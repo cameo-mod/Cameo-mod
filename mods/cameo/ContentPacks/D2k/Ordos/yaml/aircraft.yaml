@@ -2,7 +2,7 @@ ordos_swarmerdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^FighterTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
@@ -82,7 +82,7 @@ ordos_airmine:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@Cloak: ^CloakedAircraft
@@ -299,7 +299,7 @@ ordos_wraith:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos

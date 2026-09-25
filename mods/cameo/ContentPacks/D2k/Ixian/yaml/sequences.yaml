@@ -1071,11 +1071,13 @@ ixian_storminfantry:
 		BlendMode: Additive
 
 ixian_neocymek:
-	Inherits: ^SCSmallShadow
 	Defaults:
 		Filename: ixian_promotion_neocymek_ixcymekspritesheet.png
 		#Scale: 1
 		Offset: 0,16
+	shadow: parach_shadow
+		Length: *
+		ZOffset: -511
 	idle:
 		Facings: 8
 	turret:

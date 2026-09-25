@@ -66,7 +66,7 @@ harkonnen_carryall_husk:
 harkonnen_gunship:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

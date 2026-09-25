@@ -277,7 +277,7 @@ harkonnen_outpost:
 
 harkonnen_autogunturret:
 	Inherits: ^D2KDefense
-	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@exp: ^D2KGainsExperienceRABuilding
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
@@ -356,7 +356,7 @@ harkonnen_autogunturret:
 
 harkonnen_flameturret:
 	Inherits: ^D2KDefense
-	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@exp: ^D2KGainsExperienceRABuilding
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
@@ -424,7 +424,7 @@ harkonnen_flameturret:
 
 harkonnen_rocketturret:
 	Inherits: ^D2KDefense
-	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@exp: ^D2KGainsExperienceRABuilding
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@detect: ^GenericAllDetector
@@ -490,7 +490,7 @@ harkonnen_rocketturret:
 
 harkonnen_devastatorturret:
 	Inherits: ^D2KDefense
-	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@exp: ^D2KGainsExperienceRABuilding
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@detect: ^GenericAllDetector

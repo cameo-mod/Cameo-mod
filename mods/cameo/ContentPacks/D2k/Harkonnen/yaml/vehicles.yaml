@@ -30,7 +30,7 @@ harkonnen_mobileconstructionvehicle:
 harkonnen_combat_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -82,7 +82,7 @@ harkonnen_combat_tank:
 harkonnen_assaulttank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -129,7 +129,7 @@ harkonnen_assaulttank:
 missile_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MissileVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -189,7 +189,7 @@ missile_tank:
 harkonnen_rockettank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MissileVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -346,7 +346,7 @@ devastator.husk:
 
 harkonnen_devastatormech:
 	Inherits@D2KT: ^D2KTank
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -491,7 +491,7 @@ harkonnen_spiceharvester:
 harkonnen_flametank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -532,7 +532,7 @@ harkonnen_flametank:
 harkonnen_buzzsaw:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -573,7 +573,7 @@ harkonnen_buzzsaw:
 harkonnen_inkvine:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -617,7 +617,7 @@ harkonnen_inkvine:
 harkonnen_adp:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^AntiAirVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

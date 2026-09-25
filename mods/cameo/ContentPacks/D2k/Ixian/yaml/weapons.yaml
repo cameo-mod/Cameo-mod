@@ -1579,7 +1579,8 @@ D2K_StormGunCymek:
 	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
 
 D2K_RocketsCymek:
-	Inherits@4: ^RA2MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^d2k_ixian_d2k_rocketscymek
 	ReloadDelay: 60
 	Burst: 4
@@ -1600,6 +1601,9 @@ D2K_RocketsCymek:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		Acceleration: 10
+		ContrailLength: 33
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
 	Warhead@MissileAP_Medium:

@@ -1,7 +1,7 @@
 atreides_lightinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -42,7 +42,7 @@ atreides_lightinfantry:
 atreides_rockettrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^RocketTrooperInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
