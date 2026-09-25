@@ -2804,11 +2804,13 @@ ra1_allies_alliedlighttank_25mm:
 ra1_allies_alliedartillery_155mm:
 	Inherits: 155mm
 	Range: 11813
+	MinRange: 2365
 	Warhead@Concussion_Heavy:
 		Damage: 58173
 
 ra1_allies_alliedartillery_155mmcryo:
 	Inherits: 155mmCryo
 	Range: 11813
+	MinRange: 2365
 	Warhead@Concussion_Heavy:
 		Damage: 58173

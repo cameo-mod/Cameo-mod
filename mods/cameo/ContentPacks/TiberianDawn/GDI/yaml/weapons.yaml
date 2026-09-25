@@ -1269,6 +1269,74 @@ td_gdi_mammothtank_mammothmissilesamt:
 td_gdi_mlrs_227mmamt:
 	Inherits@w71: ^Warhead_MissileAP_Medium
 	Range: 9993
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 800
+		Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 12
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 12
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Speed: 800
+		CloseEnough: 500
+		Acceleration: 5
+		HomingActivationDelay: 0
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+		MinimumLaunchAngle: 50
+		MaximumLaunchAngle: 50
+		ContrailStartColor: 99887766
+		ContrailEndColor: 33221100
+		ContrailStartWidth: 75
+		ContrailEndWidth: 5
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: med_frag
+		ImpactActors: false
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	MinRange: 2000
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 
@@ -5593,6 +5661,72 @@ td_gdi_battletank_120mm:
 td_gdi_mlrs_227mm:
 	Inherits@w71: ^Warhead_MissileAP_Medium
 	Range: 9993
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 800
+		Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 16
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: med_frag
+		ImpactActors: false
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	MinRange: 2000
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 

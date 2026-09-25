@@ -1,3 +1,30 @@
+## Devin-DAWN — EMBER-routed fixes + faction-leak model gap (2026-09-26)
+
+Batch on `devin/dawn/routed-fixes` (stacked on `devin/dawn/w7-packs-v2` /
+PR #508). All four items EMBER's board routed to DAWN:
+
+- **B1 leaks (6 rows) — 1 model false-positive, 5 intended sharing.**
+  `cameo_model.roster()` never modeled `Buildable.Factions:` — the engine's
+  roster gate. `ordos_upgrade_lightfactory` (`Factions: ordos`) was flagged
+  buildable in harkonnen purely on prereq tokens. Added `_factions_allows` to
+  the fixpoint; L1 drops 6 -> 5. Remaining 5 rows are deliberate cross-pack
+  sharing added in team sessions (`4c6d4bfaa` ts_gdi conyard ->
+  `asianalliancebarrier`; `f6956364a` cabal conyard -> `tslaserfence`;
+  latinsyndicate StartingUnits list naxis/asianalliance vehicles = mercenary
+  design). Pack-mount question for the fleet, not a yaml fix; syndicate rows
+  are NOVA's files.
+- **Q-order:** `steelconsortium_consortiummobileconstructionvehicle` —
+  `~warfactory` moved before `consortiumradar` (sibling MCV convention).
+  Prereq-order violations 1 -> 0.
+- **MinRange (7 rows):** DESIGN.md `round(Range/25)*5` enforced.
+  td x4 + ordos_chemturret: stale donor/rounding values normalized
+  (1999->2000 x2, 2258->2260 x2, 1985->2800). ra1 pair: pinned
+  `MinRange: 2365` (inherited `155mm`'s 2670 = stale for Range 11813).
+  audit_min_range: 7 -> 0.
+- **G1 garrison (7 rows):** all melee (`^DogJaw` bites, `^Warhead_Melee_*`
+  slices) — applied the existing 2026-07-10 ruling, added to
+  `garrison_exceptions.yaml` melee list (39 -> 46). G1 7 -> 0.
+
 ## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
 
 Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave
