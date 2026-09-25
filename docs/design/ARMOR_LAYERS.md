@@ -89,11 +89,14 @@ Plus the general question: **what is the balance formula still not seeing?**
 Every claim here was read out of the code or counted in the resolved ruleset. Several
 contradict what the design docs assume, so the numbers matter.
 
-#### A1 — Multiple armor types AVERAGE (they do not multiply)
+#### A1 — Multiple CLASS armor types take their GEOMETRIC MEAN (they do not multiply)
 
 `AreaDamageWarhead.DamageVersus` overrides the engine's product with
-`MultiArmorCombination`, default **Average** (the W21 ruling). An actor carrying a base
-armor plus an overlay takes `avg(Versus[base], Versus[overlay])`.
+`MultiArmorCombination`, default **Geometric** (maintainer 2026-09-25; it was the arithmetic
+`Average` under the W21 ruling from 2026-08-15). An actor carrying two class armors takes
+`sqrt(Versus[a] x Versus[b])` (n-th root of the product for n armors), so 88 and 10 give 30
+where the arithmetic average gave 49, and 200 and 50 give exactly 100. A PLATING is not a class
+armor: it is a layer that MULTIPLIES the combined class row (layer rule, 2026-08-17).
 
 #### A2 — ⚠ A MISSING row is EXCLUDED from the average, NOT treated as 100
 
@@ -113,7 +116,12 @@ everywhere" and "add it only where it means something" are genuinely different d
 (For a SINGLE-armor actor the two coincide: an empty armor list returns 100. That is why
 "a missing row resolves to 100" was true in the W23 retrofit and is false here.)
 
-#### A3 — An overlay armor can never cut damage by more than ~50%
+#### A3 — (HISTORICAL) Under the arithmetic average an overlay armor could never cut damage by more than ~50%
+
+⚠ **Superseded twice.** Platings stopped being averaged on 2026-08-17 (they multiply the class
+row as a layer), and class armors combine GEOMETRICALLY since 2026-09-25, where a second armor
+at the window floor gives `sqrt(base x 10)` — base 100 -> 32, a 3.2x cut — so the ~2x bound
+below no longer holds for either. Kept as the record of why the arithmetic rule was replaced.
 
 With averaging, `effective = (base + overlay) / 2`. Even at the window floor
 (`overlay = 10`) the result is `(base + 10) / 2` — just over half. **The whole HAZMAT /
@@ -1731,7 +1739,7 @@ Agreed on the outcome, but these are **two different mechanisms** and only one o
 | | mechanism | where it happens | rule |
 |---|---|---|---|
 | `Heroic = Plate × Scout / peak`, `Airborne = Helicopter × Scout / peak` | a **DERIVED Versus COLUMN**, computed once per warhead by the generator | `gen_weapon_template`, DESIGN §12.0b | already a product; `MultiArmorCombination` never sees it |
-| CABAL cyborgs / droids carrying **two Armor traits** | runtime multi-armor | `AreaDamageWarhead.MultiArmorCombination` | **Average** — keep |
+| CABAL cyborgs / droids carrying **two Armor traits** | runtime multi-armor | `AreaDamageWarhead.MultiArmorCombination` | **Geometric** (was Average until 2026-09-25) — keep |
 | a **plating** over the class armor | runtime, one plating at a time | same field | **Multiply** — the change |
 
 So: **Heroic and Airborne are not affected by this decision at all** — they are columns, not
