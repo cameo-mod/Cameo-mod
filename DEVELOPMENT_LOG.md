@@ -12548,3 +12548,4 @@ into `^ts_torptube` family, orphaning the def-top-level cancel (engine
 line; `audit_orphan_cancels.py` flags it correctly when run on the final
 tree (the 17:14 suite predated the last materialization edits — procedural
 gap, not a tool gap). Relaunch: menu marker present, exceptions 46→46.
+
