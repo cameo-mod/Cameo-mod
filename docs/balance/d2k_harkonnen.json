@@ -31,7 +31,7 @@
     },
     "name": "actor_harkonnen_advancedcarryall.name",
     "prerequisites": [
-     "~hightech.harkonnen",
+     "~harkonnen_hightech",
      "~harkonnen_promotion_advancedcarryall"
     ],
     "queue": [
@@ -141,7 +141,9 @@
       "range": "6666",
       "reloaddelay": "25",
       "slot": "Armament",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_ornigun"
+      ],
       "warheads": [],
       "weapon": "OrniGun",
       "weapon_class_source": "none"
@@ -173,7 +175,7 @@
     },
     "name": "actor_harkonnen_gunship.name",
     "prerequisites": [
-     "~hightech.harkonnen",
+     "~harkonnen_hightech",
      "~harkonnen_promotion_gunship"
     ],
     "queue": [
@@ -1047,7 +1049,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1709,7 +1711,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2052,7 +2054,7 @@
    }
   },
   "upgrades": {
-   "upgrade_barracks.harkonnen": {
+   "harkonnen_upgrade_barracks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2077,7 +2079,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_conyard.harkonnen": {
+   "harkonnen_upgrade_conyard": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2103,7 +2105,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_heavy.harkonnen": {
+   "harkonnen_upgrade_heavy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2128,7 +2130,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_light.harkonnen": {
+   "harkonnen_upgrade_light": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2153,7 +2155,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_radar.harkonnen": {
+   "harkonnen_upgrade_radar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2180,99 +2182,6 @@
    }
   },
   "vehicles": {
-   "combat_tank.harkonnen": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5120",
-      "reloaddelay": "55",
-      "slot": "Armament",
-      "versus_templates": [
-       "^D2K_Cannon"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
-      "weapon": "80mm_H",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
-     "v": "600"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": "mbt",
-     "special": null,
-     "subtype": "MainBattleTank",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
-     "v": "70000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "actor_combat_tank_harkonnen.name",
-    "prerequisites": [
-     "~harkonnen_vehicle_production",
-     "~heavy.harkonnen_combat"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle",
-     "Starport"
-    ],
-    "resolved_firepower_modifiers": [],
-    "self_heal_step": {
-     "src": "inherited",
-     "v": "10"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "65"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "13"
-    }
-   },
    "devastator": {
     "armaments": [
      {
@@ -2342,7 +2251,7 @@
     "name": "actor_devastator.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
-     "~heavy.harkonnen",
+     "~harkonnen_heavy",
      "research_centre"
     ],
     "queue": [
@@ -2666,6 +2575,98 @@
      "v": "48"
     }
    },
+   "harkonnen_combat_tank": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "80mm_H",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "actor_combat_tank_harkonnen.name",
+    "prerequisites": [
+     "~harkonnen_vehicle_production",
+     "~heavy.harkonnen_combat"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
+    }
+   },
    "harkonnen_devastatormech": {
     "armaments": [
      {
@@ -2735,7 +2736,7 @@
     "name": "actor_harkonnen_devastatormech.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
-     "~heavy.harkonnen",
+     "~harkonnen_heavy",
      "research_centre",
      "~harkonnen_promotion_devastatormech"
     ],
@@ -3065,7 +3066,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -3239,7 +3241,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"

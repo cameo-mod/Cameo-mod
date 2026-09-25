@@ -140,7 +140,9 @@
       "range": "6666",
       "reloaddelay": "25",
       "slot": "Armament",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_ornigun"
+      ],
       "warheads": [],
       "weapon": "OrniGun",
       "weapon_class_source": "none"
@@ -805,7 +807,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1257,7 +1259,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1347,7 +1349,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1666,7 +1668,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^d2k_laser_heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1701,7 +1703,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^d2k_laser_heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2059,7 +2061,7 @@
    }
   },
   "upgrades": {
-   "upgrade_barracks.corrino": {
+   "corrino_upgrade_barracks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2084,7 +2086,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_conyard.corrino": {
+   "corrino_upgrade_conyard": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2110,7 +2112,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_heavy.corrino": {
+   "corrino_upgrade_heavy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2135,7 +2137,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_light.corrino": {
+   "corrino_upgrade_light": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2160,7 +2162,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_radar.corrino": {
+   "corrino_upgrade_radar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2308,7 +2310,7 @@
     "name": "actor_corrino_bmp.name",
     "prerequisites": [
      "~corrino_light_vehicle_production",
-     "upgrade_light.corrino"
+     "corrino_upgrade_light"
     ],
     "queue": [
      "Vehicle",
@@ -2551,7 +2553,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2699,16 +2702,65 @@
    "corrino_siegetank": {
     "armaments": [
      {
-      "damage_warheads": [],
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium_Flat",
+       "^D2K155mmLegacy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2738,7 +2790,7 @@
     "name": "actor_corrino_siegetank.name",
     "prerequisites": [
      "~corrino_vehicle_production",
-     "upgrade_heavy.corrino"
+     "corrino_upgrade_heavy"
     ],
     "queue": [
      "Vehicle",

@@ -254,18 +254,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "5000",
+        "damage": "7500",
         "falloff": "100, 75, 50, 25",
         "spread": "250",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2500",
-        "falloff": "100, 75, 50, 25",
-        "spread": "500",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -1068,8 +1061,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1096,8 +1089,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -3070,18 +3063,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3105,18 +3091,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3140,18 +3119,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3175,18 +3147,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3210,18 +3175,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3245,18 +3203,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3280,18 +3231,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3315,18 +3259,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "400",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -4753,18 +4690,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "45000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -5137,18 +5067,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -5158,13 +5088,11 @@
       "reloaddelay": "120",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "WaveforceCannonChargedLaser",
@@ -5202,8 +5130,7 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Waveforce_Heavy",
-       "^TeslaWeapon",
-       "^HeavyCannon"
+       "^TeslaWeapon"
       ],
       "warheads": [
        "^Warhead_Waveforce_Heavy"
@@ -5228,13 +5155,11 @@
       "reloaddelay": "120",
       "slot": "Armament@Upgrade3",
       "versus_templates": [
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "WaveforceCannonDistortedBeam2",

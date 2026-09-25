@@ -293,7 +293,9 @@
       "requires": "td_nod_upgrade_burninglasers",
       "slot": "Armament@Burning",
       "versus_templates": [
-       "td_nod_venom_venomlaserinferno"
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Inferno_Medium"
@@ -638,7 +640,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Effect_AlliedTigerCannon"
+       "^td_nod_td_nod_gunturret_turretgun"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -708,7 +710,7 @@
       "versus_templates": [
        "^Warhead_Concussion_Medium_Flat",
        "td_nod_gunturret_turretgun",
-       "^Effect_Apoc_AP_RA2"
+       "^td_nod_td_nod_gunturret_turretgunblackmarket"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -972,7 +974,9 @@
       "requires": "td_nod_upgrade_burninglasers",
       "slot": "Armament@Burning",
       "versus_templates": [
-       "td_nod_laserturret_nodturretlaserinferno"
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Inferno_Medium"
@@ -1721,7 +1725,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Chemical_Light",
-       "^Effect_CannonAP_Light"
+       "^td_nod_td_nod_chemicalrocketsoldier_chemrockets"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -1769,7 +1773,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Chemical_Light",
-       "^Effect_CannonAP_Light"
+       "^td_nod_td_nod_chemicalrocketsoldier_chemrockets"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -2018,7 +2022,9 @@
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "td_gdi_commando_sniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -2051,7 +2057,9 @@
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "td_gdi_commando_sniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -2279,7 +2287,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^td_nod_td_nod_lasercommando_nodcommandolaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2314,7 +2322,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^td_nod_td_nod_lasercommando_nodcommandolaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2349,7 +2357,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^td_nod_td_nod_lasercommando_nodcommandolaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2446,7 +2454,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "32400",
+        "damage": "33048",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2475,13 +2483,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "648",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -2493,7 +2494,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^Effect_Watersplash_Huge_RA2"
+       "^td_nod_td_nod_lasertrooper_blackhandlaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2505,7 +2506,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "32400",
+        "damage": "33048",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2534,13 +2535,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "648",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -2552,7 +2546,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^Effect_Watersplash_Huge_RA2"
+       "^td_nod_td_nod_lasertrooper_blackhandlaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2696,7 +2690,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10209",
+        "damage": "11230",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2725,13 +2719,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1021",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -2744,7 +2731,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^Effect_Sniper_Light"
+       "^td_nod_set2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2758,7 +2745,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10209",
+        "damage": "11230",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2787,13 +2774,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1021",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -2806,7 +2786,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^Effect_Sniper_Light"
+       "^td_nod_set2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -3059,7 +3039,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^Effect_CannonAP_Medium"
+       "^td_nod_td_nod_stealthsoldier_bhreddarts"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -3129,7 +3109,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^Effect_CannonAP_Medium"
+       "^td_nod_td_nod_stealthsoldier_bhreddarts"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -3230,7 +3210,7 @@
        "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileHE_Heavy"
+       "^td_nod_set6"
       ],
       "warheads": [
        "^Warhead_Concussion_Light",
@@ -3262,7 +3242,7 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileHE_Heavy"
+       "^td_nod_set6"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -3488,7 +3468,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^td_nod_td_nod_lasercorvette_corvettedragon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4370,7 +4350,9 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "MachineGun"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4523,7 +4505,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Effect_CannonHE_Heavy_D2K_DevBullet"
+       "^td_nod_td_nod_buggymkii_machinegunbuggy2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4607,7 +4589,8 @@
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
-       "td_nod_buggymkii_machinegunbuggy2"
+       "^Warhead_Bullet_Medium",
+       "^td_nod_td_nod_buggymkii_machinegunbuggy2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4705,7 +4688,9 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserBurning",
       "versus_templates": [
-       "td_nod_buggymkii_laserbuggy2inferno"
+       "^Warhead_Inferno_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
@@ -4770,7 +4755,9 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserAAElite",
       "versus_templates": [
-       "td_nod_buggymkii_laserbuggy2inferno"
+       "^Warhead_Inferno_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
@@ -4799,7 +4786,9 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserAABurning",
       "versus_templates": [
-       "td_nod_buggymkii_laserbuggy2burning"
+       "^Warhead_Inferno_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
@@ -4906,9 +4895,7 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@pointdefense",
       "support_armament": true,
-      "versus_templates": [
-       "PDLaser"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PDLaserBike",
       "weapon_class_source": "none"
@@ -4961,7 +4948,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
-       "^Effect_Watersplash_Huge_RA2"
+       "^td_nod_td_nod_chemicalattackbike_chemicalbikerockets"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5209,7 +5196,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
-       "^Effect_CannonAP_Medium"
+       "^td_nod_td_nod_chemicalstealthtank_chemicalstealthtankmissiles"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5409,7 +5396,7 @@
       "versus_templates": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^td_nod_td_nod_flametankmkii_bigflamer2"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -5508,7 +5495,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^td_nod_td_nod_lighttank_70mm"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5536,7 +5523,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^td_nod_set7"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5634,9 +5621,7 @@
       "reloaddelay": "25",
       "slot": "Armament@pointdefense",
       "support_armament": true,
-      "versus_templates": [
-       "PDLaser"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PDLaserLTNK2",
       "weapon_class_source": "none"
@@ -5673,7 +5658,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
-       "^Effect_CannonHE_Heavy"
+       "^td_nod_td_nod_lighttankmkii_lighttank2cannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5701,7 +5686,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^td_nod_set7"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5872,9 +5857,7 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@pointdefense",
       "support_armament": true,
-      "versus_templates": [
-       "PDLaser"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PDLaserBike",
       "weapon_class_source": "none"
@@ -5927,7 +5910,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Effect_CannonAP_Light"
+       "^td_nod_td_nod_reconbike_rocket"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -6379,7 +6362,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^td_nod_td_nod_stealthtank_stealthtankmissiles"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -6407,7 +6390,9 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "td_nod_stealthtank_stealthtankmissiles"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^td_nod_td_nod_stealthtank_stealthtankmissiles"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

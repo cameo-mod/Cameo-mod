@@ -31,7 +31,7 @@
     },
     "name": "actor_atreides_advancedcarryall.name",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "~heavy.atreides_combat"
     ],
     "queue": [
@@ -122,7 +122,7 @@
     },
     "name": "actor_atreides_airdrone.name",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "research_centre",
      "~atreides_promotion_airdrone"
     ],
@@ -236,7 +236,9 @@
       "range": "6666",
       "reloaddelay": "25",
       "slot": "Armament@GUN",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_ornigun"
+      ],
       "warheads": [],
       "weapon": "OrniGun",
       "weapon_class_source": "none"
@@ -268,7 +270,7 @@
     },
     "name": "actor_atreides_ornithopter.name",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "~heavy.atreides_combat"
     ],
     "queue": [
@@ -761,7 +763,7 @@
     },
     "name": "Atreides Palace",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "~heavy.atreides_combat",
      "~research_centre",
      "!apalace",
@@ -909,7 +911,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -984,7 +986,7 @@
     },
     "name": "Atreides Starport",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "~research_centre"
     ],
     "shield_flat": {
@@ -1180,7 +1182,8 @@
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MG"
+       "^MG",
+       "^d2k_fremen_s"
       ],
       "warheads": [],
       "weapon": "Fremen_S",
@@ -1202,9 +1205,7 @@
       "range": "2560",
       "reloaddelay": "25",
       "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "M_HMG"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "Fremen_L",
       "weapon_class_source": "none"
@@ -1237,7 +1238,7 @@
     "name": "actor_atreides_fremen.name",
     "prerequisites": [
      "~atreides_barracks",
-     "~hightech.atreides",
+     "~atreides_hightech",
      "upgrade_barracks",
      "~atreides_promotion_fremen"
     ],
@@ -1693,7 +1694,7 @@
    }
   },
   "upgrades": {
-   "upgrade_barracks.atreides": {
+   "atreides_upgrade_barracks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1718,7 +1719,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_conyard.atreides": {
+   "atreides_upgrade_conyard": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1744,7 +1745,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_heavy.atreides": {
+   "atreides_upgrade_heavy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1769,7 +1770,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_light.atreides": {
+   "atreides_upgrade_light": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1794,7 +1795,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_radar.atreides": {
+   "atreides_upgrade_radar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1842,7 +1843,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^d2k_shared_hmg"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2013,16 +2014,65 @@
    "atreides_minotaurus": {
     "armaments": [
      {
-      "damage_warheads": [],
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium_Flat",
+       "^D2K155mmLegacy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2113,7 +2163,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2280,7 +2331,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2395,7 +2447,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "Heal"
+       "^HealingWeapon"
       ],
       "warheads": [],
       "weapon": "D2KRepair",
@@ -2487,7 +2539,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^d2k_shared_hmg"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2523,7 +2575,7 @@
     "name": "actor_atreides_sandbike.name",
     "prerequisites": [
      "~atreides_vehicle_production",
-     "~light.atreides"
+     "~atreides_light"
     ],
     "queue": [
      "Vehicle",
@@ -2563,16 +2615,65 @@
    "atreides_siegetank": {
     "armaments": [
      {
-      "damage_warheads": [],
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium_Flat",
+       "^D2K155mmLegacy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2602,7 +2703,7 @@
     "name": "actor_atreides_siegetank.name",
     "prerequisites": [
      "~atreides_vehicle_production",
-     "upgrade_heavy.atreides"
+     "atreides_upgrade_heavy"
     ],
     "queue": [
      "Vehicle",
@@ -2663,7 +2764,9 @@
       "range": "7777",
       "reloaddelay": "77",
       "slot": "Armament",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_sound"
+      ],
       "warheads": [],
       "weapon": "Sound",
       "weapon_class_source": "none"
