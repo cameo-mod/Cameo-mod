@@ -691,7 +691,7 @@ steelconsortium_consortiummobileconstructionvehicle:
 	Tooltip:
 		Name: Consortium Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: steelconsortium_consortiumradar, ~steelconsortium_consortiumwarfactory
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumradar
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Mobile:
 		TurnSpeed: 12
