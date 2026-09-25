@@ -132,7 +132,7 @@ td_nod_commando_td_gdi_commando_sniper:
 td_nod_artillery_artilleryshell:
 	Inherits: ArtilleryShell
 	Range: 11291
-	MinRange: 2258
+	MinRange: 2260
 	Warhead@Concussion_Medium_Flat:
 		Damage: 72263
 
@@ -298,7 +298,7 @@ td_nod_artillery_artilleryshellupgrade:
 	Inherits@6: ^HeavyBomb
 	ReloadDelay: 96
 	Range: 11291
-	MinRange: 2258
+	MinRange: 2260
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet

@@ -1,3 +1,48 @@
+## Devin-DAWN — EMBER-routed fixes + faction-leak model gap (2026-09-26)
+
+Batch on `devin/dawn/routed-fixes` (stacked on `devin/dawn/w7-packs-v2` /
+PR #508). All four items EMBER's board routed to DAWN:
+
+- **B1 leaks (6 rows) — 1 model false-positive, 5 intended sharing.**
+  `cameo_model.roster()` never modeled `Buildable.Factions:` — the engine's
+  roster gate. `ordos_upgrade_lightfactory` (`Factions: ordos`) was flagged
+  buildable in harkonnen purely on prereq tokens. Added `_factions_allows` to
+  the fixpoint; L1 drops 6 -> 5. Remaining 5 rows are deliberate cross-pack
+  sharing added in team sessions (`4c6d4bfaa` ts_gdi conyard ->
+  `asianalliancebarrier`; `f6956364a` cabal conyard -> `tslaserfence`;
+  latinsyndicate StartingUnits list naxis/asianalliance vehicles = mercenary
+  design). Pack-mount question for the fleet, not a yaml fix; syndicate rows
+  are NOVA's files.
+- **Q-order:** `steelconsortium_consortiummobileconstructionvehicle` —
+  `~warfactory` moved before `consortiumradar` (sibling MCV convention).
+  Prereq-order violations 1 -> 0.
+- **MinRange (7 rows):** DESIGN.md `round(Range/25)*5` enforced.
+  td x4 + ordos_chemturret: stale donor/rounding values normalized
+  (1999->2000 x2, 2258->2260 x2, 1985->2800). ra1 pair: pinned
+  `MinRange: 2365` (inherited `155mm`'s 2670 = stale for Range 11813).
+  audit_min_range: 7 -> 0.
+- **G1 garrison (7 rows):** all melee (`^DogJaw` bites, `^Warhead_Melee_*`
+  slices) — applied the existing 2026-07-10 ruling, added to
+  `garrison_exceptions.yaml` melee list (39 -> 46). G1 7 -> 0.
+
+## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
+
+Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave
+landed #497–#500. Old commit `e7c5b60ab` cherry-picked onto `4416e43bd` as
+`9835ec4c4` on `devin/dawn/w7-packs-v2`; only docs append-races conflicted.
+
+**R16 regression trap found:** materialization bakes the resolved `Versus:`
+table into inlined `Warhead@X` nodes — when master's R16 generator regen
+(#506/#507) changed every `^Warhead_*` Versus profile, 33 of the converted
+weapons drifted (stale baked values). Fixed by syncing each materialized
+`Versus` subtree to the new master-resolved values. Any materialization batch
+that survives a Versus regen needs this re-sync — check resolved-identity
+against the NEW base, not the original one.
+
+Re-verified on the new base: 637/637 resolved-identical vs `4416e43bd`,
+orphans 0, empty 0, diamonds 15881=base, D2 3969=base, S2 5=base,
+all W-buckets at/below ratchets (W7 664). Boot-gate PASS (47->47).
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
