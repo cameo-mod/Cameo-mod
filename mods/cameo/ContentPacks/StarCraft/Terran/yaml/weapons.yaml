@@ -384,7 +384,7 @@ MarauderMissiles:
 
 SCTyr:
 	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
-	Inherits@4: ^RA2HeavyCannon
+	Inherits@4: ^SCRA2HeavyCannon
 	Inherits: ^Effect_Flame_Light
 	ReloadDelay: 44
 	Range: 7156
@@ -525,7 +525,7 @@ SCTyr:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		SmudgeType: Crater
 SCTyrAA:
-	Inherits@4: ^RA2MediumMissile
+	Inherits@4: ^SCRA2MediumMissile
 	Inherits@fx: ^Effect_Explosion_Large_SC
 	ReloadDelay: 84
 	Burst: 4
@@ -1721,7 +1721,7 @@ GoliathMG:
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Projectile_Shell_Heavy
 	Inherits@4: ^Effect_CannonHE_Heavy
-	Inherits@5: ^RA2Chaingun
+	Inherits@5: ^SCRA2Chaingun
 	ValidTargets: Ground, Water
 	Range: 6000
 	ReloadDelay: 16
@@ -1772,7 +1772,7 @@ GoliathMk2MG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@6: ^RA2Chaingun
+	Inherits@6: ^SCRA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 34
 	Range: 6479

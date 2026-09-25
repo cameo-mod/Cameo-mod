@@ -539,7 +539,7 @@ cabal_enlighted:
 		Weapon: SuicideBomberTargeting
 	 	RequiresCondition: cydamaged
 	FireWarheadsOnDeathCA@bomb:
-		Weapon: RA2Terrorist
+		Weapon: TSTerrorist
 		EmptyWeapon: RA2Terrorist
 		RequiresCondition: !disabled && cydamaged
 	Armament@GARRISONED:
@@ -923,7 +923,7 @@ cabal_eliminator800:
 	Inherits@GATLING: ^GatlingSpinUpUnitBehavior
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@EXPERIENCERA2: ^GainsExperienceRA2
+	Inherits@EXPERIENCERA2: ^TSGainsExperienceRA2
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos

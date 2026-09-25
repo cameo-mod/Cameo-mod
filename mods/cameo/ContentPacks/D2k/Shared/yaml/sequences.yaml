@@ -1,0 +1,622 @@
+atreides_conyard:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2807
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4373
+		Length: 30
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4403
+		Length: 12
+		Offset: -48,64
+		Tick: 170
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2808
+		Offset: -48,64
+	crane-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4700
+		Length: 14
+		Offset: -48,64
+		Tick: 80
+		ZOffset: 1023
+	damaged-crane-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4700
+		Length: 14
+		Offset: -48,64
+		Tick: 80
+		ZOffset: 1023
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4310
+		Offset: -30,-24
+
+
+ixian_rocketturret:
+	Defaults:
+	invisible:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2821, 2824, 2822, 2832, 2825, 2826, 2836, 2829, 2823, 2833, 2827, 2828, 2834, 2830, 2831, 2835
+		Length: 16
+		Offset: -24,16
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2869, 2872, 2870, 2880, 2873, 2874, 2884, 2877, 2871, 2881, 2875, 2876, 2882, 2878, 2879, 2883
+		Length: 16
+		Offset: -24,16
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 8
+		Offset: -16,16
+		ZOffset: 1024
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2885
+		Facings: -32
+		Offset: -24,16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4339
+		Offset: -30,-24
+
+
+atreides_d2k_munitions:
+	Defaults:
+	idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 2
+		Scale: 1.5
+	damaged-idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 3
+		Scale: 1.5
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 7
+		Offset: -16,16
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
+	icon:
+		Filename: ixian_munitionssilo_icon.shp
+		Start: 2
+
+
+harkonnen_gunship:
+	Defaults:
+		Filename: harkonnen_gunship.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	icon:
+		Filename: harkonnen_gunship_icon.png
+
+
+
+harkonnen_gun_turret:
+	Inherits: harkonnen_flameturret
+
+
+harkonnen_rocket_turret:
+	Inherits: harkonnen_flameturret
+
+
+harkonnen_spiceharvester:
+	Defaults:
+		Filename: harkonnen_harvester.png
+		Scale: 0.5
+	idle:
+		Start: 64
+		Length: 1
+		Facings: 64
+	move:
+		Start: 0
+		Length: 8
+		Facings: 8
+		Tick: 80
+	harvest:
+		Start: 128
+		Length: 8
+		Facings: 8
+		Tick: 80
+	dock:
+		Start: 64
+		Length: 1
+		Facings: 1
+	dock-loop:
+		Start: 64
+		Length: 1
+		Facings: 1
+	icon:
+		Start: 0
+		Length: 1
+		Facings: 1
+		Scale: 0.35
+		Offset: -30,-24
+
+
+
+harkonnen_advancedcarryall:
+	Defaults:
+		Filename: harkonnen_advancedcarryall.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	idle-landed:
+		Start: 0
+		Length: 1
+		Facings: 32
+		Tick: 120
+	icon:
+		Filename: harkonnen_advancedcarryall_icon.png
+
+
+ordos_stealthraider:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2421
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2485
+		ZOffset: -1
+		Facings: -32
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4298
+		Offset: -30,-24
+
+
+ordos_research:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3237
+		Offset: -48,80
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4655
+		Length: 10
+		Offset: -48,80
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4665
+		Length: 11
+		Offset: -48,80
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3238
+		Offset: -48,80
+	idle-lights:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5024
+		Length: 60
+		Tick: 80
+		Offset: -48,80
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4365
+		Offset: -30,-24
+
+
+atreides_refinery:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2809
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4495
+		Length: 11
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4505
+		Length: 12
+		Offset: -48,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2809
+		Offset: -48,64
+	idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2810
+		Offset: -48,64
+	damaged-idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2811
+		Offset: -48,64
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4330
+		Offset: -30,-24
+	smoke:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+		Length: 14
+		Offset: 13,-16
+		Tick: 100
+		BlendMode: Additive
+	stages:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+
+
+
+^D2KRA2ArmedInfantry:
+	Inherits: ^D2KRA2Infantry
+	shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-shoot:
+		Start: 212
+		Length: 6
+		Facings: 8
+		Tick: 80
+	liedown:
+		Start: 260
+	standup:
+		Start: 276
+	cheer:
+		Start: 293
+
+
+
+^D2KRA2MachineGunMuzzle:
+	muzzle:
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 6
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		Offset: 0, 0
+
+
+^D2KRA2Infantry:
+	Inherits: ^InfantryOverlays
+	Inherits@1: ^D2KRA2BasicInfantry
+	Inherits@2: ^D2KRA2ProneInfantry
+
+d2k_corpse:
+	death_a:
+		Filename: ra2_death_a.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_b:
+		Filename: ra2_death_b.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_c:
+		Filename: ra2_death_c.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_d:
+		Filename: ra2_death_d.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_e:
+		Filename: ra2_death_e.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_f:
+		Filename: ra2_death_f.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+
+harkonnen_flameturret:
+	Defaults:
+	invisible:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2821, 2824, 2822, 2832, 2825, 2826, 2836, 2829, 2823, 2833, 2827, 2828, 2834, 2830, 2831, 2835
+		Length: 16
+		Offset: -24,16
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2869, 2872, 2870, 2880, 2873, 2874, 2884, 2877, 2871, 2881, 2875, 2876, 2882, 2878, 2879, 2883
+		Length: 16
+		Offset: -24,16
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 8
+		Offset: -16,16
+		ZOffset: 1024
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
+	turret:
+		Filename: harkonnen_flameturret_head.png
+		Facings: -16
+		Offset: 0,-24
+	icon:
+		Filename: harkonnen_flameturret_icon.png
+
+^D2KRA2BasicInfantry:
+	Inherits: ^D2KRA2InfantryDeaths
+	Defaults:
+		Filename: ra2gi.shp
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	walk:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	idle1:
+		Start: 56
+		Length: 15
+		Tick: 120
+	idle2:
+		Start: 71
+		Length: 15
+		Tick: 120
+	cheer:
+		Start: 245
+		Length: 8
+		Tick: 120
+	die1:
+		Start: 134
+		Length: 15
+	die2:
+		Start: 149
+		Length: 15
+	die-crushed:
+		Filename: invisibleitem.shp
+	paradrop:
+
+^D2KRA2ProneInfantry:
+	Defaults:
+		Filename: ra2gi.shp
+	liedown:
+		Start: 212
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 228
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Frames: 86, 92, 98, 104, 110, 116, 122, 128
+		Facings: 8
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		Tick: 100
+
+d2k_flameguy:
+	Defaults:
+		Filename: ra2_flameguy.shp
+		Facings: 8
+		Tick: 80
+		IgnoreWorldTint: true
+	idle:
+	stand:
+	run:
+		Length: 6
+	die:
+		Start: 44
+		Facings: 1
+		Length: 104
+
+^D2KRA2InfantryDeaths:
+	die4:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_nukedie.shp
+		Length: *
+		Tick: 50
+	die5:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_yuridie.shp
+		Length: *
+		Tick: 80
+	die6:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_electro.shp
+		Length: *
+		Tick: 80
+	die7:
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
+		Length: *
+		Tick: 80
+	die8:
+		Filename: futuretech_promotion_cryolegionnaire_yr_brutdie.shp
+		Length: *
+		Tick: 80
+

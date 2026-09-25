@@ -12500,3 +12500,52 @@ no new split-defs or dup-keys.
 Flagged for fleet (semantic, not deps): `^D2KSpawnActorsOnSell` still spawns
 `e6, td_gdi_minigunner` (TD crew from an Ixian building) — content bug needing
 a maintainer ruling, not touched here.
+
+## 2026-09-24 — Value-reference self-containment batch (D2k/TD/TS/SC) — DAWN/A4
+
+Second-layer self-containment after the Inherits-edge work (PRs #497/#498):
+value-refs (`Weapon:`, `IconImage:`, `Actor:`, `ActorTypes:`, seq-name
+overrides) into pack-gated foreign defs. Generalized census over the mount
+topology (`pack_reach.py`: consumer file -> its pack's mounted set + core
+mounts) found ~139 hits in my four packs -> fixed the hard layer to **0**.
+
+**Method:** per leak, copy the foreign def into the owning pack (renamed
+`^TSRA2*`/`^SCRA2*`/`^TDRA2*`/`td_*`/`ts_*`/`d2k_*`/`Protoss*`/`SC*` namespaces
+to avoid same-name merge doubling), retarget all consumers, then verify
+resolved-identical vs a HEAD worktree over the WHOLE corpus.
+
+**Key new lesson — verbatim copies re-add audit findings.** A copied weapon
+re-adds its source's W2/W6/W7/W8 counts in the merged corpus (original still
+exists in the foreign pack). Ratchets are lower-only, so each copy was made
+audit-clean via materialization: effect-typed nodes moved into per-weapon
+`^<pk>_<weapon>` families (17 families created), dropped parent edges
+materialized inline (resolved-identical emit), duplicate sibling nodes folded
+(`dedupe_blocks.py` — `-Key:` nodes are per-key merge barriers, NOT global).
+
+**Name-collision trap:** copied `Heal`->`TSHeal` collided with a pre-existing
+core-mounted `TSHeal` (`weapons/tiberiansun.yaml`) — renamed mine `TSRA2Heal`.
+A "T-only" name check must include same-name-in-other-namespace, not just
+the def dict.
+
+New Shared yaml files mounted via each game's `Shared/content.yaml`:
+- D2k/Shared/yaml/sequences.yaml (19 cross-faction seqs + ^D2KRA2* infantry seq templates)
+- TD/Shared/yaml/{weapons,sequences,templates}.yaml (Tanya/Ivan bomb chain, flameguy, corpse spawner, upgrade templates)
+- TS/Shared/yaml/weapons.yaml (8Inch/APCGun/DepthCharge/CarrierTarget/TorpTube x2/Terrorist/Heal/Explode/CorpseSpawner families)
+- SC/Shared/yaml/{weapons,sequences}.yaml additions (nuke chain, ^SC* templates)
+
+Residual: 45 SOFT refs (upgrade `Condition:`/`RequiresCondition:` strings +
+`ActorTypes:` spawn lists pointing into foreign namespaces) — dormant strings,
+flagged to fleet for ruling, not hard leaks.
+
+Verified: HARD leaks 0; full-corpus resolved diff 0 weapons/0 seqs changed,
+6 actor diffs = intended icon/weapon retargets; W-shape all flat (W7 793);
+empty-warhead 0; dup-inherits unchanged; S2 5 (= pre-existing); D2 +0 net.
+
+**Boot-gate catch + fix:** first launch died on
+`TSTorpTube` `-Warhead@Smudge:` — materialization had moved the effect node
+into `^ts_torptube` family, orphaning the def-top-level cancel (engine
+`ResolveInherits` throws; nested `-Key:` are weak/no-throw). Dropped the one
+line; `audit_orphan_cancels.py` flags it correctly when run on the final
+tree (the 17:14 suite predated the last materialization edits — procedural
+gap, not a tool gap). Relaunch: menu marker present, exceptions 46→46.
+

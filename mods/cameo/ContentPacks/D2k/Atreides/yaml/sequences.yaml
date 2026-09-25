@@ -1,77 +1,3 @@
-atreides_refinery:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2809
-		Offset: -48,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4495
-		Length: 11
-		Offset: -48,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4505
-		Length: 12
-		Offset: -48,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2809
-		Offset: -48,64
-	idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2810
-		Offset: -48,64
-	damaged-idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2811
-		Offset: -48,64
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4330
-		Offset: -30,-24
-	smoke:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4138
-		Length: 14
-		Offset: 13,-16
-		Tick: 100
-		BlendMode: Additive
-	stages:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4138
-
-
 atreides_sonic_tank_husk:
 	Defaults:
 		Filename: atreides_sonictank.png
@@ -111,7 +37,6 @@ atreides_combat_tank:
 		Start: 4281
 		Offset: -30,-24
 
-
 atreides_combat_tank_husk:
 	Defaults:
 	idle:
@@ -128,7 +53,6 @@ atreides_combat_tank_husk:
 		Start: 1859
 		Facings: -32
 		ZOffset: -512
-
 
 atreides_spiceharvester:
 	idle:
@@ -164,7 +88,6 @@ atreides_spiceharvester:
 		Start: 0
 		Length: 1
 		Facings: 1
-
 
 ornithopter:
 	Defaults:
