@@ -7,7 +7,13 @@
 One-stanza fix in shared `mods/cameo/rules/misc.yaml` (no lane owner,
 last touched by merged naming PRs): appended `GiveBaseBuilderCrateAction@corrino`
 granting `corrino_mobileconstructionvehicle`, same shape as the 30 siblings.
-`audit_basebuilder_crates` re-run: **31/31 covered, 0 missing**.
+`audit_basebuilder_crates` re-run: **31/31 covered, 0 missing`.
+
+*(update: merged as #503; follow-up #504 retargets the one dead ai.yaml
+UnitsToBuild ref — `atreides_combat_tank` → loaded actor `atreides_combattank` —
+A3 unloaded refs 1 → 0, and resyncs the stale "D1: 7" prose; the audit has
+measured 0 since the merge wave.)*
+
 
 Remaining red rows and their owners (not mine to take):
 - Q prerequisite order ×1 — `steelconsortium_consortiummobileconstructionvehicle`
