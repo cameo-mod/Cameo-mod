@@ -800,8 +800,10 @@ CabalBerserkerBlades:
 
 CabalCyborgChaingun:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 60
+	Range: 5800
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^ts_cabal_set2
 	Report: cygun1.aud
@@ -809,17 +811,20 @@ CabalCyborgChaingun:
 	Range: 5800
 	Warhead@Bullet_Medium:
 		Damage: 20000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
 
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
 TSDevoutChainguns:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 45
+	Range: 6200
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^ts_cabal_set2
 	Report: cygun1.aud
@@ -829,13 +834,14 @@ TSDevoutChainguns:
 	Range: 6200
 	Warhead@Bullet_Medium:
 		Damage: 24000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 3200
 		PercentageScale: 9996
 
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
 CabalEliminatorGatling:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -860,10 +866,10 @@ CabalTarantulaCannon:
 		Damage: 16000
 CabalReaperMissiles:
 	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 24
+	Range: 5785
+	TargetActorCenter: true
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
@@ -997,21 +1003,18 @@ CabalReaperMissiles:
 			Heroic: 5
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 0
+	TargetActorCenter: true
 CabalReaperMissiles_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Medium_Flat
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	ValidTargets: Air
+	ReloadDelay: 24
+	Range: 8680
+	TargetActorCenter: true
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
@@ -1152,18 +1155,18 @@ CabalReaperMissiles_AA:
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileAA_Medium_Flat:
 		ValidTargets: Air
 		Damage: 32000
 		PercentageScale: 0
+	TargetActorCenter: true
 CabalHeavyReaperMissiles:
 	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
-	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Range: 6085
+	TargetActorCenter: true
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^ts_cabal_set5
 	ReloadDelay: 30
@@ -1298,21 +1301,18 @@ CabalHeavyReaperMissiles:
 			Heroic: 5
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
+	TargetActorCenter: true
 CabalHeavyReaperMissiles_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
-	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	ValidTargets: Air
+	ReloadDelay: 30
+	Range: 9130
+	TargetActorCenter: true
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^ts_cabal_set5
 	ReloadDelay: 30
@@ -1455,11 +1455,11 @@ CabalHeavyReaperMissiles_AA:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 48000
 		PercentageScale: 0
+	TargetActorCenter: true
 CabalHeavyReaperTrap:
 	Report: fireweb1.aud
 	ReloadDelay: 250
@@ -2393,7 +2393,6 @@ CabalEngineerRepairBeam:
 
 CabalMantisGun:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^ts_cabal_set8
@@ -2421,7 +2420,6 @@ CabalMantisGun:
 		PhysicalStateScale: 38
 CabalLegionGun:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^ts_cabal_set8
@@ -2606,7 +2604,6 @@ CabalManticoreMissiles_AA:
 		PercentageScale: 0
 CabalRocketCyborgRockets:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -2627,7 +2624,6 @@ CabalRocketCyborgRockets:
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2640,7 +2636,6 @@ CabalRocketCyborgRockets:
 
 CabalRocketCyborgRocketsUpgraded:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -2661,7 +2656,6 @@ CabalRocketCyborgRocketsUpgraded:
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4000,7 +3994,6 @@ CabalOverkillLaser:
 
 CabalOverkillDroneLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^ts_cabal_cabaloverkilldronelaser

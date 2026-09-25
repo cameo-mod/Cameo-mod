@@ -165,6 +165,31 @@ Two traps inside that emit:
   kind — W2/W3/W4. Those go to materialization too. When the child has an
   existing fx edge, the per-weapon family must DERIVE from it and the edge
   swaps to the family (1 fx edge preserved, no W4).
+- **A cancel CONSUMES its provider edge — delete edge+cancel together or
+  neither** (2026-09-26, W2 dead-edge sweep, EMBER's rule; maintainer
+  standing rule 0.3). An edge is dead only if (a) no `Warhead@`/node it
+  emits survives into resolved output AND (b) no `-Key:` anywhere targets
+  a node it emits. The sweep's node-survival classifier missed (b) — it
+  dropped `TSBombSonic`'s `^Warhead_Demolition_Heavy` edge while leaving
+  the `-Warhead@Demolition_Heavy:` cancel, which the engine throws on at
+  ruleset load (the python resolver tolerates the orphan — only
+  `audit_orphan_cancels` and the boot see it). The same rule bites in
+  reverse: removing a `-X:` whose provider edge was dropped in the same
+  pass resurrects the node for every consumer (the DevBullet template
+  case), and `-Warhead@X:` + a child pin is a cancel-redeclare — deleting
+  the cancel strands the child under the wrong parent. Correct loop:
+  remove -> `audit_orphan_cancels` -> resolved-verify -> restore drift,
+  repeat to fixpoint.
+- **The resolved `/Inherits` annotation leaf is part of the ordered-payload
+  contract** (2026-09-26). Dropping a dead bare `Inherits:` edge removes a
+  leaf the resolver records in output — ordered-verify counts it as a
+  payload diff. `RashidanGun_upgrade`'s dead edge+cancel pair stays for
+  that reason: dead-but-contract-bearing.
+- **A dead `^Warhead_*` edge still carries live top-level fields** — an
+  edge whose every `Warhead@` node is cancelled/unsurfaced can be dropped
+  resolved-identically, BUT the same template also emits weapon-level
+  `TargetActorCenter`, `ValidTargets`, `Range`, `ReloadDelay` that the
+  weapon was silently relying on. Always re-pin lost top-level fields.
 - **Materialization freezes resolved `Versus:` tables — a template regen
   stales them** (2026-09-26, #508 rebase). Inlined `Warhead@X` pins carry the
   Versus table resolved at emit time; when master regenerated every

@@ -1,7 +1,9 @@
 TS30mm:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_Flak_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 26
+	Range: 6125
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
@@ -21,6 +23,8 @@ TS30mm:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 2494
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
 TS30mmRail:
 	Inherits@collapsewh: ^Warhead_Flak_Medium
 	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
@@ -135,7 +139,6 @@ TS30mmRail:
 		Duration: 15
 TS120mmRail:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -169,7 +172,6 @@ TS120mmTal:
 		Damage: 24000
 TS120mmTalRail:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -189,8 +191,10 @@ TS120mmTalRail:
 		PercentageScale: 9998
 TSRPGTower:
 	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 46
+	Range: 8544
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 46
@@ -211,6 +215,8 @@ TSRPGTower:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
 TSRPGTowerRail:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1469,8 +1475,10 @@ TSGDIRedEye:
 
 TSBomb:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_Demolition_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 38
+	Range: 1500
+	TargetActorCenter: true
 	Inherits@fx: ^ts_gdi_tsbomb
 	ReloadDelay: 38
 	Burst: 5
@@ -1482,15 +1490,17 @@ TSBomb:
 		Acceleration: 0, 0, -10
 		Image: 120mm
 		Shadow: true
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Ship
 		Damage: 20000
 		PercentageScale: 9995
 
+	ValidTargets: Ground, Water
 TSBombSonic:
-	Inherits@wh: ^Warhead_Demolition_Heavy
+	ValidTargets: Ground, Ship
+	ReloadDelay: 38
+	Range: 1500
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
 	Inherits@sonicfamily: ^Warhead_BlastSonic_Heavy
@@ -1501,8 +1511,6 @@ TSBombSonic:
 	TargetActorCenter: true
 	Report: 120mmf.aud
 	ValidTargets: Ground, Ship
-	-Warhead@Demolition_Heavy:
-		PercentageScale: 4995
 	Warhead@BlastSonic_Heavy: AreaDamage
 		ValidTargets: Ground, Ship
 		Damage: 30000
@@ -1969,8 +1977,10 @@ TSAssaultCannonTalSonic:
 		ValidTargets: Ground, Water, Structure, wall
 TSVulcanGun:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 48
+	Range: 6809
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
@@ -1980,7 +1990,6 @@ TSVulcanGun:
 	Range: 6809
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
@@ -1989,6 +1998,7 @@ TSVulcanGun:
 		PercentageScale: 9988
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	TargetActorCenter: true
 TSVulcanGunSonic:
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
@@ -2040,8 +2050,11 @@ TSHammerheadGun:
 		ValidTargets: Ground, Water
 TSAAPCCannon:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Flak_Medium
+	ValidTargets: Ground, Water, Air
+		Damage: 2000
+	ReloadDelay: 10
+	Range: 6263
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
@@ -2049,13 +2062,12 @@ TSAAPCCannon:
 	Range: 6263
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
 TSMechMGII:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium

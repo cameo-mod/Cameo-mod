@@ -42,11 +42,13 @@ TS70mmChem:
 
 TS70mmTur:
 	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits: ^Warhead_CannonHE_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 10
+	Range: 6574
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^Warhead_CannonAP_Light
 	Inherits@6: ^Projectile_Shell_Light
 	Inherits@7: ^Effect_CannonAP_Light
 	Report: cannon1.aud
@@ -66,8 +68,9 @@ TS70mmTur:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 TS70mmTurChem:
-	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@4: ^TSCannonEffect
@@ -93,7 +96,6 @@ TS70mmTurChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@CannonHE_Medium_Flat:
 	Report: cannon1.aud
 	InvalidTargets: wall
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
@@ -313,11 +315,13 @@ TSScoopDualChem:
 
 TSScoopDualTur:
 	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 48
+	Range: 6404
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TSCannonEffect
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 48
 	Burst: 2
@@ -335,8 +339,9 @@ TSScoopDualTur:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 TSScoopDualTurChem:
-	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@4: ^TSCannonEffect
@@ -361,7 +366,6 @@ TSScoopDualTurChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@CannonHE_Heavy_Flat:
 	Report: M203.aud
 	InvalidTargets: wall
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
@@ -814,7 +818,6 @@ TSInfantryMortar:
 TSInfantryMortarChem:
 	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
 	Inherits: ^TSInfantryMortarLegacy
-	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	Report: flamer2.aud
@@ -928,7 +931,6 @@ TSInfantryMortarChem:
 
 TS120mmxChem:
 	Inherits@finalmain: ^Warhead_Chemical_Heavy
-	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 60
@@ -1428,7 +1430,6 @@ TSMammothTusk:
 
 TSRuinerMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 5919
@@ -1444,7 +1445,6 @@ TSRuinerMissile:
 	-Warhead@MissileHE_Medium:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1722,8 +1722,10 @@ TSChemCobraMissile:
 
 TSAdatsMissile:
 	Inherits@finalmain: ^Warhead_MissileHE_Light_Flat
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 54
+	Range: 5606
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Range: 5606
@@ -1744,6 +1746,7 @@ TSAdatsMissile:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Ground, Water
+	TargetActorCenter: true
 ^ts_forgotten_tsadatsmissile_aa:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
@@ -3218,8 +3221,10 @@ TSMutShotgun:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 TSMutVulcanTurret:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 6
+	Range: 6272
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
@@ -3228,7 +3233,6 @@ TSMutVulcanTurret:
 	Report: tsgun4.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
@@ -3237,6 +3241,7 @@ TSMutVulcanTurret:
 		PercentageScale: 9975
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	TargetActorCenter: true
 TSRaiderCarCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -3251,8 +3256,10 @@ TSRaiderCarCannon:
 		Damage: 4000
 TSBowlerCannon:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 5
+	Range: 6603
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
@@ -3261,12 +3268,12 @@ TSBowlerCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	TargetActorCenter: true
 TSWaspClaw:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -3283,8 +3290,11 @@ TSWaspClaw:
 		ValidTargets: Ground, Air
 TSMutApcCannon:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Flak_Medium
+	ValidTargets: Ground, Water, Air
+		Damage: 2000
+	ReloadDelay: 12
+	Range: 6147
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
@@ -3292,13 +3302,12 @@ TSMutApcCannon:
 	Range: 6147
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
 TSNomadGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -3394,8 +3403,10 @@ MutAPRifle:
 		Damage: 4000
 TSSergGun:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 8
+	Range: 5611
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 8
@@ -3405,17 +3416,13 @@ TSSergGun:
 		PercentageScale: 2500
 		Damage: 16000
 		ValidTargets: Ground, Water
-# SCOUT-CLASS VERIFICATION WEAPON (law 2026-07-19): exactly 2x the
-# baseline rifle (8000 dmg / 50 rl / 5000 rng, SmallArms, % = 4). The
-# verification unit proves the class formula: 2x HP + 2x damage at
-# same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
-# MutAPRifle stays for its other users.
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 2494
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
 forgotten_mutantsoldier_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light

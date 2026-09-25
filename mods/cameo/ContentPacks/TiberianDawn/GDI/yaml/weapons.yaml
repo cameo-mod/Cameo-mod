@@ -220,8 +220,10 @@ td_gdi_commando_sniper_elite:
 		Explosions: small_poof
 APCGun:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Flak_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 10
+	Range: 5668
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Ground, Water
@@ -240,6 +242,7 @@ APCGun:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+	TargetActorCenter: true
 ^td_gdi_td_gdi_apc_apcgun_aa:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
@@ -1702,7 +1705,6 @@ Vulcan:
 		Spread: 600
 Napalm:
 	Inherits@finalmain: ^Warhead_Flame_Heavy
-	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^td_gdi_set3
 	ReloadDelay: 2
 	Range: 2000
@@ -1739,7 +1741,6 @@ VulcanA10Carrier:
 		Spread: 300
 NapalmA10Carrier:
 	Inherits@roleflat: ^Warhead_Flame_Heavy
-	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^td_gdi_set3
 	ReloadDelay: 2
 	Range: 1000
@@ -3413,7 +3414,6 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 
 td_gdi_humveemkii_rocketshumvee2amt:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
-	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt
 	Inherits@2: ^AMTProjectile
@@ -3457,7 +3457,6 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		ValidTargets: Ground, Water
 		Damage: 16000
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Heavy_Flat:
 	Warhead@MissileHE_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3898,8 +3897,10 @@ td_gdi_exosuit_exosuitrailgun:
 		Damage: 20000
 td_gdi_officer_machinegun:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 5596
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
@@ -3911,13 +3912,13 @@ td_gdi_officer_machinegun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
 		Damage: 17280
 		PercentageScale: 625
+	TargetActorCenter: true
 td_gdi_officer_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -4644,7 +4645,6 @@ td_gdi_havoc_sniper:
 
 td_gdi_havoc_rocket:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^td_gdi_td_gdi_havoc_rocket
 	Report: bazook1.aud
@@ -4665,7 +4665,6 @@ td_gdi_havoc_rocket:
 		ValidTargets: Ground, Air, Water
 		Damage: 40000
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -5246,8 +5245,10 @@ td_gdi_minigunner_minigun_ap:
 		InvalidTargets: Air
 td_gdi_shotgunner_shotgun:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 70
+	Range: 3500
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 70
@@ -5262,7 +5263,6 @@ td_gdi_shotgunner_shotgun:
 		Inaccuracy: 800
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
@@ -5272,6 +5272,7 @@ td_gdi_shotgunner_shotgun:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	TargetActorCenter: true
 td_gdi_grenadier_grenade:
 	Inherits@w71: ^Warhead_Demolition_Light
 	Inherits@w72: ^Projectile_Grenade_Light

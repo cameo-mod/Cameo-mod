@@ -3272,8 +3272,10 @@ td_nod_buggymkii_laserbuggy2burning_AA:
 	Burst: 10
 td_nod_buggymkii_fireballlauncherbuggy2:
 	Inherits@roleflat: ^Warhead_Flame_Medium_Flat
-	Inherits: ^Warhead_Flame_Light
-	Inherits@2: ^Warhead_Flame_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 5274
+	TargetActorCenter: true
 	Inherits@4: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Burst: 3
@@ -3290,13 +3292,14 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 	Warhead@Flame_Medium:
 		Damage: 2000
 	-Warhead@Flame_Heavy:
-	-Warhead@Flame_Light:
 	-Warhead@Flame_Medium:
 	Warhead@Flame_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water
 		Damage: 3000
 		PercentageScale: 9984
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
 	Inherits@fx: ^td_nod_td_nod_lighttankmkii_lighttank2cannon
@@ -4013,7 +4016,6 @@ td_nod_lasercommando_nodcommandolaser:
 		Damage: 12000
 
 td_nod_attacksubmarine_nodtorptube:
-	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_nod_set6
@@ -4040,7 +4042,6 @@ td_nod_attacksubmarine_nodtorptube:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	-Warhead@Concussion_Light:
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
@@ -4048,7 +4049,6 @@ td_nod_attacksubmarine_nodtorptube:
 	-Warhead@EffectAir:
 
 td_nod_attacksubmarine_nodtorptubeblackmarket:
-	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_nod_set6
@@ -4075,7 +4075,6 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	-Warhead@Demolition_Heavy:
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure

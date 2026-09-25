@@ -226,9 +226,10 @@ D2K_155mm2:
 		PercentageScale: 0
 D2K_155mm3:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 80
+	Range: 8686
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
 	Inherits@fx: ^d2k_ixian_d2k_155mm3
 	ReloadDelay: 80
@@ -338,12 +339,12 @@ D2K_155mm3:
 		Range: 0, 233, 466
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
 
+	ValidTargets: Ground, Water
 D2K_Bazooka2:
 	Inherits: ^D2KMissile
 	Range: 6400
@@ -363,9 +364,7 @@ D2K_Bazooka2:
 		Damage: 6000
 	MinRange: 1280
 D2K_Rocket_Trooper2:
-	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
-	Inherits@wh3: ^Warhead_CannonHE_Medium
 	Inherits@wh4: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
@@ -386,16 +385,11 @@ D2K_Rocket_Trooper2:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	-Warhead@Demolition_Light:
 	-Warhead@Railgun_Heavy:
-	-Warhead@CannonHE_Medium:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 D2K_Rocket_Trooper1:
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
 	Inherits@wh4: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
@@ -418,9 +412,6 @@ D2K_Rocket_Trooper1:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 12
 		Acceleration: 6
-	-Warhead@MissileAP_Light:
-	-Warhead@Flak_Medium:
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -1124,8 +1115,10 @@ RashidanGun_upgrade:
 		Width: 20
 RaiderGuns:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 40
+	Range: 6400
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ixian_raiderguns
 	ReloadDelay: 40
@@ -1137,12 +1130,12 @@ RaiderGuns:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	TargetActorCenter: true
 ^d2k_ixian_raiderguns_upgrade:
 	Inherits: ^Effect_CannonHE_Heavy
 	Warhead@Concrete: DamagesConcrete

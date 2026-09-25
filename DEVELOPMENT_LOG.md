@@ -1,3 +1,56 @@
+## Devin-DAWN — W2 dead wh-edge sweep (2026-09-26)
+
+Branch `devin/dawn/w2-deadedges` (stacked on routed-fixes/`e227f3245`).
+
+The residual W2 class: weapons carrying 2+ `^Warhead_*` inherits where the
+extra edges' `Warhead@` nodes never reach resolution (cancelled or shadowed).
+Classified all 107 my-pack W2s by live-vs-dead node survival:
+
+- **153 dead edges dropped** across 87 weapons — an edge is dead when every
+  `Warhead@` node it emits is absent from the resolved weapon.
+- **42 top-level fields re-pinned verbatim** — dead edges also carried
+  `TargetActorCenter`, `ValidTargets`, `Range`, `ReloadDelay`.
+- 13 multi-main weapons left alone (deliberate dual-warhead design: _Flat +
+  shaped, ExtraDamage chips, `TSVulcanGun`-class cancel mechanics).
+
+Audits: W2 123 -> 45, W1 287 -> 234 (ratchets lowered), D2 3637 = base,
+empty 0, orphans 1 (see trap below), resolved 679/679 identical.
+
+**Trap — `audit_orphan_cancels` mis-flags three load-bearing shapes:**
+(a) cancels inside `^` templates whose provider is the template's own
+`Inherits` (DevBullet resurrected `Warhead@CannonHE_Heavy` for every
+consumer); (b) `-Warhead@X:` WITH a child pin (cancel-redeclare idiom —
+`TSBombSonic`); (c) cancels whose provider is a concrete weapon-parent.
+Fixpoint removal is mandatory: remove -> re-run -> restore any drift —
+never trust the flag alone.
+
+## Devin-DAWN — EMBER-routed fixes + faction-leak model gap (2026-09-26)
+
+Batch on `devin/dawn/routed-fixes` (stacked on `devin/dawn/w7-packs-v2` /
+PR #508). All four items EMBER's board routed to DAWN:
+
+- **B1 leaks (6 rows) — 1 model false-positive, 5 intended sharing.**
+  `cameo_model.roster()` never modeled `Buildable.Factions:` — the engine's
+  roster gate. `ordos_upgrade_lightfactory` (`Factions: ordos`) was flagged
+  buildable in harkonnen purely on prereq tokens. Added `_factions_allows` to
+  the fixpoint; L1 drops 6 -> 5. Remaining 5 rows are deliberate cross-pack
+  sharing added in team sessions (`4c6d4bfaa` ts_gdi conyard ->
+  `asianalliancebarrier`; `f6956364a` cabal conyard -> `tslaserfence`;
+  latinsyndicate StartingUnits list naxis/asianalliance vehicles = mercenary
+  design). Pack-mount question for the fleet, not a yaml fix; syndicate rows
+  are NOVA's files.
+- **Q-order:** `steelconsortium_consortiummobileconstructionvehicle` —
+  `~warfactory` moved before `consortiumradar` (sibling MCV convention).
+  Prereq-order violations 1 -> 0.
+- **MinRange (7 rows):** DESIGN.md `round(Range/25)*5` enforced.
+  td x4 + ordos_chemturret: stale donor/rounding values normalized
+  (1999->2000 x2, 2258->2260 x2, 1985->2800). ra1 pair: pinned
+  `MinRange: 2365` (inherited `155mm`'s 2670 = stale for Range 11813).
+  audit_min_range: 7 -> 0.
+- **G1 garrison (7 rows):** all melee (`^DogJaw` bites, `^Warhead_Melee_*`
+  slices) — applied the existing 2026-07-10 ruling, added to
+  `garrison_exceptions.yaml` melee list (39 -> 46). G1 7 -> 0.
+
 ## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
 
 Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave

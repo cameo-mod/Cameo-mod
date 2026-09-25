@@ -1,8 +1,9 @@
 MarineMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 26
+	Range: 6105
+	TargetActorCenter: true
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 26
@@ -29,9 +30,8 @@ MarineMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 1664
+	TargetActorCenter: true
 JimRaynorMachineGun:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@wh3: ^Warhead_Bullet_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -52,16 +52,15 @@ JimRaynorMachineGun:
 		ContrailLength: 8
 		Speed: 4000
 		Inaccuracy: 200
-	-Warhead@MissileHE_Heavy:
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 MadcapGun:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5542
+	TargetActorCenter: true
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 25
@@ -87,6 +86,7 @@ MadcapGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 1664
+	TargetActorCenter: true
 FirebatF:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -180,8 +180,6 @@ HarakanF:
 	InvalidTargets: wall
 MatadorFlamer:
 	Inherits@roleflat: ^Warhead_Flame_Heavy
-	Inherits: ^Warhead_Flame_Light
-	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@4: ^Effect_Flame_Heavy
 	ReloadDelay: 18
 	Burst: 13
@@ -194,8 +192,6 @@ MatadorFlamer:
 		Image: tsflameall
 		Inaccuracy: 1184
 		Palette: tseffect
-	-Warhead@Flame_Light:
-	-Warhead@Flame_Medium:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -217,7 +213,6 @@ MatadorLaser:
 		Damage: 32000
 CycloneRockets:
 	Inherits@heldmissilerole: ^Warhead_MissileAP_Light
-	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
@@ -423,7 +418,6 @@ CycloneRocketsLockOn:
 
 MarauderMissiles:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits@collapseflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Range: 7010
@@ -500,7 +494,6 @@ MarauderMissiles:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	-Warhead@MissileAP_Medium_Flat:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -787,11 +780,12 @@ ReaperPistols:
 
 ReaperGrenade:
 	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Concussion_Medium
+	ValidTargets: Structure
+	ReloadDelay: 45
+	Range: 4375
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	ValidTargets: Structure
@@ -835,6 +829,7 @@ ReaperGrenade:
 		Damage: 12000
 		PercentageScale: 9992
 
+	TargetActorCenter: true
 GhostSniper:
 	Inherits: ^Warhead_Bullet_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1593,7 +1588,10 @@ SpecterSniperLockdown:
 
 VultureGrenade:
 	Inherits@roleflat: ^Warhead_Demolition_Light_Flat
-	Inherits: ^Warhead_CannonHE_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 4800
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	ReloadDelay: 25
@@ -1737,10 +1735,14 @@ VultureGrenade:
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 SiegeTankCannon:
 	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
-	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonAP_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 37
+	Range: 6114
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 37
@@ -1748,12 +1750,12 @@ SiegeTankCannon:
 	Report: TTaFir00.aud
 	Projectile: Bullet
 		Speed: 611
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
 	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 SiegeTankSiegeCannon:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^NuclearWarhead
@@ -2222,7 +2224,6 @@ GoliathRockets_AA:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 GoliathMk2MG:
-	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2294,7 +2295,6 @@ GoliathMk2MG:
 		Blockable: false
 		LaunchAngle: 66
 
-	-Warhead@Bullet_Medium_Flat:
 	Warhead@Effect:
 		ImpactSounds: xplosml2.aud
 		ImpactActors: false
@@ -2640,7 +2640,10 @@ ValkyrieRockets:
 		SmudgeType: SandCrater, RockCrater
 WyvernRockets:
 	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 90
+	Range: 8000
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumFlameWeapon

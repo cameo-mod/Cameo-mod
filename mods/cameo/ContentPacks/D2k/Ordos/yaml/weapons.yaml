@@ -1208,9 +1208,10 @@ eye_bomberguy:
 		PercentageScale: 0
 D2K_155mm_turret:
 	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 74
+	Range: 10000
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
 	Inherits@4: ^D2K_Cannon
 	Inherits@fx: ^d2k_ordos_d2k_155mm_turret
@@ -1356,9 +1357,10 @@ D2K_155mm_turret:
 		ValidTargets: Shielded
 Dune_SiegeMortar:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Concussion_Medium
-	Inherits@wh3: ^Warhead_CannonAP_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 80
+	Range: 9920
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@4: ^D2K_Cannon
@@ -1504,10 +1506,6 @@ Dune_SiegeMortar:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
-#############################
-#       MISSILES
-#############################
-
 D2K_Rocket_Trooper_AGOnly:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1567,8 +1565,10 @@ D2K_Rocket_Trooper_AA:
 		Damage: 10000
 D2K_APC_Rocket:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 42
+	Range: 6500
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits: ^D2KRocket
@@ -1669,8 +1669,6 @@ D2K_APC_Rocket:
 		Falloff: 100, 50
 		Range: 0, 32
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Light:
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -3105,8 +3103,10 @@ d2kChainGun_upgrade:
 		PercentageScale: 9988
 HMGstealth:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 33
+	Range: 4857
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ordos_bullet_medium
 	ReloadDelay: 33
@@ -3118,14 +3118,13 @@ HMGstealth:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	TargetActorCenter: true
 autogun_tank:
-	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@4: ^D2KMissile
@@ -3142,7 +3141,6 @@ autogun_tank:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 	MinRange: 1495
-	-Warhead@Bullet_Medium_Flat:
 	Projectile: Bullet
 		Image: 50CAL
 		Inaccuracy: 200

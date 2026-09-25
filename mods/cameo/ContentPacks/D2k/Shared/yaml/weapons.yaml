@@ -444,10 +444,12 @@
 
 110mm_Gun:
 	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 50
+	Range: 7979
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@7: ^D2K_Cannon
@@ -456,8 +458,6 @@
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
 	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
@@ -922,9 +922,10 @@ Debris4:
 
 D2K_Rocket_Trooper:
 	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 64
+	Range: 6185
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
@@ -1047,6 +1048,7 @@ D2K_Rocket_Trooper:
 		Damage: 24000
 		PercentageScale: 0
 
+	TargetActorCenter: true
 WormJaw:
 	ReloadDelay: 10
 	InvalidTargets: Structure
@@ -1064,7 +1066,10 @@ WallExplode:
 	Inherits@fx: ^d2k_shared_wallexplode
 light_inf_lmg:
 	Inherits@finalmain: ^Warhead_Bullet_Light_Flat
-	Inherits@wh: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 5475
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
@@ -1081,10 +1086,14 @@ light_inf_lmg:
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
 light_inf_lmg_upgrade:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 4500
+	TargetActorCenter: true
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
@@ -1109,6 +1118,7 @@ light_inf_lmg_upgrade:
 		Damage: 6000
 		PercentageScale: 9984
 
+	TargetActorCenter: true
 Fremen_RPG:
 	Inherits: ^D2KMissile
 	Inherits@fx: ^d2k_shared_fremen_rpg
@@ -1323,9 +1333,7 @@ HMG:
 	Report: 20MMGUN1.WAV
 
 ordos_autogunturret:
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_shared_ordos_autogunturret
 	ReloadDelay: 22
@@ -1347,16 +1355,16 @@ ordos_autogunturret:
 		ProjectileStreakTailColorAlpha: 176
 		ContrailLength: 0
 		Speed: 4000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Bullet_Light:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 
 HMG_turret:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 22
+	Range: 7394
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_shared_hmg_turret
 	ReloadDelay: 22
@@ -1368,13 +1376,13 @@ HMG_turret:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy

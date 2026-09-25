@@ -116,7 +116,10 @@ SpithidSpit:
 
 MutaliskSpore:
 	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
-	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 4444
+	TargetActorCenter: true
 	Inherits: ^SwordWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^SmallArms
@@ -1180,8 +1183,10 @@ ScourgeExplosion:
 
 SCScourgeExplosion:
 	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Concussion_Medium
+	ValidTargets: Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	ValidTargets: Air
@@ -1189,17 +1194,20 @@ SCScourgeExplosion:
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
 		ImpactSounds: zavdth00.aud
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 100000
 		PercentageScale: 9999
 
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Range: 5120
 GuardianShoot:
 	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
-	Inherits@collapsewh: ^Warhead_Concussion_Medium
-	Inherits@compatwh: ^Warhead_Concussion_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 10000
+	TargetActorCenter: true
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -1238,8 +1246,6 @@ GuardianShoot:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@ShrapnelWeapon:
-	-Warhead@Concussion_Medium:
-	-Warhead@Concussion_Light:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -3258,9 +3264,10 @@ LurkerSpinesImpact:
 
 InfestedExplosion:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Report: M203.aud
@@ -3275,12 +3282,15 @@ InfestedExplosion:
 		ImpactActors: true
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 10000
 
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Range: 5120
 BehemothShoot:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
@@ -3478,7 +3488,10 @@ Spore_AA:
 
 Tentacle:
 	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground
+	ReloadDelay: 32
+	Range: 7680
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^RailgunWeapon
@@ -3493,7 +3506,6 @@ Tentacle:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 3
-	-Warhead@CannonHE_Heavy:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 3
@@ -3514,6 +3526,7 @@ Tentacle:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	TargetActorCenter: true
 DroneAttack:
 	Inherits: ^WorkerAttack
 	Report: zerglinghit.wav
