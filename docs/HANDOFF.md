@@ -1,5 +1,36 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-25d — EMBER: dot-sweep mop-up (3 missed loaded faction ids)
+
+`Agent: EMBER · branch devin/ember/dot-dormant · base 57fe937ba`
+
+Full-tree re-census (mod.yaml + all 39 content.yaml includes) found three
+loaded faction-dot ids the first sweep's suffix list missed — same class,
+same fix, `tools/rename/rename_map_dot_faction_mopup.yaml`:
+
+- `OILB.RA2` → `ra2_oilderrick` (RA2 oil derrick actor; same as `OILB.d2k`
+  → `d2k_spicesifter`, `OILB.TS` → `ts_tiberiumpump`)
+- `tsgtsilo.gdi` → `gdi_tsgtsilo`, `tsgtsilo.nod` → `nod_tsgtsilo`
+  (TS silo per-faction sequence defs)
+
+12 refs updated incl. `ai/ai.yaml` and loose map `iris-ally-hb`.
+`audit_map_actors` M1 0/363 maps; boot-gate PASS.
+
+Remaining dotted defs in LOADED files are all legal or pending maintainer
+eyeball: `.husk`/`.Husk` (515), `.bot` (7 + prereqs verified), `up_team_*`
+/ `team_upgrade.*` (ruled legal), and variant markers needing rulings —
+`.destroyed` 19 (wreck sequences, husk-class?), `.upgraded` 8,
+`.infiltrated` 3, `.black` 2, `.gold`/`.mercenary`/`reinforce`/`paradrop`/
+`scan`/`small`/`emp`/`dominate`/`huskVTOL` singles. ~400 faction dots in
+DORMANT `rules/*.yaml` monoliths (`.actibliz` `.camea` `.freedomguard`
+`.imperium` `.togran` `.shadowhand` `.eodalien` `.horde` `.TOMORROW`
+`.ANSWER` `.dt*` `.hutt` `.xcom` `.gla` `.nod`/`.gdi` `.empire` `.rebels`
+`.republic` `.separatist` AW five …) — unmounted reference files; recommend
+delete-per-MIGRATION over rename. Census lives in HANDOFF; ping me to sweep
+dormant anyway if wanted — map generation is scripted.
+
+---
+
 ## 2026-09-25c — EMBER: loaded faction-dot sweep (150 renames, R18)
 
 `Agent: EMBER · branch devin/ember/dot-faction-prefix · base a5692a5f7`

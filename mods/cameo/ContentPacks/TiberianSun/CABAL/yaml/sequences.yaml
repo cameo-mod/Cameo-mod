@@ -1870,7 +1870,7 @@ cabal_refinery:
 		UseTilesetCode: false
 
 cabal_tsgtsilo:
-	Inherits: tsgtsilo.gdi
+	Inherits: gdi_tsgtsilo
 	icon:
 		Filename: cabal_icons|cabal_missilesilo_icon.png
 		Offset: 0, 0
