@@ -2149,21 +2149,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6656",
       "reloaddelay": "45",
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "TSGrenade"
+       "^ts_tiberiansun_tsgrenadeg"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSGrenadeG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2696,8 +2693,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^RA2FlakWeapon",
-       "^RA2Chaingun"
+       "^TSRA2FlakWeapon",
+       "^TSRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -2931,17 +2928,15 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
+      "versus_templates": [],
       "warheads": [],
-      "weapon": "Heal",
+      "weapon": "TSRA2Heal",
       "weapon_class_source": "none"
      },
      {
@@ -2969,17 +2964,15 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
+      "versus_templates": [],
       "warheads": [],
-      "weapon": "Heal",
+      "weapon": "TSRA2Heal",
       "weapon_class_source": "none"
      }
     ],
@@ -3735,24 +3728,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3766,24 +3756,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3796,24 +3783,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@TERCERA",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3826,29 +3810,26 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@CUARTA",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": false,
@@ -3857,7 +3838,7 @@
       "slot": "Armament@QUINTA",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2CarrierTarget",
+      "weapon": "TSCarrierTarget",
       "weapon_class_source": "none"
      }
     ],
@@ -3937,7 +3918,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3952,7 +3933,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3967,7 +3948,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3982,7 +3963,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3996,7 +3977,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4011,7 +3992,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4025,7 +4006,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4040,7 +4021,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4266,7 +4247,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -4280,7 +4261,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      },
      {
@@ -4293,7 +4274,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -4307,7 +4288,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],

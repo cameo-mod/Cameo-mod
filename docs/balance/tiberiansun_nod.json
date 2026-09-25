@@ -1325,7 +1325,7 @@
       "requires": "ts_nod_tiberiumwastefacility",
       "slot": "Armament@superweapon2",
       "versus_templates": [
-       "TSTacticalMissile"
+       "^ts_tiberiansun_tstacticalchemmissile"
       ],
       "warheads": [],
       "weapon": "TSTacticalChemMissile",
@@ -3264,7 +3264,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3279,7 +3279,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3294,7 +3294,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3309,7 +3309,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3323,7 +3323,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3338,7 +3338,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3352,7 +3352,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3367,7 +3367,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -3381,7 +3381,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -3396,7 +3396,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      }
     ],
@@ -3686,7 +3686,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
@@ -3696,12 +3696,12 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_Watersplash_Large_RA2"
+       "^ts_torptube"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "RA2TorpTube",
+      "weapon": "TSTorpTube",
       "weapon_class_source": "template"
      },
      {
@@ -3716,21 +3716,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "90",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2TorpTube"
+       "^ts_torptube_elite"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Heavy"
-      ],
-      "weapon": "RA2TorpTube_elite",
-      "weapon_class_source": "template"
+      "warheads": [],
+      "weapon": "TSTorpTube_elite",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4705,7 +4703,7 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "RA2IFVRepair"
+       "^ts_tiberiansun_ts_nod_mobilerepairvehicle"
       ],
       "warheads": [],
       "weapon": "ts_nod_mobilerepairvehicle",
@@ -5064,7 +5062,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -5074,12 +5072,10 @@
        "^Warhead_Chemical_Light_Flat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light",
-       "TSSAPCMissiles"
+       "^ts_tiberiansun_tssapccoremissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Chemical_Light"
       ],
       "weapon": "TSSAPCCoreMissiles",
       "weapon_class_source": "template"
@@ -5317,20 +5313,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6679",
       "reloaddelay": "22",
       "requires": "deployed && !ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@deployed",
       "versus_templates": [
-       "TS90mm"
+       "^ts_tiberiansun_ts90mmdep"
       ],
-      "warheads": [
-       "^Warhead_CannonAP"
-      ],
+      "warheads": [],
       "weapon": "TS90mmDep",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
@@ -5351,20 +5345,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6754",
       "reloaddelay": "26",
       "requires": "deployed && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADEdeployed",
       "versus_templates": [
-       "TSLaser90mm"
+       "^ts_tiberiansun_tslaser90mmdep"
       ],
-      "warheads": [
-       "^Warhead_CannonAP"
-      ],
+      "warheads": [],
       "weapon": "TSLaser90mmDep",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",

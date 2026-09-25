@@ -2307,6 +2307,19 @@ whose damage is a `*_Flat` node (no `Versus` — one number vs every armor):
   pending maintainer eyeball per-instance — the census of uses is in the fleet board note
   `NOTE_2026-09-24_ember_rulings.md`.
 
+**R20 — TOXIC FILLS THE POISON METER; THE YURI VIRUS FIRES A TOXIN DART** (maintainer, 2026-09-25).
+
+* **Every `Toxic`-family weapon fills `Poison`** (generator `FAMILY_PHYSICAL_STATE`, `Poison: 100`
+  at every level) — the gas clouds the W9 spec meant by *"gas clouds fill the meter by dwell
+  time"*: the Yuri Virus's `RA2Cloud`, the Anthrax clouds, Tiberian Sun's smoke, the Zerg
+  Devourer's acid cloud, the Ordos chem turret. `Chemical` keeps filling `Corrosion`: **corrosion
+  eats vehicles, poison hurts infantry** (the Poison meter exists only on `^DefaultInfantry`, so
+  on anything else the feed no-ops).
+* **The Yuri Virus's rifle is a toxin dart:** its main becomes the `Toxic` family
+  (`Toxic_Light` for the base shot, `Toxic_Medium` for the upgrade tiers and elite), so the shot
+  itself poisons; the `Chemical`/Corrosion percentage twin is removed, and the stray `Flak` /
+  `MissileAP` mains the upgrade tiers carried go with it. Damage totals are preserved (R17).
+
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
 > *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
