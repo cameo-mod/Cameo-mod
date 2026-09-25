@@ -2263,6 +2263,15 @@ Mechanically, per MAIN warhead profile:
   population law — an individual family at 2x or 20x is legal but must be a deliberate
   super-generalist / super-specialist, not drift.
 * Guarded by `audit_versus_profile.py` (geomean ratchet + hard band + the bell-curve census).
+* **Implemented 2026-09-25.** `mean_normalise` targets the geometric mean (#506: offenders 105 → 2,
+  the two HAND_TUNED templates). The bell is moved by `bell_stretch` (maintainer: *"Stretch toward
+  4-5x"*): one power law `v' = G·(v/G)^α` about the geometric centre, `BELL_STRETCH_ALPHA = 1.30`,
+  raising every spread to the power α — monotone, geometric-mean preserving, Heroic-exact. Census
+  2–4x / 4–5x / 5–8x: **38 / 10 / 2 → 30 / 17 / 3**. ⚠ **The 200% ceiling limits it:** top-heavy
+  profiles (the Bullet/Flak/Cannon × Sonic/Fire/Cryo/Tesla blends) already touch 200, so a larger α
+  is compressed straight back and they stay near 3.1–3.4x; α 1.5–1.7 only moves families from 4–5x
+  into 5–8x. Getting the peak fully into 4–5x needs a LOWER-tail-only stretch for those blends —
+  not Heroic-exact, so it is a design choice, not a tuning knob.
 
 **R17 — `ExtraDamage` DOES NOT EXIST; leftovers FOLD INTO THE MAIN WARHEAD.** The retirement
 noted at §"Template auxiliaries" is now the binding conversion rule for every held W7 edge:
