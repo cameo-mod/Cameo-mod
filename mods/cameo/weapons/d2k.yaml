@@ -20,7 +20,12 @@
 #      oSound). Held pending the unused-file audit phase in docs/MIGRATION.md.
 
 D2K70mm:
-	Inherits: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 2500
 	ReloadDelay: 50
 	Warhead@CannonHE_Medium:
 		Damage: 11200
@@ -139,14 +144,21 @@ D2K76mm:
 	Report: MEDTANK1.WAV
 
 D2K_Bazooka:
-	Inherits: ^D2KRocket
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Report: ROCKET1.WAV  # W7MAT w8-repin
+	ReloadDelay: 50  # W7MAT w8-repin
 	Range: 4608
 	ValidTargets: Ground, Air
 	Warhead@MissileAP_Heavy:
 		Damage: 7000
 
 D2K_Rocket:
-	Inherits: ^D2KRocket
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_d2k_d2k_rocket
 	ReloadDelay: 30
 	Range: 4608
@@ -809,7 +821,24 @@ DeathHand:
 
 	Inherits@fx: ^d2k_d2k_set2
 DeathHandCluster:
-	Inherits: ^Debris2Legacy
+	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
+	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		TrailPalette: effect75alpha
+	Projectile:  # W7MAT w8-repin
+		TrailInterval: 1
+	Warhead@Demolition_Light:  # W7MAT w8-repin
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@Demolition_Light:  # W7MAT w8-repin
+		Damage: 16000
+	Report: d2khc.wav  # W7MAT w8-repin
+	ReloadDelay: 60  # W7MAT w8-repin
+	Warhead@Flame_Light:  # W7MAT w8-repin
+		Damage: 16000
 	Inherits@fx: ^d2k_d2k_set3
 	Range: 7168
 	Projectile: Bullet
@@ -1505,11 +1534,21 @@ d2k_chaos_lightning:
 
 	Inherits@fx: ^d2k_d2k_d2k_chaos_lightning
 o110mm_Gun:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: TURRET1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 380
+	Projectile:  # W7MAT w8-repin
+		Image: 120mm
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
 	Inherits@fx: ^d2k_d2k_o110mm_gun
 	ReloadDelay: 35
 	Range: 5120
-	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 875
 		Blockable: false
@@ -1517,21 +1556,128 @@ o110mm_Gun:
 		Damage: 8250
 
 o80mm_A:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 562
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 380
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Image: 120mm
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@2Smu: LeaveSmudge  # W7MAT w8-repin
+	Warhead@2Smu:  # W7MAT w8-repin
+		SmudgeType: SandCrater, RockCrater
+	Warhead@2Smu:  # W7MAT w8-repin
+		InvalidTargets: Vehicle, Structure
+	Warhead@3Eff: CreateEffect  # W7MAT w8-repin
+	Warhead@3Eff:  # W7MAT w8-repin
+		Explosions: d2k_small_napalm
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@3Eff:  # W7MAT w8-repin
+		ExplosionPalette: effect75alpha
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactActors: false
+	ReloadDelay: 50  # W7MAT w8-repin
+	Range: 4096  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 5350
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
+	Warhead@EffectAir:  # W7MAT w8-repin
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Concrete:  # W7MAT w8-repin
+		Damage: 540
 
 o80mm_H:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 562
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 380
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Image: 120mm
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@2Smu: LeaveSmudge  # W7MAT w8-repin
+	Warhead@2Smu:  # W7MAT w8-repin
+		SmudgeType: SandCrater, RockCrater
+	Warhead@2Smu:  # W7MAT w8-repin
+		InvalidTargets: Vehicle, Structure
+	Warhead@3Eff: CreateEffect  # W7MAT w8-repin
+	Warhead@3Eff:  # W7MAT w8-repin
+		Explosions: d2k_small_napalm
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@3Eff:  # W7MAT w8-repin
+		ExplosionPalette: effect75alpha
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactActors: false
+	Range: 4096  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 5350
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
+	Warhead@EffectAir:  # W7MAT w8-repin
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Concrete:  # W7MAT w8-repin
+		Damage: 540
 	ReloadDelay: 55
 
 o80mm_O:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 562
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 380
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Image: 120mm
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@2Smu: LeaveSmudge  # W7MAT w8-repin
+	Warhead@2Smu:  # W7MAT w8-repin
+		SmudgeType: SandCrater, RockCrater
+	Warhead@2Smu:  # W7MAT w8-repin
+		InvalidTargets: Vehicle, Structure
+	Warhead@3Eff: CreateEffect  # W7MAT w8-repin
+	Warhead@3Eff:  # W7MAT w8-repin
+		Explosions: d2k_small_napalm
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@3Eff:  # W7MAT w8-repin
+		ExplosionPalette: effect75alpha
+	Warhead@3Eff:  # W7MAT w8-repin
+		ImpactActors: false
+	Range: 4096  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 5350
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
+	Warhead@EffectAir:  # W7MAT w8-repin
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Concrete:  # W7MAT w8-repin
+		Damage: 540
 	ReloadDelay: 45
 
 oDevBullet:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: TANKHVY1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
+	Range: 4096  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
 	Inherits@fx: ^d2k_d2k_odevbullet
 	ReloadDelay: 75
-	Report: TANKHVY1.WAV
 	Projectile: Bullet
 		Speed: 281
 		Inaccuracy: 0
@@ -1541,11 +1687,17 @@ oDevBullet:
 		Damage: 11850
 
 o155mm:
-	Inherits: ^OCannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: MORTAR1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 14953
 	Inherits@fx: ^d2k_d2k_o155mm
 	ReloadDelay: 80
 	Range: 5632
-	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 192
 		Blockable: false
@@ -1640,7 +1792,11 @@ omtank_pri:
 		ValidTargets: Ground, Air
 
 oDeviatorMissile:
-	Inherits: ^OMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy_D2K_ORocket  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K_OMissile  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_OMissile  # W7MAT covering-edge
+	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
+		Spread: 256
 	Inherits@fx: ^d2k_d2k_odeviatormissile
 	ReloadDelay: 160
 	Range: 5120
@@ -1765,7 +1921,22 @@ oDeathHand:
 
 	Inherits@fx: ^d2k_d2k_set2
 oDeathHandCluster:
-	Inherits: ^Debris2Legacy
+	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
+	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		TrailInterval: 1
+	Warhead@Demolition_Light:  # W7MAT w8-repin
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@Demolition_Light:  # W7MAT w8-repin
+		Damage: 16000
+	Report: d2khc.wav  # W7MAT w8-repin
+	ReloadDelay: 60  # W7MAT w8-repin
+	Warhead@Flame_Light:  # W7MAT w8-repin
+		Damage: 16000
 	Inherits@fx: ^d2k_d2k_set3
 	Range: 7168
 	Projectile: Bullet
