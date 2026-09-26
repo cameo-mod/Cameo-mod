@@ -3919,7 +3919,10 @@ the MECHANISM: the level retires now, with today's **Medium** profile (untilted)
 base, so `h = 1` reproduces current balance; the reference averaging later reshapes only the 50
 bases, not the plumbing. The three open decisions of the 2026-09-10 review, ruled the same day:
 * **Percentage grows with `h` like the old levels:** percentage magnitude x0.8 at `h=0`, x1.0 at
-  `h=1`, x1.25 at `h=2`, interpolated — the old 16/20/25 tops on one continuous curve.
+  `h=1`, x1.25 at `h=2`, interpolated — the old 16/20/25 tops on one continuous curve. **IMPLEMENTED 2026-09-26** in
+  `SharedFoldedPercentageUnits` (C#) and `percentage_damage.shared_growth` (Python), exact integers
+  `(4000 + H) / 5000` up to `H = 1000`, `(3000 + H) / 4000` above; replaces the retired `h/2` (which
+  zeroed the percentage half at `h = 0` and halved it at `h = 1`).
 * **Blast radius keeps scaling: `radius x (h+2)/3`** (2/3 at `h=0`, 4/3 at `h=2`), continuing the
   existing "the level scales the radius only" law; authored `Range` arrays stay authored.
 * **Unset is not zero:** an absent `Heaviness` means INERT (today's behaviour, every unmigrated
@@ -4168,10 +4171,14 @@ so the 50% has something to apply to; (3) move actors onto the new types, per th
 (4) re-extract ledgers. Derived columns sit OUTSIDE the R16 geomean-100 normalisation, like Heroic,
 and are computed last (they are functions of normalised parents).
 
-⚠ **The heaviness bell (§12.0i) still re-derives Heroic as `Plate x Scout / peak`** in both
-`HeavinessBell.cs` and its mirror `effective_heaviness.py`. It ships INERT (no yaml sets
-`Heaviness`), so nothing is wrong in play today; before it is ever activated, both must adopt
-rule 4's `/200` and rule 1's derived columns, together, or their parity test breaks.
+⭐ **The runtime bell follows these rules (2026-09-26).** An earlier note here called the bell
+INERT; that was wrong, measured the same day: the `^Warhead_CannonAP` continuous pilot base is
+LIVE for ~10 weapons and ~20 more set `Heaviness:`. `HeavinessBell.cs` and its mirror
+`effective_heaviness.py` now (1) exclude all 13 derived columns from the tilt, (2) renormalise on
+the GEOMETRIC mean (R16) instead of the arithmetic one, (3) re-derive Heroic = Plate x Scout / 200
+in the MAIN table only and every derived column as the geometric mean of its belled parents.
+`test_derived_armor_types.py` pins the generator, the C# and the Python mirror to ONE list, and
+was proven to fail when any of the three drifts.
 
 ## 16. Rank decorations, experience systems & elite weapons
 
