@@ -336,14 +336,40 @@ class F6Geometry(_Built):
 
 
 class F7Shield(_Built):
-    def test_shield_is_the_home_templates_final_value(self):
+    # Maintainer 2026-09-26: a base at its home h reproduces today's Shield, so the authored
+    # value is the home value divided back through the runtime's (2000 + h) / 2000 scaling.
+    def _round_trip(self):
+        import effective_heaviness as eh
+        out = {}
         for nm in gen.BASE_FAMILIES:
+            home = self.home(nm)
+            base = dict(_versus(self.blocks[f"^Warhead_{nm}"]))["Shield"]
+            ref = dict(_versus(self.blocks[f"^Warhead_{nm}_{home}"]))["Shield"]
+            self.assertEqual(ref, self.final[(nm, home)])
+            out[nm] = (base, ref, eh.shield_coefficient(base, gen.BASE_HOME_H[home]))
+        return out
+
+    def test_home_h_reproduces_the_home_templates_shield(self):
+        trips = self._round_trip()
+        for nm, (_base, ref, eff) in trips.items():
             with self.subTest(nm):
-                home = self.home(nm)
-                base = dict(_versus(self.blocks[f"^Warhead_{nm}"]))["Shield"]
-                ref = dict(_versus(self.blocks[f"^Warhead_{nm}_{home}"]))["Shield"]
-                self.assertEqual(base, ref)
-                self.assertEqual(base, self.final[(nm, home)])
+                self.assertLessEqual(abs(eff - ref), 2, "Shield off the home template's")
+        # 2 is the MINIMAL worst case (no distinct assignment exists within 1), and 30 exact is
+        # the most any assignment reaches at that bound. 33 exact is only reachable by pushing
+        # one family 4 points off, which the solver deliberately does not do.
+        exact = sum(1 for _b, ref, eff in trips.values() if eff == ref)
+        self.assertGreaterEqual(exact, 30)
+        entries = [(nm, ref, gen.BASE_HOME_H[self.home(nm)]) for nm, (_b, ref, _e) in trips.items()]
+        import effective_heaviness as eh
+        solved = gen.base_shield_values(entries)
+        worst = max(abs(eh.shield_coefficient(solved[nm], h) - ref) for nm, ref, h in entries)
+        self.assertEqual(worst, 2, "the solver must reach the minimal worst case")
+
+    def test_shield_is_divided_back_not_copied(self):
+        # The pilot copied Medium's value and so dealt 1.5x at h = 1.
+        for nm, (base, ref, _eff) in self._round_trip().items():
+            with self.subTest(nm):
+                self.assertLess(base, ref)
 
     def test_base_shields_are_distinct(self):
         vals = [dict(_versus(self.blocks[f"^Warhead_{nm}"]))["Shield"]

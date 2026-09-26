@@ -3943,15 +3943,26 @@ families and keep their templates. Rules the ruling left implicit, now fixed in 
   would have halved Magic's giant-killer %HP.
 * **The R16 `bell_stretch` runs**; only `level_tilt` is skipped. The CannonAP pilot predated R16
   and omitted the stretch, so its live profile widened (54..144 -> 45..161) when it was regenerated.
-* **Shield** = the home template's final phase-2 value, as the pilot did; distinct across all 52.
+* **Shield** is authored so the runtime's `(2000 + h) / 2000` returns the home template's final
+  value at the home h (ruling below): `base_shield_values` divides back through the runtime's own
+  half-up rounding. x1.5 half-up never lands on a value = 1 (mod 3), so a distinct exact preimage
+  does not always exist; the assignment is SOLVED for the smallest worst case — **2 points**, the
+  proven minimum (no distinct assignment exists within 1) — then the most exact matches (30 of 52).
 
 ⚠ **Acceptance measure (the test prescribed in §12.0i):** each base through the Python bell mirror
 (`effective_heaviness.shared_versus_profile`) at h = 0 / 1 / 2 against today's Light / Medium /
 Heavy templates: rank preserved inside every ladder (8 swaps, all involving the DERIVED `Heroic`
 cell), but core armor rows differ by a **mean 10.6%, p90 23%** — the bell and the old `level_tilt`
-are different curves. And the shared mode scales Shield by `(2000 + h) / 2000`, so at h = 1 a base
-deals **1.5x** its Medium template's Shield. "`h = 1` reproduces current balance" is therefore
-approximate, and that decision belongs to the re-point step, before any weapon moves.
+are different curves.
+
+⭐ **RULED 2026-09-26 (maintainer), on that measure:**
+* **Accept the bell.** The re-point proceeds with each weapon's `Heaviness` taken from its old
+  level (Light 0, Medium 1000, Heavy 2000); the bell is not calibrated to imitate the retired
+  tilt, because the reference averaging reshapes the bases anyway. The ~10% row movement is the
+  accepted cost of the retirement.
+* **A base at its home h reproduces today's Shield** (`base Shield = home Shield / 1.5`, or / 2 for
+  a Heavy home). This supersedes the pilot's copied value, which dealt 1.5x at h = 1; CannonAP's
+  authored Shield moves 144 -> 96 (effective 144 at h = 1, as before the base existed).
 
 **What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
 / `_Heavy` suffix is retired: **147 templates across 50 families become 50** *(estimate; measured
