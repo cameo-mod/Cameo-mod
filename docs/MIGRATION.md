@@ -229,6 +229,14 @@ added. Re-census: `migrate=0, qualified=234, packaged=31` (24 of them inside
 call as `audio.bag` had been: internal shp/wav resources would need a
 package-aware extraction pass, not a file move.
 
+bits/ usage census (audit_bits_refs.py): 28,052 files under `bits/`;
+4,858 referenced by live yaml, 5,403 referenced only by dormant yaml,
+17,791 referenced nowhere (largest pools: generals 2320, ts 1605, wh40k
+1334, notifications 997, ra2/mod 923, darkreign 919, shockwave 907,
+ep315 780, ra2 754). `unref` is evidence, not a delete list — engine-
+hardcoded names, Lua spawns and tileset frames still resolve without a
+yaml token. Report: `docs/migration/bits_refs.json`.
+
 ## Standing decisions (design)
 
 - Names: one lowercase group, RA1 baseline; tooltip <-> id in sync; unique
