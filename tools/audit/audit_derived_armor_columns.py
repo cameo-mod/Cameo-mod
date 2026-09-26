@@ -28,7 +28,9 @@ import derive_versus_columns as D  # noqa: E402
 # once to 30,229 the same day because the MEASURE grew, not the debt: the maintainer added a
 # 13th derived column (`Airborne` = geomean of Scout, Flak, Helicopter), so every pack table owes
 # one more row. That is the only legitimate raise — a new column ruled into §12.0l. LOWER ONLY.
-RATCHET = 30229
+# 2026-09-27: re-landing #523/#532 onto master after #534 found 24 NEW pack tables (#534's folds)
+# without the rows; the rows were written into exactly those tables (312), which lowered it.
+RATCHET = 30203
 
 
 def main() -> int:

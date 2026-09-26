@@ -514,6 +514,19 @@ GladiusCannon:
 			Bomber: 59
 			Helicopter: 53
 			Spaceship: 47
+			FlyingInfantry: 98
+			CyborgLight: 131
+			CyborgMedium: 121
+			CyborgHeavy: 106
+			CyborgHeroic: 88
+			AntiAirInfantry: 155
+			AntiAirVehicle: 102
+			AntiAirBuilding: 110
+			ShipLight: 117
+			ShipMedium: 102
+			ShipHeavy: 102
+			ShipSuperheavy: 98
+			AntiAirShip: 109
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
@@ -538,6 +551,19 @@ GladiusCannon:
 			Bomber: 11
 			Helicopter: 11
 			Spaceship: 11
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 19
+			CyborgHeavy: 20
+			CyborgHeroic: 20
+			AntiAirInfantry: 21
+			AntiAirVehicle: 18
+			AntiAirBuilding: 18
+			ShipLight: 18
+			ShipMedium: 18
+			ShipHeavy: 18
+			ShipSuperheavy: 18
+			AntiAirShip: 18
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 125
@@ -560,6 +586,19 @@ GladiusCannon:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Inherits@fx: ^sc_protoss_gladiuscannon
@@ -586,6 +625,19 @@ GladiusCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Inherits@w6fx: ^sc_protoss_gladiuscannon_fx
@@ -611,6 +663,19 @@ GladiusCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -635,6 +700,19 @@ GladiusCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage

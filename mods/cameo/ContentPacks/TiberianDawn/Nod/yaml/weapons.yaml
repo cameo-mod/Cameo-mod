@@ -1021,6 +1021,19 @@ td_nod_gunturret_turretgunblackmarket:
 			Bomber: 63
 			Helicopter: 62
 			Spaceship: 39
+			FlyingInfantry: 107
+			CyborgLight: 161
+			CyborgMedium: 117
+			CyborgHeavy: 105
+			CyborgHeroic: 86
+			AntiAirInfantry: 145
+			AntiAirVehicle: 130
+			AntiAirBuilding: 102
+			ShipLight: 159
+			ShipMedium: 105
+			ShipHeavy: 115
+			ShipSuperheavy: 96
+			AntiAirShip: 129
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -1042,6 +1055,19 @@ td_nod_gunturret_turretgunblackmarket:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
 	Inherits@fx: ^td_nod_td_nod_gunturret_turretgunblackmarket
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
