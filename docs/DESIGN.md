@@ -3914,6 +3914,19 @@ CannonAP pilot definitions; it does not authorize automatic whole-roster fitting
 *"hold off the weapon warhead changes until we have successfully mapped it from our reference
 data … so this should be a big all in one change."*
 
+⭐ **AMENDED 2026-09-26 (maintainer): RETIRE NOW, RESHAPE LATER.** The hold above is lifted for
+the MECHANISM: the level retires now, with today's **Medium** profile (untilted) as each family's
+base, so `h = 1` reproduces current balance; the reference averaging later reshapes only the 50
+bases, not the plumbing. The three open decisions of the 2026-09-10 review, ruled the same day:
+* **Percentage grows with `h` like the old levels:** percentage magnitude x0.8 at `h=0`, x1.0 at
+  `h=1`, x1.25 at `h=2`, interpolated — the old 16/20/25 tops on one continuous curve.
+* **Blast radius keeps scaling: `radius x (h+2)/3`** (2/3 at `h=0`, 4/3 at `h=2`), continuing the
+  existing "the level scales the radius only" law; authored `Range` arrays stay authored.
+* **Unset is not zero:** an absent `Heaviness` means INERT (today's behaviour, every unmigrated
+  weapon); an explicit value, including 0, is ACTIVE. Family identity is guaranteed by §12.0d's
+  per-ladder rank restore, not by a blanket "never flatter".
+Air variants (12.0l rule 3a) are built per family BASE (`^Warhead_BulletAir`), never per level.
+
 **What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
 / `_Heavy` suffix is retired: **147 templates across 50 families become 50**, and the 1,147 concrete
 weapons that inherit a level are re-pointed. Families already carry the delivery × element grammar
@@ -4068,6 +4081,7 @@ takes. **Heroic is the single exception** (rule 4).
 
 | type | = geomean of | ladder | who wears it |
 |---|---|---|---|
+| `Airborne` | `Scout` x `Flak` x `Helicopter` (3 parents: the cube root) | INF+AIR | flying infantry (jumpjets, rocketeers, cosmonauts); supersedes the `Helicopter x Scout` product above |
 | `CyborgLight` | `None` x `Light` | INF+VEH | light cyborgs (per-unit list, maintainer-corrected) |
 | `CyborgMedium` | `Flak` x `Medium` | INF+VEH | medium cyborgs |
 | `CyborgHeavy` | `Plate` x `Heavy` | INF+VEH | heavy cyborgs |
@@ -4086,13 +4100,36 @@ structure, so each ship type pairs a vehicle rung with a building rung); it is a
 12.0k `Torpedo` / `AntiSub` families will be shaped against. A cyborg carries ONE of the four cyborg types instead of today's two `Armor` traits (it replaces
 the dual stack, as the derived-armour pattern above requires).
 
+**Rule 3a — AIR VARIANTS (maintainer 2026-09-26).** A weapon fired by an airborne unit
+(`Aircraft` trait: helicopters, planes, jumpjet infantry) inherits `^Warhead_<Family>Air`, never
+the ground family. Measured on `afb66c9b5`: 300 weapons, 279 air-only + 21 shared with ground
+units (a shared weapon splits into a ground and an air copy), across 34 families; 90 of them are
+legacy inline tables, which `derive_versus_columns.py` halves instead.
+* The air variant is IDENTICAL to its ground family except the **five counter-air rows**: the
+  four `AntiAir*` types and **`Fighter`** (the air ladder's counter-air armour — fighters exist to
+  counter other aircraft). Each = `min(round(0.5 x ground value), lowest other armour row - 1)`,
+  floor 10, the five keeping their ground order among themselves: an air weapon deals its LOWEST
+  damage to counter-air units and never more than half of what the ground weapon does.
+* Families that only hit aircraft (`MissileAA`, `Flak`) get NO air variant, so dedicated
+  anti-air still hits fighters normally and fighter-vs-fighter combat is unchanged.
+* ⭐ **MEAN-100 still holds for the air variant.** The rule for which rows count: *every row that
+  is NOT a geometric-mean derivation of other rows counts in the mean-100 set.* In a ground
+  family the `AntiAir*` rows are derivations (outside the set); in an air variant they are set by
+  this rule, so they are independent and COUNT — every other row is scaled up by one common
+  factor until the geometric mean is 100 again, then the derived columns are re-derived. Scaling
+  the rest UP keeps the counter-air rows the lowest.
+* The variant keeps the ground template's INTERNAL node names (`Warhead@Bullet_...`) and changes
+  only its header, so a weapon's local overrides survive the re-point (an orphaned override is
+  the empty-warhead boot crash). It is standalone, never `Inherits:` the ground template (a weapon
+  pulling both would crash on a duplicate parent).
+
 **Rule 3 — the anti-air discount is a visible row, not a multiplier.** Every GROUND-delivered
 family writes the geomean value into the four `AntiAir*` columns; every AIR-delivered family
 (`<Family>Air`, 12.0k item 2) writes **50%** of it. This SUPERSEDES 12.0k item 1's "treats it
 exactly like `Light`": the anti-air types have their own scaling. W26/R1 still forbids doing it
 with a `DamageTypeDamageMultiplier`.
 
-**Rule 4 — Heroic stays a PRODUCT, divided by the constant 200** (supersedes 12.0b's divisor):
+**Rule 4 — Heroic stays a PRODUCT, divided by the constant 200, in the MAIN `Versus` table only** (supersedes 12.0b's divisor; the percentage twin, tops 16–30, and the chips keep their own Heroic, because 200 is the MAIN table's ceiling — `/200` on the twin made heroes near-immune, e.g. 18 x 16 / 200 = 1):
 `Heroic = round(Plate x Scout / 200)`. Measured on master `afb66c9b5`: 116 of 201 templates peak
 at exactly 200 and **no template deals more than 200 to Plate or Scout**, so Heroic can never
 exceed either half. ⛔ **Exception, a FLAT template** (every class armour equal): Heroic equals

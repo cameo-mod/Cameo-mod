@@ -48,9 +48,12 @@ def desired_rows(resolved: dict[str, int]) -> dict[str, int]:
     """The derived rows a table with these resolved values must carry."""
     vals = dict(resolved)
     out = {}
-    for name, (first, second) in GEO_DERIVED:
-        if first in vals and second in vals and vals[first] >= 0 and vals[second] >= 0:
-            vals[name] = int(round(math.sqrt(vals[first] * vals[second])))
+    for name, parents in GEO_DERIVED:
+        if all(p in vals and vals[p] >= 0 for p in parents):
+            product = 1.0
+            for p in parents:
+                product *= vals[p]
+            vals[name] = int(round(product ** (1.0 / len(parents))))
             out[name] = vals[name]
     return out
 
