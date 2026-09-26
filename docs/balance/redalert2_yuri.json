@@ -824,7 +824,9 @@
       "reloaddelay": "6",
       "slot": "Armament@1",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -878,7 +880,9 @@
       "reloaddelay": "2",
       "slot": "Armament@3",
       "versus_templates": [
-       "RA2GattlingMG3"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2474,7 +2478,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_Light",
+        "tag": "Toxic_Light",
         "type": "AreaDamage"
        },
        {
@@ -2482,13 +2486,6 @@
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2500,11 +2497,11 @@
       "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
+       "^Warhead_Toxic_Light",
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun",
       "weapon_class_source": "template"
@@ -2515,7 +2512,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Flak_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2523,13 +2520,6 @@
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2541,14 +2531,14 @@
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "^Warhead_Flak_Medium",
+       "^Warhead_Toxic_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
        "RA2Virusgun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun2",
       "weapon_class_source": "template"
@@ -2559,7 +2549,7 @@
         "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "MissileAP_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2568,35 +2558,26 @@
         "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
       "slot": "Armament@PRIMARY3",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
+       "RA2Virusgun2",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "RA2Virusgun2"
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2604,7 +2585,7 @@
         "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "MissileAP_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2613,17 +2594,10 @@
         "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "74",
@@ -2633,12 +2607,11 @@
        "RA2Virusgun3"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2647,7 +2620,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_Light",
+        "tag": "Toxic_Light",
         "type": "AreaDamage"
        },
        {
@@ -2655,13 +2628,6 @@
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2673,11 +2639,11 @@
       "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
+       "^Warhead_Toxic_Light",
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun",
       "weapon_class_source": "template"
@@ -2689,7 +2655,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Flak_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2697,13 +2663,6 @@
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2715,14 +2674,14 @@
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "^Warhead_Flak_Medium",
+       "^Warhead_Toxic_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
        "RA2Virusgun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun2",
       "weapon_class_source": "template"
@@ -2734,7 +2693,7 @@
         "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "MissileAP_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2743,35 +2702,26 @@
         "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
       "slot": "Armament@GARRISONED3",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
+       "RA2Virusgun2",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "RA2Virusgun2"
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2780,7 +2730,7 @@
         "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "MissileAP_Medium",
+        "tag": "Toxic_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2789,17 +2739,10 @@
         "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "11111",
       "reloaddelay": "74",
@@ -2809,12 +2752,11 @@
        "RA2Virusgun3"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Sniper_Light"
+       "^Warhead_Toxic_Medium",
+       "^Warhead_Toxic_Light"
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4068,7 +4010,10 @@
       "requires": "!gatling",
       "slot": "Armament@1",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4095,7 +4040,10 @@
       "requires": "gatling == 1",
       "slot": "Armament@2",
       "versus_templates": [
-       "RA2GattlingMG2"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4122,7 +4070,10 @@
       "requires": "gatling > 1",
       "slot": "Armament@3",
       "versus_templates": [
-       "RA2GattlingMG3"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4149,7 +4100,10 @@
       "requires": "!gatling",
       "slot": "Armament@1AA",
       "versus_templates": [
-       "RA2GattlingMG1_AA"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4176,7 +4130,10 @@
       "requires": "gatling == 1",
       "slot": "Armament@2AA",
       "versus_templates": [
-       "RA2GattlingMG2_AA"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4203,7 +4160,10 @@
       "requires": "gatling > 1",
       "slot": "Armament@3AA",
       "versus_templates": [
-       "RA2GattlingMG3_AA"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4834,7 +4794,9 @@
       "requires": "!rank-elite && yuri_upgrade_supermagnets",
       "slot": "Armament@Upgraded",
       "versus_templates": [
-       "RA2Magnet"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4870,7 +4832,9 @@
       "requires": "rank-elite && !yuri_upgrade_supermagnets",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2Magnet"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"

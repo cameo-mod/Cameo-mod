@@ -2302,7 +2302,9 @@
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "GuardianGIMG"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2468,7 +2470,9 @@
       "requires": "!deployed && rank-elite && !ra2_allies_upgrade_elitegi",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "GuardianGIMG"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3377,7 +3381,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3483,7 +3489,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -5053,7 +5061,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -5716,7 +5726,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5884,7 +5896,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -5911,7 +5925,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -6400,7 +6416,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -7063,7 +7081,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7231,7 +7251,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -7258,7 +7280,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -7749,7 +7773,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -8412,7 +8438,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -8580,7 +8608,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -8607,7 +8637,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -9098,7 +9130,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -9761,7 +9795,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -9929,7 +9965,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -9956,7 +9994,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -10446,7 +10486,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -11109,7 +11151,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -11277,7 +11321,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -11304,7 +11350,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -11794,7 +11842,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -12457,7 +12507,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -12625,7 +12677,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -12652,7 +12706,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",

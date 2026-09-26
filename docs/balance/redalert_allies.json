@@ -2490,7 +2490,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -2517,7 +2519,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

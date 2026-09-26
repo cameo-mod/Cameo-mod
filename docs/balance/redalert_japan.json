@@ -287,7 +287,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Medium",
        "^TeslaWeapon",
-       "SkyHawkArrows"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium",
@@ -523,7 +525,9 @@
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "SkyHawkArrows"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -1305,7 +1309,9 @@
       "reloaddelay": "200",
       "slot": "Armament@AIR",
       "versus_templates": [
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -1906,7 +1912,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Light_Flat",
        "^TeslaWeapon",
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -1978,7 +1986,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Light_Flat",
        "^TeslaWeapon",
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -6306,7 +6316,9 @@
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AA",
       "versus_templates": [
-       "JapaneseHovercraftFlak"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
