@@ -1403,9 +1403,6 @@ TSLaserFence:
 
 TSHeal:
 	Inherits: ^TSHealWeapon
-	Warhead@Effect:
-		-Explosions:
-		-ImpactActors:
 
 ^ts_tiberiansun_ts_nod_mobilerepairvehicle:
 	Warhead@EffectWeld: CreateEffect

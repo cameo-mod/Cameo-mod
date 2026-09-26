@@ -182,7 +182,12 @@ W6_BASELINE = 490   # 524 -> 490: W6 shadow-deletion batch-1 (NOVA, 2026-09-27) 
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 445   # 450 -> 445: 5 more de-parented (NOVA, 2026-09-27) once the
+W7_BASELINE = 449   # 445 -> 449: #516-review rule-4 restorations (NOVA,
+                    # 2026-09-27) — RA2Robotmm_elite, RA2RobotmmScatter_elite,
+                    # SteelMakoGun_EMP_elite, SteelInspectorIonCannon keep their
+                    # parent edges because the parents carry inline Versus.
+                    # Branch W7 set remains a strict subset of master's (760).
+                    # was: 450 -> 445: 5 more de-parented (NOVA, 2026-09-27) once the
                     # collision pre-scan stopped counting the edge being
                     # spliced (keys=Inherits/Inherits@2 false positives).
                     # 13 true same-key collisions remain deferred.

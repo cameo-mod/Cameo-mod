@@ -1,3 +1,35 @@
+## 2026-09-27 — master merge: dead-field merge residue cleaned (NOVA)
+
+Merged `origin/master` (`8f3d0a564`, picks up #535/#536/#511/#533) into
+`devin/nova/w7-packs`. Two residue fixes after the merge commit:
+
+- `ttankzap2arc...fragment2_emp` — my W7 splice had inlined fragment1's
+  PRE-#535 body (no cancels), so the six `SpreadDamage.*` dead fields
+  (`FriendlyFireDamage/FriendlyFireSpread/IntegrityScale/PercentageScale/
+  PercentageSpread/PercentageVersus`) survived on the spliced copy while
+  master's fragment1 carries the cancels and fragment2 inherits them.
+  Mirrored the same six `-field:` cancels onto fragment2's final
+  `Warhead@Tesla_Super: SpreadDamage` retype decl → resolve-identical to
+  master, `audit_dead_warhead_fields` now reports **0 kinds / 0 weapons**
+  (baseline re-locked 12 -> 0).
+- `TSHeal` — master's #536 `-Explosions:`/`-ImpactActors:` cancels became
+  ORPHANS here because `0436ca36a` already cancels the fields upstream at
+  `Heal` (the provider `^TSHealWeapon -> Heal` is dead on this branch).
+  Removed the redundant 3-line `Warhead@Effect` decl → orphan cancels back
+  to 0, resolve-identical to master.
+
+Ratchet note: W7 baseline re-locked 445 -> 449 — the four #516-review
+rule-4 restorations (RA2Robotmm_elite, RA2RobotmmScatter_elite,
+SteelMakoGun_EMP_elite, SteelInspectorIonCannon) keep their parent edges.
+Branch W7 set is a strict subset of master's (449 of 760).
+
+Post-merge gates: shape all green (W2 158/170, W3 18/19, W4 63/77,
+W5 172/389, W6 489/490, W7 449/449, W8 365/372), empty warheads 0,
+orphan cancels 0, dead fields 0, local-Versus 881 <= 891, drift clean
+except the sanctioned `shared_redalert2` holdover (Gate A, awaits #528).
+Corpus diff vs master: 85 weapons — 64 authorized fold signatures + 21
+dead-leaf removals (`value -> None` on dead-typed nodes). Zero unexplained.
+
 ## 2026-09-27 — dead warhead fields: in-lane half of the #431 regression (NOVA)
 
 DAWN's fleet handoff (STATUS_2026-09-27_dawn_dwf_batch2_pr536.md) assigned
