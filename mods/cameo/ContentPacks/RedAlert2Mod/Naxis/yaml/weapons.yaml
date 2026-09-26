@@ -4916,7 +4916,20 @@ Nax120mmAssault_elite:
 		Duration: 12
 
 NaxiAlienPistol_elite:
-	Inherits: NaxiAlienPistol
+	Warhead@Laser_Heavy_Flat:
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@EMPUnit:
+	Warhead@TeslaWeaponPercentage:
 	Range: 3500
 	Burst: 4
 	BurstDelays: 3
@@ -4928,34 +4941,117 @@ NaxiAlienPistol_elite:
 	Warhead@EMPUnit:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
-	Warhead@Tesla_Heavy_ExtraDamage:
-		Versus:
-			None: 125
-			Light: 25
-			Medium: 50
-			Heavy: 75
-			Superheavy: 100
-			Scout: 10
-			Plate: 175
-			Concrete: 10
-			Wood: 10
-			Steel: 10
-			Flak: 150
-			Heroic: 200
-			Bomber: 10
-			Fighter: 10
-			Helicopter: 10
-			Spaceship: 10
-			ARMOR: 70
-			BLAST: 98
-			COMPOSITE: 72
-			HAZMAT: 61
-			REFLECTOR: 51
-			Shield: 300
-		Spread: 200
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
+	Warhead@Laser_Heavy_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
+		Damage: 32000
+	ValidTargets: Ground, Water
+	ReloadDelay: 54
+	TargetActorCenter: true
+	Projectile: ScaledBullet
+		Image: 120MM
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Report: nax_aliengun.wav
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Damage: 1
 NaxiMissileUboat:
 	Inherits@xNaxiMissileUboat0: ^Warhead_MissileAP_Medium
 	Inherits@xNaxiMissileUboat1: ^Projectile_Missile_Medium

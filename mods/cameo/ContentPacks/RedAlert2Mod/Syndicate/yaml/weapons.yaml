@@ -548,7 +548,23 @@ RA2FreedomAK47:
 			Superheavy: 5
 
 RA2FreedomAK47_elite:
-	Inherits: RA2FreedomAK47
+	Warhead@SniperWeaponExtraDamage:
+	Warhead@SniperWeaponPercentage:
+	Warhead@Effect:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@EffectWater:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@Bullet_Medium_Flat:
+	Warhead@ChaingunPercentage:
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	Range: 8130
 	Burst: 10
@@ -678,6 +694,99 @@ RA2FreedomAK47_elite:
 			Spaceship: 6
 			Superheavy: 5
 
+	ValidTargets: Ground, Water, Air, Garrisoned
+	ReloadDelay: 42
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: 50CAL
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		ContrailZOffset: 4000
+		ContrailStartColor: FF9933
+		ContrailEndColor: 00000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailLength: 50
+		Width: 100
+		Speed: 10000
+		InaccuracyType: PerCellIncrement
+	Report: islyat1a.wav, islyat1b.wav
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Amount: 1
+		Spread: 60
+		Damage: 6000
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Spread: 30
+		Damage: 3
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			Shield: 40
+			None: 38
+			Flak: 36
+			Plate: 34
+			Heroic: 32
+			Scout: 30
+			Light: 28
+			Medium: 26
+			Heavy: 24
+			Superheavy: 22
+			Wood: 20
+			Steel: 18
+			Concrete: 16
+			Fighter: 14
+			Bomber: 12
+			Helicopter: 10
+			Spaceship: 8
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Spread: 100
+		Damage: 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
 RA2FreedomRocket:
 	Inherits@xRA2FreedomRocket0: ^Warhead_MissileAP_Medium
 	Inherits@xRA2FreedomRocket1: ^Projectile_Missile_Medium

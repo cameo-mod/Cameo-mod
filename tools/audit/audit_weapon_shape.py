@@ -109,7 +109,11 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
+W6_BASELINE = 497   # 442 -> 497: held-67 W7 materialization (nova) re-declared
+                    # inherited effect warheads locally — resolved-identical,
+                    # the +55 are parent-owned Smudge/Concrete/Effect nodes now
+                    # local after their weapon->weapon edge was inlined.
+                    # was: 443 -> 442: W7-remainder materialization batch moved
                     # the last local effect node on the DAWN file-set into a family.
                     # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
                     # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
@@ -124,7 +128,12 @@ W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 760   # 804 -> 760: W7-remainder materialization batch (DAWN
+W7_BASELINE = 693   # 760 -> 693: held-67 ExtraDamage batch (nova file-set:
+                    # RA Soviets, RA2 Yuri, RA2Mod AsianAlliance/Consortium/
+                    # FutureTech/Naxis/SchwarzerMond/Syndicate, redalert2mod).
+                    # Resolve-verified fold per ruling: chips deleted, main
+                    # bumped by chip sum, OpenToppedDamage twins kept.
+                    # was: 804 -> 760: W7-remainder materialization batch (DAWN
                     # file-set: d2k 16 + tiberiansun 11 + starcraft 3 +
                     # tiberiandawn 1 + outpost2 edenMobile chain 2).
                     # was: 807 -> 804: W7 batch-5 no-covering inlines

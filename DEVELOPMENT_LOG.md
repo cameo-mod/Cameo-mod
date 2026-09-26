@@ -1,3 +1,49 @@
+## 2026-09-26 (late) — W7 held-67: ExtraDamage fold + materialization landed (NOVA)
+
+The 67 weapons held for the ExtraDamage ruling are now converted on
+`devin/nova/*` (worktree nova-packs): every `Inherits: <weapon>` edge inlined,
+all damage-typed `Warhead@*ExtraDamage` chips folded into each weapon's own
+main warhead Damage (resolved-arithmetic, not textual), `OpenToppedDamage`
+twins preserved per ruling. Result: **W7 760 -> 693** (ratchet re-locked),
+payload + ordered-warhead-key verify clean on all 784 defs in the 9 files,
+`find_empty_warhead` = 0, damage totals preserved everywhere.
+
+W6 rose 442 -> 497 — inherent: materialization re-declares a parent's locally
+declared effect warheads (Smudge/Concrete/Effect) as local decls in the child.
+Baseline re-locked at 497 with justification; flagged to Claude for ruling.
+
+### Tool: `tools/nova_w7mat.py`
+
+Materializer that resolves each target against an immutable `--base` worktree
+(HEAD), so converting parents and children in one batch cannot contaminate a
+child's expectation (the silent damage-loss class: parent folds chips into
+main, child's local main override then shadows the folded value). Emits bare
+`Warhead@K:` stubs at `#W7MAT:` markers for order, field pins + fold bump at
+the block tail, `-K:` cancels for content surviving templates resurrect.
+
+### Hard-won failure modes fixed this session
+
+- **Live-tree target resolution** — measuring the child against the already-
+  converted parent baked the chip loss into the expectation. Resolve targets
+  on a pristine base ruleset; verify on the live tree.
+- **`#` comment banners inside logical blocks** — SchwarzerMond/Syndicate
+  files interleave `#`-banner separators mid-weapon. A block regex that stops
+  at col-0 `#` truncates the block: pins land before the banner, post-banner
+  local decls then override the pins (main Damage 18000 -> 16000 observed).
+- **Nested `-Field:` cancels** — orphan-cancel pruning must only drop dead
+  cancels; a `-HitAnim:` inside `Range:` is load-bearing while a provider
+  exists and is resolver-residue once dead (miniyaml keeps `-x` markers that
+  cancel nothing). Dropped iff the post-strip subtree lacks the key entirely.
+- **`OpenToppedDamage` is not a chip** — `Warhead@SniperWeaponExtraDamage`
+  keys on `*ExtraDamage` but is the passenger-damage mechanic; fold only
+  damage-typed nodes (SpreadDamage/AreaDamage/...).
+- **Surviving providers resurrect cancelled content** — pins must emit
+  `-field:` cancels for fields the removed parent had suppressed, else
+  `^Effect_*` templates leak them back.
+
+### Boot-gate
+
+Pending at write time; will be updated before commit.
 ## 2026-09-26 — S2 split-def fix: 3 RA Allies weapon stubs folded (NOVA)
 
 `audit_split_definitions` flagged `ra1_allies_alliedrocketsoldier_rocketsracryo`,

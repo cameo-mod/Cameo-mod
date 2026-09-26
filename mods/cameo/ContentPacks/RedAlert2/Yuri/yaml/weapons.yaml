@@ -2783,9 +2783,13 @@ RA2Virusgun2:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
-	Inherits: RA2Virusgun
+	Warhead@SniperWeaponExtraDamage:
+	Warhead@SniperWeaponPercentage:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@Cloud:
+	Warhead@HeavyChemicalWeaponPercentage:
 	ValidTargets: Ground, Ship, Garrisoned
-	-InvalidTargets:
 	Warhead@Flak_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 36000
@@ -2810,13 +2814,131 @@ RA2Virusgun2:
 		Duration: 150
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
-	-Warhead@Sniper_Light:
 
+	ReloadDelay: 74
+	Range: 9999
+	Projectile: Bullet
+		Inaccuracy: 0
+		ContrailStartColor: FF9933
+		ContrailEndColor: 88FF4400
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailLength: 33
+		ContrailEndColorUsePlayerColor: false
+		Width: 33
+		Speed: 3333
+		ContrailWidth: 333
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Ship, Air
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 4
+	Report: iviratta.wav
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Amount: 1
+		Spread: 1
+		Damage: 12000
+		Falloff: 100, 0
+		Versus:
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 40
+			None: 38
+			Flak: 36
+			Plate: 34
+			Heroic: 32
+			Scout: 30
+			Light: 28
+			Medium: 26
+			Heavy: 24
+			Superheavy: 22
+			Wood: 20
+			Steel: 18
+			Concrete: 16
+			Fighter: 14
+			Bomber: 12
+			Helicopter: 10
+			Spaceship: 8
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+	Warhead@Effect1: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	Warhead@Effect2: CreateEffect
+		Explosions: flak_explosion_ground
+		ValidTargets: Ground, Ship, Air
+	Warhead@Cloud: SpawnSmokeParticle
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
 RA2Virusgun3:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
-	Inherits: RA2Virusgun2
+	Warhead@EffectWater:
+	Warhead@SniperWeaponExtraDamage:
+	Warhead@SniperWeaponPercentage:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@Cloud:
+	Warhead@HeavyChemicalWeaponPercentage:
 	Projectile: Bullet
 		Image: bhreddragon
 		Palette: effect
@@ -2829,7 +2951,6 @@ RA2Virusgun3:
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@Flak_Medium:
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -2840,13 +2961,394 @@ RA2Virusgun3:
 		Count: 1, 4
 		Duration: 200
 
+	ValidTargets: Ground, Ship, Garrisoned
+	ReloadDelay: 74
+	Range: 9999
+	Projectile: Bullet
+		Inaccuracy: 0
+		ContrailLength: 33
+		Speed: 3333
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 10000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColor: FF9933
+		ContrailStartColorAlpha: 0
+		ContrailEndColor: 88FF4400
+		ContrailEndColorAlpha: 255
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailEndColorUsePlayerColor: false
+		Width: 33
+		ContrailWidth: 333
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Ship, Air
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 4
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Report: iviratta.wav
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Ship, Garrisoned
+		Amount: 1
+		Spread: 1
+		Damage: 12000
+		Falloff: 100, 0
+		Versus:
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Garrisoned
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 40
+			None: 38
+			Flak: 36
+			Plate: 34
+			Heroic: 32
+			Scout: 30
+			Light: 28
+			Medium: 26
+			Heavy: 24
+			Superheavy: 22
+			Wood: 20
+			Steel: 18
+			Concrete: 16
+			Fighter: 14
+			Bomber: 12
+			Helicopter: 10
+			Spaceship: 8
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+	Warhead@Effect1: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	Warhead@Effect2: CreateEffect
+		Explosions: flak_explosion_ground
+		ValidTargets: Ground, Ship, Air
+	Warhead@Cloud: SpawnSmokeParticle
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Garrisoned
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
 RA2Virusgun_elite:
-	Inherits: RA2Virusgun3
+	Warhead@MissileAP_Medium:
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@EffectWater:
+	Warhead@SniperWeaponExtraDamage:
+	Warhead@SniperWeaponPercentage:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@Cloud:
+	Warhead@HeavyChemicalWeaponPercentage:
+	Warhead@Condition:
 	Range: 11111
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 5
 		Duration: 250
 
+	ValidTargets: Ground, Ship, Garrisoned
+	ReloadDelay: 74
+	TargetActorCenter: true
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Infantry, Monster, Garrisoned
+		Spread: 1
+		Damage: 48000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 94
+			COMPOSITE: 44
+			BLAST: 69
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+	Projectile: Bullet
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 0
+		Image: bhreddragon
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: green_smokey
+		TrailInterval: 1
+		ContrailLength: 33
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 3333
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 10000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColor: FF9933
+		ContrailStartColorAlpha: 0
+		ContrailEndColor: 88FF4400
+		ContrailEndColorAlpha: 255
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailEndColorUsePlayerColor: false
+		Width: 33
+		ContrailWidth: 333
+		Palette: effect
+		TrailDelay: 1
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Ship, Air
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Report: iviratta.wav
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Ship, Garrisoned
+		Amount: 1
+		Spread: 1
+		Damage: 12000
+		Falloff: 100, 0
+		Versus:
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Garrisoned
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 40
+			None: 38
+			Flak: 36
+			Plate: 34
+			Heroic: 32
+			Scout: 30
+			Light: 28
+			Medium: 26
+			Heavy: 24
+			Superheavy: 22
+			Wood: 20
+			Steel: 18
+			Concrete: 16
+			Fighter: 14
+			Bomber: 12
+			Helicopter: 10
+			Spaceship: 8
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+	Warhead@Effect1: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	Warhead@Effect2: CreateEffect
+		Explosions: flak_explosion_ground
+		ValidTargets: Ground, Ship, Air
+	Warhead@Cloud: SpawnSmokeParticle
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Garrisoned
+		Spread: 1
+		Damage: 6
+		Falloff: 100, 0
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@Condition: GrantExternalCondition
+		Range: 2000
+		Condition: corroded
+		Duration: 200
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
 RA2Chemspray:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium

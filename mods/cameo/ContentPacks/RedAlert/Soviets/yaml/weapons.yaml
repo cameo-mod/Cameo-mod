@@ -11026,7 +11026,23 @@ ra1_soviets_rocketsoldier_rocketsra:
 			None: 5
 
 ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
-	Inherits: DragunovSniper
+	Warhead@CannonAP_Heavy:
+	Warhead@RailgunWeaponPercentage:
+	Warhead@Effect:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@TankDestroyerCannonPercentage:
+	Warhead@LightMissilePercentage:
+	Warhead@HeavyCannonPercentage:
+	Warhead@FlakWeaponPercentage:
 	Warhead@CannonAP_Heavy:
 		Damage: 206000
 	Warhead@TankDestroyerCannonPercentage:
@@ -11044,10 +11060,255 @@ ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
 	Warhead@FlakWeaponPercentage:
 		PercentageDenominator: 2500
 		Damage: 103
-	Warhead@LegacyRailgunExtraDamage:
-		Damage: 1030
 	Warhead@Effect:
 		ImpactSounds: xplos.aud
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 85
+	Range: 5804
+	TargetActorCenter: false
+	Warhead@CannonAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 91
+			COMPOSITE: 40
+			BLAST: 73
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 157
+			Superheavy: 151
+			Concrete: 136
+			Heavy: 134
+			Plate: 125
+			Medium: 118
+			Spaceship: 109
+			Steel: 108
+			Light: 105
+			Scout: 93
+			Flak: 91
+			Wood: 87
+			Helicopter: 79
+			Heroic: 77
+			None: 73
+			Bomber: 65
+			Fighter: 49
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Concrete: 20
+			Steel: 19
+			Wood: 18
+			Heroic: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		Damage: 207030
+	Report: aacanon3.aud
+	Projectile: Bullet
+		Duration: 16
+		Inaccuracy: 250
+		BeamColor: 0080FFC8
+		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
+		HitAnim:
+		Image: 50CAL
+		Speed: 10000
+		Shadow: true
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 10
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 1
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 0
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 5
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Spaceship: 15
+			Heavy: 14
+			Helicopter: 13
+			Steel: 12
+			Medium: 11
+			Bomber: 10
+			Concrete: 9
+			Light: 8
+			Fighter: 7
+			Wood: 6
+			Scout: 5
+			Plate: 4
+			Flak: 3
+			None: 2
+			Heroic: 1
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Versus:
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Concrete: 22
+			Medium: 21
+			Steel: 20
+			Heavy: 19
+			None: 18
+			Superheavy: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
 ra1_soviets_shocktrooper_portatesla:
 	Inherits: PortaTesla
 	Range: 5932
