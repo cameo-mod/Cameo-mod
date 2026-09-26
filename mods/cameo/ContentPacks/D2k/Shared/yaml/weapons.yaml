@@ -604,7 +604,9 @@ Debris:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
-	Inherits: Debris
+	Inherits@w71: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
 	Projectile: Bullet
 		Image: shrapnel2
 		Palette: d2keffect
@@ -613,6 +615,7 @@ Debris:
 		TrailInterval: 1
 	Warhead@Demolition_Light:
 		Damage: 16000
+		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Flame_Light:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
@@ -622,6 +625,9 @@ Debris:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 2250
 
+	ReloadDelay: 60  # W7MAT order-pin
+	Range: 2816  # W7MAT order-pin
+	Report: d2khc.wav  # W7MAT order-pin
 Debris2:
 	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
 	Inherits: ^Debris2Legacy

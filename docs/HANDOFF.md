@@ -1,5 +1,21 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26g — DAWN: W7 weapon-edge conversion — my lanes cleared
+
+`Agent: Devin-DAWN · branch devin/dawn/w7-chains (stacked on w2-deadedges)`
+
+19 defs in my themes held `Inherits: <weapon>` edges — WC2 cross-race
+chains (incl. 3-deep DeathCoil), `^Debris2Legacy -> Debris`,
+`^TSHealWeapon -> Heal`. Each edge replaced by the parent's covering
+template edges (`Inherits@w7N: ^Warhead_/^Projectile_/^Effect_`), drift
+pinned and marked `# W7MAT`. 679/679 resolved+ordered identical;
+orphans 0; W7 in my themes: 18 -> 1 (Sound2 held — Ordos ruling).
+
+Resolved-faithful bucket rises documented in audit_weapon_shape:
+W2 46->53, W3 7->11, W4 40->44, W6 512->518 (marked pins), W1 234->239.
+
+---
+
 ## 2026-09-26f — DAWN: W2 dead-edge sweep — 152 zero-contribution wh edges dropped
 
 `Agent: Devin-DAWN · branch devin/dawn/w2-deadedges (stacked on w7-packs / PR #508)`

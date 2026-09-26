@@ -1390,17 +1390,138 @@ TSLaserFence:
 		DamageTypes: FireDeath
 
 ^TSHealWeapon:
-	Inherits: Heal
 	ReloadDelay: 80
 	Range: 2897
 	Report: healer1.aud
 	TargetActorCenter: true
 	Projectile: InstantHit
+		Width: 128
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeam: true
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamWidth: 64
+		Color: 44FF8888
+		Duration: 12
+		ZOffset: 2047
 	Warhead@1Dam: TargetDamage
 		DebugOverlayColor: 00FF00
 		Damage: -5000
 		ValidTargets: Heal
 
+	Warhead@HealingWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Steel: 23
+			Light: 20
+			Spaceship: 15
+			Superheavy: 14
+			Medium: 18
+			Bomber: 19
+			Wood: 25
+			Plate: 11
+			Scout: 22
+			Shield: 35
+			Helicopter: 17
+			Fighter: 21
+			Concrete: 24
+			None: 13
+			Flak: 12
+			Heroic: 10
+			Heavy: 16
+		ValidTargets: Heal
+		DebugOverlayColor: 00FF00
+		FriendlyFireSpread: 100
+		ValidRelationships: Ally
+		Damage: -1
+		DamageTypes: KillsDrone
+		Falloff: 100
+		FriendlyFireDamage: 100
+		UpdatesUnitStatistics: false
+		Spread: 5000
+	Warhead@HealingWeapon: SpreadDamage  # W7MAT order-pin
+		Versus:
+			Flak: 92
+			Heavy: 76
+			None: 88
+			Shield: 140
+			Concrete: 44
+			Spaceship: 80
+			Wood: 40
+			Superheavy: 84
+			Medium: 68
+			Heroic: 100
+			Light: 60
+			Fighter: 56
+			Scout: 52
+			Bomber: 64
+			Plate: 96
+			Helicopter: 72
+			Steel: 48
+		DebugOverlayColor: 00FF00
+		DamageTypes: KillsDrone
+		Spread: 1000
+		ValidRelationships: Ally
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Heal
+		Damage: -2000
+	Warhead@ExtraHealing: SpreadDamage  # W7MAT order-pin
+		Damage: -1000
+		Versus:
+			Flak: 100
+			Medium: 100
+			Shield: 100
+			Concrete: 100
+			Heroic: 100
+			Bomber: 100
+			Plate: 100
+			None: 100
+			Light: 100
+			Steel: 100
+			Wood: 100
+			Fighter: 100
+			Helicopter: 100
+			Heavy: 100
+			Scout: 100
+			Spaceship: 100
+			Superheavy: 100
+		UpdatesUnitStatistics: false
+		DebugOverlayColor: 00FF00
+		ValidRelationships: Ally
+		ValidTargets: Heal
+		Spread: 500
+		DamageTypes: KillsDrone
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+	Warhead@Defuse3: DetachDelayedWeapon  # W7MAT order-pin
+		Types: ivanbomb
+		ValidRelationships: Ally
+		Range: 5000
+	Warhead@Effect: FlashTargetsInRadius  # W7MAT order-pin
+		Radius: 5000
+		Explosions: green_small_fire
+		ImpactActors: true
+		ValidTargets: Heal
+		ValidRelationships: Ally
+	Warhead@Defuse1: DetachDelayedWeapon  # W7MAT order-pin
+		Range: 5000
+		Types: defilerplague
+		ValidRelationships: Ally
+	ValidTargets: Heal, lockdowned, plagued, ivanattached  # W7MAT order-pin
+	Warhead@Defuse2: DetachDelayedWeapon  # W7MAT order-pin
+		ValidRelationships: Ally
+		Types: lockdowned
+		Range: 5000
+	Warhead@Healed: GrantExternalCondition  # W7MAT order-pin
+		ValidRelationships: Ally
+		Condition: Healed
+		Duration: 10
+		ValidTargets: Heal
+		Range: 5000
+	Warhead@HealingField: GrantExternalCondition  # W7MAT order-pin
+		ValidTargets: Heal
+		Condition: HealingField
+		Range: 5000
+		Duration: 10
+		ValidRelationships: Ally
+	ValidRelationships: Ally  # W7MAT order-pin
 TSHeal:
 	Inherits: ^TSHealWeapon
 

@@ -12,25 +12,440 @@ wc2gruntslice2:
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2axeFire:
-	Inherits: wc2arrowFire
+	Inherits@w71: ^Warhead_CannonHE_Medium_Flat  # W7MAT covering-edge
+	Inherits@w72: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w73: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w74: ^Effect_CannonHE_Medium  # W7MAT covering-edge
 	ReloadDelay: 38
 	Range: 6445
 	Report: wc2_axe.aud
-	Projectile:
+	Projectile: Missile  # W7MAT order-pin
 		Image: wc2_orc_trollaxethrower_axe
+		RangeLimit: 12000
+		AllowSnapping: True
+		ContrailStartColor: EECCAA88
+		VerticalRateOfTurn: 60
+		CloseEnough: 600
+		ContrailStartWidth: 40
+		ContrailLength: 0
+		Speed: 600
+		ContrailEndColor: 88664422
+		PointDefenseTypes: Missile
+		ContrailEndWidth: 80
+		Blockable: false
+		Inaccuracy: 0
+		HorizontalRateOfTurn: 60
+		ContrailZOffset: 4000
+		LaunchAngle: 66
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
+		ImpactActors: false
+		Explosions: small_poof
+		ValidTargets: Ground, Water, Air
 
+	Warhead@ChaingunPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Helicopter: 9
+			Flak: 19
+			Superheavy: 5
+			Fighter: 15
+			Plate: 18
+			Wood: 14
+			Steel: 8
+			Bomber: 12
+			Heavy: 7
+			Heroic: 17
+			Spaceship: 6
+			Shield: 25
+			None: 20
+			Medium: 10
+			Concrete: 11
+			Scout: 16
+			Light: 13
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Damage: 2
+		UpdatesUnitStatistics: false
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Versus:
+			Fighter: 15
+			Medium: 6
+			Bomber: 13
+			Shield: 17
+			Heroic: 10
+			Spaceship: 9
+			Heavy: 5
+			Superheavy: 4
+			Helicopter: 11
+			None: 16
+			Light: 7
+			Scout: 8
+			Wood: 1
+			Plate: 12
+			Flak: 14
+			Concrete: 2
+			Steel: 3
+		UpdatesUnitStatistics: false
+		Spread: 35
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Damage: 2
+		InvalidTargets: wall
+		ValidTargets: Ground, Water, Air
+	Warhead@Glow: GlowImpact  # W7MAT order-pin
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Wood: 7
+			Bomber: 19
+			Plate: 14
+			Heavy: 9
+			Scout: 12
+			Fighter: 20
+			Superheavy: 8
+			Concrete: 6
+			Helicopter: 18
+			Light: 11
+			Flak: 15
+			Spaceship: 17
+			Heroic: 13
+			Steel: 5
+			None: 16
+			Medium: 10
+			Shield: 25
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@GrenadePercentage: AreaDamagePercentage  # W7MAT order-pin
+		UpdatesUnitStatistics: false
+		Versus:
+			Heroic: 5
+			Shield: 17
+			Heavy: 10
+			Scout: 16
+			Flak: 7
+			Steel: 11
+			Light: 14
+			Plate: 6
+			Bomber: 3
+			Spaceship: 1
+			Superheavy: 8
+			Wood: 15
+			Helicopter: 2
+			Fighter: 4
+			Medium: 12
+			Concrete: 13
+			None: 9
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 2
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Ground, Water, Air
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Heroic: 5
+			Bomber: 2
+			Plate: 8
+			Flak: 7
+			Heavy: 15
+			Light: 13
+			Fighter: 1
+			Medium: 14
+			Shield: 17
+			Superheavy: 16
+			Steel: 11
+			Scout: 12
+			Spaceship: 4
+			None: 6
+			Wood: 9
+			Concrete: 10
+			Helicopter: 3
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	-Warhead@CannonHE_Medium_Flat:  # W7MAT order-pin
+	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@CannonHE_Medium: AreaDamage  # W7MAT order-pin
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 1663
+	InvalidTargets: wall  # W7MAT order-pin
+	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
+		Duration: 3
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
+		ImpactSounds: xplos.aud
+	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
+		Damage: 100
 wc2axeFirespear:
-	Inherits: wc2highArrowFire
+	Inherits@w71: ^Warhead_Laser_ExtraDamage  # W7MAT covering-edge
+	Inherits@w72: ^Warhead_CannonHE_Medium_Flat  # W7MAT covering-edge
+	Inherits@w73: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w74: ^Projectile_Shell_Medium  # W7MAT covering-edge
+	Inherits@w75: ^Effect_CannonHE_Medium  # W7MAT covering-edge
 	ReloadDelay: 40
 	Range: 7711
 	Report: wc2_axe.aud
-	Projectile:
+	Projectile: Missile  # W7MAT order-pin
 		Image: wc2_orc_trollaxethrower_axe
+		RangeLimit: 14000
+		AllowSnapping: True
+		ContrailStartColor: EECCAA88
+		VerticalRateOfTurn: 70
+		Arm: 0
+		MaximumLaunchSpeed: 200
+		CloseEnough: 700
+		Acceleration: 2
+		ZOffset: 3000
+		HomingActivationDelay: 3
+		HitAnim: laserfire
+		ContrailStartWidth: 40
+		ContrailLength: 0
+		TrailInterval: 1
+		ValidTargets: Ground, Water, Air
+		Speed: 700
+		ContrailEndColor: 88664422
+		Width: 100
+		PointDefenseTypes: Missile
+		Damage: 4000
+		MaximumLaunchAngle: 70
+		ContrailEndWidth: 80
+		MinimumLaunchAngle: 70
+		Blockable: false
+		Inaccuracy: 0
+		HorizontalRateOfTurn: 70
+		ContrailZOffset: 4000
+		LaunchAngle: 66
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
+		ImpactActors: false
+		Explosions: small_poof
+		ValidTargets: Ground, Water, Air
 
+	Warhead@ChaingunPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Helicopter: 9
+			Flak: 19
+			Superheavy: 5
+			Fighter: 15
+			Plate: 18
+			Wood: 14
+			Steel: 8
+			Bomber: 12
+			Heavy: 7
+			Heroic: 17
+			Spaceship: 6
+			Shield: 25
+			None: 20
+			Medium: 10
+			Concrete: 11
+			Scout: 16
+			Light: 13
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Damage: 2
+		UpdatesUnitStatistics: false
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Versus:
+			Fighter: 15
+			Medium: 6
+			Bomber: 13
+			Shield: 17
+			Steel: 3
+			Heroic: 10
+			Spaceship: 9
+			Heavy: 5
+			Superheavy: 4
+			Helicopter: 11
+			None: 16
+			Light: 7
+			Scout: 8
+			Wood: 1
+			Plate: 12
+			Flak: 14
+			Concrete: 2
+		UpdatesUnitStatistics: false
+		Spread: 35
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Damage: 2
+		InvalidTargets: wall
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage  # W7MAT order-pin
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Medium: 20
+			Scout: 14
+			Heavy: 23
+			Spaceship: 24
+			None: 11
+			Concrete: 18
+			Superheavy: 25
+			Wood: 15
+			Heroic: 10
+			Flak: 12
+			Helicopter: 22
+			Bomber: 19
+			Steel: 21
+			Plate: 13
+			Light: 17
+			Shield: 35
+			Fighter: 16
+		Damage: 2
+		UpdatesUnitStatistics: false
+		Spread: 300
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Glow: GlowImpact  # W7MAT order-pin
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Bomber: 16
+			Heroic: 22
+			Heavy: 21
+			Helicopter: 20
+			Shield: 35
+			Flak: 14
+			REFLECTOR: 50
+			Spaceship: 24
+			None: 11
+			Light: 13
+			Wood: 15
+			Superheavy: 25
+			Medium: 17
+			Scout: 10
+			Plate: 18
+			Fighter: 12
+			Steel: 23
+			Concrete: 19
+		Spread: 75
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		Damage: 2
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Wood: 7
+			Bomber: 19
+			Plate: 14
+			Heavy: 9
+			Scout: 12
+			Fighter: 20
+			Superheavy: 8
+			Concrete: 6
+			Helicopter: 18
+			Light: 11
+			Flak: 15
+			Spaceship: 17
+			Heroic: 13
+			Steel: 5
+			None: 16
+			Medium: 10
+			Shield: 25
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@GrenadePercentage: AreaDamagePercentage  # W7MAT order-pin
+		UpdatesUnitStatistics: false
+		Versus:
+			Heroic: 5
+			Shield: 17
+			Heavy: 10
+			Scout: 16
+			Flak: 7
+			Steel: 11
+			Light: 14
+			Plate: 6
+			Bomber: 3
+			Spaceship: 1
+			Superheavy: 8
+			Wood: 15
+			Helicopter: 2
+			Fighter: 4
+			Medium: 12
+			Concrete: 13
+			None: 9
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 2
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Ground, Water, Air
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Heroic: 5
+			Bomber: 2
+			Plate: 8
+			Flak: 7
+			Heavy: 15
+			Light: 13
+			Fighter: 1
+			Medium: 14
+			Shield: 17
+			Superheavy: 16
+			Steel: 11
+			Scout: 12
+			Spaceship: 4
+			None: 6
+			Wood: 9
+			Concrete: 10
+			Helicopter: 3
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	-Warhead@CannonHE_Medium_Flat:  # W7MAT order-pin
+	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
+		Versus:
+			Spaceship: 25
+			Scout: 17
+			Superheavy: 21
+			Wood: 10
+			Heroic: 13
+			Fighter: 22
+			Bomber: 23
+			Shield: 35
+			Light: 18
+			Plate: 16
+			Helicopter: 24
+			None: 14
+			Medium: 19
+			Concrete: 11
+			Heavy: 20
+			Steel: 12
+			Flak: 15
+		UpdatesUnitStatistics: false
+		Spread: 250
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@RA2Scorch: LeaveSmudge  # W7MAT order-pin
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Scorch
+	Warhead@CannonHE_Medium: AreaDamage  # W7MAT order-pin
+		ValidTargets: Ground, Water, Air
+		Damage: 33000
+		PercentageScale: 1210
+	InvalidTargets: wall  # W7MAT order-pin
+	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
+		Duration: 3
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
+		ImpactSounds: xplos.aud
+	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
+		Damage: 100
 wc2ogrepunch:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -211,10 +626,13 @@ wc2deathknightFire:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
-	Inherits: wc2mageFire
+	Inherits@w71: ^Warhead_Tesla_Super  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Lightning_Super  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Tesla_Super  # W7MAT covering-edge
 	Report: wc2_touchdrk.aud
-	Projectile:
+	Projectile: Bullet  # W7MAT order-pin
 		Image: wc2_effect_death_knight_attack
+		Speed: 640
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -222,12 +640,26 @@ wc2deathknightFire:
 	-Warhead@Tesla_Super:
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_knight_attack
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		ValidTargets: Ground, Air
 
 # Primary deathcoil projectile
 # 50 WC2 Damage = 11250 ORA damage. Divide by 3 since there's 3 projectiles.
 
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Range: 8000  # W7MAT order-pin
+	ReloadDelay: 40  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 wc2deathknightDeathCoil:
-	Inherits: wc2deathknightFire
+	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w74: ^Warhead_Tesla_Super  # W7MAT covering-edge
+	Inherits@w75: ^Projectile_Lightning_Super  # W7MAT covering-edge
+	Inherits@w76: ^Effect_Tesla_Super  # W7MAT covering-edge
 	Report: wc2_dethcoil.aud
 	ReloadDelay: 80
 	Range: 8000
@@ -236,25 +668,92 @@ wc2deathknightDeathCoil:
 		HorizontalRateOfTurn: 128
 		VerticalRateOfTurn: 128
 		AllowSnapping: True
+		Image: wc2_effect_death_knight_attack
+		Speed: 640
 
 # Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
 
+	-Warhead@Tesla_Super:  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		Image: wc2_effect_death_knight_attack
+		ValidTargets: Ground, Air
+	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
 wc2deathknightDeathCoilScatter_Left:
-	Inherits: wc2deathknightDeathCoil
-	-Report:
+	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w74: ^Warhead_Tesla_Super  # W7MAT covering-edge
+	Inherits@w75: ^Projectile_Lightning_Super  # W7MAT covering-edge
+	Inherits@w76: ^Effect_Tesla_Super  # W7MAT covering-edge
 	FirstBurstTargetOffset: 0,-2048,512
 	Projectile: Missile
 		# Inaccuracy: 2c256
 		# InaccuracyType: Absolute
 		RangeLimit: 30c0
 		HomingActivationDelay: 15
+		AllowSnapping: True
+		Image: wc2_effect_death_knight_attack
+		VerticalRateOfTurn: 128
+		Speed: 640
+		HorizontalRateOfTurn: 128
 
 # Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
 
+	-Warhead@Tesla_Super:  # W7MAT order-pin
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		Image: wc2_effect_death_knight_attack
+		ValidTargets: Ground, Air
+	Range: 8000  # W7MAT order-pin
+	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	ReloadDelay: 80  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 wc2deathknightDeathCoilScatter_Right:
-	Inherits: wc2deathknightDeathCoilScatter_Left
+	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w74: ^Warhead_Tesla_Super  # W7MAT covering-edge
+	Inherits@w75: ^Projectile_Lightning_Super  # W7MAT covering-edge
+	Inherits@w76: ^Effect_Tesla_Super  # W7MAT covering-edge
 	FirstBurstTargetOffset: 0,2048,512
 
+	-Warhead@Tesla_Super:  # W7MAT order-pin
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		Image: wc2_effect_death_knight_attack
+		ValidTargets: Ground, Air
+	Projectile: Missile  # W7MAT order-pin
+		RangeLimit: 30c0
+		AllowSnapping: True
+		Image: wc2_effect_death_knight_attack
+		VerticalRateOfTurn: 128
+		Speed: 640
+		HomingActivationDelay: 15
+		HorizontalRateOfTurn: 128
+	Range: 8000  # W7MAT order-pin
+	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	ReloadDelay: 80  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 wc2deathknightHaste:
 	ReloadDelay: 60
 	Range: 5120
@@ -289,65 +788,96 @@ wc2deathknightHaste:
 		ValidTargets: haste_target
 
 wc2deathknightDeathAndDecay:
-	Inherits: wc2mageBlizzard
 	Report: wc2_decay.aud
-	Warhead@InitialSpreader:
+	Warhead@InitialSpreader: FireCluster  # W7MAT order-pin
 		Weapon: wc2deathknightDeathAndDecay_Spread
 		RandomClusterCount: 5
 		Dimensions: 5, 5
 		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
-	Warhead@1Dam_impact:
+	Warhead@1Dam_impact: SpreadDamage  # W7MAT order-pin
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+		Spread: 0c1
 
+	ReloadDelay: 50  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+		AffectsParent: True
+		DamageTypes: Prone50Percent, TriggerProne
+	Range: 8000  # W7MAT order-pin
+	Projectile: InstantHit  # W7MAT order-pin
 wc2deathknightDeathAndDecay_Spread:
-	Inherits: wc2mageBlizzard_Spread
 	Projectile: InstantHit
 		Blockable: false
+		AirburstAltitude: 5c0
+		Speed: 0c512
+		LaunchAngle: 100
 	Warhead@Projectiles1: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		RandomClusterCount: 1
 	Warhead@Projectiles2: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
+		RandomClusterCount: 2
+		Delay: 30
 	Warhead@Projectiles3: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		Delay: 60
+		RandomClusterCount: 3
 	Warhead@Projectiles4: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
+		RandomClusterCount: 4
+		Delay: 90
 	Warhead@Projectiles5: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		Delay: 120
+		RandomClusterCount: 5
 	Warhead@Projectiles6: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
+		RandomClusterCount: 6
+		Delay: 150
 	Warhead@Projectiles7: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		RandomClusterCount: 5
+		Delay: 180
 	Warhead@Projectiles8: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
+		Delay: 210
+		RandomClusterCount: 4
 	Warhead@Projectiles9: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		RandomClusterCount: 3
+		Delay: 240
 	Warhead@Projectiles10: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
+		RandomClusterCount: 2
+		Delay: 270
 	Warhead@Projectiles11: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
 		Dimensions: 1, 1
 		Footprint: x
+		Delay: 300
+		RandomClusterCount: 1
 
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 wc2deathknightDeathAndDecay_Hit:
 	Inherits@wh: ^Warhead_Inferno_Heavy
 	Inherits@proj: ^Projectile_Inferno_Heavy
@@ -526,7 +1056,9 @@ wc2dragonFireVisible:
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
 wc2dragonFireExplosion:
-	Inherits: wc2dragonFireVisible
+	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Flame_Heavy  # W7MAT covering-edge
 	Burst: 3
 	BurstDelays: 0
 	FirstBurstTargetOffset: 0,0,0
@@ -537,33 +1069,88 @@ wc2dragonFireExplosion:
 		TrailImage: smokey
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
+		Speed: 384
 
 # --- Hero weapons (ported from wcameo(1), converted to 3-way split) ---
 
 # Hellscream: reuses Danath's converted sword under an orc hero name.
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: explode.aud
+		Explosions: wc2_building_collapse
+		ValidTargets: Ground, Water, Air
+	Range: 5010  # W7MAT order-pin
+	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 30000
+		ValidTargets: Ground, Water, Air
+	InvalidTargets: wall  # W7MAT order-pin
+	ReloadDelay: 120  # W7MAT order-pin
+	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+	Report: wc2_axe.aud  # W7MAT order-pin
 wc2_orcs_hellscream_slice:
-	Inherits: wc2_humans_danath_slice
+	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Melee_Medium  # W7MAT covering-edge
 
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Range: 1533  # W7MAT order-pin
+	Warhead@Melee_Medium: AreaDamage  # W7MAT order-pin
+		PercentageScale: 6667
+		Damage: 36000
+	ReloadDelay: 12  # W7MAT order-pin
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
 wc2_orcs_hellscream_slice_elite:
-	Inherits: wc2_humans_danath_slice_elite
+	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Melee_Medium  # W7MAT covering-edge
 
 # Zul'jin: reuses Alleria's converted arrow with axe projectile/sounds.
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Range: 1533  # W7MAT order-pin
+	Warhead@Melee_Medium: AreaDamage  # W7MAT order-pin
+		PercentageScale: 6667
+		Damage: 48000
+	ReloadDelay: 10  # W7MAT order-pin
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
 wc2_orcs_zuljin_spear:
-	Inherits: wc2_humans_alleria_arrow
+	Inherits@w71: ^Warhead_Arrow_Medium  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Arrow_Light  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Arrow_Medium  # W7MAT covering-edge
 	ReloadDelay: 40
 	Range: 7711
 	Report: wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
+		RangeLimit: 16000
+		AllowSnapping: True
+		VerticalRateOfTurn: 75
+		Speed: 750
+		CloseEnough: 600
+		ContrailLength: 0
+		HorizontalRateOfTurn: 75
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
 
+	Warhead@Arrow_Medium: AreaDamage  # W7MAT order-pin
+		Damage: 36000
 wc2_orcs_zuljin_spear_elite:
-	Inherits: wc2_humans_alleria_arrow_elite
+	Inherits@w71: ^Warhead_Arrow_Heavy  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Arrow_Light  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Arrow_Heavy  # W7MAT covering-edge
 	ReloadDelay: 40
 	Range: 7711
 	Report: wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
+		RangeLimit: 16000
+		AllowSnapping: True
+		VerticalRateOfTurn: 80
+		Speed: 850
+		CloseEnough: 600
+		ContrailLength: 0
+		HorizontalRateOfTurn: 80
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
+	Warhead@Arrow_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 48000

@@ -12702,3 +12702,30 @@ Verified: 637/637 pack-file weapons resolved-identical vs HEAD;
 orphan cancels 0; empty warheads 0; D1 0; D2 3636 (< HEAD 3968);
 S2 5 = HEAD; weapon-shape all buckets at/below ratchets —
 **W7 760→664, W4 41→40, W6 442→437** (baselines lowered).
+## Devin-DAWN — W7 cross-weapon edge conversion, my lanes cleared (2026-09-26)
+
+Branch `devin/dawn/w7-chains` (stacked on `devin/dawn/w2-deadedges`).
+
+19 defs in my themes carried `Inherits: <concrete weapon>` edges (W7 class):
+16 Warcraft2 cross-race/variant chains (orc weapons reusing human parents,
+DeathCoil 3-deep chain), 2 templates (`^Debris2Legacy -> Debris`,
+`^TSHealWeapon -> Heal`), plus `TSHealWeapon` consumers. Converted via
+`w7_conv.py`: each weapon edge replaced by the parent's COVERING template
+edges (recursive through chains; unique `Inherits@w7N:` labels), then
+resolve-verify + pin-fixup for drift. `Sound2` (Ordos) skipped — held
+split-def ruling.
+
+- Resolved+ordered: 679/679 identical vs stack base.
+- Orphan cancels: 2 created (`-Report:` whose provider leaf went away with
+  the parent edge) — deleted per dead-edge rule; final 0.
+- Marked all materialized decls `# W7MAT` (order-pin / covering-edge) —
+  rule 0.4.
+- Bucket deltas (resolved-faithful rises, not regression): W2 46->53,
+  W3 7->11, W4 40->44 (dual-family resolved content now carries both
+  covering edges), W6 512->518 (marked pins), W1 234->239. W7 664->647
+  global; my themes 18 -> 1 (held Sound2 only).
+- Failed first attempts documented in LESSONS: naive child-copy expands
+  parent raw children (bloats every bucket); drop-edge+repin-all vomits
+  whole subtrees. Covering-edge swap is the right shape.
+
+

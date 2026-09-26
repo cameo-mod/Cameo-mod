@@ -180,6 +180,16 @@ Two traps inside that emit:
   the cancel strands the child under the wrong parent. Correct loop:
   remove -> `audit_orphan_cancels` -> resolved-verify -> restore drift,
   repeat to fixpoint.
+- **W7 weapon-edge removal: the covering-edge swap is the only clean
+  shape** (2026-09-26). Three approaches tried: (a) inlining the parent's
+  RAW children — bloats every bucket (dual edges, stray scalars);
+  (b) drop edge + repin all drift — vomits whole resolved subtrees as
+  locals (~2700 lines for 18 weapons); (c) replace `Inherits: <weapon>`
+  with the parent's covering TEMPLATE edges (recursively resolved through
+  weapon parents, unique `Inherits@w7N:` labels), then pin only the true
+  drift — resolved-identical with minimal text. Chains flatten correctly when parents are covered
+  recursively. `-Report:`-style cancels orphaned by the swap must be
+  deleted with the edge (dead-edge rule).
 - **The resolved `/Inherits` annotation leaf is part of the ordered-payload
   contract** (2026-09-26). Dropping a dead bare `Inherits:` edge removes a
   leaf the resolver records in output — ordered-verify counts it as a

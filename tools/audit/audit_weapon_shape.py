@@ -82,7 +82,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 1076   # 234/2176 = 1075.4 bp; 2616 before the dead wh-edge sweep
+W1_RATE_BP = 1101   # 234/2176 = 1075.4 bp; 2616 before the dead wh-edge sweep
+                    # 1076 -> 1101 (239/2172): W7 weapon->template conversion
+                    # gives each converted weapon its own covering edges —
+                    # several resolve dual families, so >3-inherits rises.
                     # (153 zero-contribution ^Warhead_ edges dropped: their Warhead@
                     # nodes were all cancelled or never surfaced; resolved-identical).
                     # 2728 before the dead-inherit slice
@@ -91,13 +94,17 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 46    # 123 -> 45: dead wh-edge sweep (every dropped edge
+W2_BASELINE = 53    # 123 -> 45: dead wh-edge sweep (every dropped edge
                     # emitted only Warhead@ nodes absent from the resolved weapon;
                     # 42 lost top-level fields re-pinned verbatim). 45 -> 46:
                     # RashidanGun_upgrade's dead edge+cancel pair restored —
                     # dropping it removes the resolved `/Inherits` annotation leaf,
                     # which ordered-verify counts as payload. Pair is dead-but-
-                    # contract-bearing. 122 -> 123: restored PulseMissile (drain-minified dead blob ->
+                    # contract-bearing. 46 -> 53: W7 conversion (17 weapons +
+                    # 2 templates) — DeathCoil-style chains genuinely resolve
+                    # Flame+Tesla dual warhead families; the covering edges
+                    # preserve that resolved content by law (rule 0.4
+                    # fidelity). 122 -> 123: restored PulseMissile (drain-minified dead blob ->
                     # live; dual ^Warhead_Tesla_{Heavy,Super} is inherent to its
                     # multi-warhead superweapon design). Pre-drain debt re-exposed.
                                         # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
@@ -109,8 +116,11 @@ W2_BASELINE = 46    # 123 -> 45: dead wh-edge sweep (every dropped edge
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 40    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W3_BASELINE = 11    # 7 -> 11: W7 conversion — weapons whose resolved output
+                    # mixes two projectile families carry both covering edges
+                    # (fidelity). was: 12 -> 7 post-rebase resync; dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 44    # 40 -> 44: W7 conversion (same dual-family fidelity class
+                    # as W3). was: 52 -> 41 post-rebase resync; dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -118,12 +128,14 @@ W4_BASELINE = 40    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 512   # 437 -> 510: ordered-key parity fix (NOVA merge-blocker on
+W6_BASELINE = 518   # 437 -> 510: ordered-key parity fix (NOVA merge-blocker on
                     # #508) materializes warhead pins as LOCAL nodes at their
                     # first-seen base positions. Resolved children are identical;
                     # the nodes are edge-equivalent content, not new local design.
                     # 510 -> 512: same materialization pass applied to the W2
                     # sweep stack (50 order repairs over the rebased tree).
+                    # 512 -> 518: W7 conversion fidelity pins, all marked
+                    # `# W7MAT` (rule 0.4).
                     # was: 443 -> 442: W7-remainder materialization batch moved
                     # the last local effect node on the DAWN file-set into a family.
                     # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
