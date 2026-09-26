@@ -176,7 +176,11 @@ W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) �
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 451   # 477 -> 451: W7 chain-collapse batch-6 (NOVA, 2026-09-27) —
+W7_BASELINE = 450   # 451 -> 450: FutureJavelinRocketsDeployed_elite inlined
+                    # (NOVA, 2026-09-27); last clean chain-root candidate. All
+                    # further W7 = rule-4 holds, same-key collisions (19
+                    # deferred), or mid-chain edges pending parent conversion.
+                    # was: 477 -> 451: W7 chain-collapse batch-6 (NOVA, 2026-09-27) —
                     # final 26 chain-root children inlined verbatim; chain-root
                     # pool now drained (remaining W7 = rule-4 holds + deferred
                     # collisions + mid-chain parents still weapon-inheriting).

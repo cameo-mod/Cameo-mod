@@ -3107,7 +3107,9 @@
       "requires": "deployed && rank-elite",
       "slot": "Armament@ELITE2",
       "versus_templates": [
-       "FutureJavelinRocketsDeployed"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3136,7 +3138,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "FutureJavelinRocketsDeployed"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
