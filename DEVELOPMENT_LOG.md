@@ -1,3 +1,25 @@
+## Devin-DAWN — dead-warhead-field fix #431 culprit (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-431-fix` (off master). Claude routed the master-red
+`audit_dead_warhead_fields` (20/72 vs ratchet 15) for bisect + fix.
+
+- **Bisect:** `git log` bisection with the current audit copied into scratch
+  worktrees (old-commit audits lack `--fail-closed` and can't be compared);
+  +6 dead `SpreadDamage.*` kinds entered Sep-20→22 window → culprit commit
+  `c48c7d41a` / **PR #431** (W24 lane-2 multi-main collapses).
+- **Mechanism:** the fold retyped `Warhead@Tesla_Super` to `SpreadDamage` on
+  `...ttankzap2arcteslafragment1_emp`/`_fragment2_emp`; the percentage-ladder
+  fields the old type consumed (`FriendlyFireDamage`, `FriendlyFireSpread`,
+  `IntegrityScale`, `PercentageScale`, `PercentageSpread`, `PercentageVersus`)
+  became dead inherited values on the new type.
+- **Fix:** six leaf `-Field:` cancels on fragment1 only — fragment2 inherits
+  from fragment1, so cancels there were provider-less (orphan-cancel audit
+  proved it). Engine-identical: resolved diff = exactly the 6 discarded fields.
+- **Audit:** dead warhead fields **14/70 WARN ≤ ratchet 15** (green); orphan
+  cancels 0. Master `shared_redalert2` balance ledger re-extracted (#519-era
+  dot renames had missed it) — drift clean, un-stale-claim for `doc_claims`.
+- Finding: fleet `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
