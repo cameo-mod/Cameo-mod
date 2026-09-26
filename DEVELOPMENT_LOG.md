@@ -219,6 +219,39 @@ not dead residue — resolved values matched the stub values, the Shared-side
 the canonical Shared defs, deleted the 3 stubs. All 3 weapons resolve
 byte-identical (carbine Damage 3513, cryo 3513, rocketsracryo 11500 preserved).
 S2 findings 5 -> 2 (remaining: Flamethrower + Sound2 — DAWN-lane files).
+
+## Devin-EMBER — AI phase 6a: fogged observation + RegionMemory (2026-09-27)
+
+**Branch:** `devin/ember/ai-fog-6a` off post-merge master (`bde659efa`).
+
+Session merged the open queue first: #517 (garrison), #529 (W22 lobby), #530 (Fransbot
+research), #528 (ledger renames), #537 (drop guard), #514 (Nod armour), plus landed the
+stranded #523/#532 stack content note — those two merged down a stacked chain, not to master;
+the consolidated rebase to master went to `devin/ember/family-bases-merge` (separate PR).
+
+Phase 6a implementation per `docs/design/AI_FRANSBOT_RESEARCH.md`:
+
+- `OpenRA.Mods.Cameo/Traits/BotModules/BotFogMemory.cs` (new): `ObservedActor` last-seen
+  records per enemy (ActorID-keyed, so a unit re-seen elsewhere moves instead of
+  double-counting); `BotFogMemory.Observe` feeds only `CanBeViewedByPlayer` sightings +
+  `FrozenActorLayer` fogged buildings, forgets records whose remembered cell is now visibly
+  empty, expires non-buildings after `ObservationTimeoutTicks`.
+- `RegionMemory`: 8-cell grid, per enemy: Army/Defence/AntiAir/Economy value, LastSeenTick,
+  EverSeen (set by a contained record or `Shroud.IsVisible` of the region centre). Published
+  on `BotSituation.Regions`; `EnemyProfile.KnownRegions` counts it.
+- `UseFoggedObservation` (default true): false reproduces the legacy omniscient numbers;
+  `EnemyProfile.HarvesterCount` = currently-visible harvesters.
+- `ai.yaml` documents the lever; `AiSituationLogWriter` emits `harvester_count`/`known_regions`.
+
+Verification: `ai_bot_player_gate` PASS in both modes (7 records each). Temporary fog flip on
+the gate map: `known_regions` 144→4 and `main_target` empty — correct pre-6b behaviour (no
+scouting). Boot-gate PASS (private SupportDir, fresh `PostWorldLoaded`, no new exceptions).
+229 NUnit tests green, incl. new `RegionMemory` geometry cases.
+
+Gotcha found by the gate: `Actor.Location` NREs on actors with no `IOccupySpace` (the enemy
+PlayerActor is in `World.Actors`) — legacy profile never touched `.Location` on those because
+it filtered to buildings/combat first. Both new paths filter `IOccupySpaceInfo` up front.
+
 ## Devin-DAWN — dead-warhead-field batch-2: supplier deletes (2026-09-27)
 
 **Branch:** `devin/dawn/dwf-batch2` (stacked on `devin/dawn/dwf-431-fix`).

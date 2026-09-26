@@ -48,7 +48,30 @@ namespace OpenRA.Mods.Cameo.Warheads
 		const double BellLo = 1.0 / 1.5;
 		const double BellSigma = 0.75;
 
-		static readonly HashSet<string> DerivedArmors = new() { "Heroic", "Airborne" };
+		// DESIGN §12.0l (2026-09-26): every derived armour is the GEOMETRIC MEAN of its parents,
+		// re-derived LAST in this order (a parent is final before its child reads it); Heroic alone
+		// is a PRODUCT, Plate x Scout / 200, in the MAIN table only. Mirror of
+		// gen_weapon_template.GEO_DERIVED — keep the two lists identical.
+		static readonly (string Name, string[] Parents)[] GeoDerived =
+		{
+			("FlyingInfantry", new[] { "Scout", "Flak", "Helicopter" }),
+			("CyborgLight", new[] { "None", "Light" }),
+			("CyborgMedium", new[] { "Flak", "Medium" }),
+			("CyborgHeavy", new[] { "Plate", "Heavy" }),
+			("CyborgHeroic", new[] { "Heroic", "Superheavy" }),
+			("AntiAirInfantry", new[] { "None", "Flak" }),
+			("AntiAirVehicle", new[] { "Light", "Medium" }),
+			("AntiAirBuilding", new[] { "Concrete", "Steel" }),
+			("ShipLight", new[] { "Light", "Wood" }),
+			("ShipMedium", new[] { "Medium", "Concrete" }),
+			("ShipHeavy", new[] { "Heavy", "Steel" }),
+			("ShipSuperheavy", new[] { "Superheavy", "Steel" }),
+			("AntiAirShip", new[] { "ShipLight", "ShipMedium" })
+		};
+
+		const double HeroicDivisor = 200.0;
+
+		static readonly HashSet<string> DerivedArmors = new(new[] { "Heroic" }.Concat(GeoDerived.Select(d => d.Name)));
 		static readonly string[] NonArmorRows = { "Shield", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR", "ARMOR" };
 
 		// Ladders, lightest -> heaviest, for the rank-restore step.
@@ -71,7 +94,10 @@ namespace OpenRA.Mods.Cameo.Warheads
 			}
 		}
 
-		public static Dictionary<string, int> Transform(IReadOnlyDictionary<string, int> table, double h)
+		/// <param name="mainTable">True for the MAIN `Versus` only: Heroic is re-derived as
+		/// Plate x Scout / 200 there. The percentage tables keep their own Heroic (200 is the MAIN
+		/// table's ceiling; the percentage tops are 16-30).</param>
+		public static Dictionary<string, int> Transform(IReadOnlyDictionary<string, int> table, double h, bool mainTable = false)
 		{
 			var values = new Dictionary<string, double>();
 			foreach (var kv in table)
@@ -98,10 +124,13 @@ namespace OpenRA.Mods.Cameo.Warheads
 					belled[kv.Key] = kv.Value * curve;
 				}
 
-				// Renormalise so heaviness redistributes and never inflates (§12.0i law 2).
-				var before = tiltable.Values.Average();
-				var after = belled.Values.Average();
-				if (after > 0)
+				// Renormalise so heaviness redistributes and never inflates (§12.0i law 2), on the
+				// GEOMETRIC mean — R16 (2026-09-25) made geomean 100 the binding law, so the tilt
+				// must leave the table's geometric mean where it found it. Zero rows are skipped
+				// (a single zero collapses a geometric mean); they stay zero under the bell anyway.
+				var before = GeometricMean(tiltable.Values);
+				var after = GeometricMean(belled.Values);
+				if (before > 0 && after > 0)
 				{
 					foreach (var a in belled.Keys.ToList())
 						belled[a] *= before / after;
@@ -125,32 +154,41 @@ namespace OpenRA.Mods.Cameo.Warheads
 				}
 			}
 
-			// Re-derive the product armors LAST from the finished profile (§12.0b).
-			// ⚠ Two guards: an empty candidate set (a table with ONLY derived / non-slot
-			// rows) must not call Max() — it would THROW — and the ORIGINAL peak > 0 rule
-			// must stay, because a non-positive peak (zero or negative values) would
-			// divide by zero or flip the product below. Fail safe: skip in both cases.
-			var peakValues = values
-				.Where(kv => !NonArmorRows.Contains(kv.Key) && !DerivedArmors.Contains(kv.Key))
-				.Select(kv => kv.Value)
-				.ToList();
-
-			if (peakValues.Count > 0 && peakValues.Max() > 0)
+			// Re-derive the derived armors LAST from the finished profile (§12.0b / §12.0l), on
+			// the ROUNDED rows, exactly as the generator's `derive_rows` does on emitted integers.
+			var result = values.ToDictionary(kv => kv.Key, kv => (int)Math.Round(kv.Value));
+			if (mainTable && result.ContainsKey("Heroic") && result.ContainsKey("Plate") && result.ContainsKey("Scout"))
 			{
-				var peak = peakValues.Max();
-
-				foreach (var (name, first, second) in new[]
-				{
-					("Heroic", "Plate", "Scout"),
-					("Airborne", "Helicopter", "Scout")
-				})
-				{
-					if (values.ContainsKey(name) && values.ContainsKey(first) && values.ContainsKey(second))
-						values[name] = values[first] * values[second] / peak;
-				}
+				var body = result
+					.Where(kv => !NonArmorRows.Contains(kv.Key) && !DerivedArmors.Contains(kv.Key))
+					.Select(kv => kv.Value)
+					.ToList();
+				result["Heroic"] = body.Count > 0 && body.Min() == body.Max()
+					? body[0]
+					: (int)Math.Round(result["Plate"] * (double)result["Scout"] / HeroicDivisor);
 			}
 
-			return values.ToDictionary(kv => kv.Key, kv => (int)Math.Round(kv.Value));
+			foreach (var (name, parents) in GeoDerived)
+			{
+				if (!result.ContainsKey(name) || !parents.All(result.ContainsKey))
+					continue;
+
+				var product = 1.0;
+				foreach (var p in parents)
+					product *= Math.Max(result[p], 0);
+				result[name] = (int)Math.Round(Math.Pow(product, 1.0 / parents.Length));
+			}
+
+			return result;
+		}
+
+		static double GeometricMean(IEnumerable<double> values)
+		{
+			var positive = values.Where(v => v > 0).ToList();
+			if (positive.Count == 0)
+				return 0;
+
+			return Math.Exp(positive.Sum(Math.Log) / positive.Count);
 		}
 
 		static double? CentreOfMass(Dictionary<string, double> vals)

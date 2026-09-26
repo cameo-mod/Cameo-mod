@@ -65,7 +65,25 @@ BELL_AXIS = {armor: i * 2.0 / (len(BELL_AXIS_ORDER) - 1)
 BELL_LO = 1.0 / 1.5
 BELL_SIGMA = 0.75
 
-DERIVED_ARMORS = frozenset({"Heroic", "Airborne"})
+# DESIGN §12.0l (2026-09-26) — mirror of HeavinessBell.GeoDerived and
+# gen_weapon_template.GEO_DERIVED; test_effective_heaviness pins all three together.
+GEO_DERIVED = (
+    ("FlyingInfantry", ("Scout", "Flak", "Helicopter")),
+    ("CyborgLight", ("None", "Light")),
+    ("CyborgMedium", ("Flak", "Medium")),
+    ("CyborgHeavy", ("Plate", "Heavy")),
+    ("CyborgHeroic", ("Heroic", "Superheavy")),
+    ("AntiAirInfantry", ("None", "Flak")),
+    ("AntiAirVehicle", ("Light", "Medium")),
+    ("AntiAirBuilding", ("Concrete", "Steel")),
+    ("ShipLight", ("Light", "Wood")),
+    ("ShipMedium", ("Medium", "Concrete")),
+    ("ShipHeavy", ("Heavy", "Steel")),
+    ("ShipSuperheavy", ("Superheavy", "Steel")),
+    ("AntiAirShip", ("ShipLight", "ShipMedium")),
+)
+HEROIC_DIVISOR = 200.0
+DERIVED_ARMORS = frozenset({"Heroic"} | {name for name, _ in GEO_DERIVED})
 NON_ARMOR_ROWS = frozenset(
     {"Shield", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR", "ARMOR"})
 
@@ -171,8 +189,11 @@ def validate_shared_numeric(mode: str, heaviness: int, versus: dict,
     if damage is not None and scale is not None:
         # Raises OverflowError on an Int32-bound result — fail clear at load,
         # without any lazy cross-import (the same arrow runs the other way).
-        denominator = 200_000 * 2000
-        rounded = (damage * scale * heaviness + denominator // 2) // denominator
+        # §12.0j growth curve, mirror of percentage_damage.shared_growth / the C#.
+        growth_num, growth_den = ((4000 + heaviness, 5000) if heaviness <= 1000
+                                  else (3000 + heaviness, 4000))
+        denominator = 200_000 * growth_den
+        rounded = (damage * scale * growth_num + denominator // 2) // denominator
         if rounded > INT32_MAX:
             raise OverflowError(
                 f"HeavinessMode SharedVersus: percentage units (Damage {damage} "
@@ -317,8 +338,19 @@ def _centre_of_mass(values: dict[str, float]) -> float | None:
     return weighted / total if total else None
 
 
-def bell_transform(table: dict, h: float) -> dict[str, int]:
-    """Exact mirror of ``HeavinessBell.Transform`` (float math, int output)."""
+def _geometric_mean(values) -> float:
+    """Mirror of ``HeavinessBell.GeometricMean``: exp(mean(log)) over the positive values."""
+    positive = [v for v in values if v > 0]
+    if not positive:
+        return 0.0
+    return math.exp(sum(math.log(v) for v in positive) / len(positive))
+
+
+def bell_transform(table: dict, h: float, main_table: bool = False) -> dict[str, int]:
+    """Exact mirror of ``HeavinessBell.Transform`` (float math, int output).
+
+    ``main_table`` = the MAIN Versus only: Heroic is re-derived as Plate x Scout / 200 there
+    (DESIGN §12.0l rule 4); the percentage tables keep their own Heroic."""
     values = {armor: float(value) for armor, value in table.items()}
     live = [value for armor, value in values.items()
             if armor not in NON_ARMOR_ROWS]
@@ -335,9 +367,10 @@ def bell_transform(table: dict, h: float) -> dict[str, int]:
                                              / (2.0 * BELL_SIGMA * BELL_SIGMA)))
                   for armor, value in tiltable.items()}
 
-        before = sum(tiltable.values()) / len(tiltable)
-        after = sum(belled.values()) / len(belled)
-        if after > 0:
+        # R16: renormalise on the GEOMETRIC mean (mirror of the C#).
+        before = _geometric_mean(tiltable.values())
+        after = _geometric_mean(belled.values())
+        if before > 0 and after > 0:
             factor = before / after
             belled = {armor: value * factor for armor, value in belled.items()}
 
@@ -351,28 +384,31 @@ def bell_transform(table: dict, h: float) -> dict[str, int]:
             for slot, i in enumerate(order):
                 values[rungs[i]] = ranked[slot]
 
-    # Re-derive the product armors LAST from the finished profile (§12.0b).
-    # ⚠ Two guards: an empty candidate set (a table with ONLY derived / non-slot
-    # rows) must not call max() — it would raise — and the ORIGINAL peak > 0 rule
-    # must stay, because a non-positive peak (zero or negative values) would
-    # divide by zero or flip the product below. Fail safe: skip in both cases.
-    peak_values = [value for armor, value in values.items()
-                   if armor not in NON_ARMOR_ROWS and armor not in DERIVED_ARMORS]
-    if peak_values and max(peak_values) > 0:
-        peak = max(peak_values)
-        for name, first, second in (("Heroic", "Plate", "Scout"),
-                                    ("Airborne", "Helicopter", "Scout")):
-            if name in values and first in values and second in values:
-                values[name] = values[first] * values[second] / peak
-
-    return {armor: round(value) for armor, value in values.items()}
+    # Re-derive the derived armors LAST (§12.0b / §12.0l), on the ROUNDED rows, exactly as
+    # the C# and the generator's `derive_rows` do.
+    result = {armor: round(value) for armor, value in values.items()}
+    if main_table and all(k in result for k in ("Heroic", "Plate", "Scout")):
+        body = [v for a, v in result.items()
+                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS]
+        if body and min(body) == max(body):
+            result["Heroic"] = body[0]
+        else:
+            result["Heroic"] = round(result["Plate"] * result["Scout"] / HEROIC_DIVISOR)
+    for name, parents in GEO_DERIVED:
+        if name not in result or not all(p in result for p in parents):
+            continue
+        product = 1.0
+        for p in parents:
+            product *= max(result[p], 0)
+        result[name] = round(product ** (1.0 / len(parents)))
+    return result
 
 
 def versus_profile(versus: dict, heaviness: int) -> dict[str, int]:
     """Effective main Versus table: verbatim when disabled, bell once when active."""
     if heaviness < 0:
         return dict(versus)
-    return bell_transform(versus, heaviness / 1000.0)
+    return bell_transform(versus, heaviness / 1000.0, main_table=True)
 
 
 def percentage_profile(versus: dict, percentage_versus: dict,
