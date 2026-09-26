@@ -145,7 +145,13 @@ W4_BASELINE = 77    # 66 -> 77: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+W6_BASELINE = 490   # 524 -> 490: W6 shadow-deletion batch-1 (NOVA, 2026-09-27) —
+                    # 52 local effect-warhead decls removed on 24 RA/RA2/RA2Mod
+                    # weapons; every deletion resolve-identical (miniyaml per-node
+                    # resolver test + review_resolve_diff --strict-order on the
+                    # applied tree). Nodes were pure shadows of inherited
+                    # ^Effect_*/fx-family content.
+                    # was: 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
                     # local order-pin decls emulating the dropped template
                     # re-application (NaxiMP40Laser class).
                     # was: 511 -> 520: W7 chain-collapse batch-2 (NOVA, 2026-09-26)

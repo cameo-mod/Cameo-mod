@@ -3078,8 +3078,6 @@ DiabloCannon_AA:
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 9450
-	Warhead@EffectAir: CreateEffect
-		ValidTargets: Air
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -3097,7 +3095,6 @@ DiabloCannon_AA:
 	Warhead@Flak_Medium:
 		-InvalidTargets:
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -4710,8 +4707,6 @@ LatinAADefenderCannon:
 		Damage: 2000
 	Warhead@Flak_Medium: AreaDamage
 		Damage: 2000
-	Warhead@EffectAir: CreateEffect
-		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
@@ -5337,8 +5332,6 @@ RA2APCFlakCannonAA:
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8610
-	Warhead@EffectAir: CreateEffect
-		ValidTargets: Air
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -5356,7 +5349,6 @@ RA2APCFlakCannonAA:
 	Warhead@Flak_Medium:
 		-InvalidTargets:
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:

@@ -7046,10 +7046,6 @@ AsianTurretPlasma:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 2494
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@EffectAir: CreateEffect
 	Warhead@DuneRock:
 		SmudgeType: RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -8410,8 +8406,6 @@ AAGunBoatFlak:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 10000
-	Warhead@EffectAir: CreateEffect
-		ValidTargets: Air
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -8777,7 +8771,6 @@ AsianPhoenixRocket_elite:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
 	Warhead@Effect:
 		ImpactActors: false
 	Warhead@Flame_Medium: AreaDamage

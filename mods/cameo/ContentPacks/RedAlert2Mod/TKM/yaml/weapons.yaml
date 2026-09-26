@@ -313,9 +313,6 @@ tkmfirerockets:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud

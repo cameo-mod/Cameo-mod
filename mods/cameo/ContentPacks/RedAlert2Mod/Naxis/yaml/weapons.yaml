@@ -4632,8 +4632,6 @@ NaxQuadCannon_AA:
 		Damage: 1000
 	Warhead@NaxFlakGroundWater:
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@NaxFlakGroundWater:
 	Warhead@Flak_Medium_Flat:
@@ -4643,10 +4641,6 @@ NaxQuadCannon_AA:
 
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@NaxFlakAllyCounted: AreaDamage
 	Warhead@NaxFlakAllyUncounted: AreaDamage
@@ -4810,7 +4804,6 @@ NaxQuadCannon_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:

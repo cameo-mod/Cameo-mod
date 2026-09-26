@@ -6617,9 +6617,6 @@ ra1_soviets_hammertank_cannon_thermobaric:
 		Speed: 682
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplosml2.aud
 	Report: tnkfire6.aud
 	Warhead@Thermobaric_Heavy:
 		Damage: 16000
@@ -10465,9 +10462,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: kaboom25.aud
 	InvalidTargets: wall
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -10822,9 +10816,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: kaboom25.aud
 	InvalidTargets: wall
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 	Warhead@GrenadePercentage: AreaDamagePercentage

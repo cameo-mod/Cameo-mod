@@ -1,3 +1,26 @@
+## 2026-09-27 — W6 shadow-deletion batch-1 (NOVA)
+
+Deleted 52 local effect-warhead decls on 24 RA/RA2/RA2Mod weapons — each a
+pure shadow of effect content already supplied by an inherited
+`^Effect_*`/fx-family template (typed `Warhead@*` decls whose whole payload
+the parent's chain reproduces). Method: per-decl deletion tested through
+`miniyaml` `_resolve_generic` with an override lookup (greedy accumulation
+so same-key sibling interactions can't slip through — several decl pairs
+shadowed EACH OTHER and were correctly rejected), then
+`review_resolve_diff --strict-order` re-verified all 24 on the applied
+tree: 24/24 clean. Net W6: **524 -> 490** (ratchet re-locked with
+provenance). W7 holds 445. Guards: orphans 0, empty warheads 0,
+dup-inherits clean, local-Versus 881 <= 891. Ledgers re-extracted —
+3 drifted (`redalert2_allies`, `redalert2mod_consortium`,
+`redalert2mod_tkm`), all versus_templates provenance remaps left over
+from W7 tail-2 (`2f440999f`), none W6-caused.
+
+First W6 attempt (uncommitted) indexed merged-node children rather than
+file decls — same-key siblings (`Warhead@DuneRock` typed + untyped pair
+in `LatinAADefenderCannon`) desynced the two index spaces and deleted
+type-bearing decls. Reverted untouched; corrected scan keys everything
+to file-decl position with a key-match assertion before deletion.
+
 ## 2026-09-27 — W7 chain-collapse batch-6: chain-root pool drained (NOVA)
 
 Final 26 chain-root children inlined verbatim (RA Soviets, RA2

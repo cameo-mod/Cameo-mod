@@ -13435,7 +13435,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2sabot"
+       "^Warhead_CannonAP",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP"

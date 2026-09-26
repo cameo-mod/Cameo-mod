@@ -1397,11 +1397,6 @@ Future_MultiMissile_Javelin:
 		ExplosionPalette: effect75alpha
 		ValidTargets: Ground, Air
 		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ValidTargets: Air
-		ImpactActors: false
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1414,9 +1409,6 @@ Future_MultiMissile_Javelin:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 Future_MultiMissile_Frag:
 	Inherits@wh: ^Warhead_Concussion_Heavy
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -2025,9 +2017,6 @@ FutureJavelinRockets:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 FutureJavelinRockets_elite:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -2092,9 +2081,6 @@ FutureJavelinRockets_elite:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Range: 7000
 	Burst: 2
 	BurstDelays: 3
@@ -2165,9 +2151,6 @@ FutureJavelinRocketsDeployed:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Range: 7500
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2236,9 +2219,6 @@ FutureJavelinRocketsDeployed_elite:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Range: 7500
 	Projectile: Missile
 		VerticalRateOfTurn: 16

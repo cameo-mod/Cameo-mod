@@ -4281,10 +4281,6 @@ MigMissiles_rad:
 		PercentageDenominator: 10000
 	-Warhead@MissileHE_Medium:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
-	Warhead@Smudge1: LeaveSmudge
-	Warhead@Smudge2: LeaveSmudge
-	Warhead@Smudge2RA2: LeaveSmudge
-	Warhead@Effect2: CreateEffect
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 	Projectile:
@@ -4387,11 +4383,6 @@ MigMissiles_rad:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
-	Warhead@EffectWater: CreateEffect
-	Warhead@EffectAir: CreateEffect
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
 	Warhead@Concrete:
 		Damage: 150
 	Warhead@DuneRock:
@@ -5185,7 +5176,6 @@ RA2SCUD_rad:
 		ValidTargets: Ground, Air
 	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-	Warhead@RA2Scorch: LeaveSmudge
 	Warhead@GroundFire: SpawnActor
 	Warhead@RA2SCUDMissileAP_Heavy_NoWall: AreaDamage
 	Warhead@Effect:
@@ -8562,11 +8552,6 @@ TanyaBomb:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
 		ValidTargets: Ground, Air, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpcraa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_Heavy_Flat:
@@ -9440,12 +9425,6 @@ RA2FlyingBody:
 		Palette: ra2effect
 	Warhead@Validation: TargetDamage
 	#Projectile: InstantExplode
-	Warhead@Effect: CreateEffect
-		Image: ra2corpse
-		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
-		ExplosionPalette: ra2effect
-		ValidTargets: Ground
-		Delay: 15
 	Range: 3072
 	Projectile: BulletAS
 		Speed: 30, 90

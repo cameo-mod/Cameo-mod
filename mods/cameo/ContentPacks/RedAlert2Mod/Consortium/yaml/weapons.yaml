@@ -3565,11 +3565,6 @@ SteelManta_AA:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
-	Warhead@Glow: GlowImpact
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
 	Projectile:
 		Arm: 0
 		Blockable: false
@@ -3609,7 +3604,6 @@ SteelManta_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -8947,12 +8941,6 @@ SteelKatyCannons_EMP:
 		FriendlyFireDamage: 0
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Effect: CreateEffect
-		Explosions: aa_pulsexp
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: ra2effect
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Flame_Heavy:
 	Warhead@CannonFire_Heavy_Flat:
@@ -9573,22 +9561,6 @@ HammerheadArtillery:
 	Warhead@DuneSand: LeaveSmudge
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
 		Scale: 0.55
@@ -9600,9 +9572,6 @@ HammerheadArtillery:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 150
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	-Warhead@CannonHE_Medium:
 	-Warhead@Demolition_Heavy:
 	Warhead@CannonHE_Medium_Flat:
