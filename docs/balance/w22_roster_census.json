@@ -1,145 +1,146 @@
 {
  "generated_by": "tools/balance/w22_roster_census.py",
  "factions": 31,
- "armored_actors": 2366,
- "buildable": 1362,
- "not_buildable": 1004,
+ "armored_actors": 2367,
+ "buildable": 1371,
+ "not_buildable": 996,
  "reasons": {
-  "buildable": 1362,
-  "unbuildable": 662,
-  "spawn_only": 266,
-  "unreachable": 76
+  "buildable": 1371,
+  "unbuildable": 660,
+  "lobby_gated": 88,
+  "spawn_only": 234,
+  "parked": 14
  },
  "per_armor": [
   {
    "armor": "Wood",
    "actors": 722,
-   "live": 198,
-   "dead": 524,
-   "share_all": 30.516,
-   "share_live": 14.537,
-   "share_credit": 18.431,
-   "delta_all_vs_live": -15.978
+   "live": 200,
+   "dead": 522,
+   "share_all": 30.503,
+   "share_live": 14.588,
+   "share_credit": 61.633,
+   "delta_all_vs_live": -15.915
   },
   {
    "armor": "Concrete",
    "actors": 323,
-   "live": 261,
-   "dead": 62,
-   "share_all": 13.652,
-   "share_live": 19.163,
-   "share_credit": 11.222,
-   "delta_all_vs_live": 5.511
+   "live": 262,
+   "dead": 61,
+   "share_all": 13.646,
+   "share_live": 19.11,
+   "share_credit": 5.255,
+   "delta_all_vs_live": 5.464
   },
   {
    "armor": "Light",
    "actors": 255,
-   "live": 140,
-   "dead": 115,
-   "share_all": 10.778,
-   "share_live": 10.279,
-   "share_credit": 10.473,
-   "delta_all_vs_live": -0.499
+   "live": 143,
+   "dead": 112,
+   "share_all": 10.773,
+   "share_live": 10.43,
+   "share_credit": 4.993,
+   "delta_all_vs_live": -0.343
   },
   {
    "armor": "Heavy",
    "actors": 205,
-   "live": 103,
-   "dead": 102,
-   "share_all": 8.664,
-   "share_live": 7.562,
-   "share_credit": 7.005,
-   "delta_all_vs_live": -1.102
+   "live": 104,
+   "dead": 101,
+   "share_all": 8.661,
+   "share_live": 7.586,
+   "share_credit": 3.305,
+   "delta_all_vs_live": -1.075
   },
   {
    "armor": "None",
    "actors": 162,
    "live": 103,
    "dead": 59,
-   "share_all": 6.847,
-   "share_live": 7.562,
-   "share_credit": 13.923,
-   "delta_all_vs_live": 0.715
+   "share_all": 6.844,
+   "share_live": 7.513,
+   "share_credit": 6.516,
+   "delta_all_vs_live": 0.669
   },
   {
    "armor": "Medium",
    "actors": 138,
-   "live": 116,
-   "dead": 22,
-   "share_all": 5.833,
-   "share_live": 8.517,
-   "share_credit": 5.783,
-   "delta_all_vs_live": 2.684
+   "live": 118,
+   "dead": 20,
+   "share_all": 5.83,
+   "share_live": 8.607,
+   "share_credit": 2.777,
+   "delta_all_vs_live": 2.777
   },
   {
    "armor": "Superheavy",
    "actors": 98,
    "live": 84,
    "dead": 14,
-   "share_all": 4.142,
-   "share_live": 6.167,
-   "share_credit": 1.859,
-   "delta_all_vs_live": 2.025
+   "share_all": 4.14,
+   "share_live": 6.127,
+   "share_credit": 0.87,
+   "delta_all_vs_live": 1.987
   },
   {
    "armor": "Plate",
    "actors": 94,
    "live": 85,
    "dead": 9,
-   "share_all": 3.973,
-   "share_live": 6.241,
-   "share_credit": 9.542,
-   "delta_all_vs_live": 2.268
+   "share_all": 3.971,
+   "share_live": 6.2,
+   "share_credit": 4.466,
+   "delta_all_vs_live": 2.229
   },
   {
    "armor": "Scout",
    "actors": 71,
    "live": 39,
    "dead": 32,
-   "share_all": 3.001,
-   "share_live": 2.863,
-   "share_credit": 3.937,
-   "delta_all_vs_live": -0.137
+   "share_all": 3.0,
+   "share_live": 2.845,
+   "share_credit": 1.843,
+   "delta_all_vs_live": -0.155
   },
   {
    "armor": "Helicopter",
    "actors": 66,
    "live": 65,
    "dead": 1,
-   "share_all": 2.79,
-   "share_live": 4.772,
-   "share_credit": 2.485,
-   "delta_all_vs_live": 1.983
+   "share_all": 2.788,
+   "share_live": 4.741,
+   "share_credit": 1.163,
+   "delta_all_vs_live": 1.953
   },
   {
    "armor": "Bomber",
    "actors": 64,
    "live": 20,
    "dead": 44,
-   "share_all": 2.705,
-   "share_live": 1.468,
-   "share_credit": 0.589,
-   "delta_all_vs_live": -1.237
+   "share_all": 2.704,
+   "share_live": 1.459,
+   "share_credit": 0.276,
+   "delta_all_vs_live": -1.245
   },
   {
    "armor": "Flak",
-   "actors": 48,
+   "actors": 49,
    "live": 41,
-   "dead": 7,
-   "share_all": 2.029,
-   "share_live": 3.01,
-   "share_credit": 11.863,
-   "delta_all_vs_live": 0.982
+   "dead": 8,
+   "share_all": 2.07,
+   "share_live": 2.991,
+   "share_credit": 5.552,
+   "delta_all_vs_live": 0.92
   },
   {
    "armor": "Heroic",
    "actors": 40,
    "live": 37,
    "dead": 3,
-   "share_all": 1.691,
-   "share_live": 2.717,
-   "share_credit": 0.66,
-   "delta_all_vs_live": 1.026
+   "share_all": 1.69,
+   "share_live": 2.699,
+   "share_credit": 0.309,
+   "delta_all_vs_live": 1.009
   },
   {
    "armor": "Steel",
@@ -147,9 +148,9 @@
    "live": 33,
    "dead": 2,
    "share_all": 1.479,
-   "share_live": 2.423,
-   "share_credit": 1.234,
-   "delta_all_vs_live": 0.944
+   "share_live": 2.407,
+   "share_credit": 0.577,
+   "delta_all_vs_live": 0.928
   },
   {
    "armor": "Fighter",
@@ -157,19 +158,19 @@
    "live": 16,
    "dead": 7,
    "share_all": 0.972,
-   "share_live": 1.175,
-   "share_credit": 0.721,
-   "delta_all_vs_live": 0.203
+   "share_live": 1.167,
+   "share_credit": 0.338,
+   "delta_all_vs_live": 0.195
   },
   {
    "armor": "Spaceship",
    "actors": 22,
    "live": 21,
    "dead": 1,
-   "share_all": 0.93,
-   "share_live": 1.542,
-   "share_credit": 0.273,
-   "delta_all_vs_live": 0.612
+   "share_all": 0.929,
+   "share_live": 1.532,
+   "share_credit": 0.128,
+   "delta_all_vs_live": 0.602
   }
  ],
  "live_actors": [
@@ -226,6 +227,7 @@
   "asianalliance_warfactory",
   "asianalliance_warturtle",
   "atreides_advancedcarryall",
+  "atreides_airdrone",
   "atreides_apc",
   "atreides_barracks",
   "atreides_combattank",
@@ -234,14 +236,20 @@
   "atreides_fremen",
   "atreides_heavyfactory",
   "atreides_hightechfactory",
+  "atreides_ixresearchcenter",
   "atreides_lightinfantry",
+  "atreides_minotaurus",
+  "atreides_missiletank",
   "atreides_mobileconstructionvehicle",
+  "atreides_mongoose",
   "atreides_ornithopter",
+  "atreides_palace",
   "atreides_refinery",
   "atreides_repairtank",
   "atreides_rockettrooper",
   "atreides_sandbike",
   "atreides_siegetank",
+  "atreides_sonictank",
   "atreides_spiceharvester",
   "atreides_storagesilo",
   "atreides_windtrap",
@@ -311,8 +319,10 @@
   "corrino_gunship",
   "corrino_heavyfactory",
   "corrino_hightechfactory",
+  "corrino_ixresearchcenter",
   "corrino_lightfactory",
   "corrino_lightinfantry",
+  "corrino_missiletank",
   "corrino_mobileconstructionvehicle",
   "corrino_refinery",
   "corrino_sardaukar_bazooka",
@@ -1545,11 +1555,9 @@
   },
   "cncsyrd": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "e1": {
    "armor": "Flak",
@@ -1587,67 +1595,55 @@
   },
   "td_gdi_supercarrier": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 4000,
    "produced_by": []
   },
   "td_gdi_missileboat": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1600,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_gdi_railgunbattleship": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2600,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_gdi_landingcraft": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 500,
    "produced_by": []
   },
   "cncspen": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 800,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_nod_attacksubmarine": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1600,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_nod_ballisticmissilesubmarine": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2800,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_nod_lasercorvette": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2300,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "td_nod_transportsubmarine": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 500,
    "produced_by": []
   },
@@ -1708,7 +1704,7 @@
   },
   "ra1_allies_cybertank": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 1300,
    "produced_by": []
   },
@@ -1810,51 +1806,39 @@
   },
   "ra1_allies_gunboat": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1300,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra1_allies_destroyer": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1600,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra1_allies_cruiser": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "japan_japanesespeedboat": {
    "armor": "Light",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1200,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "japan_yamatobattleship": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2200,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "japan_japanesecarrier": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "japan_zerofighter_slave": {
    "armor": "Bomber",
@@ -1864,55 +1848,45 @@
   },
   "ra1_soviets_submarine": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra1_soviets_missilesubmarine": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra1_navaltransport": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 500,
    "produced_by": []
   },
   "ra1_soviets_kennel": {
    "armor": "Wood",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 200,
    "produced_by": []
   },
   "ra1_allies_navalyard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "japan_japanesenavalyard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra1_soviets_subpen": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 800,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "invisibleplane": {
    "armor": "Bomber",
@@ -2008,7 +1982,6 @@
     "forgotten_silo",
     "forgotten_veinhole",
     "forgotten_warfactory",
-    "player",
     "ts_gdi_barracks",
     "ts_gdi_constructionyard",
     "ts_gdi_dropshipbay",
@@ -2052,6 +2025,7 @@
    "reason": "spawn_only",
    "cost": 1000,
    "produced_by": [
+    "floaterspawner",
     "tsmonstermaker1"
    ]
   },
@@ -2069,24 +2043,25 @@
    "reason": "spawn_only",
    "cost": 1000,
    "produced_by": [
-    "tsmonstermaker1"
+    "tsmonstermaker1",
+    "viscspawner"
    ]
   },
   "rapt": {
    "armor": "Wood",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 1000,
    "produced_by": []
   },
   "tsldrone": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 150,
    "produced_by": []
   },
   "tsaegis": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 1200,
    "produced_by": []
   },
@@ -2119,7 +2094,7 @@
   },
   "cabal_navalyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
@@ -2174,13 +2149,13 @@
   },
   "cabal_artilleryspider_backup": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 1600,
    "produced_by": []
   },
   "cabal_tarantula_backup": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 1500,
    "produced_by": []
   },
@@ -2202,31 +2177,31 @@
   },
   "cabal_lcraft": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1200,
    "produced_by": []
   },
   "cabal_lazerboat": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1500,
    "produced_by": []
   },
   "cabal_plasmasub": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 2500,
    "produced_by": []
   },
   "cabal_radar_cruiser": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 0,
    "produced_by": []
   },
   "ts_nod_navalyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
@@ -2256,25 +2231,25 @@
   },
   "ts_nod_hover": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1200,
    "produced_by": []
   },
   "ts_nod_cruiser": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 4000,
    "produced_by": []
   },
   "ts_nod_rayboat": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1300,
    "produced_by": []
   },
   "ts_nod_submarine": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1600,
    "produced_by": []
   },
@@ -2286,7 +2261,7 @@
   },
   "ts_gdi_navalyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
@@ -2332,25 +2307,25 @@
   },
   "ts_gdi_hover": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1200,
    "produced_by": []
   },
   "ts_gdi_cruiser": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 4000,
    "produced_by": []
   },
   "ts_gdi_carrier": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 4000,
    "produced_by": []
   },
   "ts_gdi_destroyer": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1600,
    "produced_by": []
   },
@@ -3046,13 +3021,13 @@
   },
   "forgotten_chinook": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 700,
    "produced_by": []
   },
   "forgotten_navalyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
@@ -3109,14 +3084,17 @@
    "reason": "spawn_only",
    "cost": 1000,
    "produced_by": [
+    "fiendspawner",
     "tsmonstermaker1"
    ]
   },
   "forgotten_mutantsniper_sp": {
    "armor": "None",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": 650,
-   "produced_by": []
+   "produced_by": [
+    "nodmutant2"
+   ]
   },
   "forgotten_ghoststalker_r4": {
    "armor": "Heroic",
@@ -3132,21 +3110,27 @@
   },
   "forgotten_ghoststalker_sp": {
    "armor": "Heroic",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": 4000,
-   "produced_by": []
+   "produced_by": [
+    "nodmutant3"
+   ]
   },
   "forgotten_mutant_sp": {
    "armor": "Flak",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": 160,
-   "produced_by": []
+   "produced_by": [
+    "nodmutant"
+   ]
   },
   "forgotten_mutantsoldier_sp": {
    "armor": "Flak",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": 250,
-   "produced_by": []
+   "produced_by": [
+    "nodmutant1"
+   ]
   },
   "forgotten_visceroid": {
    "armor": "Plate",
@@ -3208,51 +3192,47 @@
   },
   "forgotten_scarabapc": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 1410,
-   "produced_by": []
+   "produced_by": [
+    "mutsapc"
+   ]
   },
   "forgotten_lcraft": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1200,
    "produced_by": []
   },
   "forgotten_juggerboat": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1500,
    "produced_by": []
   },
   "forgotten_cannonboat": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1600,
    "produced_by": []
   },
   "ra2gayard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2nayard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "yrygyard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "yrslav": {
    "armor": "Plate",
@@ -3261,7 +3241,6 @@
    "produced_by": [
     "casinocrate",
     "crate",
-    "player",
     "ra2_crate",
     "ts_crate",
     "wwcrate",
@@ -3287,45 +3266,39 @@
   },
   "ra2lcrf": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 750,
    "produced_by": []
   },
   "ra2sapc": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 750,
    "produced_by": []
   },
   "yrhovr": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 750,
    "produced_by": []
   },
   "ra2sqd": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2dlph": {
    "armor": "Light",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 500,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2dest": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1700,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2asw": {
    "armor": "Bomber",
@@ -3335,11 +3308,9 @@
   },
   "ra2carrier": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2500,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2hornet": {
    "armor": "Bomber",
@@ -3349,19 +3320,15 @@
   },
   "ra2sub": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1500,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2dred": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 4000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "ra2dmisl": {
    "armor": "Bomber",
@@ -3469,6 +3436,14 @@
    "cost": null,
    "produced_by": []
   },
+  "ra2e2_black": {
+   "armor": "Flak",
+   "reason": "spawn_only",
+   "cost": 150,
+   "produced_by": [
+    "ra2caairp"
+   ]
+  },
   "ra2sidewind": {
    "armor": "None",
    "reason": "spawn_only",
@@ -3503,13 +3478,13 @@
   },
   "ra2_c_hum2": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 400,
    "produced_by": []
   },
   "ra2_c_abram": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 900,
    "produced_by": []
   },
@@ -5094,7 +5069,7 @@
    "reason": "spawn_only",
    "cost": 1200,
    "produced_by": [
-    "player"
+    "ra2chronoai"
    ]
   },
   "yuriinvisibleplane": {
@@ -5105,17 +5080,15 @@
   },
   "asianalliance_cgpnch": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1200,
    "produced_by": []
   },
   "asianalliance_cgyard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_tankmine": {
    "armor": "Light",
@@ -5219,81 +5192,85 @@
   },
   "asianalliance_panth": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1000,
    "produced_by": []
   },
   "asianalliance_ksub": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 500,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_gunb": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1400,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_lsub": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2400,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_quasfrig": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_karrier": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1750,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "asianalliance_tsun": {
    "armor": "Superheavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 4500,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "steel_cougar": {
    "armor": "Scout",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 1200,
-   "produced_by": []
+   "produced_by": [
+    "steelsupportspawner1",
+    "steelsupportspawner2",
+    "steelsupportspawner3",
+    "steelsupportspawner4"
+   ]
   },
   "steel_hummer": {
    "armor": "Medium",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 2000,
-   "produced_by": []
+   "produced_by": [
+    "steelsupportspawner1",
+    "steelsupportspawner2",
+    "steelsupportspawner3",
+    "steelsupportspawner4"
+   ]
   },
   "steel_oldqtnk": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 2400,
-   "produced_by": []
+   "produced_by": [
+    "steelsupportspawner2",
+    "steelsupportspawner3",
+    "steelsupportspawner4"
+   ]
   },
   "steel_cobra": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 3600,
-   "produced_by": []
+   "produced_by": [
+    "steelsupportspawner4"
+   ]
   },
   "steel_inspect_husk": {
    "armor": "Heavy",
@@ -5376,11 +5353,9 @@
   },
   "latin_cgyard": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "latin_scrapcar": {
    "armor": "Light",
@@ -5401,7 +5376,8 @@
    "reason": "spawn_only",
    "cost": 1000,
    "produced_by": [
-    "latin_scrapcar"
+    "latin_scrapcar",
+    "scrapcarspawner"
    ]
   },
   "latin_scrapcar2": {
@@ -5423,7 +5399,8 @@
    "reason": "spawn_only",
    "cost": 1000,
    "produced_by": [
-    "latin_scrapcar2"
+    "latin_scrapcar2",
+    "scrapcarspawner"
    ]
   },
   "latin_ra2hind_husk": {
@@ -5452,35 +5429,27 @@
   },
   "latin_triton": {
    "armor": "Light",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 700,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "latin_sub": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3600,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "latin_rammax": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 800,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "naxis_naval": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 3000,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "naxis_frank": {
    "armor": "Plate",
@@ -5625,6 +5594,7 @@
     "ra2_soviets_engineer",
     "ra2_soviets_flaktrooper",
     "ra2_soviets_teslatrooper",
+    "ra2e2_black",
     "ra2shkhero",
     "ra2sidewind",
     "sc_zerg_larva",
@@ -5736,7 +5706,7 @@
   },
   "naxis_conehead2": {
    "armor": "Flak",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 500,
    "produced_by": []
   },
@@ -5786,7 +5756,7 @@
   },
   "naxis_assault": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 900,
    "produced_by": []
   },
@@ -5877,23 +5847,19 @@
   },
   "naxis_tuboat": {
    "armor": "Heavy",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 1200,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "naxis_muboat": {
    "armor": "Medium",
-   "reason": "spawn_only",
+   "reason": "lobby_gated",
    "cost": 2400,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "nax_bitsmark": {
    "armor": "Superheavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 4000,
    "produced_by": []
   },
@@ -6016,9 +5982,11 @@
   },
   "tkmdrone": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 25,
-   "produced_by": []
+   "produced_by": [
+    "tkmdronesummon"
+   ]
   },
   "tkmsuicidedrone": {
    "armor": "Bomber",
@@ -6047,13 +6015,12 @@
    "reason": "spawn_only",
    "cost": 250,
    "produced_by": [
-    "player",
     "tkm_orerefinery"
    ]
   },
   "tkmvan": {
    "armor": "Heroic",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 3500,
    "produced_by": []
   },
@@ -6083,7 +6050,7 @@
   },
   "siege_tank": {
    "armor": "Light",
-   "reason": "unreachable",
+   "reason": "parked",
    "cost": 600,
    "produced_by": []
   },
@@ -6167,6 +6134,7 @@
    "reason": "spawn_only",
    "cost": 2000,
    "produced_by": [
+    "d2k_projections",
     "ixian_ixprojector"
    ]
   },
@@ -6242,22 +6210,10 @@
    "cost": null,
    "produced_by": []
   },
-  "atreides_ixresearchcenter": {
-   "armor": "Wood",
-   "reason": "unbuildable",
-   "cost": null,
-   "produced_by": []
-  },
   "atreides_starport": {
    "armor": "Wood",
    "reason": "unbuildable",
    "cost": null,
-   "produced_by": []
-  },
-  "atreides_palace": {
-   "armor": "Concrete",
-   "reason": "unreachable",
-   "cost": 10000,
    "produced_by": []
   },
   "atreides_gunturret": {
@@ -6280,14 +6236,6 @@
     "atreides_combattank"
    ]
   },
-  "atreides_sonictank": {
-   "armor": "Heavy",
-   "reason": "spawn_only",
-   "cost": 1000,
-   "produced_by": [
-    "atreides_sonic_tank_husk"
-   ]
-  },
   "atreides_sonic_tank_husk": {
    "armor": "Light",
    "reason": "spawn_only",
@@ -6295,12 +6243,6 @@
    "produced_by": [
     "atreides_sonictank"
    ]
-  },
-  "atreides_missiletank": {
-   "armor": "Medium",
-   "reason": "unreachable",
-   "cost": 750,
-   "produced_by": []
   },
   "atreides_siege_tank_husk": {
    "armor": "Light",
@@ -6310,18 +6252,6 @@
     "atreides_siegetank"
    ]
   },
-  "atreides_minotaurus": {
-   "armor": "Light",
-   "reason": "unreachable",
-   "cost": 900,
-   "produced_by": []
-  },
-  "atreides_mongoose": {
-   "armor": "Light",
-   "reason": "unreachable",
-   "cost": 750,
-   "produced_by": []
-  },
   "atreides_ornithopter_husk": {
    "armor": "Heavy",
    "reason": "spawn_only",
@@ -6329,12 +6259,6 @@
    "produced_by": [
     "atreides_ornithopter"
    ]
-  },
-  "atreides_airdrone": {
-   "armor": "Light",
-   "reason": "unreachable",
-   "cost": 1000,
-   "produced_by": []
   },
   "harkonnen_carryall_husk": {
    "armor": "Heavy",
@@ -6351,12 +6275,6 @@
    "produced_by": []
   },
   "corrino_outpost": {
-   "armor": "Wood",
-   "reason": "unbuildable",
-   "cost": null,
-   "produced_by": []
-  },
-  "corrino_ixresearchcenter": {
    "armor": "Wood",
    "reason": "unbuildable",
    "cost": null,
@@ -6386,12 +6304,6 @@
    "cost": null,
    "produced_by": []
   },
-  "corrino_missiletank": {
-   "armor": "Medium",
-   "reason": "unreachable",
-   "cost": 750,
-   "produced_by": []
-  },
   "corrino_siege_tank_husk": {
    "armor": "Light",
    "reason": "spawn_only",
@@ -6413,6 +6325,7 @@
    "reason": "spawn_only",
    "cost": 800,
    "produced_by": [
+    "raventurretspawner",
     "terran_sentinel"
    ]
   },
@@ -6426,9 +6339,11 @@
   },
   "scspidermine": {
    "armor": "Scout",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": 50,
-   "produced_by": []
+   "produced_by": [
+    "scvulturesummon"
+   ]
   },
   "scwraithdrone": {
    "armor": "Bomber",
@@ -6956,7 +6871,6 @@
     "ordos_swarmerdrone",
     "ordos_tankdestroyer",
     "ordos_wraith",
-    "player",
     "plymouth_cargotruck_empty",
     "plymouth_convec_structure_factory",
     "plymouth_lynx_emp",
@@ -7234,6 +7148,7 @@
     "ra2dest",
     "ra2dlph",
     "ra2dred",
+    "ra2e2_black",
     "ra2hornet",
     "ra2lcrf",
     "ra2leopard",
@@ -7279,6 +7194,8 @@
     "schwarzermond_spacezeppelin",
     "schwarzermond_ubermensch",
     "scinterceptor",
+    "sckerrigansummon",
+    "scqueensummon",
     "scsciencefacilitym",
     "scscourgedrone",
     "scsentinelm",
@@ -7693,79 +7610,79 @@
   },
   "wc2_human_shipyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
   "wc2_human_foundry": {
    "armor": "Wood",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 2500,
    "produced_by": []
   },
   "wc2_human_oil_refinery": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
   "wc2_human_oil_platform": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 5000,
    "produced_by": []
   },
   "wc2_human_oil_tanker": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 400,
    "produced_by": []
   },
   "wc2_human_elven_destroyer": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1400,
    "produced_by": []
   },
   "wc2_human_transport": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1000,
    "produced_by": []
   },
   "wc2_human_battleship": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 2000,
    "produced_by": []
   },
   "wc2_human_gnomish_submarine": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1450,
    "produced_by": []
   },
   "wc2_orc_shipyard": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
   "wc2_orc_foundry": {
    "armor": "Wood",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 2500,
    "produced_by": []
   },
   "wc2_orc_oil_refinery": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 3000,
    "produced_by": []
   },
   "wc2_orc_oil_platform": {
    "armor": "Concrete",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 5000,
    "produced_by": []
   },
@@ -7774,50 +7691,55 @@
    "reason": "spawn_only",
    "cost": null,
    "produced_by": [
-    "wc2_orcs_altarofstorms"
+    "wc2_orcs_altarofstorms",
+    "wc2ogremagerunes_spread"
    ]
   },
   "wc2_orc_skeleton": {
    "armor": "Plate",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 100,
-   "produced_by": []
+   "produced_by": [
+    "wc2deathknightraisedead"
+   ]
   },
   "wc2_orc_oil_tanker": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 400,
    "produced_by": []
   },
   "wc2_orc_trolldestroyer": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1400,
    "produced_by": []
   },
   "wc2_orc_transport": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1000,
    "produced_by": []
   },
   "wc2_orc_ogre_juggernaught": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 2000,
    "produced_by": []
   },
   "wc2_orc_giant_turtle": {
    "armor": "None",
-   "reason": "unreachable",
+   "reason": "lobby_gated",
    "cost": 1450,
    "produced_by": []
   },
   "wc2_orc_eye_of_kilrogg": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 2000,
-   "produced_by": []
+   "produced_by": [
+    "wc2ogremageeyeofkilrogg"
+   ]
   },
   "wc2_support_orc_eye_of_kilrogg": {
    "armor": "Light",
@@ -8446,6 +8368,7 @@
     "ra2dest",
     "ra2dlph",
     "ra2dred",
+    "ra2e2_black",
     "ra2hornet",
     "ra2leopard",
     "ra2shkhero",
@@ -9462,6 +9385,7 @@
     "ra2dest",
     "ra2dlph",
     "ra2dred",
+    "ra2e2_black",
     "ra2hornet",
     "ra2leopard",
     "ra2shkhero",
@@ -10477,6 +10401,7 @@
     "ra2dest",
     "ra2dlph",
     "ra2dred",
+    "ra2e2_black",
     "ra2hornet",
     "ra2leopard",
     "ra2shkhero",
@@ -11493,6 +11418,7 @@
     "ra2dest",
     "ra2dlph",
     "ra2dred",
+    "ra2e2_black",
     "ra2hornet",
     "ra2leopard",
     "ra2shkhero",
@@ -11891,15 +11817,19 @@
   },
   "wc2_neutral_daemon": {
    "armor": "Heavy",
-   "reason": "unreachable",
+   "reason": "spawn_only",
    "cost": 2000,
-   "produced_by": []
+   "produced_by": [
+    "(ruled spawn_only \u2014 no live producer)"
+   ]
   },
   "plymouth_minv": {
    "armor": "Light",
-   "reason": "unbuildable",
+   "reason": "spawn_only",
    "cost": null,
-   "produced_by": []
+   "produced_by": [
+    "plymouthminespawner"
+   ]
   },
   "minv": {
    "armor": "Light",
@@ -13150,6 +13080,7 @@
     "ra2_soviets_engineer",
     "ra2_soviets_flaktrooper",
     "ra2_soviets_teslatrooper",
+    "ra2e2_black",
     "ra2shkhero",
     "ra2sidewind",
     "sc_zerg_larva",
@@ -13873,11 +13804,9 @@
   },
   "v19": {
    "armor": "Wood",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "hosp": {
    "armor": "Wood",
@@ -14016,7 +13945,6 @@
     "ordos_mortartrooper",
     "ordos_rockettrooper",
     "ordos_saboteur",
-    "player",
     "protoss_adept",
     "protoss_amaranth",
     "protoss_darktemplar",
@@ -14084,6 +14012,7 @@
     "ra2_soviets_engineer",
     "ra2_soviets_flaktrooper",
     "ra2_soviets_teslatrooper",
+    "ra2e2_black",
     "ra2shkhero",
     "ra2sidewind",
     "rapt",
@@ -14421,6 +14350,7 @@
     "ra2_soviets_engineer",
     "ra2_soviets_flaktrooper",
     "ra2_soviets_teslatrooper",
+    "ra2e2_black",
     "ra2shkhero",
     "ra2sidewind",
     "sc_zerg_larva",
@@ -14537,19 +14467,15 @@
   },
   "miss": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "fcom": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "barl": {
    "armor": "None",
@@ -14565,27 +14491,21 @@
   },
   "ramiss": {
    "armor": "Concrete",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "rabio": {
    "armor": "Wood",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "oilb": {
    "armor": "Wood",
-   "reason": "spawn_only",
+   "reason": "unbuildable",
    "cost": null,
-   "produced_by": [
-    "player"
-   ]
+   "produced_by": []
   },
   "mammothbunker": {
    "armor": "Wood",
@@ -16162,5 +16082,6 @@
    "cost": null,
    "produced_by": []
   }
- }
+ },
+ "parked_manifest_ok": true
 }
