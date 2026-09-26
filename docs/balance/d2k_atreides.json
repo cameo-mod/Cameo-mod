@@ -601,7 +601,7 @@
      "src": "inherited",
      "v": "Wood"
     },
-    "buildable": false,
+    "buildable": true,
     "design": {
      "class_anchor": null,
      "special": null,
@@ -620,6 +620,10 @@
     "name": "Atreides Research Centre",
     "prerequisites": [
      "~atreides_heavyfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
     ],
     "shield_flat": {
      "src": "inherited",

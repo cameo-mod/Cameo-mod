@@ -215,6 +215,30 @@ schwarzermond_noidmgarmor:
 		Weapon: Lunar_AmplifiedMP40Laser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiMP40Laser
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiMP40Laser_elite
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowMP40Laser
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowMP40Laser_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_AMP:
+		Name: garrisoned
+		Weapon: Lunar_AmplifiedMP40Laser
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_AMP:
+		Name: garrisoned
+		Weapon: Lunar_AmplifiedMP40Laser_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:
@@ -226,6 +250,8 @@ schwarzermond_noidmgarmor:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	Passenger:
+	Garrisoner:
+		GarrisonType: Infantry
 	Voiced:
 		VoiceSet: NaxiRobotVoice
 	RenderSprites:

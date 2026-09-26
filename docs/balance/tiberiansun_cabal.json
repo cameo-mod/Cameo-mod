@@ -6007,6 +6007,64 @@
       "warheads": [],
       "weapon": "CabalBeholderLaser",
       "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "46600",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "2500",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Laser_Heavy_Flat",
+       "^TeslaWeapon",
+       "^RailgunWeapon",
+       "^LaserWeapon",
+       "^ts_cabal_cabalbeholderlaser"
+      ],
+      "warheads": [],
+      "weapon": "CabalBeholderLaser",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
