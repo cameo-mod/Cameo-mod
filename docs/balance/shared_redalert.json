@@ -1628,10 +1628,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1639,10 +1635,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",

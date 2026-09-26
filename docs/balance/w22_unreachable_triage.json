@@ -1,14 +1,31 @@
 {
  "generated_by": "tools/balance/w22_triage_unreachable.py",
  "classes": {
-  "broken_prereq": 52,
-  "map_script_only": 2,
-  "dead_content": 22
+  "lobby_gated": 88,
+  "parked": 13,
+  "map_script_only": 1
  },
  "rows": [
   {
+   "actor": "cncsyrd",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/gdi",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "td_gdi_constructionyard",
+    "td_gdi_tiberiumrefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
    "actor": "td_gdi_supercarrier",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiandawn/gdi",
    "armor": "Superheavy",
    "queue": "Naval, RANaval",
@@ -17,16 +34,45 @@
     "td_gdi_advancedcommunicationscenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cncsyrd"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cncsyrd"
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "td_gdi_missileboat",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/gdi",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "cncsyrd"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "td_gdi_railgunbattleship",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/gdi",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "cncsyrd",
+    "td_gdi_communicationscenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "td_gdi_landingcraft",
-   "class": "map_script_only",
+   "class": "lobby_gated",
    "owner": "tiberiandawn/gdi",
    "armor": "Medium",
    "queue": "Naval, RANaval",
@@ -34,16 +80,78 @@
     "cncsyrd"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cncsyrd"
-   ],
+   "dead_chain": [],
    "cross": [],
-   "map_or_lua": true,
-   "why": "placed/spawned by bundled map(s) or lua"
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "cncspen",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/nod",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "td_nod_constructionyard",
+    "td_nod_tiberiumrefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "td_nod_attacksubmarine",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/nod",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "cncspen"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "td_nod_ballisticmissilesubmarine",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/nod",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "cncspen",
+    "td_nod_communicationscenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "td_nod_lasercorvette",
+   "class": "lobby_gated",
+   "owner": "tiberiandawn/nod",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "cncspen",
+    "td_nod_templeofnod"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "td_nod_transportsubmarine",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiandawn/nod",
    "armor": "Light",
    "queue": "Naval, RANaval",
@@ -51,16 +159,14 @@
     "cncspen"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cncspen"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cncspen"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ra1_allies_cybertank",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert/shared",
    "armor": "Heavy",
    "queue": "Vehicle, RAVehicle",
@@ -73,11 +179,136 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
+  },
+  {
+   "actor": "ra1_allies_gunboat",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra1_allies_navalyard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra1_allies_destroyer",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra1_allies_navalyard",
+    "ra1_allies_radardome"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra1_allies_cruiser",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra1_allies_navalyard",
+    "ra1_allies_techcenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "japan_japanesespeedboat",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Light",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "japan_japanesenavalyard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "japan_yamatobattleship",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "japan_japanesenavalyard",
+    "japan_japaneseradararray"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "japan_japanesecarrier",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "japan_japanesenavalyard",
+    "japan_japanesetechcenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra1_soviets_submarine",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra1_soviets_subpen"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra1_soviets_missilesubmarine",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra1_soviets_subpen",
+    "ra1_soviets_techcenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ra1_navaltransport",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert/shared",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -85,12 +316,10 @@
     "ranavaltransport"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ranavaltransport"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ranavaltransport"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ra1_soviets_kennel",
@@ -112,8 +341,59 @@
    "why": "placed/spawned by bundled map(s) or lua"
   },
   {
+   "actor": "ra1_allies_navalyard",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "ra1_allies_constructionyard",
+    "ra1_allies_orerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "japan_japanesenavalyard",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "japan_japaneseconstructionyard",
+    "japan_japaneseorerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "ra1_soviets_subpen",
+   "class": "lobby_gated",
+   "owner": "redalert/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "ra1_soviets_constructionyard",
+    "ra1_soviets_orerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
    "actor": "rapt",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "?",
    "armor": "Wood",
    "queue": "Biolab",
@@ -126,11 +406,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "tsldrone",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "?",
    "armor": "Light",
    "queue": "Vehicle, RAVehicle",
@@ -143,11 +423,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "tsaegis",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "?",
    "armor": "Light",
    "queue": "Naval, RANaval",
@@ -160,11 +440,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "cabal_navalyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/cabal",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -173,17 +453,15 @@
     "cabal_cyborgfactory",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "cabal_artilleryspider_backup",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "tiberiansun/cabal",
    "armor": "Light",
    "queue": "Disabled",
@@ -197,11 +475,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "cabal_tarantula_backup",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "tiberiansun/cabal",
    "armor": "Heavy",
    "queue": "Disabled",
@@ -215,11 +493,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "cabal_lcraft",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/cabal",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -227,16 +505,14 @@
     "cabal_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cabal_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cabal_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "cabal_lazerboat",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/cabal",
    "armor": "Medium",
    "queue": "Naval, RANaval",
@@ -244,16 +520,14 @@
     "cabal_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cabal_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cabal_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "cabal_plasmasub",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/cabal",
    "armor": "Medium",
    "queue": "Naval, RANaval",
@@ -262,16 +536,14 @@
     "cabal_radar"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cabal_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cabal_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "cabal_radar_cruiser",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/cabal",
    "armor": "Medium",
    "queue": "Naval, RANaval",
@@ -280,16 +552,14 @@
     "cabal_techcenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "cabal_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: cabal_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_nod_navalyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/nod",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -298,30 +568,15 @@
     "ts_nod_handof",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
-   "cross": [
-    {
-     "token": "ts_nod_constructionyard",
-     "holders": [
-      "ts_nod_constructionyard"
-     ]
-    },
-    {
-     "token": "ts_nod_handof",
-     "holders": [
-      "ts_nod_handof"
-     ]
-    }
-   ],
+   "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "ts_nod_hover",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/nod",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -329,16 +584,14 @@
     "ts_nod_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_nod_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_nod_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_nod_cruiser",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/nod",
    "armor": "Superheavy",
    "queue": "Naval, RANaval",
@@ -347,23 +600,14 @@
     "ts_nod_techcenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_nod_navalyard"
-   ],
-   "cross": [
-    {
-     "token": "ts_nod_techcenter",
-     "holders": [
-      "ts_nod_techcenter"
-     ]
-    }
-   ],
+   "dead_chain": [],
+   "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_nod_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_nod_rayboat",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/nod",
    "armor": "Light",
    "queue": "Naval, RANaval",
@@ -371,16 +615,14 @@
     "ts_nod_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_nod_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_nod_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_nod_submarine",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/nod",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -388,16 +630,14 @@
     "ts_nod_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_nod_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_nod_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_gdi_navalyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/gdi",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -406,30 +646,15 @@
     "ts_gdi_barracks",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
-   "cross": [
-    {
-     "token": "ts_gdi_constructionyard",
-     "holders": [
-      "ts_gdi_constructionyard"
-     ]
-    },
-    {
-     "token": "ts_gdi_barracks",
-     "holders": [
-      "ts_gdi_barracks"
-     ]
-    }
-   ],
+   "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "ts_gdi_hover",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/gdi",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -437,16 +662,14 @@
     "ts_gdi_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_gdi_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_gdi_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_gdi_cruiser",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/gdi",
    "armor": "Superheavy",
    "queue": "Naval, RANaval",
@@ -455,23 +678,14 @@
     "ts_gdi_techcenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_gdi_navalyard"
-   ],
-   "cross": [
-    {
-     "token": "ts_gdi_techcenter",
-     "holders": [
-      "ts_gdi_techcenter"
-     ]
-    }
-   ],
+   "dead_chain": [],
+   "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_gdi_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_gdi_carrier",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/gdi",
    "armor": "Superheavy",
    "queue": "Naval, RANaval",
@@ -480,23 +694,14 @@
     "ts_gdi_techcenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_gdi_navalyard"
-   ],
-   "cross": [
-    {
-     "token": "ts_gdi_techcenter",
-     "holders": [
-      "ts_gdi_techcenter"
-     ]
-    }
-   ],
+   "dead_chain": [],
+   "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_gdi_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ts_gdi_destroyer",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/gdi",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -504,16 +709,14 @@
     "ts_gdi_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ts_gdi_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ts_gdi_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "forgotten_chinook",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "tiberiansun/forgotten",
    "armor": "Light",
    "queue": "Aircraft, RAAircraft",
@@ -527,11 +730,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "forgotten_navalyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/forgotten",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -540,35 +743,15 @@
     "forgotten_barracks",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
-  },
-  {
-   "actor": "forgotten_scarabapc",
-   "class": "dead_content",
-   "owner": "tiberiansun/forgotten",
-   "armor": "Medium",
-   "queue": "Vehicle, RAVehicle",
-   "prereqs": [
-    "forgotten_warfactory",
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
-   "dead_chain": [],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "forgotten_lcraft",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/forgotten",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -576,16 +759,14 @@
     "forgotten_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "forgotten_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: forgotten_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "forgotten_juggerboat",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/forgotten",
    "armor": "Medium",
    "queue": "Naval, RANaval",
@@ -593,16 +774,14 @@
     "forgotten_navalyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "forgotten_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: forgotten_navalyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "forgotten_cannonboat",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "tiberiansun/forgotten",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -611,16 +790,65 @@
     "forgotten_radar"
    ],
    "undefined": [],
-   "dead_chain": [
-    "forgotten_navalyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: forgotten_navalyard"
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2gayard",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "ra2_allies_constructionyard",
+    "ra2_allies_orerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "ra2nayard",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "ra2_soviets_constructionyard",
+    "ra2_soviets_orerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "yrygyard",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "yuri_constructionyard",
+    "yuri_slaveminer_deployed",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "ra2lcrf",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2/shared",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -628,16 +856,14 @@
     "ra2gayard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ra2gayard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ra2gayard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ra2sapc",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2/shared",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -645,16 +871,14 @@
     "ra2nayard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "ra2nayard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: ra2nayard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "yrhovr",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2/shared",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -662,16 +886,107 @@
     "yrygyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "yrygyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: yrygyard"
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2sqd",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "yrygyard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2dlph",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Light",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra2gayard",
+    "ra2_allies_battlelab"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2dest",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra2gayard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2carrier",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra2gayard",
+    "ra2_allies_battlelab"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2sub",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra2nayard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "ra2dred",
+   "class": "lobby_gated",
+   "owner": "redalert2/shared",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "ra2nayard",
+    "ra2_soviets_battlelab"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "ra2_c_hum2",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert2/shared",
    "armor": "Light",
    "queue": "Vehicle, RAVehicle",
@@ -684,11 +999,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "ra2_c_abram",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert2/shared",
    "armor": "Heavy",
    "queue": "Vehicle, RAVehicle",
@@ -701,11 +1016,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "asianalliance_cgpnch",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2mod/asianalliance",
    "armor": "Concrete",
    "queue": "Defence, RADefence",
@@ -713,16 +1028,31 @@
     "asianalliance_cgyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "asianalliance_cgyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: asianalliance_cgyard"
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "asianalliance_cgyard",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "asianalliance_constructionyard",
+    "asianalliance_orerefinery",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "asianalliance_panth",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2mod/asianalliance",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -730,90 +1060,189 @@
     "asianalliance_cgyard"
    ],
    "undefined": [],
-   "dead_chain": [
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "asianalliance_ksub",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
     "asianalliance_cgyard"
    ],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: asianalliance_cgyard"
-  },
-  {
-   "actor": "steel_cougar",
-   "class": "dead_content",
-   "owner": "redalert2mod/consortium",
-   "armor": "Scout",
-   "queue": "Vehicle, RAVehicle",
-   "prereqs": [
-    "steelconsortium_consortiumwarfactory",
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
   },
   {
-   "actor": "steel_hummer",
-   "class": "dead_content",
-   "owner": "redalert2mod/consortium",
+   "actor": "asianalliance_gunb",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
    "armor": "Medium",
-   "queue": "Vehicle, RAVehicle",
+   "queue": "Naval, RANaval",
    "prereqs": [
-    "steelconsortium_consortiumwarfactory",
-    "disabled"
+    "asianalliance_cgyard"
    ],
-   "undefined": [
-    "disabled"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
   },
   {
-   "actor": "steel_oldqtnk",
-   "class": "dead_content",
-   "owner": "redalert2mod/consortium",
+   "actor": "asianalliance_lsub",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
    "armor": "Heavy",
-   "queue": "Vehicle, RAVehicle",
+   "queue": "Naval, RANaval",
    "prereqs": [
-    "steelconsortium_consortiumwarfactory",
-    "steelconsortium_consortiumbattlelab",
-    "disabled"
+    "asianalliance_cgyard",
+    "asianalliance_radar"
    ],
-   "undefined": [
-    "disabled"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
   },
   {
-   "actor": "steel_cobra",
-   "class": "dead_content",
-   "owner": "redalert2mod/consortium",
-   "armor": "Superheavy",
-   "queue": "Vehicle, RAVehicle",
+   "actor": "asianalliance_quasfrig",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
    "prereqs": [
-    "steelconsortium_consortiumwarfactory",
-    "steelconsortium_consortiumbattlelab",
-    "disabled"
+    "asianalliance_cgyard",
+    "asianalliance_radar"
    ],
-   "undefined": [
-    "disabled"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "asianalliance_karrier",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "asianalliance_cgyard",
+    "asianalliance_battlelab"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "asianalliance_tsun",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/asianalliance",
+   "armor": "Superheavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "asianalliance_cgyard",
+    "asianalliance_militaryacademy",
+    "asianalliance_upgrade_tsunami"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "latin_cgyard",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/syndicate",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "latinsyndicate_syndicateconstructionyard",
+    "latinsyndicate_combatbarracks",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
+  },
+  {
+   "actor": "latin_triton",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/syndicate",
+   "armor": "Light",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "latin_cgyard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "latin_sub",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/syndicate",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "latin_cgyard",
+    "latinsyndicate_spycenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "latin_rammax",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/syndicate",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "latin_cgyard"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "naxis_naval",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/naxis",
+   "armor": "Concrete",
+   "queue": "Building, RABuilding",
+   "prereqs": [
+    "naxis_constructionyard",
+    "naxis_barracks",
+    "globalnaval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "naxis_conehead2",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert2mod/naxis",
    "armor": "Flak",
    "queue": "Infantry, RAInfantry",
@@ -827,11 +1256,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "naxis_assault",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert2mod/naxis",
    "armor": "Heavy",
    "queue": "Vehicle, RAVehicle",
@@ -846,11 +1275,42 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
+  },
+  {
+   "actor": "naxis_tuboat",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/naxis",
+   "armor": "Heavy",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "naxis_naval"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
+  },
+  {
+   "actor": "naxis_muboat",
+   "class": "lobby_gated",
+   "owner": "redalert2mod/naxis",
+   "armor": "Medium",
+   "queue": "Naval, RANaval",
+   "prereqs": [
+    "naxis_naval",
+    "naxis_techcenter"
+   ],
+   "undefined": [],
+   "dead_chain": [],
+   "cross": [],
+   "map_or_lua": false,
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "nax_bitsmark",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "redalert2mod/naxis",
    "armor": "Superheavy",
    "queue": "Naval, RANaval",
@@ -859,33 +1319,14 @@
     "naxis_techcenter"
    ],
    "undefined": [],
-   "dead_chain": [
-    "naxis_naval"
-   ],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: naxis_naval"
-  },
-  {
-   "actor": "tkmdrone",
-   "class": "dead_content",
-   "owner": "redalert2mod/tkm",
-   "armor": "Light",
-   "queue": "Aircraft, RAAircraft",
-   "prereqs": [
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "tkmvan",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "redalert2mod/tkm",
    "armor": "Heroic",
    "queue": "Infantry, RAInfantry",
@@ -900,11 +1341,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "siege_tank",
-   "class": "dead_content",
+   "class": "parked",
    "owner": "d2k/shared",
    "armor": "Light",
    "queue": "Vehicle, RAVehicle, Starport",
@@ -918,158 +1359,11 @@
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
-  },
-  {
-   "actor": "atreides_palace",
-   "class": "broken_prereq",
-   "owner": "d2k/atreides",
-   "armor": "Concrete",
-   "queue": "Defence, RADefence",
-   "prereqs": [
-    "atreides_hightech",
-    "heavy.atreides_combat",
-    "research_centre",
-    "techlevel.superweapons"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "atreides_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-atreides_ixresearchcenter (no Queue)"
-  },
-  {
-   "actor": "atreides_missiletank",
-   "class": "broken_prereq",
-   "owner": "d2k/atreides",
-   "armor": "Medium",
-   "queue": "Vehicle, RAVehicle",
-   "prereqs": [
-    "heavy.missile_tank",
-    "heavy.atreides_combat",
-    "research_centre"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "atreides_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-atreides_ixresearchcenter (no Queue)"
-  },
-  {
-   "actor": "atreides_minotaurus",
-   "class": "broken_prereq",
-   "owner": "d2k/atreides",
-   "armor": "Light",
-   "queue": "Vehicle, RAVehicle, Starport",
-   "prereqs": [
-    "atreides_vehicle_production",
-    "heavy.missile_tank",
-    "research_centre",
-    "atreides_promotion_minotaurus"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "atreides_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-atreides_ixresearchcenter (no Queue)"
-  },
-  {
-   "actor": "atreides_mongoose",
-   "class": "broken_prereq",
-   "owner": "d2k/atreides",
-   "armor": "Light",
-   "queue": "Vehicle, RAVehicle, Starport",
-   "prereqs": [
-    "atreides_vehicle_production",
-    "heavy.missile_tank",
-    "research_centre",
-    "atreides_promotion_mongoose"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "atreides_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-atreides_ixresearchcenter (no Queue)"
-  },
-  {
-   "actor": "atreides_airdrone",
-   "class": "broken_prereq",
-   "owner": "d2k/atreides",
-   "armor": "Light",
-   "queue": "Aircraft, RAAircraft",
-   "prereqs": [
-    "atreides_hightech",
-    "research_centre",
-    "atreides_promotion_airdrone"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "atreides_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-atreides_ixresearchcenter (no Queue)"
-  },
-  {
-   "actor": "corrino_missiletank",
-   "class": "broken_prereq",
-   "owner": "d2k/corrino",
-   "armor": "Medium",
-   "queue": "Vehicle, RAVehicle",
-   "prereqs": [
-    "heavy.missile_tank",
-    "heavy.corrino_combat",
-    "research_centre"
-   ],
-   "undefined": [],
-   "dead_chain": [],
-   "cross": [
-    {
-     "token": "research_centre",
-     "holders": [
-      "corrino_ixresearchcenter (no Queue)"
-     ]
-    }
-   ],
-   "map_or_lua": false,
-   "why": "token(s) owned by other factions: research_centre<-corrino_ixresearchcenter (no Queue)"
+   "why": "`~disabled` convention \u2014 maintainer-approved parked set"
   },
   {
    "actor": "wc2_human_shipyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1078,17 +1372,15 @@
     "wc2_humans_elvenlumbermill",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_human_foundry",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Wood",
    "queue": "Building, RABuilding",
@@ -1097,19 +1389,15 @@
     "wc2_human_shipyard",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_human_shipyard"
-   ],
+   "undefined": [],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_human_oil_refinery",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1118,19 +1406,15 @@
     "wc2_human_shipyard",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_human_shipyard"
-   ],
+   "undefined": [],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_human_oil_platform",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1139,19 +1423,15 @@
     "wc2_human_oil_refinery",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_human_oil_refinery"
-   ],
+   "undefined": [],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_human_oil_tanker",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1159,16 +1439,14 @@
     "wc2_human_oil_refinery"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_human_oil_refinery"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_human_oil_refinery"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_human_elven_destroyer",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -1176,16 +1454,14 @@
     "wc2_human_shipyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_human_shipyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_human_shipyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_human_transport",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1193,16 +1469,14 @@
     "wc2_human_foundry"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_human_foundry"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_human_foundry"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_human_battleship",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -1211,16 +1485,14 @@
     "wc2_humans_blacksmith"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_human_foundry"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_human_foundry"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_human_gnomish_submarine",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1229,16 +1501,14 @@
     "wc2_humans_gnomishinventor"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_human_foundry"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_human_foundry"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_orc_shipyard",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1247,17 +1517,15 @@
     "wc2_orcs_trolllumbermill",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_orc_foundry",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Wood",
    "queue": "Building, RABuilding",
@@ -1266,19 +1534,15 @@
     "wc2_orc_shipyard",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_orc_shipyard"
-   ],
+   "undefined": [],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_orc_oil_refinery",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1287,19 +1551,15 @@
     "wc2_orc_shipyard",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_orc_shipyard"
-   ],
+   "undefined": [],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_orc_oil_platform",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Concrete",
    "queue": "Building, RABuilding",
@@ -1308,36 +1568,15 @@
     "wc2_orc_oil_refinery",
     "globalnaval"
    ],
-   "undefined": [
-    "globalnaval"
-   ],
-   "dead_chain": [
-    "wc2_orc_oil_refinery"
-   ],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "undefined prereq token(s): globalnaval"
-  },
-  {
-   "actor": "wc2_orc_skeleton",
-   "class": "dead_content",
-   "owner": "?",
-   "armor": "Plate",
-   "queue": "Infantry, RAInfantry",
-   "prereqs": [
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
+   "undefined": [],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: globalnaval"
   },
   {
    "actor": "wc2_orc_oil_tanker",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1345,16 +1584,14 @@
     "wc2_orc_oil_refinery"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_orc_oil_refinery"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_orc_oil_refinery"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_orc_trolldestroyer",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -1362,16 +1599,14 @@
     "wc2_orc_shipyard"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_orc_shipyard"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_orc_shipyard"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_orc_transport",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1379,16 +1614,14 @@
     "wc2_orc_foundry"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_orc_foundry"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_orc_foundry"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_orc_ogre_juggernaught",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "Heavy",
    "queue": "Naval, RANaval",
@@ -1397,16 +1630,14 @@
     "wc2_orcs_blacksmith"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_orc_foundry"
-   ],
+   "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_orc_foundry"
+   "why": "live when lobby option grants: ?"
   },
   {
    "actor": "wc2_orc_giant_turtle",
-   "class": "broken_prereq",
+   "class": "lobby_gated",
    "owner": "?",
    "armor": "None",
    "queue": "Naval, RANaval",
@@ -1415,46 +1646,10 @@
     "wc2_orcs_golbinalchemist"
    ],
    "undefined": [],
-   "dead_chain": [
-    "wc2_orc_foundry"
-   ],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "prereq provider(s) unreachable: wc2_orc_foundry"
-  },
-  {
-   "actor": "wc2_orc_eye_of_kilrogg",
-   "class": "dead_content",
-   "owner": "?",
-   "armor": "Heavy",
-   "queue": "Infantry, RAInfantry",
-   "prereqs": [
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
    "dead_chain": [],
    "cross": [],
    "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
-  },
-  {
-   "actor": "wc2_neutral_daemon",
-   "class": "dead_content",
-   "owner": "?",
-   "armor": "Heavy",
-   "queue": "Infantry, RAInfantry",
-   "prereqs": [
-    "disabled"
-   ],
-   "undefined": [
-    "disabled"
-   ],
-   "dead_chain": [],
-   "cross": [],
-   "map_or_lua": false,
-   "why": "`~disabled` convention (disabled token is never provided)"
+   "why": "live when lobby option grants: ?"
   }
  ]
 }

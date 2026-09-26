@@ -218,6 +218,7 @@ corrino_ixresearchcenter:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^2x2Shape
 	Buildable:
+		Queue: Building, RABuilding
 		Prerequisites: ~corrino_heavyfactory
 		Description: Unlocks advanced technology.
 		IconPalette: d2kunit
