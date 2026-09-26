@@ -173,6 +173,8 @@ D2KRepair:
 	Warhead@Defuse3:
 		Range: 5000
 	Warhead@Effect: FlashTargetsInRadius
+		-Explosions:
+		-ImpactActors:
 		Radius: 5000
 		ValidRelationships: Ally
 		ValidTargets: Heal

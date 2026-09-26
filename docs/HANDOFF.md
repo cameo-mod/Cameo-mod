@@ -1,5 +1,43 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — DAWN: dead-fields batch-2 (supplier deletes)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-batch2 · stacked on dwf-431-fix`
+
+Swept the residual: 14 kinds/70 weapons → **12 kinds / 28 weapons**.
+Deleted dead fields at their *source lines* (supplier nodes in
+`mods/cameo/weapons/weapons.yaml` + local dead lines in D2k/TS/TD/WC2 packs)
+after a per-source consumer scan proved the field is dead on EVERY weapon
+carrying it — the live-consumer check caught that `^HealingWeapon`'s
+`Warhead@Effect` fields are live on 582/385 inheritors, so the heal-weapon
+retypers got `-Explosions:`/`-ImpactActors:` cancels instead (D2KRepair,
+TSHeal). Follow-up: a file-only consumer match inflated live-children lists;
+line-precise matching shows all local dead lines have zero live consumers —
+ProtossHeal + TSRA2Heal deleted outright (no restructuring needed). Remaining
+26 = NOVA lane (fix list posted to fleet). Orphans 0, drift clean, boot PASS.
+
+## 2026-09-27 — DAWN: dead-warhead-fields fix (PR #431 culprit)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-431-fix · base 91f865585`
+
+Claude routed master-red `audit_dead_warhead_fields` (20 kinds/72 weapons vs
+ratchet 15) for culprit bisect before fix. Bisect pinned **c48c7d41a / PR
+#431** (W24 lane-2 collapses, Sep-22): the fold retyped `Warhead@Tesla_Super`
+to `SpreadDamage` on the `ra1_soviets_heavyteslatank_ttankzap2arcteslafragment{1,2}_emp`
+chain, orphaning six inherited percentage-ladder fields the new type discards.
+
+Fix: six `-Field:` cancels on **fragment1 only** — fragment2 inherits from
+fragment1, so its cancels were provider-less (orphan-cancel audit caught them;
+removed). Engine-identical: resolved diff is exactly the six discarded fields.
+Result: **14 kinds/70 weapons ≤ ratchet 15**, orphan cancels 0, empty warheads 0.
+
+Also re-extracted `shared_redalert2` balance ledger (#519 dot renames had
+missed it — the one stale `doc_claims` claim `ledgers_drifted` measures 0 again).
+
+Remaining dead-field warning: `FireShrapnel.Range` — pre-existing, separate
+cleanup. Fleet finding: `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+
+
 
 ### DAWN — Stack consolidated onto master 91f865585 (2026-09-27)
 
@@ -202,6 +240,29 @@ Follow-on (same commit series): `audit_orphan_cancels.py --fragile` — report-o
 mode flagging 2,489 cancels whose sole provider is one inherit edge. Closes the
 class that crashed #513's head: dead-edge sweeps must treat `-X:` as a CONSUMER
 of its provider edge (delete edge+cancel together or neither).
+
+## 2026-09-26e — DAWN: #508 rebased CLEAN + all four EMBER-routed items done
+
+`Agent: Devin-DAWN · branches devin/dawn/w7-packs-v2 (PR #508) + devin/dawn/routed-fixes`
+
+- **#508** cherry-picked onto post-wave master (`4416e43bd`) as `43f41c132` —
+  `mergeable: MERGEABLE, mergeStateStatus: CLEAN`. Re-verified vs the NEW base
+  (R16's Versus regen staled 33 baked tables — see devlog + LESSONS).
+- **B1:** `cameo_model.roster()` now gates on `Buildable.Factions` — the
+  engine-level roster gate the prereq closure never modeled. Sinks
+  `harkonnen → ordos_upgrade_lightfactory` (`Factions: ordos`); L1 6→5.
+  Remaining 5 rows verified deliberate (conyard provider lines added in team
+  sessions `4c6d4bfaa`/`f6956364a`; syndicate starting-units = mercenary
+  design). Cross-pack mount question stands for the fleet.
+- **Q-order:** consortium MCV `~warfactory` before `consortiumradar` →
+  prereq-order violations 0.
+- **MinRange:** all 7 normalized to `round(Range/25)*5` — td×4 + ordos
+  inline fixes; ra1 pair pinned `2365` over `155mm`'s stale 2670. → 0.
+- **G1:** all 7 are melee (`^DogJaw`, `^Warhead_Melee_*`) — the 2026-07-10
+  ruling already decided this class; added to `garrison_exceptions.yaml`
+  (39→46) rather than new weapons. → 0.
+
+---
 
 ## 2026-09-26d — EMBER → FLEET: post-merge-wave status + per-agent notes
 
@@ -2046,9 +2107,9 @@ someone else is mid-way through.**
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
-`warhead_family_reach` measures **1,532 distinct fired weapon identities** whose
+`warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.**
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (DAWN stack merge): = 391.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

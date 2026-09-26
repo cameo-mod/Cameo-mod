@@ -12,7 +12,6 @@ td_gdi_commando_sniper:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 40000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 		Spread: 1
@@ -856,13 +855,13 @@ td_gdi_mammothtank_mammothmissilesamt:
 td_gdi_mlrs_227mmamt:
 	Inherits@w71: ^Warhead_MissileAP_Medium
 	Range: 9993
+	MinRange: 2000
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 
 	ReloadDelay: 111
 	Inherits@w72: ^Projectile_Missile_Medium
 	Inherits@w73: ^td_tiberiandawn_227mm
-	MinRange: 1999
 	Burst: 6
 	BurstDelays: 5
 	Report: rocket1.aud
@@ -3693,7 +3692,6 @@ td_gdi_havoc_sniper:
 		Amount: 1
 		Damage: 20000
 		Spread: 1
-		Falloff: 100, 0
 		Versus:
 			Shield: 110
 			None: 100
@@ -3894,7 +3892,6 @@ td_gdi_havoc_rifle:
 		Amount: 1
 		Spread: 10
 		Damage: 4000
-		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 110
 			None: 100
@@ -4310,6 +4307,7 @@ td_gdi_battletank_120mm:
 td_gdi_mlrs_227mm:
 	Inherits@w71: ^Warhead_MissileAP_Medium
 	Range: 9993
+	MinRange: 2000
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 
@@ -4323,7 +4321,6 @@ td_gdi_mlrs_227mm:
 		ContrailEndColor: 000000FF
 		VerticalRateOfTurn: 16
 	Inherits@w73: ^td_tiberiandawn_227mm
-	MinRange: 1999
 	Burst: 6
 	BurstDelays: 5
 	Report: rocket1.aud

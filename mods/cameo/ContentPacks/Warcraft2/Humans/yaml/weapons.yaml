@@ -475,7 +475,6 @@ wc2gryphonFireVisible:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
-		Falloff: 100, 75, 50, 25
 		Damage: 10000
 		Spread: 1000
 	-Warhead@Effect1:

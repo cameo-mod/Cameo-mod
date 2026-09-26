@@ -618,7 +618,6 @@ IxianBomb_EMP:
 		InvalidTargets: Infantry
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
 		Damage: 120000
 		Spread: 4000
 	-Warhead@HeavyBomb:

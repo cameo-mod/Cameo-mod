@@ -164,6 +164,20 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)
+
+When deciding whether a yaml line is safe to delete, the consumer test must
+match the resolved field child's `file` AND `line` to the candidate source.
+Matching on file alone counts every def in that file as a consumer: in the
+dead-field sweep it reported `Explosions` at `weapons.yaml:2854` as live on
+582 weapons (every `Warhead@Effect.Explosions` declared anywhere in the file)
+and invented a "dead line with live retyped children" deferral class that
+does not exist. Line-precise matching shows the real split: exactly 3 heal
+weapons (BroodweaverLeech, MedicHeal, TKMMedicHeal) consume that source; the
+four "deferred" local dead lines had zero live consumers and deleted cleanly.
+Tool: `tools/audit/dead_field_sources.py` does the (file,line) match and
+labels SAFE-DELETE / RETYPE-CANCEL / DEFER.
+
 ## ⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)
 
 The value-reference self-containment batch (D2k/TD/TS/SC packs) copied ~70

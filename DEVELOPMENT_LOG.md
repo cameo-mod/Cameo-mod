@@ -1,3 +1,59 @@
+## Devin-DAWN — dead-warhead-field batch-2: supplier deletes (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-batch2` (stacked on `devin/dawn/dwf-431-fix`).
+
+Swept the 14-kind/70-weapon residual down to **12 kinds / 28 weapons**:
+- **Supplier deletes** in `mods/cameo/weapons/weapons.yaml` — dead lines removed
+  at origin after verifying every consumer resolves the node to a type lacking
+  the field (all-consumers-dead check, not just the audit's flagged subset):
+  `Warhead@SniperWeaponExtraDamage.Falloff` (:133, 3 consumers),
+  `^RepairWeapon` `Warhead@Defuse1.Spread/Falloff` (:2959-60, 9 consumers),
+  `Warhead@Sniper_Light_ExtraDamage.Falloff` (:9937, 17 consumers).
+- **Local dead-line deletes** (the field sits on the dead-typed node in the
+  weapon's own file): Ixian `EMPUnit.Falloff`, TSMobile_EMP, wc2gryphonFireVisible,
+  `ts_nod_mobilerepairvehicle` Defuse1 pair, TSSniper_elite, TD GDI x3, TD Nod,
+  TS Forgotten.
+- **Retype-site cancels** (supplier field is LIVE on other consumers —
+  `^HealingWeapon`'s `Warhead@Effect: CreateEffect` legitimately uses
+  `Explosions`/`ImpactActors`): `-Explosions:`/`-ImpactActors:` on D2KRepair's
+  local retype and an untyped pin on TSHeal.
+- Resolved-diff HEAD→working: 45 weapons differ, every delta a removed dead
+  leaf; orphan cancels 0, empty warheads 0, balance drift clean.
+- **Correction (same commit series):** the first liveness pass matched
+  consumers by FILE, not (file,line) — it reported a "live-children" class
+  (ProtossHeal/TSRA2Heal/MagicOrbSpreaderProjectile2/NaxiMeteorSpawner) that
+  does not exist. Line-precise matching shows zero live consumers for every
+  flagged local line: plain deletes. The only truly-live dead-field source is
+  `^HealingWeapon`'s `Warhead@Effect` Explosions/ImpactActors (live on
+  BroodweaverLeech, MedicHeal, TKMMedicHeal) — retypers cancel, already done.
+  Lesson folded into LESSONS_LEARNED: field provenance is (file,line), never
+  file alone.
+- Remaining 26 weapons are NOVA's lane (RA/RA2/RA2Mod packs + legacy
+  redalert2/redalert2mod/other/tiberiandawn RA-owned entries) — per-weapon fix
+  list posted to the fleet board.
+
+## Devin-DAWN — dead-warhead-field fix #431 culprit (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-431-fix` (off master). Claude routed the master-red
+`audit_dead_warhead_fields` (20/72 vs ratchet 15) for bisect + fix.
+
+- **Bisect:** `git log` bisection with the current audit copied into scratch
+  worktrees (old-commit audits lack `--fail-closed` and can't be compared);
+  +6 dead `SpreadDamage.*` kinds entered Sep-20→22 window → culprit commit
+  `c48c7d41a` / **PR #431** (W24 lane-2 multi-main collapses).
+- **Mechanism:** the fold retyped `Warhead@Tesla_Super` to `SpreadDamage` on
+  `...ttankzap2arcteslafragment1_emp`/`_fragment2_emp`; the percentage-ladder
+  fields the old type consumed (`FriendlyFireDamage`, `FriendlyFireSpread`,
+  `IntegrityScale`, `PercentageScale`, `PercentageSpread`, `PercentageVersus`)
+  became dead inherited values on the new type.
+- **Fix:** six leaf `-Field:` cancels on fragment1 only — fragment2 inherits
+  from fragment1, so cancels there were provider-less (orphan-cancel audit
+  proved it). Engine-identical: resolved diff = exactly the 6 discarded fields.
+- **Audit:** dead warhead fields **14/70 WARN ≤ ratchet 15** (green); orphan
+  cancels 0. Master `shared_redalert2` balance ledger re-extracted (#519-era
+  dot renames had missed it) — drift clean, un-stale-claim for `doc_claims`.
+- Finding: fleet `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+
 ## Devin-DAWN — W6 in-lane sweep: local fx warheads -> per-weapon templates (2026-09-26)
 
 Branch `devin/dawn/w6-fx` (stacked on `devin/dawn/r17-chips` tip `1ae9c7d02`).
