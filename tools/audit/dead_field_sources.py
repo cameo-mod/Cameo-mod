@@ -136,7 +136,11 @@ def main(argv: list[str] | None = None) -> int:
                 if c.key != s["node"]:
                     continue
                 for f in c.children:
-                    if f.key == s["field"] and str(f.file) == sfile:
+                    # consumers carry the field declared AT THIS EXACT LINE —
+                    # file-only matching is wrong (same file holds hundreds of
+                    # defs; it once inflated :2854's "consumers" to 585).
+                    if f.key == s["field"] and str(f.file) == sfile \
+                            and int(f.line) == sline:
                         got = adwf.resolve_fields(index, (c.value or "") + "Warhead")
                         if got is None or not got[2]:
                             # unverifiable consumer — treat as live (conservative)
