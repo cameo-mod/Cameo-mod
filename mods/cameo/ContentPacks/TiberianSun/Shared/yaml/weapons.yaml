@@ -153,7 +153,6 @@ TSAPCGun:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
-	Inherits@wh: ^Warhead_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5668
@@ -211,7 +210,6 @@ TSCarrierTarget:
 
 TSTorpTube:
 	Inherits@xRA2TorpTube0: ^Warhead_MissileAP_Heavy
-	Inherits@xRA2TorpTube1: ^Projectile_Missile_Heavy
 	Inherits: ^ts_torptube
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -222,7 +220,6 @@ TSTorpTube:
 	Range: 9000
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile:
 	Projectile: Missile
 		Image: Patriot
 		Arm: 5
@@ -495,7 +492,7 @@ TSRA2Heal:
 		ValidRelationships: Ally
 		Spread: 1000
 		Falloff: 100, 50, 33, 25, 20
-		Damage: -2000
+		Damage: -3000
 		Versus:
 			Shield: 140
 			Heroic: 100
@@ -515,33 +512,6 @@ TSRA2Heal:
 			Concrete: 44
 			Wood: 40
 		DamageTypes: KillsDrone
-		DebugOverlayColor: 00FF00
-	Warhead@ExtraHealing: SpreadDamage
-		ValidTargets: Heal
-		ValidRelationships: Ally
-		Spread: 500
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: -1000
-		Versus:
-			Shield: 100
-			Heroic: 100
-			Plate: 100
-			Flak: 100
-			None: 100
-			Superheavy: 100
-			Spaceship: 100
-			Heavy: 100
-			Helicopter: 100
-			Medium: 100
-			Bomber: 100
-			Light: 100
-			Fighter: 100
-			Scout: 100
-			Steel: 100
-			Concrete: 100
-			Wood: 100
-		DamageTypes: KillsDrone
-		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 	Warhead@HealingWeaponPercentage: AreaDamagePercentage
 		FriendlyFireDamage: 100

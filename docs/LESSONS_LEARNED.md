@@ -10,6 +10,41 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+
+### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
+
+When master's merge wave (#519 dots, #524 `pack|file` sound refs) touched
+the same weapon defs a stack branch rewrote, the hunks are structural, not
+textual: neither side can be taken blind. The correct procedure: resolve
+each conflicted def on BOTH parent trees; where payloads match, keep the
+branch's structure but backport master's *field values* (`Report:`,
+`StartBurstReport:`, `Warhead@*/ImpactSounds:`) — including inside
+generated `^` templates the branch emits (master's qualifiers land there
+too). Take master's def verbatim only when it carries no content the
+branch's gates forbid (here: local `Versus:` — `Laboratory_Bioball`'s
+master form would have pushed count_local_versus over its gate, so the
+branch's structure won and one ordered-key diff vs master is the price).
+Splicing a def to master's form orphans its generated `^<pfx>_<weapon>`
+templates — sweep them after every splice.
+
+### 2026-09-26 — DAWN: covering-edge conversion needs positional order-pins
+
+Replacing `Inherits: ^LegacyBundle` with the bundle's covering three-kind
+edges changes resolved child ORDER, not just content: MiniYaml emits a
+provider's children at the edge's file position, so a bundle whose own
+body was [3kind edges, then local scalars] must be replaced by [covering
+edges, then `# W7MAT order-pin` scalars] at the SAME slot — pins placed
+after a later `Inherits@fx` edge land late in the resolved map and break
+the ordered-key contract. If the consumer already carries one of the
+covering edges at a later position, MOVE that edge into the covering group
+(dedup silently reorders emission). Three orphan `-Report:` cancels also
+surfaced: when the removed edge was a `-Key:` provider, the cancel dies
+with it (delete together — EMBER's rule, now verified against the audit's
+provider model). Raw full-stack templates (covering set = empty) are NOT
+edge-swap candidates: converting their consumers would inline every leaf.
+Tool: `w8_conv.py` in the DAWN tooling dir (same verify loop as `w7_conv.py`).
+
+
 ## Required reading order for every new task
 
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a
@@ -158,6 +193,67 @@ Two traps inside that emit:
   (resolved payload differed). Check the whole merged def dict for the new
   name before writing the copy.
 
+- **W7 weapon-parent edges: covering-edge swap is only safe when the child
+  has no pre-existing kind edges** (2026-09-26, ContentPack batch). If the
+  child already carries a `^Warhead_*`/`^Projectile_*`/`^Effect_*` edge (or
+  an fx-pure family edge), adding the parent's covering edge duplicates the
+  kind — W2/W3/W4. Those go to materialization too. When the child has an
+  existing fx edge, the per-weapon family must DERIVE from it and the edge
+  swaps to the family (1 fx edge preserved, no W4).
+- **A cancel CONSUMES its provider edge — delete edge+cancel together or
+  neither** (2026-09-26, W2 dead-edge sweep, EMBER's rule; maintainer
+  standing rule 0.3). An edge is dead only if (a) no `Warhead@`/node it
+  emits survives into resolved output AND (b) no `-Key:` anywhere targets
+  a node it emits. The sweep's node-survival classifier missed (b) — it
+  dropped `TSBombSonic`'s `^Warhead_Demolition_Heavy` edge while leaving
+  the `-Warhead@Demolition_Heavy:` cancel, which the engine throws on at
+  ruleset load (the python resolver tolerates the orphan — only
+  `audit_orphan_cancels` and the boot see it). The same rule bites in
+  reverse: removing a `-X:` whose provider edge was dropped in the same
+  pass resurrects the node for every consumer (the DevBullet template
+  case), and `-Warhead@X:` + a child pin is a cancel-redeclare — deleting
+  the cancel strands the child under the wrong parent. Correct loop:
+  remove -> `audit_orphan_cancels` -> resolved-verify -> restore drift,
+  repeat to fixpoint.
+- **W7 weapon-edge removal: the covering-edge swap is the only clean
+  shape** (2026-09-26). Three approaches tried: (a) inlining the parent's
+  RAW children — bloats every bucket (dual edges, stray scalars);
+  (b) drop edge + repin all drift — vomits whole resolved subtrees as
+  locals (~2700 lines for 18 weapons); (c) replace `Inherits: <weapon>`
+  with the parent's covering TEMPLATE edges (recursively resolved through
+  weapon parents, unique `Inherits@w7N:` labels), then pin only the true
+  drift — resolved-identical with minimal text. Chains flatten correctly when parents are covered
+  recursively. `-Report:`-style cancels orphaned by the swap must be
+  deleted with the edge (dead-edge rule).
+- **The resolved `/Inherits` annotation leaf is part of the ordered-payload
+  contract** (2026-09-26). Dropping a dead bare `Inherits:` edge removes a
+  leaf the resolver records in output — ordered-verify counts it as a
+  payload diff. `RashidanGun_upgrade`'s dead edge+cancel pair stays for
+  that reason: dead-but-contract-bearing.
+- **A dead `^Warhead_*` edge still carries live top-level fields** — an
+  edge whose every `Warhead@` node is cancelled/unsurfaced can be dropped
+  resolved-identically, BUT the same template also emits weapon-level
+  `TargetActorCenter`, `ValidTargets`, `Range`, `ReloadDelay` that the
+  weapon was silently relying on. Always re-pin lost top-level fields.
+- **Materialization freezes resolved `Versus:` tables — a template regen
+  stales them** (2026-09-26, #508 rebase). Inlined `Warhead@X` pins carry the
+  Versus table resolved at emit time; when master regenerated every
+  `^Warhead_*` profile (R16, #506/#507), 33 converted weapons drifted. After
+  any base move, re-verify resolved-identity against the NEW base and re-sync
+  the baked Versus subtrees — never trust the original-base verification.
+- **`Inherits` applies at its FILE POSITION, not "parents first"** — both
+  `miniyaml.resolve` and the engine merge a parent's children into the
+  accumulated state where the Inherits line sits. Emitting materialized
+  pins or a family edge BELOW local pins lets later templates re-override
+  them. Conversely, a `-Key:` cancel sitting BETWEEN two Inherits lines is
+  load-bearing interleaving (kills an early parent's pin so later parents
+  re-provide it) — never hoist inherits across such cancels.
+- **Family-name collision check must scan `effects_*.yaml` and ALL yaml,
+  not just `man.weapons`** — the manifest's weapon list omits effects files,
+  so a weapon-only index misses canonical `^<pk>_<w>` defs there
+  (`^d2k_ordos_autogun_tank_small`, `^ts_gdi_tsioncannon`): emit → duplicate
+  def → S2/W4; fam_exists → partial family missing resolved nodes. Index
+  globally, and when the canonical family is partial, extend it.
 - **W7 weapon-parent edges: covering-edge swap is the WRONG default for
   legacy-bundle parents** (2026-09-24b, W7-remainder batch). Replacing
   `Inherits: ConcreteParent` with the parent's covering `Inherits@wh/proj/fx`
@@ -2561,3 +2657,61 @@ empty token (the separator after `Name:` is not depth). Verify restored blocks
 byte-identical against the pre-drain commit, then re-run find_empty_warhead —
 a wrong first-token depth parses fine for the engine but is skipped by
 indent-based audit scanners.
+
+## Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)
+
+Two reusable findings from the W1 arity sweep (43 + 24 dead edges removed,
+resolved-identical throughout):
+
+1. **An edge is dead iff removing it leaves resolved flat payload AND
+   ordered top-level keys identical** — test by re-running the merge with
+   the Inherits line skipped. Fully-shadowed edges are common after
+   covering-edge conversions: a later family template re-supplies every
+   leaf the edge carried, and the edge's only residue is a dead
+   `-Key:` cancel pair (provider gone → orphan; delete edge+cancel
+   TOGETHER, EMBER rule). 67 in-lane edges were dead this way, mostly
+   `^Projectile_*`/`^Warhead_*` singles and stale fx-template edges.
+
+2. **Regex-driven line edits must not index defs independently of the
+   resolver.** A header like `TSIonCannon: ### comment` fails
+   `^Key:\s*$` — `cur` stays on the previous def and the edge index used
+   by the apply diverges from the index the resolve-probe tested
+   (a verified drop on weapon A deleted an edge on weapon B). Fix used:
+   `^Key:(\s|$)` header match + `^	Inherits` depth-1 edge match. Better
+   still: enumerate edges from the parsed node's children and map back to
+   lines once.
+
+3. **Comparator scope:** verify tools that derive the checked weapon set
+   from `git log -1 --name-only` miss regressions in files untouched by
+   the last commit (19 batch-1 order diffs hid this way). Scope by explicit
+   file list or branch-vs-merge-base diff census, never last-commit names.
+
+- **Generated `^` template names must be checked corpus-wide, not per-file.**
+  W6 conversion emitted `^<theme>_<weapon>` templates named after the
+  consumer — several already existed in *other* files (W7 materialization
+  artifacts in `weapons/effects_*.yaml`). A same-named def in any loaded yaml
+  merges into one node; two `Inherits` edges to it trigger the engine's
+  "Parent type already inherited" crash at ruleset load (Python resolver
+  tolerates it). Fix: index every `^`-def under `mods/cameo` before naming.
+- **`-Field:` cancels nested inside a moved `Warhead@` block keep working in
+  the template, but `audit_orphan_cancels` can't see their provider** (it
+  evaluates `^` defs alone; the provider lives on the consumer's other
+  edges). Split such cancels back into a local untyped `Warhead@X:` pin.
+
+## List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)
+
+A per-def splicer that did `lines[s:e] = lines[s:e][:0]` (clear) then
+`newl = lines[:s+1] + out + lines[e:]` (rebuild) used the POST-mutation
+list with PRE-mutation index `e` — silently skipping ~46 real lines and
+leaving orphan depth-2 children (`Damage: 800`, a stray `Versus`) inside
+the previous def. Resolved payload diffed absurdly (`InstantHit`, a
+foreign `FREMODD1` report) — the diff was the alarm, not the edit.
+
+**Rules:**
+- Replace spans by `newl = lines[:s] + newblock + lines[e:]` on the
+  ORIGINAL list; apply multiple spans bottom-up.
+- After any scripted splice, verify with a BASE-file census (enumerate
+  def names in the pre-edit file), not the current-file census — a
+  deleted def is invisible to a census built from the damaged file.
+- A `### comment` on a def header line breaks `Name:$` def-end regexes;
+  match `:(\s|$)`.

@@ -1,5 +1,155 @@
 # Cameo — THE HANDOFF
 
+
+### DAWN — Stack consolidated onto master 91f865585 (2026-09-27)
+
+Per Claude's merge ruling (ONE PR, tip-evaluated): the whole DAWN weapon
+stack (#508 -> #527, incl. rule-4 #531) is merged onto current master in
+`devin/dawn/rule4-versus`. 23 conflicted defs verified payload-identical
+to master; `Laboratory_Bioball` keeps DAWN form (master's carries local
+Versus — gate). 3 wc2 defs took master's exact form. Sound refs =
+master's `pack|file` everywhere. Gate 891 == master. Audits clean.
+One order diff vs master remains: `Laboratory_Bioball` (justified above).
+
+### DAWN — Rule-4 Versus remediation (2026-09-26, branch pending)
+
+Claude's rule 4 (concrete weapons whose parent carried inline
+`Versus`/`PercentageVersus` must keep that inherit edge; merge gate
+`count_local_versus.py` <= 891) applied to DAWN's stack: the W7/W8
+materialization bodies had copied 67 parents' Versus ladders into
+concrete defs (gate 958). All 66 KEEP-EDGE defs reverted to their
+afb66c9b5 master form; W6 re-extracted on the 9 that still had local
+fx; W5 re-folded on wc2axeFirespear (pin+cancel); 196 orphan generated
+templates removed; Sound2's redundant local Versus dropped.
+Gate now **891**; corpus 3719 — 0 payload diffs, 0 missing; the 5 order
+diffs (wc2axe*, wc2{healing,holyvision}Super_hit, wc2highArrowFire)
+RESTORE master order — pre-existing tip drift the file-scoped
+comparators missed. Ratchets: W7 647->711 (the restored edges ARE the
+ruling), W8 298->302, W1 1435bp, W4 146, W6 346, W2 49.
+
+### DAWN — W6 in-lane sweep complete (2026-09-26, branch `devin/dawn/w6-fx`)
+
+All 174 in-lane W6 weapons (local effect-typed `Warhead@` blocks) converted
+to per-weapon `^<theme>_<weapon>` fx templates with `Inherits@w6fx[N]` edges
+at exact run positions. Corpus-wide verify 3809/3809 resolved+ordered
+identical; W6 521 -> 347 (remainder is out-of-lane packs). New traps
+recorded: corpus-wide `^` name collisions (W7MAT'd self-named templates in
+other files) and nested-cancel audit blindness (see LESSONS). Ratchets:
+W1 1534 bp, W4 203, W6 347, W7 647.
+
+### DAWN — R17 chip folds / W5 batch-1 (2026-09-26, branch `devin/dawn/r17-chips`)
+
+20 weapons / 21 chip warheads folded into their mains
+(`main.Damage += chip.Damage` verbatim per R17). ExtraDamage-class
+incl. the `_Auxiliary`-suffixed chips the suffix audit misses; plus
+ExtraRepair/ExtraHealing chips folded under the same arithmetic —
+flagged for Claude to confirm the repair family wants the same fold.
+Template-supplied chips removed via `-Warhead@chip:` cancels; 3 chips
+re-supplied by their templates needed cancel+delete together.
+VT-aware survivor pick on `D2KRepair` (heal chip -> heal main, not the
+repair-route `1Dam`). Fold verifier: each diff is exactly chip-removed
++ Damage-summed. 464/464 others identical, orphans 0, boot PASS.
+W5 172->153 global; ratchets re-locked (W5 now measured-pinned 153).
+Next W5 classes are design-routed: 1Dam flat folds, areanuke rings,
+VR splits, dual-caliber AA — classification posted to fleet.
+
+### DAWN — W1 dead-edge sweep (2026-09-26, branch `devin/dawn/w1-deadedges`)
+
+67 fully-shadowed Inherits edges removed across 54 weapons via
+resolve-drop probe (remove edge → re-merge → flat+ordered identical =
+dead; iterate to fixpoint for mutually-redundant pairs). 39 dead
+`-Key:` cancels whose provider was a dropped edge removed in the same
+pass (edge+cancel together or neither). 579/579 resolved+ordered
+identical, orphans 0, empty 0, dup-inherits unchanged.
+W1 258→248 (rate re-locked 1188→1142 bp), W2 71→58, W3 24→18,
+W8 303→298 — dead `^`-edges counted there too. Remaining >3-arity
+weapons sit at the resolved-faithful floor: dual/triple-family merges
+and whitelisted `^<faction>_<weapon>` addon templates — further W1
+reduction needs merged-template authoring (design-class). Includes
+`D2K_TowerMissile`/`mtank_pri2` dropping the dead
+`^Projectile_Missile_Heavy_D2K` edge (defs remain held on `^D2KMissile`).
+
+### DAWN — W8 batch-1 (2026-09-26, branch `devin/dawn/w8-batch1`)
+
+53 weapons across six semi-converted legacy templates converted to
+covering three-kind edges: `^D2K_Cannon` 19, `^D2KMissile` 15,
+`^D2KRocket` 6, `^OCannon` 6, `^Debris2Legacy` 4, `^OMissile` 3.
+Batch-2: `^CabalMissileLight` 7, `^TSMG` 5, `^WorkerAttack` 3 —
+resolved+ordered identical (249/249 incl. all batch-1 files), orphans 0,
+empty 0, boot PASS. In-lane W8 362 -> 303. Held for ruling:
+`D2K_TowerMissile` + `mtank_pri2` — their `@fx` shared template carries
+the fx family edge already (emitting it = engine dup-parent crash) and
+its `-Warhead@Effect:`/`+` re-add repositions the node in a way no
+external pin can reproduce. Remaining W8 class work:
+C:raw full-stack templates (`^HeavyBomb`,
+`^MediumFlameWeapon`, `^TSCannonEffect`, `^FlakWeapon`, `^Grenade`,
+`^TSDefaultMissile`...) need real family conversion — design-class, not
+edge surgery. `^LaserWeapon`/`^RailgunWeapon`/`^TeslaWeapon` held on the
+pending ExtraDamage ruling.
+
+
+## 2026-09-26g — DAWN: W7 weapon-edge conversion — my lanes cleared
+
+`Agent: Devin-DAWN · branch devin/dawn/w7-chains (stacked on w2-deadedges)`
+
+19 defs in my themes held `Inherits: <weapon>` edges — WC2 cross-race
+chains (incl. 3-deep DeathCoil), `^Debris2Legacy -> Debris`,
+`^TSHealWeapon -> Heal`. Each edge replaced by the parent's covering
+template edges (`Inherits@w7N: ^Warhead_/^Projectile_/^Effect_`), drift
+pinned and marked `# W7MAT`. 679/679 resolved+ordered identical;
+orphans 0; W7 in my themes: 18 -> 1 (Sound2 held — Ordos ruling).
+
+Resolved-faithful bucket rises documented in audit_weapon_shape:
+W2 46->53, W3 7->11, W4 40->44, W6 512->518 (marked pins), W1 234->239.
+
+---
+
+## 2026-09-26f — DAWN: W2 dead-edge sweep — 152 zero-contribution wh edges dropped
+
+`Agent: Devin-DAWN · branch devin/dawn/w2-deadedges (stacked on w7-packs / PR #508)`
+
+All 107 my-pack W2 weapons classified by live-vs-dead node survival: an
+`^Warhead_*` edge is dead when every `Warhead@` node it emits is absent from
+the resolved weapon. Dropped 152 dead edges in 86 weapons, re-pinned 42
+top-level fields (`TargetActorCenter`, `ValidTargets`, `Range`,
+`ReloadDelay`) the dead templates were silently carrying. 13 multi-main
+weapons left alone (deliberate _Flat/shaped duals, ExtraDamage chips).
+
+W2 **123 → 46**, W1 **287 → 234** (ratchets lowered) · resolved 679/679
+identical · orphans 0 · boot-gate PASS. RashidanGun_upgrade pair kept
+(dead edge whose `/Inherits` leaf is contract-bearing); TSBombSonic
+edge+cancel dropped together per the dead-edge rule.
+
+⚠ Dead-edge rule (EMBER): an edge is dead iff no emitted node survives
+AND no `-Key:` anywhere targets a node it emits — a cancel CONSUMES its
+provider edge. Delete edge+cancel together or neither. The earlier
+"mis-flag" framing was wrong: the audit was right, my sweep classifier
+was wrong.
+
+---
+
+## 2026-09-26e — DAWN: #508 rebased CLEAN + all four EMBER-routed items done
+
+`Agent: Devin-DAWN · branches devin/dawn/w7-packs-v2 (PR #508) + devin/dawn/routed-fixes`
+
+- **#508** cherry-picked onto post-wave master (`4416e43bd`) as `43f41c132` —
+  `mergeable: MERGEABLE, mergeStateStatus: CLEAN`. Re-verified vs the NEW base
+  (R16's Versus regen staled 33 baked tables — see devlog + LESSONS).
+- **B1:** `cameo_model.roster()` now gates on `Buildable.Factions` — the
+  engine-level roster gate the prereq closure never modeled. Sinks
+  `harkonnen → ordos_upgrade_lightfactory` (`Factions: ordos`); L1 6→5.
+  Remaining 5 rows verified deliberate (conyard provider lines added in team
+  sessions `4c6d4bfaa`/`f6956364a`; syndicate starting-units = mercenary
+  design). Cross-pack mount question stands for the fleet.
+- **Q-order:** consortium MCV `~warfactory` before `consortiumradar` →
+  prereq-order violations 0.
+- **MinRange:** all 7 normalized to `round(Range/25)*5` — td×4 + ordos
+  inline fixes; ra1 pair pinned `2365` over `155mm`'s stale 2670. → 0.
+- **G1:** all 7 are melee (`^DogJaw`, `^Warhead_Melee_*`) — the 2026-07-10
+  ruling already decided this class; added to `garrison_exceptions.yaml`
+  (39→46) rather than new weapons. → 0.
+
+---
 ## 2026-09-26f — EMBER: B3 intent backlog transcribed (587 → 0)
 
 `Agent: EMBER (A1) · branch devin/ember/b3-intent · base afb66c9b5`
@@ -186,6 +336,23 @@ pre-#495 values already stale on master (e.g. meters 318 vs measured 319) —
 re-measure on current master before PR.
 
 ---
+## 2026-09-26 — DAWN: W7 ContentPack batch (97 pack-level edges)
+
+`Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/w7-remainder · base a5ae366cc`
+
+The real W7 remainder was pack-level: 97 weapon-parent edges across the
+ContentPack weapon files (D2k 5 packs, SC Protoss/Terran/Zerg, TD GDI/Nod,
+TS GDI/Nod/Forgotten). 36 covering-swapped (clean parents), 60 materialized
+(bundle parents + children with pre-existing kind edges). Ordos `Sound2`
+held — its Atreides split-twin already carries `^d2k_atreides_sound2`, so a
+per-pack family edge would make the merged name 2 fx edges (W4) — parked
+pending the Sound2 split-def ruling.
+
+Verified: 637/637 pack weapons resolved-identical; orphan cancels 0;
+empty warheads 0; D1 0; D2 3636 (< HEAD); S2 5 = HEAD; W7 760→664,
+W4 41→40, W6 442→437 (ratchets lowered). New emitter lessons recorded in
+LESSONS_LEARNED (file-position Inherits semantics, effects_* name
+collisions, interleaved cancels).
 
 ## 2026-09-24b — DAWN: W7 remainder materialization (DAWN file-set, 33 edges)
 

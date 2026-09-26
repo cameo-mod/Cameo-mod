@@ -55,12 +55,10 @@
       "slot": "Armament@BOMBS",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy",
        "^td_gdi_set3"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "Napalm",
       "weapon_class_source": "template"
@@ -169,12 +167,10 @@
       "slot": "Armament@BOMBS",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy",
        "^td_gdi_set3"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "NapalmA10Carrier",
       "weapon_class_source": "template"
@@ -311,17 +307,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-2000",
+        "damage": "-3000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -2114,7 +2103,9 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "Rockets",
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light",
        "^AMTProjectile"
       ],
       "warheads": [
@@ -2142,7 +2133,9 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargetingGARRISONED",
       "versus_templates": [
-       "Rockets",
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light",
        "^AMTProjectile"
       ],
       "warheads": [
@@ -2720,7 +2713,9 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2746,7 +2741,9 @@
       "reloaddelay": "42",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2872,7 +2869,6 @@
       "slot": "Armament@Rocket",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
        "^Projectile_Missile_Light",
        "^td_gdi_td_gdi_havoc_rocket"
       ],
@@ -3026,7 +3022,6 @@
       "slot": "Armament@RocketGARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
        "^Projectile_Missile_Light",
        "^td_gdi_td_gdi_havoc_rocket"
       ],
@@ -3590,7 +3585,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5596",
       "reloaddelay": "20",
@@ -3598,17 +3593,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_officer_machinegun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3625,7 +3615,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5596",
       "reloaddelay": "20",
@@ -3633,17 +3623,12 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_officer_machinegun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
@@ -3786,7 +3771,9 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "Rockets"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -3813,7 +3800,9 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "Rockets"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -3950,24 +3939,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3983,24 +3967,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5240,7 +5219,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
@@ -5248,12 +5227,9 @@
       "versus_templates": [
        "APCGun"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_apc_apcgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
@@ -5267,7 +5243,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8502",
       "reloaddelay": "10",
@@ -5275,12 +5251,9 @@
       "versus_templates": [
        "APCGun"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_apc_apcgun_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5716,7 +5689,9 @@
       "requires": "!td_gdi_upgrade_highvelocitycannons",
       "slot": "Armament",
       "versus_templates": [
-       "120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^td_gdi_set0"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6211,17 +6186,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-2000",
+        "damage": "-3000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -6252,17 +6220,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-2000",
+        "damage": "-3000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -7017,11 +6978,12 @@
       "slot": "Armament@RocketsAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
-       "td_gdi_humveemkii_rocketshumvee2"
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa",
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa_1",
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa_2"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Light",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileAA_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2_AA",
       "weapon_class_source": "template"
@@ -7038,7 +7000,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5598",
       "reloaddelay": "84",
@@ -7046,15 +7008,11 @@
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy",
-       "td_gdi_humveemkii_rocketshumvee2",
-       "^AMTProjectile"
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2amt"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt",
       "weapon_class_source": "template"
@@ -7071,7 +7029,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8397",
       "reloaddelay": "84",
@@ -7079,16 +7037,15 @@
       "slot": "Armament@AdvancedMissileTargetingAA",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAA_Heavy_Flat",
-       "td_gdi_humveemkii_rocketshumvee2amt"
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa",
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa_1",
+       "^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa_2"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7582,7 +7539,9 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "227mm"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^td_tiberiandawn_227mm"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7611,7 +7570,9 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "227mm",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^td_tiberiandawn_227mm",
        "^AMTProjectile"
       ],
       "warheads": [

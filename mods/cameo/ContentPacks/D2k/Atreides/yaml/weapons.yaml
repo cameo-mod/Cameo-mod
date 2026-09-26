@@ -13,19 +13,36 @@
 # - Fremen_S: Fremen stealth weapon
 
 Sound2:
-	Inherits: Sound
 	Inherits@fx: ^d2k_atreides_sound2
-	Range: 5632
 	ReloadDelay: 40
+	Range: 5632
+	Report: SONIC1.WAV
 	Projectile: AreaBeam
 		Speed: 0c256
+		Inaccuracy: 333
+		InaccuracyType: PerCellIncrement
 		Duration: 2
+		DamageInterval: 2
 		Width: 0c256
+		Shape: Flat
+		Falloff: 100, 75, 50
+		Range: 0, 7500, 15000
+		BeyondTargetRange: 1c0
+		Color: C4C9C2
 	Warhead@1Dam: SpreadDamage
+		Range: 0, 32
+		Falloff: 100, 100
 		Damage: 4000
+		AffectsParent: false
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Dam: SpreadDamage
+		Range: 0, 32
+		Falloff: 100, 100
 		Damage: 400
-
+		AffectsParent: false
+		ValidRelationships: Ally
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 OrniBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy_D2K_Orni
@@ -36,16 +53,15 @@ OrniBomb:
 	BurstDelays: 5
 	Range: 2500
 
-
 OrniBombC:
 	Inherits@w71: ^Warhead_Demolition_Heavy_D2K_Orni
 	Inherits@w72: ^Projectile_GravityBomb_D2K
 	Inherits@w73: ^Effect_Demolition_Heavy_D2K_Orni
 	Range: 2500
 
-
 	BurstDelays: 5
 	Burst: 5
+
 OrniMissile:
 	Inherits: PhoenixRocket
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -66,7 +82,6 @@ OrniMissile:
 		Damage: 13345
 		ValidTargets: Ground, Air
 	MinRange: 1335
-
 
 OrniGunC:
 	Inherits@w71: ^d2k_shared_ornigun
@@ -89,7 +104,6 @@ OrniGunC:
 	MinRange: 1200
 	Warhead@2Eff:
 		ImpactSounds: EXPLSML1.WAV
-
 
 	Projectile: InstantHit
 		Inaccuracy: 1c256
@@ -143,8 +157,7 @@ D2KRepair:
 
 	Warhead@HealingWeapon:
 		Spread: 1000
-	Warhead@ExtraHealing:
-		Spread: 500
+		Damage: -3000
 	Warhead@HealingWeaponPercentage:
 		Spread: 5000
 	Warhead@HealingField:
@@ -163,13 +176,22 @@ D2KRepair:
 		Radius: 5000
 		ValidRelationships: Ally
 		ValidTargets: Heal
+	-Warhead@ExtraHealing:
 PhoenixRocket:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 920  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
+	Burst: 8  # W7MAT order-pin
+	BurstDelays: 10  # W7MAT order-pin
+	Warhead@1Dam:  # W7MAT order-pin
+	Warhead@Shrapnel:  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_atreides_phoenixrocket
 	ReloadDelay: 100
-	Burst: 8
 	Range: 4608
-	BurstDelays: 10
 	Projectile: Missile
 		Inaccuracy: 96
 		Speed: 256
@@ -188,5 +210,4 @@ PhoenixRocket:
 		Weapon: PhoenixRocketShrapnel
 		Amount: 3
 		ValidTargets: Ground, Water, Air
-	MinRange: 920
 

@@ -64,7 +64,6 @@
 	Warhead@EffectAir:
 		ImpactSounds: EXPLLG2.WAV
 
-
 ## D2K per-game EFFECT templates for the AP missile/rocket family (legacy ^D2KRocket/^D2KMissile remain AP).
 
 ^Effect_MissileAP_Heavy_D2K:
@@ -444,21 +443,19 @@
 
 110mm_Gun:
 	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 50
+	Range: 7979
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
-	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@7: ^D2K_Cannon
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 50
 	Range: 7979
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -466,15 +463,13 @@
 
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_shared_d2k_towermissile
+	MinRange: 2135
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 42
 	Range: 10684
-	Report: ROCKET1.WAV
 	TargetActorCenter: true
 	InvalidTargets: wall
-	MinRange: 2135
 	Burst: 2
 	BurstDelays: 5
 	Projectile: Missile
@@ -524,7 +519,11 @@ D2K_TowerMissile:
 # Used by Atreides, Corrino, Harkonnen.
 
 mtank_pri:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 2050  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_shared_mtank_pri
 	ReloadDelay: 150
 	Burst: 4
@@ -538,8 +537,6 @@ mtank_pri:
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Air
-
-	MinRange: 2050
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # Used by multiple D2k factions (explosion/death weapons).
@@ -556,7 +553,14 @@ D2KUnitExplodeLarge:
 # Used by multiple D2k factions.
 
 80mm_A:
-	Inherits: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 8000
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 2500
 
 D2KUnitExplodeMed:
 	Inherits: ^DamagingExplosion
@@ -589,7 +593,6 @@ D2KUnitExplodeMed:
 #       DEBRIS
 #######################################
 
-
 Debris:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_Debris
@@ -605,7 +608,9 @@ Debris:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
-	Inherits: Debris
+	Inherits@w71: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w72: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w73: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
 	Projectile: Bullet
 		Image: shrapnel2
 		Palette: d2keffect
@@ -614,6 +619,7 @@ Debris:
 		TrailInterval: 1
 	Warhead@Demolition_Light:
 		Damage: 16000
+		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Flame_Light:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
@@ -623,11 +629,33 @@ Debris:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 2250
 
-
+	ReloadDelay: 60  # W7MAT order-pin
+	Range: 2816  # W7MAT order-pin
+	Report: d2khc.wav  # W7MAT order-pin
 Debris2:
 	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
-	Inherits: ^Debris2Legacy
-	-Warhead@Demolition_Light:
+	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
+	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		TrailImage: small_trail
+	Projectile:  # W7MAT w8-repin
+		TrailPalette: effect75alpha
+	Projectile:  # W7MAT w8-repin
+		TrailInterval: 1
+	Projectile:  # W7MAT w8-repin
+		Image: shrapnel2
+	Report: d2khc.wav  # W7MAT w8-repin
+	ReloadDelay: 60  # W7MAT w8-repin
+	Range: 2816  # W7MAT w8-repin
+	Warhead@Effect:  # W7MAT w8-repin
+		Explosions: d2k_small_napalm
+	Warhead@Effect:  # W7MAT w8-repin
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@Concrete:  # W7MAT w8-repin
+		Damage: 2250
 	-Warhead@Flame_Light:
 	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
@@ -655,7 +683,6 @@ Debris3:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
 
-
 Debris4:
 	Inherits: Debris2
 	Projectile: Bullet
@@ -668,11 +695,9 @@ Debris4:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
 
-
 ################################
 #   CANNON
 ################################
-
 
 ^D2K_Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -685,12 +710,12 @@ Debris4:
 	Warhead@EffectAir:
 		ImpactSounds: EXPLMD2.WAV
 
-
 D2K_Rocket_Trooper:
 	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 64
+	Range: 6185
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
@@ -813,6 +838,7 @@ D2K_Rocket_Trooper:
 		Damage: 24000
 		PercentageScale: 0
 
+	TargetActorCenter: true
 WormJaw:
 	ReloadDelay: 10
 	InvalidTargets: Structure
@@ -820,19 +846,19 @@ WormJaw:
 	Warhead@NeededForTargeting: TargetDamage
 		InvalidTargets: Structure
 
-
 D2kBuildingExplode:
 	Inherits: ^DamagingExplosionHE
 	Inherits@fx: ^d2k_shared_d2kbuildingexplode
 
-
 WallExplode:
-
 
 	Inherits@fx: ^d2k_shared_wallexplode
 light_inf_lmg:
 	Inherits@finalmain: ^Warhead_Bullet_Light_Flat
-	Inherits@wh: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 5475
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
@@ -849,10 +875,14 @@ light_inf_lmg:
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
 light_inf_lmg_upgrade:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 4500
+	TargetActorCenter: true
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
@@ -877,8 +907,13 @@ light_inf_lmg_upgrade:
 		Damage: 6000
 		PercentageScale: 9984
 
+	TargetActorCenter: true
 Fremen_RPG:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 975  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_shared_fremen_rpg
 	ReloadDelay: 45
 	Range: 4864
@@ -892,12 +927,65 @@ Fremen_RPG:
 	-Warhead@RA2Crater:
 	Warhead@MissileAP_Heavy:
 		Damage: 4200
-	MinRange: 975
 
+^d2k_shared_hmg_fremen:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
+	Warhead@Effect: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^d2k_shared_hmg_fremen_fx:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
 
 HMG_fremen:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: HMG
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
+
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 3072
+	TargetActorCenter: true
+	Projectile: InstantHitWithFakeBullets
+		Image: 50CAL
+		Inaccuracy: 67
+		FakeBulletNumber: 2
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 2000
+		FakeBulletInaccuracy: 48
+		ContrailZOffset: 4000
+		ContrailStartColor: 888888
+		ContrailStartColorAlpha: 136
+		ContrailEndColor: 444444
+		ContrailEndColorAlpha: 0
+		ContrailStartWidth: 30
+		ContrailEndWidth: 60
+		ContrailLength: 6
+	Inherits: ^d2k_shared_hmg_fremen
+	-Warhead@Concrete:
+	-Warhead@ShieldHitEffect:
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 3
+		Range: 1250
+		ValidTargets: Shielded
+	Inherits@w6fx: ^d2k_shared_hmg_fremen_fx
 	Report: FREMODD1.WAV
 	Warhead@CollapsedHMG_fremenBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -955,15 +1043,6 @@ HMG_fremen:
 			Superheavy: 5
 		Falloff: 100, 50
 		Range: 0, 50
-	-Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
-		FriendlyFireDamage: 67
-		FriendlyFireSpread: 67
-
-
 Sound:
 	ReloadDelay: 77
 	Range: 7777
@@ -1009,8 +1088,6 @@ Sound:
 			Concrete: 77
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
-
-
 	Inherits@fx: ^d2k_shared_sound
 OrniGun:
 	StartBurstReport: FREMODD1.WAV
@@ -1037,8 +1114,6 @@ OrniGun:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		DamageCalculationType: ClosestTargetablePosition
 
-
-
 	Inherits@fx: ^d2k_shared_ornigun
 HMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1048,11 +1123,8 @@ HMG:
 	Range: 3072
 	Report: 20MMGUN1.WAV
 
-
 ordos_autogunturret:
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_shared_ordos_autogunturret
 	ReloadDelay: 22
@@ -1074,17 +1146,16 @@ ordos_autogunturret:
 		ProjectileStreakTailColorAlpha: 176
 		ContrailLength: 0
 		Speed: 4000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Bullet_Light:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 
-
 HMG_turret:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 22
+	Range: 7394
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_shared_hmg_turret
 	ReloadDelay: 22
@@ -1096,13 +1167,13 @@ HMG_turret:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1386,9 +1457,54 @@ D2K_155mm:
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 
+^d2k_shared_phoenixrocketshrapnel_1:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.3
+		FadeFrames: 6
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+
+^d2k_shared_phoenixrocketshrapnel_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Scorch: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 1
+
 PhoenixRocketShrapnel:
 	Inherits@wh: ^Warhead_Flame_Light
-	Inherits@proj: ^Projectile_Flame_Light
+	ReloadDelay: 35
+	Range: 3333
+	ValidTargets: Ground, Water, Air
+	Warhead@Flame_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+
+	Projectile: Missile
+		Shadow: true
+		HorizontalRateOfTurn: 33
+		CruiseAltitude: 3333
+		MinimumLaunchAngle: 33
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 333
+		Acceleration: 3
+		RangeLimit: 33333
+		LaunchAngle: 60
+		Inaccuracy: 333
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 66
@@ -1405,30 +1521,16 @@ PhoenixRocketShrapnel:
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Inherits@fx: ^d2k_ordos_phoenixrocketshrapnel
-	ReloadDelay: 35
+	Inherits@w6fx: ^d2k_shared_phoenixrocketshrapnel_1
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_shared_phoenixrocketshrapnel_2
 	BurstDelays: 1
 	StartBurstReport: flamer2.aud
 	Burst: 3
-	Range: 3333
-	ValidTargets: Ground, Water, Air
-	Projectile: Missile
-		Shadow: true
-		HorizontalRateOfTurn: 33
-		CruiseAltitude: 3333
-		MinimumLaunchAngle: 33
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		Speed: 333
-		Acceleration: 3
-		RangeLimit: 33333
-		LaunchAngle: 60
-		Inaccuracy: 333
-	Warhead@Flame_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-
 ^D2K155mmLegacy:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
