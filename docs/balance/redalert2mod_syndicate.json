@@ -6860,6 +6860,136 @@
       ],
       "weapon": "RA2MortarBike_elite",
       "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "36000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1500",
+      "pricing": false,
+      "range": "7500",
+      "reloaddelay": "67",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Explosion_Large_RA2"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2MortarBike",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "36000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1500",
+      "pricing": false,
+      "range": "8500",
+      "reloaddelay": "67",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "RA2MortarBike"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2MortarBike_elite",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -4520,6 +4520,566 @@
       ],
       "weapon": "Lunar_AmplifiedMP40Laser_elite",
       "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40LaserBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40LaserBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40LaserCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40LaserConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40LaserLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "4384",
+      "reloaddelay": "100",
+      "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "NaxiMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40Laser_eliteBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40Laser_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40Laser_eliteCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40Laser_eliteConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxiMP40Laser_eliteLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "5384",
+      "reloaddelay": "100",
+      "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "NaxiMP40Laser",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "NaxiMP40Laser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40LaserBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40LaserBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40LaserCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40LaserConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40LaserLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "4384",
+      "reloaddelay": "100",
+      "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONED_UP",
+      "versus_templates": [
+       "NaxiMP40Laser",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_YellowMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "11",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40Laser_eliteBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40Laser_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40Laser_eliteCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40Laser_eliteConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_YellowMP40Laser_eliteLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "5384",
+      "reloaddelay": "100",
+      "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONEDELITE_UP",
+      "versus_templates": [
+       "NaxiMP40Laser_elite",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_YellowMP40Laser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "7",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40LaserBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40LaserBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40LaserCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40LaserConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40LaserLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "4384",
+      "reloaddelay": "100",
+      "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONED_AMP",
+      "versus_templates": [
+       "NaxiMP40Laser",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_AmplifiedMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "12",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40Laser_eliteBullet_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40Laser_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40Laser_eliteCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40Laser_eliteConcussion_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedLunar_AmplifiedMP40Laser_eliteLaser_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": false,
+      "range": "5384",
+      "reloaddelay": "100",
+      "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
+      "slot": "Armament@GARRISONEDELITE_AMP",
+      "versus_templates": [
+       "NaxiMP40Laser_elite",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_AmplifiedMP40Laser_elite",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
