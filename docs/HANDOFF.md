@@ -1,5 +1,37 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — EMBER: AI phase 6b — ScoutBotModule on `devin/ember/ai-scout-6b`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-scout-6b · stacked on the 6a merge`
+
+Phase 6b of `docs/design/AI_FRANSBOT_RESEARCH.md` is implemented in
+`OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs`:
+
+* **Claims** up to `MaxScouts` (2) cheap scouts out of the squad manager's shared
+  `unitsHangingAroundTheBase` pool — `UpdatedIdleBaseUnits` hands out the live
+  list, so `Remove` is a real claim that keeps scouts out of attack sweeps.
+  Scout types are yaml-listed (`ScoutUnitTypes` on the module in
+  `mods/cameo/ai/ai.yaml`), never hard-coded in C#; a faction whose pack is not
+  loaded is skipped via `Rules.Actors.TryGetValue` (indexing throws).
+* **Production path**: when the pool yields nothing, the module requests one of
+  its listed types through `IBotRequestUnitProduction` (skips types already
+  requested and queues that cannot build them).
+* **Targeting** = staleness x interest minus danger minus distance over
+  `Situation.Regions`: staleness is per-region last-seen age (never-seen counts
+  as fully stale), interest is remembered enemy Army+Defence+Economy value plus
+  `ResourceSiteBonus` on regions containing a `ResourceMapBotModule` cluster.
+  One scout per region (`taken` set), `Move` orders only, `RetargetTicks`
+  recycle.
+* **Scout loss is information**: `IBotRespondToAttack` records the attacker's
+  `ValuedInfo.Cost` into `DangerByRegion` (decays after `DangerDecayTicks`),
+  published read-only as the 6c risk gate's input.
+* The scoring loop is a static seam (`PickScoutRegion`) — three unit tests pin
+  stalest-wins, taken-skipping, interest-vs-danger and the exhausted case.
+
+Verification: 232/232 unit tests green (incl. the #546 heaviness-mirror repair
+this branch was rebased onto), `ai_bot_player_gate` PASS, boot-gate PASS.
+**Note for 6c**: read `DangerByRegion` via `player.PlayerActor
+.TraitOrDefault<ScoutBotModule>()` — gated on `genericbot` like the master.
 ## 2026-09-27 — DAWN: PR #534 tonight-merge corrections (sounds + balance)
 
 `Agent: DAWN (A4) · branch devin/dawn/stack-consolidated · merge 1bb1c0308 on master 8f3d0a564`

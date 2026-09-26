@@ -609,5 +609,46 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(regions.IndexOf(new CPos(-3, -3)), Is.EqualTo(0));
 			Assert.That(regions.IndexOf(new CPos(-2, -10)), Is.EqualTo(1));
 		}
+
+		[Test]
+		public void ScoutPicksStalestRegionAndSkipsTaken()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var staleness = new Dictionary<int, int> { { 3, 5000 }, { 9, 9000 }, { 20, 2000 } };
+			var taken = new HashSet<int> { 9 };
+
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), taken,
+				i => staleness.GetValueOrDefault(i), i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(3));
+
+			taken.Clear();
+			picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), taken,
+				i => staleness.GetValueOrDefault(i), i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(9));
+		}
+
+		[Test]
+		public void ScoutPrefersInterestingAndSafeRegions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var staleness = new Dictionary<int, int> { { 3, 5000 }, { 9, 5000 } };
+
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => staleness.GetValueOrDefault(i), i => i == 9 ? 4000 : 0, i => 0);
+			Assert.That(picked, Is.EqualTo(9));
+
+			picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => staleness.GetValueOrDefault(i), i => 0, i => i == 9 ? int.MaxValue : 0);
+			Assert.That(picked, Is.EqualTo(3));
+		}
+
+		[Test]
+		public void ScoutIgnoresFullyExploredRegions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => 0, i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(-1));
+		}
 	}
 }
