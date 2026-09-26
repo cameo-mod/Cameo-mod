@@ -171,7 +171,35 @@ ra1_soviets_molotovconscript_conscriptmolotov:
 
 ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
-	Inherits: ra1_soviets_molotovconscript_conscriptmolotov
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Grenade_Light
+	Inherits@4: ^Effect_Flame_Light
+	ReloadDelay: 50
+	Range: 5725
+	Report: toss1.aud
+	Projectile: Bullet
+		Speed: 150
+		LaunchAngle: 66
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
+		ContrailStartColor: FF8888FF
+		ContrailEndColor: FFFFFF22
+	Warhead@Flame_Light:
+		Damage: 16000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 3
+		Duration: 40
+		Speed: 8, 24
+		TurnRate: 4
+		Image: burn_l
+		Sequences: idle
+		Palette: ra_temperat
+		Weapon: CHFlame
+		InvalidTargets: Water
+	# W7MAT inline of ra1_soviets_molotovconscript_conscriptmolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:

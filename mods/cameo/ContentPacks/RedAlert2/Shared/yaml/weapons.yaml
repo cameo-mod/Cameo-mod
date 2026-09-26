@@ -1242,7 +1242,88 @@ RA2HoverMissile_elite:
 		Falloff: 100, 45, 15, 0
 RA2HoverMissile_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
-	Inherits: RA2HoverMissile
+	Inherits@xRA2HoverMissile0: ^Warhead_MissileAP_Light
+	Inherits@xRA2HoverMissile1: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
+	Range: 5760
+	ReloadDelay: 28
+	Burst: 2
+	BurstDelays: 4
+	Report: vifvatta.wav
+	ValidTargets: Ground, Water
+	Warhead@Arrow_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		-ImpactSounds:
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileHE_Light: AreaDamage
+		Versus:
+			None: 93
+			Light: 156
+			Medium: 110
+			Heavy: 96
+			Superheavy: 78
+			Scout: 199
+			Plate: 39
+			Concrete: 88
+			Wood: 175
+			Steel: 112
+			Flak: 68
+			Heroic: 38
+			Bomber: 90
+			Fighter: 115
+			Helicopter: 77
+			Spaceship: 64
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 137
+		PercentageVersus:
+			None: 4
+			Light: 14
+			Medium: 12
+			Heavy: 10
+			Superheavy: 9
+			Scout: 16
+			Plate: 2
+			Concrete: 11
+			Wood: 15
+			Steel: 13
+			Flak: 3
+			Heroic: 1
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 17
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9992
+		PercentageSpread: 50
+		InvalidTargets: Air
+	Projectile:
+		-TrailImage:
+		Image: ra2_dragon
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@MissileHE_Light:
+		Spread: 100
+		Falloff: 100, 45, 15, 0
+	# W7MAT inline of RA2HoverMissile
 	ValidTargets: Air
 	Range: 8640
 	Projectile: Missile
@@ -1513,7 +1594,85 @@ RA2ThunderboltMissile_elite:
 		Falloff: 100, 0
 RA2ThunderboltMissile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
-	Inherits: RA2ThunderboltMissile
+	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Light_Flat:
+	Warhead@MissileAP_Light: AreaDamage
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9975
+		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileAP_Light:
+		Spread: 43
+		Falloff: 100, 0
+	# W7MAT inline of RA2ThunderboltMissile
 	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 8640
@@ -1972,7 +2131,85 @@ RA2MultiThunderboltMissile_elite:
 		Falloff: 100, 0
 RA2MultiThunderboltMissile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
-	Inherits: RA2MultiThunderboltMissile
+	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Light_Flat:
+	Warhead@MissileAP_Light: AreaDamage
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9975
+		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileAP_Light:
+		Spread: 43
+		Falloff: 100, 0
+	# W7MAT inline of RA2MultiThunderboltMissile
 	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 9255
@@ -2488,7 +2725,21 @@ RA2155mm:
 		Damage: 16000
 		Spread: 400
 RA2155mm_elite:
-	Inherits: RA2155mm
+	Inherits@xRA2155mm0: ^Warhead_CannonHE_Heavy
+	Inherits@xRA2155mm1: ^Projectile_Shell_Heavy
+	Inherits@xRA2155mm2: ^Effect_Grey_Explosion_Large_RA2
+	ReloadDelay: 40
+	Range: 8000
+	Report: vdesatta.wav, vdesattb.wav
+	InvalidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Blockable: false
+		Speed: 800
+		ContrailLength: 8
+	Warhead@CannonHE_Heavy:
+		Damage: 16000
+		Spread: 400
+	# W7MAT inline of RA2155mm
 	Range: 9000
 	Burst: 2
 	BurstDelays: 3
@@ -7392,7 +7643,100 @@ RA2TorpTube:
 			None: 10
 
 RA2TorpTube_elite:
-	Inherits: RA2TorpTube
+	Inherits@xRA2TorpTube0: ^Warhead_MissileAP_Heavy
+	Inherits@xRA2TorpTube1: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
+	ReloadDelay: 90
+	Range: 9000
+	Report: vbooat2a.wav
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile:
+	Projectile: Missile
+		Image: Patriot
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 2
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 90
+		MinimumLaunchSpeed: 90
+		Speed: 180
+		Acceleration: 1
+		HorizontalRateOfTurn: 5
+		RangeLimit: 18000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@Demolition_Light:
+		Damage: 18000
+	Warhead@MissileAP_Heavy:
+		Damage: 18000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_Heavy_Flat:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
+	Warhead@Effect:
+		Explosions: ra2_large_clsn
+		ImpactSounds: gexp14a.wav
+		ExplosionPalette: tseffect
+	Warhead@MissileAP_Heavy_Flat: AreaDamage
+	Warhead@MissileAP_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 85
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+	# W7MAT inline of RA2TorpTube
 	Range: 10000
 	Burst: 2
 	BurstDelays: 3
@@ -7870,7 +8214,18 @@ RA2FLAKAG:
 	ValidTargets: Ground, Water
 
 RA2FlakTrackGun:
-	Inherits@4: RA2FLAKAG
+	Inherits@xRA2FLAKAG0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAG1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAG2: ^Effect_Flak_Puff_RA2
+	Report: vflaat1a.wav, vflaat1b.wav
+	Projectile: Bullet
+		Speed: 512
+		Blockable: false
+		LaunchAngle: 75
+		Inaccuracy: 0
+		Image: BOMB
+	ValidTargets: Ground, Water
+	# W7MAT inline of RA2FLAKAG
 	Inherits@fx_cover: ^Effect_Watersplash_Small_RA2
 	ReloadDelay: 18
 	Range: 5528
@@ -8003,7 +8358,29 @@ RA2DoublePistols:
 		Damage: 7
 
 RA2DoublePistolsIFV:
-	Inherits: RA2DoublePistols
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: itanatta.wav, itanattb.wav
+	ReloadDelay: 12
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Projectile: Bullet
+		Speed: 10000
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 14000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 14000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 7
+	# W7MAT inline of RA2DoublePistols
 	ValidTargets: Ground, Water, Air
 	Warhead@Sniper_Light:
 		ValidTargets: Ground, Water, Air

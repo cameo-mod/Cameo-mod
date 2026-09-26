@@ -9798,7 +9798,21 @@ AAGunBoatCannon:
 		Damage: 16000
 		Spread: 400
 AAGunBoatCannon_elite:
-	Inherits: RA2155mm
+	Inherits@xRA2155mm0: ^Warhead_CannonHE_Heavy
+	Inherits@xRA2155mm1: ^Projectile_Shell_Heavy
+	Inherits@xRA2155mm2: ^Effect_Grey_Explosion_Large_RA2
+	ReloadDelay: 40
+	Range: 8000
+	Report: vdesatta.wav, vdesattb.wav
+	InvalidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Blockable: false
+		Speed: 800
+		ContrailLength: 8
+	Warhead@CannonHE_Heavy:
+		Damage: 16000
+		Spread: 400
+	# W7MAT inline of RA2155mm
 	Range: 10000
 	Burst: 2
 	BurstDelays: 3

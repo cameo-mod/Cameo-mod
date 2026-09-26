@@ -1986,7 +1986,18 @@ RA2vulcan:
 			Spaceship: 6
 			Superheavy: 5
 RA2CRFlakGuyGun:
-	Inherits: RA2FLAKAG
+	Inherits@xRA2FLAKAG0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAG1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAG2: ^Effect_Flak_Puff_RA2
+	Report: vflaat1a.wav, vflaat1b.wav
+	Projectile: Bullet
+		Speed: 512
+		Blockable: false
+		LaunchAngle: 75
+		Inaccuracy: 0
+		Image: BOMB
+	ValidTargets: Ground, Water
+	# W7MAT inline of RA2FLAKAG
 	ReloadDelay: 17
 	Range: 5627
 	ValidTargets: Ground, Water

@@ -1831,7 +1831,100 @@ NaxZombieSupportWeaponTanks:
 		ValidTargets: Ground, Air
 
 NaxTorpTube:
-	Inherits: RA2TorpTube
+	Inherits@xRA2TorpTube0: ^Warhead_MissileAP_Heavy
+	Inherits@xRA2TorpTube1: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
+	ReloadDelay: 90
+	Range: 9000
+	Report: vbooat2a.wav
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile:
+	Projectile: Missile
+		Image: Patriot
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 2
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 90
+		MinimumLaunchSpeed: 90
+		Speed: 180
+		Acceleration: 1
+		HorizontalRateOfTurn: 5
+		RangeLimit: 18000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@Demolition_Light:
+		Damage: 18000
+	Warhead@MissileAP_Heavy:
+		Damage: 18000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_Heavy_Flat:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
+	Warhead@Effect:
+		Explosions: ra2_large_clsn
+		ImpactSounds: gexp14a.wav
+		ExplosionPalette: tseffect
+	Warhead@MissileAP_Heavy_Flat: AreaDamage
+	Warhead@MissileAP_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 85
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+	# W7MAT inline of RA2TorpTube
 	Warhead@EffectWater: CreateEffect
 		ImpactSounds: nax_submissileexp.wav
 	Warhead@Effect:

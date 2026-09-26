@@ -2575,7 +2575,29 @@ GuardianGIMG2_elite:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2DoublePistols_elite:
-	Inherits: RA2DoublePistols
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: itanatta.wav, itanattb.wav
+	ReloadDelay: 12
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Projectile: Bullet
+		Speed: 10000
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 14000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 14000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 7
+	# W7MAT inline of RA2DoublePistols
 	Range: 9000
 	Burst: 4
 
