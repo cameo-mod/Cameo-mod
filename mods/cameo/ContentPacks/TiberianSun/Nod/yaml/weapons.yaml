@@ -43,7 +43,6 @@
 		Delay: 6
 
 TSAux155mm:
-	Inherits: ^ts_nod_tsaux155mm
 	ValidTargets: Ground, Water
 	ReloadDelay: 135
 	Range: 13083
@@ -100,11 +99,55 @@ TSAux155mm:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+	Inherits: ^ts_nod_tsaux155mm
+	-Warhead@Concrete:
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: building
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 15
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
 	MinRange: 2615
 	Projectile: Bullet
 		Speed: 280
@@ -913,13 +956,13 @@ TSShadowTeamAttach:
 	Warhead@2: TargetDamage
 
 TSShadowTeamBomb:
-	Inherits@fx: ^ts_nod_tsshadowteambomb
 	Projectile: InstantHit
 	Warhead@1Dam: AreaDamagePercentage
 		ValidTargets: demolishable
 		Spread: 1000
 		Damage: 100
 
+	Inherits@fx: ^ts_nod_tsshadowteambomb
 TSShadowTeamTargeting:
 	ReloadDelay: 500
 	Range: 12000
@@ -1053,7 +1096,6 @@ TSLaserHarpyClaw:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSLaserHarpyMultiClaw:
-	Inherits: ^ts_nod_tslaserharpymulticlaw
 	Warhead@Laser_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1154,25 +1196,43 @@ TSLaserHarpyMultiClaw:
 		SecondaryBeamColor: FFFFFF
 		Inaccuracy: 1024
 		TrackTarget: false
+	Inherits: ^ts_nod_tslaserharpymulticlaw
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Scorch:
+	-Warhead@ShieldHitEffect:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 	Burst: 4
 	BurstDelays: 0
 	Report: cygun1.aud
 	SoundVolume: 0.25
-	Warhead@Bullet_Medium: AreaDamage
-		Damage: 0
-		ValidTargets: Ground, Air
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 0
 		ValidTargets: Ground, Air
-	-Warhead@Bullet_Medium:
 
 ^ts_nod_tslaserharpyaoeclaw:
 	Warhead@Concrete: DamagesConcrete
@@ -1200,7 +1260,6 @@ TSLaserHarpyMultiClaw:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSLaserHarpyAOEClaw:
-	Inherits: ^ts_nod_tslaserharpyaoeclaw
 	Warhead@Laser_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1299,25 +1358,43 @@ TSLaserHarpyAOEClaw:
 		SecondaryBeamWidth: 18
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
+	Inherits: ^ts_nod_tslaserharpyaoeclaw
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Scorch:
+	-Warhead@ShieldHitEffect:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 	Burst: 4
 	BurstDelays: 0
 	Report: cygun1.aud
 	SoundVolume: 0.25
-	Warhead@Bullet_Medium: AreaDamage
-		Spread: 300
-		Falloff: 100, 50, 25
 	Warhead@LaserWeapon: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Spread: 300
 		Falloff: 100, 50, 25
-	-Warhead@Bullet_Medium:
 
 TSToxinRifle:
 	Inherits@wh: ^Warhead_Chemical_Light

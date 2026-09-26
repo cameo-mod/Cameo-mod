@@ -295,7 +295,6 @@ CycloneRockets:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 CycloneRocketsLockOn:
-	Inherits: ^sc_terran_cyclonerocketslockon
 	ValidTargets: lockon
 	ReloadDelay: 35
 	Range: 10000
@@ -376,10 +375,41 @@ CycloneRocketsLockOn:
 		InaccuracyType: PerCellIncrement
 		Palette: d2keffect
 		TrailPalette: effect75alpha
+	Inherits: ^sc_terran_cyclonerocketslockon
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
 	Burst: 6
@@ -989,12 +1019,19 @@ GhostSniper:
 
 GhostSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
-	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^sc_terran_ghostsniperlockdown
 	ValidTargets: Vehicle, Air, Shielded
 	ReloadDelay: 22
 	Range: 8428
 	TargetActorCenter: true
+	Warhead@Tesla_Super: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
+		PercentageScale: 2000
+		ValidTargets: Ground, Water, Air
+		Damage: 44000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Tesla_Super_ExtraDamage:
+	Inherits@proj: ^Projectile_Lightning_Super
 	Projectile: Bullet
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -1014,11 +1051,49 @@ GhostSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailZOffset: 4000
 		Blockable: false
+	Inherits@fx: ^sc_terran_ghostsniperlockdown
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy, Neutral
+		Damage: 24000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 	Report: TGhFir00.aud
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1123,25 +1198,6 @@ GhostSniperLockdown:
 			Spaceship: 6
 			Superheavy: 5
 	InvalidTargets: lockdowned
-	Warhead@Tesla_Super: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		PercentageScale: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 44000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@Tesla_Super_ExtraDamage:
-	Warhead@SniperMediumMissile:
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Spread: 1
 		Falloff: 100, 0
@@ -1156,13 +1212,6 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 24000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@SniperMediumMissile:
-	-Warhead@Bullet_Light:
 
 SpecterSniper:
 	Inherits: ^Warhead_Bullet_Heavy
@@ -1348,12 +1397,19 @@ SpecterSniper:
 
 SpecterSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
-	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^sc_terran_spectersniperlockdown
 	ValidTargets: Vehicle, Air, Shielded
 	ReloadDelay: 33
 	Range: 7922
 	TargetActorCenter: true
+	Warhead@Tesla_Super: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
+		PercentageScale: 2000
+		ValidTargets: Ground, Water, Air
+		Damage: 88000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Tesla_Super_ExtraDamage:
+	Inherits@proj: ^Projectile_Lightning_Super
 	Projectile: Bullet
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -1373,11 +1429,49 @@ SpecterSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailZOffset: 4000
 		Blockable: false
+	Inherits@fx: ^sc_terran_spectersniperlockdown
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy, Neutral
+		Damage: 48000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 	Report: TGhFir00.aud
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1482,25 +1576,6 @@ SpecterSniperLockdown:
 			Spaceship: 6
 			Superheavy: 5
 	InvalidTargets: lockdowned
-	Warhead@Tesla_Super: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		PercentageScale: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 88000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@Tesla_Super_ExtraDamage:
-	Warhead@SniperMediumMissile:
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Spread: 1
 		Falloff: 100, 0
@@ -1515,13 +1590,6 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 48000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@SniperMediumMissile:
-	-Warhead@Bullet_Light:
 
 VultureGrenade:
 	Inherits@roleflat: ^Warhead_Demolition_Light_Flat
@@ -3049,8 +3117,6 @@ BCLaser:
 		Delay: 9
 
 BCYamatoCannon:
-	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
-	Inherits: ^sc_terran_bcyamatocannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 38
 	Range: 6800
@@ -3141,10 +3207,59 @@ BCYamatoCannon:
 		TrailImage: smokey
 		TrailInterval: 1
 		VerticalRateOfTurn: 20
+	Inherits: ^sc_terran_bcyamatocannon
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@RA2Scorch:
+	-Warhead@ShieldHitEffect:
+	-Warhead@ShieldHitEffectNuclear:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	-Warhead@Smudge3:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: nuke_explosion
+		ImpactSounds: nukexplo.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Report: yamatoshoot.wav
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
@@ -3173,6 +3288,24 @@ BCYamatoCannon:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
@@ -3224,6 +3357,24 @@ BCYamatoCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 75
@@ -3249,6 +3400,9 @@ BCYamatoCannon:
 			Scout: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
@@ -3360,39 +3514,6 @@ BCYamatoCannon:
 		OwnerType: InternalName
 		Range: 1
 	SoundVolume: 5
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 16000
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 16000
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 16000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 16000
-	-Warhead@HeavyAAWeapon:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@LaserWeapon:
-	-Warhead@NuclearWarhead:
-	-Warhead@RailgunWeapon:
-	-Warhead@Plasma_Heavy_Flat:
 
 PhobosLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat

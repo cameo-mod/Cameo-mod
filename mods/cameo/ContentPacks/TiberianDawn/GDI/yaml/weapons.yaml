@@ -112,9 +112,39 @@ RocketsAMT:
 	Report: bazook1.aud
 td_gdi_commando_sniper_elite:
 	Inherits@wh: ^Warhead_Railgun_Heavy
-	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^td_gdi_td_gdi_commando_sniper_elite
 	ValidTargets: Infantry, Monster, Garrisoned
+	ReloadDelay: 25
+	Range: 8086
+	Warhead@Railgun_Heavy:
+		Damage: 40000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Railgun_Heavy_ExtraDamage:
+		Spread: 1
+		Falloff: 100, 0
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Projectile: Bullet
+		Duration: 16
+		Inaccuracy: 40
+		BeamColor: 0080FFC8
+		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
+		HitAnim:
+		Image: 50CAL
+		FakeBulletNumber: 1
+		FakeBulletSpeed: 10000
+		Width: 100
+		ContrailZOffset: 4000
+		ContrailStartColor: FF9933
+		ContrailStartColorAlpha: 255
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColorAlpha: 0
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 40
+		Speed: 10000
+
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Spread: 1
@@ -165,43 +195,29 @@ td_gdi_commando_sniper_elite:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-	Projectile: Bullet
-		Duration: 16
-		Inaccuracy: 40
-		BeamColor: 0080FFC8
-		HelixPlayerColor: true
-		Blockable: false
-		ZOffset: 2048
-		HitAnim:
-		Image: 50CAL
-		FakeBulletNumber: 1
-		FakeBulletSpeed: 10000
-		Width: 100
-		ContrailZOffset: 4000
-		ContrailStartColor: FF9933
-		ContrailStartColorAlpha: 255
-		ContrailEndColorUsePlayerColor: true
-		ContrailEndColorAlpha: 0
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 40
-		Speed: 10000
-
+	Inherits@fx: ^td_gdi_td_gdi_commando_sniper_elite
+	-Warhead@Glow:
+	-Warhead@ShieldHit:
+	-Warhead@Concrete:
+	-Warhead@Effect1:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Report: ramgun2.aud
-	ReloadDelay: 25
-	Range: 8086
-	Warhead@Railgun_Heavy:
-		Damage: 40000
-		Spread: 1
-		Falloff: 100, 0
-	Warhead@Railgun_Heavy_ExtraDamage:
-		Spread: 1
-		Falloff: 100, 0
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@Effect1: CreateEffect
+		Explosions: small_poof
 APCGun:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -248,7 +264,6 @@ APCGun:
 		ValidTargets: Shielded
 
 td_gdi_apc_apcgun_AA:
-	Inherits: ^td_gdi_td_gdi_apc_apcgun_aa
 	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -320,18 +335,35 @@ td_gdi_apc_apcgun_AA:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 		ContrailLength: 10
+	Inherits: ^td_gdi_td_gdi_apc_apcgun_aa
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Report: gun20.aud
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Air
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 td_gdi_boxer_boxercannonag:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@fx: ^td_gdi_td_gdi_boxer_boxercannonag
@@ -607,12 +639,50 @@ td_gdi_boxer_boxercannonag:
 
 td_gdi_boxer_boxercannon_AA:
 	Inherits@roleflat: ^Warhead_Flak_Medium_Flat
+	Warhead@Flak_Medium_Flat:
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 0
 	Inherits: ^td_gdi_td_gdi_boxer_boxercannon_aa
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@Glow:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ImpactActors: false
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactActors: false
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
 	ValidTargets: Air
 	ReloadDelay: 11
 	Range: 7290
@@ -800,10 +870,6 @@ td_gdi_boxer_boxercannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Air
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
@@ -812,15 +878,6 @@ td_gdi_boxer_boxercannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@LightMissile:
-	Warhead@Flak_Medium_Flat:
-		ValidTargets: Air
-		Damage: 6000
-		PercentageScale: 0
 td_gdi_skyshield_skyshieldcannon:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
 	Inherits@fx: ^td_gdi_td_gdi_skyshield_skyshieldcannon
@@ -1211,22 +1268,22 @@ td_gdi_mammothtank_mammothmissilesamt:
 	Burst: 2
 td_gdi_mlrs_227mmamt:
 	Inherits@w71: ^Warhead_MissileAP_Medium
-	Inherits@w72: ^Projectile_Missile_Medium
-	Inherits@w73: ^td_tiberiandawn_227mm
-	Inherits@2: ^AMTProjectile
 	Range: 9993
-	MinRange: 1999
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 
+	ReloadDelay: 111
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^td_tiberiandawn_227mm
+	MinRange: 1999
+	Burst: 6
+	BurstDelays: 5
+	Report: rocket1.aud
+	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		Inaccuracy: 800
 
-	BurstDelays: 5
-	ReloadDelay: 111
-	Burst: 6
-	Report: rocket1.aud
 td_gdi_orca_orcamissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@fx: ^td_gdi_td_gdi_orca_orcamissiles
@@ -2578,7 +2635,6 @@ td_gdi_empgrenadier_grenade_emp:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 td_gdi_empgrenadier_grenadeexplode_emp:
-	Inherits@fx: ^td_gdi_td_gdi_empgrenadier_grenadeexplode_emp
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 111
 	Range: 5694
@@ -2692,6 +2748,17 @@ td_gdi_empgrenadier_grenadeexplode_emp:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Inherits@fx: ^td_gdi_td_gdi_empgrenadier_grenadeexplode_emp
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@Glow:
+	-Warhead@RA2Crater:
+	-Warhead@RA2Scorch:
+	-Warhead@Smudge:
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -2745,6 +2812,20 @@ td_gdi_empgrenadier_grenadeexplode_emp:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ValidTargets: Ground, Ship
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -2775,6 +2856,31 @@ td_gdi_empgrenadier_grenadeexplode_emp:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -3168,11 +3274,21 @@ td_gdi_humveemkii_rocketshumvee2:
 
 td_gdi_humveemkii_rocketshumvee2_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
-	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa
 	ValidTargets: Air
 	ReloadDelay: 84
 	Range: 8397
 	TargetActorCenter: true
+	Warhead@MissileAA_Light: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -3193,23 +3309,43 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 		HomingActivationDelay: 1
 		RangeLimit: 20000
 		PointDefenseTypes: Missile
+	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 	Report: bazook1.aud
-	Warhead@MissileAA_Light: AreaDamage
-		PercentageDenominator: 10000
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-
 ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
@@ -3335,12 +3471,26 @@ td_gdi_humveemkii_rocketshumvee2amt:
 
 td_gdi_humveemkii_rocketshumvee2amt_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
-	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa
 	ValidTargets: Air
 	ReloadDelay: 84
 	Range: 8397
 	TargetActorCenter: true
+	Warhead@MissileAA_Heavy: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9997
+		PercentageSpread: 50
+		Versus:
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			Shield: 172
+
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -3367,32 +3517,43 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 		ContrailEndWidth: 5
 		MinimumLaunchAngle: 50
 		MaximumLaunchAngle: 50
+	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 	Report: bazook1.aud
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Air
-	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAA_Heavy_Flat:
-	Warhead@MissileAA_Heavy: AreaDamage
-		PercentageDenominator: 10000
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		Damage: 16000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 9997
-		PercentageSpread: 50
-		Versus:
-			HAZMAT: 87
-			COMPOSITE: 67
-			BLAST: 56
-			Shield: 172
-
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits@collapseexplosive: ^Warhead_Concussion_Medium
@@ -4010,7 +4171,6 @@ td_gdi_defenserig_gdirigphalanx:
 		ValidRelationships: Ally
 
 GDIRigDroneTargetingTower:
-	Inherits: ^td_gdi_gdirigdronetargetingtower
 	ReloadDelay: 5
 	Range: 6000
 	Burst: 1
@@ -4130,8 +4290,7 @@ GDIRigDroneTargetingTower:
 		ValidTargets: Repairing, Repair
 		ActorFlashOverlayAlpha: 0.15
 		ActorFlashCount: 1
-	#Range: 9350
-
+	Inherits: ^td_gdi_gdirigdronetargetingtower
 GDIRigPDLaserTower:
 	Inherits@w71: ^Warhead_Laser_Heavy
 	Inherits@w72: ^Projectile_Laser_Heavy
@@ -4848,7 +5007,6 @@ td_gdi_missileboat_gunboatmissileamt:
 	InvalidTargets: Underwater, Submarine
 	Burst: 2
 TDIonCannon:
-	Inherits@fx: ^td_gdi_tdioncannon
 	Range: 12288
 	AirThreshold: 99c0
 	ValidTargets: Ground, Water, Air
@@ -4866,6 +5024,7 @@ TDIonCannon:
 		AirThreshold: 99c0
 		Delay: 9
 
+	Inherits@fx: ^td_gdi_tdioncannon
 TDIonCannonLaunch:
 	AirThreshold: 99c0
 	Range: 101376
@@ -4915,15 +5074,11 @@ TDIonBeam:
 		ValidTargets: Shielded
 
 TDIonCannonDamage:
-	Inherits: ^td_gdi_tdioncannondamage
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
 
-# CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): GDI
-# minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
-# base+upgrade rename law. M16/M16AP stay for their other users.
 	Warhead@Tesla_Super: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4987,6 +5142,9 @@ TDIonCannonDamage:
 		Duration: 20
 		Range: 1250
 		ValidTargets: Shielded
+	Inherits: ^td_gdi_tdioncannondamage
+	-Warhead@3Smu_area:
+	-Warhead@Effect:
 	Report: tesla1.aud
 	Warhead@IonCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -5010,6 +5168,20 @@ TDIonCannonDamage:
 		AffectsParent: True
 		Delay: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@3Smu_area: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 1
+		Delay: 3
+	Warhead@Effect: CreateEffect
+		ImpactSounds: ion1.aud
+		Volume: 5
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		GlowColor: 32C8FF
+		GlowScale: 7.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 5
 	Warhead@GroundFireArea: SpawnActorInArea
 		Actor: groundfire
 		Range: 3
@@ -5161,7 +5333,6 @@ td_gdi_rocketsoldier_rockets:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 td_gdi_rocketsoldier_rocketsamt:
-	Inherits: ^td_gdi_td_gdi_rocketsoldier_rocketsamt
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 56
 	Range: 6500
@@ -5244,10 +5415,41 @@ td_gdi_rocketsoldier_rocketsamt:
 		ContrailEndWidth: 5
 		MinimumLaunchAngle: 50
 		MaximumLaunchAngle: 50
+	Inherits: ^td_gdi_td_gdi_rocketsoldier_rocketsamt
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Report: bazook1.aud
 
@@ -5275,7 +5477,6 @@ td_gdi_rocketsoldier_rocketsamt:
 		ValidTargets: Shielded
 
 td_gdi_apc_apcgun:
-	Inherits: ^td_gdi_td_gdi_apc_apcgun
 	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -5347,10 +5548,33 @@ td_gdi_apc_apcgun:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 		ContrailLength: 10
+	Inherits: ^td_gdi_td_gdi_apc_apcgun
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Report: gun20.aud
 
@@ -5368,13 +5592,12 @@ td_gdi_battletank_120mm:
 	Report: tnkfire4.aud
 td_gdi_mlrs_227mm:
 	Inherits@w71: ^Warhead_MissileAP_Medium
-	Inherits@w72: ^Projectile_Missile_Medium
-	Inherits@w73: ^td_tiberiandawn_227mm
 	Range: 9993
-	MinRange: 1999
 	Warhead@MissileAP_Medium:
 		Damage: 14736
 
+	ReloadDelay: 111
+	Inherits@w72: ^Projectile_Missile_Medium
 	Projectile: Missile
 		ContrailStartColor: FF884400
 		Inaccuracy: 800
@@ -5382,9 +5605,10 @@ td_gdi_mlrs_227mm:
 		MaximumLaunchAngle: 125
 		ContrailEndColor: 000000FF
 		VerticalRateOfTurn: 16
-	BurstDelays: 5
-	ReloadDelay: 111
+	Inherits@w73: ^td_tiberiandawn_227mm
+	MinRange: 1999
 	Burst: 6
+	BurstDelays: 5
 	Report: rocket1.aud
 td_gdi_assaultapc_machinegunhumvee2:
 	Inherits@w71: ^Warhead_Bullet_Light

@@ -59,7 +59,11 @@ HarkonnenFlameTurret:
 
 harkonnen_autogunturret:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^d2k_harkonnen_harkonnen_autogunturret
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
+
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 132
 	Range: 7700
@@ -88,19 +92,51 @@ harkonnen_autogunturret:
 		ProjectileStreakTailColor: FFB060
 		ProjectileStreakTailColorAlpha: 176
 		Speed: 4000
+	Inherits: ^d2k_harkonnen_harkonnen_autogunturret
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
 	Burst: 26
 	BurstDelays: 2
 	StartBurstReport: autoguntrt.wav
-	Warhead@Bullet_Medium_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 9984
-
 DebrisMissile:
 	ReloadDelay: 60
 	Range: 7c0
@@ -206,7 +242,6 @@ D2K_Rocket_AA:
 		Damage: 4750
 
 PlasmaExplosion:
-	Inherits@fx: ^d2k_harkonnen_plasmaexplosion
 	Warhead@1Dam: SpreadDamage
 		Damage: 20000
 		Spread: 3c0
@@ -221,3 +256,4 @@ PlasmaExplosion:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 
+	Inherits@fx: ^d2k_harkonnen_plasmaexplosion

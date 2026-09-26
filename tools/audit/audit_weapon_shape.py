@@ -109,12 +109,16 @@ W4_BASELINE = 40    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 437   # 443 -> 442: W7-remainder materialization batch moved
+W6_BASELINE = 510   # 437 -> 510: ordered-key parity fix (NOVA merge-blocker on
+                    # #508) materializes warhead pins as LOCAL nodes at their
+                    # first-seen base positions. Resolved children are identical;
+                    # the nodes are edge-equivalent content, not new local design.
+                    # was: 443 -> 442: W7-remainder materialization batch moved
                     # the last local effect node on the DAWN file-set into a family.
                     # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
                     # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
-                    # master itself measures 709 (known master debt vs its
-                    # own 692 baseline); this branch is still -243 vs master.
+                    # master itself measures 442; this branch is +68 vs master,
+                    # entirely order-pins from the 93-weapon ordered-key fix.
                     # was:   # weapons declaring an effect warhead locally;
                     # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448 -> 447:
                     # W27 batches 3-6 extracted D2k, TD, TS pack nodes plus

@@ -204,7 +204,6 @@ MutaliskSpore:
 		ValidTargets: Shielded
 
 MutaBounce1:
-	Inherits: ^sc_zerg_mutabounce1
 	Warhead@Chemical_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -303,10 +302,18 @@ MutaBounce1:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_mutabounce1
+	-Warhead@Concrete:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 3
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	InvalidTargets: wall
 	Report: zmufir00.aud
@@ -337,6 +344,8 @@ MutaBounce1:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -361,6 +370,10 @@ MutaBounce1:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
@@ -387,6 +400,11 @@ MutaBounce1:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
 		Amount: 1
@@ -396,16 +414,6 @@ MutaBounce1:
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Chemical_Medium:
-		Damage: 8000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility:
-		Damage: 12000
-	Warhead@MutaWildcardCompatibility: AreaDamage
-		Damage: 4000
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 
 ^sc_zerg_mutabounce2:
 	Warhead@Concrete: DamagesConcrete
@@ -432,7 +440,6 @@ MutaBounce1:
 		ValidTargets: Shielded
 
 MutaBounce2:
-	Inherits: ^sc_zerg_mutabounce2
 	Warhead@Chemical_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -531,10 +538,18 @@ MutaBounce2:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_mutabounce2
+	-Warhead@Concrete:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 3
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	InvalidTargets: wall
 	Report: zmufir00.aud
@@ -565,6 +580,8 @@ MutaBounce2:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -589,6 +606,10 @@ MutaBounce2:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
@@ -615,18 +636,13 @@ MutaBounce2:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chemical_Medium:
-		Damage: 4000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility:
-		Damage: 10000
-	Warhead@MutaWildcardCompatibility: AreaDamage
-		Damage: 2000
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 
 CorruptorSpore:
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -792,7 +808,6 @@ DreadshroudSpore:
 		ValidTargets: Shielded
 
 SCDevourerAA:
-	Inherits: ^sc_zerg_scdevoureraa
 	Warhead@Chemical_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -895,10 +910,19 @@ SCDevourerAA:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_scdevoureraa
+	-Warhead@Concrete:
+	-Warhead@Effect2:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 3
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	InvalidTargets: wall
 	Report: sc_devourer_attack.aud
@@ -929,6 +953,8 @@ SCDevourerAA:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Spread: 50
@@ -953,6 +979,10 @@ SCDevourerAA:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		InvalidTargets: wall
@@ -979,19 +1009,11 @@ SCDevourerAA:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@Chemical_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 24000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility:
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
 		ValidTargets: Air
-		Damage: 4000
-	Warhead@DevourerChemicalAirCompatibility: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		Damage: 16000
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
 		Weapon: sc_zerg_devourer_acidcloud_aa
@@ -1003,15 +1025,17 @@ SCDevourerAA:
 		TurnRate: 5
 		Image: explosion
 		Palette: alpha25
+	Warhead@Effect2: CreateEffect
+		Explosions: nax_corr_ex
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Air
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
 		Duration: 100
 		ValidTargets: corrodible
 		ValidRelationships: Enemy
-	-Warhead@Chemical_Medium:
-	-Warhead@DevourerChemicalAirCompatibility:
-	-Warhead@MutaliskCompatibility:
 sc_zerg_devourer_acidcloud_aa:
 	Inherits@w71: ^Warhead_Toxic_Light
 	ValidTargets: Air
@@ -1058,7 +1082,6 @@ sc_zerg_devourer_acidcloud_aa:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ScourgeExplosion:
-	Inherits: ^sc_zerg_scourgeexplosion
 	Warhead@MissileAA_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1115,10 +1138,38 @@ ScourgeExplosion:
 	ReloadDelay: 25
 	Range: 2000
 	TargetActorCenter: true
+	Inherits: ^sc_zerg_scourgeexplosion
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scscourgeexplosion
+		ImpactSounds: zavdth00.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Projectile: Missile
 		Speed: 200
@@ -1249,38 +1300,31 @@ HermitExplode:
 	Inherits@w71: ^sc_reactornuke
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
-	Warhead@shrapnel: FireShrapnel
-		Weapon: HermitShoot
-		Amount: 1
-		AimChance: 0
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
-		ValidTargets: Ground, Water, Air
-
-	Warhead@8Dam_areanuke2: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	ValidTargets: Ground, Water, Underwater, Air
+	Warhead@Damage: SpreadDamage
 		Versus:
-			Flak: 84
-			Scout: 72
 			Helicopter: 44
-			Heavy: 60
 			Heroic: 76
-			Superheavy: 56
-			Medium: 64
-			Steel: 92
-			Fighter: 52
-			Plate: 80
-			Wood: 100
+			Scout: 72
+			Flak: 84
+			Heavy: 60
 			Light: 68
-			Concrete: 96
-			Bomber: 48
+			Fighter: 52
+			Steel: 92
+			Plate: 80
+			Superheavy: 56
 			Spaceship: 40
+			Wood: 100
+			Bomber: 48
 			None: 88
-		Delay: 8
-		ValidTargets: Ground, Water, Underwater, Air
-		Falloff: 1000, 500, 250, 125
-		Damage: 10000
-		Spread: 2000
+			Medium: 64
+			Concrete: 96
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		Falloff: 160, 80, 40, 20, 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Damage: 160000
+		Spread: 1600
 	Warhead@1Dam_impact: SpreadDamage
 		Damage: 80000
 		Versus:
@@ -1306,30 +1350,6 @@ HermitExplode:
 		Spread: 500
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidTargets: Ground, Water, Air
-	Warhead@11Dam_areanuke3: SpreadDamage
-		Damage: 2500
-		ValidTargets: Ground, Water, Underwater, Air
-		Versus:
-			Steel: 92
-			Heavy: 60
-			Heroic: 76
-			Spaceship: 40
-			Concrete: 96
-			Superheavy: 56
-			None: 88
-			Fighter: 52
-			Plate: 80
-			Light: 68
-			Medium: 64
-			Flak: 84
-			Bomber: 48
-			Wood: 100
-			Scout: 72
-			Helicopter: 44
-		Spread: 3000
-		Falloff: 1000, 500
-		Delay: 12
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Versus:
 			Spaceship: 40
@@ -1355,6 +1375,10 @@ HermitExplode:
 		Spread: 1000
 		Falloff: 1000, 500, 250, 125, 50, 25
 		Damage: 40000
+	Warhead@4Res_areanukea: DestroyResource
+		ResourceAmount: 3
+		Delay: 3
+		Size: 3
 	Warhead@7Dam_areanuke2: SpreadDamage
 		Versus:
 			Wood: 100
@@ -1380,11 +1404,38 @@ HermitExplode:
 		Falloff: 1000, 500, 250, 125, 50
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Damage: 20000
-	Warhead@Radiation: CreateTintedCells
-		Spread: 750
-		Level: 375
-		LayerName: ra2radiation
-		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+	Warhead@8Res_areanukeb: DestroyResource
+		Delay: 6
+		ResourceAmount: 6
+		Size: 6
+	Warhead@8Dam_areanuke2: SpreadDamage
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Versus:
+			Flak: 84
+			Scout: 72
+			Helicopter: 44
+			Heavy: 60
+			Heroic: 76
+			Superheavy: 56
+			Medium: 64
+			Steel: 92
+			Fighter: 52
+			Plate: 80
+			Wood: 100
+			Light: 68
+			Concrete: 96
+			Bomber: 48
+			Spaceship: 40
+			None: 88
+		Delay: 8
+		ValidTargets: Ground, Water, Underwater, Air
+		Falloff: 1000, 500, 250, 125
+		Damage: 10000
+		Spread: 2000
+	Warhead@11Res_areanukec: DestroyResource
+		Delay: 9
+		Size: 9
+		ResourceAmount: 9
 	Warhead@10Dam_areanuke3: SpreadDamage
 		Falloff: 1000, 500, 250
 		Versus:
@@ -1410,47 +1461,47 @@ HermitExplode:
 		Damage: 5000
 		AffectsParent: true
 		Spread: 2500
-	Warhead@8Res_areanukeb: DestroyResource
-		Delay: 6
-		ResourceAmount: 6
-		Size: 6
-	Warhead@Damage: SpreadDamage
+	Warhead@11Dam_areanuke3: SpreadDamage
+		Damage: 2500
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
-			Helicopter: 44
-			Heroic: 76
-			Scout: 72
-			Flak: 84
-			Heavy: 60
-			Light: 68
-			Fighter: 52
 			Steel: 92
-			Plate: 80
-			Superheavy: 56
+			Heavy: 60
+			Heroic: 76
 			Spaceship: 40
-			Wood: 100
-			Bomber: 48
-			None: 88
-			Medium: 64
 			Concrete: 96
-		ValidTargets: Ground, Water, Air
-		AffectsParent: true
-		Falloff: 160, 80, 40, 20, 10
+			Superheavy: 56
+			None: 88
+			Fighter: 52
+			Plate: 80
+			Light: 68
+			Medium: 64
+			Flak: 84
+			Bomber: 48
+			Wood: 100
+			Scout: 72
+			Helicopter: 44
+		Spread: 3000
+		Falloff: 1000, 500
+		Delay: 12
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Damage: 160000
-		Spread: 1600
 	Warhead@13Shake: ShakeScreen
 		Intensity: 5
 		Multiplier: 1,1
 		Duration: 15
-	Warhead@11Res_areanukec: DestroyResource
-		Delay: 9
-		Size: 9
-		ResourceAmount: 9
-	ValidTargets: Ground, Water, Underwater, Air
-	Warhead@4Res_areanukea: DestroyResource
-		ResourceAmount: 3
-		Delay: 3
-		Size: 3
+	Warhead@Radiation: CreateTintedCells
+		Spread: 750
+		Level: 375
+		LayerName: ra2radiation
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+	Warhead@shrapnel: FireShrapnel
+		Weapon: HermitShoot
+		Amount: 1
+		AimChance: 0
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
 HermitShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
@@ -1581,7 +1632,6 @@ HermitShoot:
 		Delay: 6
 
 HermitShoot1:
-	Inherits: ^sc_zerg_hermitshoot1
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 30
 	Range: 5696
@@ -1692,10 +1742,44 @@ HermitShoot1:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_hermitshoot1
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1747,6 +1831,22 @@ HermitShoot1:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -1771,6 +1871,12 @@ HermitShoot1:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -1879,7 +1985,6 @@ HermitShoot1:
 		Delay: 6
 
 HermitShoot2:
-	Inherits: ^sc_zerg_hermitshoot2
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 30
 	Range: 4272
@@ -1990,10 +2095,44 @@ HermitShoot2:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_hermitshoot2
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2045,6 +2184,22 @@ HermitShoot2:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2069,6 +2224,12 @@ HermitShoot2:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -2177,7 +2338,6 @@ HermitShoot2:
 		Delay: 6
 
 HermitShoot3:
-	Inherits: ^sc_zerg_hermitshoot3
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 30
 	Range: 2848
@@ -2288,10 +2448,44 @@ HermitShoot3:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_hermitshoot3
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2343,6 +2537,22 @@ HermitShoot3:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2367,6 +2577,12 @@ HermitShoot3:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -2475,7 +2691,6 @@ HermitShoot3:
 		Delay: 6
 
 HermitShoot4:
-	Inherits: ^sc_zerg_hermitshoot4
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 30
 	Range: 1424
@@ -2586,10 +2801,44 @@ HermitShoot4:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_zerg_hermitshoot4
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2641,6 +2890,22 @@ HermitShoot4:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2665,6 +2930,12 @@ HermitShoot4:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100

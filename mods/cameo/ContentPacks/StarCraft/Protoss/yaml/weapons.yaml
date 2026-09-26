@@ -118,11 +118,14 @@ PositronGrenade:
 
 PositronBounce1:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
-	Inherits: ^sc_protoss_positronbounce1
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Range: 2522
 	TargetActorCenter: true
+	Warhead@CannonHE_Medium: AreaDamage
+		InvalidTargets: Air
+		PercentageScale: 10000
+		Damage: 4000
 	Warhead@Quantum_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -196,10 +199,48 @@ PositronBounce1:
 		LaunchAngle: 0
 		TrailImage: blue_smokey
 		TrailInterval: 1
+	Inherits: ^sc_protoss_positronbounce1
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Report: tvuFir00.aud
 
@@ -311,21 +352,9 @@ PositronBounce1:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@CannonHE_Medium: AreaDamage
-		InvalidTargets: Air
-		PercentageScale: 10000
-		Damage: 4000
 	Warhead@CannonAP_Light: AreaDamage
 		InvalidTargets: Air
 		Damage: 8000
@@ -333,10 +362,6 @@ PositronBounce1:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 2
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@Bullet_Light:
 ^sc_protoss_positronbounce2:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
@@ -377,11 +402,14 @@ PositronBounce1:
 
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
-	Inherits: ^sc_protoss_positronbounce2
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Range: 1261
 	TargetActorCenter: true
+	Warhead@CannonHE_Medium: AreaDamage
+		InvalidTargets: Air
+		PercentageScale: 10000
+		Damage: 2000
 	Warhead@Quantum_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -455,10 +483,48 @@ PositronBounce2:
 		LaunchAngle: 0
 		TrailImage: blue_smokey
 		TrailInterval: 1
+	Inherits: ^sc_protoss_positronbounce2
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Report: tvuFir00.aud
 
@@ -563,21 +629,9 @@ PositronBounce2:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@CannonHE_Medium: AreaDamage
-		InvalidTargets: Air
-		PercentageScale: 10000
-		Damage: 2000
 	Warhead@CannonAP_Light: AreaDamage
 		InvalidTargets: Air
 		Damage: 4000
@@ -585,10 +639,6 @@ PositronBounce2:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@Bullet_Light:
 InterceptorLauncher:
 	ReloadDelay: 100
 	Burst: 5
@@ -790,7 +840,6 @@ PhotonCannon:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 DragoonCannon:
-	Inherits: ^sc_protoss_dragooncannon
 	Warhead@Plasma_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -887,10 +936,29 @@ DragoonCannon:
 			Steel: 5
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_dragooncannon
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@EffectAir:
+	-Warhead@Glow:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge:
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -915,6 +983,22 @@ DragoonCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -1013,10 +1097,78 @@ DragoonCannon:
 
 GladiusCannon:
 	Inherits: ^LightFlameWeapon
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Inherits@2: ^MediumChemicalWeapon
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
 	Inherits@3: ^HeavyFlameWeapon
+	Projectile: Missile
+		Speed: 400
+		Image: waveforcebullet
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Inaccuracy: 0
+		Shadow: true
+		CloseEnough: 400
+		AllowSnapping: true
+		HorizontalRateOfTurn: 4
+		VerticalRateOfTurn: 4
+		TrailImage: blue_small_napalm
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Inherits@4: ^ShrapnelWeapon
-	Inherits@fx: ^sc_protoss_gladiuscannon
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 80
+	Range: 10000
+	Report: tphfi201.wav, tgofi200.wav
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
 	Warhead@Plasma_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1072,26 +1224,6 @@ GladiusCannon:
 			Bomber: 11
 			Helicopter: 11
 			Spaceship: 11
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 80
-	Range: 10000
-	Report: tphfi201.wav, tgofi200.wav
-	Projectile: Missile
-		Speed: 400
-		Image: waveforcebullet
-		ContrailZOffset: 4000
-		ContrailStartColor: FF884400
-		ContrailEndColor: 000000FF
-		ContrailStartWidth: 50
-		ContrailEndWidth: 100
-		ContrailLength: 0
-		Inaccuracy: 0
-		Shadow: true
-		CloseEnough: 400
-		AllowSnapping: true
-		HorizontalRateOfTurn: 4
-		VerticalRateOfTurn: 4
-		TrailImage: blue_small_napalm
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 125
@@ -1116,11 +1248,9 @@ GladiusCannon:
 			Steel: 5
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 12
-		Range: 1250
-		ValidTargets: Shielded
+	Inherits@fx: ^sc_protoss_gladiuscannon
+	-Warhead@Glow:
+	-Warhead@RA2Crater:
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 225
@@ -1144,6 +1274,13 @@ GladiusCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -1192,66 +1329,12 @@ GladiusCannon:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 30000
-		PercentageScale: 0
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -1260,105 +1343,6 @@ GladiusCannon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@FlakWeapon:
-	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 250
-		Damage: 10000
-		Versus:
-			Shield: 125
-			Fighter: 100
-			Bomber: 95
-			Helicopter: 90
-			Spaceship: 85
-			None: 80
-			Flak: 75
-			Plate: 70
-			Heroic: 65
-			Scout: 60
-			Light: 55
-			Medium: 50
-			Heavy: 45
-			Superheavy: 40
-			Wood: 35
-			Concrete: 30
-			Steel: 25
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@PreservedFlat_HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 450
-		Damage: 10000
-		Versus:
-			Shield: 140
-			Scout: 100
-			Wood: 96
-			Light: 92
-			Concrete: 88
-			Medium: 84
-			Steel: 80
-			Heavy: 76
-			None: 72
-			Superheavy: 68
-			Flak: 64
-			Plate: 60
-			Heroic: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@PreservedFlat_MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 10000
-		Versus:
-			Shield: 125
-			Scout: 100
-			Wood: 95
-			Light: 90
-			Concrete: 85
-			Medium: 80
-			Steel: 75
-			Heavy: 70
-			None: 65
-			Superheavy: 60
-			Flak: 55
-			Plate: 50
-			Heroic: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 150
-		Damage: 10000
-		Versus:
-			Shield: 110
-			Superheavy: 100
-			Heavy: 94
-			Medium: 88
-			Light: 82
-			Scout: 76
-			Steel: 70
-			Concrete: 64
-			Wood: 58
-			Plate: 52
-			Flak: 46
-			None: 40
-			Heroic: 34
-			Spaceship: 28
-			Helicopter: 22
-			Bomber: 16
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@PreservedFlat_FlakWeapon:
-	-Warhead@PreservedFlat_HeavyCannon:
-	-Warhead@PreservedFlat_MediumCannon:
-	-Warhead@PreservedFlat_TankDestroyerCannon:
 
 ^sc_protoss_arbitercannon:
 	Warhead@Concrete: DamagesConcrete
@@ -1399,7 +1383,6 @@ GladiusCannon:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ArbiterCannon:
-	Inherits: ^sc_protoss_arbitercannon
 	Warhead@Plasma_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1496,10 +1479,29 @@ ArbiterCannon:
 			Steel: 5
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_arbitercannon
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@EffectAir:
+	-Warhead@Glow:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge:
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1524,6 +1526,22 @@ ArbiterCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -2172,7 +2190,6 @@ UnitExplodeSmallProtoss:
 		InvalidTargets: Structure, wall
 
 SCWorkerExplodeProtoss:
-	Inherits: ^sc_protoss_scworkerexplodeprotoss
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -2235,11 +2252,47 @@ SCWorkerExplodeProtoss:
 		LaunchAngle: 66
 		Inaccuracy: 400
 		Image: BOMB
+	Inherits: ^sc_protoss_scworkerexplodeprotoss
+	-Warhead@2Eff:
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Structure, wall
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Structure, wall
+	Warhead@Effect: CreateEffect
+		Explosions: self_destruct
+		ImpactSounds: kaboom22.aud
+		ValidTargets: Ground, Air, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@2Eff: CreateEffect
+		Explosions: blue_big_frag
+		ImpactSounds: xplobig4.aud
 ScoutMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -2457,7 +2510,6 @@ ManifoldMG:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ManifoldMG_AA:
-	Inherits: ^sc_protoss_manifoldmg_aa
 	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2514,10 +2566,49 @@ ManifoldMG_AA:
 	ReloadDelay: 20
 	Range: 7170
 	TargetActorCenter: true
+	Inherits: ^sc_protoss_manifoldmg_aa
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Projectile: Bullet
 		Image: 50CAL
@@ -2539,15 +2630,6 @@ ManifoldMG_AA:
 		Speed: 2000
 		LaunchAngle: 0
 	Report: blastgn2.aud
-	Warhead@Concussion_Light:
-		ValidTargets: Air
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Air
-	Warhead@Bullet_Medium:
-		ValidTargets: Air
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Light:
 
 AtreusMG:
 	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
@@ -2728,7 +2810,6 @@ PatriarchShoot:
 		Delay: 6
 
 PatriarchShoot1:
-	Inherits: ^sc_protoss_patriarchshoot1
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 75
 	Range: 4000
@@ -2837,10 +2918,43 @@ PatriarchShoot1:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_patriarchshoot1
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2892,6 +3006,22 @@ PatriarchShoot1:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2916,6 +3046,11 @@ PatriarchShoot1:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3022,7 +3157,6 @@ PatriarchShoot1:
 		Delay: 6
 
 PatriarchShoot2:
-	Inherits: ^sc_protoss_patriarchshoot2
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 75
 	Range: 3000
@@ -3131,10 +3265,43 @@ PatriarchShoot2:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_patriarchshoot2
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3186,6 +3353,22 @@ PatriarchShoot2:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3210,6 +3393,11 @@ PatriarchShoot2:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3316,7 +3504,6 @@ PatriarchShoot2:
 		Delay: 6
 
 PatriarchShoot3:
-	Inherits: ^sc_protoss_patriarchshoot3
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 75
 	Range: 2000
@@ -3425,10 +3612,43 @@ PatriarchShoot3:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_patriarchshoot3
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3480,6 +3700,22 @@ PatriarchShoot3:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3504,6 +3740,11 @@ PatriarchShoot3:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3610,7 +3851,6 @@ PatriarchShoot3:
 		Delay: 6
 
 PatriarchShoot4:
-	Inherits: ^sc_protoss_patriarchshoot4
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 75
 	Range: 1000
@@ -3719,10 +3959,43 @@ PatriarchShoot4:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits: ^sc_protoss_patriarchshoot4
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Smudge1:
+	-Warhead@Smudge2:
+	-Warhead@Smudge2RA2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3774,6 +4047,22 @@ PatriarchShoot4:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3798,6 +4087,11 @@ PatriarchShoot4:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100

@@ -1097,13 +1097,14 @@ TSMammothTusk2II_AA:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSHellfireSonic:
-	Inherits@proj: ^Projectile_TS_Missile_Medium
-	Inherits@fx: ^ts_gdi_tshellfiresonic
 	Inherits@sonicfamily: ^Warhead_MissileSonic_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 6144
 	TargetActorCenter: true
+	-Warhead@MissileSonic_Medium:
+	-Warhead@MissileSonic_Medium_Debuff:
+	Inherits@proj: ^Projectile_TS_Missile_Medium
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -1129,23 +1130,116 @@ TSHellfireSonic:
 		MinimumLaunchAngle: 300
 		MaximumLaunchAngle: 300
 		Palette: ra
+	Inherits@fx: ^ts_gdi_tshellfiresonic
+	-Warhead@Glow:
+	-Warhead@Effect:
+	-Warhead@ShieldHit:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building_napalm
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
 	Report: orcamis1.aud
 	Warhead@MissileSonic_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
+		Spread: 80
 		Damage: 42000
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 81
+			COMPOSITE: 69
+			BLAST: 64
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 213
+			Superheavy: 200
+			Heavy: 170
+			Medium: 158
+			Light: 138
+			Spaceship: 132
+			Helicopter: 130
+			Scout: 113
+			Bomber: 111
+			Concrete: 105
+			Plate: 93
+			Fighter: 83
+			Steel: 69
+			Wood: 66
+			Flak: 61
+			None: 53
+			Heroic: 52
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 16
+			Superheavy: 14
+			Medium: 13
+			Heavy: 13
+			Scout: 12
+			Light: 12
+			Helicopter: 11
+			Spaceship: 11
+			Fighter: 10
+			Bomber: 10
+			Steel: 9
+			Concrete: 9
+			Heroic: 8
+			Wood: 8
+			Flak: 7
+			Plate: 7
+			None: 6
 	Warhead@MissileSonic_Medium_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-
 TSZoneHellfire:
 	Inherits@w71: ^Warhead_MissileAP_Heavy
 	Inherits@w72: ^Projectile_Missile_Medium
@@ -1202,13 +1296,14 @@ TSZoneHellfire:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSZoneHellfireSonic:
-	Inherits@proj: ^Projectile_TS_Missile_Heavy
-	Inherits@fx: ^ts_gdi_tszonehellfiresonic
 	Inherits@sonicfamily: ^Warhead_MissileSonic_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 28
 	Range: 6138
 	TargetActorCenter: true
+	-Warhead@MissileSonic_Heavy:
+	-Warhead@MissileSonic_Heavy_Debuff:
+	Inherits@proj: ^Projectile_TS_Missile_Heavy
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -1234,23 +1329,116 @@ TSZoneHellfireSonic:
 		MinimumLaunchAngle: 300
 		MaximumLaunchAngle: 300
 		Palette: ra
+	Inherits@fx: ^ts_gdi_tszonehellfiresonic
+	-Warhead@Glow:
+	-Warhead@Effect:
+	-Warhead@ShieldHit:
+	-Warhead@ShieldHitEffect:
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
 	Report: orcamis1.aud
 	Warhead@MissileSonic_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
+		Spread: 106
 		Damage: 41000
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 81
+			COMPOSITE: 69
+			BLAST: 64
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 230
+			Superheavy: 200
+			Spaceship: 176
+			Heavy: 171
+			Medium: 147
+			Light: 126
+			Helicopter: 125
+			Concrete: 110
+			Scout: 107
+			Bomber: 103
+			Plate: 93
+			Steel: 83
+			Fighter: 72
+			Flak: 70
+			Wood: 62
+			Heroic: 50
+			None: 48
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 22
+			Heavy: 17
+			Superheavy: 17
+			Light: 16
+			Medium: 16
+			Scout: 15
+			Spaceship: 15
+			Bomber: 14
+			Helicopter: 14
+			Concrete: 13
+			Fighter: 13
+			Wood: 12
+			Steel: 12
+			Plate: 11
+			Heroic: 11
+			None: 10
+			Flak: 10
 	Warhead@MissileSonic_Heavy_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
 		Range: 1066
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-
 TSGDIRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1674,13 +1862,14 @@ TSAssaultCannonTal:
 		ValidTargets: Shielded
 
 TSAssaultCannonTalSonic:
-	Inherits@proj: ^Projectile_Sonic_Shell
-	Inherits@fx: ^ts_gdi_tsassaultcannontalsonic
 	Inherits@sonicfamily: ^Warhead_BulletSonic_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 45
 	Range: 6520
 	TargetActorCenter: true
+	-Warhead@BulletSonic_Medium:
+	-Warhead@BulletSonic_Medium_Debuff:
+	Inherits@proj: ^Projectile_Sonic_Shell
 	Projectile: Bullet
 		Image: BOMB
 		Inaccuracy: 200
@@ -1697,25 +1886,87 @@ TSAssaultCannonTalSonic:
 		ContrailEndWidth: 44
 		ContrailLength: 12
 		Speed: 2000
+	Inherits@fx: ^ts_gdi_tsassaultcannontalsonic
+	-Warhead@Glow:
+	-Warhead@Concrete:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Burst: 2
 	BurstDelays: 2
 	Report: 120mmf.aud
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
 	Warhead@BulletSonic_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
+		Spread: 100
 		Damage: 16000
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 83
+			COMPOSITE: 69
+			BLAST: 64
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 218
+			None: 200
+			Flak: 148
+			Plate: 140
+			Scout: 112
+			Light: 111
+			Wood: 103
+			Fighter: 102
+			Medium: 101
+			Bomber: 97
+			Steel: 96
+			Helicopter: 90
+			Heavy: 82
+			Heroic: 78
+			Concrete: 72
+			Spaceship: 69
+			Superheavy: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 6244
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 16
+			None: 14
+			Flak: 13
+			Plate: 13
+			Heroic: 12
+			Scout: 12
+			Wood: 11
+			Fighter: 11
+			Light: 10
+			Bomber: 10
+			Medium: 9
+			Steel: 9
+			Concrete: 8
+			Helicopter: 8
+			Heavy: 7
+			Spaceship: 7
+			Superheavy: 6
 	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-
 TSVulcanGun:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1826,7 +2077,6 @@ TSMechMGII:
 		Damage: 16000
 		ValidTargets: Ground, Water
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
-	Inherits@fx: ^ts_gdi_tsioncannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 12288
@@ -1895,6 +2145,10 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Duration: 20
 		Range: 1250
 		ValidTargets: Shielded
+	Inherits@fx: ^ts_gdi_tsioncannon
+	-Warhead@3Smu_area:
+	-Warhead@5Smu_area2:
+	-Warhead@Effect:
 	Report: tesla1.aud
 	Warhead@IonCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1918,6 +2172,32 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		AffectsParent: True
 		Delay: 115
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@3Smu_area: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 3,2
+		Delay: 110
+		AirThreshold: 8c0
+	Warhead@5Smu_area2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 2,1
+		Delay: 6
+	Warhead@Effect: CreateEffect
+		ImpactSounds: ion1.aud
+		Volume: 5
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		GlowColor: 32C8FF
+		GlowScale: 7.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 5
+		AffectsParent: true
+		AirThreshold: 8c0
+		Delay: 110
+		ExplosionPalette: tseffect
+		Explosions: ionring
+		Image: tsioncannon
 	Warhead@GroundFireArea: SpawnActorInArea
 		Actor: groundfire
 		Range: 3
@@ -2044,7 +2324,6 @@ TSDroppodSpawner:
 		AirThreshold: 8c0
 
 TSDroppod1:
-	Inherits@fx: ^ts_gdi_tsdroppod1
 	Range: 2500
 	Projectile: AthenaProjectile
 		Altitude: 25460
@@ -2056,13 +2335,7 @@ TSDroppod1:
 		ImpactActors: false
 		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
 		AirThreshold: 8c0
-	# ⚠ `Inaccuracy: 1024` was here and the engine was throwing it away: FireShrapnelWarhead
-	# has no such field (Weapon, WeaponName, Amount, AimChance, AimTargetStances,
-	# ThrowWithoutTarget, AllowDirectHit, AroundTarget — that is the whole list), so the drop
-	# pods have never scattered. Removed rather than moved, because the scatter belongs on the
-	# FIRED weapon (E1Droppod) or its projectile, and neither carries one today — so putting it
-	# there would CHANGE behaviour rather than restore it. That is a balance call.
-
+	Inherits@fx: ^ts_gdi_tsdroppod1
 TSDroppod2:
 	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
@@ -2106,7 +2379,6 @@ TSDroppod4:
 		Altitude: 25460
 	Warhead@Dam: TargetDamage
 E1Droppod:
-	Inherits@fx: ^ts_gdi_e1droppod
 	ValidTargets: Ground, Air
 	InvalidTargets: Water
 	Projectile: Bullet
@@ -2120,6 +2392,7 @@ E1Droppod:
 		ImpactActors: false
 		AirThreshold: 8c0
 
+	Inherits@fx: ^ts_gdi_e1droppod
 E2Droppod:
 	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor

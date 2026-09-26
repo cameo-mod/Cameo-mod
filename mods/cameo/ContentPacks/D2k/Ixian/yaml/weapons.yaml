@@ -875,20 +875,58 @@ RashidanGun:
 
 RashidanGun_upgrade:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
+
 	Inherits: ^Warhead_CannonHE_Heavy
+	-Warhead@CannonHE_Heavy:
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@5: ^d2k_ixian_rashidangun_upgrade
-	Inherits@6: ^HeavyMachineGunProjectile
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 69
-	Range: 3800
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Burst: 4
 	BurstDelays: 0
 	Report: DSDSHTGN.wav
@@ -988,35 +1026,6 @@ RashidanGun_upgrade:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Projectile: Bullet
-		Image: 50CAL
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		Inaccuracy: 200
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		ContrailLength: 15
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		Speed: 4000
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-		ContrailEndColor: FFFFFF44
-		ContrailEndWidth: 80
-		ContrailStartColor: 88FF4488
-		ContrailStartWidth: 40
-		ContrailZOffset: 4000
-		ContrailWidth: 75
-		Width: 20
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1079,15 +1088,40 @@ RashidanGun_upgrade:
 			Heroic: 10
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
-	-Warhead@CannonHE_Heavy:
-	-Warhead@MissileHE_Heavy:
-	Warhead@Bullet_Medium_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 0
-		FriendlyFireDamage: 67
-		FriendlyFireSpread: 67
-
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@6: ^HeavyMachineGunProjectile
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 69
+	Range: 3800
+	Projectile: Bullet
+		Image: 50CAL
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 200
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 15
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 4000
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+		ContrailEndColor: FFFFFF44
+		ContrailEndWidth: 80
+		ContrailStartColor: 88FF4488
+		ContrailStartWidth: 40
+		ContrailZOffset: 4000
+		ContrailWidth: 75
+		Width: 20
 RaiderGuns:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1634,6 +1668,47 @@ HMG_Duelist_upgrade:
 	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Inherits@4: ^LaserWeapon
 	Inherits@6: ^d2k_ixian_hmg_duelist_upgrade
 	Inherits@7: ^HeavyMachineGunProjectile
@@ -2384,7 +2459,6 @@ ixian_farasha:
 		SmudgeType: Scorch
 
 d2k_farasha_aa:
-	Inherits: ^d2k_ixian_d2k_farasha_aa
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 6400
@@ -2497,6 +2571,11 @@ d2k_farasha_aa:
 		Duration: 15
 		Range: 1250
 		ValidTargets: Shielded
+	Inherits: ^d2k_ixian_d2k_farasha_aa
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@RA2Scorch:
+	-Warhead@Smudge:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
@@ -2523,6 +2602,23 @@ d2k_farasha_aa:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
 		ValidTargets: Air
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLSML4.WAV
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: effect75alpha
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: Scorch
 	Burst: 50
 	BurstDelays: 1
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
@@ -2560,20 +2656,6 @@ d2k_farasha_aa:
 		InternalOwner: Neutral
 		OwnerType: InternalName
 		Range: 1
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Air
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaWeapon:
 
 farasha_drone_ixian:
 	Inherits@wh: ^Warhead_Inferno_Light
@@ -2609,7 +2691,6 @@ d2k_basq:
 		Damage: 32000
 
 d2k_basq_AA:
-	Inherits@fx: ^d2k_ixian_d2k_basq_aa
 	ValidTargets: Air
 	ReloadDelay: 25
 	Range: 6666
@@ -2681,24 +2762,33 @@ d2k_basq_AA:
 		ContrailEndWidth: 100
 		ContrailLength: 10
 		Speed: 3333
+	Inherits@fx: ^d2k_ixian_d2k_basq_aa
+	-Warhead@Concrete:
+	-Warhead@Effect:
+	-Warhead@EffectWater:
+	-Warhead@ShieldHitEffect:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: EXPLSML4.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
 	Report: zhyfir00.aud
-
-# d2k_guild_teleport:
-# 	ReloadDelay: 1
-# 	Projectile: InstantExplode
-# 	Warhead@1Actor: SpawnActor
-# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, ixian_farasha
-# 		Range: 5
-# 		Image: ra2_allies_chronominer
-# 		Sequence: warpout
-# 		Palette: ra2effect
-# 		ValidTargets: Air, Ground, Water
-# 	Warhead@2Flash: ChronoFlashEffect
 
 d2k_projections:
 	Projectile: InstantHit
