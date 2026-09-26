@@ -2691,10 +2691,12 @@ RA2GattlingInf:
 			Spaceship: 6
 			Superheavy: 5
 RA2Virusgun:
-	Inherits@roleflat: ^Warhead_Sniper_Light
+	ValidTargets:
+	Warhead@Toxic_Light:
+	Inherits@roleflat: ^Warhead_Toxic_Light
 	Inherits@2: ^SniperWeapon
-	-Warhead@Sniper_Light_Percentage:
-	-Warhead@Sniper_Light_ExtraDamage:
+	-InvalidTargets:
+	-TargetActorCenter:
 	ReloadDelay: 74
 	Range: 9999
 	Report: iviratta.wav
@@ -2738,7 +2740,7 @@ RA2Virusgun:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 	-Warhead@SniperWeapon:
-	Warhead@Sniper_Light:
+	Warhead@Toxic_Light:
 		ValidTargets: Infantry
 		Damage: 24000
 		PercentageScale: 0
@@ -2746,51 +2748,24 @@ RA2Virusgun:
 		Falloff: 100, 0
 	InvalidTargets: wall
 	TargetActorCenter: true
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 	Warhead@Effect:
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-	Warhead@HeavyChemicalWeaponPercentage:
-		ValidTargets: Infantry, Monster, Garrisoned
-		Spread: 1
-		Damage: 6
-		Falloff: 100, 0
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Plate: 24
-			Heavy: 23
-			Flak: 22
-			Medium: 21
-			None: 20
-			Light: 19
-			Heroic: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
 
 RA2Virusgun2:
-	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@wh: ^Warhead_Toxic_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	-InvalidTargets:
+	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage:
 	Warhead@SniperWeaponPercentage:
 	Warhead@Effect1:
 	Warhead@Effect2:
 	Warhead@Cloud:
-	Warhead@HeavyChemicalWeaponPercentage:
 	ValidTargets: Ground, Ship, Garrisoned
-	Warhead@Flak_Medium:
+	Warhead@Toxic_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 36000
 		Spread: 1
@@ -2802,17 +2777,9 @@ RA2Virusgun2:
 		ValidTargets: Ground, Ship, Garrisoned
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship, Garrisoned
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 150
-	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
 
 	ReloadDelay: 74
@@ -2839,7 +2806,6 @@ RA2Virusgun2:
 		Explosions: water_piffs
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		Amount: 1
 		Spread: 1
@@ -2902,50 +2868,25 @@ RA2Virusgun2:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Spread: 1
-		Damage: 6
-		Falloff: 100, 0
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Plate: 24
-			Heavy: 23
-			Flak: 22
-			Medium: 21
-			None: 20
-			Light: 19
-			Heroic: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
 RA2Virusgun3:
-	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@wh: ^Warhead_Toxic_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
+	-InvalidTargets:
 	Warhead@EffectWater:
+	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage:
 	Warhead@SniperWeaponPercentage:
 	Warhead@Effect1:
 	Warhead@Effect2:
 	Warhead@Cloud:
-	Warhead@HeavyChemicalWeaponPercentage:
 	Projectile: Bullet
 		Image: bhreddragon
 		Palette: effect
 		TrailImage: green_smokey
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MissileAP_Medium:
+	Warhead@Toxic_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 48000
 		Spread: 1
@@ -3001,7 +2942,6 @@ RA2Virusgun3:
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Ground, Ship, Garrisoned
 		Amount: 1
@@ -3066,35 +3006,10 @@ RA2Virusgun3:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship, Garrisoned
-		Spread: 1
-		Damage: 6
-		Falloff: 100, 0
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Plate: 24
-			Heavy: 23
-			Flak: 22
-			Medium: 21
-			None: 20
-			Light: 19
-			Heroic: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
 RA2Virusgun_elite:
-	Warhead@MissileAP_Medium:
+	Inherits@wh: ^Warhead_Toxic_Medium
+	-InvalidTargets:
+	Projectile:
 	Warhead@Glow:
 	Warhead@Smudge:
 	Warhead@DuneRock:
@@ -3106,12 +3021,12 @@ RA2Virusgun_elite:
 	Warhead@Concrete:
 	Warhead@ShieldHitEffect:
 	Warhead@EffectWater:
+	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage:
 	Warhead@SniperWeaponPercentage:
 	Warhead@Effect1:
 	Warhead@Effect2:
 	Warhead@Cloud:
-	Warhead@HeavyChemicalWeaponPercentage:
 	Warhead@Condition:
 	Range: 11111
 	Warhead@Cloud: SpawnSmokeParticle
@@ -3121,58 +3036,12 @@ RA2Virusgun_elite:
 	ValidTargets: Ground, Ship, Garrisoned
 	ReloadDelay: 74
 	TargetActorCenter: true
-	Warhead@MissileAP_Medium: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@Toxic_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Spread: 1
 		Damage: 48000
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 94
-			COMPOSITE: 44
-			BLAST: 69
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heavy: 19
-			Medium: 18
-			Light: 17
-			Scout: 16
-			Spaceship: 15
-			Helicopter: 14
-			Bomber: 13
-			Fighter: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
 	Projectile: Bullet
 		Arm: 0
 		Blockable: false
@@ -3251,7 +3120,6 @@ RA2Virusgun_elite:
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Report: iviratta.wav
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Ground, Ship, Garrisoned
 		Amount: 1
@@ -3316,33 +3184,6 @@ RA2Virusgun_elite:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship, Garrisoned
-		Spread: 1
-		Damage: 6
-		Falloff: 100, 0
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Plate: 24
-			Heavy: 23
-			Flak: 22
-			Medium: 21
-			None: 20
-			Light: 19
-			Heroic: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
