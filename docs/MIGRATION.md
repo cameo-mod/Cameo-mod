@@ -204,6 +204,17 @@ Re-running is idempotent (refs report as `qualified`). RA2 census report:
 `cannon1.aud`, `turret1.aud`, `tesla1.aud`, `zulhit00.aud`, `aacanon3.aud`,
 `chute1.aud`, `expnew13.wav`, `expnew09.wav`, `spysreve.wav`.
 
+RA2 follow-up: `bits/ra2/audio.bag`+`.idx` moved to
+`ContentPacks/RedAlert2/Shared/files/sounds/` with the mount redirected
+(the 184 bag-resident names keep resolving; the bits copies remain as the
+unmounted shadow archive). Voxel caveat found while collecting: RA2
+`RenderVoxels` actors reference image names equal to the (renamed) actor ids,
+but `bits/ra2/voxel/` files still carry LEGACY names (`ra2aegis.vxl` vs actor
+`ra2_allies_aegiscruiser`) — the faction rename never renamed the voxel
+files, so those voxel renderers have been dead since the rename. That is a
+pre-existing defect needing a voxel rename pass (names, not moves), logged
+here so the voxel migration slice does not paper over it.
+
 ## Standing decisions (design)
 
 - Names: one lowercase group, RA1 baseline; tooltip <-> id in sync; unique
