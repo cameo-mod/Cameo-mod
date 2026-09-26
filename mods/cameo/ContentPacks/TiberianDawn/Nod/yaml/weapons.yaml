@@ -391,7 +391,7 @@ td_nod_artillery_artilleryshell:
 		ImpactActors: false
 		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Ship
-	MinRange: 2258
+	MinRange: 2260
 	Report: tnkfire2.aud
 
 td_nod_flametank_bigflamer:
@@ -907,7 +907,7 @@ td_nod_artillery_artilleryshellupgrade:
 	Inherits@6: ^HeavyBomb
 	ReloadDelay: 96
 	Range: 11291
-	MinRange: 2258
+	MinRange: 2260
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 
