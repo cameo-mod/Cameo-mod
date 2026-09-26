@@ -4659,7 +4659,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "BlackHoleMaker"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4731,7 +4733,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "BlackHoleMaker"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7591,7 +7595,9 @@
       "requires": "rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@elite",
       "versus_templates": [
-       "LunarPanzerCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"

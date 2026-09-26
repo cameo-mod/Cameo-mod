@@ -8,7 +8,14 @@ RA2AsianShotgun:
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
 RA2AsianShotgun_elite:
-	Inherits: RA2AsianShotgun
+	Inherits@xRA2AsianShotgun0: ^Warhead_Bullet_Light
+	Inherits@xRA2AsianShotgun1: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
+	ReloadDelay: 52
+	Range: 4567
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 6000
 	Range: 5567
 	Burst: 2
 	BurstDelays: 3
@@ -152,7 +159,14 @@ asianalliance_asianmilitia_shotgun:
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
 asianalliance_asianmilitia_shotgun_elite:
-	Inherits: asianalliance_asianmilitia_shotgun
+	Inherits@xasianalliance_asianmilitia_shotgun0: ^Warhead_Bullet_Light
+	Inherits@xasianalliance_asianmilitia_shotgun1: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
+	ReloadDelay: 50
+	Range: 4500
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 6000
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
@@ -376,7 +390,38 @@ AsianTankKillerRocket_elite:
 		ContrailEndColor: FFFFFF
 
 AsianTankKillerRocket_upgrade_elite:
-	Inherits: AsianTankKillerRocket_elite
+	Inherits@xAsianTankKillerRocket0: ^Warhead_MissileAP_Light
+	Inherits@xAsianTankKillerRocket1: ^Projectile_Missile_Light
+	Inherits@xAsianTankKillerRocket2: ^Effect_Clsn_Small_RA2
+	Report: bazook1.aud
+	ReloadDelay: 75
+	Range: 6460
+	Projectile: Missile
+		-TrailImage:
+		Speed: 500
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		Acceleration: 5
+	Warhead@MissileAP_Light:
+		Damage: 34000
+	Projectile:
+		Image: ra2_dragon
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	# W7MAT inline of AsianTankKillerRocket
+	Report: bazook1.aud
+	Range: 7460
+	Warhead@MissileAP_Light:
+		Damage: 68000
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailColor: E60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
 	Report: bazook1.aud
 	Projectile: Missile
 		Image: d2k_missile2
@@ -1871,7 +1916,19 @@ AsianNinjaStar:
 	Warhead@Effect:
 		ImpactSounds: pzehit00.aud
 AsianNinjaStar_elite:
-	Inherits: AsianNinjaStar
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@2: ^Effect_Bullet_Medium_RA2
+	InvalidTargets: Structure, wall, Husk
+	Report: toss1.aud
+	ReloadDelay: 25
+	Range: 4560
+	Projectile: Bullet
+		Speed: 456
+	Warhead@Melee_Medium:
+		Damage: 20000
+	Warhead@Effect:
+		ImpactSounds: pzehit00.aud
 	Range: 5560
 	Burst: 2
 	BurstDelays: 3
@@ -1891,7 +1948,16 @@ AsianCrocBite:
 	-Warhead@Effect:
 
 AsianCrocBite_elite:
-	Inherits: AsianCrocBite
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 39
+	Report: galiatta.wav, galiattb.wav
+	Range: 1345
+	Projectile: InstantHit
+	Warhead@Melee_Medium:
+		Damage: 16000
+	-Warhead@Effect:
 	Burst: 2
 	BurstDelays: 3
 
@@ -3996,7 +4062,63 @@ AsianHowitzerCannon:
 		AimTargetStances: Enemy, Neutral
 
 AsianHowitzerCannon_elite:
-	Inherits: AsianHowitzerCannon
+	Inherits@xAsianHowitzerCannon0: ^Warhead_CannonHE_Heavy
+	Inherits@xAsianHowitzerCannon1: ^Projectile_Shell_Heavy
+	Inherits@xAsianHowitzerCannon2: ^Effect_Grey_Explosion_Large_RA2
+	ReloadDelay: 160
+	Report: ra2m_shared_sounds|aa_bgart.wav
+	Range: 16000
+	MinRange: 3200
+	Projectile: Bullet
+		Blockable: false
+		Speed: 240
+		ContrailLength: 60
+		LaunchAngle: 120
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: DDCC99
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 120
+		ContrailEndWidth: 20
+		TrailInterval: 1
+		Inaccuracy: 320
+	Warhead@CannonHE_Heavy:
+		Damage: 40000
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 125
+		Speed: 0
+		TurnRate: 10
+		Image: tscloud1
+		Sequences: idle
+		EndSequences: die
+		Palette: shield60
+	Warhead@1Fire: TriggerLayerWeapon
+		LayerName: InfernoLayer
+		TriggerWeapon: AsianSmallOilBomb
+		TriggerSetLevel: 0
+		Level: 0
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air, GroundActor, WaterActor, AirborneActor
+		AirThreshold: 10000
+		TriggerAtLevelMin: 400
+	Warhead@2Fire: TriggerLayerWeapon
+		LayerName: InfernoLayer
+		Spread: 1250
+		Falloff: 125, 100, 75, 50, 25, 0
+		AllowSetLevelWhenTrigger: false
+		TriggerAtLevelMin: 50
+		TriggerWeapon: AsianHowitzerSplash
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air, GroundActor, WaterActor, AirborneActor
+		AirThreshold: 10000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianOilBombFragments
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Range: 20000
 	MinRange: 4000
 	Warhead@Cloud: SpawnSmokeParticle
@@ -7409,7 +7531,32 @@ AsianFlamerTank:
 	Range: 3700
 
 AsianFlamerTank_elite:
-	Inherits: AsianFlamerTank
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Burst: 6
+	BurstDelays: 3
+	Range: 6666
+	StartBurstReport: flamer2.aud
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Warhead@Flame_Light:
+		Damage: 4000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	# W7MAT inline of AsianFlamerTurret
+	ReloadDelay: 25
+	Burst: 6
+	BurstDelays: 3
+	Range: 3700
 	Range: 4700
 	Burst: 12
 	BurstDelays: 3
@@ -7443,7 +7590,32 @@ AsianFlamerTroop:
 	Range: 4444
 
 AsianFlamerTroop2:
-	Inherits: AsianFlamerTroop
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Burst: 6
+	BurstDelays: 3
+	Range: 6666
+	StartBurstReport: flamer2.aud
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Warhead@Flame_Light:
+		Damage: 4000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	# W7MAT inline of AsianFlamerTurret
+	ReloadDelay: 38
+	Burst: 6
+	BurstDelays: 3
+	Range: 4444
 	ReloadDelay: 34
 	Range: 5555
 
@@ -7752,7 +7924,24 @@ AsianTankMine:
 		Damage: 125000
 		InvalidTargets: Mine
 AsianChaosMine:
-	Inherits: AsianChaosTurret
+	Range: 5000
+	ReloadDelay: 125
+	Report: vchaatta.wav
+	ValidTargets: MindControl
+	InvalidTargets: MCImmune
+	Projectile: InstantExplode
+	Warhead@Effect: CreateEffect
+		Explosions: chaosgas
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+		AffectsParent: true
+	Warhead@Condition: GrantExternalCondition
+		Range: 5000
+		Condition: chaosgas
+		Duration: 125
+		ValidTargets: MindControl
+		InvalidTargets: Hero, MCImmune
+		ValidRelationships: Enemy
 	Inherits@2: AsianTankMine
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy

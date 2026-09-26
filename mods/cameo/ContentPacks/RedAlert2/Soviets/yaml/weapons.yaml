@@ -1540,7 +1540,29 @@ RA2CoilBolt2:
 		Weapon: TeslaFragment
 
 RA2CoilBolt3:
-	Inherits: RA2CoilBolt2
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 8842
+	ReloadDelay: 3
+	Report: btesat1a.wav
+	Warhead@Tesla_Heavy:
+		Damage: 64000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 32000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragmentWeak
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 32000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 64000
 	Warhead@TeslaArc: FireShrapnel
@@ -1577,7 +1599,31 @@ RA2OPCoilBolt2:
 		Weapon: TeslaFragment2
 
 RA2OPCoilBolt3:
-	Inherits: RA2OPCoilBolt2
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
+	Range: 8842
+	ReloadDelay: 3
+	Report: btesat2a.wav
+	Warhead@Tesla_Super:
+		Damage: 64000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 32000
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 32000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_Super:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 64000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 128000
 	Warhead@TeslaArc: FireShrapnel
@@ -1613,7 +1659,19 @@ RA2TankBolt:
 		DamageTypes: Tesla
 		Damage: 6000
 RA2TankBolt2:
-	Inherits: RA2TankBolt
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 55
+	Range: 7500
+	Burst: 2
+	BurstDelays: 5
+	Report: vtesatta.wav, vtesattb.wav
+	Warhead@Tesla_Heavy:
+		Damage: 12000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 6000
 	Range: 8000
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
@@ -1690,11 +1748,33 @@ RA2DroneJump:
 		DamageTypes: DefaultDeath, DroneInfection
 
 RA2DroneJump_elite:
-	Inherits: RA2DroneJump
+	ValidTargets: TerrorDronable
+	InvalidTargets: Air
+	ReloadDelay: 40
+	Range: 4000
+	Report: vteratta.wav
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 100000
+		ValidTargets: Infantry
+		DamageTypes: DefaultDeath, DroneInfection
 	ReloadDelay: 10
 
 RA2RadBeamWeapon_elite:
-	Inherits: RA2RadBeamWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
+	Range: 6444
+	ReloadDelay: 45
+	Report: idesat1a.wav
+	Projectile: RadBeam
+		Amplitude: 120
+		WaveLength: 360
+	Warhead@Chemical_Medium:
+		Damage: 30000
+		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
+	-Warhead@Effect:
 	Range: 7444
 	Burst: 2
 	BurstDelays: 3
@@ -2006,7 +2086,25 @@ RA2CRFlakGuyGun:
 		ValidTargets: Ground, Water
 		Damage: 16000
 RA2CRFlakGuyGun_elite:
-	Inherits: RA2CRFlakGuyGun
+	Inherits@xRA2FLAKAG0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAG1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAG2: ^Effect_Flak_Puff_RA2
+	Report: vflaat1a.wav, vflaat1b.wav
+	Projectile: Bullet
+		Speed: 512
+		Blockable: false
+		LaunchAngle: 75
+		Inaccuracy: 0
+		Image: BOMB
+	ValidTargets: Ground, Water
+	# W7MAT inline of RA2FLAKAG
+	ReloadDelay: 17
+	Range: 5627
+	ValidTargets: Ground, Water
+	Warhead@Flak_Medium:
+		PercentageScale: 5000
+		ValidTargets: Ground, Water
+		Damage: 16000
 	Range: 5900
 	Burst: 2
 	BurstDelays: 3
@@ -2023,7 +2121,16 @@ RA2FLAKAA:
 		Damage: 8000
 		ValidTargets: Air
 RA2FLAKAA_elite:
-	Inherits: RA2FLAKAA
+	Inherits@xRA2FLAKAA0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAA1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAA2: ^Effect_Flak_Puff_RA2
+	Report: aacanon3.aud
+	ReloadDelay: 26
+	Range: 7834
+	ValidTargets: Air
+	Warhead@Flak_Medium:
+		Damage: 8000
+		ValidTargets: Air
 	Report: aacanon3.aud
 	Range: 8834
 	Burst: 2
@@ -2114,7 +2221,19 @@ RA2FlakTrackAAGun_elite:
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 IvanAttachAir:
-	Inherits: IvanAttach
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: ivanattachable
+	InvalidTargets: ivanattached, Aircraft
+	Warhead@1: AttachDelayedWeapon
+		Weapon: IvanBomb
+		Type: ivanbomb
+		TriggerTime: 200
+		Range: 1
+	Warhead@2: TargetDamage
 	ValidTargets: Aircraft
 	InvalidTargets: ivanattached
 	Warhead@1: AttachDelayedWeapon

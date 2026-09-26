@@ -1202,7 +1202,22 @@ Future_CoilerFriend:
 		ValidRelationships: Ally
 
 Future_CoilerFriendMain:
-	Inherits: Future_CoilerFriend
+	Range: 1250
+	ReloadDelay: 125
+	ValidTargets: RobotEnergizable
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: RobotEnergizable
+		Duration: 250
+		ValidTargets: RobotEnergizable
+		ValidRelationships: Ally
 	Range: 7500
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriendFrag1

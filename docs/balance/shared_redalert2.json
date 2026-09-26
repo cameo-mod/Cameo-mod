@@ -7184,7 +7184,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -7309,7 +7311,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@GARRISONED3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

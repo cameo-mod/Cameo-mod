@@ -1021,7 +1021,26 @@ RA2DiskLaser:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 RA2DiskLaser_elite:
-	Inherits: RA2DiskLaser
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 40
+	Range: 6840
+	Report: vfloatta.wav
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: DiskSteal
+	Projectile: LaserZap
+		Width: 60
+		Duration: 15
+		Color: AA7799
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF88
+		UsePlayerColor: false
+	Warhead@Laser_Heavy:
+		Damage: 24000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Range: 7840
 	Projectile: LaserZap
 		Width: 80
@@ -1268,7 +1287,43 @@ RA2Magnet_elite:
 		Color: e6000045
 
 RA2MagnetAA_elite:
-	Inherits: RA2Magnet_elite
+	Inherits@xRA2Magnet0: ^Warhead_Laser_Heavy
+	Inherits@xRA2Magnet1: ^Projectile_Laser_Heavy
+	Inherits@xRA2Magnet2: ^Effect_Laser_Heavy
+	-Warhead@Effect:
+	Range: 7032
+	ValidTargets: Vehicle, Structure
+	ReloadDelay: 200
+	Burst: 100
+	BurstDelays: 1
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Shape: Flat
+		Width: 350
+		Duration: 100
+		Color: FF55F505
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 2000
+		ValidTargets: Vehicle, Structure
+	# 20000-point Magnetism meter over `Burst: 100` shots = 200 a shot, so a full volley
+	# is a full lock -- exactly what the 100 stacked `Magnet` tokens used to mean. Neither
+	# firepower nor the target's damage modifiers touched the old grant, and the magnetron
+	# carries `FirepowerMultiplier@MultiWeapon: 50` while not elite, so both stay OFF.
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+		ValidTargets: Vehicle
+	-Warhead@EffectAir:
+	# W7MAT inline of RA2Magnet
+	Range: 8032
+	Projectile: LaserZap
+		Color: e6000045
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy:
@@ -1635,21 +1690,53 @@ RA2MindControl:
 RA2SMindControl:
 	ReloadDelay: 50
 	Range: 6000
-	Inherits: RA2MindControl
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
 
 RA2TMindControl:
 	ReloadDelay: 100
-	Inherits: RA2MindControl
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
 	Range: 8000
 
 RA2XMindControl:
-	Inherits: RA2MindControl
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
 	ReloadDelay: 125
 	Range: 9000
 	ValidTargets: MindControlStructure
 
 RA2XMindControlSplash:
-	Inherits: RA2MindControl
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
 	Range: 9000
 	ReloadDelay: 125
 	ValidTargets: MindControl
@@ -1696,7 +1783,12 @@ PsiWaveX:
 		Delay: 5
 
 BoomerLaunch:
-	Inherits: V3Launch
+	ReloadDelay: 50
+	Range: 15000
+	MinRange: 3000
+	Projectile: InstantHit
+		Inaccuracy: 1000
+	Warhead@1Dam: TargetDamage
 	ValidTargets: Ground, Air
 	InvalidTargets: Ship, Underwater
 	ReloadDelay: 50
@@ -3059,7 +3151,67 @@ RA2Virusgun2:
 	Inherits@wh: ^Warhead_Toxic_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
-	Inherits: RA2Virusgun
+	ValidTargets:
+	Warhead@Toxic_Light:
+	Inherits@roleflat: ^Warhead_Toxic_Light
+	Inherits@2: ^SniperWeapon
+	-InvalidTargets:
+	-TargetActorCenter:
+	ReloadDelay: 74
+	Range: 9999
+	Report: iviratta.wav
+	ValidTargets: Infantry
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: 88FF4400
+		ContrailEndColorUsePlayerColor: false
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+		Width: 33
+	Warhead@SniperWeapon: SpreadDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		Spread: 1
+		Falloff: 100, 0
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 6
+		Spread: 1
+		Falloff: 100, 0
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 2
+		Duration: 100
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+	-Warhead@SniperWeapon:
+	Warhead@Toxic_Light:
+		ValidTargets: Infantry
+		Damage: 24000
+		PercentageScale: 0
+		Spread: 1
+		Falloff: 100, 0
+	InvalidTargets: wall
+	TargetActorCenter: true
+	Warhead@Effect:
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 	ValidTargets: Ground, Ship, Garrisoned
 	-InvalidTargets:
 	Warhead@Toxic_Medium:

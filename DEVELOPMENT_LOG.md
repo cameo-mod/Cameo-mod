@@ -1,3 +1,27 @@
+## 2026-09-26 (late night) — W7 chain-collapse batch-4 (NOVA)
+
+60 chain-root children of Versus-free parents inlined verbatim across
+RA/RA2/RA2Mod weapon files (the `Inherits: <weapon>` edge removed, parent
+body spliced in place). Net W7: **595 -> 536** — 59 de-parented;
+`AsianChaosMine` keeps its second weapon edge `Inherits@2: AsianTankMine`
+(partial collapse, resolve-clean).
+
+Verification vs b95031f9b (strict-order, payload + ordered warhead keys):
+**60/60 clean.** Guards: orphan cancels 0 | empty warheads 0 |
+dup-inherits clean | cross-file dup defs 0 | local-Versus census 881 <=
+891 unchanged (parents were Versus-free by selection) | all shape buckets
+<= ratchets (W7 re-locked 595 -> 536) | balance-drift clean after ledger
+re-extract (13 in-lane ledgers: versus_templates provenance weapon ->
+template triples; same for reverted weapons whose parents were spliced).
+
+Splicer hazards hit and handled: an accidental second 60-weapon run on
+top of the first was detected by diffing the audit's W7 drop-set against
+the emitted name list (118 dropped vs 60 claimed); the extra 59 blocks
+were restored to b95031f9b text and resolve-verified clean (they become
+batch-5's pool). 10 same-key inheritance collisions (e.g.
+`WaveTurretImpact`, `KirovExplode`, `SteelStalkerRailgun_EMP`) remain
+deferred for individual handling.
+
 ## 2026-09-26 (night) — W7 rule-4 remediation + master merge + audit split (NOVA)
 
 PR #516 was BLOCKED by rule 4: W7 splices copied parents' inline

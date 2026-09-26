@@ -865,7 +865,32 @@ ra1_soviets_shocktrooper_portateslaarc_emp:
 		AimTargetStances: Enemy, Neutral
 
 ra1_soviets_shocktrooper_portateslafragment:
-	Inherits: ra1_soviets_shocktrooper_portateslaarc_emp
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 40
+	Range: 4652
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy:
+		Damage: 20000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 10000
+	# W7MAT inline of PortaTesla
+	Range: 5932
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+		Damage: 9102
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 4551
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 10000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_shocktrooper_portateslafragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 2326
 	Warhead@Tesla_Heavy:
 		Damage: 4551
@@ -901,7 +926,25 @@ ra1_soviets_zapper_zapperportateslaarc:
 		AimTargetStances: Enemy, Neutral
 
 ra1_soviets_zapper_zapperportateslafragment:
-	Inherits: ra1_soviets_zapper_zapperportateslaarc
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 32
+	Range: 5000
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy:
+		Damage: 32000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 16000
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 16000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_zapper_zapperportateslafragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 2500
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -959,7 +1002,32 @@ ra1_soviets_teslatank_ttankzaparc_emp:
 		AimTargetStances: Enemy, Neutral
 
 ra1_soviets_teslatank_ttankzaparcteslafragment1_emp:
-	Inherits: ra1_soviets_teslatank_ttankzaparc_emp
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 80
+	Range: 7300
+	Report: tesla1.aud
+	Warhead@Tesla_Heavy:
+		Damage: 40000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 20000
+	# W7MAT inline of TTankZap
+	Range: 7898
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+		Damage: 32798
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 16399
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 20000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 3650
 	Warhead@Tesla_Heavy:
 		Damage: 16399
@@ -1007,7 +1075,21 @@ ra1_soviets_heavyteslatank_ttankzap2_emp:
 		Damage: 20000
 
 ra1_soviets_heavyteslatank_ttankzap2arc_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2_emp
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
+	ReloadDelay: 80
+	Range: 6650
+	Report: tesla1.aud
+	Warhead@Tesla_Super:
+		Damage: 40000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 20000
+	Warhead@Tesla_Super:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 20000
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
 		Amount: 1
@@ -1088,7 +1170,28 @@ ra1_soviets_teslacoil_teslazaparc_emp:
 		AimTargetStances: Enemy, Neutral
 
 ra1_soviets_teslacoil_teslazaparcteslafragment1_emp:
-	Inherits: ra1_soviets_teslacoil_teslazaparc_emp
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 3
+	Range: 9320
+	Report: tesla1.aud
+	Warhead@Tesla_Heavy:
+		Damage: 32000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 16000
+	# W7MAT inline of TeslaZap
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 16000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_teslacoil_teslazaparcteslafragment1_emp
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 4660
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -11354,7 +11457,54 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA:
 	Warhead@EMPUnit:
 		ValidTargets: Air
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@2: ^Effect_Tesla_Impact_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 10
+	Range: 5000
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Air
+		Damage: 1000
+	# W7MAT inline of ra1_soviets_gatlingtank_teslaragatlingtankcannon
+	Range: 7500
+	ValidTargets: Air
+
+	Warhead@Tesla_Heavy:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@Tesla_Heavy_ExtraDamage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPUnit:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaArc: FireShrapnel
+		InvalidTargets:
+		ValidTargets: Air
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+
+	Warhead@Tesla_Heavy:
+		ValidTargets: Air
+	Warhead@Tesla_Heavy_ExtraDamage:
+		ValidTargets: Air
+	Warhead@EMPUnit:
+		ValidTargets: Air
 	Range: 3750
 	-Warhead@TeslaArc:
 

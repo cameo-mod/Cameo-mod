@@ -2554,7 +2554,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiAntiTankCannon"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
        "^Warhead_CannonAP"
@@ -3041,7 +3043,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifleCons"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3306,7 +3310,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3366,7 +3372,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3690,7 +3698,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3762,7 +3772,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3877,7 +3889,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "naxis_naxiriflerecruit_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3935,7 +3949,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "naxis_naxiriflerecruit_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4071,7 +4087,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "naxis_naxiriflesoldier_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4129,7 +4147,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "naxis_naxiriflesoldier_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -7189,7 +7209,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "Nax120mmAssault"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8267,7 +8289,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "Nax120mmAssault"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8526,7 +8550,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "KingNaxTigerCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10208,7 +10234,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxTigerCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"

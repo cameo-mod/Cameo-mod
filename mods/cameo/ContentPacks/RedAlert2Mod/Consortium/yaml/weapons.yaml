@@ -2442,7 +2442,13 @@ bfg10kCannonDummy:
 		ValidTargets: Ground, Water, Air
 
 superbfg10kCannonDummy:
-	Inherits: bfg10kCannonDummy
+	Range: 25000
+	ReloadDelay: 750
+	Projectile: InstantHit
+	Report: bfg10kchargesound.mp3
+	ValidTargets: Ground, Water, Air
+	Warhead: TargetDamage
+		ValidTargets: Ground, Water, Air
 	Range: 10238976
 
 bfg10kCannon:

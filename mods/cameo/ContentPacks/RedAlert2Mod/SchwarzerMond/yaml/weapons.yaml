@@ -409,7 +409,16 @@ LunarPanzerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 LunarPanzerCannon_elite:
-	Inherits: LunarPanzerCannon
+	Inherits@xLunarPanzerCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xLunarPanzerCannon1: ^Projectile_Shell_Medium
+	Inherits@xLunarPanzerCannon2: ^Effect_Explosion_Medium_RA2
+	ReloadDelay: 60
+	Range: 5121
+	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
+	Projectile: Bullet
+		Speed: 512
+	Warhead@CannonHE_Medium:
+		Damage: 10000
 	Range: 6121
 	Burst: 2
 	BurstDelays: 3
@@ -2490,7 +2499,34 @@ BlackHoleMaker:
 		ValidTargets: Air, Ground, Water
 
 BlackHoleMaker_elite:
-	Inherits: BlackHoleMaker
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
+	ReloadDelay: 60
+	Range: 6414
+	Projectile: KKNDLaser
+		Duration: 12
+		Colors: ee000008
+		InnerLightness: 200
+		OuterLightness: 100
+		Radius: 2
+		Distortion: 150
+		DistortionAnimation: 150
+		SegmentLength: 350
+		Inaccuracy: 128
+	ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy:
+		Damage: 60000
+	Warhead@1Actor: SpawnActor
+		Actors: schwarzermond_hole_small
+		#OwnerType: InternalName
+		#InternalOwner: Creeps
+		Range: 5
+		Image: ra2_allies_chronominer
+		Sequence: warpout
+		Palette: ra2effect
+		ValidTargets: Air, Ground, Water
 	Report: obelray1.aud
 	Range: 7414
 	Burst: 2
@@ -2515,7 +2551,16 @@ NaxiBlackholeShoot:
 		ValidTargets: Ground, Water
 		Damage: 2000
 BlackHoleSuck:
-	Inherits: NanoReturn
+	ReloadDelay: 77
+	Range: 7777
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: black_smokey
+		TrailImage: black_smokey
+		TrailInterval: 2
+		Speed: 277
+	Warhead@Heal: TargetDamage
 	ValidTargets: BlackHole
 	-Projectile:
 	Projectile: Missile

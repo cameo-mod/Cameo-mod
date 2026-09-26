@@ -1301,7 +1301,39 @@ PrismTankCharge:
 		ValidTargets: PrismTowerChargeable
 
 PrismTankCharge_elite:
-	Inherits: PrismTankCharge
+	ReloadDelay: 3
+	Range: 9630
+	ValidTargets: Ground, Water, Air
+	Report: bpriat1a.wav
+	Projectile: PlasmaBeam
+		Width: 75
+		Duration: 50
+		ZOffset: 2047
+		UsePlayerColor: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		Colors: 88888888
+		CenterBeam: true
+		CenterBeamWidth: 50
+		CenterBeamColor: CCCCCCCC
+		SecondaryCenterBeam: true
+		SecondaryCenterBeamColor: FFFFFFFF
+		# Distortion: 10
+		# DistortionAnimation: 10
+		# DistortionAnimation: 10
+	Warhead@1Dum: Dummy
+	ReloadDelay: 100
+	Range: 10000
+	ValidTargets: PrismTowerChargeable
+	Projectile: PlasmaBeam
+		StartOffset: -256,0,1408
+		TargetActorCenter: false
+	Warhead@charge: GrantExternalCondition
+		Range: 256
+		Duration: 100
+		Condition: powercharged
+		ValidRelationships: Ally
+		ValidTargets: PrismTowerChargeable
 	Range: 11111
 
 RA2PrismBeam:
@@ -1335,7 +1367,31 @@ RA2Prism:
 		AimTargetStances: Enemy, Neutral
 
 PrismScatter:
-	Inherits: RA2Prism
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
+	Report: bpriat1a.wav
+	Warhead@Laser_Heavy:
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Range: 3333
 	-Report:
 	Projectile: LaserZap
@@ -2700,7 +2756,20 @@ GuardianGIMG_elite:
 			Spaceship: 6
 			Superheavy: 5
 GuardianGIMG2_elite:
-	Inherits: GuardianGIMG2
+	Inherits@xRA2para0: ^Warhead_Bullet_Medium
+	Inherits@xRA2para1: ^Projectile_Bullet_Medium
+	Inherits@xRA2para2: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 4750
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		InvalidTargets: Air
+		Damage: 4000
 	Range: 5750
 	Burst: 6
 

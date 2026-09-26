@@ -2500,7 +2500,9 @@
       "requires": "!deployed && rank-elite && ra2_allies_upgrade_elitegi",
       "slot": "Armament@ELITE2",
       "versus_templates": [
-       "GuardianGIMG2"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3043,9 +3045,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
-      "versus_templates": [
-       "TanyaAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SEALAttach",
       "weapon_class_source": "none"
@@ -13258,9 +13258,7 @@
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@EliteCharge",
-      "versus_templates": [
-       "PrismTankCharge"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PrismTankCharge_elite",
       "weapon_class_source": "none"

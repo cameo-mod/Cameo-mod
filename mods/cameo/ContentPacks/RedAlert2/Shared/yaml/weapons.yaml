@@ -3224,7 +3224,26 @@ RA2PortaTesla2:
 		AimTargetStances: Enemy, Neutral
 
 RA2PortaTesla3:
-	Inherits: RA2PortaTesla2
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 5222
+	ReloadDelay: 100
+	Report: itesatta.wav
+	Warhead@Tesla_Heavy:
+		Damage: 24000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 12000
+	Range: 5777
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 12000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 6222
 	Report: itesat2a.wav, itesat2b.wav
 	Warhead@EMPUnit: AffectsIntegrity
@@ -8697,7 +8716,24 @@ TanyaBomb:
 			Helicopter: 11
 			Spaceship: 10
 SEALAttach:
-	Inherits: TanyaAttach
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: ivanattachable
+	InvalidTargets: ivanattached, Aircraft
+	Warhead@1: AttachDelayedWeapon
+		Weapon: IvanBomb
+		Type: ivanbomb
+		TriggerTime: 200
+		Range: 1
+	Warhead@2: TargetDamage
+	ValidTargets: Vehicle, Ship, Submarine
+	InvalidTargets: ivanattached, Monster
+	Warhead@1: AttachDelayedWeapon
+		Weapon: TanyaBomb
+		TriggerTime: 50
 	ValidTargets: Vehicle, Ship, Submarine, demolishable
 	Warhead@1: AttachDelayedWeapon
 		Weapon: SealBomb

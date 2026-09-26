@@ -1117,7 +1117,25 @@ naxis_naxiriflesoldier_rifle:
 		InvalidTargets: Air
 		Damage: 4000
 naxis_naxiriflesoldier_rifle_elite:
-	Inherits: naxis_naxiriflesoldier_rifle
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 50
+	Range: 5000
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		ContrailLength: 20
+		Speed: 10000
+		Width: 50
+	Warhead@Bullet_Light:
+		InvalidTargets: Air
+		Damage: 4000
 	Range: 6500
 	Burst: 2
 	BurstDelays: 3
@@ -1142,7 +1160,17 @@ naxis_naxiriflerecruit_rifle:
 		PercentageScale: 5000
 		Damage: 8000
 naxis_naxiriflerecruit_rifle_elite:
-	Inherits: naxis_naxiriflerecruit_rifle
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 100
+	Range: 5227
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
+	ValidTargets: Ground, Water
+	Warhead@Bullet_Light:
+		InvalidTargets: Air
+		PercentageScale: 5000
+		Damage: 8000
 	Range: 6500
 	Burst: 2
 	BurstDelays: 3
@@ -1186,7 +1214,15 @@ NaxiRifleCons:
 	Warhead@Bullet_Light:
 		Damage: 4000
 NaxiRifleCons_elite:
-	Inherits: NaxiRifleCons
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 100
+	Range: 5501
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
+	ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Light:
+		Damage: 4000
 	Range: 6501
 	Burst: 2
 	BurstDelays: 3
@@ -1929,7 +1965,32 @@ NaxiFlamerTroop:
 	BurstDelays: 3
 
 NaxiFlamerTroop_elite:
-	Inherits: NaxiFlamerTroop
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Burst: 6
+	BurstDelays: 3
+	Range: 6666
+	StartBurstReport: flamer2.aud
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Warhead@Flame_Light:
+		Damage: 4000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	# W7MAT inline of AsianFlamerTurret
+	Range: 4830
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 3
 	Range: 5830
 	Burst: 6
 	BurstDelays: 3
@@ -1980,7 +2041,24 @@ NaxiSniper:
 		Falloff: 100, 0
 
 NaxiSniper_elite:
-	Inherits: NaxiSniper
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
+	ReloadDelay: 120
+	Range: 7777
+	Warhead@Sniper_Light:
+		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 12
+		Spread: 1
+		Falloff: 100, 0
 	Report: ramgun2.aud
 	Range: 8888
 	Burst: 2
@@ -3010,7 +3088,22 @@ NaxiAntiTankCannon:
 		Damage: 28000
 		Heaviness: 0
 NaxiAntiTankCannon_elite:
-	Inherits: NaxiAntiTankCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
+	ReloadDelay: 75
+	Range: 7361
+	Report: ra2m_naxis_sounds|nax_hotwizer.wav
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	Warhead@CannonAP:
+		Damage: 28000
+		Heaviness: 0
 	Range: 8361
 	Burst: 2
 	BurstDelays: 3
@@ -5760,7 +5853,16 @@ NaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 NaxTigerCannon_elite:
-	Inherits: NaxTigerCannon
+	Inherits@xNaxTigerCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xNaxTigerCannon1: ^Projectile_Shell_Medium
+	Inherits@xNaxTigerCannon2: ^Effect_Explosion_Medium_RA2
+	Range: 5000
+	ReloadDelay: 50
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Warhead@CannonHE_Medium:
+		Damage: 10000
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -5792,7 +5894,16 @@ KingNaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 KingNaxTigerCannon_elite:
-	Inherits: KingNaxTigerCannon
+	Inherits@xKingNaxTigerCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xKingNaxTigerCannon1: ^Projectile_Shell_Medium
+	Inherits@xKingNaxTigerCannon2: ^Effect_Explosion_Medium_RA2
+	Range: 5000
+	ReloadDelay: 50
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Warhead@CannonHE_Medium:
+		Damage: 20000
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -5828,7 +5939,19 @@ Nax120mmAssault:
 	ReloadDelay: 28
 
 Nax120mmAssault_elite:
-	Inherits: Nax120mmAssault
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
+	Range: 5200
+	ReloadDelay: 28
 	Range: 6200
 	Burst: 2
 	BurstDelays: 3

@@ -9791,7 +9791,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Arcing",
       "versus_templates": [
-       "ra1_soviets_heavyteslatank_ttankzap2_emp"
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"

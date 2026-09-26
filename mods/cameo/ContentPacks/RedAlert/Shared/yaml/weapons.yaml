@@ -583,7 +583,86 @@ LightSniper:
 
 ReimuYinYangOrb:
 	# Shrine super-orb projectile. Pure Magic (2026-08-10). Was 32k Tesla + 32k Magic = 64k total.
-	Inherits: Hakureiring2
+	# Anti-boss ability: targets Epic/Psionic/Monster only. Pure Magic (2026-08-10).
+	# Combined damage: was 120k Tesla + 120k Magic = 240k total → single 240k Magic.
+	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
+	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
+	InvalidTargets: Epic, Psionic, Monster
+	ReloadDelay: 30
+	Burst: 3
+	BurstDelays: 10
+	Range: 6666
+	Projectile: Missile
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 66
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		Sequences: idle
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiring
+		TrailSequences: idle2, idle1
+		TrailInterval: 0
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		CloseEnough: 333
+		AllowSnapping: true
+	Warhead@Magic_Heavy:
+		InvalidTargets: Air
+		ValidTargets: Air, Ground, Water
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect:
+		Explosions: tsring
+		ExplosionPalette: tseffect
+		ImpactSounds:
+
+# TODO "Hakureiring2" uses MCImmune like a placeholder, in the future will be replaced with Mind Controllers and Magic Monsters
+	-InvalidTargets:
+	ValidTargets: Epic, Psionic, Monster
+	ReloadDelay: 100
+	Burst: 1
+	Report: ra1_japan_sounds|thbomb.wav
+	Projectile: Missile
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 44
+		Speed: 222
+		Inaccuracy: 222
+		RangeLimit: 22222
+		Image: hakureiringspecial
+		Sequences: bullet
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiringspecial
+		TrailSequences: trail
+		TrailInterval: 2
+		TrailDelay: 1
+	Warhead@Magic_Heavy:
+		-InvalidTargets:
+		Damage: 240000
+		ValidTargets: Air, Ground, Water
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
+		Image: hakurei_giphy
+		Explosions: fades
+		ExplosionPalette: player
+		UsePlayerPalette: true
+		AirThreshold: 6400
+		ImpactSounds: ra1_shared_sounds|thgun.wav
+
+## Unused
 	Burst: 8
 	BurstDelays: 10
 	ReloadDelay: 10

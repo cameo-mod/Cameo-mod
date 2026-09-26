@@ -2520,7 +2520,9 @@
       "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@3",
       "versus_templates": [
-       "RA2CoilBolt2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -2621,7 +2623,9 @@
       "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@Charged3",
       "versus_templates": [
-       "RA2OPCoilBolt2"
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -3118,9 +3122,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@aa",
-      "versus_templates": [
-       "IvanAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IvanAttachAir",
       "weapon_class_source": "none"
@@ -3231,7 +3233,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2RadBeamWeapon"
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -3636,7 +3640,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYE",
       "versus_templates": [
-       "RA2CRFlakGuyGun"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -3665,7 +3671,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYAAE",
       "versus_templates": [
-       "RA2FLAKAA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -3694,7 +3702,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDE",
       "versus_templates": [
-       "RA2CRFlakGuyGun"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -3723,7 +3733,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDAAE",
       "versus_templates": [
-       "RA2FLAKAA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -3898,7 +3910,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -4023,7 +4037,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@GARRISONED3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -5775,9 +5791,7 @@
       "reloaddelay": "10",
       "requires": "rank-elite",
       "slot": "Armament@Elite",
-      "versus_templates": [
-       "RA2DroneJump"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "RA2DroneJump_elite",
       "weapon_class_source": "none"
@@ -5912,7 +5926,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "RA2TankBolt"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

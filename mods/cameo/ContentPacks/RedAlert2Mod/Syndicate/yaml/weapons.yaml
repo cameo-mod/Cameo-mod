@@ -10,7 +10,16 @@ latinsyndicate_latinmilitia_ak47:
 	Warhead@Bullet_Light:
 		Damage: 2000
 latinsyndicate_latinmilitia_ak47_elite:
-	Inherits: latinsyndicate_latinmilitia_ak47
+	Inherits@xlatinsyndicate_latinmilitia_ak470: ^Warhead_Bullet_Light
+	Inherits@xlatinsyndicate_latinmilitia_ak471: ^Projectile_Bullet_Light
+	Inherits@xlatinsyndicate_latinmilitia_ak472: ^Effect_Bullet_Light_RA2
+	Range: 5395
+	ReloadDelay: 22
+	Burst: 3
+	BurstDelays: 4
+	Report: vwaratta.wav, vwarattb.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
 	Range: 5500
 	Burst: 6
 	BurstDelays: 3
@@ -177,7 +186,25 @@ LatinTankKillerRocket:
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 LatinTankKillerRocket_elite:
-	Inherits: LatinTankKillerRocket
+	Inherits@xLatinTankKillerRocket0: ^Warhead_MissileAP_Light
+	Inherits@xLatinTankKillerRocket1: ^Projectile_Missile_Light
+	Inherits@xLatinTankKillerRocket2: ^Effect_Clsn_Small_RA2
+	Report: bazook1.aud
+	ReloadDelay: 66
+	Range: 6666
+	Projectile: Missile
+		-TrailImage:
+		Speed: 666
+		MinimumLaunchAngle: 222
+		MaximumLaunchAngle: 222
+		Acceleration: 6
+	Warhead@MissileAP_Light:
+		Damage: 26000
+	Projectile:
+		Image: ra2_dragon
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
 	Report: bazook1.aud
 	Range: 7777
 	Warhead@MissileAP_Light:
@@ -210,7 +237,22 @@ RA2NarcoPistol:
 		Damage: 10
 
 RA2NarcoPistols_elite:
-	Inherits: RA2NarcoPistol
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	ReloadDelay: 22
+	Range: 6300
+	Report: itanatta.wav, itanattb.wav
+	ValidTargets: Ground, Water, Garrisoned, Air
+	Warhead@Sniper_Light:
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 20000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 20000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 10
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
@@ -239,7 +281,27 @@ NarcoGrenade:
 		AimTargetStances: Enemy, Neutral
 
 NarcoGrenade_elite:
-	Inherits: NarcoGrenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	ReloadDelay: 77
+	Range: 5701
+	Report: M203.aud
+	Projectile: Bullet
+		Speed: 140
+		ContrailLength: 28
+		ContrailStartWidth: 28
+		ContrailEndWidth: 7
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailEndColorUsePlayerColor: true
+	Warhead@Demolition_Light:
+		Damage: 70000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 3
+		AimChance: 33
+		AimTargetStances: Enemy, Neutral
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
@@ -384,7 +446,16 @@ RA2Narco60mm:
 	Warhead@CannonHE_Medium:
 		Damage: 16000
 RA2Narco60mm_elite:
-	Inherits: RA2Narco60mm
+	Inherits@xRA2Narco60mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2Narco60mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2Narco60mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5800
+	ReloadDelay: 20
+	Projectile: Bullet
+		Speed: 580
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Warhead@CannonHE_Medium:
+		Damage: 16000
 	Range: 6800
 	Burst: 2
 	BurstDelays: 3
@@ -2066,7 +2137,25 @@ LatinRusherRocket:
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 LatinRusherRocket_elite:
-	Inherits: LatinRusherRocket
+	Inherits@xLatinRusherRocket0: ^Warhead_MissileAP_Medium
+	Inherits@xLatinRusherRocket1: ^Projectile_Missile_Medium
+	Inherits@xLatinRusherRocket2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 101
+	Range: 5031
+	Report: vaegatta.wav, vaegattb.wav
+	InvalidTargets: Infantry
+	Projectile: Missile
+		-TrailImage:
+		VerticalRateOfTurn: 16
+		Speed: 800
+		MinimumLaunchAngle: 60
+		ContrailLength: 35
+	Warhead@MissileAP_Medium:
+		Damage: 16000
+	Projectile:
+		Image: patriot
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
 	Range: 6031
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2745,7 +2834,25 @@ LatinSmokerRocket:
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 LatinSmokerRocket_elite:
-	Inherits: LatinSmokerRocket
+	Inherits@xLatinSmokerRocket0: ^Warhead_MissileAP_Medium
+	Inherits@xLatinSmokerRocket1: ^Projectile_Missile_Medium
+	Inherits@xLatinSmokerRocket2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 116
+	Range: 6550
+	Report: vaegatta.wav, vaegattb.wav
+	InvalidTargets: Infantry
+	Projectile: Missile
+		-TrailImage:
+		VerticalRateOfTurn: 16
+		Speed: 800
+		MinimumLaunchAngle: 60
+		ContrailLength: 35
+	Warhead@MissileAP_Medium:
+		Damage: 24000
+	Projectile:
+		Image: patriot
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
 	Range: 7550
 	Projectile: Missile
 		VerticalRateOfTurn: 16

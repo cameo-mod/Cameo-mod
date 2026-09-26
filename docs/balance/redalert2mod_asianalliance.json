@@ -2657,7 +2657,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianCrocBite"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3741,7 +3743,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "AsianFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3832,7 +3836,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "AsianFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -4138,7 +4144,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "asianalliance_asianmilitia_shotgun"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4252,7 +4260,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "asianalliance_asianmilitia_shotgun"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4826,7 +4836,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianNinjaStar"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4884,7 +4896,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "AsianNinjaStar"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -5057,7 +5071,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARYELITEUpgrade",
       "versus_templates": [
-       "AsianTankKillerRocket_elite"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5171,7 +5187,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITEUpgrade",
       "versus_templates": [
-       "AsianTankKillerRocket_elite"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7476,7 +7494,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianFlamerTank"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -7761,7 +7781,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianHowitzerCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"

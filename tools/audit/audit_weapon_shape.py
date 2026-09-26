@@ -176,7 +176,13 @@ W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) �
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 595   # 520 -> 595: rule-4 restoration (NOVA, 2026-09-26) — the 75
+W7_BASELINE = 536   # 595 -> 536: W7 chain-collapse batch-4 (NOVA, 2026-09-26) —
+                    # 60 chain-root children of Versus-free parents inlined
+                    # verbatim (59 de-parented; AsianChaosMine keeps a second
+                    # weapon edge Inherits@2: AsianTankMine). Resolve-identical
+                    # strict-order on all 60 vs b95031f9b; orphan cancels 0,
+                    # local-Versus census unchanged at 881 <= 891.
+                    # was: 520 -> 595: rule-4 restoration (NOVA, 2026-09-26) — the 75
                     # weapons whose spliced parent bodies carried inline
                     # Versus/PercentageVersus had their `Inherits: <weapon>`
                     # edge restored (rule: never materialize Versus into a

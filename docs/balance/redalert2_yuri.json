@@ -68,7 +68,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2DiskLaser"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1162,9 +1164,7 @@
       "range": "8000",
       "reloaddelay": "75",
       "slot": "Armament@CONTROL",
-      "versus_templates": [
-       "RA2MindControl"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "RA2TMindControl",
       "weapon_class_source": "none"
@@ -2534,7 +2534,8 @@
        "^Warhead_Toxic_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
-       "RA2Virusgun"
+       "^Warhead_Toxic_Light",
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Toxic_Medium",
@@ -2677,7 +2678,8 @@
        "^Warhead_Toxic_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
-       "RA2Virusgun"
+       "^Warhead_Toxic_Light",
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Toxic_Medium",
@@ -2832,9 +2834,7 @@
       "range": "9000",
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "RA2MindControl"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "RA2XMindControl",
       "weapon_class_source": "none"
@@ -2857,9 +2857,7 @@
       "reloaddelay": "125",
       "requires": "!yuri_upgrade_domination",
       "slot": "Armament@Splash",
-      "versus_templates": [
-       "RA2MindControl"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "RA2XMindControlSplash",
       "weapon_class_source": "none"
@@ -2997,9 +2995,7 @@
       "range": "15000",
       "reloaddelay": "50",
       "slot": "Armament@LAUNCH",
-      "versus_templates": [
-       "V3Launch"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "BoomerLaunch",
       "weapon_class_source": "none"
@@ -4870,7 +4866,9 @@
       "requires": "rank-elite && yuri_upgrade_supermagnets",
       "slot": "Armament@elite_aa",
       "versus_templates": [
-       "RA2Magnet_elite"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4968,9 +4966,7 @@
       "range": "7000",
       "reloaddelay": "75",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "RA2MindControl"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "RA2SMindControl",
       "weapon_class_source": "none"
