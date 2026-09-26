@@ -52,3 +52,14 @@ casters:  # special-mechanic attacks (mind control, spells, spy work, repair)
   - wc2_humans_highelfsorceress
   - cabal_engineer
   - cabal_dissolver
+
+vehicle_queue:  # built on Vehicle queues — "all infantry garrison" (ruling
+  # 2026-09-26) means units BUILT as infantry; these are vehicles, exempt
+  # from G4. cabal_ravager is deliberately NOT here: it moves to the
+  # Infantry queue in Claude's armour PR and then garrisons.
+  - asianalliance_pulverizermecha
+  - futuretech_plasmastrider
+  - steelconsortium_megalodon
+  - steelconsortium_poseidontank
+  - steelconsortium_stalker
+  - steelconsortium_whiterabbit
