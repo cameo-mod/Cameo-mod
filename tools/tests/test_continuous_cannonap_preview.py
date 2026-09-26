@@ -409,7 +409,7 @@ class PreviewConstruction(unittest.TestCase):
         main = [r for r in main if r[0] not in gen.PLATING_CYCLE]
         # `emit_versus`'s own finalisation: the §12.0l derived columns, then pseudo-rows first
         # and armors descending (stable), exactly as every emitted Versus node is written.
-        rows = gen.derive_rows(gen.plating_rows(FAMILY) + main)
+        rows = gen.derive_rows(gen.plating_rows(FAMILY) + main, heroic=True)
         lead = [r for r in rows if r[0] in gen.NON_ARMOR_ROWS]
         body = sorted((r for r in rows if r[0] not in gen.NON_ARMOR_ROWS), key=lambda r: -r[1])
         return lead + body

@@ -24,8 +24,11 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 import miniyaml  # noqa: E402
 import derive_versus_columns as D  # noqa: E402
 
-# Measured 2026-09-26 after weapons/weapons.yaml was written (30,445 -> 27,944). LOWER ONLY.
-RATCHET = 27944
+# Measured 2026-09-26 after weapons/weapons.yaml was written (30,445 -> 27,944), then RE-PINNED
+# once to 30,229 the same day because the MEASURE grew, not the debt: the maintainer added a
+# 13th derived column (`Airborne` = geomean of Scout, Flak, Helicopter), so every pack table owes
+# one more row. That is the only legitimate raise — a new column ruled into §12.0l. LOWER ONLY.
+RATCHET = 30229
 
 
 def main() -> int:
