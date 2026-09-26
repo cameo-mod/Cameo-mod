@@ -1,3 +1,21 @@
+## 2026-09-27 — dead warhead fields: in-lane half of the #431 regression (NOVA)
+
+DAWN's fleet handoff (STATUS_2026-09-27_dawn_dwf_batch2_pr536.md) assigned
+the lane's share: 31 dead source lines deleted across RA/RA2/RA2Mod +
+`redalert2mod.yaml` (Sniper/OpenTopped `Falloff`, spawner `FireShrapnel`/
+`FireFragment` residue, `CreateEffect.Range/Duration`, `Burst`,
+`AffectsIntegrity.Falloff`), plus `Heal`'s `-Explosions`/`-ImpactActors:`
+retype-cancels (`^HealingWeapon` supplier stays live for 3 heal weapons).
+The `ttankzap2arc` fragments deliberately skipped — DAWN's #535 owns them.
+Sources classified via her `dead_field_sources.py` (used read-only from
+`devin/dawn/dwf-batch2`; not committed — her PR carries it).
+`audit_dead_warhead_fields`: **20 kinds / 72 weapons -> 12 / 56** on this
+branch; the remainder is `weapons.yaml`-sourced = #535/#536 territory, so
+the audit reaches 0 once that stack merges. 27/27 resolve-verified
+(behavioural invariants; diffs are the removed dead leaves). Guards all
+green; drift clean; boot-gate PASS. Ratchet left at 15 — the re-lock to 0
+belongs on DAWN's stack post-merge.
+
 ## 2026-09-27 — W6 shadow-deletion batch-1 (NOVA)
 
 Deleted 52 local effect-warhead decls on 24 RA/RA2/RA2Mod weapons — each a
