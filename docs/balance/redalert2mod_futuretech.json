@@ -6143,24 +6143,49 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
       "requires": "rank-elite",
       "slot": "Armament@elite",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "RA2Robotmm"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

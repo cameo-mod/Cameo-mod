@@ -592,7 +592,7 @@ RA2AsianShotgunFanatic2:
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 50
 	Range: 5000
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	Warhead@Demolition_Light:
 		Versus:
 			None: 183
@@ -817,7 +817,7 @@ RA2AsianShotgunFanatic3:
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 50
 	Range: 5000
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	Warhead@Demolition_Light:
 		Versus:
 			None: 183
@@ -1051,7 +1051,7 @@ AsianSamuraiSword2:
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
-	Report: aa_samu_kil1.wav
+	Report: ra2m_asianalliance_sounds|aa_samu_kil1.wav
 	Range: 1579
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
@@ -1065,7 +1065,7 @@ AsianSamuraiSword3:
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
-	Report: aa_samu_kil1.wav
+	Report: ra2m_asianalliance_sounds|aa_samu_kil1.wav
 	Range: 1579
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
@@ -5028,7 +5028,7 @@ AsianSinglePlasma_elite:
 	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Range: 5190
 	ReloadDelay: 34
-	Report: aa_plasfire.wav
+	Report: ra2m_asianalliance_sounds|aa_plasfire.wav
 	Projectile: Bullet
 		Speed: 519
 		Image: aa_plasred
@@ -9621,7 +9621,7 @@ asianalliance_fanatic_shotgun_upgrade:
 	Burst: 10
 	BurstDelays: 0
 	ValidTargets: Ground, Water
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	SoundVolume: 0.1
 	Projectile: Bullet
 		Speed: 4000
@@ -9753,7 +9753,7 @@ asianalliance_fanatic_shotgun_elite:
 	Burst: 10
 	BurstDelays: 0
 	ValidTargets: Ground, Water
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	SoundVolume: 0.1
 	Projectile: Bullet
 		Speed: 4000

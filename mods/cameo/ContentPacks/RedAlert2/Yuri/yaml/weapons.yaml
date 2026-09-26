@@ -2480,7 +2480,7 @@ RA2GattlingMG3_AA:
 			Superheavy: 5
 	# W7MAT inline of RA2GattlingMG1
 	Range: 5500
-	Report: vgatlo8a.wav, vgatlo8b.wav
+	Report: ra2_yuri_sounds|vgatlo8a.wav, ra2_yuri_sounds|vgatlo8b.wav
 	ReloadDelay: 2
 	Warhead@Bullet_Medium_Flat: AreaDamage
 	Warhead@Bullet_Medium_Flat:
@@ -2670,7 +2670,7 @@ YuriGatlingCannonMG3:
 			Superheavy: 5
 	# W7MAT inline of RA2GattlingMG1
 	Range: 5500
-	Report: vgatlo8a.wav, vgatlo8b.wav
+	Report: ra2_yuri_sounds|vgatlo8a.wav, ra2_yuri_sounds|vgatlo8b.wav
 	ReloadDelay: 2
 	Warhead@Bullet_Medium_Flat: AreaDamage
 	Warhead@Bullet_Medium_Flat:
@@ -2973,7 +2973,7 @@ YuriGatlingTankMG3:
 	Inherits@xYuriGatlingTankMG30: ^Warhead_Bullet_Medium
 	Inherits@xYuriGatlingTankMG31: ^Projectile_Bullet_Medium
 	Inherits@xYuriGatlingTankMG32: ^Effect_Bullet_Medium_RA2
-	Report: vgatlo8a.wav, vgatlo8b.wav
+	Report: ra2_yuri_sounds|vgatlo8a.wav, ra2_yuri_sounds|vgatlo8b.wav
 	Range: 5940
 	ReloadDelay: 2
 	ValidTargets: Ground, Water
@@ -3001,7 +3001,7 @@ YuriGatlingTankMG3_AA:
 	Inherits@xYuriGatlingTankMG3_AA0: ^Warhead_Bullet_Medium
 	Inherits@xYuriGatlingTankMG3_AA1: ^Projectile_Bullet_Medium
 	Inherits@xYuriGatlingTankMG3_AA2: ^Effect_Bullet_Medium_RA2
-	Report: vgatlo8a.wav, vgatlo8b.wav
+	Report: ra2_yuri_sounds|vgatlo8a.wav, ra2_yuri_sounds|vgatlo8b.wav
 	Range: 8910
 	ReloadDelay: 2
 	ValidTargets: Air

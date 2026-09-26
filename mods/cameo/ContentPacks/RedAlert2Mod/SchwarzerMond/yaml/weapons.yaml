@@ -3223,7 +3223,7 @@ UbermenschLaser:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 UbermenschLaser_elite:
@@ -3358,7 +3358,7 @@ UbermenschLaser_elite:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
@@ -6217,7 +6217,7 @@ Lunar_YellowUbermenschLaser:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	BurstDelays: 3
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -6355,7 +6355,7 @@ Lunar_YellowUbermenschLaser_elite:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	BurstDelays: 3
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -6493,7 +6493,7 @@ Lunar_AmplifiedUbermenschLaser:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	BurstDelays: 3
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -6635,7 +6635,7 @@ Lunar_AmplifiedUbermenschLaser_elite:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	BurstDelays: 3
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water

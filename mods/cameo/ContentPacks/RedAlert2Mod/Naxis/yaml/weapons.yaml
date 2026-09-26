@@ -261,7 +261,7 @@ NaxiWW2Machinegun_AA:
 	Inherits@xNaxiWW2Machinegun0: ^Warhead_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun1: ^Projectile_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun2: ^Effect_Bullet_Medium_RA2
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
 	BurstDelays: 4
@@ -1610,7 +1610,7 @@ NaxiMP40_elite:
 	Burst: 10
 	BurstDelays: 5
 	Range: 4000
-	Report: nax_mp40.wav
+	Report: ra2m_shared_sounds|nax_mp40.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FF9933
@@ -4396,7 +4396,7 @@ NaxQuadCannon_AA:
 	Burst: 6
 	BurstDelays: 4
 	Range: 5368
-	Report: nax_aa1.wav
+	Report: ra2m_naxis_sounds|nax_aa1.wav
 	Projectile: Bullet
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -6095,7 +6095,7 @@ NaxiAlienPistol_elite:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
