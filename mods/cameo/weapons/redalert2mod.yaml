@@ -804,7 +804,6 @@ Support_EMP_Bomb:
 		InvalidTargets: Infantry
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
 		Damage: 500000
 		Spread: 10000
 		InvalidTargets: Infantry
@@ -2175,9 +2174,7 @@ NaxiMeteorSpawner:
 	Warhead@1: FireFragment
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteorSpreader
-		AimChance: 23
 		ImpactActors: false
-		TargetActorCenter: true
 
 NaxiMeteorSpawner2:
 	Projectile: InstantHit
@@ -2190,7 +2187,6 @@ NaxiMeteorSpawner2:
 		Weapon: NaxiMeteorSpreader
 		AimChance: 13
 		ImpactActors: false
-		TargetActorCenter: false
 
 NaxiMeteorSpreader:
 	Range: 10000
@@ -2228,7 +2224,6 @@ NaxiMeteor:
 		GlowFadeInFrames: 12
 	Warhead@MeteorFlameFragment: FireShrapnel
 		Weapon: MeteorFlameFragment
-		Range: 4
 		Amount: 4
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
@@ -3163,7 +3158,6 @@ LatinBuggyRocket_elite:
 		Amount: 1
 		AimChance: 50
 		ImpactActors: false
-		TargetActorCenter: true
 
 12MissilesSpawner2:
 	Projectile: InstantHit
@@ -3176,7 +3170,6 @@ LatinBuggyRocket_elite:
 		Amount: 1
 		AimChance: 50
 		ImpactActors: false
-		TargetActorCenter: true
 
 12MissilesSpreaderScud:
 	Range: 9000

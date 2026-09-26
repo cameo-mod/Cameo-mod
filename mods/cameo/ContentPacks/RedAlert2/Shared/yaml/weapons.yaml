@@ -7388,7 +7388,6 @@ RA2AWP:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
 		Spread: 1
@@ -8335,9 +8334,7 @@ AccurateCloudSpawner:
 	Warhead@1: FireFragment
 		ValidTargets: Ground, Water, Air
 		Weapon: StormCloud
-		AimChance: 100
 		ImpactActors: false
-		TargetActorCenter: true
 
 CloudSpawner:
 	Projectile: InstantHit
@@ -8349,7 +8346,6 @@ CloudSpawner:
 		Weapon: StormCloud
 		Amount: 8
 		AimChance: 50
-		TargetActorCenter: false
 
 StormCloud:
 	#ReloadDelay: 120

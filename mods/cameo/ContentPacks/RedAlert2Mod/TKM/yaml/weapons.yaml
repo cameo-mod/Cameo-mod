@@ -398,7 +398,6 @@ tkmakap:
 			Spaceship: 2
 			Shield: 17
 		PercentageScale: 3333
-		Burst: 3
 		Damage: 8000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
@@ -437,7 +436,6 @@ tkmawp:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
 		Spread: 1
@@ -2966,7 +2964,6 @@ VanSniper:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 40
 		Spread: 1

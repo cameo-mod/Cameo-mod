@@ -575,7 +575,6 @@ LightSniper:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 30000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 15
 		Spread: 1
@@ -764,7 +763,6 @@ MagicOrbHailstormSpawner:
 	Warhead@Shrapnel1: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
-		TargetActorCenter: true
 		AimChance: 1
 		Amount: 1
 		AimTargetStances: Enemy
@@ -773,7 +771,6 @@ MagicOrbHailstormSpawner:
 	Warhead@Shrapnel2: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
-		TargetActorCenter: true
 		AimChance: 4
 		Amount: 4
 		AimTargetStances: Enemy
@@ -782,7 +779,6 @@ MagicOrbHailstormSpawner:
 	Warhead@Shrapnel3: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
-		TargetActorCenter: true
 		AimChance: 9
 		Amount: 9
 		AimTargetStances: Enemy
@@ -791,7 +787,6 @@ MagicOrbHailstormSpawner:
 	Warhead@Shrapnel4: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
-		TargetActorCenter: true
 		AimChance: 16
 		Amount: 16
 		AimTargetStances: Enemy
@@ -809,7 +804,6 @@ MagicOrbHailstormSpawner2:
 		Weapon: MagicOrbSpreaderProjectile2
 		AimChance: 8
 		Amount: 8
-		TargetActorCenter: false
 
 MagicOrbSpreaderProjectile:
 	Range: 10000
@@ -834,8 +828,6 @@ MagicOrbSpreaderProjectile2:
 		ValidTargets: Ground, Water, Air
 		Weapon: MagicOrb2
 		Delay: 64
-		AimChance: 8
-		Amount: 8
 
 MagicOrb:
 	Inherits@2: ^Warhead_Magic_Heavy
@@ -2906,6 +2898,8 @@ Heal:
 		Radius: 5000
 		ValidRelationships: Ally
 		ValidTargets: Heal
+		-Explosions:
+		-ImpactActors:
 
 MADTankThump:
 	InvalidTargets: MADTank, Infantry
@@ -3788,8 +3782,6 @@ PsionicShells:
 		Explosions: deviator
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
-		Range: 512
-		Duration: 130
 		ValidTargets: Ground
 		InvalidTargets: Structure, MCImmune
 		AirThreshold: 0c0
