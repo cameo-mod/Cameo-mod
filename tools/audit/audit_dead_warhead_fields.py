@@ -61,7 +61,12 @@ EXIT_INCOMPLETE = 2
 
 # Distinct (warhead type, dead field) pairs present when this audit was written (2026-08-22).
 # ⚠ RATCHET — LOWER ONLY. Raising it hides a field the engine is throwing away.
-DEAD_FIELD_BASELINE = 15
+# 2026-09-27 re-locked 15 -> 12: supplier deletes + retype cancels cleared
+# DetachDelayedWeapon.Spread/Falloff, AffectsIntegrity.Falloff (partially),
+# and the DAWN-lane OpenToppedDamage.Falloff sources (fleet
+# STATUS_2026-09-27_dawn_dwf_batch2_pr536.md). Remaining: NOVA-lane locals +
+# live-children cases deferred for restructuring.
+DEAD_FIELD_BASELINE = 12
 
 # mod.yaml `Assemblies:` order — first hit wins, exactly like ObjectCreator.FindType.
 # location "repo" = vendored at the repository root (NOT under engine/ — that trap cost

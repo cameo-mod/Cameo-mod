@@ -130,7 +130,6 @@
 		Amount: 1
 		Spread: 10
 		Damage: 1000
-		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 110
 			None: 100
@@ -2956,8 +2955,6 @@
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 	Warhead@Defuse1: DetachDelayedWeapon
-		Spread: 2000
-		Falloff: 100, 50
 		Range: 2000
 		Types: defilerplague
 		ValidRelationships: Ally
@@ -9934,7 +9931,6 @@ DefuseKit:
 		Amount: 1
 		Spread: 10
 		Damage: 1000
-		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 110
 			None: 100

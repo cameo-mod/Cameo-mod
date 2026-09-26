@@ -187,6 +187,105 @@ not dead residue — resolved values matched the stub values, the Shared-side
 the canonical Shared defs, deleted the 3 stubs. All 3 weapons resolve
 byte-identical (carbine Damage 3513, cryo 3513, rocketsracryo 11500 preserved).
 S2 findings 5 -> 2 (remaining: Flamethrower + Sound2 — DAWN-lane files).
+## Devin-DAWN — dead-warhead-field batch-2: supplier deletes (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-batch2` (stacked on `devin/dawn/dwf-431-fix`).
+
+Swept the 14-kind/70-weapon residual down to **12 kinds / 28 weapons**:
+- **Supplier deletes** in `mods/cameo/weapons/weapons.yaml` — dead lines removed
+  at origin after verifying every consumer resolves the node to a type lacking
+  the field (all-consumers-dead check, not just the audit's flagged subset):
+  `Warhead@SniperWeaponExtraDamage.Falloff` (:133, 3 consumers),
+  `^RepairWeapon` `Warhead@Defuse1.Spread/Falloff` (:2959-60, 9 consumers),
+  `Warhead@Sniper_Light_ExtraDamage.Falloff` (:9937, 17 consumers).
+- **Local dead-line deletes** (the field sits on the dead-typed node in the
+  weapon's own file): Ixian `EMPUnit.Falloff`, TSMobile_EMP, wc2gryphonFireVisible,
+  `ts_nod_mobilerepairvehicle` Defuse1 pair, TSSniper_elite, TD GDI x3, TD Nod,
+  TS Forgotten.
+- **Retype-site cancels** (supplier field is LIVE on other consumers —
+  `^HealingWeapon`'s `Warhead@Effect: CreateEffect` legitimately uses
+  `Explosions`/`ImpactActors`): `-Explosions:`/`-ImpactActors:` on D2KRepair's
+  local retype and an untyped pin on TSHeal.
+- Resolved-diff HEAD→working: 45 weapons differ, every delta a removed dead
+  leaf; orphan cancels 0, empty warheads 0, balance drift clean.
+- **Correction (same commit series):** the first liveness pass matched
+  consumers by FILE, not (file,line) — it reported a "live-children" class
+  (ProtossHeal/TSRA2Heal/MagicOrbSpreaderProjectile2/NaxiMeteorSpawner) that
+  does not exist. Line-precise matching shows zero live consumers for every
+  flagged local line: plain deletes. The only truly-live dead-field source is
+  `^HealingWeapon`'s `Warhead@Effect` Explosions/ImpactActors (live on
+  BroodweaverLeech, MedicHeal, TKMMedicHeal) — retypers cancel, already done.
+  Lesson folded into LESSONS_LEARNED: field provenance is (file,line), never
+  file alone.
+- Remaining 26 weapons are NOVA's lane (RA/RA2/RA2Mod packs + legacy
+  redalert2/redalert2mod/other/tiberiandawn RA-owned entries) — per-weapon fix
+  list posted to the fleet board.
+
+## Devin-DAWN — dead-warhead-field fix #431 culprit (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-431-fix` (off master). Claude routed the master-red
+`audit_dead_warhead_fields` (20/72 vs ratchet 15) for bisect + fix.
+
+- **Bisect:** `git log` bisection with the current audit copied into scratch
+  worktrees (old-commit audits lack `--fail-closed` and can't be compared);
+  +6 dead `SpreadDamage.*` kinds entered Sep-20→22 window → culprit commit
+  `c48c7d41a` / **PR #431** (W24 lane-2 multi-main collapses).
+- **Mechanism:** the fold retyped `Warhead@Tesla_Super` to `SpreadDamage` on
+  `...ttankzap2arcteslafragment1_emp`/`_fragment2_emp`; the percentage-ladder
+  fields the old type consumed (`FriendlyFireDamage`, `FriendlyFireSpread`,
+  `IntegrityScale`, `PercentageScale`, `PercentageSpread`, `PercentageVersus`)
+  became dead inherited values on the new type.
+- **Fix:** six leaf `-Field:` cancels on fragment1 only — fragment2 inherits
+  from fragment1, so cancels there were provider-less (orphan-cancel audit
+  proved it). Engine-identical: resolved diff = exactly the 6 discarded fields.
+- **Audit:** dead warhead fields **14/70 WARN ≤ ratchet 15** (green); orphan
+  cancels 0. Master `shared_redalert2` balance ledger re-extracted (#519-era
+  dot renames had missed it) — drift clean, un-stale-claim for `doc_claims`.
+- Finding: fleet `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+## Devin-DAWN — EMBER-routed fixes + faction-leak model gap (2026-09-26)
+
+Batch on `devin/dawn/routed-fixes` (stacked on `devin/dawn/w7-packs-v2` /
+PR #508). All four items EMBER's board routed to DAWN:
+
+- **B1 leaks (6 rows) — 1 model false-positive, 5 intended sharing.**
+  `cameo_model.roster()` never modeled `Buildable.Factions:` — the engine's
+  roster gate. `ordos_upgrade_lightfactory` (`Factions: ordos`) was flagged
+  buildable in harkonnen purely on prereq tokens. Added `_factions_allows` to
+  the fixpoint; L1 drops 6 -> 5. Remaining 5 rows are deliberate cross-pack
+  sharing added in team sessions (`4c6d4bfaa` ts_gdi conyard ->
+  `asianalliancebarrier`; `f6956364a` cabal conyard -> `tslaserfence`;
+  latinsyndicate StartingUnits list naxis/asianalliance vehicles = mercenary
+  design). Pack-mount question for the fleet, not a yaml fix; syndicate rows
+  are NOVA's files.
+- **Q-order:** `steelconsortium_consortiummobileconstructionvehicle` —
+  `~warfactory` moved before `consortiumradar` (sibling MCV convention).
+  Prereq-order violations 1 -> 0.
+- **MinRange (7 rows):** DESIGN.md `round(Range/25)*5` enforced.
+  td x4 + ordos_chemturret: stale donor/rounding values normalized
+  (1999->2000 x2, 2258->2260 x2, 1985->2800). ra1 pair: pinned
+  `MinRange: 2365` (inherited `155mm`'s 2670 = stale for Range 11813).
+  audit_min_range: 7 -> 0.
+- **G1 garrison (7 rows):** all melee (`^DogJaw` bites, `^Warhead_Melee_*`
+  slices) — applied the existing 2026-07-10 ruling, added to
+  `garrison_exceptions.yaml` melee list (39 -> 46). G1 7 -> 0.
+
+## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
+
+Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave
+landed #497–#500. Old commit `e7c5b60ab` cherry-picked onto `4416e43bd` as
+`9835ec4c4` on `devin/dawn/w7-packs-v2`; only docs append-races conflicted.
+
+**R16 regression trap found:** materialization bakes the resolved `Versus:`
+table into inlined `Warhead@X` nodes — when master's R16 generator regen
+(#506/#507) changed every `^Warhead_*` Versus profile, 33 of the converted
+weapons drifted (stale baked values). Fixed by syncing each materialized
+`Versus` subtree to the new master-resolved values. Any materialization batch
+that survives a Versus regen needs this re-sync — check resolved-identity
+against the NEW base, not the original one.
+
+Re-verified on the new base: 637/637 resolved-identical vs `4416e43bd`,
+orphans 0, empty 0, diamonds 15881=base, D2 3969=base, S2 5=base,
+all W-buckets at/below ratchets (W7 664). Boot-gate PASS (47->47).
 
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 

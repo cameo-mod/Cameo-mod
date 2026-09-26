@@ -1285,6 +1285,12 @@ ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp:
 	Range: 3325
 	Warhead@Tesla_Super: SpreadDamage
 		Damage: 60000
+		-FriendlyFireDamage:
+		-FriendlyFireSpread:
+		-IntegrityScale:
+		-PercentageScale:
+		-PercentageSpread:
+		-PercentageVersus:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 10000
