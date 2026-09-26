@@ -176,7 +176,16 @@ W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) �
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 520   # 577 -> 520: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+W7_BASELINE = 595   # 520 -> 595: rule-4 restoration (NOVA, 2026-09-26) — the 75
+                    # weapons whose spliced parent bodies carried inline
+                    # Versus/PercentageVersus had their `Inherits: <weapon>`
+                    # edge restored (rule: never materialize Versus into a
+                    # weapon; the fold payload cannot be expressed without
+                    # either local Versus or the parent edge). Resolve-verified:
+                    # payload + ordered warhead keys identical to the spliced
+                    # tip on all 75; orphan cancels 0. Claude accepted the
+                    # re-lock class (REPLY_2026-09-26_claude_to_dawn_rule4).
+                    # was: 577 -> 520: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
                     # 57 more children of split/template parents de-parented;
                     # 3 collision-heavy cases deferred (YuriGatlingCannonMG2,
                     # NaxiHetzer/JadgDestroyerCorrosion).

@@ -358,22 +358,7 @@ NaxiBeetleLaser_elite:
 	Warhead@Smudge:
 		SmudgeType: Scorch
 NaxiBeetleLaser_AA_elite:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
@@ -385,16 +370,24 @@ NaxiBeetleLaser_AA_elite:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
+		-InvalidTargets:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 4600
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 
 	Warhead@SmallArmsPercentage:
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EffectWater:
 	Warhead@Concrete:
@@ -403,221 +396,7 @@ NaxiBeetleLaser_AA_elite:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ReloadDelay: 60
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-		Damage: 4600
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Burst: 2
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 LunarPanzerCannon:
 	Inherits@xLunarPanzerCannon0: ^Warhead_CannonHE_Medium
 	Inherits@xLunarPanzerCannon1: ^Projectile_Shell_Medium
@@ -812,22 +591,7 @@ NaxiTank2Laser:
 	Warhead@Smudge:
 		SmudgeType: Scorch
 NaxiTank2Laser_AA:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiTank2Laser
 	Range: 9750
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
@@ -839,16 +603,24 @@ NaxiTank2Laser_AA:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
+		-InvalidTargets:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 4600
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 
 	Warhead@SmallArmsPercentage:
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EffectWater:
 	Warhead@Concrete:
@@ -857,221 +629,7 @@ NaxiTank2Laser_AA:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ReloadDelay: 52
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-		Damage: 4600
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Burst: 4
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 NaxiMP40Laser:
 	Inherits@xNaxiMP400: ^Warhead_Bullet_Medium
 	Inherits@xNaxiMP401: ^Projectile_Bullet_Medium
@@ -5148,22 +4706,7 @@ schwarzermond_lunarsoldier_rifle_amplified_elite:
 			Scout: 10
 
 Lunar_YellowLaserT:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxLaserT
 	Burst: 2
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -5174,244 +4717,11 @@ Lunar_YellowLaserT:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 20
-	Range: 8181
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Spread: 64
+	Warhead@Laser_Heavy:
 		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_AmplifiedLaserT:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxLaserT
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -5422,244 +4732,11 @@ Lunar_AmplifiedLaserT:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 20
-	Range: 8181
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Spread: 64
+	Warhead@Laser_Heavy:
 		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_YellowBeetleLaser:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiBeetleLaser_elite
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -5667,6 +4744,7 @@ Lunar_YellowBeetleLaser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
+		Damage: 8600
 	Warhead@SmallArmsPercentage:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
@@ -5680,6 +4758,9 @@ Lunar_YellowBeetleLaser:
 		InvalidTargets: Air
 	Warhead@LaserWeaponPercentage:
 		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EffectWater:
 	Warhead@Concrete:
@@ -5688,243 +4769,9 @@ Lunar_YellowBeetleLaser:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
-	Range: 6448
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_YellowBeetleLaser_AA:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
-	Warhead@Bullet_Light:
-	Warhead@Bullet_Light_Percentage:
-	Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Percentage:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -5933,8 +4780,11 @@ Lunar_YellowBeetleLaser_AA:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4600
 	Warhead@MediumMissilePercentage:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage:
@@ -5954,243 +4804,9 @@ Lunar_YellowBeetleLaser_AA:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Air
-	ReloadDelay: 60
-	Range: 9672
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 4600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@Bullet_Light: AreaDamage
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-	Warhead@Bullet_Medium: AreaDamage
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_AmplifiedBeetleLaser:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiBeetleLaser_elite
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -6198,264 +4814,34 @@ Lunar_AmplifiedBeetleLaser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		InvalidTargets: Air
-	Warhead@ChaingunPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@LaserWeaponPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@EffectWater:
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@ShieldHit:
-		Duration: 10
-	Warhead@Smudge:
-		SmudgeType: Scorch
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
-	Range: 6448
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
 		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-Lunar_AmplifiedBeetleLaser_AA:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
 	Warhead@MediumMissilePercentage:
-	Warhead@Bullet_Light:
-	Warhead@Bullet_Light_Percentage:
-	Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Percentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LaserWeaponPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@LegacyLaserExtraDamage:
+Lunar_AmplifiedBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -6464,8 +4850,11 @@ Lunar_AmplifiedBeetleLaser_AA:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4600
 	Warhead@MediumMissilePercentage:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage:
@@ -6485,226 +4874,7 @@ Lunar_AmplifiedBeetleLaser_AA:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Air
-	ReloadDelay: 60
-	Range: 9672
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 4600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@Bullet_Light: AreaDamage
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-	Warhead@Bullet_Medium: AreaDamage
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_YellowMP40Laser:
 	Inherits: NaxiMP40Laser
 	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
@@ -7730,22 +5900,7 @@ Lunar_AmplifiedMP40Laser_elite:
 			Fighter: 11
 			Scout: 10
 Lunar_YellowTank2Laser:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiTank2Laser
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -7753,6 +5908,7 @@ Lunar_YellowTank2Laser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
+		Damage: 8600
 	Warhead@SmallArmsPercentage:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
@@ -7766,6 +5922,9 @@ Lunar_YellowTank2Laser:
 		InvalidTargets: Air
 	Warhead@LaserWeaponPercentage:
 		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EffectWater:
 	Warhead@Concrete:
@@ -7774,243 +5933,9 @@ Lunar_YellowTank2Laser:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Ground, Water
-	ReloadDelay: 52
-	Range: 6500
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_YellowTank2Laser_AA:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
-	Warhead@Bullet_Light:
-	Warhead@Bullet_Light_Percentage:
-	Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Percentage:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -8019,8 +5944,11 @@ Lunar_YellowTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4600
 	Warhead@MediumMissilePercentage:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage:
@@ -8040,243 +5968,9 @@ Lunar_YellowTank2Laser_AA:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Air
-	ReloadDelay: 52
-	Range: 9750
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 4600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@Bullet_Light: AreaDamage
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-	Warhead@Bullet_Medium: AreaDamage
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_AmplifiedTank2Laser:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage:
-	Warhead@ChaingunPercentage:
-	Warhead@MediumMissilePercentage:
+	Inherits: NaxiTank2Laser
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -8284,264 +5978,34 @@ Lunar_AmplifiedTank2Laser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		InvalidTargets: Air
-	Warhead@ChaingunPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@LaserWeaponPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@EffectWater:
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@ShieldHit:
-		Duration: 10
-	Warhead@Smudge:
-		SmudgeType: Scorch
-	ValidTargets: Ground, Water
-	ReloadDelay: 52
-	Range: 6500
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
 		Damage: 8600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-Lunar_AmplifiedTank2Laser_AA:
-	Warhead@Laser_Heavy:
-	Warhead@LaserWeaponPercentage:
-	Warhead@Smudge:
-	Warhead@RA2Scorch:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit:
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
 	Warhead@MediumMissilePercentage:
-	Warhead@Bullet_Light:
-	Warhead@Bullet_Light_Percentage:
-	Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Percentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LaserWeaponPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@LegacyLaserExtraDamage:
+Lunar_AmplifiedTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -8550,8 +6014,11 @@ Lunar_AmplifiedTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4600
 	Warhead@MediumMissilePercentage:
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage:
@@ -8571,226 +6038,7 @@ Lunar_AmplifiedTank2Laser_AA:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
-	ValidTargets: Air
-	ReloadDelay: 52
-	Range: 9750
-	TargetActorCenter: false
-	Warhead@Laser_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 64
-		Damage: 4600
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Spaceship: 23
-			Concrete: 22
-			Heavy: 21
-			Plate: 20
-			Helicopter: 19
-			Steel: 18
-			Medium: 17
-			Flak: 16
-			Bomber: 15
-			Wood: 14
-			Light: 13
-			None: 12
-			Fighter: 11
-			Scout: 10
-	Report: AWMinilaser.wav
-	Projectile: LaserZap
-		Width: 25
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Spread: 75
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	BurstDelays: 4
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Spread: 200
-		Damage: 1
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@Bullet_Light: AreaDamage
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-	Warhead@Bullet_Medium: AreaDamage
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+	-Warhead@LegacyLaserExtraDamage:
 Lunar_YellowUbermenschLaser:
 	Warhead@Laser_Heavy_Flat:
 	Warhead@Glow:
