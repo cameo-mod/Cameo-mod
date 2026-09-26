@@ -39,7 +39,7 @@ class OverflowClassificationTest(unittest.TestCase):
         self.assertEqual(audit.legacy_folded_units(6000, 2000), 60)
         self.assertEqual(pd.folded_units(6000, 2000)[1], 60)
         self.assertEqual(
-            pd.shared_folded_units(6000, 2000, 1000), (30.0, 30))
+            pd.shared_folded_units(6000, 2000, 1000), (60.0, 60))  # h=1 = legacy (§12.0j growth)
         self.assertEqual(audit.overflow_repairs(apps), [])
 
     def test_true_int32_wrap_is_still_reported(self):
@@ -74,12 +74,14 @@ class SharedInventoryTest(unittest.TestCase):
         self.assertEqual(rows[0]["heaviness"], 1000)
         self.assertEqual(rows[0]["damage"], 6000)
         self.assertEqual(rows[0]["scale"], 2000)
-        self.assertEqual(rows[0]["runtime_units"], 30)
+        self.assertEqual(rows[0]["runtime_units"], 60)   # h=1 = the legacy fold (§12.0j growth)
         self.assertFalse(rows[0]["zero_unit"])
 
     def test_zero_unit_shared_stays_visible(self):
         node = self.shared_weapon(
-            field("Damage", 80_000),
+            # h=0 no longer zeroes the percentage half (x0.8, §12.0j 2026-09-26); a zero
+            # row now needs an input that ROUNDS to zero: 50 x 2000 x 0.8 / 200000 = 0.4.
+            field("Damage", 50),
             field("PercentageScale", 2000),
             field("Heaviness", 0),
             field("HeavinessMode", "SharedVersus"))

@@ -151,9 +151,9 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"percentage half keeps its own anchored Endpoint tables. SharedVersus: the",
 			"opt-in shared profile — the percentage half follows the SAME belled table",
 			"as the flat half (percentage tables/endpoints must be absent), its",
-			"magnitude is heavy-scaled by h/2 (h=0 -> 0x, h=2 -> 1x), and the flat",
-			"Shield row's coefficient scales ONCE by (2000 + h) / 2000 while the",
-			"percentage half still reads zero at h = 0. Requires an active Heaviness;")]
+			"magnitude grows with h like the old levels (x0.8 at h=0, x1.0 at h=1,",
+			"x1.25 at h=2; DESIGN 12.0j, 2026-09-26), and the flat Shield row's",
+			"coefficient scales ONCE by (2000 + h) / 2000. Requires an active Heaviness;")]
 		public readonly HeavinessMode HeavinessMode = HeavinessMode.Legacy;
 
 		[Desc("The percentage half's armor table at the h = 0 (Light) endpoint. Optional; when",
@@ -311,7 +311,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 				effectiveMinRadius = new WDist(ScaledRadiusLength(MinRadius.Length, Heaviness));
 				effectiveMaxRadius = new WDist(ScaledRadiusLength(MaxRadius.Length, Heaviness));
 
-				effectiveVersus = HeavinessBell.Transform(Versus, h);
+				effectiveVersus = HeavinessBell.Transform(Versus, h, mainTable: true);
 
 				// THE SHARED-PROFILE BRANCH: the bell ran ONCE above over the flat
 				// Versus; the Shield row's coefficient is then scaled ONCE by
@@ -739,8 +739,8 @@ namespace OpenRA.Mods.Cameo.Warheads
 			// THE SHARED MODE: the percentage magnitude is heavy-scaled by h/2
 			// (h=0 -> 0x, h=2 -> 1x of the base Scale) — ONE rounded combined fraction
 			// (SharedFoldedPercentageUnits), never a legacy rounding then a multiply.
-			// h = 0 yields ZERO units: the percentage half stays zero at h=0 even though
-			// the flat Shield coefficient floor is (2000 + h) / 2000 there.
+			// h = 0 yields 0.8x the Medium units (§12.0j growth curve, 2026-09-26); it is no
+			// longer zero there.
 			var basisPoints = sharedMode
 				? SharedFoldedPercentageUnits(Damage, PercentageScale, Heaviness)
 				: FoldedPercentageUnits(Damage, PercentageScale);
@@ -869,8 +869,15 @@ namespace OpenRA.Mods.Cameo.Warheads
 		{
 			checked
 			{
-				Int128 numerator = (Int128)damage * percentageScale * heaviness;
-				Int128 denominator = (Int128)200000L * 2000L;
+				// §12.0j (maintainer 2026-09-26): the percentage half GROWS with h like the old
+				// levels did (tops 16/20/25) — x0.8 at h=0, x1.0 at h=1, x1.25 at h=2, linear on
+				// each side of h=1. Exact integers: (4000 + H) / 5000 up to H=1000, (3000 + H) / 4000
+				// above; continuous at H=1000, where it reproduces the Medium template exactly.
+				var (growthNum, growthDen) = heaviness <= 1000
+					? (4000L + heaviness, 5000L)
+					: (3000L + heaviness, 4000L);
+				Int128 numerator = (Int128)damage * percentageScale * growthNum;
+				Int128 denominator = (Int128)200000L * growthDen;
 				Int128 rounded = (numerator + denominator / 2) / denominator;
 				return (int)rounded;
 			}

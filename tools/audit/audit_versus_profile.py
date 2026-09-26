@@ -85,7 +85,13 @@ LADDERS = {
     "BLD": ["Wood", "Steel", "Concrete"],
     "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
 }
-DERIVED_ARMORS = ("Heroic", "Airborne")
+# Mirror of gen_weapon_template.DERIVED_ARMORS (DESIGN §12.0l, 2026-09-26): derived columns are
+# functions of the finished profile, so they stay OUT of the MEAN-100 / spread statistics.
+# test_derived_armor_types pins the two lists together.
+DERIVED_ARMORS = ("Heroic", "FlyingInfantry",
+                  "CyborgLight", "CyborgMedium", "CyborgHeavy", "CyborgHeroic",
+                  "AntiAirInfantry", "AntiAirVehicle", "AntiAirBuilding",
+                  "ShipLight", "ShipMedium", "ShipHeavy", "ShipSuperheavy", "AntiAirShip")
 LEVELS = ("Light", "Medium", "Heavy", "Super")
 COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete",
              "Effect", "ShieldHit", "Glow", "Smudge")
@@ -142,7 +148,10 @@ def profiles() -> dict[tuple[str, str], dict[str, float]]:
 
 
 def armor_rows(profile):
-    return {k: v for k, v in profile.items() if k not in NON_ARMOR}
+    # Heroic IS one of the 16 rows the law averages (it always was); the §12.0l geometric-mean
+    # columns are not — they are exact functions of those rows, added after normalisation.
+    return {k: v for k, v in profile.items()
+            if k not in NON_ARMOR and (k == "Heroic" or k not in DERIVED_ARMORS)}
 
 
 def ladder_direction(profile, rungs):

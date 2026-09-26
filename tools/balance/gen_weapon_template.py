@@ -830,7 +830,28 @@ def distinct_ints(rows):
 
 BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target band's flat end
 BAND_MARGIN = 1.03                  # headroom so integer rounding cannot fall back out of band
-DERIVED_ARMORS = ("Heroic", "Airborne")
+# DESIGN §12.0l (maintainer 2026-09-26): every derived armour is the GEOMETRIC MEAN of its
+# parents (the n-th root of their product), computed LAST (in `emit_versus`) from the finished
+# row set. Order matters: a parent must be computed before its child (`CyborgHeroic` needs
+# `Heroic`, `AntiAirShip` the ships). Heroic alone stays a PRODUCT, `Plate x Scout / 200`,
+# re-derived in the MAIN table only (§12.0l rule 4) — see `derive_rows`.
+GEO_DERIVED = (
+    ("FlyingInfantry", ("Scout", "Flak", "Helicopter")),
+    ("CyborgLight", ("None", "Light")),
+    ("CyborgMedium", ("Flak", "Medium")),
+    ("CyborgHeavy", ("Plate", "Heavy")),
+    ("CyborgHeroic", ("Heroic", "Superheavy")),
+    ("AntiAirInfantry", ("None", "Flak")),
+    ("AntiAirVehicle", ("Light", "Medium")),
+    ("AntiAirBuilding", ("Concrete", "Steel")),
+    ("ShipLight", ("Light", "Wood")),
+    ("ShipMedium", ("Medium", "Concrete")),
+    ("ShipHeavy", ("Heavy", "Steel")),
+    ("ShipSuperheavy", ("Superheavy", "Steel")),
+    ("AntiAirShip", ("ShipLight", "ShipMedium")),
+)
+HEROIC_DIVISOR = 200
+DERIVED_ARMORS = ("Heroic",) + tuple(name for name, _ in GEO_DERIVED)
 # Rows that live on a Versus node but are not armor classes, so they never enter a
 # profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
 NON_ARMOR_ROWS = ("Shield",) + tuple(PLATING_CYCLE)
@@ -992,8 +1013,7 @@ def class_tilt(rows, level):
     # computed before the last cell moves is not derived, it is stale.
     peak = max(v for a, v in out.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if name in out and first in out and second in out and peak > 0:
             out[name] = out[first] * out[second] / peak
     return [(a, out[a]) for a, _ in rows]
@@ -1102,8 +1122,7 @@ def heaviness_bell(rows, level):
     # Re-derive the products LAST, from the finished profile (§12.0b).
     peak = max(v for a, v in out.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if name in out and first in out and second in out and peak > 0:
             out[name] = out[first] * out[second] / peak
     return [(a, out[a]) for a, _ in rows]
@@ -1354,8 +1373,7 @@ def finish_blend(rows, name=None):
 
     peak = max(v for a, v in values.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                     ("Airborne", ("Helicopter", "Scout"))):
+    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if derived in values and first in values and second in values and peak > 0:
             values[derived] = values[first] * values[second] / peak
 
@@ -1440,7 +1458,41 @@ def reference_main(name, order16, level):
     return sorted(rows, key=lambda r: -r[1])
 
 
-def emit_versus(rows, indent="\t\t\t"):
+def derive_rows(rows, heroic=False):
+    """DESIGN §12.0l: re-derive every derived armour from the FINISHED rows, and add the missing ones.
+
+    Runs inside `emit_versus`, so every Versus node the generator writes — main, `_Percentage`
+    twin, `_ExtraDamage` chip — carries the same derived columns, computed after the last cell
+    moved. A derived value computed earlier is stale by definition (§12.0b).
+
+    * every `GEO_DERIVED` type = the geometric mean of its parents (rule 1),
+      `round(product ** (1/n))`, in table order, so a parent is always final before its child
+      reads it. Scale-free, so it is right in the percentage twin too.
+    * `Heroic = round(Plate x Scout / 200)`, a PRODUCT (rule 4) — **only when `heroic=True`, i.e.
+      the MAIN table.** 200 is the main table's ceiling; the percentage twin (tops 16-30) and the
+      chips carry their own Heroic, and dividing those by 200 makes heroes all but immune
+      (Bullet_Medium's twin: 18 x 16 / 200 = 1). A FLAT table keeps its flat value.
+    A derived type whose parents are absent from the table is skipped, never guessed.
+    """
+    vals = dict(rows)
+    body = [v for a, v in rows if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS]
+    if heroic and "Heroic" in vals and "Plate" in vals and "Scout" in vals:
+        if body and min(body) == max(body):
+            vals["Heroic"] = body[0]
+        else:
+            vals["Heroic"] = int(round(vals["Plate"] * vals["Scout"] / HEROIC_DIVISOR))
+    for name, parents in GEO_DERIVED:
+        if all(p in vals for p in parents):
+            product = 1.0
+            for p in parents:
+                product *= max(vals[p], 0)
+            vals[name] = int(round(product ** (1.0 / len(parents))))
+    seen = {a for a, _ in rows}
+    return ([(a, vals[a]) for a, _ in rows]
+            + [(name, vals[name]) for name, _ in GEO_DERIVED if name in vals and name not in seen])
+
+
+def emit_versus(rows, indent="\t\t\t", heroic=False):
     """Emit a `Versus:` node: pseudo-rows first, then armors DESCENDING by value.
 
     Maintainer 2026-08-16: *"the percentage versus values are not ordered by power like
@@ -1465,6 +1517,7 @@ def emit_versus(rows, indent="\t\t\t"):
     the [10, 200] window in both directions, so sorting it in would drag it to an end and
     hide the ladder it is not part of.
     """
+    rows = derive_rows(rows, heroic=heroic)
     out = []
     lead = [r for r in rows if r[0] in NON_ARMOR_ROWS]
     body = sorted((r for r in rows if r[0] not in NON_ARMOR_ROWS), key=lambda r: -r[1])
@@ -1524,7 +1577,7 @@ def emit_main_warhead(tag, vt, main, *, damage, falloff, spread, damage_types,
         if heaviness_mode != "Legacy":
             main_wh.append(f"\t\tHeavinessMode: {heaviness_mode}")
     main_wh += [f"\t\tVersus:",
-         emit_versus(main),
+         emit_versus(main, heroic=True),
          f"\t\tDamageTypes: {damage_types}",
          *pre_fold]
     # ⭐ THE FOLD (UNIFIED_AREADAMAGE_WARHEAD.md). The percentage half is no longer a second
