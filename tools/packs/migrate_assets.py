@@ -1,0 +1,260 @@
+#!/usr/bin/env python3
+"""ContentPack asset migration: census + apply.
+
+Phase 1 (census): collect every file-token reference (ext-matched, pkg|name aware)
+in a theme's yaml, locate each file under bits/, classify ownership
+(theme-exclusive vs shared-with-other-themes), and emit a move plan.
+
+Phase 2 (--apply): shadow-copy theme-exclusive files into the owning pack's
+files/<type>/ dir, add `~cameo|.../files/<type>: <pkg>` mounts to mod.yaml
+(before the `cameo|bits` line), and rewrite bare refs to `pkg|name`.
+
+Type dirs: icons (basename has 'icon'/'icnh' OR .png referenced... rule below),
+sprites (shp/tem/sno/int/pal/png), voxels (vxl/hva), sounds (wav/aud).
+Mounted packages that are single files (.bag/.idx/.mix) move by mount swap,
+not by file tokens (handled by --move-packages).
+
+Usage:
+    python tools/packs/migrate_assets.py --theme RedAlert2            # census
+    python tools/packs/migrate_assets.py --theme RedAlert2 --apply    # do it
+"""
+import argparse, json, os, re, sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+MOD = ROOT / "mods" / "cameo"
+FILE_EXT = re.compile(r"\.(shp|tem|sno|int|vxl|hva|wav|aud|png|pal)$", re.I)
+ICON_NAME = re.compile(r"(icon|icnh|iconv|_icn)", re.I)
+
+def norm(p): return str(p).replace("\\", "/").lower()
+
+def yaml_files_under(dirpath):
+    return sorted(dirpath.rglob("*.yaml")) if dirpath.is_dir() else []
+
+def theme_of(path):
+    """Owning theme name for a yaml path, else None."""
+    r = norm(path)
+    m = re.search(r"contentpacks/([^/]+)/", r)
+    if m: return "ContentPacks:" + m.group(1)
+    if "/rules/" in r or "/sequences/" in r or "/weapons/" in r or "/audio/" in r:
+        return "core:" + r.split("/")[-1]
+    return "other"
+
+def collect_refs(path):
+    """All ext-matching tokens in a yaml file -> [(rawtoken, name, pkg_or_None)]."""
+    out = []
+    try: text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError: return out
+    for line in text.splitlines():
+        # strip comments
+        s = line.split("#", 1)[0]
+        for tok in re.split(r"[\s,'\"]+", s):
+            if not FILE_EXT.search(tok):
+                continue
+            if "|" in tok:
+                pkg, name = tok.split("|", 1)
+                out.append((tok, name, pkg))
+            else:
+                out.append((tok, tok, None))
+    return out
+
+def type_dir(name, ext):
+    ext = ext.lower()
+    if ext in (".vxl", ".hva"): return "voxels"
+    if ext in (".wav", ".aud"): return "sounds"
+    if ICON_NAME.search(name): return "icons"
+    return "sprites"
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--theme", required=True, help="e.g. RedAlert2")
+    ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--pkg-prefix", default=None, help="default ra2")
+    ap.add_argument("--out", default=None)
+    args = ap.parse_args()
+
+    theme_dir = MOD / "ContentPacks" / args.theme
+    if not theme_dir.is_dir():
+        sys.exit(f"no such theme dir: {theme_dir}")
+    prefix = args.pkg_prefix or args.theme.lower()
+
+    theme_yamls = yaml_files_under(theme_dir)
+    # extra mounted file that belongs to the theme (wrapper monolith)
+    extra = MOD / "rules" / (args.theme.lower() + ".yaml")
+    if extra.exists(): theme_yamls.append(extra)
+
+    all_yamls = [p for p in MOD.rglob("*.yaml")
+                 if "/bits/" not in norm(p)]
+    theme_set = {norm(p) for p in theme_yamls}
+
+    # 1. refs in theme yaml, grouped by file token
+    refs = {}          # name(lower) -> {"refs": set(yaml), "pkg": pkg|None}
+    for y in theme_yamls:
+        for raw, name, pkg in collect_refs(y):
+            e = refs.setdefault(name.lower(), {"name": name, "refs": set(), "pkg": pkg})
+            e["refs"].add(norm(y))
+
+    # 2. refs in non-theme yaml (for exclusivity)
+    foreign = {}
+    for y in all_yamls:
+        if norm(y) in theme_set: continue
+        for raw, name, pkg in collect_refs(y):
+            foreign.setdefault(name.lower(), set()).add(norm(y))
+
+    # 3. bits file index + .idx (AudPackage) name indexes
+    bits_index = {}    # basename(lower) -> [relpaths]
+    bag_index = {}     # bag relpath -> set(names inside, no ext)
+    for p in (MOD / "bits").rglob("*"):
+        if p.is_file():
+            bits_index.setdefault(p.name.lower(), []).append(norm(p.relative_to(MOD)))
+            if p.suffix == ".idx":
+                try:
+                    data = p.read_bytes()
+                    names = {m.group(0).rstrip(b"\x00").decode()
+                             for m in re.finditer(rb"[a-z0-9_]{3,}\x00", data)}
+                    bag_index[norm(p.relative_to(MOD))] = names
+                except OSError:
+                    pass
+    in_bag = {}        # bare name(lower) -> bag relpath
+    for bag, names in bag_index.items():
+        for n in names:
+            in_bag.setdefault(n, bag)
+
+    # 4. classify
+    plan, shared, missing, qualified, packaged = [], [], [], [], []
+    for key, e in refs.items():
+        name, yrefs = e["name"], e["refs"]
+        if e["pkg"]:
+            qualified.append({"name": name, "pkg": e["pkg"], "refs": len(yrefs)})
+            continue
+        srcs = bits_index.get(key, [])
+        if not srcs:
+            stem = key.rsplit(".", 1)[0]
+            if stem in in_bag:
+                packaged.append({"name": name, "bag": in_bag[stem],
+                                 "refs": len(yrefs)})
+            else:
+                missing.append({"name": name, "refs": len(yrefs)})
+            continue
+        foreign_refs = [f for f in foreign.get(key, [])]
+        if foreign_refs:
+            shared.append({"name": name, "src": srcs, "foreign": foreign_refs})
+            continue
+        if len(srcs) > 1:
+            # ambiguity: prefer one under bits/<prefix>*
+            pref = [s for s in srcs if s.startswith(f"bits/{prefix}")]
+            src = pref[0] if len(pref) == 1 else None
+            if src is None:
+                shared.append({"name": name, "src": srcs, "foreign": [],
+                               "note": "ambiguous-multi"})
+                continue
+        else:
+            src = srcs[0]
+        # owning subpack: packs (dirs) of referencing yamls
+        CANON = {"allies": "Allies", "soviets": "Soviets", "yuri": "Yuri",
+                 "shared": "Shared"}
+        owners = set()
+        for yr in yrefs:
+            m = re.search(r"contentpacks/[^/]+/([^/]+)/", yr)
+            owners.add(CANON.get(m.group(1), "Shared") if m else "Shared")
+        owner = "Shared" if len(owners) != 1 else sorted(owners)[0]
+        ext = os.path.splitext(name)[1]
+        plan.append({"name": name, "src": src, "owner": owner,
+                     "type": type_dir(name, ext), "refs": len(yrefs)})
+
+    pkgs = {(p["owner"], p["type"]) for p in plan}
+    report = {
+        "theme": args.theme, "refs": len(refs),
+        "migrate": len(plan), "shared": len(shared),
+        "missing": len(missing), "qualified": len(qualified),
+        "packaged": len(packaged),
+        "packages_needed": sorted(f"{prefix}_{o.lower()}_{t}" for o, t in pkgs),
+        "plan": plan,
+        "shared_detail": shared[:50], "missing_detail": missing[:50],
+        "qualified_detail": qualified[:50],
+        "packaged_detail": packaged[:50],
+    }
+    out = args.out or f"docs/migration/{args.theme.lower()}_assets.json"
+    Path(out).parent.mkdir(parents=True, exist_ok=True)
+    Path(out).write_text(json.dumps(report, indent=1))
+    print(f"refs={len(refs)} migrate={len(plan)} shared={len(shared)} "
+          f"missing={len(missing)} qualified={len(qualified)} "
+          f"packaged={len(packaged)}")
+    print("pkgs:", *report["packages_needed"], sep="\n  ")
+    by = {}
+    for p in plan: by[(p["owner"], p["type"])] = by.get((p["owner"], p["type"]), 0) + 1
+    for k, v in sorted(by.items()): print(f"  {k}: {v}")
+    if missing:
+        print("MISSING:", *(m["name"] for m in missing[:20]), sep=" ")
+    if not args.apply:
+        return
+
+    # --- apply: copy + mounts + rewrite ---
+    import shutil
+    CANON = {"allies": "Allies", "soviets": "Soviets", "yuri": "Yuri",
+             "shared": "Shared"}
+    def canon(o):
+        return CANON.get(str(o).lower(), "Shared")
+
+    copied = []
+    for p in plan:
+        dest_dir = theme_dir / canon(p["owner"]) / "files" / p["type"]
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest = dest_dir / p["name"]
+        shutil.copy2(MOD / p["src"], dest)
+        copied.append((p["name"], str(dest.relative_to(ROOT))))
+    print(f"copied {len(copied)} files")
+
+    # mod.yaml mounts, derived from the files/ dirs that now exist (idempotent):
+    # ~cameo|ContentPacks/<T>/<O>/files/<t>: <prefix>_<o>_<t>
+    modyaml = ROOT / "mods" / "cameo" / "mod.yaml"
+    lines = modyaml.read_text(encoding="utf-8").splitlines()
+    anchors = [i for i, l in enumerate(lines) if "cameo|bits:" in l]
+    if not anchors:
+        sys.exit("no `cameo|bits:` anchor in mod.yaml")
+    anchor = anchors[0]
+    existing = set(lines)
+    mounts = []
+    for o in sorted(CANON.values()):
+        fd = theme_dir / o / "files"
+        if not fd.is_dir():
+            continue
+        for t in sorted(fd.iterdir()):
+            if t.is_dir() and any(t.iterdir()):
+                pkg = f"{prefix}_{o.lower()}_{t.name}"
+                line = f"\t\t~cameo|ContentPacks/{args.theme}/{o}/files/{t.name}: {pkg}"
+                if line not in existing:
+                    mounts.append(line)
+    if mounts:
+        lines[anchor:anchor] = mounts
+        modyaml.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        print(f"added {len(mounts)} mounts to mod.yaml")
+
+    # rewrite refs in theme yaml: bare name -> pkg|name
+    name_pkg = {}
+    for p in plan:
+        name_pkg[p["name"].lower()] = (
+            p["name"], f"{prefix}_{canon(p['owner']).lower()}_{p['type']}")
+    n_repl = 0
+    for y in theme_yamls:
+        text = y.read_text(encoding="utf-8", errors="replace")
+        orig = text
+        # file tokens present in THIS file
+        for raw, name, pkg in collect_refs(y):
+            if pkg:
+                continue
+            ent = name_pkg.get(name.lower())
+            if ent is None:
+                continue
+            fname, pkgname = ent
+            # whole-token replace of the bare name
+            pat = re.compile(r"(?<![\w.|/])" + re.escape(fname) + r"(?![\w.])")
+            text = pat.sub(f"{pkgname}|{fname}", text)
+        if text != orig:
+            y.write_text(text, encoding="utf-8")
+            n_repl += 1
+    print(f"rewrote refs in {n_repl} yaml files")
+
+
+if __name__ == "__main__":
+    main()

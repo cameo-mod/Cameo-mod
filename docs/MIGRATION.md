@@ -159,7 +159,7 @@ commits and reported.
 | RA2Mod six (original) | DONE (ids renamed to `asianalliance_*`, `steelconsortium_*`, `latinsyndicate_*`, `naxis_*`, `schwarzermond_*`, `futuretech_*`) | DONE incl. weapons+sequences | — | — | — |
 | D2k four (atreides/harkonnen/ixian/ordos) | PARTIAL (new-style `atreides_*` etc. for some actors; old-style dotted names like `combat_tank.atreides` remain) | DONE incl. weapons+sequences | — | — | — |
 | RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | — | — |
-| RA2 (america/russia/yuri) | maps drafted | monolith | | | |
+| RA2 (america/russia/yuri) | maps drafted | DONE (Allies/Soviets/Yuri/Shared packs own their yaml; `rules/redalert2.yaml` remains mounted as the shared monolith via the wrapper) | — | PARTIAL (397 faction-exclusive files copied to `files/{icons,sprites,sounds}` with `ra2_<faction>_<type>|` refs; 458 cross-theme refs stay in `bits/`, 184 sound names resolve from `bits/ra2/audio.bag`, tilesets+bags unmoved) | — |
 | StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
 | WC2 (humans/orcs) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
 | TKM | DONE (ids) | DONE 2026-07-18 (moved into `RedAlert2Mod/TKM/`) | — | — | — |
@@ -183,6 +183,26 @@ resolved-identical verified).
 
 Proposal maps for every faction: `tools/rename/rename_map_<faction>.yaml`
 (regenerate: `python tools/audit/gen_rename_maps.py`).
+
+**Asset migration tooling (2026-09-26):** `tools/packs/migrate_assets.py`
+automates the CABAL pilot's mechanics for any theme —
+`python tools/packs/migrate_assets.py --theme <Theme> --pkg-prefix <pfx>`
+censuses every extension-matching file token in the theme's yaml, locates it
+under `bits/` (or inside a mounted `.bag`/`.idx` package — those names are
+reported as `packaged` and left to resolve from the bag), and classifies each
+as theme-exclusive (migrate), foreign-referenced (leave in `bits/`), or
+dangling (report only). `--apply` shadow-copies exclusives into the owning
+pack's `files/{icons,sprites,voxels,sounds}` (icon/`icnh` basenames → icons,
+`vxl`/`hva` → voxels, `wav`/`aud` → sounds, rest → sprites), inserts
+`~cameo|.../files/<type>: <prefix>_<pack>_<type>` mounts in `mod.yaml` before
+the `cameo|bits` line, and rewrites the theme's bare refs to `pkg|name`.
+Re-running is idempotent (refs report as `qualified`). RA2 census report:
+`docs/migration/ra2_assets.json`. Known RA2 dangling refs found by the census
+(pre-existing, NOT introduced by the migration): `ra2htanyaicon.shp`,
+`cra2cmin.shp`, `ra2ltnk.shp`, `ra2howi.shp`, `ra2arty.shp`,
+`yuri_chaosdrone.shp`, `splash9.aud`, `kaboom25.aud`, `kaboom15.aud`,
+`cannon1.aud`, `turret1.aud`, `tesla1.aud`, `zulhit00.aud`, `aacanon3.aud`,
+`chute1.aud`, `expnew13.wav`, `expnew09.wav`, `spysreve.wav`.
 
 ## Standing decisions (design)
 
