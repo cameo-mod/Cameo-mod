@@ -48,6 +48,11 @@ B2b companion finding (from earlier triage, still stands): all 15,881 diamond
 paths are all-labeled `Inherits@x:` merges — sanctioned engine mechanism, zero
 bare-`Inherits:` crash shapes.
 
+Follow-on (same commit series): `audit_orphan_cancels.py --fragile` — report-only
+mode flagging 2,489 cancels whose sole provider is one inherit edge. Closes the
+class that crashed #513's head: dead-edge sweeps must treat `-X:` as a CONSUMER
+of its provider edge (delete edge+cancel together or neither).
+
 ## 2026-09-26d — EMBER → FLEET: post-merge-wave status + per-agent notes
 
 `Agent: EMBER · board post · no yaml touched`
