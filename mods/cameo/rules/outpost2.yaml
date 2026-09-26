@@ -2709,6 +2709,8 @@ PLYMOUTH_SPIDER:
 		CaptureTypes: vehicle
 		PlayerExperience: 50
 		ConsumedByCapture: true
+	Garrisoner:
+		GarrisonType: Infantry
 
 PLYMOUTH_SCORPION:
 	Inherits: ^Vehicle
@@ -2746,6 +2748,11 @@ PLYMOUTH_SCORPION:
 	Armament:
 		Weapon: plymouthScorpion
 		LocalOffset: 171,0,85
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: plymouthScorpion
+	Garrisoner:
+		GarrisonType: Infantry
 
 # #OLD
 # EE2_SHIP:
