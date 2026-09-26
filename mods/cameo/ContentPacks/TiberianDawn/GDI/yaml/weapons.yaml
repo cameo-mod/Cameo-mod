@@ -12,7 +12,6 @@ td_gdi_commando_sniper:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 40000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 		Spread: 1
@@ -3464,7 +3463,6 @@ td_gdi_havoc_sniper:
 		Amount: 1
 		Damage: 20000
 		Spread: 1
-		Falloff: 100, 0
 		Versus:
 			Shield: 110
 			None: 100
@@ -3671,7 +3669,6 @@ td_gdi_havoc_rifle:
 		Amount: 1
 		Spread: 10
 		Damage: 4000
-		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 110
 			None: 100

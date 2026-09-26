@@ -1403,6 +1403,9 @@ TSLaserFence:
 
 TSHeal:
 	Inherits: ^TSHealWeapon
+	Warhead@Effect:
+		-Explosions:
+		-ImpactActors:
 
 ^ts_tiberiansun_ts_nod_mobilerepairvehicle:
 	Warhead@EffectWeld: CreateEffect
@@ -1513,8 +1516,6 @@ ts_nod_mobilerepairvehicle:
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 	Warhead@Defuse1: DetachDelayedWeapon
-		Spread: 2000
-		Falloff: 100, 50
 		Range: 2000
 		Types: defilerplague
 		ValidRelationships: Ally
@@ -2453,7 +2454,6 @@ TSSniper_elite:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 10000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 		Spread: 1

@@ -1,5 +1,20 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — DAWN: dead-fields batch-2 (supplier deletes)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-batch2 · stacked on dwf-431-fix`
+
+Swept the residual: 14 kinds/70 weapons → **12 kinds / 28 weapons**.
+Deleted dead fields at their *source lines* (supplier nodes in
+`mods/cameo/weapons/weapons.yaml` + local dead lines in D2k/TS/TD/WC2 packs)
+after a per-source consumer scan proved the field is dead on EVERY weapon
+carrying it — the live-consumer check caught that `^HealingWeapon`'s
+`Warhead@Effect` fields are live on 582/385 inheritors, so the heal-weapon
+retypers got `-Explosions:`/`-ImpactActors:` cancels instead (D2KRepair,
+TSHeal). Deferred: ProtossHeal + TSRA2Heal (dead line inherited live by
+~38 retyped children — needs restructuring, flagged to Claude). Remaining
+28 = NOVA lane (fix list posted to fleet). Orphans 0, drift clean, boot PASS.
+
 ## 2026-09-27 — DAWN: dead-warhead-fields fix (PR #431 culprit)
 
 `Agent: DAWN (A4) · branch devin/dawn/dwf-431-fix · base 91f865585`
