@@ -26,9 +26,12 @@ and [DTA investigation](../balance/review/DTA_INI_EXTRACTOR_RESEARCH_20260909.md
 - [ ] Finish the new OpenRA all-armament evidence repair requested at 00:08 on
   10 September. Factory-ready and maximum-upgrade states remain distinct; unknown
   activation cannot be replaced with an all-conditions-false assumption.
-- [ ] Implement and validate the continuous-heaviness runtime/tool contract before
+- [x] Implement and validate the continuous-heaviness runtime/tool contract before
   scoped W24 activation (Aedis authorized implementation 00:40, interpolation 00:51);
   see [the reviewed findings](../balance/review/CONTINUOUS_HEAVINESS_REVIEW_20260910.md).
+  ✅ SHIPPED 2026-08-24 (`7704fcf67`) — `HeavinessBell.cs` wired behind the inert
+  `Heaviness` yaml field; `audit_heaviness_bell` clean. Still gated: no yaml may set
+  `Heaviness` until a maintainer orders the rollout.
 
 Completed boxes above describe reviewed local implementation, not publication, anchor
 approval or an applied rebalance. Same-base full-suite comparison at `50b7d001b` retains
@@ -137,6 +140,10 @@ the fog sequencing.
 - [x] **M** Phase 3 synced `BotPersonalityController` and difficulty-gated dynamic
   personality switching through `SetBotPersonality`; lower tiers retain fixed
   random personalities.
+- [x] **M** Phase 4 main-target consumption: `SquadManagerBotModuleCA` prefers the
+  master's `MainTarget` for proactive picks when `PreferMainTarget` is enabled.
+- [x] **M** Phase 5 counter-demand conditions: `BotCounterDemandController` exposes
+  hysteretic, sustained `demand.*` prerequisites for pilot compositions.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
   and later personality refinements.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
@@ -182,6 +189,36 @@ first. Faction reference: [`FACTIONS.md`](../FACTIONS.md).
 an open checkbox was moved.
 
 ---
+
+## ✅ RULED — three ideas from Combined Arms' damage model (2026-09-23)
+
+Asked by the maintainer after a Discord note from **Legato** (CA): CA has armour types only, a
+per-unit % against each, tooltips that say *"good vs heavy, weak vs infantry"*, and three extra
+rules: dedicated AA takes less from air weapons, `TankBuster` weapons deal bonus damage to 'tank'
+units, and a T3 flak-armour upgrade shields infantry from some splash. Measured against CA's source
+(`CAmod` @ `f31049d2`): all three are ONE hidden-multiplier trait, `DamageTypeDamageMultiplier`
+(`AirToGround` 50, **`TankBuster` 133 — not 150**, `FlakVestMitigated` 60 / 80), and the
+tooltips are hand-written `TooltipExtras` lines. Cameo already has the per-weapon % (the
+`^Warhead_*` families) and already prescribes `Strong vs … / Weak vs …` (DESIGN §7, 1,489 /
+1,061 live lines, **all hand-written and never checked**).
+
+**Maintainer ruling, 2026-09-23 — ADOPT:**
+
+1. **Derive `Strong vs` / `Weak vs` from each unit's resolved warhead profile** (generator or
+   audit) so §7's lines stay true as the reference averaging moves profiles. No balance change.
+   Read through `miniyaml.Ruleset.resolve_weapon` + `weapon_efficiency.versus_of`.
+2. **Dedicated AA takes less damage from aircraft weapons** — as an armour / plating class,
+   visible and priced by the pipeline. **Not** as CA's hidden multiplier: W26/R1 is retiring
+   those (*"HP is visible in the unit stat widget; a multiplier is not"*).
+3. **A TankBuster bonus against 'tank' units.** Adopted against the coordinator's advice (Cameo's
+   five-rung vehicle ladder and the AP families already peak on heavy armour). ⚠ **The FORM is not
+   ruled yet:** CA's form is the hidden multiplier W26/R1 forbids; the Cameo-native forms are a
+   Versus tilt in a `^Warhead_*` family or a 'tank' armour distinction. Ask before building.
+
+**NOT adopted:** the infantry flak-armour upgrade.
+
+None of this is built. Order: (1) first — it is balance-neutral and protects the reference
+averaging's output; (2) and (3) are balance changes and follow W24.
 
 ## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md)
 
@@ -275,9 +312,10 @@ Whether the grip should complete faster is a BALANCE question for the ledger, no
 
 ### 4. More axes to convert
 
-Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonance`** (W7, needs no
-new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
-(needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
+Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Hex** (Magic: −firepower/−accuracy/
+disable specials), **ArmorBreach**, **Knockback** (needs new C#). **Sonic → `Resonance`** (W7)
+is in progress (EMBER, `devin/ember/l6-w7-resonance` — shared side done, pack refs pending);
+**Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
 ## ✅ RULED — the "broken ladders" were never broken (2026-08-23)
 
@@ -325,11 +363,14 @@ family/ladder pairs; with it, **zero**. Nothing needs authoring.
 continuous value; the interim per-ladder form is unique within a ladder but collides across them.
 Recorded as an explicit OPEN block in DESIGN §12.0i — think it through before changing anything.
 
-⭐ **The bell is unblocked.** §9.6's blockers 1 and 2 are both gone — blocker 2 (every family in the
-spread band) was already finished on 2026-08-22 and the document had not noticed
-(`audit_versus_profile`: 46 in band, `SPREAD_OFFENDERS_BASELINE = 0`). Next action is §9.6 step 5:
-implement the family-anchored bell in `AreaDamageWarhead`, **inert at h=1**, and prove the resolved
-profiles are byte-identical before any weapon sets a different `h`.
+⭐ ~~**The bell is unblocked.**~~ **✅ SHIPPED 2026-08-24 (`7704fcf67`).** §9.6 step 5 landed:
+`OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs` is the C# port of the ruled bell (13-slot axis,
+`mu = (h + com)/2`, LO 2/3, σ 0.75, renorm + per-ladder rank restore), wired in
+`AreaDamageWarhead.RulesetLoaded` behind the `Heaviness` yaml field (thousandths; 0 = inert).
+Inertness is by construction — no weapon sets `Heaviness`, so resolved profiles are byte-identical.
+`audit_heaviness_bell`: 0 inversions, 0 mean drifts, 2 flat families at ratchet. Remaining: the
+Spread scale (`LEVEL_RADIUS_SCALE`) is deliberately NOT wired — it needs its own design ruling,
+and no yaml may set `Heaviness` until a maintainer orders a rollout.
 
 ## ✅ RULED AND SHIPPED — the Cryo families are adopted (2026-08-23, `a9f31258a`)
 
@@ -575,8 +616,10 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
   `docs/balance/derived/`. Full spec + improvement roadmap:
   [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
-- **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
-  the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
+- **[PARTIALLY ADOPTED — recheck remaining candidates] Adopt the Sonic family.** `^Warhead_Sonic_*`
+  is now LIVE: TS GDI `TSSonicZapWeaponSonic` inherits `^Warhead_Sonic_Heavy` + `^Effect_Sonic_Heavy`,
+  and `^Warhead_CannonSonic_*`/`^Warhead_MissileSonic_*` variants are inherited across TiberianSun,
+  RedAlert, RedAlert2, and D2k packs (post-#483 Resonance/state wiring). Remaining candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
   the sonic UPGRADE variants `TSVulcanGunSonic` / `TSAssaultCannonSonic` / `TSAssaultCannonTalSonic` /
   `TSHellfireSonic` / `TSZoneHellfireSonic` / `TSBombSonic` / `TSGrenadeSonic` / `KodiakCannonSonic`
@@ -767,8 +810,10 @@ shaders → boot-gate → commit `mod.config`. Also in `CLAUDE.md` and the Sessi
 `ObjectCreator.FindType` returns the first assembly in `mod.yaml`'s `Assemblies` list holding
 the type name, and that order is AS, CA, **Cameo**, Cnc, D2k, Common, so an
 `OpenRA.Mods.Cameo` class of the same name replaces the engine's with **zero yaml changes**.
-Precedent: `ColorPickerColorShift`, `PlayerColorShift`, and `SelectionDecorations`
-(`57685c3a3`). Prove it with a Cameo-only field — `--docs` lists both types and proves nothing.
+Precedent: `ColorPickerColorShift`, `PlayerColorShift`, `SelectionDecorations`
+(`57685c3a3`), and now `RenderSpritesInfo` + `ColorPickerManagerInfo` (the colour-picker
+preview build, 2026-09-22). Prove it with a Cameo-only field — `--docs` lists both types
+and proves nothing.
 Memory: `cameo-engine-submodule`.
 
 ---
@@ -1064,7 +1109,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   first — the current subtype rosters pull in snipers/casters/spies/core-combat
   units (scout: spies+zerg_defiler; SF: dragunov sniper, terran_*, zerg_hydralisk).
   PROGRESS 2026-07-22: **closecombat 3/4 at Δ≤1** — shotgunner/fanatic anchors
-  (Δ0), naxis_sssoldier (range 4500, FP 95%, Δ−0.8). `alien.nax` DEFERRED (Δ+67):
+  (Δ0), naxis_sssoldier (range 4500, FP 95%, Δ−0.8). `naxis_alien` DEFERRED (Δ+67):
   its weapon `NaxiAlienPistol` is defined in shared `mods/cameo/weapons/redalert2mod.yaml`
   and inherited cross-pack (Naxis + SchwarzerMond) — editing it would leak.
 - [ ] **Shared-weapon ownership pass** (systemic, found 2026-07-22): many members
@@ -1297,7 +1342,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `steel_defender→steelconsortium_defenderbot`,
   `aa_samurai→asianalliance_japanesesamurai`,
   `aa_lynx→asianalliance_lynxtank`, `aa_mecha→asianalliance_pulverizermecha`,
-  `aa_flam→asianalliance_asiansentryflamer`; unresolved: `aa_archer`,
+  `aa_flam→asianalliance_sentryflamer`; unresolved: `aa_archer`,
   `aa_ftnk`, `steel_fedinf`, `steel_qinf`. Effort: S–M once decided.
 
 ### P0/P1 — User-reported issues (2026-07-15/17)
@@ -1610,11 +1655,10 @@ DESIGN formulas instead of silently "fixing".
 Maintainer picked the scout class first; proposed anchor 20000 HP /
 50 Speed / 5.0 Range / 4000 Damage / 50 Reload / Cost 100 with the
 2x-health bake replacing the ScoutInfantryBuff damage reduction.
-⚠ **The bake is HALF APPLIED (measured 2026-08-17): 19 of 35 scouts
-cancel the template's `DamageMultiplier@ScoutInfantryBuff: 50` with a
-local `Modifier: 100`; 16 still resolve to 50 and are therefore twice
-as durable as their price. Finishing this class means finishing that
-migration, not just setting the anchor** — W26 / FORMULA_V2.md.
+⚠ **The bake WAS half applied (measured 2026-08-17): 19 of 35 scouts
+cancelled the template's `DamageMultiplier@ScoutInfantryBuff: 50` with a
+local `Modifier: 100` — re-measured 2026-09-22: 0 still resolve,
+migration complete.** — W26 / FORMULA_V2.md.
 Assessment + simulation: docs/balance/formula_v2_classes.md — anchor
 structure confirmed, speed 60 recommended over 50, bake endorsed;
 BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,
@@ -2373,6 +2417,10 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] Replace shared art references with unique `harkonnen_*` assets/actors where art exists; remaining placeholders flagged for art pass.
 - [x] Enable `FactionCA@Harkonnen` and add `StartingUnits` (MCV/Light/Heavy) in `afdaae46c`.
 - [x] Boot-gate + menu reached with zero new exceptions.
+- [x] **Build options follow-up (2026-09-21):** restored the missing `Queue`, palette order,
+  descriptions, and icon palettes for `harkonnen_autogunturret` and
+  `harkonnen_rocketturret`; both now appear in the Harkonnen Defence queue with their existing
+  construction-yard/barracks or outpost prerequisites.
 
 ### Phase 2 — Atreides (Devin-Aurora) — COMPLETE in `f07d8d35e`
 - [x] Complete Atreides tech tree: 15 buildings, 4 infantry, 5 vehicles, 1 aircraft, 5 upgrades, sequences.

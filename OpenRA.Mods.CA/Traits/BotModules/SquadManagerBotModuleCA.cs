@@ -120,6 +120,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
+		public readonly bool PreferMainTarget = false;
+
 		[Desc("Actor types to prioritise based on HighValueTargetPriority.")]
 		public readonly HashSet<string> HighValueTargetTypes = new HashSet<string>();
 
@@ -192,6 +195,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotPositionsUpdated[] notifyPositionsUpdated;
 		IBotNotifyIdleBaseUnits[] notifyIdleBaseUnits;
 		IBotAircraftBuilder[] aircraftBuilders;
+		IBotMainTargetProvider[] mainTargetProviders;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -301,6 +305,7 @@ namespace OpenRA.Mods.CA.Traits
 			notifyPositionsUpdated = self.Owner.PlayerActor.TraitsImplementing<IBotPositionsUpdated>().ToArray();
 			notifyIdleBaseUnits = self.Owner.PlayerActor.TraitsImplementing<IBotNotifyIdleBaseUnits>().ToArray();
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
+			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -349,18 +354,41 @@ namespace OpenRA.Mods.CA.Traits
 		internal Actor FindClosestEnemy(Actor sourceActor)
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
-			var units = World.Actors.Where(IsHighValueTarget);
+			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			return units.RandomOrDefault(World.LocalRandom);
 		}
 
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius)
 		{
 			return World.FindActorsInCircle(sourceActor.CenterPosition, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ClosestToIgnoringPath(sourceActor);
+		}
+
+		Player EffectiveMainTarget()
+		{
+			if (!Info.PreferMainTarget || mainTargetProviders == null)
+				return null;
+
+			return mainTargetProviders
+				.Select(p => p.MainTarget)
+				.FirstOrDefault(target => target != null && target.WinState == WinState.Undefined);
+		}
+
+		public static List<T> PreferOwned<T>(List<T> candidates, Func<T, bool> ownedByMainTarget)
+		{
+			if (ownedByMainTarget == null)
+				return candidates;
+
+			var preferred = candidates.Where(ownedByMainTarget).ToList();
+			return preferred.Count > 0 ? preferred : candidates;
 		}
 
 		void CleanSquads()

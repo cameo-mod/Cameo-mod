@@ -749,7 +749,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**21 distinct trait types, 36 Player instances plus one World instance**. Conditional instances
+**22 distinct trait types, 37 Player instances plus one World instance**. Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
@@ -914,12 +914,15 @@ interpret that cache as synchronized world state or bypass it through a new prod
 **Loaded, observe-only:** `MasterAiBotModule` publishes the immutable local snapshot
 at the §10.5 cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
 It has **no consumers and no hint reads**, and logs candidate personality and target values only.
-On hard and above it issues `SetBotPersonality` at the decision cadence; the synced
+Every difficulty issues `SetBotPersonality` after its sustained reaction delay; the synced
 `BotPersonalityController` validates the order, ignores repeats, and owns the sole condition token.
 `ScoutBotModule` remains a later owner of explicitly allocated scouting tasks after contact memory
 and the visibility gate (§11.3), not a current capability. Reading an unsynced personality field
-from simulation code is forbidden. Lower tiers keep switching disabled through
-`AllowPersonalitySwitching: false`, preserving the fixed random personality fallback.
+from simulation code is forbidden. `PersonalityReactionDelay` controls how long
+a candidate must persist before switching; the ten difficulty tiers range from
+7500 ticks on easiest to 750 on cameogod in 750-tick steps. The personality
+hold is clamped to that reaction delay, so no tier reacts slower than its own
+delay; a negative value preserves the fixed random personality fallback.
 
 ```text
 Current synced world / rule data
@@ -1041,9 +1044,16 @@ allow it.
    The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
    situation log's candidate field, while the active five-personality controller falls through
    to the next grantable rule.
-4. **Main target selection**, consumed by the squad managers and support powers.
-5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
-   (`ProvidesPrerequisite` tokens, zero C#).
+4. **Main target selection (landed).** `SquadManagerBotModuleCA` consumes the
+   master's target for proactive, unbounded picks only when `PreferMainTarget` is
+   enabled; in-radius targeting is untouched, and empty preferred results fall
+   back to the existing unrestricted selection.
+5. **Counter demand and hints (implemented).** `MasterAiBotModule` issues the
+   `SetBotCounterDemand` order; `BotCounterDemandController` owns the synced demand conditions;
+   `ProvidesPrerequisite` maps those conditions to `demand.*` tokens, and composition
+   `Prerequisites` consume them without new consumer-side C#. Signals use hysteresis, with
+   per-tier sustained activation delays and immediate removal below the off threshold. Only a
+   small set of pilot compositions ships initially.
 6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
    because it makes the bots temporarily weaker and it invalidates any tuning done against
    omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.
@@ -1060,10 +1070,10 @@ the one that needs a tuning pass on everything before it.
 |---|---|
 | Duplicate authority (two writers of production or squads) | 10.1; enforced by the master owning no queues and no squads |
 | Second instance of a `TraitOrDefault` consumer | §1.3; the master and the compositions module are singletons by declaration |
-| Personality thrash | §4.5 hold time + momentum + slow cadence; and every switch costs an order (10.4) |
+| Personality thrash | §4.5 sustained reaction delay + clamped hold + momentum; and every switch costs an order (10.4) |
 | Desync from learning | §6.1 tiers; learned data is read at load or never touches synced state |
 | Learned weights overfitted to bot-vs-bot play | §8.4 distribution shift; priors stay small and are reviewed as balance data |
-| Losing today's behaviour on a bad phase | degradation rule in 10.1; `AllowPersonalitySwitching: false` remains the fallback |
+| Losing today's behaviour on a bad phase | degradation rule in 10.1; set `PersonalityReactionDelay` negative to disable switching |
 | Tuning invalidated by the fog switch | fog is phase 6, and phases 1-5 are labelled pre-fog rather than pretending otherwise |
 | Stale reference to a personality-gated module after a switch | §1.6; CN shipped this bug and documented it — every such reference is re-resolved whenever the cached instance is not enabled |
 | A borrowed detection threshold that never fires | §11.4; detection thresholds are fitted from phase-2 logs, only the hysteresis constants are imported |

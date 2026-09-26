@@ -2,13 +2,15 @@
 
 This map starts one fixed `hard` bot and one human enemy with a construction
 yard each. The fixed bot form matches Cameo campaign maps and activates the
-normal modular-bot player construction path. At tick 400, Lua writes
+normal modular-bot player construction path. At tick 900, Lua writes
 `AI_PHASE2_GATE_COMPLETED`.
 
-The runtime pass requires the completion marker and no new exception log. It
-proves successful world/player construction and 400 ticks with a configured
-hard bot under the pinned engine. The focused `MasterAiBotModuleTest` cases
-separately cover the unavailable-incumbent decision branch. `Launch.Map` uses a
-local server, so it cannot populate a playable skirmish-bot slot; the runtime
-snapshot assertion remains inferred from the normal modular-bot wiring rather
-than read back through `AiSituationLogWriter`.
+Run `python tools\tests\ai_bot_player_gate.py` to launch this map with
+`Launch.Map` and `Launch.Benchmark`, then read back the appended
+`cameo-ai-situations.jsonl` records. The gate requires repeated `HardBot`
+situation snapshots with a real decision, target, personality, and unsaturated
+target score before the failed objective ends the world and benchmark exit.
+Map-declared bots are included in the match and situation logs even though they
+do not occupy playable lobby slots, so campaign and other map-declared bots also
+produce records. Each record carries `map_uid` and `bot_type` for offline
+filtering.

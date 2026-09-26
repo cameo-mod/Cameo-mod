@@ -53,7 +53,7 @@ N6_BASELINE = 1
 
 # DESIGN.md "The dot rule" (maintainer ruling 2026-09-06): a dot marks a VARIANT of
 # the base actor named before it, and is LEGAL - `.husk`, `.spysat`, `.emp`,
-# `.infiltrated`, `.colorpicker`, `.rank_3`.  What is NOT legal is a dot carrying a
+# `.colorpicker`, `.rank_3`.  What is NOT legal is a dot carrying a
 # FACTION: `ptnk.asian` puts in the suffix what the grammar requires as the prefix.
 # So the test is not "which suffixes are sanctioned" but "does this suffix name a
 # faction" - DOT_FACTION below is the whole of it.

@@ -61,7 +61,7 @@
   },
   "armor": "Light",
   "comment": "ARMED TROOP TRANSPORT (maintainer ruling 2026-09-08). A carrier that shoots. Until now these sat in `support`, whose spec is ABILITY-priced with dps0 0 and range0_wdist 0 \u2014 so an armed APC's gun and range were worth literally nothing. 16 members: the plain APCs, BTR-80, subterranean/amphibious/latin/ordos/atreides APCs, the IFV, hover and Hind transports, the Kirov and Zeppelin transports, and td_gdi_assaultapc. Unarmed transports stay in `support`.",
-  "provisional": "RE-DERIVED 2026-09-08c, third time, and this one is measured on the GROUND weapon alone. The AA test read only the slot name and missed `td_gdi_apc`, whose AA gun sits in `Armament@SECONDARY` firing `APCGun_AA` at 1.500x range \u2014 so the anchor had been summing gun+AA. With the ground weapon isolated, four APCs across four packs land on the same number: td_gdi_apc 47500/100/5668/1200/4000dmg/400dps, ra1_allies_alliedapc 50000/105/5978/1300/4000/400, ts_gdi_amphibiousapc 80000/100/6263/1640/4000/400, forgotten_apctruck 80000/80/6147/1260/4000/333. dps0 PROVISIONAL, deferred under W24. signed_off pending.",
+  "provisional": "RE-DERIVED 2026-09-08c, third time, and this one is measured on the GROUND weapon alone. The AA test read only the slot name and missed `td_gdi_apc`, whose AA gun sits in `Armament@SECONDARY` firing `APCGun_AA` at 1.500x range \u2014 so the anchor had been summing gun+AA. With the ground weapon isolated, four APCs across four packs land on the same number: td_gdi_apc 47500/100/5668/1200/4000dmg/400dps, ra1_allies_apc 50000/105/5978/1300/4000/400, ts_gdi_amphibiousapc 80000/100/6263/1640/4000/400, forgotten_apctruck 80000/80/6147/1260/4000/333. dps0 PROVISIONAL, deferred under W24. signed_off pending.",
   "reveals_shroud": 5000,
   "signed_off": false,
   "spec": {
@@ -77,7 +77,7 @@
   "verifier_note": "NO VERIFIER EXISTS. The 2x/2x/2.5x candidate would have to sit near 100000hp/800dps/3000cr; ra1_soviets_btr80 is 1.8x/1.4x/1.33x and td_gdi_assaultapc is 5x/0.45x/3.75x. Emitting a broken verifier would break the 2.5x identity, so none is set \u2014 see EXTRAPOLATION_PROGRAM.md \u00a72 phase E step 3."
  },
  "artillery": {
-  "anchor_actor": "ra1_allies_alliedartillery",
+  "anchor_actor": "ra1_allies_artillery",
   "armor": "Light",
   "comment": "Long-range indirect siege. Verifier Brummbaer (T2, NOT V2 which is T3). latinsyndicate_burrito is Artillery too (long range, no air).",
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
@@ -280,7 +280,7 @@
   "verifier_actor": "ra1_soviets_siegemammothtank"
  },
  "light_tank": {
-  "anchor_actor": "ra1_allies_alliedlighttank",
+  "anchor_actor": "ra1_allies_lighttank",
   "armor": "Medium",
   "comment": "Cheap fast light cannon; weak vs heavy tanks.",
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
@@ -410,7 +410,7 @@
   "verifier_actor": "ra2_allies_sniper"
  },
  "rocket_trooper": {
-  "anchor_actor": "ra1_allies_alliedrocketsoldier",
+  "anchor_actor": "ra1_allies_rocketsoldier",
   "comment": "ROCKET TROOPER = dedicated AA+AT launcher, light+medium rocket mix. Verifier cabal_rocketcyborg (triple-rocket => SUM the 3 rocket warheads) fitted to 20000/55/6500/400/750 (2x/2x/2.5x). SIDE FIX: raise td_nod + td_gdi rocket troopers 200 -> 300 (currently too weak at 200).",
   "provisional": "dps0/cost0 placeholders \u2014 test in-game",
   "reveals_shroud": 6500,

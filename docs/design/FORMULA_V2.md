@@ -81,9 +81,9 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   This stat grid does not itself migrate regeneration: the ticks-to-full design
   and staged runtime conversion remain separate work. (The
   2×-health bake replaced the ScoutInfantryBuff 50% damage reduction —
-  ⚠ **for 19 of 35 scouts. Measured 2026-08-17: 16 still resolve to
-  `DamageMultiplier@ScoutInfantryBuff: 50`**, i.e. double effective HP
-  that the price does not see. `^ScoutInfantryTemplate` still carries the
+  ⚠ **at the time for 19 of 35 scouts; measured 2026-09-22: 0 still resolve
+  `DamageMultiplier@ScoutInfantryBuff: 50` — migration complete.**
+  (Historical trap, kept for the lesson: `^ScoutInfantryTemplate` still carries the
   50; the migrated actors CANCEL it with a local `Modifier: 100`, which
   is why those overrides look like deletable no-ops and are not — see
   BALANCE_PROGRAM_PLAN §W26. Claim: `unmigrated_scout_damage_multiplier`.)
@@ -146,7 +146,7 @@ already capture.
 | Gatling spin-up / ramp | `^GatlingSpeedUpUnitBehavior` | Gatling Trooper, Eliminator 800 |
 | Sniper instakill / lockdown | lockdown attach or instakill-vs-infantry weapon | Ghost, Allied Sniper |
 | Point-defense | point-defense trait (intercepts incoming projectiles) | Laser Commando, TD Nod Light Tank Mk2 |
-| Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → hole_small.nax2) → K 1.25 |
+| Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → schwarzermond_hole_small) → K 1.25 |
 | Friendly aura buff | a proximity buff aura (firepower/speed/armour to nearby allies) — often VERY strong, RE-TIER to Major+ | TD GDI Officer **propaganda** |
 | Debuff warhead / designator | snare (slow), blind (vision/accuracy cut), or target-designator (marks for bonus damage) | zerg corruptor (snare), latin smoker tank (blind), GDI Predator (targeting laser) |
 

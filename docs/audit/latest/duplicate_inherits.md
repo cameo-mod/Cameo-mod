@@ -1,12 +1,13 @@
-# audit_duplicate_inherits — 1876 actor(s)/template(s) reach a parent through more than one path
+_clean_ — no node reaches the same parent twice on one chain (actors and weapons).
+# audit_duplicate_inherits — 1952 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
     -> a10carrier -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> a10carrier -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -923,56 +924,6 @@ OILB.RA2:
     -> oilb.ra2 -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
     -> oilb.ra2 -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-OILB.TS:
-  parent ^^ ^globalbounty  (2 paths)
-    -> oilb.ts -> oilb.building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> oilb.ts -> oilb.building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> oilb.ts -> oilb.building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> oilb.ts -> oilb.building -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (5 paths)
-    -> oilb.ts -> oilb.building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-    -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-  parent ^^ ^cashtricklerwithexperience  (2 paths)
-    -> oilb.ts -> oilb.building -> Inherits@cashtrickler:^CashTricklerWithExperience
-    -> oilb.ts -> Inherits@cashtrickler:^CashTricklerWithExperience
-  parent ^^ ^cashtricklermultipliers  (2 paths)
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
-    -> oilb.ts -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
-  parent ^^ ^gainsexperiencecity  (2 paths)
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
-    -> oilb.ts -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
-  parent ^^ ^disableonlowpowerorpowerdown  (2 paths)
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
-    -> oilb.ts -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
-  parent ^^ ^disableonlowpower  (2 paths)
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
-    -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
-  parent ^^ ^disableonpowerdown  (2 paths)
-    -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
-    -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
-  parent ^^ ^cashtricklerlimited  (2 paths)
-    -> oilb.ts -> oilb.building -> Inherits@cashtricklerlimit:^CashTricklerLimited
-    -> oilb.ts -> Inherits@cashtricklerlimit:^CashTricklerLimited
-
-OILB.d2k:
-  parent ^^ ^globalbounty  (2 paths)
-    -> oilb.d2k -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> oilb.d2k -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> oilb.d2k -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> oilb.d2k -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^selectablebuilding  (2 paths)
-    -> oilb.d2k -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
-    -> oilb.d2k -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> oilb.d2k -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> oilb.d2k -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> oilb.d2k -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
 PLYMOUTH_AGRIDOME:
   parent ^^ ^globalbounty  (2 paths)
     -> plymouth_agridome -> ^op2baseagridome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -1359,9 +1310,9 @@ SCINTERCEPTOR:
   parent ^^ ^externalconditions  (2 paths)
     -> scinterceptor -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scinterceptor -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1400,9 +1351,9 @@ SCSCOURGEDRONE:
   parent ^^ ^externalconditions  (2 paths)
     -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1446,9 +1397,9 @@ SCWRAITHDRONE:
   parent ^^ ^externalconditions  (2 paths)
     -> scwraithdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scwraithdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1522,9 +1473,9 @@ TRAN:
   parent ^^ ^externalconditions  (2 paths)
     -> tran -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -2503,14 +2454,6 @@ YRSLAV:
     -> yrslav -> ^meleeinfantrytemplate -> ^infantrybuffs -> Inherits@RA2YuriGeneMod:^RA2YuriGeneMod
     -> yrslav -> Inherits@RA2YuriGeneMod:^RA2YuriGeneMod
 
-apparition.ixian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> apparition.ixian -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> apparition.ixian -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^gainsexperience  (2 paths)
-    -> apparition.ixian -> ^meleeinfantrytemplate -> ^gainsexperiencemelee -> ^gainsexperiencemobile -> Inherits:^GainsExperience
-    -> apparition.ixian -> Inherits@GAINSEXPERIENCE:^GainsExperience
-
 asianalliance_advancedcommunicationcenter:
   parent ^^ ^globalbounty  (2 paths)
     -> asianalliance_advancedcommunicationcenter -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -2522,6 +2465,17 @@ asianalliance_advancedcommunicationcenter:
     -> asianalliance_advancedcommunicationcenter -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> asianalliance_advancedcommunicationcenter -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
     -> asianalliance_advancedcommunicationcenter -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+asianalliance_airforcecommand:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_airforcecommand -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_airforcecommand -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 asianalliance_alligator:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -2722,509 +2676,49 @@ asianalliance_asdf:
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianairforcecommand:
+asianalliance_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianairforcecommand -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_barracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianairforcecommand -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asianbarracks:
+asianalliance_battlelab:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianbarracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_battlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_battlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asianbattlelab:
+asianalliance_cgpnch:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianbattlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianbattlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-asianalliance_asiancommando:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-asianalliance_asianconstructionyard:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianconstructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-asianalliance_asianflametank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianflametank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianflametank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-asianalliance_asianflametrooper:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-asianalliance_asianmilitia:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-asianalliance_asianmobileconstructionvehicle:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianmobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-asianalliance_asianorerefinery:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianorerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-asianalliance_asianpetrolplant:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianpetrolplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-asianalliance_asianradar:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianradar -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianradar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> asianalliance_asianradar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-asianalliance_asiansentryflamer:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asiansentryflamer -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_cgpnch -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
   parent ^^ ^gainsexperiencera2  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
-    -> asianalliance_asiansentryflamer -> Inherits@EXPERIENCE:^GainsExperienceRA2
+    -> asianalliance_cgpnch -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
+    -> asianalliance_cgpnch -> Inherits@EXPERIENCE:^GainsExperienceRA2
 
-asianalliance_asianservicedepot:
+asianalliance_cgyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianservicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_cgyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianservicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-asianalliance_asiantankkiller:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-asianalliance_asianwarfactory:
-  parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_cgyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 asianalliance_chaosstorminductor:
   parent ^^ ^globalbounty  (2 paths)
@@ -3249,6 +2743,112 @@ asianalliance_chaostower:
   parent ^^ ^gainsexperiencera2  (2 paths)
     -> asianalliance_chaostower -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
     -> asianalliance_chaostower -> Inherits@EXPERIENCE:^GainsExperienceRA2
+
+asianalliance_commando:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_commando -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+asianalliance_constructionyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_constructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 asianalliance_dragonfly:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -3456,13 +3056,121 @@ asianalliance_fanatic:
     -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+asianalliance_flametank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_flametank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+asianalliance_flametrooper:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+asianalliance_gunb:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_gunb -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_gunb -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 asianalliance_harbinger:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_harbinger -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_harbinger -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3644,6 +3352,144 @@ asianalliance_japanesesamurai:
     -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+asianalliance_kami:
+  parent ^^ ^externalconditions  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+asianalliance_kami_asdf:
+  parent ^^ ^externalconditions  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+asianalliance_kami_chemical:
+  parent ^^ ^externalconditions  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+asianalliance_karrier:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_karrier -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_karrier -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+asianalliance_ksub:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_ksub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ksub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+asianalliance_lsub:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_lsub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_lsub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 asianalliance_lynxtank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_lynxtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -3665,18 +3511,134 @@ asianalliance_militaryacademy:
     -> asianalliance_militaryacademy -> ^istechnobuilding -> Inherits@IDISABLE:^DisableOnPowerDown
     -> asianalliance_militaryacademy -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
 
+asianalliance_militia:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_militia -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+asianalliance_mobileconstructionvehicle:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_mobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 asianalliance_oiltruck:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_oiltruck -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_oiltruck -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+asianalliance_orerefinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_orerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+asianalliance_panth:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_panth -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_panth -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 asianalliance_pelican:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_pelican -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3711,13 +3673,21 @@ asianalliance_pelican:
     -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
+asianalliance_petrolplant:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_petrolplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
 asianalliance_phoenix:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_phoenix -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_phoenix -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3865,6 +3835,11 @@ asianalliance_plasmatrooper:
     -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+asianalliance_ptnk:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_ptnk -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ptnk -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 asianalliance_pulsar:
   parent ^^ ^globalbounty  (2 paths)
     -> asianalliance_pulsar -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -3891,6 +3866,23 @@ asianalliance_quasar:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_quasar -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_quasar -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+asianalliance_quasfrig:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_quasfrig -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_quasfrig -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+asianalliance_radar:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_radar -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_radar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> asianalliance_radar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 asianalliance_railguntank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -3935,6 +3927,28 @@ asianalliance_railtower:
   parent ^^ ^gainsexperiencera2  (2 paths)
     -> asianalliance_railtower -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
     -> asianalliance_railtower -> Inherits@EXPERIENCE:^GainsExperienceRA2
+
+asianalliance_sentryflamer:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_sentryflamer -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^gainsexperiencera2  (2 paths)
+    -> asianalliance_sentryflamer -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
+    -> asianalliance_sentryflamer -> Inherits@EXPERIENCE:^GainsExperienceRA2
+
+asianalliance_servicedepot:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_servicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_servicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 asianalliance_shinobi:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -4049,6 +4063,104 @@ asianalliance_spitfire:
     -> asianalliance_spitfire -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
     -> asianalliance_spitfire -> Inherits@EXPERIENCE:^GainsExperienceRA2
 
+asianalliance_tankkiller:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
 asianalliance_tankreactor:
   parent ^^ ^globalbounty  (2 paths)
     -> asianalliance_tankreactor -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -4056,6 +4168,11 @@ asianalliance_tankreactor:
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> asianalliance_tankreactor -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> asianalliance_tankreactor -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+asianalliance_tsun:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> asianalliance_tsun -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tsun -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 asianalliance_type89mlrs:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -4192,6 +4309,17 @@ asianalliance_viper:
     -> asianalliance_viper -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> asianalliance_viper -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
+asianalliance_warfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 asianalliance_warturtle:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_warturtle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -4270,6 +4398,9 @@ atreides_hightechfactory:
   parent ^^ ^selectablebuilding  (2 paths)
     -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_hightechfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> atreides_hightechfactory -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 atreides_ixresearchcenter:
   parent ^^ ^globalbounty  (2 paths)
@@ -4824,9 +4955,9 @@ cabal_constructionyard:
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> cabal_constructionyard -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> cabal_constructionyard -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_constructionyard -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_constructionyard -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_constructionyard -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> cabal_constructionyard -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
 
 cabal_core:
   parent ^^ ^globalbounty  (2 paths)
@@ -4862,9 +4993,9 @@ cabal_cyborgassassin:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgassassin -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -5020,9 +5151,9 @@ cabal_cyborgcommando:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_cyborgcommando -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -5202,9 +5333,9 @@ cabal_cyborgcommandov2:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6009,9 +6140,9 @@ cabal_hunterdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6050,9 +6181,9 @@ cabal_hunterdronecarrier:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6091,9 +6222,9 @@ cabal_hunterkillermk1:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterkillermk1 -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6132,9 +6263,9 @@ cabal_hunterkillermk1_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6274,10 +6405,10 @@ cabal_mothership:
     -> cabal_mothership -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_mothership -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_mothership -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_mothership -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_mothership -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6377,9 +6508,9 @@ cabal_orbdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_orbdrone -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_orbdrone -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6430,9 +6561,9 @@ cabal_orbdrone_slave:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6483,9 +6614,9 @@ cabal_overkillgunship:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_overkillgunship -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6583,9 +6714,9 @@ cabal_repairdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_repairdrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6818,49 +6949,6 @@ cabal_widow_backup:
     -> cabal_widow_backup -> cabal_widow -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_widow_backup -> cabal_widow -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-cgpnch.asian:
-  parent ^^ ^globalbounty  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> cgpnch.asian -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-  parent ^^ ^gainsexperiencera2  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
-    -> cgpnch.asian -> Inherits@EXPERIENCE:^GainsExperienceRA2
-
-cgyard.asian:
-  parent ^^ ^globalbounty  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> cgyard.asian -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> cgyard.asian -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-cgyard.latin:
-  parent ^^ ^globalbounty  (2 paths)
-    -> cgyard.latin -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cgyard.latin -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> cgyard.latin -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> cgyard.latin -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> cgyard.latin -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> cgyard.latin -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-cobra.steel:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cobra.steel -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cobra.steel -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-combat_tank.harkonnen:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> combat_tank.harkonnen -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> combat_tank.harkonnen -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 corrino_apc:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> corrino_apc -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -6944,6 +7032,9 @@ corrino_hightechfactory:
   parent ^^ ^selectablebuilding  (2 paths)
     -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> corrino_hightechfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> corrino_hightechfactory -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 corrino_ixresearchcenter:
   parent ^^ ^globalbounty  (2 paths)
@@ -7634,61 +7725,25 @@ corrino_windtrap:
     -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
-cougar.steel:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cougar.steel -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cougar.steel -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-cruiser_f.steel:
-  parent ^^ ^externalconditions  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> cruiser_f.steel -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+d2k_spicesifter:
+  parent ^^ ^globalbounty  (2 paths)
+    -> d2k_spicesifter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> d2k_spicesifter -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> d2k_spicesifter -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> d2k_spicesifter -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> d2k_spicesifter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> d2k_spicesifter -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> d2k_spicesifter -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> d2k_spicesifter -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> d2k_spicesifter -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 devastator:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> devastator -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> devastator -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-duelist_tank.ixian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> duelist_tank.ixian -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> duelist_tank.ixian -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 eden_impulseitems:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -7803,18 +7858,13 @@ engineer:
     -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-fact.colorpicker:
-  parent ^^ ^globalbounty  (2 paths)
-    -> fact.colorpicker -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> fact.colorpicker -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-
 farasha_drone_ixian:
   parent ^^ ^externalconditions  (2 paths)
     -> farasha_drone_ixian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> farasha_drone_ixian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7853,9 +7903,9 @@ forgotten_apache:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_apache -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_apache -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7897,9 +7947,9 @@ forgotten_apctruck:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_apctruck -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_apctruck -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_apctruck -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_apctruck -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_apctruck -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8112,9 +8162,9 @@ forgotten_cobracopter:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_cobracopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8161,9 +8211,9 @@ forgotten_cropplane:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_cropplane -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8617,7 +8667,7 @@ forgotten_helipad:
     -> forgotten_helipad -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> forgotten_helipad -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> forgotten_helipad -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> forgotten_helipad -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
     -> forgotten_helipad -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> forgotten_helipad -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
@@ -8645,9 +8695,9 @@ forgotten_locustbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_locustbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9104,9 +9154,9 @@ forgotten_mutanthijacker:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutanthijacker -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9446,9 +9496,9 @@ forgotten_mutantsniper:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9634,9 +9684,9 @@ forgotten_mutantsniper_r4:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9822,9 +9872,9 @@ forgotten_mutantsniper_sp:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -10607,47 +10657,47 @@ forgotten_tiberiumharvester:
 
 forgotten_tiberiumspike:
   parent ^^ ^globalbounty  (2 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> forgotten_tiberiumspike -> ^3x4shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (7 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
   parent ^^ ^cashtricklerwithexperience  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> Inherits@cashtrickler:^CashTricklerWithExperience
-    -> forgotten_tiberiumspike -> oilb.ts -> Inherits@cashtrickler:^CashTricklerWithExperience
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> Inherits@cashtrickler:^CashTricklerWithExperience
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> Inherits@cashtrickler:^CashTricklerWithExperience
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> Inherits:^CashTricklerWithExperience
   parent ^^ ^cashtricklermultipliers  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
   parent ^^ ^gainsexperiencecity  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
   parent ^^ ^disableonlowpowerorpowerdown  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
   parent ^^ ^disableonlowpower  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
   parent ^^ ^disableonpowerdown  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
-    -> forgotten_tiberiumspike -> oilb.ts -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
     -> forgotten_tiberiumspike -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
   parent ^^ ^cashtricklerlimited  (3 paths)
-    -> forgotten_tiberiumspike -> oilb.ts -> oilb.building -> Inherits@cashtricklerlimit:^CashTricklerLimited
-    -> forgotten_tiberiumspike -> oilb.ts -> Inherits@cashtricklerlimit:^CashTricklerLimited
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> oilb.building -> Inherits@cashtricklerlimit:^CashTricklerLimited
+    -> forgotten_tiberiumspike -> ts_tiberiumpump -> Inherits@cashtricklerlimit:^CashTricklerLimited
     -> forgotten_tiberiumspike -> Inherits@cashtricklerlimit:^CashTricklerLimited
 
 forgotten_veinhole:
@@ -10812,9 +10862,9 @@ forgotten_wasp:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_wasp -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -10946,6 +10996,47 @@ forgotten_zombiemutant:
   parent ^^ ^gravityweighter  (2 paths)
     -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+futu_landcarr_drone:
+  parent ^^ ^externalconditions  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> futu_landcarr_drone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> futu_landcarr_drone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> futu_landcarr_drone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
 futuretech_athenacannon:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -11137,9 +11228,9 @@ futuretech_cryocopter:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_cryocopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -11567,9 +11658,9 @@ futuretech_harbingergunship:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_harbingergunship -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_harbingergunship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -11988,9 +12079,9 @@ futuretech_twister:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_twister -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_twister -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12040,9 +12131,9 @@ gdirigdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> gdirigdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> gdirigdrone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12077,15 +12168,15 @@ gdirigdrone:
     -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-gunb.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> gunb.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> gunb.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 harkonnen_adp:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+harkonnen_assaulttank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_assaulttank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_assaulttank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_autogunturret:
   parent ^^ ^basebuilding  (2 paths)
@@ -12141,9 +12232,9 @@ harkonnen_autogunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12220,6 +12311,11 @@ harkonnen_buzzsaw:
     -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
+harkonnen_combat_tank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_combat_tank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_combat_tank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 harkonnen_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -12290,9 +12386,9 @@ harkonnen_devastatorturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12382,9 +12478,9 @@ harkonnen_flameturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12562,6 +12658,11 @@ harkonnen_repairpad:
     -> harkonnen_repairpad -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> harkonnen_repairpad -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+harkonnen_rockettank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_rockettank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_rockettank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 harkonnen_rocketturret:
   parent ^^ ^basebuilding  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
@@ -12616,9 +12717,9 @@ harkonnen_rocketturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12694,16 +12795,6 @@ harkonnen_windtrap:
     -> harkonnen_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> harkonnen_windtrap -> ^windtrap -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
-heavy_rocket_raider.ixian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> heavy_rocket_raider.ixian -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> heavy_rocket_raider.ixian -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-hummer.steel:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> hummer.steel -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> hummer.steel -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 ixian_advancedheavyfactory:
   parent ^^ ^globalbounty  (2 paths)
     -> ixian_advancedheavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -12722,9 +12813,9 @@ ixian_airdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_airdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_airdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12759,6 +12850,14 @@ ixian_airdrone:
     -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
+ixian_apparition:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ixian_apparition -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ixian_apparition -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^gainsexperience  (2 paths)
+    -> ixian_apparition -> ^meleeinfantrytemplate -> ^gainsexperiencemelee -> ^gainsexperiencemobile -> Inherits:^GainsExperience
+    -> ixian_apparition -> Inherits@GAINSEXPERIENCE:^GainsExperience
+
 ixian_barracks:
   parent ^^ ^globalbounty  (2 paths)
     -> ixian_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -12784,13 +12883,18 @@ ixian_constructionyard:
     -> ixian_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> ixian_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+ixian_duelist_tank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ixian_duelist_tank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ixian_duelist_tank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 ixian_empbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_empbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_empbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12830,10 +12934,10 @@ ixian_farasha:
     -> ixian_farasha -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_farasha -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ixian_farasha -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_farasha -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_farasha -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12970,9 +13074,9 @@ ixian_gunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13001,6 +13105,11 @@ ixian_gunturret:
   parent ^^ ^selectablecombatbuilding  (2 paths)
     -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
     -> ixian_gunturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
+
+ixian_heavy_rocket_raider:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ixian_heavy_rocket_raider -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ixian_heavy_rocket_raider -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ixian_heavykodatank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -13169,9 +13278,9 @@ ixian_machinegunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13249,9 +13358,9 @@ ixian_railgundrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_railgundrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -13315,9 +13424,9 @@ ixian_resonancedrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_resonancedrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -13351,6 +13460,11 @@ ixian_resonancedrone:
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
     -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+ixian_rocket_raider:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ixian_rocket_raider -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ixian_rocket_raider -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ixian_rockettrooper:
   parent ^^ ^d2kpersonalshield  (2 paths)
@@ -13414,9 +13528,9 @@ ixian_rocketturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13539,9 +13653,9 @@ ixian_stormlasher:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13747,9 +13861,9 @@ japan_archermaiden:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> japan_archermaiden -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14189,9 +14303,9 @@ japan_imperialscoutsman:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14294,9 +14408,9 @@ japan_japanesebomber:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_japanesebomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_japanesebomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14610,9 +14724,9 @@ japan_rocketangel:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_rocketangel -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> japan_rocketangel -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14785,9 +14899,9 @@ japan_skyhawk:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_skyhawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14987,9 +15101,9 @@ japan_zerofighter:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_zerofighter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_zerofighter -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15028,9 +15142,9 @@ japan_zerofighter_slave:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_zerofighter_slave -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_zerofighter_slave -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15065,179 +15179,203 @@ japan_zerofighter_slave:
     -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-kami.asian:
-  parent ^^ ^externalconditions  (2 paths)
-    -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+junv01:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
-kami_asdf.asian:
-  parent ^^ ^externalconditions  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+junv02:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
-kami_chemical.asian:
-  parent ^^ ^externalconditions  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+junv03:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
-karrier.asian:
+junv04:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv08:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv09:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv10:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv11:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+latin_cgyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> latin_cgyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> latin_cgyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> latin_cgyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> latin_cgyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> latin_cgyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> latin_cgyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+latin_rammax:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> karrier.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> karrier.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_rammax -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_rammax -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-ksub.asian:
+latin_scrapcar:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ksub.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ksub.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-landcarr_drone.futu:
-  parent ^^ ^externalconditions  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> landcarr_drone.futu -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+latin_scrapcar2:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_scrapcar2 -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar2 -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+latin_scrapcar2_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_scrapcar2_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar2_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> latin_scrapcar2_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> latin_scrapcar2_demo -> Inherits@EMP:^FrontalEMP
+
+latin_scrapcar2_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_scrapcar2_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar2_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> latin_scrapcar2_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> latin_scrapcar2_driveby -> Inherits@EMP:^FrontalEMP
+
+latin_scrapcar_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_scrapcar_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> latin_scrapcar_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> latin_scrapcar_demo -> Inherits@EMP:^FrontalEMP
+
+latin_scrapcar_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_scrapcar_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_scrapcar_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> latin_scrapcar_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> latin_scrapcar_driveby -> Inherits@EMP:^FrontalEMP
+
+latin_sub:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_sub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_sub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+latin_triton:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> latin_triton -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> latin_triton -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 latinsyndicate_airstation:
   parent ^^ ^globalbounty  (2 paths)
@@ -15550,9 +15688,9 @@ latinsyndicate_hindtransport:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_hindtransport -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15835,9 +15973,9 @@ latinsyndicate_mig21:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_mig21 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_mig21 -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -16343,9 +16481,9 @@ latinsyndicate_yakovlev:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_yakovlev -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_yakovlev -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -16387,11 +16525,6 @@ light_inf:
   parent ^^ ^d2k_advancedixiantechnology  (2 paths)
     -> light_inf -> ^d2kinfantry -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
     -> light_inf -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
-
-lsub.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> lsub.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> lsub.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 mammothbunker.husk:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -16599,9 +16732,9 @@ naxis_bf109:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_bf109 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_bf109 -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -17106,9 +17239,9 @@ naxis_interceptor:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_interceptor -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_interceptor -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -17167,9 +17300,9 @@ naxis_me262:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_me262 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_me262 -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18147,9 +18280,9 @@ naxis_skymage:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_skymage -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> naxis_skymage -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18518,9 +18651,9 @@ naxis_transportzeppelin:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_transportzeppelin -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18674,18 +18807,13 @@ naxis_wirbelwind:
     -> naxis_wirbelwind -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_wirbelwind -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-oldqtnk.steel:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> oldqtnk.steel -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> oldqtnk.steel -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 ordos_airmine:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_airmine -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_airmine -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18877,9 +19005,9 @@ ordos_artilleryplatform:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -18964,9 +19092,9 @@ ordos_autogunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19001,9 +19129,9 @@ ordos_banshee:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_banshee -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_banshee -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19109,9 +19237,9 @@ ordos_chemturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19217,9 +19345,9 @@ ordos_eyeinthesky:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_eyeinthesky -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_eyeinthesky -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19373,9 +19501,9 @@ ordos_laserturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19637,9 +19765,9 @@ ordos_swarmerdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_swarmerdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_swarmerdrone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19698,10 +19826,10 @@ ordos_wraith:
     -> ordos_wraith -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_wraith -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ordos_wraith -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_wraith -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_wraith -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19777,11 +19905,6 @@ ordos_wraith:
     -> ordos_wraith -> ^spaceshiptemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> ordos_wraith -> ^epicairunittemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
-panth.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> panth.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> panth.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 protoss_analogue:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> protoss_analogue -> ^largeprotoss -> ^basicprotoss -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -19795,10 +19918,10 @@ protoss_arbiter:
     -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_arbiter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
     -> protoss_arbiter -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_arbiter -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_arbiter -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19911,9 +20034,9 @@ protoss_carrier:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_carrier -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19960,9 +20083,9 @@ protoss_corsair:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_corsair -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20017,9 +20140,9 @@ protoss_epigraph:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_epigraph -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20089,9 +20212,9 @@ protoss_gladius:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_gladius -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20179,9 +20302,9 @@ protoss_observer:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_observer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20311,9 +20434,9 @@ protoss_scout:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_scout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20360,9 +20483,9 @@ protoss_shuttle:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20413,10 +20536,10 @@ protoss_starshipsovereign:
     -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_starshipsovereign -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> protoss_starshipsovereign -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_starshipsovereign -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_starshipsovereign -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20504,9 +20627,9 @@ protoss_voidray:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_voidray -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20541,16 +20664,6 @@ protoss_voidray:
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-ptnk.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ptnk.asian -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ptnk.asian -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-quasfrig.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> quasfrig.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> quasfrig.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 ra1_advancedpowerplant:
   parent ^^ ^globalbounty  (2 paths)
     -> ra1_advancedpowerplant -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -20559,430 +20672,62 @@ ra1_advancedpowerplant:
     -> ra1_advancedpowerplant -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ra1_advancedpowerplant -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra1_allies_alliedaagun:
+ra1_allies_aagun:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedaagun -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedaagun -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_aagun -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_aagun -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^disabledoverlay  (3 paths)
-    -> ra1_allies_alliedaagun -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedaagun -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> ra1_allies_alliedaagun -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra1_allies_aagun -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_aagun -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra1_allies_aagun -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra1_allies_alliedapc:
+ra1_allies_apc:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedapc -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedapc -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_apc -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_apc -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-ra1_allies_alliedartillery:
+ra1_allies_artillery:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedartillery -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedartillery -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_artillery -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_artillery -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^vehiclebuffs  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> ra1_allies_artillery -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
   parent ^^ ^globalbuffs  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
   parent ^^ ^gpssatellitesupport  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
   parent ^^ ^wayofthedragon  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
   parent ^^ ^helium3teamupgrademobile  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
   parent ^^ ^nanotechrepairs  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
   parent ^^ ^modernfirecontrolsystems  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
   parent ^^ ^blitzkrieg  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
   parent ^^ ^tiberiumadaptability  (2 paths)
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
-    -> ra1_allies_alliedartillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> ra1_allies_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
-ra1_allies_alliedbarracks:
+ra1_allies_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedbarracks -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedbarracks -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_barracks -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_barracks -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedbarracks -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedbarracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_barracks -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_barracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedbarracks -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedchinooktransport:
-  parent ^^ ^externalconditions  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-
-ra1_allies_alliedconstructionyard:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedconstructionyard -> ^rafact -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedconstructionyard -> ^rafact -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedconstructionyard -> ^rafact -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedconstructionyard -> ^rafact -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra1_allies_alliedcybertank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedcybertank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedcybertank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedgunturret:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedgunturret -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedgunturret -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedgunturret -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedgunturret -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedheavyaatank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedheavyaatank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedheavyaatank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedhelipad:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedhelipad -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedhelipad -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedhelipad -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedhelipad -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedhelipad -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedhelipad -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedlighttank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedlighttank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedlighttank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedmediumtank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedmediumtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedmediumtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedmobileconstructionvehicle:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedmobileconstructionvehicle -> ^ramcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedmobileconstructionvehicle -> ^ramcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliednavalyard:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliednavalyard -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliednavalyard -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliednavalyard -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliednavalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliednavalyard -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliednavalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedorerefinery:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedorerefinery -> ^raproc -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedorerefinery -> ^raproc -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedorerefinery -> ^raproc -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedorerefinery -> ^raproc -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra1_allies_alliedoretruck:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedoretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedoretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedradardome:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedradardome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedradardome -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedradardome -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedradardome -> ^dome -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> ra1_allies_alliedradardome -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedradardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> ra1_allies_alliedradardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedrocketsoldier:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-ra1_allies_alliedservicedepot:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedservicedepot -> ^rafix -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedsniper:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-ra1_allies_alliedtankdestroyer:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedtankdestroyer -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedtankdestroyer -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedtechcenter:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedtechcenter -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedtechcenter -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedtechcenter -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedtechcenter -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedtechcenter -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedtechcenter -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_allies_alliedtigerheavytank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_allies_alliedtigerheavytank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_allies_alliedtigerheavytank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_allies_alliedwarfactory:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_allies_alliedwarfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_allies_alliedwarfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_allies_alliedwarfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_allies_alliedwarfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_allies_alliedwarfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_allies_alliedwarfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra1_allies_barracks -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_allies_bastionartillerybunker:
   parent ^^ ^globalbounty  (2 paths)
@@ -21000,9 +20745,9 @@ ra1_allies_blackhawk:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_blackhawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21045,6 +20790,47 @@ ra1_allies_camopillbox:
     -> ra1_allies_camopillbox -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ra1_allies_camopillbox -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ra1_allies_chinooktransport:
+  parent ^^ ^externalconditions  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> ra1_allies_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> ra1_allies_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
 ra1_allies_chronosphere:
   parent ^^ ^globalbounty  (2 paths)
     -> ra1_allies_chronosphere -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -21061,11 +20847,51 @@ ra1_allies_chronotank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_chronotank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_chronotank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
+ra1_allies_constructionyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_constructionyard -> ^rafact -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_constructionyard -> ^rafact -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_constructionyard -> ^rafact -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_constructionyard -> ^rafact -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ra1_allies_cruiser:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_cruiser -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_cruiser -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_cybertank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_cybertank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_cybertank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_allies_destroyer:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -21092,13 +20918,42 @@ ra1_allies_gunboat:
     -> ra1_allies_gunboat -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_gunboat -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+ra1_allies_gunturret:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_gunturret -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_gunturret -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_gunturret -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_gunturret -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra1_allies_heavyaatank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_heavyaatank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_heavyaatank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_helipad:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_helipad -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_helipad -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_helipad -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_helipad -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_helipad -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_helipad -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra1_allies_lighttank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_lighttank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_lighttank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 ra1_allies_longbow:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_longbow -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21427,10 +21282,20 @@ ra1_allies_medic:
     -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+ra1_allies_mediumtank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_mediumtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_mediumtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 ra1_allies_minelayer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_minelayer -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_minelayer -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_mobileconstructionvehicle:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_mobileconstructionvehicle -> ^ramcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_mobileconstructionvehicle -> ^ramcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_allies_mobilegapgenerator:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -21441,6 +21306,30 @@ ra1_allies_mobileradarjammer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_mobileradarjammer -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_mobileradarjammer -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_navalyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_navalyard -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_navalyard -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_navalyard -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_navalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_navalyard -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_navalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra1_allies_orerefinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_orerefinery -> ^raproc -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_orerefinery -> ^raproc -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_orerefinery -> ^raproc -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_orerefinery -> ^raproc -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ra1_allies_oretruck:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_oretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_oretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_allies_phasetransport:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -21455,6 +21344,18 @@ ra1_allies_pillbox:
     -> ra1_allies_pillbox -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ra1_allies_pillbox -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ra1_allies_radardome:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_radardome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_radardome -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_radardome -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_radardome -> ^dome -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ra1_allies_radardome -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_radardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra1_allies_radardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_allies_ranger:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_ranger -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -21464,9 +21365,9 @@ ra1_allies_rapierjumpjet:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_rapierjumpjet -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_rapierjumpjet -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21714,10 +21615,222 @@ ra1_allies_rifleinfantry:
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+ra1_allies_rocketsoldier:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_allies_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra1_allies_servicedepot:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_servicedepot -> ^rafix -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_servicedepot -> ^rafix -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_servicedepot -> ^rafix -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_servicedepot -> ^rafix -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_servicedepot -> ^rafix -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_servicedepot -> ^rafix -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_allies_sheridanassaulttank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_sheridanassaulttank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_sheridanassaulttank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_sniper:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra1_allies_tankdestroyer:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_tankdestroyer -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_tankdestroyer -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_allies_tanya:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -21822,6 +21935,33 @@ ra1_allies_tanya:
   parent ^^ ^commandoskull  (2 paths)
     -> ra1_allies_tanya -> ^heroinfantrytemplate -> Inherits@COMMANDOSKULL:^CommandoSkull
     -> ra1_allies_tanya -> Inherits@COMMANDOSKULL:^CommandoSkull
+
+ra1_allies_techcenter:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_techcenter -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_techcenter -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_techcenter -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_techcenter -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_techcenter -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_techcenter -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra1_allies_tigerheavytank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_allies_tigerheavytank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_allies_tigerheavytank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_allies_warfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_allies_warfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_allies_warfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_allies_warfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_allies_warfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_allies_warfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_allies_warfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_engineer:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -22058,9 +22198,9 @@ ra1_soviets_armoredyak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_armoredyak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_armoredyak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22711,9 +22851,9 @@ ra1_soviets_hindattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22752,9 +22892,9 @@ ra1_soviets_hiptransport:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22805,9 +22945,9 @@ ra1_soviets_kamovattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22895,18 +23035,13 @@ ra1_soviets_mammothtank:
     -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-ra1_soviets_mammothtank.colorpicker:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_mammothtank.colorpicker -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_mammothtank.colorpicker -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 ra1_soviets_migattackbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_migattackbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_migattackbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23215,9 +23350,9 @@ ra1_soviets_nuclearyak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_nuclearyak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_nuclearyak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23622,9 +23757,9 @@ ra1_soviets_su57attackbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_su57attackbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_su57attackbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23683,10 +23818,10 @@ ra1_soviets_supersonicnuclearbomber:
     -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
     -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23815,9 +23950,9 @@ ra1_soviets_teslayak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_teslayak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_teslayak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24032,9 +24167,9 @@ ra1_soviets_yakscoutplane:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_yakscoutplane -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_yakscoutplane -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24188,82 +24323,16 @@ ra2_allies_airforcecommandhq:
     -> ra2_allies_airforcecommandhq -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
     -> ra2_allies_airforcecommandhq -> ^isaircraftfactory -> Inherits@DisabledOverlay:^DisableOnPowerDown
 
-ra2_allies_alliedbarracks:
+ra2_allies_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbarracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra2_allies_alliedbattlelab:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbattlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbattlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra2_allies_alliedconstructionyard:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedconstructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra2_allies_alliedmobileconstructionvehicle:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^enemyinproximity  (3 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
-
-ra2_allies_alliedorerefinery:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedorerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra2_allies_alliedpowerplant:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedpowerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra2_allies_alliedservicedepot:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedservicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedservicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra2_allies_alliedwarfactory:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra2_allies_battlefortress:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -24301,13 +24370,24 @@ ra2_allies_battlefortress_empty:
     -> ra2_allies_battlefortress_empty -> ra2_allies_battlefortress -> ^linebreakertemplate -> Inherits@Crushes:^VehicleCrusher
     -> ra2_allies_battlefortress_empty -> ra2_allies_battlefortress -> Inherits@crush:^VehicleCrusher
 
+ra2_allies_battlelab:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_battlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_battlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra2_allies_blackeagle:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_blackeagle -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_blackeagle -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24460,6 +24540,14 @@ ra2_allies_chronosphere:
     -> ra2_allies_chronosphere -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ra2_allies_chronosphere -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
     -> ra2_allies_chronosphere -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra2_allies_constructionyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_constructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ra2_allies_engineer:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -24798,9 +24886,9 @@ ra2_allies_harrier:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_harrier -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_harrier -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24907,13 +24995,22 @@ ra2_allies_miragetank:
     -> ra2_allies_miragetank -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
     -> ra2_allies_miragetank -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
 
+ra2_allies_mobileconstructionvehicle:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^enemyinproximity  (3 paths)
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
+
 ra2_allies_nighthawk:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_nighthawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24960,6 +25057,14 @@ ra2_allies_orepurifier:
     -> ra2_allies_orepurifier -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
     -> ra2_allies_orepurifier -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ra2_allies_orerefinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_orerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
 ra2_allies_patriotmissilesystem:
   parent ^^ ^globalbounty  (2 paths)
     -> ra2_allies_patriotmissilesystem -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -24982,6 +25087,14 @@ ra2_allies_pillbox:
   parent ^^ ^gainsexperiencera2  (2 paths)
     -> ra2_allies_pillbox -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
     -> ra2_allies_pillbox -> Inherits@EXPERIENCE:^GainsExperienceRA2
+
+ra2_allies_powerplant:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_powerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ra2_allies_prismtank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -25133,9 +25246,9 @@ ra2_allies_rocketeer:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_rocketeer -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -25279,6 +25392,17 @@ ra2_allies_seal:
   parent ^^ ^gravityweighter  (2 paths)
     -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra2_allies_servicedepot:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_servicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_servicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra2_allies_sniper:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -25502,6 +25626,17 @@ ra2_allies_tanyaii:
   parent ^^ ^commandoskull  (2 paths)
     -> ra2_allies_tanyaii -> ^heroinfantrytemplate -> Inherits@COMMANDOSKULL:^CommandoSkull
     -> ra2_allies_tanyaii -> Inherits@COMMANDOSKULL:^CommandoSkull
+
+ra2_allies_warfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra2_allies_weathercontrolcenter:
   parent ^^ ^globalbounty  (2 paths)
@@ -27807,9 +27942,9 @@ ra2_soviets_kirovairship:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -27851,9 +27986,9 @@ ra2_soviets_migbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_migbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_migbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -27978,9 +28113,9 @@ ra2_soviets_siegechopper:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_siegechopper -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28183,9 +28318,9 @@ ra2_soviets_transportkirov:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_transportkirov -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28478,9 +28613,9 @@ ra2asw:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2asw -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2asw -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -29665,9 +29800,9 @@ ra2hornet:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2hornet -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2hornet -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30047,26 +30182,6 @@ ra2sub:
     -> ra2sub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2sub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-rafact.colorpicker:
-  parent ^^ ^globalbounty  (2 paths)
-    -> rafact.colorpicker -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> rafact.colorpicker -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-
-rafactj.colorpicker:
-  parent ^^ ^globalbounty  (2 paths)
-    -> rafactj.colorpicker -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> rafactj.colorpicker -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-
-rammax.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> rammax.latin -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> rammax.latin -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-rocket_raider.ixian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> rocket_raider.ixian -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> rocket_raider.ixian -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 sc_zerg_larva:
   parent ^^ ^defaultinfantry  (2 paths)
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
@@ -30165,129 +30280,6 @@ sc_zerg_larva:
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-scalpelAA.steel:
-  parent ^^ ^externalconditions  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-
-scalpelMG.steel:
-  parent ^^ ^externalconditions  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-
-scalpelQuantumCannon.steel:
-  parent ^^ ^externalconditions  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-  parent ^^ ^defilerplague  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-  parent ^^ ^commandocallable  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
-  parent ^^ ^darkswarmable  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-  parent ^^ ^industryspeed  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-  parent ^^ ^citycombatcallable  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
-  parent ^^ ^berserkable  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
-  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-  parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-  parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-
 schwarzermond_airfield:
   parent ^^ ^globalbounty  (2 paths)
     -> schwarzermond_airfield -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -30321,9 +30313,9 @@ schwarzermond_blackbomb:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_blackbomb -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_blackbomb -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30370,9 +30362,9 @@ schwarzermond_corruptorpiercer:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_corruptorpiercer -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_corruptorpiercer -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30448,9 +30440,9 @@ schwarzermond_dieglocke:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_dieglocke -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30489,9 +30481,9 @@ schwarzermond_drone:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_drone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_drone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30552,9 +30544,9 @@ schwarzermond_haunebuii:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_haunebuii -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30593,9 +30585,9 @@ schwarzermond_haunebuiii:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31089,9 +31081,9 @@ schwarzermond_spacezeppelin:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31257,48 +31249,6 @@ schwarzermond_warfactory:
     -> schwarzermond_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> schwarzermond_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-scrapcar.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar.latin -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar.latin -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-scrapcar2.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar2.latin -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar2.latin -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-scrapcar2_demo.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar2_demo.latin -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar2_demo.latin -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^frontalemp  (2 paths)
-    -> scrapcar2_demo.latin -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
-    -> scrapcar2_demo.latin -> Inherits@EMP:^FrontalEMP
-
-scrapcar2_driveby.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar2_driveby.latin -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar2_driveby.latin -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^frontalemp  (2 paths)
-    -> scrapcar2_driveby.latin -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
-    -> scrapcar2_driveby.latin -> Inherits@EMP:^FrontalEMP
-
-scrapcar_demo.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar_demo.latin -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar_demo.latin -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^frontalemp  (2 paths)
-    -> scrapcar_demo.latin -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
-    -> scrapcar_demo.latin -> Inherits@EMP:^FrontalEMP
-
-scrapcar_driveby.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> scrapcar_driveby.latin -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> scrapcar_driveby.latin -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^frontalemp  (2 paths)
-    -> scrapcar_driveby.latin -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
-    -> scrapcar_driveby.latin -> Inherits@EMP:^FrontalEMP
-
 siege_tank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> siege_tank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -31353,6 +31303,342 @@ sietch_creep_disabled:
     -> sietch_creep_disabled -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> sietch_creep_disabled -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+snov01:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov02:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov03:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov04:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov08:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov09:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov10:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov11:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov12:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov13:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+steel_cobra:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> steel_cobra -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> steel_cobra -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+steel_cougar:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> steel_cougar -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> steel_cougar -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+steel_cruiser_f:
+  parent ^^ ^externalconditions  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> steel_cruiser_f -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> steel_cruiser_f -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> steel_cruiser_f -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+steel_hummer:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> steel_hummer -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> steel_hummer -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+steel_oldqtnk:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> steel_oldqtnk -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> steel_oldqtnk -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+steel_scalpelAA:
+  parent ^^ ^externalconditions  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> steel_scalpelaa -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+steel_scalpelMG:
+  parent ^^ ^externalconditions  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> steel_scalpelmg -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+steel_scalpelQuantumCannon:
+  parent ^^ ^externalconditions  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^resonant  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+  parent ^^ ^defilerplague  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> steel_scalpelquantumcannon -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
 steelconsortium_antiairquantummissileturret:
   parent ^^ ^globalbounty  (2 paths)
     -> steelconsortium_antiairquantummissileturret -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -31386,9 +31672,9 @@ steelconsortium_cargoship:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_cargoship -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31533,9 +31819,9 @@ steelconsortium_cloudbreaker:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31702,10 +31988,10 @@ steelconsortium_empressstation:
     -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_empressstation -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> steelconsortium_empressstation -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_empressstation -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_empressstation -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32190,9 +32476,9 @@ steelconsortium_skyhammer:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_skyhammer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32359,9 +32645,9 @@ steelconsortium_twister:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_twister -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_twister -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32403,11 +32689,6 @@ steelconsortium_whiterabbit:
   parent ^^ ^mcimmune  (2 paths)
     -> steelconsortium_whiterabbit -> ^heroinfantrytemplate -> Inherits@MC:^MCImmune
     -> steelconsortium_whiterabbit -> Inherits@MC:^MCImmune
-
-sub.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> sub.latin -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> sub.latin -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 td_gdi_advancedcommunicationscenter:
   parent ^^ ^globalbounty  (2 paths)
@@ -32457,7 +32738,7 @@ td_gdi_apc:
     -> td_gdi_apc -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_apc -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^lightweightarmorplating  (2 paths)
-    -> td_gdi_apc -> ^supportvehicletemplate -> Inherits@upgrade:^LightWeightArmorPlating
+    -> td_gdi_apc -> ^armedtrooptransporttemplate -> ^supportvehicletemplate -> Inherits@upgrade:^LightWeightArmorPlating
     -> td_gdi_apc -> Inherits@LightWeightArmorPlating:^LightWeightArmorPlating
 
 td_gdi_archerartillery:
@@ -32501,9 +32782,9 @@ td_gdi_chinooktransport:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32804,9 +33085,9 @@ td_gdi_firehawk:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_firehawk -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_firehawk -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -33443,9 +33724,9 @@ td_gdi_orca:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_orca -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -33851,9 +34132,9 @@ td_nod_apacheattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -34329,9 +34610,9 @@ td_nod_chinooktransport:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35393,9 +35674,9 @@ td_nod_venom:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_venom -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_venom -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35601,9 +35882,9 @@ terran_battlecruiser:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_battlecruiser -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35675,9 +35956,9 @@ terran_cyclone:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_cyclone -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_cyclone -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35716,9 +35997,9 @@ terran_dropship:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_dropship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35765,9 +36046,9 @@ terran_firebat:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_firebat -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_firebat -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35806,9 +36087,9 @@ terran_ghost:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_ghost -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_ghost -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35856,9 +36137,9 @@ terran_goliath:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_goliath -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_goliath -> ^hightechtanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35906,9 +36187,9 @@ terran_goliathmk2:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_goliathmk2 -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_goliathmk2 -> ^hightechtanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35947,9 +36228,9 @@ terran_harakan:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_harakan -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_harakan -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35988,9 +36269,9 @@ terran_jimraynor:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_jimraynor -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_jimraynor -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36029,9 +36310,9 @@ terran_madcap:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_madcap -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_madcap -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36070,9 +36351,9 @@ terran_marauder:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_marauder -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_marauder -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36111,9 +36392,9 @@ terran_marine:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_marine -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_marine -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36161,9 +36442,9 @@ terran_matador:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_matador -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_matador -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36202,9 +36483,9 @@ terran_medic:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_medic -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_medic -> ^medictemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36243,9 +36524,9 @@ terran_medivac:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_medivac -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36322,10 +36603,10 @@ terran_phobos:
     -> terran_phobos -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_phobos -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> terran_phobos -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_phobos -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_phobos -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36406,10 +36687,10 @@ terran_pythean:
     -> terran_pythean -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_pythean -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> terran_pythean -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_pythean -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_pythean -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36489,9 +36770,9 @@ terran_raven:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_raven -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_raven -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36530,9 +36811,9 @@ terran_reaper:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_reaper -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_reaper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36590,9 +36871,9 @@ terran_sciencevessel:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_sciencevessel -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36658,9 +36939,9 @@ terran_siegetank:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_siegetank -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_siegetank -> ^artillerytanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36699,9 +36980,9 @@ terran_specter:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_specter -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_specter -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36751,9 +37032,9 @@ terran_sundog:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_sundog -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_sundog -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36800,9 +37081,9 @@ terran_valkyrie:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_valkyrie -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36850,9 +37131,9 @@ terran_vulture:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_vulture -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_vulture -> ^lighttanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36900,9 +37181,9 @@ terran_warhound:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_warhound -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_warhound -> ^dreadnoughttemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36952,9 +37233,9 @@ terran_wraith:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_wraith -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_wraith -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36993,9 +37274,9 @@ terran_wyvern:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_wyvern -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_wyvern -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37037,9 +37318,9 @@ tkm_abrams:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_abrams -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_abrams -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_abrams -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_abrams -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_abrams -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37282,9 +37563,9 @@ tkm_iroquois:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkm_iroquois -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37998,9 +38279,9 @@ tkm_t30:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_t30 -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_t30 -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_t30 -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_t30 -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_t30 -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38042,9 +38323,9 @@ tkm_t72m:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_t72m -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_t72m -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_t72m -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_t72m -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_t72m -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38116,9 +38397,9 @@ tkm_technicaltank:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_technicaltank -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_technicaltank -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_technicaltank -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_technicaltank -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_technicaltank -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38295,9 +38576,9 @@ tkm_trenchtank:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_trenchtank -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_trenchtank -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_trenchtank -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_trenchtank -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_trenchtank -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38339,9 +38620,9 @@ tkm_trenchtruck:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_trenchtruck -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_trenchtruck -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_trenchtruck -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_trenchtruck -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_trenchtruck -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38489,9 +38770,9 @@ tkm_viper:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_viper -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkm_viper -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38644,9 +38925,9 @@ tkmdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> tkmdrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkmdrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38716,9 +38997,9 @@ tkmsuicidedrone:
   parent ^^ ^externalconditions  (2 paths)
     -> tkmsuicidedrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkmsuicidedrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38966,11 +39247,6 @@ tkmworker:
     -> tkmworker -> ^meleeinfantrytemplate -> ^infantrybuffs -> Inherits@RA2YuriGeneMod:^RA2YuriGeneMod
     -> tkmworker -> Inherits@RA2YuriGeneMod:^RA2YuriGeneMod
 
-triton.latin:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> triton.latin -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> triton.latin -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 trooper:
   parent ^^ ^d2kpersonalshield  (2 paths)
     -> trooper -> ^d2kinfantry -> Inherits@personalshield:^D2KPersonalShield
@@ -38978,6 +39254,47 @@ trooper:
   parent ^^ ^d2k_advancedixiantechnology  (2 paths)
     -> trooper -> ^d2kinfantry -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
     -> trooper -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
+
+ts_bus:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_bus_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_bus_demo -> Inherits@EMP:^FrontalEMP
+
+ts_bus_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_bus_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_ctpyr01:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr01 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctpyr02:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr02 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctpyr03:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr03 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctvega:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctvega -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctvega -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ts_gdi_amphibiousapc:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -39120,9 +39437,9 @@ ts_gdi_disruptor:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_disruptor -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_disruptor -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_disruptor -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_disruptor -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_disruptor -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39384,9 +39701,9 @@ ts_gdi_hammerhead:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_hammerhead -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39444,9 +39761,9 @@ ts_gdi_hovermlrs:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_hovermlrs -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39534,9 +39851,9 @@ ts_gdi_jumpjetinfantry:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39588,10 +39905,10 @@ ts_gdi_kodiakcommandship:
     -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39772,9 +40089,9 @@ ts_gdi_mammothmkii:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_mammothmkii -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39825,9 +40142,9 @@ ts_gdi_mammothprototype:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_mammothprototype -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39999,9 +40316,9 @@ ts_gdi_orcabomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_orcabomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40040,9 +40357,9 @@ ts_gdi_orcafighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_orcafighter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40342,9 +40659,9 @@ ts_gdi_strike_orca:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_strike_orca -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_strike_orca -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40451,9 +40768,9 @@ ts_gdi_wolverine:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_wolverine -> ^firesupporttemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_wolverine -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_wolverine -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_wolverine -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_wolverine -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40522,9 +40839,9 @@ ts_gdi_wolverinemkii:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_wolverinemkii -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40590,9 +40907,9 @@ ts_gdi_zoneorcafighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40762,9 +41079,9 @@ ts_nod_attackcycle:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_attackcycle -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_nod_attackcycle -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_attackcycle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_attackcycle -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_attackcycle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40803,9 +41120,9 @@ ts_nod_bansheefighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_nod_bansheefighter -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41170,9 +41487,9 @@ ts_nod_harpy:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_nod_harpy -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41630,9 +41947,9 @@ ts_nod_shadowteam_air:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41957,10 +42274,299 @@ ts_nod_warfactory:
     -> ts_nod_warfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ts_nod_warfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ts_pickup:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_pickup_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickup_demo -> Inherits@EMP:^FrontalEMP
+
+ts_pickup_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickup_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_pickupb:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_pickupb_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickupb_demo -> Inherits@EMP:^FrontalEMP
+
+ts_pickupb_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickupb_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_sedan:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_sedan_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_sedan_demo -> Inherits@EMP:^FrontalEMP
+
+ts_sedan_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_sedan_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_tiberiumpump:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_tiberiumpump -> oilb.building -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (5 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^cashtricklerwithexperience  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> Inherits@cashtrickler:^CashTricklerWithExperience
+    -> ts_tiberiumpump -> Inherits@cashtrickler:^CashTricklerWithExperience
+  parent ^^ ^cashtricklermultipliers  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits:^CashTricklerMultipliers
+  parent ^^ ^gainsexperiencecity  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits@2:^GainsExperienceCity
+  parent ^^ ^disableonlowpowerorpowerdown  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> Inherits@IDISABLE:^DisableOnLowPowerOrPowerDown
+  parent ^^ ^disableonlowpower  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits:^DisableOnLowPower
+  parent ^^ ^disableonpowerdown  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
+    -> ts_tiberiumpump -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
+  parent ^^ ^cashtricklerlimited  (2 paths)
+    -> ts_tiberiumpump -> oilb.building -> Inherits@cashtricklerlimit:^CashTricklerLimited
+    -> ts_tiberiumpump -> Inherits@cashtricklerlimit:^CashTricklerLimited
+
+ts_trucka:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_trucka_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_trucka_demo -> Inherits@EMP:^FrontalEMP
+
+ts_trucka_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_trucka_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_truckb:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_truckb_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_truckb_demo -> Inherits@EMP:^FrontalEMP
+
+ts_truckb_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_truckb_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_wini:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_wini_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_wini_demo -> Inherits@EMP:^FrontalEMP
+
+ts_wini_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_wini_driveby -> Inherits@EMP:^FrontalEMP
+
 tsaegis:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tsaegis -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tsaegis -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+tsbboard01:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard01 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard01 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard01 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard02:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard02 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard02 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard02 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard03:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard03 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard03 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard03 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard04:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard04 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard04 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard04 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard04 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard05:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard05 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard05 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard05 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard05 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard06:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard06 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard06 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard06 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard06 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard07:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard07 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard07 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard07 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard07 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard08:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard08 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard08 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard08 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard08 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard09:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard09 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard09 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard09 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard09 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard10:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard10 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard10 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard10 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard10 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard11:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard11 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard11 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard11 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard11 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard12:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard12 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard12 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard12 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard12 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard13:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard13 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard13 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard13 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard13 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard14:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard14 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard14 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard14 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard14 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard15:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard15 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard15 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard15 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard15 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard16:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard16 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard16 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard16 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard16 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tscity01:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -42521,11 +43127,6 @@ tsmonstermaker1:
     -> tsmonstermaker1 -> vice -> ^viceroid -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
     -> tsmonstermaker1 -> vice -> ^viceroid -> Inherits@selection:^SelectableCombatUnit
 
-tsun.asian:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> tsun.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> tsun.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 tsvislrg:
   parent ^^ ^selectablecombatunit  (2 paths)
     -> tsvislrg -> ^viceroid -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
@@ -42995,9 +43596,9 @@ wc2_human_battleship:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_battleship -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43039,9 +43640,9 @@ wc2_human_elven_destroyer:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_elven_destroyer -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43091,9 +43692,9 @@ wc2_human_gnomish_submarine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_gnomish_submarine -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43269,9 +43870,9 @@ wc2_humans_alleria:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_alleria -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43411,9 +44012,9 @@ wc2_humans_alleria_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43553,9 +44154,9 @@ wc2_humans_archmage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43602,9 +44203,9 @@ wc2_humans_ballista:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_ballista -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_ballista -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43815,9 +44416,9 @@ wc2_humans_danath:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_danath -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_danath -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43957,9 +44558,9 @@ wc2_humans_danath_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44099,9 +44700,9 @@ wc2_humans_demolitionsquad:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44241,9 +44842,9 @@ wc2_humans_dwarvenrifleman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44383,9 +44984,9 @@ wc2_humans_elvenarcher:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44533,9 +45134,9 @@ wc2_humans_elvenranger:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44588,10 +45189,10 @@ wc2_humans_flyingmachine:
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_flyingmachine -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44742,9 +45343,9 @@ wc2_humans_footman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_footman -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44811,10 +45412,10 @@ wc2_humans_gryphonrider:
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_gryphonrider -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44887,10 +45488,10 @@ wc2_humans_gyrocoptermachine:
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45041,9 +45642,9 @@ wc2_humans_highelfpriest:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45186,9 +45787,9 @@ wc2_humans_highelfsorceress:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45331,9 +45932,9 @@ wc2_humans_highelvenarcher:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45413,9 +46014,9 @@ wc2_humans_knight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45555,9 +46156,9 @@ wc2_humans_mage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45714,10 +46315,10 @@ wc2_humans_militiapeasant:
     -> wc2_humans_militiapeasant -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45921,9 +46522,9 @@ wc2_humans_mobileconstructionvehiclehuman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46063,9 +46664,9 @@ wc2_humans_mortarteam:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46112,9 +46713,9 @@ wc2_humans_paladin:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46257,9 +46858,9 @@ wc2_humans_peasant:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46306,9 +46907,9 @@ wc2_humans_siegeengine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_siegeengine -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_siegeengine -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46499,9 +47100,9 @@ wc2_humans_warcraft3footman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46548,9 +47149,9 @@ wc2_humans_warcraft3knight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_warcraft3knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46594,9 +47195,9 @@ wc2_neutral_daemon:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_neutral_daemon -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46643,9 +47244,9 @@ wc2_orc_eye_of_kilrogg:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46700,9 +47301,9 @@ wc2_orc_giant_turtle:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_giant_turtle -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46744,9 +47345,9 @@ wc2_orc_ogre_juggernaught:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_ogre_juggernaught -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46917,9 +47518,9 @@ wc2_orc_skeleton:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46977,9 +47578,9 @@ wc2_orc_trolldestroyer:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_trolldestroyer -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47065,9 +47666,9 @@ wc2_orcs_catapult:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_catapult -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_catapult -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47234,9 +47835,9 @@ wc2_orcs_deathknight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47281,10 +47882,10 @@ wc2_orcs_dragon:
     -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orcs_dragon -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_dragon -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_dragon -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_dragon -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47446,9 +48047,9 @@ wc2_orcs_goblinsappers:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47493,10 +48094,10 @@ wc2_orcs_goblinzeppelin:
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47666,9 +48267,9 @@ wc2_orcs_grunt:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47825,9 +48426,9 @@ wc2_orcs_hellscream:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47967,9 +48568,9 @@ wc2_orcs_hellscream_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48016,9 +48617,9 @@ wc2_orcs_kodobeast:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_kodobeast -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48193,9 +48794,9 @@ wc2_orcs_mobileconstructionvehicleorc:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48242,9 +48843,9 @@ wc2_orcs_ogre:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_ogre -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_ogre -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48291,9 +48892,9 @@ wc2_orcs_ogremage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48477,9 +49078,9 @@ wc2_orcs_peon:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48534,9 +49135,9 @@ wc2_orcs_siegeengine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_siegeengine -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_siegeengine -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48719,9 +49320,9 @@ wc2_orcs_trollaxethrower:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48861,9 +49462,9 @@ wc2_orcs_trollberserker:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49003,9 +49604,9 @@ wc2_orcs_trollheadhunter:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49153,9 +49754,9 @@ wc2_orcs_warcraft3grunt:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49295,9 +49896,9 @@ wc2_orcs_zuljin:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49437,9 +50038,9 @@ wc2_orcs_zuljin_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49478,6 +50079,158 @@ wc2_orcs_zuljin_elite:
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+winv01:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv02:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv03:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv04:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv08:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv09:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv10:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv11:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv12:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv13:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 yrbpln:
   parent ^^ ^enemyinproximity  (2 paths)
@@ -49883,9 +50636,9 @@ yuri_cosmonaut:
   parent ^^ ^externalconditions  (2 paths)
     -> yuri_cosmonaut -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> yuri_cosmonaut -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50037,9 +50790,9 @@ yuri_floatingdisk:
   parent ^^ ^externalconditions  (2 paths)
     -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> yuri_floatingdisk -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50760,11 +51513,11 @@ zerg_behemoth:
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_behemoth -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_behemoth -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (4 paths)
-    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (4 paths)
+    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (4 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50879,9 +51632,9 @@ zerg_broodweaver:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50920,9 +51673,9 @@ zerg_corruptor:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_corruptor -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51001,9 +51754,9 @@ zerg_defiler:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_defiler -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_defiler -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_defiler -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_defiler -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_defiler -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51050,9 +51803,9 @@ zerg_devourer:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_devourer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51091,9 +51844,9 @@ zerg_dreadshroud:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_dreadshroud -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51153,9 +51906,9 @@ zerg_gorekraken:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_gorekraken -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51205,9 +51958,9 @@ zerg_guardian:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_guardian -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51294,9 +52047,9 @@ zerg_infestedterranbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_infestedterranbomber -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51385,9 +52138,9 @@ zerg_mutalisk:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_mutalisk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51434,9 +52187,9 @@ zerg_overlord:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_overlord -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51499,9 +52252,9 @@ zerg_queen:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_queen -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51548,9 +52301,9 @@ zerg_scourge:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_scourge -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51589,9 +52342,9 @@ zerg_shriek:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_shriek -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51729,9 +52482,9 @@ zerg_swarmling:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_swarmling -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague

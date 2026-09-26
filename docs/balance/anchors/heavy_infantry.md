@@ -51,7 +51,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | japan_japaneseflamethrower | redalert_japan | REF | 15000 | 50 | 3603 | 200 | live resolved YAML |
 | ra1_soviets_flamethrower | redalert_soviets | REF | 16000 | 56 | 5004 | 200 | live resolved YAML |
 | naxis_naxiflamer | redalert2mod_naxis | FORMULA | 24000 | 48 | 4830 | 225 | live resolved YAML |
-| asianalliance_asianflametrooper | redalert2mod_asianalliance | REF | 26000 | 53 | 4444 | 400 | live resolved YAML |
+| asianalliance_flametrooper | redalert2mod_asianalliance | REF | 26000 | 53 | 4444 | 400 | live resolved YAML |
 | japan_tankbuster | redalert_japan | FORMULA | 48000 | 48 | 5190 | 400 | live resolved YAML |
 | naxis_panzerfausttrooper | redalert2mod_naxis | FORMULA | 36000 | 46 | 5512 | 400 | live resolved YAML |
 | ordos_chemicaltrooper | d2k_ordos | FORMULA | 30000 | 45 | 5177 | 400 | live resolved YAML |
@@ -101,7 +101,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | ra2_soviets_desolator | Mental Omega/DESO; RA2 0XX/DESO; RA2 Reborn/DESO; Red Resurrection/DESO; Valiant Shades/deso | 43988.3 (n=5) | 53.7676 (n=5) | 5997.95 (n=5) | 925.146 (n=5) | 676.119 (n=5) | unapproved |
 | ra2_soviets_teslatrooper | CnC Reloaded/SHK; Mental Omega/SHK; RA2 0XX/SHK; RA2 Reborn/HCONS; Red Resurrection/SHK; Romanov's Vengeance/shk; Valiant Shades/shk | 40455.6 (n=7) | 52.4406 (n=7) | 4316.63 (n=6) | 567.48 (n=7) | 336.63 (n=6) | unapproved |
 | yuri_biotrooper | Combined Arms/CRYT; RA2 Reborn/PTROOP; Red Resurrection/YURI | 43606.9 (n=3) | 61.182 (n=3) | 5860.81 (n=3) | 974.412 (n=3) | 37.3943 (n=2) | unapproved |
-| asianalliance_asianflametrooper | Mental Omega/SHK; RA2 Reborn/FTHROW; Rise of the East/FLAMETROOPERUP | 42650.9 (n=3) | 62.1637 (n=3) | 4443.26 (n=2) | 605.897 (n=3) | 397.404 (n=2) | unapproved |
+| asianalliance_flametrooper | Mental Omega/SHK; RA2 Reborn/FTHROW; Rise of the East/FLAMETROOPERUP | 42650.9 (n=3) | 62.1637 (n=3) | 4443.26 (n=2) | 605.897 (n=3) | 397.404 (n=2) | unapproved |
 | asianalliance_plasmatrooper | Mental Omega/FLAKT; RA2 Reborn/FLAKT; Rise of the East/FLAMETROOPER | 37298.1 (n=3) | 55.4971 (n=3) | 4534.23 (n=3) | 392.538 (n=3) | 495.099 (n=3) | unapproved |
 | latinsyndicate_latinflametrooper | Generals Alpha/infantry.rebel; Generals Alpha/infantry.saboteur; Generals Alpha/infantry.terrorist; Generals Alpha/infantry.toxin_rebel; Generals Alpha/infantry.toxin_terrorist; Generals Alpha/infantry.angry_mob; Generals Alpha/infantry.hijacker; Generals Alpha/infantry.rpg_trooper; Generals Alpha/infantry.worker; Mental Omega/SHK; RA2 Reborn/FTHROW | 45054.8 (n=3) | 58.6674 (n=3) | 3803.1 (n=2) | 602.88 (n=3) | 386.172 (n=2) | unapproved |
 | japan_japaneseflamethrower | RA2 Reborn/FTHROW | 26433.1 (n=1) | 56.2705 (n=1) | unavailable (n=0) | 332.778 (n=1) | unavailable (n=0) | unapproved |

@@ -39,6 +39,20 @@
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
@@ -53,13 +67,6 @@
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -70,13 +77,6 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -93,11 +93,7 @@
        "^Effect_CannonHE_Heavy",
        "^NuclearWarhead",
        "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
        "^HeavyBomb",
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
@@ -132,6 +128,20 @@
        },
        {
         "damage": "8",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
@@ -146,13 +156,6 @@
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -163,13 +166,6 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -488,6 +484,20 @@
        },
        {
         "damage": "3",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
@@ -502,13 +512,6 @@
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -519,13 +522,6 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -544,11 +540,7 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
        "^HeavyBomb",
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
@@ -584,6 +576,20 @@
        },
        {
         "damage": "8",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
@@ -598,13 +604,6 @@
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -615,13 +614,6 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -723,22 +715,15 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "133",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
@@ -746,15 +731,17 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -980,18 +967,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
+        "damage": "150000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1133,8 +1113,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileAP_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1160,8 +1140,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileAP_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1294,10 +1274,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyAAWeapon",
-       "^D2KRocket"
+       "^SCRocket",
+       "^Effect_Watersplash_Huge_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1348,10 +1326,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyAAWeapon",
-       "^D2KRocket"
+       "^SCRocket",
+       "^Effect_Watersplash_Huge_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1496,8 +1472,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1523,8 +1499,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1623,16 +1599,16 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1669,12 +1645,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^HeavyBomb",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyAAWeapon",
-       "^D2KRocket"
+       "^SCRocket"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -1703,16 +1675,16 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1749,12 +1721,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^HeavyBomb",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyAAWeapon",
-       "^D2KRocket"
+       "^SCRocket"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -2562,8 +2530,8 @@
       "slot": "Armament@1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2589,8 +2557,8 @@
       "slot": "Armament@2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2669,6 +2637,20 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LegacyLaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -2686,20 +2668,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -2711,11 +2679,9 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility"
+       "^LegacyLaserChipCompatibility",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2976,18 +2942,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "44000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3098,12 +3057,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3159,12 +3113,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3175,7 +3124,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3277,8 +3226,7 @@
       "slot": "Armament@1",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3320,8 +3268,7 @@
       "slot": "Armament@2",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3364,8 +3311,7 @@
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3408,8 +3354,7 @@
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3493,22 +3438,15 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "133",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
@@ -3516,15 +3454,17 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3532,22 +3472,15 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "133",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7446",
       "reloaddelay": "12",
@@ -3555,15 +3488,17 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3695,7 +3630,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3801,9 +3736,7 @@
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^TankDestroyerCannon",
-       "^MediumMissile"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -3846,9 +3779,7 @@
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^TankDestroyerCannon",
-       "^MediumMissile"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -3986,7 +3917,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -4062,31 +3993,24 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeapon",
+        "damage": "7600",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_Light",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -4096,48 +4020,29 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
+        "damage": "1",
         "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@Flare",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Warhead_Flame_Light",
+       "^Effect_Flak_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -4181,31 +4086,24 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeapon",
+        "damage": "7600",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_Light",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -4215,48 +4113,29 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
+        "damage": "1",
         "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@FlareGARRISONED",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Warhead_Flame_Light",
+       "^Effect_Flak_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4528,7 +4407,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -4586,18 +4465,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "88000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -4708,12 +4580,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -4769,12 +4636,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -4785,7 +4647,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -5798,7 +5660,7 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^SCRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_Concussion_Light",
@@ -5831,7 +5693,7 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^SCRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_Concussion_Light",
@@ -5859,8 +5721,8 @@
       "slot": "Armament@A1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -5886,8 +5748,8 @@
       "slot": "Armament@A2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6015,9 +5877,7 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^RA2Chaingun"
+       "^SCRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -6063,9 +5923,7 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^RA2Chaingun"
+       "^SCRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -6114,13 +5972,13 @@
       "slot": "Armament@A1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K_Rocket",
-       "^Effect_MissileAP_Heavy_D2K_Rocket"
+       "^Projectile_Missile_Heavy_Rocket_SC",
+       "^Effect_MissileAP_Heavy_Rocket_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
       ],
-      "weapon": "GoliathMk2Rockets",
+      "weapon": "GoliathMk2Rockets_AA",
       "weapon_class_source": "template"
      },
      {
@@ -6163,13 +6021,13 @@
       "slot": "Armament@A2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K_Rocket",
-       "^Effect_MissileAP_Heavy_D2K_Rocket"
+       "^Projectile_Missile_Heavy_Rocket_SC",
+       "^Effect_MissileAP_Heavy_Rocket_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
       ],
-      "weapon": "GoliathMk2Rockets",
+      "weapon": "GoliathMk2Rockets_AA",
       "weapon_class_source": "template"
      }
     ],
@@ -6666,6 +6524,27 @@
        },
        {
         "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
@@ -6690,13 +6569,6 @@
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6729,13 +6601,6 @@
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
@@ -6746,13 +6611,6 @@
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6767,18 +6625,8 @@
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
        "^NuclearWarhead",
-       "^LightMissile",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
        "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^ShrapnelWeapon",
        "^HeavyBomb",
-       "^HeavyCannon",
-       "^MediumCannon",
        "^TankDestroyerCannon"
       ],
       "warheads": [],
@@ -6908,11 +6756,7 @@
        "^Warhead_Demolition_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6996,6 +6840,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -7015,13 +6866,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7032,10 +6876,8 @@
       "slot": "Armament@Cannon",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^LightFlameWeapon",
-       "^Chaingun",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon"
+       "^SCRA2HeavyCannon",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -7048,6 +6890,14 @@
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
@@ -7068,14 +6918,6 @@
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7085,11 +6927,8 @@
       "reloaddelay": "84",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^HeavyMissile",
-       "^RA2MediumMissile",
-       "^Effect_Explosion_Large_RA2"
+       "^SCRA2MediumMissile",
+       "^Effect_Explosion_Large_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

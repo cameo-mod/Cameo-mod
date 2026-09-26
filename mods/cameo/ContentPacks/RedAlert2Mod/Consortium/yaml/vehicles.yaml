@@ -365,7 +365,7 @@ steelconsortium_whiterabbit:
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-cougar.steel:
+steel_cougar:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -426,7 +426,7 @@ cougar.steel:
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-hummer.steel:
+steel_hummer:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -491,7 +491,7 @@ hummer.steel:
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-oldqtnk.steel:
+steel_oldqtnk:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -557,7 +557,7 @@ oldqtnk.steel:
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-cobra.steel:
+steel_cobra:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^LineBreakerTemplate

@@ -71,11 +71,11 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`).
 - **The dot rule** (maintainer ruling 2026-09-06). A dot marks a **VARIANT of the
   base actor named before it** — `camera.spysat`, `powerproxy.emp`,
-  `ra2gacnst.infiltrated`, `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
+  `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
   are all legal, exactly as `.husk` always was. ⛔ **A dot may NEVER carry a
-  faction.** `ptnk.asian` and `rocket_raider.ixian` put the faction in the suffix
+  faction.** `asianalliance_ptnk` and `rocket_raider.ixian` put the faction in the suffix
   where the grammar requires it as the PREFIX, and those are the only dotted ids
-  that are renaming debt: `ptnk.asian` -> `asianalliance_plasmatank`. The rule is
+  that are renaming debt: `asianalliance_ptnk` -> `asianalliance_plasmatank`. The rule is
   what makes the two cases distinguishable by a tool rather than by taste, and
   `audit_naming_damage.py` N5 enforces exactly it. (Before this ruling, all 398
   dotted ids read as backlog; 237 were husks, 52 were variants, and only 109 were
@@ -536,7 +536,7 @@ the unit cannot shoot into.
 
 | | pairs | |
 |---|--:|---|
-| compliant | **36** | identical apart from a 1.5x maximum range |
+| compliant | **39** | identical apart from a 1.5x maximum range |
 | **value violations** | **21** | the halves are not the same weapon at all |
 | range-ratio violations | 6 | same weapon, reach is not 1.5x |
 
@@ -601,8 +601,8 @@ AA half carries +100% damage; the answer depends on whose job anti-air is:
 > don't forget we also have the anti air ship template like for the sea scorpion, aegis cruiser
 > etc, they should get the same bonus as the anti air vehicle class."*
 
-⚠ **THE MEASUREMENT THAT SHAPED THIS.** Of 63 pairs, **36** comply with identical damage and
-only **2** with double; 46 carry identical damage today. A blanket +100% would have made 36
+⚠ **THE MEASUREMENT THAT SHAPED THIS.** Of 63 pairs, **39** comply with identical damage and
+only **2** with double; 46 carry identical damage today. A blanket +100% would have made 39
 correct pairs wrong, required editing 61 of 63, and INVERTED the rise-only
 `aa_split_pairs_compliant` ratchet. Scoping it by class keeps the common case intact and gives
 the dedicated AA classes something the others do not have - which is the point, because a free
@@ -1534,6 +1534,13 @@ YAML remains an explicit design decision.
   `actor-<id>.name` / `actor-<id>.description`.
 - Scheme = RA1 Soviet style: one-line role summary; ability lines as
   separate indented lines; `Strong vs …` / `Weak vs …` at the end.
+  ⭐ **DERIVED since 2026-09-23 (maintainer ruling, ROADMAP "three ideas from Combined Arms'
+  damage model").** The production tooltip computes `Strong vs` / `Weak vs`, the per-ladder
+  damage % table, the `Armor Piercing` tag (vehicle ladder peaks on `Heavy`/`Superheavy`, per
+  §12.0d) and the `Targets` line from the unit's RESOLVED warheads
+  (`OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs`), and hides any hand-written
+  `Strong vs` / `Weak vs` line in the description. **Do not write new ones.** Check what the
+  tooltip will say with `utility.cmd cameo --versus-summary [actor ...]`.
 - Upgrade descriptions open with the tier tag ("Tech Upgrade (Only affects
   units of own faction)" / "Team Upgrade (…)" / "Promotion Upgrade (…)"),
   then one effect per line with exact stats and affected units (grouped
@@ -2158,7 +2165,7 @@ ruling as written would have got wrong:
   N=2 both engagements empty it exactly: ground `10x1 + 1x10 = 20`, air `10x1 + 2x5 = 20`.
 * **Scope is 14, not 17.** 19 − 2 assumed the maintainer's two names were all the suicide
   drones; three more qualify under the same rule (`SCSCOURGEDRONE` self-destruct weapon,
-  `kami.asian` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
+  `asianalliance_kami` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
   at all — their self-destruct is in the weapon — so the explicit list and the detector are
   both required, and neither alone suffices.
 * ⚠ **`AmmoPool.Armaments` defaults to `primary, secondary`** and `AmmoPool.Attacking` only
@@ -2228,6 +2235,103 @@ the seven, and if `AreaDamage`'s expanding rings reproduce it, convert — do no
 
 **R15 — boot-gate cadence: ONE PER COHORT.** Batch a whole cohort, verify with `resolved_gate`,
 then one boot gate and one commit; bisect within the batch if boot fails.
+
+### R16-R19 — the W7 hold rulings (maintainer, 2026-09-24)
+
+**R16 — THE VERSUS LAW, FINAL SHAPE.** Supersedes R5's "2x–8x band, 4x target":
+
+> *"it's 2x to 20x but those should be extreme edge cases, the target range should be 4x to 5x
+> for the most part with 2x to 20x being the absolute exception here for like super
+> generialistic or super specialized weapons (20x comes from the fact that the max versus value
+> is 200% and the lowest versus value is 10%). There is also another rule: All versus values of
+> a warhead must always have a geometric mean of 100% and the distribution of versus values
+> spread should roughly follow a bell curve with 4x to 5x being the top of the bell curve and
+> 2x and 20x being the asymptote (the end of the line with low occupancy)"*
+
+Mechanically, per MAIN warhead profile:
+
+* **GEOMETRIC mean of the armor rows = 100.** This is the §12.0j normalisation brought forward
+  to binding: geometric is the correct centre for multipliers (a 200/50 pair centres at 100;
+  the arithmetic mean of the same pair is 125 and silently inflates the family's contribution
+  to `K`). `mean_normalise`'s arithmetic target is superseded — the power-law machinery in
+  `gen_weapon_template` already works about the geometric mean, so this closes the last
+  inconsistency in the pipeline.
+* **Hard bound 2x–20x spread** (max:min over the armor rows). Below 2x is a flat profile — R5
+  still applies, flat does not exist. Above 20x exceeds the Versus range itself (10%–200%).
+* **Roster target: the DISTRIBUTION of family spreads is a bell curve peaking at 4x–5x**, with
+  2x (generalist) and 20x (super-specialist) as the low-occupancy asymptotes. This is a
+  population law — an individual family at 2x or 20x is legal but must be a deliberate
+  super-generalist / super-specialist, not drift.
+* Guarded by `audit_versus_profile.py` (geomean ratchet + hard band + the bell-curve census).
+* **Implemented 2026-09-25.** `mean_normalise` targets the geometric mean (#506: offenders 105 → 2,
+  the two HAND_TUNED templates). The bell is moved by `bell_stretch` (maintainer: *"Stretch toward
+  4-5x"*): one power law `v' = G·(v/G)^α` about the geometric centre, `BELL_STRETCH_ALPHA = 1.30`,
+  raising every spread to the power α — monotone, geometric-mean preserving, Heroic-exact. Census
+  2–4x / 4–5x / 5–8x: **38 / 10 / 2 → 30 / 17 / 3**. ⚠ **The 200% ceiling limits it:** top-heavy
+  profiles (the Bullet/Flak/Cannon × Sonic/Fire/Cryo/Tesla blends) already touch 200, so a larger α
+  is compressed straight back and they stay near 3.1–3.4x; α 1.5–1.7 only moves families from 4–5x
+  into 5–8x. Getting the peak fully into 4–5x needs a LOWER-tail-only stretch for those blends —
+  not Heroic-exact, so it is a design choice, not a tuning knob.
+
+**R17 — `ExtraDamage` DOES NOT EXIST; leftovers FOLD INTO THE MAIN WARHEAD.** The retirement
+noted at §"Template auxiliaries" is now the binding conversion rule for every held W7 edge:
+
+> *"try to fold it into the main AreaDamage warhead by adding the damage amount as it
+> currently stands. The OpenTopped damage of the sniper might be the only exception but you
+> need to research if it can be faithfully converted to be inside the AreaDamage warhead so we
+> only need one of them instead of 2 damage warheads here."*
+
+* `Warhead@*_ExtraDamage` → `main.Damage += extra.Damage`, node deleted. A folded weapon is
+  **not resolved-identical by design** — the two-node shape collapses into one; the Damage
+  total is what must match (main + extra verbatim, never re-priced).
+* **`OpenToppedDamage` CANNOT fold** (verified 2026-09-24, `OpenToppedDamageWarhead.cs`): it is
+  not a damage channel at all — it calls `INotifyPassengersDamage.DamagePassengers` to hurt
+  garrisoned/passenger actors *inside* the target. AreaDamage has no passenger path; folding
+  would redirect the damage from passengers to the vehicle itself. The 34 sniper
+  `OpenToppedDamage` twins stay as their own warhead type — the ruling's own caveat confirmed.
+
+**R18 — NO FLAT WARHEADS; `_Flat` KEEPS THE WARHEAD, GAINS THE FAMILY SHAPE.** For a weapon
+whose damage is a `*_Flat` node (no `Versus` — one number vs every armor):
+
+* Keep the warhead; **give it the family's canonical Versus table** (the `^Warhead_<Family>`
+  profile it belongs to), `Damage` preserved. Damage becomes armor-discriminating — this is
+  the intended change, not drift to pin.
+* This applies to the `_Flat` role edges the W7 sweep left in place (`^Warhead_*_Flat`
+  survivors of R4 — the ones that are real shape, not dead shims).
+
+**R19 — THE DOT GRAMMAR: `.` = bot variant or `.husk`, NOTHING ELSE.**
+
+> *"the dot must always mean a bot variant and it's the only acceptable use of a dot"*
+> *"`.husk` is also allowed"*; on `OILB.d2k`: *"should be renamed to `d2k_spicesifter` …
+> the faction name must be in the front"*
+
+* A dot is legal **only** on (a) a bot-only variant — test: the actor's `Prerequisites`
+  carry `~botplayer` / `~hardbotplayer`, i.e. buildable by no player — or (b) the `.husk`
+  husk suffix (already everywhere; the same class of "not a real actor" marker).
+* **A dot carrying a faction name is a violation** — `.atreides`, `.harkonnen`, `.cabal`,
+  `.steel`, `.d2k` etc. The faction goes in FRONT: `combat_tank_husk.atreides` →
+  `atreides_combat_tank_husk`, `OILB.d2k` → `d2k_spicesifter`. Renames must update
+  husk/upgrade references and `map.yaml`/lua placements (§14, rule 8h).
+* Other dotted variant markers (`.para`, `.power`, `.laser`, `.mutant`, …) are
+  pending maintainer eyeball per-instance — the census of uses is in the fleet board note
+  `NOTE_2026-09-24_ember_rulings.md`. **Ruled 2026-09-26 (fleet order):** `.destroyed`,
+  `.upgraded`, `.infiltrated`, `.black` are renamed to `_suffix` form in live mounts
+  (`mcv.destroyed` → `mcv_destroyed`, `ra2gacnst.infiltrated` → `ra2gacnst_infiltrated`,
+  `ra2e2.black` → `ra2e2_black`, `infantry.upgraded` → `infantry_upgraded`). `.husk`
+  stays, and dormant monolith files keep their dots until migration deletes them.
+
+**R20 — TOXIC FILLS THE POISON METER; THE YURI VIRUS FIRES A TOXIN DART** (maintainer, 2026-09-25).
+
+* **Every `Toxic`-family weapon fills `Poison`** (generator `FAMILY_PHYSICAL_STATE`, `Poison: 100`
+  at every level) — the gas clouds the W9 spec meant by *"gas clouds fill the meter by dwell
+  time"*: the Yuri Virus's `RA2Cloud`, the Anthrax clouds, Tiberian Sun's smoke, the Zerg
+  Devourer's acid cloud, the Ordos chem turret. `Chemical` keeps filling `Corrosion`: **corrosion
+  eats vehicles, poison hurts infantry** (the Poison meter exists only on `^DefaultInfantry`, so
+  on anything else the feed no-ops).
+* **The Yuri Virus's rifle is a toxin dart:** its main becomes the `Toxic` family
+  (`Toxic_Light` for the base shot, `Toxic_Medium` for the upgrade tiers and elite), so the shot
+  itself poisons; the `Chemical`/Corrosion percentage twin is removed, and the stray `Flak` /
+  `MissileAP` mains the upgrade tiers carried go with it. Damage totals are preserved (R17).
 
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
@@ -3175,6 +3279,12 @@ the moment §12.0h renormalised everything.
 
 ### 12.0d THE CLASS TILT (maintainer 2026-08-16) — binding
 
+> ⚠ **The thing this tilts on is being retired.** §12.0d keys the tilt on the warhead's LEVEL;
+> §12.0j (2026-09-21) retires `_Light` / `_Medium` / `_Heavy` and re-keys the tilt onto the FIRING
+> UNIT's tier, computed from its prerequisite chain cost. The tilt itself survives — its input
+> changes from a hand-assigned label to a measured number. Binding as written until the §12.0j
+> regeneration runs; do not build anything new on the level.
+
 Within a family, each LEVEL tilts toward one end of every armor ladder:
 
 | level | tilts toward | |
@@ -3241,7 +3351,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.555 measured
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x1.097 measured 2026-09-26 (was x0.617 pre-#490)
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
@@ -3264,7 +3374,7 @@ all 43 Protoss shields (`InitialPercentageStrength: 100`, `RequiresCondition: !d
 report a shield-free roster. Only a POSITIVE token gates.
 
 **The weapon side gets its own weight, not a rung.** `armor_weights()` carries a 17th `Shield`
-row at the measured baseline damage share (**1.432%**), taken OUT of the 16 class rows so the
+row at the measured baseline damage share (**1.444%**), taken OUT of the 16 class rows so the
 weights still sum to 1.0; `weighted_versus` iterates the weights, never `ARMORS`. Effect:
 +0.65% (Bullet) to +3.47% (Tesla). `effective_density` deliberately stays on `ARMORS` — it
 counts BODIES, and a shield sits on a body the class row already counted.
@@ -3338,6 +3448,12 @@ until item A5 retires them onto `^Warhead_*` templates. This is a reason to fini
 reason to avoid the rule.
 
 ### 12.0h THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
+
+> ⚠ **The ARITHMETIC mean below is the law for the templates as they ship TODAY.** §12.0j rules
+> that the ONE regeneration following the reference mapping normalises to the **GEOMETRIC** mean
+> instead, because that is the condition under which two matrices compose without moving total
+> magnitude. Measured: Cameo's template matrix currently sits at a geometric mean of **79.8**, so
+> the two are not the same number. Until that regeneration runs, everything below binds unchanged.
 
 > *"all warheads average all versus values at 100 to make them comparable"*
 
@@ -3434,9 +3550,13 @@ and a secondary vehicle `Armor@<role>` is added, so cyborgs count as both
 infantry and vehicles for weapon Versus tables. True vehicles and walkers do
 not use this pattern.
 
-⚠ **The two armors are AVERAGED, not multiplied** (W20/W21 R5, live since
-2026-08-15): `AreaDamageWarhead.MultiArmorCombination` defaults to `Average`,
-so `Plate` 88 with `Superheavy` 10 resolves to 49, not 8. **Never add a
+⚠ **The two armors combine by their GEOMETRIC MEAN, not multiplied** (W20/W21 R5
+"averaged, not multiplied", live since 2026-08-15; the average became GEOMETRIC by maintainer
+ruling 2026-09-25 — Versus rows are multipliers, so their centre is the geometric mean, the
+same reason R16 pins every warhead to geomean 100): `AreaDamageWarhead.MultiArmorCombination`
+defaults to `Geometric`, so `Plate` 88 with `Superheavy` 10 resolves to **30** (√880), not 49
+(the arithmetic average, where the more vulnerable body dominated) and not 8.8 (the engine's
+product). Integer-only math in the synced path. **Never add a
 `DamageMultiplier@<role>: Modifier: 200` to compensate** — that was the old
 recipe, it fought the ENGINE's multiplication rather than the design, and all
 7 instances were deleted when averaging landed. R1 abolishes `DamageMultiplier`
@@ -3608,6 +3728,12 @@ needs three things for backup systems:
 
 ### 12.0i CONTINUOUS HEAVINESS — the global armor axis and the bell (maintainer 2026-08-23/24) — binding
 
+> ⚠ **The axis below is unchanged; where `h` COMES FROM changes.** This section reads `h` off the
+> warhead's LEVEL as 0 / 1 / 2. §12.0j (2026-09-21) retires the level and derives `h` from the
+> FIRING UNIT's prerequisite chain cost instead, `h = 2 × (1 − f(C))`, which is continuous rather
+> than three buckets. The bell, `mu = (h + COM) / 2`, `LO`, `sigma` and the rank restore are all
+> untouched — they simply receive a measured input instead of a hand-assigned one.
+
 Replaces the discrete `Light/Medium/Heavy/Super` LEVEL with a continuous heaviness `h`. Full
 derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVINESS.md` §9.
 
@@ -3764,6 +3890,153 @@ Heaviness 0..2000. Omitted mode keeps legacy behavior, including existing healin
 and standalone percentage warheads. This is an intentional gameplay change,
 not an equivalence-preserving refactor. Initial activation is limited to five
 CannonAP pilot definitions; it does not authorize automatic whole-roster fitting.
+### 12.0j THE LEVEL RETIRES; `h` COMES FROM THE UNIT (maintainer 2026-09-21) — binding, PLANNED
+
+> *"the tilt is only from the unit class itself with the heaviness bell curve applying from the
+> unit tier by credits required for all prerequisites including the promotions … the higher the
+> cost … the more the heaviness bell curve is pushed towards the heavy side."*
+
+⛔ **NOT YET IMPLEMENTED, AND DELIBERATELY SO.** This is the shape of ONE regeneration that happens
+**after** the reference mapping completes, never before and never piecemeal:
+*"hold off the weapon warhead changes until we have successfully mapped it from our reference
+data … so this should be a big all in one change."*
+
+**What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
+/ `_Heavy` suffix is retired: **147 templates across 50 families become 50**, and the 1,147 concrete
+weapons that inherit a level are re-pointed. Families already carry the delivery × element grammar
+(`BulletChem`, `CannonCryo`, `MissileTesla`), so 50 is a real vocabulary, not a collapse.
+
+**Where the tilt goes.** §12.0d keyed the tilt on the LEVEL, and there is no level any more. It is
+re-keyed onto the **firing unit**:
+
+```
+C = unit's own price  +  Σ(prerequisite building costs)  +  1500 × promotion tiers
+f(C) = 1 / (1 + (C − B) / S)                B = 9500, S = 8250     ← already shipped, already
+h = 2 × (1 − f(C))                                                   used by the pricing formula
+```
+
+⭐ **AMENDED 2026-09-23 (maintainer): the unit's OWN PRICE is part of `C`.** *"I want the unit price
+to be included into the heaviness bell curve on top of the cost of the accumulated prerequisite
+chain (including virtual cost of the promotions)."* So two units behind the same tech chain no
+longer share one `h`: the dearer one sits further toward the heavy end. ⚠ **`B` and `S` were fitted
+to chain cost ALONE** (`tier_chain.py`); adding the unit's price shifts every unit's `C` upward, so
+they must be re-fitted on the new `C` before the regeneration runs, or the whole roster drifts heavy.
+The promotion term stays the virtual 1500 credits per tier.
+
+Barracks-only lands at `h = 0`; a Tier-4 chain approaches `h = 2`. ⭐ **The measurement layer
+already exists** — `tier_chain.py` resolves prerequisite chains to a cumulative cost and scopes
+providers to the actor's own ContentPack, so a Nod unit is never priced off a GDI ConYard. The only
+new term is the 1500-credit promotion tier. This replaces a hand-assigned label with a number the
+tech tree maintains itself, which is what the 2026-08-11 standing order asks for.
+
+**How it is applied.** A new warhead class in `OpenRA.Mods.Cameo` reads the source actor's tier
+from `WarheadArgs` and tilts the profile at impact, so the family keeps ONE shape and the tilt is
+CONTINUOUS rather than three buckets. ⚠ Two dependencies: **3,067 weapons still use the engine's
+`SpreadDamage`** against 3,991 on Cameo's `AreaDamage` (the "universal conversion COMPLETE" note is
+stale), so either that conversion finishes or `SpreadDamage` is shadowed; and the family keeps
+supplying the tilt's DIRECTION while `h` supplies only its MAGNITUDE, or a Tier-4 AA gun tilts
+heavy-ward and stops being anti-light.
+
+**The normalisation moves too.** §12.0h normalises each row to ARITHMETIC mean 100. The regenerated
+templates are normalised to **GEOMETRIC** mean 100, because that is the condition under which two
+matrices compose without moving total magnitude — `prod(cell / 100) == 1`. Measured: Cameo's
+template matrix sits at a geometric mean of **79.8**, so this is a real move, not a rename.
+
+**Uniqueness survives the averaging.** The reference merge sets each family's position; where two
+families then land on top of each other they are separated along the axis on which the sources
+disagreed MOST, because that is where the field is least certain and we have the most licence to
+choose. Authenticity decides everything it can; uniqueness decides only the collisions.
+
+### 12.0k MORE FAMILIES, AND AN `AntiAir` ARMOUR (maintainer 2026-09-23) — binding, PLANNED
+
+> *"maybe we do in fact need a lot more warhead families than we currently have … we need air
+> versions for all weapon types right? For example an air laser that deals less damage to the new
+> anti air vehicle (with a new armor type?) … We need specialist for any situation."*
+
+This REPLACES the earlier "50 → 32 consolidation" idea: the vocabulary grows instead of shrinking.
+Every family below closes a MEASURED gap (numbers from master `5380720ad` and the 17-source
+reference assignment); none exists yet. It lands with the §12.0j regeneration, through
+`gen_weapon_template.py` + `splice_templates.py --all`, never by hand, and each new family needs its
+own radius/curve (rule 8d, `audit_family_uniqueness.py`).
+
+**1. The `AntiAir` armour type.** Dedicated anti-air units (SAM sites, flak tracks, AA guns) get a
+new vehicle-ladder armour type `AntiAir`. Every GROUND-delivered family treats it exactly like
+`Light`; every AIR-delivered family (item 2) deals **50%** of its `Light` value to it — Combined
+Arms' number, expressed as a visible armour row instead of CA's hidden `DamageTypeDamageMultiplier`
+(W26/R1 forbids the multiplier). This is the ROADMAP ruling "AA takes less from aircraft weapons, as
+armour" made concrete.
+
+**2. Air-to-ground variants — `<Family>Air`.** One per family an aircraft fires: **31 today**
+(MissileAP 65 armaments, Bullet 62, Laser 46, Flame 21, Demolition 18, Chemical 17, Tesla 15, …).
+GENERATED from the ground family, identical to it except the `AntiAir` row (item 1); aircraft
+weapons are re-pointed to the `Air` variant. A generator rule, not 31 hand templates.
+
+**3. Anti-air per delivery — `LaserAA`, `TeslaAA`.** Families that rank AIR first. Measured: 17
+air-only lasers and 6 air-only teslas currently sit on GROUND-shaped families that rank air last or
+third. Air-only bullets (23) re-point to the existing `Flak`, air-only quantum missiles (3) to
+`MissileAA` — no new family needed for those.
+
+**4. `Radiation` — anti-infantry.** The Desolator's beam and eruption and other rad weapons: INF
+first, light direction, `RadiationDeath`. Measured: in **7 of 8** reference sources the weapons filed
+as `Nuclear` are anti-infantry radiation (R69), and Cameo has no such family — its own Desolator
+(`RA2RadBeamWeapon`) sits on `Chemical_Medium`, which is anti-ARMOUR. `Nuclear` stays the
+buildings-first blast.
+
+**5. Naval — `Torpedo` (anti-ship) and `AntiSub` (depth charges).** Reference mods park these; Cameo
+files depth charges under `Demolition` and torpedoes under `MissileAP`/`MissileHE`. Both only fire at
+water targets. ⚠ Cameo has no naval armour ladder yet, so their shape is an open design question.
+
+**6. Rifle sub-types.**
+- **`Sniper` becomes anti-infantry ONLY** — every reference source measures INF ≈ 200 against ≈ 10 on
+  everything else; today's `^Warhead_Sniper_*` is a legacy linear ramp (None 100 sliding to
+  Spaceship 10), which is not a sniper.
+- **`AntiMaterielSniper` (new)** — the heavy rifle: vehicle-first, heavy direction, weak against
+  infantry (DTA's anti-materiel `CommandoGrenadeAP` is INF 130% against HEAVY 1000%).
+- **`ScoutRifle` (new)** — infantry first, AIR second (it can shoot aircraft), weak against heavy
+  armour.
+
+**7. Specialists (maintainer 2026-09-23, second round).**
+- **`Shotgun`** — close range, anti-infantry, wide spread: 15 shotguns currently sit on `CannonHE`,
+  `Bullet` or no family at all.
+- **`PointDefense`** — interceptors that shoot down missiles and shells (7 today: the PD lasers on
+  the recon bike, GDI rig and Nod laser commando, `PointDefenseTesla`): strong against light and air
+  targets, weak against heavy.
+- **`Psychic`** — hits only living targets (infantry; zero against vehicles and buildings), as in
+  RA2. Yuri's psychic wave (`RA2PsychicJab`) currently sits on an artillery shape (`CannonHE`).
+
+**8. Confirmed in the Combined Arms review but never built.** **`LaserPulse`** (small anti-light
+pulse lasers: laser turrets, light laser tanks, portable lasers — CA review, where `Prism` is
+reserved for real prism weapons) and **`Radiation`** (item 4) were both CONFIRMED by the maintainer
+in the Combined Arms review and have no template yet. The reference assignments now use both (R70).
+
+**9. From the 17-source research (maintainer 2026-09-23, third round).** Weapon types every one of
+these mods has, which were forced into an unrelated family or dropped:
+- **`Magnetic`** — the **Magnetron** (RA2 YR / Rise of the East / RA2 Reborn / CnC Reloaded:
+  `MagneShake`, dropped as "not damage" in three sources), RA 20XX's **PS Raijin** (magnetic wave,
+  parked) and DTA's **Magnetic Water Mine**. Vehicle-only, strongest against heavy metal armour, zero
+  against infantry.
+- **`Ion`** — Twisted Insurrection's **Cyborg Templar** tachyon gun and SP's **GDI Ion Cannon
+  Turret** (filed as `Railgun` / `Laser`). An energy beam, anti-armour and strong against shields.
+- **`Gravity`** — SP's **Scrin Battleship** black hole (`Blackholeblast`, filed as `Quantum`) and Red
+  Resurrection's **Vortex Tank** (parked). Flat damage that ignores armour. (CN's ORCA Bomber
+  "gravity bomb" is only a free-fall projectile — a plain bomb, not evidence.)
+- **`Mutagen`** — Twisted Insurrection's **Infector** (toxin gun: 1000% against infantry, victims
+  mutate), the **Yuri Virus** sniper (RA 20XX; "Virus" in Mental Omega), Mental Omega's **Rahn**
+  mutation railgun. Infantry-only; the kill
+  converts the victim. (Currently `BulletChem` / `Sniper`.)
+
+**10. Two more from the research (maintainer 2026-09-23, fourth round).**
+- **`Temporal`** — chrono weapons that erase or warp: Mental Omega's **Siren Frigate** (chrono
+  blaster) and **Charon Tank** (neutron cannon, chrono warp), RA2 Reborn's **Chrono Commander**
+  (a 9,999-damage eraser). Flat, ignores armour; pairs with the chrono-erase meter Cameo already
+  carries (Combined Arms' `WarpDamage`). Previously filed as `Quantum`.
+- **`Cluster`** — sub-munition weapons: DTA's drone and cluster launchers (`DroneLauncherHE`, the
+  Ekranoplan's drones). Many small hits over a wide area. Incendiary bomblets (DTA's A-10 and Badger
+  napalm) keep their element family, `BulletFire`.
+
+**Order of work:** these are balance changes, so they follow the reference averaging (R69: which
+waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
+faction weapon files, so each lane's files move through that lane's owner.
 
 ## 16. Rank decorations, experience systems & elite weapons
 
@@ -4261,12 +4534,14 @@ fictional sci-fi faction, not an endorsement of any real-world ideology.
 ## 19. AI bot personalities
 
 Each bot draws one of five squad-manager personalities per match: Rush,
-Turtle, Tech, Expansion, or Steamroller. Hard-and-above bots can switch
+Turtle, Tech, Expansion, or Steamroller. Every difficulty can switch
 dynamically through a `SetBotPersonality` order; the synced controller keeps
-exactly one personality condition active at a time. Switching observes a
-`PersonalityHoldTicks` minimum hold and bypasses it when entering Emergency.
-Lower tiers retain the fixed random personality because
-`AllowPersonalitySwitching` defaults to false.
+exactly one personality condition active at a time. Switching requires the
+candidate to persist for the per-tier `PersonalityReactionDelay` (7500 ticks
+on easiest down to 750 on cameogod in 750-tick steps), then observes a
+`PersonalityHoldTicks` hold clamped to that reaction delay, so no tier reacts
+slower than its own delay. Emergency bypasses both the reaction delay and the
+hold.
 
 The personality effect is currently confined to the squad manager. Each
 personality has its own `SquadManagerBotModuleCA` instance gated by

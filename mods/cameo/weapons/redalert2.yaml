@@ -1417,31 +1417,31 @@ IonPulseDischarge:
 		ImpactActors: false
 		AffectsParent: true
 		ValidTargets: Ground, Water, Air
-	Warhead@Condition1: GrantExternalCondition
-		Condition: SonicDebuff
+	Warhead@Resonance1: ApplyPhysicalState
+		PhysicalStateName: Resonance
 		Range: 10000
-		Duration: 10
+		Amount: 5000
 		Delay: 1
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-	Warhead@Condition2: GrantExternalCondition
-		Condition: SonicDebuff
+	Warhead@Resonance2: ApplyPhysicalState
+		PhysicalStateName: Resonance
 		Range: 8000
-		Duration: 20
+		Amount: 5000
 		Delay: 2
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-	Warhead@Condition3: GrantExternalCondition
-		Condition: SonicDebuff
+	Warhead@Resonance3: ApplyPhysicalState
+		PhysicalStateName: Resonance
 		Range: 6000
-		Duration: 30
+		Amount: 5000
 		Delay: 3
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-	Warhead@Condition4: GrantExternalCondition
-		Condition: SonicDebuff
+	Warhead@Resonance4: ApplyPhysicalState
+		PhysicalStateName: Resonance
 		Range: 4000
-		Duration: 40
+		Amount: 5000
 		Delay: 4
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall

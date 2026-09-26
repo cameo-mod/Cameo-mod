@@ -640,7 +640,7 @@ quality distribution says why.**
 
 Median name score **0.62**. Real examples from `scout`: `forgotten_mutant_wild` drew *"Pilot"*,
 *"Bodybuilder"*, *"Warrior"*, *"Red Devil"*, *"Civilian"* and *"Virus"* — six sources, not one of
-them a match. `asianalliance_asianmilitia` drew *"Assimilator"* and *"Civilian Male White"*.
+them a match. `asianalliance_militia` drew *"Assimilator"* and *"Civilian Male White"*.
 
 **Coverage against quality:**
 
@@ -740,7 +740,7 @@ keys decide among names of comparable quality.**
 
 **370 is the honest floor** — and it is still a proposal count, not evidence, until each class is
 reviewed. ⚠ The residual WEAK rows are not a defect to fix: they are clause 9 working as ruled
-(*"assign, but flag low-confidence"*). `asianalliance_asianmilitia` drawing *"Animal Alligator"*
+(*"assign, but flag low-confidence"*). `asianalliance_militia` drawing *"Animal Alligator"*
 from CnC Reloaded is the greedy taking the best of what was left after better-matched militia units
 claimed the good candidates. **It is flagged WEAK, which is the whole point.**
 

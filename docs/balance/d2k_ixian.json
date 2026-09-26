@@ -146,7 +146,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "1300",
       "pricing": true,
@@ -192,7 +192,7 @@
        "^D2KMissile",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_ixian_d2k_air_drone_guns"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
@@ -262,7 +262,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Air Drone",
+    "name": "actor_ixian_airdrone.name",
     "prerequisites": [
      "~ixian_launchpad"
     ],
@@ -351,7 +351,8 @@
        "^Warhead_Demolition_Heavy_Flat",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^TeslaChargedWeapon"
+       "^TeslaChargedWeapon",
+       "^d2k_ixian_ixianbomb_emp"
       ],
       "warheads": [],
       "weapon": "IxianBomb_EMP",
@@ -383,7 +384,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian EMP Bomber",
+    "name": "actor_ixian_empbomber.name",
     "prerequisites": [
      "~ixian_launchpad",
      "ixian_ixresearchcenter",
@@ -484,16 +485,16 @@
        },
        {
         "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -506,8 +507,8 @@
       "versus_templates": [
        "^Warhead_Laser_Medium",
        "^TeslaWeapon",
-       "^HeavyFlameWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^d2k_ixian_ixian_farasha"
       ],
       "warheads": [
        "^Warhead_Laser_Medium"
@@ -536,16 +537,16 @@
        },
        {
         "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -594,7 +595,7 @@
      "src": "inherited",
      "v": "200"
     },
-    "name": "Farasha",
+    "name": "actor_ixian_farasha.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter",
@@ -668,6 +669,13 @@
         "damage": "3",
         "falloff": null,
         "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
@@ -676,13 +684,6 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -696,8 +697,6 @@
        "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Railgun_ExtraDamage",
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^D2K_Cannon"
       ],
@@ -734,7 +733,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Railgun Drone",
+    "name": "actor_ixian_railgundrone.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "~ixian_promotion_ixrailgundrone"
@@ -848,7 +847,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Resonance Drone",
+    "name": "actor_ixian_resonancedrone.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter",
@@ -1329,7 +1328,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7394",
@@ -1341,7 +1340,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_shared_hmg_turret"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -1680,7 +1679,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1875,7 +1874,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Storm_Heavy",
-       "^Effect_Magic_Heavy"
+       "^d2k_ixian_d2kstormlasher"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -2054,7 +2053,7 @@
    }
   },
   "infantry": {
-   "heavy_inf.ixian": {
+   "ixian_heavy_inf": {
     "armaments": [
      {
       "burst": "4",
@@ -2105,10 +2104,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun"
+       "^d2k_ixian_rashidangun"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2121,7 +2117,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium_Flat",
@@ -2154,13 +2150,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "RashidanGroundCompatibility",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2269,10 +2258,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun"
+       "^d2k_ixian_rashidangun"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2286,7 +2272,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium_Flat",
@@ -2319,13 +2305,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "RashidanGroundCompatibility",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2395,7 +2374,6 @@
      "v": "400"
     },
     "design": {
-     "category": "Infantry",
      "class_anchor": null,
      "special": null,
      "subtype": "MeleeInfantry",
@@ -2406,7 +2384,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Rashidan",
+    "name": "actor_heavy_inf_ixian.name",
     "prerequisites": [
      "~ixian_barracks",
      "~ixian_promotion_rashidan"
@@ -2457,7 +2435,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -2486,7 +2464,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4500",
@@ -2519,7 +2497,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -2549,7 +2527,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4500",
@@ -2574,7 +2552,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -2598,7 +2576,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Ixian Light Infantry",
+    "name": "actor_ixian_lightinfantry.name",
     "prerequisites": [
      "~ixian_barracks"
     ],
@@ -2685,7 +2663,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -2742,7 +2720,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -2767,7 +2745,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -2786,7 +2764,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Ixian Rocket Trooper",
+    "name": "actor_ixian_rockettrooper.name",
     "prerequisites": [
      "~ixian_barracks",
      "~!ixian_upgrade_twinbazooka"
@@ -2904,7 +2882,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "36000"
     },
-    "name": "Shock Infantry",
+    "name": "actor_ixian_shockinfantry.name",
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
@@ -2965,7 +2943,7 @@
       "versus_templates": [
        "^Warhead_Storm_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
+       "^d2k_ixian_set0"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -2993,7 +2971,7 @@
       "versus_templates": [
        "^Warhead_Storm_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
+       "^d2k_ixian_set0"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -3023,7 +3001,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "44000"
     },
-    "name": "Storm Infantry",
+    "name": "actor_ixian_storminfantry.name",
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
@@ -3068,24 +3046,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -3099,33 +3063,21 @@
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper1",
       "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
@@ -3134,10 +3086,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -3151,13 +3103,15 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper2",
       "weapon_class_source": "illegal_mix"
@@ -3166,24 +3120,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -3197,13 +3137,15 @@
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper1",
       "weapon_class_source": "illegal_mix"
@@ -3212,20 +3154,6 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -3233,10 +3161,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -3250,13 +3178,15 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper2",
       "weapon_class_source": "illegal_mix"
@@ -3264,7 +3194,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3283,7 +3213,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "24000"
     },
-    "name": "Twin Rocket Trooper",
+    "name": "actor_ixian_twinrockettrooper.name",
     "prerequisites": [
      "~ixian_barracks",
      "~ixian_upgrade_twinbazooka"
@@ -3837,7 +3767,7 @@
    }
   },
   "vehicles": {
-   "apparition.ixian": {
+   "ixian_apparition": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -3859,7 +3789,7 @@
       "versus_templates": [
        "^Warhead_Flak_Light",
        "^Projectile_Flak_Medium",
-       "^Effect_Flak_Light"
+       "^d2k_ixian_d2k_basq"
       ],
       "warheads": [
        "^Warhead_Flak_Light"
@@ -3885,7 +3815,8 @@
       "reloaddelay": "25",
       "slot": "Armament@aa",
       "versus_templates": [
-       "d2k_basq"
+       "d2k_basq",
+       "^d2k_ixian_d2k_basq_aa"
       ],
       "warheads": [
        "^Warhead_Flak_Light"
@@ -3904,12 +3835,11 @@
      "v": "2000"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
-     "special": 1.0,
+     "special": null,
      "subtype": "MeleeInfantry",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
@@ -3950,7 +3880,7 @@
      "v": "64"
     }
    },
-   "duelist_tank.ixian": {
+   "ixian_duelist_tank": {
     "armaments": [
      {
       "damage_warheads": [
@@ -3970,16 +3900,16 @@
        },
        {
         "damage": "7",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "7",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4000,12 +3930,10 @@
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
-       "^Grenade",
        "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^D2K_Cannon"
+       "^D2K_Cannon",
+       "^d2k_ixian_duelisttankcannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -4078,12 +4006,7 @@
       "slot": "Armament@Guns",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^LightMissile",
-       "^Grenade",
-       "^SmallArms",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun"
+       "^d2k_ixian_hmg_duelist"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4114,13 +4037,6 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4164,6 +4080,13 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4181,7 +4104,6 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^LaserWeapon",
-       "^HeavyMissile",
        "HMG_Duelist",
        "^HeavyMachineGunProjectile"
       ],
@@ -4203,12 +4125,11 @@
      "v": "1800"
     },
     "design": {
-     "category": "Tanks",
-     "class_anchor": "high_tech_tank",
-     "special": 1.0,
+     "class_anchor": null,
+     "special": null,
      "subtype": "HighTechTank",
-     "tech_tier": 0.75,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "firepower_multiplier": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -4223,7 +4144,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Duelist Tank",
+    "name": "actor_duelist_tank_ixian.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter"
@@ -4278,7 +4199,7 @@
      "v": "9"
     }
    },
-   "heavy_rocket_raider.ixian": {
+   "ixian_heavy_rocket_raider": {
     "armaments": [
      {
       "damage_warheads": [
@@ -4330,7 +4251,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_ixian_raiderguns"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -4392,12 +4313,11 @@
      "v": "2000"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
-     "special": 1.25,
+     "special": null,
      "subtype": "SupportVehicle",
-     "tech_tier": 1.0,
-     "unit_class": 1.25
+     "tech_tier": null,
+     "unit_class": null
     },
     "firepower_multiplier": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -4412,7 +4332,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Ix Raider",
+    "name": "actor_heavy_rocket_raider_ixian.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~ixian_promotion_heavyixraider"
@@ -4525,7 +4445,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Koda Tank",
+    "name": "actor_ixian_heavykodatank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~ixian_upgrade_heavykodatank"
@@ -4621,7 +4541,7 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light_D2K_155mm",
-       "^Effect_Demolition_Heavy_D2K_155mm"
+       "^d2k_ixian_d2k_155mm3"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4657,7 +4577,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Combat Siege",
+    "name": "actor_ixian_ixcombatsiege.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_outpost"
@@ -4727,7 +4647,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_ixian_mtank_pri2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4761,7 +4681,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Missile Tank",
+    "name": "actor_ixian_ixmissiletank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter"
@@ -4836,18 +4756,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4860,7 +4773,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
+       "^d2k_ixian_ixiandisable_emp"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -4898,7 +4811,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Projector",
+    "name": "actor_ixian_ixprojector.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -4966,13 +4879,6 @@
        },
        {
         "damage": "6",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -4991,6 +4897,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -5001,11 +4914,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Grenade",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
-       "^Projectile_Grenade_Light_D2K_155mm"
+       "^Projectile_Grenade_Light_D2K_155mm",
+       "^d2k_ixian_d2k_155mm2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -5039,7 +4952,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Siege Tank",
+    "name": "actor_ixian_ixsiegetank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_outpost",
@@ -5146,7 +5059,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Koda Tank",
+    "name": "actor_ixian_kodatank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~!ixian_upgrade_heavykodatank"
@@ -5224,7 +5137,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Mobile Construction Vehicle",
+    "name": "actor_ixian_mobileconstructionvehicle.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_mcv_production"
@@ -5336,7 +5249,8 @@
       "reloaddelay": "64",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^D2KRocket"
+       "^D2KRocket",
+       "^d2k_ixian_mongooserocket"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5370,7 +5284,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Mongoose",
+    "name": "actor_ixian_mongoose.name",
     "prerequisites": [
      "~ixian_vehicle_production"
     ],
@@ -5437,7 +5351,7 @@
       "versus_templates": [
        "^Warhead_Storm_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
+       "^d2k_ixian_set0"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -5450,6 +5364,14 @@
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "3",
         "falloff": "100, 50, 33, 25, 20",
@@ -5470,14 +5392,6 @@
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -5487,11 +5401,9 @@
       "reloaddelay": "60",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^HeavyMissile",
-       "^RA2MediumMissile",
-       "^Effect_Explosion_Large_RA2"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^d2k_ixian_d2k_rocketscymek"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5530,7 +5442,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Neo Cymek",
+    "name": "actor_ixian_neocymek.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5584,6 +5496,115 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
+    }
+   },
+   "ixian_rocket_raider": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1280",
+      "pricing": true,
+      "range": "6400",
+      "reloaddelay": "5",
+      "slot": "Armament@damage",
+      "versus_templates": [
+       "^D2KMissile"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Bazooka2",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "25000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "actor_rocket_raider_ixian.name",
+    "prerequisites": [
+     "~ixian_vehicle_production",
+     "~!ixian_promotion_heavyixraider"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1250"
+    },
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "160"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "64"
     }
    },
    "ixian_shockraider": {
@@ -5641,7 +5662,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Shock Raider",
+    "name": "actor_ixian_shockraider.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5720,7 +5741,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Spice Harvester",
+    "name": "actor_ixian_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~ixian_vehicle_production"
@@ -5786,7 +5807,9 @@
       "reloaddelay": "100",
       "slot": "Armament@damage",
       "versus_templates": [
-       "D2K_ShockGun"
+       "^Warhead_Storm_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -5812,7 +5835,7 @@
       "slot": "Armament@StormEffect",
       "versus_templates": [
        "^Warhead_Storm_Heavy",
-       "^Effect_Magic_Heavy"
+       "^d2k_ixian_d2k_stormgun"
       ],
       "warheads": [
        "^Warhead_Storm_Heavy"
@@ -5851,7 +5874,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Storm Raider",
+    "name": "actor_ixian_stormraider.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5905,116 +5928,6 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "19"
-    }
-   },
-   "rocket_raider.ixian": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "minrange": "1280",
-      "pricing": true,
-      "range": "6400",
-      "reloaddelay": "5",
-      "slot": "Armament@damage",
-      "versus_templates": [
-       "^D2KMissile"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Heavy"
-      ],
-      "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
-    },
-    "buildable": true,
-    "cargo_capacity": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.MaxWeight",
-     "v": "5"
-    },
-    "cargo_types": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.Types",
-     "v": "Infantry, Hacker, Fremen"
-    },
-    "cost": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1200"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": null,
-     "special": 1.25,
-     "subtype": "SupportVehicle",
-     "tech_tier": 1.0,
-     "unit_class": 1.25
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
-     "v": "25000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Ix Raider",
-    "prerequisites": [
-     "~ixian_vehicle_production",
-     "~!ixian_promotion_heavyixraider"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle",
-     "Starport"
-    ],
-    "repairable_hp_per_step": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
-     "v": "1250"
-    },
-    "resolved_firepower_modifiers": [],
-    "self_heal_step": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
-     "v": "10"
-    },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "160"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "64"
     }
    }
   }

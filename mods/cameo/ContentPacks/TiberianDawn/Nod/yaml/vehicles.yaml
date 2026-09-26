@@ -797,14 +797,14 @@ td_nod_buggymkii:
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserAAElite:
-		Weapon: td_nod_buggymkii_laserbuggy2_AAinferno
+		Weapon: td_nod_buggymkii_laserbuggy2inferno_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserAABurning:
-		Weapon: td_nod_buggymkii_laserbuggy2_AAburning
+		Weapon: td_nod_buggymkii_laserbuggy2burning_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0

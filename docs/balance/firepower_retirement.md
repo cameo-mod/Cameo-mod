@@ -34,15 +34,15 @@ grid cannot express the result — pick the real damage instead of folding.
 |---|---|---|--:|--:|--:|--:|
 | `asianalliance_asdf` | `ASDFGun` | `Bullet_MediumFlatCompatibility` | 1.09 | 4000 | **4360** | 0.00% |
 | `asianalliance_asdf` | `ASDFGun2` | `Bullet_MediumFlatCompatibility` | 1.09 | 6000 | **6540** | 0.00% |
-| `asianalliance_asianflametank` | `AsianFlamerTank` | `Flame_Light` | 0.75 | 4000 | **3000** | 0.00% |
-| `asianalliance_asianflametank` | `AsianFlamerTank_elite` | `Flame_Light` | 0.75 | 4000 | **3000** | 0.00% |
-| `asianalliance_asianflametrooper` | `AsianFlamerTroop` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
-| `asianalliance_asianflametrooper` | `AsianFlamerTroop2` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
-| `asianalliance_asianflametrooper` | `AsianFlamerTurret` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
-| `asianalliance_asianmilitia` | `asianalliance_asianmilitia_grenade` | `Concussion_MediumFlatCompatibility` | 0.83 | 8000 | **6640** | 0.00% |
-| `asianalliance_asianmilitia` | `asianalliance_asianmilitia_grenade_elite` | `Concussion_MediumFlatCompatibility` | 0.83 | 8000 | **6640** | 0.00% |
-| `asianalliance_asianmilitia` | `asianalliance_asianmilitia_shotgun` | `Bullet_Light` | 0.83 | 6000 | **4980** | 0.00% |
-| `asianalliance_asianmilitia` | `asianalliance_asianmilitia_shotgun_elite` | `Bullet_Light` | 0.83 | 6000 | **4980** | 0.00% |
+| `asianalliance_flametank` | `AsianFlamerTank` | `Flame_Light` | 0.75 | 4000 | **3000** | 0.00% |
+| `asianalliance_flametank` | `AsianFlamerTank_elite` | `Flame_Light` | 0.75 | 4000 | **3000** | 0.00% |
+| `asianalliance_flametrooper` | `AsianFlamerTroop` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
+| `asianalliance_flametrooper` | `AsianFlamerTroop2` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
+| `asianalliance_flametrooper` | `AsianFlamerTurret` | `Flame_Light` | 0.50 | 4000 | **2000** | 0.00% |
+| `asianalliance_militia` | `asianalliance_asianmilitia_grenade` | `Concussion_MediumFlatCompatibility` | 0.83 | 8000 | **6640** | 0.00% |
+| `asianalliance_militia` | `asianalliance_asianmilitia_grenade_elite` | `Concussion_MediumFlatCompatibility` | 0.83 | 8000 | **6640** | 0.00% |
+| `asianalliance_militia` | `asianalliance_asianmilitia_shotgun` | `Bullet_Light` | 0.83 | 6000 | **4980** | 0.00% |
+| `asianalliance_militia` | `asianalliance_asianmilitia_shotgun_elite` | `Bullet_Light` | 0.83 | 6000 | **4980** | 0.00% |
 | `cabal_eliminator800` | `CabalEliminatorGatling` | `Bullet_Medium` | 1.05 | 4000 | **4200** | 0.00% |
 | `cabal_plasmasub` | `CabalSubmarinePlasma` | `Plasma_Heavy` | 2.00 | 75000 | **150000** | 0.00% |
 | `cruiser_f.steel` | `SteelFighterRailgun` | `Laser_HeavyFlatCompatibility` | 0.10 | 10000 | **1000** | 0.00% |

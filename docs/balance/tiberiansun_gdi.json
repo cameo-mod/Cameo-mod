@@ -223,6 +223,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -231,22 +245,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -262,11 +262,9 @@
        "^Warhead_Railgun_ExtraDamage",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^HeavyChemicalWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyBomb"
+       "^HeavyBomb",
+       "^ts_gdi_kodiakcannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -432,7 +430,7 @@
        "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_gdi_tsbomb"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -576,7 +574,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^ts_tiberiansun_tshellfire"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -703,7 +701,9 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "TSHellfire"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^ts_tiberiansun_tshellfire"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1600,6 +1600,7 @@
    "ts_gdi_empulsecannon": {
     "armaments": [
      {
+      "armament_name": "superweapon",
       "damage_warheads": [
        {
         "damage": "5000",
@@ -1752,13 +1753,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1770,6 +1764,13 @@
         "falloff": null,
         "spread": null,
         "tag": "HRailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -1783,9 +1784,8 @@
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^ShrapnelWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_gdi_tsrpgtowerrail"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -1873,7 +1873,7 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^ts_gdi_tsgdiredeye"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2092,9 +2092,8 @@
        "^Warhead_Concussion_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_tiberiansun_tsgrenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -2150,21 +2149,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6656",
       "reloaddelay": "45",
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "TSGrenade"
+       "^ts_tiberiansun_tsgrenadeg"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSGrenadeG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2356,7 +2352,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -2507,6 +2503,13 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -2516,13 +2519,6 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2536,9 +2532,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_gdi_ts30mmrail"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2568,6 +2563,13 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -2577,13 +2579,6 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2597,9 +2592,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_gdi_ts30mmrail"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2610,7 +2604,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -2699,8 +2693,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^RA2FlakWeapon",
-       "^RA2Chaingun"
+       "^TSRA2FlakWeapon",
+       "^TSRA2Chaingun"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -2837,7 +2831,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -2934,17 +2928,15 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
+      "versus_templates": [],
       "warheads": [],
-      "weapon": "Heal",
+      "weapon": "TSRA2Heal",
       "weapon_class_source": "none"
      },
      {
@@ -2972,17 +2964,15 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
+      "versus_templates": [],
       "warheads": [],
-      "weapon": "Heal",
+      "weapon": "TSRA2Heal",
       "weapon_class_source": "none"
      }
     ],
@@ -3121,7 +3111,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "TSCommandoRailgun"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -3209,7 +3201,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "TSCommandoRailgun"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -3283,10 +3277,24 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
         "type": "AreaDamage"
        },
        {
@@ -3323,48 +3331,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3376,13 +3342,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^ts_gdi_tsshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3394,10 +3354,24 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
         "type": "AreaDamage"
        },
        {
@@ -3434,48 +3408,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3487,13 +3419,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^ts_gdi_tsshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3634,7 +3560,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "TSZoneRailgun"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -3718,7 +3646,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "TSZoneRailgun"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -3798,24 +3728,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3829,24 +3756,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3859,24 +3783,21 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@TERCERA",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
@@ -3889,29 +3810,26 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
       "slot": "Armament@CUARTA",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Bullet_Medium"
       ],
-      "weapon": "APCGun",
+      "weapon": "TSAPCGun",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": false,
@@ -3920,7 +3838,7 @@
       "slot": "Armament@QUINTA",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2CarrierTarget",
+      "weapon": "TSCarrierTarget",
       "weapon_class_source": "none"
      }
     ],
@@ -4000,7 +3918,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4008,7 +3926,6 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -4016,7 +3933,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4031,7 +3948,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4039,7 +3956,6 @@
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -4047,7 +3963,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4061,7 +3977,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4069,7 +3985,6 @@
       "reloaddelay": "250",
       "slot": "Armament@TERCERA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -4077,7 +3992,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4091,7 +4006,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -4099,7 +4014,6 @@
       "reloaddelay": "250",
       "slot": "Armament@CUARTA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -4107,7 +4021,7 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "TS8Inch",
       "weapon_class_source": "template"
      },
      {
@@ -4151,9 +4065,7 @@
       "slot": "Armament@QUINTA",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^ts_gdi_set17"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4202,9 +4114,7 @@
       "slot": "Armament@SEXTA",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^ts_gdi_set17"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4319,9 +4229,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^ts_gdi_set17"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4339,7 +4247,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -4353,7 +4261,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      },
      {
@@ -4366,7 +4274,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -4380,7 +4288,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -4536,7 +4444,9 @@
       "reloaddelay": "28",
       "slot": "Armament@GUNS",
       "versus_templates": [
-       "TSHellfire"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^ts_tiberiansun_tshellfire"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4567,7 +4477,7 @@
        "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_gdi_tsbomb"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -4594,7 +4504,9 @@
       "reloaddelay": "28",
       "slot": "Armament@AA",
       "versus_templates": [
-       "TSHellfire"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^ts_tiberiansun_tshellfire"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5190,18 +5102,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "5000",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -5213,7 +5118,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
-       "^Effect_Magic_Heavy"
+       "^ts_gdi_tssoniczapweapon"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -5240,7 +5145,7 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Sonic_Heavy",
-       "^Effect_Sonic_Heavy"
+       "^ts_gdi_tssoniczapweaponsonic"
       ],
       "warheads": [
        "^Warhead_Sonic_Heavy"
@@ -5360,9 +5265,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^ts_gdi_set17"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5480,7 +5383,7 @@
       "slot": "Armament@Deployed",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_gdi_set19"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -5582,7 +5485,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_gdi_set19"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -5729,7 +5632,7 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^ts_gdi_set21"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -5772,7 +5675,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeRAILGUN",
       "versus_templates": [
-       "TSMechRailgunII"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -5952,12 +5857,12 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^ts_gdi_set21"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
       ],
-      "weapon": "TSMammothTusk2",
+      "weapon": "TSMammothTusk2_AA",
       "weapon_class_source": "template"
      },
      {
@@ -5995,7 +5900,9 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeRAILGUN",
       "versus_templates": [
-       "TSMechRailgun"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -6155,18 +6062,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "64000",
+        "damage": "96000",
         "falloff": "100, 75, 50, 25",
         "spread": "813",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "813",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -6178,7 +6078,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^ts_gdi_tsmobile_emp"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

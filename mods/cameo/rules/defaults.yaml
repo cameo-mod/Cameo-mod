@@ -776,7 +776,7 @@
 		CloakEffectSequence: reversed
 		UncloakEffectSequence: idle
 		EffectTracksActor: True
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		RequiresCondition: cloak-crate-collected
 	ExternalCondition@CLOAK:
 		Condition: cloak-crate-collected
@@ -855,17 +855,60 @@
 	# 	RequiresSelection: False
 	# 	ValidRelationships: Ally, Neutral, Enemy
 
+	# --- Poison METER (physical-state axis). Replaces the binary `poisoned` condition
+	# (retired): gas clouds / poison darts feed Poison via ApplyPhysicalState or AreaDamage
+	# PhysicalStates; the DoT below scales with dose — one dart != a lingering cloud.
+	# Infantry-only by construction — only ^DefaultInfantry inherits ^Poisonable.
+	# Corrosion clone — see docs/design/PHYSICAL_STATE_SYSTEM.md.
 ^Poisonable:
-	ChangesHealth@poison:
-		Delay: 20
-		PercentageStep: -1
-		StartIfBelow: 101
-		RequiresCondition: poisoned
-	ExternalCondition@Poisoned:
-		Condition: poisoned
-	Targetable@poisoned:
-		TargetTypes: poisoned
-		RequiresCondition: poisoned
+	PhysicalState@Poison:
+		Name: Poison
+		MaxValue: 20000
+		MinValue: -20000
+		RelaxedValue: 0
+		RelativeToHealth: true
+		RelaxationLinear: 5
+		RelaxationScaled: 50
+		RelaxationInterval: 1
+		RelaxationDelay: 25
+		InitialValue: 0
+		ApplyDamageModifiers: true
+	PhysicalStateBar@PoisonBar:
+		PhysicalStateName: Poison
+		PositiveColor: A0C020
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+		RequiresCondition: !PoisonDeadzone
+	GrantConditionOnPhysicalState@PoisonDeadzone:
+		PhysicalStateName: Poison
+		Condition: PoisonDeadzone
+		UpperValue: 200
+		LowerValue: -200
+	GrantConditionOnPhysicalState@Poisoning:
+		PhysicalStateName: Poison
+		Condition: Poisoning
+		UpperValue: 20000
+		LowerValue: 200
+	GrantConditionOnPhysicalState@PoisonMax:
+		PhysicalStateName: Poison
+		Condition: PoisonMax
+		UpperValue: 20000
+		LowerValue: 20000
+	WithPhysicalStateColoredOverlay@Poison:
+		PhysicalStateName: Poison
+		MinColor: A0C02004
+		MaxColor: A0C0201A
+		UpperValue: 20000
+		LowerValue: 200
+	ChangesHealthProportionalToPhysicalState@Poison:
+		PhysicalStateName: Poison
+		UsePercentageDamage: true
+		DamageAtMaximum: 1
+		DamageAtMinimum: 0
+		DamageThreshold: 0
+		DamageInterval: 20
+		RequiresCondition: Poisoning
 
 ^LeechEggLayable:
 	SpawnActorOnDeath@Leech2:
@@ -969,22 +1012,22 @@
 ^GainsExperienceVehicle:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyvehicles:
-		Prerequisites: vehicles.upgraded
+		Prerequisites: vehicles_upgraded
 
 ^GainsExperienceAircraft:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyaircraft:
-		Prerequisites: aircraft.upgraded
+		Prerequisites: aircraft_upgraded
 
 ^GainsExperienceInfantry:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
+		Prerequisites: infantry_upgraded
 
 ^GainsExperienceShips:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyships:
-		Prerequisites: ships.upgraded
+		Prerequisites: ships_upgraded
 
 ^GlobalBuffs:
 	Inherits: ^GPSSatelliteSupport
@@ -1178,7 +1221,7 @@
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
 	Armor:
-		Type: None
+		Type: Flak
 	# DamageMultiplier@ScoutInfantryBuff:
 		# Modifier: 50
 	# FirepowerMultiplier@ScoutInfantryBuff:
@@ -1277,7 +1320,7 @@
 	# FirepowerMultiplier@AntiTankAntiAirInfantryBuff:
 		# Modifier: 110
 	Armor:
-		Type: Flak
+		Type: None
 	RevealsShroud:
 		Range: 6500
 	Buildable:
@@ -1343,7 +1386,7 @@
 	# 	ValidTargets: Infantry
 	# 	Priority: 50
 	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
+		Prerequisites: infantry_upgraded
 	Armor:
 		Type: Plate
 	# DamageMultiplier@MeleeBuff:
@@ -1404,7 +1447,7 @@
 	RenderRangeCircle:
 		RangeCircleType: infantry
 	Armor:
-		Type: Flak
+		Type: None
 	RevealsShroud:
 		Range: 7500
 	DetectCloaked:
@@ -1431,7 +1474,7 @@
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Armor:
-		Type: Flak
+		Type: None
 	FirepowerMultiplier@HeavySniperInfantryBuff:
 		Modifier: 100
 	RevealsShroud:
@@ -1461,7 +1504,7 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Armor:
-		Type: Flak
+		Type: None
 	FirepowerMultiplier@RocketTrooperInfantryBuff:
 		Modifier: 100
 	RevealsShroud:
@@ -1683,7 +1726,7 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
 	ProducibleWithLevel@spyvehicles:
-		Prerequisites: vehicles.upgraded
+		Prerequisites: vehicles_upgraded
 	Armor:
 		Type: Superheavy
 	RevealsShroud:
@@ -2543,7 +2586,7 @@
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !driver-dead && !being-captured && !beingterrordroned
 		ImmovableCondition: driver-dead
 		CanMoveBackward: false
@@ -2716,7 +2759,7 @@
 	Mobile:
 		Locomotor: naval
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Tooltip:
 		GenericName: Boat
 	Targetable:
@@ -2737,7 +2780,7 @@
 		RequiresCondition: !chronobeamed
 	-Repairable:
 	RepairableNear:
-		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_alliednavalyard, cncsyrd, ra1_soviets_subpen, cncspen
+		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_navalyard, cncsyrd, ra1_soviets_subpen, cncspen
 	GpsDot:
 		String: Ship
 	RangedGpsDot:
@@ -2761,7 +2804,7 @@
 		InitialDelay: 0
 		CloakDelay: 50
 		CloakedCondition: underwater
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !cloak-force-disabled && !underbridge
 		IsPlayerPalette: true
 		UncloakSound: subshow1.aud
@@ -2770,7 +2813,7 @@
 		InitialDelay: 0
 		CloakDelay: 0
 		CloakedCondition: underwater
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !cloak-force-disabled && underbridge
 		CloakStyle: Alpha
 		MinCloakedAlpha: 0
@@ -2802,7 +2845,7 @@
 	Mobile:
 		Locomotor: naval
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Selectable:
 		Bounds: 1024, 1024
 	WithInfantryBody:
@@ -2908,7 +2951,7 @@
 		RequiresCondition: !untargetable && damaged
 		TargetTypes: SpecialRepair
 	AttackAircraft:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
@@ -3123,7 +3166,7 @@
 		RequiresCondition: !airborne && !untargetable && damaged && !Healed
 		TargetTypes: Heal, Healing
 	AttackAircraft:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
@@ -3266,7 +3309,7 @@
 	Mobile:
 		Locomotor: foot
 		ResponsiveBetweenCells: true
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !beingterrordroned
 	Selectable:
 		Bounds: 768, 768, 0, -256
@@ -3320,8 +3363,8 @@
 			asianalliance_warturtle: battlefortresspassenger
 			latinsyndicate_narcohummer: battlefortresspassenger
 			latinsyndicate_carteltruck: battlefortresspassenger
-			scrapcar_driveby.latin: battlefortresspassenger
-			scrapcar2_driveby.latin: battlefortresspassenger
+			latin_scrapcar_driveby: battlefortresspassenger
+			latin_scrapcar2_driveby: battlefortresspassenger
 			naxis_oldtank: battlefortresspassenger
 			naxis_shoekarn: battlefortresspassenger
 			steelconsortium_poseidontank: battlefortresspassenger
@@ -3555,7 +3598,7 @@
 	RevealOnDeath:
 	AttackFrontal:
 		FacingTolerance: 8
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^Soldier:
 	Inherits: ^DefaultSoldier
@@ -3810,7 +3853,7 @@
 		Voice: Attack
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		FacingTolerance: 0
 	WithInfantryBody:
 		DefaultAttackSequence: attack
@@ -4064,7 +4107,7 @@
 	Inherits@bot: ^BotProductionBehavior
 	Inherits@mindcontrol: ^MindControllableStructure
 	Inherits@forceshield: ^ForceShieldable
-	Inherits@sonicdebuff: ^SonicDebuff
+	Inherits@resonant: ^Resonant
 	Inherits@trap: ^BoobyTrappable
 	Inherits@base-reveal: ^Base-reveal
 	Inherits@bounty: ^GlobalBounty
@@ -4382,7 +4425,7 @@
 	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: owned
 	ChangesHealth@regen:
 		PercentageStep: 1
@@ -5274,14 +5317,13 @@
 ^Blindable:
 	ExternalCondition@blinded:
 		Condition: blinded
-	# --- Blind METER (physical-state axis). ADDITIVE + inert until weapons migrate.
+	# --- Blind METER (physical-state axis). Meter + proportional range scaling live.
 	# W10 spec: range scales 100% -> 20% proportionally with the meter; at FULL blind
-	# the weapon is disabled, the icon shows, and the `blinded` condition applies so
-	# blinding units retarget. This block defines the meter and the full-blind
-	# condition grant; the proportional range scaling and weapon disable wiring stay
-	# with the Set B weapon migration (warheads switch from `GrantExternalCondition`
-	# `blinded` to `PhysicalStateName: Blind` / `PhysicalStateScale` and the old
-	# `RangeMultiplier@blinded` is retired). See PHYSICAL_STATE_SYSTEM.md §5 / W10.
+	# the weapon is disabled (every attack PauseOnCondition that carries `disabled`
+	# also carries `blinded`), the icon shows, and the `blinded` Targetable drops so
+	# blinding units retarget. Warheads migrate from `GrantExternalCondition`
+	# `blinded` to `PhysicalStateName: Blind` / `PhysicalStateScale`; the old binary
+	# block below stays until the pack-side grants land. See PHYSICAL_STATE_SYSTEM.md §5 / W10.
 	PhysicalState@Blind:
 		Name: Blind
 		MaxValue: 20000
@@ -5312,6 +5354,12 @@
 		MaxColor: 888888AA
 		UpperValue: 20000
 		LowerValue: 2000
+	# W10: proportional range scaling (replaces the retired RangeMultiplier@blinded,
+	# which would double-dip to 20% x 20% = 4% at full meter). All other channels of
+	# the trait default to 100 = neutral.
+	ModifiesCombatProportionalToPhysicalState@Blind:
+		PhysicalStateName: Blind
+		RangeTo: 20
 	# --- old binary condition block (preserved until Set B weapon migration).
 	TimedConditionBar@blinded:
 		Condition: blinded
@@ -5323,9 +5371,6 @@
 		RequiresCondition: blinded
 		Modifier: 20
 	DetectCloakedMultiplier@blinded:
-		RequiresCondition: blinded
-		Modifier: 20
-	RangeMultiplier@blinded:
 		RequiresCondition: blinded
 		Modifier: 20
 	WithDecoration@blinded:
@@ -6173,25 +6218,72 @@
 		Range: 7c0
 		Condition: CommandoCall
 
-^SonicDebuff:
-	ExternalCondition@SONICDEBUFF:
-		Condition: SonicDebuff
-	WithColoredOverlay@SONICDEBUFF:
-		RequiresCondition: SonicDebuff
-		Color: 0088FF40
-		Multiply: true
-	DamageMultiplier@SONICDEBUFF:
-		Modifier: 150
-		RequiresCondition: SonicDebuff
-	SpeedMultiplier@SONICDEBUFF:
-		Modifier: 75
-		RequiresCondition: SonicDebuff
-	# WithDecoration@SONICDEBUFF:
-	# 	Image: 2100commandodebuff
-	# 	Sequence: idle
-	# 	Position: Center
-	# 	RequiresCondition: SonicDebuff
-	# 	ValidRelationships: Enemy, Neutral, Ally
+^Resonant:
+	# --- Resonance METER (physical-state axis) — the W7 sonic "spotlight". Filled by
+	# sonic-family damage (AreaDamage PhysicalStates) and flat ApplyPhysicalState marks.
+	# It deals NO damage of its own, ever — the force multiplier only. Fast decay: dies
+	# with the beam (RelaxationScaled 200 = 4x Corrosion). Effects ramp with the meter to
+	# the old binary peak (Damage 150 / Speed 75). See BALANCE_PROGRAM_PLAN.md §W7.
+	PhysicalState@Resonance:
+		Name: Resonance
+		MinValue: 0
+		MaxValue: 20000
+		RelaxedValue: 0
+		InitialValue: 0
+		RelativeToHealth: true
+		ApplyDamageModifiers: true
+		RelaxationInterval: 1
+		RelaxationDelay: 12
+		RelaxationLinear: 5
+		RelaxationScaled: 200
+	PhysicalStateBar@ResonanceBar:
+		PhysicalStateName: Resonance
+		PositiveColor: 0088FF
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+		RequiresCondition: !ResonanceDeadzone
+	GrantConditionOnPhysicalState@ResonanceDeadzone:
+		PhysicalStateName: Resonance
+		Condition: ResonanceDeadzone
+		LowerValue: 0
+		UpperValue: 199
+	GrantConditionOnPhysicalState@Resonating:
+		PhysicalStateName: Resonance
+		Condition: Resonating
+		LowerValue: 200
+		UpperValue: 20000
+	GrantConditionOnPhysicalState@ResonanceMax:
+		PhysicalStateName: Resonance
+		Condition: ResonanceMax
+		LowerValue: 20000
+		UpperValue: 20000
+	WithPhysicalStateColoredOverlay@Resonance:
+		PhysicalStateName: Resonance
+		MinColor: 0088FF08
+		MaxColor: 0088FF40
+		LowerValue: 200
+		UpperValue: 20000
+		BlendMode: Multiply
+	DamageMultiplierProportionalToPhysicalState@Resonance:
+		PhysicalStateName: Resonance
+		DamageMultiplierAtMinimum: 100
+		DamageMultiplierAtMaximum: 150
+		UseDeviationFromRelaxed: true
+		RequiresCondition: Resonating
+	SlowsProportionalToPhysicalState@Resonance:
+		PhysicalStateName: Resonance
+		UseDeviationFromRelaxed: true
+		OnlyPositiveValues: true
+		SpeedModifierAtMinimum: 100
+		SpeedModifierAtMaximum: 75
+		TurnSpeedModifierAtMinimum: 100
+		TurnSpeedModifierAtMaximum: 100
+		TurretTurnSpeedModifierAtMinimum: 100
+		TurretTurnSpeedModifierAtMaximum: 100
+		ReloadDelayModifierAtMinimum: 100
+		ReloadDelayModifierAtMaximum: 100
+		RequiresCondition: Resonating
 
 ^CommandoCallable:
 	ExternalCondition@CommandoCall:
@@ -6584,7 +6676,7 @@
 	# 	BlinkPattern: Off, Off, On, Off
 
 ^ExternalConditions:
-	Inherits@sonicdebuff: ^SonicDebuff
+	Inherits@resonant: ^Resonant
 	Inherits@defplague: ^DefilerPlague
 	Inherits@commando: ^CommandoCallable
 	Inherits@darkswarm: ^DarkSwarmable
@@ -6815,7 +6907,7 @@ CPQDEBUGDUMMY:
 		InitialDelay: 1
 		CloakDelay: 1
 		UncloakOn: None
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: stashcamo
 		IsPlayerPalette: true
 	Cloak:
@@ -6825,7 +6917,7 @@ CPQDEBUGDUMMY:
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 		CloakedCondition: cloaked
 		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology)
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		IsPlayerPalette: true
 	WithColoredSelectionBox:
 		ColorSource: Player
@@ -6856,7 +6948,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviets_airfield,ra1_soviets_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asianalliance_asianairforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_helipad,ra1_soviets_airfield,ra1_soviets_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asianalliance_airforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	# DamageMultiplier@RearmableAircraft:
@@ -6876,11 +6968,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7089,7 +7181,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		CloakSound: cloak5.aud
 		UncloakSound: cloak5.aud
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		RequiresCondition: tscloak
 		IsPlayerPalette: true
 		# CloakStyle: Palette
@@ -7146,7 +7238,7 @@ CPQDEBUGDUMMY:
 
 ^ChargedFrontalEMP:
 	AttackFrontalCharged:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		FacingTolerance: 10
 		ChargeLevel: 25, 50
 		ChargingCondition: cond_charging
@@ -7167,11 +7259,11 @@ CPQDEBUGDUMMY:
 ^FrontalEMP:
 	AttackFrontal:
 		FacingTolerance: 8
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^TurretEMP:
 	AttackTurreted:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^DefenseTurretedEMP:
 	Inherits: ^TurretEMP
@@ -7180,11 +7272,11 @@ CPQDEBUGDUMMY:
 
 ^FollowEMP:
 	AttackFollow:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^PopupTurretEMP:
 	AttackPopupTurreted:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^WithSwimsuit:
 	Mobile:
@@ -7631,21 +7723,21 @@ CPQDEBUGDUMMY:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: infantry.upgraded
+		Proxy: infantry_upgraded
 		Types: SpyInfiltrate
 
 ^SpyVehicleFactory:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: vehicles.upgraded
+		Proxy: vehicles_upgraded
 		Types: SpyInfiltrate
 
 ^SpyAircraftFactory:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: aircraft.upgraded
+		Proxy: aircraft_upgraded
 		Types: SpyInfiltrate
 
 ^MCV:
@@ -7684,7 +7776,7 @@ CPQDEBUGDUMMY:
 		UsePlayerColor: True
 		ValidRelationships: Ally, Enemy, Neutral
 	Transforms:
-		PauseOnCondition: disabled || terrordroned
+		PauseOnCondition: disabled || terrordroned || blinded
 		TransformTextNotification: New base hub has been deployed.
 		FlashTransformTextNotification: true
 	NewConstructionOptionsOnDeploy:
@@ -7750,7 +7842,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !jammed && !disabled
 	Transforms:
 		RequiresCondition: factundeploy
-		PauseOnCondition: being-demolished || build-incomplete || disabled
+		PauseOnCondition: being-demolished || build-incomplete || disabled || blinded
 		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
@@ -7765,7 +7857,7 @@ CPQDEBUGDUMMY:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -7775,11 +7867,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Building, Defence
 		RequiresCondition: !(classicproductionqueues || hybridproductionqueues)
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RABuilding, RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@Building:
 		Type: Building
 		DisplayOrder: 0
@@ -7934,11 +8026,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Infantry, Soldier
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAInfantry, Soldier
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@INFANTRY:
 		Type: Infantry
 		DisplayOrder: 2
@@ -7958,7 +8050,7 @@ CPQDEBUGDUMMY:
 		ProductionType: RAInfantry
 		RequiresCondition: classicproductionqueues
 	InfiltrateForSupportPower:
-		Proxy: infantry.upgraded
+		Proxy: infantry_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
@@ -8073,11 +8165,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Vehicle
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAVehicle
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@VEHICLE:
 		Type: Vehicle
 		DisplayOrder: 3
@@ -8097,7 +8189,7 @@ CPQDEBUGDUMMY:
 		ProductionType: RAVehicle
 		RequiresCondition: classicproductionqueues
 	InfiltrateForSupportPower:
-		Proxy: vehicles.upgraded
+		Proxy: vehicles_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
@@ -8137,7 +8229,7 @@ CPQDEBUGDUMMY:
 	# 	ReadyAudio: ReinforcementsArrived
 	# 	SpawnType: ClosestEdgeToDestination
 	# 	ProportionalSpeed: true
-	# 	PauseOnCondition: disabled
+	# 	PauseOnCondition: disabled || blinded
 	ProductionAirdropCA@CLASSIC:
 		Produces: RAVehicle
 		# RequiresCondition: classicproductionqueues
@@ -8146,7 +8238,7 @@ CPQDEBUGDUMMY:
 		ReadyAudio: ReinforcementsArrived
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	-ProductionQueue@VEHICLE:
 	-ProductionBar@VEHICLE:
 	ProductionBar@RAVEHICLE:
@@ -8175,18 +8267,18 @@ CPQDEBUGDUMMY:
 	RevealsShroud:
 		Range: 6000
 	InfiltrateForSupportPower@SpyInfiltrate:
-		Proxy: aircraft.upgraded
+		Proxy: aircraft_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	Production@NORMAL:
 		Produces: Aircraft
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAAircraft
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@AIRCRAFT:
 		Type: Aircraft
 		DisplayOrder: 4
@@ -8686,7 +8778,7 @@ CPQDEBUGDUMMY:
 		Delay: 50
 		Count: 1
 		ResetOnFire: True
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -8695,7 +8787,7 @@ CPQDEBUGDUMMY:
 	# RenderRangeCircle:
 	# 	RangeCircleType: pointdefense
 	# 	Color: FF000088
-	# 	PauseOnCondition: !pdammo || disabled
+	# 	PauseOnCondition: !pdammo || disabled || blinded
 
 ^CashTricklerMultipliers:
 	CashTrickler:
@@ -8742,7 +8834,7 @@ CPQDEBUGDUMMY:
 	CashTrickler:
 		Interval: 250
 		Amount: 250
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	CashTricklerBar:
 	CashTricklerMultiplier@RANK-1:
 		Modifier: 125
@@ -8760,7 +8852,7 @@ CPQDEBUGDUMMY:
 		Amount: 250
 		Interval: 1
 		InitialDelay: 1
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: city-veteran <= 3
 	ActorStatValues:
 		Stats: Armor, Sight, CashTrickler, Power, Experience
@@ -8865,7 +8957,7 @@ CPQDEBUGDUMMY:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		DeployedCondition: deployed
 		UndeployedCondition: undeployed
 		UndeployOnMove: true
@@ -8976,7 +9068,7 @@ CPQDEBUGDUMMY:
 		ExclusiveDeploy: false
 		DeployType: vehicle
 	Mobile:
-		PauseOnCondition: disabled || notmobile
+		PauseOnCondition: disabled || notmobile || blinded
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
 	TooltipExtras@Cargo:
@@ -9056,7 +9148,7 @@ CPQDEBUGDUMMY:
 		CooldownTicks: 0
 		DeployedCondition: clearmines
 		Voice: Action
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProximityExternalCondition@clearmines:
 		Condition: trap-neutralized
 		Range: 4c0
@@ -9128,7 +9220,7 @@ CPQDEBUGDUMMY:
 			# ra1_soviets_rifleinfantry: ifv-mg
 			# ra2_allies_gi: ifv-mg
 			# ra2_soviets_conscript: ifv-mg
-			# asianalliance_asianmilitia: ifv-mg
+			# asianalliance_militia: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
 			# terran_marine: ifv-mg
@@ -9178,10 +9270,10 @@ CPQDEBUGDUMMY:
 			# leanghacker: ifv-repair
 			# leanglotus: ifv-repair
 			# e3: ifv-miss
-			# ra1_allies_alliedrocketsoldier: ifv-miss
+			# ra1_allies_rocketsoldier: ifv-miss
 			# ra1_soviets_rocketsoldier: ifv-miss
 			# ra2_allies_guardiangi: ifv-miss
-			# asianalliance_asiantankkiller: ifv-miss
+			# asianalliance_tankkiller: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
 			# che3: ifv-miss
@@ -9198,7 +9290,7 @@ CPQDEBUGDUMMY:
 			# ra1_soviets_flamethrower: ifv-fire
 			# japan_japaneseflamethrower: ifv-fire
 			# yuri_initiate: ifv-fire
-			# asianalliance_asianflametrooper: ifv-fire
+			# asianalliance_flametrooper: ifv-fire
 			# terran_firebat: ifv-fire
 			# td_nod_chemicalwarrior: ifv-chem
 			# ra2_soviets_desolator: ifv-chem
@@ -9503,7 +9595,7 @@ CPQDEBUGDUMMY:
 		Range: 12c0
 		RequiresCondition: !disabled && ifv-spy
 	SpawnActorPower@spy:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: ifv-spy
 		OrderName: SovietSpyPlane
 		Prerequisites:
@@ -9543,7 +9635,7 @@ CPQDEBUGDUMMY:
 		Cost: 500
 	Tooltip:
 		Name: actor_fv.name
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
@@ -9552,7 +9644,7 @@ CPQDEBUGDUMMY:
 		Locomotor: wheeled
 		Speed: 150
 		TurnSpeed: 30
-		PauseOnCondition: notmobile || disabled
+		PauseOnCondition: notmobile || disabled || blinded
 	Health:
 		HP: 25000
 	Repairable:
@@ -9571,42 +9663,42 @@ CPQDEBUGDUMMY:
 		Name: primary
 		Weapon: RA2HoverMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryelite:
 		Name: primary
 		Weapon: RA2HoverMissile_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryAA:
 		Name: primary
 		Weapon: RA2HoverMissile_AA
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteAA:
 		Name: primary
 		Weapon: RA2HoverMissile_AA_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryAAThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile_AA
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteAAThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile_AA_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@missile:
 		Weapon: RA2MultiHoverMissile
 		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
@@ -9666,12 +9758,12 @@ CPQDEBUGDUMMY:
 	FirepowerMultiplier@repair:
 		Modifier: 50
 		RequiresCondition: ifv-repair || ifv-healer
-	Armament@ra1_allies_alliedsniper:
+	Armament@ra1_allies_sniper:
 		Weapon: RA2AWP
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
 		MuzzlePalette: ra2effect
-		RequiresCondition: ifv-ra1_allies_alliedsniper
+		RequiresCondition: ifv-ra1_allies_sniper
 	Armament@hero:
 		Weapon: RA2DoublePistolsIFV
 		LocalOffset: 171,0,255
@@ -9722,10 +9814,10 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ifv-demo && !disabled
 	WithSpriteTurret@default:
 		Sequence: turret-missile
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
 	WithSpriteTurret@mg:
 		Sequence: turret-mg
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-ra1_allies_sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
 	WithSpriteTurret@flame:
 		Sequence: turret-flame
 		RequiresCondition: ifv-chem || ifv-fire
@@ -9755,7 +9847,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ifv-repair
 	Tooltip@SNIPE:
 		Name: Sniper IFV
-		RequiresCondition: ifv-ra1_allies_alliedsniper
+		RequiresCondition: ifv-ra1_allies_sniper
 	Tooltip@HERO:
 		Name: Hero IFV
 		RequiresCondition: ifv-hero
@@ -9832,7 +9924,7 @@ CPQDEBUGDUMMY:
 ^RepairsUnits:
 	RepairsUnits:
 		RepairDamageTypes: KillsDrone
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^BuildingPlug:
 	Interactable:
@@ -9885,7 +9977,7 @@ CPQDEBUGDUMMY:
 		CloakedCondition: cloaked
 		InitialDelay: 125
 		CloakDelay: 75
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		IsPlayerPalette: true
 		CloakStyle: Alpha
 	WithColoredSelectionBox:
@@ -9980,7 +10072,7 @@ CPQDEBUGDUMMY:
 		Condition: triggered
 	GrantConditionOnDeploy:
 		DeployedCondition: triggered
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		ExclusiveDeploy: true
 		DeployType: Detonate
 	Voiced:
@@ -10013,7 +10105,7 @@ CPQDEBUGDUMMY:
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
-		PauseOnCondition: disabled || notmobile || !loaded
+		PauseOnCondition: disabled || notmobile || !loaded || blinded
 	Passenger:
 	Health:
 		HP: 25000
@@ -10031,7 +10123,7 @@ CPQDEBUGDUMMY:
 	Armament:
 		Weapon: RA220mmrapid
 		MuzzleSequence: muzzle
-		PauseOnCondition: disabled || notmobile || !loaded
+		PauseOnCondition: disabled || notmobile || !loaded || blinded
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0

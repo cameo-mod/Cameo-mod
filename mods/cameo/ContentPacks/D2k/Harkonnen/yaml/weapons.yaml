@@ -10,7 +10,7 @@ HarkonnenFlameTurret:
 	Burst: 5
 	BurstDelays: 3
 	Range: 6742
-	StartBurstReport: hk_flame_turret_1.wav
+	StartBurstReport: d2k_harkonnen_sounds|hk_flame_turret_1.wav
 	Projectile: Bullet
 		Speed: 180, 240
 		LaunchAngle: 10, 20
@@ -26,9 +26,7 @@ harkonnen_autogunturret:
 	ReloadDelay: 132
 	Burst: 26
 	BurstDelays: 2
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -58,6 +56,7 @@ DebrisMissile:
 
 ExplosiveDebris:
 	Inherits: ^Debris2Legacy
+	Inherits@fx: ^d2k_harkonnen_explosivedebris
 	Range: 7c0
 	Projectile: Bullet
 		Image: 120mm
@@ -70,11 +69,6 @@ ExplosiveDebris:
 		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562
-	Warhead@Effect: CreateEffect
-		Explosions: large_explosion
-		ImpactSounds: EXPLSML4.WAV
-	Warhead@Concrete: DamagesConcrete
-		Damage: 4500
 
 harkonnen_devastatorturret:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
@@ -94,3 +88,70 @@ harkonnen_inkvine_weapon:
 	ReloadDelay: 120
 	Range: 10000
 	Report: MORTAR1.WAV
+
+D2K70mmH:
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 90
+	-Report:
+	StartBurstReport: d2k_harkonnen_sounds|d2k_buzzsaw_att.wav
+	Range: 4352
+	Burst: 2
+	BurstDelays: 0
+	Warhead@CannonHE_Medium:
+		Damage: 10250
+
+
+DevBullet:
+	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
+	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
+	Inherits@fx: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	ReloadDelay: 100
+	Range: 6666
+	Report: TANKHVY1.WAV
+	Projectile: Bullet
+		Speed: 333
+		Image: doubleblastbullet
+		Palette: d2keffect
+
+
+D2K_Rocket_AA:
+	Inherits: ^D2KMissile
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	ValidTargets: Air
+	Range: 5500
+	ReloadDelay: 30
+	Projectile: Missile
+		VerticalRateOfTurn: 12
+		Blockable: false
+		Speed: 300
+		Inaccuracy: 96
+		InaccuracyType: PerCellIncrement
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		MinRange: 256
+		Image: d2k_RPG
+		RangeLimit: 24c0
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Air
+		Damage: 4750
+
+
+PlasmaExplosion:
+	Warhead@1Dam: SpreadDamage
+		Damage: 20000
+		Spread: 3c0
+		Falloff: 100, 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		DamageCalculationType: ClosestTargetablePosition
+
+	Inherits@fx: ^d2k_harkonnen_plasmaexplosion

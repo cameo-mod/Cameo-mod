@@ -28,7 +28,7 @@ Confidence: FAIR 8 · **STRONG 27**
 ⚠ **No reference at all** — formula-only unless the review rescues them:
 
 * `E1` — cost 100.0
-* `asianalliance_asianmilitia` — cost 110.0
+* `asianalliance_militia` — cost 110.0
 * `atreides_lightinfantry` — cost 150.0
 * `corrino_lightinfantry` — cost 150.0 — ⛔ no route for faction 'corrino'
 * `forgotten_mutant_sp` — cost 160.0

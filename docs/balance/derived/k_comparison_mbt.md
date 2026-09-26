@@ -24,7 +24,7 @@ consistent; only the SHAPE of the class changes between them.
 | `cabal_widow` | 3500 | 9052 | 11829 | +159% | +238% | +31% ❗ |
 | `ordos_combatautoguntank` | 1500 | 892 | 624 | -41% | -58% | -30% ⚠ |
 | `td_gdi_battletank` | 900 | 928 | 657 | +3% | -27% | -29% ⚠ |
-| `ptnk.asian` | 2400 | 1842 | 2341 | -23% | -2% | +27% ⚠ |
+| `asianalliance_ptnk` | 2400 | 1842 | 2341 | -23% | -2% | +27% ⚠ |
 | `ixian_heavykodatank` | 1100 | 1037 | 780 | -6% | -29% | -25% ⚠ |
 | `ixian_kodatank` | 800 | 713 | 545 | -11% | -32% | -24% ⚠ |
 | `oldqtnk.steel` | 2400 | 3180 | 2666 | +33% | +11% | -16% ⚠ |

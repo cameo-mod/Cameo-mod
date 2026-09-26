@@ -18,6 +18,10 @@ power_chemicalmissile =
    .description = Tactical cluster missile with additional Tiberium-based warheads.
    Deals heavy damage in an area and leaves harmful corrosive clouds.
 
+power_empulse =
+   .name = E. M. Pulse
+   .description = Fires a pulse blast which disables all mechanical units in the area.
+
 power_nuke =
    .tdname = Nuclear Strike
    .raname = Atomic Bomb
@@ -79,10 +83,10 @@ actor_2tnk =
    .name = Allied Medium Tank
 
 actor_heavyaatank =
-   .description = Allied heavy anti air tank.
+   .description = Mobile twin-cannon anti-aircraft vehicle.
       Strong vs Aircraft
       Weak vs Tanks
-   .name = Allied Heavy AA Tank
+   .name = Flakpanzer Gepard
 
 actor_3tnk =
    .description = Soviet main battle tank armed with dual cannons.

@@ -29,9 +29,10 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Advanced Carryall",
+    "name": "actor_atreides_advancedcarryall.name",
     "prerequisites": [
-     "~hightech.atreides"
+     "~atreides_hightech",
+     "~heavy.atreides_combat"
     ],
     "queue": [
      "Aircraft",
@@ -69,18 +70,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "13345",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12345",
-        "falloff": null,
-        "spread": "1234",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
@@ -91,10 +85,12 @@
       "reloaddelay": "66",
       "slot": "Armament",
       "versus_templates": [
-       "PhoenixRocket"
+       "PhoenixRocket",
+       "^Warhead_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "OrniMissile",
       "weapon_class_source": "template"
@@ -124,9 +120,9 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Air Drone",
+    "name": "actor_atreides_airdrone.name",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "research_centre",
      "~atreides_promotion_airdrone"
     ],
@@ -197,18 +193,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "13345",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12345",
-        "falloff": null,
-        "spread": "1234",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
@@ -219,10 +208,12 @@
       "reloaddelay": "66",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "PhoenixRocket"
+       "PhoenixRocket",
+       "^Warhead_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "OrniMissile",
       "weapon_class_source": "template"
@@ -239,13 +230,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "25",
       "slot": "Armament@GUN",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_ornigun"
+      ],
       "warheads": [],
       "weapon": "OrniGun",
       "weapon_class_source": "none"
@@ -275,9 +268,10 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ornithopter",
+    "name": "actor_atreides_ornithopter.name",
     "prerequisites": [
-     "~hightech.atreides"
+     "~atreides_hightech",
+     "~heavy.atreides_combat"
     ],
     "queue": [
      "Aircraft",
@@ -557,10 +551,18 @@
    },
    "atreides_hightechfactory": {
     "armor": {
-     "src": "inherited",
-     "v": "Wood"
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -570,7 +572,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -579,6 +581,10 @@
     "name": "Atreides High Tech Factory",
     "prerequisites": [
      "~atreides_heavyfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
     ],
     "shield_flat": {
      "src": "inherited",
@@ -594,7 +600,7 @@
     },
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "atreides_ixresearchcenter": {
@@ -757,7 +763,8 @@
     },
     "name": "Atreides Palace",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
+     "~heavy.atreides_combat",
      "~research_centre",
      "!apalace",
      "~techlevel.superweapons"
@@ -904,7 +911,7 @@
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -979,7 +986,7 @@
     },
     "name": "Atreides Starport",
     "prerequisites": [
-     "~hightech.atreides",
+     "~atreides_hightech",
      "~research_centre"
     ],
     "shield_flat": {
@@ -1123,7 +1130,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Atreides Engineer",
+    "name": "actor_atreides_engineer.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1175,7 +1182,8 @@
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MG"
+       "^MG",
+       "^d2k_fremen_s"
       ],
       "warheads": [],
       "weapon": "Fremen_S",
@@ -1197,9 +1205,7 @@
       "range": "2560",
       "reloaddelay": "25",
       "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "M_HMG"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "Fremen_L",
       "weapon_class_source": "none"
@@ -1229,10 +1235,10 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "15000"
     },
-    "name": "Desert Phantom",
+    "name": "actor_atreides_fremen.name",
     "prerequisites": [
      "~atreides_barracks",
-     "~hightech.atreides",
+     "~atreides_hightech",
      "upgrade_barracks",
      "~atreides_promotion_fremen"
     ],
@@ -1278,7 +1284,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -1307,7 +1313,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -1328,7 +1334,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -1346,7 +1352,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Atreides Light Infantry",
+    "name": "actor_atreides_lightinfantry.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1420,7 +1426,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -1477,7 +1483,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -1502,7 +1508,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -1520,7 +1526,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "40000"
     },
-    "name": "Atreides Rocket Trooper",
+    "name": "actor_atreides_rockettrooper.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1688,7 +1694,7 @@
    }
   },
   "upgrades": {
-   "upgrade_barracks.atreides": {
+   "atreides_upgrade_barracks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1713,7 +1719,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_conyard.atreides": {
+   "atreides_upgrade_conyard": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1739,7 +1745,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_heavy.atreides": {
+   "atreides_upgrade_heavy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1764,7 +1770,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_light.atreides": {
+   "atreides_upgrade_light": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1789,7 +1795,7 @@
      "Upgrades"
     ]
    },
-   "upgrade_radar.atreides": {
+   "atreides_upgrade_radar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1828,7 +1834,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -1837,7 +1843,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^d2k_shared_hmg"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1878,7 +1884,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides APC",
+    "name": "actor_atreides_apc.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.atreides_combat"
@@ -1966,7 +1972,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Combat Tank",
+    "name": "actor_atreides_combattank.name",
     "prerequisites": [
      "~heavy.atreides_combat"
     ],
@@ -2049,7 +2055,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
@@ -2093,7 +2099,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Minotaurus",
+    "name": "actor_atreides_minotaurus.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
@@ -2142,18 +2148,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -2164,7 +2163,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2197,9 +2197,10 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Missile Tank",
+    "name": "actor_atreides_missiletank.name",
     "prerequisites": [
      "~heavy.missile_tank",
+     "~heavy.atreides_combat",
      "research_centre"
     ],
     "queue": [
@@ -2265,7 +2266,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Mobile Construction Vehicle",
+    "name": "actor_atreides_mobileconstructionvehicle.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "atreides_mcv_production"
@@ -2315,18 +2316,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -2337,7 +2331,8 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_shared_mtank_pri"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2370,7 +2365,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Mongoose",
+    "name": "actor_atreides_mongoose.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
@@ -2452,7 +2447,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "Heal"
+       "^HealingWeapon"
       ],
       "warheads": [],
       "weapon": "D2KRepair",
@@ -2483,7 +2478,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Repair Tank",
+    "name": "actor_atreides_repairtank.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.atreides_combat"
@@ -2535,7 +2530,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -2544,7 +2539,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^d2k_shared_hmg"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2577,10 +2572,10 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Sand Bike",
+    "name": "actor_atreides_sandbike.name",
     "prerequisites": [
      "~atreides_vehicle_production",
-     "~light.atreides"
+     "~atreides_light"
     ],
     "queue": [
      "Vehicle",
@@ -2661,7 +2656,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
@@ -2705,10 +2700,10 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Siege Tank",
+    "name": "actor_atreides_siegetank.name",
     "prerequisites": [
      "~atreides_vehicle_production",
-     "upgrade_heavy.atreides"
+     "atreides_upgrade_heavy"
     ],
     "queue": [
      "Vehicle",
@@ -2763,13 +2758,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "77",
       "slot": "Armament",
-      "versus_templates": [],
+      "versus_templates": [
+       "^d2k_shared_sound"
+      ],
       "warheads": [],
       "weapon": "Sound",
       "weapon_class_source": "none"
@@ -2799,7 +2796,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Sonic Tank",
+    "name": "actor_atreides_sonictank.name",
     "prerequisites": [
      "~heavy.atreides_combat",
      "research_centre",
@@ -2869,7 +2866,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Spice Harvester",
+    "name": "actor_atreides_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~atreides_vehicle_production"

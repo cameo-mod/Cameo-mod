@@ -1,6 +1,6 @@
 # audit_metadata — tooltip/metadata rot (B7)
 
-Duplicate-tooltip groups: **39**, buildables missing Tooltip name: **0**
+Duplicate-tooltip groups: **38**, buildables missing Tooltip name: **0**
 
 
 ## M1 — same tooltip name on multiple buildables of one faction
@@ -10,13 +10,12 @@ Duplicate-tooltip groups: **39**, buildables missing Tooltip name: **0**
 | atreides | concrete slab | concreteabuilding, concreteadefense |
 | corrino | concrete slab | concreteabuilding, concreteadefense |
 | eden | impulse items | eden_impulseitems, eden_impulseitems_2, eden_impulseitems_3 |
-| harkonnen | barracks upgrade | upgrade_barracks, upgrade_barracks.harkonnen |
+| harkonnen | barracks upgrade | harkonnen_upgrade_barracks, upgrade_barracks |
 | harkonnen | concrete slab | concreteabuilding, concreteadefense |
-| harkonnen | construction yard upgrade | upgrade_conyard, upgrade_conyard.harkonnen |
-| harkonnen | heavy factory upgrade | upgrade_heavy, upgrade_heavy.harkonnen |
+| harkonnen | construction yard upgrade | harkonnen_upgrade_conyard, upgrade_conyard |
+| harkonnen | heavy factory upgrade | harkonnen_upgrade_heavy, upgrade_heavy |
 | harkonnen | large concrete slab | concretebbuilding, concretebdefense |
-| harkonnen | light factory upgrade | ordos_upgrade_lightfactory, upgrade_light.harkonnen |
-| harkonnen | missile tank | atreides_missiletank, missile_tank |
+| harkonnen | light factory upgrade | harkonnen_upgrade_light, ordos_upgrade_lightfactory |
 | ixian | concrete slab | concreteabuilding, concreteadefense |
 | ixian | large concrete slab | concretebbuilding, concretebdefense |
 | naxis | horten bomber strike | naxis_promotion_hortenbomberstrike, naxis_promotion_hortenbomberstrike_2 |

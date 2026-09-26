@@ -213,7 +213,7 @@ td_gdi_commando:
 	Passenger:
 		Voice: Move
 	Armament@c4:
-		Weapon: TanyaAttach
+		Weapon: td_tanyaattach
 		Name: secondary
 		Cursor: c4
 		OutsideRangeCursor: c4
@@ -518,7 +518,7 @@ td_gdi_officer:
 		# Modifier: 108
 td_gdi_havoc:
 	Inherits: ^Soldier
-	Inherits@anim: ^RA2InfantryDeathAnimations
+	Inherits@anim: ^TDRA2InfantryDeathAnimations
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -563,7 +563,7 @@ td_gdi_havoc:
 		Voice: Move
 	ProducibleWithLevel:
 		InitialLevels: 1
-	Armament@ra1_allies_alliedsniper:
+	Armament@ra1_allies_sniper:
 		Weapon: td_gdi_havoc_sniper
 		LocalOffset: 256,64,512
 		AmmoUsage: 5

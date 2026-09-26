@@ -1,10 +1,10 @@
 corrino_sardaukar_bazooka:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@anim: ^RA2Infantry
+	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
@@ -59,7 +59,7 @@ corrino_sardaukar_bazooka:
 corrino_lightinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -125,7 +125,7 @@ corrino_engineer:
 corrino_trooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^RocketTrooperInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -164,10 +164,10 @@ corrino_trooper:
 corrino_sardaukar_berserker:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@anim: ^RA2Infantry
+	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
@@ -209,10 +209,10 @@ corrino_sardaukar_berserker:
 corrino_sardaukar_sword:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@anim: ^RA2Infantry
+	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
@@ -254,10 +254,10 @@ corrino_sardaukar_sword:
 corrino_sardaukar_javelin:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@anim: ^RA2Infantry
+	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
@@ -300,10 +300,10 @@ corrino_sardaukar_javelin:
 corrino_sardaukar_laser:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@anim: ^RA2Infantry
+	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir

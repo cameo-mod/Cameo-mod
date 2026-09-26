@@ -5,7 +5,7 @@ anchor: `SPEC(10000,55,6500,200,1,300)` (cost0 300, O0 590.00, P0 542.00, Q0 57.
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
 | `E3` | 300 | 364 | +21% ⚠ |
-| `asianalliance_asiantankkiller` | 300 | 361 | +20% ⚠ |
+| `asianalliance_tankkiller` | 300 | 361 | +20% ⚠ |
 | `atreides_rockettrooper` | 200 | 862 | +331% ❗ |
 | `cabal_ascended` | 900 | 2929 | +225% ❗ |
 | `cabal_rocketcyborg` | 650 | 1046 | +61% ❗ |

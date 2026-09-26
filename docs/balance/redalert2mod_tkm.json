@@ -72,7 +72,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -80,20 +80,15 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^Warhead_Cryo_Medium_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyCryoMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -107,7 +102,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -115,20 +110,15 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -142,7 +132,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -150,20 +140,15 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -267,11 +252,11 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
       "slot": "Armament@BOMBS",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^ViperMissilesLegacy"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissiles",
@@ -297,11 +282,9 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "ViperMissiles",
-       "^CryoMissileProjectile"
+       "ViperMissiles"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesCryo",
@@ -330,7 +313,6 @@
        "ViperMissiles"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesTwin",
@@ -341,56 +323,30 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "40000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6271",
       "reloaddelay": "50",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Flame_Light",
-       "^ViperMissilesLegacy"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1130,19 +1086,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7496",
       "reloaddelay": "41",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "tkmbunkmg",
@@ -1262,14 +1217,11 @@
       "reloaddelay": "5",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TKMAATurretCannon",
@@ -1345,21 +1297,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8683",
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "tkmturretcannon",
@@ -1513,7 +1461,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "11071",
       "reloaddelay": "36",
@@ -1522,7 +1470,6 @@
        "tkmtrenchcannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "tkmtrenchdepcannon",
@@ -1850,7 +1797,9 @@
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1878,12 +1827,11 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
       "versus_templates": [
-       "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Bang_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmjuggap",
@@ -1908,7 +1856,9 @@
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1937,12 +1887,11 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Bang_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmjuggap",
@@ -2058,7 +2007,9 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2118,7 +2069,9 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2129,7 +2082,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -2276,7 +2229,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -2443,14 +2396,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "22000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -2465,13 +2411,11 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "tkmfirerockets",
@@ -2569,14 +2513,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "22000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -2591,13 +2528,11 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@GARRISONEDNATO",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "tkmfirerockets",
@@ -2606,7 +2541,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -2737,7 +2672,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3257,7 +3192,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "204000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Tesla_Super",
@@ -3269,13 +3204,6 @@
         "spread": "1",
         "tag": "Tesla_Super_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "16",
@@ -3306,20 +3234,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperChaingun",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "16",
         "falloff": "100, 0",
         "spread": "1",
@@ -3327,25 +3241,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "64000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "16",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "64000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -3370,7 +3270,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "30000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Heavy",
@@ -3403,20 +3303,6 @@
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -3429,12 +3315,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3445,7 +3326,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "92000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Heavy",
@@ -3480,32 +3361,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "38000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperChaingun",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "8",
@@ -3535,7 +3395,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "30000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Heavy",
@@ -3568,20 +3428,6 @@
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -3594,12 +3440,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3611,7 +3452,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "92000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Heavy",
@@ -3646,32 +3487,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "38000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperChaingun",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "8",
@@ -4673,7 +4493,6 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
@@ -4842,14 +4661,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "22000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -4864,13 +4676,11 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "tkmfirerockets",
@@ -5076,21 +4886,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7238",
       "reloaddelay": "83",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "BigShieeTusk",
@@ -5109,7 +4916,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
@@ -5117,16 +4924,15 @@
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
        "^Warhead_MissileCryo_Heavy",
-       "SandmarineTusk",
-       "^CryoMissileProjectile"
+       "^Effect_Cryo",
+       "SandmarineTusk"
       ],
       "warheads": [
        "^Warhead_MissileCryo_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -5141,7 +4947,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
@@ -5149,48 +4955,26 @@
       "slot": "Armament@SECONDARYNATO",
       "versus_templates": [
        "^Warhead_MissileCryo_Heavy",
-       "SandmarineTusk",
-       "^CryoMissileProjectile"
+       "^Effect_Cryo",
+       "SandmarineTusk"
       ],
       "warheads": [
        "^Warhead_MissileCryo_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -5214,13 +4998,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
@@ -5229,57 +5006,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^SandmarineTuskLegacy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -5303,13 +5056,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
@@ -5318,46 +5064,29 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@SECONDARYBEREZKA",
       "versus_templates": [
-       "^SandmarineTuskLegacy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "88000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -5365,49 +5094,29 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Flame_Light",
-       "^SandmarineTuskLegacy"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "88000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -5415,28 +5124,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Flame_Light",
-       "^SandmarineTuskLegacy"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5449,21 +5152,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7238",
       "reloaddelay": "86",
       "slot": "Armament@Mortar",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium",
-       "^Effect_Explosion_Large_RA2"
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Medium"
       ],
       "weapon": "bigshieemortar",
@@ -5906,20 +5606,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5253",
       "reloaddelay": "10",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TKMQuadCannonAG",
@@ -5936,7 +5633,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7880",
       "reloaddelay": "10",
@@ -5945,7 +5642,6 @@
        "TKMQuadCannonAG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TKMQuadCannonAA",
@@ -6232,18 +5928,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^SandmarineTuskLegacy"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTusk",
@@ -6262,7 +5958,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
@@ -6270,16 +5966,15 @@
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
        "^Warhead_MissileCryo_Heavy",
-       "SandmarineTusk",
-       "^CryoMissileProjectile"
+       "^Effect_Cryo",
+       "SandmarineTusk"
       ],
       "warheads": [
        "^Warhead_MissileCryo_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -6294,7 +5989,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
@@ -6302,48 +5997,26 @@
       "slot": "Armament@SECONDARYNATO",
       "versus_templates": [
        "^Warhead_MissileCryo_Heavy",
-       "SandmarineTusk",
-       "^CryoMissileProjectile"
+       "^Effect_Cryo",
+       "SandmarineTusk"
       ],
       "warheads": [
        "^Warhead_MissileCryo_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -6367,13 +6040,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
@@ -6382,57 +6048,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^SandmarineTuskLegacy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -6456,13 +6098,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
@@ -6471,46 +6106,29 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@SECONDARYBEREZKA",
       "versus_templates": [
-       "^SandmarineTuskLegacy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "88000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -6518,49 +6136,29 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Flame_Light",
-       "^SandmarineTuskLegacy"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "88000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -6568,28 +6166,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Flame_Light",
-       "^SandmarineTuskLegacy"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flame_Light",
-       "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6602,21 +6194,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "135",
       "slot": "Armament@Mortar",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium",
-       "^Effect_Explosion_Large_RA2"
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Medium"
       ],
       "weapon": "sandmarinemortar",
@@ -6724,7 +6313,9 @@
       "reloaddelay": "5",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -6763,14 +6354,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "30000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
         "tag": "Flame_Medium",
@@ -6785,13 +6369,11 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@missilefire",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Flame_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Flame_Medium"
       ],
       "weapon": "tkmstrykerfirerockets",
@@ -6872,18 +6454,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 0",
-        "spread": "512",
-        "tag": "Railgun_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "80000",
+        "falloff": "100, 0",
+        "spread": "512",
+        "tag": "Railgun_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -6893,15 +6475,11 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "t30shell",
@@ -7030,7 +6608,6 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
@@ -7056,7 +6633,9 @@
       "reloaddelay": "10",
       "slot": "Armament@machinegun",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -7154,7 +6733,9 @@
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -7185,7 +6766,6 @@
        "tkmjuggap"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmtechnicalmgap",
@@ -7280,7 +6860,6 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
@@ -7483,7 +7062,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
@@ -7512,7 +7090,6 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^CryoMissileProjectile",
        "tkmkatyushalalauncherrockets"
       ],
       "warheads": [
@@ -7554,47 +7131,31 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "28000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "157",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Effect_Flame_Light",
        "tkmkatyushalalauncherrockets"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "tkmkatyushalalauncherrocketsfire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7678,21 +7239,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9237",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "tkmtrenchcannon",
@@ -7859,20 +7416,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5284",
       "reloaddelay": "8",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TKMZazaCannonAG",
@@ -7889,7 +7443,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7926",
       "reloaddelay": "8",
@@ -7898,7 +7452,6 @@
        "TKMZazaCannonAG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TKMZazaCannonAA",

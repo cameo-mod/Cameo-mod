@@ -1,8 +1,8 @@
 saudakar_bazooka:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
-		Filename: saudakar_bazooka.png
+		Filename: d2k_corrino_sprites|saudakar_bazooka.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -60,7 +60,7 @@ saudakar_bazooka:
 
 corrino_buggy:
 	Defaults:
-		Filename: corrino_buggy.png
+		Filename: d2k_corrino_sprites|corrino_buggy.png
 		Scale: 1
 	idle:
 		Start: 0
@@ -85,7 +85,7 @@ corrino_buggy:
 
 corrino_bmp:
 	Defaults:
-		Filename: corrino_bmp.png
+		Filename: d2k_corrino_sprites|corrino_bmp.png
 		Scale: 1
 	idle:
 		Start: 0
@@ -110,7 +110,7 @@ corrino_bmp:
 
 corrino_tank:
 	Defaults:
-		Filename: corrino_tank.png
+		Filename: d2k_corrino_sprites|corrino_tank.png
 		Scale: 1
 	idle:
 		Start: 0
@@ -133,7 +133,7 @@ corrino_tank:
 
 corrino_apc:
 	Defaults:
-		Filename: corrino_apc.png
+		Filename: d2k_corrino_sprites|corrino_apc.png
 		Scale: 1
 	idle:
 		Start: 0
@@ -143,13 +143,13 @@ corrino_apc:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: corrino_apc_build_icon.png
+		Filename: d2k_corrino_icons|corrino_apc_build_icon.png
 
 saudakar_berserker:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
-		Filename: saudakar_berserker.png
+		Filename: d2k_corrino_sprites|saudakar_berserker.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -206,10 +206,10 @@ saudakar_berserker:
 		Length: 1
 
 saudakar_sword:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
-		Filename: saudakar_sword.png
+		Filename: d2k_corrino_sprites|saudakar_sword.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -266,10 +266,10 @@ saudakar_sword:
 		Length: 1
 
 saudakar_javelin:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
-		Filename: saudakar_javelin.png
+		Filename: d2k_corrino_sprites|saudakar_javelin.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -326,10 +326,10 @@ saudakar_javelin:
 		Length: 1
 
 saudakar_laser:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
-		Filename: saudakar_laser.png
+		Filename: d2k_corrino_sprites|saudakar_laser.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -384,3 +384,5 @@ saudakar_laser:
 		Scale: 1
 		Start: 0
 		Length: 1
+
+# D2k-local sequence templates (renamed copies; Corrino infantry must not inherit RA2 pack defs).

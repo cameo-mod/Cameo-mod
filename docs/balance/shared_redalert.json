@@ -111,11 +111,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb"
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -251,7 +248,6 @@
        "ParaBomb"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ra1_allies_cargoplanebomber_parabomb",
@@ -275,7 +271,6 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Cryo",
       "versus_templates": [
-       "^ParaBombDelivery",
        "^Warhead_BlastCryo_Heavy",
        "^Effect_Cryo"
       ],
@@ -459,11 +454,10 @@
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
-       "^ParaBombLegacy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ParaBomb",
@@ -823,7 +817,7 @@
      "v": "5c0"
     }
    },
-   "ra1_allies_alliednavalyard": {
+   "ra1_allies_navalyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -854,8 +848,8 @@
     },
     "name": "Allied Naval Yard",
     "prerequisites": [
-     "~ra1_allies_alliedconstructionyard",
-     "ra1_allies_alliedorerefinery",
+     "~ra1_allies_constructionyard",
+     "ra1_allies_orerefinery",
      "~globalnaval"
     ],
     "queue": [
@@ -1164,178 +1158,6 @@
      "v": "71"
     }
    },
-   "ra1_allies_alliedrocketsoldier": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "11500",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_Flat",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "7500",
-      "reloaddelay": "50",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "RocketsRA"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium"
-      ],
-      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "11500",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_Flat",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "7500",
-      "reloaddelay": "50",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "RocketsRA"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium"
-      ],
-      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "11500",
-        "falloff": "100, 60, 27, 0",
-        "spread": "40",
-        "tag": "MissileCryo_Medium",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "7500",
-      "reloaddelay": "50",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Warhead_MissileCryo_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_MissileCryo_Medium"
-      ],
-      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "11500",
-        "falloff": "100, 60, 27, 0",
-        "spread": "40",
-        "tag": "MissileCryo_Medium",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "7500",
-      "reloaddelay": "50",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "slot": "Armament@UpgradeGARRISONED",
-      "versus_templates": [
-       "^Warhead_MissileCryo_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_MissileCryo_Medium"
-      ],
-      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Flak"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
-     "v": "480"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "AntiTankAntiAirInfantry",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
-     "v": "13000"
-    },
-    "name": "Allied Rocket Soldier",
-    "prerequisites": [
-     "~ra1_allies_alliedbarracks"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [],
-    "self_heal_step": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
-     "v": "13"
-    },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "6500"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
-     "v": "54"
-    }
-   },
    "ra1_allies_rifleinfantry": {
     "armaments": [
      {
@@ -1467,7 +1289,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -1488,7 +1310,7 @@
     },
     "name": "Rifle Infantry",
     "prerequisites": [
-     "~ra1_allies_alliedbarracks"
+     "~ra1_allies_barracks"
     ],
     "queue": [
      "Infantry",
@@ -1522,6 +1344,178 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "56"
+    }
+   },
+   "ra1_allies_rocketsoldier": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "11500",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7500",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "RocketsRA"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "11500",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7500",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "RocketsRA"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "11500",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7500",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "11500",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7500",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
+     "v": "480"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
+     "v": "13000"
+    },
+    "name": "Allied Rocket Soldier",
+    "prerequisites": [
+     "~ra1_allies_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "13"
+    },
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
+     "v": "54"
     }
    },
    "ra1_einstein": {
@@ -2055,21 +2049,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGun",
@@ -2078,41 +2069,39 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 81, 61, 38, 0",
-        "spread": "76",
-        "tag": "Waveforce_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 81, 61, 38, 0",
+        "spread": "76",
+        "tag": "Waveforce_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Waveforce_Heavy",
-       "^WaveforceBulletWarhead",
-       "JapanSpeedBoatGun",
-       "^WaveforceBulletProjectile"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Emp_Fx_RA2",
+       "JapanSpeedBoatGun"
       ],
       "warheads": [
-       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGunWaveforce",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2253,14 +2242,11 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
@@ -2286,14 +2272,11 @@
       "reloaddelay": "125",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
@@ -2460,7 +2443,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -2481,24 +2464,10 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "ZeroFighterBullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "500",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "ZeroFighterBullet_MediumFriendly",
+        "tag": "ZeroFighterBullet_MediumFriendlyFire",
         "type": "AreaDamage"
        }
       ],
@@ -2511,11 +2480,10 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile",
-       "^ZeroFighterWaveforceBulletCompatibility"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_MissileAP_Heavy",
+       "ZeroFighterChainGun"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2529,7 +2497,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -2550,24 +2518,10 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "ZeroFighterBullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "500",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "ZeroFighterBullet_MediumFriendly",
+        "tag": "ZeroFighterBullet_MediumFriendlyFire",
         "type": "AreaDamage"
        }
       ],
@@ -2580,11 +2534,10 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile",
-       "^ZeroFighterWaveforceBulletCompatibility"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_MissileAP_Heavy",
+       "ZeroFighterChainGun"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2836,8 +2789,8 @@
     },
     "name": "Cruiser",
     "prerequisites": [
-     "~ra1_allies_alliednavalyard",
-     "ra1_allies_alliedtechcenter"
+     "~ra1_allies_navalyard",
+     "ra1_allies_techcenter"
     ],
     "queue": [
      "Naval",
@@ -3067,8 +3020,8 @@
     },
     "name": "Destroyer",
     "prerequisites": [
-     "~ra1_allies_alliednavalyard",
-     "ra1_allies_alliedradardome"
+     "~ra1_allies_navalyard",
+     "ra1_allies_radardome"
     ],
     "queue": [
      "Naval",
@@ -3244,7 +3197,7 @@
     },
     "name": "Gunboat",
     "prerequisites": [
-     "~ra1_allies_alliednavalyard"
+     "~ra1_allies_navalyard"
     ],
     "queue": [
      "Naval",
@@ -3448,35 +3401,26 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
         "tag": "Concussion_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_submarine_torpedo",
@@ -3502,7 +3446,6 @@
       "versus_templates": [
        "^Warhead_MissileNuke_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_Nuclear_Super",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
@@ -3699,7 +3642,7 @@
    }
   },
   "vehicles": {
-   "ra1_allies_alliedapc": {
+   "ra1_allies_apc": {
     "armaments": [
      {
       "damage_warheads": [
@@ -3718,14 +3661,11 @@
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun",
@@ -3752,7 +3692,6 @@
        "ra1_allies_alliedapc_gun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun_AA",
@@ -3794,7 +3733,7 @@
     },
     "name": "Allied APC",
     "prerequisites": [
-     "~ra1_allies_alliedbarracks",
+     "~ra1_allies_barracks",
      "~!ra1_allies_promotion_phasetransport"
     ],
     "queue": [
@@ -3835,7 +3774,7 @@
      "v": "21"
     }
    },
-   "ra1_allies_alliedcybertank": {
+   "ra1_allies_cybertank": {
     "armaments": [
      {
       "damage_warheads": [

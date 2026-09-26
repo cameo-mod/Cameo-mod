@@ -83,7 +83,7 @@ RA2Flameguy:
 		DeathPaletteIsPlayerPalette: false
 	HitShape:
 
-OILB.RA2:
+ra2_oilderrick:
 	Inherits: ^RA2Building
 	Inherits@cashtrickler: ^CashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
@@ -106,27 +106,27 @@ OILB.RA2:
 		PlayerPalette: playerra2
 	-WithDeathAnimation:
 
-ra2gacnst.infiltrated:
+ra2gacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Allied Buildings Plans
 	Buildable:
 		Description:
 	RenderSprites:
-		Image: ra2_allies_alliedconstructionyard
+		Image: ra2_allies_constructionyard
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: ra2_allies_alliedconstructionyard
+		Prerequisite: ra2_allies_constructionyard
+
 dummy_dock:
 	Interactable:
 	Reservable:
-	GrantCondition:
-		Condition: dontmove
-	Mobile:
-		Speed: 1
-		Locomotor: wheeled
-		PauseOnCondition: dontmove
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		AllowInvalidPlacement: true
 	Exit@1:
 	RejectsOrders:
+	Targetable:
 
 ra2gayard:
 	Inherits: ^RA2Building
@@ -138,7 +138,7 @@ ra2gayard:
 	Tooltip:
 		Name: Allied Naval Yard
 	Buildable:
-		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery, ~globalnaval
+		Prerequisites: ~ra2_allies_constructionyard, ra2_allies_orerefinery, ~globalnaval
 		Description: Allied Naval Yard
 	Building:
 		Footprint: =+= +++ =+=
@@ -269,7 +269,7 @@ ra2_ywall:
 		PlayerPalette: playerra2
 		Type: ra2_ywall
 
-ra2nacnst.infiltrated:
+ra2nacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Soviet Buildings Plans
@@ -313,7 +313,7 @@ ra2nayard:
 #   Red Alert 2 Yuri Structures
 ##############################################
 
-yrnacnst.infiltrated:
+yrnacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Yuri Buildings Plans
@@ -826,7 +826,7 @@ ra2dlph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_dlph.description
 	Mobile:
@@ -1026,7 +1026,7 @@ ra2carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_ra2carrier.description
 	Selectable:
@@ -1845,9 +1845,9 @@ ra2caairp:
 			2: power_paratroopers.description
 			3: power_paratroopers.description
 		DropItems:
-			1: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind
-			2: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
-			3: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
+			1: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind
+			2: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2tany_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black
+			3: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2tany_black,ra2tany_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -2067,7 +2067,7 @@ ra2_ctoutp.husk:
 
 # Black Operation Soldiers
 
-ra2e2.black:
+ra2e2_black:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -3934,7 +3934,7 @@ upra2aegismissiles:
 		BuildPaletteOrder: 70
 		Queue: Research
 		Description: Allows Aegis Cruisers to target ground targets.
-		Prerequisites: ~ra2_allies_alliedbattlelab, ~ra2gayard, !upra2aegismissiles
+		Prerequisites: ~ra2_allies_battlelab, ~ra2gayard, !upra2aegismissiles
 	RenderSprites:
 		Image: ra2_allies_aegiscruiser
 	ProvidesPrerequisite:

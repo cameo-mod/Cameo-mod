@@ -26,7 +26,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^ts_forgotten_set12"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -54,7 +54,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^ts_forgotten_set15"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -281,7 +281,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^ts_forgotten_set12"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -309,7 +309,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium"
+       "^ts_forgotten_set15"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -407,7 +407,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_forgotten_set3"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -434,7 +434,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_forgotten_set3"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -535,7 +535,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_tiberiansun_tslocustbomb"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -564,7 +564,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^ts_forgotten_set3"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -1480,10 +1480,8 @@
        "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^ts_forgotten_ts70mmturchem"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -1622,10 +1620,8 @@
        "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^TSCannonEffect",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon"
+       "^ts_forgotten_tsscoopdualturchem"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -1800,7 +1796,7 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
+       "^ts_forgotten_set20"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2136,9 +2132,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Effect_Chem_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -2216,9 +2210,7 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Effect_Chem_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -2388,7 +2380,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3047,7 +3039,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -3179,7 +3171,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": false,
     "cost": {
@@ -3298,7 +3290,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": false,
     "cost": {
@@ -3859,7 +3851,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3998,7 +3990,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": false,
     "cost": {
@@ -4129,7 +4121,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": false,
     "cost": {
@@ -4246,7 +4238,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -4376,7 +4368,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": false,
     "cost": {
@@ -4512,7 +4504,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "^ts_forgotten_tschembazooka"
       ],
       "warheads": [
        "^Warhead_MissileChem_Light"
@@ -4541,7 +4533,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "^ts_forgotten_tschembazooka"
       ],
       "warheads": [
        "^Warhead_MissileChem_Light"
@@ -4552,7 +4544,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -4614,10 +4606,24 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
         "type": "AreaDamage"
        },
        {
@@ -4654,48 +4660,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4707,13 +4671,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^ts_forgotten_tsmutshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4725,10 +4683,24 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
         "type": "AreaDamage"
        },
        {
@@ -4765,48 +4737,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4818,13 +4748,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^ts_forgotten_tsmutshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4914,7 +4838,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "^ts_forgotten_tsfiendshard"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -4945,7 +4869,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "^ts_forgotten_tsfiendshard"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -4995,9 +4919,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsfiendshardup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5048,9 +4970,7 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsfiendshardup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5140,7 +5060,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "^ts_forgotten_tsfiendshard"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -5171,7 +5091,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "^ts_forgotten_tsfiendshard"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -5221,9 +5141,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsfiendshardup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5274,9 +5192,7 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsfiendshardup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5391,10 +5307,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon"
+       "^ts_forgotten_tsfiendshardblue"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -5452,10 +5365,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon"
+       "^ts_forgotten_tsfiendshardblue"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -5526,12 +5436,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyBomb"
+       "^ts_forgotten_tsfiendshardblueup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5603,12 +5508,7 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyBomb"
+       "^ts_forgotten_tsfiendshardblueup"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5773,9 +5673,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Effect_Chem_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -5824,9 +5722,7 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Effect_Chem_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -6059,13 +5955,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -6078,6 +5967,13 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6089,9 +5985,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumChemicalWeapon"
+       "^ts_forgotten_tschemboatcannon"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -6109,7 +6003,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6123,7 +6017,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      },
      {
@@ -6136,7 +6030,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6150,7 +6044,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -6242,7 +6136,7 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
+       "^ts_forgotten_set20"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -6272,7 +6166,7 @@
       "slot": "Armament@AG",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_forgotten_tsjuggerboat90mm"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -6302,7 +6196,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_CannonChem_Medium",
-       "^Effect_Chem_Medium"
+       "^ts_forgotten_tschemjuggerboat90mm"
       ],
       "warheads": [
        "^Warhead_CannonChem_Medium"
@@ -6321,7 +6215,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6335,7 +6229,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -6455,7 +6349,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_forgotten_set16"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -7337,8 +7231,7 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileChem_Heavy",
-       "^HeavyMissile",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsmammothtuskchem"
       ],
       "warheads": [
        "^Warhead_MissileChem_Heavy"
@@ -7483,8 +7376,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^ts_forgotten_mutflamerchem"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -7586,9 +7478,8 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^TSCannon",
-       "^Effect_Concussion_Medium"
+       "^ts_forgotten_ts120mmx"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7609,16 +7500,16 @@
        },
        {
         "damage": "15",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -7632,10 +7523,8 @@
       "versus_templates": [
        "^Warhead_CannonChem_Heavy",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^TSCannon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon"
+       "^ts_forgotten_tschem120mmx"
       ],
       "warheads": [
        "^Warhead_CannonChem_Heavy"
@@ -7665,7 +7554,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^ts_forgotten_tsmammothtusk"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -7782,8 +7671,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -7838,10 +7726,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_muthflamerchem"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -8049,21 +7934,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADEAA",
       "versus_templates": [
-       "TSAdatsMissile_AA"
+       "^ts_tiberiansun_tschemadatsmissile_aa"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
-      "weapon": "TSChemAdatsMissileAA",
-      "weapon_class_source": "template"
+      "warheads": [],
+      "weapon": "TSChemAdatsMissile_AA",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8187,7 +8069,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_forgotten_set16"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -8318,7 +8200,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_Concussion_Medium"
+       "^ts_forgotten_set16"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -8729,8 +8611,8 @@
       "versus_templates": [
        "^Warhead_CannonChem_Light",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^TSCannonEffect"
+       "^TSCannonEffect",
+       "^ts_forgotten_ts70mmchem"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -8884,10 +8766,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^Grenade",
-       "^MediumMissile"
+       "^ts_forgotten_tschemruinermissile"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -9035,7 +8914,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -9044,12 +8923,10 @@
        "^Warhead_Chemical_Light_Flat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light",
-       "TSSAPCMissiles"
+       "^ts_tiberiansun_tssapccoremissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Chemical_Light"
       ],
       "weapon": "TSSAPCCoreMissiles",
       "weapon_class_source": "template"
@@ -9186,8 +9063,8 @@
       "versus_templates": [
        "^Warhead_CannonChem_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^TSCannonEffect"
+       "^TSCannonEffect",
+       "^ts_forgotten_tsscoopdualchem"
       ],
       "warheads": [
        "^Warhead_CannonChem_Medium"
@@ -9306,17 +9183,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "7",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -9330,8 +9207,7 @@
       "versus_templates": [
        "^Warhead_CannonChem_Light",
        "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^ts_forgotten_set18"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -9485,10 +9361,7 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^ts_forgotten_tsbusmortarchem"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -9690,13 +9563,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20",
         "falloff": null,
         "spread": "75",
@@ -9708,6 +9574,13 @@
         "falloff": null,
         "spread": null,
         "tag": "MLightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -9721,8 +9594,7 @@
       "versus_templates": [
        "^Warhead_CannonChem_Light",
        "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^ts_forgotten_set18"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"

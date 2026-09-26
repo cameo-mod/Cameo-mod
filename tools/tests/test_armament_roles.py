@@ -563,7 +563,7 @@ class EvidenceFingerprintTests(unittest.TestCase):
     def test_structured_zero_match_rows_are_not_called_structureless(self):
         doc = json.loads((ROOT / "docs/balance/derived/armament_pairing.json")
                          .read_text(encoding="utf-8"))
-        for actor in ("asianalliance_asiancommando", "asianalliance_quasar"):
+        for actor in ("asianalliance_commando", "asianalliance_quasar"):
             self.assertNotIn(actor, doc["no_structured_reference"])
             self.assertIn(actor, doc["uncovered_armaments"])
 

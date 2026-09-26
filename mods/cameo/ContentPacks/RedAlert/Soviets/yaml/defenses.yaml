@@ -4,7 +4,7 @@ ra1_soviets_missilesilo:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	RenderSprites:
-		Image: ra1_soviets_sovietmissilesilo
+		Image: ra1_soviets_missilesilo
 		PlayerPalette: playerra
 	Tooltip:
 		Name: Soviet Missile Silo
@@ -287,7 +287,7 @@ ra1_soviets_samsite:
 		PauseOnCondition: lowpower || disabled
 	WithMuzzleOverlay:
 	RenderSprites:
-		Image: ra1_soviets_sovietsamsite
+		Image: ra1_soviets_samsite
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer

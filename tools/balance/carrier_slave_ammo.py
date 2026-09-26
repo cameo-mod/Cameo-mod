@@ -51,7 +51,7 @@ An AA-only engagement then drains only the AA share, which is correct — nothin
 ⚠ SUICIDE SLAVES ARE OUT OF SCOPE and the maintainer's two names are not the whole set. They
 named `tkmsuicidedrone` and `farasha_drone_ixian`, whose self-destruct is in the WEAPON (its
 name is the actor's own, or `*Explosion`) and shows up in no trait. Three more qualify under
-the same rule via `SpawnedExplodes` or a self-destruct weapon: `SCSCOURGEDRONE`, `kami.asian`,
+the same rule via `SpawnedExplodes` or a self-destruct weapon: `SCSCOURGEDRONE`, `asianalliance_kami`,
 `tsprobe`. A reload trait on a unit that dies when it attacks is dead weight, so all five are
 skipped and named in the report. Scope is **14 actors, not the 17** that 19-minus-2 implied.
 """

@@ -126,8 +126,8 @@ def main() -> int:
 		if weapon is None:
 			continue
 
-		damage_scaled = set()
-		fixed = set()
+		damage_scaled = {}   # state -> [damage Spread radii]
+		fixed = {}           # state -> [fixed feed Range radii]
 		for warhead in weapon.children:
 			problems.extend(
 				f"{weapon_name}: {problem}"
@@ -143,15 +143,24 @@ def main() -> int:
 						f"{weapon_name}: {warhead.key} does not feed {expected_state} through AreaDamagePercentage")
 
 			if warhead.value in {"AreaDamage", "AreaDamagePercentage"}:
-				damage_scaled.update(scaled_states(warhead))
+				for state in scaled_states(warhead):
+					damage_scaled.setdefault(state, []).append(int(warhead.get("Spread") or 0))
 			elif warhead.value == "ApplyPhysicalState":
 				state = warhead.get("PhysicalStateName")
 				if state:
-					fixed.add(state)
+					fixed.setdefault(state, []).append(int(warhead.get("Range") or 0))
 
-		for state in sorted(damage_scaled & fixed):
-			problems.append(
-				f"{weapon_name}: combines damage-scaled and fixed ApplyPhysicalState for {state}")
+		for state in sorted(set(damage_scaled) & set(fixed)):
+			# A fixed feed whose Range exceeds every damage Spread is the AREA channel —
+			# it marks the ring beyond the blast (the sonic _Debuff design: Range = 2x
+			# Spread), not a second application on the damaged target. Only a fixed feed
+			# at or inside the damage footprint is a real double-apply.
+			max_spread = max(damage_scaled[state], default=0)
+			for rng in fixed[state]:
+				if rng <= max_spread:
+					problems.append(
+						f"{weapon_name}: combines damage-scaled and fixed ApplyPhysicalState for {state}")
+					break
 
 	print("# Physical-state warhead audit\n")
 	print(f"Active concrete weapons checked: {sum(not name.startswith('^') for name in rs.weapons)}")

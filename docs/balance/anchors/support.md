@@ -133,7 +133,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | steelconsortium_defenderbot | redalert2mod_consortium | FORMULA | 210000 | 70 | 8000 | 3200 | live resolved YAML |
 | ordos_laboratorycrawler | d2k_ordos | FORMULA | 137500 | 105 | 6500 | 4500 | live resolved YAML |
 | cabal_scarabapc | tiberiansun_cabal | REF | 30000 | 75 | unavailable | 4775 | live resolved YAML |
-| asianalliance_asianmobileconstructionvehicle | redalert2mod_asianalliance | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
+| asianalliance_mobileconstructionvehicle | redalert2mod_asianalliance | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | atreides_mobileconstructionvehicle | d2k_atreides | FORMULA | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | cabal_mobileconstructionvehicle | tiberiansun_cabal | FORMULA | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | corrino_mobileconstructionvehicle | d2k_corrino | FORMULA | 300000 | 75 | unavailable | 5000 | live resolved YAML |
@@ -148,7 +148,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | protoss_mobilenexus | starcraft_protoss | FORMULA | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | ra1_allies_alliedmobileconstructionvehicle | redalert_allies | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | ra1_soviets_mobileconstructionvehicle | redalert_soviets | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
-| ra2_allies_alliedmobileconstructionvehicle | redalert2_allies | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
+| ra2_allies_mobileconstructionvehicle | redalert2_allies | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | ra2_soviets_mobileconstructionvehicle | redalert2_soviets | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | schwarzermond_naxismobileconstructionvehicle | redalert2mod_schwarzermond | REF | 300000 | 75 | unavailable | 5000 | live resolved YAML |
 | steelconsortium_consortiummobileconstructionvehicle | redalert2mod_consortium | REF | 150000 | 60 | unavailable | 5000 | live resolved YAML |
@@ -175,7 +175,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | ra2_allies_chronolegionnaire | CnC Reloaded/CLEG; RA2 Reborn/CLEG; Red Resurrection/CLEG; Romanov's Vengeance/cleg; Valiant Shades/cleg | 32962.2 (n=5) | 55.3425 (n=5) | 5326.04 (n=5) | 1470.19 (n=5) | 172.901 (n=5) | unapproved |
 | ra2_allies_engineer | Romanov's Vengeance/engineer | 12381.4 (n=1) | 51.3606 (n=1) | unavailable (n=0) | 727.543 (n=1) | unavailable (n=0) | unapproved |
 | ra2_allies_ra2spy | RA2 0XX/SPY; RA2 Reborn/SPY; Romanov's Vengeance/spy | 15604.8 (n=3) | 54.0502 (n=3) | unavailable (n=0) | 779.166 (n=3) | 11.3814 (n=2) | unapproved |
-| ra2_allies_alliedmobileconstructionvehicle | Mental Omega/AMCV; RA2 0XX/AMCV; RA2 Reborn/AMCV; Red Resurrection/AMCV; Romanov's Vengeance/amcv; Valiant Shades/amcv | 379593 (n=6) | 57.0346 (n=6) | unavailable (n=0) | 4345.16 (n=6) | unavailable (n=0) | unapproved |
+| ra2_allies_mobileconstructionvehicle | Mental Omega/AMCV; RA2 0XX/AMCV; RA2 Reborn/AMCV; Red Resurrection/AMCV; Romanov's Vengeance/amcv; Valiant Shades/amcv | 379593 (n=6) | 57.0346 (n=6) | unavailable (n=0) | 4345.16 (n=6) | unavailable (n=0) | unapproved |
 | ra2_soviets_crazyivan | CnC Reloaded/IVAN; Mental Omega/IVAN; RA2 0XX/IVAN; RA2 Reborn/IVAN; Red Resurrection/IVAN; Romanov's Vengeance/ivan; Valiant Shades/ivan | 27454.4 (n=7) | 65.8199 (n=7) | 2286.18 (n=5) | 632.107 (n=7) | 713.057 (n=5) | unapproved |
 | ra2_soviets_engineer | Romanov's Vengeance/engineer | 12381.4 (n=1) | 51.3606 (n=1) | unavailable (n=0) | 727.543 (n=1) | unavailable (n=0) | unapproved |
 | ra2_soviets_mobileconstructionvehicle | Mental Omega/SMCV; RA2 0XX/SMCV; RA2 Reborn/FMCV; Red Resurrection/SMCV; Romanov's Vengeance/smcv; Valiant Shades/smcv | 379593 (n=6) | 54.8066 (n=6) | unavailable (n=0) | 3780.63 (n=6) | unavailable (n=0) | unapproved |
@@ -184,7 +184,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | yuri_chaosdrone | Combined Arms/CDRN; RA2 0XX/CAOS; RA2 Reborn/CAOS; Red Resurrection/CAOS; Romanov's Vengeance/caos | 37461.5 (n=5) | 121.409 (n=5) | 2689.42 (n=3) | 1031.97 (n=5) | 3614.63 (n=3) | unapproved |
 | yuri_mobileconstructionvehicle | Combined Arms/AMCV; Mental Omega/PCV; RA2 0XX/PCV; RA2 Reborn/PCV; Red Resurrection/PCV; Romanov's Vengeance/pcv | 374038 (n=6) | 52.885 (n=6) | unavailable (n=0) | 4583.22 (n=6) | unavailable (n=0) | unapproved |
 | yuri_slaveminer | CnC Reloaded/SMIN; RA2 0XX/SMIN; RA2 Reborn/SMIN; Romanov's Vengeance/smin | 370366 (n=4) | 52.088 (n=4) | 5146.74 (n=4) | 2320.45 (n=4) | 562.828 (n=4) | unapproved |
-| asianalliance_asianmobileconstructionvehicle | Generals Alpha/vehicle.emparor_overlord; Generals Alpha/vehicle.overlord_tank; Generals Alpha/vehicle.battlemaster_tank; Generals Alpha/vehicle.nuclear_battlemaster_tank; Generals Alpha/vehicle.attack_outpost; Generals Alpha/vehicle.ecm_tank; Generals Alpha/vehicle.gatling_tank; Generals Alpha/vehicle.supply_truck; Generals Alpha/vehicle.dragon_tank; Generals Alpha/vehicle.prc_mcc; Generals Alpha/vehicle.assault_troop_crawler; Generals Alpha/vehicle.listening_outpost; Generals Alpha/vehicle.nuke_cannon; Generals Alpha/vehicle.troop_crawler; Generals Alpha/vehicle.inferno_cannon; Mental Omega/SMCV; RA2 Reborn/FMCV; Rise of the East/EAMCV | 269613 (n=4) | 51.4051 (n=4) | 3186.79 (n=1) | 2879.7 (n=4) | 701.177 (n=1) | unapproved |
+| asianalliance_mobileconstructionvehicle | Generals Alpha/vehicle.emparor_overlord; Generals Alpha/vehicle.overlord_tank; Generals Alpha/vehicle.battlemaster_tank; Generals Alpha/vehicle.nuclear_battlemaster_tank; Generals Alpha/vehicle.attack_outpost; Generals Alpha/vehicle.ecm_tank; Generals Alpha/vehicle.gatling_tank; Generals Alpha/vehicle.supply_truck; Generals Alpha/vehicle.dragon_tank; Generals Alpha/vehicle.prc_mcc; Generals Alpha/vehicle.assault_troop_crawler; Generals Alpha/vehicle.listening_outpost; Generals Alpha/vehicle.nuke_cannon; Generals Alpha/vehicle.troop_crawler; Generals Alpha/vehicle.inferno_cannon; Mental Omega/SMCV; RA2 Reborn/FMCV; Rise of the East/EAMCV | 269613 (n=4) | 51.4051 (n=4) | 3186.79 (n=1) | 2879.7 (n=4) | 701.177 (n=1) | unapproved |
 | steelconsortium_consortiummobileconstructionvehicle | Mental Omega/FMCV | 234525 (n=1) | 51.7896 (n=1) | unavailable (n=0) | 4793.34 (n=1) | unavailable (n=0) | unapproved |
 | futuretech_mobileconstructionvehicle | Mental Omega/AMCV | 331668 (n=1) | 57.9025 (n=1) | unavailable (n=0) | 4793.34 (n=1) | unavailable (n=0) | unapproved |
 | naxis_naximobileconstructionvehicle | RA2 0XX/AMCV | 406531 (n=1) | 66.4427 (n=1) | unavailable (n=0) | 3804 (n=1) | unavailable (n=0) | unapproved |

@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
@@ -30,6 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		};
 
 		public readonly string PersonalityPrefix = "personality-";
+
+		// Declares the runtime-granted `personality-*` conditions to the yaml linter (see
+		// BotCounterDemandController), so their consumers stop reading as "not granted".
+		[GrantedConditionReference]
+		public IEnumerable<string> LinterConditions => Conditions;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{

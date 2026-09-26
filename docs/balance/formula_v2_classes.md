@@ -62,7 +62,7 @@ Anchor spec: HP=20000, Speed=60, Range=5000, eff-DPS=60, Cost=100
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | `naxis_naxiriflesoldier` | naxis | 29000 | 52 | 5495 | 100 | 6000 | 1 | 75 | 70 | 0.75 | 42.0 | 100 | +0 | anchor-ish baseline |
 | `forgotten_mutantsoldier` | forgotten | 40000 | 59 | 5000 | 250 | 8000 | 1 | 50 | 100 | 0.75 | 120.0 | 247 | -3 | verifier |
-| `asianalliance_asianmilitia` | asianalliance | 24000 | 57 | 4570 | 110 | 6000 | 1 | 50 | 70 | 0.75 | 63.0 | 106 | -4 |  |
+| `asianalliance_militia` | asianalliance | 24000 | 57 | 4570 | 110 | 6000 | 1 | 50 | 70 | 0.75 | 63.0 | 106 | -4 |  |
 | `ixian_lightinfantry` | ixian | 35000 | 55 | 4530 | 150 | 4000 | 1 | 20 | 54 | 0.75 | 81.0 | 154 | +4 |  |
 | `ordos_lightinfantry` | ordos | 37000 | 51 | 4500 | 150 | 4000 | 1 | 20 | 55 | 0.75 | 82.5 | 153 | +3 |  |
 | `light_inf` | d2k_shared | 36000 | 54 | 4510 | 150 | 4000 | 1 | 20 | 53 | 0.75 | 79.5 | 153 | +3 |  |
@@ -101,7 +101,7 @@ Anchor spec: HP=20000, Speed=60, Range=5000, eff-DPS=60, Cost=100
 
 - `naxis_naxiriflesoldier`: HP 29000, Speed 52, Range 5495, weapon Damage 6000, ReloadDelay 75, Burst 1, FirepowerMultiplier@NAXISNAXIRIFLESOLDIER 70
 - `forgotten_mutantsoldier`: HP 40000, Speed 59, Range 5000, weapon Damage 8000, ReloadDelay 50, Burst 1, FirepowerMultiplier@FORGOTTENMUTANTSOLDIER 100
-- `asianalliance_asianmilitia`: HP 24000, Speed 57, Range 4570, weapon Damage 6000, ReloadDelay 50, Burst 1, FirepowerMultiplier@ASIANALLIANCEASIANMILITIA 70
+- `asianalliance_militia`: HP 24000, Speed 57, Range 4570, weapon Damage 6000, ReloadDelay 50, Burst 1, FirepowerMultiplier@ASIANALLIANCEASIANMILITIA 70
 - `ixian_lightinfantry`: HP 35000, Speed 55, Range 4530, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@IXIANLIGHTINFANTRY 54
 - `ordos_lightinfantry`: HP 37000, Speed 51, Range 4500, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@ORDOSLIGHTINFANTRY 55
 - `light_inf`: HP 36000, Speed 54, Range 4510, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@LIGHTINF 53
@@ -300,7 +300,7 @@ anchor: `naxis_tiger` (cost0 800, O0 946.79, P0 1093.58, Q0 1387.16)
 | `ordos_combatautoguntank` | 1500 | 916 | -39% ❗ |
 | `ordos_heavycombattank` | 950 | 1063 | +12% ⚠ |
 | `protoss_dragoon` | 1200 | 438 | -63% ❗ |
-| `ptnk.asian` | 2400 | 3485 | +45% ❗ |
+| `asianalliance_ptnk` | 2400 | 3485 | +45% ❗ |
 | `ra1_allies_alliedcybertank` | 1300 | 1381 | +6% |
 | `ra1_allies_alliedmediumtank` | 700 | 698 | -0% |
 | `ra1_allies_alliedtigerheavytank` | 1300 | 1381 | +6% |
@@ -334,7 +334,7 @@ anchor: `td_nod_flametank` (cost0 800, O0 1403.88, P0 1226.56, Q0 1450.49)
 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
-| `asianalliance_asianflametank` | 1300 | 882 | -32% ❗ |
+| `asianalliance_flametank` | 1300 | 882 | -32% ❗ |
 | `asianalliance_warturtle` | 5000 | 567 | -89% ❗ |
 | `cabal_beholder` | 2500 | 856 | -66% ❗ |
 | `cobra.steel` | 3600 | 2515 | -30% ❗ |

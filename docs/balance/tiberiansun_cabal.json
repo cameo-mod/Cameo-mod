@@ -11,7 +11,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -22,13 +22,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -41,7 +34,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set11"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -147,7 +140,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^ts_cabal_cabaloverkilldronelaser"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -256,7 +249,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^ts_cabal_cabaloverkillcharge"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -293,7 +286,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set9"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -375,7 +368,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "16600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -394,13 +387,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -412,7 +398,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^MediumMissile"
+       "^ts_cabal_cabalhunterkillerlasers"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -482,12 +468,7 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^ts_cabal_tshellfiretwin"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -564,7 +545,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "31600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -590,20 +571,6 @@
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "LegacyRailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -616,7 +583,7 @@
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile"
+       "^ts_cabal_cabalhunterkillerlasers_elite"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -686,12 +653,7 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^ts_cabal_tshellfiretwin"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -792,7 +754,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set7"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -834,16 +796,16 @@
        },
        {
         "damage": "5",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -866,9 +828,8 @@
        "^TeslaWeapon",
        "^HeavyMissile",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^Grenade",
-       "^ArrowWeapon"
+       "^ts_cabal_cabalmothershiprockets"
       ],
       "warheads": [
        "^Warhead_MissileTesla_Heavy"
@@ -951,7 +912,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -962,13 +923,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -981,7 +935,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set11"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1062,7 +1016,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1073,13 +1027,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -1092,7 +1039,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set11"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1192,7 +1139,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set9"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1226,7 +1173,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set9"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2006,14 +1953,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2040,11 +1987,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^ts_cabal_set13"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2171,7 +2116,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set7"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2325,20 +2270,17 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6487",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "TSTurretLaser"
+       "^ts_tiberiansun_tscabalplasmafire"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Laser_Heavy"
-      ],
+      "warheads": [],
       "weapon": "TSCABALPlasmaFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2514,7 +2456,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "36000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
@@ -2561,13 +2503,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_HeavyGroundBonus",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2578,14 +2513,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^ts_cabal_cabalascendedrockets"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2599,7 +2528,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "36000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
@@ -2646,13 +2575,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_HeavyGroundBonus",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2663,14 +2585,8 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^ts_cabal_cabalascendedrockets"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2795,7 +2711,8 @@
        "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^ts_cabal_set1"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -2828,13 +2745,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -2853,6 +2763,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2866,10 +2783,10 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_cabal_set4"
       ],
       "warheads": [],
       "weapon": "CabalCommandoPlasmaNeutron",
@@ -2918,7 +2835,8 @@
        "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^ts_cabal_set1"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -2952,13 +2870,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -2977,6 +2888,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2990,10 +2908,10 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_cabal_set4"
       ],
       "warheads": [],
       "weapon": "CabalCommandoPlasmaNeutron",
@@ -3121,7 +3039,8 @@
        "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^ts_cabal_set1"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -3154,13 +3073,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3179,6 +3091,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3192,10 +3111,10 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_cabal_set4"
       ],
       "warheads": [],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
@@ -3244,7 +3163,8 @@
        "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^ts_cabal_set1"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -3278,13 +3198,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3303,6 +3216,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3316,10 +3236,10 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_cabal_set4"
       ],
       "warheads": [],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
@@ -3426,7 +3346,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -3457,7 +3377,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -3564,7 +3484,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -3597,7 +3517,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -3713,8 +3633,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonChem_Light",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^ts_cabal_cabaldissolverspray"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -3816,7 +3735,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3844,7 +3763,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^ts_cabal_set2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4093,14 +4012,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4127,11 +4046,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^ts_cabal_set13"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4147,9 +4064,7 @@
       "pricing": false,
       "range": "1536",
       "slot": "Armament@Suicide",
-      "versus_templates": [
-       "DemoTruckTargeting"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SuicideBomberTargeting",
       "weapon_class_source": "none"
@@ -4182,14 +4097,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4216,11 +4131,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^ts_cabal_set13"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4328,18 +4241,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4352,7 +4258,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
+       "^ts_cabal_tscabaldisable_emp"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -4652,7 +4558,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4686,12 +4592,12 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "CabalLaserBoatLaserAA",
+      "weapon": "CabalLaserBoatLaser_AA",
       "weapon_class_source": "template"
      },
      {
@@ -4705,7 +4611,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -4719,7 +4625,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -4898,7 +4804,8 @@
        "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^ts_cabal_set1"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -5009,18 +4916,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -5033,7 +4933,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
+       "^ts_cabal_tscabaldisable_emp"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -5836,10 +5736,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon"
+       "^ts_cabal_cabalartillerywalkershell"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -5855,6 +5752,20 @@
         "spread": "400",
         "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "21",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "21",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "21",
@@ -5893,23 +5804,9 @@
        },
        {
         "damage": "21",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "21",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "21",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -5923,14 +5820,9 @@
       "slot": "Armament@Upgraded",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^MediumChemicalWeapon",
        "^TeslaChargedWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^ts_cabal_cabalartillerywalkershellupgraded"
       ],
       "warheads": [],
       "weapon": "CabalArtilleryWalkerShellUpgraded",
@@ -6033,7 +5925,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -6067,7 +5959,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -6157,13 +6049,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -6181,6 +6066,13 @@
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -6191,10 +6083,10 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
-       "^HeavyCannon",
        "^TeslaWeapon",
        "^RailgunWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^ts_cabal_cabalbeholderlaser"
       ],
       "warheads": [],
       "weapon": "CabalBeholderLaser",
@@ -6293,7 +6185,7 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^ts_cabal_cabalberserkerblades"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -6453,7 +6345,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -6487,7 +6379,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -6712,7 +6604,9 @@
       "range": "5785",
       "reloaddelay": "250",
       "slot": "Armament@TRAPGROUND",
-      "versus_templates": [],
+      "versus_templates": [
+       "^ts_cabal_set6"
+      ],
       "warheads": [],
       "weapon": "CabalReaperTrapGround",
       "weapon_class_source": "none"
@@ -6726,7 +6620,9 @@
       "range": "8680",
       "reloaddelay": "250",
       "slot": "Armament@TRAPAIR",
-      "versus_templates": [],
+      "versus_templates": [
+       "^ts_cabal_cabalreapertrapair"
+      ],
       "warheads": [],
       "weapon": "CabalReaperTrapAir",
       "weapon_class_source": "none"
@@ -6859,7 +6755,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
-       "^CabalMissileEffect"
+       "^ts_cabal_set5"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
@@ -6927,7 +6823,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
-       "^CabalMissileEffect"
+       "^ts_cabal_set5"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
@@ -6947,7 +6843,9 @@
       "range": "6085",
       "reloaddelay": "250",
       "slot": "Armament@TRAP",
-      "versus_templates": [],
+      "versus_templates": [
+       "^ts_cabal_set6"
+      ],
       "warheads": [],
       "weapon": "CabalHeavyReaperTrap",
       "weapon_class_source": "none"
@@ -7049,7 +6947,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7156,7 +7054,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_cabalmanticorelaser"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7223,7 +7121,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "CabalManticoreMissilesAA",
+      "weapon": "CabalManticoreMissiles_AA",
       "weapon_class_source": "allowlist_mix"
      }
     ],
@@ -7325,7 +7223,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^ts_cabal_set8"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -7496,7 +7394,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
+       "^ts_cabal_set10"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -7524,7 +7422,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
+       "^ts_cabal_cabalravagerplasmaneutron"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -7708,7 +7606,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^ts_cabal_set0"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7836,7 +7734,7 @@
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^ts_tiberiansun_ts120mm_bluenuke"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8019,7 +7917,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "^ts_cabal_set8"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",

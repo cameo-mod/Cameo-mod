@@ -44,6 +44,9 @@ class SonicFamilyGenerationTest(unittest.TestCase):
             with self.subTest(family=name):
                 parents, states, levels = gen.BLEND_FAMILIES[name]
                 self.assertEqual(parents, [delivery, 'Sonic'])
+                # W7: the Sonic share feeds the Resonance meter at the per-parent
+                # average (1/2 parents -> 50), replacing the retired _Debuff mark.
+                self.assertEqual(states, {'Resonance': 50})
                 self.assertEqual(gen.PHYSICS_RANK[name],
                                  (gen.PHYSICS_RANK[delivery] + gen.PHYSICS_RANK['Sonic']) / 2)
                 spreads, falloffs = gen.shape_for(name)
@@ -56,12 +59,11 @@ class SonicFamilyGenerationTest(unittest.TestCase):
                     main = node.child('Warhead@' + name + '_' + level)
                     status = node.child('Warhead@' + name + '_' + level + '_Debuff')
                     self.assertIsNotNone(main)
-                    self.assertIsNotNone(status)
-                    self.assertEqual(status.get('Condition'), 'SonicDebuff')
-                    self.assertEqual(status.get('Duration'), '50')
-                    self.assertEqual(int(status.get('Range')), int(main.get('Spread')) * 2)
+                    self.assertIsNone(status)
+                    self.assertIsNone(next((c for c in node.children
+                                            if c.value == 'GrantExternalCondition'), None))
                     self.assertEqual(main.get('ValidTargets'), vt)
-                    self.assertIsNone(main.child('PhysicalStates'))
+                    self.assertEqual(main.child('PhysicalStates').get('Resonance'), '50')
                     direction = gen.WEAPONS[delivery][1]
                     none, heavy = (int(main.get('Versus', armor)) for armor in ('None', 'Superheavy'))
                     self.assertGreater(heavy, none) if direction == 'heavy' else self.assertGreater(none, heavy)
@@ -70,15 +72,29 @@ class SonicFamilyGenerationTest(unittest.TestCase):
         parents, states, levels = gen.BLEND_FAMILIES['BlastSonic']
         self.assertEqual(parents, ['Demolition', 'Concussion', 'Sonic'])
         self.assertEqual(levels, gen.L3)
-        self.assertIsNone(states)
+        self.assertEqual(states, {'Resonance': 33})
         spreads, falloffs = gen.shape_for('BlastSonic')
         nodes = load_text(gen.family('BlastSonic', None, gen.valid_targets(False), levels,
-            versus_override=gen.blend_versus(parents), spreads=spreads, falloffs=falloffs))
+            versus_override=gen.blend_versus(parents), physical_states=states,
+            spreads=spreads, falloffs=falloffs))
         for node in nodes:
             main = next(c for c in node.children if c.value == 'AreaDamage')
-            status = next(c for c in node.children if c.value == 'GrantExternalCondition')
+            self.assertIsNone(next((c for c in node.children
+                                    if c.value == 'GrantExternalCondition'), None))
             self.assertEqual(main.get('ValidTargets'), 'Ground, Water')
-            self.assertEqual(status.get('Condition'), 'SonicDebuff')
+            self.assertEqual(main.child('PhysicalStates').get('Resonance'), '33')
+
+    def test_pure_sonic_feeds_resonance_at_full_scale(self):
+        self.assertEqual(gen.FAMILY_PHYSICAL_STATE['Sonic'], {'Resonance': 100})
+        self.assertNotIn('Sonic', gen.FAMILY_CONDITION)
+        vt = gen.valid_targets(gen.WEAPONS['Sonic'][2])
+        nodes = load_text(gen.family('Sonic', None, vt, gen.L3,
+                                     mode=gen.SPECIAL_MODE['FLAT']))
+        for node in nodes:
+            main = next(c for c in node.children if c.value == 'AreaDamage')
+            self.assertIsNone(next((c for c in node.children
+                                    if c.value == 'GrantExternalCondition'), None))
+            self.assertEqual(main.child('PhysicalStates').get('Resonance'), '100')
 
 
 if __name__ == '__main__':

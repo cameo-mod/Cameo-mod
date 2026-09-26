@@ -1,4 +1,4 @@
-upgrade_conyard.harkonnen:
+harkonnen_upgrade_conyard:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Construction Yard Upgrade
@@ -11,9 +11,9 @@ upgrade_conyard.harkonnen:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: conyard.harkonnen
+		Image: harkonnen_conyard
 
-upgrade_barracks.harkonnen:
+harkonnen_upgrade_barracks:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barracks Upgrade
@@ -26,9 +26,9 @@ upgrade_barracks.harkonnen:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: barracks.harkonnen
+		Image: harkonnen_barracks
 
-upgrade_light.harkonnen:
+harkonnen_upgrade_light:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Factory Upgrade
@@ -41,9 +41,9 @@ upgrade_light.harkonnen:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: light.harkonnen
+		Image: harkonnen_light
 
-upgrade_heavy.harkonnen:
+harkonnen_upgrade_heavy:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Factory Upgrade
@@ -56,9 +56,9 @@ upgrade_heavy.harkonnen:
 	Valued:
 		Cost: 400
 	RenderSprites:
-		Image: heavy.harkonnen
+		Image: harkonnen_heavy
 
-upgrade_radar.harkonnen:
+harkonnen_upgrade_radar:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radar Upgrade
@@ -71,4 +71,4 @@ upgrade_radar.harkonnen:
 	Valued:
 		Cost: 300
 	RenderSprites:
-		Image: outpost.harkonnen
+		Image: harkonnen_outpost

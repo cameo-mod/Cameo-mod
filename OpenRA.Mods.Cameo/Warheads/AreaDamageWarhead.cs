@@ -36,6 +36,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 		Average,
 		Lowest,
 		Highest,
+		Geometric,
 	}
 
 	[Desc("How a warhead's CONTINUOUS-HEAVINESS scalar (Heaviness) parameterises its armor",
@@ -65,9 +66,12 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"dual-armor cyborgs and droids) — over a single armor every rule returns that armor,",
 			"which is why a SHIELDED unit is unaffected: its body armor is gated off while the",
 			"shield holds, so only the Shield row is ever read (W21 R5).",
-			"Average: the Cameo law. 40% and 30% -> 35%, so the two bodies meet in the middle —",
-			"  anti-infantry fire is never useless against a dual-armor cyborg and AP fire is",
-			"  never oppressive against one.",
+			"Geometric: the Cameo law (maintainer 2026-09-25). The n-th root of the product, so the",
+			"  two bodies meet in the middle IN RATIO TERMS — Versus rows are multipliers, and the",
+			"  geometric mean is their centre (the same reason R16 pins every warhead to geomean 100).",
+			"  88% and 10% -> 30% (Average gave 49%: the more vulnerable body dominated); 200% and",
+			"  50% -> 100% (Average gave 125%). Integer-only arithmetic, so it is deterministic.",
+			"Average: the previous law (W21 R5, 2026-08-15 .. 2026-09-25). 40% and 30% -> 35%.",
 			"Multiply: the ENGINE's rule, and the reason this field exists. 40% x 30% = 12%, so a",
 			"  second armor does not average a weapon's profile, it SQUARES it — a 17:1 weapon",
 			"  becomes ~289:1 against these units. Never use it for CLASS armors.",
@@ -75,7 +79,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"⚠ Only warheads that ROUTE THROUGH AreaDamage obey this. The ~878 legacy warhead",
 			"nodes still declaring inline Versus on SpreadDamage keep multiplying until they are",
 			"retired onto ^Warhead_* templates.")]
-		public readonly ArmorCombination MultiArmorCombination = ArmorCombination.Average;
+		public readonly ArmorCombination MultiArmorCombination = ArmorCombination.Geometric;
 
 		[Desc("Range between falloff steps.")]
 		public readonly WDist Spread = new(43);
@@ -499,6 +503,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 				? 100
 				: MultiArmorCombination switch
 				{
+					ArmorCombination.Geometric => GeometricMean(armor),
 					ArmorCombination.Average => armor.Sum() / armor.Count,
 					ArmorCombination.Lowest => armor.Min(),
 					ArmorCombination.Highest => armor.Max(),
@@ -524,6 +529,64 @@ namespace OpenRA.Mods.Cameo.Warheads
 			return plating.Count > 0
 				? classRow * plating.Min() / 100
 				: classRow;
+		}
+
+		/// <summary>
+		/// The n-th root of the product of `values`, rounded to the NEAREST integer, in integer
+		/// arithmetic only — this runs inside the synced damage path, where floating point could
+		/// differ between machines and desync a game. Versus rows are small (0..~1000) and an actor
+		/// wears at most a handful of class armors, so the product fits a long; if it ever would
+		/// not, the arithmetic average is the conservative fallback.
+		/// </summary>
+		static int GeometricMean(List<int> values)
+		{
+			var n = values.Count;
+			if (n == 1)
+				return values[0];
+
+			long product = 1;
+			var max = 0;
+			foreach (var v in values)
+			{
+				if (v <= 0)
+					return 0; // a zero row is immunity; the geometric mean of anything with 0 is 0
+				if (product > long.MaxValue / v)
+					return values.Sum() / n;
+				product *= v;
+				max = Math.Max(max, v);
+			}
+
+			// Largest r with r^n <= product, by bisection over [0, max].
+			long lo = 0, hi = max;
+			while (lo < hi)
+			{
+				var mid = (lo + hi + 1) / 2;
+				if (Pow(mid, n) <= product)
+					lo = mid;
+				else
+					hi = mid - 1;
+			}
+
+			// Round to NEAREST: the root is >= r + 1/2 exactly when (2r+1)^n <= 2^n x product.
+			// (Comparing r^n and (r+1)^n distances instead rounds wrong near x.5, because the power
+			// curve is convex; this form is exact in integers.)
+			var twoN = Pow(2, n);
+			if (product > long.MaxValue / twoN)
+				return (int)lo;
+			return (int)(Pow(2 * lo + 1, n) <= twoN * product ? lo + 1 : lo);
+		}
+
+		static long Pow(long b, int e)
+		{
+			long r = 1;
+			for (var i = 0; i < e; i++)
+			{
+				if (r > long.MaxValue / Math.Max(b, 1))
+					return long.MaxValue;
+				r *= b;
+			}
+
+			return r;
 		}
 
 		protected override void DoImpact(WPos pos, Actor firedBy, WarheadArgs args)

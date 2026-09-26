@@ -1,7 +1,7 @@
 atreides_lightinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -42,7 +42,7 @@ atreides_lightinfantry:
 atreides_rockettrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^RocketTrooperInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -95,7 +95,7 @@ atreides_fremen:
 		Factions: atreides
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~atreides_barracks, ~hightech.atreides, upgrade_barracks, ~atreides_promotion_fremen
+		Prerequisites: ~atreides_barracks, ~atreides_hightech, upgrade_barracks, ~atreides_promotion_fremen
 		Icon: phantomicon
 		IconPalette: windows256
 		Description: actor_atreides_fremen.description

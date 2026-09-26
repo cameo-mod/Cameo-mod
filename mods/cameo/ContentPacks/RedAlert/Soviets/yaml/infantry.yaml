@@ -74,7 +74,7 @@ ra1_soviets_dog:
 		RequiresCondition: run
 	IgnoresDisguise:
 	RenderSprites:
-		Image: ra1_soviets_actordogname
+		Image: ra1_soviets_dog
 		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: DogVoice
@@ -278,7 +278,7 @@ ra1_soviets_grenadier:
 	Voiced:
 		VoiceSet: RussianVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietgrenadier
+		Image: ra1_soviets_grenadier
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
@@ -347,7 +347,7 @@ ra1_soviets_mortarsoldier:
 	Voiced:
 		VoiceSet: RussianVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietmortarsoldier
+		Image: ra1_soviets_mortarsoldier
 		PlayerPalette: playerra
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
@@ -548,7 +548,7 @@ ra1_soviets_flamethrower:
 		Weapon: ra1_soviets_flamethrower_fireballgunthermobaricexplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	RenderSprites:
-		Image: ra1_soviets_sovietflamethrower
+		Image: ra1_soviets_flamethrower
 		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: RussianVoice

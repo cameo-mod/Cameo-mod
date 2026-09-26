@@ -54,7 +54,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | forgotten_closhtank | tiberiansun_forgotten | FORMULA | 120000 | 80 | 2386 | 1000 | live resolved YAML |
 | ts_nod_devilstongue | tiberiansun_nod | REF | 100000 | 70 | 4250 | 1150 | live resolved YAML |
 | tkm_battlebus | redalert2mod_tkm | FORMULA | 50000 | 100 | 4831 | 1250 | live resolved YAML |
-| asianalliance_asianflametank | redalert2mod_asianalliance | REF | 85000 | 85 | 3700 | 1300 | live resolved YAML |
+| asianalliance_flametank | redalert2mod_asianalliance | REF | 85000 | 85 | 3700 | 1300 | live resolved YAML |
 | forgotten_flametank | tiberiansun_forgotten | REF | 200000 | 80 | 2425 | 1300 | live resolved YAML |
 | ra1_soviets_gorynychtank | redalert_soviets | REF | 150000 | 70 | 2390 | 1300 | live resolved YAML |
 | td_nod_flametankmkii | tiberiandawn_nod | FORMULA | 200000 | 75 | 2534 | 1300 | live resolved YAML |
@@ -93,7 +93,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 |---|---|--:|--:|--:|--:|--:|---|
 | ra2_allies_battlefortress | CnC Reloaded/BFRT; Mental Omega/BFRT; RA2 0XX/BFRT; RA2 Reborn/BFRT; Red Resurrection/BFRT; Romanov's Vengeance/bfrt; Valiant Shades/bfrt | 184860 (n=7) | 58.4608 (n=7) | 5478.61 (n=5) | 2713.29 (n=7) | 945.508 (n=5) | unapproved |
 | ra2_allies_battlefortress_chrono | Mental Omega/CHRTNK; RA2 Reborn/CHRTNK; Red Resurrection/CTNK; Romanov's Vengeance/ctnk; Valiant Shades/chrp | 130497 (n=5) | 58.4604 (n=5) | 6832.38 (n=4) | 3326.21 (n=5) | 564.056 (n=4) | unapproved |
-| asianalliance_asianflametank | RA2 Reborn/FLTNK; Rise of the East/FTNK | 80297.1 (n=2) | 77.0233 (n=2) | 4100.88 (n=1) | 1140.24 (n=2) | 963.372 (n=1) | unapproved |
+| asianalliance_flametank | RA2 Reborn/FLTNK; Rise of the East/FTNK | 80297.1 (n=2) | 77.0233 (n=2) | 4100.88 (n=1) | 1140.24 (n=2) | 963.372 (n=1) | unapproved |
 | steelconsortium_megalodon | Mental Omega/MEGA | 275231 (n=1) | 77.7487 (n=1) | 1943.24 (n=1) | 3439.72 (n=1) | 593.212 (n=1) | unapproved |
 | naxis_oldtank | RA2 0XX/ROLAND | 63249 (n=1) | 60.5857 (n=1) | 11085.4 (n=1) | 1520.28 (n=1) | 183.439 (n=1) | unapproved |
 | latinsyndicate_carteltruck | Mental Omega/HTK; RA2 Reborn/HTK | 69268.4 (n=2) | 83.1349 (n=2) | 5303.1 (n=2) | 1267.01 (n=2) | 584.333 (n=2) | unapproved |

@@ -58,12 +58,12 @@ export PYTHONIOENCODING=utf-8
 # its counts are moving targets while W24 collapses and the fold are in flight.
 # Wire it in once that work settles; see docs/HANDOFF.md and the audit header.
 for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai ai_personalities sequences \
-         metadata outliers orphans assets fluent power_budget stat_formulas \
+         metadata outliers orphans orphan_cancels local_effect_fields assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
          basebuilder_crates buildable_order display_text rename_safety naming_damage \
          map_actors \
          missing_elite elite_gating rank_decoration \
-         dune_rank_decoration effect_warhead_names weapon_suffixes \
+         dune_rank_decoration effect_warhead_names effect_pairings weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
          duplicate_keys split_definitions weapon_shape shrapnel_chains missile_role_family release_drift turn_speed original_coverage stat_uniqueness \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
@@ -94,7 +94,7 @@ done
 # ⚠ Each script still exits 1 on its own findings, so CI may gate on one deliberately.
 # ⚠ tools/audit/run_all.py parses BOTH loops out of this file — keep the `for a in ...; do`
 #   shape so the two runners cannot drift apart.
-for a in code_duplication test_coverage recent_changes error_handling security; do
+for a in code_duplication test_coverage recent_changes error_handling security drain_status; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

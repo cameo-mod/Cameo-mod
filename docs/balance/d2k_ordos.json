@@ -4,135 +4,6 @@
  "schema": 2,
  "sections": {
   "aircraft": {
-   "carryall_reinforce.ordos": {
-    "armaments": [
-     {
-      "burst": "4",
-      "burstdelays": "1",
-      "damage_warheads": [
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "4000",
-      "reloaddelay": "20",
-      "requires": "!ordos_upgrade_lasercartridges",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Medium"
-      ],
-      "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "1",
-      "damage_warheads": [
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "4000",
-      "reloaddelay": "20",
-      "requires": "ordos_upgrade_lasercartridges",
-      "slot": "Armament@PRIMARYLaser",
-      "versus_templates": [
-       "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "d2kCarryallChainGun"
-      ],
-      "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Medium"
-      ],
-      "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
-     "v": "Bomber"
-    },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Buildable.BuildLimit",
-     "v": "10"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
-     "v": "5000"
-    },
-    "design": {
-     "category": "Aircraft",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Aircraft",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
-     "v": "500000"
-    },
-    "name": "Advanced Carryall",
-    "resolved_firepower_modifiers": [],
-    "self_heal_step": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth.Step",
-     "v": "50"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5c0"
-    },
-    "speed_air": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
-     "v": "156"
-    },
-    "turn_speed_air": {
-     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
-     "v": "24"
-    }
-   },
    "ordos_advancedcarryall": {
     "armaments": [
      {
@@ -157,7 +28,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_ordos_bullet_medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -195,7 +66,7 @@
        "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
+       "^d2k_ordos_laser_heavy",
        "d2kCarryallChainGun"
       ],
       "warheads": [
@@ -227,7 +98,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
     },
-    "name": "Advanced Carryall",
+    "name": "actor_ordos_advancedcarryall.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -272,7 +143,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "22000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy_Flat",
@@ -312,13 +183,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "0c768",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -330,12 +194,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyBomb",
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_ordos_ordos_airmine"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -369,7 +229,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Air Mine",
+    "name": "actor_ordos_airmine.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -419,17 +279,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -443,8 +303,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "d2k_grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^d2k_ordos_laboratory_bioball"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
@@ -583,7 +442,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Banshee",
+    "name": "actor_ordos_banshee.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_ixresearchcenter",
@@ -631,6 +490,134 @@
      "v": "33"
     }
    },
+   "ordos_carryall_reinforce": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "20",
+      "requires": "!ordos_upgrade_lasercartridges",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^d2k_ordos_bullet_medium"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "d2kCarryallChainGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "20",
+      "requires": "ordos_upgrade_lasercartridges",
+      "slot": "Armament@PRIMARYLaser",
+      "versus_templates": [
+       "^Warhead_Laser_Heavy_Flat",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^d2k_ordos_laser_heavy",
+       "d2kCarryallChainGun"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "d2kCarryallChainGun_upgrade",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "10"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Advanced Carryall",
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth.Step",
+     "v": "50"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    }
+   },
    "ordos_eyeinthesky": {
     "armaments": [
      {
@@ -641,20 +628,6 @@
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10",
@@ -676,6 +649,20 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -686,11 +673,10 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Grenade",
-       "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^HeavyBomb",
+       "^d2k_ordos_eye_bomberguy_2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -724,7 +710,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Eye In The Sky",
+    "name": "actor_ordos_eyeinthesky.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_ixresearchcenter"
@@ -795,7 +781,7 @@
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_ordos_bullet_medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -833,7 +819,7 @@
        "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
+       "^d2k_ordos_laser_heavy",
        "d2kChainGun"
       ],
       "warheads": [
@@ -869,7 +855,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Swarmer Drone",
+    "name": "actor_ordos_swarmerdrone.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -931,20 +917,6 @@
        },
        {
         "damage": "5",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
@@ -955,6 +927,20 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -1008,7 +994,7 @@
      "src": "inherited",
      "v": "200"
     },
-    "name": "Wraith",
+    "name": "actor_ordos_wraith.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_palace",
@@ -1114,8 +1100,8 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light_D2K_155mm",
-       "^Effect_Demolition_Heavy_D2K_155mm",
-       "^D2K_Cannon"
+       "^D2K_Cannon",
+       "^d2k_ordos_d2k_155mm_turret"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -1190,28 +1176,14 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7700",
@@ -1222,7 +1194,7 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Bullet_Medium",
-       "^Effect_CannonHE_Heavy"
+       "^d2k_shared_ordos_autogunturret"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -1366,7 +1338,7 @@
       "versus_templates": [
        "^Warhead_Toxic_AntiInfantryDefense",
        "^Projectile_Shell_Light",
-       "^Effect_Chem_Light"
+       "^d2k_ordos_ordos_chemturret"
       ],
       "warheads": [
        "^Warhead_Toxic_AntiInfantryDefense",
@@ -1400,7 +1372,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Gas Turret",
+    "name": "actor_ordos_chemturret.name",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_barracks"
@@ -1676,7 +1648,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
+       "^d2k_ordos_laser_heavy_2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1709,7 +1681,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Laser Turret",
+    "name": "actor_ordos_laserturret.name",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_ixresearchcenter"
@@ -2295,7 +2267,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -2314,7 +2286,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "15000"
     },
-    "name": "Anti Air Trooper",
+    "name": "actor_ordos_antiairtrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_upgrade_antiairtrooper"
@@ -2432,7 +2404,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "30000"
     },
-    "name": "Ordos Chemical Trooper",
+    "name": "actor_ordos_chemicaltrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_chemicaltrooper"
@@ -2550,7 +2522,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "75000"
     },
-    "name": "Contaminator",
+    "name": "actor_ordos_contaminator.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_contaminator"
@@ -2602,16 +2574,23 @@
        },
        {
         "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "180000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2641,13 +2620,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "180000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2659,15 +2631,10 @@
       "slot": "Armament",
       "versus_templates": [
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
        "^HeavyBomb",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_ordos_facedancer_grenade_2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2687,16 +2654,23 @@
        },
        {
         "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "180000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2726,13 +2700,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "180000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2744,15 +2711,10 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
        "^HeavyBomb",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_ordos_facedancer_grenade_2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -2786,7 +2748,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "90000"
     },
-    "name": "Face Dancer",
+    "name": "actor_ordos_facedancer.name",
     "prerequisites": [
      "~ordos_barracks",
      "ordos_palace"
@@ -2870,7 +2832,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "50000"
     },
-    "name": "Leech",
+    "name": "actor_ordos_leech.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_leecher"
@@ -2925,7 +2887,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -2972,7 +2934,7 @@
        "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
+       "^d2k_ordos_laser_heavy_2",
        "light_inf_lmg"
       ],
       "warheads": [
@@ -2993,7 +2955,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -3041,7 +3003,7 @@
        "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
+       "^d2k_ordos_laser_heavy_2",
        "light_inf_lmg"
       ],
       "warheads": [
@@ -3054,7 +3016,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -3078,7 +3040,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "28000"
     },
-    "name": "Ordos Light Infantry",
+    "name": "actor_ordos_lightinfantry.name",
     "prerequisites": [
      "~ordos_barracks"
     ],
@@ -3288,7 +3250,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Ordos Mortar Trooper",
+    "name": "actor_ordos_mortartrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_mortartroopers"
@@ -3359,7 +3321,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -3416,7 +3378,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -3441,7 +3403,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {
@@ -3460,7 +3422,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Ordos Rocket Trooper",
+    "name": "actor_ordos_rockettrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~!ordos_upgrade_antiairtrooper"
@@ -3537,7 +3499,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Saboteur",
+    "name": "actor_ordos_saboteur.name",
     "prerequisites": [
      "~disabled"
     ],
@@ -4290,7 +4252,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos APC",
+    "name": "actor_ordos_apc.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4489,7 +4451,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Cobra Tank",
+    "name": "actor_ordos_cobratank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4588,7 +4550,8 @@
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
-       "autogun_tank"
+       "autogun_tank",
+       "^d2k_ordos_autogun_tank_small"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -4628,7 +4591,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Combat Autogun Tank",
+    "name": "actor_ordos_combatautoguntank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4737,7 +4700,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Combat Tank",
+    "name": "actor_ordos_combattank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~!ordos_upgrade_heavycombattank"
@@ -4800,20 +4763,6 @@
        },
        {
         "damage": "5",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
@@ -4824,6 +4773,20 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -4836,9 +4799,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^ShrapnelWeapon",
-       "^HeavyFlameWeapon",
-       "DeviatorMissile"
+       "DeviatorMissile",
+       "^d2k_ordos_deviator_art"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -4874,7 +4836,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Deviator Artillery",
+    "name": "actor_ordos_deviatorartillery.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_palace"
@@ -4927,6 +4889,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -4939,13 +4908,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4959,10 +4921,8 @@
        "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^MediumChemicalWeapon",
-       "^MediumMissile",
-       "^D2KMissile"
+       "^D2KMissile",
+       "^d2k_ordos_deviatormissile_2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -4997,7 +4957,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Deviator Tank",
+    "name": "actor_ordos_deviatortank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_palace",
@@ -5130,7 +5090,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Dust Drone",
+    "name": "actor_ordos_dustdrone.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~ordos_promotion_dustdrone"
@@ -5231,12 +5191,8 @@
        "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
        "^D2KMissile",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^Chaingun"
+       "^d2k_ordos_autogun_tank"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -5276,7 +5232,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Autogun Tank",
+    "name": "actor_ordos_heavyautoguntank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavyautoguntank"
@@ -5380,7 +5336,7 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^d2k_ordos_heavyordoscombattankrockets"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5414,7 +5370,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Heavy Combat Tank",
+    "name": "actor_ordos_heavycombattank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavycombattank"
@@ -5474,17 +5430,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -5498,8 +5454,7 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "d2k_grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^d2k_ordos_laboratory_bioball"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
@@ -5646,7 +5601,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Laboratory Crawler",
+    "name": "actor_ordos_laboratorycrawler.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
@@ -5700,25 +5655,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "41600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "5",
@@ -5735,18 +5676,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
+        "damage": "5",
         "falloff": null,
-        "spread": "500",
-        "tag": "LegacyRailgunExtraDamage",
-        "type": "SpreadDamage"
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
+        "damage": "5",
         "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5757,10 +5698,9 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^FlakWeapon",
-       "^MediumMissile",
        "^RailgunWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^d2k_ordos_ordos_lasertank"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -5794,7 +5734,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Laser Tank",
+    "name": "actor_ordos_lasertank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
@@ -5873,7 +5813,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Mobile Construction Vehicle",
+    "name": "actor_ordos_mobileconstructionvehicle.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_mcv_production"
@@ -6067,7 +6007,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Python Tank",
+    "name": "actor_ordos_pythontank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -6138,7 +6078,9 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
-       "HMGo"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6177,7 +6119,7 @@
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "HMGo",
-       "^Effect_Bullet_Medium"
+       "^d2k_ordos_bullet_medium"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
@@ -6213,7 +6155,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Raider",
+    "name": "actor_ordos_raider.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~!ordos_promotion_stealthraider"
@@ -6291,7 +6233,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Spice Harvester",
+    "name": "actor_ordos_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~ordos_heavy_vehicle_production"
@@ -6364,7 +6306,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "^d2k_ordos_bullet_medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
@@ -6402,7 +6344,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
+       "^d2k_ordos_laser_heavy",
        "HMGstealth"
       ],
       "warheads": [
@@ -6447,7 +6389,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Stealth Raider",
+    "name": "actor_ordos_stealthraider.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~ordos_promotion_stealthraider"
@@ -6500,6 +6442,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "56000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "7",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -6512,13 +6461,6 @@
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "56000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -6536,10 +6478,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Medium_Flat",
-       "^MediumChemicalWeapon",
-       "^LightChemicalWeapon",
        "^D2K_Cannon",
-       "^TankDestroyerCannon"
+       "^d2k_ordos_120mm_td"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6573,7 +6513,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Tank Destroyer",
+    "name": "actor_ordos_tankdestroyer.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter"

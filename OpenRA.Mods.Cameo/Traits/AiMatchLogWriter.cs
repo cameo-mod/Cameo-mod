@@ -118,8 +118,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		static bool AllBotsResolved(World world)
 		{
 			return world.Players
-				.Where(IsEligiblePlayer)
-				.Where(p => p.IsBot)
+				.Where(IsLoggableBot)
 				.All(p => p.WinState != WinState.Undefined);
 		}
 
@@ -135,7 +134,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				gameUid = fallbackGameUid;
 
 			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(p => p.IsBot && IsEligiblePlayer(p)))
+			foreach (var player in world.Players.Where(IsLoggableBot))
 			{
 				var recorder = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>();
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
@@ -237,6 +236,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		static bool IsEligiblePlayer(OpenRA.Player player)
 		{
 			return !player.NonCombatant && player.Playable;
+		}
+
+		// Map-declared bots are real bot players even when they are not playable lobby slots.
+		internal static bool IsLoggableBot(OpenRA.Player player)
+		{
+			return player.IsBot && !player.NonCombatant;
 		}
 
 		static string Outcome(WinState state)

@@ -1127,8 +1127,16 @@ def _powerlaw(vals, alpha):
 
 
 def _to_mean(vals, target):
-    m = statistics.fmean(vals)
-    return [v * target / m for v in vals] if m > 0 else list(vals)
+    """Scale `vals` so their GEOMETRIC mean is `target` (DESIGN R16, maintainer 2026-09-24).
+
+    *"All versus values of a warhead must always have a geometric mean of 100%."* Versus rows
+    are multipliers, so the geometric mean is their centre: a 200/50 pair centres at 100, while
+    its arithmetic mean (125) silently inflated the family's contribution to `K`. The power law
+    (`_powerlaw`) already works about the geometric mean, so this closes the last arithmetic step.
+    """
+    pos = [max(v, 1.0) for v in vals]
+    m = statistics.geometric_mean(pos) if pos else 0.0
+    return [v * target / m for v in pos] if m > 0 else list(vals)
 
 
 def fit_band_floor(rows):
@@ -1160,8 +1168,31 @@ def fit_band_floor(rows):
             for a, v in rows]
 
 
+# R16's POPULATION law (maintainer 2026-09-25, "Stretch toward 4-5x"): the family spreads
+# (max:min over the armor rows) must form a bell curve peaking at 4x-5x, with 2x and 20x the
+# low-occupancy asymptotes. The census before this step peaked at 2-4x (38 families) with only
+# 10 at 4-5x. One exponent moves the whole bell: a power law about the geometric centre,
+# `v' = G * (v/G) ** a`, raises a profile's spread to the power `a`, so every family's log-spread
+# is scaled by the same factor - the bell keeps its shape and its peak moves. It is the same
+# instrument as `fit_band_floor` and the ceiling compression: monotone (the ordering law's
+# sequence survives), geometric-mean preserving, and it keeps Heroic = Plate x Scout / peak exact.
+# Flat-by-design families (Sonic, Magic) have max == min and are untouched; the 10-200 window is
+# still enforced afterwards by `mean_normalise`'s compression.
+BELL_STRETCH_ALPHA = 1.30
+
+
+def bell_stretch(rows, alpha=BELL_STRETCH_ALPHA):
+    """Stretch a MAIN profile's spread to `spread ** alpha` about its geometric mean (R16)."""
+    idx = [i for i, (a, _) in enumerate(rows) if a not in NON_ARMOR_ROWS]
+    vals = [float(rows[i][1]) for i in idx]
+    if not vals or max(vals) <= min(vals) or alpha == 1.0:
+        return rows
+    fixed = dict((rows[i][0], v) for i, v in zip(idx, _powerlaw(vals, alpha)))
+    return [(a, fixed.get(a, v)) for a, v in rows]
+
+
 def mean_normalise(rows, target=MEAN_TARGET):
-    """Rescale a MAIN profile so the MEAN of its armor rows is `target` (see above).
+    """Rescale a MAIN profile so the GEOMETRIC mean of its armor rows is `target` (R16; see above).
 
     Returns rows in the SAME ORDER — the emit order is the ordering law's output and
     `shield_for` overwrites `Shield` immediately after, so nothing here may reshuffle.
@@ -1580,6 +1611,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
         # and let the tilt undo it for Cryo.
         main = fit_band_floor(main)
+        # R16 population law — move the spread bell's peak to 4x-5x (see BELL_STRETCH_ALPHA).
+        main = bell_stretch(main)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
@@ -1646,6 +1679,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if name in FAMILY_CONDITION:  # on-hit status mark (Sonic -> SonicDebuff)
             cname, dmul, rmul = FAMILY_CONDITION[name]
             parts.append(emit_condition(tag, cname, reload * dmul, main_spread * rmul, vt))
+        if name in FAMILY_AREA_STATE:  # area meter feed over the ring beyond the damage
+            psn, amount, rmul = FAMILY_AREA_STATE[name]
+            parts.append(emit_area_state(tag, psn, amount, main_spread * rmul, vt))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -1891,6 +1927,11 @@ FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
     "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
     "Chemical": {"Corrosion": _m(1.00)},     # acid -> corrosion meter (mapping form)
+    # W9, maintainer 2026-09-25: "Every Toxic weapon" fills the POISON meter - the gas clouds
+    # (Yuri Virus cloud, Anthrax, TS smoke, Zerg acid cloud) poison by dose, the W9 spec's
+    # "gas clouds fill the meter by dwell time". Poison exists only on ^DefaultInfantry, so on a
+    # vehicle this no-ops: corrosion eats vehicles, poison hurts infantry.
+    "Toxic":    {"Poison": _m(1.00)},
     # ⭐ SUPPORT WEAPONS, maintainer 2026-08-22: Cryo and Inferno fill the meter TWICE as fast as
     # Flame (Scale 200 vs 100), so they freeze/ignite after 25% of lethal damage instead of 50%.
     # The intent is "mostly apply the physical effect without dealing too much direct damage" —
@@ -1899,6 +1940,9 @@ FAMILY_PHYSICAL_STATE = {
     # doubled rate is paid for and the pipeline can take the direct damage back out.
     "Cryo":     ("Temperature", _m(-2.00)),  # prism beam that freezes — 2x Flame
     "Inferno":  ("Temperature", _m(2.00)),   # prism beam that burns — 2x Flame
+    # W7: Sonic feeds the Resonance meter instead of the retired binary SonicDebuff.
+    # Pure Sonic = 100 (damage dealt fills the meter 1:1, HP-relative like Corrosion).
+    "Sonic":    {"Resonance": _m(1.00)},
     # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
@@ -1960,8 +2004,97 @@ FAMILY_DAMAGE_TYPES = {
     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
     "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
     "BulletChem": "Prone75Percent, TriggerProne, TiberiumDeath",
-    # Storm is handled at its own call site (Prone100Percent + Tesla).
+    # ⛔ THE TWO BELOW ARE NOT ELEMENTS — they are deliberate choices the derivation below would
+    # otherwise flatten, and both were caught by diffing generated output against what ships.
+    # `Sniper` uses a death ANIMATION as its signature (the target is ripped apart, not blown up);
+    # deriving it from its element would have replaced that with a generic explosion. `Storm`
+    # knocks EVERY infantry target prone, not 75% of them — it lived at a second call site, which
+    # is how it came to be the one IntegrityScale family whose `Tesla` token was hand-added.
+    "Sniper":     "Prone75Percent, TriggerProne, RippedApartDeath",
+    "Storm":      "Prone100Percent, TriggerProne, ElectricityDeath, Tesla",
 }
+
+
+# ── ELEMENT -> DamageTypes, DERIVED FROM THE FAMILY (R43) ─────────────────────────────────────
+# The table above was hand-maintained and listed 17 families, all of them BLENDS. Every base
+# family was missing, so 31 of 50 shipped the generic `ExplosionDeath` line — including `Flame`,
+# whose own children `BulletFire`/`CannonFire`/`Inferno` were correctly tagged `Incendiary`. A
+# family and the blends made FROM it disagreed about what element it is.
+#
+# ⚠ A NAME IS NOT A MEASUREMENT (R21) — except here, and only here. R21 forbids inferring a
+# REFERENCE mod's weapon nature from its name (`BazAP` read as Tesla because it contains "zAP").
+# These are OUR family names, and DESIGN.md §12 declares them as a delivery x element grid: a
+# `MissileCryo` is delivery Missile, element Cryo BY CONSTRUCTION, because that is what naming it
+# so was FOR. The name is a spec on this side of the line and evidence on the other.
+#
+# ⛔ ONLY TOKENS THAT ALREADY EXIST IN THE TREE. Introducing a new one is a design decision, not a
+# generator change, and an unconsumed token is dead weight the engine will happily carry forever
+# (FieldLoader keeps unknown STRINGS; it is unknown FIELDS it drops). Live counts at R43:
+# `FireDeath` 230 / `Incendiary` 204 / `Tesla` 142 / `ElectricityDeath` 140 / `TiberiumDeath` 56 /
+# `RadiationDeath` 20. There is NO `FrozenDeath` anywhere, so Cryo has no token and is reported by
+# `undeclared_elements()` rather than invented.
+ELEMENT_DAMAGE_TYPES = {
+    "Fire":      "FireDeath, Incendiary",
+    "Tesla":     "ElectricityDeath, Tesla",
+    "Toxin":     "TiberiumDeath",
+    "Radiation":  "RadiationDeath",
+}
+
+# The element half of each family name. Longest match wins, so `FlakCryo` reads Cryo and `Flak`
+# reads nothing. A family absent from this map has no element and keeps the plain blast line.
+ELEMENT_BY_NAME = {
+    "Flame": "Fire", "Fire": "Fire", "Inferno": "Fire", "Thermobaric": "Fire",
+    "Tesla": "Tesla", "Quantum": "Tesla", "Storm": "Tesla",
+    "Chemical": "Toxin", "Chem": "Toxin", "Toxic": "Toxin",
+    "Nuclear": "Radiation",
+    # ⚠ `Nuke` is deliberately FIRE, not Radiation, because that is what `CannonNuke` and
+    # `MissileNuke` already ship and changing it would move live gating under the guise of a
+    # refactor. Whether a tactical nuke should read Radiation is a DESIGN question, open.
+    "Nuke": "Fire",
+    # No engine token exists for these yet; `undeclared_elements()` lists them.
+    "Cryo": "Cryo",
+}
+
+PRONE_DEFAULT = "Prone75Percent, TriggerProne"
+BLAST_DEFAULT = "ExplosionDeath"
+
+
+def family_element(name):
+    """The element a family name declares, or None. Longest token match wins."""
+    hit = None
+    for token, element in ELEMENT_BY_NAME.items():
+        if token in name and (hit is None or len(token) > len(hit[0])):
+            hit = (token, element)
+    return hit[1] if hit else None
+
+
+def damage_types_for(name, prone=PRONE_DEFAULT):
+    """The `DamageTypes` line for a family — explicit override, else derived from its element.
+
+    ⭐ The `Tesla` token is appended STRUCTURALLY for every family carrying `IntegrityScale`,
+    because that is what makes the Integrity trait's passive drain fire. It used to be a comment
+    asking the reader to remember, and `Storm` was already relying on a second call site to add
+    it by hand. A rule the generator enforces cannot be forgotten by the next family.
+    """
+    override = FAMILY_DAMAGE_TYPES.get(name)
+    if override:
+        return override
+    element = family_element(name)
+    tail = ELEMENT_DAMAGE_TYPES.get(element) if element else None
+    line = f"{prone}, {tail or BLAST_DEFAULT}"
+    if name in FAMILY_INTEGRITY_SCALE and "Tesla" not in line:
+        line += ", Tesla"
+    return line
+
+
+def undeclared_elements():
+    """[(family, element)] whose element is real but has no token in the tree — a DESIGN gap."""
+    out = []
+    for name in sorted(set(WEAPONS) | set(BLEND_FAMILIES)):
+        element = family_element(name)
+        if element and element not in ELEMENT_DAMAGE_TYPES:
+            out.append((name, element))
+    return out
 
 # Per-family STATUS CONDITION (PHYSICAL_STATE_SYSTEM.md §6 decision 4). Some families mark the target
 # with a short external condition on every hit instead of (or as well as) filling a PhysicalState meter.
@@ -1971,12 +2104,27 @@ FAMILY_DAMAGE_TYPES = {
 #              couple of shots after the beam stops (the maintainer's "short duration, on hit only").
 #   Range    = range_x_spread x the main warhead Spread -> the half-damage radius of the same blast.
 # {family: (condition, duration_x_reload, range_x_spread)}
-FAMILY_CONDITION = {
-    "Sonic": ("SonicDebuff", 2, 2),
-    "BulletSonic": ("SonicDebuff", 2, 2),
-    "MissileSonic": ("SonicDebuff", 2, 2),
-    "CannonSonic": ("SonicDebuff", 2, 2),
-    "BlastSonic": ("SonicDebuff", 2, 2),
+# W7: the Sonic binary mark is RETIRED — the five Sonic families emitted
+# `Warhead@<tag>_Debuff: GrantExternalCondition` (SonicDebuff) here; they now feed the
+# Resonance meter via FAMILY_PHYSICAL_STATE / BLEND_FAMILIES states instead.
+FAMILY_CONDITION = {}
+
+# Per-family AREA METER FEED (W7 follow-up). The retired `_Debuff` nodes were NOT the on-hit
+# mark — they were a second channel: `Range = range_x_spread x Spread` deliberately marked a
+# ring twice the damage radius, so the blast's outer ring debuffed without damaging. Removing
+# them silently shrank the mark to the damage footprint (FINDING_2026-09-24_dawn_w7_double_feed).
+# They now emit as flat `ApplyPhysicalState` feeds — `Amount` fills the meter regardless of the
+# damage roll, preserving the old binary "everyone in the ring is marked" shape, while the
+# damage-scaled feed on the main warhead handles the direct hit. Same-footprint fixed+scaled
+# double-apply is still flagged by audit_physical_state_warheads; the area channel is exempted
+# there by the Range > Spread rule.
+# {family: (PhysicalStateName, Amount, range_x_spread)}
+FAMILY_AREA_STATE = {
+    "Sonic": ("Resonance", 5000, 2),
+    "BulletSonic": ("Resonance", 5000, 2),
+    "MissileSonic": ("Resonance", 5000, 2),
+    "CannonSonic": ("Resonance", 5000, 2),
+    "BlastSonic": ("Resonance", 5000, 2),
 }
 
 # Per-family InvalidTargets, emitted on the weapon AND its damaging warheads.
@@ -2000,6 +2148,17 @@ def emit_condition(tag, cname, duration, rng, vt):
         f"\t\tValidTargets: {vt}, Structure, wall"])
 
 
+def emit_area_state(tag, psn, amount, rng, vt):
+    """Emit the flat meter feed over the ring beyond the damage (the old _Debuff area channel)."""
+    return "\n".join([
+        f"\tWarhead@{tag}_Debuff: ApplyPhysicalState",
+        f"\t\tPhysicalStateName: {psn}",
+        f"\t\tAmount: {amount}",
+        f"\t\tRange: {rng}",
+        f"\t\tValidRelationships: Enemy, Neutral",
+        f"\t\tValidTargets: {vt}, Structure, wall"])
+
+
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
 # warhead to add a PhysicalState. Keeps the parent's Versus + warhead key.
 # {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
@@ -2013,7 +2172,7 @@ def emit_inherit_family(name, parent, psn, pss, levels):
     parent_cfg = WEAPONS[parent]
     order16 = build_order(parent_cfg[0], parent_cfg[1])
     vt = valid_targets(parent_cfg[2])
-    dt = FAMILY_DAMAGE_TYPES.get(name)
+    dt = damage_types_for(name)
     return family(name, order16, vt, levels, profile_family=parent,
                   **({"damage_types": dt} if dt else {}))
 
@@ -2022,13 +2181,13 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
-    # Aedis 2026-09-10: delivery-specific Sonic combinations. Status remains
-    # additional to direct damage; it is not a PhysicalState meter to average.
-    "BulletSonic": (["Bullet", "Sonic"], None, L3),
-    "MissileSonic": (["MissileAP", "Sonic"], None, L3),
-    "CannonSonic": (["CannonHE", "Sonic"], None, L3),
+    # Aedis 2026-09-10: delivery-specific Sonic combinations. W7 2026-09-24: the status
+    # is now the Resonance meter at the per-parent-average share (Sonic = 1/2 or 1/3).
+    "BulletSonic": (["Bullet", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
+    "MissileSonic": (["MissileAP", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
+    "CannonSonic": (["CannonHE", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
     # Aedis 17:38 resolves grenade delivery explicitly, like CryoBlast.
-    "BlastSonic": (["Demolition", "Concussion", "Sonic"], None, L3),
+    "BlastSonic": (["Demolition", "Concussion", "Sonic"], {"Resonance": _m(1 / 3)}, L3),
     "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
     # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average
@@ -2511,7 +2670,7 @@ def _generate():
             print()
             continue
         order = build_order(bl, d)
-        dt = FAMILY_DAMAGE_TYPES.get(nm)
+        dt = damage_types_for(nm)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
         print(family(nm, order, vt, lv, spreads=spreads, falloffs=falloffs, **({"damage_types": dt} if dt else {})))
         print()
@@ -2537,7 +2696,7 @@ def _generate():
         air_share = (sum(1 for p in parents if p in WEAPONS and WEAPONS[p][2]) / len(parents)
                      if parents else 0)
         vt = valid_targets(air_share >= 1 / 3)
-        dt = FAMILY_DAMAGE_TYPES.get(nm)
+        dt = damage_types_for(nm)
         states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
         # The blend's SHAPE crosses its parents' shapes exactly as its Versus crosses their
         # profiles — see blend_shape(). Without this the 17 blend families kept the old

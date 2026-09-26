@@ -179,7 +179,7 @@ class TargetPolicyTest(unittest.TestCase):
                                   (name, warhead.key))
 
     def test_gunboat_has_one_aa_ship_range_bonus_without_unconditional_firepower(self):
-        actor = self.rules.resolve('gunb.asian')
+        actor = self.rules.resolve('asianalliance_gunb')
         traits = {c.key: c for c in actor.children}
         self.assertNotIn('TooltipExtras@ScoutShip', traits)
         self.assertEqual({c.key: c.value for c in traits['RangeMultiplier@AntiAirShip'].children}

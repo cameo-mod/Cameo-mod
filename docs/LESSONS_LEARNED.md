@@ -44,6 +44,9 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
+- [A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)](#a-writer-that-preserves-line-endings-but-reads-in-text-mode-preserves-nothing-2026-09-22)
+- [⛔ A surviving name is not a surviving decision (2026-09-22)](#a-surviving-name-is-not-a-surviving-decision-2026-09-22)
+- [A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)](#a-writer-that-replaces-when-you-expect-it-to-merge-and-exits-0-2026-09-22)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Hand-built JSON emitters need native parse tests (2026-09-07)](#hand-built-json-emitters-need-native-parse-tests-2026-09-07)
 - [Condition-gated bot delays must be relative to WorldTick (2026-09-13)](#condition-gated-bot-delays-must-be-relative-to-worldtick-2026-09-13)
@@ -61,6 +64,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 - [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
+- [⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)](#-conflict-clean-is-not-resolved-clean--a-merge-can-pass-every-gate-while-damage-drifts-2026-09-22)
 
 **Weapon templates, the 3-way split and the effect layer**
 
@@ -83,6 +87,19 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
+- [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
+- [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
+- [A rename moves a key, so a SORTED dump reports every touched node as changed](#a-rename-moves-a-key-so-a-sorted-dump-reports-every-touched-node-as-changed)
+- [`gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent](#gh-resolves-the-repo-from-the-wrong-remote-here-and-reports-the-pr-as-nonexistent)
+- [A spread-band ratio that folds in `Shield` invents violations that do not exist](#a-spread-band-ratio-that-folds-in-shield-invents-violations-that-do-not-exist)
+- [`w_damage` means different things in different sources, and reading it wrong doubles burst](#wdamage-means-different-things-in-different-sources-and-reading-it-wrong-doubles-burst)
+- ["Another class would accept it" sounds like evidence and is worth nothing — count first](#another-class-would-accept-it-sounds-like-evidence-and-is-worth-nothing--count-first)
+- [Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)](#cameo-shadowing-pitfalls--namespace-world-and-explicit-interface-members-2026-09-22)
+- [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
+- [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
+- [Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)](#concurrent-boot-gates-kill-each-other--and-a-stale-shared-enginebin-lies-2026-09-23)
+- [⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)](#-the-shared-main-checkout-stays-on-master--a-stale-branch-there-looks-like-master-renamed-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -97,8 +114,228 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
+- [A default you never see is still a decision — the Aircraft-148 defect](#a-default-you-never-see-is-still-a-decision--the-aircraft-148-defect)
+- [An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check](#an-invariant-that-holds-by-construction-cannot-fail-so-it-is-not-a-check)
+- [`*Death` tokens are DEATH ANIMATIONS, not damage elements](#death-tokens-are-death-animations-not-damage-elements)
+- [One weapon, one warhead — on the REFERENCE side too](#one-weapon-one-warhead--on-the-reference-side-too)
+- [A weapon's profile is the SUM of its warheads, not its biggest one](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one)
+- [Matching a warhead by its NAME fails, three different ways](#matching-a-warhead-by-its-name-fails-three-different-ways)
+- [A tool must derive its target from its OWN worktree root (2026-09-24)](#-a-tool-must-derive-its-target-from-its-own-worktree-root--a-stale-path-wrote-into-another-agents-tree-2026-09-24)
+- [W23-RA correction round — four traps (2026-09-23)](#w23-ra-correction-round-2026-09-23-nova--four-traps-that-each-cost-a-re-pass)
+- [`extract_stats` carries seeded `design.*` fields forward by actor KEY (2026-09-23)](#extractstats-carries-seeded-design-fields-forward-by-actor-key--a-rename-silently-drops-them-2026-09-23)
+- [`*ProportionalToPhysicalState` non-neutral defaults on secondary channels (2026-09-23)](#proportionaltophysicalstate-traits-have-non-neutral-defaults-on-secondary-channels-2026-09-23)
+- [Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)](#rename-tool-pitfalls-found-on-the-ra1allies-pass-2026-09-24)
+- [The naming audit sees file stems only (2026-09-24)](#the-naming-audit-sees-file-stems-only--pair-it-with-a-raw-disk-scan-2026-09-24)
 
 ---
+
+## ⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)
+
+The value-reference self-containment batch (D2k/TD/TS/SC packs) copied ~70
+foreign defs into owning packs. In the merged corpus both the copy AND the
+foreign original exist, so every W2/W6/W7/W8 finding on the source got a
+second vote — verbatim copying pushed W6 +11, W7 +5, W8 +3, W2 +1 against
+lower-only ratchets. The fix is the batch-6 materialization pattern applied
+to the copy: effect-typed `Warhead@X` nodes move into a per-weapon
+`^<pk>_<weapon>` family (standalone emit of the resolved subtree — no
+derivation needed, purity keeps it in `fx_templates` so it counts as an fx
+edge, not W8-legacy), dropped inherit edges are materialized inline AT the
+edge's position using the resolved-W subtree for keys the dropped parent
+defines (later-parent overrides are idempotent, child cancels keep working).
+
+Two traps inside that emit:
+
+- **Emitting a resolved subtree that re-states fields the child already
+  declares produces duplicate leaf keys** (audit D2 +55 on the first pass).
+  Fold duplicate sibling nodes afterward: merge same-key siblings
+  recursively, later leaf wins — but `-Key:` nodes are **per-key merge
+  barriers only**: `-Warhead@A:` consumes earlier `Warhead@A` siblings yet
+  leaves `Warhead@B` untouched, so the fold index resets per key, not per
+  barrier.
+- **New names can collide with defs in OTHER namespaces/files.** `Heal` was
+  copied to `TSHeal` while a core-mounted `weapons/tiberiansun.yaml` already
+  defined a different `TSHeal` — a split-definition the resolved diff caught
+  (resolved payload differed). Check the whole merged def dict for the new
+  name before writing the copy.
+
+- **W7 weapon-parent edges: covering-edge swap is the WRONG default for
+  legacy-bundle parents** (2026-09-24b, W7-remainder batch). Replacing
+  `Inherits: ConcreteParent` with the parent's covering `Inherits@wh/proj/fx`
+  edges resolves identically but each legacy bundle explodes into 4-6 edges —
+  W8 +25, W1/W2 up on the first pass of the 33-edge batch. Correct pattern is
+  the same materialization used for foreign copies: drop the concrete edge,
+  inline the resolved parent payload at the edge's position, route
+  effect-typed nodes to a per-weapon family. And when the materializer emits
+  a family that ALREADY exists canonically in `effects_<file>.yaml` (because
+  the parent edge carried it), the emit duplicates the def AND the edge —
+  drop the generated copy, keep the canonical one.
+
+Also: the leak census must model the mount topology — a ref is a leak only
+when EVERY definition of the name lives in files the consumer's own
+`content.yaml` (plus its pack's `Include:` chain and core `mod.yaml` mounts)
+never reaches. Same-file refs, `cameo|`-mounted core files, `bits/` assets
+and game-level `Shared` packs are all reachable and must not flag.
+
+---
+
+## ⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)
+
+The first W27 batch-2 boot crashed in `WeaponInfo.LoadWarheads`
+(`ObjectCreator.CreateObject` with a null className) even though
+`find_empty_warhead.py` reported 0. Cause: the audit skipped `^`-prefixed
+nodes as "never instantiated", but `Ruleset.LoadDefaults` builds a
+`WeaponInfo` for **every** node in the mounted weapons files — a bare
+`Warhead@X:` pin inside a template with no typed ancestor resolves to an
+empty type and NREs exactly like a weapon-level one.
+
+Two related subtleties surfaced in the same round:
+
+- The engine's merge keeps an earlier-supplied type when a bare
+  `Warhead@X:` pin adds fields — the audit's parent-map merge used to let
+  `''` overwrite a real type (false positives on template pins).
+- Files must be enumerated from the manifest, not a hard-coded list —
+  `weapons/effects_d2k.yaml` was mounted but unscanned, hiding the types
+  the new families supply.
+
+**Rule:** every `Warhead@X:` node a template adds must either carry a type
+or inherit one — `find_empty_warhead.py` now scans templates and resolves
+files via the manifest. When extracting pins into a `^` family, declare
+the node's resolved type (usually `CreateEffect`) on the pin.
+
+---
+
+## ⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)
+
+During the W27 batch-1 round, nine pack files in the `C:/tmp/dawn` worktree
+were found silently changed — 161 lines deleted across TD GDI+Nod, TS
+CABAL+Forgotten+Nod and D2k Ixian+Ordos, with no matching commit or stash
+entry. First blamed on a stash cycle; the real cause, disclosed by NOVA in
+`PLAN_2026-09-23_nova_w23ra.md` and confirmed by Claude-Local, was her
+orphan-cancel tool writing through a **stale hard-coded `/tmp` path** —
+Git Bash's `/tmp` and Windows' `C:\tmp` are different folders, and the
+mismatch put her writes inside DAWN's tree.
+
+**Rule:** a tool that edits the tree must resolve its target from its own
+`git rev-parse --show-toplevel` at run time — never from a hard-coded,
+remembered, or environment-derived path that can outlive the worktree it
+was captured in. Cross-check `git status` output in full (truncated status
+output hid the nine dirty files for a whole round) and, when in doubt,
+diff the worktree against `HEAD` per-file rather than trusting "I didn't
+touch that". Verified on GitHub: none of the deletions reached the pushed
+branch (0 `-Key@` removals vs master).
+
+---
+
+## ⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)
+
+The W24 lane-2 squash-merge onto master passed yaml parse,
+`find_empty_warhead` = 0, `audit_balance_drift` clean, and the boot-gate —
+and still shipped **78 weapons whose resolved damage sum differed from
+master**. `git rebase` resolves TEXT, not semantics: 52 stale-value
+overwrites (old branch values beating master's newer rebalances), 25 fold
+survivors computed on pre-rebase values, and one fold that collapsed four
+deliberate `PreservedFlat_*` channels into a single inflated node.
+
+**Rule:** after ANY merge or rebase that touches `weapons.yaml`, run
+`tools/audit/review_resolve_diff.py <master-tree> <branch-tree>` over
+**every weapon id your diff touches AND every `Inherits:` referrer of
+those weapons** — children outside the diff inherit the edited parents and
+drift invisibly (`WaveTurretImpact`, `GLASCUD`). Compare damage **sums**,
+not the OK/FLAGS verdict: a multiset arity difference is the point of a
+W24 fold, but `sum(branch) == sum(master)` per weapon is the invariant.
+
+Corollaries proven on that repair: a surviving channel master rebalanced
+gets master's value, never the branch's stale one; a fold survivor carries
+`master[survivor] + sum(master's folded-away channels)`; `PreservedFlat_*`
+/ `*_Flat` companion channels are deliberate structure — restore master's
+block, don't fold them; and damage-number repairs must re-run
+`extract_stats.py` so yaml and ledgers land in the same commit.
+Independent verification of the fix is cheap and worth asking for — DAWN's
+re-run caught the difference between "reviewed pre-repair" and "verified
+post-repair".
+
+---
+
+## ⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)
+
+A W24 fold that removes channel `X` from a PARENT weapon silently turns every
+child's `-Warhead@X:` into dead yaml — the cancel has no accumulated target
+anymore. Three surfaced in lane-3: `harkonnen_autogunturret` (its `Bullet_Light` /
+`CannonHE_Heavy` cancels died when `ordos_autogunturret` folded them),
+`edenMobileDefenceLaser` (its `Laser_Heavy` cancel died when `edenMobileLaserTiger`
+folded), and `plymouthStickyDefence` (a leftover `-Warhead@Chemical_Light:` after
+its own inline def was folded).
+
+⛔ **Severity upgrade (2026-09-23, W23 lane): orphans are a BOOT CRASH, not
+hygiene.** The earlier wording ("resolved damage was correct — orphans are
+hygiene") was wrong about the risk class: `MiniYaml.ResolveInherits` throws
+`There are no elements with key 'X' to remove` on ANY cancel with no
+provider, which aborts ruleset load mid-boot — while the python resolver's
+`_merge_into` silently skips it, so resolve-diffs stay clean on a tree that
+cannot boot. W23 hit it twice in one batch: a child's
+`-Warhead@GrenadeFriendlyFire` orphaned by the parent's `^Grenade` strip,
+and nested `-LaunchAngle:` cancels inside `Projectile:` left when
+missile-era template fields went away. The engine is the only oracle that
+was already right; the new `tools/audit/audit_orphan_cancels.py` (wired
+into `run_all.sh`) closes the gap in tooling — it walks EVERY depth level
+with document-order providers and must print 0.
+
+**Rule:** after folding a parent, run `tools/audit/audit_orphan_cancels.py`
+AND `tools/audit/audit_orphan_removals.py` and resolve-diff the INHERITING
+CHILDREN, not just the folded weapon. The fix is to
+delete the orphaned cancel — never "restore" the channel it used to kill.
+Second trap in the same lane: deleting a child's override block can RESURFACE the
+parent's node (`OrniMissile` lost `Warhead@1Dam` -> parent `PhoenixRocket`'s
+`1Dam` @7500 came back). Removing a channel a parent also defines needs
+`-Warhead@X:`, not deletion; removing a purely inline def needs deletion, not a
+cancel. `review_resolve_diff.py` sees both classes of wrong.
+
+## `^Effect_*` templates inherit each other — a covering pick can dup-crash a DESCENDANT (2026-09-23, W23 follow-up)
+
+`^Effect_*` is not a flat list: e.g. `^Effect_AlliedTigerCannon` itself inherits
+`^Effect_CannonHE_Heavy`. When a W23-style pass adds `Inherits: ^Effect_X` to a
+weapon, every DESCENDANT that already inherits an `^Effect_` ancestor of X now
+reaches that ancestor by two paths — `audit_duplicate_inherits` reports BLOCKING
+(`Parent type X was already inherited`, a boot crash). Real case:
+`plymouthSticky` + `^Effect_AlliedTigerCannon` put `^Effect_CannonHE_Heavy` on
+`plymouthStickyDefence` twice (its own `Inherits@3` + the new chain through
+`plymouthStickyTiger`). Fixes: pick a covering template with **no `^Effect_`
+ancestry that collides with any descendant's effect edge** (the swap to
+`^Effect_Apoc_Chem_RA2` — zero ancestors — cleared it), or keep the legacy edge.
+Run `audit_duplicate_inherits.py` after ANY template-inherit retrofit, not just
+the orphan audits — resolve-diff stays green on a tree the engine refuses.
+
+Related mechanic worth remembering: a local `Warhead@X:` node with **no type
+token** merges over the inherited node as a field-level override and does NOT
+count as a locally-declared effect warhead (W6) — that is the correct way to pin
+field drift on a template-provided effect node.
+
+---
+
+## ⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)
+
+The maintainer's VS Code showed the main worktree as `devin/aurora/naming-ra1_allies` and asked why
+master had been renamed. It had not. `master` is the local branch, `origin/master` is GitHub's copy as
+last fetched, and the MAIN WORKTREE is just the folder `Documents/GitHub/Cameo-mod` — which had been
+left checked out on a disabled agent's branch, **358 commits behind master**, since 2026-09-07. So the
+maintainer's launches ran that old branch, its DLL was built from it, and 13 agent worktrees whose
+`engine/` is a junction to the main one were booting against it too.
+
+It cost more than confusion. That day another agent, looking for a commit, ran `git checkout
+origin/master -- .` and then `git reset --hard` in the main folder: six tracked files that had carried
+someone's uncommitted edits since at least 2026-09-21 (`.claude/settings.json`,
+`tools/hooks/bash_guard.py`, four Dune 2000 `rename_map_*.yaml`) came back as their committed state. No
+git object ever held those edits, so they are gone.
+
+**Rules:**
+- The main folder is `master`, fast-forwarded only, and nobody works in it — its `.agent-id` says so.
+  `Cameo-mod-fleet/sync_main_checkout.ps1` (scheduled every 15 min) fast-forwards it, rebuilds C# when
+  C# changed, and REFUSES — logging why — when the folder is on another branch or has tracked edits.
+- Work happens in a worktree of your own. Cross-tree questions use `git -C <path>` read verbs only.
+- `git checkout <ref> -- .` and `git reset --hard` overwrite tracked files with no undo. Never in a
+  folder you do not own, and in your own only after `git status` shows nothing you would miss.
+- Removing a worktree whose `engine/` is a junction: unlink the junction FIRST
+  (`[System.IO.Directory]::Delete(<path>\engine, $false)`), so nothing can recurse into the target.
 
 ## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
 
@@ -173,6 +410,49 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)
+
+`splice_templates.py` contained exactly the right line:
+
+```python
+newline = "\r\n" if "\r\n" in text else "\n"
+```
+
+and it could never once have been true. The text had come from `Path.read_text()`, which
+applies universal-newline translation, so CRLF arrives already normalised and the test
+always takes the `else`. `write_text()` then translates back to `os.linesep` on the way
+out. On Windows that turns every splice into a full-file rewrite of `weapons.yaml` --
+19,882 lines touched to change 12.
+
+**The detection code looked correct in review and was inert.** Reading it teaches nothing;
+only the bytes on disk do. Both ends need `newline=""`:
+
+```python
+with F.open(encoding="utf-8", newline="") as fh:   # no translation on the way IN
+    text = fh.read()
+...
+with F.open("w", encoding="utf-8", newline="") as fh:   # nor on the way OUT
+    fh.write(newline.join(result))
+```
+
+**And then measure the consequence before writing it up.** The first version of this
+entry said the bug produced a 19,882-line COMMIT diff. It does not: `.gitattributes`
+carries `*.yaml eol=lf` and `* text=lf`, so git normalises on add and reports the same 12
+changed lines whichever ending sits on disk -- confirmed by writing CRLF deliberately and
+re-running `git diff`. The real cost is to the WORKING TREE: a plain non-git `diff`
+reports the whole file, byte-comparing tools see everything changed, and git warns on
+every touch. That is a detour, not a corruption.
+
+Two habits come out of it, and they generalise past this one tool:
+
+* **A guard that cannot fail is not a guard.** Before trusting a conditional that protects
+  something, make it fire once on purpose. This one had never fired.
+* **Diff the artifact, not the intent.** `git diff --stat` after the splice said 12 lines;
+  a raw `diff` against a pre-change copy said 19,882. Both were true and they answer
+  different questions. Knowing which one the situation needs is the skill -- and when a
+  diff is implausibly large for the edit you made, suspect encoding before suspecting the
+  edit.
 
 ## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
 
@@ -812,6 +1092,23 @@ Then read `C:	mp\gate_<name>\Logs\perf.log` for
 `(Get-Process OpenRA).Path` against your own worktree, because another agent's gate may be
 mid-run and a live instance locks the next build.
 
+#### `launch-game.cmd` needs Windows `find.exe` — Git Bash shadows it
+
+**2026-09-22.** The script's engine check is `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION`;
+under Git Bash, GNU `find` shadows Windows `find.exe`, the check dies with "Required engine
+files not found", and a stale `perf.log` can still read as a pass. Either run the script from
+`cmd.exe`/PowerShell, or invoke the binary directly with the same arguments the script uses:
+
+```
+cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
+  Engine.LaunchPath="<abs path to launch-game.cmd>" \
+  Engine.ModSearchPaths="<worktree>\\mods,./mods"
+```
+
+`Engine.LaunchPath` must point at the launcher script (the mod worktree), NOT `engine/bin` —
+the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
+Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
+
 ## The canonical engine update pipeline (binding, uniform process)
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
@@ -1353,6 +1650,25 @@ A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_
 - tools/balance/splice_templates.py ran gen_weapon_template.py with a family filter, which caused shield_uniqueness to see only a subset and emit wrong compressed Shield values. It now always runs the full generator and splices only the requested blocks, preserving the original newline style (CRLF/LF).
 - The A1a delivery-first rename proved that verify_generator_sync.py is the real source of truth for ^Warhead_* blocks: the Flame and MissileChem blocks had drifted by one Shield point and were re-synced by splicing.
 
+## Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)
+
+- `safe_rename.py` silently no-op'd on files-only maps: `if not actors: return 0` fired before the
+  `files:` half ran. Now `if not actors and not files`. A map that "applied cleanly" with zero
+  output did nothing.
+- A generated `rename_map_*.yaml` can be stale/pathological: `rename_map_ra1_allies.yaml`'s file
+  targets embedded the *entire* already-doubled source names (`…_ra1_soviets_sovietX_ra1_allies_alliedY_…`
+  → tripled ids, N1 18→52, N2 unchanged). Aurora's hand-derived `rename_map_ra1_allies_n4.yaml`
+  (from `aurora/naming_ra1_allies_v2` commit `90e27a1b3`) is the authority for that faction —
+  `gen_rename_maps.py` cannot emit it because the faction's actors already satisfy the slug
+  grammar; the damage was in redundant `allied` adjectives (N4), which only the audit sees.
+- Shared sprites must NOT be renamed into one faction: the `ra1_soviets_sovietX_ra1_allies_alliedY_*`
+  files are referenced by Soviets/Japan/Shared sequences only — Allies borrows the art. Aurora's
+  precedent (ore refinery): actor renames, file keeps the shared name.
+- `extract_stats.py` preserves `design.*` judgment fields by actor NAME from the committed ledger.
+  After a rename, pre-seed the new ids into `docs/balance/*.json` BEFORE re-extracting, or every
+  renamed actor silently loses `class_anchor`/`category`/etc. Frozen dated snapshots
+  (`*_20260911*`, `checkpoints/`) must not be renamed — evidence stays frozen.
+
 ## Upgrade regressions feel like downgrades (2026-08-19)
 
 A W24 collapse can move an upgrade pair onto families with **opposite Versus profiles** and still pass every damage check, because the on-grid `Damage` total is preserved on both sides. `audit_upgrade_regression.py` was added to catch this:
@@ -1702,6 +2018,11 @@ had shown cameo-mod's PRs moments earlier.
 report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
 nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
 
+Worse variant (hit 2026-09-22): the redirect can also **succeed silently on the wrong repo** —
+`gh pr view/comment 146` resolved to an unrelated PR on `Zeruel87/Cameo-mod` and posted a review
+there, while the real target was #431 on `cameo-mod/Cameo-mod`. Same PR number, different repo —
+no error at all. Any `gh` result without `--repo` is untrusted, including "success".
+
 ## A spread-band ratio that folds in `Shield` invents violations that do not exist
 
 `Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
@@ -1800,3 +2121,443 @@ its own language; `AiMatchLogWriterTest.cs` catches separator defects at source.
 Re-enabling a condition-gated bot module re-runs `TraitEnabled`. Any “initial” delay
 computed there is therefore reapplied on every switch; express the remaining delay
 relative to `WorldTick` instead.
+
+## Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)
+
+Two traps hit while adding the `RenderSpritesInfo`/`ColorPickerManagerInfo` shadows for the
+colour-picker preview build:
+
+- **Never create namespace `OpenRA.Mods.Cameo.Traits.World`.** Every file under
+  `OpenRA.Mods.Cameo.Traits.*` resolves the unqualified `World` type through its enclosing
+  namespace chain, and a `Traits.World` namespace shadows `OpenRA.World` for ALL of them —
+  ~94 `CS0118 'World' is a namespace` errors. Cameo's convention is the directory
+  `Traits/World/` with the FLAT namespace `OpenRA.Mods.Cameo.Traits` (see
+  `Traits/World/AutoControlGroupsManager.cs` et al.).
+- **Shadowing a class with explicit interface implementations needs the interface
+  re-declared AND re-implemented.** `RenderPreview`/`ShowColorDropDown` are explicit
+  impls — a `new` method alone does not take over the interface slot. Re-declare the
+  interface on the subclass (`class X : Base, IInterface`) and implement the member
+  explicitly there; members you don't re-implement fall back to the base's impls, which is
+  what you want. For a base-class *event* subscribers reach via the interface (the
+  colour-picker palette subscriptions), declare `public new event ...` — the interface map
+  then resolves to the event the subclass can raise. A non-`public` `new` event cannot
+  satisfy the interface and subscribers silently land on the base event.
+## Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)
+
+A Cameo-only yaml field proves `ObjectCreator.FindType` resolved your shadow
+type — it says nothing about which method an interface call will hit. C# keeps
+the BASE class's interface map unless the derived class re-lists the interface,
+so `public new` on a non-virtual interface member never runs:
+`TraitInfos<IRenderActorPreviewInfo>()` dispatched to Common's `RenderPreview`
+even though the Cameo `RenderSpritesInfo` shadow defined its own. The fix is to
+re-declare the interface on the shadow (`class X : Base, IInterface`) — the map
+then rebinds every member, so any member you do NOT also override must be one
+you deliberately want the base version of. Verify with
+`type.GetInterfaceMap(iface)` — a two-line reflection check over the built dll
+prints which declaring type each member binds to. (Claude review on #443;
+the same trap was already handled for the manager's event via
+`IColorPickerManagerInfo`.)
+
+## Boot-gate: verify YOUR process made the menu marker (2026-09-23)
+
+Two launch traps surfaced the same day, both producing false confidence:
+
+1. **`Engine.ModSearchPaths` takes COMMA separators** (`mods,engine\mods` per
+   `boot-test.cmd`) — a semicolon-separated list makes `Game.Initialize` throw
+   `Unknown or invalid mod 'cameo'` before logging even initializes. Check the
+   exception log's *stack path* before assuming a crash is yours: another
+   agent's failed launch leaves the same signature in the shared
+   `%APPDATA%/OpenRA/Logs` directory.
+2. **The menu marker alone is not proof of YOUR boot.** The shared `perf.log`
+   is written by whichever OpenRA.exe is running — a crashed launch sitting
+   next to another agent's healthy boot will show a fresh
+   `MenuPostProcessEffect.PostWorldLoaded` that your process never produced.
+   Gate correctly: confirm the PID you launched is alive through the load AND
+   the marker appears — or timestamp-check that the marker was written during
+   your process's lifetime, not just "exists."
+
+## Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)
+
+Same-day sequel, found when three agents gated at once:
+
+1. **The cleanup step murders other agents' games.** The gate's
+   `Stop-Process -Name OpenRA*` matches by process NAME — every agent's game
+   dies when anyone's run ends. Combined with the shared perf.log being
+   truncated per launch, a gate can look unpassable during another agent's
+   retry loop. Workaround that worked: copy `engine/bin/OpenRA.exe` to a
+   differently-named exe (e.g. `NovaGate.exe` — dodges the name-matched kill)
+   and launch with `Engine.SupportDir=<private dir>` (Game.cs reads the arg at
+   line ~364; logs, maps and settings go there instead of the shared
+   `%APPDATA%/OpenRA`). The gate skill should adopt both.
+2. **`Cannot locate type: XInfo` can mean the BINARY is stale, not the yaml.**
+   `engine/bin/OpenRA.Mods.Cameo.dll` was rebuilt from a tree that predated
+   `AiMatchLogWriter` (yaml requirement since `30acae0f0`), so every worktree
+   junctioned to it crashed at `CursorManager→LoadDefaults` — two agents
+   burned a morning in crash loops. `strings`/`grep -c` the dll for the type
+   name first; if absent, `dotnet build -c Release -p:TargetPlatform=win-x64`
+   the mod sln from a CURRENT source tree (the mod project's
+   `EngineRootPath=../engine` deploys straight into the shared `engine/bin`).
+
+---
+
+## A default you never see is still a decision — the Aircraft-148 defect
+
+`WeaponInfo.ValidTargets` and `Warhead.ValidTargets` **both default to `new("Ground", "Water")`**
+(`WeaponInfo.cs:116`, `Warhead.cs:30`). A weapon that never mentions targeting therefore **cannot
+hit air at all** — that is 366 of Combined Arms' 695 weapons.
+
+The reference matrix filled every unstated armour row with the engine's neutral 100, including the
+aircraft rows of weapons that can never fire at aircraft. Every tank cannon in the corpus was
+entered as a competent anti-air weapon. **74% of Combined Arms' air cells were wrong, and 48% of
+Cameo's own.** The maintainer spotted it from the output: *"Aircraft148 is there always even if the
+unit cannot even hit air which is annoying and completely misrepresenting everything."*
+
+⭐ **A cell an attack cannot reach is `n/a`, and `n/a` is not `0`.** Both are excluded from every
+mean, but "immune to this armour" and "cannot target this armour" are different statements and a
+reader must be able to tell them apart. Guarded by `warhead_matrix.targetable_macros`.
+
+## An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check
+
+The reference matrices are normalised so each one's geometric mean is 100 and every value lies in
+`[10, 200]`. That was verified after every change and reported as proof — *"all seven verified at
+exactly 100.00000000"*.
+
+It proved nothing. The matrix is divided **by the very centre being tested**, so the invariant is
+true whatever that centre is. It passed on six matrices whose centre had collapsed to a twentieth
+of the mod's typical value, where a real 60 and a real 100 both clamped to the ceiling and the
+whole matrix had flattened.
+
+⭐ **Check against a quantity the transform cannot move.** Here that is the source's own POSITIVE
+MEDIAN: a matrix has collapsed when its typical working value no longer fits inside its own window.
+`warhead_matrix.py --check`. The same trap is waiting wherever a value is normalised by a statistic
+derived from itself.
+
+⚠ The related numerical lesson: the window is a FIXPOINT (clamping moves the mean, which moves the
+window), and it **diverges** when the floored cells are numerous enough. Above ~13% zeros Mental
+Omega's centre marched 32.3 → 13.5 → 4.1 → 0.2 and never settled. Below ~8% it converged fine,
+which is exactly why the flaw stayed invisible until six YR mods were added at once.
+
+## `*Death` tokens are DEATH ANIMATIONS, not damage elements
+
+`DamageTypes` looks like an element tag and mostly is not. `FireDeath` means "the victim plays the
+burning death sequence" — Combined Arms' `HonestJohn` rocket artillery and `155mmSpec` both carry
+it, and neither is a fire weapon. Reading it as an element produced a warhead group named
+`LaserFire_Veh` containing `PointLaser` and `AvatarLaser`.
+
+⭐ **Split the strong signals from the animations.** `FrozenDeath`, `RadiationDeath`, `ToxinDeath`,
+`ElectricityDeath` and `AtomizedDeath` are specific enough that no ordinary weapon claims them, and
+`TankBuster` and `Incendiary` are real damage tags the engine acts on. `FireDeath`,
+`ExplosionDeath`, `BulletDeath` and `DefaultDeath` are presentation.
+
+⭐ **HOW TO TELL WHICH IS WHICH, since the name never says (R54).** List the token's CARRIERS and
+read them. A token whose carriers are all one kind of weapon is an element; a token spread across
+several kinds is an animation, no matter how elemental it sounds. Worked on all eight OpenRA
+rulesets at once, that test admitted three new spellings and rejected seven tempting ones:
+
+| token | carriers | verdict |
+|---|---|---|
+| `VirusDeath` (RV, 24 weapons) | ToxinSprayer, Virusgun, PoisonSting, ToxinBomb, CloudDamage — **all toxin** | **Toxin** |
+| `PoisonDeath` (CA, 8) | ChemDebris, CorrupterSpew, VirusCloud, and a sniper that **spawns a `viruscloud` actor** | **Toxin** |
+| `OrangeRadiationDeath` (8) | every one the Orange twin of a `RadiationDeath` weapon | **Radiation** |
+| `FlameDeath` (RV, 61) | flamethrowers — **but also** CurtainRifle, PsychicJab, MirageGun, IonCannon, every barrel explosion | animation |
+| `ElectroDeath` (RV, 73) | ElectricBolt, CoilBolt — **but also** PrismShot, Comet, DiskLaser | animation |
+| `EnergyDeath` (SP/CN/TS, 84) | lasers, plasma, ion, railgun, tesla **and artillery** | animation |
+
+⛔ **The same element is spelled differently in every mod, so the vocabulary is never finished.**
+Toxin alone has FIVE spellings across the corpus — `ToxinDeath` (CA), `TiberiumDeath` (TD/Cameo),
+`RA2VirusDeath` (Cameo), `VirusDeath` (RV), `PoisonDeath` (CA). A mod that shows **zero groups of
+an element it obviously has** is the symptom; Romanov's Vengeance had no chemical weapons on
+record while shipping a full Yuri toxin arsenal. Census the tokens before assigning the source.
+
+⚠ **Listing a token as NOISE changes no classification** — `element_of` subtracts the noise set and
+then takes the first `ELEMENT_ORDER` hit, so a token in neither list already loses every time. The
+noise set exists to record that a token was **censused and judged**, which is the only thing that
+stops the next census redoing the work. Do not mistake adding one for a fix.
+
+## A surviving name is not a surviving decision (2026-09-22)
+
+Reviewed data keyed by a GENERATED name silently rots when the generator renumbers, and the
+loader will not notice, because the name still exists.
+
+Pulling one weapon out of Combined Arms' `Bullet_Veh_7` cascaded the numbered suffixes: `_7`, `_8`
+and `_9` each inherited the next group's weapon, and three **maintainer-reviewed** decisions
+attached to weapons nobody had looked at. The coverage report said **one** row was open — the only
+one whose name had disappeared — so three wrong rows read as green.
+
+⭐ **The fix is to record the MEMBERS a decision was written about, and check them.** Every
+assignment row had always carried its weapon list, precisely so it could be audited later, and
+nothing audited it until `assignment_store.stale_rows()` did. Generalise: whenever a hand-made
+judgement is keyed by anything a tool generates, store the judgement's SUBJECT alongside the key
+and assert the two still agree.
+
+⛔ **And prove the guard on the broken state before trusting it.** `stale_rows()` was run against
+the pre-migration file first and fired on 4 rows, then against the fixed one and fired on 0. A
+guard only ever observed passing is indistinguishable from a guard that cannot fail — the same
+defect as `tolerance` set so wide no claim could miss, and as a line-ending check that could never
+trigger.
+
+## A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)
+
+Three writers in one lane failed the same way: they did something destructive, reported success,
+and left no signal.
+
+* `compress_warheads.py --write` **replaces** the groups file rather than merging, while
+  `--source` **defaults to one mod**. A bare `--write` wrote 182 groups over all twenty sources,
+  destroying **1,499**, and printed `wrote docs/reference/warhead_groups.json` with exit 0.
+* `retau_assignment.py` held a **hardcoded document path** from when there was one reviewed
+  source. `--source X` switched the data but not the document, so it compared X's groups against
+  a different mod's review and reported a confident 100% migration.
+* Its own warning said *"both groupings are at tau X — nothing to migrate"*, which is false: a
+  vocabulary change regroups without touching tau.
+
+⭐ **A destructive default needs an explicit opt-in, and a report needs a number.** `--write` now
+requires `--all` and prints the group and source counts it wrote, so a wrong run is visible in its
+own output rather than in a diff nobody takes. ⭐ **Snapshot before any regrouping** — the 1,499
+lost groups were recovered from a copy taken two commands earlier, purely out of habit.
+
+## One weapon, one warhead — on the REFERENCE side too
+
+**116 of Combined Arms' 466 armed weapons carry more than one damage warhead.** Treating each node
+as its own weapon put one weapon into three groups at once and filled the generalist buckets with
+fragments — which is what the maintainer was seeing when they wrote *"these are many different
+things that have nothing to do with each other."* One row per weapon is right, and it is
+DESIGN.md §11b applied to the corpus instead of to our own tree.
+
+⛔ **The half of this entry that said HOW to pick that row was wrong and has been struck.** It
+read: *"`Warhead@1Dam` is the main in 550 of 577 weapons, so the convention decides it."* The
+count came from a scan that treated every warhead node as a weapon, and the conclusion does not
+survive contact with the corpus — see
+[A weapon's profile is the SUM of its warheads](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one).
+⭐ **Fold, do not pick.**
+
+## A weapon's profile is the SUM of its warheads, not its biggest one
+
+The maintainer reviewed 132 measured warhead groups and queried four of them in almost the same
+words — *"why is light immune? this doesn't make any sense and is a bug"*, *"how is the damage so
+low against None?"*, *"none immune is a bug, this can't be right?"*, *"are you sure that anti light
+is only at 18 while the rest is all at 176?"*. All four were one defect, in the measurement.
+
+The compressor reduced each weapon to one warhead — correctly — but picked it **by name**,
+`Warhead@1Dam` first. In Combined Arms that convention does not mean "the main one", and the extra
+warheads are routinely **complementary rather than twins**, because OpenRA fires every warhead on
+every hit:
+
+| weapon | `@1Dam` | the warhead that was discarded |
+|---|---|---|
+| `FireballLauncher` | `Light: 0` | `@2Dam` — `Light: 50`, everything else 0 |
+| `JDAM` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `MaverickSU` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `ApocRadBeamWeapon` | an infantry-only `HealthPercentageDamage` rider stating one row | `@2Dam` — the weapon's whole table |
+
+Picking one reported a **false zero**, the worst error available here: the pipeline exists to keep
+time-to-kill intact across the compression, and a zero says "this matchup never ends".
+
+⭐ The fix is arithmetic, not heuristic. Effective damage against armour `A` is what the engine
+inflicts, `sum over warheads w that reach A of damage_w x versus_w(A) / 100`, so the folded row is
+that against the weapon's own total damage `D`:
+
+```
+versus(A) = 100 x SUM( damage_w x versus_w(A) ) / D,    D = SUM( damage_w )
+```
+
+A warhead that cannot reach `A` contributes 0 to the numerator and still counts in `D`. That keeps
+the **ratios** between armour rows equal to the ratios of real effective damage. ⚠ Dividing by a
+per-armour denominator instead — a plain weighted average — silently flattens exactly the weapons
+that split their target sets: it reports `ApocRadBeamWeapon` at 2.14x infantry-vs-light where the
+truth is 2.64x. Two currencies are never summed: `HealthPercentageDamage` resolves as
+`HP x Damage/100 x Versus/100`, so `Damage: 300` is a 3x-overkill one-shot and not a 300 HP chip,
+and it folds only with its own kind.
+
+⚠ **A folded row has no node of its own, and `DamageTypes` is keyed by (weapon, node).** The first
+version of this fold dropped that key, every folded weapon came back element `Plain`, and the
+flamethrowers landed in the plain-`Bullet` group. Carry the original node list and resolve the
+element over all of them.
+
+⭐ **The maintainer's review was recorded per WEAPON, not per group, and that is why it survived.**
+Group names carry a `_2`/`_3` suffix assigned by clustering order, so fixing this defect moved 5
+group boundaries and would have invalidated a name-keyed review. `docs/reference/warhead_family_assignment.yaml`
+keeps every individually-named verdict in an `overrides:` block for exactly this reason.
+
+## Matching a warhead by its NAME fails, three different ways
+
+Three separate name-based classifications broke in one session:
+
+* `BazAP` was classified **Tesla** — `Ba`**`zAP`** contains "zap" as a substring.
+* `ChronoBeam` and `LocomotorBeam` matched **Laser** on "beam"; both are mind-control and
+  movement effects with no damage profile at all.
+* `InterloperLaser` landed in a group named `Cannon_LightVeh`, and `135mm` in one named
+  `Laser_HeavyVeh`, because the group's name was voted by whichever member matched first.
+
+Word boundaries fix only the first. ⭐ **Every signal has a measured source: delivery from the
+weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors that actually fire
+it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
+groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).
+
+## W23-RA correction round (2026-09-23, Nova) — four traps that each cost a re-pass
+
+**1. A covering `^Effect_*` edge on parent AND child is a boot crash, not a style issue.**
+When a follow-up pass adds `Inherits@fx_cover: ^Effect_X` to cover local typed
+`Warhead@` declares, check every WEAPON ancestor first: if `Parent` already
+carries (or will receive) the same `^Effect_X`, adding it to `Child` puts the
+name twice on one root-to-ancestor path — `MiniYaml.cs` throws
+"Parent type X was already inherited" at boot. `audit_duplicate_inherits.py`
+BLOCKING section reports exactly this class (not the advisory diamond section).
+Fix = drop the child's own edge; the template still reaches via the parent and
+resolution is unchanged (verified by resolved diff). ~40 W23-RA weapons needed it.
+
+**2. `^` template blocks are cross-file providers — weapon-level passes must never touch them.**
+Two separate "sweep" tools (a duplicate-warhead-edge collapse and an
+orphan-cancel remover) treated `^` blocks like concrete weapons and stripped
+their `Inherits` lines. Those templates are consumed by weapons in OTHER files
+(`GLDemolitionExplode` in the central `weapons.yaml` consumes
+`^RA2TerroristLegacy` from a ContentPack file) — the breakage surfaced as
+EMPTY-TYPE warheads in files the pass never touched. The only safe rule:
+a `^` block must stay byte-identical to HEAD unless the pass is *about* that
+template. Verify by restoring every `^` block to its `git show HEAD:` content
+and re-running the repo-wide resolved diff.
+
+**3. Git Bash `/tmp` is NOT `C:\tmp` — Python resolves it to the drive root.**
+`open('/tmp/orphans.txt')` from Python reads `C:\tmp\orphans.txt`; bash's
+`/tmp` is the user temp dir. A stale `C:\tmp\orphans.txt` from another
+worktree's session redirected a line-number-based deletion tool into that
+worktree's files. It happened to delete exactly the orphan cancels that
+worktree's own audit had flagged (positions still valid), but the hazard is
+real: **always pass `cygpath -w` paths into Python tools, and before a
+line-number deletion verify each target line actually contains the expected
+pattern** (e.g. starts with `-` for cancels). Refuse otherwise.
+
+**4. `W7_BASELINE` in `audit_weapon_shape.py` is stale on master.**
+Both master and this branch report 963 vs the hardcoded 957 — the +6 is
+fleet-wide weapon-inherit debt that landed after the ratchet was set, not a
+regression in any one branch. When a ratchet fails, first re-run the audit in
+a clean master worktree with master's own script copy (`find_repo_root`
+resolves from the script's path, NOT the cwd — running another tree's script
+silently scans the wrong tree).
+
+---
+
+## `extract_stats` carries seeded `design.*` fields forward by actor KEY — a rename silently drops them (2026-09-23)
+
+`load_existing_design` preserves judgment data (`design.category`, `unit_class`, `special`,
+`tech_tier`, `class_anchor`) by looking each actor up in the COMMITTED ledger under its live
+name. Rename `ra2_allies_alliedmobileconstructionvehicle` → `ra2_allies_mobileconstructionvehicle`
+and the lookup misses: the fresh extract regenerates the block in the CURRENT schema and the
+legacy `category: "Vehicles"` seed vanishes — a real delta hiding inside what looks like a pure
+id-renames diff.
+
+Check any extract after a rename by remapping the committed ledger's keys through the rename
+map before diffing; residual deltas are then either seeded-field losses (restore them in the
+ledger) or genuine staleness corrections (disclose them in the commit message). The same
+lookup-by-key trap applies to any tool that carries state forward from a committed artifact
+(`assign_references`, anchors tables, doc_claims pins).
+
+## `*ProportionalToPhysicalState` traits have non-neutral defaults on secondary channels (2026-09-23)
+
+`DamageMultiplierProportionalToPhysicalState` is neutral on every knob it doesn't take —
+but `SlowsProportionalToPhysicalState` is not: omit `TurnSpeed`/`TurretSpeed`/`ReloadDelay`
+endpoints and they default to a 100→50 slowdown curve, silently adding slows the old
+binary condition never had. When converting a `SpeedMultiplier`-only binary effect to a
+meter (the W7 `SonicDebuff` → `Resonance` conversion), pin every channel you don't intend
+to scale at `100` on both endpoints, and grep the trait's C# defaults before assuming
+"unset = unchanged". Same trap class as 8b/8c: an omitted field is a value, not an absence.
+
+Adjacent gotcha from the same conversion: `AreaDamage`'s `PhysicalStates: X: 100` scales
+the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply a **flat
+`Amount`** — hand-tuned support grants (IonPulse rings, `Warhead@2Con` lasers) need the
+flat form; folding them into a damage node would make a support power's debuff depend on
+its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.
+
+And the follow-up trap the same conversion shipped (DAWN's double-feed finding,
+2026-09-24): a `GrantExternalCondition`/`ApplyPhysicalState` warhead with a `Range`
+wider than the damage warhead's `Spread` is an **area channel**, not "the condition
+grant the meter subsumes". The sonic `_Debuff` nodes deliberately marked a ring of
+`Range = 2×Spread` — units beyond the blast got the mark without damage. Deleting them
+(#476) shrank the mark to the damage footprint on all 15 sonic templates. When
+converting a condition grant to a meter feed, compare `Range` to the damage `Spread`:
+wider = keep as a flat feed (the ring is the payload), equal-or-smaller = redundant.
+`audit_physical_state_warheads` exempts `Range > Spread` fixed feeds for exactly this.
+
+Sign-convention trap from W9 (2026-09-23): `ChangesHealth` damages with a **negative**
+step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` damages with a
+**positive** `DamageAtMaximum` (the trait only inflicts when the interpolated amount is
+`> 0`). With `UsePercentageDamage: true` the value is percent-of-max-HP per
+`DamageInterval` at full meter — `DamageAtMaximum: 1` + `DamageInterval: 20` reproduces
+`PercentageStep: -1, Delay: 20` exactly at full dose, and scales down with the meter
+(dose-response). `DamageAtMinimum: 0` keeps a zero dose inert; `DamageThreshold: 0`
+applies whenever the meter is above zero.
+
+## The naming audit sees file stems only — pair it with a raw disk scan (2026-09-24)
+
+`audit_naming_damage.py` scans `mods/cameo/bits/**` stems through `SPRITE_EXT` and a
+known-actor-id regex. Two blind spots surfaced in the ra1_soviets cleanup: **`.tem`
+theater files are outside `SPRITE_EXT`**, and **doubled stems built from non-actor ids**
+(`ra1_soviets_promotion_unlockX`, `ra1_soviets_upgrade_X`) match no actor id so N1
+cannot see them. A `bits/` rglob found 15 more damaged files than the audit's 68 —
+always run the raw scan before writing a map. Sequence-name damage is likewise
+invisible: `ra1_soviets_sovietbarracks` as an `Image:`/`Inherits:` id flags nothing,
+but is the same redundant-word class. Sweep it in the map's `actors:` section — the
+replacer is boundary-safe and catches every reference.
+
+`tools/rename/rename_map_ra1_soviets.yaml` remains stamped STALE — DO NOT APPLY.
+`gen_rename_maps.py` cannot emit this map either: it proposes §9.1-grammar renames,
+while actor ids were already 106/106 compliant (`ad7c5e232` + revert). The applied
+artifact is the hand-derived `rename_map_ra1_soviets_n134.yaml` — 14 sequence ids +
+83 files, zero dangling refs, N1 16→0 / N3 4→0 / N4 48→0 for the faction.
+
+Three traps from W10 (2026-09-24), all the same species — "the meter is not the binary
+condition it replaced":
+1. **Meters clamp.** `PhysicalState.ApplyChange` runs `Math.Clamp(MinValue, MaxValue)`,
+   so a converted `GrantExternalCondition` with `Duration: 125` cannot be preserved as
+   `Amount: 25000` — overshoot is discarded. When the cliff grant sits at exactly
+   `MaxValue`, full-state duration is owned by `RelaxationDelay`, not by `Amount`.
+   Per-weapon duration ordering is lost by design; use `Amount: <MaxValue>` for
+   binary-faithful instant-full and flag the ordering loss in the commit/REQUEST.
+2. **Retire the conditional multiplier the proportional trait replaces.** W10's
+   `ModifiesCombatProportionalToPhysicalState@Blind` (`RangeTo: 20`) and the old
+   `RangeMultiplier@blinded` (`Modifier: 20`) are both `IRangeModifier`s — keeping both
+   would scale range to 20%×20% = 4% at full meter. When a proportional channel goes
+   live, delete the binary-cliff multiplier for the same channel.
+3. **Condition names substring-match.** `cloak-force-disabled` *contains* `disabled` —
+   a `grep disabled` on `PauseOnCondition` lines over-matches. Split the condition
+   expression on `||`/`&&`, strip `!`, and compare whole tokens before appending
+   (`|| blinded` went to exactly the 46 sites carrying a real `disabled` token, not
+   the 48 lines grep counted).
+
+---
+
+### W27 family-extraction rules that survived verification (2026-09-25)
+
+Extracting inline `Warhead@` effect nodes into `^d2k_*` families taught four
+non-obvious rules, each learned from a red audit:
+
+1. **`-X:` cancels need a provider.** Emitting `-Warhead@X:` before every
+   redeclare inside a derivation family produced 22 orphan cancels — a
+   purely-local stripped node has no parent copy to cancel. Cancel only when
+   `parent_flat` contains the channel.
+2. **Family purity forbids non-effect types.** A pin like
+   `Warhead@ShieldHit: GrantExternalCondition` inside the family flips it to
+   "legacy" (W8). Those channels must be pinned at WEAPON level as a trailing
+   local typed node instead.
+3. **…but you cannot mask them either.** `-Warhead@X:` inside the family
+   strips the type from a bare local `Warhead@X:` pin that relied on the
+   parent for its type → empty-type NRE. Full local redeclare is the only
+   safe form.
+4. **Edge classification must match the audit's own predicate.** W4 counts
+   `^Effect_`-PREFIXED parents plus fixpoint-classified families. An impure
+   `^Effect_*` template (e.g. `^Effect_Magic_Heavy`) is an fx edge for the
+   audit but never enters `fx_templates` — a removal filter using only the
+   fixpoint set leaves the old edge in place and the weapon grows a second
+   fx edge (+1 W4 each).
+
+## Drain-migration minification hazard (2026-09-26)
+
+The pack-drain migration can emit a weapon block as ONE line of tab-separated
+`Key: value` tokens (`PulseMissile:Inherits: X\tWarhead@Y: ...`). MiniYAML
+treats the whole line as a scalar value — the weapon resolves to zero fields
+and is silently dead, while grep still "sees" the content. Census for the
+class: top-level lines containing a literal tab after the colon. Restoration:
+split on tabs, depth = run-length of empty tokens + 1, and DROP the first
+empty token (the separator after `Name:` is not depth). Verify restored blocks
+byte-identical against the pre-drain commit, then re-run find_empty_warhead —
+a wrong first-token depth parses fine for the engine but is skipped by
+indent-based audit scanners.

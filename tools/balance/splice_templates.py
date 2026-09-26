@@ -65,7 +65,21 @@ def main():
     else:
         gen = all_gen
 
-    text = F.read_text(encoding="utf-8")
+    # READ WITH newline="" OR THE LINE-ENDING DETECTION BELOW IS A NO-OP. read_text applies
+    # universal-newline translation, so a CRLF file arrives already normalised and the CRLF
+    # check never fires; write_text then translates back to os.linesep, so on Windows this
+    # tool rewrote EVERY line of weapons.yaml whatever the file actually used.
+    #
+    # MEASURED, because the obvious conclusion is wrong: the COMMITTED diff was never at risk.
+    # .gitattributes carries "*.yaml eol=lf" and "* text=lf", so git normalises on add and
+    # shows the same 12 changed lines whichever ending is on disk -- verified by writing CRLF
+    # and re-running git diff. What the rewrite actually costs is the WORKING TREE: a plain
+    # (non-git) diff reports all 19,882 lines, byte-comparing tools see a fully changed file,
+    # editors churn, and git prints a warning on every touch. That is a detour, not a
+    # corruption -- but it is free to avoid, and the protection is one .gitattributes edit away
+    # from disappearing for any path the patterns stop covering.
+    with F.open(encoding="utf-8", newline="") as fh:
+        text = fh.read()
     newline = "\r\n" if "\r\n" in text else "\n"
     flines = text.split(newline)
     result, replaced, i = [], [], 0
@@ -87,7 +101,8 @@ def main():
             result.append("")
             result.extend(gen[m])
         replaced += missing
-    F.write_text(newline.join(result), encoding="utf-8")
+    with F.open("w", encoding="utf-8", newline="") as fh:
+        fh.write(newline.join(result))
     print(f"spliced {len(replaced)} blocks: {', '.join(replaced)}")
 
 

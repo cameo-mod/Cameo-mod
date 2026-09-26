@@ -233,7 +233,7 @@ td_nod_commando:
 	Passenger:
 		Voice: Move
 	Armament@c4:
-		Weapon: TanyaAttach
+		Weapon: td_tanyaattach
 		Name: secondary
 		Cursor: c4
 		OutsideRangeCursor: c4
@@ -503,7 +503,7 @@ td_nod_stealthsoldier:
 		# Modifier: 81
 td_nod_lasercommando:
 	Inherits: ^Soldier
-	Inherits@deathanim: ^RA2InfantryDeathAnimations
+	Inherits@deathanim: ^TDRA2InfantryDeathAnimations
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

@@ -151,8 +151,12 @@ class WeaponUpgradeContractTest(unittest.TestCase):
             with self.subTest(weapon=name):
                 node = self.rs.resolve_weapon(name)
                 self.assertEqual([family], main_warheads(node))
-                self.assertTrue(any(c.get('Condition') == 'SonicDebuff'
-                                    for c in node.children if c.value == 'GrantExternalCondition'))
+                # W7: the mark is the Resonance meter on the main warhead, not a
+                # GrantExternalCondition side warhead.
+                main = node.child('Warhead@' + family)
+                states = main.child('PhysicalStates') if main else None
+                self.assertIsNotNone(states)
+                self.assertIsNotNone(states.get('Resonance'))
                 armors = upgrade.CORE
                 if 'Air' in (self.rs.resolve_weapon(base).get('ValidTargets') or '').split(', '):
                     armors += upgrade.AIR
