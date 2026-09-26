@@ -43,9 +43,10 @@ DEFAULT_PERCENTAGE_SPREAD = 50
 INT32_MIN = -(2 ** 31)
 INT32_MAX = 2 ** 31 - 1
 # THE SHARED PROFILE: one combined fraction
-# Damage x PercentageScale x Heaviness / (200000 x 2000) — half-up in ONE step,
-# with the h/2 heaviness factor inside the fraction (never a legacy rounding
-# then a multiply). Mirrors the C# SharedFoldedPercentageUnits.
+# Damage x PercentageScale x growth(h) / 200000 — half-up in ONE step, with the
+# growth factor inside the fraction (never a legacy rounding then a multiply).
+# Mirrors the C# SharedFoldedPercentageUnits. (The two constants below are the
+# retired h/2 form, kept only for readers of older reports.)
 SHARED_SCALE_DENOMINATOR = 200_000 * 2000
 SHARED_ROUNDING_BIAS = SHARED_SCALE_DENOMINATOR // 2
 
@@ -93,16 +94,26 @@ def folded_units(damage: int, scale: int) -> tuple[float, int]:
     return continuous, rounded
 
 
+def shared_growth(heaviness: int) -> tuple[int, int]:
+    """§12.0j (maintainer 2026-09-26): the percentage half GROWS with h like the old levels
+    (tops 16/20/25) — x0.8 at h=0, x1.0 at h=1, x1.25 at h=2, linear on each side of h=1.
+    Exact integers, mirror of the C#: (4000 + H) / 5000 up to H=1000, (3000 + H) / 4000 above."""
+    if heaviness <= 1000:
+        return 4000 + heaviness, 5000
+    return 3000 + heaviness, 4000
+
+
 def shared_folded_units(damage: int, scale: int, heaviness: int) -> tuple[float, int]:
     """THE SHARED-PROFILE conversion: ONE rounded combined fraction
-    ``Damage x PercentageScale x h / (200000 x 2000)`` — half-up over the
-    nonnegative input, everything in ONE step (the h/2 factor lives inside the
-    fraction). Python ints are arbitrary precision, mirroring the C# Int128
-    intermediates; the result must fit Int32 exactly like the engine's field."""
-    continuous = damage * scale * heaviness / SHARED_SCALE_DENOMINATOR
-    numerator = damage * scale * heaviness + SHARED_ROUNDING_BIAS
-    rounded = _runtime_int32(
-        _truncate_div(numerator, SHARED_SCALE_DENOMINATOR))
+    ``Damage x PercentageScale x growth(h) / 200000`` — half-up over the nonnegative
+    input, everything in ONE step (the growth factor lives inside the fraction). Python
+    ints are arbitrary precision, mirroring the C# Int128 intermediates; the result must
+    fit Int32 exactly like the engine's field. At h = 1 it equals the legacy fold."""
+    growth_num, growth_den = shared_growth(heaviness)
+    denominator = 200_000 * growth_den
+    continuous = damage * scale * growth_num / denominator
+    numerator = damage * scale * growth_num + denominator // 2
+    rounded = _runtime_int32(_truncate_div(numerator, denominator))
     return continuous, rounded
 
 
