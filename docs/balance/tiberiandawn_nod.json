@@ -1655,10 +1655,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "36"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1666,10 +1662,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -1819,7 +1811,7 @@
     },
     "shield_condition": {
      "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
     },
     "shield_flat": {
      "src": "inherited",
@@ -1828,10 +1820,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -1935,10 +1923,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "56"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1946,10 +1930,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2106,10 +2086,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "80"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2117,10 +2093,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2225,10 +2197,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "29"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2236,10 +2204,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2418,10 +2382,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "57"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2429,10 +2389,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2591,7 +2547,7 @@
     },
     "shield_condition": {
      "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
     },
     "shield_flat": {
      "src": "inherited",
@@ -2600,10 +2556,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2829,7 +2781,7 @@
     },
     "shield_condition": {
      "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
     },
     "shield_flat": {
      "src": "inherited",
@@ -2838,10 +2790,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2947,7 +2895,7 @@
     },
     "shield_condition": {
      "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
     },
     "shield_flat": {
      "src": "inherited",
@@ -2956,10 +2904,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -3152,10 +3096,6 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "25"
     },
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3163,10 +3103,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -3995,7 +3931,7 @@
      "Research"
     ]
    },
-   "td_nod_upgrade_cyberneticmodifications": {
+   "td_nod_upgrade_cyberneticarmor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4012,10 +3948,37 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Cybernetic Modifications",
+    "name": "Cybernetic Armor",
     "prerequisites": [
      "~td_nod_templeofnod",
      "td_nod_templeprime",
+     "td_nod_upgrade_cyberneticmodifications",
+     "!td_nod_upgrade_cyberneticarmor"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_cyberneticmodifications": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cybernetic Modifications",
+    "prerequisites": [
+     "~td_nod_templeofnod",
      "!td_nod_upgrade_cyberneticmodifications"
     ],
     "queue": [

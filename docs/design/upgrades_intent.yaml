@@ -21,10 +21,14 @@ td_nod_upgrade_elitecapacitors:
 	drawbacks: reloaddelaymultiplier
 td_nod_upgrade_cyberneticmodifications:
 	faction: td_nod
-	effect: infantry shield and Medium armor profile; speed +20%
+	effect: permanent Medium armor on top of the infantry armor (geometric); speed +20%
+	coverage: infantry
+	phase: mid
+td_nod_upgrade_cyberneticarmor:
+	faction: td_nod
+	effect: COMPOSITE armor plating bar, 50% of max HP, absorbs before health; needs Cybernetic Modifications
 	coverage: infantry
 	phase: late
-	drawbacks: damagemultiplier
 
 ######################## Reviewed weapon tradeoffs ##################
 asianalliance_doctrine_heavypulverizerweapons:
