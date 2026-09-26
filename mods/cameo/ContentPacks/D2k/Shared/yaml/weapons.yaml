@@ -1059,7 +1059,7 @@ ordos_autogunturret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7700
-	StartBurstReport: autoguntrt.wav
+	StartBurstReport: d2k_shared_sounds|autoguntrt.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		-Image:
@@ -1112,7 +1112,7 @@ d2k_laser:
 	Range: 7500
 	Burst: 5
 	BurstDelays: 0
-	StartBurstReport: d2k_laser_tank_att.wav
+	StartBurstReport: d2k_shared_sounds|d2k_laser_tank_att.wav
 	ValidTargets: Ground
 	Projectile: LaserZap
 		Width: 50

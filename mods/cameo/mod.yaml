@@ -41,6 +41,62 @@ FileSystem: ContentInstallerFileSystem
 		~cameo|ContentPacks/TiberianDawn/Shared/files/sprites: td_shared_sprites
 		~cameo|ContentPacks/TiberianDawn/Shared/files/voxels: td_shared_voxels
 		~cameo|ContentPacks/TiberianDawn/Shared/files/sounds: td_shared_sounds
+		~cameo|ContentPacks/RedAlert2/Allies/files/icons: ra2_allies_icons
+		~cameo|ContentPacks/RedAlert2/Allies/files/sprites: ra2_allies_sprites
+		~cameo|ContentPacks/RedAlert2/Shared/files/sprites: ra2_shared_sprites
+		~cameo|ContentPacks/RedAlert2/Soviets/files/icons: ra2_soviets_icons
+		~cameo|ContentPacks/RedAlert2/Soviets/files/sprites: ra2_soviets_sprites
+		~cameo|ContentPacks/RedAlert2/Yuri/files/icons: ra2_yuri_icons
+		~cameo|ContentPacks/RedAlert2/Yuri/files/sounds: ra2_yuri_sounds
+		~cameo|ContentPacks/RedAlert2/Yuri/files/sprites: ra2_yuri_sprites
+		~cameo|ContentPacks/RedAlert2Mod/AsianAlliance/files/icons: ra2m_asianalliance_icons
+		~cameo|ContentPacks/RedAlert2Mod/AsianAlliance/files/sounds: ra2m_asianalliance_sounds
+		~cameo|ContentPacks/RedAlert2Mod/AsianAlliance/files/sprites: ra2m_asianalliance_sprites
+		~cameo|ContentPacks/RedAlert2Mod/Consortium/files/icons: ra2m_consortium_icons
+		~cameo|ContentPacks/RedAlert2Mod/Consortium/files/sounds: ra2m_consortium_sounds
+		~cameo|ContentPacks/RedAlert2Mod/Consortium/files/sprites: ra2m_consortium_sprites
+		~cameo|ContentPacks/RedAlert2Mod/FutureTech/files/icons: ra2m_futuretech_icons
+		~cameo|ContentPacks/RedAlert2Mod/FutureTech/files/sounds: ra2m_futuretech_sounds
+		~cameo|ContentPacks/RedAlert2Mod/FutureTech/files/sprites: ra2m_futuretech_sprites
+		~cameo|ContentPacks/RedAlert2Mod/Naxis/files/icons: ra2m_naxis_icons
+		~cameo|ContentPacks/RedAlert2Mod/Naxis/files/sounds: ra2m_naxis_sounds
+		~cameo|ContentPacks/RedAlert2Mod/Naxis/files/sprites: ra2m_naxis_sprites
+		~cameo|ContentPacks/RedAlert2Mod/SchwarzerMond/files/icons: ra2m_schwarzermond_icons
+		~cameo|ContentPacks/RedAlert2Mod/SchwarzerMond/files/sounds: ra2m_schwarzermond_sounds
+		~cameo|ContentPacks/RedAlert2Mod/SchwarzerMond/files/sprites: ra2m_schwarzermond_sprites
+		~cameo|ContentPacks/RedAlert2Mod/Shared/files/icons: ra2m_shared_icons
+		~cameo|ContentPacks/RedAlert2Mod/Shared/files/sounds: ra2m_shared_sounds
+		~cameo|ContentPacks/RedAlert2Mod/Shared/files/sprites: ra2m_shared_sprites
+		~cameo|ContentPacks/RedAlert2Mod/Syndicate/files/icons: ra2m_syndicate_icons
+		~cameo|ContentPacks/RedAlert2Mod/Syndicate/files/sounds: ra2m_syndicate_sounds
+		~cameo|ContentPacks/RedAlert2Mod/Syndicate/files/sprites: ra2m_syndicate_sprites
+		~cameo|ContentPacks/RedAlert2Mod/TKM/files/icons: ra2m_tkm_icons
+		~cameo|ContentPacks/RedAlert2Mod/TKM/files/sounds: ra2m_tkm_sounds
+		~cameo|ContentPacks/RedAlert2Mod/TKM/files/sprites: ra2m_tkm_sprites
+		~cameo|ContentPacks/Warcraft2/Humans/files/icons: wc2_humans_icons
+		~cameo|ContentPacks/Warcraft2/Humans/files/sounds: wc2_humans_sounds
+		~cameo|ContentPacks/Warcraft2/Humans/files/sprites: wc2_humans_sprites
+		~cameo|ContentPacks/Warcraft2/Orcs/files/icons: wc2_orcs_icons
+		~cameo|ContentPacks/Warcraft2/Orcs/files/sounds: wc2_orcs_sounds
+		~cameo|ContentPacks/Warcraft2/Orcs/files/sprites: wc2_orcs_sprites
+		~cameo|ContentPacks/Warcraft2/Shared/files/icons: wc2_shared_icons
+		~cameo|ContentPacks/Warcraft2/Shared/files/sounds: wc2_shared_sounds
+		~cameo|ContentPacks/Warcraft2/Shared/files/sprites: wc2_shared_sprites
+		~cameo|ContentPacks/RedAlert/Allies/files/icons: ra1_allies_icons
+		~cameo|ContentPacks/RedAlert/Allies/files/sounds: ra1_allies_sounds
+		~cameo|ContentPacks/RedAlert/Allies/files/sprites: ra1_allies_sprites
+		~cameo|ContentPacks/RedAlert/Japan/files/icons: ra1_japan_icons
+		~cameo|ContentPacks/RedAlert/Japan/files/sounds: ra1_japan_sounds
+		~cameo|ContentPacks/RedAlert/Japan/files/sprites: ra1_japan_sprites
+		~cameo|ContentPacks/RedAlert/Shared/files/icons: ra1_shared_icons
+		~cameo|ContentPacks/RedAlert/Shared/files/sounds: ra1_shared_sounds
+		~cameo|ContentPacks/RedAlert/Shared/files/sprites: ra1_shared_sprites
+		~cameo|ContentPacks/RedAlert/Soviets/files/icons: ra1_soviets_icons
+		~cameo|ContentPacks/RedAlert/Soviets/files/sounds: ra1_soviets_sounds
+		~cameo|ContentPacks/RedAlert/Soviets/files/sprites: ra1_soviets_sprites
+		~cameo|ContentPacks/Outpost2/Shared/files/icons: op2_shared_icons
+		~cameo|ContentPacks/Outpost2/Shared/files/sounds: op2_shared_sounds
+		~cameo|ContentPacks/Outpost2/Shared/files/sprites: op2_shared_sprites
 		cameo|bits: bits
 		~cameo|bits/temp
 		~cameo|bits/ratemperat
@@ -110,11 +166,11 @@ FileSystem: ContentInstallerFileSystem
 		# ~cameo|bits/classicdoom
 		~cameo|bits/dune2
 		~cameo|bits/td
-		~cameo|bits/ra2/audio.bag
+		~cameo|ContentPacks/RedAlert2/Shared/files/sounds/audio.bag
 		~cameo|bits/ra2
 		~cameo|bits/ra2/shp2
 		~cameo|bits/ra2/mod
-		~cameo|bits/ra2/tileset
+		~cameo|ContentPacks/RedAlert2/Shared/files/tileset
 		~cameo|bits/darkreign
 		#########
 		~cameo|bits/ts

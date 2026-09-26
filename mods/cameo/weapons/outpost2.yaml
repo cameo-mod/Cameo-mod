@@ -43,7 +43,7 @@ edenMobileLaser:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 29
 	Range: 5280
-	Report: fireLaser.wav
+	Report: op2_shared_sounds|fireLaser.wav
 	Projectile: LaserZap
 		Width: 48
 		HitAnim: laserfire
@@ -207,7 +207,7 @@ edenMobileLaserTiger:
 	ReloadDelay: 16
 	Range: 7030
 	TargetActorCenter: true
-	Report: fireLaser.wav
+	Report: op2_shared_sounds|fireLaser.wav
 	Projectile: LaserZap
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -408,7 +408,7 @@ edenMobileDefenceLaser:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Report: fireLaser.wav
+	Report: op2_shared_sounds|fireLaser.wav
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 75
@@ -2347,7 +2347,7 @@ edenMobileThorsHammer:
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 33
-	Report: thor.wav
+	Report: op2_shared_sounds|thor.wav
 	Warhead@Tesla_Heavy:
 		Damage: 9000
 	-Warhead@Tesla_Heavy_ExtraDamage:
@@ -2356,7 +2356,7 @@ edenMobileThorsHammerTiger:
 	Inherits@w71: ^Projectile_Lightning_Heavy
 	Inherits@w72: ^Effect_Tesla_Heavy
 	ReloadDelay: 19
-	Report: thor.wav
+	Report: op2_shared_sounds|thor.wav
 	Warhead@Tesla_Heavy:
 		Damage: 9000
 	-Warhead@Tesla_Heavy_ExtraDamage:
@@ -2367,7 +2367,7 @@ edenMobileThorsHammerTiger:
 plymouthMobileMicrowave:
 	ReloadDelay: 20
 	Range: 5632
-	Report: fireMicrowave.wav
+	Report: op2_shared_sounds|fireMicrowave.wav
 	Projectile: LaserZap
 		Color: FFFFFFFF
 		Width: 40
@@ -2384,7 +2384,7 @@ plymouthMobileMicrowave:
 plymouthMobileTigerMicrowave:
 	ReloadDelay: 10
 	Range: 5632
-	Report: fireMicrowave.wav
+	Report: op2_shared_sounds|fireMicrowave.wav
 	Projectile: LaserZap
 		Color: FFFFFFFF
 		Width: 40
@@ -2401,7 +2401,7 @@ plymouthMobileTigerMicrowave:
 plymouthMobileDefenceMicrowave:
 	ReloadDelay: 10
 	Range: 6656
-	Report: fireMicrowave.wav
+	Report: op2_shared_sounds|fireMicrowave.wav
 	Projectile: LaserZap
 		Color: FFFFFFFF
 		Width: 40
@@ -2418,7 +2418,7 @@ plymouthMobileDefenceMicrowave:
 plymouthScorpion:
 	ReloadDelay: 20
 	Range: 5632
-	Report: fireLaser.wav
+	Report: op2_shared_sounds|fireLaser.wav
 	Projectile: LaserZap
 		Color: 0000FFFF
 		Width: 40

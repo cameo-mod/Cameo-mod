@@ -121,11 +121,11 @@ ixian_rocketturret:
 atreides_d2k_munitions:
 	Defaults:
 	idle:
-		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Filename: d2k_shared_sprites|ixian_munitionssilo_d2k_munitions.shp
 		Start: 2
 		Scale: 1.5
 	damaged-idle:
-		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Filename: d2k_shared_sprites|ixian_munitionssilo_d2k_munitions.shp
 		Start: 3
 		Scale: 1.5
 	make:
@@ -146,13 +146,13 @@ atreides_d2k_munitions:
 		Tick: 200
 		ZOffset: 1024
 	icon:
-		Filename: ixian_munitionssilo_icon.shp
+		Filename: d2k_shared_icons|ixian_munitionssilo_icon.shp
 		Start: 2
 
 
 harkonnen_gunship:
 	Defaults:
-		Filename: harkonnen_gunship.png
+		Filename: d2k_harkonnen_sprites|harkonnen_gunship.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -161,7 +161,7 @@ harkonnen_gunship:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: harkonnen_gunship_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_gunship_icon.png
 
 
 
@@ -175,7 +175,7 @@ harkonnen_rocket_turret:
 
 harkonnen_spiceharvester:
 	Defaults:
-		Filename: harkonnen_harvester.png
+		Filename: d2k_harkonnen_sprites|harkonnen_harvester.png
 		Scale: 0.5
 	idle:
 		Start: 64
@@ -210,7 +210,7 @@ harkonnen_spiceharvester:
 
 harkonnen_advancedcarryall:
 	Defaults:
-		Filename: harkonnen_advancedcarryall.png
+		Filename: d2k_harkonnen_sprites|harkonnen_advancedcarryall.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -224,7 +224,7 @@ harkonnen_advancedcarryall:
 		Facings: 32
 		Tick: 120
 	icon:
-		Filename: harkonnen_advancedcarryall_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_advancedcarryall_icon.png
 
 
 ordos_stealthraider:
@@ -519,11 +519,11 @@ harkonnen_flameturret:
 		Tick: 200
 		ZOffset: 1024
 	turret:
-		Filename: harkonnen_flameturret_head.png
+		Filename: d2k_harkonnen_sprites|harkonnen_flameturret_head.png
 		Facings: -16
 		Offset: 0,-24
 	icon:
-		Filename: harkonnen_flameturret_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_flameturret_icon.png
 
 ^D2KRA2BasicInfantry:
 	Inherits: ^D2KRA2InfantryDeaths

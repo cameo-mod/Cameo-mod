@@ -1025,7 +1025,7 @@ ra1_allies_mobileradarjammer:
 		ChargingCondition: charging
 	AmbientSoundCA:
 		RequiresCondition: charging
-		SoundFiles: jammer.aud
+		SoundFiles: ra1_allies_sounds|jammer.aud
 		VolumeMultiplier: 10
 	WithIdleOverlay@JAMSIGNAL:
 		Sequence: jamsignal

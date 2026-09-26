@@ -12,18 +12,18 @@ wc2footmanslice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 15
 	Range: 1333
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 12000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2peasantsmack:
 	Inherits@w70: ^Warhead_Melee_Medium
 	Inherits@w71: ^Projectile_InstantHit
 	Inherits@w72: ^Effect_Melee_Medium
-	Report: wc2_peonatak.aud
+	Report: wc2_shared_sounds|wc2_peonatak.aud
 
 # 3-9 WC2 damage. 3 Base, 6 Pierce.
 	ReloadDelay: 15
@@ -31,7 +31,7 @@ wc2peasantsmack:
 	Warhead@Melee_Medium: AreaDamage
 		Damage: 12000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2arrowFire:
 	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
@@ -45,7 +45,7 @@ wc2arrowFire:
 	Inherits@8: ^ArrowWeapon
 	ReloadDelay: 25
 	Range: 6973
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -94,7 +94,7 @@ wc2arrowFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
 
 	-Warhead@FlakWeapon:
@@ -112,7 +112,7 @@ wc2highArrowFire:
 	Inherits@4: wc2arrowFire
 	ReloadDelay: 35
 	Range: 7487
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -346,8 +346,8 @@ wc2demolitionsquadMelee:
 	Warhead@Melee_Medium: AreaDamage
 		Damage: 12000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2demolitionsquadTargeting:
 	ValidTargets: Ground, Water
@@ -434,7 +434,7 @@ wc2mageFire:
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 40
 	Range: 8000
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 640
@@ -448,7 +448,7 @@ wc2mageFire:
 	Warhead@Effect: CreateEffect
 		Image: wc2_lightng
 		Explosions: hit
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 		ValidTargets: Ground, Air
 
 # Allegedly does an average of 34 WC2 damage...
@@ -456,7 +456,7 @@ wc2mageFire:
 wc2mageBlizzard:
 	ReloadDelay: 50
 	Range: 8000
-	Report: wc2_icestorm.aud
+	Report: wc2_shared_sounds|wc2_icestorm.aud
 	Projectile: InstantHit
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c1
@@ -562,7 +562,7 @@ wc2mageBlizzard_Projectile:
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LightChemicalWeapon
 	Inherits@4: ^LightFlameWeapon
-	Report: wc2_firehit.aud
+	Report: wc2_shared_sounds|wc2_firehit.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c512
@@ -620,7 +620,7 @@ wc2mageBlizzard_Projectile:
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_blizzard
 		Explosions: hit
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@FlakWeapon:
@@ -641,7 +641,7 @@ wc2_tower_arrow:
 	Inherits@3: ^ArrowWeapon
 	ReloadDelay: 34
 	Range: 8750
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -670,7 +670,7 @@ wc2_tower_arrow:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
@@ -691,12 +691,12 @@ wc2gruntslice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 18
 	Range: 1555
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2ogremageRunes_Hit:
 	Inherits@w70: ^Warhead_Demolition_Heavy
@@ -747,13 +747,13 @@ wc2skeletonpunch:
 	Inherits@w70: ^Warhead_Melee_Medium
 	Inherits@w71: ^Projectile_InstantHit
 	Inherits@w72: ^Effect_Melee_Medium
-	Report: wc2_punch.aud
+	Report: wc2_shared_sounds|wc2_punch.aud
 	ReloadDelay: 15
 	Range: 1333
 	Warhead@Melee_Medium: AreaDamage
 		Damage: 12000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2_tower_axe:
 	Inherits@w70: ^Warhead_Arrow_Heavy
@@ -768,7 +768,7 @@ wc2_tower_axe:
 	Warhead@Arrow_Heavy: AreaDamage
 		Damage: 19000
 		PercentageScale: 0
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	Projectile: Missile
 		Duration: 16
 		Inaccuracy: 0
@@ -818,7 +818,7 @@ wc2_tower_axe:
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -900,7 +900,7 @@ wc2cannontowerFire:
 	ReloadDelay: 90
 	Range: 10500
 	MinRange: 2100
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Ground, Water
 	InvalidTargets: Air
 	Projectile: Bullet
@@ -920,7 +920,7 @@ wc2cannontowerFire:
 wc2lightshipFire:
 	ReloadDelay: 70
 	Range: 5120
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c650
@@ -961,7 +961,7 @@ wc2lightshipFire:
 wc2heavyshipFire:
 	ReloadDelay: 130
 	Range: 7680
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 0c650
@@ -1000,7 +1000,7 @@ wc2heavyshipFire:
 wc2submarineFire:
 	ReloadDelay: 40
 	Range: 5120
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Water
 	Projectile: Bullet
 		Speed: 0c650
@@ -1077,7 +1077,7 @@ wc2tornadoTest:
 wc2daemonFire:
 	ReloadDelay: 40
 	Range: 5120
-	Report: wc2_fireball.aud
+	Report: wc2_shared_sounds|wc2_fireball.aud
 	ValidTargets: Ground
 	Projectile: Bullet
 		Speed: 0c650
@@ -1109,7 +1109,7 @@ wc2daemonFire:
 	Warhead@2Eff: CreateEffect
 		Image: wc2_effect_daemon_attack
 		Explosions: hit
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 
 wc2visualexplode:
 	Warhead@2Eff: CreateEffect

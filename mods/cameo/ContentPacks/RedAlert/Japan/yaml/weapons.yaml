@@ -5,7 +5,7 @@ CHGuardRifle:
 	ReloadDelay: 55
 	Range: 5547
 	ValidTargets: Ground, Water, Air
-	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
+	Report: ra1_japan_sounds|iredweaa.wav, ra1_japan_sounds|iredweab.wav, ra1_japan_sounds|iredweac.wav, ra1_japan_sounds|iredwead.wav
 	Warhead@Bullet_Medium:
 		Damage: 4000
 # SCOUT-CLASS BASELINE WEAPON (Formula v2, design 2026-07-18): the round
@@ -81,7 +81,7 @@ japan_imperialscoutsman_rifle:
 	Range: 6000
 	ValidTargets: Ground, Water, Air
 	-TargetActorCenter:
-	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
+	Report: ra1_japan_sounds|iredweaa.wav, ra1_japan_sounds|iredweab.wav, ra1_japan_sounds|iredweac.wav, ra1_japan_sounds|iredwead.wav
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@RailgunWeapon:
@@ -1947,7 +1947,7 @@ Hakureiring:
 	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
-	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
 	InvalidTargets: Epic, Psionic, Monster
 	ReloadDelay: 30
 	Burst: 3
@@ -1996,7 +1996,7 @@ Hakureiring2:
 	ValidTargets: Epic, Psionic, Monster
 	ReloadDelay: 100
 	Burst: 1
-	Report: thbomb.wav
+	Report: ra1_japan_sounds|thbomb.wav
 	Projectile: Missile
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 44
@@ -2023,7 +2023,7 @@ Hakureiring2:
 		ExplosionPalette: player
 		UsePlayerPalette: true
 		AirThreshold: 6400
-		ImpactSounds: thgun.wav
+		ImpactSounds: ra1_shared_sounds|thgun.wav
 
 ## Unused
 
@@ -2034,7 +2034,7 @@ ReimuDreamSeal:
 	Burst: 2
 	BurstDelays: 35
 	Range: 6400
-	Report: thbomb.wav
+	Report: ra1_japan_sounds|thbomb.wav
 	Warhead@Magic_Heavy:
 		Spread: 640
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -2103,7 +2103,7 @@ THMiss:
 		Image: hakurei_dream #TODO: make exorcist drop point pickups
 		Explosions: idle
 		ExplosionPalette: tseffect
-		ImpactSounds: thmiss.wav
+		ImpactSounds: ra1_japan_sounds|thmiss.wav
 		ImpactActors: false
 
 NambuMG:
@@ -3088,7 +3088,7 @@ HovercraftPlasmaCannon:
 	Inherits@roleflat: ^Warhead_Plasma_Medium_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@4: HovercraftCannon
-	Report: WaveforceCannon.wav
+	Report: ra1_japan_sounds|WaveforceCannon.wav
 	Projectile: Missile
 		Speed: 974
 		ContrailStartColor: 8844FFAA
@@ -3651,7 +3651,7 @@ Type89PlasmaCannon:
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 52
 	Range: 5243
-	Report: WaveforceCannon.wav
+	Report: ra1_japan_sounds|WaveforceCannon.wav
 	Projectile: Bullet
 		Speed: 1048
 		ContrailStartColor: 8844FFAA
@@ -3806,7 +3806,7 @@ Type97PlasmaCannon:
 	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 56
 	Range: 5692
-	Report: WaveforceCannon.wav
+	Report: ra1_japan_sounds|WaveforceCannon.wav
 	Projectile: Bullet
 		Speed: 1138
 		ContrailStartColor: FF4488AA
@@ -3947,7 +3947,7 @@ ShrineTankCannon:
 	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 50
 	Range: 6370
-	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
 	Projectile: Missile
 		HorizontalRateOfTurn: 33
 		VerticalRateOfTurn: 66
@@ -4662,7 +4662,7 @@ JapanesePlasmaBomb:
 	Burst: 4
 	BurstDelays: 5
 	Range: 6000
-	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 250
@@ -4885,7 +4885,7 @@ JHighVWaveforce:
 		PercentageSpread: 50
 ExecutionerDeath:
 	Inherits: MiniNuke
-	Report: JUShoEx_OmegaShockwaveStereo.wav
+	Report: ra1_japan_sounds|JUShoEx_OmegaShockwaveStereo.wav
 	SoundVolume: 10
 
 ExecutionerSword:
@@ -4893,7 +4893,7 @@ ExecutionerSword:
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 300
-	Report: JUShoEx_swordSwipea.wav, JUShoEx_swordSwipeb.wav, JUShoEx_swordSwipec.wav, JUShoEx_swordSwiped.wav, JUShoEx_swordSwipee.wav, JUShoEx_swordSwipef.wav
+	Report: ra1_japan_sounds|JUShoEx_swordSwipea.wav, ra1_japan_sounds|JUShoEx_swordSwipeb.wav, ra1_japan_sounds|JUShoEx_swordSwipec.wav, ra1_japan_sounds|JUShoEx_swordSwiped.wav, ra1_japan_sounds|JUShoEx_swordSwipee.wav, ra1_japan_sounds|JUShoEx_swordSwipef.wav
 	SoundVolume: 10
 	Range: 3000
 	ValidTargets: Ground, Water, Air
@@ -5248,7 +5248,7 @@ NanoSmokeAG:
 WaveArtilleryShell:
 	ReloadDelay: 111
 	Range: 11111
-	Report: WaveforceCannon.wav
+	Report: ra1_japan_sounds|WaveforceCannon.wav
 	Projectile: WarheadTrailProjectileCA
 		Weapon: WaveArtilleryImpact
 		FireMode: Line
