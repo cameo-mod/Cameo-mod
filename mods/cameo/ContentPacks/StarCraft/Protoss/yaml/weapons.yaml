@@ -11,6 +11,11 @@ ArbiterStasis:
 		Condition: chronobeamed
 		Duration: 125
 
+^sc_protoss_positrongrenade:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+
 PositronGrenade:
 	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -57,9 +62,7 @@ PositronGrenade:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+	Inherits@w6fx: ^sc_protoss_positrongrenade
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce1
 		Amount: 1
@@ -115,6 +118,39 @@ PositronGrenade:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_protoss_positronbounce1_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^sc_protoss_positronbounce1_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 
 PositronBounce1:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
@@ -208,40 +244,13 @@ PositronBounce1:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_protoss_positronbounce1_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_positronbounce1_2
 	Report: tvuFir00.aud
 
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
@@ -400,6 +409,39 @@ PositronBounce1:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^sc_protoss_positronbounce2_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^sc_protoss_positronbounce2_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	ValidTargets: Ground, Water
@@ -492,40 +534,13 @@ PositronBounce2:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_protoss_positronbounce2_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_positronbounce2_2
 	Report: tvuFir00.aud
 
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
@@ -839,6 +854,38 @@ PhotonCannon:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^sc_protoss_dragooncannon_1:
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+
+^sc_protoss_dragooncannon_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_dragooncannon_3:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+
 DragoonCannon:
 	Warhead@Plasma_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -945,21 +992,13 @@ DragoonCannon:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
 	-Warhead@Smudge:
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ValidTargets: Air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
+	Inherits@w6fx: ^sc_protoss_dragooncannon_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_dragooncannon_2
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 225
@@ -983,22 +1022,7 @@ DragoonCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
+	Inherits@w6fx2: ^sc_protoss_dragooncannon_3
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -1094,6 +1118,15 @@ DragoonCannon:
 		SmudgeType: Crater
 		Chance: 15
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_protoss_gladiuscannon_fx:
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 
 GladiusCannon:
 	Inherits: ^LightFlameWeapon
@@ -1274,13 +1307,7 @@ GladiusCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
+	Inherits@w6fx: ^sc_protoss_gladiuscannon_fx
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -1381,6 +1408,38 @@ GladiusCannon:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_protoss_arbitercannon_1:
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+
+^sc_protoss_arbitercannon_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_arbitercannon_3:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 
 ArbiterCannon:
 	Warhead@Plasma_Heavy_Flat: AreaDamage
@@ -1488,21 +1547,13 @@ ArbiterCannon:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
 	-Warhead@Smudge:
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ValidTargets: Air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
+	Inherits@w6fx: ^sc_protoss_arbitercannon_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_arbitercannon_2
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 225
@@ -1526,22 +1577,7 @@ ArbiterCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
+	Inherits@w6fx2: ^sc_protoss_arbitercannon_3
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
@@ -1612,6 +1648,10 @@ GlaveCanon:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
+^sc_protoss_psi_blades:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 psi_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1624,6 +1664,9 @@ psi_blades:
 	Range: 1335
 	Warhead@Melee_Medium:
 		Damage: 8000
+	Inherits@w6fx: ^sc_protoss_psi_blades
+
+^sc_protoss_psi_spear:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -1637,8 +1680,7 @@ psi_spear:
 	Range: 1337
 	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+	Inherits@w6fx: ^sc_protoss_psi_spear
 
 PsiStorm:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1656,17 +1698,25 @@ PsiStorm:
 		Damage: 12000
 		AffectsParent: True
 	-Warhead@Tesla_Heavy_ExtraDamage:
+^sc_protoss_psistormcosmetic:
+	Warhead@Effect: CreateEffect
+		Explosions: scpsistorm
+		ValidTargets: Ground, Air
+		ImpactActors: false
+		ImpactSounds: ptesto00.aud
+
 PsiStormCosmetic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 64
 	Range: 6400
 	Report: ptesto00.aud
 	Projectile: InstantHit
+	Inherits@w6fx: ^sc_protoss_psistormcosmetic
+
+^sc_protoss_psionicshockwave:
 	Warhead@Effect: CreateEffect
-		Explosions: scpsistorm
-		ValidTargets: Ground, Air
-		ImpactActors: false
-		ImpactSounds: ptesto00.aud
+		Explosions: scaae
+		ValidTargets: Ground, Water, Air
 
 PsionicShockwave:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -1680,9 +1730,12 @@ PsionicShockwave:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000
 	-Warhead@Tesla_Super_ExtraDamage:
+	Inherits@w6fx: ^sc_protoss_psionicshockwave
+
+^sc_protoss_scarablaunch:
 	Warhead@Effect: CreateEffect
-		Explosions: scaae
-		ValidTargets: Ground, Water, Air
+		ImpactSounds: psahit00.aud
+		Explosions: blueartexp
 
 ScarabLaunch:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1737,9 +1790,7 @@ ScarabLaunch:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
-	Warhead@Effect: CreateEffect
-		ImpactSounds: psahit00.aud
-		Explosions: blueartexp
+	Inherits@w6fx: ^sc_protoss_scarablaunch
 
 	-Warhead@HeavyBomb:
 	-Warhead@ShrapnelWeapon:
@@ -1751,6 +1802,12 @@ ScarabLaunchDummy:
 	Projectile: InstantHit
 	Warhead@Damage: TargetDamage
 		Damage: 0
+
+^sc_protoss_scoutrockets_aa:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 ScoutRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -1778,10 +1835,11 @@ ScoutRockets_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_scoutrockets_aa
+^sc_protoss_warpblade:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 WarpBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1793,6 +1851,9 @@ WarpBlade:
 	Warhead@Melee_Medium:
 		PercentageScale: 1000
 		Damage: 20000
+	Inherits@w6fx: ^sc_protoss_warpblade
+
+^sc_protoss_warpbladeamaranth:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -1806,6 +1867,9 @@ WarpBladeAmaranth:
 	SoundVolume: 3
 	Warhead@Melee_Medium:
 		Damage: 30000
+	Inherits@w6fx: ^sc_protoss_warpbladeamaranth
+
+^sc_protoss_zeratulslice:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -1820,8 +1884,11 @@ ZeratulSlice:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 64000
+	Inherits@w6fx: ^sc_protoss_zeratulslice
+
+^sc_protoss_corsairflash:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+		Explosions: steel_bluepiffs
 
 CorsairFlash:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
@@ -1851,8 +1918,7 @@ CorsairFlash:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
+	Inherits@w6fx: ^sc_protoss_corsairflash
 	-Warhead@Demolition_Light:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
@@ -1861,6 +1927,13 @@ CorsairFlash:
 		PercentageScale: 9975
 
 	TargetActorCenter: true
+^sc_protoss_corsair_emp:
+	Warhead@Effect: CreateEffect
+		Explosions: pulse_explosion_small
+		ExplosionPalette: tseffect
+		ImpactSounds: sc_corsair_disruptionweb.aud
+		ImpactActors: false
+
 Corsair_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -1891,11 +1964,21 @@ Corsair_EMP:
 		Amount: 20000
 		Range: 2500
 		ValidTargets: Ground, Water
+	Inherits@w6fx: ^sc_protoss_corsair_emp
+
+^sc_protoss_voidraybeam:
 	Warhead@Effect: CreateEffect
-		Explosions: pulse_explosion_small
-		ExplosionPalette: tseffect
-		ImpactSounds: sc_corsair_disruptionweb.aud
-		ImpactActors: false
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
 
 VoidRayBeam:
 	Inherits@roleflat: ^Warhead_Prism_Heavy
@@ -1979,18 +2062,7 @@ VoidRayBeam:
 		Range: 600
 		Delay: 3
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
+	Inherits@w6fx: ^sc_protoss_voidraybeam
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
 	-Warhead@LaserExtraDamage:
@@ -2003,6 +2075,20 @@ VoidRayBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 0
+
+^sc_protoss_starshipsovereignbeam:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
 
 StarshipSovereignBeam:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
@@ -2100,18 +2186,7 @@ StarshipSovereignBeam:
 		Delay: 3
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
+	Inherits@w6fx: ^sc_protoss_starshipsovereignbeam
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
 	-Warhead@LaserExtraDamage:
@@ -2144,7 +2219,7 @@ ProbeAttack:
 		Branches: 0
 		NodeRadius: 0
 
-BuildingExplodeProtoss:
+^sc_protoss_buildingexplodeprotoss:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building, blue_building_napalm, blue_med_frag, blue_poof, blue_small_building
 		Delay: 1
@@ -2153,11 +2228,17 @@ BuildingExplodeProtoss:
 		SmudgeType: Crater
 		Delay: 1
 
-UnitExplodeSmallProtoss:
-	Inherits: ^DamagingExplosionHE
+BuildingExplodeProtoss:
+	Inherits@w6fx: ^sc_protoss_buildingexplodeprotoss
+
+^sc_protoss_unitexplodesmallprotoss:
 	Warhead@2Eff: CreateEffect
 		Explosions: blue_big_frag
 		ImpactSounds: xplobig4.aud
+
+UnitExplodeSmallProtoss:
+	Inherits: ^DamagingExplosionHE
+	Inherits@w6fx: ^sc_protoss_unitexplodesmallprotoss
 
 ^sc_protoss_scworkerexplodeprotoss:
 	Warhead@2Eff: CreateEffect
@@ -2194,6 +2275,37 @@ UnitExplodeSmallProtoss:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Structure, wall
+
+^sc_protoss_scworkerexplodeprotoss_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Structure, wall
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Structure, wall
+	Warhead@Effect: CreateEffect
+		Explosions: self_destruct
+		ImpactSounds: kaboom22.aud
+		ValidTargets: Ground, Air, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_protoss_scworkerexplodeprotoss_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@2Eff: CreateEffect
+		Explosions: blue_big_frag
+		ImpactSounds: xplobig4.aud
 
 SCWorkerExplodeProtoss:
 	ValidTargets: Ground, Water, Air
@@ -2267,38 +2379,17 @@ SCWorkerExplodeProtoss:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Structure, wall
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Structure, wall
-	Warhead@Effect: CreateEffect
-		Explosions: self_destruct
-		ImpactSounds: kaboom22.aud
-		ValidTargets: Ground, Air, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_scworkerexplodeprotoss_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@2Eff: CreateEffect
-		Explosions: blue_big_frag
-		ImpactSounds: xplobig4.aud
+	Inherits@w6fx1: ^sc_protoss_scworkerexplodeprotoss_2
+^sc_protoss_scoutmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+
 ScoutMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	ValidTargets: Ground, Water
@@ -2321,14 +2412,21 @@ ScoutMG:
 		ContrailEndWidth: 15
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
+	Inherits@w6fx: ^sc_protoss_scoutmg
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
 	TargetActorCenter: true
+^sc_protoss_epigraphmg:
+	Warhead@Effect: CreateEffect
+		Explosions: cryo_blast
+	Warhead@EffectWater: CreateEffect
+		Explosions: cryo_blast
+	Warhead@EffectAir: CreateEffect
+		Explosions: cryo_blast
+
 EpigraphMG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -2417,12 +2515,7 @@ EpigraphMG:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectWater: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectAir: CreateEffect
-		Explosions: cryo_blast
+	Inherits@w6fx: ^sc_protoss_epigraphmg
 
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -2434,6 +2527,11 @@ EpigraphMG:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
 	-Warhead@Chaingun:
+
+^sc_protoss_manifoldmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ValidTargets: Ground, Water
 
 ManifoldMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
@@ -2466,9 +2564,7 @@ ManifoldMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-		ValidTargets: Ground, Water
+	Inherits@w6fx: ^sc_protoss_manifoldmg
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
@@ -2515,6 +2611,40 @@ ManifoldMG:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_protoss_manifoldmg_aa_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
+
+^sc_protoss_manifoldmg_aa_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 
 ManifoldMG_AA:
 	Warhead@Bullet_Medium_Flat: AreaDamage
@@ -2582,41 +2712,13 @@ ManifoldMG_AA:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-		ImpactSounds: kaboom15.aud
-		ValidTargets: Air
-		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_piffs
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-		ExplosionPalette: ra2effect
+	Inherits@w6fx: ^sc_protoss_manifoldmg_aa_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_manifoldmg_aa_2
 	Projectile: Bullet
 		Image: 50CAL
 		Inaccuracy: 100
@@ -2637,6 +2739,11 @@ ManifoldMG_AA:
 		Speed: 2000
 		LaunchAngle: 0
 	Report: blastgn2.aud
+
+^sc_protoss_atreusmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ValidTargets: Ground, Water, Air
 
 AtreusMG:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -2687,14 +2794,20 @@ AtreusMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Bullet_Medium:
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_protoss_atreusmg
 
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
+^sc_protoss_patriarchshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
@@ -2741,12 +2854,7 @@ PatriarchShoot:
 		Damage: 1
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
+	Inherits@w6fx: ^sc_protoss_patriarchshoot
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PatriarchShoot1
 		Amount: 2
@@ -2813,6 +2921,56 @@ PatriarchShoot:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_protoss_patriarchshoot1_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_protoss_patriarchshoot1_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_patriarchshoot1_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_protoss_patriarchshoot1_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 
 PatriarchShoot1:
 	ValidTargets: Ground, Water, Air
@@ -2935,32 +3093,13 @@ PatriarchShoot1:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_patriarchshoot1_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_patriarchshoot1_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -3011,22 +3150,7 @@ PatriarchShoot1:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_protoss_patriarchshoot1_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3051,11 +3175,7 @@ PatriarchShoot1:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_protoss_patriarchshoot1_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3160,6 +3280,56 @@ PatriarchShoot1:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_protoss_patriarchshoot2_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_protoss_patriarchshoot2_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_patriarchshoot2_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_protoss_patriarchshoot2_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 
 PatriarchShoot2:
 	ValidTargets: Ground, Water, Air
@@ -3282,32 +3452,13 @@ PatriarchShoot2:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_patriarchshoot2_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_patriarchshoot2_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -3358,22 +3509,7 @@ PatriarchShoot2:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_protoss_patriarchshoot2_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3398,11 +3534,7 @@ PatriarchShoot2:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_protoss_patriarchshoot2_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3507,6 +3639,56 @@ PatriarchShoot2:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_protoss_patriarchshoot3_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_protoss_patriarchshoot3_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_patriarchshoot3_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_protoss_patriarchshoot3_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 
 PatriarchShoot3:
 	ValidTargets: Ground, Water, Air
@@ -3629,32 +3811,13 @@ PatriarchShoot3:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_patriarchshoot3_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_patriarchshoot3_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -3705,22 +3868,7 @@ PatriarchShoot3:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_protoss_patriarchshoot3_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -3745,11 +3893,7 @@ PatriarchShoot3:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_protoss_patriarchshoot3_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3854,6 +3998,56 @@ PatriarchShoot3:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_protoss_patriarchshoot4_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_protoss_patriarchshoot4_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_protoss_patriarchshoot4_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_protoss_patriarchshoot4_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+		ImpactActors: false
+		ValidTargets: Air
 
 PatriarchShoot4:
 	ValidTargets: Ground, Water, Air
@@ -3976,32 +4170,13 @@ PatriarchShoot4:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_patriarchshoot4_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_protoss_patriarchshoot4_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -4052,22 +4227,7 @@ PatriarchShoot4:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_protoss_patriarchshoot4_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -4092,11 +4252,7 @@ PatriarchShoot4:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_protoss_patriarchshoot4_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100

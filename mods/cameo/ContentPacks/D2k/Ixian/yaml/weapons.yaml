@@ -868,27 +868,7 @@ RashidanGun:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
-RashidanGun_upgrade:
-	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Warhead@Bullet_Medium_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 0
-		FriendlyFireDamage: 67
-		FriendlyFireSpread: 67
-
-	Inherits: ^Warhead_CannonHE_Heavy
-	-Warhead@CannonHE_Heavy:
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@5: ^d2k_ixian_rashidangun_upgrade
-	-Warhead@Concrete:
-	-Warhead@DuneRock:
-	-Warhead@DuneSand:
-	-Warhead@Effect:
-	-Warhead@EffectAir:
-	-Warhead@EffectWater:
-	-Warhead@RA2Crater:
-	-Warhead@ShieldHitEffect:
+^d2k_ixian_rashidangun_upgrade_1:
 	Warhead@DuneRock: LeaveSmudge
 		SmudgeType: RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -912,16 +892,42 @@ RashidanGun_upgrade:
 		ImpactSounds: kaboom12.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
+
+^d2k_ixian_rashidangun_upgrade_2:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+RashidanGun_upgrade:
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
+
+	Inherits: ^Warhead_CannonHE_Heavy
+	-Warhead@CannonHE_Heavy:
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@5: ^d2k_ixian_rashidangun_upgrade
+	-Warhead@Concrete:
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	-Warhead@EffectWater:
+	-Warhead@RA2Crater:
+	-Warhead@ShieldHitEffect:
+	Inherits@w6fx: ^d2k_ixian_rashidangun_upgrade_1
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_ixian_rashidangun_upgrade_2
 	Burst: 4
 	BurstDelays: 0
 	Report: DSDSHTGN.wav
@@ -1656,9 +1662,7 @@ HMG_Duelist:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
-HMG_Duelist_upgrade:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
+^d2k_ixian_hmg_duelist_upgrade_1:
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
 		Scale: 0.8
@@ -1690,16 +1694,24 @@ HMG_Duelist_upgrade:
 		ImpactSounds: kaboom12.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
+
+^d2k_ixian_hmg_duelist_upgrade_2:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+HMG_Duelist_upgrade:
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@w6fx: ^d2k_ixian_hmg_duelist_upgrade_1
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_ixian_hmg_duelist_upgrade_2
 	Inherits@4: ^LaserWeapon
 	Inherits@6: ^d2k_ixian_hmg_duelist_upgrade
 	Warhead@ShieldHit: GrantExternalCondition
@@ -2449,6 +2461,25 @@ ixian_farasha:
 		InvalidTargets: Vehicle, Structure
 		SmudgeType: Scorch
 
+^d2k_ixian_d2k_farasha_aa_fx:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLSML4.WAV
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: effect75alpha
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: Scorch
+
 d2k_farasha_aa:
 	ValidTargets: Air
 	ReloadDelay: 50
@@ -2593,23 +2624,7 @@ d2k_farasha_aa:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: effect75alpha
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactActors: false
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure
-		SmudgeType: Scorch
+	Inherits@w6fx: ^d2k_ixian_d2k_farasha_aa_fx
 	Burst: 50
 	BurstDelays: 1
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
@@ -2680,6 +2695,24 @@ d2k_basq:
 	Warhead@Flak_Light:
 		ValidTargets: Ground, Water
 		Damage: 32000
+
+^d2k_ixian_d2k_basq_aa_fx:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: EXPLSML4.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
 
 d2k_basq_AA:
 	ValidTargets: Air
@@ -2763,22 +2796,7 @@ d2k_basq_AA:
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		ExplosionPalette: effect75alpha
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: EXPLSML4.WAV
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
+	Inherits@w6fx: ^d2k_ixian_d2k_basq_aa_fx
 	Report: zhyfir00.aud
 
 d2k_projections:
@@ -2857,6 +2875,41 @@ MongooseRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
+^d2k_ixian_pulsemissile_1:
+	Warhead@Effect: CreateEffect
+		Explosions: pulse_missile_explosion
+		ImpactSounds: nukexplo.aud
+		ImpactActors: false
+		GlowColor: 32C8FF
+		GlowScale: 15.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 15
+
+^d2k_ixian_pulsemissile_2:
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 5
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: xplobig4.aud
+		Delay: 3
+		ImpactActors: false
+
+^d2k_ixian_pulsemissile_3:
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 7
+		Delay: 6
+
+^d2k_ixian_pulsemissile_4:
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 9
+		Delay: 9
+
 PulseMissile:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Warhead_Tesla_Super
@@ -2910,14 +2963,7 @@ PulseMissile:
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: pulse_missile_explosion
-		ImpactSounds: nukexplo.aud
-		ImpactActors: false
-		GlowColor: 32C8FF
-		GlowScale: 15.0
-		GlowFadeFrames: 600
-		GlowFadeInFrames: 15
+	Inherits@w6fx: ^d2k_ixian_pulsemissile_1
 	Warhead@GroundFireArea: SpawnActorInArea
 		Actor: groundfire
 		Range: 5
@@ -2963,15 +3009,7 @@ PulseMissile:
 		Size: 3
 		Delay: 3
 		ResourceAmount: 3
-	Warhead@5Smu_areanukea: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 5
-		Delay: 3
-	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplobig4.aud
-		Delay: 3
-		ImpactActors: false
+	Inherits@w6fx1: ^d2k_ixian_pulsemissile_2
 	Warhead@7Dam_areanuke2: SpreadDamage
 		Spread: 3000
 		Damage: 15000
@@ -3002,11 +3040,7 @@ PulseMissile:
 		Size: 6
 		Delay: 6
 		ResourceAmount: 6
-	Warhead@9Smu_areanukeb: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 7
-		Delay: 6
+	Inherits@w6fx2: ^d2k_ixian_pulsemissile_3
 	Warhead@8Dam_areanuke2: SpreadDamage
 		Spread: 4000
 		Damage: 12500
@@ -3037,11 +3071,7 @@ PulseMissile:
 		Size: 9
 		Delay: 9
 		ResourceAmount: 9
-	Warhead@12Smu_areanukec: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 9
-		Delay: 9
+	Inherits@w6fx3: ^d2k_ixian_pulsemissile_4
 	Warhead@10Dam_areanuke3: SpreadDamage
 		Spread: 5000
 		Damage: 10000

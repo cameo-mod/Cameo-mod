@@ -1,3 +1,7 @@
+^wc2_orcs_wc2gruntslice2:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2gruntslice2:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -8,8 +12,29 @@ wc2gruntslice2:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 24000
+	Inherits@w6fx: ^wc2_orcs_wc2gruntslice2
+
+^wc2_orcs_wc2axefire_1:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_axe.aud
+		ImpactActors: false
+		Explosions: small_poof
+		ValidTargets: Ground, Water, Air
+
+^wc2_orcs_wc2axefire_2:
+	Warhead@Glow: GlowImpact  # W7MAT order-pin
+		FadeFrames: 15
+		Scale: 0.8
+
+^wc2_orcs_wc2axefire_3:
+	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+
+^wc2_orcs_wc2axefire_4:
+	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
+		ImpactSounds: xplos.aud
+	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
+		Damage: 100
 
 wc2axeFire:
 	Inherits@w72: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
@@ -36,11 +61,7 @@ wc2axeFire:
 		HorizontalRateOfTurn: 60
 		ContrailZOffset: 4000
 		LaunchAngle: 66
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
-		ImpactActors: false
-		Explosions: small_poof
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_orcs_wc2axefire_1
 
 	Warhead@ChaingunPercentage: AreaDamagePercentage  # W7MAT order-pin
 		Versus:
@@ -92,9 +113,7 @@ wc2axeFire:
 		Damage: 2
 		InvalidTargets: wall
 		ValidTargets: Ground, Water, Air
-	Warhead@Glow: GlowImpact  # W7MAT order-pin
-		FadeFrames: 15
-		Scale: 0.8
+	Inherits@w6fx1: ^wc2_orcs_wc2axefire_2
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
 		Versus:
 			Wood: 7
@@ -168,8 +187,7 @@ wc2axeFire:
 		Spread: 75
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Inherits@w6fx2: ^wc2_orcs_wc2axefire_3
 	Warhead@CannonHE_Medium: AreaDamage  # W7MAT order-pin
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -178,10 +196,34 @@ wc2axeFire:
 	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
 		Duration: 3
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+	Inherits@w6fx3: ^wc2_orcs_wc2axefire_4
+^wc2_orcs_wc2axefirespear_1:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_axe.aud
+		ImpactActors: false
+		Explosions: small_poof
+		ValidTargets: Ground, Water, Air
+
+^wc2_orcs_wc2axefirespear_2:
+	Warhead@Glow: GlowImpact  # W7MAT order-pin
+		FadeFrames: 15
+		Scale: 0.8
+
+^wc2_orcs_wc2axefirespear_3:
+	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+
+^wc2_orcs_wc2axefirespear_4:
+	Warhead@RA2Scorch: LeaveSmudge  # W7MAT order-pin
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Scorch
+
+^wc2_orcs_wc2axefirespear_5:
 	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
 		ImpactSounds: xplos.aud
 	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
 		Damage: 100
+
 wc2axeFirespear:
 	Inherits@w71: ^Warhead_Laser_ExtraDamage  # W7MAT covering-edge
 	Inherits@w73: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
@@ -220,11 +262,7 @@ wc2axeFirespear:
 		HorizontalRateOfTurn: 70
 		ContrailZOffset: 4000
 		LaunchAngle: 66
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
-		ImpactActors: false
-		Explosions: small_poof
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_orcs_wc2axefirespear_1
 
 	Warhead@ChaingunPercentage: AreaDamagePercentage  # W7MAT order-pin
 		Versus:
@@ -300,9 +338,7 @@ wc2axeFirespear:
 		UpdatesUnitStatistics: false
 		Spread: 300
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Glow: GlowImpact  # W7MAT order-pin
-		FadeFrames: 15
-		Scale: 0.8
+	Inherits@w6fx1: ^wc2_orcs_wc2axefirespear_2
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
 		Versus:
 			Bomber: 16
@@ -401,8 +437,7 @@ wc2axeFirespear:
 		Spread: 75
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Inherits@w6fx2: ^wc2_orcs_wc2axefirespear_3
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
 		Versus:
 			Spaceship: 25
@@ -427,9 +462,7 @@ wc2axeFirespear:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@RA2Scorch: LeaveSmudge  # W7MAT order-pin
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-		SmudgeType: RA2Scorch
+	Inherits@w6fx3: ^wc2_orcs_wc2axefirespear_4
 	Warhead@CannonHE_Medium: AreaDamage  # W7MAT order-pin
 		ValidTargets: Ground, Water, Air
 		Damage: 33600
@@ -438,11 +471,12 @@ wc2axeFirespear:
 	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
 		Duration: 3
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
-	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
-		ImpactSounds: xplos.aud
-	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
-		Damage: 100
+	Inherits@w6fx4: ^wc2_orcs_wc2axefirespear_5
 	-Warhead@LaserExtraDamage_Auxiliary:
+^wc2_orcs_wc2ogrepunch:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_punch.aud
+
 wc2ogrepunch:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -453,8 +487,12 @@ wc2ogrepunch:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_punch.aud
+	Inherits@w6fx: ^wc2_orcs_wc2ogrepunch
+
+^wc2_orcs_wc2ogremageeyeofkilrogg:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
 
 wc2ogremageEyeOfKilrogg:
 	ReloadDelay: 60
@@ -474,9 +512,7 @@ wc2ogremageEyeOfKilrogg:
 			Concrete: 100
 		DamageTypes: DefaultDeath
 		ValidTargets: Ground
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
+	Inherits@w6fx: ^wc2_orcs_wc2ogremageeyeofkilrogg
 	Warhead@spawn: SpawnActor
 		Actors: wc2_orc_eye_of_kilrogg
 
@@ -545,6 +581,13 @@ wc2ogremageRunes_Spread:
 
 # WC2 50 piercing damage.
 
+^wc2_orcs_wc2runessuper:
+	Warhead@2Eff: CreateEffect
+		Delay: 2
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ImpactSounds: wc2_runes.aud
+
 wc2runesSuper:
 	ValidTargets: Ground, Water, Air
 	Warhead@Projectiles: FireCluster
@@ -552,11 +595,13 @@ wc2runesSuper:
 		Dimensions: 5,5
 		Footprint: _____ _____ _____ _____ ____x
 		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
-	Warhead@2Eff: CreateEffect
-		Delay: 2
-		Image: wc2_effect_sparkle
+	Inherits@w6fx: ^wc2_orcs_wc2runessuper
+
+^wc2_orcs_wc2catapultfire:
+	Warhead@Effect: CreateEffect
+		Image: wc2_catapult_stone_projectile_medium
 		Explosions: idle
-		ImpactSounds: wc2_runes.aud
+		ImpactSounds: explode.aud
 
 wc2catapultFire:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
@@ -601,10 +646,7 @@ wc2catapultFire:
 		Damage: 30000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@Effect: CreateEffect
-		Image: wc2_catapult_stone_projectile_medium
-		Explosions: idle
-		ImpactSounds: explode.aud
+	Inherits@w6fx: ^wc2_orcs_wc2catapultfire
 
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -618,6 +660,13 @@ wc2catapultFire:
 		PercentageScale: 0
 
 # Death Knight basic attack
+
+^wc2_orcs_wc2deathknightfire:
+	Warhead@Effect: CreateEffect
+		Image: wc2_effect_death_knight_attack
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		ValidTargets: Ground, Air
 
 wc2deathknightFire:
 	Inherits@wh: ^Warhead_Flame_Heavy
@@ -634,11 +683,7 @@ wc2deathknightFire:
 		Damage: 16000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@Tesla_Super:
-	Warhead@Effect: CreateEffect
-		Image: wc2_effect_death_knight_attack
-		ImpactSounds: wc2_firehit.aud
-		Explosions: hit
-		ValidTargets: Ground, Air
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightfire
 
 # Primary deathcoil projectile
 # 50 WC2 Damage = 11250 ORA damage. Divide by 3 since there's 3 projectiles.
@@ -649,6 +694,13 @@ wc2deathknightFire:
 	Range: 8000  # W7MAT order-pin
 	ReloadDelay: 40  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+^wc2_orcs_wc2deathknightdeathcoil:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		Image: wc2_effect_death_knight_attack
+		ValidTargets: Ground, Air
+
 wc2deathknightDeathCoil:
 	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
@@ -673,14 +725,17 @@ wc2deathknightDeathCoil:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathcoil
+	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+^wc2_orcs_wc2deathknightdeathcoilscatter_left:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
 		ImpactSounds: wc2_firehit.aud
 		Explosions: hit
 		Image: wc2_effect_death_knight_attack
 		ValidTargets: Ground, Air
-	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
+
 wc2deathknightDeathCoilScatter_Left:
 	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
@@ -705,17 +760,20 @@ wc2deathknightDeathCoilScatter_Left:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_firehit.aud
-		Explosions: hit
-		Image: wc2_effect_death_knight_attack
-		ValidTargets: Ground, Air
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathcoilscatter_left
 	Range: 8000  # W7MAT order-pin
 	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	ReloadDelay: 80  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+^wc2_orcs_wc2deathknightdeathcoilscatter_right:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_firehit.aud
+		Explosions: hit
+		Image: wc2_effect_death_knight_attack
+		ValidTargets: Ground, Air
+
 wc2deathknightDeathCoilScatter_Right:
 	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
@@ -728,11 +786,7 @@ wc2deathknightDeathCoilScatter_Right:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_firehit.aud
-		Explosions: hit
-		Image: wc2_effect_death_knight_attack
-		ValidTargets: Ground, Air
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathcoilscatter_right
 	Projectile: Missile  # W7MAT order-pin
 		RangeLimit: 30c0
 		AllowSnapping: True
@@ -747,6 +801,12 @@ wc2deathknightDeathCoilScatter_Right:
 		ValidTargets: Ground, Water, Air
 	ReloadDelay: 80  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+^wc2_orcs_wc2deathknighthaste:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ValidTargets: haste_target
+
 wc2deathknightHaste:
 	ReloadDelay: 60
 	Range: 5120
@@ -770,10 +830,7 @@ wc2deathknightHaste:
 			Concrete: 0
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: haste_target
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
-		ValidTargets: haste_target
+	Inherits@w6fx: ^wc2_orcs_wc2deathknighthaste
 	Warhead@Condition: GrantExternalCondition
 		Condition: wc2_cond_haste
 		Duration: 600
@@ -871,6 +928,11 @@ wc2deathknightDeathAndDecay_Spread:
 		RandomClusterCount: 1
 
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
+^wc2_orcs_wc2deathknightdeathanddecay_hit:
+	Warhead@Effect: CreateEffect
+		Image: wc2_effect_death_and_decay
+		Explosions: idle
+
 wc2deathknightDeathAndDecay_Hit:
 	Inherits@wh: ^Warhead_Inferno_Heavy
 	Inherits@proj: ^Projectile_Inferno_Heavy
@@ -883,8 +945,11 @@ wc2deathknightDeathAndDecay_Hit:
 	Warhead@Inferno_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
-	Warhead@Effect: CreateEffect
-		Image: wc2_effect_death_and_decay
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathanddecay_hit
+
+^wc2_orcs_wc2deathknightraisedead:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
 		Explosions: idle
 
 wc2deathknightRaiseDead:
@@ -905,9 +970,7 @@ wc2deathknightRaiseDead:
 			Concrete: 100
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: Ground
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
+	Inherits@w6fx: ^wc2_orcs_wc2deathknightraisedead
 	Warhead@spawn: SpawnActor
 		Actors: WC2_ORC_SKELETON
 
@@ -1021,6 +1084,12 @@ wc2deathanddecaySuper_Spread:
 		Dimensions: 1,1
 		Footprint: x
 
+^wc2_orcs_wc2dragonfirevisible:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+
 wc2dragonFireVisible:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
@@ -1044,10 +1113,13 @@ wc2dragonFireVisible:
 		Damage: 30000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Effect: CreateEffect
-		Explosions: wc2_building_collapse
+	Inherits@w6fx: ^wc2_orcs_wc2dragonfirevisible
+^wc2_orcs_wc2dragonfireexplosion:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
 		ImpactSounds: explode.aud
+		Explosions: wc2_building_collapse
 		ValidTargets: Ground, Water, Air
+
 wc2dragonFireExplosion:
 	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
@@ -1067,10 +1139,7 @@ wc2dragonFireExplosion:
 # --- Hero weapons (ported from wcameo(1), converted to 3-way split) ---
 
 # Hellscream: reuses Danath's converted sword under an orc hero name.
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: explode.aud
-		Explosions: wc2_building_collapse
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_orcs_wc2dragonfireexplosion
 	Range: 5010  # W7MAT order-pin
 	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
 		Damage: 30000
@@ -1079,33 +1148,43 @@ wc2dragonFireExplosion:
 	ReloadDelay: 120  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 	Report: wc2_axe.aud  # W7MAT order-pin
+^wc2_orcs_wc2_orcs_hellscream_slice:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2_orcs_hellscream_slice:
 	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_InstantHit  # W7MAT covering-edge
 	Inherits@w73: ^Effect_Melee_Medium  # W7MAT covering-edge
 
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Inherits@w6fx: ^wc2_orcs_wc2_orcs_hellscream_slice
 	Range: 1533  # W7MAT order-pin
 	Warhead@Melee_Medium: AreaDamage  # W7MAT order-pin
 		PercentageScale: 6667
 		Damage: 36000
 	ReloadDelay: 12  # W7MAT order-pin
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
+^wc2_orcs_wc2_orcs_hellscream_slice_elite:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2_orcs_hellscream_slice_elite:
 	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_InstantHit  # W7MAT covering-edge
 	Inherits@w73: ^Effect_Melee_Medium  # W7MAT covering-edge
 
 # Zul'jin: reuses Alleria's converted arrow with axe projectile/sounds.
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Inherits@w6fx: ^wc2_orcs_wc2_orcs_hellscream_slice_elite
 	Range: 1533  # W7MAT order-pin
 	Warhead@Melee_Medium: AreaDamage  # W7MAT order-pin
 		PercentageScale: 6667
 		Damage: 48000
 	ReloadDelay: 10  # W7MAT order-pin
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
+^wc2_orcs_wc2_orcs_zuljin_spear:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_axe.aud
+
 wc2_orcs_zuljin_spear:
 	Inherits@w71: ^Warhead_Arrow_Medium  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Arrow_Light  # W7MAT covering-edge
@@ -1122,11 +1201,14 @@ wc2_orcs_zuljin_spear:
 		CloseEnough: 600
 		ContrailLength: 0
 		HorizontalRateOfTurn: 75
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+	Inherits@w6fx: ^wc2_orcs_wc2_orcs_zuljin_spear
 
 	Warhead@Arrow_Medium: AreaDamage  # W7MAT order-pin
 		Damage: 36000
+^wc2_orcs_wc2_orcs_zuljin_spear_elite:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_axe.aud
+
 wc2_orcs_zuljin_spear_elite:
 	Inherits@w71: ^Warhead_Arrow_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Arrow_Light  # W7MAT covering-edge
@@ -1143,7 +1225,6 @@ wc2_orcs_zuljin_spear_elite:
 		CloseEnough: 600
 		ContrailLength: 0
 		HorizontalRateOfTurn: 80
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+	Inherits@w6fx: ^wc2_orcs_wc2_orcs_zuljin_spear_elite
 	Warhead@Arrow_Heavy: AreaDamage  # W7MAT order-pin
 		Damage: 48000

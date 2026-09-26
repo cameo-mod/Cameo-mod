@@ -108,6 +108,35 @@ OrniBombC:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_atreides_ornimissile_1:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_atreides_ornimissile_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1250
+
+^d2k_atreides_ornimissile_3:
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect
+		Explosions: napalm
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		GlowScale: 1.5
+		ImpactSounds: firebl3.aud
+
 OrniMissile:
 	ValidTargets: Ground, Air
 	ReloadDelay: 66
@@ -142,36 +171,16 @@ OrniMissile:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_atreides_ornimissile_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
+	Inherits@w6fx1: ^d2k_atreides_ornimissile_2
 	MinRange: 1335
 	Report: ROCKET1.WAV
-	Warhead@3Eff: CreateEffect
-		ExplosionPalette: effect
-		Explosions: napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactSounds: firebl3.aud
+	Inherits@w6fx2: ^d2k_atreides_ornimissile_3
 	Burst: 2
 	BurstDelays: 6
 	Warhead@Shrapnel: FireShrapnel

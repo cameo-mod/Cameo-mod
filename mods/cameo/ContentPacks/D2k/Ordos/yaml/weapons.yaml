@@ -1723,6 +1723,35 @@ D2K_APC_Rocket:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_ordos_d2k_apc_rocket_aa_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_d2k_apc_rocket_aa_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 D2K_APC_Rocket_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Medium_Flat
 	Warhead@MissileAA_Medium_Flat:
@@ -1767,36 +1796,13 @@ D2K_APC_Rocket_AA:
 	-Warhead@EffectAir:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_tiny_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_d2k_apc_rocket_aa_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_ordos_d2k_apc_rocket_aa_2
 	Report: ROCKET1.WAV
 	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2023,6 +2029,34 @@ DeviatorMissile:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_ordos_deviatormissile_artillery_1:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000
+
+^d2k_ordos_deviatormissile_artillery_2:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^d2k_ordos_deviatormissile_artillery_3:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 DeviatorMissile_Artillery:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	ValidTargets: Ground, Water
@@ -2081,27 +2115,10 @@ DeviatorMissile_Artillery:
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1000
+	Inherits@w6fx: ^d2k_ordos_deviatormissile_artillery_1
 	MinRange: 2005
 	Report: MISSLE1.WAV
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx1: ^d2k_ordos_deviatormissile_artillery_2
 	Warhead@OwnerChange: ChangeOwner
 		Range: 1250
 		Duration: 75
@@ -2163,9 +2180,7 @@ DeviatorMissile_Artillery:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx2: ^d2k_ordos_deviatormissile_artillery_3
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -2278,6 +2293,51 @@ DeviatorMissile_Artillery:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_ordos_wraith_toxinmissiles_1:
+	Warhead@Effect: CreateEffect
+		Explosions: deviator
+		ImpactSounds: bioball_impact.wav
+		ValidTargets: Ground, Air
+		ExplosionPalette: deviatorgas
+		ImpactActors: false
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		GlowScale: 1.5
+		UsePlayerPalette: true
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_wraith_toxinmissiles_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000
+
+^d2k_ordos_wraith_toxinmissiles_3:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^d2k_ordos_wraith_toxinmissiles_4:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 Wraith_ToxinMissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy_WraithOrder
 	ValidTargets: Ground, Water, Air
@@ -2336,47 +2396,16 @@ Wraith_ToxinMissiles:
 	-Warhead@RA2Crater:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: deviator
-		ImpactSounds: bioball_impact.wav
-		ValidTargets: Ground, Air
-		ExplosionPalette: deviatorgas
-		ImpactActors: false
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		UsePlayerPalette: true
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_wraith_toxinmissiles_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1000
+	Inherits@w6fx1: ^d2k_ordos_wraith_toxinmissiles_2
 	MinRange: 1675
 	Report: MISSLE1.WAV
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx2: ^d2k_ordos_wraith_toxinmissiles_3
 	Warhead@OwnerChange: ChangeOwner
 		Range: 1250
 		Duration: 75
@@ -2436,9 +2465,7 @@ Wraith_ToxinMissiles:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx3: ^d2k_ordos_wraith_toxinmissiles_4
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -2560,6 +2587,44 @@ d2k_grenade:
 		Damage: 30000
 		DamageCalculationType: ClosestTargetablePosition
 
+^d2k_ordos_laboratory_bioball_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: deviator
+		ImpactSounds: bioball_impact.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		ExplosionPalette: deviatorgas
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		UsePlayerPalette: true
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^d2k_ordos_laboratory_bioball_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1875
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall
+		SmudgeType: Scorch
+
+^d2k_ordos_laboratory_bioball_3:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 Laboratory_Bioball:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	ValidTargets: Ground, Water
@@ -2602,46 +2667,17 @@ Laboratory_Bioball:
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@EffectWater:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: deviator
-		ImpactSounds: bioball_impact.wav
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-		ExplosionPalette: deviatorgas
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		UsePlayerPalette: true
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^d2k_ordos_laboratory_bioball_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
 		InvalidTargets: Air
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1875
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall
-		SmudgeType: Scorch
+	Inherits@w6fx1: ^d2k_ordos_laboratory_bioball_2
 	MinRange: 1300
 	Report: bioball_shoot.wav
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx2: ^d2k_ordos_laboratory_bioball_3
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -3024,6 +3060,10 @@ ordos_raider_hmg:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^d2k_ordos_hmgo_upgrade_fx:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+
 HMGo_upgrade:
 	Inherits: ^Warhead_Laser_Heavy
 	-Warhead@Laser_Heavy:
@@ -3045,8 +3085,7 @@ HMGo_upgrade:
 	Burst: 9
 	BurstDelays: 2
 	StartBurstReport: hmgo1.wav, hmgo2.wav
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
+	Inherits@w6fx: ^d2k_ordos_hmgo_upgrade_fx
 	Report: LaserTankAttack.wav
 	Projectile: LaserZap
 		Width: 55
@@ -3288,6 +3327,42 @@ autogun_tank:
 	Warhead@Smudge:
 		SmudgeType: Crater
 
+^d2k_ordos_autogun_tank_small_1:
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+		ExplosionPalette: effect
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: EXPLMD2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_autogun_tank_small_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+
+^d2k_ordos_autogun_tank_small_3:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 autogun_tank_small:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 24
@@ -3384,42 +3459,15 @@ autogun_tank_small:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-		ExplosionPalette: effect
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: EXPLMD2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_autogun_tank_small_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
+	Inherits@w6fx1: ^d2k_ordos_autogun_tank_small_2
 	MinRange: 1245
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx2: ^d2k_ordos_autogun_tank_small_3
 	Burst: 4
 	BurstDelays: 2
 	StartBurstReport: 20MMGUN1.WAV
@@ -4389,6 +4437,26 @@ Rocket_stealth:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_ordos_rocket_stealth_aa_1:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_rocket_stealth_aa_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+
 Rocket_stealth_AA:
 	ValidTargets: Air
 	ReloadDelay: 150
@@ -4451,27 +4519,13 @@ Rocket_stealth_AA:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_rocket_stealth_aa_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 750
+	Inherits@w6fx1: ^d2k_ordos_rocket_stealth_aa_2
 	MinRange: 2200
 	Report: d2k_buggy_rocket.wav
 	Burst: 2
@@ -4511,6 +4565,26 @@ Rocket_stealth_AA:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^d2k_ordos_d2k_apco_ag_1:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_d2k_apco_ag_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
 
 d2k_APCo_AG:
 	ValidTargets: Ground, Water, Air
@@ -4597,27 +4671,13 @@ d2k_APCo_AG:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_d2k_apco_ag_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 750
+	Inherits@w6fx1: ^d2k_ordos_d2k_apco_ag_2
 	MinRange: 1845
 	Report: d2k_buggy_rocket.wav
 	Burst: 1
@@ -4649,6 +4709,26 @@ d2k_APCo_AG:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^d2k_ordos_d2k_apco_aa_1:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
+		ImpactActors: false
+		ValidTargets: Air
+
+^d2k_ordos_d2k_apco_aa_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
 
 d2k_APCo_AA:
 	ValidTargets: Air
@@ -4712,27 +4792,13 @@ d2k_APCo_AA:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	-Warhead@ShieldHitEffect:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^d2k_ordos_d2k_apco_aa_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 750
+	Inherits@w6fx1: ^d2k_ordos_d2k_apco_aa_2
 	MinRange: 2200
 	Report: d2k_buggy_rocket.wav
 	Burst: 1
@@ -4855,6 +4921,15 @@ M_LMG:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 
+^d2k_ordos_m_lmg_h_fx:
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_piffs
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1250
+
 M_LMG_H:
 	ReloadDelay: 30
 	Range: 4096
@@ -4882,13 +4957,7 @@ M_LMG_H:
 	-Warhead@2Eff:
 	-Warhead@Concrete:
 	InvalidTargets: Vehicle, Structure
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_piffs
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-		ImpactSounds: EXPLSML1.WAV
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
+	Inherits@w6fx: ^d2k_ordos_m_lmg_h_fx
 	ValidTargets: Infantry
 
 ^d2k_ordos_m_hmg_h:
@@ -4905,6 +4974,15 @@ M_LMG_H:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 		ImpactSounds: splash9.aud
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_ordos_m_hmg_h_fx:
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_piffs
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+		ImpactSounds: EXPLSML1.WAV
 	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 
@@ -4935,13 +5013,7 @@ M_HMG_H:
 	-Warhead@2Eff:
 	-Warhead@Concrete:
 	InvalidTargets: Infantry
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_piffs
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-		ImpactSounds: EXPLSML1.WAV
-	Warhead@Concrete: DamagesConcrete
-		Damage: 625
+	Inherits@w6fx: ^d2k_ordos_m_hmg_h_fx
 	ValidTargets: Vehicle, Structure
 
 d2k25mm:
@@ -5005,6 +5077,38 @@ HMG_tleilaxu:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^d2k_ordos_d2k_sardaukar_elite_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^d2k_ordos_d2k_sardaukar_elite_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
 
 d2k_sardaukar_elite:
 	ValidTargets: Ground, Air
@@ -5096,39 +5200,13 @@ d2k_sardaukar_elite:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx: ^d2k_ordos_d2k_sardaukar_elite_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		Explosions: piffs
-		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactActors: false
-		ImpactSounds: EXPLLG2.WAV
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
+	Inherits@w6fx1: ^d2k_ordos_d2k_sardaukar_elite_2
 	Burst: 5
 	BurstDelays: 1
 	StartBurstReport: autoguntrt.wav
@@ -5373,6 +5451,18 @@ D2K_buzzsaw:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^d2k_ordos_d2k_airdefenseplatform_fx:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+
 d2k_airdefenseplatform:
 	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5454,16 +5544,7 @@ d2k_airdefenseplatform:
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
+	Inherits@w6fx: ^d2k_ordos_d2k_airdefenseplatform_fx
 	Burst: 2
 	BurstDelays: 0
 	StartBurstReport: autoguntrt.wav

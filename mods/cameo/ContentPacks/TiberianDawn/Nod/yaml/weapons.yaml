@@ -141,6 +141,21 @@ td_nod_rocketsoldier_rockets:
 		Chance: 15
 		InvalidTargets: Vehicle, Structure, wall
 
+^td_nod_td_nod_flamethrower_flamethrower_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+
+^td_nod_td_nod_flamethrower_flamethrower_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
 td_nod_flamethrower_flamethrower:
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
@@ -206,22 +221,13 @@ td_nod_flamethrower_flamethrower:
 	-Warhead@Effect:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
+	Inherits@w6fx: ^td_nod_td_nod_flamethrower_flamethrower_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^td_nod_td_nod_flamethrower_flamethrower_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -289,6 +295,31 @@ td_nod_commando_td_gdi_commando_sniper:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^td_nod_td_nod_artillery_artilleryshell_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^td_nod_td_nod_artillery_artilleryshell_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactActors: false
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Ship
 
 td_nod_artillery_artilleryshell:
 	Warhead@Concussion_Medium_Flat: AreaDamage
@@ -365,32 +396,13 @@ td_nod_artillery_artilleryshell:
 	-Warhead@Effect:
 	-Warhead@EffectWater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^td_nod_td_nod_artillery_artilleryshell_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 175
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship
+	Inherits@w6fx1: ^td_nod_td_nod_artillery_artilleryshell_2
 	MinRange: 2258
 	Report: tnkfire2.aud
 
@@ -439,6 +451,25 @@ td_nod_buggy_machinegun:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
+
+^td_nod_td_nod_ssmlauncher_honestjohn_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^td_nod_td_nod_ssmlauncher_honestjohn_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^td_nod_td_nod_ssmlauncher_honestjohn_3:
+	Warhead@Effect: CreateEffect
+		Explosions: med_napalm
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		GlowScale: 1.5
+		ImpactActors: false
+		ImpactSounds: firebl3.aud
 
 td_nod_ssmlauncher_honestjohn:
 	ValidTargets: Ground, Water
@@ -503,30 +534,20 @@ td_nod_ssmlauncher_honestjohn:
 	-Warhead@Effect:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx: ^td_nod_td_nod_ssmlauncher_honestjohn_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^td_nod_td_nod_ssmlauncher_honestjohn_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
+	Inherits@w6fx2: ^td_nod_td_nod_ssmlauncher_honestjohn_3
 	Burst: 2
 	BurstDelays: 25
 	MinRange: 2090
@@ -584,6 +605,25 @@ td_nod_ssmlauncher_honestjohn:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
+
+^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_3:
+	Warhead@Effect: CreateEffect
+		Explosions: med_napalm
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		GlowScale: 1.5
+		ImpactActors: false
+		ImpactSounds: firebl3.aud
 
 td_nod_ballisticmissilesubmarine_honestjohn:
 	ValidTargets: Ground, Water
@@ -649,30 +689,20 @@ td_nod_ballisticmissilesubmarine_honestjohn:
 	-Warhead@Effect:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
+	Inherits@w6fx2: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_3
 	Burst: 2
 	BurstDelays: 25
 	MinRange: 1790
@@ -687,6 +717,21 @@ td_nod_ballisticmissilesubmarine_honestjohn:
 		Shadow: true
 		TrailDelay: 1
 		TrailInterval: 1
+^td_nod_td_nod_flamethrower_flamethrowerexplode_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+
+^td_nod_td_nod_flamethrower_flamethrowerexplode_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
 td_nod_flamethrower_flamethrowerexplode:
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
@@ -752,22 +797,13 @@ td_nod_flamethrower_flamethrowerexplode:
 	-Warhead@Effect:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
+	Inherits@w6fx: ^td_nod_td_nod_flamethrower_flamethrowerexplode_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^td_nod_td_nod_flamethrower_flamethrowerexplode_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -1526,6 +1562,34 @@ td_nod_gunturret_turretgun:
 		PercentageScale: 0
 	Warhead@Concrete:
 		Damage: 100
+^td_nod_td_nod_gunturret_turretgunblackmarket_fx:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactActors: false
+		ImpactSounds: siege_impact.aud
+		ValidTargets: Ground, Ship
+
 td_nod_gunturret_turretgunblackmarket:
 	ValidTargets: Ground, Water
 	ReloadDelay: 61
@@ -1701,32 +1765,7 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Effect2: CreateEffect
-		Delay: 6
-		Explosions: napalm
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@Effect1: CreateEffect
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: siege_impact.aud
-		ValidTargets: Ground, Ship
+	Inherits@w6fx: ^td_nod_td_nod_gunturret_turretgunblackmarket_fx
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1873,6 +1912,26 @@ td_nod_obeliskoflight_laserobelisk:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^td_nod_td_nod_obeliskoflight_laserobeliskburning_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^td_nod_td_nod_obeliskoflight_laserobeliskburning_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 td_nod_obeliskoflight_laserobeliskburning:
 	ValidTargets: Ground, Water
 	ReloadDelay: 96
@@ -1932,28 +1991,14 @@ td_nod_obeliskoflight_laserobeliskburning:
 	-Warhead@EffectAir:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^td_nod_td_nod_obeliskoflight_laserobeliskburning_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
 		InvalidTargets: Air
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^td_nod_td_nod_obeliskoflight_laserobeliskburning_2
 	Report: obelray1.aud
 	Warhead@Inferno_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

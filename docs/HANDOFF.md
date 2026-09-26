@@ -1,6 +1,16 @@
 # Cameo — THE HANDOFF
 
 
+### DAWN — W6 in-lane sweep complete (2026-09-26, branch `devin/dawn/w6-fx`)
+
+All 174 in-lane W6 weapons (local effect-typed `Warhead@` blocks) converted
+to per-weapon `^<theme>_<weapon>` fx templates with `Inherits@w6fx[N]` edges
+at exact run positions. Corpus-wide verify 3809/3809 resolved+ordered
+identical; W6 521 -> 347 (remainder is out-of-lane packs). New traps
+recorded: corpus-wide `^` name collisions (W7MAT'd self-named templates in
+other files) and nested-cancel audit blindness (see LESSONS). Ratchets:
+W1 1534 bp, W4 203, W6 347, W7 647.
+
 ### DAWN — R17 chip folds / W5 batch-1 (2026-09-26, branch `devin/dawn/r17-chips`)
 
 20 weapons / 21 chip warheads folded into their mains

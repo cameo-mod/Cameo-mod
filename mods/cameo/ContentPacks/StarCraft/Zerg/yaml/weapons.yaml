@@ -1,3 +1,7 @@
+^sc_zerg_zerglingclaw:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 ZerglingClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -8,6 +12,9 @@ ZerglingClaw:
 	Range: 1350
 	Warhead@Melee_Medium:
 		Damage: 2000
+	Inherits@w6fx: ^sc_zerg_zerglingclaw
+
+^sc_zerg_talonclaw:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -20,7 +27,11 @@ TalonClaw:
 	Range: 1680
 	Warhead@Melee_Medium:
 		Damage: 6000
+	Inherits@w6fx: ^sc_zerg_talonclaw
+
+^sc_zerg_gorekrakenclaw:
 	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 GorekrakenClaw:
@@ -34,6 +45,9 @@ GorekrakenClaw:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
+	Inherits@w6fx: ^sc_zerg_gorekrakenclaw
+
+^sc_zerg_shriekstinger:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -49,9 +63,13 @@ ShriekStinger:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	Inherits@w6fx: ^sc_zerg_shriekstinger
+
+^sc_zerg_hydraspit:
 	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water, Air
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+		Explosions: sczhsplash
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
 
 HydraSpit:
 	Inherits@wh: ^Warhead_BulletChem_Light
@@ -70,6 +88,9 @@ HydraSpit:
 		TrailImage: sczhsplash
 	Warhead@BulletChem_Light:
 		Damage: 18000
+	Inherits@w6fx: ^sc_zerg_hydraspit
+
+^sc_zerg_spithidspit:
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
@@ -102,10 +123,7 @@ SpithidSpit:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
+	Inherits@w6fx: ^sc_zerg_spithidspit
 	-TargetActorCenter:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
@@ -113,6 +131,13 @@ SpithidSpit:
 	Warhead@Bullet_Light:
 		Damage: 6000
 		PercentageScale: 0
+
+^sc_zerg_mutaliskspore:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 MutaliskSpore:
 	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
@@ -151,11 +176,7 @@ MutaliskSpore:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_mutaliskspore
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce1
 		Amount: 1
@@ -205,6 +226,28 @@ MutaliskSpore:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+^sc_zerg_mutabounce1_1:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_mutabounce1_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+
+^sc_zerg_mutabounce1_3:
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_mutabounce1_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 MutaBounce1:
 	Warhead@Chemical_Medium_Flat: AreaDamage
@@ -315,9 +358,7 @@ MutaBounce1:
 		Duration: 3
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx: ^sc_zerg_mutabounce1_1
 	InvalidTargets: wall
 	Report: zmufir00.aud
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
@@ -347,8 +388,7 @@ MutaBounce1:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@Concrete: DamagesConcrete
-		Damage: 150
+	Inherits@w6fx1: ^sc_zerg_mutabounce1_2
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -373,10 +413,7 @@ MutaBounce1:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piff
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx2: ^sc_zerg_mutabounce1_3
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
@@ -403,11 +440,7 @@ MutaBounce1:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_zerg_mutabounce1_4
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
 		Amount: 1
@@ -441,6 +474,28 @@ MutaBounce1:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+^sc_zerg_mutabounce2_1:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_mutabounce2_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+
+^sc_zerg_mutabounce2_3:
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_mutabounce2_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 MutaBounce2:
 	Warhead@Chemical_Medium_Flat: AreaDamage
@@ -551,9 +606,7 @@ MutaBounce2:
 		Duration: 3
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx: ^sc_zerg_mutabounce2_1
 	InvalidTargets: wall
 	Report: zmufir00.aud
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
@@ -583,8 +636,7 @@ MutaBounce2:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@Concrete: DamagesConcrete
-		Damage: 150
+	Inherits@w6fx1: ^sc_zerg_mutabounce2_2
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -609,10 +661,7 @@ MutaBounce2:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piff
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx2: ^sc_zerg_mutabounce2_3
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
@@ -639,13 +688,16 @@ MutaBounce2:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_zerg_mutabounce2_4
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
+
+^sc_zerg_corruptorspore:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 CorruptorSpore:
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -675,10 +727,17 @@ CorruptorSpore:
 		Duration: 100
 		ValidTargets: snareable
 		ValidRelationships: Enemy
+	Inherits@w6fx: ^sc_zerg_corruptorspore
+
+^sc_zerg_dreadshroudspore:
 	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 
 DreadshroudSpore:
@@ -757,15 +816,7 @@ DreadshroudSpore:
 		PhysicalStateName: Blind
 		Amount: 20000
 		Range: 600
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_dreadshroudspore
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumMissile:
@@ -808,6 +859,35 @@ DreadshroudSpore:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+^sc_zerg_scdevoureraa_1:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_scdevoureraa_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+
+^sc_zerg_scdevoureraa_3:
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_scdevoureraa_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^sc_zerg_scdevoureraa_5:
+	Warhead@Effect2: CreateEffect
+		Explosions: nax_corr_ex
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Air
 
 SCDevourerAA:
 	Warhead@Chemical_Medium_Flat: AreaDamage
@@ -923,9 +1003,7 @@ SCDevourerAA:
 		Duration: 3
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx: ^sc_zerg_scdevoureraa_1
 	InvalidTargets: wall
 	Report: sc_devourer_attack.aud
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
@@ -955,8 +1033,7 @@ SCDevourerAA:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@Concrete: DamagesConcrete
-		Damage: 150
+	Inherits@w6fx1: ^sc_zerg_scdevoureraa_2
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Spread: 50
@@ -981,10 +1058,7 @@ SCDevourerAA:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piff
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx2: ^sc_zerg_scdevoureraa_3
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		InvalidTargets: wall
@@ -1011,11 +1085,7 @@ SCDevourerAA:
 			Wood: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx3: ^sc_zerg_scdevoureraa_4
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
 		Weapon: sc_zerg_devourer_acidcloud_aa
@@ -1027,11 +1097,7 @@ SCDevourerAA:
 		TurnRate: 5
 		Image: explosion
 		Palette: alpha25
-	Warhead@Effect2: CreateEffect
-		Explosions: nax_corr_ex
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Air
+	Inherits@w6fx4: ^sc_zerg_scdevoureraa_5
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -1082,6 +1148,31 @@ sc_zerg_devourer_acidcloud_aa:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_zerg_scourgeexplosion_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: scscourgeexplosion
+		ImpactSounds: zavdth00.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_scourgeexplosion_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 
 ScourgeExplosion:
 	Warhead@MissileAA_Heavy_Flat: AreaDamage
@@ -1147,38 +1238,25 @@ ScourgeExplosion:
 	-Warhead@Effect:
 	-Warhead@EffectWater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: scscourgeexplosion
-		ImpactSounds: zavdth00.aud
-		ValidTargets: Air
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_zerg_scourgeexplosion_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 175
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_zerg_scourgeexplosion_2
 	Projectile: Missile
 		Speed: 200
 		Blockable: false
 		LaunchAngle: 66
 		Inaccuracy: 400
 		Image: zerg_scourge
+
+^sc_zerg_scscourgeexplosion:
+	Warhead@Effect: CreateEffect
+		Explosions: scscourgeexplosion
+		ValidTargets: Air
+		ImpactSounds: zavdth00.aud
 
 SCScourgeExplosion:
 	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
@@ -1189,10 +1267,7 @@ SCScourgeExplosion:
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		Explosions: scscourgeexplosion
-		ValidTargets: Air
-		ImpactSounds: zavdth00.aud
+	Inherits@w6fx: ^sc_zerg_scscourgeexplosion
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 100000
@@ -1201,6 +1276,12 @@ SCScourgeExplosion:
 	ReloadDelay: 25
 	TargetActorCenter: true
 	Range: 5120
+^sc_zerg_guardianshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+
 GuardianShoot:
 	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
 	ValidTargets: Ground, Water
@@ -1238,10 +1319,7 @@ GuardianShoot:
 		Damage: 4
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
+	Inherits@w6fx: ^sc_zerg_guardianshoot
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@ShrapnelWeapon:
@@ -1251,6 +1329,26 @@ GuardianShoot:
 		PercentageScale: 0
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
+^sc_zerg_sporemawshoot_1:
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+
+^sc_zerg_sporemawshoot_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+
 SporemawShoot:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1280,31 +1378,20 @@ SporemawShoot:
 	FirstBurstTargetOffset: 3072,0,0
 	Warhead@Concussion_Medium:
 		Damage: 18000
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
+	Inherits@w6fx: ^sc_zerg_sporemawshoot_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-HermitExplode:
-	Inherits@w71: ^sc_reactornuke
+	Inherits@w6fx1: ^sc_zerg_sporemawshoot_2
+^sc_zerg_hermitexplode:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
+
+HermitExplode:
+	Inherits@w71: ^sc_reactornuke
+	Inherits@w6fx: ^sc_zerg_hermitexplode
 	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@Damage: SpreadDamage
 		Versus:
@@ -1507,6 +1594,18 @@ HermitExplode:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
+^sc_zerg_hermitshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+
 HermitShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
@@ -1557,16 +1656,7 @@ HermitShoot:
 		Damage: 1
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_hermitshoot
 	Warhead@shrapnel: FireShrapnel
 		Weapon: HermitShoot1
 		Amount: 1
@@ -1635,6 +1725,58 @@ HermitShoot:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_zerg_hermitshoot1_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_hermitshoot1_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_hermitshoot1_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_zerg_hermitshoot1_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 
 HermitShoot1:
 	ValidTargets: Ground, Water, Air
@@ -1759,33 +1901,13 @@ HermitShoot1:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_zerg_hermitshoot1_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_zerg_hermitshoot1_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -1836,22 +1958,7 @@ HermitShoot1:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_zerg_hermitshoot1_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -1876,12 +1983,7 @@ HermitShoot1:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: ra2effect
+	Inherits@w6fx3: ^sc_zerg_hermitshoot1_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -1988,6 +2090,58 @@ HermitShoot1:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_zerg_hermitshoot2_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_hermitshoot2_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_hermitshoot2_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_zerg_hermitshoot2_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 
 HermitShoot2:
 	ValidTargets: Ground, Water, Air
@@ -2112,33 +2266,13 @@ HermitShoot2:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_zerg_hermitshoot2_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_zerg_hermitshoot2_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -2189,22 +2323,7 @@ HermitShoot2:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_zerg_hermitshoot2_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2229,12 +2348,7 @@ HermitShoot2:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: ra2effect
+	Inherits@w6fx3: ^sc_zerg_hermitshoot2_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -2341,6 +2455,58 @@ HermitShoot2:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_zerg_hermitshoot3_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_hermitshoot3_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_hermitshoot3_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_zerg_hermitshoot3_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 
 HermitShoot3:
 	ValidTargets: Ground, Water, Air
@@ -2465,33 +2631,13 @@ HermitShoot3:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_zerg_hermitshoot3_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_zerg_hermitshoot3_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -2542,22 +2688,7 @@ HermitShoot3:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_zerg_hermitshoot3_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2582,12 +2713,7 @@ HermitShoot3:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: ra2effect
+	Inherits@w6fx3: ^sc_zerg_hermitshoot3_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -2694,6 +2820,58 @@ HermitShoot3:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
+
+^sc_zerg_hermitshoot4_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^sc_zerg_hermitshoot4_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^sc_zerg_hermitshoot4_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
+^sc_zerg_hermitshoot4_4:
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
 
 HermitShoot4:
 	ValidTargets: Ground, Water, Air
@@ -2818,33 +2996,13 @@ HermitShoot4:
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_zerg_hermitshoot4_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_zerg_hermitshoot4_2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -2895,22 +3053,7 @@ HermitShoot4:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
+	Inherits@w6fx2: ^sc_zerg_hermitshoot4_3
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -2935,12 +3078,7 @@ HermitShoot4:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ImpactSounds: gexp14a.wav
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: ra2effect
+	Inherits@w6fx3: ^sc_zerg_hermitshoot4_4
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -3003,6 +3141,17 @@ BroodweaverLeech:
 	-Warhead@ExtraHealing:
 	Warhead@HealingWeapon:
 		Damage: -3000
+^sc_zerg_swarmlingshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+
 SwarmlingShoot:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	-TargetActorCenter:
@@ -3116,15 +3265,7 @@ SwarmlingShoot:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_swarmlingshoot
 
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
@@ -3141,6 +3282,18 @@ SwarmlingShoot:
 		Damage: 16000
 		PercentageScale: 0
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+
+^sc_zerg_queenspine:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 QueenSpine:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -3168,16 +3321,7 @@ QueenSpine:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_queenspine
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ArrowWeapon:
 	Warhead@Chemical_Medium:
@@ -3186,6 +3330,10 @@ QueenSpine:
 		Damage: 20000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
 		PercentageScale: 0
+
+^sc_zerg_ultraliskhusk:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 UltraliskHusk:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -3196,6 +3344,9 @@ UltraliskHusk:
 	Range: 1600
 	Warhead@Melee_Medium:
 		Damage: 40000
+	Inherits@w6fx: ^sc_zerg_ultraliskhusk
+
+^sc_zerg_goremawclaw:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -3208,8 +3359,7 @@ GoremawClaw:
 	Range: 1250
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+	Inherits@w6fx: ^sc_zerg_goremawclaw
 
 LurkerTargeting:
 	ReloadDelay: 33
@@ -3217,6 +3367,11 @@ LurkerTargeting:
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	Warhead@Dummy: Dummy
+
+^sc_zerg_lurkerspines:
+	Warhead@Effect: CreateEffect
+		Explosions: sczlspine
+		ImpactSounds: zquhit00.aud,zquhit01.aud
 
 LurkerSpines:
 	ReloadDelay: 66
@@ -3233,9 +3388,13 @@ LurkerSpines:
 		Blockable: true
 		Speed: 333
 		Inaccuracy: 666
+	Inherits@w6fx: ^sc_zerg_lurkerspines
+
+^sc_zerg_lurkerspinesimpact:
 	Warhead@Effect: CreateEffect
 		Explosions: sczlspine
 		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 LurkerSpinesImpact:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -3252,10 +3411,7 @@ LurkerSpinesImpact:
 		Damage: 1
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: sczlspine
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_lurkerspinesimpact
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@SwordWeapon:
 	-Warhead@SwordWeaponFriendlyFire:
@@ -3263,6 +3419,12 @@ LurkerSpinesImpact:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 0
+
+^sc_zerg_infestedexplosion:
+	Warhead@Effect: CreateEffect
+		Explosions: self_destruct
+		ImpactSounds: ExploLrg.aud
+		ImpactActors: true
 
 InfestedExplosion:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
@@ -3278,10 +3440,7 @@ InfestedExplosion:
 		Damage: 50000
 	Warhead@Demolition_Heavy:
 		Damage: 100000
-	Warhead@Effect: CreateEffect
-		Explosions: self_destruct
-		ImpactSounds: ExploLrg.aud
-		ImpactActors: true
+	Inherits@w6fx: ^sc_zerg_infestedexplosion
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_Heavy_Flat:
@@ -3293,6 +3452,18 @@ InfestedExplosion:
 	ReloadDelay: 25
 	TargetActorCenter: true
 	Range: 5120
+^sc_zerg_behemothshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+	Warhead@Effect2: CreateEffect
+		Explosions: sczhsplash
+		ImpactSounds: zguhit00.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
+		ImpactSounds: zguhit00.aud
+
 BehemothShoot:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
@@ -3381,16 +3552,7 @@ BehemothShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-	Warhead@Effect2: CreateEffect
-		Explosions: sczhsplash
-		ImpactSounds: zguhit00.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
-		ImpactSounds: zguhit00.aud
+	Inherits@w6fx: ^sc_zerg_behemothshoot
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
@@ -3436,6 +3598,13 @@ SCQUEENSUMMON:
 		Delay: 15
 		ValidTargets: Air, Ground, Water
 
+^sc_zerg_spore_aa:
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: zluhit00.aud
+		ImpactActors: false
+		ValidTargets: Air
+
 Spore_AA:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: ^MediumMissile
@@ -3475,11 +3644,7 @@ Spore_AA:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 6
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: zluhit00.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_zerg_spore_aa
 	-Warhead@MediumMissile:
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
@@ -3487,6 +3652,12 @@ Spore_AA:
 		ValidTargets: Air
 		Damage: 36000
 		PercentageScale: 0
+
+^sc_zerg_tentacle:
+	Warhead@Effect: CreateEffect
+		Explosions: sctentacle
+		ImpactSounds: zluhit00.aud
+		ImpactActors: false
 
 Tentacle:
 	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
@@ -3511,10 +3682,7 @@ Tentacle:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: sctentacle
-		ImpactSounds: zluhit00.aud
-		ImpactActors: false
+	Inherits@w6fx: ^sc_zerg_tentacle
 	-Warhead@Chaingun:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
@@ -3529,6 +3697,10 @@ Tentacle:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 	TargetActorCenter: true
+^sc_zerg_droneattack:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 DroneAttack:
 	Inherits@w81: ^Warhead_Melee_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_InstantHit  # W7MAT covering-edge
@@ -3538,8 +3710,7 @@ DroneAttack:
 	Warhead@Melee_Medium:  # W7MAT w8-repin
 		Damage: 10000
 	Report: zerglinghit.wav
-	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+	Inherits@w6fx: ^sc_zerg_droneattack
 
 DarkSwarmSpawn:
 	ReloadDelay: 1
@@ -3550,6 +3721,13 @@ DarkSwarmSpawn:
 		Range: 5
 		Delay: 15
 		ValidTargets: Air, Ground, Water
+
+^sc_zerg_defilerplague:
+	Warhead@Effect: CreateEffect
+		Explosions: scplague
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ImpactSounds: zulhit00.aud
 
 DefilerPlague:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -3594,11 +3772,7 @@ DefilerPlague:
 		ValidTargets: Ground, Air, Water
 		InvalidTargets: plagued
 		ValidRelationships: Enemy, Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: scplague
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ImpactSounds: zulhit00.aud
+	Inherits@w6fx: ^sc_zerg_defilerplague
 
 RemovableDebuffDummy:
 	Warhead@Cloud: SpawnSmokeParticle

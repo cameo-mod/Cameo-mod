@@ -1,3 +1,7 @@
+^wc2_humans_wc2footmanslice2:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2footmanslice2:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -8,10 +12,14 @@ wc2footmanslice2:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 18000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Inherits@w6fx: ^wc2_humans_wc2footmanslice2
 
 # 1-5 WC2 damage. 3 Base, 2 Pierce.
+
+^wc2_humans_wc2_dwarf_rifle:
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
 
 wc2_dwarf_Rifle:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
@@ -51,9 +59,7 @@ wc2_dwarf_Rifle:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
+	Inherits@w6fx: ^wc2_humans_wc2_dwarf_rifle
 
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
@@ -66,6 +72,10 @@ wc2_dwarf_Rifle:
 
 # 2-12 WC2 damage. 8 Base, 4 Pierce.
 
+^wc2_humans_wc2knightslice:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2knightslice:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -76,8 +86,7 @@ wc2knightslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Inherits@w6fx: ^wc2_humans_wc2knightslice
 
 wc2paladinholyvision:
 	ReloadDelay: 60
@@ -100,6 +109,11 @@ wc2paladinholyvision:
 		Dimensions: 13,17
 		Footprint: ______X______ _____________ _____________ _____________ X___________X _____________ _____________ _____________ ______X______ _____________ _____________ _____________ X___________X _____________ _____________ _____________ ______X______
 
+^wc2_humans_wc2paladinholyvision_hit:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+
 wc2paladinholyvision_hit:
 	ReloadDelay: 60
 	Range: 5120
@@ -116,9 +130,7 @@ wc2paladinholyvision_hit:
 			Heavy: 100
 			Concrete: 100
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
+	Inherits@w6fx: ^wc2_humans_wc2paladinholyvision_hit
 	Warhead@3Reveal: RevealShroud
 		RevealStances: Ally
 		Duration: 60
@@ -137,7 +149,7 @@ wc2holyvisionSuper:
 # Spell sound effect goes in a CreateEffectWarhead here because if you put it in the weapon fired by IonCannonPower,
 # the sound will play at the location of the building that fired the power, and not at the impact location.
 
-wc2holyvisionSuper_hit:
+^wc2_humans_wc2holyvisionsuper_hit:
 	Warhead@2Eff: CreateEffect  # W7MAT order-pin
 		Delay: 10
 		Image: wc2_effect_sparkle_circle
@@ -171,6 +183,9 @@ wc2holyvisionSuper_hit:
 		Delay: 31
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-nw
+
+wc2holyvisionSuper_hit:
+	Inherits@w6fx: ^wc2_humans_wc2holyvisionsuper_hit
 	Warhead@3Reveal: RevealShroud  # W7MAT order-pin
 		Duration: 250
 		Radius: 9c0
@@ -194,6 +209,12 @@ wc2holyvisionSuper_hit:
 	Range: 5120  # W7MAT order-pin
 	Projectile: InstantHit  # W7MAT order-pin
 	ReloadDelay: 60  # W7MAT order-pin
+^wc2_humans_wc2paladinhealing:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_heal
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+
 wc2paladinhealing:
 	ReloadDelay: 60
 	Range: 5120
@@ -215,6 +236,9 @@ wc2paladinhealing:
 		ValidTargets: Heal, Healing
 		# InvalidTargets: wc2_ballista
 		ValidRelationships: Ally
+	Inherits@w6fx: ^wc2_humans_wc2paladinhealing
+
+^wc2_humans_wc2priesthealing:
 	Warhead@2Eff: CreateEffect
 		Image: wc2_effect_heal
 		Explosions: idle
@@ -241,10 +265,7 @@ wc2priesthealing:
 		ValidTargets: Heal, Healing
 		# InvalidTargets: wc2_ballista
 		ValidRelationships: Ally
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_heal
-		Explosions: idle
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_humans_wc2priesthealing
 
 # Support power healing.
 
@@ -255,6 +276,12 @@ wc2healingSuper:
 		Dimensions: 5,5
 		Footprint: _____ _____ _____ _____ ____x
 		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+
+^wc2_humans_wc2healingsuper_hit:
+	Warhead@2Eff: CreateEffect
+		ValidTargets: Ground, Water, Air
+		Explosions: idle
+		Image: wc2_effect_heal
 
 wc2healingSuper_hit:
 	ValidTargets: Ground, Water, Air
@@ -271,15 +298,17 @@ wc2healingSuper_hit:
 			Heavy: 100
 			Wood: 0
 		ValidRelationships: Ally
-	Warhead@2Eff: CreateEffect
-		ValidTargets: Ground, Water, Air
-		Explosions: idle
-		Image: wc2_effect_heal
+	Inherits@w6fx: ^wc2_humans_wc2healingsuper_hit
 
 	ReloadDelay: 60  # W7MAT order-pin
 	Range: 5120  # W7MAT order-pin
 	Report: wc2_heal.aud  # W7MAT order-pin
 	Projectile: InstantHit  # W7MAT order-pin
+^wc2_humans_wc2paladinexorcism:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_exorcism
+		Explosions: idle
+
 wc2paladinexorcism:
 	ReloadDelay: 60
 	Range: 5120
@@ -298,11 +327,15 @@ wc2paladinexorcism:
 			Concrete: 0
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: undeadtarget
-	Warhead@2Eff: CreateEffect
-		Image: wc2_exorcism
-		Explosions: idle
+	Inherits@w6fx: ^wc2_humans_wc2paladinexorcism
 
 # 25-80 WC2 damage. 80 Base, 0 Pierce.
+
+^wc2_humans_wc2ballistafire:
+	Warhead@Effect: CreateEffect
+		Image: wc2_catapult_impact
+		Explosions: idle
+		ImpactSounds: explode.aud
 
 wc2ballistaFire:
 	Inherits@wh2: ^Warhead_Demolition_Heavy
@@ -323,6 +356,9 @@ wc2ballistaFire:
 		Damage: 90000
 		PercentageScale: 9999
 	-Warhead@Concussion_Medium:
+	Inherits@w6fx: ^wc2_humans_wc2ballistafire
+
+^wc2_humans_mortarteamartilleryshell:
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_impact
 		Explosions: idle
@@ -387,15 +423,25 @@ MortarTeamArtilleryShell:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Effect: CreateEffect
-		Image: wc2_catapult_impact
-		Explosions: idle
-		ImpactSounds: explode.aud
+	Inherits@w6fx: ^wc2_humans_mortarteamartilleryshell
 
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
+^wc2_humans_wc2gryphonfirevisible:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect2: CreateEffect
+		Explosions: mobileemp_small
+		ExplosionPalette: ra2unit
+		ImpactSounds: mobemp1.aud
+		ImpactActors: false
+		AffectsParent: true
+		ValidTargets: Ground, Water, Air
+
 wc2gryphonFireVisible:
 	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^LightMissile
@@ -459,17 +505,7 @@ wc2gryphonFireVisible:
 		Spread: 1000
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: wc2_building_collapse
-		ImpactSounds: explode.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@Effect2: CreateEffect
-		Explosions: mobileemp_small
-		ExplosionPalette: ra2unit
-		ImpactSounds: mobemp1.aud
-		ImpactActors: false
-		AffectsParent: true
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_humans_wc2gryphonfirevisible
 
 # 5-9 WC2 damage. 0 Base, 9 Pierce.
 	-Warhead@HeavyBomb:
@@ -481,6 +517,31 @@ wc2gryphonFireVisible:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000
 		PercentageScale: 0
+
+^wc2_humans_wc2magefireballvisible_1:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^wc2_humans_wc2magefireballvisible_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@Glow: GlowImpact
 
 wc2mageFireballVisible:
 	Inherits@wh: ^Warhead_Flame_Heavy
@@ -519,32 +580,37 @@ wc2mageFireballVisible:
 		PointDefenseTypes: Missile
 	Warhead@Flame_Heavy:
 		Damage: 18000
-	Warhead@Effect: CreateEffect
-		Explosions: wc2_building_collapse
-		ImpactSounds: explode.aud
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^wc2_humans_wc2magefireballvisible_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
+	Inherits@w6fx1: ^wc2_humans_wc2magefireballvisible_2
+^wc2_humans_wc2magefireballexplosion_1:
+	Warhead@Effect: CreateEffect  # W7MAT order-pin
+		ImpactSounds: explode.aud
+		Explosions: wc2_building_collapse
+		ValidTargets: Ground, Water, Air
+
+^wc2_humans_wc2magefireballexplosion_2:
+	Warhead@EffectWater: CreateEffect  # W7MAT order-pin
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^wc2_humans_wc2magefireballexplosion_3:
+	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+		ImpactActors: false
+		Explosions: small_explosion_air
+
+^wc2_humans_wc2magefireballexplosion_4:
+	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
 		Damage: 25
-	Warhead@Glow: GlowImpact
+
 wc2mageFireballExplosion:
 	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
 	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
@@ -554,10 +620,7 @@ wc2mageFireballExplosion:
 	BurstDelays: 0
 	FirstBurstTargetOffset: 0,0,0
 	FollowingBurstTargetOffset: 1024,0,0
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: explode.aud
-		Explosions: wc2_building_collapse
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_humans_wc2magefireballexplosion_1
 	Projectile: Bullet  # W7MAT order-pin
 		RangeLimit: 25000
 		MinimumLaunchSpeed: 250
@@ -584,25 +647,22 @@ wc2mageFireballExplosion:
 		HorizontalRateOfTurn: 30
 		LaunchAngle: 66
 		ContrailZOffset: 4000
-	Warhead@EffectWater: CreateEffect  # W7MAT order-pin
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx1: ^wc2_humans_wc2magefireballexplosion_2
 	Range: 8000  # W7MAT order-pin
-	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
-		ImpactSounds: xplos.aud
-		ValidTargets: Air
-		ImpactActors: false
-		Explosions: small_explosion_air
+	Inherits@w6fx2: ^wc2_humans_wc2magefireballexplosion_3
 	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
 		Damage: 18000
-	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
-		Damage: 25
+	Inherits@w6fx3: ^wc2_humans_wc2magefireballexplosion_4
 	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
 		Duration: 5
 	ValidTargets: Ground  # W7MAT order-pin
 	Report: aacanon3.aud  # W7MAT order-pin
+^wc2_humans_wc2mageslow:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+
 wc2mageSlow:
 	ReloadDelay: 60
 	Range: 8000
@@ -626,14 +686,17 @@ wc2mageSlow:
 			Concrete: 0
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: Ground, Water, Air
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_humans_wc2mageslow
 	Warhead@Condition: GrantExternalCondition
 		Condition: wc2_cond_slow
 		Duration: 600
 		Range: 341
+		ValidTargets: Ground, Water, Air
+
+^wc2_humans_wc2magepolymorph:
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
 		ValidTargets: Ground, Water, Air
 
 wc2magePolymorph:
@@ -648,10 +711,7 @@ wc2magePolymorph:
 		HorizontalRateOfTurn: 256
 		VerticalRateOfTurn: 256
 		AllowSnapping: True
-	Warhead@2Eff: CreateEffect
-		Image: wc2_effect_sparkle
-		Explosions: idle
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^wc2_humans_wc2magepolymorph
 	Warhead@Polymorph: GrantExternalCondition
 		Condition: wc2_cond_polymorph
 		Duration: 1
@@ -807,6 +867,10 @@ wc2blizzardSuper_Spread:
 # --- Hero weapons (ported from wcameo(1), converted to 3-way split) ---
 
 # Alleria: 6 old warheads each 6000 main + 3% percentage -> 36000 main, 18% twin.
+^wc2_humans_wc2_humans_alleria_arrow:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_bowhit.aud
+
 wc2_humans_alleria_arrow:
 	Inherits@wh: ^Warhead_Arrow_Medium
 	Inherits@proj: ^Projectile_Arrow_Light
@@ -826,10 +890,13 @@ wc2_humans_alleria_arrow:
 		ContrailLength: 0
 	Warhead@Arrow_Medium:
 		Damage: 36000
+	Inherits@w6fx: ^wc2_humans_wc2_humans_alleria_arrow
+
+# Alleria elite / general: 6 old warheads each 8000 main + 4% -> 48000 main, 24% twin.
+^wc2_humans_wc2_humans_alleria_arrow_elite:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_bowhit.aud
 
-# Alleria elite / general: 6 old warheads each 8000 main + 4% -> 48000 main, 24% twin.
 wc2_humans_alleria_arrow_elite:
 	Inherits@wh: ^Warhead_Arrow_Heavy
 	Inherits@proj: ^Projectile_Arrow_Light
@@ -849,11 +916,14 @@ wc2_humans_alleria_arrow_elite:
 		ContrailLength: 0
 	Warhead@Arrow_Heavy:
 		Damage: 48000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+	Inherits@w6fx: ^wc2_humans_wc2_humans_alleria_arrow_elite
 
 # Danath: 12 WC2 damage (36000). Old 3-main (36000/18000/12%) -> one AreaDamage.
 # PercentageScale 6667 preserves the 12% percentage twin at 36000 main.
+^wc2_humans_wc2_humans_danath_slice:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
 wc2_humans_danath_slice:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -865,10 +935,13 @@ wc2_humans_danath_slice:
 	Warhead@Melee_Medium:
 		Damage: 36000
 		PercentageScale: 6667
+	Inherits@w6fx: ^wc2_humans_wc2_humans_danath_slice
+
+# Danath elite / veteran: 16 WC2 damage (48000). 48000*6667/200000 ~= 16%.
+^wc2_humans_wc2_humans_danath_slice_elite:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
-# Danath elite / veteran: 16 WC2 damage (48000). 48000*6667/200000 ~= 16%.
 wc2_humans_danath_slice_elite:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -880,5 +953,4 @@ wc2_humans_danath_slice_elite:
 	Warhead@Melee_Medium:
 		Damage: 48000
 		PercentageScale: 6667
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Inherits@w6fx: ^wc2_humans_wc2_humans_danath_slice_elite

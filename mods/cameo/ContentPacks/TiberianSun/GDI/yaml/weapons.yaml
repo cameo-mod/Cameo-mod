@@ -1096,6 +1096,43 @@ TSMammothTusk2II_AA:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^ts_gdi_tshellfiresonic_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building_napalm
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^ts_gdi_tshellfiresonic_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
+
 TSHellfireSonic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
@@ -1137,44 +1174,13 @@ TSHellfireSonic:
 	-Warhead@EffectAir:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: blue_building_napalm
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^ts_gdi_tshellfiresonic_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 150
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		FadeFrames: 10
-		Scale: 0.55
+	Inherits@w6fx1: ^ts_gdi_tshellfiresonic_2
 	Report: orcamis1.aud
 	Warhead@MissileSonic_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1291,6 +1297,43 @@ TSZoneHellfire:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^ts_gdi_tszonehellfiresonic_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^ts_gdi_tszonehellfiresonic_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+
 TSZoneHellfireSonic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 28
@@ -1332,44 +1375,13 @@ TSZoneHellfireSonic:
 	-Warhead@EffectAir:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: blue_building
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^ts_gdi_tszonehellfiresonic_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 150
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		FadeFrames: 15
-		Scale: 0.8
+	Inherits@w6fx1: ^ts_gdi_tszonehellfiresonic_2
 	Report: orcamis1.aud
 	Warhead@MissileSonic_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1855,6 +1867,19 @@ TSAssaultCannonTal:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^ts_gdi_tsassaultcannontalsonic_1:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^ts_gdi_tsassaultcannontalsonic_2:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+
 TSAssaultCannonTalSonic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 45
@@ -1885,18 +1910,11 @@ TSAssaultCannonTalSonic:
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx: ^ts_gdi_tsassaultcannontalsonic_1
 	Burst: 2
 	BurstDelays: 2
 	Report: 120mmf.aud
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.55
-		FadeFrames: 10
+	Inherits@w6fx1: ^ts_gdi_tsassaultcannontalsonic_2
 	Warhead@BulletSonic_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2070,6 +2088,34 @@ TSMechMGII:
 	Warhead@Bullet_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water
+^ts_gdi_tsioncannon_fx:
+	Warhead@3Smu_area: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 3,2
+		Delay: 110
+		AirThreshold: 8c0
+	Warhead@5Smu_area2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 2,1
+		Delay: 6
+	Warhead@Effect: CreateEffect
+		ImpactSounds: ion1.aud
+		Volume: 5
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		GlowColor: 32C8FF
+		GlowScale: 7.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 5
+		AffectsParent: true
+		AirThreshold: 8c0
+		Delay: 110
+		ExplosionPalette: tseffect
+		Explosions: ionring
+		Image: tsioncannon
+
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -2166,32 +2212,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		AffectsParent: True
 		Delay: 115
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@3Smu_area: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-		Size: 3,2
-		Delay: 110
-		AirThreshold: 8c0
-	Warhead@5Smu_area2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-		Size: 2,1
-		Delay: 6
-	Warhead@Effect: CreateEffect
-		ImpactSounds: ion1.aud
-		Volume: 5
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		GlowColor: 32C8FF
-		GlowScale: 7.0
-		GlowFadeFrames: 600
-		GlowFadeInFrames: 5
-		AffectsParent: true
-		AirThreshold: 8c0
-		Delay: 110
-		ExplosionPalette: tseffect
-		Explosions: ionring
-		Image: tsioncannon
+	Inherits@w6fx: ^ts_gdi_tsioncannon_fx
 	Warhead@GroundFireArea: SpawnActorInArea
 		Actor: groundfire
 		Range: 3

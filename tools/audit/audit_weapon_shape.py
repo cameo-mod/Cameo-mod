@@ -82,7 +82,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 1138   # 247/2172 = 1137.5 bp: R17 chip folds dropped 9 dead
+W1_RATE_BP = 1534   # 333/2172 = 1533.2 bp: W6 full in-lane sweep — local fx
+                    # warhead runs moved to per-weapon ^<theme>_<weapon>
+                    # templates, +1 edge per converted weapon (174 done: D2k,
+                    # TD, TS, WC2, SC). The fx-bundle edge is structural —
+                    # only 3/174 could chain into an existing fx edge instead.
+                    # 1184 (257/2172): W6 batch-1 (D2k, 10 crossed >3).
+                    # 1138 (247/2172): R17 chip folds dropped 9 dead
                     # ^Warhead_*_ExtraDamage edges. 1142 was the W1 dead-edge sweep
                     # fully-shadowed edges (resolve-drop probe: flat+ordered
                     # identical). Old value 1188 (258/2172): W8 batch-1 covering edges
@@ -132,44 +138,25 @@ W3_BASELINE = 18    # 24 -> 18: W1 dead-edge sweep (-6 dead ^Projectile_* edges)
                     # 7 -> 11: W7 conversion — weapons whose resolved output
                     # mixes two projectile families carry both covering edges
                     # (fidelity). was: 12 -> 7 post-rebase resync; dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 70    # 44 -> 70: W8 batch-1 covering edges (+26 dual fx).
-                    # 40 -> 44: W7 conversion (same dual-family fidelity class
-                    # as W3). was: 52 -> 41 post-rebase resync; dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
-                    # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
-                    # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
-                    # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
-                    # surfacing 3 pre-existing dual-effect-edge weapons hidden by
-                    # the old prefix-only classifier. Same class as the W2
-                    # ^Compatibility_* rename: measurement fix, not new debt.
+W4_BASELINE = 203   # 94 -> 203: W6 in-lane sweep — converted weapons keep
+                    # their generic @fx edge AND gain a per-weapon fx-template
+                    # edge; fx-pure ^<theme>_<weapon> templates count fx-kind.
 W5_BASELINE = 153   # 389 -> 153: re-locked at current true value after the
                     # R17 chip-fold batch (-19 weapons). The 389 figure was a
                     # merge-repair era ceiling, far above any recent measurement.
                     # previous: more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 521   # 518 -> 521: W8 batch-1 w8-repin materializations.
-                    # 437 -> 510: ordered-key parity fix (NOVA merge-blocker on
-                    # #508) materializes warhead pins as LOCAL nodes at their
-                    # first-seen base positions. Resolved children are identical;
-                    # the nodes are edge-equivalent content, not new local design.
-                    # 510 -> 512: same materialization pass applied to the W2
-                    # sweep stack (50 order repairs over the rebased tree).
-                    # 512 -> 518: W7 conversion fidelity pins, all marked
-                    # `# W7MAT` (rule 0.4).
-                    # was: 443 -> 442: W7-remainder materialization batch moved
-                    # the last local effect node on the DAWN file-set into a family.
-                    # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
-                    # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
-                    # master itself measures 442; this branch is +68 vs master,
-                    # entirely order-pins from the 93-weapon ordered-key fix.
-                    # was:   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448 -> 447:
-                    # W27 batches 3-6 extracted D2k, TD, TS pack nodes plus
-                    # the legacy d2k/tiberiandawn/tiberiansun files into
-                    # per-game effects_*.yaml family libraries.
+W6_BASELINE = 347   # 497 -> 347: W6 in-lane sweep complete (D2k, TD, TS,
+                    # WC2, SC — 174 weapons, ~250 new per-weapon templates);
+                    # 3809/3809 corpus-wide resolved+ordered identical.
+                    # Remaining 347 are out-of-lane packs.
 # W7/W8 added 2026-09-12 after the maintainer restated the law: the three inherits must come
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 664   # 804 -> 760: W7-remainder materialization batch (DAWN
+W7_BASELINE = 647   # 664 -> 647: belated re-lock — the R17 chip-fold commit
+                    # dropped weapon-parent ExtraDamage edges; measured 647 at
+                    # W6 batch-1 time (both sides of the diff).
+                    # 804 -> 760: W7-remainder materialization batch (DAWN
                     # file-set: d2k 16 + tiberiansun 11 + starcraft 3 +
                     # tiberiandawn 1 + outpost2 edenMobile chain 2).
                     # was: 807 -> 804: W7 batch-5 no-covering inlines

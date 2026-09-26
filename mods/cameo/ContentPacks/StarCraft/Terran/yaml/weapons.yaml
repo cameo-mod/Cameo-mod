@@ -289,6 +289,33 @@ CycloneRockets:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^sc_terran_cyclonerocketslockon_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^sc_terran_cyclonerocketslockon_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 CycloneRocketsLockOn:
 	ValidTargets: lockon
 	ReloadDelay: 35
@@ -378,34 +405,13 @@ CycloneRocketsLockOn:
 	-Warhead@EffectAir:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_explosion
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_terran_cyclonerocketslockon_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_terran_cyclonerocketslockon_2
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
 	Burst: 6
 	BurstDelays: 2
@@ -517,6 +523,11 @@ MarauderMissiles:
 		Explosions: med_splash
 	Warhead@ShieldHit:
 		Duration: 8
+
+^sc_terran_sctyr:
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
+		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
 
 SCTyr:
 	Inherits@4: ^SCRA2HeavyCannon
@@ -635,9 +646,7 @@ SCTyr:
 		PercentageScale: 2494
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
-		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
+	Inherits@w6fx: ^sc_terran_sctyr
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@Chaingun:
@@ -776,6 +785,16 @@ ReaperPistols:
 		ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 		Damage: 2
 
+^sc_terran_reapergrenade:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
 ReaperGrenade:
 	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
 	ValidTargets: Structure
@@ -811,14 +830,7 @@ ReaperGrenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: EXPLMD2.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
+	Inherits@w6fx: ^sc_terran_reapergrenade
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
@@ -828,6 +840,12 @@ ReaperGrenade:
 		PercentageScale: 9992
 
 	TargetActorCenter: true
+^sc_terran_ghostsniper:
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+
 GhostSniper:
 	Inherits: ^Warhead_Bullet_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -957,10 +975,7 @@ GhostSniper:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
+	Inherits@w6fx: ^sc_terran_ghostsniper
 	Warhead@EffectAir:
 		Explosions: small_explosion_air
 		ImpactSounds: xplos.aud
@@ -1009,6 +1024,33 @@ GhostSniper:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_terran_ghostsniperlockdown_fx:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 
 GhostSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -1061,31 +1103,7 @@ GhostSniperLockdown:
 	-Warhead@EffectAir:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
+	Inherits@w6fx: ^sc_terran_ghostsniperlockdown_fx
 	Report: TGhFir00.aud
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1204,6 +1222,12 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+
+^sc_terran_spectersniper:
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
 
 SpecterSniper:
 	Inherits: ^Warhead_Bullet_Heavy
@@ -1334,10 +1358,7 @@ SpecterSniper:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
+	Inherits@w6fx: ^sc_terran_spectersniper
 	Warhead@EffectAir:
 		Explosions: small_explosion_air
 		ImpactSounds: xplos.aud
@@ -1386,6 +1407,33 @@ SpecterSniper:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_terran_spectersniperlockdown_fx:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 
 SpecterSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -1438,31 +1486,7 @@ SpecterSniperLockdown:
 	-Warhead@EffectAir:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
+	Inherits@w6fx: ^sc_terran_spectersniperlockdown_fx
 	Report: TGhFir00.aud
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1581,6 +1605,12 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+
+^sc_terran_vulturegrenade:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		Explosions: poof
+		ImpactActors: false
 
 VultureGrenade:
 	Inherits@roleflat: ^Warhead_Demolition_Light_Flat
@@ -1710,10 +1740,7 @@ VultureGrenade:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
-		Explosions: poof
-		ImpactActors: false
+	Inherits@w6fx: ^sc_terran_vulturegrenade
 	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -1752,6 +1779,15 @@ SiegeTankCannon:
 		PercentageScale: 9997
 	ValidTargets: Ground, Water
 	TargetActorCenter: true
+^sc_terran_siegetanksiegecannon:
+	Warhead@Effect: CreateEffect
+		Explosions: scsiegetanksiegeexplosion
+		ImpactSounds: ExploLrg.aud
+		ExplosionPalette: greyscale
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+
 SiegeTankSiegeCannon:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^NuclearWarhead
@@ -2136,13 +2172,7 @@ SiegeTankSiegeCannon:
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: scsiegetanksiegeexplosion
-		ImpactSounds: ExploLrg.aud
-		ExplosionPalette: greyscale
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
+	Inherits@w6fx: ^sc_terran_siegetanksiegecannon
 
 	MinRange: 2355
 	-Warhead@Grenade:
@@ -2187,6 +2217,12 @@ GoliathMG:
 	# chaingun inheritance must not demote it to Bullet's default speed.
 	Projectile: ScaledBullet
 
+^sc_terran_goliathrockets_aa:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
@@ -2213,10 +2249,7 @@ GoliathRockets_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 30000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_terran_goliathrockets_aa
 GoliathMk2MG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -2292,6 +2325,21 @@ GoliathMk2MG:
 	Warhead@Effect:
 		ImpactSounds: xplosml2.aud
 		ImpactActors: false
+^sc_terran_goliathmk2rockets_aa:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 GoliathMk2Rockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_Rocket_SC
@@ -2399,19 +2447,13 @@ GoliathMk2Rockets_AA:
 			Shield: 25
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Inherits@w6fx: ^sc_terran_goliathmk2rockets_aa
+^sc_terran_wraithrockets_aa:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 WraithRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
@@ -2438,10 +2480,7 @@ WraithRockets_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_terran_wraithrockets_aa
 WraithLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2462,6 +2501,12 @@ WraithLaser:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+^sc_terran_sundogrockets:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 SunDogRockets:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
@@ -2488,10 +2533,7 @@ SunDogRockets:
 		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_terran_sundogrockets
 SunDogLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2507,6 +2549,12 @@ SunDogLaser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
+^sc_terran_valkyrierockets:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 ValkyrieRockets:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@4: ^SCRocket
@@ -2612,10 +2660,8 @@ ValkyrieRockets:
 			Steel: 12
 			Superheavy: 21
 			Wood: 10
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_terran_valkyrierockets
+	Warhead@EffectWater:
 		-ExplosionPalette:
 	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
@@ -3113,6 +3159,87 @@ BCLaser:
 		Size: 3
 		Delay: 9
 
+^sc_terran_bcyamatocannon_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: nuke_explosion
+		ImpactSounds: nukexplo.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+^sc_terran_bcyamatocannon_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^sc_terran_bcyamatocannon_3:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+
+^sc_terran_bcyamatocannon_4:
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+
+^sc_terran_bcyamatocannon_5:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 BCYamatoCannon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 38
@@ -3221,43 +3348,13 @@ BCYamatoCannon:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
 	-Warhead@Smudge3:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: nuke_explosion
-		ImpactSounds: nukexplo.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_terran_bcyamatocannon_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^sc_terran_bcyamatocannon_2
 	Report: yamatoshoot.wav
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3285,24 +3382,7 @@ BCYamatoCannon:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge1: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-		Size: 1
-		Delay: 3
-	Warhead@Smudge2: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Smudge3: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 3
-		Delay: 9
-	Warhead@ShieldHitEffectNuclear: CreateEffect
-		ImpactSounds: shielded_nuclear_hit.wav
-		ValidTargets: Shielded
+	Inherits@w6fx2: ^sc_terran_bcyamatocannon_3
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
@@ -3354,24 +3434,7 @@ BCYamatoCannon:
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Smudge2RA2: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
-	Warhead@Effect1: CreateEffect
-		Explosions: poof
-		ImpactSounds: siege_impact.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
-	Warhead@Effect2: CreateEffect
-		Delay: 6
-		Explosions: napalm
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
+	Inherits@w6fx3: ^sc_terran_bcyamatocannon_4
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 75
@@ -3397,9 +3460,7 @@ BCYamatoCannon:
 			Scout: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx4: ^sc_terran_bcyamatocannon_5
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
@@ -3511,6 +3572,13 @@ BCYamatoCannon:
 		OwnerType: InternalName
 		Range: 1
 	SoundVolume: 5
+
+^sc_terran_phoboslaser:
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 PhobosLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
@@ -3694,11 +3762,7 @@ PhobosLaser:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_terran_phoboslaser
 
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
@@ -3733,6 +3797,12 @@ PhobosLaser:
 		InternalOwner: Neutral
 		OwnerType: InternalName
 		Range: 1
+^sc_terran_missileturret:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
@@ -3760,10 +3830,7 @@ MissileTurret:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 20000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_terran_missileturret
 SCVULTURESUMMON:
 	ReloadDelay: 5
 	Projectile: InstantExplode
@@ -3909,6 +3976,13 @@ RavenRepair:
 	-Warhead@ExtraRepair:
 	Warhead@RepairWeapon:
 		Damage: -3000
+^sc_terran_sciencevesseldefensematrix:
+	Warhead@Effect: CreateEffect
+		Explosions: drneutronexp
+		ImpactSounds: sc_defensivematrix.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
 ScienceVesselDefenseMatrix:
 	ValidTargets: Vehicle, Ship, Air
 	InvalidTargets: lockdowned, shielded
@@ -3933,11 +4007,12 @@ ScienceVesselDefenseMatrix:
 		Condition: supershielded
 		ValidTargets: Vehicle, Ship, Air
 		ValidRelationships: Ally
-	Warhead@Effect: CreateEffect
-		Explosions: drneutronexp
-		ImpactSounds: sc_defensivematrix.aud
+	Inherits@w6fx: ^sc_terran_sciencevesseldefensematrix
+
+^sc_terran_sciencevesselirradiate:
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: sc_irridate.aud
 		ImpactActors: false
-		ValidTargets: Ground, Water, Air
 
 ScienceVesselIrradiate:
 	ValidTargets: Ground
@@ -3965,8 +4040,13 @@ ScienceVesselIrradiate:
 		Condition: corroded
 		Duration: 100
 		ValidRelationships: Enemy
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: sc_irridate.aud
+	Inherits@w6fx: ^sc_terran_sciencevesselirradiate
+
+^sc_terran_sciencevessel_emp:
+	Warhead@Effect: CreateEffect
+		Explosions: pulse_explosion
+		ExplosionPalette: tseffect
+		ImpactSounds: ptesto00.aud
 		ImpactActors: false
 
 ScienceVessel_EMP:
@@ -3994,9 +4074,5 @@ ScienceVessel_EMP:
 		ValidTargets: Shielded
 		Damage: 150000
 	-Warhead@Tesla_Super_ExtraDamage:
-	Warhead@Effect: CreateEffect
-		Explosions: pulse_explosion
-		ExplosionPalette: tseffect
-		ImpactSounds: ptesto00.aud
-		ImpactActors: false
+	Inherits@w6fx: ^sc_terran_sciencevessel_emp
 # WORKER ATTACKS

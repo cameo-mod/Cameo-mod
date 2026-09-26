@@ -665,6 +665,38 @@ Debris2:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
 
+^d2k_shared_debris3_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ImpactSounds: EXPLSML2.WAV
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+		ExplosionPalette: effect75alpha
+
+^d2k_shared_debris3_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^d2k_shared_debris3_3:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1350
+
 Debris3:
 	Warhead@Demolition_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -745,43 +777,20 @@ Debris3:
 	-Warhead@EffectWater:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_napalm
-		ImpactSounds: EXPLSML2.WAV
-		ImpactActors: false
-		ValidTargets: Ground, Ship
-		ExplosionPalette: effect75alpha
+	Inherits@w6fx: ^d2k_shared_debris3_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_shared_debris3_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1350
+	Inherits@w6fx2: ^d2k_shared_debris3_3
 	Report: d2khc.wav
 
 ^d2k_shared_debris4:
@@ -819,6 +828,38 @@ Debris3:
 		SmudgeType: Scorch
 		Chance: 15
 		InvalidTargets: Vehicle, Structure
+
+^d2k_shared_debris4_1:
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ImpactSounds: EXPLSML2.WAV
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+		ExplosionPalette: effect75alpha
+
+^d2k_shared_debris4_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^d2k_shared_debris4_3:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete: DamagesConcrete
+		Damage: 2250
 
 Debris4:
 	Warhead@Demolition_Light_Flat: AreaDamage
@@ -900,43 +941,20 @@ Debris4:
 	-Warhead@EffectWater:
 	-Warhead@RA2Scorch:
 	-Warhead@ShieldHitEffect:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_napalm
-		ImpactSounds: EXPLSML2.WAV
-		ImpactActors: false
-		ValidTargets: Ground, Ship
-		ExplosionPalette: effect75alpha
+	Inherits@w6fx: ^d2k_shared_debris4_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
+	Inherits@w6fx1: ^d2k_shared_debris4_2
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Concrete: DamagesConcrete
-		Damage: 2250
+	Inherits@w6fx2: ^d2k_shared_debris4_3
 	Report: d2khc.wav
 
 
@@ -1184,6 +1202,13 @@ Fremen_RPG:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^d2k_shared_hmg_fremen_fx:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
+
 HMG_fremen:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
@@ -1220,11 +1245,7 @@ HMG_fremen:
 		Duration: 3
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1800
+	Inherits@w6fx: ^d2k_shared_hmg_fremen_fx
 	Report: FREMODD1.WAV
 	Warhead@CollapsedHMG_fremenBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1700,6 +1721,32 @@ D2K_155mm:
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 
+^d2k_shared_phoenixrocketshrapnel_1:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.3
+		FadeFrames: 6
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+
+^d2k_shared_phoenixrocketshrapnel_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Scorch: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 1
+
 PhoenixRocketShrapnel:
 	Inherits@wh: ^Warhead_Flame_Light
 	ReloadDelay: 35
@@ -1738,33 +1785,13 @@ PhoenixRocketShrapnel:
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.3
-		FadeFrames: 6
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
+	Inherits@w6fx: ^d2k_shared_phoenixrocketshrapnel_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Scorch: LeaveSmudge
-		SmudgeType: Scorch
-		Size: 1
+	Inherits@w6fx1: ^d2k_shared_phoenixrocketshrapnel_2
 	BurstDelays: 1
 	StartBurstReport: flamer2.aud
 	Burst: 3

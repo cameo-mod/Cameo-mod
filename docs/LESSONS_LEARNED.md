@@ -2669,3 +2669,15 @@ resolved-identical throughout):
    from `git log -1 --name-only` miss regressions in files untouched by
    the last commit (19 batch-1 order diffs hid this way). Scope by explicit
    file list or branch-vs-merge-base diff census, never last-commit names.
+
+- **Generated `^` template names must be checked corpus-wide, not per-file.**
+  W6 conversion emitted `^<theme>_<weapon>` templates named after the
+  consumer — several already existed in *other* files (W7 materialization
+  artifacts in `weapons/effects_*.yaml`). A same-named def in any loaded yaml
+  merges into one node; two `Inherits` edges to it trigger the engine's
+  "Parent type already inherited" crash at ruleset load (Python resolver
+  tolerates it). Fix: index every `^`-def under `mods/cameo` before naming.
+- **`-Field:` cancels nested inside a moved `Warhead@` block keep working in
+  the template, but `audit_orphan_cancels` can't see their provider** (it
+  evaluates `^` defs alone; the provider lives on the consumer's other
+  edges). Split such cancels back into a local untyped `Warhead@X:` pin.

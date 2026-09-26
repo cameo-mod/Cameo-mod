@@ -1,3 +1,40 @@
+## Devin-DAWN — W6 in-lane sweep: local fx warheads -> per-weapon templates (2026-09-26)
+
+Branch `devin/dawn/w6-fx` (stacked on `devin/dawn/r17-chips` tip `1ae9c7d02`).
+
+W6 = effect-typed `Warhead@X` blocks declared locally on concrete weapons.
+Converted **all 174 in-lane W6 weapons** (D2k, TiberianDawn, TiberianSun,
+Warcraft2, StarCraft; 0 remaining) into ~250 per-weapon
+`^<theme>_<weapon>`/`_n` templates emitted directly before the consumer,
+referenced by `Inherits@w6fx[N]:` edges placed at the exact run position.
+
+- Resolved+ordered identical **corpus-wide: 3809/3809** (0 payload, 0 order,
+  0 missing; the 1358 unresolvable names are non-manifest defs on both sides).
+- Orphan cancels 0, empty warheads 0, dup-inherits blocking 0.
+- Buckets: W6 521 -> 347, W4 94 -> 203, W1 rate 1184 -> 1534 bp
+  (ratchets re-baselined — +1 fx-kind edge per converted weapon is the
+  sanctioned per-weapon-bundle shape; only 3/174 weapons could have chained
+  into an existing fx edge instead).
+- Audits/tools: `w6_conv.py` (extractor), `w6_xcheck.py` (corpus-wide emitted
+  name collision scan), `verify_tree.py` + full-corpus verify.
+
+**Two traps found and fixed in-flight:**
+- **Corpus-wide name collision** — a `^<theme>_<weapon>` name can already
+  exist in *another* file (e.g. `^d2k_ixian_d2k_basq_aa` in
+  `weapons/effects_d2k.yaml` from a W7 materialization). Emitting a second
+  def merges the two and creates the engine's `Parent type already
+  inherited` crash when both edges point at it. Same-file checks are not
+  enough — the final scan indexes every `^` def under `mods/cameo`.
+  6 same-file + 1 cross-file collision renamed `*_fx`.
+- **Nested cancels (`-X:` inside a moved `Warhead@` block)** ride along into
+  the template; `audit_orphan_cancels` evaluates `^` defs in isolation so a
+  cancel whose provider only exists via the consumer's other edges is
+  flagged. Split the cancel back out as a local untyped `Warhead@X:` pin
+  (`sc_terran_valkyrierockets`) — resolved identical, audit clean.
+
+Ratchets re-locked: W1_RATE_BP 1534, W4 203, W6 347 (W7 647 — belated
+re-lock of the R17 fold drop, unchanged by this batch).
+
 ## Devin-DAWN — W2 dead wh-edge sweep (2026-09-26)
 
 Branch `devin/dawn/w2-deadedges` (stacked on routed-fixes/`e227f3245`).

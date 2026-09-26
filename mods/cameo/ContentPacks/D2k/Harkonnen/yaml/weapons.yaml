@@ -64,6 +64,38 @@ HarkonnenFlameTurret:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+^d2k_harkonnen_harkonnen_autogunturret_1:
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^d2k_harkonnen_harkonnen_autogunturret_2:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+
 harkonnen_autogunturret:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
@@ -108,39 +140,13 @@ harkonnen_autogunturret:
 	-Warhead@EffectWater:
 	-Warhead@RA2Crater:
 	-Warhead@ShieldHitEffect:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Inherits@w6fx: ^d2k_harkonnen_harkonnen_autogunturret_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		Explosions: piffs
-		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactActors: false
-		ImpactSounds: EXPLLG2.WAV
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
+	Inherits@w6fx1: ^d2k_harkonnen_harkonnen_autogunturret_2
 	Burst: 26
 	BurstDelays: 2
 	StartBurstReport: autoguntrt.wav
