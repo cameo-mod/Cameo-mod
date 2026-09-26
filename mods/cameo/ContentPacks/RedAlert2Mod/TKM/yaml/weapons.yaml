@@ -489,7 +489,7 @@ tkmm203:
 	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 100
 	Range: 5621
-	Report: m203.wav
+	Report: ra2m_tkm_sounds|m203.wav
 	Projectile: Bullet
 		Speed: 150
 		LaunchAngle: 66
@@ -1106,7 +1106,7 @@ t30shell:
 	Inherits@2: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 80
 	Range: 22000
-	Report: t30cannon.wav
+	Report: ra2m_tkm_sounds|t30cannon.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 2048
@@ -1368,7 +1368,7 @@ sandmarinemortar:
 	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	ReloadDelay: 135
 	Range: 6464
-	Report: t30cannon.wav
+	Report: ra2m_tkm_sounds|t30cannon.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 175
@@ -1507,7 +1507,7 @@ bigshieemortar:
 	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	ReloadDelay: 86
 	Range: 7238
-	Report: t30cannon.wav
+	Report: ra2m_tkm_sounds|t30cannon.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 175
@@ -2865,7 +2865,7 @@ tkm_trooper_gp25:
 	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 80
 	Range: 5500
-	Report: m203.wav
+	Report: ra2m_tkm_sounds|m203.wav
 	Projectile: Bullet
 		Speed: 300
 		LaunchAngle: 66

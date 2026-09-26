@@ -124,6 +124,14 @@ def main():
         sys.exit(f"no such theme dir: {theme_dir}")
     prefix = args.pkg_prefix or args.theme.lower()
 
+    # pack dirs under the theme (canonical casing), plus shared fallbacks
+    CANON = {d.name.lower(): d.name for d in theme_dir.iterdir()
+             if d.is_dir() and d.name not in ("yaml", "files", "translations")}
+    CANON["yaml"] = "Shared"      # theme-level yaml/ dir -> Shared pack
+    CANON.setdefault("shared", "Shared")
+    def canon(o):
+        return CANON.get(str(o).lower(), "Shared")
+
     theme_yamls = yaml_files_under(theme_dir)
     # extra mounted file that belongs to the theme (wrapper monolith)
     extra = MOD / "rules" / (args.theme.lower() + ".yaml")
@@ -221,8 +229,6 @@ def main():
         else:
             src = srcs[0]
         # owning subpack: packs (dirs) of referencing yamls
-        CANON = {"allies": "Allies", "soviets": "Soviets", "yuri": "Yuri",
-                 "shared": "Shared"}
         owners = set()
         for yr in yrefs:
             m = re.search(r"contentpacks/[^/]+/([^/]+)/", yr)
@@ -261,11 +267,6 @@ def main():
 
     # --- apply: copy + mounts + rewrite ---
     import shutil
-    CANON = {"allies": "Allies", "soviets": "Soviets", "yuri": "Yuri",
-             "shared": "Shared"}
-    def canon(o):
-        return CANON.get(str(o).lower(), "Shared")
-
     copied = []
     for p in plan:
         dest_dir = theme_dir / canon(p["owner"]) / "files" / p["type"]
@@ -285,7 +286,7 @@ def main():
     anchor = anchors[0]
     existing = set(lines)
     mounts = []
-    for o in sorted(CANON.values()):
+    for o in sorted(set(CANON.values())):
         fd = theme_dir / o / "files"
         if not fd.is_dir():
             continue
