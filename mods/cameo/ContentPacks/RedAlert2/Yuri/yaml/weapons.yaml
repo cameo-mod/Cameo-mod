@@ -1748,7 +1748,24 @@ RA2XMindControlSplash:
 		ChangeOwnerInvalidTargets: Structure, MCImmune
 
 RA2XMindControlSplash2:
-	Inherits: RA2XMindControlSplash
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+	Range: 9000
+	ReloadDelay: 125
+	ValidTargets: MindControl
+	Warhead@2Own: MindControl
+		Range: 1500
+		Delay: 25
+		ChangeOwnerValidRelationships: Neutral, Enemy
+		ChangeOwnerValidTargets: Infantry, Vehicle, Ship, Submarine
+		ChangeOwnerInvalidTargets: Structure, MCImmune
 	Warhead@2Own: MindControl
 		Delay: 15
 

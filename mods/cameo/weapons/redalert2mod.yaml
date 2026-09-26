@@ -145,12 +145,34 @@ AsianFlameFragment:
 		AimTargetStances: Enemy, Neutral
 
 AsianFlameFragment2:
-	Inherits: AsianFlameFragment
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ReloadDelay: 20
+	Range: 2000
+	Warhead@Flame_Light:
+		Damage: 2000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	-Warhead@FireShrapnel:
 	Range: 3000
 
 AsianOilBombFragments:
-	Inherits: AsianFlameFragment
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ReloadDelay: 20
+	Range: 2000
+	Warhead@Flame_Light:
+		Damage: 2000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	ReloadDelay: 15
 	Range: 5000
 	Projectile: Bullet
@@ -1610,7 +1632,16 @@ NaxZombieSpawner:
 		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 
 NaxZombieSpawnerFrank:
-	Inherits: NaxZombieSpawner
+	Projectile: InstantHit
+	Warhead@Effect: CreateEffect
+		Explosions: virusreversed
+		ExplosionPalette: ra2effect
+		ImpactSounds: gvirexpa.wav, gvirexpb.wav
+		ValidTargets: Ground, Air
+	Warhead@Effect2: CreateEffect
+		AffectsParent: true
+		ImpactActors: false
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 
 NaxZombieSupportWeapon:
 	Projectile: InstantHit
@@ -1863,11 +1894,49 @@ Nax120mmCorrosion:
 	Inherits@Corrosion: ^NaxOxidationShells
 
 Nax120mmCorrosion_elite:
-	Inherits: RA2120mm_elite
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
+	Range: 6374
+	Burst: 2
+	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiHetzerDestroyerCorrosion:
-	Inherits: NaxiHetzerDestroyer
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
+	Report: cannon1.aud
+	ReloadDelay: 80
+	Range: 7132
+	Projectile: Bullet
+		Speed: 713
+	Warhead@CannonAP:
+		Damage: 40000
+		Heaviness: 0
 	Inherits@Corrosion: ^NaxOxidationShells
 	Report: cannon1.aud
 
@@ -1929,7 +1998,22 @@ NaxiJadgDestroyerCorrosion:
 			Fighter: 1
 
 NaxiAntiTankCannonCorrosion:
-	Inherits: NaxiAntiTankCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
+	ReloadDelay: 75
+	Range: 7361
+	Report: ra2m_naxis_sounds|nax_hotwizer.wav
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	Warhead@CannonAP:
+		Damage: 28000
+		Heaviness: 0
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiAlienPistol:

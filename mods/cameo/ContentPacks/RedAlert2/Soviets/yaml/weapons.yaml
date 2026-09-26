@@ -1458,7 +1458,32 @@ RA2120xmm_elite:
 		Duration: 12
 
 RA2120xmm_rad_elite:
-	Inherits: RA2120xmm_rad
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Apoc_Chem_RA2
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	InvalidTargets: wall
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonChem_Light: AreaDamage
+		Damage: 16000
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@Radiation: CreateTintedCells
+	Warhead@Effect:
+		Explosions: demotruck_explosion
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
@@ -1480,7 +1505,24 @@ RA2120xmm_rad_elite:
 		Duration: 12
 
 RA2120xmm_fire_elite:
-	Inherits: RA2120xmm_fire
+	Inherits@wh: ^Warhead_CannonFire_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Flame_Light
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonFire_Light: AreaDamage
+		Damage: 12000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Range: 7992
 	Burst: 4
@@ -1530,7 +1572,24 @@ RA2120xmm_fire_elite:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 RA2120xmm_tesla_elite:
-	Inherits: RA2120xmm_tesla
+	Inherits@wh: ^Warhead_CannonTesla_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Tesla_Impact_RA2
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonTesla_Light: AreaDamage
+		Damage: 12000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 1
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
 	Inherits@fx_cover: ^Effect_Watersplash_Huge_RA2
 	Range: 7992
 	Burst: 4
@@ -1590,7 +1649,23 @@ RA2CoilBolt:
 		AimTargetStances: Enemy, Neutral
 
 RA2CoilBolt2:
-	Inherits: RA2CoilBolt
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 8842
+	ReloadDelay: 3
+	Report: btesat1a.wav
+	Warhead@Tesla_Heavy:
+		Damage: 64000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 32000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragmentWeak
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1649,7 +1724,25 @@ RA2OPCoilBolt1:
 		AimTargetStances: Enemy, Neutral
 
 RA2OPCoilBolt2:
-	Inherits: RA2OPCoilBolt1
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
+	Range: 8842
+	ReloadDelay: 3
+	Report: btesat2a.wav
+	Warhead@Tesla_Super:
+		Damage: 64000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 32000
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 32000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Warhead@Tesla_Super:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1744,7 +1837,30 @@ RA2TankBolt2:
 		AimTargetStances: Enemy, Neutral
 
 RA2TankBolt3:
-	Inherits: RA2TankBolt2
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	ReloadDelay: 55
+	Range: 7500
+	Burst: 2
+	BurstDelays: 5
+	Report: vtesatta.wav, vtesattb.wav
+	Warhead@Tesla_Heavy:
+		Damage: 12000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 6000
+	Range: 8000
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 6000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaTankFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 8500
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000

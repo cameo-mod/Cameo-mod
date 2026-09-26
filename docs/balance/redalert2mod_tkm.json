@@ -500,7 +500,8 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "TKMDroneExplode"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -6885,7 +6886,9 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@missiles",
       "versus_templates": [
-       "tkmtwinrockets"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7116,7 +7119,8 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "tkmkatyushalalauncherrockets"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"

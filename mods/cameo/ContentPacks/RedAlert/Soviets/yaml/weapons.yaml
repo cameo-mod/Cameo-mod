@@ -1300,7 +1300,43 @@ ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp:
 		AimTargetStances: Enemy, Neutral
 
 ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
+	ReloadDelay: 80
+	Range: 6650
+	Report: tesla1.aud
+	Warhead@Tesla_Super:
+		Damage: 40000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 20000
+	Warhead@Tesla_Super:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 20000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+	Range: 3325
+	Warhead@Tesla_Super: SpreadDamage
+		Damage: 60000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 10000
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		Damage: 10
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 10000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 	Range: 1663
 	Warhead@Tesla_Super: SpreadDamage
 		Damage: 50000

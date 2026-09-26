@@ -2488,7 +2488,9 @@
       "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && ((ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite))",
       "slot": "Armament@2",
       "versus_templates": [
-       "RA2CoilBolt"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -2591,7 +2593,9 @@
       "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && ((ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite))",
       "slot": "Armament@Charged2",
       "versus_templates": [
-       "RA2OPCoilBolt1"
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -4922,7 +4926,9 @@
       "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
       "slot": "Armament@PRIMARYELITERad",
       "versus_templates": [
-       "RA2120xmm_rad"
+       "^Warhead_CannonChem_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Apoc_Chem_RA2"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -4951,7 +4957,9 @@
       "requires": "rank-elite && ra2_soviets_doctrine_firemunitions",
       "slot": "Armament@PRIMARYELITEFire",
       "versus_templates": [
-       "RA2120xmm_fire",
+       "^Warhead_CannonFire_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Flame_Light",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -4981,7 +4989,9 @@
       "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARYELITETesla",
       "versus_templates": [
-       "RA2120xmm_tesla",
+       "^Warhead_CannonTesla_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Tesla_Impact_RA2",
        "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
@@ -5976,7 +5986,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY3",
       "versus_templates": [
-       "RA2TankBolt2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

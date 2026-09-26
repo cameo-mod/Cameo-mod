@@ -541,7 +541,9 @@
       "requires": "rank-elite",
       "slot": "Armament@AAELITE",
       "versus_templates": [
-       "HarbingerChainguns"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1794,7 +1796,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "BlackWidowPistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -1868,7 +1872,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "BlackWidowPistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3011,7 +3017,9 @@
       "requires": "deployed && !rank-elite",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3038,7 +3046,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3066,7 +3076,9 @@
       "requires": "!deployed && rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4534,9 +4546,7 @@
       "range": "17500",
       "reloaddelay": "150",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "RA2CarrierTarget"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "BeehiveCarrierTarget",
       "weapon_class_source": "none"
@@ -5011,7 +5021,9 @@
       "requires": "!deployed && rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "GuardianTankCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5046,9 +5058,7 @@
       "reloaddelay": "4",
       "requires": "deployed && rank-elite",
       "slot": "Armament@debuffelite",
-      "versus_templates": [
-       "Future_MBT_DebuffLaser"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser_elite",
       "weapon_class_source": "none"

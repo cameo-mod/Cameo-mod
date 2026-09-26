@@ -1,3 +1,17 @@
+## 2026-09-27 — W7 chain-collapse batch-6: chain-root pool drained (NOVA)
+
+Final 26 chain-root children inlined verbatim (RA Soviets, RA2
+Soviets/Yuri, RA2Mod FutureTech/TKM, `mods/cameo/weapons/redalert2mod.yaml`).
+Net W7: **477 -> 451**. Strict-order verify vs `ae67c80fc`: 26/26 clean.
+Guards all green; local-Versus 881 unchanged; ratchet re-locked to 451.
+
+Chain-root pool is now empty. Remaining lane W7 (451 global, lane share
+~360) = rule-4 holds (parent carries inline Versus — edge kept per
+ruling), the 19 deferred same-key collisions (await Claude's ruling in
+STATUS_2026-09-27_nova_w7_batch4.md Q1), and mid-chain weapons whose
+parents still weapon-inherit — next bottom-up pass targets those as
+their parents retire.
+
 ## 2026-09-27 — W7 chain-collapse batch-5 (NOVA)
 
 60 more chain-root children inlined verbatim (RA Allies/Japan/Shared/
