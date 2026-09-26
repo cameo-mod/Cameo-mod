@@ -30,7 +30,10 @@ import derive_versus_columns as D  # noqa: E402
 # one more row. That is the only legitimate raise — a new column ruled into §12.0l. LOWER ONLY.
 # 2026-09-27: re-landing #523/#532 onto master after #534 found 24 NEW pack tables (#534's folds)
 # without the rows; the rows were written into exactly those tables (312), which lowered it.
-RATCHET = 30203
+# 2026-09-27b: post-#516 merge — the merged pack tables' derived rows were written
+# (2,886 rows across 15 files: only tables whose pending count grew vs ccfd7830a);
+# the merges also cleared 923 pre-existing pending rows. Landing: 29,592.
+RATCHET = 29592
 
 
 def main() -> int:

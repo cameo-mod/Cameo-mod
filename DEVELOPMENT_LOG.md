@@ -1,3 +1,20 @@
+## 2026-09-27b — post-#516 derived-armor-row repair (NOVA)
+
+The #516 merge left master's `audit_derived_armor_columns` red
+(32,478 > ratchet 30,203): the merged pack tables lacked the §12.0l
+derived rows. Per-table diff vs pre-merge master (`ccfd7830a`) showed
+the merge introduced exactly **2,886** new pending rows across ~230
+tables in 15 files, while also clearing 923 pre-existing backlog rows.
+
+`derive_versus_columns.py`'s computed writes were applied ONLY to the
+tables whose pending count grew — the sanctioned #523 backlog
+(~29,592 rows) is untouched. Audit now reports **29,592 <= ratchet**;
+ratchet re-locked 30,203 -> 29,592.
+
+Gates: drift clean 34/34, doc_claims 43/43, dead fields OK, orphan
+cancels 0, empty warheads 0, dup-inherits clean, shape at ratchets,
+boot-gate PASS (menu marker, no new exceptions).
+
 ## 2026-09-27 — master merge: dead-field merge residue cleaned (NOVA)
 
 Merged `origin/master` (`8f3d0a564`, picks up #535/#536/#511/#533) into

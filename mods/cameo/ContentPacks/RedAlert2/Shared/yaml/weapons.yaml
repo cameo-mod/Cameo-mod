@@ -1886,6 +1886,19 @@ RA2MultiHoverMissile_elite:
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
+			FlyingInfantry: 89
+			CyborgLight: 71
+			CyborgMedium: 82
+			CyborgHeavy: 88
+			CyborgHeroic: 78
+			AntiAirInfantry: 39
+			AntiAirVehicle: 148
+			AntiAirBuilding: 65
+			ShipLight: 92
+			ShipMedium: 104
+			ShipHeavy: 101
+			ShipSuperheavy: 102
+			AntiAirShip: 98
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -1904,6 +1917,19 @@ RA2MultiHoverMissile_elite:
 			Helicopter: 10
 			Spaceship: 11
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 5
+			CyborgHeavy: 7
+			CyborgHeroic: 8
+			AntiAirInfantry: 1
+			AntiAirVehicle: 13
+			AntiAirBuilding: 6
+			ShipLight: 8
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 10
+			AntiAirShip: 9
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -4317,6 +4343,19 @@ MigMissiles_rad:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@HeavyAAWeaponPercentage:
@@ -4340,6 +4379,19 @@ MigMissiles_rad:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@HeavyBombPercentage:
@@ -4364,6 +4416,19 @@ MigMissiles_rad:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Radiation:
@@ -5296,6 +5361,19 @@ RA2SCUD_rad:
 			HAZMAT: 62
 			REFLECTOR: 75
 			Shield: 143
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
 		PercentageVersus:
 			None: 13
 			Light: 8
@@ -5314,6 +5392,19 @@ RA2SCUD_rad:
 			Helicopter: 2
 			Spaceship: 1
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
 		Damage: 18000
 	Warhead@MissileAP_Heavy:
 		Damage: 18000
@@ -5450,6 +5541,19 @@ RA2SCUD_rad:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@RA2SCUDMissileAP_Heavy_NoWall:
@@ -5483,6 +5587,19 @@ RA2SCUD_rad:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -5615,6 +5732,19 @@ RA2SCUD_fire:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -5651,6 +5781,19 @@ RA2SCUD_fire:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -5705,6 +5848,19 @@ RA2SCUD_fire:
 			HAZMAT: 62
 			REFLECTOR: 75
 			Shield: 143
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
 		PercentageVersus:
 			None: 13
 			Light: 8
@@ -5723,6 +5879,19 @@ RA2SCUD_fire:
 			Helicopter: 2
 			Spaceship: 1
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -5840,6 +6009,19 @@ RA2SCUD_tesla:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -5876,6 +6058,19 @@ RA2SCUD_tesla:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -5930,6 +6125,19 @@ RA2SCUD_tesla:
 			HAZMAT: 62
 			REFLECTOR: 75
 			Shield: 143
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
 		PercentageVersus:
 			None: 13
 			Light: 8
@@ -5948,6 +6156,19 @@ RA2SCUD_tesla:
 			Helicopter: 2
 			Spaceship: 1
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -6090,6 +6311,19 @@ V3Explode:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -6126,6 +6360,19 @@ V3Explode:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -6175,6 +6422,19 @@ V3Explode:
 			HAZMAT: 62
 			REFLECTOR: 75
 			Shield: 143
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
 		PercentageVersus:
 			None: 13
 			Light: 8
@@ -6193,6 +6453,19 @@ V3Explode:
 			Helicopter: 2
 			Spaceship: 1
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
 		Damage: 10000
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
@@ -6320,6 +6593,19 @@ DredMissile:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -6356,6 +6642,19 @@ DredMissile:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -6408,6 +6707,19 @@ DredMissile:
 			HAZMAT: 62
 			REFLECTOR: 75
 			Shield: 143
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
 		PercentageVersus:
 			None: 13
 			Light: 8
@@ -6426,6 +6738,19 @@ DredMissile:
 			Helicopter: 2
 			Spaceship: 1
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -6760,6 +7085,19 @@ RA2TorpTube_elite:
 			Wood: 66
 			Heroic: 57
 			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -6780,6 +7118,19 @@ RA2TorpTube_elite:
 			Plate: 12
 			Flak: 11
 			None: 10
+			FlyingInfantry: 16
+			CyborgLight: 15
+			CyborgMedium: 16
+			CyborgHeavy: 17
+			CyborgHeroic: 18
+			AntiAirInfantry: 10
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
 
 ^RA2MG:
 	Inherits@x^RA2MG0: ^Warhead_Bullet_Light
@@ -7584,6 +7935,19 @@ RA2GattlingMG1_AA:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -7604,6 +7968,19 @@ RA2GattlingMG1_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 RA2GattlingMG2:
 	Inherits@xRA2GattlingMG10: ^Warhead_Bullet_Medium
 	Inherits@xRA2GattlingMG11: ^Projectile_Bullet_Medium
@@ -7713,6 +8090,19 @@ RA2GattlingMG2:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -7733,6 +8123,19 @@ RA2GattlingMG2:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 
 RA2GattlingMG2_AA:
 	Inherits@xRA2GattlingMG10: ^Warhead_Bullet_Medium
@@ -7843,6 +8246,19 @@ RA2GattlingMG2_AA:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -7863,6 +8279,19 @@ RA2GattlingMG2_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 	# W7MAT inline of RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
@@ -7904,6 +8333,19 @@ RA2GattlingMG2_AA:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -7924,6 +8366,19 @@ RA2GattlingMG2_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 RA2Cloud:
 	Inherits@xRA2Cloud0: ^Warhead_Toxic_Light
 	ReloadDelay: 1
@@ -8832,6 +9287,19 @@ TanyaBomb:
 			Helicopter: 59
 			Heroic: 52
 			Spaceship: 51
+			FlyingInfantry: 88
+			CyborgLight: 108
+			CyborgMedium: 103
+			CyborgHeavy: 96
+			CyborgHeroic: 61
+			AntiAirInfantry: 148
+			AntiAirVehicle: 75
+			AntiAirBuilding: 149
+			ShipLight: 122
+			ShipMedium: 101
+			ShipHeavy: 110
+			ShipSuperheavy: 109
+			AntiAirShip: 111
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -8852,6 +9320,19 @@ TanyaBomb:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
 SEALAttach:
 	Projectile: InstantHit
 	TargetActorCenter: true

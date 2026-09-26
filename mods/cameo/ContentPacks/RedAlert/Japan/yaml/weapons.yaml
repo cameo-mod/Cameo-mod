@@ -2592,6 +2592,19 @@ ZeroFighterArrows:
 			Superheavy: 69
 			Concrete: 66
 			Heroic: 64
+			FlyingInfantry: 110
+			CyborgLight: 132
+			CyborgMedium: 117
+			CyborgHeavy: 101
+			CyborgHeroic: 66
+			AntiAirInfantry: 184
+			AntiAirVehicle: 84
+			AntiAirBuilding: 71
+			ShipLight: 86
+			ShipMedium: 73
+			ShipHeavy: 75
+			ShipSuperheavy: 72
+			AntiAirShip: 79
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2612,6 +2625,19 @@ ZeroFighterArrows:
 			Wood: 3
 			Steel: 2
 			Concrete: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 1
+			ShipLight: 5
+			ShipMedium: 2
+			ShipHeavy: 3
+			ShipSuperheavy: 3
+			AntiAirShip: 3
 ZeroFighterArrowsEnergized:
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
@@ -4040,6 +4066,19 @@ JapaneseHovercraftFlakAA:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -4060,6 +4099,19 @@ JapaneseHovercraftFlakAA:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
 JapaneseHovercraftFlakWaveforce:
 	Inherits@xJapaneseHovercraftFlakWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakWaveforce1: ^Projectile_Railgun_Heavy
