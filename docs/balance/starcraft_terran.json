@@ -178,7 +178,8 @@
       "slot": "Armament@Yamato",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
-       "BCLaser"
+       "BCLaser",
+       "^sc_terran_bcyamatocannon_fx"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -455,25 +456,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "49600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -534,18 +521,15 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
-       "^Warhead_Railgun_ExtraDamage",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^HeavyBomb",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^sc_terran_phoboslaser"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "PhobosLaser",
       "weapon_class_source": "template"
@@ -626,7 +610,8 @@
       "slot": "Armament@Yamato",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
-       "BCLaser"
+       "BCLaser",
+       "^sc_terran_bcyamatocannon_fx"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -723,25 +708,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -831,17 +812,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-2000",
+        "damage": "-3000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -945,7 +919,9 @@
       "range": "7500",
       "reloaddelay": "260",
       "slot": "Armament@IronCourtain",
-      "versus_templates": [],
+      "versus_templates": [
+       "^sc_terran_sciencevesseldefensematrix"
+      ],
       "warheads": [],
       "weapon": "ScienceVesselDefenseMatrix",
       "weapon_class_source": "none"
@@ -959,7 +935,9 @@
       "range": "7500",
       "reloaddelay": "110",
       "slot": "Armament@Irradiate",
-      "versus_templates": [],
+      "versus_templates": [
+       "^sc_terran_sciencevesselirradiate"
+      ],
       "warheads": [],
       "weapon": "ScienceVesselIrradiate",
       "weapon_class_source": "none"
@@ -983,7 +961,8 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
+       "^Effect_Tesla_Super",
+       "^sc_terran_sciencevessel_emp"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -1114,7 +1093,8 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileAP_Heavy_SC"
+       "^Effect_MissileAP_Heavy_SC",
+       "^sc_terran_sundogrockets"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1141,7 +1121,8 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileAP_Heavy_SC"
+       "^Effect_MissileAP_Heavy_SC",
+       "^sc_terran_sundogrockets"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1275,7 +1256,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^SCRocket",
-       "^Effect_Watersplash_Huge_SC"
+       "^Effect_Watersplash_Huge_SC",
+       "^sc_terran_valkyrierockets"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1327,7 +1309,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^SCRocket",
-       "^Effect_Watersplash_Huge_SC"
+       "^Effect_Watersplash_Huge_SC",
+       "^sc_terran_valkyrierockets"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1473,7 +1456,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_wraithrockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1500,7 +1484,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_wraithrockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1641,7 +1626,6 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
@@ -1649,7 +1633,6 @@
        "^SCRocket"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "WyvernRockets",
@@ -1717,7 +1700,6 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
@@ -1725,7 +1707,6 @@
        "^SCRocket"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "WyvernRockets",
@@ -2531,7 +2512,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_missileturret"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2558,7 +2540,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_missileturret"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -3057,7 +3040,8 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_ghostsniper"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3113,7 +3097,8 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_ghostsniper"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3446,25 +3431,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3480,25 +3461,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7446",
       "reloaddelay": "12",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Heavy"
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3580,19 +3557,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "MadcapGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3613,19 +3583,12 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "MadcapGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3734,7 +3697,6 @@
       "slot": "Armament@1",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
@@ -3777,7 +3739,6 @@
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
@@ -3865,19 +3826,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "MarineMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3900,19 +3854,12 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "MarineMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4282,21 +4229,15 @@
       "slot": "Armament@Grenade",
       "versus_templates": [
        "^Warhead_Demolition_Light_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_reapergrenade"
       ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -4388,21 +4329,15 @@
       "slot": "Armament@GARRISONEDGrenade",
       "versus_templates": [
        "^Warhead_Demolition_Light_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_reapergrenade"
       ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4580,7 +4515,8 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_spectersniper"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -4636,7 +4572,8 @@
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^sc_terran_spectersniper"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -5528,7 +5465,6 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
@@ -5650,25 +5586,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
       "slot": "Armament@G1",
       "versus_templates": [
-       "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^SCRA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -5683,25 +5617,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
       "slot": "Armament@G2",
       "versus_templates": [
-       "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^SCRA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5722,7 +5654,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_goliathrockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -5749,7 +5682,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_SC",
-       "^Effect_MissileHE_Heavy_SC"
+       "^Effect_MissileHE_Heavy_SC",
+       "^sc_terran_goliathrockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -5873,7 +5807,6 @@
       "reloaddelay": "34",
       "slot": "Armament@G1",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5919,7 +5852,6 @@
       "reloaddelay": "34",
       "slot": "Armament@G2",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5973,7 +5905,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_Rocket_SC",
-       "^Effect_MissileAP_Heavy_Rocket_SC"
+       "^Effect_MissileAP_Heavy_Rocket_SC",
+       "^sc_terran_goliathmk2rockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6022,7 +5955,8 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy_Rocket_SC",
-       "^Effect_MissileAP_Heavy_Rocket_SC"
+       "^Effect_MissileAP_Heavy_Rocket_SC",
+       "^sc_terran_goliathmk2rockets_aa"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6126,7 +6060,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5938",
       "reloaddelay": "18",
@@ -6134,17 +6068,13 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flame_Heavy",
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium"
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "MatadorFlamer",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -6341,7 +6271,9 @@
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^WorkerAttack"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -6485,7 +6417,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
@@ -6493,17 +6425,12 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
@@ -6627,7 +6554,8 @@
        "^NuclearWarhead",
        "^LightFlameWeapon",
        "^HeavyBomb",
-       "^TankDestroyerCannon"
+       "^TankDestroyerCannon",
+       "^sc_terran_siegetanksiegecannon"
       ],
       "warheads": [],
       "weapon": "SiegeTankSiegeCannon",
@@ -6747,22 +6675,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4800",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Light_Flat",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^Effect_CannonHE_Medium",
+       "^sc_terran_vulturegrenade"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "VultureGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6875,9 +6801,9 @@
       "reloaddelay": "44",
       "slot": "Armament@Cannon",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^SCRA2HeavyCannon",
-       "^Effect_Flame_Light"
+       "^Effect_Flame_Light",
+       "^sc_terran_sctyr"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"

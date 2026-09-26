@@ -130,20 +130,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4096",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^ts_cabal_cabaloverkilldronelaser"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalOverkillDroneLaser",
@@ -1253,17 +1251,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-1600",
+        "damage": "-2600",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -1929,25 +1920,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "104000",
+        "damage": "105600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "35",
@@ -1986,7 +1963,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
        "^TSLaserEffect",
        "^ts_cabal_set13"
@@ -3336,24 +3312,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^ts_cabal_set2"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3367,24 +3338,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^ts_cabal_set2"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3474,24 +3440,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^ts_cabal_set2"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3507,24 +3468,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^ts_cabal_set2"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3877,17 +3833,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-1600",
+        "damage": "-2600",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
@@ -3988,25 +3937,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "279000",
+        "damage": "280600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "35",
@@ -4045,7 +3980,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
        "^TSLaserEffect",
        "^ts_cabal_set13"
@@ -4073,25 +4007,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "279000",
+        "damage": "280600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "35",
@@ -4130,7 +4050,6 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
        "^TSLaserEffect",
        "^ts_cabal_set13"
@@ -4383,8 +4302,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
       "warheads": [
@@ -4414,8 +4332,7 @@
       "slot": "Armament@Upgraded",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
       "warheads": [
@@ -4445,8 +4362,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
       "warheads": [
@@ -6511,21 +6427,12 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Medium_Flat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
-      "warheads": [
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalReaperMissiles",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
@@ -6579,21 +6486,12 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileAA_Medium_Flat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
-      "warheads": [
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalReaperMissiles_AA",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [],
@@ -6750,21 +6648,12 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy_Flat",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^ts_cabal_set5"
       ],
-      "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalHeavyReaperMissiles",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
@@ -6818,21 +6707,12 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy_Flat",
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^CabalMissileLight",
+       "^Projectile_Missile_Light",
        "^ts_cabal_set5"
       ],
-      "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "CabalHeavyReaperMissiles_AA",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [],
@@ -7213,20 +7093,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7082",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^ts_cabal_set8"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalMantisGun",
@@ -7907,20 +7785,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6813",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^ts_cabal_set8"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalLegionGun",

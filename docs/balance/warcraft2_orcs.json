@@ -28,7 +28,8 @@
       "versus_templates": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^Effect_Flame_Heavy",
+       "^wc2_orcs_wc2dragonfirevisible"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -56,7 +57,10 @@
       "reloaddelay": "120",
       "slot": "Armament@EXPLOSIONS",
       "versus_templates": [
-       "wc2dragonFireVisible"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "^wc2_orcs_wc2dragonfireexplosion"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -1451,7 +1455,9 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "wc2mageFire"
+       "^Warhead_Tesla_Super",
+       "^Effect_Tesla_Super",
+       "^wc2_orcs_wc2deathknightfire"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy",
@@ -1488,7 +1494,9 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "wc2mageFire"
+       "^Warhead_Tesla_Super",
+       "^Effect_Tesla_Super",
+       "^wc2_orcs_wc2deathknightfire"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy",
@@ -1557,7 +1565,12 @@
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@DEATHCOILSCATTER1",
       "versus_templates": [
-       "wc2deathknightDeathCoil"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "^Warhead_Tesla_Super",
+       "^Effect_Tesla_Super",
+       "^wc2_orcs_wc2deathknightdeathcoilscatter_left"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy",
@@ -1591,7 +1604,12 @@
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@DEATHCOILSCATTER2",
       "versus_templates": [
-       "wc2deathknightDeathCoilScatter_Left"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "^Warhead_Tesla_Super",
+       "^Effect_Tesla_Super",
+       "^wc2_orcs_wc2deathknightdeathcoilscatter_right"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy",
@@ -1618,7 +1636,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && deathknighthaste_upg",
       "slot": "Armament@HASTE",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_orcs_wc2deathknighthaste"
+      ],
       "warheads": [],
       "weapon": "wc2deathknightHaste",
       "weapon_class_source": "none"
@@ -1666,7 +1686,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && deathknightraisedead_upg",
       "slot": "Armament@RAISEDEAD",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_orcs_wc2deathknightraisedead"
+      ],
       "warheads": [],
       "weapon": "wc2deathknightRaiseDead",
       "weapon_class_source": "none"
@@ -1837,7 +1859,10 @@
       "reloaddelay": "12",
       "slot": "Armament",
       "versus_templates": [
-       "wc2_humans_danath_slice"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium",
+       "^wc2_orcs_wc2_orcs_hellscream_slice"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -1924,7 +1949,10 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "wc2_humans_danath_slice_elite"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium",
+       "^wc2_orcs_wc2_orcs_hellscream_slice_elite"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -2045,7 +2073,8 @@
       "reloaddelay": "38",
       "slot": "Armament",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2106,7 +2135,8 @@
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2204,7 +2234,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_orcs_wc2ogrepunch"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -2230,7 +2261,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
       "slot": "Armament@EYEOFKILROGG",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_orcs_wc2ogremageeyeofkilrogg"
+      ],
       "warheads": [],
       "weapon": "wc2ogremageEyeOfKilrogg",
       "weapon_class_source": "none"
@@ -2396,7 +2429,8 @@
       "reloaddelay": "38",
       "slot": "Armament",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2457,7 +2491,8 @@
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2580,7 +2615,8 @@
       "reloaddelay": "38",
       "slot": "Armament",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2641,7 +2677,8 @@
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "wc2arrowFire"
+       "wc2arrowFire",
+       "^wc2_orcs_wc2axefire"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2716,13 +2753,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -2744,7 +2774,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "33600",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2793,7 +2823,8 @@
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "wc2highArrowFire"
+       "wc2highArrowFire",
+       "^wc2_orcs_wc2axefirespear"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2804,13 +2835,6 @@
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
-       },
        {
         "damage": "2",
         "falloff": null,
@@ -2833,7 +2857,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "33600",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2882,7 +2906,8 @@
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "wc2highArrowFire"
+       "wc2highArrowFire",
+       "^wc2_orcs_wc2axefirespear"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2971,7 +2996,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_orcs_wc2gruntslice2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3059,7 +3085,10 @@
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "wc2_humans_alleria_arrow"
+       "^Warhead_Arrow_Medium",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Medium",
+       "^wc2_orcs_wc2_orcs_zuljin_spear"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium"
@@ -3085,7 +3114,10 @@
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "wc2_humans_alleria_arrow"
+       "^Warhead_Arrow_Medium",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Medium",
+       "^wc2_orcs_wc2_orcs_zuljin_spear"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium"
@@ -3982,7 +4014,8 @@
        "^Grenade",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^HeavyBomb",
+       "^wc2_orcs_wc2catapultfire"
       ],
       "warheads": [
        "^Warhead_Concussion_Heavy"
@@ -4246,7 +4279,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_orcs_wc2ogrepunch"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4272,7 +4306,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
       "slot": "Armament@EYEOFKILROGG",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_orcs_wc2ogremageeyeofkilrogg"
+      ],
       "warheads": [],
       "weapon": "wc2ogremageEyeOfKilrogg",
       "weapon_class_source": "none"

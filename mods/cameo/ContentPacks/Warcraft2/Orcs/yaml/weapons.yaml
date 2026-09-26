@@ -1,6 +1,6 @@
 ^wc2_orcs_wc2gruntslice2:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2gruntslice2:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -16,7 +16,7 @@ wc2gruntslice2:
 
 ^wc2_orcs_wc2axefire:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2axeFire:
 	Inherits: wc2arrowFire
@@ -726,7 +726,7 @@ wc2_orcs_hellscream_slice_elite:
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
 ^wc2_orcs_wc2_orcs_zuljin_spear:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2_orcs_zuljin_spear:
 	Inherits@w71: ^Warhead_Arrow_Medium  # W7MAT covering-edge

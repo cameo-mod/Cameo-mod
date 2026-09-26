@@ -333,21 +333,14 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
-       "^D2K_Cannon"
+       "^Projectile_Shell_Medium_D2K",
+       "^Effect_CannonHE_Medium_D2K"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "110mm_Gun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -806,7 +799,6 @@
       "slot": "Armament",
       "versus_templates": [
        "^D2KMissile",
-       "^Projectile_Missile_Heavy_D2K",
        "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
@@ -1072,22 +1064,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Light_Flat",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -1101,22 +1090,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Light_Flat",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1222,19 +1208,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
@@ -1258,7 +1237,6 @@
       "slot": "Armament@ELITE",
       "versus_templates": [
        "^D2KMissile",
-       "^Projectile_Missile_Heavy_D2K",
        "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
@@ -1311,19 +1289,12 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -1348,7 +1319,6 @@
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
        "^D2KMissile",
-       "^Projectile_Missile_Heavy_D2K",
        "^d2k_shared_d2k_towermissile"
       ],
       "warheads": [
@@ -1922,19 +1892,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -1979,19 +1942,12 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2274,7 +2230,9 @@
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^D2K_Cannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium_D2K",
+       "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2553,7 +2511,9 @@
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileAP_Heavy_D2K",
        "^d2k_shared_mtank_pri"
       ],
       "warheads": [

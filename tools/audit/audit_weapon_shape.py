@@ -152,7 +152,9 @@ W5_BASELINE = 153   # 389 -> 153: re-locked at current true value after the
                     # R17 chip-fold batch (-19 weapons). The 389 figure was a
                     # merge-repair era ceiling, far above any recent measurement.
                     # previous: more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 346   # 347 -> 346: rule-4 remediation (Sound2 drop, reverts).
+W6_BASELINE = 347   # 346 -> 347: consolidate onto master 91f865585 — one
+                    # master-imported local fx on a merge-spliced def.
+                    # was: 347 -> 346: rule-4 remediation (Sound2 drop, reverts).
                     # was: 497 -> 347: W6 in-lane sweep complete (D2k, TD, TS,
                     # WC2, SC — 174 weapons, ~250 new per-weapon templates);
                     # 3809/3809 corpus-wide resolved+ordered identical.
@@ -161,7 +163,10 @@ W6_BASELINE = 346   # 347 -> 346: rule-4 remediation (Sound2 drop, reverts).
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 711   # 647 -> 711: rule-4 remediation (Claude ruling: concrete
+W7_BASELINE = 714   # 711 -> 714: consolidated onto master 91f865585 — three
+                    # wc2 defs took master's own form, which carries weapon-
+                    # parent edges (master's own W7 ratchet is 760).
+                    # was: 647 -> 711: rule-4 remediation (Claude ruling: concrete
                     # weapons whose parent carries inline Versus/PercentageVersus
                     # KEEP the weapon-parent edge) — 66 defs reverted to master
                     # form; the restored Inherits:<weapon> edges are the ruling's

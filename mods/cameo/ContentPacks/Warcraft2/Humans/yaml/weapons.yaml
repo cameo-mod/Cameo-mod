@@ -844,7 +844,7 @@ wc2blizzardSuper_Spread:
 # Alleria: 6 old warheads each 6000 main + 3% percentage -> 36000 main, 18% twin.
 ^wc2_humans_wc2_humans_alleria_arrow:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 
 wc2_humans_alleria_arrow:
 	Inherits@wh: ^Warhead_Arrow_Medium
@@ -899,7 +899,7 @@ wc2_humans_alleria_arrow_elite:
 		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 ^wc2_humans_wc2_humans_danath_slice:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2_humans_danath_slice:
 	Inherits@wh: ^Warhead_Melee_Medium

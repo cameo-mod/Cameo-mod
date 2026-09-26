@@ -71,7 +71,8 @@
        "^HeavyMissile",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^HeavyBomb",
+       "^sc_zerg_behemothshoot"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -162,17 +163,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "-2000",
+        "damage": "-3000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "HealingWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "100",
-        "tag": "ExtraHealing",
         "type": "SpreadDamage"
        },
        {
@@ -285,7 +279,8 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
+       "^Effect_Chem_Medium",
+       "^sc_zerg_corruptorspore"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -394,19 +389,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [
-       "MutaliskSpore"
+       "MutaliskSpore",
+       "^sc_zerg_scdevoureraa_1_fx",
+       "^sc_zerg_scdevoureraa_2_fx"
       ],
-      "warheads": [
-       "^Warhead_Chemical_Medium"
-      ],
+      "warheads": [],
       "weapon": "SCDevourerAA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -472,18 +467,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "11000",
+        "damage": "11600",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -536,13 +524,13 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_Laser_ExtraDamage",
        "^LightFlameWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon",
        "^FlakWeapon",
        "^MediumChemicalWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^sc_zerg_dreadshroudspore"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -631,7 +619,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_gorekrakenclaw"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -733,25 +722,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Concussion_Medium_Flat",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Concussion_Light",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^HeavyBomb",
+       "^sc_zerg_guardianshoot"
       ],
-      "warheads": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Concussion_Light"
-      ],
+      "warheads": [],
       "weapon": "GuardianShoot",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -853,24 +838,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Chemical_Medium_Flat",
-       "^Warhead_Chemical_Medium",
        "^SwordWeapon",
        "^MediumChemicalWeapon",
        "^SmallArms",
-       "^ArrowWeapon"
+       "^ArrowWeapon",
+       "^sc_zerg_mutaliskspore"
       ],
-      "warheads": [
-       "^Warhead_Chemical_Medium"
-      ],
+      "warheads": [],
       "weapon": "MutaliskSpore",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1044,7 +1027,8 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium",
        "^MediumChemicalWeapon",
-       "^ArrowWeapon"
+       "^ArrowWeapon",
+       "^sc_zerg_queenspine"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -1124,20 +1108,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "SCScourgeExplosion"
+       "SCScourgeExplosion",
+       "^sc_zerg_scourgeexplosion_fx"
       ],
-      "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "ScourgeExplosion",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2032,7 +2014,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2040,18 +2022,16 @@
       "slot": "Armament@sunken",
       "versus_templates": [
        "^Warhead_Melee_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^SwordWeapon"
+       "^SwordWeapon",
+       "^sc_zerg_tentacle"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "Tentacle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "spore",
@@ -2096,7 +2076,8 @@
        "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_spore_aa"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -2194,7 +2175,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2202,18 +2183,16 @@
       "slot": "Armament@sunken",
       "versus_templates": [
        "^Warhead_Melee_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^SwordWeapon"
+       "^SwordWeapon",
+       "^sc_zerg_tentacle"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "Tentacle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "spore",
@@ -2258,7 +2237,8 @@
        "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_spore_aa"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -2355,7 +2335,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2363,18 +2343,16 @@
       "slot": "Armament@sunken",
       "versus_templates": [
        "^Warhead_Melee_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^SwordWeapon"
+       "^SwordWeapon",
+       "^sc_zerg_tentacle"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "Tentacle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "spore",
@@ -2419,7 +2397,8 @@
        "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_spore_aa"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -2517,7 +2496,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2525,18 +2504,16 @@
       "slot": "Armament@sunken",
       "versus_templates": [
        "^Warhead_Melee_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^SwordWeapon"
+       "^SwordWeapon",
+       "^sc_zerg_tentacle"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "Tentacle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "spore",
@@ -2581,7 +2558,8 @@
        "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_spore_aa"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -2667,7 +2645,8 @@
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Chem_Heavy",
+       "^sc_zerg_defilerplague"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy"
@@ -2757,7 +2736,8 @@
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_BulletChem_Light"
+       "^Warhead_BulletChem_Light",
+       "^sc_zerg_hydraspit"
       ],
       "warheads": [
        "^Warhead_BulletChem_Light"
@@ -2783,7 +2763,8 @@
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_BulletChem_Light"
+       "^Warhead_BulletChem_Light",
+       "^sc_zerg_hydraspit"
       ],
       "warheads": [
        "^Warhead_BulletChem_Light"
@@ -3046,7 +3027,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_shriekstinger"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3164,7 +3146,8 @@
        "^Warhead_Bullet_Light",
        "^LightMissile",
        "^SmallArms",
-       "^ArrowWeapon"
+       "^ArrowWeapon",
+       "^sc_zerg_spithidspit"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3214,7 +3197,8 @@
        "^Warhead_Bullet_Light",
        "^LightMissile",
        "^SmallArms",
-       "^ArrowWeapon"
+       "^ArrowWeapon",
+       "^sc_zerg_spithidspit"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3365,7 +3349,8 @@
        "^HeavyBomb",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_swarmlingshoot"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"
@@ -3462,7 +3447,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_talonclaw"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3547,7 +3533,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_ultraliskhusk"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3635,7 +3622,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_zerglingclaw"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4396,7 +4384,10 @@
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^WorkerAttack"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium",
+       "^sc_zerg_droneattack"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4507,7 +4498,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^sc_zerg_goremawclaw"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4715,7 +4707,8 @@
        "^HeavyBomb",
        "^MediumMissile",
        "^Chaingun",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^sc_zerg_hermitshoot"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -4828,7 +4821,9 @@
       "reloaddelay": "66",
       "requires": "deployed || undeployed",
       "slot": "Armament@Deployed",
-      "versus_templates": [],
+      "versus_templates": [
+       "^sc_zerg_lurkerspines"
+      ],
       "warheads": [],
       "weapon": "LurkerSpines",
       "weapon_class_source": "none"
@@ -4915,7 +4910,9 @@
       "versus_templates": [
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium"
+       "^Effect_Concussion_Medium",
+       "^sc_zerg_sporemawshoot_1",
+       "^sc_zerg_sporemawshoot_2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -4943,7 +4940,9 @@
       "versus_templates": [
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium"
+       "^Effect_Concussion_Medium",
+       "^sc_zerg_sporemawshoot_1",
+       "^sc_zerg_sporemawshoot_2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"

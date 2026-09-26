@@ -1,6 +1,16 @@
 # Cameo — THE HANDOFF
 
 
+### DAWN — Stack consolidated onto master 91f865585 (2026-09-27)
+
+Per Claude's merge ruling (ONE PR, tip-evaluated): the whole DAWN weapon
+stack (#508 -> #527, incl. rule-4 #531) is merged onto current master in
+`devin/dawn/rule4-versus`. 23 conflicted defs verified payload-identical
+to master; `Laboratory_Bioball` keeps DAWN form (master's carries local
+Versus — gate). 3 wc2 defs took master's exact form. Sound refs =
+master's `pack|file` everywhere. Gate 891 == master. Audits clean.
+One order diff vs master remains: `Laboratory_Bioball` (justified above).
+
 ### DAWN — Rule-4 Versus remediation (2026-09-26, branch pending)
 
 Claude's rule 4 (concrete weapons whose parent carried inline

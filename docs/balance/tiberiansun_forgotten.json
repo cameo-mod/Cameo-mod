@@ -1422,7 +1422,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
@@ -1430,20 +1430,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannonEffect",
-       "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
-      ],
+      "warheads": [],
       "weapon": "TS70mmTur",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -1477,7 +1471,6 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^TSCannonEffect",
@@ -1561,7 +1554,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6404",
       "reloaddelay": "48",
@@ -1569,19 +1562,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^TSCannonEffect",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSScoopDualTur",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
@@ -1617,7 +1605,6 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^TSCannonEffect",
@@ -1874,24 +1861,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6272",
       "reloaddelay": "6",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSMutVulcanTurret",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3479,7 +3461,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -3489,17 +3471,15 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium_Flat",
        "^TSInfantryMortarLegacy",
-       "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Chemical_Medium"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3566,7 +3546,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -3576,17 +3556,15 @@
       "versus_templates": [
        "^Warhead_Chemical_Medium_Flat",
        "^TSInfantryMortarLegacy",
-       "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Chemical_Medium"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3658,24 +3636,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5611",
       "reloaddelay": "8",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSSergGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3689,24 +3662,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5611",
       "reloaddelay": "8",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSSergGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6967,24 +6935,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6147",
       "reloaddelay": "12",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Flak_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSMutApcCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7075,24 +7038,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6603",
       "reloaddelay": "5",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
+      "warheads": [],
       "weapon": "TSBowlerCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7185,13 +7143,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
-       "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy",
        "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "TS120mmxChem",
       "weapon_class_source": "template"
@@ -7819,7 +7775,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5606",
       "reloaddelay": "54",
@@ -7827,17 +7783,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Light_Flat",
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
+      "warheads": [],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
@@ -7852,22 +7803,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "TSAdatsMissile",
+       "^ts_forgotten_tsadatsmissile_aa",
+       "^ts_forgotten_tsadatsmissile_aa_1",
+       "^ts_forgotten_tsadatsmissile_aa_2",
        "^Warhead_Flak_Medium_Flat"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
+      "warheads": [],
       "weapon": "TSAdatsMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
@@ -8709,7 +8659,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],

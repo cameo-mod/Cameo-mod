@@ -701,22 +701,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Concussion_Medium_Flat",
-       "td_nod_gunturret_turretgun",
-       "^td_nod_td_nod_gunturret_turretgunblackmarket"
+       "^td_nod_td_nod_gunturret_turretgunblackmarket",
+       "^td_nod_td_nod_gunturret_turretgunblackmarket_fx"
       ],
-      "warheads": [
-       "^Warhead_Concussion_Medium"
-      ],
+      "warheads": [],
       "weapon": "td_nod_gunturret_turretgunblackmarket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1320,7 +1317,9 @@
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "Dragon"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^td_nod_dragon"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1865,7 +1864,9 @@
       "reloaddelay": "48",
       "slot": "Armament",
       "versus_templates": [
-       "Chemspray"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -1891,7 +1892,9 @@
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "Chemspray"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -2875,7 +2878,9 @@
       "reloaddelay": "56",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "Rockets"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -2901,7 +2906,9 @@
       "reloaddelay": "56",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "Rockets"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -3198,20 +3205,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy",
-       "^Projectile_Missile_Heavy",
        "^td_nod_set6"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_nod_attacksubmarine_nodtorptube",
@@ -3237,13 +3241,10 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy",
-       "^Projectile_Missile_Heavy",
        "^td_nod_set6"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_nod_attacksubmarine_nodtorptubeblackmarket",
@@ -4525,7 +4526,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -4533,16 +4534,11 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Flame_Medium_Flat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy",
        "^Effect_Flame_Medium"
       ],
-      "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
-      ],
+      "warheads": [],
       "weapon": "td_nod_buggymkii_fireballlauncherbuggy2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "3",
@@ -5293,7 +5289,9 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "BigFlamer"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^td_tiberiandawn_bigflamer"
       ],
       "warheads": [
        "^Warhead_Flame_Medium"

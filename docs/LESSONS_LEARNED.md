@@ -11,6 +11,22 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
+
+When master's merge wave (#519 dots, #524 `pack|file` sound refs) touched
+the same weapon defs a stack branch rewrote, the hunks are structural, not
+textual: neither side can be taken blind. The correct procedure: resolve
+each conflicted def on BOTH parent trees; where payloads match, keep the
+branch's structure but backport master's *field values* (`Report:`,
+`StartBurstReport:`, `Warhead@*/ImpactSounds:`) — including inside
+generated `^` templates the branch emits (master's qualifiers land there
+too). Take master's def verbatim only when it carries no content the
+branch's gates forbid (here: local `Versus:` — `Laboratory_Bioball`'s
+master form would have pushed count_local_versus over its gate, so the
+branch's structure won and one ordered-key diff vs master is the price).
+Splicing a def to master's form orphans its generated `^<pfx>_<weapon>`
+templates — sweep them after every splice.
+
 ### 2026-09-26 — DAWN: covering-edge conversion needs positional order-pins
 
 Replacing `Inherits: ^LegacyBundle` with the bundle's covering three-kind

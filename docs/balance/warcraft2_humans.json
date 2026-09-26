@@ -123,7 +123,8 @@
        "^LightMissile",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^TeslaChargedWeapon"
+       "^TeslaChargedWeapon",
+       "^wc2_humans_wc2gryphonfirevisible"
       ],
       "warheads": [
        "^Warhead_MissileTesla_Medium"
@@ -1564,7 +1565,8 @@
       "versus_templates": [
        "^Warhead_Arrow_Medium",
        "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Medium"
+       "^Effect_Arrow_Medium",
+       "^wc2_humans_wc2_humans_alleria_arrow"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium"
@@ -1592,7 +1594,8 @@
       "versus_templates": [
        "^Warhead_Arrow_Medium",
        "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Medium"
+       "^Effect_Arrow_Medium",
+       "^wc2_humans_wc2_humans_alleria_arrow"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium"
@@ -1686,7 +1689,8 @@
       "versus_templates": [
        "^Warhead_Arrow_Heavy",
        "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Heavy"
+       "^Effect_Arrow_Heavy",
+       "^wc2_humans_wc2_humans_alleria_arrow_elite"
       ],
       "warheads": [
        "^Warhead_Arrow_Heavy"
@@ -1714,7 +1718,8 @@
       "versus_templates": [
        "^Warhead_Arrow_Heavy",
        "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Heavy"
+       "^Effect_Arrow_Heavy",
+       "^wc2_humans_wc2_humans_alleria_arrow_elite"
       ],
       "warheads": [
        "^Warhead_Arrow_Heavy"
@@ -1878,7 +1883,9 @@
       "versus_templates": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^Effect_Flame_Heavy",
+       "^wc2_humans_wc2magefireballvisible_1",
+       "^wc2_humans_wc2magefireballvisible_2"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -1906,7 +1913,13 @@
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@FIREBALL_EXPLOSIONS",
       "versus_templates": [
-       "wc2mageFireballVisible"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "^wc2_humans_wc2magefireballexplosion_1",
+       "^wc2_humans_wc2magefireballexplosion_2",
+       "^wc2_humans_wc2magefireballexplosion_3",
+       "^wc2_humans_wc2magefireballexplosion_4"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -1932,7 +1945,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && mageslow_upg",
       "slot": "Armament@SLOW",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2mageslow"
+      ],
       "warheads": [],
       "weapon": "wc2mageSlow",
       "weapon_class_source": "none"
@@ -1948,7 +1963,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
       "slot": "Armament@POLYMORPH",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2magepolymorph"
+      ],
       "warheads": [],
       "weapon": "wc2magePolymorph",
       "weapon_class_source": "none"
@@ -2053,7 +2070,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2_humans_danath_slice"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -2142,7 +2160,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2_humans_danath_slice_elite"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -2214,18 +2233,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2257,10 +2269,10 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Railgun_ExtraDamage",
        "^RailgunWeapon",
        "^MediumMissile",
-       "^TankDestroyerCannon"
+       "^TankDestroyerCannon",
+       "^wc2_humans_wc2_dwarf_rifle"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2272,18 +2284,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2315,10 +2320,10 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Railgun_ExtraDamage",
        "^RailgunWeapon",
        "^MediumMissile",
-       "^TankDestroyerCannon"
+       "^TankDestroyerCannon",
+       "^wc2_humans_wc2_dwarf_rifle"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2965,7 +2970,9 @@
       "reloaddelay": "40",
       "requires": "FSD_cond_3 && paladinhealing_upg",
       "slot": "Armament@HEAL",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2priesthealing"
+      ],
       "warheads": [],
       "weapon": "wc2priesthealing",
       "weapon_class_source": "none"
@@ -2988,7 +2995,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
       "slot": "Armament@EXORCISM",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinexorcism"
+      ],
       "warheads": [],
       "weapon": "wc2paladinexorcism",
       "weapon_class_source": "none"
@@ -3104,7 +3113,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
       "slot": "Armament@HEAL",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinhealing"
+      ],
       "warheads": [],
       "weapon": "wc2paladinhealing",
       "weapon_class_source": "none"
@@ -3127,7 +3138,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
       "slot": "Armament@EXORCISM",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinexorcism"
+      ],
       "warheads": [],
       "weapon": "wc2paladinexorcism",
       "weapon_class_source": "none"
@@ -3457,7 +3470,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2knightslice"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3506,7 +3520,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
       "slot": "Armament@HEAL",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinhealing"
+      ],
       "warheads": [],
       "weapon": "wc2paladinhealing",
       "weapon_class_source": "none"
@@ -3529,7 +3545,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
       "slot": "Armament@EXORCISM",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinexorcism"
+      ],
       "warheads": [],
       "weapon": "wc2paladinexorcism",
       "weapon_class_source": "none"
@@ -3688,7 +3706,9 @@
       "versus_templates": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^Effect_Flame_Heavy",
+       "^wc2_humans_wc2magefireballvisible_1",
+       "^wc2_humans_wc2magefireballvisible_2"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3716,7 +3736,13 @@
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@FIREBALL_EXPLOSIONS",
       "versus_templates": [
-       "wc2mageFireballVisible"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "^wc2_humans_wc2magefireballexplosion_1",
+       "^wc2_humans_wc2magefireballexplosion_2",
+       "^wc2_humans_wc2magefireballexplosion_3",
+       "^wc2_humans_wc2magefireballexplosion_4"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3742,7 +3768,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && mageslow_upg",
       "slot": "Armament@SLOW",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2mageslow"
+      ],
       "warheads": [],
       "weapon": "wc2mageSlow",
       "weapon_class_source": "none"
@@ -3758,7 +3786,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
       "slot": "Armament@POLYMORPH",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2magepolymorph"
+      ],
       "warheads": [],
       "weapon": "wc2magePolymorph",
       "weapon_class_source": "none"
@@ -3980,13 +4010,13 @@
       "reloaddelay": "200",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
-       "^ShrapnelWeapon"
+       "^ShrapnelWeapon",
+       "^wc2_humans_mortarteamartilleryshell"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4034,13 +4064,13 @@
       "reloaddelay": "200",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
-       "^ShrapnelWeapon"
+       "^ShrapnelWeapon",
+       "^wc2_humans_mortarteamartilleryshell"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4126,7 +4156,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2footmanslice2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4901,7 +4932,8 @@
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Heavy"
+       "^Effect_Demolition_Heavy",
+       "^wc2_humans_wc2ballistafire"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -5165,7 +5197,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2knightslice"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -5214,7 +5247,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
       "slot": "Armament@HEAL",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinhealing"
+      ],
       "warheads": [],
       "weapon": "wc2paladinhealing",
       "weapon_class_source": "none"
@@ -5237,7 +5272,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
       "slot": "Armament@EXORCISM",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinexorcism"
+      ],
       "warheads": [],
       "weapon": "wc2paladinexorcism",
       "weapon_class_source": "none"
@@ -5630,7 +5667,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^wc2_humans_wc2knightslice"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -5679,7 +5717,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
       "slot": "Armament@HEAL",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinhealing"
+      ],
       "warheads": [],
       "weapon": "wc2paladinhealing",
       "weapon_class_source": "none"
@@ -5702,7 +5742,9 @@
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
       "slot": "Armament@EXORCISM",
-      "versus_templates": [],
+      "versus_templates": [
+       "^wc2_humans_wc2paladinexorcism"
+      ],
       "warheads": [],
       "weapon": "wc2paladinexorcism",
       "weapon_class_source": "none"
