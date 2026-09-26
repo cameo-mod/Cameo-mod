@@ -2,52 +2,52 @@ forgotten_mutantsniper:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mutantsniper.shp
+		Filename: ts_forgotten_sprites|forgotten_mutantsniper.shp
 	icon:
-		Filename: forgotten_mutantsniper_icon.shp
+		Filename: ts_forgotten_icons|forgotten_mutantsniper_icon.shp
 
 forgotten_ghoststalker:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_promotion_ghoststalker_tsghost.shp
+		Filename: ts_forgotten_sprites|forgotten_promotion_ghoststalker_tsghost.shp
 	icon:
 		Filename: tsghosticon.shp
 
 forgotten_mutanthijacker:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: forgotten_promotion_ghoststalker_tsghost.shp
+		Filename: ts_forgotten_sprites|forgotten_promotion_ghoststalker_tsghost.shp
 	icon:
-		Filename: forgotten_mutanthijacker_icon.png
+		Filename: ts_forgotten_icons|forgotten_mutanthijacker_icon.png
 
 forgotten_mutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mutant_tsmutant.shp
+		Filename: ts_shared_sprites|forgotten_mutant_tsmutant.shp
 	icon:
-		Filename: forgotten_mutant_icon.png
+		Filename: ts_forgotten_icons|forgotten_mutant_icon.png
 
 forgotten_mutantsoldier:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mutantsoldier_tsmutant3.shp
+		Filename: ts_forgotten_sprites|forgotten_mutantsoldier_tsmutant3.shp
 	icon:
-		Filename: forgotten_mutantsoldier_icon.png
+		Filename: ts_forgotten_icons|forgotten_mutantsoldier_icon.png
 
 forgotten_mutantsergeant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mutantsoldier_tsmutant3.shp
+		Filename: ts_forgotten_sprites|forgotten_mutantsoldier_tsmutant3.shp
 	icon:
-		Filename: forgotten_mutantsergeant_icon.png
+		Filename: ts_forgotten_icons|forgotten_mutantsergeant_icon.png
 
 forgotten_chemsprayinfantry:
 	Defaults:
-		Filename: forgotten_chemsprayinfantry.shp
+		Filename: ts_forgotten_sprites|forgotten_chemsprayinfantry.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -153,11 +153,11 @@ forgotten_chemsprayinfantry:
 		Length: 13
 	icon:
 		Offset: 0,0
-		Filename: forgotten_chemsprayinfantry_icon.shp
+		Filename: ts_forgotten_icons|forgotten_chemsprayinfantry_icon.shp
 
 forgotten_tiberianfiend:
 	Defaults:
-		Filename: forgotten_tiberianfiend.shp
+		Filename: ts_forgotten_sprites|forgotten_tiberianfiend.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -228,11 +228,11 @@ forgotten_tiberianfiend:
 		ShadowStart: 218
 	icon:
 		Offset: 0,0
-		Filename: forgotten_tiberianfiend_icon.png
+		Filename: ts_forgotten_icons|forgotten_tiberianfiend_icon.png
 
 forgotten_viniferafiend:
 	Defaults:
-		Filename: forgotten_promotion_viniferafiend.shp
+		Filename: ts_forgotten_sprites|forgotten_promotion_viniferafiend.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -303,13 +303,13 @@ forgotten_viniferafiend:
 		ShadowStart: 218
 	icon:
 		Offset: 0,0
-		Filename: forgotten_promotion_viniferafiend_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_viniferafiend_icon.png
 
 forgotten_zombiemutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_zombiemutant.shp
+		Filename: ts_forgotten_sprites|forgotten_zombiemutant.shp
 		Tick: 80
 		Offset: 0, 0, 16
 		Scale: 1.1
@@ -401,21 +401,21 @@ forgotten_zombiemutant:
 		Offset: 0, 0
 	icon:
 		Offset: 0,0
-		Filename: forgotten_zombiemutant_icon.png
+		Filename: ts_forgotten_icons|forgotten_zombiemutant_icon.png
 
 forgotten_runnershotgal:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_promotion_runnershotgal.shp
+		Filename: ts_forgotten_sprites|forgotten_promotion_runnershotgal.shp
 	icon:
-		Filename: forgotten_promotion_runnershotgal_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_runnershotgal_icon.png
 
 forgotten_mutantmortarman:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mutantmortarman.shp
+		Filename: ts_forgotten_sprites|forgotten_mutantmortarman.shp
 		Tick: 80
 	stand:
 		Start: 126
@@ -512,7 +512,7 @@ forgotten_mutantmortarman:
 		Facings: 8
 		ShadowStart: 268
 	icon:
-		Filename: forgotten_mutantmortarman_icon.shp
+		Filename: ts_forgotten_icons|forgotten_mutantmortarman_icon.shp
 
 # tsweed:
 # 	idle: invisibleitem
@@ -523,11 +523,11 @@ forgotten_mutantmortarman:
 
 forgotten_rattytank:
 	idle:
-		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret_rattytank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -535,64 +535,64 @@ forgotten_rattytank:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_rattytank_icon.png
+		Filename: ts_forgotten_icons|forgotten_rattytank_icon.png
 
 forgotten_closhtank:
 	idle:
-		Filename: forgotten_closhtank.png
+		Filename: ts_forgotten_sprites|forgotten_closhtank.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_closhtank_icon.png
+		Filename: ts_forgotten_icons|forgotten_closhtank_icon.png
 
 forgotten_thumperbus:
 	idle:
-		Filename: forgotten_thumperbus.png
+		Filename: ts_forgotten_sprites|forgotten_thumperbus.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_thumperbus_icon.png
+		Filename: ts_forgotten_icons|forgotten_thumperbus_icon.png
 	turret:
 		Filename: shared_sprites|invisibleitem.shp
 
 forgotten_nomadbarracks:
 	idle:
-		Filename: forgotten_nomadbarracks.png
+		Filename: ts_forgotten_sprites|forgotten_nomadbarracks.png
 		Facings: 64
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_nomadbarracks_icon.png
+		Filename: ts_forgotten_icons|forgotten_nomadbarracks_icon.png
 	turret:
 		Filename: shared_sprites|invisibleitem.shp
 
 forgotten_tankkiller:
 	idle:
-		Filename: forgotten_tankkiller.png
+		Filename: ts_forgotten_sprites|forgotten_tankkiller.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_tankkiller_icon.png
+		Filename: ts_forgotten_icons|forgotten_tankkiller_icon.png
 
 forgotten_missilevan:
 	Defaults:
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: forgotten_missilevan.png
+		Filename: ts_forgotten_sprites|forgotten_missilevan.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_missilevan.png
+		Filename: ts_forgotten_sprites|forgotten_missilevan.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -600,15 +600,15 @@ forgotten_missilevan:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_missilevan_icon.png
+		Filename: ts_forgotten_icons|forgotten_missilevan_icon.png
 
 forgotten_raidercar:
 	idle:
-		Filename: forgotten_raidercar.png
+		Filename: ts_forgotten_sprites|forgotten_raidercar.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_raidercar.png
+		Filename: ts_forgotten_sprites|forgotten_raidercar.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -616,15 +616,15 @@ forgotten_raidercar:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_raidercar_icon.png
+		Filename: ts_forgotten_icons|forgotten_raidercar_icon.png
 
 forgotten_bowler:
 	idle:
-		Filename: forgotten_promotion_bowler.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_bowler.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_promotion_bowler.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_bowler.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -632,26 +632,26 @@ forgotten_bowler:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_promotion_bowler_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_bowler_icon.png
 
 forgotten_ruiner:
 	idle:
-		Filename: forgotten_ruiner.png
+		Filename: ts_forgotten_sprites|forgotten_ruiner.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_ruiner_icon.png
+		Filename: ts_forgotten_icons|forgotten_ruiner_icon.png
 
 forgotten_warriortank:
 	idle:
-		Filename: forgotten_promotion_warriortank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_warriortank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_promotion_warriortank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -659,15 +659,15 @@ forgotten_warriortank:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_promotion_warriortank_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_warriortank_icon.png
 
 forgotten_scoopertank:
 	idle:
-		Filename: forgotten_promotion_scoopertank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_scoopertank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_promotion_scoopertank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -675,11 +675,11 @@ forgotten_scoopertank:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_promotion_scoopertank_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_scoopertank_icon.png
 
 forgotten_flametank:
 	idle:
-		Filename: forgotten_promotion_flametank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_flametank.png
 		Facings: 64
 		Scale: 0.5
 	muzzle:
@@ -718,11 +718,11 @@ forgotten_flametank:
 				Length: *
 				Offset: -7,8
 	icon:
-		Filename: forgotten_promotion_flametank_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_flametank_icon.png
 
 forgotten_experimentalmammothtank:
 	Defaults:
-		Filename: forgotten_promotion_experimentalmammothtank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_experimentalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -731,14 +731,14 @@ forgotten_experimentalmammothtank:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_promotion_experimentalmammothtank_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_experimentalmammothtank_icon.png
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 forgotten_chemicalmammothtank:
 	Defaults:
-		Filename: forgotten_promotion_chemicalmammothtank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_chemicalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -747,14 +747,14 @@ forgotten_chemicalmammothtank:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_promotion_chemicalmammothtank_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_chemicalmammothtank_icon.png
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 forgotten_mlrs:
 	Defaults:
-		Filename: forgotten_promotion_mlrs.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_mlrs.png
 		Scale: 1.25
 	idle:
 		Facings: 64
@@ -775,11 +775,11 @@ forgotten_mlrs:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_promotion_mlrs_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_mlrs_icon.png
 
 forgotten_m113adats:
 	Defaults:
-		Filename: forgotten_m113adats.png
+		Filename: ts_forgotten_sprites|forgotten_m113adats.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -791,16 +791,16 @@ forgotten_m113adats:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_m113adats_icon.png
+		Filename: ts_forgotten_icons|forgotten_m113adats_icon.png
 
 forgotten_apctruck:
 	Defaults:
-		Filename: forgotten_apctruck.png
+		Filename: ts_forgotten_sprites|forgotten_apctruck.png
 	idle:
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_raidercar.png
+		Filename: ts_forgotten_sprites|forgotten_raidercar.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -808,7 +808,7 @@ forgotten_apctruck:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_apctruck_icon.png
+		Filename: ts_forgotten_icons|forgotten_apctruck_icon.png
 
 forgotten_crystalpowerextractor:
 	Inherits: ^WithBuildingBib3
@@ -816,27 +816,27 @@ forgotten_crystalpowerextractor:
 		Scale: 1.25
 		Offset: 0, -12, 24
 	idle:
-		Filename: tampowr.shp
+		Filename: ts_forgotten_sprites|tampowr.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: tampowr.shp
+		Filename: ts_forgotten_sprites|tampowr.shp
 		Start: 1
 		ShadowStart: 2
 	dead:
-		Filename: tampowr.shp
+		Filename: ts_forgotten_sprites|tampowr.shp
 		Start: 2
 		ShadowStart: 3
 		Tick: 400
 	idle-cycle:
-		Filename: tampowr_a.shp
+		Filename: ts_forgotten_sprites|tampowr_a.shp
 		Length: 31
 		Tick: 200
 	damaged-idle-cycle:
-		Filename: tampowr_a.shp
+		Filename: ts_forgotten_sprites|tampowr_a.shp
 		Length: 31
 		Tick: 200
 	make:
-		Filename: tampowrmake.shp
+		Filename: ts_forgotten_sprites|tampowrmake.shp
 	icon:
 		Filename: tsnpwricon.shp
 		Offset: 0, 0, 25
@@ -848,37 +848,37 @@ forgotten_barracks:
 		Scale: 1.25
 		Offset: -12, -15, 30
 	idle:
-		Filename: tambar.shp
+		Filename: ts_forgotten_sprites|tambar.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: tambar.shp
+		Filename: ts_forgotten_sprites|tambar.shp
 		Start: 1
 		ShadowStart: 3
 	dead:
-		Filename: tambar.shp
+		Filename: ts_forgotten_sprites|tambar.shp
 		Start: 2
 		ShadowStart: 3
 		Tick: 400
 	idle-light:
-		Filename: tambar_a.shp
+		Filename: ts_forgotten_sprites|tambar_a.shp
 		Length: *
 		Tick: 100
 		ZOffset: 1023
 	damaged-idle-light:
-		Filename: tambar_a.shp
+		Filename: ts_forgotten_sprites|tambar_a.shp
 		Length: *
 		Tick: 100
 		ZOffset: 1023
 	idle-lights:
-		Filename: tambar_b.shp
+		Filename: ts_forgotten_sprites|tambar_b.shp
 		Length: *
 		Tick: 200
 	damaged-idle-lights:
-		Filename: tambar_b.shp
+		Filename: ts_forgotten_sprites|tambar_b.shp
 		Length: *
 		Tick: 200
 	make:
-		Filename: tambarmake.shp
+		Filename: ts_forgotten_sprites|tambarmake.shp
 	icon:
 		Filename: ts_shared_icons|ts_nod_handof_icon.png
 		Offset: 0, 0
@@ -888,30 +888,30 @@ forgotten_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1.25
-		Filename: tamradr.shp
+		Filename: ts_forgotten_sprites|tamradr.shp
 		Offset: 0, -12, 12
 	idle:
-		Filename: tamradr.shp
+		Filename: ts_forgotten_sprites|tamradr.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: tamradr.shp
+		Filename: ts_forgotten_sprites|tamradr.shp
 		Start: 1
 		ShadowStart: 3
 	dead:
-		Filename: tamradr.shp
+		Filename: ts_forgotten_sprites|tamradr.shp
 		Start: 1
 		ShadowStart: 3
 		Tick: 400
 	idle-dish:
-		Filename: tamradr_a.shp
+		Filename: ts_forgotten_sprites|tamradr_a.shp
 		Length: *
 		Tick: 200
 	damaged-idle-dish:
-		Filename: tamradr_a.shp
+		Filename: ts_forgotten_sprites|tamradr_a.shp
 		Length: *
 		Tick: 240
 	make:
-		Filename: tamradrmake.shp
+		Filename: ts_forgotten_sprites|tamradrmake.shp
 		Length: 17
 	icon:
 		Filename: ts_shared_icons|ts_gdi_radar_icon.shp
@@ -919,30 +919,30 @@ forgotten_radar:
 
 forgotten_church:
 	Defaults:
-		Filename: tamtech.shp
+		Filename: ts_forgotten_sprites|tamtech.shp
 		Offset: -12, -30, 30
 	idle:
-		Filename: tamtech.shp
+		Filename: ts_forgotten_sprites|tamtech.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: tamtech.shp
+		Filename: ts_forgotten_sprites|tamtech.shp
 		Start: 1
 		ShadowStart: 2
 	dead:
-		Filename: tamtech.shp
+		Filename: ts_forgotten_sprites|tamtech.shp
 		Start: 2
 		ShadowStart: 2
 		Tick: 400
 	idle-lights:
-		Filename:  tamtech_a.shp
+		Filename:  ts_forgotten_sprites|tamtech_a.shp
 		Length: *
 		Tick: 200
 	damaged-idle-lights:
-		Filename:  tamtech_a.shp
+		Filename:  ts_forgotten_sprites|tamtech_a.shp
 		Length: *
 		Tick: 240
 	make:
-		Filename: tamtechmake.shp
+		Filename: ts_forgotten_sprites|tamtechmake.shp
 	icon:
 		Filename:  ts_shared_icons|ts_gdi_techcenter_icon.png
 		Offset: 0, 0
@@ -951,7 +951,7 @@ forgotten_refinery:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: tamref.shp
+		Filename: ts_forgotten_sprites|tamref.shp
 		Offset: -12, -21, 20
 	idle:
 		ShadowStart: 3
@@ -963,38 +963,38 @@ forgotten_refinery:
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: tamrefmake.shp
+		Filename: ts_forgotten_sprites|tamrefmake.shp
 	unload-overlay:
-		Filename: tamref_bib.shp
+		Filename: ts_forgotten_sprites|tamref_bib.shp
 		Length: *
 		ZOffset: 1024
 	idle-redlights:
-		Filename: tamref_c.shp
+		Filename: ts_forgotten_sprites|tamref_c.shp
 		Length: 16
 		Tick: 120
 		Reverses: True
 	damaged-idle-redlights:
-		Filename: tamref_c.shp
+		Filename: ts_forgotten_sprites|tamref_c.shp
 		Length: 16
 		Tick: 120
 		Reverses: True
 	bib2:
 		Scale: 1
-		Filename: tamref_bib.shp
+		Filename: ts_forgotten_sprites|tamref_bib.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	damaged-bib2:
 		Scale: 1
-		Filename: tamref_bib.shp
+		Filename: ts_forgotten_sprites|tamref_bib.shp
 		Start: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	dead-bib2:
 		Scale: 1
-		Filename: tamref_bib.shp
+		Filename: ts_forgotten_sprites|tamref_bib.shp
 		Start: 2
 		ZOffset: -1024
 		Offset: -12, -21, 5
@@ -1004,11 +1004,11 @@ forgotten_refinery:
 
 forgotten_cobracopter:
 	idle:
-		Filename: forgotten_promotion_cobracopter.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_cobracopter.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_promotion_cobracopter_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_cobracopter_icon.png
 	rotor:
 		Filename: shared_sprites|lrotor.shp
 		Length: 4
@@ -1021,7 +1021,7 @@ forgotten_apache:
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: ts_nod_harpy_icon.shp
+		Filename: ts_shared_icons|ts_nod_harpy_icon.shp
 	rotor:
 		Filename: shared_sprites|lrotor.shp
 		Length: 4
@@ -1032,62 +1032,62 @@ forgotten_apache:
 
 forgotten_wasp:
 	idle:
-		Filename: forgotten_wasp.png
+		Filename: ts_forgotten_sprites|forgotten_wasp.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_wasp_icon.png
+		Filename: ts_forgotten_icons|forgotten_wasp_icon.png
 
 forgotten_locustbomber:
 	idle:
-		Filename: forgotten_promotion_locustbomber.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_locustbomber.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_promotion_locustbomber_icon.png
+		Filename: ts_forgotten_icons|forgotten_promotion_locustbomber_icon.png
 
 forgotten_cropplane:
 	idle:
-		Filename: forgotten_cropplane.png
+		Filename: ts_forgotten_sprites|forgotten_cropplane.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_cropplane_icon.png
+		Filename: ts_forgotten_icons|forgotten_cropplane_icon.png
 
 forgotten_chemicalplant:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: forgotten_chemicalplant.png
+		Filename: ts_forgotten_sprites|forgotten_chemicalplant.png
 		Start: 40
 		Length: 20
 	damaged-idle:
-		Filename: forgotten_chemicalplant.png
+		Filename: ts_forgotten_sprites|forgotten_chemicalplant.png
 		Start: 61
 		Length: 20
 	dead:
-		Filename: forgotten_chemicalplant.png
+		Filename: ts_forgotten_sprites|forgotten_chemicalplant.png
 		Start: 61
 		Length: 20
 	make:
-		Filename: forgotten_chemicalplant.png
+		Filename: ts_forgotten_sprites|forgotten_chemicalplant.png
 		Length: 40
 	icon:
-		Filename: forgotten_chemicalplant_icon.png
+		Filename: ts_forgotten_icons|forgotten_chemicalplant_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
 forgotten_veinhole:
 	idle:
-		Filename: forgotten_veinhole.shp
+		Filename: ts_forgotten_sprites|forgotten_veinhole.shp
 	recoil:
-		Filename: forgotten_veinhole.shp
+		Filename: ts_forgotten_sprites|forgotten_veinhole.shp
 		Length: 12
 	damaged-idle:
-		Filename: forgotten_veinhole.shp
+		Filename: ts_forgotten_sprites|forgotten_veinhole.shp
 	damaged-recoil:
-		Filename: forgotten_veinhole.shp
+		Filename: ts_forgotten_sprites|forgotten_veinhole.shp
 		Length: 12
 	make:
 		Filename: shared_sprites|td_nod_gunturret_make.shp
@@ -1110,12 +1110,12 @@ forgotten_machineguntower:
 	critical-idle:
 		Filename: shared_sprites|invisibleitem.shp
 	turret:
-		Filename: forgotten_machineguntower.png
+		Filename: ts_forgotten_sprites|forgotten_machineguntower.png
 		Facings: 64
 		Start: 64
 		Offset: 0,0
 	make:
-		Filename: forgotten_machineguntower.png
+		Filename: ts_forgotten_sprites|forgotten_machineguntower.png
 		Length: 64
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1124,28 +1124,28 @@ forgotten_machineguntower:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgotten_machineguntower_icon.png
+		Filename: ts_forgotten_icons|forgotten_machineguntower_icon.png
 		Offset: 0,0
 
 forgotten_brokenwarriortankturret:
 	Defaults:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 	idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	critical-idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	turret:
-		Filename: forgotten_promotion_warriortank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Length: 64
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1154,28 +1154,28 @@ forgotten_brokenwarriortankturret:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgotten_brokenwarriortankturret_icon.png
+		Filename: ts_forgotten_icons|forgotten_brokenwarriortankturret_icon.png
 		Offset: 0,0
 
 forgotten_brokenrattytankturret:
 	Defaults:
-		Filename: forgotten_brokenrattytankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret.png
 	idle:
-		Filename: forgotten_brokenrattytankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgotten_brokenrattytankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret.png
 		Start: 63
 	critical-idle:
-		Filename: forgotten_brokenrattytankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret.png
 		Start: 63
 	turret:
-		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgotten_brokenrattytankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenrattytankturret.png
 		Length: 64
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1184,28 +1184,28 @@ forgotten_brokenrattytankturret:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgotten_brokenrattytankturret_icon.png
+		Filename: ts_forgotten_icons|forgotten_brokenrattytankturret_icon.png
 		Offset: 0,0
 
 forgotten_brokenscoopertankturret:
 	Defaults:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 	idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	critical-idle:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Start: 63
 	turret:
-		Filename: forgotten_promotion_scoopertank.png
+		Filename: ts_forgotten_sprites|forgotten_promotion_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgotten_brokenwarriortankturret.png
+		Filename: ts_forgotten_sprites|forgotten_brokenwarriortankturret.png
 		Length: 64
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1214,48 +1214,48 @@ forgotten_brokenscoopertankturret:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgotten_brokenscoopertankturret_icon.png
+		Filename: ts_forgotten_icons|forgotten_brokenscoopertankturret_icon.png
 		Offset: 0,0
 forgotten_juggerboat:
 	idle:
-		Filename: forgot_juggerboat.png
+		Filename: ts_forgotten_sprites|forgot_juggerboat.png
 		Facings: 64
 		Scale: 0.8
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_juggerboat_icon.png
+		Filename: ts_forgotten_icons|forgot_juggerboat_icon.png
 forgotten_cannonboat:
 	idle:
-		Filename: forgot_cannonboat.png
+		Filename: ts_forgotten_sprites|forgot_cannonboat.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_cannonboat_icon.png
+		Filename: ts_forgotten_icons|forgot_cannonboat_icon.png
 forgotten_lcraft:
 	idle:
-		Filename: forgot_lcraft.png
+		Filename: ts_forgotten_sprites|forgot_lcraft.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_lcraft_icon.png
+		Filename: ts_forgotten_icons|forgot_lcraft_icon.png
 
 
 forgotten_navalyard:
 	Defaults:
 		Offset: 0,-12
 	idle:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Start: 33
 	damaged-idle:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Start: 33
 	idle-waves:
 		Filename: ra2_ngyard_c.shp
@@ -1269,21 +1269,21 @@ forgotten_navalyard:
 		ShadowStart: 30
 		Tick: 200
 	repair:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Length: 15
 		Start: 33
 	damaged-repair:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Length: 15
 		Start: 33
 	make:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Length: 32
 	dead:
-		Filename: forgot_navyyard.png
+		Filename: ts_forgotten_sprites|forgot_navyyard.png
 		Start: 33
 	icon:
-		Filename: forgot_navyyard_icon.png
+		Filename: ts_forgotten_icons|forgot_navyyard_icon.png
 		Offset: 0,0
 # tstacticalmissile:
 # 	Defaults:

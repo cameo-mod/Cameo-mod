@@ -3,20 +3,20 @@ scsentinelm:
 	Defaults:
 		Offset: 0,0
 	idle:
-		Filename: scsentinelfly.png
+		Filename: sc_shared_sprites|scsentinelfly.png
 
 scxelnagatemple:
 	Defaults:
-		Filename: scxelnagatemple.shp
+		Filename: sc_shared_sprites|scxelnagatemple.shp
 	build:
 	idle:
 	dead:
 	make:
-		Filename: protossbuild.png
+		Filename: sc_shared_sprites|protossbuild.png
 		Length: *
 		Tick: 80
 	icon:
-		Filename: scnexusicon.shp
+		Filename: sc_shared_icons|scnexusicon.shp
 
 ####################################################################################################
 #		BUILDING ZERG
@@ -33,57 +33,57 @@ zergsoilmaker:
 	Defaults:
 		Filename: zergsoilmaker.shp
 	idle:
-		Filename: sccreepcolony.shp
+		Filename: sc_shared_sprites|sccreepcolony.shp
 		Length: *
 		Tick: 160
 	sunken:
-		Filename: scsunkencolony.shp
+		Filename: sc_shared_sprites|scsunkencolony.shp
 		Length: 4
 		Tick: 160
 	spore:
-		Filename: scsporecolony.shp
+		Filename: sc_shared_sprites|scsporecolony.shp
 		Length: *
 		Tick: 160
 	shoot:
-		Filename: scsunkencolony.shp
+		Filename: sc_shared_sprites|scsunkencolony.shp
 		Length: *
 	dead:
-		Filename: sccreepcolony.shp
+		Filename: sc_shared_sprites|sccreepcolony.shp
 	make:
 		Filename: sczbm1.shp
 		Length: *
 	icon:
-		Filename: zerg_creepcolony_defense_icon.png
+		Filename: sc_shared_icons|zerg_creepcolony_defense_icon.png
 
 zergsoilmaker2:
 	Defaults:
 		Filename: zergsoilmaker2.shp
 	idle:
-		Filename: sccreepcolony.shp
+		Filename: sc_shared_sprites|sccreepcolony.shp
 		Length: *
 		Tick: 160
 	sunken:
-		Filename: scsunkencolonyidle.png
+		Filename: sc_shared_sprites|scsunkencolonyidle.png
 		Length: *
 		Tick: 160
 	spore:
-		Filename: scsporecolony.png
+		Filename: sc_shared_sprites|scsporecolony.png
 		Length: *
 		Tick: 160
 	shoot:
-		Filename: zerg_sunkencolony_defense_scsunkencolonyshoot.png
+		Filename: sc_shared_sprites|zerg_sunkencolony_defense_scsunkencolonyshoot.png
 		Length: *
 	dead:
-		Filename: sccreepcolony.shp
+		Filename: sc_shared_sprites|sccreepcolony.shp
 	make:
 		Filename: sczbm1.shp
 		Length: *
 	icon:
-		Filename: sccreepcolonyicon.shp
+		Filename: sc_shared_icons|sccreepcolonyicon.shp
 
 scliftoff:
 	icon:
-		Filename: scliftoff.shp
+		Filename: sc_shared_sprites|scliftoff.shp
 
 ####################################################################################################
 #		UNIT TERRAN
@@ -92,16 +92,16 @@ scliftoff:
 scscvfull:
 	Inherits: terran_scv
 	Defaults:
-		Filename: scscvfull.png
+		Filename: sc_shared_sprites|scscvfull.png
 	idle:
 		Length: 1
 		Facings: -16
 		Combine:
 			terran_scv-l:
-				Filename: scscvfull.png
+				Filename: sc_shared_sprites|scscvfull.png
 				Length: 9
 			terran_scv-r:
-				Filename: scscvfull.png
+				Filename: sc_shared_sprites|scscvfull.png
 				FlipX: True
 				Frames: 7, 6, 5, 4, 3, 2, 1, 0
 	move:
@@ -109,16 +109,16 @@ scscvfull:
 		Facings: -16
 		Combine:
 			scscvrun-l:
-				Filename: scscvwalkfull.png
+				Filename: sc_shared_sprites|scscvwalkfull.png
 				Length: 9
 			scscvrun-r:
-				Filename: scscvwalkfull.png
+				Filename: sc_shared_sprites|scscvwalkfull.png
 				FlipX: True
 				Frames: 7, 6, 5, 4, 3, 2, 1, 0
 
 warhoundsparks:
 	idle:
-		Filename: TyrSparks.png
+		Filename: sc_shared_sprites|TyrSparks.png
 		Length: *
 		ZOffset: 1023
 		Scale: 1
@@ -132,7 +132,7 @@ scttruck:
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: sctruckicon.shp
+		Filename: sc_shared_icons|sctruckicon.shp
 
 scwraithdrone:
 	Defaults:
@@ -142,18 +142,18 @@ scwraithdrone:
 		Facings: -32
 		Combine:
 			terran_wraith-l:
-				Filename: scwraith.png
+				Filename: sc_shared_sprites|scwraith.png
 				Length: *
 			terran_wraith-r:
-				Filename: scwraith.png
+				Filename: sc_shared_sprites|scwraith.png
 				FlipX: True
 				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	icon:
-		Filename: scwraithicon.shp
+		Filename: sc_shared_icons|scwraithicon.shp
 
 scbattlecruiserteleport:
 	idle:
-		Filename: BattleCruiserTeleportFx.png
+		Filename: sc_shared_sprites|BattleCruiserTeleportFx.png
 		Length: *
 		ZOffset: 1023
 		Scale: 1
@@ -163,7 +163,7 @@ scbattlecruiserteleport:
 
 scbattlecruiserteleport2:
 	idle:
-		Filename: BattleCruiserTeleportFx2.png
+		Filename: sc_shared_sprites|BattleCruiserTeleportFx2.png
 		Length: *
 		ZOffset: 1023
 		Scale: 1
@@ -181,26 +181,26 @@ sctmcv.bot:
 scprobefull:
 	Inherits: protoss_probe
 	Defaults:
-		Filename: protoss_probe_scprobeidle.png
+		Filename: sc_shared_sprites|protoss_probe_scprobeidle.png
 		Offset: 0,0
 	idle:
 		Facings: -8
 
 scinterceptor:
 	Defaults:
-		Filename: scinterceptor.png
+		Filename: sc_shared_sprites|scinterceptor.png
 	idle:
 		Facings: -32
 		Combine:
 			scinterceptor-l:
-				Filename: scinterceptor.png
+				Filename: sc_shared_sprites|scinterceptor.png
 				Length: *
 			scinterceptor-r:
-				Filename: scinterceptor.png
+				Filename: sc_shared_sprites|scinterceptor.png
 				FlipX: True
 				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	icon:
-		Filename: scinterceptoricon.shp
+		Filename: sc_shared_icons|scinterceptoricon.shp
 
 scpmcv.bot:
 	Inherits: protoss_mobilenexus
@@ -208,14 +208,14 @@ scpmcv.bot:
 scdronefull:
 	Inherits: zerg_drone
 	Defaults:
-		Filename: zerg_drone_scdronefull.png
+		Filename: sc_shared_sprites|zerg_drone_scdronefull.png
 	idle:
 		Facings: -8
 
 scdroneburrow:
 	Inherits: zerg_drone
 	idle:
-		Filename: zerg_drone_scdroneburrowed.png
+		Filename: sc_shared_sprites|zerg_drone_scdroneburrowed.png
 		Start: 4
 		Facings: 1
 		Tick: 100
@@ -228,22 +228,22 @@ sczhsplash:
 
 scscourgedrone:
 	Defaults:
-		Filename: zerg_scourge.png
+		Filename: sc_shared_sprites|zerg_scourge.png
 	idle:
 		Length: 5
 		Facings: 16
 		Tick: 120
 	die:
-		Filename: zerg_scourge_scscourgedeath.png
+		Filename: sc_shared_sprites|zerg_scourge_scscourgedeath.png
 		Start: 0
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: scscourgeicon.shp
+		Filename: sc_shared_icons|scscourgeicon.shp
 
 darkswarm:
 	Defaults:
-		Filename: darkswarm.png
+		Filename: sc_shared_sprites|darkswarm.png
 		ZOffset: 2048
 	idle:
 		Length: 4
@@ -254,28 +254,28 @@ darkswarm:
 
 scbroodling:
 	Defaults:
-		Filename: scbroodlingidle.png
+		Filename: sc_shared_sprites|scbroodlingidle.png
 	idle:
-		Filename: scbroodlingidle.png
+		Filename: sc_shared_sprites|scbroodlingidle.png
 		Facings: -8
 	stand:
-		Filename: scbroodlingidle.png
+		Filename: sc_shared_sprites|scbroodlingidle.png
 		Facings: -8
 	run:
-		Filename: scbroodlingwalk.png
+		Filename: sc_shared_sprites|scbroodlingwalk.png
 		Length: 8
 		Facings: -8
 	shoot:
-		Filename: scbroodlingshoot.png
+		Filename: sc_shared_sprites|scbroodlingshoot.png
 		Length: 2
 		Facings: -8
 	die:
-		Filename: scdeath.png
+		Filename: sc_shared_sprites|scdeath.png
 		Start: 0
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: scbroodlingicon.shp
+		Filename: sc_shared_icons|scbroodlingicon.shp
 
 sczmcv.bot:
 	Inherits: zerg_hatcherydrone
@@ -288,38 +288,38 @@ scztruck:
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: sctruckicon.shp
+		Filename: sc_shared_icons|sctruckicon.shp
 
 sc_zerg_larva:
 	Defaults:
-		Filename: sclarva.png
+		Filename: sc_shared_sprites|sclarva.png
 		Tick: 125
 	idle:
-		Filename: sclarva.png
+		Filename: sc_shared_sprites|sclarva.png
 		Length: 5
 		Facings: -8
 	stand:
-		Filename: sclarva.png
+		Filename: sc_shared_sprites|sclarva.png
 		Length: 5
 		Facings: -8
 	run:
-		Filename: sclarva.png
+		Filename: sc_shared_sprites|sclarva.png
 		Length: 5
 		Facings: -8
 	makeunit:
-		Filename: scegg.png
+		Filename: sc_shared_sprites|scegg.png
 		Length: 12
 	icon:
-		Filename: scbroodlingicon.shp
+		Filename: sc_shared_icons|scbroodlingicon.shp
 
 scscarab:
 	idle:
-		Filename: scscarab.shp
+		Filename: sc_shared_sprites|scscarab.shp
 		Facings: 16
 
 scphotonbullet:
 	idle:
-		Filename: scphotonbullet.shp
+		Filename: sc_shared_sprites|scphotonbullet.shp
 		Length: 5
 
 scscoutspark:
@@ -329,7 +329,7 @@ scscoutspark:
 
 scinterceptorbullet:
 	idle:
-		Filename: scinterceptorbullet.shp
+		Filename: sc_shared_sprites|scinterceptorbullet.shp
 		Facings: 32
 
 sczlspine:
@@ -339,26 +339,26 @@ sczlspine:
 
 scmspore:
 	idle:
-		Filename: scmspore.shp
+		Filename: sc_shared_sprites|scmspore.shp
 		Length: 10
 
 scspore:
 	idle:
-		Filename: scspore.shp
+		Filename: sc_shared_sprites|scspore.shp
 		Length: 2
 
 upreaverdamage:
 	icon:
-		Filename: upreaverdamage.png
+		Filename: sc_shared_sprites|upreaverdamage.png
 
 disabledicon:
 	icon:
-		Filename: disabledicon.png
+		Filename: sc_shared_icons|disabledicon.png
 		Length: 1
 
 tspulsball:
 	idle:
-		Filename: tspulsball.shp
+		Filename: sc_shared_sprites|tspulsball.shp
 		Length: *
 		ZOffset: 1023
 		Offset: 0, 0, 24

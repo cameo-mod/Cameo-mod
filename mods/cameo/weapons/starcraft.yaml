@@ -12,7 +12,7 @@ WraithDroneLaser:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	ValidTargets: Ground, Water, Air
-	Report: TPhFi100.aud
+	Report: sc_shared_sounds|TPhFi100.aud
 	ReloadDelay: 30
 	Range: 5000
 	Projectile: Bullet
@@ -247,7 +247,7 @@ SCBROODLING:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
-	Report: zerglinghit.wav
+	Report: sc_shared_sounds|zerglinghit.wav
 	ReloadDelay: 6
 	Range: 1200
 	Warhead@Melee_Medium:

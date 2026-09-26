@@ -1,6 +1,6 @@
 td_gdi_battletank:
 	Defaults:
-		Filename: td_gdi_battletank.shp
+		Filename: td_shared_sprites|td_gdi_battletank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -16,11 +16,11 @@ td_gdi_battletank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_battletank_icon.shp
+		Filename: td_gdi_icons|td_gdi_battletank_icon.shp
 
 td_gdi_mammothtank:
 	Defaults:
-		Filename: td_gdi_mammothtank.shp
+		Filename: td_shared_sprites|td_gdi_mammothtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -32,7 +32,7 @@ td_gdi_mammothtank:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_mammothtank_icon.shp
+		Filename: td_gdi_icons|td_gdi_mammothtank_icon.shp
 
 td_gdi_humvee:
 	Defaults:
@@ -49,11 +49,11 @@ td_gdi_humvee:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_humvee_icon.shp
+		Filename: td_gdi_icons|td_gdi_humvee_icon.shp
 
 msam:
 	Defaults:
-		Filename: td_gdi_mlrs_msam.shp
+		Filename: td_shared_sprites|td_gdi_mlrs_msam.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -73,11 +73,11 @@ msam:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_mlrs_icon.shp
+		Filename: td_gdi_icons|td_gdi_mlrs_icon.shp
 
 td_gdi_boxer:
 	Defaults:
-		Filename: td_gdi_boxer.png
+		Filename: td_gdi_sprites|td_gdi_boxer.png
 		Scale: 0.75
 	idle:
 		Scale: 1
@@ -92,22 +92,22 @@ td_gdi_boxer:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_boxer_icon.png
+		Filename: td_gdi_icons|td_gdi_boxer_icon.png
 
 td_gdi_archerartillery:
 	Defaults:
-		Filename: td_gdi_archerartillery_gdiarcherchassis.png
+		Filename: td_gdi_sprites|td_gdi_archerartillery_gdiarcherchassis.png
 	idle:
 		Facings: 64
 		Offset: 0,10
 	turret:
-		Filename: td_gdi_archerartillery_gdiarchercannon.png
+		Filename: td_gdi_sprites|td_gdi_archerartillery_gdiarchercannon.png
 		Facings: 64
 	muzzle:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_archerartillery_icon.png
+		Filename: td_gdi_icons|td_gdi_archerartillery_icon.png
 
 td_gdi_apc:
 	Defaults:
@@ -132,11 +132,11 @@ td_gdi_apc:
 	unload:
 		Start: 32
 	icon:
-		Filename: td_gdi_apc_icon.shp
+		Filename: td_gdi_icons|td_gdi_apc_icon.shp
 
 td_gdi_orca:
 	Defaults:
-		Filename: td_gdi_orca.shp
+		Filename: td_gdi_sprites|td_gdi_orca.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -148,11 +148,11 @@ td_gdi_orca:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_orca_icon.shp
+		Filename: td_gdi_icons|td_gdi_orca_icon.shp
 
 a10:
 	Defaults:
-		Filename: td_gdi_upgrade_a10airstrike.shp
+		Filename: td_gdi_sprites|td_gdi_upgrade_a10airstrike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -161,11 +161,11 @@ a10:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_upgrade_a10airstrike_icon.shp
+		Filename: td_gdi_icons|td_gdi_upgrade_a10airstrike_icon.shp
 
 a10carrier:
 	Defaults:
-		Filename: td_gdi_upgrade_a10airstrike.shp
+		Filename: td_gdi_sprites|td_gdi_upgrade_a10airstrike.shp
 		Scale: 0.5
 	idle:
 		Facings: 32
@@ -175,12 +175,12 @@ a10carrier:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_upgrade_a10airstrike_icon.shp
+		Filename: td_gdi_icons|td_gdi_upgrade_a10airstrike_icon.shp
 
 gdifact:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: td_gdi_constructionyard_gdifact.shp
+		Filename: td_gdi_sprites|td_gdi_constructionyard_gdifact.shp
 	build:
 		Start: 4
 		Length: 20
@@ -200,7 +200,7 @@ gdifact:
 		Start: 48
 		Tick: 800
 	make:
-		Filename: td_gdi_constructionyard_gdifactmake.shp
+		Filename: td_gdi_sprites|td_gdi_constructionyard_gdifactmake.shp
 		Length: *
 		Tick: 80
 	icon:
@@ -211,7 +211,7 @@ gdifact:
 td_gdi_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: td_gdi_barracks.shp
+		Filename: td_gdi_sprites|td_gdi_barracks.shp
 	idle:
 		Length: 10
 		Tick: 100
@@ -223,16 +223,16 @@ td_gdi_barracks:
 		Start: 20
 		Tick: 800
 	make:
-		Filename: td_gdi_barracks_pylemake.shp
+		Filename: td_gdi_sprites|td_gdi_barracks_pylemake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: td_gdi_barracks_icon.shp
+		Filename: td_gdi_icons|td_gdi_barracks_icon.shp
 
 td_gdi_weaponsfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: td_gdi_weaponsfactory.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory.shp
 		Offset: 0,-12
 	idle:
 		ZOffset: -511
@@ -243,38 +243,38 @@ td_gdi_weaponsfactory:
 		Start: 2
 		Tick: 800
 	build-top:
-		Filename: td_gdi_weaponsfactory_weap2.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_weap2.shp
 		Length: 10
 		ZOffset: -1024
 	damaged-build-top:
-		Filename: td_gdi_weaponsfactory_weap2.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_weap2.shp
 		Start: 10
 		Length: 10
 		ZOffset: -1024
 	customhack:
-		Filename: td_gdi_weaponsfactory_weap2.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_weap2.shp
 		Length: 1
 	damaged-customhack:
-		Filename: td_gdi_weaponsfactory_weap2.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_weap2.shp
 		Start: 10
 		Length: 1
 	place:
-		Filename: td_gdi_weaponsfactory_make.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_make.shp
 		Start: 19
 	make:
-		Filename: td_gdi_weaponsfactory_make.shp
+		Filename: td_gdi_sprites|td_gdi_weaponsfactory_make.shp
 		Length: *
 		Tick: 80
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: td_gdi_weaponsfactory_icon.shp
+		Filename: td_gdi_icons|td_gdi_weaponsfactory_icon.shp
 		Offset: 0,0
 
 td_gdi_advancedcommunicationscenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: td_gdi_advancedcommunicationscenter.shp
+		Filename: td_gdi_sprites|td_gdi_advancedcommunicationscenter.shp
 	idle:
 		Length: 16
 		Tick: 100
@@ -286,22 +286,22 @@ td_gdi_advancedcommunicationscenter:
 		Start: 32
 		Tick: 800
 	make:
-		Filename: td_gdi_advancedcommunicationscenter_eyemake.shp
+		Filename: td_gdi_sprites|td_gdi_advancedcommunicationscenter_eyemake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: td_gdi_advancedcommunicationscenter_icon.shp
+		Filename: td_gdi_icons|td_gdi_advancedcommunicationscenter_icon.shp
 		Scale: 1
 
 td_gdi_ioncannonuplink:
 	icon:
-		Filename: td_gdi_ioncannonuplink_icon.png
+		Filename: td_gdi_icons|td_gdi_ioncannonuplink_icon.png
 		Offset: 0,0
 
 td_gdi_guardtower:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: td_gdi_guardtower.shp
+		Filename: td_gdi_sprites|td_gdi_guardtower.shp
 	idle:
 	damaged-idle:
 		Start: 1
@@ -311,7 +311,7 @@ td_gdi_guardtower:
 	make:
 		Combine:
 			gtwrmake:
-				Filename: gtwrmake.shp
+				Filename: td_gdi_sprites|gtwrmake.shp
 				Length: 15
 		Length: 15
 		Tick: 80
@@ -322,17 +322,17 @@ td_gdi_guardtower:
 	bib:
 		Offset: -1,-2
 	icon:
-		Filename: td_gdi_guardtower_icon.shp
+		Filename: td_gdi_icons|td_gdi_guardtower_icon.shp
 
 td_gdi_skyshield:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: td_gdi_skyshield.png
+		Filename: td_gdi_sprites|td_gdi_skyshield.png
 		Offset: 0,-2
 	idle:
 		Facings: 64
 	make:
-		Filename: td_gdi_skyshield_make.png
+		Filename: td_gdi_sprites|td_gdi_skyshield_make.png
 		Length: *
 	damaged-idle:
 		Facings: 64
@@ -343,13 +343,13 @@ td_gdi_skyshield:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: td_gdi_skyshield_icon.png
+		Filename: td_gdi_icons|td_gdi_skyshield_icon.png
 		Offset: 0,0
 
 td_gdi_advancedguardtower:
 	Inherits: ^WithBuildingBibSilo
 	Defaults:
-		Filename: td_gdi_advancedguardtower.shp
+		Filename: td_gdi_sprites|td_gdi_advancedguardtower.shp
 		Offset: 0,-26
 	idle:
 	damaged-idle:
@@ -358,7 +358,7 @@ td_gdi_advancedguardtower:
 		Start: 2
 		Tick: 800
 	make:
-		Filename: td_gdi_advancedguardtower_make.shp
+		Filename: td_gdi_sprites|td_gdi_advancedguardtower_make.shp
 		Length: *
 		Tick: 80
 	muzzle:
@@ -371,13 +371,13 @@ td_gdi_advancedguardtower:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_advancedguardtower_icon.shp
+		Filename: td_shared_icons|td_gdi_advancedguardtower_icon.shp
 		Offset: 0,0
 
 td_gdi_grenadier:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: td_gdi_grenadier.shp
+		Filename: td_gdi_sprites|td_gdi_grenadier.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -458,55 +458,55 @@ td_gdi_grenadier:
 		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
-		Filename: td_gdi_grenadier_e2rot.shp
+		Filename: td_gdi_sprites|td_gdi_grenadier_e2rot.shp
 		Start: 16
 		Length: 4
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: td_gdi_grenadier_icon.shp
+		Filename: td_gdi_icons|td_gdi_grenadier_icon.shp
 
 cncpt:
 	Defaults:
-		Filename: cncpt.shp
+		Filename: td_gdi_sprites|cncpt.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
 	turret:
-		Filename: ssam.shp
+		Filename: td_gdi_sprites|ssam.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: GDIMissileCruiserIcon.png
+		Filename: td_gdi_icons|GDIMissileCruiserIcon.png
 
 gdicarrier:
 	Defaults:
-		Filename: gdicarrier.shp
+		Filename: td_gdi_sprites|gdicarrier.shp
 	idle:
 		Facings: 64
 		Offset: 0,32
 		Scale: 0.8
 	icon:
-		Filename: futurecarrier.png
+		Filename: td_gdi_sprites|futurecarrier.png
 
 cncca:
 	Defaults:
 	idle:
-		Filename: GdiBattleshipSpritesheet.png
+		Filename: td_gdi_sprites|GdiBattleshipSpritesheet.png
 		Scale: 1.25
 		Facings: 64
 	turret:
-		Filename: GdiBattleshipTurretSpritesheet.png
+		Filename: td_gdi_sprites|GdiBattleshipTurretSpritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: RailgunBattleshipIcon.png
+		Filename: td_gdi_icons|RailgunBattleshipIcon.png
 
 td_gdi_exosuit:
 	Defaults:
-		Filename: td_gdi_exosuit_newegg.shp
+		Filename: td_gdi_sprites|td_gdi_exosuit_newegg.shp
 		Scale: 0.3
 		Offset: 0,-5
 	idle:
@@ -524,17 +524,17 @@ td_gdi_exosuit:
 		Facings: 8
 		Tick: 100
 	icon:
-		Filename: td_gdi_exosuit_icon.shp
+		Filename: td_gdi_icons|td_gdi_exosuit_icon.shp
 		Offset: 0,0
 
 newhumvee:
 	Defaults:
-		Filename: td_gdi_promotion_humveemkii_newhumvee.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_humveemkii_newhumvee.shp
 	idle:
 		Facings: -64
 		Scale: 0.5
 	turret:
-		Filename: td_gdi_promotion_humveemkii_newhumvee2.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_humveemkii_newhumvee2.shp
 		Offset: 0,10
 		Start: 64
 		Facings: 64
@@ -543,13 +543,13 @@ newhumvee:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_humveemkii_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_humveemkii_icon.shp
 
 td_gdi_officer:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 0.71
-		Filename: td_gdi_promotion_gdiofficer_modofficer.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_gdiofficer_modofficer.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -651,11 +651,11 @@ td_gdi_officer:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_gdiofficer_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_gdiofficer_icon.shp
 
 td_gdi_predatortank:
 	Defaults:
-		Filename: td_gdi_promotion_predatortank_gdipredator.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_predatortank_gdipredator.shp
 	idle:
 		Facings: -64
 		Scale: 0.25
@@ -672,11 +672,11 @@ td_gdi_predatortank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_predatortank_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_predatortank_icon.shp
 
 td_gdi_mammothtankmkiii:
 	Defaults:
-		Filename: td_gdi_promotion_mammothtankmk3_gdimammoth3.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_mammothtankmk3_gdimammoth3.shp
 	idle:
 		Facings: -64
 		Scale: 0.25
@@ -689,19 +689,19 @@ td_gdi_mammothtankmkiii:
 		Length: *
 		Scale: 1.333
 	icon:
-		Filename: td_gdi_promotion_mammothtankmk3_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_mammothtankmk3_icon.shp
 
 td_gdi_sonicmissilesoldier:
 	Inherits: e3
 	Defaults:
-		Filename: td_gdi_promotion_missilesoldier.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_missilesoldier.shp
 	icon:
-		Filename: td_gdi_promotion_missilesoldier_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_missilesoldier_icon.shp
 
 td_gdi_empgrenadier:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: td_gdi_promotion_empgrenadier_tdempgrenadier.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_empgrenadier_tdempgrenadier.shp
 		Scale: 0.96
 	stand:
 		Start: 1
@@ -810,13 +810,13 @@ td_gdi_empgrenadier:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: td_gdi_promotion_empgrenadier_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_empgrenadier_icon.shp
 
 td_gdi_shotgunner:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 0.92
-		Filename: td_gdi_promotion_shotgunner_tdshotgunner.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_shotgunner_tdshotgunner.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -923,11 +923,11 @@ td_gdi_shotgunner:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_shotgunner_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_shotgunner_icon.shp
 
 td_gdi_heavysniper:
 	Defaults:
-		Filename: td_gdi_promotion_sniper_gdisniper.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_sniper_gdisniper.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1038,11 +1038,11 @@ td_gdi_heavysniper:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: td_gdi_promotion_sniper_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_sniper_icon.shp
 
 td_gdi_assaultapc:
 	Defaults:
-		Filename: td_gdi_promotion_assaultapc_newapc.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_assaultapc_newapc.shp
 	idle:
 		Facings: -64
 		Scale: 0.4
@@ -1062,11 +1062,11 @@ td_gdi_assaultapc:
 	unload:
 		Facings: -32
 	icon:
-		Filename: td_gdi_promotion_assaultapc_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_assaultapc_icon.shp
 
 td_gdi_firehawk:
 	Defaults:
-		Filename: td_gdi_promotion_firehawk_firehawk.shp
+		Filename: td_gdi_sprites|td_gdi_promotion_firehawk_firehawk.shp
 		Scale: 2
 	idle:
 		Facings: 64
@@ -1074,13 +1074,13 @@ td_gdi_firehawk:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_promotion_firehawk_icon.shp
+		Filename: td_gdi_icons|td_gdi_promotion_firehawk_icon.shp
 
 td_gdi_havoc:
 	Inherits: ^InfantryOverlays
 	Inherits@2: ^TDRA2InfantryDeaths
 	Defaults:
-		Filename: td_gdi_havoc.shp
+		Filename: td_gdi_sprites|td_gdi_havoc.shp
 		Scale: 0.8
 	stand:
 		Facings: 8
@@ -1135,7 +1135,7 @@ td_gdi_havoc:
 		Length: 20
 		Tick: 120
 	cheer:
-		Filename: rmbo.shp
+		Filename: td_shared_sprites|rmbo.shp
 		Scale: 1
 		Start: 396
 		Length: 3
@@ -1163,14 +1163,14 @@ td_gdi_havoc:
 	#	Tick: 80
 	# Burn
 	#die5:
-	#	Filename: rmbo.shp
+	#	Filename: td_shared_sprites|rmbo.shp
 	#	Scale: 1
 	#	Start: 354
 	#	Length: 18
 	#	Tick: 80
 	# Tib
 	#die6:
-	#	Filename: rmbo.shp
+	#	Filename: td_shared_sprites|rmbo.shp
 	#	Scale: 1
 	#	Start: 308
 	#	Length: 4
@@ -1188,51 +1188,51 @@ td_gdi_havoc:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: td_gdi_havoc_icon.shp
+		Filename: td_gdi_icons|td_gdi_havoc_icon.shp
 
 cncsyrd:
 	Defaults:
-		Filename: GdiNavalYardUdSpritesheet.png
+		Filename: td_gdi_sprites|GdiNavalYardUdSpritesheet.png
 		Scale: 1.25
 	idle:
 		Start: 13
 		Length: 6
 	damaged-idle:
-		Filename: GdiNavalYarddSpritesheet.png
+		Filename: td_gdi_sprites|GdiNavalYarddSpritesheet.png
 		Length: *
 	make:
 		Length: 13
 	dead:
-		Filename: GdiNavalYarddSpritesheet.png
+		Filename: td_gdi_sprites|GdiNavalYarddSpritesheet.png
 		Length: 1
 	icon:
-		Filename: gdishipyardicon.png
+		Filename: td_gdi_icons|gdishipyardicon.png
 
 td_gdi_defenserig:
 	Defaults:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
 		Facings: 64
 	deployed:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigtower.png
 		Facings: 64
 	damaged-deployed:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigtower.png
 		Facings: 64
 	turret:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigphalanx.png
+		Filename: td_gdi_sprites|td_gdi_promotion_gdidefenserig_gdirigphalanx.png
 		Facings: 64
 		Offset: 0,32
 		Scale: 1.5
 	make:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
 	dead:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	dot:
@@ -1248,11 +1248,11 @@ td_gdi_defenserig:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_promotion_gdidefenserig_icon.png
+		Filename: td_gdi_icons|td_gdi_promotion_gdidefenserig_icon.png
 
 gdirigdrone:
 	Defaults:
-		Filename: gdirigdrone.png
+		Filename: td_gdi_sprites|gdirigdrone.png
 		Offset: 0,24
 	idle:
 		Start: 8
@@ -1284,32 +1284,32 @@ gdirigdrone:
 
 longrangesensorsicon:
 	icon:
-		Filename: td_gdi_upgrade_longrangesensors_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_longrangesensors_icon.png
 
 armorpiercingbulletsicon:
 	icon:
-		Filename: td_gdi_upgrade_armorpiercingbullets_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_armorpiercingbullets_icon.png
 
 aircraftarmorplatingicon:
 	icon:
-		Filename: td_gdi_upgrade_heavyaircraftarmorplating_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_heavyaircraftarmorplating_icon.png
 
 advancedmissiletargetingicon:
 	icon:
-		Filename: td_gdi_upgrade_advancedmissiletargeting_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_advancedmissiletargeting_icon.png
 
 cuttingedgeequipmenticon:
 	icon:
-		Filename: td_gdi_upgrade_cuttingedgeequipment_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_cuttingedgeequipment_icon.png
 
 highvelocitycannonsicon:
 	icon:
-		Filename: td_gdi_upgrade_highvelocitycannons_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_highvelocitycannons_icon.png
 
 lightweightarmorplatingicon:
 	icon:
-		Filename: td_gdi_upgrade_lightweightarmorplating_icon.png
+		Filename: td_gdi_icons|td_gdi_upgrade_lightweightarmorplating_icon.png
 
 havocexosuit:
 	icon:
-		Filename: td_gdi_promotion_havocandexosuit_icon.png
+		Filename: td_gdi_icons|td_gdi_promotion_havocandexosuit_icon.png

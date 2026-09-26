@@ -260,17 +260,17 @@ e3:
 		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
-		Filename: td_nod_rocketsoldier_e3rot.shp
+		Filename: td_shared_sprites|td_nod_rocketsoldier_e3rot.shp
 		Start: 16
 		Length: 4
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: td_nod_rocketsoldier_icon.shp
+		Filename: td_shared_icons|td_nod_rocketsoldier_icon.shp
 
 td_gdi_mlrs:
 	Defaults:
-		Filename: td_nod_ssmlauncher_mlrs.shp
+		Filename: td_shared_sprites|td_nod_ssmlauncher_mlrs.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -290,5 +290,5 @@ td_gdi_mlrs:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_nod_ssmlauncher_icon.shp
+		Filename: td_shared_icons|td_nod_ssmlauncher_icon.shp
 

@@ -172,7 +172,7 @@ TSCABALObeliskLaserFire:
 	ReloadDelay: 90
 	Range: 12288
 	ValidTargets: Ground, Water
-	Report: cabal_obelisk_fire.wav
+	Report: ts_cabal_sounds|cabal_obelisk_fire.wav
 	SoundVolume: 2.0
 	Projectile:
 		Width: 110
@@ -742,7 +742,7 @@ TSCABALEnlightedLaser:
 			Wood: 9
 TSRobotHackingControl:
 	ReloadDelay: 50
-	Report: tsrobothacking.wav
+	Report: ts_cabal_sounds|tsrobothacking.wav
 	Range: 8000
 	TargetActorCenter: true
 	ValidTargets: HackableRobot, Cyborg

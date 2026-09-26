@@ -63,8 +63,8 @@ protoss_shuttle:
 	ActorStatValues:
 		Upgrades: protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	WithCargoSounds:
-		EnterSounds: tdrtra00.wav
-		ExitSounds: tdrtra00.wav
+		EnterSounds: sc_shared_sounds|tdrtra00.wav
+		ExitSounds: sc_shared_sounds|tdrtra00.wav
 
 protoss_observer:
 	Inherits: ^AirProtoss

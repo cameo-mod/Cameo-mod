@@ -50,7 +50,7 @@
 		Length: 15
 		ShadowStart: 441
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Start: 159
@@ -88,47 +88,47 @@
 tsengineer:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: ts_gdi_engineer.shp
+		Filename: ts_shared_sprites|ts_gdi_engineer.shp
 	die3:
 		Start: 149
 		Length: 15
 		ShadowStart: 441
 	icon:
-		Filename: ts_gdi_engineer_icon.shp
+		Filename: ts_shared_icons|ts_gdi_engineer_icon.shp
 
 altengi:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: ts_nod_engineer_altengi.shp
+		Filename: ts_shared_sprites|ts_nod_engineer_altengi.shp
 	icon:
-		Filename: ts_gdi_engineer_icon.shp
+		Filename: ts_shared_icons|ts_gdi_engineer_icon.shp
 
 tse3:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_nod_rocketinfantry_alte3.shp
+		Filename: ts_shared_sprites|ts_nod_rocketinfantry_alte3.shp
 	icon:
 		Filename: ts_nod_rocketinfantry_icon.png
 
 tstratos:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: forgotten_mutant_tsmutant.shp
+		Filename: ts_shared_sprites|forgotten_mutant_tsmutant.shp
 	icon:
-		Filename: forgot_tratos_icon.png
+		Filename: ts_shared_icons|forgot_tratos_icon.png
 
 tse3mut:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_nod_rocketinfantry_alte3.shp
+		Filename: ts_shared_sprites|ts_nod_rocketinfantry_alte3.shp
 	icon:
-		Filename: forgotten_rocketinfantry_icon.png
+		Filename: ts_shared_icons|forgotten_rocketinfantry_icon.png
 
 tsfloater:
 	idle:
-		Filename: tsfloater.shp
+		Filename: ts_shared_sprites|tsfloater.shp
 		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
@@ -137,7 +137,7 @@ tsfloater:
 
 tsvislrg:
 	idle:
-		Filename: tsvislrg.shp
+		Filename: ts_shared_sprites|tsvislrg.shp
 		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
@@ -146,7 +146,7 @@ tsvislrg:
 
 tsvissml:
 	idle:
-		Filename: tsvissml.shp
+		Filename: ts_shared_sprites|tsvissml.shp
 		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
@@ -169,11 +169,11 @@ dtruck:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: ts_gdi_tiberiumharvester_icon.shp
+		Filename: ts_shared_icons|ts_gdi_tiberiumharvester_icon.shp
 
 tsprobe:
 	Defaults:
-		Filename: tsgghunt.shp
+		Filename: ts_shared_sprites|tsgghunt.shp
 	idle:
 	shadow:
 		Start: 8
@@ -186,7 +186,7 @@ tsprobe:
 
 tsldrone:
 	Defaults:
-		Filename: tsdlimpmake.shp
+		Filename: ts_shared_sprites|tsdlimpmake.shp
 	idle:
 		ShadowStart: 42
 	make:
@@ -196,7 +196,7 @@ tsldrone:
 		Start: 41
 		ShadowStart: 83
 	icon:
-		Filename: tsldroneicon.shp
+		Filename: ts_shared_icons|tsldroneicon.shp
 
 # tsdlimpmake:
 # 	idle:
@@ -205,14 +205,14 @@ tsldrone:
 
 ts_nod_attackcycle:
 	Defaults:
-		Filename: ts_nod_attackcycle.shp
+		Filename: ts_shared_sprites|ts_nod_attackcycle.shp
 		Scale: 1.25
 	idle:
-		Filename: ts_nod_attackcycle.shp
+		Filename: ts_shared_sprites|ts_nod_attackcycle.shp
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: ts_nod_attackcycle_icon.shp
+		Filename: ts_shared_icons|ts_nod_attackcycle_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -223,20 +223,20 @@ ts_nod_ticktank:
 	idle:
 		Filename: invisibleitem.shp
 	deploy-idle:
-		Filename: ts_nod_ticktank_tsgttick.shp
+		Filename: ts_shared_sprites|ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 		ShadowStart: 3
 	make:
-		Filename: ts_nod_ticktank_make.shp
+		Filename: ts_shared_sprites|ts_nod_ticktank_make.shp
 		Length: 24
 		ShadowStart: 25
 		Offset: 0, -10, 0
 		Tick: 10
 	dead:
-		Filename: ts_nod_ticktank_tsgttick.shp
+		Filename: ts_shared_sprites|ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 	icon:
-		Filename: ts_nod_ticktank_icon.png
+		Filename: ts_shared_icons|ts_nod_ticktank_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: gunfire2.shp
@@ -248,7 +248,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ts_gdi_mobileconstructionvehicle_icon.shp
+		Filename: ts_shared_icons|ts_gdi_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -274,45 +274,45 @@ tsmcv:
 
 tsartspid:
 	idle:
-		Filename: cabal_artilleryspider.png
+		Filename: ts_shared_sprites|cabal_artilleryspider.png
 		Facings: 64
 		Start: 64
 	icon:
-		Filename: cabal_artilleryspider_icon.png
+		Filename: ts_shared_icons|cabal_artilleryspider_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_artilleryspider.png
+		Filename: ts_shared_sprites|cabal_artilleryspider.png
 		Facings: 64
 		Start: 64
 	walk:
-		Filename: cabal_artilleryspider.png
+		Filename: ts_shared_sprites|cabal_artilleryspider.png
 		Length: 8
 		Facings: 8
 		Tick: 60
 
 tstnkspid:
 	idle:
-		Filename: cabal_tarantula.png
+		Filename: ts_shared_sprites|cabal_tarantula.png
 		Facings: 64
 		Start: 64
 	icon:
-		Filename: cabal_tarantula_icon.png
+		Filename: ts_shared_icons|cabal_tarantula_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_tarantula.png
+		Filename: ts_shared_sprites|cabal_tarantula.png
 		Facings: 64
 		Start: 64
 	walk:
-		Filename: cabal_tarantula.png
+		Filename: ts_shared_sprites|cabal_tarantula.png
 		Length: 8
 		Facings: 8
 		Tick: 60
 	turret:
-		Filename: cabal_tarantula.png
+		Filename: ts_shared_sprites|cabal_tarantula.png
 		Start: 128
 		Facings: 64
 		Offset: 0, 0, 12
@@ -323,34 +323,34 @@ tsgtcnst:
 		Scale: 1.25
 		Offset: -8, -20, 20
 	idle:
-		Filename: ts_gdi_constructionyard_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	build:
-		Filename: ts_gdi_constructionyard_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ts_gdi_constructionyard_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_cabal.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: ts_gdi_constructionyard_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: ts_gdi_constructionyard_cabal_make.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_cabal_make.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Length: 20
 		ZOffset: 1023
 	damaged-crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Length: 20
 		ZOffset: 1023
 	critical-crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Start: 20
 		Length: 20
 		ZOffset: 1023
@@ -359,20 +359,20 @@ tsgtcnst:
 	damaged-idle-top:
 		Filename: invisibleitem.shp
 	idle-side:
-		Filename: ts_gdi_constructionyard_a.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_a.shp
 		Length: 10
 	damaged-idle-side:
-		Filename: ts_gdi_constructionyard_a.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_a.shp
 		Start: 10
 		Length: 10
 	idle-front:
-		Filename: ts_gdi_constructionyard_b.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_b.shp
 		Length: 10
 	damaged-idle-front:
-		Filename: ts_gdi_constructionyard_b.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_b.shp
 		Length: 10
 	icon:
-		Filename: ts_gdi_constructionyard_icon.png
+		Filename: ts_shared_icons|ts_gdi_constructionyard_icon.png
 		Offset: 0,0
 
 drplasma2:
@@ -384,7 +384,7 @@ drplasma2:
 
 tstorpedo:
 	Defaults:
-		Filename: tstorpedo.png
+		Filename: ts_shared_sprites|tstorpedo.png
 		Scale: 1.6
 	idle:
 		Length: 3
@@ -399,31 +399,31 @@ tsnttmpl:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: tsnttmpl.shp
+		Filename: ts_shared_sprites|tsnttmpl.shp
 		Offset: -12,-42, 42
 	idle:
-		Filename: tsnttmpl.shp
+		Filename: ts_shared_sprites|tsnttmpl.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsnttmpl.shp
+		Filename: ts_shared_sprites|tsnttmpl.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsnttmpl.shp
+		Filename: ts_shared_sprites|tsnttmpl.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	idle-lights:
-		Filename: tsnttmpl_a.shp
+		Filename: ts_shared_sprites|tsnttmpl_a.shp
 		Length: 16
 		Tick: 120
 	damaged-idle-lights:
-		Filename: tsnttmpl_a.shp
+		Filename: ts_shared_sprites|tsnttmpl_a.shp
 		Start: 16
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsnttmplmake.shp
+		Filename: ts_shared_sprites|tsnttmplmake.shp
 	active:
 		Filename: invisibleitem.shp
 	smoke:
@@ -435,92 +435,92 @@ tsnttmpl:
 	down:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsnodtempleicon.shp
+		Filename: ts_shared_icons|tsnodtempleicon.shp
 		Offset: 0, 0
 
 tsctarmr:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: tsctarmr.shp
+		Filename: ts_shared_sprites|tsctarmr.shp
 	idle:
-		Filename: tsctarmr.shp
+		Filename: ts_shared_sprites|tsctarmr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsctarmr.shp
+		Filename: ts_shared_sprites|tsctarmr.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsctarmr.shp
+		Filename: ts_shared_sprites|tsctarmr.shp
 		Start: 1
 		ShadowStart: 4
 		Tick: 400
 	icon:
-		Filename: tstmplicon.shp
+		Filename: ts_shared_icons|tstmplicon.shp
 		Offset: 0, 0
 
 tsnthpadmut:
 	Defaults:
 		Scale: 1.25
-		Filename: forgotten_helipad.shp
+		Filename: ts_shared_sprites|forgotten_helipad.shp
 		Offset: 0, -24, 0
 	idle:
-		Filename: forgotten_helipad.shp
+		Filename: ts_shared_sprites|forgotten_helipad.shp
 		ShadowStart: 2
 		ZOffset: -1c511
 		# Offset: 0, -24, 3
 	damaged-idle:
-		Filename: forgotten_helipad.shp
+		Filename: ts_shared_sprites|forgotten_helipad.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1c511
 		# Offset: 0, -24, 3
 	dead:
-		Filename: forgotten_helipad.shp
+		Filename: ts_shared_sprites|forgotten_helipad.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1c511
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: ts_nod_helipad_bib.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: ts_nod_helipad_bib.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: ts_nod_helipad_bib.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
 		Tick: 400
 	idle-lights:
-		Filename: forgotten_helipad_b.shp
+		Filename: ts_shared_sprites|forgotten_helipad_b.shp
 		Start: 8
 		Tick: 100
 		ZOffset: -1c511
 	active:
-		Filename: forgotten_helipad_a.shp
+		Filename: ts_shared_sprites|forgotten_helipad_a.shp
 		Length: 28
 		ZOffset: -1c511
 		Tick: 100
 	damaged-active:
-		Filename: forgotten_helipad_a.shp
+		Filename: ts_shared_sprites|forgotten_helipad_a.shp
 		Length: 28
 		ZOffset: -1c511
 		Tick: 100
 	damaged-idle-lights:
-		Filename: forgotten_helipad_b.shp
+		Filename: ts_shared_sprites|forgotten_helipad_b.shp
 		Start: 8
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_make.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_make.shp
 	icon:
-		Filename: forgotten_helipad_icon.png
+		Filename: ts_shared_icons|forgotten_helipad_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -528,50 +528,50 @@ gdi_tsgtsilo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 		Offset: 4, -24, 24
 	idle:
-		Filename: ts_gdi_silo_tsgtsilo_a.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_a.shp
 	damaged-idle:
-		Filename: ts_gdi_silo_tsgtsilo_a.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_a.shp
 		Start: 4
 	stages:
-		Filename: ts_gdi_silo_tsgtsilo_a.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_a.shp
 		Length: 4
 	damaged-stages:
-		Filename: ts_gdi_silo_tsgtsilo_a.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_a.shp
 		Start: 4
 		Length: 4
 	idle-underlay:
 		Scale: 1
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-idle-underlay:
 		Scale: 1
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	dead:
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -512
 		Tick: 400
 	idle-lights:
-		Filename: ts_gdi_silo_tsgtsilo_b.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_b.shp
 		Length: 16
 		Tick: 120
 	damaged-idle-lights:
-		Filename: ts_gdi_silo_tsgtsilo_b.shp
+		Filename: ts_shared_sprites|ts_gdi_silo_tsgtsilo_b.shp
 		Start: 16
 		Length: 16
 		Tick: 120
 	make:
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 	icon:
-		Filename: ts_gdi_silo_icon.shp
+		Filename: ts_shared_icons|ts_gdi_silo_icon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -581,55 +581,55 @@ nod_tsgtsilo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: ts_nod_silo_tsgtsilo.shp
+		Filename: ts_shared_sprites|ts_nod_silo_tsgtsilo.shp
 		Offset: 4, -24, 24
 	idle:
-		Filename: ts_nod_silo.shp
+		Filename: ts_shared_sprites|ts_nod_silo.shp
 	damaged-idle:
-		Filename: ts_nod_silo.shp
+		Filename: ts_shared_sprites|ts_nod_silo.shp
 		Start: 1
 	stages:
-		Filename: ts_nod_silo_s.shp
+		Filename: ts_shared_sprites|ts_nod_silo_s.shp
 		Length: 4
 	damaged-stages:
-		Filename: ts_nod_silo_sd.shp
+		Filename: ts_shared_sprites|ts_nod_silo_sd.shp
 		Length: 4
 	idle-underlay:
 		Scale: 1
-		Filename: ts_nod_silo_b.shp
+		Filename: ts_shared_sprites|ts_nod_silo_b.shp
 		Length: 20
 		ZOffset: -512
 	damaged-idle-underlay:
 		Scale: 1
-		Filename: ts_nod_silo_b.shp
+		Filename: ts_shared_sprites|ts_nod_silo_b.shp
 		Length: 20
 		ZOffset: -512
 	dead:
-		Filename: ts_nod_silo.shp
+		Filename: ts_shared_sprites|ts_nod_silo.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -512
 		Tick: 400
 	idle-lights:
-		Filename: ts_nod_silo_a.shp
+		Filename: ts_shared_sprites|ts_nod_silo_a.shp
 		Length: 20
 		Tick: 120
 	damaged-idle-lights:
-		Filename: ts_nod_silo_ad.shp
+		Filename: ts_shared_sprites|ts_nod_silo_ad.shp
 		Length: 20
 		Tick: 120
 	idle-window:
-		Filename: ts_nod_silo_w.shp
+		Filename: ts_shared_sprites|ts_nod_silo_w.shp
 		Length: 3
 		Tick: 120
 	damaged-idle-window:
-		Filename: ts_nod_silo_wd.shp
+		Filename: ts_shared_sprites|ts_nod_silo_wd.shp
 		Length: 3
 		Tick: 120
 	make:
-		Filename: ts_nod_silo_make.shp
+		Filename: ts_shared_sprites|ts_nod_silo_make.shp
 	icon:
-		Filename: ts_nod_silo_icon.png
+		Filename: ts_shared_icons|ts_nod_silo_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -638,115 +638,115 @@ nod_tsgtsilo:
 tsgtdept:
 	Defaults:
 		Scale: 1.5
-		Filename: ts_gdi_servicedepot_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal.shp
 		Offset: 8, -32, 1
 	idle:
-		Filename: ts_gdi_servicedepot_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal.shp
 		ShadowStart: 3
 		# Offset: 0, -16, 12
 	damaged-idle:
-		Filename: ts_gdi_servicedepot_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal.shp
 		Start: 1
 		ShadowStart: 4
 		# Offset: 0, -16, 12
 	dead:
-		Filename: ts_gdi_servicedepot_cabal.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 		# Offset: 0, -16, 12
 	ground:
 		Scale: 1
-		Filename: ts_gdi_servicedepot_cabal_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
 		Scale: 1
-		Filename: ts_gdi_servicedepot_cabal_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
 		Scale: 1
-		Filename: ts_gdi_servicedepot_cabal_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c611
 		Tick: 400
 	idle-light:
-		Filename: ts_gdi_servicedepot_cabal_b.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_b.shp
 		Length: 7
 		Tick: 120
 	damaged-idle-light:
-		Filename: ts_gdi_servicedepot_cabal_b.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_b.shp
 		Start: 7
 		Length: 7
 		Tick: 120
 	circuits:
-		Filename: ts_gdi_servicedepot_cabal_a.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_a.shp
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	damaged-circuits:
-		Filename: ts_gdi_servicedepot_cabal_a.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_a.shp
 		Start: 5
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	crane-start:
-		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_c.shp
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-loop:
-		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	active:
-		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	damaged-active:
-		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-end:
-		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_c.shp
 		Start: 10
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
 		Scale: 1
-		Filename: ts_gdi_servicedepot_cabal_d.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_d.shp
 		ZOffset: -1c511
 	damaged-platform:
 		Scale: 1
-		Filename: ts_gdi_servicedepot_cabal_d.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_d.shp
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: ts_gdi_servicedepot_cabal_make.shp
+		Filename: ts_shared_sprites|ts_gdi_servicedepot_cabal_make.shp
 	icon:
-		Filename: ts_gdi_servicedepot_icon.png
+		Filename: ts_shared_icons|ts_gdi_servicedepot_icon.png
 		Offset: 0, 0
 
 tsnodmmsil:
 	idle:
-		Filename: glgadfly_missile.shp
+		Filename: ts_shared_sprites|glgadfly_missile.shp
 		Facings: -32
 
 tsapache:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ts_nod_harpy_icon.shp
+		Filename: ts_shared_icons|ts_nod_harpy_icon.shp
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -757,17 +757,17 @@ tsapache:
 
 tsfsmoker:
 	idle:
-		Filename: forgot_smoker.png
+		Filename: ts_shared_sprites|forgot_smoker.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_smoker_icon.png
+		Filename: ts_shared_icons|forgot_smoker_icon.png
 
 forgotten_chinook:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsotrnicon.shp
+		Filename: ts_shared_icons|tsotrnicon.shp
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -785,7 +785,7 @@ forgotten_chinook:
 
 tsjumpjet:
 	Defaults:
-		Filename: ts_gdi_jumpjetinfantry_altjumpjet.shp
+		Filename: ts_shared_sprites|ts_gdi_jumpjetinfantry_altjumpjet.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	idle:
@@ -885,13 +885,13 @@ tsjumpjet:
 	# Fly through air squish on ground
 	icon:
 		Offset: 0,0
-		Filename: ts_gdi_jumpjetinfantry_icon.shp
+		Filename: ts_shared_icons|ts_gdi_jumpjetinfantry_icon.shp
 
 forgot_conyard:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: forgotten_constructionyard.png
+		Filename: ts_shared_sprites|forgotten_constructionyard.png
 		Offset: 0, -20, 20
 	idle:
 		Start: 64
@@ -915,15 +915,15 @@ forgot_conyard:
 	make:
 		Length: 32
 	crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Length: 20
 		ZOffset: 1023
 	damaged-crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Length: 20
 		ZOffset: 1023
 	critical-crane-overlay:
-		Filename: ts_gdi_constructionyard_d.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_d.shp
 		Start: 20
 		Length: 20
 		ZOffset: 1023
@@ -932,27 +932,27 @@ forgot_conyard:
 	damaged-idle-top:
 		Filename: invisibleitem.shp
 	idle-side:
-		Filename: ts_gdi_constructionyard_a.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_a.shp
 		Length: 10
 	damaged-idle-side:
-		Filename: ts_gdi_constructionyard_a.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_a.shp
 		Start: 10
 		Length: 10
 	idle-front:
-		Filename: ts_gdi_constructionyard_b.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_b.shp
 		Length: 10
 	damaged-idle-front:
-		Filename: ts_gdi_constructionyard_b.shp
+		Filename: ts_shared_sprites|ts_gdi_constructionyard_b.shp
 		Length: 10
 	icon:
-		Filename: forgotten_constructionyard_icon.png
+		Filename: ts_shared_icons|forgotten_constructionyard_icon.png
 		Offset: 0,0
 
 forgot_power:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1.25
-		Filename: forgotten_crystalpowerextractor.png
+		Filename: ts_shared_sprites|forgotten_crystalpowerextractor.png
 	idle:
 		Start: 32
 		Length: 8
@@ -968,7 +968,7 @@ forgot_power:
 	make:
 		Length: 32
 	icon:
-		Filename: forgotten_crystalpowerextractor_icon.png
+		Filename: ts_shared_icons|forgotten_crystalpowerextractor_icon.png
 		Offset: 0, 0, 25
 		UseTilesetCode: false
 
@@ -977,22 +977,22 @@ forgot_barracks:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: forgotten_barracks.png
+		Filename: ts_shared_sprites|forgotten_barracks.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgotten_barracks.png
+		Filename: ts_shared_sprites|forgotten_barracks.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgotten_barracks.png
+		Filename: ts_shared_sprites|forgotten_barracks.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgotten_barracks.png
+		Filename: ts_shared_sprites|forgotten_barracks.png
 		Length: 16
 	icon:
-		Filename: forgotten_barracks_icon.png
+		Filename: ts_shared_icons|forgotten_barracks_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1002,22 +1002,22 @@ forgot_refin:
 		Scale: 1.25
 		Offset: 0,-12
 	idle:
-		Filename: forgotten_refinery.png
+		Filename: ts_shared_sprites|forgotten_refinery.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgotten_refinery.png
+		Filename: ts_shared_sprites|forgotten_refinery.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgotten_refinery.png
+		Filename: ts_shared_sprites|forgotten_refinery.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgotten_refinery.png
+		Filename: ts_shared_sprites|forgotten_refinery.png
 		Length: 16
 	icon:
-		Filename: forgotten_refinery_icon.png
+		Filename: ts_shared_icons|forgotten_refinery_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1026,22 +1026,22 @@ forgot_radar:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: forgotten_radar.png
+		Filename: ts_shared_sprites|forgotten_radar.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgotten_radar.png
+		Filename: ts_shared_sprites|forgotten_radar.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgotten_radar.png
+		Filename: ts_shared_sprites|forgotten_radar.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgotten_radar.png
+		Filename: ts_shared_sprites|forgotten_radar.png
 		Length: 16
 	icon:
-		Filename: forgotten_radar_icon.png
+		Filename: ts_shared_icons|forgotten_radar_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1050,22 +1050,22 @@ forgot_church:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: forgotten_church.png
+		Filename: ts_shared_sprites|forgotten_church.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgotten_church.png
+		Filename: ts_shared_sprites|forgotten_church.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgotten_church.png
+		Filename: ts_shared_sprites|forgotten_church.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgotten_church.png
+		Filename: ts_shared_sprites|forgotten_church.png
 		Length: 16
 	icon:
-		Filename: forgotten_church_icon.png
+		Filename: ts_shared_icons|forgotten_church_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1078,44 +1078,44 @@ forgot_weap:
 	damaged-idle:
 		Filename: invisibleitem.shp
 	idle-roof:
-		Filename: forgotten_warfactory_top.png
+		Filename: ts_shared_sprites|forgotten_warfactory_top.png
 		Length: 16
 		ZOffset: 512
 	damaged-idle-roof:
-		Filename: forgotten_warfactory_top.png
+		Filename: ts_shared_sprites|forgotten_warfactory_top.png
 		Start: 16
 		Length: 16
 		ZOffset: 512
 	dead:
-		Filename: forgotten_warfactory_bottom.png
+		Filename: ts_shared_sprites|forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	build-door:
-		Filename: forgotten_warfactory_door.png
+		Filename: ts_shared_sprites|forgotten_warfactory_door.png
 		Length: 16
 		ZOffset: 512
 	damaged-build-door:
-		Filename: forgotten_warfactory_door.png
+		Filename: ts_shared_sprites|forgotten_warfactory_door.png
 		Start: 16
 		Length: 16
 		ZOffset: 512
 	make:
-		Filename: forgotten_warfactory_buildup.png
+		Filename: ts_shared_sprites|forgotten_warfactory_buildup.png
 		Length: 32
 	bib2:
-		Filename: forgotten_warfactory_bottom.png
+		Filename: ts_shared_sprites|forgotten_warfactory_bottom.png
 		ZOffset: -1024
 	damaged-bib2:
 		Scale: 1
-		Filename: forgotten_warfactory_bottom.png
+		Filename: ts_shared_sprites|forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	dead-bib2:
-		Filename: forgotten_warfactory_bottom.png
+		Filename: ts_shared_sprites|forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	icon:
-		Filename: forgotten_warfactory_icon.png
+		Filename: ts_shared_icons|forgotten_warfactory_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1123,39 +1123,39 @@ forgot_silo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 	idle:
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 32
 	damaged-idle:
 		Filename: invisibleitem.shp
 	stages:
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 32
 		Length: 12
 	damaged-stages:
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 45
 		Length: 12
 	idle-underlay:
 		Scale: 1
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 32
 		ZOffset: -512
 	damaged-idle-underlay:
 		Scale: 1
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 45
 		ZOffset: -512
 	dead:
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Start: 45
 		ZOffset: -512
 	make:
-		Filename: forgotten_silo.png
+		Filename: ts_shared_sprites|forgotten_silo.png
 		Length: 32
 	icon:
-		Filename: forgotten_silo_icon.png
+		Filename: ts_shared_icons|forgotten_silo_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 # ts_gdi_jumpjetinfantry:
@@ -1177,26 +1177,26 @@ tsveinsmoke:
 tsntpuls:
 	Defaults:
 		Scale: 1.25
-		Filename: ts_gdi_empulsecannon.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon.shp
 		Offset: 0,-12
 	idle:
-		Filename: ts_gdi_empulsecannon.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon.shp
 	damaged-idle:
-		Filename: ts_gdi_empulsecannon.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon.shp
 		Start: 1
 	critical-idle:
-		Filename: ts_gdi_empulsecannon.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon.shp
 		Start: 2
 	turret:
-		Filename: ts_gdi_empulsecannon_a.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon_a.shp
 		Facings: 32
 		Offset: 0,-12
 	damaged-turret:
-		Filename: ts_gdi_empulsecannon_a.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon_a.shp
 		Facings: 32
 		Offset: 0,-12
 	critical-turret:
-		Filename: ts_gdi_empulsecannon_a.shp
+		Filename: ts_shared_sprites|ts_gdi_empulsecannon_a.shp
 		Facings: 32
 		Offset: 0,-12
 	make:
@@ -1210,7 +1210,7 @@ tsntpuls:
 	damaged-active:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ts_gdi_empulsecannon_icon.shp
+		Filename: ts_shared_icons|ts_gdi_empulsecannon_icon.shp
 		Offset: 0,0
 	icon2:
 		Filename: steelconsortium_upgrade_empcannon_icon.shp
@@ -1226,12 +1226,12 @@ forgot_juggerflak:
 	critical-idle:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: forgotten_juggerflakwall.png
+		Filename: ts_shared_sprites|forgotten_juggerflakwall.png
 		Facings: 64
 		Start: 64
 		Offset: 0,0
 	make:
-		Filename: forgotten_juggerflakwall.png
+		Filename: ts_shared_sprites|forgotten_juggerflakwall.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -1240,7 +1240,7 @@ forgot_juggerflak:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgotten_juggerflakwall_icon.png
+		Filename: ts_shared_icons|forgotten_juggerflakwall_icon.png
 		Offset: 0,0
 
 tsdig:
@@ -1256,19 +1256,19 @@ tsdig:
 
 tsdroppod:
 	idle:
-		Filename: ra2_pod.shp
+		Filename: ts_shared_sprites|ra2_pod.shp
 		Length: 1
 		Facing: 2
 	fade1:
-		Filename: ra2_droppod2.shp
+		Filename: ts_shared_sprites|ra2_droppod2.shp
 		Length: *
 		Tick: 200
 	fade2:
-		Filename: ra2_droppod.shp
+		Filename: ts_shared_sprites|ra2_droppod.shp
 		Length: *
 		Tick: 200
 	ring:
-		Filename: ra2_podring.shp
+		Filename: ts_shared_sprites|ra2_podring.shp
 		Length: *
 		ZOffset: 256
 
@@ -1284,34 +1284,34 @@ tsdroppod:
 
 tsdissolvereffect:
 	idle:
-		Filename: cabal_dissolver_weapon.shp
+		Filename: ts_shared_sprites|cabal_dissolver_weapon.shp
 		Length: *
 		Tick: 90
 
 tibpump:
 	Defaults:
-		Filename: tibpump.shp
+		Filename: ts_shared_sprites|tibpump.shp
 	idle:
-		Filename: tibpump.shp
+		Filename: ts_shared_sprites|tibpump.shp
 		ShadowStart: 3
 	idle-platform:
-		Filename: tibpump_a.shp
+		Filename: ts_shared_sprites|tibpump_a.shp
 		Length: 13
 		Tick: 130
 		ShadowStart: 13
 	idle-lights:
-		Filename: tibpump_b.shp
+		Filename: ts_shared_sprites|tibpump_b.shp
 		Length: 4
 		ShadowStart: 4
 		Tick: 100
 	dead:
 	icon:
-		Filename: ts_tiberiumpump_icon.png
+		Filename: ts_shared_icons|ts_tiberiumpump_icon.png
 		Offset: 0, 0
 
 tibdrill:
 	Defaults:
-		Filename: forgotten_tiberiumspike_a.shp
+		Filename: ts_shared_sprites|forgotten_tiberiumspike_a.shp
 	idle:
 		Length: 164
 		Offset: 0,0, 60
@@ -1324,12 +1324,12 @@ tibdrill:
 		Tick: 60
 		ShadowStart: 494
 	anim:
-		Filename: forgotten_tiberiumspike_b.shp
+		Filename: ts_shared_sprites|forgotten_tiberiumspike_b.shp
 		Length: 164
 		Offset: 0,0, 60
 		Tick: 60
 	damaged-anim:
-		Filename: forgotten_tiberiumspike_b.shp
+		Filename: ts_shared_sprites|forgotten_tiberiumspike_b.shp
 		Start: 164
 		Length: 165
 		Offset: 0,0, 60
@@ -1337,12 +1337,12 @@ tibdrill:
 	dead:
 		Offset: 0,0, 60
 	icon:
-		Filename: forgotten_tiberiumspike_icon.png
+		Filename: ts_shared_icons|forgotten_tiberiumspike_icon.png
 		Offset: 0, 0
 
 tsbomb:
 	idle:
-		Filename: tsbomb.shp
+		Filename: ts_shared_sprites|tsbomb.shp
 		Facings: 2
 		Frames: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
  		Length: 14
@@ -1353,35 +1353,35 @@ tsbomb:
 
 seretrainingicon:
 	icon:
-		Filename: ts_gdi_upgrade_seretraining_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_seretraining_icon.png
 
 sonicweaponryicon:
 	icon:
-		Filename: ts_gdi_upgrade_sonicweaponry_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_sonicweaponry_icon.png
 
 tsprojectileimprovementsicon:
 	icon:
-		Filename: ts_gdi_upgrade_projectileimprovements_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_projectileimprovements_icon.png
 
 fieldmaintenanceicon:
 	icon:
-		Filename: ts_gdi_upgrade_fieldmaintenance_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_fieldmaintenance_icon.png
 
 railgunweaponryicon:
 	icon:
-		Filename: ts_gdi_upgrade_railgunweaponry_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_railgunweaponry_icon.png
 
 mechengineeringicon:
 	icon:
-		Filename: ts_gdi_upgrade_mechengineering_icon.shp
+		Filename: ts_shared_icons|ts_gdi_upgrade_mechengineering_icon.shp
 
 ceramicarmoricon:
 	icon:
-		Filename: ts_gdi_upgrade_ceramicarmor_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_ceramicarmor_icon.png
 
 modernfirecontrolsystemsicon:
 	icon:
-		Filename: ts_gdi_upgrade_modernfirecontrolsystems_icon.png
+		Filename: ts_shared_icons|ts_gdi_upgrade_modernfirecontrolsystems_icon.png
 
 
 
@@ -1391,7 +1391,7 @@ ts_sedan:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_sedan.png
+		Filename: ts_shared_sprites|ts_sedan.png
 		Scale: 0.5
 	idle:
 		Scale: 1
@@ -1403,7 +1403,7 @@ ts_trucka:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_trucka.png
+		Filename: ts_shared_sprites|ts_trucka.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1415,7 +1415,7 @@ ts_truckb:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_truckb.png
+		Filename: ts_shared_sprites|ts_truckb.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1427,7 +1427,7 @@ ts_bus:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_bus.png
+		Filename: ts_shared_sprites|ts_bus.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1439,7 +1439,7 @@ ts_pickup:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_pickup.png
+		Filename: ts_shared_sprites|ts_pickup.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1451,7 +1451,7 @@ ts_pickupb:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_pickupb.png
+		Filename: ts_shared_sprites|ts_pickupb.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1463,7 +1463,7 @@ ts_wini:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: ts_wini.png
+		Filename: ts_shared_sprites|ts_wini.png
 		Scale: 0.64
 	idle:
 		Scale: 1
@@ -1473,71 +1473,71 @@ ts_wini:
 
 mobilityspecializationicon:
 	icon:
-		Filename: ts_nod_upgrade_mobilityspecialization_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_mobilityspecialization_icon.png
 
 tstiberiumlensesicon:
 	icon:
-		Filename: ts_nod_upgrade_tiberiumlenses_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_tiberiumlenses_icon.png
 
 tstiberiumcoremissilesicon:
 	icon:
-		Filename: ts_nod_upgrade_tiberiumcoremissiles_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_tiberiumcoremissiles_icon.png
 
 tsauxiliaryweaponicon:
 	icon:
-		Filename: ts_nod_upgrade_auxiliaryweapon_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_auxiliaryweapon_icon.png
 
 infiltrationkiticon:
 	icon:
-		Filename: ts_nod_upgrade_infiltrationkit_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_infiltrationkit_icon.png
 
 stealthfieldsimprovementsicon:
 	icon:
-		Filename: ts_nod_upgrade_stealthfieldsimprovements_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_stealthfieldsimprovements_icon.png
 
 advancedtiberiumrefinementicon:
 	icon:
-		Filename: ts_nod_upgrade_advancedtiberiumrefinement_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_advancedtiberiumrefinement_icon.png
 
 willofkaneicon:
 	icon:
-		Filename: ts_nod_upgrade_willofkane_icon.png
+		Filename: ts_shared_icons|ts_nod_upgrade_willofkane_icon.png
 
 tsgdidummyicon:
 	icon:
-		Filename: tsgdidummyicon.png
+		Filename: ts_shared_icons|tsgdidummyicon.png
 
 genomemappingicon:
 	icon:
-		Filename: forgotten_upgrade_genomemapping_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_genomemapping_icon.png
 
 chemicalfuelicon:
 	icon:
-		Filename: forgotten_upgrade_chemicalfuel_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_chemicalfuel_icon.png
 
 mypeticon:
 	icon:
-		Filename: forgotten_upgrade_friendlywildlife_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_friendlywildlife_icon.png
 
 junkarmoricon:
 	icon:
-		Filename: forgotten_upgrade_junkarmor_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_junkarmor_icon.png
 
 tiberiumboostersicon:
 	icon:
-		Filename: forgotten_upgrade_tiberiumboosters_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_tiberiumboosters_icon.png
 
 unityicon:
 	icon:
-		Filename: forgotten_upgrade_unity_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_unity_icon.png
 
 chemicalweaponsicon:
 	icon:
-		Filename: forgotten_upgrade_chemicalweapons_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_chemicalweapons_icon.png
 
 tiberiumadaptabilityicon:
 	icon:
-		Filename: forgotten_upgrade_tiberiumadaptability_icon.png
+		Filename: ts_shared_icons|forgotten_upgrade_tiberiumadaptability_icon.png
 
 invisibleplane:
 	idle:
@@ -1546,7 +1546,7 @@ invisibleplane:
 ts_nod_laserfence_segment:
 	Defaults:
 		Scale: 1.25
-		Filename: tsntfence.shp
+		Filename: ts_shared_sprites|tsntfence.shp
 	idle:
 		Length: 1
 	disabled-x:

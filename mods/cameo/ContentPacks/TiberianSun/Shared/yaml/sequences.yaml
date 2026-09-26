@@ -2,9 +2,9 @@ ts_civ1:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_civ1.shp
+		Filename: ts_shared_sprites|ts_civ1.shp
 	icon:
-		Filename: ts_civ1.shp
+		Filename: ts_shared_sprites|ts_civ1.shp
 	panic-stand:
 		Start: 86
 		Facings: 8
@@ -20,9 +20,9 @@ ts_civ2:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_civ2.shp
+		Filename: ts_shared_sprites|ts_civ2.shp
 	icon:
-		Filename: ts_civ2.shp
+		Filename: ts_shared_sprites|ts_civ2.shp
 	panic-stand:
 		Start: 86
 		Facings: 8
@@ -38,9 +38,9 @@ ts_civ3:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_civ3.shp
+		Filename: ts_shared_sprites|ts_civ3.shp
 	icon:
-		Filename: ts_civ3.shp
+		Filename: ts_shared_sprites|ts_civ3.shp
 	panic-stand:
 		Start: 86
 		Facings: 8
@@ -55,7 +55,7 @@ ts_civ3:
 ts_sedan:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_sedan.png
+		Filename: ts_shared_sprites|ts_sedan.png
 	idle:
 		Facings: 64
 	icon:
@@ -63,7 +63,7 @@ ts_sedan:
 ts_pickup:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_pickup.png
+		Filename: ts_shared_sprites|ts_pickup.png
 	idle:
 		Facings: 64
 	icon:
@@ -71,7 +71,7 @@ ts_pickup:
 ts_pickupb:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_pickupb.png
+		Filename: ts_shared_sprites|ts_pickupb.png
 	idle:
 		Facings: 64
 	icon:
@@ -79,7 +79,7 @@ ts_pickupb:
 ts_trucka:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_trucka.png
+		Filename: ts_shared_sprites|ts_trucka.png
 	idle:
 		Facings: 64
 	icon:
@@ -87,7 +87,7 @@ ts_trucka:
 ts_truckb:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_truckb.png
+		Filename: ts_shared_sprites|ts_truckb.png
 	idle:
 		Facings: 64
 	icon:
@@ -95,7 +95,7 @@ ts_truckb:
 ts_wini:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_wini.png
+		Filename: ts_shared_sprites|ts_wini.png
 	idle:
 		Facings: 64
 	icon:
@@ -103,7 +103,7 @@ ts_wini:
 ts_bus:
 	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
-		Filename: ts_bus.png
+		Filename: ts_shared_sprites|ts_bus.png
 	idle:
 		Facings: 64
 	icon:
@@ -111,7 +111,7 @@ ts_bus:
 
 tscity01:
 	Defaults:
-		Filename: ts_city01.shp
+		Filename: ts_shared_sprites|ts_city01.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -123,7 +123,7 @@ tscity01:
 
 tscity02:
 	Defaults:
-		Filename: ts_city02.shp
+		Filename: ts_shared_sprites|ts_city02.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -135,7 +135,7 @@ tscity02:
 
 tscity03:
 	Defaults:
-		Filename: ts_city03.shp
+		Filename: ts_shared_sprites|ts_city03.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -146,7 +146,7 @@ tscity03:
 		Start: 1
 tscity04:
 	Defaults:
-		Filename: ts_city04.shp
+		Filename: ts_shared_sprites|ts_city04.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -157,7 +157,7 @@ tscity04:
 		Start: 1
 tscity05:
 	Defaults:
-		Filename: ts_city05.shp
+		Filename: ts_shared_sprites|ts_city05.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -169,7 +169,7 @@ tscity05:
 
 tscity06:
 	Defaults:
-		Filename: ts_city06.shp
+		Filename: ts_shared_sprites|ts_city06.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -181,7 +181,7 @@ tscity06:
 
 tscity07:
 	Defaults:
-		Filename: ts_city07.shp
+		Filename: ts_shared_sprites|ts_city07.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -192,7 +192,7 @@ tscity07:
 		Start: 1
 tscity08:
 	Defaults:
-		Filename: ts_city08.shp
+		Filename: ts_shared_sprites|ts_city08.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -203,7 +203,7 @@ tscity08:
 		Start: 1
 tscity09:
 	Defaults:
-		Filename: ts_city09.shp
+		Filename: ts_shared_sprites|ts_city09.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -214,7 +214,7 @@ tscity09:
 		Start: 1
 tscity10:
 	Defaults:
-		Filename: ts_city10.shp
+		Filename: ts_shared_sprites|ts_city10.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -225,7 +225,7 @@ tscity10:
 		Start: 1
 tscity11:
 	Defaults:
-		Filename: ts_city11.shp
+		Filename: ts_shared_sprites|ts_city11.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -236,7 +236,7 @@ tscity11:
 		Start: 1
 tscity12:
 	Defaults:
-		Filename: ts_city12.shp
+		Filename: ts_shared_sprites|ts_city12.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -247,7 +247,7 @@ tscity12:
 		Start: 1
 tscity13:
 	Defaults:
-		Filename: ts_city13.shp
+		Filename: ts_shared_sprites|ts_city13.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -258,7 +258,7 @@ tscity13:
 		Start: 1
 tscity14:
 	Defaults:
-		Filename: ts_city14.shp
+		Filename: ts_shared_sprites|ts_city14.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -269,7 +269,7 @@ tscity14:
 		Start: 1
 tscity15:
 	Defaults:
-		Filename: ts_city15.shp
+		Filename: ts_shared_sprites|ts_city15.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -280,7 +280,7 @@ tscity15:
 		Start: 1
 tscity16:
 	Defaults:
-		Filename: ts_city16.shp
+		Filename: ts_shared_sprites|ts_city16.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -291,7 +291,7 @@ tscity16:
 		Start: 1
 tscity17:
 	Defaults:
-		Filename: ts_city17.shp
+		Filename: ts_shared_sprites|ts_city17.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -302,7 +302,7 @@ tscity17:
 		Start: 1
 tscity18:
 	Defaults:
-		Filename: ts_city18.shp
+		Filename: ts_shared_sprites|ts_city18.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -313,7 +313,7 @@ tscity18:
 		Start: 1
 tscity19:
 	Defaults:
-		Filename: ts_city19.shp
+		Filename: ts_shared_sprites|ts_city19.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -324,7 +324,7 @@ tscity19:
 		Start: 1
 tscity20:
 	Defaults:
-		Filename: ts_city20.shp
+		Filename: ts_shared_sprites|ts_city20.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -335,7 +335,7 @@ tscity20:
 		Start: 1
 tscity21:
 	Defaults:
-		Filename: ts_city21.shp
+		Filename: ts_shared_sprites|ts_city21.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -346,7 +346,7 @@ tscity21:
 		Start: 1
 tscity22:
 	Defaults:
-		Filename: ts_city22.shp
+		Filename: ts_shared_sprites|ts_city22.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -357,7 +357,7 @@ tscity22:
 		Start: 1
 tsct0001:
 	Defaults:
-		Filename: tsct0001.shp
+		Filename: ts_shared_sprites|tsct0001.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -368,7 +368,7 @@ tsct0001:
 		Start: 1
 tsct0002:
 	Defaults:
-		Filename: tsct0002.shp
+		Filename: ts_shared_sprites|tsct0002.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -379,7 +379,7 @@ tsct0002:
 		Start: 1
 tsct0003:
 	Defaults:
-		Filename: tsct0003.shp
+		Filename: ts_shared_sprites|tsct0003.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -390,7 +390,7 @@ tsct0003:
 		Start: 1
 tsct0004:
 	Defaults:
-		Filename: tsct0004.shp
+		Filename: ts_shared_sprites|tsct0004.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -401,7 +401,7 @@ tsct0004:
 		Start: 1
 tsct0005:
 	Defaults:
-		Filename: tsct0005.shp
+		Filename: ts_shared_sprites|tsct0005.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -412,7 +412,7 @@ tsct0005:
 		Start: 1
 tsct0006:
 	Defaults:
-		Filename: tsct0006.shp
+		Filename: ts_shared_sprites|tsct0006.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -423,7 +423,7 @@ tsct0006:
 		Start: 1
 tsct0007:
 	Defaults:
-		Filename: tsct0007.shp
+		Filename: ts_shared_sprites|tsct0007.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -434,7 +434,7 @@ tsct0007:
 		Start: 1
 tsct0008:
 	Defaults:
-		Filename: tsct0008.shp
+		Filename: ts_shared_sprites|tsct0008.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -445,7 +445,7 @@ tsct0008:
 		Start: 1
 tsct0009:
 	Defaults:
-		Filename: tsct0009.shp
+		Filename: ts_shared_sprites|tsct0009.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -456,7 +456,7 @@ tsct0009:
 		Start: 1
 tsct0010:
 	Defaults:
-		Filename: tsct0010.shp
+		Filename: ts_shared_sprites|tsct0010.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -467,7 +467,7 @@ tsct0010:
 		Start: 1
 tsct0011:
 	Defaults:
-		Filename: tsct0011.shp
+		Filename: ts_shared_sprites|tsct0011.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -478,7 +478,7 @@ tsct0011:
 		Start: 1
 tsct0012:
 	Defaults:
-		Filename: tsct0012.shp
+		Filename: ts_shared_sprites|tsct0012.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -489,7 +489,7 @@ tsct0012:
 		Start: 1
 tsct0013:
 	Defaults:
-		Filename: tsct0013.shp
+		Filename: ts_shared_sprites|tsct0013.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -500,7 +500,7 @@ tsct0013:
 		Start: 1
 tsct0014:
 	Defaults:
-		Filename: tsct0014.shp
+		Filename: ts_shared_sprites|tsct0014.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -511,7 +511,7 @@ tsct0014:
 		Start: 1
 tsct0015:
 	Defaults:
-		Filename: tsct0015.shp
+		Filename: ts_shared_sprites|tsct0015.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -522,7 +522,7 @@ tsct0015:
 		Start: 1
 tsct0016:
 	Defaults:
-		Filename: tsct0016.shp
+		Filename: ts_shared_sprites|tsct0016.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -533,7 +533,7 @@ tsct0016:
 		Start: 1
 tsct0017:
 	Defaults:
-		Filename: tsct0017.shp
+		Filename: ts_shared_sprites|tsct0017.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -544,7 +544,7 @@ tsct0017:
 		Start: 1
 tsct0018:
 	Defaults:
-		Filename: tsct0018.shp
+		Filename: ts_shared_sprites|tsct0018.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -555,7 +555,7 @@ tsct0018:
 		Start: 1
 tsct0019:
 	Defaults:
-		Filename: tsct0019.shp
+		Filename: ts_shared_sprites|tsct0019.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -566,7 +566,7 @@ tsct0019:
 		Start: 1
 tsct0020:
 	Defaults:
-		Filename: tsct0020.shp
+		Filename: ts_shared_sprites|tsct0020.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -577,7 +577,7 @@ tsct0020:
 		Start: 1
 tsct0021:
 	Defaults:
-		Filename: tsct0021.shp
+		Filename: ts_shared_sprites|tsct0021.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -590,7 +590,7 @@ tsct0021:
 
 tsbboard01:
 	Defaults:
-		Filename: ts_bboard01.shp
+		Filename: ts_shared_sprites|ts_bboard01.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -601,7 +601,7 @@ tsbboard01:
 		Start: 1
 tsbboard02:
 	Defaults:
-		Filename: ts_bboard02.shp
+		Filename: ts_shared_sprites|ts_bboard02.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -612,7 +612,7 @@ tsbboard02:
 		Start: 1
 tsbboard03:
 	Defaults:
-		Filename: ts_bboard03.shp
+		Filename: ts_shared_sprites|ts_bboard03.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -623,7 +623,7 @@ tsbboard03:
 		Start: 1
 tsbboard04:
 	Defaults:
-		Filename: ts_bboard04.shp
+		Filename: ts_shared_sprites|ts_bboard04.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -634,7 +634,7 @@ tsbboard04:
 		Start: 1
 tsbboard05:
 	Defaults:
-		Filename: ts_bboard05.shp
+		Filename: ts_shared_sprites|ts_bboard05.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -645,7 +645,7 @@ tsbboard05:
 		Start: 1
 tsbboard06:
 	Defaults:
-		Filename: ts_bboard06.shp
+		Filename: ts_shared_sprites|ts_bboard06.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -656,7 +656,7 @@ tsbboard06:
 		Start: 1
 tsbboard07:
 	Defaults:
-		Filename: ts_bboard07.shp
+		Filename: ts_shared_sprites|ts_bboard07.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -667,7 +667,7 @@ tsbboard07:
 		Start: 1
 tsbboard08:
 	Defaults:
-		Filename: ts_bboard08.shp
+		Filename: ts_shared_sprites|ts_bboard08.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -678,7 +678,7 @@ tsbboard08:
 		Start: 1
 tsbboard09:
 	Defaults:
-		Filename: ts_bboard09.shp
+		Filename: ts_shared_sprites|ts_bboard09.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -689,7 +689,7 @@ tsbboard09:
 		Start: 1
 tsbboard10:
 	Defaults:
-		Filename: ts_bboard10.shp
+		Filename: ts_shared_sprites|ts_bboard10.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -700,7 +700,7 @@ tsbboard10:
 		Start: 1
 tsbboard11:
 	Defaults:
-		Filename: ts_bboard11.shp
+		Filename: ts_shared_sprites|ts_bboard11.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -711,7 +711,7 @@ tsbboard11:
 		Start: 1
 tsbboard12:
 	Defaults:
-		Filename: ts_bboard12.shp
+		Filename: ts_shared_sprites|ts_bboard12.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -722,7 +722,7 @@ tsbboard12:
 		Start: 1
 tsbboard13:
 	Defaults:
-		Filename: ts_bboard13.shp
+		Filename: ts_shared_sprites|ts_bboard13.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -733,7 +733,7 @@ tsbboard13:
 		Start: 1
 tsbboard14:
 	Defaults:
-		Filename: ts_bboard14.shp
+		Filename: ts_shared_sprites|ts_bboard14.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -744,7 +744,7 @@ tsbboard14:
 		Start: 1
 tsbboard15:
 	Defaults:
-		Filename: ts_bboard15.shp
+		Filename: ts_shared_sprites|ts_bboard15.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -755,7 +755,7 @@ tsbboard15:
 		Start: 1
 tsbboard16:
 	Defaults:
-		Filename: ts_bboard16.shp
+		Filename: ts_shared_sprites|ts_bboard16.shp
 	idle:
 		ShadowStart: 2
 	damaged-idle:
@@ -766,7 +766,7 @@ tsbboard16:
 		Start: 1
 ts_ctpyr01:
 	Defaults:
-		Filename: ts_ctpyr01.shp
+		Filename: ts_shared_sprites|ts_ctpyr01.shp
 	idle:
 		ShadowStart: 1
 	damaged-idle:
@@ -775,20 +775,20 @@ ts_ctpyr01:
 	dead:
 ts_ctpyr02:
 	Defaults:
-		Filename: ts_ctpyr02.shp
+		Filename: ts_shared_sprites|ts_ctpyr02.shp
 	idle:
 		ShadowStart: 1
 	damaged-idle:
 		ShadowStart: 1
-		Filename: ts_ctpyr03.shp
+		Filename: ts_shared_sprites|ts_ctpyr03.shp
 	make:
 	dead:
 		ShadowStart: 1
-		Filename: ts_ctpyr03.shp
+		Filename: ts_shared_sprites|ts_ctpyr03.shp
 
 ts_ctpyr03:
 	Defaults:
-		Filename: ts_ctpyr03.shp
+		Filename: ts_shared_sprites|ts_ctpyr03.shp
 	idle:
 		ShadowStart: 1
 	damaged-idle:
@@ -796,10 +796,10 @@ ts_ctpyr03:
 	make:
 	dead:
 		ShadowStart: 1
-		Filename: ts_ctpyr03.shp
+		Filename: ts_shared_sprites|ts_ctpyr03.shp
 ts_ctvega:
 	Defaults:
-		Filename: ts_ctvega.shp
+		Filename: ts_shared_sprites|ts_ctvega.shp
 	idle:
 		ShadowStart: 3
 	damaged-idle:
@@ -807,148 +807,148 @@ ts_ctvega:
 	make:
 	dead:
 		ShadowStart: 3
-		Filename: ts_ctvega.shp
+		Filename: ts_shared_sprites|ts_ctvega.shp
 
 
 
 
 ts_tree01:
 	Defaults:
-		Filename: ts_tree01.tem
+		Filename: ts_shared_sprites|ts_tree01.tem
 		TilesetFilenames:
-			WINTER: ts_tree01.tem
-			SNOW: ts_tree01.tem
-			JUNGLE: ts_tree01.tem
-			BARREN: ts_tree01.tem
-			CAMEO: ts_tree01.tem
-			VOLCANIC: ts_tree01.tem
-			RA_SNOW: ts_tree01.tem
-			RA_TEMPERAT: ts_tree01.tem
-			RA_INTERIOR: ts_tree01.tem
-			CARIBIC: ts_tree01.tem
-			WC2SUNSET: ts_tree01.tem
-			WC2SUMMER: ts_tree01.tem
-			OUTPOST2: ts_tree01.tem
+			WINTER: ts_shared_sprites|ts_tree01.tem
+			SNOW: ts_shared_sprites|ts_tree01.tem
+			JUNGLE: ts_shared_sprites|ts_tree01.tem
+			BARREN: ts_shared_sprites|ts_tree01.tem
+			CAMEO: ts_shared_sprites|ts_tree01.tem
+			VOLCANIC: ts_shared_sprites|ts_tree01.tem
+			RA_SNOW: ts_shared_sprites|ts_tree01.tem
+			RA_TEMPERAT: ts_shared_sprites|ts_tree01.tem
+			RA_INTERIOR: ts_shared_sprites|ts_tree01.tem
+			CARIBIC: ts_shared_sprites|ts_tree01.tem
+			WC2SUNSET: ts_shared_sprites|ts_tree01.tem
+			WC2SUMMER: ts_shared_sprites|ts_tree01.tem
+			OUTPOST2: ts_shared_sprites|ts_tree01.tem
 	idle:
 		ShadowStart: 1
 ts_tree02:
 	Defaults:
-		Filename: ts_tree02.tem
+		Filename: ts_shared_sprites|ts_tree02.tem
 	idle:
 		ShadowStart: 1
 ts_tree03:
 	Defaults:
-		Filename: ts_tree03.tem
+		Filename: ts_shared_sprites|ts_tree03.tem
 	idle:
 		ShadowStart: 1
 ts_tree04:
 	Defaults:
-		Filename: ts_tree04.tem
+		Filename: ts_shared_sprites|ts_tree04.tem
 	idle:
 		ShadowStart: 1
 ts_tree05:
 	Defaults:
-		Filename: ts_tree05.tem
+		Filename: ts_shared_sprites|ts_tree05.tem
 	idle:
 		ShadowStart: 1
 ts_tree06:
 	Defaults:
-		Filename: ts_tree06.tem
+		Filename: ts_shared_sprites|ts_tree06.tem
 	idle:
 		ShadowStart: 1
 ts_tree07:
 	Defaults:
-		Filename: ts_tree07.tem
+		Filename: ts_shared_sprites|ts_tree07.tem
 	idle:
 		ShadowStart: 1
 ts_tree08:
 	Defaults:
-		Filename: ts_tree08.tem
+		Filename: ts_shared_sprites|ts_tree08.tem
 	idle:
 		ShadowStart: 1
 ts_tree09:
 	Defaults:
-		Filename: ts_tree09.tem
+		Filename: ts_shared_sprites|ts_tree09.tem
 	idle:
 		ShadowStart: 1
 ts_tree10:
 	Defaults:
-		Filename: ts_tree10.tem
+		Filename: ts_shared_sprites|ts_tree10.tem
 	idle:
 		ShadowStart: 1
 ts_tree11:
 	Defaults:
-		Filename: ts_tree11.tem
+		Filename: ts_shared_sprites|ts_tree11.tem
 	idle:
 		ShadowStart: 1
 ts_tree12:
 	Defaults:
-		Filename: ts_tree12.tem
+		Filename: ts_shared_sprites|ts_tree12.tem
 	idle:
 		ShadowStart: 1
 ts_tree13:
 	Defaults:
-		Filename: ts_tree13.tem
+		Filename: ts_shared_sprites|ts_tree13.tem
 	idle:
 		ShadowStart: 1
 ts_tree14:
 	Defaults:
-		Filename: ts_tree14.tem
+		Filename: ts_shared_sprites|ts_tree14.tem
 	idle:
 		ShadowStart: 1
 ts_tree15:
 	Defaults:
-		Filename: ts_tree15.tem
+		Filename: ts_shared_sprites|ts_tree15.tem
 	idle:
 		ShadowStart: 1
 ts_tree16:
 	Defaults:
-		Filename: ts_tree16.tem
+		Filename: ts_shared_sprites|ts_tree16.tem
 	idle:
 		ShadowStart: 1
 ts_tree17:
 	Defaults:
-		Filename: ts_tree17.tem
+		Filename: ts_shared_sprites|ts_tree17.tem
 	idle:
 		ShadowStart: 1
 ts_tree18:
 	Defaults:
-		Filename: ts_tree18.tem
+		Filename: ts_shared_sprites|ts_tree18.tem
 	idle:
 		ShadowStart: 1
 ts_tree19:
 	Defaults:
-		Filename: ts_tree19.tem
+		Filename: ts_shared_sprites|ts_tree19.tem
 	idle:
 		ShadowStart: 1
 ts_tree20:
 	Defaults:
-		Filename: ts_tree20.tem
+		Filename: ts_shared_sprites|ts_tree20.tem
 	idle:
 		ShadowStart: 1
 ts_tree21:
 	Defaults:
-		Filename: ts_tree21.tem
+		Filename: ts_shared_sprites|ts_tree21.tem
 	idle:
 		ShadowStart: 1
 ts_tree22:
 	Defaults:
-		Filename: ts_tree22.tem
+		Filename: ts_shared_sprites|ts_tree22.tem
 	idle:
 		ShadowStart: 1
 ts_tree23:
 	Defaults:
-		Filename: ts_tree23.tem
+		Filename: ts_shared_sprites|ts_tree23.tem
 	idle:
 		ShadowStart: 1
 ts_tree24:
 	Defaults:
-		Filename: ts_tree24.tem
+		Filename: ts_shared_sprites|ts_tree24.tem
 	idle:
 		ShadowStart: 1
 ts_tree25:
 	Defaults:
-		Filename: ts_tree25.tem
+		Filename: ts_shared_sprites|ts_tree25.tem
 	idle:
 		ShadowStart: 1
 
@@ -1123,7 +1123,7 @@ ts_gdi_tiberiumrefinery:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
-		Filename: ts_gdi_tiberiumrefinery.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery.shp
 		Offset: -12, -20, 20
 	idle:
 		ShadowStart: 3
@@ -1136,31 +1136,31 @@ ts_gdi_tiberiumrefinery:
 		Tick: 400
 	make:
 	unload-overlay:
-		Filename: ts_gdi_tiberiumrefinery_a.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_a.shp
 		Length: *
 		ZOffset: 1024
 	idle-redlights:
-		Filename: ts_gdi_tiberiumrefinery_c.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_c.shp
 		Length: 16
 		Tick: 120
 	damaged-idle-redlights:
-		Filename: ts_gdi_tiberiumrefinery_c.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_c.shp
 		Length: 16
 		Tick: 120
 	bib2:
-		Filename: ts_gdi_tiberiumrefinery_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_bib.shp
 		Length: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	damaged-bib2:
-		Filename: ts_gdi_tiberiumrefinery_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	dead-bib2:
-		Filename: ts_gdi_tiberiumrefinery_bib.shp
+		Filename: ts_shared_sprites|ts_gdi_tiberiumrefinery_bib.shp
 		Start: 2
 		ZOffset: -1024
 		# Offset: 0, 0, 5

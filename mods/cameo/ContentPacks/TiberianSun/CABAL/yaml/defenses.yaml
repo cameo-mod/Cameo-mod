@@ -158,7 +158,7 @@ cabal_heavycabalobelisk:
 		ZOffset: 1
 	AmbientSoundCA:
 		RequiresCondition: charging
-		SoundFiles: cabal_obelisk_charge.wav
+		SoundFiles: cabal_sounds|cabal_obelisk_charge.wav
 		VolumeMultiplier: 2.0
 		Interval: 100
 	-SpawnActorsOnSell:

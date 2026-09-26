@@ -23,7 +23,7 @@ PositronGrenade:
 	TargetActorCenter: true
 	ReloadDelay: 30
 	Range: 5044
-	Report: tvuFir00.aud
+	Report: sc_shared_sounds|tvuFir00.aud
 	Projectile: Bullet
 		Image: scsmalldragoonprojectile
 		TrailImage: blue_smokey
@@ -59,7 +59,7 @@ PositronGrenade:
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+		ImpactSounds: sc_shared_sounds|tvuHit00.aud,sc_shared_sounds|tvuHit01.aud,sc_shared_sounds|tvuHit02.aud
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce1
 		Amount: 1
@@ -725,7 +725,7 @@ ScoutRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
-	Report: HKMISSLE.aud
+	Report: sc_shared_sounds|HKMISSLE.aud
 	ReloadDelay: 40
 	Range: 4500
 	ValidTargets: Air
@@ -798,7 +798,7 @@ CorsairFlash:
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
-	Report: sc_corsair_attack.aud
+	Report: sc_protoss_sounds|sc_corsair_attack.aud
 	ValidTargets: Air
 	Range: 5500
 	ReloadDelay: 65
@@ -860,7 +860,7 @@ Corsair_EMP:
 	Warhead@Effect: CreateEffect
 		Explosions: pulse_explosion_small
 		ExplosionPalette: tseffect
-		ImpactSounds: sc_corsair_disruptionweb.aud
+		ImpactSounds: sc_protoss_sounds|sc_corsair_disruptionweb.aud
 		ImpactActors: false
 
 VoidRayBeam:

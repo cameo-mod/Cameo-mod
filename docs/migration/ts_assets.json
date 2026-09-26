@@ -1,0 +1,5188 @@
+{
+ "theme": "TiberianSun",
+ "refs": 897,
+ "migrate": 549,
+ "shared": 121,
+ "missing": 32,
+ "qualified": 174,
+ "packaged": 21,
+ "packages_needed": [
+  "ts_cabal_sounds",
+  "ts_forgotten_icons",
+  "ts_forgotten_sounds",
+  "ts_forgotten_sprites",
+  "ts_gdi_icons",
+  "ts_gdi_sprites",
+  "ts_nod_icons",
+  "ts_nod_sprites",
+  "ts_shared_icons",
+  "ts_shared_sprites"
+ ],
+ "plan": [
+  {
+   "name": "ts_nod_laserturret.shp",
+   "src": "bits/ts/ts_nod_laserturret.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_nod_laserturret_icon.shp",
+   "src": "bits/ts/ts_nod_laserturret_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 2
+  },
+  {
+   "name": "tsrobothacking.wav",
+   "src": "bits/ts/tsrobothacking.wav",
+   "owner": "CABAL",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "oldplane_up.wav",
+   "src": "bits/ts/oldplane_up.wav",
+   "owner": "Forgotten",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "oldplane_down.wav",
+   "src": "bits/ts/oldplane_down.wav",
+   "owner": "Forgotten",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantsniper.shp",
+   "src": "bits/ts/forgotten_mutantsniper.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantsniper_icon.shp",
+   "src": "bits/ts/forgotten_mutantsniper_icon.shp",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_ghoststalker_tsghost.shp",
+   "src": "bits/ts/forgotten_promotion_ghoststalker_tsghost.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutanthijacker_icon.png",
+   "src": "bits/ts/forgotten_mutanthijacker_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutant_tsmutant.shp",
+   "src": "bits/ts/forgotten_mutant_tsmutant.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "forgotten_mutant_icon.png",
+   "src": "bits/ts/forgotten_mutant_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantsoldier_tsmutant3.shp",
+   "src": "bits/ts/forgotten_mutantsoldier_tsmutant3.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantsoldier_icon.png",
+   "src": "bits/ts/forgotten_mutantsoldier_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantsergeant_icon.png",
+   "src": "bits/ts/forgotten_mutantsergeant_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_chemsprayinfantry.shp",
+   "src": "bits/ts/forgotten_chemsprayinfantry.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_chemsprayinfantry_icon.shp",
+   "src": "bits/ts/forgotten_chemsprayinfantry_icon.shp",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tiberianfiend.shp",
+   "src": "bits/ts/forgotten_tiberianfiend.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tiberianfiend_icon.png",
+   "src": "bits/ts/forgotten_tiberianfiend_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_viniferafiend.shp",
+   "src": "bits/ts/forgotten_promotion_viniferafiend.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_viniferafiend_icon.png",
+   "src": "bits/ts/forgotten_promotion_viniferafiend_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_zombiemutant.shp",
+   "src": "bits/ts/forgotten_zombiemutant.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_zombiemutant_icon.png",
+   "src": "bits/ts/forgotten_zombiemutant_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_runnershotgal.shp",
+   "src": "bits/ts/forgotten_promotion_runnershotgal.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_runnershotgal_icon.png",
+   "src": "bits/ts/forgotten_promotion_runnershotgal_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantmortarman.shp",
+   "src": "bits/ts/forgotten_mutantmortarman.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_mutantmortarman_icon.shp",
+   "src": "bits/ts/forgotten_mutantmortarman_icon.shp",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenrattytankturret_rattytank.png",
+   "src": "bits/ts/forgotten_brokenrattytankturret_rattytank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_rattytank_icon.png",
+   "src": "bits/ts/forgotten_rattytank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_closhtank.png",
+   "src": "bits/ts/forgotten_closhtank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_closhtank_icon.png",
+   "src": "bits/ts/forgotten_closhtank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_thumperbus.png",
+   "src": "bits/ts/forgotten_thumperbus.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_thumperbus_icon.png",
+   "src": "bits/ts/forgotten_thumperbus_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_nomadbarracks.png",
+   "src": "bits/ts/forgotten_nomadbarracks.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_nomadbarracks_icon.png",
+   "src": "bits/ts/forgotten_nomadbarracks_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tankkiller.png",
+   "src": "bits/ts/forgotten_tankkiller.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tankkiller_icon.png",
+   "src": "bits/ts/forgotten_tankkiller_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_missilevan.png",
+   "src": "bits/ts/forgotten_missilevan.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_missilevan_icon.png",
+   "src": "bits/ts/forgotten_missilevan_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_raidercar.png",
+   "src": "bits/ts/forgotten_raidercar.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_raidercar_icon.png",
+   "src": "bits/ts/forgotten_raidercar_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_bowler.png",
+   "src": "bits/ts/forgotten_promotion_bowler.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_bowler_icon.png",
+   "src": "bits/ts/forgotten_promotion_bowler_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_ruiner.png",
+   "src": "bits/ts/forgotten_ruiner.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_ruiner_icon.png",
+   "src": "bits/ts/forgotten_ruiner_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_warriortank.png",
+   "src": "bits/ts/forgotten_promotion_warriortank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_warriortank_icon.png",
+   "src": "bits/ts/forgotten_promotion_warriortank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_scoopertank.png",
+   "src": "bits/ts/forgotten_promotion_scoopertank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_scoopertank_icon.png",
+   "src": "bits/ts/forgotten_promotion_scoopertank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_flametank.png",
+   "src": "bits/ts/forgotten_promotion_flametank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_flametank_icon.png",
+   "src": "bits/ts/forgotten_promotion_flametank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_experimentalmammothtank.png",
+   "src": "bits/ts/forgotten_promotion_experimentalmammothtank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_experimentalmammothtank_icon.png",
+   "src": "bits/ts/forgotten_promotion_experimentalmammothtank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_chemicalmammothtank.png",
+   "src": "bits/ts/forgotten_promotion_chemicalmammothtank.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_chemicalmammothtank_icon.png",
+   "src": "bits/ts/forgotten_promotion_chemicalmammothtank_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_mlrs.png",
+   "src": "bits/ts/forgotten_promotion_mlrs.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_mlrs_icon.png",
+   "src": "bits/ts/forgotten_promotion_mlrs_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_m113adats.png",
+   "src": "bits/ts/forgotten_m113adats.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_m113adats_icon.png",
+   "src": "bits/ts/forgotten_m113adats_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_apctruck.png",
+   "src": "bits/ts/forgotten_apctruck.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_apctruck_icon.png",
+   "src": "bits/ts/forgotten_apctruck_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tampowr.shp",
+   "src": "bits/ts/tampowr.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tampowr_a.shp",
+   "src": "bits/ts/tampowr_a.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tampowrmake.shp",
+   "src": "bits/ts/tampowrmake.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tambar.shp",
+   "src": "bits/ts/tambar.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tambar_a.shp",
+   "src": "bits/ts/tambar_a.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tambar_b.shp",
+   "src": "bits/ts/tambar_b.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tambarmake.shp",
+   "src": "bits/ts/tambarmake.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamradr.shp",
+   "src": "bits/ts/tamradr.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamradr_a.shp",
+   "src": "bits/ts/tamradr_a.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamradrmake.shp",
+   "src": "bits/ts/tamradrmake.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamtech.shp",
+   "src": "bits/ts/tamtech.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamtech_a.shp",
+   "src": "bits/ts/tamtech_a.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamtechmake.shp",
+   "src": "bits/ts/tamtechmake.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamref.shp",
+   "src": "bits/ts/tamref.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamrefmake.shp",
+   "src": "bits/ts/tamrefmake.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamref_bib.shp",
+   "src": "bits/ts/tamref_bib.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tamref_c.shp",
+   "src": "bits/ts/tamref_c.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_cobracopter.png",
+   "src": "bits/ts/forgotten_promotion_cobracopter.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_cobracopter_icon.png",
+   "src": "bits/ts/forgotten_promotion_cobracopter_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_harpy_icon.shp",
+   "src": "bits/ts/ts_nod_harpy_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 2
+  },
+  {
+   "name": "forgotten_wasp.png",
+   "src": "bits/ts/forgotten_wasp.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_wasp_icon.png",
+   "src": "bits/ts/forgotten_wasp_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_locustbomber.png",
+   "src": "bits/ts/forgotten_promotion_locustbomber.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_promotion_locustbomber_icon.png",
+   "src": "bits/ts/forgotten_promotion_locustbomber_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_cropplane.png",
+   "src": "bits/ts/forgotten_cropplane.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_cropplane_icon.png",
+   "src": "bits/ts/forgotten_cropplane_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_chemicalplant.png",
+   "src": "bits/ts/forgotten_chemicalplant.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_chemicalplant_icon.png",
+   "src": "bits/ts/forgotten_chemicalplant_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_veinhole.shp",
+   "src": "bits/ts/forgotten_veinhole.shp",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_machineguntower.png",
+   "src": "bits/ts/forgotten_machineguntower.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_machineguntower_icon.png",
+   "src": "bits/ts/forgotten_machineguntower_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenwarriortankturret.png",
+   "src": "bits/ts/forgotten_brokenwarriortankturret.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenwarriortankturret_icon.png",
+   "src": "bits/ts/forgotten_brokenwarriortankturret_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenrattytankturret.png",
+   "src": "bits/ts/forgotten_brokenrattytankturret.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenrattytankturret_icon.png",
+   "src": "bits/ts/forgotten_brokenrattytankturret_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_brokenscoopertankturret_icon.png",
+   "src": "bits/ts/forgotten_brokenscoopertankturret_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgot_juggerboat.png",
+   "src": "bits/ts/forgot_juggerboat.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_juggerboat_icon.png",
+   "src": "bits/ts/forgot_juggerboat_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgot_cannonboat.png",
+   "src": "bits/ts/forgot_cannonboat.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_cannonboat_icon.png",
+   "src": "bits/ts/forgot_cannonboat_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgot_lcraft.png",
+   "src": "bits/ts/forgot_lcraft.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_lcraft_icon.png",
+   "src": "bits/ts/forgot_lcraft_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgot_navyyard.png",
+   "src": "bits/ts/forgot_navyyard.png",
+   "owner": "Forgotten",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_navyyard_icon.png",
+   "src": "bits/ts/forgot_navyyard_icon.png",
+   "owner": "Forgotten",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_lightinfantry_tse1.shp",
+   "src": "bits/ts/ts_gdi_lightinfantry_tse1.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_medic.shp",
+   "src": "bits/ts/ts_gdi_medic.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_medic_icon.png",
+   "src": "bits/ts/ts_gdi_medic_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_discthrower_alte2.shp",
+   "src": "bits/ts/ts_gdi_discthrower_alte2.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_discthrower_icon.png",
+   "src": "bits/ts/ts_gdi_discthrower_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_falconenforcer_icon.png",
+   "src": "bits/ts/ts_gdi_falconenforcer_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_falconenforcer.shp",
+   "src": "bits/ts/ts_gdi_falconenforcer.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_zonetrooper.png",
+   "src": "bits/ts/ts_gdi_promotion_zonetrooper.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_zonetrooper_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_zonetrooper_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_riottrooper.shp",
+   "src": "bits/ts/ts_gdi_riottrooper.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_riottrooper_icon.png",
+   "src": "bits/ts/ts_gdi_riottrooper_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_railguncommando.shp",
+   "src": "bits/ts/ts_gdi_railguncommando.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_railguncommando_icon.png",
+   "src": "bits/ts/ts_gdi_railguncommando_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_titan.shp",
+   "src": "bits/ts/ts_gdi_titan.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_mechengineering_icon.shp",
+   "src": "bits/ts/ts_gdi_upgrade_mechengineering_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 2
+  },
+  {
+   "name": "ts_gdi_promotion_titanmkii.png",
+   "src": "bits/ts/ts_gdi_promotion_titanmkii.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_titanmkii_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_titanmkii_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_titanmkii_run.png",
+   "src": "bits/ts/ts_gdi_promotion_titanmkii_run.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_titanmkii_tur.png",
+   "src": "bits/ts/ts_gdi_promotion_titanmkii_tur.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_juggernautmkii.shp",
+   "src": "bits/ts/ts_gdi_promotion_juggernautmkii.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_juggernautmkii_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_juggernautmkii_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_tiberiumharvester_icon.shp",
+   "src": "bits/ts/ts_gdi_tiberiumharvester_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 2
+  },
+  {
+   "name": "ts_gdi_promotion_kodiak_kodiakcommandship.shp",
+   "src": "bits/ts/ts_gdi_promotion_kodiak_kodiakcommandship.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_kodiak_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_kodiak_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_amphibiousapc_icon.shp",
+   "src": "bits/ts/ts_gdi_amphibiousapc_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_pitbull.png",
+   "src": "bits/ts/ts_gdi_pitbull.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_pitbull_tur.png",
+   "src": "bits/ts/ts_gdi_pitbull_tur.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_pitbull_icon.png",
+   "src": "bits/ts/ts_gdi_pitbull_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_mobilesensorarray_icon.shp",
+   "src": "bits/ts/ts_gdi_mobilesensorarray_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_mobileemp_icon.png",
+   "src": "bits/ts/ts_gdi_mobileemp_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_hovermlrs_icon.shp",
+   "src": "bits/ts/ts_gdi_hovermlrs_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_wolverine.shp",
+   "src": "bits/ts/ts_gdi_wolverine.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_wolverinemkii.png",
+   "src": "bits/ts/ts_gdi_promotion_wolverinemkii.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_wolverinemkii_run.png",
+   "src": "bits/ts/ts_gdi_promotion_wolverinemkii_run.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_wolverinemkii_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_wolverinemkii_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_mammothprototype_icon.shp",
+   "src": "bits/ts/ts_gdi_mammothprototype_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_mammothmkii_lightbluelasermuzzle.shp",
+   "src": "bits/effects/ts_gdi_promotion_mammothmkii_lightbluelasermuzzle.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_mammothmkii_idle.png",
+   "src": "bits/ts/ts_gdi_promotion_mammothmkii_idle.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_mammothmkii_walk.png",
+   "src": "bits/ts/ts_gdi_promotion_mammothmkii_walk.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_mammothmkii_atk.png",
+   "src": "bits/ts/ts_gdi_promotion_mammothmkii_atk.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_mammothmkii_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_mammothmkii_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_jugger.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_jugger.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_djugg_a.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_djugg_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_juggerbarl.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_juggerbarl.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_juggerbarlup.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_juggerbarlup.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_djugg.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_djugg.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_make.shp",
+   "src": "bits/ts/ts_gdi_juggernaut_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_juggernaut_icon.png",
+   "src": "bits/ts/ts_gdi_juggernaut_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_disruptor_icon.shp",
+   "src": "bits/ts/ts_gdi_disruptor_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_powerplant.shp",
+   "src": "bits/ts/ts_gdi_powerplant.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_powerplant_a.shp",
+   "src": "bits/ts/ts_gdi_powerplant_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_powerplant_b.shp",
+   "src": "bits/ts/ts_gdi_powerplant_b.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_powerplant_icon.png",
+   "src": "bits/ts/ts_gdi_powerplant_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_powerturbine_icon.png",
+   "src": "bits/ts/ts_gdi_powerturbine_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_barracks.shp",
+   "src": "bits/ts/ts_gdi_barracks.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_barracks_a.shp",
+   "src": "bits/ts/ts_gdi_barracks_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_barracks_b.shp",
+   "src": "bits/ts/ts_gdi_barracks_b.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_barracks_c.shp",
+   "src": "bits/ts/ts_gdi_barracks_c.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_barracks_icon.shp",
+   "src": "bits/ts/ts_gdi_barracks_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory.shp",
+   "src": "bits/ts/ts_gdi_warfactory.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_1.shp",
+   "src": "bits/ts/ts_gdi_warfactory_1.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_2.shp",
+   "src": "bits/ts/ts_gdi_warfactory_2.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_a.shp",
+   "src": "bits/ts/ts_gdi_warfactory_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_b.shp",
+   "src": "bits/ts/ts_gdi_warfactory_b.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_c.shp",
+   "src": "bits/ts/ts_gdi_warfactory_c.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_d.shp",
+   "src": "bits/ts/ts_gdi_warfactory_d.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_make.shp",
+   "src": "bits/ts/ts_gdi_warfactory_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_bib.shp",
+   "src": "bits/ts/ts_gdi_warfactory_bib.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_warfactory_icon.png",
+   "src": "bits/ts/ts_gdi_warfactory_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_radar_radr.shp",
+   "src": "bits/ts/ts_gdi_radar_radr.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_radar_radr_a.shp",
+   "src": "bits/ts/ts_gdi_radar_radr_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_radar_make.shp",
+   "src": "bits/ts/ts_gdi_radar_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_techcenter.shp",
+   "src": "bits/ts/ts_gdi_techcenter.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_techcenter_a.shp",
+   "src": "bits/ts/ts_gdi_techcenter_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_techcenter_make.shp",
+   "src": "bits/ts/ts_gdi_techcenter_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_helipad.shp",
+   "src": "bits/ts/ts_gdi_helipad.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_helipad_bib.shp",
+   "src": "bits/ts/ts_gdi_helipad_bib.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_helipad_a.shp",
+   "src": "bits/ts/ts_gdi_helipad_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_helipad_make.shp",
+   "src": "bits/ts/ts_gdi_helipad_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_helipad_icon.shp",
+   "src": "bits/ts/ts_gdi_helipad_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_a.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_b.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_b.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_c.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_c.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_f.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_f.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_e.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_e.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_make.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgradecenter_icon.shp",
+   "src": "bits/ts/ts_gdi_upgradecenter_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_orcafighter_icon.png",
+   "src": "bits/ts/ts_gdi_orcafighter_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_zoneorca_zoneorcafighter.png",
+   "src": "bits/ts/ts_gdi_promotion_zoneorca_zoneorcafighter.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_zoneorca_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_zoneorca_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_hammerhead.png",
+   "src": "bits/ts/ts_gdi_promotion_hammerhead.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_promotion_hammerhead_icon.png",
+   "src": "bits/ts/ts_gdi_promotion_hammerhead_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_orcabomber_icon.shp",
+   "src": "bits/ts/ts_gdi_orcabomber_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_carryall_icon.png",
+   "src": "bits/ts/forgotten_carryall_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_vulcantower_tsgtctwr.shp",
+   "src": "bits/ts/ts_gdi_vulcantower_tsgtctwr.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_vulcantower.shp",
+   "src": "bits/ts/ts_gdi_vulcantower.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_vulcantower_make.shp",
+   "src": "bits/ts/ts_gdi_vulcantower_make.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_vulcantower_icon.shp",
+   "src": "bits/ts/ts_gdi_vulcantower_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_rpgtower.shp",
+   "src": "bits/ts/ts_gdi_rpgtower.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_rpgtower_icon.shp",
+   "src": "bits/ts/ts_gdi_rpgtower_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_samtower_icon.shp",
+   "src": "bits/ts/ts_gdi_samtower_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_ioncannonuplink_icon.shp",
+   "src": "bits/ts/ts_gdi_ioncannonuplink_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_droppoduplink_icon.shp",
+   "src": "bits/ts/ts_gdi_droppoduplink_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsseekcontrolicon.shp",
+   "src": "bits/ts/tsseekcontrolicon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_navalyard.png",
+   "src": "bits/ts/tsgdi_navalyard.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_navalyard_icon.png",
+   "src": "bits/ts/ts_gdi_navalyard_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_cruiser.png",
+   "src": "bits/ts/tsgdi_cruiser.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_cruiser_turret.png",
+   "src": "bits/ts/tsnod_cruiser_turret.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_gdi_cruiser_icon.png",
+   "src": "bits/ts/ts_gdi_cruiser_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_carrier.png",
+   "src": "bits/ts/tsgdi_carrier.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_carrier_icon.png",
+   "src": "bits/ts/ts_gdi_carrier_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_strike_orca.png",
+   "src": "bits/ts/tsgdi_strike_orca.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_strike_orca_icon.png",
+   "src": "bits/ts/ts_gdi_strike_orca_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_destroyer.png",
+   "src": "bits/ts/tsgdi_destroyer.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_destroyer_icon.png",
+   "src": "bits/ts/ts_gdi_destroyer_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdi_hover.png",
+   "src": "bits/ts/tsgdi_hover.png",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_hover_icon.png",
+   "src": "bits/ts/ts_gdi_hover_icon.png",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_tsgtdrop.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_tsgtdrop.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_tsgtdrop_a.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_tsgtdrop_a.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_tsgtdrop_b.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_tsgtdrop_b.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_tsgtplug_c.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_tsgtplug_c.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_tsgtdropmake.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_tsgtdropmake.shp",
+   "owner": "GDI",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_dropshipbay_icon.shp",
+   "src": "bits/ts/ts_gdi_dropshipbay_icon.shp",
+   "owner": "GDI",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_lightinfantry_altnode1.shp",
+   "src": "bits/ts/ts_nod_lightinfantry_altnode1.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_chameleonspy_tschamspy.shp",
+   "src": "bits/ts/ts_nod_chameleonspy_tschamspy.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_chameleonspy_icon.shp",
+   "src": "bits/ts/ts_nod_chameleonspy_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_elitecadre.shp",
+   "src": "bits/ts/ts_nod_elitecadre.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_elitecadre_icon.shp",
+   "src": "bits/ts/ts_nod_elitecadre_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_shadowteam.shp",
+   "src": "bits/ts/ts_nod_shadowteam.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_shadowteam_air.shp",
+   "src": "bits/ts/ts_nod_shadowteam_air.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_shadowteam_icon.shp",
+   "src": "bits/ts/ts_nod_shadowteam_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_toxintrooper.shp",
+   "src": "bits/ts/ts_nod_toxintrooper.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_toxintrooper_icon.png",
+   "src": "bits/ts/ts_nod_toxintrooper_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_shotguncommando.shp",
+   "src": "bits/ts/ts_nod_shotguncommando.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_shotguncommando_icon.png",
+   "src": "bits/ts/ts_nod_shotguncommando_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_mobilestealthgenerator_icon.shp",
+   "src": "bits/ts/ts_nod_mobilestealthgenerator_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_attackbuggy.shp",
+   "src": "bits/ts/ts_nod_attackbuggy.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_attackbuggy_icon.shp",
+   "src": "bits/ts/ts_nod_attackbuggy_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_laserfence_tspost.shp",
+   "src": "bits/ts/ts_nod_laserfence_tspost.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_laserfence_napost_b.shp",
+   "src": "bits/ts/ts_nod_laserfence_napost_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_laserfence_napost_a.shp",
+   "src": "bits/ts/ts_nod_laserfence_napost_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_laserfence_make.shp",
+   "src": "bits/ts/ts_nod_laserfence_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_laserfence_icon.shp",
+   "src": "bits/ts/ts_nod_laserfence_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_cruiser.png",
+   "src": "bits/ts/tsnod_cruiser.png",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_cruiser_icon.png",
+   "src": "bits/ts/ts_nod_cruiser_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_rayboat.png",
+   "src": "bits/ts/tsnod_rayboat.png",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_rayboat_icon.png",
+   "src": "bits/ts/ts_nod_rayboat_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_submarine.png",
+   "src": "bits/ts/tsnod_submarine.png",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_submarine_icon.png",
+   "src": "bits/ts/ts_nod_submarine_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_hover.png",
+   "src": "bits/ts/tsnod_hover.png",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_hover_icon.png",
+   "src": "bits/ts/ts_nod_hover_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsnod_navalyard.png",
+   "src": "bits/ts/tsnod_navalyard.png",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_navalyard_icon.png",
+   "src": "bits/ts/ts_nod_navalyard_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_stealthtank_icon.png",
+   "src": "bits/ts/ts_nod_stealthtank_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_mobilerepairvehicle_icon.shp",
+   "src": "bits/ts/ts_nod_mobilerepairvehicle_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_artillery_icon.shp",
+   "src": "bits/ts/ts_nod_artillery_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_artillery.shp",
+   "src": "bits/ts/ts_nod_artillery.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_devilstongue_icon.shp",
+   "src": "bits/ts/ts_nod_devilstongue_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_subterraneanapc_icon.shp",
+   "src": "bits/ts/ts_nod_subterraneanapc_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_powerplant.shp",
+   "src": "bits/ts/ts_nod_powerplant.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_powerplant_a.shp",
+   "src": "bits/ts/ts_nod_powerplant_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_powerplant_make.shp",
+   "src": "bits/ts/ts_nod_powerplant_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_powerplant_icon.png",
+   "src": "bits/ts/ts_nod_powerplant_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_advancedpowerplant.shp",
+   "src": "bits/ts/ts_nod_advancedpowerplant.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_advancedpowerplant_a.shp",
+   "src": "bits/ts/ts_nod_advancedpowerplant_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_advancedpowerplant_make.shp",
+   "src": "bits/ts/ts_nod_advancedpowerplant_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_advancedpowerplant_icon.png",
+   "src": "bits/ts/ts_nod_advancedpowerplant_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_handof_nthand.shp",
+   "src": "bits/ts/ts_nod_handof_nthand.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_handof_nthand_a.shp",
+   "src": "bits/ts/ts_nod_handof_nthand_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_handof_nthand_b.shp",
+   "src": "bits/ts/ts_nod_handof_nthand_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_handof_make.shp",
+   "src": "bits/ts/ts_nod_handof_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_handof_handofcabalicon.png",
+   "src": "bits/ts/ts_nod_handof_handofcabalicon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory.shp",
+   "src": "bits/ts/ts_nod_warfactory.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_2.shp",
+   "src": "bits/ts/ts_nod_warfactory_2.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_a.shp",
+   "src": "bits/ts/ts_nod_warfactory_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_b.shp",
+   "src": "bits/ts/ts_nod_warfactory_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_make.shp",
+   "src": "bits/ts/ts_nod_warfactory_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_bib.shp",
+   "src": "bits/ts/ts_nod_warfactory_bib.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_warfactory_icon.png",
+   "src": "bits/ts/ts_nod_warfactory_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_radar.shp",
+   "src": "bits/ts/ts_nod_radar.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_radar_a.shp",
+   "src": "bits/ts/ts_nod_radar_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_radar_make.shp",
+   "src": "bits/ts/ts_nod_radar_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_radar_icon.shp",
+   "src": "bits/ts/ts_nod_radar_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_techcenter.shp",
+   "src": "bits/ts/ts_nod_techcenter.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_techcenter_a.shp",
+   "src": "bits/ts/ts_nod_techcenter_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_techcenter_make.shp",
+   "src": "bits/ts/ts_nod_techcenter_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_techcenter_icon.png",
+   "src": "bits/ts/ts_nod_techcenter_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_obeliskoflight.shp",
+   "src": "bits/ts/ts_nod_obeliskoflight.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_obeliskoflight_b.shp",
+   "src": "bits/ts/ts_nod_obeliskoflight_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_obeliskoflight_a.shp",
+   "src": "bits/ts/ts_nod_obeliskoflight_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_obeliskoflight_make.shp",
+   "src": "bits/ts/ts_nod_obeliskoflight_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_obeliskoflight_icon.png",
+   "src": "bits/ts/ts_nod_obeliskoflight_icon.png",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_stealthgenerator.shp",
+   "src": "bits/ts/ts_nod_stealthgenerator.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_stealthgenerator_a.shp",
+   "src": "bits/ts/ts_nod_stealthgenerator_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_stealthgenerator_icon.shp",
+   "src": "bits/ts/ts_nod_stealthgenerator_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_helipad.shp",
+   "src": "bits/ts/ts_nod_helipad.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_helipad_bib.shp",
+   "src": "bits/ts/ts_nod_helipad_bib.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_nod_helipad_a.shp",
+   "src": "bits/ts/ts_nod_helipad_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_helipad_icon.shp",
+   "src": "bits/ts/ts_nod_helipad_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumrefinery_icon.shp",
+   "src": "bits/ts/ts_nod_tiberiumrefinery_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumwastefacility.shp",
+   "src": "bits/ts/ts_nod_tiberiumwastefacility.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumwastefacility_a.shp",
+   "src": "bits/ts/ts_nod_tiberiumwastefacility_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumwastefacility_b.shp",
+   "src": "bits/ts/ts_nod_tiberiumwastefacility_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumwastefacility_bib.shp",
+   "src": "bits/ts/ts_nod_tiberiumwastefacility_bib.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_tiberiumwastefacility_icon.shp",
+   "src": "bits/ts/ts_nod_tiberiumwastefacility_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_missilesilo_cabal.shp",
+   "src": "bits/ts/ts_nod_missilesilo_cabal.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_missilesilo_cabal_b.shp",
+   "src": "bits/ts/ts_nod_missilesilo_cabal_b.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_missilesilo_cabal_make.shp",
+   "src": "bits/ts/ts_nod_missilesilo_cabal_make.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_missilesilo_cabal_a.shp",
+   "src": "bits/ts/ts_nod_missilesilo_cabal_a.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_missilesilo_icon.shp",
+   "src": "bits/ts/ts_nod_missilesilo_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_bansheefighter_icon.shp",
+   "src": "bits/ts/ts_nod_bansheefighter_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_samsite.shp",
+   "src": "bits/ts/ts_nod_samsite.shp",
+   "owner": "Nod",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_samsite_icon.shp",
+   "src": "bits/ts/ts_nod_samsite_icon.shp",
+   "owner": "Nod",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_civ1.shp",
+   "src": "bits/ts/ts_civ1.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_civ2.shp",
+   "src": "bits/ts/ts_civ2.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_civ3.shp",
+   "src": "bits/ts/ts_civ3.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_sedan.png",
+   "src": "bits/ts/ts_sedan.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_pickup.png",
+   "src": "bits/ts/ts_pickup.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_pickupb.png",
+   "src": "bits/ts/ts_pickupb.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_trucka.png",
+   "src": "bits/ts/ts_trucka.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_truckb.png",
+   "src": "bits/ts/ts_truckb.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_wini.png",
+   "src": "bits/ts/ts_wini.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_bus.png",
+   "src": "bits/ts/ts_bus.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 2
+  },
+  {
+   "name": "ts_city01.shp",
+   "src": "bits/ts/ts_city01.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city02.shp",
+   "src": "bits/ts/ts_city02.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city03.shp",
+   "src": "bits/ts/ts_city03.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city04.shp",
+   "src": "bits/ts/ts_city04.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city05.shp",
+   "src": "bits/ts/ts_city05.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city06.shp",
+   "src": "bits/ts/ts_city06.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city07.shp",
+   "src": "bits/ts/ts_city07.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city08.shp",
+   "src": "bits/ts/ts_city08.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city09.shp",
+   "src": "bits/ts/ts_city09.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city10.shp",
+   "src": "bits/ts/ts_city10.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city11.shp",
+   "src": "bits/ts/ts_city11.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city12.shp",
+   "src": "bits/ts/ts_city12.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city13.shp",
+   "src": "bits/ts/ts_city13.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city14.shp",
+   "src": "bits/ts/ts_city14.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city15.shp",
+   "src": "bits/ts/ts_city15.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city16.shp",
+   "src": "bits/ts/ts_city16.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city17.shp",
+   "src": "bits/ts/ts_city17.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city18.shp",
+   "src": "bits/ts/ts_city18.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city19.shp",
+   "src": "bits/ts/ts_city19.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city20.shp",
+   "src": "bits/ts/ts_city20.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city21.shp",
+   "src": "bits/ts/ts_city21.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_city22.shp",
+   "src": "bits/ts/ts_city22.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0001.shp",
+   "src": "bits/ts/tsct0001.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0002.shp",
+   "src": "bits/ts/tsct0002.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0003.shp",
+   "src": "bits/ts/tsct0003.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0004.shp",
+   "src": "bits/ts/tsct0004.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0005.shp",
+   "src": "bits/ts/tsct0005.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0006.shp",
+   "src": "bits/ts/tsct0006.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0007.shp",
+   "src": "bits/ts/tsct0007.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0008.shp",
+   "src": "bits/ts/tsct0008.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0009.shp",
+   "src": "bits/ts/tsct0009.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0010.shp",
+   "src": "bits/ts/tsct0010.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0011.shp",
+   "src": "bits/ts/tsct0011.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0012.shp",
+   "src": "bits/ts/tsct0012.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0013.shp",
+   "src": "bits/ts/tsct0013.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0014.shp",
+   "src": "bits/ts/tsct0014.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0015.shp",
+   "src": "bits/ts/tsct0015.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0016.shp",
+   "src": "bits/ts/tsct0016.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0017.shp",
+   "src": "bits/ts/tsct0017.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0018.shp",
+   "src": "bits/ts/tsct0018.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0019.shp",
+   "src": "bits/ts/tsct0019.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0020.shp",
+   "src": "bits/ts/tsct0020.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsct0021.shp",
+   "src": "bits/ts/tsct0021.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard01.shp",
+   "src": "bits/ts/ts_bboard01.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard02.shp",
+   "src": "bits/ts/ts_bboard02.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard03.shp",
+   "src": "bits/ts/ts_bboard03.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard04.shp",
+   "src": "bits/ts/ts_bboard04.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard05.shp",
+   "src": "bits/ts/ts_bboard05.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard06.shp",
+   "src": "bits/ts/ts_bboard06.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard07.shp",
+   "src": "bits/ts/ts_bboard07.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard08.shp",
+   "src": "bits/ts/ts_bboard08.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard09.shp",
+   "src": "bits/ts/ts_bboard09.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard10.shp",
+   "src": "bits/ts/ts_bboard10.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard11.shp",
+   "src": "bits/ts/ts_bboard11.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard12.shp",
+   "src": "bits/ts/ts_bboard12.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard13.shp",
+   "src": "bits/ts/ts_bboard13.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard14.shp",
+   "src": "bits/ts/ts_bboard14.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard15.shp",
+   "src": "bits/ts/ts_bboard15.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_bboard16.shp",
+   "src": "bits/ts/ts_bboard16.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_ctpyr01.shp",
+   "src": "bits/ts/ts_ctpyr01.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_ctpyr02.shp",
+   "src": "bits/ts/ts_ctpyr02.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_ctpyr03.shp",
+   "src": "bits/ts/ts_ctpyr03.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_ctvega.shp",
+   "src": "bits/ts/ts_ctvega.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree01.tem",
+   "src": "bits/ts/ts_tree01.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree02.tem",
+   "src": "bits/ts/ts_tree02.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree03.tem",
+   "src": "bits/ts/ts_tree03.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree04.tem",
+   "src": "bits/ts/ts_tree04.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree05.tem",
+   "src": "bits/ts/ts_tree05.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree06.tem",
+   "src": "bits/ts/ts_tree06.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree07.tem",
+   "src": "bits/ts/ts_tree07.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree08.tem",
+   "src": "bits/ts/ts_tree08.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree09.tem",
+   "src": "bits/ts/ts_tree09.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree10.tem",
+   "src": "bits/ts/ts_tree10.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree11.tem",
+   "src": "bits/ts/ts_tree11.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree12.tem",
+   "src": "bits/ts/ts_tree12.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree13.tem",
+   "src": "bits/ts/ts_tree13.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree14.tem",
+   "src": "bits/ts/ts_tree14.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree15.tem",
+   "src": "bits/ts/ts_tree15.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree16.tem",
+   "src": "bits/ts/ts_tree16.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree17.tem",
+   "src": "bits/ts/ts_tree17.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree18.tem",
+   "src": "bits/ts/ts_tree18.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree19.tem",
+   "src": "bits/ts/ts_tree19.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree20.tem",
+   "src": "bits/ts/ts_tree20.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree21.tem",
+   "src": "bits/ts/ts_tree21.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree22.tem",
+   "src": "bits/ts/ts_tree22.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree23.tem",
+   "src": "bits/ts/ts_tree23.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree24.tem",
+   "src": "bits/ts/ts_tree24.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tree25.tem",
+   "src": "bits/ts/ts_tree25.tem",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_tiberiumrefinery.shp",
+   "src": "bits/ts/ts_gdi_tiberiumrefinery.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_tiberiumrefinery_a.shp",
+   "src": "bits/ts/ts_gdi_tiberiumrefinery_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_tiberiumrefinery_c.shp",
+   "src": "bits/ts/ts_gdi_tiberiumrefinery_c.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_tiberiumrefinery_bib.shp",
+   "src": "bits/ts/ts_gdi_tiberiumrefinery_bib.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_engineer.shp",
+   "src": "bits/ts/ts_gdi_engineer.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_engineer_icon.shp",
+   "src": "bits/ts/ts_gdi_engineer_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_engineer_altengi.shp",
+   "src": "bits/ts/ts_nod_engineer_altengi.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_rocketinfantry_alte3.shp",
+   "src": "bits/ts/ts_nod_rocketinfantry_alte3.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_tratos_icon.png",
+   "src": "bits/ts/forgot_tratos_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_rocketinfantry_icon.png",
+   "src": "bits/ts/forgotten_rocketinfantry_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsfloater.shp",
+   "src": "bits/ts/tsfloater.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsvislrg.shp",
+   "src": "bits/ts/tsvislrg.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsvissml.shp",
+   "src": "bits/ts/tsvissml.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsgghunt.shp",
+   "src": "bits/ts/tsgghunt.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsdlimpmake.shp",
+   "src": "bits/ts/tsdlimpmake.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsldroneicon.shp",
+   "src": "bits/ts/tsldroneicon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_attackcycle.shp",
+   "src": "bits/ts/ts_nod_attackcycle.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_attackcycle_icon.shp",
+   "src": "bits/ts/ts_nod_attackcycle_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_ticktank_tsgttick.shp",
+   "src": "bits/ts/ts_nod_ticktank_tsgttick.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_ticktank_make.shp",
+   "src": "bits/ts/ts_nod_ticktank_make.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_ticktank_icon.png",
+   "src": "bits/ts/ts_nod_ticktank_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_mobileconstructionvehicle_icon.shp",
+   "src": "bits/ts/ts_gdi_mobileconstructionvehicle_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_artilleryspider.png",
+   "src": "bits/ts/cabal_artilleryspider.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_artilleryspider_icon.png",
+   "src": "bits/ts/cabal_artilleryspider_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_tarantula.png",
+   "src": "bits/ts/cabal_tarantula.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_tarantula_icon.png",
+   "src": "bits/ts/cabal_tarantula_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_cabal.shp",
+   "src": "bits/ts/ts_gdi_constructionyard_cabal.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_cabal_make.shp",
+   "src": "bits/ts/ts_gdi_constructionyard_cabal_make.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_d.shp",
+   "src": "bits/ts/ts_gdi_constructionyard_d.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_a.shp",
+   "src": "bits/ts/ts_gdi_constructionyard_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_b.shp",
+   "src": "bits/ts/ts_gdi_constructionyard_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_constructionyard_icon.png",
+   "src": "bits/ts/ts_gdi_constructionyard_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tstorpedo.png",
+   "src": "bits/ts/tstorpedo.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsnttmpl.shp",
+   "src": "bits/ts/tsnttmpl.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsnttmpl_a.shp",
+   "src": "bits/ts/tsnttmpl_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsnttmplmake.shp",
+   "src": "bits/ts/tsnttmplmake.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tsnodtempleicon.shp",
+   "src": "bits/ts/tsnodtempleicon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsctarmr.shp",
+   "src": "bits/ts/tsctarmr.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tstmplicon.shp",
+   "src": "bits/ts/tstmplicon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_helipad.shp",
+   "src": "bits/ts/forgotten_helipad.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_helipad_b.shp",
+   "src": "bits/ts/forgotten_helipad_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_helipad_a.shp",
+   "src": "bits/ts/forgotten_helipad_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_helipad_icon.png",
+   "src": "bits/ts/forgotten_helipad_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_tsgtsilo.shp",
+   "src": "bits/ts/ts_nod_silo_tsgtsilo.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_silo_tsgtsilo_a.shp",
+   "src": "bits/ts/ts_gdi_silo_tsgtsilo_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_silo_tsgtsilo_b.shp",
+   "src": "bits/ts/ts_gdi_silo_tsgtsilo_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_silo_icon.shp",
+   "src": "bits/ts/ts_gdi_silo_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo.shp",
+   "src": "bits/ts/ts_nod_silo.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_s.shp",
+   "src": "bits/ts/ts_nod_silo_s.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_sd.shp",
+   "src": "bits/ts/ts_nod_silo_sd.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_b.shp",
+   "src": "bits/ts/ts_nod_silo_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_a.shp",
+   "src": "bits/ts/ts_nod_silo_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_ad.shp",
+   "src": "bits/ts/ts_nod_silo_ad.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_w.shp",
+   "src": "bits/ts/ts_nod_silo_w.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_wd.shp",
+   "src": "bits/ts/ts_nod_silo_wd.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_make.shp",
+   "src": "bits/ts/ts_nod_silo_make.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_silo_icon.png",
+   "src": "bits/ts/ts_nod_silo_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_bib.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_bib.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_b.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_a.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_c.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_c.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_d.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_d.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_cabal_make.shp",
+   "src": "bits/ts/ts_gdi_servicedepot_cabal_make.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_servicedepot_icon.png",
+   "src": "bits/ts/ts_gdi_servicedepot_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "glgadfly_missile.shp",
+   "src": "bits/shockwave/glgadfly_missile.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_smoker.png",
+   "src": "bits/ts/forgot_smoker.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgot_smoker_icon.png",
+   "src": "bits/ts/forgot_smoker_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsotrnicon.shp",
+   "src": "bits/ts/tsotrnicon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_jumpjetinfantry_altjumpjet.shp",
+   "src": "bits/ts/ts_gdi_jumpjetinfantry_altjumpjet.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_jumpjetinfantry_icon.shp",
+   "src": "bits/ts/ts_gdi_jumpjetinfantry_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_constructionyard.png",
+   "src": "bits/ts/forgotten_constructionyard.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_constructionyard_icon.png",
+   "src": "bits/ts/forgotten_constructionyard_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_crystalpowerextractor.png",
+   "src": "bits/ts/forgotten_crystalpowerextractor.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_crystalpowerextractor_icon.png",
+   "src": "bits/ts/forgotten_crystalpowerextractor_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_barracks.png",
+   "src": "bits/ts/forgotten_barracks.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_barracks_icon.png",
+   "src": "bits/ts/forgotten_barracks_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_refinery.png",
+   "src": "bits/ts/forgotten_refinery.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_refinery_icon.png",
+   "src": "bits/ts/forgotten_refinery_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_radar.png",
+   "src": "bits/ts/forgotten_radar.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_radar_icon.png",
+   "src": "bits/ts/forgotten_radar_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_church.png",
+   "src": "bits/ts/forgotten_church.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_church_icon.png",
+   "src": "bits/ts/forgotten_church_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_warfactory_top.png",
+   "src": "bits/ts/forgotten_warfactory_top.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_warfactory_bottom.png",
+   "src": "bits/ts/forgotten_warfactory_bottom.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_warfactory_door.png",
+   "src": "bits/ts/forgotten_warfactory_door.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_warfactory_buildup.png",
+   "src": "bits/ts/forgotten_warfactory_buildup.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_warfactory_icon.png",
+   "src": "bits/ts/forgotten_warfactory_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_silo.png",
+   "src": "bits/ts/forgotten_silo.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_silo_icon.png",
+   "src": "bits/ts/forgotten_silo_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_empulsecannon.shp",
+   "src": "bits/ts/ts_gdi_empulsecannon.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_empulsecannon_a.shp",
+   "src": "bits/ts/ts_gdi_empulsecannon_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_empulsecannon_icon.shp",
+   "src": "bits/ts/ts_gdi_empulsecannon_icon.shp",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_juggerflakwall.png",
+   "src": "bits/ts/forgotten_juggerflakwall.png",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_juggerflakwall_icon.png",
+   "src": "bits/ts/forgotten_juggerflakwall_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ra2_pod.shp",
+   "src": "bits/ra2/ra2_pod.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ra2_droppod2.shp",
+   "src": "bits/ra2/ra2_droppod2.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ra2_droppod.shp",
+   "src": "bits/ra2/ra2_droppod.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ra2_podring.shp",
+   "src": "bits/ra2/ra2_podring.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_dissolver_weapon.shp",
+   "src": "bits/ts/cabal_dissolver_weapon.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tibpump.shp",
+   "src": "bits/ts/tibpump.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tibpump_a.shp",
+   "src": "bits/ts/tibpump_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "tibpump_b.shp",
+   "src": "bits/ts/tibpump_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_tiberiumpump_icon.png",
+   "src": "bits/ts/ts_tiberiumpump_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tiberiumspike_a.shp",
+   "src": "bits/ts/forgotten_tiberiumspike_a.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tiberiumspike_b.shp",
+   "src": "bits/ts/forgotten_tiberiumspike_b.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_tiberiumspike_icon.png",
+   "src": "bits/ts/forgotten_tiberiumspike_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsbomb.shp",
+   "src": "bits/ts/tsbomb.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_seretraining_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_seretraining_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_sonicweaponry_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_sonicweaponry_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_projectileimprovements_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_projectileimprovements_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_fieldmaintenance_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_fieldmaintenance_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_railgunweaponry_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_railgunweaponry_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_ceramicarmor_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_ceramicarmor_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_gdi_upgrade_modernfirecontrolsystems_icon.png",
+   "src": "bits/ts/ts_gdi_upgrade_modernfirecontrolsystems_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_mobilityspecialization_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_mobilityspecialization_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_tiberiumlenses_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_tiberiumlenses_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_tiberiumcoremissiles_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_tiberiumcoremissiles_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_auxiliaryweapon_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_auxiliaryweapon_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_infiltrationkit_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_infiltrationkit_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_stealthfieldsimprovements_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_stealthfieldsimprovements_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_advancedtiberiumrefinement_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_advancedtiberiumrefinement_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "ts_nod_upgrade_willofkane_icon.png",
+   "src": "bits/ts/ts_nod_upgrade_willofkane_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsgdidummyicon.png",
+   "src": "bits/ts/tsgdidummyicon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_genomemapping_icon.png",
+   "src": "bits/ts/forgotten_upgrade_genomemapping_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_chemicalfuel_icon.png",
+   "src": "bits/ts/forgotten_upgrade_chemicalfuel_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_friendlywildlife_icon.png",
+   "src": "bits/ts/forgotten_upgrade_friendlywildlife_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_junkarmor_icon.png",
+   "src": "bits/ts/forgotten_upgrade_junkarmor_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_tiberiumboosters_icon.png",
+   "src": "bits/ts/forgotten_upgrade_tiberiumboosters_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_unity_icon.png",
+   "src": "bits/ts/forgotten_upgrade_unity_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_chemicalweapons_icon.png",
+   "src": "bits/ts/forgotten_upgrade_chemicalweapons_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "forgotten_upgrade_tiberiumadaptability_icon.png",
+   "src": "bits/ts/forgotten_upgrade_tiberiumadaptability_icon.png",
+   "owner": "Shared",
+   "type": "icons",
+   "refs": 1
+  },
+  {
+   "name": "tsntfence.shp",
+   "src": "bits/ts/tsntfence.shp",
+   "owner": "Shared",
+   "type": "sprites",
+   "refs": 1
+  }
+ ],
+ "shared_detail": [
+  {
+   "name": "dropup1.aud",
+   "src": [
+    "bits/ts/dropup1.aud",
+    "bits/ts/audio/dropup1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "dropdwn1.aud",
+   "src": [
+    "bits/ts/dropdwn1.aud",
+    "bits/ts/audio/dropdwn1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "orcaup1.aud",
+   "src": [
+    "bits/ts/orcaup1.aud",
+    "bits/ts/audio/orcaup1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/wz2100.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/starwars.yaml"
+   ]
+  },
+  {
+   "name": "orcadwn1.aud",
+   "src": [
+    "bits/ts/orcadwn1.aud",
+    "bits/ts/audio/orcadwn1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/wz2100.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/starwars.yaml"
+   ]
+  },
+  {
+   "name": "cloak5.aud",
+   "src": [
+    "bits/ts/cloak5.aud",
+    "bits/ts/audio/cloak5.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/generals.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/halloween.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/defaults.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/misc.yaml"
+   ]
+  },
+  {
+   "name": "obelpowr.aud",
+   "src": [
+    "bits/shared/obelpowr.aud",
+    "bits/ts/obelpowr.aud",
+    "bits/ts/audio/obelpowr.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/tiberiaalliances.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/n64.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/buildings.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/starwars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/win98.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/naval.yaml"
+   ]
+  },
+  {
+   "name": "ra2_ngyard_c.shp",
+   "src": [
+    "bits/ra2/ra2_ngyard_c.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "hunter2.aud",
+   "src": [
+    "bits/ts/hunter2.aud",
+    "bits/ts/audio/hunter2.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "tsplace2.aud",
+   "src": [
+    "bits/ts/tsplace2.aud",
+    "bits/ts/audio/tsplace2.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/vehicles.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/templates.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/defenses.yaml"
+   ]
+  },
+  {
+   "name": "xplos.aud",
+   "src": [
+    "bits/shared/xplos.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/classicdoom.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/explosions.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/simcity.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/advancewars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/defaults.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starwars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/missiles.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiaalliances.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/advacewars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tomorrow.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/sow.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/generals.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit1.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit1.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit2.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit2.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit3.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit3.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit4.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit4.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "fireweb1.aud",
+   "src": [
+    "bits/ts/fireweb1.aud",
+    "bits/ts/audio/fireweb1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml"
+   ]
+  },
+  {
+   "name": "obelcor3.aud",
+   "src": [
+    "bits/ts/obelcor3.aud",
+    "bits/ts/audio/obelcor3.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "2100rotlsr.wav",
+   "src": [
+    "bits/2100/2100rotlsr.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/wz2100.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit1.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit1.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit2.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit2.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit3.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit3.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit4.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit4.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "rketinf1.aud",
+   "src": [
+    "bits/ts/rketinf1.aud",
+    "bits/ts/audio/rketinf1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "obelmod1.aud",
+   "src": [
+    "bits/ts/obelmod1.aud",
+    "bits/ts/audio/obelmod1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "chaingn1.aud",
+   "src": [
+    "bits/ts/chaingn1.aud",
+    "bits/ts/audio/chaingn1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "cygun1.aud",
+   "src": [
+    "bits/ts/cygun1.aud",
+    "bits/ts/audio/cygun1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "tsgun4.aud",
+   "src": [
+    "bits/ts/tsgun4.aud",
+    "bits/ts/audio/tsgun4.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/heroes.yaml"
+   ]
+  },
+  {
+   "name": "samshot1.aud",
+   "src": [
+    "bits/ts/samshot1.aud",
+    "bits/ts/audio/samshot1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "tnkfire2.aud",
+   "src": [
+    "bits/shared/tnkfire2.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiandawn.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/infected.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/shockwave.yaml"
+   ]
+  },
+  {
+   "name": "lastur1.aud",
+   "src": [
+    "bits/ts/lastur1.aud",
+    "bits/ts/audio/lastur1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml"
+   ]
+  },
+  {
+   "name": "tsdissolver.wav",
+   "src": [
+    "bits/ts/tsdissolver.wav",
+    "bits/ts/audio/tsdissolver.wav"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "corefir1.aud",
+   "src": [
+    "bits/ts/corefir1.aud",
+    "bits/ts/audio/corefir1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "plasma_robot_shoot.aud",
+   "src": [
+    "bits/sow/plasma_robot_shoot.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/sow.yaml"
+   ]
+  },
+  {
+   "name": "nukemisl.aud",
+   "src": [
+    "bits/shared/nukemisl.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/tomorrow.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/darkreign.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tomorrow.yaml"
+   ]
+  },
+  {
+   "name": "obelray1.aud",
+   "src": [
+    "bits/shared/obelray1.aud",
+    "bits/ts/obelray1.aud",
+    "bits/ts/audio/obelray1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/shared/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "tsghosticon.shp",
+   "src": [
+    "bits/ts/tsghosticon.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml"
+   ]
+  },
+  {
+   "name": "tsnpwricon.shp",
+   "src": [
+    "bits/ts/tsnpwricon.shp",
+    "bits/ts/icon/tsnpwricon.shp"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "napalm2.shp",
+   "src": [
+    "bits/shared/napalm2.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/civilian.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml"
+   ]
+  },
+  {
+   "name": "forgotten_veinhole_icon.tem",
+   "src": [
+    "bits/td/forgotten_veinhole_icon.tem"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/challenge.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/structures.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/lostunits.yaml"
+   ]
+  },
+  {
+   "name": "tnkfire6.aud",
+   "src": [
+    "bits/shared/tnkfire6.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ixian/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml"
+   ]
+  },
+  {
+   "name": "flamer2.aud",
+   "src": [
+    "bits/shared/flamer2.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/valentine.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/explosions.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/d2k/ordos/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiandawn.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/generals.yaml"
+   ]
+  },
+  {
+   "name": "M203.aud",
+   "src": [
+    "bits/m203.aud",
+    "bits/shared/m203.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/simcity.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/shockwave.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "trashcannon.wav",
+   "src": [
+    "bits/ra2/mod/trashcannon.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml"
+   ]
+  },
+  {
+   "name": "tnkfire4.aud",
+   "src": [
+    "bits/shared/tnkfire4.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "jugger1.aud",
+   "src": [
+    "bits/ts/jugger1.aud",
+    "bits/ts/audio/jugger1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "hovrmis1.aud",
+   "src": [
+    "bits/ts/hovrmis1.aud",
+    "bits/ts/audio/hovrmis1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/heroes.yaml"
+   ]
+  },
+  {
+   "name": "misl1.aud",
+   "src": [
+    "bits/ts/misl1.aud",
+    "bits/ts/audio/misl1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/heroes.yaml"
+   ]
+  },
+  {
+   "name": "orcamis1.aud",
+   "src": [
+    "bits/ts/orcamis1.aud",
+    "bits/ts/audio/orcamis1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "flamtnk1.aud",
+   "src": [
+    "bits/ts/flamtnk1.aud",
+    "bits/ts/audio/flamtnk1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml"
+   ]
+  },
+  {
+   "name": "fiend2.aud",
+   "src": [
+    "bits/ts/fiend2.aud",
+    "bits/ts/audio/fiend2.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  },
+  {
+   "name": "vicer1.aud",
+   "src": [
+    "bits/ts/vicer1.aud",
+    "bits/ts/audio/vicer1.aud"
+   ],
+   "foreign": [],
+   "note": "ambiguous-multi"
+  }
+ ],
+ "missing_detail": [
+  {
+   "name": "spysreve.wav",
+   "refs": 1
+  },
+  {
+   "name": "cabal_obelisk_charge.wav",
+   "refs": 1
+  },
+  {
+   "name": "cabal_navalyard_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "expnew12.aud",
+   "refs": 2
+  },
+  {
+   "name": "splash9.aud",
+   "refs": 3
+  },
+  {
+   "name": "cabal_obelisk_fire.wav",
+   "refs": 1
+  },
+  {
+   "name": "pzehit00.aud",
+   "refs": 2
+  },
+  {
+   "name": "cannon1.aud",
+   "refs": 1
+  },
+  {
+   "name": "aacanon3.aud",
+   "refs": 2
+  },
+  {
+   "name": "minelay1.aud",
+   "refs": 1
+  },
+  {
+   "name": "mineblo1.aud",
+   "refs": 1
+  },
+  {
+   "name": "tesla1.aud",
+   "refs": 1
+  },
+  {
+   "name": "turret1.aud",
+   "refs": 1
+  },
+  {
+   "name": "h2obomb2.aud",
+   "refs": 1
+  },
+  {
+   "name": "kaboom15.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew13.wav",
+   "refs": 1
+  },
+  {
+   "name": "expnew09.wav",
+   "refs": 1
+  },
+  {
+   "name": "expnew01.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew02.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew04.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew05.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew03.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew07.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew08.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew11.aud",
+   "refs": 1
+  },
+  {
+   "name": "chute1.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew14.aud",
+   "refs": 1
+  },
+  {
+   "name": "kaboom12.aud",
+   "refs": 1
+  },
+  {
+   "name": "kaboom25.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew13.aud",
+   "refs": 1
+  },
+  {
+   "name": "missile6.aud",
+   "refs": 1
+  },
+  {
+   "name": "expnew19.aud",
+   "refs": 1
+  }
+ ],
+ "qualified_detail": [
+  {
+   "name": "invisibleitem.shp",
+   "pkg": "shared_sprites",
+   "refs": 6
+  },
+  {
+   "name": "cabal_cyborginfantry_altcyborg.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborginfantry_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_promotion_devout.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "frag3.shp",
+   "pkg": "ts_shared_sprites",
+   "refs": 4
+  },
+  {
+   "name": "cabal_promotion_devout_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_ascended.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_ascended_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_rocketcyborg.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_rocketcyborg_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_hackercyborg.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_hackercyborg_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_enlighted.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_enlighted_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_engineer.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_engineer_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgcommando.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgcommando_icon.shp",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgcommandov2.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgcommandov2_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_coredefender_tsdefender.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_coredefender_defd_exp.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_coredefender_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgreaper.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgreaper_icon.shp",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "ra2_oregath.shp",
+   "pkg": "shared_sprites",
+   "refs": 3
+  },
+  {
+   "name": "cabal_tiberiumharvester_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_promotion_spidercnc4_laserspider.png",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_promotion_spidercnc4_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "gunfire2.shp",
+   "pkg": "shared_sprites",
+   "refs": 5
+  },
+  {
+   "name": "cabal_mantis.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mantis_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_ravager.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_ravager_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_avatar_manticore.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_avatar_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_scarabapc.png",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_scarabapc_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_ybbar.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_ybbar_c.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_ybbar_a.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_ybbar_ad.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_ybbar_b.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_make.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_cyborgfactory_icon.png",
+   "pkg": "cabal_icons",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mechfactory_1.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mechfactory_2.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mechfactory.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mechfactory_b.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  },
+  {
+   "name": "cabal_mechfactory_a.shp",
+   "pkg": "cabal_sprites",
+   "refs": 1
+  }
+ ],
+ "packaged_detail": [
+  {
+   "name": "vnavupa.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "icraatta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "uplace.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "uselbuil.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gdamag1a.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gdamag1b.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gdamag1c.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gdamag1d.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gdamag1e.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "igensqua.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexp14a.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexpwasa.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vbooat2a.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexp11a.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexp14b.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexp14c.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexp14d.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "gexpapoa.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vifvrepa.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vaegatta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vaegattb.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  }
+ ]
+}

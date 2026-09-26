@@ -79,8 +79,8 @@ zerg_overlord:
 		PipCount: 10
 		FullSequence: pip-yellow
 	WithCargoSounds:
-		EnterSounds: scoverlordgetin.wav
-		ExitSounds: scoverlordgetout.wav
+		EnterSounds: sc_zerg_sounds|scoverlordgetin.wav
+		ExitSounds: sc_zerg_sounds|scoverlordgetout.wav
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -181,8 +181,8 @@ zerg_broodweaver:
 		Position: BottomLeft
 		RequiresSelection: true
 	WithCargoSounds:
-		EnterSounds: scoverlordgetin.wav
-		ExitSounds: scoverlordgetout.wav
+		EnterSounds: sc_zerg_sounds|scoverlordgetin.wav
+		ExitSounds: sc_zerg_sounds|scoverlordgetout.wav
 	GrantConditionOnPrerequisite@zerg_upgrade_pneumatizedcarapace:
 		Condition: zerg_upgrade_pneumatizedcarapace
 		Prerequisites: zerg_upgrade_pneumatizedcarapace
@@ -710,7 +710,7 @@ zerg_behemoth:
 		Position: BottomLeft
 		RequiresSelection: true
 	WithCargoSounds:
-		EnterSounds: scoverlordgetin.wav
-		ExitSounds: scoverlordgetout.wav
+		EnterSounds: sc_zerg_sounds|scoverlordgetin.wav
+		ExitSounds: sc_zerg_sounds|scoverlordgetout.wav
 	ActorStatValues:
 		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2

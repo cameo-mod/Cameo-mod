@@ -435,8 +435,8 @@ terran_dropship:
 	ActorStatValues:
 		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:
-		EnterSounds: tdrtra00.wav
-		ExitSounds: tdrtra00.wav
+		EnterSounds: sc_shared_sounds|tdrtra00.wav
+		ExitSounds: sc_shared_sounds|tdrtra00.wav
 
 terran_pythean:
 	Inherits: ^Helicopter
@@ -529,8 +529,8 @@ terran_pythean:
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 	WithCargoSounds:
-		EnterSounds: tdrtra00.wav
-		ExitSounds: tdrtra00.wav
+		EnterSounds: sc_shared_sounds|tdrtra00.wav
+		ExitSounds: sc_shared_sounds|tdrtra00.wav
 
 terran_medivac:
 	Inherits: ^Helicopter
@@ -604,8 +604,8 @@ terran_medivac:
 	ActorStatValues:
 		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:
-		EnterSounds: tdrtra00.wav
-		ExitSounds: tdrtra00.wav
+		EnterSounds: sc_shared_sounds|tdrtra00.wav
+		ExitSounds: sc_shared_sounds|tdrtra00.wav
 
 terran_battlecruiser:
 	Inherits: ^Helicopter
@@ -713,7 +713,7 @@ terran_battlecruiser:
 	DeathSounds:
 	AmbientSound:
 		RequiresCondition: tacticaljump
-		SoundFiles: yamatocharge.wav
+		SoundFiles: sc_terran_sounds|yamatocharge.wav
 		Volume: 5
 	AmmoPool:
 		InitialAmmo: 0
@@ -848,7 +848,7 @@ terran_phobos:
 		RequiresCondition: !tacticaljump
 	AmbientSound:
 		RequiresCondition: tacticaljump
-		SoundFiles: yamatocharge.wav
+		SoundFiles: sc_terran_sounds|yamatocharge.wav
 		Volume: 5
 	AmmoPool:
 		InitialAmmo: 0

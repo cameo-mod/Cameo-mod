@@ -149,21 +149,21 @@ commits and reported.
 
 | faction | rename | pack split | own ai.yaml | assets in pack | fluent descriptions |
 |---|---|---|---|---|---|
-| Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | — | DONE `d723a6b78` |
-| TS GDI | DONE `9d901fb45` | DONE `dfa00f20f` | — | — | — |
-| TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | — | — |
-| CABAL | DONE | DONE | — | DONE `68cdd5ebb`/`472209150` | DONE `68cdd5ebb` |
-| TS Shared | — | — | — | DONE `6835a04` | — |
+| Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | PARTIAL (99 files → `ts_forgotten_*`) | DONE `d723a6b78` |
+| TS GDI | DONE `9d901fb45` | DONE `dfa00f20f` | — | PARTIAL (121 files → `ts_gdi_*`) | — |
+| TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | PARTIAL (89 files → `ts_nod_*`) | — |
+| CABAL | DONE | DONE | — | DONE `68cdd5ebb`/`472209150` (+1 `cabal_sounds`) | DONE `68cdd5ebb` |
+| TS Shared | — | — | — | DONE `6835a04` (+239 `ts_shared_*`) | — |
 | Top-level Shared | — | — | — | DONE `e1b153d9c`/`472209150` | — |
-| TD GDI / TD Nod | DONE (ids renamed to `td_gdi_*`/`td_nod_*`) | DONE incl. weapons+sequences | — | — | — |
+| TD GDI / TD Nod | DONE (ids renamed to `td_gdi_*`/`td_nod_*`) | DONE incl. weapons+sequences | — | PARTIAL (257 exclusive files → `td_<pack>_<type>|`, 4 mounts; 110 shared stay bare, 10 dangling) | — |
 | RA2Mod six (original) | DONE (ids renamed to `asianalliance_*`, `steelconsortium_*`, `latinsyndicate_*`, `naxis_*`, `schwarzermond_*`, `futuretech_*`) | DONE incl. weapons+sequences | — | PARTIAL (1032+47 files copied to `files/{icons,sprites,sounds}` with `ra2m_<pack>_<type>|` refs incl. the live sequences/weapons/audio monoliths; 107 cross-theme refs stay in `bits/`, 37 dangling) | — |
 | D2k four (atreides/harkonnen/ixian/ordos) | PARTIAL (new-style `atreides_*` etc. for some actors; old-style dotted names like `combat_tank.atreides` remain) | DONE incl. weapons+sequences | — | PARTIAL (packs already held 529 files; 144 exclusives copied from `bits/d2k`, 382 refs qualified to `d2k_<pack>_<type>|` incl. live sequences/weapons/audio monoliths; 32 resolve inside SOUND.RS/DATA.R16; 10 dangling, 60 shared stay) | — |
 | RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | PARTIAL (528 exclusive files copied to `files/{icons,sprites,sounds}` with `ra1_<pack>_<type>|` refs, 12 mounts; 90 shared stay bare; 26 dangling — RA1 `.aud` never shipped in `bits/`) | — |
 | RA2 (america/russia/yuri) | maps drafted | DONE (Allies/Soviets/Yuri/Shared packs own their yaml; `rules/redalert2.yaml` remains mounted as the shared monolith via the wrapper) | — | PARTIAL (397 faction-exclusive files → `files/{icons,sprites,sounds}` with `ra2_<faction>_<type>|` refs; `audio.bag`+`.idx` and `bits/ra2/tileset` moved into the Shared pack; 458 cross-theme refs stay in `bits/`) | — |
-| StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
+| StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | PARTIAL (464 exclusive files → `sc_<pack>_<type>|`, 12 mounts; 86 shared stay bare, 35 dangling) | — |
 | WC2 (humans/orcs) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | PARTIAL (189 refs qualified / 189 files in `wc2_<pack>_<type>` packages incl. live sequences+weapons monoliths; 22 shared stay bare; 1 dangling `aacanon3.aud`) | — |
 | TKM | DONE (ids) | DONE 2026-07-18 (moved into `RedAlert2Mod/TKM/`) | — | — | — |
-| Outpost2 (eden/plymouth, WIP factions) | maps drafted (~compliant) | monolith/wrapper | | | |
+| Outpost2 (eden/plymouth, WIP factions) | maps drafted (~compliant) | monolith/wrapper | | PARTIAL (188 files → `op2_shared_*` under new `Outpost2/Shared`; monoliths held nearly the whole theme; 15 shared, 2 dangling) | |
 
 **Cross-pack self-containment (2026-09-24):** the hard-reference layer is
 clean for D2k, TiberianDawn, TiberianSun and StarCraft — every `Inherits`,

@@ -322,8 +322,8 @@ forgotten_cropplane:
 		TurnSpeed: 11
 		Speed: 160
 		CruisingCondition: cruising
-		TakeoffSounds: oldplane_up.wav
-		LandingSounds: oldplane_down.wav
+		TakeoffSounds: ts_forgotten_sounds|oldplane_up.wav
+		LandingSounds: ts_forgotten_sounds|oldplane_down.wav
 		CanHover: false
 		CanSlide: false
 	Health:

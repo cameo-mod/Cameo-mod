@@ -113,8 +113,8 @@
 		Name: deployed
 		RequiresCondition: undeployed
 	GrantConditionOnDeploy:
-		DeploySounds: zburrowup.wav
-		UndeploySounds: zburrowdown.wav
+		DeploySounds: sc_zerg_sounds|zburrowup.wav
+		UndeploySounds: sc_zerg_sounds|zburrowdown.wav
 		RequiresCondition: !parachute
 	Cloak:
 		InitialDelay: 50

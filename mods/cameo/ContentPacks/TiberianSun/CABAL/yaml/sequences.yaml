@@ -1,7 +1,7 @@
 cabal_plasmaturret:
 	Defaults:
 		Scale: 1.25
-		Filename: ts_nod_laserturret.shp
+		Filename: ts_shared_sprites|ts_nod_laserturret.shp
 	idle:
 	damaged-idle:
 		Start: 1
@@ -12,7 +12,7 @@ cabal_plasmaturret:
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: ts_nod_laserturret_icon.shp
+		Filename: ts_shared_icons|ts_nod_laserturret_icon.shp
 		Offset: 0,0
 
 cabal_cyborginfantry:
@@ -1208,7 +1208,7 @@ cabal_navalyard:
 		Filename: cabal_sprites|cabal_navalyard.png
 		Start: 33
 	icon:
-		Filename: cabal_navalyard_icon.png
+		Filename: cabal_icons|cabal_navalyard_icon.png
 		Offset: 0,0
 
 cabal_lazerboat:

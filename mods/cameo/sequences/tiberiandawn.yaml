@@ -4,25 +4,25 @@
 
 mcv:
 	Defaults:
-		Filename: td_nod_mobileconstructionvehicle_mcv.shp
+		Filename: td_shared_sprites|td_nod_mobileconstructionvehicle_mcv.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: td_nod_mobileconstructionvehicle_icon.shp
+		Filename: td_shared_icons|td_nod_mobileconstructionvehicle_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
 mcv.destroyed:
 	idle:
-		Filename: td_nod_mobileconstructionvehicle_mcv.shp
+		Filename: td_shared_sprites|td_nod_mobileconstructionvehicle_mcv.shp
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
 
 harv:
 	Defaults:
-		Filename: td_nod_tiberiumharvester.shp
+		Filename: td_shared_sprites|td_nod_tiberiumharvester.shp
 	idle:
 		Facings: 32
 		UseClassicFacings: True
@@ -32,24 +32,24 @@ harv:
 		Facings: 8
 		Tick: 60
 	dock:
-		Filename: td_nod_tiberiumharvester_harvdump.shp
+		Filename: td_shared_sprites|td_nod_tiberiumharvester_harvdump.shp
 		Length: 7
 	dock-loop:
-		Filename: td_nod_tiberiumharvester_harvdump.shp
+		Filename: td_shared_sprites|td_nod_tiberiumharvester_harvdump.shp
 		Start: 7
 	icon:
-		Filename: td_nod_tiberiumharvester_icon.shp
+		Filename: td_shared_icons|td_nod_tiberiumharvester_icon.shp
 
 harv.destroyed:
 	idle:
-		Filename: td_nod_tiberiumharvester.shp
+		Filename: td_shared_sprites|td_nod_tiberiumharvester.shp
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
 
 bggy.destroyed:
 	Defaults:
-		Filename: td_nod_promotion_buggymkii_bggy.shp
+		Filename: td_shared_sprites|td_nod_promotion_buggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -62,7 +62,7 @@ bggy.destroyed:
 
 mtnk.destroyed:
 	Defaults:
-		Filename: td_gdi_battletank.shp
+		Filename: td_shared_sprites|td_gdi_battletank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -75,7 +75,7 @@ mtnk.destroyed:
 
 ltnk.destroyed:
 	Defaults:
-		Filename: td_nod_lighttank.shp
+		Filename: td_shared_sprites|td_nod_lighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -88,7 +88,7 @@ ltnk.destroyed:
 
 htnk.destroyed:
 	Defaults:
-		Filename: td_gdi_mammothtank.shp
+		Filename: td_shared_sprites|td_gdi_mammothtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -114,7 +114,7 @@ jeep.destroyed:
 
 bike.destroyed:
 	Defaults:
-		Filename: td_nod_reconbike.shp
+		Filename: td_shared_sprites|td_nod_reconbike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -122,7 +122,7 @@ bike.destroyed:
 
 ftnk.destroyed:
 	Defaults:
-		Filename: td_nod_flametank.shp
+		Filename: td_shared_sprites|td_nod_flametank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -130,7 +130,7 @@ ftnk.destroyed:
 
 mlrs.destroyed:
 	Defaults:
-		Filename: td_nod_ssmlauncher_mlrs.shp
+		Filename: td_shared_sprites|td_nod_ssmlauncher_mlrs.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -143,7 +143,7 @@ mlrs.destroyed:
 
 stnk.destroyed:
 	Defaults:
-		Filename: td_nod_stealthtank.shp
+		Filename: td_shared_sprites|td_nod_stealthtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -151,7 +151,7 @@ stnk.destroyed:
 
 arty.destroyed:
 	Defaults:
-		Filename: td_nod_artillery.shp
+		Filename: td_shared_sprites|td_nod_artillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -190,7 +190,7 @@ truck.destroyed:
 
 c17:
 	Defaults:
-		Filename: c17.shp
+		Filename: td_shared_sprites|c17.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -199,7 +199,7 @@ c17:
 
 tran:
 	Defaults:
-		Filename: td_nod_chinooktransport.shp
+		Filename: td_shared_sprites|td_nod_chinooktransport.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -227,7 +227,7 @@ tran:
 	unload:
 		Start: 35
 	icon:
-		Filename: td_nod_chinooktransport_icon.shp
+		Filename: td_shared_icons|td_nod_chinooktransport_icon.shp
 
 fact:
 	Inherits: ^WithBuildingBib2
@@ -314,12 +314,12 @@ proc:
 		Length: 6
 		Offset: -60,-34
 	icon:
-		Filename: td_nod_tiberiumrefinery_icon.shp
+		Filename: td_shared_icons|td_nod_tiberiumrefinery_icon.shp
 
 silo:
 	Inherits: ^WithBuildingBibIron
 	Defaults:
-		Filename: silo.shp
+		Filename: td_shared_sprites|silo.shp
 	idle:
 		Offset: 0,-1
 	damaged-idle:
@@ -337,19 +337,19 @@ silo:
 		Length: 5
 		Offset: 0,-1
 	make:
-		Filename: silomake.shp
+		Filename: td_shared_sprites|silomake.shp
 		Length: *
 		Tick: 80
 		Offset: 0,-1
 	bib:
 		Offset: -1,6
 	icon:
-		Filename: siloicnh.shp
+		Filename: td_shared_icons|siloicnh.shp
 
 hq:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: td_nod_communicationscenter_hq.shp
+		Filename: td_shared_sprites|td_nod_communicationscenter_hq.shp
 	idle:
 		Length: 16
 		Tick: 100
@@ -361,11 +361,11 @@ hq:
 		Start: 32
 		Tick: 800
 	make:
-		Filename: td_nod_communicationscenter_hqmake.shp
+		Filename: td_shared_sprites|td_nod_communicationscenter_hqmake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: td_nod_communicationscenter_icon.shp
+		Filename: td_shared_icons|td_nod_communicationscenter_icon.shp
 
 nuk2:
 	Inherits: ^WithBuildingBib3
@@ -387,12 +387,12 @@ nuk2:
 		Tick: 80
 	bib:
 	icon:
-		Filename: nuk2icnh.shp
+		Filename: td_shared_icons|nuk2icnh.shp
 
 hpad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: td_nod_helipad_hpad.shp
+		Filename: td_shared_sprites|td_nod_helipad_hpad.shp
 	idle:
 		ZOffset: -1023
 	damaged-idle:
@@ -413,17 +413,17 @@ hpad:
 		ZOffset: -1023
 		Tick: 800
 	make:
-		Filename: td_nod_helipad_make.shp
+		Filename: td_shared_sprites|td_nod_helipad_make.shp
 		Length: *
 		Tick: 80
 	bib:
 	icon:
-		Filename: td_nod_helipad_icon.shp
+		Filename: td_shared_icons|td_nod_helipad_icon.shp
 
 fix:
 	Inherits: ^WithBuildingBibFix
 	Defaults:
-		Filename: td_nod_repairfacility_fix.shp
+		Filename: td_shared_sprites|td_nod_repairfacility_fix.shp
 	idle:
 		ZOffset: -1c511
 	damaged-idle:
@@ -441,17 +441,17 @@ fix:
 		ZOffset: -1c511
 		Tick: 800
 	make:
-		Filename: td_nod_repairfacility_fixmake.shp
+		Filename: td_shared_sprites|td_nod_repairfacility_fixmake.shp
 		Length: 14
 		Tick: 60
 	bib:
 		Offset: 0,-10
 	icon:
-		Filename: td_nod_repairfacility_icon.shp
+		Filename: td_shared_icons|td_nod_repairfacility_icon.shp
 
 brik:
 	Defaults:
-		Filename: brik.shp
+		Filename: td_shared_sprites|brik.shp
 	idle:
 		Length: 16
 	scratched-idle:
@@ -461,30 +461,30 @@ brik:
 		Start: 32
 		Length: 16
 	icon:
-		Filename: brikicon.png
+		Filename: td_shared_icons|brikicon.png
 
 sbag:
 	Defaults:
-		Filename: sbag.shp
+		Filename: td_shared_sprites|sbag.shp
 	idle:
 		Length: 16
 	icon:
-		Filename: sbagicon.png
+		Filename: td_shared_icons|sbagicon.png
 
 cycl:
 	Defaults:
-		Filename: cycl.shp
+		Filename: td_shared_sprites|cycl.shp
 	idle:
 		Length: 16
 	damaged-idle:
 		Start: 16
 		Length: 16
 	icon:
-		Filename: cyclicon.png
+		Filename: td_shared_icons|cyclicon.png
 
 barb:
 	Defaults:
-		Filename: barb.shp
+		Filename: td_shared_sprites|barb.shp
 	idle:
 		Length: 16
 	damaged-idle:
@@ -493,7 +493,7 @@ barb:
 
 wood:
 	Defaults:
-		Filename: wood.shp
+		Filename: td_shared_sprites|wood.shp
 	idle:
 		Length: 16
 	damaged-idle:
@@ -502,7 +502,7 @@ wood:
 
 bio:
 	Defaults:
-		Filename: bio.shp
+		Filename: td_shared_sprites|bio.shp
 	idle:
 	damaged-idle:
 		Start: 1
@@ -513,7 +513,7 @@ bio:
 
 bio.husk:
 	Defaults:
-		Filename: bio.shp
+		Filename: td_shared_sprites|bio.shp
 	idle: bio
 		Start: 2
 
@@ -524,7 +524,7 @@ bio.husk:
 
 vice:
 	Defaults:
-		Filename: vice.shp
+		Filename: td_shared_sprites|vice.shp
 	Inherits: ^InfantryOverlays
 	idle:
 		Length: *
@@ -589,13 +589,13 @@ vice:
 
 pvice:
 	Defaults:
-		Filename: pvice.shp
+		Filename: td_shared_sprites|pvice.shp
 	Inherits: vice
 
 e6:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e6.shp
+		Filename: td_shared_sprites|e6.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -680,20 +680,20 @@ e6:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: e6icnh.shp
+		Filename: td_shared_icons|e6icnh.shp
 	scicon:
-		Filename: sce6icon.shp
+		Filename: td_shared_icons|sce6icon.shp
 	2100icon:
-		Filename: 2100e6icon.shp
+		Filename: td_shared_icons|2100e6icon.shp
 	cityicon:
-		Filename: citye6icon.shp
+		Filename: td_shared_icons|citye6icon.shp
 	dricon:
-		Filename: dre6icon.shp
+		Filename: td_shared_icons|dre6icon.shp
 
 rmbo:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: rmbo.shp
+		Filename: td_shared_sprites|rmbo.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -788,7 +788,7 @@ rmbo:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: td_nod_commando_icon.shp
+		Filename: td_shared_icons|td_nod_commando_icon.shp
 
 ^BasicInfantryTibsun:
 	Defaults:
@@ -905,7 +905,7 @@ rmbo:
 
 bhreddragonemp:
 	idle:
-		Filename: bhreddragonemp.shp
+		Filename: td_shared_sprites|bhreddragonemp.shp
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: 1023
@@ -915,22 +915,22 @@ tsblackhandlaser2:
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
 		Scale: 1.16
-		Filename: tsblackhandlaser.shp
+		Filename: td_shared_sprites|tsblackhandlaser.shp
 	icon:
-		Filename: td_nod_promotion_lasertrooper_icon.shp
+		Filename: td_shared_icons|td_nod_promotion_lasertrooper_icon.shp
 
 tsstealthsoldier2:
 	Inherits: ^BasicInfantryTibsun
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
 		Scale: 1.05
-		Filename: tsstealthsoldier.shp
+		Filename: td_shared_sprites|tsstealthsoldier.shp
 	icon:
-		Filename: td_nod_stealthsoldier_icon.shp
+		Filename: td_shared_icons|td_nod_stealthsoldier_icon.shp
 
 mammothbunker:
 	Defaults:
-		Filename: mammothbunker.shp
+		Filename: td_shared_sprites|mammothbunker.shp
 	idle:
 		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
@@ -941,14 +941,14 @@ mammothbunker:
 		InterpolatedFacings: 64
 		Scale: 1
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
 		Filename: mammothbunkericon.shp
 
 mammothbunker.husk:
 	Defaults:
-		Filename: mammothbunker.shp
+		Filename: td_shared_sprites|mammothbunker.shp
 	idle:
 		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
@@ -960,14 +960,14 @@ mammothbunker.husk:
 		InterpolatedFacings: 64
 		Scale: 1
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: 5
 	icon:
 		Filename: mammothbunkericon.shp
 
 c2kindustry:
 	Defaults:
-		Filename: c2kindustry.shp
+		Filename: td_shared_sprites|c2kindustry.shp
 		Scale: 2
 	idle:
 		Length: 8
@@ -976,19 +976,19 @@ c2kindustry:
 
 c2kfiredepartment:
 	Defaults:
-		Filename: c2kfiredepartment.shp
+		Filename: td_shared_sprites|c2kfiredepartment.shp
 		Scale: 2
 	idle:
 
 c2kpolicedepartment:
 	Defaults:
-		Filename: c2kpolicedepartment.shp
+		Filename: td_shared_sprites|c2kpolicedepartment.shp
 		Scale: 2
 	idle:
 
 c2knuke:
 	Defaults:
-		Filename: c2knuke.shp
+		Filename: td_shared_sprites|c2knuke.shp
 		Scale: 2
 	idle:
 
@@ -996,7 +996,7 @@ techrpad:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Offset: 0,-6
-		Filename: techrpad.shp
+		Filename: td_shared_sprites|techrpad.shp
 		Scale: 2
 	idle:
 	damaged-idle:
@@ -1056,7 +1056,7 @@ zombie:
 	#	Tick: 1600
 	#	ZOffset: -511
 	icon:
-		Filename: zombicon.shp
+		Filename: td_shared_icons|zombicon.shp
 
 ant:
 	Inherits: ^InfantryOverlays
@@ -1091,7 +1091,7 @@ ant:
 fireant:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: ant2.shp
+		Filename: td_shared_sprites|ant2.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -1121,7 +1121,7 @@ fireant:
 scoutant:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: ant3.shp
+		Filename: td_shared_sprites|ant3.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -1151,7 +1151,7 @@ scoutant:
 spitter:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: vice.shp
+		Filename: td_shared_sprites|vice.shp
 	idle:
 		Length: *
 	icon:
@@ -1159,7 +1159,7 @@ spitter:
 
 brik:
 	Defaults:
-		Filename: brik.shp
+		Filename: td_shared_sprites|brik.shp
 	idle:
 		Length: 16
 	scratched-idle:
@@ -1169,11 +1169,11 @@ brik:
 		Start: 32
 		Length: 16
 	icon:
-		Filename: brikicon.png
+		Filename: td_shared_icons|brikicon.png
 
 sbag:
 	Defaults:
-		Filename: sbag.shp
+		Filename: td_shared_sprites|sbag.shp
 	idle:
 		Length: 16
 	icon:
@@ -1181,18 +1181,18 @@ sbag:
 
 cycl:
 	Defaults:
-		Filename: cycl.shp
+		Filename: td_shared_sprites|cycl.shp
 	idle:
 		Length: 16
 	damaged-idle:
 		Start: 16
 		Length: 16
 	icon:
-		Filename: cyclicon.png
+		Filename: td_shared_icons|cyclicon.png
 
 barb:
 	Defaults:
-		Filename: barb.shp
+		Filename: td_shared_sprites|barb.shp
 	idle:
 		Length: 16
 	damaged-idle:
@@ -1201,7 +1201,7 @@ barb:
 
 wood:
 	Defaults:
-		Filename: wood.shp
+		Filename: td_shared_sprites|wood.shp
 	idle:
 		Length: 16
 	damaged-idle:
@@ -1211,7 +1211,7 @@ wood:
 hosp:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hosp.shp
+		Filename: td_shared_sprites|hosp.shp
 	idle:
 		Length: 4
 		Tick: 100
@@ -1221,7 +1221,7 @@ hosp:
 		Length: 4
 		Offset: 0,-2
 	make:
-		Filename: hospmake.shp
+		Filename: td_shared_sprites|hospmake.shp
 		Length: *
 		Tick: 80
 		Offset: 0,-2
@@ -1233,7 +1233,7 @@ hosp:
 hosp.husk:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hosp.shp
+		Filename: td_shared_sprites|hosp.shp
 	idle:
 		Start: 8
 	bib:
@@ -1241,7 +1241,7 @@ hosp.husk:
 
 miss:
 	Defaults:
-		Filename: miss.shp
+		Filename: td_shared_sprites|miss.shp
 	idle:
 		Offset: 0,-1
 	damaged-idle:
@@ -1253,11 +1253,11 @@ miss:
 		Tick: 80
 		Offset: 0,-1
 	bib:
-		Filename: mbMISS.tem
+		Filename: td_shared_sprites|mbMISS.tem
 		TilesetFilenames:
 			DESERT: mbMISS.des
-			SNOW: mbMISS.sno
-			RA_SNOW: mbMISS.sno
+			SNOW: td_shared_sprites|mbMISS.sno
+			RA_SNOW: td_shared_sprites|mbMISS.sno
 			RA_DESERT: mbMISS.des
 			ARRAKIS: mbMISS.des
 			ARRAKIS2: mbMISS.des
@@ -1268,15 +1268,15 @@ miss:
 
 miss.husk:
 	Defaults:
-		Filename: miss.shp
+		Filename: td_shared_sprites|miss.shp
 	idle:
 		Start: 2
 	bib:
-		Filename: mbMISS.tem
+		Filename: td_shared_sprites|mbMISS.tem
 		TilesetFilenames:
 			DESERT: mbMISS.des
-			SNOW: mbMISS.sno
-			RA_SNOW: mbMISS.sno
+			SNOW: td_shared_sprites|mbMISS.sno
+			RA_SNOW: td_shared_sprites|mbMISS.sno
 			RA_DESERT: mbMISS.des
 			ARRAKIS: mbMISS.des
 			ARRAKIS2: mbMISS.des
@@ -1289,7 +1289,7 @@ miss.husk:
 
 spit:
 	Defaults:
-		Filename: spit.shp
+		Filename: td_shared_sprites|spit.shp
 	idle:
 		Length: *
 		ZOffset: 1023
@@ -1300,7 +1300,7 @@ spit:
 
 modegg:
 	Defaults:
-		Filename: modegg.shp
+		Filename: td_shared_sprites|modegg.shp
 	stand:
 		Facings: 8
 	idle:
@@ -1310,35 +1310,35 @@ modegg:
 		Length: 4
 		Facings: 8
 	icon:
-		Filename: modeggicon.shp
+		Filename: td_shared_icons|modeggicon.shp
 
 modegg2:
 	Defaults:
-		Filename: modegg2.shp
+		Filename: td_shared_sprites|modegg2.shp
 	idle:
 		Facings: -32
 	move:
 		Facings: -32
 	icon:
-		Filename: modegg2icon.shp
+		Filename: td_shared_icons|modegg2icon.shp
 
 newarty:
 	Defaults:
-		Filename: newarty.shp
+		Filename: td_shared_sprites|newarty.shp
 	idle:
 		Facings: -32
 	turret:
-		Filename: newartytur.shp
+		Filename: td_shared_sprites|newartytur.shp
 		Facings: -32
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: newartyicon.shp
+		Filename: td_shared_icons|newartyicon.shp
 
 hdtruck:
 	Defaults:
-		Filename: hdtruck.shp
+		Filename: td_shared_sprites|hdtruck.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1362,14 +1362,14 @@ modntech1:
 	Defaults: ra1_technician
 		Filename: tech1.shp
 	icon:
-		Filename: modntech1icon.shp
+		Filename: td_shared_icons|modntech1icon.shp
 
 deadsixrmbo:
 	Inherits: rmbo
 	Defaults: rmbo
-		Filename: rmbo.shp
+		Filename: td_shared_sprites|rmbo.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1379,9 +1379,9 @@ moddeadeye:
 	Inherits: rmbo
 	Defaults: moddeadeye
 		Scale: 2
-		Filename: moddeadeye.shp
+		Filename: td_shared_sprites|moddeadeye.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1391,9 +1391,9 @@ modgunner:
 	Inherits: rmbo
 	Defaults: modgunner
 		Scale: 2
-		Filename: modgunner.shp
+		Filename: td_shared_sprites|modgunner.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1403,9 +1403,9 @@ modhotwire:
 	Inherits: rmbo
 	Defaults: modhotwire
 		Scale: 2
-		Filename: modhotwire.shp
+		Filename: td_shared_sprites|modhotwire.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1415,9 +1415,9 @@ modrpatch:
 	Inherits: rmbo
 	Defaults: modrpatch
 		Scale: 2
-		Filename: modrpatch.shp
+		Filename: td_shared_sprites|modrpatch.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1427,9 +1427,9 @@ modsakura:
 	Inherits: rmbo
 	Defaults: modsakura
 		Scale: 2
-		Filename: modsakura.shp
+		Filename: td_shared_sprites|modsakura.shp
 	icon:
-		Filename: deadsixicon.shp
+		Filename: td_shared_icons|deadsixicon.shp
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -1447,7 +1447,7 @@ explosion:
 
 gdirigtower:
 	Defaults:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigtower.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
@@ -1459,11 +1459,11 @@ gdirigtower:
 		# Start: 71
 		# Length: 4
 	dead:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	make:
-		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Filename: td_shared_sprites|td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
@@ -1483,16 +1483,16 @@ gdirigtower:
 	# 	Scale: 1.25
 	# 	Offset: 16,32
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_advancedguardtower_icon.shp
+		Filename: td_shared_icons|td_gdi_advancedguardtower_icon.shp
 		Offset: 0,0
 
 msam.destroyed:
 	idle:
-		Filename: td_gdi_mlrs_msam.shp
+		Filename: td_shared_sprites|td_gdi_mlrs_msam.shp
 		ZOffset: -512

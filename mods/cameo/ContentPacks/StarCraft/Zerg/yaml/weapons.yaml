@@ -2,7 +2,7 @@ ZerglingClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
-	Report: zerglinghit.wav
+	Report: sc_shared_sounds|zerglinghit.wav
 	SoundVolume: 3
 	ReloadDelay: 11
 	Range: 1350
@@ -15,7 +15,7 @@ TalonClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
-	Report: zerglinghit.wav
+	Report: sc_shared_sounds|zerglinghit.wav
 	ReloadDelay: 15
 	Range: 1680
 	Warhead@Melee_Medium:
@@ -42,7 +42,7 @@ ShriekStinger:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
-	Report: zerglinghit.wav
+	Report: sc_shared_sounds|zerglinghit.wav
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Range: 1150
@@ -370,7 +370,7 @@ DreadshroudSpore:
 
 SCDevourerAA:
 	Inherits: MutaliskSpore
-	Report: sc_devourer_attack.aud
+	Report: sc_zerg_sounds|sc_devourer_attack.aud
 	ValidTargets: Air
 	ReloadDelay: 100
 	Projectile: RadBeam
@@ -396,7 +396,7 @@ SCDevourerAA:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 		Explosions: purplesplash
-		ImpactSounds: sc_devourer_hit.aud
+		ImpactSounds: sc_zerg_sounds|sc_devourer_hit.aud
 	-Warhead@shrapnel:
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
@@ -1222,7 +1222,7 @@ Tentacle:
 		InvalidTargets: Air
 DroneAttack:
 	Inherits: ^WorkerAttack
-	Report: zerglinghit.wav
+	Report: sc_shared_sounds|zerglinghit.wav
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 

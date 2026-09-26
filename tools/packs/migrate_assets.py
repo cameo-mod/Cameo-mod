@@ -317,7 +317,12 @@ def main():
     if not anchors:
         sys.exit("no `cameo|bits:` anchor in mod.yaml")
     anchor = anchors[0]
-    existing = set(lines)
+    # dirs already mounted (possibly under a hand-picked name — reuse it)
+    dir_pkg = {}   # (pack_lower, type) -> existing pkg name
+    for l in lines:
+        m = re.match(r"\s*~?cameo\|ContentPacks/[^/]+/([^/]+)/files/([^:\s]+):\s*(\S+)", l)
+        if m:
+            dir_pkg[(m.group(1).lower(), m.group(2))] = m.group(3)
     mounts = []
     for o in sorted(set(CANON.values())):
         fd = theme_dir / o / "files"
@@ -325,20 +330,24 @@ def main():
             continue
         for t in sorted(fd.iterdir()):
             if t.is_dir() and any(t.iterdir()):
+                if (o.lower(), t.name) in dir_pkg:
+                    continue
                 pkg = f"{prefix}_{o.lower()}_{t.name}"
-                line = f"\t\t~cameo|ContentPacks/{args.theme}/{o}/files/{t.name}: {pkg}"
-                if line not in existing:
-                    mounts.append(line)
+                mounts.append(
+                    f"\t\t~cameo|ContentPacks/{args.theme}/{o}/files/{t.name}: {pkg}")
     if mounts:
         lines[anchor:anchor] = mounts
         modyaml.write_text("\n".join(lines) + "\n", encoding="utf-8")
         print(f"added {len(mounts)} mounts to mod.yaml")
 
+    def pkg_for(owner, t):
+        return dir_pkg.get((canon(owner).lower(), t),
+                         f"{prefix}_{canon(owner).lower()}_{t}")
+
     # rewrite refs in theme yaml: bare name -> pkg|name
     name_pkg = {}
     for p in plan:
-        name_pkg[p["name"].lower()] = (
-            p["name"], f"{prefix}_{canon(p['owner']).lower()}_{p['type']}")
+        name_pkg[p["name"].lower()] = (p["name"], pkg_for(p["owner"], p["type"]))
 
     # files already in the theme's packs (half-done migrations): prefix their
     # bare refs too, preferring the referencing yaml's own pack, then Shared.
@@ -369,8 +378,7 @@ def main():
                         or ([cands[0]] if len(cands) == 1 else []))
                 if pick:
                     pk, t = pick[0]
-                    name_pkg[name.lower()] = (
-                        name, f"{prefix}_{pk.lower()}_{t}")
+                    name_pkg[name.lower()] = (name, pkg_for(pk, t))
         n_prefixed = len(name_pkg) - len(plan)
         print(f"prefix-existing: +{n_prefixed} refs qualify against pack files")
     n_repl = 0

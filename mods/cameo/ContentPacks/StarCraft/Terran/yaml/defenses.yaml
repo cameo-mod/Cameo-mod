@@ -38,8 +38,8 @@ terran_bunker:
 		EjectOnDeath: false
 		# InitialUnits: terran_marine, terran_firebat, terran_marauder, terran_marine
 	WithCargoSounds:
-		EnterSounds: tdrtra00.wav
-		ExitSounds: tdrtra00.wav
+		EnterSounds: sc_shared_sounds|tdrtra00.wav
+		ExitSounds: sc_shared_sounds|tdrtra00.wav
 	FireWarheadsOnDeath@healer:
 		Weapon: FakeHealtAPC
 	AttackOpenTopped:
