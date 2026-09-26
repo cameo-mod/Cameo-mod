@@ -1783,6 +1783,10 @@ YAML remains an explicit design decision.
   the open, silence in bunkers (live cases: TS engineer pistol, RA1
   Imperial Scoutsman, M113 Adats-style condition typos).
 - **G3: garrisoned armaments never carry a FireDelay.**
+- **ALL infantry can garrison** (maintainer ruled 2026-09-26). A melee infantry (dogs, blades,
+  claws, fists) stays garrison-CAPABLE but never gets a garrisoned attack: its armament is for
+  the open field only, and it is listed under `melee:` in `garrison_exceptions.yaml`. Infantry
+  that garrisons cannot accept is a defect to fix, not an exemption (census: EMBER, 2026-09-26).
 
 ## 11b. ONE WARHEAD PER WEAPON (binding, maintainer 2026-08-16)
 
@@ -1922,6 +1926,12 @@ inherits itself. That is 481 of the 957 — `_elite` 168, `_aa` 43, `2` 24, `_em
 `_upgrade` 11 — and it is the drift-prone half, because each variant must also reproduce
 whatever its base declared LOCALLY. Prove every batch with
 `tools/audit/review_resolve_diff.py`; a missed local override is a silent behaviour change.
+
+**Warhead ORDER is part of the contract** (maintainer ruled 2026-09-26, on PR #508). A W7/W2
+conversion must reproduce the resolved `Warhead@*` keys in the SAME ORDER, not just the same
+payloads. That includes pure Effect/visual warheads, because warheads execute in sequence and
+first-seen position is the merge position. A payload-identical conversion that reorders warheads
+FAILS. Diff order-aware: a `sort_keys=True` flat map hides exactly this defect.
 
 ### 11b.0 MAINTAINER RULINGS, 2026-09-12 (the reference/pricing/ammo session)
 
