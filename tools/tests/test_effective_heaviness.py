@@ -558,7 +558,12 @@ class ChecklistRegressionTest(unittest.TestCase):
                     mode = node.get("HeavinessMode")
                     modes[(name, node.key)] = None if mode is None else mode
         from reviewed_weapon_history import current_endpoint_name
-        expected = {("^Warhead_CannonAP", "Warhead@CannonAP"): 1000}
+        import gen_weapon_template as gen
+        # The §12.0j family bases (maintainer 2026-09-26) are authorized TEMPLATES, one per
+        # generated family at its home h; ^Warhead_CannonAP is one of them. Only the WEAPON
+        # list below stays enumerated by hand — a base existing activates no weapon.
+        expected = {(f"^Warhead_{nm}", f"Warhead@{nm}"): gen.BASE_HOME_H[
+            gen.base_home_level(args[3])] for nm, _h, args, _kw in gen.family_calls()}
         expected.update({(current_endpoint_name(rs, name), "Warhead@CannonAP"): h for name, h in {
             "RA2sabot": 0, "RA2sabot_elite": 0, "TS90mm": 1000,
             "TS90mmDep": 1000, "corrino_buggy_gun": 0,

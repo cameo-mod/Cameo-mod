@@ -1626,7 +1626,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
 
     `base=True` emits the ONE level-less §12.0j `^Warhead_<name>` base instead of the
     levelled templates — see the family-bases block above `family_calls` for what it
-    changes and why. `base_shield` is then the final phase-2 Shield of the home level."""
+    changes and why. `base_shield` is then the AUTHORED Shield (`base_shield_values`)."""
     blocks = []
     allr = sorted(CANON16)
     if base:
@@ -1686,8 +1686,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # overrides whatever the measured or designed path put there, so the two can never
         # contest the cell again (see shield_for). Placed after the if/else on purpose —
         # scoping it to one branch left the FLAT/PCT families on their old value.
-        # A base carries the home template's FINAL (phase-2) Shield instead: the raw value
-        # here is centi-units that only `shield_uniqueness.apply` turns into the shipped one.
+        # A base carries its authored Shield instead (`base_shield_values`): the raw value here
+        # is centi-units that only `shield_uniqueness.apply` turns into the shipped one.
         sv = base_shield if base else shield_for(name, level, main)
         if sv is not None:
             main = [("Shield", sv)] + [(a, v) for a, v in main if a != "Shield"]
@@ -2526,9 +2526,9 @@ def storm_versus(level):
 #     magnitude moves into `PercentageScale` (see `base_percent_scale`);
 #   * radius and falloff come from the MEDIUM slot whatever the home level, because the C#
 #     scales the radius by (h+2)/3;
-#   * Shield = the FINAL phase-2 value of the home-level template (DESIGN §12.0c, the
-#     approved carry-over). Phase 2 already makes every template's Shield distinct, so the
-#     bases are distinct among themselves without a second uniqueness pass.
+#   * Shield is authored so the runtime's (2000 + h) / 2000 scaling returns the home
+#     template's FINAL phase-2 value at the home h (maintainer 2026-09-26; the pilot copied
+#     the value and so dealt 1.5x at h = 1). See `base_shield_values` for the integer grid.
 # Out of scope on purpose: Nuclear (HAND_TUNED superweapon), Sniper (a hand-made single
 # template, not a generator family) and the `Super` levels (h stops at 2).
 BASE_HOME_H = {"Light": 0, "Medium": 1000, "Heavy": 2000}   # h x 1000 (AreaDamageWarhead.cs)
@@ -2691,23 +2691,86 @@ BASE_NOTES = "\n".join([
     "# One level-less ^Warhead_<Family> per generated family: the home level's construction",
     "# (Medium; Railgun Heavy) WITHOUT the level tilt, which the C# bell applies at runtime",
     "# from Heaviness. SharedVersus: one table for both halves, PercentageScale = 100 x the",
-    "# home percentage top / growth(home h). Shield = the home template's final phase-2 value.",
+    "# home percentage top / growth(home h). Shield = authored so that the runtime's",
+    "# (2000 + h) / 2000 scaling returns the home template's final value at the home h.",
     "# Radius: the Medium slot, scaled (h+2)/3 by the C#. The levelled templates stay until",
     "# every weapon is re-pointed. See the family-bases block in gen_weapon_template.py.",
 ])
 
 
+def base_shield_values(entries):
+    """[(family, home final Shield, home h x 1000)] -> {family: AUTHORED base Shield}.
+
+    Maintainer 2026-09-26: a base at its home h must reproduce today's Shield. Shared mode
+    scales the row by (2000 + h) / 2000 at runtime (x1.5 at h = 1, x2 at h = 2), so the
+    authored value is the final one divided back — through the runtime's OWN half-up
+    rounding (`effective_heaviness.shield_coefficient`, the C# mirror), not a float.
+
+    ⚠ The integer grid is not onto: x1.5 half-up never yields a value = 1 (mod 3), and x2
+    only even ones, so about a third of the finals have no exact preimage and their nearest
+    neighbour belongs to another family. Where the finals are consecutive integers some
+    error is FORCED, so the assignment is solved, not greedy: per h group, the SMALLEST
+    worst-case error first, then the most exact matches, then the smallest total error.
+    The runtime scaling is monotonic, so an optimal assignment keeps the finals' order and a
+    DP over each family's few candidates is exact. (Two greedy variants measured worse: one
+    pass lost three exact matches; exact-first pushed one family 4 points off.) Every base
+    stays distinct (DESIGN §12.0c).
+    """
+    import effective_heaviness
+    coef = effective_heaviness.shield_coefficient
+    used, out = set(), {}
+    groups = {}
+    for nm, final, heaviness in entries:
+        groups.setdefault(heaviness, []).append((final, nm))
+    # The biggest group (the Medium homes) is solved first; the rest avoid its values.
+    for heaviness, items in sorted(groups.items(), key=lambda g: (-len(g[1]), g[0])):
+        items.sort()
+        for bound in range(0, 20):
+            cands = []
+            for final, _nm in items:
+                guess = final * 2000 // (2000 + heaviness)
+                cands.append([b for b in range(max(1, guess - bound - 2), guess + bound + 3)
+                              if b not in used and abs(coef(b, heaviness) - final) <= bound])
+            # best[i][b] = (exact count, -total error) of the best increasing chain ending at b.
+            best, parent = [{} for _ in items], [{} for _ in items]
+            for i, (final, _nm) in enumerate(items):
+                for b in cands[i]:
+                    err = abs(coef(b, heaviness) - final)
+                    gain = (1 if err == 0 else 0, -err)
+                    if i == 0:
+                        best[i][b] = gain
+                        continue
+                    prev = [(best[i - 1][p], -p, p) for p in best[i - 1] if p < b]
+                    if prev:
+                        score, _neg, p = max(prev)
+                        best[i][b] = (score[0] + gain[0], score[1] + gain[1])
+                        parent[i][b] = p
+            if best[-1]:
+                b = max(best[-1], key=lambda k: (best[-1][k], -k))
+                for i in range(len(items) - 1, -1, -1):
+                    out[items[i][1]] = b
+                    used.add(b)
+                    b = parent[i].get(b)
+                break
+        else:
+            raise ValueError(f"base Shields: no distinct assignment at h {heaviness}")
+    return out
+
+
 def family_bases(phase1_text, wanted=()):
     """The appended bases section: notes + one base per generated family in `wanted`
-    (all when empty), each carrying its home template's final phase-2 Shield."""
+    (all when empty), each Shield authored to reproduce its home template's at the home h."""
     final = shield_final_map(phase1_text, SHIELD_FLOOR_TARGET, SHIELD_CEIL_TARGET)
+    calls = [(nm, args, kw, base_home_level(args[3])) for nm, _h, args, kw in family_calls()
+             if (nm, base_home_level(args[3])) in final]
+    shields = base_shield_values([(nm, final[(nm, home)], BASE_HOME_H[home])
+                                  for nm, _a, _k, home in calls])
     out = [BASE_NOTES]
-    for nm, _header, args, kw in family_calls():
+    for nm, args, kw, home in calls:
         if wanted and nm.lower() not in wanted:
             continue
-        home = base_home_level(args[3])
         out.append(f"###### {nm}: FAMILY BASE (home {home}, Heaviness {BASE_HOME_H[home]}) "
-                   f"######\n" + family(*args, **kw, base=True, base_shield=final[(nm, home)]))
+                   f"######\n" + family(*args, **kw, base=True, base_shield=shields[nm]))
     return "\n\n".join(out)
 
 
