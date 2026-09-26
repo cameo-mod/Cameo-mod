@@ -12953,3 +12953,26 @@ newblock + tail on the ORIGINAL line list — mutating the list then
 slicing by stale indices ate a 202-line region (OrniBomb..OrniGunC in
 D2k/Atreides); only caught because the resolved diff was absurd, then
 the base-census verify confirmed nothing was lost after repair.
+
+## 2026-09-27 — PR #534 fleet-order corrections (sounds + balance re-extract)
+
+Claude's tonight-merge order for #534: restore master's `pack|file`
+sound paths on stack-touched weapons; take master's `docs/balance/**`
+then re-extract. Done on top of merge `1bb1c0308`:
+
+- Sound reconciliation: qualified `wc2_firehit.aud` on the generated
+  `^wc2_orcs_*deathcoil*`/`deathknightfire` templates and
+  `wc2_sword{1,2,3}.aud` on hellscream slice/elite to master's
+  `wc2_shared_sounds|` form; `d2k_shared_sounds|autoguntrt.wav` on
+  `harkonnen_autogunturret`. Reverted an over-patch on
+  `wc2tornadoTest` — master deliberately keeps `bowfire.aud`/
+  `bowhit.aud` bare there. Corpus diff vs master `8f3d0a564`:
+  2475 compared, **20 differing, 0 sound diffs, 0 missing/added** —
+  every remaining diff is the authorized R17 chip-fold signature
+  (main `Damage` += removed auxiliary chip's value, exact arithmetic).
+- Balance: master's `docs/balance/derived/**` restored verbatim
+  (re-extract regenerated only 4th-decimal float jitter — discarded);
+  raw `shared_redalert2.json` byte-identical to master, preserving
+  `ra2e2_black.design.unit_class: 1.0` (the #528 carry-forward).
+- Audits: dead fields 12 kinds/26 weapons (ratchet 12), orphans 0,
+  empty warheads 0, drift clean (34/34), doc_claims 43/43.

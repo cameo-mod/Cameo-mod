@@ -451,7 +451,7 @@ HeavyOrdosCombatTankRockets:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: KobraAttack.wav
+	Report: d2k_ordos_sounds|KobraAttack.wav
 	Warhead@Collapsed120mm_cobra_deployCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -704,7 +704,7 @@ HeavyOrdosCombatTankRockets:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: KobraAttack.wav
+	Report: d2k_ordos_sounds|KobraAttack.wav
 	Burst: 2
 	BurstDelays: 0
 	Warhead@Cloud: SpawnSmokeParticle
@@ -969,7 +969,7 @@ HeavyOrdosCombatTankRockets:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-	Report: KobraAttack.wav
+	Report: d2k_ordos_sounds|KobraAttack.wav
 	Burst: 2
 	BurstDelays: 0
 	Warhead@Cloud: SpawnSmokeParticle
@@ -4290,7 +4290,7 @@ d2k_sardaukar_elite:
 	Inherits@w6fx1: ^d2k_ordos_d2k_sardaukar_elite_2
 	Burst: 5
 	BurstDelays: 1
-	StartBurstReport: autoguntrt.wav
+	StartBurstReport: d2k_shared_sounds|autoguntrt.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 825
 		Spread: 0c182

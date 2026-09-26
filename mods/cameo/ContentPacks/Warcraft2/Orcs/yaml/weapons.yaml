@@ -45,7 +45,7 @@ wc2axeFirespear:
 
 ^wc2_orcs_wc2ogrepunch:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_punch.aud
+		ImpactSounds: wc2_shared_sounds|wc2_punch.aud
 
 wc2ogrepunch:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -158,7 +158,7 @@ wc2ogremageRunes_Spread:
 		Delay: 2
 		Image: wc2_effect_sparkle
 		Explosions: idle
-		ImpactSounds: wc2_runes.aud
+		ImpactSounds: wc2_orcs_sounds|wc2_runes.aud
 
 wc2runesSuper:
 	ValidTargets: Ground, Water, Air
@@ -236,7 +236,7 @@ wc2catapultFire:
 ^wc2_orcs_wc2deathknightfire:
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_knight_attack
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 		Explosions: hit
 		ValidTargets: Ground, Air
 
@@ -282,7 +282,7 @@ wc2deathknightDeathCoil:
 # Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
 ^wc2_orcs_wc2deathknightdeathcoilscatter_left:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 		Explosions: hit
 		Image: wc2_effect_death_knight_attack
 		ValidTargets: Ground, Air
@@ -320,7 +320,7 @@ wc2deathknightDeathCoilScatter_Left:
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
 ^wc2_orcs_wc2deathknightdeathcoilscatter_right:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_firehit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 		Explosions: hit
 		Image: wc2_effect_death_knight_attack
 		ValidTargets: Ground, Air
@@ -690,10 +690,10 @@ wc2dragonFireExplosion:
 	InvalidTargets: wall  # W7MAT order-pin
 	ReloadDelay: 120  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
-	Report: wc2_axe.aud  # W7MAT order-pin
+	Report: wc2_shared_sounds|wc2_axe.aud  # W7MAT order-pin
 ^wc2_orcs_wc2_orcs_hellscream_slice:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2_orcs_hellscream_slice:
 	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
@@ -706,10 +706,10 @@ wc2_orcs_hellscream_slice:
 		PercentageScale: 6667
 		Damage: 36000
 	ReloadDelay: 12  # W7MAT order-pin
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud  # W7MAT order-pin
 ^wc2_orcs_wc2_orcs_hellscream_slice_elite:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2_orcs_hellscream_slice_elite:
 	Inherits@w71: ^Warhead_Melee_Medium  # W7MAT covering-edge
@@ -723,7 +723,7 @@ wc2_orcs_hellscream_slice_elite:
 		PercentageScale: 6667
 		Damage: 48000
 	ReloadDelay: 10  # W7MAT order-pin
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud  # W7MAT order-pin
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud  # W7MAT order-pin
 ^wc2_orcs_wc2_orcs_zuljin_spear:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_shared_sounds|wc2_axe.aud

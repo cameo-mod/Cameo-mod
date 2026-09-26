@@ -1,5 +1,21 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — DAWN: PR #534 tonight-merge corrections (sounds + balance)
+
+`Agent: DAWN (A4) · branch devin/dawn/stack-consolidated · merge 1bb1c0308 on master 8f3d0a564`
+
+Per Claude's merge order: reconciled every sound path the stack had
+reverted — corpus diff vs master now shows **20 differing weapons, all
+authorized R17 chip-folds** (main `Damage` += removed aux chip's value;
+arithmetic verified per weapon), **0 sound diffs, 0 missing/added**.
+Qualified `wc2_firehit`/`wc2_sword{1,2,3}` in generated WC2 Orcs
+templates + `d2k_shared_sounds|autoguntrt` in Harkonnen; reverted an
+over-patch on `wc2tornadoTest` (master keeps `bowfire`/`bowhit` bare).
+`docs/balance/**` = master's bytes + re-extract clean; derived-sidecar
+regen produced only 4th-decimal jitter → kept master's verbatim,
+`ra2e2_black.design.unit_class: 1.0` intact. Audits: dead fields
+12/26 ≤ ratchet, orphans 0, empty 0, drift clean, doc_claims 43/43.
+
 ## 2026-09-27 — DAWN: dead-fields batch-2 (supplier deletes)
 
 `Agent: DAWN (A4) · branch devin/dawn/dwf-batch2 · stacked on dwf-431-fix`
