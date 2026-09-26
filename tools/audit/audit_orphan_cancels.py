@@ -82,9 +82,23 @@ def _check_level(raw_here: miniyaml.Node, parents: list[tuple[str, miniyaml.Node
         elif not c.key.startswith("Inherits"):
             avail.add(c.key)
             earlier_own.add(c.key)
+    # Same-key siblings merge in the engine: a `-X` inside the second
+    # `Projectile:` sees the first `Projectile:`'s fields. Group them so the
+    # recursion checks each key against the union of all its siblings.
+    groups: dict[str, miniyaml.Node] = {}
+    group_order: list[str] = []
     for c in raw_here.children:
-        if c.children and not c.key.startswith("-") and not c.key.startswith("Inherits"):
-            _check_level(c, parents, path + (c.key,), owner, out, fragile)
+        if c.key.startswith("-") or c.key.startswith("Inherits"):
+            continue
+        if c.key not in groups:
+            groups[c.key] = miniyaml.Node(key=c.key, value=c.value, children=[],
+                                          file=c.file, line=c.line)
+            group_order.append(c.key)
+        groups[c.key].children.extend(c.children)
+    for key in group_order:
+        g = groups[key]
+        if g.children:
+            _check_level(g, parents, path + (key,), owner, out, fragile)
 
 
 def _check_all(r: miniyaml.Ruleset, raw: dict[str, miniyaml.Node],
