@@ -215,6 +215,20 @@ files, so those voxel renderers have been dead since the rename. That is a
 pre-existing defect needing a voxel rename pass (names, not moves), logged
 here so the voxel migration slice does not paper over it.
 
+D2k follow-up (prefix-existing slice): D2k's packs were already
+half-migrated by hand — 529 files sat in `files/` dirs while the yaml kept
+bare references that only resolved through the bare-name fallback.
+`--prefix-existing` qualified 222 refs (`d2k_atreides_sprites|…` etc. across
+13 yaml files), 7 genuinely-missing exclusives were copied out of `bits/d2k`
+(harkonnen/ordos/ixian/shared sounds + ixian sprites), and 4 mounts were
+added. Re-census: `migrate=0, qualified=234, packaged=31` (24 of them inside
+`bits/d2k/SOUND.RS`, now indexed), `shared=52` left bare, `missing=8`
+(`REARM1.WAV`, `splash9.aud`, `tesla1.aud`, `missile6.aud`, `missile7.aud`,
+`zhyfir00.aud`, `chute1.aud`, `kaboom12.aud` — dangling, reported only).
+`DATA.R16`/`BLOXBASE.R16` remain in `bits/d2k` unextracted — same deferred
+call as `audio.bag` had been: internal shp/wav resources would need a
+package-aware extraction pass, not a file move.
+
 ## Standing decisions (design)
 
 - Names: one lowercase group, RA1 baseline; tooltip <-> id in sync; unique

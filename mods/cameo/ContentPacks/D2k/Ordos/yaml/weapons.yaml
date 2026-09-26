@@ -59,7 +59,7 @@ HeavyOrdosCombatTankRockets:
 	Inherits@fx: ^d2k_ordos_120mm_td
 	ReloadDelay: 72
 	Range: 8500
-	Report: d2ktd.wav
+	Report: d2k_ordos_sounds|d2ktd.wav
 	Projectile: Bullet
 		Speed: 1700
 		Inaccuracy: 17
@@ -170,7 +170,7 @@ HeavyOrdosCombatTankRockets:
 	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 7640
-	Report: KobraAttack.wav
+	Report: d2k_ordos_sounds|KobraAttack.wav
 	Projectile: Bullet
 		Speed: 382
 		LaunchAngle: 25
@@ -714,7 +714,7 @@ eye_bomberguy:
 	Inherits@fx: ^d2k_ordos_eye_bomberguy_2
 	ReloadDelay: 125
 	Range: 3905
-	Report: 15_UA05.wav, 15_UA00.wav, 15_UA01.wav
+	Report: d2k_ordos_sounds|15_UA05.wav, d2k_ordos_sounds|15_UA00.wav, d2k_ordos_sounds|15_UA01.wav
 	Projectile: Bullet
 		Speed: 125
 		Inaccuracy: 250
@@ -1664,7 +1664,7 @@ contaminator_attack:
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
-	Report: contaminator_attack_2.wav
+	Report: d2k_ordos_sounds|contaminator_attack_2.wav
 	Range: 2000
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
@@ -1716,7 +1716,7 @@ Laboratory_Bioball:
 	ReloadDelay: 42
 	Range: 6500
 	MinRange: 1300
-	Report: bioball_shoot.wav
+	Report: d2k_ordos_sounds|bioball_shoot.wav
 	Projectile: Bullet
 		Speed: 260
 		Blockable: false
@@ -2136,7 +2136,7 @@ HMGo_upgrade:
 	Inherits@3: ^Projectile_Bullet_Medium
 	Inherits@4: HMGo
 	Inherits@5: ^d2k_ordos_bullet_medium
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
 		Width: 55
@@ -2164,7 +2164,7 @@ d2kChainGun_upgrade:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_laser_heavy
 	Inherits@2: d2kChainGun
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-StartBurstReport:
 	-Projectile:
 	Projectile: LaserZap
@@ -2610,7 +2610,7 @@ ordos_lasertank:
 	-Warhead@Glow:
 	ReloadDelay: 55
 	Range: 7275
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
 		Width: 55
@@ -2719,7 +2719,7 @@ d2k_chemgun:
 	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 75
 	Range: 5177
-	Report: chemtrooper_att.wav
+	Report: d2k_ordos_sounds|chemtrooper_att.wav
 	Projectile: RadBeam
 		Amplitude: 150
 		WaveLength: 300
@@ -2777,7 +2777,7 @@ HMGstealth_upgrade:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_laser_heavy
 	Inherits@2: HMGstealth
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
 		Width: 55
@@ -2792,7 +2792,7 @@ d2kCarryallChainGun_upgrade:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_laser_heavy
 	Inherits@2: d2kCarryallChainGun
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
 		Width: 55
@@ -2812,7 +2812,7 @@ LMG_ordos_upgrade:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_laser_heavy_2
 	Inherits@2: LMG
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
 		Width: 40
@@ -2834,7 +2834,7 @@ light_inf_lmg_ordos_upgrade:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_laser_heavy_2
 	Inherits@2: light_inf_lmg
-	Report: LaserTankAttack.wav
+	Report: d2k_ordos_sounds|LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
 		Width: 40
@@ -2876,7 +2876,7 @@ ordos_laserturret:
 	Burst: 3
 	BurstDelays: 5
 	Range: 7275
-	Report: PopupTurretAttack.wav
+	Report: d2k_ordos_sounds|PopupTurretAttack.wav
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -2902,7 +2902,7 @@ ordos_chemturret:
 	ReloadDelay: 90
 	Range: 14000
 	MinRange: 1985
-	Report: ChemTurretAttack.wav
+	Report: d2k_ordos_sounds|ChemTurretAttack.wav
 	ValidTargets: Ground
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -2938,7 +2938,7 @@ D2K_alshabah_autocannon:
 Emperor_Sardaukar_E:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 60
-	Report: d2k_gauss.wav
+	Report: d2k_ordos_sounds|d2k_gauss.wav
 	Range: 6000
 	Warhead@CannonHE_Medium:
 		Damage: 17000
@@ -2968,7 +2968,7 @@ D2K_SiegeQuad:
 D2K_Rocket_Buggy:
 	Inherits: ^D2KRocket
 	ReloadDelay: 28
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	Warhead@MissileAP_Heavy:
 		Damage: 6500
 
@@ -2984,7 +2984,7 @@ d2k_tyrant:
 	ReloadDelay: 130
 	Burst: 1
 	Range: 6144
-	Report: tyrantshot.wav
+	Report: d2k_ordos_sounds|tyrantshot.wav
 	ValidTargets: Ground
 	Projectile: Missile
 		RangeLimit: 6c512
@@ -3006,7 +3006,7 @@ d2k_tyrant:
 Rocket_stealth:
 	Inherits: ^D2KMissile
 	ReloadDelay: 150
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	Burst: 2
 	BurstDelays: 15
 	Range: 9216
@@ -3020,7 +3020,7 @@ Rocket_stealth_AA:
 	Inherits: Rocket_stealth
 	Burst: 2
 	BurstDelays: 15
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	Range: 11000
 	MinRange: 2200
 	ValidTargets: Air
@@ -3300,7 +3300,7 @@ D2KMarksmanRifle:
 	Inherits@w71: ^d2k_ordos_d2ksniperrifle
 	ReloadDelay: 45
 	Range: 6656
-	Report: d2k_marksman.wav
+	Report: d2k_ordos_sounds|d2k_marksman.wav
 	InvalidTargets: Water
 	Projectile: Bullet
 		Speed: 1c768
@@ -3352,7 +3352,7 @@ d2k_laser_qafza:
 	Inherits@w72: ^Projectile_Laser_Heavy
 	Inherits@w73: ^d2k_shared_d2k_laser
 	Report: obelray1.aud
-	StartBurstReport: d2k_laser.wav
+	StartBurstReport: d2k_ordos_sounds|d2k_laser.wav
 	Burst: 1
 	ReloadDelay: 12
 	Range: 6144
@@ -3398,7 +3398,7 @@ d2k_laser_qafza_aa:
 		Width: 50
 		Color: FF0000
 	ReloadDelay: 12
-	StartBurstReport: d2k_laser.wav
+	StartBurstReport: d2k_ordos_sounds|d2k_laser.wav
 	Warhead@Laser_Heavy: AreaDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Burst: 1
@@ -3420,7 +3420,7 @@ d2k_airdefenseplatform:
 	BurstDelays: 0
 	ReloadDelay: 8
 	ValidTargets: Ground, Air, Water
-	StartBurstReport: autoguntrt.wav
+	StartBurstReport: d2k_shared_sounds|autoguntrt.wav
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 3000
@@ -3438,7 +3438,7 @@ d2k_airdefenseplatform:
 
 D2KTheVoice:
 	ReloadDelay: 200
-	Report: d2k_the_voice.wav
+	Report: d2k_ordos_sounds|d2k_the_voice.wav
 	Range: 6144
 	TargetActorCenter: true
 	ValidTargets: MindControl
@@ -3448,7 +3448,7 @@ D2KTheVoice:
 		Damage: 0
 
 D2KGomJabbar:
-	Report: d2k_gom_jabbar.wav
+	Report: d2k_ordos_sounds|d2k_gom_jabbar.wav
 	ReloadDelay: 50
 	Range: 1250
 	ValidTargets: Infantry
@@ -3467,7 +3467,7 @@ D2KGomJabbar:
 			Concrete: 100
 
 d2k_aircraft_eater:
-	Report: d2k_aircraft_eater.wav
+	Report: d2k_ordos_sounds|d2k_aircraft_eater.wav
 	ValidTargets: Air
 	ReloadDelay: 500
 	Range: 1024
@@ -3507,7 +3507,7 @@ d2k_sard_heatblade:
 d2k_sard_crossbow:
 	ReloadDelay: 35
 	Range: 5120
-	Report: d2k_sardaukar_assassin_crossbow.wav
+	Report: d2k_ordos_sounds|d2k_sardaukar_assassin_crossbow.wav
 	Projectile: InstantHit
 	ValidTargets: Infantry
 	Warhead@1Dam: SpreadDamage

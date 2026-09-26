@@ -1,0 +1,1279 @@
+{
+ "theme": "D2k",
+ "refs": 327,
+ "migrate": 7,
+ "shared": 52,
+ "missing": 256,
+ "qualified": 5,
+ "packaged": 7,
+ "packages_needed": [
+  "d2k_harkonnen_sounds",
+  "d2k_ixian_sprites",
+  "d2k_ordos_sounds",
+  "d2k_shared_sounds"
+ ],
+ "plan": [
+  {
+   "name": "DEVASTATORMELTDOWN.WAV",
+   "src": "bits/d2k/devastatormeltdown.wav",
+   "owner": "Harkonnen",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "hk_flame_turret_1.wav",
+   "src": "bits/d2k/hk_flame_turret_1.wav",
+   "owner": "Harkonnen",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "d2k_buzzsaw_att.wav",
+   "src": "bits/d2k/d2k_buzzsaw_att.wav",
+   "owner": "Harkonnen",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "ixian_duelist_tank_chassis_v6.png",
+   "src": "bits/d2k/ixian_duelist_tank_chassis_v6.png",
+   "owner": "Ixian",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "ixian_duelist_tank_turret_v6.png",
+   "src": "bits/d2k/ixian_duelist_tank_turret_v6.png",
+   "owner": "Ixian",
+   "type": "sprites",
+   "refs": 1
+  },
+  {
+   "name": "d2k_laser.wav",
+   "src": "bits/d2k/d2k_laser.wav",
+   "owner": "Ordos",
+   "type": "sounds",
+   "refs": 1
+  },
+  {
+   "name": "autoguntrt.wav",
+   "src": "bits/d2k/autoguntrt.wav",
+   "owner": "Shared",
+   "type": "sounds",
+   "refs": 2
+  }
+ ],
+ "shared_detail": [
+  {
+   "name": "invisibleitem.shp",
+   "src": [
+    "bits/ra2/invisibleitem.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/tiberiandawn.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/starwars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/darkreign.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/civilian.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/dune2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "fixit1.aud",
+   "src": [
+    "bits/d2k/fixit1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml"
+   ]
+  },
+  {
+   "name": "d2k_sardaukar_elite_icon.shp",
+   "src": [
+    "bits/d2k/d2k_sardaukar_elite_icon.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml"
+   ]
+  },
+  {
+   "name": "appear1.aud",
+   "src": [
+    "bits/shared/appear1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/aircraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/buildings.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/aircraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/templates.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/vehicles.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/templates.yaml"
+   ]
+  },
+  {
+   "name": "trans1.aud",
+   "src": [
+    "bits/shared/trans1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/aircraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/buildings.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/vehicles.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/n64.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/dune2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/defaults.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/aircraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/templates.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/infantry.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/templates.yaml"
+   ]
+  },
+  {
+   "name": "ixian_promotion_stormraider_ra2_wclbolt1.shp",
+   "src": [
+    "bits/ra2/ixian_promotion_stormraider_ra2_wclbolt1.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml"
+   ]
+  },
+  {
+   "name": "d2khc.wav",
+   "src": [
+    "bits/d2k/d2khc.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml"
+   ]
+  },
+  {
+   "name": "bigggun1.aud",
+   "src": [
+    "bits/ts/bigggun1.aud",
+    "bits/ts/audio/bigggun1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "2100rotlsr.wav",
+   "src": [
+    "bits/2100/2100rotlsr.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/wz2100.yaml"
+   ]
+  },
+  {
+   "name": "DSDSHTGN.wav",
+   "src": [
+    "bits/ep315/dsdshtgn.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/xcom.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/classicdoom.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit1.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit1.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit2.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit2.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit3.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit3.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_bullet_hit4.wav",
+   "src": [
+    "bits/shared/shielded_bullet_hit4.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/warcraft2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/warcraft2/humans/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "tnkfire6.aud",
+   "src": [
+    "bits/shared/tnkfire6.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/ballistics.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "nukemisl.aud",
+   "src": [
+    "bits/shared/nukemisl.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/tomorrow.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tomorrow.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/darkreign.yaml"
+   ]
+  },
+  {
+   "name": "nukexplo.aud",
+   "src": [
+    "bits/shared/nukexplo.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starwars.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/darkreign.yaml"
+   ]
+  },
+  {
+   "name": "xplobig4.aud",
+   "src": [
+    "bits/shared/xplobig4.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/missiles.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/templates.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/rules/defaults.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/wh40k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/worms.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/sc2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/explosions.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/darkreign.yaml"
+   ]
+  },
+  {
+   "name": "asianalliance_chaosstorminductor_icon.shp",
+   "src": [
+    "bits/ra2/mod/asianalliance_chaosstorminductor_icon.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit1.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit1.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit2.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit2.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit3.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit3.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "shielded_shell_hit4.wav",
+   "src": [
+    "bits/shared/shielded_shell_hit4.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/outpost2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_ts.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_op2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/tkm/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "grenadepin.wav",
+   "src": [
+    "bits/d2k/grenadepin.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/wh40k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/syndicate/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/terran/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "hmgo1.wav",
+   "src": [
+    "bits/d2k/hmgo1.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml"
+   ]
+  },
+  {
+   "name": "hmgo2.wav",
+   "src": [
+    "bits/d2k/hmgo2.wav"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml"
+   ]
+  },
+  {
+   "name": "gun8.aud",
+   "src": [
+    "bits/shared/gun8.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/generals.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiandawn.yaml"
+   ]
+  },
+  {
+   "name": "obelray1.aud",
+   "src": [
+    "bits/shared/obelray1.aud",
+    "bits/ts/obelray1.aud",
+    "bits/ts/audio/obelray1.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiansun.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/cabal/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "gun11.aud",
+   "src": [
+    "bits/ra/gun11.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/xcom.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/generals.yaml"
+   ]
+  },
+  {
+   "name": "flamer2.aud",
+   "src": [
+    "bits/shared/flamer2.aud"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/valentine.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/allies/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/other.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/generals.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/explosions.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/schwarzermond/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/d2k.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/soviets/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/zerg/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/yuri/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/tiberiandawn.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/forgotten/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/effects_td.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/nod/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/starcraft.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/gdi/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/redalert2mod.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/weapons/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/protoss/yaml/weapons.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert/japan/yaml/weapons.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_n.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_n.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_nw.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_nw.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_w.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_w.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_sw.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_sw.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_s.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_s.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_se.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_se.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_e.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_e.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_mgun_ne.shp",
+   "src": [
+    "bits/ra2/ra2_mgun_ne.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/allies/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/consortium/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/starcraft/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/asianalliance/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_a.shp",
+   "src": [
+    "bits/ra2/ra2_death_a.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_b.shp",
+   "src": [
+    "bits/ra2/ra2_death_b.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/naxis/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_c.shp",
+   "src": [
+    "bits/ra2/ra2_death_c.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_d.shp",
+   "src": [
+    "bits/ra2/ra2_death_d.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_e.shp",
+   "src": [
+    "bits/ra2/ra2_death_e.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_death_f.shp",
+   "src": [
+    "bits/ra2/ra2_death_f.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2gi.shp",
+   "src": [
+    "bits/ra2/ra2gi.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "ra2_flameguy.shp",
+   "src": [
+    "bits/ra2/ra2_flameguy.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "futuretech_promotion_cryolegionnaire_ra2_nukedie.shp",
+   "src": [
+    "bits/ra2/futuretech_promotion_cryolegionnaire_ra2_nukedie.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "futuretech_promotion_cryolegionnaire_ra2_yuridie.shp",
+   "src": [
+    "bits/ra2/futuretech_promotion_cryolegionnaire_ra2_yuridie.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "futuretech_promotion_cryolegionnaire_ra2_electro.shp",
+   "src": [
+    "bits/ra2/futuretech_promotion_cryolegionnaire_ra2_electro.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  },
+  {
+   "name": "futuretech_promotion_cryolegionnaire_yr_virusd.shp",
+   "src": [
+    "bits/ra2/futuretech_promotion_cryolegionnaire_yr_virusd.shp"
+   ],
+   "foreign": [
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/redalert2.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiandawn/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/sequences/misc.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2mod/futuretech/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/redalert2/shared/yaml/sequences.yaml",
+    "c:/users/aedistoru/documents/github/ember-ra2a/mods/cameo/contentpacks/tiberiansun/shared/yaml/sequences.yaml"
+   ]
+  }
+ ],
+ "missing_detail": [
+  {
+   "name": "REARM1.WAV",
+   "refs": 3
+  },
+  {
+   "name": "A_FSEL1.AUD",
+   "refs": 1
+  },
+  {
+   "name": "atreides_sonictank.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_harvester.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_harvester_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_ornithopter.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_ornithopter_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_sonictank_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_sandbike.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_sandbike_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_apc.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_apc_turret.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_apc_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_minotaurus.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_minotaurus_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_mongoose.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_mongoose_turret.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_mongoose_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_repairtank.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_repairtank_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_advancedcarryall.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_advancedcarryall_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_airdrone.png",
+   "refs": 1
+  },
+  {
+   "name": "atreides_airdrone_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "ixian_windtrap_power_atreides_zaps.png",
+   "refs": 1
+  },
+  {
+   "name": "d2k_mini_windtrap.shp",
+   "refs": 2
+  },
+  {
+   "name": "d2k_mini_windtrap_icon.shp",
+   "refs": 2
+  },
+  {
+   "name": "atreidesicon.shp",
+   "refs": 1
+  },
+  {
+   "name": "BUILD1.WAV",
+   "refs": 8
+  },
+  {
+   "name": ".aud",
+   "refs": 5
+  },
+  {
+   "name": "EXPLSML1.WAV",
+   "refs": 4
+  },
+  {
+   "name": "FREMODD1.WAV",
+   "refs": 2
+  },
+  {
+   "name": "MGUN2.WAV",
+   "refs": 2
+  },
+  {
+   "name": "splash9.aud",
+   "refs": 3
+  },
+  {
+   "name": "saudakar_bazooka.png",
+   "refs": 1
+  },
+  {
+   "name": "corrino_buggy.png",
+   "refs": 1
+  },
+  {
+   "name": "corrino_bmp.png",
+   "refs": 1
+  },
+  {
+   "name": "corrino_tank.png",
+   "refs": 1
+  },
+  {
+   "name": "corrino_apc.png",
+   "refs": 1
+  },
+  {
+   "name": "corrino_apc_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "saudakar_berserker.png",
+   "refs": 1
+  },
+  {
+   "name": "saudakar_sword.png",
+   "refs": 1
+  },
+  {
+   "name": "saudakar_javelin.png",
+   "refs": 1
+  },
+  {
+   "name": "saudakar_laser.png",
+   "refs": 1
+  },
+  {
+   "name": "MEDTANK1.WAV",
+   "refs": 3
+  },
+  {
+   "name": "harkonnen_assaulttank.png",
+   "refs": 1
+  },
+  {
+   "name": "harkonnen_assaulttank_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "harkonnen_devastatorturret.png",
+   "refs": 1
+  },
+  {
+   "name": "harkonnen_devastatorturret_build_icon.png",
+   "refs": 1
+  },
+  {
+   "name": "harkonnen_rockettank.png",
+   "refs": 1
+  }
+ ],
+ "qualified_detail": [
+  {
+   "name": "minigun.shp",
+   "pkg": "shared_sprites",
+   "refs": 2
+  },
+  {
+   "name": "e1.shp",
+   "pkg": "shared_sprites",
+   "refs": 2
+  },
+  {
+   "name": "electro.shp",
+   "pkg": "shared_sprites",
+   "refs": 2
+  },
+  {
+   "name": "gunfire2.shp",
+   "pkg": "shared_sprites",
+   "refs": 1
+  },
+  {
+   "name": "diskray.shp",
+   "pkg": "shared_sprites",
+   "refs": 1
+  }
+ ],
+ "packaged_detail": [
+  {
+   "name": "vkiratta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vintatta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "sgenopen.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "vteratta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "icraatta.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "urepair.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  },
+  {
+   "name": "igensqua.wav",
+   "bag": "bits/ra2/audio.idx",
+   "refs": 1
+  }
+ ]
+}

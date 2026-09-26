@@ -29,7 +29,7 @@ harkonnen_combat_tank:
 
 harkonnen_assaulttank:
 	Defaults:
-		Filename: harkonnen_assaulttank.png
+		Filename: d2k_harkonnen_sprites|harkonnen_assaulttank.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -38,7 +38,7 @@ harkonnen_assaulttank:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: harkonnen_assaulttank_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_assaulttank_icon.png
 
 harkonnen_combat_tank_husk:
 	Defaults:
@@ -62,7 +62,7 @@ harkonnen_devastatorturret:
 		Scale: 0.5
 		Offset: 0,-24
 	invisible:
-		Filename: harkonnen_devastatorturret.png
+		Filename: d2k_harkonnen_sprites|harkonnen_devastatorturret.png
 		Start: 0
 		Length: 1
 	idle:
@@ -73,12 +73,12 @@ harkonnen_devastatorturret:
 		Length: 1
 		Facings: 1
 	make:
-		Filename: harkonnen_devastatorturret.png
+		Filename: d2k_harkonnen_sprites|harkonnen_devastatorturret.png
 		Start: 0
 		Length: 16
 		Tick: 80
 	turret:
-		Filename: harkonnen_devastatorturret.png
+		Filename: d2k_harkonnen_sprites|harkonnen_devastatorturret.png
 		Start: 16
 		Facings: 64
 	crumble-overlay:
@@ -91,12 +91,12 @@ harkonnen_devastatorturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
-		Filename: harkonnen_devastatorturret_build_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_devastatorturret_build_icon.png
 		Offset: 0,0
 
 harkonnen_rockettank:
 	Defaults:
-		Filename: harkonnen_rockettank.png
+		Filename: d2k_harkonnen_sprites|harkonnen_rockettank.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -105,11 +105,11 @@ harkonnen_rockettank:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: harkonnen_rockettank_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_rockettank_icon.png
 
 harkonnen_devastatormech:
 	Defaults:
-		Filename: harkonnen_devestator.png
+		Filename: d2k_harkonnen_sprites|harkonnen_devestator.png
 	idle:
 		Start: 0
 		Length: 8
@@ -121,11 +121,11 @@ harkonnen_devastatormech:
 		Facings: 32
 		Tick: 100
 	icon:
-		Filename: harkonnen_devestator_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_devestator_icon.png
 
 harkonnen_adp:
 	Defaults:
-		Filename: harkonnen_adp.png
+		Filename: d2k_harkonnen_sprites|harkonnen_adp.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -134,7 +134,7 @@ harkonnen_adp:
 		Facings: 32
 		Tick: 80
 	turret:
-		Filename: harkonnen_adp_turret.png
+		Filename: d2k_harkonnen_sprites|harkonnen_adp_turret.png
 		Start: 0
 		Facings: 32
 	muzzle:
@@ -146,11 +146,11 @@ harkonnen_adp:
 		Tick: 60
 		BlendMode: Additive
 	icon:
-		Filename: harkonnen_adp_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_adp_icon.png
 
 harkonnen_buzzsaw:
 	Defaults:
-		Filename: harkonnen_buzzsaw.png
+		Filename: d2k_harkonnen_sprites|harkonnen_buzzsaw.png
 	idle:
 		Start: 0
 		Length: 8
@@ -164,11 +164,11 @@ harkonnen_buzzsaw:
 		Transpose: true
 		Tick: 100
 	icon:
-		Filename: harkonnen_buzzsaw_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_buzzsaw_icon.png
 
 harkonnen_inkvine:
 	Defaults:
-		Filename: harkonnen_inkvine.png
+		Filename: d2k_harkonnen_sprites|harkonnen_inkvine.png
 	idle:
 		Start: 0
 		Length: 8
@@ -182,11 +182,11 @@ harkonnen_inkvine:
 		Transpose: true
 		Tick: 100
 	icon:
-		Filename: harkonnen_inkvine_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_inkvine_icon.png
 
 harkonnen_flametank:
 	Defaults:
-		Filename: harkonnen_flametank.png
+		Filename: d2k_harkonnen_sprites|harkonnen_flametank.png
 	idle:
 		Start: 0
 		Facings: 32
@@ -195,11 +195,11 @@ harkonnen_flametank:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: harkonnen_flametank_icon.png
+		Filename: d2k_harkonnen_icons|harkonnen_flametank_icon.png
 
 harkonnen_sardaukar_baron_elite:
 	Defaults:
-		Filename: harkonnen_sardaukar_baron_elite.png
+		Filename: d2k_harkonnen_sprites|harkonnen_sardaukar_baron_elite.png
 		Scale: 1.2
 	stand:
 		Start: 0

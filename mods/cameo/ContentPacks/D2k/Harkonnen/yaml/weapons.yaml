@@ -10,7 +10,7 @@ HarkonnenFlameTurret:
 	Burst: 5
 	BurstDelays: 3
 	Range: 6742
-	StartBurstReport: hk_flame_turret_1.wav
+	StartBurstReport: d2k_harkonnen_sounds|hk_flame_turret_1.wav
 	Projectile: Bullet
 		Speed: 180, 240
 		LaunchAngle: 10, 20
@@ -93,7 +93,7 @@ D2K70mmH:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 90
 	-Report:
-	StartBurstReport: d2k_buzzsaw_att.wav
+	StartBurstReport: d2k_harkonnen_sounds|d2k_buzzsaw_att.wav
 	Range: 4352
 	Burst: 2
 	BurstDelays: 0

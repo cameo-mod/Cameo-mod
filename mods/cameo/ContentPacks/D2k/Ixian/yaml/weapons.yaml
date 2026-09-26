@@ -1736,7 +1736,7 @@ d2k_farasha_charge:
 	ReloadDelay: 125
 	Range: 6400
 	ValidTargets: Ground, Water, Air
-	Report: d2k_lasercharging.wav
+	Report: d2k_ixian_sounds|d2k_lasercharging.wav
 	Projectile: LaserZap
 		Width: 36
 		Duration: 60
@@ -1905,7 +1905,7 @@ farasha_drone_ixian:
 	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 25
 	Range: 2500
-	Report: d2k_alfayrus.wav
+	Report: d2k_ixian_sounds|d2k_alfayrus.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
 		Width: 50
@@ -1965,7 +1965,7 @@ MongooseRocket:
 	Inherits@fx: ^d2k_ixian_mongooserocket
 	ReloadDelay: 64
 	Range: 6183
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Arm: 0

@@ -413,7 +413,7 @@ harkonnen_devastatormech:
 		RequiresCondition: overload
 		GrantsCondition: meltdown
 	AmbientSound@onMeltDown:
-		SoundFiles: DEVASTATORMELTDOWN.WAV
+		SoundFiles: d2k_harkonnen_sounds|DEVASTATORMELTDOWN.WAV
 		RequiresCondition: overload
 		Interval: 250
 	ChangesHealth@SelfHealing:

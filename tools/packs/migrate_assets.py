@@ -51,6 +51,9 @@ def collect_refs(path):
         for tok in re.split(r"[\s,'\"]+", s):
             if not FILE_EXT.search(tok):
                 continue
+            base = tok.rsplit("|", 1)[-1]
+            if not base.rsplit(".", 1)[0]:   # bare extension like ".WAV"
+                continue
             if "|" in tok:
                 pkg, name = tok.split("|", 1)
                 out.append((tok, name, pkg))
@@ -115,6 +118,9 @@ def main():
     ap.add_argument("--voxels", action="store_true",
                     help="also collect RenderVoxels name-convention files")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--prefix-existing", action="store_true",
+                    help="also rewrite bare refs for files already inside "
+                         "the theme's files/ dirs (half-done migrations)")
     ap.add_argument("--pkg-prefix", default=None, help="default ra2")
     ap.add_argument("--out", default=None)
     args = ap.parse_args()
@@ -185,11 +191,17 @@ def main():
     for p in (MOD / "bits").rglob("*"):
         if p.is_file():
             bits_index.setdefault(p.name.lower(), []).append(norm(p.relative_to(MOD)))
-            if p.suffix == ".idx":
+            if p.suffix.lower() in (".idx", ".rs", ".r8", ".r16"):
                 try:
                     data = p.read_bytes()
-                    names = {m.group(0).rstrip(b"\x00").decode()
+                    names = {m.group(0).rstrip(b"\x00").decode().lower()
                              for m in re.finditer(rb"[a-z0-9_]{3,}\x00", data)}
+                    # RS/R8/R16 embed full names with extensions (often
+                    # uppercase), so match case-insensitively.
+                    names |= {m.group(0).decode().lower()
+                              for m in re.finditer(
+                                  rb"[a-zA-Z0-9_]{2,}\.(wav|aud|shp|png|tem)",
+                                  data, re.IGNORECASE)}
                     bag_index[norm(p.relative_to(MOD))] = names
                 except OSError:
                     pass
@@ -208,8 +220,9 @@ def main():
         srcs = bits_index.get(key, [])
         if not srcs:
             stem = key.rsplit(".", 1)[0]
-            if stem in in_bag:
-                packaged.append({"name": name, "bag": in_bag[stem],
+            bag = in_bag.get(key) or in_bag.get(stem)
+            if bag:
+                packaged.append({"name": name, "bag": bag,
                                  "refs": len(yrefs)})
             else:
                 missing.append({"name": name, "refs": len(yrefs)})
@@ -306,6 +319,40 @@ def main():
     for p in plan:
         name_pkg[p["name"].lower()] = (
             p["name"], f"{prefix}_{canon(p['owner']).lower()}_{p['type']}")
+
+    # files already in the theme's packs (half-done migrations): prefix their
+    # bare refs too, preferring the referencing yaml's own pack, then Shared.
+    if args.prefix_existing:
+        pack_index = {}   # name(lower) -> [(pack, type)]
+        for packdir in theme_dir.iterdir():
+            fd = packdir / "files" if packdir.is_dir() else None
+            if not fd or not fd.is_dir():
+                continue
+            for td in fd.iterdir():
+                if not td.is_dir():
+                    continue
+                for f in td.iterdir():
+                    if f.is_file():
+                        pack_index.setdefault(f.name.lower(), []).append(
+                            (packdir.name, td.name))
+        for y in theme_yamls:
+            m = re.search(r"contentpacks/[^/]+/([^/]+)/", norm(y))
+            ypack = canon(m.group(1)) if m else "Shared"
+            for raw, name, pkg in collect_refs(y):
+                if pkg:
+                    continue
+                cands = pack_index.get(name.lower())
+                if not cands or name.lower() in name_pkg:
+                    continue
+                pick = ([c for c in cands if c[0] == ypack]
+                        or [c for c in cands if c[0] == "Shared"]
+                        or ([cands[0]] if len(cands) == 1 else []))
+                if pick:
+                    pk, t = pick[0]
+                    name_pkg[name.lower()] = (
+                        name, f"{prefix}_{pk.lower()}_{t}")
+        n_prefixed = len(name_pkg) - len(plan)
+        print(f"prefix-existing: +{n_prefixed} refs qualify against pack files")
     n_repl = 0
     for y in theme_yamls:
         text = y.read_text(encoding="utf-8", errors="replace")
@@ -318,8 +365,10 @@ def main():
             if ent is None:
                 continue
             fname, pkgname = ent
-            # whole-token replace of the bare name
-            pat = re.compile(r"(?<![\w.|/])" + re.escape(fname) + r"(?![\w.])")
+            # whole-token replace of the bare name (case-insensitive; the
+            # replacement uses the on-disk filename casing)
+            pat = re.compile(r"(?<![\w.|/])" + re.escape(name) + r"(?![\w.])",
+                             re.IGNORECASE)
             text = pat.sub(f"{pkgname}|{fname}", text)
         if text != orig:
             y.write_text(text, encoding="utf-8")
