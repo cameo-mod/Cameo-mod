@@ -229,6 +229,40 @@ Every module above issues orders and keeps local state. None grants conditions f
 the exception, and it stays forbidden** (`AI_ARCHITECTURE.md` §1.6). Credit CN (Astor / DoGyAUT,
 commit `30cf70a`) in each ported file header.
 
+### 3c. The whole CN bot, module by module, against Cameo
+
+Astor sent the complete module list on 2026-09-11. Every row below was checked in
+`.modsdk/OpenRA.Mods.CN/Traits/BotModules/` (the line count is the file size) and against Cameo's
+loaded modules (`mods/cameo/ai/ai.yaml`, `AI_ARCHITECTURE.md` §10.2).
+
+| CN module (lines) | What it does (verified) | Cameo counterpart | Verdict |
+|---|---|---|---|
+| `CNBotProfileBotModule` (924) | profiles Rush / Turtle / Tech / Expansion / Steamroller / Adaptive; **tech stage Early / Mid / Late** (`enum TechStage`, `:20`) shifts rush thresholds; budget split (expansion, tech, defence, production) + harvester target % | `BotPersonalityController` + `MasterAiBotModule` (phase 3); `BotLimits` caps | **Numbers and safeguards only**; its switch mechanism is forbidden (§1.6). Worth taking: an **own tech stage** in the snapshot (Cameo counts only the *enemy's* `TechBuildings`, `BotSituation.cs:33`) |
+| `CombatAnalysisBotModule` (369) | threat weight per role, value-scaled and decaying; nemesis player; feeds the base builder and squads | none (§4.3 `w_hurt` is unbuilt) | **Port** (§3b) |
+| `CNTacticalMapBotModule` (3055) | chokepoints and high-ground edges from the **hierarchical pathfinder's abstract graph** (cut edges and articulation points), rebuilt on bridge changes | none | **Port the topology.** The API it needs exists in Cameo's engine: `PathFinder.GetOverlayDataForLocomotor` (`engine/OpenRA.Mods.Common/Traits/World/PathFinder.cs:59`), called at CN `:699`. **No engine change** |
+| `CNRegionManagerBotModule` (639) | held regions, ground value, role Core / Economy / Military / Outpost; `cntopo` chat debug overlay | none | later; the debug overlay is worth copying with the topology, for replay review |
+| `CNResourceMapBotModule` (390) | resource + refinery map shared by economy modules | `ResourceMapBotModule` (Common) | skip unless the harvester port needs it |
+| `CNBaseBuilderBotModule` + `QueueManager` (4347 + 4482) | self-clustering placement (`NearBuilding`, `ClusterGroupSize`/spacing); **threat-driven defence roles** (`enum DefenseRole`, capped % per role, `:206`) | `BaseBuilderBotModuleCA@generic` | **Idea only**: defence roles driven by `CombatAnalysis` threat. ⚠ Blackrobe's #245 edits the Cameo base builder; coordinate first |
+| `CNHarvesterBotModule` (1063) | refinery-aware field distribution; rebuilds harvesters per refinery count | `HarvesterBotModuleCA` | later; economy, not this month |
+| `CNMcvExpansionManagerBotModule` (1998) | CN's expansion manager | `McvExpansionManagerBotModule` (Common) | **read before phase 7**: check whether it already handles unreachable patches |
+| `CNRepairManagerBotModule` (218) | sends damaged idle units to allied repair facilities | `BuildingRepairBotModule` (+CA) repair **buildings** only | small port candidate |
+| `CNBridgeRepairBotModule` (209) | engineers into bridge huts | ⭐ **already shipped, not loaded**: AS `CncEngineerManagerBotModule` has `RepairBridge` (`engine/OpenRA.Mods.AS/Traits/BotModules/CncEngineerManagerBotModule.cs:24,49`), and **0** instances in `ai.yaml`. Cameo has 17 yaml files using `RepairsBridges` | **Quick win, yaml only**: load the AS module. Check it does not fight `CaptureManagerBotModuleCA` for the same engineers |
+| `CNUnitBuilderBotModule` (1393) | **squad-demand driven**: reinforces damaged squads first, then fills missing templates, then ratios (`:26-27`, `:857`) | `UnitBuilderBotModuleCA` + compositions + phase 5 counter demand | idea for 6f: reinforce existing squads before starting new ones |
+| `CNSquadManagerBotModule` (4923) | template and slot squads (`AllowedTypes`, `Count`, `Optional`, `MinSlotsToActivate`), own state machine, fuzzy attack-or-flee, 15 squad types | `SquadManagerBotModuleCA` ×5 personalities | **pieces**, not the whole (§3b); phases 6c–6g |
+| `CNGarrisonBotModule` (353) | fills garrisonable buildings with the infantry type the **local threat** calls for; swaps mismatches out | `LoadGarrisonerBotModuleCA@Infantry` (no threat matching) | later: threat matching once `CombatAnalysis` is ported. Cameo has 11 yaml files with garrisons |
+| `CNCliffDemolitionBotModule` (326) | shoots destroyable cliffs open, only to join own ground or open a way into ground it is attacking | **no destroyable cliffs in Cameo** (0 yaml hits) | **skip** |
+| `CNVeinholeAssaultBotModule` (232) | force-fires veinholes, gated by side (GDI burns them, Nod keeps them for weed) | none; Cameo has veinhole content (8 yaml files) from the TS factions | small candidate for TS GDI and Nod |
+| `DeployBotModule` (517) | deploy behaviour per actor group (artillery and similar) | nothing loaded | candidate: many Cameo siege units deploy, and a bot that never deploys them wastes them |
+| `CNBotPerf` (159), `CNBotLog` (38) | per-module timing and logging | `AiMatchLogWriter`, `AiSituationLogWriter` (no timing) | **cheap and useful**: 25 factions and several bots per match; measure before 6a–6e add scans (Fransbot C8 claims 10 bots without lag) |
+
+**Configuration layout.** CN defines six `ModularBot`s (`cn`, `cn-rush`, `cn-turtle`, `cn-tech`,
+`cn-expansion`, `cn-steamroller`) and splits its AI yaml by concern into 11 files, 3829 lines in
+total (`.modsdk/mods/cn/rules/ai/`: `bots`, `profiles`, `base-building`, `economy`, `production`,
+`support`, and one `squads-<profile>.yaml` per profile). Cameo's is one `mods/cameo/ai/ai.yaml`
+of more than 6000 lines. Splitting it by concern is a maintainability win, but a new file means a
+`mod.yaml` manifest entry, and **`mod.yaml` belongs to DAWN**. Ask before doing it. Cameo's
+personalities are one bot with switching (phase 3), not six separate bots; keep it that way.
+
 ---
 
 ## 4. The work plan for Devin-Cloud (amends `AI_ARCHITECTURE.md` §10.6)
@@ -292,6 +326,13 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 * Coarse A* over `RegionMemory` from the squad's centroid to the target, costed by remembered hostile
   value. Emit 1–4 waypoints and reuse the existing move / attack-move orders. Unsynced only.
 
+### Quick wins (any time, small PRs)
+
+* Load AS `CncEngineerManagerBotModule` for bridge repair (§3c), yaml only. Verify engineers are
+  not double-assigned with `CaptureManagerBotModuleCA`.
+* Port `CNBotPerf`-style per-module timing into the existing AI logs before 6a, so the cost of the
+  fog scans is measured rather than guessed.
+
 ### 6f. Coordinated waves: artillery, support, growth (Astor's points)
 
 * Artillery squads **attach** to an assault squad, hang back N cells, and bombard only targets the
@@ -336,8 +377,8 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 * Bot module: an allied beacon near **enemy** memory sends the nearest free squad (risk gate
   applies). An allied beacon on the **ally's own building** sends support (a repair or supply unit
   if the faction has one; skip otherwise).
-* ⚠ Shadowing `PlaceBeacon` is outside the lane (it is not a `Bot*` file). Ask in the PR, per the
-  lane rule.
+* ✅ Maintainer ruling 2026-09-27: **the `PlaceBeacon` shadow is approved** — the earlier lane
+  caveat is resolved. The shadow still must be proven with a Cameo-only field before merging.
 
 ### 9. Stats-derived effective value (optional this month)
 
