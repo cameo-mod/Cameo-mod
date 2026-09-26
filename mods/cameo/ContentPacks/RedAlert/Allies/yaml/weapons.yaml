@@ -2306,7 +2306,7 @@ ra1_allies_tanya_pistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
-	Report: ragun5.aud
+	Report: ra1_allies_sounds|ragun5.aud
 	ReloadDelay: 7
 	Range: 7777
 	Burst: 2
@@ -2330,7 +2330,7 @@ ra1_allies_tanya_pistol_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Cryo
-	Report: ragun5.aud
+	Report: ra1_allies_sounds|ragun5.aud
 	ReloadDelay: 7
 	Range: 7777
 	Burst: 2
@@ -2576,7 +2576,7 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 	Warhead@EffectWater:
 RadarJammer:
 	ReloadDelay: 150
-	Report: jammed.aud
+	Report: ra1_allies_sounds|jammed.aud
 	Range: 10000
 	Projectile: InstantHit
 	Warhead@1Dum: Dummy

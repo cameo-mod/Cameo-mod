@@ -7,7 +7,7 @@ ACV_Machinegun:
 	Burst: 4
 	BurstDelays: 2
 	Range: 5555
-	Report: AUACV_mgFireA.wav, AUACV_mgFireB.wav, AUACV_mgFireC.wav, AUACV_mgFireD.wav
+	Report: ra2m_futuretech_sounds|AUACV_mgFireA.wav, ra2m_futuretech_sounds|AUACV_mgFireB.wav, ra2m_futuretech_sounds|AUACV_mgFireC.wav, ra2m_futuretech_sounds|AUACV_mgFireD.wav
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -309,7 +309,7 @@ Future_Cryocopter_Cryo:
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 5200
-	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
+	Report: ra2m_futuretech_sounds|AUCryoc_wea1impact2La.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Lb.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Lc.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Ld.wav
 	TargetActorCenter: true
 	Projectile: LaserZapCA
 		Duration: 22
@@ -566,7 +566,7 @@ CryoLegionnaireAttack:
 	TargetActorCenter: false
 	Range: 7000
 	ReloadDelay: 30
-	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
+	Report: ra2m_futuretech_sounds|AUCryoc_wea1impact2La.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Lb.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Lc.wav, ra2m_futuretech_sounds|AUCryoc_wea1impact2Ld.wav
 	Projectile: LinearPulse
 		Blockable: false
 		ImpactType: Cone
@@ -1155,7 +1155,7 @@ AthenaVisualLaser:
 	Range: 16000
 	MinRange: 3200
 	#Report: 2100rotlsr.wav
-	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
+	Report: ra2m_shared_sounds|AUGuard_beamLoopa.wav, ra2m_shared_sounds|AUGuard_beamLoopb.wav, ra2m_shared_sounds|AUGuard_beamLoopc.wav
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
@@ -2013,7 +2013,7 @@ Future_Wheel_MG:
 	Burst: 4
 	BurstDelays: 2
 	Range: 5806
-	Report: heavy_mgun1_3.wav
+	Report: ra2m_futuretech_sounds|heavy_mgun1_3.wav
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
@@ -2150,7 +2150,7 @@ ShotgunAttackRobotGun:
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 55
 	Range: 4110
-	Report: laser_cannon3_3.wav
+	Report: ra2m_futuretech_sounds|laser_cannon3_3.wav
 	ValidTargets: Ground, Water
 	-Warhead@Bullet_Medium:
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
@@ -2618,7 +2618,7 @@ CannonAttackRobotGun:
 	Inherits@xCannonAttackRobotGun2: ^Effect_Explosion_Medium_RA2
 	Range: 6000
 	ReloadDelay: 25
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	Projectile: Bullet
 		Speed: 600
 	Warhead@Railgun_Heavy:
@@ -3143,7 +3143,7 @@ FutureMechGatling:
 	Inherits@xFutureMechGatling0: ^Warhead_Bullet_Medium
 	Inherits@xFutureMechGatling1: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 12
 	Range: 8300
 	ValidTargets: Ground, Water, Air
@@ -3306,7 +3306,7 @@ FutureMechPlasma:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 7000
 	MinRange: 1400
 	Projectile: Bullet
@@ -3554,7 +3554,7 @@ GuardianTankCannon_elite:
 Future_MBT_DebuffLaser:
 	ReloadDelay: 4
 	Range: 7820
-	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
+	Report: ra2m_shared_sounds|AUGuard_beamLoopa.wav, ra2m_shared_sounds|AUGuard_beamLoopb.wav, ra2m_shared_sounds|AUGuard_beamLoopc.wav
 	TargetActorCenter: true
 	ValidTargets: Ground, Water, Structure, wall
 	Projectile: LaserZap
@@ -3582,7 +3582,7 @@ FutureTankCannons:
 	Burst: 2
 	BurstDelays: 10
 	Report: AUFutur_weapFire1a.wav,AUFutur_weapFire1b.wav,AUFutur_weapFire1c.wav,AUFutur_weapFire1d.wav,AUFutur_weapFire1e.wav,AUFutur_weapFire1f.wav
-	StartBurstReport: AUFutur_wea1Firea.wav,AUFutur_wea1Fireb.wav,AUFutur_wea1Firec.wav,AUFutur_wea1Fired.wav,AUFutur_wea1Firee.wav
+	StartBurstReport: ra2m_futuretech_sounds|AUFutur_wea1Firea.wav,ra2m_futuretech_sounds|AUFutur_wea1Fireb.wav,ra2m_futuretech_sounds|AUFutur_wea1Firec.wav,ra2m_futuretech_sounds|AUFutur_wea1Fired.wav,ra2m_futuretech_sounds|AUFutur_wea1Firee.wav
 	Range: 7500
 	MinRange: 1500
 	Projectile: Bullet
@@ -3615,7 +3615,7 @@ FutureTankCannons:
 		Spread: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: drneutronexp
-		ImpactSounds: AUFutur_Wea1FireV3a.wav,AUFutur_Wea1FireV3b.wav,AUFutur_Wea1FireV3c.wav,AUFutur_Wea1FireV3d.wav,AUFutur_Wea1FireV3e.wav
+		ImpactSounds: ra2m_futuretech_sounds|AUFutur_Wea1FireV3a.wav,ra2m_futuretech_sounds|AUFutur_Wea1FireV3b.wav,ra2m_futuretech_sounds|AUFutur_Wea1FireV3c.wav,ra2m_futuretech_sounds|AUFutur_Wea1FireV3d.wav,ra2m_futuretech_sounds|AUFutur_Wea1FireV3e.wav
 		ValidTargets: Ground, Water
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
@@ -3930,7 +3930,7 @@ FutureHarbingerCannon:
 		Explosions: blue_building_napalm
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
-		ImpactSounds: AUGunship_cannonExplo1A.wav,AUGunship_cannonExplo1B.wav,AUGunship_cannonExplo1C.wav,AUGunship_cannonExplo1D.wav,AUGunship_cannonExplo1E.wav,AUGunship_cannonExplo1F.wav,AUGunship_cannonExplo1G.wav,AUGunship_cannonExplo1H.wav,AUGunship_cannonExplo2A.wav,AUGunship_cannonExplo2B.wav,AUGunship_cannonExplo2C.wav,AUGunship_cannonExplo2D.wav,AUGunship_cannonExplo2E.wav,AUGunship_cannonExplo2F.wav,AUGunship_cannonExplo2G.wav,AUGunship_cannonExplo2H.wav
+		ImpactSounds: ra2m_futuretech_sounds|AUGunship_cannonExplo1A.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1B.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1C.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1D.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1E.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1F.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1G.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo1H.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2A.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2B.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2C.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2D.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2E.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2F.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2G.wav,ra2m_futuretech_sounds|AUGunship_cannonExplo2H.wav
 	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunExtraDamage:
@@ -4166,7 +4166,7 @@ HarbingerChainguns:
 	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 9
 	Range: 6030
-	Report: AUGunsh_wea1Firea.wav,AUGunsh_wea1Fireb.wav,AUGunsh_wea1Firec.wav
+	Report: ra2m_futuretech_sounds|AUGunsh_wea1Firea.wav,ra2m_futuretech_sounds|AUGunsh_wea1Fireb.wav,ra2m_futuretech_sounds|AUGunsh_wea1Firec.wav
 	Warhead@Flak_Medium:
 		Damage: 12000
 HarbingerChainguns_elite:
@@ -4179,7 +4179,7 @@ BlackWidowPistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
-	Report: AUTanya_pistolFireA.wav, AUTanya_pistolFireB.wav, AUTanya_pistolFireC.wav, AUTanya_pistolFireD.wav, AUTanya_pistolFireE.wav, AUTanya_pistolFireF.wav, AUTanya_pistolFireG.wav, AUTanya_pistolFireH.wav, AUTanya_pistolFireI.wav
+	Report: ra2m_futuretech_sounds|AUTanya_pistolFireA.wav, ra2m_futuretech_sounds|AUTanya_pistolFireB.wav, ra2m_futuretech_sounds|AUTanya_pistolFireC.wav, ra2m_futuretech_sounds|AUTanya_pistolFireD.wav, ra2m_futuretech_sounds|AUTanya_pistolFireE.wav, ra2m_futuretech_sounds|AUTanya_pistolFireF.wav, ra2m_futuretech_sounds|AUTanya_pistolFireG.wav, ra2m_futuretech_sounds|AUTanya_pistolFireH.wav, ra2m_futuretech_sounds|AUTanya_pistolFireI.wav
 	ReloadDelay: 16
 	Range: 9000
 	Burst: 2
@@ -4210,7 +4210,7 @@ OrionRailgun:
 	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Range: 7500
 	ReloadDelay: 60
-	Report: AUFTank_neutImpaSmaa.wav, AUFTank_neutImpaSmab.wav, AUFTank_neutImpaSmac.wav, AUFTank_neutImpaSmad.wav, AUFTank_neutImpaSmae.wav
+	Report: ra2m_futuretech_sounds|AUFTank_neutImpaSmaa.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmab.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmac.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmad.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmae.wav
 	Projectile: Bullet
 		Blockable: false
 		Speed: 1500

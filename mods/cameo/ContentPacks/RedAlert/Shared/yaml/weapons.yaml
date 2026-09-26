@@ -603,7 +603,7 @@ ReimuYinYangOrb:
 		Spread: 320
 		Damage: 64000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: thgun.wav
+		ImpactSounds: ra1_shared_sounds|thgun.wav
 
 ## Unused
 
@@ -763,7 +763,7 @@ MagicOrbSpreaderProjectile2:
 MagicOrb:
 	Inherits@2: ^Warhead_Magic_Heavy
 	Inherits@3: ^Effect_Magic_Heavy
-	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
 	Burst: 8
 	BurstDelays: 10
 	ReloadDelay: 10
@@ -869,7 +869,7 @@ MagicOrb:
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect:
-		ImpactSounds: thgun.wav
+		ImpactSounds: ra1_shared_sounds|thgun.wav
 	-Warhead@Magic_Heavy:
 	Warhead@Tesla_Heavy: AreaDamage
 	Warhead@Tesla_Heavy:
@@ -886,7 +886,7 @@ MagicOrb:
 MagicOrb2:
 	Inherits@2: ^Warhead_Magic_Heavy
 	Inherits@3: ^Effect_Magic_Heavy
-	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
 	Burst: 8
 	BurstDelays: 10
 	ReloadDelay: 10
@@ -990,7 +990,7 @@ MagicOrb2:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect:
-		ImpactSounds: thgun.wav
+		ImpactSounds: ra1_shared_sounds|thgun.wav
 	-Warhead@Magic_Heavy:
 	Warhead@Tesla_Heavy: AreaDamage
 	Warhead@Tesla_Heavy:
@@ -4378,7 +4378,7 @@ ra1_allies_chronovortex:
 	Range: 1250
 	ValidTargets: Ground, Water
 	Projectile: InstantHit
-	Report: rift1.aud, rift2.aud, rift3.aud
+	Report: ra1_shared_sounds|rift1.aud, ra1_shared_sounds|rift2.aud, ra1_shared_sounds|rift3.aud
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -1000

@@ -2532,7 +2532,7 @@ BlackHoleSuck:
 		ValidRelationships: Ally
 		ValidTargets: BlackHole
 	Warhead@Effect: CreateEffect
-		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
+		ImpactSounds: ra2m_schwarzermond_sounds|nax_bh_slurp_01.wav, ra2m_schwarzermond_sounds|nax_bh_slurp_02.wav, ra2m_schwarzermond_sounds|nax_bh_slurp_03.wav
 
 NaxCorrosionRocket:
 	Inherits@xNaxCorrosionRocket0: ^Warhead_MissileAP_Medium
@@ -2543,7 +2543,7 @@ NaxCorrosionRocket:
 	BurstDelays: 2
 	Range: 8000
 	MinRange: 1600
-	Report: nax_corrokit.wav
+	Report: ra2m_schwarzermond_sounds|nax_corrokit.wav
 	SoundVolume: 2.0
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
@@ -2659,7 +2659,7 @@ NaxCorrosionExpand1:
 	Warhead@Effect: CreateEffect
 		Explosions: nax_corr_frag
 		ExplosionPalette: ra2effect
-		ImpactSounds: nax_corrosion.wav
+		ImpactSounds: ra2m_schwarzermond_sounds|nax_corrosion.wav
 		ValidTargets: corrodible
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
@@ -2683,7 +2683,7 @@ NaxCorrosionExpand2:
 	Warhead@Effect: CreateEffect
 		Explosions: nax_corr_frag
 		ExplosionPalette: ra2effect
-		ImpactSounds: nax_corrosion.wav
+		ImpactSounds: ra2m_schwarzermond_sounds|nax_corrosion.wav
 		ValidTargets: corrodible
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
@@ -2701,7 +2701,7 @@ NaxCorrosionExpand3:
 	Warhead@Effect: CreateEffect
 		Explosions: nax_corr_frag
 		ExplosionPalette: ra2effect
-		ImpactSounds: nax_corrosion.wav
+		ImpactSounds: ra2m_schwarzermond_sounds|nax_corrosion.wav
 		ValidTargets: corrodible
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
@@ -3393,7 +3393,7 @@ Lunar_Green105mm_elite:
 	Range: 6000
 	Burst: 2
 	BurstDelays: 5
-	Report: laser_cannon2_2.wav
+	Report: ra2m_shared_sounds|laser_cannon2_2.wav
 	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -3519,7 +3519,7 @@ Lunar_GreenTigerCannon:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Report: laser_cannon3_4.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_4.wav
 
 	-Warhead@CannonHE_Medium:
 	InvalidTargets: wall
@@ -3687,7 +3687,7 @@ Lunar_GreenTigerCannon_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Report: laser_cannon3_4.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_4.wav
 
 	-Warhead@CannonHE_Medium:
 	InvalidTargets: wall
@@ -3856,7 +3856,7 @@ Lunar_GreenJadgDestroyer:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
-	Report: laser_cannon3_4.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_4.wav
 	Warhead@CollapsedLunar_GreenJadgDestroyerCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4048,7 +4048,7 @@ Lunar_GreenJadgDestroyer_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
-	Report: laser_cannon3_4.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_4.wav
 	Warhead@CollapsedLunar_GreenJadgDestroyer_eliteCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4251,7 +4251,7 @@ Lunar_GreenGrilleArty:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
-	Report: laser_cannon3_2.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_2.wav
 
 	-Warhead@CannonHE_Heavy:
 	Projectile:
@@ -4304,7 +4304,7 @@ Lunar_GreenGrilleArty_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
-	Report: laser_cannon3_2.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_2.wav
 
 	-Warhead@CannonHE_Heavy:
 	Projectile:
@@ -4346,7 +4346,7 @@ Lunar_GreenSturmArty:
 	-Warhead@Demolition_Heavy:
 	Warhead@Tesla_Heavy:
 		Damage: 82000
-	Report: laser_cannon3_4.wav
+	Report: ra2m_schwarzermond_sounds|laser_cannon3_4.wav
 	Projectile:
 		ContrailLength: 25
 		ContrailStartWidth: 25

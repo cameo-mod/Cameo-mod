@@ -130,8 +130,8 @@ ra1_allies_chronosphere:
 		InsufficientPowerSpeechNotification: InsufficientPower
 		IncomingSpeechNotification: NuclearWarheadApproaching
 		IncomingTextNotification: Chrono Vortex activated.
-		IncomingSound: Chrono.aud
-		LaunchSound: Chrono.aud
+		IncomingSound: ra1_allies_sounds|Chrono.aud
+		LaunchSound: ra1_allies_sounds|Chrono.aud
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		PauseOnCondition: disabled
 		DisplayBeacon: True

@@ -156,12 +156,12 @@ commits and reported.
 | TS Shared | — | — | — | DONE `6835a04` | — |
 | Top-level Shared | — | — | — | DONE `e1b153d9c`/`472209150` | — |
 | TD GDI / TD Nod | DONE (ids renamed to `td_gdi_*`/`td_nod_*`) | DONE incl. weapons+sequences | — | — | — |
-| RA2Mod six (original) | DONE (ids renamed to `asianalliance_*`, `steelconsortium_*`, `latinsyndicate_*`, `naxis_*`, `schwarzermond_*`, `futuretech_*`) | DONE incl. weapons+sequences | — | — | — |
-| D2k four (atreides/harkonnen/ixian/ordos) | PARTIAL (new-style `atreides_*` etc. for some actors; old-style dotted names like `combat_tank.atreides` remain) | DONE incl. weapons+sequences | — | — | — |
-| RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | — | — |
-| RA2 (america/russia/yuri) | maps drafted | monolith | | | |
+| RA2Mod six (original) | DONE (ids renamed to `asianalliance_*`, `steelconsortium_*`, `latinsyndicate_*`, `naxis_*`, `schwarzermond_*`, `futuretech_*`) | DONE incl. weapons+sequences | — | PARTIAL (1032+47 files copied to `files/{icons,sprites,sounds}` with `ra2m_<pack>_<type>|` refs incl. the live sequences/weapons/audio monoliths; 107 cross-theme refs stay in `bits/`, 37 dangling) | — |
+| D2k four (atreides/harkonnen/ixian/ordos) | PARTIAL (new-style `atreides_*` etc. for some actors; old-style dotted names like `combat_tank.atreides` remain) | DONE incl. weapons+sequences | — | PARTIAL (packs already held 529 files; 144 exclusives copied from `bits/d2k`, 382 refs qualified to `d2k_<pack>_<type>|` incl. live sequences/weapons/audio monoliths; 32 resolve inside SOUND.RS/DATA.R16; 10 dangling, 60 shared stay) | — |
+| RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | PARTIAL (528 exclusive files copied to `files/{icons,sprites,sounds}` with `ra1_<pack>_<type>|` refs, 12 mounts; 90 shared stay bare; 26 dangling — RA1 `.aud` never shipped in `bits/`) | — |
+| RA2 (america/russia/yuri) | maps drafted | DONE (Allies/Soviets/Yuri/Shared packs own their yaml; `rules/redalert2.yaml` remains mounted as the shared monolith via the wrapper) | — | PARTIAL (397 faction-exclusive files → `files/{icons,sprites,sounds}` with `ra2_<faction>_<type>|` refs; `audio.bag`+`.idx` and `bits/ra2/tileset` moved into the Shared pack; 458 cross-theme refs stay in `bits/`) | — |
 | StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
-| WC2 (humans/orcs) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
+| WC2 (humans/orcs) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | PARTIAL (189 refs qualified / 189 files in `wc2_<pack>_<type>` packages incl. live sequences+weapons monoliths; 22 shared stay bare; 1 dangling `aacanon3.aud`) | — |
 | TKM | DONE (ids) | DONE 2026-07-18 (moved into `RedAlert2Mod/TKM/`) | — | — | — |
 | Outpost2 (eden/plymouth, WIP factions) | maps drafted (~compliant) | monolith/wrapper | | | |
 
@@ -183,6 +183,64 @@ resolved-identical verified).
 
 Proposal maps for every faction: `tools/rename/rename_map_<faction>.yaml`
 (regenerate: `python tools/audit/gen_rename_maps.py`).
+
+**Asset migration tooling (2026-09-26):** `tools/packs/migrate_assets.py`
+automates the CABAL pilot's mechanics for any theme —
+`python tools/packs/migrate_assets.py --theme <Theme> --pkg-prefix <pfx>`
+censuses every extension-matching file token in the theme's yaml, locates it
+under `bits/` (or inside a mounted `.bag`/`.idx` package — those names are
+reported as `packaged` and left to resolve from the bag), and classifies each
+as theme-exclusive (migrate), foreign-referenced (leave in `bits/`), or
+dangling (report only). `--apply` shadow-copies exclusives into the owning
+pack's `files/{icons,sprites,voxels,sounds}` (icon/`icnh` basenames → icons,
+`vxl`/`hva` → voxels, `wav`/`aud` → sounds, rest → sprites), inserts
+`~cameo|.../files/<type>: <prefix>_<pack>_<type>` mounts in `mod.yaml` before
+the `cameo|bits` line, and rewrites the theme's bare refs to `pkg|name`.
+Re-running is idempotent (refs report as `qualified`). Monolith discovery: theme yaml includes (a) every
+file the theme's content.yaml(s) declare (`cameo|rules/<theme>.yaml` wrapper
+packs) and (b) LIVE mod.yaml core entries named `<theme>.yaml` under
+rules/sequences/weapons/audio/tilesets. Dormant monoliths (commented-out
+mounts) are NOT scanned or rewritten.
+ RA2 census report:
+`docs/migration/ra2_assets.json`. Known RA2 dangling refs found by the census
+(pre-existing, NOT introduced by the migration): `ra2htanyaicon.shp`,
+`cra2cmin.shp`, `ra2ltnk.shp`, `ra2howi.shp`, `ra2arty.shp`,
+`yuri_chaosdrone.shp`, `splash9.aud`, `kaboom25.aud`, `kaboom15.aud`,
+`cannon1.aud`, `turret1.aud`, `tesla1.aud`, `zulhit00.aud`, `aacanon3.aud`,
+`chute1.aud`, `expnew13.wav`, `expnew09.wav`, `spysreve.wav`.
+
+RA2 follow-up: `bits/ra2/audio.bag`+`.idx` moved to
+`ContentPacks/RedAlert2/Shared/files/sounds/` with the mount redirected
+(the 184 bag-resident names keep resolving; the bits copies remain as the
+unmounted shadow archive). Voxel caveat found while collecting: RA2
+`RenderVoxels` actors reference image names equal to the (renamed) actor ids,
+but `bits/ra2/voxel/` files still carry LEGACY names (`ra2aegis.vxl` vs actor
+`ra2_allies_aegiscruiser`) — the faction rename never renamed the voxel
+files, so those voxel renderers have been dead since the rename. That is a
+pre-existing defect needing a voxel rename pass (names, not moves), logged
+here so the voxel migration slice does not paper over it.
+
+D2k follow-up (prefix-existing slice): D2k's packs were already
+half-migrated by hand — 529 files sat in `files/` dirs while the yaml kept
+bare references that only resolved through the bare-name fallback.
+`--prefix-existing` qualified 222 refs (`d2k_atreides_sprites|…` etc. across
+13 yaml files), 7 genuinely-missing exclusives were copied out of `bits/d2k`
+(harkonnen/ordos/ixian/shared sounds + ixian sprites), and 4 mounts were
+added. Re-census: `migrate=0, qualified=234, packaged=31` (24 of them inside
+`bits/d2k/SOUND.RS`, now indexed), `shared=52` left bare, `missing=8`
+(`REARM1.WAV`, `splash9.aud`, `tesla1.aud`, `missile6.aud`, `missile7.aud`,
+`zhyfir00.aud`, `chute1.aud`, `kaboom12.aud` — dangling, reported only).
+`DATA.R16`/`BLOXBASE.R16` remain in `bits/d2k` unextracted — same deferred
+call as `audio.bag` had been: internal shp/wav resources would need a
+package-aware extraction pass, not a file move.
+
+bits/ usage census (audit_bits_refs.py): 28,052 files under `bits/`;
+4,858 referenced by live yaml, 5,403 referenced only by dormant yaml,
+17,791 referenced nowhere (largest pools: generals 2320, ts 1605, wh40k
+1334, notifications 997, ra2/mod 923, darkreign 919, shockwave 907,
+ep315 780, ra2 754). `unref` is evidence, not a delete list — engine-
+hardcoded names, Lua spawns and tileset frames still resolve without a
+yaml token. Report: `docs/migration/bits_refs.json`.
 
 ## Standing decisions (design)
 

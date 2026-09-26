@@ -36,7 +36,7 @@ and every other agent can see the same picture without asking. If your row is st
 | **Claude-Local** | Opus 5, local CLI | `claude/weapon_inherit_audit_and_map` | the REFERENCE pipeline: `tools/balance/{assign_references,reference_targets,reference_distribution,reference_coverage,build_reference_report,faction_routes}.py`, `tools/reference/variant_pool.py` | ACTIVE 2026-09-13 |
 | **Codex (Astra)** | GPT-6, Blackrobe's host | `codex/recovery-pr345-merge-20260912`, `codex/overnight-integration-20260910` | INI/DTA extraction, evidence gates, the four-faction review pipeline, `tools/tests/` | ACTIVE 2026-09-13 |
 | Devin — Aurora | Devin AI | `devin/aurora/lane*` | AA range/audit lanes, extractor cargo | idle since 2026-09-08 |
-| Devin — Ember | Devin AI (SWE-2 Max) | `devin/ember/dot-faction-sweep` | naming sweeps (R18 dot-rule), W7 remainders, versus-profile audit (R16) | ACTIVE 2026-09-25 — PRs #488 #489 #490 #494 |
+| Devin — Ember | Devin AI (SWE-2 Max) | `devin/ember/b13-corrino-crate` | naming sweeps (R18 dot-rule), W7 remainders, versus-profile audit (R16), audit-tool fixes | ACTIVE 2026-09-26 — #488–#503 merged; #504 open; queue clean, awaiting assignment |
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
 
 **Signing rule (restating `CLAUDE.md` rule 10 because it keeps being got wrong):** sign with your

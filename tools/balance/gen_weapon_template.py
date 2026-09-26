@@ -1127,8 +1127,16 @@ def _powerlaw(vals, alpha):
 
 
 def _to_mean(vals, target):
-    m = statistics.fmean(vals)
-    return [v * target / m for v in vals] if m > 0 else list(vals)
+    """Scale `vals` so their GEOMETRIC mean is `target` (DESIGN R16, maintainer 2026-09-24).
+
+    *"All versus values of a warhead must always have a geometric mean of 100%."* Versus rows
+    are multipliers, so the geometric mean is their centre: a 200/50 pair centres at 100, while
+    its arithmetic mean (125) silently inflated the family's contribution to `K`. The power law
+    (`_powerlaw`) already works about the geometric mean, so this closes the last arithmetic step.
+    """
+    pos = [max(v, 1.0) for v in vals]
+    m = statistics.geometric_mean(pos) if pos else 0.0
+    return [v * target / m for v in pos] if m > 0 else list(vals)
 
 
 def fit_band_floor(rows):
@@ -1160,8 +1168,31 @@ def fit_band_floor(rows):
             for a, v in rows]
 
 
+# R16's POPULATION law (maintainer 2026-09-25, "Stretch toward 4-5x"): the family spreads
+# (max:min over the armor rows) must form a bell curve peaking at 4x-5x, with 2x and 20x the
+# low-occupancy asymptotes. The census before this step peaked at 2-4x (38 families) with only
+# 10 at 4-5x. One exponent moves the whole bell: a power law about the geometric centre,
+# `v' = G * (v/G) ** a`, raises a profile's spread to the power `a`, so every family's log-spread
+# is scaled by the same factor - the bell keeps its shape and its peak moves. It is the same
+# instrument as `fit_band_floor` and the ceiling compression: monotone (the ordering law's
+# sequence survives), geometric-mean preserving, and it keeps Heroic = Plate x Scout / peak exact.
+# Flat-by-design families (Sonic, Magic) have max == min and are untouched; the 10-200 window is
+# still enforced afterwards by `mean_normalise`'s compression.
+BELL_STRETCH_ALPHA = 1.30
+
+
+def bell_stretch(rows, alpha=BELL_STRETCH_ALPHA):
+    """Stretch a MAIN profile's spread to `spread ** alpha` about its geometric mean (R16)."""
+    idx = [i for i, (a, _) in enumerate(rows) if a not in NON_ARMOR_ROWS]
+    vals = [float(rows[i][1]) for i in idx]
+    if not vals or max(vals) <= min(vals) or alpha == 1.0:
+        return rows
+    fixed = dict((rows[i][0], v) for i, v in zip(idx, _powerlaw(vals, alpha)))
+    return [(a, fixed.get(a, v)) for a, v in rows]
+
+
 def mean_normalise(rows, target=MEAN_TARGET):
-    """Rescale a MAIN profile so the MEAN of its armor rows is `target` (see above).
+    """Rescale a MAIN profile so the GEOMETRIC mean of its armor rows is `target` (R16; see above).
 
     Returns rows in the SAME ORDER — the emit order is the ordering law's output and
     `shield_for` overwrites `Shield` immediately after, so nothing here may reshuffle.
@@ -1580,6 +1611,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
         # and let the tilt undo it for Cryo.
         main = fit_band_floor(main)
+        # R16 population law — move the spread bell's peak to 4x-5x (see BELL_STRETCH_ALPHA).
+        main = bell_stretch(main)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
@@ -1894,6 +1927,11 @@ FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
     "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
     "Chemical": {"Corrosion": _m(1.00)},     # acid -> corrosion meter (mapping form)
+    # W9, maintainer 2026-09-25: "Every Toxic weapon" fills the POISON meter - the gas clouds
+    # (Yuri Virus cloud, Anthrax, TS smoke, Zerg acid cloud) poison by dose, the W9 spec's
+    # "gas clouds fill the meter by dwell time". Poison exists only on ^DefaultInfantry, so on a
+    # vehicle this no-ops: corrosion eats vehicles, poison hurts infantry.
+    "Toxic":    {"Poison": _m(1.00)},
     # ⭐ SUPPORT WEAPONS, maintainer 2026-08-22: Cryo and Inferno fill the meter TWICE as fast as
     # Flame (Scale 200 vs 100), so they freeze/ignite after 25% of lethal damage instead of 50%.
     # The intent is "mostly apply the physical effect without dealing too much direct damage" —

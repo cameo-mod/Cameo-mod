@@ -155,7 +155,7 @@ NaxiWW2KübelwagenMachinegun:
 	Inherits@xNaxiWW2KübelwagenMachinegun0: ^Warhead_Bullet_Medium
 	Inherits@xNaxiWW2KübelwagenMachinegun1: ^Projectile_Bullet_Medium
 	Inherits@xNaxiWW2KübelwagenMachinegun2: ^Effect_Bullet_Medium_RA2
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 80
 	Burst: 6
 	BurstDelays: 4
@@ -183,7 +183,7 @@ NaxiWW2Machinegun:
 	Inherits@xNaxiWW2Machinegun0: ^Warhead_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun1: ^Projectile_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun2: ^Effect_Bullet_Medium_RA2
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
 	BurstDelays: 4
@@ -399,7 +399,7 @@ NaxiWW2MachinegunSmall:
 	Inherits@xNaxiWW2Machinegun0: ^Warhead_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun1: ^Projectile_Bullet_Medium
 	Inherits@xNaxiWW2Machinegun2: ^Effect_Bullet_Medium_RA2
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
 	BurstDelays: 4
@@ -474,7 +474,7 @@ NaxiWW2MachinegunSmall:
 			Spaceship: 6
 			Superheavy: 5
 	# W7MAT inline of NaxiWW2Machinegun
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ReloadDelay: 60
 	Burst: 3
 	Warhead@Bullet_Medium:
@@ -676,7 +676,7 @@ NaxiWW2MachinegunTop:
 			Superheavy: 5
 	# W7MAT inline of NaxiWW2Machinegun
 	Range: 7555
-	Report: nax_mgun3.wav
+	Report: ra2m_naxis_sounds|nax_mgun3.wav
 	Warhead@Bullet_Medium_Flat: AreaDamage
 	Warhead@Bullet_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -808,7 +808,7 @@ NaxiWW2MachinegunTop_AA:
 			Superheavy: 5
 	# W7MAT inline of NaxiWW2Machinegun
 	Range: 7555
-	Report: nax_mgun3.wav
+	Report: ra2m_naxis_sounds|nax_mgun3.wav
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
@@ -950,7 +950,7 @@ NaxiWW2Machinegunner:
 	ReloadDelay: 90
 	Burst: 10
 	BurstDelays: 5
-	Report: nax_mgun3.wav
+	Report: ra2m_naxis_sounds|nax_mgun3.wav
 	Warhead@Bullet_Medium_Flat: AreaDamage
 	Warhead@Bullet_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1005,7 +1005,7 @@ NaxiWW2Machinegunner:
 NaxiWW2Machinegunner_elite:
 	Inherits: NaxiWW2Machinegunner
 	Range: 9970
-	Report: nax_mgun3.wav
+	Report: ra2m_naxis_sounds|nax_mgun3.wav
 	Burst: 20
 	BurstDelays: 3
 	Projectile: Bullet
@@ -1092,7 +1092,7 @@ NaxiRifle_elite:
 	Range: 6621
 	Burst: 2
 	BurstDelays: 3
-	Report: nax_rifle4.wav , nax_rifle5.wav
+	Report: ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	Projectile: Bullet
 		ContrailStartColor: FFAA55
 
@@ -1102,7 +1102,7 @@ naxis_naxiriflesoldier_rifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
@@ -1121,7 +1121,7 @@ naxis_naxiriflesoldier_rifle_elite:
 	Range: 6500
 	Burst: 2
 	BurstDelays: 3
-	Report: nax_rifle4.wav , nax_rifle5.wav
+	Report: ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	Projectile: Bullet
 		ContrailStartColor: FFAA55
 
@@ -1135,7 +1135,7 @@ naxis_naxiriflerecruit_rifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5227
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
 		InvalidTargets: Air
@@ -1159,7 +1159,7 @@ NaxiRifleT:
 	Range: 8100
 	Burst: 2
 	BurstDelays: 5
-	Report: nax_rifle4.wav , nax_rifle5.wav
+	Report: ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
@@ -1181,7 +1181,7 @@ NaxiRifleCons:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5501
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
 		Damage: 4000
@@ -1190,7 +1190,7 @@ NaxiRifleCons_elite:
 	Range: 6501
 	Burst: 2
 	BurstDelays: 3
-	Report: nax_rifle4.wav , nax_rifle5.wav
+	Report: ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	Projectile: Bullet
 		Speed: 2000
 		ContrailStartColor: FFAA55
@@ -2998,7 +2998,7 @@ NaxiAntiTankCannon:
 	Inherits@wh: ^Warhead_CannonAP
 	ReloadDelay: 75
 	Range: 7361
-	Report: nax_hotwizer.wav
+	Report: ra2m_naxis_sounds|nax_hotwizer.wav
 	Projectile: Bullet
 		ContrailStartColor: FF9933
 		ContrailEndColor: 000000
@@ -3020,7 +3020,7 @@ NaxMausCannon:
 	Inherits@xNaxMausCannon1: ^Projectile_Shell_Medium
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	ReloadDelay: 99
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 6666
 	MinRange: 1335
 	Projectile: Bullet
@@ -3564,7 +3564,7 @@ NaxRatteCannon:
 	Inherits@xNaxRatteCannon1: ^Projectile_Shell_Medium
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	ReloadDelay: 145
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 6110
 	MinRange: 1220
 	Burst: 2
@@ -4052,7 +4052,7 @@ NaxQuadCannon:
 	Burst: 6
 	BurstDelays: 4
 	Range: 5368
-	Report: nax_aa1.wav
+	Report: ra2m_naxis_sounds|nax_aa1.wav
 	Projectile: Bullet
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -5068,7 +5068,7 @@ NaxPlanegun_elite:
 	Burst: 10
 	BurstDelays: 2
 	Range: 6090
-	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Report: ra2m_shared_sounds|bghmga.wav, ra2m_shared_sounds|bghmgb.wav, ra2m_shared_sounds|bghmgc.wav, ra2m_shared_sounds|bghmgd.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: 50CAL
@@ -5364,7 +5364,7 @@ NaxiInterceptorGun:
 	Burst: 4
 	BurstDelays: 3
 	Range: 6090
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav , nax_rifle5.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav, ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: 50CAL
@@ -6234,7 +6234,7 @@ NaxiSlaveWhip:
 	ReloadDelay: 50
 	ValidTargets: SlaveFaster
 	Projectile: InstantHit
-	Report: nax_slavewhip.wav
+	Report: ra2m_naxis_sounds|nax_slavewhip.wav
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
 		Condition: SlaveFaster
@@ -6255,7 +6255,7 @@ NaxisDonnerschlagTargetVisualLaser:
 	Range: 20130
 	MinRange: 4025
 	#Report: 2100rotlsr.wav
-	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
+	Report: ra2m_shared_sounds|AUGuard_beamLoopa.wav, ra2m_shared_sounds|AUGuard_beamLoopb.wav, ra2m_shared_sounds|AUGuard_beamLoopc.wav
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: LaserZap

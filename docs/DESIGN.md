@@ -71,7 +71,7 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`).
 - **The dot rule** (maintainer ruling 2026-09-06). A dot marks a **VARIANT of the
   base actor named before it** — `camera.spysat`, `powerproxy.emp`,
-  `ra2gacnst.infiltrated`, `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
+  `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
   are all legal, exactly as `.husk` always was. ⛔ **A dot may NEVER carry a
   faction.** `asianalliance_ptnk` and `rocket_raider.ixian` put the faction in the suffix
   where the grammar requires it as the PREFIX, and those are the only dotted ids
@@ -2263,6 +2263,15 @@ Mechanically, per MAIN warhead profile:
   population law — an individual family at 2x or 20x is legal but must be a deliberate
   super-generalist / super-specialist, not drift.
 * Guarded by `audit_versus_profile.py` (geomean ratchet + hard band + the bell-curve census).
+* **Implemented 2026-09-25.** `mean_normalise` targets the geometric mean (#506: offenders 105 → 2,
+  the two HAND_TUNED templates). The bell is moved by `bell_stretch` (maintainer: *"Stretch toward
+  4-5x"*): one power law `v' = G·(v/G)^α` about the geometric centre, `BELL_STRETCH_ALPHA = 1.30`,
+  raising every spread to the power α — monotone, geometric-mean preserving, Heroic-exact. Census
+  2–4x / 4–5x / 5–8x: **38 / 10 / 2 → 30 / 17 / 3**. ⚠ **The 200% ceiling limits it:** top-heavy
+  profiles (the Bullet/Flak/Cannon × Sonic/Fire/Cryo/Tesla blends) already touch 200, so a larger α
+  is compressed straight back and they stay near 3.1–3.4x; α 1.5–1.7 only moves families from 4–5x
+  into 5–8x. Getting the peak fully into 4–5x needs a LOWER-tail-only stretch for those blends —
+  not Heroic-exact, so it is a design choice, not a tuning knob.
 
 **R17 — `ExtraDamage` DOES NOT EXIST; leftovers FOLD INTO THE MAIN WARHEAD.** The retirement
 noted at §"Template auxiliaries" is now the binding conversion rule for every held W7 edge:
@@ -2303,9 +2312,26 @@ whose damage is a `*_Flat` node (no `Versus` — one number vs every armor):
   `.steel`, `.d2k` etc. The faction goes in FRONT: `combat_tank_husk.atreides` →
   `atreides_combat_tank_husk`, `OILB.d2k` → `d2k_spicesifter`. Renames must update
   husk/upgrade references and `map.yaml`/lua placements (§14, rule 8h).
-* Other dotted variant markers (`.para`, `.power`, `.destroyed`, `.laser`, `.mutant`, …) are
+* Other dotted variant markers (`.para`, `.power`, `.laser`, `.mutant`, …) are
   pending maintainer eyeball per-instance — the census of uses is in the fleet board note
-  `NOTE_2026-09-24_ember_rulings.md`.
+  `NOTE_2026-09-24_ember_rulings.md`. **Ruled 2026-09-26 (fleet order):** `.destroyed`,
+  `.upgraded`, `.infiltrated`, `.black` are renamed to `_suffix` form in live mounts
+  (`mcv.destroyed` → `mcv_destroyed`, `ra2gacnst.infiltrated` → `ra2gacnst_infiltrated`,
+  `ra2e2.black` → `ra2e2_black`, `infantry.upgraded` → `infantry_upgraded`). `.husk`
+  stays, and dormant monolith files keep their dots until migration deletes them.
+
+**R20 — TOXIC FILLS THE POISON METER; THE YURI VIRUS FIRES A TOXIN DART** (maintainer, 2026-09-25).
+
+* **Every `Toxic`-family weapon fills `Poison`** (generator `FAMILY_PHYSICAL_STATE`, `Poison: 100`
+  at every level) — the gas clouds the W9 spec meant by *"gas clouds fill the meter by dwell
+  time"*: the Yuri Virus's `RA2Cloud`, the Anthrax clouds, Tiberian Sun's smoke, the Zerg
+  Devourer's acid cloud, the Ordos chem turret. `Chemical` keeps filling `Corrosion`: **corrosion
+  eats vehicles, poison hurts infantry** (the Poison meter exists only on `^DefaultInfantry`, so
+  on anything else the feed no-ops).
+* **The Yuri Virus's rifle is a toxin dart:** its main becomes the `Toxic` family
+  (`Toxic_Light` for the base shot, `Toxic_Medium` for the upgrade tiers and elite), so the shot
+  itself poisons; the `Chemical`/Corrosion percentage twin is removed, and the stray `Flak` /
+  `MissileAP` mains the upgrade tiers carried go with it. Damage totals are preserved (R17).
 
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
@@ -3325,7 +3351,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x1.135 measured 2026-09-24 (was x0.617 pre-#490)
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x1.097 measured 2026-09-26 (was x0.617 pre-#490)
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
@@ -3524,9 +3550,13 @@ and a secondary vehicle `Armor@<role>` is added, so cyborgs count as both
 infantry and vehicles for weapon Versus tables. True vehicles and walkers do
 not use this pattern.
 
-⚠ **The two armors are AVERAGED, not multiplied** (W20/W21 R5, live since
-2026-08-15): `AreaDamageWarhead.MultiArmorCombination` defaults to `Average`,
-so `Plate` 88 with `Superheavy` 10 resolves to 49, not 8. **Never add a
+⚠ **The two armors combine by their GEOMETRIC MEAN, not multiplied** (W20/W21 R5
+"averaged, not multiplied", live since 2026-08-15; the average became GEOMETRIC by maintainer
+ruling 2026-09-25 — Versus rows are multipliers, so their centre is the geometric mean, the
+same reason R16 pins every warhead to geomean 100): `AreaDamageWarhead.MultiArmorCombination`
+defaults to `Geometric`, so `Plate` 88 with `Superheavy` 10 resolves to **30** (√880), not 49
+(the arithmetic average, where the more vulnerable body dominated) and not 8.8 (the engine's
+product). Integer-only math in the synced path. **Never add a
 `DamageMultiplier@<role>: Modifier: 200` to compensate** — that was the old
 recipe, it fought the ENGINE's multiplication rather than the design, and all
 7 instances were deleted when averaging landed. R1 abolishes `DamageMultiplier`

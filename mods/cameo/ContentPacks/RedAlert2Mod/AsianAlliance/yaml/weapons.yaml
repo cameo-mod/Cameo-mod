@@ -4,7 +4,7 @@ RA2AsianShotgun:
 	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 52
 	Range: 4567
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
 RA2AsianShotgun_elite:
@@ -148,7 +148,7 @@ asianalliance_asianmilitia_shotgun:
 	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 50
 	Range: 4500
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
 asianalliance_asianmilitia_shotgun_elite:
@@ -427,7 +427,7 @@ RA2AsianShotgunFanatic1:
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 50
 	Range: 5000
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	Warhead@Demolition_Light:
 		Versus:
 			None: 183
@@ -996,7 +996,7 @@ AsianSamuraiSword1:
 	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
-	Report: aa_samu_kil1.wav
+	Report: ra2m_asianalliance_sounds|aa_samu_kil1.wav
 	Range: 1579
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
@@ -3941,7 +3941,7 @@ AsianHowitzerCannon:
 	Inherits@xAsianHowitzerCannon1: ^Projectile_Shell_Heavy
 	Inherits@xAsianHowitzerCannon2: ^Effect_Grey_Explosion_Large_RA2
 	ReloadDelay: 160
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 16000
 	MinRange: 3200
 	Projectile: Bullet
@@ -4049,7 +4049,7 @@ AsianPulverizerGatling:
 	Inherits@xAsianPulverizerGatling0: ^Warhead_Bullet_Medium
 	Inherits@xAsianPulverizerGatling1: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
+	Report: ra2m_shared_sounds|aa_pulvat2a.wav, ra2m_shared_sounds|aa_pulvat2b.wav, ra2m_shared_sounds|aa_pulvat2c.wav
 	Range: 5517
 	ReloadDelay: 12
 	ValidTargets: Ground, Air, Water
@@ -4370,7 +4370,7 @@ AsianSinglePlasma:
 	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Range: 5190
 	ReloadDelay: 34
-	Report: aa_plasfire.wav
+	Report: ra2m_asianalliance_sounds|aa_plasfire.wav
 	Projectile: Bullet
 		Speed: 519
 		Image: aa_plasred
@@ -6105,7 +6105,7 @@ AsianTwinPlasma:
 	ReloadDelay: 25
 	Burst: 2
 	BurstDelays: 5
-	Report: aa_plasfire.wav
+	Report: ra2m_asianalliance_sounds|aa_plasfire.wav
 	Projectile: Bullet
 		Speed: 777
 		ContrailLength: 35
@@ -7004,7 +7004,7 @@ AsianHarbingerPlasma:
 	Burst: 2
 	BurstDelays: 5
 	ReloadDelay: 60
-	Report: aa_plasfire.wav
+	Report: ra2m_asianalliance_sounds|aa_plasfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		-TrailImage:
@@ -9367,7 +9367,7 @@ asianalliance_fanatic_shotgun:
 	Burst: 10
 	BurstDelays: 0
 	ValidTargets: Ground, Water
-	Report: aa_sshtgatt.wav
+	Report: ra2m_asianalliance_sounds|aa_sshtgatt.wav
 	SoundVolume: 0.1
 	Projectile: Bullet
 		Speed: 4000

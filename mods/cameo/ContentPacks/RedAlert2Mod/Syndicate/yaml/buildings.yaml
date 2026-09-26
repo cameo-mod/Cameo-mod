@@ -298,7 +298,7 @@ latinsyndicate_spycenter:
 			1: Convert a group of enemies to your own army.
 		Weapons:
 			1: RA2TraitorPower
-		EndChargeSound: beepy3.aud
+		EndChargeSound: ra2m_syndicate_sounds|beepy3.aud
 		EndChargeSpeechNotification: Reinforce
 		EndChargeTextNotification: Traitors Ready.
 		SelectTargetSpeechNotification: SelectTarget
@@ -309,7 +309,7 @@ latinsyndicate_spycenter:
 		IncomingSpeechNotification: ReinforcementsArrived
 		IncomingTextNotification: Warning: A group of traitors was detected.
 		LaunchSound: spysreve.wav
-		IncomingSound: beepy2.aud
+		IncomingSound: ra2m_syndicate_sounds|beepy2.aud
 		DisplayRadarPing: True
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		CameraRemoveDelay: 125

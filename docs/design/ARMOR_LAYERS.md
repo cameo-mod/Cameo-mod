@@ -1,6 +1,6 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9). **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544; `shield_versus_mean` = 88.08 → `shield_hp_factor` = 1.135; `shield_damage_share` = 0.0171; `unconverted_template_inheritors` = 385; `cameo_family_labelled_weapons` = 1210; `percentage_denominator_unset` = 417.**
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9). **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544; `shield_versus_mean` = 88.08 → `shield_hp_factor` = 1.135; `shield_damage_share` = 0.0171; `unconverted_template_inheritors` = 385; `cameo_family_labelled_weapons` = 1210; `percentage_denominator_unset` = 417.** **2026-09-26 (master `afb66c9b5` resync): `meters_filling_before_death` = 320; `physical_state_fired_weapons` = 548; `shield_versus_mean` = 91.16 → `shield_hp_factor` = 1.097; `shield_damage_share` = 0.0179; `unconverted_template_inheritors` = 390; `cameo_family_labelled_weapons` = 1291; `percentage_denominator_unset` = 423.**
 
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
@@ -89,11 +89,14 @@ Plus the general question: **what is the balance formula still not seeing?**
 Every claim here was read out of the code or counted in the resolved ruleset. Several
 contradict what the design docs assume, so the numbers matter.
 
-#### A1 — Multiple armor types AVERAGE (they do not multiply)
+#### A1 — Multiple CLASS armor types take their GEOMETRIC MEAN (they do not multiply)
 
 `AreaDamageWarhead.DamageVersus` overrides the engine's product with
-`MultiArmorCombination`, default **Average** (the W21 ruling). An actor carrying a base
-armor plus an overlay takes `avg(Versus[base], Versus[overlay])`.
+`MultiArmorCombination`, default **Geometric** (maintainer 2026-09-25; it was the arithmetic
+`Average` under the W21 ruling from 2026-08-15). An actor carrying two class armors takes
+`sqrt(Versus[a] x Versus[b])` (n-th root of the product for n armors), so 88 and 10 give 30
+where the arithmetic average gave 49, and 200 and 50 give exactly 100. A PLATING is not a class
+armor: it is a layer that MULTIPLIES the combined class row (layer rule, 2026-08-17).
 
 #### A2 — ⚠ A MISSING row is EXCLUDED from the average, NOT treated as 100
 
@@ -113,7 +116,12 @@ everywhere" and "add it only where it means something" are genuinely different d
 (For a SINGLE-armor actor the two coincide: an empty armor list returns 100. That is why
 "a missing row resolves to 100" was true in the W23 retrofit and is false here.)
 
-#### A3 — An overlay armor can never cut damage by more than ~50%
+#### A3 — (HISTORICAL) Under the arithmetic average an overlay armor could never cut damage by more than ~50%
+
+⚠ **Superseded twice.** Platings stopped being averaged on 2026-08-17 (they multiply the class
+row as a layer), and class armors combine GEOMETRICALLY since 2026-09-25, where a second armor
+at the window floor gives `sqrt(base x 10)` — base 100 -> 32, a 3.2x cut — so the ~2x bound
+below no longer holds for either. Kept as the record of why the arithmetic rule was replaced.
 
 With averaging, `effective = (base + overlay) / 2`. Even at the window floor
 (`overlay = 10`) the result is `(base + 10) / 2` — just over half. **The whole HAZMAT /
@@ -619,13 +627,13 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **88.08** (was 162.19 pre-#490) | **1.135 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. Post-#490 the measured factor overshoots: a shield point is now worth *more* than an HP point. |
+| `Shield` | **91.16** (was 162.19 pre-#490) | **1.097 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. Post-#490 the measured factor overshoots: a shield point is now worth *more* than an HP point. |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.555 today
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x1.097 today
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
@@ -1731,7 +1739,7 @@ Agreed on the outcome, but these are **two different mechanisms** and only one o
 | | mechanism | where it happens | rule |
 |---|---|---|---|
 | `Heroic = Plate × Scout / peak`, `Airborne = Helicopter × Scout / peak` | a **DERIVED Versus COLUMN**, computed once per warhead by the generator | `gen_weapon_template`, DESIGN §12.0b | already a product; `MultiArmorCombination` never sees it |
-| CABAL cyborgs / droids carrying **two Armor traits** | runtime multi-armor | `AreaDamageWarhead.MultiArmorCombination` | **Average** — keep |
+| CABAL cyborgs / droids carrying **two Armor traits** | runtime multi-armor | `AreaDamageWarhead.MultiArmorCombination` | **Geometric** (was Average until 2026-09-25) — keep |
 | a **plating** over the class armor | runtime, one plating at a time | same field | **Multiply** — the change |
 
 So: **Heroic and Airborne are not affected by this decision at all** — they are columns, not
@@ -1820,7 +1828,7 @@ Versus[Shield] = 2 x Versus[the building's armor row]
 `(H/2) x 100/V_c` for the health plus `H x 100/V_s` for the pool. Setting them equal gives
 `0.5/V_c + 1/V_s = 1/V_c`, i.e. `V_s = 2 V_c`.
 
-⭐ This is the same fact as the **182.4% break-even pool** (`100 / shield_hp_factor`): both say
+⭐ This is the same fact as the **182.3% break-even pool** (`200 / shield_hp_factor`): both say
 that converting HP into an equal-value shield means undoing exactly the Shield row's average
 penalty. AtomicCore has `Shield 155` against `Concrete 100`, i.e. 1.55x where neutrality needs
 2.0x — which is precisely why the converted building came out *tougher*.

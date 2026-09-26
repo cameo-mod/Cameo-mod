@@ -21,8 +21,8 @@ futuretech_twister:
 		Speed: 150
 		IdleTurnSpeed: 10
 		IdleSpeed: 100
-		TakeoffSounds: twisSounda.wav, twisSoundb.wav
-		LandingSounds: twisSounda.wav, twisSoundb.wav
+		TakeoffSounds: ra2m_shared_sounds|twisSounda.wav, ra2m_shared_sounds|twisSoundb.wav
+		LandingSounds: ra2m_shared_sounds|twisSounda.wav, ra2m_shared_sounds|twisSoundb.wav
 		CanHover: false
 		CanSlide: false
 		VTOL: true
@@ -203,8 +203,8 @@ futuretech_harbingergunship:
 		Speed: 125
 		IdleTurnSpeed: 6
 		IdleSpeed: 90
-		TakeoffSounds: twisSounda.wav, twisSoundb.wav
-		LandingSounds: twisSounda.wav, twisSoundb.wav
+		TakeoffSounds: ra2m_shared_sounds|twisSounda.wav, ra2m_shared_sounds|twisSoundb.wav
+		LandingSounds: ra2m_shared_sounds|twisSounda.wav, ra2m_shared_sounds|twisSoundb.wav
 		CanHover: false
 		CanSlide: false
 		VTOL: true
@@ -268,8 +268,8 @@ futuretech_harbingergunship:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	AmbientSoundCA:
-		SoundFiles: AUGunsh_movLoopa.wav
-		InitialSound: AUGunsh_movStarta.wav
+		SoundFiles: ra2m_futuretech_sounds|AUGunsh_movLoopa.wav
+		InitialSound: ra2m_futuretech_sounds|AUGunsh_movStarta.wav
 		InitialSoundLength: 60
 		VolumeMultiplier: 0.20
 		AudibleThroughFog: false

@@ -6003,7 +6003,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6017,7 +6017,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      },
      {
@@ -6030,7 +6030,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6044,7 +6044,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -6215,7 +6215,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -6229,7 +6229,7 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "TSDepthCharge",
       "weapon_class_source": "template"
      }
     ],
@@ -7934,21 +7934,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADEAA",
       "versus_templates": [
-       "TSAdatsMissile_AA"
+       "^ts_tiberiansun_tschemadatsmissile_aa"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
+      "warheads": [],
       "weapon": "TSChemAdatsMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8917,7 +8914,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -8926,12 +8923,10 @@
        "^Warhead_Chemical_Light_Flat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
-       "^Effect_Chem_Light",
-       "TSSAPCMissiles"
+       "^ts_tiberiansun_tssapccoremissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Chemical_Light"
       ],
       "weapon": "TSSAPCCoreMissiles",
       "weapon_class_source": "template"
