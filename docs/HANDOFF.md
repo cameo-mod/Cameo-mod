@@ -1,5 +1,26 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — DAWN: dead-warhead-fields fix (PR #431 culprit)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-431-fix · base 91f865585`
+
+Claude routed master-red `audit_dead_warhead_fields` (20 kinds/72 weapons vs
+ratchet 15) for culprit bisect before fix. Bisect pinned **c48c7d41a / PR
+#431** (W24 lane-2 collapses, Sep-22): the fold retyped `Warhead@Tesla_Super`
+to `SpreadDamage` on the `ra1_soviets_heavyteslatank_ttankzap2arcteslafragment{1,2}_emp`
+chain, orphaning six inherited percentage-ladder fields the new type discards.
+
+Fix: six `-Field:` cancels on **fragment1 only** — fragment2 inherits from
+fragment1, so its cancels were provider-less (orphan-cancel audit caught them;
+removed). Engine-identical: resolved diff is exactly the six discarded fields.
+Result: **14 kinds/70 weapons ≤ ratchet 15**, orphan cancels 0, empty warheads 0.
+
+Also re-extracted `shared_redalert2` balance ledger (#519 dot renames had
+missed it — the one stale `doc_claims` claim `ledgers_drifted` measures 0 again).
+
+Remaining dead-field warning: `FireShrapnel.Range` — pre-existing, separate
+cleanup. Fleet finding: `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+
 ## 2026-09-26f — EMBER: B3 intent backlog transcribed (587 → 0)
 
 `Agent: EMBER (A1) · branch devin/ember/b3-intent · base afb66c9b5`
