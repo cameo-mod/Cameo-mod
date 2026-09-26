@@ -1,5 +1,12 @@
 80mm_H:
-	Inherits: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 8000
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 2500
 	ReloadDelay: 55
 
 HarkonnenFlameTurret:
@@ -160,7 +167,22 @@ DebrisMissile:
 		Damage: 2000
 
 ExplosiveDebris:
-	Inherits: ^Debris2Legacy
+	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
+	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		TrailPalette: effect75alpha
+	Projectile:  # W7MAT w8-repin
+		TrailInterval: 1
+	Warhead@Demolition_Light:  # W7MAT w8-repin
+		DamageCalculationType: ClosestTargetablePosition
+	Report: d2khc.wav  # W7MAT w8-repin
+	ReloadDelay: 60  # W7MAT w8-repin
+	Warhead@Flame_Light:  # W7MAT w8-repin
+		Damage: 16000
 	Inherits@fx: ^d2k_harkonnen_explosivedebris
 	Range: 7c0
 	Projectile: Bullet
@@ -195,9 +217,12 @@ harkonnen_inkvine_weapon:
 	Report: MORTAR1.WAV
 
 D2K70mmH:
-	Inherits: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 2500
 	ReloadDelay: 90
-	-Report:
 	StartBurstReport: d2k_buzzsaw_att.wav
 	Range: 4352
 	Burst: 2
@@ -218,7 +243,11 @@ DevBullet:
 		Palette: d2keffect
 
 D2K_Rocket_AA:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1100  # W7MAT w8-repin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	ValidTargets: Air
 	Range: 5500

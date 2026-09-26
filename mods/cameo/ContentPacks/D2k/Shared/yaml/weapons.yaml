@@ -452,7 +452,9 @@
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@7: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 50
 	Range: 7979
 	Report: TURRET1.WAV
@@ -468,13 +470,12 @@ D2K_TowerMissile:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_shared_d2k_towermissile
+	MinRange: 2135
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 42
 	Range: 10684
-	Report: ROCKET1.WAV
 	TargetActorCenter: true
 	InvalidTargets: wall
-	MinRange: 2135
 	Burst: 2
 	BurstDelays: 5
 	Projectile: Missile
@@ -524,7 +525,11 @@ D2K_TowerMissile:
 # Used by Atreides, Corrino, Harkonnen.
 
 mtank_pri:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 2050  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_shared_mtank_pri
 	ReloadDelay: 150
 	Burst: 4
@@ -538,8 +543,6 @@ mtank_pri:
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Air
-
-	MinRange: 2050
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # Used by multiple D2k factions (explosion/death weapons).
@@ -556,7 +559,14 @@ D2KUnitExplodeLarge:
 # Used by multiple D2k factions.
 
 80mm_A:
-	Inherits: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		Damage: 8000
+	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+		PercentageScale: 2500
 
 D2KUnitExplodeMed:
 	Inherits: ^DamagingExplosion
@@ -630,7 +640,29 @@ Debris:
 	Report: d2khc.wav  # W7MAT order-pin
 Debris2:
 	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
-	Inherits: ^Debris2Legacy
+	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
+	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
+	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
+	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		TrailImage: small_trail
+	Projectile:  # W7MAT w8-repin
+		TrailPalette: effect75alpha
+	Projectile:  # W7MAT w8-repin
+		TrailInterval: 1
+	Projectile:  # W7MAT w8-repin
+		Image: shrapnel2
+	Report: d2khc.wav  # W7MAT w8-repin
+	ReloadDelay: 60  # W7MAT w8-repin
+	Range: 2816  # W7MAT w8-repin
+	Warhead@Effect:  # W7MAT w8-repin
+		Explosions: d2k_small_napalm
+	Warhead@Effect:  # W7MAT w8-repin
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@Concrete:  # W7MAT w8-repin
+		Damage: 2250
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
 	Warhead@Demolition_Light_Flat:
@@ -1126,7 +1158,11 @@ light_inf_lmg_upgrade:
 
 	TargetActorCenter: true
 Fremen_RPG:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 975  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_shared_fremen_rpg
 	ReloadDelay: 45
 	Range: 4864
@@ -1140,7 +1176,6 @@ Fremen_RPG:
 	-Warhead@RA2Crater:
 	Warhead@MissileAP_Heavy:
 		Damage: 4200
-	MinRange: 975
 
 ^d2k_shared_hmg_fremen:
 	Warhead@Concrete: DamagesConcrete

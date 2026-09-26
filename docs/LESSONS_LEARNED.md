@@ -10,6 +10,25 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+
+### 2026-09-26 — DAWN: covering-edge conversion needs positional order-pins
+
+Replacing `Inherits: ^LegacyBundle` with the bundle's covering three-kind
+edges changes resolved child ORDER, not just content: MiniYaml emits a
+provider's children at the edge's file position, so a bundle whose own
+body was [3kind edges, then local scalars] must be replaced by [covering
+edges, then `# W7MAT order-pin` scalars] at the SAME slot — pins placed
+after a later `Inherits@fx` edge land late in the resolved map and break
+the ordered-key contract. If the consumer already carries one of the
+covering edges at a later position, MOVE that edge into the covering group
+(dedup silently reorders emission). Three orphan `-Report:` cancels also
+surfaced: when the removed edge was a `-Key:` provider, the cancel dies
+with it (delete together — EMBER's rule, now verified against the audit's
+provider model). Raw full-stack templates (covering set = empty) are NOT
+edge-swap candidates: converting their consumers would inline every leaf.
+Tool: `w8_conv.py` in the DAWN tooling dir (same verify loop as `w7_conv.py`).
+
+
 ## Required reading order for every new task
 
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a

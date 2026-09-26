@@ -1,5 +1,21 @@
 # Cameo — THE HANDOFF
 
+
+### DAWN — W8 batch-1 (2026-09-26, branch `devin/dawn/w8-covering`)
+
+53 weapons across six semi-converted legacy templates converted to
+covering three-kind edges: `^D2K_Cannon` 19, `^D2KMissile` 15,
+`^D2KRocket` 6, `^OCannon` 6, `^Debris2Legacy` 4, `^OMissile` 3.
+Resolved+ordered identical (192/192 in touched files), orphans 0,
+empty 0, boot PASS. In-lane W8 362 -> 315. Remaining W8 class work:
+B:mixed templates `^CabalMissileLight`, `^TSMG`, `^WorkerAttack`, set-*
+families still mechanical; C:raw full-stack templates (`^HeavyBomb`,
+`^MediumFlameWeapon`, `^TSCannonEffect`, `^FlakWeapon`, `^Grenade`,
+`^TSDefaultMissile`...) need real family conversion — design-class, not
+edge surgery. `^LaserWeapon`/`^RailgunWeapon`/`^TeslaWeapon` held on the
+pending ExtraDamage ruling.
+
+
 ## 2026-09-26g — DAWN: W7 weapon-edge conversion — my lanes cleared
 
 `Agent: Devin-DAWN · branch devin/dawn/w7-chains (stacked on w2-deadedges)`

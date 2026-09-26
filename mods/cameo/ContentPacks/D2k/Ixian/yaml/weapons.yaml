@@ -4,7 +4,10 @@ IxianCombatTankCannon:
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@7: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
 	Range: 5555
 	ReloadDelay: 35
 	Projectile: Bullet
@@ -18,7 +21,10 @@ HeavyIxianCombatTankCannon:
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@7: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MEDTANK1.WAV  # W7MAT w8-repin
 	Range: 6000
 	ReloadDelay: 40
 	Projectile: Bullet
@@ -31,7 +37,9 @@ DuelistTankCannon:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@4: ^MediumFlameWeapon
 	Inherits@6: ^HeavyBomb
-	Inherits@8: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Inherits@fx: ^d2k_ixian_duelisttankcannon
 	Range: 7000
 	MinRange: 1400
@@ -346,7 +354,10 @@ D2K_155mm3:
 
 	ValidTargets: Ground, Water
 D2K_Bazooka2:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Range: 6400
 	ReloadDelay: 5
 	ValidTargets: Ground, Water, Air
@@ -416,7 +427,7 @@ D2K_Rocket_Trooper1:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 mtank_pri2:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_ixian_mtank_pri2
 	ValidTargets: Ground, Water, Air
@@ -462,7 +473,9 @@ IxRailgunDroneBullet:
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
 	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits@3: ^RailgunWeapon
-	Inherits@4: ^D2K_Cannon
+	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 24
 	Range: 6034
 	Report: bigggun1.aud
@@ -2177,7 +2190,9 @@ D2K_RocketsCymek:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 d2k_air_drone_guns:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ixian_d2k_air_drone_guns
@@ -2185,7 +2200,6 @@ d2k_air_drone_guns:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6500
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	-Warhead@MissileAP_Heavy:
@@ -2791,7 +2805,9 @@ d2k_projections:
 		Delay: 10
 
 MongooseRocket:
-	Inherits: ^D2KRocket
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Inherits@fx: ^d2k_ixian_mongooserocket
 	ReloadDelay: 64
 	Range: 6183
@@ -3399,7 +3415,10 @@ ixian_airdrone:
 	Inherits@3: ^FlakWeapon
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^HeavyBomb
-	Inherits@6: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	ReloadDelay: 132
 	Range: 6500
 	Burst: 4

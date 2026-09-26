@@ -328,7 +328,10 @@ D2KRepair:
 		ValidRelationships: Ally
 		ValidTargets: Heal
 PhoenixRocket:
-	Inherits: ^D2KMissile
+	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
+	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_atreides_phoenixrocket
 	ReloadDelay: 100
 	Burst: 8
