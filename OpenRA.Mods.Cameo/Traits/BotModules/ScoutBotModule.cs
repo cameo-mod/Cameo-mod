@@ -172,7 +172,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (builder == null)
 					continue;
 
-				var actorInfo = world.Map.Rules.Actors[name];
+				// Unloaded ContentPacks leave their actor names out of Rules.Actors;
+				// indexing a missing key throws, so TryGetValue is load-bearing.
+				if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
+					continue;
+
 				var buildable = actorInfo?.TraitInfoOrDefault<BuildableInfo>();
 				if (buildable == null)
 					continue;

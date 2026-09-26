@@ -1058,8 +1058,10 @@ allow it.
    because it makes the bots temporarily weaker and it invalidates any tuning done against
    omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.
    *Phase 6a (fogged observation + `RegionMemory` + `UseFoggedObservation`) landed 2026-09-27 —
-   the master builds profiles from `BotFogMemory` instead of `World.Actors`; scouting (6b), the
-   risk gate (6c), squad-side fog (6d) and risk routing (6e) remain —
+   the master builds profiles from `BotFogMemory` instead of `World.Actors`; Phase 6b
+   (`ScoutBotModule`: staleness x interest region targets, yaml-listed scout types, scout-loss
+   danger marks exposed read-only for 6c) landed the same day; the risk gate (6c), squad-side
+   fog (6d) and risk routing (6e) remain —
    `docs/design/AI_FRANSBOT_RESEARCH.md` §4.*
 7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
    strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.
