@@ -1890,7 +1890,17 @@ NaxTorpTube:
 			None: 10
 
 Nax120mmCorrosion:
-	Inherits: RA2120mm
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
 	Inherits@Corrosion: ^NaxOxidationShells
 
 Nax120mmCorrosion_elite:
