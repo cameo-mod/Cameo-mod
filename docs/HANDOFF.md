@@ -15,6 +15,35 @@ over-patch on `wc2tornadoTest` (master keeps `bowfire`/`bowhit` bare).
 regen produced only 4th-decimal jitter → kept master's verbatim,
 `ra2e2_black.design.unit_class: 1.0` intact. Audits: dead fields
 12/26 ≤ ratchet, orphans 0, empty 0, drift clean, doc_claims 43/43.
+## 2026-09-27 — EMBER: AI phase 6a — fogged observation + RegionMemory landed on `devin/ember/ai-fog-6a`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules per maintainer order "continue with the bot modules" · branch devin/ember/ai-fog-6a`
+
+Phase 6a of `docs/design/AI_FRANSBOT_RESEARCH.md` is implemented in
+`OpenRA.Mods.Cameo/Traits/BotModules/`:
+
+* **`BotFogMemory`** (new file): per-enemy last-seen table keyed by ActorID. Writes only from
+  `CanBeViewedByPlayer` sightings plus `FrozenActorLayer` (fogged buildings). A remembered cell
+  that becomes visible without the actor drops it ("seen empty is information"); non-buildings
+  expire after `ObservationTimeoutTicks` (30000).
+* **`RegionMemory`**: 8-cell-region grid published on `BotSituation.Regions` — per enemy,
+  per region: ArmyValue / DefenceValue / AntiAirValue / EconomyValue / LastSeenTick / EverSeen.
+  `EverSeen` requires `Shroud.IsVisible` of the region centre or a contained observation, so
+  `EnemyProfile.KnownRegions` is a true seen-content metric for the 6a gate.
+* **`UseFoggedObservation`** (default **true**, maintainer ruling 2026-09-23): `false`
+  reproduces the legacy omniscient numbers; the yaml lever sits on `MasterAiBotModule` in
+  `mods/cameo/ai/ai.yaml`.
+* `EnemyProfile.HarvesterCount` = currently-visible harvesters; `Harvesters` keeps the
+  remembered count. `AiSituationLogWriter` gained `harvester_count` + `known_regions`.
+
+Verification: `ai_bot_player_gate` PASS in **both** modes; with the gate map's fog flipped on,
+the bot saw only `known_regions: 4` and correctly held no `main_target` (no scouting yet — that
+is 6b). Boot-gate PASS (`PostWorldLoaded`, 0 new exceptions). 229 unit tests green.
+**Do not** tune bot strength against this — fog makes bots weaker until 6b–6e land.
+
+Remaining phases for whoever continues: 6b ScoutBotModule, 6c risk gate, 6d fogged squad scans,
+6e risk routing, 7 island ferry, 8 beacon shadow, 9 stats-derived counter value. The squad scans
+in `OpenRA.Mods.CA` (`SquadManagerBotModuleCA.cs:354-372`) are still omniscient until 6d.
 
 ## 2026-09-27 — DAWN: dead-fields batch-2 (supplier deletes)
 

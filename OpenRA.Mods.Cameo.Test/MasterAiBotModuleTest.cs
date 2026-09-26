@@ -123,8 +123,8 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
-				"buildings", "expansion_clusters", "harvesters", "refineries", "pressure_value",
-				"stealth_share", "nearest_cells", "last_seen_tick", "score"
+				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
+				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score"
 			}));
 		}
 
@@ -570,6 +570,44 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 0), Is.EqualTo(12000));
 			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 12001), Is.Zero);
+		}
+
+		[Test]
+		public void RegionMemoryBucketsCellsAndClampsOutOfMapPositions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			Assert.That(regions.Columns, Is.EqualTo(8));
+			Assert.That(regions.Rows, Is.EqualTo(8));
+			Assert.That(regions.CellCount, Is.EqualTo(64));
+			Assert.That(regions.IndexOf(new CPos(0, 0)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(7, 7)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(8, 0)), Is.EqualTo(1));
+			Assert.That(regions.IndexOf(new CPos(0, 8)), Is.EqualTo(8));
+			Assert.That(regions.IndexOf(new CPos(63, 63)), Is.EqualTo(63));
+			Assert.That(regions.IndexOf(new CPos(-5, 200)), Is.EqualTo(56));
+			Assert.That(regions.CenterOf(0), Is.EqualTo(new CPos(4, 4)));
+			Assert.That(regions.CenterOf(63), Is.EqualTo(new CPos(60, 60)));
+		}
+
+		[Test]
+		public void RegionMemoryCountsOnlyEverSeenRegions()
+		{
+			var cells = new RegionMemory.Region[4];
+			Assert.That(RegionMemory.CountKnown(cells), Is.Zero);
+			cells[1] = new RegionMemory.Region { EverSeen = true };
+			cells[2] = new RegionMemory.Region { ArmyValue = 500 };
+			Assert.That(RegionMemory.CountKnown(cells), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void RegionMemoryHandlesNonAlignedMapBounds()
+		{
+			var regions = new RegionMemory(new CPos(-10, -10), new CPos(17, 9), 8);
+			Assert.That(regions.Columns, Is.EqualTo(4));
+			Assert.That(regions.Rows, Is.EqualTo(3));
+			Assert.That(regions.IndexOf(new CPos(-10, -10)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(-3, -3)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(-2, -10)), Is.EqualTo(1));
 		}
 	}
 }
