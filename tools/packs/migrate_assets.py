@@ -58,6 +58,50 @@ def collect_refs(path):
                 out.append((tok, tok, None))
     return out
 
+def collect_voxel_models(path):
+    """Actors whose node carries an uncommented RenderVoxels (directly or via
+    Inherits@*: ^RenderVoxel) -> [(actorid, image_name, has_tur, has_barl)].
+    Voxels resolve by NAME CONVENTION: <img>.vxl/.hva, <img>tur.*, <img>barl.*."""
+    out = []
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return out
+    actor = None; in_rv = False; img = None; tur = False; barl = False
+    has_rv = False
+
+    def flush():
+        if actor and has_rv:
+            out.append((actor, img or actor, tur, barl))
+
+    for raw in lines:
+        s = raw.split("#", 1)[0].rstrip()
+        if not s.strip():
+            continue
+        indent = len(raw) - len(raw.lstrip("\t "))
+        toks = s.strip()
+        if indent == 0:
+            flush()
+            actor = toks.split(":")[0].strip()
+            img, tur, barl, has_rv = None, False, False, False
+            in_rv = False
+            continue
+        if indent == 1:
+            in_rv = toks.startswith("RenderVoxels:")
+            if toks.startswith("RenderVoxels:"):
+                has_rv = True
+            if re.match(r"Inherits@\w+: *\^RenderVoxel", toks):
+                has_rv = True
+            if toks.startswith("WithVoxelTurret"):
+                tur = True
+            if toks.startswith("WithVoxelBarrel"):
+                barl = True
+            continue
+        if in_rv and indent == 2 and toks.startswith("Image:"):
+            img = toks.split(":", 1)[1].strip()
+    flush()
+    return out
+
 def type_dir(name, ext):
     ext = ext.lower()
     if ext in (".vxl", ".hva"): return "voxels"
@@ -68,6 +112,8 @@ def type_dir(name, ext):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--theme", required=True, help="e.g. RedAlert2")
+    ap.add_argument("--voxels", action="store_true",
+                    help="also collect RenderVoxels name-convention files")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--pkg-prefix", default=None, help="default ra2")
     ap.add_argument("--out", default=None)
@@ -100,6 +146,30 @@ def main():
         if norm(y) in theme_set: continue
         for raw, name, pkg in collect_refs(y):
             foreign.setdefault(name.lower(), set()).add(norm(y))
+
+    # 2b. voxel name-convention files (RenderVoxels actors)
+    if args.voxels:
+        theme_models = {}   # image(lower) -> (actor, yaml, tur, barl)
+        for y in theme_yamls:
+            for actor, img, tur, barl in collect_voxel_models(y):
+                theme_models.setdefault(img.lower(), (actor, norm(y), tur, barl))
+        # foreign themes' voxel image names (for exclusivity)
+        foreign_models = set()
+        for y in all_yamls:
+            if norm(y) in theme_set: continue
+            for actor, img, tur, barl in collect_voxel_models(y):
+                foreign_models.add(img.lower())
+        for img, (actor, yr, tur, barl) in theme_models.items():
+            sufs = ["", "tur" if tur else None, "barl" if barl else None]
+            for suf in [s for s in sufs if s is not None]:
+                for ext in (".vxl", ".hva"):
+                    fname = f"{img}{suf}{ext}"
+                e = refs.setdefault(fname, {"name": fname, "refs": {yr},
+                                            "pkg": None})
+                e["refs"].add(yr)
+                # foreign exclusivity: same image name in another theme
+                if img in foreign_models:
+                    foreign.setdefault(fname, set()).add("voxel-name-collision")
 
     # 3. bits file index + .idx (AudPackage) name indexes
     bits_index = {}    # basename(lower) -> [relpaths]
