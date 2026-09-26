@@ -3925,6 +3925,9 @@ bases, not the plumbing. The three open decisions of the 2026-09-10 review, rule
   zeroed the percentage half at `h = 0` and halved it at `h = 1`).
 * **Blast radius keeps scaling: `radius x (h+2)/3`** (2/3 at `h=0`, 4/3 at `h=2`), continuing the
   existing "the level scales the radius only" law; authored `Range` arrays stay authored.
+  ⚠ **The code disagrees (measured 2026-09-27):** `AreaDamageWarhead.cs:381-383` scales the warhead
+  `Range` array by `(h+2)/3` exactly like `Spread`/`MinRadius`/`MaxRadius`. The re-point tool divides
+  all four back, so the migration keeps effective radii either way; which one is the law is open.
 * **Unset is not zero:** an absent `Heaviness` means INERT (today's behaviour, every unmigrated
   weapon); an explicit value, including 0, is ACTIVE. Family identity is guaranteed by §12.0d's
   per-ladder rank restore, not by a blanket "never flatter".
@@ -3963,6 +3966,18 @@ are different curves.
 * **A base at its home h reproduces today's Shield** (`base Shield = home Shield / 1.5`, or / 2 for
   a Heavy home). This supersedes the pilot's copied value, which dealt 1.5x at h = 1; CannonAP's
   authored Shield moves 144 -> 96 (effective 144 at h = 1, as before the base existed).
+
+**RE-POINT TOOL BUILT 2026-09-27, NOT YET APPLIED** (`tools/balance/repoint_family_bases.py`, guard
+`tools/tests/test_repoint_family_bases.py`). It renames each levelled edge and its warhead keys across
+the owner's whole inheritance closure, rescales what `h` now owns (a `PercentageScale` dial keeps its
+ratio to the base; `Spread`/`MinRadius`/`MaxRadius`/`Range` are divided back through the runtime's
+truncating `(h+2)/3`), sets `Heaviness` from the old level, then RE-RESOLVES every affected weapon and
+pins back any other field that moved; it writes only when that verification is empty. Measured on
+#532's tree: **1,191 owners, 1,662 weapons, 0 non-`h` differences, 573 pins**; the applied tree boots,
+orphan cancels 0, dead fields unchanged. Left levelled on purpose: 37 `Super` edges, 35 Sniper/Nuclear
+edges, 74 same-family MIX edges (needs a ruling), and 15 owners whose closure cannot be pinned
+uniformly or whose main is retyped away from `AreaDamage` (no `Heaviness` field). Applied per lane
+AFTER #534 and #516 land; 33 raw ledgers move, so the application re-extracts.
 
 **What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
 / `_Heavy` suffix is retired: **147 templates across 50 families become 50** *(estimate; measured
