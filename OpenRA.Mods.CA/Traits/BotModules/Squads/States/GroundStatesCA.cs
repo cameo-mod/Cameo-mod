@@ -28,12 +28,28 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor);
 		}
 
+		// 6c: pre-commit checks route through the risk-gated overloads — the squad's
+		// unit value is compared to the remembered threat at each candidate's region.
+		protected Actor FindClosestEnemy(SquadCA owner, bool riskCheck)
+		{
+			return riskCheck
+				? owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner.SquadManager.SquadValueOf(owner))
+				: owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor);
+		}
+
 		protected Actor FindHighValueTarget(SquadCA owner)
 		{
 			return owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition);
 		}
 
-		protected bool FindNewTarget(SquadCA owner, bool highValueCheck = false)
+		protected Actor FindHighValueTarget(SquadCA owner, bool riskCheck)
+		{
+			return riskCheck
+				? owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition, owner.SquadManager.SquadValueOf(owner))
+				: owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition);
+		}
+
+		protected bool FindNewTarget(SquadCA owner, bool highValueCheck = false, bool riskCheck = false)
 		{
 			if (highValueCheck)
 			{
@@ -41,7 +57,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				if (owner.SquadManager.Info.HighValueTargetPriority > highValueTargetRoll)
 				{
-					var highValueTarget = FindHighValueTarget(owner);
+					var highValueTarget = FindHighValueTarget(owner, riskCheck);
 					if (highValueTarget != null)
 					{
 						owner.TargetActor = highValueTarget;
@@ -50,7 +66,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
-			var closestEnemy = FindClosestEnemy(owner);
+			var closestEnemy = FindClosestEnemy(owner, riskCheck);
 			if (closestEnemy != null)
 			{
 				owner.TargetActor = closestEnemy;
@@ -72,7 +88,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
-			if (!owner.IsTargetValid && !FindNewTarget(owner, true))
+			// The idle squad is committing to a proactive attack — gate it on the
+			// remembered threat at the target's region (6c). Mid-fight retargets in
+			// GroundUnitsAttackState stay ungated.
+			if (!owner.IsTargetValid && !FindNewTarget(owner, true, riskCheck: true))
 				return;
 
 			if (owner.SquadManager.unitCannotBeOrdered(leader))

@@ -1,5 +1,32 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — EMBER: AI phase 6c — pre-commit risk gate on `devin/ember/ai-risk-6c`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-risk-6c · stacked on the 6b merge`
+
+Phase 6c of `docs/design/AI_FRANSBOT_RESEARCH.md` (the CN C4 "pre-commit risk
+test"):
+
+* **`IBotRegionThreatProvider`** (new, `OpenRA.Mods.CA/Traits/BotModules/`): a
+  fog-honest `RememberedEnemyThreatAt(CPos)` — the assembly boundary is crossed
+  by interface exactly like `IBotMainTargetProvider`. Implemented by
+  `MasterAiBotModule` (remembered Army+Defence value in the cell's region —
+  AntiAir excluded, this gate is ground-only) and `ScoutBotModule` (scout-loss
+  `DangerByRegion` marks). Unknown regions read 0 and never block.
+* **`SquadManagerBotModuleCA`**: new yaml knob `AttackRiskMargin` (percent,
+  default 25, negative disables). A proactive squad only commits when
+  `squadValue * 100 >= threat * (100 + margin)`; rejections are BotDebug-logged
+  with both values (the CN lesson: log the data before trusting the check).
+* **Scope**: gated overloads of `FindClosestEnemy`/`FindHighValueTarget` are
+  used ONLY by `GroundUnitsIdleStateCA`'s `FindNewTarget` — mid-fight retargets
+  (`GroundUnitsAttackState`), protection squads, air and naval paths stay
+  ungated. A squad with every candidate over-gated simply holds (retries next
+  tick when memory shifts).
+* Seam: `public static PassesRiskGate(attackerValue, threat, margin)` — unit
+  tests pin the boundary (exactly-1.25x passes, 1.249x fails, threat-0 always
+  passes, negative margin disables).
+
+Verification: 235/235 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
 ## 2026-09-27 — EMBER: AI phase 6b — ScoutBotModule on `devin/ember/ai-scout-6b`
 
 `Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-scout-6b · stacked on the 6a merge`

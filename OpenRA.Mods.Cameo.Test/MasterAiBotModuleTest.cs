@@ -650,5 +650,30 @@ namespace OpenRA.Mods.Cameo.Test
 				i => 0, i => 0, i => 0);
 			Assert.That(picked, Is.EqualTo(-1));
 		}
+
+		[Test]
+		public void RiskGateNeverBlocksUnknownRegions()
+		{
+			// threat 0 = nothing remembered there; even an empty squad may commit
+			// (fog-honest: no information is not a reason to hold).
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(0, 0, 25), Is.True);
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(500, 0, 25), Is.True);
+		}
+
+		[Test]
+		public void RiskGateBlocksOvermatchedSquads()
+		{
+			// margin 25: attacker must beat threat by 1.25x.
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1000, 800, 25), Is.True);   // exactly 1.25x
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1249, 1000, 25), Is.False); // 1.249x < 1.25x
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1250, 1000, 25), Is.True);
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(400, 1000, 25), Is.False);
+		}
+
+		[Test]
+		public void RiskGateNegativeMarginDisables()
+		{
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1, 999999, -1), Is.True);
+		}
 	}
 }

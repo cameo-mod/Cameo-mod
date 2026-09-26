@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -52,7 +53,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	public class ScoutBotModule : ConditionalTrait<ScoutBotModuleInfo>, IBotTick, IBotEnabled,
-		IBotNotifyIdleBaseUnits, IBotRespondToAttack
+		IBotNotifyIdleBaseUnits, IBotRespondToAttack, IBotRegionThreatProvider
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
@@ -298,6 +299,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var index = regions.IndexOf(e.Attacker.Location);
 			dangerByRegion.TryGetValue(index, out var existing);
 			dangerByRegion[index] = (existing.Value + Math.Max(1, value), world.WorldTick);
+		}
+
+		// The 6c risk gate reads scout-loss marks through this CA-side interface;
+		// a region that killed a scout counts its attacker's cost as threat.
+		int IBotRegionThreatProvider.RememberedEnemyThreatAt(CPos cell)
+		{
+			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
+			return IsTraitDisabled || regions == null ? 0 : DangerAt(regions.IndexOf(cell));
 		}
 	}
 }
