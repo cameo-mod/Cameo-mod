@@ -519,7 +519,6 @@ MarauderMissiles:
 		Duration: 8
 
 SCTyr:
-	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@4: ^SCRA2HeavyCannon
 	Inherits: ^Effect_Flame_Light
 	ReloadDelay: 44
@@ -644,7 +643,6 @@ SCTyr:
 	-Warhead@Chaingun:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_Heavy_Flat:
 	InvalidTargets: wall
 	Warhead@Glow:
 		FadeFrames: 15
@@ -1026,7 +1024,6 @@ GhostSniperLockdown:
 		Damage: 44000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@Tesla_Super_ExtraDamage:
-	Inherits@proj: ^Projectile_Lightning_Super
 	Projectile: Bullet
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -1404,7 +1401,6 @@ SpecterSniperLockdown:
 		Damage: 88000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@Tesla_Super_ExtraDamage:
-	Inherits@proj: ^Projectile_Lightning_Super
 	Projectile: Bullet
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -2173,7 +2169,6 @@ SiegeTankSiegeCannon:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 GoliathMG:
-	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Projectile_Shell_Heavy
 	Inherits@4: ^Effect_CannonHE_Heavy
@@ -2184,7 +2179,6 @@ GoliathMG:
 	Burst: 3
 	BurstDelays: 2
 	Report: TGoFir00.aud
-	-Warhead@Concussion_Light:
 	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
@@ -3523,7 +3517,6 @@ PhobosLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits@collapseextra2: ^Warhead_Railgun_ExtraDamage
-	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^RailgunWeapon

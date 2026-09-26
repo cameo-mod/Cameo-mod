@@ -1,7 +1,23 @@
 # Cameo — THE HANDOFF
 
 
-### DAWN — W8 batch-1 (2026-09-26, branch `devin/dawn/w8-covering`)
+### DAWN — W1 dead-edge sweep (2026-09-26, branch `devin/dawn/w1-deadedges`)
+
+67 fully-shadowed Inherits edges removed across 54 weapons via
+resolve-drop probe (remove edge → re-merge → flat+ordered identical =
+dead; iterate to fixpoint for mutually-redundant pairs). 39 dead
+`-Key:` cancels whose provider was a dropped edge removed in the same
+pass (edge+cancel together or neither). 579/579 resolved+ordered
+identical, orphans 0, empty 0, dup-inherits unchanged.
+W1 258→248 (rate re-locked 1188→1142 bp), W2 71→58, W3 24→18,
+W8 303→298 — dead `^`-edges counted there too. Remaining >3-arity
+weapons sit at the resolved-faithful floor: dual/triple-family merges
+and whitelisted `^<faction>_<weapon>` addon templates — further W1
+reduction needs merged-template authoring (design-class). Includes
+`D2K_TowerMissile`/`mtank_pri2` dropping the dead
+`^Projectile_Missile_Heavy_D2K` edge (defs remain held on `^D2KMissile`).
+
+### DAWN — W8 batch-1 (2026-09-26, branch `devin/dawn/w8-batch1`)
 
 53 weapons across six semi-converted legacy templates converted to
 covering three-kind edges: `^D2K_Cannon` 19, `^D2KMissile` 15,

@@ -330,7 +330,6 @@ wc2ballistaFire:
 		ImpactSounds: explode.aud
 
 MortarTeamArtilleryShell:
-	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -398,7 +397,6 @@ MortarTeamArtilleryShell:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_Medium_Flat:
 wc2gryphonFireVisible:
 	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^LightMissile

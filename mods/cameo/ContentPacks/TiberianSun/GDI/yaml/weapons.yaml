@@ -313,7 +313,6 @@ TSJugg120mm:
 	# 	Explosions: artillery_explosion
 
 KodiakCannon:
-	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -431,7 +430,6 @@ KodiakCannon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@HeavyMissile:
 	-Warhead@HeavyBomb:
-	-Warhead@CannonHE_Heavy_Flat:
 	Warhead@RailgunExtraDamage_Auxiliary:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
@@ -1103,14 +1101,10 @@ TSMammothTusk2II_AA:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSHellfireSonic:
-	Inherits@sonicfamily: ^Warhead_MissileSonic_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 6144
 	TargetActorCenter: true
-	-Warhead@MissileSonic_Medium:
-	-Warhead@MissileSonic_Medium_Debuff:
-	Inherits@proj: ^Projectile_TS_Missile_Medium
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -1302,14 +1296,10 @@ TSZoneHellfire:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSZoneHellfireSonic:
-	Inherits@sonicfamily: ^Warhead_MissileSonic_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 28
 	Range: 6138
 	TargetActorCenter: true
-	-Warhead@MissileSonic_Heavy:
-	-Warhead@MissileSonic_Heavy_Debuff:
-	Inherits@proj: ^Projectile_TS_Missile_Heavy
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -1870,14 +1860,10 @@ TSAssaultCannonTal:
 		ValidTargets: Shielded
 
 TSAssaultCannonTalSonic:
-	Inherits@sonicfamily: ^Warhead_BulletSonic_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 45
 	Range: 6520
 	TargetActorCenter: true
-	-Warhead@BulletSonic_Medium:
-	-Warhead@BulletSonic_Medium_Debuff:
-	Inherits@proj: ^Projectile_Sonic_Shell
 	Projectile: Bullet
 		Image: BOMB
 		Inaccuracy: 200

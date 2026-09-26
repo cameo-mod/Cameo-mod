@@ -153,7 +153,6 @@ TSAPCGun:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
-	Inherits@wh: ^Warhead_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5668
@@ -211,7 +210,6 @@ TSCarrierTarget:
 
 TSTorpTube:
 	Inherits@xRA2TorpTube0: ^Warhead_MissileAP_Heavy
-	Inherits@xRA2TorpTube1: ^Projectile_Missile_Heavy
 	Inherits: ^ts_torptube
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -222,7 +220,6 @@ TSTorpTube:
 	Range: 9000
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile:
 	Projectile: Missile
 		Image: Patriot
 		Arm: 5

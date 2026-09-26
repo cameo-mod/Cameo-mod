@@ -268,8 +268,6 @@ td_tanyabomb:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
-	Inherits@wh2: ^Warhead_CannonAP_Light
-	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits: ^td_tanyabomb
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater

@@ -60,7 +60,6 @@ HeavyOrdosCombatTankRockets:
 		PercentageSpread: 50
 
 120mm_td:
-	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
@@ -76,7 +75,6 @@ HeavyOrdosCombatTankRockets:
 	Warhead@CannonHE_Medium:
 		PercentageScale: 2499
 		Damage: 56000
-	-Warhead@CannonHE_Medium_Flat:
 	InvalidTargets: wall
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -171,7 +169,6 @@ HeavyOrdosCombatTankRockets:
 	Inherits@finalmain: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 80
@@ -1223,7 +1220,6 @@ D2K_155mm_turret:
 	Range: 10000
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MORTAR1.WAV  # W7MAT order-pin
@@ -1380,7 +1376,6 @@ Dune_SiegeMortar:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MORTAR1.WAV  # W7MAT order-pin
@@ -1590,7 +1585,6 @@ D2K_APC_Rocket:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
-	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Report: ROCKET1.WAV  # W7MAT w8-repin
@@ -1889,7 +1883,6 @@ D2K_APC_Rocket_AA:
 		Falloff: 100, 50
 		Range: 0, 32
 DeviatorMissile:
-	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
@@ -1928,7 +1921,6 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
 		ValidRelationships: Neutral, Enemy
-	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
 	# InvalidTargets: Structure, MCImmune
 	InvalidTargets: wall
@@ -3056,8 +3048,6 @@ HMGo_upgrade:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
 	Report: LaserTankAttack.wav
-	Inherits@3: ^Projectile_Bullet_Medium
-	-Projectile:
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -3108,7 +3098,6 @@ d2kChainGun:
 d2kChainGun_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_d2kchaingun_upgrade
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
@@ -3122,7 +3111,6 @@ d2kChainGun_upgrade:
 	Burst: 5
 	BurstDelays: 2
 	Report: LaserTankAttack.wav
-	-Projectile:
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -3160,7 +3148,6 @@ HMGstealth:
 autogun_tank:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
 	MinRange: 1495  # W7MAT order-pin
@@ -3175,7 +3162,6 @@ autogun_tank:
 	ReloadDelay: 24
 	Range: 7480
 	ValidTargets: Ground, Water, Air
-	-Warhead@MissileAP_Heavy:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -3997,7 +3983,6 @@ d2k_chemgun:
 
 HMGstealth_upgrade:
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_hmgstealth_upgrade
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 33
@@ -4012,7 +3997,6 @@ HMGstealth_upgrade:
 	BurstDelays: 2
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	Report: LaserTankAttack.wav
-	-Projectile:
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -4054,7 +4038,6 @@ HMGstealth_upgrade:
 d2kCarryallChainGun_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_d2kcarryallchaingun_upgrade
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
@@ -4069,7 +4052,6 @@ d2kCarryallChainGun_upgrade:
 	Burst: 4
 	BurstDelays: 1
 	StartBurstReport: MGUN2.WAV
-	-Projectile:
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -4146,7 +4128,6 @@ d2kCarryallChainGun_upgrade:
 LMG_ordos_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_lmg_ordos_upgrade
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
@@ -4158,7 +4139,6 @@ LMG_ordos_upgrade:
 		Range: 1250
 		ValidTargets: Shielded
 	Report: LaserTankAttack.wav
-	-Projectile:
 	Projectile: LaserZap
 		Width: 40
 		ZOffset: 2047
@@ -4175,7 +4155,6 @@ LMG_ordos_upgrade:
 light_inf_lmg_ordos_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^d2k_ordos_light_inf_lmg_ordos_upgrade
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
@@ -4188,7 +4167,6 @@ light_inf_lmg_ordos_upgrade:
 		ValidTargets: Shielded
 		InvalidTargets: Air
 	Report: LaserTankAttack.wav
-	-Projectile:
 	Projectile: LaserZap
 		Width: 40
 		ZOffset: 2047
@@ -5302,7 +5280,6 @@ d2kFlameTurret:
 	Warhead@Flame_Light:
 		Damage: 2800
 
-	Inherits@w72: ^Projectile_Flame_Light
 	Projectile: Bullet
 		Blockable: false
 		LaunchAngle: 60

@@ -449,10 +449,7 @@
 	Range: 7979
 	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 50
@@ -460,7 +457,6 @@
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -468,7 +464,6 @@
 
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_shared_d2k_towermissile
 	MinRange: 2135
 	ValidTargets: Ground, Water, Air
@@ -643,7 +638,6 @@ Debris2:
 	Inherits@w81: ^Warhead_Flame_Light  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Flame_Light  # W7MAT covering-edge
 	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
-	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
 	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
 	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
 	Projectile:  # W7MAT w8-repin
@@ -663,7 +657,6 @@ Debris2:
 		ImpactSounds: EXPLSML2.WAV
 	Warhead@Concrete:  # W7MAT w8-repin
 		Damage: 2250
-	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
 	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
@@ -1716,7 +1709,6 @@ PhoenixRocketShrapnel:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 
-	Inherits@proj: ^Projectile_Flame_Light
 	Projectile: Missile
 		Shadow: true
 		HorizontalRateOfTurn: 33
@@ -1740,20 +1732,12 @@ PhoenixRocketShrapnel:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
-	Inherits@fx: ^d2k_ordos_phoenixrocketshrapnel
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	-Warhead@Glow:
-	-Warhead@Smudge:
-	-Warhead@RA2Scorch:
-	-Warhead@Effect:
-	-Warhead@ShieldHit:
-	-Warhead@ShieldHitEffect:
-	-Warhead@Scorch:
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
 		Scale: 0.3

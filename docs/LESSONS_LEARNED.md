@@ -2641,3 +2641,31 @@ empty token (the separator after `Name:` is not depth). Verify restored blocks
 byte-identical against the pre-drain commit, then re-run find_empty_warhead —
 a wrong first-token depth parses fine for the engine but is skipped by
 indent-based audit scanners.
+
+## Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)
+
+Two reusable findings from the W1 arity sweep (43 + 24 dead edges removed,
+resolved-identical throughout):
+
+1. **An edge is dead iff removing it leaves resolved flat payload AND
+   ordered top-level keys identical** — test by re-running the merge with
+   the Inherits line skipped. Fully-shadowed edges are common after
+   covering-edge conversions: a later family template re-supplies every
+   leaf the edge carried, and the edge's only residue is a dead
+   `-Key:` cancel pair (provider gone → orphan; delete edge+cancel
+   TOGETHER, EMBER rule). 67 in-lane edges were dead this way, mostly
+   `^Projectile_*`/`^Warhead_*` singles and stale fx-template edges.
+
+2. **Regex-driven line edits must not index defs independently of the
+   resolver.** A header like `TSIonCannon: ### comment` fails
+   `^Key:\s*$` — `cur` stays on the previous def and the edge index used
+   by the apply diverges from the index the resolve-probe tested
+   (a verified drop on weapon A deleted an edge on weapon B). Fix used:
+   `^Key:(\s|$)` header match + `^	Inherits` depth-1 edge match. Better
+   still: enumerate edges from the parsed node's children and map back to
+   lines once.
+
+3. **Comparator scope:** verify tools that derive the checked weapon set
+   from `git log -1 --name-only` miss regressions in files untouched by
+   the last commit (19 batch-1 order diffs hid this way). Scope by explicit
+   file list or branch-vs-merge-base diff census, never last-commit names.

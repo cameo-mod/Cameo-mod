@@ -122,7 +122,6 @@ td_gdi_commando_sniper_elite:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		Spread: 1
 		Falloff: 100, 0
-	Inherits@proj: ^Projectile_Railgun_Heavy
 	Projectile: Bullet
 		Duration: 16
 		Inaccuracy: 40
@@ -3416,7 +3415,6 @@ td_gdi_humveemkii_rocketshumvee2amt:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt
-	Inherits@2: ^AMTProjectile
 	ValidTargets: Ground, Water
 	ReloadDelay: 84
 	Range: 5598

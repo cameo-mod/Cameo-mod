@@ -109,12 +109,10 @@ OrniBombC:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 OrniMissile:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	ValidTargets: Ground, Air
 	ReloadDelay: 66
 	Range: 6666
 	TargetActorCenter: true
-	-Warhead@MissileHE_Heavy:
 	Projectile: Missile
 		Arm: 0
 		Blockable: false

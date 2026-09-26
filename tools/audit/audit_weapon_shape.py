@@ -82,7 +82,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 1188   # 258/2172 = 1187.8 bp: W8 batch-1 covering edges
+W1_RATE_BP = 1142   # 248/2172 = 1141.8 bp: W1 dead-edge sweep removed 43
+                    # fully-shadowed edges (resolve-drop probe: flat+ordered
+                    # identical). Old value 1188 (258/2172): W8 batch-1 covering edges
                     # (^D2K_Cannon/^D2KMissile/^D2KRocket/^OCannon/^Debris2Legacy/
                     # ^OMissile, 53 consumers, resolved-identical); was 1101
                     # 1076 -> 1101 (239/2172): W7 weapon->template conversion
@@ -96,7 +98,9 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 71    # 53 -> 71: W8 batch-1 covering edges (+18 dual wh; the
+W2_BASELINE = 58    # 71 -> 58: W1 dead-edge sweep (-13 dead ^Warhead_* edges,
+                    # each with its dead -Key: cancel pair). Resolved-identical.
+                    # 53 -> 71: W8 batch-1 covering edges (+18 dual wh; the
                     # ^Debris2Legacy family is genuinely dual-warhead).
                     # 123 -> 45: dead wh-edge sweep (every dropped edge
                     # emitted only Warhead@ nodes absent from the resolved weapon;
@@ -120,7 +124,8 @@ W2_BASELINE = 71    # 53 -> 71: W8 batch-1 covering edges (+18 dual wh; the
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 24    # 11 -> 24: W8 batch-1 covering edges (+13 dual proj).
+W3_BASELINE = 18    # 24 -> 18: W1 dead-edge sweep (-6 dead ^Projectile_* edges).
+                    # 11 -> 24: W8 batch-1 covering edges (+13 dual proj).
                     # 7 -> 11: W7 conversion — weapons whose resolved output
                     # mixes two projectile families carry both covering edges
                     # (fidelity). was: 12 -> 7 post-rebase resync; dual ^Projectile_ inherit (21->12: same collapse)
@@ -172,7 +177,10 @@ W7_BASELINE = 664   # 804 -> 760: W7-remainder materialization batch (DAWN
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 362   # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
+W8_BASELINE = 298   # 362 -> 298: W1 dead-edge sweep removed dead non-three-kind
+                    # edges (^ts_gdi_tsioncannon, ^HeavyMachineGunProjectile,
+                    # ^AMTProjectile, ^Projectile_Laser_Heavy etc) + W8 batches.
+                    # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
                     # D2K_155mm (^D2K155mmLegacy) re-expose pre-drain W8 debt;
                     # conversion awaits the legacy-bundle retrofit ruling.
                     # (#489 cleared most legacy edges); was:   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting

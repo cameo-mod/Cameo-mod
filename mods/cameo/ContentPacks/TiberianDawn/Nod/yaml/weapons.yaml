@@ -1874,12 +1874,10 @@ td_nod_obeliskoflight_laserobelisk:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 td_nod_obeliskoflight_laserobeliskburning:
-	Inherits@inferno: ^Warhead_Inferno_Heavy
 	ValidTargets: Ground, Water
 	ReloadDelay: 96
 	Range: 9600
 	TargetActorCenter: true
-	-Warhead@Inferno_Heavy:
 	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -4017,7 +4015,6 @@ td_nod_lasercommando_nodcommandolaser:
 
 td_nod_attacksubmarine_nodtorptube:
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_nod_set6
 	ReloadDelay: 64
 	Range: 8000
@@ -4025,7 +4022,6 @@ td_nod_attacksubmarine_nodtorptube:
 	BurstDelays: 8
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5
@@ -4050,7 +4046,6 @@ td_nod_attacksubmarine_nodtorptube:
 
 td_nod_attacksubmarine_nodtorptubeblackmarket:
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_nod_set6
 	ReloadDelay: 64
 	Range: 8000
@@ -4058,7 +4053,6 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 	BurstDelays: 8
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5

@@ -12748,4 +12748,32 @@ split-def ruling.
   parent raw children (bloats every bucket); drop-edge+repin-all vomits
   whole subtrees. Covering-edge swap is the right shape.
 
+## Devin-DAWN — W1 dead-edge sweep, in-lane arity floor reached (2026-09-26)
 
+Branch `devin/dawn/w1-deadedges` (stacked on `devin/dawn/w8-batch1` tip
+`2c0cf7196`, PR #521).
+
+Method: per-edge resolve-drop probe — remove the Inherits line, re-merge
+the def, compare resolved flat payload + ordered top-level keys. An edge
+is dead iff removal changes nothing (every leaf it supplied is shadowed
+by a later parent/local AND its position contribution is redundant).
+Applied iteratively until fixpoint per weapon (mutually-redundant pairs
+resolve to the maximal joint drop set).
+
+- Sweep-1 (>3-arity weapons): 43 dead edges across 35 weapons.
+- Sweep-2 (all arities >=2 edges): 24 dead edges across 19 weapons —
+  includes the held `D2K_TowerMissile`/`mtank_pri2` losing their dead
+  `^Projectile_Missile_Heavy_D2K` edge (the defs stay held on
+  `^D2KMissile`, just minus the shadowed edge).
+- Dead `-Key:` cancels whose provider was a dropped edge removed in the
+  same pass (EMBER rule: edge+cancel together or neither) — 19 + 20.
+- Verified: 579/579 resolved+ordered identical vs branch base,
+  orphan cancels 0, empty warheads 0, dup-inherits identical to base.
+- Buckets: W1 258->248 (rate 1188->1142 bp), W2 71->58, W3 24->18,
+  W8 303->298. Ratchets re-locked lower. The remaining >3-arity weapons
+  are at the resolved-faithful floor: dual/triple-family merges and
+  whitelisted `^<faction>_<weapon>` addon templates, not dead edges.
+
+Tooling note: `w1_deadedge.py`/`w1_allarity.py`/`w1_apply2.py` (scratch).
+Comparator `verify_tree.py` scopes by explicit file list — the
+`git log -1`-files comparator has a real blind spot (see LESSONS).

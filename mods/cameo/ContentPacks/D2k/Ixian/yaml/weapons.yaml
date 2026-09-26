@@ -1,10 +1,7 @@
 IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MEDTANK1.WAV  # W7MAT w8-repin
@@ -14,14 +11,10 @@ IxianCombatTankCannon:
 		Speed: 555
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	-Warhead@CannonHE_Medium:
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MEDTANK1.WAV  # W7MAT w8-repin
@@ -31,13 +24,11 @@ HeavyIxianCombatTankCannon:
 		Speed: 600
 	Warhead@CannonHE_Heavy:
 		Damage: 18000
-	-Warhead@CannonHE_Medium:
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@4: ^MediumFlameWeapon
 	Inherits@6: ^HeavyBomb
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: d2khc.wav  # W7MAT order-pin
@@ -131,7 +122,6 @@ DuelistTankCannon:
 			Wood: 9
 	Warhead@CannonHE_Heavy:
 		Damage: 84000
-	-Warhead@CannonHE_Medium:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	-Warhead@Grenade:
@@ -429,7 +419,6 @@ D2K_Rocket_Trooper1:
 		Damage: 24000
 mtank_pri2:
 	Inherits: ^D2KMissile
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_ixian_mtank_pri2
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
@@ -474,7 +463,6 @@ IxRailgunDroneBullet:
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
 	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits@3: ^RailgunWeapon
-	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	ReloadDelay: 24
@@ -1093,8 +1081,6 @@ RashidanGun_upgrade:
 			Heroic: 10
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
-	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@6: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 69
 	Range: 3800
@@ -1192,7 +1178,6 @@ RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^d2k_ixian_raiderguns_upgrade
-	Inherits@2: ^HeavyMachineGunProjectile
 	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1333,7 +1318,6 @@ HMG_turret_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^d2k_ixian_hmg_turret_upgrade
-	Inherits@2: ^HeavyMachineGunProjectile
 	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1671,7 +1655,6 @@ HMG_Duelist:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 HMG_Duelist_upgrade:
-	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1718,7 +1701,6 @@ HMG_Duelist_upgrade:
 		ValidTargets: Shielded
 	Inherits@4: ^LaserWeapon
 	Inherits@6: ^d2k_ixian_hmg_duelist_upgrade
-	Inherits@7: ^HeavyMachineGunProjectile
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
@@ -1919,7 +1901,6 @@ HMG_Duelist_upgrade:
 		Damage: 18000
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	-Warhead@Bullet_Medium_Flat:
 	Report: missile6.aud
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2258,7 +2239,6 @@ d2k_air_drone_guns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^d2k_ixian_d2k_air_drone_guns_upgrade
-	Inherits@2: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 28
 	Range: 6500
