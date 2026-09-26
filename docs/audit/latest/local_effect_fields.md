@@ -3,59 +3,161 @@
 # Non-primary effect channels (@2Eff/@EffectWater/...) are exempt from
 # the ratchet counts per maintainer ruling but stay listed below.
 
-Files scanned: 40
-Concrete weapons with local Explosions (L1): 245
-Concrete weapons with local ImpactSounds (L2): 252
-Exempt secondary-channel declarations (not ratcheted): 223
+Files scanned: 43
+Concrete weapons with local Explosions (L1): 299
+Concrete weapons with local ImpactSounds (L2): 307
+Exempt secondary-channel declarations (not ratcheted): 394
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect | YES | YES | 2075 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect2 | - | YES | 2133 | exempt |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AAHyperionMagnet | Effect | YES | YES | 5138 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChaosTurret | Effect | YES | - | 5059 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChemical | Effect | YES | YES | 2813 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianIonBeamMini | Effect | YES | - | 5234 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow | Effect | YES | YES | 776 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow | EffectAir | YES | YES | 782 | exempt |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon | Effect | YES | YES | 2057 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSniperAP | Effect | YES | YES | 6581 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSubmarineBomb | Effect | - | YES | 5862 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianTurretPlasma | Effect | - | YES | 4587 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect | YES | YES | 7512 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect1 | YES | YES | 7518 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect2 | YES | YES | 7524 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | EffectAir | YES | YES | 7538 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | EffectWater | YES | YES | 7532 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | ShieldHitEffect | - | YES | 7579 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurret | Effect | YES | YES | 6283 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurretEScatter | Effect | YES | YES | 6387 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurret_elite | Effect | YES | YES | 6353 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelCruiserArtillery | Effect | YES | YES | 7879 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelDaggerCannon | Effect | YES | YES | 7662 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFighterRailgun | Effect | YES | YES | 5863 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFighterRailgun | EffectAir | YES | YES | 5867 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFortressWeapons | Effect | YES | YES | 6409 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun | Effect | YES | YES | 4683 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInspectorIonCannon | Effect | YES | YES | 6722 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInspectorIonCannonDamage | Effect | YES | YES | 6826 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelKatyCannons | Effect | YES | YES | 6891 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelKatyCannons_EMP | Effect | YES | YES | 7081 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun | Effect | - | YES | 2319 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelManta_AA | EffectAir | YES | - | 2966 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMegaSword | Effect | YES | YES | 6053 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMegaSword_EMP | Effect | YES | YES | 6160 |  |
+| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect | YES | YES | 2079 |  |
+| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect2 | - | YES | 2137 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AAHyperionMagnet | Effect | YES | YES | 7513 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChaosTurret | Effect | YES | - | 7434 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChemical | Effect | YES | YES | 5188 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianIonBeamMini | Effect | YES | - | 7609 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow | Effect | YES | YES | 790 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow | EffectAir | YES | YES | 796 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow_elite | Effect | YES | YES | 1416 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow_elite | EffectAir | YES | YES | 1459 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow_elite | EffectWater | YES | YES | 1492 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianMaidenBow_elite | ShieldHitEffect | - | YES | 1412 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon | Effect | YES | YES | 2309 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon_EMP | Effect | YES | YES | 2720 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon_EMP | EffectAir | YES | YES | 2763 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon_EMP | EffectWater | YES | - | 2795 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPhotonCannon_EMP | ShieldHitEffect | - | YES | 2716 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | Effect | YES | YES | 3910 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | EffectAir | YES | YES | 3953 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | EffectWater | YES | - | 3985 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | ShieldHitEffect | - | YES | 3906 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG_EMP | Effect | YES | YES | 4130 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG_EMP | EffectAir | YES | YES | 4173 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG_EMP | EffectWater | YES | - | 4205 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG_EMP | ShieldHitEffect | - | YES | 4127 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG | Effect | YES | YES | 2992 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG | EffectAir | YES | YES | 3035 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG | EffectWater | YES | - | 3067 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG | ShieldHitEffect | - | YES | 2988 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG_EMP | Effect | YES | YES | 3210 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG_EMP | EffectAir | YES | YES | 3253 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG_EMP | EffectWater | YES | - | 3285 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarAG_EMP | ShieldHitEffect | - | YES | 3206 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG | Effect | YES | YES | 4404 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG | EffectAir | YES | YES | 4447 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG | EffectWater | YES | - | 4479 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG | ShieldHitEffect | - | YES | 4400 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG_EMP | Effect | YES | YES | 4622 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG_EMP | EffectAir | YES | YES | 4665 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG_EMP | EffectWater | YES | - | 4697 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoatAG_EMP | ShieldHitEffect | - | YES | 4618 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_AA | Effect | YES | YES | 4840 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_AA | EffectAir | YES | YES | 4883 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_AA | EffectWater | YES | - | 4915 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_AA | ShieldHitEffect | - | YES | 4836 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_EMP_AA | Effect | YES | YES | 5052 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_EMP_AA | EffectAir | YES | YES | 5095 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_EMP_AA | EffectWater | YES | - | 5127 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasarBoat_EMP_AA | ShieldHitEffect | - | YES | 5049 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_AA | Effect | YES | YES | 3424 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_AA | EffectAir | YES | YES | 3467 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_AA | EffectWater | YES | - | 3499 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_AA | ShieldHitEffect | - | YES | 3420 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_EMP_AA | Effect | YES | YES | 3636 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_EMP_AA | EffectAir | YES | YES | 3679 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_EMP_AA | EffectWater | YES | - | 3711 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianQuasar_EMP_AA | ShieldHitEffect | - | YES | 3633 | exempt |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSniperAP | Effect | YES | YES | 8956 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSubmarineBomb | Effect | - | YES | 8237 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianTurretPlasma | Effect | - | YES | 6962 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect | YES | YES | 9949 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect1 | YES | YES | 9955 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect2 | YES | YES | 9961 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | EffectAir | YES | YES | 9975 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | EffectWater | YES | YES | 9969 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | ShieldHitEffect | - | YES | 10016 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurret | Effect | YES | YES | 8651 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurretEScatter | Effect | YES | YES | 8755 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelAirTurret_elite | Effect | YES | YES | 8721 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelCruiserArtillery | Effect | YES | YES | 10316 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelDaggerCannon | Effect | YES | YES | 10099 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFighterRailgun | Effect | YES | YES | 8231 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFighterRailgun | EffectAir | YES | YES | 8235 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelFortressWeapons | Effect | YES | YES | 8777 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun | Effect | YES | YES | 6328 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP | Effect | YES | YES | 7298 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP | EffectWater | YES | YES | 7318 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP | ShieldHitEffect | - | YES | 7290 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP_elite | Effect | YES | YES | 7614 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP_elite | EffectAir | YES | YES | 7639 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP_elite | EffectWater | YES | YES | 7646 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_EMP_elite | ShieldHitEffect | - | YES | 7601 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_elite | Effect | YES | YES | 6571 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_elite | EffectAir | YES | YES | 6576 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_elite | EffectWater | YES | YES | 6591 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInfRailgun_elite | ShieldHitEffect | - | YES | 6588 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInspectorIonCannon | Effect | YES | YES | 9097 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInspectorIonCannon | ShieldHitEffect | - | YES | 9171 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelInspectorIonCannonDamage | Effect | YES | YES | 9263 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelKatyCannons | Effect | YES | YES | 9328 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelKatyCannons_EMP | Effect | YES | YES | 9518 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun | Effect | - | YES | 2325 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP | Effect | - | YES | 2823 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP | EffectAir | YES | YES | 2842 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP | EffectWater | YES | YES | 2836 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP | ShieldHitEffect | - | YES | 2815 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP_elite | Effect | YES | YES | 3015 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP_elite | EffectAir | YES | YES | 3044 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP_elite | EffectWater | YES | YES | 3038 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_EMP_elite | ShieldHitEffect | - | YES | 3002 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_elite | Effect | YES | YES | 2597 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_elite | EffectAir | YES | YES | 2611 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_elite | EffectWater | YES | YES | 2605 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMakoGun_elite | ShieldHitEffect | - | YES | 2623 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelManta_AA | EffectAir | YES | - | 3261 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMegaSword | Effect | YES | YES | 8421 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelMegaSword_EMP | Effect | YES | YES | 8528 |  |
 | ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannon | Effect | YES | YES | 1646 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannonScatter_elite | Effect | YES | YES | 2036 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannon_elite | Effect | YES | YES | 1903 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumTurretRail | Effect | YES | YES | 6448 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgunAA | EffectAir | YES | YES | 4907 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgun_EMP_AA | EffectAir | YES | YES | 5753 | exempt |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgun | Effect | YES | YES | 7173 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgunEScatter | Effect | YES | YES | 7282 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgun_elite | Effect | YES | YES | 7244 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannonScatter_elite | Effect | YES | YES | 2037 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannonScatter_elite | ShieldHitEffect | - | YES | 2124 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannon_EMP | Effect | YES | YES | 1858 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannon_elite | Effect | YES | YES | 1899 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumCannon_elite | ShieldHitEffect | - | YES | 1988 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelQuantumTurretRail | Effect | YES | YES | 8816 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance | Effect | YES | YES | 5243 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance | EffectAir | YES | YES | 5248 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance | ShieldHitEffect | - | YES | 5209 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1 | Effect | YES | YES | 5445 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1 | EffectAir | YES | YES | 5450 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1 | ShieldHitEffect | - | YES | 5411 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1_elite | Effect | YES | YES | 6058 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1_elite | EffectAir | YES | YES | 6063 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce1_elite | ShieldHitEffect | - | YES | 6024 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2 | Effect | YES | YES | 5650 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2 | EffectAir | YES | YES | 5655 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2 | ShieldHitEffect | - | YES | 5616 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2_elite | Effect | YES | YES | 6263 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2_elite | EffectAir | YES | YES | 6268 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonanceBounce2_elite | ShieldHitEffect | - | YES | 6229 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance_elite | Effect | YES | YES | 5856 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance_elite | EffectAir | YES | YES | 5861 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistolsResonance_elite | ShieldHitEffect | - | YES | 5822 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistols_elite | Effect | YES | YES | 5038 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistols_elite | EffectAir | YES | YES | 5043 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelRunnerPistols_elite | ShieldHitEffect | - | YES | 5004 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgunAA | Effect | YES | YES | 6678 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgunAA | EffectAir | YES | YES | 6615 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgunAA | EffectWater | YES | YES | 6696 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgunAA | ShieldHitEffect | - | YES | 6693 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgun_EMP_AA | Effect | YES | YES | 7986 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgun_EMP_AA | EffectAir | YES | YES | 7869 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgun_EMP_AA | EffectWater | YES | YES | 8016 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelScalpelRailgun_EMP_AA | ShieldHitEffect | - | YES | 7973 | exempt |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgun | Effect | YES | YES | 9610 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgunEScatter | Effect | YES | YES | 9719 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelStalkerRailgun_elite | Effect | YES | YES | 9681 |  |
 | ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | SteelVulcan | Effect | YES | - | 1066 |  |
-| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | bfg10kCannon | Effect | YES | YES | 2206 |  |
+| ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | bfg10kCannon | Effect | YES | YES | 2212 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | AthenaLaser | Effect | YES | YES | 942 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | AthenaLaser | Effect2 | YES | - | 948 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | AthenaLaser | Effect3 | YES | - | 953 | exempt |
@@ -64,13 +166,17 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | AthenaLaser | Effect6 | YES | - | 968 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | AthenaLaser | Effect7 | YES | YES | 973 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CannonAttackRobotGun | Effect | - | YES | 2629 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CannonAttackRobotGun_elite | Effect | YES | YES | 2911 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CannonAttackRobotGun_elite | EffectAir | YES | YES | 2926 | exempt |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CannonAttackRobotGun_elite | EffectWater | YES | YES | 2920 | exempt |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CannonAttackRobotGun_elite | ShieldHitEffect | - | YES | 2938 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | CryoLegionnaireAttack | Effect | YES | YES | 639 |  |
-| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureHarbingerCannon | Effect | YES | YES | 3820 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureHarbingerCannon | Effect | YES | YES | 3931 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureJavelinRockets | Effect | YES | YES | 1960 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureJavelinRockets | EffectAir | YES | YES | 1966 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureJavelinRockets | EffectWater | YES | YES | 1971 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureJavelinRockets | ShieldHitEffect | - | YES | 1983 | exempt |
-| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureTankCannons | Effect | YES | YES | 3505 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | FutureTankCannons | Effect | YES | YES | 3616 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_Cryocopter_Cryo | Effect | YES | YES | 370 |  |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_Cryocopter_Cryo | EffectAir | YES | YES | 375 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_MultiMissile_Javelin | Effect | YES | YES | 1349 |  |
@@ -78,22 +184,112 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_MultiMissile_Javelin | EffectWater | YES | YES | 1360 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_MultiMissile_Javelin | ShieldHitEffect | - | YES | 1372 | exempt |
 | ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | Future_MultiMissile_Sigma | Effect | YES | YES | 1442 |  |
-| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | OrionRailgun | Effect | - | YES | 4116 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | OrionRailgun | Effect | - | YES | 4227 |  |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | OrionRailgun_elite | EffectWater | YES | - | 4465 | exempt |
+| ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml | OrionRailgun_elite | ShieldHitEffect | - | YES | 4462 | exempt |
 | ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml | NaxShoeRocket | Effect | - | YES | 4660 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | BlackHoleSuck | Effect | - | YES | 2382 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatter | Effect | YES | YES | 2069 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand1 | Effect | YES | YES | 2507 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand2 | Effect | YES | YES | 2531 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand3 | Effect | YES | YES | 2549 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionRocket | Effect | YES | YES | 2416 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxDieGlocke | Effect | YES | YES | 2873 |  |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiCowDrop | EffectWater | YES | YES | 2999 | exempt |
-| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Naxis_Komet | Effect | YES | YES | 5832 |  |
-| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2APCRocket | Effect1 | YES | YES | 5507 | exempt |
-| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2APCRocket | Effect2 | YES | YES | 5512 | exempt |
-| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2AkulaRockets | Effect | - | YES | 5828 |  |
-| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2MortarBike | Effect | - | YES | 2973 |  |
-| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2TOPOLCuba | Effect | YES | YES | 4616 |  |
+| ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml | NaxiAlienPistol_elite | Effect | YES | YES | 5025 |  |
+| ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml | NaxiAlienPistol_elite | EffectAir | YES | YES | 5036 | exempt |
+| ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml | NaxiAlienPistol_elite | EffectWater | YES | YES | 5030 | exempt |
+| ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml | NaxiAlienPistol_elite | ShieldHitEffect | - | YES | 5048 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | BlackHoleSuck | Effect | - | YES | 2781 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatter | Effect | YES | YES | 2478 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatter | EffectWater | YES | YES | 2578 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatter | ShieldHitEffect | - | YES | 2575 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatterE | Effect | YES | YES | 2682 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatterE | EffectWater | YES | YES | 2698 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannonScatterE | ShieldHitEffect | - | YES | 2695 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannon_elite | Effect | YES | YES | 2423 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannon_elite | EffectWater | YES | YES | 2438 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | DalekCannon_elite | ShieldHitEffect | - | YES | 2435 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser | Effect | YES | YES | 6142 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser | EffectAir | YES | YES | 6147 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser | EffectWater | YES | - | 6169 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser | ShieldHitEffect | - | YES | 6157 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser_AA | Effect | YES | YES | 6408 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser_AA | EffectAir | YES | YES | 6413 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser_AA | EffectWater | YES | - | 6435 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedBeetleLaser_AA | ShieldHitEffect | - | YES | 6423 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedLaserT | Effect | YES | YES | 5348 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedLaserT | EffectAir | YES | YES | 5353 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedLaserT | EffectWater | YES | - | 5375 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedLaserT | ShieldHitEffect | - | YES | 5363 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser | Effect | YES | YES | 8228 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser | EffectAir | YES | YES | 8233 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser | EffectWater | YES | - | 8255 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser | ShieldHitEffect | - | YES | 8243 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser_AA | Effect | YES | YES | 8494 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser_AA | EffectAir | YES | YES | 8499 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser_AA | EffectWater | YES | - | 8521 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedTank2Laser_AA | ShieldHitEffect | - | YES | 8509 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser | Effect | YES | YES | 8982 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser | EffectAir | YES | YES | 8993 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser | EffectWater | YES | YES | 8987 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser | ShieldHitEffect | - | YES | 9005 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser_elite | Effect | YES | YES | 9124 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser_elite | EffectAir | YES | YES | 9135 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser_elite | EffectWater | YES | YES | 9129 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_AmplifiedUbermenschLaser_elite | ShieldHitEffect | - | YES | 9147 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_Green105mm_elite | Effect | YES | YES | 3732 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_Green105mm_elite | EffectAir | YES | YES | 3743 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_Green105mm_elite | EffectWater | YES | YES | 3737 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_Green105mm_elite | ShieldHitEffect | - | YES | 3755 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser | Effect | YES | YES | 5611 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser | EffectAir | YES | YES | 5616 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser | EffectWater | YES | - | 5638 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser | ShieldHitEffect | - | YES | 5626 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser_AA | Effect | YES | YES | 5877 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser_AA | EffectAir | YES | YES | 5882 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser_AA | EffectWater | YES | - | 5904 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowBeetleLaser_AA | ShieldHitEffect | - | YES | 5892 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowLaserT | Effect | YES | YES | 5100 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowLaserT | EffectAir | YES | YES | 5105 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowLaserT | EffectWater | YES | - | 5127 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowLaserT | ShieldHitEffect | - | YES | 5115 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser | Effect | YES | YES | 7697 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser | EffectAir | YES | YES | 7702 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser | EffectWater | YES | - | 7724 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser | ShieldHitEffect | - | YES | 7712 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser_AA | Effect | YES | YES | 7963 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser_AA | EffectAir | YES | YES | 7968 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser_AA | EffectWater | YES | - | 7990 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowTank2Laser_AA | ShieldHitEffect | - | YES | 7978 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser | Effect | YES | YES | 8706 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser | EffectAir | YES | YES | 8717 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser | EffectWater | YES | YES | 8711 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser | ShieldHitEffect | - | YES | 8729 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser_elite | Effect | YES | YES | 8844 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser_elite | EffectAir | YES | YES | 8855 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser_elite | EffectWater | YES | YES | 8849 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Lunar_YellowUbermenschLaser_elite | ShieldHitEffect | - | YES | 8867 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand1 | Effect | YES | YES | 2906 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand2 | Effect | YES | YES | 2930 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionExpand3 | Effect | YES | YES | 2948 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxCorrosionRocket | Effect | YES | YES | 2815 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxDieGlocke | Effect | YES | YES | 3272 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiBeetleLaser_AA_elite | Effect | YES | YES | 501 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiBeetleLaser_AA_elite | EffectAir | YES | YES | 506 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiBeetleLaser_AA_elite | EffectWater | YES | - | 528 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiBeetleLaser_AA_elite | ShieldHitEffect | - | YES | 516 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiCowDrop | EffectWater | YES | YES | 3586 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiTank2Laser_AA | Effect | YES | YES | 955 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiTank2Laser_AA | EffectAir | YES | YES | 960 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiTank2Laser_AA | EffectWater | YES | - | 982 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | NaxiTank2Laser_AA | ShieldHitEffect | - | YES | 970 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | Naxis_Komet | Effect | YES | YES | 9185 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser | Effect | YES | YES | 3402 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser | EffectAir | YES | YES | 3413 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser | EffectWater | YES | YES | 3407 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser | ShieldHitEffect | - | YES | 3425 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser_elite | Effect | YES | YES | 3537 |  |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser_elite | EffectAir | YES | YES | 3548 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser_elite | EffectWater | YES | YES | 3542 | exempt |
+| ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml | UbermenschLaser_elite | ShieldHitEffect | - | YES | 3560 | exempt |
+| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2APCRocket | Effect1 | YES | YES | 5616 | exempt |
+| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2APCRocket | Effect2 | YES | YES | 5621 | exempt |
+| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2AkulaRockets | Effect | - | YES | 5937 |  |
+| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2MortarBike | Effect | - | YES | 3082 |  |
+| ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml | RA2TOPOLCuba | Effect | YES | YES | 4725 |  |
 | ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml | TKMDroneExplosion | Effect | YES | YES | 3557 |  |
 | ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml | VonSniper | Effect | YES | YES | 2580 |  |
 | ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml | VonSniperAP | Effect | YES | YES | 2757 |  |
@@ -143,6 +339,22 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2LasherToxicMortar | Effect | YES | YES | 443 |  |
 | ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2LasherToxicMortar_elite | Effect | YES | YES | 829 |  |
 | ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun | Effect | YES | YES | 2727 |  |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun2 | Effect | YES | YES | 2831 |  |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun2 | Effect1 | YES | - | 2891 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun2 | Effect2 | YES | - | 2894 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun2 | EffectWater | YES | - | 2838 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | Effect | YES | YES | 2985 |  |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | Effect1 | YES | - | 3055 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | Effect2 | YES | - | 3058 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | EffectAir | YES | - | 2992 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | EffectWater | YES | - | 3000 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun3 | ShieldHitEffect | - | YES | 2998 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | Effect | YES | YES | 3228 |  |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | Effect1 | YES | - | 3305 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | Effect2 | YES | - | 3308 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | EffectAir | YES | YES | 3235 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | EffectWater | YES | - | 3250 | exempt |
+| ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml | RA2Virusgun_elite | ShieldHitEffect | - | YES | 3247 | exempt |
 | ContentPacks\RedAlert\Allies\yaml\weapons.yaml | 155mmCryo | Effect | YES | - | 2028 |  |
 | ContentPacks\RedAlert\Allies\yaml\weapons.yaml | 25mm | Effect | YES | YES | 2071 |  |
 | ContentPacks\RedAlert\Allies\yaml\weapons.yaml | 25mm | EffectAir | YES | YES | 2078 | exempt |
@@ -236,6 +448,10 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | MammothTuskThermobaric | Effect | YES | YES | 6572 |  |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | MammothTuskThermobaric | EffectAir | YES | YES | 6578 | exempt |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ParaBombNuke | Effect | - | YES | 9841 |  |
+| ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_dragunovantimaterialsniper_dragunovsniper | Effect | YES | - | 11178 |  |
+| ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_dragunovantimaterialsniper_dragunovsniper | EffectAir | YES | YES | 11212 | exempt |
+| ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_dragunovantimaterialsniper_dragunovsniper | EffectWater | YES | YES | 11207 | exempt |
+| ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_dragunovantimaterialsniper_dragunovsniper | ShieldHitEffect | - | YES | 11188 | exempt |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_flamethrower_fireballgun | Effect | YES | - | 698 |  |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_flametower_flamethrower | Effect | YES | - | 662 |  |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_hammertank_cannon | Effect | YES | YES | 5856 |  |
@@ -307,44 +523,44 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ValkyrieRockets | EffectWater | YES | - | 2096 | exempt |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | VultureGrenade | Effect | - | YES | 1156 |  |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | WraithRockets_AA | EffectWater | YES | - | 1996 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect | YES | YES | 1074 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect2 | YES | YES | 1078 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | EffectAir | YES | YES | 1081 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect | YES | YES | 1078 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect2 | YES | YES | 1082 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | EffectAir | YES | YES | 1085 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | CorruptorSpore | Effect | YES | YES | 265 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DefilerPlague | Effect | YES | YES | 1278 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DefilerPlague | Effect | YES | YES | 1282 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DreadshroudSpore | Effect | YES | YES | 348 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DreadshroudSpore | EffectAir | YES | YES | 352 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DroneAttack | Effect | - | YES | 1222 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DroneAttack | Effect | - | YES | 1226 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GorekrakenClaw | Effect | - | YES | 37 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GoremawClaw | Effect | - | YES | 905 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GuardianShoot | Effect | YES | YES | 512 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitExplode | Effect | YES | - | 579 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | Effect | YES | YES | 639 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | EffectAir | YES | YES | 644 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GoremawClaw | Effect | - | YES | 909 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GuardianShoot | Effect | YES | YES | 516 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitExplode | Effect | YES | - | 583 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | Effect | YES | YES | 643 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | EffectAir | YES | YES | 648 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HydraSpit | Effect | YES | - | 73 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HydraSpit | EffectAir | YES | - | 75 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | InfestedExplosion | Effect | YES | YES | 974 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpines | Effect | YES | YES | 930 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpinesImpact | Effect | YES | YES | 949 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | InfestedExplosion | Effect | YES | YES | 978 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpines | Effect | YES | YES | 934 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpinesImpact | Effect | YES | YES | 953 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | MutaliskSpore | Effect | YES | YES | 151 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | Effect | YES | YES | 865 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | EffectAir | YES | YES | 870 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect | YES | YES | 397 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect2 | YES | YES | 408 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCScourgeExplosion | Effect | YES | YES | 466 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ScourgeExplosion | Effect | YES | YES | 454 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | Effect | YES | YES | 869 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | EffectAir | YES | YES | 874 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect | YES | YES | 396 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect2 | YES | YES | 412 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCScourgeExplosion | Effect | YES | YES | 470 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ScourgeExplosion | Effect | YES | YES | 458 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ShriekStinger | Effect | - | YES | 52 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SpithidSpit | Effect | YES | - | 105 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SpithidSpit | EffectAir | YES | - | 107 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Spore_AA | Effect | YES | YES | 1168 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | Effect | YES | YES | 556 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | EffectWater | YES | YES | 561 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | ShieldHitEffect | - | YES | 572 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | Effect | YES | YES | 813 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | EffectAir | YES | YES | 817 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Spore_AA | Effect | YES | YES | 1172 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | Effect | YES | YES | 560 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | EffectWater | YES | YES | 565 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | ShieldHitEffect | - | YES | 576 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | Effect | YES | YES | 817 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | EffectAir | YES | YES | 821 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | TalonClaw | Effect | - | YES | 23 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1202 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 893 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1206 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 897 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ZerglingClaw | Effect | - | YES | 11 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | MortarTeamArtilleryShell | Effect | YES | YES | 363 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | wc2_dwarf_Rifle | Effect | YES | YES | 55 |  |
@@ -387,30 +603,41 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogremageEyeOfKilrogg | 2Eff | YES | - | 65 | exempt |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogrepunch | Effect | - | YES | 44 |  |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2runesSuper | 2Eff | YES | YES | 143 | exempt |
-| weapons\redalert2mod.yaml | 12MissilesSpawnerScud | Effect | YES | YES | 3128 |  |
+| weapons\redalert2mod.yaml | 12MissilesSpawnerScud | Effect | YES | YES | 3501 |  |
 | weapons\redalert2mod.yaml | AsianChaosSuperweapon | 1 | YES | - | 203 | exempt |
 | weapons\redalert2mod.yaml | AsianOilBombFragments | Effect | - | YES | 170 |  |
-| weapons\redalert2mod.yaml | NaxTorpTube | EffectWater | - | YES | 1698 | exempt |
-| weapons\redalert2mod.yaml | NaxZombieSpawner | Effect | YES | YES | 1599 |  |
-| weapons\redalert2mod.yaml | NaxZombieSpawner | Effect2 | - | YES | 1604 | exempt |
-| weapons\redalert2mod.yaml | NaxZombieSupportWeaponFranks | Effect | - | YES | 1666 |  |
-| weapons\redalert2mod.yaml | NaxZombieSupportWeaponTanks | Effect | - | YES | 1683 |  |
-| weapons\redalert2mod.yaml | NaxZombieSupportWeaponZombies | Effect | - | YES | 1649 |  |
-| weapons\redalert2mod.yaml | NaxiV1Rocket | Effect | YES | YES | 1905 |  |
-| weapons\redalert2mod.yaml | NaxisBlackBombSmaller | Effect | YES | YES | 2267 |  |
-| weapons\redalert2mod.yaml | RA2RobotmmScatter_elite | Effect | YES | YES | 3431 |  |
-| weapons\redalert2mod.yaml | RA2Robotmm_elite | Effect | YES | YES | 3312 |  |
-| weapons\redalert2mod.yaml | RA2TraitorPower | Effect | YES | YES | 3204 |  |
+| weapons\redalert2mod.yaml | NaxTorpTube | EffectWater | - | YES | 1835 | exempt |
+| weapons\redalert2mod.yaml | NaxZombieSpawner | Effect | YES | YES | 1736 |  |
+| weapons\redalert2mod.yaml | NaxZombieSpawner | Effect2 | - | YES | 1741 | exempt |
+| weapons\redalert2mod.yaml | NaxZombieSupportWeaponFranks | Effect | - | YES | 1803 |  |
+| weapons\redalert2mod.yaml | NaxZombieSupportWeaponTanks | Effect | - | YES | 1820 |  |
+| weapons\redalert2mod.yaml | NaxZombieSupportWeaponZombies | Effect | - | YES | 1786 |  |
+| weapons\redalert2mod.yaml | NaxiAlienPistol | Effect | YES | YES | 2033 |  |
+| weapons\redalert2mod.yaml | NaxiAlienPistol | EffectAir | YES | YES | 2044 | exempt |
+| weapons\redalert2mod.yaml | NaxiAlienPistol | EffectWater | YES | YES | 2038 | exempt |
+| weapons\redalert2mod.yaml | NaxiAlienPistol | ShieldHitEffect | - | YES | 2056 | exempt |
+| weapons\redalert2mod.yaml | NaxiV1Rocket | Effect | YES | YES | 2094 |  |
+| weapons\redalert2mod.yaml | NaxiV1Rocket | Effect2 | - | YES | 2257 | exempt |
+| weapons\redalert2mod.yaml | NaxiV1Rocket | ShieldHitEffect | - | YES | 2169 | exempt |
+| weapons\redalert2mod.yaml | NaxisBlackBombSmaller | Effect | YES | YES | 2640 |  |
+| weapons\redalert2mod.yaml | RA2RobotmmScatter_elite | Effect | YES | YES | 3814 |  |
+| weapons\redalert2mod.yaml | RA2RobotmmScatter_elite | EffectWater | YES | YES | 3914 | exempt |
+| weapons\redalert2mod.yaml | RA2RobotmmScatter_elite | ShieldHitEffect | - | YES | 3911 | exempt |
+| weapons\redalert2mod.yaml | RA2Robotmm_elite | Effect | YES | YES | 3692 |  |
+| weapons\redalert2mod.yaml | RA2Robotmm_elite | EffectWater | YES | YES | 3789 | exempt |
+| weapons\redalert2mod.yaml | RA2Robotmm_elite | ShieldHitEffect | - | YES | 3786 | exempt |
+| weapons\redalert2mod.yaml | RA2TraitorPower | Effect | YES | YES | 3577 |  |
 | weapons\redalert2mod.yaml | SteelIonCannon | Effect | YES | YES | 451 |  |
-| weapons\redalert2mod.yaml | SteelTwisterMissiles | Effect | YES | YES | 574 |  |
-| weapons\redalert2mod.yaml | SteelTwisterMissiles | EffectAir | YES | YES | 578 | exempt |
-| weapons\redalert2mod.yaml | Support_EMP_Bomb | Effect | YES | YES | 786 |  |
-| weapons\starcraft.yaml | HeliExplodeProtoss | Effect | YES | YES | 186 |  |
-| weapons\starcraft.yaml | SCBROODLING | Effect | - | YES | 38 |  |
-| weapons\starcraft.yaml | SCSPIDEREXPLOSION | Effect | YES | YES | 105 |  |
-| weapons\starcraft.yaml | SCScourgeDroneExplosion | Effect | YES | YES | 59 |  |
-| weapons\starcraft.yaml | Scarab | 3Eff | YES | YES | 163 | exempt |
-| weapons\starcraft.yaml | ScourgeDroneExplosion | Effect | YES | YES | 47 |  |
+| weapons\redalert2mod.yaml | SteelIonCannonDamage | Effect | - | YES | 619 |  |
+| weapons\redalert2mod.yaml | SteelIonCannonDamage | ShieldHitEffect | - | YES | 586 | exempt |
+| weapons\redalert2mod.yaml | SteelTwisterMissiles | Effect | YES | YES | 711 |  |
+| weapons\redalert2mod.yaml | SteelTwisterMissiles | EffectAir | YES | YES | 715 | exempt |
+| weapons\redalert2mod.yaml | Support_EMP_Bomb | Effect | YES | YES | 923 |  |
+| weapons\starcraft.yaml | HeliExplodeProtoss | Effect | YES | YES | 591 |  |
+| weapons\starcraft.yaml | SCBROODLING | Effect | - | YES | 255 |  |
+| weapons\starcraft.yaml | SCSPIDEREXPLOSION | Effect | YES | YES | 412 |  |
+| weapons\starcraft.yaml | SCScourgeDroneExplosion | Effect | YES | YES | 365 |  |
+| weapons\starcraft.yaml | Scarab | 3Eff | YES | YES | 568 | exempt |
 | weapons\warcraft2.yaml | SiegeEngineCannon | Effect | YES | YES | 309 |  |
 | weapons\warcraft2.yaml | wc2_tower_arrow | Effect | - | YES | 672 |  |
 | weapons\warcraft2.yaml | wc2_tower_axe | Effect | YES | YES | 819 |  |
@@ -535,4 +762,4 @@ Exempt secondary-channel declarations (not ratcheted): 223
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 14809 | exempt |
 | weapons\weapons.yaml | wc_tower_fire | 2Eff | - | YES | 14901 | exempt |
 
-PASS: L1 245 <= 245, L2 252 <= 252
+FAIL: L1 299 > ratchet 245

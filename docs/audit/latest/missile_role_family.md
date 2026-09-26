@@ -4,11 +4,11 @@
 |---|---|---|---|---|
 | R1 | ground-only weapon not flying MissileHE | 11 | 51 | PASS |
 | R2 | air-only weapon not flying MissileAA | 6 | 33 | PASS |
-| R3 | dual-role weapon not flying MissileAP | 6 | 47 | PASS |
-| R4 | MissileHE reachable against Air (hard rule) | 7 | 50 | PASS |
+| R3 | dual-role weapon not flying MissileAP | 7 | 47 | PASS |
+| R4 | MissileHE reachable against Air (hard rule) | 8 | 50 | PASS |
 
 
-362 concrete weapon(s) fly a Missile* main; 267 already match their role.
+365 concrete weapon(s) fly a Missile* main; 267 already match their role.
 
 
 ## custom selectors - domain verdict withheld
@@ -33,6 +33,8 @@
 | RA2TorpTube_elite | Water, Underwater, Bridge |  |
 | RA2Virusgun3 | Ground, Ship, Garrisoned |  |
 | RA2Virusgun_elite | Ground, Ship, Garrisoned |  |
+| TSTorpTube | Water, Underwater, Bridge |  |
+| TSTorpTube_elite | Water, Underwater, Bridge |  |
 | YRBoomerTorpedo | Water, Underwater, Bridge |  |
 | ra1_soviets_mammothtank_mammothtusk | Ground, Water, Infantry, Monster, Air |  |
 | ra1_soviets_mammothtank_mammothtusktesla | Ground, Water, Infantry, Monster, Air | wall |
@@ -70,6 +72,6 @@ Groups only enumerated one-parent wrappers whose current ordered payload equals 
 |---|---|---|
 | R1 | 11 | 11 |
 | R2 | 6 | 6 |
-| R3 | 6 | 6 |
-| R4 | 7 | 7 |
+| R3 | 7 | 7 |
+| R4 | 8 | 8 |
 

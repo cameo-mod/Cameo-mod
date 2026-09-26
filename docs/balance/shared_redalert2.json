@@ -843,7 +843,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -996,7 +998,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1121,7 +1125,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1246,7 +1252,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1273,7 +1281,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "RA2GattlingMG1"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1300,7 +1310,9 @@
       "requires": "rank-elite",
       "slot": "Armament@eliteAA",
       "versus_templates": [
-       "RA2GattlingMG2"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -5745,7 +5757,9 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "DepthCharge",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light",
        "^Effect_Depth_Charge_RA2"
       ],
       "warheads": [
@@ -6056,7 +6070,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2155mm"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -6259,9 +6275,7 @@
       "range": "25000",
       "reloaddelay": "75",
       "slot": "Armament@AG",
-      "versus_templates": [
-       "V3Launch"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "DreadnoughtLaunch",
       "weapon_class_source": "none"
@@ -6385,7 +6399,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "ra2_soviets_conscript_carbine"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6767,7 +6783,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7133,7 +7151,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "RA2PortaTesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -7166,7 +7186,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -7257,7 +7279,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "RA2PortaTesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -7291,7 +7315,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@GARRISONED3",
       "versus_templates": [
-       "RA2PortaTesla2"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -7440,7 +7466,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7467,7 +7495,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7681,7 +7711,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2TorpTube"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -7891,7 +7923,9 @@
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium",
-       "MigMissiles"
+       "^Projectile_Missile_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium"

@@ -282,7 +282,17 @@ tkmtwinrockets:
 		VerticalRateOfTurn: 20
 
 tkmtwinrocketstechnicaltank:
-	Inherits: tkmtwinrockets
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
+	ReloadDelay: 64
+	Range: 7214
+	Burst: 2
+	Report: bazook1.aud
+	Warhead@MissileAP_Light:
+		Damage: 18000
+	Projectile: Missile
+		VerticalRateOfTurn: 20
 	Range: 5243
 	Projectile: Missile
 		VerticalRateOfTurn: 20
@@ -303,9 +313,6 @@ tkmfirerockets:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
@@ -391,7 +398,6 @@ tkmakap:
 			Spaceship: 2
 			Shield: 17
 		PercentageScale: 3333
-		Burst: 3
 		Damage: 8000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
@@ -430,7 +436,6 @@ tkmawp:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
 		Spread: 1
@@ -1693,7 +1698,31 @@ tkmkatyushalalauncherrockets:
 	Warhead@Effect:
 		ImpactActors: false
 tkmkatyushalalauncherrocketscryo:
-	Inherits@2: tkmkatyushalalauncherrockets
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 157
+	Burst: 8
+	BurstDelays: 4
+	Range: 12437
+	Report: vintatta.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Speed: 250
+		Arm: 2
+		Inaccuracy: 1500
+		RangeLimit: 15000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 125
+		MinimumLaunchSpeed: 125
+		Acceleration: 5
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 20000
+	Warhead@Effect:
+		ImpactActors: false
 	Report: vintatta.wav
 	Range: 14000
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
@@ -1742,7 +1771,31 @@ tkmkatyushalalauncherrocketsfire:
 		InvalidTargets: Air
 	-Warhead@Concussion_Medium:
 tkmkatyushalalauncherrocketstwin:
-	Inherits: tkmkatyushalalauncherrockets
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 157
+	Burst: 8
+	BurstDelays: 4
+	Range: 12437
+	Report: vintatta.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Speed: 250
+		Arm: 2
+		Inaccuracy: 1500
+		RangeLimit: 15000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 125
+		MinimumLaunchSpeed: 125
+		Acceleration: 5
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 20000
+	Warhead@Effect:
+		ImpactActors: false
 	Burst: 16
 	Warhead@Effect:
 		ImpactActors: false
@@ -2911,7 +2964,6 @@ VanSniper:
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
 		Spread: 1
-		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 40
 		Spread: 1
@@ -3547,7 +3599,12 @@ TKMDroneExplode:
 		ValidTargets: Ground, Water
 		Damage: 40000
 TKMDroneExplosion:
-	Inherits: TKMDroneExplode
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	ValidTargets: Ground, Water
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 40000
 	Range: 2000
 	Projectile: Missile
 		Speed: 200

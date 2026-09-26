@@ -648,9 +648,7 @@
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
-      "versus_templates": [
-       "SpyPlaneTargeting"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SpyPlaneTargeting2",
       "weapon_class_source": "none"
@@ -1366,7 +1364,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -1393,7 +1393,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -2475,7 +2477,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2529,7 +2533,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2898,7 +2904,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1",
       "versus_templates": [
-       "DepthCharge"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2924,7 +2932,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC2",
       "versus_templates": [
-       "DepthCharge"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2950,7 +2960,9 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1Cryo",
       "versus_templates": [
-       "DepthChargeCryo"
+       "^Warhead_BlastCryo_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
        "^Warhead_BlastCryo_Light"
@@ -2976,7 +2988,9 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC2Cryo",
       "versus_templates": [
-       "DepthChargeCryo"
+       "^Warhead_BlastCryo_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
        "^Warhead_BlastCryo_Light"
@@ -3098,7 +3112,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "DepthCharge"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -3153,7 +3169,9 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARYCryo",
       "versus_templates": [
-       "DepthChargeCryo"
+       "^Warhead_BlastCryo_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
        "^Warhead_BlastCryo_Light"
@@ -3681,7 +3699,9 @@
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "ra1_allies_alliedapc_gun"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"

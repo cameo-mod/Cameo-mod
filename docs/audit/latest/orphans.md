@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **3261** — orphans: **393**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
+Live weapons: **3351** — orphans: **397**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -22,6 +22,7 @@ _none found_
 | 227mm | mods/cameo/weapons/tiberiandawn.yaml |
 | 25mm | mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml |
 | 25mmWaveforce | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| APCGun | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
 | AngryMobTargeting | mods/cameo/weapons/weapons.yaml |
 | Arrakis_Tanya_Guns | mods/cameo/weapons/d2k.yaml |
 | AsianChaosSuperweapon | mods/cameo/weapons/redalert2mod.yaml |
@@ -255,6 +256,8 @@ _none found_
 | Rocketeer_t | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | RocketsG | mods/cameo/weapons/weapons.yaml |
 | RocketsRA | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| SCMiniNuke | mods/cameo/ContentPacks/StarCraft/Shared/yaml/weapons.yaml |
+| SCReactorNuke | mods/cameo/ContentPacks/StarCraft/Shared/yaml/weapons.yaml |
 | SCUD | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | SCUDIrak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | SWGreenLaser | mods/cameo/weapons/weapons.yaml |
@@ -279,6 +282,7 @@ _none found_
 | TS152mm | mods/cameo/weapons/tiberiansun.yaml |
 | TS155mm_bluenuke | mods/cameo/weapons/tiberiansun.yaml |
 | TSBazookaG | mods/cameo/weapons/tiberiansun.yaml |
+| TSCorpseSpawner | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml |
 | TSDragon | mods/cameo/weapons/tiberiansun.yaml |
 | TSDroppodSpawner | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
 | TSGrenadeAA | mods/cameo/weapons/tiberiansun.yaml |
@@ -291,7 +295,6 @@ _none found_
 | TSRedEye2 | mods/cameo/weapons/tiberiansun.yaml |
 | TSSlimeAttack | mods/cameo/weapons/tiberiansun.yaml |
 | TSSniper_elite | mods/cameo/weapons/tiberiansun.yaml |
-| TSSonicWeaponEffect | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
 | TSTentacle | mods/cameo/weapons/tiberiansun.yaml |
 | TSTurretLaserFire | mods/cameo/weapons/weapons.yaml |
 | TSVeinholeSmoke | mods/cameo/weapons/tiberiansun.yaml |
@@ -396,6 +399,7 @@ _none found_
 | ragal120mm | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | supernova_missile_super | mods/cameo/weapons/outpost2.yaml |
 | td_gdi_guardtower_highv_base | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
+| td_ivanattach | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/weapons.yaml |
 | tkmabramscannon | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | tkmakap | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | tkmheavyaaturret | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |

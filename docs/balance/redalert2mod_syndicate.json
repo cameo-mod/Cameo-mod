@@ -1959,21 +1959,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2FreedomAK47",
        "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
@@ -2141,21 +2138,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2FreedomAK47",
        "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2784,7 +2778,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "latinsyndicate_latinmilitia_ak47"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -2900,7 +2896,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "latinsyndicate_latinmilitia_ak47"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3094,7 +3092,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GrenadeELITE",
       "versus_templates": [
-       "NarcoGrenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -3164,7 +3164,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PistolELITE",
       "versus_templates": [
-       "RA2NarcoPistol"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3222,7 +3224,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GrenadeGARRISONEDELITE",
       "versus_templates": [
-       "NarcoGrenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -3294,7 +3298,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PistolGARRISONEDELITE",
       "versus_templates": [
-       "RA2NarcoPistol"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3451,7 +3457,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYE",
       "versus_templates": [
-       "LatinTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -3478,7 +3486,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDE",
       "versus_templates": [
-       "LatinTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5291,7 +5301,9 @@
       "requires": "rank-elite",
       "slot": "Armament@AGE",
       "versus_templates": [
-       "RA2Narco60mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6228,7 +6240,9 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && rank-elite",
       "slot": "Armament@MachinegunELITE",
       "versus_templates": [
-       "RA2APCMachineGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -6256,7 +6270,9 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite",
       "slot": "Armament@MachinegunAA",
       "versus_templates": [
-       "RA2APCMachineGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -6386,7 +6402,9 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "RA2APCRocket"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7763,7 +7781,9 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@AAE",
       "versus_templates": [
-       "LatinRusherRocket"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -8064,7 +8084,9 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@AAE",
       "versus_templates": [
-       "LatinSmokerRocket"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

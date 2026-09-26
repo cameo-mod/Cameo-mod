@@ -1496,8 +1496,6 @@ TSLaserFence:
 		Range: 5000
 	Warhead@Effect: FlashTargetsInRadius  # W7MAT order-pin
 		Radius: 5000
-		Explosions: green_small_fire
-		ImpactActors: true
 		ValidTargets: Heal
 		ValidRelationships: Ally
 	Warhead@Defuse1: DetachDelayedWeapon  # W7MAT order-pin
@@ -1524,9 +1522,6 @@ TSLaserFence:
 	ValidRelationships: Ally  # W7MAT order-pin
 TSHeal:
 	Inherits: ^TSHealWeapon
-	Warhead@Effect:
-		-Explosions:
-		-ImpactActors:
 
 ^ts_tiberiansun_ts_nod_mobilerepairvehicle:
 	Warhead@EffectWeld: CreateEffect

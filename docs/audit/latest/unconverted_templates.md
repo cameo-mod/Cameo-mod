@@ -78,4 +78,4 @@ Ranked by direct inheritors, which is the blast radius of converting each one.
 |---|--:|---|
 | `^RepairWeapon` | 8 | support — repairs, same |
 | `^SniperWeapon` | 5 | special — infantry-only, huge damage per shot, and its OpenToppedDamage warhead is how a sniper hits passengers |
-| `^HealingWeapon` | 4 | support — heals, has no armor profile to speak of |
+| `^HealingWeapon` | 5 | support — heals, has no armor profile to speak of |

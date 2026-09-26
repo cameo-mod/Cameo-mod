@@ -1202,7 +1202,22 @@ Future_CoilerFriend:
 		ValidRelationships: Ally
 
 Future_CoilerFriendMain:
-	Inherits: Future_CoilerFriend
+	Range: 1250
+	ReloadDelay: 125
+	ValidTargets: RobotEnergizable
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: RobotEnergizable
+		Duration: 250
+		ValidTargets: RobotEnergizable
+		ValidRelationships: Ally
 	Range: 7500
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriendFrag1
@@ -1212,14 +1227,44 @@ Future_CoilerFriendMain:
 		AimTargetStances: Ally
 
 Future_CoilerFriendFrag1:
-	Inherits: Future_CoilerFriend
+	Range: 1250
+	ReloadDelay: 125
+	ValidTargets: RobotEnergizable
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: RobotEnergizable
+		Duration: 250
+		ValidTargets: RobotEnergizable
+		ValidRelationships: Ally
 	Range: 5000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriendFrag2
 		Amount: 2
 
 Future_CoilerFriendFrag2:
-	Inherits: Future_CoilerFriend
+	Range: 1250
+	ReloadDelay: 125
+	ValidTargets: RobotEnergizable
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: RobotEnergizable
+		Duration: 250
+		ValidTargets: RobotEnergizable
+		ValidRelationships: Ally
 	Range: 2500
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriend
@@ -1352,11 +1397,6 @@ Future_MultiMissile_Javelin:
 		ExplosionPalette: effect75alpha
 		ValidTargets: Ground, Air
 		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ValidTargets: Air
-		ImpactActors: false
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1369,9 +1409,6 @@ Future_MultiMissile_Javelin:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 Future_MultiMissile_Frag:
 	Inherits@wh: ^Warhead_Concussion_Heavy
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -1980,11 +2017,70 @@ FutureJavelinRockets:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 FutureJavelinRockets_elite:
-	Inherits: FutureJavelinRockets
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
+	ReloadDelay: 25
+	Range: 6000
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 16
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 0
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		CloseEnough: 400
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+		LaunchAngle: 125
+		Palette: d2keffect
+	Warhead@MissileAP_Medium:
+		Damage: 10000
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: xplobig4.aud
+		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
 	Range: 7000
 	Burst: 2
 	BurstDelays: 3
@@ -1992,13 +2088,140 @@ FutureJavelinRockets_elite:
 		VerticalRateOfTurn: 16
 
 FutureJavelinRocketsDeployed:
-	Inherits: FutureJavelinRockets
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
+	ReloadDelay: 25
+	Range: 6000
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 16
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 0
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		CloseEnough: 400
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+		LaunchAngle: 125
+		Palette: d2keffect
+	Warhead@MissileAP_Medium:
+		Damage: 10000
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: xplobig4.aud
+		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
 	Range: 7500
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
 FutureJavelinRocketsDeployed_elite:
-	Inherits: FutureJavelinRocketsDeployed
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
+	ReloadDelay: 25
+	Range: 6000
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 16
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 0
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		CloseEnough: 400
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+		LaunchAngle: 125
+		Palette: d2keffect
+	Warhead@MissileAP_Medium:
+		Damage: 10000
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: xplobig4.aud
+		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+	Range: 7500
+	Projectile: Missile
+		VerticalRateOfTurn: 16
 	Range: 8500
 	Burst: 2
 	BurstDelays: 3
@@ -2801,7 +3024,22 @@ CannonAttackRobotGun:
 		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 CannonAttackRobotGun_elite:
-	Inherits: CannonAttackRobotGun
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@CannonHE_Medium_Flat:
+	Warhead@TankDestroyerCannonPercentage:
+	Warhead@MediumFlameWeaponPercentage:
+	Warhead@RA2Scorch:
+	Warhead@GroundFire:
 	Range: 7000
 	Burst: 2
 	BurstDelays: 3
@@ -2813,30 +3051,6 @@ CannonAttackRobotGun_elite:
 		Blockable: false
 		ZOffset: 2048
 	Warhead@CannonHE_Medium_Flat: AreaDamage
-	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
-		Versus:
-			None: 10
-			Light: 50
-			Medium: 75
-			Heavy: 100
-			Superheavy: 125
-			Scout: 25
-			Plate: 10
-			Concrete: 200
-			Wood: 150
-			Steel: 175
-			Flak: 10
-			Heroic: 10
-			Bomber: 10
-			Fighter: 10
-			Helicopter: 10
-			Spaceship: 10
-			ARMOR: 70
-			BLAST: 78
-			COMPOSITE: 40
-			HAZMAT: 96
-			REFLECTOR: 64
-			Shield: 10
 	Warhead@CannonHE_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2886,13 +3100,133 @@ CannonAttackRobotGun_elite:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
-	Warhead@Railgun_Heavy_ExtraDamage:
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 1000
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: 120MM
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 600
+		ContrailStartColor: 77CCFFAA
+		ContrailEndColor: 4488FF00
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 5
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
+	Warhead@CannonHE_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 9000
+		PercentageScale: 4988
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 1
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 MissileAttackRobotGun:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -3420,7 +3754,16 @@ GuardianTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 12000
 GuardianTankCannon_elite:
-	Inherits: GuardianTankCannon
+	Inherits@xGuardianTankCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xGuardianTankCannon1: ^Projectile_Shell_Medium
+	Inherits@xGuardianTankCannon2: ^Effect_Explosion_Medium_RA2
+	Range: 7820
+	ReloadDelay: 85
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 782
+	Warhead@CannonHE_Medium:
+		Damage: 12000
 	Range: 8820
 	Burst: 2
 	BurstDelays: 3
@@ -3458,7 +3801,21 @@ Future_MBT_DebuffLaser:
 	Warhead@Validation: TargetDamage
 
 Future_MBT_DebuffLaser_elite:
-	Inherits: Future_MBT_DebuffLaser
+	ReloadDelay: 4
+	Range: 7820
+	Report: ra2m_shared_sounds|AUGuard_beamLoopa.wav, ra2m_shared_sounds|AUGuard_beamLoopb.wav, ra2m_shared_sounds|AUGuard_beamLoopc.wav
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Structure, wall
+	Projectile: LaserZap
+		Duration: 22
+		Width: 0c64
+		Color: 83B9FC
+	Warhead@2Con: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 22
+		Range: 172
+		ValidTargets: Ground, Water, Structure, wall
+	Warhead@Validation: TargetDamage
 	Range: 8820
 
 FutureTankCannons:
@@ -4059,7 +4416,14 @@ HarbingerChainguns:
 	Warhead@Flak_Medium:
 		Damage: 12000
 HarbingerChainguns_elite:
-	Inherits: HarbingerChainguns
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
+	ReloadDelay: 9
+	Range: 6030
+	Report: ra2m_futuretech_sounds|AUGunsh_wea1Firea.wav,ra2m_futuretech_sounds|AUGunsh_wea1Fireb.wav,ra2m_futuretech_sounds|AUGunsh_wea1Firec.wav
+	Warhead@Flak_Medium:
+		Damage: 12000
 	Range: 7030
 	Burst: 2
 	BurstDelays: 1
@@ -4089,7 +4453,28 @@ BlackWidowPistols:
 		Damage: 5
 
 BlackWidowPistols_elite:
-	Inherits: BlackWidowPistols
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: ra2m_futuretech_sounds|AUTanya_pistolFireA.wav, ra2m_futuretech_sounds|AUTanya_pistolFireB.wav, ra2m_futuretech_sounds|AUTanya_pistolFireC.wav, ra2m_futuretech_sounds|AUTanya_pistolFireD.wav, ra2m_futuretech_sounds|AUTanya_pistolFireE.wav, ra2m_futuretech_sounds|AUTanya_pistolFireF.wav, ra2m_futuretech_sounds|AUTanya_pistolFireG.wav, ra2m_futuretech_sounds|AUTanya_pistolFireH.wav, ra2m_futuretech_sounds|AUTanya_pistolFireI.wav
+	ReloadDelay: 16
+	Range: 9000
+	Burst: 2
+	BurstDelays: 3
+	Projectile: Bullet
+		Speed: 10000
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 10000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 10000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 5
 	Range: 6000
 	Burst: 8
 
@@ -4209,7 +4594,18 @@ OrionRailgun:
 			Fighter: 10
 
 OrionRailgun_elite:
-	Inherits: OrionRailgun
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@EffectWater:
+	Warhead@Railgun_Heavy_Flat:
 	Range: 9000
 	Projectile: Bullet
 		Speed: 1800
@@ -4252,36 +4648,6 @@ OrionRailgun_elite:
 		HelixPlayerColor: true
 		ZOffset: 2048
 	Warhead@Railgun_Heavy_Flat: AreaDamage
-	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
-		Versus:
-			None: 10
-			Light: 50
-			Medium: 75
-			Heavy: 100
-			Superheavy: 125
-			Scout: 25
-			Plate: 10
-			Concrete: 200
-			Wood: 150
-			Steel: 175
-			Flak: 10
-			Heroic: 10
-			Bomber: 10
-			Fighter: 10
-			Helicopter: 10
-			Spaceship: 10
-			ARMOR: 70
-			BLAST: 78
-			COMPOSITE: 40
-			HAZMAT: 96
-			REFLECTOR: 64
-			Shield: 10
-	Warhead@Railgun_Heavy_ExtraDamage:
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 1000
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4331,8 +4697,59 @@ OrionRailgun_elite:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: 120MM
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Blockable: false
+		ContrailDelay: 0
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Report: ra2m_futuretech_sounds|AUFTank_neutImpaSmaa.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmab.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmac.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmad.wav, ra2m_futuretech_sounds|AUFTank_neutImpaSmae.wav
+	Warhead@Railgun_Heavy_Flat:
+		Damage: 151000
 BeehiveCarrierTarget:
-	Inherits: RA2CarrierTarget
+	ReloadDelay: 50
+	Range: 17500
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
 	ReloadDelay: 150
 	Range: 17500
 	ValidTargets: Ground, Air, Water

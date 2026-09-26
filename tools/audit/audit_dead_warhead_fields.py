@@ -66,7 +66,11 @@ EXIT_INCOMPLETE = 2
 # and the DAWN-lane OpenToppedDamage.Falloff sources (fleet
 # STATUS_2026-09-27_dawn_dwf_batch2_pr536.md). Remaining: NOVA-lane locals +
 # live-children cases deferred for restructuring.
-DEAD_FIELD_BASELINE = 12
+# 2026-09-27 re-locked 12 -> 0 (NOVA): the NOVA-lane local lines landed earlier
+# today; the last survivor was ttankzap2arc...fragment2_emp, whose W7 splice had
+# copied fragment1's pre-#535 body — fragment1's six retype cancels are now
+# mirrored on fragment2's own retype decl. Audit fully green.
+DEAD_FIELD_BASELINE = 0
 
 # mod.yaml `Assemblies:` order — first hit wins, exactly like ObjectCreator.FindType.
 # location "repo" = vendored at the repository root (NOT under engine/ — that trap cost
