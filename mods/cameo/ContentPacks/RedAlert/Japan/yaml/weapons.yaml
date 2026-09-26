@@ -5978,7 +5978,30 @@ WaveTurretShell:
 
 	MinRange: 1965
 WaveTurretImpact:
-	Inherits: WaveArtilleryImpact
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Effect_Railgun_Heavy
+	Projectile: InstantHit
+	Warhead@Tesla_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 21000
+		Spread: 333
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+		Spread: 666
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@SonicDebuff: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 222
+		Range: 666
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+	Warhead@Effect: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: blue_building
+		ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water

@@ -1703,7 +1703,31 @@ tkmkatyushalalauncherrockets:
 	Warhead@Effect:
 		ImpactActors: false
 tkmkatyushalalauncherrocketscryo:
-	Inherits@2: tkmkatyushalalauncherrockets
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 157
+	Burst: 8
+	BurstDelays: 4
+	Range: 12437
+	Report: vintatta.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Speed: 250
+		Arm: 2
+		Inaccuracy: 1500
+		RangeLimit: 15000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 125
+		MinimumLaunchSpeed: 125
+		Acceleration: 5
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 20000
+	Warhead@Effect:
+		ImpactActors: false
 	Report: vintatta.wav
 	Range: 14000
 	Warhead@PhysicalStateCryo: ApplyPhysicalState

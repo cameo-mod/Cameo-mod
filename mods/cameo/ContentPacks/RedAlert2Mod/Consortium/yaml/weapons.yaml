@@ -8003,7 +8003,40 @@ SteelAirTurret_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: SteelAirTurret
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
+	Inherits: ^LaserWeapon
+	Inherits@2: ^RailgunWeapon
+	Range: 8000
+	ReloadDelay: 60
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Railgun
+		BeamColor: 00EEFF88
+		Railgun: 96
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 12
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 12
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@Laser_Heavy_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 49600
+		PercentageScale: 0
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 49600
@@ -9146,7 +9179,39 @@ SteelStalkerRailgun_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: SteelStalkerRailgun
+	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
+	Inherits: ^LaserWeapon
+	Inherits@2: ^RailgunWeapon
+	Range: 9000
+	ReloadDelay: 103
+	Report: bigggun1.aud
+	Projectile: Railgun
+		BeamColor: 00EEFF88
+		BeamWidth: 128
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 60000
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Damage: 30
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 60000
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Damage: 30
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: makoexplose.wav
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@Railgun_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 121600
+		PercentageScale: 0
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 121600
