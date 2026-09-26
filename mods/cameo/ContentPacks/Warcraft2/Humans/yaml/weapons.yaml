@@ -4,12 +4,12 @@ wc2footmanslice2:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 15
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 18000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 # 1-5 WC2 damage. 3 Base, 2 Pierce.
 
@@ -73,12 +73,12 @@ wc2knightslice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 12
 	Range: 1420
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2paladinholyvision:
 	ReloadDelay: 60
@@ -736,7 +736,7 @@ wc2_humans_alleria_arrow:
 	Inherits@fx: ^Effect_Arrow_Medium
 	ReloadDelay: 23
 	Range: 7487
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -750,7 +750,7 @@ wc2_humans_alleria_arrow:
 	Warhead@Arrow_Medium:
 		Damage: 36000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 
 # Alleria elite / general: 6 old warheads each 8000 main + 4% -> 48000 main, 24% twin.
 wc2_humans_alleria_arrow_elite:
@@ -759,7 +759,7 @@ wc2_humans_alleria_arrow_elite:
 	Inherits@fx: ^Effect_Arrow_Heavy
 	ReloadDelay: 20
 	Range: 7487
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -773,7 +773,7 @@ wc2_humans_alleria_arrow_elite:
 	Warhead@Arrow_Heavy:
 		Damage: 48000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 
 # Danath: 12 WC2 damage (36000). Old 3-main (36000/18000/12%) -> one AreaDamage.
 # PercentageScale 6667 preserves the 12% percentage twin at 36000 main.
@@ -783,13 +783,13 @@ wc2_humans_danath_slice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 12
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 36000
 		PercentageScale: 6667
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 # Danath elite / veteran: 16 WC2 damage (48000). 48000*6667/200000 ~= 16%.
 wc2_humans_danath_slice_elite:
@@ -798,10 +798,10 @@ wc2_humans_danath_slice_elite:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 10
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 48000
 		PercentageScale: 6667
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud

@@ -563,7 +563,7 @@ wc2_humans_magetower:
 		EndChargeSpeechNotification: IonCannonReady
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
-		OnFireSound: wc2_icestorm.aud
+		OnFireSound: wc2_shared_sounds|wc2_icestorm.aud
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		DisplayRadarPing: True
 		CameraActor: camera.small

@@ -4,7 +4,7 @@ tkm_rifleman_rifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 75
 	Range: 5042
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
@@ -27,7 +27,7 @@ tkm_rifleman_semiautorifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 25
 	Range: 5500
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL

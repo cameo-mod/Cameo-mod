@@ -4,12 +4,12 @@ wc2gruntslice2:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 18
 	Range: 1600
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 24000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2axeFire:
 	Inherits: wc2arrowFire
@@ -37,12 +37,12 @@ wc2ogrepunch:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1660
-	Report: wc2_punch.aud
+	Report: wc2_shared_sounds|wc2_punch.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 30000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_punch.aud
+		ImpactSounds: wc2_shared_sounds|wc2_punch.aud
 
 wc2ogremageEyeOfKilrogg:
 	ReloadDelay: 60

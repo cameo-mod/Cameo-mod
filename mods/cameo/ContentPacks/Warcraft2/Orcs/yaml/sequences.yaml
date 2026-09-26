@@ -158,7 +158,7 @@ wc2_orcs_cannontower:
 		Filename: wc2_orcs_sprites|wc2_orcs_cannontower_plug_wc2_orc_cannon_tower.shp
 	Inherits: wc2_orcs_orcwatchtower
 	icon:
-		Filename: wc2_cameos_orc_buildings.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_buildings.png
 		Start: 7
 
 wc2_orcs_wall:
@@ -180,7 +180,7 @@ wc2_orcs_wall:
 		Length: *
 		Tick: 400
 	icon:
-		Filename: wc2_cameos_orc_buildings.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_buildings.png
 		Start: 19
 
 wc2_orcs_orcgoldmine:
@@ -204,17 +204,17 @@ wc2_orcs_orcgoldmine:
 wc2_orcs_mobileconstructionvehicleorc:
 	Inherits: wc2_orc_engineer
 	Defaults:
-		Filename: wc2_orcs_mobileconstructionvehicleorc_wc2_orc_engineer.shp
+		Filename: wc2_shared_sprites|wc2_orcs_mobileconstructionvehicleorc_wc2_orc_engineer.shp
 		Scale: 1
 	icon:
-		Filename: wc2_cameos_orc_buildings.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_buildings.png
 		Start: 1
 
 wc2_orcs_peon:
 	Inherits: ^WC2OrcInfantry
 	Defaults:
 		Scale: 0.8
-		Filename: wc2_orcs_peon.shp
+		Filename: wc2_shared_sprites|wc2_orcs_peon.shp
 	run:
 		Start: 8
 		Length: 4
@@ -246,7 +246,7 @@ wc2_orcs_peon:
 	icon:
 		Start: 0
 	greathall_icon:
-		Filename: wc2_cameos_orc_buildings.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_buildings.png
 		Start: 1
 
 wc2_orcs_grunt:
@@ -988,102 +988,102 @@ wc2_orcs_dragon:
 
 wc2_orcs_upgrade_axestrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 27
 
 wc2_orcs_upgrade_axestrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 28
 
 wc2_orcs_upgrade_armorstrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 61
 
 wc2_orcs_upgrade_armorstrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 62
 
 wc2_orcs_upgrade_throwingaxestrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 33
 
 wc2_orcs_upgrade_throwingaxestrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 34
 
 wc2_orcs_upgrade_catapultstrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 41
 
 wc2_orcs_upgrade_catapultstrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 42
 
 wc2_orcs_upgrade_cannondamage:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 51
 
 wc2_orcs_upgrade_cannondamageii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 52
 
 wc2_orcs_upgrade_berserker:
 	icon:
-		Filename: wc2_cameos_orc_units.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_units.png
 		Start: 3
 
 wc2_orcs_upgrade_berserkerlightaxes:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 38
 
 wc2_orcs_upgrade_berserkerscouting:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 39
 
 wc2_orcs_upgrade_berserkerregeneration:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 40
 
 wc2_orcs_upgrade_ogremage:
 	icon:
-		Filename: wc2_cameos_orc_units.png
+		Filename: wc2_shared_sprites|wc2_cameos_orc_units.png
 		Start: 5
 
 wc2_orcs_upgrade_bloodlust:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 19
 
 wc2_orcs_upgrade_runes:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 3
 
 wc2_orcs_upgrade_haste:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 2
 
 wc2_orcs_upgrade_deathanddecay:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 9
 
 wc2_orcs_upgrade_raisedead:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 21
 
 ####################################################################################################

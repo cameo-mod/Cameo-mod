@@ -699,7 +699,7 @@ naxis_naxiriflesoldier_rifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
@@ -732,7 +732,7 @@ naxis_naxiriflerecruit_rifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5227
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
 		InvalidTargets: Air
@@ -778,7 +778,7 @@ NaxiRifleCons:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5501
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
 		Damage: 4000
@@ -4441,7 +4441,7 @@ NaxiInterceptorGun:
 	Burst: 4
 	BurstDelays: 3
 	Range: 6090
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav, ra2m_naxis_sounds|nax_rifle4.wav , ra2m_naxis_sounds|nax_rifle5.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: 50CAL

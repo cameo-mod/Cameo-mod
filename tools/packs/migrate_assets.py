@@ -139,9 +139,29 @@ def main():
         return CANON.get(str(o).lower(), "Shared")
 
     theme_yamls = yaml_files_under(theme_dir)
-    # extra mounted file that belongs to the theme (wrapper monolith)
-    extra = MOD / "rules" / (args.theme.lower() + ".yaml")
-    if extra.exists(): theme_yamls.append(extra)
+    # theme monoliths living outside the pack dir:
+    #  (a) files the theme's own content.yaml(s) declare (e.g. wrapper packs
+    #      include cameo|rules/<theme>.yaml)
+    #  (b) LIVE core-dir entries in mod.yaml named <theme>.yaml
+    #      (sequences/, weapons/, audio/, tilesets/ monoliths)
+    CORE_DIRS = ("rules", "sequences", "weapons", "audio", "tilesets")
+    for cy in theme_dir.rglob("content.yaml"):
+        for m in re.finditer(r"^\s*cameo\|(\S+\.ya?ml)", cy.read_text(errors="replace"), re.M):
+            p = MOD / m.group(1)
+            if p.exists() and p not in theme_yamls:
+                theme_yamls.append(p)
+    my_lines = (MOD / "mod.yaml").read_text(encoding="utf-8", errors="replace").splitlines()
+    mono_name = args.theme.lower() + ".yaml"
+    for line in my_lines:
+        s = line.strip()
+        if s.startswith("#") or "|" not in s:
+            continue
+        path = s.split("|", 1)[1].split()[0]
+        parts = path.split("/")
+        if len(parts) == 2 and parts[0] in CORE_DIRS and parts[1].lower() == mono_name:
+            p = MOD / path
+            if p.exists() and p not in theme_yamls:
+                theme_yamls.append(p)
 
     all_yamls = [p for p in MOD.rglob("*.yaml")
                  if "/bits/" not in norm(p)]

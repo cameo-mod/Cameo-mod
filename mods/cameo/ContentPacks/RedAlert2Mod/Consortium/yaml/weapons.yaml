@@ -22,7 +22,7 @@ SteelCloneGun:
 		Damage: 6000
 		PercentageScale: 9984
 	Projectile: Bullet
-	Report: steel_clonefire.wav
+	Report: ra2m_shared_sounds|steel_clonefire.wav
 	Projectile:
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -2815,7 +2815,7 @@ SteelMantaAG:
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
-	Report: steel_clonefire.wav
+	Report: ra2m_shared_sounds|steel_clonefire.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: 77CCFF

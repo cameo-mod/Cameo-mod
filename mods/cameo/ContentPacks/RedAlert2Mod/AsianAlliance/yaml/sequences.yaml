@@ -1320,7 +1320,7 @@ asianalliance_quasar:
 	icon:
 		Filename: ra2m_asianalliance_icons|asianalliance_quasar_icon.shp
 	muzzle:
-		Filename: aa_pulsmuzz.shp
+		Filename: ra2m_shared_sprites|aa_pulsmuzz.shp
 		Length: *
 
 asianalliance_viper:
@@ -1435,7 +1435,7 @@ asianalliance_mobileconstructionvehicle:
 
 asianalliance_droneminer:
 	Defaults:
-		Filename: asianalliance_droneminer_aa_drmn.shp
+		Filename: ra2m_shared_sprites|asianalliance_droneminer_aa_drmn.shp
 	idle:
 		Facings: 8
 		InterpolatedFacings: 32
@@ -1450,7 +1450,7 @@ asianalliance_droneminer:
 		InterpolatedFacings: 32
 		Length: 4
 	icon:
-		Filename: asianalliance_droneminer_icon.shp
+		Filename: ra2m_shared_icons|asianalliance_droneminer_icon.shp
 	harvesting:
 		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
@@ -1518,7 +1518,7 @@ asianalliance_pulverizermecha:
 		Length: 9
 		Tick: 120
 	icon:
-		Filename: asianalliance_promotion_pulverizermecha_icon.shp
+		Filename: ra2m_shared_icons|asianalliance_promotion_pulverizermecha_icon.shp
 		Offset: 0,0
 
 asianalliance_phoenix:
@@ -1722,7 +1722,7 @@ asianalliance_quasfrig:
 	icon:
 		Filename: ra2m_asianalliance_icons|aa_quasfrigicon.shp
 	muzzle:
-		Filename: aa_pulsmuzz.shp
+		Filename: ra2m_shared_sprites|aa_pulsmuzz.shp
 		Length: *
 
 asianalliance_gunb:
@@ -1795,7 +1795,7 @@ asianalliance_warturtle:
 	icon:
 		Filename: ra2m_asianalliance_icons|asianalliance_warturtle_icon.shp
 	muzzle:
-		Filename: aa_pulsmuzz.shp
+		Filename: ra2m_shared_sprites|aa_pulsmuzz.shp
 		Length: *
 
 asianalliance_lsub:

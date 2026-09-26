@@ -180,7 +180,7 @@ wc2_humans_wall:
 		Start: 0
 		Length: *
 		Tick: 400
-	icon: wc2_humans_peasant_wc2_cameos_human_buildings.png
+	icon: wc2_shared_sprites|wc2_humans_peasant_wc2_cameos_human_buildings.png
 		Start: 19
 
 wc2_humans_humangoldmine:
@@ -245,17 +245,17 @@ wc2_humans_sunwell:
 wc2_humans_mobileconstructionvehiclehuman:
 	Inherits: wc2_human_engineer
 	Defaults:
-		Filename: wc2_humans_mobileconstructionvehiclehuman_wc2_human_engineer.shp
+		Filename: wc2_shared_sprites|wc2_humans_mobileconstructionvehiclehuman_wc2_human_engineer.shp
 		Scale: 0.9
 	icon:
-		Filename: wc2_humans_peasant_wc2_cameos_human_buildings.png
+		Filename: wc2_shared_sprites|wc2_humans_peasant_wc2_cameos_human_buildings.png
 		Start: 1
 
 wc2_humans_peasant:
 	Inherits: ^WC2HumanInfantry
 	Defaults:
 		Scale: 0.9
-		Filename: wc2_humans_peasant.shp
+		Filename: wc2_shared_sprites|wc2_humans_peasant.shp
 	run:
 		Start: 8
 		Length: 4
@@ -287,7 +287,7 @@ wc2_humans_peasant:
 	icon:
 		Start: 0
 	townhall_icon:
-		Filename: wc2_humans_peasant_wc2_cameos_human_buildings.png
+		Filename: wc2_shared_sprites|wc2_humans_peasant_wc2_cameos_human_buildings.png
 		Start: 1
 
 wc2_humans_footman:
@@ -1193,102 +1193,102 @@ wc2_humans_gryphonrider:
 
 wc2_humans_upgrade_swordstrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 24
 
 wc2_humans_upgrade_swordstrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 25
 
 wc2_humans_upgrade_armorstrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 58
 
 wc2_humans_upgrade_armorstrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 59
 
 wc2_humans_upgrade_arrowstrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 30
 
 wc2_humans_upgrade_arrowstrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 31
 
 wc2_humans_upgrade_ballistastrength:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 43
 
 wc2_humans_upgrade_ballistastrengthii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 44
 
 wc2_humans_upgrade_cannondamage:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 48
 
 wc2_humans_upgrade_cannondamageii:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 49
 
 wc2_humans_upgrade_ranger:
 	icon:
-		Filename: wc2_cameos_human_units.png
+		Filename: wc2_shared_sprites|wc2_cameos_human_units.png
 		Start: 3
 
 wc2_humans_upgrade_rangerlongbow:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 35
 
 wc2_humans_upgrade_rangerscouting:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 36
 
 wc2_humans_upgrade_rangermarksman:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 37
 
 wc2_humans_upgrade_paladin:
 	icon:
-		Filename: wc2_cameos_human_units.png
+		Filename: wc2_shared_sprites|wc2_cameos_human_units.png
 		Start: 5
 
 wc2_humans_upgrade_healing:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 14
 
 wc2_humans_upgrade_exorcism:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 17
 
 wc2_humans_upgrade_slow:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 0
 
 wc2_humans_upgrade_polymorph:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 22
 
 wc2_humans_upgrade_blizzard:
 	icon:
-		Filename: cameos_wc2_extra.png
+		Filename: wc2_shared_sprites|cameos_wc2_extra.png
 		Start: 11
 
 ####################################################################################################
