@@ -527,7 +527,7 @@
     "physical_state_weapon": "td_nod_blackhandflamer_blackhandflamer",
     "physical_state_weight": 1.4826,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 36000.0,
     "tier_chain_cost": 12000.0,
     "tier_multiplier": 0.7674
@@ -649,7 +649,7 @@
     "physical_state_weapon": "td_nod_chemicalwarrior_chemspray",
     "physical_state_weight": 0.7296,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 56000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -706,7 +706,7 @@
      }
     ],
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 80000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -768,7 +768,7 @@
     "physical_state_weapon": "td_nod_flamethrower_flamethrower",
     "physical_state_weight": 1.4826,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 29000.0,
     "tier_chain_cost": 12000.0,
     "tier_multiplier": 0.7674
@@ -849,7 +849,7 @@
     "physical_state_weapon": "td_nod_lasercommando_nodcommandolaser",
     "physical_state_weight": 0.7413,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 57000.0,
     "tier_chain_cost": 27000.0,
     "tier_multiplier": 0.3204
@@ -1131,7 +1131,7 @@
      }
     ],
     "shield_always_on": false,
-    "shield_gated_on_upgrade": true,
+    "shield_gated_on_upgrade": false,
     "shield_pool": 25000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -1357,9 +1357,13 @@
     "tier_chain_cost": 26000.0,
     "tier_multiplier": 0.3333
    },
-   "td_nod_upgrade_cyberneticmodifications": {
+   "td_nod_upgrade_cyberneticarmor": {
     "tier_chain_cost": 26000.0,
     "tier_multiplier": 0.3333
+   },
+   "td_nod_upgrade_cyberneticmodifications": {
+    "tier_chain_cost": 21000.0,
+    "tier_multiplier": 0.4177
    },
    "td_nod_upgrade_elementalwarfare": {
     "tier_chain_cost": 21000.0,

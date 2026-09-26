@@ -64,6 +64,11 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 - [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
+- [⛔ Two UNNAMED traits of one type MERGE — the last `ShieldsUpCondition` silently wins (2026-09-26)](#-two-unnamed-traits-of-one-type-merge--the-last-shieldsupcondition-silently-wins-2026-09-26)
+- [⛔ Boot BEFORE you merge, not only before you commit (2026-09-26)](#-boot-before-you-merge-not-only-before-you-commit-2026-09-26)
+- [⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)](#-a-verbatim-foreign-def-copy-re-adds-its-sources-audit-findings--copies-must-be-materialized-audit-clean-2026-09-24)
+- [Drain-migration minification hazard (2026-09-26)](#drain-migration-minification-hazard-2026-09-26)
+- [⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)](#--templates-are-instantiated-at-boot--an-untyped-warhead-pin-inside-one-nres-2026-09-24)
 - [⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)](#-conflict-clean-is-not-resolved-clean--a-merge-can-pass-every-gate-while-damage-drifts-2026-09-22)
 
 **Weapon templates, the 3-way split and the effect layer**
@@ -128,6 +133,24 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [The naming audit sees file stems only (2026-09-24)](#the-naming-audit-sees-file-stems-only--pair-it-with-a-raw-disk-scan-2026-09-24)
 
 ---
+
+## ⛔ Two UNNAMED traits of one type MERGE — the last `ShieldsUpCondition` silently wins (2026-09-26)
+
+`^CyberneticModifications` declared a bare `Shielded:` and so did `^ShieldedShieldable`, and
+every Nod infantry inherits both. A bare trait key merges into ONE node, so the cyborg
+template's `ShieldsUpCondition: armored` replaced the generic `shielded`. The result: a Nod
+infantry inside a shield generator's field never raised `shielded`, so its `Armor@shielded`
+(Type Shield) row never switched on, and any `!shielded` gate on it was always true. Nothing
+crashed and no audit flagged it; it only showed up when a redesign wanted to gate on
+`!shielded`. **Before gating on a condition, resolve a real actor and read which trait
+actually grants it.** If two templates each need their own copy, give the trait an `@suffix`.
+
+## ⛔ Boot BEFORE you merge, not only before you commit (2026-09-26)
+
+#504 renamed an `ai.yaml` key onto one that already existed. It was merged without a boot and
+master crashed at load (`MiniYaml` duplicate key) for about an hour, until #509. A PR that
+someone else booted on ITS base proves nothing about the merge result. Boot the merged tree
+(or the PR rebased on current master) before pressing merge.
 
 ## ⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)
 

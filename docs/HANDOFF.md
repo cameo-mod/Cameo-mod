@@ -1,5 +1,52 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26f — CLAUDE (coordinator): maintainer rulings + fleet orders + Nod cyborg armour
+
+`Agent: Claude · branch claude/nod_cyborg_armor · base afb66c9b5`
+
+**Maintainer rulings, 2026-09-26** (asked and answered this session):
+
+| topic | ruling | recorded in |
+|---|---|---|
+| #508 warhead order | **STRICT**: a conversion that reorders resolved `Warhead@*` keys fails, effects included | DESIGN §11b (after the W7 table) |
+| garrison (G1) | **all infantry can garrison**; melee never gets a garrisoned attack | DESIGN §11 |
+| variant dots | `.destroyed` `.upgraded` `.infiltrated` `.black` + singles → `_suffix`; `.husk` stays | here |
+| dormant monoliths | LEAVE the ~400 faction dots in unmounted `rules/*.yaml`; no rename, no delete | here |
+| #511 / #513 | unstack from #508; Claude reviews, boots and merges each | PR threads |
+| Nod cyborg upgrades | see below | this PR |
+
+**Fleet orders (posted on the PRs):**
+- **DAWN:** redo #508 order-preserving (NOVA's displaced-stub method), and fold in the R16/#510
+  re-freeze. ⛔ No `Versus` may be materialized into a weapon. Rebase #511 and #513 straight onto
+  master.
+- **EMBER:** (1) rebase #512; (2) infantry garrison census + fix (new G4 row); (3) variant-dot
+  rename. The TS cyborgs, droids and `td_nod_*` infantry are Claude's this week. W6
+  "fidelity-vs-snap": post a 3-line example so it can be ruled; the context was not found.
+- **NOVA:** unchanged. Re-measure `doc-claims-resync` on current master before the PR.
+
+**This PR — Nod cyborg upgrades (maintainer-confirmed):**
+- **Cybernetic Modifications** moves to the Temple of Nod tier, 10,000 → **7,500**. The upgrade
+  shield, `shieldpermanent` and the hidden `DamageMultiplier 200` are deleted. `Medium` is
+  permanent after research, gated `upgrade && !shielded`, and +20% speed is kept. The cyborg
+  `Shielded:` block is deleted outright: it had merged over `^ShieldedShieldable` and raised
+  `armored`, so the Shield row never activated at generators (see LESSONS).
+- **New: Cybernetic Armor** (`td_nod_upgrade_cyberneticarmor`, Temple Prime, **10,000**, needs
+  Upgrade 1). `ArmorPlating` 50% of max HP plus `Armor: COMPOSITE` gated
+  `cyberneticarmor_up && !shielded`. COMPOSITE measures lowest vs Arrow 35, CannonAP 40,
+  Bullet 42 and MissileAP 44, and highest vs Demolition 100 and Concussion 105. New 64×48 icon,
+  new tooltip, added to the Nod bot's upgrade list (`ai.yaml`, DEVIN-CLOUD lane: one line).
+- Scope: 25 actors, the 10 TD Nod infantry plus 15 engineers across packs that react only when
+  their owner researched it. Both `^CyberneticModifications` (TD) and `^D2KCyberneticModifications`.
+- Gates: boot to menu with 0 new exceptions · `find_empty_warhead` 0 · ledgers re-extracted
+  (drift 0) · `test_upgrade_direction_contracts` 4/4 (the 200% test is replaced).
+
+**Next in my lane:** the hero armours already ruled (Volkov Heroic+Superheavy, Cyborg Reaper
+Plate+Heavy, Berserker Heroic+Heavy, Repair Droid Plate+Light, Cyborg Assassin +Flak) → the
+canonical armour-model docs (ARMOR_LAYERS top, DESIGN §12.0e law 1 = plating MULTIPLIES, §12.0g
+geometric table, and the stale "defaults to `Average`" yaml comments) → the armour guard audit.
+
+---
+
 ## 2026-09-26f — EMBER: B3 intent backlog transcribed (587 → 0)
 
 `Agent: EMBER (A1) · branch devin/ember/b3-intent · base afb66c9b5`
