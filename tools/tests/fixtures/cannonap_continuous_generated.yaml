@@ -15,28 +15,41 @@
 		Heaviness: 1000
 		HeavinessMode: SharedVersus
 		Versus:
-			HAZMAT: 92
-			COMPOSITE: 41
-			BLAST: 72
+			HAZMAT: 91
+			COMPOSITE: 40
+			BLAST: 73
 			REFLECTOR: 75
 			ARMOR: 70
 			Shield: 144
-			Superheavy: 137
-			Heavy: 134
-			Medium: 133
-			Light: 131
-			Scout: 130
-			Concrete: 129
-			Steel: 122
-			Wood: 120
-			Plate: 84
-			Heroic: 81
+			Superheavy: 161
+			Heavy: 157
+			Medium: 156
+			AntiAirVehicle: 154
+			Light: 152
+			ShipMedium: 152
+			Scout: 151
+			ShipSuperheavy: 150
+			Concrete: 149
+			ShipHeavy: 148
+			AntiAirShip: 148
+			AntiAirBuilding: 144
+			ShipLight: 144
+			Steel: 139
+			Wood: 136
+			CyborgHeavy: 116
+			CyborgMedium: 112
+			CyborgLight: 106
+			CyborgHeroic: 102
+			FlyingInfantry: 91
+			Plate: 86
 			Flak: 80
-			None: 75
-			Spaceship: 68
-			Helicopter: 67
-			Bomber: 57
-			Fighter: 51
+			AntiAirInfantry: 77
+			None: 74
+			Heroic: 65
+			Spaceship: 65
+			Helicopter: 63
+			Bomber: 51
+			Fighter: 45
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 2000
 		PercentageSpread: 50
