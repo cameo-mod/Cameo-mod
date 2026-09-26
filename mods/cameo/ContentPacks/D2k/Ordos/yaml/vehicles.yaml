@@ -862,8 +862,8 @@ ordos_cobratank:
 		UndeployOnMove: true
 		UndeployOnPickup: true
 		Facing: 640
-		DeploySounds: KobraDeploy.wav
-		UndeploySounds: KobraDeploy.wav
+		DeploySounds: d2k_ordos_sounds|KobraDeploy.wav
+		UndeploySounds: d2k_ordos_sounds|KobraDeploy.wav
 		Voice: Move
 	Passenger:
 		RequireForceMoveCondition: !undeployed
@@ -971,8 +971,8 @@ ordos_pythontank:
 	WithMakeAnimation:
 	GrantConditionOnDeploy:
 		Facing: 640
-		DeploySounds: KobraDeploy.wav
-		UndeploySounds: KobraDeploy.wav
+		DeploySounds: d2k_ordos_sounds|KobraDeploy.wav
+		UndeploySounds: d2k_ordos_sounds|KobraDeploy.wav
 		Voice: Move
 	Voiced:
 		VoiceSet: EBFDOrdosCobra

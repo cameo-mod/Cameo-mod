@@ -22,7 +22,7 @@ SteelCloneGun:
 		Damage: 6000
 		PercentageScale: 9984
 	Projectile: Bullet
-	Report: steel_clonefire.wav
+	Report: ra2m_shared_sounds|steel_clonefire.wav
 	Projectile:
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -1062,7 +1062,7 @@ SteelVulcan:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
-	Report: pulseturretfire.wav
+	Report: ra2m_consortium_sounds|pulseturretfire.wav
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 	Projectile:
@@ -1632,7 +1632,7 @@ SteelQuantumCannon:
 	Inherits@4: ^Effect_Railgun_Heavy
 	Range: 6000
 	ReloadDelay: 65
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	ValidTargets: Ground, Water
 	Projectile: Railgun
 		BeamColor: 00EEFF88
@@ -2154,7 +2154,7 @@ bfg10kCannon:
 	Inherits@4: ^RailgunWeapon
 	Range: 25000
 	ReloadDelay: 750
-	Report: bfg10kfiringsound.wav
+	Report: ra2m_consortium_sounds|bfg10kfiringsound.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Railgun
 		BeamColor: 22FF4488
@@ -2309,7 +2309,7 @@ SteelMakoGun:
 	Inherits@xSteelMakoGun2: ^Effect_Explosion_Medium_RA2
 	Range: 6050
 	ReloadDelay: 25
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	Warhead@Demolition_Light:
 		Damage: 2000
 	Warhead@Railgun_Heavy:
@@ -2815,7 +2815,7 @@ SteelMantaAG:
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
-	Report: steel_clonefire.wav
+	Report: ra2m_shared_sounds|steel_clonefire.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: 77CCFF
@@ -2960,7 +2960,7 @@ SteelMantaAG:
 SteelManta_AA:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: SteelMantaAG
-	Report: steel_chaingunfire.wav
+	Report: ra2m_consortium_sounds|steel_chaingunfire.wav
 	Range: 9999
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -3617,7 +3617,7 @@ SteelMantaHunterCannons:
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
 	Range: 8000
 	ReloadDelay: 8
-	Report: pulseturretfire.wav
+	Report: ra2m_consortium_sounds|pulseturretfire.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
@@ -3742,7 +3742,7 @@ SteelMantaHunterCannons_AA:
 	Inherits@2: SteelMantaHunterCannons
 	Range: 12000
 	ReloadDelay: 12
-	Report: steel_chaingunfire.wav
+	Report: ra2m_consortium_sounds|steel_chaingunfire.wav
 	ValidTargets: Air
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
@@ -4372,7 +4372,7 @@ SteelRunnerPistols:
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^RailgunWeapon
-	Report: steel_chaingunfire.wav
+	Report: ra2m_consortium_sounds|steel_chaingunfire.wav
 	ReloadDelay: 8
 	Burst: 2
 	BurstDelays: 4
@@ -4663,7 +4663,7 @@ SteelInfRailgun:
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 0
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		-TrailImage:
@@ -5840,7 +5840,7 @@ SteelFighterRailgun:
 	ReloadDelay: 80
 	Burst: 2
 	BurstDelays: 0
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		-TrailImage:
@@ -6037,7 +6037,7 @@ SteelMegaSword:
 	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
 	Inherits@2: ^LaserWeapon
 	ReloadDelay: 24
-	Report: megasword.wav
+	Report: ra2m_consortium_sounds|megasword.wav
 	Range: 1600
 	Projectile: InstantHit
 	Warhead@LaserWeapon: SpreadDamage
@@ -6134,7 +6134,7 @@ SteelMegaSword_EMP:
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^TeslaWeapon
 	ReloadDelay: 16
-	Report: megasword.wav
+	Report: ra2m_consortium_sounds|megasword.wav
 	Range: 2400
 	Projectile: InstantHit
 	Warhead@LaserWeapon: SpreadDamage
@@ -6263,7 +6263,7 @@ SteelAirTurret:
 	Inherits@2: ^RailgunWeapon
 	Range: 8000
 	ReloadDelay: 60
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Railgun
 		BeamColor: 00EEFF88
@@ -6424,7 +6424,7 @@ SteelQuantumTurretRail:
 	Inherits@xSteelQuantumTurretRail2: ^Effect_Grey_Explosion_Large_RA2
 	Range: 8888
 	ReloadDelay: 38
-	Report: steel_quantumfire.wav
+	Report: ra2m_shared_sounds|steel_quantumfire.wav
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -6868,7 +6868,7 @@ SteelKatyCannons:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 7250
 	MinRange: 1450
 	TargetActorCenter: true
@@ -7023,7 +7023,7 @@ SteelKatyCannons_EMP:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
-	Report: aa_bgart.wav
+	Report: ra2m_shared_sounds|aa_bgart.wav
 	Range: 7250
 	MinRange: 1450
 	Projectile: Bullet
@@ -7291,7 +7291,7 @@ WhiteRabbitGatling:
 	Inherits@xWhiteRabbitGatling0: ^Warhead_Bullet_Medium
 	Inherits@xWhiteRabbitGatling1: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
+	Report: ra2m_shared_sounds|aa_pulvat2a.wav, ra2m_shared_sounds|aa_pulvat2b.wav, ra2m_shared_sounds|aa_pulvat2c.wav
 	Range: 6000
 	ReloadDelay: 10
 	ValidTargets: Ground, Air, Water
@@ -7645,7 +7645,7 @@ SteelDaggerCannon:
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 0
-	Report: steelblaster.wav
+	Report: ra2m_consortium_sounds|steelblaster.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		LaunchAngle: 10
@@ -8050,7 +8050,7 @@ SteelCruiserCannons:
 	ReloadDelay: 5
 	ValidTargets: Ground, Air, Water
 	Range: 7000
-	Report: pulseturretfire.wav
+	Report: ra2m_consortium_sounds|pulseturretfire.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: 77CCFF
@@ -8230,7 +8230,7 @@ SteelCargoshipCannons:
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
-	Report: pulseturretfire.wav
+	Report: ra2m_consortium_sounds|pulseturretfire.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: 77CCFF

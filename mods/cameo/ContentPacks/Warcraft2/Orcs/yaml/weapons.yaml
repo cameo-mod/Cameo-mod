@@ -8,7 +8,7 @@ wc2gruntslice2:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 18
 	Range: 1600
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 24000
@@ -22,20 +22,20 @@ wc2axeFire:
 	Inherits: wc2arrowFire
 	ReloadDelay: 38
 	Range: 6445
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Inherits@w6fx: ^wc2_orcs_wc2axefire
 
 ^wc2_orcs_wc2axefirespear:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2axeFirespear:
 	Inherits: wc2highArrowFire
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Inherits@w6fx: ^wc2_orcs_wc2axefirespear
@@ -53,11 +53,13 @@ wc2ogrepunch:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1660
-	Report: wc2_punch.aud
+	Report: wc2_shared_sounds|wc2_punch.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 30000
 	Inherits@w6fx: ^wc2_orcs_wc2ogrepunch
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_punch.aud
 
 ^wc2_orcs_wc2ogremageeyeofkilrogg:
 	Warhead@2Eff: CreateEffect
@@ -67,7 +69,7 @@ wc2ogrepunch:
 wc2ogremageEyeOfKilrogg:
 	ReloadDelay: 60
 	Range: 5120
-	Report: eye_of_killrog.aud
+	Report: wc2_orcs_sounds|eye_of_killrog.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -89,7 +91,7 @@ wc2ogremageEyeOfKilrogg:
 wc2ogremageBloodlust:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_blodlust.aud
+	Report: wc2_orcs_sounds|wc2_blodlust.aud
 	ValidTargets: bloodlust_target
 	Projectile: Missile
 		Speed: 10c0
@@ -121,7 +123,7 @@ wc2ogremageBloodlust:
 wc2ogremageRunes:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_runes.aud
+	Report: wc2_orcs_sounds|wc2_runes.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -183,7 +185,7 @@ wc2catapultFire:
 	ReloadDelay: 240
 	Range: 13400
 	MinRange: 2680
-	Report: wc2_catapult.aud
+	Report: wc2_shared_sounds|wc2_catapult.aud
 	Projectile: Bullet
 		Speed: 384
 		Inaccuracy: 384
@@ -244,7 +246,7 @@ wc2deathknightFire:
 	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits@w71: ^Warhead_Tesla_Super  # W7MAT covering-edge
 	Inherits@w73: ^Effect_Tesla_Super  # W7MAT covering-edge
-	Report: wc2_touchdrk.aud
+	Report: wc2_orcs_sounds|wc2_touchdrk.aud
 	Projectile: Bullet  # W7MAT order-pin
 		Image: wc2_effect_death_knight_attack
 		Speed: 640
@@ -264,20 +266,11 @@ wc2deathknightFire:
 	Range: 8000  # W7MAT order-pin
 	ReloadDelay: 40  # W7MAT order-pin
 	ValidTargets: Ground, Water, Air  # W7MAT order-pin
-^wc2_orcs_wc2deathknightdeathcoil:
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_firehit.aud
-		Explosions: hit
-		Image: wc2_effect_death_knight_attack
-		ValidTargets: Ground, Air
-
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_firehit.aud
 wc2deathknightDeathCoil:
-	Inherits@w71: ^Warhead_Flame_Heavy  # W7MAT covering-edge
-	Inherits@w72: ^Projectile_Flame_Heavy  # W7MAT covering-edge
-	Inherits@w73: ^Effect_Flame_Heavy  # W7MAT covering-edge
-	Inherits@w74: ^Warhead_Tesla_Super  # W7MAT covering-edge
-	Inherits@w76: ^Effect_Tesla_Super  # W7MAT covering-edge
-	Report: wc2_dethcoil.aud
+	Inherits: wc2deathknightFire
+	Report: wc2_orcs_sounds|wc2_dethcoil.aud
 	ReloadDelay: 80
 	Range: 8000
 	Projectile: Missile
@@ -285,20 +278,8 @@ wc2deathknightDeathCoil:
 		HorizontalRateOfTurn: 128
 		VerticalRateOfTurn: 128
 		AllowSnapping: True
-		Image: wc2_effect_death_knight_attack
-		Speed: 640
 
 # Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
-
-	-Warhead@Tesla_Super:  # W7MAT order-pin
-	ValidTargets: Ground, Water, Air  # W7MAT order-pin
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage  # W7MAT order-pin
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
-	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathcoil
-	Warhead@Flame_Heavy: AreaDamage  # W7MAT order-pin
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
 ^wc2_orcs_wc2deathknightdeathcoilscatter_left:
 	Warhead@Effect: CreateEffect  # W7MAT order-pin
 		ImpactSounds: wc2_firehit.aud
@@ -380,7 +361,7 @@ wc2deathknightDeathCoilScatter_Right:
 wc2deathknightHaste:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_haste.aud
+	Report: wc2_orcs_sounds|wc2_haste.aud
 	ValidTargets: haste_target
 	Projectile: Missile
 		Speed: 10c0
@@ -408,23 +389,15 @@ wc2deathknightHaste:
 		ValidTargets: haste_target
 
 wc2deathknightDeathAndDecay:
-	Report: wc2_decay.aud
-	Warhead@InitialSpreader: FireCluster  # W7MAT order-pin
+	Inherits: wc2mageBlizzard
+	Report: wc2_orcs_sounds|wc2_decay.aud
+	Warhead@InitialSpreader:
 		Weapon: wc2deathknightDeathAndDecay_Spread
 		RandomClusterCount: 5
 		Dimensions: 5, 5
 		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
-	Warhead@1Dam_impact: SpreadDamage  # W7MAT order-pin
+	Warhead@1Dam_impact:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
-		Spread: 0c1
-
-	ReloadDelay: 50  # W7MAT order-pin
-	ValidTargets: Ground, Water, Air  # W7MAT order-pin
-		AffectsParent: True
-		DamageTypes: Prone50Percent, TriggerProne
-	Range: 8000  # W7MAT order-pin
-	Projectile: InstantHit  # W7MAT order-pin
 wc2deathknightDeathAndDecay_Spread:
 	Projectile: InstantHit
 		Blockable: false
@@ -525,7 +498,7 @@ wc2deathknightDeathAndDecay_Hit:
 wc2deathknightRaiseDead:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_raise_dead.aud
+	Report: wc2_orcs_sounds|wc2_raise_dead.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -668,7 +641,7 @@ wc2dragonFireVisible:
 	ReloadDelay: 120
 	Burst: 2
 	BurstDelays: 0
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	Projectile: Missile
@@ -761,7 +734,7 @@ wc2_orcs_zuljin_spear:
 	Inherits@w73: ^Effect_Arrow_Medium  # W7MAT covering-edge
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 		RangeLimit: 16000
@@ -775,26 +748,12 @@ wc2_orcs_zuljin_spear:
 
 	Warhead@Arrow_Medium: AreaDamage  # W7MAT order-pin
 		Damage: 36000
-^wc2_orcs_wc2_orcs_zuljin_spear_elite:
-	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
-
 wc2_orcs_zuljin_spear_elite:
-	Inherits@w71: ^Warhead_Arrow_Heavy  # W7MAT covering-edge
-	Inherits@w72: ^Projectile_Arrow_Light  # W7MAT covering-edge
-	Inherits@w73: ^Effect_Arrow_Heavy  # W7MAT covering-edge
+	Inherits: wc2_humans_alleria_arrow_elite
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
-		RangeLimit: 16000
-		AllowSnapping: True
-		VerticalRateOfTurn: 80
-		Speed: 850
-		CloseEnough: 600
-		ContrailLength: 0
-		HorizontalRateOfTurn: 80
-	Inherits@w6fx: ^wc2_orcs_wc2_orcs_zuljin_spear_elite
-	Warhead@Arrow_Heavy: AreaDamage  # W7MAT order-pin
-		Damage: 48000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud

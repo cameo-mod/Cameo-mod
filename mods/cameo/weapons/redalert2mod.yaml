@@ -330,7 +330,7 @@ AsianSmallTorpedo:
 
 ^SteelSmallArms:
 	Inherits: ^RA2SmallArms
-	Report: steel_clonefire.wav
+	Report: ra2m_shared_sounds|steel_clonefire.wav
 	Projectile: Bullet
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -562,7 +562,7 @@ SteelTwisterMissiles:
 	BurstDelays: 5
 	Range: 5000
 	MinRange: 1000
-	Report: twisterfire.wav
+	Report: ra2m_shared_sounds|twisterfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -1069,7 +1069,7 @@ NaxiRifle:
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 75
 	Range: 5621
-	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	Report: ra2m_shared_sounds|nax_rifle1.wav, ra2m_shared_sounds|nax_rifle2.wav, ra2m_shared_sounds|nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: 50CAL
@@ -1287,7 +1287,7 @@ NaxiMP40:
 	Burst: 10
 	BurstDelays: 5
 	Range: 4000
-	Report: nax_mp40.wav
+	Report: ra2m_shared_sounds|nax_mp40.wav
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FF9933
@@ -1604,7 +1604,7 @@ NaxZombieSpawner:
 	Warhead@Effect2: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
-		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 
 NaxZombieSpawnerFrank:
 	Inherits: NaxZombieSpawner
@@ -1649,7 +1649,7 @@ NaxZombieSupportWeaponZombies:
 	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
-		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor1: SpawnActorOrWeapon
 		Actors: naxis_undead
@@ -1666,7 +1666,7 @@ NaxZombieSupportWeaponFranks:
 	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
-		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor2: SpawnActorOrWeapon
 		Actors: naxis_frank
@@ -1683,7 +1683,7 @@ NaxZombieSupportWeaponTanks:
 	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
-		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor2: SpawnActorOrWeapon
 		Actors: naxis_oldtank
@@ -1696,7 +1696,7 @@ NaxZombieSupportWeaponTanks:
 NaxTorpTube:
 	Inherits: RA2TorpTube
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: nax_submissileexp.wav
+		ImpactSounds: ra2m_shared_sounds|nax_submissileexp.wav
 	Warhead@Effect:
 		Explosions: ra2_large_clsn
 		ImpactSounds: gexp14a.wav
@@ -1829,7 +1829,7 @@ NaxiAntiTankCannonCorrosion:
 NaxiAlienPistol:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: Lunar_Green105mm
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Range: 2777
 	ReloadDelay: 54
 	Burst: 2
@@ -2421,7 +2421,7 @@ NaxisBlackBombSmaller:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 ^LunarNaxisUpgradedCannons:
-	Report: nax_aliengun.wav
+	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Projectile: Bullet
 		ContrailStartColor: 21f3b7AA
 		ContrailLength: 25
@@ -2470,7 +2470,7 @@ Lunar_Green105mm:
 			REFLECTOR: 51
 			Shield: 300
 		Damage: 4000
-	Report: laser_cannon2_2.wav
+	Report: ra2m_shared_sounds|laser_cannon2_2.wav
 	-Warhead@CannonHE_Medium:
 	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_Heavy_Flat:
@@ -3491,7 +3491,7 @@ naxis_sssoldier_smg:
 	Burst: 10
 	BurstDelays: 5
 	ValidTargets: Ground, Water
-	Report: nax_mp40.wav
+	Report: ra2m_shared_sounds|nax_mp40.wav
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 600

@@ -914,6 +914,6 @@ ra2_allies_rocketeer:
 		Condition: ra2_allies_upgrade_eliterocketeer
 		Prerequisites: ra2_allies_upgrade_eliterocketeer
 	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
+		Prerequisites: infantry_upgraded
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_eliterocketeer

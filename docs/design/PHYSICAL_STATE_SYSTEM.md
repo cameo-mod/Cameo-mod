@@ -1,6 +1,6 @@
 # Physical-State System — damage-scaled status meters (design spec, rev. 2026-08-09)
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `w24_multi_main_fed` = **290**. **2026-09-22 (DAWN lane-3): `w24_multi_main_fed` = 274.** **2026-09-23b (post-#456/#457): `w24_multi_main_fed` = 269; `meters_filling_before_death` = 318.** Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `w24_multi_main_fed` = **290**. **2026-09-22 (DAWN lane-3): `w24_multi_main_fed` = 274.** **2026-09-23b (post-#456/#457): `w24_multi_main_fed` = 269; `meters_filling_before_death` = 318.** **2026-09-26 (master `afb66c9b5` resync): `meters_filling_before_death` = 320; `w24_multi_main_fed` = 260.** Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
 
 Status: **The framework + the entire Temperature axis ALREADY EXIST and are wired.** This rev
 corrects the first draft, which wrongly implied a from-scratch C# build. The real remaining work is
@@ -139,7 +139,7 @@ the axes:
 | `Temperature` | 1592 | **98.6%** |
 | `Corrosion` | 839 | **52.1%** |
 
-A corrosion weapon does nothing at all to 47.9% of priced actors. Claims: `corrosion_meter_actors` = **839** and `meters_filling_before_death` = **318**, re-measured 2026-09-23 post-#456/#457 merge wave.
+A corrosion weapon does nothing at all to 47.9% of priced actors. Claims: `corrosion_meter_actors` = **839** and `meters_filling_before_death` = **320**, re-measured 2026-09-26 on master `afb66c9b5`.
 
 ### E2 pricing — the rule as built
 

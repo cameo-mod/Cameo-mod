@@ -68,7 +68,7 @@ claims:
       print(sum(included(n.key) for n in rs.resolve('world').children))
 
   - id: shield_versus_mean
-    value: 88.0773
+    value: 91.1561
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -79,7 +79,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 1.13537
+    value: 1.09702
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -174,7 +174,7 @@ claims:
       print(n)
 
   - id: live_damage_multipliers
-    value: 326
+    value: 328
     tolerance: 0
     what: >
       DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
@@ -228,7 +228,7 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 417
+    value: 423
     tolerance: 0
     what: >
       Raw authored PercentageDenominator occurrences in active weapon files, despite
@@ -274,7 +274,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 318
+    value: 320
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -343,7 +343,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 269
+    value: 260
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -379,7 +379,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 544
+    value: 548
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -478,7 +478,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1530
+    value: 1532
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -516,7 +516,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 385
+    value: 390
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
@@ -1102,7 +1102,7 @@ claims:
       print(int(cycles.pop()))
 
   - id: cameo_family_labelled_weapons
-    value: 1210
+    value: 1291
     tolerance: 0
     what: >
       Concrete Cameo weapons whose inherit chain names a `^Warhead_<Family>_<Level>` template,

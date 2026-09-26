@@ -8,13 +8,15 @@ wc2footmanslice2:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 15
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 18000
 	Inherits@w6fx: ^wc2_humans_wc2footmanslice2
 
 # 1-5 WC2 damage. 3 Base, 2 Pierce.
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 ^wc2_humans_wc2_dwarf_rifle:
 	Warhead@Effect: CreateEffect
@@ -82,16 +84,18 @@ wc2knightslice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 12
 	Range: 1420
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
 	Inherits@w6fx: ^wc2_humans_wc2knightslice
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2paladinholyvision:
 	ReloadDelay: 60
 	Range: 512000
-	Report: wc2_holyvisn.aud
+	Report: wc2_humans_sounds|wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -117,7 +121,7 @@ wc2paladinholyvision:
 wc2paladinholyvision_hit:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_holyvisn.aud
+	Report: wc2_humans_sounds|wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -203,7 +207,7 @@ wc2holyvisionSuper_hit:
 wc2paladinhealing:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_heal.aud
+	Report: wc2_humans_sounds|wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
 	Projectile: InstantHit
@@ -232,7 +236,7 @@ wc2paladinhealing:
 wc2priesthealing:
 	ReloadDelay: 40
 	Range: 5120
-	Report: wc2_heal.aud
+	Report: wc2_humans_sounds|wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
 	Projectile: InstantHit
@@ -283,7 +287,7 @@ wc2healingSuper_hit:
 wc2paladinexorcism:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_exorcism.aud
+	Report: wc2_humans_sounds|wc2_exorcism.aud
 	ValidTargets: undeadtarget
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -315,7 +319,7 @@ wc2ballistaFire:
 	ReloadDelay: 180
 	Range: 14450
 	MinRange: 2890
-	Report: wc2_catapult.aud
+	Report: wc2_shared_sounds|wc2_catapult.aud
 	Projectile: Bullet
 		Speed: 384
 		Inaccuracy: 384
@@ -421,7 +425,7 @@ wc2gryphonFireVisible:
 	Inherits@4: ^TeslaChargedWeapon
 	ReloadDelay: 100
 	Range: 4444
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 444
@@ -637,7 +641,7 @@ wc2mageFireballExplosion:
 wc2mageSlow:
 	ReloadDelay: 60
 	Range: 8000
-	Report: wc2_slow.aud
+	Report: wc2_humans_sounds|wc2_slow.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 10c0
@@ -673,7 +677,7 @@ wc2mageSlow:
 wc2magePolymorph:
 	ReloadDelay: 60
 	Range: 8000
-	Report: wc2_morph.aud
+	Report: wc2_humans_sounds|wc2_morph.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	Projectile: Missile
@@ -848,7 +852,7 @@ wc2_humans_alleria_arrow:
 	Inherits@fx: ^Effect_Arrow_Medium
 	ReloadDelay: 23
 	Range: 7487
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -866,7 +870,7 @@ wc2_humans_alleria_arrow:
 # Alleria elite / general: 6 old warheads each 8000 main + 4% -> 48000 main, 24% twin.
 ^wc2_humans_wc2_humans_alleria_arrow_elite:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_bowhit.aud
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 
 wc2_humans_alleria_arrow_elite:
 	Inherits@wh: ^Warhead_Arrow_Heavy
@@ -874,7 +878,7 @@ wc2_humans_alleria_arrow_elite:
 	Inherits@fx: ^Effect_Arrow_Heavy
 	ReloadDelay: 20
 	Range: 7487
-	Report: wc2_bowfire.aud
+	Report: wc2_shared_sounds|wc2_bowfire.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: arrow
@@ -891,6 +895,8 @@ wc2_humans_alleria_arrow_elite:
 
 # Danath: 12 WC2 damage (36000). Old 3-main (36000/18000/12%) -> one AreaDamage.
 # PercentageScale 6667 preserves the 12% percentage twin at 36000 main.
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_bowhit.aud
 ^wc2_humans_wc2_humans_danath_slice:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -901,7 +907,7 @@ wc2_humans_danath_slice:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 12
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 36000
@@ -911,7 +917,7 @@ wc2_humans_danath_slice:
 # Danath elite / veteran: 16 WC2 damage (48000). 48000*6667/200000 ~= 16%.
 ^wc2_humans_wc2_humans_danath_slice_elite:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 
 wc2_humans_danath_slice_elite:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -919,9 +925,11 @@ wc2_humans_danath_slice_elite:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 10
 	Range: 1533
-	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 48000
 		PercentageScale: 6667
 	Inherits@w6fx: ^wc2_humans_wc2_humans_danath_slice_elite
+	Warhead@Effect:
+		ImpactSounds: wc2_shared_sounds|wc2_sword1.aud,wc2_shared_sounds|wc2_sword2.aud,wc2_shared_sounds|wc2_sword3.aud

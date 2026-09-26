@@ -106,7 +106,7 @@ ra2_oilderrick:
 		PlayerPalette: playerra2
 	-WithDeathAnimation:
 
-ra2gacnst.infiltrated:
+ra2gacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Allied Buildings Plans
@@ -269,7 +269,7 @@ ra2_ywall:
 		PlayerPalette: playerra2
 		Type: ra2_ywall
 
-ra2nacnst.infiltrated:
+ra2nacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Soviet Buildings Plans
@@ -313,7 +313,7 @@ ra2nayard:
 #   Red Alert 2 Yuri Structures
 ##############################################
 
-yrnacnst.infiltrated:
+yrnacnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Yuri Buildings Plans
@@ -1845,9 +1845,9 @@ ra2caairp:
 			2: power_paratroopers.description
 			3: power_paratroopers.description
 		DropItems:
-			1: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind
-			2: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
-			3: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
+			1: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind
+			2: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2tany_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black
+			3: ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2e2_black,ra2e2_black,ra2e2_black,ra2sidewind,ra2sidewind,ra2tany_black,ra2tany_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black,ra2e2_black
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -2067,7 +2067,7 @@ ra2_ctoutp.husk:
 
 # Black Operation Soldiers
 
-ra2e2.black:
+ra2e2_black:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

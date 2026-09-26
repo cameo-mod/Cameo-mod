@@ -512,7 +512,7 @@ d2k_APC_AG:
 		Range: 1250
 		ValidTargets: Shielded
 	MinRange: 1845
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	Burst: 1
 	BurstDelays: 15
 
@@ -605,7 +605,7 @@ d2k_APC_AA:
 		Range: 1250
 		ValidTargets: Shielded
 	MinRange: 2200
-	Report: d2k_buggy_rocket.wav
+	Report: d2k_shared_sounds|d2k_buggy_rocket.wav
 	Burst: 1
 	BurstDelays: 15
 	Projectile: Missile
@@ -763,7 +763,7 @@ LeechSpit:
 	Inherits@fx: ^d2k_d2k_leechspit
 	ReloadDelay: 30
 	Range: 5230
-	Report: tx_leech_attack_confirm_1.wav
+	Report: d2k_shared_sounds|tx_leech_attack_confirm_1.wav
 	ValidTargets: Vehicle
 	Projectile: Bullet
 		Image: scmspore
@@ -1189,7 +1189,7 @@ d2k_shotgun:
 	Inherits@w72: ^Projectile_Bullet_Light
 	Inherits@w73: ^Effect_Bullet_Light
 	Range: 3328
-	StartBurstReport: shtgunboom.wav
+	StartBurstReport: d2k_shared_sounds|shtgunboom.wav
 	Burst: 3
 	BurstDelays: 0
 	ReloadDelay: 40
@@ -1292,7 +1292,7 @@ HMGh:
 DroneJumpH:
 	ReloadDelay: 45
 	Range: 3584
-	Report: vteratta.aud
+	Report: d2k_shared_sounds|vteratta.aud
 	Projectile: InstantHit
 	InvalidTargets: Structure
 	Warhead@1Dam:
@@ -1321,7 +1321,7 @@ d2k_flame_tank:
 	InvalidTargets: wall
 	ReloadDelay: 5
 	Range: 4096
-	Report: d2k_flame_tank.wav
+	Report: d2k_shared_sounds|d2k_flame_tank.wav
 	Burst: 15
 	BurstDelays: 1
 	StartBurstReport: flamer2.aud
@@ -1485,7 +1485,7 @@ d2k_laser_aa:
 		Width: 50
 		Color: FF0000
 		ZOffset: 2047
-	StartBurstReport: d2k_laser_tank_att.wav
+	StartBurstReport: d2k_shared_sounds|d2k_laser_tank_att.wav
 	BurstDelays: 0
 	Warhead@Laser_Heavy: AreaDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
