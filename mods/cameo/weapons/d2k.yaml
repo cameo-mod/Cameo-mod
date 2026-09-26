@@ -1764,28 +1764,7 @@ oRocket:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 
 oTowerMissile:
-	Inherits@w81: ^Warhead_MissileAP_Heavy_D2K_ORocket  # W7MAT covering-edge
-	Inherits@w82: ^Projectile_Missile_Heavy_D2K_OMissile  # W7MAT covering-edge
-	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_OMissile  # W7MAT covering-edge
-	MinRange: 1100  # W7MAT w8-repin
-	Report: ROCKET1.WAV  # W7MAT w8-repin
-	Range: 5500  # W7MAT w8-repin
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Spread: 256
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Damage: 4800
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			None: 15
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Wood: 65
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Light: 90
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Concrete: 30
+	Inherits: ^OMissile
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 60
@@ -1797,32 +1776,14 @@ oTowerMissile:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 
 omtank_pri:
-	Inherits@w81: ^Warhead_MissileAP_Heavy_D2K_ORocket  # W7MAT covering-edge
-	Inherits@w82: ^Projectile_Missile_Heavy_D2K_OMissile  # W7MAT covering-edge
-	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_OMissile  # W7MAT covering-edge
-	MinRange: 1230  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT order-pin
-	Burst: 2  # W7MAT order-pin
-	BurstDelays: 115  # W7MAT order-pin
-	ValidTargets: Ground, Air  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT w8-repin
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Spread: 256
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			None: 15
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Wood: 65
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Light: 90
-	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
-		Versus:
-			Concrete: 30
+	Inherits: ^OMissile
 	Inherits@fx: ^d2k_d2k_omtank_pri
 	ReloadDelay: 115
+	Burst: 2
+	BurstDelays: 115
 	Range: 6144
+	ValidTargets: Ground, Air
+	MinRange: 1230
 	Projectile: Missile
 		Inaccuracy: 96
 		RangeLimit: 7c204

@@ -12857,3 +12857,43 @@ Remaining in-lane W5 (~36): 1Dam flat-main folds (analyse_flat_main_fold
 (5), VR-routed enemy/ally splits (Sound/GrenDeath/SaboDeath — Sound2 held),
 dual-caliber AA stacks, held-trio mains, multi-mains >2 (SiegeQuad,
 PositronBounce). All need per-class rulings — classification posted.
+
+---
+
+## 2026-09-26 — Rule-4 Versus remediation (DAWN)
+
+Claude's ruling (REPLY_2026-09-26_claude_to_nova_w7_next.md): concrete
+weapons declaring `Versus`/`PercentageVersus` locally must KEEP the
+weapon-parent edge carrying that content. Merge gate:
+`count_local_versus.py` <= 891 (master baseline).
+
+Diagnosis: my W7/W8 materialization machinery (stack root #508) copied
+parent inline Versus into concrete defs — gate went 891 -> 958 (+67).
+
+Remediation executed: full def revert to afb66c9b5 master form for all
+66 KEEP-EDGE weapons (probe-verified: dropping the copied Versus is NOT
+resolved-identical, so the parent edge is required). On the reverted form:
+- W6 fx locals re-extracted for the 9 defs that still had local fx runs
+  at master (keeps in-lane W6 = 0)
+- W5 fold re-applied on wc2axeFirespear (Damage pin + chip cancel);
+  GDIRigDroneTargetingTower needed nothing — its parent carries the fold
+- 196 orphaned generated `^<pfx>_<weapon>*` templates deleted
+  (base-aware sweep: 7 pre-existing W7MAT templates kept)
+
+Verified: gate 891 (exactly at ceiling); corpus 3719 weapons — 0 payload
+diffs, 0 missing; 5 order diffs all in wc2 family and each RESTORES
+master order (the materialized bodies had drifted tip-side — the revert
+fixes pre-existing drift, caught only because this verify enumerates the
+BASE-file census, not the current-file census). Orphans 0, empty 0,
+dup-inherits byte-identical to base.
+
+Ratchets re-locked: W7 647->711 (restored parent edges = ruling intent),
+W8 298->302 (4 legacy ^ edges rode back with the master wc2 defs —
+rule 4 outranks W8), W1 rate 1534->1435bp, W4 203->146, W6 347->346,
+W2 51->49.
+
+Bug class logged in LESSONS: splice helpers must build newl = head +
+newblock + tail on the ORIGINAL line list — mutating the list then
+slicing by stale indices ate a 202-line region (OrniBomb..OrniGunC in
+D2k/Atreides); only caught because the resolved diff was absurd, then
+the base-census verify confirmed nothing was lost after repair.

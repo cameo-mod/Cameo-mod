@@ -163,7 +163,6 @@ D2K_155mm2:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 6000
 
-
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1144,134 +1143,17 @@ RaiderGuns:
 		Damage: 4000
 		PercentageScale: 9975
 	TargetActorCenter: true
-^d2k_ixian_raiderguns_upgrade:
-	Inherits: ^Effect_CannonHE_Heavy
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectAir: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^d2k_ixian_raiderguns_upgrade
-	Warhead@Bullet_Medium_Flat: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 6000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 9984
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 40
-	Range: 6400
-	TargetActorCenter: true
-	Projectile: Bullet
-		Image: 50CAL
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
-		Inaccuracy: 120
-		FakeBulletNumber: 3
-		FakeBulletSpawnInterval: 2
-		FakeBulletSpeed: 4000
-		FakeBulletInaccuracy: 64
-		ContrailZOffset: 4000
-		ContrailStartColor: 88FF4488
-		ContrailStartColorAlpha: 136
-		ContrailEndColor: FFFFFF44
-		ContrailEndColorAlpha: 34
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 15
-		ContrailWidth: 75
-		Speed: 4000
-		Width: 20
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
-	Burst: 4
-	BurstDelays: 2
-	StartBurstReport: 20MMGUN1.WAV
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits: RaiderGuns
+	Inherits@2: ^HeavyMachineGunProjectile
 	Report: tnkfire6.aud
+	Projectile: Bullet
+		Inaccuracy: 120
+	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1283,135 +1165,26 @@ RaiderGuns_upgrade:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 	-Warhead@CannonHE_Heavy:
-^d2k_ixian_hmg_turret_upgrade:
-	Inherits: ^Effect_CannonHE_Heavy
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectAir: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: green_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 HMG_turret_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^d2k_ixian_hmg_turret_upgrade
-	Warhead@Bullet_Medium_Flat: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 6000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 9984
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-	ValidTargets: Ground, Water, Air
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits: HMG_turret
+	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ReloadDelay: 33
-	Range: 7394
-	TargetActorCenter: true
-	Projectile: Bullet
-		Image: 50CAL
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
-		Inaccuracy: 120
-		FakeBulletNumber: 3
-		FakeBulletSpawnInterval: 2
-		FakeBulletSpeed: 4000
-		FakeBulletInaccuracy: 64
-		ContrailZOffset: 4000
-		ContrailStartColor: 88FF4488
-		ContrailStartColorAlpha: 136
-		ContrailEndColor: FFFFFF44
-		ContrailEndColorAlpha: 34
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 15
-		ContrailWidth: 75
-		Speed: 4000
-		Width: 20
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
 	Burst: 4
 	BurstDelays: 3
 	StartBurstReport: 20MMGUN1.WAV
-	Report: tnkfire6.aud
+	Projectile: Bullet
+		Inaccuracy: 120
+	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1423,6 +1196,10 @@ HMG_turret_upgrade:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 	-Warhead@CannonHE_Heavy:
 HMG_Duelist:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
@@ -2439,229 +2216,47 @@ ixian_farasha:
 		ValidTargets: Shielded
 		Duration: 15
 	-Warhead@TeslaExtraDamage:
-^d2k_ixian_d2k_farasha_aa:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: effect75alpha
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactActors: false
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure
-		SmudgeType: Scorch
-
-^d2k_ixian_d2k_farasha_aa_fx:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ValidTargets: Ground, Water, Air
-		ExplosionPalette: effect75alpha
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactActors: false
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure
-		SmudgeType: Scorch
 
 d2k_farasha_aa:
+	Inherits: ixian_farasha
+	-FirstBurstTargetOffset:
+	-FollowingBurstTargetOffset:
+	Projectile: LaserZap
+		TrackTarget: true
 	ValidTargets: Air
-	ReloadDelay: 50
-	Range: 6400
-	TargetActorCenter: true
-	Warhead@Laser_Medium: AreaDamage
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Air
-		Spread: 48
-		Damage: 8000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 272
-			Concrete: 200
-			Superheavy: 194
-			Plate: 188
-			Spaceship: 175
-			Heavy: 170
-			Medium: 148
-			Helicopter: 140
-			Steel: 136
-			Flak: 129
-			Bomber: 120
-			Light: 106
-			Wood: 85
-			None: 37
-			Fighter: 34
-			Scout: 31
-			Heroic: 29
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
-		PercentageScale: 0
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heroic: 19
-			Spaceship: 18
-			Concrete: 17
-			Heavy: 16
-			Plate: 15
-			Helicopter: 14
-			Steel: 13
-			Medium: 12
-			Flak: 11
-			Bomber: 10
-			Wood: 9
-			Light: 8
-			None: 7
-			Fighter: 6
-			Scout: 5
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 1000
-		Spread: 1
-		InvalidTargets: Shielded
-		ValidTargets: Air
-		ValidRelationships: Neutral, Enemy
-	Report: bigggun1.aud
-	Projectile: LaserZap
-		Duration: 5
-		Inaccuracy: 0
-		BeamColor: FF666633
-		HelixPlayerColor: true
-		Blockable: true
-		ZOffset: 2048
-		HitAnim:
-		TrackTarget: true
-		HelixColor: FF000044
-		HelixThickness: 64
-		HelixRadius: 128
-		HelixPitch: 512
-		HelixRadiusDeltaPerTick: 16
-		HelixAngleDeltaPerTick: 32
-		QuantizationCount: 64
-		Speed: 3000
-	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Air
-		Spread: 50
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Heroic: 25
-			Plate: 24
-			Flak: 23
-			None: 22
-			Superheavy: 21
-			Heavy: 20
-			Medium: 19
-			Light: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 15
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits: ^d2k_ixian_d2k_farasha_aa
-	-Warhead@Concrete:
-	-Warhead@Effect:
-	-Warhead@RA2Scorch:
-	-Warhead@Smudge:
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		AffectsParent: false
-		Spread: 125
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Superheavy: 25
-			Heavy: 24
-			Medium: 23
-			Light: 22
-			Scout: 21
-			Heroic: 20
-			Plate: 19
-			Flak: 18
-			None: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
-		UpdatesUnitStatistics: false
-		ValidTargets: Air
-	Inherits@w6fx: ^d2k_ixian_d2k_farasha_aa_fx
-	Burst: 50
-	BurstDelays: 1
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 500
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 12
-			Concrete: 20
-			Fighter: 13
-			Flak: 24
-			HAZMAT: 25
-			Heavy: 15
-			Helicopter: 11
-			Heroic: 22
-			Light: 17
-			Medium: 16
-			None: 25
-			Plate: 23
-			Scout: 18
-			Shield: 35
-			Spaceship: 10
-			Steel: 19
-			Superheavy: 14
-			Wood: 21
-	InvalidTargets: wall
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		ForceGround: true
-		InternalOwner: Neutral
-		OwnerType: InternalName
-		Range: 1
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
+		ValidTargets: Air
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
+		ValidTargets: Air
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@TeslaWeapon:
+	Warhead@Laser_Medium:
+		-InvalidTargets:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 0
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Air
 
 farasha_drone_ixian:
 	Inherits@wh: ^Warhead_Inferno_Light
@@ -2696,108 +2291,26 @@ d2k_basq:
 		ValidTargets: Ground, Water
 		Damage: 32000
 
-^d2k_ixian_d2k_basq_aa_fx:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		ExplosionPalette: effect75alpha
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: EXPLSML4.WAV
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		InvalidTargets: Ship, Structure, Bridge
-		ValidTargets: Water, Underwater
-
 d2k_basq_AA:
-	ValidTargets: Air
-	ReloadDelay: 25
-	Range: 6666
-	TargetActorCenter: true
-	Warhead@Flak_Light: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		Spread: 73
-		Damage: 32000
-		Falloff: 100, 58, 32, 16, 6, 0
-		Versus:
-			HAZMAT: 88
-			COMPOSITE: 63
-			BLAST: 58
-			REFLECTOR: 70
-			ARMOR: 70
-			Shield: 152
-			Fighter: 200
-			None: 194
-			Bomber: 182
-			Helicopter: 166
-			Flak: 161
-			Spaceship: 151
-			Plate: 124
-			Scout: 100
-			Light: 79
-			Wood: 73
-			Medium: 68
-			Heroic: 62
-			Heavy: 61
-			Steel: 60
-			Superheavy: 57
-			Concrete: 54
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Fighter: 16
-			Bomber: 15
-			Helicopter: 14
-			Spaceship: 13
-			None: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Scout: 8
-			Light: 7
-			Medium: 6
-			Heavy: 5
-			Superheavy: 4
-			Wood: 3
-			Steel: 2
-			Concrete: 1
-	Projectile: Bullet
-		Inaccuracy: 333
-		FakeBulletNumber: 3
-		FakeBulletSpawnInterval: 2
-		FakeBulletSpeed: 10000
-		FakeBulletInaccuracy: 64
-		ContrailZOffset: 4000
-		ContrailStartColor: 00FF4400
-		ContrailStartColorAlpha: 0
-		ContrailEndColor: 000000
-		ContrailEndColorAlpha: 255
-		ContrailStartWidth: 50
-		ContrailEndWidth: 100
-		ContrailLength: 10
-		Speed: 3333
+	Inherits: d2k_basq
 	Inherits@fx: ^d2k_ixian_d2k_basq_aa
-	-Warhead@Concrete:
-	-Warhead@Effect:
-	-Warhead@EffectWater:
-	-Warhead@ShieldHitEffect:
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx: ^d2k_ixian_d2k_basq_aa_fx
-	Report: zhyfir00.aud
+	ValidTargets: Air
+	Range: 6666
+	-Warhead@EffectAir:
+	Warhead@Flak_Light:
+		ValidTargets: Air
+
+# d2k_guild_teleport:
+# 	ReloadDelay: 1
+# 	Projectile: InstantExplode
+# 	Warhead@1Actor: SpawnActor
+# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, ixian_farasha
+# 		Range: 5
+# 		Image: ra2_allies_chronominer
+# 		Sequence: warpout
+# 		Palette: ra2effect
+# 		ValidTargets: Air, Ground, Water
+# 	Warhead@2Flash: ChronoFlashEffect
 
 d2k_projections:
 	Projectile: InstantHit

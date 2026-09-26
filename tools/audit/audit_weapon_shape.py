@@ -82,7 +82,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 1534   # 333/2172 = 1533.2 bp: W6 full in-lane sweep — local fx
+W1_RATE_BP = 1435   # 314/2189 = 1434.4 bp: rule-4 remediation reverted the 66
+                    # materialized defs whose parent edge carried inline Versus
+                    # (weapon-parent Inherits restored, covering-edge fan-out gone).
+                    # was: 1534 = 333/2172: W6 full in-lane sweep — local fx
                     # warhead runs moved to per-weapon ^<theme>_<weapon>
                     # templates, +1 edge per converted weapon (174 done: D2k,
                     # TD, TS, WC2, SC). The fx-bundle edge is structural —
@@ -105,7 +108,9 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 51    # 58 -> 51: R17 chip folds removed the sole-purpose
+W2_BASELINE = 49    # 51 -> 49: rule-4 remediation (the reverted defs' extra
+                    # ^Warhead_ edges went with the materialized bodies).
+                    # was: 58 -> 51: R17 chip folds removed the sole-purpose
                     # ^Warhead_*_ExtraDamage family edges folded into mains.
                     # 71 -> 58: W1 dead-edge sweep (-13 dead ^Warhead_* edges,
                     # each with its dead -Key: cancel pair). Resolved-identical.
@@ -138,14 +143,17 @@ W3_BASELINE = 18    # 24 -> 18: W1 dead-edge sweep (-6 dead ^Projectile_* edges)
                     # 7 -> 11: W7 conversion — weapons whose resolved output
                     # mixes two projectile families carry both covering edges
                     # (fidelity). was: 12 -> 7 post-rebase resync; dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 203   # 94 -> 203: W6 in-lane sweep — converted weapons keep
+W4_BASELINE = 146   # 203 -> 146: rule-4 remediation — reverted defs no longer
+                    # carry the materialized body's dual fx edges.
+                    # was: 94 -> 203: W6 in-lane sweep — converted weapons keep
                     # their generic @fx edge AND gain a per-weapon fx-template
                     # edge; fx-pure ^<theme>_<weapon> templates count fx-kind.
 W5_BASELINE = 153   # 389 -> 153: re-locked at current true value after the
                     # R17 chip-fold batch (-19 weapons). The 389 figure was a
                     # merge-repair era ceiling, far above any recent measurement.
                     # previous: more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 347   # 497 -> 347: W6 in-lane sweep complete (D2k, TD, TS,
+W6_BASELINE = 346   # 347 -> 346: rule-4 remediation (Sound2 drop, reverts).
+                    # was: 497 -> 347: W6 in-lane sweep complete (D2k, TD, TS,
                     # WC2, SC — 174 weapons, ~250 new per-weapon templates);
                     # 3809/3809 corpus-wide resolved+ordered identical.
                     # Remaining 347 are out-of-lane packs.
@@ -153,7 +161,12 @@ W6_BASELINE = 347   # 497 -> 347: W6 in-lane sweep complete (D2k, TD, TS,
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 647   # 664 -> 647: belated re-lock — the R17 chip-fold commit
+W7_BASELINE = 711   # 647 -> 711: rule-4 remediation (Claude ruling: concrete
+                    # weapons whose parent carries inline Versus/PercentageVersus
+                    # KEEP the weapon-parent edge) — 66 defs reverted to master
+                    # form; the restored Inherits:<weapon> edges are the ruling's
+                    # intent, not new debt. Merge gate count_local_versus: 958 -> 891.
+                    # was: 664 -> 647: belated re-lock — the R17 chip-fold commit
                     # dropped weapon-parent ExtraDamage edges; measured 647 at
                     # W6 batch-1 time (both sides of the diff).
                     # 804 -> 760: W7-remainder materialization batch (DAWN
@@ -170,7 +183,11 @@ W7_BASELINE = 647   # 664 -> 647: belated re-lock — the R17 chip-fold commit
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 298   # 362 -> 298: W1 dead-edge sweep removed dead non-three-kind
+W8_BASELINE = 302   # 298 -> 302: rule-4 remediation — the reverted master defs
+                    # bring back 4 legacy ^ edges that rode the same defs (wc2
+                    # family); the covering-edge work that replaced them was on
+                    # the materialized bodies. Accepted: rule 4 outranks W8.
+                    # was: 362 -> 298: W1 dead-edge sweep removed dead non-three-kind
                     # edges (^ts_gdi_tsioncannon, ^HeavyMachineGunProjectile,
                     # ^AMTProjectile, ^Projectile_Laser_Heavy etc) + W8 batches.
                     # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +

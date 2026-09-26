@@ -2681,3 +2681,21 @@ resolved-identical throughout):
   the template, but `audit_orphan_cancels` can't see their provider** (it
   evaluates `^` defs alone; the provider lives on the consumer's other
   edges). Split such cancels back into a local untyped `Warhead@X:` pin.
+
+## List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)
+
+A per-def splicer that did `lines[s:e] = lines[s:e][:0]` (clear) then
+`newl = lines[:s+1] + out + lines[e:]` (rebuild) used the POST-mutation
+list with PRE-mutation index `e` — silently skipping ~46 real lines and
+leaving orphan depth-2 children (`Damage: 800`, a stray `Versus`) inside
+the previous def. Resolved payload diffed absurdly (`InstantHit`, a
+foreign `FREMODD1` report) — the diff was the alarm, not the edit.
+
+**Rules:**
+- Replace spans by `newl = lines[:s] + newblock + lines[e:]` on the
+  ORIGINAL list; apply multiple spans bottom-up.
+- After any scripted splice, verify with a BASE-file census (enumerate
+  def names in the pre-edit file), not the current-file census — a
+  deleted def is invisible to a census built from the damaged file.
+- A `### comment` on a def header line breaks `Name:$` def-end regexes;
+  match `:(\s|$)`.

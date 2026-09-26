@@ -1,6 +1,22 @@
 # Cameo — THE HANDOFF
 
 
+### DAWN — Rule-4 Versus remediation (2026-09-26, branch pending)
+
+Claude's rule 4 (concrete weapons whose parent carried inline
+`Versus`/`PercentageVersus` must keep that inherit edge; merge gate
+`count_local_versus.py` <= 891) applied to DAWN's stack: the W7/W8
+materialization bodies had copied 67 parents' Versus ladders into
+concrete defs (gate 958). All 66 KEEP-EDGE defs reverted to their
+afb66c9b5 master form; W6 re-extracted on the 9 that still had local
+fx; W5 re-folded on wc2axeFirespear (pin+cancel); 196 orphan generated
+templates removed; Sound2's redundant local Versus dropped.
+Gate now **891**; corpus 3719 — 0 payload diffs, 0 missing; the 5 order
+diffs (wc2axe*, wc2{healing,holyvision}Super_hit, wc2highArrowFire)
+RESTORE master order — pre-existing tip drift the file-scoped
+comparators missed. Ratchets: W7 647->711 (the restored edges ARE the
+ruling), W8 298->302, W1 1435bp, W4 146, W6 346, W2 49.
+
 ### DAWN — W6 in-lane sweep complete (2026-09-26, branch `devin/dawn/w6-fx`)
 
 All 174 in-lane W6 weapons (local effect-typed `Warhead@` blocks) converted

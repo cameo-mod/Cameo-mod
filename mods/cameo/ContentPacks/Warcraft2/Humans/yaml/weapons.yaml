@@ -149,12 +149,7 @@ wc2holyvisionSuper:
 # Spell sound effect goes in a CreateEffectWarhead here because if you put it in the weapon fired by IonCannonPower,
 # the sound will play at the location of the building that fired the power, and not at the impact location.
 
-^wc2_humans_wc2holyvisionsuper_hit:
-	Warhead@2Eff: CreateEffect  # W7MAT order-pin
-		Delay: 10
-		Image: wc2_effect_sparkle_circle
-		Explosions: idle-n
-		ImpactSounds: wc2_holyvisn.aud
+^wc2_humans_wc2holyvisionsuper_hit_fx:
 	Warhead@Effect: CreateEffect
 		Delay: 13
 		Image: wc2_effect_sparkle_circle
@@ -185,30 +180,20 @@ wc2holyvisionSuper:
 		Explosions: idle-nw
 
 wc2holyvisionSuper_hit:
-	Inherits@w6fx: ^wc2_humans_wc2holyvisionsuper_hit
-	Warhead@3Reveal: RevealShroud  # W7MAT order-pin
+	Inherits: wc2paladinholyvision_hit
+	-Report:
+	Warhead@2Eff:
+		Delay: 10
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-n
+		ImpactSounds: wc2_holyvisn.aud
+	Inherits@w6fx: ^wc2_humans_wc2holyvisionsuper_hit_fx
+	Warhead@3Reveal:
 		Duration: 250
-		Radius: 9c0
-		RevealStances: Ally
-		RevealGeneratedShroud: True
 
 # Undecided on whether or not this should be able to target ballistas/catapults, or vehicles in general.
 # Just gonna leave it as able to target vehicles in general for now. If we make a "vanilla" wc2 human faction, we can re-implement this.
 
-	Warhead@1Dam: SpreadDamage  # W7MAT order-pin
-		Versus:
-			None: 100
-			Light: 100
-			Medium: 100
-			Heavy: 100
-			Wood: 100
-			Concrete: 100
-		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-		Damage: 0
-		Spread: 1
-	Range: 5120  # W7MAT order-pin
-	Projectile: InstantHit  # W7MAT order-pin
-	ReloadDelay: 60  # W7MAT order-pin
 ^wc2_humans_wc2paladinhealing:
 	Warhead@2Eff: CreateEffect
 		Image: wc2_effect_heal
@@ -277,33 +262,19 @@ wc2healingSuper:
 		Footprint: _____ _____ _____ _____ ____x
 		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
 
-^wc2_humans_wc2healingsuper_hit:
+^wc2_humans_wc2healingsuper_hit_fx:
 	Warhead@2Eff: CreateEffect
 		ValidTargets: Ground, Water, Air
-		Explosions: idle
-		Image: wc2_effect_heal
 
 wc2healingSuper_hit:
+	Inherits: wc2paladinhealing
 	ValidTargets: Ground, Water, Air
-	Warhead@1Dam: SpreadDamage  # W7MAT order-pin
+	Warhead@1Dam:
 		Spread: 256
 		Damage: -25000
 		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-		Versus:
-			None: 100
-			Concrete: 0
-			Light: 100
-			Medium: 100
-			Heavy: 100
-			Wood: 0
-		ValidRelationships: Ally
-	Inherits@w6fx: ^wc2_humans_wc2healingsuper_hit
+	Inherits@w6fx: ^wc2_humans_wc2healingsuper_hit_fx
 
-	ReloadDelay: 60  # W7MAT order-pin
-	Range: 5120  # W7MAT order-pin
-	Report: wc2_heal.aud  # W7MAT order-pin
-	Projectile: InstantHit  # W7MAT order-pin
 ^wc2_humans_wc2paladinexorcism:
 	Warhead@2Eff: CreateEffect
 		Image: wc2_exorcism

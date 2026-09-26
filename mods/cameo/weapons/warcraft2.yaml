@@ -109,10 +109,7 @@ wc2highArrowFire:
 	Inherits: ^LaserWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^HeavyAAWeapon
-	Inherits@w71: ^Warhead_CannonHE_Medium_Flat  # W7MAT covering-edge
-	Inherits@w72: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
-	Inherits@w73: ^Projectile_Shell_Medium  # W7MAT covering-edge
-	Inherits@w74: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Inherits@4: wc2arrowFire
 	ReloadDelay: 35
 	Range: 7487
 	Report: wc2_bowfire.aud
@@ -131,13 +128,6 @@ wc2highArrowFire:
 		-MinimumLaunchSpeed:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-		ContrailStartColor: EECCAA88
-		ContrailStartWidth: 40
-		ContrailLength: 0
-		ContrailEndColor: 88664422
-		ContrailEndWidth: 80
-		Inaccuracy: 0
-		LaunchAngle: 66
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -161,147 +151,6 @@ wc2highArrowFire:
 	Warhead@CannonHE_Medium:
 		Damage: 33000
 		PercentageScale: 1210
-		ValidTargets: Ground, Water, Air
-	Warhead@ChaingunPercentage: AreaDamagePercentage  # W7MAT order-pin
-		Versus:
-			Helicopter: 9
-			Flak: 19
-			Fighter: 15
-			Plate: 18
-			Wood: 14
-			Bomber: 12
-			Heroic: 17
-			Shield: 25
-			None: 20
-			Medium: 10
-			Light: 13
-			Superheavy: 5
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Concrete: 11
-			Scout: 16
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		Damage: 2
-		Spread: 100
-		UpdatesUnitStatistics: false
-	Warhead@ArrowWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		Versus:
-			Bomber: 13
-			Heroic: 10
-			Spaceship: 9
-			Superheavy: 4
-			Helicopter: 11
-			Scout: 8
-			Wood: 1
-			Fighter: 15
-			Medium: 6
-			Shield: 17
-			Heavy: 5
-			None: 16
-			Light: 7
-			Plate: 12
-			Flak: 14
-			Concrete: 2
-			Steel: 3
-		UpdatesUnitStatistics: false
-		Spread: 35
-		InvalidTargets: wall
-		ValidTargets: Ground, Water, Air
-		Falloff: 100, 85, 70, 55, 40, 25, 10
-		Damage: 2
-	Warhead@GrenadePercentage: AreaDamagePercentage  # W7MAT order-pin
-		UpdatesUnitStatistics: false
-		Versus:
-			Shield: 17
-			Flak: 7
-			Bomber: 3
-			Helicopter: 2
-			Medium: 12
-			Heroic: 5
-			Heavy: 10
-			Scout: 16
-			Steel: 11
-			Light: 14
-			Plate: 6
-			Spaceship: 1
-			Superheavy: 8
-			Wood: 15
-			Fighter: 4
-			Concrete: 13
-			None: 9
-		Damage: 2
-		Falloff: 100, 50, 33, 25, 20
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 200
-	-Warhead@CannonHE_Medium_Flat:  # W7MAT order-pin
-	Warhead@ShieldHitEffect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage  # W7MAT order-pin
-		Versus:
-			Heavy: 9
-			Scout: 12
-			Fighter: 20
-			Superheavy: 8
-			Concrete: 6
-			Light: 11
-			Flak: 15
-			Spaceship: 17
-			Heroic: 13
-			Medium: 10
-			Shield: 25
-			Wood: 7
-			Bomber: 19
-			Plate: 14
-			Helicopter: 18
-			Steel: 5
-			None: 16
-		Spread: 125
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	InvalidTargets: wall  # W7MAT order-pin
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage  # W7MAT order-pin
-		Versus:
-			Bomber: 2
-			Flak: 7
-			Light: 13
-			Medium: 14
-			Spaceship: 4
-			None: 6
-			Concrete: 10
-			Helicopter: 3
-			Heroic: 5
-			Plate: 8
-			Heavy: 15
-			Fighter: 1
-			Shield: 17
-			Superheavy: 16
-			Steel: 11
-			Scout: 12
-			Wood: 9
-		UpdatesUnitStatistics: false
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 75
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@Glow: GlowImpact  # W7MAT order-pin
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
-		Duration: 3
-	Warhead@Effect: CreateEffect  # W7MAT order-pin
-		ImpactSounds: wc2_bowhit.aud
-		Explosions: small_poof
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect  # W7MAT order-pin
-		ImpactSounds: xplos.aud
-	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
-		Damage: 100
 SiegeEngineCannon:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^NuclearWarhead

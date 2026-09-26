@@ -120,121 +120,12 @@ td_nod_rocketsoldier_rockets:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 	Report: bazook1.aud
-^td_nod_td_nod_flamethrower_flamethrower:
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.3
-		FadeFrames: 6
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall
-
-^td_nod_td_nod_flamethrower_flamethrower_1:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-
-^td_nod_td_nod_flamethrower_flamethrower_2:
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
 
 td_nod_flamethrower_flamethrower:
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
+	Inherits: Flamethrower
 	Range: 2495
-	TargetActorCenter: true
-	Warhead@Flame_Light: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 200
+	Warhead@Flame_Light:
 		Damage: 27494
-		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 76
-			BLAST: 67
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 203
-			None: 200
-			Wood: 195
-			Flak: 170
-			Steel: 169
-			Scout: 127
-			Plate: 117
-			Concrete: 103
-			Light: 95
-			Fighter: 84
-			Medium: 80
-			Heroic: 74
-			Heavy: 73
-			Bomber: 70
-			Superheavy: 66
-			Helicopter: 63
-			Spaceship: 57
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			None: 16
-			Wood: 15
-			Flak: 14
-			Steel: 13
-			Plate: 12
-			Concrete: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-	Projectile: Bullet
-		Speed: 3000
-	Inherits: ^td_nod_td_nod_flamethrower_flamethrower
-	-Warhead@Effect:
-	-Warhead@RA2Scorch:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_flamethrower_flamethrower_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 6
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx1: ^td_nod_td_nod_flamethrower_flamethrower_2
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Report: flamer2.aud
 
 td_nod_chemicalwarrior_chemspray:
 	Inherits@w71: ^Warhead_Chemical_Light
@@ -266,145 +157,12 @@ td_nod_commando_td_gdi_commando_sniper:
 		Spread: 1
 		Falloff: 100, 0
 
-^td_nod_td_nod_artillery_artilleryshell:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 175
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-
-^td_nod_td_nod_artillery_artilleryshell_1:
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-
-^td_nod_td_nod_artillery_artilleryshell_2:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 175
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship
-
 td_nod_artillery_artilleryshell:
-	Warhead@Concussion_Medium_Flat: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 350
-		Damage: 72263
-		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 106
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 9997
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-	ValidTargets: Ground, Water
-	ReloadDelay: 112
+	Inherits: ArtilleryShell
 	Range: 11291
-	TargetActorCenter: true
-	Projectile: Bullet
-		Speed: 246
-		Blockable: false
-		LaunchAngle: 75
-		Inaccuracy: 492
-		Image: BOMB
-		ContrailLength: 35
-		ContrailStartWidth: 100
-		ContrailEndWidth: 25
-		ContrailStartColor: FFFF88FF
-		ContrailEndColor: FF884422
-	Inherits: ^td_nod_td_nod_artillery_artilleryshell
-	-Warhead@Concrete:
-	-Warhead@DuneRock:
-	-Warhead@DuneSand:
-	-Warhead@Effect:
-	-Warhead@EffectWater:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_artillery_artilleryshell_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 12
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx1: ^td_nod_td_nod_artillery_artilleryshell_2
 	MinRange: 2258
-	Report: tnkfire2.aud
+	Warhead@Concussion_Medium_Flat:
+		Damage: 72263
 
 td_nod_flametank_bigflamer:
 	Inherits@w71: ^Warhead_Flame_Medium
@@ -430,387 +188,25 @@ td_nod_buggy_machinegun:
 	Report: mgun11.aud
 	ReloadDelay: 10
 	Burst: 3
-^td_nod_td_nod_ssmlauncher_honestjohn:
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-
-^td_nod_td_nod_ssmlauncher_honestjohn_1:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-
-^td_nod_td_nod_ssmlauncher_honestjohn_2:
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-
-^td_nod_td_nod_ssmlauncher_honestjohn_3:
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
 
 td_nod_ssmlauncher_honestjohn:
-	ValidTargets: Ground, Water
-	ReloadDelay: 225
+	Inherits: HonestJohn
 	Range: 10449
-	TargetActorCenter: true
-	Warhead@MissileFire_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 30
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 245
-		Damage: 69017
-		Falloff: 100, 74, 54, 36, 0
-		Versus:
-			HAZMAT: 57
-			COMPOSITE: 82
-			BLAST: 56
-			REFLECTOR: 85
-			ARMOR: 70
-			Shield: 245
-			Wood: 178
-			Steel: 156
-			None: 151
-			Concrete: 138
-			Flak: 132
-			Plate: 119
-			Scout: 110
-			Light: 105
-			Medium: 92
-			Heavy: 91
-			Superheavy: 89
-			Fighter: 78
-			Heroic: 74
-			Bomber: 70
-			Helicopter: 61
-			Spaceship: 53
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
-		PhysicalStates:
-			Temperature: 50
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Wood: 24
-			Steel: 22
-			Scout: 21
-			Light: 20
-			Concrete: 20
-			None: 19
-			Medium: 18
-			Flak: 17
-			Heavy: 17
-			Plate: 16
-			Superheavy: 16
-			Fighter: 15
-			Heroic: 14
-			Bomber: 14
-			Helicopter: 13
-			Spaceship: 12
-	Inherits: ^td_nod_td_nod_ssmlauncher_honestjohn
-	-Warhead@Effect:
-	-Warhead@RA2Scorch:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_ssmlauncher_honestjohn_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx1: ^td_nod_td_nod_ssmlauncher_honestjohn_2
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Inherits@w6fx2: ^td_nod_td_nod_ssmlauncher_honestjohn_3
-	Burst: 2
-	BurstDelays: 25
 	MinRange: 2090
-	Report: rocket2.aud
-	Projectile: Bullet
-		Image: MISSILE
-		TrailImage: smokey
-		Speed: 250
-		Inaccuracy: 750
-		LaunchAngle: 100
-		Blockable: false
-		Shadow: true
-		TrailDelay: 1
-		TrailInterval: 1
-
-^td_nod_td_nod_flamethrower_flamethrowerexplode:
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.3
-		FadeFrames: 6
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall
-
-^td_nod_td_nod_ballisticmissilesubmarine_honestjohn:
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-
-^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_1:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-
-^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_2:
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-
-^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_3:
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: firebl3.aud
+	Warhead@MissileFire_Heavy:
+		Damage: 69017
 
 td_nod_ballisticmissilesubmarine_honestjohn:
-	ValidTargets: Ground, Water
-	ReloadDelay: 225
-	Range: 8940
-	TargetActorCenter: true
-	Warhead@MissileFire_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 30
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 245
-		Damage: 100000
-		Falloff: 100, 74, 54, 36, 0
-		Versus:
-			HAZMAT: 57
-			COMPOSITE: 82
-			BLAST: 56
-			REFLECTOR: 85
-			ARMOR: 70
-			Shield: 245
-			Wood: 178
-			Steel: 156
-			None: 151
-			Concrete: 138
-			Flak: 132
-			Plate: 119
-			Scout: 110
-			Light: 105
-			Medium: 92
-			Heavy: 91
-			Superheavy: 89
-			Fighter: 78
-			Heroic: 74
-			Bomber: 70
-			Helicopter: 61
-			Spaceship: 53
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
-		PhysicalStates:
-			Temperature: 50
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Wood: 24
-			Steel: 22
-			Scout: 21
-			Light: 20
-			Concrete: 20
-			None: 19
-			Medium: 18
-			Flak: 17
-			Heavy: 17
-			Plate: 16
-			Superheavy: 16
-			Fighter: 15
-			Heroic: 14
-			Bomber: 14
-			Helicopter: 13
-			Spaceship: 12
+	Inherits: HonestJohn
+	Warhead@MissileFire_Heavy:
 		PercentageDenominator: 10000
-	Inherits: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn
-	-Warhead@Effect:
-	-Warhead@RA2Scorch:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx1: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_2
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Inherits@w6fx2: ^td_nod_td_nod_ballisticmissilesubmarine_honestjohn_3
-	Burst: 2
-	BurstDelays: 25
-	MinRange: 1790
-	Report: rocket2.aud
-	Projectile: Bullet
-		Image: MISSILE
-		TrailImage: smokey
-		Speed: 250
-		Inaccuracy: 750
-		LaunchAngle: 100
-		Blockable: false
-		Shadow: true
-		TrailDelay: 1
-		TrailInterval: 1
-^td_nod_td_nod_flamethrower_flamethrowerexplode_1:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-
-^td_nod_td_nod_flamethrower_flamethrowerexplode_2:
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
+		PercentageScale: 10000
+		Damage: 100000
 
 td_nod_flamethrower_flamethrowerexplode:
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
-	Range: 2085
-	TargetActorCenter: true
-	Warhead@Flame_Light: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 200
+	Inherits: Flamethrower
+	Warhead@Flame_Light:
 		Damage: 10000
-		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 76
-			BLAST: 67
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 203
-			None: 200
-			Wood: 195
-			Flak: 170
-			Steel: 169
-			Scout: 127
-			Plate: 117
-			Concrete: 103
-			Light: 95
-			Fighter: 84
-			Medium: 80
-			Heroic: 74
-			Heavy: 73
-			Bomber: 70
-			Superheavy: 66
-			Helicopter: 63
-			Spaceship: 57
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			None: 16
-			Wood: 15
-			Flak: 14
-			Steel: 13
-			Plate: 12
-			Concrete: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-	Projectile: Bullet
-		Speed: 3000
-	Inherits: ^td_nod_td_nod_flamethrower_flamethrowerexplode
-	-Warhead@Effect:
-	-Warhead@RA2Scorch:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_flamethrower_flamethrowerexplode_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 6
-		Range: 1250
-		ValidTargets: Shielded
-	Inherits@w6fx1: ^td_nod_td_nod_flamethrower_flamethrowerexplode_2
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Report: flamer2.aud
 td_nod_laserturret_laser:
 	Inherits@wh: ^Warhead_Laser_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1887,178 +1283,28 @@ td_nod_obeliskoflight_laserobelisk:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
-^td_nod_td_nod_obeliskoflight_laserobeliskburning:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-
-^td_nod_td_nod_obeliskoflight_laserobeliskburning_1:
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-
-^td_nod_td_nod_obeliskoflight_laserobeliskburning_2:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-
 td_nod_obeliskoflight_laserobeliskburning:
-	ValidTargets: Ground, Water
+	Inherits: td_nod_obeliskoflight_laserobelisk
+	Inherits@inferno: ^Warhead_Inferno_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 96
 	Range: 9600
-	TargetActorCenter: true
-	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 200
-		Damage: 1000
-		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 70
-			BLAST: 96
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		InvalidTargets: Air
-	Projectile: LaserZap
-		Width: 128
-		HitAnim: laserfire
-		ZOffset: 3000
-		Blockable: false
-		Duration: 38
-		SecondaryBeam: true
-		SecondaryBeamWidth: 64
-		SecondaryBeamZOffset: 3000
-		SecondaryBeamColor: FFFFFF
-		SourceFlare: true
-		SourceFlareColor: FF3B00D0
-		SourceFlareCoreColor: FFFFFFFF
-		SourceFlareSize: 64, 72
-		SourceFlareWidth: 2.5
-		SourceFlareCoreSize: 5
-		TrackTarget: false
-		Inaccuracy: 0
-	Inherits: ^td_nod_td_nod_obeliskoflight_laserobeliskburning
-	-Warhead@Concrete:
-	-Warhead@Effect:
-	-Warhead@EffectAir:
-	-Warhead@RA2Scorch:
-	-Warhead@ShieldHitEffect:
-	Inherits@w6fx: ^td_nod_td_nod_obeliskoflight_laserobeliskburning_1
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
-		InvalidTargets: Air
-	Inherits@w6fx1: ^td_nod_td_nod_obeliskoflight_laserobeliskburning_2
-	Report: obelray1.aud
-	Warhead@Inferno_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 141
-		Damage: 120000
-		Falloff: 100, 80, 59, 40, 0
-		Versus:
-			HAZMAT: 46
-			COMPOSITE: 70
-			BLAST: 86
-			REFLECTOR: 80
-			ARMOR: 70
-			Shield: 252
-			None: 181
-			Wood: 171
-			Flak: 165
-			Plate: 152
-			Steel: 142
-			Concrete: 132
-			Scout: 107
-			Light: 90
-			Heroic: 89
-			Medium: 88
-			Heavy: 83
-			Superheavy: 81
-			Fighter: 71
-			Bomber: 66
-			Helicopter: 57
-			Spaceship: 50
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 200
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			None: 24
-			Wood: 23
-			Flak: 22
-			Scout: 21
-			Steel: 21
-			Plate: 19
-			Light: 19
-			Concrete: 18
-			Heroic: 17
-			Medium: 17
-			Heavy: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
-		InvalidTargets: Air
+	ValidTargets: Ground, Water
 	Burst: 10
 	BurstDelays: 1
 	FirstBurstTargetOffset: -500,0,0
 	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
+	Warhead@Inferno_Heavy:
+		InvalidTargets: Air
+		Damage: 120000
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_nod_chemicalrocketsoldier_chemrockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits@fx: ^td_nod_td_nod_chemicalrocketsoldier_chemrockets
@@ -3214,7 +2460,7 @@ td_nod_buggymkii_laserbuggy2burning:
 	ReloadDelay: 60
 	Range: 5274
 td_nod_buggymkii_laserbuggy2_AA:
-	Inherits@w71: ^Warhead_Laser_Light
+	Inherits: td_nod_buggymkii_laserbuggy2
 	Range: 7911
 	ValidTargets: Air
 
@@ -3222,45 +2468,12 @@ td_nod_buggymkii_laserbuggy2_AA:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 3000
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Laser_Light_ExtraDamage:
 		Damage: 300
+		-InvalidTargets:
 		ValidTargets: Air
-		Versus:
-			REFLECTOR: 50
-			Flak: 1
-			Medium: 1
-			Heavy: 1
-			Bomber: 1
-			Scout: 1
-			Spaceship: 1
-			Fighter: 1
-			Concrete: 1
-			Shield: 100
-			Light: 1
-			Plate: 1
-			Heroic: 1
-			None: 1
-			Helicopter: 1
-			Wood: 1
-			Superheavy: 1
-			Steel: 1
-		Spread: 300
-	ReloadDelay: 60
-	Inherits@w72: ^Projectile_Laser_Heavy
-	Projectile: LaserZap
-		SecondaryBeamWidth: 32
-		Duration: 12
-		ZOffset: 2047
-		Color: FF000055
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFF
-		SecondaryBeam: true
-		Width: 64
-	Inherits@w73: ^Effect_Laser_Heavy
-	Burst: 3
-	BurstDelays: 4
-	Report: vpalwe2d.aud
 td_nod_buggymkii_laserbuggy2inferno_AA:
 	Inherits@w71: ^Warhead_Inferno_Light
 	Inherits@w72: ^Projectile_Laser_Heavy
