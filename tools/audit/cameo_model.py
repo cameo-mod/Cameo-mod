@@ -163,6 +163,18 @@ class Model:
         b = resolved.child("Buildable")
         return b is not None and bool(b.get("Queue"))
 
+    @staticmethod
+    def _factions_allows(resolved: Node, faction: str) -> bool:
+        """`Buildable.Factions` is an engine-level roster gate the prereq
+        closure does not see: a buildable listing other factions' InternalNames
+        is unobtainable here even when its prereq tokens are satisfied."""
+        b = resolved.child("Buildable")
+        if b is None:
+            return True
+        raw = (b.get("Factions") or "").split("#", 1)[0]
+        allowed = {x.strip().lower() for x in raw.split(",") if x.strip()}
+        return not allowed or faction.lower() in allowed
+
     def roster(self, faction: str) -> set[str]:
         """Fixpoint prerequisite closure: every actor the faction can obtain."""
         if faction in self._rosters:
@@ -205,6 +217,8 @@ class Model:
             changed = False
             for lname, res in buildables:
                 if lname in owned:
+                    continue
+                if not self._factions_allows(res, faction):
                     continue
                 if all(satisfied(t) for t in self.positive_prereqs(res)):
                     own(lname)
