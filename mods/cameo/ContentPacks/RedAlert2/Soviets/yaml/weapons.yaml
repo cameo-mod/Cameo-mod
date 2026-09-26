@@ -718,22 +718,26 @@ RA160mm_tesla:
 		PercentageScale: 10000
 
 RA160mmE_elite:
-	Inherits: RA160mm
-	Inherits@fx_cover: ^Effect_MissileAP_Heavy
-	Range: 12345
-	Burst: 2
-	BurstDelays: 3
+	Inherits@xRA160mmE_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
+	Warhead@Concussion_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 120000
+		PercentageScale: 10000
+	Inherits@collapseflat: ^Warhead_Concussion_Medium_Flat
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
 	ReloadDelay: 88
+	Range: 12345
 	MinRange: 2222
 	Report: vdesatta.wav, vdesattb.wav
-	Warhead@RA2Crater:
-	Warhead@EffectAir:
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
@@ -745,11 +749,17 @@ RA160mmE_elite:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		TrailInterval: 1
+	Inherits@fx_cover: ^Effect_MissileAP_Heavy
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
 	Warhead@Concrete:
 		Damage: 200
 	Warhead@Effect:
 		Explosions: ra2_elite_explosion
 		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		ExplosionPalette: ra2effect
 	Warhead@EffectAir:
 		Explosions: big_explosion_air
 		ImpactSounds: kaboom25.aud
@@ -761,64 +771,8 @@ RA160mmE_elite:
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Duration: 12
-	Warhead@Effect:
-		ValidTargets: Ground, Ship
-	Warhead@Concussion_Medium_Flat: AreaDamage
-	Warhead@Concussion_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 350
-		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 106
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
+	Burst: 2
+	BurstDelays: 3
 RA160mmE_rad_elite:
 	Inherits@xRA160mmE_rad_elite5: ^Warhead_Demolition_Light
 	Inherits@xRA160mmE_rad_elite6: ^Projectile_Grenade_Light
@@ -1052,60 +1006,81 @@ RA160mmE_rad_elite:
 			None: 55
 		UpdatesUnitStatistics: false
 RA160mmE_fire_elite:
-	Inherits: RA160mm_fire
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
+	Inherits@xRA160mmE_fire_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_fire_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_fire_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
 	Range: 12345
-	Warhead@FireShrapnel: FireShrapnel
-		Weapon: AsianOilBombFragments
-		Amount: 2
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	ValidTargets: Ground, Water
 	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
-	ReloadDelay: 88
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
 		ContrailLength: 25
+		ContrailStartColor: FFBB88
 		ContrailStartWidth: 55
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
+		TrailImage: red_smokey
+		TrailPalette: effect
 		TrailInterval: 1
-
-RA160mmE_tesla_elite:
-	Inherits: RA160mm_tesla
-	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
-	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
-		Weapon: TeslaFragmentLarge
+		Weapon: AsianOilBombFragments
 		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+RA160mmE_tesla_elite:
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
+	Inherits@xRA160mmE_tesla_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_tesla_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_tesla_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
+	Range: 12345
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	ValidTargets: Ground, Water
 	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
-
-# Faction-local effect compositions preserve the authored Apocalypse visuals
-# without repeating effect overrides on each concrete weapon/rank route.
-# Materialized in resolved order from the authored generic + Apocalypse effects:
-# one heavy glow path, with exact fields/order protected by the premerge fixture.
-	ReloadDelay: 88
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Warhead@EffectAir:
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
 		ContrailLength: 25
+		ContrailStartColor: 6688BB
 		ContrailStartWidth: 55
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
+		TrailImage: blue_smokey
+		TrailPalette: effect
 		TrailInterval: 1
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragmentLarge
+		Amount: 2
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
+	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
+# Faction-local effect compositions preserve the authored Apocalypse visuals
+# without repeating effect overrides on each concrete weapon/rank route.
+# Materialized in resolved order from the authored generic + Apocalypse effects:
+# one heavy glow path, with exact fields/order protected by the premerge fixture.
 	Warhead@EffectAir:
 		Explosions: big_explosion_air
 		ImpactSounds: kaboom25.aud

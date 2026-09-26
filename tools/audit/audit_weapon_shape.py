@@ -88,7 +88,10 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 129   # 123 -> 129: Yuri Gatling Tank conversion (NOVA R-order,
+W2_BASELINE = 132   # 129 -> 132: RA160mmE_*_elite de-parenting (NOVA, 2026-09-26)
+                    # re-declared the chain's flat-twin edge per weapon
+                    # (collapseflat/finalmain) — same sanctioned class.
+                    # was: 123 -> 129: Yuri Gatling Tank conversion (NOVA R-order,
                     # 2026-09-26) added the sanctioned ^Warhead_Bullet_Medium_Flat
                     # twin edge to YuriGatlingTankMG{1,2,3}[_AA] — same flat-twin
                     # pattern as APCGun/110mm_Gun. Resolve-identical, order-pinned.
@@ -105,7 +108,10 @@ W2_BASELINE = 129   # 123 -> 129: Yuri Gatling Tank conversion (NOVA R-order,
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
 W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W4_BASELINE = 44    # 41 -> 44: RA160mmE_*_elite de-parenting (NOVA, 2026-09-26)
+                    # re-declared the inherited ^Effect_Bang_Large_RA2 edge
+                    # alongside each weapon's own faction fx edge.
+                    # was: 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -132,7 +138,10 @@ W6_BASELINE = 497   # 442 -> 497: held-67 W7 materialization (nova) re-declared
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 687   # 693 -> 687: Yuri Gatling Tank conversion (NOVA, 2026-09-26)
+W7_BASELINE = 684   # 687 -> 684: RA160mmE_{elite,fire_elite,tesla_elite}
+                    # de-parented (NOVA, 2026-09-26) — template triples +
+                    # flat-twin edges + fx_cover; resolve-identical strict-order.
+                    # was: 693 -> 687: Yuri Gatling Tank conversion (NOVA, 2026-09-26)
                     # de-parented YuriGatlingTankMG{1,2,3}[_AA] onto the x0/x1/x2
                     # template triple + ^Warhead_Bullet_Medium_Flat collapse edge;
                     # resolve-identical incl. strict order.
