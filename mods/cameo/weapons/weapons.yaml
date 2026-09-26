@@ -4198,6 +4198,61 @@ DefuseKit:
 			Spaceship: 11
 			Superheavy: 10
 
+^Warhead_Bullet:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Bullet: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 98
+			COMPOSITE: 42
+			BLAST: 69
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			AntiAirInfantry: 198
+			Flak: 196
+			Plate: 187
+			CyborgLight: 149
+			Scout: 140
+			Heroic: 131
+			FlyingInfantry: 124
+			CyborgMedium: 119
+			Fighter: 115
+			Wood: 113
+			ShipLight: 112
+			Light: 111
+			CyborgHeavy: 109
+			AntiAirVehicle: 89
+			Bomber: 88
+			CyborgHeroic: 88
+			AntiAirShip: 88
+			Steel: 74
+			Medium: 72
+			Helicopter: 70
+			AntiAirBuilding: 70
+			ShipMedium: 69
+			ShipHeavy: 69
+			Concrete: 67
+			ShipSuperheavy: 66
+			Heavy: 64
+			Spaceship: 62
+			Superheavy: 59
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### CannonAP: VEH > BLD > INF > AIR (heavy, air=False) ######
 ^Warhead_CannonAP_Light:
 	ValidTargets: Ground, Water
@@ -4450,6 +4505,61 @@ DefuseKit:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+
+^Warhead_CannonAP:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonAP: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 120
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 91
+			COMPOSITE: 40
+			BLAST: 73
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 144
+			Superheavy: 161
+			Heavy: 157
+			Medium: 156
+			AntiAirVehicle: 154
+			Light: 152
+			ShipMedium: 152
+			Scout: 151
+			ShipSuperheavy: 150
+			Concrete: 149
+			ShipHeavy: 148
+			AntiAirShip: 148
+			AntiAirBuilding: 144
+			ShipLight: 144
+			Steel: 139
+			Wood: 136
+			CyborgHeavy: 116
+			CyborgMedium: 112
+			CyborgLight: 106
+			CyborgHeroic: 102
+			FlyingInfantry: 91
+			Plate: 86
+			Flak: 80
+			AntiAirInfantry: 77
+			None: 74
+			Heroic: 65
+			Spaceship: 65
+			Helicopter: 63
+			Bomber: 51
+			Fighter: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### CannonHE: VEH+BLD > INF > AIR (light, air=False) ######
 ^Warhead_CannonHE_Light:
@@ -5299,6 +5409,61 @@ DefuseKit:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+
+^Warhead_CannonHE:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonHE: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 50, 20, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 98
+			BLAST: 40
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 147
+			Scout: 175
+			Wood: 138
+			ShipLight: 136
+			Light: 135
+			AntiAirVehicle: 128
+			Steel: 127
+			AntiAirShip: 126
+			Medium: 121
+			AntiAirBuilding: 120
+			CyborgLight: 119
+			ShipHeavy: 119
+			ShipSuperheavy: 118
+			ShipMedium: 117
+			Concrete: 114
+			Heavy: 111
+			CyborgMedium: 111
+			Superheavy: 110
+			None: 105
+			AntiAirInfantry: 103
+			Flak: 102
+			CyborgHeavy: 102
+			FlyingInfantry: 96
+			CyborgHeroic: 94
+			Plate: 93
+			Fighter: 89
+			Bomber: 87
+			Heroic: 81
+			Helicopter: 50
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 # Percentage-inert class slices used by the retired-family shotgun and sniper
 # compatibility groups. Their percentage warheads remain separate on each weapon
@@ -6286,6 +6451,61 @@ DefuseKit:
 			None: 10
 			AntiAirInfantry: 10
 
+^Warhead_MissileAP:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileAP: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 64
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 94
+			COMPOSITE: 44
+			BLAST: 69
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 199
+			Medium: 182
+			AntiAirVehicle: 180
+			Light: 179
+			Scout: 154
+			Spaceship: 151
+			Helicopter: 127
+			Bomber: 126
+			ShipHeavy: 119
+			ShipSuperheavy: 119
+			ShipMedium: 115
+			AntiAirShip: 113
+			ShipLight: 111
+			CyborgHeavy: 107
+			FlyingInfantry: 102
+			Fighter: 100
+			CyborgMedium: 100
+			CyborgHeroic: 94
+			CyborgLight: 87
+			Concrete: 73
+			AntiAirBuilding: 72
+			Steel: 71
+			Wood: 69
+			Plate: 57
+			Flak: 55
+			AntiAirInfantry: 48
+			Heroic: 44
+			None: 42
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### MissileHE: VEH+BLD > AIR > INF (light, air=True) ######
 ^Warhead_MissileHE_Light:
 	ValidTargets: Ground, Water, Air
@@ -6538,6 +6758,61 @@ DefuseKit:
 			AntiAirInfantry: 12
 			Plate: 11
 			Heroic: 10
+
+^Warhead_MissileHE:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileHE: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 2000
+		Falloff: 100, 45, 15, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 148
+			Scout: 191
+			Wood: 151
+			ShipLight: 149
+			Light: 147
+			Steel: 136
+			AntiAirVehicle: 133
+			AntiAirShip: 133
+			AntiAirBuilding: 126
+			ShipHeavy: 125
+			ShipSuperheavy: 121
+			Medium: 120
+			ShipMedium: 118
+			Concrete: 117
+			Heavy: 114
+			Superheavy: 108
+			FlyingInfantry: 107
+			CyborgLight: 107
+			Fighter: 105
+			Bomber: 102
+			CyborgMedium: 94
+			Helicopter: 87
+			Spaceship: 81
+			None: 78
+			AntiAirInfantry: 76
+			CyborgHeavy: 75
+			Flak: 74
+			CyborgHeroic: 71
+			Plate: 49
+			Heroic: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### MissileAA: AIR > VEH > BLD > INF (heavy, air=True) ######
 ^Warhead_MissileAA_Light:
@@ -6792,6 +7067,61 @@ DefuseKit:
 			None: 10
 			AntiAirInfantry: 10
 
+^Warhead_MissileAA:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileAA: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 70, 30, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 86
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 151
+			Spaceship: 200
+			Helicopter: 198
+			Bomber: 182
+			Fighter: 180
+			Superheavy: 156
+			Heavy: 153
+			Medium: 130
+			AntiAirVehicle: 129
+			Light: 128
+			ShipSuperheavy: 107
+			ShipHeavy: 106
+			FlyingInfantry: 105
+			Scout: 102
+			ShipMedium: 99
+			AntiAirShip: 97
+			ShipLight: 96
+			CyborgHeavy: 95
+			CyborgMedium: 87
+			Concrete: 76
+			CyborgLight: 75
+			AntiAirBuilding: 75
+			Steel: 74
+			Wood: 72
+			CyborgHeroic: 68
+			Plate: 59
+			Flak: 58
+			AntiAirInfantry: 51
+			None: 44
+			Heroic: 30
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### Flak: AIR > INF > VEH > BLD (light, air=True) ######
 ^Warhead_Flak_Light:
 	ValidTargets: Ground, Water, Air
@@ -7044,6 +7374,61 @@ DefuseKit:
 			Steel: 11
 			Concrete: 10
 			AntiAirBuilding: 10
+
+^Warhead_Flak:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Flak: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 110
+		Damage: 2000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 63
+			BLAST: 58
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 171
+			Fighter: 200
+			Bomber: 199
+			Helicopter: 198
+			Spaceship: 197
+			None: 193
+			AntiAirInfantry: 187
+			Flak: 181
+			Plate: 154
+			FlyingInfantry: 144
+			CyborgLight: 114
+			CyborgMedium: 105
+			CyborgHeavy: 95
+			Scout: 84
+			Light: 67
+			Heroic: 65
+			AntiAirVehicle: 64
+			Medium: 61
+			CyborgHeroic: 61
+			ShipLight: 61
+			AntiAirShip: 59
+			Heavy: 58
+			Superheavy: 57
+			ShipMedium: 57
+			Wood: 56
+			ShipHeavy: 56
+			ShipSuperheavy: 55
+			Steel: 54
+			Concrete: 53
+			AntiAirBuilding: 53
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### Laser: VEH+INF+AIR+BLD (heavy, air=True) ######
 ^Warhead_Laser_Light:
@@ -7430,6 +7815,105 @@ DefuseKit:
 			AntiAirBuilding: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
+^Warhead_Laser:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Laser: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 48
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 70
+			BLAST: 96
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 272
+			Superheavy: 181
+			Spaceship: 172
+			Concrete: 167
+			ShipSuperheavy: 164
+			Heavy: 162
+			CyborgHeavy: 159
+			Plate: 157
+			AntiAirBuilding: 157
+			ShipMedium: 155
+			ShipHeavy: 155
+			Helicopter: 152
+			Steel: 148
+			Medium: 143
+			CyborgMedium: 140
+			Flak: 138
+			AntiAirShip: 124
+			AntiAirVehicle: 118
+			Bomber: 103
+			Wood: 101
+			ShipLight: 99
+			Light: 98
+			FlyingInfantry: 90
+			AntiAirInfantry: 76
+			CyborgHeroic: 70
+			CyborgLight: 64
+			None: 42
+			Fighter: 38
+			Scout: 35
+			Heroic: 27
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
+		PercentageScale: 2000
+		PercentageSpread: 50
+	Warhead@Laser_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 70
+			BLAST: 96
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 9
+			Scout: 36
+			None: 33
+			CyborgLight: 31
+			Light: 30
+			AntiAirInfantry: 30
+			Flak: 27
+			AntiAirVehicle: 27
+			CyborgMedium: 25
+			Medium: 24
+			Plate: 21
+			FlyingInfantry: 21
+			CyborgHeavy: 19
+			Heavy: 18
+			ShipLight: 16
+			Heroic: 15
+			ShipMedium: 15
+			AntiAirShip: 15
+			CyborgHeroic: 13
+			ShipHeavy: 13
+			Superheavy: 12
+			ShipSuperheavy: 10
+			Wood: 9
+			Steel: 9
+			Concrete: 9
+			Fighter: 9
+			Bomber: 9
+			Helicopter: 9
+			Spaceship: 9
+			AntiAirBuilding: 9
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
 ###### Prism: VEH+INF+BLD > AIR (light, air=False) ######
 ^Warhead_Prism_Light:
 	ValidTargets: Ground, Water
@@ -7682,6 +8166,61 @@ DefuseKit:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+
+^Warhead_Prism:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Prism: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 2000
+		Falloff: 100, 40, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 64
+			COMPOSITE: 70
+			BLAST: 106
+			REFLECTOR: 42
+			ARMOR: 70
+			Shield: 275
+			Scout: 163
+			None: 146
+			CyborgLight: 139
+			Wood: 136
+			AntiAirInfantry: 135
+			ShipLight: 134
+			Light: 132
+			AntiAirVehicle: 126
+			Flak: 125
+			AntiAirShip: 125
+			Steel: 122
+			CyborgMedium: 122
+			Medium: 120
+			Plate: 118
+			AntiAirBuilding: 117
+			ShipMedium: 116
+			ShipHeavy: 115
+			CyborgHeavy: 113
+			Concrete: 112
+			ShipSuperheavy: 112
+			Heavy: 108
+			Superheavy: 102
+			CyborgHeroic: 99
+			Fighter: 97
+			Heroic: 96
+			FlyingInfantry: 96
+			Bomber: 47
+			Helicopter: 44
+			Spaceship: 39
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### Cryo: inherits Prism + PhysicalState Temperature -100 ######
 ^Warhead_Cryo_Light:
@@ -7942,6 +8481,63 @@ DefuseKit:
 			Bomber: 13
 			Fighter: 12
 
+^Warhead_Cryo:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Cryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 42
+		Damage: 2000
+		Falloff: 100, 45, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 66
+			COMPOSITE: 63
+			BLAST: 93
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 273
+			Plate: 135
+			Superheavy: 133
+			Concrete: 131
+			ShipSuperheavy: 131
+			CyborgHeavy: 130
+			AntiAirBuilding: 130
+			Steel: 129
+			Flak: 127
+			ShipMedium: 127
+			ShipHeavy: 127
+			Heavy: 125
+			CyborgMedium: 125
+			Medium: 124
+			AntiAirShip: 120
+			AntiAirVehicle: 118
+			Wood: 114
+			Light: 113
+			ShipLight: 113
+			AntiAirInfantry: 105
+			CyborgLight: 99
+			FlyingInfantry: 95
+			Scout: 91
+			CyborgHeroic: 90
+			None: 86
+			Spaceship: 80
+			Helicopter: 75
+			Heroic: 61
+			Bomber: 55
+			Fighter: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: -200
+		PercentageScale: 1400
+		PercentageSpread: 50
+
 ###### Flame: INF+BLD > VEH > AIR (light, air=False) ######
 ^Warhead_Flame_Light:
 	ValidTargets: Ground, Water
@@ -8201,6 +8797,63 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 10
 
+^Warhead_Flame:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Flame: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 90, 78, 60, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 76
+			BLAST: 67
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 225
+			None: 200
+			Wood: 197
+			AntiAirInfantry: 197
+			Flak: 195
+			Steel: 193
+			AntiAirBuilding: 147
+			Plate: 143
+			CyborgLight: 138
+			ShipLight: 137
+			CyborgMedium: 123
+			ShipHeavy: 115
+			ShipSuperheavy: 113
+			AntiAirShip: 113
+			Concrete: 112
+			Scout: 109
+			FlyingInfantry: 109
+			CyborgHeavy: 99
+			Light: 95
+			ShipMedium: 93
+			AntiAirVehicle: 86
+			Heroic: 78
+			Medium: 78
+			CyborgHeroic: 72
+			Heavy: 69
+			Superheavy: 66
+			Fighter: 65
+			Bomber: 64
+			Helicopter: 61
+			Spaceship: 58
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### Chemical: INF+VEH > BLD > AIR (heavy, air=False) ######
 ^Warhead_Chemical_Light:
 	ValidTargets: Ground, Water
@@ -8459,6 +9112,63 @@ DefuseKit:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+
+^Warhead_Chemical:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Chemical: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 275
+		Damage: 2000
+		Falloff: 100, 88, 72, 50, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 51
+			COMPOSITE: 61
+			BLAST: 73
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 220
+			Superheavy: 187
+			Heavy: 185
+			CyborgHeavy: 183
+			Plate: 181
+			Medium: 176
+			CyborgMedium: 171
+			Flak: 167
+			AntiAirVehicle: 164
+			Light: 153
+			AntiAirInfantry: 151
+			CyborgLight: 144
+			CyborgHeroic: 141
+			None: 136
+			ShipMedium: 129
+			ShipSuperheavy: 120
+			ShipHeavy: 119
+			Scout: 117
+			AntiAirShip: 112
+			Heroic: 106
+			FlyingInfantry: 97
+			ShipLight: 97
+			Concrete: 95
+			AntiAirBuilding: 86
+			Steel: 77
+			Wood: 62
+			Spaceship: 53
+			Helicopter: 47
+			Bomber: 43
+			Fighter: 41
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 
 ###### Toxic: INF > BLD > VEH > AIR (light, air=True) ######
@@ -8726,6 +9436,65 @@ DefuseKit:
 			Helicopter: 6
 			Spaceship: 5
 
+^Warhead_Toxic:
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: wall, Mine, ToxinImmune
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Toxic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall, Mine, ToxinImmune
+		Spread: 1100
+		Damage: 2000
+		Falloff: 100, 90, 75, 55, 30, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 34
+			COMPOSITE: 70
+			BLAST: 73
+			REFLECTOR: 105
+			ARMOR: 70
+			Shield: 214
+			None: 200
+			AntiAirInfantry: 195
+			Flak: 190
+			Plate: 162
+			Wood: 150
+			CyborgLight: 147
+			Steel: 136
+			CyborgMedium: 134
+			AntiAirBuilding: 127
+			ShipLight: 127
+			Concrete: 119
+			AntiAirShip: 116
+			Scout: 115
+			CyborgHeavy: 115
+			Light: 108
+			ShipMedium: 106
+			FlyingInfantry: 105
+			ShipHeavy: 105
+			ShipSuperheavy: 104
+			AntiAirVehicle: 101
+			Medium: 94
+			Heroic: 93
+			CyborgHeroic: 86
+			Heavy: 81
+			Superheavy: 79
+			Fighter: 63
+			Bomber: 55
+			Helicopter: 53
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Poison: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### Plasma: blend of Flame+Chemical + PhysicalStates {'Temperature': 50, 'Corrosion': 50} ######
 ^Warhead_Plasma_Light:
 	ValidTargets: Ground, Water
@@ -8988,6 +9757,64 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 11
 
+^Warhead_Plasma:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Plasma: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 287
+		Damage: 2000
+		Falloff: 100, 89, 75, 55, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 49
+			COMPOSITE: 70
+			BLAST: 89
+			REFLECTOR: 73
+			ARMOR: 70
+			Shield: 261
+			None: 200
+			AntiAirInfantry: 195
+			Flak: 190
+			Plate: 162
+			Wood: 153
+			CyborgLight: 151
+			Steel: 150
+			CyborgMedium: 146
+			CyborgHeavy: 134
+			ShipLight: 132
+			ShipHeavy: 129
+			ShipSuperheavy: 127
+			AntiAirBuilding: 122
+			AntiAirShip: 118
+			Scout: 115
+			Light: 114
+			AntiAirVehicle: 113
+			Medium: 112
+			Heavy: 111
+			Superheavy: 108
+			ShipMedium: 106
+			Concrete: 100
+			CyborgHeroic: 100
+			FlyingInfantry: 99
+			Heroic: 93
+			Fighter: 48
+			Bomber: 46
+			Helicopter: 45
+			Spaceship: 44
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+			Corrosion: 50
+		PercentageScale: 1600
+		PercentageSpread: 50
+
 ###### Thermobaric: blend of Demolition+Concussion+Flame + PhysicalStates {'Temperature': 33} ######
 ^Warhead_Thermobaric_Light:
 	ValidTargets: Ground, Water
@@ -9246,6 +10073,63 @@ DefuseKit:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+
+^Warhead_Thermobaric:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Thermobaric: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 253
+		Damage: 2000
+		Falloff: 100, 76, 57, 43, 31, 17, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 54
+			COMPOSITE: 91
+			BLAST: 51
+			REFLECTOR: 84
+			ARMOR: 70
+			Shield: 201
+			Wood: 200
+			None: 195
+			Steel: 194
+			AntiAirInfantry: 189
+			Flak: 183
+			AntiAirBuilding: 168
+			Concrete: 146
+			Plate: 141
+			ShipLight: 141
+			CyborgLight: 139
+			AntiAirShip: 125
+			CyborgMedium: 124
+			ShipHeavy: 120
+			ShipSuperheavy: 117
+			Scout: 115
+			ShipMedium: 111
+			FlyingInfantry: 104
+			CyborgHeavy: 102
+			Light: 99
+			AntiAirVehicle: 91
+			Medium: 84
+			Heroic: 81
+			CyborgHeroic: 75
+			Heavy: 74
+			Superheavy: 70
+			Fighter: 61
+			Bomber: 55
+			Helicopter: 53
+			Spaceship: 50
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 33
+		PercentageScale: 1900
+		PercentageSpread: 50
 
 ###### Quantum: blend of Railgun+Laser+Tesla + PhysicalStates {'Temperature': 25} ######
 ^Warhead_Quantum_Light:
@@ -9508,6 +10392,64 @@ DefuseKit:
 			Helicopter: 14
 			Bomber: 12
 			Fighter: 10
+
+^Warhead_Quantum:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Quantum: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 39
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 61
+			BLAST: 91
+			REFLECTOR: 58
+			ARMOR: 70
+			Shield: 291
+			Superheavy: 164
+			Heavy: 154
+			CyborgHeavy: 144
+			Medium: 143
+			Plate: 135
+			ShipSuperheavy: 134
+			CyborgMedium: 133
+			AntiAirVehicle: 132
+			ShipMedium: 130
+			ShipHeavy: 130
+			Flak: 123
+			Light: 121
+			Concrete: 119
+			AntiAirShip: 117
+			AntiAirBuilding: 114
+			Steel: 109
+			ShipLight: 106
+			AntiAirInfantry: 104
+			Spaceship: 103
+			CyborgLight: 103
+			CyborgHeroic: 103
+			Scout: 96
+			FlyingInfantry: 96
+			Wood: 92
+			None: 88
+			Helicopter: 76
+			Heroic: 65
+			Bomber: 58
+			Fighter: 37
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStates:
+			Temperature: 25
+		IntegrityScale: 33
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### FireMissile: blend of Flame+MissileHE + PhysicalStates {'Temperature': 50} ######
 ###### Waveforce: blend of Flame+Chemical+Railgun+Laser+Tesla (Plasma x Quantum) ######
@@ -9772,6 +10714,64 @@ DefuseKit:
 			Bomber: 12
 			Fighter: 10
 
+^Warhead_Waveforce:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Waveforce: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 57
+		Damage: 2000
+		Falloff: 100, 81, 61, 38, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 60
+			COMPOSITE: 64
+			BLAST: 83
+			REFLECTOR: 74
+			ARMOR: 70
+			Shield: 263
+			Plate: 158
+			Flak: 146
+			CyborgHeavy: 145
+			Superheavy: 139
+			AntiAirInfantry: 138
+			CyborgMedium: 136
+			Heavy: 133
+			None: 131
+			Medium: 127
+			Concrete: 126
+			ShipMedium: 126
+			ShipSuperheavy: 126
+			CyborgLight: 124
+			ShipHeavy: 124
+			AntiAirVehicle: 122
+			AntiAirBuilding: 120
+			AntiAirShip: 119
+			Light: 118
+			Steel: 115
+			ShipLight: 112
+			Wood: 107
+			CyborgHeroic: 103
+			Scout: 97
+			FlyingInfantry: 94
+			Heroic: 77
+			Spaceship: 73
+			Helicopter: 59
+			Bomber: 50
+			Fighter: 38
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 35
+			Corrosion: 20
+		PercentageScale: 1700
+		PercentageSpread: 50
+
 
 ###### PhotonCannon: blend of Waveforce x CannonHE x MissileAA, no PhysicalStates ######
 ^Warhead_PhotonCannon_Light:
@@ -10023,6 +11023,61 @@ DefuseKit:
 			Plate: 14
 			None: 13
 			AntiAirInfantry: 13
+
+^Warhead_PhotonCannon:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@PhotonCannon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 71
+		Damage: 2000
+		Falloff: 100, 75, 49, 24, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 74
+			BLAST: 59
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 187
+			Superheavy: 145
+			Heavy: 143
+			Spaceship: 139
+			Helicopter: 137
+			Bomber: 136
+			Fighter: 129
+			Medium: 123
+			Light: 122
+			AntiAirVehicle: 122
+			Scout: 111
+			ShipSuperheavy: 109
+			ShipHeavy: 108
+			FlyingInfantry: 102
+			CyborgHeavy: 102
+			ShipMedium: 102
+			AntiAirShip: 99
+			ShipLight: 97
+			CyborgMedium: 92
+			Concrete: 84
+			CyborgLight: 84
+			AntiAirBuilding: 83
+			Steel: 82
+			Wood: 77
+			CyborgHeroic: 77
+			Plate: 73
+			Flak: 69
+			AntiAirInfantry: 63
+			None: 58
+			Heroic: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 1500
+		PercentageSpread: 50
 ###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######
 
 ^Warhead_MissileFire_Light:
@@ -10283,6 +11338,63 @@ DefuseKit:
 			Helicopter: 13
 			Spaceship: 12
 
+^Warhead_MissileFire:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileFire: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 183
+		Damage: 2000
+		Falloff: 100, 74, 54, 36, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 57
+			COMPOSITE: 82
+			BLAST: 56
+			REFLECTOR: 85
+			ARMOR: 70
+			Shield: 233
+			Wood: 200
+			Steel: 187
+			None: 161
+			AntiAirInfantry: 157
+			Flak: 154
+			ShipLight: 150
+			Scout: 144
+			AntiAirBuilding: 143
+			CyborgLight: 135
+			ShipHeavy: 122
+			AntiAirShip: 121
+			ShipSuperheavy: 118
+			CyborgMedium: 116
+			Light: 113
+			FlyingInfantry: 111
+			Concrete: 110
+			AntiAirVehicle: 100
+			ShipMedium: 98
+			Plate: 94
+			Medium: 88
+			CyborgHeavy: 86
+			Heavy: 79
+			Superheavy: 75
+			Fighter: 73
+			CyborgHeroic: 71
+			Bomber: 70
+			Heroic: 68
+			Helicopter: 62
+			Spaceship: 58
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 50
+		PercentageScale: 1900
+		PercentageSpread: 50
+
 ###### ChemMissile: blend of Chemical+MissileAP + PhysicalStates {'Corrosion': 50} ######
 ^Warhead_MissileChem_Light:
 	ValidTargets: Ground, Water, Air
@@ -10542,6 +11654,63 @@ DefuseKit:
 			AntiAirInfantry: 14
 			Fighter: 13
 
+^Warhead_MissileChem:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileChem: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 66
+		Damage: 2000
+		Falloff: 100, 82, 61, 38, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 72
+			COMPOSITE: 53
+			BLAST: 71
+			REFLECTOR: 84
+			ARMOR: 70
+			Shield: 226
+			Superheavy: 198
+			Heavy: 197
+			Medium: 181
+			AntiAirVehicle: 174
+			Light: 168
+			CyborgHeavy: 142
+			Scout: 134
+			CyborgMedium: 133
+			CyborgHeroic: 117
+			ShipMedium: 116
+			ShipHeavy: 114
+			ShipSuperheavy: 114
+			CyborgLight: 113
+			AntiAirShip: 107
+			Plate: 103
+			FlyingInfantry: 103
+			Spaceship: 100
+			ShipLight: 99
+			Flak: 97
+			AntiAirInfantry: 86
+			Helicopter: 83
+			Bomber: 80
+			None: 76
+			Concrete: 74
+			AntiAirBuilding: 70
+			Heroic: 69
+			Steel: 66
+			Fighter: 65
+			Wood: 58
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 33
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### ChemCannon: blend of Chemical+CannonAP + PhysicalStates {'Corrosion': 50} ######
 ^Warhead_CannonChem_Light:
 	ValidTargets: Ground, Water
@@ -10800,6 +11969,63 @@ DefuseKit:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+
+^Warhead_CannonChem:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonChem: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 90
+		Damage: 2000
+		Falloff: 100, 82, 61, 38, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 51
+			BLAST: 73
+			REFLECTOR: 85
+			ARMOR: 70
+			Shield: 224
+			Superheavy: 170
+			Heavy: 167
+			Medium: 162
+			AntiAirVehicle: 156
+			Light: 150
+			CyborgHeavy: 146
+			ShipMedium: 139
+			CyborgMedium: 138
+			ShipSuperheavy: 134
+			ShipHeavy: 133
+			Scout: 131
+			AntiAirShip: 130
+			Plate: 128
+			CyborgLight: 123
+			ShipLight: 121
+			Concrete: 120
+			CyborgHeroic: 119
+			Flak: 118
+			AntiAirBuilding: 113
+			AntiAirInfantry: 109
+			Steel: 106
+			None: 101
+			Wood: 97
+			FlyingInfantry: 94
+			Heroic: 84
+			Spaceship: 57
+			Helicopter: 54
+			Bomber: 47
+			Fighter: 42
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 33
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######
 ^Warhead_Storm_Light:
@@ -11142,6 +12368,62 @@ DefuseKit:
 			Bomber: 30
 			Helicopter: 30
 
+^Warhead_Storm:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Storm: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 320
+		Damage: 2000
+		Falloff: 100, 70, 45, 25, 10, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 64
+			COMPOSITE: 74
+			BLAST: 98
+			REFLECTOR: 45
+			ARMOR: 70
+			Shield: 325
+			Plate: 200
+			Flak: 187
+			AntiAirInfantry: 180
+			CyborgHeavy: 175
+			None: 174
+			Superheavy: 169
+			CyborgMedium: 161
+			Heavy: 154
+			CyborgLight: 148
+			Medium: 139
+			CyborgHeroic: 136
+			AntiAirVehicle: 132
+			Light: 126
+			ShipSuperheavy: 121
+			ShipMedium: 115
+			ShipHeavy: 115
+			Heroic: 110
+			Scout: 110
+			AntiAirShip: 103
+			FlyingInfantry: 99
+			Concrete: 95
+			ShipLight: 93
+			AntiAirBuilding: 90
+			Steel: 86
+			Wood: 69
+			Spaceship: 54
+			Helicopter: 47
+			Bomber: 45
+			Fighter: 43
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 8700
+		PercentageSpread: 50
+
 ###### FireCannon: blend of Flame+CannonHE + PhysicalStates {'Temperature': 50} ######
 ^Warhead_CannonFire_Light:
 	ValidTargets: Ground, Water
@@ -11401,6 +12683,63 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 10
 
+^Warhead_CannonFire:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonFire: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 259
+		Damage: 2000
+		Falloff: 100, 76, 56, 38, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 55
+			COMPOSITE: 87
+			BLAST: 54
+			REFLECTOR: 85
+			ARMOR: 70
+			Shield: 232
+			Wood: 200
+			Steel: 189
+			None: 183
+			AntiAirInfantry: 179
+			Flak: 176
+			ShipLight: 148
+			AntiAirBuilding: 145
+			CyborgLight: 142
+			Scout: 141
+			CyborgMedium: 127
+			Plate: 124
+			ShipHeavy: 123
+			ShipSuperheavy: 122
+			AntiAirShip: 122
+			Concrete: 112
+			Light: 110
+			FlyingInfantry: 105
+			ShipMedium: 101
+			CyborgHeavy: 100
+			AntiAirVehicle: 100
+			Medium: 91
+			Heroic: 87
+			CyborgHeroic: 83
+			Heavy: 80
+			Superheavy: 79
+			Fighter: 67
+			Bomber: 65
+			Helicopter: 46
+			Spaceship: 39
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 50
+		PercentageScale: 1900
+		PercentageSpread: 50
+
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
 	ValidTargets: Ground
@@ -11654,6 +12993,61 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 10
 
+^Warhead_Melee:
+	ValidTargets: Ground
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Melee: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground
+		Spread: 1
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 93
+			COMPOSITE: 53
+			BLAST: 64
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 108
+			None: 200
+			AntiAirInfantry: 192
+			Flak: 184
+			Plate: 157
+			CyborgLight: 139
+			CyborgMedium: 130
+			CyborgHeavy: 120
+			FlyingInfantry: 117
+			Scout: 106
+			Light: 96
+			AntiAirVehicle: 94
+			Medium: 92
+			ShipLight: 92
+			Heavy: 91
+			Superheavy: 90
+			AntiAirShip: 90
+			ShipMedium: 89
+			ShipHeavy: 89
+			Wood: 88
+			ShipSuperheavy: 88
+			Steel: 87
+			Concrete: 86
+			CyborgHeroic: 86
+			AntiAirBuilding: 86
+			Fighter: 84
+			Bomber: 83
+			Heroic: 83
+			Helicopter: 82
+			Spaceship: 79
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### Arrow: INF > AIR > VEH > BLD (light, air=True) ######
 ^Warhead_Arrow_Light:
 	ValidTargets: Ground, Water, Air
@@ -11906,6 +13300,61 @@ DefuseKit:
 			Steel: 11
 			Concrete: 10
 			AntiAirBuilding: 10
+
+^Warhead_Arrow:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Arrow: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 88
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 101
+			COMPOSITE: 35
+			BLAST: 73
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 116
+			None: 200
+			AntiAirInfantry: 195
+			Flak: 190
+			Plate: 172
+			CyborgLight: 130
+			CyborgMedium: 126
+			Fighter: 125
+			CyborgHeavy: 119
+			FlyingInfantry: 115
+			Bomber: 106
+			Helicopter: 94
+			Spaceship: 88
+			Scout: 86
+			Light: 84
+			Medium: 83
+			AntiAirVehicle: 83
+			Heavy: 82
+			Superheavy: 81
+			ShipLight: 81
+			ShipMedium: 80
+			ShipHeavy: 80
+			AntiAirShip: 80
+			Wood: 79
+			ShipSuperheavy: 79
+			Steel: 78
+			Concrete: 77
+			CyborgHeroic: 77
+			AntiAirBuilding: 77
+			Heroic: 74
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### Magic: PCT (%-equalizer) ######
 ^Warhead_Magic_Light:
@@ -12244,6 +13693,61 @@ DefuseKit:
 			ShipSuperheavy: 65
 			AntiAirShip: 65
 
+^Warhead_Magic:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Magic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 96
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 77
+			BLAST: 87
+			REFLECTOR: 56
+			ARMOR: 70
+			Shield: 243
+			Bomber: 100
+			Concrete: 100
+			Fighter: 100
+			Flak: 100
+			Heavy: 100
+			Helicopter: 100
+			Heroic: 100
+			Light: 100
+			Medium: 100
+			None: 100
+			Plate: 100
+			Scout: 100
+			Spaceship: 100
+			Steel: 100
+			Superheavy: 100
+			Wood: 100
+			FlyingInfantry: 100
+			CyborgLight: 100
+			CyborgMedium: 100
+			CyborgHeavy: 100
+			CyborgHeroic: 100
+			AntiAirInfantry: 100
+			AntiAirVehicle: 100
+			AntiAirBuilding: 100
+			ShipLight: 100
+			ShipMedium: 100
+			ShipHeavy: 100
+			ShipSuperheavy: 100
+			AntiAirShip: 100
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 4000
+		PercentageSpread: 50
+
 ###### Demolition: BLD > INF > VEH > AIR (light, air=False) ######
 ^Warhead_Demolition_Light:
 	ValidTargets: Ground, Water
@@ -12497,6 +14001,61 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 10
 
+^Warhead_Demolition:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Demolition: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 2000
+		Falloff: 100, 45, 18, 6, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 62
+			COMPOSITE: 100
+			BLAST: 42
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 154
+			Wood: 200
+			Steel: 197
+			AntiAirBuilding: 194
+			Concrete: 192
+			None: 183
+			AntiAirInfantry: 176
+			Flak: 169
+			Plate: 148
+			ShipLight: 131
+			CyborgLight: 125
+			AntiAirShip: 125
+			ShipMedium: 119
+			ShipHeavy: 116
+			CyborgMedium: 112
+			ShipSuperheavy: 112
+			Scout: 103
+			FlyingInfantry: 101
+			CyborgHeavy: 100
+			Light: 86
+			AntiAirVehicle: 80
+			Heroic: 76
+			Medium: 74
+			CyborgHeroic: 70
+			Heavy: 68
+			Superheavy: 64
+			Fighter: 63
+			Bomber: 61
+			Helicopter: 60
+			Spaceship: 59
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ###### Concussion: INF+VEH+BLD > AIR (light, air=False) ######
 ^Warhead_Concussion_Light:
 	ValidTargets: Ground, Water
@@ -12749,6 +14308,61 @@ DefuseKit:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+
+^Warhead_Concussion:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Concussion: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 2000
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 67
+			COMPOSITE: 105
+			BLAST: 36
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 166
+			Scout: 141
+			None: 138
+			Wood: 134
+			CyborgLight: 134
+			AntiAirInfantry: 132
+			ShipLight: 132
+			Light: 131
+			Flak: 127
+			AntiAirVehicle: 125
+			Steel: 123
+			CyborgMedium: 123
+			AntiAirShip: 123
+			Medium: 120
+			AntiAirBuilding: 116
+			ShipMedium: 115
+			ShipHeavy: 114
+			Plate: 113
+			Concrete: 110
+			ShipSuperheavy: 110
+			CyborgHeavy: 109
+			Heavy: 106
+			Superheavy: 98
+			FlyingInfantry: 98
+			CyborgHeroic: 89
+			Heroic: 80
+			Fighter: 73
+			Bomber: 58
+			Helicopter: 52
+			Spaceship: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ###### Sonic: FLAT (ignores armor) ######
 ^Warhead_Sonic_Light:
@@ -13027,6 +14641,69 @@ DefuseKit:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
+^Warhead_Sonic:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Sonic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 75, 50, 25, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 67
+			COMPOSITE: 95
+			BLAST: 58
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 248
+			Bomber: 100
+			Concrete: 100
+			Fighter: 100
+			Flak: 100
+			Heavy: 100
+			Helicopter: 100
+			Heroic: 100
+			Light: 100
+			Medium: 100
+			None: 100
+			Plate: 100
+			Scout: 100
+			Spaceship: 100
+			Steel: 100
+			Superheavy: 100
+			Wood: 100
+			FlyingInfantry: 100
+			CyborgLight: 100
+			CyborgMedium: 100
+			CyborgHeavy: 100
+			CyborgHeroic: 100
+			AntiAirInfantry: 100
+			AntiAirVehicle: 100
+			AntiAirBuilding: 100
+			ShipLight: 100
+			ShipMedium: 100
+			ShipHeavy: 100
+			ShipSuperheavy: 100
+			AntiAirShip: 100
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 100
+		PercentageScale: 800
+		PercentageSpread: 50
+	Warhead@Sonic_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 800
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+
 ###### Railgun: VEH > INF > BLD > AIR (heavy, air=False) ######
 ^Warhead_Railgun_Heavy:
 	ValidTargets: Ground, Water
@@ -13112,6 +14789,103 @@ DefuseKit:
 			Bomber: 11
 			Fighter: 10
 	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 96
+			COMPOSITE: 40
+			BLAST: 78
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 10
+			Concrete: 200
+			AntiAirBuilding: 187
+			Steel: 175
+			Wood: 150
+			ShipSuperheavy: 148
+			ShipHeavy: 132
+			Superheavy: 125
+			ShipMedium: 122
+			AntiAirShip: 103
+			Heavy: 100
+			ShipLight: 87
+			Medium: 75
+			AntiAirVehicle: 61
+			Light: 50
+			CyborgHeroic: 35
+			CyborgHeavy: 32
+			CyborgMedium: 27
+			Scout: 25
+			CyborgLight: 22
+			FlyingInfantry: 14
+			None: 10
+			Flak: 10
+			Plate: 10
+			Heroic: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+			AntiAirInfantry: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+^Warhead_Railgun:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Railgun: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 72
+		Damage: 2000
+		Falloff: 100, 0
+		Heaviness: 2000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 96
+			COMPOSITE: 40
+			BLAST: 78
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 305
+			Superheavy: 200
+			Heavy: 192
+			Medium: 175
+			AntiAirVehicle: 159
+			Light: 145
+			CyborgHeavy: 132
+			ShipSuperheavy: 130
+			ShipHeavy: 127
+			CyborgMedium: 124
+			ShipMedium: 122
+			AntiAirShip: 116
+			Scout: 115
+			CyborgLight: 112
+			ShipLight: 110
+			CyborgHeroic: 102
+			FlyingInfantry: 94
+			Plate: 91
+			Flak: 88
+			None: 87
+			AntiAirInfantry: 87
+			Concrete: 85
+			Steel: 84
+			AntiAirBuilding: 84
+			Wood: 83
+			Spaceship: 82
+			Helicopter: 81
+			Bomber: 80
+			Fighter: 78
+			Heroic: 52
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2000
+		PercentageSpread: 50
+	Warhead@Railgun_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1000
@@ -13662,6 +15436,104 @@ DefuseKit:
 			Bomber: 10
 			Helicopter: 10
 			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
+
+^Warhead_Tesla:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Tesla: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 70
+		Damage: 2000
+		Falloff: 100, 55, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 338
+			Superheavy: 139
+			Heavy: 134
+			Plate: 133
+			CyborgHeavy: 133
+			Medium: 131
+			CyborgMedium: 129
+			Flak: 128
+			AntiAirVehicle: 127
+			Light: 124
+			AntiAirInfantry: 124
+			ShipSuperheavy: 123
+			CyborgLight: 122
+			ShipMedium: 122
+			None: 121
+			ShipHeavy: 121
+			Scout: 118
+			AntiAirShip: 118
+			ShipLight: 115
+			Concrete: 114
+			AntiAirBuilding: 111
+			Steel: 109
+			Wood: 106
+			CyborgHeroic: 104
+			Spaceship: 94
+			FlyingInfantry: 90
+			Heroic: 78
+			Helicopter: 48
+			Bomber: 46
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
+	Warhead@Tesla_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			None: 125
+			CyborgHeavy: 115
+			Superheavy: 100
+			CyborgMedium: 87
+			Heavy: 75
+			CyborgLight: 56
+			Medium: 50
+			AntiAirVehicle: 35
+			ShipSuperheavy: 32
+			ShipHeavy: 27
+			Light: 25
+			FlyingInfantry: 25
+			ShipMedium: 22
+			AntiAirShip: 19
+			ShipLight: 16
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+			AntiAirBuilding: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 ###### Nuclear: BLD > VEH > AIR > INF (heavy, air=True) ######
@@ -20374,6 +22246,63 @@ generic_bullet_casing:
 			Helicopter: 11
 			Spaceship: 10
 
+^Warhead_Inferno:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Inferno: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 106
+		Damage: 2000
+		Falloff: 100, 80, 59, 40, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 46
+			COMPOSITE: 70
+			BLAST: 86
+			REFLECTOR: 80
+			ARMOR: 70
+			Shield: 241
+			None: 200
+			Wood: 193
+			AntiAirInfantry: 192
+			Flak: 185
+			Steel: 181
+			CyborgLight: 148
+			ShipLight: 145
+			AntiAirBuilding: 142
+			Plate: 137
+			Scout: 132
+			CyborgMedium: 130
+			AntiAirShip: 122
+			ShipHeavy: 121
+			ShipSuperheavy: 117
+			Concrete: 112
+			Light: 109
+			CyborgHeavy: 105
+			FlyingInfantry: 104
+			ShipMedium: 102
+			AntiAirVehicle: 100
+			Medium: 92
+			Heroic: 90
+			CyborgHeroic: 83
+			Heavy: 81
+			Superheavy: 76
+			Fighter: 73
+			Bomber: 49
+			Helicopter: 46
+			Spaceship: 42
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 200
+		PercentageScale: 1900
+		PercentageSpread: 50
+
 
 ^Warhead_CannonNuke_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -20627,6 +22556,61 @@ generic_bullet_casing:
 			Spaceship: 8
 			AntiAirInfantry: 8
 
+^Warhead_CannonNuke:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonNuke: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 91
+			BLAST: 51
+			REFLECTOR: 77
+			ARMOR: 70
+			Shield: 205
+			Wood: 153
+			Scout: 151
+			Steel: 149
+			AntiAirBuilding: 148
+			Concrete: 147
+			ShipLight: 140
+			AntiAirShip: 138
+			ShipMedium: 137
+			ShipHeavy: 137
+			ShipSuperheavy: 136
+			Light: 129
+			Medium: 128
+			AntiAirVehicle: 128
+			Heavy: 126
+			Superheavy: 124
+			CyborgLight: 99
+			CyborgMedium: 97
+			CyborgHeavy: 96
+			FlyingInfantry: 89
+			Fighter: 84
+			CyborgHeroic: 83
+			Bomber: 81
+			None: 76
+			AntiAirInfantry: 75
+			Flak: 74
+			Plate: 73
+			Helicopter: 64
+			Spaceship: 61
+			Heroic: 55
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PercentageScale: 1800
+		PercentageSpread: 50
+
 ^Warhead_MissileNuke_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -20878,6 +22862,61 @@ generic_bullet_casing:
 			Flak: 6
 			None: 5
 			AntiAirInfantry: 5
+
+^Warhead_MissileNuke:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileNuke: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 80
+		Damage: 2000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 72
+			COMPOSITE: 64
+			BLAST: 66
+			REFLECTOR: 78
+			ARMOR: 70
+			Shield: 200
+			Superheavy: 200
+			Heavy: 194
+			Medium: 176
+			AntiAirVehicle: 172
+			Light: 168
+			ShipSuperheavy: 149
+			ShipHeavy: 147
+			Scout: 145
+			ShipMedium: 143
+			Spaceship: 137
+			AntiAirShip: 137
+			ShipLight: 132
+			Concrete: 117
+			Helicopter: 115
+			AntiAirBuilding: 114
+			Steel: 111
+			Bomber: 109
+			Wood: 104
+			CyborgHeavy: 99
+			FlyingInfantry: 92
+			CyborgMedium: 90
+			Fighter: 86
+			CyborgHeroic: 86
+			CyborgLight: 77
+			Plate: 51
+			Flak: 46
+			AntiAirInfantry: 40
+			Heroic: 37
+			None: 35
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PercentageScale: 1800
+		PercentageSpread: 50
 
 ^Warhead_MissileQuantum_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -21140,6 +23179,64 @@ generic_bullet_casing:
 			AntiAirInfantry: 8
 			None: 7
 
+^Warhead_MissileQuantum:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileQuantum: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 35
+		Damage: 2000
+		Falloff: 100, 51, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 83
+			COMPOSITE: 52
+			BLAST: 80
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 242
+			Superheavy: 195
+			Heavy: 189
+			Medium: 172
+			AntiAirVehicle: 166
+			Light: 161
+			Spaceship: 132
+			Scout: 130
+			ShipSuperheavy: 125
+			CyborgHeavy: 124
+			ShipHeavy: 123
+			ShipMedium: 122
+			CyborgMedium: 115
+			AntiAirShip: 115
+			ShipLight: 108
+			Helicopter: 103
+			CyborgHeroic: 102
+			FlyingInfantry: 101
+			Bomber: 94
+			CyborgLight: 93
+			Concrete: 86
+			AntiAirBuilding: 83
+			Plate: 81
+			Steel: 80
+			Flak: 77
+			Wood: 72
+			Fighter: 67
+			AntiAirInfantry: 64
+			None: 54
+			Heroic: 53
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStates:
+			Temperature: 12
+		IntegrityScale: 17
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ^Warhead_MissileTesla_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -21394,6 +23491,62 @@ generic_bullet_casing:
 			Bomber: 9
 			AntiAirInfantry: 9
 			Fighter: 8
+
+^Warhead_MissileTesla:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileTesla: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 47
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 78
+			COMPOSITE: 58
+			BLAST: 84
+			REFLECTOR: 61
+			ARMOR: 70
+			Shield: 256
+			Superheavy: 178
+			Heavy: 175
+			Medium: 163
+			AntiAirVehicle: 160
+			Light: 158
+			Scout: 138
+			Spaceship: 124
+			CyborgHeavy: 120
+			ShipSuperheavy: 119
+			ShipMedium: 118
+			ShipHeavy: 118
+			AntiAirShip: 114
+			CyborgMedium: 113
+			ShipLight: 110
+			CyborgLight: 106
+			CyborgHeroic: 101
+			FlyingInfantry: 97
+			Concrete: 85
+			Helicopter: 84
+			Plate: 82
+			AntiAirBuilding: 82
+			Bomber: 81
+			Steel: 80
+			Flak: 78
+			Wood: 77
+			AntiAirInfantry: 74
+			None: 71
+			Fighter: 68
+			Heroic: 57
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 2000
+		PercentageSpread: 50
 
 ^Warhead_MissileThermobaric_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -21653,6 +23806,63 @@ generic_bullet_casing:
 			Helicopter: 8
 			Spaceship: 7
 
+^Warhead_MissileThermobaric:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileThermobaric: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 138
+		Damage: 2000
+		Falloff: 100, 74, 51, 36, 23, 13, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 66
+			COMPOSITE: 91
+			BLAST: 47
+			REFLECTOR: 76
+			ARMOR: 70
+			Shield: 176
+			Wood: 176
+			Steel: 164
+			Scout: 148
+			AntiAirBuilding: 145
+			ShipLight: 144
+			None: 133
+			Concrete: 128
+			AntiAirInfantry: 128
+			AntiAirShip: 126
+			CyborgLight: 125
+			Flak: 123
+			ShipHeavy: 120
+			Light: 118
+			ShipSuperheavy: 116
+			ShipMedium: 111
+			CyborgMedium: 109
+			AntiAirVehicle: 106
+			FlyingInfantry: 105
+			Medium: 96
+			Heavy: 88
+			Plate: 87
+			CyborgHeavy: 87
+			Superheavy: 82
+			Fighter: 77
+			Bomber: 72
+			CyborgHeroic: 72
+			Heroic: 64
+			Helicopter: 64
+			Spaceship: 60
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 17
+		PercentageScale: 1900
+		PercentageSpread: 50
+
 ^Warhead_BulletFire_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -21911,6 +24121,63 @@ generic_bullet_casing:
 			Helicopter: 7
 			Spaceship: 5
 
+^Warhead_BulletFire:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletFire: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 86
+		Damage: 2000
+		Falloff: 100, 82, 64, 42, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 59
+			BLAST: 68
+			REFLECTOR: 85
+			ARMOR: 70
+			Shield: 193
+			None: 200
+			AntiAirInfantry: 198
+			Flak: 196
+			Plate: 166
+			Wood: 154
+			CyborgLight: 142
+			Steel: 135
+			ShipLight: 125
+			Scout: 124
+			CyborgMedium: 120
+			FlyingInfantry: 115
+			AntiAirBuilding: 109
+			Heroic: 103
+			CyborgHeavy: 103
+			Light: 101
+			AntiAirShip: 100
+			ShipHeavy: 93
+			Fighter: 90
+			ShipSuperheavy: 90
+			Concrete: 88
+			AntiAirVehicle: 86
+			ShipMedium: 80
+			CyborgHeroic: 79
+			Bomber: 74
+			Medium: 73
+			Heavy: 64
+			Helicopter: 63
+			Superheavy: 60
+			Spaceship: 57
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 50
+		PercentageScale: 2000
+		PercentageSpread: 50
+
 ^Warhead_BulletHE_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -22162,6 +24429,61 @@ generic_bullet_casing:
 			Superheavy: 7
 			Helicopter: 7
 			Spaceship: 5
+
+^Warhead_BulletHE:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletHE: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 93
+		Damage: 2000
+		Falloff: 100, 60, 34, 16, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 80
+			COMPOSITE: 71
+			BLAST: 56
+			REFLECTOR: 72
+			ARMOR: 70
+			Shield: 153
+			None: 200
+			AntiAirInfantry: 195
+			Flak: 191
+			Plate: 174
+			Wood: 154
+			CyborgLight: 139
+			Steel: 132
+			AntiAirBuilding: 129
+			Concrete: 126
+			ShipLight: 122
+			Scout: 121
+			CyborgMedium: 114
+			FlyingInfantry: 112
+			AntiAirShip: 107
+			Heroic: 105
+			CyborgHeavy: 103
+			Light: 96
+			ShipMedium: 93
+			ShipHeavy: 90
+			Fighter: 87
+			ShipSuperheavy: 86
+			AntiAirVehicle: 81
+			CyborgHeroic: 77
+			Bomber: 71
+			Medium: 68
+			Heavy: 61
+			Helicopter: 60
+			Superheavy: 56
+			Spaceship: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 1800
+		PercentageSpread: 50
 
 ^Warhead_BulletTesla_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -22417,6 +24739,62 @@ generic_bullet_casing:
 			AntiAirBuilding: 9
 			Helicopter: 8
 			Spaceship: 7
+
+^Warhead_BulletTesla:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletTesla: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 59
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 79
+			COMPOSITE: 57
+			BLAST: 84
+			REFLECTOR: 60
+			ARMOR: 70
+			Shield: 258
+			None: 200
+			AntiAirInfantry: 199
+			Flak: 198
+			Plate: 193
+			CyborgLight: 151
+			Scout: 136
+			CyborgMedium: 133
+			Heroic: 131
+			CyborgHeavy: 130
+			FlyingInfantry: 116
+			Light: 114
+			ShipLight: 111
+			Wood: 108
+			CyborgHeroic: 106
+			AntiAirVehicle: 101
+			AntiAirShip: 97
+			Medium: 90
+			Heavy: 87
+			Superheavy: 85
+			ShipMedium: 84
+			ShipHeavy: 84
+			ShipSuperheavy: 83
+			Steel: 81
+			AntiAirBuilding: 80
+			Concrete: 79
+			Fighter: 76
+			Bomber: 67
+			Helicopter: 58
+			Spaceship: 48
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 1800
+		PercentageSpread: 50
 
 ^Warhead_BulletThermobaric_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -22676,6 +25054,63 @@ generic_bullet_casing:
 			Helicopter: 7
 			Spaceship: 5
 
+^Warhead_BulletThermobaric:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletThermobaric: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 65
+		Damage: 2000
+		Falloff: 100, 80, 62, 46, 32, 17, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 77
+			COMPOSITE: 68
+			BLAST: 59
+			REFLECTOR: 76
+			ARMOR: 70
+			Shield: 175
+			None: 200
+			AntiAirInfantry: 196
+			Flak: 192
+			Plate: 170
+			Wood: 144
+			CyborgLight: 144
+			Scout: 128
+			Steel: 122
+			ShipLight: 122
+			CyborgMedium: 120
+			FlyingInfantry: 113
+			AntiAirBuilding: 110
+			Heroic: 109
+			CyborgHeavy: 107
+			Light: 103
+			AntiAirShip: 102
+			Concrete: 99
+			ShipHeavy: 90
+			Fighter: 89
+			AntiAirVehicle: 88
+			ShipSuperheavy: 87
+			ShipMedium: 86
+			CyborgHeroic: 82
+			Medium: 75
+			Bomber: 71
+			Heavy: 67
+			Superheavy: 62
+			Helicopter: 59
+			Spaceship: 54
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 17
+		PercentageScale: 1900
+		PercentageSpread: 50
+
 ^Warhead_BulletCryo_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -22933,6 +25368,63 @@ generic_bullet_casing:
 			Superheavy: 9
 			Helicopter: 9
 			Spaceship: 8
+
+^Warhead_BulletCryo:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletCryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 46
+		Damage: 2000
+		Falloff: 100, 48, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 79
+			COMPOSITE: 56
+			BLAST: 85
+			REFLECTOR: 60
+			ARMOR: 70
+			Shield: 183
+			None: 200
+			AntiAirInfantry: 196
+			Flak: 192
+			Plate: 188
+			CyborgLight: 146
+			Scout: 126
+			CyborgMedium: 126
+			CyborgHeavy: 122
+			Heroic: 118
+			FlyingInfantry: 115
+			Wood: 110
+			ShipLight: 108
+			Light: 106
+			CyborgHeroic: 96
+			AntiAirVehicle: 94
+			AntiAirShip: 94
+			Fighter: 88
+			Steel: 86
+			Medium: 83
+			AntiAirBuilding: 83
+			ShipMedium: 82
+			ShipHeavy: 82
+			ShipSuperheavy: 82
+			Concrete: 81
+			Heavy: 79
+			Superheavy: 78
+			Bomber: 68
+			Helicopter: 63
+			Spaceship: 60
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -100
+		PercentageScale: 1600
+		PercentageSpread: 50
 
 ^Warhead_CannonCryo_Heavy:
 	ValidTargets: Ground, Water
@@ -23192,6 +25684,63 @@ generic_bullet_casing:
 			Bomber: 7
 			Fighter: 6
 
+^Warhead_CannonCryo:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonCryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 55
+		Damage: 2000
+		Falloff: 100, 61, 28, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 70
+			COMPOSITE: 70
+			BLAST: 79
+			REFLECTOR: 61
+			ARMOR: 70
+			Shield: 184
+			Scout: 142
+			Light: 140
+			AntiAirVehicle: 139
+			Medium: 138
+			Heavy: 137
+			ShipLight: 137
+			Wood: 135
+			ShipHeavy: 135
+			AntiAirShip: 135
+			ShipMedium: 134
+			Steel: 133
+			ShipSuperheavy: 132
+			Superheavy: 131
+			AntiAirBuilding: 131
+			Concrete: 130
+			CyborgLight: 122
+			CyborgMedium: 120
+			CyborgHeavy: 110
+			None: 106
+			AntiAirInfantry: 105
+			Flak: 104
+			FlyingInfantry: 94
+			CyborgHeroic: 90
+			Plate: 88
+			Heroic: 62
+			Fighter: 59
+			Bomber: 58
+			Helicopter: 56
+			Spaceship: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -100
+		PercentageScale: 1500
+		PercentageSpread: 50
+
 ^Warhead_MissileCryo_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -23449,6 +25998,63 @@ generic_bullet_casing:
 			None: 9
 			Fighter: 9
 			AntiAirInfantry: 9
+
+^Warhead_MissileCryo:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileCryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 40
+		Damage: 2000
+		Falloff: 100, 60, 27, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 72
+			COMPOSITE: 68
+			BLAST: 79
+			REFLECTOR: 61
+			ARMOR: 70
+			Shield: 186
+			Scout: 155
+			Light: 153
+			AntiAirVehicle: 152
+			Medium: 151
+			Heavy: 150
+			Superheavy: 146
+			ShipLight: 128
+			AntiAirShip: 126
+			ShipMedium: 124
+			ShipHeavy: 124
+			ShipSuperheavy: 123
+			CyborgLight: 110
+			Wood: 107
+			CyborgMedium: 105
+			Steel: 103
+			Concrete: 102
+			AntiAirBuilding: 102
+			Fighter: 98
+			FlyingInfantry: 98
+			CyborgHeavy: 96
+			Bomber: 88
+			Helicopter: 84
+			CyborgHeroic: 83
+			None: 79
+			Spaceship: 76
+			AntiAirInfantry: 76
+			Flak: 73
+			Plate: 61
+			Heroic: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -100
+		PercentageScale: 1500
+		PercentageSpread: 50
 
 ^Warhead_BlastCryo_Heavy:
 	ValidTargets: Ground, Water
@@ -23708,6 +26314,63 @@ generic_bullet_casing:
 			Helicopter: 7
 			Spaceship: 7
 
+^Warhead_BlastCryo:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BlastCryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 105
+		Damage: 2000
+		Falloff: 100, 72, 50, 32, 19, 9, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 92
+			BLAST: 60
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 181
+			Wood: 163
+			Steel: 161
+			AntiAirBuilding: 158
+			Concrete: 155
+			None: 148
+			AntiAirInfantry: 147
+			Flak: 146
+			Plate: 133
+			ShipLight: 130
+			AntiAirShip: 126
+			CyborgLight: 123
+			ShipMedium: 123
+			ShipHeavy: 121
+			CyborgMedium: 120
+			ShipSuperheavy: 119
+			Scout: 110
+			CyborgHeavy: 110
+			Light: 103
+			AntiAirVehicle: 100
+			Medium: 98
+			FlyingInfantry: 97
+			Heavy: 91
+			Superheavy: 88
+			CyborgHeroic: 80
+			Heroic: 73
+			Fighter: 61
+			Bomber: 58
+			Helicopter: 56
+			Spaceship: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -67
+		PercentageScale: 1700
+		PercentageSpread: 50
+
 ^Warhead_FlakCryo_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -23965,6 +26628,63 @@ generic_bullet_casing:
 			AntiAirShip: 10
 			Concrete: 9
 			AntiAirBuilding: 9
+
+^Warhead_FlakCryo:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@FlakCryo: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 43
+		Damage: 2000
+		Falloff: 100, 68, 44, 26, 12, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 74
+			COMPOSITE: 67
+			BLAST: 80
+			REFLECTOR: 60
+			ARMOR: 70
+			Shield: 185
+			None: 169
+			AntiAirInfantry: 166
+			Flak: 163
+			Fighter: 161
+			Bomber: 159
+			Helicopter: 155
+			Spaceship: 154
+			Plate: 146
+			FlyingInfantry: 125
+			CyborgLight: 113
+			CyborgMedium: 109
+			CyborgHeavy: 103
+			Scout: 78
+			Light: 75
+			AntiAirVehicle: 74
+			Medium: 73
+			Heavy: 72
+			ShipLight: 71
+			Superheavy: 70
+			ShipHeavy: 69
+			AntiAirShip: 69
+			Wood: 68
+			ShipMedium: 68
+			ShipSuperheavy: 68
+			Steel: 67
+			AntiAirBuilding: 65
+			Concrete: 64
+			CyborgHeroic: 63
+			Heroic: 57
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -100
+		PercentageScale: 1400
+		PercentageSpread: 50
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -26484,6 +29204,62 @@ generic_bullet_casing:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+
+^Warhead_CannonTesla:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonTesla: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 65
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 56
+			BLAST: 86
+			REFLECTOR: 63
+			ARMOR: 70
+			Shield: 255
+			Superheavy: 149
+			Heavy: 146
+			Medium: 142
+			AntiAirVehicle: 139
+			Light: 137
+			ShipMedium: 136
+			ShipSuperheavy: 136
+			ShipHeavy: 135
+			Scout: 134
+			AntiAirShip: 132
+			Concrete: 131
+			ShipLight: 129
+			AntiAirBuilding: 127
+			CyborgHeavy: 125
+			Steel: 124
+			Wood: 121
+			CyborgMedium: 120
+			CyborgLight: 115
+			Plate: 107
+			CyborgHeroic: 104
+			Flak: 102
+			AntiAirInfantry: 99
+			None: 96
+			FlyingInfantry: 91
+			Spaceship: 78
+			Heroic: 72
+			Helicopter: 56
+			Bomber: 48
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 2000
+		PercentageSpread: 50
 ^Warhead_BulletChem_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
@@ -26742,61 +29518,63 @@ generic_bullet_casing:
 			Helicopter: 8
 			Spaceship: 7
 
-
-^Warhead_CannonAP:
-	ValidTargets: Ground, Water
+^Warhead_BulletChem:
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonAP: AreaDamage
+	Warhead@BulletChem: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 120
+		ValidTargets: Ground, Water, Air
+		Spread: 83
 		Damage: 2000
-		Falloff: 100, 0
+		Falloff: 100, 82, 61, 38, 0
 		Heaviness: 1000
 		HeavinessMode: SharedVersus
 		Versus:
-			HAZMAT: 91
-			COMPOSITE: 40
-			BLAST: 73
-			REFLECTOR: 75
+			HAZMAT: 74
+			COMPOSITE: 52
+			BLAST: 71
+			REFLECTOR: 83
 			ARMOR: 70
-			Shield: 144
-			Superheavy: 144
-			Heavy: 142
-			Medium: 141
-			AntiAirVehicle: 139
-			Light: 138
-			ShipMedium: 138
-			Scout: 137
-			Concrete: 136
-			ShipSuperheavy: 136
-			ShipHeavy: 135
-			AntiAirShip: 135
-			AntiAirBuilding: 132
-			ShipLight: 132
-			Steel: 129
-			Wood: 127
-			CyborgHeavy: 112
-			CyborgMedium: 109
-			CyborgLight: 105
-			CyborgHeroic: 94
-			FlyingInfantry: 93
-			Plate: 89
-			Flak: 84
-			AntiAirInfantry: 82
-			None: 80
-			Spaceship: 71
-			Helicopter: 70
-			Heroic: 61
+			Shield: 182
+			None: 200
+			Flak: 199
+			AntiAirInfantry: 199
+			Plate: 191
+			CyborgLight: 159
+			CyborgMedium: 148
+			CyborgHeavy: 144
+			Scout: 130
+			Light: 126
+			Heroic: 124
+			AntiAirVehicle: 118
+			CyborgHeroic: 115
+			Medium: 110
+			FlyingInfantry: 110
+			Heavy: 109
+			Superheavy: 107
+			ShipLight: 104
+			AntiAirShip: 95
+			ShipHeavy: 89
+			ShipSuperheavy: 88
+			Wood: 86
+			ShipMedium: 86
+			Fighter: 76
+			Steel: 73
+			AntiAirBuilding: 70
+			Concrete: 68
 			Bomber: 60
-			Fighter: 54
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 2000
+			Helicopter: 52
+			Spaceship: 50
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 33
+		PercentageScale: 1800
 		PercentageSpread: 50
+
 
 # Scoped Sonic additions; existing shield/plating calibration retained.
 ^Warhead_BulletSonic_Light:
@@ -27072,6 +29850,69 @@ generic_bullet_casing:
 		PhysicalStateName: Resonance
 		Amount: 5000
 		Range: 266
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
+
+^Warhead_BulletSonic:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletSonic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 2000
+		Falloff: 100, 75, 50, 25, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 83
+			COMPOSITE: 69
+			BLAST: 64
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 218
+			None: 200
+			AntiAirInfantry: 198
+			Flak: 196
+			Plate: 184
+			CyborgLight: 145
+			Scout: 133
+			FlyingInfantry: 123
+			Heroic: 122
+			CyborgMedium: 120
+			CyborgHeavy: 112
+			Fighter: 108
+			Wood: 106
+			Light: 105
+			ShipLight: 105
+			CyborgHeroic: 89
+			AntiAirVehicle: 88
+			AntiAirShip: 87
+			Bomber: 86
+			Steel: 75
+			Medium: 74
+			Helicopter: 72
+			AntiAirBuilding: 72
+			ShipMedium: 72
+			ShipHeavy: 71
+			Concrete: 70
+			ShipSuperheavy: 70
+			Heavy: 68
+			Spaceship: 67
+			Superheavy: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
+		PercentageScale: 1400
+		PercentageSpread: 50
+	Warhead@BulletSonic_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 200
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Air, Structure, wall
 
@@ -27351,6 +30192,69 @@ generic_bullet_casing:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Air, Structure, wall
 
+^Warhead_MissileSonic:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@MissileSonic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 80
+		Damage: 2000
+		Falloff: 100, 75, 50, 25, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 81
+			COMPOSITE: 69
+			BLAST: 64
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 213
+			Superheavy: 174
+			Heavy: 172
+			Medium: 160
+			AntiAirVehicle: 159
+			Light: 158
+			Scout: 138
+			Spaceship: 136
+			Helicopter: 117
+			Bomber: 115
+			ShipHeavy: 114
+			ShipSuperheavy: 114
+			ShipMedium: 111
+			AntiAirShip: 109
+			CyborgHeavy: 107
+			ShipLight: 107
+			FlyingInfantry: 102
+			CyborgMedium: 102
+			Fighter: 96
+			CyborgLight: 95
+			CyborgHeroic: 89
+			Concrete: 77
+			AntiAirBuilding: 76
+			Steel: 75
+			Wood: 73
+			Plate: 67
+			Flak: 65
+			AntiAirInfantry: 61
+			None: 57
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
+		PercentageScale: 1400
+		PercentageSpread: 50
+	Warhead@MissileSonic_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 160
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
+
 ^Warhead_CannonSonic_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -27627,6 +30531,69 @@ generic_bullet_casing:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
+^Warhead_CannonSonic:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonSonic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 68, 42, 20, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 69
+			COMPOSITE: 97
+			BLAST: 49
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 215
+			Scout: 148
+			Wood: 124
+			Light: 123
+			ShipLight: 123
+			Steel: 117
+			AntiAirVehicle: 117
+			AntiAirShip: 116
+			CyborgLight: 112
+			AntiAirBuilding: 112
+			Medium: 111
+			ShipHeavy: 111
+			ShipSuperheavy: 110
+			ShipMedium: 109
+			Concrete: 107
+			Heavy: 106
+			CyborgMedium: 105
+			Superheavy: 104
+			None: 102
+			AntiAirInfantry: 101
+			Flak: 100
+			FlyingInfantry: 100
+			CyborgHeavy: 100
+			Plate: 95
+			Fighter: 91
+			Bomber: 89
+			CyborgHeroic: 85
+			Heroic: 70
+			Helicopter: 67
+			Spaceship: 60
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
+		PercentageScale: 1400
+		PercentageSpread: 50
+	Warhead@CannonSonic_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 600
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+
 ^Warhead_BlastSonic_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -27900,5 +30867,68 @@ generic_bullet_casing:
 		PhysicalStateName: Resonance
 		Amount: 5000
 		Range: 744
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+
+^Warhead_BlastSonic:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BlastSonic: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 279
+		Damage: 2000
+		Falloff: 100, 73, 51, 33, 20, 10, 0
+		Heaviness: 1000
+		HeavinessMode: SharedVersus
+		Versus:
+			HAZMAT: 66
+			COMPOSITE: 100
+			BLAST: 45
+			REFLECTOR: 68
+			ARMOR: 70
+			Shield: 197
+			Wood: 165
+			Steel: 159
+			None: 157
+			AntiAirBuilding: 154
+			Concrete: 150
+			AntiAirInfantry: 150
+			Flak: 144
+			ShipLight: 128
+			Plate: 126
+			CyborgLight: 125
+			AntiAirShip: 122
+			ShipMedium: 117
+			ShipHeavy: 115
+			CyborgMedium: 114
+			Scout: 113
+			ShipSuperheavy: 111
+			CyborgHeavy: 102
+			Light: 100
+			FlyingInfantry: 100
+			AntiAirVehicle: 95
+			Medium: 91
+			Heavy: 83
+			Superheavy: 78
+			CyborgHeroic: 74
+			Heroic: 71
+			Fighter: 69
+			Bomber: 63
+			Helicopter: 61
+			Spaceship: 58
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 33
+		PercentageScale: 1500
+		PercentageSpread: 50
+	Warhead@BlastSonic_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 558
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall

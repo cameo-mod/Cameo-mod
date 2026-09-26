@@ -3930,8 +3930,32 @@ bases, not the plumbing. The three open decisions of the 2026-09-10 review, rule
   per-ladder rank restore, not by a blanket "never flatter".
 Air variants (12.0l rule 3a) are built per family BASE (`^Warhead_BulletAir`), never per level.
 
+**BASES IMPLEMENTED 2026-09-26 (weapons NOT yet re-pointed).** `gen_weapon_template.py` emits one
+`^Warhead_<Family>` per generated family through `family(..., base=True)`, so every extra (chips,
+meters, IntegrityScale, area feeds) is carried; guard `tools/tests/test_family_bases.py`. Measured
+on the tree, not the estimate below: **54 families / 159 levelled templates** in yaml, **52 bases** —
+`Nuclear` (hand-tuned superweapon) and `Sniper` (a hand-made single template) are not generator
+families and keep their templates. Rules the ruling left implicit, now fixed in code:
+* **Home level** = Medium, or a family's only level (`Railgun` is Heavy-only, so its base carries
+  `Heaviness: 2000`). Geometry always comes from the MEDIUM slot, because the C# applies `(h+2)/3`.
+* **`PercentageScale` = 100 x the home level's percentage TOP / growth(home h)**: the approved
+  CannonAP 2000 and 2000 for every standard family, but Magic 4000 and Sonic 800 — a blanket 2000
+  would have halved Magic's giant-killer %HP.
+* **The R16 `bell_stretch` runs**; only `level_tilt` is skipped. The CannonAP pilot predated R16
+  and omitted the stretch, so its live profile widened (54..144 -> 45..161) when it was regenerated.
+* **Shield** = the home template's final phase-2 value, as the pilot did; distinct across all 52.
+
+⚠ **Acceptance measure (the test prescribed in §12.0i):** each base through the Python bell mirror
+(`effective_heaviness.shared_versus_profile`) at h = 0 / 1 / 2 against today's Light / Medium /
+Heavy templates: rank preserved inside every ladder (8 swaps, all involving the DERIVED `Heroic`
+cell), but core armor rows differ by a **mean 10.6%, p90 23%** — the bell and the old `level_tilt`
+are different curves. And the shared mode scales Shield by `(2000 + h) / 2000`, so at h = 1 a base
+deals **1.5x** its Medium template's Shield. "`h = 1` reproduces current balance" is therefore
+approximate, and that decision belongs to the re-point step, before any weapon moves.
+
 **What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
-/ `_Heavy` suffix is retired: **147 templates across 50 families become 50**, and the 1,147 concrete
+/ `_Heavy` suffix is retired: **147 templates across 50 families become 50** *(estimate; measured
+2026-09-26: 159 across 54, 52 of them generated — see above)*, and the 1,147 concrete
 weapons that inherit a level are re-pointed. Families already carry the delivery × element grammar
 (`BulletChem`, `CannonCryo`, `MissileTesla`), so 50 is a real vocabulary, not a collapse.
 
