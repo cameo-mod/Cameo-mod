@@ -807,6 +807,19 @@ RA2FreedomAK47_elite:
 			Bomber: 22
 			Helicopter: 16
 			Spaceship: 10
+			FlyingInfantry: 49
+			CyborgLight: 84
+			CyborgMedium: 78
+			CyborgHeavy: 71
+			CyborgHeroic: 65
+			AntiAirInfantry: 97
+			AntiAirVehicle: 67
+			AntiAirBuilding: 37
+			ShipLight: 57
+			ShipMedium: 47
+			ShipHeavy: 48
+			ShipSuperheavy: 46
+			AntiAirShip: 52
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Garrisoned
@@ -831,6 +844,19 @@ RA2FreedomAK47_elite:
 			Bomber: 12
 			Helicopter: 10
 			Spaceship: 8
+			FlyingInfantry: 22
+			CyborgLight: 33
+			CyborgMedium: 31
+			CyborgHeavy: 29
+			CyborgHeroic: 27
+			AntiAirInfantry: 37
+			AntiAirVehicle: 27
+			AntiAirBuilding: 17
+			ShipLight: 24
+			ShipMedium: 20
+			ShipHeavy: 21
+			ShipSuperheavy: 20
+			AntiAirShip: 22
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@ChaingunPercentage: AreaDamagePercentage
@@ -855,6 +881,19 @@ RA2FreedomAK47_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 RA2FreedomRocket:
@@ -5613,6 +5652,19 @@ RA2APCMachineGun_elite:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5633,6 +5685,19 @@ RA2APCMachineGun_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 RA2APCMachineGun_AA:
 	Inherits@xRA2APCMachineGun0: ^Warhead_Bullet_Medium
 	Inherits@xRA2APCMachineGun1: ^Projectile_Bullet_Medium
@@ -5749,6 +5814,19 @@ RA2APCMachineGun_AA:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5769,6 +5847,19 @@ RA2APCMachineGun_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
 RA2APCMachineGun_AA_elite:
 	Inherits: RA2APCMachineGun_AA
 	Range: 9610
@@ -6156,6 +6247,19 @@ RA2APCRocket_elite:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6181,6 +6285,19 @@ RA2APCRocket_elite:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6207,6 +6324,19 @@ RA2APCRocket_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6258,6 +6388,19 @@ RA2APCRocket_elite:
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 148
+			FlyingInfantry: 95
+			CyborgLight: 116
+			CyborgMedium: 97
+			CyborgHeavy: 73
+			CyborgHeroic: 62
+			AntiAirInfantry: 83
+			AntiAirVehicle: 135
+			AntiAirBuilding: 103
+			ShipLight: 146
+			ShipMedium: 112
+			ShipHeavy: 112
+			ShipSuperheavy: 100
+			AntiAirShip: 128
 		PercentageVersus:
 			None: 8
 			Light: 18
@@ -6276,6 +6419,19 @@ RA2APCRocket_elite:
 			Helicopter: 10
 			Spaceship: 9
 			Shield: 25
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
