@@ -83,7 +83,7 @@ wc2knightslice:
 wc2paladinholyvision:
 	ReloadDelay: 60
 	Range: 512000
-	Report: wc2_holyvisn.aud
+	Report: wc2_humans_sounds|wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -104,7 +104,7 @@ wc2paladinholyvision:
 wc2paladinholyvision_hit:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_holyvisn.aud
+	Report: wc2_humans_sounds|wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -145,7 +145,7 @@ wc2holyvisionSuper_hit:
 		Delay: 10
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-n
-		ImpactSounds: wc2_holyvisn.aud
+		ImpactSounds: wc2_humans_sounds|wc2_holyvisn.aud
 	Warhead@Effect: CreateEffect
 		Delay: 13
 		Image: wc2_effect_sparkle_circle
@@ -183,7 +183,7 @@ wc2holyvisionSuper_hit:
 wc2paladinhealing:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_heal.aud
+	Report: wc2_humans_sounds|wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
 	Projectile: InstantHit
@@ -209,7 +209,7 @@ wc2paladinhealing:
 wc2priesthealing:
 	ReloadDelay: 40
 	Range: 5120
-	Report: wc2_heal.aud
+	Report: wc2_humans_sounds|wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
 	Projectile: InstantHit
@@ -255,7 +255,7 @@ wc2healingSuper_hit:
 wc2paladinexorcism:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_exorcism.aud
+	Report: wc2_humans_sounds|wc2_exorcism.aud
 	ValidTargets: undeadtarget
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -283,7 +283,7 @@ wc2ballistaFire:
 	ReloadDelay: 180
 	Range: 14450
 	MinRange: 2890
-	Report: wc2_catapult.aud
+	Report: wc2_shared_sounds|wc2_catapult.aud
 	Projectile: Bullet
 		Speed: 384
 		Inaccuracy: 384
@@ -378,7 +378,7 @@ wc2gryphonFireVisible:
 	Inherits@4: ^TeslaChargedWeapon
 	ReloadDelay: 100
 	Range: 4444
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 444
@@ -529,7 +529,7 @@ wc2mageFireballExplosion:
 wc2mageSlow:
 	ReloadDelay: 60
 	Range: 8000
-	Report: wc2_slow.aud
+	Report: wc2_humans_sounds|wc2_slow.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 10c0
@@ -562,7 +562,7 @@ wc2mageSlow:
 wc2magePolymorph:
 	ReloadDelay: 60
 	Range: 8000
-	Report: wc2_morph.aud
+	Report: wc2_humans_sounds|wc2_morph.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	Projectile: Missile

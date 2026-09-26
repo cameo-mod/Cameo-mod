@@ -15,21 +15,21 @@ wc2axeFire:
 	Inherits: wc2arrowFire
 	ReloadDelay: 38
 	Range: 6445
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2axeFirespear:
 	Inherits: wc2highArrowFire
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2ogrepunch:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -47,7 +47,7 @@ wc2ogrepunch:
 wc2ogremageEyeOfKilrogg:
 	ReloadDelay: 60
 	Range: 5120
-	Report: eye_of_killrog.aud
+	Report: wc2_orcs_sounds|eye_of_killrog.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -71,7 +71,7 @@ wc2ogremageEyeOfKilrogg:
 wc2ogremageBloodlust:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_blodlust.aud
+	Report: wc2_orcs_sounds|wc2_blodlust.aud
 	ValidTargets: bloodlust_target
 	Projectile: Missile
 		Speed: 10c0
@@ -103,7 +103,7 @@ wc2ogremageBloodlust:
 wc2ogremageRunes:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_runes.aud
+	Report: wc2_orcs_sounds|wc2_runes.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 1
@@ -144,7 +144,7 @@ wc2runesSuper:
 		Delay: 2
 		Image: wc2_effect_sparkle
 		Explosions: idle
-		ImpactSounds: wc2_runes.aud
+		ImpactSounds: wc2_orcs_sounds|wc2_runes.aud
 
 wc2catapultFire:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
@@ -156,7 +156,7 @@ wc2catapultFire:
 	ReloadDelay: 240
 	Range: 13400
 	MinRange: 2680
-	Report: wc2_catapult.aud
+	Report: wc2_shared_sounds|wc2_catapult.aud
 	Projectile: Bullet
 		Speed: 384
 		Inaccuracy: 384
@@ -212,7 +212,7 @@ wc2deathknightFire:
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits: wc2mageFire
-	Report: wc2_touchdrk.aud
+	Report: wc2_orcs_sounds|wc2_touchdrk.aud
 	Projectile:
 		Image: wc2_effect_death_knight_attack
 	Warhead@Flame_Heavy:
@@ -228,7 +228,7 @@ wc2deathknightFire:
 
 wc2deathknightDeathCoil:
 	Inherits: wc2deathknightFire
-	Report: wc2_dethcoil.aud
+	Report: wc2_orcs_sounds|wc2_dethcoil.aud
 	ReloadDelay: 80
 	Range: 8000
 	Projectile: Missile
@@ -258,7 +258,7 @@ wc2deathknightDeathCoilScatter_Right:
 wc2deathknightHaste:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_haste.aud
+	Report: wc2_orcs_sounds|wc2_haste.aud
 	ValidTargets: haste_target
 	Projectile: Missile
 		Speed: 10c0
@@ -290,7 +290,7 @@ wc2deathknightHaste:
 
 wc2deathknightDeathAndDecay:
 	Inherits: wc2mageBlizzard
-	Report: wc2_decay.aud
+	Report: wc2_orcs_sounds|wc2_decay.aud
 	Warhead@InitialSpreader:
 		Weapon: wc2deathknightDeathAndDecay_Spread
 		RandomClusterCount: 5
@@ -367,7 +367,7 @@ wc2deathknightDeathAndDecay_Hit:
 wc2deathknightRaiseDead:
 	ReloadDelay: 60
 	Range: 5120
-	Report: wc2_raise_dead.aud
+	Report: wc2_orcs_sounds|wc2_raise_dead.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -506,7 +506,7 @@ wc2dragonFireVisible:
 	ReloadDelay: 120
 	Burst: 2
 	BurstDelays: 0
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	Projectile: Missile
@@ -552,18 +552,18 @@ wc2_orcs_zuljin_spear:
 	Inherits: wc2_humans_alleria_arrow
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
 
 wc2_orcs_zuljin_spear_elite:
 	Inherits: wc2_humans_alleria_arrow_elite
 	ReloadDelay: 40
 	Range: 7711
-	Report: wc2_axe.aud
+	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 	Warhead@Effect: CreateEffect
-		ImpactSounds: wc2_axe.aud
+		ImpactSounds: wc2_shared_sounds|wc2_axe.aud
