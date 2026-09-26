@@ -11,9 +11,10 @@ after a per-source consumer scan proved the field is dead on EVERY weapon
 carrying it — the live-consumer check caught that `^HealingWeapon`'s
 `Warhead@Effect` fields are live on 582/385 inheritors, so the heal-weapon
 retypers got `-Explosions:`/`-ImpactActors:` cancels instead (D2KRepair,
-TSHeal). Deferred: ProtossHeal + TSRA2Heal (dead line inherited live by
-~38 retyped children — needs restructuring, flagged to Claude). Remaining
-28 = NOVA lane (fix list posted to fleet). Orphans 0, drift clean, boot PASS.
+TSHeal). Follow-up: a file-only consumer match inflated live-children lists;
+line-precise matching shows all local dead lines have zero live consumers —
+ProtossHeal + TSRA2Heal deleted outright (no restructuring needed). Remaining
+26 = NOVA lane (fix list posted to fleet). Orphans 0, drift clean, boot PASS.
 
 ## 2026-09-27 — DAWN: dead-warhead-fields fix (PR #431 culprit)
 

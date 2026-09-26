@@ -19,9 +19,15 @@ Swept the 14-kind/70-weapon residual down to **12 kinds / 28 weapons**:
   local retype and an untyped pin on TSHeal.
 - Resolved-diff HEAD→working: 45 weapons differ, every delta a removed dead
   leaf; orphan cancels 0, empty warheads 0, balance drift clean.
-- **Deferred (live-children pattern, needs restructuring):** ProtossHeal,
-  TSRA2Heal — their local dead lines are inherited LIVE by children retyped
-  back to CreateEffect; deleting would break ~38 consumers. Flagged to Claude.
+- **Correction (same commit series):** the first liveness pass matched
+  consumers by FILE, not (file,line) — it reported a "live-children" class
+  (ProtossHeal/TSRA2Heal/MagicOrbSpreaderProjectile2/NaxiMeteorSpawner) that
+  does not exist. Line-precise matching shows zero live consumers for every
+  flagged local line: plain deletes. The only truly-live dead-field source is
+  `^HealingWeapon`'s `Warhead@Effect` Explosions/ImpactActors (live on
+  BroodweaverLeech, MedicHeal, TKMMedicHeal) — retypers cancel, already done.
+  Lesson folded into LESSONS_LEARNED: field provenance is (file,line), never
+  file alone.
 - Remaining 26 weapons are NOVA's lane (RA/RA2/RA2Mod packs + legacy
   redalert2/redalert2mod/other/tiberiandawn RA-owned entries) — per-weapon fix
   list posted to the fleet board.
