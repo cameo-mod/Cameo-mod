@@ -68,7 +68,7 @@ claims:
       print(sum(included(n.key) for n in rs.resolve('world').children))
 
   - id: shield_versus_mean
-    value: 94.6819
+    value: 97.6157
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -79,7 +79,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 1.05617
+    value: 1.02443
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -90,7 +90,7 @@ claims:
       print(tm.shield_hp_factor())
 
   - id: shield_damage_share
-    value: 0.0171309
+    value: 0.0183167
     tolerance: 0.05
     what: >
       Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that

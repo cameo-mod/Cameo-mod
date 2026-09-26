@@ -634,7 +634,7 @@ Two families were credited to the wrong counter in the first draft:
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x1.084 (nova post-merge) / x1.056 (DAWN stack merge), 2026-09-27; combined tree re-measured at resync
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # **x1.024 measured 2026-09-27 (#534+#539+#543+#544 merged tree)** — x0.617 pre-#490
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
