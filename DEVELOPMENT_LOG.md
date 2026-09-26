@@ -1,3 +1,43 @@
+## 2026-09-26 (night) — W7 rule-4 remediation + master merge + audit split (NOVA)
+
+PR #516 was BLOCKED by rule 4: W7 splices copied parents' inline
+`Versus`/`PercentageVersus` into 75 concrete defs (`count_local_versus`
+891 -> 956; Claude's merge gate: <=891). Remediation on
+`devin/nova/w7-packs` (`01c89a5a5`): restored the `Inherits: <weapon>`
+edge on all 75 where the parent carries the Versus blob; the authorized
+held-67 ExtraDamage folds re-applied as local `-Warhead@<chip>:` cancels
++ `Damage:` pins; Virusgun trio kept template-edges with stub-ordered
+nodes (duplicate `^Warhead_Toxic_Medium` path removed). Local-Versus
+final: **881 <= 891**. W7 re-locked **520 -> 595** with provenance in the
+ratchet comment (75 restored edges are the ruling's intent, not new debt).
+
+Merged `origin/master` 91f865585 (`fb3cdb4b6`): conflicts in Naxis
+weapons, redalert2mod.yaml (kept converted shape + master's
+`pack|file` Report format) and `audit_orphan_cancels.py` (EMBER's
+--fragile + NOVA same-key sibling grouping).
+
+Post-merge verification vs master (2475-weapon corpus, strict-order):
+2407 clean; all 68 diffs are authorized — held-67 folds (Damage
+multiset totals preserved, e.g. SteelIonCannonDamage 450000 = 450000),
+R20 toxic-dart renames, cosmetic intra-node field order. 48 post-merge
+drifts vs pre-merge tip = master's R16 geometric-mean rebalance of shared
+^Warhead_* Versus tables — inherited by reference, correct.
+
+Gates on merged tree: local-Versus 881 <= 891 | orphan cancels 0 |
+empty warheads 0 | dup-inherits clean | weapon-shape all buckets <=
+ratchets (W7 595/595) | balance-drift clean after `ae18687ae` re-extract
+(14 in-lane ledgers + derived sidecars; `_model.json` Flak census 48->49
+is the conversion's own move) | cross-file duplicate defs 0 |
+**boot-gate PASS** (`MenuPostProcessEffect.PostWorldLoaded`, private
+SupportDir, zero new exceptions).
+
+`audit_orphan_cancels.py` same-key sibling fix split per Claude's order
+into its own PR: **#533** (branch `devin/nova/orphan-cancels-siblings`,
+off master, +test `tools/tests/test_orphan_cancels_siblings.py`).
+Master-version-vs-fixed on this tree: 9 findings -> 0, each a
+sibling-provider false positive (`Range:` redeclare-cancel idiom,
+engine MergeSelfPartial semantics).
+
 ## 2026-09-26 (late) — W7 held-67: ExtraDamage fold + materialization landed (NOVA)
 
 The 67 weapons held for the ExtraDamage ruling are now converted on
