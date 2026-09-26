@@ -1785,7 +1785,82 @@ RA2MultiHoverMissile:
 		Spread: 43
 		Falloff: 100, 0
 RA2MultiHoverMissile_elite:
-	Inherits: RA2MultiHoverMissile
+	Inherits@finalmain: ^Warhead_MissileHE_Light_Flat
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	Range: 6170
+	ReloadDelay: 20
+	Burst: 4
+	Report: vifvatta.wav
+	Projectile: Missile
+		HorizontalRateOfTurn: 24
+		VerticalRateOfTurn: 12
+		Speed: 384
+		Image: DRAGON
+		ContrailLenght: 16
+		ContrailColor: D8D8FF
+		MinimumLaunchAngle: 64
+		MaximumLaunchAngle: 128
+		MaximumLaunchSpeed: 64
+		MinimumLaunchSpeed: 128
+		Acceleration: 16
+	-Warhead@MissileHE_Light_Flat:
+	Warhead@MissileAP_Light: AreaDamage
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9975
+		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Warhead@MissileAP_Light:
+		Spread: 43
+		Falloff: 100, 0
+	# W7MAT inline of RA2MultiHoverMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 7170
 	Burst: 4
@@ -1852,7 +1927,82 @@ RA2MultiHoverMissile_elite:
 		Falloff: 100, 0
 RA2MultiHoverMissile_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
-	Inherits: RA2MultiHoverMissile
+	Inherits@finalmain: ^Warhead_MissileHE_Light_Flat
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	Range: 6170
+	ReloadDelay: 20
+	Burst: 4
+	Report: vifvatta.wav
+	Projectile: Missile
+		HorizontalRateOfTurn: 24
+		VerticalRateOfTurn: 12
+		Speed: 384
+		Image: DRAGON
+		ContrailLenght: 16
+		ContrailColor: D8D8FF
+		MinimumLaunchAngle: 64
+		MaximumLaunchAngle: 128
+		MaximumLaunchSpeed: 64
+		MinimumLaunchSpeed: 128
+		Acceleration: 16
+	-Warhead@MissileHE_Light_Flat:
+	Warhead@MissileAP_Light: AreaDamage
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9975
+		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Warhead@MissileAP_Light:
+		Spread: 43
+		Falloff: 100, 0
+	# W7MAT inline of RA2MultiHoverMissile
 	ValidTargets: Air
 	Range: 9255
 	Warhead@CannonHE_Medium:
@@ -8751,7 +8901,135 @@ RA2GattlingMG2:
 			Superheavy: 5
 
 RA2GattlingMG2_AA:
-	Inherits: RA2GattlingMG2
+	Inherits@xRA2GattlingMG10: ^Warhead_Bullet_Medium
+	Inherits@xRA2GattlingMG11: ^Projectile_Bullet_Medium
+	Inherits@xRA2GattlingMG12: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Range: 5000
+	ReloadDelay: 6
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG1
+	Range: 5250
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	ReloadDelay: 4
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -9393,7 +9671,81 @@ TanyaAttach:
 		TriggerTime: 50
 
 TanyaBomb:
-	Inherits: IvanBomb
+	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Report: M203.aud
+	Warhead@Concussion_Medium:
+		Damage: 30000
+	Warhead@Demolition_Heavy:
+		Damage: 60000
+	Warhead@Effect: CreateEffect
+		Explosions: ivan_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpcraa.wav
+		ValidTargets: Ground, Air, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpcraa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	Warhead@Demolition_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 90000
+		PercentageScale: 9999
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+	# W7MAT inline of IvanBomb
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy

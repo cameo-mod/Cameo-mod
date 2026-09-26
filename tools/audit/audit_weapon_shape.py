@@ -88,7 +88,11 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 157   # 143 -> 157: W7 chain-collapse batch-2 (NOVA,
+W2_BASELINE = 170   # 157 -> 170: W7 chain-collapse batch-3 (NOVA,
+                    # 2026-09-26) — de-parented children now carry the
+                    # parent+sibling warhead-template edges verbatim
+                    # (^Warhead_ twins like the batch-2 flat-twin class).
+                    # was: 143 -> 157: W7 chain-collapse batch-2 (NOVA,
                     # 2026-09-26) — same verbatim-inline mechanism; parents'
                     # extra ^Warhead_ edges now carried by their children.
                     # was: 132 -> 143: W7 chain-collapse batch (NOVA, 2026-09-26) —
@@ -114,13 +118,19 @@ W2_BASELINE = 157   # 143 -> 157: W7 chain-collapse batch-2 (NOVA,
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 14    # 11 -> 14: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+W3_BASELINE = 19    # 14 -> 19: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # same mechanism as batch-2: parent bodies carrying a second
+                    # ^Projectile_ edge hand it to de-parented children.
+                    # was: 11 -> 14: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
                     # was: 7 -> 11: W7 chain-collapse batch (NOVA, 2026-09-26) —
                     # parents carrying a second ^Projectile_ edge (MigMissiles,
                     # volkov magnetic, RA2120mm chem variants) hand it to their
                     # de-parented children verbatim. Resolve-identical.
                     # was: 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 66    # 61 -> 66: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+W4_BASELINE = 77    # 66 -> 77: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # de-parented children carry the parent's dual ^Effect_
+                    # edges verbatim. Resolve-identical.
+                    # was: 61 -> 66: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
                     # was: 44 -> 61: W7 chain-collapse batch (NOVA, 2026-09-26) —
                     # children take on their parents' dual ^Effect_ composition
                     # (e.g. Apoc_AP + family cover edges) verbatim.
@@ -135,7 +145,10 @@ W4_BASELINE = 66    # 61 -> 66: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 520   # 511 -> 520: W7 chain-collapse batch-2 (NOVA, 2026-09-26)
+W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # local order-pin decls emulating the dropped template
+                    # re-application (NaxiMP40Laser class).
+                    # was: 511 -> 520: W7 chain-collapse batch-2 (NOVA, 2026-09-26)
                     # — parent local effect decls now local on children.
                     # was: 509 -> 511: the MigMissiles_{fire,tesla} resurrection
                     # pins (Effect1/Glow/Effect/ShieldHit) — sole-emulation of the
@@ -163,7 +176,11 @@ W6_BASELINE = 520   # 511 -> 520: W7 chain-collapse batch-2 (NOVA, 2026-09-26)
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 577   # 629 -> 577: W7 chain-collapse batch-2 (NOVA, 2026-09-26),
+W7_BASELINE = 520   # 577 -> 520: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # 57 more children of split/template parents de-parented;
+                    # 3 collision-heavy cases deferred (YuriGatlingCannonMG2,
+                    # NaxiHetzer/JadgDestroyerCorrosion).
+                    # was: 629 -> 577: W7 chain-collapse batch-2 (NOVA, 2026-09-26),
                     # 52 more children of split parents inlined verbatim.
                     # was: 684 -> 629: W7 chain-collapse batch (NOVA, 2026-09-26) —
                     # 55 children of already-split parents had their
@@ -196,7 +213,10 @@ W7_BASELINE = 577   # 629 -> 577: W7 chain-collapse batch-2 (NOVA, 2026-09-26),
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 368   # 365 -> 368: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+W8_BASELINE = 372   # 368 -> 372: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # parents' non-three-kind template edges copied verbatim
+                    # into de-parented children (same class as batch-2).
+                    # was: 365 -> 368: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
                     # was: 362 -> 365: W7 chain-collapse batch (NOVA, 2026-09-26) —
                     # parents' non-three-kind edges (^TeslaWeapon,
                     # ^NaxOxidationShells) copied verbatim into de-parented

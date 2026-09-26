@@ -1185,7 +1185,40 @@ RA2Magnet:
 	-Warhead@EffectAir:
 
 RA2MagnetAA:
-	Inherits: RA2Magnet
+	Inherits@xRA2Magnet0: ^Warhead_Laser_Heavy
+	Inherits@xRA2Magnet1: ^Projectile_Laser_Heavy
+	Inherits@xRA2Magnet2: ^Effect_Laser_Heavy
+	-Warhead@Effect:
+	Range: 7032
+	ValidTargets: Vehicle, Structure
+	ReloadDelay: 200
+	Burst: 100
+	BurstDelays: 1
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Shape: Flat
+		Width: 350
+		Duration: 100
+		Color: FF55F505
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 2000
+		ValidTargets: Vehicle, Structure
+	# 20000-point Magnetism meter over `Burst: 100` shots = 200 a shot, so a full volley
+	# is a full lock -- exactly what the 100 stacked `Magnet` tokens used to mean. Neither
+	# firepower nor the target's damage modifiers touched the old grant, and the magnetron
+	# carries `FirepowerMultiplier@MultiWeapon: 50` while not elite, so both stay OFF.
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+		ValidTargets: Vehicle
+	-Warhead@EffectAir:
+	# W7MAT inline of RA2Magnet
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy:
@@ -1196,7 +1229,40 @@ RA2MagnetAA:
 		InvalidTargets: Paratrooper
 
 RA2Magnet_elite:
-	Inherits: RA2Magnet
+	Inherits@xRA2Magnet0: ^Warhead_Laser_Heavy
+	Inherits@xRA2Magnet1: ^Projectile_Laser_Heavy
+	Inherits@xRA2Magnet2: ^Effect_Laser_Heavy
+	-Warhead@Effect:
+	Range: 7032
+	ValidTargets: Vehicle, Structure
+	ReloadDelay: 200
+	Burst: 100
+	BurstDelays: 1
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Shape: Flat
+		Width: 350
+		Duration: 100
+		Color: FF55F505
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 2000
+		ValidTargets: Vehicle, Structure
+	# 20000-point Magnetism meter over `Burst: 100` shots = 200 a shot, so a full volley
+	# is a full lock -- exactly what the 100 stacked `Magnet` tokens used to mean. Neither
+	# firepower nor the target's damage modifiers touched the old grant, and the magnetron
+	# carries `FirepowerMultiplier@MultiWeapon: 50` while not elite, so both stay OFF.
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+		ValidTargets: Vehicle
+	-Warhead@EffectAir:
+	# W7MAT inline of RA2Magnet
 	Range: 8032
 	Projectile: LaserZap
 		Color: e6000045
@@ -2229,7 +2295,135 @@ RA2GattlingMG3:
 			Superheavy: 5
 
 RA2GattlingMG3_AA:
-	Inherits: RA2GattlingMG3
+	Inherits@xRA2GattlingMG10: ^Warhead_Bullet_Medium
+	Inherits@xRA2GattlingMG11: ^Projectile_Bullet_Medium
+	Inherits@xRA2GattlingMG12: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Range: 5000
+	ReloadDelay: 6
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG1
+	Range: 5500
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	ReloadDelay: 2
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG3
 	Range: 8250
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -2291,7 +2485,135 @@ RA2GattlingMG3_AA:
 			Spaceship: 6
 			Superheavy: 5
 YuriGatlingCannonMG3:
-	Inherits: RA2GattlingMG3
+	Inherits@xRA2GattlingMG10: ^Warhead_Bullet_Medium
+	Inherits@xRA2GattlingMG11: ^Projectile_Bullet_Medium
+	Inherits@xRA2GattlingMG12: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Range: 5000
+	ReloadDelay: 6
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG1
+	Range: 5500
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	ReloadDelay: 2
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of RA2GattlingMG3
 	Range: 8250
 	Warhead@Bullet_Medium_Flat:
 		Damage: 4000

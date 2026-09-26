@@ -147,8 +147,154 @@ SteelCloneGun:
 			Spaceship: 6
 			Superheavy: 5
 SteelCloneGun_elite:
-	Inherits: SteelCloneGun
+	Inherits@xSteelCloneGun0: ^Warhead_Bullet_Light
+	Inherits@xSteelCloneGun1: ^Projectile_Bullet_Light
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
+	ReloadDelay: 25
+	Range: 6463
+	ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
+	Projectile: Bullet
+	Report: steel_clonefire.wav
+	Projectile:
+		ContrailStartColor: 77CCFFAA
+		ContrailEndColor: 4488FF00
+		ContrailLength: 10
+		ContrailStartWidth: 20
+		ContrailEndWidth: 5
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+		ImpactSounds: makoexplose.wav
+	Warhead@EffectAir:
+		ImpactSounds: makoexplose.wav
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Concrete:
+	Projectile:
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		ImpactSounds: gexpwasa.wav
+		ExplosionPalette: ra2effect
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piff
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHit:
+		Duration: 3
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelCloneGun
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -275,8 +421,154 @@ SteelCloneGun_elite:
 			Superheavy: 5
 
 SteelCloneGunResonance:
-	Inherits: SteelCloneGun
+	Inherits@xSteelCloneGun0: ^Warhead_Bullet_Light
+	Inherits@xSteelCloneGun1: ^Projectile_Bullet_Light
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
+	ReloadDelay: 25
+	Range: 6463
+	ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
+	Projectile: Bullet
+	Report: steel_clonefire.wav
+	Projectile:
+		ContrailStartColor: 77CCFFAA
+		ContrailEndColor: 4488FF00
+		ContrailLength: 10
+		ContrailStartWidth: 20
+		ContrailEndWidth: 5
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+		ImpactSounds: makoexplose.wav
+	Warhead@EffectAir:
+		ImpactSounds: makoexplose.wav
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Concrete:
+	Projectile:
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		ImpactSounds: gexpwasa.wav
+		ExplosionPalette: ra2effect
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piff
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHit:
+		Duration: 3
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelCloneGun
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelCloneGunResonanceBounce1
 		Amount: 1
@@ -3254,7 +3546,155 @@ SteelMantaAG:
 			Superheavy: 5
 SteelManta_AA:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits: SteelMantaAG
+	Inherits@xSteelMantaAG0: ^Warhead_Bullet_Medium
+	Inherits@xSteelMantaAG1: ^Projectile_Bullet_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
+	ReloadDelay: 20
+	Range: 6666
+	ValidTargets: Ground, Water
+	Report: steel_clonefire.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 77CCFF
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Light:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
+	Projectile:
+		ContrailEndWidth: 10
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Projectile:
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailInterval: 1
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@ShieldHit:
+		Duration: 4
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelMantaAG
 	Report: steel_chaingunfire.wav
 	Range: 9999
 	ValidTargets: Air
@@ -3325,8 +3765,155 @@ SteelManta_AA:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 
 SteelMantaAGResonance:
-	Inherits: SteelMantaAG
+	Inherits@xSteelMantaAG0: ^Warhead_Bullet_Medium
+	Inherits@xSteelMantaAG1: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
+	ReloadDelay: 20
+	Range: 6666
+	ValidTargets: Ground, Water
+	Report: steel_clonefire.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 77CCFF
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Light:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
+	Projectile:
+		ContrailEndWidth: 10
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Projectile:
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailInterval: 1
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@ShieldHit:
+		Duration: 4
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelMantaAG
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaAGResonanceBounce1
 		Amount: 1
@@ -4034,7 +4621,130 @@ SteelMantaHunterCannons_AA:
 	Inherits@xSteelMantaHunterCannons_AA0: ^Warhead_MissileAP_Medium
 	Inherits@xSteelMantaHunterCannons_AA1: ^Projectile_Missile_Medium
 	Inherits@xSteelMantaHunterCannons_AA2: ^Effect_Clsn_Medium_RA2
-	Inherits@2: SteelMantaHunterCannons
+	Inherits@xSteelMantaHunterCannons0: ^Warhead_Bullet_Medium
+	Inherits@xSteelMantaHunterCannons1: ^Projectile_Bullet_Medium
+	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
+	Range: 8000
+	ReloadDelay: 8
+	Report: pulseturretfire.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 77CCFF
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	Projectile:
+		ContrailEndWidth: 10
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+	Warhead@Glow:
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Effect:
+		-ImpactActors:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelMantaHunterCannons
 	Range: 12000
 	ReloadDelay: 12
 	Report: steel_chaingunfire.wav
@@ -4120,8 +4830,129 @@ SteelMantaHunterCannons_AA:
 			Steel: 6
 			Concrete: 5
 SteelMantaHunterCannonsResonance:
-	Inherits: SteelMantaHunterCannons
+	Inherits@xSteelMantaHunterCannons0: ^Warhead_Bullet_Medium
+	Inherits@xSteelMantaHunterCannons1: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
+	Range: 8000
+	ReloadDelay: 8
+	Report: pulseturretfire.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 77CCFF
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	Projectile:
+		ContrailEndWidth: 10
+	Warhead@Effect:
+		Explosions: steel_bluepiffs
+	Warhead@Glow:
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of SteelMantaHunterCannons
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsResonanceBounce1
 		Amount: 1
@@ -9391,7 +10222,99 @@ SteelKatyCannons:
 			Spaceship: 10
 
 SteelKatyCannons_elite:
-	Inherits: SteelKatyCannons
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Projectile_Shell_Heavy
+	Inherits@4: ^Effect_CannonHE_Heavy
+	Warhead@EffectWater:
+		ImpactSounds: gexpwasa.wav
+	ReloadDelay: 50
+	Burst: 2
+	BurstDelays: 10
+	Report: aa_bgart.wav
+	Range: 7250
+	MinRange: 1450
+	TargetActorCenter: true
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		ContrailLength: 50
+		LaunchAngle: 50
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailDelay: 0
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		TrailInterval: 1
+	Warhead@CannonHE_Heavy:
+		Damage: 10000
+		FriendlyFireDamage: 0
+	Warhead@Flame_Heavy:
+		Damage: 20000
+	Warhead@Effect: CreateEffect
+		Explosions: aa_pulsexp
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@CannonFire_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 9997
+	Warhead@CannonFire_Heavy_Flat: AreaDamage
+	Warhead@CannonFire_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 346
+		Falloff: 100, 76, 56, 38, 0
+		Versus:
+			HAZMAT: 55
+			COMPOSITE: 88
+			BLAST: 53
+			REFLECTOR: 84
+			ARMOR: 70
+			Shield: 230
+			Wood: 152
+			None: 146
+			Flak: 141
+			Steel: 131
+			Concrete: 129
+			Plate: 122
+			Scout: 98
+			Light: 92
+			Medium: 91
+			Heavy: 90
+			Superheavy: 89
+			Heroic: 79
+			Fighter: 61
+			Bomber: 60
+			Helicopter: 59
+			Spaceship: 58
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 50
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 24
+			Steel: 22
+			None: 21
+			Scout: 21
+			Light: 20
+			Concrete: 20
+			Flak: 19
+			Plate: 18
+			Medium: 18
+			Heavy: 17
+			Heroic: 16
+			Superheavy: 16
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+	# W7MAT inline of SteelKatyCannons
 	Range: 8250
 	MinRange: 1650
 	Burst: 4
@@ -9456,7 +10379,99 @@ SteelKatyCannons_elite:
 SteelKatyCannons_EMP:
 	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits@2: ^TeslaWeapon
-	Inherits@3: SteelKatyCannons
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Projectile_Shell_Heavy
+	Inherits@4: ^Effect_CannonHE_Heavy
+	Warhead@EffectWater:
+		ImpactSounds: gexpwasa.wav
+	ReloadDelay: 50
+	Burst: 2
+	BurstDelays: 10
+	Report: aa_bgart.wav
+	Range: 7250
+	MinRange: 1450
+	TargetActorCenter: true
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		ContrailLength: 50
+		LaunchAngle: 50
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailDelay: 0
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		TrailInterval: 1
+	Warhead@CannonHE_Heavy:
+		Damage: 10000
+		FriendlyFireDamage: 0
+	Warhead@Flame_Heavy:
+		Damage: 20000
+	Warhead@Effect: CreateEffect
+		Explosions: aa_pulsexp
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		ExplosionPalette: ra2effect
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@CannonFire_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 9997
+	Warhead@CannonFire_Heavy_Flat: AreaDamage
+	Warhead@CannonFire_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 346
+		Falloff: 100, 76, 56, 38, 0
+		Versus:
+			HAZMAT: 55
+			COMPOSITE: 88
+			BLAST: 53
+			REFLECTOR: 84
+			ARMOR: 70
+			Shield: 230
+			Wood: 152
+			None: 146
+			Flak: 141
+			Steel: 131
+			Concrete: 129
+			Plate: 122
+			Scout: 98
+			Light: 92
+			Medium: 91
+			Heavy: 90
+			Superheavy: 89
+			Heroic: 79
+			Fighter: 61
+			Bomber: 60
+			Helicopter: 59
+			Spaceship: 58
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStates:
+			Temperature: 50
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 24
+			Steel: 22
+			None: 21
+			Scout: 21
+			Light: 20
+			Concrete: 20
+			Flak: 19
+			Plate: 18
+			Medium: 18
+			Heavy: 17
+			Heroic: 16
+			Superheavy: 16
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+	# W7MAT inline of SteelKatyCannons
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
