@@ -583,7 +583,14 @@ Scarab:
 	Warhead@Melee_Medium:
 		Damage: 10000
 SCVAttack:
-	Inherits: ^WorkerAttack
+	Inherits@w81: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Melee_Medium  # W7MAT covering-edge
+	Report: repair11.aud  # W7MAT w8-repin
+	Range: 1500  # W7MAT w8-repin
+	TargetActorCenter: True  # W7MAT w8-repin
+	Warhead@Melee_Medium:  # W7MAT w8-repin
+		Damage: 10000
 	Projectile: LaserZap
 		Color: 8888FF
 

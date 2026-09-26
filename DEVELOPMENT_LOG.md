@@ -409,7 +409,9 @@ semi-converted templates: `^D2K_Cannon` (19), `^D2KMissile` (15),
 `^D2KRocket` (6), `^OCannon` (6), `^Debris2Legacy` (4 — genuinely
 dual-warhead, 6 covering edges), `^OMissile` (3). Verified 0/0
 ordered+payload on all 192 weapons in touched files; orphans 0;
-empty warheads 0. W8 in-lane 362 -> 315. Bucket rises (resolved-faithful,
+empty warheads 0. W8 in-lane 362 -> 303 (batch-1 315, batch-2 +12: `^CabalMissileLight`
+7, `^TSMG` 5, `^WorkerAttack` 3 — batch-2 nets edges because those
+consumers already carried the projectile family). Bucket rises (resolved-faithful,
 ratchets documented in audit_weapon_shape.py): W1 rate 1101->1188 bp,
 W2 +18, W3 +13, W4 +26, W6 +3. Three orphan `-Report:` cancels removed
 (provider edge gone; cancels had already consumed the leaf). Raw-body

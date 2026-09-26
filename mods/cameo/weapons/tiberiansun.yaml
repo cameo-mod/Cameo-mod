@@ -2461,17 +2461,42 @@ TSMinigun:
 	Warhead@Bullet_Light:
 		Damage: 2000
 TSM1Carbine:
-	Inherits: ^TSMG
+	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 2000
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 200
+	ReloadDelay: 20  # W7MAT w8-repin
+	Range: 4000  # W7MAT w8-repin
 	Report: infgun3.aud
 
 TSVulcan:
-	Inherits: ^TSMG
+	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 2000
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 200
+	ReloadDelay: 20  # W7MAT w8-repin
+	Range: 4000  # W7MAT w8-repin
 	Report: chaingn1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
 
 TSVulcan2:
-	Inherits: ^TSMG
+	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 2000
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 200
 	ReloadDelay: 50
 	Burst: 3
 	Range: 6144
@@ -2534,7 +2559,15 @@ TSLaserRaiderCannon:
 		PercentageScale: 9992
 		PhysicalStateScale: 38
 TSPistola:
-	Inherits: ^TSMG
+	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 2000
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 200
+	ReloadDelay: 20  # W7MAT w8-repin
 	Inherits@fx: ^ts_tiberiansun_tspistola
 	Range: 3072
 	Report: gun18.aud

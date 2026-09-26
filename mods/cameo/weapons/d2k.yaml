@@ -1537,6 +1537,9 @@ o110mm_Gun:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: TURRET1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
 	Projectile:  # W7MAT w8-repin
 		Inaccuracy: 380
 	Projectile:  # W7MAT w8-repin
@@ -1546,7 +1549,6 @@ o110mm_Gun:
 	Inherits@fx: ^d2k_d2k_o110mm_gun
 	ReloadDelay: 35
 	Range: 5120
-	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 875
 		Blockable: false
@@ -1668,12 +1670,14 @@ oDevBullet:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: TANKHVY1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
 	Range: 4096  # W7MAT w8-repin
 	Warhead@CannonHE_Medium:  # W7MAT w8-repin
 		PercentageScale: 14953
 	Inherits@fx: ^d2k_d2k_odevbullet
 	ReloadDelay: 75
-	Report: TANKHVY1.WAV
 	Projectile: Bullet
 		Speed: 281
 		Inaccuracy: 0
@@ -1686,12 +1690,14 @@ o155mm:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium  # W7MAT covering-edge
+	Report: MORTAR1.WAV  # W7MAT order-pin
+	Warhead@2Smu:  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
 	Warhead@CannonHE_Medium:  # W7MAT w8-repin
 		PercentageScale: 14953
 	Inherits@fx: ^d2k_d2k_o155mm
 	ReloadDelay: 80
 	Range: 5632
-	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 192
 		Blockable: false
@@ -1794,6 +1800,11 @@ omtank_pri:
 	Inherits@w81: ^Warhead_MissileAP_Heavy_D2K_ORocket  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K_OMissile  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_OMissile  # W7MAT covering-edge
+	MinRange: 1230  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT order-pin
+	Burst: 2  # W7MAT order-pin
+	BurstDelays: 115  # W7MAT order-pin
+	ValidTargets: Ground, Air  # W7MAT order-pin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Warhead@MissileAP_Heavy:  # W7MAT w8-repin
 		Spread: 256
@@ -1811,11 +1822,7 @@ omtank_pri:
 			Concrete: 30
 	Inherits@fx: ^d2k_d2k_omtank_pri
 	ReloadDelay: 115
-	Burst: 2
-	BurstDelays: 115
 	Range: 6144
-	ValidTargets: Ground, Air
-	MinRange: 1230
 	Projectile: Missile
 		Inaccuracy: 96
 		RangeLimit: 7c204

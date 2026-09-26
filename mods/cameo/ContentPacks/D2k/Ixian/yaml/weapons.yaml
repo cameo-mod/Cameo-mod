@@ -40,11 +40,11 @@ DuelistTankCannon:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: d2khc.wav  # W7MAT order-pin
+	MinRange: 1400  # W7MAT order-pin
 	Inherits@fx: ^d2k_ixian_duelisttankcannon
 	Range: 7000
-	MinRange: 1400
 	ReloadDelay: 140
-	Report: d2khc.wav
 
 	Projectile: Bullet
 		Speed: 700
@@ -357,6 +357,8 @@ D2K_Bazooka2:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1280  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT order-pin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Range: 6400
 	ReloadDelay: 5
@@ -373,7 +375,6 @@ D2K_Bazooka2:
 		TrailInterval: 1
 	Warhead@MissileAP_Heavy:
 		Damage: 6000
-	MinRange: 1280
 D2K_Rocket_Trooper2:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@wh4: ^Warhead_MissileHE_Heavy
@@ -427,7 +428,7 @@ D2K_Rocket_Trooper1:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 mtank_pri2:
-	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
+	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^d2k_ixian_mtank_pri2
 	ValidTargets: Ground, Water, Air
@@ -2193,20 +2194,22 @@ d2k_air_drone_guns:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1300  # W7MAT order-pin
+	Warhead@Bullet_Medium:  # W7MAT order-pin
+	Warhead@EffectWater:  # W7MAT order-pin
+	Burst: 4  # W7MAT order-pin
+	BurstDelays: 2  # W7MAT order-pin
+	StartBurstReport: 20MMGUN1.WAV  # W7MAT order-pin
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ixian_d2k_air_drone_guns
 	ReloadDelay: 28
-	Burst: 4
-	BurstDelays: 2
 	Range: 6500
-	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	-Warhead@MissileAP_Heavy:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	MinRange: 1300
 	Projectile: Bullet
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -2808,10 +2811,14 @@ MongooseRocket:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
+	Report: d2k_buggy_rocket.wav  # W7MAT order-pin
+	Warhead@DuneRock:  # W7MAT order-pin
+	Warhead@DuneSand:  # W7MAT order-pin
+	Warhead@EffectWater:  # W7MAT order-pin
+	Warhead@RA2Crater:  # W7MAT order-pin
 	Inherits@fx: ^d2k_ixian_mongooserocket
 	ReloadDelay: 64
 	Range: 6183
-	Report: d2k_buggy_rocket.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Arm: 0
@@ -3418,11 +3425,13 @@ ixian_airdrone:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1300  # W7MAT order-pin
+	Burst: 4  # W7MAT order-pin
+	BurstDelays: 5  # W7MAT order-pin
+	Warhead@Shrapnel:  # W7MAT order-pin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	ReloadDelay: 132
 	Range: 6500
-	Burst: 4
-	BurstDelays: 5
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		MinimumLaunchAngle: -128
@@ -3493,7 +3502,6 @@ ixian_airdrone:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	MinRange: 1300
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@FlakWeapon:

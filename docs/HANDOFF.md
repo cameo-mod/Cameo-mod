@@ -6,10 +6,14 @@
 53 weapons across six semi-converted legacy templates converted to
 covering three-kind edges: `^D2K_Cannon` 19, `^D2KMissile` 15,
 `^D2KRocket` 6, `^OCannon` 6, `^Debris2Legacy` 4, `^OMissile` 3.
-Resolved+ordered identical (192/192 in touched files), orphans 0,
-empty 0, boot PASS. In-lane W8 362 -> 315. Remaining W8 class work:
-B:mixed templates `^CabalMissileLight`, `^TSMG`, `^WorkerAttack`, set-*
-families still mechanical; C:raw full-stack templates (`^HeavyBomb`,
+Batch-2: `^CabalMissileLight` 7, `^TSMG` 5, `^WorkerAttack` 3 —
+resolved+ordered identical (249/249 incl. all batch-1 files), orphans 0,
+empty 0, boot PASS. In-lane W8 362 -> 303. Held for ruling:
+`D2K_TowerMissile` + `mtank_pri2` — their `@fx` shared template carries
+the fx family edge already (emitting it = engine dup-parent crash) and
+its `-Warhead@Effect:`/`+` re-add repositions the node in a way no
+external pin can reproduce. Remaining W8 class work:
+C:raw full-stack templates (`^HeavyBomb`,
 `^MediumFlameWeapon`, `^TSCannonEffect`, `^FlakWeapon`, `^Grenade`,
 `^TSDefaultMissile`...) need real family conversion — design-class, not
 edge surgery. `^LaserWeapon`/`^RailgunWeapon`/`^TeslaWeapon` held on the

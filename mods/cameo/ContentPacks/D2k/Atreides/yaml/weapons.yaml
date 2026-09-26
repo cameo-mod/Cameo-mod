@@ -331,12 +331,17 @@ PhoenixRocket:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 920  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT order-pin
+	Warhead@3Eff:  # W7MAT order-pin
+	Burst: 8  # W7MAT order-pin
+	BurstDelays: 10  # W7MAT order-pin
+	Warhead@1Dam:  # W7MAT order-pin
+	Warhead@Shrapnel:  # W7MAT order-pin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits@fx: ^d2k_atreides_phoenixrocket
 	ReloadDelay: 100
-	Burst: 8
 	Range: 4608
-	BurstDelays: 10
 	Projectile: Missile
 		Inaccuracy: 96
 		Speed: 256
@@ -355,5 +360,4 @@ PhoenixRocket:
 		Weapon: PhoenixRocketShrapnel
 		Amount: 3
 		ValidTargets: Ground, Water, Air
-	MinRange: 920
 

@@ -752,7 +752,14 @@ TSRobotHackingControl:
 		Damage: 0
 
 TSVulcanTower:
-	Inherits: ^TSMG
+	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		Speed: 2000
+	Projectile: Bullet  # W7MAT w8-repin
+	Projectile:  # W7MAT w8-repin
+		Inaccuracy: 200
 	Inherits@fx: ^ts_cabal_tsvulcantower
 	ReloadDelay: 26
 	Range: 6144
@@ -870,7 +877,21 @@ CabalReaperMissiles:
 	ReloadDelay: 24
 	Range: 5785
 	TargetActorCenter: true
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
 	Burst: 2
@@ -1015,7 +1036,21 @@ CabalReaperMissiles_AA:
 	ReloadDelay: 24
 	Range: 8680
 	TargetActorCenter: true
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
 	Burst: 2
@@ -1167,7 +1202,21 @@ CabalHeavyReaperMissiles:
 	ReloadDelay: 30
 	Range: 6085
 	TargetActorCenter: true
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^ts_cabal_set5
 	ReloadDelay: 30
 	Burst: 2
@@ -1313,7 +1362,21 @@ CabalHeavyReaperMissiles_AA:
 	ReloadDelay: 30
 	Range: 9130
 	TargetActorCenter: true
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^ts_cabal_set5
 	ReloadDelay: 30
 	Burst: 2
@@ -2604,7 +2667,21 @@ CabalManticoreMissiles_AA:
 		PercentageScale: 0
 CabalRocketCyborgRockets:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
 	Burst: 3
@@ -2636,7 +2713,21 @@ CabalRocketCyborgRockets:
 
 CabalRocketCyborgRocketsUpgraded:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@proj: ^CabalMissileLight
+	Inherits@w81: ^Projectile_Missile_Light  # W7MAT covering-edge
+	Projectile:  # W7MAT w8-repin
+		MinimumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		MaximumLaunchAngle: 255
+	Projectile:  # W7MAT w8-repin
+		CruiseAltitude: 6000
+	Projectile:  # W7MAT w8-repin
+		TerrainHeightAware: true
+	Projectile:  # W7MAT w8-repin
+		HorizontalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		VerticalRateOfTurn: 80
+	Projectile:  # W7MAT w8-repin
+		TrailImage: cabal_rockettrail
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
 	Burst: 4

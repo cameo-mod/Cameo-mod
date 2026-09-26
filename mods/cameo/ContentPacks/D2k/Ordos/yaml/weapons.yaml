@@ -1226,10 +1226,15 @@ D2K_155mm_turret:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MORTAR1.WAV  # W7MAT order-pin
+	Warhead@Smudge1:  # W7MAT order-pin
+	Warhead@Smudge2:  # W7MAT order-pin
+	Warhead@Smudge2RA2:  # W7MAT order-pin
+	Warhead@Effect1:  # W7MAT order-pin
+	Warhead@Effect2:  # W7MAT order-pin
 	Inherits@fx: ^d2k_ordos_d2k_155mm_turret
 	ReloadDelay: 74
 	Range: 10000
-	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 228
 	Warhead@Demolition_Light:
@@ -1378,10 +1383,10 @@ Dune_SiegeMortar:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
+	Report: MORTAR1.WAV  # W7MAT order-pin
+	MinRange: 1985  # W7MAT order-pin
 	ReloadDelay: 80
 	Range: 9920
-	MinRange: 1985
-	Report: MORTAR1.WAV
 	TargetActorCenter: true
 	Projectile: Bullet
 		LaunchAngle: 125
@@ -1890,10 +1895,16 @@ DeviatorMissile:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1415  # W7MAT order-pin
+	Report: MISSLE1.WAV  # W7MAT order-pin
+	Warhead@DuneRock:  # W7MAT order-pin
+	Warhead@DuneSand:  # W7MAT order-pin
+	Warhead@RA2Crater:  # W7MAT order-pin
+	Warhead@EffectWater:  # W7MAT order-pin
+	Warhead@OwnerChange:  # W7MAT order-pin
 	Inherits@fx: ^d2k_ordos_deviatormissile_2
 	ReloadDelay: 98
 	Range: 7070
-	Report: MISSLE1.WAV
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 12
@@ -1917,7 +1928,6 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
 		ValidRelationships: Neutral, Enemy
-	MinRange: 1415
 	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
 	# InvalidTargets: Structure, MCImmune
@@ -2720,11 +2730,13 @@ facedancer_grenade:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1450  # W7MAT order-pin
+	Report: missile7.aud  # W7MAT order-pin
+	Warhead@DuneRock:  # W7MAT order-pin
+	Warhead@DuneSand:  # W7MAT order-pin
 	Inherits@fx: ^d2k_ordos_facedancer_grenade_2
 	ReloadDelay: 90
 	Range: 7250
-	MinRange: 1450
-	Report: missile7.aud
 	ValidTargets: Ground, Water, Air
 
 	Projectile: Missile
@@ -3151,18 +3163,22 @@ autogun_tank:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1495  # W7MAT order-pin
+	Warhead@DuneRock:  # W7MAT order-pin
+	Warhead@DuneSand:  # W7MAT order-pin
+	Warhead@RA2Crater:  # W7MAT order-pin
+	Warhead@EffectWater:  # W7MAT order-pin
+	Burst: 4  # W7MAT order-pin
+	BurstDelays: 2  # W7MAT order-pin
+	StartBurstReport: 20MMGUN1.WAV  # W7MAT order-pin
 	Inherits@fx: ^d2k_ordos_autogun_tank
 	ReloadDelay: 24
-	Burst: 4
-	BurstDelays: 2
 	Range: 7480
-	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	-Warhead@MissileAP_Heavy:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	MinRange: 1495
 	Projectile: Bullet
 		Image: 50CAL
 		Inaccuracy: 200
@@ -3551,12 +3567,29 @@ ordos_airmine:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 410  # W7MAT order-pin
+	Report: ROCKET1.WAV  # W7MAT order-pin
+	Warhead@DuneRock:  # W7MAT order-pin
+	Warhead@DuneSand:  # W7MAT order-pin
+	Warhead@RA2Crater:  # W7MAT order-pin
+	Warhead@Effect1:  # W7MAT order-pin
+	Warhead@EffectWater:  # W7MAT order-pin
+	Warhead@Smudge1:  # W7MAT order-pin
+	Warhead@Smudge2:  # W7MAT order-pin
+	Warhead@Smudge2RA2:  # W7MAT order-pin
+	Warhead@Effect2:  # W7MAT order-pin
+	Burst: 15  # W7MAT order-pin
+	BurstDelays: 0  # W7MAT order-pin
+	Warhead@TankDestroyerCannonPercentage:  # W7MAT order-pin
+	Warhead@LightChemicalWeaponPercentage:  # W7MAT order-pin
+	Warhead@FlakWeaponPercentage:  # W7MAT order-pin
+	Warhead@MediumMissilePercentage:  # W7MAT order-pin
+	Warhead@HeavyBombPercentage:  # W7MAT order-pin
+	Warhead@Shrapnel:  # W7MAT order-pin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits: ^d2k_ordos_ordos_airmine
 	ReloadDelay: 132
 	Range: 2048
-	Burst: 15
-	BurstDelays: 0
 	Projectile: Missile
 		MaximumLaunchSpeed: 96
 		Blockable: false
@@ -3756,7 +3789,6 @@ ordos_airmine:
 		PercentageScale: 1659
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileAP_Heavy:
-	MinRange: 410
 	InvalidTargets: wall
 	Warhead@Concrete:
 		Damage: 750
@@ -4316,10 +4348,12 @@ d2k_tyrant:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1230  # W7MAT order-pin
+	Report: tyrantshot.wav  # W7MAT order-pin
+	Burst: 1  # W7MAT order-pin
+	Warhead@1Dam:  # W7MAT order-pin
 	ReloadDelay: 130
-	Burst: 1
 	Range: 6144
-	Report: tyrantshot.wav
 	ValidTargets: Ground
 	Projectile: Missile
 		RangeLimit: 6c512
@@ -4336,22 +4370,21 @@ d2k_tyrant:
 			Medium: 115
 			Heavy: 100
 			Concrete: 30
-	MinRange: 1230
 
 Rocket_stealth:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
+	MinRange: 1845  # W7MAT order-pin
+	Report: d2k_buggy_rocket.wav  # W7MAT order-pin
+	Burst: 2  # W7MAT order-pin
+	BurstDelays: 15  # W7MAT order-pin
 	ReloadDelay: 150
-	Report: d2k_buggy_rocket.wav
-	Burst: 2
-	BurstDelays: 15
 	Range: 9216
 	Projectile: Bullet
 		Inaccuracy: 64
 	Warhead@MissileAP_Heavy:
 		Damage: 14500
-	MinRange: 1845
 
 ^d2k_ordos_rocket_stealth_aa:
 	Warhead@Concrete: DamagesConcrete

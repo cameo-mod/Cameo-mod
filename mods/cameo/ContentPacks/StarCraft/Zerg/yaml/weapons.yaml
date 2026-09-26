@@ -3528,7 +3528,13 @@ Tentacle:
 		InvalidTargets: Air
 	TargetActorCenter: true
 DroneAttack:
-	Inherits: ^WorkerAttack
+	Inherits@w81: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Melee_Medium  # W7MAT covering-edge
+	Range: 1500  # W7MAT w8-repin
+	TargetActorCenter: True  # W7MAT w8-repin
+	Warhead@Melee_Medium:  # W7MAT w8-repin
+		Damage: 10000
 	Report: zerglinghit.wav
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
