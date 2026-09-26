@@ -306,13 +306,13 @@ asianalliance_militaryacademy:
 		ProductionType: RAInfantry
 		RequiresCondition: classicproductionqueues
 	ProvidesPrerequisite@infantry:
-		Prerequisite: infantry.upgraded
+		Prerequisite: infantry_upgraded
 	ProvidesPrerequisite@aircraft:
-		Prerequisite: aircraft.upgraded
+		Prerequisite: aircraft_upgraded
 	ProvidesPrerequisite@vehicles:
-		Prerequisite: vehicles.upgraded
+		Prerequisite: vehicles_upgraded
 	ProvidesPrerequisite@ships:
-		Prerequisite: ships.upgraded
+		Prerequisite: ships_upgraded
 	Voiced:
 		VoiceSet: CHPropagandaCenterVoice
 

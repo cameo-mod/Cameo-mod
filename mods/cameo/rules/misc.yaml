@@ -526,7 +526,7 @@ Vortex:
 ####################################################################################################
 #		RA
 ####################################################################################################
-infantry.upgraded:
+infantry_upgraded:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Veterancy
@@ -534,7 +534,7 @@ infantry.upgraded:
 		Description:
 	RenderSprites:
 
-vehicles.upgraded:
+vehicles_upgraded:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Veterancy
@@ -542,7 +542,7 @@ vehicles.upgraded:
 		Description:
 	RenderSprites:
 
-aircraft.upgraded:
+aircraft_upgraded:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Aircraft Veterancy
@@ -550,7 +550,7 @@ aircraft.upgraded:
 		Description:
 	RenderSprites:
 
-techbuilding.upgraded:
+techbuilding_upgraded:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tech Center Infiltration

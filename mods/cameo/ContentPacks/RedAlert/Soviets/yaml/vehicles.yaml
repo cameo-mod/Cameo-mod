@@ -572,7 +572,7 @@ ra1_soviets_heavyteslatank:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA1
 	ProducibleWithLevel:
-		Prerequisites: vehicles.upgraded
+		Prerequisites: vehicles_upgraded
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_stalinium
 

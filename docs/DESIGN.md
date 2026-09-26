@@ -71,7 +71,7 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`).
 - **The dot rule** (maintainer ruling 2026-09-06). A dot marks a **VARIANT of the
   base actor named before it** — `camera.spysat`, `powerproxy.emp`,
-  `ra2gacnst.infiltrated`, `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
+  `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
   are all legal, exactly as `.husk` always was. ⛔ **A dot may NEVER carry a
   faction.** `asianalliance_ptnk` and `rocket_raider.ixian` put the faction in the suffix
   where the grammar requires it as the PREFIX, and those are the only dotted ids
@@ -2312,9 +2312,13 @@ whose damage is a `*_Flat` node (no `Versus` — one number vs every armor):
   `.steel`, `.d2k` etc. The faction goes in FRONT: `combat_tank_husk.atreides` →
   `atreides_combat_tank_husk`, `OILB.d2k` → `d2k_spicesifter`. Renames must update
   husk/upgrade references and `map.yaml`/lua placements (§14, rule 8h).
-* Other dotted variant markers (`.para`, `.power`, `.destroyed`, `.laser`, `.mutant`, …) are
+* Other dotted variant markers (`.para`, `.power`, `.laser`, `.mutant`, …) are
   pending maintainer eyeball per-instance — the census of uses is in the fleet board note
-  `NOTE_2026-09-24_ember_rulings.md`.
+  `NOTE_2026-09-24_ember_rulings.md`. **Ruled 2026-09-26 (fleet order):** `.destroyed`,
+  `.upgraded`, `.infiltrated`, `.black` are renamed to `_suffix` form in live mounts
+  (`mcv.destroyed` → `mcv_destroyed`, `ra2gacnst.infiltrated` → `ra2gacnst_infiltrated`,
+  `ra2e2.black` → `ra2e2_black`, `infantry.upgraded` → `infantry_upgraded`). `.husk`
+  stays, and dormant monolith files keep their dots until migration deletes them.
 
 **R20 — TOXIC FILLS THE POISON METER; THE YURI VIRUS FIRES A TOXIN DART** (maintainer, 2026-09-25).
 
