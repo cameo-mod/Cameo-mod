@@ -1,8 +1,10 @@
 # Fransbot research: what Cameo can take, and the phase-6+ handoff
 
 _Written 2026-09-26 by Claude-Local (coordinator) for **Devin-Cloud (AI lane)** and the maintainer.
-Source: the maintainer's conversation with fransotto, author of FransBots, on 2026-09-24, plus
-Cameo's own code on master `91f865585`. This document **amends** [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md)
+Sources: the maintainer's conversation with fransotto, author of FransBots, on 2026-09-24; the
+maintainer's conversation with **Astor, author of Crystallized Nexus (CN), on 2026-09-11**; CN's
+public source (`github.com/DoGyAUT/crystallized-nexus`, `main` = `30cf70a`, GPLv3, cloned at
+`~/Documents/GitHub/crystallized-nexus`); and Cameo's own code on master `91f865585`. This document **amends** [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md)
 §10.6 phase 6 and adds phases 6c–10. It does not replace that document. Where the two disagree on
 something already built, `AI_ARCHITECTURE.md` and the code win._
 
@@ -40,6 +42,20 @@ something already built, `AI_ARCHITECTURE.md` and the code win._
    build orders and compositions are RA-specific: **do not take them.** Cameo has 25 factions, and
    the only part of Fransbot that scales to 25 factions is the part that *"reads the stats of the
    unit files"*.
+6. **Much of what Fransbot does already exists in public, GPLv3 code: CN's bot, and it is already
+   cloned here.** The Astor conversation (§1.4) pointed at it, and the source confirms it (§3b):
+   * `CNTacticalMapBotModule` splits the map into terrain **regions** bounded by chokepoints, with
+     doors, adjacency and high ground. Those are better buckets for the value memory than a grid.
+   * `CombatAnalysisBotModule` keeps per-role threat weights with decay and a **nemesis** player.
+     That is the pairwise-attribution term `AI_ARCHITECTURE.md` §4.3 calls `w_hurt`.
+   * CN's squad manager has **coordinated waves**: staging, rally, flank split across two doors,
+     and wave size that **grows over time**. It also has **artillery that hangs back behind an
+     assault squad and only fires at what that squad can see**, support squads that follow, APC
+     and air transports, and **priority targets per squad**.
+
+   None of this is mentioned in `AI_ARCHITECTURE.md` today. CN's profile-switching mechanism stays
+   forbidden (`AI_ARCHITECTURE.md` §1.6); the modules above act only through orders. **Read the CN
+   source first, and the Fransbot source when it arrives.**
 
 ---
 
@@ -97,6 +113,22 @@ maintainer has the source with his consent. A private repo is not consent to cop
 | Beacons are **invisible to bots**: `Beacon` keeps `owner` and position **private**, and `PlaceBeacon.ResolveOrder` only runs on the placing player's actor | `engine/OpenRA.Mods.Common/Effects/Beacon.cs:20-24`, `engine/OpenRA.Mods.Common/Traits/Player/PlaceBeacon.cs:47-71` |
 | The engine **already remembers fogged buildings** per player (frozen actors). Units are not remembered | `engine/OpenRA.Game/Traits/Player/FrozenActorLayer.cs:363,371` (`FrozenActorsInRegion/InCircle`), `Actor.CanBeViewedByPlayer` (`engine/OpenRA.Game/Actor.cs:510`), `Shroud.IsVisible/IsExplored` (`Shroud.cs:413-463`) |
 | Match and situation logs already exist (phases 1–2) | `OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs`, `AiSituationLogWriter.cs`, `docs/design/AI_MATCH_LOG.md` |
+
+### 1.4 From the Astor (CN) conversation, 2026-09-11, checked against CN source
+
+| # | Astor said | CN source says (`.modsdk/OpenRA.Mods.CN/Traits/BotModules/`) |
+|---|---|---|
+| A1 | Steamroller gets wave sizes that grow the longer the game goes | ✅ `AttackWaveSizeGrowthInterval` / `AttackWaveSizeGrowthAmount`, capped by `AttackWaveMaxMinReadySquads` (`Squads/CNSquadManagerBotModule.cs:440-480`). Cameo's #276 time-scaled squad value threshold is a partial equivalent |
+| A2 | Artillery squads coordinate with assault squads: artillery fires first, then the assault goes in after some time | ✅ in shape, ⚠ **not** as a timer. `CNSquadType.ArtilleryAssault` *"follows Assault squads, hangs back, bombards"* (`Squads/CNSquadType.cs`). States Idle → HangBack (`ArtilleryHangBackCells` 8 behind the leader) → Bombard when enemies are in range → Flee (`Squads/States/ArtilleryStates.cs:20-498`). The sequencing comes from staging: the wave holds at `AttackWaveStagingProgressPercent` 65 % of the way and rallies. No fixed "artillery first, assault after X" delay was found |
+| A3 | Each squad can be given priority targets | ✅ `PriorityTargetCapabilities` per squad template, first match wins, matching actors tagged `BotCapabilities: <tag>` (`CNSquadManagerBotModule.cs:106-110`; `Traits/BotCapabilities.cs`) |
+| A4 | (maintainer asked) air squads to counter enemy artillery | ✅ expressible: `AircraftRaider` (*"priority target strike, then return to rearm"*) and `Raider` (*"targets soft units (harvesters, arty), flees on resistance"*) plus a priority tag on artillery |
+| A5 | (maintainer asked) do they use formations? | ❌ unanswered. No bot formation code in CN (it uses steering movement, `Activities/CNSteeredMove.cs`). Cameo has player-side Custom Formations (`OpenRA.Mods.Cameo/Orders/CustomFormations*`) that no bot uses |
+| A6 | (not claimed, found) fog-honest artillery | ✅ `ArtilleryStates.cs:209-240` `FindCoordinatedTarget`: the attached frontline squad is the **observer**, and a target must pass `CanBeViewedByPlayer`, with a deterministic `ActorID` tie-break |
+| A7 | (not claimed, found) risk gate | ⚠ `WaveAbortThreatPerUnit` (`CNSquadManagerBotModule.cs:368-373`) holds a wave back when defensive fire per unit is too high. It is **off by default**: CN's author had only failed waves to calibrate from, and logs "wave strength" on every launch to fit it later. Same idea as Fransbot C4, and the same calibration lesson applies to Cameo |
+| A8 | (not claimed, found) defence memory under fog | ✅ `EnemyDefenseMemoryInterval` (`:306-310`), already analysed in `AI_ARCHITECTURE.md` §1.6 |
+
+Non-AI parts of that conversation (infantry cover, late-game infantry vs artillery, armour layers,
+mobs) are not the AI lane's job. They are recorded for the maintainer in **Appendix A**.
 
 ---
 
@@ -180,6 +212,25 @@ weapon and armour data come from rules at load time.
 
 ---
 
+## 3b. CN modules worth porting (public, GPLv3, shares the 2026-05-11 engine base with cameo-engine)
+
+| CN module (lines) | What it gives | Cameo use | Port cost |
+|---|---|---|---|
+| `CNTacticalMapBotModule.cs` (3055) | terrain regions bounded by chokepoints, doors, adjacency, high-ground edges; **computed once per world and shared** (`ConditionalWeakTable<World, …>` at `:367`, an unsynced cache) | the region set for `RegionMemory` (6a), the graph for risk routing (6e), scout targets (6b) | port the **topology** part only; leave out CN-specific rendering and base-role logic |
+| `CNRegionManagerBotModule.cs` (639) | what each held region is for (main, economy, military, outpost), security score per door | later: expansion and defence placement hints | later, not this month |
+| `CombatAnalysisBotModule.cs` (369) | threat weight per attacker role (air / inf / vehicle), value-scaled, decaying; **nemesis** player | `w_hurt` in main-target scoring (§4.3). Fog-honest by construction, because it is fed by being attacked | small; `IBotRespondToAttack` + `IBotTick` |
+| `Squads/States/ArtilleryStates.cs` (514) | hang-back, observer-gated bombard | 6f | medium: needs a squad "attach to" notion in `SquadCA` |
+| `Squads/States/CNWaveStates.cs` (348) + wave fields | staged, rallied, optionally pincer waves; growth over time | 6f; Steamroller wave growth (A1) | medium to large |
+| `Squads/States/TransportStates.cs` (2268) | APC load → move on pinned waypoints → unload → return; `AirTransport` avoids AA | the ferry in phase 7 (island expansion) | large; read it before designing phase 7 |
+| `Traits/BotCapabilities.cs` | yaml capability tags on actors | priority targets (A3) | ⚠ Cameo has **3474** actors. Derive tags from traits and templates (Harvester, Production, artillery weapon ranges) instead of hand-tagging, or put them on the shared `^` templates |
+
+Every module above issues orders and keeps local state. None grants conditions from bot code
+(checked by grep for `GrantCondition` / `RevokeCondition` in those files). **CN's profile module is
+the exception, and it stays forbidden** (`AI_ARCHITECTURE.md` §1.6). Credit CN (Astor / DoGyAUT,
+commit `30cf70a`) in each ported file header.
+
+---
+
 ## 4. The work plan for Devin-Cloud (amends `AI_ARCHITECTURE.md` §10.6)
 
 One PR per sub-phase. Each is shippable alone, and each honours the **degradation rule**
@@ -190,7 +241,9 @@ order below is also the priority order: stop wherever time runs out, and leave �
 
 * Replace the omniscient scan at `BotSituation.cs:219` with visible actors
   (`CanBeViewedByPlayer`), plus frozen actors for buildings, plus the per-actor last-seen table.
-* Add the `RegionMemory` grid (§2) and publish it on `BotSituation` as a read-only view.
+* Add the `RegionMemory` (§2) and publish it on `BotSituation` as a read-only view. **Prefer CN's
+  terrain regions** (`CNTacticalMapBotModule` topology, §3b) as the buckets; fall back to the
+  8×8-cell grid only if the port does not fit in the window.
   `EnemyProfile` values become sums over remembered regions, so the phase 3–5 consumers keep working
   unchanged.
 * Add `UseFoggedObservation` (bool, **default true**, per the maintainer ruling of 2026-09-23 on
@@ -216,6 +269,9 @@ order below is also the priority order: stop wherever time runs out, and leave �
   when `squadValue × RiskAppetite < remembered(target)`. `RiskAppetite` is a field per personality
   instance, in yaml.
 * Home defence and the §4.5 emergency override bypass the gate.
+* Precedent: CN's `WaveAbortThreatPerUnit` (§1.4 A7). Ship the gate **with its threshold logged on
+  every launch** and a permissive default, then fit it from match logs. CN had to leave its version
+  off because nobody had logged successful waves.
 * ⚠ This file lives in `OpenRA.Mods.CA/`, **outside the lane as written on #435** (see §7). Phase 4
   already had to touch CA (`IBotMainTargetProvider.cs`); the lane is corrected below.
 
@@ -232,6 +288,24 @@ order below is also the priority order: stop wherever time runs out, and leave �
 * Coarse A* over `RegionMemory` from the squad's centroid to the target, costed by remembered hostile
   value. Emit 1–4 waypoints and reuse the existing move / attack-move orders. Unsynced only.
 
+### 6f. Coordinated waves: artillery, support, growth (Astor's points)
+
+* Artillery squads **attach** to an assault squad, hang back N cells, and bombard only targets the
+  assault squad can see (CN A2/A6). Together with 6d, this is the fog-honest answer to the "bot
+  artillery always shoots at max range" complaint.
+* Waves stage partway to the target and rally before committing (CN
+  `AttackWaveStagingProgressPercent`). Steamroller grows its wave threshold over time (CN A1). Make
+  growth a field on the `SquadManagerBotModuleCA@steamroller` instance, and **check #276's
+  time-scaled threshold first**, so there are not two growth mechanisms.
+* Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`).
+  Unit selection goes through compositions and tokens, never actor ids.
+
+### 6g. Priority targets per squad, and air vs artillery
+
+* A per-squad-instance priority list (CN A3). Derive the tags from rules at load time (§3b note):
+  `artillery` = long-range ground weapon, `harvester`, `production`, `superweapon`.
+* An air raider squad whose priority tag is `artillery` answers the maintainer's question A4.
+
 ### 7. Island expansion (new Cameo module)
 
 * Candidates: resource clusters for which `McvExpansionManagerBotModule` would get
@@ -244,6 +318,9 @@ order below is also the priority order: stop wherever time runs out, and leave �
   engine modules), then load, move to the shore cell nearest the patch, unload, and let the existing
   MCV manager deploy.
 * Map test: `mods/cameo/maps/ai_*` is lane-owned. Add a small island map if none exists.
+* **Read CN's `TransportStates.cs` first** (§3b): it already solves loading, the pinned-waypoint
+  approach, unloading and returning, and its air variant avoids AA. Fransbot's version (C12) is
+  unknown until F0.
 
 ### 8. Beacon response
 
@@ -278,6 +355,9 @@ order below is also the priority order: stop wherever time runs out, and leave �
 * **Anything that reads `World.Actors` for enemy information.** It defeats the whole point.
 * **Map-specific data.** He trained on uploaded maps, but claims generality (C2). If the source
   contains per-map tables, leave them out.
+* **CN's profile switching and its one-module-per-profile layout.** The first mutates synced state
+  from bot code; the second produced CN's own documented stale-reference bug
+  (`AI_ARCHITECTURE.md` §1.6).
 * **Engine edits.** `engine/` is not in this repo (CLAUDE.md rule 7). If Fransbot patches Common bot
   modules, port the change as a Cameo-side module or shadow.
 
@@ -333,3 +413,18 @@ what the debug log contains.
 * **Sign** `Co-Authored-By: Devin AI <devin@cognition.ai>`.
 * **Before 2026-10-20:** a short handoff in `docs/HANDOFF.md` (the AI lane section) saying which of
   6a–9 landed and what is open, and tick the phases in `AI_ARCHITECTURE.md` §10.6.
+
+---
+
+## Appendix A. Non-AI takeaways from the Astor conversation (for the maintainer, NOT the AI lane)
+
+These came up in the same 2026-09-11 conversation. Each is a gameplay or balance decision, so each
+needs a maintainer ruling before any agent builds it. None is assigned to Devin-Cloud.
+
+| Topic | What Astor said | Evidence | Cameo today | Open question |
+|---|---|---|---|---|
+| Late-game infantry collapse | The maintainer's problem: infantry is useful early, then shut down by late-game artillery. CN has "high fatality" and some "power infantry" | conversation | not written down in `DESIGN.md` or `ROADMAP.md` (grep, 2026-09-26) | is this a design goal to fix? It interacts with the warhead and armour laws, so it goes through `DESIGN.md` first |
+| Infantry cover | CN infantry moves through trees and gets defence plus camouflage there. Planned: cover next to tanks and buildings, disabled against a structure the unit is attacking (for melee units like the Samurai) | CN `Traits/World/ForestCoverSystem.cs`: a condition granted in forest cells through a cell influence map | no cover system (only the Hydralisk lab notes mention cover) | the maintainer's own objection stands: barren and Arrakis maps have no trees. Adjacency cover would work on every map |
+| Armour layers | CN: armour class (inf / structure / vehicle) + weight (light … superheavy) + secondary HP (ablative, shields), piercing and armour bypass | conversation | Cameo already has 17 armour types plus a separate shield ladder, and the W21 stack Shield → Integrity → Armor → Health (`design/ARMOR_LAYERS.md`; `GrantsShield`, `Integrity`, `ArmorPlating` traits) | nothing to take without a specific gap. Compare CN's piercing and bypass with Cameo's Armor Piercing tag (#445) if one is found |
+| Regeneration | CN: veterans only. Cameo: all units, slowly (100 s from 0 to full) | conversation | `ScaledSelfHeal`; ruled in `DESIGN.md` | none, a different design choice |
+| Mobs (squad infantry, restorable in barracks) | CN uses the Generals Alpha mob system as a base, fixed and extended; "runs well in CN" | CN `Traits/MobSpawner/MobSpawnerMaster.cs` (850 lines) + slave, selection decoration | Cameo tried the Generals Alpha mobs before: bad lag, and "stupid" individual units (the zombie horde faction) | worth a performance test of CN's version before anyone ports it. `design/UPSTREAM_MODS.md` is where upstream ports are triaged |
