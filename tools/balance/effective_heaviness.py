@@ -216,7 +216,7 @@ def shared_versus_profile(versus: dict, heaviness: int) -> dict[str, int]:
     Disabled heaviness is a configuration error in this mode — callers already
     validated that (heaviness_config) before reaching here.
     """
-    belled = bell_transform(versus, heaviness / 1000.0)
+    belled = bell_transform(versus, heaviness / 1000.0, main_table=True)
     out = dict(belled)
     if "Shield" in out:
         out["Shield"] = shield_coefficient(out["Shield"], heaviness)

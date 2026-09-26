@@ -2761,3 +2761,34 @@ foreign `FREMODD1` report) — the diff was the alarm, not the edit.
   deleted def is invisible to a census built from the damaged file.
 - A `### comment` on a def header line breaks `Name:$` def-end regexes;
   match `:(\s|$)`.
+
+## Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)
+
+The §12.0j/§12.0l stack (PR #540) shipped `HeavinessBell.Transform(table, h,
+mainTable:)` where `mainTable=True` re-derives Heroic as `Plate x Scout / 200`.
+C# calls it with `mainTable: true` for the warhead's ONE Versus — including the
+SharedVersus profile — but the Python mirror's `shared_versus_profile()` called
+`bell_transform` with `main_table=False`. Result: every Python consumer of the
+shared profile (cameo_channel_curves, compare_defense_armor_curves,
+percentage_damage, weapon_efficiency, the CannonAP fixture) kept the belled
+Heroic (~65) while the engine re-derived it (54 on the CannonAP table), and
+CyborgHeroic diverged 105 vs 96. One flag in the mirror, silent divergence in
+every downstream tool — the fixture was the only place the two were compared
+armor-by-armor.
+
+Same merge left the C# mirror tables stale in a subtler way: Ts90Belled holds
+MAIN-table vectors (Heroic re-derived = 1) while the percentage-path tests need
+`main_table=False` vectors (Heroic keeps authored 12). Two expectations, one
+flag — a belled table is meaningless without saying WHICH side of rule 4 it is.
+
+**Rules:**
+- When the C# gains a semantic flag (`mainTable`, mode enums), grep every
+  Python-mirror call site for the missing argument; the mirror must pass the
+  flag through, not silently default it.
+- Fixture regeneration needs a committed re-run path: `python
+  tools/tests/gen_cannonap_fixture.py` now rebuilds both
+  `cannonap_continuous_generated.yaml` and `cannonap_continuous_fixture.json`
+  in lockstep after any heaviness-rule change.
+- A Python-vs-C# mirror mismatch on GENERATED data is a bug in the mirror or
+  the engine — never "fix" it by editing expectations until you know which
+  side violates the spec.

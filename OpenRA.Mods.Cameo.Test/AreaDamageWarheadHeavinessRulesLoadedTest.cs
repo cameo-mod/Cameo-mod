@@ -41,33 +41,36 @@ namespace OpenRA.Mods.Cameo.Test
 			("Superheavy", 20), ("Wood", 13),
 		};
 
-		// Python mirror: bell(ReadOnlyDictionary(Ts90Authored), h) — one row per h.
+		// Python mirror: bell(ReadOnlyDictionary(Ts90Authored), h, main_table=True) —
+		// one row per h. The MAIN-table rule (§12.0l rule 4) re-derives Heroic as
+		// Plate x Scout / 200 (= 1 on this table); the percentage tables keep their
+		// authored Heroic instead — see Anchors_FullBandProfileMatchesThePythonMirror.
 		static readonly IReadOnlyDictionary<string, int>[] Ts90Belled =
 		{
 			// h = 0.0
 			ToDict(("Bomber", 7), ("Concrete", 15), ("Fighter", 6), ("Flak", 10), ("Heavy", 19),
-				("Helicopter", 7), ("Heroic", 9), ("Light", 17), ("Medium", 17), ("None", 9),
-				("Plate", 11), ("Scout", 16), ("Shield", 25), ("Spaceship", 7), ("Steel", 15),
+				("Helicopter", 7), ("Heroic", 1), ("Light", 17), ("Medium", 17), ("None", 9),
+				("Plate", 11), ("Scout", 16), ("Shield", 25), ("Spaceship", 7), ("Steel", 14),
 				("Superheavy", 19), ("Wood", 14)),
 			// h = 0.5
-			ToDict(("Bomber", 7), ("Concrete", 15), ("Fighter", 5), ("Flak", 10), ("Heavy", 18),
-				("Helicopter", 7), ("Heroic", 8), ("Light", 17), ("Medium", 18), ("None", 9),
+			ToDict(("Bomber", 7), ("Concrete", 15), ("Fighter", 5), ("Flak", 9), ("Heavy", 18),
+				("Helicopter", 7), ("Heroic", 1), ("Light", 16), ("Medium", 18), ("None", 9),
 				("Plate", 11), ("Scout", 15), ("Shield", 25), ("Spaceship", 7), ("Steel", 15),
 				("Superheavy", 19), ("Wood", 14)),
 			// h = 1.0
 			ToDict(("Bomber", 6), ("Concrete", 16), ("Fighter", 5), ("Flak", 10), ("Heavy", 19),
-				("Helicopter", 8), ("Heroic", 8), ("Light", 17), ("Medium", 18), ("None", 8),
+				("Helicopter", 8), ("Heroic", 1), ("Light", 17), ("Medium", 18), ("None", 8),
 				("Plate", 11), ("Scout", 14), ("Shield", 25), ("Spaceship", 8), ("Steel", 15),
 				("Superheavy", 20), ("Wood", 14)),
 			// h = 1.5
 			ToDict(("Bomber", 6), ("Concrete", 16), ("Fighter", 4), ("Flak", 11), ("Heavy", 19),
-				("Helicopter", 8), ("Heroic", 7), ("Light", 16), ("Medium", 19), ("None", 8),
+				("Helicopter", 8), ("Heroic", 1), ("Light", 16), ("Medium", 19), ("None", 8),
 				("Plate", 11), ("Scout", 13), ("Shield", 25), ("Spaceship", 8), ("Steel", 15),
-				("Superheavy", 20), ("Wood", 13)),
+				("Superheavy", 21), ("Wood", 13)),
 			// h = 2.0
 			ToDict(("Bomber", 6), ("Concrete", 17), ("Fighter", 4), ("Flak", 10), ("Heavy", 21),
-				("Helicopter", 8), ("Heroic", 7), ("Light", 15), ("Medium", 19), ("None", 7),
-				("Plate", 12), ("Scout", 13), ("Shield", 25), ("Spaceship", 9), ("Steel", 14),
+				("Helicopter", 8), ("Heroic", 1), ("Light", 15), ("Medium", 19), ("None", 7),
+				("Plate", 12), ("Scout", 13), ("Shield", 25), ("Spaceship", 9), ("Steel", 15),
 				("Superheavy", 21), ("Wood", 12)),
 		};
 
@@ -357,8 +360,10 @@ namespace OpenRA.Mods.Cameo.Test
 					.Select(kv => (kv.Item1, kv.Item2 + 10)).ToArray()));
 			RulesetLoaded(warhead);
 			var effective = EffectiveTable(warhead, "effectivePercentageVersus");
+			// The percentage tables keep their own Heroic (§12.0l rule 4 — the
+			// Plate x Scout / 200 re-derivation is a MAIN-table rule only).
 			foreach (var (armor, value) in Ts90Belled[1])
-				Assert.That(effective[armor], Is.EqualTo(value),
+				Assert.That(effective[armor], Is.EqualTo(armor == "Heroic" ? 12 : value),
 					$"armor {armor} at h=0.5");
 		}
 
@@ -726,13 +731,13 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void SharedMode_NumberOfPercentageUnitsFollowsScaleTimesHeaviness()
 		{
-			// The runtime RATIO: Scale 2000 + h=2 -> 2x the h=0 units (which are 0),
-			// and Scale 10000 at h=2 -> Damage/2000 x 2 (0.20% per 100 damage). The
+			// The runtime RATIO: Scale 2000 + h=2 -> 25 bp (growth x1.25 over the
+			// h=1 unit), and Scale 10000 at h=2 -> Damage/2000 x 2.5. The
 			// conversion itself is unit-tested in AreaDamageWarheadHeavinessTest.
 			var h2000Scale2000 = AreaDamageWarhead.SharedFoldedPercentageUnits(2000, 2000, 2000);
 			var h2000Scale10000 = AreaDamageWarhead.SharedFoldedPercentageUnits(2000, 10000, 2000);
-			Assert.That(h2000Scale2000, Is.EqualTo(20));
-			Assert.That(h2000Scale10000, Is.EqualTo(100));
+			Assert.That(h2000Scale2000, Is.EqualTo(25));
+			Assert.That(h2000Scale10000, Is.EqualTo(125));
 		}
 
 		[Test]
