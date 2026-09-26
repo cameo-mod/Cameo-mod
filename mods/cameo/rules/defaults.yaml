@@ -1012,22 +1012,22 @@
 ^GainsExperienceVehicle:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyvehicles:
-		Prerequisites: vehicles.upgraded
+		Prerequisites: vehicles_upgraded
 
 ^GainsExperienceAircraft:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyaircraft:
-		Prerequisites: aircraft.upgraded
+		Prerequisites: aircraft_upgraded
 
 ^GainsExperienceInfantry:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
+		Prerequisites: infantry_upgraded
 
 ^GainsExperienceShips:
 	Inherits@GainsExperience: ^GainsExperienceMobile
 	ProducibleWithLevel@spyships:
-		Prerequisites: ships.upgraded
+		Prerequisites: ships_upgraded
 
 ^GlobalBuffs:
 	Inherits: ^GPSSatelliteSupport
@@ -1386,7 +1386,7 @@
 	# 	ValidTargets: Infantry
 	# 	Priority: 50
 	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
+		Prerequisites: infantry_upgraded
 	Armor:
 		Type: Plate
 	# DamageMultiplier@MeleeBuff:
@@ -1726,7 +1726,7 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
 	ProducibleWithLevel@spyvehicles:
-		Prerequisites: vehicles.upgraded
+		Prerequisites: vehicles_upgraded
 	Armor:
 		Type: Superheavy
 	RevealsShroud:
@@ -7702,21 +7702,21 @@ CPQDEBUGDUMMY:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: infantry.upgraded
+		Proxy: infantry_upgraded
 		Types: SpyInfiltrate
 
 ^SpyVehicleFactory:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: vehicles.upgraded
+		Proxy: vehicles_upgraded
 		Types: SpyInfiltrate
 
 ^SpyAircraftFactory:
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: aircraft.upgraded
+		Proxy: aircraft_upgraded
 		Types: SpyInfiltrate
 
 ^MCV:
@@ -8029,7 +8029,7 @@ CPQDEBUGDUMMY:
 		ProductionType: RAInfantry
 		RequiresCondition: classicproductionqueues
 	InfiltrateForSupportPower:
-		Proxy: infantry.upgraded
+		Proxy: infantry_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
@@ -8168,7 +8168,7 @@ CPQDEBUGDUMMY:
 		ProductionType: RAVehicle
 		RequiresCondition: classicproductionqueues
 	InfiltrateForSupportPower:
-		Proxy: vehicles.upgraded
+		Proxy: vehicles_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
@@ -8246,7 +8246,7 @@ CPQDEBUGDUMMY:
 	RevealsShroud:
 		Range: 6000
 	InfiltrateForSupportPower@SpyInfiltrate:
-		Proxy: aircraft.upgraded
+		Proxy: aircraft_upgraded
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
