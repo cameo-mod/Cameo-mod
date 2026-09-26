@@ -86,7 +86,7 @@ ra1_soviets_ak47conscript_rifle:
 	BurstDelays: 2
 	SoundVolume: 0.5
 	ValidTargets: Ground, Water
-	Report: conscriptak.wav
+	Report: ra1_soviets_sounds|conscriptak.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Medium:
@@ -1109,7 +1109,7 @@ ra1_soviets_v1rockettruck_v1rockets:
 	BurstDelays: 5
 	Range: 9595
 	MinRange: 1920
-	Report: v1rocket.wav
+	Report: ra1_soviets_sounds|v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
 		Shadow: true
@@ -1185,7 +1185,7 @@ ra1_soviets_v1rockettruck_v1rocketsthermobaric:
 	BurstDelays: 5
 	Range: 9595
 	MinRange: 1920
-	Report: v1rocket.wav
+	Report: ra1_soviets_sounds|v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
 		Shadow: true
@@ -1376,7 +1376,7 @@ ra1_soviets_grad_rocket:
 	BurstDelays: 5
 	Range: 13820
 	MinRange: 2765
-	Report: v1rocket.wav
+	Report: ra1_soviets_sounds|v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
 		Shadow: true
