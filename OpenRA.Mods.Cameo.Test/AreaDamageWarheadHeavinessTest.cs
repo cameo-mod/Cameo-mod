@@ -69,11 +69,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(outTable["Medium"], Is.EqualTo(expectedOrderNoneFlakPlateMedium[3]));
 		}
 
-		[TestCase(0.0, new[] { 7, 15, 6, 10, 19, 7, 9, 17, 17, 9, 11, 16, 25, 7, 15, 19, 14 })]
-		[TestCase(0.5, new[] { 7, 15, 5, 10, 18, 7, 8, 17, 18, 9, 11, 15, 25, 7, 15, 19, 14 })]
-		[TestCase(1.0, new[] { 6, 16, 5, 10, 19, 8, 8, 17, 18, 8, 11, 14, 25, 8, 15, 20, 14 })]
-		[TestCase(1.5, new[] { 6, 16, 4, 11, 19, 8, 7, 16, 19, 8, 11, 13, 25, 8, 15, 20, 13 })]
-		[TestCase(2.0, new[] { 6, 17, 4, 10, 21, 8, 7, 15, 19, 7, 12, 13, 25, 9, 14, 21, 12 })]
+		[TestCase(0.0, new[] { 7, 15, 6, 10, 19, 7, 12, 17, 17, 9, 11, 16, 25, 7, 14, 19, 14 })]
+		[TestCase(0.5, new[] { 7, 15, 5, 9, 18, 7, 12, 16, 18, 9, 11, 15, 25, 7, 15, 19, 14 })]
+		[TestCase(1.0, new[] { 6, 16, 5, 10, 19, 8, 12, 17, 18, 8, 11, 14, 25, 8, 15, 20, 14 })]
+		[TestCase(1.5, new[] { 6, 16, 4, 11, 19, 8, 12, 16, 19, 8, 11, 13, 25, 8, 15, 21, 13 })]
+		[TestCase(2.0, new[] { 6, 17, 4, 10, 21, 8, 12, 15, 19, 7, 12, 13, 25, 9, 15, 21, 12 })]
 		public void BellMatchesThePythonMirrorOnTheTs90MediumTable(
 			double h, int[] expected)
 		{
@@ -130,19 +130,21 @@ namespace OpenRA.Mods.Cameo.Test
 		// ------------------------------------------------------------------
 
 		[Test]
-		public void SharedFoldedPercentageUnits_ZeroHeavinessIsZeroPercentage()
+		public void SharedFoldedPercentageUnits_ZeroHeavinessScalesByPointEight()
 		{
-			// h = 0 keeps the flat profile but the percentage half reads ZERO.
-			Assert.That(AreaDamageWarhead.SharedFoldedPercentageUnits(2000, 2000, 0), Is.Zero);
+			// §12.0j: the percentage half GROWS with h — x0.8 at h=0, x1.0 at h=1,
+			// x1.25 at h=2. h = 0 keeps the flat Versus profile but the percentage
+			// half reads 0.8x, not zero: 2000 x 2000 x 4000 / (200000 x 5000) = 16.
+			Assert.That(AreaDamageWarhead.SharedFoldedPercentageUnits(2000, 2000, 0), Is.EqualTo(16));
 		}
 
-		[TestCase(100, 2000, 2000, 1)]     // 100 x 2000 x 2 / 4e8 = 1.0 exactly (100 -> 0.01%)
-		[TestCase(100, 2000, 1000, 1)]     // 0.5 -> HALF-UP to 1
-		[TestCase(100, 2000, 500, 0)]      // 0.25 -> 0
-		[TestCase(2000, 2000, 2000, 20)]   // Damage 2000 Scale 2000 h=2 -> 20 bp (0.20%)
-		[TestCase(6000, 10000, 2000, 300)] // legacy Scale 10000 at h=2 -> Damage/2000 x 2
-		[TestCase(6000, 2500, 1000, 38)]   // 6000 x 2500 x 1000 / 4e8 = 37.5 -> HALF-UP to 38
-		[TestCase(80000, 2000, 1000, 400)] // RA2sabot pilot magnitude
+		[TestCase(100, 2000, 2000, 1)]     // 100 x 2000 x 5000 / 8e8 = 1.25 -> 1
+		[TestCase(100, 2000, 1000, 1)]     // growth 1.0 at h=1 -> 1.0 exactly
+		[TestCase(100, 2000, 500, 1)]      // 100 x 2000 x 4500 / 1e9 = 0.9 -> 1
+		[TestCase(2000, 2000, 2000, 25)]   // Damage 2000 Scale 2000 h=2 -> 25 bp (0.25%)
+		[TestCase(6000, 10000, 2000, 375)] // legacy Scale 10000 at h=2 -> Damage/2000 x 2.5
+		[TestCase(6000, 2500, 1000, 75)]   // 6000 x 2500 x 1.0 / 200000 = 75
+		[TestCase(80000, 2000, 1000, 800)] // RA2sabot pilot magnitude
 		public void SharedFoldedPercentageUnits_SmallDamageBoundaries(
 			int damage, int scale, int heaviness, int expected)
 		{
@@ -151,8 +153,8 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(expected));
 		}
 
-		[TestCase(160000, 8000, 2000, 6_400)]        // 160000 x 8000 x 2 / 4e8 — fits
-		[TestCase(2_000_000_000, 1000, 2000, 10_000_000)] // large-but-fitting product
+		[TestCase(160000, 8000, 2000, 8_000)]        // 160000 x 8000 x 5000 / 8e8 — fits
+		[TestCase(2_000_000_000, 1000, 2000, 12_500_000)] // large-but-fitting product
 		public void SharedFoldedPercentageUnits_LargeValuesStayInt32(
 			int damage, int scale, int heaviness, int expected)
 		{
