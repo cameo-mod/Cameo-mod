@@ -239,6 +239,10 @@ order below is also the priority order: stop wherever time runs out, and leave �
 
 ### 6a. Fogged snapshot + region value memory (C#: `OpenRA.Mods.Cameo/Traits/BotModules/`)
 
+_**Status: implemented 2026-09-27** (`BotFogMemory` + `RegionMemory`, `UseFoggedObservation`
+default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
+`harvester_count`/`known_regions`). Memory does not yet survive save/load — candidate follow-up._
+
 * Replace the omniscient scan at `BotSituation.cs:219` with visible actors
   (`CanBeViewedByPlayer`), plus frozen actors for buildings, plus the per-actor last-seen table.
 * Add the `RegionMemory` (§2) and publish it on `BotSituation` as a read-only view. **Prefer CN's

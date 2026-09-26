@@ -198,6 +198,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "buildings", enemy.BuildingCount);
 				AiMatchLogWriter.AppendNumber(builder, "expansion_clusters", enemy.ExpansionClusters);
 				AiMatchLogWriter.AppendNumber(builder, "harvesters", enemy.Harvesters);
+				AiMatchLogWriter.AppendNumber(builder, "harvester_count", enemy.HarvesterCount);
+				AiMatchLogWriter.AppendNumber(builder, "known_regions", enemy.KnownRegions);
 				AiMatchLogWriter.AppendNumber(builder, "refineries", enemy.Refineries);
 				AiMatchLogWriter.AppendNumber(builder, "pressure_value", enemy.PressureValue);
 				AiMatchLogWriter.AppendNumber(builder, "stealth_share", enemy.StealthShare);
