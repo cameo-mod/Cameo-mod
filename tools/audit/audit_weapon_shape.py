@@ -88,7 +88,11 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blob ->
+W2_BASELINE = 129   # 123 -> 129: Yuri Gatling Tank conversion (NOVA R-order,
+                    # 2026-09-26) added the sanctioned ^Warhead_Bullet_Medium_Flat
+                    # twin edge to YuriGatlingTankMG{1,2,3}[_AA] — same flat-twin
+                    # pattern as APCGun/110mm_Gun. Resolve-identical, order-pinned.
+                    # was: 122 -> 123: restored PulseMissile (drain-minified dead blob ->
                     # live; dual ^Warhead_Tesla_{Heavy,Super} is inherent to its
                     # multi-warhead superweapon design). Pre-drain debt re-exposed.
                                         # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
@@ -128,7 +132,11 @@ W6_BASELINE = 497   # 442 -> 497: held-67 W7 materialization (nova) re-declared
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 693   # 760 -> 693: held-67 ExtraDamage batch (nova file-set:
+W7_BASELINE = 687   # 693 -> 687: Yuri Gatling Tank conversion (NOVA, 2026-09-26)
+                    # de-parented YuriGatlingTankMG{1,2,3}[_AA] onto the x0/x1/x2
+                    # template triple + ^Warhead_Bullet_Medium_Flat collapse edge;
+                    # resolve-identical incl. strict order.
+                    # was: 760 -> 693: held-67 ExtraDamage batch (nova file-set:
                     # RA Soviets, RA2 Yuri, RA2Mod AsianAlliance/Consortium/
                     # FutureTech/Naxis/SchwarzerMond/Syndicate, redalert2mod).
                     # Resolve-verified fold per ruling: chips deleted, main

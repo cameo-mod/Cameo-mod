@@ -2279,340 +2279,172 @@ YuriGatlingCannonMG3_AA:
 			Superheavy: 5
 
 YuriGatlingTankMG1:
-	Inherits: RA2GattlingMG1
+	Inherits@xYuriGatlingTankMG10: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG11: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG12: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5400
+	ReloadDelay: 6
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
 		Damage: 3000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9975
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Ground, Water
+		Damage: 3000
+		PercentageScale: 9975
 
 YuriGatlingTankMG1_AA:
-	Inherits: RA2GattlingMG1_AA
+	Inherits@xYuriGatlingTankMG1_AA0: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG1_AA1: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG1_AA2: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7290
+	ReloadDelay: 6
+	ValidTargets: Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Air
 		Damage: 6000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9988
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 9988
 
 YuriGatlingTankMG2:
-	Inherits: RA2GattlingMG2
+	Inherits@xYuriGatlingTankMG20: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG21: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG22: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo5a.wav, vgatlo5b.wav
 	Range: 5670
+	ReloadDelay: 4
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
 		Damage: 3000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9975
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Ground, Water
+		Damage: 3000
+		PercentageScale: 9975
 
 YuriGatlingTankMG2_AA:
-	Inherits: RA2GattlingMG2_AA
+	Inherits@xYuriGatlingTankMG2_AA0: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG2_AA1: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG2_AA2: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo5a.wav, vgatlo5b.wav
 	Range: 8100
+	ReloadDelay: 4
+	ValidTargets: Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Air
 		Damage: 6000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9988
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 9988
 
 YuriGatlingTankMG3:
-	Inherits: RA2GattlingMG3
+	Inherits@xYuriGatlingTankMG30: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG31: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG32: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo8a.wav, vgatlo8b.wav
 	Range: 5940
+	ReloadDelay: 2
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
 		Damage: 3000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9975
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Ground, Water
+		Damage: 3000
+		PercentageScale: 9975
 
 YuriGatlingTankMG3_AA:
-	Inherits: RA2GattlingMG3_AA
+	Inherits@xYuriGatlingTankMG3_AA0: ^Warhead_Bullet_Medium
+	Inherits@xYuriGatlingTankMG3_AA1: ^Projectile_Bullet_Medium
+	Inherits@xYuriGatlingTankMG3_AA2: ^Effect_Bullet_Medium_RA2
+	Report: vgatlo8a.wav, vgatlo8b.wav
 	Range: 8910
+	ReloadDelay: 2
+	ValidTargets: Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Air
 		Damage: 6000
-	Warhead@Bullet_Medium_Flat: AreaDamage
+		PercentageScale: 9988
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Warhead@Bullet_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 100
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Steel: 11
-			Medium: 10
-			Helicopter: 9
-			Concrete: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 9988
 
 RA2GattlingInf:
 	Inherits@xRA2GattlingInf0: ^Warhead_Bullet_Medium
