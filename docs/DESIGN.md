@@ -2770,6 +2770,9 @@ Scout** — a hybrid of infantry and vehicle, of light and heavy.
 **Its value is the PRODUCT of the weapon's Plate and Scout values**, as
 fractions of the profile's own PEAK: `Heroic = Plate × Scout / peak`.
 
+⚠ **Superseded 2026-09-26 (12.0l rule 4): the divisor is the CONSTANT 200**, not the
+profile's peak — `Heroic = Plate × Scout / 200`, and a FLAT template keeps its flat value.
+
 ⚠ **The divisor is the peak, not the constant 100** — they stopped being the
 same thing when rule 1 above moved normalisation from the peak to the median and
 values over 100 became legal. Dividing by 100 while a parent sits at 137
@@ -3969,7 +3972,7 @@ reference assignment); none exists yet. It lands with the §12.0j regeneration, 
 `gen_weapon_template.py` + `splice_templates.py --all`, never by hand, and each new family needs its
 own radius/curve (rule 8d, `audit_family_uniqueness.py`).
 
-**1. The `AntiAir` armour type.** Dedicated anti-air units (SAM sites, flak tracks, AA guns) get a
+**1. The `AntiAir` armour type** *(renamed `AntiAirVehicle` and given its own scaling by 12.0l, 2026-09-26)*. Dedicated anti-air units (SAM sites, flak tracks, AA guns) get a
 new vehicle-ladder armour type `AntiAir`. Every GROUND-delivered family treats it exactly like
 `Light`; every AIR-delivered family (item 2) deals **50%** of its `Light` value to it — Combined
 Arms' number, expressed as a visible armour row instead of CA's hidden `DamageTypeDamageMultiplier`
@@ -4047,6 +4050,91 @@ these mods has, which were forced into an unrelated family or dropped:
 **Order of work:** these are balance changes, so they follow the reference averaging (R69: which
 waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
 faction weapon files, so each lane's files move through that lane's owner.
+
+### 12.0l DERIVED ARMOUR TYPES: CYBORGS AND ANTI-AIR (maintainer 2026-09-26) — binding, PLANNED
+
+> *"all armor x armor types mean geomean and not product"* — and for the anti-air types: *"not the
+> same armor values but instead their own scaling … in between light and medium … and for anti air
+> infantry in between none and flak but at the same time have that 50% damage reduction from air
+> weapons."*
+
+**Rule 1 — every derived armour is the GEOMETRIC MEAN of its two parents**, computed per template
+by the generator, never typed by hand: `X = round(sqrt(parentA x parentB))`. It sits between its
+parents in multiplier terms, which is also exactly what the runtime does to a dual class-armour
+stack since #510, so moving a unit from two `Armor` traits to one derived type changes nothing it
+takes. **Heroic is the single exception** (rule 4).
+
+**Rule 2 — the seven new types** (names ruled 2026-09-26; one token each):
+
+| type | = geomean of | ladder | who wears it |
+|---|---|---|---|
+| `CyborgLight` | `None` x `Light` | INF+VEH | light cyborgs (per-unit list, maintainer-corrected) |
+| `CyborgMedium` | `Flak` x `Medium` | INF+VEH | medium cyborgs |
+| `CyborgHeavy` | `Plate` x `Heavy` | INF+VEH | heavy cyborgs |
+| `CyborgHeroic` | `Heroic` x `Superheavy` | INF+VEH | hero cyborgs (Volkov, Cyborg Commandos, Berserker, …) |
+| `AntiAirInfantry` | `None` x `Flak` | INF | anti-air infantry |
+| `AntiAirVehicle` | `Light` x `Medium` | VEH | anti-air vehicles (replaces 12.0k's provisional name `AntiAir`) |
+| `AntiAirBuilding` | `Concrete` x `Steel` | BLD | anti-air defences |
+| `ShipLight` | `Light` x `Wood` | NAV | light ships (today Light / None) |
+| `ShipMedium` | `Medium` x `Concrete` | NAV | medium ships |
+| `ShipHeavy` | `Heavy` x `Steel` | NAV | heavy ships |
+| `ShipSuperheavy` | `Superheavy` x `Steel` | NAV | capital ships (battleships, carriers) |
+| `AntiAirShip` | `ShipLight` x `ShipMedium` | NAV | anti-air ships (50% from air weapons, rule 3) |
+
+Ships are the new NAVAL ladder (maintainer 2026-09-26: a hull is part vehicle, part floating
+structure, so each ship type pairs a vehicle rung with a building rung); it is also the ladder the
+12.0k `Torpedo` / `AntiSub` families will be shaped against. A cyborg carries ONE of the four cyborg types instead of today's two `Armor` traits (it replaces
+the dual stack, as the derived-armour pattern above requires).
+
+**Rule 3 — the anti-air discount is a visible row, not a multiplier.** Every GROUND-delivered
+family writes the geomean value into the four `AntiAir*` columns; every AIR-delivered family
+(`<Family>Air`, 12.0k item 2) writes **50%** of it. This SUPERSEDES 12.0k item 1's "treats it
+exactly like `Light`": the anti-air types have their own scaling. W26/R1 still forbids doing it
+with a `DamageTypeDamageMultiplier`.
+
+**Rule 4 — Heroic stays a PRODUCT, divided by the constant 200** (supersedes 12.0b's divisor):
+`Heroic = round(Plate x Scout / 200)`. Measured on master `afb66c9b5`: 116 of 201 templates peak
+at exactly 200 and **no template deals more than 200 to Plate or Scout**, so Heroic can never
+exceed either half. ⛔ **Exception, a FLAT template** (every class armour equal): Heroic equals
+that flat value, so a generalist weapon stays general (9 templates peak at 100; without the
+exception they would deal 50% to heroes).
+
+**Rule 5a — who wears `AntiAirInfantry` (2026-09-26): every ROCKET TROOPER, every ARCHER and every
+SPECIAL FORCES unit** (FORMULA_V2's class list — "air is the special-forces class trait"). A
+cyborg in one of those classes (Rocket Cyborg, Ascended, Eliminator 800) wears TWO armours, its
+cyborg type and `AntiAirInfantry`, and the runtime combines them by geometric mean (#510).
+
+**Rule 5b — ONE ANTI-AIR INFANTRY PER FACTION, at least.** Promotion replacements fill the same
+slot (Dragunov for the Soviet Rocket Soldier, Madcap for the Marine, Specter for the Ghost).
+Japan: the Imperial Scoutsman (Special Forces) is the main one; the Archer Maiden counts as its
+late-game one. Yuri: the Gatling Trooper, and the Initiate loses its anti-air (confirms the
+2026-07-20 verdict "yuri initiate → scout"). ⚠ OPEN: Protoss — the Dragoon is its only
+anti-air option, plays as a main battle tank that also hits air and "feels a bit weak"; keeps
+`Heavy` until designed. Outpost 2 (Eden, Plymouth) has no infantry at all, so the rule cannot
+apply there.
+
+**Rule 5c — tiers (2026-09-26): every tech tier unlocks AT LEAST ONE unit; sharing is fine, an
+empty tier is not.** Yuri: Gatling Trooper T3 → **T2** (Psychic Sensor, beside the Clone), Virus
+T2 → **T3** (Battle Lab).
+
+**Rule 5 — membership comes from the templates.** `^AntiAirVehicleTemplate` (14 actors) →
+`AntiAirVehicle`; `^AntiTankAntiAirInfantryTemplate` (52) + `^RocketTrooperInfantryTemplate` (3) +
+`^ArcherInfantryTemplate` (0 today — the archers sit in the AT/AA template) → `AntiAirInfantry`;
+`^AntiAirDefenseTemplate` (18) → `AntiAirBuilding`; `^AntiAirShipTemplate` (1) →
+`AntiAirVehicle`. ⚠ The AT/AA infantry template also holds units that are not anti-air infantry
+(Protoss High Templar, Terran Marine, the Dragunov anti-materiel sniper), so every member is
+reviewed case by case, like the cyborg list, and misfiled units leave the template first.
+
+**Order of work:** (1) generator: the seven columns + Heroic /200, `splice_templates.py --all`,
+`verify_generator_sync` 0, `audit_family_uniqueness`; (2) the `<Family>Air` variants (12.0k item 2)
+so the 50% has something to apply to; (3) move actors onto the new types, per the corrected lists;
+(4) re-extract ledgers. Derived columns sit OUTSIDE the R16 geomean-100 normalisation, like Heroic,
+and are computed last (they are functions of normalised parents).
+
+⚠ **The heaviness bell (§12.0i) still re-derives Heroic as `Plate x Scout / peak`** in both
+`HeavinessBell.cs` and its mirror `effective_heaviness.py`. It ships INERT (no yaml sets
+`Heaviness`), so nothing is wrong in play today; before it is ever activated, both must adopt
+rule 4's `/200` and rule 1's derived columns, together, or their parity test breaks.
 
 ## 16. Rank decorations, experience systems & elite weapons
 

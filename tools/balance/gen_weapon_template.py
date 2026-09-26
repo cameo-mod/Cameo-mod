@@ -830,7 +830,26 @@ def distinct_ints(rows):
 
 BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target band's flat end
 BAND_MARGIN = 1.03                  # headroom so integer rounding cannot fall back out of band
-DERIVED_ARMORS = ("Heroic", "Airborne")
+# DESIGN §12.0l (maintainer 2026-09-26): every derived armour is the GEOMETRIC MEAN of its two
+# parents, computed LAST (in `emit_versus`) from the finished row set. Order matters: a parent
+# must be computed before its child (`CyborgHeroic` needs `Heroic`, `AntiAirShip` the ships).
+# Heroic alone stays a PRODUCT, `Plate x Scout / 200` (§12.0l rule 4) — see `derive_rows`.
+GEO_DERIVED = (
+    ("CyborgLight", ("None", "Light")),
+    ("CyborgMedium", ("Flak", "Medium")),
+    ("CyborgHeavy", ("Plate", "Heavy")),
+    ("CyborgHeroic", ("Heroic", "Superheavy")),
+    ("AntiAirInfantry", ("None", "Flak")),
+    ("AntiAirVehicle", ("Light", "Medium")),
+    ("AntiAirBuilding", ("Concrete", "Steel")),
+    ("ShipLight", ("Light", "Wood")),
+    ("ShipMedium", ("Medium", "Concrete")),
+    ("ShipHeavy", ("Heavy", "Steel")),
+    ("ShipSuperheavy", ("Superheavy", "Steel")),
+    ("AntiAirShip", ("ShipLight", "ShipMedium")),
+)
+HEROIC_DIVISOR = 200
+DERIVED_ARMORS = ("Heroic", "Airborne") + tuple(name for name, _ in GEO_DERIVED)
 # Rows that live on a Versus node but are not armor classes, so they never enter a
 # profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
 NON_ARMOR_ROWS = ("Shield",) + tuple(PLATING_CYCLE)
@@ -1440,6 +1459,34 @@ def reference_main(name, order16, level):
     return sorted(rows, key=lambda r: -r[1])
 
 
+def derive_rows(rows):
+    """DESIGN §12.0l: re-derive every derived armour from the FINISHED rows, and add the missing ones.
+
+    Runs inside `emit_versus`, so every Versus node the generator writes — main, `_Percentage`
+    twin, `_ExtraDamage` chip — carries the same derived columns, computed after the last cell
+    moved. A derived value computed earlier is stale by definition (§12.0b).
+
+    * `Heroic = round(Plate x Scout / 200)`, a PRODUCT (rule 4). A FLAT table — every class
+      armour equal — keeps that flat value instead, so a generalist stays general.
+    * every `GEO_DERIVED` type = `round(sqrt(parentA x parentB))` (rule 1), in table order, so a
+      parent is always final before its child reads it.
+    A derived type whose parents are absent from the table is skipped, never guessed.
+    """
+    vals = dict(rows)
+    body = [v for a, v in rows if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS]
+    if "Heroic" in vals and "Plate" in vals and "Scout" in vals:
+        if body and min(body) == max(body):
+            vals["Heroic"] = body[0]
+        else:
+            vals["Heroic"] = int(round(vals["Plate"] * vals["Scout"] / HEROIC_DIVISOR))
+    for name, (first, second) in GEO_DERIVED:
+        if first in vals and second in vals:
+            vals[name] = int(round(math.sqrt(vals[first] * vals[second])))
+    seen = {a for a, _ in rows}
+    return ([(a, vals[a]) for a, _ in rows]
+            + [(name, vals[name]) for name, _ in GEO_DERIVED if name in vals and name not in seen])
+
+
 def emit_versus(rows, indent="\t\t\t"):
     """Emit a `Versus:` node: pseudo-rows first, then armors DESCENDING by value.
 
@@ -1465,6 +1512,7 @@ def emit_versus(rows, indent="\t\t\t"):
     the [10, 200] window in both directions, so sorting it in would drag it to an end and
     hide the ladder it is not part of.
     """
+    rows = derive_rows(rows)
     out = []
     lead = [r for r in rows if r[0] in NON_ARMOR_ROWS]
     body = sorted((r for r in rows if r[0] not in NON_ARMOR_ROWS), key=lambda r: -r[1])
