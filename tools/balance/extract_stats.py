@@ -316,6 +316,12 @@ _WEAPON_CLASS_IGNORE = {
 # sidecar entry can never silently mis-price a unit again.
 _UNMAPPED_WEAPON_TEMPLATES: set[str] = set()
 
+# (ledger, actor) -> the non-null `design` judgment a committed ledger holds for an actor that
+# this extraction no longer emits. Design values never exist in yaml; they are carried over by
+# actor id, so a rename drops them. `main` refuses to write while this is non-empty unless
+# `--allow-design-drop` is given (see build_both).
+_DROPPED_DESIGN: dict[tuple[str, str], dict] = {}
+
 
 _MIX_ALLOWLIST = {
     "CombatTank", "SiegeTankSiegeCannon", "SiegeEngineCannon",
@@ -1233,6 +1239,7 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
 def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
                                                                dict[str, dict]]:
     """(raw ledgers, derived sidecars) from a single pass — they cannot desync."""
+    _DROPPED_DESIGN.clear()     # per pass: a previous call in the same process must not leak in
     rs = model.rs
     tm.use_ruleset(rs)          # reuse the built tree for the armor census (~8s saved)
     we.use_ruleset(rs)          # ... and for the median-weapon-range yardstick
@@ -1281,6 +1288,15 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
                     sec[a] = u
             if sec:
                 sections[section] = sec
+        # ⛔ A design value is carried over by ACTOR ID only (above). An actor that is no longer
+        # emitted — renamed, moved to another ledger, or deleted — takes its design judgment
+        # with it, silently: after #519's dot renames every plain re-extract turned
+        # `ra2e2_black.design.unit_class` 1.0 into null, in three PRs at once. Record the loss;
+        # `main` refuses to write it unless the caller says it is intended.
+        emitted = {a for sec in sections.values() for a in sec}
+        for actor, kept in keep_design.items():
+            if actor not in emitted:
+                _DROPPED_DESIGN[(ledger, actor)] = kept
         if sections:
             raw, derived = split_derived({"schema": 2, "ledger": ledger,
                                           "pack": info["pack"], "sections": sections})
@@ -1303,6 +1319,9 @@ def main() -> int:
     ap.add_argument("--check-weapon-classes", action="store_true",
                     help="fail if any weapon references a class template missing "
                          "from docs/balance/weapon_classes.yaml (the sidecar)")
+    ap.add_argument("--allow-design-drop", action="store_true",
+                    help="write even though a committed design value would be dropped "
+                         "(only for an actor that was really deleted)")
     args = ap.parse_args()
     if args.output_dir and args.check:
         ap.error("--output-dir cannot be combined with --check")
@@ -1352,6 +1371,17 @@ def main() -> int:
             drift += 1
         print(f"balance check: {len(ledgers)} ledgers, {drift} drifted")
         return 1 if drift else 0
+
+    if _DROPPED_DESIGN and not args.allow_design_drop:
+        print("REFUSING TO WRITE — these committed design values belong to actors this "
+              "extraction no longer emits, and would be dropped:")
+        for (ledger, actor), kept in sorted(_DROPPED_DESIGN.items()):
+            print(f"  {ledger}: {actor}  {kept}")
+        print("Design values are not in yaml; they survive a re-extract only by actor id. "
+              "If the actor was RENAMED, rename its key in the committed ledger first, then "
+              "re-extract (the #528 procedure). If it was really deleted, re-run with "
+              "--allow-design-drop.")
+        return 2
 
     total = 0
     for label, root, docs in targets:

@@ -787,6 +787,16 @@ The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **no
 
 ### Ledger patching safety
 
+- ⛔ **A RENAME DROPS LEDGER DESIGN VALUES, SILENTLY (2026-09-27).** `design.unit_class` /
+  `special` / `tech_tier` / `class_anchor` never exist in yaml. `extract_stats.py` carries them
+  across a re-extract **by actor id only**, so after a rename the re-extract finds nothing under
+  the new id and writes null. After #519's dot renames, **three PRs (#534, #535, #516) shipped
+  `ra2e2_black.design.unit_class` 1.0 -> null at once**, and each passed `audit_balance_drift`,
+  because drift compares the ledger with the yaml and a lost judgment is invisible to that.
+  **Procedure:** rename the key in the committed ledger FIRST, then re-extract (#528). The
+  extractor now refuses to write a dropped design value (exit 2, the list printed);
+  `--allow-design-drop` is only for an actor that was really deleted. Guard:
+  `tools/tests/test_extract_design_drop.py`.
 - When patching ledger JSONs from generated markdown balance reports, only overwrite primary damage warheads.
   - Skip `HealthPercentageDamage` warheads entirely.
   - Skip warheads whose tag contains `Friendly` (e.g., `GrenadeFriendlyFire`) to avoid corrupting friendly-fire or self-damage values.
