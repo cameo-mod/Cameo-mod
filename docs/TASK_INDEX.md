@@ -60,7 +60,7 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 | **ContentPack split / faction migration** | [`MIGRATION.md`](MIGRATION.md) §"The per-faction pipeline" | `tools/packs/split_faction.py` · `tools/audit/audit_faction_leaks.py` |
 | **Faction build options / production wiring** | [`HANDOFF.md`](HANDOFF.md) §3.B and [`DESIGN.md`](DESIGN.md) §4 tech-tier rules | `tools/audit/audit_buildable_order.py` · `utility.cmd cameo --faction-report <faction>`; resolve the active faction closure before editing |
 | **Renaming anything** | [`DESIGN.md`](DESIGN.md) naming grammar | `tools/rename/safe_rename.py` + `rename_map_<faction>.yaml` |
-| **AI / bot behaviour** | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) | — |
+| **AI / bot behaviour** | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md); for phase 6+ (fog, scouting, risk gate, island expansion, beacons) also [`design/AI_FRANSBOT_RESEARCH.md`](design/AI_FRANSBOT_RESEARCH.md) §0 and §4 | `python tools/tests/ai_bot_player_gate.py` (starts a match) |
 | **Engine / C# change** | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) "The canonical engine update pipeline" | ⚠ try a mod-side **shadow** first — assembly order puts Cameo before Common |
 | **Running the gates** | [`audit/PERIODIC.md`](audit/PERIODIC.md); [`HANDOFF.md`](HANDOFF.md) §3.0c on exit codes | `bash tools/audit/run_all.sh` (the ONLY sanctioned runner) |
 | **Refactor that must not change behaviour** | — | `tools/audit/dump_resolved.py` — diff must be empty |
