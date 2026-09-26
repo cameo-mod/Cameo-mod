@@ -161,7 +161,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -194,6 +194,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
+
+		// The 6c risk gate's fog-honest read: remembered enemy combat value in the
+		// region containing the cell. AntiAir is deliberately excluded (a ground
+		// squad's pre-commit check); air squads do not consult this gate yet.
+		int IBotRegionThreatProvider.RememberedEnemyThreatAt(CPos cell)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || regions == null)
+				return 0;
+
+			var index = regions.IndexOf(cell);
+			var threat = 0;
+			foreach (var enemyRegions in regions.ByEnemy.Values)
+				if (index < enemyRegions.Length && enemyRegions[index] != null)
+					threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+
+			return threat;
+		}
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)

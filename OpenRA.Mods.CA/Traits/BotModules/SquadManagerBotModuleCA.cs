@@ -123,6 +123,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 
+		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
+		public readonly int AttackRiskMargin = 25;
+
 		[Desc("Actor types to prioritise based on HighValueTargetPriority.")]
 		public readonly HashSet<string> HighValueTargetTypes = new HashSet<string>();
 
@@ -196,6 +199,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotNotifyIdleBaseUnits[] notifyIdleBaseUnits;
 		IBotAircraftBuilder[] aircraftBuilders;
 		IBotMainTargetProvider[] mainTargetProviders;
+		IBotRegionThreatProvider[] threatProviders;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -222,7 +226,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			World = self.World;
 			Player = self.Owner;
-			
+
 			unitCannotBeOrdered = a => a == null || a.Owner != Player || a.IsDead || !a.IsInWorld || a.CurrentActivity is Enter;
 			constructionYardBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(World, info.ConstructionYardTypes, Player);
 		}
@@ -306,6 +310,7 @@ namespace OpenRA.Mods.CA.Traits
 			notifyIdleBaseUnits = self.Owner.PlayerActor.TraitsImplementing<IBotNotifyIdleBaseUnits>().ToArray();
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
+			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -359,12 +364,70 @@ namespace OpenRA.Mods.CA.Traits
 			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
+		// 6c pre-commit risk gate: as FindClosestEnemy, but candidates whose region's
+		// remembered enemy threat exceeds attackerValue by more than AttackRiskMargin
+		// are skipped — an unknown region (threat 0) never blocks. When every
+		// candidate fails the gate the squad holds instead of suiciding.
+		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue)
+		{
+			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units.RemoveAll(u => !PassesRiskGate(u, attackerValue));
+			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+		}
+
 		internal Actor FindHighValueTarget(WPos pos)
 		{
 			var units = World.Actors.Where(IsHighValueTarget).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			return units.RandomOrDefault(World.LocalRandom);
+		}
+
+		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
+		{
+			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units.RemoveAll(u => !PassesRiskGate(u, attackerValue));
+			return units.RandomOrDefault(World.LocalRandom);
+		}
+
+		internal int SquadValueOf(SquadCA squad)
+		{
+			var value = 0;
+			foreach (var u in squad.Units)
+			{
+				if (!cachedUnitValues.TryGetValue(u.Actor.Info.Name, out var unitCost))
+				{
+					unitCost = u.Actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					cachedUnitValues[u.Actor.Info.Name] = unitCost;
+				}
+
+				value += unitCost;
+			}
+
+			return value;
+		}
+
+		internal bool PassesRiskGate(Actor target, int attackerValue)
+		{
+			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(target.Location)) ?? 0;
+			var pass = PassesRiskGate(attackerValue, threat, Info.AttackRiskMargin);
+			if (!pass)
+				AIUtils.BotDebug("AI ({0}): risk gate held a {1}-value squad off {2} (remembered threat {3}, margin {4}%)",
+					Player.ClientIndex, attackerValue, target.Info.Name, threat, Info.AttackRiskMargin);
+
+			return pass;
+		}
+
+		public static bool PassesRiskGate(int attackerValue, int threat, int marginPercent)
+		{
+			if (marginPercent < 0 || threat <= 0)
+				return true;
+
+			return (long)attackerValue * 100 >= (long)threat * (100 + marginPercent);
 		}
 
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius)
