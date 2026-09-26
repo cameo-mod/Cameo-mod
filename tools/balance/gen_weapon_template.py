@@ -836,7 +836,7 @@ BAND_MARGIN = 1.03                  # headroom so integer rounding cannot fall b
 # `Heroic`, `AntiAirShip` the ships). Heroic alone stays a PRODUCT, `Plate x Scout / 200`,
 # re-derived in the MAIN table only (§12.0l rule 4) — see `derive_rows`.
 GEO_DERIVED = (
-    ("Airborne", ("Scout", "Flak", "Helicopter")),
+    ("FlyingInfantry", ("Scout", "Flak", "Helicopter")),
     ("CyborgLight", ("None", "Light")),
     ("CyborgMedium", ("Flak", "Medium")),
     ("CyborgHeavy", ("Plate", "Heavy")),
@@ -1013,8 +1013,7 @@ def class_tilt(rows, level):
     # computed before the last cell moves is not derived, it is stale.
     peak = max(v for a, v in out.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if name in out and first in out and second in out and peak > 0:
             out[name] = out[first] * out[second] / peak
     return [(a, out[a]) for a, _ in rows]
@@ -1123,8 +1122,7 @@ def heaviness_bell(rows, level):
     # Re-derive the products LAST, from the finished profile (§12.0b).
     peak = max(v for a, v in out.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if name in out and first in out and second in out and peak > 0:
             out[name] = out[first] * out[second] / peak
     return [(a, out[a]) for a, _ in rows]
@@ -1375,8 +1373,7 @@ def finish_blend(rows, name=None):
 
     peak = max(v for a, v in values.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                     ("Airborne", ("Helicopter", "Scout"))):
+    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),):
         if derived in values and first in values and second in values and peak > 0:
             values[derived] = values[first] * values[second] / peak
 

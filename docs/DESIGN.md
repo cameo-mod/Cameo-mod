@@ -4081,7 +4081,7 @@ takes. **Heroic is the single exception** (rule 4).
 
 | type | = geomean of | ladder | who wears it |
 |---|---|---|---|
-| `Airborne` | `Scout` x `Flak` x `Helicopter` (3 parents: the cube root) | INF+AIR | flying infantry (jumpjets, rocketeers, cosmonauts); supersedes the `Helicopter x Scout` product above |
+| `FlyingInfantry` | `Scout` x `Flak` x `Helicopter` (3 parents: the cube root) | INF+AIR | flying infantry (jumpjets, rocketeers, cosmonauts); REPLACES the provisional `Airborne` = `Helicopter x Scout` product above — name ruled 2026-09-26 to match the flying-infantry class and `^FlyingInfantryTemplate` |
 | `CyborgLight` | `None` x `Light` | INF+VEH | light cyborgs (per-unit list, maintainer-corrected) |
 | `CyborgMedium` | `Flak` x `Medium` | INF+VEH | medium cyborgs |
 | `CyborgHeavy` | `Plate` x `Heavy` | INF+VEH | heavy cyborgs |

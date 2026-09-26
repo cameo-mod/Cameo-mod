@@ -88,7 +88,7 @@ LADDERS = {
 # Mirror of gen_weapon_template.DERIVED_ARMORS (DESIGN §12.0l, 2026-09-26): derived columns are
 # functions of the finished profile, so they stay OUT of the MEAN-100 / spread statistics.
 # test_derived_armor_types pins the two lists together.
-DERIVED_ARMORS = ("Heroic", "Airborne",
+DERIVED_ARMORS = ("Heroic", "FlyingInfantry",
                   "CyborgLight", "CyborgMedium", "CyborgHeavy", "CyborgHeroic",
                   "AntiAirInfantry", "AntiAirVehicle", "AntiAirBuilding",
                   "ShipLight", "ShipMedium", "ShipHeavy", "ShipSuperheavy", "AntiAirShip")

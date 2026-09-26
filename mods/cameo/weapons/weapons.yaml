@@ -55,7 +55,7 @@
 			ShipHeavy: 32
 			ShipSuperheavy: 21
 			AntiAirShip: 45
-			Airborne: 62
+			FlyingInfantry: 62
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -91,7 +91,7 @@
 			ShipHeavy: 5
 			ShipSuperheavy: 3
 			AntiAirShip: 7
-			Airborne: 10
+			FlyingInfantry: 10
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -162,7 +162,7 @@
 			ShipHeavy: 48
 			ShipSuperheavy: 46
 			AntiAirShip: 52
-			Airborne: 49
+			FlyingInfantry: 49
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -200,7 +200,7 @@
 			ShipHeavy: 48
 			ShipSuperheavy: 46
 			AntiAirShip: 52
-			Airborne: 49
+			FlyingInfantry: 49
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -237,7 +237,7 @@
 			ShipHeavy: 21
 			ShipSuperheavy: 20
 			AntiAirShip: 22
-			Airborne: 22
+			FlyingInfantry: 22
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -314,7 +314,7 @@
 			ShipHeavy: 37
 			ShipSuperheavy: 32
 			AntiAirShip: 59
-			Airborne: 70
+			FlyingInfantry: 70
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -350,7 +350,7 @@
 			ShipHeavy: 7
 			ShipSuperheavy: 6
 			AntiAirShip: 11
-			Airborne: 14
+			FlyingInfantry: 14
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -423,7 +423,7 @@
 			ShipHeavy: 34
 			ShipSuperheavy: 32
 			AntiAirShip: 41
-			Airborne: 74
+			FlyingInfantry: 74
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -459,7 +459,7 @@
 			ShipHeavy: 7
 			ShipSuperheavy: 6
 			AntiAirShip: 8
-			Airborne: 15
+			FlyingInfantry: 15
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -535,7 +535,7 @@
 			ShipHeavy: 62
 			ShipSuperheavy: 63
 			AntiAirShip: 56
-			Airborne: 73
+			FlyingInfantry: 73
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -571,7 +571,7 @@
 			ShipHeavy: 15
 			ShipSuperheavy: 16
 			AntiAirShip: 13
-			Airborne: 18
+			FlyingInfantry: 18
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -656,7 +656,7 @@
 			ShipHeavy: 82
 			ShipSuperheavy: 87
 			AntiAirShip: 54
-			Airborne: 39
+			FlyingInfantry: 39
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -692,7 +692,7 @@
 			ShipHeavy: 13
 			ShipSuperheavy: 14
 			AntiAirShip: 8
-			Airborne: 6
+			FlyingInfantry: 6
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -786,7 +786,7 @@
 			ShipHeavy: 85
 			ShipSuperheavy: 89
 			AntiAirShip: 62
-			Airborne: 51
+			FlyingInfantry: 51
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -822,7 +822,7 @@
 			ShipHeavy: 17
 			ShipSuperheavy: 18
 			AntiAirShip: 12
-			Airborne: 10
+			FlyingInfantry: 10
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -916,7 +916,7 @@
 			ShipHeavy: 88
 			ShipSuperheavy: 92
 			AntiAirShip: 70
-			Airborne: 62
+			FlyingInfantry: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -952,7 +952,7 @@
 			ShipHeavy: 22
 			ShipSuperheavy: 23
 			AntiAirShip: 17
-			Airborne: 15
+			FlyingInfantry: 15
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1050,7 +1050,7 @@
 			ShipHeavy: 81
 			ShipSuperheavy: 84
 			AntiAirShip: 72
-			Airborne: 43
+			FlyingInfantry: 43
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1086,7 +1086,7 @@
 			ShipHeavy: 13
 			ShipSuperheavy: 13
 			AntiAirShip: 11
-			Airborne: 6
+			FlyingInfantry: 6
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1171,7 +1171,7 @@
 			ShipHeavy: 72
 			ShipSuperheavy: 67
 			AntiAirShip: 87
-			Airborne: 55
+			FlyingInfantry: 55
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1207,7 +1207,7 @@
 			ShipHeavy: 14
 			ShipSuperheavy: 13
 			AntiAirShip: 17
-			Airborne: 11
+			FlyingInfantry: 11
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1292,7 +1292,7 @@
 			ShipHeavy: 78
 			ShipSuperheavy: 74
 			AntiAirShip: 90
-			Airborne: 66
+			FlyingInfantry: 66
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1327,7 +1327,7 @@
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 22
-			Airborne: 16
+			FlyingInfantry: 16
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1412,7 +1412,7 @@
 			ShipHeavy: 88
 			ShipSuperheavy: 96
 			AntiAirShip: 63
-			Airborne: 56
+			FlyingInfantry: 56
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1449,7 +1449,7 @@
 			ShipHeavy: 22
 			ShipSuperheavy: 24
 			AntiAirShip: 16
-			Airborne: 14
+			FlyingInfantry: 14
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LaserExtraDamage: SpreadDamage
@@ -1487,7 +1487,7 @@
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1563,7 +1563,7 @@
 			ShipHeavy: 78
 			ShipSuperheavy: 80
 			AntiAirShip: 72
-			Airborne: 66
+			FlyingInfantry: 66
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
@@ -1600,7 +1600,7 @@
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 18
-			Airborne: 17
+			FlyingInfantry: 17
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@RailgunExtraDamage: SpreadDamage
@@ -1638,7 +1638,7 @@
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -1698,7 +1698,7 @@
 			ShipHeavy: 72
 			ShipSuperheavy: 73
 			AntiAirShip: 65
-			Airborne: 67
+			FlyingInfantry: 67
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1736,7 +1736,7 @@
 			ShipHeavy: 27
 			ShipSuperheavy: 32
 			AntiAirShip: 19
-			Airborne: 25
+			FlyingInfantry: 25
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1773,7 +1773,7 @@
 			ShipHeavy: 18
 			ShipSuperheavy: 18
 			AntiAirShip: 16
-			Airborne: 17
+			FlyingInfantry: 17
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1831,7 +1831,7 @@
 			ShipHeavy: 79
 			ShipSuperheavy: 80
 			AntiAirShip: 74
-			Airborne: 76
+			FlyingInfantry: 76
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1869,7 +1869,7 @@
 			ShipHeavy: 115
 			ShipSuperheavy: 122
 			AntiAirShip: 70
-			Airborne: 63
+			FlyingInfantry: 63
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1906,7 +1906,7 @@
 			ShipHeavy: 23
 			ShipSuperheavy: 23
 			AntiAirShip: 21
-			Airborne: 22
+			FlyingInfantry: 22
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1968,7 +1968,7 @@
 			ShipHeavy: 51
 			ShipSuperheavy: 47
 			AntiAirShip: 60
-			Airborne: 44
+			FlyingInfantry: 44
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2007,7 +2007,7 @@
 			ShipHeavy: 8
 			ShipSuperheavy: 7
 			AntiAirShip: 9
-			Airborne: 6
+			FlyingInfantry: 6
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2090,7 +2090,7 @@
 			ShipHeavy: 59
 			ShipSuperheavy: 56
 			AntiAirShip: 66
-			Airborne: 57
+			FlyingInfantry: 57
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2129,7 +2129,7 @@
 			ShipHeavy: 12
 			ShipSuperheavy: 11
 			AntiAirShip: 13
-			Airborne: 11
+			FlyingInfantry: 11
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2210,7 +2210,7 @@
 			ShipHeavy: 68
 			ShipSuperheavy: 65
 			AntiAirShip: 74
-			Airborne: 67
+			FlyingInfantry: 67
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2250,7 +2250,7 @@
 			ShipHeavy: 17
 			ShipSuperheavy: 16
 			AntiAirShip: 18
-			Airborne: 17
+			FlyingInfantry: 17
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2333,7 +2333,7 @@
 			ShipHeavy: 64
 			ShipSuperheavy: 68
 			AntiAirShip: 51
-			Airborne: 45
+			FlyingInfantry: 45
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2372,7 +2372,7 @@
 			ShipHeavy: 10
 			ShipSuperheavy: 11
 			AntiAirShip: 7
-			Airborne: 7
+			FlyingInfantry: 7
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2443,7 +2443,7 @@
 			ShipHeavy: 70
 			ShipSuperheavy: 74
 			AntiAirShip: 59
-			Airborne: 56
+			FlyingInfantry: 56
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2482,7 +2482,7 @@
 			ShipHeavy: 14
 			ShipSuperheavy: 15
 			AntiAirShip: 12
-			Airborne: 11
+			FlyingInfantry: 11
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2556,7 +2556,7 @@
 			ShipHeavy: 77
 			ShipSuperheavy: 80
 			AntiAirShip: 68
-			Airborne: 66
+			FlyingInfantry: 66
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2595,7 +2595,7 @@
 			ShipHeavy: 19
 			ShipSuperheavy: 20
 			AntiAirShip: 17
-			Airborne: 16
+			FlyingInfantry: 16
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2669,7 +2669,7 @@
 			ShipHeavy: 53
 			ShipSuperheavy: 49
 			AntiAirShip: 65
-			Airborne: 43
+			FlyingInfantry: 43
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -2708,7 +2708,7 @@
 			ShipHeavy: 53
 			ShipSuperheavy: 49
 			AntiAirShip: 65
-			Airborne: 43
+			FlyingInfantry: 43
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -2746,7 +2746,7 @@
 			ShipHeavy: 10
 			ShipSuperheavy: 9
 			AntiAirShip: 13
-			Airborne: 6
+			FlyingInfantry: 6
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -2822,7 +2822,7 @@
 			ShipHeavy: 57
 			ShipSuperheavy: 52
 			AntiAirShip: 79
-			Airborne: 62
+			FlyingInfantry: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -2861,7 +2861,7 @@
 			ShipHeavy: 57
 			ShipSuperheavy: 52
 			AntiAirShip: 79
-			Airborne: 62
+			FlyingInfantry: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
@@ -2899,7 +2899,7 @@
 			ShipHeavy: 11
 			ShipSuperheavy: 10
 			AntiAirShip: 15
-			Airborne: 12
+			FlyingInfantry: 12
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -2973,7 +2973,7 @@
 			ShipHeavy: 74
 			ShipSuperheavy: 72
 			AntiAirShip: 80
-			Airborne: 64
+			FlyingInfantry: 64
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
@@ -3010,7 +3010,7 @@
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge1: LeaveSmudge
@@ -3099,7 +3099,7 @@
 			ShipHeavy: 77
 			ShipSuperheavy: 80
 			AntiAirShip: 68
-			Airborne: 66
+			FlyingInfantry: 66
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
@@ -3137,7 +3137,7 @@
 			ShipHeavy: 19
 			ShipSuperheavy: 20
 			AntiAirShip: 17
-			Airborne: 16
+			FlyingInfantry: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge1: LeaveSmudge
@@ -3211,7 +3211,7 @@
 			ShipHeavy: 60
 			ShipSuperheavy: 57
 			AntiAirShip: 58
-			Airborne: 61
+			FlyingInfantry: 61
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -3249,7 +3249,7 @@
 			ShipHeavy: 60
 			ShipSuperheavy: 57
 			AntiAirShip: 58
-			Airborne: 61
+			FlyingInfantry: 61
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
@@ -3287,7 +3287,7 @@
 			ShipHeavy: 12
 			ShipSuperheavy: 11
 			AntiAirShip: 12
-			Airborne: 12
+			FlyingInfantry: 12
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -3348,7 +3348,7 @@
 			ShipHeavy: 27
 			ShipSuperheavy: 25
 			AntiAirShip: 23
-			Airborne: 68
+			FlyingInfantry: 68
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3386,7 +3386,7 @@
 			ShipHeavy: 4
 			ShipSuperheavy: 3
 			AntiAirShip: 3
-			Airborne: 11
+			FlyingInfantry: 11
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -3467,7 +3467,7 @@
 			ShipHeavy: 66
 			ShipSuperheavy: 69
 			AntiAirShip: 58
-			Airborne: 69
+			FlyingInfantry: 69
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3505,7 +3505,7 @@
 			ShipHeavy: 17
 			ShipSuperheavy: 17
 			AntiAirShip: 14
-			Airborne: 17
+			FlyingInfantry: 17
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@MagicExtraDamage: SpreadDamage
@@ -3544,7 +3544,7 @@
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -3626,7 +3626,7 @@
 			ShipHeavy: 60
 			ShipSuperheavy: 63
 			AntiAirShip: 52
-			Airborne: 70
+			FlyingInfantry: 70
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraHealing: SpreadDamage
@@ -3665,7 +3665,7 @@
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
-			Airborne: 100
+			FlyingInfantry: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3707,7 +3707,7 @@
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 21
-			Airborne: 16
+			FlyingInfantry: 16
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3793,7 +3793,7 @@
 			ShipHeavy: 88
 			ShipSuperheavy: 96
 			AntiAirShip: 63
-			Airborne: 56
+			FlyingInfantry: 56
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraRepair: SpreadDamage
@@ -3832,7 +3832,7 @@
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
-			Airborne: 100
+			FlyingInfantry: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3874,7 +3874,7 @@
 			ShipHeavy: 13
 			ShipSuperheavy: 11
 			AntiAirShip: 19
-			Airborne: 20
+			FlyingInfantry: 20
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3975,7 +3975,7 @@ DefuseKit:
 			Fighter: 133
 			Wood: 132
 			ShipLight: 125
-			Airborne: 124
+			FlyingInfantry: 124
 			Light: 118
 			CyborgMedium: 113
 			Heroic: 105
@@ -4009,7 +4009,7 @@ DefuseKit:
 			CyborgLight: 12
 			Fighter: 11
 			Wood: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			Light: 9
 			CyborgMedium: 9
 			ShipLight: 9
@@ -4057,7 +4057,7 @@ DefuseKit:
 			CyborgLight: 151
 			Scout: 123
 			CyborgMedium: 121
-			Airborne: 118
+			FlyingInfantry: 118
 			Light: 114
 			ShipLight: 109
 			CyborgHeavy: 107
@@ -4093,7 +4093,7 @@ DefuseKit:
 			CyborgLight: 16
 			Fighter: 15
 			Wood: 14
-			Airborne: 14
+			FlyingInfantry: 14
 			CyborgMedium: 14
 			Light: 13
 			ShipLight: 13
@@ -4140,7 +4140,7 @@ DefuseKit:
 			Plate: 166
 			CyborgLight: 145
 			Scout: 120
-			Airborne: 118
+			FlyingInfantry: 118
 			CyborgMedium: 118
 			CyborgHeavy: 110
 			Light: 105
@@ -4177,7 +4177,7 @@ DefuseKit:
 			CyborgLight: 21
 			Fighter: 20
 			Wood: 19
-			Airborne: 19
+			FlyingInfantry: 19
 			CyborgMedium: 19
 			Light: 18
 			ShipLight: 18
@@ -4238,7 +4238,7 @@ DefuseKit:
 			CyborgHeroic: 106
 			ShipLight: 102
 			CyborgLight: 94
-			Airborne: 93
+			FlyingInfantry: 93
 			Flak: 91
 			Wood: 81
 			AntiAirInfantry: 79
@@ -4275,7 +4275,7 @@ DefuseKit:
 			CyborgLight: 8
 			Plate: 7
 			Flak: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			None: 5
 			AntiAirInfantry: 5
 			Spaceship: 4
@@ -4323,7 +4323,7 @@ DefuseKit:
 			Plate: 112
 			CyborgMedium: 108
 			CyborgLight: 93
-			Airborne: 84
+			FlyingInfantry: 84
 			Spaceship: 78
 			Flak: 75
 			AntiAirInfantry: 70
@@ -4359,7 +4359,7 @@ DefuseKit:
 			CyborgLight: 12
 			Plate: 11
 			Flak: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			None: 9
 			AntiAirInfantry: 9
 			Spaceship: 8
@@ -4407,7 +4407,7 @@ DefuseKit:
 			ShipLight: 99
 			Scout: 95
 			Flak: 94
-			Airborne: 89
+			FlyingInfantry: 89
 			CyborgLight: 89
 			Wood: 87
 			AntiAirInfantry: 82
@@ -4442,7 +4442,7 @@ DefuseKit:
 			CyborgLight: 18
 			Heroic: 17
 			Plate: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			Flak: 15
 			None: 14
 			AntiAirInfantry: 14
@@ -4486,7 +4486,7 @@ DefuseKit:
 			None: 112
 			ShipMedium: 111
 			Heavy: 109
-			Airborne: 106
+			FlyingInfantry: 106
 			ShipSuperheavy: 106
 			CyborgMedium: 104
 			Concrete: 101
@@ -4529,7 +4529,7 @@ DefuseKit:
 			CyborgHeroic: 7
 			AntiAirInfantry: 7
 			Plate: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			Heroic: 5
 			Fighter: 4
 			Bomber: 3
@@ -4585,7 +4585,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4619,7 +4619,7 @@ DefuseKit:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			AntiAirShip: 16
-			Airborne: 11
+			FlyingInfantry: 11
 
 
 ^Warhead_CannonHE_Heavy_Flat:
@@ -4666,7 +4666,7 @@ DefuseKit:
 			ShipHeavy: 111
 			ShipSuperheavy: 111
 			AntiAirShip: 118
-			Airborne: 96
+			FlyingInfantry: 96
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4700,7 +4700,7 @@ DefuseKit:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 16
+			FlyingInfantry: 16
 
 # Percentage-inert class slices used by the retired-family shotgun and sniper
 # compatibility groups. Their percentage warheads remain separate on each weapon
@@ -4750,7 +4750,7 @@ DefuseKit:
 			ShipHeavy: 44
 			ShipSuperheavy: 39
 			AntiAirShip: 51
-			Airborne: 112
+			FlyingInfantry: 112
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4784,7 +4784,7 @@ DefuseKit:
 			ShipHeavy: 7
 			ShipSuperheavy: 7
 			AntiAirShip: 8
-			Airborne: 15
+			FlyingInfantry: 15
 
 
 ^Warhead_Bullet_Medium_Flat:
@@ -4831,7 +4831,7 @@ DefuseKit:
 			ShipHeavy: 75
 			ShipSuperheavy: 68
 			AntiAirShip: 86
-			Airborne: 112
+			FlyingInfantry: 112
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4865,7 +4865,7 @@ DefuseKit:
 			ShipHeavy: 9
 			ShipSuperheavy: 7
 			AntiAirShip: 11
-			Airborne: 14
+			FlyingInfantry: 14
 
 
 ^Warhead_MissileAP_Heavy_Flat:
@@ -4912,7 +4912,7 @@ DefuseKit:
 			ShipHeavy: 108
 			ShipSuperheavy: 115
 			AntiAirShip: 99
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4946,7 +4946,7 @@ DefuseKit:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 18
-			Airborne: 16
+			FlyingInfantry: 16
 
 ###### MissileHE: VEH+BLD > AIR > INF (light, air=True) ######
 
@@ -4994,7 +4994,7 @@ DefuseKit:
 			ShipHeavy: 99
 			ShipSuperheavy: 105
 			AntiAirShip: 101
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -5028,7 +5028,7 @@ DefuseKit:
 			ShipHeavy: 14
 			ShipSuperheavy: 14
 			AntiAirShip: 13
-			Airborne: 11
+			FlyingInfantry: 11
 
 # Compatibility slices for mixed legacy stacks where only part of the original
 # flat damage could hit walls. These deliberately omit PercentageScale so they
@@ -5073,7 +5073,7 @@ DefuseKit:
 			Fighter: 104
 			ShipSuperheavy: 103
 			CyborgHeavy: 98
-			Airborne: 97
+			FlyingInfantry: 97
 			Concrete: 96
 			Superheavy: 92
 			Flak: 88
@@ -5108,7 +5108,7 @@ DefuseKit:
 			None: 12
 			CyborgHeavy: 12
 			Flak: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeroic: 11
 			AntiAirInfantry: 11
 			Plate: 10
@@ -5154,7 +5154,7 @@ DefuseKit:
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -5194,7 +5194,7 @@ DefuseKit:
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -5256,7 +5256,7 @@ DefuseKit:
 			Superheavy: 111
 			Concrete: 110
 			Flak: 106
-			Airborne: 98
+			FlyingInfantry: 98
 			CyborgHeavy: 97
 			Plate: 84
 			CyborgHeroic: 82
@@ -5290,7 +5290,7 @@ DefuseKit:
 			None: 17
 			CyborgHeavy: 17
 			Flak: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			CyborgHeroic: 16
 			AntiAirInfantry: 16
 			Plate: 15
@@ -5345,7 +5345,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunGrenadeAlly: AreaDamage
 		ValidRelationships: Ally
@@ -5388,7 +5388,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShotgunShrapnelEnemy: AreaDamage
@@ -5432,7 +5432,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunShrapnelAlly: AreaDamage
 		ValidRelationships: Ally
@@ -5475,7 +5475,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShotgunTankDestroyer: AreaDamage
@@ -5521,7 +5521,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunSmallArms: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5567,7 +5567,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunChaingun: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5612,7 +5612,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 98
 			AntiAirShip: 123
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^SniperBulletHeavyCompatibility:
@@ -5659,7 +5659,7 @@ DefuseKit:
 			ShipHeavy: 69
 			ShipSuperheavy: 69
 			AntiAirShip: 81
-			Airborne: 113
+			FlyingInfantry: 113
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperFlak: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5704,7 +5704,7 @@ DefuseKit:
 			ShipHeavy: 69
 			ShipSuperheavy: 69
 			AntiAirShip: 81
-			Airborne: 113
+			FlyingInfantry: 113
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperSmallArms: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5750,7 +5750,7 @@ DefuseKit:
 			ShipHeavy: 69
 			ShipSuperheavy: 69
 			AntiAirShip: 81
-			Airborne: 113
+			FlyingInfantry: 113
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperChaingun: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5795,7 +5795,7 @@ DefuseKit:
 			ShipHeavy: 69
 			ShipSuperheavy: 69
 			AntiAirShip: 81
-			Airborne: 113
+			FlyingInfantry: 113
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ###### MissileAP: VEH > AIR > BLD > INF (heavy, air=True) ######
@@ -5834,7 +5834,7 @@ DefuseKit:
 			ShipSuperheavy: 117
 			AntiAirShip: 113
 			ShipLight: 106
-			Airborne: 103
+			FlyingInfantry: 103
 			CyborgHeavy: 101
 			CyborgMedium: 94
 			CyborgHeroic: 88
@@ -5872,7 +5872,7 @@ DefuseKit:
 			Concrete: 7
 			CyborgHeavy: 7
 			Steel: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			AntiAirBuilding: 6
 			Wood: 5
 			CyborgMedium: 5
@@ -5919,7 +5919,7 @@ DefuseKit:
 			ShipHeavy: 112
 			ShipLight: 101
 			CyborgHeroic: 99
-			Airborne: 98
+			FlyingInfantry: 98
 			CyborgMedium: 98
 			Concrete: 95
 			Fighter: 89
@@ -5955,7 +5955,7 @@ DefuseKit:
 			CyborgHeavy: 12
 			ShipLight: 12
 			Concrete: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			Steel: 10
 			CyborgMedium: 10
 			AntiAirBuilding: 10
@@ -6006,7 +6006,7 @@ DefuseKit:
 			ShipHeavy: 1
 			ShipSuperheavy: 1
 			AntiAirShip: 1
-			Airborne: 1
+			FlyingInfantry: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -6054,7 +6054,7 @@ DefuseKit:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6104,7 +6104,7 @@ DefuseKit:
 			ShipHeavy: 101
 			ShipSuperheavy: 102
 			AntiAirShip: 98
-			Airborne: 89
+			FlyingInfantry: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Medium_WallExcluded:
@@ -6152,7 +6152,7 @@ DefuseKit:
 			ShipHeavy: 99
 			ShipSuperheavy: 105
 			AntiAirShip: 101
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Medium_GroundShip:
@@ -6199,7 +6199,7 @@ DefuseKit:
 			ShipHeavy: 99
 			ShipSuperheavy: 105
 			AntiAirShip: 101
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Heavy:
@@ -6238,7 +6238,7 @@ DefuseKit:
 			AntiAirShip: 106
 			Bomber: 104
 			CyborgMedium: 101
-			Airborne: 99
+			FlyingInfantry: 99
 			CyborgHeroic: 99
 			AntiAirBuilding: 97
 			Plate: 95
@@ -6274,7 +6274,7 @@ DefuseKit:
 			Fighter: 17
 			CyborgHeavy: 17
 			Concrete: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			CyborgMedium: 16
 			Steel: 15
 			CyborgLight: 15
@@ -6318,7 +6318,7 @@ DefuseKit:
 			Steel: 120
 			Medium: 118
 			ShipHeavy: 112
-			Airborne: 110
+			FlyingInfantry: 110
 			AntiAirBuilding: 108
 			ShipMedium: 107
 			Heavy: 104
@@ -6358,7 +6358,7 @@ DefuseKit:
 			Superheavy: 9
 			Fighter: 8
 			Bomber: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgLight: 7
 			Helicopter: 6
 			CyborgMedium: 6
@@ -6409,7 +6409,7 @@ DefuseKit:
 			None: 106
 			Bomber: 104
 			CyborgMedium: 103
-			Airborne: 100
+			FlyingInfantry: 100
 			Concrete: 99
 			Superheavy: 91
 			Helicopter: 88
@@ -6443,7 +6443,7 @@ DefuseKit:
 			Fighter: 12
 			CyborgLight: 12
 			Bomber: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgMedium: 11
 			Helicopter: 10
 			Spaceship: 9
@@ -6493,7 +6493,7 @@ DefuseKit:
 			Fighter: 108
 			CyborgLight: 104
 			Bomber: 97
-			Airborne: 96
+			FlyingInfantry: 96
 			CyborgMedium: 96
 			Helicopter: 84
 			CyborgHeavy: 84
@@ -6525,7 +6525,7 @@ DefuseKit:
 			Heavy: 19
 			Superheavy: 18
 			Fighter: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgLight: 17
 			Bomber: 16
 			CyborgMedium: 16
@@ -6570,7 +6570,7 @@ DefuseKit:
 			AntiAirVehicle: 137
 			Light: 135
 			Scout: 129
-			Airborne: 108
+			FlyingInfantry: 108
 			ShipMedium: 108
 			ShipSuperheavy: 103
 			AntiAirShip: 103
@@ -6612,7 +6612,7 @@ DefuseKit:
 			ShipLight: 7
 			AntiAirShip: 7
 			Steel: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			CyborgHeavy: 6
 			AntiAirBuilding: 6
 			Wood: 5
@@ -6658,7 +6658,7 @@ DefuseKit:
 			ShipSuperheavy: 105
 			ShipHeavy: 103
 			AntiAirShip: 102
-			Airborne: 99
+			FlyingInfantry: 99
 			Concrete: 97
 			ShipLight: 93
 			Scout: 90
@@ -6692,7 +6692,7 @@ DefuseKit:
 			ShipMedium: 12
 			ShipHeavy: 12
 			Concrete: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeroic: 11
 			ShipLight: 11
 			AntiAirShip: 11
@@ -6745,7 +6745,7 @@ DefuseKit:
 			AntiAirBuilding: 99
 			AntiAirShip: 98
 			Plate: 97
-			Airborne: 96
+			FlyingInfantry: 96
 			CyborgMedium: 94
 			Steel: 84
 			CyborgHeroic: 81
@@ -6777,7 +6777,7 @@ DefuseKit:
 			ShipMedium: 17
 			ShipHeavy: 17
 			Concrete: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			ShipLight: 16
 			AntiAirShip: 16
 			Steel: 15
@@ -6820,7 +6820,7 @@ DefuseKit:
 			Helicopter: 166
 			Flak: 161
 			Spaceship: 151
-			Airborne: 139
+			FlyingInfantry: 139
 			Plate: 124
 			CyborgLight: 124
 			CyborgMedium: 105
@@ -6853,7 +6853,7 @@ DefuseKit:
 			Spaceship: 13
 			None: 12
 			Flak: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirInfantry: 11
 			Plate: 10
 			Heroic: 9
@@ -6905,7 +6905,7 @@ DefuseKit:
 			Spaceship: 162
 			Flak: 160
 			Plate: 132
-			Airborne: 129
+			FlyingInfantry: 129
 			CyborgLight: 126
 			CyborgMedium: 110
 			CyborgHeavy: 95
@@ -6937,7 +6937,7 @@ DefuseKit:
 			Spaceship: 17
 			None: 16
 			Flak: 15
-			Airborne: 15
+			FlyingInfantry: 15
 			AntiAirInfantry: 15
 			Plate: 14
 			Heroic: 13
@@ -6989,7 +6989,7 @@ DefuseKit:
 			Flak: 159
 			Spaceship: 146
 			Plate: 142
-			Airborne: 127
+			FlyingInfantry: 127
 			CyborgLight: 110
 			CyborgMedium: 108
 			CyborgHeavy: 99
@@ -7021,7 +7021,7 @@ DefuseKit:
 			Spaceship: 22
 			None: 21
 			Flak: 20
-			Airborne: 20
+			FlyingInfantry: 20
 			AntiAirInfantry: 20
 			Plate: 19
 			Heroic: 18
@@ -7087,7 +7087,7 @@ DefuseKit:
 			Plate: 107
 			CyborgMedium: 102
 			Flak: 93
-			Airborne: 90
+			FlyingInfantry: 90
 			CyborgLight: 90
 			AntiAirInfantry: 84
 			CyborgHeroic: 81
@@ -7125,7 +7125,7 @@ DefuseKit:
 			Wood: 5
 			AntiAirInfantry: 5
 			Light: 4
-			Airborne: 4
+			FlyingInfantry: 4
 			ShipLight: 4
 			None: 3
 			CyborgLight: 3
@@ -7153,7 +7153,7 @@ DefuseKit:
 			CyborgMedium: 25
 			Medium: 24
 			Plate: 21
-			Airborne: 21
+			FlyingInfantry: 21
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
@@ -7215,7 +7215,7 @@ DefuseKit:
 			Light: 106
 			ShipLight: 95
 			Wood: 85
-			Airborne: 82
+			FlyingInfantry: 82
 			CyborgHeroic: 75
 			AntiAirInfantry: 69
 			CyborgLight: 63
@@ -7251,7 +7251,7 @@ DefuseKit:
 			Bomber: 10
 			AntiAirVehicle: 10
 			Wood: 9
-			Airborne: 9
+			FlyingInfantry: 9
 			AntiAirInfantry: 9
 			Light: 8
 			ShipLight: 8
@@ -7281,7 +7281,7 @@ DefuseKit:
 			CyborgMedium: 25
 			Medium: 24
 			Plate: 21
-			Airborne: 21
+			FlyingInfantry: 21
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
@@ -7341,7 +7341,7 @@ DefuseKit:
 			AntiAirVehicle: 94
 			Bomber: 92
 			CyborgHeroic: 88
-			Airborne: 87
+			FlyingInfantry: 87
 			AntiAirInfantry: 84
 			Light: 81
 			ShipLight: 77
@@ -7379,7 +7379,7 @@ DefuseKit:
 			Bomber: 15
 			AntiAirVehicle: 15
 			Wood: 14
-			Airborne: 14
+			FlyingInfantry: 14
 			AntiAirInfantry: 14
 			Light: 13
 			ShipLight: 13
@@ -7409,7 +7409,7 @@ DefuseKit:
 			CyborgMedium: 25
 			Medium: 24
 			Plate: 21
-			Airborne: 21
+			FlyingInfantry: 21
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
@@ -7464,7 +7464,7 @@ DefuseKit:
 			CyborgMedium: 119
 			Steel: 118
 			Medium: 115
-			Airborne: 112
+			FlyingInfantry: 112
 			Fighter: 107
 			ShipHeavy: 100
 			AntiAirBuilding: 98
@@ -7505,7 +7505,7 @@ DefuseKit:
 			Concrete: 8
 			CyborgHeavy: 8
 			Heavy: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			ShipSuperheavy: 7
 			Heroic: 6
 			Superheavy: 5
@@ -7553,7 +7553,7 @@ DefuseKit:
 			ShipMedium: 113
 			CyborgHeavy: 108
 			AntiAirBuilding: 104
-			Airborne: 103
+			FlyingInfantry: 103
 			Plate: 99
 			ShipSuperheavy: 98
 			Concrete: 94
@@ -7587,7 +7587,7 @@ DefuseKit:
 			ShipMedium: 13
 			ShipHeavy: 13
 			Concrete: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			ShipSuperheavy: 12
 			Heavy: 11
@@ -7635,7 +7635,7 @@ DefuseKit:
 			CyborgHeavy: 105
 			Medium: 104
 			ShipHeavy: 104
-			Airborne: 103
+			FlyingInfantry: 103
 			ShipSuperheavy: 103
 			Heavy: 102
 			Superheavy: 101
@@ -7667,7 +7667,7 @@ DefuseKit:
 			AntiAirShip: 20
 			Medium: 19
 			Plate: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			AntiAirBuilding: 18
 			ShipMedium: 18
 			ShipHeavy: 18
@@ -7726,7 +7726,7 @@ DefuseKit:
 			CyborgLight: 101
 			AntiAirInfantry: 98
 			Wood: 96
-			Airborne: 93
+			FlyingInfantry: 93
 			None: 89
 			Heroic: 77
 			Spaceship: 75
@@ -7760,7 +7760,7 @@ DefuseKit:
 			ShipHeavy: 9
 			Scout: 8
 			Light: 8
-			Airborne: 8
+			FlyingInfantry: 8
 			CyborgLight: 8
 			AntiAirVehicle: 8
 			ShipLight: 8
@@ -7812,7 +7812,7 @@ DefuseKit:
 			AntiAirInfantry: 91
 			CyborgLight: 90
 			Spaceship: 89
-			Airborne: 84
+			FlyingInfantry: 84
 			Scout: 77
 			None: 73
 			Heroic: 70
@@ -7846,7 +7846,7 @@ DefuseKit:
 			ShipHeavy: 13
 			Scout: 12
 			Light: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgLight: 12
 			AntiAirVehicle: 12
 			ShipLight: 12
@@ -7894,7 +7894,7 @@ DefuseKit:
 			AntiAirShip: 105
 			AntiAirInfantry: 102
 			AntiAirVehicle: 98
-			Airborne: 94
+			FlyingInfantry: 94
 			Light: 90
 			Helicopter: 88
 			CyborgLight: 88
@@ -7932,7 +7932,7 @@ DefuseKit:
 			ShipHeavy: 18
 			Scout: 17
 			Light: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgLight: 17
 			AntiAirVehicle: 17
 			ShipLight: 17
@@ -7974,7 +7974,7 @@ DefuseKit:
 			Scout: 127
 			Plate: 117
 			CyborgMedium: 117
-			Airborne: 111
+			FlyingInfantry: 111
 			ShipHeavy: 111
 			AntiAirShip: 111
 			ShipSuperheavy: 106
@@ -8022,7 +8022,7 @@ DefuseKit:
 			CyborgHeroic: 7
 			AntiAirVehicle: 7
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -8062,7 +8062,7 @@ DefuseKit:
 			AntiAirShip: 119
 			ShipHeavy: 112
 			ShipSuperheavy: 104
-			Airborne: 103
+			FlyingInfantry: 103
 			Concrete: 102
 			Scout: 101
 			Light: 100
@@ -8105,7 +8105,7 @@ DefuseKit:
 			Light: 12
 			ShipSuperheavy: 12
 			Medium: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeroic: 11
 			AntiAirVehicle: 11
 			Heavy: 10
@@ -8151,7 +8151,7 @@ DefuseKit:
 			ShipHeavy: 113
 			ShipSuperheavy: 112
 			ShipMedium: 102
-			Airborne: 98
+			FlyingInfantry: 98
 			Scout: 91
 			Light: 86
 			AntiAirVehicle: 82
@@ -8190,7 +8190,7 @@ DefuseKit:
 			ShipHeavy: 18
 			ShipSuperheavy: 18
 			Light: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			Medium: 16
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
@@ -8241,7 +8241,7 @@ DefuseKit:
 			ShipHeavy: 113
 			ShipMedium: 112
 			AntiAirShip: 107
-			Airborne: 102
+			FlyingInfantry: 102
 			ShipLight: 102
 			Concrete: 82
 			AntiAirBuilding: 79
@@ -8280,7 +8280,7 @@ DefuseKit:
 			Concrete: 7
 			ShipLight: 7
 			Steel: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			AntiAirBuilding: 6
 			Wood: 5
 			Spaceship: 4
@@ -8329,7 +8329,7 @@ DefuseKit:
 			Scout: 98
 			AntiAirBuilding: 95
 			Heroic: 94
-			Airborne: 93
+			FlyingInfantry: 93
 			ShipLight: 92
 			Steel: 84
 			Spaceship: 65
@@ -8364,7 +8364,7 @@ DefuseKit:
 			Scout: 12
 			AntiAirShip: 12
 			Concrete: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			ShipLight: 11
 			Steel: 10
 			AntiAirBuilding: 10
@@ -8413,7 +8413,7 @@ DefuseKit:
 			AntiAirShip: 106
 			AntiAirBuilding: 102
 			None: 97
-			Airborne: 94
+			FlyingInfantry: 94
 			Scout: 86
 			Spaceship: 85
 			Steel: 84
@@ -8450,7 +8450,7 @@ DefuseKit:
 			Scout: 17
 			AntiAirShip: 17
 			Concrete: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			ShipLight: 16
 			Steel: 15
 			AntiAirBuilding: 15
@@ -8497,7 +8497,7 @@ DefuseKit:
 			Light: 116
 			AntiAirShip: 115
 			AntiAirBuilding: 112
-			Airborne: 109
+			FlyingInfantry: 109
 			AntiAirVehicle: 106
 			ShipHeavy: 101
 			CyborgHeavy: 99
@@ -8543,7 +8543,7 @@ DefuseKit:
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -8585,7 +8585,7 @@ DefuseKit:
 			Light: 116
 			AntiAirShip: 115
 			AntiAirBuilding: 112
-			Airborne: 109
+			FlyingInfantry: 109
 			AntiAirVehicle: 106
 			ShipHeavy: 101
 			CyborgHeavy: 99
@@ -8631,7 +8631,7 @@ DefuseKit:
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -8675,7 +8675,7 @@ DefuseKit:
 			AntiAirBuilding: 112
 			CyborgHeavy: 108
 			AntiAirVehicle: 106
-			Airborne: 105
+			FlyingInfantry: 105
 			ShipHeavy: 105
 			Concrete: 103
 			ShipMedium: 101
@@ -8717,7 +8717,7 @@ DefuseKit:
 			ShipHeavy: 12
 			ShipSuperheavy: 12
 			Medium: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirVehicle: 11
 			Heavy: 10
 			Superheavy: 9
@@ -8765,7 +8765,7 @@ DefuseKit:
 			CyborgHeavy: 110
 			ShipSuperheavy: 108
 			AntiAirBuilding: 107
-			Airborne: 105
+			FlyingInfantry: 105
 			Heavy: 100
 			ShipMedium: 99
 			Superheavy: 90
@@ -8808,7 +8808,7 @@ DefuseKit:
 			ShipSuperheavy: 9
 			AntiAirShip: 9
 			Scout: 8
-			Airborne: 6
+			FlyingInfantry: 6
 			Fighter: 2
 			Bomber: 2
 			Helicopter: 2
@@ -8852,7 +8852,7 @@ DefuseKit:
 			ShipHeavy: 109
 			ShipSuperheavy: 107
 			AntiAirBuilding: 104
-			Airborne: 102
+			FlyingInfantry: 102
 			ShipMedium: 101
 			Heavy: 99
 			Superheavy: 94
@@ -8895,7 +8895,7 @@ DefuseKit:
 			ShipSuperheavy: 13
 			AntiAirShip: 13
 			Scout: 12
-			Airborne: 10
+			FlyingInfantry: 10
 			Fighter: 6
 			Bomber: 6
 			Helicopter: 6
@@ -8940,7 +8940,7 @@ DefuseKit:
 			ShipMedium: 110
 			ShipHeavy: 110
 			Medium: 105
-			Airborne: 105
+			FlyingInfantry: 105
 			ShipSuperheavy: 105
 			Heroic: 97
 			Heavy: 94
@@ -8982,7 +8982,7 @@ DefuseKit:
 			ShipSuperheavy: 18
 			AntiAirShip: 18
 			Scout: 17
-			Airborne: 16
+			FlyingInfantry: 16
 			Fighter: 11
 			Bomber: 11
 			Helicopter: 11
@@ -9023,7 +9023,7 @@ DefuseKit:
 			Concrete: 115
 			ShipHeavy: 111
 			Plate: 109
-			Airborne: 108
+			FlyingInfantry: 108
 			Light: 107
 			ShipSuperheavy: 104
 			ShipMedium: 100
@@ -9067,7 +9067,7 @@ DefuseKit:
 			AntiAirVehicle: 8
 			ShipSuperheavy: 8
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			CyborgHeroic: 6
 			Superheavy: 5
 			Fighter: 4
@@ -9114,7 +9114,7 @@ DefuseKit:
 			AntiAirVehicle: 103
 			ShipSuperheavy: 102
 			Medium: 101
-			Airborne: 101
+			FlyingInfantry: 101
 			CyborgHeavy: 100
 			Heavy: 86
 			Fighter: 74
@@ -9152,7 +9152,7 @@ DefuseKit:
 			CyborgHeavy: 12
 			AntiAirVehicle: 12
 			ShipSuperheavy: 12
-			Airborne: 11
+			FlyingInfantry: 11
 			Heavy: 10
 			CyborgHeroic: 10
 			Superheavy: 9
@@ -9197,7 +9197,7 @@ DefuseKit:
 			AntiAirShip: 122
 			ShipMedium: 115
 			CyborgHeavy: 113
-			Airborne: 97
+			FlyingInfantry: 97
 			Scout: 94
 			Light: 88
 			Medium: 87
@@ -9236,7 +9236,7 @@ DefuseKit:
 			ShipSuperheavy: 18
 			Heroic: 17
 			Medium: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirVehicle: 17
 			Heavy: 15
@@ -9288,7 +9288,7 @@ DefuseKit:
 			ShipLight: 107
 			AntiAirInfantry: 106
 			AntiAirBuilding: 102
-			Airborne: 99
+			FlyingInfantry: 99
 			None: 98
 			Steel: 96
 			Wood: 84
@@ -9325,7 +9325,7 @@ DefuseKit:
 			Scout: 7
 			Steel: 7
 			Spaceship: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgLight: 7
 			AntiAirInfantry: 7
 			ShipLight: 7
@@ -9374,7 +9374,7 @@ DefuseKit:
 			ShipLight: 101
 			Steel: 100
 			CyborgLight: 98
-			Airborne: 93
+			FlyingInfantry: 93
 			AntiAirInfantry: 91
 			Spaceship: 90
 			Helicopter: 87
@@ -9412,7 +9412,7 @@ DefuseKit:
 			Scout: 11
 			Steel: 11
 			Spaceship: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgLight: 11
 			AntiAirInfantry: 11
 			ShipLight: 11
@@ -9462,7 +9462,7 @@ DefuseKit:
 			Steel: 98
 			CyborgLight: 95
 			ShipLight: 93
-			Airborne: 90
+			FlyingInfantry: 90
 			AntiAirInfantry: 90
 			Helicopter: 86
 			Scout: 84
@@ -9499,7 +9499,7 @@ DefuseKit:
 			Scout: 16
 			Steel: 16
 			Spaceship: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			CyborgLight: 16
 			AntiAirInfantry: 16
 			ShipLight: 16
@@ -9554,7 +9554,7 @@ DefuseKit:
 			Steel: 108
 			ShipLight: 103
 			Heroic: 97
-			Airborne: 95
+			FlyingInfantry: 95
 			Wood: 91
 			Spaceship: 55
 			Helicopter: 54
@@ -9592,7 +9592,7 @@ DefuseKit:
 			AntiAirShip: 8
 			Scout: 7
 			Wood: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			Spaceship: 5
 			Helicopter: 4
 			Bomber: 3
@@ -9640,7 +9640,7 @@ DefuseKit:
 			Steel: 105
 			ShipLight: 103
 			Wood: 91
-			Airborne: 87
+			FlyingInfantry: 87
 			Heroic: 81
 			Scout: 81
 			Spaceship: 71
@@ -9679,7 +9679,7 @@ DefuseKit:
 			AntiAirShip: 12
 			Scout: 11
 			Wood: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			Spaceship: 9
 			Helicopter: 8
 			Bomber: 7
@@ -9727,7 +9727,7 @@ DefuseKit:
 			None: 97
 			Spaceship: 92
 			ShipLight: 89
-			Airborne: 87
+			FlyingInfantry: 87
 			Scout: 78
 			Wood: 76
 			Heroic: 68
@@ -9766,7 +9766,7 @@ DefuseKit:
 			AntiAirShip: 17
 			Scout: 16
 			Wood: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			Spaceship: 14
 			Helicopter: 13
 			Bomber: 12
@@ -9810,7 +9810,7 @@ DefuseKit:
 			CyborgHeavy: 108
 			AntiAirShip: 107
 			Fighter: 100
-			Airborne: 98
+			FlyingInfantry: 98
 			AntiAirBuilding: 98
 			ShipLight: 93
 			CyborgMedium: 92
@@ -9848,7 +9848,7 @@ DefuseKit:
 			CyborgHeroic: 8
 			AntiAirBuilding: 8
 			Fighter: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgMedium: 7
 			CyborgHeavy: 7
 			Heroic: 6
@@ -9893,7 +9893,7 @@ DefuseKit:
 			ShipHeavy: 104
 			AntiAirShip: 104
 			Plate: 97
-			Airborne: 97
+			FlyingInfantry: 97
 			Scout: 93
 			CyborgMedium: 90
 			AntiAirBuilding: 90
@@ -9928,7 +9928,7 @@ DefuseKit:
 			Steel: 12
 			Concrete: 12
 			Bomber: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			CyborgHeroic: 12
 			AntiAirBuilding: 12
@@ -9979,7 +9979,7 @@ DefuseKit:
 			CyborgHeroic: 97
 			Steel: 96
 			Bomber: 92
-			Airborne: 92
+			FlyingInfantry: 92
 			ShipLight: 91
 			Scout: 87
 			CyborgLight: 82
@@ -10011,7 +10011,7 @@ DefuseKit:
 			Steel: 17
 			Concrete: 17
 			Bomber: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			CyborgHeroic: 17
 			AntiAirBuilding: 17
@@ -10056,7 +10056,7 @@ DefuseKit:
 			Light: 126
 			AntiAirShip: 122
 			AntiAirBuilding: 119
-			Airborne: 112
+			FlyingInfantry: 112
 			ShipHeavy: 111
 			CyborgMedium: 110
 			AntiAirVehicle: 109
@@ -10102,7 +10102,7 @@ DefuseKit:
 			CyborgMedium: 8
 			Plate: 7
 			Superheavy: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgHeavy: 7
 			Fighter: 6
 			CyborgHeroic: 6
@@ -10148,7 +10148,7 @@ DefuseKit:
 			ShipHeavy: 116
 			ShipMedium: 106
 			ShipSuperheavy: 104
-			Airborne: 103
+			FlyingInfantry: 103
 			Concrete: 96
 			Heavy: 92
 			Fighter: 90
@@ -10185,7 +10185,7 @@ DefuseKit:
 			AntiAirInfantry: 13
 			Flak: 12
 			Heavy: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgMedium: 12
 			Plate: 11
 			Superheavy: 11
@@ -10236,7 +10236,7 @@ DefuseKit:
 			Light: 105
 			CyborgHeavy: 104
 			AntiAirVehicle: 98
-			Airborne: 96
+			FlyingInfantry: 96
 			Medium: 92
 			Heavy: 91
 			Superheavy: 89
@@ -10271,7 +10271,7 @@ DefuseKit:
 			AntiAirInfantry: 18
 			Flak: 17
 			Heavy: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgMedium: 17
 			Plate: 16
 			Superheavy: 16
@@ -10318,7 +10318,7 @@ DefuseKit:
 			CyborgLight: 106
 			ShipHeavy: 106
 			AntiAirShip: 106
-			Airborne: 104
+			FlyingInfantry: 104
 			Spaceship: 100
 			ShipLight: 99
 			Plate: 94
@@ -10357,7 +10357,7 @@ DefuseKit:
 			AntiAirShip: 8
 			Concrete: 7
 			Spaceship: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgLight: 7
 			ShipLight: 7
 			Flak: 6
@@ -10406,7 +10406,7 @@ DefuseKit:
 			AntiAirShip: 106
 			CyborgLight: 101
 			Spaceship: 99
-			Airborne: 98
+			FlyingInfantry: 98
 			Helicopter: 96
 			Concrete: 95
 			ShipLight: 92
@@ -10445,7 +10445,7 @@ DefuseKit:
 			ShipLight: 12
 			Concrete: 11
 			Spaceship: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			Flak: 10
 			Steel: 10
 			Helicopter: 10
@@ -10492,7 +10492,7 @@ DefuseKit:
 			Concrete: 111
 			Flak: 104
 			AntiAirShip: 104
-			Airborne: 98
+			FlyingInfantry: 98
 			Scout: 97
 			AntiAirBuilding: 94
 			CyborgLight: 93
@@ -10531,7 +10531,7 @@ DefuseKit:
 			ShipLight: 17
 			Concrete: 16
 			Spaceship: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			Flak: 15
 			Steel: 15
 			Helicopter: 15
@@ -10583,7 +10583,7 @@ DefuseKit:
 			Concrete: 103
 			ShipLight: 102
 			None: 101
-			Airborne: 99
+			FlyingInfantry: 99
 			AntiAirBuilding: 95
 			Heroic: 88
 			Steel: 88
@@ -10623,7 +10623,7 @@ DefuseKit:
 			None: 7
 			Wood: 7
 			AntiAirInfantry: 7
-			Airborne: 6
+			FlyingInfantry: 6
 			Spaceship: 4
 			Helicopter: 3
 			Bomber: 2
@@ -10670,7 +10670,7 @@ DefuseKit:
 			ShipLight: 106
 			Steel: 100
 			AntiAirInfantry: 96
-			Airborne: 89
+			FlyingInfantry: 89
 			None: 87
 			Wood: 84
 			Heroic: 83
@@ -10708,7 +10708,7 @@ DefuseKit:
 			AntiAirBuilding: 12
 			None: 11
 			Wood: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirInfantry: 11
 			Spaceship: 8
 			Helicopter: 7
@@ -10755,7 +10755,7 @@ DefuseKit:
 			Steel: 98
 			CyborgLight: 98
 			Spaceship: 97
-			Airborne: 91
+			FlyingInfantry: 91
 			Scout: 89
 			ShipLight: 89
 			None: 84
@@ -10794,7 +10794,7 @@ DefuseKit:
 			AntiAirBuilding: 17
 			None: 16
 			Wood: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			AntiAirInfantry: 16
 			Spaceship: 13
 			Helicopter: 12
@@ -10841,7 +10841,7 @@ DefuseKit:
 			ShipSuperheavy: 108
 			ShipHeavy: 107
 			AntiAirShip: 105
-			Airborne: 104
+			FlyingInfantry: 104
 			ShipLight: 103
 			Concrete: 87
 			AntiAirBuilding: 86
@@ -10874,7 +10874,7 @@ DefuseKit:
 			Light: 35
 			ShipHeavy: 34
 			Scout: 31
-			Airborne: 30
+			FlyingInfantry: 30
 			ShipMedium: 30
 			AntiAirShip: 27
 			Steel: 26
@@ -10928,7 +10928,7 @@ DefuseKit:
 			AntiAirBuilding: 98
 			Heroic: 96
 			Scout: 96
-			Airborne: 96
+			FlyingInfantry: 96
 			ShipLight: 93
 			Steel: 87
 			Wood: 68
@@ -10960,7 +10960,7 @@ DefuseKit:
 			ShipHeavy: 45
 			Scout: 41
 			ShipMedium: 40
-			Airborne: 39
+			FlyingInfantry: 39
 			AntiAirShip: 37
 			Steel: 35
 			ShipLight: 34
@@ -11011,7 +11011,7 @@ DefuseKit:
 			Light: 112
 			AntiAirShip: 102
 			AntiAirBuilding: 101
-			Airborne: 96
+			FlyingInfantry: 96
 			Heroic: 93
 			Scout: 93
 			Steel: 90
@@ -11044,7 +11044,7 @@ DefuseKit:
 			Light: 59
 			ShipHeavy: 57
 			Scout: 51
-			Airborne: 49
+			FlyingInfantry: 49
 			ShipMedium: 49
 			AntiAirShip: 45
 			Steel: 44
@@ -11095,7 +11095,7 @@ DefuseKit:
 			Scout: 105
 			CyborgHeroic: 104
 			AntiAirShip: 102
-			Airborne: 99
+			FlyingInfantry: 99
 			ShipLight: 97
 			Concrete: 96
 			AntiAirBuilding: 94
@@ -11130,7 +11130,7 @@ DefuseKit:
 			ShipHeavy: 69
 			Scout: 62
 			ShipMedium: 60
-			Airborne: 59
+			FlyingInfantry: 59
 			AntiAirShip: 55
 			Steel: 53
 			ShipLight: 51
@@ -11176,7 +11176,7 @@ DefuseKit:
 			AntiAirShip: 124
 			ShipHeavy: 118
 			CyborgMedium: 116
-			Airborne: 111
+			FlyingInfantry: 111
 			AntiAirVehicle: 111
 			ShipSuperheavy: 106
 			Concrete: 99
@@ -11223,7 +11223,7 @@ DefuseKit:
 			Heroic: 7
 			Superheavy: 7
 			CyborgHeroic: 7
-			Airborne: 6
+			FlyingInfantry: 6
 			Fighter: 4
 			Bomber: 3
 			Helicopter: 2
@@ -11267,7 +11267,7 @@ DefuseKit:
 			ShipMedium: 106
 			ShipSuperheavy: 105
 			Plate: 104
-			Airborne: 103
+			FlyingInfantry: 103
 			Concrete: 98
 			CyborgHeavy: 98
 			Heavy: 93
@@ -11308,7 +11308,7 @@ DefuseKit:
 			CyborgHeavy: 12
 			Heroic: 11
 			Superheavy: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeroic: 11
 			Fighter: 8
 			Bomber: 7
@@ -11352,7 +11352,7 @@ DefuseKit:
 			ShipSuperheavy: 119
 			CyborgHeavy: 114
 			Scout: 104
-			Airborne: 98
+			FlyingInfantry: 98
 			Light: 96
 			Medium: 95
 			AntiAirVehicle: 95
@@ -11394,7 +11394,7 @@ DefuseKit:
 			CyborgHeavy: 17
 			Heroic: 16
 			Superheavy: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			CyborgHeroic: 16
 			Fighter: 13
 			Bomber: 12
@@ -11428,7 +11428,7 @@ DefuseKit:
 			CyborgLight: 143
 			Plate: 134
 			CyborgMedium: 126
-			Airborne: 116
+			FlyingInfantry: 116
 			Scout: 115
 			CyborgHeavy: 109
 			Light: 102
@@ -11474,7 +11474,7 @@ DefuseKit:
 			Superheavy: 8
 			AntiAirShip: 8
 			Wood: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			ShipMedium: 7
 			ShipHeavy: 7
 			ShipSuperheavy: 7
@@ -11513,7 +11513,7 @@ DefuseKit:
 			CyborgLight: 141
 			CyborgMedium: 132
 			CyborgHeavy: 116
-			Airborne: 114
+			FlyingInfantry: 114
 			Scout: 105
 			Wood: 100
 			Light: 99
@@ -11556,7 +11556,7 @@ DefuseKit:
 			Heavy: 13
 			ShipLight: 13
 			Superheavy: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			AntiAirShip: 12
 			Wood: 11
 			ShipMedium: 11
@@ -11597,7 +11597,7 @@ DefuseKit:
 			CyborgLight: 137
 			CyborgMedium: 131
 			CyborgHeavy: 130
-			Airborne: 113
+			FlyingInfantry: 113
 			Scout: 101
 			Wood: 96
 			Heroic: 96
@@ -11638,7 +11638,7 @@ DefuseKit:
 			CyborgHeroic: 19
 			AntiAirVehicle: 19
 			Heavy: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			ShipLight: 18
 			Superheavy: 17
 			AntiAirShip: 17
@@ -11682,7 +11682,7 @@ DefuseKit:
 			CyborgLight: 136
 			Fighter: 135
 			CyborgMedium: 122
-			Airborne: 115
+			FlyingInfantry: 115
 			Bomber: 109
 			CyborgHeavy: 107
 			Scout: 99
@@ -11716,7 +11716,7 @@ DefuseKit:
 			Heroic: 13
 			Fighter: 12
 			Bomber: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgLight: 11
 			Helicopter: 10
 			Spaceship: 9
@@ -11765,7 +11765,7 @@ DefuseKit:
 			Plate: 148
 			CyborgLight: 134
 			CyborgMedium: 121
-			Airborne: 119
+			FlyingInfantry: 119
 			Fighter: 113
 			Bomber: 112
 			CyborgHeavy: 109
@@ -11800,7 +11800,7 @@ DefuseKit:
 			Heroic: 17
 			Fighter: 16
 			Bomber: 15
-			Airborne: 15
+			FlyingInfantry: 15
 			CyborgLight: 15
 			Helicopter: 14
 			CyborgMedium: 14
@@ -11849,7 +11849,7 @@ DefuseKit:
 			Plate: 167
 			CyborgLight: 133
 			CyborgMedium: 125
-			Airborne: 121
+			FlyingInfantry: 121
 			CyborgHeavy: 114
 			Fighter: 105
 			Bomber: 102
@@ -11884,7 +11884,7 @@ DefuseKit:
 			Heroic: 22
 			Fighter: 21
 			Bomber: 20
-			Airborne: 20
+			FlyingInfantry: 20
 			CyborgLight: 20
 			Helicopter: 19
 			CyborgMedium: 19
@@ -11944,7 +11944,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -11978,7 +11978,7 @@ DefuseKit:
 			Steel: 25
 			Superheavy: 25
 			Wood: 25
-			Airborne: 25
+			FlyingInfantry: 25
 			CyborgLight: 25
 			CyborgMedium: 25
 			CyborgHeavy: 25
@@ -12028,7 +12028,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -12062,7 +12062,7 @@ DefuseKit:
 			Steel: 40
 			Superheavy: 40
 			Wood: 40
-			Airborne: 40
+			FlyingInfantry: 40
 			CyborgLight: 40
 			CyborgMedium: 40
 			CyborgHeavy: 40
@@ -12112,7 +12112,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -12146,7 +12146,7 @@ DefuseKit:
 			Steel: 50
 			Superheavy: 50
 			Wood: 50
-			Airborne: 50
+			FlyingInfantry: 50
 			CyborgLight: 50
 			CyborgMedium: 50
 			CyborgHeavy: 50
@@ -12196,7 +12196,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -12230,7 +12230,7 @@ DefuseKit:
 			Steel: 65
 			Superheavy: 65
 			Wood: 65
-			Airborne: 65
+			FlyingInfantry: 65
 			CyborgLight: 65
 			CyborgMedium: 65
 			CyborgHeavy: 65
@@ -12280,7 +12280,7 @@ DefuseKit:
 			CyborgMedium: 110
 			ShipHeavy: 108
 			ShipMedium: 107
-			Airborne: 105
+			FlyingInfantry: 105
 			ShipSuperheavy: 103
 			Light: 97
 			CyborgHeavy: 90
@@ -12322,7 +12322,7 @@ DefuseKit:
 			CyborgHeroic: 7
 			AntiAirVehicle: 7
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -12366,7 +12366,7 @@ DefuseKit:
 			ShipSuperheavy: 102
 			CyborgHeavy: 99
 			Scout: 98
-			Airborne: 98
+			FlyingInfantry: 98
 			Light: 95
 			Medium: 94
 			AntiAirVehicle: 94
@@ -12403,7 +12403,7 @@ DefuseKit:
 			Light: 12
 			CyborgHeavy: 12
 			Medium: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeroic: 11
 			AntiAirVehicle: 11
 			Heavy: 10
@@ -12449,7 +12449,7 @@ DefuseKit:
 			CyborgMedium: 112
 			ShipMedium: 110
 			CyborgHeavy: 104
-			Airborne: 97
+			FlyingInfantry: 97
 			Scout: 90
 			Light: 85
 			Medium: 84
@@ -12487,7 +12487,7 @@ DefuseKit:
 			Light: 17
 			CyborgHeavy: 17
 			Medium: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
 			Heavy: 15
@@ -12532,7 +12532,7 @@ DefuseKit:
 			CyborgMedium: 123
 			Medium: 120
 			ShipHeavy: 107
-			Airborne: 105
+			FlyingInfantry: 105
 			Fighter: 102
 			AntiAirBuilding: 102
 			ShipMedium: 100
@@ -12572,7 +12572,7 @@ DefuseKit:
 			Concrete: 8
 			CyborgHeavy: 8
 			Heavy: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			ShipSuperheavy: 7
 			Heroic: 6
 			Superheavy: 5
@@ -12617,7 +12617,7 @@ DefuseKit:
 			Flak: 116
 			ShipHeavy: 115
 			Steel: 113
-			Airborne: 107
+			FlyingInfantry: 107
 			CyborgHeavy: 105
 			ShipMedium: 105
 			AntiAirBuilding: 102
@@ -12654,7 +12654,7 @@ DefuseKit:
 			ShipMedium: 13
 			ShipHeavy: 13
 			Concrete: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			ShipSuperheavy: 12
 			Heavy: 11
@@ -12708,7 +12708,7 @@ DefuseKit:
 			Superheavy: 106
 			Plate: 103
 			Concrete: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgHeroic: 86
 			Fighter: 70
 			Heroic: 69
@@ -12734,7 +12734,7 @@ DefuseKit:
 			AntiAirShip: 20
 			Medium: 19
 			Plate: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			AntiAirBuilding: 18
 			ShipMedium: 18
 			ShipHeavy: 18
@@ -12787,7 +12787,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -12823,7 +12823,7 @@ DefuseKit:
 			Steel: 5
 			Superheavy: 5
 			Wood: 5
-			Airborne: 5
+			FlyingInfantry: 5
 			CyborgLight: 5
 			CyborgMedium: 5
 			CyborgHeavy: 5
@@ -12879,7 +12879,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -12915,7 +12915,7 @@ DefuseKit:
 			Steel: 8
 			Superheavy: 8
 			Wood: 8
-			Airborne: 8
+			FlyingInfantry: 8
 			CyborgLight: 8
 			CyborgMedium: 8
 			CyborgHeavy: 8
@@ -12971,7 +12971,7 @@ DefuseKit:
 			Steel: 100
 			Superheavy: 100
 			Wood: 100
-			Airborne: 100
+			FlyingInfantry: 100
 			CyborgLight: 100
 			CyborgMedium: 100
 			CyborgHeavy: 100
@@ -13007,7 +13007,7 @@ DefuseKit:
 			Steel: 10
 			Superheavy: 10
 			Wood: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			CyborgLight: 10
 			CyborgMedium: 10
 			CyborgHeavy: 10
@@ -13066,7 +13066,7 @@ DefuseKit:
 			ShipLight: 100
 			Concrete: 99
 			Spaceship: 96
-			Airborne: 93
+			FlyingInfantry: 93
 			AntiAirBuilding: 93
 			Flak: 90
 			Helicopter: 88
@@ -13101,7 +13101,7 @@ DefuseKit:
 			ShipLight: 18
 			AntiAirShip: 18
 			None: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			AntiAirInfantry: 17
 			Concrete: 16
 			Steel: 15
@@ -13142,7 +13142,7 @@ DefuseKit:
 			CyborgMedium: 27
 			Scout: 25
 			CyborgLight: 22
-			Airborne: 14
+			FlyingInfantry: 14
 			None: 10
 			Flak: 10
 			Plate: 10
@@ -13197,7 +13197,7 @@ DefuseKit:
 			None: 101
 			Steel: 100
 			ShipLight: 98
-			Airborne: 95
+			FlyingInfantry: 95
 			Heroic: 82
 			Wood: 81
 			Spaceship: 70
@@ -13232,7 +13232,7 @@ DefuseKit:
 			Concrete: 7
 			ShipLight: 7
 			Steel: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			AntiAirBuilding: 6
 			Wood: 5
 			Spaceship: 4
@@ -13267,7 +13267,7 @@ DefuseKit:
 			ShipSuperheavy: 32
 			ShipHeavy: 27
 			Light: 25
-			Airborne: 25
+			FlyingInfantry: 25
 			ShipMedium: 22
 			AntiAirShip: 19
 			ShipLight: 16
@@ -13326,7 +13326,7 @@ DefuseKit:
 			Steel: 95
 			Heroic: 89
 			Wood: 89
-			Airborne: 86
+			FlyingInfantry: 86
 			Spaceship: 78
 			Helicopter: 58
 			Bomber: 54
@@ -13357,7 +13357,7 @@ DefuseKit:
 			Scout: 12
 			AntiAirShip: 12
 			Concrete: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			ShipLight: 11
 			Steel: 10
 			AntiAirBuilding: 10
@@ -13394,7 +13394,7 @@ DefuseKit:
 			ShipSuperheavy: 32
 			ShipHeavy: 27
 			Light: 25
-			Airborne: 25
+			FlyingInfantry: 25
 			ShipMedium: 22
 			AntiAirShip: 19
 			ShipLight: 16
@@ -13452,7 +13452,7 @@ DefuseKit:
 			ShipLight: 96
 			None: 93
 			Scout: 91
-			Airborne: 87
+			FlyingInfantry: 87
 			Wood: 83
 			Heroic: 80
 			Helicopter: 57
@@ -13484,7 +13484,7 @@ DefuseKit:
 			Scout: 17
 			AntiAirShip: 17
 			Concrete: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			ShipLight: 16
 			Steel: 15
 			AntiAirBuilding: 15
@@ -13521,7 +13521,7 @@ DefuseKit:
 			ShipSuperheavy: 32
 			ShipHeavy: 27
 			Light: 25
-			Airborne: 25
+			FlyingInfantry: 25
 			ShipMedium: 22
 			AntiAirShip: 19
 			ShipLight: 16
@@ -13580,7 +13580,7 @@ DefuseKit:
 			Steel: 103
 			Wood: 101
 			CyborgHeroic: 100
-			Airborne: 95
+			FlyingInfantry: 95
 			Spaceship: 80
 			Heroic: 73
 			Helicopter: 60
@@ -13612,7 +13612,7 @@ DefuseKit:
 			Scout: 22
 			AntiAirShip: 22
 			Concrete: 21
-			Airborne: 21
+			FlyingInfantry: 21
 			ShipLight: 21
 			Steel: 20
 			AntiAirBuilding: 20
@@ -13653,7 +13653,7 @@ DefuseKit:
 			ShipMedium: 87
 			Steel: 75
 			AntiAirShip: 70
-			Airborne: 63
+			FlyingInfantry: 63
 			AntiAirBuilding: 61
 			ShipLight: 56
 			Concrete: 50
@@ -13718,7 +13718,7 @@ DefuseKit:
 			ShipHeavy: 92
 			ShipSuperheavy: 94
 			AntiAirShip: 90
-			Airborne: 69
+			FlyingInfantry: 69
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -13759,7 +13759,7 @@ DefuseKit:
 			ShipHeavy: 92
 			ShipSuperheavy: 94
 			AntiAirShip: 90
-			Airborne: 69
+			FlyingInfantry: 69
 		UpdatesUnitStatistics: false
 
 ^Warhead_Sniper_Light:
@@ -13802,7 +13802,7 @@ DefuseKit:
 			ShipHeavy: 48
 			ShipSuperheavy: 46
 			AntiAirShip: 52
-			Airborne: 49
+			FlyingInfantry: 49
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -13839,7 +13839,7 @@ DefuseKit:
 			ShipHeavy: 21
 			ShipSuperheavy: 20
 			AntiAirShip: 22
-			Airborne: 22
+			FlyingInfantry: 22
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
@@ -13878,7 +13878,7 @@ DefuseKit:
 			ShipHeavy: 48
 			ShipSuperheavy: 46
 			AntiAirShip: 52
-			Airborne: 49
+			FlyingInfantry: 49
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 
 ####################################################################
@@ -16744,7 +16744,7 @@ GLTerroristExplosive:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -16778,7 +16778,7 @@ GLTerroristExplosive:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -16853,7 +16853,7 @@ GLTerroristExplosive2:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -16887,7 +16887,7 @@ GLTerroristExplosive2:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -17695,7 +17695,7 @@ GLBombTruckToxExplosive:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -17729,7 +17729,7 @@ GLBombTruckToxExplosive:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -17808,7 +17808,7 @@ GLBombTruckToxExplosive2:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -17842,7 +17842,7 @@ GLBombTruckToxExplosive2:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -17941,7 +17941,7 @@ GLASCUD:
 			ShipHeavy: 115
 			ShipSuperheavy: 114
 			AntiAirShip: 121
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -17975,7 +17975,7 @@ GLASCUD:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 17
+			FlyingInfantry: 17
 	-Warhead@Flame_Heavy:
 
 GLASCUDPOWER:
@@ -18056,7 +18056,7 @@ GLASCUDPOWER:
 			ShipHeavy: 115
 			ShipSuperheavy: 114
 			AntiAirShip: 121
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18090,7 +18090,7 @@ GLASCUDPOWER:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 17
+			FlyingInfantry: 17
 	MinRange: 4096
 	Report: vscuweaa.wav
 	-Warhead@Flame_Heavy:
@@ -18152,7 +18152,7 @@ GLASCUDPOWER2:
 			ShipHeavy: 115
 			ShipSuperheavy: 114
 			AntiAirShip: 121
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18186,7 +18186,7 @@ GLASCUDPOWER2:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 17
+			FlyingInfantry: 17
 	MinRange: 4096
 	Report: vscuweaa.wav
 	Warhead@1Dam: SpreadDamage
@@ -18276,7 +18276,7 @@ GLASCUDPOWER3:
 			ShipHeavy: 115
 			ShipSuperheavy: 114
 			AntiAirShip: 121
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18310,7 +18310,7 @@ GLASCUDPOWER3:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 17
+			FlyingInfantry: 17
 	MinRange: 4096
 	Report: vscuweaa.wav
 	Warhead@1Dam: SpreadDamage
@@ -18743,7 +18743,7 @@ GLToxinBombBlue:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18777,7 +18777,7 @@ GLToxinBombBlue:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Flame_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@Effect: CreateEffect
@@ -18868,7 +18868,7 @@ GLToxinBombPurple:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18902,7 +18902,7 @@ GLToxinBombPurple:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Warhead@Flame_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@Effect: CreateEffect
@@ -19147,7 +19147,7 @@ Short8Inch:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9999
 		PercentageSpread: 50
@@ -19181,7 +19181,7 @@ Short8Inch:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 	Projectile: Bullet
 		Speed: 250
 		LaunchAngle: 100
@@ -20148,7 +20148,7 @@ generic_bullet_casing:
 			AntiAirBuilding: 119
 			AntiAirShip: 119
 			Light: 117
-			Airborne: 112
+			FlyingInfantry: 112
 			ShipHeavy: 107
 			AntiAirVehicle: 105
 			Plate: 103
@@ -20193,7 +20193,7 @@ generic_bullet_casing:
 			ShipMedium: 8
 			ShipHeavy: 8
 			ShipSuperheavy: 8
-			Airborne: 7
+			FlyingInfantry: 7
 			Heavy: 6
 			CyborgHeroic: 6
 			Superheavy: 5
@@ -20238,7 +20238,7 @@ generic_bullet_casing:
 			Light: 113
 			AntiAirVehicle: 112
 			Medium: 111
-			Airborne: 105
+			FlyingInfantry: 105
 			ShipMedium: 104
 			ShipSuperheavy: 104
 			CyborgHeavy: 102
@@ -20276,7 +20276,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			Heroic: 12
 			Medium: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			ShipMedium: 12
 			ShipSuperheavy: 12
@@ -20325,7 +20325,7 @@ generic_bullet_casing:
 			ShipMedium: 108
 			Scout: 107
 			ShipSuperheavy: 107
-			Airborne: 100
+			FlyingInfantry: 100
 			Light: 90
 			AntiAirVehicle: 89
 			Medium: 88
@@ -20362,7 +20362,7 @@ generic_bullet_casing:
 			ShipHeavy: 18
 			Heroic: 17
 			Medium: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			ShipMedium: 17
 			ShipSuperheavy: 17
@@ -20413,7 +20413,7 @@ generic_bullet_casing:
 			Superheavy: 103
 			None: 102
 			CyborgMedium: 102
-			Airborne: 95
+			FlyingInfantry: 95
 			AntiAirInfantry: 90
 			CyborgHeavy: 85
 			Fighter: 83
@@ -20448,7 +20448,7 @@ generic_bullet_casing:
 			CyborgMedium: 16
 			CyborgHeavy: 16
 			CyborgHeroic: 16
-			Airborne: 15
+			FlyingInfantry: 15
 			None: 13
 			Flak: 13
 			Plate: 13
@@ -20495,7 +20495,7 @@ generic_bullet_casing:
 			Heavy: 120
 			CyborgLight: 117
 			Superheavy: 103
-			Airborne: 97
+			FlyingInfantry: 97
 			CyborgMedium: 95
 			Fighter: 92
 			None: 86
@@ -20532,7 +20532,7 @@ generic_bullet_casing:
 			CyborgMedium: 7
 			CyborgHeavy: 7
 			CyborgHeroic: 7
-			Airborne: 6
+			FlyingInfantry: 6
 			None: 4
 			Flak: 4
 			Plate: 4
@@ -20581,7 +20581,7 @@ generic_bullet_casing:
 			None: 106
 			Superheavy: 104
 			Fighter: 97
-			Airborne: 95
+			FlyingInfantry: 95
 			CyborgMedium: 95
 			CyborgHeavy: 89
 			AntiAirInfantry: 84
@@ -20616,7 +20616,7 @@ generic_bullet_casing:
 			CyborgMedium: 11
 			CyborgHeavy: 11
 			CyborgHeroic: 11
-			Airborne: 10
+			FlyingInfantry: 10
 			None: 8
 			Flak: 8
 			Plate: 8
@@ -20668,7 +20668,7 @@ generic_bullet_casing:
 			CyborgMedium: 94
 			CyborgHeroic: 92
 			Plate: 91
-			Airborne: 90
+			FlyingInfantry: 90
 			Wood: 85
 			CyborgLight: 71
 			Fighter: 68
@@ -20702,7 +20702,7 @@ generic_bullet_casing:
 			Bomber: 16
 			CyborgHeavy: 16
 			Fighter: 15
-			Airborne: 15
+			FlyingInfantry: 15
 			CyborgMedium: 15
 			CyborgLight: 14
 			Heroic: 13
@@ -20750,7 +20750,7 @@ generic_bullet_casing:
 			Fighter: 117
 			Steel: 115
 			Wood: 105
-			Airborne: 90
+			FlyingInfantry: 90
 			CyborgHeavy: 86
 			CyborgMedium: 82
 			CyborgHeroic: 76
@@ -20786,7 +20786,7 @@ generic_bullet_casing:
 			CyborgHeroic: 7
 			Fighter: 6
 			CyborgHeavy: 6
-			Airborne: 5
+			FlyingInfantry: 5
 			CyborgMedium: 5
 			Heroic: 4
 			Plate: 3
@@ -20836,7 +20836,7 @@ generic_bullet_casing:
 			CyborgHeroic: 92
 			CyborgMedium: 91
 			Wood: 90
-			Airborne: 90
+			FlyingInfantry: 90
 			Fighter: 78
 			CyborgLight: 76
 			Plate: 72
@@ -20870,7 +20870,7 @@ generic_bullet_casing:
 			Bomber: 11
 			CyborgHeavy: 11
 			Fighter: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			CyborgMedium: 10
 			CyborgLight: 9
 			Heroic: 8
@@ -20917,7 +20917,7 @@ generic_bullet_casing:
 			CyborgHeroic: 103
 			AntiAirBuilding: 102
 			Scout: 95
-			Airborne: 94
+			FlyingInfantry: 94
 			ShipLight: 89
 			Steel: 88
 			Bomber: 87
@@ -20955,7 +20955,7 @@ generic_bullet_casing:
 			ShipLight: 17
 			Plate: 16
 			Helicopter: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			AntiAirBuilding: 16
 			Steel: 15
 			Bomber: 15
@@ -21003,7 +21003,7 @@ generic_bullet_casing:
 			Bomber: 104
 			Fighter: 103
 			ShipLight: 103
-			Airborne: 102
+			FlyingInfantry: 102
 			CyborgHeroic: 98
 			CyborgLight: 92
 			Concrete: 81
@@ -21041,7 +21041,7 @@ generic_bullet_casing:
 			AntiAirShip: 8
 			Plate: 7
 			Helicopter: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			AntiAirBuilding: 7
 			ShipLight: 7
 			Steel: 6
@@ -21092,7 +21092,7 @@ generic_bullet_casing:
 			CyborgHeroic: 106
 			Plate: 105
 			ShipLight: 99
-			Airborne: 95
+			FlyingInfantry: 95
 			AntiAirBuilding: 92
 			CyborgLight: 89
 			Steel: 77
@@ -21129,7 +21129,7 @@ generic_bullet_casing:
 			ShipLight: 12
 			Plate: 11
 			Helicopter: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirBuilding: 11
 			Steel: 10
 			Bomber: 10
@@ -21178,7 +21178,7 @@ generic_bullet_casing:
 			AntiAirBuilding: 107
 			Scout: 101
 			Flak: 94
-			Airborne: 93
+			FlyingInfantry: 93
 			Steel: 92
 			ShipLight: 91
 			CyborgLight: 89
@@ -21214,7 +21214,7 @@ generic_bullet_casing:
 			ShipLight: 17
 			Concrete: 16
 			Spaceship: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			Flak: 15
 			Steel: 15
 			Helicopter: 15
@@ -21259,7 +21259,7 @@ generic_bullet_casing:
 			Helicopter: 113
 			AntiAirShip: 109
 			CyborgMedium: 105
-			Airborne: 101
+			FlyingInfantry: 101
 			Bomber: 99
 			CyborgHeroic: 99
 			ShipLight: 99
@@ -21297,7 +21297,7 @@ generic_bullet_casing:
 			AntiAirShip: 8
 			Concrete: 7
 			Spaceship: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgLight: 7
 			ShipLight: 7
 			Flak: 6
@@ -21350,7 +21350,7 @@ generic_bullet_casing:
 			ShipLight: 98
 			Bomber: 97
 			CyborgLight: 95
-			Airborne: 94
+			FlyingInfantry: 94
 			AntiAirBuilding: 92
 			Steel: 76
 			Flak: 74
@@ -21384,7 +21384,7 @@ generic_bullet_casing:
 			ShipLight: 12
 			Concrete: 11
 			Spaceship: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			Flak: 10
 			Steel: 10
 			Helicopter: 10
@@ -21437,7 +21437,7 @@ generic_bullet_casing:
 			Superheavy: 99
 			CyborgHeavy: 98
 			Plate: 96
-			Airborne: 96
+			FlyingInfantry: 96
 			Fighter: 84
 			Bomber: 75
 			CyborgHeroic: 73
@@ -21467,7 +21467,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 19
 			None: 18
 			Heavy: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgMedium: 17
 			AntiAirInfantry: 17
 			Flak: 16
@@ -21514,7 +21514,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 117
 			Flak: 113
 			ShipHeavy: 111
-			Airborne: 110
+			FlyingInfantry: 110
 			CyborgMedium: 107
 			Fighter: 103
 			Concrete: 102
@@ -21557,7 +21557,7 @@ generic_bullet_casing:
 			AntiAirInfantry: 8
 			Flak: 7
 			Superheavy: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgHeavy: 7
 			Plate: 6
 			Fighter: 6
@@ -21605,7 +21605,7 @@ generic_bullet_casing:
 			Flak: 111
 			Concrete: 108
 			ShipSuperheavy: 103
-			Airborne: 102
+			FlyingInfantry: 102
 			Heavy: 99
 			Fighter: 90
 			CyborgHeavy: 88
@@ -21643,7 +21643,7 @@ generic_bullet_casing:
 			AntiAirInfantry: 12
 			Flak: 11
 			Superheavy: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgHeavy: 11
 			Plate: 10
 			Fighter: 10
@@ -21682,7 +21682,7 @@ generic_bullet_casing:
 			Steel: 131
 			CyborgMedium: 121
 			AntiAirBuilding: 116
-			Airborne: 113
+			FlyingInfantry: 113
 			CyborgHeavy: 112
 			ShipLight: 112
 			Scout: 106
@@ -21721,7 +21721,7 @@ generic_bullet_casing:
 			CyborgMedium: 19
 			ShipLight: 19
 			Light: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirBuilding: 17
 			AntiAirShip: 17
@@ -21768,7 +21768,7 @@ generic_bullet_casing:
 			ShipLight: 131
 			Steel: 127
 			Plate: 125
-			Airborne: 116
+			FlyingInfantry: 116
 			CyborgMedium: 114
 			Fighter: 109
 			Light: 106
@@ -21811,7 +21811,7 @@ generic_bullet_casing:
 			AntiAirShip: 8
 			Concrete: 7
 			Fighter: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgHeavy: 7
 			AntiAirVehicle: 7
 			Medium: 6
@@ -21855,7 +21855,7 @@ generic_bullet_casing:
 			ShipLight: 126
 			CyborgMedium: 122
 			Scout: 111
-			Airborne: 111
+			FlyingInfantry: 111
 			Light: 106
 			AntiAirBuilding: 106
 			AntiAirShip: 105
@@ -21893,7 +21893,7 @@ generic_bullet_casing:
 			ShipLight: 14
 			CyborgMedium: 13
 			Light: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			AntiAirBuilding: 12
 			AntiAirShip: 12
@@ -21942,7 +21942,7 @@ generic_bullet_casing:
 			AntiAirBuilding: 119
 			CyborgMedium: 117
 			ShipLight: 112
-			Airborne: 109
+			FlyingInfantry: 109
 			CyborgHeavy: 107
 			AntiAirShip: 103
 			Scout: 102
@@ -21979,7 +21979,7 @@ generic_bullet_casing:
 			Concrete: 18
 			CyborgMedium: 18
 			Light: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirShip: 17
 			Fighter: 16
@@ -22025,7 +22025,7 @@ generic_bullet_casing:
 			Steel: 127
 			Plate: 126
 			AntiAirBuilding: 116
-			Airborne: 114
+			FlyingInfantry: 114
 			CyborgMedium: 110
 			AntiAirShip: 110
 			Fighter: 108
@@ -22065,7 +22065,7 @@ generic_bullet_casing:
 			Light: 8
 			AntiAirShip: 8
 			Fighter: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgHeavy: 7
 			AntiAirVehicle: 7
 			ShipMedium: 7
@@ -22111,7 +22111,7 @@ generic_bullet_casing:
 			CyborgMedium: 119
 			Concrete: 111
 			AntiAirShip: 111
-			Airborne: 109
+			FlyingInfantry: 109
 			Scout: 108
 			Light: 103
 			CyborgHeavy: 102
@@ -22147,7 +22147,7 @@ generic_bullet_casing:
 			Concrete: 13
 			CyborgMedium: 13
 			Light: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			AntiAirShip: 12
 			Fighter: 11
 			CyborgHeavy: 11
@@ -22191,7 +22191,7 @@ generic_bullet_casing:
 			CyborgMedium: 133
 			CyborgHeavy: 120
 			Scout: 111
-			Airborne: 110
+			FlyingInfantry: 110
 			Light: 107
 			AntiAirVehicle: 105
 			ShipLight: 105
@@ -22230,7 +22230,7 @@ generic_bullet_casing:
 			CyborgHeavy: 19
 			Light: 18
 			Medium: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			AntiAirVehicle: 18
 			Heavy: 17
 			Superheavy: 17
@@ -22278,7 +22278,7 @@ generic_bullet_casing:
 			Plate: 125
 			Light: 122
 			CyborgMedium: 120
-			Airborne: 118
+			FlyingInfantry: 118
 			Fighter: 114
 			AntiAirVehicle: 105
 			CyborgHeavy: 101
@@ -22318,7 +22318,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 9
 			Heavy: 8
 			Superheavy: 8
-			Airborne: 8
+			FlyingInfantry: 8
 			ShipLight: 8
 			Wood: 7
 			ShipMedium: 7
@@ -22366,7 +22366,7 @@ generic_bullet_casing:
 			ShipLight: 113
 			Medium: 112
 			Wood: 110
-			Airborne: 109
+			FlyingInfantry: 109
 			AntiAirShip: 103
 			Heavy: 98
 			ShipHeavy: 97
@@ -22403,7 +22403,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 13
 			Heavy: 12
 			Superheavy: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			ShipLight: 12
 			Wood: 11
 			ShipMedium: 11
@@ -22448,7 +22448,7 @@ generic_bullet_casing:
 			Steel: 115
 			AntiAirBuilding: 114
 			Concrete: 113
-			Airborne: 112
+			FlyingInfantry: 112
 			CyborgHeavy: 111
 			Scout: 107
 			ShipLight: 106
@@ -22486,7 +22486,7 @@ generic_bullet_casing:
 			CyborgMedium: 19
 			ShipLight: 19
 			Light: 18
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirVehicle: 17
 			AntiAirBuilding: 17
@@ -22533,7 +22533,7 @@ generic_bullet_casing:
 			ShipLight: 134
 			Plate: 122
 			Steel: 117
-			Airborne: 115
+			FlyingInfantry: 115
 			CyborgMedium: 114
 			Fighter: 112
 			Light: 111
@@ -22572,7 +22572,7 @@ generic_bullet_casing:
 			CyborgMedium: 10
 			ShipLight: 10
 			Light: 9
-			Airborne: 8
+			FlyingInfantry: 8
 			AntiAirVehicle: 8
 			AntiAirBuilding: 8
 			AntiAirShip: 8
@@ -22621,7 +22621,7 @@ generic_bullet_casing:
 			CyborgMedium: 123
 			Scout: 112
 			Light: 109
-			Airborne: 109
+			FlyingInfantry: 109
 			AntiAirShip: 108
 			AntiAirBuilding: 106
 			CyborgHeavy: 103
@@ -22658,7 +22658,7 @@ generic_bullet_casing:
 			CyborgMedium: 14
 			ShipLight: 14
 			Light: 13
-			Airborne: 12
+			FlyingInfantry: 12
 			AntiAirVehicle: 12
 			AntiAirBuilding: 12
 			AntiAirShip: 12
@@ -22702,7 +22702,7 @@ generic_bullet_casing:
 			Plate: 146
 			CyborgLight: 139
 			CyborgMedium: 128
-			Airborne: 114
+			FlyingInfantry: 114
 			CyborgHeavy: 113
 			Scout: 108
 			Wood: 98
@@ -22740,7 +22740,7 @@ generic_bullet_casing:
 			Scout: 19
 			CyborgLight: 19
 			Wood: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			CyborgMedium: 18
 			CyborgHeavy: 18
 			Light: 17
@@ -22791,7 +22791,7 @@ generic_bullet_casing:
 			ShipLight: 132
 			Light: 123
 			Fighter: 121
-			Airborne: 120
+			FlyingInfantry: 120
 			Plate: 118
 			CyborgMedium: 116
 			AntiAirVehicle: 103
@@ -22829,7 +22829,7 @@ generic_bullet_casing:
 			CyborgMedium: 9
 			Light: 8
 			Steel: 8
-			Airborne: 8
+			FlyingInfantry: 8
 			CyborgHeavy: 8
 			ShipLight: 8
 			Medium: 7
@@ -22879,7 +22879,7 @@ generic_bullet_casing:
 			ShipLight: 113
 			Scout: 112
 			Light: 111
-			Airborne: 110
+			FlyingInfantry: 110
 			AntiAirVehicle: 108
 			Medium: 106
 			AntiAirShip: 101
@@ -22912,7 +22912,7 @@ generic_bullet_casing:
 			Scout: 14
 			CyborgLight: 14
 			Wood: 13
-			Airborne: 13
+			FlyingInfantry: 13
 			CyborgMedium: 13
 			CyborgHeavy: 13
 			Light: 12
@@ -22975,7 +22975,7 @@ generic_bullet_casing:
 			Flak: 107
 			Concrete: 100
 			CyborgHeavy: 100
-			Airborne: 98
+			FlyingInfantry: 98
 			CyborgHeroic: 87
 			Plate: 85
 			Fighter: 76
@@ -23013,7 +23013,7 @@ generic_bullet_casing:
 			Plate: 17
 			Heroic: 17
 			None: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			AntiAirInfantry: 16
 			Spaceship: 14
 			Helicopter: 13
@@ -23057,7 +23057,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 109
 			ShipMedium: 108
 			AntiAirBuilding: 106
-			Airborne: 105
+			FlyingInfantry: 105
 			Flak: 97
 			Superheavy: 94
 			Fighter: 90
@@ -23099,7 +23099,7 @@ generic_bullet_casing:
 			Plate: 8
 			Heroic: 8
 			None: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			AntiAirInfantry: 7
 			Spaceship: 5
 			Helicopter: 4
@@ -23145,7 +23145,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 111
 			Superheavy: 110
 			Concrete: 109
-			Airborne: 95
+			FlyingInfantry: 95
 			CyborgHeavy: 94
 			CyborgHeroic: 90
 			Flak: 89
@@ -23185,7 +23185,7 @@ generic_bullet_casing:
 			Plate: 12
 			Heroic: 12
 			None: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirInfantry: 11
 			Spaceship: 9
 			Helicopter: 8
@@ -23227,7 +23227,7 @@ generic_bullet_casing:
 			ShipMedium: 110
 			Steel: 104
 			CyborgMedium: 102
-			Airborne: 101
+			FlyingInfantry: 101
 			Fighter: 98
 			AntiAirBuilding: 97
 			Bomber: 96
@@ -23263,7 +23263,7 @@ generic_bullet_casing:
 			Steel: 18
 			Concrete: 18
 			AntiAirBuilding: 18
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgLight: 17
 			CyborgMedium: 17
 			CyborgHeavy: 17
@@ -23309,7 +23309,7 @@ generic_bullet_casing:
 			AntiAirShip: 128
 			Heavy: 120
 			ShipHeavy: 110
-			Airborne: 108
+			FlyingInfantry: 108
 			ShipMedium: 105
 			Bomber: 104
 			Superheavy: 102
@@ -23349,7 +23349,7 @@ generic_bullet_casing:
 			Steel: 9
 			Concrete: 9
 			AntiAirBuilding: 9
-			Airborne: 8
+			FlyingInfantry: 8
 			CyborgMedium: 8
 			CyborgHeavy: 8
 			CyborgHeroic: 8
@@ -23398,7 +23398,7 @@ generic_bullet_casing:
 			Fighter: 106
 			ShipHeavy: 106
 			None: 105
-			Airborne: 105
+			FlyingInfantry: 105
 			CyborgMedium: 103
 			ShipSuperheavy: 103
 			Bomber: 100
@@ -23435,7 +23435,7 @@ generic_bullet_casing:
 			Steel: 13
 			Concrete: 13
 			AntiAirBuilding: 13
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgLight: 12
 			CyborgMedium: 12
 			CyborgHeavy: 12
@@ -23488,7 +23488,7 @@ generic_bullet_casing:
 			ShipMedium: 105
 			CyborgHeavy: 103
 			Light: 101
-			Airborne: 98
+			FlyingInfantry: 98
 			AntiAirVehicle: 96
 			Medium: 92
 			Heavy: 91
@@ -23525,7 +23525,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 18
 			Heroic: 17
 			Medium: 17
-			Airborne: 17
+			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirVehicle: 17
 			Heavy: 16
@@ -23571,7 +23571,7 @@ generic_bullet_casing:
 			Concrete: 114
 			ShipHeavy: 111
 			AntiAirVehicle: 107
-			Airborne: 106
+			FlyingInfantry: 106
 			ShipMedium: 105
 			ShipSuperheavy: 103
 			Plate: 99
@@ -23614,7 +23614,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 8
 			ShipSuperheavy: 8
 			Heavy: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgHeroic: 7
 			Superheavy: 6
 			Fighter: 3
@@ -23662,7 +23662,7 @@ generic_bullet_casing:
 			CyborgHeavy: 102
 			ShipSuperheavy: 101
 			Medium: 100
-			Airborne: 97
+			FlyingInfantry: 97
 			Heavy: 94
 			Superheavy: 78
 			CyborgHeroic: 75
@@ -23697,7 +23697,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 13
 			Heroic: 12
 			Medium: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			CyborgHeavy: 12
 			AntiAirVehicle: 12
 			Heavy: 11
@@ -23735,7 +23735,7 @@ generic_bullet_casing:
 			Flak: 155
 			Helicopter: 146
 			Plate: 131
-			Airborne: 126
+			FlyingInfantry: 126
 			Spaceship: 124
 			CyborgLight: 119
 			CyborgMedium: 109
@@ -23773,7 +23773,7 @@ generic_bullet_casing:
 			Heroic: 18
 			Fighter: 18
 			Bomber: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			Scout: 17
 			CyborgLight: 17
 			CyborgMedium: 17
@@ -23820,7 +23820,7 @@ generic_bullet_casing:
 			Bomber: 162
 			Flak: 154
 			Helicopter: 139
-			Airborne: 135
+			FlyingInfantry: 135
 			CyborgLight: 134
 			Spaceship: 118
 			Scout: 114
@@ -23859,7 +23859,7 @@ generic_bullet_casing:
 			Heroic: 9
 			Fighter: 9
 			Bomber: 9
-			Airborne: 9
+			FlyingInfantry: 9
 			Scout: 8
 			CyborgLight: 8
 			CyborgMedium: 8
@@ -23908,7 +23908,7 @@ generic_bullet_casing:
 			CyborgLight: 130
 			Helicopter: 128
 			Spaceship: 123
-			Airborne: 121
+			FlyingInfantry: 121
 			Plate: 118
 			CyborgMedium: 104
 			Scout: 103
@@ -23945,7 +23945,7 @@ generic_bullet_casing:
 			Heroic: 13
 			Fighter: 13
 			Bomber: 13
-			Airborne: 13
+			FlyingInfantry: 13
 			Scout: 12
 			CyborgLight: 12
 			CyborgMedium: 12
@@ -24015,7 +24015,7 @@ generic_bullet_casing:
 			ShipHeavy: 65
 			ShipSuperheavy: 59
 			AntiAirShip: 86
-			Airborne: 117
+			FlyingInfantry: 117
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24049,7 +24049,7 @@ generic_bullet_casing:
 			ShipHeavy: 5
 			ShipSuperheavy: 3
 			AntiAirShip: 7
-			Airborne: 10
+			FlyingInfantry: 10
 
 ^Warhead_CannonAP_Light_Flat:
 	Warhead@CannonAP_Light_Flat: AreaDamage
@@ -24095,7 +24095,7 @@ generic_bullet_casing:
 			ShipHeavy: 114
 			ShipSuperheavy: 120
 			AntiAirShip: 111
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24129,7 +24129,7 @@ generic_bullet_casing:
 			ShipHeavy: 12
 			ShipSuperheavy: 13
 			AntiAirShip: 11
-			Airborne: 6
+			FlyingInfantry: 6
 
 
 ^Warhead_Chemical_Medium_Flat:
@@ -24176,7 +24176,7 @@ generic_bullet_casing:
 			ShipHeavy: 109
 			ShipSuperheavy: 118
 			AntiAirShip: 97
-			Airborne: 84
+			FlyingInfantry: 84
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -24212,7 +24212,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			ShipSuperheavy: 14
 			AntiAirShip: 12
-			Airborne: 11
+			FlyingInfantry: 11
 
 ^Warhead_Concussion_Medium_Flat:
 	Warhead@Concussion_Medium_Flat: AreaDamage
@@ -24258,7 +24258,7 @@ generic_bullet_casing:
 			ShipHeavy: 105
 			ShipSuperheavy: 93
 			AntiAirShip: 116
-			Airborne: 101
+			FlyingInfantry: 101
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24292,7 +24292,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			ShipSuperheavy: 12
 			AntiAirShip: 15
-			Airborne: 12
+			FlyingInfantry: 12
 
 
 ^Warhead_Cryo_Medium_Flat:
@@ -24339,7 +24339,7 @@ generic_bullet_casing:
 			ShipHeavy: 112
 			ShipSuperheavy: 123
 			AntiAirShip: 113
-			Airborne: 83
+			FlyingInfantry: 83
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: -200
@@ -24375,7 +24375,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			ShipSuperheavy: 14
 			AntiAirShip: 12
-			Airborne: 12
+			FlyingInfantry: 12
 
 ^Warhead_Demolition_Light_Flat:
 	Warhead@Demolition_Light_Flat: AreaDamage
@@ -24421,7 +24421,7 @@ generic_bullet_casing:
 			ShipHeavy: 98
 			ShipSuperheavy: 92
 			AntiAirShip: 113
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24455,7 +24455,7 @@ generic_bullet_casing:
 			ShipHeavy: 9
 			ShipSuperheavy: 9
 			AntiAirShip: 10
-			Airborne: 6
+			FlyingInfantry: 6
 
 
 ^Warhead_Laser_Heavy_Flat:
@@ -24502,7 +24502,7 @@ generic_bullet_casing:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -24538,7 +24538,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
-			Airborne: 14
+			FlyingInfantry: 14
 
 
 
@@ -24587,7 +24587,7 @@ generic_bullet_casing:
 			ShipHeavy: 78
 			ShipSuperheavy: 77
 			AntiAirShip: 80
-			Airborne: 106
+			FlyingInfantry: 106
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24621,7 +24621,7 @@ generic_bullet_casing:
 			ShipHeavy: 16
 			ShipSuperheavy: 16
 			AntiAirShip: 17
-			Airborne: 18
+			FlyingInfantry: 18
 
 ^Warhead_MissileAA_Light_Flat:
 	Warhead@MissileAA_Light_Flat: AreaDamage
@@ -24667,7 +24667,7 @@ generic_bullet_casing:
 			ShipHeavy: 88
 			ShipSuperheavy: 90
 			AntiAirShip: 89
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24701,7 +24701,7 @@ generic_bullet_casing:
 			ShipHeavy: 8
 			ShipSuperheavy: 8
 			AntiAirShip: 7
-			Airborne: 6
+			FlyingInfantry: 6
 
 
 ^Warhead_MissileHE_Heavy_Flat:
@@ -24748,7 +24748,7 @@ generic_bullet_casing:
 			ShipHeavy: 115
 			ShipSuperheavy: 114
 			AntiAirShip: 121
-			Airborne: 94
+			FlyingInfantry: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -24782,7 +24782,7 @@ generic_bullet_casing:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			AntiAirShip: 21
-			Airborne: 17
+			FlyingInfantry: 17
 
 
 
@@ -24831,7 +24831,7 @@ generic_bullet_casing:
 			ShipHeavy: 102
 			ShipSuperheavy: 98
 			AntiAirShip: 109
-			Airborne: 98
+			FlyingInfantry: 98
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
@@ -24868,7 +24868,7 @@ generic_bullet_casing:
 			ShipHeavy: 18
 			ShipSuperheavy: 18
 			AntiAirShip: 18
-			Airborne: 16
+			FlyingInfantry: 16
 
 
 ^Warhead_Plasma_Medium_Flat:
@@ -24915,7 +24915,7 @@ generic_bullet_casing:
 			ShipHeavy: 100
 			ShipSuperheavy: 97
 			AntiAirShip: 111
-			Airborne: 92
+			FlyingInfantry: 92
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
@@ -24952,7 +24952,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			ShipSuperheavy: 13
 			AntiAirShip: 13
-			Airborne: 10
+			FlyingInfantry: 10
 
 
 ^Warhead_Railgun_Heavy_Flat:
@@ -24999,7 +24999,7 @@ generic_bullet_casing:
 			ShipHeavy: 120
 			ShipSuperheavy: 126
 			AntiAirShip: 106
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25033,7 +25033,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 18
-			Airborne: 17
+			FlyingInfantry: 17
 
 
 # Percentage-inert flat compatibility profiles for the final reviewed
@@ -25084,7 +25084,7 @@ generic_bullet_casing:
 			ShipHeavy: 110
 			ShipSuperheavy: 109
 			AntiAirShip: 111
-			Airborne: 88
+			FlyingInfantry: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25118,7 +25118,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 
 
 # Percentage-inert flat compatibility profiles for the final reviewed
@@ -25169,7 +25169,7 @@ generic_bullet_casing:
 			ShipHeavy: 75
 			ShipSuperheavy: 72
 			AntiAirShip: 79
-			Airborne: 110
+			FlyingInfantry: 110
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25203,7 +25203,7 @@ generic_bullet_casing:
 			ShipHeavy: 3
 			ShipSuperheavy: 3
 			AntiAirShip: 3
-			Airborne: 11
+			FlyingInfantry: 11
 
 
 
@@ -25251,7 +25251,7 @@ generic_bullet_casing:
 			ShipHeavy: 88
 			ShipSuperheavy: 90
 			AntiAirShip: 88
-			Airborne: 84
+			FlyingInfantry: 84
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25285,7 +25285,7 @@ generic_bullet_casing:
 			ShipHeavy: 12
 			ShipSuperheavy: 13
 			AntiAirShip: 11
-			Airborne: 11
+			FlyingInfantry: 11
 
 
 ^Warhead_Quantum_Heavy_Flat:
@@ -25332,7 +25332,7 @@ generic_bullet_casing:
 			ShipHeavy: 123
 			ShipSuperheavy: 134
 			AntiAirShip: 104
-			Airborne: 82
+			FlyingInfantry: 82
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
 			Temperature: 25
@@ -25369,7 +25369,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 20
 			AntiAirShip: 17
-			Airborne: 16
+			FlyingInfantry: 16
 
 
 
@@ -25422,7 +25422,7 @@ generic_bullet_casing:
 			ShipHeavy: 104
 			ShipSuperheavy: 93
 			AntiAirShip: 127
-			Airborne: 101
+			FlyingInfantry: 101
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25456,7 +25456,7 @@ generic_bullet_casing:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			AntiAirShip: 12
-			Airborne: 7
+			FlyingInfantry: 7
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -25506,7 +25506,7 @@ generic_bullet_casing:
 			ShipHeavy: 100
 			ShipSuperheavy: 95
 			AntiAirShip: 101
-			Airborne: 100
+			FlyingInfantry: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -25542,7 +25542,7 @@ generic_bullet_casing:
 			ShipHeavy: 9
 			ShipSuperheavy: 8
 			AntiAirShip: 10
-			Airborne: 6
+			FlyingInfantry: 6
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -25592,7 +25592,7 @@ generic_bullet_casing:
 			ShipHeavy: 118
 			ShipSuperheavy: 126
 			AntiAirShip: 106
-			Airborne: 85
+			FlyingInfantry: 85
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 100
 		PercentageScale: 0
@@ -25627,7 +25627,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 17
-			Airborne: 16
+			FlyingInfantry: 16
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -25690,7 +25690,7 @@ generic_bullet_casing:
 			ShipHeavy: 102
 			ShipSuperheavy: 93
 			AntiAirShip: 109
-			Airborne: 92
+			FlyingInfantry: 92
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -25726,7 +25726,7 @@ generic_bullet_casing:
 			ShipHeavy: 13
 			ShipSuperheavy: 12
 			AntiAirShip: 14
-			Airborne: 11
+			FlyingInfantry: 11
 
 # Canonical flat profiles for explicit full-family state expansion.
 
@@ -25774,7 +25774,7 @@ generic_bullet_casing:
 			ShipHeavy: 102
 			ShipSuperheavy: 103
 			AntiAirShip: 98
-			Airborne: 95
+			FlyingInfantry: 95
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -25810,7 +25810,7 @@ generic_bullet_casing:
 			ShipHeavy: 9
 			ShipSuperheavy: 10
 			AntiAirShip: 8
-			Airborne: 6
+			FlyingInfantry: 6
 
 ^Warhead_Thermobaric_Heavy_Flat:
 	Warhead@Thermobaric_Heavy_Flat: AreaDamage
@@ -25856,7 +25856,7 @@ generic_bullet_casing:
 			ShipHeavy: 111
 			ShipSuperheavy: 110
 			AntiAirShip: 109
-			Airborne: 91
+			FlyingInfantry: 91
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 33
@@ -25892,7 +25892,7 @@ generic_bullet_casing:
 			ShipHeavy: 18
 			ShipSuperheavy: 18
 			AntiAirShip: 19
-			Airborne: 17
+			FlyingInfantry: 17
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -25942,7 +25942,7 @@ generic_bullet_casing:
 			ShipHeavy: 101
 			ShipSuperheavy: 102
 			AntiAirShip: 98
-			Airborne: 89
+			FlyingInfantry: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -25976,7 +25976,7 @@ generic_bullet_casing:
 			ShipHeavy: 9
 			ShipSuperheavy: 10
 			AntiAirShip: 9
-			Airborne: 6
+			FlyingInfantry: 6
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -26026,7 +26026,7 @@ generic_bullet_casing:
 			ShipHeavy: 105
 			ShipSuperheavy: 112
 			AntiAirShip: 92
-			Airborne: 92
+			FlyingInfantry: 92
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -26060,7 +26060,7 @@ generic_bullet_casing:
 			ShipHeavy: 17
 			ShipSuperheavy: 18
 			AntiAirShip: 16
-			Airborne: 16
+			FlyingInfantry: 16
 
 ^Warhead_MissileHE_Medium_Flat:
 	Warhead@MissileHE_Medium_Flat: AreaDamage
@@ -26106,7 +26106,7 @@ generic_bullet_casing:
 			ShipHeavy: 112
 			ShipSuperheavy: 100
 			AntiAirShip: 128
-			Airborne: 95
+			FlyingInfantry: 95
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -26140,7 +26140,7 @@ generic_bullet_casing:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			AntiAirShip: 16
-			Airborne: 11
+			FlyingInfantry: 11
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -26190,7 +26190,7 @@ generic_bullet_casing:
 			ShipHeavy: 109
 			ShipSuperheavy: 108
 			AntiAirShip: 113
-			Airborne: 93
+			FlyingInfantry: 93
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
@@ -26226,7 +26226,7 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 20
-			Airborne: 16
+			FlyingInfantry: 16
 
 
 
@@ -26272,7 +26272,7 @@ generic_bullet_casing:
 			CyborgLight: 95
 			AntiAirInfantry: 94
 			Scout: 92
-			Airborne: 88
+			FlyingInfantry: 88
 			Wood: 84
 			None: 81
 			Heroic: 73
@@ -26308,7 +26308,7 @@ generic_bullet_casing:
 			AntiAirBuilding: 17
 			None: 16
 			Wood: 16
-			Airborne: 16
+			FlyingInfantry: 16
 			AntiAirInfantry: 16
 			Spaceship: 13
 			Helicopter: 12
@@ -26356,7 +26356,7 @@ generic_bullet_casing:
 			CyborgLight: 102
 			ShipLight: 100
 			AntiAirInfantry: 95
-			Airborne: 94
+			FlyingInfantry: 94
 			None: 84
 			Wood: 80
 			Heroic: 78
@@ -26394,7 +26394,7 @@ generic_bullet_casing:
 			None: 7
 			Wood: 7
 			AntiAirInfantry: 7
-			Airborne: 6
+			FlyingInfantry: 6
 			Spaceship: 4
 			Helicopter: 3
 			Bomber: 2
@@ -26441,7 +26441,7 @@ generic_bullet_casing:
 			Wood: 101
 			CyborgLight: 100
 			Flak: 90
-			Airborne: 87
+			FlyingInfantry: 87
 			AntiAirInfantry: 85
 			None: 81
 			Heroic: 81
@@ -26478,7 +26478,7 @@ generic_bullet_casing:
 			AntiAirBuilding: 12
 			None: 11
 			Wood: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			AntiAirInfantry: 11
 			Spaceship: 8
 			Helicopter: 7
@@ -26512,7 +26512,7 @@ generic_bullet_casing:
 			CyborgMedium: 134
 			Scout: 121
 			CyborgHeavy: 121
-			Airborne: 113
+			FlyingInfantry: 113
 			Light: 112
 			AntiAirVehicle: 109
 			Medium: 107
@@ -26552,7 +26552,7 @@ generic_bullet_casing:
 			CyborgHeavy: 19
 			Light: 18
 			Medium: 18
-			Airborne: 18
+			FlyingInfantry: 18
 			AntiAirVehicle: 18
 			Heavy: 17
 			Superheavy: 17
@@ -26601,7 +26601,7 @@ generic_bullet_casing:
 			ShipLight: 122
 			AntiAirVehicle: 121
 			CyborgHeavy: 114
-			Airborne: 113
+			FlyingInfantry: 113
 			Wood: 111
 			Medium: 109
 			Heroic: 102
@@ -26641,7 +26641,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 9
 			Heavy: 8
 			Superheavy: 8
-			Airborne: 8
+			FlyingInfantry: 8
 			ShipLight: 8
 			Wood: 7
 			ShipMedium: 7
@@ -26687,7 +26687,7 @@ generic_bullet_casing:
 			Light: 124
 			AntiAirVehicle: 118
 			Medium: 112
-			Airborne: 111
+			FlyingInfantry: 111
 			ShipLight: 111
 			Heavy: 109
 			Wood: 99
@@ -26727,7 +26727,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 13
 			Heavy: 12
 			Superheavy: 12
-			Airborne: 12
+			FlyingInfantry: 12
 			ShipLight: 12
 			Wood: 11
 			ShipMedium: 11
@@ -26784,7 +26784,7 @@ generic_bullet_casing:
 			CyborgMedium: 109
 			CyborgLight: 105
 			CyborgHeroic: 94
-			Airborne: 93
+			FlyingInfantry: 93
 			Plate: 89
 			Flak: 84
 			AntiAirInfantry: 82
@@ -26828,7 +26828,7 @@ generic_bullet_casing:
 			Wood: 132
 			ShipLight: 124
 			Plate: 122
-			Airborne: 122
+			FlyingInfantry: 122
 			Light: 117
 			CyborgMedium: 113
 			AntiAirVehicle: 98
@@ -26865,7 +26865,7 @@ generic_bullet_casing:
 			CyborgLight: 8
 			Light: 7
 			Wood: 7
-			Airborne: 7
+			FlyingInfantry: 7
 			CyborgMedium: 7
 			ShipLight: 7
 			Steel: 6
@@ -26917,7 +26917,7 @@ generic_bullet_casing:
 			Flak: 148
 			Plate: 140
 			CyborgMedium: 122
-			Airborne: 114
+			FlyingInfantry: 114
 			Scout: 112
 			Light: 111
 			CyborgHeavy: 107
@@ -26956,7 +26956,7 @@ generic_bullet_casing:
 			CyborgLight: 12
 			Wood: 11
 			Fighter: 11
-			Airborne: 11
+			FlyingInfantry: 11
 			CyborgMedium: 11
 			Light: 10
 			Bomber: 10
@@ -27009,7 +27009,7 @@ generic_bullet_casing:
 			Plate: 146
 			CyborgLight: 139
 			CyborgMedium: 123
-			Airborne: 116
+			FlyingInfantry: 116
 			CyborgHeavy: 111
 			Scout: 105
 			Light: 97
@@ -27046,7 +27046,7 @@ generic_bullet_casing:
 			Heroic: 16
 			Scout: 15
 			Fighter: 15
-			Airborne: 15
+			FlyingInfantry: 15
 			CyborgLight: 15
 			Light: 14
 			Wood: 14
@@ -27110,7 +27110,7 @@ generic_bullet_casing:
 			Fighter: 113
 			CyborgHeavy: 112
 			AntiAirShip: 109
-			Airborne: 101
+			FlyingInfantry: 101
 			ShipLight: 98
 			CyborgMedium: 96
 			CyborgHeroic: 92
@@ -27147,7 +27147,7 @@ generic_bullet_casing:
 			AntiAirShip: 7
 			Concrete: 6
 			Fighter: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			CyborgHeavy: 6
 			CyborgHeroic: 6
 			Wood: 5
@@ -27204,7 +27204,7 @@ generic_bullet_casing:
 			Concrete: 105
 			CyborgHeroic: 103
 			CyborgMedium: 98
-			Airborne: 96
+			FlyingInfantry: 96
 			ShipLight: 95
 			Plate: 93
 			CyborgLight: 86
@@ -27237,7 +27237,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 11
 			Fighter: 10
 			Bomber: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			CyborgMedium: 10
 			CyborgHeavy: 10
 			ShipLight: 10
@@ -27296,7 +27296,7 @@ generic_bullet_casing:
 			Bomber: 103
 			CyborgMedium: 101
 			CyborgHeroic: 100
-			Airborne: 98
+			FlyingInfantry: 98
 			AntiAirBuilding: 96
 			Plate: 93
 			ShipLight: 88
@@ -27333,7 +27333,7 @@ generic_bullet_casing:
 			AntiAirShip: 14
 			Concrete: 13
 			Fighter: 13
-			Airborne: 13
+			FlyingInfantry: 13
 			CyborgLight: 13
 			CyborgMedium: 13
 			Wood: 12
@@ -27382,7 +27382,7 @@ generic_bullet_casing:
 			None: 117
 			Medium: 116
 			ShipHeavy: 115
-			Airborne: 109
+			FlyingInfantry: 109
 			AntiAirBuilding: 108
 			Heavy: 103
 			AntiAirInfantry: 103
@@ -27426,7 +27426,7 @@ generic_bullet_casing:
 			CyborgMedium: 7
 			None: 6
 			Flak: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			CyborgHeavy: 6
 			CyborgHeroic: 6
 			AntiAirInfantry: 6
@@ -27479,7 +27479,7 @@ generic_bullet_casing:
 			ShipMedium: 106
 			Steel: 105
 			CyborgMedium: 103
-			Airborne: 101
+			FlyingInfantry: 101
 			AntiAirBuilding: 97
 			ShipSuperheavy: 96
 			CyborgHeavy: 95
@@ -27516,7 +27516,7 @@ generic_bullet_casing:
 			ShipSuperheavy: 11
 			None: 10
 			Superheavy: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			CyborgMedium: 10
 			CyborgHeavy: 10
 			Flak: 9
@@ -27575,7 +27575,7 @@ generic_bullet_casing:
 			Superheavy: 108
 			Concrete: 104
 			Flak: 103
-			Airborne: 101
+			FlyingInfantry: 101
 			CyborgHeavy: 93
 			CyborgHeroic: 80
 			Plate: 79
@@ -27610,7 +27610,7 @@ generic_bullet_casing:
 			CyborgMedium: 14
 			None: 13
 			Flak: 13
-			Airborne: 13
+			FlyingInfantry: 13
 			CyborgHeavy: 13
 			CyborgHeroic: 13
 			AntiAirInfantry: 13
@@ -27661,7 +27661,7 @@ generic_bullet_casing:
 			CyborgMedium: 115
 			Light: 114
 			ShipHeavy: 108
-			Airborne: 106
+			FlyingInfantry: 106
 			AntiAirVehicle: 104
 			ShipMedium: 104
 			ShipSuperheavy: 100
@@ -27705,7 +27705,7 @@ generic_bullet_casing:
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
 			Heavy: 6
-			Airborne: 6
+			FlyingInfantry: 6
 			CyborgHeroic: 6
 			Superheavy: 5
 			Fighter: 4
@@ -27756,7 +27756,7 @@ generic_bullet_casing:
 			ShipMedium: 109
 			Plate: 106
 			AntiAirVehicle: 102
-			Airborne: 101
+			FlyingInfantry: 101
 			CyborgHeavy: 99
 			ShipSuperheavy: 97
 			Medium: 96
@@ -27795,7 +27795,7 @@ generic_bullet_casing:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			Heroic: 10
-			Airborne: 10
+			FlyingInfantry: 10
 			CyborgHeavy: 10
 			Heavy: 9
 			CyborgHeroic: 9
@@ -27848,7 +27848,7 @@ generic_bullet_casing:
 			Scout: 110
 			ShipMedium: 106
 			CyborgHeavy: 102
-			Airborne: 99
+			FlyingInfantry: 99
 			Light: 98
 			AntiAirVehicle: 95
 			Medium: 93
@@ -27887,7 +27887,7 @@ generic_bullet_casing:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			Heroic: 14
-			Airborne: 14
+			FlyingInfantry: 14
 			CyborgHeavy: 14
 			Heavy: 13
 			CyborgHeroic: 13
