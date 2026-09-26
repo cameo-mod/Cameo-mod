@@ -407,7 +407,12 @@ class PreviewConstruction(unittest.TestCase):
         main = gen.mean_normalise(main)
         main = [("Shield", self.shield_medium)] + [(a, v) for a, v in main if a != "Shield"]
         main = [r for r in main if r[0] not in gen.PLATING_CYCLE]
-        return gen.plating_rows(FAMILY) + main
+        # `emit_versus`'s own finalisation: the §12.0l derived columns, then pseudo-rows first
+        # and armors descending (stable), exactly as every emitted Versus node is written.
+        rows = gen.derive_rows(gen.plating_rows(FAMILY) + main)
+        lead = [r for r in rows if r[0] in gen.NON_ARMOR_ROWS]
+        body = sorted((r for r in rows if r[0] not in gen.NON_ARMOR_ROWS), key=lambda r: -r[1])
+        return lead + body
 
     def test_profile_is_the_untilted_medium_construction_plus_shared_finalization(self):
         rows = _sub_table(self.block, "Versus", 2)
