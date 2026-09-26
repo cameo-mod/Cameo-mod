@@ -171,7 +171,35 @@ ra1_soviets_molotovconscript_conscriptmolotov:
 
 ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
-	Inherits: ra1_soviets_molotovconscript_conscriptmolotov
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Grenade_Light
+	Inherits@4: ^Effect_Flame_Light
+	ReloadDelay: 50
+	Range: 5725
+	Report: toss1.aud
+	Projectile: Bullet
+		Speed: 150
+		LaunchAngle: 66
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
+		ContrailStartColor: FF8888FF
+		ContrailEndColor: FFFFFF22
+	Warhead@Flame_Light:
+		Damage: 16000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 3
+		Duration: 40
+		Speed: 8, 24
+		TurnRate: 4
+		Image: burn_l
+		Sequences: idle
+		Palette: ra_temperat
+		Weapon: CHFlame
+		InvalidTargets: Water
+	# W7MAT inline of ra1_soviets_molotovconscript_conscriptmolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
@@ -261,10 +289,10 @@ ra1_allies_alliedrocketsoldier_rocketsracryo:
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 50
-	Range: 6643
+	Range: 7500
 	Report: missile6.aud
 	Warhead@MissileCryo_Medium:
-		Damage: 20000
+		Damage: 11500
 		ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
@@ -1048,7 +1076,76 @@ ra1_allies_alliedapc_gun:
 			Steel: 6
 			Concrete: 5
 ra1_allies_alliedapc_gun_AA:
-	Inherits: ra1_allies_alliedapc_gun
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 10
+	Range: 5978
+	Report: gun20.aud
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	# W7MAT inline of ra1_allies_alliedapc_gun
 	Range: 8967
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
@@ -2715,7 +2812,33 @@ ragal120mm:
 	Report: mammothgg1.wav
 
 MammothTuskGal:
-	Inherits: MammothTusk
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
+	ValidTargets: Ground, Water, Infantry, Monster, Air
+	ReloadDelay: 91
+	Burst: 2
+	BurstDelays: 12
+	Range: 6412
+	Report: missile6.aud
+	Projectile: Missile
+		VerticalRateOfTurn: 12
+		Speed: 641
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Heavy:
+		Damage: 24000
+	Warhead@Effect: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	# W7MAT inline of MammothTusk
 	ReloadDelay: 55
 	Range: 5675
 	ValidTargets: Air, Ground
@@ -4462,7 +4585,7 @@ ra1_allies_rifleinfantry_carbine:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
-	Range: 5500
+	Range: 4778
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
@@ -4471,7 +4594,7 @@ ra1_allies_rifleinfantry_carbine:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 940
+		Damage: 3513
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_allies_rifleinfantry_carbine_cryo:
@@ -4479,7 +4602,7 @@ ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 50
-	Range: 5500
+	Range: 4778
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
@@ -4497,4 +4620,4 @@ ra1_allies_rifleinfantry_carbine_cryo:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 940
+		Damage: 3513

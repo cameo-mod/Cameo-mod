@@ -2007,7 +2007,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium_Flat",
@@ -2026,30 +2026,19 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "CannonAttackRobotGun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "CannonAttackRobotGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5376,18 +5365,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "150000",
+        "damage": "151000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "30",
@@ -5398,20 +5380,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
       "requires": "rank-elite",
       "slot": "Armament@elite",
-      "versus_templates": [
-       "OrionRailgun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "OrionRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6155,49 +6133,24 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "30000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
       "requires": "rank-elite",
       "slot": "Armament@elite",
-      "versus_templates": [
-       "RA2Robotmm"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6477,7 +6430,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -7140,7 +7095,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7308,7 +7265,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -7335,7 +7294,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",

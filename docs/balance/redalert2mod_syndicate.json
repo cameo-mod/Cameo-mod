@@ -1967,21 +1967,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2FreedomAK47",
        "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
@@ -2149,21 +2146,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2FreedomAK47",
        "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -6236,7 +6230,9 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && rank-elite",
       "slot": "Armament@MachinegunELITE",
       "versus_templates": [
-       "RA2APCMachineGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -6264,7 +6260,9 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite",
       "slot": "Armament@MachinegunAA",
       "versus_templates": [
-       "RA2APCMachineGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -6394,7 +6392,9 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "RA2APCRocket"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

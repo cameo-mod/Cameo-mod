@@ -1,6 +1,6 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32, W3 carrier-only 89
+damaging armament weapons checked: 1489; W1 same-faction 37, W2 cross-faction 33, W3 carrier-only 86
 
 
 ## W1 — same faction, distinct actors, identical weapon (37)
@@ -46,7 +46,7 @@ damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32
 | wc2paladinexorcism | wc2_humans | wc2_humans_highelfpriest, wc2_humans_highelfsorceress |
 
 
-## W2 — identical weapon across factions (32)
+## W2 — identical weapon across factions (33)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -56,7 +56,6 @@ damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32
 | wc2cannontowerfire | 6 | wc2_humans, wc2_orcs | wc2_humans_cannontower, wc2_humans_guardtower, wc2_humans_humanscouttower, wc2_orcs_cannontower, wc2_orcs_guardtower, wc2_orcs_orcwatchtower |
 | d2k_towermissile | 4 | corrino, harkonnen, ixian | corrino_sardaukar_bazooka, harkonnen_rocketturret, harkonnen_sardaukar, ixian_rocketturret |
 | ra2ifvrepair | 4 | futuretech, naxis, schwarzermond, tkm | futuretech_repairdroid, naxis_engineeringtruck, schwarzermond_engineeringarmor, tkm_repairtruck |
-| tanyaattach | 4 | ra1_allies, ra2_allies, td_gdi, td_nod | ra1_allies_tanya, ra2_allies_tanyaii, td_gdi_commando, td_nod_commando |
 | blackhawkcannon | 3 | latinsyndicate, ra2_allies, ra2_soviets | latinsyndicate_hindtransport, ra2_allies_nighthawk, ra2_soviets_transportkirov |
 | ornigun | 3 | atreides, corrino, harkonnen | atreides_ornithopter, corrino_gunship, harkonnen_gunship |
 | ra220mmrapid | 3 | ra2_allies, ra2_soviets, yuri | ra2_allies_battlefortress, ra2_allies_battlefortress_chrono, ra2_allies_battlefortress_empty, ra2_soviets_warminer, yuri_slaveminer, yuri_slaveminer_deployed |
@@ -76,6 +75,8 @@ damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32
 | steeltwistermissiles | 2 | futuretech, steelconsortium | futuretech_twister, steelconsortium_twister |
 | steeltwistermissiles_elite | 2 | futuretech, steelconsortium | futuretech_twister, steelconsortium_twister |
 | syndicatefireballlauncher | 2 | latinsyndicate, naxis | latinsyndicate_latinflametrooper, naxis_nokana |
+| tanyaattach | 2 | ra1_allies, ra2_allies | ra1_allies_tanya, ra2_allies_tanyaii |
+| td_tanyaattach | 2 | td_gdi, td_nod | td_gdi_commando, td_nod_commando |
 | ts_nod_mobilerepairvehicle | 2 | plymouth, ts_nod | plymouth_spider, ts_nod_mobilerepairvehicle |
 | tsbazooka | 2 | forgotten, ts_nod | forgotten_rocketinfantry, ts_nod_rocketinfantry |
 | tsminigun | 2 | ts_gdi, ts_nod | ts_gdi_lightinfantry, ts_nod_lightinfantry |
@@ -84,7 +85,7 @@ damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32
 | wc2peasantsmack | 2 | wc2_humans, wc2_orcs | wc2_humans_peasant, wc2_orcs_peon |
 
 
-## W3 — shared only with weapon-borrowing carriers (89)
+## W3 — shared only with weapon-borrowing carriers (86)
 
 | weapon | actors |
 |---|---|
@@ -165,9 +166,6 @@ damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32
 | tssoniczap | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ttankzap | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | usalasercannonag | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| waveforcecannonchargedlaser | japan_waveforcetank, protoss_idol |
-| waveforcecannondistortedbeam1 | japan_waveforcetank, protoss_idol |
-| waveforcecannondistortedbeam2 | japan_waveforcetank, protoss_idol |
 | wc2knightslice | wc2_humans_knight, wc2_humans_paladin, wc2_humans_warcraft3knight |
 | wc2mageblizzard | wc2_humans_archmage, wc2_humans_mage |
 | wc2magefireballexplosion | wc2_humans_archmage, wc2_humans_mage |

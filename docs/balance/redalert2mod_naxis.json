@@ -856,7 +856,9 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_Flak_Medium_Flat",
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1688,7 +1690,9 @@
       "requires": "mg",
       "slot": "Armament@mg",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2306,18 +2310,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2328,39 +2325,29 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2777",
       "reloaddelay": "54",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Laser_Heavy_Flat",
-       "Lunar_Green105mm"
+       "^Warhead_Laser_Heavy_Flat"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2371,20 +2358,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "54",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "NaxiAlienPistol"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "NaxiAlienPistol_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2392,18 +2375,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2414,21 +2390,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "2777",
       "reloaddelay": "54",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Laser_Heavy_Flat",
-       "Lunar_Green105mm"
+       "^Warhead_Laser_Heavy_Flat"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2436,18 +2409,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2458,20 +2424,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "54",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "NaxiAlienPistol"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "NaxiAlienPistol_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2689,7 +2651,9 @@
       "reloaddelay": "60",
       "slot": "Armament@AG",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3312,7 +3276,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3369,7 +3335,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3502,7 +3470,9 @@
       "requires": "(deployed || undeployed) && !rank-elite",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3560,7 +3530,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -5721,7 +5693,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -5779,7 +5753,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6087,7 +6063,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6145,7 +6123,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -7178,7 +7158,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7477,7 +7459,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -7506,7 +7490,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -7986,7 +7972,9 @@
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -8120,7 +8108,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxiHetzerDestroyer"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
        "^Warhead_CannonAP"
@@ -8246,7 +8236,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8402,7 +8394,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxiJadgDestroyer"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -9893,7 +9887,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10480,7 +10476,9 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_Flak_Medium_Flat",
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"

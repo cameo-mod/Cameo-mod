@@ -1,6 +1,6 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4335**
+Actors+templates scanned: **4373**
 
 | violation | meaning | count |
 |---|---|---|
@@ -396,7 +396,6 @@ _none found_
 | OILB | 4 | mods/cameo/rules/tech.yaml |
 | OILB.Building | 4 | mods/cameo/rules/shared.yaml |
 | OILB.Husk | 5 | mods/cameo/rules/tech.yaml |
-| OILB.RA2 | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | PLYMOUTH_AGRIDOME | 5 | mods/cameo/rules/outpost2.yaml |
 | PLYMOUTH_BASIC_LAB | 5 | mods/cameo/rules/outpost2.yaml |
 | PLYMOUTH_CARGOTRUCK_EMPTY | 4 | mods/cameo/rules/outpost2.yaml |
@@ -1522,6 +1521,7 @@ _none found_
 | ra2_lt_sgn02 | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2_lt_sgn03 | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2_lt_sgn04 | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
+| ra2_oilderrick | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2_ptruck | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2_ptruck_demo | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2_ptruck_driveby | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
@@ -2480,7 +2480,7 @@ _none found_
 | terran_battlecruiser | 4 | -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli | mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml |
 | terran_missileturret | 3 | -WithTurretSearchlight, -WithSpriteBody, -ActorPreviewPlaceBuildi | mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml |
 | terran_phobos | 5 | -AttackAircraft, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli | mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml |
-| ts_gdi_carryall_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/husks.yaml |
+| ts_gdi_carryall_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/templates.yaml |
 | ts_gdi_orcabomber_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/husks.yaml |
 | ts_gdi_orcafighter_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/husks.yaml |
 | ts_gdi_strike_orca | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml |

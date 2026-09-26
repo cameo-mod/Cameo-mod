@@ -2588,7 +2588,75 @@ RadarJammer:
 		ImpactActors: false
 
 ra1_allies_alliedrocketsoldier_rocketsra:
-	Inherits: RocketsRA
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	ReloadDelay: 50
+	Range: 6643
+	Report: missile6.aud
+	Warhead@MissileAP_Medium:
+		Damage: 10000
+	Warhead@MissileAP_Light:
+		Damage: 10000
+	-Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 9995
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+	# W7MAT inline of RocketsRA
 	Range: 7500
 	Warhead@MissileAP_Medium_Flat:
 		Damage: 11500
@@ -2642,21 +2710,6 @@ ra1_allies_alliedrocketsoldier_rocketsra:
 			Plate: 7
 			Flak: 6
 			None: 5
-
-ra1_allies_alliedrocketsoldier_rocketsracryo:
-	Range: 7500
-	Warhead@MissileCryo_Medium:
-		Damage: 11500
-
-ra1_allies_rifleinfantry_carbine:
-	Range: 4778
-	Warhead@Bullet_Light:
-		Damage: 3513
-
-ra1_allies_rifleinfantry_carbine_cryo:
-	Range: 4778
-	Warhead@BulletCryo_Light:
-		Damage: 3513
 
 ra1_allies_cargoplanebomber_parabomb:
 	Inherits: ParaBomb
@@ -2712,16 +2765,84 @@ ra1_allies_cargoplanebomber_parabomb:
 			Spaceship: 10
 
 ra1_allies_gunboat_depthcharge:
-	Inherits: DepthCharge
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@Demolition_Light:
+		Damage: 60000
+		ValidTargets: Submarine, Ship, Underwater
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: h2obomb2.aud
+		ValidTargets: Water, Underwater
+	Warhead@Effect:
+		Explosions: small_explosion
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Submarine, Ship, Underwater
+	# W7MAT inline of DepthCharge
 
 ra1_allies_gunboat_depthchargecryo:
-	Inherits: DepthChargeCryo
+	Inherits@wh: ^Warhead_BlastCryo_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Cryo
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@BlastCryo_Light:
+		Damage: 60000
+		ValidTargets: Submarine, Ship, Underwater
+	# W7MAT inline of DepthChargeCryo
 
 ra1_allies_destroyer_depthcharge:
-	Inherits: DepthCharge
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@Demolition_Light:
+		Damage: 60000
+		ValidTargets: Submarine, Ship, Underwater
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: h2obomb2.aud
+		ValidTargets: Water, Underwater
+	Warhead@Effect:
+		Explosions: small_explosion
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Submarine, Ship, Underwater
+	# W7MAT inline of DepthCharge
 
 ra1_allies_destroyer_depthchargecryo:
-	Inherits: DepthChargeCryo
+	Inherits@wh: ^Warhead_BlastCryo_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Cryo
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@BlastCryo_Light:
+		Damage: 60000
+		ValidTargets: Submarine, Ship, Underwater
+	# W7MAT inline of DepthChargeCryo
 
 ra1_allies_cruiser_8inch:
 	Inherits: 8Inch

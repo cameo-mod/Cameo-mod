@@ -170,7 +170,17 @@ RA2120mm_rad:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
-	Inherits: RA2120mm
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
 	Warhead@Chemical_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium:
@@ -244,7 +254,17 @@ RA2120mm_rad:
 			Bomber: 6
 			Fighter: 5
 RA2120mm_fire:
-	Inherits: RA2120mm
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment2
 		Amount: 2
@@ -252,7 +272,17 @@ RA2120mm_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2120mm_tesla:
-	Inherits: RA2120mm
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragmentWeak
 		Amount: 1
@@ -718,22 +748,26 @@ RA160mm_tesla:
 		PercentageScale: 10000
 
 RA160mmE_elite:
-	Inherits: RA160mm
-	Inherits@fx_cover: ^Effect_MissileAP_Heavy
-	Range: 12345
-	Burst: 2
-	BurstDelays: 3
+	Inherits@xRA160mmE_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
+	Warhead@Concussion_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 120000
+		PercentageScale: 10000
+	Inherits@collapseflat: ^Warhead_Concussion_Medium_Flat
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
 	ReloadDelay: 88
+	Range: 12345
 	MinRange: 2222
 	Report: vdesatta.wav, vdesattb.wav
-	Warhead@RA2Crater:
-	Warhead@EffectAir:
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
@@ -745,11 +779,17 @@ RA160mmE_elite:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		TrailInterval: 1
+	Inherits@fx_cover: ^Effect_MissileAP_Heavy
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
 	Warhead@Concrete:
 		Damage: 200
 	Warhead@Effect:
 		Explosions: ra2_elite_explosion
 		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		ExplosionPalette: ra2effect
 	Warhead@EffectAir:
 		Explosions: big_explosion_air
 		ImpactSounds: kaboom25.aud
@@ -761,64 +801,8 @@ RA160mmE_elite:
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Duration: 12
-	Warhead@Effect:
-		ValidTargets: Ground, Ship
-	Warhead@Concussion_Medium_Flat: AreaDamage
-	Warhead@Concussion_Medium_Flat:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Spread: 350
-		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 106
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
+	Burst: 2
+	BurstDelays: 3
 RA160mmE_rad_elite:
 	Inherits@xRA160mmE_rad_elite5: ^Warhead_Demolition_Light
 	Inherits@xRA160mmE_rad_elite6: ^Projectile_Grenade_Light
@@ -1052,60 +1036,81 @@ RA160mmE_rad_elite:
 			None: 55
 		UpdatesUnitStatistics: false
 RA160mmE_fire_elite:
-	Inherits: RA160mm_fire
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
+	Inherits@xRA160mmE_fire_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_fire_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_fire_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
 	Range: 12345
-	Warhead@FireShrapnel: FireShrapnel
-		Weapon: AsianOilBombFragments
-		Amount: 2
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	ValidTargets: Ground, Water
 	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
-	ReloadDelay: 88
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
 		ContrailLength: 25
+		ContrailStartColor: FFBB88
 		ContrailStartWidth: 55
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
+		TrailImage: red_smokey
+		TrailPalette: effect
 		TrailInterval: 1
-
-RA160mmE_tesla_elite:
-	Inherits: RA160mm_tesla
-	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
-	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
-		Weapon: TeslaFragmentLarge
+		Weapon: AsianOilBombFragments
 		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+RA160mmE_tesla_elite:
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
+	Inherits@xRA160mmE_tesla_elite0: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_tesla_elite1: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_tesla_elite2: ^Effect_Bang_Large_RA2
+	-Warhead@Demolition_Light:
+	Range: 12345
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	ValidTargets: Ground, Water
 	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
-
-# Faction-local effect compositions preserve the authored Apocalypse visuals
-# without repeating effect overrides on each concrete weapon/rank route.
-# Materialized in resolved order from the authored generic + Apocalypse effects:
-# one heavy glow path, with exact fields/order protected by the premerge fixture.
-	ReloadDelay: 88
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Warhead@EffectAir:
-	Projectile:
+	Projectile: Bullet
 		Speed: 333
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Image: bhreddragon
 		ContrailLength: 25
+		ContrailStartColor: 6688BB
 		ContrailStartWidth: 55
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
+		TrailImage: blue_smokey
+		TrailPalette: effect
 		TrailInterval: 1
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragmentLarge
+		Amount: 2
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
+	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
+# Faction-local effect compositions preserve the authored Apocalypse visuals
+# without repeating effect overrides on each concrete weapon/rank route.
+# Materialized in resolved order from the authored generic + Apocalypse effects:
+# one heavy glow path, with exact fields/order protected by the premerge fixture.
 	Warhead@EffectAir:
 		Explosions: big_explosion_air
 		ImpactSounds: kaboom25.aud
@@ -1981,7 +1986,18 @@ RA2vulcan:
 			Spaceship: 6
 			Superheavy: 5
 RA2CRFlakGuyGun:
-	Inherits: RA2FLAKAG
+	Inherits@xRA2FLAKAG0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAG1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAG2: ^Effect_Flak_Puff_RA2
+	Report: vflaat1a.wav, vflaat1b.wav
+	Projectile: Bullet
+		Speed: 512
+		Blockable: false
+		LaunchAngle: 75
+		Inaccuracy: 0
+		Image: BOMB
+	ValidTargets: Ground, Water
+	# W7MAT inline of RA2FLAKAG
 	ReloadDelay: 17
 	Range: 5627
 	ValidTargets: Ground, Water
@@ -2105,7 +2121,81 @@ IvanAttachAir:
 		Weapon: IvanBombAir
 
 IvanBombAir:
-	Inherits: IvanBomb
+	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Report: M203.aud
+	Warhead@Concussion_Medium:
+		Damage: 30000
+	Warhead@Demolition_Heavy:
+		Damage: 60000
+	Warhead@Effect: CreateEffect
+		Explosions: ivan_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpcraa.wav
+		ValidTargets: Ground, Air, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpcraa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	Warhead@Demolition_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 90000
+		PercentageScale: 9999
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+	# W7MAT inline of IvanBomb
 	Report: M203.aud
 	Warhead@Concussion_Medium:
 		ValidTargets: Aircraft
@@ -2168,7 +2258,79 @@ IvanBombAir:
 			Helicopter: 11
 			Spaceship: 10
 BorisAKM_elite:
-	Inherits: BorisAKM
+	Inherits@xBorisAKM0: ^Warhead_Bullet_Medium
+	Inherits@xBorisAKM1: ^Projectile_Bullet_Medium
+	Inherits@xBorisAKM2: ^Effect_Bullet_Medium_RA2
+	Report: iboratta.wav, iborattb.wav
+	ValidTargets: Ground, Water
+	InvalidTargets: Structure, Bridge, wall
+	Range: 8167
+	ReloadDelay: 18
+	Burst: 4
+	BurstDelays: 2
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 4000
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water
+		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of BorisAKM
 	Range: 9167
 	Burst: 8
 	Warhead@Bullet_Medium_Flat:
@@ -2227,7 +2389,79 @@ BorisAKM_elite:
 			Superheavy: 5
 
 BorisAKM2:
-	Inherits: BorisAKM
+	Inherits@xBorisAKM0: ^Warhead_Bullet_Medium
+	Inherits@xBorisAKM1: ^Projectile_Bullet_Medium
+	Inherits@xBorisAKM2: ^Effect_Bullet_Medium_RA2
+	Report: iboratta.wav, iborattb.wav
+	ValidTargets: Ground, Water
+	InvalidTargets: Structure, Bridge, wall
+	Range: 8167
+	ReloadDelay: 18
+	Burst: 4
+	BurstDelays: 2
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 4000
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water
+		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of BorisAKM
 	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:
 	Range: 9167

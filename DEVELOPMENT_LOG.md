@@ -1,3 +1,103 @@
+## 2026-09-26 (night) — W7 rule-4 remediation + master merge + audit split (NOVA)
+
+PR #516 was BLOCKED by rule 4: W7 splices copied parents' inline
+`Versus`/`PercentageVersus` into 75 concrete defs (`count_local_versus`
+891 -> 956; Claude's merge gate: <=891). Remediation on
+`devin/nova/w7-packs` (`01c89a5a5`): restored the `Inherits: <weapon>`
+edge on all 75 where the parent carries the Versus blob; the authorized
+held-67 ExtraDamage folds re-applied as local `-Warhead@<chip>:` cancels
++ `Damage:` pins; Virusgun trio kept template-edges with stub-ordered
+nodes (duplicate `^Warhead_Toxic_Medium` path removed). Local-Versus
+final: **881 <= 891**. W7 re-locked **520 -> 595** with provenance in the
+ratchet comment (75 restored edges are the ruling's intent, not new debt).
+
+Merged `origin/master` 91f865585 (`fb3cdb4b6`): conflicts in Naxis
+weapons, redalert2mod.yaml (kept converted shape + master's
+`pack|file` Report format) and `audit_orphan_cancels.py` (EMBER's
+--fragile + NOVA same-key sibling grouping).
+
+Post-merge verification vs master (2475-weapon corpus, strict-order):
+2407 clean; all 68 diffs are authorized — held-67 folds (Damage
+multiset totals preserved, e.g. SteelIonCannonDamage 450000 = 450000),
+R20 toxic-dart renames, cosmetic intra-node field order. 48 post-merge
+drifts vs pre-merge tip = master's R16 geometric-mean rebalance of shared
+^Warhead_* Versus tables — inherited by reference, correct.
+
+Gates on merged tree: local-Versus 881 <= 891 | orphan cancels 0 |
+empty warheads 0 | dup-inherits clean | weapon-shape all buckets <=
+ratchets (W7 595/595) | balance-drift clean after `ae18687ae` re-extract
+(14 in-lane ledgers + derived sidecars; `_model.json` Flak census 48->49
+is the conversion's own move) | cross-file duplicate defs 0 |
+**boot-gate PASS** (`MenuPostProcessEffect.PostWorldLoaded`, private
+SupportDir, zero new exceptions).
+
+`audit_orphan_cancels.py` same-key sibling fix split per Claude's order
+into its own PR: **#533** (branch `devin/nova/orphan-cancels-siblings`,
+off master, +test `tools/tests/test_orphan_cancels_siblings.py`).
+Master-version-vs-fixed on this tree: 9 findings -> 0, each a
+sibling-provider false positive (`Range:` redeclare-cancel idiom,
+engine MergeSelfPartial semantics).
+
+## 2026-09-26 (late) — W7 held-67: ExtraDamage fold + materialization landed (NOVA)
+
+The 67 weapons held for the ExtraDamage ruling are now converted on
+`devin/nova/*` (worktree nova-packs): every `Inherits: <weapon>` edge inlined,
+all damage-typed `Warhead@*ExtraDamage` chips folded into each weapon's own
+main warhead Damage (resolved-arithmetic, not textual), `OpenToppedDamage`
+twins preserved per ruling. Result: **W7 760 -> 693** (ratchet re-locked),
+payload + ordered-warhead-key verify clean on all 784 defs in the 9 files,
+`find_empty_warhead` = 0, damage totals preserved everywhere.
+
+W6 rose 442 -> 497 — inherent: materialization re-declares a parent's locally
+declared effect warheads (Smudge/Concrete/Effect) as local decls in the child.
+Baseline re-locked at 497 with justification; flagged to Claude for ruling.
+
+### Tool: `tools/nova_w7mat.py`
+
+Materializer that resolves each target against an immutable `--base` worktree
+(HEAD), so converting parents and children in one batch cannot contaminate a
+child's expectation (the silent damage-loss class: parent folds chips into
+main, child's local main override then shadows the folded value). Emits bare
+`Warhead@K:` stubs at `#W7MAT:` markers for order, field pins + fold bump at
+the block tail, `-K:` cancels for content surviving templates resurrect.
+
+### Hard-won failure modes fixed this session
+
+- **Live-tree target resolution** — measuring the child against the already-
+  converted parent baked the chip loss into the expectation. Resolve targets
+  on a pristine base ruleset; verify on the live tree.
+- **`#` comment banners inside logical blocks** — SchwarzerMond/Syndicate
+  files interleave `#`-banner separators mid-weapon. A block regex that stops
+  at col-0 `#` truncates the block: pins land before the banner, post-banner
+  local decls then override the pins (main Damage 18000 -> 16000 observed).
+- **Nested `-Field:` cancels** — orphan-cancel pruning must only drop dead
+  cancels; a `-HitAnim:` inside `Range:` is load-bearing while a provider
+  exists and is resolver-residue once dead (miniyaml keeps `-x` markers that
+  cancel nothing). Dropped iff the post-strip subtree lacks the key entirely.
+- **`OpenToppedDamage` is not a chip** — `Warhead@SniperWeaponExtraDamage`
+  keys on `*ExtraDamage` but is the passenger-damage mechanic; fold only
+  damage-typed nodes (SpreadDamage/AreaDamage/...).
+- **Surviving providers resurrect cancelled content** — pins must emit
+  `-field:` cancels for fields the removed parent had suppressed, else
+  `^Effect_*` templates leak them back.
+
+### Boot-gate
+
+Pending at write time; will be updated before commit.
+## 2026-09-26 — S2 split-def fix: 3 RA Allies weapon stubs folded (NOVA)
+
+`audit_split_definitions` flagged `ra1_allies_alliedrocketsoldier_rocketsracryo`,
+`ra1_allies_rifleinfantry_carbine`, `ra1_allies_rifleinfantry_carbine_cryo` —
+defined in both `RedAlert/Shared/yaml/weapons.yaml` (full 3-way defs) and
+`RedAlert/Allies/yaml/weapons.yaml` (bare Range+Damage stubs).
+
+Load order: Shared(152) -> Allies(155), so the Allies stubs were LIVE OVERRIDES,
+not dead residue — resolved values matched the stub values, the Shared-side
+`Damage`/`Range` were dead-masked fields. Fix: folded the live stub values into
+the canonical Shared defs, deleted the 3 stubs. All 3 weapons resolve
+byte-identical (carbine Damage 3513, cryo 3513, rocketsracryo 11500 preserved).
+S2 findings 5 -> 2 (remaining: Flamethrower + Sound2 — DAWN-lane files).
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after

@@ -925,7 +925,39 @@ JapanMaidenBow:
 JapanMaidenBowEnergized:
 	Inherits@roleflat: ^Warhead_Arrow_Light_Flat
 	Inherits@5: ^TeslaWeapon
-	Inherits@6: JapanMaidenBow
+	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
+	ReloadDelay: 100
+	Range: 7500
+	MinRange: 1500
+	Report: dune2smalllaser.aud
+	Projectile: Missile
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		Speed: 512
+		Arm: 2
+		Inaccuracy: 125
+		RangeLimit: 25000
+		Image: DRAGON
+		TrailImage: blue_smokey_small
+		TrailInterval: 1
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		ContrailLength: 30
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Arrow_Light:
+		Damage: 40000
+	Warhead@Effect:
+		ValidRelationships: Neutral, Enemy
+		Explosions: blue_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+	# W7MAT inline of JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
@@ -1119,7 +1151,39 @@ JapanMaidenBowEnergized:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 BallistaSingleShotAir_AA:
-	Inherits: JapanMaidenBow
+	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
+	ReloadDelay: 100
+	Range: 7500
+	MinRange: 1500
+	Report: dune2smalllaser.aud
+	Projectile: Missile
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		Speed: 512
+		Arm: 2
+		Inaccuracy: 125
+		RangeLimit: 25000
+		Image: DRAGON
+		TrailImage: blue_smokey_small
+		TrailInterval: 1
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		ContrailLength: 30
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Arrow_Light:
+		Damage: 40000
+	Warhead@Effect:
+		ValidRelationships: Neutral, Enemy
+		Explosions: blue_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+	# W7MAT inline of JapanMaidenBow
 	Range: 9214
 	ReloadDelay: 200
 	ValidTargets: Air
@@ -2220,7 +2284,94 @@ NambuMGWaveforce:
 			Corrosion: 20
 		PercentageSpread: 50
 ZeroFighterArrows:
-	Inherits: SkyHawkArrows
+	Inherits@wh2: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
+	ReloadDelay: 128
+	Range: 3053
+	Report: dune2smalllaser.aud
+	Projectile: Missile
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 125
+		RangeLimit: 25000
+		Image: DRAGON
+		TrailImage: blue_smokey_small
+		TrailInterval: 1
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		ContrailLength: 30
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@MissileHE_Medium:
+		Damage: 32000
+	Warhead@Arrow_Light:
+		Damage: 32000
+	Warhead@Effect: CreateEffect
+		ValidRelationships: Neutral, Enemy
+		Explosions: blue_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+	-Warhead@Arrow_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@Arrow_Light_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 64000
+		PercentageScale: 9999
+	Warhead@Arrow_Light_Flat: AreaDamage
+	Warhead@Arrow_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 59
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 102
+			COMPOSITE: 35
+			BLAST: 72
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			Flak: 169
+			Plate: 137
+			Fighter: 130
+			Bomber: 103
+			Scout: 93
+			Light: 87
+			Wood: 86
+			Helicopter: 85
+			Medium: 81
+			Steel: 76
+			Spaceship: 75
+			Heavy: 74
+			Superheavy: 69
+			Concrete: 66
+			Heroic: 64
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Wood: 3
+			Steel: 2
+			Concrete: 1
+	# W7MAT inline of SkyHawkArrows
 	Range: 6615
 	MinRange: 1325
 	ReloadDelay: 110
@@ -2608,7 +2759,94 @@ SkyHawkArrows:
 SkyHawkArrowsEnergized:
 	Inherits@roleflat: ^Warhead_Arrow_Medium
 	Inherits@2: ^TeslaWeapon
-	Inherits@3: SkyHawkArrows
+	Inherits@wh2: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
+	ReloadDelay: 128
+	Range: 3053
+	Report: dune2smalllaser.aud
+	Projectile: Missile
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 125
+		RangeLimit: 25000
+		Image: DRAGON
+		TrailImage: blue_smokey_small
+		TrailInterval: 1
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		ContrailLength: 30
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@MissileHE_Medium:
+		Damage: 32000
+	Warhead@Arrow_Light:
+		Damage: 32000
+	Warhead@Effect: CreateEffect
+		ValidRelationships: Neutral, Enemy
+		Explosions: blue_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+	-Warhead@Arrow_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@Arrow_Light_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 64000
+		PercentageScale: 9999
+	Warhead@Arrow_Light_Flat: AreaDamage
+	Warhead@Arrow_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 59
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 102
+			COMPOSITE: 35
+			BLAST: 72
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			Flak: 169
+			Plate: 137
+			Fighter: 130
+			Bomber: 103
+			Scout: 93
+			Light: 87
+			Wood: 86
+			Helicopter: 85
+			Medium: 81
+			Steel: 76
+			Spaceship: 75
+			Heavy: 74
+			Superheavy: 69
+			Concrete: 66
+			Heroic: 64
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Wood: 3
+			Steel: 2
+			Concrete: 1
+	# W7MAT inline of SkyHawkArrows
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@Arrow_Light:
@@ -3504,7 +3742,76 @@ JapaneseHovercraftFlak:
 			Steel: 6
 			Concrete: 5
 JapaneseHovercraftFlakAA:
-	Inherits: JapaneseHovercraftFlak
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
+	ReloadDelay: 8
+	Range: 4876
+	Report: gun20.aud
+	ValidTargets: Ground, Water
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	# W7MAT inline of JapaneseHovercraftFlak
 	Range: 7314
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage

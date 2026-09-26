@@ -88,7 +88,25 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blob ->
+W2_BASELINE = 170   # 157 -> 170: W7 chain-collapse batch-3 (NOVA,
+                    # 2026-09-26) — de-parented children now carry the
+                    # parent+sibling warhead-template edges verbatim
+                    # (^Warhead_ twins like the batch-2 flat-twin class).
+                    # was: 143 -> 157: W7 chain-collapse batch-2 (NOVA,
+                    # 2026-09-26) — same verbatim-inline mechanism; parents'
+                    # extra ^Warhead_ edges now carried by their children.
+                    # was: 132 -> 143: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # 55 children of already-split parents inlined the parent's
+                    # edge set verbatim; the union with their own edges raises
+                    # arity while staying resolve-identical.
+                    # was: 129 -> 132: RA160mmE_*_elite de-parenting (NOVA, 2026-09-26)
+                    # re-declared the chain's flat-twin edge per weapon
+                    # (collapseflat/finalmain) — same sanctioned class.
+                    # was: 123 -> 129: Yuri Gatling Tank conversion (NOVA R-order,
+                    # 2026-09-26) added the sanctioned ^Warhead_Bullet_Medium_Flat
+                    # twin edge to YuriGatlingTankMG{1,2,3}[_AA] — same flat-twin
+                    # pattern as APCGun/110mm_Gun. Resolve-identical, order-pinned.
+                    # was: 122 -> 123: restored PulseMissile (drain-minified dead blob ->
                     # live; dual ^Warhead_Tesla_{Heavy,Super} is inherent to its
                     # multi-warhead superweapon design). Pre-drain debt re-exposed.
                                         # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
@@ -100,8 +118,26 @@ W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blo
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W3_BASELINE = 19    # 14 -> 19: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # same mechanism as batch-2: parent bodies carrying a second
+                    # ^Projectile_ edge hand it to de-parented children.
+                    # was: 11 -> 14: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+                    # was: 7 -> 11: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # parents carrying a second ^Projectile_ edge (MigMissiles,
+                    # volkov magnetic, RA2120mm chem variants) hand it to their
+                    # de-parented children verbatim. Resolve-identical.
+                    # was: 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 77    # 66 -> 77: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # de-parented children carry the parent's dual ^Effect_
+                    # edges verbatim. Resolve-identical.
+                    # was: 61 -> 66: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+                    # was: 44 -> 61: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # children take on their parents' dual ^Effect_ composition
+                    # (e.g. Apoc_AP + family cover edges) verbatim.
+                    # was: 41 -> 44: RA160mmE_*_elite de-parenting (NOVA, 2026-09-26)
+                    # re-declared the inherited ^Effect_Bang_Large_RA2 edge
+                    # alongside each weapon's own faction fx edge.
+                    # was: 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -109,7 +145,23 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
+W6_BASELINE = 524   # 520 -> 524: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # local order-pin decls emulating the dropped template
+                    # re-application (NaxiMP40Laser class).
+                    # was: 511 -> 520: W7 chain-collapse batch-2 (NOVA, 2026-09-26)
+                    # — parent local effect decls now local on children.
+                    # was: 509 -> 511: the MigMissiles_{fire,tesla} resurrection
+                    # pins (Effect1/Glow/Effect/ShieldHit) — sole-emulation of the
+                    # child edge's template re-application.
+                    # was: 497 -> 509: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # parent's local effect-warhead decls become the child's
+                    # locals when the weapon edge is inlined (same mechanism as
+                    # the held-67 re-baseline below). Resolve-identical.
+                    # was: 442 -> 497: held-67 W7 materialization (nova) re-declared
+                    # inherited effect warheads locally — resolved-identical,
+                    # the +55 are parent-owned Smudge/Concrete/Effect nodes now
+                    # local after their weapon->weapon edge was inlined.
+                    # was: 443 -> 442: W7-remainder materialization batch moved
                     # the last local effect node on the DAWN file-set into a family.
                     # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
                     # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
@@ -124,7 +176,39 @@ W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 760   # 804 -> 760: W7-remainder materialization batch (DAWN
+W7_BASELINE = 595   # 520 -> 595: rule-4 restoration (NOVA, 2026-09-26) — the 75
+                    # weapons whose spliced parent bodies carried inline
+                    # Versus/PercentageVersus had their `Inherits: <weapon>`
+                    # edge restored (rule: never materialize Versus into a
+                    # weapon; the fold payload cannot be expressed without
+                    # either local Versus or the parent edge). Resolve-verified:
+                    # payload + ordered warhead keys identical to the spliced
+                    # tip on all 75; orphan cancels 0. Claude accepted the
+                    # re-lock class (REPLY_2026-09-26_claude_to_dawn_rule4).
+                    # was: 577 -> 520: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # 57 more children of split/template parents de-parented;
+                    # 3 collision-heavy cases deferred (YuriGatlingCannonMG2,
+                    # NaxiHetzer/JadgDestroyerCorrosion).
+                    # was: 629 -> 577: W7 chain-collapse batch-2 (NOVA, 2026-09-26),
+                    # 52 more children of split parents inlined verbatim.
+                    # was: 684 -> 629: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # 55 children of already-split parents had their
+                    # `Inherits: <weapon>` edge replaced by the parent's body
+                    # verbatim at the edge position (payload + strict-order
+                    # verified on all 55).
+                    # was: 687 -> 684: RA160mmE_{elite,fire_elite,tesla_elite}
+                    # de-parented (NOVA, 2026-09-26) — template triples +
+                    # flat-twin edges + fx_cover; resolve-identical strict-order.
+                    # was: 693 -> 687: Yuri Gatling Tank conversion (NOVA, 2026-09-26)
+                    # de-parented YuriGatlingTankMG{1,2,3}[_AA] onto the x0/x1/x2
+                    # template triple + ^Warhead_Bullet_Medium_Flat collapse edge;
+                    # resolve-identical incl. strict order.
+                    # was: 760 -> 693: held-67 ExtraDamage batch (nova file-set:
+                    # RA Soviets, RA2 Yuri, RA2Mod AsianAlliance/Consortium/
+                    # FutureTech/Naxis/SchwarzerMond/Syndicate, redalert2mod).
+                    # Resolve-verified fold per ruling: chips deleted, main
+                    # bumped by chip sum, OpenToppedDamage twins kept.
+                    # was: 804 -> 760: W7-remainder materialization batch (DAWN
                     # file-set: d2k 16 + tiberiansun 11 + starcraft 3 +
                     # tiberiandawn 1 + outpost2 edenMobile chain 2).
                     # was: 807 -> 804: W7 batch-5 no-covering inlines
@@ -138,7 +222,15 @@ W7_BASELINE = 760   # 804 -> 760: W7-remainder materialization batch (DAWN
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 362   # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
+W8_BASELINE = 372   # 368 -> 372: W7 chain-collapse batch-3 (NOVA, 2026-09-26) —
+                    # parents' non-three-kind template edges copied verbatim
+                    # into de-parented children (same class as batch-2).
+                    # was: 365 -> 368: W7 chain-collapse batch-2 (NOVA, 2026-09-26).
+                    # was: 362 -> 365: W7 chain-collapse batch (NOVA, 2026-09-26) —
+                    # parents' non-three-kind edges (^TeslaWeapon,
+                    # ^NaxOxidationShells) copied verbatim into de-parented
+                    # children; same class as pre-existing parent debt.
+                    # was: 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
                     # D2K_155mm (^D2K155mmLegacy) re-expose pre-drain W8 debt;
                     # conversion awaits the legacy-bundle retrofit ruling.
                     # (#489 cleared most legacy edges); was:   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting

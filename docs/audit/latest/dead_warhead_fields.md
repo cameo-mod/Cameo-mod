@@ -1,4 +1,4 @@
-scanned 24969 resolved warhead nodes across 3261 weapons
+scanned 25078 resolved warhead nodes across 3351 weapons
 
 DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
 
@@ -6,10 +6,10 @@ DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
      10 weapons   DetachDelayedWeapon.Spread
      10 weapons   DetachDelayedWeapon.Falloff
       6 weapons   FireShrapnel.TargetActorCenter
+      5 weapons   FlashTargetsInRadius.Explosions
+      5 weapons   FlashTargetsInRadius.ImpactActors
       4 weapons   AffectsIntegrity.Falloff
       3 weapons   FireFragment.AimChance
-      3 weapons   FlashTargetsInRadius.Explosions
-      3 weapons   FlashTargetsInRadius.ImpactActors
       2 weapons   SpreadDamage.FriendlyFireDamage
       2 weapons   SpreadDamage.FriendlyFireSpread
       2 weapons   SpreadDamage.IntegrityScale
@@ -23,5 +23,5 @@ DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
       1 weapons   AreaDamage.Burst
       1 weapons   FireShrapnel.Range
 
-FAIL 20 dead field kind(s) on 70 weapons (ratchet 15)
+FAIL 20 dead field kind(s) on 72 weapons (ratchet 15)
 **A warhead field was just written that the engine will silently discard.** Fix the field or the type; do not raise DEAD_FIELD_BASELINE.

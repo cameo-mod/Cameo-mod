@@ -67,7 +67,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -88,13 +88,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
@@ -112,12 +105,10 @@
       "versus_templates": [
        "^Warhead_Quantum_Medium",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelMakoGun"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Quantum_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
       "weapon_class_source": "template"
@@ -205,43 +196,33 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "SteelInfRailgun_elite"
+       "^Warhead_Flak_Medium_Flat"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelScalpelRailgunAA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "28000",
+        "damage": "30000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium_Flat",
@@ -256,13 +237,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -273,13 +247,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -319,21 +286,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "SteelInfRailgun_EMP_elite"
+       "^Warhead_Flak_Medium_Flat"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelScalpelRailgun_EMP_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1020,25 +984,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "250000",
+        "damage": "350000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "300",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "200",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "25",
@@ -1054,14 +1004,10 @@
       "range": "2500",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "SteelInspectorIonCannonDamage"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Super"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInspectorIonCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3038,7 +2984,8 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "SteelCloneGun",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -3097,7 +3044,8 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "SteelCloneGun",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -3124,7 +3072,8 @@
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
-       "SteelCloneGun",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -3181,7 +3130,8 @@
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "SteelCloneGun",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -3427,7 +3377,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
@@ -3439,30 +3389,19 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "SteelMakoGun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3513,7 +3452,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
@@ -3525,35 +3464,24 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "SteelMakoGun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -3572,13 +3500,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3598,12 +3519,10 @@
       "versus_templates": [
        "^Warhead_Quantum_Medium",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelMakoGun"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Quantum_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
       "weapon_class_source": "template"
@@ -3613,7 +3532,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -3632,13 +3551,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3649,27 +3561,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeELITE",
-      "versus_templates": [
-       "SteelMakoGun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -3688,13 +3595,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3714,12 +3614,10 @@
       "versus_templates": [
        "^Warhead_Quantum_Medium",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelMakoGun"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Quantum_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
       "weapon_class_source": "template"
@@ -3730,7 +3628,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -3751,13 +3649,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
@@ -3766,21 +3657,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeGARRISONEDELITE",
-      "versus_templates": [
-       "SteelMakoGun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3895,42 +3781,31 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "!deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARYELITE",
-      "versus_templates": [
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -3945,13 +3820,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -3962,13 +3830,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4040,7 +3901,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4049,21 +3910,18 @@
       "versus_templates": [
        "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelInfRailgun"
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -4078,13 +3936,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -4095,13 +3946,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4173,20 +4017,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "!deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARYELITE",
-      "versus_templates": [
-       "SteelInfRailgun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "targeting",
@@ -4250,35 +4090,24 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@DEPLOYEDELITE",
-      "versus_templates": [
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
@@ -4286,7 +4115,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -4301,13 +4130,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -4318,13 +4140,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4396,7 +4211,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4405,14 +4220,11 @@
       "versus_templates": [
        "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelInfRailgun"
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
@@ -4420,7 +4232,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -4435,13 +4247,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -4452,13 +4257,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4530,20 +4328,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeDEPLOYEDELITE",
-      "versus_templates": [
-       "SteelInfRailgun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -4589,35 +4383,24 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -4625,7 +4408,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -4640,13 +4423,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -4657,13 +4433,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4735,7 +4504,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
@@ -4744,14 +4513,11 @@
       "versus_templates": [
        "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelInfRailgun"
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -4759,7 +4525,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -4774,13 +4540,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -4791,13 +4550,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -4869,20 +4621,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeGARRISONEDELITE",
-      "versus_templates": [
-       "SteelInfRailgun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5019,7 +4767,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5045,27 +4793,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5160,7 +4887,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5186,27 +4913,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5228,7 +4934,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5254,27 +4960,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5296,7 +4981,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5322,27 +5007,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5365,7 +5029,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5391,27 +5055,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5434,7 +5077,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "15600",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy_Flat",
@@ -5460,27 +5103,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "PreservedFlat_RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6543,32 +6165,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "60000",
+        "damage": "68000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -6586,20 +6187,15 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
       "slot": "Armament",
-      "versus_templates": [
-       "SteelQuantumCannon_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Railgun_Heavy"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6757,7 +6353,9 @@
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Clsn_Medium_RA2",
-       "SteelMantaHunterCannons"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
@@ -6787,7 +6385,9 @@
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Clsn_Medium_RA2",
-       "SteelMantaHunterCannons"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
@@ -6815,7 +6415,8 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG1",
       "versus_templates": [
-       "SteelMantaHunterCannons",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
        "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
@@ -6843,7 +6444,8 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG2",
       "versus_templates": [
-       "SteelMantaHunterCannons",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
        "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
@@ -7345,42 +6947,31 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARYELITE",
-      "versus_templates": [
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -7395,13 +6986,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -7412,13 +6996,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -7490,7 +7067,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -7499,21 +7076,18 @@
       "versus_templates": [
        "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelInfRailgun"
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "22000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -7528,13 +7102,6 @@
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "PreservedFlat_GrenadeFriendlyFire",
@@ -7545,13 +7112,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -7623,20 +7183,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARYELITE",
-      "versus_templates": [
-       "SteelInfRailgun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7918,7 +7474,9 @@
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "SteelKatyCannons"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -7978,7 +7536,9 @@
       "versus_templates": [
        "^Warhead_Quantum_Medium",
        "^TeslaWeapon",
-       "SteelKatyCannons"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
@@ -8173,7 +7733,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
@@ -8185,35 +7745,24 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "SteelMakoGun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -8232,13 +7781,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8258,12 +7800,10 @@
       "versus_templates": [
        "^Warhead_Quantum_Medium",
        "^TeslaWeapon",
-       "^Effect_Flame_Heavy",
-       "SteelMakoGun"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Quantum_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
       "weapon_class_source": "template"
@@ -8273,7 +7813,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "13000",
+        "damage": "14000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_Medium",
@@ -8294,13 +7834,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
@@ -8309,21 +7842,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeELITE",
-      "versus_templates": [
-       "SteelMakoGun_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8520,7 +8048,8 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG1",
       "versus_templates": [
-       "SteelMantaAG",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -8547,7 +8076,8 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG2",
       "versus_templates": [
-       "SteelMantaAG",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
        "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
@@ -9069,32 +8599,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "48000",
+        "damage": "54000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -9121,12 +8630,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "SteelQuantumCannon"
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "SteelQuantumCannon_EMP",
       "weapon_class_source": "template"
@@ -9135,32 +8642,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "60000",
+        "damage": "68000",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -9178,21 +8664,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
       "requires": "rank-elite",
       "slot": "Armament@elite",
-      "versus_templates": [
-       "SteelQuantumCannon_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Railgun_Heavy"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

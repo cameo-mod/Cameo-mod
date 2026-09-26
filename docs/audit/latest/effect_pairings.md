@@ -2,7 +2,13 @@
 
 Silent bullet-puff exemptions (ruled OK): {'piffs': 113, 'water_piffs': 210, 'small_poof': 2, 'piff': 76, 'water_piff': 87, 'blue_poof': 3, 'ra2_piff': 16, 'ra2_piffs': 142, 'd2k_piffs': 8}
 
-## Silent impacts (Explosions w/o ImpactSounds): 396
+## Silent impacts (Explosions w/o ImpactSounds): 415
+| `td_corpsespawner` | `Warhead@Effect` | `death_a` |
+| `td_corpsespawner` | `Warhead@Effect` | `death_b` |
+| `td_corpsespawner` | `Warhead@Effect` | `death_c` |
+| `td_corpsespawner` | `Warhead@Effect` | `death_d` |
+| `td_corpsespawner` | `Warhead@Effect` | `death_e` |
+| `td_corpsespawner` | `Warhead@Effect` | `death_f` |
 | `APCGun` | `Warhead@EffectWater` | `small_splash` |
 | `td_gdi_apc_apcgun_AA` | `Warhead@EffectWater` | `small_splash` |
 | `td_gdi_skyshield_skyshieldcannon` | `Warhead@EffectWater` | `small_splash` |
@@ -57,13 +63,7 @@ Silent bullet-puff exemptions (ruled OK): {'piffs': 113, 'water_piffs': 210, 'sm
 | `DepthChargeCryo` | `Warhead@EffectAir` | `cryo_blast` |
 | `ra1_allies_gunboat_cannon_cryo` | `Warhead@Effect` | `cryo_blast` |
 | `ra1_allies_gunboat_cannon_cryo` | `Warhead@EffectWater` | `cryo_blast` |
-| `ra1_allies_gunboat_cannon_cryo` | `Warhead@EffectAir` | `cryo_blast` |
-| `ra1_allies_cruiser_8inchcryo` | `Warhead@Effect` | `cryo_blast` |
-| `ra1_allies_cruiser_8inchcryo` | `Warhead@EffectWater` | `cryo_blast` |
-| `ra1_allies_cruiser_8inchcryo` | `Warhead@EffectAir` | `cryo_blast` |
-| `ra1_allies_destroyer_missile_cryo` | `Warhead@Effect` | `cryo_blast` |
-| `ra1_allies_destroyer_missile_cryo` | `Warhead@EffectWater` | `cryo_blast` |
-_… 336 more_
+_… 355 more_
 
 ## Foreign .aud sound on d2k_* visual: 11
 | `NaxPlaneRockets_elite` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
@@ -78,4 +78,4 @@ _… 336 more_
 | `SwarmlingShoot` | `Warhead@EffectAir` | `d2k_med_explosion` → `zguhit00.aud` |
 | `BehemothShoot` | `Warhead@Effect` | `d2k_med_explosion` → `zguhit00.aud` |
 
-FAIL: silent 396 <= 396, foreign 11 <= 9  (lower-only ratchet)
+FAIL: silent 415 <= 396, foreign 11 <= 9  (lower-only ratchet)

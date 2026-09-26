@@ -2364,7 +2364,74 @@ ra2_allies_gi_para:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2vulcan2:
-	Inherits: GuardianGIMG
+	Inherits@xGuardianGIMG0: ^Warhead_Bullet_Medium
+	Inherits@xGuardianGIMG1: ^Projectile_Bullet_Medium
+	Inherits@xGuardianGIMG2: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 20
+	Range: 4762
+	Burst: 3
+	BurstDelays: 2
+	Report: vblhatta.wav, vblhattb.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of GuardianGIMG
 	ReloadDelay: 25
 	Range: 5724
 	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
@@ -2507,7 +2574,74 @@ GuardianGIMG2:
 		InvalidTargets: Air
 		Damage: 4000
 GuardianGIMG_elite:
-	Inherits: GuardianGIMG
+	Inherits@xGuardianGIMG0: ^Warhead_Bullet_Medium
+	Inherits@xGuardianGIMG1: ^Projectile_Bullet_Medium
+	Inherits@xGuardianGIMG2: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 20
+	Range: 4762
+	Burst: 3
+	BurstDelays: 2
+	Report: vblhatta.wav, vblhattb.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+	# W7MAT inline of GuardianGIMG
 	Range: 5762
 	Burst: 6
 
@@ -2575,7 +2709,29 @@ GuardianGIMG2_elite:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2DoublePistols_elite:
-	Inherits: RA2DoublePistols
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: itanatta.wav, itanattb.wav
+	ReloadDelay: 12
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Projectile: Bullet
+		Speed: 10000
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 14000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 14000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 7
+	# W7MAT inline of RA2DoublePistols
 	Range: 9000
 	Burst: 4
 
