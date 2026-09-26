@@ -191,14 +191,29 @@ td_nod_upgrade_cyberneticmodifications:
 	Tooltip:
 		Name: Cybernetic Modifications
 	Valued:
-		Cost: 10000
+		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_cyberneticmodifications.description
-		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, !td_nod_upgrade_cyberneticmodifications
+		Prerequisites: ~td_nod_templeofnod, !td_nod_upgrade_cyberneticmodifications
 	RenderSprites:
 		Image: cyberneticmodificationsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_cyberneticarmor:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cybernetic Armor
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 81
+		Queue: Research
+		Description: upgrade_cyberneticarmor.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, td_nod_upgrade_cyberneticmodifications, !td_nod_upgrade_cyberneticarmor
+	RenderSprites:
+		Image: cyberneticarmoricon
 	ProvidesPrerequisite:
 
 td_nod_upgrade_advancedguerillatactics:

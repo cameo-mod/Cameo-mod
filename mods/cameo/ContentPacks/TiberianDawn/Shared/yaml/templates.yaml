@@ -344,29 +344,34 @@ td_ra2flameguy:
 	GrantConditionOnPrerequisite@td_nod_upgrade_cyberneticmodifications:
 		Condition: td_nod_upgrade_cyberneticmodifications
 		Prerequisites: td_nod_upgrade_cyberneticmodifications
-	Shielded:
-		InitialPercentageStrength: 100
-		MaxPercentageStrength: 100
-		DamageRegenDelay: 125
-		RegenAmount: 25
-		RegenInterval: 1
-		ShieldsUpCondition: armored
-		RequiresCondition: (td_nod_upgrade_cyberneticmodifications || shieldgen)
-		SelectionBarColor: FFFF88FF
-	GrantCondition@shieldpermanent:
-		Condition: shieldpermanent
-		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+	# Upgrade 1 (Temple of Nod) - PERMANENT Medium armour after research, combined with the
+	# unit's own infantry armour by the geometric rule (#510), e.g. Minigunner = Flak x Medium.
+	# Off while a generator shield is up: the Shield row replaces every class armour (12.0c).
+	# The upgrade no longer grants a shield, and the hidden DamageMultiplier 200 is gone (W26/R1).
 	Armor@td_nod_upgrade_cyberneticmodifications:
 		Type: Medium
-		RequiresCondition: armored
-	DamageMultiplier@td_nod_upgrade_cyberneticmodifications:
-		RequiresCondition: td_nod_upgrade_cyberneticmodifications
-		Modifier: 200
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications && !shielded
 	SpeedMultiplier@td_nod_upgrade_cyberneticmodifications:
 		RequiresCondition: td_nod_upgrade_cyberneticmodifications
 		Modifier: 120
+	# Upgrade 2 (Temple Prime) - Cybernetic Armor: an orange plating bar of 50% max HP that absorbs
+	# before health (the Schwarzer Mond Noid layer). While it holds, COMPOSITE multiplies on the
+	# class row: bullets and AP rounds do much less, blast is its weakness.
+	GrantConditionOnPrerequisite@td_nod_upgrade_cyberneticarmor:
+		Condition: td_nod_upgrade_cyberneticarmor
+		Prerequisites: td_nod_upgrade_cyberneticarmor
+	ArmorPlating@td_nod_upgrade_cyberneticarmor:
+		RequiresCondition: td_nod_upgrade_cyberneticarmor
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: cyberneticarmor_up
+	Armor@td_nod_upgrade_cyberneticarmor:
+		Type: COMPOSITE
+		RequiresCondition: cyberneticarmor_up && !shielded
 	ActorStatValues:
-		Upgrades: td_nod_upgrade_cyberneticmodifications
+		Upgrades: td_nod_upgrade_cyberneticmodifications, td_nod_upgrade_cyberneticarmor
 
 ^GuerillaTactics:
 	FirepowerMultiplier@td_nod_upgrade_guerillatactics:
