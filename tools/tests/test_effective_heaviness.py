@@ -660,19 +660,25 @@ class SharedProfileMirrorTest(unittest.TestCase):
         self.assertEqual(eh.heaviness_mode_of(field("W", "AreaDamage")), eh.MODE_LEGACY)
 
     def test_shared_folded_units_combined_fraction_half_up(self):
-        # ONE rounding of the combined fraction; h = 0 -> 0 exactly.
-        self.assertEqual(pd.shared_folded_units(2000, 2000, 0), (0.0, 0))
+        # §12.0j growth (2026-09-26): x0.8 at h=0, x1.0 at h=1, x1.25 at h=2; ONE rounding.
+        self.assertEqual(pd.shared_folded_units(2000, 2000, 0), (16.0, 16))  # 20 x 0.8
         continuous, rounded = pd.shared_folded_units(100, 2000, 2000)
-        self.assertEqual(rounded, 1)                  # 100 x 2000 x 2 / 4e8 = 1.0
-        self.assertEqual(continuous, 1.0)
-        self.assertEqual(pd.shared_folded_units(100, 2000, 1000)[1], 1)   # 0.5 -> half-UP
-        self.assertEqual(pd.shared_folded_units(100, 2000, 500)[1], 0)    # 0.25 -> 0
-        self.assertEqual(pd.shared_folded_units(6000, 2500, 1000)[1], 38) # 37.5 -> half-UP
+        self.assertEqual(rounded, 1)                  # 1.0 x 1.25 = 1.25 -> 1
+        self.assertEqual(continuous, 1.25)
+        self.assertEqual(pd.shared_folded_units(100, 2000, 1000)[1], 1)   # exactly 1.0
+        self.assertEqual(pd.shared_folded_units(100, 2000, 500)[1], 1)    # 0.9 -> 1
+        self.assertEqual(pd.shared_folded_units(6000, 2500, 1000)[1], 75) # = the legacy fold
+        self.assertEqual(pd.shared_folded_units(500, 2000, 0)[1], 4)      # 5 x 0.8 = 4.0
+
+    def test_shared_growth_is_continuous_and_hits_the_ruled_points(self):
+        for h, want in ((0, 0.8), (500, 0.9), (1000, 1.0), (1500, 1.125), (2000, 1.25)):
+            num, den = pd.shared_growth(h)
+            self.assertAlmostEqual(num / den, want, places=9, msg=h)
 
     def test_shared_folded_units_large_values(self):
-        # 160000 x 8000 x 1000 / 4e8 = 3200 — RA2sabot_elite scale.
-        self.assertEqual(pd.shared_folded_units(160000, 8000, 1000)[1], 3200)
-        self.assertEqual(pd.shared_folded_units(160000, 8000, 2000)[1], 6400)
+        # 160000 x 8000 / 200000 = 6400 at h=1 — RA2sabot_elite scale; x1.25 at h=2.
+        self.assertEqual(pd.shared_folded_units(160000, 8000, 1000)[1], 6400)
+        self.assertEqual(pd.shared_folded_units(160000, 8000, 2000)[1], 8000)
 
     # --- review follow-up items 2–4: nonnegative contract + load-time gates ---
     def test_shared_numeric_negative_inputs_rejected_even_at_h0(self):
