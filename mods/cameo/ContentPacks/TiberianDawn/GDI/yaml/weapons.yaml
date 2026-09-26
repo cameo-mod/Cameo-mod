@@ -3946,6 +3946,9 @@ GDIRigDroneTargeting:
 	Range: 6000
 	Burst: 1
 
+	-Warhead@ExtraRepair:
+	Warhead@RepairWeapon:
+		Damage: -3000
 GDIRigPDLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -3976,6 +3979,9 @@ GDIRigDroneRepair:
 	Range: 6000
 	Burst: 1
 
+	-Warhead@ExtraRepair:
+	Warhead@RepairWeapon:
+		Damage: -3000
 td_gdi_defenserig_gdirigphalanx:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits@fx: ^td_gdi_td_gdi_defenserig_gdirigphalanx
@@ -4192,7 +4198,7 @@ GDIRigDroneTargetingTower:
 		ValidRelationships: Ally
 		Spread: 200
 		Falloff: 100, 50, 33, 25, 20
-		Damage: -2000
+		Damage: -3000
 		Versus:
 			Shield: 140
 			Superheavy: 100
@@ -4212,33 +4218,6 @@ GDIRigDroneTargetingTower:
 			None: 44
 			Scout: 40
 		DamageTypes: KillsDrone
-		DebugOverlayColor: 00FF00
-	Warhead@ExtraRepair: SpreadDamage
-		ValidTargets: Repairing, Repair, SpecialRepair
-		ValidRelationships: Ally
-		Spread: 100
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: -1000
-		Versus:
-			Shield: 100
-			Superheavy: 100
-			Spaceship: 100
-			Steel: 100
-			Heroic: 100
-			Heavy: 100
-			Helicopter: 100
-			Concrete: 100
-			Plate: 100
-			Medium: 100
-			Bomber: 100
-			Wood: 100
-			Flak: 100
-			Light: 100
-			Fighter: 100
-			None: 100
-			Scout: 100
-		DamageTypes: KillsDrone
-		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 	Warhead@RepairWeaponPercentage: AreaDamagePercentage
 		FriendlyFireDamage: 100

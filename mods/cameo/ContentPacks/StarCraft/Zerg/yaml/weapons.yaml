@@ -683,7 +683,6 @@ CorruptorSpore:
 
 DreadshroudSpore:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -778,7 +777,7 @@ DreadshroudSpore:
 	-Warhead@LaserExtraDamage:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 11000
+		Damage: 11600
 		PercentageScale: 0
 
 ^sc_zerg_scdevoureraa:
@@ -3001,6 +3000,9 @@ BroodweaverLeech:
 	BurstDelays: 1
 	InvalidTargets: Broodling
 
+	-Warhead@ExtraHealing:
+	Warhead@HealingWeapon:
+		Damage: -3000
 SwarmlingShoot:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	-TargetActorCenter:

@@ -1,6 +1,22 @@
 # Cameo — THE HANDOFF
 
 
+### DAWN — R17 chip folds / W5 batch-1 (2026-09-26, branch `devin/dawn/r17-chips`)
+
+20 weapons / 21 chip warheads folded into their mains
+(`main.Damage += chip.Damage` verbatim per R17). ExtraDamage-class
+incl. the `_Auxiliary`-suffixed chips the suffix audit misses; plus
+ExtraRepair/ExtraHealing chips folded under the same arithmetic —
+flagged for Claude to confirm the repair family wants the same fold.
+Template-supplied chips removed via `-Warhead@chip:` cancels; 3 chips
+re-supplied by their templates needed cancel+delete together.
+VT-aware survivor pick on `D2KRepair` (heal chip -> heal main, not the
+repair-route `1Dam`). Fold verifier: each diff is exactly chip-removed
++ Damage-summed. 464/464 others identical, orphans 0, boot PASS.
+W5 172->153 global; ratchets re-locked (W5 now measured-pinned 153).
+Next W5 classes are design-routed: 1Dam flat folds, areanuke rings,
+VR splits, dual-caliber AA — classification posted to fleet.
+
 ### DAWN — W1 dead-edge sweep (2026-09-26, branch `devin/dawn/w1-deadedges`)
 
 67 fully-shadowed Inherits edges removed across 54 weapons via

@@ -164,7 +164,6 @@ TSCABALDisable_EMP:
 	-Warhead@Tesla_Super_ExtraDamage:
 TSCABALObeliskLaserFire:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	-TargetActorCenter:
 	Inherits@LASER: ^LaserWeapon
 	Inherits@EFFECT: ^TSLaserEffect
@@ -229,13 +228,9 @@ TSCABALObeliskLaserFire:
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 104000
+		Damage: 105600
 		PercentageScale: 0
 
-	Warhead@Laser_Heavy_ExtraDamage:
-		InvalidTargets: Air
-	Warhead@LaserExtraDamage_Auxiliary:
-		InvalidTargets: Air
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 8
@@ -337,6 +332,7 @@ TSCABALObeliskLaserFire:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+	-Warhead@Laser_Heavy_ExtraDamage:
 TSHellfireTwin:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@fx: ^ts_cabal_tshellfiretwin
@@ -571,7 +567,6 @@ TSHellfireTwin:
 			Wood: 9
 TSCABALEnlightedLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	-TargetActorCenter:
 	Range: 10088
 	ReloadDelay: 120
@@ -628,17 +623,13 @@ TSCABALEnlightedLaser:
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 279000
+		Damage: 280600
 		PercentageScale: 0
 
 ####################################################################################################
 #		Tiberian Sun Other
 ####################################################################################################
 
-	Warhead@Laser_Heavy_ExtraDamage:
-		InvalidTargets: Air
-	Warhead@LaserExtraDamage_Auxiliary:
-		InvalidTargets: Air
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 8
@@ -740,6 +731,7 @@ TSCABALEnlightedLaser:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+	-Warhead@Laser_Heavy_ExtraDamage:
 TSRobotHackingControl:
 	ReloadDelay: 50
 	Report: tsrobothacking.wav
@@ -2452,8 +2444,9 @@ CabalEngineerRepairBeam:
 	ReloadDelay: 31
 	Range: 6128
 	Warhead@RepairWeapon: SpreadDamage
-		Damage: -1600
+		Damage: -2600
 
+	-Warhead@ExtraRepair:
 CabalMantisGun:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh2: ^Warhead_Laser_Heavy

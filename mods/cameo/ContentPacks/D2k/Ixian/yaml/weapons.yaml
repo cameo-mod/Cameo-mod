@@ -461,7 +461,6 @@ mtank_pri2:
 IxRailgunDroneBullet:
 	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
-	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits@3: ^RailgunWeapon
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
@@ -506,7 +505,7 @@ IxRailgunDroneBullet:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 25000
 		PercentageScale: 2496
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -563,6 +562,9 @@ ResonanceDroneRepair:
 	ReloadDelay: 5
 	Range: 4500
 
+	-Warhead@ExtraRepair:
+	Warhead@RepairWeapon:
+		Damage: -3000
 IxianBomb_EMP:
 	Inherits@roleflat: ^Warhead_Demolition_Heavy_Flat
 	Inherits: ^MediumFlameWeapon
@@ -1655,7 +1657,6 @@ HMG_Duelist:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 HMG_Duelist_upgrade:
-	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Warhead@Glow: GlowImpact
@@ -1898,7 +1899,7 @@ HMG_Duelist_upgrade:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 18000
+		Damage: 18600
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Report: missile6.aud

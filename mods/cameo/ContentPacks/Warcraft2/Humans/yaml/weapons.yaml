@@ -15,7 +15,6 @@ wc2footmanslice2:
 
 wc2_dwarf_Rifle:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
-	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
 	-TargetActorCenter:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumMissile
@@ -62,7 +61,7 @@ wc2_dwarf_Rifle:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 25000
 		PercentageScale: 0
 
 # 2-12 WC2 damage. 8 Base, 4 Pierce.

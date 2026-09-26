@@ -27,7 +27,6 @@ TS30mm:
 	ValidTargets: Ground, Water, Air
 TS30mmRail:
 	Inherits@collapsewh: ^Warhead_Flak_Medium
-	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
 	Inherits@3: ^RailgunWeapon
 	Inherits@fx: ^ts_gdi_ts30mmrail
 	-TargetActorCenter:
@@ -128,7 +127,7 @@ TS30mmRail:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 7000
 		PercentageScale: 0
 		FriendlyFireDamage: 56
 		FriendlyFireSpread: 56
@@ -313,7 +312,6 @@ TSJugg120mm:
 	# 	Explosions: artillery_explosion
 
 KodiakCannon:
-	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@5: ^RailgunWeapon
@@ -416,7 +414,7 @@ KodiakCannon:
 		InvalidTargets: Air
 		PercentageScale: 1998
 		ValidTargets: Ground, Water
-		Damage: 40000
+		Damage: 41000
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -430,8 +428,6 @@ KodiakCannon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@HeavyMissile:
 	-Warhead@HeavyBomb:
-	Warhead@RailgunExtraDamage_Auxiliary:
-		InvalidTargets: Air
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 15

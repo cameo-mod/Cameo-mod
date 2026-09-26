@@ -82,7 +82,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 1142   # 248/2172 = 1141.8 bp: W1 dead-edge sweep removed 43
+W1_RATE_BP = 1138   # 247/2172 = 1137.5 bp: R17 chip folds dropped 9 dead
+                    # ^Warhead_*_ExtraDamage edges. 1142 was the W1 dead-edge sweep
                     # fully-shadowed edges (resolve-drop probe: flat+ordered
                     # identical). Old value 1188 (258/2172): W8 batch-1 covering edges
                     # (^D2K_Cannon/^D2KMissile/^D2KRocket/^OCannon/^Debris2Legacy/
@@ -98,7 +99,9 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 58    # 71 -> 58: W1 dead-edge sweep (-13 dead ^Warhead_* edges,
+W2_BASELINE = 51    # 58 -> 51: R17 chip folds removed the sole-purpose
+                    # ^Warhead_*_ExtraDamage family edges folded into mains.
+                    # 71 -> 58: W1 dead-edge sweep (-13 dead ^Warhead_* edges,
                     # each with its dead -Key: cancel pair). Resolved-identical.
                     # 53 -> 71: W8 batch-1 covering edges (+18 dual wh; the
                     # ^Debris2Legacy family is genuinely dual-warhead).
@@ -138,7 +141,10 @@ W4_BASELINE = 70    # 44 -> 70: W8 batch-1 covering edges (+26 dual fx).
                     # surfacing 3 pre-existing dual-effect-edge weapons hidden by
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
-W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
+W5_BASELINE = 153   # 389 -> 153: re-locked at current true value after the
+                    # R17 chip-fold batch (-19 weapons). The 389 figure was a
+                    # merge-repair era ceiling, far above any recent measurement.
+                    # previous: more than one resolved MAIN warhead; merge-payload repairs
 W6_BASELINE = 521   # 518 -> 521: W8 batch-1 w8-repin materializations.
                     # 437 -> 510: ordered-key parity fix (NOVA merge-blocker on
                     # #508) materializes warhead pins as LOCAL nodes at their

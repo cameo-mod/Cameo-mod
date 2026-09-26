@@ -3515,8 +3515,6 @@ BCYamatoCannon:
 PhobosLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
-	Inherits@collapseextra2: ^Warhead_Railgun_ExtraDamage
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^RailgunWeapon
@@ -3720,7 +3718,7 @@ PhobosLaser:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 48000
+		Damage: 49600
 		PercentageScale: 1248
 
 	InvalidTargets: wall
@@ -3908,6 +3906,9 @@ RavenRepair:
 	ReloadDelay: 5
 	Range: 5000
 
+	-Warhead@ExtraRepair:
+	Warhead@RepairWeapon:
+		Damage: -3000
 ScienceVesselDefenseMatrix:
 	ValidTargets: Vehicle, Ship, Air
 	InvalidTargets: lockdowned, shielded

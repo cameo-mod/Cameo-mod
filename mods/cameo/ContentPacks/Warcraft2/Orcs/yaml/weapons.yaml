@@ -432,7 +432,7 @@ wc2axeFirespear:
 		SmudgeType: RA2Scorch
 	Warhead@CannonHE_Medium: AreaDamage  # W7MAT order-pin
 		ValidTargets: Ground, Water, Air
-		Damage: 33000
+		Damage: 33600
 		PercentageScale: 1210
 	InvalidTargets: wall  # W7MAT order-pin
 	Warhead@ShieldHit: GrantExternalCondition  # W7MAT order-pin
@@ -442,6 +442,7 @@ wc2axeFirespear:
 		ImpactSounds: xplos.aud
 	Warhead@Concrete: DamagesConcrete  # W7MAT order-pin
 		Damage: 100
+	-Warhead@LaserExtraDamage_Auxiliary:
 wc2ogrepunch:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit

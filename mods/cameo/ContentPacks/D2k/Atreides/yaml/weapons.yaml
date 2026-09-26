@@ -305,8 +305,7 @@ D2KRepair:
 
 	Warhead@HealingWeapon:
 		Spread: 1000
-	Warhead@ExtraHealing:
-		Spread: 500
+		Damage: -3000
 	Warhead@HealingWeaponPercentage:
 		Spread: 5000
 	Warhead@HealingField:
@@ -325,6 +324,7 @@ D2KRepair:
 		Radius: 5000
 		ValidRelationships: Ally
 		ValidTargets: Heal
+	-Warhead@ExtraHealing:
 PhoenixRocket:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge

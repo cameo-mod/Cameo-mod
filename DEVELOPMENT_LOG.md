@@ -12777,3 +12777,46 @@ resolve to the maximal joint drop set).
 Tooling note: `w1_deadedge.py`/`w1_allarity.py`/`w1_apply2.py` (scratch).
 Comparator `verify_tree.py` scopes by explicit file list — the
 `git log -1`-files comparator has a real blind spot (see LESSONS).
+
+## Devin-DAWN — R17 chip folds, W5 batch-1 (2026-09-26)
+
+Branch `devin/dawn/r17-chips` (stacked on `devin/dawn/w1-deadedges` tip
+`2c54d3c74`, PR #525).
+
+Lane item W5 (multi-MAIN warheads). Claude's month-lanes order:
+"W5 folds follow R17 arithmetic — keep each weapon's total damage" and
+"fold ExtraDamage weapons in the batch whose family they belong to."
+
+20 weapons / 21 chips folded, `main.Damage += chip.Damage` verbatim:
+
+- ExtraDamage-class chips (R17 itself): `LaserExtraDamage_Auxiliary`,
+  `RailgunExtraDamage_Auxiliary`, `Laser_Heavy_ExtraDamage` — the
+  `_Auxiliary` suffix is the same chip pattern the `*ExtraDamage` suffix
+  check misses. 10 weapons.
+- ExtraRepair / ExtraHealing chips (same chip-half structure, applied
+  under the same verbatim-sum arithmetic — flagged to Claude in case the
+  repair family wants a different disposition): 10 weapons.
+
+Fold mechanics: local chip blocks deleted; template-supplied chips get a
+`-Warhead@chip:` cancel; sole-purpose `Inherits*: ^Warhead_*_ExtraDamage`
+edges dropped with the fold (9 edges — also why W2 -7); chip+edge removed
+TOGETHER or the cancel orphans (EMBER rule). Caught 3 re-supplied chips
+(CABAL lasers, D2KRepair) where the template re-provides the node after
+the local declare was deleted — appended cancels.
+
+VT-aware survivor pick: `D2KRepair` folds `ExtraHealing` into
+`HealingWeapon` (VT=Heal), NOT `1Dam` (VT=Repair) — matching the chip's
+route, not just max damage.
+
+Verified per-weapon: resolved diff = exactly {chip subtree gone,
+main Damage = old + chip sum, nothing else}. 20/20 OK. Corpus: 464/464
+otherwise identical, 0 order diffs, orphans 0, empty 0, dup-inherits
+identical, boot-gate PASS. W5 172->153 global, W1 248->247,
+W2 58->51; ratchets re-locked (W5 re-pinned to true value 153 vs the
+stale 389 ceiling).
+
+Remaining in-lane W5 (~36): 1Dam flat-main folds (analyse_flat_main_fold
+— mean-preserving, per-armor shift needs maintainer eye), areanuke rings
+(5), VR-routed enemy/ally splits (Sound/GrenDeath/SaboDeath — Sound2 held),
+dual-caliber AA stacks, held-trio mains, multi-mains >2 (SiegeQuad,
+PositronBounce). All need per-class rulings — classification posted.
