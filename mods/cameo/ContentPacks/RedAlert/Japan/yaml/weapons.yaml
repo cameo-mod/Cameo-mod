@@ -2055,7 +2055,50 @@ Hakureiring:
 Hakureiring2:
 	# Anti-boss ability: targets Epic/Psionic/Monster only. Pure Magic (2026-08-10).
 	# Combined damage: was 120k Tesla + 120k Magic = 240k total → single 240k Magic.
-	Inherits: Hakureiring
+	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
+	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
+	InvalidTargets: Epic, Psionic, Monster
+	ReloadDelay: 30
+	Burst: 3
+	BurstDelays: 10
+	Range: 6666
+	Projectile: Missile
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 66
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		Sequences: idle
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiring
+		TrailSequences: idle2, idle1
+		TrailInterval: 0
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		CloseEnough: 333
+		AllowSnapping: true
+	Warhead@Magic_Heavy:
+		InvalidTargets: Air
+		ValidTargets: Air, Ground, Water
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect:
+		Explosions: tsring
+		ExplosionPalette: tseffect
+		ImpactSounds:
+
+# TODO "Hakureiring2" uses MCImmune like a placeholder, in the future will be replaced with Mind Controllers and Magic Monsters
 	-InvalidTargets:
 	ValidTargets: Epic, Psionic, Monster
 	ReloadDelay: 100
@@ -2234,7 +2277,50 @@ ReimuYinYangDrone:
 Hakureiring3:
 	# Spawned sub-weapon (from YinYangDrone shrapnel). Pure Magic (2026-08-10).
 	# Was 8k Tesla + 8k Magic = 16k total → single 16k Magic.
-	Inherits: Hakureiring
+	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
+	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
+	InvalidTargets: Epic, Psionic, Monster
+	ReloadDelay: 30
+	Burst: 3
+	BurstDelays: 10
+	Range: 6666
+	Projectile: Missile
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 66
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		Sequences: idle
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiring
+		TrailSequences: idle2, idle1
+		TrailInterval: 0
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		CloseEnough: 333
+		AllowSnapping: true
+	Warhead@Magic_Heavy:
+		InvalidTargets: Air
+		ValidTargets: Air, Ground, Water
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect:
+		Explosions: tsring
+		ExplosionPalette: tseffect
+		ImpactSounds:
+
+# TODO "Hakureiring2" uses MCImmune like a placeholder, in the future will be replaced with Mind Controllers and Magic Monsters
 	InvalidTargets: Ground
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -2265,7 +2351,17 @@ NambuMGWaveforce:
 	Inherits@xNambuMGWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xNambuMGWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: NambuMG
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 15
+	Burst: 5
+	BurstDelays: 5
+	Range: 5004
+	Report: pillbox1.aud
+	Warhead@Bullet_Light:
+		Damage: 4000
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -2575,7 +2671,18 @@ SkyHawkChainGunWaveforce:
 	Inherits@xSkyHawkChainGunWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xSkyHawkChainGunWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: SkyHawkChainGun
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 8
+	Range: 3053
+	Report: gun13.aud
+	Projectile: Bullet
+		Speed: 4000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 	-Warhead@Bullet_Medium:
@@ -4871,7 +4978,50 @@ OIPlasmaFlamer:
 		PhysicalStateScale: 100
 		PercentageSpread: 50
 OIHakureiring:
-	Inherits: Hakureiring
+	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
+	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
+	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
+	InvalidTargets: Epic, Psionic, Monster
+	ReloadDelay: 30
+	Burst: 3
+	BurstDelays: 10
+	Range: 6666
+	Projectile: Missile
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 66
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		Sequences: idle
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiring
+		TrailSequences: idle2, idle1
+		TrailInterval: 0
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		CloseEnough: 333
+		AllowSnapping: true
+	Warhead@Magic_Heavy:
+		InvalidTargets: Air
+		ValidTargets: Air, Ground, Water
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect:
+		Explosions: tsring
+		ExplosionPalette: tseffect
+		ImpactSounds:
+
+# TODO "Hakureiring2" uses MCImmune like a placeholder, in the future will be replaced with Mind Controllers and Magic Monsters
 	Range: 5394
 
 	Warhead@Magic_Heavy:
@@ -4988,7 +5138,21 @@ BuggyGrenade:
 		Damage: 60000
 BuggyPlasmaGrenade:
 	Inherits@roleflat: ^Warhead_Plasma_Light
-	Inherits@3: BuggyGrenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	ReloadDelay: 60
+	Range: 5184
+	Report: M203.aud
+	Projectile: Bullet
+		Speed: 333
+		ContrailStartColor: FFCC88FF
+		ContrailEndColor: FFFFFF22
+		ContrailLength: 11
+		ContrailStartWidth: 99
+		ContrailEndWidth: 33
+	Warhead@Demolition_Light:
+		Damage: 60000
 	Projectile: Bullet
 		Speed: 333
 		ContrailStartColor: FF4488AA
@@ -5538,7 +5702,16 @@ NanoArtilleryAG:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 NanoReturnHeal:
-	Inherits: NanoReturn
+	ReloadDelay: 77
+	Range: 7777
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: black_smokey
+		TrailImage: black_smokey
+		TrailInterval: 2
+		Speed: 277
+	Warhead@Heal: TargetDamage
 	Inherits@fx: ^Effect_Emp_Fx_RA2
 	Warhead@Heal: SpreadDamage
 		AffectsParent: true
@@ -5763,7 +5936,30 @@ WaveArtilleryImpact:
 		ValidTargets: Ground, Water, Air
 
 WaveTurretShell:
-	Inherits: WaveArtilleryShell
+	ReloadDelay: 111
+	Range: 11111
+	Report: ra1_japan_sounds|WaveforceCannon.wav
+	Projectile: WarheadTrailProjectileCA
+		Weapon: WaveArtilleryImpact
+		FireMode: Line
+		KillProjectilesWhenReachedTargetLocation: false
+		ExplosionInterval: 1
+		Image: waveforcebullet
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		Blockable: true
+		ContrailLength: 11
+		ContrailStartWidth: 333
+		ContrailEndWidth: 33
+		ContrailStartColor: 77CCFF77
+		ContrailEndColor: FFFFFF00
+		ContrailDelay: 0
+		Speed: 333
+		Inaccuracy: 666
+	Warhead@Effect: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: blueartexp
+		ValidTargets: Ground, Air
 	ReloadDelay: 100
 	Range: 9825
 	Projectile: WarheadTrailProjectileCA

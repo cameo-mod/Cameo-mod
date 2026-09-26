@@ -1286,7 +1286,27 @@ PrismCharge:
 	Warhead@1Dum: Dummy
 
 PrismTankCharge:
-	Inherits: PrismCharge
+	ReloadDelay: 3
+	Range: 9630
+	ValidTargets: Ground, Water, Air
+	Report: bpriat1a.wav
+	Projectile: PlasmaBeam
+		Width: 75
+		Duration: 50
+		ZOffset: 2047
+		UsePlayerColor: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		Colors: 88888888
+		CenterBeam: true
+		CenterBeamWidth: 50
+		CenterBeamColor: CCCCCCCC
+		SecondaryCenterBeam: true
+		SecondaryCenterBeamColor: FFFFFFFF
+		# Distortion: 10
+		# DistortionAnimation: 10
+		# DistortionAnimation: 10
+	Warhead@1Dum: Dummy
 	ReloadDelay: 100
 	Range: 10000
 	ValidTargets: PrismTowerChargeable
@@ -1355,7 +1375,19 @@ RA2Prism:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
-	Inherits@Effects: RA2PrismBeam
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
 	Report: bpriat1a.wav
 	Warhead@Laser_Heavy:
 		Damage: 32000
@@ -1408,7 +1440,45 @@ PrismScatter:
 		AimTargetStances: Enemy, Neutral
 
 PrismScatter2:
-	Inherits: PrismScatter
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
+	Report: bpriat1a.wav
+	Warhead@Laser_Heavy:
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+	Range: 3333
+	-Report:
+	Projectile: LaserZap
+		Width: 96
+		SecondaryBeamWidth: 48
+		Duration: 24
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Damage: 4000
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter2
+		Amount: 3
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Range: 2500
 	Projectile: LaserZap
 		Width: 64
@@ -1419,7 +1489,45 @@ PrismScatter2:
 	-Warhead@3:
 
 PrismScatterE:
-	Inherits: PrismScatter
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
+	Report: bpriat1a.wav
+	Warhead@Laser_Heavy:
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+	Range: 3333
+	-Report:
+	Projectile: LaserZap
+		Width: 96
+		SecondaryBeamWidth: 48
+		Duration: 24
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Damage: 4000
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter2
+		Amount: 3
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Range: 5000
 	Warhead@Laser_Heavy:
 		Damage: 6000
@@ -2274,7 +2382,24 @@ RA2HeavyMirageGun_elite:
 			Fighter: 1
 
 ChronoBeam_elite:
-	Inherits: ChronoBeam
+	ReloadDelay: 1
+	Range: 5000
+	TargetActorCenter: True
+	ValidTargets: Chronobeamable
+	InvalidTargets: Air
+	Projectile: LaserZap
+		Width: 75
+		Duration: 15
+		Color: add8e6
+		SecondaryBeam: true
+		SecondaryBeamWidth: 25
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF80
+	Warhead@Damage: WarpDamage
+		Damage: 200
+		Spread: 1
+		DamageTypes: ChronoDeath
+		ValidTargets: Chronobeamable
 	Projectile: LaserZap
 		Width: 75
 		Duration: 15
@@ -2625,7 +2750,17 @@ RA2para:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 GuardianGIMG2:
-	Inherits: RA2para
+	Inherits@xRA2para0: ^Warhead_Bullet_Medium
+	Inherits@xRA2para1: ^Projectile_Bullet_Medium
+	Inherits@xRA2para2: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 4750
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
 	Warhead@Bullet_Medium:
 		InvalidTargets: Air
 		Damage: 4000
@@ -2805,7 +2940,24 @@ RA2DoublePistols_elite:
 	Burst: 4
 
 RA2AWP_elite:
-	Inherits: RA2AWP
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	ReloadDelay: 54
+	Range: 10000
+	Report: isniatta.wav
+	Warhead@Sniper_Light:
+		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 22
+		Spread: 1
+		Falloff: 100, 0
 	Range: 12345
 	Projectile: Bullet
 		Speed: 10000
@@ -2842,7 +2994,28 @@ RA2MP5:
 		Damage: 1
 
 RA2MP5_elite:
-	Inherits: RA2MP5
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: iseaatta.wav, iseaattb.wav
+	ReloadDelay: 10
+	Range: 6386
+	Burst: 4
+	BurstDelays: 3
+	Projectile: Bullet
+		Speed: 10000
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 4000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 2000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 1
 	Range: 6000
 	Burst: 8
 

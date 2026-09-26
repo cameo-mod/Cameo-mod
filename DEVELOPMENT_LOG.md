@@ -1,3 +1,14 @@
+## 2026-09-27 — W7 chain-collapse batch-5 (NOVA)
+
+60 more chain-root children inlined verbatim (RA Allies/Japan/Shared/
+Soviets + RA2 Allies/Shared/Soviets weapon files). Net W7: **536 -> 477**
+— `RA2FlyingBody` keeps a second weapon edge (partial, resolve-clean).
+Verification vs `76914f1c8` strict-order: 60/60 clean. Guards: orphans 0,
+empty 0, dup-inherits clean, dup defs 0, local-Versus 881 <= 891.
+Ledgers re-extracted (10 in-lane, same provenance-remap class). Ratchet
+re-locked 536 -> 477. The 10 same-key collisions remain deferred pending
+Claude's ruling (see STATUS_2026-09-27_nova_w7_batch4.md Q1).
+
 ## 2026-09-26 (late night) — W7 chain-collapse batch-4 (NOVA)
 
 60 chain-root children of Versus-free parents inlined verbatim across

@@ -4043,7 +4043,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "ra1_soviets_teslacoil_teslazap_emp"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -5865,7 +5867,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "ra1_soviets_shocktrooper_portatesla_emp"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -5971,7 +5975,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade2GARRISONED",
       "versus_templates": [
-       "ra1_soviets_shocktrooper_portatesla_emp"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -6841,7 +6847,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "ra1_soviets_zapper_zapperportatesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -6911,7 +6919,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "ra1_soviets_zapper_zapperportatesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -8592,7 +8602,9 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@AA",
       "versus_templates": [
-       "ra1_soviets_gatlingtank_ragatlingtankcannon"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -8784,7 +8796,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade2AA",
       "versus_templates": [
-       "ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -9157,7 +9171,9 @@
        "^Warhead_Thermobaric_Heavy",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
-       "ra1_soviets_hammertank_cannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Heavy",
@@ -9586,7 +9602,9 @@
       "requires": "!ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament",
       "versus_templates": [
-       "105mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9758,7 +9776,9 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament",
       "versus_templates": [
-       "ra1_soviets_heavyteslatank_ttankzap2"
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -11184,7 +11204,8 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "ra1_soviets_nuclearv2launcher_scudnuke"
+       "^Warhead_Nuclear_Super",
+       "^Effect_Nuclear_Super"
       ],
       "warheads": [
        "^Warhead_Nuclear_Super"
@@ -12058,7 +12079,9 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "ra1_soviets_teslatank_ttankzap_emp"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

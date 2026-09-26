@@ -648,9 +648,7 @@
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
-      "versus_templates": [
-       "SpyPlaneTargeting"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SpyPlaneTargeting2",
       "weapon_class_source": "none"
@@ -2487,7 +2485,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2541,7 +2541,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",

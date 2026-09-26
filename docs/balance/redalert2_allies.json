@@ -1750,8 +1750,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "RA2PrismBeam"
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1919,9 +1918,7 @@
       "reloaddelay": "1",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
       "weapon_class_source": "none"
@@ -1953,9 +1950,7 @@
       "reloaddelay": "1",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
       "weapon_class_source": "none"
@@ -2442,7 +2437,9 @@
       "requires": "!deployed && !rank-elite && ra2_allies_upgrade_elitegi",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "RA2para"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2605,7 +2602,9 @@
       "requires": "rank-elite && deployed",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -2632,7 +2631,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -2953,7 +2954,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2MP5"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3027,7 +3030,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2MP5"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3180,7 +3185,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2AWP"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3250,7 +3257,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2AWP"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3401,9 +3410,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
-      "versus_templates": [
-       "IvanAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "TanyaAttach",
       "weapon_class_source": "none"
@@ -4606,7 +4613,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2105mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5516,9 +5525,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -5533,9 +5540,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -6871,9 +6876,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -6888,9 +6891,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -8228,9 +8229,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -8245,9 +8244,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -9585,9 +9582,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -9602,9 +9597,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -10941,9 +10934,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -10958,9 +10949,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -12297,9 +12286,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -12314,9 +12301,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -13241,9 +13226,7 @@
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@Charge",
-      "versus_templates": [
-       "PrismCharge"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PrismTankCharge",
       "weapon_class_source": "none"

@@ -2898,7 +2898,24 @@ ra1_allies_cruiser_8inch:
 			Spaceship: 10
 
 ra1_allies_alliedsniper_lightsniper:
-	Inherits: LightSniper
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
+	ReloadDelay: 100
+	Range: 9153
+	Warhead@Sniper_Light:
+		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 15
+		Spread: 1
+		Falloff: 100, 0
 
 ra1_allies_alliedlighttank_25mm:
 	Inherits: 25mm

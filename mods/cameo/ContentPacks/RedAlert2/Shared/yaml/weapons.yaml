@@ -886,7 +886,27 @@ RA2GIRocketsG:
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 RA2GIRocketsG_elite:
-	Inherits: RA2GIRocketsG
+	Inherits@xRA2GIRocketsG0: ^Warhead_MissileAP_Light
+	Inherits@xRA2GIRocketsG1: ^Projectile_Missile_Light
+	Inherits@xRA2GIRocketsG2: ^Effect_Clsn_Small_RA2
+	Report: bazook1.aud
+	ReloadDelay: 45
+	Range: 6567
+	Projectile: Missile
+		-TrailImage:
+		Speed: 500
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
+		Acceleration: 5
+	Warhead@MissileAP_Light:
+		Damage: 24000
+	Projectile:
+		Image: ra2_dragon
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
 	Report: bazook1.aud
 	Range: 7567
 	Warhead@MissileAP_Light:
@@ -901,13 +921,37 @@ RA2GIRocketsG_elite:
 		ContrailEndColor: FFFFFF
 
 RA2PrismBeam2:
-	Inherits: RA2PrismBeam
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
 	Projectile: LaserZapCA
 		Width: 192
 		SecondaryBeamWidth: 96
 
 RA2PrismBeam3:
-	Inherits: RA2PrismBeam
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
 	Projectile: LaserZapCA
 		Width: 256
 		SecondaryBeamWidth: 128
@@ -924,7 +968,16 @@ RA2105mm:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 RA2105mm_elite:
-	Inherits: RA2105mm
+	Inherits@xRA2105mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2105mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2105mm2: ^Effect_Explosion_Medium_RA2
+	ReloadDelay: 45
+	Range: 5289
+	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
+	Projectile: Bullet
+		Speed: 528
+	Warhead@CannonHE_Medium:
+		Damage: 8000
 	Range: 6289
 	Burst: 2
 	BurstDelays: 3
@@ -2796,11 +2849,34 @@ ChronoBeam:
 		ValidTargets: Chronobeamable
 
 IFVChronoSound:
-	Inherits: RA2ChronoTele
+	ReloadDelay: 180
+	Range: 5000
+	Report: ichratta.wav
+	Projectile: InstantHit
+	ValidTargets: Chronobeamable
+	InvalidTargets: Air
+	Warhead@1Dam: TargetDamage
 	Range: 8000
 
 IFVChronoBeam:
-	Inherits: ChronoBeam
+	ReloadDelay: 1
+	Range: 5000
+	TargetActorCenter: True
+	ValidTargets: Chronobeamable
+	InvalidTargets: Air
+	Projectile: LaserZap
+		Width: 75
+		Duration: 15
+		Color: add8e6
+		SecondaryBeam: true
+		SecondaryBeamWidth: 25
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF80
+	Warhead@Damage: WarpDamage
+		Damage: 200
+		Spread: 1
+		DamageTypes: ChronoDeath
+		ValidTargets: Chronobeamable
 	Range: 7500
 	Warhead@Damage: WarpDamage
 		Damage: 600
@@ -3212,7 +3288,17 @@ RA2PortaTesla:
 		DamageTypes: Tesla
 		Damage: 12000
 RA2PortaTesla2:
-	Inherits: RA2PortaTesla
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 5222
+	ReloadDelay: 100
+	Report: itesatta.wav
+	Warhead@Tesla_Heavy:
+		Damage: 24000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 12000
 	Range: 5777
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
@@ -3307,7 +3393,15 @@ RA2BrutePunch:
 	-Warhead@Effect:
 
 RA2BrutePunch_elite:
-	Inherits: RA2BrutePunch
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 37
+	Report: ibruattb.wav, ibruattc.wav, ibruattd.wav, ibruatte.wav, ibruattf.wav #ibruatta.wav
+	Range: 1616
+	Warhead@Melee_Medium:
+		Damage: 20000
+	-Warhead@Effect:
 	Burst: 2
 	BurstDelays: 3
 
@@ -4787,7 +4881,12 @@ V3Launch:
 	Warhead@1Dam: TargetDamage
 
 DreadnoughtLaunch:
-	Inherits: V3Launch
+	ReloadDelay: 50
+	Range: 15000
+	MinRange: 3000
+	Projectile: InstantHit
+		Inaccuracy: 1000
+	Warhead@1Dam: TargetDamage
 	ReloadDelay: 75
 	Burst: 2
 	BurstDelays: 10
@@ -6698,7 +6797,14 @@ ra2_soviets_conscript_carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 ra2_soviets_conscript_carbine_elite:
-	Inherits: ra2_soviets_conscript_carbine
+	Inherits@xra2_soviets_conscript_carbine0: ^Warhead_Bullet_Light
+	Inherits@xra2_soviets_conscript_carbine1: ^Projectile_Bullet_Light
+	Inherits@xra2_soviets_conscript_carbine2: ^Effect_Bullet_Light_RA2
+	ReloadDelay: 18
+	Range: 4500
+	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
@@ -8124,7 +8230,16 @@ RA2MODTrackMG:
 		Spread: 200
 
 RA2MODHIFVMG:
-	Inherits: RA2M60
+	Inherits@xRA2M600: ^Warhead_Bullet_Light
+	Inherits@xRA2M601: ^Projectile_Bullet_Light
+	Inherits@xRA2M602: ^Effect_Bullet_Light_RA2
+	ReloadDelay: 15
+	Range: 3854
+	Burst: 3
+	BurstDelays: 2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
 	Burst: 2
 
 LightningStorm:
@@ -8381,11 +8496,35 @@ IvanBomb:
 			Spaceship: 10
 
 IFVAttach:
-	Inherits: IvanAttach
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: ivanattachable
+	InvalidTargets: ivanattached, Aircraft
+	Warhead@1: AttachDelayedWeapon
+		Weapon: IvanBomb
+		Type: ivanbomb
+		TriggerTime: 200
+		Range: 1
+	Warhead@2: TargetDamage
 	Range: 4608
 
 TanyaAttach:
-	Inherits: IvanAttach
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: ivanattachable
+	InvalidTargets: ivanattached, Aircraft
+	Warhead@1: AttachDelayedWeapon
+		Weapon: IvanBomb
+		Type: ivanbomb
+		TriggerTime: 200
+		Range: 1
+	Warhead@2: TargetDamage
 	ValidTargets: Vehicle, Ship, Submarine
 	InvalidTargets: ivanattached, Monster
 	Warhead@1: AttachDelayedWeapon
@@ -8957,7 +9096,21 @@ RA2SpyCamera:
 		ValidTargets: Ground, Water, Air
 
 RA2ChronoAI:
-	Inherits: ChronoshiftImpact
+	Inherits@fx: ^Effect_Chrono_Fd_RA2
+	Warhead@Distort: HeatDistortion
+		Scale: 1.2
+		FadeFrames: 90
+		FadeInFrames: 0
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.5
+		FadeFrames: 90
+		FadeInFrames: 5
+	Warhead@GlowWhite: GlowImpact
+		Color: FFFFFF
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 5
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
@@ -9248,14 +9401,34 @@ RA2Debris:
 	Warhead@Validation: TargetDamage
 
 RA2LargeDebris:
-	Inherits: RA2Debris
+	Range: 3584
+	Projectile: BulletAS
+		Speed: 60, 120
+		LaunchAngle: 70, 190
+		Image: ra2debris
+		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9
+		Palette: ra2effect
+	Warhead@Validation: TargetDamage
 	Inherits@fx: ^Effect_Bang_Tiny_RA2
 	Projectile: BulletAS
 		Sequences: large1, large2, large3, large4, large5, large6, large7, large8, large9, large10
 
 RA2FlyingBody:
-	Inherits: RA2Debris
-	Inherits@2: RA2CorpseSpawner
+	Range: 3584
+	Projectile: BulletAS
+		Speed: 60, 120
+		LaunchAngle: 70, 190
+		Image: ra2debris
+		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9
+		Palette: ra2effect
+	Warhead@Validation: TargetDamage
+	#Projectile: InstantExplode
+	Warhead@Effect: CreateEffect
+		Image: ra2corpse
+		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground
+		Delay: 15
 	Range: 3072
 	Projectile: BulletAS
 		Speed: 30, 90

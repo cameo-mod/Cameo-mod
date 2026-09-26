@@ -59,7 +59,23 @@ RA2KirovBomb_rad:
 		LayerName: ra2radiation
 
 RA2KirovBomb_fire:
-	Inherits: RA2KirovBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Clsn_VeryLarge_RA2
+	ReloadDelay: 50
+	Range: 2500
+	Report: vkiratta.wav
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 0, 0, -50
+		Acceleration: 0, 0, -10
+		Image: ra2zbomb
+		Palette: playerra2
+		IsPlayerPalette: true
+		Shadow: True
+	Warhead@Demolition_Heavy:
+		ValidTargets: Ground, Ship
+		Damage: 80000
+		Spread: 800
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 125
@@ -375,7 +391,22 @@ RA2120mm_rad_elite:
 			Fighter: 5
 
 RA2120mm_fire_elite:
-	Inherits: RA2120mm_fire
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
@@ -396,7 +427,22 @@ RA2120mm_fire_elite:
 		Duration: 12
 
 RA2120mm_tesla_elite:
-	Inherits: RA2120mm_tesla
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragmentWeak
+		Amount: 1
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
@@ -1385,7 +1431,20 @@ RA2120xmm_tesla:
 		AimTargetStances: Enemy, Neutral
 
 RA2120xmm_elite:
-	Inherits: RA2120xmm
+	Inherits@wh: ^Warhead_CannonAP
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Apoc_AP_RA2
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonAP: AreaDamage
+		Damage: 12000
+		Heaviness: 0
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3

@@ -81,7 +81,8 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions && !ra2_soviets_upgrade_kirovatomicbombs",
       "slot": "Armament@PRIMARYFire",
       "versus_templates": [
-       "RA2KirovBomb"
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Clsn_VeryLarge_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -2983,7 +2984,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "ra2_soviets_conscript_carbine"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3877,7 +3880,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "RA2PortaTesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -4003,7 +4008,9 @@
       "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "RA2PortaTesla"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -4884,7 +4891,9 @@
       "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "RA2120xmm"
+       "^Warhead_CannonAP",
+       "^Projectile_Shell_Light",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP"
@@ -5645,7 +5654,9 @@
       "requires": "rank-elite && ra2_soviets_doctrine_firemunitions",
       "slot": "Armament@PRIMARYELITEFire",
       "versus_templates": [
-       "RA2120mm_fire"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5674,7 +5685,9 @@
       "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARYELITETesla",
       "versus_templates": [
-       "RA2120mm_tesla"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"

@@ -1458,7 +1458,20 @@ ZeroFighterChainGunWaveforce:
 	Inherits@xZeroFighterChainGunWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xZeroFighterChainGunWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_MissileAP_Heavy
-	Inherits@3: ZeroFighterChainGun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	Range: 6615
+	MinRange: 1325
+	ReloadDelay: 92
+	Burst: 12
+	BurstDelays: 4
+	Report: gun13.aud
+	TargetActorCenter: true
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 11000
@@ -2720,7 +2733,15 @@ SpyPlaneTargeting:
 		ValidRelationships: Enemy
 
 SpyPlaneTargeting2:
-	Inherits: SpyPlaneTargeting
+	ReloadDelay: 5
+	Range: 10000
+	Projectile: InstantExplode
+	Warhead@Condition: GrantExternalCondition
+		Range: 10000
+		Duration: 500
+		Condition: lockon
+		ValidTargets: lockable
+		ValidRelationships: Enemy
 	Warhead@Condition: GrantExternalCondition
 		Duration: 750
 
@@ -2737,7 +2758,21 @@ ChronoReinforcementsSpawner:
 	Warhead@2Flash: ChronoFlashEffect
 
 ChronoAI:
-	Inherits: ChronoshiftImpact
+	Inherits@fx: ^Effect_Chrono_Fd_RA2
+	Warhead@Distort: HeatDistortion
+		Scale: 1.2
+		FadeFrames: 90
+		FadeInFrames: 0
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.5
+		FadeFrames: 90
+		FadeInFrames: 5
+	Warhead@GlowWhite: GlowImpact
+		Color: FFFFFF
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 5
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
@@ -3651,7 +3686,20 @@ MiniNuke:
 		Multiplier: 1,1
 
 105mmirak:
-	Inherits: 105mm
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
+	ReloadDelay: 76
+	Range: 5469
+	Burst: 2
+	BurstDelays: 5
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 546
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Warhead@Effect:
+		Explosions: small_poof
 	Warhead@1Radiation: CreateTintedCells
 		Spread: 1c0
 		Falloff: 100, 66, 33

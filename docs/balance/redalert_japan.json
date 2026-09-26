@@ -84,7 +84,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -424,7 +426,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Emp_Fx_RA2",
-       "SkyHawkChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -655,7 +659,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -1710,9 +1716,7 @@
       "range": "9825",
       "reloaddelay": "100",
       "slot": "Armament@WaveTurretShell",
-      "versus_templates": [
-       "WaveArtilleryShell"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "WaveTurretShell",
       "weapon_class_source": "none"
@@ -2107,7 +2111,8 @@
       "reloaddelay": "100",
       "slot": "Armament@Special",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -2164,7 +2169,8 @@
       "reloaddelay": "100",
       "slot": "Armament@GARRISONEDSpecial",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -5297,7 +5303,8 @@
       "reloaddelay": "30",
       "slot": "Armament@MAIN",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -5839,7 +5846,9 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Plasma_Light",
-       "BuggyGrenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Plasma_Light",
@@ -7454,7 +7463,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Emp_Fx_RA2",
-       "NambuMG"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
