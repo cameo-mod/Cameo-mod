@@ -663,6 +663,9 @@ cabal_beholder:
 	Armament@PRIMARY:
 		Weapon: CabalBeholderLaser
 		LocalOffset: 777,-222,-333, 777,222,-333
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalBeholderLaser
 	AttackFrontal:
 		FacingTolerance: 10
 	WithInfantryBody:
@@ -674,6 +677,8 @@ cabal_beholder:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	Passenger:
+	Garrisoner:
+		GarrisonType: Infantry
 	Selectable:
 		Bounds: 1536, 1536
 	Voiced:

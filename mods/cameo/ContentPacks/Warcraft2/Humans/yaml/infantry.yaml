@@ -394,6 +394,8 @@ wc2_humans_knight:
 		TargetTypes: Ground, Vehicle, Monster
 	#Weapons
 	Inherits@attacks_and_spells: ^WC2KnightPaladinAttacksSpells
+	Garrisoner:
+		GarrisonType: Infantry
 	ActorStatValues:
 		Upgrades: wc2_humans_upgrade_swordstrength, wc2_humans_upgrade_swordstrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii, wc2_humans_upgrade_paladin, wc2_humans_upgrade_healing, wc2_humans_upgrade_exorcism
 

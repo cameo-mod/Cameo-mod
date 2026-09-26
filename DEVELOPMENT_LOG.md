@@ -12588,3 +12588,25 @@ empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
 (pre-existing); weapon-shape all buckets at/below ratchets —
 **W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).
 
+## 2026-09-26 (late) — EMBER g4-garrison, commit 013bdd7ad
+
+**Done:** G4 vehicle-queue ruling applied. New `vehicle_queue:` category in
+`docs/design/garrison_exceptions.yaml` (6 mechs exempt); audit loader made
+category-aware so the exemption is G4-only (G1/G2/G3 unaffected). G4 7->1
+(only `cabal_ravager` — owned by Claude per ruling: moves to Infantry queue
+in the armour PR). G1 stays 7 (melee-only), G2/G3 0. Baseline report,
+SUMMARY, HANDOFF (26h) updated; PR #517 body updated; boot-gate PASS.
+
+**What didn't work:** `edit`-tool writes silently didn't persist in this
+worktree twice (file unchanged on disk, `git status` clean) — switched to
+`exec`+Python writes for all file changes here. `launch-game.cmd` via
+git-bash `cmd //c` resolves Git's Unix `find`, breaking its VERSION check —
+booted `bin/OpenRA.exe` directly with identical args. `engine/VERSION` had
+been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
+`Engine.SupportDir=` requires the dir to pre-exist (OverrideSupportDir throws).
+
+**Blockers:** none in lane. Remaining work all needs maintainer rulings
+(shared pools, DATA.R16/BLOXBASE.R16, voxel rename, bits/ cleanup).
+
+**Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
+got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).

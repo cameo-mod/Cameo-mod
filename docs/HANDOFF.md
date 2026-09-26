@@ -1,5 +1,49 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26h — EMBER: G4 vehicle-queue exemption applied (ruling follow-up)
+
+`Agent: EMBER · branch devin/ember/g4-garrison · base 784cc86be`
+
+Claude's ruling on the 7 Vehicle-queue mechs (26g open question): "all
+infantry garrison" means units **built in the Infantry queue** — vehicle-built
+mechs are exempt. Implemented as a new `vehicle_queue:` category in
+`docs/design/garrison_exceptions.yaml` (G4-only; G1/G2/G3 unaffected) listing
+pulverizermecha, plasmastrider, megalodon, poseidontank, stalker, whiterabbit.
+
+`cabal_ravager` is deliberately NOT exempted — it moves to the Infantry queue
+in Claude's armour PR and then garrisons normally. G4 residual: **1**
+(cabal_ravager, expected until that PR lands). G1 stays 7 (melee-only,
+ruled). G2/G3 stay 0. Baseline report regenerated; SUMMARY G row updated.
+
+## 2026-09-26g — EMBER: G4 garrison-acceptance census + fix (ruling 2026-09-26)
+
+`Agent: EMBER · branch devin/ember/g4-garrison · base afb66c9b5`
+
+Claude's order from 26f: census + fix under "all infantry can garrison".
+
+**Correct gate** — `Garrisoner.GarrisonType` vs `Garrisonable.Types: Infantry`.
+The earlier `Passenger.CargoType` proxy measures the transport system, not
+garrison; censusing on it flags the wrong set (misses `shotgundroid`, counts
+`fremen`/`ultralisk` which are already capable).
+
+**Census:** 284 buildable inf → 259 capable, 25 not: 9 pure aircraft
+(structurally excluded — no `Mobile`, can never `CanEnterCell`), 9
+infantry-queue defects, 7 Vehicle-queue mechs. New audit row G4 in
+`audit_garrison_weapons.py` reports queue + reason.
+
+**Fixed (9 infantry-queue):** beholder, shotgundroid, mortarbike, scorpion,
+noidmgarmor got `Garrisoner.GarrisonType: Infantry` + `Armament@GARRISONED`
+mirrors of their primaries (elite/upgrade-conditioned tiers mirrored);
+kodobeast had the armament, needed only the trait; spider (repair/capture)
+got the trait; knight + ogre are melee → `melee:` in `garrison_exceptions.yaml`.
+Post-fix G4 16→7, G1 unchanged 7.
+
+**The 7 Vehicle-queue mechs — ruled, see 26h above:** exempted via the
+`vehicle_queue:` category in `garrison_exceptions.yaml` (6 units);
+`cabal_ravager` stays flagged pending the armour-PR queue move. Flyers: 9
+(rocketeer, rocketangel, jumpjet, cosmonaut, shriek, swarmling,
+cyborgassassin, orbdrone, skymage) — structurally excluded, not defects.
+
 ## 2026-09-26f — EMBER: B3 intent backlog transcribed (587 → 0)
 
 `Agent: EMBER (A1) · branch devin/ember/b3-intent · base afb66c9b5`

@@ -246,6 +246,8 @@ wc2_orcs_kodobeast:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: wc2axeFire
+	Garrisoner:
+		GarrisonType: Infantry
 	Voiced:
 		VoiceSet: wc2voiceorctrollaxethrower
 	RenderSprites:
@@ -320,6 +322,8 @@ wc2_orcs_ogre:
 		TargetTypes: Ground, Vehicle, Monster
 	#Weapons
 	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
+	Garrisoner:
+		GarrisonType: Infantry
 	ActorStatValues:
 		Upgrades: wc2_orcs_upgrade_axestrength, wc2_orcs_upgrade_axestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_ogremage, wc2_orcs_upgrade_bloodlust, wc2_orcs_upgrade_runes
 
