@@ -7,6 +7,10 @@
   G2 an Armament@*GARRISON* block without `Name: garrisoned`: it silently
      becomes a second primary (double-fire in the open, mute in bunkers)
   G3 garrisoned armaments never carry a FireDelay
+  G4 every infantry must be garrison-accepting (ruling 2026-09-26): a
+     buildable inf actor whose resolved `Garrisoner` node is missing or
+     whose `GarrisonType` is not `Infantry` is a defect. Pure aircraft
+     (Aircraft, no Mobile) are structurally incapable and excluded.
 
 Utility-only infantry (defuse kits, capture tools — see UTILITY_WEAPONS)
 and units garrisons cannot accept are auto-exempt from G1.
@@ -76,7 +80,8 @@ def main() -> int:
                     return True
         return False
 
-    g1_rows, g2_rows, g3_rows = [], [], []
+    g1_rows, g2_rows, g3_rows, g4_rows = [], [], [], []
+    flyers = 0
     seen: set[str] = set()
     for fac in sorted(f.internal for f in m.real_factions()):
         for lname in sorted(m.buildable_roster(fac)):
@@ -86,6 +91,24 @@ def main() -> int:
             res = rs.resolve(lname)
             if res is None:
                 continue
+
+            # G4 (ruling 2026-09-26): ALL infantry can garrison — a garrison
+            # must accept every inf actor. Acceptance is Garrisoner.GarrisonType
+            # vs Garrisonable.Types (Infantry), NOT Passenger.CargoType (that is
+            # the transport system). Pure aircraft (Aircraft, no Mobile) can
+            # never CanEnterCell a building — structurally incapable, excluded.
+            # Everything else missing Garrisoner/GarrisonType=Infantry is a defect.
+            g = res.child("Garrisoner")
+            gtype = (g.get("GarrisonType") if g else None) or None
+            if gtype != "Infantry":
+                if res.child("Mobile") is None and res.child("Aircraft") is not None:
+                    flyers += 1
+                else:
+                    qb = res.child("Buildable")
+                    g4_rows.append([fac, lname,
+                                    (qb.get("Queue") or "?") if qb else "?",
+                                    "no Garrisoner" if g is None
+                                    else f"GarrisonType={gtype!r}"])
             prim, garr = [], []
             for arm in res.children_named("Armament"):
                 w = arm.get("Weapon")
@@ -115,7 +138,8 @@ def main() -> int:
     print(h1("Garrison weapons (DESIGN.md §11)"))
     print(f"exceptions loaded: {len(exceptions)}; "
           f"G1 missing {len(g1_rows)}, G2 miswired {len(g2_rows)}, "
-          f"G3 fire-delayed {len(g3_rows)}\n")
+          f"G3 fire-delayed {len(g3_rows)}, G4 non-garrisonable {len(g4_rows)} "
+          f"({flyers} pure aircraft excluded)\n")
     print(h2(f"G1 — armed garrison-capable infantry without a garrison "
              f"weapon ({len(g1_rows)})"))
     print(table(["faction", "actor", "combat weapons"], g1_rows))
@@ -124,6 +148,9 @@ def main() -> int:
     print(table(["faction", "actor", "armament", "weapon"], g2_rows))
     print(h2(f"G3 — garrisoned armament with FireDelay ({len(g3_rows)})"))
     print(table(["faction", "actor", "armament", "FireDelay"], g3_rows))
+    print(h2(f"G4 — infantry a garrison cannot accept ({len(g4_rows)}) "
+           f"[ruling: all infantry garrison, 2026-09-26]"))
+    print(table(["faction", "actor", "queue", "reason"], g4_rows))
     return 0
 
 

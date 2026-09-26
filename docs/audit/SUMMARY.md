@@ -80,7 +80,7 @@ shares.
 | B13 | basebuilder crate coverage | **31/31** factions covered | `basebuilder_crates.md` |
 | R2 | stacked multipliers | 823 units over the 2.0× power budget | `power_budget.md` |
 | W | weapon uniqueness (§10) | 37 same-faction · 31 cross-faction · 89 carrier-only | `weapon_uniqueness.md` |
-| G | garrison weapons (§11) | **7 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
+| G | garrison weapons (§11) | **7 G1** · 0 G2 · 0 G3 · **7 G4** | `garrison_weapons.md` |
 | F | house stat formulas | 685 violations across 2009 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 60 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | **1** prerequisite-order · 985 build-palette-order violations across 910 buildables | `buildable_order.md` |
@@ -108,6 +108,7 @@ bespoke-family blocks), owned by the generator lane.
 | **MinRange** | **7 mismatches** | `min_range.md` — weapons whose `MinRange` ≠ round(Range/5) step 5 (e.g. `ra1_allies_alliedartillery_155mm` 2670 vs 2365). This row was wrongly listed under Green in the previous edition. |
 | **B13 crate coverage** | **fixed 2026-09-26 — 31/31** | `basebuilder_crates.md` — corrino `GiveBaseBuilderCrateAction` added in `rules/misc.yaml`. |
 | **G1 garrison weapons** | **7 missing** | `garrison_weapons.md` — armed garrison-capable infantry without a garrison weapon (e.g. `ra1_soviets_dog`). Was 0 in the previous edition. |
+| **G4 garrison acceptance** | **7 non-garrisonable, all Vehicle-queue** | `garrison_weapons.md` — ruling 2026-09-26: ALL infantry can garrison (`Garrisoner.GarrisonType: Infantry` vs `Garrisonable.Types`). 9 infantry-queue defects fixed 2026-09-26 (trait added; ranged got `Armament@GARRISONED` mirrors; melee knight/ogre → exceptions). Remaining 7 are all Vehicle-queue mechs (pulverizermecha, ravager, plasmastrider, megalodon, poseidontank, stalker, whiterabbit) — class ruling pending. 9 pure aircraft excluded. |
 | **Q prerequisite order** | **1 violation** | `buildable_order.md` — one buildable is gated by a prerequisite ordered after it. Was 0. |
 | **balance-ledger drift** | **25 ledgers drifted** | `balance_drift.md` — yaml moved without re-extraction, or sanctioned applies missing their `extract_stats.py` follow-up. Was 0 — flagged to lane owners. |
 | **doc claims** | **36 of 43 match — 7 MISMATCHED** | `doc_claims.md` — `shield_versus_mean`, `shield_hp_factor`, `shield_damage_share`, `percentage_denominator_unset`, `physical_state_fired_weapons`, `unconverted_template_inheritors`, `ledgers_drifted`. Several are pipeline-moved numbers needing re-pin, not bugs. |
