@@ -1,3 +1,7 @@
+^sc_zerg_zerglingclaw:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 ZerglingClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -8,6 +12,9 @@ ZerglingClaw:
 	Range: 1350
 	Warhead@Melee_Medium:
 		Damage: 2000
+	Inherits@w6fx: ^sc_zerg_zerglingclaw
+
+^sc_zerg_talonclaw:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -20,7 +27,11 @@ TalonClaw:
 	Range: 1680
 	Warhead@Melee_Medium:
 		Damage: 6000
+	Inherits@w6fx: ^sc_zerg_talonclaw
+
+^sc_zerg_gorekrakenclaw:
 	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 GorekrakenClaw:
@@ -34,6 +45,9 @@ GorekrakenClaw:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
+	Inherits@w6fx: ^sc_zerg_gorekrakenclaw
+
+^sc_zerg_shriekstinger:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -49,9 +63,13 @@ ShriekStinger:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	Inherits@w6fx: ^sc_zerg_shriekstinger
+
+^sc_zerg_hydraspit:
 	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water, Air
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+		Explosions: sczhsplash
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
 
 HydraSpit:
 	Inherits@wh: ^Warhead_BulletChem_Light
@@ -70,6 +88,9 @@ HydraSpit:
 		TrailImage: sczhsplash
 	Warhead@BulletChem_Light:
 		Damage: 18000
+	Inherits@w6fx: ^sc_zerg_hydraspit
+
+^sc_zerg_spithidspit:
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
@@ -102,10 +123,7 @@ SpithidSpit:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
+	Inherits@w6fx: ^sc_zerg_spithidspit
 	-TargetActorCenter:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
@@ -114,9 +132,19 @@ SpithidSpit:
 		Damage: 6000
 		PercentageScale: 0
 
+^sc_zerg_mutaliskspore:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
+
 MutaliskSpore:
 	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
-	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 20
+	Range: 4444
+	TargetActorCenter: true
 	Inherits: ^SwordWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^SmallArms
@@ -148,11 +176,7 @@ MutaliskSpore:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_mutaliskspore
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce1
 		Amount: 1
@@ -234,6 +258,13 @@ MutaBounce2:
 		Damage: 16000
 		PercentageScale: 0
 
+^sc_zerg_corruptorspore:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
+
 CorruptorSpore:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -262,15 +293,21 @@ CorruptorSpore:
 		Duration: 100
 		ValidTargets: snareable
 		ValidRelationships: Enemy
+	Inherits@w6fx: ^sc_zerg_corruptorspore
+
+^sc_zerg_dreadshroudspore:
 	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 
 DreadshroudSpore:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -345,15 +382,7 @@ DreadshroudSpore:
 		PhysicalStateName: Blind
 		Amount: 20000
 		Range: 600
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_dreadshroudspore
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumMissile:
@@ -365,8 +394,21 @@ DreadshroudSpore:
 	-Warhead@LaserExtraDamage:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 11000
+		Damage: 11600
 		PercentageScale: 0
+
+^sc_zerg_scdevoureraa_1_fx:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Air
+		Explosions: purplesplash
+		ImpactSounds: sc_devourer_hit.aud
+
+^sc_zerg_scdevoureraa_2_fx:
+	Warhead@Effect2: CreateEffect
+		Explosions: nax_corr_ex
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Air
 
 SCDevourerAA:
 	Inherits: MutaliskSpore
@@ -393,10 +435,7 @@ SCDevourerAA:
 		FriendlyFireSpread: 50
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		ValidTargets: Air
-		Explosions: purplesplash
-		ImpactSounds: sc_devourer_hit.aud
+	Inherits@w6fx: ^sc_zerg_scdevoureraa_1_fx
 	-Warhead@shrapnel:
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
@@ -409,11 +448,7 @@ SCDevourerAA:
 		TurnRate: 5
 		Image: explosion
 		Palette: alpha25
-	Warhead@Effect2: CreateEffect
-		Explosions: nax_corr_ex
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Air
+	Inherits@w6fx1: ^sc_zerg_scdevoureraa_2_fx
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -449,12 +484,22 @@ sc_zerg_devourer_acidcloud_aa:
 
 	Projectile: InstantExplode
 	ReloadDelay: 1
+
+^sc_zerg_scourgeexplosion_fx:
+	Warhead@Effect: CreateEffect
+		Explosions: scscourgeexplosion
+		ValidTargets: Air
+		ImpactSounds: zavdth00.aud
+
 ScourgeExplosion:
 	Inherits: SCScourgeExplosion
 	Range: 2000
 	Projectile: Missile
 		Speed: 200
 		Image: zerg_scourge
+	Inherits@w6fx: ^sc_zerg_scourgeexplosion_fx
+
+^sc_zerg_scscourgeexplosion:
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
@@ -462,26 +507,34 @@ ScourgeExplosion:
 
 SCScourgeExplosion:
 	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Concussion_Medium
+	ValidTargets: Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		Explosions: scscourgeexplosion
-		ValidTargets: Air
-		ImpactSounds: zavdth00.aud
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
+	Inherits@w6fx: ^sc_zerg_scscourgeexplosion
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 100000
 		PercentageScale: 9999
 
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Range: 5120
+^sc_zerg_guardianshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+
 GuardianShoot:
 	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
-	Inherits@collapsewh: ^Warhead_Concussion_Medium
-	Inherits@compatwh: ^Warhead_Concussion_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 10000
+	TargetActorCenter: true
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -513,21 +566,36 @@ GuardianShoot:
 		Damage: 4
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
+	Inherits@w6fx: ^sc_zerg_guardianshoot
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@ShrapnelWeapon:
-	-Warhead@Concussion_Medium:
-	-Warhead@Concussion_Light:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
+^sc_zerg_sporemawshoot_1:
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+
+^sc_zerg_sporemawshoot_2:
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+
 SporemawShoot:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -557,37 +625,39 @@ SporemawShoot:
 	FirstBurstTargetOffset: 3072,0,0
 	Warhead@Concussion_Medium:
 		Damage: 18000
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
+	Inherits@w6fx: ^sc_zerg_sporemawshoot_1
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-HermitExplode:
-	Inherits: SCReactorNuke
+	Inherits@w6fx1: ^sc_zerg_sporemawshoot_2
+
+^sc_zerg_hermitexplode_fx:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
+
+HermitExplode:
+	Inherits: SCReactorNuke
+	Inherits@w6fx: ^sc_zerg_hermitexplode_fx
 	Warhead@shrapnel: FireShrapnel
 		Weapon: HermitShoot
 		Amount: 1
 		AimChance: 0
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+^sc_zerg_hermitshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: aa_plasgreeexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
 		ValidTargets: Ground, Water, Air
 
 HermitShoot:
@@ -640,16 +710,7 @@ HermitShoot:
 		Damage: 1
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: aa_plasgreeexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: aa_plasgreeexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_hermitshoot
 	Warhead@shrapnel: FireShrapnel
 		Weapon: HermitShoot1
 		Amount: 1
@@ -700,6 +761,20 @@ BroodweaverLeech:
 	Burst: 10
 	BurstDelays: 1
 	InvalidTargets: Broodling
+
+	-Warhead@ExtraHealing:
+	Warhead@HealingWeapon:
+		Damage: -3000
+^sc_zerg_swarmlingshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
 
 SwarmlingShoot:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -814,15 +889,7 @@ SwarmlingShoot:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_swarmlingshoot
 
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
@@ -839,6 +906,18 @@ SwarmlingShoot:
 		Damage: 16000
 		PercentageScale: 0
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+
+^sc_zerg_queenspine:
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 QueenSpine:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -866,16 +945,7 @@ QueenSpine:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-	Warhead@Effect: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_queenspine
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ArrowWeapon:
 	Warhead@Chemical_Medium:
@@ -884,6 +954,10 @@ QueenSpine:
 		Damage: 20000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
 		PercentageScale: 0
+
+^sc_zerg_ultraliskhusk:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 UltraliskHusk:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -894,6 +968,9 @@ UltraliskHusk:
 	Range: 1600
 	Warhead@Melee_Medium:
 		Damage: 40000
+	Inherits@w6fx: ^sc_zerg_ultraliskhusk
+
+^sc_zerg_goremawclaw:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -906,8 +983,7 @@ GoremawClaw:
 	Range: 1250
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+	Inherits@w6fx: ^sc_zerg_goremawclaw
 
 LurkerTargeting:
 	ReloadDelay: 33
@@ -915,6 +991,11 @@ LurkerTargeting:
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	Warhead@Dummy: Dummy
+
+^sc_zerg_lurkerspines:
+	Warhead@Effect: CreateEffect
+		Explosions: sczlspine
+		ImpactSounds: zquhit00.aud,zquhit01.aud
 
 LurkerSpines:
 	ReloadDelay: 66
@@ -931,9 +1012,13 @@ LurkerSpines:
 		Blockable: true
 		Speed: 333
 		Inaccuracy: 666
+	Inherits@w6fx: ^sc_zerg_lurkerspines
+
+^sc_zerg_lurkerspinesimpact:
 	Warhead@Effect: CreateEffect
 		Explosions: sczlspine
 		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
 
 LurkerSpinesImpact:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -950,10 +1035,7 @@ LurkerSpinesImpact:
 		Damage: 1
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: sczlspine
-		ImpactSounds: zquhit00.aud,zquhit01.aud
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_zerg_lurkerspinesimpact
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@SwordWeapon:
 	-Warhead@SwordWeaponFriendlyFire:
@@ -962,11 +1044,18 @@ LurkerSpinesImpact:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 0
 
+^sc_zerg_infestedexplosion:
+	Warhead@Effect: CreateEffect
+		Explosions: self_destruct
+		ImpactSounds: ExploLrg.aud
+		ImpactActors: true
+
 InfestedExplosion:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Report: M203.aud
@@ -975,17 +1064,29 @@ InfestedExplosion:
 		Damage: 50000
 	Warhead@Demolition_Heavy:
 		Damage: 100000
-	Warhead@Effect: CreateEffect
-		Explosions: self_destruct
-		ImpactSounds: ExploLrg.aud
-		ImpactActors: true
+	Inherits@w6fx: ^sc_zerg_infestedexplosion
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 10000
+
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Range: 5120
+^sc_zerg_behemothshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: zguhit00.aud
+		ExplosionPalette: ra_temperat
+	Warhead@Effect2: CreateEffect
+		Explosions: sczhsplash
+		ImpactSounds: zguhit00.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
+		ImpactSounds: zguhit00.aud
 
 BehemothShoot:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
@@ -1075,16 +1176,7 @@ BehemothShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-	Warhead@Effect2: CreateEffect
-		Explosions: sczhsplash
-		ImpactSounds: zguhit00.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: sczhsplash
-		ImpactSounds: zguhit00.aud
+	Inherits@w6fx: ^sc_zerg_behemothshoot
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
@@ -1130,12 +1222,19 @@ SCQUEENSUMMON:
 		Delay: 15
 		ValidTargets: Air, Ground, Water
 
+^sc_zerg_spore_aa:
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: zluhit00.aud
+		ImpactActors: false
+		ValidTargets: Air
+
 Spore_AA:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	-TargetActorCenter:
 	Inherits: ^MediumMissile
 	Inherits@2: ^Chaingun
 	Inherits@3: ^FlakWeapon
+	-TargetActorCenter:
 	ReloadDelay: 34
 	Range: 10160
 	Report: zlufir00.aud
@@ -1169,11 +1268,7 @@ Spore_AA:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 6
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: zluhit00.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_zerg_spore_aa
 	-Warhead@MediumMissile:
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
@@ -1182,9 +1277,18 @@ Spore_AA:
 		Damage: 36000
 		PercentageScale: 0
 
+^sc_zerg_tentacle:
+	Warhead@Effect: CreateEffect
+		Explosions: sctentacle
+		ImpactSounds: zluhit00.aud
+		ImpactActors: false
+
 Tentacle:
 	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground
+	ReloadDelay: 32
+	Range: 7680
+	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^RailgunWeapon
@@ -1199,14 +1303,10 @@ Tentacle:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 3
-	-Warhead@CannonHE_Heavy:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: sctentacle
-		ImpactSounds: zluhit00.aud
-		ImpactActors: false
+	Inherits@w6fx: ^sc_zerg_tentacle
 	-Warhead@Chaingun:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
@@ -1220,11 +1320,21 @@ Tentacle:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-DroneAttack:
-	Inherits: ^WorkerAttack
-	Report: zerglinghit.wav
+	TargetActorCenter: true
+^sc_zerg_droneattack:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
+
+DroneAttack:
+	Inherits@w81: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Melee_Medium  # W7MAT covering-edge
+	Range: 1500  # W7MAT w8-repin
+	TargetActorCenter: True  # W7MAT w8-repin
+	Warhead@Melee_Medium:  # W7MAT w8-repin
+		Damage: 10000
+	Report: zerglinghit.wav
+	Inherits@w6fx: ^sc_zerg_droneattack
 
 DarkSwarmSpawn:
 	ReloadDelay: 1
@@ -1235,6 +1345,13 @@ DarkSwarmSpawn:
 		Range: 5
 		Delay: 15
 		ValidTargets: Air, Ground, Water
+
+^sc_zerg_defilerplague:
+	Warhead@Effect: CreateEffect
+		Explosions: scplague
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		ImpactSounds: zulhit00.aud
 
 DefilerPlague:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -1279,15 +1396,11 @@ DefilerPlague:
 		ValidTargets: Ground, Air, Water
 		InvalidTargets: plagued
 		ValidRelationships: Enemy, Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: scplague
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-		ImpactSounds: zulhit00.aud
+	Inherits@w6fx: ^sc_zerg_defilerplague
 
 RemovableDebuffDummy:
-	Warhead@Cloud:
-		Duration: 450
+	Warhead@Cloud: SpawnSmokeParticle
+		Duration: 175
 		Sequences: blue_toxins
 		Weapon: AnthraxCloudBlueLarge
 		Delay: 5
@@ -1296,6 +1409,3 @@ RemovableDebuffDummy:
 		TurnRate: 5
 		Image: explosion
 		Palette: alpha25
-	Warhead@Cloud: SpawnSmokeParticle
-		Duration: 175
-		Count: 1

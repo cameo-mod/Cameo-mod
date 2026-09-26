@@ -11,6 +11,11 @@ ArbiterStasis:
 		Condition: chronobeamed
 		Duration: 125
 
+^sc_protoss_positrongrenade:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+
 PositronGrenade:
 	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -57,9 +62,7 @@ PositronGrenade:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+	Inherits@w6fx: ^sc_protoss_positrongrenade
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce1
 		Amount: 1
@@ -126,6 +129,7 @@ PositronBounce1:
 		InvalidTargets: Air
 	Warhead@TankDestroyerCannonPercentage:
 		InvalidTargets: Air
+
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
@@ -335,6 +339,7 @@ PhotonCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		PercentageScale: 0
+
 DragoonCannon:
 	Inherits: PhotonCannon
 	ReloadDelay: 40
@@ -348,22 +353,64 @@ DragoonCannon:
 		Damage: 40000
 		PercentageScale: 0
 
+^sc_protoss_gladiuscannon:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ValidTargets: Ground, Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+^sc_protoss_gladiuscannon_fx:
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+
 GladiusCannon:
 	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: PhotonCannon
-	ReloadDelay: 80
-	Range: 10000
-	Projectile: Missile
-		HorizontalRateOfTurn: 4
-		VerticalRateOfTurn: 4
-		Speed: 400
-		CloseEnough: 400
-		AllowSnapping: true
-		Image: waveforcebullet
-		TrailImage: blue_small_napalm
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -377,6 +424,7 @@ GladiusCannon:
 		Damage: 5
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+	Inherits@2: ^MediumChemicalWeapon
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -386,6 +434,23 @@ GladiusCannon:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+	Inherits@3: ^HeavyFlameWeapon
+	Projectile: Missile
+		Speed: 400
+		Image: waveforcebullet
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Inaccuracy: 0
+		Shadow: true
+		CloseEnough: 400
+		AllowSnapping: true
+		HorizontalRateOfTurn: 4
+		VerticalRateOfTurn: 4
+		TrailImage: blue_small_napalm
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -399,6 +464,16 @@ GladiusCannon:
 		Damage: 5
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+	Inherits@4: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 80
+	Range: 10000
+	Report: tphfi201.wav, tgofi200.wav
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -408,140 +483,174 @@ GladiusCannon:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Plasma_Heavy_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Spread: 383
+		Damage: 110000
+		Falloff: 100, 89, 75, 55, 0
+		Versus:
+			HAZMAT: 49
+			COMPOSITE: 71
+			BLAST: 88
+			REFLECTOR: 73
+			ARMOR: 70
+			Shield: 276
+			None: 160
+			Flak: 150
+			Wood: 129
+			Plate: 126
+			Scout: 118
+			Steel: 115
+			Light: 107
+			Concrete: 106
+			Medium: 98
+			Heroic: 93
+			Heavy: 90
+			Superheavy: 83
+			Fighter: 66
+			Bomber: 59
+			Helicopter: 53
+			Spaceship: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+			Corrosion: 50
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			None: 21
+			Flak: 21
+			Plate: 21
+			Heroic: 21
+			Heavy: 19
+			Superheavy: 19
+			Wood: 19
+			Light: 18
+			Medium: 18
+			Steel: 18
+			Concrete: 18
+			Scout: 17
+			Fighter: 11
+			Bomber: 11
+			Helicopter: 11
+			Spaceship: 11
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
+		Spread: 125
 		Damage: 5
-	Warhead@CannonHE_Heavy: AreaDamage
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Inherits@fx: ^sc_protoss_gladiuscannon
+	-Warhead@Glow:
+	-Warhead@RA2Crater:
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 30000
-		PercentageScale: 0
+		Spread: 225
+		Damage: 5
+		Versus:
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Concrete: 22
+			Medium: 21
+			Steel: 20
+			Heavy: 19
+			None: 18
+			Superheavy: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Inherits@w6fx: ^sc_protoss_gladiuscannon_fx
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 5
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 75
+		Damage: 5
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@Plasma_Heavy_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 110000
-		PercentageScale: 0
-	-Warhead@FlakWeapon:
-	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 250
-		Damage: 10000
-		Versus:
-			Shield: 125
-			Fighter: 100
-			Bomber: 95
-			Helicopter: 90
-			Spaceship: 85
-			None: 80
-			Flak: 75
-			Plate: 70
-			Heroic: 65
-			Scout: 60
-			Light: 55
-			Medium: 50
-			Heavy: 45
-			Superheavy: 40
-			Wood: 35
-			Concrete: 30
-			Steel: 25
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@PreservedFlat_HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 450
-		Damage: 10000
-		Versus:
-			Shield: 140
-			Scout: 100
-			Wood: 96
-			Light: 92
-			Concrete: 88
-			Medium: 84
-			Steel: 80
-			Heavy: 76
-			None: 72
-			Superheavy: 68
-			Flak: 64
-			Plate: 60
-			Heroic: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@PreservedFlat_MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 10000
-		Versus:
-			Shield: 125
-			Scout: 100
-			Wood: 95
-			Light: 90
-			Concrete: 85
-			Medium: 80
-			Steel: 75
-			Heavy: 70
-			None: 65
-			Superheavy: 60
-			Flak: 55
-			Plate: 50
-			Heroic: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 150
-		Damage: 10000
-		Versus:
-			Shield: 110
-			Superheavy: 100
-			Heavy: 94
-			Medium: 88
-			Light: 82
-			Scout: 76
-			Steel: 70
-			Concrete: 64
-			Wood: 58
-			Plate: 52
-			Flak: 46
-			None: 40
-			Heroic: 34
-			Spaceship: 28
-			Helicopter: 22
-			Bomber: 16
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@PreservedFlat_FlakWeapon:
-	-Warhead@PreservedFlat_HeavyCannon:
-	-Warhead@PreservedFlat_MediumCannon:
-	-Warhead@PreservedFlat_TankDestroyerCannon:
 
 ArbiterCannon:
 	Inherits: PhotonCannon
@@ -558,7 +667,6 @@ ArbiterCannon:
 
 GlaveCanon:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -573,12 +681,15 @@ GlaveCanon:
 		Inaccuracy: 0
 		CloseEnough: 822
 		AllowSnapping: true
-	-Warhead@Demolition_Light:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
+^sc_protoss_psi_blades:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 psi_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -591,6 +702,9 @@ psi_blades:
 	Range: 1335
 	Warhead@Melee_Medium:
 		Damage: 8000
+	Inherits@w6fx: ^sc_protoss_psi_blades
+
+^sc_protoss_psi_spear:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -604,8 +718,7 @@ psi_spear:
 	Range: 1337
 	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+	Inherits@w6fx: ^sc_protoss_psi_spear
 
 PsiStorm:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -623,17 +736,25 @@ PsiStorm:
 		Damage: 12000
 		AffectsParent: True
 	-Warhead@Tesla_Heavy_ExtraDamage:
+^sc_protoss_psistormcosmetic:
+	Warhead@Effect: CreateEffect
+		Explosions: scpsistorm
+		ValidTargets: Ground, Air
+		ImpactActors: false
+		ImpactSounds: ptesto00.aud
+
 PsiStormCosmetic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 64
 	Range: 6400
 	Report: ptesto00.aud
 	Projectile: InstantHit
+	Inherits@w6fx: ^sc_protoss_psistormcosmetic
+
+^sc_protoss_psionicshockwave:
 	Warhead@Effect: CreateEffect
-		Explosions: scpsistorm
-		ValidTargets: Ground, Air
-		ImpactActors: false
-		ImpactSounds: ptesto00.aud
+		Explosions: scaae
+		ValidTargets: Ground, Water, Air
 
 PsionicShockwave:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -647,12 +768,14 @@ PsionicShockwave:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000
 	-Warhead@Tesla_Super_ExtraDamage:
+	Inherits@w6fx: ^sc_protoss_psionicshockwave
+
+^sc_protoss_scarablaunch:
 	Warhead@Effect: CreateEffect
-		Explosions: scaae
-		ValidTargets: Ground, Water, Air
+		ImpactSounds: psahit00.aud
+		Explosions: blueartexp
 
 ScarabLaunch:
-	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -705,21 +828,24 @@ ScarabLaunch:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
-	Warhead@Effect: CreateEffect
-		ImpactSounds: psahit00.aud
-		Explosions: blueartexp
+	Inherits@w6fx: ^sc_protoss_scarablaunch
 
 	-Warhead@HeavyBomb:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumMissile:
-	-Warhead@CannonHE_Heavy_Flat:
 ScarabLaunchDummy:
 	ReloadDelay: 90
 	Range: 7777
 	Projectile: InstantHit
 	Warhead@Damage: TargetDamage
 		Damage: 0
+
+^sc_protoss_scoutrockets_aa:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 ScoutRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -747,10 +873,11 @@ ScoutRockets_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@w6fx: ^sc_protoss_scoutrockets_aa
+^sc_protoss_warpblade:
+	Warhead@Effect: CreateEffect
+		ImpactSounds: zulhit00.aud,zulhit01.aud
+
 WarpBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -762,6 +889,9 @@ WarpBlade:
 	Warhead@Melee_Medium:
 		PercentageScale: 1000
 		Damage: 20000
+	Inherits@w6fx: ^sc_protoss_warpblade
+
+^sc_protoss_warpbladeamaranth:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -775,6 +905,9 @@ WarpBladeAmaranth:
 	SoundVolume: 3
 	Warhead@Melee_Medium:
 		Damage: 30000
+	Inherits@w6fx: ^sc_protoss_warpbladeamaranth
+
+^sc_protoss_zeratulslice:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -789,13 +922,18 @@ ZeratulSlice:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 64000
+	Inherits@w6fx: ^sc_protoss_zeratulslice
+
+^sc_protoss_corsairflash:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: zulhit00.aud,zulhit01.aud
+		Explosions: steel_bluepiffs
 
 CorsairFlash:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_Demolition_Light
+	ValidTargets: Air
+	ReloadDelay: 65
+	Range: 5500
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: sc_corsair_attack.aud
@@ -818,14 +956,21 @@ CorsairFlash:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
+	Inherits@w6fx: ^sc_protoss_corsairflash
 	-Warhead@Demolition_Light:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
+
+	TargetActorCenter: true
+^sc_protoss_corsair_emp:
+	Warhead@Effect: CreateEffect
+		Explosions: pulse_explosion_small
+		ExplosionPalette: tseffect
+		ImpactSounds: sc_corsair_disruptionweb.aud
+		ImpactActors: false
 
 Corsair_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -857,11 +1002,21 @@ Corsair_EMP:
 		Amount: 20000
 		Range: 2500
 		ValidTargets: Ground, Water
+	Inherits@w6fx: ^sc_protoss_corsair_emp
+
+^sc_protoss_voidraybeam:
 	Warhead@Effect: CreateEffect
-		Explosions: pulse_explosion_small
-		ExplosionPalette: tseffect
-		ImpactSounds: sc_corsair_disruptionweb.aud
-		ImpactActors: false
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
 
 VoidRayBeam:
 	Inherits@roleflat: ^Warhead_Prism_Heavy
@@ -945,18 +1100,7 @@ VoidRayBeam:
 		Range: 600
 		Delay: 3
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
+	Inherits@w6fx: ^sc_protoss_voidraybeam
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
 	-Warhead@LaserExtraDamage:
@@ -969,6 +1113,20 @@ VoidRayBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 0
+
+^sc_protoss_starshipsovereignbeam:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: phohit00.wav
+		ExplosionPalette: ra_temperat
+		ValidTargets: Ground, Water, Air
+		Volume: 0.5
 
 StarshipSovereignBeam:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
@@ -1066,18 +1224,7 @@ StarshipSovereignBeam:
 		Delay: 3
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: phohit00.wav
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		Volume: 0.5
+	Inherits@w6fx: ^sc_protoss_starshipsovereignbeam
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
 	-Warhead@LaserExtraDamage:
@@ -1094,7 +1241,14 @@ StarshipSovereignBeam:
 		-PhysicalStateScale:
 
 ProbeAttack:
-	Inherits: ^WorkerAttack
+	Inherits@w81: ^Warhead_Melee_Medium  # W7MAT covering-edge
+	Inherits@w82: ^Projectile_InstantHit  # W7MAT covering-edge
+	Inherits@w83: ^Effect_Melee_Medium  # W7MAT covering-edge
+	Report: repair11.aud  # W7MAT w8-repin
+	Range: 1500  # W7MAT w8-repin
+	TargetActorCenter: True  # W7MAT w8-repin
+	Warhead@Melee_Medium:  # W7MAT w8-repin
+		Damage: 10000
 	Projectile: LightningZap
 		CoreWidth: 16
 		GlowWidth: 32
@@ -1103,7 +1257,7 @@ ProbeAttack:
 		Branches: 0
 		NodeRadius: 0
 
-BuildingExplodeProtoss:
+^sc_protoss_buildingexplodeprotoss:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building, blue_building_napalm, blue_med_frag, blue_poof, blue_small_building
 		Delay: 1
@@ -1112,20 +1266,32 @@ BuildingExplodeProtoss:
 		SmudgeType: Crater
 		Delay: 1
 
-UnitExplodeSmallProtoss:
-	Inherits: ^DamagingExplosionHE
+BuildingExplodeProtoss:
+	Inherits@w6fx: ^sc_protoss_buildingexplodeprotoss
+
+^sc_protoss_unitexplodesmallprotoss:
 	Warhead@2Eff: CreateEffect
 		Explosions: blue_big_frag
 		ImpactSounds: xplobig4.aud
+
+UnitExplodeSmallProtoss:
+	Inherits: ^DamagingExplosionHE
+	Inherits@w6fx: ^sc_protoss_unitexplodesmallprotoss
 
 SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
 	Warhead@Demolition_Light:
 		Damage: 12000
+^sc_protoss_scoutmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+
 ScoutMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_Demolition_Light
+	ValidTargets: Ground, Water
+	ReloadDelay: 32
+	Range: 4500
+	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: blastgn2.aud
@@ -1142,17 +1308,22 @@ ScoutMG:
 		ContrailEndWidth: 15
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-	-Warhead@Demolition_Light:
-	-Warhead@Flak_Medium:
+	Inherits@w6fx: ^sc_protoss_scoutmg
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
+	TargetActorCenter: true
+^sc_protoss_epigraphmg:
+	Warhead@Effect: CreateEffect
+		Explosions: cryo_blast
+	Warhead@EffectWater: CreateEffect
+		Explosions: cryo_blast
+	Warhead@EffectAir: CreateEffect
+		Explosions: cryo_blast
+
 EpigraphMG:
-	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1240,12 +1411,7 @@ EpigraphMG:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectWater: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectAir: CreateEffect
-		Explosions: cryo_blast
+	Inherits@w6fx: ^sc_protoss_epigraphmg
 
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -1257,12 +1423,18 @@ EpigraphMG:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
 	-Warhead@Chaingun:
-	-Warhead@Bullet_Medium_Flat:
+
+^sc_protoss_manifoldmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ValidTargets: Ground, Water
 
 ManifoldMG:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Concussion_Light
-	Inherits@2: ^Warhead_CannonHE_Heavy
+	ValidTargets: Ground, Water
+	ReloadDelay: 20
+	Range: 4780
+	TargetActorCenter: true
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^SCRA2Chaingun
 	Report: blastgn2.aud
@@ -1288,9 +1460,7 @@ ManifoldMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-		ValidTargets: Ground, Water
+	Inherits@w6fx: ^sc_protoss_manifoldmg
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
@@ -1298,6 +1468,10 @@ ManifoldMG:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
+
+^sc_protoss_manifoldmg_aa_fx:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Air
 
 ManifoldMG_AA:
 	Inherits: ManifoldMG
@@ -1309,8 +1483,7 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		ValidTargets: Air
+	Inherits@w6fx: ^sc_protoss_manifoldmg_aa_fx
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
@@ -1319,8 +1492,12 @@ ManifoldMG_AA:
 		Damage: 6000
 		PercentageScale: 9984
 
+^sc_protoss_atreusmg:
+	Warhead@Effect: CreateEffect
+		Explosions: steel_bluepiffs
+		ValidTargets: Ground, Water, Air
+
 AtreusMG:
-	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1369,15 +1546,20 @@ AtreusMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Bullet_Medium:
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
-		ValidTargets: Ground, Water, Air
+	Inherits@w6fx: ^sc_protoss_atreusmg
 
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
-	-Warhead@Bullet_Medium_Flat:
+^sc_protoss_patriarchshoot:
+	Warhead@Effect: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+	Warhead@EffectAir: CreateEffect
+		Explosions: scblueexplosion
+		ImpactSounds: ptesto00
+
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
@@ -1424,12 +1606,7 @@ PatriarchShoot:
 		Damage: 1
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
-	Warhead@EffectAir: CreateEffect
-		Explosions: scblueexplosion
-		ImpactSounds: ptesto00
+	Inherits@w6fx: ^sc_protoss_patriarchshoot
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PatriarchShoot1
 		Amount: 2
@@ -1853,7 +2030,7 @@ ProtossHeal:
 		ValidRelationships: Ally
 		Spread: 1000
 		Falloff: 100, 50, 33, 25, 20
-		Damage: -2000
+		Damage: -3000
 		Versus:
 			Shield: 140
 			Heroic: 100
@@ -1873,33 +2050,6 @@ ProtossHeal:
 			Concrete: 44
 			Wood: 40
 		DamageTypes: KillsDrone
-		DebugOverlayColor: 00FF00
-	Warhead@ExtraHealing: SpreadDamage
-		ValidTargets: Heal
-		ValidRelationships: Ally
-		Spread: 500
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: -1000
-		Versus:
-			Shield: 100
-			Heroic: 100
-			Plate: 100
-			Flak: 100
-			None: 100
-			Superheavy: 100
-			Spaceship: 100
-			Heavy: 100
-			Helicopter: 100
-			Medium: 100
-			Bomber: 100
-			Light: 100
-			Fighter: 100
-			Scout: 100
-			Steel: 100
-			Concrete: 100
-			Wood: 100
-		DamageTypes: KillsDrone
-		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 	Warhead@HealingWeaponPercentage: AreaDamagePercentage
 		FriendlyFireDamage: 100
