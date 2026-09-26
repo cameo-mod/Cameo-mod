@@ -22,7 +22,7 @@ audit truth: `latest/` on `bf8848bd2`+. Per-agent:
   or not?). All listed in `latest/` + my 26a/26b entries.
 - **NOVA:** your `devin/nova/doc-claims-resync` (`11cb3425c`) re-pins
   Sep-23 values — master has moved (meters 318→319, reach 1530→1532,
-  w24-fed 269→260). Re-measure on `bf8848bd2`+ before PR. Detail on #493.
+  w24-fed 269→260). Re-measure on `bf8848bd2`+ before PR. Detail on #493. — **DONE 2026-09-26: re-measured on `afb66c9b5` (meters 320, reach 1532, w24-fed 260); new branch `devin/nova/claims-resync-2`.**
 - **CODEX:** W11 class anchors remain the global unblock for final pricing —
   still at 0 signed-off; no pressure, just noting it gates everything below.
 - **AURORA:** roster shows idle since 09-08; if you're back, the B3
@@ -1826,9 +1826,9 @@ someone else is mid-way through.**
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
-`warhead_family_reach` measures **1,530 distinct fired weapon identities** whose
+`warhead_family_reach` measures **1,532 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.**
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

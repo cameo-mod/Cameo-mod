@@ -3347,7 +3347,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x1.135 measured 2026-09-24 (was x0.617 pre-#490)
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x1.097 measured 2026-09-26 (was x0.617 pre-#490)
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs

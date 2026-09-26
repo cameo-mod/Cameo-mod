@@ -1,6 +1,6 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9). **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544; `shield_versus_mean` = 88.08 → `shield_hp_factor` = 1.135; `shield_damage_share` = 0.0171; `unconverted_template_inheritors` = 385; `cameo_family_labelled_weapons` = 1210; `percentage_denominator_unset` = 417.**
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9). **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544; `shield_versus_mean` = 88.08 → `shield_hp_factor` = 1.135; `shield_damage_share` = 0.0171; `unconverted_template_inheritors` = 385; `cameo_family_labelled_weapons` = 1210; `percentage_denominator_unset` = 417.** **2026-09-26 (master `afb66c9b5` resync): `meters_filling_before_death` = 320; `physical_state_fired_weapons` = 548; `shield_versus_mean` = 91.16 → `shield_hp_factor` = 1.097; `shield_damage_share` = 0.0179; `unconverted_template_inheritors` = 390; `cameo_family_labelled_weapons` = 1291; `percentage_denominator_unset` = 423.**
 
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
@@ -627,13 +627,13 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **88.08** (was 162.19 pre-#490) | **1.135 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. Post-#490 the measured factor overshoots: a shield point is now worth *more* than an HP point. |
+| `Shield` | **91.16** (was 162.19 pre-#490) | **1.097 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. Post-#490 the measured factor overshoots: a shield point is now worth *more* than an HP point. |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.555 today
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x1.097 today
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
@@ -1828,7 +1828,7 @@ Versus[Shield] = 2 x Versus[the building's armor row]
 `(H/2) x 100/V_c` for the health plus `H x 100/V_s` for the pool. Setting them equal gives
 `0.5/V_c + 1/V_s = 1/V_c`, i.e. `V_s = 2 V_c`.
 
-⭐ This is the same fact as the **182.4% break-even pool** (`100 / shield_hp_factor`): both say
+⭐ This is the same fact as the **182.3% break-even pool** (`200 / shield_hp_factor`): both say
 that converting HP into an equal-value shield means undoing exactly the Shield row's average
 penalty. AtomicCore has `Shield 155` against `Concrete 100`, i.e. 1.55x where neutrality needs
 2.0x — which is precisely why the converted building came out *tougher*.
