@@ -527,7 +527,7 @@
     "physical_state_weapon": "td_nod_blackhandflamer_blackhandflamer",
     "physical_state_weight": 1.4826,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 36000.0,
     "tier_chain_cost": 12000.0,
     "tier_multiplier": 0.7674
@@ -649,7 +649,7 @@
     "physical_state_weapon": "td_nod_chemicalwarrior_chemspray",
     "physical_state_weight": 0.7296,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 56000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -706,7 +706,7 @@
      }
     ],
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 80000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -768,7 +768,7 @@
     "physical_state_weapon": "td_nod_flamethrower_flamethrower",
     "physical_state_weight": 1.4826,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 29000.0,
     "tier_chain_cost": 12000.0,
     "tier_multiplier": 0.7674
@@ -849,7 +849,7 @@
     "physical_state_weapon": "td_nod_lasercommando_nodcommandolaser",
     "physical_state_weight": 0.7413,
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 57000.0,
     "tier_chain_cost": 27000.0,
     "tier_multiplier": 0.3204
@@ -1131,7 +1131,7 @@
      }
     ],
     "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
+    "shield_gated_on_upgrade": true,
     "shield_pool": 25000.0,
     "tier_chain_cost": 22000.0,
     "tier_multiplier": 0.3976
@@ -1357,13 +1357,9 @@
     "tier_chain_cost": 26000.0,
     "tier_multiplier": 0.3333
    },
-   "td_nod_upgrade_cyberneticarmor": {
+   "td_nod_upgrade_cyberneticmodifications": {
     "tier_chain_cost": 26000.0,
     "tier_multiplier": 0.3333
-   },
-   "td_nod_upgrade_cyberneticmodifications": {
-    "tier_chain_cost": 21000.0,
-    "tier_multiplier": 0.4177
    },
    "td_nod_upgrade_elementalwarfare": {
     "tier_chain_cost": 21000.0,
@@ -1394,18 +1390,18 @@
       "damage_total": 72263.0,
       "eff_reload": 112.0,
       "effective_damage": 89458.65,
-      "effective_dps": 932.83,
-      "effective_per_shot": 104476.79,
-      "factor_deadzone": 0.9599,
+      "effective_dps": 932.9,
+      "effective_per_shot": 104484.51,
+      "factor_deadzone": 0.96,
       "factor_range": 1.2272,
       "factor_targets": 0.95,
       "folded_rounding": -0.13,
       "folded_rounding_context": -0.14,
       "footprint": 2.9117,
       "k": 1.2919,
-      "k_context": 1.4458,
+      "k_context": 1.4459,
       "k_flat": 1.2919,
-      "k_flat_context": 1.4458,
+      "k_flat_context": 1.4459,
       "overkill": 0.7141,
       "pct_absolute": 0.0,
       "pct_absolute_context": 0.0,
@@ -1420,19 +1416,19 @@
       "dps_floor": 17.7,
       "eff_reload": 96.0,
       "effective_damage": 154493.81,
-      "effective_dps": 2019.68,
-      "effective_per_shot": 193889.54,
-      "factor_deadzone": 0.9599,
+      "effective_dps": 2019.83,
+      "effective_per_shot": 193903.86,
+      "factor_deadzone": 0.96,
       "factor_range": 1.2272,
       "factor_targets": 0.95,
       "footprint": 5.1615,
       "k": 2.1311,
-      "k_context": 2.385,
+      "k_context": 2.3852,
       "k_flat": 2.1124,
-      "k_flat_context": 2.3641,
+      "k_flat_context": 2.3643,
       "overkill": 0.5772,
       "pct_absolute": 1518.11,
-      "pct_absolute_context": 1698.99,
+      "pct_absolute_context": 1699.12,
       "reliability": 0.61,
       "sigma": 1409.97,
       "slot": "Armament@Upgrade",
