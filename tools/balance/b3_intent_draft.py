@@ -37,7 +37,9 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
 
 import miniyaml  # noqa: E402
 from cameo_model import Model  # noqa: E402
-from audit_upgrades import DIRECTION, UPGRADE_QUEUES, load_intent  # noqa: E402
+from audit_upgrades import (  # noqa: E402
+    DEFERRED_INVERTED, DIRECTION, UPGRADE_QUEUES, load_intent,
+)
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 _ident = re.compile(r"[A-Za-z0-9_.\-]+")
@@ -236,6 +238,10 @@ def collect(m: Model):
                     v = int(str(value).split(",")[0])
                 except ValueError:
                     continue
+                if not spec[1](v) and (uname, actor, trait_key, str(v)) in DEFERRED_INVERTED:
+                    # Drafting this drawback would re-mask a deferred pin the
+                    # audit deliberately keeps visible — never emit it.
+                    continue
                 if not spec[1](v):
                     drawbacks.add(base.lower())
 
@@ -243,21 +249,12 @@ def collect(m: Model):
         faction = next((f for f in real_factions
                         if uname == f or uname.startswith(f + "_")), "unknown")
 
-        # coverage = consumer macro split
-        macros = set()
-        for actor in consumers:
-            an = rs.resolve(actor)
-            if an is not None:
-                macros.add(_macro(an))
-        macros.discard("other")
-        if not consumers:
-            cov = "narrow"
-        elif len(consumers) <= 4:
-            cov = "listed"
-        elif len(macros) == 1:
-            cov = next(iter(macros))
-        else:
-            cov = "roster_wide"
+        # Drafted entries never assert enforced coverage — consumer inference
+        # cannot prove roster intent, and audit_upgrade_coverage.py treats
+        # roster_wide|infantry|vehicles|aircraft as an enforcement contract.
+        # `listed` = consumer-driven subset; `narrow` = no detected consumers.
+        # Hand-review promotes a drafted row to an enforced value.
+        cov = "listed" if consumers else "narrow"
 
         drafts.append({
             "id": uname,
