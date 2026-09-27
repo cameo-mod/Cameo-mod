@@ -3190,6 +3190,8 @@ Player:
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		ScoutUnitTypes: ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog, td_nod_reconbike, td_nod_buggy, td_nod_buggymkii, td_gdi_humvee, td_gdi_humveemkii, ra1_allies_ranger, ra1_allies_reconranger, japan_scoutcar, japan_imperialscoutsman, ordos_dustdrone, ordos_swarmerdrone, ixian_airdrone, atreides_airdrone, latinsyndicate_raiderbuggy, futuretech_scoutdroid, ordos_raider, atreides_sandbike, ix_raider, corrino_buggy, zerg_zergling, terran_reaper
+	BeaconResponderBotModule:
+		RequiresCondition: genericbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot
 		McvTypes: td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, yuri_slaveminer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, asianalliance_mobileconstructionvehicle, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, futuretech_mobileconstructionvehicle, terran_mobilecommandcenter, protoss_mobilenexus, zerg_hatcherydrone, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, tkm_mobileconstructionvehicletkm
@@ -3807,6 +3809,7 @@ Player:
 		RequiresCondition: genericbot
 
 World:
+	BeaconTracker:
 	UnitCompositionsBotModule:
 		Composition@TDGDIArmorPush:
 			UnitQueues: Vehicle, RAVehicle

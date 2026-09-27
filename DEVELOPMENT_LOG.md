@@ -13345,3 +13345,8 @@ been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
 
 **Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
 got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).
+
+**Done (EMBER, 2026-09-28, phase 8 beacon response):** `PlaceBeacon` shadow +
+`BeaconTracker` world trait + `BeaconResponderBotModule` (allied pings near hostiles
+pull idle combat units through the risk gate; pings on allied buildings pull a repair
+unit). Gates: 256/256 tests (3 new shadow tests), ai_squad_gate PASS, boot-gate PASS.
