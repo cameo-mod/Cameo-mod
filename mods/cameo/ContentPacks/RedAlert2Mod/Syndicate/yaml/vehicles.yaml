@@ -1184,6 +1184,7 @@ latinsyndicate_collectiontruck:
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
+		Voice: Move
 	Health:
 		HP: 85000
 	Repairable:
@@ -1191,7 +1192,9 @@ latinsyndicate_collectiontruck:
 	ChangesHealth@SelfHealing:
 		Step: 34
 	Harvester:
-		Voice: Harvest
+		# The engine field is HarvestVoice (Harvester.cs); a bare `Voice:` here was silently
+		# dropped by FieldLoader, so the harvest line never played.
+		HarvestVoice: Harvest
 		BaleLoadDelay: 3
 		BaleUnloadDelay: 2
 		EmptyCondition: no-tiberium
