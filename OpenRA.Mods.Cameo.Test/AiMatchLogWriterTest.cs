@@ -36,11 +36,13 @@ namespace OpenRA.Mods.Cameo.Test
 		// The shipped emitter had exactly that: AppendTimeline wrote no leading comma, so each line
 		// came out as ..."personality_switches":0"personality_timeline":[]... The Python tests build
 		// their fixtures with json.dumps and cannot see it. This mirrors BuildLog's call sequence.
-		static string BuildPlayerLine(IReadOnlyList<AiMatchLogPersonalityTransition> timeline)
+		static string BuildPlayerLine(IReadOnlyList<AiMatchLogPersonalityTransition> timeline,
+			IReadOnlyList<AiMatchLogCompositionTransition> compositions = null,
+			IReadOnlyList<AiMatchLogEpisodeTransition> episodes = null)
 		{
 			var b = new StringBuilder();
 			AiMatchLogWriter.AppendObjectStart(b);
-			AiMatchLogWriter.AppendNumber(b, "schema", 1, true);
+			AiMatchLogWriter.AppendNumber(b, "schema", 2, true);
 			AiMatchLogWriter.AppendString(b, "record_id", "game|Multi0");
 			AiMatchLogWriter.AppendNumber(b, "duration_ticks", 2400);
 
@@ -49,6 +51,10 @@ namespace OpenRA.Mods.Cameo.Test
 			AiMatchLogWriter.AppendString(b, "personality", "rush");
 			AiMatchLogWriter.AppendNumber(b, "personality_switches", 2);
 			AiMatchLogWriter.AppendTimeline(b, timeline);
+			AiMatchLogWriter.AppendString(b, "composition", "opener");
+			AiMatchLogWriter.AppendNumber(b, "composition_switches", 1);
+			AiMatchLogWriter.AppendCompositionTimeline(b, compositions);
+			AiMatchLogWriter.AppendEpisodeTimeline(b, episodes);
 			b.Append('}');
 
 			AiMatchLogWriter.AppendObjectPropertyStart(b, "stats");
@@ -82,6 +88,45 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(entries.GetArrayLength(), Is.EqualTo(2));
 			Assert.That(entries[1].GetProperty("tick").GetInt32(), Is.EqualTo(1500));
 			Assert.That(entries[1].GetProperty("personality").GetString(), Is.EqualTo("tech"));
+		}
+
+		[Test]
+		public void CompositionAndEpisodeTimelinesRoundTrip()
+		{
+			var compositions = new List<AiMatchLogCompositionTransition>
+			{
+				new(9000, "tdgdi_armorpush")
+			};
+			var episodes = new List<AiMatchLogEpisodeTransition>
+			{
+				new(0, "rush", "", 0, 0),
+				new(9000, "rush", "tdgdi_armorpush", 1500, 800)
+			};
+
+			using var doc = JsonDocument.Parse(BuildPlayerLine(null, compositions, episodes));
+			var player = doc.RootElement.GetProperty("player");
+			Assert.That(player.GetProperty("composition").GetString(), Is.EqualTo("opener"));
+			Assert.That(player.GetProperty("composition_switches").GetInt32(), Is.EqualTo(1));
+
+			var ct = player.GetProperty("composition_timeline");
+			Assert.That(ct.GetArrayLength(), Is.EqualTo(1));
+			Assert.That(ct[0].GetProperty("composition").GetString(), Is.EqualTo("tdgdi_armorpush"));
+
+			var ep = player.GetProperty("episode_timeline");
+			Assert.That(ep.GetArrayLength(), Is.EqualTo(2));
+			Assert.That(ep[1].GetProperty("composition").GetString(), Is.EqualTo("tdgdi_armorpush"));
+			Assert.That(ep[1].GetProperty("kills_cost").GetInt32(), Is.EqualTo(1500));
+			Assert.That(ep[1].GetProperty("deaths_cost").GetInt32(), Is.EqualTo(800));
+		}
+
+		[Test]
+		public void EmptySchema2FieldsStillProduceParseableJson()
+		{
+			using var doc = JsonDocument.Parse(BuildPlayerLine(null));
+			var player = doc.RootElement.GetProperty("player");
+			Assert.That(player.GetProperty("composition_timeline").GetArrayLength(), Is.EqualTo(0));
+			Assert.That(player.GetProperty("episode_timeline").GetArrayLength(), Is.EqualTo(0));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
 		}
 
 		[Test]

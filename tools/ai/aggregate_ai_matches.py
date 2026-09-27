@@ -37,7 +37,10 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-SCHEMA = 1
+# Schema 2 adds player.composition[_switches|_timeline] and player.episode_timeline
+# ({tick, personality, composition, kills_cost, deaths_cost} boundaries, cumulative
+# snapshots) written by AiMatchLogWriter; schema-1 records aggregate as before.
+SCHEMAS = (1, 2)
 
 # A record must have these top-level keys to be usable at all.
 REQUIRED_TOP = ("schema", "record_id", "duration_ticks", "player", "stats", "opponents", "allies")
@@ -99,7 +102,7 @@ def load_records(paths: list[Path], skips: Skips) -> list[dict]:
             if not isinstance(record, dict):
                 skips.add("line is not an object")
                 continue
-            if record.get("schema") != SCHEMA:
+            if record.get("schema") not in SCHEMAS:
                 skips.add(f"unsupported schema {record.get('schema')!r}")
                 continue
             if any(k not in record for k in REQUIRED_TOP):
@@ -172,6 +175,61 @@ class Cell:
         return self.kills_cost / self.deaths_cost if self.deaths_cost else float("inf")
 
 
+class EpisodeCell:
+    """Per-episode aggregates: ticks held and kills/deaths-cost deltas between
+    the transition snapshots, plus the containing matches' outcome record."""
+
+    def __init__(self) -> None:
+        self.cell = Cell()
+        self.episodes = 0
+        self.episode_ticks = 0
+        self.kills = 0
+        self.deaths = 0
+
+    def add_episode(self, ticks: int, kills: int, deaths: int) -> None:
+        self.episodes += 1
+        self.episode_ticks += ticks
+        self.kills += kills
+        self.deaths += deaths
+
+    @property
+    def trade(self) -> float:
+        return self.kills / self.deaths if self.deaths else float("inf")
+
+
+def episodes_of(record: dict):
+    """Yield (personality, composition, ticks_held, kills_delta, deaths_delta) per
+    episode from a schema-2 record's episode_timeline. Entries are boundaries with
+    cumulative snapshots; damage before the first boundary (or lost to the
+    recorder's cap eviction) is simply unattributed."""
+    entries = record["player"].get("episode_timeline")
+    if not isinstance(entries, list):
+        return
+
+    stats = record.get("stats") or {}
+    end_tick = int(record.get("duration_ticks") or 0)
+    end_kills = int(stats.get("kills_cost") or 0)
+    end_deaths = int(stats.get("deaths_cost") or 0)
+
+    prev = None
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        cur = (
+            str(entry.get("personality") or ""),
+            str(entry.get("composition") or ""),
+            int(entry.get("tick") or 0),
+            int(entry.get("kills_cost") or 0),
+            int(entry.get("deaths_cost") or 0),
+        )
+        if prev is not None:
+            yield prev[0], prev[1], cur[2] - prev[2], cur[3] - prev[3], cur[4] - prev[4]
+        prev = cur
+
+    if prev is not None:
+        yield prev[0], prev[1], max(0, end_tick - prev[2]), max(0, end_kills - prev[3]), max(0, end_deaths - prev[4])
+
+
 def usable(record: dict, min_ticks: int, skips: Skips) -> bool:
     outcome = record["player"]["outcome"]
     if outcome not in ("won", "lost"):
@@ -196,9 +254,10 @@ def is_duel(record: dict) -> bool:
 
 
 def aggregate(records: list[dict], min_ticks: int, skips: Skips):
-    """Return (matchup cells, personality cells, team-game count)."""
+    """Return (matchup cells, personality cells, episode cells, team-game count)."""
     matchups: dict[tuple, Cell] = defaultdict(Cell)
     personalities: dict[tuple, Cell] = defaultdict(Cell)
+    episodes: dict[tuple, EpisodeCell] = defaultdict(EpisodeCell)
     team_games = 0
 
     for record in records:
@@ -223,7 +282,54 @@ def aggregate(records: list[dict], min_ticks: int, skips: Skips):
         )
         matchups[key].add(record)
 
-    return matchups, personalities, team_games
+        # Episode stats are match-total deltas between transition snapshots;
+        # in team games they could not be attributed to one opponent, so they
+        # stay duel-only like the matchup table.
+        ep_key_prefix = (player["faction"], opponent["faction"],
+                         player["bot_type"], opponent["bot_type"],
+                         int(player.get("handicap") or 0), int(opponent.get("handicap") or 0))
+        for personality, composition, ticks, kills, deaths in episodes_of(record):
+            ecell = episodes[ep_key_prefix + (personality, composition)]
+            ecell.add_episode(ticks, kills, deaths)
+            if ecell.cell.matches == 0:
+                ecell.cell.add(record)
+
+    return matchups, personalities, episodes, team_games
+
+
+def print_episodes(episodes: dict[tuple, EpisodeCell], min_samples: int, only_significant: bool, top: int) -> None:
+    print()
+    print("== episode table: faction x personality x composition vs enemy faction (1v1 only) ==")
+    print("   (episodes are spans between schema-2 transition snapshots; trade = episode kills_cost/deaths_cost)")
+    if not episodes:
+        print("  (no episode records - schema 1 carries none)")
+        return
+    rows = sorted(
+        episodes.items(),
+        key=lambda kv: (-kv[1].trade, kv[0]),
+    )
+    print(f"  {'faction':<28} {'personality':<12} {'composition':<28} {'vs faction':<28} {'tier':<10} {'hcp':>7} {'eps':>5} {'ticks':>7} {'etrade':>7} {'match n':>7} {'win':>7} {'sig':>4}")
+    shown = 0
+    for key, ecell in rows:
+        faction, enemy, tier, enemy_tier, handicap, enemy_handicap, personality, composition = key
+        cell = ecell.cell
+        significant = cell.matches >= min_samples and ecell.episodes >= min_samples
+        if only_significant and not significant:
+            continue
+        if top and shown >= top:
+            break
+        tiers = tier if tier == enemy_tier else f"{tier}/{enemy_tier}"
+        handicaps = f"{handicap}/{enemy_handicap}"
+        print(
+            f"  {faction:<28} {personality:<12} {(composition or '-'):<28} {enemy:<28} {tiers:<10} {handicaps:>7} "
+            f"{ecell.episodes:>5} {ecell.episode_ticks:>7} "
+            f"{'inf' if ecell.trade == float('inf') else f'{ecell.trade:5.2f}':>7} "
+            f"{cell.matches:>7} {fmt_rate(cell):>7} {'yes' if significant else '-':>4}"
+        )
+        shown += 1
+    hidden = len(rows) - shown
+    if hidden > 0:
+        print(f"  ... {hidden} further row(s) not shown")
 
 
 def fmt_rate(cell: Cell) -> str:
@@ -300,7 +406,7 @@ def print_personalities(personalities: dict[tuple, Cell], min_samples: int) -> N
                 )
 
 
-def to_json(matchups: dict[tuple, Cell], personalities: dict[tuple, Cell], min_samples: int) -> dict:
+def to_json(matchups: dict[tuple, Cell], personalities: dict[tuple, Cell], episodes: dict[tuple, EpisodeCell], min_samples: int) -> dict:
     def cell_json(cell: Cell) -> dict:
         return {
             "matches": cell.matches,
@@ -317,7 +423,7 @@ def to_json(matchups: dict[tuple, Cell], personalities: dict[tuple, Cell], min_s
         }
 
     return {
-        "schema": SCHEMA,
+        "schema": SCHEMAS[-1],
         "min_samples": min_samples,
         "matchups": [
             {
@@ -341,6 +447,25 @@ def to_json(matchups: dict[tuple, Cell], personalities: dict[tuple, Cell], min_s
                 **cell_json(cell),
             }
             for key, cell in sorted(personalities.items())
+        ],
+        "episodes": [
+            {
+                "faction": key[0],
+                "enemy_faction": key[1],
+                "bot_type": key[2],
+                "enemy_bot_type": key[3],
+                "handicap": key[4],
+                "enemy_handicap": key[5],
+                "personality": key[6],
+                "composition": key[7],
+                "episodes": cell.episodes,
+                "episode_ticks": cell.episode_ticks,
+                "episode_kills_cost": cell.kills,
+                "episode_deaths_cost": cell.deaths,
+                "episode_trade": None if cell.trade == float("inf") else round(cell.trade, 4),
+                **cell_json(cell.cell),
+            }
+            for key, cell in sorted(episodes.items())
         ],
     }
 
@@ -370,9 +495,10 @@ def main(argv: list[str] | None = None) -> int:
         print("no usable records - run some AI matches first")
         return 2
 
-    matchups, personalities, team_games = aggregate(records, args.min_ticks, skips)
+    matchups, personalities, episodes, team_games = aggregate(records, args.min_ticks, skips)
     print_matchups(matchups, args.min_samples, args.only_significant, args.top)
     print_personalities(personalities, args.min_samples)
+    print_episodes(episodes, args.min_samples, args.only_significant, args.top)
 
     print()
     print(f"skipped {skips.total()} line(s)/record(s):")
@@ -384,7 +510,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
-        args.json.write_text(json.dumps(to_json(matchups, personalities, args.min_samples), indent=2) + "\n", encoding="utf-8")
+        args.json.write_text(json.dumps(to_json(matchups, personalities, episodes, args.min_samples), indent=2) + "\n", encoding="utf-8")
         print(f"wrote {args.json}")
 
     return 0
