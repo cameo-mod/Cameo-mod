@@ -47,12 +47,14 @@ class InventoryFixtureTest(unittest.TestCase):
              field("Heaviness", heaviness),
              field("HeavinessMode", "SharedVersus"), *extra])
 
-    def test_active_zero_heaviness_excludes_the_folded_hit(self):
-        # corrino_buggy_gun shape: ACTIVE h = 0 - the SHARED folded units are
-        # Damage x Scale x h / (200000 x 2000) = exactly zero, so nothing
-        # (folded or otherwise) is expected from the warhead.
-        self.assertEqual(self.inventory(self.shared(0)), {})
-        self.assertEqual(self.modeled(self.shared(0)), {})
+    def test_active_zero_heaviness_still_deals_the_folded_hit(self):
+        # corrino_buggy_gun shape: ACTIVE h = 0. The growth curve (maintainer 2026-09-26,
+        # DESIGN §12.0j) makes the shared folded magnitude x0.8 at h = 0, NOT zero — the
+        # retired h/2 rule did that, and this test used to pin it. Both the independent
+        # inventory and the pricing model must see the one folded application.
+        expect = {(pd.PCT_FOLDED, "Main"): 1}
+        self.assertEqual(self.inventory(self.shared(0)), expect)
+        self.assertEqual(self.modeled(self.shared(0)), expect)
 
     def test_positive_heaviness_includes_one_folded_application(self):
         expect = {(pd.PCT_FOLDED, "Main"): 1}
