@@ -3217,6 +3217,7 @@ Player:
 	SquadManagerBotModuleCA@rush:
 		RequiresCondition: genericbot && personality-rush
 		PreferMainTarget: true
+		AirPriorityTags: artillery, harvester
 		MinimumAttackForceDelay: 400
 		SquadSize: 3
 		SquadSizeRandomBonus: 8
@@ -3291,6 +3292,7 @@ Player:
 	SquadManagerBotModuleCA@turtle:
 		RequiresCondition: genericbot && personality-turtle
 		PreferMainTarget: true
+		AirPriorityTags: artillery, harvester
 		MinimumAttackForceDelay: 2500
 		SquadSize: 8
 		SquadSizeRandomBonus: 20
@@ -3365,6 +3367,7 @@ Player:
 	SquadManagerBotModuleCA@tech:
 		RequiresCondition: genericbot && personality-tech
 		PreferMainTarget: true
+		AirPriorityTags: artillery, harvester
 		MinimumAttackForceDelay: 1800
 		SquadSize: 6
 		SquadSizeRandomBonus: 15
@@ -3439,6 +3442,7 @@ Player:
 	SquadManagerBotModuleCA@expansion:
 		RequiresCondition: genericbot && personality-expansion
 		PreferMainTarget: true
+		AirPriorityTags: artillery, harvester
 		MinimumAttackForceDelay: 1200
 		SquadSize: 5
 		SquadSizeRandomBonus: 15
@@ -3513,6 +3517,7 @@ Player:
 	SquadManagerBotModuleCA@steamroller:
 		RequiresCondition: genericbot && personality-steamroller
 		PreferMainTarget: true
+		AirPriorityTags: artillery, harvester
 		MinimumAttackForceDelay: 2000
 		SquadSize: 12
 		SquadSizeRandomBonus: 25

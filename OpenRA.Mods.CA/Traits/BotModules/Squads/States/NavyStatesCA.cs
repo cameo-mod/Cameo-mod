@@ -50,7 +50,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					return nearest;
 			}
 
-			return owner.SquadManager.FindClosestEnemy(first, WDist.FromCells(owner.SquadManager.Info.NavalScanRadius));
+			return owner.SquadManager.FindClosestEnemy(first, WDist.FromCells(owner.SquadManager.Info.NavalScanRadius), owner);
 		}
 	}
 
@@ -153,7 +153,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Switch to attack state if we encounter enemy units like ground squad
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
-			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius);
+			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius, owner);
 			if (enemyActor != null)
 			{
 				owner.TargetActor = enemyActor;
@@ -337,7 +337,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Rescan target to prevent being ambushed and die without fight
 			// If there is no threat around, return to AttackMove state for formation
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
-			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius);
+			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius, owner);
 
 			if (closestEnemy == null)
 			{
