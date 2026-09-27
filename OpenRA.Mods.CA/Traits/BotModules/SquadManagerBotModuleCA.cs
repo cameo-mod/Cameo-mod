@@ -121,6 +121,24 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
+		public readonly bool StageBeforeAssault = false;
+
+		[Desc("Percent of squad units that must reach the staging point before the assault proceeds.")]
+		public readonly int StageAssemblePercent = 60;
+
+		[Desc("Cells around the staging point within which a unit counts as assembled.")]
+		public readonly int StageRadiusCells = 8;
+
+		[Desc("Ticks a staging squad waits before committing regardless of assembly.")]
+		public readonly int StageTimeoutTicks = 750;
+
+		[Desc("6f: support units (medics, repair) follow assault squads instead of charging with them.")]
+		public readonly HashSet<string> SupportUnitTypes = [];
+
+		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
+		public readonly int SupportFollowRangeCells = 6;
+
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
@@ -896,6 +914,17 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
+				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
+				{
+					var supportSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Support);
+					if (supportSquad == null)
+					{
+						supportSquad = RegisterNewSquad(bot, SquadCAType.Support);
+						AIUtils.BotDebug("AI ({0}): Created support squad {1}", Player.ClientIndex, supportSquad.Type);
+					}
+
+					supportSquad.Units.Add(new UnitWposWrapper(a));
+				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 
@@ -1007,6 +1036,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				// 6f: support squads trail the newest assault, healing/repairing in its wake.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);

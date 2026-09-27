@@ -338,14 +338,17 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 ### 6f. Coordinated waves: artillery, support, growth (Astor's points)
 
 * Artillery squads **attach** to an assault squad, hang back N cells, and bombard only targets the
-  assault squad can see (CN A2/A6). Together with 6d, this is the fog-honest answer to the "bot
-  artillery always shoots at max range" complaint.
+  assault squad can see (CN A2/A6) — **shipped** in #554 (hang-back anchor, `FindAttachableAssault`).
 * Waves stage partway to the target and rally before committing (CN
-  `AttackWaveStagingProgressPercent`). Steamroller grows its wave threshold over time (CN A1). Make
-  growth a field on the `SquadManagerBotModuleCA@steamroller` instance, and **check #276's
-  time-scaled threshold first**, so there are not two growth mechanisms.
-* Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`).
-  Unit selection goes through compositions and tokens, never actor ids.
+  `AttackWaveStagingProgressPercent`) — **shipped**: `GroundUnitsStageStateCA` rallies Rush squads
+  at the own building nearest the target, commits when `StageAssemblePercent` arrive or
+  `StageTimeoutTicks` lapses, and fights early on contact. `StageBeforeAssault` gates it in yaml.
+  Steamroller's wave threshold already grows via #276's `SquadValueRamp*` fields (checked — no
+  second mechanism added).
+* Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`) —
+  **shipped**: `SquadCAType.Support`, `SupportUnitsIdleStateCA` trails `Parent` within
+  `SupportFollowRangeCells`, holding near base with no assault. Unit list is yaml
+  (`SupportUnitTypes`, same pattern as the other type lists — no actor ids in C#).
 
 ### 6g. Priority targets per squad, and air vs artillery — **implemented**
 
