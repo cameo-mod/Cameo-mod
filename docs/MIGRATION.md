@@ -129,7 +129,7 @@ can never remove one (a load-time crash).
 | Part | Size | How | State |
 |---|---|---|---|
 | Dictionary rows (`UnitsToBuild`, `BuildingFractions`, `BuildingLimits`, `UnitLimits`, `AirSquadTargetTypes`, delays and intervals) | 2,680 refs; 2,646 movable | `tools/packs/split_ai_rows.py --pack <Theme/Faction> --apply` | tool built; pilot TD/GDI measured content-identical on the engine; the all-pack move is prepared and awaits an independent engine verification before it lands |
-| List fields (`GuerrillaTypes`, `ExcludeFromSquadsTypes`, `HighValueTargetTypes`, …) | 4,471 refs in 41 fields | derived roles + `BotRoles` on each pack's actors (§2.8) | designed, needs a ruling and C# |
+| List fields (`GuerrillaTypes`, `ExcludeFromSquadsTypes`, `HighValueTargetTypes`, …) | 4,471 refs in 41 fields | derived roles + `BotRoles` on each pack's actors (§2.8) | **ruled 2026-09-27: roles on actors**; C# next (AI architect lane) |
 | Module declarations, scalars, personalities, difficulties | — | stay central (one authority per decision) | by design |
 
 **Gate for every move:** dump `utility.cmd cameo --resolved-rules Player`

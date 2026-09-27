@@ -362,7 +362,7 @@ Three mechanisms were considered:
 
 | | Mechanism | Pack edits | C# | Verdict |
 |---|---|---|---|---|
-| **A** | **Roles on the actor.** Each pack's unit yaml says what the unit *is for* (`BotRoles: Guerrilla, AntiAir`). Mechanical roles are **derived** from traits and need no yaml (Harvester → harvester, Aircraft → air unit, a naval locomotor → naval, Refinery, conyard, MCV, power, barracks). At rules load, one Cameo trait (`BotRoleSets`, `IRulesetLoaded`) adds each role's actors into the module lists that role feeds, through a role → (module, field) table. | on the pack's own actors only | one new trait; **zero edits to CA files** (Frankenstein and CA sync stay safe) | **recommended** |
+| **A** | **Roles on the actor.** Each pack's unit yaml says what the unit *is for* (`BotRoles: Guerrilla, AntiAir`). Mechanical roles are **derived** from traits and need no yaml (Harvester → harvester, Aircraft → air unit, a naval locomotor → naval, Refinery, conyard, MCV, power, barracks). At rules load, one Cameo trait (`BotRoleSets`, `IRulesetLoaded`) adds each role's actors into the module lists that role feeds, through a role → (module, field) table. | on the pack's own actors only | one new trait; **zero edits to CA files** (Frankenstein and CA sync stay safe) | **RULED 2026-09-27 (maintainer): adopt** |
 | B | Engine list-append syntax (`GuerrillaTypes+: …`) in cameo-engine's MiniYaml | 5× per personality instance, per pack | engine patch | rejected: duplicates every list ×5 and forks the yaml language |
 | C | Every consumer reads `Info.X ∪ roles(X)` | on the pack's own actors | edits at every read site in ~15 CA files | rejected: conflicts with every CA sync |
 
