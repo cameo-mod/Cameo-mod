@@ -25,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		protected Actor FindClosestEnemy(SquadCA owner)
 		{
-			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor);
+			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner);
 		}
 
 		// 6c: pre-commit checks route through the risk-gated overloads — the squad's
@@ -33,8 +33,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		protected Actor FindClosestEnemy(SquadCA owner, bool riskCheck)
 		{
 			return riskCheck
-				? owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner.SquadManager.SquadValueOf(owner))
-				: owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor);
+				? owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner.SquadManager.SquadValueOf(owner), owner)
+				: owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner);
 		}
 
 		protected Actor FindHighValueTarget(SquadCA owner)
@@ -172,7 +172,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{
-				var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor);
+				var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
 				if (targetActor != null)
 					owner.TargetActor = targetActor;
 				else
@@ -185,7 +185,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
-			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius);
+			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius, owner);
 			if (enemyActor != null)
 			{
 				owner.TargetActor = enemyActor;
@@ -521,7 +521,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Rescan target to prevent being ambushed and die without fight
 			// If there is no threat around, return to AttackMove state for formation
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
-			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius);
+			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius, owner);
 
 			var healthChange = false;
 			var cannotRetaliate = true;
@@ -530,7 +530,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (closestEnemy == null)
 			{
-				owner.TargetActor = owner.SquadManager.FindClosestEnemy(leader);
+				owner.TargetActor = owner.SquadManager.FindClosestEnemy(leader, owner);
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 				return;
 			}

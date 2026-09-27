@@ -347,11 +347,25 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 * Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`).
   Unit selection goes through compositions and tokens, never actor ids.
 
-### 6g. Priority targets per squad, and air vs artillery
+### 6g. Priority targets per squad, and air vs artillery — **implemented**
 
-* A per-squad-instance priority list (CN A3). Derive the tags from rules at load time (§3b note):
-  `artillery` = long-range ground weapon, `harvester`, `production`, `superweapon`.
-* An air raider squad whose priority tag is `artillery` answers the maintainer's question A4.
+* `OpenRA.Mods.CA/Traits/BotModules/BotTargetTags.cs` derives the tags from rules at load
+  time (§3b note), no actor ids: `artillery` = any `Armament` whose weapon out-ranges the
+  assault threshold (currently the longest-ranged ground armaments), `harvester` = any
+  `Harvester` trait, `production` = `Production`/`ProductionQueue` owners, `superweapon` =
+  actor names appearing in support-power `Prerequisites`.
+* `SquadCA.PriorityTags` carries the per-squad-instance list (CN A3). Yaml fields per squad
+  type: `GroundPriorityTags` / `NavalPriorityTags` / `AirPriorityTags` / `GuerrillaPriorityTags`
+  on `SquadManagerBotModuleCA`; unset = current behaviour.
+* `SquadManagerBotModuleCA.PreferSquadTargets` re-orders each enemy candidate list so
+  matching-tag actors come first, preserving the within-group order — visibility and risk
+  gates still run upstream, so a priority target that is fogged or suicidal is not picked.
+* `AirPriorityTags: artillery, harvester` on all five personalities answers the maintainer's
+  question A4 (air raiders hunt enemy artillery). Verified: `BotTargetTagsTest` (5 tests),
+  `tools/tests/ai_squad_gate.py` PASS, boot-gate PASS.
+* Deferred: `SquadCAType.Harass` does not exist in Cameo's enum (upstream CA has it — the
+  CA-sync lane adds it); when it lands, add `HarassPriorityTags` + one `case` in
+  `AssignPriorityTags`.
 
 ### 7. Island expansion (new Cameo module)
 

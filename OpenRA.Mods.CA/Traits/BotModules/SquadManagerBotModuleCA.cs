@@ -123,6 +123,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 
+		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
+		public readonly HashSet<string> AssaultPriorityTags = [];
+		public readonly HashSet<string> RushPriorityTags = [];
+		public readonly HashSet<string> ArtilleryPriorityTags = [];
+		public readonly HashSet<string> AirPriorityTags = [];
+		public readonly HashSet<string> NavalPriorityTags = [];
+		public readonly HashSet<string> GuerrillaPriorityTags = [];
+		public readonly HashSet<string> ProtectionPriorityTags = [];
+
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
 
@@ -240,6 +249,41 @@ namespace OpenRA.Mods.CA.Traits
 
 			unitCannotBeOrdered = a => a == null || a.Owner != Player || a.IsDead || !a.IsInWorld || a.CurrentActivity is Enter;
 			constructionYardBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(World, info.ConstructionYardTypes, Player);
+		}
+
+		IReadOnlyDictionary<string, HashSet<string>> targetTagMap;
+
+		// Lazily built per ruleset: actor name -> rules-derived BotTargetTags.
+		internal IReadOnlyDictionary<string, HashSet<string>> TargetTags =>
+			targetTagMap ??= BotTargetTags.BuildTagMap(World.Map.Rules);
+
+		internal HashSet<string> PriorityTagsFor(SquadCAType type)
+		{
+			return type switch
+			{
+				SquadCAType.Air => Info.AirPriorityTags,
+				SquadCAType.Artillery => Info.ArtilleryPriorityTags,
+				SquadCAType.Naval => Info.NavalPriorityTags,
+				SquadCAType.Rush => Info.RushPriorityTags,
+				SquadCAType.Guerrilla => Info.GuerrillaPriorityTags,
+				SquadCAType.Protection => Info.ProtectionPriorityTags,
+				_ => Info.AssaultPriorityTags,
+			};
+		}
+
+		internal HashSet<string> TagsOf(Actor a)
+		{
+			return a != null && TargetTags.TryGetValue(a.Info.Name, out var tags) ? tags : null;
+		}
+
+		internal HashSet<string> TagsOf(ActorInfo info)
+		{
+			return info != null && TargetTags.TryGetValue(info.Name, out var tags) ? tags : null;
+		}
+
+		internal List<T> PreferSquadTargets<T>(List<T> candidates, SquadCA owner, Func<T, HashSet<string>> tagsOf)
+		{
+			return owner == null ? candidates : BotTargetTags.PreferTagged(candidates, owner.PriorityTags, tagsOf);
 		}
 
 		bool IsValidEnemyUnit(Actor a)
@@ -402,7 +446,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Fogged fallback target: an enemy building the engine's FrozenActorLayer
 		// remembers under shroud. The layer invalidates the record when the cell
 		// is re-observed empty, so a stale frozen target drops out on its own.
-		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue)
+		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue, SquadCA owner = null)
 		{
 			var layer = Player.FrozenActorLayer;
 			if (layer == null)
@@ -419,6 +463,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var mainTarget = EffectiveMainTarget();
 			candidates = PreferOwned(candidates, mainTarget == null ? null : fa => fa.Owner == mainTarget);
+			candidates = PreferSquadTargets(candidates, owner, fa => TagsOf(fa.Info));
 
 			if (attackerValue >= 0)
 				candidates.RemoveAll(fa => !PassesRiskGate(map.CellContaining(fa.CenterPosition), attackerValue));
@@ -514,11 +559,12 @@ namespace OpenRA.Mods.CA.Traits
 			AssignRolesToIdleUnits(bot);
 		}
 
-		internal Actor FindClosestEnemy(Actor sourceActor)
+		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units = PreferSquadTargets(units, owner, TagsOf);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 
 			// Fogged scans never fall back to actors the bot cannot see; remembered
@@ -533,11 +579,12 @@ namespace OpenRA.Mods.CA.Traits
 		// remembered enemy threat exceeds attackerValue by more than AttackRiskMargin
 		// are skipped — an unknown region (threat 0) never blocks. When every
 		// candidate fails the gate the squad holds instead of suiciding.
-		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue)
+		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units = PreferSquadTargets(units, owner, TagsOf);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 			if (FoggedScans)
@@ -610,9 +657,12 @@ namespace OpenRA.Mods.CA.Traits
 			return (long)attackerValue * 100 >= (long)threat * (100 + marginPercent);
 		}
 
-		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius)
+		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
 		{
-			return World.FindActorsInCircle(sourceActor.CenterPosition, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ClosestToIgnoringPath(sourceActor);
+			var candidates = World.FindActorsInCircle(sourceActor.CenterPosition, radius)
+				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			candidates = PreferSquadTargets(candidates, owner, TagsOf);
+			return candidates.ClosestToIgnoringPath(sourceActor);
 		}
 
 		Player EffectiveMainTarget()
@@ -664,6 +714,7 @@ namespace OpenRA.Mods.CA.Traits
 		SquadCA RegisterNewSquad(IBot bot, SquadCAType type, Actor target = null)
 		{
 			var ret = new SquadCA(bot, this, type, target);
+			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
 			return ret;
 		}

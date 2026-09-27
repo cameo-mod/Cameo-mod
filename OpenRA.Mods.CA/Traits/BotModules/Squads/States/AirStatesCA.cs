@@ -198,7 +198,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (CountAntiAirUnits(possibleAntiAir, owner) < owner.Units.Count)
 			{
 				if (possibleTargets.Count > 0)
+				{
+					possibleTargets = owner.SquadManager.PreferSquadTargets(possibleTargets, owner, owner.SquadManager.TagsOf);
 					detectedEnemyTarget = possibleTargets.Random(owner.Random);
+				}
 
 				return true;
 			}
@@ -259,7 +262,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var a = owner.Units.Random(owner.Random).Actor;
 
 					// copied from FindClosestEnemy() so that non-air squads don't check IsAirSquadTargetType unnecessarily
-					var units = a.World.Actors.Where(t => owner.SquadManager.IsPreferredObservedEnemyUnit(t) && owner.SquadManager.IsAirSquadTargetType(t, owner));
+					var units = owner.SquadManager.PreferSquadTargets(
+						a.World.Actors.Where(t => owner.SquadManager.IsPreferredObservedEnemyUnit(t) && owner.SquadManager.IsAirSquadTargetType(t, owner)).ToList(),
+						owner, owner.SquadManager.TagsOf);
 					closestEnemy = units.Where(owner.SquadManager.IsNotHiddenUnit).ClosestToIgnoringPath(a.CenterPosition) ?? units.ClosestToIgnoringPath(a.CenterPosition);
 				}
 
