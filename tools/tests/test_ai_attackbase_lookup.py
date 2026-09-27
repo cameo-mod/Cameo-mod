@@ -1,4 +1,4 @@
-"""Bot modules must never look up AttackBase as a single trait.
+"""No CA/Cameo code may look up AttackBase as a single trait (bot modules first of all).
 
 76 mobile ground actors carry two or more AttackBase-derived traits (e.g.
 AttackFrontal + AttackFollow on ts_nod_attackbuggy), and TraitOrDefault<T> /
@@ -16,22 +16,25 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parents[2]
+# All of CA and Cameo, not just bot modules: HuntCA (Lua hunt) and TargetedAttackAbility
+# (created with the actor) carried the same latent bug until 2026-09-27.
 BOT_DIRS = [
-    ROOT / "OpenRA.Mods.CA" / "Traits" / "BotModules",
-    ROOT / "OpenRA.Mods.Cameo" / "Traits" / "BotModules",
+    ROOT / "OpenRA.Mods.CA",
+    ROOT / "OpenRA.Mods.Cameo",
 ]
 SINGLE_LOOKUP = re.compile(r"\b(?:TraitOrDefault|Trait)<AttackBase>\s*\(")
 
 
 class AttackBaseLookupTest(unittest.TestCase):
-    def test_bot_modules_do_not_single_lookup_attackbase(self):
+    def test_no_single_attackbase_lookup(self):
         offenders = []
         for directory in BOT_DIRS:
             for path in sorted(directory.rglob("*.cs")):
                 if "obj" in path.parts:
                     continue
                 for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-                    if SINGLE_LOOKUP.search(line):
+                    code = line.split("//", 1)[0]  # comments may name the forbidden call
+                    if SINGLE_LOOKUP.search(code):
                         offenders.append(f"{path.relative_to(ROOT)}:{number}: {line.strip()}")
 
         self.assertEqual([], offenders, "use TraitsImplementing<AttackBase>() instead:\n" + "\n".join(offenders))
