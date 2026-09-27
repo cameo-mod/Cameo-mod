@@ -50,7 +50,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Role -> actors that never get the role by DERIVATION. An explicit BotRoles entry still applies.")]
 		public readonly Dictionary<string, string[]> Exclude = [];
 
-		[Desc("Only actors with Buildable get a derived role.")]
+		[Desc("Only actors a queue can produce (Buildable with a Queue) get a derived role. Spawned slaves such as",
+			"YRSLAV carry Buildable for its tooltip but no Queue: their master drives them, not the bot.")]
 		public readonly bool DeriveOnlyBuildable = true;
 
 		[Desc("Role -> the module list fields it fills, as TraitType.Field. Every instance of that trait on this actor is filled.")]
@@ -67,7 +68,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					a.Name,
 					TraitTypeNames(a),
 					a.TraitInfoOrDefault<BotRolesInfo>()?.Roles ?? FrozenSet<string>.Empty,
-					a.HasTraitInfo<BuildableInfo>()));
+					a.TraitInfoOrDefault<BuildableInfo>()?.Queue.Count > 0));
 
 			var members = ResolveMembers(actors, DeriveHas, DeriveNot, Exclude, DeriveOnlyBuildable);
 
