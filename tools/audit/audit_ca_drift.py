@@ -49,6 +49,9 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import vector_codemod  # noqa: E402
+
 REPO = pathlib.Path(__file__).resolve().parents[2]
 CANDIDATES = [os.environ.get("CA_ROOT"), os.environ.get("CAMOD_DIR"), str(REPO.parent / "CAmod"),
               str(pathlib.Path.home() / "Documents" / "GitHub" / "CAmod")]
@@ -145,9 +148,17 @@ def main() -> int:
     head = git(ca, "rev-parse", args.ref).strip()
     versions = upstream_versions(ca, head)
 
+    # Cameo's engine is on System.Numerics vectors (bleed, #569) and upstream CA is not: compare
+    # upstream in the engine's vocabulary, or every converted-but-unedited copy reads as a Cameo edit.
+    vectors = vector_codemod.is_vector_engine(REPO)
+    upstream = vector_codemod.convert if vectors else (lambda s: s)
+    if vectors:
+        print("_Engine uses System.Numerics vectors: upstream text is compared after the float2/float3 -> "
+              "Vector2/Vector3 conversion (tools/audit/vector_codemod.py)._\n")
+
     # Normalised hash of every upstream version, and where it sits in its path's history.
     all_blobs = sorted({b for vs in versions.values() for b, _, _ in vs})
-    blob_text = {b: normalise(d) for b, d in cat_blobs(ca, all_blobs).items()}
+    blob_text = {b: upstream(normalise(d)) for b, d in cat_blobs(ca, all_blobs).items()}
     hash_to_versions: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
     for path, vs in versions.items():
         for blob, commit, date in vs:
@@ -155,7 +166,7 @@ def main() -> int:
                 hash_to_versions[norm_hash(blob_text[blob])].append((path, commit, date))
 
     head_files = {p for p in git(ca, "ls-tree", "-r", "--name-only", head, PREFIX).splitlines() if p.endswith(".cs")}
-    head_text = {p[len(head) + 1:]: normalise(d) for p, d in
+    head_text = {p[len(head) + 1:]: upstream(normalise(d)) for p, d in
                  cat_blobs(ca, [f"{head}:{p}" for p in sorted(head_files)]).items()}
 
     cameo_files = [p for p in git(REPO, "ls-files", PREFIX).splitlines() if p.endswith(".cs")]
