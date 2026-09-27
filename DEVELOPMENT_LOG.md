@@ -13345,3 +13345,13 @@ been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
 
 **Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
 got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).
+
+**Done (2026-09-28, ember-ai6a):** w_hurt consumer (AI_ARCHITECTURE §4.3).
+IBotThreatAnalysis += GetNemesisScore(Player); CombatAnalysisBotModule
+implements it (nemesisScores read). MasterAiBotModule: WeightHurt=150
+subtracts Saturate(nemesisScore, HurtSaturation=40) per enemy in
+TargetScore, and a nemesis >= NemesisOverrideWeight=60 force-retargets
+bypassing interval+hold. Dealt-to-them side still has no producer —
+documented one-sided. Gates: 264/264 tests, ai_squad_gate PASS on the
+ISOLATED worktree engine (junction removed per maintainer order),
+boot-gate PASS.

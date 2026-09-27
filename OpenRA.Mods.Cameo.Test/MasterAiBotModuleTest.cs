@@ -273,6 +273,19 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TargetScoreHurtPenalisesTheEnemyBeatingUs()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var profile = new EnemyProfile { Name = "aggressor", ArmyValue = 100, NearestCells = 5 };
+			var calm = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 0, info);
+			var hurt = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
+
+			// §4.3: a player beating on us scores lower — a softer teammate outranks it.
+			Assert.That(hurt, Is.LessThan(calm));
+			Assert.That(hurt, Is.GreaterThanOrEqualTo(0));
+		}
+
+		[Test]
 		public void TargetChoiceHoldsIncumbentWithinMinimumHold()
 		{
 			var info = new MasterAiBotModuleInfo();

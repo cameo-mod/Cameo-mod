@@ -105,6 +105,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightKill = 100;
 		public readonly int WeightDefence = 150;
 		public readonly int WeightAlly = 100;
+
+		[Desc("w_hurt weight: damage an enemy has dealt us lowers its target score (§4.3).",
+			"The dealt-to-them numerator has no producer yet; this is the honest half.")]
+		public readonly int WeightHurt = 150;
+
+		[Desc("Nemesis score at which the hurt term saturates (Saturate k).")]
+		public readonly int HurtSaturation = 40;
+
+		[Desc("Nemesis score that counts as 'actively killing our base' — mandatory re-target,",
+			"bypassing the decision interval and the incumbent hold (§4.3 override).")] 
+		public readonly int NemesisOverrideWeight = 60;
 		public readonly int IncumbentMomentum = 75;
 		public readonly int MinimumHoldTicks = 3000;
 		public readonly int FortifiedDefenceCount = 6;
@@ -355,9 +366,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (urgency != BotUrgency.Emergency)
 				emergencyPersonalityHandled = false;
 
+			var threatAnalysis = player.PlayerActor.TraitsImplementing<IBotThreatAnalysis>()
+				.FirstEnabledTraitOrDefault();
+
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
-				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
+				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal,
+					threatAnalysis == null ? 0 : Saturate((int)threatAnalysis.GetNemesisScore(profile.Player), Info.HurtSaturation), Info);
 
 			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
 			var decision = ShouldEvaluateTargetDecision(
@@ -373,6 +388,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
+			}
+
+			// §4.3 override: a player actively killing our base is the mandatory target,
+			// bypassing both the decision interval and MinimumHoldTicks.
+			var nemesis = threatAnalysis?.GetNemesis();
+			if (nemesis != null && nemesis != incumbentTarget &&
+				threatAnalysis.GetNemesisScore(nemesis) >= Info.NemesisOverrideWeight)
+			{
+				var nemesisProfile = profiles.Values.FirstOrDefault(p => p.Alive && p.NearestCells >= 0 && p.Player == nemesis);
+				if (nemesisProfile != null)
+				{
+					incumbentTarget = nemesis;
+					incumbentSince = tick;
+					target = nemesis;
+					targetProfile = nemesisProfile;
+				}
 			}
 
 			var currentPersonality = CurrentPersonality();
@@ -878,9 +909,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)
-			=> TargetScore(profile, ownArmy, 0, 0, info);
+			=> TargetScore(profile, ownArmy, 0, 0, 0, info);
 
-		static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal,
+		internal static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal, int hurt,
 			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
@@ -889,9 +920,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
 			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);
 			var fort = Saturate(profile.DefenceValue, 1500);
-			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly);
+			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly + info.WeightHurt);
 			var score = (long)info.WeightReach * reach + (long)info.WeightWeak * weak + (long)info.WeightEcon * econ +
-				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally;
+				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally -
+				(long)info.WeightHurt * hurt;
 			return ClampScore(score * 10 / total);
 		}
 
