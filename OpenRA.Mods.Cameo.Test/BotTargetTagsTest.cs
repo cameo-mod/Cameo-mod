@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -56,7 +57,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void EmptyPriorityTagsReturnsInput()
 		{
 			var input = Candidates();
-			var picked = BotTargetTags.PreferTagged(input, [], TagsOf);
+			var picked = BotTargetTags.PreferTagged(input, new HashSet<string>(), TagsOf);
 			Assert.That(picked, Is.SameAs(input));
 		}
 
