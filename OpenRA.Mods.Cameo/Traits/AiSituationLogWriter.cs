@@ -173,6 +173,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "harvesters", situation.OwnHarvesters);
 			AiMatchLogWriter.AppendNumber(builder, "kills_cost_window", situation.OwnKillsCostWindow);
 			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", situation.OwnDeathsCostWindow);
+			AiMatchLogWriter.AppendNumber(builder, "squad_count", situation.SquadCount);
+			AiMatchLogWriter.AppendNumber(builder, "squad_units", situation.SquadUnitCount);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

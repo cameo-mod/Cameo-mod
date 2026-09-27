@@ -61,6 +61,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public RegionMemory Regions;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
+		internal int SquadCount, SquadUnitCount;
 		internal string OwnPersonality = "";
 	}
 
@@ -395,6 +396,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				lastIssuedCounterDemands = resolvedDemands;
 			}
 
+			var squadCount = 0;
+			var squadUnitCount = 0;
+			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
+			{
+				if (!sm.IsTraitEnabled())
+					continue;
+
+				squadCount += sm.Squads.Count;
+				squadUnitCount += sm.Squads.Sum(q => q.Units.Count);
+			}
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -412,6 +424,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
 				OwnDeathsCostWindow = DeathsCostWindow,
+				SquadCount = squadCount,
+				SquadUnitCount = squadUnitCount,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
