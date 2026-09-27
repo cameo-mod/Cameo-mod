@@ -106,7 +106,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var dead in scoutTargets.Keys.Where(a => unitCannotBeOrdered(a)).ToArray())
 				scoutTargets.Remove(dead);
 
-			ClaimScouts(bot);
+			// A scout that went idle between scans re-enters the squad manager's
+			// idle pool and can be claimed by a squad while we still hold it —
+			// yielding duelling orders (DAWN's edge). Release ownership instead.
+			if (scouts.Count != 0)
+			{
+				var squadOwned = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+					.Where(m => !m.IsTraitDisabled)
+					.SelectMany(m => m.Squads)
+					.SelectMany(s => s.Units)
+					.Select(u => u.Actor)
+					.ToHashSet();
+
+				foreach (var scout in scouts.Where(u => squadOwned.Contains(u.Actor)).ToArray())
+				{
+					scoutTargets.Remove(scout.Actor);
+					scouts.Remove(scout);
+				}
+			}
 
 			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
 			if (regions == null)
@@ -115,7 +132,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tick = world.WorldTick;
 			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
 
-			foreach (var scout in scouts)
+			// Claiming while nothing is stale only churns the idle pool.
+			if (!AnyStaleRegion(regions, tick))
+				return;
+
+			ClaimScouts(bot);
+
+			foreach (var scout in scouts.ToArray())
 			{
 				var actor = scout.Actor;
 				if (scoutTargets.TryGetValue(actor, out var target) && tick - target.AssignedTick < Info.RetargetTicks && !actor.IsIdle)
@@ -123,7 +146,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
 				if (region < 0)
+				{
+					// No stale region: release the unit so squads can claim it.
+					scoutTargets.Remove(actor);
+					scouts.Remove(scout);
 					continue;
+				}
 
 				taken.Add(region);
 				scoutTargets[actor] = (region, tick);
@@ -221,6 +249,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			return best;
+		}
+
+		bool AnyStaleRegion(RegionMemory regions, int tick)
+		{
+			for (var i = 0; i < regions.CellCount; i++)
+			{
+				if (Staleness(regions, i, tick) > 0)
+					return true;
+			}
+
+			return false;
 		}
 
 		int Staleness(RegionMemory regions, int index, int tick)
