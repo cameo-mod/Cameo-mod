@@ -66,6 +66,18 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Max number of units AI has in guerrilla squad")]
 		public readonly int MaxGuerrillaSize = 10;
 
+		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
+			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
+			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
+		public readonly HashSet<string> HarasserTypes = new HashSet<string>();
+
+		[Desc("Harasser squads wait for at least this many units before launching.")]
+		public readonly int HarassMinLaunchSize = 3;
+
+		[Desc("Distinct route candidates a harasser squad requests — the flanking breadth.",
+			"It then picks randomly from the last (least direct) routes.")]
+		public readonly int HarassRouteCount = 12;
+
 		[Desc("Delay (in ticks) between giving out orders to units.")]
 		public readonly int AssignRolesInterval = 50;
 
@@ -156,6 +168,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly HashSet<string> AirPriorityTags = [];
 		public readonly HashSet<string> NavalPriorityTags = [];
 		public readonly HashSet<string> GuerrillaPriorityTags = [];
+		public readonly HashSet<string> HarassPriorityTags = [];
 		public readonly HashSet<string> ProtectionPriorityTags = [];
 
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
@@ -326,6 +339,7 @@ namespace OpenRA.Mods.CA.Traits
 				SquadCAType.Naval => Info.NavalPriorityTags,
 				SquadCAType.Rush => Info.RushPriorityTags,
 				SquadCAType.Guerrilla => Info.GuerrillaPriorityTags,
+				SquadCAType.Harass => Info.HarassPriorityTags,
 				SquadCAType.Protection => Info.ProtectionPriorityTags,
 				_ => Info.AssaultPriorityTags,
 			};
@@ -892,11 +906,35 @@ namespace OpenRA.Mods.CA.Traits
 					!activeUnits.Contains(a) && a.IsInWorld);
 
 			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
-			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) < Info.JoinGuerrilla));
+			// JoinGuerrilla gates creation too: 0 means this personality never forms
+			// guerrilla squads, not "the first unit always joins".
+			var guerrillaUpdate = World.LocalRandom.Next(100) < Info.JoinGuerrilla &&
+				(guerrillaForce == null || guerrillaForce.Units.Count <= Info.MaxGuerrillaSize);
 
 			foreach (var a in newUnits)
 			{
-				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
+				if (Info.HarasserTypes.Contains(a.Info.Name))
+				{
+					var harasserSquads = Squads.Where(s => s.Type == SquadCAType.Harass);
+					var matchingHarasserSquadFound = false;
+
+					foreach (var harasserSquad in harasserSquads)
+					{
+						if (harasserSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						{
+							harasserSquad.Units.Add(new UnitWposWrapper(a));
+							matchingHarasserSquadFound = true;
+							break;
+						}
+					}
+
+					if (!matchingHarasserSquadFound)
+					{
+						var newHarasserSquad = RegisterNewSquad(bot, SquadCAType.Harass);
+						newHarasserSquad.Units.Add(new UnitWposWrapper(a));
+					}
+				}
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
 				{
 					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
 
