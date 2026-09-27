@@ -1,3 +1,27 @@
+# 2026-09-28 — NOVA: H1 human-likeness producer (`HumanPaceBotModule`/`IBotActionBudget`)
+
+The unassigned H1 item from `ORDERS_2026-09-27_ai_next_lanes.md` (AI_SYNTHESIS
+§5): action budget over a sliding window + per-tick burst cap (the AlphaStar
+lesson needs both), and an attention budget (≤N distinct decision points per
+tick; deferral IS the stagger). New `IBotActionBudget` in CA (consumer-visible
+assembly) implemented by `HumanPaceBotModule` in Cameo.
+
+- Producer ONLY — identical shape to the CombatAnalysis port: real
+  interception of `IBot.QueueOrder` would need `ModularBot` (engine lane),
+  so consumers consult `TryConsumeActions`/`TryConsumeAttention` once wired.
+- Lazy per-tick state (window ledger + burst counter + attention set) — no
+  `IBotTick`, so it cannot be missed by tick ordering.
+- Disabled trait returns true for every consume — "absence degrades, it
+  never breaks".
+- Same ai.yaml trap as #564: block goes at END OF PLAYER section, not EOF.
+- Defaults: ~144 APM (6/25 ticks), ≤3 actions per tick, ≤2 attention slots
+  per tick — conservative-human, all yaml-tunable.
+- Gotcha logged: a `--check-yaml` `OpenRA.Utility.exe` child can outlive its
+  printed output and hold `engine/bin` DLLs — `MSB3027` file-lock errors on
+  rebuild mean a stale utility process, not a bad build.
+- Tests: `tools/tests/test_ai_human_pace.py` (4: registration, Player-not-
+  World, contract+machinery, producer-only guard).
+
 # 2026-09-28 — NOVA: CombatAnalysisBotModule port (producer-only)
 
 Ported CN `CombatAnalysisBotModule` (crystallized-nexus `30cf70a`, GPLv3) as
