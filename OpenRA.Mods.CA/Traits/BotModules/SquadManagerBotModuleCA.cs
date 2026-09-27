@@ -215,7 +215,10 @@ namespace OpenRA.Mods.CA.Traits
 			// that may hit allies is a heal/repair effect, so its carrier is support.
 			foreach (var actor in rules.Actors.Values)
 			{
-				if (actor.Name.StartsWith('^'))
+				// Support must be mobile to follow a squad — a heal-armament building
+				// (repair aura/depot) is not a squad member.
+				if (actor.Name.StartsWith('^') ||
+					(!actor.HasTraitInfo<MobileInfo>() && !actor.HasTraitInfo<AircraftInfo>()))
 					continue;
 
 				foreach (var armament in actor.TraitInfos<ArmamentInfo>())
