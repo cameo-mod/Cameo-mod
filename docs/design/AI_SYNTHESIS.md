@@ -310,6 +310,38 @@ the utility cannot run the rule on Cameo (its loader rejects an unrelated blank 
 `weapons/redalert2mod.yaml`). Work branch: `cameo-mod/OpenRA` `bleed_sync_2026_09`. The claim
 and gates are in the fleet folder.
 
+### 4.5 Fransbot ↔ Cameo, layer by layer (from fransotto's own architecture chart)
+
+fransotto (2026-09-27) sent his hand-drawn architecture as a chart, "Fransbot V1.25.x: Simple
+Architecture and Mission Flow". His core loop is **Observe → Understand → Create mission → Bid →
+Assign → Execute → Recover → Repeat**, and he said a lot of it "is named differently". This table
+is the translation, checked against the V1.29.23 source. Several V1.25 chart modules have since
+been merged or renamed, and V1.29 adds Defense, Transport and CommanderCore modules.
+
+| Fransbot layer (his chart) | Fransbot V1.29 module | Cameo today | Gap |
+|---|---|---|---|
+| **1. World** (tick loop, fog, events) | — | same engine | — |
+| **2. Sensors and intelligence** | `FransCombatIntel`, `FransStrategicMap`, `FransRiskModel`, `FransEconomicSaturation` | `BotFogMemory` (6a), `BotSituation` (8×8 regions), `ResourceMapBotModule` (RV), `CombatAnalysisBotModule` (#564, per-role threat + nemesis), `MasterAiBotModule` risk provider/router (6e) | different axes, no duplicate (#564 checked it) |
+| **3. General** (big picture, priorities, target area, mission types; no micromanagement) | `FransGeneral` | `MasterAiBotModule` + `BotPersonalityController` + `BotCounterDemandController`: main target, posture, demand; never picks units | Cameo has no explicit **mission object** |
+| Mission **RECON** | commanders + `CommanderCore` RECON pricing | `ScoutBotModule` (6b) | — |
+| Mission **RAID** (hit a valuable target, leave) | commanders + RAID pricing | guerrilla squads (hit and run) + the harasser port (§3.1: high-value target roll, long routes) | being built |
+| Mission **SECURE** (clear and hold) | `FransGroundCommander` SECURE | assault/rush squads; 6f staging rallies before the attack | no "hold", no forward anchor |
+| Mission **DEFEND** | `FransDefenseCommander` | `Protection` squads | — |
+| **4. Bid and broker** (commanders bid on score, risk, ETA, force; the best bid wins and reserves actors) | `FransCommandBid` | **none.** `SquadManagerBotModuleCA.FindNewUnits` assigns units to squads by static type lists when they are produced | **the main structural difference** |
+| **5. Commanders** Ground / Air / Sea / SpecOps (+ Defense, Transport) | `Frans{Ground,Air,Sea,SpecOps,Defense,Transport}Commander` | `SquadCA` types Rush/Assault, Air, Naval, Guerrilla, Protection, Artillery; special ops spread over `CaptureManagerBotModuleCA`, `CncEngineerBotModule`, `SendUnitToAttackBotModule@chrono`; transport only `LoadCargoBotModule` | no transport/ferry commander (island expansion comes with Fransbot, §4.2) |
+| **6. Execution + Anchor** (regroup/recovery point; SECURE creates a forward anchor; retreat to it; repaired units rejoin) | commanders | squad state machines; guerrillas flee to a random own building; 6f staging = a rally point before the assault | no **forward anchor**, no rejoin-from-anchor |
+| **Support modules** Economy, BaseBuilder, UnitBuilder, MCV, GroundTransfer, SupportCoordinator, Capture | `FransBaseBuilder`, `FransUnitBuilder`, `FransMcvExpansionManager`, `FransGroundTransfer`, `FransSupportCoordinator`, `FransSupportPower`, `FransHarvester`, `FransMinelayer` | `BaseBuilderBotModuleCA`, `UnitBuilderBotModuleCA`, `McvExpansionManagerBotModule`, `SupportPowerBot(AS)Module`, `HarvesterBotModuleCA`, `MinelayerBotModule`, `CaptureManagerBotModuleCA` | ground transfer has no Cameo counterpart |
+
+**What the architect takes from it.** Cameo already has Observe, Understand, Execute and part of
+Recover. Its missing middle is **Create mission → Bid → Assign**. Units belong to a squad because of
+their type, not because a mission needed them. Fransbot's broker is therefore the most valuable
+single idea to import, and it fits the list ruling (§2.8 of AI_ARCHITECTURE, roles on actors):
+**roles decide which units are eligible for a mission, and the broker decides which units a
+mission gets.** That keeps one authority per decision (AI_ARCHITECTURE §10.1). The General (the
+master module) creates missions, the broker allocates, and the commanders (squads) execute.
+Sequencing: this comes after route A's side-by-side matches (§4.2), which show whether the broker
+beats static assignment in play, before anything in the CA squad manager changes.
+
 ---
 
 ## 5. Making the bot more human-like: research and mapping
