@@ -170,8 +170,52 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)](#-field-provenance-is-file-line--matching-by-file-alone-fabricates-a-live-children-class-2026-09-27)
 - [Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)](#dead-edge-detection--resolve-drop-probe-apply-must-share-the-tests-def-index-2026-09-26-w1-sweep)
 - [List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)](#list-splice-hygiene-build-headblocktail-never-mutate-then-slice-2026-09-26-rule-4-remediation)
+- [⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)](#-traitordefault-throws-on-an-actor-with-two-traits-of-that-type--76-units-carry-two-attack-traits-2026-09-27)
+- [⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)](#-cameos-ca-code-is-a-hand-copy--unused-means-check-what-ca-uses-it-for-never-dead-2026-09-27)
+- [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)
+- [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
 
 ---
+
+## ⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)
+
+`actor.TraitOrDefault<T>()` and `actor.Trait<T>()` throw
+*"Actor X has multiple traits of type T"* when the actor has more than one (`TraitDictionary.cs:178`).
+**76 mobile ground actors** carry two or more `AttackBase`-derived traits (`ts_nod_attackbuggy`:
+`AttackFrontal` + `AttackFollow`; the TS drive-bys, Recon Bike, Tick Tank, Mammoth Mk II …). AI
+phase 6f called `TraitOrDefault<AttackBase>()` and **crashed the match** the first time a bot
+owning one formed an attack force (reproduced, fixed in #555). A disabled conditional trait still
+counts.
+
+**Rule:** for any trait type an actor can carry twice (`AttackBase`, `Armament`, `Cargo` …),
+iterate `TraitsImplementing<T>()` and skip `IsTraitDisabled`. Guarded by
+`tools/tests/test_ai_attackbase_lookup.py` (all of CA and Cameo; comments ignored).
+
+## ⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)
+
+Cameo's engine is the RV fork, so `OpenRA.Mods.CA/` gets **no** CA updates on its own.
+`HuntCA.cs` was judged "dead code" and hand-fixed, but upstream had **already fixed it**, and it
+looked unused only because its caller, the Lua binding `Scripting/CombatCAProperties.cs`, had
+never been copied (#557). Before judging, fixing or deleting any CA-derived file:
+`git -C ~/Documents/GitHub/CAmod fetch`, run `tools/audit/audit_ca_drift.py` (is it STALE?) and
+`tools/audit/audit_ca_unused.py` (what does CA use it for?). Prefer upstream verbatim over a
+local fix. Bot modules carry RV and Cameo merges: `tools/audit/audit_ai_frankenstein.py` must
+stay PASS. Details: `docs/design/UPSTREAM_MODS.md` §4a.
+
+## The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)
+
+`tools/tests/ai_bot_player_gate.py` runs **900 ticks** and the bot only ever owns a
+construction yard, so squad formation, attack forces and artillery never execute. Phases 6a–6f
+merged green and still crashed in real play. For any change to squad, target or order code, also
+run a scenario in which the bot owns an army (on 2026-09-27: a local-only copy of the gate map
+spawning 2 `ts_nod_attackbuggy` + 28 `td_nod_lighttank` for the bot, 3500 ticks), and put that
+reproduction in the PR.
+
+## ⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)
+
+The stash list lives in the common `.git`, so a `git stash pop` in one worktree can apply
+**another agent's** entry. It happened on 2026-09-27 (NOVA's `versus-strip` applied in Claude's
+lane). Use `git show <rev>:<path>` or a scratch copy to look at an old version instead.
 
 ## ⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)
 
