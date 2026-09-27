@@ -151,36 +151,28 @@ harkonnen_adp:
 harkonnen_buzzsaw:
 	Defaults:
 		Filename: d2k_harkonnen_sprites|harkonnen_buzzsaw.png
+	# Frames 0-31: one per facing. From 32 an action animation, 7 frames per facing, facing-major.
+	# The old Length/Transpose read that block frame-major, so idle/move spun through facings.
 	idle:
 		Start: 0
-		Length: 8
 		Facings: 32
-		Transpose: true
-		Tick: 100
 	move:
 		Start: 0
-		Length: 8
 		Facings: 32
-		Transpose: true
-		Tick: 100
 	icon:
 		Filename: d2k_harkonnen_icons|harkonnen_buzzsaw_icon.png
 
 harkonnen_inkvine:
 	Defaults:
 		Filename: d2k_harkonnen_sprites|harkonnen_inkvine.png
+	# Frames 0-31: one per facing. From 32 an action animation, 7 frames per facing, facing-major.
+	# The old Length/Transpose read that block frame-major, so idle/move spun through facings.
 	idle:
 		Start: 0
-		Length: 8
 		Facings: 32
-		Transpose: true
-		Tick: 100
 	move:
 		Start: 0
-		Length: 8
 		Facings: 32
-		Transpose: true
-		Tick: 100
 	icon:
 		Filename: d2k_harkonnen_icons|harkonnen_inkvine_icon.png
 

@@ -93,8 +93,9 @@ atreides_spiceharvester:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	WithHarvestOverlay:
-		Palette: effect50alpha
+	# `harvest` is this sheet's harvesting pose of the whole vehicle (frames 8-31, 3 per facing), not a
+	# spray effect: as an overlay in effect50alpha it drew an uncoloured copy (hue-300 pixels purple).
+	WithHarvestAnimation:
 	WithDockingAnimation:
 	-RevealOnFire:
 	Voiced:
