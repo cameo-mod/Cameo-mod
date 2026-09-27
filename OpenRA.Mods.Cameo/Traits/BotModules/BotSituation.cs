@@ -139,6 +139,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly bool UseFoggedObservation = true;
 		[Desc("Cell-edge length of one spatial memory region.")]
 		public readonly int RegionCellSize = 8;
+		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
+		public readonly bool UseRiskRouting = true;
+		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
+		public readonly int RiskRoutingThreatWeight = 1000;
 		[Desc("Ticks after which a remembered non-building that was never seen again is dropped.")]
 		public readonly int ObservationTimeoutTicks = 30000;
 
@@ -161,7 +165,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -204,13 +208,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (IsTraitDisabled || regions == null)
 				return 0;
 
-			var index = regions.IndexOf(cell);
+			return RememberedThreatAtRegion(regions, regions.IndexOf(cell));
+		}
+
+		// Summed remembered Army+Defence value across every enemy's region table —
+		// the shared threat read for the 6c gate and the 6e router.
+		static int RememberedThreatAtRegion(RegionMemory regions, int index)
+		{
 			var threat = 0;
 			foreach (var enemyRegions in regions.ByEnemy.Values)
 				if (index < enemyRegions.Length && enemyRegions[index] != null)
 					threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
 
 			return threat;
+		}
+
+		// 6e risk routing: coarse waypoints around remembered threat. The squad's
+		// locomotor filters out waypoints it cannot reach (region centers can land
+		// on water or cliffs).
+		List<CPos> IBotRouteThreatRouter.RouteAroundThreat(Actor leader, CPos to, int maxWaypoints)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || !Info.UseRiskRouting || regions == null || leader == null || leader.IsDead || !leader.IsInWorld)
+				return null;
+
+			var mobile = leader.TraitOrDefault<Mobile>();
+			Func<CPos, CPos, bool> reachable = null;
+			if (mobile != null)
+				reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+
+			return RegionRouter.Route(regions, leader.Location, to,
+				i => RememberedThreatAtRegion(regions, i), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
 		}
 
 		// The 6d fogged-scan switch: squads observe fog only when the master AI is

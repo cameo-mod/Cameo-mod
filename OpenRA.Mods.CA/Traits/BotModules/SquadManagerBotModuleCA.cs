@@ -150,6 +150,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent chance that a regular assault squad will take an indirect (flanking) route instead of the most direct path. 0 to disable.")]
 		public readonly int IndirectRouteChance = 0;
 
+		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
+		public readonly bool UseRiskRouting = true;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -201,6 +204,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotMainTargetProvider[] mainTargetProviders;
 		IBotRegionThreatProvider[] threatProviders;
 		IBotFoggedEnemyProvider[] fogProviders;
+		IBotRouteThreatRouter[] routeRouters;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -290,6 +294,24 @@ namespace OpenRA.Mods.CA.Traits
 		// rule as the risk gate.
 		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
 
+		// 6e risk routing: ask region-memory routers for waypoints that skirt
+		// remembered threat. Returns null (caller keeps direct routing) when
+		// disabled, no router answers, or the router has no useful detour.
+		internal List<CPos> RouteAroundThreat(Actor leader, CPos target, int maxWaypoints = 4)
+		{
+			if (!Info.UseRiskRouting || IsTraitDisabled || routeRouters == null)
+				return null;
+
+			foreach (var router in routeRouters)
+			{
+				var route = router.RouteAroundThreat(leader, target, maxWaypoints);
+				if (route != null && route.Count > 0)
+					return route;
+			}
+
+			return null;
+		}
+
 		public static bool FoggedScansActive(bool traitDisabled, IBotFoggedEnemyProvider[] providers)
 		{
 			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
@@ -370,6 +392,7 @@ namespace OpenRA.Mods.CA.Traits
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
+			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 

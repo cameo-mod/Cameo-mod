@@ -1,5 +1,32 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — EMBER: AI phase 6e — risk routing on `devin/ember/ai-route-6e`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-route-6e · stacked on the 6d merge`
+
+Phase 6e of `docs/design/AI_FRANSBOT_RESEARCH.md` (risk-aware routing) — the
+last phase-6 item; the fog programme is now complete.
+
+* **`IBotRouteThreatRouter`** (new, `OpenRA.Mods.CA/Traits/BotModules/`):
+  `RouteAroundThreat(leader, to, maxWaypoints)` — the assembly-boundary seam.
+  Implemented by `MasterAiBotModule`; yaml knobs `UseRiskRouting` (default
+  true) and `RiskRoutingThreatWeight` (1000 = one region-hop of cost) sit on
+  the master, and the squad manager adds `UseRiskRouting` for per-bot opt-out.
+* **`RegionRouter`** (new, Cameo): a pure 4-connected A* over
+  `RegionMemory` — enter-cost 1 + threat/weight, start and goal regions never
+  charged (the 6c gate decides whether to go, the router only decides how).
+  Emits interior region centers + the exact target, decimated to maxWaypoints;
+  a locomotor reachability filter drops waypoints on water/cliffs.
+* **Consumers**: `GroundUnitsAttackMoveStateCA` fills `currentRoute` from the
+  router for non-guerrilla squads before falling back to
+  `AIUtils.FindDistinctRoutes`; existing waypoint advance (proximity or the
+  625-tick timeout) and orders are reused unchanged.
+* Seam: `RegionRouter.Route` is static/pure — unit tests cover same-region
+  null, direct-vs-threat-wall routing, uncharged goal threat, the waypoint cap
+  and the reachability filter.
+
+Verification: 244/244 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
 ## 2026-09-27 — EMBER: AI phase 6d — fogged squad scans on `devin/ember/ai-fog-6d`
 
 `Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-fog-6d · stacked on the 6c merge`
