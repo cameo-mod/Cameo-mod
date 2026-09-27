@@ -153,8 +153,11 @@ the fog sequencing.
     [`AiMatchLogWriter.cs`](../../OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs), and
     [`aggregate_ai_matches.py`](../../tools/ai/aggregate_ai_matches.py). Schema version 1;
     host-only JSONL writes with no gameplay effect and no read-back.
-  - [ ] **M** Offline aggregation extensions: personality and composition performance per
-    faction matchup, with a minimum sample threshold.
+  - [x] **M** Offline aggregation extensions: personality and composition performance per
+    faction matchup, with a minimum sample threshold. Schema 2 adds
+    `composition*` fields and `episode_timeline` (stat-snapshot boundaries);
+    the aggregator reports per-episode kill/death trade per
+    faction x personality x composition x enemy matchup.
 - [ ] **L** Bandit-style (UCB1/Thompson) personality priors per matchup, fitted
   offline and committed as reviewed data.
 - [ ] **L** Headless AI-vs-AI batch harness to produce the data volume.
