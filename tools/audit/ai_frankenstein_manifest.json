@@ -58,6 +58,9 @@
  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs": {
   "SetBotLimits": "CAMEO"
  },
+ "OpenRA.Mods.CA/Traits/BotModules/BotTargetTags.cs": {
+  "BotTargetTags": "CAMEO"
+ },
  "OpenRA.Mods.CA/Traits/BotModules/CaptureManagerBotModuleCA.cs": {
   "CapturableRelationships": "RV",
   "PriorityCapturableActorTypes": "RV",
@@ -106,6 +109,7 @@
   "mcvs": "RV"
  },
  "OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs": {
+  "AirPriorityTags": "CAMEO",
   "AirstrikeGrid": "CAMEO",
   "ArtilleryHangBackCells": "CAMEO",
   "ArtilleryMinRangeCells": "CAMEO",
@@ -114,6 +118,7 @@
   "FindFrozenEnemyTarget": "CAMEO",
   "FoggedScans": "CAMEO",
   "FoggedScansActive": "CAMEO",
+  "GuerrillaPriorityTags": "CAMEO",
   "GuerrillaTypes": "RV",
   "HangBackAnchor": "CAMEO",
   "IsArtilleryUnit": "CAMEO",
@@ -123,10 +128,12 @@
   "MaxGuerrillaSize": "RV",
   "MaxIdleUnits": "CAMEO",
   "MaximumEnabledRange": "CAMEO",
+  "NavalPriorityTags": "CAMEO",
   "NavalScanRadius": "CAMEO",
   "PassesRiskGate": "CAMEO",
   "PopAirStrikeTarget": "RV",
   "PreferMainTarget": "CAMEO",
+  "PreferSquadTargets": "CAMEO",
   "RemainingInitialAttackDelay": "CAMEO",
   "RouteAroundThreat": "CAMEO",
   "SetAirStrikeTarget": "RV",
@@ -141,6 +148,7 @@
  },
  "OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs": {
   "Parent": "CAMEO",
+  "PriorityTags": "CAMEO",
   "SquadCAType.Artillery": "CAMEO",
   "SquadCAType.Guerrilla": "CAMEO"
  },
