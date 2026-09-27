@@ -1,3 +1,31 @@
+# 2026-09-28 — NOVA: CombatAnalysisBotModule port (producer-only)
+
+Ported CN `CombatAnalysisBotModule` (crystallized-nexus `30cf70a`, GPLv3) as
+`OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs` implementing the
+new `IBotThreatAnalysis` interface (`OpenRA.Mods.CA/Traits/BotModules/` — the
+consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
+
+- Per-role threat weights (`antiair`/`antiarmour`/`antiinfantry` — the
+  `demand.*` suffixes) accumulated from `IBotRespondToAttack`, value-scaled by
+  attacker cost, decaying on an interval; nemesis score per enemy player with
+  per-attacker throttling; ally-attack registration exposed but unwired.
+- Producer ONLY: nothing consumes `IBotThreatAnalysis` yet — target-scoring
+  (`w_hurt`) wiring is a separate lane (EMBER). The new test asserts that.
+- Adaptations vs CN: `DefenseRole` enum -> `BotThreatRoles` strings matching the
+  demand.* vocabulary; `BotCapabilitiesInfo` economy tags -> `Harvester` trait
+  detection (Cameo has no capability tags); `CNBotLog`/`CNBotPerf` ->
+  `CAAIUtils.BotDebug` / plain `IBotTick`; air target types widened to
+  `{Air, Aircraft, Plane, Helicopter}` for Cameo's vocabulary.
+- Gate result of the mandated overlap check: Fransbot's
+  `FransCombatIntelBotModule` (positional intel) and `FransRiskModelBotModule`
+  (spatial risk) do NOT cover this — different axis.
+- ai.yaml gotcha found in the act: the file defines BOTH `Player:` and `World:`;
+  an end-of-file append lands on World. The trait block sits at the END OF THE
+  PLAYER SECTION (before `World:`), guarded by the new test.
+- Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
+  Player-not-World placement, role/demand-name match, interface contract,
+  producer-only guard).
+
 ## 2026-09-28 — AI match log schema 2: composition + episode telemetry (NOVA)
 
 ROADMAP item "Offline aggregation extensions" (AI queue):

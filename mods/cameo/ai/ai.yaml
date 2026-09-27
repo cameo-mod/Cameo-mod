@@ -6529,6 +6529,8 @@ Player:
 			wc2_orcs_peon: 50
 			wc2_orcs_goblinsappers: 1
 			wc2_orcs_goblinzeppelin: 1
+	CombatAnalysisBotModule:
+		RequiresCondition: genericbot
 
 World:
 	UnitCompositionsBotModule:
