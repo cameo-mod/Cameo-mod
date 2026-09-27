@@ -1,0 +1,17 @@
+World:
+	LuaScript:
+		Scripts: test.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		GameSpeed: insane
+		GameSpeedDropdownLocked: True
+		ShortGameCheckboxEnabled: False
+Player:
+	-ConquestVictoryConditions:
+	Shroud:
+		FogCheckboxEnabled: False
+		ExploredMapCheckboxEnabled: True
+	PlayerResources:
+		DefaultCash: 50000

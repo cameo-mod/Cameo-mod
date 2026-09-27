@@ -3026,3 +3026,13 @@ next vendored bot (CN CombatAnalysis consumption, harasser squads):
   for tens of minutes, silently failing every `dotnet build` copy step with MSB3027.
   Before building or booting: `Get-Process OpenRA*`; only ever kill a PID whose
   binary path + command line resolve to YOUR worktree.
+- **Bot match tests must lock `GameSpeed: insane`** (maintainer order 2026-09-28).
+  Default speed made a 4,500-tick smoke take ~19 min; `insane` (10 ms timestep,
+  `mod.yaml` GameSpeeds) runs the same match ~4-5x faster and a 25,000-tick
+  versus duel finishes in minutes — matches become cheap enough to run in quick
+  succession. Recipe for every `ai_*` test map's `rules.yaml`:
+  `World: → MapOptions: → GameSpeed: insane` (+ `GameSpeedDropdownLocked: True`
+  so a lobby default can't override). `MapOptions` is a WORLD trait — under
+  `Player:` it silently drops, and at yaml root it parses as an actor named
+  `mapoptions` (`Junk value` rules error). `Shroud`/`PlayerResources` are
+  Player-actor traits and stay under `Player:`.

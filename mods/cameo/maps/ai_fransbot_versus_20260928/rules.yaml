@@ -1,0 +1,15 @@
+World:
+	LuaScript:
+		Scripts: versus.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		GameSpeed: insane
+		GameSpeedDropdownLocked: True
+Player:
+	Shroud:
+		FogCheckboxEnabled: False
+		ExploredMapCheckboxEnabled: True
+	PlayerResources:
+		DefaultCash: 50000

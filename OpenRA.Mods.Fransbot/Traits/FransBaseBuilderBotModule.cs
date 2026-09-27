@@ -395,6 +395,8 @@ namespace OpenRA.Mods.Common.Traits
 		string lastRadarDecisionLoggedState;
 		CPos? oreMineRefineryTarget;
 		int oreMineRefineryClaimTick = -1;
+		int lastQueueDiagTick = -1000;
+		int lastOpeningDiagTick = -1000;
 
 		public CPos? DefenseCenter { get; private set; }
 		public CPos? ResourceConyardCenter;
@@ -945,32 +947,51 @@ namespace OpenRA.Mods.Common.Traits
 
 		public ActorInfo ChooseOpeningBuilding(IEnumerable<ActorInfo> buildables, string category)
 		{
-			if (OpeningComplete || !Info.BuildingQueues.Contains(category))
-				return null;
-
-			if (!ConstructionYardBuildings.Actors.Any(a => a.IsInWorld && !a.IsDead))
-				return null;
-
-			if (openingStructureIssued)
-				return null;
-
-			FrozenSet<string> wanted = openingStage switch
+			var items = buildables as IReadOnlyCollection<ActorInfo> ?? buildables.ToList();
+			string reason = null;
+			ActorInfo result = null;
+			if (OpeningComplete)
+				reason = "opening complete";
+			else if (!Info.BuildingQueues.Contains(category))
+				reason = $"category {category} not in BuildingQueues";
+			else if (!ConstructionYardBuildings.Actors.Any(a => a.IsInWorld && !a.IsDead))
+				reason = "no live construction yard";
+			else if (openingStructureIssued)
+				reason = $"already issued {openingStructureType}";
+			else
 			{
-				OpeningStage.Power1 => Info.PowerTypes,
-				OpeningStage.Barracks1 => Info.BarracksTypes,
-				OpeningStage.Refinery1 => Info.RefineryTypes,
-				OpeningStage.Refinery2 => Info.RefineryTypes,
-				OpeningStage.Power2 => Info.PowerTypes,
-				OpeningStage.WarFactory => Info.WarFactoryTypes,
-				OpeningStage.Repair => Info.RepairTypes,
-				_ => null
-			};
-			if (wanted == null)
-				return null;
+				FrozenSet<string> wanted = openingStage switch
+				{
+					OpeningStage.Power1 => Info.PowerTypes,
+					OpeningStage.Barracks1 => Info.BarracksTypes,
+					OpeningStage.Refinery1 => Info.RefineryTypes,
+					OpeningStage.Refinery2 => Info.RefineryTypes,
+					OpeningStage.Power2 => Info.PowerTypes,
+					OpeningStage.WarFactory => Info.WarFactoryTypes,
+					OpeningStage.Repair => Info.RepairTypes,
+					_ => null
+				};
+				if (wanted == null)
+					reason = $"no wanted set for stage {openingStage}";
+				else
+				{
+					result = items.Where(a => wanted.Contains(a.Name) && BelowLimit(a.Name))
+						.OrderBy(a => a.Name)
+						.FirstOrDefault();
+					if (result == null)
+						reason = $"no wanted∩buildable (stage={openingStage}, buildables={items.Count}, " +
+							$"wantedInBuildables=({string.Join(",", items.Where(a => wanted.Contains(a.Name)).Select(a => a.Name).Take(4))}), " +
+							$"wantedBlockedByLimit=({string.Join(",", items.Where(a => wanted.Contains(a.Name) && !BelowLimit(a.Name)).Select(a => a.Name).Take(4))}))";
+				}
+			}
 
-			return buildables.Where(a => wanted.Contains(a.Name) && BelowLimit(a.Name))
-				.OrderBy(a => a.Name)
-				.FirstOrDefault();
+			if (reason != null && world.WorldTick - lastOpeningDiagTick >= 250)
+			{
+				lastOpeningDiagTick = world.WorldTick;
+				FransBotLog.BotDebug(world, "{0}: FRANS-PROD opening blocked: {1}.", player, reason);
+			}
+
+			return result;
 		}
 
 		public void NotifyOpeningBuildingQueued(string type)
@@ -1524,6 +1545,15 @@ namespace OpenRA.Mods.Common.Traits
 			if (builders.Length == 0)
 				return;
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
+			if (world.WorldTick - lastQueueDiagTick >= 250)
+			{
+				lastQueueDiagTick = world.WorldTick;
+				FransBotLog.BotDebug(world, "{0}: FRANS-PROD queues=({1}) builders=({2}) stage={3}.",
+					player,
+					string.Join(", ", queuesByCategory.Select(g => $"{g.Key}:{g.Count()}")),
+					string.Join(", ", builders.Select(b => $"{b.Category}/w{b.WaitTicks}")),
+					openingStage);
+			}
 			var found = false;
 			for (var i = 0; i < builders.Length; i++)
 			{
@@ -1911,6 +1941,7 @@ namespace OpenRA.Mods.Common.Traits
 			int minimumExcessPower;
 			CPos? baseCenterKeepsFailing;
 			bool itemQueuedThisTick;
+			int lastGateDiagTick = -1000;
 			string footprintClearanceBuilding;
 			CPos? footprintClearanceCell;
 			int footprintClearanceStartedTick;
@@ -2352,6 +2383,15 @@ namespace OpenRA.Mods.Common.Traits
 					: active ? baseBuilder.Info.StructureProductionActiveDelay : baseBuilder.Info.StructureProductionInactiveDelay;
 			}
 
+			void DiagGate(ProductionQueue queue, string reason)
+			{
+				if (world.WorldTick - lastGateDiagTick < 250)
+					return;
+				lastGateDiagTick = world.WorldTick;
+				FransBotLog.BotDebug(world, "{0}: FRANS-PROD {1} queue actor {2} gate: {3} (failCount={4}).",
+					player, Category, queue.Actor.ActorID, reason, failCount);
+			}
+
 			void ClearFootprintClearanceState()
 			{
 				footprintClearanceBuilding = null;
@@ -2587,19 +2627,31 @@ namespace OpenRA.Mods.Common.Traits
 					placementPendingConfirmationRetries = 0;
 				}
 
+				if (current == null && failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+					DiagGate(queue, $"failCount {failCount} >= MaximumFailedPlacementAttempts");
 				if (current == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 				{
 					if (!allowNewProduction)
+					{
+						DiagGate(queue, "allowNewProduction=false");
 						return false;
+					}
 
 					var openingBuildingPriority = !baseBuilder.OpeningComplete && baseBuilder.Info.BuildingQueues.Contains(Category);
 					// Opening structures are queued immediately even when the bank is below the normal
 					// BaseBuilder cash threshold. OpenRA's production queue then consumes income as it arrives.
 					// This prevents ordinary unit spending from delaying mandatory opening structures.
 					if ((!openingBuildingPriority && playerResources.GetCashAndResources() < baseBuilder.Info.ProductionMinCashRequirement) || itemQueuedThisTick)
+					{
+						DiagGate(queue, $"cash/throttle cash={playerResources.GetCashAndResources()} itemQueued={itemQueuedThisTick}");
 						return false;
+					}
 					var item = ChooseBuildingToBuild(queue);
-					if (item == null) return false;
+					if (item == null)
+					{
+						DiagGate(queue, $"ChooseBuildingToBuild=null buildables={queue.BuildableItems().Count()}");
+						return false;
+					}
 					RecordOrdinaryStartProductionIntent(queue, item.Name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 					bot.QueueOrder(new Order(OrdinaryStartProductionAcknowledgedOrder, player.PlayerActor, false)

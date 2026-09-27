@@ -296,8 +296,15 @@ def main():
     is_rocket_infantry = {n for n in is_infantry
                           if n in has_combat and ctx.weapon_targets_air(actors[n])}
     is_rifle_infantry = {n for n in is_infantry if n in has_combat and n not in is_rocket_infantry}
+    # PowerTypes must hold dedicated power plants only: the BaseBuilder opening
+    # checks CountOwned(PowerTypes) >= 1 to pass the Power1 stage. Construction
+    # yards and other base hubs supply a little power too — including them lets
+    # the opening skip the real plant, after which every later building fails
+    # its prereq check and production stalls forever. Exclude anything that
+    # itself produces on a building queue (conyards, townhalls, nexuses).
     is_power = {n for n, r in buildable.items()
                 if has(r, "Building") and has(r, "Power")
+                and not produces(r) & BUILDING_QUEUES
                 and any((ch.value or "0").strip().lstrip("-").isdigit()
                         and int(ch.value) > 0
                         for c in r.children if c.key.split("@")[0] == "Power"
@@ -315,6 +322,14 @@ def main():
     is_any_transport = is_ground_transport | is_air_transport | is_landing_craft
     is_specialist = is_capture | is_engineer
     building_queue_names = {q for n in is_building for q in queues_raw(actors[n])}
+    # Queues that produce non-building actors, minus meta queues that never hold
+    # unit build items and minus building-queue names reused by oddball actors.
+    META_QUEUES = {"Promotions", "Research", "Upgrades", "Disabled"}
+    unit_queue_names = {q for n, r in buildable.items()
+                        if n not in is_building
+                        for q in queues_raw(actors[n])} - building_queue_names - META_QUEUES
+    WATER_TERRAINS = {"Water", "River"}
+    SHORE_TERRAINS = {"Beach"}
 
     units_to_build = {}
     for n in sorted(has_combat | is_harvester | is_mcv | is_ground_transport |
@@ -347,6 +362,19 @@ def main():
     put("FransMcvExpansionManagerBotModule", "ExpansionRefineryTypes", is_refinery)
     put("FransMcvExpansionManagerBotModule", "ExistingBaseCoverageTypes", is_conyard)
 
+    put("FransBaseBuilderBotModule", "ConstructionYardTypes", is_conyard)
+    put("FransBaseBuilderBotModule", "RefineryTypes", is_refinery)
+    put("FransBaseBuilderBotModule", "ProductionTypes", is_producer)
+    put("FransBaseBuilderBotModule", "HarvesterTypes", is_harvester)
+    put("FransBaseBuilderBotModule", "McvTypes", is_mcv)
+    put("FransBaseBuilderBotModule", "TechTypes", is_tech)
+    put("FransBaseBuilderBotModule", "NavalProductionTypes", is_nav_prod)
+    put("FransBaseBuilderBotModule", "WaterTerrainTypes", WATER_TERRAINS)
+    put("FransMcvExpansionManagerBotModule", "SeaShoreTerrainTypes", SHORE_TERRAINS)
+    put("FransStrategicMapBotModule", "BeachTerrainTypes", SHORE_TERRAINS)
+    put("FransSupportPowerBotModule", "DeliveryRejectedTerrainTypes", WATER_TERRAINS)
+    put("FransUnitBuilderBotModule", "UnitQueues", unit_queue_names)
+    put("FransEconomicSaturationBotModule", "ProductionQueueCategories", unit_queue_names)
     put("FransBaseBuilderBotModule", "BarracksTypes", is_inf_prod)
     put("FransBaseBuilderBotModule", "WarFactoryTypes", is_veh_prod)
     put("FransBaseBuilderBotModule", "PowerTypes", is_power)

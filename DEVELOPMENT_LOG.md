@@ -186,6 +186,41 @@ consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
 - Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
   Player-not-World placement, role/demand-name match, interface contract,
   producer-only guard).
+## 2026-09-28 — DAWN: Fransbot production unblocked (ConstructionYardTypes gap)
+
+- **Bug:** Fransbot ticked, planned and published missions but never produced:
+  `resources_spent: 0`, `army_value: 0`, `queues busy 0/0` across td_nod AND
+  ra1_soviets smoke matches. Three layers were peeled:
+  1. TD ruleset circular prereq deadlock (refinery→`nuke`→NUK2→`anytdhq`→
+     commcenter→refinery) — pre-existing master issue, bricks ALL bots there.
+  2. `is_power` classified conyards as power plants → opening auto-passed
+     `Power1` → waited on a power plant that was never queued. Fixed in the
+     generator: `is_power` now excludes any structure producing building queues.
+  3. **Root cause:** the generator emitted no `ConstructionYardTypes` (or
+     `RefineryTypes`, `ProductionTypes`, `HarvesterTypes`, `McvTypes`,
+     `TechTypes`, `NavalProductionTypes`, `WaterTerrainTypes`) on
+     `FransBaseBuilderBotModule`, and no `UnitQueues`/`ProductionQueueCategories`
+     on FransUnitBuilder/FransEconomicSaturation. The conyard index
+     (`ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>`) stayed empty →
+     `ChooseOpeningBuilding` dead-ended at "no live construction yard" forever.
+     Upstream supplied these via C# defaults (`powr`/`mcv`/… actor ids and
+     `Infantry`/`Vehicle`/… queue names); the vendored port emptied every
+     [ActorReference] field for the generated lists but these puts were never
+     written — the field-sweep originally missed them.
+- **Fix:** `tools/ai/gen_fransbot_lists.py` — added the 12 missing `put`s,
+  `unit_queue_names` (non-building queue names minus meta/building queues) and
+  WATER/SHORE terrain constants. 127→140 emitted fields. `--check` clean.
+- **Instrumentation:** `FransBaseBuilderBotModule` now logs `[FRANS-PROD]`
+  queue topology (category→queue-count per 250 WT), every silent
+  `ChooseOpeningBuilding` early-return reason, and every `TickQueue` gate.
+  ⚠ first attempt used `int.MinValue` sentinels — `WorldTick - int.MinValue`
+  overflows negative so the throttle never fired; init to `-1000` instead.
+- **Verified live** (`ai_fransbot_smoke_20260928`, ra1_soviets, 4500 WT):
+  PWR1@152 → BARR@502 → PROC1@1352 → PROC2@2202 → PWR2@2402 → WEAP@3002 →
+  FIX@3852 — the full upstream opening chain placed. Final: `resources_spent`
+  15706, `resources_earned` 8750 (harvesters), `assets_value` 23660,
+  `army_value` 7660, `buildings_killed` 1 (killed the inert player's conyard).
+
 ## 2026-09-28 — DAWN: engine isolation + vendored-source drift audit
 
 - **Engine isolation (maintainer order `ORDERS_2026-09-28`):** `engine/` was a
