@@ -58,7 +58,8 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Units that form a guerrilla squad.")]
 		public readonly HashSet<string> GuerrillaTypes = new();
 
-		[Desc("Possibility of units in GuerrillaTypes to join Guerrilla.")]
+		[Desc("Percent chance (0-100) that a pass of new GuerrillaTypes units joins the guerrilla squad. " +
+			"Cameo: the engine this came from compared the other way round (join chance = 100 - value); flipped 2026-09-27.")]
 		public readonly int JoinGuerrilla = 50;
 
 		[Desc("Max number of units AI has in guerrilla squad")]
@@ -784,7 +785,7 @@ namespace OpenRA.Mods.CA.Traits
 					!activeUnits.Contains(a) && a.IsInWorld);
 
 			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
-			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));
+			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) < Info.JoinGuerrilla));
 
 			foreach (var a in newUnits)
 			{

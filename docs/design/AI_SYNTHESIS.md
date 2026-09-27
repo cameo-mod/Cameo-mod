@@ -193,6 +193,10 @@ join (max 16), expansion 15 → 85 %, tech 40 → 60 %, turtle 60 → 40 %, stea
 (one blob). The roll also happens once per pass, not once per unit. Do not flip the comparison
 alone, because that silently inverts every personality. Either rename the field (e.g.
 `GuerrillaSkipChance`), or flip the code **and** the five values in the same commit.
+**Ruled 2026-09-27 and done:** code and values flipped together. The name now means join chance,
+and the values are rush 95, expansion 85, tech 60, turtle 40, steamroller 0, so behaviour is
+unchanged. Still open: `guerrillaForce == null` short-circuits the roll, so a bot with no guerrilla
+squad always forms one, and steamroller's 0 % is "at most one squad" (`LESSONS_LEARNED.md`).
 
 **Unused vendored code is the other half.** `python tools/audit/audit_ca_unused.py` lists every
 type Cameo never uses and **what CA uses it for**. Today: 85 of 247 traits are unused and CA uses
