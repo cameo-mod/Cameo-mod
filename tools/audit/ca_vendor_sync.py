@@ -37,6 +37,8 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 AUDIT = REPO / "tools" / "audit" / "audit_ca_drift.py"
 GUARD = REPO / "tools" / "audit" / "audit_ai_frankenstein.py"
 MANIFEST = REPO / "tools" / "audit" / "ai_frankenstein_manifest.json"
+sys.path.insert(0, str(REPO / "tools" / "audit"))
+import vector_codemod  # noqa: E402
 DEFAULT_CA = pathlib.Path.home() / "Documents" / "GitHub" / "CAmod"
 
 
@@ -109,7 +111,14 @@ def main() -> int:
             return 2
         drift = json.loads(report.read_text(encoding="utf-8"))
     head = drift["ca_head"]
-    protected = set(json.loads(MANIFEST.read_text(encoding="utf-8"))) if MANIFEST.exists() else set()
+    # Upstream CA still says float2/float3; the engine (bleed, #569) does not. Convert what comes from
+    # upstream so a STALE copy compiles and a 3-way merge compares like with like (Cameo's side is converted).
+    vectors = vector_codemod.is_vector_engine(REPO)
+
+    def upstream(data: bytes) -> bytes:
+        return vector_codemod.convert(data.decode("utf-8")).encode("utf-8") if vectors else data
+
+    protected =set(json.loads(MANIFEST.read_text(encoding="utf-8"))) if MANIFEST.exists() else set()
 
     plan = []
     for row in drift["rows"]:
@@ -119,7 +128,8 @@ def main() -> int:
         skip = "frankenstein (RV/Cameo behaviour inside)" if row["path"] in protected and not args.include_frankenstein else ""
         plan.append((kind, row, skip))
 
-    print(f"# CA vendor sync plan vs CAmod `{head[:9]}` ({'APPLY' if args.apply else 'dry run'})\n")
+    print(f"# CA vendor sync plan vs CAmod `{head[:9]}` ({'APPLY' if args.apply else 'dry run'})"
+          f"{' - upstream converted to System.Numerics vectors' if vectors else ''}\n")
     results = {"synced": [], "merged": [], "conflict": [], "skipped": [], "field_loss": []}
 
     def check_fields(path: str, before: bytes, after: bytes) -> None:
@@ -134,7 +144,7 @@ def main() -> int:
             continue
         ours_file = REPO / path
         ours = ours_file.read_bytes()
-        theirs = git_bytes(args.ca, "show", f"{head}:{row.get('upstream_path') or path}")
+        theirs = upstream(git_bytes(args.ca, "show", f"{head}:{row.get('upstream_path') or path}"))
         if kind == "STALE":
             results["synced"].append(path)
             check_fields(path, ours, theirs)
@@ -142,7 +152,7 @@ def main() -> int:
                 ours_file.write_bytes(with_endings(theirs, ours))
             continue
 
-        base = git_bytes(args.ca, "cat-file", "-p", row["base_blob"])
+        base = upstream(git_bytes(args.ca, "cat-file", "-p", row["base_blob"]))
         with tempfile.TemporaryDirectory() as tmp:
             t = pathlib.Path(tmp)
             (t / "ours").write_bytes(ours.replace(b"\r\n", b"\n"))
