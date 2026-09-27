@@ -1,5 +1,25 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
+
+`Agent: NOVA · lane: AI architecture / assign layer · branch devin/nova/ai-missions-7a · based on master e9d500212`
+
+Phase 7a adds the first assign-layer seam without changing unit ownership:
+
+* `BotMission` and `IBotMissionProvider` live at the CA assembly boundary. The master publishes
+  ordered, fog-honest `Raid` and `Defend` intent from `RegionMemory`; it does not grant
+  conditions or issue unit orders.
+* `SquadManagerBotModuleCA` remains the sole owner of attack-force formation. It may hold a
+  ready force briefly for a defend mission or focus a newly formed raid on the mission region,
+  but it never moves units between existing squads. Reservations are advisory unsynchronized
+  state.
+* `Recon` remains with `ScoutBotModule` and `Secure` is deferred. Phase 7b is mission bidding;
+  phase 7c adds Secure plus Fransbot anchors/rejoin.
+
+Situation records are schema 2 and include the published mission type, priority, and region
+index. The mission contract is intent, not command: future consumers must preserve one execution
+owner per unit.
+
 ## 2026-09-27 — NOVA: I own the AI architecture; Claude's groundwork queue is on master (`590752075`)
 
 `Agent: NOVA · lane: AI architecture / bot-module coherence · merge queue nova/merge-queue-20260927 → master`

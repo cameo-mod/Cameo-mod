@@ -138,7 +138,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotSituation situation)
 		{
 			AiMatchLogWriter.AppendObjectStart(builder);
-			AiMatchLogWriter.AppendNumber(builder, "schema", 1, true);
+			AiMatchLogWriter.AppendNumber(builder, "schema", 2, true);
 			AiMatchLogWriter.AppendString(builder, "kind", "situation");
 			AiMatchLogWriter.AppendString(builder, "record_id", gameUid + "|" + playerName + "|" + situation.Tick);
 			AiMatchLogWriter.AppendString(builder, "game_uid", worldGameUid);
@@ -153,6 +153,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "main_target", situation.MainTarget?.InternalName ?? "");
 			AiMatchLogWriter.AppendNumber(builder, "main_target_score",
 				situation.MainTarget != null && situation.Enemies.TryGetValue(situation.MainTarget, out var target) ? target.Score : 0);
+			if (situation.Mission == null)
+				builder.Append(",\"mission\":null");
+			else
+			{
+				builder.Append(",\"mission\":{\"type\":\"")
+					.Append(situation.Mission.Type.ToString().ToLowerInvariant())
+					.Append("\",\"priority\":")
+					.Append(situation.Mission.Priority)
+					.Append(",\"region_index\":")
+					.Append(situation.Mission.RegionIndex)
+					.Append('}');
+			}
 
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, "hints");
 			AiMatchLogWriter.AppendNumber(builder, "defence_fraction", situation.DefenceFractionHint, true);
