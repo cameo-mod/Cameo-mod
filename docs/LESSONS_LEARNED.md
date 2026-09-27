@@ -2979,7 +2979,6 @@ or a name-based `Stop-Process -Name OpenRA` from another agent's cleanup all
 land there. On a box running several agent lanes at once, a name sweep kills
 every lane's match.
 
-**Rules:**
 - Never kill OpenRA by process name — always by the PID you spawned. A
   `Stop-Process -Name "OpenRA*"` in a boot-gate script is a cross-agent kill.
 - Treat `exit=1` + zero records + no exception as an external kill, not a
@@ -2998,3 +2997,32 @@ every lane's match.
 - `Map.ComputeUID` hashes file bytes: two byte-identical variant dirs merge
   into one `MapCache` preview, and `Launch.Map`'s name lookup can't see the
   other — salt generated copies with a unique comment.
+## Vendored-bot port traps (2026-09-28, DAWN Fransbot Route-A)
+
+Three traps from porting Fransbot's 27 modules onto cameo-engine — all apply to the
+next vendored bot (CN CombatAnalysis consumption, harasser squads):
+
+- **`readonly` collection fields defaulted `= null` are a boot NRE.** Upstream fills
+  `UnitsToBuild`/`UnitLimits`/`UnitDelays` from its personalities yaml on every player;
+  in Cameo no faction row exists yet, so the field stays null and
+  `ActorIndex.OwnerAndNames(info.UnitsToBuild.Keys)` NRE'd inside `Player..ctor` during
+  shellmap world creation — before the menu, before any bot type check. Default to
+  `FrozenDictionary.Empty`/`FrozenSet.Empty` and let runtime `Count == 0` guards
+  idle the feature. `Actor.TraitsImplementing<T>` returns disabled traits too, so
+  `Created()` `?? throw` service lookups are safe, but ctor-time field dereferences
+  are not — trait constructors run for EVERY player actor regardless of conditions.
+- **`IBotRespondToAttack` is a fog-leak class.** `e.Attacker` may be a shroud-hidden
+  enemy; reading its `Info.Name`/`Location`/`ActorID` leaks what the player cannot
+  see. Fransbot's own convention (Minelayer): the ATTACK is legitimate information,
+  the attacker is not — inspect `e.Attacker` only behind `CanBeViewedByPlayer(player)`
+  and fall back to the victim's cell for any anchoring. Two handlers violated it
+  (DefenseCommander threat-type/defense-center, BaseBuilder `UpdatedDefenseCenter`).
+  Audit every `RespondToAttack` + every `ActorMap.AllActors`/`FindActorsInCircle`
+  enemy-side scan when porting; own-actor filters and `BlockedByActor` route sims are
+  fine (the engine pathfinder pays the same cost physically).
+- **Zombie `OpenRA.Utility` children pin the shared `engine/bin`.** All worktrees
+  junction to the same built engine; `--check-yaml` writes its printed output early
+  but the process keeps running (~1 GB, one CPU core) holding `bin\*.dll` read-locks
+  for tens of minutes, silently failing every `dotnet build` copy step with MSB3027.
+  Before building or booting: `Get-Process OpenRA*`; only ever kill a PID whose
+  binary path + command line resolve to YOUR worktree.

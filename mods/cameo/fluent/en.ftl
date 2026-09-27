@@ -362,6 +362,7 @@ bot_ai =
    .unbeatable = Unbeatable AI
    .cameogod = Cameo God AI
    .campaign = Campaign AI
+   .fransbot = Fransbot (Experimental)
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 
