@@ -1062,8 +1062,11 @@ allow it.
    (`ScoutBotModule`: staleness x interest region targets, yaml-listed scout types, scout-loss
    danger marks now feed it) and 6c (the pre-commit risk
    gate: `IBotRegionThreatProvider` + `AttackRiskMargin` on `SquadManagerBotModuleCA`, gating the
-   idle-squad commit only) both landed 2026-09-27; squad-side fog (6d) and risk routing (6e)
-   remain —
+   idle-squad commit only) and 6d (squad-side fogged scans: `IBotFoggedEnemyProvider` gates every
+   `World.Actors` target scan to observed enemies, with `FrozenActorLayer` remembered buildings as
+   fallback targets — remembered mobile units are re-observed by scouts instead of being chased at
+   stale positions) all landed 2026-09-27; risk routing (6e)
+   remains —
    `docs/design/AI_FRANSBOT_RESEARCH.md` §4.*
 7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
    strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.

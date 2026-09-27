@@ -675,5 +675,37 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1, 999999, -1), Is.True);
 		}
+
+		sealed class StubFogProvider : IBotFoggedEnemyProvider
+		{
+			public bool FoggedObservation { get; set; }
+		}
+
+		[Test]
+		public void FoggedScansNeedAnEnabledProvider()
+		{
+			// No provider / disabled trait / disabled provider all leave the
+			// legacy omniscient scan in place (6d degradation rule).
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, null), Is.False);
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(true, new IBotFoggedEnemyProvider[] { new StubFogProvider { FoggedObservation = true } }), Is.False);
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, new IBotFoggedEnemyProvider[] { new StubFogProvider { FoggedObservation = false } }), Is.False);
+		}
+
+		[Test]
+		public void FoggedScansOnWhenAnyProviderReportsFog()
+		{
+			var providers = new IBotFoggedEnemyProvider[]
+			{
+				new StubFogProvider { FoggedObservation = false },
+				new StubFogProvider { FoggedObservation = true },
+			};
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, providers), Is.True);
+		}
+
+		[Test]
+		public void MasterAiImplementsFoggedEnemyProvider()
+		{
+			Assert.That(typeof(IBotFoggedEnemyProvider).IsAssignableFrom(typeof(MasterAiBotModule)), Is.True);
+		}
 	}
 }

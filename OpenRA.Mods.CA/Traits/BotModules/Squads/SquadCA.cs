@@ -87,7 +87,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public bool IsTargetValid => Target.IsValidFor(Units.FirstOrDefault().Actor);
 
-		public bool IsTargetVisible => TargetActor.CanBeViewedByPlayer(Bot.Player);
+		public bool IsTargetVisible => Target.Actor == null || Target.Actor.CanBeViewedByPlayer(Bot.Player);
 
 		public WPos CenterPosition { get { return Units[0].Actor.CenterPosition; } }
 

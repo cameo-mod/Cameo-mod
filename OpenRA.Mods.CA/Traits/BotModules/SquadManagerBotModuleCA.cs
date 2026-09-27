@@ -200,6 +200,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotAircraftBuilder[] aircraftBuilders;
 		IBotMainTargetProvider[] mainTargetProviders;
 		IBotRegionThreatProvider[] threatProviders;
+		IBotFoggedEnemyProvider[] fogProviders;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -283,6 +284,63 @@ namespace OpenRA.Mods.CA.Traits
 			return a.CanBeViewedByPlayer(Player);
 		}
 
+		// 6d fogged observation: when a provider reports fogged scans, squads only
+		// pick targets they can see (or remember via FrozenActorLayer). Without a
+		// provider the legacy omniscient scans run unchanged — same degradation
+		// rule as the risk gate.
+		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
+
+		public static bool FoggedScansActive(bool traitDisabled, IBotFoggedEnemyProvider[] providers)
+		{
+			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
+		}
+
+		// IsPreferredEnemyUnit restricted to what the bot can currently observe.
+		internal bool IsPreferredObservedEnemyUnit(Actor a)
+		{
+			return IsPreferredEnemyUnit(a) && (!FoggedScans || IsNotHiddenUnit(a));
+		}
+
+		// Fogged fallback target: an enemy building the engine's FrozenActorLayer
+		// remembers under shroud. The layer invalidates the record when the cell
+		// is re-observed empty, so a stale frozen target drops out on its own.
+		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue)
+		{
+			var layer = Player.FrozenActorLayer;
+			if (layer == null)
+				return null;
+
+			var map = World.Map;
+			// Mirrors Target.IsValidFor's FrozenActor predicate: only rendered
+			// ghosts count — hidden (revealed-empty) and invalid records drop out.
+			var candidates = layer.FrozenActorsInRegion(map.AllCells)
+				.Where(fa => fa.IsValid && fa.Visible && !fa.Hidden && fa.Owner != null
+					&& Player.RelationshipWith(fa.Owner) == PlayerRelationship.Enemy
+					&& !fa.TargetTypes.IsEmpty && !fa.TargetTypes.Overlaps(Info.IgnoredEnemyTargetTypes))
+				.ToList();
+
+			var mainTarget = EffectiveMainTarget();
+			candidates = PreferOwned(candidates, mainTarget == null ? null : fa => fa.Owner == mainTarget);
+
+			if (attackerValue >= 0)
+				candidates.RemoveAll(fa => !PassesRiskGate(map.CellContaining(fa.CenterPosition), attackerValue));
+
+			FrozenActor closest = null;
+			var closestDistance = long.MaxValue;
+			foreach (var fa in candidates)
+			{
+				var delta = fa.CenterPosition - from;
+				var distance = (long)delta.LengthSquared;
+				if (distance < closestDistance)
+				{
+					closestDistance = distance;
+					closest = fa;
+				}
+			}
+
+			return closest;
+		}
+
 		public bool IsValidAllyUnit(Actor a)
 		{
 			if (a == null || a.IsDead || Player.RelationshipWith(a.Owner) != PlayerRelationship.Ally || a.Info.HasTraitInfo<HuskInfo>() || a.Info.HasTraitInfo<CarrierSlaveInfo>())
@@ -311,6 +369,7 @@ namespace OpenRA.Mods.CA.Traits
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
+			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -361,7 +420,14 @@ namespace OpenRA.Mods.CA.Traits
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+
+			// Fogged scans never fall back to actors the bot cannot see; remembered
+			// enemy buildings are offered separately as FrozenActor targets.
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
+
+			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
 		// 6c pre-commit risk gate: as FindClosestEnemy, but candidates whose region's
@@ -373,13 +439,20 @@ namespace OpenRA.Mods.CA.Traits
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			units.RemoveAll(u => !PassesRiskGate(u, attackerValue));
-			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
+
+			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
 			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			if (FoggedScans)
+				units = units.Where(IsNotHiddenUnit).ToList();
+
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			return units.RandomOrDefault(World.LocalRandom);
@@ -388,9 +461,12 @@ namespace OpenRA.Mods.CA.Traits
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
 		{
 			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			if (FoggedScans)
+				units = units.Where(IsNotHiddenUnit).ToList();
+
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			units.RemoveAll(u => !PassesRiskGate(u, attackerValue));
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			return units.RandomOrDefault(World.LocalRandom);
 		}
 
@@ -413,11 +489,16 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal bool PassesRiskGate(Actor target, int attackerValue)
 		{
-			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(target.Location)) ?? 0;
+			return PassesRiskGate(target.Location, attackerValue);
+		}
+
+		internal bool PassesRiskGate(CPos cell, int attackerValue)
+		{
+			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(cell)) ?? 0;
 			var pass = PassesRiskGate(attackerValue, threat, Info.AttackRiskMargin);
 			if (!pass)
 				AIUtils.BotDebug("AI ({0}): risk gate held a {1}-value squad off {2} (remembered threat {3}, margin {4}%)",
-					Player.ClientIndex, attackerValue, target.Info.Name, threat, Info.AttackRiskMargin);
+					Player.ClientIndex, attackerValue, cell, threat, Info.AttackRiskMargin);
 
 			return pass;
 		}
@@ -686,9 +767,14 @@ namespace OpenRA.Mods.CA.Traits
 			protectOwnFrom = null;
 			protectOwnTicks = Info.ProtectInterval;
 
+			// Fogged scans only chase an attacker the bot can actually see; an
+			// unseen attacker still updates the defence center above, and the
+			// protection squad's own radius scan picks up anything it can see.
+			var protectTarget = FoggedScans && !IsNotHiddenUnit(attacker) ? null : attacker;
+
 			var protectSq = GetSquadOfType(SquadCAType.Protection);
 			if (protectSq == null)
-				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, attacker);
+				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, protectTarget);
 
 			if (!protectSq.IsValid)
 			{
@@ -700,8 +786,8 @@ namespace OpenRA.Mods.CA.Traits
 					protectSq.Units.Add(new UnitWposWrapper(a));
 			}
 
-			if (protectSq.IsValid && !protectSq.IsTargetValid)
-				protectSq.TargetActor = attacker;
+			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
+				protectSq.TargetActor = protectTarget;
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)

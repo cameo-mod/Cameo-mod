@@ -1,5 +1,38 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — EMBER: AI phase 6d — fogged squad scans on `devin/ember/ai-fog-6d`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-fog-6d · stacked on the 6c merge`
+
+Phase 6d of `docs/design/AI_FRANSBOT_RESEARCH.md` (squad target scans honour
+fog): the last `World.Actors` omniscience leak is closed.
+
+* **`IBotFoggedEnemyProvider`** (new, `OpenRA.Mods.CA/Traits/BotModules/`):
+  one-member interface, `FoggedObservation` — implemented by
+  `MasterAiBotModule` as `UseFoggedObservation && Shroud != null`, the same
+  condition its snapshot uses. No provider / disabled trait → legacy scans run
+  unchanged (the 10.1 degradation rule).
+* **`SquadManagerBotModuleCA`**: `FoggedScans` +
+  `IsPreferredObservedEnemyUnit` (preferred AND viewable). In fogged mode
+  `FindClosestEnemy`/`FindHighValueTarget` drop the omniscient building/any
+  fallbacks to visible-only; state scans in Ground/Navy/Air/StateBase use the
+  observed filter. `RespondToAttack` still records the defence-center ping (a
+  hit is legitimate intel) but no longer assigns an unseen attacker as a chase
+  target.
+* **Frozen-actor fallback**: when nothing is visible, `FindNewTarget` (ground)
+  and `NavyUnitsIdleState` commit to a `Target.FromFrozenActor` — the
+  `FrozenActorLayer` already remembers buildings and self-invalidates when a
+  re-observed cell is empty. Remembered MOBILE units deliberately produce no
+  attack target (a stale position cannot invalidate a `Target.FromCell`) —
+  scouts re-observe them instead.
+* `CheckReachability` gained a `CPos` overload; squad states dereference
+  `owner.Target.CenterPosition` (works for actor/frozen/terrain) instead of
+  `TargetActor` which is null for non-actor targets.
+* Seam: `public static FoggedScansActive(traitDisabled, providers)` — unit
+  tests pin the degradation cases plus the master/provider contract.
+
+Verification: 238/238 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
 ## 2026-09-27 — EMBER: AI phase 6c — pre-commit risk gate on `devin/ember/ai-risk-6c`
 
 `Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-risk-6c · stacked on the 6b merge`
