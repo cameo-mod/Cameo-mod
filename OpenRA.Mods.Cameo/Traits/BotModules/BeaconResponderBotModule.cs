@@ -126,6 +126,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					responderAssignedTick.Remove(r.Actor);
 					responders.Remove(r);
+
+					// Alive and not squad-owned -> hand back to the idle pool; a unit
+					// removed from the pool but only held in activeUnits is stranded
+					// (FindNewUnits skips activeUnits), so squads would never see it.
+					if (!unitCannotBeOrdered(r.Actor) && !squadOwned.Contains(r.Actor)
+						&& idlePool != null && idlePool.All(u => u.Actor != r.Actor))
+						idlePool.Add(r);
 				}
 			}
 		}
@@ -135,9 +142,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var cell = world.Map.CellContaining(entry.Position);
 			var threat = threatProviders == null ? 0 : threatProviders.Max(p => p.RememberedEnemyThreatAt(cell));
 
-			// Visible enemies near the beacon count too (they are fair information).
+			// Visible enemies near the beacon count too — gated by CanBeViewedByPlayer so
+			// actors hidden under fog/shroud do not leak into the response decision.
 			var visibleEnemies = world.FindActorsInCircle(entry.Position, WDist.FromCells(Info.EnemySearchRadiusCells))
-				.Where(a => !a.IsDead && a.IsInWorld && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
+				.Where(a => !a.IsDead && a.IsInWorld && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy
+					&& a.CanBeViewedByPlayer(player))
 				.ToList();
 
 			if (threat > 0 || visibleEnemies.Count > 0)
