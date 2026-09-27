@@ -1,5 +1,71 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — NOVA: I own the AI architecture; Claude's groundwork queue is on master (`590752075`)
+
+`Agent: NOVA · lane: AI architecture / bot-module coherence · merge queue nova/merge-queue-20260927 → master`
+
+The maintainer put me in charge of the bot-AI architecture: the five bot-module
+sources (Cameo, Romanov's Vengeance, Combined Arms, Crystallized Nexus,
+Fransbot) have to end up as one layered system, not five systems sharing a
+process. I reviewed and landed Claude's groundwork for that, independently
+verified rather than taken on description:
+
+* **#573** architecture + pack tools, **#574** ContentPack AI rows, **#575**
+  report-only `BotRoleSets`, **#570** Frankenstein 6g symbols, **#576** CA
+  vector codemod — all merged, in that order.
+
+Three findings that matter to anyone working these files:
+
+1. **#574 is content-identical, but not resolved-rules-identical in
+   combination.** My own dump, own engine build: `before=7054 after=7067
+   only-before=0 only-after=13 changed=0`. All 13 extra keys are
+   `/BotRoleSets/*` from #575; the moved rows themselves lose nothing and
+   change nothing. Anyone re-verifying the combined tree should expect 7067,
+   not the 7054 in #574's body.
+2. **`compare_resolved.py` cannot see row order** — it sorts siblings. Moving
+   rows into packs *does* reorder them. That is safe only because the two
+   consumers (`BaseBuilderQueueManagerCA`, `UnitBuilderBotModuleCA`) shuffle
+   with `world.LocalRandom` rather than treating declaration order as
+   priority. If you ever add a consumer that walks these dictionaries in
+   order, the pack split becomes a behaviour change and the comparator will
+   not tell you.
+3. **Never run `ai_bot_player_gate` and `ai_squad_gate` concurrently.** They
+   append to the same `Logs/cameo-ai-situations.jsonl`, and interleaved
+   records make the ticks look non-monotonic — the gate then fails with
+   `HardBot situation record ticks are not strictly increasing` and blames
+   your branch. Run them sequentially, moving the log aside first. This cost
+   me a false regression.
+
+Verified on the pushed master head: engine 0/0, Cameo 0 errors (8 pre-existing
+analyzer warnings), 258/258 tests, squad gate PASS (3 squads / 8 units),
+bot-player gate PASS, all four audits PASS, `boot-test.cmd` PASS, module map
+current.
+
+**The architecture I am holding the lane to** (full version in
+`docs/design/AI_ARCHITECTURE.md` and `AI_SYNTHESIS.md`) — one owner per
+decision, four layers:
+
+* **Sense**: fog memory, `BotSituation`, `ScoutBotModule`, CN combat analysis.
+  Producers only; they publish, they never decide.
+* **Decide**: `MasterAiBotModule` (unsynced, observes and publishes) feeding
+  the synced `BotPersonalityController` / `BotCounterDemandController`, which
+  are the *only* things that grant conditions. Unsynced code must never touch
+  a synced condition directly — that is the rule CN's profile switcher
+  violates, which is why its scoring gets ported into our synced controller
+  instead of its code being vendored.
+* **Assign**: not built yet. This is the Fransbot mission/bid/broker layer
+  (`RECON`/`RAID`/`SECURE`/`DEFEND` + anchors) and it is the next real piece
+  of architecture. Until it exists, CA squads self-assign.
+* **Execute**: CA squads, RV guerrilla, our artillery/risk routing. One
+  execution owner per unit, always.
+
+Instructions to the fleet: do not add a second personality switcher, a second
+`UnitCompositionsBotModule` (it throws), or a second assignment authority —
+bring it to me and it becomes a layer instead of a rival. Fransbot commanders
+get evaluated side by side against CA squads on match data before anything is
+replaced. EMBER's 6a–6f work is the sense/execute half of this and needs no
+rework.
+
 ## 2026-09-27 — EMBER: AI phase 6f part 1 — artillery attach on `devin/ember/ai-waves-6f`
 
 `Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-waves-6f · stacked on the 6e merge`
