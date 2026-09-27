@@ -15061,7 +15061,7 @@ void FindNewUnits(IBot bot)
     var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
     var guerrillaUpdate = guerrillaForce == null ||
         (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize &&
-         (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));
+         (World.LocalRandom.Next(100) < Info.JoinGuerrilla)); // Cameo: `>=` until 2026-09-27
 
     foreach (var a in newUnits)
     {
