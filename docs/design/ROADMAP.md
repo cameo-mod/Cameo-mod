@@ -144,8 +144,13 @@ the fog sequencing.
   master's `MainTarget` for proactive picks when `PreferMainTarget` is enabled.
 - [x] **M** Phase 5 counter-demand conditions: `BotCounterDemandController` exposes
   hysteretic, sustained `demand.*` prerequisites for pilot compositions.
-- [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
-  and later personality refinements.
+- [x] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
+  and later personality refinements. Phase-6 programme landed 2026-09-27:
+  6a fogged observation + `RegionMemory` + `UseFoggedObservation` (`ccfd7830a`),
+  6b `ScoutBotModule` (`c2dab139a`), 6c pre-commit risk gate
+  `IBotRegionThreatProvider` + `AttackRiskMargin` (`295396dfd`), 6d fogged
+  squad scans + `FrozenActorLayer` fallback targets (`16d876f51`), 6e risk
+  routing `IBotRouteThreatRouter` + `RegionRouter` (`951e480d7`).
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),
@@ -163,12 +168,12 @@ the fog sequencing.
 - [ ] **L** Headless AI-vs-AI batch harness to produce the data volume.
 - [ ] **DEFERRED** Anything neural - blocked on factions and balance being
   finished, per the maintainer's own sequencing.
-- [ ] **OPEN DESIGN** Fogged bot observation. Bots currently scan `World.Actors`
-  and filter only cloak, never shroud, so they know the whole map from tick zero.
-  This is the only real cheat left (difficulty is `BotLimits` throttling, not
-  resources), and fixing it will make bots temporarily weaker and requires a
-  scouting module. Maintainer's call - see AI_ARCHITECTURE.md section 9,
-  decision 1.
+- [x] **SHIPPED** Fogged bot observation (phases 6a-6e above). Squad scans now
+  honour shroud via `IsPreferredObservedEnemyUnit` and remembered buildings via
+  `FrozenActorLayer`; `ScoutBotModule` provides the scouting half. Bots keep
+  the legacy omniscient scan whenever no `IBotFoggedEnemyProvider` answers
+  (10.1 degradation) or `UseFoggedObservation` is off. The follow-on tuning
+  pass the design warned about is the remaining work.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
