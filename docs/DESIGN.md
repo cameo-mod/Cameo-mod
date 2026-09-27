@@ -3924,10 +3924,11 @@ bases, not the plumbing. The three open decisions of the 2026-09-10 review, rule
   `(4000 + H) / 5000` up to `H = 1000`, `(3000 + H) / 4000` above; replaces the retired `h/2` (which
   zeroed the percentage half at `h = 0` and halved it at `h = 1`).
 * **Blast radius keeps scaling: `radius x (h+2)/3`** (2/3 at `h=0`, 4/3 at `h=2`), continuing the
-  existing "the level scales the radius only" law; authored `Range` arrays stay authored.
-  ⚠ **The code disagrees (measured 2026-09-27):** `AreaDamageWarhead.cs:381-383` scales the warhead
-  `Range` array by `(h+2)/3` exactly like `Spread`/`MinRadius`/`MaxRadius`. The re-point tool divides
-  all four back, so the migration keeps effective radii either way; which one is the law is open.
+  existing "the level scales the radius only" law. ⭐ **RULED 2026-09-27 (maintainer): the warhead
+  `Range` array SCALES too**, exactly like `Spread`/`MinRadius`/`MaxRadius`, so every radius of a
+  warhead moves together — the code (`AreaDamageWarhead.cs:381-383`) was right and the earlier
+  wording "authored `Range` arrays stay authored" is withdrawn. The re-point tool divides all four
+  back, so migrating a weapon keeps its effective radii.
 * **Unset is not zero:** an absent `Heaviness` means INERT (today's behaviour, every unmigrated
   weapon); an explicit value, including 0, is ACTIVE. Family identity is guaranteed by §12.0d's
   per-ladder rank restore, not by a blanket "never flatter".
@@ -3977,7 +3978,20 @@ pins back any other field that moved; it writes only when that verification is e
 orphan cancels 0, dead fields unchanged. Left levelled on purpose: 37 `Super` edges, 35 Sniper/Nuclear
 edges, 74 same-family MIX edges (needs a ruling), and 15 owners whose closure cannot be pinned
 uniformly or whose main is retyped away from `AreaDamage` (no `Heaviness` field). Applied per lane
-AFTER #534 and #516 land; 33 raw ledgers move, so the application re-extracts.
+AFTER #534 and #516 land; 33 raw ledgers move, so the application re-extracts. *(Re-measured on
+post-#534 master: 1,129 owners / 1,582 weapons; the MIX edges fell to 6 because #534 collapsed most.)*
+
+⭐ **RULED 2026-09-27 (maintainer), the same-family MIX weapons** (two levels of one family on one
+chain):
+* **A re-level re-points at the level that FIRES.** When the second level only overrides the first
+  and one main is cancelled — `RA2Chemspray2` (Yuri Biotrooper, Chemical Medium → Heavy),
+  `RA2Virusgun2` (Yuri Virus, Toxic Light + Medium) and `SkyHawkArrowsEnergized` (Japanese Sky Hawk,
+  Arrow Light + Medium) — the weapon goes onto the family base with `Heaviness` from the surviving
+  main: 2000, 1000 and 1000.
+* **A true two-warhead mix folds into ONE warhead at the HEAVY level.** `^D2K155mmLegacy` (the D2k
+  155mm artillery template: Demolition Light 2,000 + Demolition Heavy 24,000) becomes one
+  `^Warhead_Demolition` warhead with `Damage: 26000` (the R17 sum) and `Heaviness: 2000`; the Light
+  part's separate profile is retired.
 
 **What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
 / `_Heavy` suffix is retired: **147 templates across 50 families become 50** *(estimate; measured
