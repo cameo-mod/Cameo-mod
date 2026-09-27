@@ -16,7 +16,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval }
+	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery }
 
 	public class SquadCA
 	{
@@ -36,6 +36,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		internal Target Target;
 		internal StateMachineCA FuzzyStateMachine;
+
+		// 6f: artillery squads attach to an assault squad and bombard what it can
+		// see. Runtime-only — not serialized; the state reattaches after load.
+		internal SquadCA Parent;
+
+		// 6g (CN A3): rules-derived BotTargetTags this squad prefers when picking
+		// targets (e.g. air raiders prefer artillery). Empty = no preference.
+		internal HashSet<string> PriorityTags = [];
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)
@@ -68,6 +76,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				case SquadCAType.Naval:
 					FuzzyStateMachine.ChangeState(this, new NavyUnitsIdleState(), true);
 					break;
+				case SquadCAType.Artillery:
+					FuzzyStateMachine.ChangeState(this, new ArtilleryUnitsIdleStateCA(), true);
+					break;
 			}
 		}
 
@@ -87,7 +98,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public bool IsTargetValid => Target.IsValidFor(Units.FirstOrDefault().Actor);
 
-		public bool IsTargetVisible => TargetActor.CanBeViewedByPlayer(Bot.Player);
+		public bool IsTargetVisible => Target.Actor == null || Target.Actor.CanBeViewedByPlayer(Bot.Player);
 
 		public WPos CenterPosition { get { return Units[0].Actor.CenterPosition; } }
 

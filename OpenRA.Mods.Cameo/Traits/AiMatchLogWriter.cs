@@ -142,7 +142,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var team = world.LobbyInfo.ClientWithIndex(player.ClientIndex)?.Team ?? 0;
 
 				AppendObjectStart(lines);
-				AppendNumber(lines, "schema", 1, true);
+				AppendNumber(lines, "schema", 2, true);
 				AppendString(lines, "record_id", gameUid + "|" + player.InternalName);
 				AppendString(lines, "recorded_utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture));
 				AppendString(lines, "mod_version", Game.ModData.Manifest.Metadata.Version);
@@ -163,6 +163,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
 				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
 				AppendTimeline(lines, recorder?.PersonalityTimeline);
+				AppendString(lines, "composition", recorder?.CurrentComposition ?? "");
+				AppendNumber(lines, "composition_switches", recorder?.CompositionSwitches ?? 0);
+				AppendCompositionTimeline(lines, recorder?.CompositionTimeline);
+				AppendEpisodeTimeline(lines, recorder?.EpisodeTimeline);
 				lines.Append('}');
 
 				AppendObjectPropertyStart(lines, "stats");
@@ -227,6 +231,43 @@ namespace OpenRA.Mods.Cameo.Traits
 					AppendObjectStart(builder);
 					AppendNumber(builder, "tick", timeline[i].Tick, true);
 					AppendString(builder, "personality", timeline[i].Personality);
+					builder.Append('}');
+				}
+
+			builder.Append(']');
+		}
+
+		internal static void AppendCompositionTimeline(StringBuilder builder, IReadOnlyList<AiMatchLogCompositionTransition> timeline, bool first = false)
+		{
+			AppendArrayPropertyStart(builder, "composition_timeline", first);
+			if (timeline != null)
+				for (var i = 0; i < timeline.Count; i++)
+				{
+					if (i > 0)
+						builder.Append(',');
+					AppendObjectStart(builder);
+					AppendNumber(builder, "tick", timeline[i].Tick, true);
+					AppendString(builder, "composition", timeline[i].Composition);
+					builder.Append('}');
+				}
+
+			builder.Append(']');
+		}
+
+		internal static void AppendEpisodeTimeline(StringBuilder builder, IReadOnlyList<AiMatchLogEpisodeTransition> timeline, bool first = false)
+		{
+			AppendArrayPropertyStart(builder, "episode_timeline", first);
+			if (timeline != null)
+				for (var i = 0; i < timeline.Count; i++)
+				{
+					if (i > 0)
+						builder.Append(',');
+					AppendObjectStart(builder);
+					AppendNumber(builder, "tick", timeline[i].Tick, true);
+					AppendString(builder, "personality", timeline[i].Personality);
+					AppendString(builder, "composition", timeline[i].Composition);
+					AppendNumber(builder, "kills_cost", timeline[i].KillsCost);
+					AppendNumber(builder, "deaths_cost", timeline[i].DeathsCost);
 					builder.Append('}');
 				}
 

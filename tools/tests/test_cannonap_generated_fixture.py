@@ -135,10 +135,13 @@ class CannonAPGeneratedFixtureFreshnessTest(unittest.TestCase):
         for armor in ("Shield", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR",
                       "ARMOR", "Heroic", "Superheavy", "Fighter", "Scout"):
             self.assertIn(armor, versus)
-        self.assertEqual(len(versus), 22)
         # THE SHARED PROFILE: the MAIN Versus table is the ONLY profile — the
         # plating/derived armors live here, and no percentage table exists.
-        self.assertEqual(len(versus), 22)
+        # Shield + 5 platings + the 16 class armors + the §12.0l geometric derived columns.
+        import gen_weapon_template as gen
+        for armor, _parents in gen.GEO_DERIVED:
+            self.assertIn(armor, versus)
+        self.assertEqual(len(versus), 1 + len(gen.PLATING_CYCLE) + 16 + len(gen.GEO_DERIVED))
 
 
 if __name__ == "__main__":

@@ -25,7 +25,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		protected Actor FindClosestEnemy(SquadCA owner)
 		{
-			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor);
+			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner);
+		}
+
+		// 6c: pre-commit checks route through the risk-gated overloads — the squad's
+		// unit value is compared to the remembered threat at each candidate's region.
+		protected Actor FindClosestEnemy(SquadCA owner, bool riskCheck)
+		{
+			return riskCheck
+				? owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner.SquadManager.SquadValueOf(owner), owner)
+				: owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner);
 		}
 
 		protected Actor FindHighValueTarget(SquadCA owner)
@@ -33,7 +42,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition);
 		}
 
-		protected bool FindNewTarget(SquadCA owner, bool highValueCheck = false)
+		protected Actor FindHighValueTarget(SquadCA owner, bool riskCheck)
+		{
+			return riskCheck
+				? owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition, owner.SquadManager.SquadValueOf(owner))
+				: owner.SquadManager.FindHighValueTarget(owner.Units.First().Actor.CenterPosition);
+		}
+
+		protected bool FindNewTarget(SquadCA owner, bool highValueCheck = false, bool riskCheck = false)
 		{
 			if (highValueCheck)
 			{
@@ -41,7 +57,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				if (owner.SquadManager.Info.HighValueTargetPriority > highValueTargetRoll)
 				{
-					var highValueTarget = FindHighValueTarget(owner);
+					var highValueTarget = FindHighValueTarget(owner, riskCheck);
 					if (highValueTarget != null)
 					{
 						owner.TargetActor = highValueTarget;
@@ -50,11 +66,27 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
-			var closestEnemy = FindClosestEnemy(owner);
+			var closestEnemy = FindClosestEnemy(owner, riskCheck);
 			if (closestEnemy != null)
 			{
 				owner.TargetActor = closestEnemy;
 				return true;
+			}
+
+			// 6d fogged fallback: nothing visible — commit to an enemy building the
+			// FrozenActorLayer remembers. The record self-invalidates when the
+			// cell is re-observed empty, so a stale memory can't trap the squad.
+			if (owner.SquadManager.FoggedScans)
+			{
+				var frozen = owner.SquadManager.FindFrozenEnemyTarget(
+					owner.Units.First().Actor.CenterPosition,
+					riskCheck ? owner.SquadManager.SquadValueOf(owner) : -1);
+
+				if (frozen != null)
+				{
+					owner.Target = Target.FromFrozenActor(frozen);
+					return true;
+				}
 			}
 
 			return false;
@@ -72,18 +104,27 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
-			if (!owner.IsTargetValid && !FindNewTarget(owner, true))
+			// The idle squad is committing to a proactive attack — gate it on the
+			// remembered threat at the target's region (6c). Mid-fight retargets in
+			// GroundUnitsAttackState stay ungated.
+			if (!owner.IsTargetValid && !FindNewTarget(owner, true, riskCheck: true))
 				return;
 
 			if (owner.SquadManager.unitCannotBeOrdered(leader))
 				leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedGroundLeaderLocomotor).Actor;
 
-			var enemyUnits = owner.World.FindActorsInCircle(owner.TargetActor.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
-				.Where(owner.SquadManager.IsPreferredEnemyUnit).ToList();
+			var enemyUnits = owner.World.FindActorsInCircle(owner.Target.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
+				.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
 
 			if (enemyUnits.Count == 0)
 			{
-				Retreat(owner, flee: false, rearm: true, repair: true);
+				// A FrozenActor target is itself the point of the attack — nothing
+				// visible nearby doesn't mean nothing is there.
+				if (owner.Target.Type == TargetType.FrozenActor)
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				else
+					Retreat(owner, flee: false, rearm: true, repair: true);
+
 				return;
 			}
 
@@ -115,7 +156,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		List<CPos> currentRoute;
 		int currentWaypointIndex;
 		int lastWaypointUpdateTick;
-		Actor lastRoutingTarget;
+		Target lastRoutingTarget;
 
 		public void Activate(SquadCA owner) { }
 
@@ -129,9 +170,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.SquadManager.unitCannotBeOrdered(leader.Actor))
 				leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedGroundLeaderLocomotor);
 
-			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.TargetActor))
+			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{
-				var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor);
+				var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
 				if (targetActor != null)
 					owner.TargetActor = targetActor;
 				else
@@ -144,7 +185,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
-			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius);
+			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius, owner);
 			if (enemyActor != null)
 			{
 				owner.TargetActor = enemyActor;
@@ -218,7 +259,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedGroundLeaderLocomotor);
 					leader.WPos = leader.Actor.CenterPosition;
-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromCell(owner.World, owner.TargetActor.Location), false));
+					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
 					owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: stopUnits.ToArray()));
 					owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: otherUnits.ToArray()));
 					kickStuck--;
@@ -244,7 +285,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					var others = owner.Units.Where(u => u.Actor != leader.Actor).Select(u => u.Actor);
 					owner.Bot.QueueOrder(new Order("Scatter", null, false, groupedActors: others.ToArray()));
-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromCell(owner.World, owner.TargetActor.Location), false));
+					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
 					makeWay--;
 				}
 				else if (makeWay == 1)
@@ -300,13 +341,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			// Compute indirect/harass route when target changes
-			if (owner.TargetActor != lastRoutingTarget)
+			if (!owner.Target.Equals(lastRoutingTarget))
 			{
-				lastRoutingTarget = owner.TargetActor;
+				lastRoutingTarget = owner.Target;
 				currentRoute = null;
+				currentWaypointIndex = 0;
+				lastWaypointUpdateTick = owner.World.WorldTick;
+
+				var targetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+
+				// 6e risk routing: coarse waypoints that skirt remembered threat,
+				// when a router answers. Guerrillas keep their harass routes —
+				// unpredictability is the point there.
+				if (owner.Type != SquadCAType.Guerrilla)
+					currentRoute = owner.SquadManager.RouteAroundThreat(leader.Actor, targetCell);
 
 				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
-				if (locomotor != null)
+				if (currentRoute == null && locomotor != null)
 				{
 					var maxRoutes = 2;
 					var useIndirectRoutes = false;
@@ -321,7 +372,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 					if (maxRoutes > 2 || useIndirectRoutes)
 					{
-						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.TargetActor.Location, maxRoutes);
+						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
 
 						if (owner.Type == SquadCAType.Guerrilla)
 							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
@@ -353,7 +404,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Determine move target (waypoint or direct)
 			var routeTarget = currentRoute != null && currentRoute.Count > 1 && currentWaypointIndex < currentRoute.Count
 				? Target.FromCell(owner.World, currentRoute[currentWaypointIndex])
-				: Target.FromCell(owner.World, owner.TargetActor.Location);
+				: Target.FromPos(owner.Target.CenterPosition);
 
 			// Record current position of the squad leader
 			leader.WPos = leader.Actor.CenterPosition;
@@ -470,7 +521,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Rescan target to prevent being ambushed and die without fight
 			// If there is no threat around, return to AttackMove state for formation
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
-			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius);
+			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius, owner);
 
 			var healthChange = false;
 			var cannotRetaliate = true;
@@ -479,7 +530,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (closestEnemy == null)
 			{
-				owner.TargetActor = owner.SquadManager.FindClosestEnemy(leader);
+				owner.TargetActor = owner.SquadManager.FindClosestEnemy(leader, owner);
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 				return;
 			}
@@ -609,4 +660,72 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Deactivate(SquadCA owner) { }
 	}
+	// 6f (CN A2/A6): an artillery squad trails an assault squad and bombards only
+	// what the assault can see — its parent's target is fog-honest by
+	// construction (observed actor or remembered frozen building).
+	class ArtilleryUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			var parent = owner.Parent;
+			if (parent == null || !parent.IsValid)
+			{
+				parent = owner.SquadManager.FindAttachableAssault(owner);
+				owner.Parent = parent;
+			}
+
+			// No assault to escort: stop babysitting and act as one.
+			if (parent == null)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
+			if (!parent.IsTargetValid)
+			{
+				// Parent is still forming up — trail it.
+				owner.Target = Target.Invalid;
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(parent.CenterPosition), false,
+					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				return;
+			}
+
+			owner.Target = parent.Target;
+			var targetPos = owner.Target.CenterPosition;
+			var anchor = SquadManagerBotModuleCA.HangBackAnchor(parent.CenterPosition, targetPos,
+				WDist.FromCells(owner.SquadManager.Info.ArtilleryHangBackCells).Length);
+
+			foreach (var u in owner.Units)
+			{
+				// Longest range over the enabled attack traits; TraitOrDefault<AttackBase>
+				// throws on the many actors that carry more than one.
+				var range = WDist.Zero;
+				foreach (var attack in u.Actor.TraitsImplementing<AttackBase>())
+				{
+					if (attack.IsTraitDisabled)
+						continue;
+
+					var r = attack.GetMaximumRangeVersusTarget(owner.Target);
+					if (r > range)
+						range = r;
+				}
+
+				// In range: bombard the shared target. Out of range: move to the
+				// hang-back anchor, NOT toward the target — the assault squad does
+				// the closing so artillery keeps its range advantage.
+				if (range > WDist.Zero && owner.Target.IsInRange(u.Actor.CenterPosition, range))
+					owner.Bot.QueueOrder(new Order("Attack", u.Actor, owner.Target, false));
+				else
+					owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(anchor), false));
+			}
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
 }

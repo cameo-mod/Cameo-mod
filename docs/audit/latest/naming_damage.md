@@ -6,7 +6,7 @@
 | N2 | CROSS_FACTION (file carries two factions' ids) | 16 | 16 | PASS |
 | N3 | FLUENT_LEAK (a fluent key became an id) | 0 | 5 | PASS |
 | N4 | REDUNDANT_WORD (faction named twice) | 97 | 345 | PASS |
-| N5 | DOTTED_FACTION (dot carries a faction, not a variant) | 4 | 109 | PASS |
+| N5 | DOTTED_FACTION (dot carries a faction, not a variant) | 3 | 109 | PASS |
 | N6 | HYPHEN (DESIGN rule 9) | 0 | 1 | PASS |
 
 
@@ -23,7 +23,6 @@
 | zerg | 0 | 0 | 0 | 6 | 0 | 0 |
 | yuri | 0 | 0 | 0 | 4 | 0 | 0 |
 | futuretech | 0 | 0 | 0 | 1 | 0 | 0 |
-| ra2_allies | 0 | 0 | 0 | 0 | 1 | 0 |
 
 
 **0 of 6 ratchets exceeded.**

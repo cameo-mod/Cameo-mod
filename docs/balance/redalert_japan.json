@@ -84,7 +84,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -287,7 +289,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Medium",
        "^TeslaWeapon",
-       "SkyHawkArrows"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Medium",
@@ -422,7 +426,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Emp_Fx_RA2",
-       "SkyHawkChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -523,7 +529,9 @@
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "SkyHawkArrows"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -651,7 +659,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_MissileAP_Heavy",
-       "ZeroFighterChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -1305,7 +1315,9 @@
       "reloaddelay": "200",
       "slot": "Armament@AIR",
       "versus_templates": [
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -1704,9 +1716,7 @@
       "range": "9825",
       "reloaddelay": "100",
       "slot": "Armament@WaveTurretShell",
-      "versus_templates": [
-       "WaveArtilleryShell"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "WaveTurretShell",
       "weapon_class_source": "none"
@@ -1906,7 +1916,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Light_Flat",
        "^TeslaWeapon",
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -1978,7 +1990,9 @@
       "versus_templates": [
        "^Warhead_Arrow_Light_Flat",
        "^TeslaWeapon",
-       "JapanMaidenBow"
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
       "warheads": [
        "^Warhead_Arrow_Light"
@@ -2097,7 +2111,8 @@
       "reloaddelay": "100",
       "slot": "Armament@Special",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -2154,7 +2169,8 @@
       "reloaddelay": "100",
       "slot": "Armament@GARRISONEDSpecial",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -5287,7 +5303,8 @@
       "reloaddelay": "30",
       "slot": "Armament@MAIN",
       "versus_templates": [
-       "Hakureiring"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -5314,7 +5331,8 @@
       "reloaddelay": "100",
       "slot": "Armament@AntiEpic",
       "versus_templates": [
-       "Hakureiring2"
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
       "warheads": [
        "^Warhead_Magic_Heavy"
@@ -5828,7 +5846,9 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Plasma_Light",
-       "BuggyGrenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Plasma_Light",
@@ -6306,7 +6326,9 @@
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AA",
       "versus_templates": [
-       "JapaneseHovercraftFlak"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -7441,7 +7463,9 @@
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Emp_Fx_RA2",
-       "NambuMG"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",

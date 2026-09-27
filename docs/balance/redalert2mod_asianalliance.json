@@ -1095,20 +1095,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -1130,7 +1116,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -1145,8 +1131,7 @@
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "AsianPhotonCannon"
+       "^Warhead_MissileAP_Medium_Flat"
       ],
       "warheads": [],
       "weapon": "AsianPunisherAG",
@@ -1155,7 +1140,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 51, 0",
         "spread": "35",
         "tag": "MissileQuantum_Medium",
@@ -1167,20 +1152,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1876,7 +1847,10 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
-       "AsianSinglePlasma",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy",
        "^Effect_Twlt_Large_RA2"
       ],
       "warheads": [
@@ -2013,7 +1987,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -2025,20 +1999,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2697,7 +2657,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianCrocBite"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3444,10 +3406,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3455,10 +3413,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -3525,7 +3479,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "asianalliance_fanatic_shotgun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3553,7 +3509,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "asianalliance_fanatic_shotgun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3613,7 +3571,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "asianalliance_fanatic_shotgun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3642,7 +3602,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "asianalliance_fanatic_shotgun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3742,7 +3704,9 @@
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3771,7 +3735,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "AsianFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3831,7 +3797,9 @@
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3860,7 +3828,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "AsianFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -4018,7 +3988,9 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Sword2",
       "versus_templates": [
-       "AsianSamuraiSword1"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4046,7 +4018,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@Sword3",
       "versus_templates": [
-       "AsianSamuraiSword1"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4162,7 +4136,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "asianalliance_asianmilitia_shotgun"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4276,7 +4252,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "asianalliance_asianmilitia_shotgun"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4571,8 +4549,10 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianSinglePlasma",
-       "^Effect_Apoc_AP_RA2"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -4729,8 +4709,10 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "AsianSinglePlasma",
-       "^Effect_Apoc_AP_RA2"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -4846,7 +4828,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianNinjaStar"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -4904,7 +4888,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "AsianNinjaStar"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -5019,7 +5005,9 @@
       "requires": "!rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "AsianTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5046,7 +5034,9 @@
       "requires": "rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "AsianTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5073,7 +5063,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARYELITEUpgrade",
       "versus_templates": [
-       "AsianTankKillerRocket_elite"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5129,7 +5121,9 @@
       "requires": "!rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "AsianTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5156,7 +5150,9 @@
       "requires": "rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "AsianTankKillerRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5183,7 +5179,9 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITEUpgrade",
       "versus_templates": [
-       "AsianTankKillerRocket_elite"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5258,7 +5256,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "13888",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -5270,20 +5268,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5330,8 +5314,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Arrow_Light_Flat",
-       "AsianPhotonCannon"
+       "^Warhead_Arrow_Light_Flat"
       ],
       "warheads": [],
       "weapon": "AsianMaidenBow",
@@ -5342,7 +5325,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "13888",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -5354,20 +5337,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5413,9 +5382,7 @@
       "reloaddelay": "68",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "AsianMaidenBow"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMaidenBow_elite",
       "weapon_class_source": "none"
@@ -5426,7 +5393,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "13888",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -5438,20 +5405,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5498,8 +5451,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Arrow_Light_Flat",
-       "AsianPhotonCannon"
+       "^Warhead_Arrow_Light_Flat"
       ],
       "warheads": [],
       "weapon": "AsianMaidenBow",
@@ -5511,7 +5463,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "13888",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -5523,20 +5475,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5582,9 +5520,7 @@
       "reloaddelay": "68",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "AsianMaidenBow"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMaidenBow_elite",
       "weapon_class_source": "none"
@@ -5705,7 +5641,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2155mm"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -6240,7 +6178,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6327,7 +6267,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
         "tag": "Plasma_Heavy_Flat",
@@ -6339,20 +6279,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6395,7 +6321,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -6407,20 +6333,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6464,7 +6376,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
         "tag": "MissileAA_Medium_Flat",
@@ -6476,20 +6388,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6533,7 +6431,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 51, 0",
         "spread": "35",
         "tag": "MissileQuantum_Medium",
@@ -6545,20 +6443,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7572,7 +7456,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -7600,7 +7486,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianFlamerTank"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -7717,7 +7605,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "AsianRailTank"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -7751,7 +7641,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianRailTank"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -7881,7 +7773,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianHowitzerCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -8438,7 +8332,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "AsianSinglePlasma",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
        "^Effect_Apoc_AP_RA2",
        "^Effect_Flame_Heavy"
       ],
@@ -8882,7 +8777,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
         "tag": "Plasma_Heavy_Flat",
@@ -8894,20 +8789,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8948,7 +8829,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 52, 0",
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
@@ -8960,20 +8841,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9015,7 +8882,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
         "tag": "MissileAA_Medium_Flat",
@@ -9027,20 +8894,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9082,7 +8935,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9888",
         "falloff": "100, 51, 0",
         "spread": "35",
         "tag": "MissileQuantum_Medium",
@@ -9094,20 +8947,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "PreservedFlat_MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9280,7 +9119,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "AsianRailTank"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"

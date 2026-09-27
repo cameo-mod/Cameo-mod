@@ -4,31 +4,31 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2158**
+concrete weapons with inherits: **2128**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **293** (13.58% of 2158) | 26.16% |
+| W1 | more than 3 inherits | **287** (13.49% of 2128) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **123** | 123 |
 | W3 | two or more `^Projectile_*` inherits | **7** | 7 |
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
-| W5 | more than one resolved MAIN warhead | **168** | 389 |
-| W6 | effect warheads declared LOCALLY | **443** | 443 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **799** | 804 |
+| W5 | more than one resolved MAIN warhead | **172** | 389 |
+| W6 | effect warheads declared LOCALLY | **497** | 497 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **693** | 693 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **362** | 362 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 822 |
-| no `^Projectile_*` inherit | 1220 |
-| no `^Warhead_*` inherit | 883 |
+| no `^Effect_*` inherit | 749 |
+| no `^Projectile_*` inherit | 1175 |
+| no `^Warhead_*` inherit | 838 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (799 vs ratchet 804)
+## W7 — inherits from ANOTHER WEAPON, not a template (693 vs ratchet 693)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -46,7 +46,6 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `ArmoredCarMGAAWaveforce` | 1 | `ArmoredCarMG_AA` |
 | `ArmoredCarMGWaveforce` | 1 | `ArmoredCarMG` |
 | `ArmoredCarMG_AA` | 1 | `ArmoredCarMG` |
-| `Arrakis_Tanya_Guns` | 1 | `Fremen_Upg` |
 | `ArtilleryExplode` | 1 | `155mm` |
 | `AsianChaosMine` | 2 | `AsianChaosTurret` · `AsianTankMine` |
 | `AsianChemical_elite` | 1 | `AsianChemical` |
@@ -61,20 +60,21 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianHowitzerCannon_elite` | 1 | `AsianHowitzerCannon` |
 | `AsianLynxMG_elite` | 1 | `AsianLynxMG` |
 | `AsianLynxTankCannon_elite` | 1 | `AsianLynxTankCannon` |
-| `AsianMaidenBow` | 1 | `AsianPhotonCannon` |
-| `AsianMaidenBow_elite` | 1 | `AsianMaidenBow` |
 | `AsianNinjaStar_elite` | 1 | `AsianNinjaStar` |
 | `AsianOilBombFragments` | 1 | `AsianFlameFragment` |
 | `AsianPelicanMG_elite` | 1 | `AsianPelicanMG` |
 | `AsianPelicanMissile_elite` | 1 | `AsianPelicanMissile` |
 | `AsianPhoenixRocket_elite` | 1 | `AsianPhoenixRocket` |
-| `AsianPhotonCannon_EMP` | 1 | `AsianPhotonCannon` |
 | `AsianPulverizerMechaGatling` | 1 | `AsianPulverizerGatling` |
-| `AsianPunisherAG` | 1 | `AsianPhotonCannon` |
-| `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
+| `AsianRailTank2` | 1 | `AsianRailTank` |
+| `AsianRailTank3` | 1 | `AsianRailTank` |
+| `AsianSamuraiSword2` | 1 | `AsianSamuraiSword1` |
+| `AsianSamuraiSword3` | 1 | `AsianSamuraiSword1` |
+| `AsianSinglePlasma_elite` | 1 | `AsianSinglePlasma` |
+| `AsianSniperAP` | 1 | `AsianSniper` |
 
 
-_... and 759 more._
+_... and 653 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (362 vs ratchet 362)
@@ -90,7 +90,7 @@ _... and 759 more._
 | `AsianPhotonCannon` | 1 | `^TeslaWeapon` |
 | `AthenaLaser` | 2 | `^TeslaWeapon` · `^LaserWeapon` |
 | `Atomic` | 1 | `^AtomicCore` |
-| `AtreusMG` | 4 | `^Grenade` · `^MediumMissile` · `^FlakWeapon` · `^RA2Chaingun` |
+| `AtreusMG` | 4 | `^Grenade` · `^MediumMissile` · `^FlakWeapon` · `^SCRA2Chaingun` |
 | `BCLaser` | 4 | `^NuclearWarhead` · `^RailgunWeapon` · `^HeavyBomb` · `^LaserWeapon` |
 | `BHBombs` | 1 | `^FlameWeapon` |
 | `BallistaMultiShotEnergized` | 1 | `^TeslaWeapon` |
@@ -126,7 +126,7 @@ _... and 759 more._
 _... and 322 more._
 
 
-## W1 — more than 3 inherits (293 vs ratchet 576)
+## W1 — more than 3 inherits (287 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -172,7 +172,7 @@ _... and 322 more._
 | `D2K_155mm2` | 6 | `^Warhead_CannonHE_Heavy` · `^MediumFlameWeapon` · `^ShrapnelWeapon` · `^HeavyBomb` |
 
 
-_... and 253 more._
+_... and 247 more._
 
 
 ## W2 — two or more `^Warhead_*` inherits (123 vs ratchet 123)
@@ -286,7 +286,7 @@ _... and 83 more._
 _... and 1 more._
 
 
-## W5 — more than one resolved MAIN warhead (168 vs ratchet 389)
+## W5 — more than one resolved MAIN warhead (172 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -332,10 +332,10 @@ _... and 1 more._
 | `GLTerroristExplosive2` | 3 | `1Dam` · `Concussion_Medium` · `Demolition_Heavy` |
 
 
-_... and 128 more._
+_... and 132 more._
 
 
-## W6 — effect warheads declared LOCALLY (443 vs ratchet 443)
+## W6 — effect warheads declared LOCALLY (497 vs ratchet 497)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -353,11 +353,23 @@ _... and 128 more._
 | `AsianChemical` | 5 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@RA2Crater: LeaveSmudge` |
 | `AsianHarbingerPlasma` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@RA2Scorch: LeaveSmudge` · `Warhead@Smudge: LeaveSmudge` |
 | `AsianIonBeamMini` | 1 | `Warhead@Effect: CreateEffect` |
-| `AsianMaidenBow` | 7 | `Warhead@Effect: CreateEffect` · `Warhead@EffectAir: CreateEffect` · `Warhead@DuneRock: LeaveSmudge` |
+| `AsianMaidenBow` | 9 | `Warhead@Effect: CreateEffect` · `Warhead@EffectAir: CreateEffect` · `Warhead@DuneRock: LeaveSmudge` |
+| `AsianMaidenBow_elite` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
 | `AsianOilBombFragments` | 1 | `Warhead@Effect: CreateEffect` |
 | `AsianPhoenixRocket` | 1 | `Warhead@RA2Scorch: LeaveSmudge` |
 | `AsianPhoenixRocket_elite` | 1 | `Warhead@RA2Scorch: LeaveSmudge` |
 | `AsianPhotonCannon` | 8 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@DuneRock: LeaveSmudge` |
+| `AsianPhotonCannon_EMP` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianPunisherAG` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianPunisherAG_EMP` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarAG` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarAG_EMP` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarBoatAG` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarBoatAG_EMP` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarBoat_AA` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasarBoat_EMP_AA` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasar_AA` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `AsianQuasar_EMP_AA` | 9 | `Warhead@ShieldHitEffect: CreateEffect` · `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
 | `AsianSmallTorpedo` | 1 | `Warhead@Effect: CreateEffect` |
 | `AsianSniperAP` | 1 | `Warhead@Effect: CreateEffect` |
 | `AsianSubmarineBomb` | 4 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@DuneRock: LeaveSmudge` |
@@ -367,21 +379,9 @@ _... and 128 more._
 | `AtreusMG` | 1 | `Warhead@Effect: CreateEffect` |
 | `BCYamatoCannon` | 1 | `Warhead@Effect: CreateEffect` |
 | `BHBombs` | 1 | `Warhead@3Eff: CreateEffect` |
-| `BallistaMultiShot` | 9 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@DuneRock: LeaveSmudge` |
-| `BallistaMultiShotEnergized` | 5 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@RA2Scorch: LeaveSmudge` |
-| `BarrelExplode` | 11 | `Warhead@2Eff: CreateEffect` · `Warhead@Smu: LeaveSmudge` · `Warhead@Glow: GlowImpact` |
-| `BehemothShoot` | 3 | `Warhead@Effect: CreateEffect` · `Warhead@Effect2: CreateEffect` · `Warhead@EffectAir: CreateEffect` |
-| `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
-| `BlackEagleThunderboltMissiles` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@Smudge2: LeaveSmudge` |
-| `BlackHoleSuck` | 1 | `Warhead@Effect: CreateEffect` |
-| `BoatMissile` | 2 | `Warhead@3Eff: CreateEffect` · `Warhead@4EffAir: CreateEffect` |
-| `BuggyPlasmaGrenade` | 7 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@RA2Crater: LeaveSmudge` |
-| `BuildingExplode` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
-| `BuildingExplodeProtoss` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@2Smu: LeaveSmudge` |
-| `C4` | 1 | `Warhead@2Eff: CreateEffect` |
 
 
-_... and 403 more._
+_... and 457 more._
 
 
 _all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

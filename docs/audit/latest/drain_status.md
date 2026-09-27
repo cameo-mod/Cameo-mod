@@ -9,10 +9,10 @@
 | weapons/advancewars.yaml | 109 | 0 | 109 |  |
 | weapons/ballistics.yaml | 18 | 4 | 14 | GLOBAL:tech, RedAlert/Japan, RedAlert2/Allies, RedAlert2Mod/FutureTech, RedAlert2Mod/Naxis, TiberianDawn/GDI… |
 | weapons/classicdoom.yaml | 25 | 0 | 25 |  |
-| weapons/d2k.yaml | 78 | 1 | 77 | GLOBAL:d2k |
+| weapons/d2k.yaml | 90 | 1 | 89 | GLOBAL:d2k |
 | weapons/darkreign.yaml | 94 | 0 | 94 |  |
 | weapons/dune2.yaml | 16 | 0 | 16 |  |
-| weapons/effects_d2k.yaml | 111 | 0 | 111 |  |
+| weapons/effects_d2k.yaml | 112 | 0 | 112 |  |
 | weapons/effects_op2.yaml | 13 | 0 | 13 |  |
 | weapons/effects_td.yaml | 45 | 0 | 45 |  |
 | weapons/effects_ts.yaml | 99 | 0 | 99 |  |
@@ -30,20 +30,20 @@
 | weapons/missiles.yaml | 29 | 2 | 27 | GLOBAL:tech, TiberianDawn/GDI |
 | weapons/monsters.yaml | 37 | 2 | 35 | GLOBAL:tiberiansun |
 | weapons/other.yaml | 70 | 15 | 55 | D2k/Ordos, GLOBAL:civilian, GLOBAL:tiberiansun, GLOBAL:weapons, RedAlert/Allies, RedAlert/Japan… |
-| weapons/outpost2.yaml | 35 | 32 | 3 | GLOBAL:outpost2 |
+| weapons/outpost2.yaml | 37 | 32 | 5 | GLOBAL:outpost2 |
 | weapons/redalert2.yaml | 180 | 128 | 52 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
 | weapons/redalert2mod.yaml | 80 | 45 | 35 | GLOBAL:redalert2mod, RedAlert2/Shared, RedAlert2/Soviets, RedAlert2Mod/AsianAlliance, RedAlert2Mod/Consortium, RedAlert2Mod/FutureTech… |
 | weapons/sc2k.yaml | 12 | 0 | 12 |  |
 | weapons/shockwave.yaml | 214 | 0 | 214 |  |
 | weapons/simcity.yaml | 20 | 0 | 20 |  |
 | weapons/sow.yaml | 58 | 0 | 58 |  |
-| weapons/starcraft.yaml | 18 | 13 | 5 | GLOBAL:starcraft, RedAlert/Japan, RedAlert2/Allies, RedAlert2Mod/FutureTech, RedAlert2Mod/TKM, StarCraft/Protoss… |
+| weapons/starcraft.yaml | 21 | 13 | 8 | GLOBAL:starcraft, RedAlert/Japan, RedAlert2/Allies, RedAlert2Mod/FutureTech, RedAlert2Mod/TKM, StarCraft/Protoss… |
 | weapons/starcraft2.yaml | 1 | 0 | 1 |  |
 | weapons/starwars.yaml | 92 | 1 | 91 | RedAlert2Mod/Consortium |
 | weapons/targeting.yaml | 6 | 3 | 3 | GLOBAL:outpost2, RedAlert/Soviets, RedAlert2/Allies, RedAlert2/Shared, RedAlert2/Soviets, RedAlert2Mod/AsianAlliance… |
 | weapons/tiberiaalliances.yaml | 12 | 0 | 12 |  |
 | weapons/tiberiandawn.yaml | 15 | 10 | 5 | GLOBAL:civilian, GLOBAL:tiberiansun, RedAlert/Japan, RedAlert/Soviets, RedAlert2/Allies, RedAlert2/Shared… |
-| weapons/tiberiansun.yaml | 102 | 60 | 42 | GLOBAL:misc, GLOBAL:outpost2, GLOBAL:tiberiansun, TiberianSun/CABAL, TiberianSun/Forgotten, TiberianSun/GDI… |
+| weapons/tiberiansun.yaml | 112 | 60 | 52 | GLOBAL:misc, GLOBAL:outpost2, GLOBAL:tiberiansun, TiberianSun/CABAL, TiberianSun/Forgotten, TiberianSun/GDI… |
 | weapons/tomorrow.yaml | 12 | 0 | 12 |  |
 | weapons/valentine.yaml | 21 | 0 | 21 |  |
 | weapons/warcraft1.yaml | 27 | 0 | 27 |  |

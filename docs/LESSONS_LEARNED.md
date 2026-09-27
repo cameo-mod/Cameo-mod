@@ -10,6 +10,41 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+
+### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
+
+When master's merge wave (#519 dots, #524 `pack|file` sound refs) touched
+the same weapon defs a stack branch rewrote, the hunks are structural, not
+textual: neither side can be taken blind. The correct procedure: resolve
+each conflicted def on BOTH parent trees; where payloads match, keep the
+branch's structure but backport master's *field values* (`Report:`,
+`StartBurstReport:`, `Warhead@*/ImpactSounds:`) — including inside
+generated `^` templates the branch emits (master's qualifiers land there
+too). Take master's def verbatim only when it carries no content the
+branch's gates forbid (here: local `Versus:` — `Laboratory_Bioball`'s
+master form would have pushed count_local_versus over its gate, so the
+branch's structure won and one ordered-key diff vs master is the price).
+Splicing a def to master's form orphans its generated `^<pfx>_<weapon>`
+templates — sweep them after every splice.
+
+### 2026-09-26 — DAWN: covering-edge conversion needs positional order-pins
+
+Replacing `Inherits: ^LegacyBundle` with the bundle's covering three-kind
+edges changes resolved child ORDER, not just content: MiniYaml emits a
+provider's children at the edge's file position, so a bundle whose own
+body was [3kind edges, then local scalars] must be replaced by [covering
+edges, then `# W7MAT order-pin` scalars] at the SAME slot — pins placed
+after a later `Inherits@fx` edge land late in the resolved map and break
+the ordered-key contract. If the consumer already carries one of the
+covering edges at a later position, MOVE that edge into the covering group
+(dedup silently reorders emission). Three orphan `-Report:` cancels also
+surfaced: when the removed edge was a `-Key:` provider, the cancel dies
+with it (delete together — EMBER's rule, now verified against the audit's
+provider model). Raw full-stack templates (covering set = empty) are NOT
+edge-swap candidates: converting their consumers would inline every leaf.
+Tool: `w8_conv.py` in the DAWN tooling dir (same verify loop as `w7_conv.py`).
+
+
 ## Required reading order for every new task
 
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a
@@ -64,6 +99,11 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 - [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
+- [⛔ Two UNNAMED traits of one type MERGE — the last `ShieldsUpCondition` silently wins (2026-09-26)](#-two-unnamed-traits-of-one-type-merge--the-last-shieldsupcondition-silently-wins-2026-09-26)
+- [⛔ Boot BEFORE you merge, not only before you commit (2026-09-26)](#-boot-before-you-merge-not-only-before-you-commit-2026-09-26)
+- [⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)](#-a-verbatim-foreign-def-copy-re-adds-its-sources-audit-findings--copies-must-be-materialized-audit-clean-2026-09-24)
+- [Drain-migration minification hazard (2026-09-26)](#drain-migration-minification-hazard-2026-09-26)
+- [⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)](#--templates-are-instantiated-at-boot--an-untyped-warhead-pin-inside-one-nres-2026-09-24)
 - [⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)](#-conflict-clean-is-not-resolved-clean--a-merge-can-pass-every-gate-while-damage-drifts-2026-09-22)
 
 **Weapon templates, the 3-way split and the effect layer**
@@ -84,6 +124,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Dual-weapon units](#dual-weapon-units)
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
 - [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
+- [Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)](#mirror-drift-sharedversusprofile-skipped-the-main-table-heroic-rule-2026-09-27)
 
 **Process, tooling and platform**
 
@@ -126,8 +167,86 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`*ProportionalToPhysicalState` non-neutral defaults on secondary channels (2026-09-23)](#proportionaltophysicalstate-traits-have-non-neutral-defaults-on-secondary-channels-2026-09-23)
 - [Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)](#rename-tool-pitfalls-found-on-the-ra1allies-pass-2026-09-24)
 - [The naming audit sees file stems only (2026-09-24)](#the-naming-audit-sees-file-stems-only--pair-it-with-a-raw-disk-scan-2026-09-24)
+- [⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)](#-field-provenance-is-file-line--matching-by-file-alone-fabricates-a-live-children-class-2026-09-27)
+- [Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)](#dead-edge-detection--resolve-drop-probe-apply-must-share-the-tests-def-index-2026-09-26-w1-sweep)
+- [List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)](#list-splice-hygiene-build-headblocktail-never-mutate-then-slice-2026-09-26-rule-4-remediation)
+- [⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)](#-traitordefault-throws-on-an-actor-with-two-traits-of-that-type--76-units-carry-two-attack-traits-2026-09-27)
+- [⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)](#-cameos-ca-code-is-a-hand-copy--unused-means-check-what-ca-uses-it-for-never-dead-2026-09-27)
+- [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)
+- [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
 
 ---
+
+## ⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)
+
+`actor.TraitOrDefault<T>()` and `actor.Trait<T>()` throw
+*"Actor X has multiple traits of type T"* when the actor has more than one (`TraitDictionary.cs:178`).
+**76 mobile ground actors** carry two or more `AttackBase`-derived traits (`ts_nod_attackbuggy`:
+`AttackFrontal` + `AttackFollow`; the TS drive-bys, Recon Bike, Tick Tank, Mammoth Mk II …). AI
+phase 6f called `TraitOrDefault<AttackBase>()` and **crashed the match** the first time a bot
+owning one formed an attack force (reproduced, fixed in #555). A disabled conditional trait still
+counts.
+
+**Rule:** for any trait type an actor can carry twice (`AttackBase`, `Armament`, `Cargo` …),
+iterate `TraitsImplementing<T>()` and skip `IsTraitDisabled`. Guarded by
+`tools/tests/test_ai_attackbase_lookup.py` (all of CA and Cameo; comments ignored).
+
+## ⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)
+
+Cameo's engine is the RV fork, so `OpenRA.Mods.CA/` gets **no** CA updates on its own.
+`HuntCA.cs` was judged "dead code" and hand-fixed, but upstream had **already fixed it**, and it
+looked unused only because its caller, the Lua binding `Scripting/CombatCAProperties.cs`, had
+never been copied (#557). Before judging, fixing or deleting any CA-derived file:
+`git -C ~/Documents/GitHub/CAmod fetch`, run `tools/audit/audit_ca_drift.py` (is it STALE?) and
+`tools/audit/audit_ca_unused.py` (what does CA use it for?). Prefer upstream verbatim over a
+local fix. Bot modules carry RV and Cameo merges: `tools/audit/audit_ai_frankenstein.py` must
+stay PASS. Details: `docs/design/UPSTREAM_MODS.md` §4a.
+
+## The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)
+
+`tools/tests/ai_bot_player_gate.py` runs **900 ticks** and the bot only ever owns a
+construction yard, so squad formation, attack forces and artillery never execute. Phases 6a–6f
+merged green and still crashed in real play. For any change to squad, target or order code, also
+run a scenario in which the bot owns an army (on 2026-09-27: a local-only copy of the gate map
+spawning 2 `ts_nod_attackbuggy` + 28 `td_nod_lighttank` for the bot, 3500 ticks), and put that
+reproduction in the PR.
+
+## ⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)
+
+The stash list lives in the common `.git`, so a `git stash pop` in one worktree can apply
+**another agent's** entry. It happened on 2026-09-27 (NOVA's `versus-strip` applied in Claude's
+lane). Use `git show <rev>:<path>` or a scratch copy to look at an old version instead.
+
+## ⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)
+
+When deciding whether a yaml line is safe to delete, the consumer test must
+match the resolved field child's `file` AND `line` to the candidate source.
+Matching on file alone counts every def in that file as a consumer: in the
+dead-field sweep it reported `Explosions` at `weapons.yaml:2854` as live on
+582 weapons (every `Warhead@Effect.Explosions` declared anywhere in the file)
+and invented a "dead line with live retyped children" deferral class that
+does not exist. Line-precise matching shows the real split: exactly 3 heal
+weapons (BroodweaverLeech, MedicHeal, TKMMedicHeal) consume that source; the
+four "deferred" local dead lines had zero live consumers and deleted cleanly.
+Tool: `tools/audit/dead_field_sources.py` does the (file,line) match and
+labels SAFE-DELETE / RETYPE-CANCEL / DEFER.
+## ⛔ Two UNNAMED traits of one type MERGE — the last `ShieldsUpCondition` silently wins (2026-09-26)
+
+`^CyberneticModifications` declared a bare `Shielded:` and so did `^ShieldedShieldable`, and
+every Nod infantry inherits both. A bare trait key merges into ONE node, so the cyborg
+template's `ShieldsUpCondition: armored` replaced the generic `shielded`. The result: a Nod
+infantry inside a shield generator's field never raised `shielded`, so its `Armor@shielded`
+(Type Shield) row never switched on, and any `!shielded` gate on it was always true. Nothing
+crashed and no audit flagged it; it only showed up when a redesign wanted to gate on
+`!shielded`. **Before gating on a condition, resolve a real actor and read which trait
+actually grants it.** If two templates each need their own copy, give the trait an `@suffix`.
+
+## ⛔ Boot BEFORE you merge, not only before you commit (2026-09-26)
+
+#504 renamed an `ai.yaml` key onto one that already existed. It was merged without a boot and
+master crashed at load (`MiniYaml` duplicate key) for about an hour, until #509. A PR that
+someone else booted on ITS base proves nothing about the merge result. Boot the merged tree
+(or the PR rebased on current master) before pressing merge.
 
 ## ⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)
 
@@ -158,6 +277,67 @@ Two traps inside that emit:
   (resolved payload differed). Check the whole merged def dict for the new
   name before writing the copy.
 
+- **W7 weapon-parent edges: covering-edge swap is only safe when the child
+  has no pre-existing kind edges** (2026-09-26, ContentPack batch). If the
+  child already carries a `^Warhead_*`/`^Projectile_*`/`^Effect_*` edge (or
+  an fx-pure family edge), adding the parent's covering edge duplicates the
+  kind — W2/W3/W4. Those go to materialization too. When the child has an
+  existing fx edge, the per-weapon family must DERIVE from it and the edge
+  swaps to the family (1 fx edge preserved, no W4).
+- **A cancel CONSUMES its provider edge — delete edge+cancel together or
+  neither** (2026-09-26, W2 dead-edge sweep, EMBER's rule; maintainer
+  standing rule 0.3). An edge is dead only if (a) no `Warhead@`/node it
+  emits survives into resolved output AND (b) no `-Key:` anywhere targets
+  a node it emits. The sweep's node-survival classifier missed (b) — it
+  dropped `TSBombSonic`'s `^Warhead_Demolition_Heavy` edge while leaving
+  the `-Warhead@Demolition_Heavy:` cancel, which the engine throws on at
+  ruleset load (the python resolver tolerates the orphan — only
+  `audit_orphan_cancels` and the boot see it). The same rule bites in
+  reverse: removing a `-X:` whose provider edge was dropped in the same
+  pass resurrects the node for every consumer (the DevBullet template
+  case), and `-Warhead@X:` + a child pin is a cancel-redeclare — deleting
+  the cancel strands the child under the wrong parent. Correct loop:
+  remove -> `audit_orphan_cancels` -> resolved-verify -> restore drift,
+  repeat to fixpoint.
+- **W7 weapon-edge removal: the covering-edge swap is the only clean
+  shape** (2026-09-26). Three approaches tried: (a) inlining the parent's
+  RAW children — bloats every bucket (dual edges, stray scalars);
+  (b) drop edge + repin all drift — vomits whole resolved subtrees as
+  locals (~2700 lines for 18 weapons); (c) replace `Inherits: <weapon>`
+  with the parent's covering TEMPLATE edges (recursively resolved through
+  weapon parents, unique `Inherits@w7N:` labels), then pin only the true
+  drift — resolved-identical with minimal text. Chains flatten correctly when parents are covered
+  recursively. `-Report:`-style cancels orphaned by the swap must be
+  deleted with the edge (dead-edge rule).
+- **The resolved `/Inherits` annotation leaf is part of the ordered-payload
+  contract** (2026-09-26). Dropping a dead bare `Inherits:` edge removes a
+  leaf the resolver records in output — ordered-verify counts it as a
+  payload diff. `RashidanGun_upgrade`'s dead edge+cancel pair stays for
+  that reason: dead-but-contract-bearing.
+- **A dead `^Warhead_*` edge still carries live top-level fields** — an
+  edge whose every `Warhead@` node is cancelled/unsurfaced can be dropped
+  resolved-identically, BUT the same template also emits weapon-level
+  `TargetActorCenter`, `ValidTargets`, `Range`, `ReloadDelay` that the
+  weapon was silently relying on. Always re-pin lost top-level fields.
+- **Materialization freezes resolved `Versus:` tables — a template regen
+  stales them** (2026-09-26, #508 rebase). Inlined `Warhead@X` pins carry the
+  Versus table resolved at emit time; when master regenerated every
+  `^Warhead_*` profile (R16, #506/#507), 33 converted weapons drifted. After
+  any base move, re-verify resolved-identity against the NEW base and re-sync
+  the baked Versus subtrees — never trust the original-base verification.
+- **`Inherits` applies at its FILE POSITION, not "parents first"** — both
+  `miniyaml.resolve` and the engine merge a parent's children into the
+  accumulated state where the Inherits line sits. Emitting materialized
+  pins or a family edge BELOW local pins lets later templates re-override
+  them. Conversely, a `-Key:` cancel sitting BETWEEN two Inherits lines is
+  load-bearing interleaving (kills an early parent's pin so later parents
+  re-provide it) — never hoist inherits across such cancels.
+- **Family-name collision check must scan `effects_*.yaml` and ALL yaml,
+  not just `man.weapons`** — the manifest's weapon list omits effects files,
+  so a weapon-only index misses canonical `^<pk>_<w>` defs there
+  (`^d2k_ordos_autogun_tank_small`, `^ts_gdi_tsioncannon`): emit → duplicate
+  def → S2/W4; fam_exists → partial family missing resolved nodes. Index
+  globally, and when the canonical family is partial, extend it.
 - **W7 weapon-parent edges: covering-edge swap is the WRONG default for
   legacy-bundle parents** (2026-09-24b, W7-remainder batch). Replacing
   `Inherits: ConcreteParent` with the parent's covering `Inherits@wh/proj/fx`
@@ -773,6 +953,16 @@ The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **no
 
 ### Ledger patching safety
 
+- ⛔ **A RENAME DROPS LEDGER DESIGN VALUES, SILENTLY (2026-09-27).** `design.unit_class` /
+  `special` / `tech_tier` / `class_anchor` never exist in yaml. `extract_stats.py` carries them
+  across a re-extract **by actor id only**, so after a rename the re-extract finds nothing under
+  the new id and writes null. After #519's dot renames, **three PRs (#534, #535, #516) shipped
+  `ra2e2_black.design.unit_class` 1.0 -> null at once**, and each passed `audit_balance_drift`,
+  because drift compares the ledger with the yaml and a lost judgment is invisible to that.
+  **Procedure:** rename the key in the committed ledger FIRST, then re-extract (#528). The
+  extractor now refuses to write a dropped design value (exit 2, the list printed);
+  `--allow-design-drop` is only for an actor that was really deleted. Guard:
+  `tools/tests/test_extract_design_drop.py`.
 - When patching ledger JSONs from generated markdown balance reports, only overwrite primary damage warheads.
   - Skip `HealthPercentageDamage` warheads entirely.
   - Skip warheads whose tag contains `Friendly` (e.g., `GrenadeFriendlyFire`) to avoid corrupting friendly-fire or self-damage values.
@@ -2561,3 +2751,92 @@ empty token (the separator after `Name:` is not depth). Verify restored blocks
 byte-identical against the pre-drain commit, then re-run find_empty_warhead —
 a wrong first-token depth parses fine for the engine but is skipped by
 indent-based audit scanners.
+
+## Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)
+
+Two reusable findings from the W1 arity sweep (43 + 24 dead edges removed,
+resolved-identical throughout):
+
+1. **An edge is dead iff removing it leaves resolved flat payload AND
+   ordered top-level keys identical** — test by re-running the merge with
+   the Inherits line skipped. Fully-shadowed edges are common after
+   covering-edge conversions: a later family template re-supplies every
+   leaf the edge carried, and the edge's only residue is a dead
+   `-Key:` cancel pair (provider gone → orphan; delete edge+cancel
+   TOGETHER, EMBER rule). 67 in-lane edges were dead this way, mostly
+   `^Projectile_*`/`^Warhead_*` singles and stale fx-template edges.
+
+2. **Regex-driven line edits must not index defs independently of the
+   resolver.** A header like `TSIonCannon: ### comment` fails
+   `^Key:\s*$` — `cur` stays on the previous def and the edge index used
+   by the apply diverges from the index the resolve-probe tested
+   (a verified drop on weapon A deleted an edge on weapon B). Fix used:
+   `^Key:(\s|$)` header match + `^	Inherits` depth-1 edge match. Better
+   still: enumerate edges from the parsed node's children and map back to
+   lines once.
+
+3. **Comparator scope:** verify tools that derive the checked weapon set
+   from `git log -1 --name-only` miss regressions in files untouched by
+   the last commit (19 batch-1 order diffs hid this way). Scope by explicit
+   file list or branch-vs-merge-base diff census, never last-commit names.
+
+- **Generated `^` template names must be checked corpus-wide, not per-file.**
+  W6 conversion emitted `^<theme>_<weapon>` templates named after the
+  consumer — several already existed in *other* files (W7 materialization
+  artifacts in `weapons/effects_*.yaml`). A same-named def in any loaded yaml
+  merges into one node; two `Inherits` edges to it trigger the engine's
+  "Parent type already inherited" crash at ruleset load (Python resolver
+  tolerates it). Fix: index every `^`-def under `mods/cameo` before naming.
+- **`-Field:` cancels nested inside a moved `Warhead@` block keep working in
+  the template, but `audit_orphan_cancels` can't see their provider** (it
+  evaluates `^` defs alone; the provider lives on the consumer's other
+  edges). Split such cancels back into a local untyped `Warhead@X:` pin.
+
+## List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)
+
+A per-def splicer that did `lines[s:e] = lines[s:e][:0]` (clear) then
+`newl = lines[:s+1] + out + lines[e:]` (rebuild) used the POST-mutation
+list with PRE-mutation index `e` — silently skipping ~46 real lines and
+leaving orphan depth-2 children (`Damage: 800`, a stray `Versus`) inside
+the previous def. Resolved payload diffed absurdly (`InstantHit`, a
+foreign `FREMODD1` report) — the diff was the alarm, not the edit.
+
+**Rules:**
+- Replace spans by `newl = lines[:s] + newblock + lines[e:]` on the
+  ORIGINAL list; apply multiple spans bottom-up.
+- After any scripted splice, verify with a BASE-file census (enumerate
+  def names in the pre-edit file), not the current-file census — a
+  deleted def is invisible to a census built from the damaged file.
+- A `### comment` on a def header line breaks `Name:$` def-end regexes;
+  match `:(\s|$)`.
+
+## Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)
+
+The §12.0j/§12.0l stack (PR #540) shipped `HeavinessBell.Transform(table, h,
+mainTable:)` where `mainTable=True` re-derives Heroic as `Plate x Scout / 200`.
+C# calls it with `mainTable: true` for the warhead's ONE Versus — including the
+SharedVersus profile — but the Python mirror's `shared_versus_profile()` called
+`bell_transform` with `main_table=False`. Result: every Python consumer of the
+shared profile (cameo_channel_curves, compare_defense_armor_curves,
+percentage_damage, weapon_efficiency, the CannonAP fixture) kept the belled
+Heroic (~65) while the engine re-derived it (54 on the CannonAP table), and
+CyborgHeroic diverged 105 vs 96. One flag in the mirror, silent divergence in
+every downstream tool — the fixture was the only place the two were compared
+armor-by-armor.
+
+Same merge left the C# mirror tables stale in a subtler way: Ts90Belled holds
+MAIN-table vectors (Heroic re-derived = 1) while the percentage-path tests need
+`main_table=False` vectors (Heroic keeps authored 12). Two expectations, one
+flag — a belled table is meaningless without saying WHICH side of rule 4 it is.
+
+**Rules:**
+- When the C# gains a semantic flag (`mainTable`, mode enums), grep every
+  Python-mirror call site for the missing argument; the mirror must pass the
+  flag through, not silently default it.
+- Fixture regeneration needs a committed re-run path: `python
+  tools/tests/gen_cannonap_fixture.py` now rebuilds both
+  `cannonap_continuous_generated.yaml` and `cannonap_continuous_fixture.json`
+  in lockstep after any heaviness-rule change.
+- A Python-vs-C# mirror mismatch on GENERATED data is a bug in the mirror or
+  the engine — never "fix" it by editing expectations until you know which
+  side violates the spec.

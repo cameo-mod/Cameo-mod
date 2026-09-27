@@ -1,11 +1,14 @@
-=== 50 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
+=== 53 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
+[VIOLATION] mods\cameo\ContentPacks\D2k\Shared\yaml\weapons.yaml:1458  PhoenixRocketShrapnel  Image: d2k_corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2021  Hakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2085  ReimuYinYangDrone  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2103  THMiss  Image: hakurei_dream
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:7387  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:7423  RA2FlyingBody  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5140  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:7515  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\Shared\yaml\weapons.yaml:477  td_tanyaattach  Image: td_corpse
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\Shared\yaml\weapons.yaml:825  TSUnitExplode  Image: ts_corpse
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:121  wc2paladinholyvision_hit  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:151  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:155  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle

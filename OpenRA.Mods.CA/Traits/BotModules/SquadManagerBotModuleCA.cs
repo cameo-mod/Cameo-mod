@@ -58,7 +58,8 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Units that form a guerrilla squad.")]
 		public readonly HashSet<string> GuerrillaTypes = new();
 
-		[Desc("Possibility of units in GuerrillaTypes to join Guerrilla.")]
+		[Desc("Percent chance (0-100) that a pass of new GuerrillaTypes units joins the guerrilla squad. " +
+			"Cameo: the engine this came from compared the other way round (join chance = 100 - value); flipped 2026-09-27.")]
 		public readonly int JoinGuerrilla = 50;
 
 		[Desc("Max number of units AI has in guerrilla squad")]
@@ -122,6 +123,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
+		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
+		public readonly bool UseMissions = true;
+		[Desc("Maximum number of ticks a Defend mission may hold an otherwise ready attack force.")]
+		public readonly int MissionDefendHoldTicks = 1500;
+
+		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
+		public readonly HashSet<string> AssaultPriorityTags = [];
+		public readonly HashSet<string> RushPriorityTags = [];
+		public readonly HashSet<string> ArtilleryPriorityTags = [];
+		public readonly HashSet<string> AirPriorityTags = [];
+		public readonly HashSet<string> NavalPriorityTags = [];
+		public readonly HashSet<string> GuerrillaPriorityTags = [];
+		public readonly HashSet<string> ProtectionPriorityTags = [];
+
+		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
+		public readonly int AttackRiskMargin = 25;
 
 		[Desc("Actor types to prioritise based on HighValueTargetPriority.")]
 		public readonly HashSet<string> HighValueTargetTypes = new HashSet<string>();
@@ -146,6 +163,15 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Percent chance that a regular assault squad will take an indirect (flanking) route instead of the most direct path. 0 to disable.")]
 		public readonly int IndirectRouteChance = 0;
+
+		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
+		public readonly bool UseRiskRouting = true;
+
+		[Desc("Ground units whose maximum weapon range reaches this many cells split into artillery squads that hang back behind assault squads (AI_FRANSBOT_RESEARCH.md 6f). Negative disables artillery squads.")]
+		public readonly int ArtilleryMinRangeCells = 10;
+
+		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
+		public readonly int ArtilleryHangBackCells = 8;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -196,6 +222,10 @@ namespace OpenRA.Mods.CA.Traits
 		IBotNotifyIdleBaseUnits[] notifyIdleBaseUnits;
 		IBotAircraftBuilder[] aircraftBuilders;
 		IBotMainTargetProvider[] mainTargetProviders;
+		IBotRegionThreatProvider[] threatProviders;
+		IBotFoggedEnemyProvider[] fogProviders;
+		IBotRouteThreatRouter[] routeRouters;
+		IBotMissionProvider[] missionProviders;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -206,6 +236,9 @@ namespace OpenRA.Mods.CA.Traits
 		int attackForceTicks;
 		int protectionForceTicks;
 		int minAttackForceDelayTicks;
+		BotMission heldDefendMission;
+		int defendMissionHeldSince = -1;
+		int defendMissionExhaustedRegion = -1;
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
@@ -222,9 +255,44 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			World = self.World;
 			Player = self.Owner;
-			
+
 			unitCannotBeOrdered = a => a == null || a.Owner != Player || a.IsDead || !a.IsInWorld || a.CurrentActivity is Enter;
 			constructionYardBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(World, info.ConstructionYardTypes, Player);
+		}
+
+		IReadOnlyDictionary<string, HashSet<string>> targetTagMap;
+
+		// Lazily built per ruleset: actor name -> rules-derived BotTargetTags.
+		internal IReadOnlyDictionary<string, HashSet<string>> TargetTags =>
+			targetTagMap ??= BotTargetTags.BuildTagMap(World.Map.Rules);
+
+		internal HashSet<string> PriorityTagsFor(SquadCAType type)
+		{
+			return type switch
+			{
+				SquadCAType.Air => Info.AirPriorityTags,
+				SquadCAType.Artillery => Info.ArtilleryPriorityTags,
+				SquadCAType.Naval => Info.NavalPriorityTags,
+				SquadCAType.Rush => Info.RushPriorityTags,
+				SquadCAType.Guerrilla => Info.GuerrillaPriorityTags,
+				SquadCAType.Protection => Info.ProtectionPriorityTags,
+				_ => Info.AssaultPriorityTags,
+			};
+		}
+
+		internal HashSet<string> TagsOf(Actor a)
+		{
+			return a != null && TargetTags.TryGetValue(a.Info.Name, out var tags) ? tags : null;
+		}
+
+		internal HashSet<string> TagsOf(ActorInfo info)
+		{
+			return info != null && TargetTags.TryGetValue(info.Name, out var tags) ? tags : null;
+		}
+
+		internal List<T> PreferSquadTargets<T>(List<T> candidates, SquadCA owner, Func<T, HashSet<string>> tagsOf)
+		{
+			return owner == null ? candidates : BotTargetTags.PreferTagged(candidates, owner.PriorityTags, tagsOf);
 		}
 
 		bool IsValidEnemyUnit(Actor a)
@@ -279,6 +347,153 @@ namespace OpenRA.Mods.CA.Traits
 			return a.CanBeViewedByPlayer(Player);
 		}
 
+		// 6d fogged observation: when a provider reports fogged scans, squads only
+		// pick targets they can see (or remember via FrozenActorLayer). Without a
+		// provider the legacy omniscient scans run unchanged — same degradation
+		// rule as the risk gate.
+		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
+
+		// 6e risk routing: ask region-memory routers for waypoints that skirt
+		// remembered threat. Returns null (caller keeps direct routing) when
+		// disabled, no router answers, or the router has no useful detour.
+		internal List<CPos> RouteAroundThreat(Actor leader, CPos target, int maxWaypoints = 4)
+		{
+			if (!Info.UseRiskRouting || IsTraitDisabled || routeRouters == null)
+				return null;
+
+			foreach (var router in routeRouters)
+			{
+				var route = router.RouteAroundThreat(leader, target, maxWaypoints);
+				if (route != null && route.Count > 0)
+					return route;
+			}
+
+			return null;
+		}
+
+		public static bool FoggedScansActive(bool traitDisabled, IBotFoggedEnemyProvider[] providers)
+		{
+			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
+		}
+
+		// 6f: rules-derived artillery classification — a mobile ground unit whose
+		// weapons reach ArtilleryMinRangeCells. No actor ids, so every faction's
+		// artillery qualifies automatically (CN's tag-derivation rule).
+		internal bool IsArtilleryUnit(Actor a)
+		{
+			if (Info.ArtilleryMinRangeCells < 0 || a == null
+				|| a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return false;
+
+			return MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+		}
+
+		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
+		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
+		// ts_nod_attackbuggy), and TraitOrDefault throws on the second one.
+		internal static WDist MaximumEnabledRange(Actor a)
+		{
+			var range = WDist.Zero;
+			foreach (var attack in a.TraitsImplementing<AttackBase>())
+			{
+				if (attack.IsTraitDisabled)
+					continue;
+
+				var r = attack.GetMaximumRange();
+				if (r > range)
+					range = r;
+			}
+
+			return range;
+		}
+
+		// The assault squad an artillery squad trails: nearest living Rush squad.
+		internal SquadCA FindAttachableAssault(SquadCA artillery)
+		{
+			if (!artillery.IsValid)
+				return null;
+
+			var from = artillery.Units[0].Actor.CenterPosition;
+			SquadCA best = null;
+			var bestDistance = long.MaxValue;
+			foreach (var squad in Squads)
+			{
+				if (squad == artillery || !squad.IsValid || squad.Type != SquadCAType.Rush)
+					continue;
+
+				var distance = (squad.CenterPosition - from).HorizontalLengthSquared;
+				if (distance < bestDistance)
+				{
+					bestDistance = distance;
+					best = squad;
+				}
+			}
+
+			return best;
+		}
+
+		// Point hangBackLength behind the parent's position, away from the target.
+		public static WPos HangBackAnchor(WPos parentPos, WPos targetPos, int hangBackLength)
+		{
+			var offset = parentPos - targetPos;
+			var distance = offset.HorizontalLength;
+			if (distance <= 0)
+				return parentPos;
+
+			return parentPos + new WVec(
+				(int)((long)offset.X * hangBackLength / distance),
+				(int)((long)offset.Y * hangBackLength / distance),
+				0);
+		}
+
+		// IsPreferredEnemyUnit restricted to what the bot can currently observe.
+		internal bool IsPreferredObservedEnemyUnit(Actor a)
+		{
+			return IsPreferredEnemyUnit(a) && (!FoggedScans || IsNotHiddenUnit(a));
+		}
+
+		// Fogged fallback target: an enemy building the engine's FrozenActorLayer
+		// remembers under shroud. The layer invalidates the record when the cell
+		// is re-observed empty, so a stale frozen target drops out on its own.
+		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue, SquadCA owner = null, Player targetPlayer = null)
+		{
+			var layer = Player.FrozenActorLayer;
+			if (layer == null)
+				return null;
+
+			var map = World.Map;
+			// Mirrors Target.IsValidFor's FrozenActor predicate: only rendered
+			// ghosts count — hidden (revealed-empty) and invalid records drop out.
+			var candidates = layer.FrozenActorsInRegion(map.AllCells)
+				.Where(fa => fa.IsValid && fa.Visible && !fa.Hidden && fa.Owner != null
+					&& Player.RelationshipWith(fa.Owner) == PlayerRelationship.Enemy
+					&& (targetPlayer == null || fa.Owner == targetPlayer)
+					&& !fa.TargetTypes.IsEmpty && !fa.TargetTypes.Overlaps(Info.IgnoredEnemyTargetTypes))
+				.ToList();
+
+			var mainTarget = EffectiveMainTarget();
+			candidates = PreferOwned(candidates, mainTarget == null ? null : fa => fa.Owner == mainTarget);
+			candidates = PreferSquadTargets(candidates, owner, fa => TagsOf(fa.Info));
+
+			if (attackerValue >= 0)
+				candidates.RemoveAll(fa => !PassesRiskGate(map.CellContaining(fa.CenterPosition), attackerValue));
+
+			FrozenActor closest = null;
+			var closestDistance = long.MaxValue;
+			foreach (var fa in candidates)
+			{
+				var delta = fa.CenterPosition - from;
+				var distance = (long)delta.LengthSquared;
+				if (distance < closestDistance)
+				{
+					closestDistance = distance;
+					closest = fa;
+				}
+			}
+
+			return closest;
+		}
+
 		public bool IsValidAllyUnit(Actor a)
 		{
 			if (a == null || a.IsDead || Player.RelationshipWith(a.Owner) != PlayerRelationship.Ally || a.Info.HasTraitInfo<HuskInfo>() || a.Info.HasTraitInfo<CarrierSlaveInfo>())
@@ -306,6 +521,10 @@ namespace OpenRA.Mods.CA.Traits
 			notifyIdleBaseUnits = self.Owner.PlayerActor.TraitsImplementing<IBotNotifyIdleBaseUnits>().ToArray();
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
+			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
+			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
+			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
+			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -326,6 +545,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			heldDefendMission = null;
+			defendMissionHeldSince = -1;
+			defendMissionExhaustedRegion = -1;
 			foreach (var squad in Squads)
 				DismissSquad(squad);
 
@@ -351,25 +573,130 @@ namespace OpenRA.Mods.CA.Traits
 			AssignRolesToIdleUnits(bot);
 		}
 
-		internal Actor FindClosestEnemy(Actor sourceActor)
+		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			units = PreferSquadTargets(units, owner, TagsOf);
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+
+			// Fogged scans never fall back to actors the bot cannot see; remembered
+			// enemy buildings are offered separately as FrozenActor targets.
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
+
+			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+		}
+
+		// 6c pre-commit risk gate: as FindClosestEnemy, but candidates whose region's
+		// remembered enemy threat exceeds attackerValue by more than AttackRiskMargin
+		// are skipped — an unknown region (threat 0) never blocks. When every
+		// candidate fails the gate the squad holds instead of suiciding.
+		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
+		{
+			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units = PreferSquadTargets(units, owner, TagsOf);
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
+
+			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+		}
+
+		internal Actor FindClosestEnemy(CPos location, int attackerValue, Player targetPlayer, SquadCA owner = null)
+		{
+			if (targetPlayer == null)
+				return null;
+
+			var units = World.Actors
+				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
+				.ToList();
+			units = PreferSquadTargets(units, owner, TagsOf);
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+			var targetPosition = World.Map.CenterOfCell(location);
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(targetPosition);
+
+			return visible.ClosestToIgnoringPath(targetPosition) ??
+				units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
+				units.ClosestToIgnoringPath(targetPosition);
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
 			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			if (FoggedScans)
+				units = units.Where(IsNotHiddenUnit).ToList();
+
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			return units.RandomOrDefault(World.LocalRandom);
 		}
 
-		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius)
+		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
 		{
-			return World.FindActorsInCircle(sourceActor.CenterPosition, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ClosestToIgnoringPath(sourceActor);
+			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			if (FoggedScans)
+				units = units.Where(IsNotHiddenUnit).ToList();
+
+			var mainTarget = EffectiveMainTarget();
+			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			return units.RandomOrDefault(World.LocalRandom);
+		}
+
+		internal int SquadValueOf(SquadCA squad)
+		{
+			var value = 0;
+			foreach (var u in squad.Units)
+			{
+				if (!cachedUnitValues.TryGetValue(u.Actor.Info.Name, out var unitCost))
+				{
+					unitCost = u.Actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					cachedUnitValues[u.Actor.Info.Name] = unitCost;
+				}
+
+				value += unitCost;
+			}
+
+			return value;
+		}
+
+		internal bool PassesRiskGate(Actor target, int attackerValue)
+		{
+			return PassesRiskGate(target.Location, attackerValue);
+		}
+
+		internal bool PassesRiskGate(CPos cell, int attackerValue)
+		{
+			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(cell)) ?? 0;
+			var pass = PassesRiskGate(attackerValue, threat, Info.AttackRiskMargin);
+			if (!pass)
+				AIUtils.BotDebug("AI ({0}): risk gate held a {1}-value squad off {2} (remembered threat {3}, margin {4}%)",
+					Player.ClientIndex, attackerValue, cell, threat, Info.AttackRiskMargin);
+
+			return pass;
+		}
+
+		public static bool PassesRiskGate(int attackerValue, int threat, int marginPercent)
+		{
+			if (marginPercent < 0 || threat <= 0)
+				return true;
+
+			return (long)attackerValue * 100 >= (long)threat * (100 + marginPercent);
+		}
+
+		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
+		{
+			var candidates = World.FindActorsInCircle(sourceActor.CenterPosition, radius)
+				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			candidates = PreferSquadTargets(candidates, owner, TagsOf);
+			return candidates.ClosestToIgnoringPath(sourceActor);
 		}
 
 		Player EffectiveMainTarget()
@@ -389,6 +716,29 @@ namespace OpenRA.Mods.CA.Traits
 
 			var preferred = candidates.Where(ownedByMainTarget).ToList();
 			return preferred.Count > 0 ? preferred : candidates;
+		}
+
+		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		{
+			if (providers == null)
+				return null;
+
+			foreach (var provider in providers)
+				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
+					if (mission != null && mission.RequiredValue <= idleForceValue)
+						return mission;
+
+			return null;
+		}
+
+		void MissionTaken(BotMission mission)
+		{
+			foreach (var provider in missionProviders ?? Array.Empty<IBotMissionProvider>())
+				if ((provider.Missions ?? Array.Empty<BotMission>()).Any(candidate => ReferenceEquals(candidate, mission)))
+				{
+					provider.MissionTaken(mission);
+					return;
+				}
 		}
 
 		void CleanSquads()
@@ -421,6 +771,7 @@ namespace OpenRA.Mods.CA.Traits
 		SquadCA RegisterNewSquad(IBot bot, SquadCAType type, Actor target = null)
 		{
 			var ret = new SquadCA(bot, this, type, target);
+			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
 			return ret;
 		}
@@ -490,7 +841,7 @@ namespace OpenRA.Mods.CA.Traits
 					!activeUnits.Contains(a) && a.IsInWorld);
 
 			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
-			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));
+			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) < Info.JoinGuerrilla));
 
 			foreach (var a in newUnits)
 			{
@@ -578,15 +929,96 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
 			{
-				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
+				BotMission mission = null;
+				Actor missionTarget = null;
+				FrozenActor missionFrozenTarget = null;
+				if (Info.UseMissions && missionProviders?.Length > 0)
+				{
+					mission = BestAffordableMission(missionProviders, idleUnitsValue);
+					if (mission?.Type == BotMissionType.Defend)
+					{
+						if (defendMissionExhaustedRegion != mission.RegionIndex)
+							defendMissionExhaustedRegion = -1;
 
-				attackForce.Units.AddRange(unitsHangingAroundTheBase);
-				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, unitsHangingAroundTheBase.Count, attackForce.Type);
+						if (defendMissionExhaustedRegion == mission.RegionIndex)
+						{
+							heldDefendMission = null;
+							defendMissionHeldSince = -1;
+							mission = null;
+						}
+						else
+						{
+							if (heldDefendMission == null)
+							{
+								heldDefendMission = mission;
+								defendMissionHeldSince = World.WorldTick;
+							}
+							else
+								heldDefendMission = mission;
+
+							var heldTicks = World.WorldTick - defendMissionHeldSince;
+							if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+							{
+								AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+									Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+								return;
+							}
+
+							AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+								Player.ClientIndex, mission.RegionIndex, heldTicks);
+							defendMissionExhaustedRegion = mission.RegionIndex;
+							heldDefendMission = null;
+							defendMissionHeldSince = -1;
+							mission = null;
+						}
+					}
+					else
+					{
+						heldDefendMission = null;
+						defendMissionHeldSince = -1;
+						defendMissionExhaustedRegion = -1;
+					}
+
+					if (mission?.Type == BotMissionType.Raid)
+					{
+						missionTarget = FindClosestEnemy(mission.Location, idleUnitsValue, mission.TargetPlayer);
+						if (missionTarget == null && FoggedScans)
+							missionFrozenTarget = FindFrozenEnemyTarget(
+								World.Map.CenterOfCell(mission.Location), idleUnitsValue, null, mission.TargetPlayer);
+					}
+				}
+
+				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
+				if (missionFrozenTarget != null)
+					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
+
+				// 6f: long-range units peel off into an artillery squad that trails
+				// the assault and bombards its target, instead of charging with it.
+				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
+				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)));
+
+				if (artilleryUnits.Count > 0)
+				{
+					var artillerySquad = RegisterNewSquad(bot, SquadCAType.Artillery);
+					artillerySquad.Units.AddRange(artilleryUnits);
+					artillerySquad.Parent = attackForce.IsValid ? attackForce : null;
+					AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2} (escorts {3})", Player.ClientIndex, artilleryUnits.Count, artillerySquad.Type, artillerySquad.Parent);
+				}
+
+				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
 				unitsHangingAroundTheBase.Clear();
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
 				SetNextDesiredAttackForce();
+				if (mission?.Type == BotMissionType.Raid && (missionTarget != null || missionFrozenTarget != null))
+					MissionTaken(mission);
+				heldDefendMission = null;
+				defendMissionHeldSince = -1;
 			}
 		}
 
@@ -623,9 +1055,14 @@ namespace OpenRA.Mods.CA.Traits
 			protectOwnFrom = null;
 			protectOwnTicks = Info.ProtectInterval;
 
+			// Fogged scans only chase an attacker the bot can actually see; an
+			// unseen attacker still updates the defence center above, and the
+			// protection squad's own radius scan picks up anything it can see.
+			var protectTarget = FoggedScans && !IsNotHiddenUnit(attacker) ? null : attacker;
+
 			var protectSq = GetSquadOfType(SquadCAType.Protection);
 			if (protectSq == null)
-				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, attacker);
+				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, protectTarget);
 
 			if (!protectSq.IsValid)
 			{
@@ -637,8 +1074,8 @@ namespace OpenRA.Mods.CA.Traits
 					protectSq.Units.Add(new UnitWposWrapper(a));
 			}
 
-			if (protectSq.IsValid && !protectSq.IsTargetValid)
-				protectSq.TargetActor = attacker;
+			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
+				protectSq.TargetActor = protectTarget;
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)

@@ -138,7 +138,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotSituation situation)
 		{
 			AiMatchLogWriter.AppendObjectStart(builder);
-			AiMatchLogWriter.AppendNumber(builder, "schema", 1, true);
+			AiMatchLogWriter.AppendNumber(builder, "schema", 2, true);
 			AiMatchLogWriter.AppendString(builder, "kind", "situation");
 			AiMatchLogWriter.AppendString(builder, "record_id", gameUid + "|" + playerName + "|" + situation.Tick);
 			AiMatchLogWriter.AppendString(builder, "game_uid", worldGameUid);
@@ -153,6 +153,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "main_target", situation.MainTarget?.InternalName ?? "");
 			AiMatchLogWriter.AppendNumber(builder, "main_target_score",
 				situation.MainTarget != null && situation.Enemies.TryGetValue(situation.MainTarget, out var target) ? target.Score : 0);
+			if (situation.Mission == null)
+				builder.Append(",\"mission\":null");
+			else
+			{
+				builder.Append(",\"mission\":{\"type\":\"")
+					.Append(situation.Mission.Type.ToString().ToLowerInvariant())
+					.Append("\",\"priority\":")
+					.Append(situation.Mission.Priority)
+					.Append(",\"region_index\":")
+					.Append(situation.Mission.RegionIndex)
+					.Append('}');
+			}
 
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, "hints");
 			AiMatchLogWriter.AppendNumber(builder, "defence_fraction", situation.DefenceFractionHint, true);
@@ -173,6 +185,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "harvesters", situation.OwnHarvesters);
 			AiMatchLogWriter.AppendNumber(builder, "kills_cost_window", situation.OwnKillsCostWindow);
 			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", situation.OwnDeathsCostWindow);
+			AiMatchLogWriter.AppendNumber(builder, "squad_count", situation.SquadCount);
+			AiMatchLogWriter.AppendNumber(builder, "squad_units", situation.SquadUnitCount);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
@@ -198,6 +212,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "buildings", enemy.BuildingCount);
 				AiMatchLogWriter.AppendNumber(builder, "expansion_clusters", enemy.ExpansionClusters);
 				AiMatchLogWriter.AppendNumber(builder, "harvesters", enemy.Harvesters);
+				AiMatchLogWriter.AppendNumber(builder, "harvester_count", enemy.HarvesterCount);
+				AiMatchLogWriter.AppendNumber(builder, "known_regions", enemy.KnownRegions);
 				AiMatchLogWriter.AppendNumber(builder, "refineries", enemy.Refineries);
 				AiMatchLogWriter.AppendNumber(builder, "pressure_value", enemy.PressureValue);
 				AiMatchLogWriter.AppendNumber(builder, "stealth_share", enemy.StealthShare);

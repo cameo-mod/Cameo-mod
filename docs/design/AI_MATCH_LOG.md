@@ -1,4 +1,4 @@
-# AI match log — record schema v1
+# AI match log — record schema v2
 
 One JSON object per line (JSONL), **one line per bot player per finished match**.
 Append-only. Never rewritten, never read back by the game.
@@ -13,7 +13,7 @@ Strings are the internal names, never the display/translated names.
 
 ```json
 {
-  "schema": 1,
+  "schema": 2,
   "record_id": "<game_uid>|<player_internal_name>",
   "recorded_utc": "2026-08-31T10:27:15.1234567Z",
   "mod_version": "<Game.ModData.Manifest.Metadata.Version>",
@@ -32,7 +32,12 @@ Strings are the internal names, never the display/translated names.
     "outcome": "won",
     "personality": "rush",
     "personality_switches": 0,
-    "personality_timeline": [ { "tick": 0, "personality": "rush" } ]
+    "personality_timeline": [ { "tick": 0, "personality": "rush" } ],
+    "composition": "tdgdi_armorpush",
+    "composition_switches": 0,
+    "composition_timeline": [ { "tick": 9000, "composition": "tdgdi_armorpush" } ],
+    "episode_timeline": [ { "tick": 0, "personality": "rush", "composition": "", "kills_cost": 0, "deaths_cost": 0 },
+                          { "tick": 9000, "personality": "rush", "composition": "tdgdi_armorpush", "kills_cost": 1500, "deaths_cost": 800 } ]
   },
   "stats": {
     "units_killed": 0,
@@ -56,6 +61,10 @@ Strings are the internal names, never the display/translated names.
 
 ## Field rules
 
+`schema` is `2` for records carrying the composition/episode fields; older
+schema-1 records in the same file remain valid and the aggregator pools both
+(they simply contribute no composition/episode rows).
+
 - `record_id` — `game_uid + "|" + player.InternalName`. When `game_uid` is empty
   (skirmish without one), substitute a per-match `Guid.NewGuid().ToString("N")`
   generated ONCE per world by the world-level writer and shared by all lines of
@@ -72,6 +81,20 @@ Strings are the internal names, never the display/translated names.
   manager cannot produce unbounded lines. `personality_switches` is the TOTAL
   number of changes observed after the first grant, uncapped, so a truncated
   timeline is still detectable.
+- `composition` — `UnitCompositionsBotModule` composition `Id` active at the END
+  of the match; `""` for the baseline build order. Composition transitions are
+  observed via `UnitBuilderBotModuleCA.ActiveCompositionChanged`, a read-only
+  event added for exactly this purpose — the recorder never steers selection.
+- `composition_timeline` — every composition selection/revert, oldest first;
+  `""` marks a revert to baseline. Same 64-entry keep-first-32/last-32 cap, and
+  `composition_switches` stays the uncapped total.
+- `episode_timeline` — schema 2's attribution primitive: one entry whenever the
+  personality OR the active composition changes, carrying `kills_cost` /
+  `deaths_cost` snapshotted from `PlayerStatistics` at that tick. Each entry
+  opens an episode; the aggregator diffs consecutive snapshots (the last entry
+  diffs against match-end `stats`) to get per-episode value destroyed vs lost —
+  the §6.1 `outcome` unit of learning. Damage before the first boundary is
+  unattributed. Cap: 128 entries (keep first 64 / last 64).
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.
@@ -132,13 +155,14 @@ Two rules follow, and both are load-bearing:
   sequence and parses the result** with `JsonDocument`. It fails 2 of 3 against
   the original emitter. Extend it whenever `BuildLog` grows a field.
 
-## Situation snapshot log (schema 1)
+## Situation snapshot log (schema 2)
 
 Phase 2 adds a second record type to the same record-only logging boundary.
 `MasterAiBotModule` publishes an unsynced, host-local snapshot and does not
 queue orders, grant conditions, mutate synced state, or read either log back.
-The snapshot is intentionally **pre-fog**: it scans `world.Actors` without
-shroud gating. Future fogged observation is a later phase.
+The snapshot carries the currently published mission intent (`mission`, or `null`) in addition
+to the existing fields. Schema-1 records remain valid. Mission records contain `type`,
+`priority`, and `region_index`; only `raid` and `defend` are produced in phase 7a.
 
 The situation writer emits one line per snapshot rebuild per bot player. For
 matches exceeding 2000 rebuilds, the buffer retains the first 1000 and most
@@ -146,7 +170,7 @@ recent 1000 lines and silently drops the middle. Field order is stable and all
 numeric values are integers:
 
 ```json
-{"schema":1,"kind":"situation","record_id":"<game_uid>|<player>|<tick>","game_uid":"","map_uid":"...","player":"Multi0","faction":"td_gdi","bot_type":"medium","tick":1500,"urgency":"normal","personality_current":"rush","personality_candidate":"steamroller","main_target":"Multi1","main_target_score":730,"hints":{"defence_fraction":35,"expansion_appetite":20},"demand":{"anti_air":10,"anti_armour":40,"anti_infantry":25,"detector":0,"artillery":60},"own":{"army_value":5400,"defence_value":1200,"buildings":14,"harvesters":4,"kills_cost_window":900,"deaths_cost_window":1500},"enemies":[{"name":"Multi1","faction":"td_nod","alive":true,"army_value":8100,"infantry_value":2000,"vehicle_value":5000,"air_value":1100,"naval_value":0,"defence_count":7,"defence_value":3500,"tech_buildings":4,"production_buildings":3,"buildings":9,"expansion_clusters":2,"harvesters":5,"refineries":2,"pressure_value":800,"stealth_share":10,"nearest_cells":42,"last_seen_tick":1500,"score":730}]}
+{"schema":2,"kind":"situation","record_id":"<game_uid>|<player>|<tick>","game_uid":"","map_uid":"...","player":"Multi0","faction":"td_gdi","bot_type":"medium","tick":1500,"urgency":"normal","personality_current":"rush","personality_candidate":"steamroller","main_target":"Multi1","main_target_score":730,"mission":{"type":"raid","priority":65,"region_index":18},"hints":{"defence_fraction":35,"expansion_appetite":20},"demand":{"anti_air":10,"anti_armour":40,"anti_infantry":25,"detector":0,"artillery":60},"own":{"army_value":5400,"defence_value":1200,"buildings":14,"harvesters":4,"kills_cost_window":900,"deaths_cost_window":1500},"enemies":[{"name":"Multi1","faction":"td_nod","alive":true,"army_value":8100,"infantry_value":2000,"vehicle_value":5000,"air_value":1100,"naval_value":0,"defence_count":7,"defence_value":3500,"tech_buildings":4,"production_buildings":3,"buildings":9,"expansion_clusters":2,"harvesters":5,"refineries":2,"pressure_value":800,"stealth_share":10,"nearest_cells":42,"last_seen_tick":1500,"score":730}]}
 ```
 
 `urgency` is `normal`, `pressured`, or `emergency`; `main_target` is empty

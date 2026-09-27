@@ -35,6 +35,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int BuildingCount;
 		public int ExpansionClusters;
 		public int Harvesters, Refineries;
+		public int HarvesterCount;
+		public int KnownRegions;
 		public int PressureValue;
 		public int StealthShare;
 		public int NearestCells;
@@ -55,9 +57,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public BotUrgency Urgency;
 		public IReadOnlyDictionary<OpenRA.Player, EnemyProfile> Enemies;
 		public CounterDemand Demand;
+		public BotMission Mission;
 		public int DefenceFractionHint, ExpansionAppetiteHint;
+		public RegionMemory Regions;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
+		internal int SquadCount, SquadUnitCount;
 		internal string OwnPersonality = "";
 	}
 
@@ -132,6 +137,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int ArtilleryDemandOn = 40;
 		[Desc("Signal threshold below which held artillery counter demand is removed.")]
 		public readonly int ArtilleryDemandOff = 25;
+		[Desc("Limit enemy observations to what the bot player can see plus remembered sightings. False reproduces the legacy omniscient scan.")]
+		public readonly bool UseFoggedObservation = true;
+		[Desc("Cell-edge length of one spatial memory region.")]
+		public readonly int RegionCellSize = 8;
+		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
+		public readonly bool UseRiskRouting = true;
+		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
+		public readonly int RiskRoutingThreatWeight = 1000;
+		[Desc("Ticks after which a remembered non-building that was never seen again is dropped.")]
+		public readonly int ObservationTimeoutTicks = 30000;
+		[Desc("Publish fog-honest Raid and Defend missions from the latest situation snapshot.")]
+		public readonly bool PublishMissions = true;
+		[Desc("Percentage of remembered enemy army and defence value required before attempting a Raid.")]
+		public readonly int RaidForceRatioPercent = 120;
+		[Desc("Minimum Raid priority required before publishing a mission.")]
+		public readonly int RaidPriorityThreshold = 40;
+		[Desc("Minimum Defend priority required before publishing a mission.")]
+		public readonly int DefendPriorityThreshold = 25;
+		[Desc("Ticks for which a taken mission pair remains reserved from other consumers.")]
+		public readonly int MissionReservationTicks = 1500;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -152,16 +177,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
+		readonly BotFogMemory fogMemory;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
 		readonly Queue<(int Tick, int Delta)> killSamples = new();
 		readonly Queue<int> productionLossTicks = new();
 		readonly HashSet<uint> productionBuildings = [];
+		readonly Dictionary<(BotMissionType Type, int RegionIndex), int> missionReservations = [];
+		List<BotMission> missions = [];
+		int missionTick;
 		int nextSnapshotTick;
 		int nextEmergencyTick;
 		int lastDecisionTick;
@@ -184,11 +213,74 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
+		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
+			? Array.Empty<BotMission>()
+			: missions.Where(m => !missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
+				!ReservationActive(reservedTick, missionTick, Info.MissionReservationTicks)).ToArray();
+
+		public void MissionTaken(BotMission mission)
+		{
+			if (mission == null || mission.Type != BotMissionType.Raid)
+				return;
+
+			// Reservations are advisory unsynchronized state. They intentionally do
+			// not survive save/load because a fresh snapshot republishes intent.
+			missionReservations[(mission.Type, mission.RegionIndex)] = missionTick;
+		}
+
+		// The 6c risk gate's fog-honest read: remembered enemy combat value in the
+		// region containing the cell. AntiAir is deliberately excluded (a ground
+		// squad's pre-commit check); air squads do not consult this gate yet.
+		int IBotRegionThreatProvider.RememberedEnemyThreatAt(CPos cell)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || regions == null)
+				return 0;
+
+			return RememberedThreatAtRegion(regions, regions.IndexOf(cell));
+		}
+
+		// Summed remembered Army+Defence value across every enemy's region table —
+		// the shared threat read for the 6c gate and the 6e router.
+		static int RememberedThreatAtRegion(RegionMemory regions, int index)
+		{
+			var threat = 0;
+			foreach (var enemyRegions in regions.ByEnemy.Values)
+				if (index < enemyRegions.Length && enemyRegions[index] != null)
+					threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+
+			return threat;
+		}
+
+		// 6e risk routing: coarse waypoints around remembered threat. The squad's
+		// locomotor filters out waypoints it cannot reach (region centers can land
+		// on water or cliffs).
+		List<CPos> IBotRouteThreatRouter.RouteAroundThreat(Actor leader, CPos to, int maxWaypoints)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || !Info.UseRiskRouting || regions == null || leader == null || leader.IsDead || !leader.IsInWorld)
+				return null;
+
+			var mobile = leader.TraitOrDefault<Mobile>();
+			Func<CPos, CPos, bool> reachable = null;
+			if (mobile != null)
+				reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+
+			return RegionRouter.Route(regions, leader.Location, to,
+				i => RememberedThreatAtRegion(regions, i), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
+		}
+
+		// The 6d fogged-scan switch: squads observe fog only when the master AI is
+		// configured to (UseFoggedObservation) and the map actually has shroud —
+		// the same condition Rebuild uses to fog its own snapshot.
+		bool IBotFoggedEnemyProvider.FoggedObservation =>
+			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
 		{
 			player = self.Owner;
+			fogMemory = new BotFogMemory(player, info);
 			costCountersInitialized = !player.World.IsLoadingGameSave;
 			lastDecisionTick = -Math.Max(1, info.DecisionInterval);
 			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
@@ -223,11 +315,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var ownArmy = ownActors.Where(IsCombatUnit).Sum(Value);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
 			var ownHarvesters = ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
+			var enemies = player.World.Players.Where(IsEligible)
+				.Where(p => p != player && player.RelationshipWith(p) == PlayerRelationship.Enemy)
+				.ToArray();
+			var fogged = Info.UseFoggedObservation && player.Shroud != null;
+			var regions = new RegionMemory(player.World.Map, Info.RegionCellSize);
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
-			foreach (var enemy in player.World.Players.Where(IsEligible).Where(p => p != player && player.RelationshipWith(p) == PlayerRelationship.Enemy))
+			foreach (var enemy in enemies)
 			{
 				var enemyActors = actorsByOwner.TryGetValue(enemy, out var ownedEnemyActors) ? ownedEnemyActors : Array.Empty<Actor>();
-				var profile = BuildProfile(enemy, enemyActors, ownBuildings, tick);
+				EnemyProfile profile;
+				if (fogged)
+				{
+					var visibleHarvesters = fogMemory.Observe(enemy, enemyActors, tick);
+					profile = BuildObservedProfile(enemy, fogMemory.Remembered(enemy), ownBuildings, tick);
+					profile.HarvesterCount = visibleHarvesters;
+					regions.SetRegions(enemy, BuildRegions(regions, fogMemory.Remembered(enemy)));
+				}
+				else
+				{
+					profile = BuildProfile(enemy, enemyActors, ownBuildings, tick);
+					profile.HarvesterCount = profile.Harvesters;
+					regions.SetRegions(enemy, BuildRegions(regions,
+						enemyActors.Where(a => a.Info.HasTraitInfo<IOccupySpaceInfo>())
+							.Select(a => BotFogMemory.Classify(a.Info, a.ActorID, a.Location, a.GetEnabledTargetTypes(), tick, Info))));
+				}
+
+				profile.KnownRegions = regions.KnownRegionCount(enemy);
 				profiles.Add(enemy, profile);
 			}
 
@@ -310,6 +424,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				lastIssuedCounterDemands = resolvedDemands;
 			}
 
+			var ownLiveActors = ownActors.Where(a => a.IsInWorld && !a.IsDead && a.OccupiesSpace != null).ToArray();
+			var ownLiveBuildings = ownBuildings.Where(a => a.IsInWorld && !a.IsDead && a.OccupiesSpace != null).ToArray();
+			var ownBase = ownLiveBuildings.FirstOrDefault(a => a.Info.HasTraitInfo<BaseBuildingInfo>())
+				?? ownLiveBuildings.FirstOrDefault()
+				?? ownLiveActors.FirstOrDefault();
+			var ownBaseRegionIndex = ownBase == null ? 0 : regions.IndexOf(ownBase.Location);
+			var ownNearBaseValue = ownLiveActors
+				.Where(a => IsNearRegion(regions, ownBaseRegionIndex, a.Location))
+				.Sum(Value);
+			missions = Info.PublishMissions
+				? DeriveMissions(regions, enemies, ownBaseRegionIndex, ownNearBaseValue, Info)
+				: [];
+			missionTick = tick;
+
+			var squadCount = 0;
+			var squadUnitCount = 0;
+			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
+			{
+				if (!sm.IsTraitEnabled())
+					continue;
+
+				squadCount += sm.Squads.Count;
+				squadUnitCount += sm.Squads.Sum(q => q.Units.Count);
+			}
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -318,6 +457,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Urgency = urgency,
 				Enemies = profiles,
 				Demand = demand,
+				Mission = Missions.FirstOrDefault(),
+				Regions = regions,
 				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
 				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
 				OwnArmyValue = ownArmy,
@@ -326,6 +467,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
 				OwnDeathsCostWindow = DeathsCostWindow,
+				SquadCount = squadCount,
+				SquadUnitCount = squadUnitCount,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
@@ -385,6 +528,115 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				: BotUrgency.Normal;
 		}
 
+		internal static List<BotMission> DeriveMissions(
+			RegionMemory regions,
+			OpenRA.Player[] enemies,
+			int ownBaseRegionIndex,
+			int ownNearBaseValue,
+			MasterAiBotModuleInfo info)
+		{
+			var result = new List<BotMission>();
+			foreach (var enemy in enemies ?? Array.Empty<OpenRA.Player>())
+			{
+				if (!regions.ByEnemy.TryGetValue(enemy, out var enemyRegions))
+					continue;
+
+				for (var index = 0; index < enemyRegions.Length; index++)
+				{
+					var region = enemyRegions[index];
+					if (region == null || !region.EverSeen || region.EconomyValue <= 0)
+						continue;
+
+					var denominator = (long)region.EconomyValue + region.ArmyValue + region.DefenceValue + 1;
+					var priority = (int)Math.Clamp(100L * region.EconomyValue / Math.Max(1, denominator), 0, 100);
+					if (priority < info.RaidPriorityThreshold)
+						continue;
+
+					result.Add(new BotMission
+					{
+						Type = BotMissionType.Raid,
+						Location = regions.CenterOf(index),
+						TargetPlayer = enemy,
+						RegionIndex = index,
+						RequiredValue = (int)Math.Clamp((long)(region.ArmyValue + region.DefenceValue) *
+							info.RaidForceRatioPercent / 100, 0, int.MaxValue),
+						Priority = priority
+					});
+				}
+			}
+
+			var threat = 0L;
+			var baseRow = ownBaseRegionIndex / regions.Columns;
+			var baseColumn = ownBaseRegionIndex - baseRow * regions.Columns;
+			for (var row = Math.Max(0, baseRow - 1); row <= Math.Min(regions.Rows - 1, baseRow + 1); row++)
+				for (var column = Math.Max(0, baseColumn - 1); column <= Math.Min(regions.Columns - 1, baseColumn + 1); column++)
+				{
+					var index = row * regions.Columns + column;
+					foreach (var enemyRegions in regions.ByEnemy.Values)
+						if (index < enemyRegions.Length && enemyRegions[index] != null)
+							threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+				}
+
+			var defendPriority = threat <= ownNearBaseValue
+				? 0
+				: (int)Math.Min(100, 100L * (threat - ownNearBaseValue) / (threat + 1));
+			if (defendPriority >= info.DefendPriorityThreshold)
+				result.Add(new BotMission
+				{
+					Type = BotMissionType.Defend,
+					Location = regions.CenterOf(ownBaseRegionIndex),
+					TargetPlayer = null,
+					RegionIndex = ownBaseRegionIndex,
+					RequiredValue = 0,
+					Priority = defendPriority
+				});
+
+			result.Sort(CompareMissions);
+			return result;
+		}
+
+		static int CompareMissions(BotMission left, BotMission right)
+		{
+			var comparison = right.Priority.CompareTo(left.Priority);
+			if (comparison != 0)
+				return comparison;
+
+			comparison = (left.Type == BotMissionType.Defend ? 0 : 1).CompareTo(right.Type == BotMissionType.Defend ? 0 : 1);
+			if (comparison != 0)
+				return comparison;
+
+			comparison = left.RegionIndex.CompareTo(right.RegionIndex);
+			if (comparison != 0)
+				return comparison;
+
+			comparison = string.Compare(left.TargetPlayer?.InternalName ?? "", right.TargetPlayer?.InternalName ?? "", StringComparison.Ordinal);
+			if (comparison != 0)
+				return comparison;
+
+			comparison = left.Location.X.CompareTo(right.Location.X);
+			if (comparison != 0)
+				return comparison;
+			comparison = left.Location.Y.CompareTo(right.Location.Y);
+			if (comparison != 0)
+				return comparison;
+			return left.RequiredValue.CompareTo(right.RequiredValue);
+		}
+
+		internal static bool IsNearRegion(RegionMemory regions, int regionIndex, CPos location)
+		{
+			var row = regionIndex / regions.Columns;
+			var column = regionIndex - row * regions.Columns;
+			var locationIndex = regions.IndexOf(location);
+			var locationRow = locationIndex / regions.Columns;
+			var locationColumn = locationIndex - locationRow * regions.Columns;
+			return Math.Abs(row - locationRow) <= 1 && Math.Abs(column - locationColumn) <= 1;
+		}
+
+		internal static bool ReservationActive(int reservedTick, int tick, int reservationTicks)
+		{
+			return tick >= reservedTick && tick - reservedTick <= Math.Max(0, reservationTicks);
+		}
+
 		EnemyProfile BuildProfile(OpenRA.Player enemy, Actor[] enemyActors, Actor[] ownBuildings, int tick)
 		{
 			var profile = new EnemyProfile
@@ -439,7 +691,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			profile.StealthShare = profile.ArmyValue == 0 ? 0 : Clamp(profile.StealthShare * 100 / profile.ArmyValue);
-			profile.ExpansionClusters = ClusterCount(enemyBuildings);
+			profile.ExpansionClusters = ClusterCount(enemyBuildings
+				.Where(a => a.Info.HasTraitInfo<BaseBuildingInfo>() || a.Info.HasTraitInfo<RefineryInfo>())
+				.Select(a => a.Location));
 			if (enemyBuildings.Length > 0)
 			{
 				var ownBase = ownBuildings.Where(a => a.Info.HasTraitInfo<BaseBuildingInfo>()).ToArray();
@@ -454,12 +708,125 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return profile;
 		}
 
-		int ClusterCount(Actor[] buildings)
+		EnemyProfile BuildObservedProfile(OpenRA.Player enemy, IReadOnlyCollection<ObservedActor> observed,
+			Actor[] ownBuildings, int tick)
+		{
+			var profile = new EnemyProfile
+			{
+				Player = enemy,
+				Name = enemy.InternalName,
+				FactionName = enemy.Faction?.InternalName ?? "",
+				Alive = enemy.WinState == WinState.Undefined && observed.Count > 0,
+				NearestCells = -1,
+				LastSeenTick = 0
+			};
+			var buildingLocations = new List<CPos>();
+			foreach (var actor in observed.OrderBy(a => a.ActorID))
+			{
+				if (actor.LastSeenTick > profile.LastSeenTick)
+					profile.LastSeenTick = actor.LastSeenTick;
+
+				if (actor.Building)
+					profile.BuildingCount++;
+				if (actor.Harvester)
+					profile.Harvesters++;
+
+				if (actor.Combat)
+				{
+					var value = actor.Value;
+					profile.ArmyValue += value;
+					if (actor.Aircraft)
+						profile.AirValue += value;
+					else
+					{
+						if (actor.Infantry)
+							profile.InfantryValue += value;
+						if (actor.Vehicle)
+							profile.VehicleValue += value;
+						if (actor.Naval)
+							profile.NavalValue += value;
+					}
+
+					if (actor.Cloaked)
+						profile.StealthShare += value;
+					if (ownBuildings.Any(b => (actor.Location - b.Location).Length <= Info.PressureRadius))
+						profile.PressureValue += value;
+				}
+
+				if (actor.Building)
+				{
+					buildingLocations.Add(actor.Location);
+					if (actor.Defence)
+					{
+						profile.DefenceCount++;
+						profile.DefenceValue += actor.Value;
+					}
+					if (actor.Tech)
+						profile.TechBuildings++;
+					if (actor.Production)
+						profile.ProductionBuildings++;
+					if (actor.Refinery)
+						profile.Refineries++;
+				}
+			}
+
+			profile.StealthShare = profile.ArmyValue == 0 ? 0 : Clamp(profile.StealthShare * 100 / profile.ArmyValue);
+			profile.ExpansionClusters = ClusterCount(observed.Where(a => a.Building && (a.BaseBuilding || a.Refinery)).Select(a => a.Location));
+			if (buildingLocations.Count > 0)
+			{
+				var ownBase = ownBuildings.Where(a => a.Info.HasTraitInfo<BaseBuildingInfo>()).ToArray();
+				var baseActors = ownBase.Length > 0 ? ownBase : ownBuildings.Take(1).ToArray();
+				if (baseActors.Length > 0)
+				{
+					var ownCenter = new CPos(baseActors.Sum(a => a.Location.X) / baseActors.Length,
+						baseActors.Sum(a => a.Location.Y) / baseActors.Length);
+					profile.NearestCells = buildingLocations.Min(l => (l - ownCenter).Length);
+				}
+			}
+			return profile;
+		}
+
+		RegionMemory.Region[] BuildRegions(RegionMemory regions, IEnumerable<ObservedActor> observed)
+		{
+			var cells = new RegionMemory.Region[regions.CellCount];
+			foreach (var actor in observed.OrderBy(a => a.ActorID))
+			{
+				var index = regions.IndexOf(actor.Location);
+				var region = cells[index] ??= new RegionMemory.Region();
+				if (actor.Combat)
+					region.ArmyValue += actor.Value;
+				if (actor.Defence)
+					region.DefenceValue += actor.Value;
+				if (actor.AntiAir)
+					region.AntiAirValue += actor.Value;
+				if (actor.Harvester || actor.Refinery)
+					region.EconomyValue += actor.Value;
+				region.EverSeen = true;
+				if (actor.LastSeenTick > region.LastSeenTick)
+					region.LastSeenTick = actor.LastSeenTick;
+			}
+
+			var shroud = player.Shroud;
+			for (var i = 0; i < cells.Length; i++)
+			{
+				if (cells[i] == null)
+				{
+					if (shroud.IsVisible(regions.CenterOf(i)))
+						cells[i] = new RegionMemory.Region { EverSeen = true };
+				}
+				else if (!cells[i].EverSeen && shroud.IsVisible(regions.CenterOf(i)))
+					cells[i].EverSeen = true;
+			}
+
+			return cells;
+		}
+
+		int ClusterCount(IEnumerable<CPos> buildingLocations)
 		{
 			var seeds = new List<CPos>();
-			foreach (var building in buildings.Where(a => a.Info.HasTraitInfo<BaseBuildingInfo>() || a.Info.HasTraitInfo<RefineryInfo>()))
-				if (!seeds.Any(seed => (building.Location - seed).Length <= Info.ClusterRadius))
-					seeds.Add(building.Location);
+			foreach (var location in buildingLocations)
+				if (!seeds.Any(seed => (location - seed).Length <= Info.ClusterRadius))
+					seeds.Add(location);
 			return seeds.Count;
 		}
 

@@ -541,7 +541,9 @@
       "requires": "rank-elite",
       "slot": "Armament@AAELITE",
       "versus_templates": [
-       "HarbingerChainguns"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1794,7 +1796,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "BlackWidowPistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -1868,7 +1872,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "BlackWidowPistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -1886,9 +1892,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
-      "versus_templates": [
-       "TanyaAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SEALAttach",
       "weapon_class_source": "none"
@@ -2007,7 +2011,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium_Flat",
@@ -2026,30 +2030,19 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "CannonAttackRobotGun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "CannonAttackRobotGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2946,10 +2939,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2957,10 +2946,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -3024,7 +3009,9 @@
       "requires": "deployed && !rank-elite",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3051,7 +3038,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3079,7 +3068,9 @@
       "requires": "!deployed && rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "FutureJavelinRockets"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3108,7 +3099,9 @@
       "requires": "deployed && rank-elite",
       "slot": "Armament@ELITE2",
       "versus_templates": [
-       "FutureJavelinRocketsDeployed"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -3137,7 +3130,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "FutureJavelinRocketsDeployed"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4547,9 +4542,7 @@
       "range": "17500",
       "reloaddelay": "150",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "RA2CarrierTarget"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "BeehiveCarrierTarget",
       "weapon_class_source": "none"
@@ -4670,9 +4663,7 @@
       "range": "7500",
       "reloaddelay": "125",
       "slot": "Armament@Support",
-      "versus_templates": [
-       "Future_CoilerFriend"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "Future_CoilerFriendMain",
       "weapon_class_source": "none"
@@ -5026,7 +5017,9 @@
       "requires": "!deployed && rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "GuardianTankCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5061,9 +5054,7 @@
       "reloaddelay": "4",
       "requires": "deployed && rank-elite",
       "slot": "Armament@debuffelite",
-      "versus_templates": [
-       "Future_MBT_DebuffLaser"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser_elite",
       "weapon_class_source": "none"
@@ -5376,18 +5367,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "150000",
+        "damage": "151000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "30",
@@ -5398,20 +5382,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
       "requires": "rank-elite",
       "slot": "Armament@elite",
-      "versus_templates": [
-       "OrionRailgun"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "OrionRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6477,7 +6457,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -6930,9 +6912,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -6947,9 +6927,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -7140,7 +7118,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7308,7 +7288,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -7335,7 +7317,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",

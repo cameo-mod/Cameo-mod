@@ -145,12 +145,34 @@ AsianFlameFragment:
 		AimTargetStances: Enemy, Neutral
 
 AsianFlameFragment2:
-	Inherits: AsianFlameFragment
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ReloadDelay: 20
+	Range: 2000
+	Warhead@Flame_Light:
+		Damage: 2000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	-Warhead@FireShrapnel:
 	Range: 3000
 
 AsianOilBombFragments:
-	Inherits: AsianFlameFragment
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ReloadDelay: 20
+	Range: 2000
+	Warhead@Flame_Light:
+		Damage: 2000
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment2
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	ReloadDelay: 15
 	Range: 5000
 	Projectile: Bullet
@@ -502,7 +524,10 @@ SteelIonCannonDamage:
 		InvalidTargets: Vehicle, Building, wall
 		Size: 3
 		Delay: 3
-
+	Warhead@Tesla_Super:
+		Damage: 400000
+	-Warhead@Tesla_Heavy_ExtraDamage:
+	-Warhead@Tesla_Super_ExtraDamage:
 SteelHoverMissile_elite:
 	Inherits@finalmain: ^Warhead_MissileAP_Light_Flat
 	Inherits: SteelHoverMissile
@@ -779,7 +804,6 @@ Support_EMP_Bomb:
 		InvalidTargets: Infantry
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
 		Damage: 500000
 		Spread: 10000
 		InvalidTargets: Infantry
@@ -1607,7 +1631,16 @@ NaxZombieSpawner:
 		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 
 NaxZombieSpawnerFrank:
-	Inherits: NaxZombieSpawner
+	Projectile: InstantHit
+	Warhead@Effect: CreateEffect
+		Explosions: virusreversed
+		ExplosionPalette: ra2effect
+		ImpactSounds: gvirexpa.wav, gvirexpb.wav
+		ValidTargets: Ground, Air
+	Warhead@Effect2: CreateEffect
+		AffectsParent: true
+		ImpactActors: false
+		ImpactSounds: ra2m_shared_sounds|nax_zmove1.wav, ra2m_shared_sounds|nax_zmove2.wav
 
 NaxZombieSupportWeapon:
 	Projectile: InstantHit
@@ -1694,9 +1727,45 @@ NaxZombieSupportWeaponTanks:
 		ValidTargets: Ground, Air
 
 NaxTorpTube:
-	Inherits: RA2TorpTube
-	Warhead@EffectWater: CreateEffect
-		ImpactSounds: ra2m_shared_sounds|nax_submissileexp.wav
+	Inherits@xRA2TorpTube0: ^Warhead_MissileAP_Heavy
+	Inherits@xRA2TorpTube1: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
+	ReloadDelay: 90
+	Range: 9000
+	Report: vbooat2a.wav
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile:
+	Projectile: Missile
+		Image: Patriot
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 2
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 90
+		MinimumLaunchSpeed: 90
+		Speed: 180
+		Acceleration: 1
+		HorizontalRateOfTurn: 5
+		RangeLimit: 18000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@Demolition_Light:
+		Damage: 18000
+	Warhead@MissileAP_Heavy:
+		Damage: 18000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_Heavy_Flat:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
 	Warhead@Effect:
 		Explosions: ra2_large_clsn
 		ImpactSounds: gexp14a.wav
@@ -1751,17 +1820,148 @@ NaxTorpTube:
 			Plate: 12
 			Flak: 11
 			None: 10
+	# W7MAT inline of RA2TorpTube
+	Warhead@EffectWater: CreateEffect
+		ImpactSounds: ra2m_shared_sounds|nax_submissileexp.wav
+	Warhead@Effect:
+		Explosions: ra2_large_clsn
+		ImpactSounds: gexp14a.wav
+		ExplosionPalette: tseffect
+	Warhead@MissileAP_Heavy_Flat: AreaDamage
+	Warhead@MissileAP_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 85
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+			FlyingInfantry: 94
+			CyborgLight: 78
+			CyborgMedium: 96
+			CyborgHeavy: 114
+			CyborgHeroic: 95
+			AntiAirInfantry: 63
+			AntiAirVehicle: 119
+			AntiAirBuilding: 93
+			ShipLight: 86
+			ShipMedium: 115
+			ShipHeavy: 108
+			ShipSuperheavy: 115
+			AntiAirShip: 99
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			FlyingInfantry: 16
+			CyborgLight: 15
+			CyborgMedium: 16
+			CyborgHeavy: 17
+			CyborgHeroic: 18
+			AntiAirInfantry: 10
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
 
 Nax120mmCorrosion:
-	Inherits: RA2120mm
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
 	Inherits@Corrosion: ^NaxOxidationShells
 
 Nax120mmCorrosion_elite:
-	Inherits: RA2120mm_elite
+	Inherits@xRA2120mm0: ^Warhead_CannonHE_Medium
+	Inherits@xRA2120mm1: ^Projectile_Shell_Medium
+	Inherits@xRA2120mm2: ^Effect_Explosion_Medium_RA2
+	Range: 5374
+	ReloadDelay: 54
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Projectile: Bullet
+		Speed: 514
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	# W7MAT inline of RA2120mm
+	Range: 6374
+	Burst: 2
+	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiHetzerDestroyerCorrosion:
-	Inherits: NaxiHetzerDestroyer
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
+	Report: cannon1.aud
+	ReloadDelay: 80
+	Range: 7132
+	Projectile: Bullet
+		Speed: 713
+	Warhead@CannonAP:
+		Damage: 40000
+		Heaviness: 0
 	Inherits@Corrosion: ^NaxOxidationShells
 	Report: cannon1.aud
 
@@ -1823,12 +2023,38 @@ NaxiJadgDestroyerCorrosion:
 			Fighter: 1
 
 NaxiAntiTankCannonCorrosion:
-	Inherits: NaxiAntiTankCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
+	ReloadDelay: 75
+	Range: 7361
+	Report: ra2m_naxis_sounds|nax_hotwizer.wav
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	Warhead@CannonAP:
+		Damage: 28000
+		Heaviness: 0
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiAlienPistol:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
-	Inherits: Lunar_Green105mm
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@ShieldHit:
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@EMPUnit:
 	Report: ra2m_shared_sounds|nax_aliengun.wav
 	Range: 2777
 	ReloadDelay: 54
@@ -1842,38 +2068,11 @@ NaxiAlienPistol:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		Versus:
-			None: 125
-			Light: 25
-			Medium: 50
-			Heavy: 75
-			Superheavy: 100
-			Scout: 10
-			Plate: 175
-			Concrete: 10
-			Wood: 10
-			Steel: 10
-			Flak: 150
-			Heroic: 200
-			Bomber: 10
-			Fighter: 10
-			Helicopter: 10
-			Spaceship: 10
-			ARMOR: 70
-			BLAST: 98
-			COMPOSITE: 72
-			HAZMAT: 61
-			REFLECTOR: 51
-			Shield: 300
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	-Warhead@CannonHE_Medium:
 	-Warhead@TeslaWeapon:
-	-Warhead@Tesla_Heavy_Flat:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -1882,11 +2081,61 @@ NaxiAlienPistol:
 	Warhead@EMPUnit:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
-	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
+	TargetActorCenter: true
+	Projectile: ScaledBullet
+		Image: 120MM
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Laser_Heavy_Flat:
+		Damage: 32000
 NaxiV1Rocket:
 	Inherits: Atomic
 	Report: vaegatta.wav, vaegattb.wav
@@ -1909,7 +2158,9 @@ NaxiV1Rocket:
 		GlowScale: 15.0
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 15
-
+	Warhead@Nuclear_Super:
+		Damage: 600000
+	-Warhead@Tesla_Super_ExtraDamage:
 NaxiMeteorBlitzkriegActivate:
 	Warhead@1Dam: FireFragment
 		Weapon: NaxiMeteorBlitzkriegDamage
@@ -1949,9 +2200,7 @@ NaxiMeteorSpawner:
 	Warhead@1: FireFragment
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteorSpreader
-		AimChance: 23
 		ImpactActors: false
-		TargetActorCenter: true
 
 NaxiMeteorSpawner2:
 	Projectile: InstantHit
@@ -1964,7 +2213,6 @@ NaxiMeteorSpawner2:
 		Weapon: NaxiMeteorSpreader
 		AimChance: 13
 		ImpactActors: false
-		TargetActorCenter: false
 
 NaxiMeteorSpreader:
 	Range: 10000
@@ -2002,7 +2250,6 @@ NaxiMeteor:
 		GlowFadeInFrames: 12
 	Warhead@MeteorFlameFragment: FireShrapnel
 		Weapon: MeteorFlameFragment
-		Range: 4
 		Amount: 4
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
@@ -2937,7 +3184,6 @@ LatinBuggyRocket_elite:
 		Amount: 1
 		AimChance: 50
 		ImpactActors: false
-		TargetActorCenter: true
 
 12MissilesSpawner2:
 	Projectile: InstantHit
@@ -2950,7 +3196,6 @@ LatinBuggyRocket_elite:
 		Amount: 1
 		AimChance: 50
 		ImpactActors: false
-		TargetActorCenter: true
 
 12MissilesSpreaderScud:
 	Range: 9000

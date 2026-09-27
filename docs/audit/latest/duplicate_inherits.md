@@ -912,18 +912,6 @@ OILB.Husk:
     -> oilb.husk -> ^techbuildinghusk -> ^techbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> oilb.husk -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-OILB.RA2:
-  parent ^^ ^globalbounty  (2 paths)
-    -> oilb.ra2 -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> oilb.ra2 -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> oilb.ra2 -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> oilb.ra2 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> oilb.ra2 -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> oilb.ra2 -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> oilb.ra2 -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
 PLYMOUTH_AGRIDOME:
   parent ^^ ^globalbounty  (2 paths)
     -> plymouth_agridome -> ^op2baseagridome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -6486,13 +6474,13 @@ cabal_mothership:
 
 cabal_navalyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> cabal_navalyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cabal_navalyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> cabal_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> cabal_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> cabal_navalyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> cabal_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> cabal_navalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> cabal_navalyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> cabal_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> cabal_navalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 cabal_obeliskofdarkness:
@@ -6653,14 +6641,14 @@ cabal_overkillgunship:
 
 cabal_pillbox:
   parent ^^ ^globalbounty  (2 paths)
-    -> cabal_pillbox -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cabal_pillbox -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> cabal_pillbox -> ^tsra2defense -> ^tsra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> cabal_pillbox -> ^tsra2defense -> ^tsra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^disabledoverlay  (2 paths)
-    -> cabal_pillbox -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> cabal_pillbox -> ^tsra2defense -> ^tsra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> cabal_pillbox -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-  parent ^^ ^gainsexperiencera2  (2 paths)
-    -> cabal_pillbox -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
-    -> cabal_pillbox -> Inherits@EXPERIENCE:^GainsExperienceRA2
+  parent ^^ ^tsgainsexperiencera2  (2 paths)
+    -> cabal_pillbox -> ^tsra2defense -> Inherits@exp:^TSGainsExperienceRA2
+    -> cabal_pillbox -> Inherits@EXPERIENCE:^TSGainsExperienceRA2
 
 cabal_plasmasub:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -6936,8 +6924,8 @@ cabal_techcenter:
 
 cabal_tiberiumharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cabal_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cabal_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> cabal_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> cabal_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 cabal_widow:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -10149,13 +10137,13 @@ forgotten_mutantsoldier_sp:
 
 forgotten_navalyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> forgotten_navalyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> forgotten_navalyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> forgotten_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> forgotten_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> forgotten_navalyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> forgotten_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> forgotten_navalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> forgotten_navalyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> forgotten_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> forgotten_navalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 forgotten_nomadbarracks:
@@ -10652,8 +10640,8 @@ forgotten_tiberianfiend_wild:
 
 forgotten_tiberiumharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> forgotten_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> forgotten_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> forgotten_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> forgotten_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 forgotten_tiberiumspike:
   parent ^^ ^globalbounty  (2 paths)
@@ -27212,6 +27200,18 @@ ra2_lt_sgn04:
     -> ra2_lt_sgn04 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ra2_lt_sgn04 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
+ra2_oilderrick:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra2_oilderrick -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_oilderrick -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra2_oilderrick -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_oilderrick -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ra2_oilderrick -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_oilderrick -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra2_oilderrick -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra2_ptruck:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_ptruck -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -39278,22 +39278,22 @@ ts_bus_driveby:
 
 ts_ctpyr01:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_ctpyr01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr01 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_ctpyr01 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ts_ctpyr02:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_ctpyr02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr02 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_ctpyr02 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ts_ctpyr03:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_ctpyr03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr03 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_ctpyr03 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ts_ctvega:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_ctvega -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctvega -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_ctvega -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ts_gdi_amphibiousapc:
@@ -40303,13 +40303,13 @@ ts_gdi_mobilesensorarray:
 
 ts_gdi_navalyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> ts_gdi_navalyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ts_gdi_navalyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ts_gdi_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ts_gdi_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_gdi_navalyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_gdi_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_gdi_navalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ts_gdi_navalyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ts_gdi_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ts_gdi_navalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ts_gdi_orcabomber:
@@ -40709,8 +40709,8 @@ ts_gdi_techcenter:
 
 ts_gdi_tiberiumharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ts_gdi_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ts_gdi_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_gdi_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_gdi_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ts_gdi_tiberiumrefinery:
   parent ^^ ^globalbounty  (2 paths)
@@ -41684,13 +41684,13 @@ ts_nod_mobilestealthgenerator:
 
 ts_nod_navalyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> ts_nod_navalyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ts_nod_navalyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ts_nod_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ts_nod_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ts_nod_navalyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_nod_navalyard -> ^tsra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ts_nod_navalyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ts_nod_navalyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ts_nod_navalyard -> ^tsra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ts_nod_navalyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ts_nod_obeliskoflight:
@@ -42141,8 +42141,8 @@ ts_nod_techcenter:
 
 ts_nod_tiberiumharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ts_nod_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ts_nod_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_nod_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_nod_tiberiumharvester -> ^tstdharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ts_nod_tiberiumrefinery:
   parent ^^ ^globalbounty  (2 paths)
@@ -42442,666 +42442,666 @@ tsaegis:
 
 tsbboard01:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard01 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard01 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard01 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard01 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard01 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard02:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard02 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard02 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard02 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard02 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard02 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard03:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard03 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard03 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard03 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard03 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard03 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard04:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard04 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard04 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard04 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard04 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard04 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard04 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard05:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard05 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard05 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard05 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard05 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard05 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard05 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard06:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard06 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard06 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard06 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard06 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard06 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard06 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard07:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard07 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard07 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard07 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard07 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard07 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard07 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard08:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard08 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard08 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard08 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard08 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard08 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard08 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard09:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard09 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard09 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard09 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard09 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard09 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard09 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard10:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard10 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard10 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard10 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard10 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard10 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard10 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard11:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard11 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard11 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard11 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard11 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard11 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard11 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard12:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard12 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard12 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard12 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard12 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard12 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard12 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard13:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard13 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard13 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard13 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard13 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard13 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard13 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard14:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard14 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard14 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard14 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard14 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard14 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard14 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard15:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard15 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard15 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard15 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard15 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard15 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard15 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsbboard16:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsbboard16 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard16 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tsbboard16 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsbboard16 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard16 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsbboard16 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tscity01:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity01 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity01 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity01 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity01 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity02:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity02 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity02 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity02 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity02 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity03:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity03 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity03 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity03 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity03 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity04:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity04 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity04 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity04 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity04 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity05:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity05 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity05 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity05 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity05 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity06:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity06 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity06 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity06 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity06 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity07:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity07 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity07 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity07 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity07 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity08:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity08 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity08 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity08 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity08 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity09:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity09 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity09 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity09 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity09 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity10:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity10 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity10 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity10 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity10 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity11:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity11 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity11 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity11 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity11 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity12:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity12 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity12 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity12 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity12 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity13:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity13 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity13 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity13 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity13 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity14:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity14 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity14 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity14 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity14 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity15:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity15 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity15 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity15 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity15 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity16:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity16 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity16 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity16 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity16 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity17:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity17 -> ^ra24x3garrison -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity17 -> ^tsra24x3garrison -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity17 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity17 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity18:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity18 -> ^ra24x3garrison -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity18 -> ^tsra24x3garrison -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity18 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity18 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity19:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity19 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity19 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity19 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity19 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tscity20:
   parent ^^ ^1x1shape  (2 paths)
-    -> tscity20 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tscity20 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tscity20 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity20 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity20 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tscity20 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tscity21:
   parent ^^ ^1x1shape  (2 paths)
-    -> tscity21 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tscity21 -> ^tsra2civprop -> ^building -> Inherits@shape:^1x1Shape
     -> tscity21 -> Inherits@shape:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity21 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity21 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tscity21 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tscity22:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tscity22 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tscity22 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tscity22 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tscity22 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0001:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0001 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0001 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0001 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0001 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0002:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0002 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0002 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0002 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0002 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0003:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0003 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0003 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0003 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0003 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0004:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0004 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0004 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0004 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0004 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0005:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0005 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0005 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0005 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0005 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0006:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0006 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0006 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0006 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0006 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0007:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0007 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0007 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0007 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0007 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0008:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0008 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0008 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0008 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0008 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0009:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0009 -> ^ra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0009 -> ^tsra22x2garrison -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0009 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0009 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0010:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0010 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0010 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0010 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0010 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0011:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0011 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0011 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0011 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0012:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0012 -> ^ra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0012 -> ^tsra23x3garrison -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0012 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0012 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0013:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0013 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0013 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0013 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0014:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
-    -> tsct0014 -> ^ra21x1garrison -> Inherits@2x2:^1x1Shape
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> tsct0014 -> ^tsra21x1garrison -> Inherits@2x2:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0014 -> ^ra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0014 -> ^tsra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0014 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0014 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0015:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
-    -> tsct0015 -> ^ra21x1garrison -> Inherits@2x2:^1x1Shape
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> tsct0015 -> ^tsra21x1garrison -> Inherits@2x2:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0015 -> ^ra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0015 -> ^tsra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0015 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0015 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0016:
   parent ^^ ^1x1shape  (2 paths)
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
-    -> tsct0016 -> ^ra21x1garrison -> Inherits@2x2:^1x1Shape
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> tsct0016 -> ^tsra21x1garrison -> Inherits@2x2:^1x1Shape
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> tsct0016 -> ^ra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0016 -> ^tsra21x1garrison -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^shroudable  (2 paths)
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
-    -> tsct0016 -> ^ra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> tsct0016 -> ^tsra2civbuilding -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 tsct0017:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0017 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0017 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0017 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0018:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0018 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0018 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0018 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0019:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0019 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0019 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0019 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0020:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0020 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0020 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0020 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsct0021:
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> tsct0021 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsct0021 -> ^tsra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> tsct0021 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tsctarmr:

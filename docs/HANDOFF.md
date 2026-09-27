@@ -1,5 +1,563 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
+
+`Agent: NOVA · lane: AI architecture / assign layer · branch devin/nova/ai-missions-7a · based on master e9d500212`
+
+Phase 7a adds the first assign-layer seam without changing unit ownership:
+
+* `BotMission` and `IBotMissionProvider` live at the CA assembly boundary. The master publishes
+  ordered, fog-honest `Raid` and `Defend` intent from `RegionMemory`; it does not grant
+  conditions or issue unit orders.
+* `SquadManagerBotModuleCA` remains the sole owner of attack-force formation. It may hold a
+  ready force briefly for a defend mission or focus a newly formed raid on the mission region,
+  but it never moves units between existing squads. Reservations are advisory unsynchronized
+  state.
+* `Recon` remains with `ScoutBotModule` and `Secure` is deferred. Phase 7b is mission bidding;
+  phase 7c adds Secure plus Fransbot anchors/rejoin.
+
+Situation records are schema 2 and include the published mission type, priority, and region
+index. The mission contract is intent, not command: future consumers must preserve one execution
+owner per unit.
+
+## 2026-09-27 — NOVA: I own the AI architecture; Claude's groundwork queue is on master (`590752075`)
+
+`Agent: NOVA · lane: AI architecture / bot-module coherence · merge queue nova/merge-queue-20260927 → master`
+
+The maintainer put me in charge of the bot-AI architecture: the five bot-module
+sources (Cameo, Romanov's Vengeance, Combined Arms, Crystallized Nexus,
+Fransbot) have to end up as one layered system, not five systems sharing a
+process. I reviewed and landed Claude's groundwork for that, independently
+verified rather than taken on description:
+
+* **#573** architecture + pack tools, **#574** ContentPack AI rows, **#575**
+  report-only `BotRoleSets`, **#570** Frankenstein 6g symbols, **#576** CA
+  vector codemod — all merged, in that order.
+
+Three findings that matter to anyone working these files:
+
+1. **#574 is content-identical, but not resolved-rules-identical in
+   combination.** My own dump, own engine build: `before=7054 after=7067
+   only-before=0 only-after=13 changed=0`. All 13 extra keys are
+   `/BotRoleSets/*` from #575; the moved rows themselves lose nothing and
+   change nothing. Anyone re-verifying the combined tree should expect 7067,
+   not the 7054 in #574's body.
+2. **`compare_resolved.py` cannot see row order** — it sorts siblings. Moving
+   rows into packs *does* reorder them. That is safe only because the two
+   consumers (`BaseBuilderQueueManagerCA`, `UnitBuilderBotModuleCA`) shuffle
+   with `world.LocalRandom` rather than treating declaration order as
+   priority. If you ever add a consumer that walks these dictionaries in
+   order, the pack split becomes a behaviour change and the comparator will
+   not tell you.
+3. **Never run `ai_bot_player_gate` and `ai_squad_gate` concurrently.** They
+   append to the same `Logs/cameo-ai-situations.jsonl`, and interleaved
+   records make the ticks look non-monotonic — the gate then fails with
+   `HardBot situation record ticks are not strictly increasing` and blames
+   your branch. Run them sequentially, moving the log aside first. This cost
+   me a false regression.
+
+Verified on the pushed master head: engine 0/0, Cameo 0 errors (8 pre-existing
+analyzer warnings), 258/258 tests, squad gate PASS (3 squads / 8 units),
+bot-player gate PASS, all four audits PASS, `boot-test.cmd` PASS, module map
+current.
+
+**The architecture I am holding the lane to** (full version in
+`docs/design/AI_ARCHITECTURE.md` and `AI_SYNTHESIS.md`) — one owner per
+decision, four layers:
+
+* **Sense**: fog memory, `BotSituation`, `ScoutBotModule`, CN combat analysis.
+  Producers only; they publish, they never decide.
+* **Decide**: `MasterAiBotModule` (unsynced, observes and publishes) feeding
+  the synced `BotPersonalityController` / `BotCounterDemandController`, which
+  are the *only* things that grant conditions. Unsynced code must never touch
+  a synced condition directly — that is the rule CN's profile switcher
+  violates, which is why its scoring gets ported into our synced controller
+  instead of its code being vendored.
+* **Assign**: not built yet. This is the Fransbot mission/bid/broker layer
+  (`RECON`/`RAID`/`SECURE`/`DEFEND` + anchors) and it is the next real piece
+  of architecture. Until it exists, CA squads self-assign.
+* **Execute**: CA squads, RV guerrilla, our artillery/risk routing. One
+  execution owner per unit, always.
+
+Instructions to the fleet: do not add a second personality switcher, a second
+`UnitCompositionsBotModule` (it throws), or a second assignment authority —
+bring it to me and it becomes a layer instead of a rival. Fransbot commanders
+get evaluated side by side against CA squads on match data before anything is
+replaced. EMBER's 6a–6f work is the sense/execute half of this and needs no
+rework.
+
+## 2026-09-27 — EMBER: AI phase 6f part 1 — artillery attach on `devin/ember/ai-waves-6f`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-waves-6f · stacked on the 6e merge`
+
+Phase 6f of `docs/design/AI_FRANSBOT_RESEARCH.md` (coordinated waves), first
+piece — CN A2/A6 artillery attachment:
+
+* **`SquadCAType.Artillery`** — new squad type. `CreateAttackForce` peels
+  long-range units out of the rush squad into a trailing artillery squad;
+  orphaned artillery squads re-attach to each new assault (so a save-load keeps
+  working — `SquadCA.Parent` is deliberately runtime-only).
+* **Rules-derived classification** — `IsArtilleryUnit` asks the unit's
+  `AttackBase.GetMaximumRange()` against `ArtilleryMinRangeCells` (default
+  10); no actor ids anywhere, every faction's long-range unit qualifies
+  automatically. Air/naval units never reach the pool (they diverte earlier).
+* **`ArtilleryUnitsIdleStateCA`** — trails `Parent` (nearest living Rush
+  squad). When the parent has a valid target, the squad's own `Target` mirrors
+  it: in-range units `Attack`, out-of-range units `AttackMove` to the
+  hang-back anchor — the assault squad does the closing so artillery keeps its
+  range advantage. The parent's target is fog-honest by construction (6d), so
+  artillery only ever fires at what the assault actually sees. No parent → the
+  squad just acts as a regular assault squad.
+* Seam: `public static HangBackAnchor(parentPos, targetPos, hangBackLength)`
+  — unit tests pin the away-from-target offset and the colocated degenerate.
+* Deferred to later 6f parts: wave staging/rally (`AttackWaveStagingProgressPercent`-
+  style) and support-follow squads (medics/repair).
+
+Verification: 248/248 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
+## 2026-09-27 — EMBER: AI phase 6e — risk routing on `devin/ember/ai-route-6e`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-route-6e · stacked on the 6d merge`
+
+Phase 6e of `docs/design/AI_FRANSBOT_RESEARCH.md` (risk-aware routing) — the
+last phase-6 item; the fog programme is now complete.
+
+* **`IBotRouteThreatRouter`** (new, `OpenRA.Mods.CA/Traits/BotModules/`):
+  `RouteAroundThreat(leader, to, maxWaypoints)` — the assembly-boundary seam.
+  Implemented by `MasterAiBotModule`; yaml knobs `UseRiskRouting` (default
+  true) and `RiskRoutingThreatWeight` (1000 = one region-hop of cost) sit on
+  the master, and the squad manager adds `UseRiskRouting` for per-bot opt-out.
+* **`RegionRouter`** (new, Cameo): a pure 4-connected A* over
+  `RegionMemory` — enter-cost 1 + threat/weight, start and goal regions never
+  charged (the 6c gate decides whether to go, the router only decides how).
+  Emits interior region centers + the exact target, decimated to maxWaypoints;
+  a locomotor reachability filter drops waypoints on water/cliffs.
+* **Consumers**: `GroundUnitsAttackMoveStateCA` fills `currentRoute` from the
+  router for non-guerrilla squads before falling back to
+  `AIUtils.FindDistinctRoutes`; existing waypoint advance (proximity or the
+  625-tick timeout) and orders are reused unchanged.
+* Seam: `RegionRouter.Route` is static/pure — unit tests cover same-region
+  null, direct-vs-threat-wall routing, uncharged goal threat, the waypoint cap
+  and the reachability filter.
+
+Verification: 244/244 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
+## 2026-09-27 — EMBER: AI phase 6d — fogged squad scans on `devin/ember/ai-fog-6d`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-fog-6d · stacked on the 6c merge`
+
+Phase 6d of `docs/design/AI_FRANSBOT_RESEARCH.md` (squad target scans honour
+fog): the last `World.Actors` omniscience leak is closed.
+
+* **`IBotFoggedEnemyProvider`** (new, `OpenRA.Mods.CA/Traits/BotModules/`):
+  one-member interface, `FoggedObservation` — implemented by
+  `MasterAiBotModule` as `UseFoggedObservation && Shroud != null`, the same
+  condition its snapshot uses. No provider / disabled trait → legacy scans run
+  unchanged (the 10.1 degradation rule).
+* **`SquadManagerBotModuleCA`**: `FoggedScans` +
+  `IsPreferredObservedEnemyUnit` (preferred AND viewable). In fogged mode
+  `FindClosestEnemy`/`FindHighValueTarget` drop the omniscient building/any
+  fallbacks to visible-only; state scans in Ground/Navy/Air/StateBase use the
+  observed filter. `RespondToAttack` still records the defence-center ping (a
+  hit is legitimate intel) but no longer assigns an unseen attacker as a chase
+  target.
+* **Frozen-actor fallback**: when nothing is visible, `FindNewTarget` (ground)
+  and `NavyUnitsIdleState` commit to a `Target.FromFrozenActor` — the
+  `FrozenActorLayer` already remembers buildings and self-invalidates when a
+  re-observed cell is empty. Remembered MOBILE units deliberately produce no
+  attack target (a stale position cannot invalidate a `Target.FromCell`) —
+  scouts re-observe them instead.
+* `CheckReachability` gained a `CPos` overload; squad states dereference
+  `owner.Target.CenterPosition` (works for actor/frozen/terrain) instead of
+  `TargetActor` which is null for non-actor targets.
+* Seam: `public static FoggedScansActive(traitDisabled, providers)` — unit
+  tests pin the degradation cases plus the master/provider contract.
+
+Verification: 238/238 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
+## 2026-09-27 — EMBER: AI phase 6c — pre-commit risk gate on `devin/ember/ai-risk-6c`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-risk-6c · stacked on the 6b merge`
+
+Phase 6c of `docs/design/AI_FRANSBOT_RESEARCH.md` (the CN C4 "pre-commit risk
+test"):
+
+* **`IBotRegionThreatProvider`** (new, `OpenRA.Mods.CA/Traits/BotModules/`): a
+  fog-honest `RememberedEnemyThreatAt(CPos)` — the assembly boundary is crossed
+  by interface exactly like `IBotMainTargetProvider`. Implemented by
+  `MasterAiBotModule` (remembered Army+Defence value in the cell's region —
+  AntiAir excluded, this gate is ground-only) and `ScoutBotModule` (scout-loss
+  `DangerByRegion` marks). Unknown regions read 0 and never block.
+* **`SquadManagerBotModuleCA`**: new yaml knob `AttackRiskMargin` (percent,
+  default 25, negative disables). A proactive squad only commits when
+  `squadValue * 100 >= threat * (100 + margin)`; rejections are BotDebug-logged
+  with both values (the CN lesson: log the data before trusting the check).
+* **Scope**: gated overloads of `FindClosestEnemy`/`FindHighValueTarget` are
+  used ONLY by `GroundUnitsIdleStateCA`'s `FindNewTarget` — mid-fight retargets
+  (`GroundUnitsAttackState`), protection squads, air and naval paths stay
+  ungated. A squad with every candidate over-gated simply holds (retries next
+  tick when memory shifts).
+* Seam: `public static PassesRiskGate(attackerValue, threat, margin)` — unit
+  tests pin the boundary (exactly-1.25x passes, 1.249x fails, threat-0 always
+  passes, negative margin disables).
+
+Verification: 235/235 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+## 2026-09-27 — EMBER: AI phase 6b — ScoutBotModule on `devin/ember/ai-scout-6b`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-scout-6b · stacked on the 6a merge`
+
+Phase 6b of `docs/design/AI_FRANSBOT_RESEARCH.md` is implemented in
+`OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs`:
+
+* **Claims** up to `MaxScouts` (2) cheap scouts out of the squad manager's shared
+  `unitsHangingAroundTheBase` pool — `UpdatedIdleBaseUnits` hands out the live
+  list, so `Remove` is a real claim that keeps scouts out of attack sweeps.
+  Scout types are yaml-listed (`ScoutUnitTypes` on the module in
+  `mods/cameo/ai/ai.yaml`), never hard-coded in C#; a faction whose pack is not
+  loaded is skipped via `Rules.Actors.TryGetValue` (indexing throws).
+* **Production path**: when the pool yields nothing, the module requests one of
+  its listed types through `IBotRequestUnitProduction` (skips types already
+  requested and queues that cannot build them).
+* **Targeting** = staleness x interest minus danger minus distance over
+  `Situation.Regions`: staleness is per-region last-seen age (never-seen counts
+  as fully stale), interest is remembered enemy Army+Defence+Economy value plus
+  `ResourceSiteBonus` on regions containing a `ResourceMapBotModule` cluster.
+  One scout per region (`taken` set), `Move` orders only, `RetargetTicks`
+  recycle.
+* **Scout loss is information**: `IBotRespondToAttack` records the attacker's
+  `ValuedInfo.Cost` into `DangerByRegion` (decays after `DangerDecayTicks`),
+  published read-only as the 6c risk gate's input.
+* The scoring loop is a static seam (`PickScoutRegion`) — three unit tests pin
+  stalest-wins, taken-skipping, interest-vs-danger and the exhausted case.
+
+Verification: 232/232 unit tests green (incl. the #546 heaviness-mirror repair
+this branch was rebased onto), `ai_bot_player_gate` PASS, boot-gate PASS.
+**Note for 6c**: read `DangerByRegion` via `player.PlayerActor
+.TraitOrDefault<ScoutBotModule>()` — gated on `genericbot` like the master.
+## 2026-09-27 — DAWN: PR #534 tonight-merge corrections (sounds + balance)
+
+`Agent: DAWN (A4) · branch devin/dawn/stack-consolidated · merge 1bb1c0308 on master 8f3d0a564`
+
+Per Claude's merge order: reconciled every sound path the stack had
+reverted — corpus diff vs master now shows **20 differing weapons, all
+authorized R17 chip-folds** (main `Damage` += removed aux chip's value;
+arithmetic verified per weapon), **0 sound diffs, 0 missing/added**.
+Qualified `wc2_firehit`/`wc2_sword{1,2,3}` in generated WC2 Orcs
+templates + `d2k_shared_sounds|autoguntrt` in Harkonnen; reverted an
+over-patch on `wc2tornadoTest` (master keeps `bowfire`/`bowhit` bare).
+`docs/balance/**` = master's bytes + re-extract clean; derived-sidecar
+regen produced only 4th-decimal jitter → kept master's verbatim,
+`ra2e2_black.design.unit_class: 1.0` intact. Audits: dead fields
+12/26 ≤ ratchet, orphans 0, empty 0, drift clean, doc_claims 43/43.
+## 2026-09-27 — EMBER: AI phase 6a — fogged observation + RegionMemory landed on `devin/ember/ai-fog-6a`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules per maintainer order "continue with the bot modules" · branch devin/ember/ai-fog-6a`
+
+Phase 6a of `docs/design/AI_FRANSBOT_RESEARCH.md` is implemented in
+`OpenRA.Mods.Cameo/Traits/BotModules/`:
+
+* **`BotFogMemory`** (new file): per-enemy last-seen table keyed by ActorID. Writes only from
+  `CanBeViewedByPlayer` sightings plus `FrozenActorLayer` (fogged buildings). A remembered cell
+  that becomes visible without the actor drops it ("seen empty is information"); non-buildings
+  expire after `ObservationTimeoutTicks` (30000).
+* **`RegionMemory`**: 8-cell-region grid published on `BotSituation.Regions` — per enemy,
+  per region: ArmyValue / DefenceValue / AntiAirValue / EconomyValue / LastSeenTick / EverSeen.
+  `EverSeen` requires `Shroud.IsVisible` of the region centre or a contained observation, so
+  `EnemyProfile.KnownRegions` is a true seen-content metric for the 6a gate.
+* **`UseFoggedObservation`** (default **true**, maintainer ruling 2026-09-23): `false`
+  reproduces the legacy omniscient numbers; the yaml lever sits on `MasterAiBotModule` in
+  `mods/cameo/ai/ai.yaml`.
+* `EnemyProfile.HarvesterCount` = currently-visible harvesters; `Harvesters` keeps the
+  remembered count. `AiSituationLogWriter` gained `harvester_count` + `known_regions`.
+
+Verification: `ai_bot_player_gate` PASS in **both** modes; with the gate map's fog flipped on,
+the bot saw only `known_regions: 4` and correctly held no `main_target` (no scouting yet — that
+is 6b). Boot-gate PASS (`PostWorldLoaded`, 0 new exceptions). 229 unit tests green.
+**Do not** tune bot strength against this — fog makes bots weaker until 6b–6e land.
+
+Remaining phases for whoever continues: 6b ScoutBotModule, 6c risk gate, 6d fogged squad scans,
+6e risk routing, 7 island ferry, 8 beacon shadow, 9 stats-derived counter value. The squad scans
+in `OpenRA.Mods.CA` (`SquadManagerBotModuleCA.cs:354-372`) are still omniscient until 6d.
+
+## 2026-09-27 — DAWN: dead-fields batch-2 (supplier deletes)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-batch2 · stacked on dwf-431-fix`
+
+Swept the residual: 14 kinds/70 weapons → **12 kinds / 28 weapons**.
+Deleted dead fields at their *source lines* (supplier nodes in
+`mods/cameo/weapons/weapons.yaml` + local dead lines in D2k/TS/TD/WC2 packs)
+after a per-source consumer scan proved the field is dead on EVERY weapon
+carrying it — the live-consumer check caught that `^HealingWeapon`'s
+`Warhead@Effect` fields are live on 582/385 inheritors, so the heal-weapon
+retypers got `-Explosions:`/`-ImpactActors:` cancels instead (D2KRepair,
+TSHeal). Follow-up: a file-only consumer match inflated live-children lists;
+line-precise matching shows all local dead lines have zero live consumers —
+ProtossHeal + TSRA2Heal deleted outright (no restructuring needed). Remaining
+26 = NOVA lane (fix list posted to fleet). Orphans 0, drift clean, boot PASS.
+
+## 2026-09-27 — DAWN: dead-warhead-fields fix (PR #431 culprit)
+
+`Agent: DAWN (A4) · branch devin/dawn/dwf-431-fix · base 91f865585`
+
+Claude routed master-red `audit_dead_warhead_fields` (20 kinds/72 weapons vs
+ratchet 15) for culprit bisect before fix. Bisect pinned **c48c7d41a / PR
+#431** (W24 lane-2 collapses, Sep-22): the fold retyped `Warhead@Tesla_Super`
+to `SpreadDamage` on the `ra1_soviets_heavyteslatank_ttankzap2arcteslafragment{1,2}_emp`
+chain, orphaning six inherited percentage-ladder fields the new type discards.
+
+Fix: six `-Field:` cancels on **fragment1 only** — fragment2 inherits from
+fragment1, so its cancels were provider-less (orphan-cancel audit caught them;
+removed). Engine-identical: resolved diff is exactly the six discarded fields.
+Result: **14 kinds/70 weapons ≤ ratchet 15**, orphan cancels 0, empty warheads 0.
+
+Also re-extracted `shared_redalert2` balance ledger (#519 dot renames had
+missed it — the one stale `doc_claims` claim `ledgers_drifted` measures 0 again).
+
+Remaining dead-field warning: `FireShrapnel.Range` — pre-existing, separate
+cleanup. Fleet finding: `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+## 2026-09-26f — CLAUDE (coordinator): maintainer rulings + fleet orders + Nod cyborg armour
+
+`Agent: Claude · branch claude/nod_cyborg_armor · base afb66c9b5`
+
+**Maintainer rulings, 2026-09-26** (asked and answered this session):
+
+| topic | ruling | recorded in |
+|---|---|---|
+| #508 warhead order | **STRICT**: a conversion that reorders resolved `Warhead@*` keys fails, effects included | DESIGN §11b (after the W7 table) |
+| garrison (G1) | **all infantry can garrison**; melee never gets a garrisoned attack | DESIGN §11 |
+| variant dots | `.destroyed` `.upgraded` `.infiltrated` `.black` + singles → `_suffix`; `.husk` stays | here |
+| dormant monoliths | LEAVE the ~400 faction dots in unmounted `rules/*.yaml`; no rename, no delete | here |
+| #511 / #513 | unstack from #508; Claude reviews, boots and merges each | PR threads |
+| Nod cyborg upgrades | see below | this PR |
+
+**Fleet orders (posted on the PRs):**
+- **DAWN:** redo #508 order-preserving (NOVA's displaced-stub method), and fold in the R16/#510
+  re-freeze. ⛔ No `Versus` may be materialized into a weapon. Rebase #511 and #513 straight onto
+  master.
+- **EMBER:** (1) rebase #512; (2) infantry garrison census + fix (new G4 row); (3) variant-dot
+  rename. The TS cyborgs, droids and `td_nod_*` infantry are Claude's this week. W6
+  "fidelity-vs-snap": post a 3-line example so it can be ruled; the context was not found.
+- **NOVA:** unchanged. Re-measure `doc-claims-resync` on current master before the PR.
+
+**This PR — Nod cyborg upgrades (maintainer-confirmed):**
+- **Cybernetic Modifications** moves to the Temple of Nod tier, 10,000 → **7,500**. The upgrade
+  shield, `shieldpermanent` and the hidden `DamageMultiplier 200` are deleted. `Medium` is
+  permanent after research, gated `upgrade && !shielded`, and +20% speed is kept. The cyborg
+  `Shielded:` block is deleted outright: it had merged over `^ShieldedShieldable` and raised
+  `armored`, so the Shield row never activated at generators (see LESSONS).
+- **New: Cybernetic Armor** (`td_nod_upgrade_cyberneticarmor`, Temple Prime, **10,000**, needs
+  Upgrade 1). `ArmorPlating` 50% of max HP plus `Armor: COMPOSITE` gated
+  `cyberneticarmor_up && !shielded`. COMPOSITE measures lowest vs Arrow 35, CannonAP 40,
+  Bullet 42 and MissileAP 44, and highest vs Demolition 100 and Concussion 105. New 64×48 icon,
+  new tooltip, added to the Nod bot's upgrade list (`ai.yaml`, DEVIN-CLOUD lane: one line).
+- Scope: 25 actors, the 10 TD Nod infantry plus 15 engineers across packs that react only when
+  their owner researched it. Both `^CyberneticModifications` (TD) and `^D2KCyberneticModifications`.
+- Gates: boot to menu with 0 new exceptions · `find_empty_warhead` 0 · ledgers re-extracted
+  (drift 0) · `test_upgrade_direction_contracts` 4/4 (the 200% test is replaced).
+
+**Next in my lane:** the hero armours already ruled (Volkov Heroic+Superheavy, Cyborg Reaper
+Plate+Heavy, Berserker Heroic+Heavy, Repair Droid Plate+Light, Cyborg Assassin +Flak) → the
+canonical armour-model docs (ARMOR_LAYERS top, DESIGN §12.0e law 1 = plating MULTIPLIES, §12.0g
+geometric table, and the stale "defaults to `Average`" yaml comments) → the armour guard audit.
+
+---
+
+## 2026-09-26h — EMBER: G4 vehicle-queue exemption applied (ruling follow-up)
+
+`Agent: EMBER · branch devin/ember/g4-garrison · base 784cc86be`
+
+Claude's ruling on the 7 Vehicle-queue mechs (26g open question): "all
+infantry garrison" means units **built in the Infantry queue** — vehicle-built
+mechs are exempt. Implemented as a new `vehicle_queue:` category in
+`docs/design/garrison_exceptions.yaml` (G4-only; G1/G2/G3 unaffected) listing
+pulverizermecha, plasmastrider, megalodon, poseidontank, stalker, whiterabbit.
+
+`cabal_ravager` is deliberately NOT exempted — it moves to the Infantry queue
+in Claude's armour PR and then garrisons normally. G4 residual: **1**
+(cabal_ravager, expected until that PR lands). G1 stays 7 (melee-only,
+ruled). G2/G3 stay 0. Baseline report regenerated; SUMMARY G row updated.
+
+## 2026-09-26g — EMBER: G4 garrison-acceptance census + fix (ruling 2026-09-26)
+
+`Agent: EMBER · branch devin/ember/g4-garrison · base afb66c9b5`
+
+Claude's order from 26f: census + fix under "all infantry can garrison".
+
+**Correct gate** — `Garrisoner.GarrisonType` vs `Garrisonable.Types: Infantry`.
+The earlier `Passenger.CargoType` proxy measures the transport system, not
+garrison; censusing on it flags the wrong set (misses `shotgundroid`, counts
+`fremen`/`ultralisk` which are already capable).
+
+**Census:** 284 buildable inf → 259 capable, 25 not: 9 pure aircraft
+(structurally excluded — no `Mobile`, can never `CanEnterCell`), 9
+infantry-queue defects, 7 Vehicle-queue mechs. New audit row G4 in
+`audit_garrison_weapons.py` reports queue + reason.
+
+**Fixed (9 infantry-queue):** beholder, shotgundroid, mortarbike, scorpion,
+noidmgarmor got `Garrisoner.GarrisonType: Infantry` + `Armament@GARRISONED`
+mirrors of their primaries (elite/upgrade-conditioned tiers mirrored);
+kodobeast had the armament, needed only the trait; spider (repair/capture)
+got the trait; knight + ogre are melee → `melee:` in `garrison_exceptions.yaml`.
+Post-fix G4 16→7, G1 unchanged 7.
+
+**The 7 Vehicle-queue mechs — ruled, see 26h above:** exempted via the
+`vehicle_queue:` category in `garrison_exceptions.yaml` (6 units);
+`cabal_ravager` stays flagged pending the armour-PR queue move. Flyers: 9
+(rocketeer, rocketangel, jumpjet, cosmonaut, shriek, swarmling,
+cyborgassassin, orbdrone, skymage) — structurally excluded, not defects.
+
+
+
+
+### DAWN — Stack consolidated onto master 91f865585 (2026-09-27)
+
+Per Claude's merge ruling (ONE PR, tip-evaluated): the whole DAWN weapon
+stack (#508 -> #527, incl. rule-4 #531) is merged onto current master in
+`devin/dawn/rule4-versus`. 23 conflicted defs verified payload-identical
+to master; `Laboratory_Bioball` keeps DAWN form (master's carries local
+Versus — gate). 3 wc2 defs took master's exact form. Sound refs =
+master's `pack|file` everywhere. Gate 891 == master. Audits clean.
+One order diff vs master remains: `Laboratory_Bioball` (justified above).
+
+### DAWN — Rule-4 Versus remediation (2026-09-26, branch pending)
+
+Claude's rule 4 (concrete weapons whose parent carried inline
+`Versus`/`PercentageVersus` must keep that inherit edge; merge gate
+`count_local_versus.py` <= 891) applied to DAWN's stack: the W7/W8
+materialization bodies had copied 67 parents' Versus ladders into
+concrete defs (gate 958). All 66 KEEP-EDGE defs reverted to their
+afb66c9b5 master form; W6 re-extracted on the 9 that still had local
+fx; W5 re-folded on wc2axeFirespear (pin+cancel); 196 orphan generated
+templates removed; Sound2's redundant local Versus dropped.
+Gate now **891**; corpus 3719 — 0 payload diffs, 0 missing; the 5 order
+diffs (wc2axe*, wc2{healing,holyvision}Super_hit, wc2highArrowFire)
+RESTORE master order — pre-existing tip drift the file-scoped
+comparators missed. Ratchets: W7 647->711 (the restored edges ARE the
+ruling), W8 298->302, W1 1435bp, W4 146, W6 346, W2 49.
+
+### DAWN — W6 in-lane sweep complete (2026-09-26, branch `devin/dawn/w6-fx`)
+
+All 174 in-lane W6 weapons (local effect-typed `Warhead@` blocks) converted
+to per-weapon `^<theme>_<weapon>` fx templates with `Inherits@w6fx[N]` edges
+at exact run positions. Corpus-wide verify 3809/3809 resolved+ordered
+identical; W6 521 -> 347 (remainder is out-of-lane packs). New traps
+recorded: corpus-wide `^` name collisions (W7MAT'd self-named templates in
+other files) and nested-cancel audit blindness (see LESSONS). Ratchets:
+W1 1534 bp, W4 203, W6 347, W7 647.
+
+### DAWN — R17 chip folds / W5 batch-1 (2026-09-26, branch `devin/dawn/r17-chips`)
+
+20 weapons / 21 chip warheads folded into their mains
+(`main.Damage += chip.Damage` verbatim per R17). ExtraDamage-class
+incl. the `_Auxiliary`-suffixed chips the suffix audit misses; plus
+ExtraRepair/ExtraHealing chips folded under the same arithmetic —
+flagged for Claude to confirm the repair family wants the same fold.
+Template-supplied chips removed via `-Warhead@chip:` cancels; 3 chips
+re-supplied by their templates needed cancel+delete together.
+VT-aware survivor pick on `D2KRepair` (heal chip -> heal main, not the
+repair-route `1Dam`). Fold verifier: each diff is exactly chip-removed
++ Damage-summed. 464/464 others identical, orphans 0, boot PASS.
+W5 172->153 global; ratchets re-locked (W5 now measured-pinned 153).
+Next W5 classes are design-routed: 1Dam flat folds, areanuke rings,
+VR splits, dual-caliber AA — classification posted to fleet.
+
+### DAWN — W1 dead-edge sweep (2026-09-26, branch `devin/dawn/w1-deadedges`)
+
+67 fully-shadowed Inherits edges removed across 54 weapons via
+resolve-drop probe (remove edge → re-merge → flat+ordered identical =
+dead; iterate to fixpoint for mutually-redundant pairs). 39 dead
+`-Key:` cancels whose provider was a dropped edge removed in the same
+pass (edge+cancel together or neither). 579/579 resolved+ordered
+identical, orphans 0, empty 0, dup-inherits unchanged.
+W1 258→248 (rate re-locked 1188→1142 bp), W2 71→58, W3 24→18,
+W8 303→298 — dead `^`-edges counted there too. Remaining >3-arity
+weapons sit at the resolved-faithful floor: dual/triple-family merges
+and whitelisted `^<faction>_<weapon>` addon templates — further W1
+reduction needs merged-template authoring (design-class). Includes
+`D2K_TowerMissile`/`mtank_pri2` dropping the dead
+`^Projectile_Missile_Heavy_D2K` edge (defs remain held on `^D2KMissile`).
+
+### DAWN — W8 batch-1 (2026-09-26, branch `devin/dawn/w8-batch1`)
+
+53 weapons across six semi-converted legacy templates converted to
+covering three-kind edges: `^D2K_Cannon` 19, `^D2KMissile` 15,
+`^D2KRocket` 6, `^OCannon` 6, `^Debris2Legacy` 4, `^OMissile` 3.
+Batch-2: `^CabalMissileLight` 7, `^TSMG` 5, `^WorkerAttack` 3 —
+resolved+ordered identical (249/249 incl. all batch-1 files), orphans 0,
+empty 0, boot PASS. In-lane W8 362 -> 303. Held for ruling:
+`D2K_TowerMissile` + `mtank_pri2` — their `@fx` shared template carries
+the fx family edge already (emitting it = engine dup-parent crash) and
+its `-Warhead@Effect:`/`+` re-add repositions the node in a way no
+external pin can reproduce. Remaining W8 class work:
+C:raw full-stack templates (`^HeavyBomb`,
+`^MediumFlameWeapon`, `^TSCannonEffect`, `^FlakWeapon`, `^Grenade`,
+`^TSDefaultMissile`...) need real family conversion — design-class, not
+edge surgery. `^LaserWeapon`/`^RailgunWeapon`/`^TeslaWeapon` held on the
+pending ExtraDamage ruling.
+
+
+## 2026-09-26g — DAWN: W7 weapon-edge conversion — my lanes cleared
+
+`Agent: Devin-DAWN · branch devin/dawn/w7-chains (stacked on w2-deadedges)`
+
+19 defs in my themes held `Inherits: <weapon>` edges — WC2 cross-race
+chains (incl. 3-deep DeathCoil), `^Debris2Legacy -> Debris`,
+`^TSHealWeapon -> Heal`. Each edge replaced by the parent's covering
+template edges (`Inherits@w7N: ^Warhead_/^Projectile_/^Effect_`), drift
+pinned and marked `# W7MAT`. 679/679 resolved+ordered identical;
+orphans 0; W7 in my themes: 18 -> 1 (Sound2 held — Ordos ruling).
+
+Resolved-faithful bucket rises documented in audit_weapon_shape:
+W2 46->53, W3 7->11, W4 40->44, W6 512->518 (marked pins), W1 234->239.
+
+---
+
+## 2026-09-26f — DAWN: W2 dead-edge sweep — 152 zero-contribution wh edges dropped
+
+`Agent: Devin-DAWN · branch devin/dawn/w2-deadedges (stacked on w7-packs / PR #508)`
+
+All 107 my-pack W2 weapons classified by live-vs-dead node survival: an
+`^Warhead_*` edge is dead when every `Warhead@` node it emits is absent from
+the resolved weapon. Dropped 152 dead edges in 86 weapons, re-pinned 42
+top-level fields (`TargetActorCenter`, `ValidTargets`, `Range`,
+`ReloadDelay`) the dead templates were silently carrying. 13 multi-main
+weapons left alone (deliberate _Flat/shaped duals, ExtraDamage chips).
+
+W2 **123 → 46**, W1 **287 → 234** (ratchets lowered) · resolved 679/679
+identical · orphans 0 · boot-gate PASS. RashidanGun_upgrade pair kept
+(dead edge whose `/Inherits` leaf is contract-bearing); TSBombSonic
+edge+cancel dropped together per the dead-edge rule.
+
+⚠ Dead-edge rule (EMBER): an edge is dead iff no emitted node survives
+AND no `-Key:` anywhere targets a node it emits — a cancel CONSUMES its
+provider edge. Delete edge+cancel together or neither. The earlier
+"mis-flag" framing was wrong: the audit was right, my sweep classifier
+was wrong.
+
+---
+
+## 2026-09-26e — DAWN: #508 rebased CLEAN + all four EMBER-routed items done
+
+`Agent: Devin-DAWN · branches devin/dawn/w7-packs-v2 (PR #508) + devin/dawn/routed-fixes`
+
+- **#508** cherry-picked onto post-wave master (`4416e43bd`) as `43f41c132` —
+  `mergeable: MERGEABLE, mergeStateStatus: CLEAN`. Re-verified vs the NEW base
+  (R16's Versus regen staled 33 baked tables — see devlog + LESSONS).
+- **B1:** `cameo_model.roster()` now gates on `Buildable.Factions` — the
+  engine-level roster gate the prereq closure never modeled. Sinks
+  `harkonnen → ordos_upgrade_lightfactory` (`Factions: ordos`); L1 6→5.
+  Remaining 5 rows verified deliberate (conyard provider lines added in team
+  sessions `4c6d4bfaa`/`f6956364a`; syndicate starting-units = mercenary
+  design). Cross-pack mount question stands for the fleet.
+- **Q-order:** consortium MCV `~warfactory` before `consortiumradar` →
+  prereq-order violations 0.
+- **MinRange:** all 7 normalized to `round(Range/25)*5` — td×4 + ordos
+  inline fixes; ra1 pair pinned `2365` over `155mm`'s stale 2670. → 0.
+- **G1:** all 7 are melee (`^DogJaw`, `^Warhead_Melee_*`) — the 2026-07-10
+  ruling already decided this class; added to `garrison_exceptions.yaml`
+  (39→46) rather than new weapons. → 0.
+
+---
 ## 2026-09-26f — EMBER: B3 intent backlog transcribed (587 → 0)
 
 `Agent: EMBER (A1) · branch devin/ember/b3-intent · base afb66c9b5`
@@ -52,6 +610,29 @@ Follow-on (same commit series): `audit_orphan_cancels.py --fragile` — report-o
 mode flagging 2,489 cancels whose sole provider is one inherit edge. Closes the
 class that crashed #513's head: dead-edge sweeps must treat `-X:` as a CONSUMER
 of its provider edge (delete edge+cancel together or neither).
+
+## 2026-09-26e — DAWN: #508 rebased CLEAN + all four EMBER-routed items done
+
+`Agent: Devin-DAWN · branches devin/dawn/w7-packs-v2 (PR #508) + devin/dawn/routed-fixes`
+
+- **#508** cherry-picked onto post-wave master (`4416e43bd`) as `43f41c132` —
+  `mergeable: MERGEABLE, mergeStateStatus: CLEAN`. Re-verified vs the NEW base
+  (R16's Versus regen staled 33 baked tables — see devlog + LESSONS).
+- **B1:** `cameo_model.roster()` now gates on `Buildable.Factions` — the
+  engine-level roster gate the prereq closure never modeled. Sinks
+  `harkonnen → ordos_upgrade_lightfactory` (`Factions: ordos`); L1 6→5.
+  Remaining 5 rows verified deliberate (conyard provider lines added in team
+  sessions `4c6d4bfaa`/`f6956364a`; syndicate starting-units = mercenary
+  design). Cross-pack mount question stands for the fleet.
+- **Q-order:** consortium MCV `~warfactory` before `consortiumradar` →
+  prereq-order violations 0.
+- **MinRange:** all 7 normalized to `round(Range/25)*5` — td×4 + ordos
+  inline fixes; ra1 pair pinned `2365` over `155mm`'s stale 2670. → 0.
+- **G1:** all 7 are melee (`^DogJaw`, `^Warhead_Melee_*`) — the 2026-07-10
+  ruling already decided this class; added to `garrison_exceptions.yaml`
+  (39→46) rather than new weapons. → 0.
+
+---
 
 ## 2026-09-26d — EMBER → FLEET: post-merge-wave status + per-agent notes
 
@@ -186,6 +767,23 @@ pre-#495 values already stale on master (e.g. meters 318 vs measured 319) —
 re-measure on current master before PR.
 
 ---
+## 2026-09-26 — DAWN: W7 ContentPack batch (97 pack-level edges)
+
+`Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/w7-remainder · base a5ae366cc`
+
+The real W7 remainder was pack-level: 97 weapon-parent edges across the
+ContentPack weapon files (D2k 5 packs, SC Protoss/Terran/Zerg, TD GDI/Nod,
+TS GDI/Nod/Forgotten). 36 covering-swapped (clean parents), 60 materialized
+(bundle parents + children with pre-existing kind edges). Ordos `Sound2`
+held — its Atreides split-twin already carries `^d2k_atreides_sound2`, so a
+per-pack family edge would make the merged name 2 fx edges (W4) — parked
+pending the Sound2 split-def ruling.
+
+Verified: 637/637 pack weapons resolved-identical; orphan cancels 0;
+empty warheads 0; D1 0; D2 3636 (< HEAD); S2 5 = HEAD; W7 760→664,
+W4 41→40, W6 442→437 (ratchets lowered). New emitter lessons recorded in
+LESSONS_LEARNED (file-position Inherits semantics, effects_* name
+collisions, interleaved cancels).
 
 ## 2026-09-24b — DAWN: W7 remainder materialization (DAWN file-set, 33 edges)
 
@@ -1879,9 +2477,9 @@ someone else is mid-way through.**
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
-`warhead_family_reach` measures **1,532 distinct fired weapon identities** whose
+`warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.**
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (nova post-merge): = 394** (splice-edge mechanics, not new legacy usage). **2026-09-27 (DAWN stack merge): = 391.** **2026-09-27b (#534+#516 combined): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage).
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

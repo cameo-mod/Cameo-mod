@@ -17,11 +17,11 @@ A repair is ONLY a legacy Int32 wrap independent of SharedVersus. The `runtime u
 | weapon | warhead | legacy Int32 units | wide legacy units | runtime units |
 |---|---|---:|---:|---:|
 | `DalekCannon` | `Railgun_Heavy_Flat` | -6474 | 15000 | 15000 |
-| `DalekCannon_elite` | `Railgun_Heavy_Flat` | 8525 | 30000 | 30000 |
+| `DalekCannon_elite` | `Railgun_Heavy_Flat` | -7849 | 35100 | 35100 |
 | `ExecutionerSword` | `Melee_Medium` | 8525 | 30000 | 30000 |
 | `Hakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
 | `OIHakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
-| `SteelInspectorIonCannon` | `Tesla_Super` | -8974 | 12500 | 12500 |
+| `SteelInspectorIonCannon` | `Tesla_Super` | -3974 | 17500 | 17500 |
 | `SteelInspectorIonCannonDamage` | `Tesla_Super` | -8974 | 12500 | 12500 |
 | `TSLocustBombChem` | `Chemical_Heavy` | -7974 | 13500 | 13500 |
 | `d2kStormLasher` | `Storm_Heavy` | -6474 | 15000 | 15000 |

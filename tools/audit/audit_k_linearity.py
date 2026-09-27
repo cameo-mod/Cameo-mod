@@ -124,19 +124,16 @@ def runtime_percentage_inventory(node) -> Counter:
                 child.get("PercentageDenominator"), pd.FOLDED_DEFAULT_DENOMINATOR)
             if scale is not None and denominator is not None:
                 if mode == eh.MODE_SHARED:
-                    # THE SHARED PROFILE: the folded magnitude is
-                    # Damage x Scale x h / (200000 x 2000), ONE half-up step.
-                    # The CONTINUOUS coefficient is kept independently of the
-                    # runtime rounding, so a positive h yields a positive
-                    # continuous magnitude whenever Damage x Scale > 0 —
-                    # mirroring percentage_damage's retention rule — while
-                    # h = 0 is ACTIVE zero: the whole folded contribution is
-                    # exactly zero in the continuous model too, so nothing is
-                    # expected. Legacy mode keeps the pre-shared behavior
-                    # verbatim: Scale > 0 alone implies a folded expectation
-                    # (continuous units = Damage x Scale / 200000 > 0), which
-                    # the model retains.
-                    if heaviness > 0:
+                    # THE SHARED PROFILE (DESIGN §12.0j, maintainer 2026-09-26): the folded
+                    # magnitude is Damage x Scale x growth(h) / 200000, with growth x0.8 at
+                    # h = 0, x1.0 at h = 1, x1.25 at h = 2 — the C#'s exact integers
+                    # (4000 + H) / 5000 up to H = 1000, (3000 + H) / 4000 above. Computed
+                    # HERE, not through percentage_damage, so this inventory stays independent.
+                    # ⚠ The retired rule was h/2, which made h = 0 an ACTIVE ZERO; this check
+                    # kept encoding it after the growth ruling and flagged all 21 CannonAP
+                    # pilot weapons (h = 0) as "unexpected" hits the runtime really deals.
+                    growth_num = 4000 + heaviness if heaviness <= 1000 else 3000 + heaviness
+                    if growth_num > 0:
                         found[(pd.PCT_FOLDED, tag)] += 1
                 else:
                     found[(pd.PCT_FOLDED, tag)] += 1

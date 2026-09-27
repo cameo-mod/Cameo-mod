@@ -1750,8 +1750,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "RA2PrismBeam"
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1919,9 +1918,7 @@
       "reloaddelay": "1",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
       "weapon_class_source": "none"
@@ -1953,9 +1950,7 @@
       "reloaddelay": "1",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
       "weapon_class_source": "none"
@@ -2161,10 +2156,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2172,10 +2163,6 @@
     "shield_init_flat": {
      "src": "inherited",
      "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -2302,7 +2289,9 @@
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "GuardianGIMG"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2440,7 +2429,9 @@
       "requires": "!deployed && !rank-elite && ra2_allies_upgrade_elitegi",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "RA2para"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2468,7 +2459,9 @@
       "requires": "!deployed && rank-elite && !ra2_allies_upgrade_elitegi",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "GuardianGIMG"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2496,7 +2489,9 @@
       "requires": "!deployed && rank-elite && ra2_allies_upgrade_elitegi",
       "slot": "Armament@ELITE2",
       "versus_templates": [
-       "GuardianGIMG2"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2599,7 +2594,9 @@
       "requires": "rank-elite && deployed",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -2626,7 +2623,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2GIRocketsG"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -2947,7 +2946,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2MP5"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3021,7 +3022,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2MP5"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3039,9 +3042,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
-      "versus_templates": [
-       "TanyaAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "SEALAttach",
       "weapon_class_source": "none"
@@ -3176,7 +3177,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2AWP"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3246,7 +3249,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2AWP"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3377,7 +3382,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3395,9 +3402,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
-      "versus_templates": [
-       "IvanAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "TanyaAttach",
       "weapon_class_source": "none"
@@ -3483,7 +3488,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -4598,7 +4605,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2105mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5053,7 +5062,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -5506,9 +5517,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -5523,9 +5532,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -5716,7 +5723,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -5884,7 +5893,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -5911,7 +5922,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -6400,7 +6413,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -6853,9 +6868,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -6870,9 +6883,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -7063,7 +7074,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7231,7 +7244,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -7258,7 +7273,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -7749,7 +7766,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -8202,9 +8221,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -8219,9 +8236,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -8412,7 +8427,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -8580,7 +8597,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -8607,7 +8626,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -9098,7 +9119,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -9551,9 +9574,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -9568,9 +9589,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -9761,7 +9780,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -9929,7 +9950,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -9956,7 +9979,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -10446,7 +10471,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -10899,9 +10926,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -10916,9 +10941,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -11109,7 +11132,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -11277,7 +11302,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -11304,7 +11331,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -11794,7 +11823,9 @@
       "requires": "ifv-hero",
       "slot": "Armament@hero",
       "versus_templates": [
-       "RA2DoublePistols"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -12247,9 +12278,7 @@
       "reloaddelay": "1",
       "requires": "ifv-chrono",
       "slot": "Armament@chrono",
-      "versus_templates": [
-       "ChronoBeam"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoBeam",
       "weapon_class_source": "none"
@@ -12264,9 +12293,7 @@
       "reloaddelay": "180",
       "requires": "ifv-chrono",
       "slot": "Armament@chronosound",
-      "versus_templates": [
-       "RA2ChronoTele"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "IFVChronoSound",
       "weapon_class_source": "none"
@@ -12457,7 +12484,9 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2HoverMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -12625,7 +12654,9 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile",
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [],
@@ -12652,7 +12683,9 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light_Flat",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Light_Flat",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [],
       "weapon": "RA2MultiHoverMissile_AA",
@@ -13185,9 +13218,7 @@
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@Charge",
-      "versus_templates": [
-       "PrismCharge"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PrismTankCharge",
       "weapon_class_source": "none"
@@ -13202,9 +13233,7 @@
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@EliteCharge",
-      "versus_templates": [
-       "PrismTankCharge"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "PrismTankCharge_elite",
       "weapon_class_source": "none"
@@ -13398,7 +13427,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2sabot"
+       "^Warhead_CannonAP",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP"

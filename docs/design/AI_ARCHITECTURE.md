@@ -330,6 +330,75 @@ without a load-time crash. The failure mode of a partial migration is silent —
 just keeps winning — which is why every step is gated on the resolved-rules diff rather than on
 reading the yaml.
 
+### 2.7a Status (2026-09-27, AI architect: Claude)
+
+Measured on master `28cf7b404` with `tools/audit/miniyaml` (rule 8e): the central `ai.yaml` held
+**7,151 actor-id references**. **2,680** are dictionary rows (12 fields, e.g. `UnitsToBuild` 1,436,
+`BuildingFractions` 402, `BuildingLimits` 250). **4,471** are list entries (41 fields, e.g.
+`GuerrillaTypes` 1,265, `ExcludeFromSquadsTypes` 510, `HighValueTargetTypes` 500). **0 of 28**
+pack `ai.yaml` files held live config. They held a stale "cannot be split" note plus commented
+copies of the rows, which is a second copy that drifts.
+
+* **Dictionaries: built.** `tools/packs/split_ai_rows.py` moves every row whose key is an actor
+  defined in exactly one pack into that pack's `yaml/ai.yaml`, under the same trait instance and
+  field. It adds the `content.yaml` include when the pack had no ai file; 13 packs had none, and
+  without the include their rows would silently vanish. **2,646 of the 2,680 rows are movable.**
+  The rest are keyed by actors defined in no pack or in several. `tools/packs/compare_resolved.py`
+  is the gate: it compares the engine's `--resolved-rules Player` before and after, as content.
+  **Pilot measured: TD/GDI, 100 rows, 7,054 resolved keys before and after, 0 differences.** The
+  all-pack apply is prepared but not committed: its engine verification is still pending.
+* **Lists: not movable in yaml** (§2.8).
+
+### 2.8 Lists: derive the membership, don't enumerate it
+
+A pack cannot append to a list that another file sets. MiniYaml merges a scalar value by
+override, and the central file loads last (§1.2). A list therefore cannot be split by moving
+lines. As long as the central file names every faction's ids, two things break. A game that
+doesn't load faction X still carries ids for X's actors: that is a lint error today and a
+KeyNotFound the day loading becomes dynamic. And a pack author has to edit the central file to
+add a unit, which is exactly the coupling ContentPacks exist to remove.
+
+Three mechanisms were considered:
+
+| | Mechanism | Pack edits | C# | Verdict |
+|---|---|---|---|---|
+| **A** | **Roles on the actor.** Each pack's unit yaml says what the unit *is for* (`BotRoles: Guerrilla, AntiAir`). Mechanical roles are **derived** from traits and need no yaml (Harvester → harvester, Aircraft → air unit, a naval locomotor → naval, Refinery, conyard, MCV, power, barracks). At rules load, one Cameo trait (`BotRoleSets`, `IRulesetLoaded`) adds each role's actors into the module lists that role feeds, through a role → (module, field) table. | on the pack's own actors only | one new trait; **zero edits to CA files** (Frankenstein and CA sync stay safe) | **RULED 2026-09-27 (maintainer): adopt** |
+| B | Engine list-append syntax (`GuerrillaTypes+: …`) in cameo-engine's MiniYaml | 5× per personality instance, per pack | engine patch | rejected: duplicates every list ×5 and forks the yaml language |
+| C | Every consumer reads `Info.X ∪ roles(X)` | on the pack's own actors | edits at every read site in ~15 CA files | rejected: conflicts with every CA sync |
+
+Why A fits the rulings already made. The raid-unit ruling (2026-09-27: guerrilla = fast/light,
+*generated from traits*) is a derived role. EMBER's 6g `BotTargetTags` already derives targeting
+tags from rules. An unloaded pack contributes no actors, so it contributes no ids, and the lists
+become plug and play automatically. Mechanism A **replaces** each target field's value once, at
+rules load, with a new set of the field's own type (old ∪ role members), identically on every
+client, so it is sync-safe. It follows `ScaledBullet`'s derive-at-load idiom. Replacing rather than
+mutating is required: `BaseBuilderBotModuleCA`'s lists are already `FrozenSet` on master.
+
+**Built: `BotRoleSets` (Player) + `BotRoles` (actor)**, in `OpenRA.Mods.Cameo/Traits/BotModules/BotRoleSets.cs`.
+The yaml has `DeriveHas` / `DeriveNot` / `Exclude` / `Targets` per role, and only roles listed
+under `Apply` change anything. Every other role **reports** to `bot-roles.log`: its member count,
+what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
+predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
+
+| Role → target | Written | Would add | Written, not derived |
+|---|---|---|---|
+| harvester → `HarvesterBotModuleCA` / `ResourceMapBotModule.HarvesterTypes` | 25 / 26 | 11: the D2k spice harvesters, Outpost 2 cargo trucks, FutureTech prospector, `ra1_soviets_heavyindustrialminer`, … | 0 / 1 (`naxis_slaveoverseer`) |
+| refinery → 3 `RefineryTypes` fields | 28–32 | 10–14: the D2k refineries, the StarCraft resource depots, the Warcraft II oil refineries | 4 (`chsupply`, `glsupply`, `usasupply`, `refinery`) |
+| mcv → `McvTypes` | 35 | 11: the D2k MCVs, Outpost 2 convecs, **and false hits** such as `ra1_soviets_stalinfist` | 0 |
+| conyard → `ConstructionYardTypes` | 28 | 5: the D2k yards, Outpost 2 factories | 2 (`zerg_hive`, `zerg_lair`) |
+
+These lists are looked up **by name** (`ActorIndex.OwnerAndNames…`). A harvester that isn't
+listed is invisible to `HarvesterBotModuleCA`, so the "would add" column is mostly **real gaps in
+today's bots** (the D2k factions' own harvesters, refineries and yards), plus a few false hits.
+Each role is applied only after its additions are reviewed and a match with an affected faction
+confirms it. False hits go under `Exclude`; the "written, not derived" actors get a `BotRoles` line
+in their own pack. Only then does the central list shrink.
+
+Order: the derived roles first (they remove the most ids with no yaml at all), then `BotRoles` on
+the judgment lists (`HighValueTargetTypes`, `BigAirThreats`, `ExcludeFromSquadsTypes`). A list is
+then emptied in the central file. Progress metric: actor ids in the central `ai.yaml`, lower-only,
+**7,151 → 0**.
+
 ---
 
 ## 3. Reading the enemy: the observation model
@@ -389,7 +458,8 @@ Today a personality is a condition that selects one of five `SquadManagerBotModu
 (§19). The manager keeps that mechanism and adds the missing personality the user named:
 **Guerrilla** — many small simultaneous raids against expansions, rather than one blob. Cameo's
 squad manager already has the knobs (`JoinGuerrilla`, `MaxGuerrillaSize`, `GuerrillaTypes`), and
-note `JoinGuerrilla` is inverted: a *higher* value means *less* harassment.
+`JoinGuerrilla` is the join chance in percent (it was inverted until 2026-09-27; see
+`AI_SYNTHESIS.md` §3.1).
 
 ### 4.2 The switch mechanism, given §1.1
 
@@ -442,6 +512,12 @@ Target and personality are **coupled but distinct**: the target answers "who", t
 answers "how". The personality is chosen against the *selected target's* profile, damped by the
 worst threat among the others — otherwise the bot turtles against a rusher it isn't fighting, or
 steamrolls into a fortified target while a second player razes its base.
+
+The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
+`30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
+with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
+damage-dealt side still has no producer). Nothing consumes it yet — wiring it into this score is
+a separate lane.
 
 ### 4.4 Transition table
 
@@ -746,10 +822,17 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 
 ### 10.2 What Cameo loads today
 
+> **The authoritative list is generated:** [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md), built by
+> `python tools/ai/ai_module_map.py --write` from the resolved `Player`/`World` and the C#. On
+> 2026-09-27 it lists **32 loaded bot types, 67 instances**, the interface provider → consumer
+> graph, and four checks (consumer without provider, producer without consumer, unloaded code,
+> shadowing). The table below is the annotated narrative; where they disagree, the map wins.
+> Run `--check` before citing a count.
+
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**22 distinct trait types, 37 Player instances plus one World instance**. Conditional instances
+**26 distinct trait types, 41 Player instances plus one World instance** (2026-09-28: `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
@@ -1030,6 +1113,20 @@ share the result is a net *saving* if the squad managers are later pointed at th
 instead of scanning independently. That consolidation is not phase 1, but the snapshot is shaped to
 allow it.
 
+### 10.5a The assign layer: missions
+
+Phase 7a adds the first assign-layer contract without creating another unit owner.
+`MasterAiBotModule` publishes fog-honest `Raid` and `Defend` intent through
+`IBotMissionProvider`; `SquadManagerBotModuleCA` consumes the ordered missions only when it is
+about to form a new attack force. The producer derives missions from `RegionMemory`, while the
+consumer retains ownership of force formation, target validation, and orders.
+
+The strategist publishes intent rather than commanding units because squad membership and
+execution already belong to the squad manager. A mission may defer a force for a bounded defend
+hold or focus a newly formed raid, but it never moves units between existing squads and never
+assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is deferred to a later
+phase. The assign layer must never become a second owner of a unit.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
@@ -1057,7 +1154,27 @@ allow it.
 6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
    because it makes the bots temporarily weaker and it invalidates any tuning done against
    omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.
-7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
+   *Phase 6a (fogged observation + `RegionMemory` + `UseFoggedObservation`) landed 2026-09-27 —
+   the master builds profiles from `BotFogMemory` instead of `World.Actors`; Phase 6b
+   (`ScoutBotModule`: staleness x interest region targets, yaml-listed scout types, scout-loss
+   danger marks now feed it) and 6c (the pre-commit risk
+   gate: `IBotRegionThreatProvider` + `AttackRiskMargin` on `SquadManagerBotModuleCA`, gating the
+   idle-squad commit only) and 6d (squad-side fogged scans: `IBotFoggedEnemyProvider` gates every
+   `World.Actors` target scan to observed enemies, with `FrozenActorLayer` remembered buildings as
+   fallback targets — remembered mobile units are re-observed by scouts instead of being chased at
+   stale positions) all landed 2026-09-27, as did 6e (risk routing: a coarse A*
+   over `RegionMemory` costed by remembered hostile value —
+   `IBotRouteThreatRouter` on the master answers `RouteAroundThreat` with 1-4
+   locomotor-checked waypoints; guerrillas keep their harass routes), all merged
+   2026-09-27 — and 6f's first piece (artillery attach: `SquadCAType.Artillery`,
+   rules-derived via max weapon range, hangs `ArtilleryHangBackCells` behind a
+   parent assault squad and bombards only what the parent sees — no separate
+   staging or support-follow yet) — phase 6 is done except 6f staging/support —
+   `docs/design/AI_FRANSBOT_RESEARCH.md` §4.*
+7. **Assign-layer missions (phase 7a, implemented).** The master publishes ordered, reserved
+   `Raid` and `Defend` intent from fogged region memory; squad formation remains the execution
+   owner's decision. `Recon` and `Secure` are deferred.
+8. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
    strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.
 
 Phases 1 and 2 are pure additions with no gameplay effect and can proceed while the balance

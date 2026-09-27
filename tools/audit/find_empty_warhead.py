@@ -34,7 +34,7 @@ def _live_files():
 FILES = _live_files()
 
 RE_INHERITS = re.compile(r"^Inherits(?:@\S+)?:\s*(\S+)")
-RE_WARHEAD = re.compile(r"^(-?)Warhead@(\S+?):\s*(\S*)\s*$")
+RE_WARHEAD = re.compile(r"^(-?)Warhead@(\S+?):\s*(\S*)\s*(?:#.*)?$")
 RE_TOP = re.compile(r"^([^\s#][^:]*):")
 
 

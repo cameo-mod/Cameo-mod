@@ -1,2 +1,34 @@
-# Corrino AI placeholder.
+# AI configuration owned by this ContentPack (D2k/Corrino).
+#
+# Why this file exists: a faction's AI must ship inside its own pack, so that a game which does
+# not load this faction carries no AI rows naming its actors (docs/MIGRATION.md, "Why
+# ContentPacks"). Rows here are MERGED into the bot modules that mods/cameo/ai/ai.yaml declares:
+# a pack can ADD dictionary rows (they union), but it can never override or remove a key the
+# central file sets (docs/design/AI_ARCHITECTURE.md §1.2). Lists of actor ids cannot be
+# appended from a pack and stay central until §2.8 lands.
+#
+# Moved from the central file by tools/packs/split_ai_rows.py. Edit rows HERE, never there.
+
 Player:
+	UnitBuilderBotModuleCA@generic:
+		UnitsToBuild:
+			corrino_lightinfantry: 5
+			corrino_engineer: 1
+			corrino_trooper: 5
+			corrino_sardaukar_bazooka: 5
+			corrino_sardaukar_berserker: 3
+			corrino_sardaukar_sword: 3
+			corrino_sardaukar_javelin: 3
+			corrino_sardaukar_laser: 3
+			corrino_combattank: 10
+			corrino_buggy: 7
+			corrino_bmp: 5
+			corrino_apc: 3
+			corrino_missiletank: 5
+			corrino_siegetank: 5
+			corrino_gunship: 3
+			corrino_advancedcarryall: 1
+		UnitLimits:
+			corrino_spiceharvester: 20
+			corrino_advancedcarryall: 5
+			corrino_gunship: 10

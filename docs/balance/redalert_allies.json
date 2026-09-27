@@ -2490,7 +2490,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -2517,7 +2519,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "RocketsRA"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -2668,7 +2672,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "LightSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -2702,7 +2708,9 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "LightSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -2911,9 +2919,7 @@
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
-      "versus_templates": [
-       "IvanAttach"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "TanyaAttach",
       "weapon_class_source": "none"
@@ -3590,7 +3596,7 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "minrange": "2670",
+      "minrange": "2365",
       "pricing": true,
       "range": "11813",
       "reloaddelay": "80",
@@ -3638,7 +3644,7 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "minrange": "2670",
+      "minrange": "2365",
       "pricing": true,
       "range": "11813",
       "reloaddelay": "80",

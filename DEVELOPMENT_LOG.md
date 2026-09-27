@@ -1,3 +1,514 @@
+# 2026-09-28 — NOVA: H1 human-likeness producer (`HumanPaceBotModule`/`IBotActionBudget`)
+
+The unassigned H1 item from `ORDERS_2026-09-27_ai_next_lanes.md` (AI_SYNTHESIS
+§5): action budget over a sliding window + per-tick burst cap (the AlphaStar
+lesson needs both), and an attention budget (≤N distinct decision points per
+tick; deferral IS the stagger). New `IBotActionBudget` in CA (consumer-visible
+assembly) implemented by `HumanPaceBotModule` in Cameo.
+
+- Producer ONLY — identical shape to the CombatAnalysis port: real
+  interception of `IBot.QueueOrder` would need `ModularBot` (engine lane),
+  so consumers consult `TryConsumeActions`/`TryConsumeAttention` once wired.
+- Lazy per-tick state (window ledger + burst counter + attention set) — no
+  `IBotTick`, so it cannot be missed by tick ordering.
+- Disabled trait returns true for every consume — "absence degrades, it
+  never breaks".
+- Same ai.yaml trap as #564: block goes at END OF PLAYER section, not EOF.
+- Defaults: ~144 APM (6/25 ticks), ≤3 actions per tick, ≤2 attention slots
+  per tick — conservative-human, all yaml-tunable.
+- Gotcha logged: a `--check-yaml` `OpenRA.Utility.exe` child can outlive its
+  printed output and hold `engine/bin` DLLs — `MSB3027` file-lock errors on
+  rebuild mean a stale utility process, not a bad build.
+- Tests: `tools/tests/test_ai_human_pace.py` (4: registration, Player-not-
+  World, contract+machinery, producer-only guard).
+
+# 2026-09-28 — NOVA: CombatAnalysisBotModule port (producer-only)
+
+Ported CN `CombatAnalysisBotModule` (crystallized-nexus `30cf70a`, GPLv3) as
+`OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs` implementing the
+new `IBotThreatAnalysis` interface (`OpenRA.Mods.CA/Traits/BotModules/` — the
+consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
+
+- Per-role threat weights (`antiair`/`antiarmour`/`antiinfantry` — the
+  `demand.*` suffixes) accumulated from `IBotRespondToAttack`, value-scaled by
+  attacker cost, decaying on an interval; nemesis score per enemy player with
+  per-attacker throttling; ally-attack registration exposed but unwired.
+- Producer ONLY: nothing consumes `IBotThreatAnalysis` yet — target-scoring
+  (`w_hurt`) wiring is a separate lane (EMBER). The new test asserts that.
+- Adaptations vs CN: `DefenseRole` enum -> `BotThreatRoles` strings matching the
+  demand.* vocabulary; `BotCapabilitiesInfo` economy tags -> `Harvester` trait
+  detection (Cameo has no capability tags); `CNBotLog`/`CNBotPerf` ->
+  `CAAIUtils.BotDebug` / plain `IBotTick`; air target types widened to
+  `{Air, Aircraft, Plane, Helicopter}` for Cameo's vocabulary.
+- Gate result of the mandated overlap check: Fransbot's
+  `FransCombatIntelBotModule` (positional intel) and `FransRiskModelBotModule`
+  (spatial risk) do NOT cover this — different axis.
+- ai.yaml gotcha found in the act: the file defines BOTH `Player:` and `World:`;
+  an end-of-file append lands on World. The trait block sits at the END OF THE
+  PLAYER SECTION (before `World:`), guarded by the new test.
+- Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
+  Player-not-World placement, role/demand-name match, interface contract,
+  producer-only guard).
+
+## 2026-09-28 — AI match log schema 2: composition + episode telemetry (NOVA)
+
+ROADMAP item "Offline aggregation extensions" (AI queue):
+
+- `UnitBuilderBotModuleCA` gained a read-only surface: `ActiveCompositionId`
+  and `ActiveCompositionChanged(tick, id)` fired by a single
+  `SetActiveComposition` helper at both assignment sites (selection +
+  baseline revert). No behavior change; observability only.
+- `AiMatchLogRecorder` now implements `INotifyCreated`, subscribes to that
+  event, tracks `composition_timeline`/`composition_switches`, and maintains
+  a unified `episode_timeline`: one entry per personality OR composition
+  transition carrying cumulative `kills_cost`/`deaths_cost` snapshots —
+  per-episode value attribution per AI_MATCH_LOG §6.1 shape.
+- `AiMatchLogWriter` emits schema 2 with the new fields; schema-1 records
+  remain valid input.
+- `aggregate_ai_matches.py` accepts schemas 1+2 and adds the episode table:
+  faction x personality x composition vs enemy faction, episodes/ticks held/
+  episode trade + containing-match win rate, min-samples gate unchanged.
+- Tests: aggregator (schema-2 acceptance + boundary-delta attribution +
+  schema-1 no-episode path, 3/3 pass), AiMatchLogWriterTest (new schema-2
+  emitter coverage, 234/234 NUnit pass).
+
+Gates: build clean, --check-yaml unaffected (no yaml), boot-gate PASS.
+
+## 2026-09-27b — post-#516 derived-armor-row repair (NOVA)
+
+The #516 merge left master's `audit_derived_armor_columns` red
+(32,478 > ratchet 30,203): the merged pack tables lacked the §12.0l
+derived rows. Per-table diff vs pre-merge master (`ccfd7830a`) showed
+the merge introduced exactly **2,886** new pending rows across ~230
+tables in 15 files, while also clearing 923 pre-existing backlog rows.
+
+`derive_versus_columns.py`'s computed writes were applied ONLY to the
+tables whose pending count grew — the sanctioned #523 backlog
+(~29,592 rows) is untouched. Audit now reports **29,592 <= ratchet**;
+ratchet re-locked 30,203 -> 29,592.
+
+Gates: drift clean 34/34, doc_claims 43/43, dead fields OK, orphan
+cancels 0, empty warheads 0, dup-inherits clean, shape at ratchets,
+boot-gate PASS (menu marker, no new exceptions).
+
+## 2026-09-27 — master merge: dead-field merge residue cleaned (NOVA)
+
+Merged `origin/master` (`8f3d0a564`, picks up #535/#536/#511/#533) into
+`devin/nova/w7-packs`. Two residue fixes after the merge commit:
+
+- `ttankzap2arc...fragment2_emp` — my W7 splice had inlined fragment1's
+  PRE-#535 body (no cancels), so the six `SpreadDamage.*` dead fields
+  (`FriendlyFireDamage/FriendlyFireSpread/IntegrityScale/PercentageScale/
+  PercentageSpread/PercentageVersus`) survived on the spliced copy while
+  master's fragment1 carries the cancels and fragment2 inherits them.
+  Mirrored the same six `-field:` cancels onto fragment2's final
+  `Warhead@Tesla_Super: SpreadDamage` retype decl → resolve-identical to
+  master, `audit_dead_warhead_fields` now reports **0 kinds / 0 weapons**
+  (baseline re-locked 12 -> 0).
+- `TSHeal` — master's #536 `-Explosions:`/`-ImpactActors:` cancels became
+  ORPHANS here because `0436ca36a` already cancels the fields upstream at
+  `Heal` (the provider `^TSHealWeapon -> Heal` is dead on this branch).
+  Removed the redundant 3-line `Warhead@Effect` decl → orphan cancels back
+  to 0, resolve-identical to master.
+
+Ratchet note: W7 baseline re-locked 445 -> 449 — the four #516-review
+rule-4 restorations (RA2Robotmm_elite, RA2RobotmmScatter_elite,
+SteelMakoGun_EMP_elite, SteelInspectorIonCannon) keep their parent edges.
+Branch W7 set is a strict subset of master's (449 of 760).
+
+Post-merge gates: shape all green (W2 158/170, W3 18/19, W4 63/77,
+W5 172/389, W6 489/490, W7 449/449, W8 365/372), empty warheads 0,
+orphan cancels 0, dead fields 0, local-Versus 881 <= 891, drift clean
+except the sanctioned `shared_redalert2` holdover (Gate A, awaits #528).
+Corpus diff vs master: 85 weapons — 64 authorized fold signatures + 21
+dead-leaf removals (`value -> None` on dead-typed nodes). Zero unexplained.
+
+## 2026-09-27 — dead warhead fields: in-lane half of the #431 regression (NOVA)
+
+DAWN's fleet handoff (STATUS_2026-09-27_dawn_dwf_batch2_pr536.md) assigned
+the lane's share: 31 dead source lines deleted across RA/RA2/RA2Mod +
+`redalert2mod.yaml` (Sniper/OpenTopped `Falloff`, spawner `FireShrapnel`/
+`FireFragment` residue, `CreateEffect.Range/Duration`, `Burst`,
+`AffectsIntegrity.Falloff`), plus `Heal`'s `-Explosions`/`-ImpactActors:`
+retype-cancels (`^HealingWeapon` supplier stays live for 3 heal weapons).
+The `ttankzap2arc` fragments deliberately skipped — DAWN's #535 owns them.
+Sources classified via her `dead_field_sources.py` (used read-only from
+`devin/dawn/dwf-batch2`; not committed — her PR carries it).
+`audit_dead_warhead_fields`: **20 kinds / 72 weapons -> 12 / 56** on this
+branch; the remainder is `weapons.yaml`-sourced = #535/#536 territory, so
+the audit reaches 0 once that stack merges. 27/27 resolve-verified
+(behavioural invariants; diffs are the removed dead leaves). Guards all
+green; drift clean; boot-gate PASS. Ratchet left at 15 — the re-lock to 0
+belongs on DAWN's stack post-merge.
+
+## 2026-09-27 — W6 shadow-deletion batch-1 (NOVA)
+
+Deleted 52 local effect-warhead decls on 24 RA/RA2/RA2Mod weapons — each a
+pure shadow of effect content already supplied by an inherited
+`^Effect_*`/fx-family template (typed `Warhead@*` decls whose whole payload
+the parent's chain reproduces). Method: per-decl deletion tested through
+`miniyaml` `_resolve_generic` with an override lookup (greedy accumulation
+so same-key sibling interactions can't slip through — several decl pairs
+shadowed EACH OTHER and were correctly rejected), then
+`review_resolve_diff --strict-order` re-verified all 24 on the applied
+tree: 24/24 clean. Net W6: **524 -> 490** (ratchet re-locked with
+provenance). W7 holds 445. Guards: orphans 0, empty warheads 0,
+dup-inherits clean, local-Versus 881 <= 891. Ledgers re-extracted —
+3 drifted (`redalert2_allies`, `redalert2mod_consortium`,
+`redalert2mod_tkm`), all versus_templates provenance remaps left over
+from W7 tail-2 (`2f440999f`), none W6-caused.
+
+First W6 attempt (uncommitted) indexed merged-node children rather than
+file decls — same-key siblings (`Warhead@DuneRock` typed + untyped pair
+in `LatinAADefenderCannon`) desynced the two index spaces and deleted
+type-bearing decls. Reverted untouched; corrected scan keys everything
+to file-decl position with a key-match assertion before deletion.
+
+## 2026-09-27 — W7 chain-collapse batch-6: chain-root pool drained (NOVA)
+
+Final 26 chain-root children inlined verbatim (RA Soviets, RA2
+Soviets/Yuri, RA2Mod FutureTech/TKM, `mods/cameo/weapons/redalert2mod.yaml`).
+Net W7: **477 -> 451**. Strict-order verify vs `ae67c80fc`: 26/26 clean.
+Guards all green; local-Versus 881 unchanged; ratchet re-locked to 451.
+
+Chain-root pool is now empty. Remaining lane W7 (451 global, lane share
+~360) = rule-4 holds (parent carries inline Versus — edge kept per
+ruling), the 19 deferred same-key collisions (await Claude's ruling in
+STATUS_2026-09-27_nova_w7_batch4.md Q1), and mid-chain weapons whose
+parents still weapon-inherit — next bottom-up pass targets those as
+their parents retire.
+
+## 2026-09-27 — W7 chain-collapse batch-5 (NOVA)
+
+60 more chain-root children inlined verbatim (RA Allies/Japan/Shared/
+Soviets + RA2 Allies/Shared/Soviets weapon files). Net W7: **536 -> 477**
+— `RA2FlyingBody` keeps a second weapon edge (partial, resolve-clean).
+Verification vs `76914f1c8` strict-order: 60/60 clean. Guards: orphans 0,
+empty 0, dup-inherits clean, dup defs 0, local-Versus 881 <= 891.
+Ledgers re-extracted (10 in-lane, same provenance-remap class). Ratchet
+re-locked 536 -> 477. The 10 same-key collisions remain deferred pending
+Claude's ruling (see STATUS_2026-09-27_nova_w7_batch4.md Q1).
+
+## 2026-09-26 (late night) — W7 chain-collapse batch-4 (NOVA)
+
+60 chain-root children of Versus-free parents inlined verbatim across
+RA/RA2/RA2Mod weapon files (the `Inherits: <weapon>` edge removed, parent
+body spliced in place). Net W7: **595 -> 536** — 59 de-parented;
+`AsianChaosMine` keeps its second weapon edge `Inherits@2: AsianTankMine`
+(partial collapse, resolve-clean).
+
+Verification vs b95031f9b (strict-order, payload + ordered warhead keys):
+**60/60 clean.** Guards: orphan cancels 0 | empty warheads 0 |
+dup-inherits clean | cross-file dup defs 0 | local-Versus census 881 <=
+891 unchanged (parents were Versus-free by selection) | all shape buckets
+<= ratchets (W7 re-locked 595 -> 536) | balance-drift clean after ledger
+re-extract (13 in-lane ledgers: versus_templates provenance weapon ->
+template triples; same for reverted weapons whose parents were spliced).
+
+Splicer hazards hit and handled: an accidental second 60-weapon run on
+top of the first was detected by diffing the audit's W7 drop-set against
+the emitted name list (118 dropped vs 60 claimed); the extra 59 blocks
+were restored to b95031f9b text and resolve-verified clean (they become
+batch-5's pool). 10 same-key inheritance collisions (e.g.
+`WaveTurretImpact`, `KirovExplode`, `SteelStalkerRailgun_EMP`) remain
+deferred for individual handling.
+
+## 2026-09-26 (night) — W7 rule-4 remediation + master merge + audit split (NOVA)
+
+PR #516 was BLOCKED by rule 4: W7 splices copied parents' inline
+`Versus`/`PercentageVersus` into 75 concrete defs (`count_local_versus`
+891 -> 956; Claude's merge gate: <=891). Remediation on
+`devin/nova/w7-packs` (`01c89a5a5`): restored the `Inherits: <weapon>`
+edge on all 75 where the parent carries the Versus blob; the authorized
+held-67 ExtraDamage folds re-applied as local `-Warhead@<chip>:` cancels
++ `Damage:` pins; Virusgun trio kept template-edges with stub-ordered
+nodes (duplicate `^Warhead_Toxic_Medium` path removed). Local-Versus
+final: **881 <= 891**. W7 re-locked **520 -> 595** with provenance in the
+ratchet comment (75 restored edges are the ruling's intent, not new debt).
+
+Merged `origin/master` 91f865585 (`fb3cdb4b6`): conflicts in Naxis
+weapons, redalert2mod.yaml (kept converted shape + master's
+`pack|file` Report format) and `audit_orphan_cancels.py` (EMBER's
+--fragile + NOVA same-key sibling grouping).
+
+Post-merge verification vs master (2475-weapon corpus, strict-order):
+2407 clean; all 68 diffs are authorized — held-67 folds (Damage
+multiset totals preserved, e.g. SteelIonCannonDamage 450000 = 450000),
+R20 toxic-dart renames, cosmetic intra-node field order. 48 post-merge
+drifts vs pre-merge tip = master's R16 geometric-mean rebalance of shared
+^Warhead_* Versus tables — inherited by reference, correct.
+
+Gates on merged tree: local-Versus 881 <= 891 | orphan cancels 0 |
+empty warheads 0 | dup-inherits clean | weapon-shape all buckets <=
+ratchets (W7 595/595) | balance-drift clean after `ae18687ae` re-extract
+(14 in-lane ledgers + derived sidecars; `_model.json` Flak census 48->49
+is the conversion's own move) | cross-file duplicate defs 0 |
+**boot-gate PASS** (`MenuPostProcessEffect.PostWorldLoaded`, private
+SupportDir, zero new exceptions).
+
+`audit_orphan_cancels.py` same-key sibling fix split per Claude's order
+into its own PR: **#533** (branch `devin/nova/orphan-cancels-siblings`,
+off master, +test `tools/tests/test_orphan_cancels_siblings.py`).
+Master-version-vs-fixed on this tree: 9 findings -> 0, each a
+sibling-provider false positive (`Range:` redeclare-cancel idiom,
+engine MergeSelfPartial semantics).
+
+## 2026-09-26 (late) — W7 held-67: ExtraDamage fold + materialization landed (NOVA)
+
+The 67 weapons held for the ExtraDamage ruling are now converted on
+`devin/nova/*` (worktree nova-packs): every `Inherits: <weapon>` edge inlined,
+all damage-typed `Warhead@*ExtraDamage` chips folded into each weapon's own
+main warhead Damage (resolved-arithmetic, not textual), `OpenToppedDamage`
+twins preserved per ruling. Result: **W7 760 -> 693** (ratchet re-locked),
+payload + ordered-warhead-key verify clean on all 784 defs in the 9 files,
+`find_empty_warhead` = 0, damage totals preserved everywhere.
+
+W6 rose 442 -> 497 — inherent: materialization re-declares a parent's locally
+declared effect warheads (Smudge/Concrete/Effect) as local decls in the child.
+Baseline re-locked at 497 with justification; flagged to Claude for ruling.
+
+### Tool: `tools/nova_w7mat.py`
+
+Materializer that resolves each target against an immutable `--base` worktree
+(HEAD), so converting parents and children in one batch cannot contaminate a
+child's expectation (the silent damage-loss class: parent folds chips into
+main, child's local main override then shadows the folded value). Emits bare
+`Warhead@K:` stubs at `#W7MAT:` markers for order, field pins + fold bump at
+the block tail, `-K:` cancels for content surviving templates resurrect.
+
+### Hard-won failure modes fixed this session
+
+- **Live-tree target resolution** — measuring the child against the already-
+  converted parent baked the chip loss into the expectation. Resolve targets
+  on a pristine base ruleset; verify on the live tree.
+- **`#` comment banners inside logical blocks** — SchwarzerMond/Syndicate
+  files interleave `#`-banner separators mid-weapon. A block regex that stops
+  at col-0 `#` truncates the block: pins land before the banner, post-banner
+  local decls then override the pins (main Damage 18000 -> 16000 observed).
+- **Nested `-Field:` cancels** — orphan-cancel pruning must only drop dead
+  cancels; a `-HitAnim:` inside `Range:` is load-bearing while a provider
+  exists and is resolver-residue once dead (miniyaml keeps `-x` markers that
+  cancel nothing). Dropped iff the post-strip subtree lacks the key entirely.
+- **`OpenToppedDamage` is not a chip** — `Warhead@SniperWeaponExtraDamage`
+  keys on `*ExtraDamage` but is the passenger-damage mechanic; fold only
+  damage-typed nodes (SpreadDamage/AreaDamage/...).
+- **Surviving providers resurrect cancelled content** — pins must emit
+  `-field:` cancels for fields the removed parent had suppressed, else
+  `^Effect_*` templates leak them back.
+
+### Boot-gate
+
+Pending at write time; will be updated before commit.
+## 2026-09-26 — S2 split-def fix: 3 RA Allies weapon stubs folded (NOVA)
+
+`audit_split_definitions` flagged `ra1_allies_alliedrocketsoldier_rocketsracryo`,
+`ra1_allies_rifleinfantry_carbine`, `ra1_allies_rifleinfantry_carbine_cryo` —
+defined in both `RedAlert/Shared/yaml/weapons.yaml` (full 3-way defs) and
+`RedAlert/Allies/yaml/weapons.yaml` (bare Range+Damage stubs).
+
+Load order: Shared(152) -> Allies(155), so the Allies stubs were LIVE OVERRIDES,
+not dead residue — resolved values matched the stub values, the Shared-side
+`Damage`/`Range` were dead-masked fields. Fix: folded the live stub values into
+the canonical Shared defs, deleted the 3 stubs. All 3 weapons resolve
+byte-identical (carbine Damage 3513, cryo 3513, rocketsracryo 11500 preserved).
+S2 findings 5 -> 2 (remaining: Flamethrower + Sound2 — DAWN-lane files).
+
+## Devin-EMBER — AI phase 6a: fogged observation + RegionMemory (2026-09-27)
+
+**Branch:** `devin/ember/ai-fog-6a` off post-merge master (`bde659efa`).
+
+Session merged the open queue first: #517 (garrison), #529 (W22 lobby), #530 (Fransbot
+research), #528 (ledger renames), #537 (drop guard), #514 (Nod armour), plus landed the
+stranded #523/#532 stack content note — those two merged down a stacked chain, not to master;
+the consolidated rebase to master went to `devin/ember/family-bases-merge` (separate PR).
+
+Phase 6a implementation per `docs/design/AI_FRANSBOT_RESEARCH.md`:
+
+- `OpenRA.Mods.Cameo/Traits/BotModules/BotFogMemory.cs` (new): `ObservedActor` last-seen
+  records per enemy (ActorID-keyed, so a unit re-seen elsewhere moves instead of
+  double-counting); `BotFogMemory.Observe` feeds only `CanBeViewedByPlayer` sightings +
+  `FrozenActorLayer` fogged buildings, forgets records whose remembered cell is now visibly
+  empty, expires non-buildings after `ObservationTimeoutTicks`.
+- `RegionMemory`: 8-cell grid, per enemy: Army/Defence/AntiAir/Economy value, LastSeenTick,
+  EverSeen (set by a contained record or `Shroud.IsVisible` of the region centre). Published
+  on `BotSituation.Regions`; `EnemyProfile.KnownRegions` counts it.
+- `UseFoggedObservation` (default true): false reproduces the legacy omniscient numbers;
+  `EnemyProfile.HarvesterCount` = currently-visible harvesters.
+- `ai.yaml` documents the lever; `AiSituationLogWriter` emits `harvester_count`/`known_regions`.
+
+Verification: `ai_bot_player_gate` PASS in both modes (7 records each). Temporary fog flip on
+the gate map: `known_regions` 144→4 and `main_target` empty — correct pre-6b behaviour (no
+scouting). Boot-gate PASS (private SupportDir, fresh `PostWorldLoaded`, no new exceptions).
+229 NUnit tests green, incl. new `RegionMemory` geometry cases.
+
+Gotcha found by the gate: `Actor.Location` NREs on actors with no `IOccupySpace` (the enemy
+PlayerActor is in `World.Actors`) — legacy profile never touched `.Location` on those because
+it filtered to buildings/combat first. Both new paths filter `IOccupySpaceInfo` up front.
+
+## Devin-DAWN — dead-warhead-field batch-2: supplier deletes (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-batch2` (stacked on `devin/dawn/dwf-431-fix`).
+
+Swept the 14-kind/70-weapon residual down to **12 kinds / 28 weapons**:
+- **Supplier deletes** in `mods/cameo/weapons/weapons.yaml` — dead lines removed
+  at origin after verifying every consumer resolves the node to a type lacking
+  the field (all-consumers-dead check, not just the audit's flagged subset):
+  `Warhead@SniperWeaponExtraDamage.Falloff` (:133, 3 consumers),
+  `^RepairWeapon` `Warhead@Defuse1.Spread/Falloff` (:2959-60, 9 consumers),
+  `Warhead@Sniper_Light_ExtraDamage.Falloff` (:9937, 17 consumers).
+- **Local dead-line deletes** (the field sits on the dead-typed node in the
+  weapon's own file): Ixian `EMPUnit.Falloff`, TSMobile_EMP, wc2gryphonFireVisible,
+  `ts_nod_mobilerepairvehicle` Defuse1 pair, TSSniper_elite, TD GDI x3, TD Nod,
+  TS Forgotten.
+- **Retype-site cancels** (supplier field is LIVE on other consumers —
+  `^HealingWeapon`'s `Warhead@Effect: CreateEffect` legitimately uses
+  `Explosions`/`ImpactActors`): `-Explosions:`/`-ImpactActors:` on D2KRepair's
+  local retype and an untyped pin on TSHeal.
+- Resolved-diff HEAD→working: 45 weapons differ, every delta a removed dead
+  leaf; orphan cancels 0, empty warheads 0, balance drift clean.
+- **Correction (same commit series):** the first liveness pass matched
+  consumers by FILE, not (file,line) — it reported a "live-children" class
+  (ProtossHeal/TSRA2Heal/MagicOrbSpreaderProjectile2/NaxiMeteorSpawner) that
+  does not exist. Line-precise matching shows zero live consumers for every
+  flagged local line: plain deletes. The only truly-live dead-field source is
+  `^HealingWeapon`'s `Warhead@Effect` Explosions/ImpactActors (live on
+  BroodweaverLeech, MedicHeal, TKMMedicHeal) — retypers cancel, already done.
+  Lesson folded into LESSONS_LEARNED: field provenance is (file,line), never
+  file alone.
+- Remaining 26 weapons are NOVA's lane (RA/RA2/RA2Mod packs + legacy
+  redalert2/redalert2mod/other/tiberiandawn RA-owned entries) — per-weapon fix
+  list posted to the fleet board.
+
+## Devin-DAWN — dead-warhead-field fix #431 culprit (2026-09-27)
+
+**Branch:** `devin/dawn/dwf-431-fix` (off master). Claude routed the master-red
+`audit_dead_warhead_fields` (20/72 vs ratchet 15) for bisect + fix.
+
+- **Bisect:** `git log` bisection with the current audit copied into scratch
+  worktrees (old-commit audits lack `--fail-closed` and can't be compared);
+  +6 dead `SpreadDamage.*` kinds entered Sep-20→22 window → culprit commit
+  `c48c7d41a` / **PR #431** (W24 lane-2 multi-main collapses).
+- **Mechanism:** the fold retyped `Warhead@Tesla_Super` to `SpreadDamage` on
+  `...ttankzap2arcteslafragment1_emp`/`_fragment2_emp`; the percentage-ladder
+  fields the old type consumed (`FriendlyFireDamage`, `FriendlyFireSpread`,
+  `IntegrityScale`, `PercentageScale`, `PercentageSpread`, `PercentageVersus`)
+  became dead inherited values on the new type.
+- **Fix:** six leaf `-Field:` cancels on fragment1 only — fragment2 inherits
+  from fragment1, so cancels there were provider-less (orphan-cancel audit
+  proved it). Engine-identical: resolved diff = exactly the 6 discarded fields.
+- **Audit:** dead warhead fields **14/70 WARN ≤ ratchet 15** (green); orphan
+  cancels 0. Master `shared_redalert2` balance ledger re-extracted (#519-era
+  dot renames had missed it) — drift clean, un-stale-claim for `doc_claims`.
+- Finding: fleet `FINDING_2026-09-27_dawn_deadfields_bisect.md`.
+
+## Devin-DAWN — W6 in-lane sweep: local fx warheads -> per-weapon templates (2026-09-26)
+
+Branch `devin/dawn/w6-fx` (stacked on `devin/dawn/r17-chips` tip `1ae9c7d02`).
+
+W6 = effect-typed `Warhead@X` blocks declared locally on concrete weapons.
+Converted **all 174 in-lane W6 weapons** (D2k, TiberianDawn, TiberianSun,
+Warcraft2, StarCraft; 0 remaining) into ~250 per-weapon
+`^<theme>_<weapon>`/`_n` templates emitted directly before the consumer,
+referenced by `Inherits@w6fx[N]:` edges placed at the exact run position.
+
+- Resolved+ordered identical **corpus-wide: 3809/3809** (0 payload, 0 order,
+  0 missing; the 1358 unresolvable names are non-manifest defs on both sides).
+- Orphan cancels 0, empty warheads 0, dup-inherits blocking 0.
+- Buckets: W6 521 -> 347, W4 94 -> 203, W1 rate 1184 -> 1534 bp
+  (ratchets re-baselined — +1 fx-kind edge per converted weapon is the
+  sanctioned per-weapon-bundle shape; only 3/174 weapons could have chained
+  into an existing fx edge instead).
+- Audits/tools: `w6_conv.py` (extractor), `w6_xcheck.py` (corpus-wide emitted
+  name collision scan), `verify_tree.py` + full-corpus verify.
+
+**Two traps found and fixed in-flight:**
+- **Corpus-wide name collision** — a `^<theme>_<weapon>` name can already
+  exist in *another* file (e.g. `^d2k_ixian_d2k_basq_aa` in
+  `weapons/effects_d2k.yaml` from a W7 materialization). Emitting a second
+  def merges the two and creates the engine's `Parent type already
+  inherited` crash when both edges point at it. Same-file checks are not
+  enough — the final scan indexes every `^` def under `mods/cameo`.
+  6 same-file + 1 cross-file collision renamed `*_fx`.
+- **Nested cancels (`-X:` inside a moved `Warhead@` block)** ride along into
+  the template; `audit_orphan_cancels` evaluates `^` defs in isolation so a
+  cancel whose provider only exists via the consumer's other edges is
+  flagged. Split the cancel back out as a local untyped `Warhead@X:` pin
+  (`sc_terran_valkyrierockets`) — resolved identical, audit clean.
+
+Ratchets re-locked: W1_RATE_BP 1534, W4 203, W6 347 (W7 647 — belated
+re-lock of the R17 fold drop, unchanged by this batch).
+
+## Devin-DAWN — W2 dead wh-edge sweep (2026-09-26)
+
+Branch `devin/dawn/w2-deadedges` (stacked on routed-fixes/`e227f3245`).
+
+The residual W2 class: weapons carrying 2+ `^Warhead_*` inherits where the
+extra edges' `Warhead@` nodes never reach resolution (cancelled or shadowed).
+Classified all 107 my-pack W2s by live-vs-dead node survival:
+
+- **153 dead edges dropped** across 87 weapons — an edge is dead when every
+  `Warhead@` node it emits is absent from the resolved weapon.
+- **42 top-level fields re-pinned verbatim** — dead edges also carried
+  `TargetActorCenter`, `ValidTargets`, `Range`, `ReloadDelay`.
+- 13 multi-main weapons left alone (deliberate dual-warhead design: _Flat +
+  shaped, ExtraDamage chips, `TSVulcanGun`-class cancel mechanics).
+
+Audits: W2 123 -> 45, W1 287 -> 234 (ratchets lowered), D2 3637 = base,
+empty 0, orphans 1 (see trap below), resolved 679/679 identical.
+
+**Trap — `audit_orphan_cancels` mis-flags three load-bearing shapes:**
+(a) cancels inside `^` templates whose provider is the template's own
+`Inherits` (DevBullet resurrected `Warhead@CannonHE_Heavy` for every
+consumer); (b) `-Warhead@X:` WITH a child pin (cancel-redeclare idiom —
+`TSBombSonic`); (c) cancels whose provider is a concrete weapon-parent.
+Fixpoint removal is mandatory: remove -> re-run -> restore any drift —
+never trust the flag alone.
+
+## Devin-DAWN — EMBER-routed fixes + faction-leak model gap (2026-09-26)
+
+Batch on `devin/dawn/routed-fixes` (stacked on `devin/dawn/w7-packs-v2` /
+PR #508). All four items EMBER's board routed to DAWN:
+
+- **B1 leaks (6 rows) — 1 model false-positive, 5 intended sharing.**
+  `cameo_model.roster()` never modeled `Buildable.Factions:` — the engine's
+  roster gate. `ordos_upgrade_lightfactory` (`Factions: ordos`) was flagged
+  buildable in harkonnen purely on prereq tokens. Added `_factions_allows` to
+  the fixpoint; L1 drops 6 -> 5. Remaining 5 rows are deliberate cross-pack
+  sharing added in team sessions (`4c6d4bfaa` ts_gdi conyard ->
+  `asianalliancebarrier`; `f6956364a` cabal conyard -> `tslaserfence`;
+  latinsyndicate StartingUnits list naxis/asianalliance vehicles = mercenary
+  design). Pack-mount question for the fleet, not a yaml fix; syndicate rows
+  are NOVA's files.
+- **Q-order:** `steelconsortium_consortiummobileconstructionvehicle` —
+  `~warfactory` moved before `consortiumradar` (sibling MCV convention).
+  Prereq-order violations 1 -> 0.
+- **MinRange (7 rows):** DESIGN.md `round(Range/25)*5` enforced.
+  td x4 + ordos_chemturret: stale donor/rounding values normalized
+  (1999->2000 x2, 2258->2260 x2, 1985->2800). ra1 pair: pinned
+  `MinRange: 2365` (inherited `155mm`'s 2670 = stale for Range 11813).
+  audit_min_range: 7 -> 0.
+- **G1 garrison (7 rows):** all melee (`^DogJaw` bites, `^Warhead_Melee_*`
+  slices) — applied the existing 2026-07-10 ruling, added to
+  `garrison_exceptions.yaml` melee list (39 -> 46). G1 7 -> 0.
+
+## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
+
+Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave
+landed #497–#500. Old commit `e7c5b60ab` cherry-picked onto `4416e43bd` as
+`9835ec4c4` on `devin/dawn/w7-packs-v2`; only docs append-races conflicted.
+
+**R16 regression trap found:** materialization bakes the resolved `Versus:`
+table into inlined `Warhead@X` nodes — when master's R16 generator regen
+(#506/#507) changed every `^Warhead_*` Versus profile, 33 of the converted
+weapons drifted (stale baked values). Fixed by syncing each materialized
+`Versus` subtree to the new master-resolved values. Any materialization batch
+that survives a Versus regen needs this re-sync — check resolved-identity
+against the NEW base, not the original one.
+
+Re-verified on the new base: 637/637 resolved-identical vs `4416e43bd`,
+orphans 0, empty 0, diamonds 15881=base, D2 3969=base, S2 5=base,
+all W-buckets at/below ratchets (W7 664). Boot-gate PASS (47->47).
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
@@ -329,6 +840,26 @@ Maintainer order 2026-09-07; overflow item claimed per Claude's lane orders (§4
 - Pitfalls hit + documented in LESSONS_LEARNED: `Traits.World` namespace collides with
   `OpenRA.World` for every `Traits.*` file (use flat `OpenRA.Mods.Cameo.Traits`);
   explicit-interface members need the interface re-declared on the shadow.
+
+## 2026-09-26 — DAWN: W8 batch-1 — 53 legacy-template edges -> covering triples (D2k/Outpost)
+
+Replaced `Inherits: ^<legacy-bundle>` with the template's own covering
+three-kind edges (recursive) + drift pins on 53 weapons across six
+semi-converted templates: `^D2K_Cannon` (19), `^D2KMissile` (15),
+`^D2KRocket` (6), `^OCannon` (6), `^Debris2Legacy` (4 — genuinely
+dual-warhead, 6 covering edges), `^OMissile` (3). Verified 0/0
+ordered+payload on all 192 weapons in touched files; orphans 0;
+empty warheads 0. W8 in-lane 362 -> 303 (batch-1 315, batch-2 +12: `^CabalMissileLight`
+7, `^TSMG` 5, `^WorkerAttack` 3 — batch-2 nets edges because those
+consumers already carried the projectile family). Bucket rises (resolved-faithful,
+ratchets documented in audit_weapon_shape.py): W1 rate 1101->1188 bp,
+W2 +18, W3 +13, W4 +26, W6 +3. Three orphan `-Report:` cancels removed
+(provider edge gone; cancels had already consumed the leaf). Raw-body
+legacy templates (`^HeavyBomb`, `^MediumFlameWeapon`, `^TSCannonEffect`,
+`^FlakWeapon`, ...) cover to NOTHING — they need real family conversion
+(design-class), not edge surgery; `^LaserWeapon`/`^RailgunWeapon`/
+`^TeslaWeapon` remain held on the pending ExtraDamage ruling.
+
 ## 2026-09-22 (late) — EMBER: landing batch reconciled, #424 rebased onto 1519a7582
 
 Claude landed the backlog: **#421, #422, #423, #427, #420, #411, #413-#419,
@@ -12588,3 +13119,229 @@ empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
 (pre-existing); weapon-shape all buckets at/below ratchets —
 **W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).
 
+## 2026-09-26 — W7 ContentPack batch (DAWN)
+
+97 weapon-parent edges across the ContentPack weapon files converted
+(D2k Atreides/Harkonnen/Ixian/Ordos/Shared, SC Protoss/Terran/Zerg,
+TD GDI/Nod, TS GDI/Nod/Forgotten). Two passes:
+
+- **Covering-swap (36)**: parents with clean 3-kind covering got their
+  edge swapped for the covering set — stripped class-template edges
+  (`^MissileWeapon`, `^LaserWeapon`, ...) so pins absorb them instead
+  of inflating W8.
+- **Materialize (60)**: bundle/chain parents and children that already
+  carried kind edges — covering-swap on those would duplicate the kind
+  (W2/W3/W4), so the parent's resolved non-effect payload inlined and
+  effect-typed nodes routed into a per-weapon `^<game>_<pack>_<weapon>`
+  family (deriving from the child's existing fx edge when present).
+
+Held: Ordos `Sound2` — its Atreides split-twin already edges
+`^d2k_atreides_sound2`; giving Ordos its own `^d2k_ordos_sound2` pushes
+the merged name to 2 fx edges (W4). Needs the Sound2 split-def ruling.
+
+New traps hit and fixed:
+- Resolver applies `Inherits` at its FILE POSITION — a family edge or
+  materialized pins emitted below local pins let later templates
+  override them (RashidanGun_upgrade / HMG_Duelist_upgrade / OrniMissile
+  drift). Edge order and block order must be preserved.
+- `fam_name in allnames` misses defs in `effects_*.yaml` (not in
+  man.weapons) — `^d2k_ordos_autogun_tank_small` and
+  `^ts_gdi_tsioncannon` collided; extended the former (it was a partial
+  family), deleted the emitted dup for the latter.
+- Orphan-cancel audit counts CORPUS-WIDE dead cancels incl. nested
+  `Node/-Field` — 66 removed after rematerialize; one live
+  `-Warhead@Effect:` was wrongly cut by a stale-line-number pass and
+  restored (`td_nod_gunturret_turretgunblackmarket`).
+- Dedupe pass hoisted nothing but sibling-folding PLUS the emit order
+  produced blocks with `Inherits` below locals — fixed by re-hoisting;
+  interleaved `-Key:` cancels BETWEEN Inherits lines are load-bearing
+  (`eye_bomberguy`, `SwarmlingShoot` — cancel kills an early parent's
+  pin, later parents re-provide it).
+
+Verified: 637/637 pack-file weapons resolved-identical vs HEAD;
+orphan cancels 0; empty warheads 0; D1 0; D2 3636 (< HEAD 3968);
+S2 5 = HEAD; weapon-shape all buckets at/below ratchets —
+**W7 760→664, W4 41→40, W6 442→437** (baselines lowered).
+## Devin-DAWN — W7 cross-weapon edge conversion, my lanes cleared (2026-09-26)
+
+Branch `devin/dawn/w7-chains` (stacked on `devin/dawn/w2-deadedges`).
+
+19 defs in my themes carried `Inherits: <concrete weapon>` edges (W7 class):
+16 Warcraft2 cross-race/variant chains (orc weapons reusing human parents,
+DeathCoil 3-deep chain), 2 templates (`^Debris2Legacy -> Debris`,
+`^TSHealWeapon -> Heal`), plus `TSHealWeapon` consumers. Converted via
+`w7_conv.py`: each weapon edge replaced by the parent's COVERING template
+edges (recursive through chains; unique `Inherits@w7N:` labels), then
+resolve-verify + pin-fixup for drift. `Sound2` (Ordos) skipped — held
+split-def ruling.
+
+- Resolved+ordered: 679/679 identical vs stack base.
+- Orphan cancels: 2 created (`-Report:` whose provider leaf went away with
+  the parent edge) — deleted per dead-edge rule; final 0.
+- Marked all materialized decls `# W7MAT` (order-pin / covering-edge) —
+  rule 0.4.
+- Bucket deltas (resolved-faithful rises, not regression): W2 46->53,
+  W3 7->11, W4 40->44 (dual-family resolved content now carries both
+  covering edges), W6 512->518 (marked pins), W1 234->239. W7 664->647
+  global; my themes 18 -> 1 (held Sound2 only).
+- Failed first attempts documented in LESSONS: naive child-copy expands
+  parent raw children (bloats every bucket); drop-edge+repin-all vomits
+  whole subtrees. Covering-edge swap is the right shape.
+
+## Devin-DAWN — W1 dead-edge sweep, in-lane arity floor reached (2026-09-26)
+
+Branch `devin/dawn/w1-deadedges` (stacked on `devin/dawn/w8-batch1` tip
+`2c0cf7196`, PR #521).
+
+Method: per-edge resolve-drop probe — remove the Inherits line, re-merge
+the def, compare resolved flat payload + ordered top-level keys. An edge
+is dead iff removal changes nothing (every leaf it supplied is shadowed
+by a later parent/local AND its position contribution is redundant).
+Applied iteratively until fixpoint per weapon (mutually-redundant pairs
+resolve to the maximal joint drop set).
+
+- Sweep-1 (>3-arity weapons): 43 dead edges across 35 weapons.
+- Sweep-2 (all arities >=2 edges): 24 dead edges across 19 weapons —
+  includes the held `D2K_TowerMissile`/`mtank_pri2` losing their dead
+  `^Projectile_Missile_Heavy_D2K` edge (the defs stay held on
+  `^D2KMissile`, just minus the shadowed edge).
+- Dead `-Key:` cancels whose provider was a dropped edge removed in the
+  same pass (EMBER rule: edge+cancel together or neither) — 19 + 20.
+- Verified: 579/579 resolved+ordered identical vs branch base,
+  orphan cancels 0, empty warheads 0, dup-inherits identical to base.
+- Buckets: W1 258->248 (rate 1188->1142 bp), W2 71->58, W3 24->18,
+  W8 303->298. Ratchets re-locked lower. The remaining >3-arity weapons
+  are at the resolved-faithful floor: dual/triple-family merges and
+  whitelisted `^<faction>_<weapon>` addon templates, not dead edges.
+
+Tooling note: `w1_deadedge.py`/`w1_allarity.py`/`w1_apply2.py` (scratch).
+Comparator `verify_tree.py` scopes by explicit file list — the
+`git log -1`-files comparator has a real blind spot (see LESSONS).
+
+## Devin-DAWN — R17 chip folds, W5 batch-1 (2026-09-26)
+
+Branch `devin/dawn/r17-chips` (stacked on `devin/dawn/w1-deadedges` tip
+`2c54d3c74`, PR #525).
+
+Lane item W5 (multi-MAIN warheads). Claude's month-lanes order:
+"W5 folds follow R17 arithmetic — keep each weapon's total damage" and
+"fold ExtraDamage weapons in the batch whose family they belong to."
+
+20 weapons / 21 chips folded, `main.Damage += chip.Damage` verbatim:
+
+- ExtraDamage-class chips (R17 itself): `LaserExtraDamage_Auxiliary`,
+  `RailgunExtraDamage_Auxiliary`, `Laser_Heavy_ExtraDamage` — the
+  `_Auxiliary` suffix is the same chip pattern the `*ExtraDamage` suffix
+  check misses. 10 weapons.
+- ExtraRepair / ExtraHealing chips (same chip-half structure, applied
+  under the same verbatim-sum arithmetic — flagged to Claude in case the
+  repair family wants a different disposition): 10 weapons.
+
+Fold mechanics: local chip blocks deleted; template-supplied chips get a
+`-Warhead@chip:` cancel; sole-purpose `Inherits*: ^Warhead_*_ExtraDamage`
+edges dropped with the fold (9 edges — also why W2 -7); chip+edge removed
+TOGETHER or the cancel orphans (EMBER rule). Caught 3 re-supplied chips
+(CABAL lasers, D2KRepair) where the template re-provides the node after
+the local declare was deleted — appended cancels.
+
+VT-aware survivor pick: `D2KRepair` folds `ExtraHealing` into
+`HealingWeapon` (VT=Heal), NOT `1Dam` (VT=Repair) — matching the chip's
+route, not just max damage.
+
+Verified per-weapon: resolved diff = exactly {chip subtree gone,
+main Damage = old + chip sum, nothing else}. 20/20 OK. Corpus: 464/464
+otherwise identical, 0 order diffs, orphans 0, empty 0, dup-inherits
+identical, boot-gate PASS. W5 172->153 global, W1 248->247,
+W2 58->51; ratchets re-locked (W5 re-pinned to true value 153 vs the
+stale 389 ceiling).
+
+Remaining in-lane W5 (~36): 1Dam flat-main folds (analyse_flat_main_fold
+— mean-preserving, per-armor shift needs maintainer eye), areanuke rings
+(5), VR-routed enemy/ally splits (Sound/GrenDeath/SaboDeath — Sound2 held),
+dual-caliber AA stacks, held-trio mains, multi-mains >2 (SiegeQuad,
+PositronBounce). All need per-class rulings — classification posted.
+
+---
+
+## 2026-09-26 — Rule-4 Versus remediation (DAWN)
+
+Claude's ruling (REPLY_2026-09-26_claude_to_nova_w7_next.md): concrete
+weapons declaring `Versus`/`PercentageVersus` locally must KEEP the
+weapon-parent edge carrying that content. Merge gate:
+`count_local_versus.py` <= 891 (master baseline).
+
+Diagnosis: my W7/W8 materialization machinery (stack root #508) copied
+parent inline Versus into concrete defs — gate went 891 -> 958 (+67).
+
+Remediation executed: full def revert to afb66c9b5 master form for all
+66 KEEP-EDGE weapons (probe-verified: dropping the copied Versus is NOT
+resolved-identical, so the parent edge is required). On the reverted form:
+- W6 fx locals re-extracted for the 9 defs that still had local fx runs
+  at master (keeps in-lane W6 = 0)
+- W5 fold re-applied on wc2axeFirespear (Damage pin + chip cancel);
+  GDIRigDroneTargetingTower needed nothing — its parent carries the fold
+- 196 orphaned generated `^<pfx>_<weapon>*` templates deleted
+  (base-aware sweep: 7 pre-existing W7MAT templates kept)
+
+Verified: gate 891 (exactly at ceiling); corpus 3719 weapons — 0 payload
+diffs, 0 missing; 5 order diffs all in wc2 family and each RESTORES
+master order (the materialized bodies had drifted tip-side — the revert
+fixes pre-existing drift, caught only because this verify enumerates the
+BASE-file census, not the current-file census). Orphans 0, empty 0,
+dup-inherits byte-identical to base.
+
+Ratchets re-locked: W7 647->711 (restored parent edges = ruling intent),
+W8 298->302 (4 legacy ^ edges rode back with the master wc2 defs —
+rule 4 outranks W8), W1 rate 1534->1435bp, W4 203->146, W6 347->346,
+W2 51->49.
+
+Bug class logged in LESSONS: splice helpers must build newl = head +
+newblock + tail on the ORIGINAL line list — mutating the list then
+slicing by stale indices ate a 202-line region (OrniBomb..OrniGunC in
+D2k/Atreides); only caught because the resolved diff was absurd, then
+the base-census verify confirmed nothing was lost after repair.
+
+## 2026-09-27 — PR #534 fleet-order corrections (sounds + balance re-extract)
+
+Claude's tonight-merge order for #534: restore master's `pack|file`
+sound paths on stack-touched weapons; take master's `docs/balance/**`
+then re-extract. Done on top of merge `1bb1c0308`:
+
+- Sound reconciliation: qualified `wc2_firehit.aud` on the generated
+  `^wc2_orcs_*deathcoil*`/`deathknightfire` templates and
+  `wc2_sword{1,2,3}.aud` on hellscream slice/elite to master's
+  `wc2_shared_sounds|` form; `d2k_shared_sounds|autoguntrt.wav` on
+  `harkonnen_autogunturret`. Reverted an over-patch on
+  `wc2tornadoTest` — master deliberately keeps `bowfire.aud`/
+  `bowhit.aud` bare there. Corpus diff vs master `8f3d0a564`:
+  2475 compared, **20 differing, 0 sound diffs, 0 missing/added** —
+  every remaining diff is the authorized R17 chip-fold signature
+  (main `Damage` += removed auxiliary chip's value, exact arithmetic).
+- Balance: master's `docs/balance/derived/**` restored verbatim
+  (re-extract regenerated only 4th-decimal float jitter — discarded);
+  raw `shared_redalert2.json` byte-identical to master, preserving
+  `ra2e2_black.design.unit_class: 1.0` (the #528 carry-forward).
+- Audits: dead fields 12 kinds/26 weapons (ratchet 12), orphans 0,
+  empty warheads 0, drift clean (34/34), doc_claims 43/43.
+## 2026-09-26 (late) — EMBER g4-garrison, commit 013bdd7ad
+
+**Done:** G4 vehicle-queue ruling applied. New `vehicle_queue:` category in
+`docs/design/garrison_exceptions.yaml` (6 mechs exempt); audit loader made
+category-aware so the exemption is G4-only (G1/G2/G3 unaffected). G4 7->1
+(only `cabal_ravager` — owned by Claude per ruling: moves to Infantry queue
+in the armour PR). G1 stays 7 (melee-only), G2/G3 0. Baseline report,
+SUMMARY, HANDOFF (26h) updated; PR #517 body updated; boot-gate PASS.
+
+**What didn't work:** `edit`-tool writes silently didn't persist in this
+worktree twice (file unchanged on disk, `git status` clean) — switched to
+`exec`+Python writes for all file changes here. `launch-game.cmd` via
+git-bash `cmd //c` resolves Git's Unix `find`, breaking its VERSION check —
+booted `bin/OpenRA.exe` directly with identical args. `engine/VERSION` had
+been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
+`Engine.SupportDir=` requires the dir to pre-exist (OverrideSupportDir throws).
+
+**Blockers:** none in lane. Remaining work all needs maintainer rulings
+(shared pools, DATA.R16/BLOXBASE.R16, voxel rename, bits/ cleanup).
+
+**Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
+got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).

@@ -6,75 +6,75 @@
 | empty capacity, needs `shieldgen` | 1266 | ✔ correctly nothing | — (it has no shield) |
 | pool behind an upgrade | 233 | ✖ nothing | E5 (upgrade pricing) |
 
-Shield row mean Versus **88.49**, so one shield point is **1.1301 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.710%** of all roster raw damage at baseline.
+Shield row mean Versus **99.41**, so one shield point is **1.0060 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.673%** of all roster raw damage at baseline.
 
-⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.7534 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
+⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.6707 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
 
 ## The gap
 
 * Raw HP across these 56 actors: **12,812,500**
-* Effective HP once the pool is counted: **21,296,708** (**+66.2%**)
-* Implied price change if the formula read effective HP: median **×1.430**, max **×1.859**
+* Effective HP once the pool is counted: **28,329,223** (**+121.1%**)
+* Implied price change if the formula read effective HP: median **×1.787**, max **×2.571**
 
-⚠ **Retiring the 150% multiplier is a BUFF that must be paid for.** The numbers above already account for it, so they price the game AS IT IS. Delete `DamageMultiplier@shielded` and a shield point jumps from 0.753 to 1.130 HP — the same pool becomes 1.5x more valuable and the implied price rises again. Re-extract AFTER the deletion and price once, or these units get charged for durability they no longer have (or keep durability they were never charged for).
+⚠ **Retiring the 150% multiplier is a BUFF that must be paid for.** The numbers above already account for it, so they price the game AS IT IS. Delete `DamageMultiplier@shielded` and a shield point jumps from 0.671 to 1.006 HP — the same pool becomes 1.5x more valuable and the implied price rises again. Re-extract AFTER the deletion and price once, or these units get charged for durability they no longer have (or keep durability they were never charged for).
 
 ## Per actor
 
 | pack | actor | HP | shield pool | effective HP | ×HP | cost | implied ×price |
 |---|---|--:|--:|--:|--:|--:|--:|
-| redalert2mod_consortium | `steelconsortium_defenderbot` | 210,000 | 420,000 | 469,532 | ×2.236 | 3,200 | ×1.859 |
-| redalert2mod_consortium | `steelconsortium_skyhammer` | 120,000 | 240,000 | 268,304 | ×2.236 | 4,500 | ×1.850 |
-| redalert2mod_consortium | `steelconsortium_katytank` | 275,000 | 550,000 | 614,863 | ×2.236 | 3,800 | ×1.811 |
-| redalert2mod_consortium | `steelconsortium_stalker` | 140,000 | 280,000 | 313,021 | ×2.236 | 4,000 | ×1.791 |
-| redalert2mod_consortium | `steelconsortium_whiterabbit` | 150,000 | 300,000 | 335,380 | ×2.236 | 4,500 | ×1.651 |
-| starcraft_protoss | `protoss_roboticsfacility` | 400,000 | 400,000 | 647,173 | ×1.618 | 2,000 | ×1.618 |
-| starcraft_protoss | `protoss_fleetbeacon` | 1,000,000 | 1,000,000 | 1,617,932 | ×1.618 | 10,000 | ×1.618 |
-| starcraft_protoss | `protoss_nexus` | 1,000,000 | 1,000,000 | 1,617,932 | ×1.618 | 5,000 | ×1.618 |
-| starcraft_protoss | `protoss_citadelofadun` | 200,000 | 200,000 | 323,586 | ×1.618 | 2,000 | ×1.618 |
-| starcraft_protoss | `protoss_gateway` | 200,000 | 200,000 | 323,586 | ×1.618 | 1,000 | ×1.618 |
-| starcraft_protoss | `protoss_roboticssupportbay` | 200,000 | 200,000 | 323,586 | ×1.618 | 2,000 | ×1.618 |
-| starcraft_protoss | `protoss_arbitertribunal` | 250,000 | 250,000 | 404,483 | ×1.618 | 2,500 | ×1.618 |
-| starcraft_protoss | `protoss_assimilator` | 300,000 | 300,000 | 485,380 | ×1.618 | 3,000 | ×1.618 |
-| starcraft_protoss | `protoss_cyberneticscore` | 150,000 | 150,000 | 242,690 | ×1.618 | 1,500 | ×1.618 |
-| starcraft_protoss | `protoss_forge` | 150,000 | 150,000 | 242,690 | ×1.618 | 1,500 | ×1.618 |
-| starcraft_protoss | `protoss_observatory` | 250,000 | 250,000 | 404,483 | ×1.618 | 2,500 | ×1.618 |
-| starcraft_protoss | `protoss_pylon` | 250,000 | 250,000 | 404,483 | ×1.618 | 1,000 | ×1.618 |
-| starcraft_protoss | `protoss_stargate` | 300,000 | 300,000 | 485,380 | ×1.618 | 1,500 | ×1.618 |
-| starcraft_protoss | `protoss_templararchives` | 250,000 | 250,000 | 404,483 | ×1.618 | 2,500 | ×1.618 |
-| starcraft_protoss | `protoss_mobilenexus` | 300,000 | 300,000 | 485,380 | ×1.618 | 5,000 | ×1.562 |
-| redalert2mod_consortium | `cruiser_f.steel` | 37,500 | 75,000 | 83,845 | ×2.236 | 125 | ×1.524 |
-| starcraft_protoss | `protoss_starshipsovereign` | 750,000 | 750,000 | 1,213,449 | ×1.618 | 10,000 | ×1.510 |
-| redalert2mod_consortium | `steelconsortium_supportshieldgenerator` | 100,000 | 200,000 | 223,586 | ×2.236 | 3,000 | ×1.494 |
-| redalert2mod_consortium | `steelconsortium_empressstation` | 1,500,000 | 1,500,000 | 2,426,898 | ×1.618 | 5,000 | ×1.489 |
-| starcraft_protoss | `protoss_archon` | 350,000 | 350,000 | 566,276 | ×1.618 | 5,600 | ×1.465 |
-| starcraft_protoss | `protoss_epigraph` | 200,000 | 200,000 | 323,586 | ×1.618 | 2,600 | ×1.451 |
-| starcraft_protoss | `protoss_shuttle` | 100,000 | 100,000 | 161,793 | ×1.618 | 6,000 | ×1.449 |
-| starcraft_protoss | `protoss_carrier` | 300,000 | 300,000 | 485,380 | ×1.618 | 3,000 | ×1.432 |
-| starcraft_protoss | `protoss_idol` | 350,000 | 350,000 | 566,276 | ×1.618 | 2,800 | ×1.429 |
-| starcraft_protoss | `protoss_arbiter` | 225,000 | 225,000 | 364,035 | ×1.618 | 4,800 | ×1.424 |
-| starcraft_protoss | `protoss_atreus` | 250,000 | 250,000 | 404,483 | ×1.618 | 2,400 | ×1.417 |
-| starcraft_protoss | `protoss_zeratul` | 250,000 | 250,000 | 404,483 | ×1.618 | 4,000 | ×1.416 |
-| starcraft_protoss | `protoss_corsair` | 125,000 | 125,000 | 202,242 | ×1.618 | 2,100 | ×1.410 |
-| redalert2mod_consortium | `steelconsortium_cloudbreaker` | 250,000 | 250,000 | 404,483 | ×1.618 | 5,000 | ×1.406 |
-| starcraft_protoss | `protoss_reaver` | 275,000 | 275,000 | 444,931 | ×1.618 | 2,700 | ×1.393 |
-| redalert2mod_consortium | `cougar.steel` | 25,000 | 50,000 | 55,897 | ×2.236 | 1,200 | ×1.360 |
-| starcraft_protoss | `protoss_voidray` | 70,000 | 70,000 | 113,255 | ×1.618 | 1,400 | ×1.360 |
-| starcraft_protoss | `protoss_scout` | 75,000 | 75,000 | 121,345 | ×1.618 | 1,500 | ×1.359 |
-| redalert2mod_consortium | `hummer.steel` | 45,000 | 67,500 | 86,710 | ×1.927 | 2,000 | ×1.357 |
-| redalert2mod_consortium | `oldqtnk.steel` | 112,500 | 112,500 | 182,017 | ×1.618 | 2,400 | ×1.352 |
-| starcraft_protoss | `protoss_shieldbattery` | 100,000 | 100,000 | 161,793 | ×1.618 | 1,000 | ×1.309 |
-| starcraft_protoss | `protoss_positron` | 60,000 | 60,000 | 97,076 | ×1.618 | 1,200 | ×1.299 |
-| starcraft_protoss | `protoss_dragoon` | 75,000 | 75,000 | 121,345 | ×1.618 | 1,200 | ×1.278 |
-| starcraft_protoss | `protoss_gladius` | 100,000 | 100,000 | 161,793 | ×1.618 | 1,800 | ×1.275 |
-| starcraft_protoss | `protoss_patriarch` | 75,000 | 75,000 | 121,345 | ×1.618 | 4,000 | ×1.272 |
-| redalert2mod_consortium | `cobra.steel` | 325,000 | 162,500 | 425,414 | ×1.309 | 3,600 | ×1.228 |
-| starcraft_protoss | `protoss_probe` | 45,000 | 45,000 | 72,807 | ×1.618 | 500 | ×1.217 |
-| starcraft_protoss | `protoss_analogue` | 60,000 | 60,000 | 97,076 | ×1.618 | 1,200 | ×1.216 |
-| starcraft_protoss | `protoss_amaranth` | 70,000 | 70,000 | 113,255 | ×1.618 | 1,200 | ×1.206 |
-| starcraft_protoss | `protoss_observer` | 12,500 | 12,500 | 20,224 | ×1.618 | 500 | ×1.194 |
-| starcraft_protoss | `protoss_darktemplar` | 50,000 | 50,000 | 80,897 | ×1.618 | 600 | ×1.185 |
-| starcraft_protoss | `protoss_zealot` | 40,000 | 40,000 | 64,717 | ×1.618 | 300 | ×1.168 |
-| starcraft_protoss | `protoss_legionnaire` | 60,000 | 60,000 | 97,076 | ×1.618 | 700 | ×1.163 |
-| starcraft_protoss | `protoss_adept` | 30,000 | 30,000 | 48,538 | ×1.618 | 650 | ×1.148 |
-| starcraft_protoss | `protoss_manifold` | 25,000 | 25,000 | 40,448 | ×1.618 | 600 | ×1.136 |
-| starcraft_protoss | `protoss_photoncannon` | 200,000 | 200,000 | 323,586 | ×1.618 | 2,000 | ×1.016 |
+| redalert2mod_consortium | `steelconsortium_defenderbot` | 210,000 | 420,000 | 684,656 | ×3.260 | 3,200 | ×2.571 |
+| redalert2mod_consortium | `steelconsortium_skyhammer` | 120,000 | 240,000 | 391,232 | ×3.260 | 4,500 | ×2.555 |
+| redalert2mod_consortium | `steelconsortium_katytank` | 275,000 | 550,000 | 896,573 | ×3.260 | 3,800 | ×2.484 |
+| redalert2mod_consortium | `steelconsortium_stalker` | 140,000 | 280,000 | 456,437 | ×3.260 | 4,000 | ×2.447 |
+| redalert2mod_consortium | `steelconsortium_whiterabbit` | 150,000 | 300,000 | 489,040 | ×3.260 | 4,500 | ×2.191 |
+| starcraft_protoss | `protoss_arbitertribunal` | 250,000 | 250,000 | 532,533 | ×2.130 | 2,500 | ×2.130 |
+| starcraft_protoss | `protoss_observatory` | 250,000 | 250,000 | 532,533 | ×2.130 | 2,500 | ×2.130 |
+| starcraft_protoss | `protoss_pylon` | 250,000 | 250,000 | 532,533 | ×2.130 | 1,000 | ×2.130 |
+| starcraft_protoss | `protoss_templararchives` | 250,000 | 250,000 | 532,533 | ×2.130 | 2,500 | ×2.130 |
+| starcraft_protoss | `protoss_roboticsfacility` | 400,000 | 400,000 | 852,053 | ×2.130 | 2,000 | ×2.130 |
+| starcraft_protoss | `protoss_fleetbeacon` | 1,000,000 | 1,000,000 | 2,130,133 | ×2.130 | 10,000 | ×2.130 |
+| starcraft_protoss | `protoss_nexus` | 1,000,000 | 1,000,000 | 2,130,133 | ×2.130 | 5,000 | ×2.130 |
+| starcraft_protoss | `protoss_assimilator` | 300,000 | 300,000 | 639,040 | ×2.130 | 3,000 | ×2.130 |
+| starcraft_protoss | `protoss_cyberneticscore` | 150,000 | 150,000 | 319,520 | ×2.130 | 1,500 | ×2.130 |
+| starcraft_protoss | `protoss_forge` | 150,000 | 150,000 | 319,520 | ×2.130 | 1,500 | ×2.130 |
+| starcraft_protoss | `protoss_stargate` | 300,000 | 300,000 | 639,040 | ×2.130 | 1,500 | ×2.130 |
+| starcraft_protoss | `protoss_citadelofadun` | 200,000 | 200,000 | 426,026 | ×2.130 | 2,000 | ×2.130 |
+| starcraft_protoss | `protoss_gateway` | 200,000 | 200,000 | 426,026 | ×2.130 | 1,000 | ×2.130 |
+| starcraft_protoss | `protoss_roboticssupportbay` | 200,000 | 200,000 | 426,026 | ×2.130 | 2,000 | ×2.130 |
+| starcraft_protoss | `protoss_mobilenexus` | 300,000 | 300,000 | 639,040 | ×2.130 | 5,000 | ×2.027 |
+| redalert2mod_consortium | `steel_cruiser_f` | 37,500 | 75,000 | 122,260 | ×3.260 | 125 | ×1.958 |
+| starcraft_protoss | `protoss_starshipsovereign` | 750,000 | 750,000 | 1,597,600 | ×2.130 | 10,000 | ×1.933 |
+| redalert2mod_consortium | `steelconsortium_supportshieldgenerator` | 100,000 | 200,000 | 326,026 | ×3.260 | 3,000 | ×1.904 |
+| redalert2mod_consortium | `steelconsortium_empressstation` | 1,500,000 | 1,500,000 | 3,195,199 | ×2.130 | 5,000 | ×1.894 |
+| starcraft_protoss | `protoss_archon` | 350,000 | 350,000 | 745,546 | ×2.130 | 5,600 | ×1.853 |
+| starcraft_protoss | `protoss_epigraph` | 200,000 | 200,000 | 426,026 | ×2.130 | 2,600 | ×1.825 |
+| starcraft_protoss | `protoss_shuttle` | 100,000 | 100,000 | 213,013 | ×2.130 | 6,000 | ×1.822 |
+| starcraft_protoss | `protoss_carrier` | 300,000 | 300,000 | 639,040 | ×2.130 | 3,000 | ×1.790 |
+| starcraft_protoss | `protoss_idol` | 350,000 | 350,000 | 745,546 | ×2.130 | 2,800 | ×1.784 |
+| starcraft_protoss | `protoss_arbiter` | 225,000 | 225,000 | 479,280 | ×2.130 | 4,800 | ×1.775 |
+| starcraft_protoss | `protoss_atreus` | 250,000 | 250,000 | 532,533 | ×2.130 | 2,400 | ×1.763 |
+| starcraft_protoss | `protoss_zeratul` | 250,000 | 250,000 | 532,533 | ×2.130 | 4,000 | ×1.761 |
+| starcraft_protoss | `protoss_corsair` | 125,000 | 125,000 | 266,267 | ×2.130 | 2,100 | ×1.749 |
+| redalert2mod_consortium | `steelconsortium_cloudbreaker` | 250,000 | 250,000 | 532,533 | ×2.130 | 5,000 | ×1.743 |
+| starcraft_protoss | `protoss_reaver` | 275,000 | 275,000 | 585,786 | ×2.130 | 2,700 | ×1.719 |
+| redalert2mod_consortium | `steel_cougar` | 25,000 | 50,000 | 81,507 | ×3.260 | 1,200 | ×1.659 |
+| starcraft_protoss | `protoss_voidray` | 70,000 | 70,000 | 149,109 | ×2.130 | 1,400 | ×1.658 |
+| starcraft_protoss | `protoss_scout` | 75,000 | 75,000 | 159,760 | ×2.130 | 1,500 | ×1.656 |
+| redalert2mod_consortium | `steel_hummer` | 45,000 | 67,500 | 121,284 | ×2.695 | 2,000 | ×1.653 |
+| redalert2mod_consortium | `steel_oldqtnk` | 112,500 | 112,500 | 239,640 | ×2.130 | 2,400 | ×1.644 |
+| starcraft_protoss | `protoss_shieldbattery` | 100,000 | 100,000 | 213,013 | ×2.130 | 1,000 | ×1.565 |
+| starcraft_protoss | `protoss_positron` | 60,000 | 60,000 | 127,808 | ×2.130 | 1,200 | ×1.548 |
+| starcraft_protoss | `protoss_dragoon` | 75,000 | 75,000 | 159,760 | ×2.130 | 1,200 | ×1.508 |
+| starcraft_protoss | `protoss_gladius` | 100,000 | 100,000 | 213,013 | ×2.130 | 1,800 | ×1.502 |
+| starcraft_protoss | `protoss_patriarch` | 75,000 | 75,000 | 159,760 | ×2.130 | 4,000 | ×1.497 |
+| redalert2mod_consortium | `steel_cobra` | 325,000 | 162,500 | 508,647 | ×1.565 | 3,600 | ×1.417 |
+| starcraft_protoss | `protoss_probe` | 45,000 | 45,000 | 95,856 | ×2.130 | 500 | ×1.396 |
+| starcraft_protoss | `protoss_analogue` | 60,000 | 60,000 | 127,808 | ×2.130 | 1,200 | ×1.395 |
+| starcraft_protoss | `protoss_amaranth` | 70,000 | 70,000 | 149,109 | ×2.130 | 1,200 | ×1.378 |
+| starcraft_protoss | `protoss_observer` | 12,500 | 12,500 | 26,627 | ×2.130 | 500 | ×1.355 |
+| starcraft_protoss | `protoss_darktemplar` | 50,000 | 50,000 | 106,507 | ×2.130 | 600 | ×1.338 |
+| starcraft_protoss | `protoss_zealot` | 40,000 | 40,000 | 85,205 | ×2.130 | 300 | ×1.306 |
+| starcraft_protoss | `protoss_legionnaire` | 60,000 | 60,000 | 127,808 | ×2.130 | 700 | ×1.298 |
+| starcraft_protoss | `protoss_adept` | 30,000 | 30,000 | 63,904 | ×2.130 | 650 | ×1.272 |
+| starcraft_protoss | `protoss_manifold` | 25,000 | 25,000 | 53,253 | ×2.130 | 600 | ×1.248 |
+| starcraft_protoss | `protoss_photoncannon` | 200,000 | 200,000 | 426,026 | ×2.130 | 2,000 | ×1.029 |

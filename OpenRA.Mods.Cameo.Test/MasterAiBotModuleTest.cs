@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
@@ -76,8 +77,10 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
-				"main_target_score", "hints", "demand", "own", "enemies"
+				"main_target_score", "mission", "hints", "demand", "own", "enemies"
 			}));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
+			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
 		}
 
 		[Test]
@@ -109,6 +112,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var b = new StringBuilder();
 			var situation = Situation(BotUrgency.Pressured, "steamroller", null,
 				new EnemyProfiles(enemy));
+			situation.Mission = new BotMission { Type = BotMissionType.Raid, Priority = 65, RegionIndex = 18 };
 			AiSituationLogWriter.AppendSituation(b, "game", "", "map", "Multi0", "td_gdi", "medium", "rush",
 				situation);
 			using var doc = JsonDocument.Parse(b.ToString());
@@ -119,12 +123,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(enemyJson.GetProperty("buildings").GetInt32(), Is.EqualTo(9));
 			Assert.That(doc.RootElement.GetProperty("urgency").GetString(), Is.EqualTo("pressured"));
 			Assert.That(doc.RootElement.GetProperty("personality_candidate").GetString(), Is.EqualTo("steamroller"));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("type").GetString(), Is.EqualTo("raid"));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("priority").GetInt32(), Is.EqualTo(65));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("region_index").GetInt32(), Is.EqualTo(18));
 			Assert.That(enemyJson.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
 				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
-				"buildings", "expansion_clusters", "harvesters", "refineries", "pressure_value",
-				"stealth_share", "nearest_cells", "last_seen_tick", "score"
+				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
+				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score"
 			}));
 		}
 
@@ -570,6 +577,234 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 0), Is.EqualTo(12000));
 			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 12001), Is.Zero);
+		}
+
+		[Test]
+		public void RegionMemoryBucketsCellsAndClampsOutOfMapPositions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			Assert.That(regions.Columns, Is.EqualTo(8));
+			Assert.That(regions.Rows, Is.EqualTo(8));
+			Assert.That(regions.CellCount, Is.EqualTo(64));
+			Assert.That(regions.IndexOf(new CPos(0, 0)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(7, 7)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(8, 0)), Is.EqualTo(1));
+			Assert.That(regions.IndexOf(new CPos(0, 8)), Is.EqualTo(8));
+			Assert.That(regions.IndexOf(new CPos(63, 63)), Is.EqualTo(63));
+			Assert.That(regions.IndexOf(new CPos(-5, 200)), Is.EqualTo(56));
+			Assert.That(regions.CenterOf(0), Is.EqualTo(new CPos(4, 4)));
+			Assert.That(regions.CenterOf(63), Is.EqualTo(new CPos(60, 60)));
+		}
+
+		[Test]
+		public void RegionMemoryCountsOnlyEverSeenRegions()
+		{
+			var cells = new RegionMemory.Region[4];
+			Assert.That(RegionMemory.CountKnown(cells), Is.Zero);
+			cells[1] = new RegionMemory.Region { EverSeen = true };
+			cells[2] = new RegionMemory.Region { ArmyValue = 500 };
+			Assert.That(RegionMemory.CountKnown(cells), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void RegionMemoryHandlesNonAlignedMapBounds()
+		{
+			var regions = new RegionMemory(new CPos(-10, -10), new CPos(17, 9), 8);
+			Assert.That(regions.Columns, Is.EqualTo(4));
+			Assert.That(regions.Rows, Is.EqualTo(3));
+			Assert.That(regions.IndexOf(new CPos(-10, -10)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(-3, -3)), Is.EqualTo(0));
+			Assert.That(regions.IndexOf(new CPos(-2, -10)), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void ScoutPicksStalestRegionAndSkipsTaken()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var staleness = new Dictionary<int, int> { { 3, 5000 }, { 9, 9000 }, { 20, 2000 } };
+			var taken = new HashSet<int> { 9 };
+
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), taken,
+				i => staleness.GetValueOrDefault(i), i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(3));
+
+			taken.Clear();
+			picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), taken,
+				i => staleness.GetValueOrDefault(i), i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(9));
+		}
+
+		[Test]
+		public void ScoutPrefersInterestingAndSafeRegions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var staleness = new Dictionary<int, int> { { 3, 5000 }, { 9, 5000 } };
+
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => staleness.GetValueOrDefault(i), i => i == 9 ? 4000 : 0, i => 0);
+			Assert.That(picked, Is.EqualTo(9));
+
+			picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => staleness.GetValueOrDefault(i), i => 0, i => i == 9 ? int.MaxValue : 0);
+			Assert.That(picked, Is.EqualTo(3));
+		}
+
+		[Test]
+		public void ScoutIgnoresFullyExploredRegions()
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
+			var picked = ScoutBotModule.PickScoutRegion(regions, new CPos(0, 0), new HashSet<int>(),
+				i => 0, i => 0, i => 0);
+			Assert.That(picked, Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void RiskGateNeverBlocksUnknownRegions()
+		{
+			// threat 0 = nothing remembered there; even an empty squad may commit
+			// (fog-honest: no information is not a reason to hold).
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(0, 0, 25), Is.True);
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(500, 0, 25), Is.True);
+		}
+
+		[Test]
+		public void RiskGateBlocksOvermatchedSquads()
+		{
+			// margin 25: attacker must beat threat by 1.25x.
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1000, 800, 25), Is.True);   // exactly 1.25x
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1249, 1000, 25), Is.False); // 1.249x < 1.25x
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1250, 1000, 25), Is.True);
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(400, 1000, 25), Is.False);
+		}
+
+		[Test]
+		public void RiskGateNegativeMarginDisables()
+		{
+			Assert.That(SquadManagerBotModuleCA.PassesRiskGate(1, 999999, -1), Is.True);
+		}
+
+		sealed class StubFogProvider : IBotFoggedEnemyProvider
+		{
+			public bool FoggedObservation { get; set; }
+		}
+
+		[Test]
+		public void FoggedScansNeedAnEnabledProvider()
+		{
+			// No provider / disabled trait / disabled provider all leave the
+			// legacy omniscient scan in place (6d degradation rule).
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, null), Is.False);
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(true, new IBotFoggedEnemyProvider[] { new StubFogProvider { FoggedObservation = true } }), Is.False);
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, new IBotFoggedEnemyProvider[] { new StubFogProvider { FoggedObservation = false } }), Is.False);
+		}
+
+		[Test]
+		public void FoggedScansOnWhenAnyProviderReportsFog()
+		{
+			var providers = new IBotFoggedEnemyProvider[]
+			{
+				new StubFogProvider { FoggedObservation = false },
+				new StubFogProvider { FoggedObservation = true },
+			};
+			Assert.That(SquadManagerBotModuleCA.FoggedScansActive(false, providers), Is.True);
+		}
+
+		[Test]
+		public void MasterAiImplementsFoggedEnemyProvider()
+		{
+			Assert.That(typeof(IBotFoggedEnemyProvider).IsAssignableFrom(typeof(MasterAiBotModule)), Is.True);
+		}
+
+		static (RegionMemory Regions, OpenRA.Player Enemy) MissionRegions(params (int Index, int Army, int Defence, int Economy)[] values)
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(23, 23), 8);
+			var cells = new RegionMemory.Region[regions.CellCount];
+			foreach (var value in values)
+				cells[value.Index] = new RegionMemory.Region
+				{
+					ArmyValue = value.Army,
+					DefenceValue = value.Defence,
+					EconomyValue = value.Economy,
+					EverSeen = true
+				};
+			var enemy = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			regions.SetRegions(enemy, cells);
+			return (regions, enemy);
+		}
+
+		[Test]
+		public void MissionsUseRaidPriorityAndRequiredValueArithmetic()
+		{
+			var setup = MissionRegions((0, 0, 0, 100), (1, 50, 50, 100));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 8, 100,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions.Select(m => m.RegionIndex), Is.EqualTo(new[] { 0, 1 }));
+			Assert.That(missions[0].Priority, Is.EqualTo(99));
+			Assert.That(missions[0].RequiredValue, Is.Zero);
+			Assert.That(missions[1].Priority, Is.EqualTo(49));
+			Assert.That(missions[1].RequiredValue, Is.EqualTo(120));
+		}
+
+		[Test]
+		public void DefendMissionUsesNineRegionThreatAndThreshold()
+		{
+			var setup = MissionRegions((4, 100, 0, 0));
+			var noDefend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 100,
+				new MasterAiBotModuleInfo());
+			Assert.That(noDefend, Is.Empty);
+
+			var defend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+			Assert.That(defend, Has.Count.EqualTo(1));
+			Assert.That(defend[0].Type, Is.EqualTo(BotMissionType.Defend));
+			Assert.That(defend[0].Priority, Is.EqualTo(99));
+			Assert.That(defend[0].RequiredValue, Is.Zero);
+		}
+
+		[Test]
+		public void EqualMissionPrioritiesOrderDefendThenRegion()
+		{
+			var setup = MissionRegions((0, 49, 0, 50), (4, 0, 0, 0), (8, 49, 0, 50));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 48,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions.Select(m => (m.Type, m.RegionIndex)), Is.EqualTo(new[]
+			{
+				(BotMissionType.Defend, 4),
+				(BotMissionType.Raid, 0),
+				(BotMissionType.Raid, 8)
+			}));
+		}
+
+		[Test]
+		public void MissionReservationExpiresAfterConfiguredTicks()
+		{
+			Assert.That(MasterAiBotModule.ReservationActive(100, 100, 1500), Is.True);
+			Assert.That(MasterAiBotModule.ReservationActive(100, 1600, 1500), Is.True);
+			Assert.That(MasterAiBotModule.ReservationActive(100, 1601, 1500), Is.False);
+		}
+
+		sealed class StubMissionProvider : IBotMissionProvider
+		{
+			public IReadOnlyList<BotMission> Missions { get; set; } = Array.Empty<BotMission>();
+			public void MissionTaken(BotMission mission) { }
+		}
+
+		[Test]
+		public void BestAffordableMissionUsesProviderAndPublishedOrder()
+		{
+			var first = new BotMission { RequiredValue = 500, RegionIndex = 1 };
+			var second = new BotMission { RequiredValue = 100, RegionIndex = 2 };
+			var third = new BotMission { RequiredValue = 50, RegionIndex = 3 };
+			var providers = new[]
+			{
+				new StubMissionProvider { Missions = new[] { first, second } },
+				new StubMissionProvider { Missions = new[] { third } }
+			};
+
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
 		}
 	}
 }

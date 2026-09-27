@@ -1,11 +1,11 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1344 shared with the tree · **1172 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1344 shared with the tree · **1157 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 116 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 131 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
 | D4 | UNMATCHED - in the release, gone under that name | 568 | 335 | FAIL |
@@ -16,11 +16,11 @@ baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1344 shared with 
 
 | weapon | shipped | now | x | mains |
 |---|---|---|---|---|
+| NaxiAlienPistol | 4000 | 32000 | 8.00 | 2 -> 1 |
 | AsianTSIonCannon | 30000 | 230000 | 7.67 | 3 -> 4 |
 | TSIonCannon | 38000 | 254000 | 6.68 | 3 -> 4 |
 | MadcapGun | 6000 | 36000 | 6.00 | 3 -> 1 |
 | MarineMG | 6000 | 36000 | 6.00 | 3 -> 1 |
-| NaxiAlienPistol | 4000 | 24000 | 6.00 | 2 -> 1 |
 | DragunovSniper | 40000 | 200000 | 5.00 | 5 -> 1 |
 | Pistol | 100 | 500 | 5.00 | 1 -> 1 |
 | RA2GattlingInf | 4000 | 16000 | 4.00 | 2 -> 1 |
@@ -44,7 +44,7 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 |---|---|
 | matched | 1500 |
 | unmatched | 412 |
-| inflated | 141 |
+| inflated | 156 |
 | weakened | 81 |
 | extreme | 22 |
 | accepted | 30 |

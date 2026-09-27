@@ -3305,7 +3305,11 @@
 		Type: None
 	Armor@HAZMAT:
 		Type: HAZMAT
-		RequiresCondition: hazmatsuits
+		# One plating per actor (maintainer: "the most important rule"). Every infantry and every
+		# engineer also carries the Nod Cybernetic Armor COMPOSITE plating, and both upgrades are
+		# reachable by one player through a captured Soviet radar / Temple of Nod, so Cybernetic
+		# Armor supersedes Hazmat while it holds.
+		RequiresCondition: hazmatsuits && !cyberneticarmor_up
 	Mobile:
 		Locomotor: foot
 		ResponsiveBetweenCells: true

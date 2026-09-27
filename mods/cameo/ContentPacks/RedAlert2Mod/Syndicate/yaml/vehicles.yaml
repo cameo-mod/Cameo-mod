@@ -35,6 +35,14 @@ latinsyndicate_mortarbike:
 		Weapon: RA2MortarBike_elite
 		LocalOffset: 222,0,400
 		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2MortarBike
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MortarBike_elite
+		RequiresCondition: rank-elite
 	FirepowerMultiplier@Mortar:
 		Modifier: 50
 	FireWarheadsOnDeathCA@Mortar:
@@ -56,6 +64,8 @@ latinsyndicate_mortarbike:
 	SpeedMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 120
 		RequiresCondition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	Garrisoner:
+		GarrisonType: Infantry
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -1174,6 +1184,7 @@ latinsyndicate_collectiontruck:
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
+		Voice: Move
 	Health:
 		HP: 85000
 	Repairable:
@@ -1181,7 +1192,9 @@ latinsyndicate_collectiontruck:
 	ChangesHealth@SelfHealing:
 		Step: 34
 	Harvester:
-		Voice: Harvest
+		# The engine field is HarvestVoice (Harvester.cs); a bare `Voice:` here was silently
+		# dropped by FieldLoader, so the harvest line never played.
+		HarvestVoice: Harvest
 		BaleLoadDelay: 3
 		BaleUnloadDelay: 2
 		EmptyCondition: no-tiberium
