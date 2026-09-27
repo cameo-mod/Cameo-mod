@@ -1,5 +1,34 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — EMBER: fill the faction ids the applied roles don't cover (devin/ember/ai-faction-wiring)
+
+`Agent: EMBER · lane: AI execute/sense + gate tooling · branch devin/ember/ai-faction-wiring`
+
+Follow-on to the inert-factions fix above: `Apply: harvester, refinery, conyard`
+(#583/#587) wakes the five factions' economies, but ~60 more gating list fields
+(PowerTypes, BarracksTypes, ProductionTypes, McvTypes, defenses, scouts,
+engineers, squad/capture/crate/resource-map lists) still carry no
+`atreides`/`harkonnen`/`corrino`/`EDEN`/`PLYMOUTH` ids — the bots can count a
+refinery yet still can't pick a power plant. This commit appends the missing
+ids to exactly the fields no applied role covers (~100 ids, all verified
+defined, strict appends), and the pack dictionaries the houses lost in the
+rename-era cleanup (`10b8f5915`): `BuildingFractions`/`Intervals`/`Delays`/
+`Limits`, `AirSquadTargetTypes` ×5, `spiceharvester` units; Outpost2
+bootstrapped.
+
+- New gate `tools/tests/ai_d2k_production_gate.py` + map
+  `ai_d2k_production_gate_20260928`: an Atreides HardBot starts with one
+  construction yard; lua prints live `AI_D2K_GATE_TICK`/`AI_D2K_GATE_ACTORS`
+  counts (the situation-log writer buffers until match end — killed runs
+  write nothing). PASS with the lists, FAIL at 2 actors without them.
+- Fields whose applied role already supplies the ids (`HarvesterTypes`,
+  `RefineryTypes`, `ConstructionYardTypes`, harvester ids in
+  `ExcludeFromSquadsTypes`) are NOT re-appended — the drain direction stands;
+  the remaining ids compose with `Apply:` (set-union dedupe) and mark the
+  fields Claude's next roles should target.
+- Verified: gate PASS, negative control FAIL, bot-player + squad gates PASS,
+  boot-gate PASS.
+
 ## 2026-09-27 — Claude: the AI lane is SPLIT (maintainer ruling); harvester role applied; 5 factions' bots are inert
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_apply_harvester`
