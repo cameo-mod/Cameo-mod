@@ -184,6 +184,8 @@ bot-file sync:**
    loses no field (CLAUDE.md rule 8b).
 4. Which units belong in the list is a **design call for the maintainer**. A mammoth tank that
    runs home after every hit is not a guerrilla, and today's list holds 254 units against CA's 18.
+   **Ruled 2026-09-27: fast/light units only.** Generate `GuerrillaTypes` per faction from traits
+   (speed and cost bands), like CA's 18 harassers. Never hand-type it.
 
 **Found while measuring: `JoinGuerrilla` is inverted.** Its description says "possibility to
 join", but the code joins when `rand(100) >= JoinGuerrilla`, so the join chance is
