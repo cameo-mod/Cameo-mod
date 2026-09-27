@@ -874,76 +874,71 @@ namespace OpenRA.Mods.Common.Traits
 			return true;
 		}
 
-		static bool IsSoftRaidAircraft(Actor aircraft) => aircraft?.Info?.Name?.ToLowerInvariant() switch
-		{
-			"yak" or "hind" => true,
-			_ => false
-		};
+		// Cameo port: upstream distinguished raid aircraft by RA ids (yak/hind vs mig/heli/mh60).
+		// Trait split: VTOL gunships fly soft raids, fixed-wing strikers fly hard raids.
+		static bool IsSoftRaidAircraft(Actor aircraft) =>
+			aircraft?.Info is { } ai && FransActorClass.IsVtol(ai) && FransActorClass.IsArmed(ai);
 
-		static bool IsHardRaidAircraft(Actor aircraft) => aircraft?.Info?.Name?.ToLowerInvariant() switch
-		{
-			// HELI is OpenRA RA's Allied Longbow/Apache-style attack helicopter. HELI2 is kept
-			// as a compatible alias used by some Fransbot rule sets.
-			"mig" or "mig2" or "heli" or "heli2" or "mh60" => true,
-			_ => false
-		};
+		static bool IsHardRaidAircraft(Actor aircraft) =>
+			aircraft?.Info is { } ai && FransActorClass.IsFixedWing(ai) && FransActorClass.IsArmed(ai);
 
-		static bool IsRaidTankTargetType(string actorType) => actorType?.ToLowerInvariant() switch
-		{
-			"1tnk" or "2tnk" or "3tnk" or "4tnk" or "ttnk" or "ctnk" or "qtnk" or "stnk" => true,
-			_ => false
-		};
+		static bool IsRaidTankTargetType(ActorInfo info) =>
+			info != null && FransActorClass.IsTank(info);
 
-		static int GetRaidTargetPriorityRank(Actor aircraft, string actorType, bool isBuilding)
+		static int GetRaidTargetPriorityRank(Actor aircraft, Ruleset rules, string actorType, bool isBuilding)
 		{
 			var type = actorType?.ToLowerInvariant() ?? string.Empty;
+			ActorInfo info = null;
+			if (type.Length > 0)
+				rules.Actors.TryGetValue(type, out info);
 
 			// Construction capability is the highest-value precision RAID objective.
 			// A visible/feasible FACT or MCV therefore outranks economy vehicles for every
 			// Air family. Refineries remain deliberately poor precision targets.
-			if (type == "proc")
+			if (info != null && FransActorClass.IsRefinery(info))
 				return 50;
-			if (type is "fact" or "mcv")
+			// "fact" is the SECURE-conyard mission token, not an actor name.
+			if (type == "fact" || (info != null && (FransActorClass.IsConyard(info) || FransActorClass.IsMcv(info))))
 				return 0;
 
 			if (IsSoftRaidAircraft(aircraft))
 			{
-				if (type == "harv")
+				if (info != null && FransActorClass.IsHarvester(info))
 					return 1;
-				// YAK/HIND then spend their cannon ammunition on exposed soft/high-value units.
-				if (type is "e3" or "arty" or "v2rl")
+				// Gunships then spend their cannon ammunition on exposed soft/high-value units.
+				if (info != null && (FransActorClass.IsAAInfantry(info, rules) || FransActorClass.IsArtillery(info, rules)))
 					return 2;
-				if (IsRaidTankTargetType(type))
+				if (IsRaidTankTargetType(info))
 					return 4;
 				return isBuilding ? 10 : 6;
 			}
 
 			if (IsHardRaidAircraft(aircraft))
 			{
-				if (type == "harv")
+				if (info != null && FransActorClass.IsHarvester(info))
 					return 1;
-				if (type is "arty" or "v2rl")
+				if (info != null && FransActorClass.IsArtillery(info, rules))
 					return 2;
-				if (IsRaidTankTargetType(type))
+				if (IsRaidTankTargetType(info))
 					return 3;
-				if (type == "e3")
+				if (info != null && FransActorClass.IsAAInfantry(info, rules))
 					return 5;
 				return isBuilding ? 10 : 8;
 			}
 
 			// Other armed aircraft keep the same construction-first fallback doctrine.
-			if (type == "harv")
+			if (info != null && FransActorClass.IsHarvester(info))
 				return 1;
-			if (type is "arty" or "v2rl" or "e3")
+			if (info != null && (FransActorClass.IsArtillery(info, rules) || FransActorClass.IsAAInfantry(info, rules)))
 				return 2;
-			if (IsRaidTankTargetType(type))
+			if (IsRaidTankTargetType(info))
 				return 4;
 			return isBuilding ? 10 : 8;
 		}
 
-		static int GetRaidGroupTargetPriorityRank(IEnumerable<Actor> aircraft, string actorType, bool isBuilding)
+		static int GetRaidGroupTargetPriorityRank(IEnumerable<Actor> aircraft, Ruleset rules, string actorType, bool isBuilding)
 		{
-			var ranks = aircraft.Select(a => GetRaidTargetPriorityRank(a, actorType, isBuilding)).ToArray();
+			var ranks = aircraft.Select(a => GetRaidTargetPriorityRank(a, rules, actorType, isBuilding)).ToArray();
 			// The least-suitable committed member defines the group's doctrine band. This keeps
 			// mixed wings from stealing a target that a purpose-matched wing can service cleanly.
 			return ranks.Length == 0 ? 20 : ranks.Max();
@@ -1082,7 +1077,7 @@ namespace OpenRA.Mods.Common.Traits
 						metricRejected++;
 						continue;
 					}
-					var preference = GetRaidTargetPriorityRank(a, mission.TargetActorType, mission.IsBuilding);
+					var preference = GetRaidTargetPriorityRank(a, world.Map.Rules, mission.TargetActorType, mission.IsBuilding);
 					ranked.Add((a, preference, eta, contribution, price, routeMetrics.PeakRisk, GetCombatValue(a), routeMetrics.TravelCells));
 				}
 			}
@@ -1125,7 +1120,7 @@ namespace OpenRA.Mods.Common.Traits
 					Info.KnownAntiAirPathSafetyRadius, riskRevision, candidateSignature, new FransAirRaidBidTemplate(false, 0, Array.Empty<uint>(), 0, 0, 0, 0, 0, 0, required));
 				return false;
 			}
-			groupPrice = ApplyRaidTargetPriorityToPrice(groupPrice, GetRaidGroupTargetPriorityRank(chosen, mission.TargetActorType, mission.IsBuilding));
+			groupPrice = ApplyRaidTargetPriorityToPrice(groupPrice, GetRaidGroupTargetPriorityRank(chosen, world.Map.Rules, mission.TargetActorType, mission.IsBuilding));
 			LogFactRaidDiagnostic(mission,
 				offered >= required
 					? $"FEASIBLE full strike: {chosen.Count} aircraft, contribution {offered}/{required}, ETA {slowestEta}, risk {peakRisk}, final price {groupPrice}"

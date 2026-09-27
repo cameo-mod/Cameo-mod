@@ -186,6 +186,31 @@ consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
 - Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
   Player-not-World placement, role/demand-name match, interface contract,
   producer-only guard).
+## 2026-09-28 — DAWN: Fransbot RA-id logic sites converted to trait classification
+
+- New `OpenRA.Mods.Fransbot/Traits/FransActorClass.cs` — shared static classifier
+  replacing upstream's hard-coded Red Alert id literals: IsHarvester/IsRefinery/
+  IsConyard/IsMcv/IsProducer/IsNavalProducer/IsAirProducer/IsRadar/IsRepairDepot/
+  IsSilo/IsPowerPlant/IsSuperweapon/IsTechCenter/IsInfantry/IsNaval/IsGround/
+  IsVtol/IsFixedWing/IsArmed/IsDefense/IsTank + weapon-resolution helpers
+  (`WeaponTargets`, `MaxWeaponRange`) via `rules.Weapons`.
+- Converted every `Info.Name == "<raid>"` / id-switch logic site across Air
+  Commander (soft/hard raid aircraft → VTOL/fixed-wing armed aircraft; raid target
+  rank ladder → refinery/conyard-mcv/harvester/AA-infantry/artillery/tank traits),
+  General (proc/fact/mcv/hpad/afld lookups → trait checks; air anchor now picks
+  the nearest own AIR PRODUCER rather than hpad-vs-afld name checks),
+  Ground/Sea commander priority ladders (AA-defense/harvester/conyard/refinery
+  and naval-producer ladders preserved by trait), SpecOps C4 value table
+  (superweapon>tech/conyard>producer>radar/repair>refinery) and its engineer
+  check (e6 → Captures/RepairsBridges on managed types), CommanderCore infantry
+  classification.
+- KEPT as tokens (not actor ids): `TargetActorType == "fact"`/`"minecluster"` —
+  those are mission-kind labels published by General, handled explicitly where a
+  type string may be either a real id or a token.
+- Gates: Fransbot+full-solution build 0/0 (shared `engine/bin` had a stale
+  EMBER-built CA dll mid-flight — rebuilt whole solution so bin is consistent),
+  boot-gate PASS (`PostWorldLoaded`), 248/248 tests PASS.
+
 ## 2026-09-28 — DAWN: Fransbot actor lists generated from traits (same branch, continues above)
 
 - New `tools/ai/gen_fransbot_lists.py`: resolves the full ruleset through

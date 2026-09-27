@@ -740,17 +740,26 @@ namespace OpenRA.Mods.Common.Traits
 			return false;
 		}
 
-		static int GetC4TargetPriority(string actorType)
+		// Cameo port: upstream listed RA ids (mslo/iron/pdox superweapons, atek/stek/fact
+		// tech+conyard, producers, dome/fix radar+repair, proc refinery). Same ladder by traits.
+		int GetC4TargetPriority(string actorType)
 		{
-			return actorType?.ToLowerInvariant() switch
-			{
-				"mslo" or "iron" or "pdox" => 1000,
-				"atek" or "stek" or "fact" => 800,
-				"weap" or "afld" or "hpad" or "spen" or "syrd" => 600,
-				"dome" or "fix" => 400,
-				"proc" => 250,
-				_ => 0
-			};
+			if (actorType == null
+				|| !(world.Map.Rules.Actors.TryGetValue(actorType, out var info)
+					|| world.Map.Rules.Actors.TryGetValue(actorType.ToLowerInvariant(), out info)))
+				return string.Equals(actorType, "fact", StringComparison.OrdinalIgnoreCase) ? 800 : 0;
+
+			if (FransActorClass.IsSuperweapon(info))
+				return 1000;
+			if (FransActorClass.IsTechCenter(info) || FransActorClass.IsConyard(info))
+				return 800;
+			if (FransActorClass.IsProducer(info))
+				return 600;
+			if (FransActorClass.IsRadar(info) || FransActorClass.IsRepairDepot(info))
+				return 400;
+			if (FransActorClass.IsRefinery(info))
+				return 250;
+			return 0;
 		}
 
 		bool IsVisibleEnemyRaidTarget(Actor target)
@@ -759,8 +768,11 @@ namespace OpenRA.Mods.Common.Traits
 				player.RelationshipWith(target.Owner) == PlayerRelationship.Enemy && target.CanBeViewedByPlayer(player);
 		}
 
+		// Cameo port: "e6" was the RA engineer id; capture-capable managed actors now classify by trait.
 		bool IsEngineerCaptureRole => Info.MissionMode == FransSpecOpsMissionMode.Capture &&
-			Info.ManagedActorTypes.Contains("e6");
+			Info.ManagedActorTypes.Any(t =>
+				world.Map.Rules.Actors.TryGetValue(t, out var mi)
+				&& (FransActorClass.IsCapturer(mi) || FransActorClass.IsBridgeEngineer(mi)));
 
 		bool IsEngineerCaptureTargetLocallyClear(Actor target)
 		{
@@ -2489,7 +2501,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			foreach (var capturer in nextRouteRecheckTick.Keys.Where(a => !current.Contains(a)).ToArray())
 				nextRouteRecheckTick.Remove(capturer);
-	
+
 			foreach (var actorId in completedReusableInsertionActorIds.ToArray())
 			{
 				var actor = world.GetActorById(actorId);

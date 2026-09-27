@@ -1593,7 +1593,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var friendlyRefineries = combatIntelService.OwnedActors
-				.Where(a => a != null && a.IsInWorld && !a.IsDead && a.Info.Name == "proc").ToArray();
+				.Where(a => a != null && a.IsInWorld && !a.IsDead && FransActorClass.IsRefinery(a.Info)).ToArray();
 			if (!TryGetOwnEconomicFrontier(out var ownFrontier, out _))
 				ownFrontier = clusters.Length > 0
 					? clusters.OrderBy(GetMineClusterKey).First().Center
@@ -1777,8 +1777,11 @@ namespace OpenRA.Mods.Common.Traits
 
 		FransCombatIntelContact[] GetKnownEnemyConstructionYards()
 		{
+			var rules = world.Map.Rules;
 			return combatIntelService.EnemyCombatContacts
-				.Where(c => c.ActorId != 0 && c.IsBuilding && string.Equals(c.ActorType, "fact", StringComparison.OrdinalIgnoreCase))
+				.Where(c => c.ActorId != 0 && c.IsBuilding
+					&& c.ActorType != null && rules.Actors.TryGetValue(c.ActorType, out var ai)
+					&& FransActorClass.IsConyard(ai))
 				.Where(c => c.Owner != null && PlayerRelationship.Enemy.HasRelationship(player.RelationshipWith(c.Owner)))
 				.OrderBy(c => c.ActorId)
 				.ToArray();
@@ -2138,8 +2141,8 @@ namespace OpenRA.Mods.Common.Traits
 				.Where(a => a != null && a.IsInWorld && !a.IsDead && a.OccupiesSpace != null)
 				.ToArray();
 
-			var home = owned.Where(a => a.Info.Name == "fact").OrderBy(a => a.ActorID).FirstOrDefault() ??
-				owned.Where(a => a.Info.Name == "mcv").OrderBy(a => a.ActorID).FirstOrDefault();
+			var home = owned.Where(a => FransActorClass.IsConyard(a.Info)).OrderBy(a => a.ActorID).FirstOrDefault() ??
+				owned.Where(a => FransActorClass.IsMcv(a.Info)).OrderBy(a => a.ActorID).FirstOrDefault();
 			if (home == null)
 			{
 				homeCell = default;
@@ -2206,10 +2209,10 @@ namespace OpenRA.Mods.Common.Traits
 				.ToArray();
 
 			var home = owned
-				.Where(a => a.Info.Name == "fact")
+				.Where(a => FransActorClass.IsConyard(a.Info))
 				.OrderBy(a => a.ActorID)
 				.FirstOrDefault() ?? owned
-				.Where(a => a.Info.Name == "mcv")
+				.Where(a => FransActorClass.IsMcv(a.Info))
 				.OrderBy(a => a.ActorID)
 				.FirstOrDefault();
 
@@ -2482,7 +2485,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			var radiusSquared = Info.SecureAlliedClaimRadius * Info.SecureAlliedClaimRadius;
 			return combatIntelService.OwnedActors.Any(a => a != null && a.IsInWorld && !a.IsDead && a.OccupiesSpace != null &&
-				a.Info.Name == "fact" && (a.Location - pending.Cell).LengthSquared <= radiusSquared);
+				FransActorClass.IsConyard(a.Info) && (a.Location - pending.Cell).LengthSquared <= radiusSquared);
 		}
 
 		public bool IsSecureFootholdDevelopmentReady(uint secureTargetActorId) =>
@@ -2615,7 +2618,9 @@ namespace OpenRA.Mods.Common.Traits
 				.ToArray();
 
 			var knownEnemyRefineries = combatIntelService.EnemyCombatContacts
-				.Where(c => c.ActorType == "proc" && c.IsBuilding)
+				.Where(c => c.IsBuilding && c.ActorType != null
+					&& world.Map.Rules.Actors.TryGetValue(c.ActorType, out var ri)
+					&& FransActorClass.IsRefinery(ri))
 				.ToArray();
 			var visibleEnemyHarvesters = combatIntelService.VisibleEnemies
 				.Where(a => IsLiveVisibleEnemyEconomyActor(a, false))
@@ -2886,13 +2891,15 @@ namespace OpenRA.Mods.Common.Traits
 
 			if (commander == FransCommanderKind.Air)
 			{
-				var type = subject.Info.Name;
-				var isHelicopter = type == "heli" || type == "heli2" || type == "hind" || type == "mh60";
-				var isPlane = type == "mig" || type == "mig2" || type == "yak";
+				// Cameo port: upstream split helipad (hpad) vs airfield (afld) by RA aircraft id.
+				// Both are "air producers"; use the nearest own building that produces aircraft.
 				var service = world.ActorsHavingTrait<Building>()
 					.Where(a => a.IsInWorld && !a.IsDead && a.Owner == player)
-					.Where(a => isHelicopter ? a.Info.Name == "hpad" :
-						isPlane ? a.Info.Name == "afld" || a.Info.Name == "afld.ukraine" : false)
+					.Where(a => FransActorClass.IsAircraft(subject.Info)
+						&& a.Info.TraitInfos<ProductionInfo>().Any(p =>
+							p.Produces.Any(q => q.Contains("aircraft", StringComparison.OrdinalIgnoreCase)
+								|| q.Contains("plane", StringComparison.OrdinalIgnoreCase)
+								|| q.Contains("helicopter", StringComparison.OrdinalIgnoreCase))))
 					.OrderBy(a => (a.Location - subject.Location).LengthSquared)
 					.ThenBy(a => a.ActorID)
 					.FirstOrDefault();
@@ -2901,7 +2908,7 @@ namespace OpenRA.Mods.Common.Traits
 
 				anchorPoint = service.Location;
 				FransBotLog.BotDebug(world,
-					"{0}: GENERAL assigns AIR ANCHOR {1} at {2} for {3} {4}; Air uses its nearest compatible HPAD/AFLD service base and never a generic StrategicMap ground anchor.",
+					"{0}: GENERAL assigns AIR ANCHOR {1} at {2} for {3} {4}; Air uses its nearest compatible aircraft-production base and never a generic StrategicMap ground anchor.",
 					player, service.Info.Name, anchorPoint, subject.Info.Name, subject.ActorID);
 				return true;
 			}

@@ -1028,19 +1028,31 @@ namespace OpenRA.Mods.Common.Traits
 					player, moved, center, radius, Info.McvRightOfWayMaximumOrdersPerPass);
 		}
 
-		static int GetRaidTargetPriorityRank(string actorType) => actorType?.ToLowerInvariant() switch
+		int GetRaidTargetPriorityRank(string actorType)
 		{
-			// Ground is the dedicated air-defense breaker: known SAM/AA structures always occupy
+			// Ground is the dedicated air-defense breaker: known AA structures always occupy
 			// the top RAID priority band so Ground can open safe corridors for Air Commander.
-			"sam" => 0,
-			"agun" => 0,
-			"harv" => 1,
-			"fact" => 2,
-			"proc" => 50,
-			_ => 20
-		};
+			// Cameo port: classify by traits (upstream listed RA ids sam/agun/harv/fact/proc).
+			if (actorType != null
+				&& (world.Map.Rules.Actors.TryGetValue(actorType, out var info)
+					|| world.Map.Rules.Actors.TryGetValue(actorType.ToLowerInvariant(), out info)))
+			{
+				if (FransActorClass.IsDefense(info) && FransActorClass.WeaponTargets(info, world.Map.Rules, "air"))
+					return 0;
+				if (FransActorClass.IsHarvester(info))
+					return 1;
+				if (FransActorClass.IsConyard(info))
+					return 2;
+				if (FransActorClass.IsRefinery(info))
+					return 50;
+			}
+			else if (string.Equals(actorType, "fact", StringComparison.OrdinalIgnoreCase))
+				return 2; // SECURE-conyard mission token.
 
-		static int ApplyRaidTargetPriorityToPrice(int basePrice, string actorType)
+			return 20;
+		}
+
+		int ApplyRaidTargetPriorityToPrice(int basePrice, string actorType)
 		{
 			if (basePrice == int.MaxValue)
 				return int.MaxValue;

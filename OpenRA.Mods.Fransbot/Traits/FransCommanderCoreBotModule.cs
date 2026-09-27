@@ -519,8 +519,10 @@ namespace OpenRA.Mods.Common.Traits
 			return (int)Math.Clamp(Math.Max(1L, required), 1L, int.MaxValue);
 		}
 
-		static bool IsGroundInfantryActorType(string actorType) => actorType == "e1" || actorType == "e2" ||
-			actorType == "e3" || actorType == "e4" || actorType == "e7" || actorType == "medi" || actorType == "shok";
+		// Cameo port: upstream listed RA infantry ids; classify by traits instead.
+		bool IsGroundInfantryActorType(string actorType) =>
+			actorType != null && world.Map.Rules.Actors.TryGetValue(actorType, out var info)
+				&& FransActorClass.IsInfantry(info);
 
 		public int GetDefendRequiredUnitCount(FransMission mission)
 		{

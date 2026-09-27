@@ -633,21 +633,35 @@ namespace OpenRA.Mods.Common.Traits
 			return any;
 		}
 
-		static int GetSeaTargetPriorityRank(string actorType) => actorType?.ToLowerInvariant() switch
+		// Cameo port: upstream ladder was RA ids (syrd/spen/agun/sam/tsla/gun/ftur/harv/fact/proc).
+		// Trait ladder preserves the ordering: naval producers < AA defense < other defense
+		// < harvester < conyard << refinery.
+		int GetSeaTargetPriorityRank(string actorType)
 		{
-			"syrd" => 0,
-			"spen" => 1,
-			"agun" => 2,
-			"sam" => 3,
-			"tsla" => 4,
-			"gun" or "ftur" => 5,
-			"harv" => 6,
-			"fact" => 7,
-			"proc" => 50,
-			_ => 20
-		};
+			if (actorType != null
+				&& (world.Map.Rules.Actors.TryGetValue(actorType, out var info)
+					|| world.Map.Rules.Actors.TryGetValue(actorType.ToLowerInvariant(), out info)))
+			{
+				if (FransActorClass.IsNavalProducer(info))
+					return 0;
+				if (FransActorClass.IsDefense(info) && FransActorClass.WeaponTargets(info, world.Map.Rules, "air"))
+					return 2;
+				if (FransActorClass.IsDefense(info))
+					return 5;
+				if (FransActorClass.IsHarvester(info))
+					return 6;
+				if (FransActorClass.IsConyard(info))
+					return 7;
+				if (FransActorClass.IsRefinery(info))
+					return 50;
+			}
+			else if (string.Equals(actorType, "fact", StringComparison.OrdinalIgnoreCase))
+				return 7; // SECURE-conyard mission token.
 
-		static int ApplyRaidTargetPriorityToPrice(int basePrice, string actorType)
+			return 20;
+		}
+
+		int ApplyRaidTargetPriorityToPrice(int basePrice, string actorType)
 		{
 			if (basePrice == int.MaxValue)
 				return int.MaxValue;
@@ -1801,7 +1815,7 @@ namespace OpenRA.Mods.Common.Traits
 			var radiusSq = Info.SecureThreatRadius * Info.SecureThreatRadius;
 			return combatIntelService.VisibleEnemies
 				.Where(IsVisibleEnemy)
-				.Where(enemy => enemy.Info.Name == "syrd" || enemy.Info.Name == "spen")
+				.Where(enemy => FransActorClass.IsNavalProducer(enemy.Info))
 				.Where(enemy => GetSeaTargetPriorityRank(enemy.Info.Name) < currentRank)
 				.Where(enemy => (enemy.Location - missionCenter).LengthSquared <= radiusSq)
 				.Where(enemy => activeShips.Any(ship => CanAttackActor(ship, enemy)))
