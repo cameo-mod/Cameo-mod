@@ -45,6 +45,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Cameo-only: how many of the slowest modules to list in each timing report.")]
 		public readonly int ModulePerfReportTop = 8;
 
+		[Desc("Cap on queued orders. Once full, the oldest deferred order is dropped —",
+			"it refers to the stalest world state. Bounds memory when an action budget",
+			"or lag keeps orders pending longer than producers emit them.")]
+		public readonly int MaxQueuedOrders = 512;
+
 		string IBotInfo.Type => Type;
 
 		string IBotInfo.Name => Name;
@@ -98,6 +103,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBot.QueueOrder(Order order)
 		{
+			while (orders.Count >= info.MaxQueuedOrders)
+				orders.Dequeue();
+
 			orders.Enqueue(order);
 		}
 
@@ -109,18 +117,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			var timed = info.ModulePerfReportIntervalTicks > 0;
 			using (new PerfSample("bot_tick"))
 			{
-				// Rotate the starting module each tick so an attention budget grants
-				// slots round-robin instead of starving every module past the cap.
-				var tickStart = actionBudget == null || tickModules.Length == 0 ? 0 : (int)((long)world.WorldTick % tickModules.Length);
+				// Every module ticks every tick — timers (scan intervals, countdowns)
+				// live inside BotTick, so an attention budget must not skip whole
+				// modules here. Attention gating needs a clock/decision split first.
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
-					for (var i = 0; i < tickModules.Length; i++)
+					foreach (var t in tickModules)
 					{
-						var t = tickModules[(tickStart + i) % tickModules.Length];
 						if (!t.IsTraitEnabled())
-							continue;
-
-						if (actionBudget != null && !actionBudget.TryConsumeAttention(t))
 							continue;
 
 						if (timed)
