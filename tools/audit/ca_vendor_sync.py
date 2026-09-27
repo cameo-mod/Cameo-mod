@@ -118,7 +118,7 @@ def main() -> int:
     def upstream(data: bytes) -> bytes:
         return vector_codemod.convert(data.decode("utf-8")).encode("utf-8") if vectors else data
 
-    protected =set(json.loads(MANIFEST.read_text(encoding="utf-8"))) if MANIFEST.exists() else set()
+    protected = set(json.loads(MANIFEST.read_text(encoding="utf-8"))) if MANIFEST.exists() else set()
 
     plan = []
     for row in drift["rows"]:
