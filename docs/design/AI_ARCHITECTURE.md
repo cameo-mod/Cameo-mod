@@ -1065,8 +1065,11 @@ allow it.
    idle-squad commit only) and 6d (squad-side fogged scans: `IBotFoggedEnemyProvider` gates every
    `World.Actors` target scan to observed enemies, with `FrozenActorLayer` remembered buildings as
    fallback targets — remembered mobile units are re-observed by scouts instead of being chased at
-   stale positions) all landed 2026-09-27; risk routing (6e)
-   remains —
+   stale positions) all landed 2026-09-27, as did 6e (risk routing: a coarse A*
+   over `RegionMemory` costed by remembered hostile value —
+   `IBotRouteThreatRouter` on the master answers `RouteAroundThreat` with 1-4
+   locomotor-checked waypoints; guerrillas keep their harass routes) — the phase-6
+   programme is done —
    `docs/design/AI_FRANSBOT_RESEARCH.md` §4.*
 7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
    strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.

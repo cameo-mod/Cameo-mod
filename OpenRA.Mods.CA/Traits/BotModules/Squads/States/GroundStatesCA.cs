@@ -345,9 +345,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				lastRoutingTarget = owner.Target;
 				currentRoute = null;
+				currentWaypointIndex = 0;
+				lastWaypointUpdateTick = owner.World.WorldTick;
+
+				var targetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+
+				// 6e risk routing: coarse waypoints that skirt remembered threat,
+				// when a router answers. Guerrillas keep their harass routes —
+				// unpredictability is the point there.
+				if (owner.Type != SquadCAType.Guerrilla)
+					currentRoute = owner.SquadManager.RouteAroundThreat(leader.Actor, targetCell);
 
 				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
-				if (locomotor != null)
+				if (currentRoute == null && locomotor != null)
 				{
 					var maxRoutes = 2;
 					var useIndirectRoutes = false;
