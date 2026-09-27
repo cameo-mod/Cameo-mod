@@ -187,7 +187,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			detectedEnemyTarget = null;
 			var dangerRadius = owner.SquadManager.Info.DangerScanRadius;
 			var unitsAroundPos = owner.World.FindActorsInCircle(loc, WDist.FromCells(dangerRadius))
-				.Where(a => owner.SquadManager.IsPreferredEnemyUnit(a));
+				.Where(a => owner.SquadManager.IsPreferredObservedEnemyUnit(a));
 
 			if (!unitsAroundPos.Any())
 				return true;
@@ -259,7 +259,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var a = owner.Units.Random(owner.Random).Actor;
 
 					// copied from FindClosestEnemy() so that non-air squads don't check IsAirSquadTargetType unnecessarily
-					var units = a.World.Actors.Where(t => owner.SquadManager.IsPreferredEnemyUnit(t) && owner.SquadManager.IsAirSquadTargetType(t, owner));
+					var units = a.World.Actors.Where(t => owner.SquadManager.IsPreferredObservedEnemyUnit(t) && owner.SquadManager.IsAirSquadTargetType(t, owner));
 					closestEnemy = units.Where(owner.SquadManager.IsNotHiddenUnit).ClosestToIgnoringPath(a.CenterPosition) ?? units.ClosestToIgnoringPath(a.CenterPosition);
 				}
 

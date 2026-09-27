@@ -141,7 +141,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if ((u.Owner == squad.Bot.Player && u.Info.HasTraitInfo<BuildingInfo>()))
 					return false;
 
-			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>());
+			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>());
 			if (!enemyAroundUnit.Any())
 				return false;
 
@@ -157,7 +157,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var dangerRadius = squad.SquadManager.Info.DangerScanRadius;
 			var units = squad.World.FindActorsInCircle(squadUnit.CenterPosition, WDist.FromCells(dangerRadius)).ToList();
 
-			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
 			if (enemyAroundUnit.Count == 0)
 				return false;
 
@@ -333,13 +333,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		protected static bool CheckReachability(Actor sourceActor, Actor targetActor)
 		{
+			return CheckReachability(sourceActor, targetActor.Location);
+		}
+
+		protected static bool CheckReachability(Actor sourceActor, CPos targetCell)
+		{
 			var mobile = sourceActor.TraitOrDefault<Mobile>();
 			if (mobile == null)
 				return false;
 			else
 			{
 				var locomotor = mobile.Locomotor;
-				return mobile.PathFinder.PathExistsForLocomotor(locomotor, sourceActor.Location, targetActor.Location);
+				return mobile.PathFinder.PathExistsForLocomotor(locomotor, sourceActor.Location, targetCell);
 			}
 		}
 

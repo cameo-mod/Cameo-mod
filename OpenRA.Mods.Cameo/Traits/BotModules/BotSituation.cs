@@ -161,7 +161,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -212,6 +212,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return threat;
 		}
+
+		// The 6d fogged-scan switch: squads observe fog only when the master AI is
+		// configured to (UseFoggedObservation) and the map actually has shroud —
+		// the same condition Rebuild uses to fog its own snapshot.
+		bool IBotFoggedEnemyProvider.FoggedObservation =>
+			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
