@@ -369,15 +369,35 @@ Three mechanisms were considered:
 Why A fits the rulings already made. The raid-unit ruling (2026-09-27: guerrilla = fast/light,
 *generated from traits*) is a derived role. EMBER's 6g `BotTargetTags` already derives targeting
 tags from rules. An unloaded pack contributes no actors, so it contributes no ids, and the lists
-become plug and play automatically. Mechanism A mutates the modules' `HashSet` lists once, at
-rules load, identically on every client, so it is sync-safe. Engine fields that bleed turned into
-`FrozenSet` (after #569) can't be mutated and need a shadow, or a consumer-side union for those
-few fields.
+become plug and play automatically. Mechanism A **replaces** each target field's value once, at
+rules load, with a new set of the field's own type (old ∪ role members), identically on every
+client, so it is sync-safe. It follows `ScaledBullet`'s derive-at-load idiom. Replacing rather than
+mutating is required: `BaseBuilderBotModuleCA`'s lists are already `FrozenSet` on master.
+
+**Built: `BotRoleSets` (Player) + `BotRoles` (actor)**, in `OpenRA.Mods.Cameo/Traits/BotModules/BotRoleSets.cs`.
+The yaml has `DeriveHas` / `DeriveNot` / `Exclude` / `Targets` per role, and only roles listed
+under `Apply` change anything. Every other role **reports** to `bot-roles.log`: its member count,
+what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
+predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
+
+| Role → target | Written | Would add | Written, not derived |
+|---|---|---|---|
+| harvester → `HarvesterBotModuleCA` / `ResourceMapBotModule.HarvesterTypes` | 25 / 26 | 11: the D2k spice harvesters, Outpost 2 cargo trucks, FutureTech prospector, `ra1_soviets_heavyindustrialminer`, … | 0 / 1 (`naxis_slaveoverseer`) |
+| refinery → 3 `RefineryTypes` fields | 28–32 | 10–14: the D2k refineries, the StarCraft resource depots, the Warcraft II oil refineries | 4 (`chsupply`, `glsupply`, `usasupply`, `refinery`) |
+| mcv → `McvTypes` | 35 | 11: the D2k MCVs, Outpost 2 convecs, **and false hits** such as `ra1_soviets_stalinfist` | 0 |
+| conyard → `ConstructionYardTypes` | 28 | 5: the D2k yards, Outpost 2 factories | 2 (`zerg_hive`, `zerg_lair`) |
+
+These lists are looked up **by name** (`ActorIndex.OwnerAndNames…`). A harvester that isn't
+listed is invisible to `HarvesterBotModuleCA`, so the "would add" column is mostly **real gaps in
+today's bots** (the D2k factions' own harvesters, refineries and yards), plus a few false hits.
+Each role is applied only after its additions are reviewed and a match with an affected faction
+confirms it. False hits go under `Exclude`; the "written, not derived" actors get a `BotRoles` line
+in their own pack. Only then does the central list shrink.
 
 Order: the derived roles first (they remove the most ids with no yaml at all), then `BotRoles` on
-the judgment lists (`HighValueTargetTypes`, `BigAirThreats`, `ExcludeFromSquadsTypes`), each gated on
-the same resolved-rules content comparison. A list is then emptied in the central file. Progress
-metric: actor ids in the central `ai.yaml`, lower-only, **7,151 → 0**.
+the judgment lists (`HighValueTargetTypes`, `BigAirThreats`, `ExcludeFromSquadsTypes`). A list is
+then emptied in the central file. Progress metric: actor ids in the central `ai.yaml`, lower-only,
+**7,151 → 0**.
 
 ---
 
