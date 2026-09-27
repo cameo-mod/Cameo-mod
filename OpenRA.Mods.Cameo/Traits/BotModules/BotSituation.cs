@@ -220,7 +220,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public void MissionTaken(BotMission mission)
 		{
-			if (mission == null)
+			if (mission == null || mission.Type != BotMissionType.Raid)
 				return;
 
 			// Reservations are advisory unsynchronized state. They intentionally do

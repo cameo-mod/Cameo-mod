@@ -238,6 +238,7 @@ namespace OpenRA.Mods.CA.Traits
 		int minAttackForceDelayTicks;
 		BotMission heldDefendMission;
 		int defendMissionHeldSince = -1;
+		int defendMissionExhaustedRegion = -1;
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
@@ -454,7 +455,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Fogged fallback target: an enemy building the engine's FrozenActorLayer
 		// remembers under shroud. The layer invalidates the record when the cell
 		// is re-observed empty, so a stale frozen target drops out on its own.
-		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue, SquadCA owner = null)
+		internal FrozenActor FindFrozenEnemyTarget(WPos from, int attackerValue, SquadCA owner = null, Player targetPlayer = null)
 		{
 			var layer = Player.FrozenActorLayer;
 			if (layer == null)
@@ -466,6 +467,7 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = layer.FrozenActorsInRegion(map.AllCells)
 				.Where(fa => fa.IsValid && fa.Visible && !fa.Hidden && fa.Owner != null
 					&& Player.RelationshipWith(fa.Owner) == PlayerRelationship.Enemy
+					&& (targetPlayer == null || fa.Owner == targetPlayer)
 					&& !fa.TargetTypes.IsEmpty && !fa.TargetTypes.Overlaps(Info.IgnoredEnemyTargetTypes))
 				.ToList();
 
@@ -545,6 +547,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			heldDefendMission = null;
 			defendMissionHeldSince = -1;
+			defendMissionExhaustedRegion = -1;
 			foreach (var squad in Squads)
 				DismissSquad(squad);
 
@@ -928,38 +931,66 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				BotMission mission = null;
 				Actor missionTarget = null;
+				FrozenActor missionFrozenTarget = null;
 				if (Info.UseMissions && missionProviders?.Length > 0)
 				{
-					mission = heldDefendMission ?? BestAffordableMission(missionProviders, idleUnitsValue);
+					mission = BestAffordableMission(missionProviders, idleUnitsValue);
 					if (mission?.Type == BotMissionType.Defend)
 					{
-						if (heldDefendMission == null)
-						{
-							heldDefendMission = mission;
-							defendMissionHeldSince = World.WorldTick;
-							MissionTaken(mission);
-						}
+						if (defendMissionExhaustedRegion != mission.RegionIndex)
+							defendMissionExhaustedRegion = -1;
 
-						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						if (defendMissionExhaustedRegion == mission.RegionIndex)
 						{
-							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
-								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
-							return;
+							heldDefendMission = null;
+							defendMissionHeldSince = -1;
+							mission = null;
 						}
+						else
+						{
+							if (heldDefendMission == null)
+							{
+								heldDefendMission = mission;
+								defendMissionHeldSince = World.WorldTick;
+							}
+							else
+								heldDefendMission = mission;
 
-						AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
-							Player.ClientIndex, mission.RegionIndex, heldTicks);
+							var heldTicks = World.WorldTick - defendMissionHeldSince;
+							if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+							{
+								AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+									Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+								return;
+							}
+
+							AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+								Player.ClientIndex, mission.RegionIndex, heldTicks);
+							defendMissionExhaustedRegion = mission.RegionIndex;
+							heldDefendMission = null;
+							defendMissionHeldSince = -1;
+							mission = null;
+						}
+					}
+					else
+					{
 						heldDefendMission = null;
 						defendMissionHeldSince = -1;
-						mission = null;
+						defendMissionExhaustedRegion = -1;
 					}
 
 					if (mission?.Type == BotMissionType.Raid)
+					{
 						missionTarget = FindClosestEnemy(mission.Location, idleUnitsValue, mission.TargetPlayer);
+						if (missionTarget == null && FoggedScans)
+							missionFrozenTarget = FindFrozenEnemyTarget(
+								World.Map.CenterOfCell(mission.Location), idleUnitsValue, null, mission.TargetPlayer);
+					}
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
+				if (missionFrozenTarget != null)
+					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
@@ -984,7 +1015,7 @@ namespace OpenRA.Mods.CA.Traits
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
 				SetNextDesiredAttackForce();
-				if (mission?.Type == BotMissionType.Raid && missionTarget != null)
+				if (mission?.Type == BotMissionType.Raid && (missionTarget != null || missionFrozenTarget != null))
 					MissionTaken(mission);
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
