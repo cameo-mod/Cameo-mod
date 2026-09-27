@@ -13357,3 +13357,12 @@ heal/repair support (packs contribute their own via rules; field kept
 as escape hatch). Gates: 253/253 tests, squad gate PASS via scratch bin
 (C:/tmp/ember-hr; records=8 squads=1 units=6 tick1201), boot-gate PASS.
 Two exception logs during the round were own bad-arg launches, not game.
+**Done (EMBER, 2026-09-28, H1 consumption):** Cameo-side `ModularBot` shadow now
+consumes `IBotActionBudget` (NOVA #571 producer). Order drain consults
+`TryConsumeActions` per order — denied orders stay queued; module tick loop
+consults `TryConsumeAttention(module)` with a rotating start index so a
+2-slot attention cap round-robins instead of starving modules past index N.
+No budget module on the bot = zero behavior change (opt-in via
+`HumanPaceBotModule`, already on the genericbot Player block). Gates:
+full build clean, `ai_squad_gate` PASS under live pacing (squads form),
+boot-gate PASS. PR pending independent review.
