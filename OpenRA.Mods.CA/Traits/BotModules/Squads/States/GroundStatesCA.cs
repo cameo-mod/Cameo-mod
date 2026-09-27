@@ -702,12 +702,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			foreach (var u in owner.Units)
 			{
-				var attack = u.Actor.TraitOrDefault<AttackBase>();
+				// Longest range over the enabled attack traits; TraitOrDefault<AttackBase>
+				// throws on the many actors that carry more than one.
+				var range = WDist.Zero;
+				foreach (var attack in u.Actor.TraitsImplementing<AttackBase>())
+				{
+					if (attack.IsTraitDisabled)
+						continue;
+
+					var r = attack.GetMaximumRangeVersusTarget(owner.Target);
+					if (r > range)
+						range = r;
+				}
 
 				// In range: bombard the shared target. Out of range: move to the
 				// hang-back anchor, NOT toward the target — the assault squad does
 				// the closing so artillery keeps its range advantage.
-				if (attack != null && owner.Target.IsInRange(u.Actor.CenterPosition, attack.GetMaximumRangeVersusTarget(owner.Target)))
+				if (range > WDist.Zero && owner.Target.IsInRange(u.Actor.CenterPosition, range))
 					owner.Bot.QueueOrder(new Order("Attack", u.Actor, owner.Target, false));
 				else
 					owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(anchor), false));

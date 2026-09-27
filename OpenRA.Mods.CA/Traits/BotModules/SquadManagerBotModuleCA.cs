@@ -328,12 +328,30 @@ namespace OpenRA.Mods.CA.Traits
 		// artillery qualifies automatically (CN's tag-derivation rule).
 		internal bool IsArtilleryUnit(Actor a)
 		{
-			var attack = a?.TraitOrDefault<AttackBase>();
-			return Info.ArtilleryMinRangeCells >= 0
-				&& attack != null
-				&& !a.Info.HasTraitInfo<AircraftInfo>()
-				&& !a.Info.HasTraitInfo<BuildingInfo>()
-				&& attack.GetMaximumRange() >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+			if (Info.ArtilleryMinRangeCells < 0 || a == null
+				|| a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return false;
+
+			return MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+		}
+
+		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
+		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
+		// ts_nod_attackbuggy), and TraitOrDefault throws on the second one.
+		internal static WDist MaximumEnabledRange(Actor a)
+		{
+			var range = WDist.Zero;
+			foreach (var attack in a.TraitsImplementing<AttackBase>())
+			{
+				if (attack.IsTraitDisabled)
+					continue;
+
+				var r = attack.GetMaximumRange();
+				if (r > range)
+					range = r;
+			}
+
+			return range;
 		}
 
 		// The assault squad an artillery squad trails: nearest living Rush squad.
