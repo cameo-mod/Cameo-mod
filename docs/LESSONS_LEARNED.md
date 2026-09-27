@@ -124,6 +124,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Dual-weapon units](#dual-weapon-units)
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
 - [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
+- [Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)](#mirror-drift-sharedversusprofile-skipped-the-main-table-heroic-rule-2026-09-27)
 
 **Process, tooling and platform**
 
@@ -166,6 +167,9 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`*ProportionalToPhysicalState` non-neutral defaults on secondary channels (2026-09-23)](#proportionaltophysicalstate-traits-have-non-neutral-defaults-on-secondary-channels-2026-09-23)
 - [Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)](#rename-tool-pitfalls-found-on-the-ra1allies-pass-2026-09-24)
 - [The naming audit sees file stems only (2026-09-24)](#the-naming-audit-sees-file-stems-only--pair-it-with-a-raw-disk-scan-2026-09-24)
+- [⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)](#-field-provenance-is-file-line--matching-by-file-alone-fabricates-a-live-children-class-2026-09-27)
+- [Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)](#dead-edge-detection--resolve-drop-probe-apply-must-share-the-tests-def-index-2026-09-26-w1-sweep)
+- [List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)](#list-splice-hygiene-build-headblocktail-never-mutate-then-slice-2026-09-26-rule-4-remediation)
 
 ---
 

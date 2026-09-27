@@ -1,3 +1,27 @@
+## 2026-09-28 — AI match log schema 2: composition + episode telemetry (NOVA)
+
+ROADMAP item "Offline aggregation extensions" (AI queue):
+
+- `UnitBuilderBotModuleCA` gained a read-only surface: `ActiveCompositionId`
+  and `ActiveCompositionChanged(tick, id)` fired by a single
+  `SetActiveComposition` helper at both assignment sites (selection +
+  baseline revert). No behavior change; observability only.
+- `AiMatchLogRecorder` now implements `INotifyCreated`, subscribes to that
+  event, tracks `composition_timeline`/`composition_switches`, and maintains
+  a unified `episode_timeline`: one entry per personality OR composition
+  transition carrying cumulative `kills_cost`/`deaths_cost` snapshots —
+  per-episode value attribution per AI_MATCH_LOG §6.1 shape.
+- `AiMatchLogWriter` emits schema 2 with the new fields; schema-1 records
+  remain valid input.
+- `aggregate_ai_matches.py` accepts schemas 1+2 and adds the episode table:
+  faction x personality x composition vs enemy faction, episodes/ticks held/
+  episode trade + containing-match win rate, min-samples gate unchanged.
+- Tests: aggregator (schema-2 acceptance + boundary-delta attribution +
+  schema-1 no-episode path, 3/3 pass), AiMatchLogWriterTest (new schema-2
+  emitter coverage, 234/234 NUnit pass).
+
+Gates: build clean, --check-yaml unaffected (no yaml), boot-gate PASS.
+
 ## 2026-09-27b — post-#516 derived-armor-row repair (NOVA)
 
 The #516 merge left master's `audit_derived_armor_columns` red

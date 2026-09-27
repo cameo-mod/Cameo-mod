@@ -109,6 +109,11 @@ namespace OpenRA.Mods.CA.Traits
 		int activeCompositionProducedValue;
 		int activeCompositionSelectedTick;
 		int nextCompositionSelectTick;
+
+		// Record-only observability for the AI match log (schema 2): the id of the
+		// currently selected composition, and a transition notification keyed by tick.
+		public string ActiveCompositionId => activeComposition?.Id ?? string.Empty;
+		public event Action<int, string> ActiveCompositionChanged;
 		readonly Dictionary<string, int> compositionLastUsedTickById = new Dictionary<string, int>();
 
 		readonly List<string> queuedBuildRequests = new List<string>();
@@ -471,7 +476,7 @@ namespace OpenRA.Mods.CA.Traits
 				var newActiveComposition = ChooseActiveComposition();
 				if (newActiveComposition != null)
 				{
-					activeComposition = newActiveComposition;
+					SetActiveComposition(newActiveComposition);
 					activeCompositionProducedValue = 0;
 					activeCompositionSelectedTick = world.WorldTick;
 					if (!string.IsNullOrEmpty(activeComposition.Id))
@@ -482,9 +487,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		void RevertToBaselineComposition()
 		{
-			activeComposition = null;
+			SetActiveComposition(null);
 			activeCompositionProducedValue = 0;
 			nextCompositionSelectTick = GetNextCompositionSelectTick();
+		}
+
+		void SetActiveComposition(UnitComposition next)
+		{
+			var nextId = next?.Id ?? string.Empty;
+			if (nextId == ActiveCompositionId)
+				return;
+
+			activeComposition = next;
+			ActiveCompositionChanged?.Invoke(world.WorldTick, nextId);
 		}
 
 		UnitComposition ChooseActiveComposition()
