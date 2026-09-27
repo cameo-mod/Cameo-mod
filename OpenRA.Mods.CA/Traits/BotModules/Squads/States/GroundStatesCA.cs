@@ -660,4 +660,61 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Deactivate(SquadCA owner) { }
 	}
+	// 6f (CN A2/A6): an artillery squad trails an assault squad and bombards only
+	// what the assault can see — its parent's target is fog-honest by
+	// construction (observed actor or remembered frozen building).
+	class ArtilleryUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			var parent = owner.Parent;
+			if (parent == null || !parent.IsValid)
+			{
+				parent = owner.SquadManager.FindAttachableAssault(owner);
+				owner.Parent = parent;
+			}
+
+			// No assault to escort: stop babysitting and act as one.
+			if (parent == null)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
+			if (!parent.IsTargetValid)
+			{
+				// Parent is still forming up — trail it.
+				owner.Target = Target.Invalid;
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(parent.CenterPosition), false,
+					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				return;
+			}
+
+			owner.Target = parent.Target;
+			var targetPos = owner.Target.CenterPosition;
+			var anchor = SquadManagerBotModuleCA.HangBackAnchor(parent.CenterPosition, targetPos,
+				WDist.FromCells(owner.SquadManager.Info.ArtilleryHangBackCells).Length);
+
+			foreach (var u in owner.Units)
+			{
+				var attack = u.Actor.TraitOrDefault<AttackBase>();
+
+				// In range: bombard the shared target. Out of range: move to the
+				// hang-back anchor, NOT toward the target — the assault squad does
+				// the closing so artillery keeps its range advantage.
+				if (attack != null && owner.Target.IsInRange(u.Actor.CenterPosition, attack.GetMaximumRangeVersusTarget(owner.Target)))
+					owner.Bot.QueueOrder(new Order("Attack", u.Actor, owner.Target, false));
+				else
+					owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(anchor), false));
+			}
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
 }
