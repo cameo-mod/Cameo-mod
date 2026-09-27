@@ -41,6 +41,7 @@ DEFAULT_CA = pathlib.Path.home() / "Documents" / "GitHub" / "CAmod"
 RV_DIRS = [REPO / "engine" / "OpenRA.Mods.Common" / "Traits" / "BotModules",
            REPO / "engine" / "OpenRA.Mods.AS" / "Traits" / "BotModules"]
 
+# A generic method (`PreferSquadTargets<T>(...)`) carries its type parameters after the name.
 # Types may be declared with NO modifier (`class GroundUnitsIdleStateCA : ...` is internal).
 TYPE_DECL = re.compile(r"^\s*(?:\[[^\]]*\]\s*)*(?:(?:public|internal|protected|private|static|sealed|abstract|partial)\s+)*"
                        r"(?:class|enum|interface|struct)\s+(?P<type>\w+)")
@@ -48,7 +49,7 @@ DECL = re.compile(
     r"^\s*(?:\[[^\]]*\]\s*)*"
     r"(?:(?:public|internal|protected|private|static|readonly|sealed|abstract|virtual|override|partial|const)\s+)+"
     r"(?:(?:class|enum|interface|struct)\s+(?P<type>\w+)"
-    r"|[\w<>\[\],\.\? ]+?\s+(?P<member>\w+)\s*(?:[=;({]|=>))")
+    r"|[\w<>\[\],\.\? ]+?\s+(?P<member>\w+)\s*(?:<[\w, ]+>\s*)?(?:[=;({]|=>))")
 ENUM_BLOCK = re.compile(r"enum\s+(\w+)\s*\{([^}]*)\}", re.S)
 
 
