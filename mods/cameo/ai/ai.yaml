@@ -6536,6 +6536,8 @@ Player:
 			wc2_orcs_goblinzeppelin: 1
 	CombatAnalysisBotModule:
 		RequiresCondition: genericbot
+	HumanPaceBotModule:
+		RequiresCondition: genericbot
 
 World:
 	UnitCompositionsBotModule:
