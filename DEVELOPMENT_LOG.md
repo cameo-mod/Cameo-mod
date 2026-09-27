@@ -186,6 +186,40 @@ consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
 - Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
   Player-not-World placement, role/demand-name match, interface contract,
   producer-only guard).
+## 2026-09-28 — DAWN: engine isolation + vendored-source drift audit
+
+- **Engine isolation (maintainer order `ORDERS_2026-09-28`):** `engine/` was a
+  junction into the main checkout's `engine/` — every dawn-ai build/bin-write
+  landed in the maintainer's `engine\bin`, and a 55-min `--check-yaml` held
+  `OpenRA.Game.dll` and blocked `make.cmd all` there. Junction removed
+  (`rmdir` on the link only), `make.cmd all` fetched a private engine copy
+  (`engine/VERSION` = `462fc1fc…`, matches `mod.config`), full build 0 errors,
+  boot-gate re-run on the isolated bin PASS. New rule for this tree: never
+  `--check-yaml` against a shared bin; >15 min lint = stuck, kill it.
+- **Vendored-source drift audit** (`tools/audit/audit_fransbot_drift.py`,
+  Claude's #578 note 3): diffs `OpenRA.Mods/Fransbot/Traits/*.cs` against the
+  upstream clone (`src/Fransbot.OpenRA/Traits` @ `3cb13dd` V1.29.19-RC).
+  Baseline `tools/ai/fransbot_drift_baseline.json` records per-file
+  +added/-removed diff counts (28 vendored files: 27 upstream + the new
+  `FransActorClass.cs`; current delta +347/-284 lines). `--check` fails if the
+  vendored file set or any per-file delta moves — catches silent edits to
+  vendored code after upstream re-vendors. Registered in `run_all.sh`.
+- **BotRoleSets handoff to Claude** (his #578 note 1): full 127-field
+  field→predicate spec posted to the fleet
+  (`HANDOFF_2026-09-28_dawn_frans_fields_for_roles.md`). ~55 field-sites are
+  `DeriveHas`-expressible today; ~40 need `DeriveFieldIn` (locomotor/queue) or
+  `DeriveFieldCmp` (cost/speed/dimensions); ~25 stay generator-fed unless a
+  deep `DeriveWeapon`/`DeriveIntoActor` primitive lands. `Targets` must union
+  across `Apply` entries — most Frans fields are multi-predicate unions.
+- **Lobby entry** (Claude's #578 note 2): `ModularBotInfo` has no `Hidden`
+  field — lobby enumerates `IBotInfo`s unconditionally, so hiding needs an
+  engine change which Route-A forbids. With the generated lists populated the
+  `fransbot` entry is now functional rather than dead; final behavior
+  verification is the comparison match (NOVA's batch harness).
+- **#569 verify:** Fransbot compiles clean against bleed engine
+  `465c5c29…` under `net10.0`/C#13 — 0 errors/0 warnings (scratch tree verify;
+  fleet `STATUS_2026-09-28_dawn_verify_569.md`).
+
 ## 2026-09-28 — DAWN: Fransbot RA-id logic sites converted to trait classification
 
 - New `OpenRA.Mods.Fransbot/Traits/FransActorClass.cs` — shared static classifier
