@@ -11,6 +11,33 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-09-27 — Claude: a test map at `GameSpeed: insane` still runs at Normal unless you lock it AND drop AdaptiveGameSpeed
+
+Runtime gates are tick-based, so running them faster changes wall-clock time only. The maintainer's
+tip was `insane`, but setting `MapOptions: GameSpeed: insane` changed **nothing**: 288–309 s per
+6,000-tick run either way. Two things undo it:
+
+1. **`Game.LoadMap`** (every `Launch.Map=` run) sends `option gamespeed default` before it starts
+   (engine `Game.cs`). Only a **locked** option refuses it (`LobbyCommands.cs`:
+   `option.IsLocked` → invalid configuration).
+2. **`AdaptiveGameSpeed`** (`rules/world.yaml`) times whole **frames**, render included, against the
+   speed's budget (10 ms at `insane`). A frame with four bots on screen takes ~35–40 ms, so it scales
+   pacing back to ~Normal. A tick alone costs ~1.4 ms (`<prefix>-tick_time.csv`).
+
+The recipe for a test map's `rules.yaml`, as used in `ai_harvester_gate_20260927`, took the same run to
+**125 s**:
+
+```
+World:
+	-AdaptiveGameSpeed:
+	MapOptions:
+		GameSpeed: insane
+		GameSpeedDropdownLocked: True
+```
+
+Verify with wall time or the benchmark CSVs; never assume the setting took. `maximum`
+(Timestep 1) is for unattended fine-tuning batches only, since it's too fast for a human watching.
+
 ### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
 
 When master's merge wave (#519 dots, #524 `pack|file` sound refs) touched

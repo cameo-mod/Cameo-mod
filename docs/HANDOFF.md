@@ -27,9 +27,15 @@ Queue), which keeps the Yuri slaves out.
 **Five factions' bots never build anything:** Atreides, Harkonnen, Corrino, Eden and Plymouth.
 `BaseBuilderBotModuleCA.PauseUnitProduction` is `!HasMinimalRefineryCount()`, a by-name count, and
 their refineries and yards aren't listed. An Atreides hard bot with 10,000 credits spent nothing in
-6,000 ticks. **Next in the list rollout: the refinery + conyard roles.** Mind the StarCraft depots
-(Nexus, Command Center and Hatchery are also yards) and `zerg_hive`/`zerg_lair`, which need
-`BotRoles: conyard`.
+6,000 ticks. **Fixed by the refinery + conyard roles** (branch `claude/role_refinery_conyard`,
+stacked on #583; AI_ARCHITECTURE §2.8 "Applied roles"). That branch also adds field predicates to
+`BotRoleSets`, uses them to keep water-only refineries out, makes the harvester role fill
+`ExcludeFromSquadsTypes` (Atreides harvesters had been drafted into attacks), and brings the
+central ids to 4,092.
+**Still written centrally** until they get `BotRoles` in their packs: `zerg_hive`/`zerg_lair`
+(yards), `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards) and `td_gdi_defenserig`.
+**Next in the list rollout:** the Fransbot fields from DAWN's spec (replacing
+`fransbot_lists.yaml`), and moving #577's support derivation into `BotRoleSets`.
 
 ## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
 
