@@ -147,15 +147,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	class GroundUnitsStageStateCA : GroundStateBaseCA, IState
 	{
 		CPos stagingCell;
-		int waitTicks;
+		int stageDeadlineTick;
 		bool staged;
 
 		public void Activate(SquadCA owner)
 		{
-			waitTicks = owner.SquadManager.Info.StageTimeoutTicks;
+			// WorldTick deadline — squad Update() runs on AttackForceInterval,
+			// not per tick, so a decrementing counter would wait 50-100x too long.
+			stageDeadlineTick = owner.World.WorldTick + owner.SquadManager.Info.StageTimeoutTicks;
 
 			// Rally at the own building nearest the target; without one there is
-			// nowhere to stage, so commit directly.
+			// nowhere to stage, so commit directly. A building farther from the
+			// target than the squad already is would stage it backwards — commit
+			// immediately in that case too.
 			var buildings = owner.World.ActorsHavingTrait<Building>()
 				.Where(a => a.Owner == owner.Bot.Player).ToList();
 
@@ -165,8 +169,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			var targetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
-			stagingCell = buildings.MinBy(b => (b.Location - targetCell).LengthSquared).Location;
+			var targetPos = owner.Target.CenterPosition;
+			var targetCell = owner.World.Map.CellContaining(targetPos);
+			var nearest = buildings.MinBy(b => (b.Location - targetCell).LengthSquared);
+
+			var squadPos = owner.CenterPosition;
+			var buildingDist = (nearest.CenterPosition - targetPos).LengthSquared;
+			var squadDist = (squadPos - targetPos).LengthSquared;
+			if (buildingDist >= squadDist)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			stagingCell = nearest.Location;
 			staged = true;
 
 			foreach (var u in owner.Units)
@@ -199,7 +215,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var assembled = owner.Units.Count(u =>
 				(u.Actor.CenterPosition - rally).LengthSquared <= radiusSquared);
 
-			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent || --waitTicks <= 0)
+			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent ||
+				owner.World.WorldTick >= stageDeadlineTick)
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 		}
 

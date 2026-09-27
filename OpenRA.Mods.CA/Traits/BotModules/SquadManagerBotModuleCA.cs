@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -133,7 +134,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ticks a staging squad waits before committing regardless of assembly.")]
 		public readonly int StageTimeoutTicks = 750;
 
-		[Desc("6f: support units (medics, repair) follow assault squads instead of charging with them.")]
+		[Desc("Extra units to treat as heal/repair support squads, beyond the derived set. " +
+			"Derived at rules load: an armament with a negative-damage, ally-valid warhead " +
+			"marks the carrier as support, so packs contribute their own — no central ids.")]
 		public readonly HashSet<string> SupportUnitTypes = [];
 
 		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
@@ -207,6 +210,30 @@ namespace OpenRA.Mods.CA.Traits
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
+
+			// Derive support units from weapon metadata: a negative-damage warhead
+			// that may hit allies is a heal/repair effect, so its carrier is support.
+			foreach (var actor in rules.Actors.Values)
+			{
+				if (actor.Name.StartsWith('^'))
+					continue;
+
+				foreach (var armament in actor.TraitInfos<ArmamentInfo>())
+				{
+					if (string.IsNullOrEmpty(armament.Weapon))
+						continue;
+
+					if (!rules.Weapons.TryGetValue(armament.Weapon.ToLowerInvariant(), out var weapon))
+						continue;
+
+					if (weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
+						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally)))
+					{
+						SupportUnitTypes.Add(actor.Name);
+						break;
+					}
+				}
+			}
 		}
 
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
