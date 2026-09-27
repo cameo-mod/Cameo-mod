@@ -443,6 +443,12 @@ answers "how". The personality is chosen against the *selected target's* profile
 worst threat among the others — otherwise the bot turtles against a rusher it isn't fighting, or
 steamrolls into a fortified target while a second player razes its base.
 
+The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
+`30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
+with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
+damage-dealt side still has no producer). Nothing consumes it yet — wiring it into this score is
+a separate lane.
+
 ### 4.4 Transition table
 
 The user's five cases, plus the ones the design needs to cover. "Signal" is per §3.2, evaluated
@@ -749,7 +755,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**23 distinct trait types, 38 Player instances plus one World instance** (2026-09-28 re-measure on post-#547 master: `ScoutBotModule` added the 23rd type / 38th instance). Conditional instances
+**24 distinct trait types, 39 Player instances plus one World instance** (2026-09-28 re-measure on post-#555 master: `CombatAnalysisBotModule` added the 24th type / 39th instance; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
