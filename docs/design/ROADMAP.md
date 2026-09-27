@@ -174,6 +174,12 @@ the fog sequencing.
   the legacy omniscient scan whenever no `IBotFoggedEnemyProvider` answers
   (10.1 degradation) or `UseFoggedObservation` is off. The follow-on tuning
   pass the design warned about is the remaining work.
+- [x] **M** Phase 7a assign-layer missions: `MasterAiBotModule` publishes fog-honest,
+  ordered `Raid`/`Defend` intent and `SquadManagerBotModuleCA` consumes it only when forming
+  a new force; `Recon` remains with `ScoutBotModule`, `Secure` is deferred.
+- [ ] **M** Phase 7b mission bidding: squads bid for missions instead of the forming squad
+  taking the first affordable mission.
+- [ ] **M** Phase 7c `Secure` missions plus Fransbot anchors and squad rejoin.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·

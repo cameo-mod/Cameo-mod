@@ -1113,6 +1113,20 @@ share the result is a net *saving* if the squad managers are later pointed at th
 instead of scanning independently. That consolidation is not phase 1, but the snapshot is shaped to
 allow it.
 
+### 10.5a The assign layer: missions
+
+Phase 7a adds the first assign-layer contract without creating another unit owner.
+`MasterAiBotModule` publishes fog-honest `Raid` and `Defend` intent through
+`IBotMissionProvider`; `SquadManagerBotModuleCA` consumes the ordered missions only when it is
+about to form a new attack force. The producer derives missions from `RegionMemory`, while the
+consumer retains ownership of force formation, target validation, and orders.
+
+The strategist publishes intent rather than commanding units because squad membership and
+execution already belong to the squad manager. A mission may defer a force for a bounded defend
+hold or focus a newly formed raid, but it never moves units between existing squads and never
+assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is deferred to a later
+phase. The assign layer must never become a second owner of a unit.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
@@ -1157,7 +1171,10 @@ allow it.
    parent assault squad and bombards only what the parent sees — no separate
    staging or support-follow yet) — phase 6 is done except 6f staging/support —
    `docs/design/AI_FRANSBOT_RESEARCH.md` §4.*
-7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
+7. **Assign-layer missions (phase 7a, implemented).** The master publishes ordered, reserved
+   `Raid` and `Defend` intent from fogged region memory; squad formation remains the execution
+   owner's decision. `Recon` and `Secure` are deferred.
+8. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
    strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.
 
 Phases 1 and 2 are pure additions with no gameplay effect and can proceed while the balance

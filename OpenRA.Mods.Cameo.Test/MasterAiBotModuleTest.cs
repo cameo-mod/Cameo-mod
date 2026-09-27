@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
@@ -76,8 +77,10 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
-				"main_target_score", "hints", "demand", "own", "enemies"
+				"main_target_score", "mission", "hints", "demand", "own", "enemies"
 			}));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
+			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
 		}
 
 		[Test]
@@ -109,6 +112,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var b = new StringBuilder();
 			var situation = Situation(BotUrgency.Pressured, "steamroller", null,
 				new EnemyProfiles(enemy));
+			situation.Mission = new BotMission { Type = BotMissionType.Raid, Priority = 65, RegionIndex = 18 };
 			AiSituationLogWriter.AppendSituation(b, "game", "", "map", "Multi0", "td_gdi", "medium", "rush",
 				situation);
 			using var doc = JsonDocument.Parse(b.ToString());
@@ -119,6 +123,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(enemyJson.GetProperty("buildings").GetInt32(), Is.EqualTo(9));
 			Assert.That(doc.RootElement.GetProperty("urgency").GetString(), Is.EqualTo("pressured"));
 			Assert.That(doc.RootElement.GetProperty("personality_candidate").GetString(), Is.EqualTo("steamroller"));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("type").GetString(), Is.EqualTo("raid"));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("priority").GetInt32(), Is.EqualTo(65));
+			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("region_index").GetInt32(), Is.EqualTo(18));
 			Assert.That(enemyJson.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
 				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
@@ -706,6 +713,98 @@ namespace OpenRA.Mods.Cameo.Test
 		public void MasterAiImplementsFoggedEnemyProvider()
 		{
 			Assert.That(typeof(IBotFoggedEnemyProvider).IsAssignableFrom(typeof(MasterAiBotModule)), Is.True);
+		}
+
+		static (RegionMemory Regions, OpenRA.Player Enemy) MissionRegions(params (int Index, int Army, int Defence, int Economy)[] values)
+		{
+			var regions = new RegionMemory(new CPos(0, 0), new CPos(23, 23), 8);
+			var cells = new RegionMemory.Region[regions.CellCount];
+			foreach (var value in values)
+				cells[value.Index] = new RegionMemory.Region
+				{
+					ArmyValue = value.Army,
+					DefenceValue = value.Defence,
+					EconomyValue = value.Economy,
+					EverSeen = true
+				};
+			var enemy = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			regions.SetRegions(enemy, cells);
+			return (regions, enemy);
+		}
+
+		[Test]
+		public void MissionsUseRaidPriorityAndRequiredValueArithmetic()
+		{
+			var setup = MissionRegions((0, 0, 0, 100), (1, 50, 50, 100));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 8, 100,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions.Select(m => m.RegionIndex), Is.EqualTo(new[] { 0, 1 }));
+			Assert.That(missions[0].Priority, Is.EqualTo(99));
+			Assert.That(missions[0].RequiredValue, Is.Zero);
+			Assert.That(missions[1].Priority, Is.EqualTo(49));
+			Assert.That(missions[1].RequiredValue, Is.EqualTo(120));
+		}
+
+		[Test]
+		public void DefendMissionUsesNineRegionThreatAndThreshold()
+		{
+			var setup = MissionRegions((4, 100, 0, 0));
+			var noDefend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 100,
+				new MasterAiBotModuleInfo());
+			Assert.That(noDefend, Is.Empty);
+
+			var defend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+			Assert.That(defend, Has.Count.EqualTo(1));
+			Assert.That(defend[0].Type, Is.EqualTo(BotMissionType.Defend));
+			Assert.That(defend[0].Priority, Is.EqualTo(99));
+			Assert.That(defend[0].RequiredValue, Is.Zero);
+		}
+
+		[Test]
+		public void EqualMissionPrioritiesOrderDefendThenRegion()
+		{
+			var setup = MissionRegions((0, 49, 0, 50), (4, 0, 0, 0), (8, 49, 0, 50));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 48,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions.Select(m => (m.Type, m.RegionIndex)), Is.EqualTo(new[]
+			{
+				(BotMissionType.Defend, 4),
+				(BotMissionType.Raid, 0),
+				(BotMissionType.Raid, 8)
+			}));
+		}
+
+		[Test]
+		public void MissionReservationExpiresAfterConfiguredTicks()
+		{
+			Assert.That(MasterAiBotModule.ReservationActive(100, 100, 1500), Is.True);
+			Assert.That(MasterAiBotModule.ReservationActive(100, 1600, 1500), Is.True);
+			Assert.That(MasterAiBotModule.ReservationActive(100, 1601, 1500), Is.False);
+		}
+
+		sealed class StubMissionProvider : IBotMissionProvider
+		{
+			public IReadOnlyList<BotMission> Missions { get; set; } = Array.Empty<BotMission>();
+			public void MissionTaken(BotMission mission) { }
+		}
+
+		[Test]
+		public void BestAffordableMissionUsesProviderAndPublishedOrder()
+		{
+			var first = new BotMission { RequiredValue = 500, RegionIndex = 1 };
+			var second = new BotMission { RequiredValue = 100, RegionIndex = 2 };
+			var third = new BotMission { RequiredValue = 50, RegionIndex = 3 };
+			var providers = new[]
+			{
+				new StubMissionProvider { Missions = new[] { first, second } },
+				new StubMissionProvider { Missions = new[] { third } }
+			};
+
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
 		}
 	}
 }

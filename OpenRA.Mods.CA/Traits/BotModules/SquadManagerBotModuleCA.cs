@@ -123,6 +123,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
+		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
+		public readonly bool UseMissions = true;
+		[Desc("Maximum number of ticks a Defend mission may hold an otherwise ready attack force.")]
+		public readonly int MissionDefendHoldTicks = 1500;
 
 		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
 		public readonly HashSet<string> AssaultPriorityTags = [];
@@ -221,6 +225,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRegionThreatProvider[] threatProviders;
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
+		IBotMissionProvider[] missionProviders;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -231,6 +236,8 @@ namespace OpenRA.Mods.CA.Traits
 		int attackForceTicks;
 		int protectionForceTicks;
 		int minAttackForceDelayTicks;
+		BotMission heldDefendMission;
+		int defendMissionHeldSince = -1;
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
@@ -515,6 +522,7 @@ namespace OpenRA.Mods.CA.Traits
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
+			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -535,6 +543,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			heldDefendMission = null;
+			defendMissionHeldSince = -1;
 			foreach (var squad in Squads)
 				DismissSquad(squad);
 
@@ -592,6 +602,26 @@ namespace OpenRA.Mods.CA.Traits
 				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
 
 			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+		}
+
+		internal Actor FindClosestEnemy(CPos location, int attackerValue, Player targetPlayer, SquadCA owner = null)
+		{
+			if (targetPlayer == null)
+				return null;
+
+			var units = World.Actors
+				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
+				.ToList();
+			units = PreferSquadTargets(units, owner, TagsOf);
+			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var visible = units.Where(IsNotHiddenUnit).ToList();
+			var targetPosition = World.Map.CenterOfCell(location);
+			if (FoggedScans)
+				return visible.ClosestToIgnoringPath(targetPosition);
+
+			return visible.ClosestToIgnoringPath(targetPosition) ??
+				units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
+				units.ClosestToIgnoringPath(targetPosition);
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
@@ -683,6 +713,29 @@ namespace OpenRA.Mods.CA.Traits
 
 			var preferred = candidates.Where(ownedByMainTarget).ToList();
 			return preferred.Count > 0 ? preferred : candidates;
+		}
+
+		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		{
+			if (providers == null)
+				return null;
+
+			foreach (var provider in providers)
+				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
+					if (mission != null && mission.RequiredValue <= idleForceValue)
+						return mission;
+
+			return null;
+		}
+
+		void MissionTaken(BotMission mission)
+		{
+			foreach (var provider in missionProviders ?? Array.Empty<IBotMissionProvider>())
+				if ((provider.Missions ?? Array.Empty<BotMission>()).Any(candidate => ReferenceEquals(candidate, mission)))
+				{
+					provider.MissionTaken(mission);
+					return;
+				}
 		}
 
 		void CleanSquads()
@@ -873,7 +926,40 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
 			{
-				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
+				BotMission mission = null;
+				Actor missionTarget = null;
+				if (Info.UseMissions && missionProviders?.Length > 0)
+				{
+					mission = heldDefendMission ?? BestAffordableMission(missionProviders, idleUnitsValue);
+					if (mission?.Type == BotMissionType.Defend)
+					{
+						if (heldDefendMission == null)
+						{
+							heldDefendMission = mission;
+							defendMissionHeldSince = World.WorldTick;
+							MissionTaken(mission);
+						}
+
+						var heldTicks = World.WorldTick - defendMissionHeldSince;
+						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						{
+							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+							return;
+						}
+
+						AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+							Player.ClientIndex, mission.RegionIndex, heldTicks);
+						heldDefendMission = null;
+						defendMissionHeldSince = -1;
+						mission = null;
+					}
+
+					if (mission?.Type == BotMissionType.Raid)
+						missionTarget = FindClosestEnemy(mission.Location, idleUnitsValue, mission.TargetPlayer);
+				}
+
+				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
@@ -898,6 +984,10 @@ namespace OpenRA.Mods.CA.Traits
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
 				SetNextDesiredAttackForce();
+				if (mission?.Type == BotMissionType.Raid && missionTarget != null)
+					MissionTaken(mission);
+				heldDefendMission = null;
+				defendMissionHeldSince = -1;
 			}
 		}
 

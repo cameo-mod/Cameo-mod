@@ -4806,8 +4806,10 @@ JSONL records.
 
 The phase-2 master publishes an observe-only per-enemy snapshot and computes
 candidate personality and target values for logging only. It queues no orders,
-grants no conditions, touches no synced state, and remains pre-fog by design.
-The situation records use schema version 1 in the same record-only boundary.
+grants no conditions, or touches synced state; its enemy observation is now
+fog-limited by the landed phase-6 perception work.
+The situation records use schema version 2 in the same record-only boundary; schema-1 records
+remain valid, and schema 2 adds the published mission intent.
 
 The forward design for bot modules, per-ContentPack AI splitting, the dynamic
 personality manager, the master AI module, and match logging lives in
