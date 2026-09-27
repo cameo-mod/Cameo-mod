@@ -1,5 +1,34 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — EMBER: AI phase 6f part 1 — artillery attach on `devin/ember/ai-waves-6f`
+
+`Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-waves-6f · stacked on the 6e merge`
+
+Phase 6f of `docs/design/AI_FRANSBOT_RESEARCH.md` (coordinated waves), first
+piece — CN A2/A6 artillery attachment:
+
+* **`SquadCAType.Artillery`** — new squad type. `CreateAttackForce` peels
+  long-range units out of the rush squad into a trailing artillery squad;
+  orphaned artillery squads re-attach to each new assault (so a save-load keeps
+  working — `SquadCA.Parent` is deliberately runtime-only).
+* **Rules-derived classification** — `IsArtilleryUnit` asks the unit's
+  `AttackBase.GetMaximumRange()` against `ArtilleryMinRangeCells` (default
+  10); no actor ids anywhere, every faction's long-range unit qualifies
+  automatically. Air/naval units never reach the pool (they diverte earlier).
+* **`ArtilleryUnitsIdleStateCA`** — trails `Parent` (nearest living Rush
+  squad). When the parent has a valid target, the squad's own `Target` mirrors
+  it: in-range units `Attack`, out-of-range units `AttackMove` to the
+  hang-back anchor — the assault squad does the closing so artillery keeps its
+  range advantage. The parent's target is fog-honest by construction (6d), so
+  artillery only ever fires at what the assault actually sees. No parent → the
+  squad just acts as a regular assault squad.
+* Seam: `public static HangBackAnchor(parentPos, targetPos, hangBackLength)`
+  — unit tests pin the away-from-target offset and the colocated degenerate.
+* Deferred to later 6f parts: wave staging/rally (`AttackWaveStagingProgressPercent`-
+  style) and support-follow squads (medics/repair).
+
+Verification: 248/248 unit tests, `ai_bot_player_gate` PASS, boot-gate PASS.
+
 ## 2026-09-27 — EMBER: AI phase 6e — risk routing on `devin/ember/ai-route-6e`
 
 `Agent: EMBER (Devin CLI) · lane: AI bot modules · branch devin/ember/ai-route-6e · stacked on the 6d merge`

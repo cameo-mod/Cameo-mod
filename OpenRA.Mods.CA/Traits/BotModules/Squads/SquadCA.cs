@@ -16,7 +16,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval }
+	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery }
 
 	public class SquadCA
 	{
@@ -36,6 +36,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		internal Target Target;
 		internal StateMachineCA FuzzyStateMachine;
+
+		// 6f: artillery squads attach to an assault squad and bombard what it can
+		// see. Runtime-only — not serialized; the state reattaches after load.
+		internal SquadCA Parent;
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)
@@ -67,6 +71,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					break;
 				case SquadCAType.Naval:
 					FuzzyStateMachine.ChangeState(this, new NavyUnitsIdleState(), true);
+					break;
+				case SquadCAType.Artillery:
+					FuzzyStateMachine.ChangeState(this, new ArtilleryUnitsIdleStateCA(), true);
 					break;
 			}
 		}

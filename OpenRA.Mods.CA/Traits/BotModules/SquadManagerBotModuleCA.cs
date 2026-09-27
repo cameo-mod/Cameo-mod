@@ -153,6 +153,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
 		public readonly bool UseRiskRouting = true;
 
+		[Desc("Ground units whose maximum weapon range reaches this many cells split into artillery squads that hang back behind assault squads (AI_FRANSBOT_RESEARCH.md 6f). Negative disables artillery squads.")]
+		public readonly int ArtilleryMinRangeCells = 10;
+
+		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
+		public readonly int ArtilleryHangBackCells = 8;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -315,6 +321,58 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool FoggedScansActive(bool traitDisabled, IBotFoggedEnemyProvider[] providers)
 		{
 			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
+		}
+
+		// 6f: rules-derived artillery classification — a mobile ground unit whose
+		// weapons reach ArtilleryMinRangeCells. No actor ids, so every faction's
+		// artillery qualifies automatically (CN's tag-derivation rule).
+		internal bool IsArtilleryUnit(Actor a)
+		{
+			var attack = a?.TraitOrDefault<AttackBase>();
+			return Info.ArtilleryMinRangeCells >= 0
+				&& attack != null
+				&& !a.Info.HasTraitInfo<AircraftInfo>()
+				&& !a.Info.HasTraitInfo<BuildingInfo>()
+				&& attack.GetMaximumRange() >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+		}
+
+		// The assault squad an artillery squad trails: nearest living Rush squad.
+		internal SquadCA FindAttachableAssault(SquadCA artillery)
+		{
+			if (!artillery.IsValid)
+				return null;
+
+			var from = artillery.Units[0].Actor.CenterPosition;
+			SquadCA best = null;
+			var bestDistance = long.MaxValue;
+			foreach (var squad in Squads)
+			{
+				if (squad == artillery || !squad.IsValid || squad.Type != SquadCAType.Rush)
+					continue;
+
+				var distance = (squad.CenterPosition - from).HorizontalLengthSquared;
+				if (distance < bestDistance)
+				{
+					bestDistance = distance;
+					best = squad;
+				}
+			}
+
+			return best;
+		}
+
+		// Point hangBackLength behind the parent's position, away from the target.
+		public static WPos HangBackAnchor(WPos parentPos, WPos targetPos, int hangBackLength)
+		{
+			var offset = parentPos - targetPos;
+			var distance = offset.HorizontalLength;
+			if (distance <= 0)
+				return parentPos;
+
+			return parentPos + new WVec(
+				(int)((long)offset.X * hangBackLength / distance),
+				(int)((long)offset.Y * hangBackLength / distance),
+				0);
 		}
 
 		// IsPreferredEnemyUnit restricted to what the bot can currently observe.
@@ -747,8 +805,24 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
 
-				attackForce.Units.AddRange(unitsHangingAroundTheBase);
-				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, unitsHangingAroundTheBase.Count, attackForce.Type);
+				// 6f: long-range units peel off into an artillery squad that trails
+				// the assault and bombards its target, instead of charging with it.
+				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
+				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)));
+
+				if (artilleryUnits.Count > 0)
+				{
+					var artillerySquad = RegisterNewSquad(bot, SquadCAType.Artillery);
+					artillerySquad.Units.AddRange(artilleryUnits);
+					artillerySquad.Parent = attackForce.IsValid ? attackForce : null;
+					AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2} (escorts {3})", Player.ClientIndex, artilleryUnits.Count, artillerySquad.Type, artillerySquad.Parent);
+				}
+
+				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
 				unitsHangingAroundTheBase.Clear();
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);

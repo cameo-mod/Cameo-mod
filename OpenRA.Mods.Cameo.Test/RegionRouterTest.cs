@@ -98,5 +98,23 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var waypoint in route)
 				Assert.That(blockedX.Contains(waypoint.X), Is.False, $"unreachable waypoint {waypoint} was kept");
 		}
+
+		[Test]
+		public void HangBackAnchorOffsetsAwayFromTarget()
+		{
+			// Parent at X=10000, target due east at X=20000: anchor sits 1024
+			// world units BEHIND the parent, away from the target.
+			var anchor = OpenRA.Mods.CA.Traits.SquadManagerBotModuleCA.HangBackAnchor(
+				new WPos(10000, 0, 0), new WPos(20000, 0, 0), 1024);
+			Assert.That(anchor.X, Is.EqualTo(8976));
+			Assert.That(anchor.Y, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void HangBackAnchorColocatedReturnsParent()
+		{
+			var pos = new WPos(5000, 5000, 0);
+			Assert.That(OpenRA.Mods.CA.Traits.SquadManagerBotModuleCA.HangBackAnchor(pos, pos, 1024), Is.EqualTo(pos));
+		}
 	}
 }
