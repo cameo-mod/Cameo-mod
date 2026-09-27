@@ -4,7 +4,7 @@
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_apply_harvester`
 
-**Two maintainer rulings, 2026-09-27 ~20:40, asked directly.** They refine the entry below:
+**Three maintainer rulings, 2026-09-27 ~20:40–21:10, asked directly.** They refine the entries below:
 
 1. **The AI-architecture lane is split.** **NOVA** owns the *layering*: Sense/Decide/Assign/Execute,
    H1 pacing, Fransbot integration. **Claude** owns the *list rollout*: `BotRoleSets` roles, pack AI
@@ -12,6 +12,12 @@
    holds, so Claude's role PRs go to NOVA for review and merge.
 2. **Fransbot publication is cleared.** #578 may carry the vendored Fransbot source in this public
    repo.
+3. **Every commit is authored `AedisToru <122120981+AedisToru@users.noreply.github.com>`.** On
+   2026-09-27, 17 commits (10 on master) came from a cloud agent's own git config, carrying another
+   name and the maintainer's private e-mail. **Fix forward, no history rewrite:** `.mailmap` maps them
+   for git tools (GitHub's web UI ignores it). Every agent checks `git var GIT_AUTHOR_IDENT` before
+   committing. Provenance stays in the `Co-Authored-By:` trailer. Details: fleet
+   `ORDERS_2026-09-28_git_identity_and_engine_isolation.md`.
 
 **Harvester role applied** (AI_ARCHITECTURE §2.8, "Applied roles"): 50 central ids removed,
 4,530 → 4,480. A/B on the new `ai_harvester_gate_20260927`: TKM built +5 and +6 harvesters with the
