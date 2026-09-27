@@ -23,8 +23,10 @@ the code wins._
 2. **Fransbot is far easier to bring in than feared.** It is a standalone plug-in DLL
    (`Fransbot.OpenRA.dll`, 24 bot modules, 49,709 lines). Compiled **unchanged** against Cameo's
    engine, retargeted from .NET 10 to .NET 8, it produces **exactly one** error: Cameo's
-   `IBotBaseExpansion` has one extra member, `IsConyardRelocationPending(Actor)`. **No
-   OpenRA-bleed or .NET 10 upgrade is needed.** The real work is content: 36 yaml-overridable
+   `IBotBaseExpansion` has one extra member, `IsConyardRelocationPending(Actor)`, added by Cameo
+   (cameo-engine #90), not by bleed, so moving to bleed does not remove it. The engine is moving
+   to current OpenRA bleed and .NET 10 anyway, by maintainer order (§4.4). That is Fransbot's
+   native target, so the port no longer needs the retarget. The real work is content: 36 yaml-overridable
    Red Alert id lists to fill per faction, and ~17 places that hard-wire RA ids into logic.
 3. **Recommended route: run Fransbot side by side first, then harvest.** Vendor it as its own
    project in Cameo's solution, give the lobby a second bot type, and let match logs decide which
@@ -152,6 +154,46 @@ losses**.
    symbol. The guard catches a deleted name, but not a name that survives while its behaviour is
    bypassed; that is what the match check in step 3 is for.
 
+### 3.1 Harasser squads (CA) and guerrilla squads (RV): two halves of one raid, not duplicates
+
+Measured on master (`SquadManagerBotModuleCA.cs`, `Squads/States/GroundStatesCA.cs`) and on CA
+`f31049d2`, where harasser squads arrived in `55e042954` (2026-02-03), after Cameo copied CA.
+
+| | Guerrilla (RV, in Cameo today) | Harasser (CA upstream, not in Cameo) |
+|---|---|---|
+| Unit list | `GuerrillaTypes`: **254 ids** in each of the 5 personalities, nearly every combat unit including MLRS and battle tanks | `HarasserTypes`: **18 ids**, fast or light (bikes, light tanks, buggies, drones, a few infantry) |
+| Assignment | **one** shared squad per bot. One roll per `FindNewUnits` pass; listed units join while the squad is at most `MaxGuerrillaSize` | deterministic: every listed unit, **one squad per actor type** (homogeneous), any number of squads |
+| Launch | at once | waits: never below 3 units, 5 % at 3, 10 % at 4, always at 5+ |
+| Target | closest enemy | a `HighValueTargetPriority` roll picks a random high-value actor (`FindHighValueTarget`), else the closest preferred building |
+| Route | Cameo **already took CA's flank trick**: 3 distinct routes, pick among the 2 longest, exempt from 6e risk routing | 12 distinct routes, pick among the 2 longest, starting from the own building nearest the target |
+| On contact | `GuerrillaUnitsHitState` ⇄ `GuerrillaUnitsRunState`: fight; on damage or a loss while locally outnumbered, run to a random own building for 2 ticks, then return. **Hit and run.** | ordinary `GroundUnitsAttackState`: fight, or fuzzy-flee like any squad |
+
+**Answer:** harasser decides *where and when* (a soft or valuable target, reached the long way
+round, only once enough units exist). Guerrilla decides *how to fight on arrival* (hit, run,
+come back). They are complementary, not the same behaviour. They still cannot coexist as two
+squad types. `FindNewUnits` is an if/else chain with guerrilla first, so a unit on both lists
+always goes guerrilla, and harasser would only ever get the leftovers. **Plan for the CA
+bot-file sync:**
+
+1. Keep `SquadCAType.Guerrilla` and its Hit/Run states. They are protected RV symbols
+   (`audit_ai_frankenstein.py`).
+2. Port harasser's parts into guerrilla, each behind a field that defaults to today's behaviour:
+   the launch threshold, the high-value target roll, the 12-route breadth, and grouping by actor
+   type. Mixed speeds break hit and run.
+3. Load `HarasserTypes` into the same set as `GuerrillaTypes`, so a verbatim CA yaml sync
+   loses no field (CLAUDE.md rule 8b).
+4. Which units belong in the list is a **design call for the maintainer**. A mammoth tank that
+   runs home after every hit is not a guerrilla, and today's list holds 254 units against CA's 18.
+
+**Found while measuring: `JoinGuerrilla` is inverted.** Its description says "possibility to
+join", but the code joins when `rand(100) >= JoinGuerrilla`, so the join chance is
+**100 − value**. The inversion came verbatim from the engine's own `SquadManagerBotModule.cs:355`
+(RV lineage). Cameo's five values only read sensibly under the real meaning: rush 5 → **95 %**
+join (max 16), expansion 15 → 85 %, tech 40 → 60 %, turtle 60 → 40 %, steamroller 100 → **0 %**
+(one blob). The roll also happens once per pass, not once per unit. Do not flip the comparison
+alone, because that silently inverts every personality. Either rename the field (e.g.
+`GuerrillaSkipChance`), or flip the code **and** the five values in the same commit.
+
 **Unused vendored code is the other half.** `python tools/audit/audit_ca_unused.py` lists every
 type Cameo never uses and **what CA uses it for**. Today: 85 of 247 traits are unused and CA uses
 57 of them (e.g. `ProvidesPrerequisiteValidatedFaction` 348×, `PeriodicProducerCA` 50×,
@@ -198,6 +240,69 @@ Unused ≠ dead: implement the purpose, or delete only when CA doesn't use it ei
 Upstream tracking: vendor at a recorded commit, and point the same history-aware drift approach
 (`audit_ca_drift.py`, `ca_vendor_sync.py`) at the Fransbot clone when a second upstream needs it.
 Fransbot keeps releasing (V1.29.20 → .23 in a week).
+
+### 4.3 Personalities: CN × Fransbot × Cameo, merged by layer
+
+Measured, not assumed:
+
+* **Cameo:** 5 personalities (rush, turtle, tech, expansion, steamroller). Each is a set of
+  condition-gated module instances (`SquadManagerBotModuleCA@rush`, …). `BotPersonalityController`
+  switches between them through orders, which keeps it sync-safe (`AI_ARCHITECTURE.md` §4.2, §10.4).
+* **CN** (`CNBotProfileBotModule.cs`, `30cf70a`): `BotProfile { Rush, Turtle, Tech, Expansion,
+  Steamroller, Adaptive }`, the **same five names** plus a switcher. A profile moves **budgets**:
+  expansion, tech, defence and production percentages, plus tech-stage timing.
+  `Adaptive` re-scores the profiles with momentum, a minimum hold time, a cooldown, an emergency
+  override and team coverage. It switches by granting conditions from unsynced code, which Cameo
+  cannot copy (`AI_ARCHITECTURE.md` §1.6).
+* **Fransbot** (`FransCommanderCoreBotModule.cs`): **one** profile, `PersonalityProfile:
+  balanced`. By its own description it is a seam: "future personality presets should tune
+  existing Commander/economy parameters through this profile instead of duplicating tactical
+  logic". Its knobs are continuous weights on the commander auction: `RouteRiskWeight`,
+  `EtaCostPerTick`, `ForceValueDivisor`, `Ground/Air/SeaFactorPercent`, the RAID and RECON
+  margins and costs, and the ground commanders' secure and defend-preservation thresholds.
+  `fransbot-personalities.yaml` sets these identically on all 10 ground commanders.
+
+**They collide only if two of them act as the strategist.** Each answers a different question:
+CN decides *which* posture and *when* to switch, Fransbot decides *how* a posture is executed, and
+Cameo already owns the switch and the names. So a merged personality is **one record with three
+blocks**, and each block feeds the module that already consumes it:
+
+| Block | Source | Consumer |
+|---|---|---|
+| budgets + tech timing | CN profile | unit and base builders |
+| execution weights | Fransbot knobs | Fransbot commanders, once they execute (route A) |
+| squad parameters (guerrilla share, squad size, attack interval, indirect-route chance) | Cameo yaml today | the CA squad manager |
+
+The switching rule is CN's `Adaptive` scoring, implemented inside Cameo's
+`BotPersonalityController`, so the order bridge stays. The result is richer than either source:
+a rush that is both lean on tech (CN) *and* cheap on ETA, bold on route risk and generous on raid
+margin (Fransbot). A CN profile alone cannot express that, and Fransbot has only one profile.
+
+Collision rules for whoever implements it:
+* **One switcher.** CN's own `SwitchTo` is never ported. Fransbot's `PersonalityProfile` becomes
+  a read-only mirror of Cameo's active personality.
+* **One Fransbot instance, not five.** It reads its weight block from a table keyed by
+  personality. Per-personality instances of 24 modules would repeat CN's stale-reference bug
+  (§1.6 there).
+* **Weights per personality, unit lists per faction.** Keep the two axes independent.
+* Fransbot's `balanced` has no Cameo counterpart. Map it to the adaptive default rather than
+  adding a sixth personality.
+
+Sequencing: after DAWN's side-by-side port (route A). The execution block only matters once
+Fransbot executes, and its match logs are what tune the weights.
+
+### 4.4 Engine: moving to OpenRA bleed and .NET 10
+
+Maintainer order, 2026-09-27. Measured: cameo-engine and OpenRA bleed share base `b0b0544d4a`
+(2026-05-11). Bleed has **99** commits since then, against Cameo's 1,975. A merge gives **25
+conflicted files, ~42 hunks**. The expensive parts are bleed's `float2`/`float3` →
+`System.Numerics` `Vector2`/`Vector3` move (`90c4415b7e`), which also reaches the AS, CA and Cameo
+assemblies, and the map generator's settings → options/parameters refactor.
+`mods/cameo/rules/map_generators.yaml` needs bleed's `RenameMapGeneratorParameters` update rule:
+3 `Settings` → `Options` and 116 → `Parameters`. The engine drops the old keys in silence, and
+the utility cannot run the rule on Cameo (its loader rejects an unrelated blank line in
+`weapons/redalert2mod.yaml`). Work branch: `cameo-mod/OpenRA` `bleed_sync_2026_09`. The claim
+and gates are in the fleet folder.
 
 ---
 
