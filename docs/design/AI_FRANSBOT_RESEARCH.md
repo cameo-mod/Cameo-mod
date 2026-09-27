@@ -246,7 +246,7 @@ loaded modules (`mods/cameo/ai/ai.yaml`, `AI_ARCHITECTURE.md` §10.2).
 | `CNHarvesterBotModule` (1063) | refinery-aware field distribution; rebuilds harvesters per refinery count | `HarvesterBotModuleCA` | later; economy, not this month |
 | `CNMcvExpansionManagerBotModule` (1998) | CN's expansion manager | `McvExpansionManagerBotModule` (Common) | **read before phase 7**: check whether it already handles unreachable patches |
 | `CNRepairManagerBotModule` (218) | sends damaged idle units to allied repair facilities | `BuildingRepairBotModule` (+CA) repair **buildings** only | small port candidate |
-| `CNBridgeRepairBotModule` (209) | engineers into bridge huts | ⭐ **already shipped, not loaded**: AS `CncEngineerManagerBotModule` has `RepairBridge` (`engine/OpenRA.Mods.AS/Traits/BotModules/CncEngineerManagerBotModule.cs:24,49`), and **0** instances in `ai.yaml`. Cameo has 17 yaml files using `RepairsBridges` | **Quick win, yaml only**: load the AS module. Check it does not fight `CaptureManagerBotModuleCA` for the same engineers |
+| `CNBridgeRepairBotModule` (209) | engineers into bridge huts | SHIPPED 2026-09-27: AS `CncEngineerManagerBotModule` now loaded for bridge repair only (`RepairableHutActorTypes: bridgehut, bridgehut.small`); capture stays with `CaptureManagerBotModuleCA` (both claim idle engineers only, first order wins) | shipped |
 | `CNUnitBuilderBotModule` (1393) | **squad-demand driven**: reinforces damaged squads first, then fills missing templates, then ratios (`:26-27`, `:857`) | `UnitBuilderBotModuleCA` + compositions + phase 5 counter demand | idea for 6f: reinforce existing squads before starting new ones |
 | `CNSquadManagerBotModule` (4923) | template and slot squads (`AllowedTypes`, `Count`, `Optional`, `MinSlotsToActivate`), own state machine, fuzzy attack-or-flee, 15 squad types | `SquadManagerBotModuleCA` ×5 personalities | **pieces**, not the whole (§3b); phases 6c–6g |
 | `CNGarrisonBotModule` (353) | fills garrisonable buildings with the infantry type the **local threat** calls for; swaps mismatches out | `LoadGarrisonerBotModuleCA@Infantry` (no threat matching) | later: threat matching once `CombatAnalysis` is ported. Cameo has 11 yaml files with garrisons |
@@ -328,10 +328,12 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 
 ### Quick wins (any time, small PRs)
 
-* Load AS `CncEngineerManagerBotModule` for bridge repair (§3c), yaml only. Verify engineers are
-  not double-assigned with `CaptureManagerBotModuleCA`.
-* Port `CNBotPerf`-style per-module timing into the existing AI logs before 6a, so the cost of the
-  fog scans is measured rather than guessed.
+* ~~Load AS `CncEngineerManagerBotModule` for bridge repair~~ SHIPPED: bridge-repair only
+  (`RepairableHutActorTypes` set, capture/base-repair lists empty → no fight with
+  `CaptureManagerBotModuleCA`, which claims idle engineers first-come-first-served anyway).
+* ~~Port `CNBotPerf`-style per-module timing~~ SHIPPED: `OpenRA.Mods.Cameo.Traits.ModularBot`
+  shadows Common's `ModularBot` and reports per-module tick cost to `debug.log` every
+  `ModulePerfReportIntervalTicks` (default 1500; `ModularBot@HardAI` uses 300).
 
 ### 6f. Coordinated waves: artillery, support, growth (Astor's points)
 
