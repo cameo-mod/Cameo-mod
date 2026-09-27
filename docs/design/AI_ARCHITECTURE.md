@@ -389,7 +389,8 @@ Today a personality is a condition that selects one of five `SquadManagerBotModu
 (§19). The manager keeps that mechanism and adds the missing personality the user named:
 **Guerrilla** — many small simultaneous raids against expansions, rather than one blob. Cameo's
 squad manager already has the knobs (`JoinGuerrilla`, `MaxGuerrillaSize`, `GuerrillaTypes`), and
-note `JoinGuerrilla` is inverted: a *higher* value means *less* harassment.
+`JoinGuerrilla` is the join chance in percent (it was inverted until 2026-09-27; see
+`AI_SYNTHESIS.md` §3.1).
 
 ### 4.2 The switch mechanism, given §1.1
 
