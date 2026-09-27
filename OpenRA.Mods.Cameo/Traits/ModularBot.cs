@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
 using OpenRA.Traits;
@@ -60,6 +61,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Queue<Order> orders = [];
 
 		OpenRA.Player player;
+		IBotActionBudget actionBudget;
 
 		IBotTick[] tickModules;
 		IBotRespondToAttack[] attackResponseModules;
@@ -88,6 +90,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			IsEnabled = true;
 			player = p;
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
+			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
 			foreach (var ibe in p.PlayerActor.TraitsImplementing<IBotEnabled>())
 				ibe.BotEnabled(this);
@@ -106,11 +109,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			var timed = info.ModulePerfReportIntervalTicks > 0;
 			using (new PerfSample("bot_tick"))
 			{
+				// Rotate the starting module each tick so an attention budget grants
+				// slots round-robin instead of starving every module past the cap.
+				var tickStart = actionBudget == null || tickModules.Length == 0 ? 0 : (int)((long)world.WorldTick % tickModules.Length);
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
-					foreach (var t in tickModules)
+					for (var i = 0; i < tickModules.Length; i++)
 					{
+						var t = tickModules[(tickStart + i) % tickModules.Length];
 						if (!t.IsTraitEnabled())
+							continue;
+
+						if (actionBudget != null && !actionBudget.TryConsumeAttention(t))
 							continue;
 
 						if (timed)
@@ -136,7 +146,12 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
 			for (var i = 0; i < ordersToIssueThisTick; i++)
+			{
+				if (actionBudget != null && !actionBudget.TryConsumeActions())
+					break;
+
 				world.IssueOrder(orders.Dequeue());
+			}
 		}
 
 		void ReportModuleTiming(Actor self)

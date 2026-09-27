@@ -13345,3 +13345,13 @@ been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
 
 **Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
 got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).
+
+**Done (EMBER, 2026-09-28, H1 consumption):** Cameo-side `ModularBot` shadow now
+consumes `IBotActionBudget` (NOVA #571 producer). Order drain consults
+`TryConsumeActions` per order — denied orders stay queued; module tick loop
+consults `TryConsumeAttention(module)` with a rotating start index so a
+2-slot attention cap round-robins instead of starving modules past index N.
+No budget module on the bot = zero behavior change (opt-in via
+`HumanPaceBotModule`, already on the genericbot Player block). Gates:
+full build clean, `ai_squad_gate` PASS under live pacing (squads form),
+boot-gate PASS. PR pending independent review.
