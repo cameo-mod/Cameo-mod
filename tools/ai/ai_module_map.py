@@ -102,7 +102,7 @@ def scan_csharp():
 MODULE_NAME = re.compile(
     r"Bot(?:AS)?Module(?:CA)?$|BotManager$|^ModularBot$|^BotLimits$|^BotGlobalUnitBudget$|^ExternalBotOrdersManager$"
     # the Cameo coordination layer: synced controllers, insurance and the bot-owner condition
-    r"|^Bot\w*Controller$|BotInsurance$|^GrantConditionOnBotOwner$")
+    r"|^Bot\w*Controller$|BotInsurance$|^GrantConditionOnBotOwner$|^BotRoleSets$")
 
 
 def is_bot_type(name, defs, bot_interfaces):

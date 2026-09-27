@@ -150,6 +150,22 @@
 		RequiresCondition: cameogodbot
 
 Player:
+	# AI_ARCHITECTURE.md 2.8 (ruled 2026-09-27: roles on actors). Fills the modules' actor lists from ROLES
+	# derived from traits or declared per actor (BotRoles) in its own ContentPack, so no faction ids live here.
+	# REPORT ONLY until a role is listed under Apply: see bot-roles.log for what each role would add.
+	BotRoleSets:
+		DeriveHas:
+			harvester: Harvester
+			refinery: Refinery
+			mcv: Transforms
+			conyard: BaseBuilding, Building
+		DeriveNot:
+			mcv: Building
+		Targets:
+			harvester: HarvesterBotModuleCA.HarvesterTypes, ResourceMapBotModule.HarvesterTypes
+			refinery: HarvesterBotModuleCA.RefineryTypes, BaseBuilderBotModuleCA.RefineryTypes, ResourceMapBotModule.RefineryTypes
+			mcv: McvExpansionManagerBotModule.McvTypes
+			conyard: BaseBuilderBotModuleCA.ConstructionYardTypes
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
