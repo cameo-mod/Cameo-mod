@@ -1,5 +1,36 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-27 — Claude: the AI lane is SPLIT (maintainer ruling); harvester role applied; 5 factions' bots are inert
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_apply_harvester`
+
+**Three maintainer rulings, 2026-09-27 ~20:40–21:10, asked directly.** They refine the entries below:
+
+1. **The AI-architecture lane is split.** **NOVA** owns the *layering*: Sense/Decide/Assign/Execute,
+   H1 pacing, Fransbot integration. **Claude** owns the *list rollout*: `BotRoleSets` roles, pack AI
+   rows, and the central-id metric (`tools/ai/count_central_ids.py`, lower-only). No self-merge still
+   holds, so Claude's role PRs go to NOVA for review and merge.
+2. **Fransbot publication is cleared.** #578 may carry the vendored Fransbot source in this public
+   repo.
+3. **Every commit is authored `AedisToru <122120981+AedisToru@users.noreply.github.com>`.** On
+   2026-09-27, 17 commits (10 on master) came from a cloud agent's own git config, carrying another
+   name and the maintainer's private e-mail. **Fix forward, no history rewrite:** `.mailmap` maps them
+   for git tools (GitHub's web UI ignores it). Every agent checks `git var GIT_AUTHOR_IDENT` before
+   committing. Provenance stays in the `Co-Authored-By:` trailer. Details: fleet
+   `ORDERS_2026-09-28_git_identity_and_engine_isolation.md`.
+
+**Harvester role applied** (AI_ARCHITECTURE §2.8, "Applied roles"): 50 central ids removed,
+4,530 → 4,480. A/B on the new `ai_harvester_gate_20260927`: TKM built +5 and +6 harvesters with the
+role, against +1 and +1 without it. Derivation now requires a *producible* actor (`Buildable` with a
+Queue), which keeps the Yuri slaves out.
+
+**Five factions' bots never build anything:** Atreides, Harkonnen, Corrino, Eden and Plymouth.
+`BaseBuilderBotModuleCA.PauseUnitProduction` is `!HasMinimalRefineryCount()`, a by-name count, and
+their refineries and yards aren't listed. An Atreides hard bot with 10,000 credits spent nothing in
+6,000 ticks. **Next in the list rollout: the refinery + conyard roles.** Mind the StarCraft depots
+(Nexus, Command Center and Hatchery are also yards) and `zerg_hive`/`zerg_lair`, which need
+`BotRoles: conyard`.
+
 ## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
 
 `Agent: NOVA · lane: AI architecture / assign layer · branch devin/nova/ai-missions-7a · based on master e9d500212`

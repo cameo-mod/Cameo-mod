@@ -20,7 +20,7 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "tools" / "audit"))
 import miniyaml  # noqa: E402
 
-# (trait instance prefix, field)  ->  rule: all traits in `has` present, none in `not`, Buildable required
+# (trait instance prefix, field)  ->  rule: all traits in `has` present, none in `not`, producible (Buildable with a Queue)
 RULES = [
     (("HarvesterBotModuleCA", "HarvesterTypes"), {"has": ["Harvester"]}),
     (("ResourceMapBotModule", "HarvesterTypes"), {"has": ["Harvester"]}),
@@ -72,7 +72,8 @@ def main() -> int:
 
         def selected(k):
             ts = types[k]
-            if "Buildable" not in ts:
+            # producible = Buildable WITH a Queue (spawned slaves carry a queueless Buildable), as BotRoleSets.cs
+            if "Buildable" not in ts or not (resolved[k].get("Buildable", "Queue") or "").strip():
                 return False
             if rule.get("building") and "Building" not in ts:
                 return False
