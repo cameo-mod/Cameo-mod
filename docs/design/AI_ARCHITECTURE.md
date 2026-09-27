@@ -443,6 +443,13 @@ because a bot with neither listed stays paused):
 | harvester | 2026-09-27 | 50: `HarvesterBotModuleCA.HarvesterTypes` emptied, and `ResourceMapBotModule.HarvesterTypes` reduced to `naxis_slaveoverseer` (a slave whip with no `Harvester` trait; kept so its behaviour doesn't change) | `ai_harvester_gate_20260927`, 4 paired runs to tick 6000: TKM (refinery listed, harvester not) **built +1, +1 without the role and +5, +6 with it**. Atreides built 0 either way: it needs refinery + conyard. `bot-roles.log`: `34 members, 0 written; ADDED 34` |
 | refinery + conyard, and harvester → `SquadManagerBotModuleCA.ExcludeFromSquadsTypes` | 2026-09-27 | 388: `HarvesterBotModuleCA.RefineryTypes` emptied; the other two `RefineryTypes` keep only `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards); the 7 `ConstructionYardTypes` lists keep only `zerg_hive`/`zerg_lair` (and `td_gdi_defenserig` in `McvExpansionManagerBotModule`); 4 dead ids deleted (`chsupply`, `glsupply`, `usasupply`, `refinery`); 26 harvesters × 5 personalities out of `ExcludeFromSquadsTypes` | `ai_harvester_gate_20260927` to tick 6000: the Atreides bot owned **7 → 7** actors (inert) with the harvester role only and **11 → 22/24** with these roles, +2 harvesters built in both runs; its harvesters (`far`: more than 25 cells from base) were **4 of 4 far by tick 6000 without** the `ExcludeFromSquadsTypes` target, drafted into attack squads as the maintainer saw, and **0 in 4 of 4 runs with it**; the same gap already existed on master for `ra1_soviets_heavyindustrialminer`, `futuretech_prospectormk2` and `wc2_humans_militiapeasant`. `bot-roles.log`: 31 refinery and 31 conyard members |
 
+**Interim repair (2026-09-28, EMBER, `devin/ember/ai-faction-wiring`):** the "would add" set was
+a live bug — the five newest factions were inert because their ids were in no central list. The
+ids were hand-appended (119 ids across 66 rows, all verified defined) until `Apply:` drains them;
+`Apply` unions into set types so the enumeration dedupe-composes with the role mechanism. The
+table's "written" column therefore now includes these ids — do not re-review them as pending
+additions.
+
 ---
 
 ## 3. Reading the enemy: the observation model
