@@ -17,6 +17,40 @@ per-type subfolders — with zero cross-pack dependencies, shared content
 only in theme `Shared/` packs or core, and an audit that deletes files
 nothing references.
 
+### What "plug and play" means: the acceptance test
+
+A ContentPack is done when **removing its `Include:` line from `mod.yaml`
+leaves a game that boots, lints clean and plays**, and adding it back
+restores the faction completely, AI included. Nothing outside the pack
+names the pack's actors, weapons, sprites or sounds. Three things follow:
+
+* **Memory.** An unpicked faction costs zero RAM and zero load time. This is
+  the original reason (the 12 GB peak).
+* **Growth.** A new faction is a new folder plus one `Include:` line. Its
+  author never edits a shared file, so N contributors can add N factions
+  without touching each other's work, and a broken pack breaks only itself.
+* **Correctness.** The linter can prove the independence. Any id that
+  crosses a pack boundary is a defect the audits can count and ratchet down.
+
+### Why the AI must live in the pack too
+
+Bot configuration is where cross-pack coupling hides best. On 2026-09-27
+the central `mods/cameo/ai/ai.yaml` named **7,151 actor ids from every
+faction**: 2,680 dictionary rows, such as how many of each unit to build,
+and 4,471 list entries, such as which units form raid squads. So:
+
+* a game that doesn't load a faction still carries AI rows for its actors
+  (a lint error now, a crash once loading is dynamic);
+* adding a unit meant editing the one file every AI agent also edits;
+* each pack's `ai.yaml` held only a placeholder comment, whose commented
+  copy of the rows drifted from the real ones.
+
+The design that makes the AI plug and play is
+[`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) §1.2 (how packs
+merge: they can add, never override or remove), §2.7 (dictionary rows move
+into the pack) and §2.8 (list membership is derived from each pack's own
+actors, never enumerated centrally).
+
 ## Target content-pack folder structure (design 2026-07-12)
 
 Every content pack gets the SAME shape — one folder per faction:
@@ -75,48 +109,39 @@ pulling another faction's assets. The top-level `ContentPacks/Shared/files/`
 folder is a temporary holding area for cross-game assets that must be
 duplicated per-game and then removed.
 
-## AI module split — why it is blocked and how to unblock it
+## AI module split — how it works and where it stands
 
-The global `mods/cameo/ai/ai.yaml` defines a single `Player:` actor with
-one `BaseBuilderBotModuleCA@generic`, one `UnitBuilderBotModuleCA@generic`,
-and one `SquadManagerBotModuleCA@generic`. Their sub-sections
-(`BuildingLimits`, `BuildingFractions`, `UnitsToBuild`, `UnitLimits`) are
-single dictionaries containing ALL faction data. OpenRA's YAML loader
-replaces trait instances with the same `@name`; it does **not** deep-merge
-their sub-sections. This means per-faction bot data cannot be split across
-multiple files by simply adding more `BaseBuilderBotModuleCA@<faction>`
-traits — the last one loaded wins.
+⚠ **This section used to say the split was blocked**, because "the loader
+replaces trait instances and does not deep-merge sub-sections". **That was
+wrong.** It was measured on 2026-09-05 (`design/AI_ARCHITECTURE.md` §1.2):
+a pack that adds rows to a dictionary field the central file declares gets
+them **unioned**. The old recommendation (one module instance per faction,
+gated by a faction condition) was also rejected: two enabled squad managers
+or unit builders compete for the same units and cash (§2.3). The same wrong
+note sat in all 28 pack `ai.yaml` files and has been replaced.
 
-### Candidate solutions (ranked by preference)
+**The rule:** a pack can ADD rows, keys and trait instances. It can never
+override a key the central file sets (the central file loads last), and it
+can never remove one (a load-time crash).
 
-1. **Custom `GrantConditionOnFaction` trait (C#)** — add a trait that sets
-   a player condition based on the chosen faction (e.g., `cabalbot`). Each
-   ContentPack can then define `BaseBuilderBotModuleCA@cabal` with
-   `RequiresCondition: cabalbot`. This keeps the YAML split clean and does
-   not require changing the engine or the lobby UI. The condition provider
-   can be added to the `Player:` actor in the core rules or injected by each
-   faction's content pack. **Recommended path.**
+**Where it stands (2026-09-27):**
 
-2. **Per-faction bot names** — create `ModularBot@CabalEasiestAI` with
-   `Name: bot_ai.cabal.easiest` etc. The lobby would offer a bot per
-   faction, but the player must manually pick the matching bot. This is
-   fragile and breaks the current "pick a difficulty, play any faction"
-   flow. **Not recommended.**
+| Part | Size | How | State |
+|---|---|---|---|
+| Dictionary rows (`UnitsToBuild`, `BuildingFractions`, `BuildingLimits`, `UnitLimits`, `AirSquadTargetTypes`, delays and intervals) | 2,680 refs; 2,646 movable | `tools/packs/split_ai_rows.py --pack <Theme/Faction> --apply` | tool built; pilot TD/GDI measured content-identical on the engine; the all-pack move is prepared and awaits an independent engine verification before it lands |
+| List fields (`GuerrillaTypes`, `ExcludeFromSquadsTypes`, `HighValueTargetTypes`, …) | 4,471 refs in 41 fields | derived roles + `BotRoles` on each pack's actors (§2.8) | designed, needs a ruling and C# |
+| Module declarations, scalars, personalities, difficulties | — | stay central (one authority per decision) | by design |
 
-3. **Engine YAML merge change** — modify OpenRA to deep-merge
-   `BaseBuilderBotModuleCA@*` sub-sections. This is the most invasive and
-   makes the fork harder to maintain. **Last resort.**
+**Gate for every move:** dump `utility.cmd cameo --resolved-rules Player`
+before and after, and compare with `tools/packs/compare_resolved.py`. It
+compares content, because moving rows reorders the dump by design. Then
+build, boot and `tools/tests/ai_squad_gate.py`.
 
-4. **Single-file per-faction AI with a custom loader** — keep one AI file
-   per faction but load it into a shared dictionary at runtime via a custom
-   C# bot module. This gives per-faction files but still requires code.
-
-### Next step
-
-Design and implement the `GrantConditionOnFaction` trait (or equivalent),
-add the corresponding `Player:` conditions, then split the faction-specific
-`BuildingLimits`/`BuildingFractions`/`UnitsToBuild` entries out of the
-global `ai.yaml` into each ContentPack's `ai.yaml`.
+**For pack authors:** a new faction's AI rows go in **its own**
+`yaml/ai.yaml`, under the same trait instance names as the central file
+(e.g. `UnitBuilderBotModuleCA@generic: UnitsToBuild:`), and the file must be
+listed in the pack's `content.yaml` `Rules:`. Never add a faction id to
+`mods/cameo/ai/ai.yaml`.
 
 ## The per-faction pipeline (proven, verified, repeatable)
 
