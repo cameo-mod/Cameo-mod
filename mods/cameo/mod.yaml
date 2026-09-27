@@ -259,6 +259,7 @@ Rules:
 	cameo|rules/promotions.yaml
 	cameo|ai/ai.yaml
 	cameo|ai/fransbot.yaml
+	cameo|ai/fransbot_lists.yaml
 	# redalert.yaml, tiberiansun.yaml, redalert2.yaml are now loaded via include-only
 	# wrapper packs (ContentPacks/{RedAlert,TiberianSun,RedAlert2}/) so their factions
 	# can be ordered in the lobby; not loaded here to avoid duplicate keys.

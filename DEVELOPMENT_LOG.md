@@ -186,6 +186,35 @@ consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
 - Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
   Player-not-World placement, role/demand-name match, interface contract,
   producer-only guard).
+## 2026-09-28 — DAWN: Fransbot actor lists generated from traits (same branch, continues above)
+
+- New `tools/ai/gen_fransbot_lists.py`: resolves the full ruleset through
+  `tools/audit/miniyaml.Ruleset` and emits `mods/cameo/ai/fransbot_lists.yaml` —
+  every `[ActorReference]` list field on the Frans modules filled from trait
+  predicates (~127 fields, ~14.6k ids), never hand-typed. Predicates:
+  `Harvester`→harvesters, `Transforms`+¬`Building`→MCVs, `Building`+`BaseBuilding`+
+  `Production`→conyards, `Building`+attack-trait→defenses, weapon `ValidTargets: air`
+  →AA, `Mobile.Locomotor`∈{naval,lcraft}→naval, `Cargo`→transports,
+  `StoresPlayerResources`→silos, `Power.Amount>0`→power plants, `ProvidesRadar`→radar,
+  `RepairsUnits`→repair depots, `ProvidesPrerequisite` granting *tech*/*tek*→tech
+  centers, *Power traits→superweapons, `Captures`/`RepairsBridges`→specialists.
+- Emission formats: `FrozenSet`/`string[]` → csv, `FrozenDictionary` → child
+  `id: weight` nodes. Registered `cameo|ai/fransbot_lists.yaml` in `mod.yaml`.
+- Non-actor string fields keep upstream C# defaults (terrain names, power-order
+  names, `BuildingQueues` — emitted as observed queue names in raw case).
+- New `tools/audit/audit_fransbot_lists.py` (registered in `run_all.sh`) wraps the
+  generator's `--check` so stale lists fail the suite.
+- ⚠ INTERIM by design: the union ids reference every faction's actors, so the file
+  only validates while all ContentPacks load — fine today, wrong end-state. The
+  long-term fill is `BotRoleSets.Targets` (Claude's lane, merged in #575): roles
+  derive per-loaded-ruleset and ContentPacks can declare `BotRoles`. Needed
+  extensions proposed: `DeriveLocomotor` (naval), `DeriveProduces` (per-queue
+  producers), field-value checks (cost/speed/power-amount) — mapping table in the
+  generator comments doubles as the migration spec. Dict fields
+  (`UnitsToBuild`/`UnitLimits`/`UnitDelays`) can't be role-filled (`Union()` only
+  handles set types) and aren't `[ActorReference]`-validated, so they may stay
+  generated even at end-state.
+
 ## 2026-09-28 — DAWN: Fransbot Route-A side-by-side port compiles + boots (branch `devin/dawn/fransbot-route-a`)
 
 `Agent: DAWN (Devin CLI) · lane: Fransbot side-by-side port per fleet ORDERS 2026-09-27 · worktree C:/tmp/dawn-ai`
