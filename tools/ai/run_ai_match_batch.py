@@ -493,6 +493,7 @@ def main() -> int:
         before = log_path.stat().st_size if log_path.is_file() else 0
         launch_args = [
             f"Game.Mod={mod_id}",
+            "Sound.Device=none",
             "Engine.EngineDir=..",
             f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
             f"Engine.SupportDir={support}",

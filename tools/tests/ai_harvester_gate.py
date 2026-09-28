@@ -47,6 +47,7 @@ def main() -> int:
     gate.TIMEOUT_SECONDS = TIMEOUT_SECONDS
     exit_code, output = gate.run_openra(executable, [
         f"Game.Mod={mod_id}",
+        "Sound.Device=none",
         "Engine.EngineDir=..",
         f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
         f"Launch.Map={MAP}",

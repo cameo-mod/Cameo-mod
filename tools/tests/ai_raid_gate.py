@@ -153,6 +153,7 @@ def main() -> int:
 
     args = [
         f"Game.Mod={mod_id}",
+        "Sound.Device=none",
         "Engine.EngineDir=..",
         f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
         f"Launch.Map={MAP}",
