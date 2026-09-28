@@ -13782,3 +13782,13 @@ worktree engine is now a REAL dir):
 
 Fleet: fixed `.devin/skills/boot-gate` name-based kill step → PID/path-scoped
 (NOVA's kill-sweep flag was correct — it would sweep every lane's matches).
+
+**Update (opening defense posture):** every loss showed GENERAL publishing RAID
+missions from ~WT3000 onward, draining the base of defenders mid-opening.
+`FransGeneralBotModule` now suppresses NEW raid publication while
+`!IFransBaseBuilderService.OpeningComplete` (local FIGHT still authorizes
+reactive defense). Soviet versus after the change: WT9827, 19 kills, and 12
+enemy buildings razed (first nonzero building kills) — opening completed,
+raids unleashed post-completion did real damage. Also added
+`ai_fransbot_versus_allies_20260928` (ra1_allies FransBot): verified the
+non-substitute light-vehicle path and producer-rebuild on a second roster.

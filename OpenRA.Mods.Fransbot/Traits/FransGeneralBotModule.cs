@@ -422,6 +422,7 @@ namespace OpenRA.Mods.Common.Traits
 		IFransOreEconomyService oreEconomyService;
 		IFransGroundCommanderService groundCommanderService;
 		IFransExpansionStateService expansionStateService;
+		IFransBaseBuilderService baseBuilderService;
 		Shroud shroud;
 		readonly Dictionary<uint, CPos> activeReconTargets = [];
 		readonly Dictionary<uint, int> activeReconWithoutMissionSinceTick = [];
@@ -473,6 +474,7 @@ namespace OpenRA.Mods.Common.Traits
 			oreEconomyService = self.Owner.PlayerActor.TraitsImplementing<IFransOreEconomyService>().FirstOrDefault();
 			groundCommanderService = self.Owner.PlayerActor.TraitsImplementing<IFransGroundCommanderService>().FirstOrDefault();
 			expansionStateService = self.Owner.PlayerActor.TraitsImplementing<IFransExpansionStateService>().FirstOrDefault();
+			baseBuilderService = self.Owner.PlayerActor.TraitsImplementing<IFransBaseBuilderService>().FirstOrDefault();
 			shroud = self.Trait<Shroud>();
 		}
 
@@ -1240,7 +1242,11 @@ namespace OpenRA.Mods.Common.Traits
 				}
 			}
 
-			while (activeRaidTargets.Count < Info.MaximumActiveRaidMissions)
+			// During the deterministic opening the army stays home: publishing RAID missions
+			// sends the only defenders across the map while the build chain is at its most
+			// fragile. Local FIGHT authorization still runs, so the army defends reactively.
+			var raidsSuppressedByOpening = baseBuilderService != null && !baseBuilderService.OpeningComplete;
+			while (!raidsSuppressedByOpening && activeRaidTargets.Count < Info.MaximumActiveRaidMissions)
 			{
 				var chosen = combatIntelService.VisibleEnemies
 					.Where(IsValidVisibleEnemy)
