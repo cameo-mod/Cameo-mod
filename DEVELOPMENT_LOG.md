@@ -76,9 +76,26 @@ this is the missing release side.
 - Fog honesty preserved: the release test reuses `FindClosestEnemy` with its
   `IsNotHiddenUnit` filter — the same call the protection states make.
 
-**Pending**
-- Baseline `hard` vs `classic` batch on synced master (ab-hard1, 4 matches both
-  spawns) running; candidate A/B after build.
+**A/B result (same-session pair, 4 matches each, both spawns)**
+- Control (master 2163ed183): hard 2-2 (spawn-side asymmetry: 0-2 at home 11,45,
+  2-0 at home 90,24 — the map side is a bigger factor than the change).
+- Candidate (8b3af22be): hard 1-3. **Does not beat master — not landing as-is.**
+- Mechanism telemetry: parked losses (idle+protection) ~67% of total in BOTH —
+  the 500-tick threat-free window barely opens under classic's raid tempo, so
+  the dissolve is mostly inert at this value. `protection`-role deaths persisted
+  (6-42k per match) — squads still die holding units while a threat is real,
+  which is correct behaviour; the release side just never engages.
+- fight_report: decisive fights decided by army mass — hard wins only when it
+  reaches the window with ~40k+ (control wins: 39k/22k own; candidate win: 41k
+  in 4 squads). Losses see hard at 0.3-24k vs classic's 57-90k. Enemy army
+  "seen" reads 1.7-18k against true 57-90k — the fog read under-prices the
+  commit by ~5x, so hard walks into losing fights (CP's ratio fields should
+  expose this once they drive decisions).
+- Next iteration: shrink the window (~150t ≈ 3 attention passes) OR pivot —
+  the bigger lever is attack-force massing/cadence (units released still need
+  CreateAttackForce to pick them up; turtle's 2500t delay means released units
+  re-park). Parked deaths may also need the role attribution to follow
+  post-release re-squadding.
 
 # 2026-09-28 — Devin: A/B measurement layer + fransbot donor-stack wiring activation
 
