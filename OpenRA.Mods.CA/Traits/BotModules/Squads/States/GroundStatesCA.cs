@@ -129,9 +129,143 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			if (AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits))
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			{
+				// 6f: assault waves stage before committing so slow units catch
+				// up and the attack arrives as one wave, not a trickle.
+				if (owner.Type == SquadCAType.Rush && owner.SquadManager.Info.StageBeforeAssault)
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+				else
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			}
 			else
 				Retreat(owner, flee: true, rearm: true, repair: true);
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	class GroundUnitsStageStateCA : GroundStateBaseCA, IState
+	{
+		CPos stagingCell;
+		int stageDeadlineTick;
+		bool staged;
+
+		public void Activate(SquadCA owner)
+		{
+			// WorldTick deadline — squad Update() runs on AttackForceInterval,
+			// not per tick, so a decrementing counter would wait 50-100x too long.
+			stageDeadlineTick = owner.World.WorldTick + owner.SquadManager.Info.StageTimeoutTicks;
+
+			// Rally at the own building nearest the target; without one there is
+			// nowhere to stage, so commit directly. A building farther from the
+			// target than the squad already is would stage it backwards — commit
+			// immediately in that case too.
+			var buildings = owner.World.ActorsHavingTrait<Building>()
+				.Where(a => a.Owner == owner.Bot.Player).ToList();
+
+			if (buildings.Count == 0 || !owner.IsTargetValid)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			var targetPos = owner.Target.CenterPosition;
+			var targetCell = owner.World.Map.CellContaining(targetPos);
+			var nearest = buildings.MinBy(b => (b.Location - targetCell).LengthSquared);
+
+			var squadPos = owner.CenterPosition;
+			var buildingDist = (nearest.CenterPosition - targetPos).LengthSquared;
+			var squadDist = (squadPos - targetPos).LengthSquared;
+			if (buildingDist >= squadDist)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			stagingCell = nearest.Location;
+			staged = true;
+
+			foreach (var u in owner.Units)
+				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, stagingCell), false));
+		}
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			if (!staged || !owner.IsTargetValid)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
+				return;
+			}
+
+			// Contact during staging: commit to the fight at the rally point.
+			var enemyActor = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor,
+				WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+			if (enemyActor != null)
+			{
+				owner.TargetActor = enemyActor;
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
+				return;
+			}
+
+			var radiusSquared = (long)WDist.FromCells(owner.SquadManager.Info.StageRadiusCells).LengthSquared;
+			var rally = owner.World.Map.CenterOfCell(stagingCell);
+			var assembled = owner.Units.Count(u =>
+				(u.Actor.CenterPosition - rally).LengthSquared <= radiusSquared);
+
+			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent ||
+				owner.World.WorldTick >= stageDeadlineTick)
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	class SupportUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		const int HoldTicks = 250;
+		int holdTicks;
+
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			var parent = owner.Parent;
+			if (parent == null || !parent.IsValid)
+			{
+				parent = owner.SquadManager.FindAttachableAssault(owner);
+				owner.Parent = parent;
+			}
+
+			if (parent == null)
+			{
+				// No assault to support: hold near home so medics stop charging
+				// into the attack force like they did as generic ground units.
+				if (--holdTicks <= 0)
+				{
+					GoToRandomOwnBuilding(owner);
+					holdTicks = HoldTicks;
+				}
+
+				return;
+			}
+
+			// Trail the assault: units beyond SupportFollowRangeCells get a move
+			// order toward it. Their own AutoTarget heals/repairs in reach.
+			var followRangeSquared = (long)WDist.FromCells(owner.SquadManager.Info.SupportFollowRangeCells).LengthSquared;
+			var parentPos = parent.CenterPosition;
+			foreach (var u in owner.Units)
+			{
+				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
+					continue;
+
+				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
+			}
 		}
 
 		public void Deactivate(SquadCA owner) { }

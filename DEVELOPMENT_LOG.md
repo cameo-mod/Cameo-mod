@@ -13345,3 +13345,15 @@ been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
 
 **Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
 got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).
+
+**Done (2026-09-27, ember-ai6a):** #577 review fixes per Claude's findings.
+(1) StageTimeoutTicks now a WorldTick deadline (was decrementing per
+squad Update -> 50-100x over-wait). (2) Staging rally skips buildings
+farther from the target than the squad already is (no backward rally).
+(3) SupportUnitTypes: dropped all 5x38 dead central ids from ai.yaml;
+support is now derived at RulesetLoaded — an Armament whose weapon has
+a negative-Damage DamageWarhead valid on Allies marks the carrier as
+heal/repair support (packs contribute their own via rules; field kept
+as escape hatch). Gates: 253/253 tests, squad gate PASS via scratch bin
+(C:/tmp/ember-hr; records=8 squads=1 units=6 tick1201), boot-gate PASS.
+Two exception logs during the round were own bad-arg launches, not game.

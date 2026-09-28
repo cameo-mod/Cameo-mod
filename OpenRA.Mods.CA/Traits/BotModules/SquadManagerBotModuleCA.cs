@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -121,6 +122,26 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
+		public readonly bool StageBeforeAssault = false;
+
+		[Desc("Percent of squad units that must reach the staging point before the assault proceeds.")]
+		public readonly int StageAssemblePercent = 60;
+
+		[Desc("Cells around the staging point within which a unit counts as assembled.")]
+		public readonly int StageRadiusCells = 8;
+
+		[Desc("Ticks a staging squad waits before committing regardless of assembly.")]
+		public readonly int StageTimeoutTicks = 750;
+
+		[Desc("Extra units to treat as heal/repair support squads, beyond the derived set. " +
+			"Derived at rules load: every armament must carry a negative-damage, ally-valid " +
+			"warhead for the carrier to count as support — no central ids.")]
+		public readonly HashSet<string> SupportUnitTypes = [];
+
+		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
+		public readonly int SupportFollowRangeCells = 6;
+
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
@@ -189,6 +210,36 @@ namespace OpenRA.Mods.CA.Traits
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
+
+			// Derive support units from weapon metadata: an actor is support only when
+			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
+			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
+			// Tesla Trooper, WC2 knights/paladins and the SCV each carry a heal weapon
+			// alongside damage weapons and must not be pulled out of combat squads.
+			foreach (var actor in rules.Actors.Values)
+			{
+				// Support must be mobile to follow a squad — a heal-armament building
+				// (repair aura/depot) is not a squad member.
+				if (actor.Name.StartsWith('^') ||
+					(!actor.HasTraitInfo<MobileInfo>() && !actor.HasTraitInfo<AircraftInfo>()))
+					continue;
+
+				var armaments = actor.TraitInfos<ArmamentInfo>()
+					.Where(a => !string.IsNullOrEmpty(a.Weapon))
+					.ToList();
+
+				if (armaments.Count == 0)
+					continue;
+
+				// An unresolvable weapon cannot be proven to heal, so it disqualifies.
+				if (armaments.All(a =>
+					rules.Weapons.TryGetValue(a.Weapon.ToLowerInvariant(), out var weapon) &&
+					weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
+						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally))))
+				{
+					SupportUnitTypes.Add(actor.Name);
+				}
+			}
 		}
 
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
@@ -896,6 +947,17 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
+				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
+				{
+					var supportSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Support);
+					if (supportSquad == null)
+					{
+						supportSquad = RegisterNewSquad(bot, SquadCAType.Support);
+						AIUtils.BotDebug("AI ({0}): Created support squad {1}", Player.ClientIndex, supportSquad.Type);
+					}
+
+					supportSquad.Units.Add(new UnitWposWrapper(a));
+				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 
@@ -1007,6 +1069,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				// 6f: support squads trail the newest assault, healing/repairing in its wake.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
