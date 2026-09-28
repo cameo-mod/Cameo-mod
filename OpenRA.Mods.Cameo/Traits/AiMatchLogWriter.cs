@@ -178,6 +178,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "deaths_cost", stats?.DeathsCost ?? 0);
 				AppendNumber(lines, "army_value", stats?.ArmyValue ?? 0);
 				AppendNumber(lines, "assets_value", stats?.AssetsValue ?? 0);
+
+				// Whether the tier's action cap binds (BotLimits.ActionsPerMinute): orders admitted, and order
+				// attempts the budget deferred to a later tick. Both 0 for a bot without HumanPaceBotModule.
+				var pace = player.PlayerActor.TraitOrDefault<BotModules.HumanPaceBotModule>();
+				AppendNumber(lines, "orders_admitted", pace?.ActionsAdmitted ?? 0);
+				AppendNumber(lines, "orders_deferred", pace?.ActionsDeferred ?? 0);
 				AppendNumber(lines, "resources_earned", resources?.Earned ?? 0);
 				AppendNumber(lines, "resources_spent", resources?.Spent ?? 0);
 				lines.Append('}');

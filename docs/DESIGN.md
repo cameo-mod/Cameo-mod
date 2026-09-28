@@ -4848,6 +4848,14 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
   Very Hard, and Easiest through Medium pay a surcharge on the same line.
 * `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* **Hands: `BotLimits.ActionsPerMinute` (maintainer 2026-09-28)** — orders per game minute (1500
+  ticks): **24 at Easiest, +24 per tier, Hard 120, CameoGod 240**. Hard is the human-like tier, the
+  top tiers superhuman, the bottom ones sub-human. `HumanPaceBotModule` applies it as a 5-second
+  window (APM / 12 per 125 ticks — AlphaStar's cap was 22 non-duplicate actions per 5 s, ≈ 264 human
+  APM) plus its burst cap. One bot order commands a whole group, so it is worth about two human
+  actions: Hard's 120 is roughly AlphaStar's 264. The `classic` reference bot has no
+  `HumanPaceBotModule` and stays uncapped. Match records carry `orders_admitted` /
+  `orders_deferred` so an A/B shows whether a tier's cap binds.
 * ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
   deploys, micro-management and every other ability a unit has work the same for every bot. A trait
   that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);

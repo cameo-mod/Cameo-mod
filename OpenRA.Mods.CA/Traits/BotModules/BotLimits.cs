@@ -47,6 +47,12 @@ namespace OpenRA.Mods.CA.Traits
 			"has observed (through fog when the master AI observes through fog). 0 disables adaptive counters.")]
 		public readonly int AdaptiveCounterWeight = 0;
 
+		[Desc("Orders per game minute (1500 ticks) this tier's bot may issue: HumanPaceBotModule's sustained action cap,",
+			"applied as a 5-second window (APM / 12 per 125 ticks, AlphaStar's 22-per-5s rule). One order commands a",
+			"whole group, so it is worth about two human actions. Maintainer 2026-09-28: 24 at Easiest to 240 at",
+			"CameoGod in equal steps of 24, Hard = 120. 0 = use HumanPaceBotModule's own fields.")]
+		public readonly int ActionsPerMinute = 0;
+
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}
 

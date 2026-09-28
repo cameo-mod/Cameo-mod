@@ -50,6 +50,7 @@
 		NewProductionCashThreshold: 20000
 		MaximiseProductionCashRequirement: 9500
 		AdaptiveCounterWeight: 0
+		ActionsPerMinute: 24
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
 		ProductionTypeLimit: 2
@@ -65,6 +66,7 @@
 		NewProductionCashThreshold: 18000
 		MaximiseProductionCashRequirement: 8500
 		AdaptiveCounterWeight: 4
+		ActionsPerMinute: 48
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
 		ProductionTypeLimit: 2
@@ -80,6 +82,7 @@
 		NewProductionCashThreshold: 16000
 		MaximiseProductionCashRequirement: 7500
 		AdaptiveCounterWeight: 9
+		ActionsPerMinute: 72
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 3
@@ -95,6 +98,7 @@
 		NewProductionCashThreshold: 14000
 		MaximiseProductionCashRequirement: 6500
 		AdaptiveCounterWeight: 13
+		ActionsPerMinute: 96
 		RequiresCondition: mediumbot
 	BotLimits@hard:
 		ProductionTypeLimit: 4
@@ -111,6 +115,7 @@
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 5500
 		AdaptiveCounterWeight: 18
+		ActionsPerMinute: 120
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
@@ -127,6 +132,7 @@
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 4500
 		AdaptiveCounterWeight: 22
+		ActionsPerMinute: 144
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 5
@@ -143,6 +149,7 @@
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 3500
 		AdaptiveCounterWeight: 27
+		ActionsPerMinute: 168
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 6
@@ -159,6 +166,7 @@
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 2500
 		AdaptiveCounterWeight: 31
+		ActionsPerMinute: 192
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 6
@@ -175,6 +183,7 @@
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 1500
 		AdaptiveCounterWeight: 36
+		ActionsPerMinute: 216
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 7
@@ -191,6 +200,7 @@
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 500
 		AdaptiveCounterWeight: 40
+		ActionsPerMinute: 240
 		RequiresCondition: cameogodbot
 
 Player:

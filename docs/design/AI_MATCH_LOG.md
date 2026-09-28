@@ -98,6 +98,10 @@ schema-1 records in the same file remain valid and the aggregator pools both
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.
+- `stats.orders_admitted` / `stats.orders_deferred` — orders `HumanPaceBotModule` admitted, and
+  order attempts it deferred to a later tick (a deferred order is retried, so one order can be
+  counted several times). The tier's cap is `BotLimits.ActionsPerMinute` (DESIGN.md §19.1). Both 0
+  for a bot without the module (`classic`).
 - `opponents` / `allies` — every eligible player other than the subject, split
   by the **stance masks** (`p.AlliedPlayersMask.Overlaps(subject.PlayerMask)`),
   NOT by `player.IsAlliedWith`. The masks are assigned once by
