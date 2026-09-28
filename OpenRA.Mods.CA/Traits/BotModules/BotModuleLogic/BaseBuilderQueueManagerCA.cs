@@ -43,6 +43,12 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? baseCenterKeepsFailing = null;
 
 		bool itemQueuedThisTick = false;
+
+		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
+		int RandomTolerance(ImmutableArray<int> values)
+		{
+			return values.IsDefaultOrEmpty ? 0 : values.Random(world.LocalRandom);
+		}
 		bool limitBuildRadius = false;
 
 		WaterCheck waterState = WaterCheck.NotChecked;
@@ -137,7 +143,8 @@ namespace OpenRA.Mods.CA.Traits
 				// a) the number of buildings has decreased since last failure M ticks ago,
 				// or b) number of BaseProviders (construction yard or similar) has increased since then.
 				// Otherwise reset failRetryTicks instead to wait again.
-				else if (baseBuilder.BaseExpansionModules == null && --failRetryTicks <= 0)
+				// (BaseExpansionModules is a .ToArray() — never null; Length==0 was the intent.)
+				else if (baseBuilder.BaseExpansionModules.Length == 0 && --failRetryTicks <= 0)
 				{
 					var currentBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
 					var baseProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
@@ -172,6 +179,8 @@ namespace OpenRA.Mods.CA.Traits
 					cachedBases = currentBases;
 					waterState = WaterCheck.NotChecked;
 				}
+				else
+					checkForBasesTicks = baseBuilder.Info.CheckForNewBasesDelay;
 			}
 
 			// Only update once per second or so
@@ -334,9 +343,9 @@ namespace OpenRA.Mods.CA.Traits
 						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
 
 						if (numRef >= baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount
-							&& numProd > 0 && numProd + numTech - baseBuilder.Info.ExpansionTolerate.Random(world.LocalRandom) - tolerateOnCash >= numRef)
+							&& numProd > 0 && numProd + numTech - RandomTolerance(baseBuilder.Info.ExpansionTolerate) - tolerateOnCash >= numRef)
 						{
-							var undeployEvenNoBase = numProd + numTech - baseBuilder.Info.ForceExpansionTolerate.Random(world.LocalRandom) - tolerateOnCash >= numRef;
+							var undeployEvenNoBase = numProd + numTech - RandomTolerance(baseBuilder.Info.ForceExpansionTolerate) - tolerateOnCash >= numRef;
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);

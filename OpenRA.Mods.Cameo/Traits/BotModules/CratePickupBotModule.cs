@@ -132,7 +132,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			var path = mobile.PathFinder.FindPathToTargetCell(
 				collector, [collector.Location], crate.Location, BlockedByActor.Stationary,
 				location => world.FindActorsInCircle(world.Map.CenterOfCell(location), Info.EnemyAvoidanceRadius)
-					.Where(u => !u.IsDead && collector.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy)
+					.Where(u => !u.IsDead && u.CanBeViewedByPlayer(collector.Owner)
+						&& collector.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy)
 					.Sum(u => Math.Max(WDist.Zero.Length, Info.EnemyAvoidanceRadius.Length - (world.Map.CenterOfCell(location) - u.CenterPosition).Length)));
 
 			if (path.Count == 0)

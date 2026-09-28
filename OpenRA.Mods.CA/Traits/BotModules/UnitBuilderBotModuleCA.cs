@@ -228,7 +228,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
-			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.PauseUnitProduction))
+			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction))
 				return;
 
 			if (baseBuilderPause != null && baseBuilderPause.PauseUnitProduction)
@@ -366,30 +366,33 @@ namespace OpenRA.Mods.CA.Traits
 		// In cases where we want to build a specific unit but don't know the queue name (because there's more than one possibility)
 		void BuildUnit(IBot bot, string name)
 		{
-			var actorInfo = world.Map.Rules.Actors[name];
-			if (actorInfo == null)
+			// Actors[] throws KeyNotFoundException for names absent from the ruleset —
+			// reachable when a queued request survives a save whose version renamed the actor.
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
 				return;
 
-			var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
-			if (buildableInfo == null)
-				return;
-
-			if (!ShouldBuild(name, true))
-				return;
-
-			ProductionQueue queue = null;
-			foreach (var pq in buildableInfo.Queue)
+			// Upstream iterates every Buildable trait — an actor with several (alternate
+			// queue sets) would otherwise have requests routed only through the first.
+			foreach (var buildableInfo in actorInfo.TraitInfos<BuildableInfo>())
 			{
-				queue = AIUtils.FindQueues(player, pq).FirstOrDefault(q => !q.AllQueued().Any());
-				if (queue != null)
-					break;
-			}
+				if (!ShouldBuild(name, true))
+					return;
 
-			if (queue != null && queue.BuildableItems().Any(b => b.Name == name))
-			{
-				SetUnitInterval(name);
-				bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
-				AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
+				ProductionQueue queue = null;
+				foreach (var pq in buildableInfo.Queue)
+				{
+					queue = AIUtils.FindQueues(player, pq).FirstOrDefault(q => !q.AllQueued().Any());
+					if (queue != null)
+						break;
+				}
+
+				if (queue != null && queue.BuildableItems().Any(b => b.Name == name))
+				{
+					SetUnitInterval(name);
+					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
+					return;
+				}
 			}
 		}
 

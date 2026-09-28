@@ -363,7 +363,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (leader.Actor.CenterPosition == leader.WPos && !IsAttackingAndTryAttack(leader.Actor).IsFiring)
 				{
 					stopUnits.Add(leader.Actor);
-					owner.Units.Remove(leader);
+
+					// GetPathfindLeader may return a fresh wrapper rather than the
+					// instance stored in Units — remove by actor identity.
+					owner.Units.RemoveAll(u => u.Actor == leader.Actor);
+					owner.SquadManager.ReturnToIdlePool(leader.Actor);
 					AIUtils.BotDebug("AI ({0}): Kick leader from squad.", owner.Bot.Player.ClientIndex);
 				}
 
@@ -385,6 +389,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						{
 							stopUnits.Add(u.Actor);
 							owner.Units.RemoveAt(i);
+							owner.SquadManager.ReturnToIdlePool(u.Actor);
 							i--;
 						}
 						else

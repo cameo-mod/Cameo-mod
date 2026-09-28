@@ -1,3 +1,74 @@
+# 2026-09-28 — Devin: fleet bot-module review fixes — crash, leak, and fog-honesty batch
+
+Three parallel reviewers swept all ~60 bot-module files across CA/Cameo/Fransbot.
+This batch lands every confident finding in the CA + Cameo modules (Fransbot items
+stay in DAWN's lane; `ResourceMapBotModule` needs the engine pipeline):
+
+**Crash class (P0/P1)**
+- `AIUtils.IsAreaAvailable<T>` regained `map.Contains(ac)` — off-map adjacent cells
+  threw `IndexOutOfRangeException` on map-edge buildings.
+- `UnitBuilderBotModuleCA` tolerates missing actor names on save-load
+  (`TryGetValue` instead of `Actors[name]`), processes all `BuildableInfo` traits
+  (secondary queues were silently dropped), and checks pauser enabled-state
+  correctly.
+- `CaptureManagerBotModuleCA` no longer throws when zero capturable players exist
+  (empty `.Random`), and materializes target options once instead of
+  re-scanning per capturer.
+- `AIUtils.GetInfoByCommonName` returns null on an empty match set (callers
+  already null-check) instead of throwing.
+- `MCVManagerBotModuleCA` no longer deploys at `(0,0)` on resource-free maps and
+  null-guards a missing construction yard.
+- `BaseBuilderQueueManagerCA`: the `BaseExpansionModules == null` recovery branch
+  was dead code (`.ToArray()` never yields null) — now keys on `Length == 0`;
+  base-scan tick now re-arms instead of scanning every tick; empty
+  `ExpansionTolerate`/`ForceExpansionTolerate` lists no longer crash `.Random`.
+- `SquadCA.IsTargetValid` no longer NREs on empty squads.
+- `UnitCompositionsBotModule` validates unit ids via `TryGetValue` with the
+  intended error message; `MinInterval` doc fixed (was a MaxTime copy-paste).
+
+**Logic / resource-leak class**
+- `PowerDownBotModuleCA` `RemoveAt(i)` no longer skips the shifted item; power
+  loop break conditions corrected.
+- `BuildingRepairBotModuleCA` was dead since it cached `RepairableBuilding` from
+  the *player* actor — it now resolves the trait from the damaged building.
+- `HarvesterBotModuleCA` redirect scan filters dead/disposed actors; cooldown
+  off-by-one fixed.
+- Stuck-squad kicks (Ground + Navy) return kicked units to the idle pool via new
+  `SquadManagerBotModuleCA.ReturnToIdlePool` instead of stranding them in
+  `activeUnits` forever; leader kick removes by actor identity (the locomotor
+  path returns a fresh wrapper, so reference `Remove` silently no-oped).
+- `NavyUnitsFleeStateCA.Deactivate` dismisses the squad (pool return) instead of
+  `Units.Clear()` leaking its ships.
+- `LoadGarrisonerBotModuleCA` dropped a bogus `TagLib.Id3v2` import; stuck
+  garrisoners now expire (9144 ticks) instead of being blacklisted until death.
+- Save-load: `SquadCA.Deserialize` restores `PriorityTags` and filters missing
+  actor ids; the manager reconciles stranded `activeUnits` into the idle pool.
+- `SquadManagerBotModuleCA`: invalid squads no longer consume H1 attention slots;
+  `ProtectOwn` drafts from the idle pool only (no dual squad membership);
+  guerrilla cap re-checked per unit; desired attack-force thresholds initialized
+  (first check no longer passes `0 >= 0`); Defend hold state doesn't carry across
+  region changes; exhausted-region set isn't cleared on empty mission reads;
+  raid missions don't spin on unconsumed selection.
+- `SquadCAType.Support` now has its own `SupportPriorityTags` (was falling
+  through to assault tags).
+- `ModularBot` picks the action-budget provider with `FirstEnabledTraitOrDefault`
+  (matching the squad manager).
+- `FransStrategicMapBotModule` strategic metrics: `TraitInfoOrDefault<AttackBaseInfo>`
+  -> `HasTraitInfo<AttackBaseInfo>` — same crash class as the #554 attackbuggy fix
+  (multi-instance trait), the only such site among ~100 siblings.
+
+**Fog-honesty**
+- `CratePickupBotModule` path enemy-avoidance only counts enemies visible to the
+  collector (`CanBeViewedByPlayer`).
+- `BotSituation.BuildRegions` stamps `LastSeenTick` on visible-but-empty regions
+  so scout staleness ordering doesn't treat a just-observed-empty region as
+  never-scouted.
+
+Verified: CA + Cameo + Test all build clean; 288/288 tests; squad / d2k /
+harvester gates PASS; boot-gate PASS (menu, 0 new exceptions, isolated
+SupportDir note: the env var did not redirect this run — verified against
+APPDATA logs with foreign-instance exclusions).
+
 # 2026-09-28 — DAWN: Fransbot economy-intel list fixes — harvesters finally count
 
 Three stacked generator bugs starved the economy intel pipeline; all fixed in

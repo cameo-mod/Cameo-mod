@@ -68,7 +68,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			toggleTick = world.LocalRandom.Next(Info.Interval);
+			toggleTick = world.LocalRandom.Next(Math.Max(1, Info.Interval));
 		}
 
 		static int GetTogglePowerChanging(Actor a)
@@ -131,7 +131,9 @@ namespace OpenRA.Mods.CA.Traits
 
 					togglingBuildings.Add(bpw.Actor);
 					power += bpw.ExpectedPowerChanging;
-					toggledBuildings.RemoveAt(i);
+
+					// Step back so the element shifting into this index isn't skipped.
+					toggledBuildings.RemoveAt(i--);
 				}
 			}
 
@@ -142,7 +144,7 @@ namespace OpenRA.Mods.CA.Traits
 				var buildingsCanBeOff = GetOnlineBuildings(bot);
 				foreach (var bpw in buildingsCanBeOff)
 				{
-					if (power > 0)
+					if (power >= 0)
 						break;
 
 					togglingBuildings.Add(bpw.Actor);
