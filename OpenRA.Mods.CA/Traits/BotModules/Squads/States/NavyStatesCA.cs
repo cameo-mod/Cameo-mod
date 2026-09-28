@@ -433,6 +433,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			owner.FuzzyStateMachine.ChangeState(owner, new NavyUnitsIdleState(), true);
 		}
 
-		public void Deactivate(SquadCA owner) { owner.Units.Clear(); }
+		public void Deactivate(SquadCA owner) { owner.SquadManager.DismissSquad(owner); }
 	}
 }

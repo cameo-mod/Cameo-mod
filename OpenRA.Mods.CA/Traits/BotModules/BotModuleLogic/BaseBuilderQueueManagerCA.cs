@@ -277,7 +277,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
 							type = BuildingType.Defense;
 					}
-					else if (!limitBuildRadius && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
+					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
 
 					(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
