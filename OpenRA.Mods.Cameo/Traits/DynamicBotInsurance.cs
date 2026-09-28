@@ -12,6 +12,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -44,6 +45,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			"easiest", "veryeasy", "easy", "medium", "hard",
 			"veryhard", "brutal", "challenger", "unbeatable", "cameogod"
 		};
+
+		[Desc("Bot types that play AS another difficulty, e.g. `classic: hard`: the A/B reference bot",
+			"(AI_ARCHITECTURE §0a) gets exactly its tier's insurance instead of none.")]
+		public readonly Dictionary<string, string> DifficultyAliases = new();
 
 		[Desc("Ticks of liquid-funds history used for the rolling average that sets the delay and the",
 			"threshold floor. ⚠ 1500 ticks is ONE MINUTE at the mod's default 40ms timestep",
@@ -288,9 +293,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void Configure(OpenRA.Player owner)
 		{
-			rank = owner != null && owner.IsBot && !string.IsNullOrEmpty(owner.BotType)
+			var botType = owner?.BotType;
+			if (!string.IsNullOrEmpty(botType) && info.DifficultyAliases.TryGetValue(botType, out var alias))
+				botType = alias;
+
+			rank = owner != null && owner.IsBot && !string.IsNullOrEmpty(botType)
 				? Array.FindIndex(info.Difficulties,
-					d => string.Equals(d, owner.BotType, StringComparison.OrdinalIgnoreCase))
+					d => string.Equals(d, botType, StringComparison.OrdinalIgnoreCase))
 				: -1;
 
 			history = new int[Math.Max(1, info.AverageWindow)];

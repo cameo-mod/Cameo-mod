@@ -957,7 +957,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**51 distinct trait types, 66 Player instances plus one World instance** (2026-09-28: #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
+**51 distinct trait types, 68 Player instances plus one World instance** (2026-09-28: #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;

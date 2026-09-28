@@ -4848,6 +4848,12 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
   Very Hard, and Easiest through Medium pay a surcharge on the same line.
 * `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
+  deploys, micro-management and every other ability a unit has work the same for every bot. A trait
+  that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);
+  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` only. Until 2026-09-28 the
+  WC2 mage's starting-spell grant listed eight of the ten tiers, so Very Easy and Very Hard mages
+  never got a spell.
 * Single thresholds, kept on purpose: `PrioritizeBarracksBeforeRefinery` (hard up); the capture,
   engineer, crate-pickup and garrison modules are off for `easiest` only (capabilities, not strength).
 * Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every

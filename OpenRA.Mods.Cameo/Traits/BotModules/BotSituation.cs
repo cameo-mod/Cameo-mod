@@ -1280,7 +1280,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return samples.ToArray();
 		}
 
-		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && p.Playable;
+		// A map-side bot (Playable: False + Bot:) is a real opponent too: campaign enemy AIs and the A/B duel
+		// harness's two duelists. `Playable` alone made the master AI blind to them: in every Nuclear Winter
+		// A/B match (2026-09-28) the fog-honest bot saw NO enemy for the whole game (0 of 253 snapshots; 246 of
+		// 246 after). A declared-NonCombatant slot stays out, as in #594's match writer.
+		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && !p.PlayerReference.NonCombatant && (p.Playable || p.IsBot);
 		static int EconProxy(EnemyProfile profile) => profile.Harvesters + profile.Refineries * 2;
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
