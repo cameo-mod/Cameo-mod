@@ -23,7 +23,7 @@ from _bootstrap import REPO_ROOT  # noqa: E402
 import ai_squad_gate as gate  # noqa: E402
 
 MAP = "ai_harvester_gate_20260927"
-SAMPLE = re.compile(r"AI_HARVESTER_GATE_SAMPLE bot=(\w+) tick=(\d+) harvesters=(\d+) refineries=(\d+) extra=(-?\d+)")
+SAMPLE = re.compile(r"AI_HARVESTER_GATE_SAMPLE bot=(\w+) tick=(\d+) harvesters=(\d+) refineries=(\d+) extra=(-?\d+) actors=(\d+) far=(\d+)")
 TIMEOUT_SECONDS = 600  # 6000 ticks
 
 
@@ -31,6 +31,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--min", action="append", default=[], metavar="BOT=N",
                         help="fail if BOT built fewer than N harvesters (extra) by the last sample (repeatable)")
+    parser.add_argument("--min-actors", action="append", default=[], metavar="BOT=N",
+                        help="fail if BOT owns fewer than N actors at the last sample: an inert bot keeps only what the map gave it")
     args = parser.parse_args()
 
     mod_id, engine = gate.load_config()
@@ -61,19 +63,26 @@ def main() -> int:
     # Only this run's lines: everything after the last STARTED marker (lua.log may be appended or rewritten).
     text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
     text = text[text.rfind("AI_HARVESTER_GATE_STARTED"):] if "AI_HARVESTER_GATE_STARTED" in text else ""
-    samples: dict[str, list[tuple[int, int, int, int]]] = {}
-    for bot, tick, harvesters, refineries, extra in SAMPLE.findall(text):
-        samples.setdefault(bot, []).append((int(tick), int(harvesters), int(refineries), int(extra)))
+    samples: dict[str, list[tuple[int, int, int, int, int, int]]] = {}
+    for bot, tick, harvesters, refineries, extra, actors, far in SAMPLE.findall(text):
+        samples.setdefault(bot, []).append((int(tick), int(harvesters), int(refineries), int(extra), int(actors), int(far)))
     if not samples:
         gate.fail(f"no AI_HARVESTER_GATE_SAMPLE lines in {lua_log}")
 
-    report = "; ".join(f"{bot} " + " ".join(f"t{t}={h}h/{r}r/+{x}" for t, h, r, x in s) for bot, s in samples.items())
+    report = "; ".join(f"{bot} " + " ".join(f"t{t}={h}h/{r}r/+{x}/{a}a/{f}far" for t, h, r, x, a, f in s) for bot, s in samples.items())
     for floor in args.min:
         bot, _, n = floor.partition("=")
         if bot not in samples:
             gate.fail(f"--min names {bot!r}, which reported no samples: {report}")
         if samples[bot][-1][3] < int(n):
             gate.fail(f"{bot} built {samples[bot][-1][3]} harvesters by the last sample (< {n}): {report}")
+
+    for floor in args.min_actors:
+        bot, _, n = floor.partition("=")
+        if bot not in samples:
+            gate.fail(f"--min-actors names {bot!r}, which reported no samples: {report}")
+        if samples[bot][-1][4] < int(n):
+            gate.fail(f"{bot} owns {samples[bot][-1][4]} actors at the last sample (< {n}): {report}")
 
     print(f"AI harvester gate PASS: process_exit={exit_code} {report}")
     return 0

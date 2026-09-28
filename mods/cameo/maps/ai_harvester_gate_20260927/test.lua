@@ -24,8 +24,15 @@ Report = function(tag)
 		local bot = Player.GetPlayer(base.bot)
 		local h = #bot.GetActorsByType(base.harvester)
 		local r = #bot.GetActorsByType(base.refinery)
+		local far = 0
+		for _, hv in ipairs(bot.GetActorsByType(base.harvester)) do
+			local d = hv.Location - base.origin
+			if d.X * d.X + d.Y * d.Y > 25 * 25 then far = far + 1 end
+		end
+		local owned = 0
+		for _, a in ipairs(bot.GetActors()) do if a.Type ~= "player" then owned = owned + 1 end end
 		print(tag .. " bot=" .. base.bot .. " tick=" .. DateTime.GameTime .. " harvesters=" .. h .. " refineries=" .. r
-			.. " extra=" .. (h - base.free * r) .. " cash=" .. bot.Cash)
+			.. " extra=" .. (h - base.free * r) .. " actors=" .. owned .. " far=" .. far .. " cash=" .. bot.Cash)
 	end
 end
 

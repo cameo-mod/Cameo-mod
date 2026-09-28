@@ -376,7 +376,12 @@ mutating is required: `BaseBuilderBotModuleCA`'s lists are already `FrozenSet` o
 
 **Built: `BotRoleSets` (Player) + `BotRoles` (actor)**, in `OpenRA.Mods.Cameo/Traits/BotModules/BotRoleSets.cs`.
 The yaml has `DeriveHas` / `DeriveNot` / `Exclude` / `Targets` per role, and only roles listed
-under `Apply` change anything. Every other role **reports** to `bot-roles.log`: its member count,
+under `Apply` change anything. `DeriveHasField` / `DeriveNotField` add **field predicates**:
+`Trait.Field any v1|v2` (the field holds at least one listed value) or `Trait.Field only v1|v2`
+(it holds values, and all of them are listed). They're read by reflection at rules load, and a
+predicate that no trait can satisfy fails the load, so a typo can't silently match nothing. This
+is the primitive DAWN's Fransbot field spec (Class B: `Mobile.Locomotor`, `Production.Produces`)
+builds on. Every other role **reports** to `bot-roles.log`: its member count,
 what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
 predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
 
@@ -407,7 +412,16 @@ What an unlisted actor costs depends on the module. The lists are looked up **by
   listed gives the base builder nothing to build from. That applies to **Atreides, Harkonnen,
   Corrino, Eden and Plymouth**. Measured on `ai_harvester_gate_20260927`: a hard Atreides bot with a
   yard, a refinery, a heavy factory and 10,000 credits spent **nothing in 6,000 ticks**. The
-  refinery and conyard roles are therefore the urgent ones, not the harvester role.
+  refinery and conyard roles fix it (applied together; see the table below). The same by-name
+  count had also left `HarvesterBotModuleCA` without `ordos_refineryordos` and
+  `schwarzermond_orerefinery`, so those two bots aimed for a single harvester.
+* **Refinery: which refinery gets built.** `BaseBuilderQueueManagerCA.GetProducibleBuilding`
+  picks **at random** among the buildable `RefineryTypes`. A water-only refinery (the WC2 oil
+  refineries) would be chosen about half the time on any map, so the role excludes it with
+  `DeriveNotField: refinery: Building.TerrainTypes only Water`. `only`, not `any`:
+  `steelconsortium_consortiumrefinery` can be placed on land *and* water, and it stays. Yards that
+  are also resource depots (StarCraft Nexus, Command Center, Hatchery) are excluded with
+  `DeriveNot: BaseBuilding`. They were never written as refineries, so nothing changes for them.
 
 Each role is applied only after its additions are reviewed and a match with an affected faction
 confirms it. False hits are best removed by a tighter **derivation rule** (the producible rule
@@ -419,13 +433,15 @@ the judgment lists (`HighValueTargetTypes`, `BigAirThreats`, `ExcludeFromSquadsT
 then emptied in the central file. Progress metric: actor ids in the central `ai.yaml`, lower-only,
 → 0. It was **7,151** before the pack split. Measure it with `python tools/ai/count_central_ids.py`,
 which counts only ids of loaded actors (a node key or a list entry): **4,530** on `e9d500212` (after
-#574), **4,480** after the harvester role.
+#574), **4,480** after the harvester role, and **4,092** after refinery + conyard and the squad exclusion.
 
-**Applied roles** (one per PR; each needs a match with an affected faction):
+**Applied roles** (each needs a match with an affected faction; refinery and conyard went in together,
+because a bot with neither listed stays paused):
 
 | Role | Applied | Central ids removed | Evidence |
 |---|---|---|---|
 | harvester | 2026-09-27 | 50: `HarvesterBotModuleCA.HarvesterTypes` emptied, and `ResourceMapBotModule.HarvesterTypes` reduced to `naxis_slaveoverseer` (a slave whip with no `Harvester` trait; kept so its behaviour doesn't change) | `ai_harvester_gate_20260927`, 4 paired runs to tick 6000: TKM (refinery listed, harvester not) **built +1, +1 without the role and +5, +6 with it**. Atreides built 0 either way: it needs refinery + conyard. `bot-roles.log`: `34 members, 0 written; ADDED 34` |
+| refinery + conyard, and harvester → `SquadManagerBotModuleCA.ExcludeFromSquadsTypes` | 2026-09-27 | 388: `HarvesterBotModuleCA.RefineryTypes` emptied; the other two `RefineryTypes` keep only `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards); the 7 `ConstructionYardTypes` lists keep only `zerg_hive`/`zerg_lair` (and `td_gdi_defenserig` in `McvExpansionManagerBotModule`); 4 dead ids deleted (`chsupply`, `glsupply`, `usasupply`, `refinery`); 26 harvesters × 5 personalities out of `ExcludeFromSquadsTypes` | `ai_harvester_gate_20260927` to tick 6000: the Atreides bot owned **7 → 7** actors (inert) with the harvester role only and **11 → 22/24** with these roles, +2 harvesters built in both runs; its harvesters (`far`: more than 25 cells from base) were **4 of 4 far by tick 6000 without** the `ExcludeFromSquadsTypes` target, drafted into attack squads as the maintainer saw, and **0 in 4 of 4 runs with it**; the same gap already existed on master for `ra1_soviets_heavyindustrialminer`, `futuretech_prospectormk2` and `wc2_humans_militiapeasant`. `bot-roles.log`: 31 refinery and 31 conyard members |
 
 ---
 
