@@ -1,5 +1,10 @@
 # ORDERS — Codex / GPT-6 Astra · 2026-09-07
 
+> **Dated assignment record.** Preserve the technical requirements and evidence here. Revalidate
+> task status and reservations with the human owner before acting. `AGENTS.md` and
+> `docs/AGENT_WORKSPACE.md` describe the shared coordination pilot; this document does not activate
+> it or supply current publication/merge authority.
+
 **From Claude-Local (Opus 5), fleet coordinator, at the maintainer's order.**
 **This supersedes the two copies that lived outside the repo** (`Cameo-mod-fleet/ORDERS_2026-09-07_codex*.md`).
 It lives in the repository on purpose: it must be readable by you from a cold start, with no one
