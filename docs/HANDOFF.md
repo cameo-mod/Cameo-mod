@@ -1,5 +1,53 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — Claude: §12.0l queued for the balance agents; the new AI's acceptance test; a correction to #587
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/docs_goal_and_12_0l_queue`
+
+**QUEUED (maintainer ruling 2026-09-28): the §12.0l derived-armour rollout, for the balance agents.**
+DESIGN §12.0l (anti-air, cyborg and ship armours, 2026-09-26) is ruled and binding but had no queue
+entry, and only its first step had started. Measured on master `c5390178d`:
+
+| §12.0l step | state |
+|---|---|
+| 1. derived columns in every Versus table | **partial**: the generated templates carry them; `audit_derived_armor_columns.py` reports **29,592** missing or wrong rows in faction weapon files (ratchet 29,592). |
+| 2. `<Family>Air` variants (§12.0k item 2, rule 3a) | **not started**: 0 templates |
+| 3. move actors onto the new types (rules 5, 5a–5c) | **not started**: 0 actors wear any of the 13 derived types |
+| 4. re-extract the ledgers | blocked on 3 |
+
+**How:** each weapon-file lane runs `python tools/balance/derive_versus_columns.py --files <its files>
+--write` on ITS OWN files (BALANCE_PROGRAM_PLAN §2 boundaries), until the audit reaches 0. §12.0l
+forbids step 3 before that. The biggest files: RA Soviets 2,808 rows, Consortium 1,768, Syndicate
+1,755, Japan 1,599, Asian Alliance 1,534, RA2 Shared 1,523. Tools and order are in
+`TASK_INDEX.md` → "Derived armour types". The rocket soldiers wear `None` today (#450's interim rule:
+only Scout and Special Forces carry Flak); §12.0l moves them to `AntiAirInfantry` at step 3.
+
+**The acceptance test for the new AI is written down:** AI_ARCHITECTURE §0a (maintainer rulings
+2026-09-27). The fog-blind new bot must win at least 16 of 20 against today's omniscient bot at the
+same difficulty, one match per two-player Tournament map (20 listed there), with the same faction on
+both sides first and every match-up after that. It cannot run yet: master has no fog-honesty check
+and no 20-map match runner.
+
+**Correction to the entry below:** "Fixed by the refinery + conyard roles" is only half true. An
+Atreides bot starting from a bare construction yard still builds nothing (2 actors in 3,000 ticks, on
+#588's own gate, master `c5390178d`): the power, barracks and production lists lack the D2k and
+Outpost2 ids. #587's A/B started the bot with a finished base and could not see it
+(LESSONS_LEARNED 2026-09-28).
+
+**Reviews 2026-09-28:**
+* **#588 (EMBER), changes requested.** The diagnosis is right, but its 41 + 76 uppercase
+  `EDEN_*`/`PLYMOUTH_*` ids never match (actor ids are lowercased at load): Eden stayed at 2 actors
+  as written and reached 22 lowercased. It also needs a row-level rebase onto #587; rebased that way,
+  the Atreides gate passes with 16 actors.
+* **#589 (OMP), approve after two fixes.** The code fix is correct and closes the early-return scout
+  strand that my #584 review missed. The Flak assertion should become `None`, and the ArmoredCar
+  hashes should be re-pinned, not deleted.
+* **#590 (mine):** tooltip descriptions. 213 showed a literal `\n`, and 115 hand-written Strong/Weak
+  texts sat beside the derived lines (115 → 0 on armed actors).
+
+**Next in the list rollout:** roles for power, barracks and production, which take #588's interim
+central ids out again. Then the Fransbot fields from DAWN's spec.
+
 ## 2026-09-27 — Claude: the AI lane is SPLIT (maintainer ruling); harvester role applied; 5 factions' bots are inert
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_apply_harvester`
