@@ -133,6 +133,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			return lines.ToString();
 		}
 
+		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
+		{
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
+			var first = true;
+			if (costs != null)
+				foreach (var (role, cost) in costs.OrderBy(c => c.Key, StringComparer.Ordinal))
+				{
+					AiMatchLogWriter.AppendNumber(builder, role, cost, first);
+					first = false;
+				}
+
+			builder.Append('}');
+		}
+
 		internal static void AppendSituation(StringBuilder builder, string gameUid, string worldGameUid,
 			string mapUid, string playerName, string faction, string botType, string currentPersonality,
 			BotSituation situation)
@@ -199,6 +213,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", situation.OwnDeathsCostWindow);
 			AiMatchLogWriter.AppendNumber(builder, "squad_count", situation.SquadCount);
 			AiMatchLogWriter.AppendNumber(builder, "squad_units", situation.SquadUnitCount);
+			AppendRoleCosts(builder, "losses_by_role", situation.LossesByRole);
+			AppendRoleCosts(builder, "away_losses_by_role", situation.AwayLossesByRole);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

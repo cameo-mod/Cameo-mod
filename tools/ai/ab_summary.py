@@ -62,13 +62,15 @@ def main(argv: list[str]) -> int:
                 s["draw"] += 1
             elif r["player"]["outcome"] == "won":
                 s["won"] += 1
-                s["spawn_wins"][r["player"].get("spawn", "?")] += 1
+                # `spawn` is the lobby choice, 0 for every map-side harness player; the home
+                # cell (or, in records older than it, the seat name) is what tells sides apart.
+                s["spawn_wins"][r["player"].get("home") or r["player"].get("name", "?")] += 1
             else:
                 s["lost"] += 1
             s["ticks"].append(r.get("duration_ticks") or 0)
 
     print(f"{len(games)} match(es)")
-    print("| bot type | won | lost | draw | win rate | 95% interval | wins by spawn | mean length (ticks) |")
+    print("| bot type | won | lost | draw | win rate | 95% interval | wins by side | mean length (ticks) |")
     print("|---|--:|--:|--:|--:|---|---|--:|")
     for bot, s in sorted(stats.items()):
         n = s["won"] + s["lost"] + s["draw"]
