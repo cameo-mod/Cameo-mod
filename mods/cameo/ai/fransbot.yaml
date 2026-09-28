@@ -67,6 +67,10 @@ Player:
 		ExpansionTargetFailureCooldownTicks: 1500
 	FransUnitBuilderBotModule:
 		RequiresCondition: enable-fransbot
+		# Fog-honest adaptive counter-production: CombatIntel's seen/remembered enemy
+		# army steers a minority of combat picks toward the best Versus counter.
+		AdaptiveCounterWeight: 40
+		AdaptiveCounterObservationInterval: 250
 	FransHarvesterBotModule:
 		RequiresCondition: enable-fransbot
 		HarvestersPerServicedMine: 3
@@ -82,7 +86,9 @@ Player:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground1
 		CommanderIndex: 0
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -93,11 +99,14 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundCommanderBotModule@ground2:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground2
 		CommanderIndex: 1
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -108,11 +117,14 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundCommanderBotModule@ground3:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground3
 		CommanderIndex: 2
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -123,11 +135,14 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundCommanderBotModule@ground4:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground4
 		CommanderIndex: 3
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -138,11 +153,14 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundCommanderBotModule@ground5:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground5
 		CommanderIndex: 4
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -153,11 +171,14 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundCommanderBotModule@ground6:
 		RequiresCondition: enable-fransbot
 		BidderKey: ground6
 		CommanderIndex: 5
-		GroundRememberedRaidMaximumAge: 3000
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -168,6 +189,7 @@ Player:
 		DefendForcePreservationMinimumReserveUnits: 8
 		DefendForcePreservationTargetReservePercent: 50
 		DefendForcePreservationLongEtaMinimumTicks: 1000
+		GroundRememberedRaidMaximumAge: 3000
 	FransGroundTransferBotModule:
 		RequiresCondition: enable-fransbot
 	# Air/Sea/SpecOps stay single-instance per upstream (only Ground is wired

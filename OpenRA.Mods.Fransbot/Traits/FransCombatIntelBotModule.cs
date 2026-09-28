@@ -98,7 +98,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransCombatIntelBotModule : ConditionalTrait<FransCombatIntelBotModuleInfo>,
-		IBotTick, IFransCombatIntelService
+		IBotTick, IFransCombatIntelService, OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider
 	{
 		sealed class EnemyCombatMemory
 		{
@@ -156,6 +156,22 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		public IReadOnlyList<FransCombatIntelContact> EnemyCombatContacts => enemyCombatContacts;
+
+		// Fog-honest enemy-composition feed for AdaptiveCounterProduction: only mobile combat
+		// contacts this bot has actually seen (live + remembered). Always returns true — an empty
+		// sample is a truthful "seen nothing", never a license for the omniscient fallback.
+		bool OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider.TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)
+		{
+			var sample = new Dictionary<string, int>();
+			foreach (var contact in enemyCombatContacts)
+			{
+				if (contact.IsBuilding)
+					continue;
+				sample[contact.ActorType] = sample.GetValueOrDefault(contact.ActorType) + Math.Max(1, contact.EstimatedValue);
+			}
+			valueByActorType = sample;
+			return true;
+		}
 
 		public IReadOnlyList<Actor> OwnedActors
 		{
