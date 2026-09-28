@@ -13371,3 +13371,12 @@ Two exception logs during the round were own bad-arg launches, not game.
  Gates run on a scratch bin copy (`C:/tmp/ember-hr`) because DAWN's
  `--check-yaml` holds the shared `engine/bin`: compile clean, squad-gate
  equivalent PASS (squads=1, units=6, tick 1201), boot-gate PASS.
+**Done (EMBER, 2026-09-28, H1 consumption):** Cameo-side `ModularBot` shadow now
+consumes `IBotActionBudget` (NOVA #571 producer). Order drain consults
+`TryConsumeActions` per order — denied orders stay queued; module tick loop
+consults `TryConsumeAttention(module)` with a rotating start index so a
+2-slot attention cap round-robins instead of starving modules past index N.
+No budget module on the bot = zero behavior change (opt-in via
+`HumanPaceBotModule`, already on the genericbot Player block). Gates:
+full build clean, `ai_squad_gate` PASS under live pacing (squads form),
+boot-gate PASS. PR pending independent review.
