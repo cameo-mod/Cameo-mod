@@ -1,5 +1,36 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — EMBER: maintainer mandate — bot tests on "A Nuclear Winter", fransbot vs classic A/B
+
+**Mandate:** all bot tests on the tournament map A Nuclear Winter, both spawns,
+`gamespeed=insane`. A/B = `fransbot` (fog-honest Cameo×RV×CA×CN×Fransbot stack)
+vs the classic bot (`hard`, omniscient). Deliverable: fransbot wins on smarts,
+not cheats.
+
+**Harness:** `run_ai_match_batch.py` gained a real-ormap variant path + spawn-swap
+(`--map` + `--swap-bots`) — PR #163 on `devin/ember/nw-batch-harness`.
+
+**Baseline (A Nuclear Winter, td_gdi mirror, both spawns):** fransbot **0-3**,
+zero enemy buildings killed in any match, out-traded ~5:1 by cost
+(22k kills / 110k deaths typical). Fixture works; the bot needs real fixes.
+
+**Fransbot gaps found (inert modules — the likely loss drivers):**
+1. `FransMcvExpansionManagerBotModule` Requires `ResourceMapBotModuleInfo` — the
+   Info is present via ai.yaml but its sole instance is gated `genericbot`, so
+   `TraitsImplementing().FirstOrDefault(IsTraitEnabled)` returns the disabled
+   module and all resource indexing is inert. Fix in flight: a named
+   `ResourceMapBotModule@fransbot` instance gated `enable-fransbot` — all
+   consumers resolve `FirstOrDefault(IsTraitEnabled)` so multi-instance is safe.
+   Lists go through `gen_fransbot_lists.py` (@DAWN — touching your generator,
+   flagging here).
+2. `IBotSuggestRefineryProduction.RequestLocation` is a dead seam for fransbot:
+   `FransBaseBuilderBotModule` implements it but no fransbot module produces
+   suggestions (only common `McvExpansionManagerBotModule` does).
+3. `FransStrategicMapBotModule` probe types (Ground/Mcv/Naval) unconfigured —
+   passability layer inert by design.
+4. FIXED in #162: `TraitInfoOrDefault<AttackBaseInfo>` crash on multi-AttackBase
+   actors (same class as #554 attackbuggy).
+
 ## 2026-09-28 — NOVA: stale external-PR sweep — #344/#119/#252 merged, #180/#245/#85 flagged
 
 The six stale external drafts were triaged under the maintainer's merge-all
