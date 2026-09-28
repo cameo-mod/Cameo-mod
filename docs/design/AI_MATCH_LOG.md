@@ -208,6 +208,16 @@ Candidate personality and target values are observations only. The phase-2
 target score deliberately has no pairwise-damage (`w_hurt`) term because no
 usable attribution hook exists; that term is phase-4 work.
 
+`own.losses_by_role` / `own.away_losses_by_role` (objects, keys sorted) are the
+CUMULATIVE cost of units lost, by the role the unit held at the last role pass
+(`AssignRolesInterval`): a squad type (`rush` = the main attack force, `protection`,
+`guerrilla`, `harass`, `artillery`, `support`, `air`, `naval`) or `idle` (at the base,
+in no squad). `away_` is the part lost farther than `MaxBaseRadius` from the base
+centre. Units in no squad and not idle (harvesters, MCVs) are not counted, so the
+difference to `PlayerStatistics.DeathsCost` is buildings plus those. Summed over
+every squad manager, including disabled personalities' (a disabled manager forgets
+its snapshot, so a unit is never booked twice).
+
 ## Batch harvest (Stage D)
 
 `tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a

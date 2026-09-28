@@ -64,6 +64,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
 		internal int SquadCount, SquadUnitCount;
+
+		// Cumulative unit losses by the role the unit held (squad type or "idle"), and the part lost
+		// away from the base; summed over every squad manager, disabled personalities included.
+		internal SortedDictionary<string, int> LossesByRole = new(StringComparer.Ordinal), AwayLossesByRole = new(StringComparer.Ordinal);
 		internal string OwnPersonality = "";
 	}
 
@@ -506,6 +510,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				squadUnitCount += sm.Squads.Sum(q => q.Units.Count);
 			}
 
+			var lossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			var awayLossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
+			{
+				foreach (var (role, cost) in sm.LossesByRole)
+					lossesByRole[role] = lossesByRole.GetValueOrDefault(role) + cost;
+				foreach (var (role, cost) in sm.AwayLossesByRole)
+					awayLossesByRole[role] = awayLossesByRole.GetValueOrDefault(role) + cost;
+			}
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -527,6 +541,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				SquadCount = squadCount,
 				SquadUnitCount = squadUnitCount,
+				LossesByRole = lossesByRole,
+				AwayLossesByRole = awayLossesByRole,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;

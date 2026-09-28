@@ -315,6 +315,19 @@ namespace OpenRA.Mods.CA.Traits
 		int desiredAttackForceSize;
 		readonly Dictionary<string, int> cachedUnitValues = new();
 
+		// Loss telemetry (situation log): the role, cost and position each unit held at the last
+		// role pass. Squads drop dead units at several sites, so a death is detected here, on the
+		// next pass, from this snapshot rather than at any one removal site.
+		readonly Dictionary<Actor, (string Role, int Cost, CPos Location)> lastKnownRoles = new();
+		readonly Dictionary<string, int> lossesByRole = new();
+		readonly Dictionary<string, int> awayLossesByRole = new();
+
+		/// <summary>Cumulative cost of units lost, by the role they held: a squad type or "idle".</summary>
+		public IReadOnlyDictionary<string, int> LossesByRole => lossesByRole;
+
+		/// <summary>The part of <see cref="LossesByRole"/> lost outside MaxBaseRadius of the base centre.</summary>
+		public IReadOnlyDictionary<string, int> AwayLossesByRole => awayLossesByRole;
+
 		BotLimits botLimits;
 		int initialAttackDelay;
 
@@ -636,6 +649,10 @@ namespace OpenRA.Mods.CA.Traits
 			Squads.Clear();
 			activeUnits.Clear();
 			unitsHangingAroundTheBase.Clear();
+
+			// The next personality's manager takes these units over; counting their deaths here too
+			// when this one is re-enabled would book them twice.
+			lastKnownRoles.Clear();
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
@@ -882,8 +899,50 @@ namespace OpenRA.Mods.CA.Traits
 			unitsHangingAroundTheBase.Add(new UnitWposWrapper(actor));
 		}
 
+		int UnitValue(Actor actor)
+		{
+			if (!cachedUnitValues.TryGetValue(actor.Info.Name, out var cost))
+			{
+				cost = actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+				cachedUnitValues[actor.Info.Name] = cost;
+			}
+
+			return cost;
+		}
+
+		void TrackRoleLosses()
+		{
+			var maxRadiusSquared = Info.MaxBaseRadius * Info.MaxBaseRadius;
+			foreach (var (actor, known) in lastKnownRoles)
+			{
+				if (!actor.IsDead)
+					continue;
+
+				lossesByRole[known.Role] = lossesByRole.GetValueOrDefault(known.Role) + known.Cost;
+				if ((known.Location - initialBaseCenter).LengthSquared > maxRadiusSquared)
+					awayLossesByRole[known.Role] = awayLossesByRole.GetValueOrDefault(known.Role) + known.Cost;
+			}
+
+			lastKnownRoles.Clear();
+			foreach (var squad in Squads)
+			{
+				var role = squad.Type.ToString().ToLowerInvariant();
+				foreach (var unit in squad.Units)
+					if (unit.Actor != null && !unit.Actor.IsDead && unit.Actor.IsInWorld)
+						lastKnownRoles[unit.Actor] = (role, UnitValue(unit.Actor), unit.Actor.Location);
+			}
+
+			foreach (var unit in unitsHangingAroundTheBase)
+				if (unit.Actor != null && !unit.Actor.IsDead && unit.Actor.IsInWorld)
+					lastKnownRoles.TryAdd(unit.Actor, ("idle", UnitValue(unit.Actor), unit.Actor.Location));
+		}
+
 		void AssignRolesToIdleUnits(IBot bot)
 		{
+			// Telemetry only: a snapshot every role pass is fresh enough for a death's position.
+			if (World.WorldTick % Math.Max(1, Info.AssignRolesInterval) == 0)
+				TrackRoleLosses();
+
 			CleanSquads();
 
 			activeUnits.RemoveAll(unitCannotBeOrdered);
