@@ -1,3 +1,20 @@
+# 2026-09-28 — EMBER: H1 squad-level attention — squads consult the action budget
+
+Branch `devin/ember/ai-squad-attention`. Second consumer of `IBotActionBudget`
+(the first consumed actions in the `ModularBot` shadow's order drain, #579).
+`SquadManagerBotModuleCA` resolves the budget in `TraitEnabled` and consults
+`TryConsumeAttention(squad)` before each `SquadCA.Update()` in the
+`AttackForceInterval` round. A `squadCursor` rotates the pass start so a spent
+budget staggers squads fairly — with `AttentionSlotsPerTick: 2` and N squads,
+each squad acts every ceil(N/2) rounds instead of the tail starving behind a
+fixed list order. Unit pruning (`Units.RemoveAll`) stays outside the gate: it
+is cleanup, not a decision. No budget on the player = unconditional updates,
+exactly the old behaviour — `genericbot` carries `HumanPaceBotModule`, so the
+gate bots exercise the new path.
+
+Verified: `ai_squad_gate` PASS (2 squads / 6 units), `ai_d2k_production_gate`
+PASS (16 actors), 284/284 tests, boot-gate menu clean.
+
 # 2026-09-28 — EMBER: D2k/Outpost2 bots inert — the central `*Types` lists never gained their ids
 
 Branch `devin/ember/ai-faction-wiring`. Root cause of "bots stopped producing

@@ -18,8 +18,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Human-likeness H1: a shared action + attention budget so a bot cannot spend",
-		"superhuman bursts and decision points take turns. Producer only — consumers",
-		"consult IBotActionBudget before issuing orders; nothing is wired yet.")]
+		"superhuman bursts and decision points take turns. Consumers: ModularBot's",
+		"order drain (TryConsumeActions) and SquadManagerBotModuleCA's squad updates",
+		"(TryConsumeAttention).")]
 	public class HumanPaceBotModuleInfo : ConditionalTraitInfo
 	{
 		[Desc("Orders admitted per sliding window (the sustained APM cap). 0 = unlimited.",

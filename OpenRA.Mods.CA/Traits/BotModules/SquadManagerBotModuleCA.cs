@@ -314,6 +314,12 @@ namespace OpenRA.Mods.CA.Traits
 		BotLimits botLimits;
 		int initialAttackDelay;
 
+		// H1 attention consumer: null when no IBotActionBudget producer is on the
+		// player (then squads act unconditionally, as before). squadCursor rotates
+		// the per-round pass order so a spent budget staggers rather than starves.
+		IBotActionBudget actionBudget;
+		int squadCursor;
+
 		public SquadManagerBotModuleCA(Actor self, SquadManagerBotModuleCAInfo info)
 			: base(info)
 		{
@@ -596,6 +602,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void TraitEnabled(Actor self)
 		{
 			botLimits = self.Owner.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			actionBudget = self.Owner.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 
 			if (botLimits != null)
 				initialAttackDelay = botLimits.Info.InitialAttackDelay;
@@ -862,9 +869,24 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				attackForceTicks = Info.AttackForceInterval;
 				foreach (var s in Squads)
-				{
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-					s.Update();
+
+				// H1: squads consult the attention budget before acting. The cursor
+				// rotates the pass order so a spent budget staggers squads instead of
+				// starving the tail of the list.
+				if (Squads.Count > 0)
+				{
+					var start = squadCursor % Squads.Count;
+					for (var i = 0; i < Squads.Count; i++)
+					{
+						var index = (start + i) % Squads.Count;
+						var s = Squads[index];
+						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
+							continue;
+
+						s.Update();
+						squadCursor = index + 1;
+					}
 				}
 			}
 

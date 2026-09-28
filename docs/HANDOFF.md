@@ -1,5 +1,13 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — EMBER: squad-level attention landed on `devin/ember/ai-squad-attention`
+
+`IBotActionBudget` now has its second consumer: squad `Update()` consults
+`TryConsumeAttention(squad)` per `AttackForceInterval` round, with a rotating
+cursor so the slot cap staggers rather than starves. Producer Desc and the
+interface doc updated to name both consumers (order drain + squad updates).
+Gates green; PR up.
+
 ## 2026-09-28 — OMP Astra: deployment review and scout follow-up
 
 Blackrobe authorized scoped publication and integration, including the engine
