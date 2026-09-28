@@ -20,16 +20,18 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "tools" / "audit"))
 import miniyaml  # noqa: E402
 
-# (trait instance prefix, field)  ->  rule: all traits in `has` present, none in `not`, Buildable required
+# (trait instance prefix, field)  ->  rule: all traits in `has` present, none in `not`, producible (Buildable with a Queue)
 RULES = [
     (("HarvesterBotModuleCA", "HarvesterTypes"), {"has": ["Harvester"]}),
     (("ResourceMapBotModule", "HarvesterTypes"), {"has": ["Harvester"]}),
-    (("HarvesterBotModuleCA", "RefineryTypes"), {"has": ["Refinery"]}),
-    (("BaseBuilderBotModuleCA", "RefineryTypes"), {"has": ["Refinery"]}),
-    (("ResourceMapBotModule", "RefineryTypes"), {"has": ["Refinery"]}),
+    (("HarvesterBotModuleCA", "RefineryTypes"), {"has": ["Refinery"], "not": ["BaseBuilding"], "not_water_only": True}),
+    (("BaseBuilderBotModuleCA", "RefineryTypes"), {"has": ["Refinery"], "not": ["BaseBuilding"], "not_water_only": True}),
+    (("ResourceMapBotModule", "RefineryTypes"), {"has": ["Refinery"], "not": ["BaseBuilding"], "not_water_only": True}),
     (("BaseBuilderBotModuleCA", "PowerTypes"), {"has": ["Power"], "building": True}),
     (("McvExpansionManagerBotModule", "McvTypes"), {"has": ["Transforms"], "not": ["Building"]}),
     (("BaseBuilderBotModuleCA", "ConstructionYardTypes"), {"has": ["BaseBuilding"], "building": True}),
+    (("McvExpansionManagerBotModule", "ConstructionYardTypes"), {"has": ["BaseBuilding"], "building": True}),
+    (("SquadManagerBotModuleCA", "ConstructionYardTypes"), {"has": ["BaseBuilding"], "building": True}),
     (("SquadManagerBotModuleCA", "AirUnitsTypes"), {"has": ["Aircraft"], "not": ["Building"]}),
     (("SquadManagerBotModuleCA", "NavalUnitsTypes"), {"naval": True}),
     (("BaseBuilderBotModuleCA", "DefenseTypes"), {"has": ["Armament"], "building": True}),
@@ -72,7 +74,8 @@ def main() -> int:
 
         def selected(k):
             ts = types[k]
-            if "Buildable" not in ts:
+            # producible = Buildable WITH a Queue (spawned slaves carry a queueless Buildable), as BotRoleSets.cs
+            if "Buildable" not in ts or not (resolved[k].get("Buildable", "Queue") or "").strip():
                 return False
             if rule.get("building") and "Building" not in ts:
                 return False
@@ -80,6 +83,11 @@ def main() -> int:
                 return False
             if any(n in ts for n in rule.get("not", [])):
                 return False
+            if rule.get("not_water_only"):
+                # DeriveNotField `Building.TerrainTypes only Water` (BotRoleSets.cs); yaml values only, no C# defaults
+                terrain = {x.strip().lower() for x in (resolved[k].get("Building", "TerrainTypes") or "").split(",") if x.strip()}
+                if terrain and terrain <= {"water"}:
+                    return False
             if rule.get("naval"):
                 loc = (resolved[k].get("Mobile", "Locomotor") or "").lower()
                 return "naval" in loc or "water" in loc or "ship" in loc

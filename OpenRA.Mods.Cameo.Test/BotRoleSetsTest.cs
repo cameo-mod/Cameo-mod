@@ -80,6 +80,73 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(all["harvester"], Is.EquivalentTo(new[] { "husk" }));
 		}
 
+		static Candidate WithField(string name, string[] traits, string key, params string[] values) =>
+			new(name, traits.ToHashSet(), FrozenSet<string>.Empty, true,
+				new Dictionary<string, IReadOnlySet<string>> { [key] = values.ToHashSet() });
+
+		[Test]
+		public void OnlyMatchesWhenEveryValueIsListedAndAnyWhenOneIs()
+		{
+			var only = BotRoleSetsInfo.FieldPredicate.Parse("Building.TerrainTypes only Water");
+			var any = BotRoleSetsInfo.FieldPredicate.Parse("Building.TerrainTypes any water");
+
+			Assert.That(only.Matches(new HashSet<string> { "Water" }), Is.True);
+			Assert.That(only.Matches(new HashSet<string> { "Clear", "Water" }), Is.False, "land-and-water is not water-only");
+			Assert.That(any.Matches(new HashSet<string> { "Clear", "Water" }), Is.True, "values compare case-insensitively");
+			Assert.That(only.Matches(new HashSet<string>()), Is.False, "no values never matches");
+			Assert.That(any.Matches(null), Is.False);
+		}
+
+		[Test]
+		public void MalformedPredicatesAreRejected()
+		{
+			Assert.Throws<YamlException>(() => BotRoleSetsInfo.FieldPredicate.Parse("TerrainTypes only Water"));
+			Assert.Throws<YamlException>(() => BotRoleSetsInfo.FieldPredicate.Parse("Building.TerrainTypes some Water"));
+			Assert.Throws<YamlException>(() => BotRoleSetsInfo.FieldPredicate.Parse("Building.TerrainTypes only"));
+		}
+
+		[Test]
+		public void DeriveNotFieldDropsWaterOnlyRefineriesButKeepsLandAndWaterOnes()
+		{
+			const string Key = "Building.TerrainTypes";
+			var actors = new[]
+			{
+				WithField("ore_refinery", ["Refinery"], Key, "Clear", "Road"),
+				WithField("oil_refinery", ["Refinery"], Key, "Water"),
+				WithField("amphibious_refinery", ["Refinery"], Key, "Clear", "Water"),
+			};
+
+			var not = new Dictionary<string, BotRoleSetsInfo.FieldPredicate[]>
+			{
+				["refinery"] = [BotRoleSetsInfo.FieldPredicate.Parse("Building.TerrainTypes only Water")]
+			};
+
+			var m = BotRoleSetsInfo.ResolveMembers(actors, new Dictionary<string, string[]> { ["refinery"] = ["Refinery"] },
+				None, None, true, null, not);
+
+			Assert.That(m["refinery"], Is.EquivalentTo(new[] { "ore_refinery", "amphibious_refinery" }));
+		}
+
+		[Test]
+		public void ARoleCanBeDerivedFromFieldPredicatesAlone()
+		{
+			const string Key = "Mobile.Locomotor";
+			var actors = new[]
+			{
+				WithField("boat", ["Mobile"], Key, "naval"),
+				WithField("tank", ["Mobile"], Key, "tracked"),
+			};
+
+			var has = new Dictionary<string, BotRoleSetsInfo.FieldPredicate[]>
+			{
+				["naval"] = [BotRoleSetsInfo.FieldPredicate.Parse("Mobile.Locomotor any naval|lcraft")]
+			};
+
+			var m = BotRoleSetsInfo.ResolveMembers(actors, None, None, None, true, has);
+
+			Assert.That(m["naval"], Is.EquivalentTo(new[] { "boat" }));
+		}
+
 		[Test]
 		public void UnionKeepsTheFieldsOwnSetType()
 		{
