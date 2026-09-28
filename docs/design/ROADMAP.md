@@ -111,6 +111,24 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
+- [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
+  Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
+  against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
+  - [ ] **L** CA-1 arsenal tracker — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
+    per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
+    with defence ranges and a per-region heat map, log fields; then the in-match production
+    weight. **Claude.**
+  - [ ] **M** CA-1b offline fitter → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
+    (read at match start, §6.1); more harness matchups. **Devin Cloud.**
+  - [ ] **L** CA-2 siege and force preservation: stand-off outside remembered defence range,
+    artillery first, commit when the area's defences are gone or the Versus-weighted force
+    ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
+  - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
+  - [ ] **M** CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
+    artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
+  - [ ] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
+    teams on an air-threat route layer. **EMBER.**
+  - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
