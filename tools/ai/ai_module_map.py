@@ -42,6 +42,9 @@ SOURCES = [
     ("CA", REPO / "OpenRA.Mods.CA"),
     ("Cameo", REPO / "OpenRA.Mods.Cameo"),
     ("Common", REPO / "engine" / "OpenRA.Mods.Common"),
+    # Last in mod.yaml's Assemblies; its 24 modules serve the hidden `fransbot` donor type
+    # (AI_SYNTHESIS.md §7) and were invisible to this map until 2026-09-28.
+    ("Fransbot", REPO / "OpenRA.Mods.Fransbot"),
     ("Game", REPO / "engine" / "OpenRA.Game"),
 ]
 
