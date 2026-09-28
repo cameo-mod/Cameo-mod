@@ -46,7 +46,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		readonly World world;
 		readonly Player player;
-		SquadManagerBotModuleCA squadManager;
+		SquadManagerBotModuleCA[] squadManagers;
 		IBotRegionThreatProvider[] threatProviders;
 		IBotRememberedDefenceProvider[] defenceProviders;
 		int lastEvaluationTick = -1;
@@ -65,15 +65,19 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			lastEvaluationTick = world.WorldTick;
 
-			squadManager ??= player.PlayerActor.TraitOrDefault<SquadManagerBotModuleCA>();
+			// Personality-named squad managers (@rush/@turtle/…): TraitOrDefault
+			// throws on the multi-instance set — collect enabled instances and
+			// evaluate whichever personality's squads are live.
+			squadManagers ??= player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+				.Where(t => !t.IsTraitDisabled).ToArray();
 			threatProviders ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			defenceProviders ??= player.PlayerActor.TraitsImplementing<IBotRememberedDefenceProvider>().ToArray();
-			if (squadManager == null || defenceProviders.Length == 0)
+			if (squadManagers.Length == 0 || defenceProviders.Length == 0)
 				return;
 
 			var defences = defenceProviders.SelectMany(p => p.RememberedDefences()).ToArray();
 
-			foreach (var squad in squadManager.Squads)
+			foreach (var squad in squadManagers.SelectMany(m => m.Squads))
 			{
 				if (!squad.IsValid || squad.Units.Count == 0 ||
 					(squad.Type != SquadCAType.Rush && squad.Type != SquadCAType.Guerrilla && squad.Type != SquadCAType.Harass))
@@ -117,7 +121,8 @@ namespace OpenRA.Mods.CA.Traits
 						verdict = committed ? "commit" : "stand-off";
 				}
 
-				var artilleryAttached = squadManager.Squads.Any(s => s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0);
+				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
+					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
 				AIUtils.BotDebug("AI ({0}): SIEGE-EVAL {1} squad v={2} units={3} at {4} -> {5}: defences={6} v={7} maxRange={8} threat={9} verdict={10} artillery={11}",
 					player.ClientIndex, squad.Type, squadValue, squad.Units.Count, squadCell, targetCell,
 					covering.Length, defenceValue, standOffCells, rememberedThreat, verdict,
