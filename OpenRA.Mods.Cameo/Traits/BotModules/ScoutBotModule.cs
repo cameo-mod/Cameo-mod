@@ -148,8 +148,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (region < 0)
 				{
 					// No stale region: release the unit so squads can claim it.
+					// Removing it from scouts alone strands it — it was pulled out
+					// of the manager's idle pool when claimed, and FindNewUnits
+					// skips activeUnits, so it must go back into the pool here.
 					scoutTargets.Remove(actor);
 					scouts.Remove(scout);
+					if (!unitCannotBeOrdered(actor) && idlePool != null && idlePool.All(u => u.Actor != actor))
+						idlePool.Add(scout);
 					continue;
 				}
 
