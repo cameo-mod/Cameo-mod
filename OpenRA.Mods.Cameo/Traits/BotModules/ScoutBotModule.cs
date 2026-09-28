@@ -68,7 +68,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		ResourceMapBotModule resourceMap;
 		IBotRequestUnitProduction[] unitBuilders;
-		List<UnitWposWrapper> idlePool = new();
+		// Null until the squad manager supplies its shared idle-unit pool.
+		List<UnitWposWrapper> idlePool;
 		int scanTicks;
 
 		public ScoutBotModule(Actor self, ScoutBotModuleInfo info)
@@ -130,12 +131,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
-
-			// Claiming while nothing is stale only churns the idle pool.
-			if (!AnyStaleRegion(regions, tick))
+			var hasStaleRegion = AnyStaleRegion(regions, tick);
+			if (ReleaseScoutsIfNoStaleRegions(hasStaleRegion, scouts, scoutTargets, idlePool))
 				return;
 
+			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
 			ClaimScouts(bot);
 
 			foreach (var scout in scouts.ToArray())
@@ -147,14 +147,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
 				if (region < 0)
 				{
-					// No stale region: release the unit so squads can claim it.
-					// Removing it from scouts alone strands it — it was pulled out
-					// of the manager's idle pool when claimed, and FindNewUnits
-					// skips activeUnits, so it must go back into the pool here.
-					scoutTargets.Remove(actor);
-					scouts.Remove(scout);
-					if (!unitCannotBeOrdered(actor) && idlePool != null && idlePool.All(u => u.Actor != actor))
-						idlePool.Add(scout);
+					// No unassigned stale region: return ownership to the shared pool.
+					ReturnScoutToIdlePool(scout, scouts, scoutTargets, idlePool);
 					continue;
 				}
 
@@ -162,6 +156,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				scoutTargets[actor] = (region, tick);
 				bot.QueueOrder(new Order("Move", actor, Target.FromCell(world, regions.CenterOf(region)), false));
 			}
+		}
+
+		internal static bool ReleaseScoutsIfNoStaleRegions(bool hasStaleRegion,
+			List<UnitWposWrapper> scouts, Dictionary<Actor, (int Region, int AssignedTick)> scoutTargets,
+			List<UnitWposWrapper> idlePool)
+		{
+			if (hasStaleRegion)
+				return false;
+
+			if (idlePool != null)
+				while (scouts.Count > 0)
+					ReturnScoutToIdlePool(scouts[0], scouts, scoutTargets, idlePool);
+
+			return true;
+		}
+
+		static void ReturnScoutToIdlePool(UnitWposWrapper scout, List<UnitWposWrapper> scouts,
+			Dictionary<Actor, (int Region, int AssignedTick)> scoutTargets, List<UnitWposWrapper> idlePool)
+		{
+			if (idlePool == null)
+				return;
+
+			scoutTargets.Remove(scout.Actor);
+			scouts.Remove(scout);
+			if (!IdlePoolContainsActor(idlePool, scout.Actor))
+				idlePool.Add(scout);
+		}
+
+		static bool IdlePoolContainsActor(List<UnitWposWrapper> idlePool, Actor actor)
+		{
+			foreach (var unit in idlePool)
+				if (unit.Actor == actor)
+					return true;
+
+			return false;
 		}
 
 		void ClaimScouts(IBot bot)
