@@ -109,6 +109,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Radius in cells that protecting squads should scan for enemies around their position.")]
 		public readonly int ProtectionScanRadius = 8;
 
+		[Desc("Ticks a protection squad must observe no valid target and no enemy in ProtectionScanRadius before it is dismissed back to the idle pool. 0 disables (protection squads persist until destroyed).")]
+		public readonly int ProtectionIdleDissolveTicks = 0;
+
 		[Desc("Radius in cells that naval squads should scan for targets.")]
 		public readonly int NavalScanRadius = 8;
 
@@ -310,6 +313,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
+		int protectionIdleSince = -1;
 
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
@@ -642,6 +646,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			heldDefendMission = null;
 			defendMissionHeldSince = -1;
+			protectionIdleSince = -1;
 			defendMissionExhaustedRegions.Clear();
 			foreach (var squad in Squads)
 				DismissSquad(squad);
@@ -977,6 +982,31 @@ namespace OpenRA.Mods.CA.Traits
 						s.Update();
 						squadCursor = index + 1;
 					}
+				}
+
+				// A protection squad otherwise persists forever: its states loop
+				// Idle->Attack->Flee->Idle with no exit, so drafted units never
+				// return to the deployable pool and die at home on the next raid.
+				// When it has seen no target and no scanned enemy for a sustained
+				// window, dismiss it so the units can be reassigned.
+				if (Info.ProtectionIdleDissolveTicks > 0)
+				{
+					var protectSq = GetSquadOfType(SquadCAType.Protection);
+					if (protectSq != null && protectSq.IsValid && !protectSq.IsTargetValid &&
+						FindClosestEnemy(protectSq.Units[0].Actor, WDist.FromCells(Info.ProtectionScanRadius)) == null)
+					{
+						if (protectionIdleSince < 0)
+							protectionIdleSince = World.WorldTick;
+						else if (World.WorldTick - protectionIdleSince >= Info.ProtectionIdleDissolveTicks)
+						{
+							AIUtils.BotDebug("AI ({0}): protection squad threat-free for {1} ticks, dismissing to idle pool",
+								Player.ClientIndex, Info.ProtectionIdleDissolveTicks);
+							DismissSquad(protectSq);
+							protectionIdleSince = -1;
+						}
+					}
+					else
+						protectionIdleSince = -1;
 				}
 			}
 
