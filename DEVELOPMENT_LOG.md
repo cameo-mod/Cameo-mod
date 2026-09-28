@@ -13905,3 +13905,26 @@ enemy buildings razed (first nonzero building kills) — opening completed,
 raids unleashed post-completion did real damage. Also added
 `ai_fransbot_versus_allies_20260928` (ra1_allies FransBot): verified the
 non-substitute light-vehicle path and producer-rebuild on a second roster.
+
+
+## 2026-09-28 dawn — DEFEND-site anchor fallback (vendored fix)
+
+Run `support4` showed the recurring post-opening loss mode: HardBot raid kills the
+main conyard (~WT6900), after which every DEFEND incident on the attacked base
+logs `[DEFENSE SITE] ... reason=NoRelevantAnchor` forever — zero static defense
+ever starts, even with the Defense queue alive and threats standing on base cells.
+
+Root cause: `TrySelectRelevantFrontAnchor` only accepts `ConstructionYardTypes`
+anchors within `DefendSiteAnchorMaximumDistance` (18). With the main conyard dead
+and the expansion conyard 19+ cells away, the burning main base is structurally
+undefendable. Upstream (OpenRA-Fransbot) documents the radius as a redirect-guard
+("prevents a vanished forward site from silently redirecting the item to an
+unrelated rear base") — it never intended conyard-only as a hard requirement.
+
+Fix: same method now falls back to the nearest owned `Building` within the same
+18-cell radius when no conyard is in range — the attacked refinery anchors its own
+defense; redirect-to-rear-base remains impossible because the radius still binds.
+
+Also confirmed this run: `EconomyTargetTypes`/`EnemyEconomyTypes` harvester fix
+live (`2 refinery/3 harvester` — first non-opening harvester ever produced) and
+mine pairing live (`friendly 1 (1 mine nodes)`).
