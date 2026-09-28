@@ -609,10 +609,13 @@ steamrolls into a fortified target while a second player razes its base.
 
 The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
 `30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
-with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
-damage-dealt side still has no producer). Consumed 2026-09-28 (EMBER): `WeightHurt` penalises the
-nemesis-weighted enemy in `TargetScore`, and a nemesis above `NemesisOverrideWeight` force-retargets
-regardless of hold time — the 'do not ignore who is hitting you' clause.
+with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side). The
+dealt side landed the same day (EMBER): `INotifyAppliedDamage` fires on the *attacker's* player
+actor (`Health.cs`), so `dealtScores` mirrors `nemesisScores` with the same per-player throttle,
+weight, cap and decay. Consumed 2026-09-28 (EMBER): `WeightHurt` scores the **taken share**
+`taken/(taken+dealt)` — the bounded form of the dealt/taken ratio — and a nemesis above
+`NemesisOverrideWeight` force-retargets regardless of hold time — the 'do not ignore who is
+hitting you' clause.
 
 ### 4.4 Transition table
 

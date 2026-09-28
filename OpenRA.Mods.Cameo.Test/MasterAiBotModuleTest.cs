@@ -281,15 +281,22 @@ namespace OpenRA.Mods.Cameo.Test
 			var calm = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 0, info);
 			var hurt = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
 
-			// §4.3: shipped WeightHurt=0 — the term is inert until the dealt-side
-			// producer lands; the nemesis override is the live hurt-driven path.
-			Assert.That(hurt, Is.EqualTo(calm));
+			// §4.3: WeightHurt=150 is live now that the dealt-side producer landed —
+			// a high taken-share of the exchange lowers the target score.
+			Assert.That(hurt, Is.LessThan(calm));
+			Assert.That(hurt, Is.GreaterThanOrEqualTo(0));
+		}
 
-			// The plumbing still works when a weight is configured.
-			FieldLoader.LoadFieldOrProperty(info, "WeightHurt", "150");
-			var hurtWeighted = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
-			Assert.That(hurtWeighted, Is.LessThan(calm));
-			Assert.That(hurtWeighted, Is.GreaterThanOrEqualTo(0));
+		[Test]
+		public void HurtShareTracksTheExchangeBalance()
+		{
+			// The bounded form of §4.3's dealt/taken ratio: our share of the exchange
+			// lost, 0-100. No exchange yet is neutral, not 100.
+			Assert.That(MasterAiBotModule.HurtShare(0, 0), Is.EqualTo(0));
+			Assert.That(MasterAiBotModule.HurtShare(50, 50), Is.EqualTo(50));
+			Assert.That(MasterAiBotModule.HurtShare(100, 0), Is.EqualTo(100));
+			Assert.That(MasterAiBotModule.HurtShare(0, 100), Is.EqualTo(0));
+			Assert.That(MasterAiBotModule.HurtShare(25, 75), Is.EqualTo(25));
 		}
 
 		[Test]
