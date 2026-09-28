@@ -20,9 +20,10 @@ WorldLoaded = function()
 	end
 	print("AI_SQUAD_GATE_STARTED bot=HardBot type=hard")
 
-	-- Squads must have formed well before this fires (force interval 50t,
-	-- minimum attack delay ~400t); 1200 leaves margin for the snapshot cadence.
-	Trigger.AfterDelay(1200, function()
+	-- Hard's MAIN army waits BotLimits@hard InitialAttackDelay = 3750 ticks (DESIGN §19.1, 2026-09-28);
+	-- guerrilla squads may form earlier but at random. 5000 = that delay + the force interval and
+	-- snapshot cadence, so the attack squad this gate exists for has certainly had its chance.
+	Trigger.AfterDelay(5000, function()
 		print("AI_SQUAD_GATE_COMPLETED bot=HardBot tick=" .. DateTime.GameTime)
 		player.MarkFailedObjective(objective)
 	end)
