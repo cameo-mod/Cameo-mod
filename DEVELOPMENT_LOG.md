@@ -13928,3 +13928,14 @@ defense; redirect-to-rear-base remains impossible because the radius still binds
 Also confirmed this run: `EconomyTargetTypes`/`EnemyEconomyTypes` harvester fix
 live (`2 refinery/3 harvester` — first non-opening harvester ever produced) and
 mine pairing live (`friendly 1 (1 mine nodes)`).
+
+# 2026-09-28 — NOVA: bot-module audit → 2 fixes on master, gates unblocked
+
+Full audit of CA/Cameo/Fransbot bot modules: fixed navy-flee unit orphaning
+(NavyUnitsFleeStateCA now calls DismissSquad like its ground sibling — fled
+ships were permanently unreachable for re-assignment) and a latent ValuedInfo
+NRE on the BaseCrawl branch. Two low-severity PlugSpawner deviations noted for
+the stack owner (order-budget bypass, BuildingInfo hard-throw). Fransbot stack
+healthy. Also: unblocked every headless gate with ALSOFT_DRIVERS=null (OpenAL
+Soft null backend dodges the alcOpenDevice AV) and de-flaked ai_raid_gate —
+all four ai_* gates PASS on master.
