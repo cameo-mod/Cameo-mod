@@ -1,3 +1,43 @@
+# 2026-09-28 — Devin (EMBER): sixth personality wired, personality-switch unlatch, fog-honesty ratchet
+
+Session outcome on the AI-architecture lane:
+
+- **Measured defect — personality latch.** nw-ab-7 situations showed `hard`
+  holding `turtle` for ~38k ticks in both matches while `personality_candidate`
+  stayed `rush`. Root cause: `CheckEmergency` had a single 600-loss threshold,
+  so the sliding loss window bounced across it every 25 ticks; each flicker
+  made the candidate `turtle`, resetting `personalityCandidateSince` — `rush`
+  never sustained its reaction delay. Fix: `EmergencyLossClearThreshold = 300`
+  gives Emergency hysteresis; `PersonalityCandidates` now always terminates
+  with a posture yield (Pressured→turtle, calm→expansion).
+- **Guerrilla wired end to end** (the §4.1 "missing personality"):
+  `personality-guerrilla` in the controller's default `Conditions` (random
+  initial draw included), `SquadManagerBotModuleCA@guerrilla` cloned from
+  `@rush` with harassment tuning (SquadSize 3, SquadValue 2500,
+  `JoinGuerrilla 100`, `IndirectRouteChance 60`, `StageBeforeAssault` /
+  `PreferMainTarget` off — the first two fields needed `TUNING_FIELDS`
+  allow-list entries in `audit_ai_personalities`, which now also counts 6
+  personalities), observer notification + `en.ftl` line.
+- **`audit_fog_honesty.py`** — the §0a-missing check: per-file ratchet on
+  global-actor-enumeration sites (`World.Actors`, `ActorsHavingTrait`,
+  `ActorsInBox`, `FindActorsInCircle`) across bot-module roots; 55 files /
+  169 sites baselined, Fransbot stack held to zero unmanifested sites.
+  Wired into `run_all.sh`. (#618)
+- **`bot_outcomes[].spawn` always 0** — `Player.SpawnPoint` is lobby-only for
+  map-side duelists; #619 derives spawn index from the slot binding
+  (Multi0/BotA→0, Multi1/BotB→1), preserving the "win from both spawns"
+  acceptance measurement.
+- A/B state: post-#611 re-baseline `hard` leads `classic` 2-0 on Nuclear
+  Winter (both by objective: 47:3 buildings in match 1); nw-ab-8 closed
+  3-1 `hard` with wins from both physical spawns. Claude's 13-match pooled
+  view (HANDOFF 2026-09-28) still calls the axis a coin flip 7-6 — my
+  series subsets agree the margin is thin.
+
+Still open for the fleet: the spawn-directed recon proposal (§9.12, DAWN's
+commander lane). Retracted earlier flag: there is no `PowerDownTypes` field —
+`PowerDownBotModuleCA` derives toggleable buildings from traits; the unset-list
+sweep false-positived it.
+
 # 2026-09-28 — Devin: A/B measurement layer + fransbot donor-stack wiring activation
 
 Second pass on the Nuclear Winter A/B program after the maintainer mandate
@@ -49,6 +89,7 @@ Second pass on the Nuclear Winter A/B program after the maintainer mandate
 - `PowerDownBotModule.PowerDownTypes` unset on the genericbot stack — bots
   never toggle power-hungry buildings under brownout. Generator emit suggested.
 - The §9.12 decision (fresh-intel-for-raids) is the blocker on the donor axis.
+
 
 # 2026-09-28 — Devin: fleet bot-module review fixes — crash, leak, and fog-honesty batch
 

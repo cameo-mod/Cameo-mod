@@ -61,6 +61,41 @@ recon loop.
   mid-sequence). If another agent is running git/file tooling here, coordinate
   — I now verify writes read-back before relying on them.
 
+## 2026-09-28 — EMBER: personality-layer diagnosis + fixes; fog-honesty ratchet; spawn attribution
+
+Post-#611 re-baseline reads: `hard` went 2-0 vs `classic` in nw-ab-7 (33248t and
+42623t, hard won both by objective — buildings 47:3 and equivalents; nw-ab-8 then closed 3-1
+for hard with wins from both physical spawns). But the situation log
+showed a personality-layer defect worth the fleet's attention:
+
+- **Emergency flapping latched personalities.** `CheckEmergency` used a single
+  600-loss threshold; the loss window bounced across it every 25-tick check,
+  each flicker flipped the candidate to `turtle` and back and reset the
+  sustained-candidate timer — `cur` held `turtle` ~38k ticks while `cand`
+  stayed `rush` for stretches. Fix in flight: `EmergencyLossClearThreshold`
+  (off-threshold = half the on-threshold) + a terminal posture yield in
+  `PersonalityCandidates` so a thin fogged profile can never leave the set
+  empty.
+- **`guerrilla` was unreachable.** `PersonalityCandidates` already yielded it
+  (`target.ExpansionClusters >= 3` = the §4.4 "aggressive expansion" row) but
+  `BotPersonalityController.Conditions` never listed `personality-guerrilla`.
+  Wired end to end: sixth personality, `SquadManagerBotModuleCA@guerrilla`
+  (clone-of-@rush shared lists; tuned for small fast harassment squads —
+  `JoinGuerrilla 100`, `IndirectRouteChance 60`, `StageBeforeAssault false`,
+  `PreferMainTarget false`), observer notification, fluent line.
+  `audit_ai_personalities` extended: `PERSONALITIES` gained guerrilla and
+  `TUNING_FIELDS` allow-lists the four identity fields it legitimately breaks.
+  `audit_fog_honesty.py` (#618) is the missing §0a check — a per-file ratchet
+  on `World.Actors`/`ActorsHavingTrait`/etc. in bot modules; 55 files/169 sites
+  baselined, new sites fail review. `bot_outcomes[].spawn` was always 0
+  (`Player.SpawnPoint` is lobby-only); #619 derives it from the slot binding.
+
+Coordination: Claude's #617 adds `player.home` (record-layer ground truth) —
+composes with #619, recommend both land; noted on the PR. The guerrilla block
+was cloned from `@rush` with only TUNING_FIELDS deviations per the audit's
+invariant — if a future personality needs a shared-list difference, extend
+`TUNING_FIELDS` deliberately rather than hand-diverging.
+
 ## 2026-09-28 — EMBER: #611 invalidates pre-existing `hard`-side A/B results; two A/B axes now exist
 
 Claude's #611 (`379d9f5f8`) found `MasterAiBotModule.IsEligible` required

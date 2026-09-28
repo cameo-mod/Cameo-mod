@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 AI_PATH = ROOT / "mods" / "cameo" / "ai" / "ai.yaml"
 CONTROLLER_PATH = ROOT / "OpenRA.Mods.Cameo" / "Traits" / "BotPersonalityController.cs"
-PERSONALITIES = ("rush", "turtle", "tech", "expansion", "steamroller")
+PERSONALITIES = ("rush", "turtle", "tech", "expansion", "steamroller", "guerrilla")
 CONDITIONS = {f"personality-{name}" for name in PERSONALITIES}
 DIFFICULTIES = ("easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "god")
 REACTION_DELAYS = (7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750)
@@ -38,6 +38,14 @@ TUNING_FIELDS = {
     "ProtectUnitScanRadius",
     "IdleScanRadius",
     "MaxBaseRadius",
+    # Personality-identity fields, allow-listed when guerrilla landed (2026-09-28):
+    # its harassment semantics require no staging/rally and off-axis routes,
+    # which the prior uniform values could not express.
+    "PreferMainTarget",
+    "StageBeforeAssault",
+    "IndirectRouteChance",
+    "HighValueTargetPriority",
+    "HarasserTypes",
 }
 DEAD_FIELDS = {"RushInterval", "RushAttackScanRadius"}
 
@@ -281,8 +289,8 @@ def main() -> int:
     print()
     print(f"- Selector conditions: `{', '.join(sorted(granted))}`")
     print(f"- Consumed conditions: `{', '.join(sorted(consumed))}`")
-    print(f"- Personality blocks: {len([block for block in blocks.values() if block])}/5")
-    print(f"- Personality notifications: {len(notification_names)}/5")
+    print(f"- Personality blocks: {len([block for block in blocks.values() if block])}/{len(PERSONALITIES)}")
+    print(f"- Personality notifications: {len(notification_names)}/{len(PERSONALITIES)}")
     print(f"- BotLimits reaction delays: `{', '.join(str(delay) for delay in REACTION_DELAYS)}`")
     print(f"- Explicit tuning allow-list: `{', '.join(sorted(TUNING_FIELDS))}`")
     print()
@@ -292,7 +300,7 @@ def main() -> int:
             print(f"- {failure}")
         return 1
     print("## PASS")
-    print("- Shared non-tuning fields are byte-identical across all five instances.")
+    print("- Shared non-tuning fields are byte-identical across all personality instances.")
     print("- BotPersonalityController and squad-manager condition sets match exactly.")
     print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
