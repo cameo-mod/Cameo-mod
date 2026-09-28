@@ -1,3 +1,140 @@
+# 2026-09-28 — EMBER: D2k/Outpost2 bots inert — the central `*Types` lists never gained their ids
+
+Branch `devin/ember/ai-faction-wiring`. Root cause of "bots stopped producing
+buildings and units": the five newest factions (`atreides`, `harkonnen`,
+`corrino`, `EDEN`, `PLYMOUTH`) were absent from every production-gating
+`*Types` list in `mods/cameo/ai/ai.yaml`. `BaseBuilderQueueManagerCA` filters
+`BuildableItems()` through `PowerTypes`/`RefineryTypes`/`BarracksTypes`/
+`ProductionTypes`/`SiloTypes`, and `HasMinimalRefineryCount()` counts only
+`RefineryTypes` members — so those bots sat with `PauseUnitProduction` set and
+an empty pick list forever. `10b8f5915` ("AI wiring cleanup: remove stale Dune
+BuildingFractions") had also deleted the houses' dictionary rows after the
+R18 rename made the old `d2k_*` keys dead, and the new ids were never re-added.
+The existing gates stayed green because they only exercise `td_gdi`/`td_nod`.
+
+Fix, respecting the pack architecture (dicts merge from packs; lists cannot —
+AI_ARCHITECTURE §1.2/§2.8):
+
+- `mods/cameo/ai/ai.yaml`: appended the missing actor ids to the list rows —
+  MCV/power/barracks/factory/silo/defense/scout/engineer/squad/capture/crate/
+  resource-map fields. All verified against actor definitions; strict appends,
+  zero values lost. (Rebased over #583+#587: fields whose `Apply:` role now
+  derives the ids — `HarvesterTypes`, `RefineryTypes`, `ConstructionYardTypes`,
+  harvester rows in `ExcludeFromSquadsTypes` — are left to the role; this
+  commit fills only the fields no applied role covers.)
+- `ContentPacks/D2k/{Atreides,Harkonnen,Corrino}/yaml/ai.yaml`: added the
+  `BaseBuilderBotModuleCA@generic` dictionaries (`BuildingFractions`,
+  `Intervals`, `Delays`, `Limits`), `AirSquadTargetTypes` for all five
+  personalities, `UnitDelays`/`UnitIntervals`, and the missing
+  `spiceharvester` row in `UnitsToBuild` — modeled on the Ixian/Ordos packs.
+- `ContentPacks/Outpost2/yaml/ai.yaml`: replaced the placeholder with
+  Eden/Plymouth bootstrap dictionaries (they drive the standard
+  Building/Defence/Vehicle queues).
+- New gate: `mods/cameo/maps/ai_d2k_production_gate_20260928/` +
+  `tools/tests/ai_d2k_production_gate.py`. Atreides HardBot starts with one
+  construction yard; lua prints `AI_D2K_GATE_TICK`/`AI_D2K_GATE_ACTORS`
+  heartbeats (the situation-log writer buffers until match end, so a killed
+  benchmark writes nothing — heartbeats read the live count instead).
+
+Verification: gate PASS (`bot_actors=15` from 1 conyard); negative control
+(unapply the central splice) FAILS at 2 actors forever — the lists are the
+fix, not coincidence; `ai_bot_player_gate` and `ai_squad_gate` still PASS;
+boot-gate PASS (menu, no new exceptions). `--check-yaml` runs the new map
+cleanly; its only findings are the pre-existing tree-wide debt.
+
+Composes with Claude's §2.8 `BotRoleSets` `Apply:` rollout: `Apply` unions
+into a set type, so these hand-appended ids dedupe and the role mechanism can
+still drain the lists later. The pack-dict rows are faction-owned and stay.
+
+# 2026-09-28 — NOVA: Stage D AI-vs-AI batch harness + duel map + writer eligibility fix
+
+`tools/ai/run_ai_match_batch.py` + template map `mods/cameo/maps/ai_duel_gate_20260928/`:
+headless repeated AI-vs-AI matches feeding the schema-2 aggregator (Stage D of
+`AI_ARCHITECTURE.md` — "a script and a map rotation, not engine work"). The
+harness copies the template into the batch's isolated `Engine.SupportDir`
+user-map cache, patches `Bot:`/`Faction:`/`TimeLimitDefault` per matchup
+variant, launches `Launch.Map`+`Launch.Benchmark` (exits on GameOver), and
+slices appended `cameo-ai-matches.jsonl` records by byte offset per run.
+
+Engine findings the design had to survive (all verified in-tree):
+
+- `Launch.Map` creates a `ServerType.Local` server — SkirmishLogic and the
+  `slot_bot` command never fire; map-declared `Bot:` slots are the only bot
+  mechanism available headless.
+- The lobby refuses to start when every slot is empty, so the map keeps a
+  `Playable`+`Required` `Referee` slot the host occupies; it is inert
+  (`StartingUnitsClass: empty` -> insta conquest loss, decided early) and
+  invisible to records because `AiMatchLogWriter.IsEligiblePlayer` now honors
+  `PlayerReference.NonCombatant` — the map's declared intent survives where
+  `Player.NonCombatant` does not (lobby clients always get false).
+- Empty `Playable` slots produce NO `Player` at all (`CreateMapPlayers`
+  skips `client == null` slots) — the duelists are therefore
+  `Playable: False` + `Bot:` map-side players, the only shape that exists
+  headless AND plays. `IsEligiblePlayer` admits them via `IsBot`, so each
+  duelist is the other's only `opponents` entry — aggregator-clean 1v1.
+- Map-side bots get no `SpawnStartingUnits` (it is `Playable`-gated), so the
+  harness resolves each faction's `StartingUnits` group from the mod yaml and
+  pre-places the actors in the variant's `Actors:` at `HomeLocation`.
+- Terrain is a real melee map (Desert Rats donor, `desert-rats-cnc.oramap`,
+  mpspawns 22,16 / 49,55). A hand-made fixture first put BotB on a concrete
+  pocket ringed by water: the bot owned its units but could never deploy or
+  path — `McvExpansionManager` rescanned every index forever while worth and
+  liquidity sat frozen at spawn values. Lesson: `HomeLocation` must be
+  connected, buildable ground; verify by flood-filling passable tiles, not
+  by uniform tile ids (tile 256 there was `w1.des` Water, not Clear).
+- Cameo strips `MustBeDestroyed` from almost all actors -> conquest sees
+  nobody as eliminated; the map re-adds it to `^Building`/`^Vehicle`/
+  `^Infantry`/`^Defense` so elimination is real, and the locked
+  `TimeLimitManager` caps stalemates (`NotifyTimerExpired` ranks `Playable`
+  players only -> a timed-out duel records both bots `lost`, an honest draw).
+- A map's `rules.yaml` is inert unless `map.yaml` declares `Rules: rules.yaml`
+  — swapping the donor header without it made every variant die on
+  `No starting units defined for faction td_gdi with class empty`.
+- `Player.Spectating` is `WinState != Undefined` on non-mission maps, so the
+  writer's `IsAlliedWith` split short-circuited to "ally" for every decided
+  player — records showed both duel bots as mutual `allies` despite declared
+  `Enemies:` and real combat. `AppendRelationships` now reads the static
+  stance masks (`AlliedPlayersMask.Overlaps(subject.PlayerMask)`) assigned by
+  `SetupPlayerMasks` — immune to the post-resolution flip, and it repairs
+  normal skirmish records too (a decided loser was being logged as an ally
+  there as well). The old gate fixture never showed this because
+  `Visibility: MissionSelector` suppresses the flip entirely.
+- `Map.ComputeUID` hashes file bytes: two same-content variant dirs collapse
+  into one `MapCache` preview and `Launch.Map`'s name lookup then can't see
+  the other — surfaced as `Could not find map` when a hand-made verify dir
+  duplicated a batch variant. `write_variant` appends a per-dir comment salt
+  so uids are always unique.
+- Fixture runs `gamespeed: insane` (locked via `MapOptions` — the local
+  server's `option gamespeed default` order is rejected for locked options).
+  Per the maintainer: bot tests SHOULD run at high game speed for fast
+  iteration. Caveat measured live: `TimeLimit *= 60 * ticksPerSecond`, so a
+  10-minute cap becomes 60000 ticks — on a contended box the achieved rate
+  stays ~25-50 tps and a timeout match overruns the old wall bound. The
+  harness now uses a debug.log stall detector (2 min quiet -> kill) plus a
+  speed-aware generous backstop instead of a tight per-match timeout. Note
+  the asymmetry: insane only shortens matches that END EARLY (eliminations);
+  a timeout match is wall-normalized, so shorten `timelimit`, not gamespeed,
+  if quick draws are needed for pipeline checks.
+- `exit=1` mid-match with zero records and no exception is an EXTERNAL kill
+  (`TerminateProcess`), not an engine exit path (0/-1 only) — observed twice
+  on this multi-agent box, both times while other lanes ran matches; a
+  name-based `Stop-Process`/`taskkill` anywhere sweeps every lane. The
+  harness now retries a no-records attempt once and writes a durable
+  `batch_results.jsonl` line per attempt; verified live when attempt 1 died
+  at 445s and attempt 2 completed with both records.
+
+Writer change (Cameo lane, my own #425/#551 lineage): `IsEligiblePlayer`
+checks `!p.NonCombatant && !p.PlayerReference.NonCombatant && (p.Playable ||
+p.IsBot)`, and `AppendRelationships` splits on stance masks instead of
+`IsAlliedWith`. Everything else unchanged — normal skirmish records identical
+in shape, with post-game ally/opponent classification now *correct* instead of
+spectator-flipped.
+
+Tests: `tools/tests/test_ai_batch_harness.py` (15: matrix incl. mirror/side
+alternation, variant patching, template contract, writer guards incl. the
+stance-mask contract, record slicing). Smoke: map loads, bots field real
+`light` starts, records stream — verified end-to-end against a live match.
+
 # 2026-09-28 — NOVA: H1 human-likeness producer (`HumanPaceBotModule`/`IBotActionBudget`)
 
 The unassigned H1 item from `ORDERS_2026-09-27_ai_next_lanes.md` (AI_SYNTHESIS
@@ -13357,3 +13494,34 @@ heal/repair support (packs contribute their own via rules; field kept
 as escape hatch). Gates: 253/253 tests, squad gate PASS via scratch bin
 (C:/tmp/ember-hr; records=8 squads=1 units=6 tick1201), boot-gate PASS.
 Two exception logs during the round were own bad-arg launches, not game.
+**Done (EMBER, 2026-09-28, H1 consumption):** Cameo-side `ModularBot` shadow now
+consumes `IBotActionBudget` (NOVA #571 producer). Order drain consults
+`TryConsumeActions` per order — denied orders stay queued; module tick loop
+consults `TryConsumeAttention(module)` with a rotating start index so a
+2-slot attention cap round-robins instead of starving modules past index N.
+No budget module on the bot = zero behavior change (opt-in via
+`HumanPaceBotModule`, already on the genericbot Player block). Gates:
+full build clean, `ai_squad_gate` PASS under live pacing (squads form),
+boot-gate PASS. PR pending independent review.
+**Done (EMBER, 2026-09-28, phase 8 beacon response):** `PlaceBeacon` shadow +
+`BeaconTracker` world trait + `BeaconResponderBotModule` (allied pings near hostiles
+pull idle combat units through the risk gate; pings on allied buildings pull a repair
+unit). Gates: 256/256 tests (3 new shadow tests), ai_squad_gate PASS, boot-gate PASS.
+
+**Done (2026-09-27, ember-ai6a):** #580 review fixes per Claude. (1) Fog
+honesty: beacon visible-enemy scan now requires CanBeViewedByPlayer —
+FindActorsInCircle sees through shroud and was leaking hidden enemies
+into the response decision. (2) Idle-pool leak: released responders are
+re-added to unitsHangingAroundTheBase unless dead/squad-claimed — a unit
+pulled from the pool but left only in activeUnits is stranded forever
+(FindNewUnits skips activeUnits). Gates: 261/261 tests, scratch-bin
+squad-gate equivalent PASS (squads=3 units=8 tick1201), boot PASS.
+**Done (2026-09-28, ember-ai6a):** w_hurt consumer (AI_ARCHITECTURE §4.3).
+IBotThreatAnalysis += GetNemesisScore(Player); CombatAnalysisBotModule
+implements it (nemesisScores read). MasterAiBotModule: WeightHurt=150
+subtracts Saturate(nemesisScore, HurtSaturation=40) per enemy in
+TargetScore, and a nemesis >= NemesisOverrideWeight=60 force-retargets
+bypassing interval+hold. Dealt-to-them side still has no producer —
+documented one-sided. Gates: 264/264 tests, ai_squad_gate PASS on the
+ISOLATED worktree engine (junction removed per maintainer order),
+boot-gate PASS.

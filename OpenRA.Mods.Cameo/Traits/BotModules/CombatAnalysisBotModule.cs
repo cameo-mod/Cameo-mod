@@ -200,6 +200,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return nemesis;
 		}
 
+		public float GetNemesisScore(OpenRA.Player attacker)
+		{
+			return attacker != null && nemesisScores.TryGetValue(attacker, out var score) ? score : 0;
+		}
+
 		/// <summary>
 		/// Called by the squad manager when an ally is attacked.
 		/// Increments the ally-attack weight for the attacker.

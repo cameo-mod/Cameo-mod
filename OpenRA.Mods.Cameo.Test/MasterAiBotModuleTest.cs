@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -270,6 +271,25 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(reachableWeak.Score, Is.GreaterThan(distantStrong.Score));
 			Assert.That(MasterAiBotModule.ChooseTarget(new[] { distantStrong, reachableWeak }, null, 0, 0, info),
 				Is.SameAs(reachableWeak));
+		}
+
+		[Test]
+		public void TargetScoreHurtPenalisesTheEnemyBeatingUs()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var profile = new EnemyProfile { Name = "aggressor", ArmyValue = 100, NearestCells = 5 };
+			var calm = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 0, info);
+			var hurt = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
+
+			// §4.3: shipped WeightHurt=0 — the term is inert until the dealt-side
+			// producer lands; the nemesis override is the live hurt-driven path.
+			Assert.That(hurt, Is.EqualTo(calm));
+
+			// The plumbing still works when a weight is configured.
+			FieldLoader.LoadFieldOrProperty(info, "WeightHurt", "150");
+			var hurtWeighted = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
+			Assert.That(hurtWeighted, Is.LessThan(calm));
+			Assert.That(hurtWeighted, Is.GreaterThanOrEqualTo(0));
 		}
 
 		[Test]

@@ -58,6 +58,24 @@ World:
 Verify with wall time or the benchmark CSVs; never assume the setting took. `maximum`
 (Timestep 1) is for unattended fine-tuning batches only, since it's too fast for a human watching.
 
+### 2026-09-27 — NOVA: `Player.Spectating` is `WinState != Undefined` — post-game `IsAlliedWith` reports losers as ALLIES
+
+`Player.Spectating` (engine `Player.cs`) is `!inMissionMap && (spectating ||
+WinState != WinState.Undefined)` — on any non-mission map, **a decided player
+is a spectator**. `RelationshipWith` short-circuits `other.Spectating` to
+`Ally` for combatant evaluators before the stance masks are ever consulted, so
+any code that evaluates relationships *after* players resolve — the match-log
+writer builds its records at match end — sees every loser as an ally of every
+combatant. Symptom: schema-2 match records listing both duel bots as mutual
+`allies` with empty `opponents`, despite declared `Enemies:` and real combat.
+Correct source of truth for post-game relationships is the static mask pair
+`AlliedPlayersMask`/`EnemyPlayersMask` assigned once by
+`CreateMapPlayers.SetupPlayerMasks` (declared `Allies:`/`Enemies:` + lobby
+teams) — `p.AlliedPlayersMask.Overlaps(subject.PlayerMask)` survives WinState.
+Note `inMissionMap` (`Visibility: MissionSelector`) suppresses the whole
+Spectating flip, which is why the synthetic gate fixture masked the bug for
+weeks while the real donor map exposed it.
+
 ### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
 
 When master's merge wave (#519 dots, #524 `pack|file` sound refs) touched
@@ -172,6 +190,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
 - [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
 - [Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)](#mirror-drift-sharedversusprofile-skipped-the-main-table-heroic-rule-2026-09-27)
+- [`exit=1` on Windows is an external kill, not an engine exit — batch harnesses need kill resilience (2026-09-28, Nova)](#exit1-on-windows-is-an-external-kill-not-an-engine-exit--batch-harnesses-need-kill-resilience-2026-09-28-nova)
 
 **Process, tooling and platform**
 
@@ -222,6 +241,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)
 - [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
 - [⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)](#-editor-writes-to-groundstatescacs-are-silently-lost--verify-c-edits-with-grepstat-2026-09-27)
+- [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
 
 ---
 
@@ -2908,3 +2928,73 @@ was observed twice in an earlier session on this same file.
 - Shared `engine/bin` is one physical directory across all worktrees — never
   trust a build/gate whose copy step raced another agent's `--check-yaml`, and
   check `Get-Process OpenRA*` before gating.
+
+## A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)
+
+Five factions (`atreides`, `harkonnen`, `corrino`, `EDEN`, `PLYMOUTH`) shipped
+buildable conyards, refineries, factories and units — and their bots never
+produced a single actor. The mechanism is name-keyed, not trait-keyed:
+`BaseBuilderQueueManagerCA.GetProducibleBuilding` filters
+`queue.BuildableItems()` against the `PowerTypes`/`RefineryTypes`/
+`BarracksTypes`/`ProductionTypes`/`SiloTypes` lists in `mods/cameo/ai/ai.yaml`,
+and `HasMinimalRefineryCount()` counts only actors whose ids are in
+`RefineryTypes` — an unlisted refinery is invisible, so
+`PauseUnitProduction` stayed true forever. Roughly 60 more list fields gate
+the same way (harvester/MCV/scout/engineer/squad/resource-map), so the bots
+were inert end-to-end. AI_ARCHITECTURE §2.8's report-only `BotRoleSets` table
+had already predicted the gap ("would add: the D2k spice harvesters,
+refineries, convecs").
+
+Why it survived: every runtime gate exercised `td_gdi`/`td_nod`, factions the
+lists already covered — green tests measured factions that were never broken.
+And a rename-era cleanup (`10b8f5915`) deleted the houses' dictionary rows as
+"stale" after `d2k_*` ids died, so the failure looked like the split working
+as designed.
+
+Rules:
+
+- After a faction rollout OR rename, census every `*Types`-shaped field in
+  `mods/cameo/ai/ai.yaml` for the new ids — the list cannot live in a pack
+  (MiniYaml scalars override; §2.8 derives it properly once `Apply:` rolls
+  out). Appending ids is additive and unions cleanly with `Apply:` later.
+- A "stale id" cleanup must verify nothing real replaced the dead spelling;
+  deleting the last central reference to a faction's buildings is a
+  functional removal wearing a hygiene costume.
+- Gates must cover a faction from the NEWEST content pack, not only the
+  oldest: `tools/tests/ai_d2k_production_gate.py` runs an Atreides HardBot
+  from one construction yard and asserts the owned-actor count grows —
+  negative control (lists spliced out) fails at 2 actors forever.
+- `AiMatchLogWriter`/situation records buffer until every bot's `WinState`
+  resolves — a timed-out or killed match writes NOTHING. For gates, print
+  progress from map lua (`Actor` counts, tick heartbeats) instead.
+
+## `exit=1` on Windows is an external kill, not an engine exit — batch harnesses need kill resilience (2026-09-28, Nova)
+
+The headless batch (`tools/ai/run_ai_match_batch.py`) lost four matches across
+two nights to the same signature: `exit=1` mid-simulation, zero match records,
+no new `exception-*.log`, `debug.log` simply stops. The engine's own launcher
+only ever returns `RunStatus.Success` (0) or `RunStatus.Error` (-1); `1` is
+what `TerminateProcess` produces — Python `Popen.terminate()`, `taskkill /F`,
+or a name-based `Stop-Process -Name OpenRA` from another agent's cleanup all
+land there. On a box running several agent lanes at once, a name sweep kills
+every lane's match.
+
+**Rules:**
+- Never kill OpenRA by process name — always by the PID you spawned. A
+  `Stop-Process -Name "OpenRA*"` in a boot-gate script is a cross-agent kill.
+- Treat `exit=1` + zero records + no exception as an external kill, not a
+  match result: `run_ai_match_batch.py` retries the matchup once and writes a
+  durable `batch_results.jsonl` line per attempt so a killed driver still
+  leaves evidence.
+- `gamespeed: insane` is a *request*: `TimeLimit *= 60 * ticksPerSecond`, so
+  the tick cap quadruples while `AdaptiveGameSpeed` keeps the achieved rate at
+  whatever the contended box sustains. Timeout matches can overrun any tight
+  wall bound — bound on `debug.log` quiet time (a live match writes every few
+  seconds), with a speed-aware backstop only.
+- `Player.Spectating` becomes true for every *decided* player on non-mission
+  maps (`WinState != Undefined`). Any post-game relationship query via
+  `IsAlliedWith` returns "ally" for both losers — read the static stance
+  masks (`AlliedPlayersMask`/`EnemyPlayersMask`) instead.
+- `Map.ComputeUID` hashes file bytes: two byte-identical variant dirs merge
+  into one `MapCache` preview, and `Launch.Map`'s name lookup can't see the
+  other — salt generated copies with a unique comment.

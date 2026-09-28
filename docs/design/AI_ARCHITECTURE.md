@@ -486,6 +486,13 @@ because a bot with neither listed stays paused):
 | harvester | 2026-09-27 | 50: `HarvesterBotModuleCA.HarvesterTypes` emptied, and `ResourceMapBotModule.HarvesterTypes` reduced to `naxis_slaveoverseer` (a slave whip with no `Harvester` trait; kept so its behaviour doesn't change) | `ai_harvester_gate_20260927`, 4 paired runs to tick 6000: TKM (refinery listed, harvester not) **built +1, +1 without the role and +5, +6 with it**. Atreides built 0 either way: it needs refinery + conyard. `bot-roles.log`: `34 members, 0 written; ADDED 34` |
 | refinery + conyard, and harvester → `SquadManagerBotModuleCA.ExcludeFromSquadsTypes` | 2026-09-27 | 388: `HarvesterBotModuleCA.RefineryTypes` emptied; the other two `RefineryTypes` keep only `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards); the 7 `ConstructionYardTypes` lists keep only `zerg_hive`/`zerg_lair` (and `td_gdi_defenserig` in `McvExpansionManagerBotModule`); 4 dead ids deleted (`chsupply`, `glsupply`, `usasupply`, `refinery`); 26 harvesters × 5 personalities out of `ExcludeFromSquadsTypes` | `ai_harvester_gate_20260927` to tick 6000: the Atreides bot owned **7 → 7** actors (inert) with the harvester role only and **11 → 22/24** with these roles, +2 harvesters built in both runs; its harvesters (`far`: more than 25 cells from base) were **4 of 4 far by tick 6000 without** the `ExcludeFromSquadsTypes` target, drafted into attack squads as the maintainer saw, and **0 in 4 of 4 runs with it**; the same gap already existed on master for `ra1_soviets_heavyindustrialminer`, `futuretech_prospectormk2` and `wc2_humans_militiapeasant`. `bot-roles.log`: 31 refinery and 31 conyard members |
 
+**Interim repair (2026-09-28, EMBER, `devin/ember/ai-faction-wiring`):** the "would add" set was
+a live bug — the five newest factions were inert because their ids were in no central list. The
+ids were hand-appended (119 ids across 66 rows, all verified defined) until `Apply:` drains them;
+`Apply` unions into set types so the enumeration dedupe-composes with the role mechanism. The
+table's "written" column therefore now includes these ids — do not re-review them as pending
+additions.
+
 ---
 
 ## 3. Reading the enemy: the observation model
@@ -603,8 +610,9 @@ steamrolls into a fortified target while a second player razes its base.
 The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
 `30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
 with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
-damage-dealt side still has no producer). Nothing consumes it yet — wiring it into this score is
-a separate lane.
+damage-dealt side still has no producer). Consumed 2026-09-28 (EMBER): `WeightHurt` penalises the
+nemesis-weighted enemy in `TargetScore`, and a nemesis above `NemesisOverrideWeight` force-retargets
+regardless of hold time — the 'do not ignore who is hitting you' clause.
 
 ### 4.4 Transition table
 
@@ -763,7 +771,27 @@ over the fixed-policy comparator on compatible Cameo data (§11.3.5).
 
 **Stage D — AI-vs-AI batch harness.** Headless repeated matches across matchups, feeding stages
 B–C. This is what makes the data volume possible; it should be a script and a map rotation, not
-engine work.
+engine work. *Shipped:* `tools/ai/run_ai_match_batch.py` + template map
+`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns) —
+the harness copies the template into an isolated `Engine.SupportDir` user-map cache per matchup
+(faction × bot × time-limit patching + faction starting-unit actors written into `Actors:`),
+launches `Launch.Map`+`Launch.Benchmark` (exits on `GameOver`), and slices the appended
+`cameo-ai-matches.jsonl` per run. Constraints the map design had to satisfy, verified against
+the engine: a `Local` server refuses to start with every slot empty, so the map keeps an inert
+host-occupied `Referee` slot whose `PlayerReference.NonCombatant` keeps it out of every record's
+`opponents`/`allies` (lobby clients ignore `Player.NonCombatant`); empty playable slots produce
+no `Player` at all, so the duelists are `Playable: False` + `Bot:` map-side players (the writer
+admits them via `IsBot`) with `SpawnStartingUnits` bypassed by preplaced actors; Cameo strips
+`MustBeDestroyed` from most actors so the map re-adds it to the base templates for real
+elimination, and `TimeLimitManager` (locked) is the guaranteed terminator — its timeout ranking
+reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at high game
+speed:** the fixture locks `gamespeed: insane` (10 ms timestep, 4x default) so decisive matches
+resolve ~4x sooner in wall time and batches can be iterated in quick succession — the minutes
+cap then spans 4x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
+`AdaptiveGameSpeed` pacing slows the target rate under CPU contention rather than janking, so a
+generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
+match timeout. Match records are only comparable within one speed — a `10`-minute insane match
+contains 4x the simulated play of a default-speed one.
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.
