@@ -222,7 +222,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -334,6 +334,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// the same condition Rebuild uses to fog its own snapshot.
 		bool IBotFoggedEnemyProvider.FoggedObservation =>
 			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
+
+		// CA-2 stand-off input (AI_ARCHITECTURE §12.6): the static defences this
+		// bot has actually seen, each projected with its observed type's longest
+		// weapon range. Range comes from public ruleset data for a seen type —
+		// fog-honest. Empty when nothing has been observed, never a claim that
+		// no defences exist.
+		IEnumerable<BotRememberedDefence> IBotRememberedDefenceProvider.RememberedDefences()
+		{
+			if (IsTraitDisabled)
+				yield break;
+
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (!seen.Defence || seen.Info == null)
+						continue;
+
+					var maxRange = 0;
+					foreach (var armament in seen.Info.TraitInfos<ArmamentInfo>())
+						if (armament.WeaponInfo != null && armament.WeaponInfo.Range.Length > maxRange)
+							maxRange = armament.WeaponInfo.Range.Length;
+
+					yield return new BotRememberedDefence(seen.Location, seen.Value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy);
+				}
+			}
+		}
 
 		// The enemy army as this bot has SEEN it, for adaptive counter-production (DESIGN §19.1). Only when it
 		// observes through fog; otherwise false, and the unit builder falls back to its omniscient sample.

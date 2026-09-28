@@ -14549,3 +14549,22 @@ lifecycle); batch relaunched detached via nohup as nw-classic2.
   port deltas preserved through the merge).
 - nw-hard4 (W2 validation): 1-1 decided, 2 died in the mid-merge yaml
   window — consistent with publish-only W2; clean W2 batch still owed.
+
+### CA-2a siege telemetry (record-only; §12.6)
+
+- New `SiegeEvaluatorBotModule` (OpenRA.Mods.CA): every 100 WT logs what
+  stand-off / artillery-first / commit / retreat would decide per assault
+  squad (Rush/Guerrilla/Harass), from fog-honest remembered defences and
+  regional threat. Issues zero orders — telemetry for the CA-2b switch.
+- New `IBotRememberedDefenceProvider` + `BotRememberedDefence` (Mods.CA):
+  cell, value, max weapon range of the observed type (public ruleset data),
+  last-seen tick, enemy. Implemented by `MasterAiBotModule` projecting its
+  `BotFogMemory` table — one fog owner, no parallel memory.
+- Donor note: `FransRiskModel` stays a consumer-side rich read; it does NOT
+  implement `IBotRegionThreatProvider` because squad consumers Sum providers
+  (adding it would double-count with MasterAi regions).
+- Wired `genericbot && hardbot` in ai.yaml. Compile clean (copy pending
+  match boundary). Fog audit unchanged — no world.Actors enumerations.
+- NOVA donor runtime check (nw-donor-v12931): EnemySpawnProbe publishes,
+  wins ground1 bid, humvee dispatched ETA 747 WT — spawn recon works end
+  to end; V1.29.31 MCV/transport ticking without exception.

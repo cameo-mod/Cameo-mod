@@ -4126,6 +4126,12 @@ Player:
 		ActionsPerWindow: 0
 		MaxActionsPerTick: 0
 		AttentionSlotsPerTick: 0
+	# CA-2a (AI_ARCHITECTURE §12.6): record-only siege telemetry — what stand-off,
+	# artillery-first, commit and retreat WOULD have decided per assault squad.
+	# Issues no orders; the CA-2b behaviour lands behind its own switch after this
+	# validates the remembered-defence inputs on the hard candidate.
+	SiegeEvaluatorBotModule:
+		RequiresCondition: genericbot && hardbot
 
 World:
 	BeaconTracker:
