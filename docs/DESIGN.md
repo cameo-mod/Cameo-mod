@@ -4867,9 +4867,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 > units: if it sees something that's going to win against the attack squad they should return
 > instead and try to attack somewhere else."
 
-* **Every Frankenstein personality** runs the same small-squad layer: `JoinGuerrilla: 100`,
-  `MaxGuerrillaSquads: 3` (several small parties at once — the smallest open one is filled first),
-  `MaxGuerrillaSize: 6`. Guerrillas raid, recon and hit soft targets whatever the posture;
+* **Every Frankenstein personality** runs a small-squad layer: `JoinGuerrilla: 100`,
+  `MaxGuerrillaSize: 6`, and several small parties at once (the smallest open one is filled
+  first). **Their number grows with game time and depends on the personality** (maintainer, same
+  day): `MaxGuerrillaSquads` → `MaxGuerrillaSquadsLate` over `GuerrillaSquadRampTicks` (30,000) —
+  steamroller 1→3, turtle 1→3, tech 1→4, rush 2→5, expansion 2→5, **guerrilla 2→6, at least twice
+  steamroller's at every moment**; steamroller spends the rest on its main army.
+  Guerrillas raid, recon and hit soft targets whatever the posture;
   harasser (spec-ops) squads and `ScoutBotModule` scouts run beside them. **Only the main army**
   (SquadValue, staging, attack interval) differs per personality — turtle defends, steamroller
   builds up and rolls.
@@ -4877,8 +4881,9 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   engages only when the Lanchester predictor over the enemies it SEES clears
   `RetreatRatioPct × EngageMarginPct` and turns back below `BotLimits.RetreatRatioPct`; the squad
   dissolves home and the next attack avoids that region (the 6c risk gate remembers the threat).
-  `RetreatRatioPct` is the tier's self-preservation on the §19.1 line: **20 at Easiest, +8 per
-  tier, Hard 52, CameoGod 92**.
+  `RetreatRatioPct` is the tier's self-preservation on the §19.1 line (maintainer, same day):
+  **0.1 at Easiest to 1.0 at CameoGod in steps of 0.1** (10, 20 … 100 %; Hard 50) — CameoGod only
+  takes fights it at least draws.
 * **Scouting:** `ScoutBotModule.EnemySpawnBonus` keeps scouts checking the enemy's possible spawn
   regions (public `mpspawn` data).
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.

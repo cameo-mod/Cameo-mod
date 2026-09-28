@@ -71,6 +71,14 @@ namespace OpenRA.Mods.CA.Traits
 			"1 keeps the single guerrilla squad of the classic bot.")]
 		public readonly int MaxGuerrillaSquads = 1;
 
+		[Desc("Cameo (maintainer 2026-09-28): the guerrilla squad cap grows with game time from MaxGuerrillaSquads to",
+			"this value over GuerrillaSquadRampTicks — the later the game, the more fast squads. Below",
+			"MaxGuerrillaSquads means no ramp.")]
+		public readonly int MaxGuerrillaSquadsLate = 0;
+
+		[Desc("Ticks over which the guerrilla squad cap ramps from MaxGuerrillaSquads to MaxGuerrillaSquadsLate.")]
+		public readonly int GuerrillaSquadRampTicks = 30000;
+
 		[Desc("Cameo (AI_DEEP_RESEARCH.md §2.3, CP): ground squads decide to engage and to retreat with the Lanchester",
 			"combat predictor over the enemies they can SEE, instead of the fuzzy health/count rule. They retreat when the",
 			"predicted ratio drops below the tier's BotLimits.RetreatRatioPct and engage only at EngageMarginPct of it.")]
@@ -1035,7 +1043,18 @@ namespace OpenRA.Mods.CA.Traits
 			if (open != null)
 				return open;
 
-			return guerrillas.Count < Math.Max(1, Info.MaxGuerrillaSquads) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
+			return guerrillas.Count < GuerrillaSquadCap(Info, World.WorldTick) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
+		}
+
+		/// <summary>The guerrilla squad cap at `tick`: MaxGuerrillaSquads, ramping linearly to MaxGuerrillaSquadsLate.</summary>
+		public static int GuerrillaSquadCap(SquadManagerBotModuleCAInfo info, int tick)
+		{
+			var early = Math.Max(1, info.MaxGuerrillaSquads);
+			if (info.MaxGuerrillaSquadsLate <= early || info.GuerrillaSquadRampTicks <= 0)
+				return early;
+
+			var t = Math.Min(1.0, (double)tick / info.GuerrillaSquadRampTicks);
+			return early + (int)Math.Round((info.MaxGuerrillaSquadsLate - early) * t);
 		}
 
 		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
