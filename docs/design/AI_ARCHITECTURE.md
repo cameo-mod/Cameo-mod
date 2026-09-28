@@ -1605,6 +1605,12 @@ formation — they run ahead on their own (6b).
   `production`, `power`, `harvester`, `artillery`; `defence` when it opens a siege), routed over
   the **air-threat layer** (remembered anti-air coverage) with minimum exposure, regroup and
   return. This is risk routing for air — today's router is ground-only.
+  *Landed first slice (2026-09-28):* the 6e router now picks its remembered-threat
+  read by the leader's domain — airborne leaders pay `AntiAirValue`, ground
+  leaders pay `ArmyValue+DefenceValue` — and `AirAttackStateCA` transits a fresh
+  target through those waypoints (`Fly` chain + queued `Attack`, skipped by the
+  per-tick re-issue so transit is not cancelled). The doctrine split (gunship CAS,
+  fighter pick-off, bomber strike-team targets) still waits on CA-1 roles.
 
 ### 12.9 Scouting decides where to attack next
 

@@ -126,7 +126,7 @@ the fog sequencing.
   - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
   - [ ] **M** CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
     artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
-  - [ ] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
+  - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a

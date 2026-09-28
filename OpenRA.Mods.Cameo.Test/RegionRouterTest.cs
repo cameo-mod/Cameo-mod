@@ -100,6 +100,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AirborneLeadersPayAntiAirNotGroundThreat()
+		{
+			// CA-5 (§12.8): the same region read splits by leader domain —
+			// ground pays Army+Defence, air pays AntiAir, holes pay nothing.
+			var region = new RegionMemory.Region { ArmyValue = 1000, DefenceValue = 500, AntiAirValue = 200 };
+			Assert.That(MasterAiBotModule.RememberedThreatAtRegion(region, false), Is.EqualTo(1500));
+			Assert.That(MasterAiBotModule.RememberedThreatAtRegion(region, true), Is.EqualTo(200));
+			Assert.That(MasterAiBotModule.RememberedThreatAtRegion(null, true), Is.Zero);
+			Assert.That(MasterAiBotModule.RememberedThreatAtRegion(null, false), Is.Zero);
+		}
+
+		[Test]
 		public void HangBackAnchorOffsetsAwayFromTarget()
 		{
 			// Parent at X=10000, target due east at X=20000: anchor sits 1024

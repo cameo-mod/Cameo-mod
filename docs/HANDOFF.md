@@ -1,5 +1,26 @@
 # Cameo — THE HANDOFF
 
+
+## 2026-09-28 - EMBER: CA-5 air-threat routing landed (first slice of §12.8)
+
+The part of CA-5 air doctrine that needs no CA-1 roles:
+
+- The 6e router's threat read now splits by the leader's domain in
+  `MasterAiBotModule.RouteAroundThreat`: airborne leaders (aircraft)
+  pay remembered `AntiAirValue` per entered region; ground leaders pay
+  `ArmyValue+DefenceValue` as before. `RegionMemory` already books AA
+  guns and air-to-air fighters into `AntiAirValue` - the air-threat
+  layer existed as data and is now consulted. The 6c ground gate is
+  unchanged.
+- `AirAttackStateCA` routes a fresh target through
+  `SquadManager.RouteAroundThreat`: chained `Fly` waypoints then a
+  queued `Attack`. Per-state `routedCurrentTarget` covers state entry
+  where `newTarget` never fires; `Fly` is excluded from the per-tick
+  re-issue so transit is not cancelled.
+- Still open for CA-5: the doctrine split - gunship CAS attach,
+  fighter pick-off of isolated units, bomber strike-team target
+  priorities - waits on CA-1 roles (§12.10) plus this slice's
+  A/B vs master.
 ## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
 
 **Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,
