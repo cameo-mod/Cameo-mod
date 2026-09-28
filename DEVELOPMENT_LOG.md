@@ -1,3 +1,41 @@
+# 2026-09-28 — DAWN: Fransbot economy-intel list fixes — harvesters finally count
+
+Three stacked generator bugs starved the economy intel pipeline; all fixed in
+`tools/ai/gen_fransbot_lists.py` + regenerated `mods/cameo/ai/fransbot_lists.yaml`:
+
+1. **`EconomyTargetTypes` had zero mobile harvesters.** `is_economy` was
+   `is_building ∩ seeders`, and the emit missed `is_harvester` — so the General's
+   `IsLiveOwnedEconomyActor` counted `0 harvester` forever (an owned
+   `ra1_allies_oretruck` was visibly attacked at WT9538 yet still counted 0).
+   Enemy economy intel had the same blind spot (`visible harvester 0` while
+   HardBot had 6). Now `is_economy | is_refinery | is_derrick | is_harvester`,
+   same for `EnemyEconomyTypes`. Verified live: `2 refinery/2 harvester`,
+   enemy `visible harvester 6`.
+2. **`LobbyScaledSeedsResource` was invisible to `is_resource_creator`.** Cameo's
+   RA ore/gem mines (`mine`, `gmine`, `split2/3/blue/red/gold`) use the lobby-
+   scaled variant, so `ResourceCreatorTypes` carried only RA2/SC/D2k creators —
+   zero mine clusters on RA1 maps, ever. Added the trait; the RA mines now emit.
+3. **All emitted actor ids are now lowercased.** `Ruleset.cs` lowercases every
+   actor name at load (`ActorInfo.Name`), so every uppercase list entry
+   (`E1`, `TSE1`, `EDEN_*`, `PLYMOUTH_*`, `MINE`, `YRSLAV`, `RAPT`, ...) was
+   silently unmatchable — the same dead-id class Claude fixed on the central
+   `ai.yaml` for #588. `put()` now lowercases; `put_raw()` serves the 8
+   non-actor string fields (terrain/queue names stay verbatim). 152 list lines
+   changed; every recovered id is a formerly-dead predicate.
+
+Map side: the versus test maps had painted ore (884 cells, 3 patches) but no
+mine actors — upstream Fransbot clusters `mine`/`gmine` actors, and stock-RA
+convention (AlpinePass 16 mines/10 spawns, 16-9 4/2) is a mine beside every
+spawn. Added `mine` actors at the three patch centroids plus one inside each
+side's refinery zone (`14,18` / `62,74`) so the strict
+`mine ↔ PROC (≤18 cells) ↔ HARV` demand matching can fire. NOTE: a painted-ore
+map with zero mine actors (e.g. `Anvil_of_War.oramap`) still yields no clusters
+— the ResourceLayer-cell fallback is an upstream-parity gap flagged for the
+fleet, not silently patched.
+
+Insane-speed verification runs (post-merge, Soviet mirror): opening completes
+on the deterministic timeline (WT3901→4200→5726); best run 16399 ticks,
+67 kills / 78 losses — first run with nonzero building kills recorded earlier.
 # 2026-09-28 — NOVA: fleet merge wave closed — all agent PRs landed; 3 stale drafts flagged
 
 Second sweep under the merge-all order: #597 (ai-missions-7a follow-up — HashSet
@@ -13867,3 +13905,26 @@ enemy buildings razed (first nonzero building kills) — opening completed,
 raids unleashed post-completion did real damage. Also added
 `ai_fransbot_versus_allies_20260928` (ra1_allies FransBot): verified the
 non-substitute light-vehicle path and producer-rebuild on a second roster.
+
+
+## 2026-09-28 dawn — DEFEND-site anchor fallback (vendored fix)
+
+Run `support4` showed the recurring post-opening loss mode: HardBot raid kills the
+main conyard (~WT6900), after which every DEFEND incident on the attacked base
+logs `[DEFENSE SITE] ... reason=NoRelevantAnchor` forever — zero static defense
+ever starts, even with the Defense queue alive and threats standing on base cells.
+
+Root cause: `TrySelectRelevantFrontAnchor` only accepts `ConstructionYardTypes`
+anchors within `DefendSiteAnchorMaximumDistance` (18). With the main conyard dead
+and the expansion conyard 19+ cells away, the burning main base is structurally
+undefendable. Upstream (OpenRA-Fransbot) documents the radius as a redirect-guard
+("prevents a vanished forward site from silently redirecting the item to an
+unrelated rear base") — it never intended conyard-only as a hard requirement.
+
+Fix: same method now falls back to the nearest owned `Building` within the same
+18-cell radius when no conyard is in range — the attacked refinery anchors its own
+defense; redirect-to-rear-base remains impossible because the radius still binds.
+
+Also confirmed this run: `EconomyTargetTypes`/`EnemyEconomyTypes` harvester fix
+live (`2 refinery/3 harvester` — first non-opening harvester ever produced) and
+mine pairing live (`friendly 1 (1 mine nodes)`).

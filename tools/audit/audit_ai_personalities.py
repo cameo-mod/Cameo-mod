@@ -121,6 +121,61 @@ def notification_blocks(block: list[str]) -> tuple[dict[str, list[str]], set[str
     return blocks, duplicates
 
 
+BOOLEAN_LIMIT_FIELDS = {"PrioritizeBarracksBeforeRefinery"}
+PRODUCTION_TIERS = ("easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "cameogod")
+FAIR_TIER = "hard"
+
+
+def on_line(values: list[int]) -> bool:
+    """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1)."""
+    n = len(values) - 1
+    return all(abs(v - (values[0] + (values[-1] - values[0]) * i / n)) <= 0.5 for i, v in enumerate(values))
+
+
+def difficulty_scale_failures() -> list[str]:
+    """DESIGN §19.1: every per-tier number lies on one straight line in equal steps, and is written in
+    every tier (a missing field falls back to a C# default and breaks the line silently)."""
+    sys.path.insert(0, str(ROOT / "tools" / "audit"))
+    from miniyaml import Ruleset
+
+    rules = Ruleset(ROOT)
+    failures = []
+    player = rules.resolve("player")
+    limits = {c.key.split("@", 1)[1]: c for c in player.children if c.key.startswith("BotLimits@")}
+    if [t for t in DIFFICULTIES if t in limits] != list(DIFFICULTIES):
+        return [f"resolved BotLimits tiers {sorted(limits)} != {list(DIFFICULTIES)}"]
+
+    fields = sorted({c.key for block in limits.values() for c in block.children} - {"RequiresCondition"} - BOOLEAN_LIMIT_FIELDS)
+    for field in fields:
+        raw = [limits[t].get(field) for t in DIFFICULTIES]
+        missing = [t for t, v in zip(DIFFICULTIES, raw) if v is None]
+        if missing:
+            failures.append(f"BotLimits.{field} is not written for {missing}: that tier silently uses the C# default")
+            continue
+        values = [int(v) for v in raw]
+        if not on_line(values):
+            failures.append(f"BotLimits.{field} is not on one equal-step line: {values}")
+
+    for flag in BOOLEAN_LIMIT_FIELDS:
+        states = [(limits[t].get(flag) or "false").strip().lower() == "true" for t in DIFFICULTIES]
+        if states != sorted(states):
+            failures.append(f"BotLimits.{flag} is not a single threshold (off below, on from some tier up): {states}")
+
+    behavior = rules.resolve("^BotProductionBehavior")
+    for trait in ("ProductionTimeMultiplier", "ProductionCostMultiplier"):
+        nodes = [behavior.child(f"{trait}@{t}botplayer") if behavior else None for t in PRODUCTION_TIERS]
+        if any(n is None for n in nodes):
+            failures.append(f"^BotProductionBehavior.{trait} is missing a tier")
+            continue
+        values = [int(n.get("Multiplier")) for n in nodes]
+        if not on_line(values):
+            failures.append(f"{trait} is not on one equal-step line: {values}")
+        fair = values[PRODUCTION_TIERS.index(FAIR_TIER)]
+        if fair != 100:
+            failures.append(f"{trait}: the fair tier `{FAIR_TIER}` must be 100, is {fair}")
+    return failures
+
+
 def main() -> int:
     lines = AI_PATH.read_text(encoding="utf-8").splitlines()
     failures: list[str] = []
@@ -220,6 +275,8 @@ def main() -> int:
             ):
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
+    failures.extend(difficulty_scale_failures())
+
     print("# AI personality audit")
     print()
     print(f"- Selector conditions: `{', '.join(sorted(granted))}`")
@@ -239,6 +296,7 @@ def main() -> int:
     print("- BotPersonalityController and squad-manager condition sets match exactly.")
     print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
+    print("- Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN §19.1).")
     return 0
 
 
