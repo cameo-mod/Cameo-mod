@@ -4829,10 +4829,22 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 | RefineryLimit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 | HarvesterLimit | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 |
 | ProductionTypeLimit, ConstructionYardLimit (rounded) | 1 | 2 | 2 | 3 | 4 | 4 | 5 | 6 | 6 | 7 |
+| NewProductionCashThreshold (extra factories above this cash) | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
+| MaximiseProductionCashRequirement (fill every queue above this cash) | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
+| AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 4 | 9 | 13 | 18 | 22 | 27 | 31 | 36 | 40 |
 
 * **`InitialAttackDelay` holds back only the MAIN army** (`CreateAttackForce`, the big assault
   squads). Guerrilla, harasser, air and naval squads are formed in `FindNewUnits` and fight from
   the first tick at every tier (maintainer 2026-09-28), so early pressure never waits for it.
+* **Adaptive counter-production** (#245, ported 2026-09-28): the unit builder spends up to
+  `AdaptiveCounterWeight` percent of its combat picks on the best COUNTER to the enemy army it has
+  SEEN (the master AI's fog memory through `IBotEnemyCompositionProvider`; the omniscient sample is
+  only the fallback when a bot does not observe through fog). A counter is scored by its weapons'
+  real Versus against each observed enemy's armour, weighted by that enemy's value, doubled for a
+  detector against cloaked units; #245's cost thresholds and per-actor override lists are gone.
+  Code: `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/AdaptiveCounterProduction.cs`.
+* **Extra production.** `NewProductionCashThreshold` was 0 (switched off) for every bot until
+  2026-09-28, so no bot ever added factories when rich; it is now on the line above.
 * **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
   Very Hard, and Easiest through Medium pay a surcharge on the same line.
 * `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).

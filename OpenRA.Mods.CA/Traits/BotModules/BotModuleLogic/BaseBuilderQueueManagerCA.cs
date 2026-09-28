@@ -87,6 +87,10 @@ namespace OpenRA.Mods.CA.Traits
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
+		// BotLimits carries the per-difficulty value on the DESIGN §19.1 line; negative there means the module's own.
+		int NewProductionCashThreshold => botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
+			? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
+
 		public void Tick(IBot bot)
 		{
 			foreach (KeyValuePair<string, int> i in activeBuildingIntervals.ToList())
@@ -452,7 +456,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Make sure that we can spend as fast as we are earning
-			if (baseBuilder.Info.NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold)
+			if (NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > NewProductionCashThreshold)
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
@@ -473,8 +477,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Only consider building this if there is enough water inside the base perimeter and there are close enough adjacent buildings
-			if (waterState == WaterCheck.EnoughWater && baseBuilder.Info.NewProductionCashThreshold > 0
-				&& playerResources.Resources > baseBuilder.Info.NewProductionCashThreshold
+			if (waterState == WaterCheck.EnoughWater && NewProductionCashThreshold > 0
+				&& playerResources.Resources > NewProductionCashThreshold
 				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
 			{
 				var navalproduction = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);

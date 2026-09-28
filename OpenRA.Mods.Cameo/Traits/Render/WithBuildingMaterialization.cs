@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Numerics;
 using OpenRA.Activities;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Traits;
