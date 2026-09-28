@@ -215,6 +215,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "squad_units", situation.SquadUnitCount);
 			AppendRoleCosts(builder, "losses_by_role", situation.LossesByRole);
 			AppendRoleCosts(builder, "away_losses_by_role", situation.AwayLossesByRole);
+			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_pct", situation.CombatRatioPct);
+			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_defended_pct", situation.CombatRatioDefendedPct);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

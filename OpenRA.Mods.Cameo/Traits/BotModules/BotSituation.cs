@@ -65,6 +65,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
 		internal int SquadCount, SquadUnitCount;
 
+		// Record-only combat prediction (AI_DEEP_RESEARCH.md §2.3, phase CP): the square-law ratio x100 of the own
+		// army against the enemy army this bot REMEMBERS, and against that army plus remembered defences.
+		// Above 100 the own side is predicted to win. No decision reads these yet.
+		internal int CombatRatioPct, CombatRatioDefendedPct;
+
 		// Cumulative unit losses by the role the unit held (squad type or "idle"), and the part lost
 		// away from the base; summed over every squad manager, disabled personalities included.
 		internal SortedDictionary<string, int> LossesByRole = new(StringComparer.Ordinal), AwayLossesByRole = new(StringComparer.Ordinal);
@@ -350,6 +355,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var ownActors = actorsByOwner.TryGetValue(player, out var ownedActors) ? ownedActors : Array.Empty<Actor>();
 			var ownBuildings = ownActors.Where(IsBuilding).ToArray();
 			var ownArmy = ownActors.Where(IsCombatUnit).Sum(Value);
+			var combatRatios = CombatRatios(ownActors);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
 			var ownHarvesters = ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
 			var enemies = player.World.Players.Where(IsEligible)
@@ -541,6 +547,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				SquadCount = squadCount,
 				SquadUnitCount = squadUnitCount,
+				CombatRatioPct = combatRatios.Army,
+				CombatRatioDefendedPct = combatRatios.Defended,
 				LossesByRole = lossesByRole,
 				AwayLossesByRole = awayLossesByRole,
 				OwnPersonality = CurrentPersonality()
@@ -1305,6 +1313,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
+		(int Army, int Defended) CombatRatios(IEnumerable<Actor> ownActors)
+		{
+			var rules = player.World.Map.Rules;
+			var own = ownActors.Where(IsCombatUnit).GroupBy(a => a.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+
+			var army = new Dictionary<ActorInfo, int>();
+			var defences = new Dictionary<ActorInfo, int>();
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (!seen.Combat || seen.Info == null)
+						continue;
+
+					var bucket = seen.Building ? defences : army;
+					bucket[seen.Info] = bucket.GetValueOrDefault(seen.Info) + 1;
+				}
+			}
+
+			var enemyArmy = army.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value)).ToList();
+			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value))).ToList();
+			return (RatioPct(BotCombatPredictor.Predict(own, enemyArmy)), RatioPct(BotCombatPredictor.Predict(own, enemyAll)));
+		}
+
+		static int RatioPct(BotCombatPredictor.Prediction p) => (int)Math.Round(p.Ratio * 100);
+
 		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
 		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 		static int Clamp(long value) => (int)Math.Max(0, Math.Min(100, value));

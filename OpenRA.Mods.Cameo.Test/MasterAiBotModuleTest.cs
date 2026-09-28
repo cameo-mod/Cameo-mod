@@ -125,6 +125,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(own.GetProperty("losses_by_role").EnumerateObject().Select(p => p.Name), Is.EqualTo(new[] { "idle", "rush" }));
 			Assert.That(own.GetProperty("losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(5400));
 			Assert.That(own.GetProperty("away_losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(4800));
+			Assert.That(own.GetProperty("combat_ratio_pct").GetInt32(), Is.Zero);
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
 			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
 			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));

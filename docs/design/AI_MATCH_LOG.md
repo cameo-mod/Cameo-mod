@@ -218,6 +218,14 @@ difference to `PlayerStatistics.DeathsCost` is buildings plus those. Summed over
 every squad manager, including disabled personalities' (a disabled manager forgets
 its snapshot, so a unit is never booked twice).
 
+`own.combat_ratio_pct` / `own.combat_ratio_defended_pct` (record-only, phase CP of
+`AI_DEEP_RESEARCH.md` §2.3): the Lanchester square-law ratio ×100 of the own combat units against
+the enemy combat units this bot REMEMBERS (fog memory; mobile contacts expire), and against those
+plus remembered enemy defences. Damage per tick uses each weapon's main warhead, burst cycle and
+Versus against the target's armour, spread over the enemy by HP share. Above 100 the own side is
+predicted to win; capped at 10000 (an enemy with nothing remembered that can shoot back). No
+decision reads it yet — it is being validated against the decisive fights (`tools/ai/fight_report.py`).
+
 ## Batch harvest (Stage D)
 
 `tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
