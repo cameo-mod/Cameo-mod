@@ -14499,3 +14499,19 @@ lifecycle); batch relaunched detached via nohup as nw-classic2.
   `EnemyCombatContacts` buildings; required-contribution falls back to
   ruleset `HealthInfo.HP` when `ObservedHp<=0`.
 - Pending: raid-bid runtime proof on nw-classic6; then commit + rebase.
+
+### W3 swap map (prep, not yet armed)
+
+- The CA economy modules are conditioned `genericbot || classicbot` —
+  BOTH stacks share them: HarvesterBotModuleCA, McvExpansionManagerBotModule,
+  BaseBuilderBotModuleCA@generic, UnitBuilderBotModuleCA@generic.
+- Atomic swap for `hard` therefore means: CA side →
+  `classicbot || (genericbot && !hardbot)`, Frans side →
+  `genericbot && hardbot`. classic's stack is untouched (reference preserved),
+  all other genericbot tiers keep CA (only `hard` carries hardbot).
+- Frans counterparts: FransBaseBuilder / FransUnitBuilder /
+  FransHarvester / FransMcvExpansionManager swap as ONE unit (internal
+  task-tracking coupling — a mixed producer/expander stack can deadlock).
+- W4 commanders: when FransGroundCommanderBotModule ports to hard it must
+  bring the multi-instance wiring (@groundN, distinct BidderKey) — the
+  serial-capacity starvation bug is proven on the donor.
