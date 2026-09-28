@@ -567,6 +567,9 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
+SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "BotA": 0, "BotB": 1}
+
+
 def ab_scoreboard(results: list[dict]) -> dict:
     """Head-to-head table keyed by ordered (bot_type, enemy_bot_type) pairs.
 
@@ -737,7 +740,11 @@ def main() -> int:
                     "record_id": r.get("record_id"),
                     "bot_type": (r.get("player") or {}).get("bot_type"),
                     "outcome": (r.get("player") or {}).get("outcome"),
-                    "spawn": (r.get("player") or {}).get("spawn"),
+                    # player.spawn is the lobby SpawnPoint — 0 for map-side
+                    # duelists. The physical spawn is the slot binding:
+                    # Multi0/BotA -> index 0, Multi1/BotB -> index 1.
+                    "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
+                                                   (r.get("player") or {}).get("spawn")),
                     "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
                 }
                 for r in records
