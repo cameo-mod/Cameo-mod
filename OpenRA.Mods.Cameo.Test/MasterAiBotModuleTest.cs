@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -280,9 +281,15 @@ namespace OpenRA.Mods.Cameo.Test
 			var calm = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 0, info);
 			var hurt = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
 
-			// §4.3: a player beating on us scores lower — a softer teammate outranks it.
-			Assert.That(hurt, Is.LessThan(calm));
-			Assert.That(hurt, Is.GreaterThanOrEqualTo(0));
+			// §4.3: shipped WeightHurt=0 — the term is inert until the dealt-side
+			// producer lands; the nemesis override is the live hurt-driven path.
+			Assert.That(hurt, Is.EqualTo(calm));
+
+			// The plumbing still works when a weight is configured.
+			FieldLoader.LoadFieldOrProperty(info, "WeightHurt", "150");
+			var hurtWeighted = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
+			Assert.That(hurtWeighted, Is.LessThan(calm));
+			Assert.That(hurtWeighted, Is.GreaterThanOrEqualTo(0));
 		}
 
 		[Test]
