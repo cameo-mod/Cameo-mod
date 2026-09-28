@@ -1,8 +1,8 @@
-# Cameo
+# Cameo — THE HANDOFF
 
-## 2026-09-28 ? NOVA: AI phase 7a follow-up ? missions on devin/1790537249.8881-ai-missions-7a-followup
+## 2026-09-28 — NOVA: AI phase 7a follow-up — missions on devin/1790537249.8881-ai-missions-7a-followup
 
-`Agent: NOVA ? lane: AI architecture / assign layer ? branch devin/1790537249.8881-ai-missions-7a-followup ? based on current origin/master after #581`
+`Agent: NOVA · lane: AI architecture / assign layer · branch devin/1790537249.8881-ai-missions-7a-followup · based on current origin/master after #581`
 
 Phase 7a landed through #581, and #592 supplied the first exhausted-Defend
 consumer fix. This follow-up fixes the remaining multi-Defend starvation so a
@@ -14,7 +14,10 @@ actors. The gate asserts Raid publication and target-bearing squad assignment;
 the frozen-target branch remains documented but is not asserted unless a fixture
 can reproduce it reliably. Phase 7b mission bidding is next.
 
- — THE HANDOFF
+Runtime gates cannot run on this host since the .NET 10 / bleed engine update:
+`alcOpenDevice` faults with an access violation (0xC0000005) before game start,
+which also reproduces on unmodified master, so the squad, bot-player and raid
+gates and `boot-test.cmd` are all blocked until the audio init is fixed.
 
 ## 2026-09-28 — OMP Astra: deployment review and scout follow-up
 

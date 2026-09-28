@@ -1,9 +1,10 @@
-"""Launch a hard bot that owns an army and verify squads actually form.
+"""Launch a fog-enabled match and verify the assign layer actually fires.
 
-Companion to ai_bot_player_gate.py: that gate proves the situation pipeline,
-this one proves the squad manager survives force creation with a real army —
-including ts_nod_attackbuggy, which carries two AttackBase-derived traits and
-crashed #554 in the field (fixed by #555).
+Companion to ai_squad_gate.py: that gate proves a squad forms at all, this one
+proves the mission pipeline end to end — the strategist publishes a Raid mission
+against a remembered enemy economy region, and the squad manager consumes it and
+assigns a target in that region. The map carries a reachable enemy refinery and
+harvesters, because Raid missions are only derived for regions with economy value.
 """
 
 from __future__ import annotations
