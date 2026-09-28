@@ -91,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new CombatAnalysisBotModule(init.Self, this); }
 	}
 
-	public class CombatAnalysisBotModule : ConditionalTrait<CombatAnalysisBotModuleInfo>, IBotTick, IBotRespondToAttack, IBotThreatAnalysis
+	public class CombatAnalysisBotModule : ConditionalTrait<CombatAnalysisBotModuleInfo>, IBotTick, IBotRespondToAttack, IBotThreatAnalysis, INotifyAppliedDamage
 	{
 		readonly Dictionary<string, float> weights = new()
 		{
@@ -106,6 +106,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Per-enemy-player nemesis score: higher = this player attacked us more
 		readonly Dictionary<OpenRA.Player, float> nemesisScores = [];
+
+		// Per-enemy-player dealt score: higher = we damaged this player more — the
+		// 'damage we have dealt to e' side of §4.3's w_hurt ratio. Shares
+		// NemesisWeightPerHit deliberately: both halves must carry the same units
+		// for the taken/(taken+dealt) share to stay meaningful.
+		readonly Dictionary<OpenRA.Player, float> dealtScores = [];
 		readonly Dictionary<string, string> attackerRoleCache = [];
 		readonly Dictionary<string, bool> economyActorCache = [];
 		readonly Dictionary<string, float> attackerValueMultiplierCache = [];
@@ -119,6 +125,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Per attacker, because the score it throttles is per attacker too. One shared tick let whoever
 		// struck first in a frame mute everybody else until the interval expired.
 		readonly Dictionary<OpenRA.Player, int> nextNemesisRecordTickByAttacker = [];
+
+		// Same per-victim-owner throttling for the dealt side.
+		readonly Dictionary<OpenRA.Player, int> nextDealtRecordTickByVictim = [];
 
 		public CombatAnalysisBotModule(Actor self, CombatAnalysisBotModuleInfo info)
 			: base(info)
@@ -205,6 +214,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return attacker != null && nemesisScores.TryGetValue(attacker, out var score) ? score : 0;
 		}
 
+		public float GetDealtScore(OpenRA.Player victim)
+		{
+			return victim != null && dealtScores.TryGetValue(victim, out var score) ? score : 0;
+		}
+
 		/// <summary>
 		/// Called by the squad manager when an ally is attacked.
 		/// Increments the ally-attack weight for the attacker.
@@ -272,6 +286,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			nemesisScores.TryGetValue(attacker, out var current);
 			nemesisScores[attacker] = Math.Min(100f, current + Info.NemesisWeightPerHit);
 			nextNemesisRecordTickByAttacker[attacker] = world.WorldTick + Math.Max(1, Info.NemesisRecordInterval);
+		}
+
+		// The dealt half of §4.3's w_hurt ratio: INotifyAppliedDamage fires on the
+		// ATTACKER's player actor (Health.cs), the exact mirror of INotifyDamage on
+		// the victim's side. Credited against the victim's owner, throttled per
+		// victim the same way nemesis throttles per attacker.
+		void INotifyAppliedDamage.AppliedDamage(Actor self, Actor damaged, AttackInfo e)
+		{
+			if (IsTraitDisabled)
+				return;
+			if (damaged == null || damaged.Disposed)
+				return;
+
+			var victim = damaged.Owner;
+			if (victim == null || victim.RelationshipWith(this.self) != PlayerRelationship.Enemy)
+				return;
+			if (e.Damage.Value < Info.MinDamageThreshold)
+				return;
+
+			if (nextDealtRecordTickByVictim.TryGetValue(victim, out var nextTick) && world.WorldTick < nextTick)
+				return;
+
+			dealtScores.TryGetValue(victim, out var current);
+			dealtScores[victim] = Math.Min(100f, current + Info.NemesisWeightPerHit);
+			nextDealtRecordTickByVictim[victim] = world.WorldTick + Math.Max(1, Info.NemesisRecordInterval);
 		}
 
 		/// <summary>
@@ -375,6 +414,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				weights[key] = Math.Max(0f, weights[key] * decay);
 			foreach (var key in nemesisScores.Keys.ToList())
 				nemesisScores[key] = Math.Max(0f, nemesisScores[key] * decay);
+			foreach (var key in dealtScores.Keys.ToList())
+				dealtScores[key] = Math.Max(0f, dealtScores[key] * decay);
 		}
 	}
 }
