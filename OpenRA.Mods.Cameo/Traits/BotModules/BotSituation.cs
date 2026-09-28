@@ -107,14 +107,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightAlly = 100;
 
 		[Desc("w_hurt weight: damage an enemy has dealt us lowers its target score (§4.3).",
-			"The dealt-to-them numerator has no producer yet; this is the honest half.")]
-		public readonly int WeightHurt = 150;
+			"Shipped at 0: with no dealt-to-them producer the one-sided term also enters the",
+			"weight total and inverts the §4.3 ratio. NemesisOverrideWeight is the live",
+			"hurt-driven path; re-raise this once the dealt half lands.")]
+		public readonly int WeightHurt = 0;
 
 		[Desc("Nemesis score at which the hurt term saturates (Saturate k).")]
 		public readonly int HurtSaturation = 40;
 
 		[Desc("Nemesis score that counts as 'actively killing our base' — mandatory re-target,",
-			"bypassing the decision interval and the incumbent hold (§4.3 override).")] 
+			"bypassing the decision interval and the incumbent hold (§4.3 override).")]
 		public readonly int NemesisOverrideWeight = 60;
 		public readonly int IncumbentMomentum = 75;
 		public readonly int MinimumHoldTicks = 3000;
