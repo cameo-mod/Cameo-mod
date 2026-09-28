@@ -221,6 +221,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)](#-cameos-ca-code-is-a-hand-copy--unused-means-check-what-ca-uses-it-for-never-dead-2026-09-27)
 - [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)
 - [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
+- [⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)](#-editor-writes-to-groundstatescacs-are-silently-lost--verify-c-edits-with-grepstat-2026-09-27)
 
 ---
 
@@ -2887,3 +2888,23 @@ flag — a belled table is meaningless without saying WHICH side of rule 4 it is
 - A Python-vs-C# mirror mismatch on GENERATED data is a bug in the mirror or
   the engine — never "fix" it by editing expectations until you know which
   side violates the spec.
+
+## ⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)
+
+On 2026-09-27 the `edit` tool reported success on three separate writes to
+`OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs` and the file
+on disk never changed — `stat` showed an mtime older than the write, and a
+later build found the new type missing. Other files in the same session took
+identical edits fine, so this is file- or watcher-specific (likely an external
+process rewriting/restoring it — DAWN's status note confirms every worktree's
+`engine/` junctions to ONE shared `Cameo-mod\engine`, and several agent
+processes were live on the tree at the time). The same phantom-write pattern
+was observed twice in an earlier session on this same file.
+
+**Rules:**
+- After any C# edit, prove it hit disk before building: `grep -c <new symbol>`
+  + `stat` mtime newer than the write. If the tool says "edited" but grep says
+  0, rewrite via a shell write (python/`cat >`) and re-verify immediately.
+- Shared `engine/bin` is one physical directory across all worktrees — never
+  trust a build/gate whose copy step raced another agent's `--check-yaml`, and
+  check `Get-Process OpenRA*` before gating.

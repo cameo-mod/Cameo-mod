@@ -150,7 +150,9 @@ the fog sequencing.
   6b `ScoutBotModule` (`c2dab139a`), 6c pre-commit risk gate
   `IBotRegionThreatProvider` + `AttackRiskMargin` (`295396dfd`), 6d fogged
   squad scans + `FrozenActorLayer` fallback targets (`16d876f51`), 6e risk
-  routing `IBotRouteThreatRouter` + `RegionRouter` (`951e480d7`).
+  routing `IBotRouteThreatRouter` + `RegionRouter` (`951e480d7`), 6f p1
+  artillery attach (`9fdb6e236`), 6g per-squad priority tags `BotTargetTags`
+  (`735a30db4`), 6b scout/squad ownership release (`257a4cbff`).
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),

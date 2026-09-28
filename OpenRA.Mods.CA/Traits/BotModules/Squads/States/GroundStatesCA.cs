@@ -129,9 +129,143 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			if (AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits))
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			{
+				// 6f: assault waves stage before committing so slow units catch
+				// up and the attack arrives as one wave, not a trickle.
+				if (owner.Type == SquadCAType.Rush && owner.SquadManager.Info.StageBeforeAssault)
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+				else
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			}
 			else
 				Retreat(owner, flee: true, rearm: true, repair: true);
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	class GroundUnitsStageStateCA : GroundStateBaseCA, IState
+	{
+		CPos stagingCell;
+		int stageDeadlineTick;
+		bool staged;
+
+		public void Activate(SquadCA owner)
+		{
+			// WorldTick deadline — squad Update() runs on AttackForceInterval,
+			// not per tick, so a decrementing counter would wait 50-100x too long.
+			stageDeadlineTick = owner.World.WorldTick + owner.SquadManager.Info.StageTimeoutTicks;
+
+			// Rally at the own building nearest the target; without one there is
+			// nowhere to stage, so commit directly. A building farther from the
+			// target than the squad already is would stage it backwards — commit
+			// immediately in that case too.
+			var buildings = owner.World.ActorsHavingTrait<Building>()
+				.Where(a => a.Owner == owner.Bot.Player).ToList();
+
+			if (buildings.Count == 0 || !owner.IsTargetValid)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			var targetPos = owner.Target.CenterPosition;
+			var targetCell = owner.World.Map.CellContaining(targetPos);
+			var nearest = buildings.MinBy(b => (b.Location - targetCell).LengthSquared);
+
+			var squadPos = owner.CenterPosition;
+			var buildingDist = (nearest.CenterPosition - targetPos).LengthSquared;
+			var squadDist = (squadPos - targetPos).LengthSquared;
+			if (buildingDist >= squadDist)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			stagingCell = nearest.Location;
+			staged = true;
+
+			foreach (var u in owner.Units)
+				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, stagingCell), false));
+		}
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			if (!staged || !owner.IsTargetValid)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
+				return;
+			}
+
+			// Contact during staging: commit to the fight at the rally point.
+			var enemyActor = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor,
+				WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+			if (enemyActor != null)
+			{
+				owner.TargetActor = enemyActor;
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
+				return;
+			}
+
+			var radiusSquared = (long)WDist.FromCells(owner.SquadManager.Info.StageRadiusCells).LengthSquared;
+			var rally = owner.World.Map.CenterOfCell(stagingCell);
+			var assembled = owner.Units.Count(u =>
+				(u.Actor.CenterPosition - rally).LengthSquared <= radiusSquared);
+
+			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent ||
+				owner.World.WorldTick >= stageDeadlineTick)
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	class SupportUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		const int HoldTicks = 250;
+		int holdTicks;
+
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			var parent = owner.Parent;
+			if (parent == null || !parent.IsValid)
+			{
+				parent = owner.SquadManager.FindAttachableAssault(owner);
+				owner.Parent = parent;
+			}
+
+			if (parent == null)
+			{
+				// No assault to support: hold near home so medics stop charging
+				// into the attack force like they did as generic ground units.
+				if (--holdTicks <= 0)
+				{
+					GoToRandomOwnBuilding(owner);
+					holdTicks = HoldTicks;
+				}
+
+				return;
+			}
+
+			// Trail the assault: units beyond SupportFollowRangeCells get a move
+			// order toward it. Their own AutoTarget heals/repairs in reach.
+			var followRangeSquared = (long)WDist.FromCells(owner.SquadManager.Info.SupportFollowRangeCells).LengthSquared;
+			var parentPos = parent.CenterPosition;
+			foreach (var u in owner.Units)
+			{
+				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
+					continue;
+
+				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
+			}
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -172,13 +306,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{
-				var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
-				if (targetActor != null)
-					owner.TargetActor = targetActor;
-				else
+				// Harassers retarget high-value first when the target is gone (HV
+				// roll + risk gate + frozen fallback live inside FindNewTarget); a
+				// valid-but-unreachable target keeps the plain closest-enemy pick
+				// so the squad cannot HV-reroll itself into a thrash loop.
+				if (owner.Type == SquadCAType.Harass && !owner.IsTargetValid && !FindNewTarget(owner, highValueCheck: true, riskCheck: true))
 				{
 					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
 					return;
+				}
+				else if (owner.Type != SquadCAType.Harass || owner.IsTargetValid)
+				{
+					var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
+					if (targetActor != null)
+						owner.TargetActor = targetActor;
+					else
+					{
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+						return;
+					}
 				}
 			}
 
@@ -351,9 +497,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				var targetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
 
 				// 6e risk routing: coarse waypoints that skirt remembered threat,
-				// when a router answers. Guerrillas keep their harass routes —
-				// unpredictability is the point there.
-				if (owner.Type != SquadCAType.Guerrilla)
+				// when a router answers. Guerrillas and harassers keep their harass
+				// routes — unpredictability is the point there.
+				if (owner.Type != SquadCAType.Guerrilla && owner.Type != SquadCAType.Harass)
 					currentRoute = owner.SquadManager.RouteAroundThreat(leader.Actor, targetCell);
 
 				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
@@ -362,7 +508,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var maxRoutes = 2;
 					var useIndirectRoutes = false;
 
-					if (owner.Type == SquadCAType.Guerrilla)
+					if (owner.Type == SquadCAType.Harass)
+						maxRoutes = owner.SquadManager.Info.HarassRouteCount;
+					else if (owner.Type == SquadCAType.Guerrilla)
 						maxRoutes = 3;
 					else if (owner.SquadManager.Info.IndirectRouteChance > 0 && owner.World.LocalRandom.Next(100) < owner.SquadManager.Info.IndirectRouteChance)
 					{
@@ -374,7 +522,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					{
 						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
 
-						if (owner.Type == SquadCAType.Guerrilla)
+						if (owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
 							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
 						else if (useIndirectRoutes)
 							routes = routes.Skip(1).ToList();
@@ -489,6 +637,46 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		public void Deactivate(SquadCA owner) { owner.SquadManager.DismissSquad(owner); }
+	}
+
+	class HarasserUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			// The harasser launch quorum (upstream CA): a trickle of one or two
+			// raiders is a waste — wait for a squad that can hurt a harvester line.
+			if (!ShouldHarass(owner.Units.Count, owner.SquadManager.Info.HarassMinLaunchSize, owner.World.LocalRandom.Next(100)))
+				return;
+
+			// High-value targets first (harvester lines, expansions), through the
+			// 6c risk gate — a harasser raid still should not suicide.
+			if (!owner.IsTargetValid && !FindNewTarget(owner, highValueCheck: true, riskCheck: true))
+				return;
+
+			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+		}
+
+		internal static bool ShouldHarass(int count, int minSize, int roll)
+		{
+			if (count < minSize)
+				return false;
+
+			// Just past the quorum the launch is a roll; a full wing always goes.
+			if (count == minSize)
+				return roll < 5;
+
+			if (count == minSize + 1)
+				return roll < 10;
+
+			return true;
+		}
+
+		public void Deactivate(SquadCA owner) { }
 	}
 
 	class GuerrillaUnitsHitState : GroundStateBaseCA, IState

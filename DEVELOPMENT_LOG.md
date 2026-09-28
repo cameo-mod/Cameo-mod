@@ -13345,3 +13345,29 @@ been rewritten UTF-16 by a PowerShell redirect earlier; restored to ASCII.
 
 **Next:** monitor #517/#529 merges; when #523 lands verify `cabal_ravager`
 got `Garrisoner.GarrisonType: Infantry` (G4 will flag it otherwise).
+
+**Done (2026-09-27, ember-ai6a):** #577 review fixes per Claude's findings.
+(1) StageTimeoutTicks now a WorldTick deadline (was decrementing per
+squad Update -> 50-100x over-wait). (2) Staging rally skips buildings
+farther from the target than the squad already is (no backward rally).
+(3) SupportUnitTypes: dropped all 5x38 dead central ids from ai.yaml;
+support is now derived at RulesetLoaded — an Armament whose weapon has
+a negative-Damage DamageWarhead valid on Allies marks the carrier as
+heal/repair support (packs contribute their own via rules; field kept
+as escape hatch). Gates: 253/253 tests, squad gate PASS via scratch bin
+(C:/tmp/ember-hr; records=8 squads=1 units=6 tick1201), boot-gate PASS.
+Two exception logs during the round were own bad-arg launches, not game.
+
+**Done (EMBER, 2026-09-28, harasser port + JoinGuerrilla=0 fix):**
+ `SquadCAType.Harass` — upstream CA harasser behind default-off fields
+ (`HarasserTypes` empty = off; `HarassMinLaunchSize`/`HarassRouteCount`/
+ `HarassPriorityTags` keep CA yaml-sync lossless). Quorum launch
+ (min→5%, min+1→10%, above→always), HV-first retargets via
+ `FindNewTarget(highValueCheck, riskCheck)`, 12-route flank pick,
+ `RouteAroundThreat` exemption. `FindNewUnits` checks `HarasserTypes`
+ before `GuerrillaTypes` (deterministic membership, disjoint lists).
+ Also fixed: `guerrillaForce == null` short-circuited `JoinGuerrilla` —
+ `JoinGuerrilla: 0` still formed a squad; now the roll gates creation.
+ Gates run on a scratch bin copy (`C:/tmp/ember-hr`) because DAWN's
+ `--check-yaml` holds the shared `engine/bin`: compile clean, squad-gate
+ equivalent PASS (squads=1, units=6, tick 1201), boot-gate PASS.
