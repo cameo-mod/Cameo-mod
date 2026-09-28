@@ -193,9 +193,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		static void AppendRelationships(StringBuilder builder, World world, OpenRA.Player subject, string property, bool allies, bool first = false)
 		{
 			AppendArrayPropertyStart(builder, property, first);
+			// Evaluate stances from the masks assigned at world creation rather than
+			// Player.IsAlliedWith: once the match resolves, decided players report
+			// Spectating (WinState != Undefined) and IsAlliedWith short-circuits to
+			// ally on non-mission maps, which would record every loser as an ally.
 			var relationships = world.Players
 				.Where(IsEligiblePlayer)
-				.Where(p => p != subject && p.IsAlliedWith(subject) == allies)
+				.Where(p => p != subject && p.AlliedPlayersMask.Overlaps(subject.PlayerMask) == allies)
 				.OrderBy(p => p.InternalName, StringComparer.Ordinal)
 				.ToArray();
 
@@ -276,13 +280,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		static bool IsEligiblePlayer(OpenRA.Player player)
 		{
-			return !player.NonCombatant && player.Playable;
+			// Player.NonCombatant only applies to map-side players: the lobby-client
+			// branch of the Player ctor ignores it, so a map-declared inert slot
+			// (e.g. the ai_duel referee) occupied by a real client keeps its intent
+			// only in PlayerReference. Honor the declared flag here so such slots
+			// never leak into opponents/allies and break the 1v1 contract.
+			// Map-declared bots are never Playable (only lobby clients are), but a
+			// headless bot-vs-bot match still fights real opponents, so IsBot
+			// admits them where Playable cannot.
+			return !player.NonCombatant && !player.PlayerReference.NonCombatant && (player.Playable || player.IsBot);
 		}
 
 		// Map-declared bots are real bot players even when they are not playable lobby slots.
+		// Same declared-intent rule as IsEligiblePlayer: a lobby-occupied slot ignores
+		// Player.NonCombatant, so PlayerReference.NonCombatant is what keeps an inert
+		// bot slot (or a hypothetical declared-noncombatant bot) out of the log.
 		internal static bool IsLoggableBot(OpenRA.Player player)
 		{
-			return player.IsBot && !player.NonCombatant;
+			return player.IsBot && !player.NonCombatant && !player.PlayerReference.NonCombatant;
 		}
 
 		static string Outcome(WinState state)
