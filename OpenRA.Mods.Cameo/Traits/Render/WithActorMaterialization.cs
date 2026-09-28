@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -75,11 +76,11 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		readonly WithActorMaterializationInfo info;
 		readonly bool skipForward;
-		readonly float3 silhouetteTint;
-		readonly float3 saberCoreTint;
-		readonly float3 saberInnerGlowTint;
-		readonly float3 saberOuterGlowTint;
-		readonly float3 saberAfterglowTint;
+		readonly Vector3 silhouetteTint;
+		readonly Vector3 saberCoreTint;
+		readonly Vector3 saberInnerGlowTint;
+		readonly Vector3 saberOuterGlowTint;
+		readonly Vector3 saberAfterglowTint;
 		readonly float silhouetteAlpha;
 		readonly float saberCoreAlpha;
 		readonly float saberInnerGlowAlpha;
@@ -114,11 +115,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.info = info;
 			skipForward = (info.RespectSkipMakeAnims && init.Contains<SkipMakeAnimsInit>(info))
 				|| (info.OnlyProducedActors && !init.GetValue<MaterializingProductionInit, bool>(false));
-			silhouetteTint = new float3(info.SilhouetteColor.R, info.SilhouetteColor.G, info.SilhouetteColor.B) / 255f;
-			saberCoreTint = new float3(info.SaberCoreColor.R, info.SaberCoreColor.G, info.SaberCoreColor.B) / 255f;
-			saberInnerGlowTint = new float3(info.SaberInnerGlowColor.R, info.SaberInnerGlowColor.G, info.SaberInnerGlowColor.B) / 255f;
-			saberOuterGlowTint = new float3(info.SaberOuterGlowColor.R, info.SaberOuterGlowColor.G, info.SaberOuterGlowColor.B) / 255f;
-			saberAfterglowTint = new float3(info.SaberAfterglowColor.R, info.SaberAfterglowColor.G, info.SaberAfterglowColor.B) / 255f;
+			silhouetteTint = new Vector3(info.SilhouetteColor.R, info.SilhouetteColor.G, info.SilhouetteColor.B) / 255f;
+			saberCoreTint = new Vector3(info.SaberCoreColor.R, info.SaberCoreColor.G, info.SaberCoreColor.B) / 255f;
+			saberInnerGlowTint = new Vector3(info.SaberInnerGlowColor.R, info.SaberInnerGlowColor.G, info.SaberInnerGlowColor.B) / 255f;
+			saberOuterGlowTint = new Vector3(info.SaberOuterGlowColor.R, info.SaberOuterGlowColor.G, info.SaberOuterGlowColor.B) / 255f;
+			saberAfterglowTint = new Vector3(info.SaberAfterglowColor.R, info.SaberAfterglowColor.G, info.SaberAfterglowColor.B) / 255f;
 			silhouetteAlpha = info.SilhouetteColor.A / 255f;
 			saberCoreAlpha = info.SaberCoreColor.A / 255f;
 			saberInnerGlowAlpha = info.SaberInnerGlowColor.A / 255f;
@@ -277,7 +278,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		IRenderable SaberOffsetLayer(WorldRenderer wr, IModifyableRenderable modifier, Rectangle sharedBounds,
-			float progress, uint actorId, int jitterPhase, float3 tint, float alpha, int height, int2 screenOffset)
+			float progress, uint actorId, int jitterPhase, Vector3 tint, float alpha, int height, int2 screenOffset)
 		{
 			var origin = wr.ProjectedPosition(int2.Zero);
 			var target = wr.ProjectedPosition(screenOffset);
@@ -288,7 +289,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		MaterializationClipRenderable SaberLayer(IModifyableRenderable modifier, Rectangle sharedBounds,
-			float progress, uint actorId, int jitterPhase, float3 tint, float alpha, int height, int offset)
+			float progress, uint actorId, int jitterPhase, Vector3 tint, float alpha, int height, int offset)
 		{
 			return new MaterializationClipRenderable(
 				modifier.WithTint(tint,

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Numerics;
 using OpenRA.Activities;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Traits;
@@ -83,8 +84,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly WithSpriteBody[] bodies;
 		readonly RenderSprites renderSprites;
 		readonly bool skipForward;
-		readonly float3 silhouetteTint;
-		readonly float3 electricTint;
+		readonly Vector3 silhouetteTint;
+		readonly Vector3 electricTint;
 		readonly float silhouetteAlpha;
 		readonly float electricAlpha;
 
@@ -104,8 +105,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			bodies = self.TraitsImplementing<WithSpriteBody>().Where(w => info.BodyNames.Contains(w.Info.Name)).ToArray();
 			renderSprites = self.Trait<RenderSprites>();
 			skipForward = info.RespectSkipMakeAnims && init.Contains<SkipMakeAnimsInit>(info);
-			silhouetteTint = new float3(info.SilhouetteColor.R, info.SilhouetteColor.G, info.SilhouetteColor.B) / 255f;
-			electricTint = new float3(info.ElectricColor.R, info.ElectricColor.G, info.ElectricColor.B) / 255f;
+			silhouetteTint = new Vector3(info.SilhouetteColor.R, info.SilhouetteColor.G, info.SilhouetteColor.B) / 255f;
+			electricTint = new Vector3(info.ElectricColor.R, info.ElectricColor.G, info.ElectricColor.B) / 255f;
 			silhouetteAlpha = info.SilhouetteColor.A / 255f;
 			electricAlpha = info.ElectricColor.A / 255f;
 		}
@@ -375,7 +376,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool IsDecoration => inner.IsDecoration;
 		public PaletteReference Palette => ((IPalettedRenderable)inner).Palette;
 		public float Alpha => inner.Alpha;
-		public float3 Tint => inner.Tint;
+		public Vector3 Tint => inner.Tint;
 		public TintModifiers TintModifiers => inner.TintModifiers;
 
 		public IRenderable WithZOffset(int newOffset)
@@ -408,7 +409,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			return Wrap(inner.WithAlpha(newAlpha));
 		}
 
-		public IModifyableRenderable WithTint(in float3 newTint, TintModifiers newTintModifiers)
+		public IModifyableRenderable WithTint(in Vector3 newTint, TintModifiers newTintModifiers)
 		{
 			return Wrap(inner.WithTint(newTint, newTintModifiers));
 		}
