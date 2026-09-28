@@ -1,6 +1,8 @@
 """Exact regression coverage for the Armored Car's retired 10% modifier."""
 
 from fractions import Fraction
+import hashlib
+import json
 import pathlib
 import sys
 import unittest
@@ -18,9 +20,30 @@ WEAPONS = (
     "ArmoredCarMGAAWaveforce",
 )
 
+# Every resolved runtime field except Damage and PercentageDenominator: targeting, cadence, projectile,
+# versus tables, effects. Re-pinned 2026-09-28 on the post-W24 layout (the pre-bake pins went stale when
+# the bullet and railgun warheads folded into one main); change them only with a reviewed resolve diff.
+NON_DAMAGE_HASHES = {
+    "ArmoredCarMG": "70574046aff059fd72ae33e11abb592123c502bedde15dea0c819b92e68625f5",
+    "ArmoredCarMG_AA": "97401fc1df7de321de40f3155ed61bba866dd229aa2d425eb43297923fdc3522",
+    "ArmoredCarMGWaveforce": "b005aa259a98a9da26c89676ed24ba09d88c88d99959b7fd38f315665a20d1cc",
+    "ArmoredCarMGAAWaveforce": "5d7c0501be6ce9e808d1114f26939742fc880dc4f5d1406faab711374274c389",
+}
+
 
 def child(node, key):
     return next((item for item in node.children if item.key == key), None)
+
+
+def non_damage_payload(node):
+    payload = {"key": node.key, "value": node.value, "children": []}
+    for item in node.children:
+        if node.value in {
+            "AreaDamage", "SpreadDamage", "TargetDamage", "AreaDamagePercentage"
+        } and item.key in {"Damage", "PercentageDenominator"}:
+            continue
+        payload["children"].append(non_damage_payload(item))
+    return payload
 
 
 class JapanArmoredCarFirepowerBakeTests(unittest.TestCase):
@@ -64,6 +87,15 @@ class JapanArmoredCarFirepowerBakeTests(unittest.TestCase):
                             ),
                             warhead.key,
                         )
+
+    def test_targeting_cadence_and_all_other_weapon_fields_are_unchanged(self):
+        for weapon_name, expected in NON_DAMAGE_HASHES.items():
+            with self.subTest(weapon=weapon_name):
+                payload = non_damage_payload(self.rules.resolve_weapon(weapon_name))
+                digest = hashlib.sha256(json.dumps(
+                    payload, sort_keys=True, separators=(",", ":")
+                ).encode()).hexdigest()
+                self.assertEqual(expected, digest)
 
 
 if __name__ == "__main__":
