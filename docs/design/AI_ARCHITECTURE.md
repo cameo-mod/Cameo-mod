@@ -40,6 +40,49 @@ The second point is the single most important finding in this document. It also 
 feints and hidden tech meaningful, and it is what the whole opponent-modelling literature in §8
 is about.
 
+### 0a. The acceptance test (maintainer rulings, 2026-09-27)
+
+> *"The new Frankenstein monster AI with no map wide vision [must be] able to beat our existing AI of
+> the same difficulty level with map wide vision … every time with any faction. … At least as a
+> first step it should win with the same faction on both sides. Later any match up."*
+
+The program is done when this test passes. It is binding and still **unmeasured** (status below).
+
+| | ruling |
+|---|---|
+| **Candidate** | the new bot (the CA × RV × CN × Fransbot merge), with **no map-wide vision**: every module reads the world only through what its player can see or remembers (§3.1). |
+| **Opponent** | the existing bot **at the same difficulty**, **with** map-wide vision, i.e. today's omniscient squad targeting (§0 point 2). |
+| **Pass** | the candidate wins **at least 16 of 20** matches, one match per map. |
+| **Maps** | the **20 two-player maps in the `Tournament` category**, ordered by player count, then title. There are 21; **Twin Lakes CAMEO** is left out. |
+| **Stage 1** | the same faction on both sides. |
+| **Stage 2** | any match-up: every faction against every faction. |
+
+The 20 maps (measured 2026-09-28 from each map's `Categories:`, `Title:` and `Playable: True`
+count; file in brackets):
+
+1. 16:9 (`16-9.oramap`) · 2. 420 blaze it (`420bzt`) · 3. A Nuclear Winter (`_ra_a-nuclear-winter`) ·
+4. Alpine Assault (`AlpineAssault`) · 5. Bombshell Beach (`BombshellBeach`) · 6. Death Valley
+(`DeathValley`) · 7. Frozen Rift CAMEO (`frozen_rift_cameo`) · 8. Model 200 (`model-200`) ·
+9. Mountain Pass (`MountainPass`) · 10. Northern Lights CAMEO (`NL04`) · 11. Only Blood Is Accepted
+(`Only_Blood_Is_Accepted_1v1_BI-4.4`) · 12. Pitfight (`_ra_pitfight`) · 13. Plan B (`plan-b`) ·
+14. Proto Blood (`proto_map_blood`) · 15. Proto Desert Night (`proto_map_desert_night`) ·
+16. Proto Mediterranean Conflict (`proto_map_mediterranean`) · 17. Proto Snow (`proto_map_snow`) ·
+18. Satan's Clutch (`SatansClutch`) · 19. Snowy Woodlands (`SnowyWoodlands`) · 20. Ysmir (`_ra_ysmir`)
+
+**Status 2026-09-28: the test cannot be run yet.** Two pieces are missing from master:
+1. **A fog-honesty check.** Nothing verifies "no map-wide vision" across *all* modules;
+   `MasterAiBotModule.UseFoggedObservation: true` (`mods/cameo/ai/ai.yaml`) covers only the modules
+   that consume the fogged provider, and the squad manager still scans `World.Actors` (§0 point 2).
+2. **A match runner** that plays one match per map and records the winner. DAWN's #578 branch has a
+   Fransbot versus map; nothing on master plays the 20-map set.
+
+Also, **the candidate must first be able to play every faction.** On 2026-09-28 an Atreides bot
+starting from a bare construction yard still built nothing (the power, barracks and production lists
+lack the D2k and Outpost2 ids; #588 and the next list-rollout roles fix this).
+
+Speed for the runs: `GameSpeed: insane` with the dropdown locked and adaptive speed off (see
+`LESSONS_LEARNED.md`), and later `maximum` once the runs are unattended tuning.
+
 ---
 
 ## 1. Verified facts

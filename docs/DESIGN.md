@@ -1541,6 +1541,18 @@ YAML remains an explicit design decision.
   (`OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs`), and hides any hand-written
   `Strong vs` / `Weak vs` line in the description. **Do not write new ones.** Check what the
   tooltip will say with `utility.cmd cameo --versus-summary [actor ...]`.
+  ⭐ **GROUPS, not armour rungs (maintainer 2026-09-28, #593).** The lines read
+  `• Strong vs. Tanks (188%), Vehicles (167%)` / `• Medium vs. …` / `• Weak vs. …`:
+  * **Groups:** Infantry, Heroes (`Heroic` armour), Vehicles, Tanks (the six tank class templates:
+    MainBattleTank, HighTechTank, Dreadnought, TankDestroyer, ArtilleryTank, LightTank), Ships,
+    Submarines (Underwater-targetable), Buildings, Defenses (armed buildings), Aircraft.
+    **Ships and Submarines appear only when the lobby's Naval Units option is on.**
+  * **Number:** the geometric mean of the unit's strongest weapon's Versus over the armour the
+    group's buildable members WEAR, each armour weighted by its wearer count. Unweighted, Tanks
+    and Vehicles would always show the same number.
+  * **Bands:** Strong >= 125, Medium 80–124, Weak < 80 (symmetric on the geometric scale).
+  * A group the unit cannot hit closes the Weak line with its reason: `(cannot attack ground |
+    air | water | underwater)`, or the missed class when the unit hits some land group.
 - Upgrade descriptions open with the tier tag ("Tech Upgrade (Only affects
   units of own faction)" / "Team Upgrade (…)" / "Promotion Upgrade (…)"),
   then one effect per line with exact stats and affected units (grouped
@@ -4161,6 +4173,22 @@ takes. **Heroic is the single exception** (rule 4).
 | `ShipHeavy` | `Heavy` x `Steel` | NAV | heavy ships |
 | `ShipSuperheavy` | `Superheavy` x `Steel` | NAV | capital ships (battleships, carriers) |
 | `AntiAirShip` | `ShipLight` x `ShipMedium` | NAV | anti-air ships (50% from air weapons, rule 3) |
+| `SubmarineLight` | `ShipMedium` x `Heavy` | NAV | light submarines (added 2026-09-28, rule 3b) |
+| `SubmarineHeavy` | `ShipHeavy` x `Superheavy` | NAV | heavy submarines (added 2026-09-28, rule 3b) |
+
+**Rule 3b — SUBMARINES (maintainer 2026-09-28).** Submarines get their own derived types, "like
+the cyborgs", each tougher than a surface ship of its class (a pressure hull):
+`SubmarineLight = ShipMedium x Heavy`, `SubmarineHeavy = ShipHeavy x Superheavy`, by rule 1's
+geomean (maintainer 2026-09-28 revised the light parent from `Medium` to `Heavy`; measured over
+1,594 weapon tables it ties with `SubmarineHeavy` in 53 against 72, at the same median gap). The anti-submarine bonus is a visible row, as in rule 3: **`AntiSub`** (depth charges,
+§12.0k item 5) ranks both `Submarine*` rows FIRST; **`Torpedo`** (anti-ship) ranks the `Ship*`
+rows first and the `Submarine*` rows SECOND; every other family writes the plain geomean. It lands
+when §12.0k item 5 builds those two families. Measured on `c5390178d`: 20 units are
+Underwater-targetable (wearing Medium 8, Heavy 7, Light 3, None 2), and 22 fired weapons can hit
+underwater: torpedoes filed as `MissileAP` (7) and `MissileHE` (2), depth charges as `Demolition`
+(5) and `BlastCryo` (2). Membership is reviewed per unit, like the cyborg list. Adding the two
+types touches the generator, `HeavinessBell.cs` and `effective_heaviness.py` together
+(`test_derived_armor_types.py` pins all three to one list).
 
 Ships are the new NAVAL ladder (maintainer 2026-09-26: a hull is part vehicle, part floating
 structure, so each ship type pairs a vehicle rung with a building rung); it is also the ladder the

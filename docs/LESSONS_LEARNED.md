@@ -11,6 +11,26 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches
+
+`Ruleset.cs:130` builds every actor as `new ActorInfo(..., k.Key.ToLowerInvariant(), ...)`, so the
+yaml key `EDEN_SMELTER_COMMON` becomes `eden_smelter_common` in the engine. Bot lists are compared
+case-sensitively (`Info.RefineryTypes.Contains(a.Info.Name)`), so writing the yaml spelling into a
+`*Types` list or a dictionary row is silently dead: no error, no warning, nothing at boot.
+**588 actors** have uppercase letters in their yaml key (legacy ids such as `E1`, `NUKE`, `SILO`,
+plus the `EDEN_*` / `PLYMOUTH_*` Outpost 2 set; measured 2026-09-28). On master only one AI entry
+spells one of them in uppercase: `RAPT: 3` in `UnitBuilderBotModuleCA@generic` → `UnitsToBuild`.
+PR #588 wrote 41 uppercase Outpost 2 ids into the central `ai.yaml` and 76 into the Outpost2 pack,
+and its own production gate (bot on `eden`) stayed at **2 actors**; lowercasing only those ids gave
+**22**. **Write actor ids in lowercase in every AI list.** `BotRoleSets` derives from `ActorInfo.Name`, which is already lowercase, so derived roles are
+immune. A related trap: the Python resolver (`miniyaml.Ruleset`) keeps the yaml spelling, so a
+Python check must lowercase before comparing with anything the engine logs (`bot-roles.log`).
+
+A second lesson from the same review: a runtime gate that starts the bot with a finished base
+(power, refinery, factory already placed) cannot see a list that blocks the FIRST building. #587's
+refinery/conyard A/B passed that way, while a bot starting from a bare construction yard still built
+nothing. Start economy gates from a bare construction yard.
+
 ### 2026-09-27 — Claude: a test map at `GameSpeed: insane` still runs at Normal unless you lock it AND drop AdaptiveGameSpeed
 
 Runtime gates are tick-based, so running them faster changes wall-clock time only. The maintainer's
