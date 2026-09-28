@@ -139,7 +139,7 @@ the axes:
 | `Temperature` | 1592 | **98.6%** |
 | `Corrosion` | 839 | **52.1%** |
 
-A corrosion weapon does nothing at all to 47.9% of priced actors. Claims: `corrosion_meter_actors` = **839** and `meters_filling_before_death` = **328**, re-measured 2026-09-27 on `devin/nova/w7-packs` post-merge.
+A corrosion weapon does nothing at all to 47.9% of priced actors. Claims: `corrosion_meter_actors` = **839** and `meters_filling_before_death` = **328**, re-measured 2026-09-27 on `devin/nova/w7-packs` post-merge. **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): `corrosion_meter_actors` = 856, `meters_filling_before_death` = 329 (the table above is as of 2026-09-27).**
 
 ### E2 pricing — the rule as built
 
