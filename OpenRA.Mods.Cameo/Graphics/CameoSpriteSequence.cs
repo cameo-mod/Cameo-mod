@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cnc.Graphics;
 using OpenRA.Mods.Common.Graphics;
@@ -155,7 +156,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 					var dx = r.Offset.X + (r.FlipX ? -s.Offset.X : s.Offset.X);
 					var dy = r.Offset.Y + (r.FlipY ? -s.Offset.Y : s.Offset.Y);
 					var dz = r.Offset.Z + s.Offset.Z + r.ZRamp * dy;
-					var sprite = new Sprite(s.Sheet, FlipRectangle(s.Bounds, r.FlipX, r.FlipY), r.ZRamp, new float3(dx, dy, dz), s.Channel, r.BlendMode);
+					var sprite = new Sprite(s.Sheet, FlipRectangle(s.Bounds, r.FlipX, r.FlipY), r.ZRamp, new Vector3(dx, dy, dz), s.Channel, r.BlendMode);
 					if (depthSprite == null)
 						return sprite;
 
@@ -178,7 +179,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 					throw new YamlException($"Sequence {image}.{Name} must define either 1 or {length.Value} Alpha values.");
 			}
 			else if (alphaFade)
-				alpha = Exts.MakeArray(length.Value, i => float2.Lerp(1f, 0f, i / (length.Value - 1f))).ToImmutableArray();
+				alpha = Exts.MakeArray(length.Value, i => float.Lerp(1f, 0f, i / (length.Value - 1f))).ToImmutableArray();
 
 			// Reindex sprites to order facings anti-clockwise and remove unused frames
 			var index = CalculateFrameIndices(start, length.Value, stride ?? length.Value, facings, default, transpose, reverseFacings, -1);

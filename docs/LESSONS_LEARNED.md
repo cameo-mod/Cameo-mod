@@ -2928,6 +2928,7 @@ was observed twice in an earlier session on this same file.
 - Shared `engine/bin` is one physical directory across all worktrees — never
   trust a build/gate whose copy step raced another agent's `--check-yaml`, and
   check `Get-Process OpenRA*` before gating.
+
 ## A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)
 
 Five factions (`atreides`, `harkonnen`, `corrino`, `EDEN`, `PLYMOUTH`) shipped
@@ -2966,6 +2967,7 @@ Rules:
 - `AiMatchLogWriter`/situation records buffer until every bot's `WinState`
   resolves — a timed-out or killed match writes NOTHING. For gates, print
   progress from map lua (`Actor` counts, tick heartbeats) instead.
+
 ## `exit=1` on Windows is an external kill, not an engine exit — batch harnesses need kill resilience (2026-09-28, Nova)
 
 The headless batch (`tools/ai/run_ai_match_batch.py`) lost four matches across

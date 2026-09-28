@@ -45,6 +45,7 @@ cleanly; its only findings are the pre-existing tree-wide debt.
 Composes with Claude's §2.8 `BotRoleSets` `Apply:` rollout: `Apply` unions
 into a set type, so these hand-appended ids dedupe and the role mechanism can
 still drain the lists later. The pack-dict rows are faction-owned and stay.
+
 # 2026-09-28 — NOVA: Stage D AI-vs-AI batch harness + duel map + writer eligibility fix
 
 `tools/ai/run_ai_match_batch.py` + template map `mods/cameo/maps/ai_duel_gate_20260928/`:
