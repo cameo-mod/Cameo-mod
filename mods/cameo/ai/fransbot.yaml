@@ -24,6 +24,12 @@ Player:
 		RequiresCondition: enable-fransbot
 	FransStrategicMapBotModule:
 		RequiresCondition: enable-fransbot
+		# Representative actors whose locomotives derive the passability layers.
+		# All ContentPacks are unconditionally Included today, so TD/RA picks
+		# always resolve; a missing actor leaves that layer inert by design.
+		GroundProbeActorType: td_gdi_battletank
+		McvProbeActorType: td_gdi_mobileconstructionvehicle
+		NavalProbeActorType: ra1_allies_gunboat
 	FransRiskModelBotModule:
 		RequiresCondition: enable-fransbot
 	FransMineClusterBotModule:
