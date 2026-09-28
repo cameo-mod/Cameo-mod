@@ -20,7 +20,7 @@ entry, and only its first step had started. Measured on master `c5390178d`:
 forbids step 3 before that. The biggest files: RA Soviets 2,808 rows, Consortium 1,768, Syndicate
 1,755, Japan 1,599, Asian Alliance 1,534, RA2 Shared 1,523. Tools and order are in
 `TASK_INDEX.md` → "Derived armour types". **Two more types were ruled 2026-09-28:**
-`SubmarineLight` (ShipMedium x Medium) and `SubmarineHeavy` (ShipHeavy x Superheavy), with the
+`SubmarineLight` (ShipMedium x Heavy) and `SubmarineHeavy` (ShipHeavy x Superheavy), with the
 AntiSub-first / Torpedo-second bonus (§12.0l rule 3b). They enter step 1 before any lane starts,
 so every table is derived once. The rocket soldiers wear `None` today (#450's interim rule:
 only Scout and Special Forces carry Flak); §12.0l moves them to `AntiAirInfantry` at step 3.

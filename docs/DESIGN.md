@@ -4173,13 +4173,14 @@ takes. **Heroic is the single exception** (rule 4).
 | `ShipHeavy` | `Heavy` x `Steel` | NAV | heavy ships |
 | `ShipSuperheavy` | `Superheavy` x `Steel` | NAV | capital ships (battleships, carriers) |
 | `AntiAirShip` | `ShipLight` x `ShipMedium` | NAV | anti-air ships (50% from air weapons, rule 3) |
-| `SubmarineLight` | `ShipMedium` x `Medium` | NAV | light submarines (added 2026-09-28, rule 3b) |
+| `SubmarineLight` | `ShipMedium` x `Heavy` | NAV | light submarines (added 2026-09-28, rule 3b) |
 | `SubmarineHeavy` | `ShipHeavy` x `Superheavy` | NAV | heavy submarines (added 2026-09-28, rule 3b) |
 
 **Rule 3b — SUBMARINES (maintainer 2026-09-28).** Submarines get their own derived types, "like
-the cyborgs", each ONE RUNG HEAVIER than a surface ship of its class (a pressure hull):
-`SubmarineLight = ShipMedium x Medium`, `SubmarineHeavy = ShipHeavy x Superheavy`, by rule 1's
-geomean. The anti-submarine bonus is a visible row, as in rule 3: **`AntiSub`** (depth charges,
+the cyborgs", each tougher than a surface ship of its class (a pressure hull):
+`SubmarineLight = ShipMedium x Heavy`, `SubmarineHeavy = ShipHeavy x Superheavy`, by rule 1's
+geomean (maintainer 2026-09-28 revised the light parent from `Medium` to `Heavy`; measured over
+1,594 weapon tables it ties with `SubmarineHeavy` in 53 against 72, at the same median gap). The anti-submarine bonus is a visible row, as in rule 3: **`AntiSub`** (depth charges,
 §12.0k item 5) ranks both `Submarine*` rows FIRST; **`Torpedo`** (anti-ship) ranks the `Ship*`
 rows first and the `Submarine*` rows SECOND; every other family writes the plain geomean. It lands
 when §12.0k item 5 builds those two families. Measured on `c5390178d`: 20 units are
