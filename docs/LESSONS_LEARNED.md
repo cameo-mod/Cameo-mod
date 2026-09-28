@@ -3074,7 +3074,7 @@ the PR MERGED without touching master (#605 → claude/bot_difficulty_scale
 after it landed as #602). Check `baseRefName` and verify the merge commit is
 an ancestor of master before calling it landed.
 
-### `EnabledByDefault` is not set yet inside another trait's `RulesetLoaded` (2026-09-28)
+## `EnabledByDefault` is not set yet inside another trait's `RulesetLoaded` (2026-09-28)
 
 `ConditionalTraitInfo.EnabledByDefault` is assigned in that trait's OWN `RulesetLoaded`. Code that runs in a
 DIFFERENT actor's `RulesetLoaded` (e.g. `BotRoleSets` on the Player, scanning every actor's armaments) can run
