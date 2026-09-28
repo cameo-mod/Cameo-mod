@@ -1586,7 +1586,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (actor == null || !actor.IsInWorld || actor.IsDead ||
 					actor.OccupiesSpace == null ||
 					actor.Info.TraitInfoOrDefault<BuildingInfo>() != null ||
-					actor.Info.TraitInfoOrDefault<AttackBaseInfo>() == null)
+					!actor.Info.HasTraitInfo<AttackBaseInfo>())
 					continue;
 
 				var id = SectorIdForCell(actor.Location);

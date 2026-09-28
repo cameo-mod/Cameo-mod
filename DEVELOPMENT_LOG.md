@@ -53,6 +53,9 @@ stay in DAWN's lane; `ResourceMapBotModule` needs the engine pipeline):
   through to assault tags).
 - `ModularBot` picks the action-budget provider with `FirstEnabledTraitOrDefault`
   (matching the squad manager).
+- `FransStrategicMapBotModule` strategic metrics: `TraitInfoOrDefault<AttackBaseInfo>`
+  -> `HasTraitInfo<AttackBaseInfo>` — same crash class as the #554 attackbuggy fix
+  (multi-instance trait), the only such site among ~100 siblings.
 
 **Fog-honesty**
 - `CratePickupBotModule` path enemy-avoidance only counts enemies visible to the
