@@ -18,10 +18,10 @@ namespace OpenRA.Mods.CA.Traits
 	/// acting on the same tick (humans move groups one after another).
 	///
 	/// Implemented by <c>HumanPaceBotModule</c>, which lives in OpenRA.Mods.Cameo
-	/// and must not be referenced by name from this assembly. Producer only until
-	/// the consumption lane lands: order-issuing call sites consult
-	/// <see cref="TryConsumeActions"/> before <c>IBot.QueueOrder</c> and
-	/// <see cref="TryConsumeAttention"/> before starting a decision.
+	/// and must not be referenced by name from this assembly. Consumers: the
+	/// Cameo <c>ModularBot</c> shadow consults <see cref="TryConsumeActions"/>
+	/// while draining its order queue, and <c>SquadManagerBotModuleCA</c>
+	/// consults <see cref="TryConsumeAttention"/> before each squad's update.
 	/// </summary>
 	public interface IBotActionBudget
 	{
