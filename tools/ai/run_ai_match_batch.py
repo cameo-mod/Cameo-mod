@@ -567,6 +567,40 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
+SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "BotA": 0, "BotB": 1}
+
+
+def ab_scoreboard(results: list[dict]) -> dict:
+    """Head-to-head table keyed by ordered (bot_type, enemy_bot_type) pairs.
+
+    Each duel writes one record per side; both perspectives land in their
+    own ordered row, so the board stays symmetric. Exact duplicates (same
+    record_id) are skipped. Values are {"won", "lost", "spawn"} - the spawn
+    axis keeps the A/B honest about start-position asymmetry.
+    """
+    seen_records: set[str] = set()
+    board: dict[tuple[str, str], dict] = {}
+    for result in results:
+        for record in result.get("bot_outcomes") or []:
+            record_id = str(record.get("record_id") or "")
+            if not record_id or record_id in seen_records:
+                continue
+            seen_records.add(record_id)
+            player = record
+            opponent = record.get("opponent") or {}
+            outcome = player.get("outcome")
+            if outcome not in ("won", "lost"):
+                continue
+            key = (str(player.get("bot_type")), str(opponent.get("bot_type")))
+            cell = board.setdefault(key, {"won": 0, "lost": 0, "spawn": {}})
+            cell["won" if outcome == "won" else "lost"] += 1
+            spawn = player.get("spawn")
+            if spawn is not None:
+                side = cell["spawn"].setdefault(str(spawn), [0, 0])
+                side[0 if outcome == "won" else 1] += 1
+    return {f"{a} vs {b}": cell for (a, b), cell in sorted(board.items())}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
@@ -701,6 +735,20 @@ def main() -> int:
             "wall_seconds": elapsed,
             "records": len(records),
             "outcomes": outcome,
+            "bot_outcomes": [
+                {
+                    "record_id": r.get("record_id"),
+                    "bot_type": (r.get("player") or {}).get("bot_type"),
+                    "outcome": (r.get("player") or {}).get("outcome"),
+                    # player.spawn is the lobby SpawnPoint — 0 for map-side
+                    # duelists. The physical spawn is the slot binding:
+                    # Multi0/BotA -> index 0, Multi1/BotB -> index 1.
+                    "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
+                                                   (r.get("player") or {}).get("spawn")),
+                    "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
+                }
+                for r in records
+            ],
         }
         if new_exc:
             result["new_exceptions"] = new_exc
@@ -715,6 +763,7 @@ def main() -> int:
             print(f"    OpenRA output tail:\n{output_tail(output)}")
 
     new_exceptions = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exceptions_before)
+    scoreboard = ab_scoreboard(results)
     summary = {
         "support_dir": str(support),
         "matches": len(matchups),
@@ -724,6 +773,7 @@ def main() -> int:
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
+        "scoreboard": scoreboard,
         "results": results,
     }
     (support / "batch_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
@@ -733,7 +783,13 @@ def main() -> int:
         f"{summary['timed_out']} timeout, {summary['stalled']} stalled, "
         f"{summary['died']} died ({summary['retried']} retried), exceptions={new_exceptions or 'none'}"
     )
+    if scoreboard:
+        print("\nA/B scoreboard (decided 1v1s, deduplicated by game):")
+        for pairing, cell in scoreboard.items():
+            spawn_note = ", ".join(f"spawn {s}: {w}-{l}" for s, (w, l) in sorted(cell["spawn"].items()))
+            print(f"  {pairing}: {cell['won']}-{cell['lost']}" + (f"  ({spawn_note})" if spawn_note else ""))
     print(f"records appended to {log_path}; aggregate with tools/ai/aggregate_ai_matches.py")
+    print(f"win-rate + Wilson interval per bot type: tools/ai/ab_summary.py {support}")
 
     if not args.keep_variants:
         for name in variants:

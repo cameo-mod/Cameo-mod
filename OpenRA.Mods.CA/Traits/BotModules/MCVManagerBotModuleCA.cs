@@ -66,11 +66,18 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var t in i.ResourceTypes)
 					resourceTypeIndices.Set(ti.GetTerrainIndex(t.Value.TerrainType), true);
 
-			var randomConstructionYard = constructionYards.Actors.RandomOrDefault(world.LocalRandom);
+			var randomConstructionYard = constructionYards.Actors.Where(a => !a.IsDead).RandomOrDefault(world.LocalRandom);
+			if (randomConstructionYard == null)
+				return initialBaseCenter;
 
 			var newResources = world.Map.FindTilesInAnnulus(randomConstructionYard.Location, Info.MaxBaseRadius, world.Map.Grid.MaximumTileSearchRange)
 				.Where(a => resourceTypeIndices.Get(world.Map.GetTerrainIndex(a)))
 				.Shuffle(world.LocalRandom).FirstOrDefault();
+
+			// FirstOrDefault yields default(CPos) — the map corner — on depleted maps or when
+			// the world has no ResourceLayerInfo. Upstream falls back to a base location.
+			if (newResources == default(CPos))
+				return randomConstructionYard?.Location ?? initialBaseCenter;
 
 			return newResources;
 		}
@@ -166,7 +173,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void DeployMcvs(IBot bot, bool chooseLocation)
 		{
-			var newMCVs = mcvs.Actors.Where(a => a.IsIdle);
+			var newMCVs = mcvs.Actors.Where(a => a.IsIdle && !unitCannotBeOrdered(a));
 
 			foreach (var mcv in newMCVs)
 				DeployMcv(bot, mcv, chooseLocation);

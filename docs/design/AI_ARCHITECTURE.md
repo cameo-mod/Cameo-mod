@@ -918,6 +918,26 @@ weights, hence bandits with exploration rather than fixed tables), and **distrib
 11. **Do CN's hysteresis constants ship as Cameo's defaults**, or get re-fitted from phase-2 logs
     before phase 3 turns switching on? Leaning: ship CN's as the starting point, since they were
     tuned against a switching bot in this engine family, and re-fit after the first logged matches.
+12. **How does a fog-honest offense get fresh target intel?** Measured 2026-09-28 (nw-ab-5/6,
+    `FransGeneralBotModule` recon loop): ordinary RECON selects only the nearest *stale
+    MineCluster* on a geographic fan from home — there is no candidate class for "the enemy's
+    probable base". `FransMissionType` has no assault verb; `Raid` is the only offense, and
+    `TryBuildGroundRaidBid` rejects remembered-intel targets (a deliberate fog-honesty rule —
+    `FransRaidIntel` docs reserve remembered-building strikes for Sea). Result on A Nuclear
+    Winter: recon fans stall on mineral waypoints short of the enemy base, every RAID publishes
+    `bids 0`, zero enemy buildings die across six matches. The choices, in increasing size:
+    a. **Spawn-directed recon** — `Map.ActorDefinitions` `mpspawn` cells are public map data
+       (lobby-visible to every human). Add unscouted-spawn cells as a RECON candidate class
+       alongside mine clusters (same cooldown/staleness machinery, higher priority for cells
+       whose fan arm is unexplored). Fog-honest, minimal, and it is what every human does.
+    b. **Bounded remembered-building raids for ground** — permit `IsRememberedIntel` targets
+       when `IsBuilding` is true (buildings cannot move; last-seen cell stays valid), inside a
+       freshness window. Extends the Sea-only rule by one axis.
+    c. **A distinct assault/base-attack verb** — a heavier mission type with escort/consolidation
+       semantics, versus teaching Raid to fill the gap.
+    Leaning (a)+(b): they are orthogonal, both fog-honest, and together they close the
+    "no fresh targets -> no bids -> no pressure" funnel without new verbs. (c) only if the
+    combined change still cannot produce raid bids in measured matches.
 
 ---
 
@@ -957,7 +977,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**51 distinct trait types, 66 Player instances plus one World instance** (2026-09-28: #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
+**51 distinct trait types, 68 Player instances plus one World instance** (2026-09-28: #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;

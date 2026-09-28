@@ -262,6 +262,8 @@ Player:
 	ModularBot@ClassicAI:
 		Name: bot_ai.classic
 		Type: classic
+		# A/B reference only (AI_ARCHITECTURE §0a); not a lobby choice.
+		HiddenInLobby: True
 	GrantConditionOnBotOwner@classicstack:
 		Condition: classicbot
 		Bots: classic

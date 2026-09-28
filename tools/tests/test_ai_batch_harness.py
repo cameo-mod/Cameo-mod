@@ -264,5 +264,31 @@ class RecordSliceTests(unittest.TestCase):
             shutil.rmtree(tmp, ignore_errors=True)
 
 
+class ScoreboardTests(unittest.TestCase):
+    def _record(self, game_uid, slot, bot, outcome, enemy, spawn):
+        return {
+            "record_id": f"{game_uid}|{slot}",
+            "bot_type": bot,
+            "outcome": outcome,
+            "spawn": spawn,
+            "opponent": {"bot_type": enemy},
+        }
+
+    def test_scoreboard_pairs_both_perspectives(self):
+        results = [{"bot_outcomes": [
+            self._record("g1", "Multi0", "fransbot", "lost", "classic", 0),
+            self._record("g1", "Multi1", "classic", "won", "fransbot", 1),
+            self._record("g2", "Multi0", "classic", "won", "fransbot", 0),
+            self._record("g2", "Multi1", "fransbot", "lost", "classic", 1),
+        ]}]
+        board = batch.ab_scoreboard(results)
+        self.assertEqual(board["fransbot vs classic"], {"won": 0, "lost": 2, "spawn": {"0": [0, 1], "1": [0, 1]}})
+        self.assertEqual(board["classic vs fransbot"], {"won": 2, "lost": 0, "spawn": {"1": [1, 0], "0": [1, 0]}})
+
+    def test_scoreboard_skips_undecided(self):
+        results = [{"bot_outcomes": [self._record("g1", "Multi0", "fransbot", "undecided", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(results), {})
+
+
 if __name__ == "__main__":
     unittest.main()

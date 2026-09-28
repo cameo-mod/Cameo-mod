@@ -88,7 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					SuppressVisualFeedback = true
 				};
 
-				world.IssueOrder(order);
+				bot.QueueOrder(order);
 			}
 
 			ticks = Info.Interval;

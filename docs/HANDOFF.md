@@ -1,5 +1,62 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — EMBER: post-#611 hard beats classic; donor-stack wiring gaps closed
+
+**nw-ab-7 match 1 (post-#611, hard vs classic, A Nuclear Winter): `hard` WON**
+— lost the unit trade 181:279 but destroyed 47 buildings vs 3, finishing at
+army$ 103,020 vs classic's 0. First measured win of the fog-honest candidate
+stack over the omniscient reference; the IsEligible fix turned "no enemy" into
+actual missions and pressure. Matches 2-4 running.
+
+**nw-ab-6 (fransbot vs classic): 0-2** — donor stack still loses cleanly to the
+reference (0:16 / 0:18 buildings). Expected: `ModularBot@Fransbot` is a donor,
+not the candidate (its header comment: modules join the Frankenstein stack one
+at a time, type deleted after). AI_MATCH_LOG.md's Side-A text was corrected.
+
+**Merged to master:** #610 template-dir restore · #612 in-harness A/B
+scoreboard (`ab_scoreboard`, spawn axis, batch_summary.json) · #614 StrategicMap
+probes (passability layers live) · #615 support-power Decisions port (fransbot
+had `Decisions: []` — all 210 orders now configured). #616 open: §9.12 records
+the fog-honest-offense decision (spawn-directed recon / bounded remembered-
+building raids / new assault verb; leaning a+b) — DAWN's call, they own the
+recon loop.
+
+**Coordination notes:**
+- DAWN: `stash@{0}` in the shared repo (`devin/dawn/batch-startingunits-regex`,
+  "fransbot-strengthening wip") holds a large WIP — AdaptiveCounterProduction.cs,
+  BotLimits, queue-manager + commander changes. I accidentally popped it onto a
+  clean tree while stashing docs; reset cleanly, stash is intact. Pop it back
+  in YOUR worktree when convenient.
+- `PowerDownBotModule.PowerDownTypes` is unset on the genericbot stack — bots
+  never toggle power-hungry buildings during brownouts (stock RA/TS configure
+  it; `^DisableOnPowerDown` exists across packs). Generator emit suggested.
+- Something raced file writes in `ember-bleed` twice today (edits reverted
+  mid-sequence). If another agent is running git/file tooling here, coordinate
+  — I now verify writes read-back before relying on them.
+
+## 2026-09-28 — EMBER: #611 invalidates pre-existing `hard`-side A/B results; two A/B axes now exist
+
+Claude's #611 (`379d9f5f8`) found `MasterAiBotModule.IsEligible` required
+`Playable` — but the harness's duelists are map-side bots (`Playable: False`),
+so the `genericbot` master AI profiled **no enemy all match** (0/253 snapshots)
+in every Nuclear Winter A/B to date. `MasterAiBotModule` is `genericbot`-gated,
+so this contaminates only `hard`-side matches; the fransbot-vs-classic axis
+(fransbot stack does not consume MasterAi) and the fransbot-side raid/intel
+diagnosis below are unaffected. `hard` still won its blind matches — its squad
+machinery carries combat without master-AI missions, which is itself worth
+knowing when re-baselining.
+
+Two A/B axes are now in play, both mandated-adjacent:
+- `fransbot` vs `classic` — the maintainer's literal pairing; EMBER's running
+  series (nw-ab-6) is post-ResourceMap and valid.
+- `hard` vs `classic` — Claude's #611 standard (`ab_summary.py`, Wilson CIs);
+  needs a post-#611 re-baseline on rebuilt binaries before numbers are trusted.
+
+Tooling overlap flag: `tools/ai/ab_summary.py` (Claude, post-hoc Wilson over
+jsonl) and the new in-harness `ab_scoreboard` (#612, end-of-batch table +
+`batch_summary.json`, adds the spawn axis) cover adjacent ground — kept both,
+cross-referenced; consolidate if they drift.
+
 ## 2026-09-28 — EMBER: maintainer mandate — bot tests on "A Nuclear Winter", fransbot vs classic A/B
 
 **Mandate:** all bot tests on the tournament map A Nuclear Winter, both spawns,
@@ -31,6 +88,20 @@ zero enemy buildings killed in any match, out-traded ~5:1 by cost
    passability layer inert by design.
 4. FIXED in #162: `TraitInfoOrDefault<AttackBaseInfo>` crash on multi-AttackBase
    actors (same class as #554 attackbuggy).
+
+
+**Post-fix A/B (ResourceMap live):** machinery works — MCV expansion commits,
+`MovingToOre`/`BuildingRefinery` stages cycle, expansion retry after raid
+threats — but fransbot still lost both completions (0-6 overall). Kill chain
+diagnosis: every published RAID sees `bids 0`; interference-driven raid targets
+are mobile attackers that leave fog before execution (`target is no longer
+visible/eligible`), and raids on buildings require 9 fresh intel samples inside
+the enemy perimeter — recon never survives deep enough. `FransMissionType` has
+no assault/push verb: Raid is the only offense and it cannot mass on bases.
+@DAWN — the bid funnel (`TryBuildGroundRaidBid` ->
+`IsGroundRaidEligibleTarget` -> fresh-visibility gate) is the blocker to the
+maintainer's win condition; probe actor types also still null (passability
+layer inert by design).
 
 ## 2026-09-28 — NOVA: stale external-PR sweep — #344/#119/#252 merged, #180/#245/#85 flagged
 

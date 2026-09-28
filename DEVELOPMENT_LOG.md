@@ -1,3 +1,126 @@
+# 2026-09-28 — Devin: A/B measurement layer + fransbot donor-stack wiring activation
+
+Second pass on the Nuclear Winter A/B program after the maintainer mandate
+(tournament map, both spawns, insane speed, fight smart not cheats).
+
+**Worked / landed**
+- `run_ai_match_batch.py` A/B scoreboard (#612): per-match records project to
+  a trimmed bot_outcomes row (bot_type, outcome, spawn, enemy bot_type),
+  deduped by record_id, aggregated to ordered W-L cells + per-spawn split,
+  printed at batch end and stored in batch_summary.json. Cross-references
+  Claude's ab_summary.py (Wilson CIs) rather than duplicating it.
+- Restored `mods/cameo/maps/ai_duel_nuclear_winter/` (#610) — the rollup merge
+  had dropped another agent's 2716-line duel arena.
+- Fransbot StrategicMap probe actors (#614): GroundProbe/McvProbe/
+  NavalProbeActorType now point at td_gdi_battletank /
+  td_gdi_mobileconstructionvehicle / ra1_allies_gunboat — the passability
+  layers (Ground/Mcv/Naval sector counts, movement graphs) were inert without
+  representative Mobile actors.
+- Fransbot support-power Decisions (#615): `FransSupportPowerBotModule` shipped
+  with `Decisions: []` — every support power inert. Ported the genericbot
+  stack's 210-order table verbatim (the module consumes the stock
+  SupportPowerDecision format on purpose).
+- AI_MATCH_LOG corrected: `fransbot` does NOT receive `genericbot` — the
+  stacks are disjoint; the merged-candidate stack is `hard`, `fransbot` is the
+  donor (per its own yaml header). Series table added (nw-ab-4..7) with the
+  #611 blindness caveat on pre-existing hard-side numbers.
+- AI_ARCHITECTURE §9.12 (#616): the fog-honest-offense open decision — RECON
+  fans only visit stale MineClusters, Raid is the only offensive verb, and
+  `TryBuildGroundRaidBid` rejects remembered-intel targets, so on the duel map
+  every RAID publishes `bids 0`. Options: spawn-directed recon (mpspawn cells
+  are public map data), bounded remembered-building raids for ground, or a new
+  assault verb. Leaning a+b; the recon loop is DAWN's lane.
+
+**Measurements**
+- nw-ab-6 (fransbot vs classic, post-ResourceMap): 0-2, tabled both games.
+- nw-ab-7 (hard vs classic, post-#611 binaries): match 1 `hard` WON — first
+  measured win of the fog-honest stack over the omniscient reference. Lost the
+  unit trade 181:279 but took the base: +47/-3 buildings, army$ 103k vs 0.
+
+**Coordination notes**
+- Accidentally popped DAWN's `stash@{0}` (fransbot-strengthening wip) onto a
+  clean tree while stashing docs; reset cleanly, stash intact. Flagged in
+  HANDOFF so they can reclaim it in their own worktree.
+- `ember-bleed` saw two file-write races today (edits reverted between calls).
+  Read-back verification added to the workflow.
+
+**Open**
+- nw-ab-7 matches 2-4 running; full series result pending.
+- `PowerDownBotModule.PowerDownTypes` unset on the genericbot stack — bots
+  never toggle power-hungry buildings under brownout. Generator emit suggested.
+- The §9.12 decision (fresh-intel-for-raids) is the blocker on the donor axis.
+
+# 2026-09-28 — Devin: fleet bot-module review fixes — crash, leak, and fog-honesty batch
+
+Three parallel reviewers swept all ~60 bot-module files across CA/Cameo/Fransbot.
+This batch lands every confident finding in the CA + Cameo modules (Fransbot items
+stay in DAWN's lane; `ResourceMapBotModule` needs the engine pipeline):
+
+**Crash class (P0/P1)**
+- `AIUtils.IsAreaAvailable<T>` regained `map.Contains(ac)` — off-map adjacent cells
+  threw `IndexOutOfRangeException` on map-edge buildings.
+- `UnitBuilderBotModuleCA` tolerates missing actor names on save-load
+  (`TryGetValue` instead of `Actors[name]`), processes all `BuildableInfo` traits
+  (secondary queues were silently dropped), and checks pauser enabled-state
+  correctly.
+- `CaptureManagerBotModuleCA` no longer throws when zero capturable players exist
+  (empty `.Random`), and materializes target options once instead of
+  re-scanning per capturer.
+- `AIUtils.GetInfoByCommonName` returns null on an empty match set (callers
+  already null-check) instead of throwing.
+- `MCVManagerBotModuleCA` no longer deploys at `(0,0)` on resource-free maps and
+  null-guards a missing construction yard.
+- `BaseBuilderQueueManagerCA`: the `BaseExpansionModules == null` recovery branch
+  was dead code (`.ToArray()` never yields null) — now keys on `Length == 0`;
+  base-scan tick now re-arms instead of scanning every tick; empty
+  `ExpansionTolerate`/`ForceExpansionTolerate` lists no longer crash `.Random`.
+- `SquadCA.IsTargetValid` no longer NREs on empty squads.
+- `UnitCompositionsBotModule` validates unit ids via `TryGetValue` with the
+  intended error message; `MinInterval` doc fixed (was a MaxTime copy-paste).
+
+**Logic / resource-leak class**
+- `PowerDownBotModuleCA` `RemoveAt(i)` no longer skips the shifted item; power
+  loop break conditions corrected.
+- `BuildingRepairBotModuleCA` was dead since it cached `RepairableBuilding` from
+  the *player* actor — it now resolves the trait from the damaged building.
+- `HarvesterBotModuleCA` redirect scan filters dead/disposed actors; cooldown
+  off-by-one fixed.
+- Stuck-squad kicks (Ground + Navy) return kicked units to the idle pool via new
+  `SquadManagerBotModuleCA.ReturnToIdlePool` instead of stranding them in
+  `activeUnits` forever; leader kick removes by actor identity (the locomotor
+  path returns a fresh wrapper, so reference `Remove` silently no-oped).
+- `NavyUnitsFleeStateCA.Deactivate` dismisses the squad (pool return) instead of
+  `Units.Clear()` leaking its ships.
+- `LoadGarrisonerBotModuleCA` dropped a bogus `TagLib.Id3v2` import; stuck
+  garrisoners now expire (9144 ticks) instead of being blacklisted until death.
+- Save-load: `SquadCA.Deserialize` restores `PriorityTags` and filters missing
+  actor ids; the manager reconciles stranded `activeUnits` into the idle pool.
+- `SquadManagerBotModuleCA`: invalid squads no longer consume H1 attention slots;
+  `ProtectOwn` drafts from the idle pool only (no dual squad membership);
+  guerrilla cap re-checked per unit; desired attack-force thresholds initialized
+  (first check no longer passes `0 >= 0`); Defend hold state doesn't carry across
+  region changes; exhausted-region set isn't cleared on empty mission reads;
+  raid missions don't spin on unconsumed selection.
+- `SquadCAType.Support` now has its own `SupportPriorityTags` (was falling
+  through to assault tags).
+- `ModularBot` picks the action-budget provider with `FirstEnabledTraitOrDefault`
+  (matching the squad manager).
+- `FransStrategicMapBotModule` strategic metrics: `TraitInfoOrDefault<AttackBaseInfo>`
+  -> `HasTraitInfo<AttackBaseInfo>` — same crash class as the #554 attackbuggy fix
+  (multi-instance trait), the only such site among ~100 siblings.
+
+**Fog-honesty**
+- `CratePickupBotModule` path enemy-avoidance only counts enemies visible to the
+  collector (`CanBeViewedByPlayer`).
+- `BotSituation.BuildRegions` stamps `LastSeenTick` on visible-but-empty regions
+  so scout staleness ordering doesn't treat a just-observed-empty region as
+  never-scouted.
+
+Verified: CA + Cameo + Test all build clean; 288/288 tests; squad / d2k /
+harvester gates PASS; boot-gate PASS (menu, 0 new exceptions, isolated
+SupportDir note: the env var did not redirect this run — verified against
+APPDATA logs with foreign-instance exclusions).
+
 # 2026-09-28 — DAWN: Fransbot economy-intel list fixes — harvesters finally count
 
 Three stacked generator bugs starved the economy intel pipeline; all fixed in

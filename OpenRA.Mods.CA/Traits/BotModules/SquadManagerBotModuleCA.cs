@@ -171,6 +171,9 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly HashSet<string> HarassPriorityTags = [];
 		public readonly HashSet<string> ProtectionPriorityTags = [];
 
+		[Desc("Actor tags the support squads prefer to target.")]
+		public readonly HashSet<string> SupportPriorityTags = [];
+
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
 
@@ -348,6 +351,7 @@ namespace OpenRA.Mods.CA.Traits
 				SquadCAType.Guerrilla => Info.GuerrillaPriorityTags,
 				SquadCAType.Harass => Info.HarassPriorityTags,
 				SquadCAType.Protection => Info.ProtectionPriorityTags,
+				SquadCAType.Support => Info.SupportPriorityTags,
 				_ => Info.AssaultPriorityTags,
 			};
 		}
@@ -614,6 +618,11 @@ namespace OpenRA.Mods.CA.Traits
 			protectionForceTicks = World.LocalRandom.Next(0, Info.ProtectInterval);
 			minAttackForceDelayTicks = World.LocalRandom.Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
+
+			// Without this the desired force stays 0/0 and the very first
+			// `idleUnits >= desired` check passes unconditionally — an empty Rush
+			// squad on the first tick the module runs (and after every load).
+			SetNextDesiredAttackForce();
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -861,6 +870,18 @@ namespace OpenRA.Mods.CA.Traits
 			squad.Units.Clear();
 		}
 
+		// Squads kick stuck/blocked units out of their Units list; without a route
+		// back those actors stay in activeUnits but in no squad and no pool — the
+		// manager never touches them again. Return them to the idle pool so
+		// FindNewUnits can reclassify them.
+		internal void ReturnToIdlePool(Actor actor)
+		{
+			if (actor == null || unitCannotBeOrdered(actor))
+				return;
+
+			unitsHangingAroundTheBase.Add(new UnitWposWrapper(actor));
+		}
+
 		void AssignRolesToIdleUnits(IBot bot)
 		{
 			CleanSquads();
@@ -886,6 +907,11 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var index = (start + i) % Squads.Count;
 						var s = Squads[index];
+
+						// The Units pruning above can empty a squad after CleanSquads ran —
+						// a corpse must not burn an attention slot on a no-op Update.
+						if (!s.IsValid)
+							continue;
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
@@ -935,13 +961,14 @@ namespace OpenRA.Mods.CA.Traits
 
 			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
 			// JoinGuerrilla gates creation too: 0 means this personality never forms
-			// guerrilla squads, not "the first unit always joins".
-			var guerrillaUpdate = World.LocalRandom.Next(100) < Info.JoinGuerrilla &&
-				(guerrillaForce == null || guerrillaForce.Units.Count <= Info.MaxGuerrillaSize);
+			// guerrilla squads, not "the first unit always joins". The size cap is
+			// evaluated per actor — a single pass may add a whole production wave.
+			var guerrillaRoll = World.LocalRandom.Next(100) < Info.JoinGuerrilla;
 
 			foreach (var a in newUnits)
 			{
-				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
+				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll &&
+					(guerrillaForce == null || guerrillaForce.Units.Count < Info.MaxGuerrillaSize))
 				{
 					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
 
@@ -1074,7 +1101,13 @@ namespace OpenRA.Mods.CA.Traits
 							defendMissionHeldSince = World.WorldTick;
 						}
 						else
+						{
+							// A different region re-published as Defend must not inherit the
+							// previous region's elapsed hold (it could exhaust instantly).
+							if (heldDefendMission.RegionIndex != mission.RegionIndex)
+								defendMissionHeldSince = World.WorldTick;
 							heldDefendMission = mission;
+						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
 						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
@@ -1092,7 +1125,9 @@ namespace OpenRA.Mods.CA.Traits
 						mission = SelectMission();
 					}
 
-					if (mission?.Type != BotMissionType.Defend)
+					// Null is "no mission published this tick", not "a non-Defend won" —
+					// clearing here would re-arm an exhausted region between publishes.
+					if (mission != null && mission.Type != BotMissionType.Defend)
 					{
 						heldDefendMission = null;
 						defendMissionHeldSince = -1;
@@ -1207,12 +1242,19 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!protectSq.IsValid)
 			{
-				var ownUnits = World.FindActorsInCircle(World.Map.CenterOfCell(GetRandomBaseCenter()), WDist.FromCells(Info.ProtectUnitScanRadius))
-					.Where(unit => unit.Owner == Player && !Info.ExcludeFromSquadsTypes.Contains(unit.Info.Name) && unit.Info.HasTraitInfo<AttackBaseInfo>() && !unit.Info.HasTraitInfo<BuildingInfo>()
-						&& !unit.Info.HasTraitInfo<HarvesterInfo>() && !unit.Info.HasTraitInfo<AircraftInfo>());
+				// Draft from the idle pool only. activeUnits contains both squad members
+				// and hanging units, so a world scan would draft units already assigned
+				// to Rush/Guerrilla/etc. — dual membership and competing orders.
+				var draftable = unitsHangingAroundTheBase
+					.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name) && u.Actor.Info.HasTraitInfo<AttackBaseInfo>()
+						&& !u.Actor.Info.HasTraitInfo<BuildingInfo>() && !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>())
+					.ToList();
 
-				foreach (var a in ownUnits)
-					protectSq.Units.Add(new UnitWposWrapper(a));
+				foreach (var u in draftable)
+				{
+					protectSq.Units.Add(u);
+					unitsHangingAroundTheBase.Remove(u);
+				}
 			}
 
 			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
@@ -1317,6 +1359,13 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var n in squadsNode.Nodes)
 					Squads.Add(SquadCA.Deserialize(bot, this, n.Value));
 			}
+
+			// Reconcile stranded units: an actor restored into activeUnits that belongs to
+			// no squad and no idle pool would never be managed again — park it in the pool.
+			var inSquads = Squads.SelectMany(s => s.Units.Select(u => u.Actor)).ToHashSet();
+			var inPool = unitsHangingAroundTheBase.Select(u => u.Actor).ToHashSet();
+			foreach (var a in activeUnits.Where(a => !inSquads.Contains(a) && !inPool.Contains(a) && !unitCannotBeOrdered(a)))
+				unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 		}
 
 		public bool CanBuildMoreOfAircraft(ActorInfo actorInfo)

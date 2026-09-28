@@ -245,6 +245,9 @@ Player:
 	# One bot-insurance state machine per player. Humans are ignored by the trait;
 	# the legacy construction-yard ladder remains removed from ^AIConyardCash.
 	DynamicBotInsurance:
+		# The A/B reference bot plays AS Hard (ai.yaml grants it `hardbot`): same insurance, not none.
+		DifficultyAliases:
+			classic: hard
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
 		Condition: nobase
 		Prerequisites: !conyard
