@@ -992,7 +992,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (Info.ProtectionIdleDissolveTicks > 0)
 				{
 					var protectSq = GetSquadOfType(SquadCAType.Protection);
-					if (protectSq != null && protectSq.IsValid && !protectSq.IsTargetValid &&
+					if (protectSq != null && protectSq.IsValid && (!protectSq.IsTargetValid || !protectSq.IsTargetVisible) &&
 						FindClosestEnemy(protectSq.Units[0].Actor, WDist.FromCells(Info.ProtectionScanRadius)) == null)
 					{
 						if (protectionIdleSince < 0)
