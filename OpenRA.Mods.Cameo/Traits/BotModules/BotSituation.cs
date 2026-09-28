@@ -1352,6 +1352,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		IReadOnlyList<BotPredictedThreat> IBotThreatPredictionProvider.PredictedThreats => predictedThreats;
 
+		bool IBotThreatPredictionProvider.PerceivedBaseThreat =>
+			Situation != null && (Situation.Urgency != BotUrgency.Normal || Situation.Enemies.Values.Any(e => e.PressureValue > 0));
+
 		// DF step 1: enemy combat units SEEN this snapshot (fogged: remembered entries refreshed at this tick),
 		// grouped, tracked against the previous snapshot, and extrapolated to the own building they head for.
 		List<(BotThreatTracker.Group, BotThreatTracker.Prediction?)> TrackThreats(int tick, OpenRA.Player[] enemies,

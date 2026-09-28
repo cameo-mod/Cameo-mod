@@ -20,5 +20,8 @@ namespace OpenRA.Mods.CA.Traits
 	public interface IBotThreatPredictionProvider
 	{
 		IReadOnlyList<BotPredictedThreat> PredictedThreats { get; }
+
+		/// <summary>The base is under PERCEIVED threat now: enemy pressure at home, or the master is Pressured/Emergency.</summary>
+		bool PerceivedBaseThreat { get; }
 	}
 }

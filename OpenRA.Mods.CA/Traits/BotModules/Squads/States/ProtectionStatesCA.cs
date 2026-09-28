@@ -59,9 +59,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					return;
 				}
 
+				// DF release: a defence that stayed quiet long enough is over — everyone back to their job.
+				if (owner.SquadManager.ShouldReleaseDefenders(true))
+				{
+					owner.SquadManager.ReleaseDefenders(owner.Bot, owner);
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new UnitsForProtectionFleeState(), false);
 				return;
 			}
+
+			owner.SquadManager.ShouldReleaseDefenders(false);
 
 			// DF-2 lure: out beyond the rally point and losing alone -> fall back under the own defences.
 			if (holding && closestEnemy != null && owner.SquadManager.Info.UseCombatPredictor

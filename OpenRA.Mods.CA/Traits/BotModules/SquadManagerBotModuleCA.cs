@@ -108,6 +108,21 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("DF-2: a protection squad farther than this from its rally point falls back when it would lose alone.")]
 		public readonly int LureRallyRadiusCells = 5;
 
+		[Desc("Cameo DF-3/4 (AI_DEEP_RESEARCH.md §14, maintainer 2026-09-28): when a predicted attack is met, each fast",
+			"(guerrilla / harass) squad that can reach the rally point before the enemy JOINS the defence; one that cannot",
+			"PUNISHES instead — it strikes a remembered enemy building (its priority tags first: harvesters, production)",
+			"while the enemy army is away. Needs PrepositionDefence.")]
+		public readonly bool FastSquadsReactToThreats = false;
+
+		[Desc("DF-3/4: a squad reacts to one predicted attack at most once per this many ticks.")]
+		public readonly int FastSquadReactionCooldownTicks = 1500;
+
+		[Desc("DF release: after this many ticks with no enemy in range, no target, no perceived threat to the base",
+			"(pressure at home, master Pressured/Emergency) and no predicted attack on an own asset, the protection squad is",
+			"released — raiders back to guerrilla squads, spec ops to harass squads, the rest to the attack pool.",
+			"0 = classic behaviour (the squad never releases).")]
+		public readonly int DefenceReleaseQuietTicks = 0;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -350,6 +365,8 @@ namespace OpenRA.Mods.CA.Traits
 		int protectionHoldUntilTick = -1;
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
+		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
+		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
 		BotMission heldDefendMission;
 		int defendMissionHeldSince = -1;
@@ -869,7 +886,7 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: meet the most valuable predicted attack at the own defence nearest its target.
 		void PrepositionDefenceTick(IBot bot)
 		{
-			if (!Info.PrepositionDefence || threatPredictionProviders == null || World.WorldTick < nextPrepositionTick)
+			if (!Info.PrepositionDefence || threatPredictionProviders == null || threatPredictionProviders.Length == 0 || World.WorldTick < nextPrepositionTick)
 				return;
 
 			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
@@ -902,6 +919,104 @@ namespace OpenRA.Mods.CA.Traits
 			protectionHoldUntilTick = World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+
+			if (Info.FastSquadsReactToThreats)
+				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
+		}
+
+		// A harasser joins the harass squad of its own type, or starts one.
+		void AddToHarassSquad(IBot bot, UnitWposWrapper unit)
+		{
+			var squad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Harass && s.Units.Any(u => u.Actor.Info.Name == unit.Actor.Info.Name))
+				?? RegisterNewSquad(bot, SquadCAType.Harass);
+			squad.Units.Add(unit);
+		}
+
+		/// <summary>
+		/// DF release (maintainer 2026-09-28): after a successful defence every defender goes back to its job — raider
+		/// types re-form guerrilla squads (within MaxGuerrillaSquads), spec-ops types their harass squads, the rest the
+		/// idle pool, from which attack forces form and take the open missions. The one release path for protection squads.
+		/// </summary>
+		internal void ReleaseDefenders(IBot bot, SquadCA protectSq)
+		{
+			foreach (var u in protectSq.Units.ToList())
+			{
+				if (unitCannotBeOrdered(u.Actor))
+					continue;
+
+				var name = u.Actor.Info.Name;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 ? OpenGuerrillaSquad(bot) : null;
+				if (guerrilla != null)
+					guerrilla.Units.Add(u);
+				else if (Info.HarasserTypes.Contains(name))
+					AddToHarassSquad(bot, u);
+				else
+					unitsHangingAroundTheBase.Add(u);
+			}
+
+			protectSq.Units.Clear();
+			protectionRally = null;
+			protectionHoldUntilTick = -1;
+			protectionQuietSinceTick = -1;
+			foreach (var n in notifyIdleBaseUnits)
+				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
+		}
+
+		// DF release trigger (maintainer 2026-09-28: "only disband defense squads if there is no more perceived and
+		// predicted threat to the base"): no enemy in range, no target, no PERCEIVED threat (pressure at home,
+		// Pressured/Emergency) and no PREDICTED attack on an own asset — all of it for DefenceReleaseQuietTicks.
+		// ⚠ TEMPORARY until NOVA's protection dissolve lands (one release decision per squad, §10.1): then that
+		// trigger calls ReleaseDefenders and this one is deleted.
+		internal bool ShouldReleaseDefenders(bool quiet)
+		{
+			var threatened = threatPredictionProviders != null && threatPredictionProviders.Any(p =>
+				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0);
+			if (Info.DefenceReleaseQuietTicks <= 0 || !quiet || threatened)
+			{
+				protectionQuietSinceTick = -1;
+				return false;
+			}
+
+			if (protectionQuietSinceTick < 0)
+				protectionQuietSinceTick = World.WorldTick;
+
+			return World.WorldTick - protectionQuietSinceTick >= Info.DefenceReleaseQuietTicks;
+		}
+
+		/// <summary>DF-3/4: can this squad be at `rally` before the enemy? Travel time at its slowest unit's speed.</summary>
+		public static bool ArrivesInTime(double distanceCells, double slowestSpeedCellsPerTick, int etaTicks) =>
+			slowestSpeedCellsPerTick > 0 && distanceCells / slowestSpeedCellsPerTick <= etaTicks;
+
+		// DF-3 join the defence if in reach; DF-4 punish the enemy base if not.
+		void ReactWithFastSquads(IBot bot, SquadCA protectSq, CPos rally, int etaTicks)
+		{
+			foreach (var sq in Squads.Where(s => (s.Type == SquadCAType.Guerrilla || s.Type == SquadCAType.Harass) && s.IsValid).ToList())
+			{
+				if (fastSquadReactedUntil.TryGetValue(sq, out var until) && World.WorldTick < until)
+					continue;
+
+				fastSquadReactedUntil[sq] = World.WorldTick + Math.Max(1, Info.FastSquadReactionCooldownTicks);
+				var leader = sq.Units[0].Actor;
+				var slowest = sq.Units.Min(u => (u.Actor.Info.TraitInfoOrDefault<MobileInfo>()?.Speed ?? 0) / 1024.0);
+				var distance = (leader.Location - rally).Length;
+				if (ArrivesInTime(distance, slowest, etaTicks))
+				{
+					// DF-3: join the defence for this attack; protection release returns them to the pool afterwards.
+					protectSq.Units.AddRange(sq.Units);
+					sq.Units.Clear();
+					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					continue;
+				}
+
+				// DF-4: too far to help — hit the enemy's base while its army is out.
+				var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);
+				if (target != null)
+					sq.Target = Target.FromFrozenActor(target);
+			}
+
+			foreach (var gone in fastSquadReactedUntil.Keys.Where(s => !Squads.Contains(s)).ToList())
+				fastSquadReactedUntil.Remove(gone);
 		}
 
 		Player EffectiveMainTarget()
@@ -1221,26 +1336,7 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 				else if (Info.HarasserTypes.Contains(a.Info.Name))
-				{
-					var harasserSquads = Squads.Where(s => s.Type == SquadCAType.Harass);
-					var matchingHarasserSquadFound = false;
-
-					foreach (var harasserSquad in harasserSquads)
-					{
-						if (harasserSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
-						{
-							harasserSquad.Units.Add(new UnitWposWrapper(a));
-							matchingHarasserSquadFound = true;
-							break;
-						}
-					}
-
-					if (!matchingHarasserSquadFound)
-					{
-						var newHarasserSquad = RegisterNewSquad(bot, SquadCAType.Harass);
-						newHarasserSquad.Units.Add(new UnitWposWrapper(a));
-					}
-				}
+					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
 				{
 					var supportSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Support);

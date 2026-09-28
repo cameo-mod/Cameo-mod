@@ -26,6 +26,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pick?.Value, Is.EqualTo(8000));
 		}
 
+		[TestCase(40, 0.1, 500, true)]
+		[TestCase(40, 0.1, 300, false)]
+		[TestCase(40, 0, 100000, false)]
+		public void AFastSquadJoinsOnlyIfItArrivesFirst(double cells, double speed, int eta, bool expected)
+		{
+			Assert.That(SquadManagerBotModuleCA.ArrivesInTime(cells, speed, eta), Is.EqualTo(expected));
+		}
+
 		[Test]
 		public void NothingSmallOrFarIsMet()
 		{
