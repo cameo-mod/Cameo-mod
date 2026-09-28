@@ -673,3 +673,6 @@ notification-bot-personality-turtle = { $bot } is playing Turtle: heavy defence,
 notification-bot-personality-tech = { $bot } is playing Tech: slow start, teching up before committing forces.
 notification-bot-personality-expansion = { $bot } is playing Expansion: spreads out early and fights over resources.
 notification-bot-personality-steamroller = { $bot } is playing Steamroller: masses one enormous army before attacking.
+checkbox-remaster-art-container =
+    .label = C&C Remastered HD Art (requires restart)
+    .tooltip = Render Tiberian Dawn terrain with C&C Remastered Collection HD artwork. Requires the Collection installed via Steam. Toggle this, then restart the game for it to take effect.

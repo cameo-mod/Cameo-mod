@@ -179,6 +179,8 @@ the fog sequencing.
 - [x] **M** Phase 7a assign-layer missions: `MasterAiBotModule` publishes fog-honest,
   ordered `Raid`/`Defend` intent and `SquadManagerBotModuleCA` consumes it only when forming
   a new force; `Recon` remains with `ScoutBotModule`, `Secure` is deferred.
+- [x] **M** Phase 7a follow-up (after #592): replace the single exhausted-Defend
+region with multi-region exclusion, fix exhausted Defend/Raid consumer selection, count static defence only in the own base region, document the inherited non-fogged fallback, and add the permanent fog-enabled Raid runtime gate.
 - [ ] **M** Phase 7b mission bidding: squads bid for missions instead of the forming squad
   taking the first affordable mission.
 - [ ] **M** Phase 7c `Secure` missions plus Fransbot anchors and squad rejoin.
@@ -2097,6 +2099,10 @@ types, creating a unified wall+turret defense system across the mod.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
+- [x] Scrin structures foundation: hidden faction metadata plus nine
+  map/editor-ready structure actors and independent Kane's Wrath-derived sprites.
+- [ ] Add the Drone Ship and its deployment into the Drone Platform before
+  enabling Scrin in the lobby or defining starting units and production.
 
 ## Phase E — Platform & engine (background, L)
 - [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all

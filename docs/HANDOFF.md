@@ -1,5 +1,24 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — NOVA: stale external-PR sweep — #344/#119/#252 merged, #180/#245/#85 flagged
+
+The six stale external drafts were triaged under the maintainer's merge-all
+order. **Merged:** #344 (coordination pilot — kept only `AGENTS.md`,
+`.github/agents/openra-cameo.agent.md`, and provenance disclaimers; master's
+evolved docs won every modified file), #119 (HD remastered terrain — its
+`CameoRemasterFileSystem` loader got `ContentInstallerFileSystemLoader`
+semantics replicated so the content-installer path is preserved, plus the
+June-era `float2/3` → `Vector2/3` API port; remaster path is inert when the
+setting is off), #252 (Scrin faction — 519-file ContentPack, master's engine
+pin kept, Scrin flag cell spliced into master's 1x/2x/3x flag sheets and
+upscaled for 4x). **Flagged, not merged** (review comments on each): #180
+needs an engine PR that doesn't exist in the pin and halves `TileSize`;
+#245's economy rewrite conflicts semantically with the post-wave composition
+system — needs a port, not a textual merge; #85 vendors ~2174 `engine/` files
+into a repo where `engine/` is `.gitignore`d — its Vulkan backend belongs in
+the cameo-mod/OpenRA fork. ⚠ `git merge --abort` on #85 deleted the ignored
+`engine/` sources (the merge had force-added them); recover with `make all`.
+
 ## 2026-09-28 — EMBER: squad-level attention landed on `devin/ember/ai-squad-attention`
 
 `IBotActionBudget` now has its second consumer: squad `Update()` consults
@@ -7,6 +26,24 @@
 cursor so the slot cap staggers rather than starves. Producer Desc and the
 interface doc updated to name both consumers (order drain + squad updates).
 Gates green; PR up.
+## 2026-09-28 — NOVA: AI phase 7a follow-up — missions on devin/1790537249.8881-ai-missions-7a-followup
+
+`Agent: NOVA · lane: AI architecture / assign layer · branch devin/1790537249.8881-ai-missions-7a-followup · based on current origin/master after #581`
+
+Phase 7a landed through #581, and #592 supplied the first exhausted-Defend
+consumer fix. This follow-up fixes the remaining multi-Defend starvation so a
+later affordable Raid can still be consumed, limits Defend threat
+from neighbouring static defences to the own base region, and documents the
+existing omniscient fallback when fogged scans are disabled. It also adds a
+permanent fog-enabled Raid runtime gate with reachable refinery and harvester
+actors. The gate asserts Raid publication and target-bearing squad assignment;
+the frozen-target branch remains documented but is not asserted unless a fixture
+can reproduce it reliably. Phase 7b mission bidding is next.
+
+Runtime gates cannot run on this host since the .NET 10 / bleed engine update:
+`alcOpenDevice` faults with an access violation (0xC0000005) before game start,
+which also reproduces on unmodified master, so the squad, bot-player and raid
+gates and `boot-test.cmd` are all blocked until the audio init is fixed.
 
 ## 2026-09-28 — OMP Astra: deployment review and scout follow-up
 
@@ -2681,7 +2718,7 @@ someone else is mid-way through.**
 
 `warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (nova post-merge): = 394** (splice-edge mechanics, not new legacy usage). **2026-09-27 (DAWN stack merge): = 391.** **2026-09-27b (#534+#516 combined): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage).
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (nova post-merge): = 394** (splice-edge mechanics, not new legacy usage). **2026-09-27 (DAWN stack merge): = 391.** **2026-09-27b (#534+#516 combined): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage). **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): = 402.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

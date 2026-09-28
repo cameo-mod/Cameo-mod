@@ -165,6 +165,18 @@ namespace OpenRA.Mods.Cameo.Traits
 					.Append(situation.Mission.RegionIndex)
 					.Append('}');
 			}
+			if (situation.MissionAssignment == null)
+				builder.Append(",\"mission_assignment\":null");
+			else
+			{
+				builder.Append(",\"mission_assignment\":{\"type\":\"")
+					.Append(situation.MissionAssignment.Type.ToString().ToLowerInvariant())
+					.Append("\",\"region_index\":")
+					.Append(situation.MissionAssignment.RegionIndex)
+					.Append(",\"frozen\":")
+					.Append(situation.MissionAssignment.Frozen ? "true" : "false")
+					.Append('}');
+			}
 
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, "hints");
 			AiMatchLogWriter.AppendNumber(builder, "defence_fraction", situation.DefenceFractionHint, true);

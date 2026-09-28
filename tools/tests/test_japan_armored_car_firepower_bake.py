@@ -1,6 +1,8 @@
 """Exact regression coverage for the Armored Car's retired 10% modifier."""
 
 from fractions import Fraction
+import hashlib
+import json
 import pathlib
 import sys
 import unittest
@@ -31,6 +33,17 @@ NON_DAMAGE_HASHES = {
 
 def child(node, key):
     return next((item for item in node.children if item.key == key), None)
+
+
+def non_damage_payload(node):
+    payload = {"key": node.key, "value": node.value, "children": []}
+    for item in node.children:
+        if node.value in {
+            "AreaDamage", "SpreadDamage", "TargetDamage", "AreaDamagePercentage"
+        } and item.key in {"Damage", "PercentageDenominator"}:
+            continue
+        payload["children"].append(non_damage_payload(item))
+    return payload
 
 
 class JapanArmoredCarFirepowerBakeTests(unittest.TestCase):

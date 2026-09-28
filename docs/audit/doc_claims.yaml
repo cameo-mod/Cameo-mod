@@ -29,7 +29,7 @@
 
 claims:
   - id: ai_contract_distinct_module_types
-    value: 27
+    value: 51
     tolerance: 0
     what: Distinct active Player/World decision-module and coordination/provider types in AI_ARCHITECTURE section 10.2; conditional instances count as loaded, not enabled.
     docs: [docs/design/AI_ARCHITECTURE.md]
@@ -42,7 +42,7 @@ claims:
       print(len({n.key.split('@')[0] for actor in ('player', 'world') for n in rs.resolve(actor).children if included(n.key)}))
 
   - id: ai_contract_player_module_instances
-    value: 42
+    value: 66
     tolerance: 0
     what: Active resolved Player instances in the section 10.2 module/provider scope, including all ten conditional BotLimits instances.
     docs: [docs/design/AI_ARCHITECTURE.md]
@@ -274,7 +274,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 328
+    value: 329
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -315,7 +315,7 @@ claims:
                 if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
 
   - id: corrosion_meter_actors
-    value: 839
+    value: 856
     tolerance: 0
     what: >
       Actors carrying the `Corrosion` meter — 839 actors (2026-09-23, post-#443/#446 wave;
@@ -379,7 +379,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 548
+    value: 549
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -516,7 +516,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 395
+    value: 402
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).

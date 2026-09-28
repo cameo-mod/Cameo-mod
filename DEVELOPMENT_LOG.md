@@ -36,6 +36,19 @@ fleet, not silently patched.
 Insane-speed verification runs (post-merge, Soviet mirror): opening completes
 on the deterministic timeline (WT3901→4200→5726); best run 16399 ticks,
 67 kills / 78 losses — first run with nonzero building kills recorded earlier.
+# 2026-09-28 — NOVA: fleet merge wave closed — all agent PRs landed; 3 stale drafts flagged
+
+Second sweep under the merge-all order: #597 (ai-missions-7a follow-up — HashSet
+of exhausted Defend regions, `IBotMissionAssignmentProvider` telemetry,
+own-base-only static-defence threat, raid-gate map+test) and #598 (fransbot
+Mcv-stage producer rebuild) merged via local resolution + push. Earlier in the
+session the stale external drafts were triaged: **#344, #119, #252 merged**;
+**#180, #245, #85 flagged with review comments** (engine-dep missing /
+semantic conflict vs post-wave AI / rule-7 engine vendoring). Verified on each
+merge: clean build, `OpenRA.Mods.Cameo.Test` 284–287/287, boot-gate menu +
+zero exceptions via isolated `Engine.SupportDir`, PID-scoped kills only.
+Gotcha worth keeping: `git merge --abort` on a PR that force-added ignored
+`engine/` files deletes the local engine source tree — `make all` recovers.
 
 # 2026-09-28 — DAWN: post-merge Fransbot regression PASS + Mcv-stage producer rebuild
 
@@ -60,6 +73,26 @@ the missing producer upstream-first (same rank order). Verified the failure mode
 live (warfactory dead ~WT5000 → `no McvTypes entry is currently buildable` →
 stall); the follow-up run's warfactory survived so the fix is compile-verified,
 next-loss-mode insurance. Drift baseline +736/-375.
+# 2026-09-28 — EMBER: w_hurt dealt-side producer — WeightHurt un-zeroed
+
+Branch `devin/ember/ai-squad-attention` (same lane, second commit). #585's
+review found the w_hurt term one-sided — nemesis scores ('damage dealt to us')
+fed a negative term that also entered the weight total, inverting §4.3 —
+`WeightHurt` shipped at 0. The missing dealt half did not need an engine
+change: `INotifyAppliedDamage` fires on the ATTACKER's player actor
+(`Health.cs`), the exact mirror of `INotifyDamage` on the victim's side.
+
+`CombatAnalysisBotModule` now keeps `dealtScores` per victim-owner, throttled
+per victim and decayed alongside nemesis with the SAME `NemesisWeightPerHit` —
+the share math only stays meaningful while both halves carry the same units.
+`IBotThreatAnalysis` gains `GetDealtScore`. `BotSituation` computes
+`HurtShare = 100*taken/(taken+dealt)` — the bounded share form of §4.3's
+dealt/taken ratio: ordering-identical, robust at taken→0, neutral (0) until a
+fight has gone either way. `WeightHurt` restored to 150; `HurtSaturation`
+dropped (the share is already bounded; no yaml set it).
+
+Verified: 285/285 tests (new `HurtShareTracksTheExchangeBalance`), ai gates,
+boot-gate.
 
 # 2026-09-28 — EMBER: H1 squad-level attention — squads consult the action budget
 

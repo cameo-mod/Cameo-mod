@@ -1,0 +1,16 @@
+World:
+	LuaScript:
+		Scripts: test.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		ShortGameEnabled: False
+
+Player:
+	-ConquestVictoryConditions:
+	Shroud:
+		FogCheckboxEnabled: True
+		ExploredMapCheckboxEnabled: False
+	PlayerResources:
+		DefaultCash: 0

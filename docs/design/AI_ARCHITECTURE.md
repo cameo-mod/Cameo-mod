@@ -609,10 +609,13 @@ steamrolls into a fortified target while a second player razes its base.
 
 The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
 `30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
-with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
-damage-dealt side still has no producer). Consumed 2026-09-28 (EMBER): `WeightHurt` penalises the
-nemesis-weighted enemy in `TargetScore`, and a nemesis above `NemesisOverrideWeight` force-retargets
-regardless of hold time — the 'do not ignore who is hitting you' clause.
+with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side). The
+dealt side landed the same day (EMBER): `INotifyAppliedDamage` fires on the *attacker's* player
+actor (`Health.cs`), so `dealtScores` mirrors `nemesisScores` with the same per-player throttle,
+weight, cap and decay. Consumed 2026-09-28 (EMBER): `WeightHurt` scores the **taken share**
+`taken/(taken+dealt)` — the bounded form of the dealt/taken ratio — and a nemesis above
+`NemesisOverrideWeight` force-retargets regardless of hold time — the 'do not ignore who is
+hitting you' clause.
 
 ### 4.4 Transition table
 
@@ -947,7 +950,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**27 distinct trait types, 42 Player instances plus one World instance** (2026-09-28: `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
+**51 distinct trait types, 66 Player instances plus one World instance** (2026-09-28: #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
@@ -1241,6 +1244,8 @@ execution already belong to the squad manager. A mission may defer a force for a
 hold or focus a newly formed raid, but it never moves units between existing squads and never
 assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is deferred to a later
 phase. The assign layer must never become a second owner of a unit.
+
+The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
 
 ### 10.6 Build order, each phase shippable on its own
 
