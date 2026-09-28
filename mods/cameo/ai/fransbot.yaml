@@ -11,6 +11,9 @@ Player:
 	ModularBot@Fransbot:
 		Name: bot_ai.fransbot
 		Type: fransbot
+		# Donor only (maintainer 2026-09-28): its modules join the Frankenstein stack one at a time,
+		# each A/B-tested; the type is deleted after. Not a lobby choice.
+		HiddenInLobby: True
 	GrantConditionOnBotOwner@fransbot:
 		Condition: enable-fransbot
 		Bots: fransbot

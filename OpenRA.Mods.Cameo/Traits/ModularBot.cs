@@ -50,6 +50,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			"or lag keeps orders pending longer than producers emit them.")]
 		public readonly int MaxQueuedOrders = 512;
 
+		[Desc("Cameo-only: not offered in the lobby's bot lists. The type still exists for map-side bots, scripts",
+			"and the A/B harness (the `fransbot` donor and the `classic` reference bot, maintainer 2026-09-28).")]
+		public readonly bool HiddenInLobby = false;
+
 		string IBotInfo.Type => Type;
 
 		string IBotInfo.Name => Name;
