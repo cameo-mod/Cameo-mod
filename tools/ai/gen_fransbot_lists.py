@@ -251,7 +251,7 @@ def main():
     is_capture = {n for n, r in buildable.items() if has(r, "Captures")}
     is_engineer = {n for n, r in buildable.items() if has(r, "RepairsBridges")}
     is_minelayer = {n for n, r in buildable.items() if has(r, "Minelayer")}
-    is_resource_creator = {n for n, r in actors.items() if has(r, "SeedsResource")}
+    is_resource_creator = {n for n, r in actors.items() if has(r, "SeedsResource", "LobbyScaledSeedsResource")}
     # Capturable neutral economy (oil derricks etc.): CashTrickler without Buildable,
     # or capturable + trickler
     is_derrick = {n for n, r in actors.items()
@@ -284,7 +284,7 @@ def main():
     is_tech = {n for n, r in buildable.items()
                if has(r, "Building") and grants_tech(r)}
     is_economy = {n for n in is_building
-                  if has(actors[n], "CashTrickler", "Refinery", "SeedsResource")}
+                  if has(actors[n], "CashTrickler", "Refinery", "SeedsResource", "LobbyScaledSeedsResource")}
     is_artillery = {n for n in has_combat
                     if n in is_mobile and ctx.max_weapon_range(actors[n]) >= 10240}
     is_combat_ground = {n for n in is_ground if n in has_combat and n not in is_harvester}
@@ -342,7 +342,12 @@ def main():
     # field -> (yaml trait block, field name, id set)
     F = {}
 
+    # ActorInfo.Name is lowercased at ruleset load (Ruleset.cs); every emitted
+    # actor id must match. Non-actor string fields (terrain/queue names) use put_raw.
     def put(mod, field_name, values):
+        F.setdefault(mod, {})[field_name] = sorted(v.lower() for v in values)
+
+    def put_raw(mod, field_name, values):
         F.setdefault(mod, {})[field_name] = sorted(values)
 
     put("FransHarvesterBotModule", "HarvesterTypes", is_harvester)
@@ -369,20 +374,20 @@ def main():
     put("FransBaseBuilderBotModule", "McvTypes", is_mcv)
     put("FransBaseBuilderBotModule", "TechTypes", is_tech)
     put("FransBaseBuilderBotModule", "NavalProductionTypes", is_nav_prod)
-    put("FransBaseBuilderBotModule", "WaterTerrainTypes", WATER_TERRAINS)
-    put("FransMcvExpansionManagerBotModule", "SeaShoreTerrainTypes", SHORE_TERRAINS)
-    put("FransStrategicMapBotModule", "BeachTerrainTypes", SHORE_TERRAINS)
-    put("FransSupportPowerBotModule", "DeliveryRejectedTerrainTypes", WATER_TERRAINS)
-    put("FransUnitBuilderBotModule", "UnitQueues", unit_queue_names)
-    put("FransEconomicSaturationBotModule", "ProductionQueueCategories", unit_queue_names)
-    put("FransEconomicSaturationBotModule", "BuildingQueueCategories", building_queue_names)
+    put_raw("FransBaseBuilderBotModule", "WaterTerrainTypes", WATER_TERRAINS)
+    put_raw("FransMcvExpansionManagerBotModule", "SeaShoreTerrainTypes", SHORE_TERRAINS)
+    put_raw("FransStrategicMapBotModule", "BeachTerrainTypes", SHORE_TERRAINS)
+    put_raw("FransSupportPowerBotModule", "DeliveryRejectedTerrainTypes", WATER_TERRAINS)
+    put_raw("FransUnitBuilderBotModule", "UnitQueues", unit_queue_names)
+    put_raw("FransEconomicSaturationBotModule", "ProductionQueueCategories", unit_queue_names)
+    put_raw("FransEconomicSaturationBotModule", "BuildingQueueCategories", building_queue_names)
     put("FransBaseBuilderBotModule", "BarracksTypes", is_inf_prod)
     put("FransBaseBuilderBotModule", "WarFactoryTypes", is_veh_prod)
     put("FransBaseBuilderBotModule", "PowerTypes", is_power)
     put("FransBaseBuilderBotModule", "RadarTypes", is_radar)
     put("FransBaseBuilderBotModule", "SiloTypes", is_silo)
     put("FransBaseBuilderBotModule", "RepairTypes", is_repair)
-    put("FransBaseBuilderBotModule", "BuildingQueues", building_queue_names)
+    put_raw("FransBaseBuilderBotModule", "BuildingQueues", building_queue_names)
     put("FransBaseBuilderBotModule", "BuildingDelays", {})
     put("FransBaseBuilderBotModule", "BuildingLimits", {})
     put("FransBaseBuilderBotModule", "SurplusProductionBuildingTypes", is_producer)
@@ -418,7 +423,7 @@ def main():
     put("FransStrategicMapBotModule", "PlaneProductionTypes", is_air_prod)
     put("FransStrategicMapBotModule", "NavalProductionTypes", is_nav_prod)
     put("FransStrategicMapBotModule", "EnemyConstructionTypes", is_conyard | is_producer)
-    put("FransStrategicMapBotModule", "EnemyEconomyTypes", is_economy | is_derrick)
+    put("FransStrategicMapBotModule", "EnemyEconomyTypes", is_economy | is_derrick | is_harvester)
     put("FransStrategicMapBotModule", "EnemyProductionTypes", is_producer)
     put("FransStrategicMapBotModule", "EnemyDefenseTypes", is_defense)
     put("FransStrategicMapBotModule", "EnemyStrategicTypes", is_superweapon | is_tech)
@@ -431,7 +436,7 @@ def main():
     put("FransGeneralBotModule", "SupportAssetTypes", is_refinery | is_conyard)
     put("FransGeneralBotModule", "CommandTargetTypes", is_conyard)
     put("FransGeneralBotModule", "SuperweaponTargetTypes", is_superweapon)
-    put("FransGeneralBotModule", "EconomyTargetTypes", is_economy | is_refinery | is_derrick)
+    put("FransGeneralBotModule", "EconomyTargetTypes", is_economy | is_refinery | is_derrick | is_harvester)
     put("FransGeneralBotModule", "ProductionTargetTypes", is_producer)
     put("FransGeneralBotModule", "TechTargetTypes", is_tech)
 
