@@ -14091,3 +14091,39 @@ build prereqs. New-CN modules (MasterAi, Scout, Beacon, personalities,
 counter-demand, HumanPace budget, AdaptiveCounterProduction) and all Fransbot
 modules stay `genericbot`/`enable-fransbot` only — the classic bot never ticks
 them. Fluent `bot_ai.classic` added; AI_MODULE_MAP regenerated (75 instances).
+
+# 2026-09-28 — NOVA: Fransbot A/B iteration round 1 (A Nuclear Winter vs classic)
+
+Baseline (pre-iteration): fransbot 0-4 vs omniscient classic, dying at
+WT 8186-17578 with ~half the resources earned. Root causes found in telemetry:
+(1) no legal path to enemy-base discovery — RECON only patrolled ore clusters;
+(2) single-unit forward trickle — every fresh rifle attack-moved alone into
+roaming raids ("forward-moving X attacked" at ~WT 650+); (3) one ground
+commander capacity meant any active mission starved all other bids;
+(4) `IsCriticalPriorityUnit` counted cheap infantry/engineer types as
+critical, freezing all spending behind the flat reserve; (5) SECURE bids
+never won (`EstimatedControlValue 0 < SecureMinimumControlValue` at small
+army sizes); (6) `TraitInfoOrDefault<AttackBaseInfo>` crashed matches when a
+visible enemy had two attack traits (see d1e46cd4e / uncommitted twin).
+
+Round-1 package (branch `nova/fransbot-ab-iteration`, pushed): public-mpspawn
+enemy-spawn RECON probes in the General (fog-honest — own spawn excluded,
+retires on observation), a second parallel ground commander `@ground2`
+(CommanderIndex 1, recon capacity no longer starves missions), MCV-only
+critical reserve, `ForwardMoveMinimumIdleUnits: 6` group-massing gate on the
+free-force push, and a fog-honest `AdaptiveCounterProduction` port —
+`FransCombatIntelBotModule` implements `IBotEnemyCompositionProvider` over
+seen/remembered mobile contacts (always returns true so the omniscient
+fallback can never fire), `FransUnitBuilderBotModule` picks best-Versus
+counters at `AdaptiveCounterWeight: 40`. Batch harness now archives
+per-match `debug-matchN.log` (the last match's log used to be all that
+survived).
+
+Round-1 results: survival 11470-17161 ticks (from ~7506-8186 at the same
+fixture), real economy reached (4 refineries, Prosperous, expansion MCV
+deployed), enemy-base intel flowing end-to-end (spawn probe → CombatIntel →
+RAID/SECURE publishes). Still 0-N — remaining gap is late-game attrition:
+infantry-heavy composition loses exchanges ~2.5-4:1 and SECURE still expires
+unbid while the army is small. Coordinate with DAWN's V1.29.31 re-vendor
+(fleet claim NOTE_.../CLAIM_2026-09-28_nova_fransbot_ab_iteration.md lists
+the Cameo-side deltas to preserve).

@@ -1776,6 +1776,12 @@ namespace OpenRA.Mods.Common.Traits
 					(Info.UnitsToBuild?.ContainsKey(a.Name) ?? false) && HasAdequateAirUnitReloadBuildings(a)),
 				n => owned.GetValueOrDefault(n));
 			counters.LastChoiceAdaptive = choice != null;
+			if (choice != null)
+				FransBotLog.BotDebug(world,
+					"{0}: ADAPTIVE COUNTER pick {1} against {2} observed enemy type(s) [{3}]; selections {4}/{5}.",
+					player, choice.Name, counters.ObservedEnemyValue.Count,
+					string.Join(",", counters.ObservedEnemyValue.Select(kv => kv.Key + "x" + kv.Value)),
+					counters.AdaptiveSelections + 1, counters.TotalSelections + 1);
 			return choice;
 		}
 

@@ -753,6 +753,11 @@ def main() -> int:
         if new_exc:
             result["new_exceptions"] = new_exc
         results.append(result)
+        # Archive the per-match debug.log before the next launch truncates it.
+        # Bot-iteration work needs each match's own telemetry, not just the last one's.
+        debug_src = logs_dir / "debug.log"
+        if debug_src.is_file():
+            shutil.copyfile(debug_src, logs_dir / f"debug-match{run}.log")
         # Durable per-match progress: a batch killed mid-run (the batch
         # process itself is as sweepable as the matches) still leaves this
         # evidence for postmortem and resume-by-rerun.
