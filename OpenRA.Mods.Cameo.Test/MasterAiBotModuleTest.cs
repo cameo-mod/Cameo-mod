@@ -544,6 +544,26 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "berserker"), Is.False);
 		}
 
+		[Test]
+		public void PersonalityPinResolvesOnlyMappedBotTypes()
+		{
+			var pins = new System.Collections.Generic.Dictionary<string, string>
+			{
+				["exploit_rush"] = "rush",
+				["exploit_turtle"] = "turtle",
+			};
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "exploit_rush"), Is.EqualTo("rush"));
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "exploit_turtle"), Is.EqualTo("turtle"));
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "hard"), Is.Null);
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, null), Is.Null);
+		}
+
+		[Test]
+		public void PersonalityPinDefaultsToNullWithoutTable()
+		{
+			Assert.That(BotPersonalityController.PinnedPersonality(null, "exploit_rush"), Is.Null);
+		}
+
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1001, 1000 + 3000, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, 3000, 1000, true)]

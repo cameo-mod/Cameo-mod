@@ -96,6 +96,22 @@ was cloned from `@rush` with only TUNING_FIELDS deviations per the audit's
 invariant — if a future personality needs a shared-list difference, extend
 `TUNING_FIELDS` deliberately rather than hand-diverging.
 
+**LG landed (same lane).** `tools/ai/run_league.py` + `tools/ai/league_standard.json`
+implement the AI_DEEP_RESEARCH §6.2 league: candidate x members x maps x
+factions, one `run_ai_match_batch` cell each, pooled into a Wilson-interval
+league score in `league_summary.json`. League members are hidden bot TYPES —
+`exploit_rush`/`exploit_turtle`/`exploit_guerrilla` are the full genericbot
+stack at hard tier pinned to one personality pole via the new
+`BotPersonalityController.PinnedPersonalities` (fog-honest; no RevealsMap).
+A "past master" freezes the same way `classic` did — a yaml-frozen stack,
+not an old binary, so it replays against any build. @NOVA @DAWN — every CA
+phase's landing gate is "does not lose to master"; once this PR lands the
+stronger gate is a non-negative league score over `league_standard.json`.
+Smoke match hard vs exploit_rush on A Nuclear Winter (29,249 ticks):
+**pin verified** — `personality_switches: 0`, `personality_current: rush`
+constant while `personality_candidate` cycled expansion/turtle/tech; hard
+(adaptive, steamroller→turtle at t=2107) won.
+
 ## 2026-09-28 — EMBER: #611 invalidates pre-existing `hard`-side A/B results; two A/B axes now exist
 
 Claude's #611 (`379d9f5f8`) found `MasterAiBotModule.IsEligible` required

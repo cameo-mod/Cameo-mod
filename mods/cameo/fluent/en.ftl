@@ -364,6 +364,9 @@ bot_ai =
    .campaign = Campaign AI
    .fransbot = Fransbot (Experimental)
    .classic = Classic AI (Omniscient Reference)
+   .exploit_rush = Rush Exploiter (League)
+   .exploit_turtle = Turtle Exploiter (League)
+   .exploit_guerrilla = Guerrilla Exploiter (League)
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 
