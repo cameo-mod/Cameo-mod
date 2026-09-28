@@ -911,14 +911,10 @@ namespace OpenRA.Mods.Common.Traits
 
 			// A complete single-Commander bid wins normally. DEFEND retains its intentional
 			// partial-bid exception; every other mission requires its own authoritative contribution.
-			// An understrength DEFEND still needs a non-negative utility: a lone unit sent against a
-			// raid it provably cannot stop is a donation, not a defense.
 			var candidates = auctions
 				.Where(p => dueTargets.Contains(p.Key))
 				.SelectMany(p => p.Value.Bids.Values.Select(b => (TargetId: p.Key, Auction: p.Value, Bid: b)))
-				.Where(x => x.Auction.MissionType == FransMissionType.Defend
-					? x.Bid.OfferedContribution >= x.Bid.RequiredContribution || x.Bid.DefendUtility >= 0
-					: x.Bid.OfferedContribution >= x.Bid.RequiredContribution)
+				.Where(x => x.Auction.MissionType == FransMissionType.Defend || x.Bid.OfferedContribution >= x.Bid.RequiredContribution)
 				.Where(x => !IsCommanderCapacityCommitted(x.Bid))
 				.OrderByDescending(x => x.Bid.StrategicPriority)
 				.ThenByDescending(x => x.Auction.MissionType == FransMissionType.Defend)
@@ -985,9 +981,6 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (auction.Mission.HasValue ||
 				(auction.MissionType != FransMissionType.Defend && winner.OfferedContribution < winner.RequiredContribution))
-				return false;
-			if (auction.MissionType == FransMissionType.Defend &&
-				winner.OfferedContribution < winner.RequiredContribution && winner.DefendUtility < 0)
 				return false;
 			if (IsCommanderCapacityCommitted(winner))
 				return false;

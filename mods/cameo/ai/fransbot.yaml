@@ -38,6 +38,11 @@ Player:
 		RequiresCondition: enable-fransbot
 	FransCommanderCoreBotModule:
 		RequiresCondition: enable-fransbot
+		# 300% required-strength margin means early raids (4-6 attackers) demand a
+		# 12-18 unit response that a small opening army can never field — every
+		# DEFEND goes understrength and the preservation guard strips it to a
+		# tripwire. 150% keeps real defenses reachable while the army is small.
+		DefendRequiredStrengthMarginPercent: 150
 	FransCommandBidBotModule:
 		RequiresCondition: enable-fransbot
 	FransGeneralBotModule:
