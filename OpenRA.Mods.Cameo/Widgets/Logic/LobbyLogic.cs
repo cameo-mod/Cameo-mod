@@ -291,7 +291,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				slotsButton.OnMouseDown = _ =>
 				{
-					var allBots = map.PlayerActorInfo.TraitInfos<IBotInfo>().ToArray();
+					var allBots = CameoLobbyBots.Selectable(map).ToArray();
 					var options = new Dictionary<string, IEnumerable<DropDownOption>>();
 
 					var botController = orderManager.LobbyInfo.Clients.FirstOrDefault(c => c.IsAdmin);
@@ -751,7 +751,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						template = emptySlotTemplate.Clone();
 
 					if (isHost)
+					{
 						LobbyUtils.SetupEditableSlotWidget(template, slot, client, orderManager, map, modData);
+						CameoLobbyBots.UseFilteredSlotDropDown(template, slot, client, orderManager, map);
+					}
 					else
 						LobbyUtils.SetupSlotWidget(template, modData, slot, client);
 
@@ -770,7 +773,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					LobbyUtils.SetupLatencyWidget(template, client, orderManager);
 
 					if (client.Bot != null)
+					{
 						LobbyUtils.SetupEditableSlotWidget(template, slot, client, orderManager, map, modData);
+						CameoLobbyBots.UseFilteredSlotDropDown(template, slot, client, orderManager, map);
+					}
 					else
 						LobbyUtils.SetupEditableNameWidget(template, client, orderManager, worldRenderer);
 
