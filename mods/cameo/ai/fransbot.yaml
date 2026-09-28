@@ -43,13 +43,38 @@ Player:
 		RequiresCondition: enable-fransbot
 	FransUnitBuilderBotModule:
 		RequiresCondition: enable-fransbot
+		# Fog-honest adaptive counter-production: CombatIntel's seen/remembered enemy
+		# army steers a minority of combat picks toward the best Versus counter.
+		AdaptiveCounterWeight: 40
+		AdaptiveCounterObservationInterval: 250
 	FransHarvesterBotModule:
 		RequiresCondition: enable-fransbot
 	FransSupplyTruckBotModule:
 		RequiresCondition: enable-fransbot
 	FransGroundCommanderBotModule:
 		RequiresCondition: enable-fransbot
+		# Hold fresh units at rally until a fighting group exists; lone trickle-push fed
+		# single rifles to roaming raids. Releases automatically under DEFEND pressure.
+		ForwardMoveMinimumIdleUnits: 6
 		# Required no-default tuning (same values as upstream fransbot-personalities.yaml @ground*)
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	# Second parallel ground capacity. Mission capacity is per-BidderKey, so a single
+	# ground1 commander means any active mission (including a persistent recon patrol)
+	# starves every other SECURE/RAID/DEFEND bid. CommanderIndex 1 keeps the
+	# index-0-only singleton duties (MCV right-of-way, forward-move fallback) on ground1.
+	FransGroundCommanderBotModule@ground2:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground2
+		CommanderIndex: 1
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600

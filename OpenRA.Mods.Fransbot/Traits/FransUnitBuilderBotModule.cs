@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
@@ -60,6 +61,12 @@ namespace OpenRA.Mods.Common.Traits
 
 		[Desc("Cash/resources requirement used throughout the deterministic opening until the first MCV has physically completed.")]
 		public readonly int OpeningProductionMinCashRequirement = 1000;
+
+		[Desc("Percent of mobile-combat production picks that may choose the best fog-honest counter to the observed enemy army (sourced from CombatIntel's seen/remembered contacts). 0 disables.")]
+		public readonly int AdaptiveCounterWeight = 0;
+
+		[Desc("Ticks between enemy-composition samples that feed adaptive counter-production.")]
+		public readonly int AdaptiveCounterObservationInterval = 250;
 
 		[ActorReference]
 		[Desc("Unit types blocked until the first opening MCV has physically completed, not merely started production.")]
@@ -253,6 +260,8 @@ namespace OpenRA.Mods.Common.Traits
 				EconomicEmergencySeaResumeCash <= EconomicEmergencySeaSuspendCash ||
 				EconomicEmergencySeaResumeCash < EconomicEmergencyAirResumeCash || EconomicEmergencyMinimumAirCombatReserve <= 0 || EconomicEmergencyLogInterval <= 0)
 				throw new YamlException("UnitBuilder SpecOps/economic-emergency production thresholds are invalid.");
+			if (AdaptiveCounterWeight < 0 || AdaptiveCounterWeight > 100 || AdaptiveCounterObservationInterval <= 0)
+				throw new YamlException("UnitBuilder adaptive counter-production settings are invalid.");
 		}
 
 		public override object Create(ActorInitializer init) { return new FransUnitBuilderBotModule(init.Self, this); }
@@ -273,6 +282,8 @@ namespace OpenRA.Mods.Common.Traits
 		readonly ActorIndex.OwnerAndNames resourceControlStructures;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		AdaptiveCounterProduction counters;
+		IBotEnemyCompositionProvider compositionProvider;
 		IFransEconomicSaturationService economicSaturationService;
 		IFransBaseBuilderService openingBuildOrderService;
 		IFransCombatIntelService combatIntelService;
@@ -306,6 +317,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			world = self.World;
 			player = self.Owner;
+			counters = new AdaptiveCounterProduction(world, player);
 			unitsToBuild = new ActorIndex.OwnerAndNames(world, info.UnitsToBuild.Keys, player);
 			resourceControlStructures = new ActorIndex.OwnerAndNames(world, info.ResourceControlStructureTypes, player);
 		}
@@ -326,6 +338,7 @@ namespace OpenRA.Mods.Common.Traits
 			groundCommanderService = self.Owner.PlayerActor.TraitsImplementing<IFransCommanderCoreService>().FirstOrDefault()
 				?? throw new InvalidOperationException("FransUnitBuilderBotModule requires Ground Commander service.");
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
+			compositionProvider = self.Owner.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -356,6 +369,7 @@ namespace OpenRA.Mods.Common.Traits
 			var economicState = economicSaturationService.State;
 			UpdateEconomicStateTransition(economicState);
 
+			counters.Observe(Info.AdaptiveCounterObservationInterval, compositionProvider);
 
 			var hasHarvesterDebt = queuedBuildRequests.Any(Info.HarvesterTypes.Contains);
 
@@ -642,6 +656,7 @@ namespace OpenRA.Mods.Common.Traits
 							continue;
 
 						bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+						counters.Record(unit);
 						available -= cost;
 						FransBotLog.BotDebug(world,
 							"{0}: {1} reserve permits {2} {3} on {4}; protected remaining cost {5}, post-order free budget {6}.",
@@ -1000,6 +1015,7 @@ namespace OpenRA.Mods.Common.Traits
 						continue;
 
 					bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+					counters.Record(unit);
 					var capMode = !ignorePositiveUnitLimits ? "hard" : "soft";
 					FransBotLog.BotDebug(world, "{0}: Production saturation fills {1} queue {2} with {3}; positive unit caps are {4}.",
 						player, category, queue.Actor, unit.Name, capMode);
@@ -1178,6 +1194,7 @@ namespace OpenRA.Mods.Common.Traits
 						continue;
 
 					bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+					counters.Record(unit);
 					FransBotLog.BotDebug(world,
 						"{0}: ECONOMIC DEFENSIVE AIR RESERVE: suspended Air domain starts {1} in {2}; live {3}, queued {4}, reserve target {5}.",
 						player, unit.Name, queue.Actor, live, queued, Info.EconomicEmergencyMinimumAirCombatReserve);
@@ -1226,8 +1243,15 @@ namespace OpenRA.Mods.Common.Traits
 			return cancelled;
 		}
 
-		bool IsCriticalPriorityUnit(string unitName) =>
-			unitName != null && Info.PriorityRequestedUnitTypes.Contains(unitName) && !Info.HarvesterTypes.Contains(unitName);
+		// Only true strategic vehicles may hold the critical reserve. Cheap infantry/engineers in
+		// PriorityRequestedUnitTypes previously froze all spending behind the flat cash reserve for
+		// their entire queue lifetime, which starved harvester and army growth into a stall.
+		bool IsCriticalPriorityUnit(string unitName)
+		{
+			if (unitName == null || !Info.PriorityRequestedUnitTypes.Contains(unitName) || Info.HarvesterTypes.Contains(unitName))
+				return false;
+			return world.Map.Rules.Actors.TryGetValue(unitName, out var actorInfo) && FransActorClass.IsMcv(actorInfo);
+		}
 
 		bool HasCriticalPriorityProduction(ILookup<string, ProductionQueue> queuesByCategory)
 		{
@@ -1328,6 +1352,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (unit != null)
 					{
 						bot.QueueOrder(Order.StartProduction(selected.Actor, unit.Name, 1));
+						counters.Record(unit);
 						FransBotLog.BotDebug(world, "{0}: {1} producer {2} is building {3}{4}.",
 							player, category, selected.Actor, unit.Name,
 							selected == preferred ? " from the preferred producer" : " using compatible-producer fallback");
@@ -1347,6 +1372,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			bot.QueueOrder(Order.StartProduction(queue.Actor, fallbackUnit.Name, 1));
+			counters.Record(fallbackUnit);
 		}
 
 		bool TryBuildRequestedUnit(IBot bot, string name, ILookup<string, ProductionQueue> queuesByCategory)
@@ -1673,6 +1699,10 @@ namespace OpenRA.Mods.Common.Traits
 			if (domainRatioUnit != null)
 				return domainRatioUnit;
 
+			var counterUnit = ChooseAdaptiveCounter(buildableThings, allUnits);
+			if (counterUnit != null)
+				return counterUnit;
+
 			ActorInfo desiredUnit = null;
 			ActorInfo artillerySaturationFallback = null;
 			var desiredError = int.MaxValue;
@@ -1730,6 +1760,23 @@ namespace OpenRA.Mods.Common.Traits
 			return artillerySaturationFallback != null && HasAdequateAirUnitReloadBuildings(artillerySaturationFallback)
 				? artillerySaturationFallback
 				: null;
+		}
+
+		// #245/CA parity on the fog-honest feed: below the weight cap, pick the best counter
+		// to the enemy army CombatIntel has SEEN among this queue's configured combat units.
+		ActorInfo ChooseAdaptiveCounter(ActorInfo[] buildableThings, Actor[] allUnits)
+		{
+			counters.LastChoiceAdaptive = false;
+			if (!AdaptiveCounterProduction.CounterPickAllowed(counters.AdaptiveSelections, counters.TotalSelections, Info.AdaptiveCounterWeight))
+				return null;
+
+			var owned = allUnits.Where(a => !a.IsDead).GroupBy(a => a.Info.Name).ToDictionary(g => g.Key, g => g.Count());
+			var choice = counters.Choose(
+				buildableThings.Where(a => AdaptiveCounterProduction.IsMobileCombat(a) && !IsUnitDelayed(a.Name) &&
+					(Info.UnitsToBuild?.ContainsKey(a.Name) ?? false) && HasAdequateAirUnitReloadBuildings(a)),
+				n => owned.GetValueOrDefault(n));
+			counters.LastChoiceAdaptive = choice != null;
+			return choice;
 		}
 
 		bool IsUnitDelayed(string unitName)

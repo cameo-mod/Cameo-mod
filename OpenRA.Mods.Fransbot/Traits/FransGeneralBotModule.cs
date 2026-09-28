@@ -138,6 +138,21 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("World ticks a newly published RECON target without an active MISSION may remain with no Commander bid before General backs that target off. Existing active persistent RECON is never affected by this timer.")]
 		public readonly int ReconNoBidBackoffTicks = 500;
 
+		[Desc("If true, legitimate map-file spawn points (mpspawn actor cells) minus the own home spawn seed persistent enemy-base RECON probes. Without them a fog-honest bot can patrol ore forever and never discover the enemy base.")]
+		public readonly bool EnemySpawnReconEnabled = true;
+
+		[Desc("Cells around the own HomeLocation that suppress an enemy-spawn RECON probe, so the bot never scouts its own spawn.")]
+		public readonly int EnemySpawnReconOwnHomeExclusionRadius = 10;
+
+		[Desc("Maximum RECON board slots enemy-spawn probes may occupy at once; remaining slots stay reserved for MineCluster fan reconnaissance.")]
+		public readonly int EnemySpawnReconMaxSlots = 2;
+
+		[Desc("Cells around a spawn probe that count as observed while a scout is nearby or the cell itself is visible.")]
+		public readonly int EnemySpawnReconObservationRadius = 5;
+
+		[Desc("Cells around a spawn probe where a known enemy structure counts as the probe's intel already resolved.")]
+		public readonly int EnemySpawnReconResolvedRadius = 12;
+
 		[Desc("Strategic priority of precision RAID. RAID is opportunistic and remains below SECURE; once committed it is never recalled for DEFEND.")]
 		public readonly int RaidStrategicPriority = 700;
 
@@ -357,6 +372,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (ScanInterval < 25 || StrategicAssessmentInterval <= 0 || StrategicIntelGoodAgeTicks < 0 ||
 				StrategicIntelAgingAgeTicks < StrategicIntelGoodAgeTicks || StrategicMineEconomyLinkRadius <= 0 ||
 				ReconStrategicPriority < 0 || PioneerReconStrategicPriority <= ReconStrategicPriority || PioneerReconStrategicPriority >= RaidStrategicPriority || MaximumPioneerReconValidationMissions <= 0 || ReconTargetCooldownTicks <= 0 || MaximumActiveReconMissions <= 0 || ReconFanArmCount <= 0 || ReconInactiveMissionSlotReleaseTicks <= 0 || ReconNoBidBackoffTicks <= 0 ||
+				EnemySpawnReconOwnHomeExclusionRadius < 0 || EnemySpawnReconMaxSlots < 0 || EnemySpawnReconObservationRadius < 0 || EnemySpawnReconResolvedRadius < 0 ||
 				RaidStrategicPriority <= ReconStrategicPriority || MaximumActiveRaidMissions <= 0 || RaidSiteIntelRadius <= 0 || RaidIntelFreshTicks <= 0 || RaidRememberedBuildingLifetimeTicks <= 0 || RaidMinimumFreshAreaSamples <= 0 || RaidMinimumFreshAreaSamples > 9 ||
 				RaidPostEtaRecheckMarginTicks < 0 || RaidRetreatCooldownTicks <= 0 || RaidNoBidBackoffTicks <= 0 || RaidNextSecurePriorityBonus < 0 || RaidNextSecurePriorityRadius <= 0 || RaidInterferencePriorityBonus <= 0 || RaidInterferenceMemoryTicks <= 0 || (long)RaidStrategicPriority + RaidNextSecurePriorityBonus + RaidInterferencePriorityBonus >= SecureStrategicPriority || SecureStrategicPriority <= RaidStrategicPriority ||
 				SecureFrontierContinuityBonus < 0 || SecureFrontierContinuityRadius <= 0 ||
@@ -426,6 +442,15 @@ namespace OpenRA.Mods.Common.Traits
 		Shroud shroud;
 		readonly Dictionary<uint, CPos> activeReconTargets = [];
 		readonly Dictionary<uint, int> activeReconWithoutMissionSinceTick = [];
+
+		// Enemy-spawn probes live in the same RECON machinery but use a synthetic key space that can
+		// never collide with a MineCluster key (and never hits the 0/MaxValue sentinels). Cells come
+		// exclusively from the map-file mpspawn actors minus the own home spawn: the same public
+		// spawn list every lobby player sees on the map preview, so no hidden state is read.
+		const uint SpawnProbeKeyBase = 0xF0000000;
+		readonly Dictionary<uint, CPos> spawnProbeTargets = [];
+		readonly Dictionary<uint, int> spawnProbeLastObservedTick = [];
+		bool spawnProbesSeeded;
 		readonly Dictionary<uint, int> activeRaidTargets = [];
 		readonly Dictionary<uint, FransMission> activeRaidSnapshots = [];
 		readonly Dictionary<uint, int> raidTargetCooldownUntil = [];
@@ -515,6 +540,9 @@ namespace OpenRA.Mods.Common.Traits
 			lastGroundForwardAnchorIntelSnapshotTick = -1;
 			completedSecureFootholds.Clear();
 			establishedSecureDefenseHoldUntil.Clear();
+			spawnProbeTargets.Clear();
+			spawnProbeLastObservedTick.Clear();
+			spawnProbesSeeded = false;
 			ClearDefenseIncidents();
 			missionsByActorId.Clear();
 			currentMissions.Clear();
@@ -773,6 +801,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			combatIntelService.EnsureCurrentSnapshot();
 			CleanupDefenseIncidents();
+			EnsureSpawnProbesSeeded();
 			UpdateMineClusterObservationMemory();
 			// foothold development is locally gated by a physical owned FACT at that SECURE anchor.
 			// The old all-map ore-occupation gate is intentionally no longer part of mission publication.
@@ -1389,15 +1418,99 @@ namespace OpenRA.Mods.Common.Traits
 
 			foreach (var stale in mineClusterLastObservedTick.Keys.Where(k => !liveKeys.Contains(k)).ToArray())
 				mineClusterLastObservedTick.Remove(stale);
-			foreach (var stale in reconTargetCooldownUntil.Keys.Where(k => !liveKeys.Contains(k) || world.WorldTick >= reconTargetCooldownUntil[k]).ToArray())
+			foreach (var stale in reconTargetCooldownUntil.Keys.Where(k => IsSpawnProbeKey(k) ? world.WorldTick >= reconTargetCooldownUntil[k] : !liveKeys.Contains(k) || world.WorldTick >= reconTargetCooldownUntil[k]).ToArray())
 				reconTargetCooldownUntil.Remove(stale);
 
-			foreach (var stale in activeReconTargets.Keys.Where(k => !liveKeys.Contains(k)).ToArray())
+			foreach (var stale in activeReconTargets.Keys.Where(k => !IsSpawnProbeKey(k) && !liveKeys.Contains(k)).ToArray())
 			{
 				activeReconTargets.Remove(stale);
 				activeReconWithoutMissionSinceTick.Remove(stale);
 				expansionReconMissionTargets.Remove(stale);
 			}
+
+			UpdateSpawnProbeObservationMemory();
+		}
+
+		static bool IsSpawnProbeKey(uint key) => key >= SpawnProbeKeyBase && key != uint.MaxValue;
+
+		void EnsureSpawnProbesSeeded()
+		{
+			if (spawnProbesSeeded)
+				return;
+			spawnProbesSeeded = true;
+			if (!Info.EnemySpawnReconEnabled)
+				return;
+
+			var home = player.HomeLocation;
+			var exclusionSq = Info.EnemySpawnReconOwnHomeExclusionRadius * Info.EnemySpawnReconOwnHomeExclusionRadius;
+			uint index = 0;
+			foreach (var definition in world.Map.ActorDefinitions)
+			{
+				if (definition.Value.Value != "mpspawn")
+					continue;
+				var cell = new ActorReference(definition.Key, definition.Value).GetValue<LocationInit, CPos>();
+				if (!world.Map.Contains(cell) || (cell - home).LengthSquared <= exclusionSq)
+					continue;
+				if (SpawnProbeKeyBase + index == uint.MaxValue)
+					break;
+				spawnProbeTargets[SpawnProbeKeyBase + index++] = cell;
+			}
+
+			if (spawnProbeTargets.Count > 0)
+				FransBotLog.BotDebug(world,
+					"{0}: GENERAL seeds {1} enemy-spawn RECON probe(s) from public map mpspawn data at [{2}]; own spawn {3} excluded. A fog-honest bot cannot find the enemy base from ore patrols alone.",
+					player, spawnProbeTargets.Count, string.Join(", ", spawnProbeTargets.Values), home);
+		}
+
+		void UpdateSpawnProbeObservationMemory()
+		{
+			if (spawnProbeTargets.Count == 0)
+				return;
+
+			foreach (var pair in spawnProbeTargets)
+			{
+				var resolvedByIntel = IsSpawnProbeResolvedByIntel(pair.Value);
+				if (IsSpawnProbeCurrentlyObserved(pair.Value) || resolvedByIntel)
+					spawnProbeLastObservedTick[pair.Key] = world.WorldTick;
+
+				// A spawn probe is a one-shot question ("is the enemy here?"), not a perpetual patrol:
+				// once the cell area is actually seen, retire the mission so its Commander capacity frees
+				// for combat work. The staleness gate republishes it later if intel ages out.
+				if (activeReconTargets.ContainsKey(pair.Key) && IsSpawnProbeCurrentlyObserved(pair.Value))
+					CompleteReconMission(pair.Key, "enemy spawn probe area observed; retiring one-shot probe");
+				else if (activeReconTargets.ContainsKey(pair.Key) && resolvedByIntel)
+					CompleteReconMission(pair.Key, "known enemy structures near spawn probe; retiring resolved probe");
+			}
+		}
+
+		bool IsSpawnProbeCurrentlyObserved(CPos cell)
+		{
+			if (shroud == null || shroud.Disabled)
+				return true;
+
+			var radius = Info.EnemySpawnReconObservationRadius;
+			for (var dy = -radius; dy <= radius; dy++)
+				for (var dx = -radius; dx <= radius; dx++)
+				{
+					var check = new CPos(cell.X + dx, cell.Y + dy);
+					if (world.Map.Contains(check) && shroud.IsVisible(check))
+						return true;
+				}
+
+			return false;
+		}
+
+		bool IsSpawnProbeResolvedByIntel(CPos cell)
+		{
+			if (strategicMapService == null)
+				return false;
+
+			var radiusSq = (long)Info.EnemySpawnReconResolvedRadius * Info.EnemySpawnReconResolvedRadius;
+			foreach (var structure in strategicMapService.KnownEnemyStructures)
+				if ((structure.LastKnownLocation - cell).LengthSquared <= radiusSq)
+					return true;
+
+			return false;
 		}
 
 		bool IsMineClusterCurrentlyObserved(FransMineCluster cluster)
@@ -1976,7 +2089,7 @@ namespace OpenRA.Mods.Common.Traits
 				expansionReconMissionTargets.Remove(key);
 			}
 
-			foreach (var stale in activeReconTargets.Keys.Where(k => !byKey.ContainsKey(k)).ToArray())
+			foreach (var stale in activeReconTargets.Keys.Where(k => !IsSpawnProbeKey(k) && !byKey.ContainsKey(k)).ToArray())
 			{
 				activeReconTargets.Remove(stale);
 				activeReconWithoutMissionSinceTick.Remove(stale);
@@ -2020,6 +2133,36 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var staleBefore = world.WorldTick - Info.StrategicIntelGoodAgeTicks;
+
+			// Enemy-spawn probes run before the MineCluster fan: finding the enemy base is the only
+			// path that ever lets SECURE/RAID form against it, and the probe retires as soon as the
+			// cell is observed or a known enemy structure already sits near it, freeing the slot again.
+			var spawnProbeSlotsUsed = 0;
+			foreach (var probe in spawnProbeTargets.OrderBy(p => p.Key))
+			{
+				var unrepresentedPioneerForProbes = expansionReconRequiredTargets.Any(key =>
+					!activeReconTargets.ContainsKey(key) &&
+					(commandBidService == null || !commandBidService.HasActiveReconMission(key)));
+				var probeReconSlotLimit = Info.MaximumActiveReconMissions +
+					(unrepresentedPioneerForProbes ? Info.MaximumPioneerReconValidationMissions : 0);
+				if (GlobalReconSlotCount() >= probeReconSlotLimit || spawnProbeSlotsUsed >= Info.EnemySpawnReconMaxSlots)
+					break;
+				if (activeReconTargets.ContainsKey(probe.Key) ||
+					(commandBidService != null && commandBidService.HasActiveReconMission(probe.Key)) ||
+					activeSecureTargets.ContainsKey(probe.Key))
+					continue;
+				if (reconTargetCooldownUntil.TryGetValue(probe.Key, out var probeCooldownUntil) && world.WorldTick < probeCooldownUntil)
+					continue;
+				if (spawnProbeLastObservedTick.TryGetValue(probe.Key, out var probeObserved) && probeObserved >= staleBefore)
+					continue;
+				activeReconTargets[probe.Key] = probe.Value;
+				activeReconWithoutMissionSinceTick[probe.Key] = world.WorldTick;
+				spawnProbeSlotsUsed++;
+				FransBotLog.BotDebug(world,
+					"{0}: GENERAL publishes MISSION RECON EnemySpawnProbe {1} at {2}, probe slot {3}/{4}: map-file mpspawn candidate minus own spawn; retires on observation so SECURE/RAID can act on what the scout finds.",
+					player, probe.Key, probe.Value, spawnProbeSlotsUsed, Info.EnemySpawnReconMaxSlots);
+			}
+
 			while (true)
 			{
 				var unrepresentedPioneerValidation = expansionReconRequiredTargets.Any(key =>
@@ -2119,6 +2262,17 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				if (currentMissions.Count >= Info.MaximumPublishedMissions)
 					break;
+				if (spawnProbeTargets.TryGetValue(pair.Key, out var probeCell))
+				{
+					if (activeSecureTargets.ContainsKey(pair.Key) || pendingSecureFootholds.ContainsKey(pair.Key))
+						continue;
+					var probe = new FransMission(null, pair.Key, "enemyspawn", null,
+						probeCell, false, false, BuildSiteIntel(probeCell, Info.SecureRiskAssessmentRadius, Info.StrategicIntelAgingAgeTicks),
+						FransMissionType.Recon, Info.ReconStrategicPriority, world.WorldTick);
+					PublishUniqueMission(probe);
+					continue;
+				}
+
 				if (!byKey.TryGetValue(pair.Key, out var cluster) || activeSecureTargets.ContainsKey(pair.Key) ||
 					pendingSecureFootholds.ContainsKey(pair.Key))
 					continue;

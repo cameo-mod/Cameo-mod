@@ -56,6 +56,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum Ground units considered for one precision RAID bid. SECURE sizing is uncapped here and is driven by observed enemy tactical strength.")]
 		public readonly int MaximumRaidUnitsPerMission = 32;
 
+		[Desc("Minimum idle Ground units required before the free-force forward push orders a group move. Below this, fresh units hold at their producer/rally point so they mass as a group instead of trickling into raiders one at a time. The gate releases while DEFEND pressure is active so defense always responds. 1 = unchanged behavior.")]
+		public readonly int ForwardMoveMinimumIdleUnits = 1;
+
 		[Desc("Distance in cells at which MOVE becomes FIGHT for a visible MISSION target.")]
 		public readonly int FightTriggerRadius = 8;
 
@@ -255,7 +258,7 @@ namespace OpenRA.Mods.Common.Traits
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
-			if (ScanInterval < 25 || string.IsNullOrWhiteSpace(BidderKey) || CommanderIndex < 0 || CommanderIndex > 9 || MaximumRaidUnitsPerMission <= 0 || FightTriggerRadius <= 0 || FightMicroRadius <= 0 ||
+			if (ScanInterval < 25 || string.IsNullOrWhiteSpace(BidderKey) || CommanderIndex < 0 || CommanderIndex > 9 || MaximumRaidUnitsPerMission <= 0 || ForwardMoveMinimumIdleUnits <= 0 || FightTriggerRadius <= 0 || FightMicroRadius <= 0 ||
 				LocalCrushRadius <= 0 || MoveRefreshInterval <= 0 || CohesionMaximumLeadCells <= 0 || CohesionChokepointLeadCells < CohesionMaximumLeadCells || DefendCohesionMaximumLeadCells <= 0 || DefendCohesionChokepointLeadCells < DefendCohesionMaximumLeadCells ||
 				DefendForcePreservationMinimumPackageUnits <= 0 || DefendForcePreservationTriggerCommitPercent <= 0 || DefendForcePreservationTriggerCommitPercent > 100 || DefendForcePreservationLowReservePercent < 0 || DefendForcePreservationLowReservePercent > 100 || DefendForcePreservationMinimumReserveUnits < 0 || DefendForcePreservationTargetReservePercent <= DefendForcePreservationLowReservePercent || DefendForcePreservationTargetReservePercent >= 100 || DefendForcePreservationLongEtaMinimumTicks <= 0 ||
 				CohesionFormationRadius <= 0 || RaidMinimumVehicleSpeed <= 0 || RaidStaticDefenseAvoidanceRadius <= 0 || MaximumRaidMissionsDuringDefend < 0 || MaximumConcurrentGroundRaidMissions <= 0 || MaximumGroundRaidMissionsDuringSecure < 0 || MaximumGroundRaidMissionsDuringSecure > MaximumConcurrentGroundRaidMissions || GroundRaidExpeditionarySharePercent <= 0 || GroundRaidExpeditionarySharePercent > 100 || GroundRaidMinimumUnitCount <= 0 ||
@@ -3293,7 +3296,16 @@ namespace OpenRA.Mods.Common.Traits
 
 			var movers = managedUnits.Where(a => a.IsIdle && !mcvRightOfWayUnits.Contains(a) && a != reconRetreatActor && !raidRecoveryOrigins.ContainsKey(a) &&
 				commanderCoreService.IsActorAvailableForBidder(FransCommanderKind.Ground, BidderKey, a)).OrderBy(a => a.ActorID).ToArray();
-			if (movers.Length == 0 || !TryGetGroundGroupMovePlan(movers, objective, out var destination))
+			if (movers.Length == 0)
+				return;
+
+			// Trickle-death guard: pushing fewer than N idle units toward the forward objective
+			// feeds them to roaming raiders one at a time. Hold them at rally until a fighting
+			// group exists. DEFEND responses are unaffected — missions bid on idle units directly.
+			if (movers.Length < Info.ForwardMoveMinimumIdleUnits)
+				return;
+
+			if (!TryGetGroundGroupMovePlan(movers, objective, out var destination))
 				return;
 
 			activeObjective = objective;
