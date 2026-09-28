@@ -50,8 +50,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.")]
 		public readonly int ProductionMinCashRequirement = 2000;
 
-		[Desc("Only queue construction of a new unit when above this requirement.")]
+		[Desc("Only queue construction of a new unit when above this requirement.",
+			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
+
+		[Desc("Ticks between samples of the enemy army for adaptive counter-production (BotLimits.AdaptiveCounterWeight).")]
+		public readonly int AdaptiveObservationInterval = 250;
 
 		[Desc("Maximum number of aircraft AI can build.",
 			"If MaintainAirSuperiority is true this only applies to units not listed in AirToAirUnits.")]
@@ -137,11 +141,20 @@ namespace OpenRA.Mods.CA.Traits
 		int unitIntervalModifier = 100;
 		bool firstTick = true;
 
+		readonly AdaptiveCounterProduction counters;
+		IBotEnemyCompositionProvider compositionProvider;
+
+		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
+
+		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
+			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
+
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
 		{
 			world = self.World;
 			player = self.Owner;
+			counters = new AdaptiveCounterProduction(world, player);
 		}
 
 		protected override void Created(Actor self)
@@ -153,6 +166,7 @@ namespace OpenRA.Mods.CA.Traits
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
+			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
 
 			var referencedUnitTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -201,6 +215,9 @@ namespace OpenRA.Mods.CA.Traits
 				RefreshDifficultyTraits();
 				firstTick = false;
 			}
+
+			if (CounterWeight > 0)
+				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
 
 			// Decrement any active unit intervals, removing any that reach zero
 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
@@ -252,7 +269,7 @@ namespace OpenRA.Mods.CA.Traits
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
 						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false);
 
-						if (playerResources.Cash + playerResources.Resources < Info.MaximiseProductionCashRequirement)
+						if (playerResources.Cash + playerResources.Resources < MaximiseProductionCash)
 							break;
 					}
 				}
@@ -340,6 +357,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				SetUnitInterval(name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+				counters.Record(unit);
 				if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 					AddToActiveCompositionProducedValue(unit);
 			}
@@ -418,6 +436,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (!buildableThings.Any())
 				return null;
 
+			var counter = ChooseCounter(buildableThings);
+			if (counter != null)
+				return counter;
+
 			var unit = buildableThings.Random(world.LocalRandom);
 			return CanBuildMoreOfAircraft(unit) ? unit : null;
 		}
@@ -432,6 +454,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (unitsToBuildShares == null || unitsToBuildShares.Count == 0)
 				return null;
 
+			var counter = ChooseCounter(buildableThings.Where(b => unitsToBuildShares.ContainsKey(b.Name) &&
+				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name))));
+			if (counter != null)
+				return counter;
+
 			var myUnits = player.World
 				.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == player)
@@ -445,6 +472,22 @@ namespace OpenRA.Mods.CA.Traits
 								return world.Map.Rules.Actors[unit.Key];
 
 			return null;
+		}
+
+		// Adaptive counters (DESIGN §19.1): below this tier's share of counter picks, the best counter to the
+		// observed enemy army among the units this composition allows; otherwise the normal choice.
+		ActorInfo ChooseCounter(IEnumerable<ActorInfo> allowed)
+		{
+			counters.LastChoiceAdaptive = false;
+			if (!AdaptiveCounterProduction.CounterPickAllowed(counters.AdaptiveSelections, counters.TotalSelections, CounterWeight))
+				return null;
+
+			var owned = player.World.ActorsHavingTrait<IPositionable>().Where(a => a.Owner == player)
+				.GroupBy(a => a.Info.Name).ToDictionary(g => g.Key, g => g.Count());
+			var choice = counters.Choose(allowed.Where(a => AdaptiveCounterProduction.IsMobileCombat(a) &&
+				ShouldBuild(a.Name, false) && CanBuildMoreOfAircraft(a)), n => owned.GetValueOrDefault(n));
+			counters.LastChoiceAdaptive = choice != null;
+			return choice;
 		}
 
 		Dictionary<string, int> GetUnitsToBuildForCategory(string queueCategory)
@@ -672,7 +715,7 @@ namespace OpenRA.Mods.CA.Traits
 				new("CompositionLastUsed", "", compositionLastUsedTickById
 					.Select(kvp => new MiniYamlNode(kvp.Key, FieldSaver.FormatValue(kvp.Value)))
 					.ToList())
-			};
+			}.Concat(counters.SaveNodes()).ToList();
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
@@ -698,6 +741,8 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var n in compositionLastUsedNode.Value.Nodes)
 					compositionLastUsedTickById[n.Key] = FieldLoader.GetValue<int>("CompositionLastUsed", n.Value.Value);
 			}
+
+			counters.Load(data);
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)

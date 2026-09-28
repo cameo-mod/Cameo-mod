@@ -35,6 +35,18 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ticks the same personality candidate must persist before this difficulty switches to it. Negative disables switching.")]
 		public readonly int PersonalityReactionDelay = 7500;
 
+		[Desc("Cash above which the base builder adds more production structures to spend what it earns.",
+			"Overrides BaseBuilderBotModuleCA.NewProductionCashThreshold. Negative: use the module's value.")]
+		public readonly int NewProductionCashThreshold = -1;
+
+		[Desc("Cash above which the unit builder fills every unit queue in one pass.",
+			"Overrides UnitBuilderBotModuleCA.MaximiseProductionCashRequirement. Negative: use the module's value.")]
+		public readonly int MaximiseProductionCashRequirement = -1;
+
+		[Desc("Percent (0-100) of mobile combat picks the unit builder may spend on COUNTERS to the enemy army it",
+			"has observed (through fog when the master AI observes through fog). 0 disables adaptive counters.")]
+		public readonly int AdaptiveCounterWeight = 0;
+
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}
 

@@ -98,6 +98,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal sealed class ObservedActor
 	{
+		// The type, for consumers that reason per unit type (adaptive counter-production).
+		public ActorInfo Info;
 		public uint ActorID;
 		public CPos Location;
 		public int LastSeenTick;
@@ -218,6 +220,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var hasAttack = actorInfo.HasTraitInfo<AttackBaseInfo>();
 			return new ObservedActor
 			{
+				Info = actorInfo,
 				ActorID = actorID,
 				Location = location,
 				LastSeenTick = tick,
