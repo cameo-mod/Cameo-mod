@@ -135,7 +135,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var capturers = newUnits
-				.Where(a => a.IsIdle && Info.CapturingActorTypes.Contains(a.Info.Name))
+				.Where(a => a.IsIdle && Info.CapturingActorTypes.Contains(a.Info.Name.ToLowerInvariant()))
 				.Select(a => new TraitPair<CaptureManager>(a, a.TraitOrDefault<CaptureManager>()))
 				.Where(tp => tp.Trait != null);
 
@@ -182,8 +182,12 @@ namespace OpenRA.Mods.CA.Traits
 					return;
 			}
 
-			var randPlayer = world.Players.Where(p => !p.Spectating
-				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(p))).Random(world.LocalRandom);
+			var randPlayers = world.Players.Where(p => !p.Spectating
+				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(p))).ToList();
+			if (randPlayers.Count == 0)
+				return;
+
+			var randPlayer = randPlayers.Random(world.LocalRandom);
 
 			var targetOptions = Info.CheckCaptureTargetsForVisibility
 				? GetVisibleActorsBelongingToPlayer(randPlayer)
@@ -203,6 +207,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (Info.CapturableActorTypes.Count > 0)
 				capturableTargetOptions = capturableTargetOptions.Where(target => Info.CapturableActorTypes.Contains(target.Info.Name.ToLowerInvariant()));
+
+			capturableTargetOptions = capturableTargetOptions.ToList();
 
 			if (!capturableTargetOptions.Any())
 				return;

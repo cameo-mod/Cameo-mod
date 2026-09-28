@@ -308,7 +308,7 @@ namespace OpenRA.Mods.CA.Traits
 			var searchRadius = resourceMapModule.GetIndiceScanRadius();
 
 			var harvesters = world.FindActorsInCircle(world.Map.CenterOfCell(worstEffectIndice.Value), WDist.FromCells(searchRadius))
-				.Where(a => a.Owner == player && resourceMapModule.Info.HarvesterTypes.Contains(a.Info.Name)).ToList();
+				.Where(a => a.Owner == player && !a.IsDead && a.IsInWorld && resourceMapModule.Info.HarvesterTypes.Contains(a.Info.Name)).ToList();
 
 			var pathDistanceSquareFactor = resourceMapModule.GetIndiceRowCount() * resourceMapModule.GetIndiceRowCount()
 					+ resourceMapModule.GetIndiceColumnCount() * resourceMapModule.GetIndiceColumnCount();
@@ -390,7 +390,7 @@ namespace OpenRA.Mods.CA.Traits
 					return false;
 			}
 
-			if (h.NoResourcesCooldown > 1)
+			if (h.NoResourcesCooldown > 0)
 			{
 				h.NoResourcesCooldown--;
 				return false;

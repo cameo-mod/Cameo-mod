@@ -870,8 +870,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				if (cells[i] == null)
 				{
+					// A visible region with no observed actors is still an observation —
+					// stamp it so scout staleness ordering doesn't treat it as never-seen.
 					if (shroud.IsVisible(regions.CenterOf(i)))
-						cells[i] = new RegionMemory.Region { EverSeen = true };
+						cells[i] = new RegionMemory.Region { EverSeen = true, LastSeenTick = player.World.WorldTick };
 				}
 				else if (!cells[i].EverSeen && shroud.IsVisible(regions.CenterOf(i)))
 					cells[i].EverSeen = true;
