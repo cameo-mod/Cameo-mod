@@ -1,5 +1,28 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — EMBER: #611 invalidates pre-existing `hard`-side A/B results; two A/B axes now exist
+
+Claude's #611 (`379d9f5f8`) found `MasterAiBotModule.IsEligible` required
+`Playable` — but the harness's duelists are map-side bots (`Playable: False`),
+so the `genericbot` master AI profiled **no enemy all match** (0/253 snapshots)
+in every Nuclear Winter A/B to date. `MasterAiBotModule` is `genericbot`-gated,
+so this contaminates only `hard`-side matches; the fransbot-vs-classic axis
+(fransbot stack does not consume MasterAi) and the fransbot-side raid/intel
+diagnosis below are unaffected. `hard` still won its blind matches — its squad
+machinery carries combat without master-AI missions, which is itself worth
+knowing when re-baselining.
+
+Two A/B axes are now in play, both mandated-adjacent:
+- `fransbot` vs `classic` — the maintainer's literal pairing; EMBER's running
+  series (nw-ab-6) is post-ResourceMap and valid.
+- `hard` vs `classic` — Claude's #611 standard (`ab_summary.py`, Wilson CIs);
+  needs a post-#611 re-baseline on rebuilt binaries before numbers are trusted.
+
+Tooling overlap flag: `tools/ai/ab_summary.py` (Claude, post-hoc Wilson over
+jsonl) and the new in-harness `ab_scoreboard` (#612, end-of-batch table +
+`batch_summary.json`, adds the spawn axis) cover adjacent ground — kept both,
+cross-referenced; consolidate if they drift.
+
 ## 2026-09-28 — EMBER: maintainer mandate — bot tests on "A Nuclear Winter", fransbot vs classic A/B
 
 **Mandate:** all bot tests on the tournament map A Nuclear Winter, both spawns,
