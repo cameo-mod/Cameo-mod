@@ -51,8 +51,8 @@ Strings are the internal names, never the display/translated names.
     "assets_value": 0,
     "resources_earned": 0,
     "resources_spent": 0,
-    "stats_timeline_fields": "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost",
-    "stats_timeline": [ [750, 1200, 1000, 800, 5000, 0, 0], [1500, 2600, 2500, 1900, 7000, 300, 110] ]
+    "stats_timeline_fields": "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues",
+    "stats_timeline": [ [750, 1200, 1000, 800, 5000, 0, 0, 200, 1], [1500, 2600, 2500, 1900, 7000, 300, 110, 100, 0] ]
   },
   "opponents": [
     { "name": "Multi1", "is_bot": true, "bot_type": "hard", "faction": "td_nod",
@@ -68,8 +68,10 @@ Strings are the internal names, never the display/translated names.
   for every map-side player, which is how the A/B harness seats both duelists — so in a
   harness run `spawn` is constant and says nothing about side. Key side analysis on `home`.
 - `stats_timeline` — one row per `AiMatchLogWriter.SampleIntervalTicks` (default 750) world
-  ticks, columns named by `stats_timeline_fields`; cumulative except `army_value` and
-  `assets_value`. Sampled on TICKS, not on `PlayerStatistics`' own graph cadence, which follows
+  ticks, columns named by `stats_timeline_fields`; cumulative except `army_value`,
+  `assets_value`, `banked` (cash + stored resources) and `idle_queues` (player-level production
+  queues that could build something but have nothing queued — the discipline metric of
+  AI_DEEP_RESEARCH §13 item 1). Sampled on TICKS, not on `PlayerStatistics`' own graph cadence, which follows
   game time (every 3000 ticks at the harness's maximum speed). Optional: records written
   before it existed have no timeline.
 
