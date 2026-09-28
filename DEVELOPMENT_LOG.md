@@ -1,3 +1,17 @@
+# 2026-09-28 — NOVA: fleet merge wave closed — all agent PRs landed; 3 stale drafts flagged
+
+Second sweep under the merge-all order: #597 (ai-missions-7a follow-up — HashSet
+of exhausted Defend regions, `IBotMissionAssignmentProvider` telemetry,
+own-base-only static-defence threat, raid-gate map+test) and #598 (fransbot
+Mcv-stage producer rebuild) merged via local resolution + push. Earlier in the
+session the stale external drafts were triaged: **#344, #119, #252 merged**;
+**#180, #245, #85 flagged with review comments** (engine-dep missing /
+semantic conflict vs post-wave AI / rule-7 engine vendoring). Verified on each
+merge: clean build, `OpenRA.Mods.Cameo.Test` 284–287/287, boot-gate menu +
+zero exceptions via isolated `Engine.SupportDir`, PID-scoped kills only.
+Gotcha worth keeping: `git merge --abort` on a PR that force-added ignored
+`engine/` files deletes the local engine source tree — `make all` recovers.
+
 # 2026-09-28 — DAWN: post-merge Fransbot regression PASS + Mcv-stage producer rebuild
 
 **Merge wave:** #578 (Fransbot Route-A) squash-merged to master as `8ff791eae`;

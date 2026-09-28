@@ -1,5 +1,24 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — NOVA: stale external-PR sweep — #344/#119/#252 merged, #180/#245/#85 flagged
+
+The six stale external drafts were triaged under the maintainer's merge-all
+order. **Merged:** #344 (coordination pilot — kept only `AGENTS.md`,
+`.github/agents/openra-cameo.agent.md`, and provenance disclaimers; master's
+evolved docs won every modified file), #119 (HD remastered terrain — its
+`CameoRemasterFileSystem` loader got `ContentInstallerFileSystemLoader`
+semantics replicated so the content-installer path is preserved, plus the
+June-era `float2/3` → `Vector2/3` API port; remaster path is inert when the
+setting is off), #252 (Scrin faction — 519-file ContentPack, master's engine
+pin kept, Scrin flag cell spliced into master's 1x/2x/3x flag sheets and
+upscaled for 4x). **Flagged, not merged** (review comments on each): #180
+needs an engine PR that doesn't exist in the pin and halves `TileSize`;
+#245's economy rewrite conflicts semantically with the post-wave composition
+system — needs a port, not a textual merge; #85 vendors ~2174 `engine/` files
+into a repo where `engine/` is `.gitignore`d — its Vulkan backend belongs in
+the cameo-mod/OpenRA fork. ⚠ `git merge --abort` on #85 deleted the ignored
+`engine/` sources (the merge had force-added them); recover with `make all`.
+
 ## 2026-09-28 — EMBER: squad-level attention landed on `devin/ember/ai-squad-attention`
 
 `IBotActionBudget` now has its second consumer: squad `Update()` consults
