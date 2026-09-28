@@ -13380,3 +13380,16 @@ No budget module on the bot = zero behavior change (opt-in via
 `HumanPaceBotModule`, already on the genericbot Player block). Gates:
 full build clean, `ai_squad_gate` PASS under live pacing (squads form),
 boot-gate PASS. PR pending independent review.
+**Done (EMBER, 2026-09-28, phase 8 beacon response):** `PlaceBeacon` shadow +
+`BeaconTracker` world trait + `BeaconResponderBotModule` (allied pings near hostiles
+pull idle combat units through the risk gate; pings on allied buildings pull a repair
+unit). Gates: 256/256 tests (3 new shadow tests), ai_squad_gate PASS, boot-gate PASS.
+
+**Done (2026-09-27, ember-ai6a):** #580 review fixes per Claude. (1) Fog
+honesty: beacon visible-enemy scan now requires CanBeViewedByPlayer —
+FindActorsInCircle sees through shroud and was leaking hidden enemies
+into the response decision. (2) Idle-pool leak: released responders are
+re-added to unitsHangingAroundTheBase unless dead/squad-claimed — a unit
+pulled from the pool but left only in activeUnits is stranded forever
+(FindNewUnits skips activeUnits). Gates: 261/261 tests, scratch-bin
+squad-gate equivalent PASS (squads=3 units=8 tick1201), boot PASS.
