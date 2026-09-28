@@ -446,7 +446,8 @@ namespace OpenRA.Mods.Common.Traits
 
 			var harvesterType = Info.HarvesterTypes
 				.OrderBy(x => x)
-				.FirstOrDefault(world.Map.Rules.Actors.ContainsKey);
+				.FirstOrDefault(t => world.Map.Rules.Actors.ContainsKey(t) &&
+					FransActorClass.AnyOwnedQueueCanBuild(player, t));
 			if (harvesterType == null)
 				return;
 

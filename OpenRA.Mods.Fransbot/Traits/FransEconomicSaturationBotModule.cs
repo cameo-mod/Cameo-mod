@@ -45,8 +45,8 @@ namespace OpenRA.Mods.Common.Traits
 		public readonly ImmutableArray<string> ProductionQueueCategories =
 			["Infantry", "Vehicle", "Aircraft", "Plane", "Ship"];
 
-		[Desc("Shared building-production queue category included in the same throughput model.")]
-		public readonly string BuildingQueueCategory = "Building";
+		[Desc("Shared building-production queue categories included in the same throughput model. Every alias a structure-declaring queue may use (classic Building plus hybrid RABuilding/RADefence/BuildingAddons) so the model resolves in any queue mode.")]
+		public readonly ImmutableArray<string> BuildingQueueCategories = ["Building"];
 
 		[Desc("The shared MinimumCash floor. Repeatedly operating two or more queues at/below this value means Struggling.")]
 		public readonly int MinimumCash = 500;
@@ -113,7 +113,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (SurplusMinimumAvailableQueues < ProsperousBusyQueues || SurplusSustainTicks <= 0 || SurplusReleaseSustainTicks <= 0 || StableCashDrawdownTolerance < 0)
 				throw new YamlException("Economic Surplus throughput settings are invalid.");
 			if (BusySamplePercent <= 0 || BusySamplePercent > 100 || SurplusAllBusySamplePercent <= 0 || SurplusAllBusySamplePercent > 100 ||
-				ScanInterval <= 0 || string.IsNullOrWhiteSpace(BuildingQueueCategory) ||
+				ScanInterval <= 0 || BuildingQueueCategories.Length == 0 || BuildingQueueCategories.Any(string.IsNullOrWhiteSpace) ||
 				string.IsNullOrWhiteSpace(StrugglingCondition) || string.IsNullOrWhiteSpace(GrowingCondition) ||
 				string.IsNullOrWhiteSpace(ProsperousCondition) || string.IsNullOrWhiteSpace(SurplusCondition))
 				throw new YamlException("Economic state scan/condition settings are invalid.");
@@ -255,7 +255,9 @@ namespace OpenRA.Mods.Common.Traits
 			var available = 0;
 			var busy = 0;
 
-			var buildingQueues = queuesByCategory[Info.BuildingQueueCategory]
+			var buildingQueues = Info.BuildingQueueCategories.Distinct()
+				.SelectMany(category => queuesByCategory[category])
+				.Distinct()
 				.Where(IsUsableQueue).ToArray();
 			if (buildingQueues.Length > 0)
 			{

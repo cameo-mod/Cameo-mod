@@ -377,6 +377,7 @@ namespace OpenRA.Mods.Common.Traits
 		bool openingMcvRequestIssued;
 		int openingMcvRequestTick;
 		int openingMcvLastDiagnosticTick = -1;
+		string openingMcvRequestedType;
 		bool openingMcvCompleted;
 		int lastStrategicSnapshotTick = -1;
 		CPos? strategicForwardTarget;
@@ -663,6 +664,7 @@ namespace OpenRA.Mods.Common.Traits
 			openingMcvRequestIssued = false;
 			openingMcvRequestTick = 0;
 			openingMcvLastDiagnosticTick = -1;
+			openingMcvRequestedType = null;
 			if (openingStage == OpeningStage.Complete)
 				FransBotLog.BotDebug(world, "{0}: Fast Expansion core opening complete; the first opening MCV is physically present. Expansion planning and post-opening BaseBuilder policy are now unlocked.", player);
 		}
@@ -685,15 +687,47 @@ namespace OpenRA.Mods.Common.Traits
 			// UnitBuilder -> ProductionQueue hand-off window without being duplicated.
 			if (openingMcvRequestIssued)
 			{
-				LogOpeningMcvWaitDiagnostic(bot);
+				// If the outstanding request vanished without native production ever starting
+				// (queue loss mid-handoff, producer destroyed), the latch must clear so the
+				// request can be reissued — a latched-but-empty demand deadlocks the opening.
+				var requestedOutstanding = openingMcvRequestedType != null &&
+					requestUnitProduction?.FirstEnabledTraitOrDefault() is { } waitingBuilder &&
+					waitingBuilder.RequestedProductionCount(bot, openingMcvRequestedType) > 0;
+				if (openingUnitPlanService?.OpeningMcvProductionStarted != true &&
+					!requestedOutstanding && !IsQueued(openingMcvRequestedType) &&
+					world.WorldTick - openingMcvRequestTick > Info.OpeningMcvDiagnosticInterval)
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: opening MCV request for {1} vanished before native production start; clearing the request latch and reissuing.",
+						player, openingMcvRequestedType ?? "unknown");
+					openingMcvRequestIssued = false;
+				}
+				else
+				{
+					LogOpeningMcvWaitDiagnostic(bot);
+					return;
+				}
+			}
+
+			var mcvType = PickBuildableType(Info.McvTypes);
+			if (mcvType == null)
+			{
+				if (world.WorldTick - openingMcvLastDiagnosticTick >= Info.OpeningMcvDiagnosticInterval)
+				{
+					openingMcvLastDiagnosticTick = world.WorldTick;
+					FransBotLog.BotDebug(world,
+						"{0}: opening MCV waits: no McvTypes entry is currently buildable on any owned enabled queue (producer missing or prerequisites unmet).",
+						player);
+				}
 				return;
 			}
 
-			if (RequestOne(bot, Info.McvTypes, "Fast Expansion MCV after FIX, one light vehicle and one manual ore truck"))
+			if (RequestOne(bot, mcvType, "Fast Expansion MCV after FIX, one light vehicle and one manual ore truck"))
 			{
 				openingMcvRequestIssued = true;
 				openingMcvRequestTick = world.WorldTick;
 				openingMcvLastDiagnosticTick = world.WorldTick;
+				openingMcvRequestedType = mcvType;
 			}
 		}
 
@@ -711,7 +745,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 			}
 
-			var type = Info.McvTypes.OrderBy(x => x).FirstOrDefault(world.Map.Rules.Actors.ContainsKey);
+			var type = openingMcvRequestedType ?? PickBuildableType(Info.McvTypes);
 			var unitBuilder = requestUnitProduction?.FirstEnabledTraitOrDefault();
 			var requested = type == null || unitBuilder == null ? 0 : unitBuilder.RequestedProductionCount(bot, type);
 			var queued = type != null && IsQueued(type);
@@ -745,17 +779,48 @@ namespace OpenRA.Mods.Common.Traits
 				"{0}: first opening MCV is physically complete; deterministic MCV cash lock releases and post-opening economy/expansion policy unlocks.", player);
 		}
 
-		bool RequestOne(IBot bot, FrozenSet<string> types, string reason)
+		// Picks the first configured type that an owned, enabled queue can actually produce.
+		// Bare alphabetical picks select a foreign faction's unit whenever the configured list
+		// spans the whole roster (e.g. an asianalliance MCV for a Soviet bot), and the resulting
+		// request can never materialize.
+		string PickBuildableType(FrozenSet<string> types)
+		{
+			return types.OrderBy(x => x).FirstOrDefault(t =>
+				world.Map.Rules.Actors.ContainsKey(t) && CanProduceOnOwnedQueues(t));
+		}
+
+		bool CanProduceOnOwnedQueues(string type) =>
+			FransActorClass.AnyOwnedQueueCanBuild(player, type);
+
+		bool RequestOne(IBot bot, string type, string reason)
 		{
 			var unitBuilder = requestUnitProduction?.FirstEnabledTraitOrDefault();
 			if (unitBuilder == null)
 				return false;
-			var type = types.OrderBy(x => x).FirstOrDefault(world.Map.Rules.Actors.ContainsKey);
 			if (type == null || IsQueued(type) || unitBuilder.RequestedProductionCount(bot, type) > 0)
 				return false;
 			FransBotLog.BotDebug(world, "{0}: FransBaseBuilder requests one {1}: {2}.", player, type, reason);
 			unitBuilder.RequestUnitProduction(bot, type);
 			return true;
+		}
+
+		// The building classes the deterministic opening depends on. Rebuilt (in this
+		// upstream-first order) when a stage's wanted set is unbuildable because one was lost.
+		bool IsOpeningProducerType(string name) =>
+			Info.PowerTypes.Contains(name) || Info.BarracksTypes.Contains(name) ||
+			Info.RefineryTypes.Contains(name) || Info.WarFactoryTypes.Contains(name) ||
+			Info.RepairTypes.Contains(name);
+
+		int OpeningProducerRank(string name) =>
+			Info.PowerTypes.Contains(name) ? 0 :
+			Info.BarracksTypes.Contains(name) ? 1 :
+			Info.RefineryTypes.Contains(name) ? 2 :
+			Info.WarFactoryTypes.Contains(name) ? 3 : 4;
+
+		bool IsOwned(string name)
+		{
+			combatIntelService.EnsureCurrentSnapshot();
+			return combatIntelService.OwnedActors.Any(a => a.Info.Name == name);
 		}
 
 		bool IsQueued(string type)
@@ -979,9 +1044,31 @@ namespace OpenRA.Mods.Common.Traits
 						.OrderBy(a => a.Name)
 						.FirstOrDefault();
 					if (result == null)
-						reason = $"no wanted∩buildable (stage={openingStage}, buildables={items.Count}, " +
-							$"wantedInBuildables=({string.Join(",", items.Where(a => wanted.Contains(a.Name)).Select(a => a.Name).Take(4))}), " +
-							$"wantedBlockedByLimit=({string.Join(",", items.Where(a => wanted.Contains(a.Name) && !BelowLimit(a.Name)).Select(a => a.Name).Take(4))}))";
+					{
+						// The wanted stage building is unbuildable because a producer lower in
+						// the chain was destroyed mid-opening (e.g. servicedepot needs the war
+						// factory). Rebuild the missing producer upstream-first instead of idling
+						// the construction yard forever on a now-impossible wanted set.
+						result = items
+							.Where(a => IsOpeningProducerType(a.Name) && !IsOwned(a.Name) && BelowLimit(a.Name))
+							.OrderBy(a => OpeningProducerRank(a.Name))
+							.ThenBy(a => a.Name)
+							.FirstOrDefault();
+						if (result != null)
+						{
+							if (world.WorldTick - lastOpeningDiagTick >= 250)
+							{
+								lastOpeningDiagTick = world.WorldTick;
+								FransBotLog.BotDebug(world,
+									"{0}: FRANS-PROD opening rebuilds missing producer {1} (stage={2}: wanted set is unbuildable).",
+									player, result.Name, openingStage);
+							}
+						}
+						else
+							reason = $"no wanted∩buildable (stage={openingStage}, buildables={items.Count}, " +
+								$"wantedInBuildables=({string.Join(",", items.Where(a => wanted.Contains(a.Name)).Select(a => a.Name).Take(4))}), " +
+								$"wantedBlockedByLimit=({string.Join(",", items.Where(a => wanted.Contains(a.Name) && !BelowLimit(a.Name)).Select(a => a.Name).Take(4))}))";
+					}
 				}
 			}
 

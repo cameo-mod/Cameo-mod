@@ -263,6 +263,14 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		readonly World world;
+		FransQueueDomains queueDomains;
+		FransQueueDomains QueueDomains => queueDomains ??= FransQueueDomains.For(world.Map.Rules);
+
+		// The configured landing-craft queue name plus every naval-domain queue alias the
+		// ruleset declares — resolves in classic ("Ship") and hybrid ("RANaval") modes.
+		FrozenSet<string> ShipQueueNames() =>
+			QueueDomains.Naval.Union(new[] { Info.LandingCraftQueueCategory })
+				.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
 		readonly Player player;
 		Actor reservationOwner;
 		IFransStrategicMapService strategicMap;
@@ -515,14 +523,16 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			var shipQueues = queuesByCategory[Info.LandingCraftQueueCategory].Where(q => q.Enabled).ToArray();
+			var shipQueueNames = ShipQueueNames();
+			var shipQueues = shipQueueNames.SelectMany(name => queuesByCategory[name]).Where(q => q.Enabled).Distinct().ToArray();
 			if (shipQueues.Length == 0)
 				return;
 
 			var craftType = Info.LandingCraftTypes.OrderBy(x => x).FirstOrDefault(type =>
 				world.Map.Rules.Actors.TryGetValue(type, out var actorInfo) &&
 				actorInfo.TraitInfoOrDefault<BuildableInfo>() is BuildableInfo buildable &&
-				buildable.Queue.Contains(Info.LandingCraftQueueCategory));
+				buildable.Queue.Any(shipQueueNames.Contains) &&
+				shipQueues.Any(q => q.BuildableItems().Any(i => i.Name == type)));
 			if (craftType == null)
 				return;
 

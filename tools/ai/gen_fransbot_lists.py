@@ -375,6 +375,7 @@ def main():
     put("FransSupportPowerBotModule", "DeliveryRejectedTerrainTypes", WATER_TERRAINS)
     put("FransUnitBuilderBotModule", "UnitQueues", unit_queue_names)
     put("FransEconomicSaturationBotModule", "ProductionQueueCategories", unit_queue_names)
+    put("FransEconomicSaturationBotModule", "BuildingQueueCategories", building_queue_names)
     put("FransBaseBuilderBotModule", "BarracksTypes", is_inf_prod)
     put("FransBaseBuilderBotModule", "WarFactoryTypes", is_veh_prod)
     put("FransBaseBuilderBotModule", "PowerTypes", is_power)
@@ -496,14 +497,20 @@ def main():
     put("FransUnitBuilderBotModule", "UnitDelays", {})
     put("FransUnitBuilderBotModule", "OpeningLightVehicleTypes", is_cheap_fast_ground - is_infantry)
     put("FransUnitBuilderBotModule", "HardDisabledUnitTypes", set())
-    put("FransUnitBuilderBotModule", "DelayUntilOpeningMcvCompletedUnitTypes", is_mcv)
+    # Delay-until-opening-MCV is for units the opening should not buy early
+    # (upstream: the mobile AA vehicle ftrk). MCVs must never appear here —
+    # the gate keys on OpeningMcvCompleted, so an MCV in the list self-deadlocks.
+    is_aa_vehicle = {n for n in is_combat_ground
+                     if n not in is_infantry and n not in is_mcv and n not in is_harvester
+                     and ctx.weapon_targets_air(actors[n])}
+    put("FransUnitBuilderBotModule", "DelayUntilOpeningMcvCompletedUnitTypes", is_aa_vehicle)
     put("FransUnitBuilderBotModule", "OpeningCaptureSpecialistTypes", is_capture)
     put("FransUnitBuilderBotModule", "OpeningRifleTypes", is_rifle_infantry)
     put("FransUnitBuilderBotModule", "OpeningRocketTypes", is_rocket_infantry)
     put("FransUnitBuilderBotModule", "PreferredVehicleProducerTypes", is_veh_prod)
     put("FransUnitBuilderBotModule", "MultiFactoryGatedVehicleTypes", set())
     put("FransUnitBuilderBotModule", "PreferredInfantryProducerTypes", is_inf_prod)
-    put("FransUnitBuilderBotModule", "PriorityRequestedUnitTypes", is_capture | is_engineer)
+    put("FransUnitBuilderBotModule", "PriorityRequestedUnitTypes", is_capture | is_engineer | is_mcv)
     put("FransUnitBuilderBotModule", "HarvesterTypes", is_harvester)
     put("FransUnitBuilderBotModule", "ResourceControlStructureTypes", is_refinery | is_derrick)
     put("FransUnitBuilderBotModule", "AirFixedWingPrimaryTypes",

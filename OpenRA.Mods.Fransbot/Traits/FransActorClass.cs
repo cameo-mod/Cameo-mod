@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common.Traits.Radar;
@@ -94,6 +95,19 @@ namespace OpenRA.Mods.Common.Traits
 		public static bool IsTank(ActorInfo a) => IsGround(a) && IsArmed(a) && !IsHarvester(a) && !IsTransport(a);
 
 		/// <summary>True when any armament's resolved weapon accepts <paramref name="target"/>.</summary>
+		/// <summary>
+		/// True when an owned, enabled production queue can currently produce the type.
+		/// Uses the prerequisite-resolved BuildableItems set — Producible is queue-type
+		/// matched only and contains cross-faction entries that can never be built.
+		/// </summary>
+		public static bool AnyOwnedQueueCanBuild(Player player, string type)
+		{
+			return player.World.ActorsHavingTrait<ProductionQueue>()
+				.Where(a => a.Owner == player && a.IsInWorld && !a.IsDead)
+				.SelectMany(a => a.TraitsImplementing<ProductionQueue>())
+				.Any(q => q.Enabled && q.BuildableItems().Any(i => i.Name == type));
+		}
+
 		public static bool WeaponTargets(ActorInfo a, Ruleset rules, string target)
 		{
 			foreach (var arm in a.TraitInfos<ArmamentInfo>())
@@ -132,5 +146,73 @@ namespace OpenRA.Mods.Common.Traits
 		/// <summary>Artillery class: armed mobile unit with weapon range >= ~10 cells.</summary>
 		public static bool IsArtillery(ActorInfo a, Ruleset rules) =>
 			!IsBuilding(a) && IsArmed(a) && !IsAircraft(a) && MaxWeaponRange(a, rules) >= 10 * 1024;
+	}
+
+	/// <summary>
+	/// Queue-name to production-domain mapping, derived per ruleset from which mobile
+	/// unit classes declare each Buildable.Queue name. Upstream logic compared queue
+	/// names to literals ("Infantry"/"Vehicle"/"Aircraft"/"Ship"), which silently match
+	/// nothing under Cameo's hybrid mode where live queue types are RAInfantry /
+	/// RAVehicle / RAAircraft / RANaval (and pack-specific names like SCZergInfantry or
+	/// Vehicle.HunterSeeker). Every domain set contains every alias a domain unit
+	/// declares, so lookups resolve in classic and hybrid queue modes alike.
+	/// </summary>
+	public sealed class FransQueueDomains
+	{
+		static readonly Dictionary<Ruleset, FransQueueDomains> Cache = new();
+
+		public readonly FrozenSet<string> Infantry;
+		public readonly FrozenSet<string> Vehicle;
+		public readonly FrozenSet<string> Air;
+		public readonly FrozenSet<string> Naval;
+
+		FransQueueDomains(FrozenSet<string> infantry, FrozenSet<string> vehicle,
+			FrozenSet<string> air, FrozenSet<string> naval)
+		{
+			Infantry = infantry;
+			Vehicle = vehicle;
+			Air = air;
+			Naval = naval;
+		}
+
+		public static FransQueueDomains For(Ruleset rules)
+		{
+			lock (Cache)
+			{
+				if (Cache.TryGetValue(rules, out var domains))
+					return domains;
+
+				var infantry = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				var vehicle = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				var air = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				var naval = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+				foreach (var actor in rules.Actors.Values)
+				{
+					if (FransActorClass.IsBuilding(actor))
+						continue;
+					var buildable = actor.TraitInfoOrDefault<BuildableInfo>();
+					if (buildable == null)
+						continue;
+
+					if (FransActorClass.IsInfantry(actor))
+						infantry.UnionWith(buildable.Queue);
+					else if (FransActorClass.IsAircraft(actor))
+						air.UnionWith(buildable.Queue);
+					else if (FransActorClass.IsNaval(actor))
+						naval.UnionWith(buildable.Queue);
+					else if (FransActorClass.IsGround(actor))
+						vehicle.UnionWith(buildable.Queue);
+				}
+
+				domains = new FransQueueDomains(
+					infantry.ToFrozenSet(StringComparer.OrdinalIgnoreCase),
+					vehicle.ToFrozenSet(StringComparer.OrdinalIgnoreCase),
+					air.ToFrozenSet(StringComparer.OrdinalIgnoreCase),
+					naval.ToFrozenSet(StringComparer.OrdinalIgnoreCase));
+				Cache[rules] = domains;
+				return domains;
+			}
+		}
 	}
 }

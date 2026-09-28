@@ -186,7 +186,8 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var validTypes = Info.SupplyTruckTypes
-				.Where(type => world.Map.Rules.Actors.ContainsKey(type) && GetValidDeliveryTargets().Any())
+				.Where(type => world.Map.Rules.Actors.ContainsKey(type) &&
+					FransActorClass.AnyOwnedQueueCanBuild(player, type) && GetValidDeliveryTargets().Any())
 				.ToArray();
 
 			if (validTypes.Length == 0)

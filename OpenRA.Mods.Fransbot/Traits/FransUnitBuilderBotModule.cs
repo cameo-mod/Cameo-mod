@@ -282,6 +282,8 @@ namespace OpenRA.Mods.Common.Traits
 		PlayerResources playerResources;
 
 		int currentQueueIndex;
+		FransQueueDomains queueDomains;
+		FransQueueDomains QueueDomains => queueDomains ??= FransQueueDomains.For(world.Map.Rules);
 		int ticks;
 		int lastCriticalPriorityReserveLogTick = -1;
 		int lastEconomicEmergencyLogTick = -1;
@@ -504,13 +506,13 @@ namespace OpenRA.Mods.Common.Traits
 					currentQueueIndex = 0;
 
 				var category = Info.UnitQueues[currentQueueIndex];
-				if (openingBuildOrderService.PauseOrdinaryVehicleProduction && category == "Vehicle")
+				if (openingBuildOrderService.PauseOrdinaryVehicleProduction && QueueDomains.Vehicle.Contains(category))
 					continue;
-				if (openingBuildOrderService.PauseOrdinaryInfantryProduction && category == "Infantry")
+				if (openingBuildOrderService.PauseOrdinaryInfantryProduction && QueueDomains.Infantry.Contains(category))
 					continue;
-				if (seaProductionSuspendedForEconomy && category == "Ship")
+				if (seaProductionSuspendedForEconomy && QueueDomains.Naval.Contains(category))
 					continue;
-				if (airProductionSuspendedForEconomy && (category == "Aircraft" || category == "Plane"))
+				if (airProductionSuspendedForEconomy && QueueDomains.Air.Contains(category))
 					continue;
 
 				var queues = queuesByCategory[category].ToArray();
@@ -590,9 +592,9 @@ namespace OpenRA.Mods.Common.Traits
 			var available = Math.Max(0, cash - Math.Max(0, protectedReserve));
 			var allowedCategories = new List<string>();
 			if (allowInfantry)
-				allowedCategories.Add("Infantry");
+				allowedCategories.AddRange(QueueDomains.Infantry);
 			if (allowVehicle)
-				allowedCategories.Add("Vehicle");
+				allowedCategories.AddRange(QueueDomains.Vehicle);
 
 			// Existing current production may continue only when the bank already covers both
 			// the protected priority item and the complete remaining bill for that queue item.
@@ -618,7 +620,9 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				if (allowInfantry)
 				{
-					TryBuildAffordableSpecOpsRequest(bot, queuesByCategory, "Infantry", ref available, openingCaptureOnly);
+					foreach (var category in QueueDomains.Infantry)
+						if (TryBuildAffordableSpecOpsRequest(bot, queuesByCategory, category, ref available, openingCaptureOnly))
+							break;
 					BuildOpeningInfantryWithBudget(bot, queuesByCategory, ref available);
 				}
 			}
@@ -687,7 +691,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (buildableInfo == null)
 					continue;
 
-				foreach (var category in buildableInfo.Queue.Where(q => q == "Infantry"))
+				foreach (var category in buildableInfo.Queue.Where(q => QueueDomains.Infantry.Contains(q)))
 				{
 					var queues = queuesByCategory[category].ToArray();
 					var selected = queues.Where(IsFreeUsableQueue).FirstOrDefault(q => QueueCanBuild(q, name));
@@ -784,11 +788,30 @@ namespace OpenRA.Mods.Common.Traits
 					openingLightVehicleSatisfied = true;
 				else if (TryStartOpeningUnit(bot, Info.OpeningLightVehicleTypes, queuesByCategory, "one Double Ref light map-control vehicle"))
 					return;
+				else if (TryStartCheapestOpeningVehicle(bot, queuesByCategory))
+					return;
+				else if (!AnyOpeningCandidateBuildable(Info.OpeningLightVehicleTypes, queuesByCategory))
+				{
+					// Some faction rosters field no light map-control unit at all (e.g. heavy-armor
+					// lineups). The flag gates the opening MCV and the manual harvester below, so an
+					// impossible demand must satisfy the step rather than deadlock the whole opening.
+					openingLightVehicleSatisfied = true;
+					FransBotLog.BotDebug(world,
+						"{0}: Fransbot opening skips the light map-control vehicle: no configured type is producible on any owned queue for this faction.",
+						player);
+				}
 			}
 
 			if (openingLightVehicleSatisfied &&
-				openingManualHarvestersStarted < Math.Max(0, Info.OpeningManualHarvesterTarget))
-				TryStartOpeningUnit(bot, Info.HarvesterTypes, queuesByCategory, "Fast Expansion single pre-MCV ore truck");
+				openingManualHarvestersStarted < Math.Max(0, Info.OpeningManualHarvesterTarget) &&
+				!TryStartOpeningUnit(bot, Info.HarvesterTypes, queuesByCategory, "Fast Expansion single pre-MCV ore truck") &&
+				!AnyOpeningCandidateBuildable(Info.HarvesterTypes, queuesByCategory))
+			{
+				openingManualHarvestersStarted = Math.Max(0, Info.OpeningManualHarvesterTarget);
+				FransBotLog.BotDebug(world,
+					"{0}: Fransbot opening skips the manual pre-MCV harvester: no configured harvester type is producible on any owned queue for this faction.",
+					player);
+			}
 		}
 
 		bool HasOwnedOrQueuedOpeningLightVehicle()
@@ -846,6 +869,67 @@ namespace OpenRA.Mods.Common.Traits
 			return false;
 		}
 
+		// Factions without a configured light map-control vehicle (e.g. heavy-armor rosters)
+		// substitute the cheapest armed vehicle their queues can currently produce — the step
+		// exists to field one mobile combat unit early, so a substitute beats an idle queue.
+		bool TryStartCheapestOpeningVehicle(IBot bot, ILookup<string, ProductionQueue> queuesByCategory)
+		{
+			ProductionQueue bestQueue = null;
+			ActorInfo bestUnit = null;
+			var bestCost = int.MaxValue;
+			foreach (var category in QueueDomains.Vehicle)
+				foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue))
+					foreach (var unit in queue.BuildableItems())
+					{
+						if (!FransActorClass.IsGround(unit) || !FransActorClass.IsArmed(unit) ||
+							FransActorClass.IsHarvester(unit) || FransActorClass.IsTransport(unit) ||
+							FransActorClass.IsMcv(unit) ||
+							Info.DelayUntilOpeningMcvCompletedUnitTypes.Contains(unit.Name) ||
+							Info.HardDisabledUnitTypes.Contains(unit.Name))
+							continue;
+						var cost = Math.Max(0, queue.GetProductionCost(unit));
+						if (cost < bestCost)
+						{
+							bestCost = cost;
+							bestQueue = queue;
+							bestUnit = unit;
+						}
+					}
+
+			if (bestQueue == null)
+				return false;
+
+			bot.QueueOrder(Order.StartProduction(bestQueue.Actor, bestUnit.Name, 1));
+			openingLightVehicleSatisfied = true;
+			RecordOpeningProduction(bestUnit.Name);
+			FransBotLog.BotDebug(world,
+				"{0}: Fransbot opening substitutes {1} for the light map-control vehicle step on {2}: no configured light type is buildable for this faction.",
+				player, bestUnit.Name, bestQueue.Actor);
+			return true;
+		}
+
+		bool AnyOpeningCandidateBuildable(IEnumerable<string> candidateTypes,
+			ILookup<string, ProductionQueue> queuesByCategory)
+		{
+			foreach (var name in candidateTypes)
+			{
+				if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
+					continue;
+				var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+				if (buildableInfo == null)
+					continue;
+
+				// QueueCanBuild is the same prereq-resolved test TryStartOpeningUnit needs —
+				// Producible would be wrong here because it is a pure queue-type match that
+				// also lists cross-faction units a queue can never actually produce.
+				foreach (var category in buildableInfo.Queue)
+					if (queuesByCategory[category].Any(q => IsUsableQueue(q) && QueueCanBuild(q, name)))
+						return true;
+			}
+
+			return false;
+		}
+
 		void RecordOpeningProduction(string unitName, bool openingPlanUnit = false)
 		{
 			if (openingBuildOrderService.OpeningComplete)
@@ -891,9 +975,9 @@ namespace OpenRA.Mods.Common.Traits
 
 			foreach (var category in Info.UnitQueues)
 			{
-				if (pauseOrdinaryVehicleProduction && category == "Vehicle")
+				if (pauseOrdinaryVehicleProduction && QueueDomains.Vehicle.Contains(category))
 					continue;
-				if (pauseOrdinaryInfantryProduction && category == "Infantry")
+				if (pauseOrdinaryInfantryProduction && QueueDomains.Infantry.Contains(category))
 					continue;
 
 				foreach (var queue in queuesByCategory[category]
@@ -906,9 +990,9 @@ namespace OpenRA.Mods.Common.Traits
 					if (TryBuildSpecOpsRequestForQueue(bot, queue, openingCaptureOnly: false))
 						continue;
 
-					if (seaProductionSuspendedForEconomy && category == "Ship")
+					if (seaProductionSuspendedForEconomy && QueueDomains.Naval.Contains(category))
 						continue;
-					if (airProductionSuspendedForEconomy && (category == "Aircraft" || category == "Plane"))
+					if (airProductionSuspendedForEconomy && QueueDomains.Air.Contains(category))
 						continue;
 
 					var unit = ChooseRandomUnitToBuild(queue, allUnits, ignorePositiveUnitLimits);
@@ -981,7 +1065,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (!seaProductionSuspendedForEconomy && cash < Info.EconomicEmergencySeaSuspendCash)
 			{
 				seaProductionSuspendedForEconomy = true;
-				var cancelled = CancelQueuedOrdinaryDomainProduction(bot, queuesByCategory, "Ship");
+				var cancelled = CancelQueuedOrdinaryDomainProduction(bot, queuesByCategory, QueueDomains.Naval.ToArray());
 				FransBotLog.BotDebug(world,
 					"{0}: ECONOMIC EMERGENCY: Sea ordinary production suspends FIRST at cash/resources {1} < {2}; cancelled {3} queued ordinary Sea combat unit(s). Demand-only transport requests are untouched.",
 					player, cash, Info.EconomicEmergencySeaSuspendCash, cancelled);
@@ -1032,7 +1116,7 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		int CountQueuedAirCombatUnits(ILookup<string, ProductionQueue> queuesByCategory) =>
-			new[] { "Aircraft", "Plane" }
+			QueueDomains.Air
 				.SelectMany(category => queuesByCategory[category])
 				.Where(IsUsableQueue)
 				.SelectMany(queue => queue.AllQueued())
@@ -1058,7 +1142,7 @@ namespace OpenRA.Mods.Common.Traits
 				.ToArray();
 
 			foreach (var actorType in preferredTypes)
-				foreach (var category in new[] { "Aircraft", "Plane" })
+				foreach (var category in QueueDomains.Air)
 					foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue).OrderByDescending(q => q.Actor.ActorID))
 					{
 						if (IsUnitDelayed(actorType) || !QueueCanBuild(queue, actorType) ||
@@ -1086,7 +1170,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
-			foreach (var category in new[] { "Aircraft", "Plane" })
+			foreach (var category in QueueDomains.Air)
 				foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue).OrderByDescending(q => q.Actor.ActorID))
 				{
 					var unit = ChooseRandomUnitToBuild(queue, allUnits, Info.PositiveCombatUnitLimitsAreSoft);
@@ -1107,7 +1191,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			var live = CountLiveAirCombatUnits();
 			var preserveQueued = Math.Max(0, Info.EconomicEmergencyMinimumAirCombatReserve - live);
-			var queued = new[] { "Aircraft", "Plane" }
+			var queued = QueueDomains.Air
 				.SelectMany(category => queuesByCategory[category])
 				.Where(IsUsableQueue)
 				.OrderBy(q => q.Actor.ActorID)
@@ -1343,12 +1427,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		ProductionQueue PreferredCompatibleProducer(string category, IEnumerable<ProductionQueue> queues, string requestedUnit)
 		{
-			var producerTypes = category switch
-			{
-				"Vehicle" => Info.PreferredVehicleProducerTypes,
-				"Infantry" => Info.PreferredInfantryProducerTypes,
-				_ => null
-			};
+			var producerTypes = QueueDomains.Vehicle.Contains(category) ? Info.PreferredVehicleProducerTypes
+				: QueueDomains.Infantry.Contains(category) ? Info.PreferredInfantryProducerTypes
+				: null;
 
 			if (producerTypes == null || producerTypes.Count == 0)
 				return null;
@@ -1364,12 +1445,9 @@ namespace OpenRA.Mods.Common.Traits
 		ProductionQueue PreferredFreeCompatibleProducer(string category, IEnumerable<ProductionQueue> queues,
 			string requestedUnit, ProductionQueue exclude)
 		{
-			var producerTypes = category switch
-			{
-				"Vehicle" => Info.PreferredVehicleProducerTypes,
-				"Infantry" => Info.PreferredInfantryProducerTypes,
-				_ => null
-			};
+			var producerTypes = QueueDomains.Vehicle.Contains(category) ? Info.PreferredVehicleProducerTypes
+				: QueueDomains.Infantry.Contains(category) ? Info.PreferredInfantryProducerTypes
+				: null;
 
 			if (producerTypes == null || producerTypes.Count == 0)
 				return null;
@@ -1386,8 +1464,8 @@ namespace OpenRA.Mods.Common.Traits
 		IEnumerable<ProductionQueue> OrderGroundProducersByPreference(string category, IEnumerable<ProductionQueue> candidates)
 		{
 			var available = candidates.ToArray();
-			var useCommanderDemand = (category == "Infantry" && Info.PreferStrategicInfantryProducer) ||
-				(category == "Vehicle" && Info.PreferStrategicVehicleProducer);
+			var useCommanderDemand = (QueueDomains.Infantry.Contains(category) && Info.PreferStrategicInfantryProducer) ||
+				(QueueDomains.Vehicle.Contains(category) && Info.PreferStrategicVehicleProducer);
 			if (useCommanderDemand && TryGetGroundProductionDemandPoint(out var demand))
 				return available
 					.OrderBy(q => (q.Actor.Location - demand).LengthSquared)

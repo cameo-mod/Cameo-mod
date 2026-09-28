@@ -13708,3 +13708,77 @@ bypassing interval+hold. Dealt-to-them side still has no producer —
 documented one-sided. Gates: 264/264 tests, ai_squad_gate PASS on the
 ISOLATED worktree engine (junction removed per maintainer order),
 boot-gate PASS.
+## 2026-09-28 (early) — DAWN fransbot production chain, commit pending
+
+**Done:** Fransbot Route-A opening now reaches the MCV stage. Three
+cross-faction/deadlock defects found + fixed in this pass:
+
+1. **Hybrid queue domains dead literals.** Cameo hybrid mode types its live
+   queues `RAInfantry`/`RAVehicle`/`RAAircraft`/`RANaval`/... while the vendored
+   code probed `queuesByCategory["Infantry"]` etc. — every hit empty. Added
+   `FransQueueDomains` (ruleset-derived domain aliases) in `FransActorClass.cs`;
+   converted UnitBuilder opening/protected/saturation paths, GroundTransfer and
+   McvExpansionManager landing-craft lookups, and `FransEconomicSaturationBotModule`
+   `BuildingQueueCategory` → `BuildingQueueCategories` (generator emits aliases).
+2. **No-light-vehicle faction deadlock.** `ra1_soviets` has no configured
+   `OpeningLightVehicleTypes` entry; `Producible` is queue-TYPE matched (cross-
+   faction included) so "is it ever buildable" lied. Skip check now uses
+   `BuildableItems()` (`QueueCanBuild`), and a faction with no light type
+   substitutes the cheapest buildable armed ground vehicle — WT3030 substituted
+   `ra1_soviets_gorynychtank`; oretruck followed at WT3690.
+3. **MCV cross-faction pick.** `RequestOne`/`RequestExpansionMcv`/
+   `TryPrequeuePioneerSuccessorMcv` picked `McvTypes.OrderBy(x=>x).First()` =
+   `asianalliance_mobileconstructionvehicle` for a Soviet bot — request
+   outstanding ~3500 WT, never materializes, `openingMcvRequestIssued` latch
+   blocked any retry. Now `PickBuildableType`/`PickBuildableMcvType` pick the
+   first faction-buildable type; the requested type is recorded
+   (`openingMcvRequestedType`); a vanished outstanding request clears the latch
+   and reissues.
+
+**Fleet:** EMBER #588 (D2k/Outpost2 central `*Types` id appends) reviewed —
+verified pure-append (118 ids, 0 removed), no overlap with this lane. Maintainer
+orders ACK'd: git author already `AedisToru`; `engine/` junction already a real
+dir here.
+
+**Test protocol:** both AI test maps force `World.MapOptions.GameSpeed: insane`
+(10 ms timestep — `MapOptions` under `Player:` silently drops). ~2.5-4x faster;
+a 25k-tick duel takes minutes.
+
+**Next:** verify the versus run requests `ra1_soviets_mobileconstructionvehicle`,
+reaches `OpeningMcvCompleted`, and compare versus HardBot outcome; then
+boot-gate + commit.
+
+**Update (same session):** two more same-class gates found — (a) generated
+`DelayUntilOpeningMcvCompletedUnitTypes` contained every `is_mcv` → `IsUnitDelayed`
+self-gated the opening MCV request (blocked until an MCV completes, forever);
+regenerated as AA-vehicles-only, (b) `PriorityRequestedUnitTypes` lacked MCVs →
+request sat non-critical behind `!openingInProgress`. Added
+`is_capture|is_engineer|is_mcv`. Verified live: request WT3901 → START WT4200 →
+physically complete + `core opening complete` WT5726 → MCV deployed expansion
+conyard WT8673. Versus: lost at WT11924 but a real fight — 31 kills, 43 fielded
+(vs 0-2 kills / 15-18 fielded before). Also fixed same-class alphabetical/random
+picks in FransHarvester (cross-faction harvester requests — the anemic-economy
+cause), FransSupplyTruck, and both landing-craft pick sites (queue-name compat →
+BuildableItems). Shared helper: `FransActorClass.AnyOwnedQueueCanBuild`.
+
+**Update (producer-rebuild + worktree launch recipe):** next failure class after
+the opening-completion run — when HardBot's raid kills the warfactory *before*
+the service depot finishes, `stage=Repair` sat forever with
+`wanted∩buildable=()` (servicedepot prereq gone). `ChooseOpeningBuilding` now
+falls back to rebuilding missing opening producers upstream-first
+(power→barracks→refinery→warfactory→repair) via `IsOpeningProducerType` +
+`OpeningProducerRank` + `IsOwned` — no more permanent stall on a destroyed
+prerequisite.
+
+Launch recipe gotchas discovered after removing the `engine/` junction (the
+worktree engine is now a REAL dir):
+- `engine/bin/glsl/` was never copied → `DirectoryNotFoundException combined.vert`
+  at renderer init. Fix: `cp -r engine/glsl engine/bin/glsl`.
+- `Launch.Map` takes the map UID (`22de08a1...` for the versus map), not a
+  filesystem path.
+- Engine dir key is `Engine.EngineDir=`, not `Game.EngineDir=`.
+- Working recipe:
+  `OpenRA.exe Game.Mod=cameo Launch.Map=<UID> Engine.EngineDir=<wt>\engine Engine.ModSearchPaths=<wt>\mods Engine.SupportDir=`
+
+Fleet: fixed `.devin/skills/boot-gate` name-based kill step → PID/path-scoped
+(NOVA's kill-sweep flag was correct — it would sweep every lane's matches).

@@ -985,6 +985,14 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		readonly World world;
+		FransQueueDomains queueDomains;
+		FransQueueDomains QueueDomains => queueDomains ??= FransQueueDomains.For(world.Map.Rules);
+
+		// The configured landing-craft queue name plus every naval-domain queue alias the
+		// ruleset declares — resolves in classic ("Ship") and hybrid ("RANaval") modes.
+		FrozenSet<string> ShipQueueNames() =>
+			QueueDomains.Naval.Union(new[] { Info.LandingCraftQueueCategory })
+				.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
 		readonly Player player;
 		readonly Actor playerActor;
 		readonly ActorIndex.OwnerAndNamesAndTrait<TransformsInfo> mcvs;
@@ -2637,9 +2645,8 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var unitBuilder = requestUnitProduction?.FirstEnabledTraitOrDefault();
-			var mcvType = Info.McvTypes.OrderBy(x => x).FirstOrDefault();
-			var stillRequested = unitBuilder != null && mcvType != null &&
-				unitBuilder.RequestedProductionCount(bot, mcvType) > 0;
+			var stillRequested = unitBuilder != null &&
+				Info.McvTypes.Any(t => unitBuilder.RequestedProductionCount(bot, t) > 0);
 			if (!stillRequested && QueuedMcvCount() == 0 && !pendingMcvSlotReservation)
 			{
 				FransBotLog.BotDebug(world,
@@ -2674,7 +2681,9 @@ namespace OpenRA.Mods.Common.Traits
 			if (unitBuilder == null)
 				return false;
 
-			var mcvType = Info.McvTypes.OrderBy(x => x).First();
+			var mcvType = PickBuildableMcvType();
+			if (mcvType == null)
+				return false;
 			RefreshPendingMcvSlotReservation();
 			if (McvAlreadyQueued() || unitBuilder.RequestedProductionCount(bot, mcvType) > 0 ||
 				mcvs.Actors.Any(a => a.IsInWorld && !a.IsDead && a.Owner == player && a != activeMcv))
@@ -2736,7 +2745,9 @@ namespace OpenRA.Mods.Common.Traits
 			if (unitBuilder == null || Info.McvTypes.Count == 0)
 				return false;
 
-			var mcvType = Info.McvTypes.OrderBy(x => x).First();
+			var mcvType = PickBuildableMcvType();
+			if (mcvType == null)
+				return false;
 			RefreshPendingMcvSlotReservation();
 			var alreadyQueued = McvAlreadyQueued();
 			var alreadyRequested = unitBuilder.RequestedProductionCount(bot, mcvType) > 0;
@@ -2851,6 +2862,20 @@ namespace OpenRA.Mods.Common.Traits
 						Info.McvTypes.Contains(passenger.Info.Name) && IsLiveOwnedMcv(passenger) && seen.Add(passenger.ActorID))
 						yield return passenger;
 			}
+		}
+
+		// Picks the first configured MCV type an owned, enabled queue can actually produce.
+		// A bare alphabetical pick selects a foreign faction's MCV whenever McvTypes spans the
+		// whole roster (e.g. asianalliance_* for a Soviet bot), and that request never materializes.
+		string PickBuildableMcvType()
+		{
+			var queues = AIUtils.FindQueuesByCategory(player)
+				.SelectMany(g => g)
+				.Where(q => q.Enabled)
+				.ToArray();
+			return Info.McvTypes.OrderBy(x => x)
+				.FirstOrDefault(t => world.Map.Rules.Actors.ContainsKey(t) &&
+					queues.Any(q => q.BuildableItems().Any(i => i.Name == t)));
 		}
 
 		int LiveMcvCount() => LiveOwnedMcvs().Count();
@@ -5261,8 +5286,9 @@ namespace OpenRA.Mods.Common.Traits
 							SuspendFirstExpansionRefineryForInfrastructure(bot, "the nearest PIONEER objective requires a same-region naval producer before any SeaOre commit");
 
 						var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-						var shipQueues = queuesByCategory[Info.LandingCraftQueueCategory]
+						var shipQueues = ShipQueueNames().SelectMany(name => queuesByCategory[name])
 							.Where(q => q.Enabled)
+							.Distinct()
 							.ToArray();
 						EnsureLandingCraftProducer(bot, queuesByCategory, shipQueues, pickupRegion);
 						ClearTarget();
@@ -7013,8 +7039,9 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			var shipQueues = queuesByCategory[Info.LandingCraftQueueCategory]
+			var shipQueues = ShipQueueNames().SelectMany(name => queuesByCategory[name])
 				.Where(q => q.Enabled)
+				.Distinct()
 				.ToArray();
 			EnsureLandingCraftProducer(bot, queuesByCategory, shipQueues);
 		}
@@ -7035,15 +7062,18 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			var shipQueues = queuesByCategory[Info.LandingCraftQueueCategory]
+			var shipQueueNames = ShipQueueNames();
+			var shipQueues = shipQueueNames.SelectMany(name => queuesByCategory[name])
 				.Where(q => q.Enabled)
+				.Distinct()
 				.ToArray();
 
 			string craftType = null;
 			foreach (var type in Info.LandingCraftTypes.OrderBy(x => x))
 				if (world.Map.Rules.Actors.TryGetValue(type, out var actorInfo) &&
 					actorInfo.TraitInfoOrDefault<BuildableInfo>() is BuildableInfo buildable &&
-					buildable.Queue.Contains(Info.LandingCraftQueueCategory))
+					buildable.Queue.Any(shipQueueNames.Contains) &&
+					shipQueues.Any(q => q.BuildableItems().Any(i => i.Name == type)))
 				{
 					craftType = type;
 					break;
@@ -7212,7 +7242,8 @@ namespace OpenRA.Mods.Common.Traits
 		int CountQueuedLandingCraftProduction(int? requiredNavalRegion = null)
 		{
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			return queuesByCategory[Info.LandingCraftQueueCategory]
+			return ShipQueueNames().SelectMany(name => queuesByCategory[name])
+				.Distinct()
 				.Where(q => q.Enabled)
 				.Where(q => !requiredNavalRegion.HasValue ||
 					(TryGetProductionQueueNavalRegion(q, out var region) && region == requiredNavalRegion.Value))
@@ -7225,7 +7256,8 @@ namespace OpenRA.Mods.Common.Traits
 		bool HasRegionalLandingCraftQueueSupplyCapability(int requiredNavalRegion)
 		{
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			return queuesByCategory[Info.LandingCraftQueueCategory]
+			return ShipQueueNames().SelectMany(name => queuesByCategory[name])
+				.Distinct()
 				.Where(q => q.Enabled)
 				.Where(q => TryGetProductionQueueNavalRegion(q, out var region) && region == requiredNavalRegion)
 				.Any(q => q.AllQueued().Any(item => Info.LandingCraftTypes.Contains(item.Item)) ||
@@ -7250,7 +7282,8 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			var queue = queuesByCategory[Info.LandingCraftQueueCategory]
+			var queue = ShipQueueNames().SelectMany(name => queuesByCategory[name])
+				.Distinct()
 				.Where(q => q.Enabled)
 				.Where(q => TryGetProductionQueueNavalRegion(q, out var region) && region == requiredNavalRegion)
 				.OrderBy(q => q.AllQueued().Count())
@@ -8453,8 +8486,9 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
-			var shipQueues = queuesByCategory[Info.LandingCraftQueueCategory]
+			var shipQueues = ShipQueueNames().SelectMany(name => queuesByCategory[name])
 				.Where(q => q.Enabled)
+				.Distinct()
 				.ToArray();
 			var producerProgress = EnsureLandingCraftProducer(bot, queuesByCategory, shipQueues,
 				hasRequiredRegion ? requiredNavalRegion : null);
