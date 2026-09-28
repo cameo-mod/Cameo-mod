@@ -247,17 +247,33 @@ longer the test surface for bot comparisons.
 
 The matchup axis is the franken-bot vs the classic bot:
 
-- **Side A — `fransbot`**: the fog-honest stack (Cameo x RV x CA x CN x
-  Fransbot modules). No global map vision — scouts, fog memory, region
-  intel, nothing omniscient.
-- **Side B — a classic `ModularBot` type** (`hard` and up): the old bot with
-  its inherent full-map awareness and none of the new modules.
+- **Side A — the candidate stack**: the fog-honest merged stack, no global
+  map vision — scouts, fog memory, region intel, nothing omniscient.
+  Concretely that is the `hard` type (the `genericbot` modules = the
+  Cameo × RV × CA × CN merge) — while `fransbot` is the Frans-module
+  **donor** stack, kept as a separate lobby-hidden type so its modules can
+  be A/B-tested in isolation before joining `hard` (maintainer 2026-09-28:
+  "its modules join the Frankenstein stack one at a time"). `fransbot`
+  does NOT receive the `genericbot` condition — the two stacks are
+  disjoint. Both pairings against `classic` are informative; the named
+  acceptance candidate is whichever stack carries the merged modules
+  (today: `hard`).
+- **Side B — `classic`**: the old `ModularBot` type — `classicbot` module
+  gate plus the shared `hardbot` difficulty tier, and deliberate
+  omniscience via `RevealsMap@classic` (self+allies shroud/fog reveal).
 
-Acceptance criterion: **`fransbot` must win the series from both spawns** —
-run `--repeats 4 --swap-bots` minimum (repeat parity alternates which bot
-occupies which `mpspawn`). `gamespeed` stays locked at `insane` (the
-maintainer's "maximum game speed" for bot matches). A timed-out match
+Acceptance criterion: **the candidate must win the series from both
+spawns** — run `--repeats 4 --swap-bots` minimum (repeat parity alternates
+which bot occupies which `mpspawn`). `gamespeed` stays locked at `insane`
+(the maintainer's "maximum game speed" for bot matches). A timed-out match
 records both sides `lost`, never a fabricated winner.
+
+> ⚠ Validity note (2026-09-28, #611): before `IsEligible` admitted
+> `Playable || IsBot`, the `genericbot` master AI saw **no enemy** in
+> harness matches (both duelists are `Playable: False` map-side bots) —
+> every `hard`-side result predating #611 measures a blind master AI and
+> is not a baseline. Fransbot-side records are unaffected: the Frans stack
+> never consumed MasterAi.
 
 Under the hood the harness extracts the `.oramap` into a variant dir, adds
 the `Referee` seat for the local client, converts `Multi0`/`Multi1` into
@@ -271,3 +287,25 @@ match — the franken-bot is not there yet; iterate until it takes the series.
 While iterating, prefer the smallest honest lever (targeting, scouting,
 economy pacing) over anything resembling a cheat — the acceptance is
 "fight smart, not hard".
+
+### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`, insane)
+
+| series | axis | tree | result | notes |
+|---|---|---|---|---|
+| nw-ab-4 | fransbot vs hard | pre-ResourceMap fix | fransbot 0-4 | `army_value: 0` every match, 0 enemy buildings killed — donor stack tabled by a master-AI-blind `hard` |
+| nw-ab-5 | fransbot vs hard | post-ResourceMap (#607) | fransbot 0-2 | expansion live (LandOre/BuildingRefinery commit + retry), first building kill, longest survival ~22k ticks; RAIDs get `bids 0` — recon never reaches the enemy base so no fresh visible targets exist |
+| nw-ab-6 | fransbot vs classic | post-#607 | fransbot 0-2 | vs true omniscient `classic`: 0:16 and 0:18 buildings, army$ 0 both — donor stack alone cannot fight the reference |
+| nw-ab-7 | hard vs classic | post-#611 | running | first VALID `hard` baseline — pre-#611 hard-side numbers were a blind master AI |
+
+⚠ nw-ab-4/5 `hard`-side numbers predate #611 (`IsEligible` saw no enemies) —
+they read as "hard's squad machinery carries it anyway", not as a fair test.
+
+### Fog-honest capability gaps closed 2026-09-28 (donor stack)
+
+- `ResourceMapBotModule@fransbot` instance (#607) — expansion was inert.
+- `ScoutBotModule` multi-instance resolution (#607).
+- Strategic-map probe actors (#614) — passability layers inert without them.
+- Support-power `Decisions` table ported verbatim (#615) — fransbot had zero
+  orders vs the genericbot stack's 210.
+- Remaining unset fields swept module-by-module; the benign 0/null defaults
+  and the real gaps are filed in `docs/HANDOFF.md` (2026-09-28 EMBER block).
