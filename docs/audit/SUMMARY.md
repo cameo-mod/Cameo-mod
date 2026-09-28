@@ -32,8 +32,8 @@ the file (CLAUDE.md rule 8).
 
 `audit_ai_personalities.py` verifies that the five personality-gated
 `SquadManagerBotModuleCA` instances retain byte-identical shared fields and
-that their consumed conditions exactly match the `GrantRandomCondition`
-selector. Personality-specific differences are restricted to an explicit
+that their consumed conditions exactly match the synchronized
+`BotPersonalityController`. Personality-specific differences are restricted to an explicit
 tuning allow-list.
 
 The implementation removes the stale `RushInterval` and
@@ -54,8 +54,8 @@ actor-value cache have not been observed in a long match; that is an in-game
 verification follow-up.
 
 The unit-builder composition consumer is opt-in through `UseCompositions`.
-Without an active composition, each personality's `UnitsToBuild` table remains
-the fallback. The pilot compositions are limited to TD vehicle queues and are
+Without an active composition, the single shared unit builder's `UnitsToBuild`
+table remains the fallback. The pilot compositions are limited to TD vehicle queues and are
 gated by their respective tech prerequisites; broader composition coverage is
 still a follow-up. Explicit unit requests continue to bypass composition
 shares.

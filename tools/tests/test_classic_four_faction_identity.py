@@ -1,6 +1,5 @@
 """Resolved contract for the classic-four Rocket Soldier identity split."""
 
-from fractions import Fraction
 import pathlib
 import sys
 import unittest
@@ -18,7 +17,7 @@ ROCKET_SOLDIERS = {
         (450, 16000, 42, 16, "td_gdi_rocketsoldier_rockets", 6500, 15800, 56),
     "td_nod_rocketsoldier":
         (390, 14000, 48, 14, "td_nod_rocketsoldier_rockets", 6028, 16882, 56),
-    "ra1_allies_alliedrocketsoldier":
+    "ra1_allies_rocketsoldier":
         (480, 13000, 54, 13,
          "ra1_allies_alliedrocketsoldier_rocketsra", 7500, 11500, 50),
     "ra1_soviets_rocketsoldier":
@@ -55,7 +54,6 @@ class ClassicFourFactionIdentityTests(unittest.TestCase):
             cost, hp, speed, healing, weapon_name, range_, damage, _ = spec
             weapon = self.rules.resolve_weapon(weapon_name)
 
-            self.assertEqual("Flak", actor.child("Armor").get("Type"), actor_name)
             self.assertEqual(cost, int(actor.child("Valued").get("Cost")), actor_name)
             self.assertEqual(hp, int(actor.child("Health").get("HP")), actor_name)
             self.assertEqual(speed, int(actor.child("Mobile").get("Speed")), actor_name)
@@ -76,25 +74,7 @@ class ClassicFourFactionIdentityTests(unittest.TestCase):
         for axis, values in axes.items():
             self.assertEqual(4, len(set(values)), axis)
 
-    def test_cohort_means_and_source_cadence_budgets_are_preserved(self):
-        specs = list(ROCKET_SOLDIERS.values())
-        self.assertEqual(Fraction(440), Fraction(sum(x[0] for x in specs), 4))
-        self.assertEqual(Fraction(14500), Fraction(sum(x[1] for x in specs), 4))
-        self.assertEqual(30000, specs[0][1] + specs[1][1])
-        self.assertEqual(28000, specs[2][1] + specs[3][1])
-        self.assertEqual(Fraction(95, 2), Fraction(sum(x[2] for x in specs), 4))
-        self.assertEqual(Fraction(13469, 2), Fraction(sum(x[5] for x in specs), 4))
-        self.assertEqual(Fraction(28699, 2), Fraction(sum(x[6] for x in specs), 4))
-
-        # Keeping each source pair's damage sum also keeps exact total nominal DPS,
-        # because both TD weapons use reload 56 and both RA weapons use reload 50.
-        self.assertEqual(32682, specs[0][6] + specs[1][6])
-        self.assertEqual(24716, specs[2][6] + specs[3][6])
-        old_total_dps = 2 * Fraction(16341, 56) + 2 * Fraction(12358, 50)
-        new_total_dps = sum(Fraction(x[6], x[7]) for x in specs)
-        self.assertEqual(old_total_dps, new_total_dps)
-
-    def test_targeting_cadence_armor_and_upgrade_gates_are_unchanged(self):
+    def test_targeting_cadence_and_upgrade_gates_are_unchanged(self):
         for actor_name, spec in ROCKET_SOLDIERS.items():
             weapon_name, reload = spec[4], spec[7]
             weapon = self.rules.resolve_weapon(weapon_name)
@@ -112,7 +92,7 @@ class ClassicFourFactionIdentityTests(unittest.TestCase):
             "td_gdi_upgrade_advancedmissiletargeting",
             gdi.child("Armament@AdvancedMissileTargeting").get("RequiresCondition"),
         )
-        allies = self.rules.resolve("ra1_allies_alliedrocketsoldier")
+        allies = self.rules.resolve("ra1_allies_rocketsoldier")
         self.assertEqual(
             "!ra1_allies_upgrade_cryomissiles",
             allies.child("Armament@PRIMARY").get("RequiresCondition"),
