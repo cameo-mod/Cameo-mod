@@ -1127,6 +1127,8 @@ hold or focus a newly formed raid, but it never moves units between existing squ
 assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is deferred to a later
 phase. The assign layer must never become a second owner of a unit.
 
+The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including

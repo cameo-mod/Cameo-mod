@@ -58,6 +58,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public IReadOnlyDictionary<OpenRA.Player, EnemyProfile> Enemies;
 		public CounterDemand Demand;
 		public BotMission Mission;
+		public BotMissionAssignment MissionAssignment;
 		public int DefenceFractionHint, ExpansionAppetiteHint;
 		public RegionMemory Regions;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
@@ -440,6 +441,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var squadCount = 0;
 			var squadUnitCount = 0;
+			var missionAssignment = player.PlayerActor.TraitsImplementing<IBotMissionAssignmentProvider>()
+				.Select(p => p.LastMissionAssignment)
+				.FirstOrDefault(a => a != null);
 			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
 			{
 				if (!sm.IsTraitEnabled())
@@ -458,6 +462,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Enemies = profiles,
 				Demand = demand,
 				Mission = Missions.FirstOrDefault(),
+				MissionAssignment = missionAssignment,
 				Regions = regions,
 				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
 				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
@@ -574,7 +579,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var index = row * regions.Columns + column;
 					foreach (var enemyRegions in regions.ByEnemy.Values)
 						if (index < enemyRegions.Length && enemyRegions[index] != null)
-							threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+							threat += enemyRegions[index].ArmyValue +
+								(index == ownBaseRegionIndex ? enemyRegions[index].DefenceValue : 0);
 				}
 
 			var defendPriority = threat <= ownNearBaseValue

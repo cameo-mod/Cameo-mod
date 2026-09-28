@@ -1,4 +1,19 @@
-# Cameo — THE HANDOFF
+# Cameo
+
+## 2026-09-28 ? NOVA: AI phase 7a follow-up ? missions on devin/1790537249.8881-ai-missions-7a-followup
+
+`Agent: NOVA ? lane: AI architecture / assign layer ? branch devin/1790537249.8881-ai-missions-7a-followup ? based on current origin/master after #581`
+
+Phase 7a landed through #581. This follow-up fixes the exhausted-Defend consumer
+selection so a later affordable Raid can still be consumed, limits Defend threat
+from neighbouring static defences to the own base region, and documents the
+existing omniscient fallback when fogged scans are disabled. It also adds a
+permanent fog-enabled Raid runtime gate with reachable refinery and harvester
+actors. The gate asserts Raid publication and target-bearing squad assignment;
+the frozen-target branch remains documented but is not asserted unless a fixture
+can reproduce it reliably. Phase 7b mission bidding is next.
+
+ — THE HANDOFF
 
 ## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
 

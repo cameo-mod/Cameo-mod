@@ -194,7 +194,7 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
 	}
 
-	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing
+	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
 	{
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
 
@@ -239,6 +239,7 @@ namespace OpenRA.Mods.CA.Traits
 		BotMission heldDefendMission;
 		int defendMissionHeldSince = -1;
 		int defendMissionExhaustedRegion = -1;
+		public BotMissionAssignment LastMissionAssignment { get; private set; }
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
@@ -607,6 +608,10 @@ namespace OpenRA.Mods.CA.Traits
 			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
+		// Fogged scans require a currently visible actor; mission consumers add
+		// remembered FrozenActor targets separately. With FoggedScans disabled,
+		// the fallback may select an unseen actor, inheriting the existing
+		// omniscient behavior of that mode rather than introducing a mission-layer cheat.
 		internal Actor FindClosestEnemy(CPos location, int attackerValue, Player targetPlayer, SquadCA owner = null)
 		{
 			if (targetPlayer == null)
@@ -718,14 +723,18 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
-		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		public static BotMission BestAffordableMission(
+			IEnumerable<IBotMissionProvider> providers,
+			int idleForceValue,
+			Func<BotMission, bool> skip = null)
 		{
 			if (providers == null)
 				return null;
 
 			foreach (var provider in providers)
 				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue)
+					if (mission != null && mission.RequiredValue <= idleForceValue &&
+						(skip == null || !skip(mission)))
 						return mission;
 
 			return null;
@@ -934,7 +943,11 @@ namespace OpenRA.Mods.CA.Traits
 				FrozenActor missionFrozenTarget = null;
 				if (Info.UseMissions && missionProviders?.Length > 0)
 				{
-					mission = BestAffordableMission(missionProviders, idleUnitsValue);
+					mission = BestAffordableMission(
+						missionProviders,
+						idleUnitsValue,
+						m => m.Type == BotMissionType.Defend &&
+							m.RegionIndex == defendMissionExhaustedRegion);
 					if (mission?.Type == BotMissionType.Defend)
 					{
 						if (defendMissionExhaustedRegion != mission.RegionIndex)
@@ -944,7 +957,6 @@ namespace OpenRA.Mods.CA.Traits
 						{
 							heldDefendMission = null;
 							defendMissionHeldSince = -1;
-							mission = null;
 						}
 						else
 						{
@@ -969,7 +981,11 @@ namespace OpenRA.Mods.CA.Traits
 							defendMissionExhaustedRegion = mission.RegionIndex;
 							heldDefendMission = null;
 							defendMissionHeldSince = -1;
-							mission = null;
+							mission = BestAffordableMission(
+								missionProviders,
+								idleUnitsValue,
+								m => m.Type == BotMissionType.Defend &&
+									m.RegionIndex == defendMissionExhaustedRegion);
 						}
 					}
 					else
@@ -988,14 +1004,16 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
-				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
-				if (missionFrozenTarget != null)
-					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
+				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
 				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
 				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)));
+				if (missionTarget != null)
+					attackForce.Target = Target.FromActor(missionTarget);
+				else if (missionFrozenTarget != null)
+					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
 
 				if (artilleryUnits.Count > 0)
 				{
@@ -1016,7 +1034,15 @@ namespace OpenRA.Mods.CA.Traits
 
 				SetNextDesiredAttackForce();
 				if (mission?.Type == BotMissionType.Raid && (missionTarget != null || missionFrozenTarget != null))
+				{
+					LastMissionAssignment = new BotMissionAssignment
+					{
+						Type = mission.Type,
+						RegionIndex = mission.RegionIndex,
+						Frozen = missionFrozenTarget != null
+					};
 					MissionTaken(mission);
+				}
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
 			}

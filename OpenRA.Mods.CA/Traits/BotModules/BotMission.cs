@@ -26,9 +26,21 @@ namespace OpenRA.Mods.CA.Traits
 		public int Priority;
 	}
 
+	public sealed class BotMissionAssignment
+	{
+		public BotMissionType Type;
+		public int RegionIndex;
+		public bool Frozen;
+	}
+
 	public interface IBotMissionProvider
 	{
 		IReadOnlyList<BotMission> Missions { get; }
 		void MissionTaken(BotMission mission);
+	}
+
+	public interface IBotMissionAssignmentProvider
+	{
+		BotMissionAssignment LastMissionAssignment { get; }
 	}
 }
