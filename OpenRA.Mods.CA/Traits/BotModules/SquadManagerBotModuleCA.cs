@@ -90,6 +90,24 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Retreat threshold when no BotLimits trait is enabled (percent of predicted strength ratio).")]
 		public readonly int DefaultRetreatRatioPct = 50;
 
+		[Desc("Cameo DF-2 (AI_DEEP_RESEARCH.md §14): when the master predicts an enemy group heading for an own asset,",
+			"draft the idle pool into the protection squad and send it to the own defence nearest that asset BEFORE the",
+			"enemy arrives; the squad holds there instead of wandering home, and falls back to it (the lure) when the",
+			"combat predictor says it loses alone. False = classic behaviour.")]
+		public readonly bool PrepositionDefence = false;
+
+		[Desc("DF-2: only threats predicted to arrive within this many ticks are met in advance.")]
+		public readonly int PrepositionMaxEtaTicks = 1500;
+
+		[Desc("DF-2: only threats worth at least this much (cost of the group) are met in advance.")]
+		public readonly int PrepositionMinThreatValue = 1500;
+
+		[Desc("DF-2: the rally point is the own armed building within this many cells of the predicted target.")]
+		public readonly int PrepositionDefenceSearchCells = 12;
+
+		[Desc("DF-2: a protection squad farther than this from its rally point falls back when it would lose alone.")]
+		public readonly int LureRallyRadiusCells = 5;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -326,6 +344,12 @@ namespace OpenRA.Mods.CA.Traits
 		int assignRolesTicks;
 		int attackForceTicks;
 		int protectionForceTicks;
+
+		// DF-2: where the protection squad waits for a predicted attack, and until when.
+		CPos? protectionRally;
+		int protectionHoldUntilTick = -1;
+		int nextPrepositionTick;
+		IBotThreatPredictionProvider[] threatPredictionProviders;
 		int minAttackForceDelayTicks;
 		BotMission heldDefendMission;
 		int defendMissionHeldSince = -1;
@@ -635,6 +659,7 @@ namespace OpenRA.Mods.CA.Traits
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
+			threatPredictionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotThreatPredictionProvider>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
@@ -820,10 +845,63 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
 		{
-			var candidates = World.FindActorsInCircle(sourceActor.CenterPosition, radius)
-				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			var candidates = VisibleEnemiesNear(sourceActor.CenterPosition, radius);
 			candidates = PreferSquadTargets(candidates, owner, TagsOf);
 			return candidates.ClosestToIgnoringPath(sourceActor);
+		}
+
+		// Enemies this bot can SEE within `radius` (the one radius scan this file keeps for squad targeting).
+		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius) =>
+			World.FindActorsInCircle(center, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+
+		/// <summary>DF-2: the protection squad's rally point while a predicted attack is pending.</summary>
+		internal bool TryGetProtectionRally(out CPos rally)
+		{
+			rally = protectionRally ?? CPos.Zero;
+			return protectionRally.HasValue && World.WorldTick <= protectionHoldUntilTick;
+		}
+
+		/// <summary>DF-2: the most valuable predicted attack that arrives soon enough and is big enough to meet, or null.</summary>
+		public static BotPredictedThreat? SelectPrepositionThreat(IEnumerable<BotPredictedThreat> threats, int maxEtaTicks, int minValue) =>
+			threats.Where(t => t.EtaTicks <= maxEtaTicks && t.Value >= minValue)
+				.OrderByDescending(t => t.Value).ThenBy(t => t.EtaTicks).Cast<BotPredictedThreat?>().FirstOrDefault();
+
+		// DF-2: meet the most valuable predicted attack at the own defence nearest its target.
+		void PrepositionDefenceTick(IBot bot)
+		{
+			if (!Info.PrepositionDefence || threatPredictionProviders == null || World.WorldTick < nextPrepositionTick)
+				return;
+
+			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
+			var threat = SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
+				Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue);
+			if (threat == null)
+				return;
+
+			var target = threat.Value.Target;
+			var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
+			var rally = World.ActorsHavingTrait<AttackBase>()
+				.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
+					&& (a.Location - target).LengthSquared <= searchSquared)
+				.OrderBy(a => (a.Location - target).LengthSquared)
+				.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+
+			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
+			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
+				&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
+				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()).ToList())
+			{
+				protectSq.Units.Add(u);
+				unitsHangingAroundTheBase.Remove(u);
+			}
+
+			if (!protectSq.IsValid)
+				return;
+
+			protectionRally = rally;
+			protectionHoldUntilTick = World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 		}
 
 		Player EffectiveMainTarget()
@@ -1021,6 +1099,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (--protectOwnTicks <= 0 && protectOwnFrom != null)
 				ProtectOwn(protectOwnFrom);
+
+			PrepositionDefenceTick(bot);
 		}
 
 		public void SetAirStrikeTarget(Actor target)

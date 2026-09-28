@@ -3321,6 +3321,7 @@ Player:
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
 		RequiresCondition: genericbot && personality-rush
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
@@ -3372,6 +3373,7 @@ Player:
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
 		RequiresCondition: genericbot && personality-turtle
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
@@ -3423,6 +3425,7 @@ Player:
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
 		RequiresCondition: genericbot && personality-tech
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 4
 		UseCombatPredictor: true
@@ -3474,6 +3477,7 @@ Player:
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
 		RequiresCondition: genericbot && personality-expansion
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
@@ -3525,6 +3529,7 @@ Player:
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
 		RequiresCondition: genericbot && personality-steamroller
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
@@ -3575,6 +3580,7 @@ Player:
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
 		RequiresCondition: genericbot && personality-guerrilla
+		PrepositionDefence: true
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 6
 		UseCombatPredictor: true

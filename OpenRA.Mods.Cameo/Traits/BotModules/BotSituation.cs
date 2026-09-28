@@ -222,7 +222,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -1348,6 +1348,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
 		List<BotThreatTracker.Group> previousThreatGroups = new();
+		List<BotPredictedThreat> predictedThreats = new();
+
+		IReadOnlyList<BotPredictedThreat> IBotThreatPredictionProvider.PredictedThreats => predictedThreats;
 
 		// DF step 1: enemy combat units SEEN this snapshot (fogged: remembered entries refreshed at this tick),
 		// grouped, tracked against the previous snapshot, and extrapolated to the own building they head for.
@@ -1369,10 +1372,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			previousThreatGroups = groups;
 
 			var assets = ownBuildings.Select(b => (b.Location, Value(b))).ToList();
-			return groups.OrderByDescending(g => g.Value).Take(Math.Max(0, Info.ThreatsLogged))
+			var predicted = groups.OrderByDescending(g => g.Value)
 				.Select(g => (g, BotThreatTracker.Predict(g, assets, Info.ThreatConeCosPercent / 100.0,
 					Info.ThreatMinSpeedCellsPerKiloTick / 1000.0)))
 				.ToList();
+
+			predictedThreats = predicted.Where(t => t.Item2.HasValue)
+				.Select(t => new BotPredictedThreat(t.Item2.Value.Target, t.Item2.Value.EtaTicks, t.Item1.Value, tick)).ToList();
+
+			return predicted.Take(Math.Max(0, Info.ThreatsLogged)).ToList();
 		}
 
 		(int Army, int Defended) CombatRatios(IEnumerable<Actor> ownActors)
