@@ -1,6 +1,6 @@
 # Reference warhead pipeline — handoff
 
-**Status: the measurement is finished and verified; the family assignment is 4 sources of 17 done** (Combined Arms reviewed; Mental Omega, Red Resurrection and Rise of the East proposed first passes).
+**Status (rechecked 2026-09-28): assignment coverage is complete for all 17 sources, with no open weapon assignments. This is not maintainer approval of all sources: the 16 proposed sources still await the R69 review before cross-source averaging.**
 
 This is a LANE handoff, not a dated one. It describes the live state of the WARHEAD and ARMOUR
 side of the reference programme and is meant to be edited in place as the lane moves.
@@ -12,10 +12,10 @@ not one.
 ⚠ **Do not confuse it with [`REFERENCE_PIPELINE_HANDOFF.md`](REFERENCE_PIPELINE_HANDOFF.md).**
 That file is the FACTION-ROUTING lane — which reference mod's units a Cameo faction draws on,
 rulings R1–R15. This file is the WARHEAD/ARMOUR lane — what the Versus tables should be, rulings
-R16–R38. Both draw on `REFERENCE_EXTRACTION_PLAN.md`, which is the single home for every ruling in
+R16–R73. Both draw on `REFERENCE_EXTRACTION_PLAN.md`, which is the single home for every ruling in
 both; where a handoff and the plan disagree, the plan wins.
 
-The binding rulings for this lane are **R1–R38 in `docs/design/REFERENCE_EXTRACTION_PLAN.md`**.
+The binding rulings for this lane are **R16–R73 in `docs/design/REFERENCE_EXTRACTION_PLAN.md`**.
 Read those before changing any tool here — several of them exist because a plausible-looking
 shortcut produced confidently wrong numbers, and the numbers looked fine until a human queried
 them.
@@ -55,9 +55,11 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
 | 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **17 of 17 sources, 2,542 of 2,542 weapons (100%) — assignment COMPLETE; next = averaging** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise, RA2 Reborn, RA 20XX, Twisted Insurrection, DTA Enhanced, DTA Classic, OpenRA RA, Crystallized Nexus, OpenRA TS/TD/D2k proposed) |
-| 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
+| 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | per-source collapse implemented for all dialects; cross-source averaging remains held by R69 |
 
-Stage 4 is the bottleneck and it is the only stage that needs human judgement.
+Assignment coverage and human approval are separate gates. The next decision is
+the maintainer's review of the proposed source assignments, not another automatic
+family-matching pass.
 
 ### Stage 1 — the measurement
 

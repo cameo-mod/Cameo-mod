@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Traits;
 
@@ -135,10 +136,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			var downscale = renderer.WorldDownscaleFactor;
 			var topLeft = wr.Viewport.TopLeft;
 
-			float2 ToFb(WPos pos)
+			Vector2 ToFb(WPos pos)
 			{
 				var screenPx = wr.ScreenPxPosition(pos);
-				return new float2(
+				return new Vector2(
 					(screenPx.X - topLeft.X) * downscale,
 					(screenPx.Y - topLeft.Y) * downscale);
 			}

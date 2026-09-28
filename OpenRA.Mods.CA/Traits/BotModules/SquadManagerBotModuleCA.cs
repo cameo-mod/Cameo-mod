@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -121,6 +122,26 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
+		public readonly bool StageBeforeAssault = false;
+
+		[Desc("Percent of squad units that must reach the staging point before the assault proceeds.")]
+		public readonly int StageAssemblePercent = 60;
+
+		[Desc("Cells around the staging point within which a unit counts as assembled.")]
+		public readonly int StageRadiusCells = 8;
+
+		[Desc("Ticks a staging squad waits before committing regardless of assembly.")]
+		public readonly int StageTimeoutTicks = 750;
+
+		[Desc("Extra units to treat as heal/repair support squads, beyond the derived set. " +
+			"Derived at rules load: every armament must carry a negative-damage, ally-valid " +
+			"warhead for the carrier to count as support — no central ids.")]
+		public readonly HashSet<string> SupportUnitTypes = [];
+
+		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
+		public readonly int SupportFollowRangeCells = 6;
+
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
@@ -189,6 +210,36 @@ namespace OpenRA.Mods.CA.Traits
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
+
+			// Derive support units from weapon metadata: an actor is support only when
+			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
+			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
+			// Tesla Trooper, WC2 knights/paladins and the SCV each carry a heal weapon
+			// alongside damage weapons and must not be pulled out of combat squads.
+			foreach (var actor in rules.Actors.Values)
+			{
+				// Support must be mobile to follow a squad — a heal-armament building
+				// (repair aura/depot) is not a squad member.
+				if (actor.Name.StartsWith('^') ||
+					(!actor.HasTraitInfo<MobileInfo>() && !actor.HasTraitInfo<AircraftInfo>()))
+					continue;
+
+				var armaments = actor.TraitInfos<ArmamentInfo>()
+					.Where(a => !string.IsNullOrEmpty(a.Weapon))
+					.ToList();
+
+				if (armaments.Count == 0)
+					continue;
+
+				// An unresolvable weapon cannot be proven to heal, so it disqualifies.
+				if (armaments.All(a =>
+					rules.Weapons.TryGetValue(a.Weapon.ToLowerInvariant(), out var weapon) &&
+					weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
+						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally))))
+				{
+					SupportUnitTypes.Add(actor.Name);
+				}
+			}
 		}
 
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
@@ -718,14 +769,15 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
-		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue,
+			Func<BotMission, bool> exclude = null)
 		{
 			if (providers == null)
 				return null;
 
 			foreach (var provider in providers)
 				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue)
+					if (mission != null && mission.RequiredValue <= idleForceValue && (exclude == null || !exclude(mission)))
 						return mission;
 
 			return null;
@@ -896,6 +948,17 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
+				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
+				{
+					var supportSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Support);
+					if (supportSquad == null)
+					{
+						supportSquad = RegisterNewSquad(bot, SquadCAType.Support);
+						AIUtils.BotDebug("AI ({0}): Created support squad {1}", Player.ClientIndex, supportSquad.Type);
+					}
+
+					supportSquad.Units.Add(new UnitWposWrapper(a));
+				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 
@@ -934,45 +997,37 @@ namespace OpenRA.Mods.CA.Traits
 				FrozenActor missionFrozenTarget = null;
 				if (Info.UseMissions && missionProviders?.Length > 0)
 				{
-					mission = BestAffordableMission(missionProviders, idleUnitsValue);
-					if (mission?.Type == BotMissionType.Defend)
+					// A Defend whose hold window already lapsed this cycle is excluded at
+					// selection time so it can't shadow a Raid sitting behind it in the
+					// published order (Defend has RequiredValue 0 and would always win).
+					mission = SelectMission();
+					while (mission?.Type == BotMissionType.Defend)
 					{
-						if (defendMissionExhaustedRegion != mission.RegionIndex)
-							defendMissionExhaustedRegion = -1;
-
-						if (defendMissionExhaustedRegion == mission.RegionIndex)
+						if (heldDefendMission == null)
 						{
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							heldDefendMission = mission;
+							defendMissionHeldSince = World.WorldTick;
 						}
 						else
+							heldDefendMission = mission;
+
+						var heldTicks = World.WorldTick - defendMissionHeldSince;
+						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
 						{
-							if (heldDefendMission == null)
-							{
-								heldDefendMission = mission;
-								defendMissionHeldSince = World.WorldTick;
-							}
-							else
-								heldDefendMission = mission;
-
-							var heldTicks = World.WorldTick - defendMissionHeldSince;
-							if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
-							{
-								AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
-									Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
-								return;
-							}
-
-							AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
-								Player.ClientIndex, mission.RegionIndex, heldTicks);
-							defendMissionExhaustedRegion = mission.RegionIndex;
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+							return;
 						}
+
+						AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+							Player.ClientIndex, mission.RegionIndex, heldTicks);
+						defendMissionExhaustedRegion = mission.RegionIndex;
+						heldDefendMission = null;
+						defendMissionHeldSince = -1;
+						mission = SelectMission();
 					}
-					else
+
+					if (mission?.Type != BotMissionType.Defend)
 					{
 						heldDefendMission = null;
 						defendMissionHeldSince = -1;
@@ -986,6 +1041,14 @@ namespace OpenRA.Mods.CA.Traits
 							missionFrozenTarget = FindFrozenEnemyTarget(
 								World.Map.CenterOfCell(mission.Location), idleUnitsValue, null, mission.TargetPlayer);
 					}
+				}
+
+				BotMission SelectMission()
+				{
+					return BestAffordableMission(missionProviders, idleUnitsValue,
+						m => defendMissionExhaustedRegion >= 0
+							&& m.Type == BotMissionType.Defend
+							&& m.RegionIndex == defendMissionExhaustedRegion);
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
@@ -1007,6 +1070,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				// 6f: support squads trail the newest assault, healing/repairing in its wake.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
