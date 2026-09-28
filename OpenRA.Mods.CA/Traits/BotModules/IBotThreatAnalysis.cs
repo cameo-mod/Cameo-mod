@@ -51,6 +51,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The enemy player who has attacked us (or our allies) the most, or null below threshold.</summary>
 		Player GetNemesis();
 
+		/// <summary>
+		/// Nemesis score for a specific enemy player — the 'damage that player has dealt
+		/// to us' side of §4.3's w_hurt term. 0 for players that have never hit us.
+		/// </summary>
+		float GetNemesisScore(Player attacker);
+
 		/// <summary>Record that an enemy player attacked an ally of ours (not us directly).</summary>
 		void RegisterAllyAttack(Player attacker);
 	}
