@@ -98,8 +98,25 @@ schema-1 records in the same file remain valid and the aggregator pools both
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.
-- `opponents` / `allies` — every non-neutral, non-spectating player other than
-  the subject, split by `player.IsAlliedWith`. Same key order as shown.
+- `opponents` / `allies` — every eligible player other than the subject, split
+  by the **stance masks** (`p.AlliedPlayersMask.Overlaps(subject.PlayerMask)`),
+  NOT by `player.IsAlliedWith`. The masks are assigned once by
+  `CreateMapPlayers.SetupPlayerMasks` from `PlayerReference.Allies`/`Enemies`
+  and lobby teams, and never mutate — so they still describe the matchup after
+  the match resolves. `Player.Spectating` is `spectating || WinState !=
+  Undefined` on non-mission maps (`Player.cs`), and `RelationshipWith`
+  short-circuits `other.Spectating` to Ally for combatant evaluators — the log
+  is built only after players resolve, so `IsAlliedWith` at write time reports
+  every decided player as an ally of every combatant. Eligible means
+  `!NonCombatant && (Playable || IsBot)`, where `NonCombatant` is taken from
+  **both** the runtime flag and the declared `PlayerReference.NonCombatant` —
+  a lobby-occupied slot ignores the runtime flag (`Player` ctor client branch),
+  so map-declared inert slots (the `ai_duel_gate` referee) must be read off the
+  reference or they leak into `opponents` and silently turn every record
+  non-1v1. `IsBot` admits map-side bots: `Playable` is true only for lobby
+  clients, but a headless `Launch.Map` match's duelists are map players
+  (`Playable: False` + `Bot:`) that are nonetheless each other's real
+  opponents.
 - `handicap` and `bot_type` are recorded because they are the cheat axes: an
   aggregation that mixes handicaps or difficulty tiers is meaningless.
 - Ordering: `opponents` and `allies` sorted by `name` ordinal, so two records of
@@ -178,3 +195,42 @@ when there is no candidate. Enemy records are sorted by ordinal player name.
 Candidate personality and target values are observations only. The phase-2
 target score deliberately has no pairwise-damage (`w_hurt`) term because no
 usable attribution hook exists; that term is phase-4 work.
+
+## Batch harvest (Stage D)
+
+`tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
+variant of `mods/cameo/maps/ai_duel_gate_20260928/` per matchup inside the
+batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`),
+launches `OpenRA.exe` with `Launch.Map` + `Launch.Benchmark`, and slices the
+appended `cameo-ai-matches.jsonl` per run by byte offset. The duelists are
+map-side bots (`Playable: False` + `Bot:`) — the only bot path under a Local
+server — so `SpawnStartingUnits` cannot serve them; the harness resolves each
+faction's `StartingUnits` group from the mod yaml and writes it into the
+variant's `Actors:` section at that bot's `HomeLocation`. The template's
+terrain is a real melee map (Desert Rats donor) with both `HomeLocation`s on
+its two real `mpspawn` cells — a hand-made fixture once put one duelist on a
+disconnected pocket, and the bot sat inert all match. Match end is
+`ConquestVictoryConditions` (map restores `MustBeDestroyed` on the base unit
+templates — Cameo strips it) or the locked `TimeLimitManager`; timeout ranks
+`Playable` players only, so a stalemated duel records both bots `lost` — an
+honest draw. The referee slot exists only to satisfy the local server's
+non-empty-slots start rule; it is `NonCombatant` by map declaration, gets no
+starting units, and is invisible to the records.
+
+Operational semantics measured live (2026-09-28): the fixture locks
+`gamespeed: insane` via `MapOptions` — the maintainer's convention for bot
+matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
+by `ticksPerSecond`, so insane quadruples the tick cap while achieved speed
+stays whatever the box sustains; timeouts are therefore bounded by a
+`debug.log` stall detector (a live match writes every few seconds) plus a
+speed-aware wall backstop, never a tight fixed timeout. Insane shortens
+elimination matches only — a timeout match is wall-normalized at any speed,
+so drop `timelimit` when a quick pipeline check needs a fast draw. An `exit=1` with zero
+records and no exception is an external `TerminateProcess` — the engine only
+returns 0/-1 — so the harness retries a no-records attempt once and appends
+one durable line per attempt to `batch_results.jsonl`. Ally/opponent in the
+records comes from the static stance masks, not `IsAlliedWith`: on
+non-mission maps every decided player reports `Spectating`, which
+short-circuits `RelationshipWith` to Ally for both losers. Generated variants
+carry a unique comment salt because `Map.ComputeUID` hashes bytes and
+identical copies merge into one `MapCache` preview.
