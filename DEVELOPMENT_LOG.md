@@ -14515,3 +14515,37 @@ lifecycle); batch relaunched detached via nohup as nw-classic2.
 - W4 commanders: when FransGroundCommanderBotModule ports to hard it must
   bring the multi-instance wiring (@groundN, distinct BidderKey) — the
   serial-capacity starvation bug is proven on the donor.
+
+### Upstream re-vendor to V1.29.31 + NOVA A/B-iteration merge (a87e9e33e, pending)
+
+- NOVA's `594939c08` merged by hand (cherry-pick state was lost to a reset):
+  their `EnemySpawnRecon*` block (bounded 2-slot, own-spawn exclusion,
+  one-shot resolve, key base `0xF0000000`) replaces my `ReconProbeSpawnRepeatTicks`
+  prototype; `ForwardMoveMinimumIdleUnits: 6` trickle-gate added to all six
+  `@groundN` capacities; `AdaptiveCounterWeight`/`ObservationInterval` on
+  `FransUnitBuilder`; `IBotEnemyCompositionProvider` on `FransCombatIntel`;
+  `OpenRA.Mods.CA` project ref. My kept deltas: six-instance ground wiring,
+  remembered-building raids, fog-honest intel provider.
+- Re-vendored upstream `3cb13dd (V1.29.23) -> 0407c38 (V1.29.31)`:
+  `FransMcvExpansionManagerBotModule` (+2042: RoutineLand negative-union
+  pathfinding, ferry corridor recovery, bounded MCV sea pickup/watchdog),
+  `FransTransportCommanderBotModule` (+109: ferry/transport recovery),
+  new `RoutineLandNegativeUnionPolicy.cs` (258). `FransBotLog` already at
+  tip; upstream csproj delta is infra-only (skipped — ours has EngineRootPath
+  + Mods.CA ref).
+- 3-way merge (`git merge-file`, base=upstream@3cb13dd): ZERO conflicts —
+  upstream delta disjoint from Cameo port deltas (FrozenSet.Empty defaults,
+  relaxed empty-type validation, `ShipQueueNames()` naval-domain resolution,
+  `IsCloseEnoughToBase` extra null param, `ExpansionConyardRetreatRecentDamageRisk`,
+  `IsConyardRelocationPending` stub).
+- One manual fix post-merge: new upstream `LogSeaSupplyPreCommitDiagnostic`
+  used raw `queuesByCategory[Info.LandingCraftQueueCategory]` — converted to
+  `ShipQueueNames().SelectMany` like the other 7 sites (naval queue aliases
+  resolve in classic "Ship" and hybrid "RANaval" modes).
+- Build clean 0/0. Fog-honesty audit PASS — manifest +1 for the new
+  `GetLandingCraftPoolDiagnostic` own-units enumeration
+  (`actor.Owner == player` filtered — honest). Drift baseline rewritten
+  (+1159/-407 vs upstream tip; per-file delta vs 0407c38 is only +80/-32 —
+  port deltas preserved through the merge).
+- nw-hard4 (W2 validation): 1-1 decided, 2 died in the mid-merge yaml
+  window — consistent with publish-only W2; clean W2 batch still owed.
