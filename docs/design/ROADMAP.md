@@ -129,6 +129,17 @@ the fog sequencing.
   - [ ] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+- [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
+  league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
+  - [ ] **M** CP combat predictor: Versus-aware Lanchester strength, engage/retreat hysteresis,
+    learned per-type factors; replaces the 6c scalar. **Claude.**
+  - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
+    layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
+  - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
+  - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
+  - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions) and
+    **OM** per-opponent profiles with a bandit start. **Devin Cloud.**
+  - [ ] DI Director and LA offline LLM analyst — maintainer rulings first (§8).
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into

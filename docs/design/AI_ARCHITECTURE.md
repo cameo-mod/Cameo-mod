@@ -11,7 +11,9 @@ fact with source evidence. Sections 2–7 are proposals except the record-only i
 still undecided. Section 10 is the module-by-module build plan and section 11 reconciles the
 five-agent research round against sections 1–10. **Section 12 is the maintainer's combined-arms
 order of 2026-09-28** (arsenal tracker with self-learning, role ratios, formation, siege, air
-doctrine, scouting) mapped onto what ships, with phases CA-1…CA-6 and an owner for each. The §6.2a match logger has runtime and replay
+doctrine, scouting) mapped onto what ships, with phases CA-1…CA-6 and an owner for each.
+Research round 2 — how the strongest RTS bots fight, reason about space, micro, learn and stay
+fun, with the phases CP/ZG/IM/UT/MI/OM/LG it adds — is [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md). The §6.2a match logger has runtime and replay
 evidence in `docs/audit/ASTRA_REVIEW.md`; this does not validate the proposed decision system.
 
 ---
@@ -1609,3 +1611,9 @@ phase lands only if it does not lose to master; the standing target stays "beat 
 
 CA-2 and CA-5 may start on the parts that do not need CA-1 (reading the existing
 `RegionMemory`), and switch to the tracker's ranges when it lands.
+
+Research round 2 ([`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9) adds phases that interleave
+with these: **CP** combat predictor (the single engage/commit/retreat authority; CA-2's commit
+rule and the 6c gate become its inputs), **ZG/IM** zone graph + influence layers (the region set
+and "where they usually are"), **UT** utility strategist (absorbs CA-3's blended squad manager),
+**MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
