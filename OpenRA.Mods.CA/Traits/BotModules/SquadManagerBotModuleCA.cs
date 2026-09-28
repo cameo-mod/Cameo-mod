@@ -135,8 +135,8 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int StageTimeoutTicks = 750;
 
 		[Desc("Extra units to treat as heal/repair support squads, beyond the derived set. " +
-			"Derived at rules load: an armament with a negative-damage, ally-valid warhead " +
-			"marks the carrier as support, so packs contribute their own — no central ids.")]
+			"Derived at rules load: every armament must carry a negative-damage, ally-valid " +
+			"warhead for the carrier to count as support — no central ids.")]
 		public readonly HashSet<string> SupportUnitTypes = [];
 
 		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
@@ -211,8 +211,11 @@ namespace OpenRA.Mods.CA.Traits
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
 
-			// Derive support units from weapon metadata: a negative-damage warhead
-			// that may hit allies is a heal/repair effect, so its carrier is support.
+			// Derive support units from weapon metadata: an actor is support only when
+			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
+			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
+			// Tesla Trooper, WC2 knights/paladins and the SCV each carry a heal weapon
+			// alongside damage weapons and must not be pulled out of combat squads.
 			foreach (var actor in rules.Actors.Values)
 			{
 				// Support must be mobile to follow a squad — a heal-armament building
@@ -221,20 +224,20 @@ namespace OpenRA.Mods.CA.Traits
 					(!actor.HasTraitInfo<MobileInfo>() && !actor.HasTraitInfo<AircraftInfo>()))
 					continue;
 
-				foreach (var armament in actor.TraitInfos<ArmamentInfo>())
+				var armaments = actor.TraitInfos<ArmamentInfo>()
+					.Where(a => !string.IsNullOrEmpty(a.Weapon))
+					.ToList();
+
+				if (armaments.Count == 0)
+					continue;
+
+				// An unresolvable weapon cannot be proven to heal, so it disqualifies.
+				if (armaments.All(a =>
+					rules.Weapons.TryGetValue(a.Weapon.ToLowerInvariant(), out var weapon) &&
+					weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
+						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally))))
 				{
-					if (string.IsNullOrEmpty(armament.Weapon))
-						continue;
-
-					if (!rules.Weapons.TryGetValue(armament.Weapon.ToLowerInvariant(), out var weapon))
-						continue;
-
-					if (weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
-						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally)))
-					{
-						SupportUnitTypes.Add(actor.Name);
-						break;
-					}
+					SupportUnitTypes.Add(actor.Name);
 				}
 			}
 		}
