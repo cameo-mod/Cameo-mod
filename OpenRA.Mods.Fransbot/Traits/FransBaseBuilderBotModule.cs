@@ -1037,7 +1037,34 @@ namespace OpenRA.Mods.Common.Traits
 					_ => null
 				};
 				if (wanted == null)
-					reason = $"no wanted set for stage {openingStage}";
+				{
+					// Stages without a building wanted set (Mcv) progress via the
+					// unit-request path. If no owned queue can currently build an
+					// MCV because its producer was destroyed, rebuild the missing
+					// producer instead of idling the construction yard forever.
+					if (openingStage == OpeningStage.Mcv && PickBuildableType(Info.McvTypes) == null)
+					{
+						result = items
+							.Where(a => IsOpeningProducerType(a.Name) && !IsOwned(a.Name) && BelowLimit(a.Name))
+							.OrderBy(a => OpeningProducerRank(a.Name))
+							.ThenBy(a => a.Name)
+							.FirstOrDefault();
+						if (result != null)
+						{
+							if (world.WorldTick - lastOpeningDiagTick >= 250)
+							{
+								lastOpeningDiagTick = world.WorldTick;
+								FransBotLog.BotDebug(world,
+									"{0}: FRANS-PROD opening rebuilds missing producer {1} (stage={2}: no owned queue can build an MCV).",
+									player, result.Name, openingStage);
+							}
+						}
+						else
+							reason = $"no McvTypes buildable and no missing producer buildable (stage={openingStage}, buildables={items.Count})";
+					}
+					else
+						reason = $"no wanted set for stage {openingStage}";
+				}
 				else
 				{
 					result = items.Where(a => wanted.Contains(a.Name) && BelowLimit(a.Name))
