@@ -17,7 +17,7 @@ from cameo_model import Model  # noqa: E402
 TARGETS = {
     "td_gdi_mobileconstructionvehicle": (4920, 294000, 65, 13, 118, 14700, "Medium"),
     "td_nod_mobileconstructionvehicle": (4920, 294000, 65, 13, 118, 14700, "Medium"),
-    "ra1_allies_alliedmobileconstructionvehicle": (4650, 253000, 70, 14, 101, 12650, "Medium"),
+    "ra1_allies_mobileconstructionvehicle": (4650, 253000, 70, 14, 101, 12650, "Medium"),
     "ra1_soviets_mobileconstructionvehicle": (4650, 253000, 70, 14, 101, 12650, "Medium"),
     # Chassis-only reference rows: strategic shroud/jamming support has no
     # justified class/special price input, so both authored costs stay 5000.

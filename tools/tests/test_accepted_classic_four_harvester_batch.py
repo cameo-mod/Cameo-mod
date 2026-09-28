@@ -19,7 +19,7 @@ HARVESTER_DURABILITY = {
     "td_gdi_tiberiumharvester": (1670, 240000, 69, 96, 12000, 14, "Heavy"),
     "td_nod_tiberiumharvester": (1670, 240000, 69, 96, 12000, 14, "Heavy"),
     "td_nod_stealthharvester": (1520, 175000, 77, 70, 8750, 15, "Heavy"),
-    "ra1_allies_alliedoretruck": (1560, 210000, 81, 84, 10500, 16, "Medium"),
+    "ra1_allies_oretruck": (1560, 210000, 81, 84, 10500, 16, "Medium"),
     "ra1_soviets_oretruck": (1560, 210000, 81, 84, 10500, 16, "Medium"),
 }
 
@@ -50,7 +50,7 @@ HARVESTER_CAPACITIES = {
     "td_gdi_tiberiumharvester": (45, 4, 1),
     "td_nod_tiberiumharvester": (45, 4, 1),
     "td_nod_stealthharvester": (30, 2, 1),
-    "ra1_allies_alliedoretruck": (30, 3, 1),
+    "ra1_allies_oretruck": (30, 3, 1),
     "ra1_soviets_oretruck": (30, 3, 1),
 }
 
