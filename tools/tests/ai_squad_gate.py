@@ -172,19 +172,28 @@ def main() -> int:
     if not records:
         fail("no HardBot situation records were appended")
 
+    def squad_count(record):
+        own = record.get("own")
+        value = own.get("squad_count") if isinstance(own, dict) else None
+        return value if isinstance(value, int) and not isinstance(value, bool) else -1
+
+    # The PEAK over the match, not the latest record: since DESIGN §19.1 (2026-09-28) Hard's main army
+    # forms at tick ~3750 and then FIGHTS the player's towers and tanks, so a squad that formed and died
+    # before the final snapshot is a pass. The failure this gate exists for is that none ever formed.
     latest = max(records, key=lambda r: r.get("tick", -1))
-    own = latest.get("own")
-    squads = own.get("squad_count") if isinstance(own, dict) else None
-    if not isinstance(squads, int) or isinstance(squads, bool) or squads < 1:
+    peak = max(records, key=lambda r: (squad_count(r), r.get("tick", -1)))
+    squads = squad_count(peak)
+    own = peak.get("own")
+    if squads < 1:
         fail(
-            "latest HardBot record shows no formed squads "
-            f"(squad_count={squads!r}) — force creation never ran or crashed",
+            "no HardBot record shows a formed squad "
+            f"(peak squad_count={squads!r}) — force creation never ran or crashed",
             latest,
         )
 
     print(
         "AI squad gate PASS: "
-        f"records={len(records)} process_exit={exit_code} last_tick={latest['tick']} "
+        f"records={len(records)} process_exit={exit_code} last_tick={latest['tick']} peak_tick={peak['tick']} "
         f"squads={squads} squad_units={own.get('squad_units') if isinstance(own, dict) else None}"
     )
     return 0
