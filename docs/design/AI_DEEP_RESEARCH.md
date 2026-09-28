@@ -428,3 +428,50 @@ the whole defence now fights, and still loses, because classic arrives with 43�
 against 3–10 k (`fight_report`). The fix stays shelved and is re-tested together with **CP**
 (hold under own defences until the predicted trade favours us). It confirms §1: the lever is
 fight selection and army size at the decisive moment, not who is drafted.
+
+---
+
+## 14. Predictive defence, the lure, and punishing an army that left home — phase **DF**
+
+**Maintainer order (2026-09-28):** *"defense squads that react to any predicted incoming attack by
+plotting enemy movements and extrapolation to predict where they might attack, so the defense
+squad is already there. It should lure the enemies into the main defenses: counter-attack, then
+quickly retreat into the defenses where they are safe. Guerrilla, recon and spec-ops squads can
+be changed into defense squads if the threat level is high enough. But if the incoming attack is
+too far away for those fast squads to react, they should pressure or sneak into the enemy base,
+since the enemy army will be out — and this must be punished by the fast squads and maybe even
+the main army."*
+
+### 14.1 What exists and what is new
+
+Today the base reacts *after* a hit: `ProtectOwn` fires when a building or harvester takes damage
+(`ReinforceProtection`, shelved: it made the defence fight, but at the wrong place and time). Fog
+memory keeps each remembered enemy's last cell and tick, not its movement. So DF adds:
+
+1. **Group tracking (world model, record-only first).** Cluster visible enemy combat units by
+   proximity each snapshot; per group keep centroid, value, and a velocity from its last two
+   sightings (fog-honest: only while seen). Log groups in the situation record.
+2. **Threat prediction.** Extrapolate each group's heading; the predicted target is the own asset
+   cluster (base, expansion, harvesters, defences) in a cone around the heading with the highest
+   value ÷ distance; ETA = path distance ÷ the group's slowest speed. Output per threat:
+   `(target, ETA, predicted strength)` — the input NOVA's influence maps (IM) will later refine.
+3. **Defence squad with a lure.** The Protection squad (and any converted fast squad) moves to a
+   rally point *under own defences on the approach* before the ETA; when the enemy closes, it pokes
+   (attacks the front), then falls back into defence range. Every decision is the combat predictor
+   with **own defences counted on our side** — fight under the towers, never outside them unless CP
+   says the open fight is won.
+4. **Conversion by threat and reach.** When the continuous threat level (AI_ARCHITECTURE §4.6) is
+   high: fast squads whose travel time ≤ ETA convert to defence for the duration; those that cannot
+   make it go on offence instead.
+5. **Punish.** With the tracked enemy army known to be far from its base, the enemy-base estimate
+   *excludes* that army: raids/sneak attacks target the base (production, harvesters, tech); the
+   main army joins when CP (own main army vs remembered base defences + what is left) predicts a
+   win **and** our own base holds without it (CP of the defence under towers vs the incoming group).
+   This is item 3 of §13 (base trade) made concrete.
+
+### 14.2 Order and gates
+Record-only group tracking + prediction first (validated against where attacks actually land,
+`fight_report` decisive windows), then the defence rally/lure, then conversion + punish — each
+behind a yaml switch, each A/B'd on A Nuclear Winter against master. Owner: **Claude** (it sits on
+CP and the threat level); NOVA's IM/ZG layers improve the target prediction when they land.
+

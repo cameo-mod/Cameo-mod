@@ -139,6 +139,10 @@ the fog sequencing.
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
   - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
   - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
+  - [ ] **L** DF predictive defence, lure and punish (AI_DEEP_RESEARCH §14): enemy-group
+    tracking + heading extrapolation (record-only first), defence squad pre-positioned under own
+    towers with a poke-and-fall-back lure, fast squads convert by threat and reach, punish the
+    enemy base while its army is out. **Claude.**
   - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
     (DESIGN §19.2). **NOVA**, with UT.
   - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the

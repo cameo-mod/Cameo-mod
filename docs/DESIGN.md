@@ -4886,6 +4886,12 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   takes fights it at least draws.
 * **Scouting:** `ScoutBotModule.EnemySpawnBonus` keeps scouts checking the enemy's possible spawn
   regions (public `mpspawn` data).
+* **Predictive defence, lure and punish** (maintainer, same day; design and phase **DF** in
+  `docs/design/AI_DEEP_RESEARCH.md` §14): track visible enemy groups, extrapolate their heading to
+  predict WHERE and WHEN they will hit; a defence squad is there first, pokes the attackers and
+  falls back under its own defences (the lure). Guerrilla/recon/spec-ops squads convert to
+  defence when the threat is high and they can arrive in time; when they cannot, they — and the
+  main army if the predictor agrees — **punish the enemy base while its army is out**.
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
 
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
