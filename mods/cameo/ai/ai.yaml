@@ -32,27 +32,31 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
+	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
+	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
+	# Every field is written in every tier, so no tier silently falls back to a C# default.
+	# Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
 	BotLimits@easiest:
 		ProductionTypeLimit: 1
 		ConstructionYardLimit: 1
 		RefineryLimit: 1
 		HarvesterLimit: 3
-		BuildingDelayModifier: 300
-		BuildingIntervalModifier: 300
-		UnitDelayModifier: 300
-		UnitIntervalModifier: 300
-		InitialAttackDelay: 12000
-		PersonalityReactionDelay: 7500
-		RequiresCondition: easiestbot
-	BotLimits@veryeasy:
-		ProductionTypeLimit: 2
-		ConstructionYardLimit: 1
-		RefineryLimit: 2
-		HarvesterLimit: 6
 		BuildingDelayModifier: 250
 		BuildingIntervalModifier: 250
 		UnitDelayModifier: 250
 		UnitIntervalModifier: 250
+		InitialAttackDelay: 6750
+		PersonalityReactionDelay: 7500
+		RequiresCondition: easiestbot
+	BotLimits@veryeasy:
+		ProductionTypeLimit: 2
+		ConstructionYardLimit: 2
+		RefineryLimit: 2
+		HarvesterLimit: 6
+		BuildingDelayModifier: 225
+		BuildingIntervalModifier: 225
+		UnitDelayModifier: 225
+		UnitIntervalModifier: 225
 		InitialAttackDelay: 6000
 		PersonalityReactionDelay: 6750
 		RequiresCondition: veryeasybot
@@ -65,62 +69,70 @@
 		BuildingIntervalModifier: 200
 		UnitDelayModifier: 200
 		UnitIntervalModifier: 200
-		InitialAttackDelay: 3000
+		InitialAttackDelay: 5250
 		PersonalityReactionDelay: 6000
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 3
-		ConstructionYardLimit: 2
+		ConstructionYardLimit: 3
 		RefineryLimit: 4
 		HarvesterLimit: 12
 		BuildingDelayModifier: 175
 		BuildingIntervalModifier: 175
 		UnitDelayModifier: 175
 		UnitIntervalModifier: 175
-		InitialAttackDelay: 1500
+		InitialAttackDelay: 4500
 		PersonalityReactionDelay: 5250
 		RequiresCondition: mediumbot
 	BotLimits@hard:
-		ProductionTypeLimit: 3
-		ConstructionYardLimit: 3
+		ProductionTypeLimit: 4
+		ConstructionYardLimit: 4
 		RefineryLimit: 5
 		HarvesterLimit: 15
 		BuildingDelayModifier: 150
 		BuildingIntervalModifier: 150
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
+		InitialAttackDelay: 3750
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 4500
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
-		ConstructionYardLimit: 3
+		ConstructionYardLimit: 4
 		RefineryLimit: 6
 		HarvesterLimit: 18
 		BuildingDelayModifier: 125
 		BuildingIntervalModifier: 125
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
+		InitialAttackDelay: 3000
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3750
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
-		ProductionTypeLimit: 4
-		ConstructionYardLimit: 4
+		ProductionTypeLimit: 5
+		ConstructionYardLimit: 5
 		RefineryLimit: 7
 		HarvesterLimit: 21
+		BuildingDelayModifier: 100
+		BuildingIntervalModifier: 100
+		UnitDelayModifier: 100
+		UnitIntervalModifier: 100
+		InitialAttackDelay: 2250
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3000
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
-		ProductionTypeLimit: 5
-		ConstructionYardLimit: 5
+		ProductionTypeLimit: 6
+		ConstructionYardLimit: 6
 		RefineryLimit: 8
 		HarvesterLimit: 24
 		BuildingDelayModifier: 75
 		BuildingIntervalModifier: 75
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
+		InitialAttackDelay: 1500
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 2250
 		RequiresCondition: challengerbot
@@ -133,6 +145,7 @@
 		BuildingIntervalModifier: 50
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
+		InitialAttackDelay: 750
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 1500
 		RequiresCondition: unbeatablebot
@@ -145,6 +158,7 @@
 		BuildingIntervalModifier: 25
 		UnitDelayModifier: 25
 		UnitIntervalModifier: 25
+		InitialAttackDelay: 0
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 750
 		RequiresCondition: cameogodbot

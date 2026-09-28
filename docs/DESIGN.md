@@ -4803,6 +4803,45 @@ other squad-manager instances. The ramp reaches its late-match range over the
 first 20 minutes using the default 25 ticks per second. Long-match ramp
 behavior has not been observed in-game; that verification is a follow-up.
 
+### 19.1 The difficulty scale — one straight line, equal steps (maintainer 2026-09-28) — binding
+
+> *"All AI difficulty levels should be on a continuous scale … The difficulty must always scale
+> with each level and have equal steps. Of course not all things can be scaled perfectly so try to
+> make it the best estimation possible."*
+
+**The law.** Every per-difficulty number lies on ONE straight line from `easiest` (index 0) to
+`cameogod` (index 9), in equal steps. An integer that cannot split evenly is the ROUNDED line
+(within 0.5). Every tier writes every field: a field left out silently falls back to its C#
+default and breaks the line. That is how `brutal` sat at modifier 100 and the six hardest tiers
+shared `InitialAttackDelay` 0 until 2026-09-28. **A new difficulty-dependent feature is a Min at
+easiest and a Max at cameogod, interpolated by tier index**, the pattern `DynamicBotInsurance`
+already uses (`Difficulties` list + `Min*`/`Max*` fields). A feature that switches on at "Hard and
+above" is not a scale. Only a genuine on/off capability may be a single threshold (off below, on
+from one tier up, never on-off-on), and it must say why it cannot scale.
+
+| value (index 0 → 9) | easiest | veryeasy | easy | medium | hard | veryhard | brutal | challenger | unbeatable | cameogod |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| production time % | 140 | 130 | 120 | 110 | **100** | 90 | 80 | 70 | 60 | 50 |
+| production cost % | 120 | 115 | 110 | 105 | **100** | 95 | 90 | 85 | 80 | 75 |
+| build/unit delay + interval modifier | 250 | 225 | 200 | 175 | 150 | 125 | 100 | 75 | 50 | 25 |
+| InitialAttackDelay (ticks) | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 | 0 |
+| PersonalityReactionDelay (ticks) | 7500 | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 |
+| RefineryLimit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| HarvesterLimit | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 |
+| ProductionTypeLimit, ConstructionYardLimit (rounded) | 1 | 2 | 2 | 3 | 4 | 4 | 5 | 6 | 6 | 7 |
+
+* **`InitialAttackDelay` holds back only the MAIN army** (`CreateAttackForce`, the big assault
+  squads). Guerrilla, harasser, air and naval squads are formed in `FindNewUnits` and fight from
+  the first tick at every tier (maintainer 2026-09-28), so early pressure never waits for it.
+* **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
+  Very Hard, and Easiest through Medium pay a surcharge on the same line.
+* `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* Single thresholds, kept on purpose: `PrioritizeBarracksBeforeRefinery` (hard up); the capture,
+  engineer, crate-pickup and garrison modules are off for `easiest` only (capabilities, not strength).
+* Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
+  `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
+  with Hard at 100.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on
