@@ -106,14 +106,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightDefence = 150;
 		public readonly int WeightAlly = 100;
 
-		[Desc("w_hurt weight: damage an enemy has dealt us lowers its target score (§4.3).",
-			"Shipped at 0: with no dealt-to-them producer the one-sided term also enters the",
-			"weight total and inverts the §4.3 ratio. NemesisOverrideWeight is the live",
-			"hurt-driven path; re-raise this once the dealt half lands.")]
-		public readonly int WeightHurt = 0;
-
-		[Desc("Nemesis score at which the hurt term saturates (Saturate k).")]
-		public readonly int HurtSaturation = 40;
+		[Desc("w_hurt weight: an enemy winning the exchange against us loses target score (§4.3).",
+			"hurt = taken/(taken+dealt) — the bounded share form of the spec's dealt/taken",
+			"ratio, so 'damage dealt to us' only penalises once we have fought back some too.")]
+		public readonly int WeightHurt = 150;
 
 		[Desc("Nemesis score that counts as 'actively killing our base' — mandatory re-target,",
 			"bypassing the decision interval and the incumbent hold (§4.3 override).")]
@@ -374,7 +370,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
 				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal,
-					threatAnalysis == null ? 0 : Saturate((int)threatAnalysis.GetNemesisScore(profile.Player), Info.HurtSaturation), Info);
+					threatAnalysis == null ? 0 : HurtShare((int)threatAnalysis.GetNemesisScore(profile.Player),
+						(int)threatAnalysis.GetDealtScore(profile.Player)), Info);
 
 			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
 			var decision = ShouldEvaluateTargetDecision(
@@ -908,6 +905,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (k < 0)
 				k = 0;
 			return ClampSignal((long)100 * x / (x + (long)k));
+		}
+
+		/// <summary>
+		/// §4.3's w_hurt as the bounded share form of dealt/taken: what fraction of
+		/// the exchange's total damage the enemy dealt us. 0-100; 0 until any damage
+		/// has flowed either way. Ordered identically to the raw ratio (winning the
+		/// exchange lowers hurt, losing raises it) without dividing by a near-zero
+		/// taken score.
+		/// </summary>
+		internal static int HurtShare(int taken, int dealt)
+		{
+			var total = taken + dealt;
+			return total <= 0 ? 0 : (int)((long)100 * taken / total);
 		}
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)

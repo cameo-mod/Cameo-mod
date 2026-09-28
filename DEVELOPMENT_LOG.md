@@ -21,6 +21,26 @@ the missing producer upstream-first (same rank order). Verified the failure mode
 live (warfactory dead ~WT5000 → `no McvTypes entry is currently buildable` →
 stall); the follow-up run's warfactory survived so the fix is compile-verified,
 next-loss-mode insurance. Drift baseline +736/-375.
+# 2026-09-28 — EMBER: w_hurt dealt-side producer — WeightHurt un-zeroed
+
+Branch `devin/ember/ai-squad-attention` (same lane, second commit). #585's
+review found the w_hurt term one-sided — nemesis scores ('damage dealt to us')
+fed a negative term that also entered the weight total, inverting §4.3 —
+`WeightHurt` shipped at 0. The missing dealt half did not need an engine
+change: `INotifyAppliedDamage` fires on the ATTACKER's player actor
+(`Health.cs`), the exact mirror of `INotifyDamage` on the victim's side.
+
+`CombatAnalysisBotModule` now keeps `dealtScores` per victim-owner, throttled
+per victim and decayed alongside nemesis with the SAME `NemesisWeightPerHit` —
+the share math only stays meaningful while both halves carry the same units.
+`IBotThreatAnalysis` gains `GetDealtScore`. `BotSituation` computes
+`HurtShare = 100*taken/(taken+dealt)` — the bounded share form of §4.3's
+dealt/taken ratio: ordering-identical, robust at taken→0, neutral (0) until a
+fight has gone either way. `WeightHurt` restored to 150; `HurtSaturation`
+dropped (the share is already bounded; no yaml set it).
+
+Verified: 285/285 tests (new `HurtShareTracksTheExchangeBalance`), ai gates,
+boot-gate.
 
 # 2026-09-28 — EMBER: H1 squad-level attention — squads consult the action budget
 
