@@ -27,7 +27,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			"personality-turtle",
 			"personality-tech",
 			"personality-expansion",
-			"personality-steamroller"
+			"personality-steamroller",
+			"personality-guerrilla"
 		};
 
 		public readonly string PersonalityPrefix = "personality-";
