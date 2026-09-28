@@ -3057,3 +3057,18 @@ next vendored bot (CN CombatAnalysis consumption, harasser squads):
   target so `FindClosestEnemy` doesn't depend on the fogged-scan fallback, and
   land a second wave above `MaxIdleUnits` inside the window to force a
   post-publication squad. Gate went from flaky to 2-for-2.
+
+## Bot-test stall detectors must scale to real-map tick rates (2026-09-28, Nova)
+
+`run_ai_match_batch.py`'s stall detector was tuned on the flat duel fixture
+(~100 tps sustained): `debug.log` quiet for 120s meant hung. On the real
+"A Nuclear Winter" template the sim sustains ~25 tps, the AI module-timing
+lines land 60-120s apart, and a busy stretch produced a false `stalled` kill
+mid-match. Default `--stall-timeout` is now 400s; keep in mind the same
+calibration applies to any future gate that infers liveness from log cadence
+on real maps.
+
+Sibling note, same day: merging a PR stacked on a *merged* base branch marks
+the PR MERGED without touching master (#605 → claude/bot_difficulty_scale
+after it landed as #602). Check `baseRefName` and verify the merge commit is
+an ancestor of master before calling it landed.

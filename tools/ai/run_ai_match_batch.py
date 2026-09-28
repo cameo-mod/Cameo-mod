@@ -74,7 +74,11 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 # workaround as tools/tests/_bootstrap.py — an explicit override still wins.
 os.environ.setdefault("ALSOFT_DRIVERS", "null")
 
-TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
+# Maintained mandate: bot-vs-bot tests run on the real tournament duel map
+# "A Nuclear Winter" (mods/cameo/maps/ai_duel_nuclear_winter, unpacked from
+# _ra_a-nuclear-winter.oramap) — real terrain, real spawns, no synthetic
+# fixtures. --template overrides for fixture debugging.
+TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_nuclear_winter"
 MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
 BENCHMARK_PREFIX = "ai-duel-batch-"
@@ -426,6 +430,8 @@ def main() -> int:
     parser.add_argument("--repeats", type=int, default=1, help="matches per matchup; sides alternate")
     parser.add_argument("--time-limit", type=int, default=30, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
+    parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
+                        help="template map dir (default: the A Nuclear Winter duel fixture)")
     parser.add_argument("--retries", type=int, default=1,
                         help="extra attempts per match that dies without an exception log "
                              "(external kill signature); crashes with an exception are not retried")
@@ -440,8 +446,9 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
-    if not TEMPLATE_MAP.is_dir():
-        fail(f"template map missing: {TEMPLATE_MAP}")
+    template = args.template.resolve()
+    if not template.is_dir():
+        fail(f"template map missing: {template}")
 
     mod_id, engine = load_config()
     executable = engine / "bin" / "OpenRA.exe"
@@ -475,7 +482,7 @@ def main() -> int:
         return 0
 
     for name, v in variants.items():
-        write_variant(TEMPLATE_MAP, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
+        write_variant(template, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 

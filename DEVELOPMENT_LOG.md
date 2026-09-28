@@ -13939,3 +13939,32 @@ the stack owner (order-budget bypass, BuildingInfo hard-throw). Fransbot stack
 healthy. Also: unblocked every headless gate with ALSOFT_DRIVERS=null (OpenAL
 Soft null backend dodges the alcOpenDevice AV) and de-flaked ai_raid_gate —
 all four ai_* gates PASS on master.
+
+# 2026-09-28 — NOVA: #605 dead-branch rescue; A/B duel fixture ("A Nuclear Winter")
+
+**Stacked-merge rescue:** PR #605 (adaptive counter-production, #245 port part 1)
+merged into `claude/bot_difficulty_scale` — which had ALREADY merged to master as
+#602. The PR showed MERGED but its two commits (`093fa6a92` + merge `1afbe8185`)
+never touched master. Local merge of the scale-branch tip onto master was clean;
+292/292 tests pass; boot-gate green; pushed as `74e804e81`. Fleet rule recorded:
+after a stacked base merges, retarget or re-base the child PR BEFORE merging it.
+
+**New mandated bot test standard (maintainer order):** all bot-vs-bot testing
+runs on the real tournament duel map **"A Nuclear Winter"**
+(`mods/cameo/maps/ai_duel_nuclear_winter`, unpacked from
+`_ra_a-nuclear-winter.oramap`; both mpspawn cells are the duelists' homes) at
+locked `gamespeed: insane`. No more synthetic flat fixtures for bot tests —
+the old `ai_duel_gate_20260928` template stays available via `--template` for
+fixture debugging only.
+
+**`classic` bot type added** (`mods/cameo/ai/ai.yaml`): the pre-Cognition-wave
+stack as the A/B reference — the eighteen pre-wave modules re-gated
+`genericbot || classicbot` (CA builders, squad manager, harvester, capture,
+cargo/garrison, repair, power, support powers), the verbatim pre-wave
+`SquadManagerBotModuleCA@generic` config restored as `@classic`, plus
+`RevealsMap@classic` on the PlayerActor gated on `classicbot` = omniscience.
+The shared `hardbot` condition grant gives classic the hard-tier limits and
+build prereqs. New-CN modules (MasterAi, Scout, Beacon, personalities,
+counter-demand, HumanPace budget, AdaptiveCounterProduction) and all Fransbot
+modules stay `genericbot`/`enable-fransbot` only — the classic bot never ticks
+them. Fluent `bot_ai.classic` added; AI_MODULE_MAP regenerated (75 instances).

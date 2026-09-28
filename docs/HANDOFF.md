@@ -4523,3 +4523,23 @@ documented source-impossible RA1 exceptions. Its
 missing-source column now uses each faction's actual routes instead of claiming CA/DTA are
 required for RA2 and TS. The bot-only empty Battle Fortress variant remains separate and did not
 steal `BFRT` rows from the real Battle Fortress.
+
+
+## 2026-09-28 — A/B duel standard: Frankenstein vs omniscient classic on "A Nuclear Winter"
+
+Maintainer ruling: every bot-vs-bot test runs on the real tournament duel map
+**A Nuclear Winter** (`mods/cameo/maps/ai_duel_nuclear_winter`, unpacked from
+`_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: insane`.
+`tools/ai/run_ai_match_batch.py` defaults its template there (old synthetic
+gate fixture remains via `--template` for debugging only).
+
+Acceptance criterion for the merged "Frankenstein" stack (Cameo x CA x CN x
+Fransbot modules, `UseFoggedObservation: true`, no global vision): it must beat
+the **`classic`** bot type — the pre-Cognition-wave module stack at hard
+strength with `RevealsMap` omniscience — fighting smart, not hard.
+
+`classic` is defined in `mods/cameo/ai/ai.yaml` (`ModularBot@ClassicAI`,
+Type `classic`): eighteen pre-wave modules re-gated `genericbot || classicbot`,
+the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
+`@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
+`RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.

@@ -363,6 +363,7 @@ bot_ai =
    .cameogod = Cameo God AI
    .campaign = Campaign AI
    .fransbot = Fransbot (Experimental)
+   .classic = Classic AI (Omniscient Reference)
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 
