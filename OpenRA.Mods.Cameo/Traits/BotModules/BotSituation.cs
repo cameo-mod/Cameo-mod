@@ -1339,18 +1339,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
 					continue;
 
+				// Fog memory marks buildings Combat=false and flags armed ones Defence instead.
 				foreach (var seen in fogMemory.Remembered(enemy))
 				{
-					if (!seen.Combat || seen.Info == null)
+					if (seen.Info == null || !(seen.Combat || seen.Defence))
 						continue;
 
-					var bucket = seen.Building ? defences : army;
+					var bucket = seen.Combat ? army : defences;
 					bucket[seen.Info] = bucket.GetValueOrDefault(seen.Info) + 1;
 				}
 			}
 
 			var enemyArmy = army.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value)).ToList();
-			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value))).ToList();
+			// Walls count as defences for targeting but cannot shoot back: only armed defences join the fight.
+			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value))
+				.Where(d => d.Item1.Weapons.Length > 0)).ToList();
 			return (RatioPct(BotCombatPredictor.Predict(own, enemyArmy)), RatioPct(BotCombatPredictor.Predict(own, enemyAll)));
 		}
 

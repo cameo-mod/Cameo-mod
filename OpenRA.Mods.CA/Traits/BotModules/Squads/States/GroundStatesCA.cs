@@ -20,6 +20,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	{
 		protected virtual bool ShouldFlee(SquadCA owner)
 		{
+			// Never suicide (maintainer 2026-09-28): with CP, turn back once the visible fight is predicted lost.
+			if (owner.SquadManager.Info.UseCombatPredictor)
+				return ShouldFlee(owner, enemies => owner.SquadManager.PredictsLoss(owner, enemies));
+
 			return ShouldFlee(owner, enemies => !AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemies));
 		}
 
@@ -128,7 +132,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			if (AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits))
+			var engage = owner.SquadManager.Info.UseCombatPredictor
+				? owner.SquadManager.PredictsWin(owner, enemyUnits)
+				: AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits);
+			if (engage)
 			{
 				// 6f: assault waves stage before committing so slow units catch
 				// up and the attack arrives as one wave, not a trickle.

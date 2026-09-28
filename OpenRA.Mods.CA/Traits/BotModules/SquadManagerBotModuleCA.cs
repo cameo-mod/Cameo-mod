@@ -66,6 +66,22 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Max number of units AI has in guerrilla squad")]
 		public readonly int MaxGuerrillaSize = 10;
 
+		[Desc("Cameo (maintainer 2026-09-28): how many guerrilla squads may exist at once. New guerrilla units fill the",
+			"smallest open squad and a full set opens another, so several small raiding parties work at the same time.",
+			"1 keeps the single guerrilla squad of the classic bot.")]
+		public readonly int MaxGuerrillaSquads = 1;
+
+		[Desc("Cameo (AI_DEEP_RESEARCH.md §2.3, CP): ground squads decide to engage and to retreat with the Lanchester",
+			"combat predictor over the enemies they can SEE, instead of the fuzzy health/count rule. They retreat when the",
+			"predicted ratio drops below the tier's BotLimits.RetreatRatioPct and engage only at EngageMarginPct of it.")]
+		public readonly bool UseCombatPredictor = false;
+
+		[Desc("Engage threshold as a percent of the retreat threshold (hysteresis, so a squad does not dither at the line).")]
+		public readonly int EngageMarginPct = 150;
+
+		[Desc("Retreat threshold when no BotLimits trait is enabled (percent of predicted strength ratio).")]
+		public readonly int DefaultRetreatRatioPct = 50;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -1011,6 +1027,36 @@ namespace OpenRA.Mods.CA.Traits
 			return target;
 		}
 
+		// The smallest guerrilla squad with room, or a new one while fewer than MaxGuerrillaSquads exist; null when all are full.
+		SquadCA OpenGuerrillaSquad(IBot bot)
+		{
+			var guerrillas = Squads.Where(s => s.Type == SquadCAType.Guerrilla).ToList();
+			var open = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize).MinByOrDefault(s => s.Units.Count);
+			if (open != null)
+				return open;
+
+			return guerrillas.Count < Math.Max(1, Info.MaxGuerrillaSquads) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
+		}
+
+		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
+		internal double PredictedRatio(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var rules = World.Map.Rules;
+			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+			var foes = enemies.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+			return BotCombatPredictor.Predict(own, foes).Ratio;
+		}
+
+		int RetreatRatioPct => botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct;
+
+		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies) =>
+			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct;
+
+		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
+			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+
 		void FindNewUnits(IBot bot)
 		{
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
@@ -1018,7 +1064,6 @@ namespace OpenRA.Mods.CA.Traits
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
 					!activeUnits.Contains(a) && a.IsInWorld);
 
-			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
 			// JoinGuerrilla gates creation too: 0 means this personality never forms
 			// guerrilla squads, not "the first unit always joins". The size cap is
 			// evaluated per actor — a single pass may add a whole production wave.
@@ -1026,11 +1071,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var a in newUnits)
 			{
-				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll &&
-					(guerrillaForce == null || guerrillaForce.Units.Count < Info.MaxGuerrillaSize))
+				var guerrillaForce = Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll ? OpenGuerrillaSquad(bot) : null;
+				if (guerrillaForce != null)
 				{
-					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
-
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}

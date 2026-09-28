@@ -4860,6 +4860,29 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
   with Hard at 100.
 
+### 19.1a Force structure: guerrillas always on, the main army follows the personality (maintainer 2026-09-28) — binding
+
+> "The guerrilla squads should always be active 100 % of the time and only the main army (or later
+> several big armies) should be more passive and try to defend or steamroll." / "Never suicide
+> units: if it sees something that's going to win against the attack squad they should return
+> instead and try to attack somewhere else."
+
+* **Every Frankenstein personality** runs the same small-squad layer: `JoinGuerrilla: 100`,
+  `MaxGuerrillaSquads: 3` (several small parties at once — the smallest open one is filled first),
+  `MaxGuerrillaSize: 6`. Guerrillas raid, recon and hit soft targets whatever the posture;
+  harasser (spec-ops) squads and `ScoutBotModule` scouts run beside them. **Only the main army**
+  (SquadValue, staging, attack interval) differs per personality — turtle defends, steamroller
+  builds up and rolls.
+* **Never suicide:** with `UseCombatPredictor` every ground squad — main army and guerrillas —
+  engages only when the Lanchester predictor over the enemies it SEES clears
+  `RetreatRatioPct × EngageMarginPct` and turns back below `BotLimits.RetreatRatioPct`; the squad
+  dissolves home and the next attack avoids that region (the 6c risk gate remembers the threat).
+  `RetreatRatioPct` is the tier's self-preservation on the §19.1 line: **20 at Easiest, +8 per
+  tier, Hard 52, CameoGod 92**.
+* **Scouting:** `ScoutBotModule.EnemySpawnBonus` keeps scouts checking the enemy's possible spawn
+  regions (public `mpspawn` data).
+* `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
+
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
 
 Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
