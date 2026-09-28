@@ -1,3 +1,26 @@
+# 2026-09-28 — DAWN: post-merge Fransbot regression PASS + Mcv-stage producer rebuild
+
+**Merge wave:** #578 (Fransbot Route-A) squash-merged to master as `8ff791eae`;
+#595 wave + #596 + #594/593/592 all landed. Master head `d1d5e915a`.
+
+**Post-merge regression** (insane speed, Soviet mirror on `ai_fransbot_versus_20260928`):
+identical deterministic opening — MCV request WT3901, production start WT4200,
+`core opening complete` WT5726 — then the longest fight yet: **16399 ticks,
+67 kills / 78 losses, 1 enemy building razed** (HardBot 80/69, 8 bk). Near-parity
+on unit trades; still loses on economy (41k vs 86k earned). Logging isolation:
+`Engine.SupportDir=<worktree>\support` — the shared `%APPDATA%\OpenRA\Logs` dir
+is written by every agent's live instance, so per-launch support dirs are the
+only reliable way to attribute `debug.log`/match records.
+
+**Mcv-stage producer rebuild gap found + fixed:** the e154 fallback only fired
+when the current stage had a non-empty wanted set — `OpeningStage.Mcv` builds
+nothing (the MCV goes through `RequestUnitProduction`), so a warfactory killed
+during the Mcv stage deadlocked the opening at `no wanted set` forever. Now:
+at Mcv stage with no owned queue able to build an McvType, the conyard rebuilds
+the missing producer upstream-first (same rank order). Verified the failure mode
+live (warfactory dead ~WT5000 → `no McvTypes entry is currently buildable` →
+stall); the follow-up run's warfactory survived so the fix is compile-verified,
+next-loss-mode insurance. Drift baseline +736/-375.
 # 2026-09-28 — EMBER: w_hurt dealt-side producer — WeightHurt un-zeroed
 
 Branch `devin/ember/ai-squad-attention` (same lane, second commit). #585's
