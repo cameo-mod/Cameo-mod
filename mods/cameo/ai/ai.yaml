@@ -47,6 +47,9 @@
 		UnitIntervalModifier: 250
 		InitialAttackDelay: 6750
 		PersonalityReactionDelay: 7500
+		NewProductionCashThreshold: 20000
+		MaximiseProductionCashRequirement: 9500
+		AdaptiveCounterWeight: 0
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
 		ProductionTypeLimit: 2
@@ -59,6 +62,9 @@
 		UnitIntervalModifier: 225
 		InitialAttackDelay: 6000
 		PersonalityReactionDelay: 6750
+		NewProductionCashThreshold: 18000
+		MaximiseProductionCashRequirement: 8500
+		AdaptiveCounterWeight: 4
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
 		ProductionTypeLimit: 2
@@ -71,6 +77,9 @@
 		UnitIntervalModifier: 200
 		InitialAttackDelay: 5250
 		PersonalityReactionDelay: 6000
+		NewProductionCashThreshold: 16000
+		MaximiseProductionCashRequirement: 7500
+		AdaptiveCounterWeight: 9
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 3
@@ -83,6 +92,9 @@
 		UnitIntervalModifier: 175
 		InitialAttackDelay: 4500
 		PersonalityReactionDelay: 5250
+		NewProductionCashThreshold: 14000
+		MaximiseProductionCashRequirement: 6500
+		AdaptiveCounterWeight: 13
 		RequiresCondition: mediumbot
 	BotLimits@hard:
 		ProductionTypeLimit: 4
@@ -96,6 +108,9 @@
 		InitialAttackDelay: 3750
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 4500
+		NewProductionCashThreshold: 12000
+		MaximiseProductionCashRequirement: 5500
+		AdaptiveCounterWeight: 18
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
@@ -109,6 +124,9 @@
 		InitialAttackDelay: 3000
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3750
+		NewProductionCashThreshold: 10000
+		MaximiseProductionCashRequirement: 4500
+		AdaptiveCounterWeight: 22
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 5
@@ -122,6 +140,9 @@
 		InitialAttackDelay: 2250
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3000
+		NewProductionCashThreshold: 8000
+		MaximiseProductionCashRequirement: 3500
+		AdaptiveCounterWeight: 27
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 6
@@ -135,6 +156,9 @@
 		InitialAttackDelay: 1500
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 2250
+		NewProductionCashThreshold: 6000
+		MaximiseProductionCashRequirement: 2500
+		AdaptiveCounterWeight: 31
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 6
@@ -148,6 +172,9 @@
 		InitialAttackDelay: 750
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 1500
+		NewProductionCashThreshold: 4000
+		MaximiseProductionCashRequirement: 1500
+		AdaptiveCounterWeight: 36
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 7
@@ -161,6 +188,9 @@
 		InitialAttackDelay: 0
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 750
+		NewProductionCashThreshold: 2000
+		MaximiseProductionCashRequirement: 500
+		AdaptiveCounterWeight: 40
 		RequiresCondition: cameogodbot
 
 Player:

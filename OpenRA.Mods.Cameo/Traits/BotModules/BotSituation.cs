@@ -187,7 +187,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -285,6 +285,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// the same condition Rebuild uses to fog its own snapshot.
 		bool IBotFoggedEnemyProvider.FoggedObservation =>
 			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
+
+		// The enemy army as this bot has SEEN it, for adaptive counter-production (DESIGN §19.1). Only when it
+		// observes through fog; otherwise false, and the unit builder falls back to its omniscient sample.
+		bool IBotEnemyCompositionProvider.TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)
+		{
+			valueByActorType = null;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+
+			var composition = new Dictionary<string, int>();
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+					if (seen.Combat && !seen.Building && seen.Info != null)
+						composition[seen.Info.Name] = composition.GetValueOrDefault(seen.Info.Name) + Math.Max(1, seen.Value);
+			}
+
+			valueByActorType = composition;
+			return true;
+		}
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
