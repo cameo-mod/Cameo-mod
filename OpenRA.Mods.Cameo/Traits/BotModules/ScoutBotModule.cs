@@ -84,7 +84,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		protected override void TraitEnabled(Actor self)
 		{
-			resourceMap = self.TraitOrDefault<ResourceMapBotModule>();
+			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
 		}
