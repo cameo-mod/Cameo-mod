@@ -16,6 +16,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
@@ -50,6 +51,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Role -> field predicates an actor must ALL satisfy to get the role by derivation:",
 			"`Trait.Field any v1|v2` (the field holds at least one of the values) or",
 			"`Trait.Field only v1|v2` (the field holds values and every one of them is listed).",
+			"The virtual `Weapons.ValidTargets` is the union of what the actor's enabled armaments' weapons may target",
+			"(e.g. `Weapons.ValidTargets any Air` = can shoot aircraft).",
 			"Trait is the type name without Info (base classes count); values compare case-insensitively.",
 			"No commas inside a predicate: MiniYaml splits the list on them.")]
 		public readonly Dictionary<string, string[]> DeriveHasField = [];
@@ -87,7 +90,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					a.TraitInfoOrDefault<BotRolesInfo>()?.Roles ?? FrozenSet<string>.Empty,
 					a.TraitInfoOrDefault<BuildableInfo>()?.Queue.Count > 0,
 					fieldKeys.Count == 0 ? null : fieldKeys.ToDictionary(k => k.Trait + "." + k.Field,
-						k => ReadField(a, k.Trait, k.Field, fieldSeen))))
+						k => k.Trait == WeaponsTrait && k.Field == ValidTargetsField
+							? WeaponTargets(rules, a, fieldSeen)
+							: ReadField(a, k.Trait, k.Field, fieldSeen))))
 				.ToList();
 
 			// A predicate no trait can ever satisfy is a typo, not a filter: fail at rules load.
@@ -133,6 +138,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					}
 				}
 			}
+		}
+
+		const string WeaponsTrait = "Weapons";
+		const string ValidTargetsField = "ValidTargets";
+
+		// The virtual `Weapons.ValidTargets`: what the actor's enabled armaments may hit, per their weapons.
+		// ⚠ Not ArmamentInfo.EnabledByDefault: that is set in each actor's OWN RulesetLoaded, which may run after
+		// this one (Player), so it would still read false. Evaluate the condition the same way instead.
+		static IReadOnlySet<string> WeaponTargets(Ruleset rules, ActorInfo a, HashSet<(string, string)> seen)
+		{
+			var values = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			foreach (var armament in a.TraitInfos<ArmamentInfo>()
+				.Where(x => x.RequiresCondition == null || x.RequiresCondition.Evaluate(VariableExpression.NoVariables)))
+			{
+				seen.Add((WeaponsTrait, ValidTargetsField));
+				if (armament.Weapon == null || !rules.Weapons.TryGetValue(armament.Weapon.ToLowerInvariant(), out var weapon))
+					continue;
+
+				foreach (var t in weapon.ValidTargets)
+					values.Add(t);
+			}
+
+			return values;
 		}
 
 		// Trait type names of every trait on the actor, including base classes, without the Info suffix.
