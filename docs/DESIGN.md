@@ -4877,7 +4877,10 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
   with the games played on that machine. Keys are factions only — **nothing about individual
   human players is stored.** Allowed by `AI_ARCHITECTURE.md` §6.1: it steers only unsynced bot
   reasoning on the host.
-* **Offline LLM analyst — yes, tools only.** A script in `tools/` may summarise match/situation
+* **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
+  host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
+  claims, human-ally beacons) — the same no-cheat rule as the Director.
+* **Offline LLM analyst — yes, tools only; the analyst is Devin until a local model exists.** A script in `tools/` may summarise match/situation
   logs with an LLM and propose tuning changes; nothing is applied without human review and an A/B.
   No LLM or network call ever runs in the game.
 

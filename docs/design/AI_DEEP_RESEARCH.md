@@ -326,3 +326,104 @@ because it attacks the measured failure (fights traded 2:1) with data Cameo alre
 * **Neural nets or network calls in the game loop** (§6.1, §6.3–6.4).
 * **Difficulty by stats.** Scale delays, self-preservation and micro; keep insurance as the one
   labelled cheat.
+
+---
+
+## 11. Team games: the Team Commander (maintainer, 2026-09-28)
+
+> "Director sounds useful for team games where the bots can give attack and defend and expand
+> orders to each other."
+
+The Director (§7, DI) paces pressure against humans. Its team sibling, **TC — Team Commander**,
+coordinates allied bots. It is cheap in OpenRA because **every bot of a match runs on the host**
+(`AI_ARCHITECTURE.md` §1.1), so allied bots can share an unsynced team blackboard without any
+network or sync work, and allies already share vision. Nothing here is a cheat: it is what a
+human team does on voice chat.
+
+* **Shared plan:** one team main target and a **synchronised attack time** — waves from two
+  bots arrive together (Lanchester square law, §2.1) instead of one after another.
+* **Defend requests:** a bot under attack posts a request; the ally whose army is nearest and
+  not committed answers with a squad (CP decides whether the answer can win).
+* **Expansion claims:** a bot reserves an expansion zone before its MCV moves, so allies never
+  race each other for the same site; claims time out.
+* **Role split:** allies bias their resting axes apart (one air/tech, one ground/rush) so the team
+  covers the arsenal instead of mirroring.
+* **Human allies:** allied beacons (phase 8, approved) become defend/attack requests on the
+  same blackboard.
+* **One owner:** a world-level `BotTeamCommander` (host-only, unsynced) owns the team plan; each
+  bot's master reads it as an input (§10.1). Absent in 1v1: nothing changes.
+* **A/B:** a 2v2 variant of the harness (Frankenstein pair vs `classic` pair); owner NOVA with DI.
+
+---
+
+## 12. The analyst without a local LLM: Devin
+
+Ruling LA (DESIGN §19.2) allows an offline analyst; the maintainer has no local LLM yet, so the
+analyst is **Devin** for now. (Measured on the maintainer's machine: RTX 4060 with 8 GB VRAM —
+Windows' WMI reports "4095 MB", a known 32-bit cap — 32 GB RAM, Ryzen 7 5700X: enough for a
+quantised 7–8B model later, e.g. through Ollama or LM Studio, if ever wanted.)
+
+The loop, every step reviewable:
+
+1. **Run** a league batch (`tools/ai/run_ai_match_batch.py`, §6.2).
+2. **Condense:** `python tools/ai/fight_report.py <batch dirs> --bot hard` — per match the
+   decisive fight (largest net trade swing), what the bot believed before/after, and which roles
+   took the losses. This is the analyst's input; it replaces reading raw JSONL.
+3. **Hypothesise:** Devin writes `FINDINGS_<date>_<agent>.md` in the fleet folder: the top 3
+   recurring causes with the report lines that show them, and one candidate change each.
+4. **Test:** each candidate on its own branch, behind a yaml switch, A/B vs master.
+5. **Review:** a human (maintainer or Claude) merges only what won.
+
+This is how today's two defects were found (idle units at home; `ProtectOwn` never grows), by
+hand; the report makes the same read take seconds.
+
+---
+
+## 13. Beating the best human players — what else
+
+Beyond §0's ten, the literature and our measurements point to what separates a bot that beats a
+strong human from one that only beats bots. Each is **fair** (no cheats) and each is a candidate
+for the league A/B.
+
+1. **Superhuman discipline, not superhuman stats.** Humans float cash, idle factories, forget
+   power and harvesters in fights; a bot must never. Add telemetry for idle-production ticks,
+   banked cash and brown-out time, and drive them to zero at the top tiers.
+2. **Pressure on several fronts at once.** A human's attention is one screen; a bot's is its
+   action budget. At the top tiers run main army + harass + expansion snipe simultaneously (RV
+   guerrilla, CA harasser, 6c/CP decide each), inside the H1 budget.
+3. **Base trade and counter-attack.** When influence maps (IM) show the human army committed
+   elsewhere, hit their base or expansion instead of racing home — or race home only when CP
+   says the defence wins.
+4. **Refuse the bait.** Humans pull bots into defences and chokes. CP + siege stand-off (CA-2)
+   + remembered ambush zones (IM decay keeps "they killed us here") make the bot decline.
+5. **Be unpredictable on purpose.** Draw openings, timings and attack paths from a distribution
+   (round 1 §8.2, Tavares' safe exploitation); a human who learns the bot's one plan beats it.
+6. **Hit windows, not timers.** Attack at our own power spikes (a tech/upgrade just completed,
+   CA-1 ledger) and at the enemy's weak moments (just lost a fight, just expanded, superweapon on
+   cooldown — support-power timers are public in OpenRA).
+7. **Superweapons both ways.** Fire at the densest valuable cluster (army or production);
+   disperse own army and harvesters when an enemy superweapon is due.
+8. **Keep veterans alive.** MI pull-back weights veterancy; a promoted unit is worth more than
+   its cost.
+9. **Map control and vision.** Hold chokes and tech/oil structures with cheap watchers
+   (ScoutBotModule posts), kill enemy scouts, deny information.
+10. **Learn from our best humans.** Record human-vs-bot games in the same logs (the match writer
+    logs bots today; add a record-only human row). The per-faction profile (OM) then learns from
+    the strongest opponents too — still keyed by faction, no personal data (ruling §8).
+11. **Measure it: ratings.** Keep an Elo/TrueSkill rating per bot version across the league and
+    human games, so "beats our best players" is a number that moves, not a feeling.
+12. **Robustness watchdogs.** Log and self-correct stuck units, an army idle for N ticks, a
+    squad without a reachable target — the silent failures humans exploit.
+
+Owners are assigned as each item becomes a phase; items 1, 10, 11 are telemetry and harness work
+(Devin Cloud), 2–4 are CP/IM consumers, 5–9 belong to UT, MI and CA-5.
+
+### 13.1 Measured today: the base-defence fix alone is not enough
+
+Round 5 (A Nuclear Winter, `ReinforceProtection` vs master, 4+4 matches, same session): the
+candidate went **1–3**, master **2–2**. Idle-at-home losses fell (3–16 k vs 15–28 k) but
+protection losses rose by the same amount (20–72 k vs 4–19 k), almost all **inside** the base:
+the whole defence now fights, and still loses, because classic arrives with 43–96 k of army
+against 3–10 k (`fight_report`). The fix stays shelved and is re-tested together with **CP**
+(hold under own defences until the predicted trade favours us). It confirms §1: the lever is
+fight selection and army size at the decisive moment, not who is drafted.

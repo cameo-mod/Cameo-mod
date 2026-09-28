@@ -20,7 +20,10 @@ Nuclear Winter against the current master before it lands. Queue: ROADMAP "AI AR
 (`stats.stats_timeline`, PR #617). The continuous-threat branch lost 1–3 and is shelved.
 Round 4's loss-by-role log (#617): the largest loss category is **idle units at home**
 (38–108k per match, 70–81 % of them inside the base) — `ProtectOwn` drafts the idle pool only
-while the protection squad is empty, and the squad never disbands; fix in progress (Claude).
+while the protection squad is empty, and the squad never disbands. **Round 5 (fix vs master, 4+4):
+fix 1–3, master 2–2** — idle losses fell, protection losses rose by the same amount, inside the
+base: the defence now fights but is out-armied (43–96k vs 3–10k, `tools/ai/fight_report.py`).
+Shelved until CP (AI_DEEP_RESEARCH §13.1).
 
 **Merged today:** #613 (classic/fransbot hidden in the lobby), #614, #616, #618, #619.
 

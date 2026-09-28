@@ -141,7 +141,14 @@ the fog sequencing.
     **OM** per-opponent profiles with a bandit start. **Devin Cloud.**
   - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
     (DESIGN §19.2). **NOVA**, with UT.
-  - [ ] **S** LA offline LLM log analyst in `tools/`, human-reviewed, A/B-verified. **Devin Cloud.**
+  - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): the analyst is **Devin** for now
+    (no local LLM); input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
+    candidate per finding. **Devin Cloud.**
+  - [ ] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
+    defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant. **NOVA**, with DI.
+  - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
+    refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
+    control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
