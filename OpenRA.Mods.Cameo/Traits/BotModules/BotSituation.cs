@@ -70,6 +70,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Above 100 the own side is predicted to win. No decision reads these yet.
 		internal int CombatRatioPct, CombatRatioDefendedPct;
 
+		// Phase DF step 1 (AI_DEEP_RESEARCH.md §14), record-only: the enemy groups seen this snapshot, heaviest
+		// first, with their tracked velocity and, when moving, the own asset they head for and when.
+		internal List<(BotThreatTracker.Group Group, BotThreatTracker.Prediction? Prediction)> Threats = new();
+
 		// Cumulative unit losses by the role the unit held (squad type or "idle"), and the part lost
 		// away from the base; summed over every squad manager, disabled personalities included.
 		internal SortedDictionary<string, int> LossesByRole = new(StringComparer.Ordinal), AwayLossesByRole = new(StringComparer.Ordinal);
@@ -173,6 +177,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RiskRoutingThreatWeight = 1000;
 		[Desc("Ticks after which a remembered non-building that was never seen again is dropped.")]
 		public readonly int ObservationTimeoutTicks = 30000;
+
+		[Desc("DF threat tracking: enemy combat units within this many cells of a group's centre join that group.")]
+		public readonly int ThreatGroupRadiusCells = 10;
+
+		[Desc("DF threat tracking: a group keeps its identity (and gets a velocity) if last snapshot's group was this close.")]
+		public readonly int ThreatMatchRadiusCells = 30;
+
+		[Desc("DF threat tracking: the predicted target must lie within this cone around the heading (cosine x100).")]
+		public readonly int ThreatConeCosPercent = 70;
+
+		[Desc("DF threat tracking: slower than this (cells per 1000 ticks) counts as standing, with no prediction.")]
+		public readonly int ThreatMinSpeedCellsPerKiloTick = 10;
+
+		[Desc("DF threat tracking: how many of the heaviest groups the situation log records.")]
+		public readonly int ThreatsLogged = 3;
 		[Desc("Publish fog-honest Raid and Defend missions from the latest situation snapshot.")]
 		public readonly bool PublishMissions = true;
 		[Desc("Percentage of remembered enemy army and defence value required before attempting a Raid.")]
@@ -395,6 +414,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				profiles.Add(enemy, profile);
 			}
 
+			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
 			var urgency = currentUrgency == BotUrgency.Emergency
 				? BotUrgency.Emergency
@@ -554,6 +574,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				SquadCount = squadCount,
 				SquadUnitCount = squadUnitCount,
+				Threats = threats,
 				CombatRatioPct = combatRatios.Army,
 				CombatRatioDefendedPct = combatRatios.Defended,
 				LossesByRole = lossesByRole,
@@ -1326,6 +1347,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
+		List<BotThreatTracker.Group> previousThreatGroups = new();
+
+		// DF step 1: enemy combat units SEEN this snapshot (fogged: remembered entries refreshed at this tick),
+		// grouped, tracked against the previous snapshot, and extrapolated to the own building they head for.
+		List<(BotThreatTracker.Group, BotThreatTracker.Prediction?)> TrackThreats(int tick, OpenRA.Player[] enemies,
+			Dictionary<OpenRA.Player, Actor[]> actorsByOwner, Actor[] ownBuildings, bool fogged)
+		{
+			var seen = new List<BotThreatTracker.Unit>();
+			foreach (var enemy in enemies)
+			{
+				if (fogged)
+					seen.AddRange(fogMemory.Remembered(enemy).Where(s => s.Combat && s.LastSeenTick == tick)
+						.Select(s => new BotThreatTracker.Unit(s.Location, Math.Max(1, s.Value))));
+				else if (actorsByOwner.TryGetValue(enemy, out var list))
+					seen.AddRange(list.Where(IsCombatUnit).Select(a => new BotThreatTracker.Unit(a.Location, Math.Max(1, Value(a)))));
+			}
+
+			var groups = BotThreatTracker.Track(previousThreatGroups,
+				BotThreatTracker.Cluster(seen, Info.ThreatGroupRadiusCells, tick), Info.ThreatMatchRadiusCells);
+			previousThreatGroups = groups;
+
+			var assets = ownBuildings.Select(b => (b.Location, Value(b))).ToList();
+			return groups.OrderByDescending(g => g.Value).Take(Math.Max(0, Info.ThreatsLogged))
+				.Select(g => (g, BotThreatTracker.Predict(g, assets, Info.ThreatConeCosPercent / 100.0,
+					Info.ThreatMinSpeedCellsPerKiloTick / 1000.0)))
+				.ToList();
+		}
+
 		(int Army, int Defended) CombatRatios(IEnumerable<Actor> ownActors)
 		{
 			var rules = player.World.Map.Rules;
