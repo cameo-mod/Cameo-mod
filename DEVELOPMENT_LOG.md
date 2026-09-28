@@ -13516,3 +13516,12 @@ re-added to unitsHangingAroundTheBase unless dead/squad-claimed — a unit
 pulled from the pool but left only in activeUnits is stranded forever
 (FindNewUnits skips activeUnits). Gates: 261/261 tests, scratch-bin
 squad-gate equivalent PASS (squads=3 units=8 tick1201), boot PASS.
+**Done (2026-09-28, ember-ai6a):** w_hurt consumer (AI_ARCHITECTURE §4.3).
+IBotThreatAnalysis += GetNemesisScore(Player); CombatAnalysisBotModule
+implements it (nemesisScores read). MasterAiBotModule: WeightHurt=150
+subtracts Saturate(nemesisScore, HurtSaturation=40) per enemy in
+TargetScore, and a nemesis >= NemesisOverrideWeight=60 force-retargets
+bypassing interval+hold. Dealt-to-them side still has no producer —
+documented one-sided. Gates: 264/264 tests, ai_squad_gate PASS on the
+ISOLATED worktree engine (junction removed per maintainer order),
+boot-gate PASS.
