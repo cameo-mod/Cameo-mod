@@ -3037,3 +3037,23 @@ next vendored bot (CN CombatAnalysis consumption, harasser squads):
   `Player:` it silently drops, and at yaml root it parses as an actor named
   `mapoptions` (`Junk value` rules error). `Shroud`/`PlayerResources` are
   Player-actor traits and stay under `Player:`.
+- **`ALSOFT_DRIVERS=null` unblocks every headless gate.** Since the .NET 10 /
+  bleed engine update, OpenAL Soft access-violates (0xC0000005) inside the
+  native `alcOpenDevice` P/Invoke — a hard crash the managed `try/catch` in
+  `DefaultPlatform.CreateSound` can never see, so it reproduces on unmodified
+  master and blocked all `ai_*` gates + `boot-test.cmd` on this host. The
+  bundled `soft_oal.dll` IS OpenAL Soft, whose `null` backend gives headless
+  runs a working silent device — set the env var (`os.environ.setdefault` in
+  `tools/tests/_bootstrap.py` covers every python gate; `run_ai_match_batch.py`
+  and `boot-test.cmd` set their own). Verified live: `ai_raid_gate` PASS.
+  This masks real-audio regressions in gates, so unset the var when testing sound.
+- **A runtime gate must not depend on a random personality roll or pre-window
+  publication.** `ai_raid_gate_20260928` asserted a `mission_assignment`, but
+  `BotPersonalityController` rolls one of five personalities at `TraitEnabled`
+  and assignments only record when a Rush squad forms AFTER the Raid mission
+  publishes — the starting army can exhaust the squad queue first (1-in-3-ish
+  pass rate observed). Fixture fix: pin `BotPersonalityController.Conditions`
+  to `personality-rush` in the map's `rules.yaml`, spawn a visible enemy-side
+  target so `FindClosestEnemy` doesn't depend on the fogged-scan fallback, and
+  land a second wave above `MaxIdleUnits` inside the window to force a
+  post-publication squad. Gate went from flaky to 2-for-2.

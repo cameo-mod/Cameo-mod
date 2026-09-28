@@ -69,6 +69,11 @@ import time
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
+# OpenAL Soft AVs in alcOpenDevice on this host since the .NET 10 / bleed
+# update; the null driver gives headless matches a silent device. Same
+# workaround as tools/tests/_bootstrap.py — an explicit override still wins.
+os.environ.setdefault("ALSOFT_DRIVERS", "null")
+
 TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
 MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}

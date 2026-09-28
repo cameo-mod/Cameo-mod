@@ -9,6 +9,8 @@ World:
 
 Player:
 	-ConquestVictoryConditions:
+	BotPersonalityController:
+		Conditions: personality-rush
 	Shroud:
 		FogCheckboxEnabled: True
 		ExploredMapCheckboxEnabled: False

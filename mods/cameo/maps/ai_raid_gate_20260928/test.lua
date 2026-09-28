@@ -21,7 +21,27 @@ WorldLoaded = function()
 	for i, unit in ipairs(army) do
 		Actor.Create(unit, true, { Owner = bot, Location = CPos.New(86 + (i % 4), 86 + math.floor(i / 4)) })
 	end
+
+	-- A scout next to the enemy refinery keeps a visible Raid target alive so
+	-- the gate does not depend on the fogged-scan fallback having fired.
+	Actor.Create("td_nod_buggy", true, { Owner = bot, Location = CPos.New(36, 40) })
+
 	print("AI_RAID_GATE_STARTED bot=HardBot type=hard")
+
+	-- mission_assignment is only recorded when a Rush squad is created against
+	-- an already-published Raid mission. The starting army can exhaust the
+	-- squad queue before the strategist publishes, so a second wave lands
+	-- mid-window: sized above every personality's MaxIdleUnits to force the
+	-- attack-force trigger regardless of its random tick.
+	local wave2 = {}
+	for i = 1, 16 do
+		wave2[i] = "td_nod_lighttank"
+	end
+	Trigger.AfterDelay(450, function()
+		for i, unit in ipairs(wave2) do
+			Actor.Create(unit, true, { Owner = bot, Location = CPos.New(86 + (i % 4), 88 + math.floor(i / 4)) })
+		end
+	end)
 
 	-- Squads must have formed well before this fires (force interval 50t,
 	-- 900 ticks leaves margin for scouting and snapshots.
