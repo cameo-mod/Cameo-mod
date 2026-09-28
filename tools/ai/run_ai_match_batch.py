@@ -6,12 +6,21 @@ cameo-ai-matches.jsonl only become useful at volume, and volume needs a
 harness — a script and a map rotation, not engine work.
 
 Each matchup is a (faction x bot) vs (faction x bot) pairing on a generated
-copy of mods/cameo/maps/ai_duel_gate_20260928. The variant's map.yaml gets
-its two duelists patched (Bot/Faction) and their starting forces written into
-the Actors: section — headless Launch.Map runs a Local server, so no lobby
-bot seating exists and the duelists are map-side players (Playable: False +
-Bot:), which SpawnStartingUnits cannot serve; the harness therefore resolves
-each faction's StartingUnits group from the mod yaml and pre-places it.
+variant of the duel map. Per the 2026-09-28 maintainer ruling, the default
+map is the shipped tournament map "A Nuclear Winter"
+(mods/cameo/maps/_ra_a-nuclear-winter.oramap): the harness extracts it into
+the support dir, adds the NonCombatant referee seat for the local client,
+converts Multi0/Multi1 into map-side bot players (Playable: False + Bot: +
+HomeLocation taken from the map's mpspawn actors), and cross-wires their
+Enemies. --map can point at the legacy ai_duel_gate_20260928 template dir for
+the old generated-fixture behavior.
+
+The variant's map.yaml gets its two duelists patched (Bot/Faction) and their
+starting forces written into the Actors: section — headless Launch.Map runs
+a Local server, so no lobby bot seating exists and the duelists are map-side
+players (Playable: False + Bot:), which SpawnStartingUnits cannot serve; the
+harness therefore resolves each faction's StartingUnits group from the mod
+yaml and pre-places it.
 
 The local client occupies the map's declared-NonCombatant "Referee" slot —
 lobby clients ignore PlayerReference.NonCombatant, so the match writer checks
@@ -43,8 +52,12 @@ Usage:
     python tools/ai/run_ai_match_batch.py [options]
 
     --factions td_gdi,td_nod        factions for the matrix (default: td_gdi,td_nod)
-    --bot-a hard --bot-b hard       difficulty types per side (default: hard)
-    --repeats 2                     matches per matchup (spawn sides alternate)
+    --bot-a fransbot --bot-b hard   bot types per side (default: fransbot vs the
+                                    omniscient classic hard bot — the A/B axis)
+    --repeats 4                     matches per matchup (spawn sides alternate)
+    --swap-bots                     also alternate which bot takes which spawn —
+                                    the A/B acceptance requires both spawns
+    --map PATH                      duel map (default: _ra_a-nuclear-winter.oramap)
     --time-limit 30                 per-match cap in minutes (engine options only)
     --support-dir PATH              batch support dir (default: %TEMP%/ai-match-batch-<ts>)
     --dry-run                       print the matrix + variants, launch nothing
@@ -66,6 +79,7 @@ import sys
 import tempfile
 import threading
 import time
+import zipfile
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -75,6 +89,14 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 os.environ.setdefault("ALSOFT_DRIVERS", "null")
 
 TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
+
+# Maintainer ruling 2026-09-28: all bot-vs-bot testing runs on the real
+# tournament duel map "A Nuclear Winter" — generated shell fixtures are only
+# kept for the bespoke per-gate maps. Default --map points at the shipped
+# .oramap; variants are extracted copies patched in the support dir, so the
+# packaged map itself is never touched.
+DEFAULT_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oramap"
+
 MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
 BENCHMARK_PREFIX = "ai-duel-batch-"
@@ -129,12 +151,14 @@ def load_config() -> tuple[str, pathlib.Path]:
     return mod_id, engine.resolve()
 
 
-def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int) -> list[dict]:
+def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int, swap_bots: bool = False) -> list[dict]:
     """One unordered faction pair per matchup; repeats alternate spawn sides.
 
     Spawn side is a real axis (corner map geometry is asymmetric), so repeat
-    parity swaps which faction occupies BotA/BotB. Mirrors (same faction both
-    sides) are included: mirror records are honest 1v1 data.
+    parity swaps which faction occupies slot A/B. With --swap-bots the bot
+    assignment alternates too — required for the A/B acceptance runs, where a
+    bot must win from BOTH spawns, not just the lucky one. Mirrors (same
+    faction both sides) are included: mirror records are honest 1v1 data.
     """
     matchups = []
     for index, (fa, fb) in enumerate(itertools.combinations_with_replacement(factions, 2)):
@@ -143,13 +167,14 @@ def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int) ->
                 a, b = fa, fb
             else:
                 a, b = fb, fa
+            ba, bb = (bot_a, bot_b) if not (swap_bots and repeat % 2 == 1) else (bot_b, bot_a)
             matchups.append(
                 {
                     "index": index,
                     "repeat": repeat,
-                    "side_a": {"faction": a, "bot": bot_a},
-                    "side_b": {"faction": b, "bot": bot_b},
-                    "variant": f"ai_duel_{a}_{bot_a}_vs_{b}_{bot_b}".replace(" ", "_"),
+                    "side_a": {"faction": a, "bot": ba},
+                    "side_b": {"faction": b, "bot": bb},
+                    "variant": f"ai_duel_{a}_{ba}_vs_{b}_{bb}".replace(" ", "_"),
                 }
             )
     return matchups
@@ -273,7 +298,131 @@ def inject_starting_actors(text: str, sides: list[tuple[str, str, tuple[int, int
     return text.replace(ACTOR_SENTINEL, rendered.rstrip("\n"))
 
 
+def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
+    """mpspawn actor locations in file order — the lobby binds Multi slots in
+    the same order, so entry 0 is Multi0's home cell, entry 1 is Multi1's."""
+    cells = []
+    for match in re.finditer(
+        r"^\t\w+: mpspawn\n\t\tOwner: \w+\n\t\tLocation: (\d+),(\d+)$",
+        map_text, re.MULTILINE,
+    ):
+        cells.append((int(match.group(1)), int(match.group(2))))
+    if len(cells) < 2:
+        fail("real-map mode needs a map with at least two mpspawn actors")
+    return cells
+
+
+REFEREE_BLOCK = """\tPlayerReference@Referee:
+\t\tName: Referee
+\t\tPlayable: True
+\t\tRequired: True
+\t\tAllowBots: False
+\t\tNonCombatant: True
+\t\tFaction: td_gdi
+\t\tLockFaction: True
+\t\tStartingUnitsClass: empty
+"""
+
+
+def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int, int], other_ref: str) -> str:
+    """Convert a Playable Multi slot into a map-side bot duelist.
+
+    Multi refs on shipped maps carry `Playable: True` + `Faction: Random` and
+    no Bot/HomeLocation — the bot's home comes from an mpspawn actor instead.
+    We write everything the map-side bot branch honors and cross-wire the two
+    duelists as enemies while keeping the map's declared Creeps hostility.
+    """
+    marker = f"\tPlayerReference@{ref}:"
+    start = text.find(marker)
+    if start < 0:
+        fail(f"map is missing {marker}")
+
+    # The block ends at the next player OR the next top-level key (e.g.
+    # Actors:) — whichever comes first. The last PlayerReference otherwise
+    # slices to EOF and swallows every section that follows Players:.
+    candidates = []
+    next_ref = text.find("\n\tPlayerReference@", start + len(marker))
+    if next_ref >= 0:
+        candidates.append(next_ref)
+    next_key = re.search(r"\n\S", text[start + len(marker):])
+    if next_key:
+        candidates.append(start + len(marker) + next_key.start())
+    block_end = min(candidates) if candidates else len(text)
+
+    block = text[start:block_end].rstrip("\n") + "\n"
+
+    for key, value in (("Playable", "False"), ("Bot", bot), ("Faction", faction)):
+        pattern = re.compile(rf"^\t\t{key}: .+$", re.MULTILINE)
+        if pattern.search(block):
+            block = pattern.sub(f"\t\t{key}: {value}", block, count=1)
+        else:
+            block += f"\t\t{key}: {value}\n"
+
+    block += f"\t\tHomeLocation: {home[0]},{home[1]}\n"
+
+    enemies = re.compile(r"^\t\tEnemies: .+$", re.MULTILINE)
+    declared = enemies.search(block)
+    extra = f", {other_ref}" if other_ref not in (declared.group(0) if declared else "") else ""
+    if declared:
+        block = enemies.sub(lambda _: declared.group(0) + extra, block, count=1)
+    else:
+        block += f"\t\tEnemies: {other_ref}\n"
+
+    return text[:start] + block + text[block_end:]
+
+
+def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
+    """Extract a shipped .oramap into a variant dir and convert its Multi slots
+    into map-side bot duelists. The referee seat is added for the local client;
+    the duel gate's rules.yaml supplies the locked insane speed, time cap and
+    restored MustBeDestroyed bases that real elimination needs."""
+    if dest.exists():
+        shutil.rmtree(dest)
+    dest.mkdir(parents=True)
+    with zipfile.ZipFile(oramap) as archive:
+        archive.extractall(dest)
+
+    map_yaml = dest / "map.yaml"
+    text = map_yaml.read_text(encoding="utf-8")
+
+    spawns = mp_spawn_cells(text)
+    if not re.search(r"^Rules: ", text, re.MULTILINE):
+        categories = re.search(r"^Categories: .+$", text, re.MULTILINE)
+        if not categories:
+            fail("map.yaml has no Categories line to anchor the Rules key")
+        text = text[:categories.end()] + "\n\nRules: rules.yaml" + text[categories.end():]
+
+    marker = "\tPlayerReference@Multi0:"
+    if text.count(marker) != 1:
+        fail("real-map mode expects exactly one PlayerReference@Multi0 block")
+    text = text.replace(marker, REFEREE_BLOCK + marker, 1)
+
+    text = patch_mp_block(text, "Multi0", matchup["side_a"]["bot"], matchup["side_a"]["faction"], spawns[0], "Multi1")
+    text = patch_mp_block(text, "Multi1", matchup["side_b"]["bot"], matchup["side_b"]["faction"], spawns[1], "Multi0")
+
+    sides = [
+        ("Multi0", matchup["side_a"]["faction"], spawns[0]),
+        ("Multi1", matchup["side_b"]["faction"], spawns[1]),
+    ]
+    rendered = "".join(render_side_actors(ref, faction, home) for ref, faction, home in sides)
+    text = text.rstrip("\n") + "\n" + rendered
+    text += f"\n# ai-match-batch variant: {dest.name}\n"
+    map_yaml.write_text(text, encoding="utf-8")
+
+    shutil.copyfile(TEMPLATE_MAP / "rules.yaml", dest / "rules.yaml")
+    rules_yaml = dest / "rules.yaml"
+    rules = rules_yaml.read_text(encoding="utf-8")
+    patched, count = re.subn(r"TimeLimitDefault: \d+", f"TimeLimitDefault: {time_limit}", rules)
+    if count != 1:
+        fail("variant rules.yaml is missing exactly one TimeLimitDefault line")
+    rules_yaml.write_text(patched, encoding="utf-8")
+
+
 def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
+    if template.suffix == ".oramap":
+        write_variant_from_oramap(template, dest, matchup, time_limit)
+        return
+
     if dest.exists():
         shutil.rmtree(dest)
     shutil.copytree(template, dest)
@@ -421,9 +570,15 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
-    parser.add_argument("--bot-a", default="hard", help="bot difficulty for side A (default: hard)")
-    parser.add_argument("--bot-b", default="hard", help="bot difficulty for side B (default: hard)")
-    parser.add_argument("--repeats", type=int, default=1, help="matches per matchup; sides alternate")
+    parser.add_argument("--bot-a", default="fransbot", help="bot type for side A (default: fransbot)")
+    parser.add_argument("--bot-b", default="hard", help="bot type for side B (default: hard — the omniscient classic bot)")
+    parser.add_argument("--repeats", type=int, default=4, help="matches per matchup; sides alternate (default: 4)")
+    parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,
+                        help="duel map: the shipped .oramap (default: A Nuclear Winter) "
+                             "or the legacy ai_duel_gate template dir")
+    parser.add_argument("--swap-bots", action="store_true",
+                        help="alternate which bot occupies which spawn per repeat — "
+                             "the A/B acceptance requires both spawns covered")
     parser.add_argument("--time-limit", type=int, default=30, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
     parser.add_argument("--retries", type=int, default=1,
@@ -440,8 +595,11 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
-    if not TEMPLATE_MAP.is_dir():
-        fail(f"template map missing: {TEMPLATE_MAP}")
+    map_source = args.map_path.resolve()
+    if not map_source.exists():
+        fail(f"map source missing: {map_source}")
+    if map_source.is_dir() and map_source != TEMPLATE_MAP:
+        fail(f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}")
 
     mod_id, engine = load_config()
     executable = engine / "bin" / "OpenRA.exe"
@@ -455,7 +613,7 @@ def main() -> int:
     logs_dir.mkdir(parents=True, exist_ok=True)
     log_path = logs_dir / MATCH_LOG
 
-    matchups = build_matchups(factions, args.bot_a, args.bot_b, args.repeats)
+    matchups = build_matchups(factions, args.bot_a, args.bot_b, args.repeats, swap_bots=args.swap_bots)
 
     # One variant dir per distinct matchup (repeats reuse it).
     variants = {}
@@ -475,7 +633,7 @@ def main() -> int:
         return 0
 
     for name, v in variants.items():
-        write_variant(TEMPLATE_MAP, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
+        write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 

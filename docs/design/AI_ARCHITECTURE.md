@@ -774,8 +774,15 @@ over the fixed-policy comparator on compatible Cameo data (§11.3.5).
 
 **Stage D — AI-vs-AI batch harness.** Headless repeated matches across matchups, feeding stages
 B–C. This is what makes the data volume possible; it should be a script and a map rotation, not
-engine work. *Shipped:* `tools/ai/run_ai_match_batch.py` + template map
-`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns) —
+engine work. *Shipped:* `tools/ai/run_ai_match_batch.py`. **Since the 2026-09-28 maintainer
+ruling the duel map is the shipped tournament map "A Nuclear Winter"
+(`mods/cameo/maps/_ra_a-nuclear-winter.oramap`)** — the harness extracts the .oramap into a
+variant dir, seats a `Referee`, and converts `Multi0`/`Multi1` into map-side bots bound to the
+map's real `mpspawn` cells. The acceptance A/B is `fransbot` (fog-honest) vs a classic
+`ModularBot` type (omniscient), both spawns (`--repeats 4 --swap-bots`), `gamespeed: insane`
+locked — see `docs/design/AI_MATCH_LOG.md` § "The A/B acceptance protocol". Legacy fixture:
+`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns)
+remains usable via `--map` —
 the harness copies the template into an isolated `Engine.SupportDir` user-map cache per matchup
 (faction × bot × time-limit patching + faction starting-unit actors written into `Actors:`),
 launches `Launch.Map`+`Launch.Benchmark` (exits on `GameOver`), and slices the appended

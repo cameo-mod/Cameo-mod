@@ -199,8 +199,11 @@ usable attribution hook exists; that term is phase-4 work.
 ## Batch harvest (Stage D)
 
 `tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
-variant of `mods/cameo/maps/ai_duel_gate_20260928/` per matchup inside the
-batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`),
+variant of the duel map per matchup inside the
+batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`)
+— since 2026-09-28 the default source is `_ra_a-nuclear-winter.oramap` (see
+the A/B acceptance protocol below; `--map` still accepts the legacy
+`ai_duel_gate_20260928/` template dir),
 launches `OpenRA.exe` with `Launch.Map` + `Launch.Benchmark`, and slices the
 appended `cameo-ai-matches.jsonl` per run by byte offset. The duelists are
 map-side bots (`Playable: False` + `Bot:`) — the only bot path under a Local
@@ -234,3 +237,37 @@ non-mission maps every decided player reports `Spectating`, which
 short-circuits `RelationshipWith` to Ally for both losers. Generated variants
 carry a unique comment salt because `Map.ComputeUID` hashes bytes and
 identical copies merge into one `MapCache` preview.
+
+## The A/B acceptance protocol (maintainer ruling 2026-09-28)
+
+All bot-vs-bot testing runs on the shipped tournament duel map **"A Nuclear
+Winter"** (`mods/cameo/maps/_ra_a-nuclear-winter.oramap`) — real melee terrain,
+two `mpspawn` cells, `Categories: Tournament`. Generated shell fixtures are no
+longer the test surface for bot comparisons.
+
+The matchup axis is the franken-bot vs the classic bot:
+
+- **Side A — `fransbot`**: the fog-honest stack (Cameo x RV x CA x CN x
+  Fransbot modules). No global map vision — scouts, fog memory, region
+  intel, nothing omniscient.
+- **Side B — a classic `ModularBot` type** (`hard` and up): the old bot with
+  its inherent full-map awareness and none of the new modules.
+
+Acceptance criterion: **`fransbot` must win the series from both spawns** —
+run `--repeats 4 --swap-bots` minimum (repeat parity alternates which bot
+occupies which `mpspawn`). `gamespeed` stays locked at `insane` (the
+maintainer's "maximum game speed" for bot matches). A timed-out match
+records both sides `lost`, never a fabricated winner.
+
+Under the hood the harness extracts the `.oramap` into a variant dir, adds
+the `Referee` seat for the local client, converts `Multi0`/`Multi1` into
+map-side bots (`Playable: False` + `Bot:` + `HomeLocation` from the map's
+`mpspawn` actors), injects each faction's `StartingUnits` group at the spawn
+cell, and layers the duel-gate `rules.yaml` (insane speed, locked time cap,
+restored `MustBeDestroyed`). The packaged map is never modified.
+
+Baseline measured 2026-09-28: `hard` beat `fransbot` on the first clean
+match — the franken-bot is not there yet; iterate until it takes the series.
+While iterating, prefer the smallest honest lever (targeting, scouting,
+economy pacing) over anything resembling a cheat — the acceptance is
+"fight smart, not hard".
