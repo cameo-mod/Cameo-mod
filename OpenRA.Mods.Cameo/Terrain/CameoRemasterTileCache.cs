@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Terrain;
 using OpenRA.Primitives;
@@ -74,7 +75,7 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 							var f = frames[0];
 							var type = SheetBuilder.FrameTypeToSheetType(f.Type);
-							var s = sheetBuilders[type].Allocate(f.Size, 1f, new float3(f.Offset, 0));
+							var s = sheetBuilders[type].Allocate(f.Size, 1f, new Vector3(f.Offset, 0));
 							OpenRA.Graphics.Util.FastCopyIntoChannel(s, f.Data, f.Type);
 							hdSprites[i] = s;
 							if (nativeWidth == 0)
@@ -150,7 +151,7 @@ namespace OpenRA.Mods.Cameo.Terrain
 						// The internal z axis is inverted from expectation (negative is closer)
 						var zOffset = tile != null ? -tile.ZOffset : 0;
 						var zRamp = tile != null ? tile.ZRamp : 1f;
-						var offset = new float3(f.Offset, zOffset);
+						var offset = new Vector3(f.Offset, zOffset);
 						var type = SheetBuilder.FrameTypeToSheetType(f.Type);
 
 						var s = sheetBuilders[type].Allocate(f.Size, zRamp, offset);
@@ -173,7 +174,7 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 				// Ignore the offsets baked into R8 sprites
 				if (terrainInfo.IgnoreTileSpriteOffsets)
-					allSprites = allSprites.Select(s => new Sprite(s.Sheet, s.Bounds, s.ZRamp, new float3(float2.Zero, s.Offset.Z), s.Channel, s.BlendMode));
+					allSprites = allSprites.Select(s => new Sprite(s.Sheet, s.Bounds, s.ZRamp, new Vector3(Vector2.Zero, s.Offset.Z), s.Channel, s.BlendMode));
 
 				if (onMissingImage != null && variants.Count == 0)
 					continue;

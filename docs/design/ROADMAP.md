@@ -179,6 +179,8 @@ the fog sequencing.
 - [x] **M** Phase 7a assign-layer missions: `MasterAiBotModule` publishes fog-honest,
   ordered `Raid`/`Defend` intent and `SquadManagerBotModuleCA` consumes it only when forming
   a new force; `Recon` remains with `ScoutBotModule`, `Secure` is deferred.
+- [x] **M** Phase 7a follow-up (after #592): replace the single exhausted-Defend
+region with multi-region exclusion, fix exhausted Defend/Raid consumer selection, count static defence only in the own base region, document the inherited non-fogged fallback, and add the permanent fog-enabled Raid runtime gate.
 - [ ] **M** Phase 7b mission bidding: squads bid for missions instead of the forming squad
   taking the first affordable mission.
 - [ ] **M** Phase 7c `Secure` missions plus Fransbot anchors and squad rejoin.

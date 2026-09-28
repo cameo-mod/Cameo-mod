@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -85,7 +86,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 				wr.Palette(info.Palette),
 				sequence.Scale,
 				info.Alpha * sequence.GetAlpha(frame),
-				float3.Ones,
+				Vector3.One,
 				tintModifiers,
 				true,
 				rotation);
