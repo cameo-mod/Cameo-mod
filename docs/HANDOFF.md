@@ -1,6 +1,6 @@
 # Cameo — THE HANDOFF
 
-## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein leads classic 6–3
+## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
 
 **Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,
 self-learning), every role used in the right ratio, squads of the right composition moving in
@@ -15,9 +15,12 @@ CA-5 air doctrine (EMBER) · CA-6 scouting → targets (DAWN)**. Every phase is 
 Nuclear Winter against the current master before it lands. Queue: ROADMAP "AI ARCHITECTURE".
 
 **A/B state (verified, td_gdi mirror):** master's Frankenstein `hard` vs omniscient `classic`
-= **6–3** over rounds 2–3. Every match is decided by one or two big fights around ticks
+= **7–6 over 13 matches** (rounds 2–4; round 4 alone went 1–3) — a coin flip, not a lead. Every match is decided by one or two big fights around ticks
 12000–16500 that one side trades ~2:1; income follows the trades, it does not cause them
 (`stats.stats_timeline`, PR #617). The continuous-threat branch lost 1–3 and is shelved.
+Round 4's loss-by-role log (#617): the largest loss category is **idle units at home**
+(38–108k per match, 70–81 % of them inside the base) — `ProtectOwn` drafts the idle pool only
+while the protection squad is empty, and the squad never disbands; fix in progress (Claude).
 
 **Merged today:** #613 (classic/fransbot hidden in the lobby), #614, #616, #618, #619.
 
