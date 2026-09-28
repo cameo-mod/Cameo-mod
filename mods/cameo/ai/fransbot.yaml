@@ -48,6 +48,7 @@ Player:
 	FransGeneralBotModule:
 		RequiresCondition: enable-fransbot
 		RaidPublishRememberedBuildings: true
+		ReconProbeSpawnRepeatTicks: 4500
 		RaidInterferencePriorityBonus: 40
 		RaidInterferenceMemoryTicks: 500
 	FransBaseBuilderBotModule:
@@ -71,10 +72,92 @@ Player:
 		HarvestersPerServicedMine: 3
 	FransSupplyTruckBotModule:
 		RequiresCondition: enable-fransbot
-	FransGroundCommanderBotModule:
+	# Ground commanders are parallel bid capacities: one BidderKey can own only one
+	# committed mission at a time (CommandBid capacity rule). A single instance means a
+	# single persistent RECON patrol locks the entire Ground bid surface — the "bids 0"
+	# kill-chain blocker. Upstream wires 10 (fransbot-personalities @ground1-10); six
+	# covers 4 fan RECON + 2 concurrent RAID + SECURE/DEFEND contention. CommanderIndex
+	# phases each instance's scan. Required no-default tuning repeats per instance.
+	FransGroundCommanderBotModule@ground1:
 		RequiresCondition: enable-fransbot
+		BidderKey: ground1
+		CommanderIndex: 0
 		GroundRememberedRaidMaximumAge: 3000
-		# Required no-default tuning (same values as upstream fransbot-personalities.yaml @ground*)
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	FransGroundCommanderBotModule@ground2:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground2
+		CommanderIndex: 1
+		GroundRememberedRaidMaximumAge: 3000
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	FransGroundCommanderBotModule@ground3:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground3
+		CommanderIndex: 2
+		GroundRememberedRaidMaximumAge: 3000
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	FransGroundCommanderBotModule@ground4:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground4
+		CommanderIndex: 3
+		GroundRememberedRaidMaximumAge: 3000
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	FransGroundCommanderBotModule@ground5:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground5
+		CommanderIndex: 4
+		GroundRememberedRaidMaximumAge: 3000
+		SecureKnownThreatMultiplierPercent: 500
+		SecureUncertaintyAllowanceValue: 600
+		SecureMinimumControlValue: 1600
+		SecureSurplusCostWeight: 4
+		DefendForcePreservationMinimumPackageUnits: 20
+		DefendForcePreservationTriggerCommitPercent: 70
+		DefendForcePreservationLowReservePercent: 25
+		DefendForcePreservationMinimumReserveUnits: 8
+		DefendForcePreservationTargetReservePercent: 50
+		DefendForcePreservationLongEtaMinimumTicks: 1000
+	FransGroundCommanderBotModule@ground6:
+		RequiresCondition: enable-fransbot
+		BidderKey: ground6
+		CommanderIndex: 5
+		GroundRememberedRaidMaximumAge: 3000
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
 		SecureMinimumControlValue: 1600
@@ -87,6 +170,8 @@ Player:
 		DefendForcePreservationLongEtaMinimumTicks: 1000
 	FransGroundTransferBotModule:
 		RequiresCondition: enable-fransbot
+	# Air/Sea/SpecOps stay single-instance per upstream (only Ground is wired
+	# as parallel capacities in fransbot-personalities.yaml @ground1-10).
 	FransAirCommanderBotModule:
 		RequiresCondition: enable-fransbot
 	FransSeaCommanderBotModule:

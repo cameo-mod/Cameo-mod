@@ -14430,3 +14430,72 @@ lifecycle); batch relaunched detached via nohup as nw-classic2.
   deaths were this crash, not bot performance.
 - nw-classic3 (old DLL, fransbot-vs-classic): 3 completed losses + match 4
   killed at WT9504 for the rebuild — donor diagnostics only per the ruling.
+
+### First valid hard-vs-classic datapoint (nw-hard2, post-#611 eligibility fix)
+
+- Match 1: hard LOST at 48067 WT but fought nearly even — units 427:474
+  (0.9:1), buildings 44:71. Where it loses: assets 65k:184k at end —
+  classic's economy out-scales; hard's force can't sustain the trade rate.
+- Frans intel services confirmed live on hard: module timing shows
+  FransCombatIntelBotModule ~5ms/300t; "combat intel ... remembers 59".
+- Donor (nw-classic4, new DLL): remembered-raid chain produced first
+  buildings-razed (1 each in m1/m2) — chain works but starved: scouts
+  never reach the enemy base. Added ReconProbeSpawnRepeatTicks (General
+  probes enemy mpspawn cells — public lobby data — on a per-cell
+  cooldown) to feed the contact pipeline.
+
+### nw-hard2 interim — FIRST Frankenstein win over omniscient classic
+
+- m1 (spawn A): hard lost WT48067 — units 427:474, buildings 44:71, but
+  assets collapsed 65k:184k (economic death spiral).
+- m2 (spawn B): **hard WON WT33447** — buildings razed 54:7, final assets
+  300k:50k, army 147k:0. The Frankenstein stack CAN beat omniscient
+  classic on this map. Series 1-1 pending m3/m4.
+- Donor (nw-classic4, remembered-raid DLL): 0-3, buildings razed 1/1/2 —
+  chain fires but scouts starving it; spawn-probe + 6-key ground
+  commander parallelism pending (yaml wired, DLL awaiting copy window).
+
+### Ground-bid starvation root cause + fix (this session, donor side)
+
+- **Root cause of "bids 0"**: upstream wires 10 named
+  `FransGroundCommanderBotModule@groundN` instances = 10 parallel bidder
+  capacities. Cameo port had ONE unnamed instance (BidderKey `ground1`,
+  index 0) = ONE serial capacity. Any persistent RECON patrol locks it
+  forever → all later RAID/SECURE boards get `bids 0`. Fixes the funnel
+  starvation EMBER flagged (independent of the fresh-visibility gate).
+- **Fix**: six named `@ground1`..`@ground6` instances (distinct
+  BidderKey/CommanderIndex, full tuning block each). Verified live:
+  `capacity ground1 (index 0)` … `ground6 (index 5)` at WT0, and missions
+  distribute across all six (WT2265–3374).
+- **gen_fransbot_lists.py trap**: the generated lists file emits an
+  UNNAMED `FransGroundCommanderBotModule` node; removing the unnamed
+  instance left it with zero tuning → `RulesetLoaded` rejected every
+  match load ("timing/radius/retreat values are invalid"). Generator now
+  emits the 8 list fields per instance name; regenerated file has only
+  @ground1..@ground6 nodes.
+- **Invalidated**: nw-classic5 (4 died, pre-regen yaml), nw-hard2 m3/m4
+  (died in the mid-edit yaml window), nw-classic6 attempt-1 (foreign
+  engine binaries — see hazard below).
+
+### Hazard: foreign engine binaries in worktree bin (shared box)
+
+- Donor match at 16:23Z spawned `engine/bin/OpenRA.exe` and ran the MAIN
+  checkout's build (462fc1fc, .NET 8, `Cameo-mod\engine` PDB paths) — it
+  then failed loading dawn-ai's mod.yaml because the older Cameo.dll
+  lacks `CameoRemasterFileSystemLoader`.
+- `sync_main_checkout.ps1` (fleet dir) rebuilds `Cameo-mod\engine\bin` on
+  every master ff and says 13 worktrees share it via junctions. If
+  dawn-ai's engine/bin was junctioned during that window, the sync
+  rebuild swapped binaries mid-batch. Current state: real dir, VERSION
+  `042b2fa`, nw-hard3 healthy. Any batch running ~16:16–16:23Z on a
+  junctioned worktree may have loaded foreign binaries.
+
+### Spawn probes + remembered-raid completion (donor)
+
+- `ReconProbeSpawnRepeatTicks` (General): periodic RECON probes at enemy
+  `mpspawn` cells — public lobby data, fog-honest. Fixes "RECON only
+  fans mine clusters → enemy base never seen → no building contacts".
+- Raid publisher seeds remembered-raid missions directly from
+  `EnemyCombatContacts` buildings; required-contribution falls back to
+  ruleset `HealthInfo.HP` when `ObservedHp<=0`.
+- Pending: raid-bid runtime proof on nw-classic6; then commit + rebase.

@@ -123,6 +123,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Extra globally reserved RECON capacity available only while an unrepresented PIONEER exact-objective validation is waiting. This prevents four persistent fan patrols from starving expansion reconnaissance.")]
 		public readonly int MaximumPioneerReconValidationMissions = 1;
 
+		[Desc("World ticks between General RECON probes of each known enemy spawn cell. The map's mpspawn cells are public lobby data every player sees, so probing them is fog-honest. 0 disables spawn probing.")]
+		public readonly int ReconProbeSpawnRepeatTicks = 0;
+
 		[Desc("World ticks before a completed/failed MineCluster RECON target may be selected again.")]
 		public readonly int ReconTargetCooldownTicks = 750;
 
@@ -429,6 +432,9 @@ namespace OpenRA.Mods.Common.Traits
 		Shroud shroud;
 		readonly Dictionary<uint, CPos> activeReconTargets = [];
 		readonly Dictionary<uint, int> activeReconWithoutMissionSinceTick = [];
+		CPos[] spawnProbeCells;
+		readonly Dictionary<CPos, int> spawnProbeCooldownUntil = [];
+		const uint SpawnProbeKeyBase = 0x80000000u;
 		readonly Dictionary<uint, int> activeRaidTargets = [];
 		readonly Dictionary<uint, FransMission> activeRaidSnapshots = [];
 		readonly Dictionary<uint, int> raidTargetCooldownUntil = [];
@@ -2172,6 +2178,49 @@ namespace OpenRA.Mods.Common.Traits
 					missionCell, false, false, BuildSiteIntel(missionCell, Info.SecureRiskAssessmentRadius, Info.StrategicIntelAgingAgeTicks),
 					FransMissionType.Recon, pioneerValidation ? Info.PioneerReconStrategicPriority : Info.ReconStrategicPriority, world.WorldTick);
 				PublishUniqueMission(recon);
+			}
+
+			// Spawn probing: enemy mpspawn cells are public lobby data every lobby member sees,
+			// so scouting them is fog-honest and is the only reliable way to get the remembered
+			// enemy building contacts the RAID board needs. Probes share the ordinary RECON
+			// priority and the published-mission board; per-cell cooldown throttles re-probes
+			// after a scout dies so the recon budget is not drained by suicide runs.
+			if (Info.ReconProbeSpawnRepeatTicks > 0)
+			{
+				if (spawnProbeCells == null)
+				{
+					var home = player.HomeLocation;
+					var all = world.Map.ActorDefinitions
+						.Where(n => n.Value.Value == "mpspawn")
+						.Select(n => new ActorReference(n.Key, n.Value).GetValue<LocationInit, CPos>())
+						.ToArray();
+					spawnProbeCells = all
+						.Where(c => (c - home).LengthSquared > 900)
+						.OrderBy(c => (c - home).LengthSquared)
+						.ToArray();
+					if (spawnProbeCells.Length > 0)
+						FransBotLog.BotDebug(world,
+							"{0}: GENERAL spawn-probe targets initialized: {1} enemy spawn cell(s) at [{2}], home spawn {3}, republish every {4} WT.",
+							player, spawnProbeCells.Length, string.Join("; ", spawnProbeCells), home, Info.ReconProbeSpawnRepeatTicks);
+				}
+
+				for (var i = 0; i < spawnProbeCells.Length; i++)
+				{
+					if (currentMissions.Count >= Info.MaximumPublishedMissions)
+						break;
+					var cell = spawnProbeCells[i];
+					if (spawnProbeCooldownUntil.TryGetValue(cell, out var until) && world.WorldTick < until)
+						continue;
+					if (shroud.IsVisible(cell))
+					{
+						spawnProbeCooldownUntil[cell] = world.WorldTick + Info.ReconProbeSpawnRepeatTicks;
+						continue;
+					}
+					spawnProbeCooldownUntil[cell] = world.WorldTick + Info.ReconProbeSpawnRepeatTicks;
+					PublishUniqueMission(new FransMission(null, SpawnProbeKeyBase + (uint)i, "spawnprobe", player,
+						cell, false, false, BuildSiteIntel(cell, Info.SecureRiskAssessmentRadius, Info.StrategicIntelAgingAgeTicks),
+						FransMissionType.Recon, Info.ReconStrategicPriority, world.WorldTick));
+				}
 			}
 		}
 
