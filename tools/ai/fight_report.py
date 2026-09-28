@@ -75,7 +75,9 @@ def describe(snap: dict | None) -> str:
     mission = mission.get("type") if isinstance(mission, dict) else mission
     return (f"posture {snap.get('personality_current')}, urgency {snap.get('urgency')}, mission {mission}, "
             f"own army {own.get('army_value')} in {own.get('squad_count')} squads, "
-            f"enemy army seen {enemy.get('army_value')}, enemy pressure at home {enemy.get('pressure_value')}")
+            f"enemy army seen {enemy.get('army_value')}, enemy pressure at home {enemy.get('pressure_value')}"
+            + (f", predicted ratio {own.get('combat_ratio_pct') / 100:.2f} (with defences {own.get('combat_ratio_defended_pct', 0) / 100:.2f})"
+               if own.get("combat_ratio_pct") is not None else ""))
 
 
 def report(batch_dirs: list[pathlib.Path], bot: str, width: int) -> str:
