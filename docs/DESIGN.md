@@ -4880,7 +4880,8 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
 * **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
   host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
   claims, human-ally beacons) — the same no-cheat rule as the Director.
-* **Offline LLM analyst — yes, tools only; the analyst is Devin until a local model exists.** A script in `tools/` may summarise match/situation
+* **Offline LLM analyst — yes, tools only; until a local model exists the analyst is an agent
+  (Claude while Devin Cloud is out of tokens).** A script in `tools/` may summarise match/situation
   logs with an LLM and propose tuning changes; nothing is applied without human review and an A/B.
   No LLM or network call ever runs in the game.
 

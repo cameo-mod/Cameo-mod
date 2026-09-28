@@ -10,7 +10,7 @@ when the area's defences are gone or the force clearly wins. Written up as
 **`docs/design/AI_ARCHITECTURE.md` §12**: §12.1 lists what already ships (fog memory, 6c risk
 gate, 6e ground risk routing, 6f artillery/support/staging, 6g tags, scouts, counters — do not
 rebuild them); §12.2 the five real gaps; §12.10 the phases **CA-1 tracker (Claude) · CA-1b
-offline fitter (Devin Cloud) · CA-2 siege (DAWN) · CA-3 role mix + CA-4 formation (NOVA) ·
+offline fitter (Claude — Devin Cloud is out of tokens until next week) · CA-2 siege (DAWN) · CA-3 role mix + CA-4 formation (NOVA) ·
 CA-5 air doctrine (EMBER) · CA-6 scouting → targets (DAWN)**. Every phase is A/B-tested on A
 Nuclear Winter against the current master before it lands. Queue: ROADMAP "AI ARCHITECTURE".
 

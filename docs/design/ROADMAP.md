@@ -119,7 +119,7 @@ the fog sequencing.
     with defence ranges and a per-region heat map, log fields; then the in-match production
     weight. **Claude.**
   - [ ] **M** CA-1b offline fitter → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
-    (read at match start, §6.1); more harness matchups. **Devin Cloud.**
+    (read at match start, §6.1); more harness matchups. **Claude** (Devin Cloud out of tokens).
   - [ ] **L** CA-2 siege and force preservation: stand-off outside remembered defence range,
     artillery first, commit when the area's defences are gone or the Versus-weighted force
     ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
@@ -137,13 +137,13 @@ the fog sequencing.
     layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
   - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
-  - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions) and
-    **OM** per-opponent profiles with a bandit start. **Devin Cloud.**
+  - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
+  - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
   - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
     (DESIGN §19.2). **NOVA**, with UT.
-  - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): the analyst is **Devin** for now
-    (no local LLM); input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
-    candidate per finding. **Devin Cloud.**
+  - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the
+    analyst; input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
+    candidate per finding. **Claude** (Devin Cloud out of tokens until next week).
   - [ ] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
     defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant. **NOVA**, with DI.
   - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,

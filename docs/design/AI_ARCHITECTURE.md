@@ -1602,7 +1602,7 @@ phase lands only if it does not lose to master; the standing target stays "beat 
 | Phase | What | Owner | Depends on |
 |---|---|---|---|
 | **CA-1** | arsenal tracker: `BotUnitRoles`/new target tags, own ledger (stats shadow), enemy ledger with defence ranges and region heat map, match/situation log fields; then the in-match production weight | **Claude** | — |
-| **CA-1b** | offline fitter: aggregate harness ledgers → `learned/arsenal_priors.yaml`; harness runs more matchups | **Devin Cloud** | CA-1 log fields |
+| **CA-1b** | offline fitter: aggregate harness ledgers → `learned/arsenal_priors.yaml`; harness runs more matchups | **Claude** (was Devin Cloud, out of tokens 2026-09-28) | CA-1 log fields |
 | **CA-2** | siege and force preservation (§12.6) incl. evaluating the Fransbot donor guard | **DAWN** | CA-1 defence ranges |
 | **CA-3** | role mix production + squad composition (§12.5), personality starting mixes | **NOVA** | CA-1 roles |
 | **CA-4** | formation movement (§12.7) | **NOVA** | CA-3 |

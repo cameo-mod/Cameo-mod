@@ -306,10 +306,10 @@ Winter (≥ 8 matches), and — once **LG** exists — a league score.
 | **IM** | influence layers on zones, decay to averages | NOVA with ZG | ZG, CA-1 |
 | **UT** | utility strategist over bipolar axes; one blended squad manager | NOVA (absorbs CA-3) | CP, IM |
 | **MI** | budgeted micro: focus, kite, pull back, concave | EMBER (with CA-5) | CP, CA-4 |
-| **OM** | per-opponent profiles + bandit start | Devin Cloud (with CA-1b) | logs |
-| **LG** | league harness: past masters + exploiter personalities + maps/factions | Devin Cloud | — |
+| **OM** | per-enemy-faction profiles + bandit start | Claude (with CA-1b) | logs |
+| **LG** | league harness: past masters + exploiter personalities + maps/factions | EMBER | — |
 | **DI** | Director (pacing only, no cheats, on in the A/B) | NOVA (with UT) | UT |
-| **LA** | offline LLM log analyst in `tools/` | Devin Cloud | logs |
+| **LA** | offline analyst loop (§12) | Claude | logs |
 
 Order of value: **CP → ZG/IM → MI → UT → LG/OM**, interleaved with CA-1…CA-6. CP comes first
 because it attacks the measured failure (fights traded 2:1) with data Cameo already has.
@@ -356,10 +356,11 @@ human team does on voice chat.
 
 ---
 
-## 12. The analyst without a local LLM: Devin
+## 12. The analyst without a local LLM: an agent
 
 Ruling LA (DESIGN §19.2) allows an offline analyst; the maintainer has no local LLM yet, so the
-analyst is **Devin** for now. (Measured on the maintainer's machine: RTX 4060 with 8 GB VRAM —
+analyst is **an agent**: Devin was proposed, but Devin Cloud is out of tokens until next week, so
+**Claude** runs the loop now (`../Cameo-mod-fleet/ORDERS_2026-09-28_claude_devin_cloud_reassigned.md`). (Measured on the maintainer's machine: RTX 4060 with 8 GB VRAM —
 Windows' WMI reports "4095 MB", a known 32-bit cap — 32 GB RAM, Ryzen 7 5700X: enough for a
 quantised 7–8B model later, e.g. through Ollama or LM Studio, if ever wanted.)
 
@@ -369,7 +370,7 @@ The loop, every step reviewable:
 2. **Condense:** `python tools/ai/fight_report.py <batch dirs> --bot hard` — per match the
    decisive fight (largest net trade swing), what the bot believed before/after, and which roles
    took the losses. This is the analyst's input; it replaces reading raw JSONL.
-3. **Hypothesise:** Devin writes `FINDINGS_<date>_<agent>.md` in the fleet folder: the top 3
+3. **Hypothesise:** the analyst writes `FINDINGS_<date>_<agent>.md` in the fleet folder: the top 3
    recurring causes with the report lines that show them, and one candidate change each.
 4. **Test:** each candidate on its own branch, behind a yaml switch, A/B vs master.
 5. **Review:** a human (maintainer or Claude) merges only what won.
@@ -416,7 +417,7 @@ for the league A/B.
     squad without a reachable target — the silent failures humans exploit.
 
 Owners are assigned as each item becomes a phase; items 1, 10, 11 are telemetry and harness work
-(Devin Cloud), 2–4 are CP/IM consumers, 5–9 belong to UT, MI and CA-5.
+(Claude / EMBER), 2–4 are CP/IM consumers, 5–9 belong to UT, MI and CA-5.
 
 ### 13.1 Measured today: the base-defence fix alone is not enough
 
