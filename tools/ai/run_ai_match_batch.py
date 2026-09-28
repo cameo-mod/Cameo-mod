@@ -192,7 +192,7 @@ UNIT_GROUP_SEARCH = (
     REPO_ROOT / "mods" / "cameo" / "rules",
     REPO_ROOT / "mods" / "cameo" / "ContentPacks",
 )
-UNIT_GROUP_RE = re.compile(r"^\s*StartingUnits@\w+:\n((?:[ \t]+[^\n]*\n)*)", re.MULTILINE)
+UNIT_GROUP_RE = re.compile(r"^\s*StartingUnits@\w+:\n((?:(?!\s*StartingUnits@)[ \t]+[^\n]*\n)*)", re.MULTILINE)
 
 # Support actors ring the base actor, mirroring SpawnStartingUnits' annulus
 # on a controlled flat fixture. Minimum distance 4 keeps the MCV deploy
