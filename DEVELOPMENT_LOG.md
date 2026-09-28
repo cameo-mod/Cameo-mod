@@ -13494,6 +13494,20 @@ heal/repair support (packs contribute their own via rules; field kept
 as escape hatch). Gates: 253/253 tests, squad gate PASS via scratch bin
 (C:/tmp/ember-hr; records=8 squads=1 units=6 tick1201), boot-gate PASS.
 Two exception logs during the round were own bad-arg launches, not game.
+
+**Done (EMBER, 2026-09-28, harasser port + JoinGuerrilla=0 fix):**
+ `SquadCAType.Harass` — upstream CA harasser behind default-off fields
+ (`HarasserTypes` empty = off; `HarassMinLaunchSize`/`HarassRouteCount`/
+ `HarassPriorityTags` keep CA yaml-sync lossless). Quorum launch
+ (min→5%, min+1→10%, above→always), HV-first retargets via
+ `FindNewTarget(highValueCheck, riskCheck)`, 12-route flank pick,
+ `RouteAroundThreat` exemption. `FindNewUnits` checks `HarasserTypes`
+ before `GuerrillaTypes` (deterministic membership, disjoint lists).
+ Also fixed: `guerrillaForce == null` short-circuited `JoinGuerrilla` —
+ `JoinGuerrilla: 0` still formed a squad; now the roll gates creation.
+ Gates run on a scratch bin copy (`C:/tmp/ember-hr`) because DAWN's
+ `--check-yaml` holds the shared `engine/bin`: compile clean, squad-gate
+ equivalent PASS (squads=1, units=6, tick 1201), boot-gate PASS.
 **Done (EMBER, 2026-09-28, H1 consumption):** Cameo-side `ModularBot` shadow now
 consumes `IBotActionBudget` (NOVA #571 producer). Order drain consults
 `TryConsumeActions` per order — denied orders stay queued; module tick loop

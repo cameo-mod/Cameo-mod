@@ -9,12 +9,16 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using OpenRA.GameRules;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Primitives;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
@@ -82,6 +86,168 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			Rows = rows;
 			ArmorPiercing = armorPiercing;
 			Targets = targets;
+		}
+
+		/// <summary>
+		/// The unit GROUPS the tooltip's Strong / Medium / Weak lines speak about (maintainer 2026-09-28). A group's
+		/// percentage is the geometric mean of the weapon's Versus over the armour its members WEAR, each armour
+		/// weighted by how many buildable members of the group wear it, so the number describes the units a
+		/// player actually meets and follows DESIGN §12.0l's re-armouring without a code change.
+		/// </summary>
+		public enum Group { Infantry, Heroes, Vehicles, Tanks, Ships, Submarines, Buildings, Defenses, Aircraft }
+
+		/// <summary>What a member of each group is targetable as; a weapon must overlap it and not be invalid for it.</summary>
+		public static readonly (Group Group, BitSet<TargetableType> TargetTypes, bool Naval)[] Groups =
+		[
+			(Group.Infantry, new BitSet<TargetableType>("Ground", "Infantry"), false),
+			(Group.Heroes, new BitSet<TargetableType>("Ground", "Infantry"), false),
+			(Group.Vehicles, new BitSet<TargetableType>("Ground", "Vehicle"), false),
+			(Group.Tanks, new BitSet<TargetableType>("Ground", "Vehicle"), false),
+			(Group.Ships, new BitSet<TargetableType>("Water", "Ship"), true),
+			(Group.Submarines, new BitSet<TargetableType>("Underwater"), true),
+			(Group.Buildings, new BitSet<TargetableType>("Ground", "Structure"), false),
+			(Group.Defenses, new BitSet<TargetableType>("Ground", "Structure", "Defense"), false),
+			(Group.Aircraft, new BitSet<TargetableType>("Air"), false),
+		];
+
+		/// <summary>Bands, symmetric around 100 on the geometric scale (x1.25 and /1.25). Maintainer 2026-09-28.</summary>
+		public const int StrongPercent = 125;
+		public const int WeakPercent = 80;
+
+		/// <summary>The six tank class templates each leave a `TooltipExtras@&lt;Class&gt;` on the actor.</summary>
+		static readonly string[] TankClasses = ["MainBattleTank", "HighTechTank", "Dreadnought", "TankDestroyer", "ArtilleryTank", "LightTank"];
+
+		static readonly ConditionalWeakTable<Ruleset, Dictionary<Group, Dictionary<string, int>>> WeightCache = new();
+
+		/// <summary>One group's value for this unit: null when none of its weapons can hit the group.</summary>
+		public readonly struct GroupValue
+		{
+			public readonly Group Group;
+			public readonly int? Percent;
+
+			public GroupValue(Group group, int? percent)
+			{
+				Group = group;
+				Percent = percent;
+			}
+		}
+
+		/// <summary>Every group present in the rules (and allowed by the lobby), in <see cref="Group"/> order.</summary>
+		public GroupValue[] GroupValues { get; private set; } = [];
+
+		/// <summary>The group a buildable unit belongs to, or null (upgrades, doctrines, anything not a unit).</summary>
+		internal static Group? GroupOf(ActorInfo actor)
+		{
+			if (actor.HasTraitInfo<AircraftInfo>())
+				return Group.Aircraft;
+
+			if (actor.HasTraitInfo<BuildingInfo>())
+				return actor.HasTraitInfo<ArmamentInfo>() ? Group.Defenses : Group.Buildings;
+
+			var targetables = actor.TraitInfos<TargetableInfo>().ToList();
+			if (targetables.Any(t => t.TargetTypes.Contains("Underwater")))
+				return Group.Submarines;
+
+			var mobile = actor.TraitInfos<MobileInfo>().FirstOrDefault();
+			var locomotor = mobile?.Locomotor?.ToLowerInvariant() ?? "";
+			if (locomotor.Contains("naval") || locomotor.Contains("water") || locomotor.Contains("ship") || locomotor.Contains("sub"))
+				return Group.Ships;
+
+			if (targetables.Any(t => t.TargetTypes.Contains("Infantry")))
+				return MainArmor(actor) == "Heroic" ? Group.Heroes : Group.Infantry;
+
+			if (actor.TraitInfos<TooltipExtrasInfo>().Any(t => TankClasses.Contains(t.InstanceName)))
+				return Group.Tanks;
+
+			if (mobile != null || targetables.Any(t => t.TargetTypes.Contains("Vehicle")))
+				return Group.Vehicles;
+
+			return null;
+		}
+
+		/// <summary>The unnamed, unconditional `Armor` trait: the class armour (Shield and HAZMAT are layers).</summary>
+		static string MainArmor(ActorInfo actor)
+		{
+			return actor.TraitInfos<ArmorInfo>().FirstOrDefault(a => a.InstanceName == null && a.EnabledByDefault)?.Type;
+		}
+
+		/// <summary>Per group, how many buildable members wear each armour. Built once per ruleset.</summary>
+		internal static Dictionary<Group, Dictionary<string, int>> ArmorWeights(Ruleset rules)
+		{
+			return WeightCache.GetValue(rules, r =>
+			{
+				var weights = new Dictionary<Group, Dictionary<string, int>>();
+				foreach (var actor in r.Actors.Values)
+				{
+					if (actor.Name.StartsWith('^') || !actor.TraitInfos<BuildableInfo>().Any(b => b.Queue.Count > 0))
+						continue;
+
+					var group = GroupOf(actor);
+					var armor = MainArmor(actor);
+					if (group == null || armor == null)
+						continue;
+
+					if (!weights.TryGetValue(group.Value, out var counts))
+						weights[group.Value] = counts = new Dictionary<string, int>();
+
+					counts[armor] = counts.GetValueOrDefault(armor) + 1;
+				}
+
+				return weights;
+			});
+		}
+
+		/// <summary>Weighted geometric mean of a Versus table over one group's worn armour.</summary>
+		internal static int GroupPercent(IReadOnlyDictionary<string, int> versus, Dictionary<string, int> weights)
+		{
+			double logSum = 0, total = 0;
+			foreach (var (armor, count) in weights)
+			{
+				logSum += count * Math.Log(Math.Max(1, versus.GetValueOrDefault(armor, 100)));
+				total += count;
+			}
+
+			return total > 0 ? (int)Math.Round(Math.Exp(logSum / total)) : 100;
+		}
+
+		/// <summary>
+		/// Sorts group values into the three tooltip lines. Within a line the strongest group comes first; groups the
+		/// unit cannot hit close the Weak line, in <see cref="Group"/> order.
+		/// </summary>
+		public static (List<GroupValue> Strong, List<GroupValue> Medium, List<GroupValue> Weak) Bands(IEnumerable<GroupValue> values)
+		{
+			var all = values.ToList();
+			var hit = all.Where(v => v.Percent != null).OrderByDescending(v => v.Percent.Value).ToList();
+			return (
+				hit.Where(v => v.Percent >= StrongPercent).ToList(),
+				hit.Where(v => v.Percent >= WeakPercent && v.Percent < StrongPercent).ToList(),
+				hit.Where(v => v.Percent < WeakPercent).Concat(all.Where(v => v.Percent == null)).ToList());
+		}
+
+		static bool CanHit(WeaponInfo weapon, BitSet<TargetableType> targetTypes)
+		{
+			return weapon.ValidTargets.Overlaps(targetTypes) && !weapon.InvalidTargets.Overlaps(targetTypes);
+		}
+
+		/// <summary>The ladder summary plus the per-group values; `naval` is the lobby's Naval Units option.</summary>
+		public static VersusSummary For(ActorInfo actor, Ruleset rules, bool naval)
+		{
+			var summary = For(actor, rules);
+			var weapons = Weapons(actor, rules);
+			var weights = ArmorWeights(rules);
+			var values = new List<GroupValue>();
+			foreach (var (group, targetTypes, isNaval) in Groups)
+			{
+				if ((isNaval && !naval) || !weights.TryGetValue(group, out var worn))
+					continue;
+
+				// As for the ladders: the strongest weapon that can hit the group speaks for it.
+				var best = weapons.Where(w => CanHit(w.Weapon, targetTypes)).OrderByDescending(w => w.Potency).FirstOrDefault();
+				values.Add(new GroupValue(group, best.Weapon == null ? null : GroupPercent(best.Warhead.Versus, worn)));
+			}
+
+			summary.GroupValues = values.ToArray();
+			return summary;
 		}
 
 		public static VersusSummary For(ActorInfo actor, Ruleset rules)

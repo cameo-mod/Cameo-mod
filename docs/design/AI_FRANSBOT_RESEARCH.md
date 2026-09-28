@@ -386,6 +386,21 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
   approach, unloading and returning, and its air variant avoids AA. Fransbot's version (C12) is
   unknown until F0.
 
+### 7b. Harasser port (fleet-consensus shape)
+
+* Upstream CA `Harass` squads = *where/when* (quorum launch, high-value targets,
+  12-route flank pick); Cameo guerrilla = *how to fight* (hit/run states).
+  They are complementary roles, not duplicates (REVIEW_2026-09-28_dawn_bot_modules §2).
+* **Ported behind default-off fields:** `HarasserTypes` (empty = off) +
+  `HarassMinLaunchSize`/`HarassRouteCount`/`HarassPriorityTags` — the field names
+  stay CA-compatible so Claude's vendor sync stays lossless. `FindNewUnits`
+  checks `HarasserTypes` before `GuerrillaTypes` (list membership is
+  deterministic, not subject to `JoinGuerrilla` chance); keep the lists disjoint.
+* Reuses the 6g `PriorityTags` seam and 6c risk gate via
+  `FindNewTarget(highValueCheck, riskCheck)`; exempt from `RouteAroundThreat`
+  like guerrilla (unpredictability is the point). Launch quorum is upstream's
+  ramp: <min never, min→5%, min+1→10%, above→always.
+
 ### 8. Beacon response
 
 * Shadow `PlaceBeacon` in `OpenRA.Mods.Cameo` with the **same type name**, and **prove the shadow**

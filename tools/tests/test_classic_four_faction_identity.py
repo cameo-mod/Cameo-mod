@@ -54,6 +54,9 @@ class ClassicFourFactionIdentityTests(unittest.TestCase):
             cost, hp, speed, healing, weapon_name, range_, damage, _ = spec
             weapon = self.rules.resolve_weapon(weapon_name)
 
+            # #450: only Scout and Special Forces carry Flak. DESIGN §12.0l rule 5a later moves rocket troopers to
+            # AntiAirInfantry; this must then fail loudly and be updated, never deleted.
+            self.assertEqual("None", actor.child("Armor").get("Type"), actor_name)
             self.assertEqual(cost, int(actor.child("Valued").get("Cost")), actor_name)
             self.assertEqual(hp, int(actor.child("Health").get("HP")), actor_name)
             self.assertEqual(speed, int(actor.child("Mobile").get("Speed")), actor_name)
