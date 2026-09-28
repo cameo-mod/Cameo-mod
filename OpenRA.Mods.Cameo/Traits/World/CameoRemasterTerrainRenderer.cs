@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Terrain;
 using OpenRA.Mods.Common.Terrain;
@@ -134,7 +135,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					var u = map.Grid.Type == MapGridType.Rectangular ? x : (x - y) / 2f;
 					var v = map.Grid.Type == MapGridType.Rectangular ? y : (x + y) / 2f;
 
-					var tl = new float2(u * tileSize.Width, (v - 0.5f * tileInfo.Height) * tileSize.Height) - 0.5f * s * sprite.Size;
+					var tl = new Vector3(u * tileSize.Width, (v - 0.5f * tileInfo.Height) * tileSize.Height, 0) - 0.5f * s * sprite.Size;
 					var rect = new Rectangle(
 						(int)(tl.X + s * sprite.Offset.X),
 						(int)(tl.Y + s * sprite.Offset.Y),
@@ -168,10 +169,10 @@ namespace OpenRA.Mods.Cameo.Traits
 					var tileScale = tileCache.TileScale(tile);
 					var u = gridType == MapGridType.Rectangular ? x : (x - y) / 2f;
 					var v = gridType == MapGridType.Rectangular ? y : (x + y) / 2f;
-					var offset = scale * (new float2(u * ts.Width, (v - 0.5f * tileInfo.Height) * ts.Height) - 0.5f * tileScale * sprite.Size.XY);
+					var offset = scale * (new Vector2(u * ts.Width, (v - 0.5f * tileInfo.Height) * ts.Height) - 0.5f * tileScale * sprite.Size.AsVector2());
 					var palette = template.Palette ?? terrainInfo.Palette;
 
-					yield return new UISpriteRenderable(sprite, WPos.Zero, origin + offset.ToInt2(), 0, wr.Palette(palette), scale * tileScale);
+					yield return new UISpriteRenderable(sprite, WPos.Zero, origin.ToVector2() + offset, 0, wr.Palette(palette), scale * tileScale);
 				}
 			}
 		}
@@ -194,7 +195,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					var offset = map.Offset(new CVec(x, y), tileInfo.Height);
 					var palette = wr.Palette(template.Palette ?? terrainInfo.Palette);
 
-					yield return new SpriteRenderable(sprite, origin, offset, 0, palette, tileCache.TileScale(tile), 1f, float3.Ones, TintModifiers.None, false);
+					yield return new SpriteRenderable(sprite, origin, offset, 0, palette, tileCache.TileScale(tile), 1f, Vector3.One, TintModifiers.None, false);
 				}
 			}
 		}
@@ -207,7 +208,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			var sprite = tileCache.TileSprite(tile, 0);
 			var palette = wr.Palette(((CameoRemasterTerrainTemplateInfo)template)?.Palette ?? terrainInfo.Palette);
 
-			yield return new SpriteRenderable(sprite, origin, WVec.Zero, 0, palette, tileCache.TileScale(tile), 1f, float3.Ones, TintModifiers.None, false);
+			yield return new SpriteRenderable(sprite, origin, WVec.Zero, 0, palette, tileCache.TileScale(tile), 1f, Vector3.One, TintModifiers.None, false);
 		}
 	}
 }

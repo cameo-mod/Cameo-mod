@@ -41,7 +41,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 		public SpriteFrameType Type => inner.Type;
 		public Size Size => inner.Size;
 		public Size FrameSize => inner.FrameSize;
-		public float2 Offset => inner.Offset;
+		public Vector2 Offset => inner.Offset;
 		public bool DisableExportPadding => inner.DisableExportPadding;
 
 		public byte[] Data
@@ -105,7 +105,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 		static readonly SpriteSequenceField<string> RemasteredMaskFilename = new(nameof(RemasteredMaskFilename), null);
 
 		[Desc("Change the position in-game on X, Y, Z for the remastered HD sprite.")]
-		static readonly SpriteSequenceField<float3> RemasteredOffset = new(nameof(RemasteredOffset), float3.Zero);
+		static readonly SpriteSequenceField<Vector3> RemasteredOffset = new(nameof(RemasteredOffset), Vector3.Zero);
 
 		[Desc("Frame index to start from for the remastered HD sprite.")]
 		static readonly SpriteSequenceField<int?> RemasteredStart = new(nameof(RemasteredStart), null);

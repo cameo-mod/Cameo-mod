@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using OpenRA.FileSystem;
+using OpenRA.Mods.Common.FileSystem;
 using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.FileSystem
