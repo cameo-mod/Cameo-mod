@@ -600,6 +600,18 @@ namespace OpenRA.Mods.Common.Traits
 				.OrderBy(a => (a.Location - frontCenter).LengthSquared)
 				.ThenBy(a => a.ActorID)
 				.FirstOrDefault();
+
+			// A front that has lost its local FACT can still be anchored by the owned
+			// building it is actually attacking, as long as the fallback anchor is also
+			// within DefendSiteAnchorMaximumDistance of the front — the redirect-guard
+			// semantics are preserved and the defense lands on the attacked site.
+			if (anchor == null)
+				anchor = world.ActorsHavingTrait<Building>()
+					.Where(a => a.IsInWorld && !a.IsDead && a.Owner == player &&
+						(a.Location - frontCenter).LengthSquared <= maximumDistanceSquared)
+					.OrderBy(a => (a.Location - frontCenter).LengthSquared)
+					.ThenBy(a => a.ActorID)
+					.FirstOrDefault();
 			return anchor != null;
 		}
 
