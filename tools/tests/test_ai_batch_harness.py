@@ -6,6 +6,7 @@ map patching, record slicing) get unit tests; the engine launch itself is
 smoke-tested separately with a real match.
 """
 import pathlib
+import re
 import shutil
 import sys
 import tempfile
@@ -158,6 +159,90 @@ class TemplateMapContractTests(unittest.TestCase):
         limit = int(re.search(r"TimeLimitDefault: (\d+)", text).group(1))
         self.assertIn(limit, batch.VALID_TIME_LIMITS)
         self.assertIn("TimeLimitLocked: True", text)
+
+
+REAL_MAP = ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oramap"
+
+
+class RealMapVariantTests(unittest.TestCase):
+    """The maintainer-mandated duel map ("A Nuclear Winter") is a shipped
+    .oramap: the harness extracts it and converts the Multi slots into
+    map-side bots. These tests pin the conversion contract — referee seat,
+    spawn binding, enemy wiring — and the EOF-bleed bug where the last
+    PlayerReference's patched fields could leak into the Actors section."""
+
+    def _write(self, matchup):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="nw_variant_test_"))
+        dest = tmp / "variant"
+        batch.write_variant(REAL_MAP, dest, matchup, time_limit=20)
+        return tmp, dest
+
+    def test_oramap_variant_converts_multi_slots(self):
+        matchup = {
+            "side_a": {"faction": "td_gdi", "bot": "fransbot"},
+            "side_b": {"faction": "ra1_allies", "bot": "hard"},
+        }
+        tmp, dest = self._write(matchup)
+        try:
+            text = (dest / "map.yaml").read_text(encoding="utf-8")
+
+            # Referee seat added for the local client, before the duelists.
+            self.assertEqual(text.count("PlayerReference@Referee:"), 1)
+
+            blocks = {
+                m.group(1): m.group(2)
+                for m in re.finditer(r"PlayerReference@(\w+):\n((?:\t\t[^\n]+\n)*)", text)
+            }
+            for ref, bot, faction in (("Multi0", "fransbot", "td_gdi"), ("Multi1", "hard", "ra1_allies")):
+                block = blocks[ref]
+                self.assertIn("Playable: False", block)
+                self.assertIn(f"Bot: {bot}", block)
+                self.assertIn(f"Faction: {faction}", block)
+                self.assertIn("HomeLocation:", block)
+
+            # Duelists are enemies of each other AND still hostile to Creeps.
+            self.assertIn("Multi1", blocks["Multi0"])
+            self.assertIn("Multi0", blocks["Multi1"])
+            self.assertIn("Enemies: Creeps", blocks["Multi0"])
+
+            # HomeLocations bind to the map's real mpspawn cells.
+            self.assertIn("HomeLocation: 11,45", blocks["Multi0"])
+            self.assertIn("HomeLocation: 90,24", blocks["Multi1"])
+
+            # Starting forces injected for both sides.
+            self.assertIn("Multi0_base:", text)
+            self.assertIn("Multi1_base:", text)
+
+            # No patched field may leak into the Actors section (EOF bleed).
+            actors = text.split("\nActors:\n", 1)[1]
+            self.assertNotIn("\t\tBot:", actors)
+            self.assertNotIn("\t\tHomeLocation:", actors)
+
+            # Rules key + file wired (insane speed, locked time cap).
+            self.assertRegex(text, r"(?m)^Rules: rules\.yaml$")
+            rules = (dest / "rules.yaml").read_text(encoding="utf-8")
+            self.assertIn("GameSpeed: insane", rules)
+            self.assertIn("TimeLimitDefault: 20", rules)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_mp_spawn_cells_from_real_map(self):
+        import zipfile
+        with zipfile.ZipFile(REAL_MAP) as z:
+            text = z.read("map.yaml").decode("utf-8", "replace")
+        cells = batch.mp_spawn_cells(text)
+        self.assertGreaterEqual(len(cells), 2)
+        self.assertEqual(cells[0], (11, 45))
+        self.assertEqual(cells[1], (90, 24))
+
+    def test_swap_bots_alternates_spawn_ownership(self):
+        matchups = batch.build_matchups(["td_gdi"], "fransbot", "hard", repeats=4, swap_bots=True)
+        side_a_bots = [m["side_a"]["bot"] for m in matchups]
+        self.assertEqual(side_a_bots, ["fransbot", "hard", "fransbot", "hard"])
+
+    def test_swap_bots_off_keeps_assignment(self):
+        matchups = batch.build_matchups(["td_gdi"], "fransbot", "hard", repeats=2)
+        self.assertEqual([m["side_a"]["bot"] for m in matchups], ["fransbot", "fransbot"])
 
 
 class RecordSliceTests(unittest.TestCase):

@@ -13951,8 +13951,8 @@ after a stacked base merges, retarget or re-base the child PR BEFORE merging it.
 
 **New mandated bot test standard (maintainer order):** all bot-vs-bot testing
 runs on the real tournament duel map **"A Nuclear Winter"**
-(`mods/cameo/maps/ai_duel_nuclear_winter`, unpacked from
-`_ra_a-nuclear-winter.oramap`; both mpspawn cells are the duelists' homes) at
+(extracted at runtime from the shipped
+`mods/cameo/maps/_ra_a-nuclear-winter.oramap`; both mpspawn cells are the duelists' homes) at
 locked `gamespeed: insane`. No more synthetic flat fixtures for bot tests —
 the old `ai_duel_gate_20260928` template stays available via `--template` for
 fixture debugging only.
