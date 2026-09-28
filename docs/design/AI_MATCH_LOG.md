@@ -29,6 +29,7 @@ Strings are the internal names, never the display/translated names.
     "team": 1,
     "handicap": 0,
     "spawn": 3,
+    "home": "42,17",
     "outcome": "won",
     "personality": "rush",
     "personality_switches": 0,
@@ -49,7 +50,9 @@ Strings are the internal names, never the display/translated names.
     "army_value": 0,
     "assets_value": 0,
     "resources_earned": 0,
-    "resources_spent": 0
+    "resources_spent": 0,
+    "stats_timeline_fields": "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost",
+    "stats_timeline": [ [750, 1200, 1000, 800, 5000, 0, 0], [1500, 2600, 2500, 1900, 7000, 300, 110] ]
   },
   "opponents": [
     { "name": "Multi1", "is_bot": true, "bot_type": "hard", "faction": "td_nod",
@@ -60,6 +63,15 @@ Strings are the internal names, never the display/translated names.
 ```
 
 ## Field rules
+
+- `home` — `player.HomeLocation` as `"x,y"`. `spawn` is the LOBBY's spawn choice and is `0`
+  for every map-side player, which is how the A/B harness seats both duelists — so in a
+  harness run `spawn` is constant and says nothing about side. Key side analysis on `home`.
+- `stats_timeline` — one row per `AiMatchLogWriter.SampleIntervalTicks` (default 750) world
+  ticks, columns named by `stats_timeline_fields`; cumulative except `army_value` and
+  `assets_value`. Sampled on TICKS, not on `PlayerStatistics`' own graph cadence, which follows
+  game time (every 3000 ticks at the harness's maximum speed). Optional: records written
+  before it existed have no timeline.
 
 `schema` is `2` for records carrying the composition/episode fields; older
 schema-1 records in the same file remain valid and the aggregator pools both
@@ -195,6 +207,16 @@ when there is no candidate. Enemy records are sorted by ordinal player name.
 Candidate personality and target values are observations only. The phase-2
 target score deliberately has no pairwise-damage (`w_hurt`) term because no
 usable attribution hook exists; that term is phase-4 work.
+
+`own.losses_by_role` / `own.away_losses_by_role` (objects, keys sorted) are the
+CUMULATIVE cost of units lost, by the role the unit held at the last role pass
+(`AssignRolesInterval`): a squad type (`rush` = the main attack force, `protection`,
+`guerrilla`, `harass`, `artillery`, `support`, `air`, `naval`) or `idle` (at the base,
+in no squad). `away_` is the part lost farther than `MaxBaseRadius` from the base
+centre. Units in no squad and not idle (harvesters, MCVs) are not counted, so the
+difference to `PlayerStatistics.DeathsCost` is buildings plus those. Summed over
+every squad manager, including disabled personalities' (a disabled manager forgets
+its snapshot, so a unit is never booked twice).
 
 ## Batch harvest (Stage D)
 

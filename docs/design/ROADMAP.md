@@ -111,6 +111,44 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
+- [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
+  Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
+  against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
+  - [ ] **L** CA-1 arsenal tracker — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
+    per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
+    with defence ranges and a per-region heat map, log fields; then the in-match production
+    weight. **Claude.**
+  - [ ] **M** CA-1b offline fitter → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
+    (read at match start, §6.1); more harness matchups. **Claude** (Devin Cloud out of tokens).
+  - [ ] **L** CA-2 siege and force preservation: stand-off outside remembered defence range,
+    artillery first, commit when the area's defences are gone or the Versus-weighted force
+    ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
+  - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
+  - [ ] **M** CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
+    artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
+  - [ ] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
+    teams on an air-threat route layer. **EMBER.**
+  - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+- [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
+  league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
+  - [ ] **M** CP combat predictor: Versus-aware Lanchester strength, engage/retreat hysteresis,
+    learned per-type factors; replaces the 6c scalar. **Claude.**
+  - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
+    layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
+  - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
+  - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
+  - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
+  - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
+  - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
+    (DESIGN §19.2). **NOVA**, with UT.
+  - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the
+    analyst; input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
+    candidate per finding. **Claude** (Devin Cloud out of tokens until next week).
+  - [ ] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
+    defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant. **NOVA**, with DI.
+  - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
+    refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
+    control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into

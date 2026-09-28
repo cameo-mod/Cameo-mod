@@ -27,6 +27,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Name of the append-only AI match log file.")]
 		public readonly string FileName = "cameo-ai-matches.jsonl";
 
+		[Desc("World ticks between two stats_timeline samples (earned, spent, army, assets, kills/deaths cost). 0 disables it.")]
+		public readonly int SampleIntervalTicks = 750;
+
 		public override object Create(ActorInitializer init) { return new AiMatchLogWriter(this); }
 	}
 
@@ -40,6 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
+		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
 		{
@@ -64,6 +68,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		void ITick.Tick(Actor self)
 		{
 			var world = self.World;
+			if (!written && info.SampleIntervalTicks > 0 && world.WorldTick % info.SampleIntervalTicks == 0)
+				Sample(world);
+
 			if (written || world.WorldTick < nextAttemptTick)
 				return;
 
@@ -115,6 +122,42 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// Fixed tick cadence, unlike PlayerStatistics' own graph samples, which follow wall-clock
+		// game time (every 3000 ticks at the harness's maximum speed, 750 at normal speed).
+		void Sample(World world)
+		{
+			foreach (var player in world.Players.Where(IsLoggableBot))
+			{
+				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
+				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
+				if (!samples.TryGetValue(player, out var list))
+					samples[player] = list = new List<int[]>();
+
+				list.Add(new[]
+				{
+					world.WorldTick, resources?.Earned ?? 0, resources?.Spent ?? 0, stats?.ArmyValue ?? 0,
+					stats?.AssetsValue ?? 0, stats?.KillsCost ?? 0, stats?.DeathsCost ?? 0
+				});
+			}
+		}
+
+		internal const string StatsTimelineFields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost";
+
+		internal static void AppendStatsTimeline(StringBuilder builder, IReadOnlyList<int[]> timeline, bool first = false)
+		{
+			AppendString(builder, "stats_timeline_fields", StatsTimelineFields, first);
+			AppendArrayPropertyStart(builder, "stats_timeline");
+			if (timeline != null)
+				for (var i = 0; i < timeline.Count; i++)
+				{
+					if (i > 0)
+						builder.Append(',');
+					builder.Append('[').Append(string.Join(",", timeline[i].Select(v => v.ToString(CultureInfo.InvariantCulture)))).Append(']');
+				}
+
+			builder.Append(']');
+		}
+
 		static bool AllBotsResolved(World world)
 		{
 			return world.Players
@@ -159,6 +202,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "team", team);
 				AppendNumber(lines, "handicap", player.Handicap);
 				AppendNumber(lines, "spawn", player.SpawnPoint);
+
+				// SpawnPoint is the lobby's choice and stays 0 for map-side players (the A/B harness),
+				// so the home cell is what tells the two sides of a duel apart.
+				AppendString(lines, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
 				AppendString(lines, "outcome", Outcome(player.WinState));
 				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
 				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
@@ -180,6 +227,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "assets_value", stats?.AssetsValue ?? 0);
 				AppendNumber(lines, "resources_earned", resources?.Earned ?? 0);
 				AppendNumber(lines, "resources_spent", resources?.Spent ?? 0);
+				samples.TryGetValue(player, out var timeline);
+				AppendStatsTimeline(lines, timeline);
 				lines.Append('}');
 
 				AppendRelationships(lines, world, player, "opponents", false);

@@ -4860,6 +4860,31 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
   with Hard at 100.
 
+### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
+
+Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
+
+* **Director — yes, no cheats, and part of the A/B.** A Director may pace the bot's pressure on a
+  tension curve (build-up → pressure → climax → relief) by changing attack timing and aggression
+  only. It never changes income, unit stats, production speed or vision. It is **on** in the
+  Nuclear Winter A/B, so every candidate is measured with it; a Director change is itself a
+  candidate that must beat master.
+* **Opponent memory — one profile per enemy faction.** The bot remembers, per faction it has
+  played against, what was effective (which of its own roles/unit types traded well, which
+  posture won, what that faction fielded when) and counters that faction more automatically the
+  more games it has played. Two layers: the committed, offline-fitted priors file
+  (`mods/cameo/ai/learned/`, shared by every install) and a host-local profile that keeps growing
+  with the games played on that machine. Keys are factions only — **nothing about individual
+  human players is stored.** Allowed by `AI_ARCHITECTURE.md` §6.1: it steers only unsynced bot
+  reasoning on the host.
+* **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
+  host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
+  claims, human-ally beacons) — the same no-cheat rule as the Director.
+* **Offline LLM analyst — yes, tools only; until a local model exists the analyst is an agent
+  (Claude while Devin Cloud is out of tokens).** A script in `tools/` may summarise match/situation
+  logs with an LLM and propose tuning changes; nothing is applied without human review and an A/B.
+  No LLM or network call ever runs in the game.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on
