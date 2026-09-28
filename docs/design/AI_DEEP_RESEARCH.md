@@ -29,8 +29,8 @@ claim was measured on 2026-09-28.
 | 6 | **Learn the opponent across games** (nearest-neighbour over unit-mix snapshots) and pick openings per opponent | Steamhammer's opponent model; ZZZKBot's bandit (round 1) | **OM**; host-local (§6.1 allows it) |
 | 7 | **Train against a league, not one reference bot** | AlphaStar: "playing to win is insufficient"; exploiters expose flaws. We A/B only vs `classic` | **LG** in the harness |
 | 8 | **Difficulty = delays and self-preservation, never cheats** | Zero-K's AI rework: Normal/Hard are the top AI with construction delay and less self-preservation | amends DESIGN §19.1 scaling fields |
-| 9 | **A Director for fun**: tension-curve pacing of attacks vs humans, honest (no resource rubber-banding) | Left 4 Dead's Director; Hunicke's DDA | **DI** — needs a maintainer ruling (§8) |
-| 10 | **LLM as an offline analyst, never in the loop** | LLM agents reach roughly average-player level in StarCraft II text play but are slow and non-deterministic; Fransbot's author already tunes from LLM-read logs | **LA** tooling on the match/situation logs |
+| 9 | **A Director for fun**: tension-curve pacing of attacks vs humans, honest (no resource rubber-banding) | Left 4 Dead's Director; Hunicke's DDA | **DI** — ruled: no cheats, on in the A/B (§8) |
+| 10 | **LLM as an offline analyst, never in the loop** | LLM agents reach roughly average-player level in StarCraft II text play but are slow and non-deterministic; Fransbot's author already tunes from LLM-read logs | **LA** tooling on the match/situation logs (ruled: yes, §8) |
 
 ---
 
@@ -222,9 +222,10 @@ Steamhammer snapshots enemy unit mixes every 30 s, finds the nearest past game a
 opponent by summed mix differences, and uses it to predict the enemy's plan and pick the opening;
 it also distinguishes opponents that repeat a build from those that randomise
 ([satirist: Steamhammer's opponent model](http://satirist.org/ai/starcraft/blog/archives/362-Steamhammers-opponent-model.html),
-Synnaeve & Bessière in round 1). **Cameo:** the situation log already takes fog-honest enemy
-snapshots; **OM** keeps a host-local profile per opponent (player name or bot type × faction):
-the last N games' snapshot sequences, openings seen, which personality won. At match start the
+Synnaeve & Bessière in round 1). **Cameo (ruling §8: one profile per enemy faction):** the situation log already takes fog-honest
+enemy snapshots; **OM** keeps a profile per enemy faction — the last N games' snapshot
+sequences, openings seen, which posture and which own roles traded well — as committed offline
+priors plus a host-local layer that grows with every game played. At match start the
 bot picks its starting axes by a bandit over that profile (round 1 §8.2). Allowed by §6.1: it
 only steers unsynced bot reasoning on the host.
 
@@ -270,7 +271,7 @@ works this way. It never ships in the game.
   Hunicke's Hamlet adjusts when failure is predicted
   ([AAAI 2004 workshop](https://www.researchgate.net/publication/228889029_AI_for_dynamic_difficulty_adjustment_in_games)).
   For Cameo vs humans: build-up → pressure → climax → relief waves, modulating **attack timing
-  and aggression only** — never income or unit stats. Off in the A/B and in ranked play.
+  and aggression only** — never income or unit stats. **On in the A/B** (ruling, §8).
 * **Readable personalities:** each named personality gets a signature the player can learn and
   counter (the steamroller's one big push, the guerrilla's multi-front raids, the turtle's
   artillery creep) plus telegraphs before big attacks (a staging army that is visible), and
@@ -282,12 +283,14 @@ works this way. It never ships in the game.
 
 ---
 
-## 8. Decisions this needs from the maintainer
+## 8. Maintainer rulings (2026-09-28) — binding in DESIGN.md §19.2
 
-1. **DI Director vs humans:** allowed at all? If yes, pacing/aggression only, or also income?
-2. **OM opponent profiles:** may a host remember individual human opponents across games
-   (host-local file), or only bot types and factions?
-3. **LA offline LLM analyst** in `tools/`: allowed as a human-reviewed tuning aid?
+1. **DI Director: yes, no cheats, and part of the A/B.** Pacing and aggression only; it is **on**
+   in the Nuclear Winter A/B (this replaces §7's "off in the A/B" proposal).
+2. **OM: one profile per enemy faction**, remembering what was effective against it and
+   countering it more automatically as games accumulate — committed offline priors plus a
+   host-local profile that grows with play. No per-human-player data.
+3. **LA offline LLM analyst: yes**, in `tools/` only, human-reviewed, A/B-verified.
 
 ---
 
@@ -305,8 +308,8 @@ Winter (≥ 8 matches), and — once **LG** exists — a league score.
 | **MI** | budgeted micro: focus, kite, pull back, concave | EMBER (with CA-5) | CP, CA-4 |
 | **OM** | per-opponent profiles + bandit start | Devin Cloud (with CA-1b) | logs |
 | **LG** | league harness: past masters + exploiter personalities + maps/factions | Devin Cloud | — |
-| **DI** | Director | — (ruling first) | UT |
-| **LA** | offline LLM log analyst | — (ruling first) | logs |
+| **DI** | Director (pacing only, no cheats, on in the A/B) | NOVA (with UT) | UT |
+| **LA** | offline LLM log analyst in `tools/` | Devin Cloud | logs |
 
 Order of value: **CP → ZG/IM → MI → UT → LG/OM**, interleaved with CA-1…CA-6. CP comes first
 because it attacks the measured failure (fights traded 2:1) with data Cameo already has.

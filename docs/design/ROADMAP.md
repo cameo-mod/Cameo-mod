@@ -139,7 +139,9 @@ the fog sequencing.
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
   - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions) and
     **OM** per-opponent profiles with a bandit start. **Devin Cloud.**
-  - [ ] DI Director and LA offline LLM analyst — maintainer rulings first (§8).
+  - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
+    (DESIGN §19.2). **NOVA**, with UT.
+  - [ ] **S** LA offline LLM log analyst in `tools/`, human-reviewed, A/B-verified. **Devin Cloud.**
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
