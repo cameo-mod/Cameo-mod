@@ -356,6 +356,30 @@ def main():
     put("FransMineClusterBotModule", "ResourceCreatorTypes", is_resource_creator)
     put("FransStrategicMapBotModule", "ResourceCreatorTypes", is_resource_creator)
 
+    # ResourceMapBotModule@fransbot: the sole genericbot-gated instance is
+    # disabled under enable-fransbot, so FransMcvExpansionManagerBotModule's
+    # Requires<ResourceMapBotModuleInfo> resolves an inert module. A named
+    # second instance carries the fransbot lists; every consumer resolves
+    # TraitsImplementing().FirstOrDefault(IsTraitEnabled), which is
+    # multi-instance safe.
+    put("ResourceMapBotModule@fransbot", "ResourceCreatorTypes", is_resource_creator)
+    put("ResourceMapBotModule@fransbot", "RefineryTypes", is_refinery)
+    put("ResourceMapBotModule@fransbot", "HarvesterTypes", is_harvester)
+    put("ResourceMapBotModule@fransbot", "EnemyBaseBuildingTypes",
+        is_conyard | is_refinery | is_producer | is_defense)
+    # Derived from SeedsResource.ResourceType, unioned with the classic module's
+    # curated list so map-preplaced resources with no seeding actor (SCMinerals,
+    # Spice) still index as valuable.
+    valuable_resources = {rt.strip() for n in is_resource_creator
+                          for rt in fields(actors[n], "SeedsResource", "ResourceType")
+                          + fields(actors[n], "LobbyScaledSeedsResource", "ResourceType")
+                          if rt and rt.strip()}
+    valuable_resources |= {"Tiberium", "BlueTiberium", "RedTiberium",
+                           "GoldTiberium", "Ore", "Gems", "RA2Ore", "RA2Gems",
+                           "RA2Silver", "RA2Copper", "SCMinerals", "SCGas",
+                           "SCGas2", "SCGas3", "Spice", "OP2Ore", "OP2Ore2"}
+    put_raw("ResourceMapBotModule@fransbot", "ValuableResourceTypes", valuable_resources)
+
     put("FransMcvExpansionManagerBotModule", "McvTypes", is_mcv)
     put("FransMcvExpansionManagerBotModule", "ConstructionYardTypes", is_conyard)
     put("FransMcvExpansionManagerBotModule", "McvFactoryTypes", is_conyard | is_producer)

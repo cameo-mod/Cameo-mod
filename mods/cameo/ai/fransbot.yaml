@@ -37,6 +37,8 @@ Player:
 		RaidInterferenceMemoryTicks: 500
 	FransBaseBuilderBotModule:
 		RequiresCondition: enable-fransbot
+	ResourceMapBotModule@fransbot:
+		RequiresCondition: enable-fransbot
 	FransMcvExpansionManagerBotModule:
 		RequiresCondition: enable-fransbot
 	FransUnitBuilderBotModule:
