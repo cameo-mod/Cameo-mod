@@ -4848,6 +4848,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
   Very Hard, and Easiest through Medium pay a surcharge on the same line.
 * `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* ⛔ **No APM cap (maintainer 2026-09-28).** `HumanPaceBotModule` runs with every limit at 0
+  (unlimited: actions, burst, attention) for the Frankenstein bot; `classic` never had one. Measured
+  on A Nuclear Winter: a per-tier cap with Hard at 120 orders/min went **0–4** vs the uncapped
+  baseline's 2–0 (orders piled up behind repeats and production was dropped); with an order-lane
+  fix **1–1**. The ruling: *"our bot does not have the super unfair advantage of AlphaStar and we are
+  actively looking for ways to make it stronger and not weaker"*. Difficulty scales through delays,
+  self-preservation and the production line above — never through the bot's hands.
 * ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
   deploys, micro-management and every other ability a unit has work the same for every bot. A trait
   that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);

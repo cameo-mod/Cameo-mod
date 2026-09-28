@@ -156,7 +156,9 @@ regions, chokepoints and "doors" from the pathfinder graph, `AI_SYNTHESIS.md` §
 
 M28AI's variants make the point: **M28Easy is M28 with micro disabled**
 ([ModDB listing](https://www.moddb.com/mods/m28ai)); micro is the difference between its tiers.
-Round 1's AlphaStar lesson still applies: micro must spend a capped, burst-free action budget.
+~~Round 1's AlphaStar lesson still applies: micro must spend a capped, burst-free action budget.~~
+**Superseded 2026-09-28 (DESIGN.md §19.1):** Cameo's bots run with no APM cap — a capped budget
+measurably weakened them (0–4), and the goal is strength. Micro spends what it needs.
 
 ### 4.2 Proposal **MI** (inside the CA squad states, consuming `IBotActionBudget`)
 
@@ -321,7 +323,7 @@ because it attacks the measured failure (fights traded 2:1) with data Cameo alre
 * **Two engagement authorities.** CP owns engage/retreat; the 6c gate and fuzzy flee become its
   inputs/fallback, never parallel voices (§10.1).
 * **Tuning against one opponent.** Every A/B so far is vs `classic`; that overfits (§6.2).
-* **Micro without a budget.** It reads as a bot and breaks the human-likeness contract (round 1).
+* ~~**Micro without a budget.**~~ Superseded: no APM cap (DESIGN.md §19.1, 2026-09-28).
 * **Per-tick field steering or pathfinding in bot code.** Precompute (M28), issue orders.
 * **Neural nets or network calls in the game loop** (§6.1, §6.3–6.4).
 * **Difficulty by stats.** Scale delays, self-preservation and micro; keep insurance as the one
