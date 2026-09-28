@@ -4892,6 +4892,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   falls back under its own defences (the lure). Guerrilla/recon/spec-ops squads convert to
   defence when the threat is high and they can arrive in time; when they cannot, they — and the
   main army if the predictor agrees — **punish the enemy base while its army is out**.
+* **Fast squads react, defenders go home when it is over** (maintainer, same day): when a predicted
+  attack is met, a guerrilla/harass squad that reaches the rally point before the enemy joins the
+  defence; one that cannot punishes the enemy base while its army is out. A defence is released
+  only when there is **no perceived threat** (no enemy pressure at home, master not
+  Pressured/Emergency) **and no predicted attack** for `DefenceReleaseQuietTicks`; then raiders
+  re-form guerrilla squads, spec ops their harass squads, the rest join the attack pool and its
+  missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
 
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
