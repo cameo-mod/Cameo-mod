@@ -69,6 +69,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly World world;
 		readonly Queue<Order> orders = [];
 
+		// With an action budget (the Frankenstein bot), orders wait in lanes instead of the FIFO: economy first,
+		// last command wins per unit and order type, stale orders free (BotOrderLanes). Without one (classic),
+		// the FIFO above is used unchanged.
+		readonly BotOrderLanes<Order, (uint Actor, string Order)> lanes = new(
+			o => o.GroupedActors == null &&
+				(o.Subject == null || o.Subject.Info.Name == "player" || o.Subject.Info.HasTraitInfo<BuildingInfo>()),
+			o => o.Subject != null && o.GroupedActors == null && !o.Queued && (o.ExtraActors == null || o.ExtraActors.Length == 0),
+			o => (o.Subject.ActorID, o.OrderString));
+
 		OpenRA.Player player;
 		IBotActionBudget actionBudget;
 
@@ -107,11 +116,21 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBot.QueueOrder(Order order)
 		{
+			if (actionBudget != null)
+			{
+				lanes.Enqueue(order, info.MaxQueuedOrders);
+				return;
+			}
+
 			while (orders.Count >= info.MaxQueuedOrders)
 				orders.Dequeue();
 
 			orders.Enqueue(order);
 		}
+
+		// An order whose subject died or changed hands would be rejected by the world anyway: never spend an action on it.
+		bool OrderStillValid(Order o) =>
+			o.Subject == null || (!o.Subject.IsDead && !o.Subject.Disposed && o.Subject.Owner == player);
 
 		void ITick.Tick(Actor self)
 		{
@@ -152,14 +171,27 @@ namespace OpenRA.Mods.Cameo.Traits
 				ReportModuleTiming(self);
 			}
 
+			if (actionBudget != null)
+			{
+				var pending = lanes.Count;
+				var toIssue = Math.Min((pending + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, pending);
+				for (var i = 0; i < toIssue && lanes.Count > 0; i++)
+				{
+					if (!actionBudget.TryConsumeActions())
+						break;
+
+					if (!lanes.TryDequeue(OrderStillValid, out var order))
+						break;
+
+					world.IssueOrder(order);
+				}
+
+				return;
+			}
+
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
 			for (var i = 0; i < ordersToIssueThisTick; i++)
-			{
-				if (actionBudget != null && !actionBudget.TryConsumeActions())
-					break;
-
 				world.IssueOrder(orders.Dequeue());
-			}
 		}
 
 		void ReportModuleTiming(Actor self)
