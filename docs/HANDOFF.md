@@ -1,5 +1,32 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
+
+**Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,
+self-learning), every role used in the right ratio, squads of the right composition moving in
+formation, scouts choosing where to attack, air strike teams on least-resistance routes, and —
+most importantly — **no suicide runs**: stop outside defence range, artillery first, commit only
+when the area's defences are gone or the force clearly wins. Written up as
+**`docs/design/AI_ARCHITECTURE.md` §12**: §12.1 lists what already ships (fog memory, 6c risk
+gate, 6e ground risk routing, 6f artillery/support/staging, 6g tags, scouts, counters — do not
+rebuild them); §12.2 the five real gaps; §12.10 the phases **CA-1 tracker (Claude) · CA-1b
+offline fitter (Claude — Devin Cloud is out of tokens until next week) · CA-2 siege (DAWN) · CA-3 role mix + CA-4 formation (NOVA) ·
+CA-5 air doctrine (EMBER) · CA-6 scouting → targets (DAWN)**. Every phase is A/B-tested on A
+Nuclear Winter against the current master before it lands. Queue: ROADMAP "AI ARCHITECTURE".
+
+**A/B state (verified, td_gdi mirror):** master's Frankenstein `hard` vs omniscient `classic`
+= **7–6 over 13 matches** (rounds 2–4; round 4 alone went 1–3) — a coin flip, not a lead. Every match is decided by one or two big fights around ticks
+12000–16500 that one side trades ~2:1; income follows the trades, it does not cause them
+(`stats.stats_timeline`, PR #617). The continuous-threat branch lost 1–3 and is shelved.
+Round 4's loss-by-role log (#617): the largest loss category is **idle units at home**
+(38–108k per match, 70–81 % of them inside the base) — `ProtectOwn` drafts the idle pool only
+while the protection squad is empty, and the squad never disbands. **Round 5 (fix vs master, 4+4):
+fix 1–3, master 2–2** — idle losses fell, protection losses rose by the same amount, inside the
+base: the defence now fights but is out-armied (43–96k vs 3–10k, `tools/ai/fight_report.py`).
+Shelved until CP (AI_DEEP_RESEARCH §13.1).
+
+**Merged today:** #613 (classic/fransbot hidden in the lobby), #614, #616, #618, #619.
+
 ## 2026-09-28 — EMBER: post-#611 hard beats classic; donor-stack wiring gaps closed
 
 **nw-ab-7 match 1 (post-#611, hard vs classic, A Nuclear Winter): `hard` WON**

@@ -7,6 +7,11 @@ the plan for **combining** the five sources of Cameo's bot code. The binding des
 [`UPSTREAM_MODS.md`](UPSTREAM_MODS.md) §4a. Where they disagree about something already built,
 the code wins._
 
+> **2026-09-28 review: read §7 first.** It measures what actually runs in the Frankenstein
+> `hard` bot today (0 Fransbot modules, 1 CN module), picks the best source per layer, lists
+> two real defects, and gives the merge order that **supersedes §6**. Fransbot upstream is now
+> V1.29.31 on `main`, not `V1.29.19-RC` as §1 says.
+
 ---
 
 ## 0. TL;DR
@@ -394,3 +399,101 @@ replays. The match log (schema 2) is the place to record the first three.
    harvesting in the order route A's data suggests.
 
 Lane assignments: `../Cameo-mod-fleet/ORDERS_2026-09-27_ai_next_lanes.md` (outside the repo).
+
+---
+
+## 7. Review, 2026-09-28: the Frankenstein today, layer by layer, and the best-of plan
+
+_Maintainer order (2026-09-28): review the whole AI architecture against the plan — one
+ultimate bot from RV × CA × CN × Fransbot (+ Cameo's own), **cherry-picking the best of each
+and merging where possible**. Measured on master `fd852d2fe` + the A/B rounds 2–4._
+
+### 7.1 The headline
+
+* **The plan is right; the harvest has barely started.** RV and CA are merged (the 140
+  protected symbols, §1.1). Cameo's own phases 1–6g all ship. From **CN only one module is
+  ported as code** (`CombatAnalysisBotModule`); staging, observer-gated artillery and priority
+  tags were re-implemented from CN's ideas (6f/6g). **From Fransbot, zero modules run in the
+  Frankenstein bot:** all 24 are gated `enable-fransbot` and serve only the hidden donor type
+  (route A, §4.2). Route B — harvesting one module at a time with an A/B each — has not begun.
+* **Measured standing:** master's Frankenstein `hard` vs omniscient `classic` = **7–6** over 13
+  matches on A Nuclear Winter (td_gdi mirror) — a coin flip. Each match is decided by one or two
+  large fights traded ~2:1; income follows the trades. So the harvest should start with what
+  wins fights (defence, siege, composition), not with economy or expansion.
+* **Upstreams moved:** Fransbot is at **V1.29.31 on `main`** (we vendor V1.29.23 from
+  `V1.29.19-RC`; the author's efficiency fix is V1.29.24) — re-vendor ordered to DAWN. CN is
+  unchanged since `30cf70a`. CA drift is tracked by `audit_ca_drift`.
+
+### 7.2 Layer by layer
+
+"Best" is a judgement from the code read in §1, §4.5 and `AI_FRANSBOT_RESEARCH.md` §3/§3c,
+**to be confirmed by an A/B** before it replaces anything. "Runs in `hard`" is measured
+(`tools/ai/ai_module_map.py`, `mods/cameo/ai/*.yaml`).
+
+| Layer | RV (engine/AS) | CA | CN | Fransbot | Cameo own | Runs in `hard` today | Best-of pick → action |
+|---|---|---|---|---|---|---|---|
+| Perception under fog | — | omniscient scans | fog-honest | fog-honest (live Shroud), ~3 enemy scans | `BotFogMemory` (6a), fogged scans (6d), `audit_fog_honesty` | Cameo | **keep Cameo**; hold every donor to the fog audit |
+| Spatial model | — | — | **`CNTacticalMap`: chokepoints/doors from the pathfinder graph** | `FransStrategicMap`: sectors + passability layers | `RegionMemory`, a square grid, values overwritten on sight | Cameo grid | **CN topology** as the region set (§2 rule 1); grid stays the fallback. Add decay/averaging for "where they usually are" (§12.3) |
+| Enemy force estimate | — | — | — | **`FransCombatIntel`: fair last-seen force estimate** | `EnemyProfile` from memory | Cameo | **harvest FransCombatIntel into CA-1** (the arsenal tracker) |
+| Threat / risk | — | fuzzy flee | `CombatAnalysis` (ported) | **`FransRiskModel`: role-aware cell/route risk** | 6c gate, 6e router, threat level (shelved, lost 1–3) | Cameo + CN | **FransRiskModel** as the risk layer for CA-2 siege and CA-5 air routing; one publisher on the snapshot |
+| Strategy / posture | — | — | `CNBotProfile` (numbers only, §1.6) | YAML personalities | master + 5 personalities, dynamic switching | Cameo | **keep Cameo**; bipolar axes (§4.6 of the threat branch) → one blended squad manager (CA-3) |
+| Missions | — | — | — | **General → Broker → Commanders** (RECON/RAID/SECURE/DEFEND) | 7a missions (Raid/Defend/Recon/Secure) | Cameo | **keep Cameo's missions**, take Fransbot's SECURE/CLEAR validation and the §9 item 12 recon fix |
+| Economy | `HarvesterBotModule` | `HarvesterBotModuleCA` | `CNHarvester` | **`FransEconomicSaturation`, `FransHarvester` (one-mine/one-PROC/one-HARV)** | harvester role, insurance | CA | A/B **FransEconomicSaturation** (self-contained, §2 rule 4) — after the fight-winning phases |
+| Base building | `BaseBuilderBotModule` | **`BaseBuilderBotModuleCA` + queue manager** | `CNBaseBuilder` (4,347 lines) | `FransBaseBuilder` (Struggling/Growing/Prosperous/Surplus) | roles, BotLimits | CA | keep CA; mine `FransBaseBuilder`'s economic states and CN's defence placement for CA-2 |
+| Expansion | `McvExpansionManager`, `BevManager` (unloaded) | — | `CNMcvExpansion` | **`FransMcvExpansion`: land + sea/island (13,500 lines at V1.29.31)** | — | RV | **Fransbot** for islands (phase 7) after the re-vendor |
+| Production mix | `UnitBuilderBotModule` | **`UnitBuilderBotModuleCA`** + compositions | `CNUnitBuilder` | `FransUnitBuilder` (nearest-producer logic) | counter demand, `AdaptiveCounterProduction` (#605) | CA + Cameo | keep; add the role mix and learned weights (CA-1, CA-3) |
+| Squads / tactics | **guerrilla states, stuck-kick, make-way** (merged) | **squad manager, fuzzy attack-or-flee** | waves, pincers, observer-gated artillery | Ground Commander FIGHT/RETREAT, **ForcePreservationGuard** | staging, artillery, support, risk gate, tags, attention budget | CA + RV + Cameo | keep the CA/RV core; **harvest ForcePreservationGuard (CA-2)**; CN pincer waves later |
+| Base defence | — | `ProtectOwn` (drafts only an empty squad; never disbands) | `CNGarrison` | `FransDefenseCommander` (single owner of static defences) | **`ReinforceProtection` fix, A/B running** | CA | land the fix if it wins; compare `FransDefenseCommander` for static defences |
+| Routing | — | "Updated AI routing" upstream (not synced) | door-aware paths | RiskModel routes, RoutineLand negative union (V1.29.24) | 6e region A* (ground only) | Cameo | one routing owner (§1.2): Cameo 6e now; evaluate Fransbot routes with the risk layer |
+| Air | — | air states (upstream fixes unsynced) | — | **`FransAirCommander`** (SECURE/RECON/RAID, remembered buildings) | `AirPriorityTags`, `BigAirThreats` | CA | CA-5 air doctrine; harvest FransAirCommander's strike logic |
+| Naval | — | navy states | — | `FransSeaCommander` | — | CA | later; Fransbot is the reference |
+| Transports | `LoadCargo`, `SharedCargo` (unloaded) | — | `DeployBotModule` | **`FransTransport`, `FransGroundTransfer` (LST waves)** | — | RV | Fransbot, with the island work |
+| SpecOps / capture | `CncEngineerManager` (bridge repair, loaded) | `CaptureManagerBotModuleCA` | `CNBridgeRepair`, `CNRepairManager` | `FransSpecOps` (capture, demo, Tanya C4) | — | RV + CA | later: FransSpecOps |
+| Support powers | `SupportPowerBotModule` (WC2 powers, **ungated**) | — | — | `FransSupportPower`, `FransSupportCoordinator` (mission-aware) | — | RV + AS | take the Coordinator idea (powers timed with assaults) in CA-5 |
+| Pacing / human-like | — | — | `CNBotPerf` idea | — | `HumanPace`, attention budget | Cameo | keep |
+| Learning | — | — | — | LLM replay-tuning log | match + situation logs, stats timeline, losses by role, harness | Cameo | CA-1 / CA-1b (in-match weights + offline priors) |
+
+### 7.3 Findings from this review (each has an owner)
+
+1. **Double repair owner — a real bug.** `BuildingRepairBotModule` (Common) and
+   `BuildingRepairBotModuleCA` are both loaded for `genericbot || classicbot` (`ai.yaml`, since
+   #96). `RepairBuilding` is a **toggle** (`RepairableBuilding.RepairBuilding`: a second order
+   removes the repairer), and each module queues it when `!RepairActive`. On a hit that jumps a
+   building from Undamaged/Light straight to Medium or worse, both queue in the same pass and
+   the second cancels the first. **Fix:** gate the Common module `classicbot` only (the
+   reference keeps its verbatim stack). Claude, with the next A/B.
+2. **Base defence never grows** (`ProtectOwn` drafts only into an empty squad; the squad never
+   disbands). Found by #617's loss-by-role log: idle units at home were the biggest loss
+   category. Fixed behind `ReinforceProtection` (Frankenstein personalities only); **A/B round 5
+   running**.
+3. **Fransbot contributes nothing to the candidate yet.** Proposed harvest order (each an A/B):
+   ForcePreservationGuard + RiskModel (CA-2) → CombatIntel (into CA-1) → AirCommander strike
+   logic (CA-5) → EconomicSaturation → MCV/island + transports (phase 7, after the V1.29.31
+   re-vendor).
+4. **CN's topology is the largest unharvested asset.** `RegionMemory` is a square grid; the
+   §6a plan preferred CN regions. It matters for siege stand-off and routing (chokepoints).
+   Owner: NOVA (layering) or whoever takes CA-2's routing part — claim it first.
+5. **The module map is blind to Fransbot.** `ai_module_map.py` lists 34 loaded types but none
+   of the Fransbot assembly, and the committed map is stale (`--check` fails on master).
+   Owner: Devin Cloud (tooling), with the CA-1b work.
+6. **Stale plan facts.** §1's table says CN/Fransbot "not yet" and names Fransbot branch
+   `V1.29.19-RC`; §6's order of work predates 6a–6g, #605 and the A/B standard. §7 supersedes
+   §6 for ordering; §12 of `AI_ARCHITECTURE.md` owns the combined-arms phases.
+7. **Minor:** the WC2 `SupportPowerBotModule` is ungated and also runs for the `fransbot` donor,
+   beside `FransSupportPowerBotModule` (two owners for WC2 powers there). `PlugSpawnerBotModuleCA`
+   is not loaded, so bots never place plugs.
+
+### 7.4 The best-of merge order (supersedes §6)
+
+Ordered by what the A/B says loses matches — fights — and every step is an A/B against the
+current master on A Nuclear Winter (≥ 8 matches, both spawns):
+
+1. **Now:** `ReinforceProtection` (round 5) and the repair double-owner fix.
+2. **CA-1** arsenal tracker, harvesting `FransCombatIntel` (Claude).
+3. **CA-2** siege + force preservation, harvesting `FransGroundDefendForcePreservationGuard` +
+   `FransRiskModel` (DAWN), then CN topology for chokepoints.
+4. **CA-3/CA-4** role mix, one blended squad manager, formation (NOVA).
+5. **CA-5** air doctrine, harvesting `FransAirCommander` strike logic (EMBER).
+6. Economy (`FransEconomicSaturation`), then islands/transports (Fransbot V1.29.31), SpecOps,
+   naval — each only after the earlier steps stop losing fights.
+7. The `fransbot` bot type is deleted when nothing in it remains un-harvested or rejected.

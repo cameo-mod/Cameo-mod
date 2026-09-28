@@ -9,7 +9,11 @@ Task queue: [`ROADMAP.md`](ROADMAP.md) section "AI ARCHITECTURE"._
 fact with source evidence. Sections 2–7 are proposals except the record-only implementation in
 §6.2a, delivered on the follow-up branch for coordinator review. Section 8 is outside research. Section 9 records what is
 still undecided. Section 10 is the module-by-module build plan and section 11 reconciles the
-five-agent research round against sections 1–10. The §6.2a match logger has runtime and replay
+five-agent research round against sections 1–10. **Section 12 is the maintainer's combined-arms
+order of 2026-09-28** (arsenal tracker with self-learning, role ratios, formation, siege, air
+doctrine, scouting) mapped onto what ships, with phases CA-1…CA-6 and an owner for each.
+Research round 2 — how the strongest RTS bots fight, reason about space, micro, learn and stay
+fun, with the phases CP/ZG/IM/UT/MI/OM/LG it adds — is [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md). The §6.2a match logger has runtime and replay
 evidence in `docs/audit/ASTRA_REVIEW.md`; this does not validate the proposed decision system.
 
 ---
@@ -778,8 +782,10 @@ engine work. *Shipped:* `tools/ai/run_ai_match_batch.py`. **Since the 2026-09-28
 ruling the duel map is the shipped tournament map "A Nuclear Winter"
 (`mods/cameo/maps/_ra_a-nuclear-winter.oramap`)** — the harness extracts the .oramap into a
 variant dir, seats a `Referee`, and converts `Multi0`/`Multi1` into map-side bots bound to the
-map's real `mpspawn` cells. The acceptance A/B is `fransbot` (fog-honest) vs a classic
-`ModularBot` type (omniscient), both spawns (`--repeats 4 --swap-bots`), `gamespeed: insane`
+map's real `mpspawn` cells. The acceptance A/B is the Frankenstein bot at a tier (`hard`,
+fog-honest, every merged module) vs the `classic` `ModularBot` type (omniscient, pre-merge
+modules, same difficulty scaling) — **not** the `fransbot` type, which is a hidden donor
+(maintainer ruling 2026-09-28) — both spawns (`--repeats 4 --swap-bots`), `gamespeed: insane`
 locked — see `docs/design/AI_MATCH_LOG.md` § "The A/B acceptance protocol". Legacy fixture:
 `mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns)
 remains usable via `--map` —
@@ -1435,3 +1441,179 @@ Recorded because they were stated as settled fact, and two of them would have ch
 * **Any fixed numeric threshold before phase-2 logs exist**, including the CN constants as Cameo
   defaults. CN's numbers are the starting point for *hysteresis* (they were tuned against a switching
   bot in the same engine family), not for *detection*.
+
+---
+
+## 12. Combined arms: the arsenal tracker, composition, formation, siege and air doctrine
+
+**Maintainer order, 2026-09-28** (paraphrased; every clause below is binding):
+
+> Add a unit/defence tracker that keeps count of every unit and defence built and where they
+> usually are, and that is **self-learning**. The AI must use **everything in its arsenal, in the
+> right ratio**; build squads of the right composition; move them **in formation** (tanky units in
+> front, long-range artillery behind, infantry supporting the tanks, aircraft giving air support)
+> while **fast scouts** roam to spot enemies and decide where to attack next. Build **quick air
+> strike teams** that hit high-value targets along the route of **least remembered resistance**.
+> **Most importantly, always move so as to minimise losses: no suicide runs into defences.** Stop
+> just outside their range, take them down with artillery, and move in only when every defence in
+> the area is destroyed or the army is strong enough to destroy them. Helicopters and spaceships
+> give air support to the ground army; fighters pick off enemies that are out of position and join
+> big battles; bombers take out high-value targets, sometimes defences and power plants.
+
+Two standing laws shape every item. **§10.1: one owner per decision.** Each item below changes the
+*inputs* of a decision an existing module owns; none adds a second producer, a second squad
+manager, or a second target picker. **§6.1: learning tiers.** In-match learning is live bot
+reasoning (host-local, unsynced, acts only through orders; §1.1) and is free. Cross-match learning
+is a **committed data file read at match start and frozen**, fitted offline from harness runs
+(§6.2a Stage C) and reviewed like a balance change. "Self-learning" means both: the bot adapts
+inside a match, and the batch harness plus the fitter improve its priors between matches.
+
+### 12.1 What already exists (do not rebuild it)
+
+| Order clause | Shipped today | Where |
+|---|---|---|
+| Enemy memory, "where they are" | `BotFogMemory` + `RegionMemory`: remembered hostile value per region, fog-honest | `OpenRA.Mods.Cameo/Traits/BotModules/BotFogMemory.cs` (§6a) |
+| Enemy composition | `IBotEnemyCompositionProvider` from fog memory; Versus-scored counters | `AdaptiveCounterProduction.cs` (#605) |
+| Who hurts us | `CombatAnalysisBotModule`: per-role threat weights from damage events, nemesis | `OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs` |
+| Compositions | personality-tagged compositions, zero C# (§1.4) | `UnitCompositionsBotModule.cs` |
+| Artillery behind the assault | artillery squads attach to an assault and hang back (`ArtilleryMinRangeCells`, `ArtilleryHangBackCells`) | `SquadManagerBotModuleCA.cs` (6f, #554) |
+| Support follows | `SquadCAType.Support` trails its parent (`SupportFollowRangeCells`) | same (6f) |
+| Rally before assault | `StageBeforeAssault` / `StageAssemblePercent` / `StageTimeoutTicks` | `GroundUnitsStageStateCA` (6f) |
+| No suicide (partial) | pre-commit gate `AttackRiskMargin`: squad value must beat remembered regional threat | `SquadManagerBotModuleCA.cs` (6c) |
+| Avoid defences en route (ground) | `UseRiskRouting` → `IBotRouteThreatRouter` waypoints around remembered threat | `GroundStatesCA.cs:508`, `RegionRouter.cs` (6e) |
+| Flee when losing | fuzzy attack-or-flee | `AttackOrFleeFuzzyCA.cs` |
+| Scouts | `ScoutBotModule`: cheap fast units cycle the stalest regions | `ScoutBotModule.cs` (6b) |
+| Target priorities | rules-derived tags `artillery`, `harvester`, `production`, `superweapon`; per-squad `*PriorityTags`; air hunts artillery | `BotTargetTags.cs` (6g) |
+| Donor stack | `FransRiskModel` (role-aware cell/route risk), `FransGroundDefendForcePreservationGuard`, `FransCombatIntel` (last-seen force estimate), `FransAirCommander` | `OpenRA.Mods.Fransbot/Traits/` — merge one module at a time, A/B each (§0a) |
+
+### 12.2 The gaps, precisely
+
+1. **No arsenal ledger.** Nothing counts *per unit type* what was built, lost, or destroyed, on
+   either side; `PlayerStatistics` only holds per-player totals. So the bot cannot learn "our
+   type X trades well against this enemy", and cannot know "the enemy usually has N defences of
+   range R at choke C".
+2. **No ratio law.** Production follows demand counters and compositions, but nothing guarantees
+   every role the faction owns is used, in a target mix.
+3. **No formation.** Artillery and support trail; tanks, infantry, AA and air do not hold roles
+   relative to one another, and a squad moves at each unit's own speed.
+4. **Siege is missing.** The 6c gate says *whether* to attack, not *how*: there is no stand-off
+   outside defence range, no "artillery first", no "commit when the area's defences are gone".
+5. **No air doctrine.** Air squads are one type with one tag set; risk routing is ground-only
+   (`GroundStatesCA` is its only consumer), so strike aircraft fly straight through remembered AA.
+
+### 12.3 The arsenal tracker (phase CA-1) — the foundation for everything else
+
+* **Own ledger, per unit type:** built, alive, lost (count and cost), value destroyed (cost of
+  victims killed), per enemy faction. **Mechanism:** a Cameo shadow of
+  `UpdatesPlayerStatistics` (engine `PlayerStatistics.cs:215`; carried by 1,243 actor nodes, so no
+  yaml changes). Its `INotifyKilled.Killed(self, e)` already receives the attacker actor; the
+  shadow keeps the engine behaviour verbatim and additionally books `victim cost` to
+  `(attacker owner, attacker type)` and `victim type` to the victim owner's ledger. The ledger
+  lives on a player-level `BotArsenalTracker` trait and is read only by bot code (never `[Sync]`).
+  Prove the shadow with a Cameo-only field (CLAUDE.md rule 7).
+* **Enemy ledger, fog-honest:** distinct enemy actors *seen* (dedupe by actor id), per rules-derived
+  role (§12.4), with the region they were seen in; for defences also the **max weapon range**
+  (read from rules once the type is known). Extends `RegionMemory`; never enumerates unseen
+  actors (`audit_fog_honesty.py` ratchet).
+* **Where they usually are:** per region, a decaying average of remembered enemy defence value and
+  army value — a heat map the siege planner (§12.6) and air router (§12.8) read.
+* **In-match learning:** for each own role, the trade ratio `value destroyed / value lost` against
+  this enemy, smoothed (prior-weighted), becomes a production *weight input* to the existing owner
+  (`UnitBuilderBotModuleCA` via the master's demand inputs — §10.1).
+* **Cross-match learning:** the match record gains the per-type ledger; `tools/ai/` aggregates it
+  per (own faction, enemy faction, role and type) across harness runs and writes
+  `mods/cameo/ai/learned/arsenal_priors.yaml` — **committed, reviewed, read at match start**.
+  Every harness batch is therefore a training run; nothing is learned from a file only one client has.
+* **Record-only first:** CA-1 ships as telemetry (match and situation logs) with no behaviour
+  change; the in-match weight is a separate, A/B-tested step.
+
+### 12.4 Roles are derived from rules, never listed
+
+Extend `BotTargetTags` into `BotUnitRoles` (same load-time derivation, no actor ids, 25 factions):
+`frontline` (high HP × armour, short range), `skirmisher`, `anti_infantry` / `anti_armour` (from the
+weapon's Versus profile, as `AdaptiveCounterProduction` scores it), `artillery` (existing tag),
+`anti_air`, `scout` (fast, cheap, long vision), `support` (heal/repair), `transport`, and for air:
+`gunship` (VTOL/hovering, ground weapons — helicopters and hovering spaceships), `fighter`
+(air-to-air weapons), `bomber` (bomb/drop attacks or fixed-wing ground-only), `air_transport`.
+New **target** tags: `power` (positive `Power`), `defence` (building with an armament), `tech`.
+
+### 12.5 Composition and ratios (phase CA-3)
+
+* A **target mix by role** per personality (starting values in yaml; e.g. frontline 35 %,
+  anti-infantry 20 %, artillery 15 %, anti-air 10 %, air 15 %, scout 5 %), shifted by the enemy
+  ledger (counters) and by the learned trade ratios, with a **floor** so every role the faction
+  can build is used. Production fills the largest *deficit* against the mix — through the existing
+  builder, as a demand input.
+* Squads are formed to the same mix (a main assault without frontline or AA waits for them,
+  bounded by `StageTimeoutTicks`), and compositions (§1.4) remain the personality flavour.
+
+### 12.6 Siege and force preservation (phase CA-2) — the maintainer's "most importantly"
+
+The rule, in order of precedence:
+
+1. **Never path through remembered defence coverage** (6e, now fed by §12.3 ranges).
+2. **Stop at stand-off**: the assault halts at `max remembered defence range + margin` from the
+   nearest remembered defence of the target area (margin per difficulty on the DESIGN.md §19.1 equal-step line).
+3. **Artillery first**: the attached artillery squad (6f) engages the defences from outside their
+   range; frontline screens the artillery; air (§12.8) may strike defences.
+4. **Commit** only when (a) no remembered defence in the area survives (re-verified by sight), or
+   (b) `effective squad value ≥ R × (remembered defence value + remembered army in the region)`,
+   where "effective" is Versus-weighted (the 6c gate, generalised) and `R` is a per-personality
+   input the Aggression axis moves.
+5. **Retreat** before the trade turns (fuzzy flee exists); a failed siege writes the loss into the
+   region memory so the next plan avoids it.
+
+Donor to evaluate first: `FransRiskModel` + `FransGroundDefendForcePreservationGuard`.
+
+### 12.7 Formation movement (phase CA-4)
+
+Engine orders have no formation, so the bot moves a squad **in steps along its route** (orders
+only, §1.1): per step the frontline goes first; infantry holds just behind/alongside the tanks;
+anti-air sits inside the group; artillery hangs back (6f exists); support trails (6f exists);
+gunships hover over the frontline centroid. The group advances at the **pace of its slowest
+frontline unit** (units that run ahead wait at the step point). Fast scouts are never in the
+formation — they run ahead on their own (6b).
+
+### 12.8 Air doctrine (phase CA-5)
+
+* **Gunships (helicopters, hovering spaceships): close air support** — attach to the main
+  assault like support squads and engage what the frontline engages.
+* **Fighters: air superiority and pick-off** — hunt enemy aircraft and **isolated** enemy units
+  (far from their army and from remembered defences), and join big battles near the own army.
+* **Bombers: strike teams** — 2–4 aircraft, targets by tag priority (`superweapon`, `tech`,
+  `production`, `power`, `harvester`, `artillery`; `defence` when it opens a siege), routed over
+  the **air-threat layer** (remembered anti-air coverage) with minimum exposure, regroup and
+  return. This is risk routing for air — today's router is ground-only.
+
+### 12.9 Scouting decides where to attack next
+
+`ScoutBotModule` (6b) keeps running; add **spawn-directed recon** (§9 item 12 (a): `mpspawn` cells are
+public map data) and feed each scout report into the main-target / region choice: attack the
+most valuable region whose remembered defence the available force beats (§12.6 rule 4), not the
+nearest one.
+
+### 12.10 Order of work, owners, and the gate for each phase
+
+Every phase: record-only telemetry first where it applies, then the behaviour behind a yaml
+switch, then **an A/B on A Nuclear Winter against the current master** (≥ 8 matches, both spawns,
+`--bot-a hard --bot-b classic --swap-bots`, compared with a master run in the same session). A
+phase lands only if it does not lose to master; the standing target stays "beat `classic`".
+
+| Phase | What | Owner | Depends on |
+|---|---|---|---|
+| **CA-1** | arsenal tracker: `BotUnitRoles`/new target tags, own ledger (stats shadow), enemy ledger with defence ranges and region heat map, match/situation log fields; then the in-match production weight | **Claude** | — |
+| **CA-1b** | offline fitter: aggregate harness ledgers → `learned/arsenal_priors.yaml`; harness runs more matchups | **Claude** (was Devin Cloud, out of tokens 2026-09-28) | CA-1 log fields |
+| **CA-2** | siege and force preservation (§12.6) incl. evaluating the Fransbot donor guard | **DAWN** | CA-1 defence ranges |
+| **CA-3** | role mix production + squad composition (§12.5), personality starting mixes | **NOVA** | CA-1 roles |
+| **CA-4** | formation movement (§12.7) | **NOVA** | CA-3 |
+| **CA-5** | air doctrine: gunship CAS, fighter pick-off, bomber strike teams, air-threat routing (§12.8) | **EMBER** | CA-1 roles |
+| **CA-6** | scouting → target choice (§12.9), with §9 item 12 (a)+(b) | **DAWN** (owns recon) | CA-1 heat map |
+
+CA-2 and CA-5 may start on the parts that do not need CA-1 (reading the existing
+`RegionMemory`), and switch to the tracker's ranges when it lands.
+
+Research round 2 ([`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9) adds phases that interleave
+with these: **CP** combat predictor (the single engage/commit/retreat authority; CA-2's commit
+rule and the 6c gate become its inputs), **ZG/IM** zone graph + influence layers (the region set
+and "where they usually are"), **UT** utility strategist (absorbs CA-3's blended squad manager),
+**MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
