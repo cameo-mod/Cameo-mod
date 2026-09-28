@@ -354,6 +354,9 @@ economy pacing) over anything resembling a cheat — the acceptance is
 | nw-ab-5 | fransbot vs hard | post-ResourceMap (#607) | fransbot 0-2 | expansion live (LandOre/BuildingRefinery commit + retry), first building kill, longest survival ~22k ticks; RAIDs get `bids 0` — recon never reaches the enemy base so no fresh visible targets exist |
 | nw-ab-6 | fransbot vs classic | post-#607 | fransbot 0-2 | vs true omniscient `classic`: 0:16 and 0:18 buildings, army$ 0 both — donor stack alone cannot fight the reference |
 | nw-ab-7 | hard vs classic | post-#611 | running | first VALID `hard` baseline — pre-#611 hard-side numbers were a blind master AI |
+| nw-hard2 | hard vs classic (ra1_soviets mirror) | W1-armed hard (genericbot && hardbot) | hard 1-1 | first post-W1 lane; m1 loss 48067t (units 427:474, assets 65k:184k), m2 WIN 33447t (buildings 54:7, assets 301k:50k); m3/m4 died inside a mid-edit yaml window — invalid |
+| nw-hard3 | hard vs classic (ra1_soviets mirror) | W1-armed hard | running | m1 loss 21831t (bld 2:35, rush→turtle latch at WT3607), m2 loss 35790t (bld 9:53, army 0:103k) |
+| nw-classic6 | fransbot vs classic (donor smoke) | 6-capacity ground + probes | fransbot 0-1 | 14410t, bld 2:23; structural proof only: ground1-6 all register + missions distribute in parallel (52 RECON, 15 DEFEND) |
 
 ⚠ nw-ab-4/5 `hard`-side numbers predate #611 (`IsEligible` saw no enemies) —
 they read as "hard's squad machinery carries it anyway", not as a fair test.

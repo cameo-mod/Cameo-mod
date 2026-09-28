@@ -42,11 +42,11 @@ Player:
 	FransEconomicSaturationBotModule:
 		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransCommanderCoreBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransCommandBidBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransGeneralBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 		RaidPublishRememberedBuildings: true
 		ReconProbeSpawnRepeatTicks: 4500
 		RaidInterferencePriorityBonus: 40
