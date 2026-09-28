@@ -918,6 +918,26 @@ weights, hence bandits with exploration rather than fixed tables), and **distrib
 11. **Do CN's hysteresis constants ship as Cameo's defaults**, or get re-fitted from phase-2 logs
     before phase 3 turns switching on? Leaning: ship CN's as the starting point, since they were
     tuned against a switching bot in this engine family, and re-fit after the first logged matches.
+12. **How does a fog-honest offense get fresh target intel?** Measured 2026-09-28 (nw-ab-5/6,
+    `FransGeneralBotModule` recon loop): ordinary RECON selects only the nearest *stale
+    MineCluster* on a geographic fan from home — there is no candidate class for "the enemy's
+    probable base". `FransMissionType` has no assault verb; `Raid` is the only offense, and
+    `TryBuildGroundRaidBid` rejects remembered-intel targets (a deliberate fog-honesty rule —
+    `FransRaidIntel` docs reserve remembered-building strikes for Sea). Result on A Nuclear
+    Winter: recon fans stall on mineral waypoints short of the enemy base, every RAID publishes
+    `bids 0`, zero enemy buildings die across six matches. The choices, in increasing size:
+    a. **Spawn-directed recon** — `Map.ActorDefinitions` `mpspawn` cells are public map data
+       (lobby-visible to every human). Add unscouted-spawn cells as a RECON candidate class
+       alongside mine clusters (same cooldown/staleness machinery, higher priority for cells
+       whose fan arm is unexplored). Fog-honest, minimal, and it is what every human does.
+    b. **Bounded remembered-building raids for ground** — permit `IsRememberedIntel` targets
+       when `IsBuilding` is true (buildings cannot move; last-seen cell stays valid), inside a
+       freshness window. Extends the Sea-only rule by one axis.
+    c. **A distinct assault/base-attack verb** — a heavier mission type with escort/consolidation
+       semantics, versus teaching Raid to fill the gap.
+    Leaning (a)+(b): they are orthogonal, both fog-honest, and together they close the
+    "no fresh targets -> no bids -> no pressure" funnel without new verbs. (c) only if the
+    combined change still cannot produce raid bids in measured matches.
 
 ---
 
