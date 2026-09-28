@@ -659,7 +659,10 @@ namespace OpenRA.Mods.CA.Traits
 			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
-		// Fogged scans require a currently visible actor; mission consumers add remembered FrozenActor targets separately. With FoggedScans disabled, the fallback may select an unseen actor, inheriting the existing omniscient behavior of that mode rather than introducing a mission-layer cheat.
+		// Fogged scans require a currently visible actor; mission consumers add remembered
+		// FrozenActor targets separately. With FoggedScans disabled, the fallback may
+		// select an unseen actor, inheriting the existing omniscient behavior of that
+		// mode rather than introducing a mission-layer cheat.
 		internal Actor FindClosestEnemy(CPos location, int attackerValue, Player targetPlayer, SquadCA owner = null)
 		{
 			if (targetPlayer == null)
