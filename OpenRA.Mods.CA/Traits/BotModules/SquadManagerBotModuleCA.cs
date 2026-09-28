@@ -718,14 +718,15 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
-		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue,
+			Func<BotMission, bool> exclude = null)
 		{
 			if (providers == null)
 				return null;
 
 			foreach (var provider in providers)
 				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue)
+					if (mission != null && mission.RequiredValue <= idleForceValue && (exclude == null || !exclude(mission)))
 						return mission;
 
 			return null;
@@ -934,45 +935,37 @@ namespace OpenRA.Mods.CA.Traits
 				FrozenActor missionFrozenTarget = null;
 				if (Info.UseMissions && missionProviders?.Length > 0)
 				{
-					mission = BestAffordableMission(missionProviders, idleUnitsValue);
-					if (mission?.Type == BotMissionType.Defend)
+					// A Defend whose hold window already lapsed this cycle is excluded at
+					// selection time so it can't shadow a Raid sitting behind it in the
+					// published order (Defend has RequiredValue 0 and would always win).
+					mission = SelectMission();
+					while (mission?.Type == BotMissionType.Defend)
 					{
-						if (defendMissionExhaustedRegion != mission.RegionIndex)
-							defendMissionExhaustedRegion = -1;
-
-						if (defendMissionExhaustedRegion == mission.RegionIndex)
+						if (heldDefendMission == null)
 						{
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							heldDefendMission = mission;
+							defendMissionHeldSince = World.WorldTick;
 						}
 						else
+							heldDefendMission = mission;
+
+						var heldTicks = World.WorldTick - defendMissionHeldSince;
+						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
 						{
-							if (heldDefendMission == null)
-							{
-								heldDefendMission = mission;
-								defendMissionHeldSince = World.WorldTick;
-							}
-							else
-								heldDefendMission = mission;
-
-							var heldTicks = World.WorldTick - defendMissionHeldSince;
-							if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
-							{
-								AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
-									Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
-								return;
-							}
-
-							AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
-								Player.ClientIndex, mission.RegionIndex, heldTicks);
-							defendMissionExhaustedRegion = mission.RegionIndex;
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+							return;
 						}
+
+						AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+							Player.ClientIndex, mission.RegionIndex, heldTicks);
+						defendMissionExhaustedRegion = mission.RegionIndex;
+						heldDefendMission = null;
+						defendMissionHeldSince = -1;
+						mission = SelectMission();
 					}
-					else
+
+					if (mission?.Type != BotMissionType.Defend)
 					{
 						heldDefendMission = null;
 						defendMissionHeldSince = -1;
@@ -986,6 +979,14 @@ namespace OpenRA.Mods.CA.Traits
 							missionFrozenTarget = FindFrozenEnemyTarget(
 								World.Map.CenterOfCell(mission.Location), idleUnitsValue, null, mission.TargetPlayer);
 					}
+				}
+
+				BotMission SelectMission()
+				{
+					return BestAffordableMission(missionProviders, idleUnitsValue,
+						m => defendMissionExhaustedRegion >= 0
+							&& m.Type == BotMissionType.Defend
+							&& m.RegionIndex == defendMissionExhaustedRegion);
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);

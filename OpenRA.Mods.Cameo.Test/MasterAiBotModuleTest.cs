@@ -806,5 +806,28 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
 		}
+
+		[Test]
+		public void BestAffordableMissionSkipsExcludedMissions()
+		{
+			var defend = new BotMission { Type = BotMissionType.Defend, RequiredValue = 0, RegionIndex = 4 };
+			var raid = new BotMission { Type = BotMissionType.Raid, RequiredValue = 0, RegionIndex = 8 };
+			var providers = new[]
+			{
+				new StubMissionProvider { Missions = new[] { defend, raid } }
+			};
+
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 0), Is.SameAs(defend));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0,
+					m => m.Type == BotMissionType.Defend && m.RegionIndex == 4),
+				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => m.Type == BotMissionType.Defend),
+				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => true),
+				Is.Null);
+		}
 	}
 }
