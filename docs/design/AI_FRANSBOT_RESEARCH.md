@@ -398,6 +398,14 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
   if the faction has one; skip otherwise).
 * ✅ Maintainer ruling 2026-09-27: **the `PlaceBeacon` shadow is approved** — the earlier lane
   caveat is resolved. The shadow still must be proven with a Cameo-only field before merging.
+* **SHIPPED 2026-09-28 (EMBER):** `OpenRA.Mods.Cameo/Traits/PlaceBeacon.cs` shadows the trait
+  verbatim plus `TrackForBots` (the Cameo-only proof field); `BeaconTracker` (WorldActor)
+  records `(owner, pos, tick)`; `BeaconResponderBotModule` answers allied beacons — remembered
+  or visible hostiles near the ping pull up to `MaxResponseUnits` idle combat units through the
+  risk gate, a ping on an allied building pulls a repair unit (`RepairsUnits`/`InstantlyRepairs`/
+  `RepairsBridges` trait-detected, skipped if the faction has none). Responders are claimed from
+  the squad manager's idle pool and released on death, squad claim, or idle after
+  `ReleaseAfterTicks`. `PlaceBeaconShadowTest` guards the shadow field-superset (rule 8b).
 
 ### 9. Stats-derived effective value (optional this month)
 
