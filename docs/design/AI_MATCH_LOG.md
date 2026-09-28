@@ -110,6 +110,12 @@ schema-1 records in the same file remain valid and the aggregator pools both
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.
+- `arsenal` — the player's `BotArsenalLedger` (AI_ARCHITECTURE.md §12.3, CA-1): one object per own
+  actor type, ordered by `killed_value` — `created`, `lost`, `lost_value`, `killed_value` (value of
+  enemy actors this type destroyed) and `killed_by_victim` (that value split by victim type). Booked
+  by Cameo's `UpdatesPlayerStatistics` shadow (Info subclasses the engine's, trait wraps it), so
+  every actor carrying that trait counts; pre-placed and starting units count as `created`.
+  Empty when the ledger trait is absent.
 - `opponents` / `allies` — every eligible player other than the subject, split
   by the **stance masks** (`p.AlliedPlayersMask.Overlaps(subject.PlayerMask)`),
   NOT by `player.IsAlliedWith`. The masks are assigned once by
