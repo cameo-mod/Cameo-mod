@@ -186,6 +186,175 @@ consumer-visible assembly, per the `IBotRegionThreatProvider` precedent).
 - Tests: `tools/tests/test_ai_combat_analysis.py` (5 tests: registration,
   Player-not-World placement, role/demand-name match, interface contract,
   producer-only guard).
+## 2026-09-28 — DAWN: Fransbot production unblocked (ConstructionYardTypes gap)
+
+- **Bug:** Fransbot ticked, planned and published missions but never produced:
+  `resources_spent: 0`, `army_value: 0`, `queues busy 0/0` across td_nod AND
+  ra1_soviets smoke matches. Three layers were peeled:
+  1. TD ruleset circular prereq deadlock (refinery→`nuke`→NUK2→`anytdhq`→
+     commcenter→refinery) — pre-existing master issue, bricks ALL bots there.
+  2. `is_power` classified conyards as power plants → opening auto-passed
+     `Power1` → waited on a power plant that was never queued. Fixed in the
+     generator: `is_power` now excludes any structure producing building queues.
+  3. **Root cause:** the generator emitted no `ConstructionYardTypes` (or
+     `RefineryTypes`, `ProductionTypes`, `HarvesterTypes`, `McvTypes`,
+     `TechTypes`, `NavalProductionTypes`, `WaterTerrainTypes`) on
+     `FransBaseBuilderBotModule`, and no `UnitQueues`/`ProductionQueueCategories`
+     on FransUnitBuilder/FransEconomicSaturation. The conyard index
+     (`ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>`) stayed empty →
+     `ChooseOpeningBuilding` dead-ended at "no live construction yard" forever.
+     Upstream supplied these via C# defaults (`powr`/`mcv`/… actor ids and
+     `Infantry`/`Vehicle`/… queue names); the vendored port emptied every
+     [ActorReference] field for the generated lists but these puts were never
+     written — the field-sweep originally missed them.
+- **Fix:** `tools/ai/gen_fransbot_lists.py` — added the 12 missing `put`s,
+  `unit_queue_names` (non-building queue names minus meta/building queues) and
+  WATER/SHORE terrain constants. 127→140 emitted fields. `--check` clean.
+- **Instrumentation:** `FransBaseBuilderBotModule` now logs `[FRANS-PROD]`
+  queue topology (category→queue-count per 250 WT), every silent
+  `ChooseOpeningBuilding` early-return reason, and every `TickQueue` gate.
+  ⚠ first attempt used `int.MinValue` sentinels — `WorldTick - int.MinValue`
+  overflows negative so the throttle never fired; init to `-1000` instead.
+- **Verified live** (`ai_fransbot_smoke_20260928`, ra1_soviets, 4500 WT):
+  PWR1@152 → BARR@502 → PROC1@1352 → PROC2@2202 → PWR2@2402 → WEAP@3002 →
+  FIX@3852 — the full upstream opening chain placed. Final: `resources_spent`
+  15706, `resources_earned` 8750 (harvesters), `assets_value` 23660,
+  `army_value` 7660, `buildings_killed` 1 (killed the inert player's conyard).
+
+## 2026-09-28 — DAWN: engine isolation + vendored-source drift audit
+
+- **Engine isolation (maintainer order `ORDERS_2026-09-28`):** `engine/` was a
+  junction into the main checkout's `engine/` — every dawn-ai build/bin-write
+  landed in the maintainer's `engine\bin`, and a 55-min `--check-yaml` held
+  `OpenRA.Game.dll` and blocked `make.cmd all` there. Junction removed
+  (`rmdir` on the link only), `make.cmd all` fetched a private engine copy
+  (`engine/VERSION` = `462fc1fc…`, matches `mod.config`), full build 0 errors,
+  boot-gate re-run on the isolated bin PASS. New rule for this tree: never
+  `--check-yaml` against a shared bin; >15 min lint = stuck, kill it.
+- **Vendored-source drift audit** (`tools/audit/audit_fransbot_drift.py`,
+  Claude's #578 note 3): diffs `OpenRA.Mods/Fransbot/Traits/*.cs` against the
+  upstream clone (`src/Fransbot.OpenRA/Traits` @ `3cb13dd` V1.29.19-RC).
+  Baseline `tools/ai/fransbot_drift_baseline.json` records per-file
+  +added/-removed diff counts (28 vendored files: 27 upstream + the new
+  `FransActorClass.cs`; current delta +347/-284 lines). `--check` fails if the
+  vendored file set or any per-file delta moves — catches silent edits to
+  vendored code after upstream re-vendors. Registered in `run_all.sh`.
+- **BotRoleSets handoff to Claude** (his #578 note 1): full 127-field
+  field→predicate spec posted to the fleet
+  (`HANDOFF_2026-09-28_dawn_frans_fields_for_roles.md`). ~55 field-sites are
+  `DeriveHas`-expressible today; ~40 need `DeriveFieldIn` (locomotor/queue) or
+  `DeriveFieldCmp` (cost/speed/dimensions); ~25 stay generator-fed unless a
+  deep `DeriveWeapon`/`DeriveIntoActor` primitive lands. `Targets` must union
+  across `Apply` entries — most Frans fields are multi-predicate unions.
+- **Lobby entry** (Claude's #578 note 2): `ModularBotInfo` has no `Hidden`
+  field — lobby enumerates `IBotInfo`s unconditionally, so hiding needs an
+  engine change which Route-A forbids. With the generated lists populated the
+  `fransbot` entry is now functional rather than dead; final behavior
+  verification is the comparison match (NOVA's batch harness).
+- **#569 verify:** Fransbot compiles clean against bleed engine
+  `465c5c29…` under `net10.0`/C#13 — 0 errors/0 warnings (scratch tree verify;
+  fleet `STATUS_2026-09-28_dawn_verify_569.md`).
+
+## 2026-09-28 — DAWN: Fransbot RA-id logic sites converted to trait classification
+
+- New `OpenRA.Mods.Fransbot/Traits/FransActorClass.cs` — shared static classifier
+  replacing upstream's hard-coded Red Alert id literals: IsHarvester/IsRefinery/
+  IsConyard/IsMcv/IsProducer/IsNavalProducer/IsAirProducer/IsRadar/IsRepairDepot/
+  IsSilo/IsPowerPlant/IsSuperweapon/IsTechCenter/IsInfantry/IsNaval/IsGround/
+  IsVtol/IsFixedWing/IsArmed/IsDefense/IsTank + weapon-resolution helpers
+  (`WeaponTargets`, `MaxWeaponRange`) via `rules.Weapons`.
+- Converted every `Info.Name == "<raid>"` / id-switch logic site across Air
+  Commander (soft/hard raid aircraft → VTOL/fixed-wing armed aircraft; raid target
+  rank ladder → refinery/conyard-mcv/harvester/AA-infantry/artillery/tank traits),
+  General (proc/fact/mcv/hpad/afld lookups → trait checks; air anchor now picks
+  the nearest own AIR PRODUCER rather than hpad-vs-afld name checks),
+  Ground/Sea commander priority ladders (AA-defense/harvester/conyard/refinery
+  and naval-producer ladders preserved by trait), SpecOps C4 value table
+  (superweapon>tech/conyard>producer>radar/repair>refinery) and its engineer
+  check (e6 → Captures/RepairsBridges on managed types), CommanderCore infantry
+  classification.
+- KEPT as tokens (not actor ids): `TargetActorType == "fact"`/`"minecluster"` —
+  those are mission-kind labels published by General, handled explicitly where a
+  type string may be either a real id or a token.
+- Gates: Fransbot+full-solution build 0/0 (shared `engine/bin` had a stale
+  EMBER-built CA dll mid-flight — rebuilt whole solution so bin is consistent),
+  boot-gate PASS (`PostWorldLoaded`), 248/248 tests PASS.
+
+## 2026-09-28 — DAWN: Fransbot actor lists generated from traits (same branch, continues above)
+
+- New `tools/ai/gen_fransbot_lists.py`: resolves the full ruleset through
+  `tools/audit/miniyaml.Ruleset` and emits `mods/cameo/ai/fransbot_lists.yaml` —
+  every `[ActorReference]` list field on the Frans modules filled from trait
+  predicates (~127 fields, ~14.6k ids), never hand-typed. Predicates:
+  `Harvester`→harvesters, `Transforms`+¬`Building`→MCVs, `Building`+`BaseBuilding`+
+  `Production`→conyards, `Building`+attack-trait→defenses, weapon `ValidTargets: air`
+  →AA, `Mobile.Locomotor`∈{naval,lcraft}→naval, `Cargo`→transports,
+  `StoresPlayerResources`→silos, `Power.Amount>0`→power plants, `ProvidesRadar`→radar,
+  `RepairsUnits`→repair depots, `ProvidesPrerequisite` granting *tech*/*tek*→tech
+  centers, *Power traits→superweapons, `Captures`/`RepairsBridges`→specialists.
+- Emission formats: `FrozenSet`/`string[]` → csv, `FrozenDictionary` → child
+  `id: weight` nodes. Registered `cameo|ai/fransbot_lists.yaml` in `mod.yaml`.
+- Non-actor string fields keep upstream C# defaults (terrain names, power-order
+  names, `BuildingQueues` — emitted as observed queue names in raw case).
+- New `tools/audit/audit_fransbot_lists.py` (registered in `run_all.sh`) wraps the
+  generator's `--check` so stale lists fail the suite.
+- ⚠ INTERIM by design: the union ids reference every faction's actors, so the file
+  only validates while all ContentPacks load — fine today, wrong end-state. The
+  long-term fill is `BotRoleSets.Targets` (Claude's lane, merged in #575): roles
+  derive per-loaded-ruleset and ContentPacks can declare `BotRoles`. Needed
+  extensions proposed: `DeriveLocomotor` (naval), `DeriveProduces` (per-queue
+  producers), field-value checks (cost/speed/power-amount) — mapping table in the
+  generator comments doubles as the migration spec. Dict fields
+  (`UnitsToBuild`/`UnitLimits`/`UnitDelays`) can't be role-filled (`Union()` only
+  handles set types) and aren't `[ActorReference]`-validated, so they may stay
+  generated even at end-state.
+
+## 2026-09-28 — DAWN: Fransbot Route-A side-by-side port compiles + boots (branch `devin/dawn/fransbot-route-a`)
+
+`Agent: DAWN (Devin CLI) · lane: Fransbot side-by-side port per fleet ORDERS 2026-09-27 · worktree C:/tmp/dawn-ai`
+
+- Vendored 27 Fransbot modules (V1.29.23 tag) into `OpenRA.Mods.Fransbot/` with its own
+  csproj registered in `CameoMod.sln`; assembly appended LAST in `mod.yaml` `Assemblies` so
+  `ObjectCreator.FindType` never shadows an existing type.
+- New `mods/cameo/ai/fransbot.yaml` wires a dedicated `fransbot` bot type:
+  `ModularBot@Fransbot` + `GrantConditionOnBotOwner@fransbot` (`enable-fransbot`); all Frans
+  modules hang off that condition so genericbot and fransbot never dual-tick. Fluent name
+  `bot_ai.fransbot` added to `en.ftl`.
+- Engine-API drift fixed (vendored source predates cameo-engine): `IsCloseEnoughToBase`
+  gained a `producer` param (~11 sites, `null` where safe = conservative base-proximity),
+  `IsCellBuildable` arg order, `IFirepowerModifier.GetFirepowerModifier` now takes the
+  armament name (moved inside the armament loops in CommanderCore).
+- `IBotBaseExpansion.IsConyardRelocationPending` implemented on `FransMcvExpansionManager`
+  returning `false`: Fransbot tracks MCV/conyard lifecycle via its own `activeConyard` +
+  `GrantBaseBuilderLock`; the only consumer (CA `BaseBuilder`'s `RelocationHoldConyard`)
+  belongs to a different bot type, so the shim is inert either way.
+- ~75 `[ActorReference]` RA-name defaults emptied (ContentPack world has no globally-loaded
+  actor; validation is per-ruleset). Validators that *required* non-empty lists relaxed to
+  accept empty = feature off; the three `FrozenDictionary` fields upstream defaults to
+  `null` (`UnitsToBuild`/`UnitLimits`/`UnitDelays`) now default to `Empty` — the null dict
+  NRE'd the boot at `FransUnitBuilder..ctor:307` (`ActorIndex.OwnerAndNames` on `.Keys`).
+- Fog-of-war audit of all nine `IBotRespondToAttack` handlers + world scans: two real
+  leaks fixed — `FransDefenseCommander` and `FransBaseBuilder` read a possibly-hidden
+  attacker's `Info.Name`/`Location`; now gate on `CanBeViewedByPlayer` and fall back to the
+  victim's own cell (Fransbot's own Minelayer convention). `FransMcvExpansion`'s
+  `ActorMap.AllActors` path-blocker scan reviewed and KEPT: it mirrors what
+  `BlockedByActor` physically does when the move executes.
+- `BotGlobalUnitBudget` verified safe for fransbot: it is `IBotRequestPauseUnitProduction`
+  (not `IBotTick`), consumed by `FransUnitBuilder.requestPause` — the global FPS cap binds
+  fransbot bots too. Left ungated on purpose.
+- Gates: Fransbot + full solution build 0/0; boot-gate PASS (`PostWorldLoaded`, no new
+  exceptions — the earlier NRE was this lane's own pre-fix run); `--check-yaml` has ZERO
+  Fransbot findings (remaining ~pre-existing master noise unchanged); `audit_ai_personalities`
+  PASS; `audit_ai_frankenstein` PASS (140 symbols); `ai_bot_player_gate` PASS.
+- Caveat: `engine/bin` is junctioned and SHARED across worktrees — EMBER's and my builds/
+  `--check-yaml` zombies interleave in it. Fransbot dll verified fresh before the boot; the
+  yaml lint result is still valid because zero findings named any Frans type.
+
+**Still open in lane:** per-faction content lists (the port runs on empty sets = modules
+mostly idle until ContentPack ai rows land — Claude owns pack AI rows, coordinate for the
+`fransbot` personality file), the ~17 RA-id logic sites (air commander's `"harv"`/`"mcv"`
+preferences → trait-based classification), upstream sync cadence, and a real Fransbot-vs-
+Cameo match once personalities exist.
 
 ## 2026-09-28 — AI match log schema 2: composition + episode telemetry (NOVA)
 
@@ -13539,3 +13708,87 @@ bypassing interval+hold. Dealt-to-them side still has no producer —
 documented one-sided. Gates: 264/264 tests, ai_squad_gate PASS on the
 ISOLATED worktree engine (junction removed per maintainer order),
 boot-gate PASS.
+## 2026-09-28 (early) — DAWN fransbot production chain, commit pending
+
+**Done:** Fransbot Route-A opening now reaches the MCV stage. Three
+cross-faction/deadlock defects found + fixed in this pass:
+
+1. **Hybrid queue domains dead literals.** Cameo hybrid mode types its live
+   queues `RAInfantry`/`RAVehicle`/`RAAircraft`/`RANaval`/... while the vendored
+   code probed `queuesByCategory["Infantry"]` etc. — every hit empty. Added
+   `FransQueueDomains` (ruleset-derived domain aliases) in `FransActorClass.cs`;
+   converted UnitBuilder opening/protected/saturation paths, GroundTransfer and
+   McvExpansionManager landing-craft lookups, and `FransEconomicSaturationBotModule`
+   `BuildingQueueCategory` → `BuildingQueueCategories` (generator emits aliases).
+2. **No-light-vehicle faction deadlock.** `ra1_soviets` has no configured
+   `OpeningLightVehicleTypes` entry; `Producible` is queue-TYPE matched (cross-
+   faction included) so "is it ever buildable" lied. Skip check now uses
+   `BuildableItems()` (`QueueCanBuild`), and a faction with no light type
+   substitutes the cheapest buildable armed ground vehicle — WT3030 substituted
+   `ra1_soviets_gorynychtank`; oretruck followed at WT3690.
+3. **MCV cross-faction pick.** `RequestOne`/`RequestExpansionMcv`/
+   `TryPrequeuePioneerSuccessorMcv` picked `McvTypes.OrderBy(x=>x).First()` =
+   `asianalliance_mobileconstructionvehicle` for a Soviet bot — request
+   outstanding ~3500 WT, never materializes, `openingMcvRequestIssued` latch
+   blocked any retry. Now `PickBuildableType`/`PickBuildableMcvType` pick the
+   first faction-buildable type; the requested type is recorded
+   (`openingMcvRequestedType`); a vanished outstanding request clears the latch
+   and reissues.
+
+**Fleet:** EMBER #588 (D2k/Outpost2 central `*Types` id appends) reviewed —
+verified pure-append (118 ids, 0 removed), no overlap with this lane. Maintainer
+orders ACK'd: git author already `AedisToru`; `engine/` junction already a real
+dir here.
+
+**Test protocol:** both AI test maps force `World.MapOptions.GameSpeed: insane`
+(10 ms timestep — `MapOptions` under `Player:` silently drops). ~2.5-4x faster;
+a 25k-tick duel takes minutes.
+
+**Next:** verify the versus run requests `ra1_soviets_mobileconstructionvehicle`,
+reaches `OpeningMcvCompleted`, and compare versus HardBot outcome; then
+boot-gate + commit.
+
+**Update (same session):** two more same-class gates found — (a) generated
+`DelayUntilOpeningMcvCompletedUnitTypes` contained every `is_mcv` → `IsUnitDelayed`
+self-gated the opening MCV request (blocked until an MCV completes, forever);
+regenerated as AA-vehicles-only, (b) `PriorityRequestedUnitTypes` lacked MCVs →
+request sat non-critical behind `!openingInProgress`. Added
+`is_capture|is_engineer|is_mcv`. Verified live: request WT3901 → START WT4200 →
+physically complete + `core opening complete` WT5726 → MCV deployed expansion
+conyard WT8673. Versus: lost at WT11924 but a real fight — 31 kills, 43 fielded
+(vs 0-2 kills / 15-18 fielded before). Also fixed same-class alphabetical/random
+picks in FransHarvester (cross-faction harvester requests — the anemic-economy
+cause), FransSupplyTruck, and both landing-craft pick sites (queue-name compat →
+BuildableItems). Shared helper: `FransActorClass.AnyOwnedQueueCanBuild`.
+
+**Update (producer-rebuild + worktree launch recipe):** next failure class after
+the opening-completion run — when HardBot's raid kills the warfactory *before*
+the service depot finishes, `stage=Repair` sat forever with
+`wanted∩buildable=()` (servicedepot prereq gone). `ChooseOpeningBuilding` now
+falls back to rebuilding missing opening producers upstream-first
+(power→barracks→refinery→warfactory→repair) via `IsOpeningProducerType` +
+`OpeningProducerRank` + `IsOwned` — no more permanent stall on a destroyed
+prerequisite.
+
+Launch recipe gotchas discovered after removing the `engine/` junction (the
+worktree engine is now a REAL dir):
+- `engine/bin/glsl/` was never copied → `DirectoryNotFoundException combined.vert`
+  at renderer init. Fix: `cp -r engine/glsl engine/bin/glsl`.
+- `Launch.Map` takes the map UID (`22de08a1...` for the versus map), not a
+  filesystem path.
+- Engine dir key is `Engine.EngineDir=`, not `Game.EngineDir=`.
+- Working recipe:
+  `OpenRA.exe Game.Mod=cameo Launch.Map=<UID> Engine.EngineDir=<wt>\engine Engine.ModSearchPaths=<wt>\mods Engine.SupportDir=`
+
+Fleet: fixed `.devin/skills/boot-gate` name-based kill step → PID/path-scoped
+(NOVA's kill-sweep flag was correct — it would sweep every lane's matches).
+
+**Update (opening defense posture):** every loss showed GENERAL publishing RAID
+missions from ~WT3000 onward, draining the base of defenders mid-opening.
+`FransGeneralBotModule` now suppresses NEW raid publication while
+`!IFransBaseBuilderService.OpeningComplete` (local FIGHT still authorizes
+reactive defense). Soviet versus after the change: WT9827, 19 kills, and 12
+enemy buildings razed (first nonzero building kills) — opening completed,
+raids unleashed post-completion did real damage. Also added
+`ai_fransbot_versus_allies_20260928` (ra1_allies FransBot): verified the
+non-substitute light-vehicle path and producer-rebuild on a second roster.
