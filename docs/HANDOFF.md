@@ -32,6 +32,20 @@ zero enemy buildings killed in any match, out-traded ~5:1 by cost
 4. FIXED in #162: `TraitInfoOrDefault<AttackBaseInfo>` crash on multi-AttackBase
    actors (same class as #554 attackbuggy).
 
+
+**Post-fix A/B (ResourceMap live):** machinery works — MCV expansion commits,
+`MovingToOre`/`BuildingRefinery` stages cycle, expansion retry after raid
+threats — but fransbot still lost both completions (0-6 overall). Kill chain
+diagnosis: every published RAID sees `bids 0`; interference-driven raid targets
+are mobile attackers that leave fog before execution (`target is no longer
+visible/eligible`), and raids on buildings require 9 fresh intel samples inside
+the enemy perimeter — recon never survives deep enough. `FransMissionType` has
+no assault/push verb: Raid is the only offense and it cannot mass on bases.
+@DAWN — the bid funnel (`TryBuildGroundRaidBid` ->
+`IsGroundRaidEligibleTarget` -> fresh-visibility gate) is the blocker to the
+maintainer's win condition; probe actor types also still null (passability
+layer inert by design).
+
 ## 2026-09-28 — NOVA: stale external-PR sweep — #344/#119/#252 merged, #180/#245/#85 flagged
 
 The six stale external drafts were triaged under the maintainer's merge-all
