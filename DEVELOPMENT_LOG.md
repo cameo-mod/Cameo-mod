@@ -1,3 +1,92 @@
+# 2026-09-28 — NOVA: Stage D AI-vs-AI batch harness + duel map + writer eligibility fix
+
+`tools/ai/run_ai_match_batch.py` + template map `mods/cameo/maps/ai_duel_gate_20260928/`:
+headless repeated AI-vs-AI matches feeding the schema-2 aggregator (Stage D of
+`AI_ARCHITECTURE.md` — "a script and a map rotation, not engine work"). The
+harness copies the template into the batch's isolated `Engine.SupportDir`
+user-map cache, patches `Bot:`/`Faction:`/`TimeLimitDefault` per matchup
+variant, launches `Launch.Map`+`Launch.Benchmark` (exits on GameOver), and
+slices appended `cameo-ai-matches.jsonl` records by byte offset per run.
+
+Engine findings the design had to survive (all verified in-tree):
+
+- `Launch.Map` creates a `ServerType.Local` server — SkirmishLogic and the
+  `slot_bot` command never fire; map-declared `Bot:` slots are the only bot
+  mechanism available headless.
+- The lobby refuses to start when every slot is empty, so the map keeps a
+  `Playable`+`Required` `Referee` slot the host occupies; it is inert
+  (`StartingUnitsClass: empty` -> insta conquest loss, decided early) and
+  invisible to records because `AiMatchLogWriter.IsEligiblePlayer` now honors
+  `PlayerReference.NonCombatant` — the map's declared intent survives where
+  `Player.NonCombatant` does not (lobby clients always get false).
+- Empty `Playable` slots produce NO `Player` at all (`CreateMapPlayers`
+  skips `client == null` slots) — the duelists are therefore
+  `Playable: False` + `Bot:` map-side players, the only shape that exists
+  headless AND plays. `IsEligiblePlayer` admits them via `IsBot`, so each
+  duelist is the other's only `opponents` entry — aggregator-clean 1v1.
+- Map-side bots get no `SpawnStartingUnits` (it is `Playable`-gated), so the
+  harness resolves each faction's `StartingUnits` group from the mod yaml and
+  pre-places the actors in the variant's `Actors:` at `HomeLocation`.
+- Terrain is a real melee map (Desert Rats donor, `desert-rats-cnc.oramap`,
+  mpspawns 22,16 / 49,55). A hand-made fixture first put BotB on a concrete
+  pocket ringed by water: the bot owned its units but could never deploy or
+  path — `McvExpansionManager` rescanned every index forever while worth and
+  liquidity sat frozen at spawn values. Lesson: `HomeLocation` must be
+  connected, buildable ground; verify by flood-filling passable tiles, not
+  by uniform tile ids (tile 256 there was `w1.des` Water, not Clear).
+- Cameo strips `MustBeDestroyed` from almost all actors -> conquest sees
+  nobody as eliminated; the map re-adds it to `^Building`/`^Vehicle`/
+  `^Infantry`/`^Defense` so elimination is real, and the locked
+  `TimeLimitManager` caps stalemates (`NotifyTimerExpired` ranks `Playable`
+  players only -> a timed-out duel records both bots `lost`, an honest draw).
+- A map's `rules.yaml` is inert unless `map.yaml` declares `Rules: rules.yaml`
+  — swapping the donor header without it made every variant die on
+  `No starting units defined for faction td_gdi with class empty`.
+- `Player.Spectating` is `WinState != Undefined` on non-mission maps, so the
+  writer's `IsAlliedWith` split short-circuited to "ally" for every decided
+  player — records showed both duel bots as mutual `allies` despite declared
+  `Enemies:` and real combat. `AppendRelationships` now reads the static
+  stance masks (`AlliedPlayersMask.Overlaps(subject.PlayerMask)`) assigned by
+  `SetupPlayerMasks` — immune to the post-resolution flip, and it repairs
+  normal skirmish records too (a decided loser was being logged as an ally
+  there as well). The old gate fixture never showed this because
+  `Visibility: MissionSelector` suppresses the flip entirely.
+- `Map.ComputeUID` hashes file bytes: two same-content variant dirs collapse
+  into one `MapCache` preview and `Launch.Map`'s name lookup then can't see
+  the other — surfaced as `Could not find map` when a hand-made verify dir
+  duplicated a batch variant. `write_variant` appends a per-dir comment salt
+  so uids are always unique.
+- Fixture runs `gamespeed: insane` (locked via `MapOptions` — the local
+  server's `option gamespeed default` order is rejected for locked options).
+  Per the maintainer: bot tests SHOULD run at high game speed for fast
+  iteration. Caveat measured live: `TimeLimit *= 60 * ticksPerSecond`, so a
+  10-minute cap becomes 60000 ticks — on a contended box the achieved rate
+  stays ~25-50 tps and a timeout match overruns the old wall bound. The
+  harness now uses a debug.log stall detector (2 min quiet -> kill) plus a
+  speed-aware generous backstop instead of a tight per-match timeout. Note
+  the asymmetry: insane only shortens matches that END EARLY (eliminations);
+  a timeout match is wall-normalized, so shorten `timelimit`, not gamespeed,
+  if quick draws are needed for pipeline checks.
+- `exit=1` mid-match with zero records and no exception is an EXTERNAL kill
+  (`TerminateProcess`), not an engine exit path (0/-1 only) — observed twice
+  on this multi-agent box, both times while other lanes ran matches; a
+  name-based `Stop-Process`/`taskkill` anywhere sweeps every lane. The
+  harness now retries a no-records attempt once and writes a durable
+  `batch_results.jsonl` line per attempt; verified live when attempt 1 died
+  at 445s and attempt 2 completed with both records.
+
+Writer change (Cameo lane, my own #425/#551 lineage): `IsEligiblePlayer`
+checks `!p.NonCombatant && !p.PlayerReference.NonCombatant && (p.Playable ||
+p.IsBot)`, and `AppendRelationships` splits on stance masks instead of
+`IsAlliedWith`. Everything else unchanged — normal skirmish records identical
+in shape, with post-game ally/opponent classification now *correct* instead of
+spectator-flipped.
+
+Tests: `tools/tests/test_ai_batch_harness.py` (15: matrix incl. mirror/side
+alternation, variant patching, template contract, writer guards incl. the
+stance-mask contract, record slicing). Smoke: map loads, bots field real
+`light` starts, records stream — verified end-to-end against a live match.
+
 # 2026-09-28 — NOVA: H1 human-likeness producer (`HumanPaceBotModule`/`IBotActionBudget`)
 
 The unassigned H1 item from `ORDERS_2026-09-27_ai_next_lanes.md` (AI_SYNTHESIS

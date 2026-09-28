@@ -720,7 +720,27 @@ over the fixed-policy comparator on compatible Cameo data (§11.3.5).
 
 **Stage D — AI-vs-AI batch harness.** Headless repeated matches across matchups, feeding stages
 B–C. This is what makes the data volume possible; it should be a script and a map rotation, not
-engine work.
+engine work. *Shipped:* `tools/ai/run_ai_match_batch.py` + template map
+`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns) —
+the harness copies the template into an isolated `Engine.SupportDir` user-map cache per matchup
+(faction × bot × time-limit patching + faction starting-unit actors written into `Actors:`),
+launches `Launch.Map`+`Launch.Benchmark` (exits on `GameOver`), and slices the appended
+`cameo-ai-matches.jsonl` per run. Constraints the map design had to satisfy, verified against
+the engine: a `Local` server refuses to start with every slot empty, so the map keeps an inert
+host-occupied `Referee` slot whose `PlayerReference.NonCombatant` keeps it out of every record's
+`opponents`/`allies` (lobby clients ignore `Player.NonCombatant`); empty playable slots produce
+no `Player` at all, so the duelists are `Playable: False` + `Bot:` map-side players (the writer
+admits them via `IsBot`) with `SpawnStartingUnits` bypassed by preplaced actors; Cameo strips
+`MustBeDestroyed` from most actors so the map re-adds it to the base templates for real
+elimination, and `TimeLimitManager` (locked) is the guaranteed terminator — its timeout ranking
+reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at high game
+speed:** the fixture locks `gamespeed: insane` (10 ms timestep, 4x default) so decisive matches
+resolve ~4x sooner in wall time and batches can be iterated in quick succession — the minutes
+cap then spans 4x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
+`AdaptiveGameSpeed` pacing slows the target rate under CPU contention rather than janking, so a
+generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
+match timeout. Match records are only comparable within one speed — a `10`-minute insane match
+contains 4x the simulated play of a default-speed one.
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.
