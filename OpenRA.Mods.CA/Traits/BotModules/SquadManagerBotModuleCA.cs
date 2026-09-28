@@ -913,28 +913,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var a in newUnits)
 			{
-				if (Info.HarasserTypes.Contains(a.Info.Name))
-				{
-					var harasserSquads = Squads.Where(s => s.Type == SquadCAType.Harass);
-					var matchingHarasserSquadFound = false;
-
-					foreach (var harasserSquad in harasserSquads)
-					{
-						if (harasserSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
-						{
-							harasserSquad.Units.Add(new UnitWposWrapper(a));
-							matchingHarasserSquadFound = true;
-							break;
-						}
-					}
-
-					if (!matchingHarasserSquadFound)
-					{
-						var newHarasserSquad = RegisterNewSquad(bot, SquadCAType.Harass);
-						newHarasserSquad.Units.Add(new UnitWposWrapper(a));
-					}
-				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
+				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
 				{
 					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
 
@@ -983,6 +962,27 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
+					}
+				}
+				else if (Info.HarasserTypes.Contains(a.Info.Name))
+				{
+					var harasserSquads = Squads.Where(s => s.Type == SquadCAType.Harass);
+					var matchingHarasserSquadFound = false;
+
+					foreach (var harasserSquad in harasserSquads)
+					{
+						if (harasserSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						{
+							harasserSquad.Units.Add(new UnitWposWrapper(a));
+							matchingHarasserSquadFound = true;
+							break;
+						}
+					}
+
+					if (!matchingHarasserSquadFound)
+					{
+						var newHarasserSquad = RegisterNewSquad(bot, SquadCAType.Harass);
+						newHarasserSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
