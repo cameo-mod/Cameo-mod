@@ -8864,9 +8864,10 @@ CPQDEBUGDUMMY:
 		Condition: CashTrickler
 
 ^BotMicromanageable:
-	GrantConditionOnBotOwner@aimicro:
+	# Unit abilities are never gated by bot difficulty or type (maintainer 2026-09-28): the CA trait with no
+	# `Bots:` list applies to every bot.
+	GrantConditionOnBotOwnerCA@aimicro:
 		Condition: botmicro
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
 
 ^BotAutoDeployTransport:
 	Inherits: ^BotMicromanageable
