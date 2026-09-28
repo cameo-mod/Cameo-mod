@@ -47,10 +47,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Role -> trait types that block the derived role.")]
 		public readonly Dictionary<string, string[]> DeriveNot = [];
 
+		[Desc("Role -> field predicates an actor must ALL satisfy to get the role by derivation:",
+			"`Trait.Field any v1|v2` (the field holds at least one of the values) or",
+			"`Trait.Field only v1|v2` (the field holds values and every one of them is listed).",
+			"Trait is the type name without Info (base classes count); values compare case-insensitively.",
+			"No commas inside a predicate: MiniYaml splits the list on them.")]
+		public readonly Dictionary<string, string[]> DeriveHasField = [];
+
+		[Desc("Role -> field predicates that block the derived role (same syntax as DeriveHasField).",
+			"E.g. `refinery: Building.TerrainTypes only Water` keeps water-only refineries out of a land base's pick.")]
+		public readonly Dictionary<string, string[]> DeriveNotField = [];
+
 		[Desc("Role -> actors that never get the role by DERIVATION. An explicit BotRoles entry still applies.")]
 		public readonly Dictionary<string, string[]> Exclude = [];
 
-		[Desc("Only actors with Buildable get a derived role.")]
+		[Desc("Only actors a queue can produce (Buildable with a Queue) get a derived role. Spawned slaves such as",
+			"YRSLAV carry Buildable for its tooltip but no Queue: their master drives them, not the bot.")]
 		public readonly bool DeriveOnlyBuildable = true;
 
 		[Desc("Role -> the module list fields it fills, as TraitType.Field. Every instance of that trait on this actor is filled.")]
@@ -61,15 +73,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IRulesetLoaded<ActorInfo>.RulesetLoaded(Ruleset rules, ActorInfo info)
 		{
+			var hasField = ParsePredicates(DeriveHasField);
+			var notField = ParsePredicates(DeriveNotField);
+			var fieldKeys = hasField.Values.Concat(notField.Values).SelectMany(p => p)
+				.Select(p => (p.Trait, p.Field)).Distinct().ToList();
+			var fieldSeen = new HashSet<(string, string)>();
+
 			var actors = rules.Actors.Values
 				.Where(a => !a.Name.StartsWith('^'))
 				.Select(a => new RoleCandidate(
 					a.Name,
 					TraitTypeNames(a),
 					a.TraitInfoOrDefault<BotRolesInfo>()?.Roles ?? FrozenSet<string>.Empty,
-					a.HasTraitInfo<BuildableInfo>()));
+					a.TraitInfoOrDefault<BuildableInfo>()?.Queue.Count > 0,
+					fieldKeys.Count == 0 ? null : fieldKeys.ToDictionary(k => k.Trait + "." + k.Field,
+						k => ReadField(a, k.Trait, k.Field, fieldSeen))))
+				.ToList();
 
-			var members = ResolveMembers(actors, DeriveHas, DeriveNot, Exclude, DeriveOnlyBuildable);
+			// A predicate no trait can ever satisfy is a typo, not a filter: fail at rules load.
+			foreach (var (trait, field) in fieldKeys)
+				if (!fieldSeen.Contains((trait, field)))
+					throw new YamlException($"BotRoleSets on {info.Name}: no actor has a `{trait}` trait with a public field `{field}`");
+
+			var members = ResolveMembers(actors, DeriveHas, DeriveNot, Exclude, DeriveOnlyBuildable, hasField, notField);
 
 			Log.AddChannel("bot-roles", "bot-roles.log");
 			foreach (var (role, targets) in Targets)
@@ -120,17 +146,104 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return names;
 		}
 
-		public readonly record struct RoleCandidate(string Name, ISet<string> TraitTypes, IReadOnlySet<string> ExplicitRoles, bool Buildable);
+		// Every value of Trait.Field over the actor's traits of that type (or a subclass), as strings.
+		static IReadOnlySet<string> ReadField(ActorInfo a, string trait, string field, HashSet<(string, string)> seen)
+		{
+			var values = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			foreach (var ti in a.TraitInfos<TraitInfo>())
+			{
+				if (!IsOrDerives(ti.GetType(), trait))
+					continue;
+
+				var f = ti.GetType().GetField(field, BindingFlags.Public | BindingFlags.Instance);
+				if (f == null)
+					continue;
+
+				seen.Add((trait, field));
+				foreach (var token in Tokens(f.GetValue(ti)))
+					values.Add(token);
+			}
+
+			return values;
+		}
+
+		static bool IsOrDerives(Type t, string trait)
+		{
+			for (; t != null && t != typeof(TraitInfo) && t != typeof(object); t = t.BaseType)
+				if (t.Name == trait + "Info")
+					return true;
+
+			return false;
+		}
+
+		static IEnumerable<string> Tokens(object value)
+		{
+			switch (value)
+			{
+				case null:
+					yield break;
+				case string s:
+					yield return s;
+					break;
+				case Enum e:
+					foreach (var part in e.ToString().Split(", "))
+						yield return part;
+					break;
+				case System.Collections.IEnumerable items:
+					foreach (var item in items)
+						if (item != null)
+							yield return item.ToString();
+					break;
+				default:
+					yield return value.ToString();
+					break;
+			}
+		}
+
+		static Dictionary<string, FieldPredicate[]> ParsePredicates(Dictionary<string, string[]> byRole) =>
+			byRole.ToDictionary(kv => kv.Key, kv => kv.Value.Select(FieldPredicate.Parse).ToArray());
+
+		public sealed record FieldPredicate(string Trait, string Field, bool Only, FrozenSet<string> Values)
+		{
+			public string Key => Trait + "." + Field;
+
+			public static FieldPredicate Parse(string text)
+			{
+				var parts = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+				var dot = parts.Length == 3 ? parts[0].LastIndexOf('.') : -1;
+				if (dot <= 0 || dot == parts[0].Length - 1 || (parts[1] != "any" && parts[1] != "only"))
+					throw new YamlException($"BotRoleSets: field predicate `{text}` must be `Trait.Field any|only v1|v2`");
+
+				var values = parts[2].Split('|', StringSplitOptions.RemoveEmptyEntries).ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+				return new FieldPredicate(parts[0][..dot], parts[0][(dot + 1)..], parts[1] == "only", values);
+			}
+
+			// `any`: some field value is listed. `only`: the field has values and all of them are listed.
+			public bool Matches(IReadOnlySet<string> fieldValues) =>
+				fieldValues != null && fieldValues.Count > 0 &&
+				(Only ? fieldValues.All(Values.Contains) : fieldValues.Any(Values.Contains));
+		}
+
+		public readonly record struct RoleCandidate(string Name, ISet<string> TraitTypes, IReadOnlySet<string> ExplicitRoles, bool Buildable,
+			IReadOnlyDictionary<string, IReadOnlySet<string>> Fields = null)
+		{
+			public IReadOnlySet<string> FieldValues(string key) =>
+				Fields != null && Fields.TryGetValue(key, out var v) ? v : FrozenSet<string>.Empty;
+		}
 
 		// Pure: role -> member actor names. Explicit BotRoles always count; derivations need every DeriveHas type,
-		// none of the DeriveNot types, and (optionally) Buildable, and are blocked by Exclude.
+		// none of the DeriveNot types, every DeriveHasField predicate, no DeriveNotField predicate, and
+		// (optionally) Buildable, and are blocked by Exclude. A role may be derived from field predicates alone.
 		public static Dictionary<string, HashSet<string>> ResolveMembers(
 			IEnumerable<RoleCandidate> actors,
 			IReadOnlyDictionary<string, string[]> deriveHas,
 			IReadOnlyDictionary<string, string[]> deriveNot,
 			IReadOnlyDictionary<string, string[]> exclude,
-			bool deriveOnlyBuildable)
+			bool deriveOnlyBuildable,
+			IReadOnlyDictionary<string, FieldPredicate[]> deriveHasField = null,
+			IReadOnlyDictionary<string, FieldPredicate[]> deriveNotField = null)
 		{
+			var derivedRoles = deriveHas.Keys.Concat(deriveHasField?.Keys ?? []).Distinct().ToArray();
 			var members = new Dictionary<string, HashSet<string>>();
 			HashSet<string> Of(string role)
 			{
@@ -147,11 +260,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (deriveOnlyBuildable && !a.Buildable)
 					continue;
 
-				foreach (var (role, has) in deriveHas)
+				foreach (var role in derivedRoles)
 				{
-					if (!has.All(a.TraitTypes.Contains))
+					if (deriveHas.TryGetValue(role, out var has) && !has.All(a.TraitTypes.Contains))
 						continue;
 					if (deriveNot.TryGetValue(role, out var not) && not.Any(a.TraitTypes.Contains))
+						continue;
+					if (deriveHasField != null && deriveHasField.TryGetValue(role, out var hasField) &&
+						!hasField.All(p => p.Matches(a.FieldValues(p.Key))))
+						continue;
+					if (deriveNotField != null && deriveNotField.TryGetValue(role, out var notField) &&
+						notField.Any(p => p.Matches(a.FieldValues(p.Key))))
 						continue;
 					if (exclude.TryGetValue(role, out var ex) && ex.Contains(a.Name))
 						continue;

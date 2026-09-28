@@ -12,36 +12,28 @@ something already built, `AI_ARCHITECTURE.md` and the code win._
 
 ## 0. TL;DR (read this if you read nothing else)
 
-1. **The Fransbot source is not available yet.** `github.com/f850484/OpenRA-Fransbot` (tag
-   `V1.29.19-RC`) returns **404**: the account `f850484` was created 2026-09-19 and has **0 public
-   repositories**, so the repo is private. The zip fransotto sent through `send.mni.li` has
-   **expired** (`/api/exists/c5e39f5134e55193` returns `Not Found`). No Wayback snapshot exists.
-   Only the older **yaml-only** FransBots releases are public (ModDB `mods/fransbots`, OpenRA forum
-   topic 21988), and both sites serve JS bot-challenges, so they cannot be scraped. **§6 (phase F0)
-   waits on the maintainer getting access.** Nothing else in this document does.
-2. **What fransotto described is the design Cameo's phase 6 already calls for, but further along.**
-   Phase 6 is *"fogged observation + ScoutBotModule"* (`AI_ARCHITECTURE.md` §10.6). It was ordered on
-   PR #455 on 2026-09-23 and **has not started**: there is no branch, and no `ScoutBotModule` or
-   `UseFoggedObservation` anywhere in the tree. Fransbot says it already runs a bot with no global
-   vision, on any map, using a **per-location memory of the cash value it has seen**. That memory
-   only refreshes when the area is re-scouted, and every order (Secure / Raid / Recon / Retreat) is
-   a **risk-versus-reward test over it**. That is a concrete, proven shape for phase 6. Build it now
-   from the description; diff against the source when it arrives.
-3. **Cameo already has the currency.** `MasterAiBotModule` already builds per-enemy profiles in
-   **cash value** (`ValuedInfo.Cost`, `BotSituation.cs:847`), split by infantry, vehicle, air, naval
-   and defence. It reads them from omniscient `World.Actors`, though (`BotSituation.cs:219`), and it
-   keeps no spatial memory.
-4. **The squads are omniscient too, not just the master.** Making only the master fogged leaves
-   `SquadManagerBotModuleCA.FindClosestEnemy` scanning `World.Actors`
-   (`OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:354-372`), so artillery squads keep
-   their max-range knowledge. Phase 6 is not finished until the squad target scans read the memory.
-5. **How much of the bot can we take?** The **algorithms**: value memory, risk gate, route risk,
-   recon targeting, beacon response, harvester estimation. Those are the most valuable thing in it.
-   The **files** are probably not drop-in. Fransbot is a fork of stock OpenRA (2-side RA, the Common
-   `SquadManagerBotModule`), while Cameo runs the CA forks plus its own master module. The yaml
-   build orders and compositions are RA-specific: **do not take them.** Cameo has 25 factions, and
-   the only part of Fransbot that scales to 25 factions is the part that *"reads the stats of the
-   unit files"*.
+1. **Source access is available.** The private `f850484/OpenRA-Fransbot` repository is
+   accessible to the authorized collaborators; `V1.29.19-RC` was inspected at `094a4d4`.
+   Source access is no longer the phase-F0 blocker. The side-by-side port is tracked in
+   PR #578, which remains draft pending its role-based configuration work. See
+   [`AI_SYNTHESIS.md`](AI_SYNTHESIS.md) §4 for the measured port contract.
+2. **Phases 6a–6e have landed.** Cameo has `BotFogMemory`, `RegionMemory`,
+   `ScoutBotModule`, the pre-commit risk gate, fogged squad scans, and risk routing.
+   The work-plan bullets below describe their design, not an instruction to build
+   duplicate implementations. Artillery attachment also exists; staging and
+   support-follow remain under review in PR #577.
+3. **Cameo retains cost-based threat estimates with spatial memory.**
+   `MasterAiBotModule` publishes the shared situation, using observed actors and
+   remembered contacts when `UseFoggedObservation` is enabled.
+4. **Fogged targeting reaches squad consumers too.** The CA squad manager consults
+   `IBotFoggedEnemyProvider`, filters visible candidates, and can use remembered
+   frozen buildings. The legacy path remains available when fogged observation is
+   disabled. The September-26 facts in §1.3 are historical evidence, not current
+   shipping status.
+5. **Reuse mechanisms, not RA-specific actor lists.** Cameo's role-based
+   configuration is specified in `AI_ARCHITECTURE.md` §2.8. The Fransbot port must
+   preserve one execution owner per unit and must not materialize a second central
+   inventory of every faction's actors.
 6. **Much of what Fransbot does already exists in public, GPLv3 code: CN's bot, and it is already
    cloned here.** The Astor conversation (§1.4) pointed at it, and the source confirms it (§3b):
    * `CNTacticalMapBotModule` splits the map into terrain **regions** bounded by chokepoints, with
@@ -53,9 +45,9 @@ something already built, `AI_ARCHITECTURE.md` and the code win._
      assault squad and only fires at what that squad can see**, support squads that follow, APC
      and air transports, and **priority targets per squad**.
 
-   None of this is mentioned in `AI_ARCHITECTURE.md` today. CN's profile-switching mechanism stays
-   forbidden (`AI_ARCHITECTURE.md` §1.6); the modules above act only through orders. **Read the CN
-   source first, and the Fransbot source when it arrives.**
+   CN's profile-switching mechanism stays forbidden (`AI_ARCHITECTURE.md` §1.6);
+   adapt its useful mechanisms through Cameo's existing decision owners. Compare
+   against both upstream sources and the current consumer before adding a module.
 
 ---
 
@@ -271,6 +263,12 @@ One PR per sub-phase. Each is shippable alone, and each honours the **degradatio
 (§10.1: a missing snapshot means today's behaviour). The window closes **~2026-10-22**, so the
 order below is also the priority order: stop wherever time runs out, and leave §7's handoff.
 
+**Shipping-state checkpoint (2026-09-28):** 6a–6e and 6f artillery attachment
+are implemented. The following bullets retain the original design requirements;
+they are not an unstarted-work queue. Staging/support-follow, the Fransbot port,
+and beacon response remain separately reviewed work. Consult the current PR
+head and `HANDOFF.md` before claiming any of those files.
+
 ### 6a. Fogged snapshot + region value memory (C#: `OpenRA.Mods.Cameo/Traits/BotModules/`)
 
 _**Status: implemented 2026-09-27** (`BotFogMemory` + `RegionMemory`, `UseFoggedObservation`
@@ -338,14 +336,17 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 ### 6f. Coordinated waves: artillery, support, growth (Astor's points)
 
 * Artillery squads **attach** to an assault squad, hang back N cells, and bombard only targets the
-  assault squad can see (CN A2/A6). Together with 6d, this is the fog-honest answer to the "bot
-  artillery always shoots at max range" complaint.
+  assault squad can see (CN A2/A6) — **shipped** in #554 (hang-back anchor, `FindAttachableAssault`).
 * Waves stage partway to the target and rally before committing (CN
-  `AttackWaveStagingProgressPercent`). Steamroller grows its wave threshold over time (CN A1). Make
-  growth a field on the `SquadManagerBotModuleCA@steamroller` instance, and **check #276's
-  time-scaled threshold first**, so there are not two growth mechanisms.
-* Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`).
-  Unit selection goes through compositions and tokens, never actor ids.
+  `AttackWaveStagingProgressPercent`) — **shipped**: `GroundUnitsStageStateCA` rallies Rush squads
+  at the own building nearest the target, commits when `StageAssemblePercent` arrive or
+  `StageTimeoutTicks` lapses, and fights early on contact. `StageBeforeAssault` gates it in yaml.
+  Steamroller's wave threshold already grows via #276's `SquadValueRamp*` fields (checked — no
+  second mechanism added).
+* Support squads (medics, repair) follow an attack squad (CN `Support`, `SupportFollowRangeCells`) —
+  **shipped**: `SquadCAType.Support`, `SupportUnitsIdleStateCA` trails `Parent` within
+  `SupportFollowRangeCells`, holding near base with no assault. Unit list is yaml
+  (`SupportUnitTypes`, same pattern as the other type lists — no actor ids in C#).
 
 ### 6g. Priority targets per squad, and air vs artillery — **implemented**
 
@@ -354,18 +355,20 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
   assault threshold (currently the longest-ranged ground armaments), `harvester` = any
   `Harvester` trait, `production` = `Production`/`ProductionQueue` owners, `superweapon` =
   actor names appearing in support-power `Prerequisites`.
-* `SquadCA.PriorityTags` carries the per-squad-instance list (CN A3). Yaml fields per squad
-  type: `GroundPriorityTags` / `NavalPriorityTags` / `AirPriorityTags` / `GuerrillaPriorityTags`
-  on `SquadManagerBotModuleCA`; unset = current behaviour.
-* `SquadManagerBotModuleCA.PreferSquadTargets` re-orders each enemy candidate list so
-  matching-tag actors come first, preserving the within-group order — visibility and risk
-  gates still run upstream, so a priority target that is fogged or suicidal is not picked.
+* `SquadCA.PriorityTags` carries the per-squad-instance list (CN A3). The fields are
+  `AssaultPriorityTags`, `RushPriorityTags`, `ArtilleryPriorityTags`, `NavalPriorityTags`,
+  `AirPriorityTags`, `GuerrillaPriorityTags`, and `ProtectionPriorityTags`.
+  `PriorityTagsFor` selects the set; `RegisterNewSquad` assigns it. Unset keeps the
+  current order.
+* `PreferSquadTargets` puts matching-tag actors first at its wired call sites,
+  preserving within-group order. It does not govern the separate
+  `FindHighValueTarget` lottery; do not claim priority tags apply to every scan.
 * `AirPriorityTags: artillery, harvester` on all five personalities answers the maintainer's
   question A4 (air raiders hunt enemy artillery). Verified: `BotTargetTagsTest` (5 tests),
   `tools/tests/ai_squad_gate.py` PASS, boot-gate PASS.
-* Deferred: `SquadCAType.Harass` does not exist in Cameo's enum (upstream CA has it — the
-  CA-sync lane adds it); when it lands, add `HarassPriorityTags` + one `case` in
-  `AssignPriorityTags`.
+* Deferred: the harasser type is proposed in PR #582. Its priority set belongs in
+  `PriorityTagsFor`; there is no `GroundPriorityTags` field or `AssignPriorityTags`
+  method to wire.
 
 ### 7. Island expansion (new Cameo module)
 
@@ -395,6 +398,14 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
   if the faction has one; skip otherwise).
 * ✅ Maintainer ruling 2026-09-27: **the `PlaceBeacon` shadow is approved** — the earlier lane
   caveat is resolved. The shadow still must be proven with a Cameo-only field before merging.
+* **SHIPPED 2026-09-28 (EMBER):** `OpenRA.Mods.Cameo/Traits/PlaceBeacon.cs` shadows the trait
+  verbatim plus `TrackForBots` (the Cameo-only proof field); `BeaconTracker` (WorldActor)
+  records `(owner, pos, tick)`; `BeaconResponderBotModule` answers allied beacons — remembered
+  or visible hostiles near the ping pull up to `MaxResponseUnits` idle combat units through the
+  risk gate, a ping on an allied building pulls a repair unit (`RepairsUnits`/`InstantlyRepairs`/
+  `RepairsBridges` trait-detected, skipped if the faction has none). Responders are claimed from
+  the squad manager's idle pool and released on death, squad claim, or idle after
+  `ReleaseAfterTicks`. `PlaceBeaconShadowTest` guards the shadow field-superset (rule 8b).
 
 ### 9. Stats-derived effective value (optional this month)
 
@@ -403,7 +414,7 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
   the rules the engine loaded, not by parsing yaml.
 * Feeds 6c (gate) and phase 5 (counter demand). This is where Cameo can **beat** Fransbot (C7).
 
-### F0. Source analysis, blocked until access (§6)
+### F0. Source analysis (access available; §6)
 
 ---
 
@@ -426,17 +437,15 @@ default true, `EnemyProfile.HarvesterCount`/`KnownRegions`, situation log fields
 
 ## 6. Phase F0: when the source arrives
 
-**Maintainer action (only the maintainer can do this):** ask fransotto either to add a
-collaborator on `f850484/OpenRA-Fransbot` (the maintainer's GitHub account; Devin's GitHub app
-cannot read a repo it was not granted), or to re-send the zip by a non-expiring route, or to make
-`V1.29.19-RC` public when he is comfortable. Clone it **outside** this repo (for example
-`~/Documents/GitHub/OpenRA-Fransbot`, next to the CA and CN clones).
+**Access checkpoint (2026-09-28):** the authorized source checkout is available.
+The earlier collaborator/expired-download blocker is resolved. Keep the checkout
+outside this repository and follow `AI_SYNTHESIS.md` §4 for the active port.
 
-**Then, in this order:**
+For a new source revision, retain this analysis order:
 
-1. Identify the upstream base: `git log --reverse | head` and the OpenRA tag it forked from. Diff
-   `OpenRA.Mods.Common/Traits/BotModules/**` against that tag. **The diff is the bot**; everything
-   else is noise.
+1. Identify its upstream base and compare the standalone `Fransbot.OpenRA`
+   project against the recorded vendor baseline. Do not assume its implementation
+   lives in the stock `OpenRA.Mods.Common` bot directory.
 2. Find the value memory: grep for `LastSeen`, `Memory`, `Threat`, `Risk`, `Value`, `Recon`,
    `Raid`, `Secure`. Record its region size, decay rule, and how moving units are de-duplicated.
 3. Find the island and transport logic (C12): grep `Cargo`, `Passenger`, `Transport`, `Island`,

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
@@ -271,7 +272,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				}
 
 				var tooltipExtras = actor.TraitInfos<TooltipExtrasInfo>();
-				extrasLabel.Text = string.Join("\n", tooltipExtras.Select(extra => FluentProvider.GetMessage(extra.Description)));
+				extrasLabel.Text = string.Join("\n", tooltipExtras.Select(extra => UnescapeNewlines(FluentProvider.GetMessage(extra.Description))));
 				var extraSize = new int2(0, 0);
 
 				if (extrasLabel.Text != "")
@@ -285,7 +286,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				var summary = versusContainer != null && versusTemplate != null ? VersusSummary.For(actor, mapRules) : null;
 				var derived = summary != null && summary.HasWeapons;
 
-				var desc = string.IsNullOrEmpty(buildable.Description) ? "" : FluentProvider.GetMessage(buildable.Description);
+				var desc = string.IsNullOrEmpty(buildable.Description) ? "" : UnescapeNewlines(FluentProvider.GetMessage(buildable.Description));
 
 				// DESIGN §7's hand-written "Strong vs / Weak vs" lines are replaced by the derived ones below.
 				if (derived)
@@ -493,14 +494,33 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				yield return FluentProvider.GetMessage(AttributeShielded);
 		}
 
-		static string StripHandWrittenVersus(string desc)
+		// A description that is not a fluent key comes back from GetMessage verbatim, and yaml cannot hold a
+		// real newline, so legacy descriptions spell it as the two characters `\n` (213 buildable actors on
+		// 2026-09-28). Without this they render literally and StripHandWrittenVersus never sees their lines.
+		internal static string UnescapeNewlines(string text)
 		{
-			var lines = desc.Split('\n').Where(line =>
+			return text.Replace("\\n", "\n");
+		}
+
+		// A sentence "Strong vs ..." / "Weak vs ..." inside a line, up to its full stop or the line end.
+		static readonly Regex InlineVersus = new(@"\s*\b(Strong|Weak) vs\b[^.\n]*\.?", RegexOptions.IgnoreCase);
+
+		internal static string StripHandWrittenVersus(string desc)
+		{
+			var lines = new List<string>();
+			foreach (var line in desc.Split('\n'))
 			{
 				var t = line.Trim().TrimStart('•', '-', '*', ' ');
-				return !t.StartsWith("Strong vs", StringComparison.OrdinalIgnoreCase)
-					&& !t.StartsWith("Weak vs", StringComparison.OrdinalIgnoreCase);
-			});
+				if (t.StartsWith("Strong vs", StringComparison.OrdinalIgnoreCase)
+						|| t.StartsWith("Weak vs", StringComparison.OrdinalIgnoreCase))
+					continue;
+
+				var stripped = InlineVersus.Replace(line, "").TrimEnd();
+				if (stripped.Trim().Length == 0 && line.Trim().Length != 0)
+					continue;
+
+				lines.Add(stripped);
+			}
 
 			return string.Join("\n", lines).TrimEnd('\n', ' ');
 		}

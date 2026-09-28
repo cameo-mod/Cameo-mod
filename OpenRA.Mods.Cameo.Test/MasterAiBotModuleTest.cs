@@ -77,11 +77,10 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
-				"main_target_score", "mission", "mission_assignment", "hints", "demand", "own", "enemies"
+				"main_target_score", "mission", "hints", "demand", "own", "enemies"
 			}));
 			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
 			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
-			Assert.That(doc.RootElement.GetProperty("mission_assignment").ValueKind, Is.EqualTo(JsonValueKind.Null));
 		}
 
 		[Test]
@@ -750,8 +749,8 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void DefendMissionUsesNineRegionThreatAndThreshold()
 		{
-			var setup = MissionRegions((4, 100, 100, 0));
-			var noDefend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 200,
+			var setup = MissionRegions((4, 100, 0, 0));
+			var noDefend = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 100,
 				new MasterAiBotModuleInfo());
 			Assert.That(noDefend, Is.Empty);
 
@@ -764,26 +763,45 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void DefendMissionIgnoresNeighbourDefenceButCountsBaseDefence()
+		public void NeighbourDefenceDoesNotPublishDefend()
 		{
-			var neighbourDefence = MissionRegions((1, 0, 100, 0));
-			var noDefend = MasterAiBotModule.DeriveMissions(
-				neighbourDefence.Regions,
-				new[] { neighbourDefence.Enemy },
-				4,
-				0,
+			var setup = MissionRegions((3, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
 				new MasterAiBotModuleInfo());
-			Assert.That(noDefend, Is.Empty);
 
-			var baseDefence = MissionRegions((4, 0, 100, 0));
-			var defend = MasterAiBotModule.DeriveMissions(
-				baseDefence.Regions,
-				new[] { baseDefence.Enemy },
-				4,
-				0,
+			Assert.That(missions, Is.Empty);
+		}
+
+		[Test]
+		public void BaseRegionDefencePublishesDefend()
+		{
+			var setup = MissionRegions((4, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
 				new MasterAiBotModuleInfo());
-			Assert.That(defend, Has.Count.EqualTo(1));
-			Assert.That(defend[0].Type, Is.EqualTo(BotMissionType.Defend));
+
+			Assert.That(missions, Has.Count.EqualTo(1));
+			Assert.That(missions[0].Type, Is.EqualTo(BotMissionType.Defend));
+		}
+
+		[Test]
+		public void NeighbourDefenceDoesNotPublishDefend()
+		{
+			var setup = MissionRegions((3, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions, Is.Empty);
+		}
+
+		[Test]
+		public void BaseRegionDefencePublishesDefend()
+		{
+			var setup = MissionRegions((4, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions, Has.Count.EqualTo(1));
+			Assert.That(missions[0].Type, Is.EqualTo(BotMissionType.Defend));
 		}
 
 		[Test]
@@ -832,13 +850,19 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void BestAffordableMissionSkipsExhaustedDefend()
+		public void BestAffordableMissionSkipsAllExhaustedDefends()
 		{
-			var defend = new BotMission
+			var firstDefend = new BotMission
 			{
 				Type = BotMissionType.Defend,
 				RegionIndex = 4,
 				Priority = 90
+			};
+			var secondDefend = new BotMission
+			{
+				Type = BotMissionType.Defend,
+				RegionIndex = 5,
+				Priority = 80
 			};
 			var raid = new BotMission
 			{
@@ -847,14 +871,71 @@ namespace OpenRA.Mods.Cameo.Test
 				RequiredValue = 100,
 				Priority = 60
 			};
-			var provider = new StubMissionProvider { Missions = new[] { defend, raid } };
+			var provider = new StubMissionProvider { Missions = new[] { firstDefend, secondDefend, raid } };
 
 			Assert.That(
 				SquadManagerBotModuleCA.BestAffordableMission(
 					new[] { provider },
 					100,
+					m => m.Type == BotMissionType.Defend &&
+						(firstDefend.RegionIndex == m.RegionIndex || secondDefend.RegionIndex == m.RegionIndex)),
+				Is.SameAs(raid));
+		}
+
+		[Test]
+		public void BestAffordableMissionSkipsAllExhaustedDefends()
+		{
+			var firstDefend = new BotMission
+			{
+				Type = BotMissionType.Defend,
+				RegionIndex = 4,
+				Priority = 90
+			};
+			var secondDefend = new BotMission
+			{
+				Type = BotMissionType.Defend,
+				RegionIndex = 5,
+				Priority = 80
+			};
+			var raid = new BotMission
+			{
+				Type = BotMissionType.Raid,
+				RegionIndex = 8,
+				RequiredValue = 100,
+				Priority = 60
+			};
+			var provider = new StubMissionProvider { Missions = new[] { firstDefend, secondDefend, raid } };
+
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(
+					new[] { provider },
+					100,
+					m => m.Type == BotMissionType.Defend &&
+						(firstDefend.RegionIndex == m.RegionIndex || secondDefend.RegionIndex == m.RegionIndex)),
+				Is.SameAs(raid));
+		}
+
+		[Test]
+		public void BestAffordableMissionSkipsExcludedMissions()
+		{
+			var defend = new BotMission { Type = BotMissionType.Defend, RequiredValue = 0, RegionIndex = 4 };
+			var raid = new BotMission { Type = BotMissionType.Raid, RequiredValue = 0, RegionIndex = 8 };
+			var providers = new[]
+			{
+				new StubMissionProvider { Missions = new[] { defend, raid } }
+			};
+
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 0), Is.SameAs(defend));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0,
 					m => m.Type == BotMissionType.Defend && m.RegionIndex == 4),
 				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => m.Type == BotMissionType.Defend),
+				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => true),
+				Is.Null);
 		}
 	}
 }

@@ -376,28 +376,79 @@ mutating is required: `BaseBuilderBotModuleCA`'s lists are already `FrozenSet` o
 
 **Built: `BotRoleSets` (Player) + `BotRoles` (actor)**, in `OpenRA.Mods.Cameo/Traits/BotModules/BotRoleSets.cs`.
 The yaml has `DeriveHas` / `DeriveNot` / `Exclude` / `Targets` per role, and only roles listed
-under `Apply` change anything. Every other role **reports** to `bot-roles.log`: its member count,
+under `Apply` change anything. `DeriveHasField` / `DeriveNotField` add **field predicates**:
+`Trait.Field any v1|v2` (the field holds at least one listed value) or `Trait.Field only v1|v2`
+(it holds values, and all of them are listed). They're read by reflection at rules load, and a
+predicate that no trait can satisfy fails the load, so a typo can't silently match nothing. This
+is the primitive DAWN's Fransbot field spec (Class B: `Mobile.Locomotor`, `Production.Produces`)
+builds on. Every other role **reports** to `bot-roles.log`: its member count,
 what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
 predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
 
 | Role → target | Written | Would add | Written, not derived |
 |---|---|---|---|
-| harvester → `HarvesterBotModuleCA` / `ResourceMapBotModule.HarvesterTypes` | 25 / 26 | 11: the D2k spice harvesters, Outpost 2 cargo trucks, FutureTech prospector, `ra1_soviets_heavyindustrialminer`, … | 0 / 1 (`naxis_slaveoverseer`) |
-| refinery → 3 `RefineryTypes` fields | 28–32 | 10–14: the D2k refineries, the StarCraft resource depots, the Warcraft II oil refineries | 4 (`chsupply`, `glsupply`, `usasupply`, `refinery`) |
-| mcv → `McvTypes` | 35 | 11: the D2k MCVs, Outpost 2 convecs, **and false hits** such as `ra1_soviets_stalinfist` | 0 |
-| conyard → `ConstructionYardTypes` | 28 | 5: the D2k yards, Outpost 2 factories | 2 (`zerg_hive`, `zerg_lair`) |
+| harvester → `HarvesterBotModuleCA` / `ResourceMapBotModule.HarvesterTypes` | 25 / 26 | 9: the D2k spice harvesters (atreides, harkonnen, corrino), Outpost 2 cargo trucks (Eden, Plymouth), `futuretech_prospectormk2`, `ra1_soviets_heavyindustrialminer`, `tkm_templateharvesterraname`, `wc2_humans_militiapeasant` | 0 / 1 (`naxis_slaveoverseer`) |
+| refinery → 3 `RefineryTypes` fields | 28–32 | 10–14: the D2k refineries, the Outpost 2 smelters, the StarCraft resource depots (`protoss_nexus`, `terran_commandcenter`, `zerg_hatchery`: also yards), the Warcraft II oil refineries | 4 (`chsupply`, `glsupply`, `usasupply`, `refinery`) |
+| mcv → `McvTypes` | 35 | 10: the D2k MCVs, Outpost 2 convecs, **and false hits**: `ra1_soviets_stalinfist`, `tkm_flakbus`, `tkm_trenchtank`, `tkm_trenchtruck`, `ts_nod_shadowteam` (they transform, but not into a yard) | 0 |
+| conyard → `ConstructionYardTypes` | 28 | 5: the D2k yards, the Outpost 2 structure factories | 2 (`zerg_hive`, `zerg_lair`) |
 
-These lists are looked up **by name** (`ActorIndex.OwnerAndNames…`). A harvester that isn't
-listed is invisible to `HarvesterBotModuleCA`, so the "would add" column is mostly **real gaps in
-today's bots** (the D2k factions' own harvesters, refineries and yards), plus a few false hits.
+Derivation only counts **producible** actors: `Buildable` **with a Queue**. Spawned slaves such as
+`YRSLAV` and `tkmworker` carry a queueless `Buildable` for their tooltip. Their master miner drives
+them, so they're no one's harvester. Without that rule the harvester role would have added both.
+
+What an unlisted actor costs depends on the module. The lists are looked up **by name**
+(`ActorIndex.OwnerAndNames…`), but not every use is by name:
+
+* **Harvester:** `HarvesterBotModuleCA` sends *every* `Harvester`-trait actor out to harvest
+  (`ActorsHavingTrait<Harvester>`), listed or not. The name list controls the **count**, **which
+  harvester to build** (`GetBuildableInfoByCommonName`, a random pick among the buildable members)
+  and the retreat-when-attacked response. A faction whose harvester isn't listed counts zero, and the
+  module has nothing buildable to request. The same happens after a switch makes the listed type
+  unbuildable: RA1's Industrial Efficiency doctrine replaces `ra1_soviets_oretruck` with the unlisted
+  heavy industrial miner, and FutureTech's promotion does the same with `futuretech_prospectormk2`.
+* **Refinery and conyard: the bot is inert.** `BaseBuilderBotModuleCA.PauseUnitProduction` is
+  `!HasMinimalRefineryCount()` (BaseBuilderBotModuleCA.cs:395), a by-name count. A faction whose
+  refinery isn't listed keeps **unit production paused for the whole game**, and a yard that isn't
+  listed gives the base builder nothing to build from. That applies to **Atreides, Harkonnen,
+  Corrino, Eden and Plymouth**. Measured on `ai_harvester_gate_20260927`: a hard Atreides bot with a
+  yard, a refinery, a heavy factory and 10,000 credits spent **nothing in 6,000 ticks**. The
+  refinery and conyard roles fix it (applied together; see the table below). The same by-name
+  count had also left `HarvesterBotModuleCA` without `ordos_refineryordos` and
+  `schwarzermond_orerefinery`, so those two bots aimed for a single harvester.
+* **Refinery: which refinery gets built.** `BaseBuilderQueueManagerCA.GetProducibleBuilding`
+  picks **at random** among the buildable `RefineryTypes`. A water-only refinery (the WC2 oil
+  refineries) would be chosen about half the time on any map, so the role excludes it with
+  `DeriveNotField: refinery: Building.TerrainTypes only Water`. `only`, not `any`:
+  `steelconsortium_consortiumrefinery` can be placed on land *and* water, and it stays. Yards that
+  are also resource depots (StarCraft Nexus, Command Center, Hatchery) are excluded with
+  `DeriveNot: BaseBuilding`. They were never written as refineries, so nothing changes for them.
+
 Each role is applied only after its additions are reviewed and a match with an affected faction
-confirms it. False hits go under `Exclude`; the "written, not derived" actors get a `BotRoles` line
-in their own pack. Only then does the central list shrink.
+confirms it. False hits are best removed by a tighter **derivation rule** (the producible rule
+above). `Exclude` names ids centrally, so it's a last resort. The "written, not derived" actors get a
+`BotRoles` line in their own pack. Only then does the central list shrink.
 
 Order: the derived roles first (they remove the most ids with no yaml at all), then `BotRoles` on
 the judgment lists (`HighValueTargetTypes`, `BigAirThreats`, `ExcludeFromSquadsTypes`). A list is
 then emptied in the central file. Progress metric: actor ids in the central `ai.yaml`, lower-only,
-**7,151 → 0**.
+→ 0. It was **7,151** before the pack split. Measure it with `python tools/ai/count_central_ids.py`,
+which counts only ids of loaded actors (a node key or a list entry): **4,530** on `e9d500212` (after
+#574), **4,480** after the harvester role, and **4,092** after refinery + conyard and the squad exclusion.
+
+**Applied roles** (each needs a match with an affected faction; refinery and conyard went in together,
+because a bot with neither listed stays paused):
+
+| Role | Applied | Central ids removed | Evidence |
+|---|---|---|---|
+| harvester | 2026-09-27 | 50: `HarvesterBotModuleCA.HarvesterTypes` emptied, and `ResourceMapBotModule.HarvesterTypes` reduced to `naxis_slaveoverseer` (a slave whip with no `Harvester` trait; kept so its behaviour doesn't change) | `ai_harvester_gate_20260927`, 4 paired runs to tick 6000: TKM (refinery listed, harvester not) **built +1, +1 without the role and +5, +6 with it**. Atreides built 0 either way: it needs refinery + conyard. `bot-roles.log`: `34 members, 0 written; ADDED 34` |
+| refinery + conyard, and harvester → `SquadManagerBotModuleCA.ExcludeFromSquadsTypes` | 2026-09-27 | 388: `HarvesterBotModuleCA.RefineryTypes` emptied; the other two `RefineryTypes` keep only `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards); the 7 `ConstructionYardTypes` lists keep only `zerg_hive`/`zerg_lair` (and `td_gdi_defenserig` in `McvExpansionManagerBotModule`); 4 dead ids deleted (`chsupply`, `glsupply`, `usasupply`, `refinery`); 26 harvesters × 5 personalities out of `ExcludeFromSquadsTypes` | `ai_harvester_gate_20260927` to tick 6000: the Atreides bot owned **7 → 7** actors (inert) with the harvester role only and **11 → 22/24** with these roles, +2 harvesters built in both runs; its harvesters (`far`: more than 25 cells from base) were **4 of 4 far by tick 6000 without** the `ExcludeFromSquadsTypes` target, drafted into attack squads as the maintainer saw, and **0 in 4 of 4 runs with it**; the same gap already existed on master for `ra1_soviets_heavyindustrialminer`, `futuretech_prospectormk2` and `wc2_humans_militiapeasant`. `bot-roles.log`: 31 refinery and 31 conyard members |
+
+**Interim repair (2026-09-28, EMBER, `devin/ember/ai-faction-wiring`):** the "would add" set was
+a live bug — the five newest factions were inert because their ids were in no central list. The
+ids were hand-appended (119 ids across 66 rows, all verified defined) until `Apply:` drains them;
+`Apply` unions into set types so the enumeration dedupe-composes with the role mechanism. The
+table's "written" column therefore now includes these ids — do not re-review them as pending
+additions.
 
 ---
 
@@ -676,7 +727,27 @@ over the fixed-policy comparator on compatible Cameo data (§11.3.5).
 
 **Stage D — AI-vs-AI batch harness.** Headless repeated matches across matchups, feeding stages
 B–C. This is what makes the data volume possible; it should be a script and a map rotation, not
-engine work.
+engine work. *Shipped:* `tools/ai/run_ai_match_batch.py` + template map
+`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns) —
+the harness copies the template into an isolated `Engine.SupportDir` user-map cache per matchup
+(faction × bot × time-limit patching + faction starting-unit actors written into `Actors:`),
+launches `Launch.Map`+`Launch.Benchmark` (exits on `GameOver`), and slices the appended
+`cameo-ai-matches.jsonl` per run. Constraints the map design had to satisfy, verified against
+the engine: a `Local` server refuses to start with every slot empty, so the map keeps an inert
+host-occupied `Referee` slot whose `PlayerReference.NonCombatant` keeps it out of every record's
+`opponents`/`allies` (lobby clients ignore `Player.NonCombatant`); empty playable slots produce
+no `Player` at all, so the duelists are `Playable: False` + `Bot:` map-side players (the writer
+admits them via `IsBot`) with `SpawnStartingUnits` bypassed by preplaced actors; Cameo strips
+`MustBeDestroyed` from most actors so the map re-adds it to the base templates for real
+elimination, and `TimeLimitManager` (locked) is the guaranteed terminator — its timeout ranking
+reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at high game
+speed:** the fixture locks `gamespeed: insane` (10 ms timestep, 4x default) so decisive matches
+resolve ~4x sooner in wall time and batches can be iterated in quick succession — the minutes
+cap then spans 4x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
+`AdaptiveGameSpeed` pacing slows the target rate under CPU contention rather than janking, so a
+generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
+match timeout. Match records are only comparable within one speed — a `10`-minute insane match
+contains 4x the simulated play of a default-speed one.
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.

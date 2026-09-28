@@ -4,8 +4,9 @@
 
 `Agent: NOVA ? lane: AI architecture / assign layer ? branch devin/1790537249.8881-ai-missions-7a-followup ? based on current origin/master after #581`
 
-Phase 7a landed through #581. This follow-up fixes the exhausted-Defend consumer
-selection so a later affordable Raid can still be consumed, limits Defend threat
+Phase 7a landed through #581, and #592 supplied the first exhausted-Defend
+consumer fix. This follow-up fixes the remaining multi-Defend starvation so a
+later affordable Raid can still be consumed, limits Defend threat
 from neighbouring static defences to the own base region, and documents the
 existing omniscient fallback when fogged scans are disabled. It also adds a
 permanent fog-enabled Raid runtime gate with reachable refinery and harvester
@@ -14,6 +15,122 @@ the frozen-target branch remains documented but is not asserted unless a fixture
 can reproduce it reliably. Phase 7b mission bidding is next.
 
  — THE HANDOFF
+
+## 2026-09-28 — OMP Astra: deployment review and scout follow-up
+
+Blackrobe authorized scoped publication and integration, including the engine
+rollout only after the maintainer's held map-generator click-test. No public
+release is authorized.
+
+* Independently reviewed and merged #584, #583 and #587. The #587 parent-squash
+  conflicts were resolved with a normal merge, no history rewrite; its full
+  tree matched the separately tested tree (`9013ffa431011461d08f47f00d290c8aefd4f01d`).
+  That batch passed 267 C# tests, the live harvester/squad gates, AI guards,
+  documentation checks and a fresh menu boot with no new exception log.
+* The additional scout fix handles the earlier no-stale-region return, preserves
+  an existing idle-pool wrapper for the same actor, and keeps ownership if the
+  pool is unavailable. It shares the return path with #584's no-target case.
+  The lifecycle regression failed before the fix; the integrated C# suite
+  passes 271 tests.
+  The final live squad scenario recorded 9 snapshots through tick 1201 with
+  2 squads / 7 units and exit 0. The final menu boot was also clean; neither
+  scenario is presented as a long-match scout-release test.
+* The classic-four regression callers now use the existing Allied actor names.
+  Tests no longer pin a bare inheritance shape, whole-weapon hashes, or an old
+  single-armor row; a tautological expected-constant arithmetic test is removed.
+  Resolved ranges, flat damage totals, faction identities, cargo and chassis
+  behavior remain covered: 29 focused Python tests pass.
+* #586 was independently visually checked and merged: a disposable map spawned
+  all seven affected actors and exercised actual harvesting. Rendered views
+  showed stable stationary body facings and player-coloured harvesting bodies
+  without the purple overlay; the 3000-tick run exited cleanly. The temporary
+  map was removed. Mongoose and additional attack/walk animation wiring were
+  deliberately untouched.
+* This is not a full rebalance. Original-unit reference coverage still has
+  withheld cases. All 17 warhead sources have assignment decisions, but R69
+  still holds cross-source averaging for the review of the proposed sources.
+  The reference and AI documents now distinguish completed implementation,
+  historical measurements, proposals and human approval.
+* Do not describe the Japanese Armored Car as fully runtime-identical to #403:
+  #431 folded 1600 bullet damage into the 300 railgun main while retaining
+  `PercentageScale: 6667`. Total flat damage is preserved, but the helper's
+  folded-percentage units become 63 instead of 10. No weapon value is changed
+  by this follow-up.
+* #580 has new source-review blockers: visible enemies can be counted again in
+  remembered threat, and a responder can be released before its delayed #579
+  order executes. #582 has a risk-checked retarget fall-through in addition to
+  its existing classification blocker. #588's new Outpost2 actor references
+  are uppercase although runtime names are lowercase. Changes-requested
+  reviews were posted; do not treat earlier approvals as clearing these.
+* #577/#585 retain their posted review blockers; #578 remains draft for the
+  role-based list rollout; #569 still requires the human click-test. #187 is
+  closed as superseded by #558. Other legacy holds and the dispatcher pause
+  remain intact.
+## 2026-09-28 — EMBER: fill the faction ids the applied roles don't cover (devin/ember/ai-faction-wiring)
+
+`Agent: EMBER · lane: AI execute/sense + gate tooling · branch devin/ember/ai-faction-wiring`
+
+Follow-on to the inert-factions fix above: `Apply: harvester, refinery, conyard`
+(#583/#587) wakes the five factions' economies, but ~60 more gating list fields
+(PowerTypes, BarracksTypes, ProductionTypes, McvTypes, defenses, scouts,
+engineers, squad/capture/crate/resource-map lists) still carry no
+`atreides`/`harkonnen`/`corrino`/`EDEN`/`PLYMOUTH` ids — the bots can count a
+refinery yet still can't pick a power plant. This commit appends the missing
+ids to exactly the fields no applied role covers (~100 ids, all verified
+defined, strict appends), and the pack dictionaries the houses lost in the
+rename-era cleanup (`10b8f5915`): `BuildingFractions`/`Intervals`/`Delays`/
+`Limits`, `AirSquadTargetTypes` ×5, `spiceharvester` units; Outpost2
+bootstrapped.
+
+- New gate `tools/tests/ai_d2k_production_gate.py` + map
+  `ai_d2k_production_gate_20260928`: an Atreides HardBot starts with one
+  construction yard; lua prints live `AI_D2K_GATE_TICK`/`AI_D2K_GATE_ACTORS`
+  counts (the situation-log writer buffers until match end — killed runs
+  write nothing). PASS with the lists, FAIL at 2 actors without them.
+- Fields whose applied role already supplies the ids (`HarvesterTypes`,
+  `RefineryTypes`, `ConstructionYardTypes`, harvester ids in
+  `ExcludeFromSquadsTypes`) are NOT re-appended — the drain direction stands;
+  the remaining ids compose with `Apply:` (set-union dedupe) and mark the
+  fields Claude's next roles should target.
+- Verified: gate PASS, negative control FAIL, bot-player + squad gates PASS,
+  boot-gate PASS.
+
+## 2026-09-27 — Claude: the AI lane is SPLIT (maintainer ruling); harvester role applied; 5 factions' bots are inert
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_apply_harvester`
+
+**Three maintainer rulings, 2026-09-27 ~20:40–21:10, asked directly.** They refine the entries below:
+
+1. **The AI-architecture lane is split.** **NOVA** owns the *layering*: Sense/Decide/Assign/Execute,
+   H1 pacing, Fransbot integration. **Claude** owns the *list rollout*: `BotRoleSets` roles, pack AI
+   rows, and the central-id metric (`tools/ai/count_central_ids.py`, lower-only). No self-merge still
+   holds, so Claude's role PRs go to NOVA for review and merge.
+2. **Fransbot publication is cleared.** #578 may carry the vendored Fransbot source in this public
+   repo.
+3. **Every commit is authored `AedisToru <122120981+AedisToru@users.noreply.github.com>`.** On
+   2026-09-27, 17 commits (10 on master) came from a cloud agent's own git config, carrying another
+   name and the maintainer's private e-mail. **Fix forward, no history rewrite:** `.mailmap` maps them
+   for git tools (GitHub's web UI ignores it). Every agent checks `git var GIT_AUTHOR_IDENT` before
+   committing. Provenance stays in the `Co-Authored-By:` trailer. Details: fleet
+   `ORDERS_2026-09-28_git_identity_and_engine_isolation.md`.
+
+**Harvester role applied** (AI_ARCHITECTURE §2.8, "Applied roles"): 50 central ids removed,
+4,530 → 4,480. A/B on the new `ai_harvester_gate_20260927`: TKM built +5 and +6 harvesters with the
+role, against +1 and +1 without it. Derivation now requires a *producible* actor (`Buildable` with a
+Queue), which keeps the Yuri slaves out.
+
+**Five factions' bots never build anything:** Atreides, Harkonnen, Corrino, Eden and Plymouth.
+`BaseBuilderBotModuleCA.PauseUnitProduction` is `!HasMinimalRefineryCount()`, a by-name count, and
+their refineries and yards aren't listed. An Atreides hard bot with 10,000 credits spent nothing in
+6,000 ticks. **Fixed by the refinery + conyard roles** (branch `claude/role_refinery_conyard`,
+stacked on #583; AI_ARCHITECTURE §2.8 "Applied roles"). That branch also adds field predicates to
+`BotRoleSets`, uses them to keep water-only refineries out, makes the harvester role fill
+`ExcludeFromSquadsTypes` (Atreides harvesters had been drafted into attacks), and brings the
+central ids to 4,092.
+**Still written centrally** until they get `BotRoles` in their packs: `zerg_hive`/`zerg_lair`
+(yards), `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards) and `td_gdi_defenserig`.
+**Next in the list rollout:** the Fransbot fields from DAWN's spec (replacing
+`fransbot_lists.yaml`), and moving #577's support derivation into `BotRoleSets`.
 
 ## 2026-09-27 — NOVA: AI phase 7a — missions on devin/nova/ai-missions-7a
 

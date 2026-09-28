@@ -19,7 +19,7 @@ import cargo_pricing  # noqa: E402
 TARGETS = {
     "td_gdi_chinooktransport": (4120, 82000, 124, 25, 33, 4100),
     "td_nod_chinooktransport": (3853, 82000, 124, 25, 33, 4100),
-    "ra1_allies_alliedchinooktransport": (4300, 88000, 120, 24, 35, 4400),
+    "ra1_allies_chinooktransport": (4300, 88000, 120, 24, 35, 4400),
     "ra1_soviets_hiptransport": (2760, 104000, 118, 24, 42, 5200),
 }
 
@@ -39,11 +39,11 @@ CARGO = {
         "cost": 3853,
         "units": "td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalrocketsoldier, td_nod_lasertrooper, td_nod_stealthsoldier, td_nod_blackhandflamer",
     },
-    "ra1_allies_alliedchinooktransport": {
+    "ra1_allies_chinooktransport": {
         "capacity": 10,
         "weight": 10,
         "cost": 4300,
-        "units": "ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner",
+        "units": "ra1_allies_rifleinfantry, ra1_allies_rocketsoldier, ra1_allies_sniper, ra1_allies_medic, ra1_allies_machinegunner, ra1_allies_rifleinfantry, ra1_allies_rocketsoldier, ra1_allies_sniper, ra1_allies_medic, ra1_allies_machinegunner",
     },
     "ra1_soviets_hiptransport": {
         "capacity": 8,

@@ -16,8 +16,8 @@ import cargo_pricing  # noqa: E402
 
 
 VALID_CARRIERS = {
-    "ra1_allies_alliedapc": 1680,
-    "ra1_allies_alliedchinooktransport": 4300,
+    "ra1_allies_apc": 1680,
+    "ra1_allies_chinooktransport": 4300,
     "ra1_allies_phasetransport": 2150,
     "ra1_soviets_btr80": 1800,
     "ra1_soviets_flaktruck": 980,
