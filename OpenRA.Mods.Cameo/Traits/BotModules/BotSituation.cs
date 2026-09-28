@@ -100,6 +100,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int PressureRadius = 15;
 		public readonly int LossWindowTicks = 750;
 		public readonly int EmergencyLossThreshold = 600;
+
+		[Desc("Loss-window value below which an active emergency de-escalates. Kept below " +
+			"EmergencyLossThreshold so the urgency state has on/off hysteresis — a window " +
+			"bouncing across a single threshold flickered Emergency on and off every check " +
+			"interval, which starved the sustained-candidate timer and latched the " +
+			"personality (observed: turtle held ~38k ticks while the candidate stayed rush).")]
+		public readonly int EmergencyLossClearThreshold = 300;
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -193,7 +200,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider
 	{
-		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
+		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
 		readonly BotFogMemory fogMemory;
@@ -597,9 +604,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			DeathsCostWindow = lossSamples.Sum(s => s.Delta);
 			KillsCostWindow = killSamples.Sum(s => s.Delta);
-			currentUrgency = DeathsCostWindow > Info.EmergencyLossThreshold || productionLossTicks.Count > 0
-				? BotUrgency.Emergency
-				: BotUrgency.Normal;
+			var emergency = DeathsCostWindow > Info.EmergencyLossThreshold || productionLossTicks.Count > 0;
+			if (!emergency && currentUrgency == BotUrgency.Emergency)
+				emergency = DeathsCostWindow > Info.EmergencyLossClearThreshold;
+			currentUrgency = emergency ? BotUrgency.Emergency : BotUrgency.Normal;
 		}
 
 		internal static List<BotMission> DeriveMissions(
@@ -1058,6 +1066,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				yield return "rush";
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
 				yield return "expansion";
+
+			// Terminal posture so a thin fogged enemy profile cannot latch the
+			// incumbent forever: under pressure consolidate defensively, when
+			// calm keep spreading out.
+			yield return urgency >= BotUrgency.Pressured ? "turtle" : "expansion";
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)

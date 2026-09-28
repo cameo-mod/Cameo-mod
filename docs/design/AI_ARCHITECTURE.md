@@ -552,12 +552,16 @@ patches). CN's danger score is the precedent for the shape.
 
 ### 4.1 What a personality is, extended
 
-Today a personality is a condition that selects one of five `SquadManagerBotModuleCA` instances
-(§19). The manager keeps that mechanism and adds the missing personality the user named:
-**Guerrilla** — many small simultaneous raids against expansions, rather than one blob. Cameo's
-squad manager already has the knobs (`JoinGuerrilla`, `MaxGuerrillaSize`, `GuerrillaTypes`), and
-`JoinGuerrilla` is the join chance in percent (it was inverted until 2026-09-27; see
-`AI_SYNTHESIS.md` §3.1).
+A personality is a condition that selects one of six `SquadManagerBotModuleCA` instances
+(§19). The sixth — **Guerrilla**, the missing personality the user named — is now wired end
+to end (2026-09-28, EMBER): `personality-guerrilla` joined the controller's default
+`Conditions`, `SquadManagerBotModuleCA@guerrilla` fields the small-squad harassment tuning
+(`JoinGuerrilla: 100`, `IndirectRouteChance: 60`, `StageBeforeAssault: false`, `PreferMainTarget:
+false`, 700-tick attack cadence, `HarasserTypes` — the dormant CA HVT-strike list — finally
+populated with the cross-faction elite/commando roster), and the observer notification exists. Its trigger was already in the master module:
+`ExpansionClusters >= GuerrillaMinClusters` on the main target yields `guerrilla` — an enemy
+spread across many expansion clusters gets its economy raided from several directions instead
+of meeting one blob.
 
 ### 4.2 The switch mechanism, given §1.1
 
@@ -643,9 +647,19 @@ for the main target unless stated.
 | We lost production structures | Turtle | rebuild before committing |
 | Two enemies focusing one ally | (keep) | target the aggressor, not the score leader |
 | No contact / nothing known | Expansion | scout; take map while blind |
+| No signal crosses a threshold (terminal fallback) | Turtle if Pressured, else Expansion | the candidate set always yields a posture; the incumbent is no longer a silent default |
+
+**Measured defect, fixed 2026-09-28 (EMBER):** in nw-ab-7 both `hard` matches sat in `turtle`
+for ~38k ticks while the candidate stayed `rush`. The latch was not a missing candidate — the
+emergency checker had a single 600-loss threshold, so the loss window bounced across it every
+25-tick check, each flicker flipped the candidate to `turtle` and back and reset the
+sustained-candidate timer, so `rush` never accumulated its reaction delay. Two changes: an
+off-threshold (`EmergencyLossClearThreshold = 300`, half the on-threshold) gives the emergency
+state hysteresis, and `PersonalityCandidates` now always ends with a posture yield (Turtle under
+pressure, Expansion when calm) so no profile can starve the switcher of a decision.
 
 Note the "(keep)" rows: **most enemy facts should change composition and priorities, not
-personality.** Personality is the coarse posture; a five-state machine cannot express "he went
+personality.** Personality is the coarse posture; a six-state machine cannot express "he went
 air" and should not try. This split is deliberate and is the main structural opinion in this
 document.
 
@@ -684,6 +698,13 @@ readers (unchanged authorities, now better informed)
 ├── UnitCompositionsBotModule (world, singleton) via personality tokens (§1.4)
 └── specialists (harvester, MCV, power, support powers, capture, repair, scout)
 ```
+
+As of 2026-09-28 the published snapshot is still **telemetry-only**: `DefenceFractionHint` and
+`ExpansionAppetiteHint` reach `cameo-ai-situations.jsonl` but no in-game reader exists — there is
+no `IBotSituationProvider` interface and `BaseBuilderBotModuleCA` does not consult it. Wiring it
+means a new CA-side interface plus defaults for the `classic` stack (which has no master module);
+that is the next integration seam, deliberately left for coordination since it touches the
+CA-sync-tracked builder.
 
 Publication should be pull-based — readers ask the master for the current snapshot — so the master
 never has to know who its readers are, and a missing master degrades to today's behaviour instead

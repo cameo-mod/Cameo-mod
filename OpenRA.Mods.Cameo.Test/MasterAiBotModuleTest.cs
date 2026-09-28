@@ -382,10 +382,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
 				available, info), Is.EqualTo("expansion"));
 			target.NearestCells = 10;
+			// Nothing matches a strong-but-unscouted enemy: the terminal fallback
+			// picks a posture (calm -> expansion, pressured -> turtle) instead of
+			// latching the incumbent forever.
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle",
-				available, info), Is.EqualTo("turtle"));
+				available, info), Is.EqualTo("expansion"));
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "guerrilla",
-				available, info), Is.EqualTo(""));
+				available, info), Is.EqualTo("expansion"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Pressured, target, 0, new[] { target }, "rush",
+				available, info), Is.EqualTo("turtle"));
 		}
 
 		[Test]
@@ -535,7 +540,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = new BotPersonalityControllerInfo();
 			Assert.That(BotPersonalityController.PersonalityName("personality-rush", info.PersonalityPrefix), Is.EqualTo("rush"));
 			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "steamroller"), Is.True);
-			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.False);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.True);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "berserker"), Is.False);
 		}
 
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
