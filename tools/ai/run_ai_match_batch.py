@@ -57,8 +57,8 @@ Usage:
     python tools/ai/run_ai_match_batch.py [options]
 
     --factions td_gdi,td_nod        factions for the matrix (default: td_gdi,td_nod)
-    --bot-a fransbot --bot-b classic   bot types per side (default: fransbot vs the
-                                    omniscient classic reference bot — the A/B axis)
+    --bot-a hard --bot-b classic   bot types per side (default: hard — the Frankenstein
+                                    candidate — vs the omniscient classic reference bot)
     --repeats 4                     matches per matchup (spawn sides alternate)
     --swap-bots                     also alternate which bot takes which spawn —
                                     the A/B acceptance requires both spawns
@@ -611,7 +611,7 @@ def ab_scoreboard(results: list[dict]) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
-    parser.add_argument("--bot-a", default="fransbot", help="bot type for side A (default: fransbot)")
+    parser.add_argument("--bot-a", default="hard", help="bot type for side A (default: hard — the Frankenstein candidate)")
     parser.add_argument("--bot-b", default="classic", help="bot type for side B (default: classic — the omniscient pre-wave reference bot)")
     parser.add_argument("--repeats", type=int, default=4, help="matches per matchup; sides alternate (default: 4)")
     parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,

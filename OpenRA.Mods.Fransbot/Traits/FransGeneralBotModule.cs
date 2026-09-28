@@ -157,6 +157,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum world ticks a previously visible stationary BUILDING RAID may remain published from its frozen fair last-visible snapshot after vision is lost. Mobile RAID targets are never remembered. Sea may use this window for coastal pressure; Ground/Air/SpecOps keep their own visible-target bid rules.")]
 		public readonly int RaidRememberedBuildingLifetimeTicks = 3000;
 
+		[Desc("If true, General may open a remembered STATIONARY-building RAID straight from combat-intel memory when no live publish ever got a fresh-intel window: the building was seen once and cannot move, so its last-seen cell remains a fair strike objective until the snapshot expires. Required contribution falls back to the public ruleset max HP when no observed HP exists.")]
+		public readonly bool RaidPublishRememberedBuildings = false;
+
 		[Desc("Minimum fresh sample points among target center plus eight points around RaidSiteIntelRadius before General may open an ordinary RAID MISSION. This is an intel-quality publication gate, not a defense/risk feasibility test.")]
 		public readonly int RaidMinimumFreshAreaSamples = 5;
 
@@ -1278,6 +1281,47 @@ namespace OpenRA.Mods.Common.Traits
 					"{0}: GENERAL publishes MISSION RAID target {1} {2} at {3}: HP snapshot {4}, strategic value {5}, fresh site samples {6}/9, priority {7}; raw SiteIntel [{8}]. General utility may include SECURE proximity and decaying recent-hostile-action value; Commander doctrine still ranks target types.",
 					player, chosen.Target.Info.Name, chosen.Target.ActorID, chosen.Target.Location, chosen.Hp, chosen.Value,
 					chosen.FreshSamples, chosen.Priority, FormatSiteIntelForLog(rawIntel));
+			}
+
+			// Fog-honest remembered strikes: stationary buildings cannot move, so a building
+			// observed once stays a fair RAID objective until its snapshot expires. This seeds
+			// remembered missions for remembered contacts the live scan never got a fresh
+			// visibility window to publish; the republish loop below then emits them while
+			// the snapshot remains inside RaidRememberedBuildingLifetimeTicks.
+			if (!raidsSuppressedByOpening && Info.RaidPublishRememberedBuildings &&
+				activeRaidTargets.Count < Info.MaximumActiveRaidMissions)
+			{
+				foreach (var contact in combatIntelService.EnemyCombatContacts
+					.Where(c => c.IsBuilding && !c.IsDefensiveBuilding && c.Owner != null &&
+						PlayerRelationship.Enemy.HasRelationship(player.RelationshipWith(c.Owner)) &&
+						world.WorldTick - c.LastSeenWorldTick <= Info.RaidRememberedBuildingLifetimeTicks &&
+						world.WorldTick - c.LastSeenWorldTick >= 0)
+					.OrderBy(c => c.ActorId))
+				{
+					if (activeRaidTargets.Count >= Info.MaximumActiveRaidMissions)
+						break;
+					if (activeRaidTargets.ContainsKey(contact.ActorId))
+						continue;
+					if (shroud.IsVisible(contact.LastSeenCell))
+						continue; // live path owns visible targets
+					if (raidTargetCooldownUntil.TryGetValue(contact.ActorId, out var rememberedUntil) &&
+						world.WorldTick < rememberedUntil)
+						continue;
+					if (commandBidService != null &&
+						commandBidService.TryGetActiveMissionForTarget(contact.ActorId, out var activeMission) &&
+						activeMission.MissionType == FransMissionType.Raid)
+						continue;
+
+					var rememberedIntel = BuildSiteIntel(contact.LastSeenCell, Info.RaidSiteIntelRadius, Info.RaidIntelFreshTicks);
+					activeRaidTargets[contact.ActorId] = world.WorldTick;
+					activeRaidSnapshots[contact.ActorId] = new FransMission(null, contact.ActorId, contact.ActorType, contact.Owner,
+						contact.LastSeenCell, true, true, rememberedIntel, FransMissionType.Raid,
+						GetRaidMissionPriority(contact.ActorId, contact.LastSeenCell), world.WorldTick);
+					FransBotLog.BotDebug(world,
+						"{0}: GENERAL seeds REMEMBERED BUILDING RAID objective {1} {2} at remembered cell {3}: last seen {4} WT ago, republish loop will emit it within the {5} WT remembered lifetime.",
+						player, contact.ActorType, contact.ActorId, contact.LastSeenCell,
+						world.WorldTick - contact.LastSeenWorldTick, Info.RaidRememberedBuildingLifetimeTicks);
+				}
 			}
 
 			foreach (var pair in activeRaidTargets.OrderBy(p => p.Key))

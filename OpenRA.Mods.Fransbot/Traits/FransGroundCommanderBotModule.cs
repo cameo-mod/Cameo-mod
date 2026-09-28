@@ -225,6 +225,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Adaptive Ground RAID strike-package floor as a percentage of currently free RAID-eligible combat value. Target damage remains mandatory; this only prevents technically sufficient but operationally tiny Ground raids.")]
 		public readonly int GroundRaidExpeditionarySharePercent = 35;
 
+		[Desc("Maximum world-tick age of a remembered STATIONARY-building RAID mission that Ground may still bid on. The target was visible when General published it; the bid reads only the remembered cell, never hidden state. Set <= 0 to disable remembered ground strikes (upstream behavior).")]
+		public readonly int GroundRememberedRaidMaximumAge = 0;
+
 		[Desc("Minimum number of Ground units in an ordinary Ground RAID when enough candidates exist. Specialist/Air/Sea RAID sizing is unchanged.")]
 		public readonly int GroundRaidMinimumUnitCount = 3;
 
@@ -1071,12 +1074,74 @@ namespace OpenRA.Mods.Common.Traits
 			var target = mission.Target;
 			// A new RAID bid requires the fair visible target snapshot. Once the MISSION starts, bounded
 			// General memory may keep the mission alive, but hidden live HP is never re-read.
-			if (mission.IsRememberedIntel || target == null || !IsVisibleEnemy(target))
+			// Exception mirroring the Sea remembered-strike path: STATIONARY buildings cannot move, so a
+			// bounded remembered-intel RAID on the last-visible cell is fog-honest — the force reacquires
+			// the exact target on arrival via the existing bounded local RECON before striking.
+			var rememberedBuildingRaid = mission.IsRememberedIntel && mission.IsBuilding && target == null &&
+				Info.GroundRememberedRaidMaximumAge > 0 &&
+				world.WorldTick - mission.PublishedWorldTick <= Info.GroundRememberedRaidMaximumAge;
+			var visibleRaid = target != null && IsVisibleEnemy(target);
+			if (!visibleRaid && !rememberedBuildingRaid)
 				return false;
 
 			var required = commanderCoreService.GetMissionRequiredContribution(FransCommanderKind.Ground, mission);
 			if (required == int.MaxValue)
 				return false;
+
+			if (rememberedBuildingRaid)
+			{
+				var rememberedTargetCell = mission.LastVisibleTargetCell;
+				var rememberedRanked = (availableMissionUnits ?? Array.Empty<Actor>())
+					.Where(IsGroundRaidEligibleActor)
+					.Where(a => !mcvRightOfWayUnits.Contains(a) && a != reconRetreatActor && !raidRecoveryOrigins.ContainsKey(a) && a.TraitOrDefault<Cargo>() == null)
+					.Select(a =>
+					{
+						var route = EvaluateMoveRisk(a, a.Location, rememberedTargetCell);
+						var eta = commanderCoreService.EstimateMoveEtaTicks(a, rememberedTargetCell);
+						return (Actor: a, Eta: eta, Route: route, Cost: GetCombatValue(a));
+					})
+					.Where(x => x.Eta != int.MaxValue && !x.Route.IsCritical)
+					.OrderBy(x => x.Route.PeakScore).ThenBy(x => x.Eta).ThenByDescending(x => x.Cost).ThenBy(x => x.Actor.ActorID)
+					.Take(Info.MaximumRaidUnitsPerMission)
+					.ToArray();
+				if (rememberedRanked.Length == 0)
+					return false;
+
+				var freeForceValue = Math.Max(1, rememberedRanked.Sum(x => x.Cost));
+				var packageFloor = Math.Max(1, freeForceValue * Info.GroundRaidExpeditionarySharePercent / 100);
+				var minimumUnits = Math.Min(Info.GroundRaidMinimumUnitCount, rememberedRanked.Length);
+				var rememberedChosen = new List<Actor>();
+				var rSlowestEta = 0;
+				var rPeakRisk = 0;
+				var rTravel = 0;
+				var rTotalCost = 0;
+				foreach (var x in rememberedRanked)
+				{
+					rememberedChosen.Add(x.Actor);
+					rSlowestEta = Math.Max(rSlowestEta, x.Eta);
+					rPeakRisk = Math.Max(rPeakRisk, x.Route.PeakScore);
+					rTravel = Math.Max(rTravel, Math.Abs(rememberedTargetCell.X - x.Actor.Location.X) + Math.Abs(rememberedTargetCell.Y - x.Actor.Location.Y));
+					rTotalCost += x.Cost;
+					if (rememberedChosen.Count >= minimumUnits && rTotalCost >= packageFloor)
+						break;
+				}
+
+				if (rememberedChosen.Count < minimumUnits || rTotalCost < packageFloor)
+					return false;
+
+				var rememberedGroupPrice = commanderCoreService.PriceBid(FransCommanderKind.Ground, rPeakRisk, rSlowestEta, rTotalCost);
+				if (rememberedGroupPrice == int.MaxValue)
+					return false;
+				rememberedGroupPrice = ApplyRaidTargetPriorityToPrice(rememberedGroupPrice, mission.TargetActorType);
+				report = new FransCommanderBidReport(
+					FransCommanderKind.Ground, BidderKey, rememberedChosen[0].ActorID, rememberedChosen.Select(a => a.ActorID).ToArray(),
+					rememberedGroupPrice, rPeakRisk, rTravel, rTotalCost, rSlowestEta, required, required, false);
+				FransBotLog.BotDebug(world,
+					"{0}: Ground bids fresh REMEMBERED BUILDING RAID {1} {2} at {3}: {4} units, package value {5}/{6} free-force floor, intel age {7}/{8} WT. No hidden target state is read; arrival reacquires via bounded local RECON before striking.",
+					player, BidderKey, mission.TargetActorType, mission.TargetActorId, rememberedTargetCell, rememberedChosen.Count, rTotalCost, packageFloor,
+					world.WorldTick - mission.PublishedWorldTick, Info.GroundRememberedRaidMaximumAge);
+				return true;
+			}
 
 			var ranked = (availableMissionUnits ?? Array.Empty<Actor>())
 				.Where(IsGroundRaidEligibleActor)

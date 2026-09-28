@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Frozen;
+using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common;
 using OpenRA.Primitives;
@@ -53,8 +54,8 @@ namespace OpenRA.Mods.Common.Traits
 		public readonly FrozenSet<string> WallKeepClearBuildingTypes =
 			FrozenSet<string>.Empty;
 
-		[Desc("RA production queue category exclusively used by this commander for static defense/wall items.")]
-		public readonly string DefenseQueueCategory = "Defense";
+		[Desc("RA production queue categories exclusively used by this commander for static defense/wall items. Covers US/UK spellings and per-faction defense queues (e.g. RADefence) so the list survives mods that split queues per faction.")]
+		public readonly FrozenSet<string> DefenseQueueCategories = new HashSet<string> { "Defense", "Defence", "RADefence" }.ToFrozenSet();
 
 		[Desc("World ticks between commander ownership/intent scans.")]
 		public readonly int ScanInterval = 25;
@@ -68,6 +69,12 @@ namespace OpenRA.Mods.Common.Traits
 
 		[Desc("Maximum number of armed defenses around each selected permanent FACT.")]
 		public readonly int DefenseLimitPerAnchor = 12;
+
+		[Desc("Routine peacetime armed-defense floor around each selected permanent FACT once the scripted opening is complete. HardBot raids arrive before the first General DEFEND incident matures; this floor guarantees a minimum standing screen without waiting for a raid.")]
+		public readonly int PeacetimeDefensePerAnchorTarget = 3;
+
+		[Desc("World tick after which the peacetime defense floor may start even before the scripted opening completes. Early raids can land before OpeningComplete on fast-paced maps; int.MaxValue disables the early start (upstream behavior).")]
+		public readonly int PeacetimeDefenseEarliestTick = int.MaxValue;
 
 		[Desc("Maximum distance in cells from a General SECURE point to its physically established FACT for SECURE foothold defense placement.")]
 		public readonly int SecureDefenseAnchorMaximumDistance = 18;
@@ -136,7 +143,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			base.RulesetLoaded(rules, ai);
 
-			if (string.IsNullOrWhiteSpace(DefenseQueueCategory))
+			if (DefenseQueueCategories.Count == 0)
 				throw new YamlException("FransDefenseCommander requires at least one defense type and one Defense queue category.");
 			if (ScanInterval <= 0 || PriorityDefenseCooldownTicks < 0 || DirectAttackFrontHoldTicks < 0 ||
 				PlacementTimeoutTicks <= 0 || PlacementSearchIntervalTicks <= 0 || DefenseLimitPerAnchor < 0 || SecureDefenseAnchorMaximumDistance <= 0 ||
@@ -473,12 +480,23 @@ namespace OpenRA.Mods.Common.Traits
 			if (!emergency && CanStartDefense(out _) && TryStartStrategicDefenseQueueRequest(bot, conyards))
 				return;
 
-			// No routine peacetime static-defense growth. A direct building attack that has not
-			// produced/preserved a General DEFEND representative may still drive this exact local
-			// front while fresh attack callbacks keep the hold window alive. Once the last callback
-			// ages out, no new static-defense request is started; already-owned queue items may finish.
 			if (!emergency)
+			{
+				// Routine peacetime floor: grow toward a small standing screen at the least-defended
+				// permanent FACT so the first HardBot raid does not meet an empty perimeter. Uses the
+				// same anchor/limit/cooldown path as incident defense; a direct building attack that has
+				// not produced a General DEFEND representative may still drive this local front while
+				// fresh attack callbacks keep the hold window alive, so the floor only runs when no
+				// emergency window is active.
+				if ((!baseBuilderService.OpeningComplete && world.WorldTick < Info.PeacetimeDefenseEarliestTick) ||
+					anchor == null || Info.PeacetimeDefensePerAnchorTarget <= 0 ||
+					!CanStartDefense(out _) ||
+					CountStructuresNear(defenses, anchor.Location, Info.PlacementMaxRadius) >= Math.Min(Info.PeacetimeDefensePerAnchorTarget, Info.DefenseLimitPerAnchor))
+					return;
+
+				TryStartDefense(bot, defenses, anchor, "peacetime-floor");
 				return;
+			}
 
 			if (!CanStartDefense(out var reason))
 			{
@@ -637,7 +655,7 @@ namespace OpenRA.Mods.Common.Traits
 				string.IsNullOrWhiteSpace(actorType) || !HasSufficientPowerFor(actorType))
 				return false;
 
-			var queues = AIUtils.FindQueuesByCategory(player)[Info.DefenseQueueCategory]
+			var queues = DefenseQueues()
 				.Where(q => q.Enabled && !q.AllQueued().Any())
 				.OrderBy(q => q.Actor.ActorID);
 			foreach (var queue in queues)
@@ -674,7 +692,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 			}
 
-			var queues = AIUtils.FindQueuesByCategory(player)[Info.DefenseQueueCategory]
+			var queues = DefenseQueues()
 				.Where(q => q.Enabled)
 				.OrderBy(q => q.Actor.ActorID)
 				.ToArray();
@@ -733,7 +751,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			nextWallPlanningTick = world.WorldTick + Info.WallPlanningIntervalTicks;
-			var queues = AIUtils.FindQueuesByCategory(player)[Info.DefenseQueueCategory]
+			var queues = DefenseQueues()
 				.Where(q => q.Enabled)
 				.OrderBy(q => q.Actor.ActorID)
 				.ToArray();
@@ -802,7 +820,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void ManagePendingDefense(IBot bot, Actor anchor, CPos? priorityCenter, bool urgentPreemption = false, bool purposeValid = true)
 		{
-			var queue = AIUtils.FindQueuesByCategory(player)[Info.DefenseQueueCategory]
+			var queue = DefenseQueues()
 				.Where(q => q.Enabled && q.Actor.ActorID == pendingQueueActorId)
 				.FirstOrDefault();
 			if (queue == null)
@@ -1145,6 +1163,12 @@ namespace OpenRA.Mods.Common.Traits
 		System.Collections.Generic.IEnumerable<Actor> OwnedBuildings(FrozenSet<string> types) =>
 			world.ActorsHavingTrait<Building>().Where(a =>
 				a.IsInWorld && !a.IsDead && a.Owner == player && types.Contains(a.Info.Name));
+
+		System.Collections.Generic.IEnumerable<ProductionQueue> DefenseQueues()
+		{
+			var byCategory = AIUtils.FindQueuesByCategory(player);
+			return Info.DefenseQueueCategories.SelectMany(c => byCategory[c]);
+		}
 
 		static int CountStructuresNear(Actor[] defenses, CPos center, int radius)
 		{

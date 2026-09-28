@@ -236,6 +236,20 @@ decision reads it yet — it is being validated against the decisive fights (`to
 
 ## Batch harvest (Stage D)
 
+**Maintainer test mandate (2026-09-28):** every bot A/B test runs on the real
+tournament map — `mods/cameo/maps/ai_duel_nuclear_winter/` (a byte-faithful
+extract of `_ra_a-nuclear-winter.oramap` whose two `Playable` slots become
+map-side `BotA`/`BotB` players on the real mpspawn cells Actor705/Actor971) —
+at the fixture's locked `insane` gamespeed. No hand-made duel fixtures: earlier
+synthetic maps misled testing (disconnected pockets, painted-ore-only fields).
+The acceptance match-up is the asymmetric one — `fransbot` (fog-honest: the
+Cameo x RV x CA x CN x Fransbot composite) must beat `classic` (the pre-wave
+stack with `RevealsMap` omniscience, `bot_ai.classic` / `classicbot` condition).
+Default invocation:
+`python tools/ai/run_ai_match_batch.py --factions ra1_soviets --bot-a fransbot --bot-b classic --repeats N`
+(the harness template already defaults to the Nuclear Winter fixture).
+
+
 `tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
 variant of the duel map per matchup inside the
 batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`)

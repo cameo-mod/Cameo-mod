@@ -14303,3 +14303,130 @@ protection squads.
 
 Boot-gate PASS x2 (menu marker, 0 new exceptions); fog audit PASS (170 sites). Apply left report-only so the FS/artillery-role machinery ships INERT - naval isolation is the only live behavior delta.
 `git add -A` never used; scoped paths only.
+## 2026-09-28 — FransBot competitiveness round 2: queue spelling, peacetime defense, harvester multiplier, expansion posture + NEW MANDATE: A Nuclear Winter A/B
+
+Maintainer mandate (this session): all bot A/B tests run on the REAL tournament
+map "A Nuclear Winter" (`mods/cameo/maps/ai_nuclear_winter_duel/` — byte-faithful
+extract of `_ra_a-nuclear-winter.oramap`, Multi0/Multi1 converted to map-side
+BotA/BotB on the real mpspawn cells) at locked `insane` gamespeed. No synthetic
+fixtures. Acceptance: `fransbot` (no omniscience) beats `hard` (omniscient
+classic bot). Harness gained `--template` for this.
+
+### Fixes shipped this round
+
+1. **Defense queue category bug** — `FransDefenseCommanderBotModule` looked up
+   `DefenseQueueCategory="Defense"` but Cameo RA queues are `Defence`/`RADefence`;
+   `AIUtils.FindQueuesByCategory` indexes exact queue `Type` strings, so the
+   commander saw ZERO queues forever — all static defense silently impossible.
+   Now `DefenseQueueCategories` FrozenSet {"Defense","Defence","RADefence"} with a
+   `DefenseQueues()` helper used by all 4 lookup sites.
+2. **Peacetime defense floor** — `PeacetimeDefensePerAnchorTarget` (default 3):
+   after `OpeningComplete` and only when no emergency/General-DEFEND is active,
+   the commander builds toward 3 armed defenses at the least-defended permanent
+   FACT using the normal anchor/limit/cooldown path. Upstream builds zero routine
+   defense; HardBot's first raid was arriving before DEFEND incidents matured.
+3. **Harvester multiplier** — `HarvestersPerServicedMine` (default 1, Cameo sets
+   2): `RequestMissingHarvester` target is now `mines * multiplier`; extra
+   harvesters fall through to the global nearest-resource scan (no pairing claim).
+4. **Expansion posture** (yaml-only): `PreSurplusMaximumConstructionYardSlots 2->3`,
+   `PreSurplusPermanentConstructionYards 1->2`, `DesiredPermanentConstructionYards
+   2->3`, `MaximumPermanentConstructionYards 3->4`, `MinimumGroundCombatValueFor
+   AdditionalMcv 10000->6000`, `MaximumMainBaseWarFactories 2->3`.
+
+### Verified live on A Nuclear Winter (batch nw-batch1, 4 matches)
+
+- peacetime-floor fired: `flametower` production+placement at WT5793/6443/7093.
+- First airfield at WT8255 ("Radar Dome exploitation with first air production")
+  placed WT8655; `hindattackhelicopter` filled the Aircraft queue WT8760.
+- `2 refinery/4 harvester` mid-game; expansion high-water reached 3 FACT slots.
+- Matches went long (19-28k ticks) but all 4 lost to `hard`: FransBot earned
+  69-167k vs HardBot 175-277k; unit trades 1:2-1:3 against; 0-3 enemy buildings
+  razed. Composition skew: 3 barracks flood infantry (42 infantry vs 9 vehicles
+  in match 4 incl. 11 wasted capture engineers); only 1 warfactory built.
+- Surviving diagnostics: `capacity high-water is now 3`, `permanent FACT target`.
+
+### Open gap for the win condition
+
+Producer mix, not policy: `KeepAllMilitaryQueuesFilled` already saturates; the
+vehicle:infantry producer ratio (1 WEAP : 3 BARR) makes the army infantry-heavy
+vs HardBot armor. Economy ceiling raised via yaml; next iteration should measure
+whether 3-WEAP capacity + 2-FACT expansion materialize and help.
+
+### A/B lane migrated to `classic` (batch nw-classic1, match 1)
+
+Rebased onto master (`47c4fb388`+): dropped the parallel local duel dir —
+master's `mods/cameo/maps/ai_duel_nuclear_winter` is canonical; `--template`
+defaults to it. Engine re-pinned to `042b2fa7` (absorbed from nova-staged).
+
+Match 1 `fransbot` vs `classic` (A Nuclear Winter, insane, ra1_soviets mirror):
+**LOSS at WT23732** — a real fight, not a stomp:
+
+| metric | fransbot | classic |
+|---|---|---|
+| units k/l | 76/106 | 98/75 |
+| buildings k/l | 1/43 | 43/1 |
+| earned/spent | 112k/122k | 204k/216k |
+| army/assets end | 0 / 0 | 81.7k / 185k |
+
+Mechanics all verified live: 11 flametowers placed (peacetime floor + anchors),
+gorynychtank/heavytank producing, 3 refinery/5 harvester mid-game, FACT capacity
+high-water 3, MCV expansion objective scans running, SpecOps oil-capture
+missions active.
+
+### Root-cause of the income gap: expansion abort hair-trigger
+
+Match-1 tail showed `first-expansion PROC attempt ABORTED ... FACT
+RETREAT/repack` and `MCV RETREAT` cycling: classic's omniscient raids land on
+the expansion conyard, and `ManageExpansionConyard` repacks on
+`IsCritical || RecentlyDamaged` — any stray shot aborts the refinery claim.
+The mobile-MCV path (`TryStartMcvRetreat`) is refined (acknowledged-damage
+baseline, commitment window, visible-threat gate); the deployed-conyard path
+kept the crude trigger.
+
+**Fix**: `ExpansionConyardRetreatRecentDamageRisk` knob (default 0 = upstream).
+Damage-triggered repack now requires `RecentDamageRiskScore >=` the knob while
+`IsCritical` still always retreats. Cameo sets 150: stray harassment is tanked,
+real raids still repack. `HarvestersPerServicedMine` 2->3 (more home-field
+yield + faster replacement after raids). Drift baseline +792/-390, check PASS.
+
+Also this round: the nw-classic1 driver died silently after match 1 (shell
+lifecycle); batch relaunched detached via nohup as nw-classic2.
+
+## 2026-09-28 — Frankenstein merge plan + W1 intel substrate armed on hard
+
+- **Fleet ruling**: acceptance candidate is `hard` (Frankenstein: generic stack +
+  CN brains), NOT `fransbot` (donor). A/B axis `hard` vs `classic` on
+  A Nuclear Winter, max speed. All prior fransbot-vs-classic runs are donor
+  diagnostics only. Posted `REPLY_2026-09-28_dawn_merge_order.md`: six
+  dependency waves W1-W6 (intel → bid/General spine → production →
+  expansion/logistics → commanders → cleanup).
+- **W1 landed** (fransbot.yaml): the five pure-intel services
+  (CombatIntel, StrategicMap, RiskModel, MineCluster, EconomicSaturation) now
+  require `enable-fransbot || (genericbot && hardbot)` — arms on `hard` only.
+  `classic` gets hardbot-via-classictier but never genericbot; lower tiers get
+  genericbot but never hardbot. Services verified order-free (zero
+  IssueOrder/IBotRequest* across all five), so W1 is a provable no-regression
+  wave. ResourceMapBotModule already ran genericbot||classicbot (EMBER).
+- Harness default `--bot-a` changed fransbot → hard (acceptance lane default).
+- Rebased to 2f3ae9071 (post-#611 eligibility fix + scoreboard + template
+  restore); all prior changes intact.
+- Running: nw-hard1 (hard-vs-classic x4 — first valid acceptance baseline;
+  match 1 is pure pre-W1, matches 2-4 run hard+W1), nw-classic3 (fransbot
+  donor diagnostics, old DLL — remembered-raid code lands next rebuild).
+
+### Follow-up: hard-side crash found and fixed (this session)
+
+- `--bot-a hard` died 4/4 at player init: `Actor player has multiple traits of
+  type ResourceMapBotModule` from `ScoutBotModule.TraitEnabled`→`TraitOrDefault`.
+  `fransbot_lists.yaml` contains a generated second `ResourceMapBotModule@fransbot`
+  instance that exists on every player (unconditioned); trait PRESENCE alone trips
+  `TraitOrDefault`. fransbot never crashed because no fransbot module does that
+  lookup — only the genericbot Scout does.
+- Commit 713180170 had already fixed ScoutBotModule to the multi-instance-safe
+  `TraitsImplementing().FirstOrDefault(IsTraitEnabled)` pattern; the shipped
+  engine DLL predated it. Rebuilt OpenRA.Mods.Cameo (+Fransbot for the pending
+  remembered-raid code) — matches initialize clean.
+- **Lesson: every hard-side A/B on a stale Cameo DLL is void.** nw-hard1's 4
+  deaths were this crash, not bot performance.
+- nw-classic3 (old DLL, fransbot-vs-classic): 3 completed losses + match 4
+  killed at WT9504 for the rebuild — donor diagnostics only per the ruling.

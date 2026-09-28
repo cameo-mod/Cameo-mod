@@ -224,6 +224,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("If true, a damaged/critically exposed roaming MCV drops its expansion target and enters the single RETREAT state. RETREAT uses plain Move only toward a reachable destination that is spatially safer, non-critical and clear of visible weapon pressure.")]
 		public readonly bool EnableMcvRetreat = true;
 
+		[Desc("Minimum RecentDamageRiskScore required before a DEPLOYED expansion FACT may repack and flee on damage alone. Unlike a mobile MCV, a deployed conyard cannot quickly escape and repacking aborts the in-flight ore refinery claim, so light harassment below this risk is tanked rather than triggering a repack cycle. Set 0 to restore upstream behavior (any recent damage repacks).")]
+		public readonly int ExpansionConyardRetreatRecentDamageRisk = 0;
+
 		[Desc("Base radius scale used when generating ranked MCV RETREAT arrival candidates around the selected safe anchor. Completion still requires the MCV to physically reach its selected arrival cell.")]
 		public readonly int McvRetreatArrivalRadius = 8;
 
@@ -8392,7 +8395,9 @@ namespace OpenRA.Mods.Common.Traits
 			var conyardTolerance = CurrentMcvRiskTolerance;
 			var conyardRisk = riskModelService.EvaluateImmediateRisk(
 				activeConyard, activeConyard.Location, FransRiskRole.Mcv, conyardTolerance);
-			var retreatFromConyard = conyardRisk.IsCritical || (Info.EnableMcvRetreat && conyardRisk.RecentlyDamaged);
+			var retreatFromConyard = conyardRisk.IsCritical ||
+				(Info.EnableMcvRetreat && conyardRisk.RecentlyDamaged &&
+				conyardRisk.RecentDamageRiskScore >= Info.ExpansionConyardRetreatRecentDamageRisk);
 			if (retreatFromConyard)
 			{
 				var incidentCenter = targetResourceCenter ?? activeConyard.Location;

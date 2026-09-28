@@ -20,10 +20,15 @@ Player:
 	FransbotControllerBotModule:
 		RequiresCondition: enable-fransbot
 		DecisionInterval: 25
+	# W1 intel substrate: these pure-service modules (no orders, no production
+	# requests) also arm on `hard` — the Frankenstein candidate — via
+	# `genericbot && hardbot`. `classic` gets hardbot but never genericbot, and
+	# lower tiers get genericbot but never hardbot, so the reference bot and
+	# easier difficulties stay Frans-free.
 	FransCombatIntelBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransStrategicMapBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 		# Representative actors whose locomotives derive the passability layers.
 		# All ContentPacks are unconditionally Included today, so TD/RA picks
 		# always resolve; a missing actor leaves that layer inert by design.
@@ -31,33 +36,44 @@ Player:
 		McvProbeActorType: td_gdi_mobileconstructionvehicle
 		NavalProbeActorType: ra1_allies_gunboat
 	FransRiskModelBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransMineClusterBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransEconomicSaturationBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || (genericbot && hardbot)
 	FransCommanderCoreBotModule:
 		RequiresCondition: enable-fransbot
 	FransCommandBidBotModule:
 		RequiresCondition: enable-fransbot
 	FransGeneralBotModule:
 		RequiresCondition: enable-fransbot
+		RaidPublishRememberedBuildings: true
 		RaidInterferencePriorityBonus: 40
 		RaidInterferenceMemoryTicks: 500
 	FransBaseBuilderBotModule:
 		RequiresCondition: enable-fransbot
+		MaximumMainBaseWarFactories: 3
 	ResourceMapBotModule@fransbot:
 		RequiresCondition: enable-fransbot
 	FransMcvExpansionManagerBotModule:
 		RequiresCondition: enable-fransbot
+		PreSurplusMaximumConstructionYardSlots: 3
+		PreSurplusPermanentConstructionYards: 2
+		DesiredPermanentConstructionYards: 3
+		MaximumPermanentConstructionYards: 4
+		MinimumGroundCombatValueForAdditionalMcv: 6000
+		ExpansionConyardRetreatRecentDamageRisk: 150
+		ExpansionTargetFailureCooldownTicks: 1500
 	FransUnitBuilderBotModule:
 		RequiresCondition: enable-fransbot
 	FransHarvesterBotModule:
 		RequiresCondition: enable-fransbot
+		HarvestersPerServicedMine: 3
 	FransSupplyTruckBotModule:
 		RequiresCondition: enable-fransbot
 	FransGroundCommanderBotModule:
 		RequiresCondition: enable-fransbot
+		GroundRememberedRaidMaximumAge: 3000
 		# Required no-default tuning (same values as upstream fransbot-personalities.yaml @ground*)
 		SecureKnownThreatMultiplierPercent: 500
 		SecureUncertaintyAllowanceValue: 600
@@ -79,6 +95,8 @@ Player:
 		RequiresCondition: enable-fransbot
 	FransDefenseCommanderBotModule:
 		RequiresCondition: enable-fransbot
+		PeacetimeDefensePerAnchorTarget: 5
+		PeacetimeDefenseEarliestTick: 3200
 	FransTransportCommanderBotModule:
 		RequiresCondition: enable-fransbot
 	FransMinelayerBotModule:
