@@ -43,9 +43,17 @@ WorldLoaded = function()
 		end
 	end)
 
+	-- A third wave gives a second post-publication formation chance if the
+	-- first still raced the strategist's scan cadence.
+	Trigger.AfterDelay(700, function()
+		for i, unit in ipairs(wave2) do
+			Actor.Create(unit, true, { Owner = bot, Location = CPos.New(80 + (i % 4), 88 + math.floor(i / 4)) })
+		end
+	end)
+
 	-- Squads must have formed well before this fires (force interval 50t,
-	-- 900 ticks leaves margin for scouting and snapshots.
-	Trigger.AfterDelay(900, function()
+	-- 1400 ticks leaves margin for two formation waves plus scouting.
+	Trigger.AfterDelay(1400, function()
 		print("AI_RAID_GATE_COMPLETED bot=HardBot tick=" .. DateTime.GameTime)
 		player.MarkFailedObjective(objective)
 	end)
