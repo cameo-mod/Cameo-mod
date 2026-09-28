@@ -245,6 +245,17 @@ Player:
 	# One bot-insurance state machine per player. Humans are ignored by the trait;
 	# the legacy construction-yard ladder remains removed from ^AIConyardCash.
 	DynamicBotInsurance:
+		DifficultyAliases:
+			classic_easiest: easiest
+			classic_veryeasy: veryeasy
+			classic_easy: easy
+			classic_medium: medium
+			classic_hard: hard
+			classic_veryhard: veryhard
+			classic_brutal: brutal
+			classic_challenger: challenger
+			classic_unbeatable: unbeatable
+			classic_cameogod: cameogod
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
 		Condition: nobase
 		Prerequisites: !conyard

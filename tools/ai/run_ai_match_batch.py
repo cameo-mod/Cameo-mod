@@ -428,6 +428,9 @@ def main() -> int:
                         help="seconds of debug.log silence before a live match counts as hung")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--template", default=TEMPLATE_MAP.name,
+                        help="template map dir under mods/cameo/maps (maintainer 2026-09-28: bot strength tests use "
+                             "ai_duel_nuclear_winter, the Tournament map at maximum speed)")
     args = parser.parse_args()
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
@@ -435,8 +438,9 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
-    if not TEMPLATE_MAP.is_dir():
-        fail(f"template map missing: {TEMPLATE_MAP}")
+    template = TEMPLATE_MAP.parent / args.template
+    if not template.is_dir():
+        fail(f"template map missing: {template}")
 
     mod_id, engine = load_config()
     executable = engine / "bin" / "OpenRA.exe"
@@ -470,7 +474,7 @@ def main() -> int:
         return 0
 
     for name, v in variants.items():
-        write_variant(TEMPLATE_MAP, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
+        write_variant(template, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 

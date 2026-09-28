@@ -361,6 +361,16 @@ bot_ai =
    .challenger = Challenger AI
    .unbeatable = Unbeatable AI
    .cameogod = Cameo God AI
+   .classic_easiest = Classic Easiest AI (A/B)
+   .classic_veryeasy = Classic Very Easy AI (A/B)
+   .classic_easy = Classic Easy AI (A/B)
+   .classic_medium = Classic Medium AI (A/B)
+   .classic_hard = Classic Hard AI (A/B)
+   .classic_veryhard = Classic Very Hard AI (A/B)
+   .classic_brutal = Classic Brutal AI (A/B)
+   .classic_challenger = Classic Challenger AI (A/B)
+   .classic_unbeatable = Classic Unbeatable AI (A/B)
+   .classic_cameogod = Classic Cameo God AI (A/B)
    .campaign = Campaign AI
    .fransbot = Fransbot (Experimental)
 

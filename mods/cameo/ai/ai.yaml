@@ -1,37 +1,42 @@
 ^AIDifficulties:
 	GrantConditionOnBotOwner@generic:
 		Condition: genericbot
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, classic_easiest, classic_veryeasy, classic_easy, classic_medium, classic_hard, classic_veryhard, classic_brutal, classic_challenger, classic_unbeatable, classic_cameogod
+	# `classic` = the same difficulty scale with the new-architecture modules off and omniscient squad scans:
+	# the AI_ARCHITECTURE §0a opponent, for A/B runs against the current bot (maintainer 2026-09-28).
+	GrantConditionOnBotOwner@classic:
+		Condition: classicbot
+		Bots: classic_easiest, classic_veryeasy, classic_easy, classic_medium, classic_hard, classic_veryhard, classic_brutal, classic_challenger, classic_unbeatable, classic_cameogod
 	GrantConditionOnBotOwner@easiest:
 		Condition: easiestbot
-		Bots: easiest
+		Bots: easiest, classic_easiest
 	GrantConditionOnBotOwner@veryeasy:
 		Condition: veryeasybot
-		Bots: veryeasy
+		Bots: veryeasy, classic_veryeasy
 	GrantConditionOnBotOwner@easy:
 		Condition: easybot
-		Bots: easy
+		Bots: easy, classic_easy
 	GrantConditionOnBotOwner@medium:
 		Condition: mediumbot
-		Bots: medium
+		Bots: medium, classic_medium
 	GrantConditionOnBotOwner@hard:
 		Condition: hardbot
-		Bots: hard
+		Bots: hard, classic_hard
 	GrantConditionOnBotOwner@veryhard:
 		Condition: veryhardbot
-		Bots: veryhard
+		Bots: veryhard, classic_veryhard
 	GrantConditionOnBotOwner@brutal:
 		Condition: brutalbot
-		Bots: brutal
+		Bots: brutal, classic_brutal
 	GrantConditionOnBotOwner@challenger:
 		Condition: challengerbot
-		Bots: challenger
+		Bots: challenger, classic_challenger
 	GrantConditionOnBotOwner@unbeatable:
 		Condition: unbeatablebot
-		Bots: unbeatable
+		Bots: unbeatable, classic_unbeatable
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
-		Bots: cameogod
+		Bots: cameogod, classic_cameogod
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -250,6 +255,36 @@ Player:
 	ModularBot@CameoGodAI:
 		Name: bot_ai.cameogod
 		Type: cameogod
+	ModularBot@ClassicEasiestAI:
+		Name: bot_ai.classic_easiest
+		Type: classic_easiest
+	ModularBot@ClassicVeryeasyAI:
+		Name: bot_ai.classic_veryeasy
+		Type: classic_veryeasy
+	ModularBot@ClassicEasyAI:
+		Name: bot_ai.classic_easy
+		Type: classic_easy
+	ModularBot@ClassicMediumAI:
+		Name: bot_ai.classic_medium
+		Type: classic_medium
+	ModularBot@ClassicHardAI:
+		Name: bot_ai.classic_hard
+		Type: classic_hard
+	ModularBot@ClassicVeryhardAI:
+		Name: bot_ai.classic_veryhard
+		Type: classic_veryhard
+	ModularBot@ClassicBrutalAI:
+		Name: bot_ai.classic_brutal
+		Type: classic_brutal
+	ModularBot@ClassicChallengerAI:
+		Name: bot_ai.classic_challenger
+		Type: classic_challenger
+	ModularBot@ClassicUnbeatableAI:
+		Name: bot_ai.classic_unbeatable
+		Type: classic_unbeatable
+	ModularBot@ClassicCameogodAI:
+		Name: bot_ai.classic_cameogod
+		Type: classic_cameogod
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
 		RequiresCondition: genericbot
@@ -3235,13 +3270,13 @@ Player:
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !classicbot
 		UseFoggedObservation: true
 	ScoutBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !classicbot
 		ScoutUnitTypes: ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog, td_nod_reconbike, td_nod_buggy, td_nod_buggymkii, td_gdi_humvee, td_gdi_humveemkii, ra1_allies_ranger, ra1_allies_reconranger, japan_scoutcar, japan_imperialscoutsman, ordos_dustdrone, ordos_swarmerdrone, ixian_airdrone, atreides_airdrone, latinsyndicate_raiderbuggy, futuretech_scoutdroid, ordos_raider, atreides_sandbike, ix_raider, corrino_buggy, zerg_zergling, terran_reaper, harkonnen_buzzsaw, eden_scout, plymouth_scout
 	BeaconResponderBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !classicbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot
 		McvTypes: td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, yuri_slaveminer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, asianalliance_mobileconstructionvehicle, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, futuretech_mobileconstructionvehicle, terran_mobilecommandcenter, protoss_mobilenexus, zerg_hatcherydrone, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, tkm_mobileconstructionvehicletkm, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
@@ -3860,9 +3895,9 @@ Player:
 			#################### UnitLimits ZERG
 			#################### UnitLimits Warcraft 2
 	CombatAnalysisBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !classicbot
 	HumanPaceBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !classicbot
 
 World:
 	BeaconTracker:
