@@ -18,37 +18,37 @@ Terrain:
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 284428
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearWinter:
 		Type: ClearWinter
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 397739 #284428
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearJungle:
 		Type: ClearJungle
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 285C30
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearSnow:
 		Type: ClearSnow
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: C4C4C4
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearDesert:
 		Type: ClearDesert
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 865F45
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearInterior:
 		Type: ClearInterior
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: ADADAD #BC8F8F
-		RestrictPlayerColor: true
+		RestrictPlayerColor: false
 	TerrainType@ClearNoSmudges:
 		Type: ClearNoSmudges
 		TargetTypes: Ground
@@ -9220,7 +9220,7 @@ Templates:
 		Frames: 0
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1001:
 		Id: 1001
 		Images: ratem_urban_concrete.png
@@ -9229,7 +9229,7 @@ Templates:
 		Frames: 1
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1002:
 		Id: 1002
 		Images: ratem_urban_concrete.png
@@ -9238,7 +9238,7 @@ Templates:
 		Frames: 2
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1003:
 		Id: 1003
 		Images: ratem_urban_concrete.png
@@ -9247,7 +9247,7 @@ Templates:
 		Frames: 3
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1004:
 		Id: 1004
 		Images: ratem_urban_concrete.png
@@ -9256,7 +9256,7 @@ Templates:
 		Frames: 4
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1005:
 		Id: 1005
 		Images: ratem_urban_concrete.png
@@ -9265,7 +9265,7 @@ Templates:
 		Frames: 5
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1006:
 		Id: 1006
 		Images: ratem_urban_concrete.png
@@ -9274,7 +9274,7 @@ Templates:
 		Frames: 6
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1007:
 		Id: 1007
 		Images: ratem_urban_concrete.png
@@ -9283,7 +9283,7 @@ Templates:
 		Frames: 7
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1008:
 		Id: 1008
 		Images: ratem_urban_concrete.png
@@ -9292,7 +9292,7 @@ Templates:
 		Frames: 8
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1009:
 		Id: 1009
 		Images: ratem_urban_concrete.png
@@ -9301,7 +9301,7 @@ Templates:
 		Frames: 9
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1010:
 		Id: 1010
 		Images: ratem_urban_concrete.png
@@ -9310,7 +9310,7 @@ Templates:
 		Frames: 10
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1011:
 		Id: 1011
 		Images: ratem_urban_concrete.png
@@ -9319,7 +9319,7 @@ Templates:
 		Frames: 11
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1012:
 		Id: 1012
 		Images: ratem_urban_concrete.png
@@ -9328,7 +9328,7 @@ Templates:
 		Frames: 12
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1013:
 		Id: 1013
 		Images: ratem_urban_concrete.png
@@ -9337,7 +9337,7 @@ Templates:
 		Frames: 13
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1014:
 		Id: 1014
 		Images: ratem_urban_concrete.png
@@ -9346,7 +9346,7 @@ Templates:
 		Frames: 14
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 	Template@1015:
 		Id: 1015
 		Images: ratem_urban_concrete.png
@@ -9356,7 +9356,7 @@ Templates:
 		Categories: Urban
 		Tiles:
 			0: ClearTemperat
-			1: Road
+			1: ClearInterior
 
 	Template@1016:
 		Id: 1016
@@ -9366,7 +9366,7 @@ Templates:
 		Frames: 17, 18
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 			1: ClearTemperat
 
 	Template@1017:
@@ -9377,7 +9377,7 @@ Templates:
 		Frames: 20, 21
 		Categories: Urban
 		Tiles:
-			0: Road
+			0: ClearInterior
 			1: ClearTemperat
 	Template@1018:
 		Id: 1018
@@ -9388,7 +9388,7 @@ Templates:
 		Categories: Urban
 		Tiles:
 			0: ClearTemperat
-			1: Road
+			1: ClearInterior
 
 	Template@1019:
 		Id: 1019
@@ -10826,6 +10826,364 @@ Templates:
 		Tiles:
 			0: ClearTemperat
 			1: Road
+
+	# ##################################################
+	# #	Biome Transitions
+	# ##################################################
+	Template@2000:
+		Id: 2000
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 0
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2001:
+		Id: 2001
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 1
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2002:
+		Id: 2002
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 2
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2003:
+		Id: 2003
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 3
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2004:
+		Id: 2004
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 4
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2005:
+		Id: 2005
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 5
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2006:
+		Id: 2006
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 6
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2007:
+		Id: 2007
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 7
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2008:
+		Id: 2008
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 8
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2009:
+		Id: 2009
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 9
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2010:
+		Id: 2010
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 10
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2011:
+		Id: 2011
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 11
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2012:
+		Id: 2012
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 12
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2013:
+		Id: 2013
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 13
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2014:
+		Id: 2014
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 14
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+	Template@2015:
+		Id: 2015
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 15, 16
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearTemperat
+			1: ClearDesert
+
+	Template@2016:
+		Id: 2016
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 17, 18
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+			1: ClearTemperat
+
+	Template@2017:
+		Id: 2017
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 20, 21
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearDesert
+			1: ClearTemperat
+	Template@2018:
+		Id: 2018
+		Images: temperat_to_desert.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 22, 23
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearTemperat
+			1: ClearDesert
+	Template@2019:
+		Id: 2019
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 0
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2020:
+		Id: 2020
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 1
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2021:
+		Id: 2021
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 2
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2022:
+		Id: 2022
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 3
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2023:
+		Id: 2023
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 4
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2024:
+		Id: 2024
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 5
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2025:
+		Id: 2025
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 6
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2026:
+		Id: 2026
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 7
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2027:
+		Id: 2027
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 8
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2028:
+		Id: 2028
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 9
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2029:
+		Id: 2029
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 10
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2030:
+		Id: 2030
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 11
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2031:
+		Id: 2031
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 12
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2032:
+		Id: 2032
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 13
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2033:
+		Id: 2033
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 1,1
+		Frames: 14
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+	Template@2034:
+		Id: 2034
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 15, 16
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearTemperat
+			1: ClearSnow
+
+	Template@2035:
+		Id: 2035
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 17, 18
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+			1: ClearTemperat
+
+	Template@2036:
+		Id: 2036
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 20, 21
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearSnow
+			1: ClearTemperat
+	Template@2037:
+		Id: 2037
+		Images: temperat_to_snow.png
+		Palette: td_temperat
+		Size: 2,1
+		Frames: 22, 23
+		Categories: Biome Transitions
+		Tiles:
+			0: ClearTemperat
+			1: ClearSnow
 	# ##################################################
 	# #	Snow
 	# ##################################################
