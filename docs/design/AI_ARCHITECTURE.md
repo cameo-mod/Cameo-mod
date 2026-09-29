@@ -1566,8 +1566,10 @@ New **target** tags: `power` (positive `Power`), `defence` (building with an arm
   ledger (counters) and by the learned trade ratios, with a **floor** so every role the faction
   can build is used. Production fills the largest *deficit* against the mix — through the existing
   builder, as a demand input.
-* Squads are formed to the same mix (a main assault without frontline or AA waits for them,
-  bounded by `StageTimeoutTicks`), and compositions (§1.4) remain the personality flavour.
+* Squads are formed to the same mix: a main assault missing a `StageRequiredRoles` entry
+  (e.g. frontline, anti_air) waits for the pool to cover it, bounded by `StageCompositionTicks`
+  — the composition bound, distinct from the 6f spatial-rally `StageTimeoutTicks` — and
+  compositions (§1.4) remain the personality flavour.
 
 ### 12.6 Siege and force preservation (phase CA-2) — the maintainer's "most importantly"
 
