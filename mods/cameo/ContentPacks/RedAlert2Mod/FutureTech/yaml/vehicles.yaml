@@ -150,6 +150,8 @@ futuretech_salamanderifv:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Salamander IFV
 	Valued:
@@ -190,6 +192,8 @@ futuretech_robottank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@RobotControllable: ^RobotControllable
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -385,6 +389,8 @@ futuretech_riptideacv:
 	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1700
 	Tooltip:

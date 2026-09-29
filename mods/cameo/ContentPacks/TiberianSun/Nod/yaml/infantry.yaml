@@ -2,6 +2,8 @@ ts_nod_lightinfantry:
 	Inherits: TSE1
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@InfiltrationKit: ^InfiltrationKit
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_nod_handof

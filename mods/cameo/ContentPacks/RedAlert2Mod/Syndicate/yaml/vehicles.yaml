@@ -9,6 +9,8 @@ latinsyndicate_mortarbike:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^LatinFlameUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
 		BuildPaletteOrder: 30
@@ -179,6 +181,8 @@ latinsyndicate_raiderbuggy:
 	Inherits@EMP: ^TurretEMP
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Raider Buggy
 	Valued:
@@ -340,6 +344,8 @@ latinsyndicate_rushertank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Rusher Tank
 	Valued:
@@ -531,6 +537,8 @@ latinsyndicate_diablo:
 	Inherits@EMP: ^TurretEMP
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Diablo
 	Valued:

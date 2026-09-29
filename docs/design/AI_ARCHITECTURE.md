@@ -497,6 +497,54 @@ ids were hand-appended (119 ids across 66 rows, all verified defined) until `App
 table's "written" column therefore now includes these ids — do not re-review them as pending
 additions.
 
+**Where the central ids are (measured 2026-09-29, master `f37342668`: 5,825).** The metric went
+**up** from 4,092, and nothing caught it, because `count_central_ids.py` is in no gate: +670 from
+#588's interim repair (4,601 after `06c74eff4` lowercased it), +580 from `1d754587f`
+(`SquadManagerBotModuleCA@classic`) and +644 from `3fc9e7e5f` (`SquadManagerBotModuleCA@guerrilla`).
+Every personality block carries its **own full copy** of the squad lists, so each new personality
+adds ~600 ids. The seven `SquadManagerBotModuleCA` copies hold ~4,270 of the 5,746 list entries:
+`GuerrillaTypes` 1,776 (254 × 7), `HighValueTargetTypes` 794, `ExcludeFromSquadsTypes` 745,
+`BigAirThreats` 284, `AirUnitsTypes` 222, `NavalUnitsTypes` 215, `StaticAntiAirTypes` 177. A role
+that targets a SquadManager field drains all seven copies at once, so the squad lists come first;
+the base-builder lists (`PowerTypes` 33, `BarracksTypes` 30, `ProductionTypes` 88) are worth far
+less. A `--max` ratchet in `run_all.sh` follows the next role that lowers the count.
+
+### 2.8a The guerrilla role: generated onto the actors, because the band is per faction
+
+**Ruled 2026-09-27:** guerrilla (raid) units are fast/light only, generated from traits, never
+hand-typed (AI_SYNTHESIS.md §3.1). **Bands ruled 2026-09-29 (maintainer, from four measured
+options):** a unit is a guerrilla when it is in the **fastest third** of its own faction's infantry
+(or vehicles) **and** costs **at most that group's median**.
+
+The band is relative to the *faction*, and the bot cannot see ContentPacks at rules load, so
+`BotRoleSets` cannot compute it. `tools/ai/derive_guerrilla_roles.py` computes it offline (the
+faction is the pack, `ContentPacks/<Theme>/<Faction>/`; an actor still in a central rules file is
+`<file stem>/<id prefix>`, e.g. `outpost2/eden`) and writes `BotRoles: Roles: guerrilla` on the
+actor **in its own file**. That keeps the id out of `ai.yaml` (plug and play) and the unit list
+out of human hands. `tools/audit/audit_guerrilla_roles.py` (in `run_all.sh`) reruns it with
+`--check` and fails on any drift.
+
+The pool, per faction and per infantry/vehicle group: producible (a queue some trait `Produces` or
+some `*ProductionQueue` declares: no factory makes the `Disabled` queue, and the Zerg queue
+is a player queue), armed with a weapon that can hurt an enemy (`scrin_repair_drone`'s beam is
+ally-only), ground-mobile (not `naval` or `subterranean`), not an engineer, saboteur or spy
+(`Captures` with a `building` type, or `Infiltrates`: every infantryman also `Captures`
+`ra2garrison`), and not from the artillery, artillery-tank or fire-support template (§12.4a).
+**Result: 154 actors in 37 factions, 57 infantry and 97 vehicles, 1–8 per faction; 12 of them
+live in central rules files (Outpost 2, TS, WC2).**
+
+Two traps the generator handles, both caught while building it:
+* **A tag leaks to children.** An actor that inherits another actor inherits its `BotRoles`:
+  the Plymouth Lynx chassis is in the band and the heavier Tiger (`PLYMOUTH_TIGER_*`) that
+  inherits it is not. The generator compares the **resolved** roles and writes `-BotRoles:` on
+  such a child (10 today), so `--check` also catches a new child of a guerrilla.
+* **A child `Roles:` replaces the parent's.** A new block repeats every role the actor keeps.
+
+**Not applied yet.** Tagging is inert: `guerrilla` has no `Targets` entry. Applying it
+(`guerrilla: SquadManagerBotModuleCA.GuerrillaTypes` + `Apply`, and the seven 254-id lists
+emptied) removes **1,776 central ids** and changes behaviour (254 raiders → 154, the 51 aircraft
+leave the ground guerrilla squad), so it lands only after a Nuclear Winter A/B (§12.10 gate).
+
 ---
 
 ## 3. Reading the enemy: the observation model
@@ -1558,6 +1606,44 @@ weapon's Versus profile, as `AdaptiveCounterProduction` scores it), `artillery` 
 `gunship` (VTOL/hovering, ground weapons — helicopters and hovering spaceships), `fighter`
 (air-to-air weapons), `bomber` (bomb/drop attacks or fixed-wing ground-only), `air_transport`.
 New **target** tags: `power` (positive `Power`), `defence` (building with an armament), `tech`.
+
+### 12.4a Squad membership rulings (maintainer, 2026-09-29)
+
+1. **Artillery squads are the `^ArtilleryTemplate` and `^ArtilleryTankTemplate` units ONLY.**
+   Both templates now declare `BotRoles: Roles: artillery` (`rules/defaults.yaml`; 50 actors
+   resolve to it). This replaces the range rule the code uses today: `SquadManagerBotModuleCA
+   .ArtilleryMinRangeCells` (10) splits *any* ground unit with a 10-cell weapon into an artillery
+   squad, and `BotTargetTags` tags *any* 12-cell unit as artillery.
+2. **Fire-support units form their own squads, with tanks, and protect the artillery.**
+   `^FireSupportTemplate` declares `BotRoles: Roles: firesupport` (37 actors: e.g. the Tesla tank,
+   the GDI exosuit). They are support, never assault or raid units.
+3. **Ships are their own squads, never mixed into ground or air squads.** A ship is a `naval`
+   locomotor (the `navalunit` role's rule; `hover` and `amphibius` units such as hovercraft move on
+   land and stay ground units). Today `FindNewUnits` checks `GuerrillaTypes` before
+   `NavalUnitsTypes` and sends anything unlisted to a ground squad, and #627 measured **19 naval
+   units missing from `NavalUnitsTypes`**: those ships are drafted into ground squads now.
+   Applying `navalunit` is the list fix; a guard that a naval unit can never enter a ground or air
+   squad is the code fix.
+
+None of the three is a guerrilla (§2.8a excludes them). **Open, C# in `SquadManagerBotModuleCA`:**
+read the `artillery` role instead of the range rule, add the fire-support squad and its escort
+of tanks, and the naval guard. Owners per §12.10: CA-3/CA-4 (NOVA) for the squad composition,
+Claude for the roles and the `navalunit` application; Claude-Local (who integrated the DF code
+below) reviews the C#.
+
+**Interlocks with the defence code on master `297c626f4`** (all in `SquadManagerBotModuleCA`):
+* **Naval check first.** `PrepositionDefenceTick` and `ProtectOwn` draft the idle pool (`AttackBase`,
+  not Building/Harvester/Aircraft), so a ship missing from `NavalUnitsTypes` can be drafted into a
+  *land* protection squad today. Put the naval branch **before** the guerrilla branch in
+  `FindNewUnits` (guerrilla assignment goes through `OpenGuerrillaSquad`, which respects
+  `MaxGuerrillaSquads` / `MaxGuerrillaSquadsLate`), so a ship never reaches the idle pool.
+* **`ReleaseDefenders`** routes released defenders by `GuerrillaTypes` / `HarasserTypes`, else to the
+  idle pool. The guerrilla role follows automatically once it has `Targets`; a fire-support squad
+  type needs its own branch there, or released fire-support units fall back into the idle pool.
+* **`FastSquadsReactToThreats`** moves only Guerrilla/Harass squads. Fire-support squads guard the
+  artillery and are not fast squads, so they stay out of it.
+* **Artillery by role** does not touch the combat predictor (`BotUnitProfiles` is independent of
+  `ArtilleryMinRangeCells`).
 
 ### 12.5 Composition and ratios (phase CA-3)
 

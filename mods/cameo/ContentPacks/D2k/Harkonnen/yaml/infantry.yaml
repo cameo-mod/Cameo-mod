@@ -7,6 +7,8 @@ harkonnen_lightinfantry:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_harkonnen_lightinfantry.name
 	Valued:

@@ -125,6 +125,8 @@ forgotten_mutantsniper:
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetMedium
 	Inherits@Unity: ^Unity
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -166,6 +168,7 @@ forgotten_mutantsniper:
 
 forgotten_mutantsniper_sp:
 	Inherits: forgotten_mutantsniper
+	-BotRoles:
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
@@ -258,6 +261,7 @@ forgotten_ghoststalker_r4:
 
 forgotten_mutantsniper_r4:
 	Inherits: forgotten_mutantsniper
+	-BotRoles:
 	-Buildable:
 	RenderSprites:
 		Image: forgotten_mutantsniper
@@ -296,6 +300,8 @@ forgotten_mutant:
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetSmall
 	Inherits@Unity: ^Unity
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 160
 	Tooltip:
@@ -340,6 +346,7 @@ forgotten_mutant:
 
 forgotten_mutant_sp:
 	Inherits: forgotten_mutant
+	-BotRoles:
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
@@ -515,6 +522,8 @@ forgotten_zombiemutant:
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetMedium
 	Inherits@Unity: ^Unity
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -939,6 +948,8 @@ forgotten_viniferafiend:
 
 forgotten_mutant_wild:
 	Inherits: forgotten_mutant
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Prerequisites: ~forgotten_mutant_wild
 		Description: Wild mutant creature. Attacks nearby enemies.

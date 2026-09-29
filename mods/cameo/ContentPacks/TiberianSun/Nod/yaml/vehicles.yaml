@@ -150,6 +150,8 @@ ts_nod_attackbuggy:
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 450
 	Tooltip:
@@ -549,6 +551,8 @@ ts_nod_attackcycle:
 	Inherits@MobilitySpecialization: ^MobilitySpecialization
 	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 550
 	Tooltip:

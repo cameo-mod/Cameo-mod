@@ -8,6 +8,8 @@ corrino_sardaukar_bazooka:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_sardaukar_bazooka.name
 	Valued:
@@ -65,6 +67,8 @@ corrino_lightinfantry:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_lightinfantry.name
 	Valued:
@@ -170,6 +174,8 @@ corrino_sardaukar_berserker:
 	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_sardaukar_berserker.name
 	WithInfantryBody:
@@ -215,6 +221,8 @@ corrino_sardaukar_sword:
 	Inherits@anim: ^D2KRA2Infantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_sardaukar_sword.name
 	Valued:
@@ -261,6 +269,8 @@ corrino_sardaukar_javelin:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_sardaukar_javelin.name
 	Valued:
@@ -307,6 +317,8 @@ corrino_sardaukar_laser:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_corrino_sardaukar_laser.name
 	Valued:

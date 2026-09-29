@@ -1,5 +1,28 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-29 — Claude: guerrilla band on the actors; squad rulings for artillery, fire support and ships
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_guerrilla`
+
+**Maintainer rulings today** (AI_ARCHITECTURE §2.8a, §12.4a):
+* **Guerrilla bands:** the fastest third of the faction's infantry or vehicles, costing at most the median.
+* **Artillery squads** are `^ArtilleryTemplate` + `^ArtilleryTankTemplate` units only. **Fire-support
+  units** (`^FireSupportTemplate`) form their own squads with tanks and protect the artillery.
+* **Ships** are their own squads, never mixed into ground or air squads.
+
+**Landed on this branch (inert, no behaviour change):** `tools/ai/derive_guerrilla_roles.py` writes
+`BotRoles: Roles: guerrilla` on 154 actors in 37 factions (65 rules files, 10 `-BotRoles:` on child
+actors that would have inherited the tag); `audit_guerrilla_roles.py` in `run_all.sh`; the three
+templates declare `artillery` / `firesupport`. Boot-gated (isolated support dir, 0 exceptions).
+
+**Found:** the §2.8 metric went **up** 4,092 → 5,825 (#588 interim, `@classic`, `@guerrilla`: every
+personality copies ~600 list ids); no gate watched it. And 19 ships are in ground squads today
+(#627's `navalunit` misses; `FindNewUnits` checks `GuerrillaTypes` before `NavalUnitsTypes`).
+
+**Next (Claude, after cameo-mod-45's integration merge):** apply `guerrilla` (−1,776 ids) behind a
+Nuclear Winter A/B, add the `--max` ratchet, review and apply `navalunit`. **For NOVA (CA-3/CA-4):**
+§12.4a in `SquadManagerBotModuleCA` — the `artillery` role instead of `ArtilleryMinRangeCells`, the
+escorted fire-support squad, the ship guard.
 
 ## 2026-09-29 — Claude: the Frankenstein doctrine integrated on master (maintainer: "merge everything together")
 

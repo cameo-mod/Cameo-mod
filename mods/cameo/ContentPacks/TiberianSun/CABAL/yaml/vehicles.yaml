@@ -99,6 +99,8 @@ cabal_cyborgreaper:
 	Inherits@snipe: ^DriverKillAndNeutronImmune
 	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
+	BotRoles:
+		Roles: guerrilla
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -429,6 +431,8 @@ cabal_tarantula:
 	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
 	Inherits@BACKUP: ^CabalUpgradeBackupSystems
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1000
 	Tooltip:

@@ -124,6 +124,8 @@ scrin_shock_trooper:
 
 scrin_shock_trooper_blink_pack:
 	Inherits: ^ScrinInfantryVisual
+	BotRoles:
+		Roles: guerrilla
 	Voiced:
 		VoiceSet: ScrinShockTrooperVoice
 	Tooltip:

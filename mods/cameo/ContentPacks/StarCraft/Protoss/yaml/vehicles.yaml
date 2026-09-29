@@ -52,6 +52,8 @@ protoss_dragoon:
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
 	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Dragoon
 	Valued:
@@ -112,6 +114,8 @@ protoss_manifold:
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
 	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Manifold
 	Valued:
@@ -614,6 +618,8 @@ protoss_positron:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Positron
 	Valued:

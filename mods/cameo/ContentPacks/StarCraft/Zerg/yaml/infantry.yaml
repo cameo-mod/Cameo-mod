@@ -11,6 +11,8 @@ zerg_zergling:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@swarmer: ^ZergSwarmerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Zergling
 	Valued:
@@ -62,6 +64,8 @@ zerg_talon:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@swarmer: ^ZergSwarmerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Talon
 	Valued:
@@ -171,6 +175,8 @@ zerg_spithid:
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@range: ^GroovedSpinesUpgrade
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Spithid
 	Valued:
