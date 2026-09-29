@@ -14584,3 +14584,28 @@ personality). Dropped own ai_module_map commit — master #622 covers it.
 `PredictsWin/PredictsLoss` wrappers still on claude/active_doctrine.
 
 nw-hard6 relaunched on fixed tree (4-match canonical td_gdi A/B).
+
+## 2026-09-29 — CA-2b siege plumbing (DAWN)
+
+Implements §12.6 end-to-end, behaviour OFF by default:
+- `IBotSiegeAdvisor` + `SiegeVerdict` (Advance/StandOff/Retreat) — new file;
+  squad state machine stays the single order authority, only consults.
+- `BotRememberedDefence.Observed` (ActorInfo) — lets BotCombatPredictor build
+  Versus-weighted enemy profiles from remembered defences (CP seam per
+  Claude's reply: commit verdict uses Predict, not parallel combat math).
+- `SiegeEvaluatorBotModule` implements the advisor: per-squad verdict cache
+  refreshed every EvaluationInterval; committed = Predict.OwnWins AND value
+  R-gate; Retreat when Predict says the trade loses; StandOff + hold cell on
+  the max-range+margin line otherwise. `BehaviourEnabled: false` default.
+- `SquadManagerBotModuleCA`: `siegeAdvisors` aggregated beside
+  threatProviders; `EvaluateSiege` returns Advance when none/disabled.
+- `GroundUnitsAttackMoveStateCA.Tick`: consult after the live-enemy check —
+  Retreat → Flee state; StandOff → Move to hold cell (re-order only when the
+  leader drifts >2 cells off the line).
+- yaml: `BehaviourEnabled: false` on the genericbot&&hardbot node.
+- Fog audit PASS (no new enumerations). Compile clean (0 CS errors);
+  engine/bin copy waits for nw-hard6 m1 boundary (detached watcher armed).
+
+NOTE: m1 at WT24000+ shows zero SIEGE-EVAL lines — either no assault squads
+formed or none held a valid target. If the batch finishes silent, that is a
+finding: assault formation may be broken on hard (larger than siege).

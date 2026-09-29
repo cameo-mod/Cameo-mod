@@ -4132,6 +4132,9 @@ Player:
 	# validates the remembered-defence inputs on the hard candidate.
 	SiegeEvaluatorBotModule:
 		RequiresCondition: genericbot && hardbot
+		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
+		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
+		BehaviourEnabled: false
 
 World:
 	BeaconTracker:

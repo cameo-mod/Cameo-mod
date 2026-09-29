@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
@@ -39,16 +40,20 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Minimum summed squad unit value worth evaluating — empty or token squads are noise.")]
 		public readonly int MinimumSquadValue = 500;
 
+		[Desc("CA-2b: feed the verdict back to assault squads through IBotSiegeAdvisor (stand-off / retreat). False = telemetry only.")]
+		public readonly bool BehaviourEnabled = false;
+
 		public override object Create(ActorInitializer init) => new SiegeEvaluatorBotModule(init.Self, this);
 	}
 
-	public class SiegeEvaluatorBotModule : ConditionalTrait<SiegeEvaluatorBotModuleInfo>, IBotTick
+	public class SiegeEvaluatorBotModule : ConditionalTrait<SiegeEvaluatorBotModuleInfo>, IBotTick, IBotSiegeAdvisor
 	{
 		readonly World world;
 		readonly Player player;
 		SquadManagerBotModuleCA[] squadManagers;
 		IBotRegionThreatProvider[] threatProviders;
 		IBotRememberedDefenceProvider[] defenceProviders;
+		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff)> verdicts = new();
 		int lastEvaluationTick = -1;
 
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
@@ -76,6 +81,9 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var defences = defenceProviders.SelectMany(p => p.RememberedDefences()).ToArray();
+			var rules = world.Map.Rules;
+			verdicts.Clear();
+			var evaluated = 0;
 
 			foreach (var squad in squadManagers.SelectMany(m => m.Squads))
 			{
@@ -86,6 +94,8 @@ namespace OpenRA.Mods.CA.Traits
 				var squadValue = squad.Units.Sum(u => u.Actor?.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0);
 				if (squadValue < Info.MinimumSquadValue)
 					continue;
+
+				evaluated++;
 
 				var target = squad.Target;
 				if (target.Type == TargetType.Invalid)
@@ -105,21 +115,63 @@ namespace OpenRA.Mods.CA.Traits
 
 				// §12.6 rule order: hold at stand-off -> artillery works the defences ->
 				// commit on cleared area or overwhelming effective value -> retreat on loss.
+				// "Effective" is Versus-weighted: BotCombatPredictor.Predict with the
+				// remembered defences as the enemy set — one engagement authority.
 				string verdict;
 				var standOffCells = 0;
+				var verdictKind = SiegeVerdict.Advance;
+				var standOffCell = CPos.Zero;
 				if (covering.Length == 0)
 					verdict = obstacleValue > 0 ? "commit-no-defences(army-covered)" : "free-advance";
 				else
 				{
+					var own = squad.Units.Where(u => u.Actor != null)
+						.GroupBy(u => u.Actor.Info)
+						.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+						.ToList();
+					var enemy = covering.GroupBy(d => d.Observed)
+						.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+						.ToList();
+					var prediction = BotCombatPredictor.Predict(own, enemy);
+
 					standOffCells = covering.Max(d => d.MaxRangeCells) + Info.StandOffMarginCells;
 					var standOffSq = (long)standOffCells * standOffCells;
-					var distToNearestDefenceSq = covering.Min(d => (d.Cell - squadCell).LengthSquared);
-					var committed = (long)squadValue * 100 >= (long)Info.CommitRatioPercent * obstacleValue;
-					if (distToNearestDefenceSq <= standOffSq)
-						verdict = committed ? "overrun-line(commit anyway)" : "inside-defence-range(HOLD-FAIL)";
+					var nearest = covering.Aggregate((a, b) =>
+						(a.Cell - squadCell).LengthSquared <= (b.Cell - squadCell).LengthSquared ? a : b);
+					var distToNearestDefenceSq = (nearest.Cell - squadCell).LengthSquared;
+					var insideLine = distToNearestDefenceSq <= standOffSq;
+					var committed = prediction.OwnWins &&
+						(long)squadValue * 100 >= (long)Info.CommitRatioPercent * obstacleValue;
+
+					// The hold point sits on the stand-off line, on the defence->squad bearing.
+					if (!committed)
+					{
+						var delta = squadCell - nearest.Cell;
+						var distCells = (int)Math.Sqrt((double)distToNearestDefenceSq);
+						var hx = distCells >= standOffCells ? squadCell.X
+							: nearest.Cell.X + (int)((long)delta.X * standOffCells / Math.Max(1, distCells));
+						var hy = distCells >= standOffCells ? squadCell.Y
+							: nearest.Cell.Y + (int)((long)delta.Y * standOffCells / Math.Max(1, distCells));
+						standOffCell = new CPos(hx, hy);
+					}
+
+					if (committed)
+					{
+						verdict = insideLine ? "overrun-line(commit anyway)" : "commit";
+					}
+					else if (!prediction.OwnWins)
+					{
+						verdict = "retreat(predicted-loss)";
+						verdictKind = SiegeVerdict.Retreat;
+					}
 					else
-						verdict = committed ? "commit" : "stand-off";
+					{
+						verdict = insideLine ? "inside-defence-range(HOLD-FAIL)" : "stand-off";
+						verdictKind = SiegeVerdict.StandOff;
+					}
 				}
+
+				verdicts[squad] = (verdictKind, standOffCell);
 
 				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
 					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
@@ -130,6 +182,26 @@ namespace OpenRA.Mods.CA.Traits
 					covering.Length, defenceValue, standOffCells, rememberedThreat, verdict,
 					artilleryAttached ? "attached" : "none"));
 			}
+
+			// Heartbeat: distinguishes "module silent" from "no assault squads
+			// qualified" — a whole batch of silence means formation starves.
+			Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} pass: squads={2} evaluated={3} defences={4}",
+				world.WorldTick, player.ClientIndex,
+				squadManagers.Sum(m => m.Squads.Count(s => s.IsValid)), evaluated, defences.Length));
+		}
+
+		// IBotSiegeAdvisor — serves the cached evaluation. Disabled or stale
+		// answers Advance so the state machine behaves exactly as without the
+		// module (CA-2b switch: BehaviourEnabled).
+		public SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell)
+		{
+			standOffCell = CPos.Zero;
+			if (IsTraitDisabled || !Info.BehaviourEnabled ||
+				!verdicts.TryGetValue(squad, out var cached))
+				return SiegeVerdict.Advance;
+
+			standOffCell = cached.StandOff;
+			return cached.Verdict;
 		}
 	}
 }

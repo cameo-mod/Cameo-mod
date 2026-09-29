@@ -127,6 +127,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightDefence = 150;
 		public readonly int WeightAlly = 100;
 
+		[Desc("CA-6 (§12.9): remembered static defences join the enemy force the own",
+			"army must outmass for a target to be 'beatable' — weak measures",
+			"ownArmy vs ArmyValue + DefenceValue instead of ArmyValue alone.",
+			"False = pre-CA-6 scoring, bit-identical.")]
+		public readonly bool WeakIncludesDefence = false;
+
 		[Desc("w_hurt weight: an enemy winning the exchange against us loses target score (§4.3).",
 			"hurt = taken/(taken+dealt) — the bounded share form of the spec's dealt/taken",
 			"ratio, so 'damage dealt to us' only penalises once we have fought back some too.")]
@@ -360,7 +366,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						if (armament.WeaponInfo != null && armament.WeaponInfo.Range.Length > maxRange)
 							maxRange = armament.WeaponInfo.Range.Length;
 
-					yield return new BotRememberedDefence(seen.Location, seen.Value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy);
+					yield return new BotRememberedDefence(seen.Location, seen.Value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy, seen.Info);
 				}
 			}
 		}
@@ -1055,7 +1061,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
-			var weak = Saturate(ownArmy, profile.ArmyValue);
+			var weak = Saturate(ownArmy, profile.ArmyValue + (info.WeakIncludesDefence ? profile.DefenceValue : 0));
 			var econProxy = profile.Harvesters + profile.Refineries * 2;
 			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
 			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);

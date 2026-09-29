@@ -349,6 +349,28 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// CA-2 siege consult (§12.6): with no live enemy in reach, an advisor
+			// may hold the squad at the remembered-defence stand-off line or pull
+			// it out before a losing trade. Advance (or no advisor) changes nothing.
+			if (owner.Type == SquadCAType.Rush || owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
+			{
+				var siegeVerdict = owner.SquadManager.EvaluateSiege(owner, out var standOffCell);
+				if (siegeVerdict == SiegeVerdict.Retreat)
+				{
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+					return;
+				}
+
+				if (siegeVerdict == SiegeVerdict.StandOff && leader.Actor != null && owner.World.Map.Contains(standOffCell))
+				{
+					// Re-order only when the leader drifts off the hold line.
+					if ((owner.World.Map.CellContaining(leader.Actor.CenterPosition) - standOffCell).LengthSquared > 4)
+						foreach (var u in owner.Units)
+							owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, standOffCell), false));
+					return;
+				}
+			}
+
 			// Since units have different movement speeds, they get separated while approaching the target.
 			// Let them regroup into tighter formation towards "leader".
 			//

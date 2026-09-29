@@ -28,13 +28,18 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int LastSeenTick;
 		public readonly OpenRA.Player Enemy;
 
-		public BotRememberedDefence(CPos cell, int value, int maxRangeCells, int lastSeenTick, OpenRA.Player enemy)
+		// The observed actor type — public ruleset data for something the bot
+		// actually saw; BotUnitProfiles resolves it for the combat predictor.
+		public readonly ActorInfo Observed;
+
+		public BotRememberedDefence(CPos cell, int value, int maxRangeCells, int lastSeenTick, OpenRA.Player enemy, ActorInfo observed)
 		{
 			Cell = cell;
 			Value = value;
 			MaxRangeCells = maxRangeCells;
 			LastSeenTick = lastSeenTick;
 			Enemy = enemy;
+			Observed = observed;
 		}
 	}
 

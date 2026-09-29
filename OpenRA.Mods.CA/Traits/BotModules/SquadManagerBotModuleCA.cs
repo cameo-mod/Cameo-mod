@@ -364,6 +364,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
+		IBotSiegeAdvisor[] siegeAdvisors;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -708,6 +709,7 @@ namespace OpenRA.Mods.CA.Traits
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
+			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -886,6 +888,23 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 
 			return (long)attackerValue * 100 >= (long)threat * (100 + marginPercent);
+		}
+
+		// CA-2 siege consult (§12.6): ask the siege advisors what an advancing
+		// assault squad should do. No advisor or all advising Advance leaves the
+		// state machine's behaviour bit-identical to before.
+		internal SiegeVerdict EvaluateSiege(SquadCA squad, out CPos standOffCell)
+		{
+			if (siegeAdvisors != null)
+				foreach (var advisor in siegeAdvisors)
+				{
+					var verdict = advisor.VerdictFor(squad, out standOffCell);
+					if (verdict != SiegeVerdict.Advance)
+						return verdict;
+				}
+
+			standOffCell = CPos.Zero;
+			return SiegeVerdict.Advance;
 		}
 
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
