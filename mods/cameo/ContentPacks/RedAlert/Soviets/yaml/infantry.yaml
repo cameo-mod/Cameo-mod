@@ -6,6 +6,8 @@ ra1_soviets_dog:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@MC: ^MCImmune
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
@@ -156,6 +158,8 @@ ra1_soviets_ak47conscript:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: AK-47 Conscript
 	Valued:
@@ -224,6 +228,8 @@ ra1_soviets_grenadier:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 230
 	Tooltip:

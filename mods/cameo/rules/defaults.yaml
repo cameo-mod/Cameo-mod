@@ -1747,6 +1747,9 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^AdvancedGuerillaTactics
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): fire-support squads, with tanks, protect the artillery.
+	BotRoles:
+		Roles: firesupport
 	# TurnSpeedMultiplier@FireSupportBuff:
 	# 	Modifier: 200
 	Armor:
@@ -1771,6 +1774,9 @@
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@AntiInf: ^PrioritizeInfantry
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): artillery squads are this template and ^ArtilleryTankTemplate only.
+	BotRoles:
+		Roles: artillery
 	# Indirect-fire: tilt the muzzle flash up out of the ground like a howitzer (Pitch is a WAngle, 1024=360deg).
 	WithMuzzleGlow:
 		Pitch: 113
@@ -1911,6 +1917,9 @@
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@AntiInf: ^PrioritizeInfantry
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): artillery squads are ^ArtilleryTemplate and this template only.
+	BotRoles:
+		Roles: artillery
 	WithMuzzleGlow:
 		Pitch: 113
 	AutoTargetPriority@INFANTRY:

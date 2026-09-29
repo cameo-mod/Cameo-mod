@@ -79,6 +79,8 @@ scrin_harvester:
 scrin_seeker:
 	Inherits: ^ScrinHoverVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Voiced:
 		VoiceSet: ScrinSeekerVoice
 	Tooltip:
@@ -177,6 +179,8 @@ scrin_repair_drone:
 scrin_gun_walker:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Voiced:
 		VoiceSet: ScrinGunWalkerVoice
 	Tooltip:
@@ -212,6 +216,8 @@ scrin_gun_walker:
 scrin_shard_walker:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Voiced:
 		VoiceSet: ScrinShardWalkerVoice
 	Tooltip:

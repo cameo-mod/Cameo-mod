@@ -29,6 +29,8 @@ atreides_mobileconstructionvehicle:
 
 atreides_combattank:
 	Inherits: ^CombatTank
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_atreides_combattank.name
 	Buildable:
@@ -295,6 +297,8 @@ atreides_sandbike:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport

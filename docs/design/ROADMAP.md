@@ -114,6 +114,16 @@ the fog sequencing.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
+  - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
+    `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
+  - [ ] **S** Apply `guerrilla` (empties 7 × `GuerrillaTypes`, −1,776 central ids) after a Nuclear
+    Winter A/B; then the `count_central_ids.py --max` ratchet in `run_all.sh`. **Claude.**
+  - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
+    (§12.4a rule 3). **Claude.**
+  - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
+    `artillery` role only (not the 10-cell range rule), fire-support squads with a tank escort
+    protecting the artillery, and a guard that ships never join ground or air squads. **NOVA**
+    (CA-3/CA-4), roles from Claude.
   - [~] **L** CA-1 arsenal tracker (**shipped 2026-09-29:** `BotArsenalLedger` + stats shadow #624, `BotUnitProfiles`, roles `staticaa`/`airunit`/`navalunit` report-only #627; open: apply roles, in-match production weight) — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
     per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
     with defence ranges and a per-region heat map, log fields; then the in-match production

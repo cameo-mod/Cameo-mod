@@ -50,6 +50,8 @@ asianalliance_quasar:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Quasar
 	Valued:
@@ -173,6 +175,8 @@ asianalliance_lynxtank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	BotRoles:
+		Roles: guerrilla
 	-ExternalCondition@AsianPhalanx:
 	Tooltip:
 		Name: Lynx Tank
@@ -251,6 +255,8 @@ asianalliance_oiltruck:
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@anim: ^RA2Vehicle
 	Inherits@vo: ^AttackFrontalVoice
+	BotRoles:
+		Roles: guerrilla
 	#Inherits@announce: ^AnnounceGlobal
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade

@@ -2011,6 +2011,8 @@ ordos_saboteur:
 	Inherits@MC: ^MCImmune
 	Inherits@isengineer: ^IsEngineer
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Factions: ordos
 		Queue: Infantry, RAInfantry

@@ -235,6 +235,8 @@ td_nod_buggy:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Nod Buggy
 	Valued:
@@ -473,6 +475,8 @@ td_nod_stealthtank:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 520
 	Tooltip:
@@ -558,6 +562,8 @@ td_nod_chemicalattackbike:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Chemical Attack Bike
 	Valued:
@@ -734,6 +740,7 @@ td_nod_buggymkii:
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@BurningLasers: ^BurningLasers
 	Inherits@decoration: ^NodRankDecoration
+	-BotRoles:
 	Tooltip:
 		Name: Nod Buggy Mk. II
 	Buildable:

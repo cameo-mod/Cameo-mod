@@ -1,6 +1,8 @@
 ts_gdi_lightinfantry:
 	Inherits: TSE1
 	Inherits@SERETraining: ^SERETraining
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_gdi_barracks
@@ -74,6 +76,8 @@ ts_gdi_discthrower:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@SERETraining: ^SERETraining
 	Inherits@SonicWeaponry: ^SonicWeaponry
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -199,6 +203,8 @@ ts_gdi_riottrooper:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@SERETraining: ^SERETraining
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 700
 	Tooltip:

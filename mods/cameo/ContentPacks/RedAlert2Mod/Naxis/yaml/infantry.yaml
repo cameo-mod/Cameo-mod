@@ -9,6 +9,8 @@ naxis_naxiriflesoldier:
 	Inherits@undead: ^NaxiUndeadRevive
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -238,6 +240,8 @@ naxis_naximercenarysniper:
 	Inherits@undead: ^NaxiUndeadRevive
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 250
 	Tooltip:
@@ -1174,6 +1178,8 @@ naxis_bmwbike:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 450
 	Tooltip:

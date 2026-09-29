@@ -442,6 +442,8 @@ ra1_soviets_gorynychtank:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
@@ -1154,6 +1156,8 @@ ra1_soviets_flaktruck:
 	Inherits@AutoloadersUpgradeRA1: ^AutoloadersUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
@@ -1228,6 +1232,8 @@ ra1_soviets_btr80:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	BotRoles:
+		Roles: guerrilla
 	ModifiesCombatProportionalToPhysicalState@SpinUp:
 		RequiresCondition: ra1_soviets_promotion_gatlingtank
 	SelectedPhysicalStateBar@SpinUp:
@@ -1334,6 +1340,8 @@ ra1_soviets_nukedemotruck:
 	Inherits@NuclearWarDoctrineRA1: ^NuclearWarDoctrineRA1
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1500
@@ -1516,6 +1524,8 @@ ra1_soviets_gatlingtank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Gatling Tank
 	Valued:

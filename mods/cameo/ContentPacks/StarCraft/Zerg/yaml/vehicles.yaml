@@ -192,6 +192,8 @@ zerg_goremaw:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Goremaw
 	Valued:

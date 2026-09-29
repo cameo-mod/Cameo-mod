@@ -11,6 +11,8 @@ ra1_allies_sniper:
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@CryoMissiles: ^CryoMissiles
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 500
 	Tooltip:

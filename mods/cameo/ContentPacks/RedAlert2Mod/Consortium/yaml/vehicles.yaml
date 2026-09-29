@@ -379,6 +379,8 @@ steel_cougar:
 	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -438,6 +440,8 @@ steel_hummer:
 	Inherits@shield: ^HasShieldGenerator
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -869,6 +873,8 @@ steelconsortium_quantumtank:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -949,6 +955,8 @@ steelconsortium_manta:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 850
 	Tooltip:
