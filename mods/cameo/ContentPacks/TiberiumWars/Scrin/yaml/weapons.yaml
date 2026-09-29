@@ -26,6 +26,11 @@
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 92
+			AntiAirVehicle: 74
+			ShipLight: 82
+			ShipMedium: 48
+			AntiAirShip: 63
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 
@@ -74,6 +79,11 @@ ScrinShardBeam:
 			Medium: 55
 			Heavy: 35
 			Concrete: 25
+			CyborgLight: 106
+			AntiAirVehicle: 70
+			ShipLight: 95
+			ShipMedium: 37
+			AntiAirShip: 59
 
 ScrinShardWalkerStreak:
 	Inherits: ScrinShardBeam
@@ -108,6 +118,11 @@ ScrinHeavyBeam:
 			Medium: 115
 			Heavy: 135
 			Concrete: 110
+			CyborgLight: 64
+			AntiAirVehicle: 102
+			ShipLight: 79
+			ShipMedium: 112
+			AntiAirShip: 94
 
 ScrinAcidBeam:
 	Inherits: ^ScrinBeamBase
@@ -128,6 +143,11 @@ ScrinAcidBeam:
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 109
+			AntiAirVehicle: 79
+			ShipLight: 105
+			ShipMedium: 48
+			AntiAirShip: 71
 
 ScrinAirZap:
 	Inherits: ^ScrinBeamBase
@@ -162,6 +182,11 @@ ScrinCapitalBeam:
 			Medium: 120
 			Heavy: 130
 			Concrete: 100
+			CyborgLight: 88
+			AntiAirVehicle: 115
+			ShipLight: 105
+			ShipMedium: 110
+			AntiAirShip: 107
 		ValidTargets: Ground, Water, Air
 
 # Combined Arms-derived projectile delivery and effect treatment. Damage,
@@ -275,6 +300,11 @@ ScrinCorrupterSpew:
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 109
+			AntiAirVehicle: 79
+			ShipLight: 105
+			ShipMedium: 48
+			AntiAirShip: 71
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -368,6 +398,11 @@ ScrinTripodLaser:
 			Medium: 115
 			Heavy: 135
 			Concrete: 110
+			CyborgLight: 64
+			AntiAirVehicle: 102
+			ShipLight: 79
+			ShipMedium: 112
+			AntiAirShip: 94
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 	Warhead@2Eff: CreateEffect
@@ -395,6 +430,11 @@ ScrinReaperTripodLaser:
 			Medium: 120
 			Heavy: 130
 			Concrete: 100
+			CyborgLight: 88
+			AntiAirVehicle: 115
+			ShipLight: 105
+			ShipMedium: 110
+			AntiAirShip: 107
 		ValidTargets: Ground, Water, Air
 
 ScrinMothershipBeam:
