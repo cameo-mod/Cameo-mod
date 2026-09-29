@@ -2079,13 +2079,14 @@ flag), and exits 1 when anything is flagged. On the master half above it flags a
 ### 12.12 Scout rebuilds and garrisons (maintainer rulings 2026-09-29; owner Claude)
 
 1. **A scout request is rationed.** `ScoutBotModule` requests a replacement at most once per
-   `ScoutRebuildCooldownTicks`, and never while a requested scout is still unclaimed. A scout-type
-   unit the squad manager drafted counts against `MaxScouts` until it dies. The requests can no
-   longer take over the vehicle queue.
+   `ScoutRebuildCooldownTicks` (`genericbot`: 3000; 0 = the old request-every-scan). So the
+   requests can no longer take over the vehicle queue, whatever happens to the scouts.
 2. **A garrisoned building is a defence, priced by its garrison.** An enemy-owned `Garrisonable`
    building (owned means occupied: `ChangeOwnerOnGarrisoner`) is valued at
    `Garrisonable.MaxWeight × GarrisonOccupantValue` when it has no `Valued` cost, and is a `Defence`
-   like a tower. So the 6c risk gate, the risk router (6e) and the siege planner (CA-2) all avoid
+   like a tower. `genericbot`: 250, half the median cost (500) of the 323 buildable garrisoning
+   infantry, because an observer cannot see how full the house is; 235 garrisonable buildings have
+   no cost (capacity 1–40). So the 6c risk gate, the risk router (6e) and the siege planner (CA-2) all avoid
    it, stand off from it and shell it. Fog-honest: ownership is visible, and the value is a rules
    constant, never the real passenger list.
 

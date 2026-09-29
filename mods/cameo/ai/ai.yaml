@@ -3345,10 +3345,16 @@ Player:
 		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
 		# variable -- flip on the candidate worktree only.
 		WeakIncludesDefence: false
+		# AI_ARCHITECTURE §12.12: an enemy-held civilian house is priced by its garrison, not its own (missing) cost,
+		# so the risk gate stops feeding infantry into it. 250 = half the median cost (500) of the 323 buildable
+		# garrisoning infantry, per slot of MaxWeight: the observer cannot see how full it is.
+		GarrisonOccupantValue: 250
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
 		EnemySpawnBonus: 20000
+		# AI_ARCHITECTURE §12.11-12.12: unrationed replacements built ~72 Humvees and ~5 tanks per match for `hard`.
+		ScoutRebuildCooldownTicks: 3000
 		ScoutUnitTypes: ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog, td_nod_reconbike, td_nod_buggy, td_nod_buggymkii, td_gdi_humvee, td_gdi_humveemkii, ra1_allies_ranger, ra1_allies_reconranger, japan_scoutcar, japan_imperialscoutsman, ordos_dustdrone, ordos_swarmerdrone, ixian_airdrone, atreides_airdrone, latinsyndicate_raiderbuggy, futuretech_scoutdroid, ordos_raider, atreides_sandbike, ix_raider, corrino_buggy, zerg_zergling, terran_reaper, harkonnen_buzzsaw, eden_scout, plymouth_scout
 	BeaconResponderBotModule:
 		RequiresCondition: genericbot

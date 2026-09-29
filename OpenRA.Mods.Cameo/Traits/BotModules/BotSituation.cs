@@ -105,6 +105,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly BitSet<TargetableType> NavalTargetTypes = new("Water", "Ship");
 		public readonly BitSet<TargetableType> DefenceTargetTypes = new("Defense");
 
+		[Desc("Value per unit of garrison weight of an enemy-held garrisonable building that has no Valued cost",
+			"(the civilian houses), so fog memory prices the garrison, not the house (AI_ARCHITECTURE §12.12).",
+			"0 keeps the house's own cost, which is none.")]
+		public readonly int GarrisonOccupantValue = 0;
+
 		public readonly int ClusterRadius = 12;
 		public readonly int PressureRadius = 15;
 		public readonly int LossWindowTicks = 750;

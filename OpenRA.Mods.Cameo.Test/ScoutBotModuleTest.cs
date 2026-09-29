@@ -92,5 +92,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(scouts, Is.EqualTo(new[] { scout }));
 			Assert.That(targets.ContainsKey(actor), Is.True);
 		}
+
+		[Test]
+		public void ScoutRequestsAreRationedByTheCooldown()
+		{
+			// AI_ARCHITECTURE §12.12: 0 keeps the old behaviour (a request on every scan).
+			Assert.That(ScoutBotModule.MayRequest(100, 50, 0), Is.True);
+
+			// The first request is always allowed; after that, one per cooldown.
+			Assert.That(ScoutBotModule.MayRequest(10, -1, 3000), Is.True);
+			Assert.That(ScoutBotModule.MayRequest(2999, 0, 3000), Is.False);
+			Assert.That(ScoutBotModule.MayRequest(3000, 0, 3000), Is.True);
+		}
 	}
 }
