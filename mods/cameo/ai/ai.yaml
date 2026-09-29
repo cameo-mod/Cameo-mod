@@ -4038,6 +4038,9 @@ Player:
 		RequiresCondition: genericbot
 	HumanPaceBotModule:
 		RequiresCondition: genericbot
+		ActionsPerWindow: 0
+		MaxActionsPerTick: 0
+		AttentionSlotsPerTick: 0
 
 World:
 	BeaconTracker:
