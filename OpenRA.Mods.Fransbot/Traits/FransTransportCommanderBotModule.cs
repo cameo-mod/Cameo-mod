@@ -22,6 +22,22 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits
 {
+	public readonly record struct FransLandingCraftPoolDiagnostic(
+		int PhysicalCount,
+		int RequestedCount,
+		int NativeQueuedCount,
+		int AuthoritativeCount,
+		string PhysicalCrafts,
+		string RequestedProduction,
+		string NativeQueues)
+	{
+		public string Signature =>
+			$"physical={PhysicalCount}:{PhysicalCrafts}|requested={RequestedCount}:{RequestedProduction}|native={NativeQueuedCount}:{NativeQueues}|total={AuthoritativeCount}";
+
+		public string Details =>
+			$"pool physical={PhysicalCount} [{PhysicalCrafts}], UnitBuilder-requested={RequestedCount} [{RequestedProduction}], native-queued={NativeQueuedCount} [{NativeQueues}], authoritative-total={AuthoritativeCount}";
+	}
+
 	/// <summary>
 	/// Small AirAI-only coordination surface used by FransSpecOps Commander and the
 	/// amphibious MCV manager. It does not add or alter any actor rules.
@@ -51,6 +67,7 @@ namespace OpenRA.Mods.Common.Traits
 		int MaximumLandingCraftPool { get; }
 		int MaximumNonStrategicLandingCraftPool { get; }
 		int CountLandingCraftPool(IBot bot);
+		FransLandingCraftPoolDiagnostic GetLandingCraftPoolDiagnostic(IBot bot);
 		bool CanStrategicExpansionClaimTransport(Actor transport);
 		bool TryReserveStrategicExpansionTransport(Actor transport, Actor reservationOwner);
 		bool TryReserveExternalTransport(Actor transport, Actor reservationOwner);
@@ -1008,6 +1025,98 @@ namespace OpenRA.Mods.Common.Traits
 				return live;
 
 			return live + Info.LandingCraftTypes.Sum(type => CountPendingProduction(bot, unitBuilder, type));
+		}
+
+		FransLandingCraftPoolDiagnostic IFransCaptureTransportService.GetLandingCraftPoolDiagnostic(IBot bot)
+		{
+			var authoritative = ((IFransCaptureTransportService)this).CountLandingCraftPool(bot);
+			var physical = Info.LandingCraftTypes.Sum(CountLiveOwnedTransportType);
+			var physicalCrafts = world.Actors
+				.Where(IsLiveOwnedTransport)
+				.Where(actor => Info.LandingCraftTypes.Contains(actor.Info.Name))
+				.OrderBy(actor => actor.ActorID)
+				.Select(FormatLandingCraftDiagnostic)
+				.ToArray();
+
+			var unitBuilder = requestUnitProduction?.FirstEnabledTraitOrDefault();
+			var requested = unitBuilder == null
+				? Array.Empty<string>()
+				: Info.LandingCraftTypes
+					.OrderBy(type => type)
+					.Select(type => $"{type}:{unitBuilder.RequestedProductionCount(bot, type)}")
+					.ToArray();
+			var requestedCount = unitBuilder == null
+				? 0
+				: Info.LandingCraftTypes.Sum(type => unitBuilder.RequestedProductionCount(bot, type));
+			var nativeQueuedCount = authoritative - physical - requestedCount;
+
+			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
+			var nativeQueues = Info.LandingCraftTypes
+				.SelectMany(type => world.Map.Rules.Actors.TryGetValue(type, out var actorInfo) &&
+					actorInfo.TraitInfoOrDefault<BuildableInfo>() is BuildableInfo buildable
+						? buildable.Queue.Distinct().SelectMany(category => queuesByCategory[category])
+						: Enumerable.Empty<ProductionQueue>())
+				.Where(queue => queue.Enabled)
+				.Distinct()
+				.Select(queue => new
+				{
+					Queue = queue,
+					Items = queue.AllQueued()
+						.Where(item => Info.LandingCraftTypes.Contains(item.Item))
+						.Select(item => item.Item)
+						.OrderBy(item => item)
+						.ToArray()
+				})
+				.Where(entry => entry.Items.Length > 0)
+				.OrderBy(entry => entry.Queue.Actor.ActorID)
+				.Select(entry => $"queueActor={entry.Queue.Actor.ActorID}/{entry.Queue.Actor.Info.Name}:items={string.Join(",", entry.Items)}")
+				.ToArray();
+
+			return new FransLandingCraftPoolDiagnostic(
+				physical,
+				requestedCount,
+				nativeQueuedCount,
+				authoritative,
+				physicalCrafts.Length == 0 ? "none" : string.Join(";", physicalCrafts),
+				requested.Length == 0 ? "none" : string.Join(",", requested),
+				nativeQueues.Length == 0 ? "none" : string.Join(";", nativeQueues));
+		}
+
+		string FormatLandingCraftDiagnostic(Actor craft)
+		{
+			var cargo = craft.TraitOrDefault<Cargo>();
+			var cargoState = cargo == null
+				? "Missing"
+				: cargo.IsTraitDisabled
+					? "Disabled"
+					: $"Count{cargo.Passengers.Count()}({string.Join(",", cargo.Passengers.OrderBy(passenger => passenger.ActorID).Select(passenger => passenger.ActorID))})";
+
+			var mobile = craft.TraitOrDefault<Mobile>();
+			var mobileState = mobile == null
+				? "Missing"
+				: mobile.IsTraitDisabled
+					? "Disabled"
+					: mobile.IsTraitPaused ? "Paused" : "Operational";
+			var regionState = mobile == null || mobile.IsTraitDisabled || mobile.IsTraitPaused
+				? "NotEvaluated"
+				: strategicMapService.TryGetNavalRegionId(mobile.ToCell, out var region)
+					? region.ToString()
+					: "Unknown";
+
+			string reservationState;
+			if (!transportReservations.TryGetValue(craft, out var owner))
+				reservationState = "None";
+			else
+			{
+				var mission = missions.Values.FirstOrDefault(candidate =>
+					candidate.Transport == craft && candidate.Passenger == owner);
+				var lifecycle = mission == null
+					? "ExternalUnknown"
+					: mission.ReusableRoundTrip ? $"ReusableCapture/{mission.State}" : $"Capture/{mission.State}";
+				reservationState = $"owner={owner.ActorID}/{owner.Info.Name},lifecycle={lifecycle}";
+			}
+
+			return $"{craft.ActorID}/{craft.Info.Name}:cargo={cargoState},reservation={reservationState},mobile={mobileState},region={regionState}";
 		}
 
 		bool TryGetPreemptableCaptureLandingCraftMission(Actor transport, out TransportMission mission)

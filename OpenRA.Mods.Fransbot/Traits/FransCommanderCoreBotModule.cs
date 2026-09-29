@@ -358,6 +358,36 @@ namespace OpenRA.Mods.Common.Traits
 			if (player.WinState != WinState.Undefined || --defaultAttackAnythingScanTicks > 0)
 				return;
 
+			// A CA squad manager owns stance doctrine on the Frankenstein stack:
+			// sallying the whole idle pool at contacts starves CreateAttackForce
+			// thresholds indefinitely (DAWN nw-hard6 m2: zero squads in 74k ticks).
+			// Donor bots have no SquadManagerBotModuleCA and keep this posture.
+			if (player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.SquadManagerBotModuleCA>().Any(t => !t.IsTraitDisabled))
+			{
+				// One-shot revert: units already forced into AttackAnything before the
+				// squad manager latched (first scan runs at WT1) mass-defend instead.
+				// Only ids this module stanced are in the set; squad-assigned stances
+				// are never touched.
+				if (defaultAttackAnythingActors.Count > 0)
+				{
+					foreach (var pair in world.ActorsWithTrait<AutoTarget>())
+					{
+						var actor = pair.Actor;
+						if (actor == null || !actor.IsInWorld || actor.IsDead || actor.Owner != player
+							|| !defaultAttackAnythingActors.Contains(actor.ActorID)
+							|| pair.Trait.Stance != UnitStance.AttackAnything)
+							continue;
+
+						pair.Trait.SetStance(actor, UnitStance.Defend);
+					}
+
+					defaultAttackAnythingActors.Clear();
+					missionOwnedLastScan.Clear();
+				}
+
+				return;
+			}
+
 			defaultAttackAnythingScanTicks = Info.DefaultAttackAnythingScanInterval;
 			var live = new HashSet<uint>();
 			foreach (var pair in world.ActorsWithTrait<AutoTarget>()
@@ -485,7 +515,14 @@ namespace OpenRA.Mods.Common.Traits
 			if (mission.Type == FransMissionType.Raid)
 			{
 				var snapshot = mission.SiteIntel.Actors?.FirstOrDefault(a => a.ActorId == mission.TargetActorId) ?? default;
-				var raidRequired = GetRaidRequiredContribution(commander, snapshot.ObservedHp);
+				var observedHp = snapshot.ObservedHp;
+				// A remembered STATIONARY building may carry no fresh HP observation. Its public
+				// ruleset HP is legitimate intel — the mod rules are not hidden state — so the
+				// strike sizes against the undamaged value instead of refusing to bid.
+				if (observedHp <= 0 && mission.IsRememberedIntel && mission.IsBuilding &&
+					world.Map.Rules.Actors.TryGetValue(mission.TargetActorType, out var rememberedType))
+					observedHp = rememberedType.TraitInfos<HealthInfo>().Select(h => h.HP).DefaultIfEmpty(0).Max();
+				var raidRequired = GetRaidRequiredContribution(commander, observedHp);
 				if (raidRequired == int.MaxValue)
 					return raidRequired;
 
@@ -493,7 +530,7 @@ namespace OpenRA.Mods.Common.Traits
 				// repair through exact-HP estimates, so
 				// Air alone receives a 125% building margin. Mobile precision targets remain exact HP.
 				if (commander == FransCommanderKind.Air && mission.IsBuilding)
-					return (int)Math.Clamp(((long)snapshot.ObservedHp * Info.AirRaidBuildingDamageMarginPercent + 99) / 100, 1L, int.MaxValue);
+					return (int)Math.Clamp(((long)observedHp * Info.AirRaidBuildingDamageMarginPercent + 99) / 100, 1L, int.MaxValue);
 
 				return raidRequired;
 			}

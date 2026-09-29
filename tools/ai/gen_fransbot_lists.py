@@ -464,17 +464,24 @@ def main():
     put("FransGeneralBotModule", "ProductionTargetTypes", is_producer)
     put("FransGeneralBotModule", "TechTargetTypes", is_tech)
 
-    put("FransGroundCommanderBotModule", "StandbyTrafficStructureTypes",
-        is_refinery | is_producer)
-    put("FransGroundCommanderBotModule", "ExcludedGroundTypes",
-        is_harvester | is_mcv | is_ground_transport)
-    put("FransGroundCommanderBotModule", "RaidExcludedInfantryTypes", is_capture | is_engineer)
-    put("FransGroundCommanderBotModule", "ReconEligibleGroundTypes", is_cheap_fast_ground)
-    put("FransGroundCommanderBotModule", "RaidEligibleMobileTargetTypes", is_combat_ground)
-    put("FransGroundCommanderBotModule", "RaidStaticDefenseBreakerTypes", is_artillery)
-    put("FransGroundCommanderBotModule", "RaidStaticDefenseAlwaysAllowedTypes", set())
-    put("FransGroundCommanderBotModule", "NavalTypes", is_naval)
-    put("FransGroundCommanderBotModule", "AirTypes", is_air)
+    # Ground commanders run as parallel bid capacities: each BidderKey owns one
+    # committed mission, so fransbot.yaml wires six named instances
+    # (@ground1..@ground6) mirroring upstream's @ground1-10 personalities file.
+    # Every instance needs the same list fields — emit them per instance name.
+    GROUND_COMMANDER_INSTANCES = [f"FransGroundCommanderBotModule@ground{i}"
+                                  for i in range(1, 7)]
+    for ground_module in GROUND_COMMANDER_INSTANCES:
+        put(ground_module, "StandbyTrafficStructureTypes",
+            is_refinery | is_producer)
+        put(ground_module, "ExcludedGroundTypes",
+            is_harvester | is_mcv | is_ground_transport)
+        put(ground_module, "RaidExcludedInfantryTypes", is_capture | is_engineer)
+        put(ground_module, "ReconEligibleGroundTypes", is_cheap_fast_ground)
+        put(ground_module, "RaidEligibleMobileTargetTypes", is_combat_ground)
+        put(ground_module, "RaidStaticDefenseBreakerTypes", is_artillery)
+        put(ground_module, "RaidStaticDefenseAlwaysAllowedTypes", set())
+        put(ground_module, "NavalTypes", is_naval)
+        put(ground_module, "AirTypes", is_air)
 
     put("FransGroundTransferBotModule", "LandingCraftTypes", is_landing_craft)
     put("FransGroundTransferBotModule", "SourceBaseAnchorTypes", is_conyard)

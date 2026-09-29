@@ -3338,6 +3338,10 @@ Player:
 	MasterAiBotModule:
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
+		# CA-6 (AI_ARCHITECTURE 12.9): remembered defences join the beatability
+		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
+		# variable -- flip on the candidate worktree only.
+		WeakIncludesDefence: false
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
@@ -4126,6 +4130,19 @@ Player:
 		ActionsPerWindow: 0
 		MaxActionsPerTick: 0
 		AttentionSlotsPerTick: 0
+	# CA-2a (AI_ARCHITECTURE §12.6): record-only siege telemetry — what stand-off,
+	# artillery-first, commit and retreat WOULD have decided per assault squad.
+	# Issues no orders; the CA-2b behaviour lands behind its own switch after this
+	# validates the remembered-defence inputs on the hard candidate.
+	SiegeEvaluatorBotModule:
+		RequiresCondition: genericbot && hardbot
+		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
+		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
+		BehaviourEnabled: false
+		# CA-2c (§12.6 rule 5): retreat verdicts write a failed-siege memory into
+		# the region and later evaluations read the wall as heavier. Own A/B
+		# variable -- keep false while the CA-2b gate is measured.
+		SiegeMemoryEnabled: false
 
 World:
 	BeaconTracker:

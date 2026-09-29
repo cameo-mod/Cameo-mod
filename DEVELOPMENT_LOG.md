@@ -14328,3 +14328,493 @@ protection squads.
 
 Boot-gate PASS x2 (menu marker, 0 new exceptions); fog audit PASS (170 sites). Apply left report-only so the FS/artillery-role machinery ships INERT - naval isolation is the only live behavior delta.
 `git add -A` never used; scoped paths only.
+## 2026-09-28 — FransBot competitiveness round 2: queue spelling, peacetime defense, harvester multiplier, expansion posture + NEW MANDATE: A Nuclear Winter A/B
+
+Maintainer mandate (this session): all bot A/B tests run on the REAL tournament
+map "A Nuclear Winter" (`mods/cameo/maps/ai_nuclear_winter_duel/` — byte-faithful
+extract of `_ra_a-nuclear-winter.oramap`, Multi0/Multi1 converted to map-side
+BotA/BotB on the real mpspawn cells) at locked `insane` gamespeed. No synthetic
+fixtures. Acceptance: `fransbot` (no omniscience) beats `hard` (omniscient
+classic bot). Harness gained `--template` for this.
+
+### Fixes shipped this round
+
+1. **Defense queue category bug** — `FransDefenseCommanderBotModule` looked up
+   `DefenseQueueCategory="Defense"` but Cameo RA queues are `Defence`/`RADefence`;
+   `AIUtils.FindQueuesByCategory` indexes exact queue `Type` strings, so the
+   commander saw ZERO queues forever — all static defense silently impossible.
+   Now `DefenseQueueCategories` FrozenSet {"Defense","Defence","RADefence"} with a
+   `DefenseQueues()` helper used by all 4 lookup sites.
+2. **Peacetime defense floor** — `PeacetimeDefensePerAnchorTarget` (default 3):
+   after `OpeningComplete` and only when no emergency/General-DEFEND is active,
+   the commander builds toward 3 armed defenses at the least-defended permanent
+   FACT using the normal anchor/limit/cooldown path. Upstream builds zero routine
+   defense; HardBot's first raid was arriving before DEFEND incidents matured.
+3. **Harvester multiplier** — `HarvestersPerServicedMine` (default 1, Cameo sets
+   2): `RequestMissingHarvester` target is now `mines * multiplier`; extra
+   harvesters fall through to the global nearest-resource scan (no pairing claim).
+4. **Expansion posture** (yaml-only): `PreSurplusMaximumConstructionYardSlots 2->3`,
+   `PreSurplusPermanentConstructionYards 1->2`, `DesiredPermanentConstructionYards
+   2->3`, `MaximumPermanentConstructionYards 3->4`, `MinimumGroundCombatValueFor
+   AdditionalMcv 10000->6000`, `MaximumMainBaseWarFactories 2->3`.
+
+### Verified live on A Nuclear Winter (batch nw-batch1, 4 matches)
+
+- peacetime-floor fired: `flametower` production+placement at WT5793/6443/7093.
+- First airfield at WT8255 ("Radar Dome exploitation with first air production")
+  placed WT8655; `hindattackhelicopter` filled the Aircraft queue WT8760.
+- `2 refinery/4 harvester` mid-game; expansion high-water reached 3 FACT slots.
+- Matches went long (19-28k ticks) but all 4 lost to `hard`: FransBot earned
+  69-167k vs HardBot 175-277k; unit trades 1:2-1:3 against; 0-3 enemy buildings
+  razed. Composition skew: 3 barracks flood infantry (42 infantry vs 9 vehicles
+  in match 4 incl. 11 wasted capture engineers); only 1 warfactory built.
+- Surviving diagnostics: `capacity high-water is now 3`, `permanent FACT target`.
+
+### Open gap for the win condition
+
+Producer mix, not policy: `KeepAllMilitaryQueuesFilled` already saturates; the
+vehicle:infantry producer ratio (1 WEAP : 3 BARR) makes the army infantry-heavy
+vs HardBot armor. Economy ceiling raised via yaml; next iteration should measure
+whether 3-WEAP capacity + 2-FACT expansion materialize and help.
+
+### A/B lane migrated to `classic` (batch nw-classic1, match 1)
+
+Rebased onto master (`47c4fb388`+): dropped the parallel local duel dir —
+master's `mods/cameo/maps/ai_duel_nuclear_winter` is canonical; `--template`
+defaults to it. Engine re-pinned to `042b2fa7` (absorbed from nova-staged).
+
+Match 1 `fransbot` vs `classic` (A Nuclear Winter, insane, ra1_soviets mirror):
+**LOSS at WT23732** — a real fight, not a stomp:
+
+| metric | fransbot | classic |
+|---|---|---|
+| units k/l | 76/106 | 98/75 |
+| buildings k/l | 1/43 | 43/1 |
+| earned/spent | 112k/122k | 204k/216k |
+| army/assets end | 0 / 0 | 81.7k / 185k |
+
+Mechanics all verified live: 11 flametowers placed (peacetime floor + anchors),
+gorynychtank/heavytank producing, 3 refinery/5 harvester mid-game, FACT capacity
+high-water 3, MCV expansion objective scans running, SpecOps oil-capture
+missions active.
+
+### Root-cause of the income gap: expansion abort hair-trigger
+
+Match-1 tail showed `first-expansion PROC attempt ABORTED ... FACT
+RETREAT/repack` and `MCV RETREAT` cycling: classic's omniscient raids land on
+the expansion conyard, and `ManageExpansionConyard` repacks on
+`IsCritical || RecentlyDamaged` — any stray shot aborts the refinery claim.
+The mobile-MCV path (`TryStartMcvRetreat`) is refined (acknowledged-damage
+baseline, commitment window, visible-threat gate); the deployed-conyard path
+kept the crude trigger.
+
+**Fix**: `ExpansionConyardRetreatRecentDamageRisk` knob (default 0 = upstream).
+Damage-triggered repack now requires `RecentDamageRiskScore >=` the knob while
+`IsCritical` still always retreats. Cameo sets 150: stray harassment is tanked,
+real raids still repack. `HarvestersPerServicedMine` 2->3 (more home-field
+yield + faster replacement after raids). Drift baseline +792/-390, check PASS.
+
+Also this round: the nw-classic1 driver died silently after match 1 (shell
+lifecycle); batch relaunched detached via nohup as nw-classic2.
+
+## 2026-09-28 — Frankenstein merge plan + W1 intel substrate armed on hard
+
+- **Fleet ruling**: acceptance candidate is `hard` (Frankenstein: generic stack +
+  CN brains), NOT `fransbot` (donor). A/B axis `hard` vs `classic` on
+  A Nuclear Winter, max speed. All prior fransbot-vs-classic runs are donor
+  diagnostics only. Posted `REPLY_2026-09-28_dawn_merge_order.md`: six
+  dependency waves W1-W6 (intel → bid/General spine → production →
+  expansion/logistics → commanders → cleanup).
+- **W1 landed** (fransbot.yaml): the five pure-intel services
+  (CombatIntel, StrategicMap, RiskModel, MineCluster, EconomicSaturation) now
+  require `enable-fransbot || (genericbot && hardbot)` — arms on `hard` only.
+  `classic` gets hardbot-via-classictier but never genericbot; lower tiers get
+  genericbot but never hardbot. Services verified order-free (zero
+  IssueOrder/IBotRequest* across all five), so W1 is a provable no-regression
+  wave. ResourceMapBotModule already ran genericbot||classicbot (EMBER).
+- Harness default `--bot-a` changed fransbot → hard (acceptance lane default).
+- Rebased to 2f3ae9071 (post-#611 eligibility fix + scoreboard + template
+  restore); all prior changes intact.
+- Running: nw-hard1 (hard-vs-classic x4 — first valid acceptance baseline;
+  match 1 is pure pre-W1, matches 2-4 run hard+W1), nw-classic3 (fransbot
+  donor diagnostics, old DLL — remembered-raid code lands next rebuild).
+
+### Follow-up: hard-side crash found and fixed (this session)
+
+- `--bot-a hard` died 4/4 at player init: `Actor player has multiple traits of
+  type ResourceMapBotModule` from `ScoutBotModule.TraitEnabled`→`TraitOrDefault`.
+  `fransbot_lists.yaml` contains a generated second `ResourceMapBotModule@fransbot`
+  instance that exists on every player (unconditioned); trait PRESENCE alone trips
+  `TraitOrDefault`. fransbot never crashed because no fransbot module does that
+  lookup — only the genericbot Scout does.
+- Commit 713180170 had already fixed ScoutBotModule to the multi-instance-safe
+  `TraitsImplementing().FirstOrDefault(IsTraitEnabled)` pattern; the shipped
+  engine DLL predated it. Rebuilt OpenRA.Mods.Cameo (+Fransbot for the pending
+  remembered-raid code) — matches initialize clean.
+- **Lesson: every hard-side A/B on a stale Cameo DLL is void.** nw-hard1's 4
+  deaths were this crash, not bot performance.
+- nw-classic3 (old DLL, fransbot-vs-classic): 3 completed losses + match 4
+  killed at WT9504 for the rebuild — donor diagnostics only per the ruling.
+
+### First valid hard-vs-classic datapoint (nw-hard2, post-#611 eligibility fix)
+
+- Match 1: hard LOST at 48067 WT but fought nearly even — units 427:474
+  (0.9:1), buildings 44:71. Where it loses: assets 65k:184k at end —
+  classic's economy out-scales; hard's force can't sustain the trade rate.
+- Frans intel services confirmed live on hard: module timing shows
+  FransCombatIntelBotModule ~5ms/300t; "combat intel ... remembers 59".
+- Donor (nw-classic4, new DLL): remembered-raid chain produced first
+  buildings-razed (1 each in m1/m2) — chain works but starved: scouts
+  never reach the enemy base. Added ReconProbeSpawnRepeatTicks (General
+  probes enemy mpspawn cells — public lobby data — on a per-cell
+  cooldown) to feed the contact pipeline.
+
+### nw-hard2 interim — FIRST Frankenstein win over omniscient classic
+
+- m1 (spawn A): hard lost WT48067 — units 427:474, buildings 44:71, but
+  assets collapsed 65k:184k (economic death spiral).
+- m2 (spawn B): **hard WON WT33447** — buildings razed 54:7, final assets
+  300k:50k, army 147k:0. The Frankenstein stack CAN beat omniscient
+  classic on this map. Series 1-1 pending m3/m4.
+- Donor (nw-classic4, remembered-raid DLL): 0-3, buildings razed 1/1/2 —
+  chain fires but scouts starving it; spawn-probe + 6-key ground
+  commander parallelism pending (yaml wired, DLL awaiting copy window).
+
+### Ground-bid starvation root cause + fix (this session, donor side)
+
+- **Root cause of "bids 0"**: upstream wires 10 named
+  `FransGroundCommanderBotModule@groundN` instances = 10 parallel bidder
+  capacities. Cameo port had ONE unnamed instance (BidderKey `ground1`,
+  index 0) = ONE serial capacity. Any persistent RECON patrol locks it
+  forever → all later RAID/SECURE boards get `bids 0`. Fixes the funnel
+  starvation EMBER flagged (independent of the fresh-visibility gate).
+- **Fix**: six named `@ground1`..`@ground6` instances (distinct
+  BidderKey/CommanderIndex, full tuning block each). Verified live:
+  `capacity ground1 (index 0)` … `ground6 (index 5)` at WT0, and missions
+  distribute across all six (WT2265–3374).
+- **gen_fransbot_lists.py trap**: the generated lists file emits an
+  UNNAMED `FransGroundCommanderBotModule` node; removing the unnamed
+  instance left it with zero tuning → `RulesetLoaded` rejected every
+  match load ("timing/radius/retreat values are invalid"). Generator now
+  emits the 8 list fields per instance name; regenerated file has only
+  @ground1..@ground6 nodes.
+- **Invalidated**: nw-classic5 (4 died, pre-regen yaml), nw-hard2 m3/m4
+  (died in the mid-edit yaml window), nw-classic6 attempt-1 (foreign
+  engine binaries — see hazard below).
+
+### Hazard: foreign engine binaries in worktree bin (shared box)
+
+- Donor match at 16:23Z spawned `engine/bin/OpenRA.exe` and ran the MAIN
+  checkout's build (462fc1fc, .NET 8, `Cameo-mod\engine` PDB paths) — it
+  then failed loading dawn-ai's mod.yaml because the older Cameo.dll
+  lacks `CameoRemasterFileSystemLoader`.
+- `sync_main_checkout.ps1` (fleet dir) rebuilds `Cameo-mod\engine\bin` on
+  every master ff and says 13 worktrees share it via junctions. If
+  dawn-ai's engine/bin was junctioned during that window, the sync
+  rebuild swapped binaries mid-batch. Current state: real dir, VERSION
+  `042b2fa`, nw-hard3 healthy. Any batch running ~16:16–16:23Z on a
+  junctioned worktree may have loaded foreign binaries.
+
+### Spawn probes + remembered-raid completion (donor)
+
+- `ReconProbeSpawnRepeatTicks` (General): periodic RECON probes at enemy
+  `mpspawn` cells — public lobby data, fog-honest. Fixes "RECON only
+  fans mine clusters → enemy base never seen → no building contacts".
+- Raid publisher seeds remembered-raid missions directly from
+  `EnemyCombatContacts` buildings; required-contribution falls back to
+  ruleset `HealthInfo.HP` when `ObservedHp<=0`.
+- Pending: raid-bid runtime proof on nw-classic6; then commit + rebase.
+
+### W3 swap map (prep, not yet armed)
+
+- The CA economy modules are conditioned `genericbot || classicbot` —
+  BOTH stacks share them: HarvesterBotModuleCA, McvExpansionManagerBotModule,
+  BaseBuilderBotModuleCA@generic, UnitBuilderBotModuleCA@generic.
+- Atomic swap for `hard` therefore means: CA side →
+  `classicbot || (genericbot && !hardbot)`, Frans side →
+  `genericbot && hardbot`. classic's stack is untouched (reference preserved),
+  all other genericbot tiers keep CA (only `hard` carries hardbot).
+- Frans counterparts: FransBaseBuilder / FransUnitBuilder /
+  FransHarvester / FransMcvExpansionManager swap as ONE unit (internal
+  task-tracking coupling — a mixed producer/expander stack can deadlock).
+- W4 commanders: when FransGroundCommanderBotModule ports to hard it must
+  bring the multi-instance wiring (@groundN, distinct BidderKey) — the
+  serial-capacity starvation bug is proven on the donor.
+
+### Upstream re-vendor to V1.29.31 + NOVA A/B-iteration merge (a87e9e33e, pending)
+
+- NOVA's `594939c08` merged by hand (cherry-pick state was lost to a reset):
+  their `EnemySpawnRecon*` block (bounded 2-slot, own-spawn exclusion,
+  one-shot resolve, key base `0xF0000000`) replaces my `ReconProbeSpawnRepeatTicks`
+  prototype; `ForwardMoveMinimumIdleUnits: 6` trickle-gate added to all six
+  `@groundN` capacities; `AdaptiveCounterWeight`/`ObservationInterval` on
+  `FransUnitBuilder`; `IBotEnemyCompositionProvider` on `FransCombatIntel`;
+  `OpenRA.Mods.CA` project ref. My kept deltas: six-instance ground wiring,
+  remembered-building raids, fog-honest intel provider.
+- Re-vendored upstream `3cb13dd (V1.29.23) -> 0407c38 (V1.29.31)`:
+  `FransMcvExpansionManagerBotModule` (+2042: RoutineLand negative-union
+  pathfinding, ferry corridor recovery, bounded MCV sea pickup/watchdog),
+  `FransTransportCommanderBotModule` (+109: ferry/transport recovery),
+  new `RoutineLandNegativeUnionPolicy.cs` (258). `FransBotLog` already at
+  tip; upstream csproj delta is infra-only (skipped — ours has EngineRootPath
+  + Mods.CA ref).
+- 3-way merge (`git merge-file`, base=upstream@3cb13dd): ZERO conflicts —
+  upstream delta disjoint from Cameo port deltas (FrozenSet.Empty defaults,
+  relaxed empty-type validation, `ShipQueueNames()` naval-domain resolution,
+  `IsCloseEnoughToBase` extra null param, `ExpansionConyardRetreatRecentDamageRisk`,
+  `IsConyardRelocationPending` stub).
+- One manual fix post-merge: new upstream `LogSeaSupplyPreCommitDiagnostic`
+  used raw `queuesByCategory[Info.LandingCraftQueueCategory]` — converted to
+  `ShipQueueNames().SelectMany` like the other 7 sites (naval queue aliases
+  resolve in classic "Ship" and hybrid "RANaval" modes).
+- Build clean 0/0. Fog-honesty audit PASS — manifest +1 for the new
+  `GetLandingCraftPoolDiagnostic` own-units enumeration
+  (`actor.Owner == player` filtered — honest). Drift baseline rewritten
+  (+1159/-407 vs upstream tip; per-file delta vs 0407c38 is only +80/-32 —
+  port deltas preserved through the merge).
+- nw-hard4 (W2 validation): 1-1 decided, 2 died in the mid-merge yaml
+  window — consistent with publish-only W2; clean W2 batch still owed.
+
+### CA-2a siege telemetry (record-only; §12.6)
+
+- New `SiegeEvaluatorBotModule` (OpenRA.Mods.CA): every 100 WT logs what
+  stand-off / artillery-first / commit / retreat would decide per assault
+  squad (Rush/Guerrilla/Harass), from fog-honest remembered defences and
+  regional threat. Issues zero orders — telemetry for the CA-2b switch.
+- New `IBotRememberedDefenceProvider` + `BotRememberedDefence` (Mods.CA):
+  cell, value, max weapon range of the observed type (public ruleset data),
+  last-seen tick, enemy. Implemented by `MasterAiBotModule` projecting its
+  `BotFogMemory` table — one fog owner, no parallel memory.
+- Donor note: `FransRiskModel` stays a consumer-side rich read; it does NOT
+  implement `IBotRegionThreatProvider` because squad consumers Sum providers
+  (adding it would double-count with MasterAi regions).
+- Wired `genericbot && hardbot` in ai.yaml. Compile clean (copy pending
+  match boundary). Fog audit unchanged — no world.Actors enumerations.
+- NOVA donor runtime check (nw-donor-v12931): EnemySpawnProbe publishes,
+  wins ground1 bid, humvee dispatched ETA 747 WT — spawn recon works end
+  to end; V1.29.31 MCV/transport ticking without exception.
+
+## 2026-09-28 — CA-2a crash + fix + rebase (DAWN)
+
+**Incident**: nw-hard6 attempt 1 — all 4 matches died at first BotTick.
+`SiegeEvaluatorBotModule` called `TraitOrDefault<SquadManagerBotModuleCA>`
+but genericbot carries one SquadManagerCA per personality (6, now 7 with
+#621's @guerrilla). Fixed `6d76b556a`: iterate enabled instances.
+**Lesson**: grep yaml for `Trait@` instance count before TraitOrDefault.
+
+**Rebase** → `2163ed183` (#623 BotCombatPredictor on master, #621 guerrilla
+personality). Dropped own ai_module_map commit — master #622 covers it.
+
+**CA-2b seam**: `BotCombatPredictor.Predict(own, enemy)` live on master;
+`PredictsWin/PredictsLoss` wrappers still on claude/active_doctrine.
+
+nw-hard6 relaunched on fixed tree (4-match canonical td_gdi A/B).
+
+## 2026-09-29 — CA-2b siege plumbing (DAWN)
+
+Implements §12.6 end-to-end, behaviour OFF by default:
+- `IBotSiegeAdvisor` + `SiegeVerdict` (Advance/StandOff/Retreat) — new file;
+  squad state machine stays the single order authority, only consults.
+- `BotRememberedDefence.Observed` (ActorInfo) — lets BotCombatPredictor build
+  Versus-weighted enemy profiles from remembered defences (CP seam per
+  Claude's reply: commit verdict uses Predict, not parallel combat math).
+- `SiegeEvaluatorBotModule` implements the advisor: per-squad verdict cache
+  refreshed every EvaluationInterval; committed = Predict.OwnWins AND value
+  R-gate; Retreat when Predict says the trade loses; StandOff + hold cell on
+  the max-range+margin line otherwise. `BehaviourEnabled: false` default.
+- `SquadManagerBotModuleCA`: `siegeAdvisors` aggregated beside
+  threatProviders; `EvaluateSiege` returns Advance when none/disabled.
+- `GroundUnitsAttackMoveStateCA.Tick`: consult after the live-enemy check —
+  Retreat → Flee state; StandOff → Move to hold cell (re-order only when the
+  leader drifts >2 cells off the line).
+- yaml: `BehaviourEnabled: false` on the genericbot&&hardbot node.
+- Fog audit PASS (no new enumerations). Compile clean (0 CS errors);
+  engine/bin copy waits for nw-hard6 m1 boundary (detached watcher armed).
+
+NOTE: m1 at WT24000+ shows zero SIEGE-EVAL lines — either no assault squads
+formed or none held a valid target. If the batch finishes silent, that is a
+finding: assault formation may be broken on hard (larger than siege).
+
+## 2026-09-29 — W3 swap map finalized (pending batch end — yaml is live-loaded)
+
+Atomic condition flip (partial = double-produce or starve; both sides
+implement IBotRequestUnitProduction):
+
+CA producers -> `classicbot || (genericbot && !hardbot)`:
+  HarvesterBotModuleCA (ai.yaml:3249), BaseBuilderBotModuleCA@generic (:3725),
+  UnitBuilderBotModuleCA@generic (:3898), McvExpansionManagerBotModule (:3271)
+Frans producers -> `enable-fransbot || (genericbot && hardbot)`:
+  FransBaseBuilderBotModule, FransMcvExpansionManagerBotModule,
+  FransUnitBuilderBotModule, FransHarvesterBotModule,
+  FransSupplyTruckBotModule (fransbot.yaml:53-78)
+
+Already armed (W1/W2): FransGeneral/CommandBid/CommanderCore, StrategicMap,
+CombatIntel, MineCluster, EconomicSaturation, ResourceMap@fransbot.
+Support/adjacent open questions for the swap diff: BuildingRepairBotModuleCA
+(genericbot||classicbot — does FransBaseBuilder cover repair?),
+ResourceMapBotModule@fransbot's current condition, plus whether
+FransHarvesterBotModule needs the CA HarvesterTypes role lists.
+
+Batch contamination rule re-verified: ai.yaml edits apply at match LOAD —
+any edit while a batch runs hits the next match's ruleset.
+
+## 2026-09-29 (cont.) — Squad starvation root-caused; rebased onto post-#630 master
+
+### nw-hard6 evidence
+- m1 hard WIN 46628t (bld 64:9, +53k decisive window, turtle/emergency, 4-5 squads)
+- m2 hard LOSS 74472t (bld 25:82, -64k window @60-62k, 2 squads/14k vs 61k, all losses home)
+- m2-attempt1 invalid (external kill); m1-attempt1 killed by stale-Cameo window (both flagged)
+
+### Root cause (findings posted: FINDINGS_2026-09-29_dawn_squad_starvation)
+- squads=0 for 24-74k ticks while owning/losing units = force-formation starvation
+- PRIMARY: FransCommanderCoreBotModule BotTick sets AttackAnything on every own
+  mobile/air unit not in a Frans mission; on hard no Frans commander executes
+  missions, so the whole CA idle pool sallies and dies piecemeal. Pool never
+  reaches MaxIdleUnits/desiredAttackForceValue -> CreateAttackForce never fires.
+- Secondary (Claude's lane, flagged): per-region Defend-hold reset is intentional
+  but aggregate under rotating multi-region pressure = indefinite hold; no
+  starvation floor in CreateAttackForce; ProtectOwn only on building/harvester damage.
+
+### F1 fix (staged, builds after batch ends)
+FransCommanderCore.BotTick early-returns when any enabled
+SquadManagerBotModuleCA exists on the player. hard -> yields stance doctrine
+to CA squads; fransbot donor (no SquadManagerCA) keeps AttackAnything; classic
+never arms the module. Fog-honest, no conditions, self-adapting.
+
+### Rebase onto origin/master 297c626f4 (post-#630 doctrine, #629 aliases)
+- Conflicts: ai.yaml (union: HumanPace fields + SiegeEvaluator block),
+  BotSituation.cs class line (union: IBotThreatPredictionProvider +
+  IBotRememberedDefenceProvider), AI_MODULE_MAP.md (ours; regen post-build).
+- Seam verified intact post-rebase: siegeAdvisors, EvaluateSiege,
+  GroundStatesCA consult, BehaviourEnabled:false, RememberedDefences provider.
+- Verdict telemetry confirmed live: `Guerrilla squad v=560 -> verdict=free-advance`
+  (only firing was a 1-unit starting squad; squads=0 thereafter = starvation).
+- run_ai_match_batch.py staged: CAMEO_BOT_DEBUG env -> Debug.BotDebug=true
+  launch arg (opt-in; default logs identical to reference batches).
+
+### Sequencing (locked)
+1. nw-hard6 finishes -> aggregate -> AI_MATCH_LOG
+2. Build F1 -> boot-gate -> commit (source + log + batch tool)
+3. dawn-ca2b-cand re-pointed to new HEAD + BehaviourEnabled:true -> rebuild bin
+4. CA-2b A/B: control dawn-ai + candidate, 8 matches each arm, parallel support dirs
+5. W3 atomic swap -> own batch (NEVER during a live batch — yaml live-loads)
+
+### W3 swap map — RESOLVED (open questions closed 2026-09-29)
+- BuildingRepairBotModule/BuildingRepairBotModuleCA: KEEP on hard — Frans stack
+  has no building-repair module (Frans Repair orders are unit->pad only,
+  donor-side). Not part of the swap.
+- FrozenSet plumbing: zero work — fransbot_lists.yaml (generated) populates
+  every Frans module's [ActorReference] sets unconditionally; arming on hard
+  inherits the resolved lists.
+- Atomicity confirmed: all consumers resolve IBotRequestUnitProduction via
+  TraitsImplementing().ToArray() — both builders enabled = double production.
+  The flip must be one commit, all four/five pairs together.
+
+## 2026-09-29 (cont.2) — F1 committed + CA-2b A/B launched
+
+- nw-hard6 FINAL: hard 2-1 decided + m4 invalid (external kill 35s). ab_summary:
+  hard 66% WR, mean 53529 ticks; both wins from spawn 11,45 (spawn confound noted).
+- F1 committed 22a74c6c7 (gate: menu 56.5s, 0 exceptions). Bin rebuilt all-3 @10:43.
+- dawn-ca2b-cand re-pointed to 22a74c6c7 + BehaviourEnabled:true (uncommitted);
+  full bin rebuild @10:50 — both arms share F1 + post-#631 base, single variable.
+- A/B LAUNCHED detached ~10:51: control=C:/tmp/ca2b-ctrl (BehaviourEnabled:false),
+  candidate=C:/tmp/ca2b-cand (true). Each: hard vs classic, td_gdi, A Nuclear
+  Winter, repeats 8 + swap-bots (4/4 orientation split), stall 400,
+  CAMEO_BOT_DEBUG=1 for rich squad telemetry on both arms.
+
+## 2026-09-29 (cont.3) — W3 swap staged in dawn-w3 worktree
+
+dawn-ai's ai.yaml is FROZEN while ca2b-ctrl runs (matches live-load yaml per
+match). W3 applied in detached worktree C:/tmp/dawn-w3 @22a74c6c7:
+
+- 4 CA flips verified at right nodes: HarvesterBotModuleCA:3291,
+  McvExpansionManagerBotModule:3321, BaseBuilderBotModuleCA@generic:3812,
+  UnitBuilderBotModuleCA@generic:3985 -> `classicbot || (genericbot && !hardbot)`
+- 5 Frans flips: FransBaseBuilder/FransMcvExpansion/FransUnitBuilder/
+  FransHarvester/FransSupplyTruck -> `enable-fransbot || (genericbot && hardbot)`
+- Uncommitted; candidate BehaviourEnabled stays OFF until the CA-2b verdict
+  decides the base (W3 measures economy swap on the post-verdict stack).
+- Needs engine copy + boot-gate before its own batch; box order: ca3 pair ->
+  ca2b pair -> w3.
+
+## 2026-09-29 (cont.4) — staged source items (build post-batch, bin frozen)
+
+- BotSituation.RememberedDefences: Value fallback to ruleset ValuedInfo.Cost
+  when the frozen actor reports 0 (map-placed/no-cost defs). Fog-honest —
+  type was observed. Fixes `defences=N v=0` telemetry artifact; provider-side
+  infra (lands on BOTH arms of any later A/B, not the CA-2b variable).
+- CA-2c seam surveyed (§12.6 item 6, failed-siege write-back):
+  RegionMemory.Region gains FailedSiegeCount/LastFailedSiegeTick; evaluator
+  increments when a committed Rush squad dissolves with heavy losses inside a
+  defended region; SelectMission/scoring reads it as avoidance penalty with
+  time decay. Deferred until CA-2b verdict is in.
+
+## 2026-09-29 (cont.5) — maximum gamespeed ruling (43696ac6d)
+
+Maintainer: use `maximum` (mod.yaml GameSpeeds: Timestep 1 = highest; insane
+is 10 ms = second-highest). Changed: gate fixture rules.yaml GameSpeed +
+comments, harness cap_ticks *6000 -> *60000 (engine converts minutes via
+timestep), README. Running ca2b pair unaffected (variants already written,
+locked at insane — internally consistent). NEXT candidate batches must
+re-point past 43696ac6d so their harness/rules carry maximum.
+
+## 2026-09-29 (cont.6) — rebased post-#642; speed commit dropped per fleet ruling
+
+EMBER #640 (rules.yaml -> maximum) + #642 (NOVA's depth-bound cap_ticks*6000)
+landed on master BEFORE my 43696ac6d merged anywhere -> dropped it on rebase
+(theirs/ours resolution; zero residual diff on fixture files). NOVA's
+semantic won on merits: cap_ticks is a wall-clock kill bound only; *60000
+would let a stalemated match burn ~25h of shared box vs ~2.6h.
+Running ca2b pair keeps insane (variants pre-written, symmetric, endorsed
+"do not restart" by EMBER). New batches: maximum + 6000 bound.
+F1 is now e18d336c0 on post-#642 master.
+
+## 2026-09-29 (cont.7) — ca2b pair found dead; CA-2c siege memory implemented
+
+ca2b-ctrl + ca2b-cand drivers died with the session restart (logs frozen
+11:52; zero ca2b python processes). Each arm banked exactly one match —
+both lost to classic (m1 each). Insane-era partial data kept as interim.
+
+Opportunity taken: the bin freeze is over, so the next pair launches at
+MAXIMUM on post-#642 master (EMBER #640/#642 carry the flip; my dup commit
+dropped on rebase).
+
+CA-2c (AI_ARCHITECTURE §12.6 rule 5 — "a failed siege writes the loss into
+the region memory so the next plan avoids it"), source-committed here:
+
+- New interface IBotSiegeFailureMemory (CA): RecordFailedSiege(enemy, cell,
+  tick) + FailedSiegeWeightPercentAt(cell, tick) -> percent multiplier.
+- MasterAiBotModule implements it over a durable per-(enemy, regionIndex)
+  store — RegionMemory is rebuilt per publish, so counts live on the
+  module and are stamped onto each snapshot's Region.FailedSiegeCount/
+  LastFailedSiegeTick. Staleness window SiegeFailureMemoryTicks=45000;
+  each fresh failure adds SiegeFailureWeightPercent=25 to the weight.
+- SiegeEvaluatorBotModule: new SiegeMemoryEnabled flag (default false —
+  own A/B variable, stays off while the CA-2b gate is measured). When on:
+  obstacleValue *= weight/100 (the wall reads heavier -> next plan avoids
+  it), and a retreat VERDICT TRANSITION records one failure keyed to the
+  nearest covering defence's enemy+region (standing-off squads do not
+  stack the count; lastVerdictBySquad tracks transitions, pruned to live
+  squads). Telemetry gained siegeMem=<weight>.
+
+Lesson re-verified the hard way both directions: building dawn-ai while a
+batch runs CAN silently overwrite engine/bin DLLs (the running process
+keeps loaded IL; the NEXT match launch picks the new binaries = #637's
+skew class). This build luckily raced an already-dead batch — zero actual
+contamination, but the rule stands: verify drivers alive before building.
+
+## 2026-09-29 (cont.8) — ca2b pair v2: phantom-retry fix adopted + relaunched
+
+NOVA FINDINGS (phantom ok+0-record matches under maximum, clustered on the
+mirrored classic_vs_hard variant in contended windows): adopted their
+retry fix 922b9ba23 via cherry-pick -> 0365e4e9e (status=="ok" && no
+records && no new_exc now retries like the exit=N kill rule; prints the
+OpenRA output tail for diagnosis). #644 also carries an ab_summary
+--timestep filter for era-splitting (timestep 10 insane vs 1 maximum).
+
+v1 pair killed pre-phantom-exposure: ctrl m1 banked (hard WIN 15289t,
+K/D 2.44 — corrected: the jsonl per-player ordering was misread first),
+m2 + cand m1 discarded mid-flight. v2 launches into fresh dirs
+ca2b2-ctrl / ca2b2-cand on HEAD 0365e4e9e (same source as 372b67825 +
+tooling; cand carries the BehaviourEnabled:true flip). Maximum speed,
+8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1.

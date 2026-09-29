@@ -127,6 +127,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightDefence = 150;
 		public readonly int WeightAlly = 100;
 
+		[Desc("CA-6 (§12.9): remembered static defences join the enemy force the own",
+			"army must outmass for a target to be 'beatable' — weak measures",
+			"ownArmy vs ArmyValue + DefenceValue instead of ArmyValue alone.",
+			"False = pre-CA-6 scoring, bit-identical.")]
+		public readonly bool WeakIncludesDefence = false;
+
+		[Desc("CA-2c (§12.6 rule 5): world ticks a failed-siege memory stays fresh.",
+			"Older entries contribute no avoidance weight. ~30 game-minutes at",
+			"standard speed.")]
+		public readonly int SiegeFailureMemoryTicks = 45000;
+
+		[Desc("CA-2c: remembered-obstacle weight added per failed siege against the",
+			"region, percent — the wall reads 25% heavier per failed attempt.")]
+		public readonly int SiegeFailureWeightPercent = 25;
+
 		[Desc("w_hurt weight: an enemy winning the exchange against us loses target score (§4.3).",
 			"hurt = taken/(taken+dealt) — the bounded share form of the spec's dealt/taken",
 			"ratio, so 'damage dealt to us' only penalises once we have fought back some too.")]
@@ -222,7 +237,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -285,6 +300,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return RememberedThreatAtRegion(regions, regions.IndexOf(cell), false);
 		}
 
+		// CA-2c (§12.6 rule 5): durable per-(enemy, region) failed-siege memory.
+		// RegionMemory is rebuilt every Rebuild, so the counts live here and are
+		// stamped onto the snapshot each pass. Reads apply a staleness window —
+		// a wall that beat us an hour ago no longer steers the plan.
+		readonly Dictionary<OpenRA.Player, Dictionary<int, (int Count, int Tick)>> failedSieges = new();
+
+		void IBotSiegeFailureMemory.RecordFailedSiege(OpenRA.Player enemy, CPos cell, int tick)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || enemy == null || regions == null)
+				return;
+
+			var index = regions.IndexOf(cell);
+			if (!failedSieges.TryGetValue(enemy, out var table))
+				failedSieges[enemy] = table = new Dictionary<int, (int, int)>();
+
+			if (table.TryGetValue(index, out var e) && tick - e.Tick <= Info.SiegeFailureMemoryTicks)
+				table[index] = (e.Count + 1, tick);
+			else
+				table[index] = (1, tick);
+		}
+
+		int IBotSiegeFailureMemory.FailedSiegeWeightPercentAt(CPos cell, int tick)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || regions == null || failedSieges.Count == 0)
+				return 100;
+
+			var index = regions.IndexOf(cell);
+			var extra = 0;
+			foreach (var table in failedSieges.Values)
+				if (table.TryGetValue(index, out var e) && tick - e.Tick <= Info.SiegeFailureMemoryTicks)
+					extra += e.Count * Info.SiegeFailureWeightPercent;
+			return 100 + extra;
+		}
+
 		// The per-region threat read, split by the leader's domain: ground squads
 		// pay remembered Army+Defence; air squads (CA-5, §12.8) pay remembered
 		// AntiAir — the "things that can hurt aircraft" layer RegionMemory keeps.
@@ -334,6 +385,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// the same condition Rebuild uses to fog its own snapshot.
 		bool IBotFoggedEnemyProvider.FoggedObservation =>
 			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
+
+		// CA-2 stand-off input (AI_ARCHITECTURE §12.6): the static defences this
+		// bot has actually seen, each projected with its observed type's longest
+		// weapon range. Range comes from public ruleset data for a seen type —
+		// fog-honest. Empty when nothing has been observed, never a claim that
+		// no defences exist.
+		IEnumerable<BotRememberedDefence> IBotRememberedDefenceProvider.RememberedDefences()
+		{
+			if (IsTraitDisabled)
+				yield break;
+
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (!seen.Defence || seen.Info == null)
+						continue;
+
+					var maxRange = 0;
+					foreach (var armament in seen.Info.TraitInfos<ArmamentInfo>())
+						if (armament.WeaponInfo != null && armament.WeaponInfo.Range.Length > maxRange)
+							maxRange = armament.WeaponInfo.Range.Length;
+
+					// Frozen actors without resolvable cost report Value 0; the
+					// observed type's ruleset Valued cost is fog-honest (the type
+					// itself was seen) and keeps siege scoring non-degenerate.
+					var value = seen.Value > 0 ? seen.Value : seen.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+					yield return new BotRememberedDefence(seen.Location, value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy, seen.Info);
+				}
+			}
+		}
 
 		// The enemy army as this bot has SEEN it, for adaptive counter-production (DESIGN §19.1). Only when it
 		// observes through fog; otherwise false, and the unit builder falls back to its omniscient sample.
@@ -423,6 +509,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						enemyActors.Where(a => a.Info.HasTraitInfo<IOccupySpaceInfo>())
 							.Select(a => BotFogMemory.Classify(a.Info, a.ActorID, a.Location, a.GetEnabledTargetTypes(), tick, Info))));
 				}
+
+				// CA-2c: stamp the durable failed-siege counts onto the fresh
+				// snapshot (the published Region fields are read-only memory).
+				if (failedSieges.TryGetValue(enemy, out var sieges) && sieges.Count > 0 &&
+					regions.ByEnemy.TryGetValue(enemy, out var stampedRegions))
+					foreach (var kv in sieges)
+						if (kv.Key < stampedRegions.Length && stampedRegions[kv.Key] != null)
+						{
+							stampedRegions[kv.Key].FailedSiegeCount = kv.Value.Count;
+							stampedRegions[kv.Key].LastFailedSiegeTick = kv.Value.Tick;
+						}
 
 				profile.KnownRegions = regions.KnownRegionCount(enemy);
 				profiles.Add(enemy, profile);
@@ -1025,7 +1122,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
-			var weak = Saturate(ownArmy, profile.ArmyValue);
+			var weak = Saturate(ownArmy, profile.ArmyValue + (info.WeakIncludesDefence ? profile.DefenceValue : 0));
 			var econProxy = profile.Harvesters + profile.Refineries * 2;
 			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
 			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);

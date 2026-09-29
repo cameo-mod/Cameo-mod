@@ -43,6 +43,9 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum mine-to-PROC distance. Matching is one-to-one: one physical PROC can service at most one visible ore-mine and one ore-mine can use at most one PROC.")]
 		public readonly int ResourceControlRadius = 18;
 
+		[Desc("Harvesters demanded per serviced economic node. 1 preserves the strict node model; higher values let a serviced ore field keep a second harvester like classic RTS openings.")]
+		public readonly int HarvestersPerServicedMine = 1;
+
 		[Desc("Resource cells within this many cells of an assigned mine are preferred by that mine's harvester.")]
 		public readonly int AssignedMineResourceRadius = 10;
 
@@ -68,7 +71,8 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			base.RulesetLoaded(rules, ai);
 			if (ResourceControlRadius <= 0 || AssignedMineResourceRadius <= 0 || AssignmentInterval <= 0 ||
-				ScanForIdleHarvestersInterval <= 0 || ScanIntervalMultiplierWhenNoResources <= 0 || RespondToAttackCooldownTicks < 0)
+				ScanForIdleHarvestersInterval <= 0 || ScanIntervalMultiplierWhenNoResources <= 0 || RespondToAttackCooldownTicks < 0 ||
+				HarvestersPerServicedMine <= 0)
 				throw new YamlException("FransHarvester timing/radius settings are invalid.");
 		}
 
@@ -412,7 +416,7 @@ namespace OpenRA.Mods.Common.Traits
 					player, harvester, mine.Info.Name, mine.ActorID, mine.Location, redirected);
 			}
 
-			RequestMissingHarvester(bot, mines.Length, hs.Length);
+			RequestMissingHarvester(bot, mines.Length * Math.Max(1, Info.HarvestersPerServicedMine), hs.Length);
 		}
 
 		bool TryRedirectToMine(IBot bot, HarvesterState state, Actor mine)

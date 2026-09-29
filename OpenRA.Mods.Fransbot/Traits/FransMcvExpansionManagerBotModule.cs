@@ -160,6 +160,15 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum truly expensive MCV exit-to-deploy path proofs advanced in one routine SeaOre planning pass. Empty/blocked Beach cells may be skipped cheaply, but native pathfinding is explicitly time-sliced.")]
 		public readonly int RoutineSeaOreExitPathProofsPerPlanningPass = 1;
 
+		[Desc("Maximum native MCV pickup path proofs advanced in one sea-proof pass. Each proof may target all legal land cells beside one Beach, so adjacent-cell alternatives remain exact without an unbounded per-tick loop.")]
+		public readonly int SeaPickupPathProofsPerPlanningPass = 1;
+
+		[Desc("Ticks between passes while a committed ferry-corridor recovery is active. Recovery is incremental but must advance faster than the ordinary sea-planning cooldown so its finite proof budget can terminate before the absolute watchdog.")]
+		public readonly int CommittedSeaCorridorRecoveryInterval = 25;
+
+		[Desc("Maximum bounded proof passes for one committed ferry-corridor recovery. The runtime limit is reduced further when the remaining absolute-watchdog lifetime cannot accommodate this many passes.")]
+		public readonly int CommittedSeaCorridorRecoveryMaximumPasses = 64;
+
 		[Desc("World ticks to reuse a completed routine sea-target search while the MCV has not materially moved. Keeps repeated no-result checks cheap without making stale results persistent.")]
 		public readonly int RoutineSeaOreSearchCacheDuration = 750;
 
@@ -189,6 +198,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		[Desc("Maximum bounded MCV boarding recoveries before the reserved LST is released and the same committed objective returns to transport acquisition instead of remaining stuck in SeaLoading.")]
 		public readonly int SeaBoardingMaximumRecoveryAttempts = 3;
+
+		[Desc("Maximum bounded land-side pickup-cell replacements attempted for one reserved LST after the MCV exhausts the normal no-cell-progress retries. Recovery stays on the same shoreline pair and crossing corridor.")]
+		public readonly int SeaPickupApproachMaximumRecoveryAttempts = 2;
 
 		[Desc("Ticks to wait before retrying an Unload order if the previous unload activity ended but the MCV remains cargo.")]
 		public readonly int SeaUnloadRetryInterval = 75;
@@ -223,6 +235,9 @@ namespace OpenRA.Mods.Common.Traits
 		public readonly int MinimumGroundCombatValueForAdditionalMcv = 10000;
 		[Desc("If true, a damaged/critically exposed roaming MCV drops its expansion target and enters the single RETREAT state. RETREAT uses plain Move only toward a reachable destination that is spatially safer, non-critical and clear of visible weapon pressure.")]
 		public readonly bool EnableMcvRetreat = true;
+
+		[Desc("Minimum RecentDamageRiskScore required before a DEPLOYED expansion FACT may repack and flee on damage alone. Unlike a mobile MCV, a deployed conyard cannot quickly escape and repacking aborts the in-flight ore refinery claim, so light harassment below this risk is tanked rather than triggering a repack cycle. Set 0 to restore upstream behavior (any recent damage repacks).")]
+		public readonly int ExpansionConyardRetreatRecentDamageRisk = 0;
 
 		[Desc("Base radius scale used when generating ranked MCV RETREAT arrival candidates around the selected safe anchor. Completion still requires the MCV to physically reach its selected arrival cell.")]
 		public readonly int McvRetreatArrivalRadius = 8;
@@ -501,14 +516,17 @@ namespace OpenRA.Mods.Common.Traits
 				(SeaTransportAbsoluteWaitWatchdogTicks > 0 && SeaTransportAbsoluteWaitWatchdogTicks < SeaTransportFeasibilityWatchdogTicks) ||
 				FirstExpansionRefineryObjectiveGraceTicks < ScanInterval ||
 				FirstExpansionRefineryPlacementConfirmTimeoutTicks < ScanInterval ||
-				SeaBoardingRetryInterval <= 0 || SeaBoardingNoProgressTimeout <= 0 || SeaBoardingMaximumRecoveryAttempts < 0)
+				SeaBoardingRetryInterval <= 0 || SeaBoardingNoProgressTimeout <= 0 || SeaBoardingMaximumRecoveryAttempts < 0 ||
+				SeaPickupApproachMaximumRecoveryAttempts < 0)
 				throw new YamlException("Sea expansion economy/timing settings are invalid.");
 
 			if (MaximumSeaOreFieldCandidates <= 0 || MaximumRoutinePickupBeachCandidates <= 0 || MaximumLandingBeachCandidates <= 0 ||
 				RoutineSeaOreCandidatesPerPlanningPass <= 0 || RoutineSeaOreLandingBeachesPerPlanningPass <= 0 ||
-				RoutineSeaOreExitPathProofsPerPlanningPass <= 0 || RoutineSeaOreSearchCacheDuration < 25 ||
+				RoutineSeaOreExitPathProofsPerPlanningPass <= 0 || SeaPickupPathProofsPerPlanningPass <= 0 ||
+				CommittedSeaCorridorRecoveryInterval < ScanInterval || CommittedSeaCorridorRecoveryInterval > SeaPlanningInterval ||
+				CommittedSeaCorridorRecoveryMaximumPasses <= 0 || RoutineSeaOreSearchCacheDuration < 25 ||
 				RoutineSeaOreSearchMovementTolerance < 0 || FutureRefineryProofRetryDelay < ScanInterval)
-				throw new YamlException("Sea expansion candidate limits must be greater than zero, future refinery proof retry must be at least one scan, and the bounded sea-search cache may not be shorter than 25 WT.");
+				throw new YamlException("Sea expansion candidate/proof limits must be greater than zero, committed corridor recovery cadence must stay between one scan and the ordinary sea-planning interval, future refinery proof retry must be at least one scan, and the bounded sea-search cache may not be shorter than 25 WT.");
 
 			if (SeaLandingSearchRadius <= 0 || SeaLandingProtectionRadius <= 0 ||
 				SeaBoardingRetryInterval <= 0 || SeaUnloadRetryInterval <= 0)
@@ -629,13 +647,14 @@ namespace OpenRA.Mods.Common.Traits
 			public CPos SeaLandingExitCell;
 			public CPos SeaDeployCell;
 			public CPos[] SeaLandingPath = [];
+			public RoutineSeaOreSearchState SeaLandingSearch;
 			public string SeaRefineryType;
 			public CPos SeaRefineryCell;
 		}
 
 		readonly record struct SeaTopologyFailureKey(CPos Objective, int PickupNavalRegion, int TerrainKnowledgeVersion);
 		readonly record struct SeaLandingProofFailureKey(CPos Objective, int PickupNavalRegion, int TerrainKnowledgeVersion);
-		readonly record struct LandingExitProof(bool Success, CPos DeployCell, int PathLength);
+		readonly record struct LandingExitProof(bool Success, CPos DeployCell, int PathLength, CPos[] Path);
 		readonly record struct PendingMoveOrder(CPos Destination, bool Queued);
 		readonly record struct PioneerExecutionProofCacheEntry(uint McvActorId, CPos McvCell, int RiskRevision,
 			int TerrainKnowledgeVersion, int Tick, PioneerObjectiveExecutionKind Kind);
@@ -676,6 +695,30 @@ namespace OpenRA.Mods.Common.Traits
 		readonly record struct SeaPlan(CPos ResourceCenter, CPos DeployCell,
 			CPos PickupMcvCell, CPos PickupCraftCell, CPos LandingCraftCell,
 			int MvcLandPathLength, int SeaPathLength);
+
+		sealed class LandingCraftEligibilityDiagnostic
+		{
+			public readonly Actor Craft;
+			public string Origin;
+			public string Claim = "NotEvaluated";
+			public string Cargo = "NotEvaluated";
+			public string Mobile = "NotEvaluated";
+			public string Region = "NotEvaluated";
+			public string PickupEnter = "NotEvaluated";
+			public string PickupStay = "NotEvaluated";
+			public string PickupPath = "NotEvaluated";
+			public string CrossingPath = "NotEvaluated";
+			public string Result = "NotEvaluated";
+
+			public LandingCraftEligibilityDiagnostic(Actor craft, string origin)
+			{
+				Craft = craft;
+				Origin = origin;
+			}
+
+			public override string ToString() =>
+				$"{Craft.ActorID}/{Craft.Info.Name}:origin={Origin},claim={Claim},cargo={Cargo},mobile={Mobile},region={Region},pickupEnter={PickupEnter},pickupStay={PickupStay},pickupPath={PickupPath},crossingPath={CrossingPath},result={Result}";
+		}
 
 		sealed class NativeDeployProofKey : IEquatable<NativeDeployProofKey>
 		{
@@ -731,6 +774,8 @@ namespace OpenRA.Mods.Common.Traits
 			public bool NativeSearchExecuted;
 			public long NativePathCostCallbacks;
 			public double NativeElapsedMs;
+			public bool NativeSearchSkippedByUnionCertificate;
+			public string UnionCertificateMismatch = "None";
 			public string Result = "Pending";
 			public bool FinalWinner;
 
@@ -745,7 +790,30 @@ namespace OpenRA.Mods.Common.Traits
 				$"#{Ordinal}/{Classification}/objective={Objective}/targets={DeployTargetCount}/" +
 				$"topologyNegative={TopologyNegative}/cooldownBeforePath={CooldownBeforePath}/" +
 				$"nativeSearch={NativeSearchExecuted}/callbacks={NativePathCostCallbacks}/nativeMs={NativeElapsedMs:0.00}/" +
+				$"unionCertifiedSkip={NativeSearchSkippedByUnionCertificate}/unionMismatch={UnionCertificateMismatch}/" +
 				$"result={Result}/winner={FinalWinner}";
+		}
+
+		readonly record struct RoutineLandPlannedCandidate(OreFieldCandidate Candidate, string Classification);
+
+		sealed class RoutineLandNegativeUnionScanState
+		{
+			public readonly CPos Source;
+			public readonly RoutineLandPlannedCandidate[] PlannedCandidates;
+			public readonly RoutineLandNegativeUnionScan Coordinator;
+			public readonly McvObjectiveScanPerf Perf;
+
+			public RoutineLandNegativeUnionScanState(Actor mcv, Mobile mobile, CPos source,
+				int worldTick, int riskRevision, int terrainKnowledgeVersion,
+				RoutineLandPlannedCandidate[] plannedCandidates, McvObjectiveScanPerf perf)
+			{
+				Source = source;
+				PlannedCandidates = plannedCandidates;
+				Perf = perf;
+				Coordinator = new RoutineLandNegativeUnionScan(new RoutineLandNegativeUnionContract(
+					mcv, mcv.ActorID, mcv.Owner, mobile, mobile.Locomotor, source, worldTick,
+					riskRevision, terrainKnowledgeVersion, true));
+			}
 		}
 
 		sealed class McvObjectiveScanPerf
@@ -782,6 +850,23 @@ namespace OpenRA.Mods.Common.Traits
 			public int NativeSearchesSkippedByTopologyNegative;
 			public int CandidatesRejectedByPrePathRefineryCooldown;
 			public int NativeSearchesSkippedByCooldownBeforePath;
+			public int RoutineLandOrdinaryNativeEmptyResults;
+			public int RoutineLandOrdinaryNativeSearches;
+			public long RoutineLandOrdinaryPathCostCallbacks;
+			public int RoutineLandUnionPreparationAttempts;
+			public double RoutineLandUnionPreparationElapsedMs;
+			public long RoutineLandUnionPreparationAllocatedBytes;
+			public string RoutineLandUnionActivationReason = "NativeEmptyThresholdNotReached";
+			public int RoutineLandUnionEligibleObjectives;
+			public int RoutineLandUnionTargetCells;
+			public int RoutineLandUnionTargetHash;
+			public int RoutineLandUnionNativeSearches;
+			public long RoutineLandUnionPathCostCallbacks;
+			public double RoutineLandUnionElapsedMs;
+			public string RoutineLandUnionOutcome = "NotAttempted";
+			public string RoutineLandUnionFallbackReason = "None";
+			public int RoutineLandNativeSearchesSkippedByUnionCertificate;
+			public int RoutineLandUnionCertificateMismatches;
 			public int RoutineLandCandidateEvidenceOmitted;
 			public CPos? AcceptedObjective;
 			public CPos? AcceptedDeployCell;
@@ -818,7 +903,21 @@ namespace OpenRA.Mods.Common.Traits
 					? $",topologyQueries={TopologyTargetQueries},topologyNegative={TopologyNegativeCandidates}," +
 						$"nativeSkippedTopology={NativeSearchesSkippedByTopologyNegative}," +
 						$"cooldownBeforePath={CandidatesRejectedByPrePathRefineryCooldown}," +
-						$"nativeSkippedCooldown={NativeSearchesSkippedByCooldownBeforePath}"
+						$"nativeSkippedCooldown={NativeSearchesSkippedByCooldownBeforePath}," +
+						$"ordinaryNativeEmpty={RoutineLandOrdinaryNativeEmptyResults}," +
+						$"ordinaryNativeSearches={RoutineLandOrdinaryNativeSearches}," +
+						$"ordinaryCallbacks={RoutineLandOrdinaryPathCostCallbacks}," +
+						$"unionPrepAttempts={RoutineLandUnionPreparationAttempts}," +
+						$"unionPrepMs={RoutineLandUnionPreparationElapsedMs:0.00}," +
+						$"unionPrepAllocBytes={RoutineLandUnionPreparationAllocatedBytes}," +
+						$"unionActivation={RoutineLandUnionActivationReason}," +
+						$"unionEligibleObjectives={RoutineLandUnionEligibleObjectives}," +
+						$"unionTargets={RoutineLandUnionTargetCells},unionHash={RoutineLandUnionTargetHash}," +
+						$"unionSearches={RoutineLandUnionNativeSearches},unionCallbacks={RoutineLandUnionPathCostCallbacks}," +
+						$"unionMs={RoutineLandUnionElapsedMs:0.00},unionOutcome={RoutineLandUnionOutcome}," +
+						$"unionFallback={RoutineLandUnionFallbackReason}," +
+						$"nativeSkippedUnionCertificate={RoutineLandNativeSearchesSkippedByUnionCertificate}," +
+						$"unionCertificateMismatches={RoutineLandUnionCertificateMismatches}"
 					: string.Empty;
 				return $"{Kind}:resourceNodes={ResourceNodesEnumerated},candidateNodes={CandidateNodesRetained}," +
 					$"nodesEvaluated={NodesEvaluated},deployCellsEnumerated={DeployCellsEnumerated}," +
@@ -914,8 +1013,16 @@ namespace OpenRA.Mods.Common.Traits
 			public bool PhaseDeferred;
 			public PioneerExecutionProofPhase? PreviousPhase;
 			public McvObjectiveScanPerf LandRoutePerf;
+			public McvObjectiveScanPerf SeaLandingPerf;
 			public int PhasesThisTick;
 			public double PhaseElapsedMs;
+			public int SeaPickupCursor;
+			public int SeaPickupCandidates;
+			public int SeaPickupNativeSearchesThisPass;
+			public int SeaPickupTargetCellsThisPass;
+			public long SeaPickupPathCostCallbacksThisPass;
+			public double SeaPickupNativeElapsedMsThisPass;
+			public int SeaPickupNativeSearchesTotal;
 			public long Started;
 		}
 
@@ -954,6 +1061,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			public CPos ResourceCenter;
 			public int PickupNavalRegion;
+			public int RiskRevision;
 			public CPos[] DeployCandidates = [];
 			public CPos[] RankedBeaches = [];
 			public int NextBeachIndex;
@@ -963,24 +1071,121 @@ namespace OpenRA.Mods.Common.Traits
 			public readonly Dictionary<CPos, LandingExitProof> ExitPathProofs = [];
 		}
 
+		sealed class RoutineSeaPickupProofState
+		{
+			public readonly uint McvActorId;
+			public readonly CPos McvCell;
+			public readonly int RiskRevision;
+			public readonly int TerrainKnowledgeVersion;
+			public readonly CPos? PreferredMcvCell;
+			public readonly CPos? PreferredCraftCell;
+			public readonly CPos[] RankedBeaches;
+			public readonly int StartedTick;
+			public bool PreferredAttempted;
+			public int NextBeachIndex;
+			public int NativeSearches;
+			public long NativeTargetCells;
+			public long NativePathCostCallbacks;
+			public double NativeElapsedMs;
+			public int LastPassNativeSearches;
+			public int LastPassTargetCells;
+			public long LastPassPathCostCallbacks;
+			public double LastPassElapsedMs;
+			public bool Success;
+			public CPos ResultMcvCell;
+			public CPos ResultCraftCell;
+			public CPos[] ResultPath = [];
+			public bool Complete;
+
+			public RoutineSeaPickupProofState(uint mcvActorId, CPos mcvCell, int riskRevision, int terrainKnowledgeVersion,
+				CPos? preferredMcvCell, CPos? preferredCraftCell, CPos[] rankedBeaches, int startedTick)
+			{
+				McvActorId = mcvActorId;
+				McvCell = mcvCell;
+				RiskRevision = riskRevision;
+				TerrainKnowledgeVersion = terrainKnowledgeVersion;
+				PreferredMcvCell = preferredMcvCell;
+				PreferredCraftCell = preferredCraftCell;
+				RankedBeaches = rankedBeaches;
+				StartedTick = startedTick;
+			}
+		}
+
 		sealed class RoutineSeaOreSearchState
 		{
 			public readonly uint McvActorId;
 			public readonly CPos McvCell;
+			public readonly int TerrainKnowledgeVersion;
 			public readonly bool AllowMapWideFallback;
 			public readonly OreFieldCandidate[] Candidates;
+			public bool PickupProven;
 			public int NextCandidateIndex;
 			public RoutineSeaLandingProofState LandingProof;
 			public bool Complete;
 			public SeaTargetChoice? Result;
+			public CPos SuccessfulLandingExitCell;
+			public CPos[] SuccessfulLandingPath = [];
+			public int CompletedRiskRevision = -1;
 			public int CompletedTick = -1;
 
-			public RoutineSeaOreSearchState(uint mcvActorId, CPos mcvCell, bool allowMapWideFallback, OreFieldCandidate[] candidates)
+			public RoutineSeaOreSearchState(uint mcvActorId, CPos mcvCell, int terrainKnowledgeVersion,
+				bool allowMapWideFallback, OreFieldCandidate[] candidates)
 			{
 				McvActorId = mcvActorId;
 				McvCell = mcvCell;
+				TerrainKnowledgeVersion = terrainKnowledgeVersion;
 				AllowMapWideFallback = allowMapWideFallback;
 				Candidates = candidates;
+			}
+		}
+
+		sealed class CommittedSeaCorridorRecoveryState
+		{
+			public readonly uint McvActorId;
+			public readonly CPos McvCell;
+			public readonly CPos Objective;
+			public readonly CPos OriginalPickupMcvCell;
+			public readonly CPos OriginalPickupCraftCell;
+			public readonly CPos OriginalLandingCraftCell;
+			public readonly CPos OriginalDeployCell;
+			public readonly CPos[] RankedAlternativePickupBeaches;
+			public int NextPickupBeachIndex;
+			public bool HasPickupCandidate;
+			public bool UsesOriginalPickup;
+			public CPos PickupMcvCell;
+			public CPos PickupCraftCell;
+			public CPos[] PickupMcvPath = [];
+			public int PickupNavalRegion = -1;
+			public int EvidenceRiskRevision = -1;
+			public RoutineSeaOreSearchState LandingSearch;
+			public CPos? ProposedLandingCraftCell;
+			public CPos? ProposedLandingExitCell;
+			public CPos? ProposedDeployCell;
+			public CPos[] ProposedLandingPath = [];
+			public int TestedCorridors;
+			public readonly int StartedTick;
+			public readonly int DeadlineTick;
+			public readonly int MaximumPasses;
+			public int PassesCompleted;
+			public int NextAdvanceTick;
+
+			public CommittedSeaCorridorRecoveryState(uint mcvActorId, CPos mcvCell, CPos objective,
+				CPos originalPickupMcvCell, CPos originalPickupCraftCell, CPos originalLandingCraftCell,
+				CPos originalDeployCell, CPos[] rankedAlternativePickupBeaches,
+				int startedTick, int deadlineTick, int maximumPasses, int nextAdvanceTick)
+			{
+				McvActorId = mcvActorId;
+				McvCell = mcvCell;
+				Objective = objective;
+				OriginalPickupMcvCell = originalPickupMcvCell;
+				OriginalPickupCraftCell = originalPickupCraftCell;
+				OriginalLandingCraftCell = originalLandingCraftCell;
+				OriginalDeployCell = originalDeployCell;
+				RankedAlternativePickupBeaches = rankedAlternativePickupBeaches;
+				StartedTick = startedTick;
+				DeadlineTick = deadlineTick;
+				MaximumPasses = maximumPasses;
+				NextAdvanceTick = nextAdvanceTick;
 			}
 		}
 
@@ -1008,6 +1213,14 @@ namespace OpenRA.Mods.Common.Traits
 		string lastMcvWaitingDebugState;
 		string lastMcvDeployDebugState;
 		string lastMcvTransportDemandDebugState;
+		string lastCommittedSeaExecutionDiagnosticSignature;
+		string lastCommittedSeaCorridorRecoveryDiagnosticSignature;
+		string lastSeaSupplyDiagnosticSignature;
+		string lastLandingCraftPlanDiagnostic;
+		string lastRegionalLandingCraftOrderDiagnostic;
+		string lastRegionalLandingCraftOrderSignature;
+		CPos? lastRegionalLandingCraftOrderObjective;
+		int? lastRegionalLandingCraftOrderRegion;
 		IBotRequestUnitProduction[] requestUnitProduction;
 		IFransCaptureTransportService transportService;
 		IFransBaseBuilderService openingBuildOrderService;
@@ -1129,6 +1342,8 @@ namespace OpenRA.Mods.Common.Traits
 		CPos? seaPickupMcvLastProgressCell;
 		int seaPickupMcvLastProgressTick = -1;
 		int seaPickupMcvStallRetries;
+		readonly HashSet<CPos> seaPickupApproachRejectedCells = [];
+		int seaPickupApproachRecoveryAttempts;
 		CPos? seaPickupCraftLastProgressCell;
 		int seaPickupCraftLastProgressTick = -1;
 		int seaPickupCraftStallRetries;
@@ -1143,7 +1358,13 @@ namespace OpenRA.Mods.Common.Traits
 		int seaTransportLossBlockedRevision = -1;
 		int seaProductionLossBlockedRevision = -1;
 		int seaTransportWaitStartedTick = -1;
+		int seaExactPathFailureStartedTick = -1;
+		bool lastLandingCraftPlanHadPickupFailure;
+		bool lastLandingCraftPlanHadCrossingFailure;
+		CommittedSeaCorridorRecoveryState committedSeaCorridorRecovery;
 		RoutineSeaOreSearchState routineSeaOreSearch;
+		RoutineSeaOreSearchState committedSeaGeometrySearch;
+		RoutineSeaPickupProofState routineSeaPickupProof;
 		int nextMcvObjectivePerfLogTick;
 		int nextMcvRecoverySuccessPerfLogTick;
 		int nextMcvRecoveryFailurePerfLogTick;
@@ -1412,6 +1633,69 @@ namespace OpenRA.Mods.Common.Traits
 				queuedValidLst, requestedLst, productionRequest, sharedPool, sharedPoolCap, region, reason, action);
 		}
 
+		void LogCommittedSeaExecutionDiagnostic(string outcome, Actor craft, string reason)
+		{
+			if ((stage != ExpansionStage.WaitingForSeaTransport && stage != ExpansionStage.MovingToSeaPickup) ||
+				expansionTask.Mode != ExpansionTaskMode.SeaOre)
+				return;
+
+			var mcvId = activeMcv?.ActorID ?? 0u;
+			var craftId = craft?.ActorID ?? 0u;
+			var objective = targetResourceCenter.HasValue ? targetResourceCenter.Value.ToString() : "None";
+			var pickupMcv = preferredRoutinePickupMcvCell.HasValue ? preferredRoutinePickupMcvCell.Value.ToString() : "None";
+			var pickupCraft = preferredRoutinePickupCraftCell.HasValue ? preferredRoutinePickupCraftCell.Value.ToString() : "None";
+			var landing = seaLandingCraftCell.HasValue ? seaLandingCraftCell.Value.ToString() : "None";
+			var claimable = craft != null && transportService.CanStrategicExpansionClaimTransport(craft);
+			var ownedByTask = craft != null && activeLandingCraft == craft &&
+				activeLandingCraftReservationOwner == activeMcv;
+			var waited = seaTransportWaitStartedTick < 0 ? 0 : world.WorldTick - seaTransportWaitStartedTick;
+			var eligibility = lastLandingCraftPlanDiagnostic ?? "NotEvaluated";
+			var signature = $"{expansionTask.Id}|{mcvId}|{objective}|{pickupMcv}|{pickupCraft}|{landing}|" +
+				$"{outcome}|{craftId}|{claimable}|{ownedByTask}|{reason}|{eligibility}";
+			if (signature == lastCommittedSeaExecutionDiagnosticSignature)
+				return;
+
+			lastCommittedSeaExecutionDiagnosticSignature = signature;
+			FransBotLog.BotDebug(world,
+				"{0}: [E25 POST-COMMIT FERRY] task={1} mcv={2} objective={3} stage={4} waitedWT={5} " +
+				"pickupMcv={6} pickupCraft={7} landing={8} selectedLst={9} claimableNow={10} ownedByTask={11} outcome={12} reason={13}; eligibility={14}.",
+				player, expansionTask.Id, mcvId, objective, stage, waited, pickupMcv, pickupCraft, landing,
+				craftId == 0u ? "None" : craftId.ToString(), claimable, ownedByTask, outcome, reason ?? "None", eligibility);
+		}
+
+		void LogCommittedSeaCorridorRecovery(string outcome, CommittedSeaCorridorRecoveryState recovery,
+			CPos? replacementPickupMcv, CPos? replacementPickupCraft, CPos? replacementLanding,
+			CPos? replacementDeploy, string reason, string eligibility = null)
+		{
+			if (recovery == null)
+				return;
+
+			var replacement = replacementPickupMcv.HasValue && replacementPickupCraft.HasValue &&
+				replacementLanding.HasValue && replacementDeploy.HasValue
+				? $"pickupMcv={replacementPickupMcv.Value},pickupCraft={replacementPickupCraft.Value},landing={replacementLanding.Value},deploy={replacementDeploy.Value}"
+				: "None";
+			var lifetime = world.WorldTick - recovery.StartedTick;
+			var remaining = recovery.DeadlineTick == int.MaxValue ? int.MaxValue : recovery.DeadlineTick - world.WorldTick;
+			var progressBucket = recovery.PassesCompleted / 8;
+			var signature = $"{expansionTask.Id}|{recovery.Objective}|{outcome}|{replacement}|{reason}|{eligibility}|" +
+				$"progressBucket={progressBucket}|tested={recovery.TestedCorridors}";
+			if (signature == lastCommittedSeaCorridorRecoveryDiagnosticSignature)
+				return;
+
+			lastCommittedSeaCorridorRecoveryDiagnosticSignature = signature;
+			FransBotLog.BotDebug(world,
+				"{0}: [E25 FERRY CORRIDOR RECOVERY] task={1} mcv={2} objective={3} outcome={4} " +
+				"original=pickupMcv={5},pickupCraft={6},landing={7},deploy={8} replacement={9} testedCorridors={10} " +
+				"passes={11}/{12} pickupCursor={13}/{14} lifetimeWT={15} deadlineRemainingWT={16} reason={17}; eligibility={18}.",
+				player, expansionTask.Id, recovery.McvActorId, recovery.Objective, outcome,
+				recovery.OriginalPickupMcvCell, recovery.OriginalPickupCraftCell,
+				recovery.OriginalLandingCraftCell, recovery.OriginalDeployCell, replacement,
+				recovery.TestedCorridors, recovery.PassesCompleted, recovery.MaximumPasses,
+				recovery.NextPickupBeachIndex, recovery.RankedAlternativePickupBeaches.Length,
+				lifetime, remaining == int.MaxValue ? "Unlimited" : remaining.ToString(),
+				reason ?? "None", eligibility ?? "NotEvaluated");
+		}
+
 		void LogMcvTarget(Actor mcv, CPos candidate, bool valid, string reason,
 			CPos? deployCell = null, int? score = null, int? pathLength = null)
 		{
@@ -1603,6 +1887,11 @@ namespace OpenRA.Mods.Common.Traits
 			preCommitStrategicLandingCraftRegion = null;
 			preCommitStrategicLandingCraftObjective = null;
 			preCommitStrategicLandingCraftDemandUntilTick = -1;
+			lastSeaSupplyDiagnosticSignature = null;
+			lastRegionalLandingCraftOrderDiagnostic = null;
+			lastRegionalLandingCraftOrderSignature = null;
+			lastRegionalLandingCraftOrderObjective = null;
+			lastRegionalLandingCraftOrderRegion = null;
 		}
 
 
@@ -1698,6 +1987,10 @@ namespace OpenRA.Mods.Common.Traits
 			lastMcvDeployDebugState = null;
 			lastMcvTransportDemandDebugState = null;
 			lastBuildingQueueHandoffDiagnostic = null;
+			routineSeaOreSearch = null;
+			committedSeaGeometrySearch = null;
+			routineSeaPickupProof = null;
+			committedSeaCorridorRecovery = null;
 		}
 
 
@@ -4170,9 +4463,22 @@ namespace OpenRA.Mods.Common.Traits
 				.ThenBy(c => c.ResourceCenter.X)
 				.ThenBy(c => c.ResourceCenter.Y);
 
+			var localCandidates = OrderOreCandidates(candidates
+				.Where(c => c.DistanceSquared <= maximumHopDistanceSquared))
+				.Take(Info.MaximumOreFieldPathCandidates).ToArray();
+			var fallbackCandidates = allowMapWideFallback
+				? OrderOreCandidates(candidates.Where(c => c.DistanceSquared > maximumHopDistanceSquared))
+					.Take(Info.FallbackMaximumOreFieldPathCandidates).ToArray()
+				: [];
+			var plannedCandidates = localCandidates.Select(candidate => new RoutineLandPlannedCandidate(candidate, "local"))
+				.Concat(fallbackCandidates.Select(candidate => new RoutineLandPlannedCandidate(candidate, "fallback")))
+				.ToArray();
+			var routineLandUnion = new RoutineLandNegativeUnionScanState(mcv, mobile, mobile.ToCell,
+				world.WorldTick, riskModelService?.RiskRevision ?? -1,
+				strategicMapService?.TerrainKnowledgeVersion ?? -1, plannedCandidates, perf);
+
 			var local = EvaluateOreCandidates(mcv, mobile, transformsInfo, intoActor, buildingInfo,
-				OrderOreCandidates(candidates.Where(c => c.DistanceSquared <= maximumHopDistanceSquared)),
-				Info.MaximumOreFieldPathCandidates, "local", perf);
+				localCandidates, "local", 0, routineLandUnion, perf);
 			if (local.HasValue)
 			{
 				if (logChoice)
@@ -4185,8 +4491,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (allowMapWideFallback)
 			{
 				var distant = EvaluateOreCandidates(mcv, mobile, transformsInfo, intoActor, buildingInfo,
-					OrderOreCandidates(candidates.Where(c => c.DistanceSquared > maximumHopDistanceSquared)),
-					Info.FallbackMaximumOreFieldPathCandidates, "fallback", perf);
+					fallbackCandidates, "fallback", localCandidates.Length, routineLandUnion, perf);
 				if (distant.HasValue)
 				{
 					if (logChoice)
@@ -4235,13 +4540,43 @@ namespace OpenRA.Mods.Common.Traits
 				return null;
 
 			var movementToleranceSquared = Info.RoutineSeaOreSearchMovementTolerance * Info.RoutineSeaOreSearchMovementTolerance;
+			var riskRevision = riskModelService?.RiskRevision ?? -1;
+			var terrainVersion = strategicMapService?.TerrainKnowledgeVersion ?? -1;
 			var stateMatches = routineSeaOreSearch != null && routineSeaOreSearch.McvActorId == mcv.ActorID &&
+				routineSeaOreSearch.TerrainKnowledgeVersion == terrainVersion &&
 				routineSeaOreSearch.AllowMapWideFallback == allowMapWideFallback &&
 				(mcv.Location - routineSeaOreSearch.McvCell).LengthSquared <= movementToleranceSquared;
 
 			if (stateMatches && routineSeaOreSearch.Complete &&
 				world.WorldTick - routineSeaOreSearch.CompletedTick < Info.RoutineSeaOreSearchCacheDuration)
-				return routineSeaOreSearch.Result;
+			{
+				var completed = routineSeaOreSearch.Result;
+				if (!completed.HasValue && routineSeaOreSearch.CompletedRiskRevision == riskRevision)
+					return null;
+				if (!completed.HasValue)
+				{
+					routineSeaOreSearch = null;
+					stateMatches = false;
+				}
+				else
+				{
+					var pickup = routineSeaPickupProof;
+					var evidenceCurrent = pickup?.Success == true &&
+						pickup.McvActorId == mcv.ActorID && pickup.McvCell == mobile.ToCell &&
+						IsPioneerPathEvidenceCurrent(mcv, mobile, pickup.McvCell, pickup.McvCell,
+							pickup.ResultMcvCell, pickup.ResultPath) &&
+						routineSeaOreSearch.SuccessfulLandingPath.Length > 0 &&
+						IsPioneerPathEvidenceCurrent(mcv, mobile, routineSeaOreSearch.McvCell,
+							routineSeaOreSearch.SuccessfulLandingExitCell, completed.Value.DeployCell,
+							routineSeaOreSearch.SuccessfulLandingPath) &&
+						TryProveFutureExpansionRefineryPlacement(mcv, completed.Value.DeployCell, out _, out _);
+					if (evidenceCurrent)
+						return completed;
+
+					routineSeaOreSearch = null;
+					stateMatches = false;
+				}
+			}
 
 			if (!stateMatches || routineSeaOreSearch.Complete)
 			{
@@ -4302,26 +4637,46 @@ namespace OpenRA.Mods.Common.Traits
 
 				if (orderedCandidates.Length == 0)
 				{
-					routineSeaOreSearch = new RoutineSeaOreSearchState(mcv.ActorID, mcv.Location, allowMapWideFallback, []);
-					routineSeaOreSearch.Complete = true;
-					routineSeaOreSearch.CompletedTick = world.WorldTick;
+						routineSeaOreSearch = new RoutineSeaOreSearchState(mcv.ActorID, mcv.Location,
+							strategicMapService?.TerrainKnowledgeVersion ?? -1, allowMapWideFallback, []);
+						routineSeaOreSearch.Complete = true;
+						routineSeaOreSearch.CompletedRiskRevision = riskRevision;
+						routineSeaOreSearch.CompletedTick = world.WorldTick;
 					return null;
 				}
 
-				using var pickupPerf = FransBotLog.Profile(world, player, "MCV.SeaOrePickupProof");
-				if (!HasReachableRoutineSeaPickupForMcv(mcv, mobile) ||
-					!TryGetPreferredRoutinePickupNavalRegion(out _))
-				{
-					routineSeaOreSearch = new RoutineSeaOreSearchState(mcv.ActorID, mcv.Location, allowMapWideFallback, []);
-					routineSeaOreSearch.Complete = true;
-					routineSeaOreSearch.CompletedTick = world.WorldTick;
-					return null;
-				}
-
-				routineSeaOreSearch = new RoutineSeaOreSearchState(mcv.ActorID, mcv.Location, allowMapWideFallback, orderedCandidates);
+				routineSeaOreSearch = new RoutineSeaOreSearchState(mcv.ActorID, mcv.Location,
+					terrainVersion, allowMapWideFallback, orderedCandidates);
 			}
 			if (perf != null && routineSeaOreSearch != null && perf.CandidateNodesRetained == 0)
 				perf.CandidateNodesRetained = routineSeaOreSearch.Candidates.Length;
+
+			// Reuse the retained positive pickup path after cheap exact evidence validation.
+			// Risk/terrain/source changes reset only this pickup proof, while an unchanged path
+			// avoids repeating native A* during the incremental landing search.
+			{
+				bool pickupFound;
+				bool pickupSearchExhausted;
+				using (FransBotLog.Profile(world, player, "MCV.SeaOrePickupProof"))
+					pickupFound = TryAdvanceReachableRoutineSeaPickupProof(mcv, mobile,
+						out _, out _, out _, out pickupSearchExhausted, perf);
+				if (!pickupFound || !TryGetPreferredRoutinePickupNavalRegion(out _))
+				{
+					routineSeaOreSearch.PickupProven = false;
+					if (!pickupSearchExhausted)
+					{
+						searchPending = true;
+						return null;
+					}
+
+					routineSeaOreSearch.Complete = true;
+					routineSeaOreSearch.CompletedRiskRevision = riskRevision;
+					routineSeaOreSearch.CompletedTick = world.WorldTick;
+					return null;
+				}
+
+				routineSeaOreSearch.PickupProven = true;
+			}
 
 			Actor[] landingProtectors;
 			using (FransBotLog.Profile(world, player, "MCV.SeaOreProtectorSnapshot"))
@@ -4354,7 +4709,8 @@ namespace OpenRA.Mods.Common.Traits
 					using (FransBotLog.Profile(world, player, "MCV.SeaOreLandProof"))
 						if (TryFindSafeDeployPath(mcv, mobile, candidate.ResourceCenter,
 							transformsInfo, intoActor, buildingInfo, out var landDeploy, out var landPathLength,
-							perf, candidate.ResourceCenter))
+							perf, candidate.ResourceCenter) &&
+							IsMcvRouteDetourAcceptable(mobile.ToCell, landDeploy, landPathLength))
 						{
 							LogMcvTarget(mcv, candidate.ResourceCenter, false, "LandRouteAlreadyExecutable", landDeploy, pathLength: landPathLength);
 							routineSeaOreSearch.LandingProof = null;
@@ -4393,9 +4749,10 @@ namespace OpenRA.Mods.Common.Traits
 
 				using (FransBotLog.Profile(world, player, "MCV.SeaOreLandingProof"))
 				{
-					if (TryAdvanceRoutineSeaLandingProof(mcv, mobile, candidate.ResourceCenter,
+					if (TryAdvanceRoutineSeaLandingProof(routineSeaOreSearch, mcv, mobile, candidate.ResourceCenter,
 						transformsInfo, intoActor, buildingInfo, pickupNavalRegion, landingProtectors,
-						out var landingCraftCell, out var deployCell, out var exhausted, perf))
+						out var landingCraftCell, out var deployCell, out var exhausted,
+						out var landingExitCell, out var landingPath, perf))
 					{
 						if (IsFutureRefineryProofCooling(candidate.ResourceCenter))
 						{
@@ -4414,9 +4771,12 @@ namespace OpenRA.Mods.Common.Traits
 						}
 
 						routineSeaOreSearch.Result = new SeaTargetChoice(candidate.ResourceCenter, deployCell, landingCraftCell, candidate.DistanceSquared);
+						routineSeaOreSearch.SuccessfulLandingExitCell = landingExitCell;
+						routineSeaOreSearch.SuccessfulLandingPath = landingPath;
 						if (perf != null)
 							perf.AcceptedNativeProofIndex = perf.LastSuccessfulNativeProofIndex;
 						routineSeaOreSearch.Complete = true;
+						routineSeaOreSearch.CompletedRiskRevision = riskRevision;
 						routineSeaOreSearch.CompletedTick = world.WorldTick;
 						LogMcvTarget(mcv, candidate.ResourceCenter, true, "AcceptedSeaTarget", deployCell);
 						return routineSeaOreSearch.Result;
@@ -4438,6 +4798,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (routineSeaOreSearch.NextCandidateIndex >= routineSeaOreSearch.Candidates.Length)
 			{
 				routineSeaOreSearch.Complete = true;
+				routineSeaOreSearch.CompletedRiskRevision = riskRevision;
 				routineSeaOreSearch.CompletedTick = world.WorldTick;
 				return null;
 			}
@@ -4446,17 +4807,32 @@ namespace OpenRA.Mods.Common.Traits
 			return null;
 		}
 
-		bool TryAdvanceRoutineSeaLandingProof(Actor mcv, Mobile mcvMobile, CPos resourceCenter,
+		bool TryAdvanceRoutineSeaLandingProof(RoutineSeaOreSearchState search, Actor mcv, Mobile mcvMobile, CPos resourceCenter,
 			TransformsInfo transformsInfo, ActorInfo intoActor, BuildingInfo buildingInfo, int pickupNavalRegion,
 			IReadOnlyCollection<Actor> landingProtectors, out CPos landingCraftCell, out CPos deployCell, out bool exhausted,
-			McvObjectiveScanPerf perf = null)
+			McvObjectiveScanPerf perf = null, IReadOnlyCollection<CPos> excludedLandingCraftCells = null)
+		{
+			return TryAdvanceRoutineSeaLandingProof(search, mcv, mcvMobile, resourceCenter,
+				transformsInfo, intoActor, buildingInfo, pickupNavalRegion, landingProtectors,
+				out landingCraftCell, out deployCell, out exhausted, out _, out _, perf, excludedLandingCraftCells);
+		}
+
+		bool TryAdvanceRoutineSeaLandingProof(RoutineSeaOreSearchState search, Actor mcv, Mobile mcvMobile, CPos resourceCenter,
+			TransformsInfo transformsInfo, ActorInfo intoActor, BuildingInfo buildingInfo, int pickupNavalRegion,
+			IReadOnlyCollection<Actor> landingProtectors, out CPos landingCraftCell, out CPos deployCell, out bool exhausted,
+			out CPos provenExitCell, out CPos[] provenLandPath,
+			McvObjectiveScanPerf perf = null, IReadOnlyCollection<CPos> excludedLandingCraftCells = null)
 		{
 			landingCraftCell = default;
 			deployCell = default;
 			exhausted = false;
+			provenExitCell = default;
+			provenLandPath = [];
 
-			var proof = routineSeaOreSearch?.LandingProof;
-			if (proof == null || proof.ResourceCenter != resourceCenter || proof.PickupNavalRegion != pickupNavalRegion)
+			var currentRiskRevision = riskModelService?.RiskRevision ?? -1;
+			var proof = search?.LandingProof;
+			if (proof == null || proof.ResourceCenter != resourceCenter || proof.PickupNavalRegion != pickupNavalRegion ||
+				proof.RiskRevision != currentRiskRevision)
 			{
 				CPos[] deployCandidates;
 				using (FransBotLog.Profile(world, player, "MCV.SeaOreDeployCandidates"))
@@ -4475,6 +4851,7 @@ namespace OpenRA.Mods.Common.Traits
 					rankedBeaches = world.Map.FindTilesInAnnulus(resourceCenter, 1, Info.SeaLandingSearchRadius)
 						.Where(IsSeaShoreCell)
 						.Where(c => IsCellInNavalRegion(c, pickupNavalRegion))
+						.Where(c => excludedLandingCraftCells == null || !excludedLandingCraftCells.Contains(c))
 						.OrderByDescending(c => CountSeaLandingProtectorsNear(c, landingProtectors, protectorBuckets))
 						.ThenBy(c => (c - resourceCenter).LengthSquared)
 						.Take(Info.MaximumLandingBeachCandidates)
@@ -4489,11 +4866,12 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					ResourceCenter = resourceCenter,
 					PickupNavalRegion = pickupNavalRegion,
+					RiskRevision = currentRiskRevision,
 					DeployCandidates = deployCandidates,
 					RankedBeaches = rankedBeaches,
 					NextBeachIndex = 0
 				};
-				routineSeaOreSearch.LandingProof = proof;
+				search.LandingProof = proof;
 			}
 
 			var beachBudget = Math.Max(1, Info.RoutineSeaOreLandingBeachesPerPlanningPass);
@@ -4533,10 +4911,11 @@ namespace OpenRA.Mods.Common.Traits
 					bool success;
 					CPos provenDeployCell;
 					int provenLandPathLength;
+					CPos[] path;
 					using (FransBotLog.Profile(world, player, "MCV.SeaOreExitPathProof"))
 						success = TryFindSafeDeployPathFromCellUsingCandidates(mcv, mcvMobile, exitCell,
-							proof.DeployCandidates, out provenDeployCell, out provenLandPathLength, perf, resourceCenter);
-					exitProof = new LandingExitProof(success, provenDeployCell, provenLandPathLength);
+							proof.DeployCandidates, out provenDeployCell, out provenLandPathLength, out path, perf, resourceCenter);
+					exitProof = new LandingExitProof(success, provenDeployCell, provenLandPathLength, path);
 					proof.ExitPathProofs.Add(exitCell, exitProof);
 					expensiveProofs++;
 				}
@@ -4546,6 +4925,8 @@ namespace OpenRA.Mods.Common.Traits
 
 				landingCraftCell = proof.ActiveBeach.Value;
 				deployCell = exitProof.DeployCell;
+				provenExitCell = exitCell;
+				provenLandPath = exitProof.Path;
 				return true;
 			}
 
@@ -4587,6 +4968,36 @@ namespace OpenRA.Mods.Common.Traits
 			return cachedRoutinePickupBeachCells;
 		}
 
+		CPos[] RankRoutinePickupBeaches(CPos origin, CPos? excluded = null, int? maximum = null)
+		{
+			var limit = Math.Max(1, maximum ?? Info.MaximumRoutinePickupBeachCandidates);
+			var ranked = new List<CPos>(limit);
+			foreach (var cell in RoutinePickupBeachCells())
+			{
+				if (excluded.HasValue && cell == excluded.Value)
+					continue;
+
+				var insertAt = 0;
+				while (insertAt < ranked.Count)
+				{
+					var existing = ranked[insertAt];
+					var distanceOrder = (cell - origin).LengthSquared.CompareTo((existing - origin).LengthSquared);
+					if (distanceOrder < 0 || (distanceOrder == 0 &&
+						(cell.X < existing.X || (cell.X == existing.X && cell.Y < existing.Y))))
+						break;
+					insertAt++;
+				}
+
+				if (insertAt >= limit)
+					continue;
+				ranked.Insert(insertAt, cell);
+				if (ranked.Count > limit)
+					ranked.RemoveAt(limit);
+			}
+
+			return ranked.ToArray();
+		}
+
 		bool TryUsePreferredRoutinePickup(Actor mcv, Mobile mcvMobile, Actor craft, Mobile craftMobile,
 			out CPos mcvCell, out CPos craftCell)
 		{
@@ -4624,49 +5035,194 @@ namespace OpenRA.Mods.Common.Traits
 			return true;
 		}
 
-		bool HasReachableRoutineSeaPickupForMcv(Actor mcv, Mobile mcvMobile)
+		bool TryFindRiskAwarePathToAnyCell(Actor actor, Mobile mobile, CPos source, CPos[] targets,
+			out CPos target, out CPos[] provenPath, out bool nativeSearchExecuted,
+			RoutineSeaPickupProofState pickupProof = null, McvObjectiveScanPerf perf = null)
 		{
-			return TryGetReachableRoutineSeaPickupProof(mcv, mcvMobile, out _, out _, out _);
+			target = default;
+			provenPath = [];
+			nativeSearchExecuted = false;
+			if (actor == null || mobile == null || targets == null || targets.Length == 0)
+				return false;
+
+			if (targets.Contains(source))
+			{
+				target = source;
+				provenPath = [source];
+				return true;
+			}
+			if (mobile.PathFinder is not PathFinder pathFinder)
+				return false;
+
+			var started = Stopwatch.GetTimestamp();
+			RoutineLandNativePathResult nativeResult;
+			using (FransBotLog.Profile(world, player, "MCV.SeaPickupNativePath"))
+				nativeResult = RoutineLandNativePathInvoker.FindPathToTargetCells(
+					actor, pathFinder, source, targets,
+					search => riskModelService.ExecuteWithPreparedPathCost(actor,
+						FransRiskRole.Mcv, CurrentMcvRiskTolerance, search));
+			var elapsedMs = ElapsedMilliseconds(started);
+			nativeSearchExecuted = true;
+			if (pickupProof != null)
+			{
+				pickupProof.NativeSearches++;
+				pickupProof.NativeTargetCells += targets.Length;
+				pickupProof.NativePathCostCallbacks += nativeResult.PathCostCallbacks;
+				pickupProof.NativeElapsedMs += elapsedMs;
+				pickupProof.LastPassNativeSearches++;
+				pickupProof.LastPassTargetCells += targets.Length;
+				pickupProof.LastPassPathCostCallbacks += nativeResult.PathCostCallbacks;
+				pickupProof.LastPassElapsedMs += elapsedMs;
+			}
+			if (perf != null)
+			{
+				perf.LogicalNativeProofRequests++;
+				perf.PhysicalNativePathSearches++;
+				perf.NativeTargetCells += targets.Length;
+				perf.NativePathCostCallbackCalls += nativeResult.PathCostCallbacks;
+				perf.RiskPathCostCalls += nativeResult.RiskPathCostCalls;
+				perf.NativePathSearchElapsedMs += elapsedMs;
+				if (elapsedMs > perf.MaxNativePathSearchElapsedMs)
+				{
+					perf.MaxNativePathSearchElapsedMs = elapsedMs;
+					perf.MaxNativeTargetCells = targets.Length;
+					perf.MaxNativePathSearchCallbackCalls = nativeResult.PathCostCallbacks;
+				}
+				perf.Pass.RecordPhysicalProof(perf, actor, source, targets);
+			}
+
+			var path = nativeResult.Path;
+			if (path == null || path.Count == 0 || !targets.Contains(path[0]))
+				return false;
+			for (var p = 0; p < path.Count - 1; p++)
+			{
+				if (perf != null)
+					perf.PostPathRiskChecks++;
+				if (IsMcvCriticalRisk(actor, path[p], CurrentMcvRiskTolerance))
+					return false;
+			}
+
+			target = path[0];
+			provenPath = path.ToArray();
+			return true;
 		}
 
-		bool TryGetReachableRoutineSeaPickupProof(Actor mcv, Mobile mcvMobile,
-			out CPos mcvCell, out CPos craftCell, out CPos[] mcvPath)
+		bool TryAdvanceReachableRoutineSeaPickupProof(Actor mcv, Mobile mcvMobile,
+			out CPos mcvCell, out CPos craftCell, out CPos[] mcvPath, out bool exhausted,
+			McvObjectiveScanPerf perf = null)
 		{
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "MCV.SeaPickupSearch");
 			mcvCell = default;
 			craftCell = default;
 			mcvPath = [];
+			exhausted = false;
 			if (mcv == null || mcvMobile == null)
-				return false;
-
-			// A ferry that just delivered this roaming MCV already proved a safe local shoreline.
-			// Test that exact E6-style handoff point first. This is the critical post-PROC/repack
-			// fast path that avoids repeating the bounded map-wide pickup search on island outposts.
-			if (TryUsePreferredRoutinePickup(mcv, mcvMobile, null, null,
-				out mcvCell, out craftCell, out mcvPath))
-				return true;
-
-			foreach (var beach in RoutinePickupBeachCells()
-				.OrderBy(c => (c - mcv.Location).LengthSquared)
-				.ThenBy(c => c.X)
-				.ThenBy(c => c.Y)
-				.Take(Info.MaximumRoutinePickupBeachCandidates))
 			{
-				foreach (var adjacent in PassengerAdjacentCells(beach)
-					.Where(c => mcvMobile.CanEnterCell(c, check: BlockedByActor.Immovable) && mcvMobile.CanStayInCell(c))
-					.OrderBy(c => (c - mcv.Location).LengthSquared))
-				{
-					if (!HasRiskAwarePathBetweenCells(mcv, mcvMobile, mcvMobile.ToCell, adjacent,
-						out _, out var path))
-						continue;
+				exhausted = true;
+				return false;
+			}
 
-					preferredRoutinePickupMcvCell = adjacent;
-					preferredRoutinePickupCraftCell = beach;
-					mcvCell = adjacent;
-					craftCell = beach;
-					mcvPath = path;
+			var riskRevision = riskModelService?.RiskRevision ?? -1;
+			var terrainVersion = strategicMapService?.TerrainKnowledgeVersion ?? -1;
+			var stateMatches = routineSeaPickupProof != null && routineSeaPickupProof.McvActorId == mcv.ActorID &&
+				routineSeaPickupProof.RiskRevision == riskRevision &&
+				routineSeaPickupProof.TerrainKnowledgeVersion == terrainVersion &&
+				mcvMobile.ToCell == routineSeaPickupProof.McvCell;
+			if (!stateMatches)
+				routineSeaPickupProof = new RoutineSeaPickupProofState(mcv.ActorID, mcvMobile.ToCell,
+					riskRevision, terrainVersion, preferredRoutinePickupMcvCell, preferredRoutinePickupCraftCell,
+					RankRoutinePickupBeaches(mcvMobile.ToCell), world.WorldTick);
+
+			var proof = routineSeaPickupProof;
+			proof.LastPassNativeSearches = 0;
+			proof.LastPassTargetCells = 0;
+			proof.LastPassPathCostCallbacks = 0;
+			proof.LastPassElapsedMs = 0;
+			if (proof.Success)
+			{
+				var resultStillCurrent = world.Map.Contains(proof.ResultCraftCell) &&
+					IsSeaShoreCell(proof.ResultCraftCell) &&
+					strategicMapService != null &&
+					strategicMapService.TryGetNavalRegionId(proof.ResultCraftCell, out _) &&
+					PassengerAdjacentCells(proof.ResultCraftCell).Contains(proof.ResultMcvCell) &&
+					IsPioneerPathEvidenceCurrent(mcv, mcvMobile, proof.McvCell, proof.McvCell,
+						proof.ResultMcvCell, proof.ResultPath);
+				if (resultStillCurrent)
+				{
+					mcvCell = proof.ResultMcvCell;
+					craftCell = proof.ResultCraftCell;
+					mcvPath = proof.ResultPath;
 					return true;
 				}
+
+				proof.Success = false;
+				proof.ResultPath = [];
+			}
+			if (proof.Complete)
+			{
+				exhausted = true;
+				return false;
+			}
+
+			var nativeBudget = Math.Max(1, Info.SeaPickupPathProofsPerPlanningPass);
+			var nativeSearches = 0;
+			while (nativeSearches < nativeBudget)
+			{
+				CPos beach;
+				CPos[] targets;
+				if (!proof.PreferredAttempted)
+				{
+					proof.PreferredAttempted = true;
+					if (!proof.PreferredMcvCell.HasValue || !proof.PreferredCraftCell.HasValue)
+						continue;
+					beach = proof.PreferredCraftCell.Value;
+					var preferred = proof.PreferredMcvCell.Value;
+					if (!world.Map.Contains(preferred) || !world.Map.Contains(beach) || !IsSeaShoreCell(beach) ||
+						strategicMapService == null || !strategicMapService.TryGetNavalRegionId(beach, out _) ||
+						!PassengerAdjacentCells(beach).Contains(preferred) ||
+						!mcvMobile.CanEnterCell(preferred, check: BlockedByActor.Immovable) || !mcvMobile.CanStayInCell(preferred))
+						continue;
+					targets = [preferred];
+				}
+				else
+				{
+					if (proof.NextBeachIndex >= proof.RankedBeaches.Length)
+					{
+						proof.Complete = true;
+						exhausted = true;
+						return false;
+					}
+
+					beach = proof.RankedBeaches[proof.NextBeachIndex++];
+					if (strategicMapService == null || !strategicMapService.TryGetNavalRegionId(beach, out _))
+						continue;
+					targets = PassengerAdjacentCells(beach)
+						.Where(cell => mcvMobile.CanEnterCell(cell, check: BlockedByActor.Immovable) && mcvMobile.CanStayInCell(cell))
+						.OrderBy(cell => (cell - mcvMobile.ToCell).LengthSquared)
+						.ThenBy(cell => cell.X)
+						.ThenBy(cell => cell.Y)
+						.ToArray();
+					if (targets.Length == 0)
+						continue;
+				}
+
+				var found = TryFindRiskAwarePathToAnyCell(mcv, mcvMobile, mcvMobile.ToCell, targets,
+					out var provenPickup, out var path, out var nativeSearchExecuted, proof, perf);
+				if (nativeSearchExecuted)
+					nativeSearches++;
+				if (!found)
+					continue;
+
+				preferredRoutinePickupMcvCell = provenPickup;
+				preferredRoutinePickupCraftCell = beach;
+				proof.Success = true;
+				proof.ResultMcvCell = provenPickup;
+				proof.ResultCraftCell = beach;
+				proof.ResultPath = path;
+				mcvCell = provenPickup;
+				craftCell = beach;
+				mcvPath = path;
+				return true;
 			}
 
 			return false;
@@ -4850,13 +5406,135 @@ namespace OpenRA.Mods.Common.Traits
 			}
 		}
 
+		void TryPrepareRoutineLandNegativeUnion(Actor mcv, Mobile mobile,
+			TransformsInfo transformsInfo, ActorInfo intoActor, BuildingInfo buildingInfo,
+			int firstPlannedIndex, RoutineLandNegativeUnionScanState state)
+		{
+			if (state == null || state.Coordinator.PreparationAttempted)
+				return;
+			var remainingCandidateUpperBound = state.PlannedCandidates.Length - firstPlannedIndex;
+			if (state.Coordinator.OrdinaryNativeEmptyResults < RoutineLandNegativeUnionPolicy.ActivationNativeEmptyResults)
+				return;
+			if (!RoutineLandNegativeUnionPolicy.ShouldAttemptPreparation(
+				state.Coordinator.OrdinaryNativeEmptyResults, remainingCandidateUpperBound,
+				state.Coordinator.PreparationAttempted))
+			{
+				if (state.Perf != null)
+				{
+					state.Perf.RoutineLandUnionActivationReason = "InsufficientRemainingCandidateUpperBound";
+					state.Perf.RoutineLandUnionFallbackReason = "InsufficientRemainingCandidateUpperBound";
+				}
+				return;
+			}
+			var perf = state.Perf;
+			var preparationStarted = Stopwatch.GetTimestamp();
+			var preparationAllocatedBytes = GC.GetAllocatedBytesForCurrentThread();
+
+			var pathFinder = mobile.PathFinder as PathFinder;
+
+			var eligible = new List<RoutineLandNegativeUnionObjective>();
+			for (var i = firstPlannedIndex; i < state.PlannedCandidates.Length; i++)
+			{
+				var objective = state.PlannedCandidates[i].Candidate.ResourceCenter;
+				if (IsFutureRefineryProofCooling(objective))
+					continue;
+
+				var targets = GetSafeDeployCandidates(mcv, mobile, objective,
+					transformsInfo, intoActor, buildingInfo);
+				if (!RoutineLandNegativeUnionPolicy.SupportsTargets(targets))
+					continue;
+				if (pathFinder == null || !targets.Any(target => pathFinder.PathMightExistForLocomotorBlockedByImmovable(
+					mobile.Locomotor, state.Source, target)))
+					continue;
+
+				eligible.Add(new RoutineLandNegativeUnionObjective(objective, targets));
+			}
+
+			var nativeElapsedMs = 0d;
+			long nativeAllocatedBytes = 0;
+			var result = state.Coordinator.TryPrepare(
+				remainingCandidateUpperBound,
+				world.Map.Grid.MaximumTerrainHeight <= 0,
+				() => CurrentRoutineLandNegativeUnionContract(mcv, mobile),
+				eligible,
+				unionTargets =>
+				{
+					if (pathFinder == null)
+						return default;
+
+					var started = Stopwatch.GetTimestamp();
+					var allocatedBytes = GC.GetAllocatedBytesForCurrentThread();
+					RoutineLandNativePathResult nativeResult;
+					using (FransBotLog.Profile(world, player, "MCV.RoutineLandNegativeUnion"))
+						nativeResult = RoutineLandNativePathInvoker.FindPathToTargetCells(
+							mcv, pathFinder, state.Source, unionTargets,
+							search => riskModelService.ExecuteWithPreparedPathCost(mcv,
+								FransRiskRole.Mcv, CurrentMcvRiskTolerance, search));
+					nativeElapsedMs = ElapsedMilliseconds(started);
+					nativeAllocatedBytes = GC.GetAllocatedBytesForCurrentThread() - allocatedBytes;
+					return nativeResult;
+				});
+
+			if (result.Outcome == RoutineLandNegativeUnionPreparationOutcome.NotAttempted)
+			{
+				if (perf != null && result.FallbackReason != null)
+				{
+					perf.RoutineLandUnionActivationReason = result.FallbackReason;
+					perf.RoutineLandUnionFallbackReason = result.FallbackReason;
+				}
+				return;
+			}
+
+			if (perf != null)
+			{
+				perf.RoutineLandUnionPreparationAttempts++;
+				perf.RoutineLandUnionActivationReason = result.ActivationReason;
+				perf.RoutineLandUnionPreparationElapsedMs +=
+					Math.Max(0d, ElapsedMilliseconds(preparationStarted) - nativeElapsedMs);
+				perf.RoutineLandUnionPreparationAllocatedBytes +=
+					Math.Max(0L, GC.GetAllocatedBytesForCurrentThread() - preparationAllocatedBytes - nativeAllocatedBytes);
+				perf.RoutineLandUnionEligibleObjectives = result.EligibleObjectives;
+				perf.RoutineLandUnionTargetCells = result.UnionTargets.Length;
+				perf.RoutineLandUnionTargetHash = OrderedCellHash(result.UnionTargets);
+				perf.RoutineLandUnionOutcome = result.Outcome.ToString();
+				perf.RoutineLandUnionFallbackReason = result.FallbackReason ?? "None";
+				if (result.NativeCallExecuted)
+				{
+					perf.RoutineLandUnionNativeSearches++;
+					perf.RoutineLandUnionPathCostCallbacks += result.NativeResult.PathCostCallbacks;
+					perf.RoutineLandUnionElapsedMs += nativeElapsedMs;
+					perf.PhysicalNativePathSearches++;
+					perf.NativeTargetCells += result.UnionTargets.Length;
+					perf.NativePathCostCallbackCalls += result.NativeResult.PathCostCallbacks;
+					perf.RiskPathCostCalls += result.NativeResult.RiskPathCostCalls;
+					perf.NativePathSearchElapsedMs += nativeElapsedMs;
+					if (nativeElapsedMs > perf.MaxNativePathSearchElapsedMs)
+					{
+						perf.MaxNativePathSearchElapsedMs = nativeElapsedMs;
+						perf.MaxNativeTargetCells = result.UnionTargets.Length;
+						perf.MaxNativePathSearchCallbackCalls = result.NativeResult.PathCostCallbacks;
+					}
+				}
+			}
+		}
+
+		RoutineLandNegativeUnionContract CurrentRoutineLandNegativeUnionContract(Actor mcv, Mobile mobile)
+		{
+			return new RoutineLandNegativeUnionContract(
+				mcv, mcv.ActorID, mcv.Owner, mobile, mobile.Locomotor, mobile.ToCell, world.WorldTick,
+				riskModelService?.RiskRevision ?? -1, strategicMapService?.TerrainKnowledgeVersion ?? -1,
+				!mcv.Disposed && mcv.IsInWorld && !mcv.IsDead);
+		}
+
 		OreChoice? EvaluateOreCandidates(Actor mcv, Mobile mobile,
 			TransformsInfo transformsInfo, ActorInfo intoActor, BuildingInfo buildingInfo,
-			IEnumerable<OreFieldCandidate> candidates, int maximumCandidates, string classification,
+			IReadOnlyList<OreFieldCandidate> candidates, string classification, int plannedOffset,
+			RoutineLandNegativeUnionScanState routineLandUnion,
 			McvObjectiveScanPerf perf = null)
 		{
-			foreach (var candidate in candidates.Take(maximumCandidates))
+			for (var candidateIndex = 0; candidateIndex < candidates.Count; candidateIndex++)
 			{
+				var candidate = candidates[candidateIndex];
 				RoutineLandCandidatePerf candidatePerf = null;
 				if (perf != null)
 				{
@@ -4864,18 +5542,24 @@ namespace OpenRA.Mods.Common.Traits
 					candidatePerf = perf.BeginRoutineLandCandidate(candidate.ResourceCenter, classification);
 				}
 
+				TryPrepareRoutineLandNegativeUnion(mcv, mobile, transformsInfo, intoActor, buildingInfo,
+					plannedOffset + candidateIndex, routineLandUnion);
+
 				var deployCandidates = GetSafeDeployCandidates(mcv, mobile, candidate.ResourceCenter,
 					transformsInfo, intoActor, buildingInfo, perf);
 				if (candidatePerf != null)
 					candidatePerf.DeployTargetCount = deployCandidates.Length;
 				if (!TryFindSafeDeployPathFromCellUsingCandidates(mcv, mobile, mobile.ToCell, deployCandidates,
 					out var deployCell, out var pathLength, out _, null, perf, candidate.ResourceCenter,
-					routineLandPrePathGuards: true, routineLandCandidate: candidatePerf))
+					routineLandPrePathGuards: true, routineLandCandidate: candidatePerf,
+					routineLandUnion: routineLandUnion))
 				{
 					var reason = candidatePerf?.CooldownBeforePath == true
 						? "FutureRefineryProofCooldown"
 						: candidatePerf?.TopologyNegative == true
 							? "TopologyNegativeNoSafeDeployPath"
+							: candidatePerf?.NativeSearchSkippedByUnionCertificate == true
+								? "CertifiedNativeNoPath"
 							: "NoSafeDeployPath";
 					if (candidatePerf != null)
 						candidatePerf.Result = reason;
@@ -5074,7 +5758,8 @@ namespace OpenRA.Mods.Common.Traits
 			CPos[] candidates, out CPos deployCell, out int pathLength, out CPos[] provenPath,
 			PioneerLandRouteAttemptEvidence evidence,
 			McvObjectiveScanPerf perf = null, CPos? objective = null,
-			bool routineLandPrePathGuards = false, RoutineLandCandidatePerf routineLandCandidate = null)
+			bool routineLandPrePathGuards = false, RoutineLandCandidatePerf routineLandCandidate = null,
+			RoutineLandNegativeUnionScanState routineLandUnion = null)
 		{
 			deployCell = default;
 			pathLength = int.MaxValue;
@@ -5126,55 +5811,79 @@ namespace OpenRA.Mods.Common.Traits
 				}
 			}
 
-			long pathCostCallbacks = 0;
-			long riskPathCostCalls = 0;
+			if (routineLandPrePathGuards && routineLandUnion != null && objective.HasValue &&
+				routineLandUnion.Coordinator.HasCertificate(objective.Value))
+			{
+				if (!routineLandUnion.Coordinator.TryUseCertificate(objective.Value, candidates,
+					CurrentRoutineLandNegativeUnionContract(mcv, mobile), out var mismatch))
+				{
+					if (perf != null)
+						perf.RoutineLandUnionCertificateMismatches++;
+					if (routineLandCandidate != null)
+						routineLandCandidate.UnionCertificateMismatch = mismatch;
+				}
+				else
+				{
+					if (perf != null)
+						perf.RoutineLandNativeSearchesSkippedByUnionCertificate++;
+					if (routineLandCandidate != null)
+						routineLandCandidate.NativeSearchSkippedByUnionCertificate = true;
+					return false;
+				}
+			}
+
 			if (evidence != null)
 				evidence.NativePathSearchAttempted = true;
 			if (routineLandCandidate != null)
 				routineLandCandidate.NativeSearchExecuted = true;
-			List<CPos> path;
 			var pathSearchStarted = Stopwatch.GetTimestamp();
+			RoutineLandNativePathResult nativeResult;
 			using (FransBotLog.Profile(world, player, "MCV.NativeDeployPath"))
-				path = riskModelService.ExecuteWithPreparedPathCost(mcv,
-					FransRiskRole.Mcv, CurrentMcvRiskTolerance, preparedPathCost =>
-					{
-						int CustomCost(CPos cell)
-						{
-							pathCostCallbacks++;
-							if (cell == sourceCell)
-								return 0;
-
-							riskPathCostCalls++;
-							return preparedPathCost(cell);
-						}
-
-						return pathFinder.FindPathToTargetCells(mcv, sourceCell, candidates,
-						BlockedByActor.Immovable, CustomCost, laneBias: false);
-					});
+				nativeResult = RoutineLandNativePathInvoker.FindPathToTargetCells(
+					mcv, pathFinder, sourceCell, candidates,
+					search => riskModelService.ExecuteWithPreparedPathCost(mcv,
+						FransRiskRole.Mcv, CurrentMcvRiskTolerance, search));
+			var path = nativeResult.Path;
 			var pathSearchElapsedMs = ElapsedMilliseconds(pathSearchStarted);
 			if (routineLandCandidate != null)
 			{
-				routineLandCandidate.NativePathCostCallbacks = pathCostCallbacks;
+				routineLandCandidate.NativePathCostCallbacks = nativeResult.PathCostCallbacks;
 				routineLandCandidate.NativeElapsedMs = pathSearchElapsedMs;
 			}
 			if (perf != null)
 			{
 				perf.PhysicalNativePathSearches++;
+				if (routineLandUnion != null)
+				{
+					perf.RoutineLandOrdinaryNativeSearches++;
+					perf.RoutineLandOrdinaryPathCostCallbacks += nativeResult.PathCostCallbacks;
+				}
 				perf.NativeTargetCells += candidates.Length;
-				perf.NativePathCostCallbackCalls += pathCostCallbacks;
-				perf.RiskPathCostCalls += riskPathCostCalls;
+				perf.NativePathCostCallbackCalls += nativeResult.PathCostCallbacks;
+				perf.RiskPathCostCalls += nativeResult.RiskPathCostCalls;
 				perf.NativePathSearchElapsedMs += pathSearchElapsedMs;
 				if (pathSearchElapsedMs > perf.MaxNativePathSearchElapsedMs)
 				{
 					perf.MaxNativePathSearchElapsedMs = pathSearchElapsedMs;
 					perf.MaxNativeTargetCells = candidates.Length;
-					perf.MaxNativePathSearchCallbackCalls = pathCostCallbacks;
+					perf.MaxNativePathSearchCallbackCalls = nativeResult.PathCostCallbacks;
 				}
 				perf.Pass.RecordPhysicalProof(perf, mcv, sourceCell, candidates);
 			}
 
-			if (path == null || path.Count == 0)
+			if (path == null)
 				return false;
+
+			if (path.Count == 0)
+			{
+				if (routineLandUnion != null)
+				{
+					routineLandUnion.Coordinator.RecordOrdinaryNativeResult(nativeResult);
+					if (perf != null)
+						perf.RoutineLandOrdinaryNativeEmptyResults++;
+				}
+				return false;
+			}
 
 			provenPath = path.ToArray();
 			if (evidence != null)
@@ -5272,6 +5981,8 @@ namespace OpenRA.Mods.Common.Traits
 					if (HasRegionalLandingCraftQueueSupplyCapability(pickupRegion))
 					{
 						TryQueueRegionalLandingCraftSupply(bot, pickupRegion, out var queueState);
+						LogSeaSupplyPreCommitDiagnostic(bot, mcv, target.Value.ResourceCenter,
+							pickupRegion, "Blocked", seaSupplyProof, queueState);
 						ClearTarget();
 						nextSeaPlanningTick = world.WorldTick + Math.Min(Info.SeaPlanningInterval, 100);
 						FransBotLog.BotDebug(world,
@@ -5319,6 +6030,8 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 			}
 
+			LogResolvedSeaSupplyPreCommitDiagnosticIfObserved(bot, mcv, target.Value.ResourceCenter,
+				pickupRegion, seaSupplyProof);
 			ClearPreCommitLandingCraftDemand();
 			LatchNavalCapabilityDemand("routine MCV expansion selected an otherwise-unreachable ore field with proven regional LST supply path: " + seaSupplyProof);
 			// Target first, transport second. The ExpansionTask owns this objective exactly once;
@@ -5397,12 +6110,6 @@ namespace OpenRA.Mods.Common.Traits
 				nextLandExpansionPlanningTick = world.WorldTick;
 				return;
 			}
-			if (world.WorldTick < nextSeaPlanningTick)
-			{
-				LogMcvWaitingState(activeMcv, $"WaitingForFerryPlanningCooldownUntilWT{nextSeaPlanningTick}");
-				return;
-			}
-			nextSeaPlanningTick = world.WorldTick + Info.SeaPlanningInterval;
 			var mobile = activeMcv.TraitOrDefault<Mobile>();
 			if (mobile == null || mobile.IsTraitDisabled || mobile.IsTraitPaused)
 			{
@@ -5438,10 +6145,55 @@ namespace OpenRA.Mods.Common.Traits
 			if (TryYieldToEarlierAlliedMcvReservation(bot))
 				return;
 
+			var ordinaryCorridorCheckDue = world.WorldTick >= nextSeaPlanningTick;
+			// Bounded recovery advances independently between ordinary original-corridor checks.
+			// When both clocks are due, give the original corridor its scheduled chance first and
+			// defer alternate recovery to the next scan so one pass never pays both exact-LST batches.
+			if (committedSeaCorridorRecovery != null && !ordinaryCorridorCheckDue)
+			{
+				if (TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, committedSeaCorridorRecovery))
+					return;
+				if (world.WorldTick < committedSeaCorridorRecovery.NextAdvanceTick)
+				{
+					LogMcvWaitingState(activeMcv,
+						$"WaitingForBoundedFerryRecoveryPassAtWT{committedSeaCorridorRecovery.NextAdvanceTick}");
+					return;
+				}
+
+				var recoveryTerminal = TryAdvanceCommittedSeaCorridorRecovery(bot, activeMcv, mobile,
+					targetResourceCenter.Value);
+				if (!recoveryTerminal && committedSeaCorridorRecovery != null)
+					RequestLandingCraft(bot);
+				return;
+			}
+
+			if (!ordinaryCorridorCheckDue)
+			{
+				LogMcvWaitingState(activeMcv, $"WaitingForFerryPlanningCooldownUntilWT{nextSeaPlanningTick}");
+				return;
+			}
+			nextSeaPlanningTick = world.WorldTick + Info.SeaPlanningInterval;
+
 			if (!TryFindAvailableLandingCraftForObjective(activeMcv, mobile, targetResourceCenter.Value, out var craft, out var plan))
 			{
 				if (seaTransportWaitStartedTick < 0)
 					seaTransportWaitStartedTick = world.WorldTick;
+				var exactPathFailure = lastLandingCraftPlanHadPickupFailure || lastLandingCraftPlanHadCrossingFailure;
+				if (exactPathFailure)
+				{
+					if (seaExactPathFailureStartedTick < 0)
+						seaExactPathFailureStartedTick = world.WorldTick;
+				}
+				else
+				{
+					// Supply absence, reservation pressure and wrong-region craft are not corridor
+					// failures. Require a fresh continuous exact-path episode before replanning.
+					seaExactPathFailureStartedTick = -1;
+					committedSeaCorridorRecovery = null;
+					lastCommittedSeaCorridorRecoveryDiagnosticSignature = null;
+				}
+				LogCommittedSeaExecutionDiagnostic("WaitingNoExecutableLst", null,
+					"physical supply, claimability and exact cached pickup/crossing eligibility are reported separately");
 
 				var hasRequiredRegion = TryGetRequiredLandingCraftProductionRegion(out var requiredNavalRegion);
 				var hasUsableProducer = hasRequiredRegion
@@ -5464,6 +6216,17 @@ namespace OpenRA.Mods.Common.Traits
 					return;
 
 				var waited = world.WorldTick - seaTransportWaitStartedTick;
+				if (committedSeaCorridorRecovery == null && exactPathFailure && seaExactPathFailureStartedTick >= 0 &&
+					world.WorldTick - seaExactPathFailureStartedTick >= Info.SeaTransportFeasibilityWatchdogTicks &&
+					TryStartCommittedSeaCorridorRecovery(activeMcv, mobile, targetResourceCenter.Value))
+				{
+					if (TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, committedSeaCorridorRecovery))
+						return;
+					RequestLandingCraft(bot);
+					LogMcvWaitingState(activeMcv, "WaitingForBoundedFerryCorridorRecovery");
+					return;
+				}
+
 				if (Info.SeaTransportAbsoluteWaitWatchdogTicks > 0 && waited >= Info.SeaTransportAbsoluteWaitWatchdogTicks)
 				{
 					var oldObjective = targetResourceCenter.Value;
@@ -5500,8 +6263,21 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			ResumeFirstExpansionRefineryAfterInfrastructure("a usable physical LST is available for the committed routine other-landmass objective");
-			BeginMcvSeaCrossing(bot, activeMcv, mobile, craft, plan,
-				"committed routine ferry objective; E6-style mission ownership with no mid-wait retargeting");
+			// Exact eligibility has recovered even if the subsequent ownership transfer is rejected.
+			// Keep reservation pressure separate from a future continuous path-failure episode.
+			committedSeaCorridorRecovery = null;
+			seaExactPathFailureStartedTick = -1;
+			lastCommittedSeaCorridorRecoveryDiagnosticSignature = null;
+			if (!BeginMcvSeaCrossing(bot, activeMcv, mobile, craft, plan,
+				"committed routine ferry objective; E6-style mission ownership with no mid-wait retargeting"))
+			{
+				LogCommittedSeaExecutionDiagnostic("ClaimRejected", craft,
+					"the exact cached plan passed, but TransportCommander did not transfer reservation ownership");
+				return;
+			}
+
+			LogCommittedSeaExecutionDiagnostic("ClaimedAndPickupStarted", craft,
+				"TransportCommander reservation succeeded and native pickup moves were issued");
 		}
 
 		bool IsCommittedRoutineFerryObjectiveStillValid(CPos objective)
@@ -5536,72 +6312,584 @@ namespace OpenRA.Mods.Common.Traits
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "MCV.LandingCraftPlan");
 			craft = null;
 			plan = default;
+			lastLandingCraftPlanHadPickupFailure = false;
+			lastLandingCraftPlanHadCrossingFailure = false;
 			if (!IsLiveOwnedMcv(mcv) || mcvMobile == null)
+			{
+				lastLandingCraftPlanDiagnostic = "preconditions=Failed,geometry=NotEvaluated,topology=NotEvaluated,crafts=[none]";
 				return false;
+			}
 
 			// SIMPLE FERRY: build the expensive MCV pickup + destination geometry once
 			// for the committed ore objective. Waiting for a physical LST must not repeat the
 			// full shoreline/deploy search for every free craft on every planning pass.
 			if (!TryPrepareCachedSeaGeometryForObjective(mcv, mcvMobile, objective))
+			{
+				lastLandingCraftPlanDiagnostic = "preconditions=Passed,geometry=Failed,topology=NotEvaluated,crafts=[none]";
 				return false;
+			}
 
-			var pickupMcvCell = preferredRoutinePickupMcvCell.Value;
-			var pickupCraftCell = preferredRoutinePickupCraftCell.Value;
-			var landingCraftCell = seaLandingCraftCell.Value;
-			var deployCell = targetDeployCell.Value;
+			var found = TryFindAvailableLandingCraftForGeometry(mcv, objective,
+				preferredRoutinePickupMcvCell.Value, preferredRoutinePickupCraftCell.Value,
+				seaLandingCraftCell.Value, targetDeployCell.Value, out craft, out plan,
+				out lastLandingCraftPlanHadPickupFailure, out lastLandingCraftPlanHadCrossingFailure,
+				out var diagnostic);
+			lastLandingCraftPlanDiagnostic = diagnostic;
+			return found;
+		}
+
+		bool TryFindAvailableLandingCraftForGeometry(Actor mcv, CPos objective,
+			CPos pickupMcvCell, CPos pickupCraftCell, CPos landingCraftCell, CPos deployCell,
+			out Actor craft, out SeaPlan plan, out bool hadPickupFailure, out bool hadCrossingFailure,
+			out string diagnosticText)
+		{
+			craft = null;
+			plan = default;
+			hadPickupFailure = false;
+			hadCrossingFailure = false;
+			diagnosticText = null;
 
 			// StrategicMap naval components are a cheap topology proof. If the cached pickup and
 			// landing are not in the same known water component, never pay native A* for any LST.
-			if (strategicMapService == null ||
-				!strategicMapService.TryGetNavalRegionId(pickupCraftCell, out var ferryRegion) ||
-				!strategicMapService.TryGetNavalRegionId(landingCraftCell, out var landingRegion) || ferryRegion != landingRegion)
+			if (strategicMapService == null)
+			{
+				diagnosticText = "preconditions=Passed,geometry=Passed,topology=Failed(NoStrategicMapService),crafts=[none]";
 				return false;
+			}
+			if (!strategicMapService.TryGetNavalRegionId(pickupCraftCell, out var ferryRegion))
+			{
+				diagnosticText = "preconditions=Passed,geometry=Passed,topology=Failed(PickupRegionUnknown),crafts=[none]";
+				return false;
+			}
+			if (!strategicMapService.TryGetNavalRegionId(landingCraftCell, out var landingRegion))
+			{
+				diagnosticText = $"preconditions=Passed,geometry=Passed,topology=Failed(LandingRegionUnknown,pickupRegion={ferryRegion}),crafts=[none]";
+				return false;
+			}
+			if (ferryRegion != landingRegion)
+			{
+				diagnosticText = $"preconditions=Passed,geometry=Passed,topology=Failed(RegionMismatch:{ferryRegion}!={landingRegion}),crafts=[none]";
+				return false;
+			}
+
+			var diagnostics = new Dictionary<Actor, LandingCraftEligibilityDiagnostic>();
+			LandingCraftEligibilityDiagnostic GetDiagnostic(Actor candidate, string origin)
+			{
+				if (!diagnostics.TryGetValue(candidate, out var diagnostic))
+				{
+					diagnostic = new LandingCraftEligibilityDiagnostic(candidate, origin);
+					diagnostics.Add(candidate, diagnostic);
+				}
+				else if (!diagnostic.Origin.Contains(origin))
+					diagnostic.Origin += "+" + origin;
+
+				return diagnostic;
+			}
+
+			string CompleteDiagnostic()
+			{
+				var craftDetails = diagnostics.Count == 0
+					? "none"
+					: string.Join(";", diagnostics.Values.OrderBy(diagnostic => diagnostic.Craft.ActorID));
+				return $"preconditions=Passed,geometry=Passed(pickupMcv={pickupMcvCell},pickupCraft={pickupCraftCell},landing={landingCraftCell},deploy={deployCell}),topology=Passed(region={ferryRegion}),crafts=[{craftDetails}]";
+			}
 
 			var candidates = new List<Actor>();
-			if (IsLiveOwnedLandingCraft(pendingMcvLandingCraftReservation) &&
-				transportService.CanStrategicExpansionClaimTransport(pendingMcvLandingCraftReservation))
-				candidates.Add(pendingMcvLandingCraftReservation);
+			if (IsLiveOwnedLandingCraft(pendingMcvLandingCraftReservation))
+			{
+				var pendingDiagnostic = GetDiagnostic(pendingMcvLandingCraftReservation, "PendingReservation");
+				var claimable = transportService.CanStrategicExpansionClaimTransport(pendingMcvLandingCraftReservation);
+				pendingDiagnostic.Claim = claimable ? "Passed" : "Failed";
+				if (claimable)
+					candidates.Add(pendingMcvLandingCraftReservation);
+				else
+					pendingDiagnostic.Result = "Rejected";
+			}
 
 			combatIntelService.EnsureCurrentSnapshot();
-			candidates.AddRange(combatIntelService.OwnedActors
-				.Where(IsLiveOwnedLandingCraft)
-				.Where(a => transportService.CanStrategicExpansionClaimTransport(a))
-				.Where(a =>
+			var ownedCandidates = new List<Actor>();
+			foreach (var ownedCraft in combatIntelService.OwnedActors.Where(IsLiveOwnedLandingCraft))
+			{
+				var diagnostic = GetDiagnostic(ownedCraft, "OwnedSnapshot");
+				var claimable = transportService.CanStrategicExpansionClaimTransport(ownedCraft);
+				diagnostic.Claim = claimable ? "Passed" : "Failed";
+				if (!claimable)
 				{
-					var cargo = a.TraitOrDefault<Cargo>();
-					return cargo != null && !cargo.IsTraitDisabled && cargo.IsEmpty();
-				})
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+
+				var ownedCargo = ownedCraft.TraitOrDefault<Cargo>();
+				var cargoEligible = ownedCargo != null && !ownedCargo.IsTraitDisabled && ownedCargo.IsEmpty();
+				diagnostic.Cargo = cargoEligible ? "Passed(Empty)" : ownedCargo == null
+					? "Failed(Missing)"
+					: ownedCargo.IsTraitDisabled ? "Failed(Disabled)" : "Failed(Loaded)";
+				if (cargoEligible)
+					ownedCandidates.Add(ownedCraft);
+				else
+					diagnostic.Result = "Rejected";
+			}
+
+			candidates.AddRange(ownedCandidates
 				.OrderBy(a => (a.Location - mcv.Location).LengthSquared)
 				.ThenBy(a => a.ActorID));
 
 			// Only naval connectivity depends on which physical LST is selected. The MCV-side
 			// pickup, landing Beach and FACT deploy cell are already cached above. This reduces
 			// each candidate from a complete amphibious replan to two bounded naval path proofs.
-			foreach (var candidate in candidates.Distinct())
+			foreach (var candidate in candidates.Distinct()
+				.Take(Math.Max(1, transportService?.MaximumLandingCraftPool ?? 1)))
 			{
+				var diagnostic = GetDiagnostic(candidate, "Candidate");
 				var cargo = candidate.TraitOrDefault<Cargo>();
 				var craftMobile = candidate.TraitOrDefault<Mobile>();
-				if (cargo == null || cargo.IsTraitDisabled || !cargo.IsEmpty() || craftMobile == null ||
-					craftMobile.IsTraitDisabled || craftMobile.IsTraitPaused)
+				if (cargo == null)
+				{
+					diagnostic.Cargo = "Failed(Missing)";
+					diagnostic.Result = "Rejected";
 					continue;
-				if (!strategicMapService.TryGetNavalRegionId(craftMobile.ToCell, out var candidateRegion) || candidateRegion != ferryRegion)
+				}
+				if (cargo.IsTraitDisabled)
+				{
+					diagnostic.Cargo = "Failed(Disabled)";
+					diagnostic.Result = "Rejected";
 					continue;
+				}
+				if (!cargo.IsEmpty())
+				{
+					diagnostic.Cargo = "Failed(Loaded)";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				diagnostic.Cargo = "Passed(Empty)";
+				if (craftMobile == null)
+				{
+					diagnostic.Mobile = "Failed(Missing)";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				if (craftMobile.IsTraitDisabled)
+				{
+					diagnostic.Mobile = "Failed(Disabled)";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				if (craftMobile.IsTraitPaused)
+				{
+					diagnostic.Mobile = "Failed(Paused)";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				diagnostic.Mobile = "Passed";
+				if (!strategicMapService.TryGetNavalRegionId(craftMobile.ToCell, out var candidateRegion))
+				{
+					diagnostic.Region = "Failed(Unknown)";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				if (candidateRegion != ferryRegion)
+				{
+					diagnostic.Region = $"Failed(Mismatch:{candidateRegion}!={ferryRegion})";
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+				diagnostic.Region = $"Passed({candidateRegion})";
 
-				if (!craftMobile.CanEnterCell(pickupCraftCell, check: BlockedByActor.Immovable) ||
-					!craftMobile.CanStayInCell(pickupCraftCell) ||
-					!TryFindNavalTransportPath(candidate, craftMobile, craftMobile.ToCell, pickupCraftCell, out var pickupSeaPathLength, out _))
+				var canEnterPickup = craftMobile.CanEnterCell(pickupCraftCell, check: BlockedByActor.Immovable);
+				diagnostic.PickupEnter = canEnterPickup ? "Passed" : "Failed";
+				if (!canEnterPickup)
+				{
+					hadPickupFailure = true;
+					diagnostic.Result = "Rejected";
 					continue;
-
-				if (!TryFindNavalTransportPath(candidate, craftMobile, pickupCraftCell, landingCraftCell, out var crossingSeaPathLength, out _))
+				}
+				var canStayAtPickup = craftMobile.CanStayInCell(pickupCraftCell);
+				diagnostic.PickupStay = canStayAtPickup ? "Passed" : "Failed";
+				if (!canStayAtPickup)
+				{
+					hadPickupFailure = true;
+					diagnostic.Result = "Rejected";
 					continue;
+				}
+				var hasPickupPath = TryFindNavalTransportPath(candidate, craftMobile, craftMobile.ToCell,
+					pickupCraftCell, out var pickupSeaPathLength, out _, out var pickupPathFailure);
+				diagnostic.PickupPath = hasPickupPath ? "Passed" : $"Failed({pickupPathFailure})";
+				if (!hasPickupPath)
+				{
+					hadPickupFailure = true;
+					diagnostic.Result = "Rejected";
+					continue;
+				}
 
+				var hasCrossingPath = TryFindNavalTransportPath(candidate, craftMobile, pickupCraftCell,
+					landingCraftCell, out var crossingSeaPathLength, out _, out var crossingPathFailure);
+				diagnostic.CrossingPath = hasCrossingPath ? "Passed" : $"Failed({crossingPathFailure})";
+				if (!hasCrossingPath)
+				{
+					hadCrossingFailure = true;
+					diagnostic.Result = "Rejected";
+					continue;
+				}
+
+				diagnostic.Result = "Selected";
 				craft = candidate;
 				plan = new SeaPlan(objective, deployCell, pickupMcvCell, pickupCraftCell, landingCraftCell,
 					0, pickupSeaPathLength + crossingSeaPathLength);
+				diagnosticText = CompleteDiagnostic();
 				return true;
 			}
 
+			diagnosticText = CompleteDiagnostic();
 			return false;
+		}
+
+		void SetCommittedSeaRecoveryPickup(CommittedSeaCorridorRecoveryState recovery,
+			CPos pickupMcvCell, CPos pickupCraftCell, CPos[] pickupMcvPath,
+			int pickupNavalRegion, bool usesOriginalPickup)
+		{
+			recovery.HasPickupCandidate = true;
+			recovery.UsesOriginalPickup = usesOriginalPickup;
+			recovery.PickupMcvCell = pickupMcvCell;
+			recovery.PickupCraftCell = pickupCraftCell;
+			recovery.PickupMcvPath = pickupMcvPath ?? [];
+			recovery.PickupNavalRegion = pickupNavalRegion;
+			recovery.EvidenceRiskRevision = riskModelService?.RiskRevision ?? -1;
+			recovery.LandingSearch = new RoutineSeaOreSearchState(recovery.McvActorId, recovery.McvCell,
+				strategicMapService?.TerrainKnowledgeVersion ?? -1, allowMapWideFallback: false,
+				[new OreFieldCandidate(recovery.Objective, (recovery.Objective - recovery.McvCell).LengthSquared)]);
+			recovery.ProposedLandingCraftCell = null;
+			recovery.ProposedLandingExitCell = null;
+			recovery.ProposedDeployCell = null;
+			recovery.ProposedLandingPath = [];
+		}
+
+		void ClearCommittedSeaRecoveryPickup(CommittedSeaCorridorRecoveryState recovery)
+		{
+			recovery.HasPickupCandidate = false;
+			recovery.UsesOriginalPickup = false;
+			recovery.PickupNavalRegion = -1;
+			recovery.PickupMcvPath = [];
+			recovery.LandingSearch = null;
+			recovery.ProposedLandingCraftCell = null;
+			recovery.ProposedLandingExitCell = null;
+			recovery.ProposedDeployCell = null;
+			recovery.ProposedLandingPath = [];
+		}
+
+		void RejectCommittedSeaRecoveryLanding(CommittedSeaCorridorRecoveryState recovery)
+		{
+			recovery.ProposedLandingCraftCell = null;
+			recovery.ProposedLandingExitCell = null;
+			recovery.ProposedDeployCell = null;
+			recovery.ProposedLandingPath = [];
+			var proof = recovery.LandingSearch?.LandingProof;
+			if (proof == null)
+				return;
+
+			// Crossing eligibility depends on the water-side Beach, not which adjacent exit/deploy
+			// pair happened to prove first. Once that Beach fails every physical LST, continue at
+			// the next ranked Beach instead of spending more native path work on the same crossing.
+			proof.ActiveBeach = null;
+			proof.ActiveExitCells = [];
+			proof.NextExitIndex = 0;
+		}
+
+		bool TryStartCommittedSeaCorridorRecovery(Actor mcv, Mobile mobile, CPos objective)
+		{
+			if (committedSeaCorridorRecovery != null)
+				return false;
+
+			if (!preferredRoutinePickupMcvCell.HasValue || !preferredRoutinePickupCraftCell.HasValue ||
+				!seaLandingCraftCell.HasValue || !targetDeployCell.HasValue)
+				return false;
+
+			var originalPickupMcv = preferredRoutinePickupMcvCell.Value;
+			var originalPickupCraft = preferredRoutinePickupCraftCell.Value;
+			var originalLanding = seaLandingCraftCell.Value;
+			var originalDeploy = targetDeployCell.Value;
+			var alternativePickupBeaches = RankRoutinePickupBeaches(mobile.ToCell, originalPickupCraft);
+			var recoveryInterval = Math.Max(Info.ScanInterval, Info.CommittedSeaCorridorRecoveryInterval);
+			var deadlineTick = Info.SeaTransportAbsoluteWaitWatchdogTicks > 0 && seaTransportWaitStartedTick >= 0
+				? seaTransportWaitStartedTick + Info.SeaTransportAbsoluteWaitWatchdogTicks - Math.Max(1, Info.ScanInterval)
+				: int.MaxValue;
+			var availablePasses = deadlineTick == int.MaxValue
+				? Info.CommittedSeaCorridorRecoveryMaximumPasses
+				: Math.Max(0, (deadlineTick - world.WorldTick) / recoveryInterval);
+			var maximumPasses = Math.Min(Info.CommittedSeaCorridorRecoveryMaximumPasses, availablePasses);
+			var recovery = new CommittedSeaCorridorRecoveryState(mcv.ActorID, mobile.ToCell, objective,
+				originalPickupMcv, originalPickupCraft, originalLanding, originalDeploy, alternativePickupBeaches,
+				world.WorldTick, deadlineTick, maximumPasses, world.WorldTick + recoveryInterval);
+			committedSeaCorridorRecovery = recovery;
+
+			// A crossing-only failure can reuse the already-proven pickup and begin with alternate
+			// landing Beaches. A pickup failure skips straight to the bounded alternate-pickup scan.
+			if (lastLandingCraftPlanHadCrossingFailure &&
+				strategicMapService.TryGetNavalRegionId(originalPickupCraft, out var originalPickupRegion) &&
+				HasRiskAwarePathBetweenCells(mcv, mobile, mobile.ToCell, originalPickupMcv,
+					out _, out var originalPickupPath))
+				SetCommittedSeaRecoveryPickup(recovery, originalPickupMcv, originalPickupCraft, originalPickupPath,
+					originalPickupRegion, usesOriginalPickup: true);
+
+			LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery, null, null, null, null,
+				$"persistent exact-path failure reached {Info.SeaTransportFeasibilityWatchdogTicks} WT; " +
+				"the original corridor remains active while bounded same-objective recovery starts");
+			return true;
+		}
+
+		bool TryAdvanceCommittedSeaRecoveryPickup(Actor mcv, Mobile mobile,
+			CommittedSeaCorridorRecoveryState recovery, out bool exhausted)
+		{
+			exhausted = false;
+			var nativeSearches = 0;
+			var proofBudget = Math.Max(1, Info.SeaPickupPathProofsPerPlanningPass);
+			while (nativeSearches < proofBudget)
+			{
+				if (recovery.NextPickupBeachIndex >= recovery.RankedAlternativePickupBeaches.Length)
+				{
+					exhausted = true;
+					return false;
+				}
+
+				var beach = recovery.RankedAlternativePickupBeaches[recovery.NextPickupBeachIndex++];
+				if (!strategicMapService.TryGetNavalRegionId(beach, out var pickupRegion))
+					continue;
+				var targets = PassengerAdjacentCells(beach)
+					.Where(cell => mobile.CanEnterCell(cell, check: BlockedByActor.Immovable) && mobile.CanStayInCell(cell))
+					.OrderBy(cell => (cell - mobile.ToCell).LengthSquared)
+					.ThenBy(cell => cell.X)
+					.ThenBy(cell => cell.Y)
+					.ToArray();
+				if (targets.Length == 0)
+					continue;
+
+				var found = TryFindRiskAwarePathToAnyCell(mcv, mobile, mobile.ToCell, targets,
+					out var pickupMcvCell, out var pickupMcvPath, out var nativeSearchExecuted);
+				if (nativeSearchExecuted)
+					nativeSearches++;
+				if (!found)
+					continue;
+
+				SetCommittedSeaRecoveryPickup(recovery, pickupMcvCell, beach, pickupMcvPath,
+					pickupRegion, usesOriginalPickup: false);
+				return true;
+			}
+
+			exhausted = recovery.NextPickupBeachIndex >= recovery.RankedAlternativePickupBeaches.Length;
+			return false;
+		}
+
+		bool CompleteCommittedSeaCorridorRecoveryNoExecutable(IBot bot,
+			CommittedSeaCorridorRecoveryState recovery, string reason)
+		{
+			MarkExpansionAreaCooldown(recovery.Objective, Info.FailedFieldRetryDelay,
+				$"bounded committed ferry-corridor recovery: {reason}");
+			LogCommittedSeaCorridorRecovery("NoExecutableCorridor", recovery, null, null, null, null, reason);
+			AbortExpansionTaskToIdle(bot, $"bounded committed ferry-corridor recovery: {reason}", recovery.Objective);
+			nextSeaPlanningTick = world.WorldTick + Info.SeaPlanningInterval;
+			committedSeaCorridorRecovery = null;
+			seaExactPathFailureStartedTick = -1;
+			return true;
+		}
+
+		bool TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(IBot bot,
+			CommittedSeaCorridorRecoveryState recovery)
+		{
+			if (recovery.PassesCompleted < recovery.MaximumPasses && world.WorldTick <= recovery.DeadlineTick)
+				return false;
+
+			var reason = world.WorldTick > recovery.DeadlineTick
+				? "the recovery deadline was reached before the absolute watchdog"
+				: $"the bounded {recovery.MaximumPasses}-pass recovery budget was exhausted before the absolute watchdog";
+			return CompleteCommittedSeaCorridorRecoveryNoExecutable(bot, recovery, reason);
+		}
+
+		bool IsCommittedSeaRecoveryEvidenceCurrent(Actor mcv, Mobile mobile,
+			CommittedSeaCorridorRecoveryState recovery, out string failure)
+		{
+			failure = null;
+			if (!IsPioneerPathEvidenceCurrent(mcv, mobile, recovery.McvCell, recovery.McvCell,
+				recovery.PickupMcvCell, recovery.PickupMcvPath, out failure))
+			{
+				failure = "Pickup" + failure;
+				return false;
+			}
+			if (!recovery.ProposedLandingCraftCell.HasValue || !recovery.ProposedLandingExitCell.HasValue ||
+				!recovery.ProposedDeployCell.HasValue || recovery.ProposedLandingPath.Length == 0)
+			{
+				failure = "LandingEvidenceMissing";
+				return false;
+			}
+
+			var landing = recovery.ProposedLandingCraftCell.Value;
+			var exit = recovery.ProposedLandingExitCell.Value;
+			var deploy = recovery.ProposedDeployCell.Value;
+			if (!world.Map.Contains(landing) || !world.Map.Contains(exit) || !world.Map.Contains(deploy))
+				failure = "LandingOffMap";
+			else if (!IsSeaShoreCell(landing) || !IsCellInNavalRegion(landing, recovery.PickupNavalRegion))
+				failure = "LandingShoreOrRegion";
+			else if (!PassengerAdjacentCells(landing).Contains(exit))
+				failure = "LandingAdjacency";
+			else if (!mobile.CanEnterCell(exit, check: BlockedByActor.Immovable) || !mobile.CanStayInCell(exit))
+				failure = "LandingExitBlocked";
+			else if (!IsPioneerPathEvidenceCurrent(mcv, mobile, recovery.McvCell, exit,
+				deploy, recovery.ProposedLandingPath, out failure))
+				failure = "Landing" + failure;
+
+			return failure == null;
+		}
+
+		bool TryAdvanceCommittedSeaCorridorRecovery(IBot bot, Actor mcv, Mobile mobile, CPos objective)
+		{
+			if (committedSeaCorridorRecovery == null ||
+				committedSeaCorridorRecovery.McvActorId != mcv.ActorID ||
+				committedSeaCorridorRecovery.Objective != objective ||
+				mobile.ToCell != committedSeaCorridorRecovery.McvCell)
+			{
+				committedSeaCorridorRecovery = null;
+				if (!TryStartCommittedSeaCorridorRecovery(mcv, mobile, objective))
+					return false;
+			}
+
+			var recovery = committedSeaCorridorRecovery;
+			if (TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery))
+				return true;
+
+			recovery.PassesCompleted++;
+			recovery.NextAdvanceTick = world.WorldTick + Math.Max(Info.ScanInterval, Info.CommittedSeaCorridorRecoveryInterval);
+			var currentRiskRevision = riskModelService?.RiskRevision ?? -1;
+			var currentTerrainVersion = strategicMapService?.TerrainKnowledgeVersion ?? -1;
+			if (recovery.HasPickupCandidate && (recovery.EvidenceRiskRevision != currentRiskRevision ||
+				recovery.LandingSearch?.TerrainKnowledgeVersion != currentTerrainVersion))
+			{
+				// Invalidate only risk/terrain-dependent positive landing evidence. Keep the recovery
+				// owner, deadline, pass count and pickup cursor so unrelated revisions cannot restart it.
+				if (!IsPioneerPathEvidenceCurrent(mcv, mobile, recovery.McvCell, recovery.McvCell,
+					recovery.PickupMcvCell, recovery.PickupMcvPath))
+					ClearCommittedSeaRecoveryPickup(recovery);
+				else
+					SetCommittedSeaRecoveryPickup(recovery, recovery.PickupMcvCell, recovery.PickupCraftCell,
+						recovery.PickupMcvPath, recovery.PickupNavalRegion, recovery.UsesOriginalPickup);
+			}
+			if (recovery.ProposedLandingCraftCell.HasValue && recovery.ProposedDeployCell.HasValue)
+			{
+				if (!IsCommittedSeaRecoveryEvidenceCurrent(mcv, mobile, recovery, out var staleEvidence))
+				{
+					LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+						recovery.PickupMcvCell, recovery.PickupCraftCell,
+						recovery.ProposedLandingCraftCell, recovery.ProposedDeployCell,
+						$"replacement evidence changed before exact LST eligibility: {staleEvidence}");
+					if (staleEvidence.StartsWith("Pickup", StringComparison.Ordinal))
+						ClearCommittedSeaRecoveryPickup(recovery);
+					else
+						RejectCommittedSeaRecoveryLanding(recovery);
+					return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+				}
+				if (!TryProveFutureExpansionRefineryPlacement(mcv, recovery.ProposedDeployCell.Value,
+					out _, out _))
+				{
+					RejectCommittedSeaRecoveryLanding(recovery);
+					return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+				}
+
+				var found = TryFindAvailableLandingCraftForGeometry(mcv, objective,
+					recovery.PickupMcvCell, recovery.PickupCraftCell,
+					recovery.ProposedLandingCraftCell.Value, recovery.ProposedDeployCell.Value,
+					out var craft, out var plan, out var pickupFailure, out var crossingFailure,
+					out var eligibility);
+				recovery.TestedCorridors++;
+				if (found)
+				{
+					if (!BeginMcvSeaCrossing(bot, mcv, mobile, craft, plan,
+						"bounded post-commit recovery replaced a persistently non-executable cached ferry corridor"))
+					{
+						LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+							recovery.PickupMcvCell, recovery.PickupCraftCell,
+							recovery.ProposedLandingCraftCell, recovery.ProposedDeployCell,
+							"replacement corridor is executable, but TransportCommander reservation was rejected",
+							eligibility);
+						return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+					}
+
+					lastLandingCraftPlanDiagnostic = eligibility;
+					LogCommittedSeaCorridorRecovery("ReplannedExecutable", recovery,
+						plan.PickupMcvCell, plan.PickupCraftCell, plan.LandingCraftCell, plan.DeployCell,
+						"physical LST passed the bounded replacement pickup/crossing corridor", eligibility);
+					LogCommittedSeaExecutionDiagnostic("ClaimedAndPickupStarted", craft,
+						"bounded corridor recovery succeeded, TransportCommander reservation transferred, and native pickup moves were issued");
+					committedSeaCorridorRecovery = null;
+					seaExactPathFailureStartedTick = -1;
+					return true;
+				}
+
+				LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+					recovery.PickupMcvCell, recovery.PickupCraftCell,
+					recovery.ProposedLandingCraftCell, recovery.ProposedDeployCell,
+					"replacement geometry did not pass current physical-LST exact eligibility", eligibility);
+				if (crossingFailure)
+					RejectCommittedSeaRecoveryLanding(recovery);
+				else if (pickupFailure)
+					ClearCommittedSeaRecoveryPickup(recovery);
+				return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+			}
+
+			if (!recovery.HasPickupCandidate)
+			{
+				if (TryAdvanceCommittedSeaRecoveryPickup(mcv, mobile, recovery, out var pickupSearchExhausted))
+				{
+					LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+						recovery.PickupMcvCell, recovery.PickupCraftCell, null, null,
+						"alternate pickup proved; landing/deploy proof is deferred to a later bounded planning pass");
+					return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+				}
+
+				if (!pickupSearchExhausted)
+					return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+
+				return CompleteCommittedSeaCorridorRecoveryNoExecutable(bot, recovery,
+					"the original corridor remained in exact-path failure and the bounded same-objective pickup alternatives were exhausted");
+			}
+
+			var transformsInfo = mcv.Info.TraitInfoOrDefault<TransformsInfo>();
+			if (transformsInfo == null || !world.Map.Rules.Actors.TryGetValue(transformsInfo.IntoActor, out var intoActor) ||
+				intoActor.TraitInfoOrDefault<BuildingInfo>() is not BuildingInfo buildingInfo)
+				return CompleteCommittedSeaCorridorRecoveryNoExecutable(bot, recovery,
+					"the committed MCV no longer has executable deploy metadata");
+
+			var excludedLandings = recovery.UsesOriginalPickup
+				? new[] { recovery.OriginalLandingCraftCell }
+				: null;
+			var landingProtectors = GetOwnedSeaLandingProtectors();
+			if (TryAdvanceRoutineSeaLandingProof(recovery.LandingSearch, mcv, mobile, objective,
+				transformsInfo, intoActor, buildingInfo, recovery.PickupNavalRegion, landingProtectors,
+				out var landingCraftCell, out var deployCell, out var landingSearchExhausted,
+				out var landingExitCell, out var landingPath,
+				perf: null, excludedLandingCraftCells: excludedLandings))
+			{
+				if (!TryProveFutureExpansionRefineryPlacement(mcv, deployCell, out _, out _))
+				{
+					RejectCommittedSeaRecoveryLanding(recovery);
+					return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+				}
+
+				recovery.ProposedLandingCraftCell = landingCraftCell;
+				recovery.ProposedLandingExitCell = landingExitCell;
+				recovery.ProposedDeployCell = deployCell;
+				recovery.ProposedLandingPath = landingPath;
+				LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+					recovery.PickupMcvCell, recovery.PickupCraftCell, landingCraftCell, deployCell,
+					"replacement geometry proof completed; physical-LST exact eligibility is deferred to the next planning pass");
+				return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
+			}
+
+			if (landingSearchExhausted)
+			{
+				LogCommittedSeaCorridorRecovery("StillTemporarilyBlocked", recovery,
+					recovery.PickupMcvCell, recovery.PickupCraftCell, null, null,
+					"landing alternatives for this pickup were exhausted; bounded recovery advances to another pickup");
+				ClearCommittedSeaRecoveryPickup(recovery);
+			}
+
+			return TryCompleteCommittedSeaCorridorRecoveryIfBudgetExhausted(bot, recovery);
 		}
 
 		bool TryPrepareCachedSeaGeometryForObjective(Actor mcv, Mobile mcvMobile, CPos objective)
@@ -5628,7 +6916,8 @@ namespace OpenRA.Mods.Common.Traits
 			// Recreate missing geometry once here, cache it, and reuse it until the mission is
 			// completed or genuinely invalidated. The cheap pickup/naval-region proof comes first,
 			// so disconnected seas never reach expensive landing/deploy ranking.
-			if (!HasReachableRoutineSeaPickupForMcv(mcv, mcvMobile) ||
+			if (!TryAdvanceReachableRoutineSeaPickupProof(mcv, mcvMobile,
+				out _, out _, out _, out _) ||
 				!TryGetPreferredRoutinePickupNavalRegion(out var pickupNavalRegion))
 				return false;
 			if (IsSeaTopologyFailureCached(objective, pickupNavalRegion))
@@ -5647,14 +6936,36 @@ namespace OpenRA.Mods.Common.Traits
 			if (buildingInfo == null)
 				return false;
 
+			var terrainVersion = strategicMapService?.TerrainKnowledgeVersion ?? -1;
+			var movementToleranceSquared = Info.RoutineSeaOreSearchMovementTolerance * Info.RoutineSeaOreSearchMovementTolerance;
+			var landingStateMatches = committedSeaGeometrySearch != null &&
+				committedSeaGeometrySearch.McvActorId == mcv.ActorID &&
+				committedSeaGeometrySearch.TerrainKnowledgeVersion == terrainVersion &&
+				(committedSeaGeometrySearch.McvCell - mcvMobile.ToCell).LengthSquared <= movementToleranceSquared &&
+				committedSeaGeometrySearch.Candidates.Length == 1 &&
+				committedSeaGeometrySearch.Candidates[0].ResourceCenter == objective;
+			if (!landingStateMatches)
+				committedSeaGeometrySearch = new RoutineSeaOreSearchState(mcv.ActorID, mcvMobile.ToCell,
+					terrainVersion, allowMapWideFallback: false,
+					[new OreFieldCandidate(objective, (objective - mcvMobile.ToCell).LengthSquared)])
+				{
+					PickupProven = true
+				};
+
 			var landingProtectors = GetOwnedSeaLandingProtectors();
-			if (!TryFindLandingSideForMcv(mcv, mcvMobile, objective, transformsInfo, intoActor, buildingInfo,
-				null, null, pickupNavalRegion, landingProtectors, out var landingCraftCell, out var deployCell, out _, out _))
+			if (!TryAdvanceRoutineSeaLandingProof(committedSeaGeometrySearch, mcv, mcvMobile, objective,
+				transformsInfo, intoActor, buildingInfo, pickupNavalRegion, landingProtectors,
+				out var landingCraftCell, out var deployCell, out var landingSearchExhausted))
+			{
+				if (landingSearchExhausted)
+					RememberSeaLandingProofFailure(objective, pickupNavalRegion);
 				return false;
+			}
 
 			targetResourceCenter = objective;
 			targetDeployCell = deployCell;
 			seaLandingCraftCell = landingCraftCell;
+			committedSeaGeometrySearch = null;
 			FransBotLog.BotDebug(world,
 				"{0}: SIMPLE FERRY caches one amphibious geometry plan for committed ore {1}: MCV pickup {2}, LST pickup {3}, landing {4}, deploy {5}. Free LST candidates now test naval connectivity only.",
 				player, objective, preferredRoutinePickupMcvCell.Value, preferredRoutinePickupCraftCell.Value,
@@ -5683,9 +6994,13 @@ namespace OpenRA.Mods.Common.Traits
 			return false;
 		}
 
-		bool TryGetProductionQueueNavalRegion(ProductionQueue queue, out int navalRegion)
+		bool TryGetProductionQueueNavalRegion(ProductionQueue queue, out int navalRegion) =>
+			TryGetProductionQueueNavalRegion(queue, out navalRegion, out _);
+
+		bool TryGetProductionQueueNavalRegion(ProductionQueue queue, out int navalRegion, out Actor producerCandidate)
 		{
 			navalRegion = -1;
+			producerCandidate = null;
 			if (queue == null || !queue.Enabled)
 				return false;
 
@@ -5695,7 +7010,8 @@ namespace OpenRA.Mods.Common.Traits
 			if (producer.Actor == null || producer.Trait == null)
 				return false;
 
-			return TryGetNavalRegionNearActor(producer.Actor, out navalRegion);
+			producerCandidate = producer.Actor;
+			return TryGetNavalRegionNearActor(producerCandidate, out navalRegion);
 		}
 
 		bool HasUsableLandingCraftProducerForCurrentDemand()
@@ -5997,6 +7313,8 @@ namespace OpenRA.Mods.Common.Traits
 			seaPickupMcvLastProgressCell = mcvMobile?.ToCell;
 			seaPickupMcvLastProgressTick = world.WorldTick;
 			seaPickupMcvStallRetries = 0;
+			seaPickupApproachRejectedCells.Clear();
+			seaPickupApproachRecoveryAttempts = 0;
 			seaPickupCraftLastProgressCell = craftMobile?.ToCell;
 			seaPickupCraftLastProgressTick = world.WorldTick;
 			seaPickupCraftStallRetries = 0;
@@ -6016,7 +7334,6 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool BeginMcvSeaCrossing(IBot bot, Actor mcv, Mobile mcvMobile, Actor craft, SeaPlan plan, string reason)
 		{
-			seaTransportWaitStartedTick = -1;
 			var craftMobile = craft?.TraitOrDefault<Mobile>();
 			if (craftMobile == null)
 				return false;
@@ -6026,6 +7343,10 @@ namespace OpenRA.Mods.Common.Traits
 			if (!transportService.TryReserveStrategicExpansionTransport(craft, mcv))
 				return false;
 
+			// The committed task leaves WaitingForSeaTransport only after the physical LST
+			// reservation is authoritative. A failed handoff must not erase the absolute
+			// watchdog clock and silently grant the same objective another full wait window.
+			seaTransportWaitStartedTick = -1;
 			if (pendingMcvLandingCraftReservation == craft)
 				pendingMcvLandingCraftReservation = null;
 			activeLandingCraft = craft;
@@ -6064,26 +7385,61 @@ namespace OpenRA.Mods.Common.Traits
 
 			var mcvAtPickup = mcvMobile.ToCell == seaPickupMcvCell.Value;
 			var craftAtPickup = craftMobile.ToCell == seaPickupCraftCell.Value;
+			if (!mcvAtPickup && craftAtPickup && activeMcv.IsIdle && activeLandingCraft.IsIdle &&
+				PassengerAdjacentCells(craftMobile.ToCell).Contains(mcvMobile.ToCell))
+			{
+				var plannedPickup = seaPickupMcvCell.Value;
+				seaPickupMcvCell = mcvMobile.ToCell;
+				mcvAtPickup = true;
+				FransBotLog.BotDebug(world,
+					"{0}: [E25 PICKUP APPROACH] task={1} mcv={2} lst={3} outcome=AdjacentHandoff current={4} oldPickupMcv={5} newPickupMcv={4} pickupCraft={6} landing={7} ferryRetained=True corridorRetained=True; native EnterTransport accepts any adjacent land cell, so the exact cached land cell is not required.",
+					player, expansionTask.Id, activeMcv.ActorID, activeLandingCraft.ActorID, mcvMobile.ToCell,
+					plannedPickup, seaPickupCraftCell.Value, seaLandingCraftCell?.ToString() ?? "None");
+			}
 
 			// plain native LST Move runs without Frans RiskModel A* while progress continues.
-			// Reissue only the current cached leg after a real no-cell-progress stall. After two
-			// bounded retries, perform one fresh path proof before deciding the plan is invalid.
+			// Reissue only the current cached leg after a real no-cell-progress stall. After the
+			// normal retries, keep the reserved ferry/corridor and replace only the land-side
+			// approach cell when one currently clear adjacent route exists.
 			if (!mcvAtPickup && seaPickupMcvLastProgressTick >= 0 &&
 				world.WorldTick - seaPickupMcvLastProgressTick >= Info.SeaPlanningInterval)
 			{
 				if (seaPickupMcvStallRetries >= Info.MovingMcvStallMaximumRetries)
 				{
-					if (!HasRiskAwarePathBetweenCells(activeMcv, mcvMobile, mcvMobile.ToCell, seaPickupMcvCell.Value, out _))
+					var oldPickup = seaPickupMcvCell.Value;
+					var originalPathStillValid = HasRiskAwarePathBetweenCells(activeMcv, mcvMobile,
+						mcvMobile.ToCell, oldPickup, out var originalPathLength);
+					seaPickupApproachRejectedCells.Add(oldPickup);
+					if (seaPickupApproachRecoveryAttempts < Info.SeaPickupApproachMaximumRecoveryAttempts &&
+						TryFindCurrentExecutableAlternateSeaPickup(activeMcv, mcvMobile, seaPickupCraftCell.Value,
+							out var alternatePickup, out var alternatePath))
 					{
-						FransBotLog.BotDebug(world, "{0}: SIMPLE FERRY aborts cached pickup: MCV {1} has no valid path to rendezvous {2} after {3} bounded stall retries.",
-							player, activeMcv, seaPickupMcvCell.Value, seaPickupMcvStallRetries);
-						MarkCurrentFieldFailed();
-						AbortSeaMissionBeforeLoad(bot);
+						seaPickupApproachRecoveryAttempts++;
+						seaPickupMcvCell = alternatePickup;
+						activeMcv.CancelActivity();
+						QueueMcvMoveAlongProvenPath(activeMcv, mcvMobile, alternatePickup, alternatePath,
+							"SeaPickupApproachRecovery");
+						seaPickupMcvLastProgressCell = mcvMobile.ToCell;
+						seaPickupMcvLastProgressTick = world.WorldTick;
+						seaPickupMcvStallRetries = 0;
+						FransBotLog.BotDebug(world,
+							"{0}: [E25 PICKUP APPROACH] task={1} mcv={2} lst={3} outcome=PickupApproachReplanned current={4} oldPickupMcv={5} newPickupMcv={6} pickupCraft={7} landing={8} noCellProgressWT={9} oldFreshPath={10} oldPathCells={11} newPathCells={12} recovery={13}/{14} ferryRetained=True corridorRetained=True.",
+							player, expansionTask.Id, activeMcv.ActorID, activeLandingCraft.ActorID, mcvMobile.ToCell,
+							oldPickup, alternatePickup, seaPickupCraftCell.Value,
+							seaLandingCraftCell?.ToString() ?? "None", Info.SeaPlanningInterval,
+							originalPathStillValid, originalPathStillValid ? originalPathLength : 0,
+							alternatePath.Length, seaPickupApproachRecoveryAttempts,
+							Info.SeaPickupApproachMaximumRecoveryAttempts);
 						return;
 					}
 
-					FransBotLog.BotDebug(world, "{0}: SIMPLE FERRY MCV pickup retry budget exhausted: MCV={1} objective={2} pickup={3} retries={4}; fresh path proof remains valid but the unchanged leg made no progress. Action=abort pre-load sea expansion through existing cleanup.",
-						player, activeMcv, targetResourceCenter?.ToString() ?? "none", seaPickupMcvCell.Value, seaPickupMcvStallRetries);
+					FransBotLog.BotDebug(world,
+						"{0}: [E25 PICKUP APPROACH] task={1} mcv={2} lst={3} outcome=PickupApproachRecoveryExhausted current={4} pickupMcv={5} pickupCraft={6} landing={7} noCellProgressWT={8} retries={9} recovery={10}/{11} oldFreshPath={12} oldPathCells={13}; no currently clear task-scoped alternate beside the same ferry pickup exists. Action=abort pre-load sea expansion through existing cleanup.",
+						player, expansionTask.Id, activeMcv.ActorID, activeLandingCraft.ActorID, mcvMobile.ToCell,
+						oldPickup, seaPickupCraftCell.Value, seaLandingCraftCell?.ToString() ?? "None",
+						Info.SeaPlanningInterval, seaPickupMcvStallRetries, seaPickupApproachRecoveryAttempts,
+						Info.SeaPickupApproachMaximumRecoveryAttempts, originalPathStillValid,
+						originalPathStillValid ? originalPathLength : 0);
 					MarkCurrentFieldFailed();
 					AbortSeaMissionBeforeLoad(bot);
 					return;
@@ -6093,8 +7449,11 @@ namespace OpenRA.Mods.Common.Traits
 				QueueRiskAwareMove(activeMcv, mcvMobile, seaPickupMcvCell.Value);
 				seaPickupMcvStallRetries++;
 				seaPickupMcvLastProgressTick = world.WorldTick;
-				FransBotLog.BotDebug(world, "{0}: SIMPLE FERRY MCV {1} stalled {2} WT en route to pickup; reissuing only the cached movement leg ({3}/{4}), no ferry replan.",
-					player, activeMcv, Info.SeaPlanningInterval, seaPickupMcvStallRetries, Info.MovingMcvStallMaximumRetries);
+				FransBotLog.BotDebug(world,
+					"{0}: [E25 PICKUP APPROACH] task={1} mcv={2} lst={3} outcome=PickupPathRefreshed current={4} pickupMcv={5} pickupCraft={6} noCellProgressWT={7} retry={8}/{9}; same pickup retained for transient blockage.",
+					player, expansionTask.Id, activeMcv.ActorID, activeLandingCraft.ActorID, mcvMobile.ToCell,
+					seaPickupMcvCell.Value, seaPickupCraftCell.Value, Info.SeaPlanningInterval,
+					seaPickupMcvStallRetries, Info.MovingMcvStallMaximumRetries);
 			}
 
 			if (!craftAtPickup && seaPickupCraftLastProgressTick >= 0 &&
@@ -6131,6 +7490,83 @@ namespace OpenRA.Mods.Common.Traits
 			seaBoardingLastProgressTick = world.WorldTick;
 			seaBoardingRecoveryAttempts = 0;
 			IssueNativeMcvBoarding(bot);
+		}
+
+		bool TryFindCurrentExecutableAlternateSeaPickup(Actor mcv, Mobile mobile, CPos craftCell,
+			out CPos alternatePickup, out CPos[] provenPath)
+		{
+			alternatePickup = default;
+			provenPath = [];
+			if (!IsLiveOwnedMcv(mcv) || mobile == null || !world.Map.Contains(craftCell))
+				return false;
+
+			var candidates = PassengerAdjacentCells(craftCell)
+				.Where(cell => !seaPickupApproachRejectedCells.Contains(cell))
+				.Where(mobile.CanStayInCell)
+				.OrderBy(cell => (cell - mobile.ToCell).LengthSquared)
+				.ThenBy(cell => cell.X)
+				.ThenBy(cell => cell.Y)
+				.ToArray();
+			if (candidates.Contains(mobile.ToCell))
+			{
+				alternatePickup = mobile.ToCell;
+				provenPath = [mobile.ToCell];
+				return true;
+			}
+
+			var currentlyEnterable = candidates
+				.Where(cell => mobile.CanEnterCell(cell, check: BlockedByActor.All))
+				.ToArray();
+			if (currentlyEnterable.Length == 0 || mobile.PathFinder is not PathFinder pathFinder)
+				return false;
+
+			var path = riskModelService.ExecuteWithPreparedPathCost(mcv,
+				FransRiskRole.Mcv, CurrentMcvRiskTolerance, preparedPathCost =>
+				{
+					int CustomCost(CPos cell) => cell == mobile.ToCell ? 0 : preparedPathCost(cell);
+
+					return pathFinder.FindPathToTargetCells(mcv, mobile.ToCell, currentlyEnterable,
+						BlockedByActor.All, CustomCost, laneBias: false);
+				});
+
+			if (path == null || path.Count == 0 || !currentlyEnterable.Contains(path[0]))
+				return false;
+			for (var p = 0; p < path.Count - 1; p++)
+				if (IsMcvCriticalRisk(mcv, path[p], CurrentMcvRiskTolerance))
+					return false;
+
+			alternatePickup = path[0];
+			provenPath = path.ToArray();
+			return true;
+		}
+
+		void QueueMcvMoveAlongProvenPath(Actor mcv, Mobile mobile, CPos destination,
+			IReadOnlyCollection<CPos> targetToSourcePath, string reason)
+		{
+			if (destination == mobile.ToCell)
+				return;
+
+			var orderedPath = targetToSourcePath
+				.Reverse()
+				.Where(cell => cell != mobile.ToCell)
+				.ToArray();
+			if (orderedPath.Length == 0)
+			{
+				LogMcvMoveOrder(mcv, destination, 1, reason);
+				QueueMoveOrder(null, mcv, destination);
+				return;
+			}
+
+			const int MaximumMoveWaypoints = 4;
+			var waypointCount = Math.Min(MaximumMoveWaypoints, orderedPath.Length);
+			LogMcvMoveOrder(mcv, destination, waypointCount, reason);
+			var queued = false;
+			for (var i = 1; i <= waypointCount; i++)
+			{
+				var index = (int)((long)i * orderedPath.Length / waypointCount) - 1;
+				QueueMoveOrder(null, mcv, orderedPath[index], queued);
+				queued = true;
+			}
 		}
 
 		void IssueNativeMcvBoarding(IBot bot)
@@ -6521,6 +7957,8 @@ namespace OpenRA.Mods.Common.Traits
 			seaPickupMcvLastProgressCell = null;
 			seaPickupMcvLastProgressTick = -1;
 			seaPickupMcvStallRetries = 0;
+			seaPickupApproachRejectedCells.Clear();
+			seaPickupApproachRecoveryAttempts = 0;
 			seaPickupCraftLastProgressCell = null;
 			seaPickupCraftLastProgressTick = -1;
 			seaPickupCraftStallRetries = 0;
@@ -6851,29 +8289,57 @@ namespace OpenRA.Mods.Common.Traits
 		bool TryFindNavalTransportPath(Actor actor, Mobile mobile, CPos source, CPos destination,
 			out int pathLength, out FransRouteRiskAssessment routeRisk, FransRiskTolerance tolerance = FransRiskTolerance.Cautious)
 		{
+			return TryFindNavalTransportPath(actor, mobile, source, destination,
+				out pathLength, out routeRisk, out _, tolerance);
+		}
+
+		bool TryFindNavalTransportPath(Actor actor, Mobile mobile, CPos source, CPos destination,
+			out int pathLength, out FransRouteRiskAssessment routeRisk, out string failure,
+			FransRiskTolerance tolerance = FransRiskTolerance.Cautious)
+		{
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "MCV.NavalPath");
 			pathLength = int.MaxValue;
 			routeRisk = default;
+			failure = null;
 			if (source == destination)
 			{
 				pathLength = 0;
 				routeRisk = riskModelService.EvaluateDirectRoute(actor, source, destination, FransRiskRole.NavalTransport, tolerance);
-				return !routeRisk.IsCritical;
+				if (routeRisk.IsCritical)
+				{
+					failure = "CriticalRisk";
+					return false;
+				}
+				return true;
 			}
 
 			if (mobile.PathFinder is not PathFinder pathFinder)
+			{
+				failure = "MissingPathFinder";
 				return false;
+			}
 
 			int CustomCost(CPos cell) =>
 				cell == source ? 0 : riskModelService.GetPathCost(actor, cell, FransRiskRole.NavalTransport, tolerance);
 			var path = pathFinder.FindPathToTargetCell(actor, [source], destination,
 				BlockedByActor.Immovable, CustomCost, laneBias: false);
-			if (path == null || path.Count == 0 || !generalService.IsTransportLossRouteAllowed(path))
+			if (path == null || path.Count == 0)
+			{
+				failure = "NativePathNotFound";
 				return false;
+			}
+			if (!generalService.IsTransportLossRouteAllowed(path))
+			{
+				failure = "TransportLossExclusion";
+				return false;
+			}
 
 			routeRisk = riskModelService.EvaluateRoute(actor, path, FransRiskRole.NavalTransport, tolerance);
 			if (routeRisk.IsCritical)
+			{
+				failure = "CriticalRisk";
 				return false;
+			}
 
 			pathLength = path.Count;
 			return true;
@@ -7264,6 +8730,82 @@ namespace OpenRA.Mods.Common.Traits
 					q.BuildableItems().Any(item => Info.LandingCraftTypes.Contains(item.Name)));
 		}
 
+		void LogResolvedSeaSupplyPreCommitDiagnosticIfObserved(IBot bot, Actor mcv, CPos objective,
+			int provenPickupRegion, string supplyProof)
+		{
+			if (lastSeaSupplyDiagnosticSignature == null ||
+				preCommitStrategicLandingCraftObjective != objective ||
+				!preCommitStrategicLandingCraftRegion.HasValue)
+				return;
+
+			var resolvedByNativeQueue = provenPickupRegion >= 0;
+			var requiredNavalRegion = resolvedByNativeQueue
+				? provenPickupRegion
+				: preCommitStrategicLandingCraftRegion.Value;
+			var resolution = resolvedByNativeQueue
+				? "ResolvedByObservedSameRegionNativeQueue"
+				: "ResolvedByPhysicalLandingCraft";
+			var queueState = resolvedByNativeQueue
+				? "no StartProduction order issued; ordinary proof accepted an observed same-region native queue item"
+				: "no StartProduction order issued; ordinary proof selected a physical LST";
+			LogSeaSupplyPreCommitDiagnostic(bot, mcv, objective, requiredNavalRegion,
+				resolution, supplyProof, queueState);
+		}
+
+		void LogSeaSupplyPreCommitDiagnostic(IBot bot, Actor mcv, CPos objective, int requiredNavalRegion,
+			string outcome, string supplyProof, string queueState)
+		{
+			var pool = transportService?.GetLandingCraftPoolDiagnostic(bot) ??
+				new FransLandingCraftPoolDiagnostic(0, 0, 0, 0, "service-unavailable", "service-unavailable", "service-unavailable");
+			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
+			var regionalQueueDetails = ShipQueueNames().SelectMany(name => queuesByCategory[name])
+				.Distinct()
+				.Where(queue => queue.Enabled)
+				.Select(queue =>
+				{
+					var resolved = TryGetProductionQueueNavalRegion(queue, out var region, out var producerCandidate);
+					var queuedItems = queue.AllQueued()
+						.Where(item => Info.LandingCraftTypes.Contains(item.Item))
+						.Select(item => item.Item)
+						.OrderBy(item => item)
+						.ToArray();
+					var buildable = queue.BuildableItems()
+						.Where(item => Info.LandingCraftTypes.Contains(item.Name))
+						.Select(item => item.Name)
+						.OrderBy(item => item)
+						.ToArray();
+					return $"queueActor={queue.Actor.ActorID}/{queue.Actor.Info.Name},producerCandidate=" +
+						$"{(producerCandidate == null ? "Unresolved" : $"{producerCandidate.ActorID}/{producerCandidate.Info.Name}")}," +
+						"producerSource=MostLikelyProducer,actualProduction=NotObserved," +
+						$"region={(resolved ? region.ToString() : "Unknown")}," +
+						$"nativeQueued={(queuedItems.Length == 0 ? "none" : string.Join(",", queuedItems))}," +
+						$"buildable={(buildable.Length == 0 ? "none" : string.Join(",", buildable))}";
+				})
+				.OrderBy(detail => detail)
+				.ToArray();
+			var queueDetails = regionalQueueDetails.Length == 0 ? "none" : string.Join(";", regionalQueueDetails);
+			var hasMatchingIssuedOrder = lastRegionalLandingCraftOrderObjective == objective &&
+				lastRegionalLandingCraftOrderRegion == requiredNavalRegion;
+			var issuedOrder = hasMatchingIssuedOrder
+					? lastRegionalLandingCraftOrderDiagnostic
+					: "none";
+			var issuedOrderSignature = hasMatchingIssuedOrder
+				? lastRegionalLandingCraftOrderSignature
+				: "none";
+			var planDetails = lastLandingCraftPlanDiagnostic ?? "NotEvaluated";
+			var signature = $"outcome={outcome}|objective={objective}|region={requiredNavalRegion}|" +
+				$"task={expansionTask.Id}/{expansionTask.Mode}/{stage}|{pool.Signature}|eligibility={planDetails}|" +
+				$"queues={queueDetails}|queueState={queueState}|issuedOrderState={issuedOrderSignature}";
+			if (signature == lastSeaSupplyDiagnosticSignature)
+				return;
+
+			lastSeaSupplyDiagnosticSignature = signature;
+			FransBotLog.BotDebug(world,
+				"{0}: [E25-SUPPLY DIAGNOSTIC] outcome={7} for MCV {1}/ore {2}/required naval region {3}: ExpansionTask={4}/{5}/{6}; proof={8}; {9}; eligibility={10}; queues=[{11}]; queue action={12}; last StartProduction intent={13}.",
+				player, mcv.ActorID, objective, requiredNavalRegion, expansionTask.Id, expansionTask.Mode, stage,
+				outcome, supplyProof, pool.Details, planDetails, queueDetails, queueState, issuedOrder);
+		}
+
 		bool TryQueueRegionalLandingCraftSupply(IBot bot, int requiredNavalRegion, out string state)
 		{
 			state = null;
@@ -7305,11 +8847,21 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			nextSeaTransportRequestTick = world.WorldTick + Info.SeaTransportRequestCooldown;
+			var producerResolved = TryGetProductionQueueNavalRegion(queue, out var resolvedRegion, out var producerCandidate);
+			lastRegionalLandingCraftOrderObjective = preCommitStrategicLandingCraftObjective;
+			lastRegionalLandingCraftOrderRegion = requiredNavalRegion;
+			lastRegionalLandingCraftOrderSignature =
+				$"type={craftType},queueActor={queue.Actor.ActorID}/{queue.Actor.Info.Name}," +
+				$"producerCandidate={(producerCandidate == null ? "Unresolved" : $"{producerCandidate.ActorID}/{producerCandidate.Info.Name}")}," +
+				"producerSource=MostLikelyProducer,actualProduction=NotObserved," +
+				$"resolvedRegion={(producerResolved ? resolvedRegion.ToString() : "Unknown")}";
+			lastRegionalLandingCraftOrderDiagnostic =
+				$"issuedWT={world.WorldTick},{lastRegionalLandingCraftOrderSignature}";
 			FransBotLog.BotDebug(world,
-				"{0}: PIONEER SEA SUPPLY reserves execution BEFORE SeaOre commit by queueing {1} on producer {2} in naval region {3}. The ore remains uncommitted until the queue is physically visible on a later tick.",
+				"{0}: PIONEER SEA SUPPLY reserves execution BEFORE SeaOre commit by queueing {1} through queue actor {2} in naval region {3}. The ore remains uncommitted until the queue is physically visible on a later tick.",
 				player, craftType, queue.Actor, requiredNavalRegion);
 			bot.QueueOrder(Order.StartProduction(queue.Actor, craftType, 1));
-			state = $"submitted same-region {craftType} reservation on producer {queue.Actor} in naval region {requiredNavalRegion}";
+			state = $"submitted same-region {craftType} reservation through queue actor {queue.Actor} in naval region {requiredNavalRegion}";
 			return false;
 		}
 
@@ -7669,6 +9221,7 @@ namespace OpenRA.Mods.Common.Traits
 			seaPickupMcvCell = null;
 			seaPickupCraftCell = null;
 			seaLandingCraftCell = null;
+			committedSeaGeometrySearch = null;
 			ResetTaskExecutionProgress();
 		}
 
@@ -8392,7 +9945,9 @@ namespace OpenRA.Mods.Common.Traits
 			var conyardTolerance = CurrentMcvRiskTolerance;
 			var conyardRisk = riskModelService.EvaluateImmediateRisk(
 				activeConyard, activeConyard.Location, FransRiskRole.Mcv, conyardTolerance);
-			var retreatFromConyard = conyardRisk.IsCritical || (Info.EnableMcvRetreat && conyardRisk.RecentlyDamaged);
+			var retreatFromConyard = conyardRisk.IsCritical ||
+				(Info.EnableMcvRetreat && conyardRisk.RecentlyDamaged &&
+				conyardRisk.RecentDamageRiskScore >= Info.ExpansionConyardRetreatRecentDamageRisk);
 			if (retreatFromConyard)
 			{
 				var incidentCenter = targetResourceCenter ?? activeConyard.Location;
@@ -10114,6 +11669,7 @@ namespace OpenRA.Mods.Common.Traits
 			work.PickupMcvCell = default;
 			work.PickupCraftCell = default;
 			work.PickupMcvPath = [];
+			work.SeaLandingSearch = null;
 			work.SeaLandingCraftCell = default;
 			work.SeaLandingExitCell = default;
 			work.SeaDeployCell = default;
@@ -10124,6 +11680,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void ClearPioneerSeaLandingEvidence(PioneerExecutionProofWork work)
 		{
+			work.SeaLandingSearch = null;
 			work.SeaLandingCraftCell = default;
 			work.SeaLandingExitCell = default;
 			work.SeaDeployCell = default;
@@ -10514,6 +12071,7 @@ namespace OpenRA.Mods.Common.Traits
 					? perf.WorkPresent ? "Recreated" : "Created"
 					: perf.WorkPresent ? "Reused" : "NotChecked";
 				var land = perf.LandRoutePerf;
+				var seaLanding = perf.SeaLandingPerf;
 				var targetCount = land?.LastNativeTargetCount ?? 0;
 				var targetHash = targetCount > 0 ? $"{land.LastNativeTargetHash:X8}" : "none";
 				OpenRA.Log.Write("debug",
@@ -10540,6 +12098,16 @@ namespace OpenRA.Mods.Common.Traits
 					$"physicalNativeSearches={land?.PhysicalNativePathSearches ?? 0} " +
 					$"nativeMs={(land?.NativePathSearchElapsedMs ?? 0):0.00} " +
 					$"pathCostCallbacks={land?.NativePathCostCallbackCalls ?? 0} " +
+					$"seaPickupCursor={perf.SeaPickupCursor}/{perf.SeaPickupCandidates} " +
+					$"seaPickupNativeSearches={perf.SeaPickupNativeSearchesThisPass} " +
+					$"seaPickupTargets={perf.SeaPickupTargetCellsThisPass} " +
+					$"seaPickupCallbacks={perf.SeaPickupPathCostCallbacksThisPass} " +
+					$"seaPickupNativeMs={perf.SeaPickupNativeElapsedMsThisPass:0.00} " +
+					$"seaPickupNativeSearchesTotal={perf.SeaPickupNativeSearchesTotal} " +
+					$"seaLandingNativeSearches={seaLanding?.PhysicalNativePathSearches ?? 0} " +
+					$"seaLandingTargets={seaLanding?.NativeTargetCells ?? 0} " +
+					$"seaLandingCallbacks={seaLanding?.NativePathCostCallbackCalls ?? 0} " +
+					$"seaLandingNativeMs={(seaLanding?.NativePathSearchElapsedMs ?? 0):0.00} " +
 					$"phasesThisTick={perf.PhasesThisTick} phaseMs={perf.PhaseElapsedMs:0.00} " +
 					$"result={(perf.PhaseDeferred ? "Deferred" : pending ? "Pending" : result.ToString())} elapsedMs={ElapsedMilliseconds(perf.Started):0.00}");
 			}
@@ -10873,8 +12441,31 @@ namespace OpenRA.Mods.Common.Traits
 						var seaPrecheckStarted = Stopwatch.GetTimestamp();
 						using (FransBotLog.Profile(world, player, "MCV.PioneerProof.SeaPrecheck"))
 						{
-							if (!TryGetReachableRoutineSeaPickupProof(source, mobile,
-									out var pickupMcvCell, out var pickupCraftCell, out var pickupMcvPath) ||
+							var pickupFound = TryAdvanceReachableRoutineSeaPickupProof(source, mobile,
+								out var pickupMcvCell, out var pickupCraftCell, out var pickupMcvPath,
+								out var pickupSearchExhausted);
+							var pickupPerf = routineSeaPickupProof;
+							if (pickupPerf != null)
+							{
+								perf.SeaPickupCursor = pickupPerf.NextBeachIndex;
+								perf.SeaPickupCandidates = pickupPerf.RankedBeaches.Length;
+								perf.SeaPickupNativeSearchesThisPass = pickupPerf.LastPassNativeSearches;
+								perf.SeaPickupTargetCellsThisPass = pickupPerf.LastPassTargetCells;
+								perf.SeaPickupPathCostCallbacksThisPass = pickupPerf.LastPassPathCostCallbacks;
+								perf.SeaPickupNativeElapsedMsThisPass = pickupPerf.LastPassElapsedMs;
+								perf.SeaPickupNativeSearchesTotal = pickupPerf.NativeSearches;
+							}
+							if (!pickupFound && !pickupSearchExhausted)
+							{
+								perf.PhaseElapsedMs = ElapsedMilliseconds(seaPrecheckStarted);
+								pending = true;
+								LogPioneerPhysicalProofPerf(source, mobile, center, riskRevision, terrainVersion,
+									perf, PioneerExecutionProofPhase.SeaPrecheck, work.Phase,
+									PioneerObjectiveExecutionKind.None, pending: true);
+								return false;
+							}
+
+							if (!pickupFound ||
 								strategicMapService == null ||
 								!strategicMapService.TryGetNavalRegionId(pickupCraftCell, out var pickupNavalRegion) ||
 								!HasNearbyShore(center, Info.SeaLandingSearchRadius) ||
@@ -10941,6 +12532,12 @@ namespace OpenRA.Mods.Common.Traits
 							work.PickupCraftCell = pickupCraftCell;
 							work.PickupMcvPath = pickupMcvPath;
 							ClearPioneerSeaLandingEvidence(work);
+							work.SeaLandingSearch = new RoutineSeaOreSearchState(source.ActorID, mobile.ToCell,
+								terrainVersion, allowMapWideFallback: false,
+								[new OreFieldCandidate(center, (center - mobile.ToCell).LengthSquared)])
+							{
+								PickupProven = true
+							};
 							work.Phase = PioneerExecutionProofPhase.SeaLanding;
 						}
 						perf.PhaseElapsedMs = ElapsedMilliseconds(seaPrecheckStarted);
@@ -10954,11 +12551,31 @@ namespace OpenRA.Mods.Common.Traits
 						var seaLandingStarted = Stopwatch.GetTimestamp();
 						using (FransBotLog.Profile(world, player, "MCV.PioneerProof.SeaLanding"))
 						{
+							work.SeaLandingSearch ??= new RoutineSeaOreSearchState(source.ActorID, mobile.ToCell,
+								terrainVersion, allowMapWideFallback: false,
+								[new OreFieldCandidate(center, (center - mobile.ToCell).LengthSquared)])
+							{
+								PickupProven = true
+							};
 							var landingProtectors = GetOwnedSeaLandingProtectors();
-							if (!TryFindLandingSideForMcvWithEvidence(source, mobile, center, transformsInfo, intoActor, buildingInfo,
-								null, null, work.PickupNavalRegion, landingProtectors,
-								out var seaLandingCraftCell, out var seaDeployCell, out _, out _,
-								out var seaLandingExitCell, out var seaLandingPath))
+							var seaLandingPass = new McvObjectivePerfPass();
+							perf.SeaLandingPerf = seaLandingPass.Sea;
+							var landingFound = TryAdvanceRoutineSeaLandingProof(work.SeaLandingSearch,
+								source, mobile, center, transformsInfo, intoActor, buildingInfo,
+								work.PickupNavalRegion, landingProtectors,
+								out var seaLandingCraftCell, out var seaDeployCell, out var seaLandingSearchExhausted,
+								out var seaLandingExitCell, out var seaLandingPath, perf.SeaLandingPerf);
+							if (!landingFound && !seaLandingSearchExhausted)
+							{
+								perf.PhaseElapsedMs = ElapsedMilliseconds(seaLandingStarted);
+								pending = true;
+								LogPioneerPhysicalProofPerf(source, mobile, center, riskRevision, terrainVersion,
+									perf, PioneerExecutionProofPhase.SeaLanding, work.Phase,
+									PioneerObjectiveExecutionKind.None, pending: true);
+								return false;
+							}
+
+							if (!landingFound)
 							{
 								var retryPhase = GetPioneerLandRejectionRetryPhaseForTerminalResult(work);
 								if (retryPhase.HasValue)
@@ -11571,6 +13188,12 @@ namespace OpenRA.Mods.Common.Traits
 
 		void ResetTaskExecutionProgress()
 		{
+			lastCommittedSeaExecutionDiagnosticSignature = null;
+			lastCommittedSeaCorridorRecoveryDiagnosticSignature = null;
+			seaExactPathFailureStartedTick = -1;
+			lastLandingCraftPlanHadPickupFailure = false;
+			lastLandingCraftPlanHadCrossingFailure = false;
+			committedSeaCorridorRecovery = null;
 			lastTransformCell = null;
 			conyardTransformIssuedTick = -1;
 			conyardTransformRetries = 0;
@@ -11588,6 +13211,8 @@ namespace OpenRA.Mods.Common.Traits
 			seaPickupMcvLastProgressCell = null;
 			seaPickupMcvLastProgressTick = -1;
 			seaPickupMcvStallRetries = 0;
+			seaPickupApproachRejectedCells.Clear();
+			seaPickupApproachRecoveryAttempts = 0;
 			seaPickupCraftLastProgressCell = null;
 			seaPickupCraftLastProgressTick = -1;
 			seaPickupCraftStallRetries = 0;
@@ -11613,6 +13238,7 @@ namespace OpenRA.Mods.Common.Traits
 			seaPickupMcvCell = null;
 			seaPickupCraftCell = null;
 			seaLandingCraftCell = null;
+			committedSeaGeometrySearch = null;
 			ResetTaskExecutionProgress();
 		}
 

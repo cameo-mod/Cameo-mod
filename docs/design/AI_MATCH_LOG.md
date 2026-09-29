@@ -236,6 +236,20 @@ decision reads it yet — it is being validated against the decisive fights (`to
 
 ## Batch harvest (Stage D)
 
+**Maintainer test mandate (2026-09-28):** every bot A/B test runs on the real
+tournament map — `mods/cameo/maps/ai_duel_nuclear_winter/` (a byte-faithful
+extract of `_ra_a-nuclear-winter.oramap` whose two `Playable` slots become
+map-side `BotA`/`BotB` players on the real mpspawn cells Actor705/Actor971) —
+at the fixture's locked `insane` gamespeed. No hand-made duel fixtures: earlier
+synthetic maps misled testing (disconnected pockets, painted-ore-only fields).
+The acceptance match-up is the asymmetric one — `fransbot` (fog-honest: the
+Cameo x RV x CA x CN x Fransbot composite) must beat `classic` (the pre-wave
+stack with `RevealsMap` omniscience, `bot_ai.classic` / `classicbot` condition).
+Default invocation:
+`python tools/ai/run_ai_match_batch.py --factions ra1_soviets --bot-a fransbot --bot-b classic --repeats N`
+(the harness template already defaults to the Nuclear Winter fixture).
+
+
 `tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
 variant of the duel map per matchup inside the
 batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`)
@@ -340,6 +354,13 @@ economy pacing) over anything resembling a cheat — the acceptance is
 | nw-ab-5 | fransbot vs hard | post-ResourceMap (#607) | fransbot 0-2 | expansion live (LandOre/BuildingRefinery commit + retry), first building kill, longest survival ~22k ticks; RAIDs get `bids 0` — recon never reaches the enemy base so no fresh visible targets exist |
 | nw-ab-6 | fransbot vs classic | post-#607 | fransbot 0-2 | vs true omniscient `classic`: 0:16 and 0:18 buildings, army$ 0 both — donor stack alone cannot fight the reference |
 | nw-ab-7 | hard vs classic | post-#611 | running | first VALID `hard` baseline — pre-#611 hard-side numbers were a blind master AI |
+| nw-hard2 | hard vs classic (ra1_soviets mirror) | W1-armed hard (genericbot && hardbot) | hard 1-1 | first post-W1 lane; m1 loss 48067t (units 427:474, assets 65k:184k), m2 WIN 33447t (buildings 54:7, assets 301k:50k); m3/m4 died inside a mid-edit yaml window — invalid |
+| nw-hard3 | hard vs classic (ra1_soviets mirror) | W1-armed hard | hard 1-3 | m1 loss 21831t (bld 2:35, rush→turtle latch), m2 loss 35790t (bld 9:53), m3 WIN 26664t (bld 45:4, army 97k:0), m4 loss 25005t (army 0:131k). Pooled ra1_soviets W1: hard 2-4. Wins dominant, losses die early — turtle-latch under continuous threat is the repeated signature |
+| nw-classic6 | fransbot vs classic (donor smoke) | 6-capacity ground + probes | fransbot 0-1 | 14410t, bld 2:23; structural proof only: ground1-6 all register + missions distribute in parallel (52 RECON, 15 DEFEND) |
+| nw-hard4 | hard vs classic (ra1_soviets mirror) | W2-armed hard (CommandBid+CommanderCore+General publish-only) | hard 1-1, 2 invalid | m1 loss (turtle), m2 WIN; m3/m4 died at ruleset load inside the mid-merge yaml window (17:50Z) — recorded invalid, not signal. Publish-only W2 shows no regression |
+| nw-donor-v12931 | fransbot vs classic (donor smoke) | NOVA merge + V1.29.31 re-vendor | fransbot 0-1 | 16102t clean exit: probes fire (publish->bid->dispatch->retreat-on-damage), V1.29.31 MCV/transport ticking, remembered-structure SECURE doctrine live; donor-only diagnostic, not acceptance |
+| nw-hard5 | hard vs classic (td_gdi mirror) | W2 on rebased tree (dc438d55e) | hard 1-0 decided, 1 invalid | m2 died at ruleset load in the yaml-before-DLL window (SiegeEvaluatorInfo) — documented as sequencing failure, not code failure |
+| nw-hard6 | hard vs classic (td_gdi mirror) | post-#623 rebase + CA-2a telemetry + CA-2b plumbing (OFF) | running | m1 hard WIN 46628t (bld 64:9, decisive +53k, turtle/emergency, 4-5 sq); m2 hard LOSS 74472t (bld 25:82, decisive -64k @60-62k, turtle/emergency, only 2 sq/14k army vs 61k — all losses 0% away); squads=0 heartbeat ~24k WT in m2 → traced to FransCommanderCore AttackAnything draining idle pool below CreateAttackForce thresholds (starvation, no floor; see FINDINGS_2026-09-29_dawn_squad_starvation); m1 attempt-1 + m2 attempt-1 invalid (external kills / stale-Cameo DLL window) |
 
 ⚠ nw-ab-4/5 `hard`-side numbers predate #611 (`IsEligible` saw no enemies) —
 they read as "hard's squad machinery carries it anyway", not as a fair test.
@@ -353,3 +374,6 @@ they read as "hard's squad machinery carries it anyway", not as a fair test.
   orders vs the genericbot stack's 210.
 - Remaining unset fields swept module-by-module; the benign 0/null defaults
   and the real gaps are filed in `docs/HANDOFF.md` (2026-09-28 EMBER block).
+| ca2b-ctrl/ca2b-cand | hard vs classic (td_gdi mirror) | F1 base + CA-2b BehaviourEnabled off/on | running | 8 matches/arm, both orientations, CAMEO_BOT_DEBUG=1; F1 validated: squads=2 by WT9k (was 0-for-74k pre-F1); candidate serving stand-off/commit/retreat orders; flag: remembered defence v=0 projection |
+| ca2b-ctrl-max/-cand-max (v1, killed) | hard vs classic (td_gdi mirror) | 372b67825 + BehaviourEnabled off/on, maximum | partial | drivers killed by session restart @11:52; ctrl m1 **hard WON** 15289t (K/D 2.44; decisive +30.8k @10.5-12k; turtle/emergency, raid; bld 31:0), cand m1 never completed (killed mid-flight, no record); v1 ctrl verdict distribution @~WT35k: retreat(predicted-loss) 204, commit 75, free-advance 13, commit-no-defences 11, stand-off 1 — squads form (F1), advisor reads real walls |
+| ca2b2-ctrl/ca2b2-cand (v2) | hard vs classic (td_gdi mirror) | 0365e4e9e (+phantom-retry) + BehaviourEnabled off/on, maximum | running | 8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1; phantom ok+0-retry adopted (NOVA 922b9ba23) |
