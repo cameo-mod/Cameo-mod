@@ -598,6 +598,94 @@ at rules load from the actors that are loaded, and a pack writes only a delibera
 The end state for ContentPacks: a pack holds its actors, and their tags come from the templates; an
 unloaded pack contributes nothing, and no faction needs its own `ai.yaml`.
 
+### 2.9 The empty `ai.yaml`: the plan (maintainer goal 2026-09-29) — binding goal
+
+**Goal.** The central `mods/cameo/ai/ai.yaml` keeps only module wiring, tuning numbers and
+*type* tables, with **zero actor ids**. At rules load the bot fills every list and every
+per-actor table from tags on the templates and actors that are actually loaded. A ContentPack's own
+`ai.yaml` carries only that faction's genuine exceptions. The bot keeps **today's behaviour**,
+except for deliberate, listed fixes (Outpost 2 and Scrin wiring, the guerrilla band). Unit production
+learns across matches instead of using fixed numbers. **Standing rule:** never add an actor id to the
+central file to fix something; add a role, a tag or a type row (TASK_INDEX already says so).
+
+**Why the C# must do it.** Packs load first and the central file last, so a pack cannot append to a
+central list or override a central scalar. MiniYaml also cannot share a trait node between the
+personality blocks. §2.8 therefore fills the fields at rules load, the `ScaledBullet` derive-at-load
+idiom: identical on every client, and sync-safe.
+
+**The layers**
+
+| layer | today | target |
+|---|---|---|
+| lists (harvester, guerrilla, AA, ships, …) | ids × 7 personality copies | roles from traits/templates, one role set fills all personalities (`BotRoleSets`, §2.8/§2.8a); `@instance` targets keep the A/B reference apart |
+| per-building numbers (fractions, limits, delays, intervals) | ~940 pack rows | one row per **building type × game family**; pack rows only for real exceptions (§2.8b) |
+| unit production weights (`UnitsToBuild`) | 1,421 static pack rows | derived and **learned** (below) |
+| per-unit squad settings (`AirSquadTargetTypes`, …) | 5 copies per pack, missing for `@guerrilla` | derived from the unit's weapons |
+
+**Building type.** A building's type is declared by a `BotRoles` tag on its template:
+`^Refinery`, `^IsWeaponFactory`, `^IsAircraftFactory`, `^IsShipyard`, `^RadarBuilding`,
+`^RepairFacility`, `^PowerPlant`, and a new `^IsBarracks` (none exists: 0/35). Without a template
+tag, the type is derived from traits, and a building with several roles takes the **first** of
+conyard > epic > airfield > navalyard > factory > barracks > refinery > power > radar > repair.
+Measured: 82 producible buildings carry several roles, and the precedence settles almost all of
+them. Every C&C yard is also power and radar → conyard; helipads, airfields and naval yards also
+repair or rearm → their production role; the RA2 Air Force Command HQ (airfield + radar +
+repair) → **airfield** (maintainer's example). **Exceptions ruled 2026-09-29:**
+* StarCraft/Warcraft main halls (Nexus, Command Center, Hatchery, Town Hall, Great Hall) →
+  **conyard only**, kept out of the refinery lists as today.
+* WC2 Gnomish Inventor, Goblin Alchemist, Zerg Infested Command Center → **factory**.
+* `scrin_warp_chasm` → its own **epic** type: it produces `ScrinAdvancedVehicle`,
+  `ScrinWarpAircraft` and `ScrinCapitalAircraft` (the Hexapod). **One per player is a rule of the
+  actor, not of the bot** (maintainer 2026-09-29): it had no build limit at all, and #636 gives it
+  `Buildable.BuildLimit: 1`. The epic type's bot row therefore needs no limit of its own. Scrin's
+  vehicle factory is the Warp Gate; its airfield is the Gravity Stabilizer.
+* `futuretech_launchpad` → **airfield**. It produces only aircraft; an early scan matched the "ship"
+  in `futuretech_harbingergunship`. Queue names must be compared whole, never as substrings.
+
+**Game family.** C&C buildings are uniform (refinery limit 10 in 24/24 packs, radar 1 in 22/24,
+conyard fraction 5 in 20/20). StarCraft and Warcraft II scale differently (supply buildings limit 50
+against C&C's 1, refinery fractions 20–30 against 15), and Outpost 2 has **no rows at all**. The
+type table therefore has one column per family: `cnc` (default), `starcraft`, `warcraft`, `outpost2`.
+The family is a tag on the family's building base template: `^OP2Building` exists; StarCraft and
+Warcraft II share no family template (measured), so each race's building base gets the tag.
+
+**Units: learned, not listed.** A unit's production weight at match start is
+
+    weight(u) = mix[personality][role(u)] / |loaded units of that faction in role(u)|
+                × prior(own faction, enemy faction, u) × trade(u, this match)
+
+* `role(u)` comes from §12.4 (frontline, anti-infantry, anti-armour, artillery, AA, air, scout, …).
+* `mix` is one small table per personality, roles × shares, with **no unit ids**. That is how the
+  personalities differ without copying a unit list. It starts calibrated from today's
+  `UnitsToBuild` role shares, so the first derived weights reproduce today's production.
+* `prior` is the cross-match memory ruled in DESIGN §19.2: the committed, offline-fitted
+  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers), plus a
+  host-local profile that grows with the games played on that machine. It is read at match start
+  only (§6.1), keyed by faction, never by player, and 1.0 where nothing is known.
+* `trade` is the in-match trade ratio per role or type (§12.3), smoothed toward the prior.
+
+Ruled 2026-09-29: the hand `UnitsToBuild` rows stay until the derived weights win a Nuclear Winter
+A/B, after CA-3 (NOVA) supplies the role mix.
+
+**The equivalence gate ("same functionality as now").** The Python resolver cannot see what the C#
+fills at load, so phase P0 adds an engine-side dump: after rules load, every list and table field of
+every bot module on `Player`, one line per field and instance. A diff tool compares two dumps.
+Every phase must diff **empty** against the previous one, except its listed deliberate changes, and
+must also pass the boot gate. A phase that changes behaviour needs the Nuclear Winter A/B.
+
+**Phases**
+
+| # | step | gate |
+|---|---|---|
+| P0 | engine dump of every bot-module field after load + `tools/ai/diff_bot_modules.py` | dump twice, diff empty |
+| P1 | fix `count_central_ids.py` case handling (ids are lowercased at load, so `eden_*`/`plymouth_*` are live, not dead); delete the truly dead ids (`asianalliance_asian*`, `d2k_*`, `ra1_allies_allied*`, …) | dump diff empty |
+| P2 | building type and family tags on the templates, `^IsBarracks`, the exceptions above | dump diff empty (tags only) |
+| P3 | type × family defaults fill the four building tables; pack rows equal to their default deleted, the others kept as exceptions; Outpost 2 and Scrin gain rows | dump diff = only the no-row buildings; A/B with an Outpost 2 and a Scrin bot |
+| P4 | the remaining ~40 list fields → roles; the personality blocks keep only numbers | dump diff empty |
+| P5 | `AirSquadTargetTypes` and other per-unit settings from weapons | dump diff = only `@guerrilla`'s missing rows |
+| P6 | derived and learned unit weights (after CA-3) | A/B |
+| P7 | the packs' `ai.yaml` keep only exceptions; the central id count reaches 0 | `audit_central_ids` CEILING 0 |
+
 ---
 
 ## 3. Reading the enemy: the observation model
