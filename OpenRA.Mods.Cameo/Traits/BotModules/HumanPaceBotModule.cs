@@ -24,8 +24,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public class HumanPaceBotModuleInfo : ConditionalTraitInfo
 	{
 		[Desc("Orders admitted per sliding window (the sustained APM cap). 0 = unlimited.",
-			"Default ~144 APM — the AlphaStar lesson is that the cap must exist AND not",
-			"be spendable in a burst; MaxActionsPerTick is the other half.")]
+			"The default 6 per 25 ticks is 360 orders per game minute. Cameo's bots run UNCAPPED (0) by",
+			"maintainer ruling 2026-09-28 (DESIGN.md §19.1): the cap only made the bot weaker.")]
 		public readonly int ActionsPerWindow = 6;
 
 		[Desc("Window length in ticks for the sustained action budget (25 ticks = 1s at default timestep).")]

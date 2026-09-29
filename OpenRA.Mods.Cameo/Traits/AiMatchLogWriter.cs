@@ -136,7 +136,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				list.Add(new[]
 				{
 					world.WorldTick, resources?.Earned ?? 0, resources?.Spent ?? 0, stats?.ArmyValue ?? 0,
-					stats?.AssetsValue ?? 0, stats?.KillsCost ?? 0, stats?.DeathsCost ?? 0
+					stats?.AssetsValue ?? 0, stats?.KillsCost ?? 0, stats?.DeathsCost ?? 0,
+					(resources?.Cash ?? 0) + (resources?.Resources ?? 0), IdleQueues(player)
 				});
 			}
 		}
@@ -171,7 +172,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
-		internal const string StatsTimelineFields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost";
+		internal const string StatsTimelineFields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues";
+
+		// Discipline telemetry (AI_DEEP_RESEARCH.md §13 item 1): player-level production queues that could build
+		// something but have nothing queued. Humans leave factories idle; a strong bot should not. Building-level
+		// queues (per-factory production) are not counted.
+		static int IdleQueues(OpenRA.Player player)
+		{
+			var idle = 0;
+			foreach (var q in player.PlayerActor.TraitsImplementing<ProductionQueue>())
+				if (q.Enabled && !q.AllQueued().Any() && q.BuildableItems().Any())
+					idle++;
+
+			return idle;
+		}
 
 		internal static void AppendStatsTimeline(StringBuilder builder, IReadOnlyList<int[]> timeline, bool first = false)
 		{

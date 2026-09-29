@@ -47,6 +47,11 @@ namespace OpenRA.Mods.CA.Traits
 			"has observed (through fog when the master AI observes through fog). 0 disables adaptive counters.")]
 		public readonly int AdaptiveCounterWeight = 0;
 
+		[Desc("Self-preservation (AI_DEEP_RESEARCH.md §7, Zero-K's lesson): a ground squad using the combat predictor",
+			"retreats when its predicted strength ratio against the enemies it sees falls below this percent. Higher",
+			"tiers value their units more. Maintainer 2026-09-28: never suicide units.")]
+		public readonly int RetreatRatioPct = 50;
+
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}
 

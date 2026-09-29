@@ -115,6 +115,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var situation = Situation(BotUrgency.Pressured, "steamroller", null,
 				new EnemyProfiles(enemy));
 			situation.Mission = new BotMission { Type = BotMissionType.Raid, Priority = 65, RegionIndex = 18 };
+			situation.Threats.Add((new BotThreatTracker.Group(40, 60, 3000, 5) { VelocityX = 0.05 },
+				new BotThreatTracker.Prediction(new CPos(80, 60), 2500, 800)));
 			situation.LossesByRole["rush"] = 5400;
 			situation.LossesByRole["idle"] = 700;
 			situation.AwayLossesByRole["rush"] = 4800;
@@ -126,6 +128,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(own.GetProperty("losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(5400));
 			Assert.That(own.GetProperty("away_losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(4800));
 			Assert.That(own.GetProperty("combat_ratio_pct").GetInt32(), Is.Zero);
+			var threat = own.GetProperty("threats")[0];
+			Assert.That(threat.GetProperty("target").GetString(), Is.EqualTo("80,60"));
+			Assert.That(threat.GetProperty("eta").GetInt32(), Is.EqualTo(800));
+			Assert.That(threat.GetProperty("vx_per_kilotick").GetInt32(), Is.EqualTo(50));
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
 			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
 			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));

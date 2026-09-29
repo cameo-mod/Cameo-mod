@@ -133,6 +133,33 @@ namespace OpenRA.Mods.Cameo.Traits
 			return lines.ToString();
 		}
 
+		// DF step 1: per tracked enemy group its centre, value, velocity (cells per 1000 ticks) and, if moving, the
+		// own asset it heads for with the ETA in ticks. `target` is empty for a standing group.
+		internal static void AppendThreats(StringBuilder builder,
+			IReadOnlyList<(BotThreatTracker.Group Group, BotThreatTracker.Prediction? Prediction)> threats)
+		{
+			AiMatchLogWriter.AppendArrayPropertyStart(builder, "threats");
+			for (var i = 0; threats != null && i < threats.Count; i++)
+			{
+				if (i > 0)
+					builder.Append(',');
+				var (g, p) = threats[i];
+				AiMatchLogWriter.AppendObjectStart(builder);
+				AiMatchLogWriter.AppendNumber(builder, "value", g.Value, true);
+				AiMatchLogWriter.AppendNumber(builder, "count", g.Count);
+				AiMatchLogWriter.AppendNumber(builder, "x", (int)Math.Round(g.X));
+				AiMatchLogWriter.AppendNumber(builder, "y", (int)Math.Round(g.Y));
+				AiMatchLogWriter.AppendNumber(builder, "vx_per_kilotick", (int)Math.Round(g.VelocityX * 1000));
+				AiMatchLogWriter.AppendNumber(builder, "vy_per_kilotick", (int)Math.Round(g.VelocityY * 1000));
+				AiMatchLogWriter.AppendString(builder, "target", p.HasValue ? $"{p.Value.Target.X},{p.Value.Target.Y}" : "");
+				AiMatchLogWriter.AppendNumber(builder, "target_value", p?.TargetValue ?? 0);
+				AiMatchLogWriter.AppendNumber(builder, "eta", p?.EtaTicks ?? 0);
+				builder.Append('}');
+			}
+
+			builder.Append(']');
+		}
+
 		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
 		{
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
@@ -217,6 +244,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendRoleCosts(builder, "away_losses_by_role", situation.AwayLossesByRole);
 			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_pct", situation.CombatRatioPct);
 			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_defended_pct", situation.CombatRatioDefendedPct);
+			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

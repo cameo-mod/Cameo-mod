@@ -47,9 +47,38 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var protectionScanRadius = WDist.FromCells(owner.SquadManager.Info.ProtectionScanRadius);
 			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, protectionScanRadius);
 
+			var holding = owner.SquadManager.TryGetProtectionRally(out var rally);
 			if (closestEnemy == null && !owner.IsTargetValid)
 			{
+				// DF-2: a predicted attack is on its way — wait at the rally point instead of going home.
+				if (holding)
+				{
+					if ((leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
+						owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, rally), false,
+							groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+					return;
+				}
+
+				// DF release: a defence that stayed quiet long enough is over — everyone back to their job.
+				if (owner.SquadManager.ShouldReleaseDefenders(true))
+				{
+					owner.SquadManager.ReleaseDefenders(owner.Bot, owner);
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new UnitsForProtectionFleeState(), false);
+				return;
+			}
+
+			owner.SquadManager.ShouldReleaseDefenders(false);
+
+			// DF-2 lure: out beyond the rally point and losing alone -> fall back under the own defences.
+			if (holding && closestEnemy != null && owner.SquadManager.Info.UseCombatPredictor
+				&& (leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells
+				&& owner.SquadManager.PredictsLoss(owner, owner.SquadManager.VisibleEnemiesNear(leader.CenterPosition, protectionScanRadius)))
+			{
+				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, rally), false,
+					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
 				return;
 			}
 			else if (closestEnemy != null && owner.TargetActor != closestEnemy)

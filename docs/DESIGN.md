@@ -4848,6 +4848,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
   Very Hard, and Easiest through Medium pay a surcharge on the same line.
 * `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* ⛔ **No APM cap (maintainer 2026-09-28).** `HumanPaceBotModule` runs with every limit at 0
+  (unlimited: actions, burst, attention) for the Frankenstein bot; `classic` never had one. Measured
+  on A Nuclear Winter: a per-tier cap with Hard at 120 orders/min went **0–4** vs the uncapped
+  baseline's 2–0 (orders piled up behind repeats and production was dropped); with an order-lane
+  fix **1–1**. The ruling: *"our bot does not have the super unfair advantage of AlphaStar and we are
+  actively looking for ways to make it stronger and not weaker"*. Difficulty scales through delays,
+  self-preservation and the production line above — never through the bot's hands.
 * ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
   deploys, micro-management and every other ability a unit has work the same for every bot. A trait
   that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);
@@ -4859,6 +4866,47 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
   with Hard at 100.
+
+### 19.1a Force structure: guerrillas always on, the main army follows the personality (maintainer 2026-09-28) — binding
+
+> "The guerrilla squads should always be active 100 % of the time and only the main army (or later
+> several big armies) should be more passive and try to defend or steamroll." / "Never suicide
+> units: if it sees something that's going to win against the attack squad they should return
+> instead and try to attack somewhere else."
+
+* **Every Frankenstein personality** runs a small-squad layer: `JoinGuerrilla: 100`,
+  `MaxGuerrillaSize: 6`, and several small parties at once (the smallest open one is filled
+  first). **Their number grows with game time and depends on the personality** (maintainer, same
+  day): `MaxGuerrillaSquads` → `MaxGuerrillaSquadsLate` over `GuerrillaSquadRampTicks` (30,000) —
+  steamroller 1→3, turtle 1→3, tech 1→4, rush 2→5, expansion 2→5, **guerrilla 2→6, at least twice
+  steamroller's at every moment**; steamroller spends the rest on its main army.
+  Guerrillas raid, recon and hit soft targets whatever the posture;
+  harasser (spec-ops) squads and `ScoutBotModule` scouts run beside them. **Only the main army**
+  (SquadValue, staging, attack interval) differs per personality — turtle defends, steamroller
+  builds up and rolls.
+* **Never suicide:** with `UseCombatPredictor` every ground squad — main army and guerrillas —
+  engages only when the Lanchester predictor over the enemies it SEES clears
+  `RetreatRatioPct × EngageMarginPct` and turns back below `BotLimits.RetreatRatioPct`; the squad
+  dissolves home and the next attack avoids that region (the 6c risk gate remembers the threat).
+  `RetreatRatioPct` is the tier's self-preservation on the §19.1 line (maintainer, same day):
+  **0.1 at Easiest to 1.0 at CameoGod in steps of 0.1** (10, 20 … 100 %; Hard 50) — CameoGod only
+  takes fights it at least draws.
+* **Scouting:** `ScoutBotModule.EnemySpawnBonus` keeps scouts checking the enemy's possible spawn
+  regions (public `mpspawn` data).
+* **Predictive defence, lure and punish** (maintainer, same day; design and phase **DF** in
+  `docs/design/AI_DEEP_RESEARCH.md` §14): track visible enemy groups, extrapolate their heading to
+  predict WHERE and WHEN they will hit; a defence squad is there first, pokes the attackers and
+  falls back under its own defences (the lure). Guerrilla/recon/spec-ops squads convert to
+  defence when the threat is high and they can arrive in time; when they cannot, they — and the
+  main army if the predictor agrees — **punish the enemy base while its army is out**.
+* **Fast squads react, defenders go home when it is over** (maintainer, same day): when a predicted
+  attack is met, a guerrilla/harass squad that reaches the rally point before the enemy joins the
+  defence; one that cannot punishes the enemy base while its army is out. A defence is released
+  only when there is **no perceived threat** (no enemy pressure at home, master not
+  Pressured/Emergency) **and no predicted attack** for `DefenceReleaseQuietTicks`; then raiders
+  re-form guerrilla squads, spec ops their harass squads, the rest join the attack pool and its
+  missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
+* `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
 
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
 
