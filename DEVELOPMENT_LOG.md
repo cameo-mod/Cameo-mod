@@ -1,3 +1,18 @@
+# 2026-09-29 — Devin (NOVA): CA-4 formation movement (12.7)
+
+- Branch nova/ca4-formation (worktree C:/tmp/nova-ca4), stacked on nova/ca3-stage-gate (0b9cf0bda) — role
+  classification consumes BotUnitRoles.ActorRoles which lives on the CA-3 line.
+- SquadManagerBotModuleCA: new fields `FormationMovement` (default false), `FormationTrailCells` (3),
+  `FormationMaxLeadCells` (6); internal `ActorRoles` accessor exposing the BotUnitRoles map to squad states.
+- GroundUnitsAttackMoveStateCA: Rush squads with FormationMovement issue formation orders each tick —
+  frontline leads toward the route target at its slowest member's pace (a member >FormationMaxLeadCells ahead
+  of the rear frontline projection holds); anti_air AttackMoves onto the frontline centroid; scouts run free;
+  all other ground trails FormationTrailCells behind the centroid. No role map or no frontline members falls
+  back to the old straggler catch-up. Guerrilla/Harass/Protection/Artillery/Support/FireSupport untouched.
+- ai.yaml: `FormationMovement: true` on the six personality SquadManager nodes only — @classic unchanged
+  (its squads keep identical movement so the A/B reference does not move).
+- Verify: build 0 errors; audit_fog_honesty PASS (171 sites); audit_ai_personalities PASS.
+
 # 2026-09-29 — Devin (NOVA): CA-3 stage/composition gate (12.5)
 
 - Branch nova/ca3-stage-gate (worktree C:/tmp/nova-ca3b, base 3ed0712b2 = ca3-role-mix + post-#630 master).
