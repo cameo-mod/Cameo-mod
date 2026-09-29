@@ -99,6 +99,19 @@ balance pipeline (`tools/balance/`), and armour classes per actor.
 * **One authority:** CP answers three questions — *launch this attack?* (replaces the 6c scalar),
   *commit past the siege stand-off?* (CA-2 rule 4), *retreat now?* (wraps the fuzzy flee as its
   fallback). Squad states consult it; nothing else decides engagement.
+* **⚠ Measured 2026-09-28 — the input is the weak part, not the formula.** Over every A/B
+  match with both logs, the enemy army the Frankenstein **remembers** is a small fraction of the
+  enemy's **actual** army (classic's own `stats_timeline`): median 0.01 before tick 6000, 0.08 at
+  6–12k, 0.13 at 12–18k, 0.15–0.18 after (p25–p75 roughly half to one and a half times that). The
+  memory is not forgetting (mobile contacts are kept 30,000 ticks); the bot never *sees* most of
+  the army, because its scouts do not reach the enemy base (§9 item 12 of `AI_ARCHITECTURE.md`).
+  In the first validation loss the prediction before the decisive fight was 5.6 in our favour
+  against an enemy five times larger than remembered. So CP uses two inputs:
+  * **local fights** — what is visible around the squad now (reliable);
+  * **strategic commits** — `max(remembered enemy, own army)`: assume the enemy is at least as
+    strong as we are unless proven otherwise (fog-honest; commit only when composition and
+    Versus favour us), later ÷ a **learned visibility factor per game phase** fitted from exactly
+    this measurement (CA-1b), and raised by better scouting (CA-6).
 * **A/B metric:** trade ratio in the decisive fights (`stats_timeline` deaths/kills deltas around
   the largest loss window) and `rush`/`guerrilla` away-losses, not only win rate.
 

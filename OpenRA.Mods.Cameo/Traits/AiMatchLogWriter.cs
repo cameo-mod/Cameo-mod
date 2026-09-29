@@ -141,6 +141,36 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// The arsenal ledger (AI_ARCHITECTURE.md §12.3): per own actor type, created / lost / value lost / value
+		// destroyed, and what it destroyed by victim type — the input of the offline fitter (CA-1b) and the
+		// per-enemy-faction profiles (DESIGN.md §19.2).
+		internal static void AppendArsenal(StringBuilder builder, BotArsenalLedger ledger, bool first = false)
+		{
+			AppendArrayPropertyStart(builder, "arsenal", first);
+			if (ledger != null)
+			{
+				var i = 0;
+				foreach (var (type, e) in ledger.Ordered())
+				{
+					if (i++ > 0)
+						builder.Append(',');
+					AppendObjectStart(builder);
+					AppendString(builder, "type", type, true);
+					AppendNumber(builder, "created", e.Created);
+					AppendNumber(builder, "lost", e.Lost);
+					AppendNumber(builder, "lost_value", e.LostValue);
+					AppendNumber(builder, "killed_value", e.KilledValue);
+					AppendObjectPropertyStart(builder, "killed_by_victim");
+					var j = 0;
+					foreach (var (victim, value) in e.KilledValueByVictim.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key, StringComparer.Ordinal))
+						AppendNumber(builder, victim, value, j++ == 0);
+					builder.Append("}}");
+				}
+			}
+
+			builder.Append(']');
+		}
+
 		internal const string StatsTimelineFields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost";
 
 		internal static void AppendStatsTimeline(StringBuilder builder, IReadOnlyList<int[]> timeline, bool first = false)
@@ -230,6 +260,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				samples.TryGetValue(player, out var timeline);
 				AppendStatsTimeline(lines, timeline);
 				lines.Append('}');
+
+				AppendArsenal(lines, player.PlayerActor.TraitOrDefault<BotArsenalLedger>());
 
 				AppendRelationships(lines, world, player, "opponents", false);
 				AppendRelationships(lines, world, player, "allies", true);
