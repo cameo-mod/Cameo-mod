@@ -1,5 +1,42 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-29 — Claude: what the maintainer saw in play, measured; the expansion planner EX-0…EX-3; the engine-pin trap
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI, by the maintainer's "split by owner" ruling (scout/garrison + expansion planner); balance continues on #650 · branches below`
+
+**Spectator report → measured causes** (AI_ARCHITECTURE §12.11; `hard` per match): ~72 Humvees and ~5 tanks
+(scout replacements jump the vehicle queue), infantry fed into civilian garrisons (valued 0, no `Valued`),
+no artillery-first or tanks-in-front (CA-2 DAWN, CA-4 NOVA, unbuilt), a timid base (random/omniscient
+`BaseCrawl`). **Rulings** in DESIGN §19.1b (expansion, garrisons, scouts; map-start resources are public)
+and §19.1c (each personality chases one lead over the enemy). `tools/ai/army_mix_report.py` flags spam
+from any batch.
+
+**Landed as PRs (stacked, each boot-gated in an isolated support dir):**
+
+| PR | what | state |
+|---|---|---|
+| #646 | design §12.11–§12.14 + army-mix report | ready |
+| #647 | SG: scout rebuild cooldown; garrisons priced by capacity × 250 | draft, A/B running (`sg_branch`/`sg_master`) |
+| #651 | EX-0: field score `V × S / (T + τ)`, telemetry | ready |
+| #652 | EX-1: `BaseCrawl` walks toward the target field (CA hook `IBotExpansionTargetProvider`) | draft, A/B pending |
+| #653 | EX-2: a refinery on every field in reach; missed claims park the field | draft, A/B pending |
+| (this) | EX-3: the MCV founds its base at the best far field (engine hook) | draft, A/B pending |
+
+Live, `hard` on A Nuclear Winter: target field 16,36 → refinery at 10,35 claims it (tick 1,380) →
+target 45,32 → a line of power plants toward it (17,44 → 19,45 → 23,40).
+
+**⛔ Engine pin trap (LESSONS_LEARNED 2026-09-29):** master's pin `042b2fa787` is **not on
+`origin/cameo-engine`** (103 commits ahead; only on `devin/1790592696-no-audio-switch`). The EX-3 hook
+`d5d8b2a685` is on `claude/mcv_expansion_site`, on top of the pin. **Engine owner: fast-forward
+`cameo-engine` to the pin** (it is a strict ancestor). Merging this PR changes `mod.config`: every
+worktree then needs `make.cmd all`.
+
+**Reviews today:** #644 (NOVA) approve, after my `norecord` point landed; #648 (EMBER) changes requested:
+75 dual-weapon helicopters (Orca, Apache, Hind…) are classed `fighter`; §12.4 makes them gunships.
+**Open for NOVA:** the escort hook (fleet `PROPOSAL_2026-09-29_claude_to_nova_escort_hook.md`).
+**Next (Claude):** A/B results for SG / EX-1..3; EX-4 (enemy creep × difficulty × aggression); towers per
+field; personality leads telemetry (§12.14: Expansion, Turtle, Tech).
+
 ## 2026-09-29 — Claude: §12.0l step 1 done (derived rows in every table) + the submarine types
 
 `Agent: Claude-Local (Opus 5.5) · lane: balance pipeline (maintainer 2026-09-29: "you continue with the balance pipeline while the other agents focus on the AI") · branch claude/submarine_armor_types`

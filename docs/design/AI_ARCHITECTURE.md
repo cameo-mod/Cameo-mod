@@ -1327,7 +1327,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**51 distinct trait types, 69 Player instances plus one World instance** (2026-09-28: #621 adds
+**52 distinct trait types, 70 Player instances plus one World instance** (2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, is the 52nd type / 70th instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -1368,6 +1368,7 @@ master snapshot today. "Hint" below is a future read-only integration, not shipp
 | `LoadGarrisonerBotModuleCA` (@Infantry) | passenger-to-garrison assignment | configured passengers, garrisons, capacity/proximity; posture hint only in a later phase | Stop/AttackMove/EnterGarrison orders; scan default 457 ticks; U |
 | `LoadCargoBotModule` (@Infantry/@TankBunker/@Battery) | configured cargo loading | passengers, transport capacity and proximity; no phase-1 hint | cargo-related orders; scan default 317, Battery configured 799 ticks; U |
 | `MinelayerBotModule` (1) | minefield assignment | minelayers, positions and attack events; posture hint later | mine-related orders; scan default 320 ticks and attack callbacks; U |
+| `ExpansionPlannerBotModule` (genericbot) | EX-0 target field (§12.13): telemetry only, no orders | own actors, resource indices, base-builder queues, `IBotRegionThreatProvider`; nothing reads its target yet | `Target` / `LastScores` and a `debug.log` line on each target change; re-plan default 250 ticks; U |
 | `ResourceMapBotModule` (1) | resource-index information | resource layer and nearby actors; no snapshot hint | index/threat query methods; `UpdateResourceMapInverval` default 67 ticks, randomized initialization; U provider |
 | `ExternalBotOrdersManager` (1) | forwarding registered external requests | direct entries / `IssueOrderToBot` registrations and current issuer validity | queued orders each bot tick; local bridge, not a new strategy owner; U |
 | `BotLimits` (10 difficulty instances) | configured cap/delay inputs | enabled difficulty condition; no master replacement | enabled `Info` queried by consumers; no independent tick; R |
@@ -2112,7 +2113,7 @@ Aggression axis).
 **The score of a resource field `f`** (every constant is a yaml knob, learnable by route 2, §6.4):
 
     V_f    = value of f: its initial resource cells × value per cell, minus the depletion seen
-    hops_f = ceil( max(0, d_f − R_reach) / R_link )   d_f: path distance from our nearest building
+    hops_f = ceil( max(0, d_f − R_reach) / R_link )   d_f: distance from our nearest building that gives buildable area
     C_f    = refinery cost + hops_f × link cost + towers_f × tower cost
     T_f    = C_f / income + hops_f × link build time + refinery build time   (seconds until it pays)
     S_f    = 1 / (1 + threat_f / max(own force near f, 1))   threat_f: remembered enemy value near f
@@ -2147,6 +2148,57 @@ with its owner (NOVA, CA-3/CA-4).
 **Creeping toward the enemy.** The enemy's probable base (a spawn, or seen buildings) is one more
 candidate, with `score = CreepWeight × difficulty step × Aggression`. It wins only when no field
 scores higher. Its towers go on the enemy-facing edge.
+
+**EX-0 as built (2026-09-29).** `ExpansionPlannerBotModule` (genericbot) scores every field we hold no
+refinery at, every `ReplanTicks` (250), and writes a `debug.log` line whenever the target changes
+(`EX-0 target field …`) or it has none, with the reason (`EX-0 no target …`). Measured choices:
+`V_f` is the field's resource-cell count at its first scan: a common factor leaves the ranking
+unchanged, so no price per cell is invented. The refinery and the cheapest building (the link) are
+whatever the base builder's own queues can build now, with their real cost and `GetBuildTime`.
+Income is `PlayerResources.Earned` over `IncomeWindowTicks`. `d_f` is measured from buildings that give
+buildable area only: a captured derrick or a garrisoned house does not extend the base, and the
+first live run picked a field 35 cells away because of one. `R_reach` = `ReachCells` (6),
+`R_link` = `LinkStepCells` (4). It is straight-line distance for now; path distance is an EX-1
+refinement. Enemy threat comes only from `IBotRegionThreatProvider` (fog-honest), never from
+`ResourceMapBotModule`'s own enemy counts. The one own-actors pass is manifested in
+`fog_honesty_manifest.json`.
+
+**EX-1 as built (2026-09-29).** A CA-side `IBotExpansionTargetProvider` (the pattern of
+`IBotRegionThreatProvider`) lets `BaseBuilderBotModuleCA` ask for the target field without naming a
+Cameo type. In the `BaseCrawl` case, which `ai.yaml` already takes for every building under 1,000
+cost (`BaseCrawlChance: 100`), the builder first tries `findPos` toward that field: the placeable cell
+nearest to it, within `BaseCrawlRadius`. It falls back to the old logic only when no cell fits. The
+planner publishes the field only with `DriveBaseCrawl: true` (`genericbot`). `classic` shares
+`BaseBuilderBotModuleCA@generic` but has no enabled planner, so it keeps today's placement and stays
+the A/B reference. Each steered placement writes `EX-1 BaseCrawl <type> at <cell> toward field <cell>`
+to `debug.log`. Live: `hard` put its second power plant at 12,36 toward field 16,36 (tick 1,554).
+Refineries and defences still use their own placement; EX-2 adds refinery-per-field.
+
+**EX-2 as built (2026-09-29).** While the target field is in reach (0 hops) and unclaimed, the planner
+reports `WantsRefineryAtExpansionTarget`. `HasAdequateRefineryCount()` then answers "not adequate"
+even above the fixed optimum (initial + additional + per base), which is ruling (a): every field in
+reach gets a refinery. The refinery case places it with `findPos` toward the field, limited to
+`ClaimRadiusCells` (8), so it lands where it claims the field; an MCV-requested refinery keeps
+priority. "Claimed" is decided from rules: an own actor with the `Refinery` trait within the claim
+radius (or the resource map's own count). **Loop guard:** every refinery gained while the same field
+stays unclaimed is a missed claim, and after `MaxClaimAttempts` (2) the field is parked for
+`ParkTicks` (3000) with a `debug.log` line (`EX-2 parked field …`). So a placement that keeps missing
+cannot become a refinery loop. `DriveRefineries: true` (genericbot) needs `DriveBaseCrawl`, which
+publishes the target. Live: the home field was claimed by tick 1,500, then the target moved to field
+7 at 45,32 (7 hops), and the base built a line of power plants toward it (17,43 → 21,38 → 30,33 by
+tick 4,034).
+
+**EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
+engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
+`claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after
+`GetExpansionCenter`, the module asks the player's `IBotMcvExpansionSiteProvider` traits for a site and
+deploys toward the first non-null one. The engine still decides **when** to expand (its cash and
+yard-count triggers); the planner decides **where**. The planner answers only for a mobile MCV (a yard
+relocation keeps the engine's choice) and only among fields at least `McvMinHops` (3) links away, which
+the building line would not reach soon. It ranks them by `V × S / (distance from the MCV + McvTauCells)`;
+value, safety and distance each come from their own analytics, as ruled. Each site is logged
+(`EX-3 MCV … sent to field …`). `genericbot` only (`DriveMcvSite: true`). **Still open:** the escort
+and outpost guard, whose hook in `SquadManagerBotModuleCA` is proposed to its owner (NOVA), not built.
 
 **Order of work** (each step: telemetry first, then behaviour behind a yaml switch, then the A/B):
 EX-0 compute and log `score_f`, `f*` and the placement choice (no behaviour change); EX-1 replace
