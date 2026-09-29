@@ -52,7 +52,8 @@ never for status.
    **deleted by the next `make all`**. To change the engine, follow
    **`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit the SEPARATE
    `cameo-engine` clone of `github.com/cameo-mod/OpenRA` (⛔ first check the `mod.config` pin IS on
-   `origin/cameo-engine`; on 2026-09-29 it was 103 commits ahead of it, so branch from the pin: LESSONS_LEARNED)
+   `origin/cameo-engine`; on 2026-09-29 it was 103 commits ahead of it (fast-forwarded 2026-09-30); if it is
+   not, branch from the pin: LESSONS_LEARNED)
    → push → `git rev-parse cameo-engine`
    for the full 40-char hash → set `ENGINE_VERSION` in **`mod.config`** → `make.cmd all` →
    verify `engine/VERSION` + recreate `engine/glsl/` shaders → boot-gate → commit `mod.config`.

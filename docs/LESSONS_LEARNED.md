@@ -269,6 +269,9 @@ the change **from the pin** (`git switch -c <branch> <pin>`), push that branch a
 rebase or fast-forward `cameo-engine` yourself: that is the engine owner's call. Say so in the PR.
 Measured 2026-09-29: `cameo-engine` is a strict ancestor of the pin, so it can be fast-forwarded
 cleanly. The EX-3 hook (`d5d8b2a685`) sits on branch `claude/mcv_expansion_site`, on top of the pin.
+**Resolved 2026-09-30** (maintainer: "synchronize all branches … the latest engine update"):
+`origin/cameo-engine` was fast-forwarded to `d5d8b2a685` (104 commits), which is master's pin. The rule
+stays: check before every engine change.
 
 ## A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)
 

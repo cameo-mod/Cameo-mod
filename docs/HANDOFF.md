@@ -27,9 +27,9 @@ target 45,32 → a line of power plants toward it (17,44 → 19,45 → 23,40).
 
 **⛔ Engine pin trap (LESSONS_LEARNED 2026-09-29):** master's pin `042b2fa787` is **not on
 `origin/cameo-engine`** (103 commits ahead; only on `devin/1790592696-no-audio-switch`). The EX-3 hook
-`d5d8b2a685` is on `claude/mcv_expansion_site`, on top of the pin. **Engine owner: fast-forward
-`cameo-engine` to the pin** (it is a strict ancestor). Merging this PR changes `mod.config`: every
-worktree then needs `make.cmd all`.
+`d5d8b2a685` is on `claude/mcv_expansion_site`, on top of the pin. **Done 2026-09-30:**
+`origin/cameo-engine` fast-forwarded to `d5d8b2a685` (maintainer order), which is master's pin. Every
+worktree needs `make.cmd all` after the integration merge.
 
 **Reviews today:** #644 (NOVA) approve, after my `norecord` point landed; #648 (EMBER) changes requested:
 75 dual-weapon helicopters (Orca, Apache, Hind…) are classed `fighter`; §12.4 makes them gunships.
