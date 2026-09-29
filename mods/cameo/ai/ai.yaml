@@ -227,6 +227,11 @@ Player:
 		# A role is applied after its additions are reviewed and a match with an affected faction (AI_ARCHITECTURE.md 2.8).
 		# refinery + conyard go together: a bot with neither listed keeps unit production paused forever.
 		Apply: harvester, refinery, conyard
+	# AI_ARCHITECTURE.md 12.4/12.5 (CA-3): code-derived unit + target roles (frontline, anti-air,
+	# artillery, gunship, ...). Report-only for now — members land in bot-roles.log; the RoleMix
+	# production demand input reads the map once it is reviewed.
+	BotUnitRoles:
+		RequiresCondition: genericbot || classicbot
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
