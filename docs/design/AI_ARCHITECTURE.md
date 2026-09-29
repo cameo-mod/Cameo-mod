@@ -573,8 +573,18 @@ at rules load from the actors that are loaded, and a pack writes only a delibera
    **Ruled: defaults per building type, exceptions kept.** One line per type in the central file
    (e.g. `refinery: Fraction 15, Limit 10, Interval 1500`) fills every loaded building of that
    type. A pack row that equals its type default is deleted. A row that differs stays in its pack
-   as an explicit override, so no bot changes behaviour, and the list of overrides goes to the
-   maintainer for review.
+   as an explicit override, and the list of overrides goes to the maintainer for review.
+   ⚠ **Buildings with no row at all DO change** (and they need the A/B): the bot never plans
+   them today. Measured: Scrin's `scrin_extractor`, `scrin_warp_gate` and `scrin_portal`
+   (refinery, vehicle factory, barracks); Outpost 2's smelters, vehicle factories,
+   consumer/arachnid factories, garages and spaceports; 8 naval yards (the base builder may place
+   those through its water logic instead, so check that first).
+   **Which type a building is: tag the templates** (the maintainer's suggestion), not trait
+   heuristics, which mislabel e.g. `EDEN_RESIDENCE` as radar. Template coverage of producible
+   buildings: `^RepairFacility` 18/18, `^IsWeaponFactory` 35/38, `^IsShipyard` 17/18, `^Refinery`
+   33/34, `^IsAircraftFactory` 28/31, `^RadarBuilding` 18/20, `^PowerPlant` 30/34. There is **no
+   barracks template** (0/35: a new `^IsBarracks` is needed), and `^Superweapon` is unreliable
+   (14/35, and 20 non-superweapons inherit it), so that type stays trait-derived.
 3. **Unit production weights** (`UnitsToBuild`, 1,421 rows; 67 % of them weight 1). **Ruled: derive
    them from stats, after CA-3.** The personality sets a role mix (§12.5); a unit's weight follows
    from its derived role and Versus profile. The hand rows stay until the derived mix wins an A/B.
