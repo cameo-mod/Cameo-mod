@@ -186,7 +186,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(authored.GetProperty("Versus").TryGetProperty(armor, out _),
 					Is.True, $"authored Versus key {armor}");
 			Assert.That(authored.GetProperty("Versus").EnumerateObject().Count(),
-				Is.EqualTo(35));
+				Is.EqualTo(37));
 		}
 	}
 }
