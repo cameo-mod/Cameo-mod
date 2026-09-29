@@ -47,6 +47,8 @@ cabal_lazerboat:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_navalyard

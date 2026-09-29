@@ -96,6 +96,21 @@ GhostSniperBunker:
 			Spaceship: 67
 			Heavy: 66
 			Superheavy: 65
+			FlyingInfantry: 113
+			CyborgLight: 141
+			CyborgMedium: 111
+			CyborgHeavy: 103
+			CyborgHeroic: 78
+			AntiAirInfantry: 191
+			AntiAirVehicle: 82
+			AntiAirBuilding: 72
+			ShipLight: 96
+			ShipMedium: 69
+			ShipHeavy: 69
+			ShipSuperheavy: 69
+			AntiAirShip: 81
+			SubmarineLight: 67
+			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -117,6 +132,21 @@ GhostSniperBunker:
 			Heavy: 12
 			Spaceship: 11
 			Superheavy: 10
+			FlyingInfantry: 19
+			CyborgLight: 21
+			CyborgMedium: 19
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 24
+			AntiAirVehicle: 16
+			AntiAirBuilding: 14
+			ShipLight: 18
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 16
+			SubmarineLight: 13
+			SubmarineHeavy: 12
 	Projectile: Bullet
 		Image: 50CAL
 		InaccuracyPercentage: 1
@@ -167,6 +197,21 @@ GhostSniperBunker:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -192,6 +237,21 @@ GhostSniperBunker:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -217,6 +277,21 @@ GhostSniperBunker:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -242,6 +317,21 @@ GhostSniperBunker:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 
 SCBROODLING:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -318,6 +408,21 @@ ScourgeDroneExplosion:
 			Helicopter: 59
 			Heroic: 52
 			Spaceship: 51
+			FlyingInfantry: 88
+			CyborgLight: 108
+			CyborgMedium: 103
+			CyborgHeavy: 96
+			CyborgHeroic: 61
+			AntiAirInfantry: 148
+			AntiAirVehicle: 75
+			AntiAirBuilding: 149
+			ShipLight: 122
+			ShipMedium: 101
+			ShipHeavy: 110
+			ShipSuperheavy: 109
+			AntiAirShip: 111
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9995
 		PercentageSpread: 50
@@ -339,6 +444,21 @@ ScourgeDroneExplosion:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 2000
@@ -505,6 +625,21 @@ SCWorkerExplode:
 			Helicopter: 54
 			Superheavy: 51
 			Spaceship: 47
+			FlyingInfantry: 94
+			CyborgLight: 125
+			CyborgMedium: 99
+			CyborgHeavy: 79
+			CyborgHeroic: 55
+			AntiAirInfantry: 162
+			AntiAirVehicle: 77
+			AntiAirBuilding: 150
+			ShipLight: 131
+			ShipMedium: 97
+			ShipHeavy: 98
+			ShipSuperheavy: 92
+			AntiAirShip: 113
+			SubmarineLight: 75
+			SubmarineHeavy: 71
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -526,6 +661,21 @@ SCWorkerExplode:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	Projectile: Bullet
 		Speed: 150
 		Blockable: false
@@ -564,6 +714,8 @@ Scarab:
 			Wood: 50
 			Light: 100
 			Heavy: 100
+			CyborgLight: 71
+			ShipLight: 71
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: psahit00.aud

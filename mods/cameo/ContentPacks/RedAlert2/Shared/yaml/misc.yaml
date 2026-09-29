@@ -2076,6 +2076,8 @@ ra2e2_black:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 150
 	Tooltip:
@@ -2245,6 +2247,8 @@ ra2_c_ifv:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -2323,6 +2327,8 @@ ra2_c_hum:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -2378,6 +2384,8 @@ ra2_c_hum:
 
 ra2_c_hum2:
 	Inherits: ra2_c_hum
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:

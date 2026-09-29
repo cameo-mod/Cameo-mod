@@ -53,7 +53,7 @@ class VariantPatchTests(unittest.TestCase):
                 "side_a": {"faction": "terran", "bot": "medium"},
                 "side_b": {"faction": "td_nod", "bot": "brutal"},
             }
-            batch.write_variant(TEMPLATE, dest, matchup, time_limit=20)
+            batch.write_variant(TEMPLATE, dest, matchup, time_limit=2)
 
             text = (dest / "map.yaml").read_text(encoding="utf-8")
             self.assertIn("Faction: terran", text)
@@ -75,7 +75,7 @@ class VariantPatchTests(unittest.TestCase):
             self.assertIn(f"# ai-match-batch variant: {dest.name}", text)
 
             rules = (dest / "rules.yaml").read_text(encoding="utf-8")
-            self.assertIn("TimeLimitDefault: 20", rules)
+            self.assertIn("TimeLimitDefault: 2", rules)
             self.assertIn("TimeLimitLocked: True", rules)
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
@@ -159,6 +159,11 @@ class TemplateMapContractTests(unittest.TestCase):
         limit = int(re.search(r"TimeLimitDefault: (\d+)", text).group(1))
         self.assertIn(limit, batch.VALID_TIME_LIMITS)
         self.assertIn("TimeLimitLocked: True", text)
+        # the engine rejects a TimeLimitDefault outside the fixture's own options, so the
+        # harness's --time-limit choices must be exactly those options
+        options = {int(v) for v in re.search(r"TimeLimitOptions: ([\d, ]+)", text).group(1).split(",")}
+        self.assertEqual(options, batch.VALID_TIME_LIMITS)
+        self.assertIn("GameSpeed: maximum", text)
 
 
 REAL_MAP = ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oramap"
@@ -174,7 +179,7 @@ class RealMapVariantTests(unittest.TestCase):
     def _write(self, matchup):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="nw_variant_test_"))
         dest = tmp / "variant"
-        batch.write_variant(REAL_MAP, dest, matchup, time_limit=20)
+        batch.write_variant(REAL_MAP, dest, matchup, time_limit=2)
         return tmp, dest
 
     def test_oramap_variant_converts_multi_slots(self):
@@ -218,11 +223,11 @@ class RealMapVariantTests(unittest.TestCase):
             self.assertNotIn("\t\tBot:", actors)
             self.assertNotIn("\t\tHomeLocation:", actors)
 
-            # Rules key + file wired (insane speed, locked time cap).
+            # Rules key + file wired (maximum speed, locked time cap).
             self.assertRegex(text, r"(?m)^Rules: rules\.yaml$")
             rules = (dest / "rules.yaml").read_text(encoding="utf-8")
-            self.assertIn("GameSpeed: insane", rules)
-            self.assertIn("TimeLimitDefault: 20", rules)
+            self.assertIn("GameSpeed: maximum", rules)
+            self.assertIn("TimeLimitDefault: 2", rules)
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 

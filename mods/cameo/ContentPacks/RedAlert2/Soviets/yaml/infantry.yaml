@@ -89,6 +89,8 @@ ra2_soviets_dog:
 	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
 	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
 	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
@@ -366,6 +368,8 @@ ra2_soviets_crazyivan:
 	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
 	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
 	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 600
 	Tooltip:

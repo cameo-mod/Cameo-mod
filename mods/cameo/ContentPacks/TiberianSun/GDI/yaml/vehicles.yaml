@@ -65,6 +65,8 @@ ts_gdi_pitbull:
 	Inherits@EMP: ^TurretEMP
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
 	Inherits@FieldMaintenance: ^FieldMaintenance
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -183,6 +185,8 @@ ts_gdi_mobileemp:
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^TurretEMP
 	Inherits@FieldMaintenance: ^FieldMaintenance
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1400
 	Tooltip:

@@ -127,6 +127,8 @@ naxis_kubelwagen:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 850
 	Tooltip:
@@ -284,6 +286,8 @@ naxis_tiger:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -345,6 +349,8 @@ naxis_kingtigerheavytank:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1240,6 +1246,8 @@ naxis_assault:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -1370,6 +1378,8 @@ naxis_panzer:
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 600
 	Tooltip:

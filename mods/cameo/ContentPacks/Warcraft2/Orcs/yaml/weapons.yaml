@@ -82,6 +82,12 @@ wc2ogremageEyeOfKilrogg:
 			Medium: 100
 			Heavy: 100
 			Concrete: 100
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 100
+			ShipMedium: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
 		DamageTypes: DefaultDeath
 		ValidTargets: Ground
 	Inherits@w6fx: ^wc2_orcs_wc2ogremageeyeofkilrogg
@@ -109,6 +115,12 @@ wc2ogremageBloodlust:
 			Medium: 100
 			Heavy: 100
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: bloodlust_target
 	#Warhead@2Eff: CreateEffect
@@ -135,6 +147,12 @@ wc2ogremageRunes:
 			Medium: 100
 			Heavy: 100
 			Concrete: 100
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 100
+			ShipMedium: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Projectiles: FireCluster
 		Weapon: wc2ogremageRunes_Spread
@@ -379,6 +397,12 @@ wc2deathknightHaste:
 			Medium: 100
 			Heavy: 100
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: haste_target
 	Inherits@w6fx: ^wc2_orcs_wc2deathknighthaste
@@ -511,6 +535,12 @@ wc2deathknightRaiseDead:
 			Medium: 100
 			Heavy: 100
 			Concrete: 100
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 100
+			ShipMedium: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: Ground
 	Inherits@w6fx: ^wc2_orcs_wc2deathknightraisedead

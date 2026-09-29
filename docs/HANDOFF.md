@@ -1,5 +1,50 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-29 — Claude: §12.0l step 1 done (derived rows in every table) + the submarine types
+
+`Agent: Claude-Local (Opus 5.5) · lane: balance pipeline (maintainer 2026-09-29: "you continue with the balance pipeline while the other agents focus on the AI") · branch claude/submarine_armor_types`
+
+**Landed on this branch (additive, no hit changes in play):**
+* **Rule 3b's submarine types** `SubmarineLight = ShipMedium x Heavy`, `SubmarineHeavy = ShipHeavy x
+  Superheavy` are in all four copies of the derived list (generator, `HeavinessBell.cs`,
+  `effective_heaviness.py`, `audit_versus_profile`); `test_derived_armor_types` now pins the fourth
+  copy too (it claimed to and did not). `splice_templates.py --all`: +754 rows, nothing else moved.
+* **§12.0l step 1 is complete:** `derive_versus_columns.py --write` wrote the 35,123 pending rows into
+  all 42 weapon files. A difflib check proved every change an inserted derived row (0 other hunks).
+  `audit_derived_armor_columns` 29,592 → **0**, ratchet 0. No actor wears a derived type yet
+  (re-measured), so no hit changes until step 3.
+* **Next in §12.0l:** step 2, the `<Family>Air` variants (§12.0k item 2, rule 3a). Then step 3, moving
+  actors onto the types; its per-unit membership lists are maintainer-reviewed.
+
+**Also today:** #645 (merged) re-greened master's derived-columns guard (Scrin's 40 rows). The test
+subset this branch touches (13 files) has **56 failures already on master** (for example
+`test_aa_weapon_routing`, which expects `*_FlatCompatibility` warhead keys); this branch adds none
+after regenerating the CannonAP fixture. `verify_generator_sync` reports 41 hand-made `^Warhead_*_Flat` /
+`_WallExcluded` / … templates the generator does not emit. It's not a value drift, but it is the A5 backlog.
+
+## 2026-09-29 — Claude: guerrilla band on the actors; squad rulings for artillery, fire support and ships
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_guerrilla`
+
+**Maintainer rulings today** (AI_ARCHITECTURE §2.8a, §12.4a):
+* **Guerrilla bands:** the fastest third of the faction's infantry or vehicles, costing at most the median.
+* **Artillery squads** are `^ArtilleryTemplate` + `^ArtilleryTankTemplate` units only. **Fire-support
+  units** (`^FireSupportTemplate`) form their own squads with tanks and protect the artillery.
+* **Ships** are their own squads, never mixed into ground or air squads.
+
+**Landed on this branch (inert, no behaviour change):** `tools/ai/derive_guerrilla_roles.py` writes
+`BotRoles: Roles: guerrilla` on 154 actors in 37 factions (65 rules files, 10 `-BotRoles:` on child
+actors that would have inherited the tag); `audit_guerrilla_roles.py` in `run_all.sh`; the three
+templates declare `artillery` / `firesupport`. Boot-gated (isolated support dir, 0 exceptions).
+
+**Found:** the §2.8 metric went **up** 4,092 → 5,825 (#588 interim, `@classic`, `@guerrilla`: every
+personality copies ~600 list ids); no gate watched it. And 19 ships are in ground squads today
+(#627's `navalunit` misses; `FindNewUnits` checks `GuerrillaTypes` before `NavalUnitsTypes`).
+
+**Next (Claude, after cameo-mod-45's integration merge):** apply `guerrilla` (−1,776 ids) behind a
+Nuclear Winter A/B, add the `--max` ratchet, review and apply `navalunit`. **For NOVA (CA-3/CA-4):**
+§12.4a in `SquadManagerBotModuleCA` — the `artillery` role instead of `ArtilleryMinRangeCells`, the
+escorted fire-support squad, the ship guard.
 
 ## 2026-09-29 — Claude: the Frankenstein doctrine integrated on master (maintainer: "merge everything together")
 
@@ -52,6 +97,13 @@ The part of CA-5 air doctrine that needs no CA-1 roles:
   fighter pick-off of isolated units, bomber strike-team target
   priorities - waits on CA-1 roles (§12.10) plus this slice's
   A/B vs master.
+- A/B so far (same binary, pooled): hard 4-3 vs classic — parity with
+  the 7-6 baseline band; dedicated 1-3 sample being extended before
+  the gate is called. Losses were ground/emergency-decided (turtle
+  held under sustained pressure ~85% of ticks); air usage was small.
+- First `league_standard.json` league run in flight (4 cells x 4
+  swapped matches; classic cell already produced 2-0 for hard).
+  Spec map-path bug found+fixed in #628 before launch.
 ## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
 
 **Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,
@@ -4762,7 +4814,8 @@ steal `BFRT` rows from the real Battle Fortress.
 
 Maintainer ruling: every bot-vs-bot test runs on the real tournament duel map
 **A Nuclear Winter** (extracted at runtime from the shipped
-`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: insane`.
+`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: maximum`
+(speed raised from `insane` per maintainer order 2026-09-29).
 `tools/ai/run_ai_match_batch.py` defaults its template there (old synthetic
 gate fixture remains via `--template` for debugging only).
 

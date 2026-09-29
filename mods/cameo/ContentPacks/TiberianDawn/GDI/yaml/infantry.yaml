@@ -413,6 +413,8 @@ td_gdi_shotgunner:
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 200
 	Tooltip:

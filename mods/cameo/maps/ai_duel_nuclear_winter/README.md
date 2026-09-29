@@ -8,7 +8,7 @@ duel map: real base geometry, resources, cliffs and the map's own Creeps
 hostile to both sides. `map.bin`/`map.png` are donor-verbatim.
 
 Maintainer order (2026-09-28): **all** bot-vs-bot testing runs here — real
-map, real spawns, locked `gamespeed: insane`. No synthetic fixtures. The old
+map, real spawns, locked `gamespeed: maximum`. No synthetic fixtures. The old
 flat `ai_duel_gate_20260928` stays available via `--template` for harness
 debugging only.
 
@@ -32,7 +32,7 @@ classic without map vision. See `docs/HANDOFF.md` 2026-09-28.
   to each other and to `Creeps`. `Bot:`/`Faction:` are sentinel values the
   harness patches per matchup; starting forces are written into `Actors:` at
   the `AI_DUEL_BOT_UNITS` marker.
-- `rules.yaml` — shared duel lock: `-AdaptiveGameSpeed`, `gamespeed: insane`
+- `rules.yaml` — shared duel lock: `-AdaptiveGameSpeed`, `gamespeed: maximum`
   locked, `TimeLimitManager` stalemate cap, `MustBeDestroyed` restored on the
   base classes so elimination is real.
 

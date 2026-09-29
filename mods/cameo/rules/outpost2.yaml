@@ -1490,6 +1490,8 @@ EDEN_SCOUT:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Eden Scout
 	Valued:
@@ -1841,6 +1843,8 @@ EDEN_LYNX_STARFLARE:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Eden Starflare Lynx
 	Valued:
@@ -2594,6 +2598,8 @@ PLYMOUTH_SCOUT:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Plymouth Scout
 	Valued:
@@ -2668,6 +2674,8 @@ PLYMOUTH_SCOUT:
 PLYMOUTH_SPIDER:
 	Inherits: ^Vehicle
 	Inherits@Template: ^MechanicTemplate
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -2716,6 +2724,8 @@ PLYMOUTH_SCORPION:
 	Inherits: ^Vehicle
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -2793,6 +2803,8 @@ PLYMOUTH_LYNX_MICROWAVE:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -2831,6 +2843,7 @@ PLYMOUTH_LYNX_MICROWAVE:
 
 PLYMOUTH_TIGER_MICROWAVE:
 	Inherits: PLYMOUTH_LYNX_MICROWAVE
+	-BotRoles:
 	Turreted:
 		TurnSpeed: 10
 	Valued:
@@ -2864,6 +2877,8 @@ PLYMOUTH_LYNX_RPG:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -2903,6 +2918,7 @@ PLYMOUTH_LYNX_RPG:
 
 PLYMOUTH_TIGER_RPG:
 	Inherits: PLYMOUTH_LYNX_RPG
+	-BotRoles:
 	Turreted:
 		TurnSpeed: 10
 	Valued:
@@ -2936,6 +2952,8 @@ PLYMOUTH_LYNX_EMP:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -2975,6 +2993,7 @@ PLYMOUTH_LYNX_EMP:
 
 PLYMOUTH_TIGER_EMP:
 	Inherits: PLYMOUTH_LYNX_EMP
+	-BotRoles:
 	Turreted:
 		TurnSpeed: 10
 	Valued:
@@ -3008,6 +3027,8 @@ PLYMOUTH_LYNX_STICKYFOAM:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -3047,6 +3068,7 @@ PLYMOUTH_LYNX_STICKYFOAM:
 
 PLYMOUTH_TIGER_STICKYFOAM:
 	Inherits: PLYMOUTH_LYNX_STICKYFOAM
+	-BotRoles:
 	Turreted:
 		TurnSpeed: 10
 	Valued:
@@ -3152,6 +3174,8 @@ PLYMOUTH_LYNX_STARFLARE:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -3203,6 +3227,7 @@ PLYMOUTH_LYNX_STARFLARE:
 
 PLYMOUTH_TIGER_STARFLARE:
 	Inherits: PLYMOUTH_LYNX_STARFLARE
+	-BotRoles:
 	Turreted:
 		TurnSpeed: 10
 	Valued:

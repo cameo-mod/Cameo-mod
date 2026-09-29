@@ -213,6 +213,8 @@ wc2_orcs_kodobeast:
 	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
 	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
 	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
+	BotRoles:
+		Roles: guerrilla
 	-ExternalCondition@PropagandaEffect:
 	Tooltip:
 		Name: Kodo Beast

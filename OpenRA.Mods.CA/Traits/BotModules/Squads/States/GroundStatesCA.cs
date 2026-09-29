@@ -928,4 +928,58 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public void Deactivate(SquadCA owner) { }
 	}
 
+	// §12.4a: fire-support squads screen the artillery (or assault) squad they are
+	// parented to. Members hold at the protected squad's position and AttackMove
+	// back into screen range — escorts fight whatever threatens the parent instead
+	// of drifting to the front or idling at home.
+	class FireSupportUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		const int HoldTicks = 250;
+		int holdTicks;
+
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			var parent = owner.Parent;
+			if (parent == null || !parent.IsValid)
+			{
+				// Re-attach to the biggest artillery squad first, else an assault.
+				parent = owner.SquadManager.Squads
+					.Where(s => s.Type == SquadCAType.Artillery && s.IsValid && s != owner)
+					.MaxByOrDefault(s => s.Units.Count)
+					?? owner.SquadManager.FindAttachableAssault(owner);
+				owner.Parent = parent;
+			}
+
+			if (parent == null)
+			{
+				// Nothing to screen: hold near home like the support state rather
+				// than trickling into the enemy alone.
+				if (--holdTicks <= 0)
+				{
+					GoToRandomOwnBuilding(owner);
+					holdTicks = HoldTicks;
+				}
+
+				return;
+			}
+
+			var followRangeSquared = (long)WDist.FromCells(owner.SquadManager.Info.SupportFollowRangeCells).LengthSquared;
+			var parentPos = parent.CenterPosition;
+			foreach (var u in owner.Units)
+			{
+				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
+					continue;
+
+				owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(parentPos), false));
+			}
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
 }

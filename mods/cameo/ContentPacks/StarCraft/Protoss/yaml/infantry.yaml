@@ -232,6 +232,8 @@ protoss_darktemplar:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Dark Templar
 	Valued:

@@ -114,6 +114,16 @@ the fog sequencing.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
+  - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
+    `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
+  - [ ] **S** Apply `guerrilla` (empties 7 × `GuerrillaTypes`, −1,776 central ids) after a Nuclear
+    Winter A/B; then the `count_central_ids.py --max` ratchet in `run_all.sh`. **Claude.**
+  - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
+    (§12.4a rule 3). **Claude.**
+  - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
+    `artillery` role only (not the 10-cell range rule), fire-support squads with a tank escort
+    protecting the artillery, and a guard that ships never join ground or air squads. **NOVA**
+    (CA-3/CA-4), roles from Claude.
   - [~] **L** CA-1 arsenal tracker (**shipped 2026-09-29:** `BotArsenalLedger` + stats shadow #624, `BotUnitProfiles`, roles `staticaa`/`airunit`/`navalunit` report-only #627; open: apply roles, in-match production weight) — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
     per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
     with defence ranges and a per-region heat map, log fields; then the in-match production
@@ -129,6 +139,15 @@ the fog sequencing.
   - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+  - [ ] **S** Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
+    §12.12; measured causes §12.11: `hard` builds ~72 Humvees and ~5 tanks per match, and feeds
+    infantry into 0-value garrisons). **Claude.**
+  - [ ] **L** EX expansion planner (§12.13, DESIGN §19.1b): the field score
+    `value × safety / time-until-it-pays`, distance-minimising placement toward the target field,
+    one refinery per field plus towers, MCV hand-off, and the enemy creep scaled by difficulty ×
+    aggression. Steps EX-0 … EX-4, each A/B-gated. **Claude.**
+  - [ ] **M** Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
+    **Claude**; Steamroller and Rush **NOVA**; Guerrilla map control **DAWN**.
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
   - [~] **M** CP combat predictor (**shipped:** record-only #623; squads engage/retreat with it on the six genericbot personalities, `RetreatRatioPct` 0.1–1.0) — Versus-aware Lanchester strength, engage/retreat hysteresis,

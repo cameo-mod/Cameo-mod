@@ -435,6 +435,8 @@ ixian_rocket_raider:
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
@@ -526,6 +528,8 @@ ixian_shockraider:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10

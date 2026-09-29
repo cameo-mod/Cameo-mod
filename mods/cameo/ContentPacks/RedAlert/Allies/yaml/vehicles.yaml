@@ -9,6 +9,8 @@ ra1_allies_lighttank:
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@ChronoArmor: ^ChronoArmor
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
@@ -298,6 +300,8 @@ ra1_allies_ranger:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
@@ -521,6 +525,8 @@ ra1_allies_reconranger:
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@CryoMissiles: ^CryoMissiles
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30

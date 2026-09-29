@@ -76,6 +76,8 @@ terran_vulture:
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
 	Inherits@bot: ^BotAutoDeployTimedAbility
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Vulture
 	Valued:
@@ -416,6 +418,8 @@ terran_cyclone:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Cyclone
 	Valued:

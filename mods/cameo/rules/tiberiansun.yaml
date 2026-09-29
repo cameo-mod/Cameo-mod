@@ -570,6 +570,8 @@ tsldrone:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@snipe: ^DriverKillAndNeutronImmune
 	Inherits@FieldMaintenance: ^FieldMaintenance
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 150
 	Tooltip:

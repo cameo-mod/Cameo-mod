@@ -1071,6 +1071,8 @@ ordos_deviatortank:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_ordos_deviatortank.name
 	Valued:
@@ -1402,6 +1404,8 @@ ordos_raider:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_ordos_raider.name
 	Valued:
@@ -1457,6 +1461,8 @@ ordos_stealthraider:
 	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@D2KSprite: ^D2KPaletteRender
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_ordos_stealthraider.name
 	Valued:
@@ -1504,6 +1510,8 @@ ordos_dustdrone:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_ordos_dustdrone.name
 	Valued:

@@ -11,6 +11,8 @@ light_inf:
 	Inherits@NeedleGuns: ^D2K_NeedleGuns
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	BotRoles:
+		Roles: guerrilla
 	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
 	# which redefines the shield traits keyed to its own upgrade and overwrites the
 	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.

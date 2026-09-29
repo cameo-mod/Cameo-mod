@@ -64,6 +64,8 @@ terran_reaper:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranInfantryWeaponUpgrades
 	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Reaper
 	Valued:
