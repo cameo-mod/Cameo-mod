@@ -145,6 +145,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					}
 				}
 			}
+
+			// AI_ARCHITECTURE.md §2.9 P0: every bot-module field as the engine now holds it (opt-in).
+			BotModuleFieldDump.WriteIfRequested(info);
 		}
 
 		const string WeaponsTrait = "Weapons";
