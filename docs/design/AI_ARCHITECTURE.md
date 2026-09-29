@@ -84,8 +84,9 @@ Also, **the candidate must first be able to play every faction.** On 2026-09-28 
 starting from a bare construction yard still built nothing (the power, barracks and production lists
 lack the D2k and Outpost2 ids; #588 and the next list-rollout roles fix this).
 
-Speed for the runs: `GameSpeed: insane` with the dropdown locked and adaptive speed off (see
-`LESSONS_LEARNED.md`), and later `maximum` once the runs are unattended tuning.
+Speed for the runs: `GameSpeed: maximum` with the dropdown locked and adaptive speed off (see
+`LESSONS_LEARNED.md`) — the maintainer promoted `insane` to `maximum` for all bot tests on
+2026-09-29.
 
 ---
 
@@ -854,7 +855,7 @@ variant dir, seats a `Referee`, and converts `Multi0`/`Multi1` into map-side bot
 map's real `mpspawn` cells. The acceptance A/B is the Frankenstein bot at a tier (`hard`,
 fog-honest, every merged module) vs the `classic` `ModularBot` type (omniscient, pre-merge
 modules, same difficulty scaling) — **not** the `fransbot` type, which is a hidden donor
-(maintainer ruling 2026-09-28) — both spawns (`--repeats 4 --swap-bots`), `gamespeed: insane`
+(maintainer ruling 2026-09-28) — both spawns (`--repeats 4 --swap-bots`), `gamespeed: maximum`
 locked — see `docs/design/AI_MATCH_LOG.md` § "The A/B acceptance protocol". Legacy fixture:
 `mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns)
 remains usable via `--map` —
@@ -869,14 +870,15 @@ no `Player` at all, so the duelists are `Playable: False` + `Bot:` map-side play
 admits them via `IsBot`) with `SpawnStartingUnits` bypassed by preplaced actors; Cameo strips
 `MustBeDestroyed` from most actors so the map re-adds it to the base templates for real
 elimination, and `TimeLimitManager` (locked) is the guaranteed terminator — its timeout ranking
-reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at high game
-speed:** the fixture locks `gamespeed: insane` (10 ms timestep, 4x default) so decisive matches
-resolve ~4x sooner in wall time and batches can be iterated in quick succession — the minutes
-cap then spans 4x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
+reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at the highest game
+speed:** the fixture locks `gamespeed: maximum` (1 ms timestep, 40x default; maintainer ruling
+2026-09-29) so decisive matches resolve at the box's maximum rate and batches can be iterated in
+quick succession — the minutes cap then spans 40x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
 `AdaptiveGameSpeed` pacing slows the target rate under CPU contention rather than janking, so a
 generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
-match timeout. Match records are only comparable within one speed — a `10`-minute insane match
-contains 4x the simulated play of a default-speed one.
+match timeout. Match records are only comparable within one speed — a `10`-minute maximum match
+contains 40x the simulated play of a default-speed one (and series at insane are a different
+population — do not mix them into a verdict).
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.

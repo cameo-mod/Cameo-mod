@@ -1,15 +1,16 @@
 World:
-	# AdaptiveGameSpeed times whole frames against the 10 ms insane budget and
+	# AdaptiveGameSpeed times whole frames against the 1 ms maximum budget and
 	# scales pacing back toward Normal under load — remove it so the batch
-	# actually gets the insane rate (Claude's ai_harvester_gate recipe).
+	# actually gets the maximum rate (Claude's ai_harvester_gate recipe).
 	-AdaptiveGameSpeed:
 	MapOptions:
 		# Conquest stays ON — elimination is a legitimate match end.
 		ShortGameCheckboxEnabled: True
-		# Fixture matches are data collection, not spectacle: run at insane
-		# (10 ms timestep, 4x default) and lock it so the local server's
-		# hard-coded 'option gamespeed default' order is rejected.
-		GameSpeed: insane
+		# Fixture matches are data collection, not spectacle: run at maximum
+		# (1 ms timestep, highest speed; maintainer ruling 2026-09-29) and lock
+		# it so the local server's hard-coded 'option gamespeed default' order
+		# is rejected.
+		GameSpeed: maximum
 		GameSpeedDropdownLocked: True
 	# Hard stalemate cap: locked so every batch match terminates and
 	# NotifyTimerExpired (via ConquestVictoryConditions) decides by experience.

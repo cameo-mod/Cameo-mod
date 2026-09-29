@@ -218,10 +218,10 @@ class RealMapVariantTests(unittest.TestCase):
             self.assertNotIn("\t\tBot:", actors)
             self.assertNotIn("\t\tHomeLocation:", actors)
 
-            # Rules key + file wired (insane speed, locked time cap).
+            # Rules key + file wired (maximum speed, locked time cap).
             self.assertRegex(text, r"(?m)^Rules: rules\.yaml$")
             rules = (dest / "rules.yaml").read_text(encoding="utf-8")
-            self.assertIn("GameSpeed: insane", rules)
+            self.assertIn("GameSpeed: maximum", rules)
             self.assertIn("TimeLimitDefault: 20", rules)
         finally:
             shutil.rmtree(tmp, ignore_errors=True)

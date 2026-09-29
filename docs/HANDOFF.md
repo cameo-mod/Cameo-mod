@@ -220,7 +220,7 @@ cross-referenced; consolidate if they drift.
 ## 2026-09-28 — EMBER: maintainer mandate — bot tests on "A Nuclear Winter", fransbot vs classic A/B
 
 **Mandate:** all bot tests on the tournament map A Nuclear Winter, both spawns,
-`gamespeed=insane`. A/B = `fransbot` (fog-honest Cameo×RV×CA×CN×Fransbot stack)
+`gamespeed=maximum` (insane until 2026-09-29; the maintainer raised the lock to the top rung). A/B = `fransbot` (fog-honest Cameo×RV×CA×CN×Fransbot stack)
 vs the classic bot (the `classic` type — omniscient via `RevealsMap@classic`;
 this baseline ran `hard`, which predates the reveal). Deliverable: the new
 stack wins on smarts, not cheats.
@@ -4792,7 +4792,7 @@ steal `BFRT` rows from the real Battle Fortress.
 
 Maintainer ruling: every bot-vs-bot test runs on the real tournament duel map
 **A Nuclear Winter** (extracted at runtime from the shipped
-`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: insane`.
+`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: maximum`.
 `tools/ai/run_ai_match_batch.py` defaults its template there (old synthetic
 gate fixture remains via `--template` for debugging only).
 

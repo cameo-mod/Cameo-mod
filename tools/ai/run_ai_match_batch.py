@@ -31,10 +31,12 @@ ConquestVictoryConditions decides on elimination and the map's locked
 TimeLimitManager is the stalemate failsafe (a timed-out duel records both
 bots "lost" — an honest draw, not an engine-invented winner).
 
-The fixture locks `gamespeed` to `insane` (10 ms timestep): bot tests run at
-4x target rate so matches can be iterated in quick succession — a decisive
-match resolves ~4x sooner in wall time. The minute-based cap scales to
-time_limit*6000 ticks at that speed, so under CPU contention a timeout match
+The fixture locks `gamespeed` to `maximum` (1 ms timestep, maintainer ruling
+2026-09-29): bot tests run at the highest rate so matches iterate as fast as
+the box allows. The in-game minute cap now spans ~10x more ticks than under the
+old insane lock, so under CPU contention a timeout match is terminated by the
+wall bound below rather than the engine cap — effectively a stalled draw that
+produces no record. The stall detector (debug.log goes quiet after
 can legitimately run long; the stall detector (debug.log goes quiet after
 its first write this run — arming skips the load phase) kills hung matches
 in ~2 minutes while a generous wall bound protects slow-but-live ones. Run
@@ -374,7 +376,7 @@ def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int,
 def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     """Extract a shipped .oramap into a variant dir and convert its Multi slots
     into map-side bot duelists. The referee seat is added for the local client;
-    the duel gate's rules.yaml supplies the locked insane speed, time cap and
+    the duel gate's rules.yaml supplies the locked maximum speed, time cap and
     restored MustBeDestroyed bases that real elimination needs."""
     if dest.exists():
         shutil.rmtree(dest)
@@ -676,11 +678,12 @@ def main() -> int:
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 
-    # The fixture locks gamespeed to insane (10 ms timestep), so the minute
-    # cap is time_limit*6000 ticks — a CPU-contended box ticks well below the
-    # 100 tps target. Bound wall time at a pessimistic sustained 20 tps; the
-    # stall detector in run_match ends genuinely hung matches in ~2 minutes,
-    # so a generous bound here only ever waits on a match still progressing.
+    # The fixture locks gamespeed to maximum (1 ms timestep); the engine-side
+    # time cap therefore spans far more ticks than a CPU-contended box can ever
+    # tick. Keep the deliberate match-depth bound used under the insane lock:
+    # time_limit*6000 ticks at a pessimistic sustained 20 tps — a match that
+    # deep without a winner is a stalemate in practice, and the stall detector
+    # in run_match ends genuinely hung matches in ~2 minutes regardless.
     cap_ticks = args.time_limit * 6000
     timeout = cap_ticks // 20 + 300
 
