@@ -234,9 +234,12 @@ Player:
 			staticaa: SquadManagerBotModuleCA.StaticAntiAirTypes
 			airunit: SquadManagerBotModuleCA.AirUnitsTypes
 			navalunit: SquadManagerBotModuleCA.NavalUnitsTypes
+			artillery: SquadManagerBotModuleCA.ArtilleryTypes
+			firesupport: SquadManagerBotModuleCA.FireSupportTypes
 		# A role is applied after its additions are reviewed and a match with an affected faction (AI_ARCHITECTURE.md 2.8).
 		# refinery + conyard go together: a bot with neither listed keeps unit production paused forever.
-		Apply: harvester, refinery, conyard
+		# artillery + firesupport are actor-declared (^ArtilleryTemplate/^FireSupportTemplate, §12.4a).
+		Apply: harvester, refinery, conyard, artillery, firesupport
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest

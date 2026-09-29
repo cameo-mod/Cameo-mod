@@ -29,6 +29,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Actor types that are valid for naval squads.")]
 		public readonly HashSet<string> NavalUnitsTypes = new HashSet<string>();
 
+		[Desc("Artillery squad members by ROLE: BotRoleSets fills this from the actor-declared",
+			"`artillery` role (the ^ArtilleryTemplate/^ArtilleryTankTemplate actors). AI_ARCHITECTURE.md",
+			"12.4a: artillery squads are these units ONLY - not any unit that reaches a range threshold.")]
+		public readonly HashSet<string> ArtilleryTypes = new HashSet<string>();
+
+		[Desc("Fire-support escort members by ROLE: BotRoleSets fills this from the actor-declared",
+			"`firesupport` role (the ^FireSupportTemplate actors). 12.4a: they form their own squads",
+			"with tanks and protect the artillery - never assault or raid units.")]
+		public readonly HashSet<string> FireSupportTypes = new HashSet<string>();
+
+		[Desc("Frontline escorts a fire-support squad pulls per artillery unit it protects.")]
+		public readonly int FireSupportEscortPerArtillery = 2;
+
 		[Desc("Actor types that are excluded from ground attacks.")]
 		public readonly HashSet<string> AirUnitsTypes = new HashSet<string>();
 
@@ -261,7 +274,8 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
 		public readonly bool UseRiskRouting = true;
 
-		[Desc("Ground units whose maximum weapon range reaches this many cells split into artillery squads that hang back behind assault squads (AI_FRANSBOT_RESEARCH.md 6f). Negative disables artillery squads.")]
+		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership now comes from ArtilleryTypes,",
+			"the role-derived list - this field is ignored. Kept so existing yaml entries load silently.")]
 		public readonly int ArtilleryMinRangeCells = 10;
 
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
@@ -430,6 +444,7 @@ namespace OpenRA.Mods.CA.Traits
 				SquadCAType.Harass => Info.HarassPriorityTags,
 				SquadCAType.Protection => Info.ProtectionPriorityTags,
 				SquadCAType.Support => Info.SupportPriorityTags,
+				SquadCAType.FireSupport => Info.SupportPriorityTags,
 				_ => Info.AssaultPriorityTags,
 			};
 		}
@@ -530,17 +545,21 @@ namespace OpenRA.Mods.CA.Traits
 			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
 		}
 
-		// 6f: rules-derived artillery classification — a mobile ground unit whose
-		// weapons reach ArtilleryMinRangeCells. No actor ids, so every faction's
-		// artillery qualifies automatically (CN's tag-derivation rule).
+		// 6f + 12.4a: role-derived artillery classification - members of the artillery
+		// role (ArtilleryTypes). The range rule this replaced is kept as MaximumEnabledRange
+		// for the combat predictor and other callers.
 		internal bool IsArtilleryUnit(Actor a)
 		{
-			if (Info.ArtilleryMinRangeCells < 0 || a == null
-				|| a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
-				return false;
-
-			return MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+			return a != null && !a.Info.HasTraitInfo<AircraftInfo>() && !a.Info.HasTraitInfo<BuildingInfo>()
+				&& Info.ArtilleryTypes.Contains(a.Info.Name);
 		}
+
+		// A ship is a `naval` locomotor (the navalunit role's rule); hover and amphibious
+		// units move on land and stay ground units (12.4a). NavalUnitsTypes stays as a
+		// belt for naval actors carried on other locomotors - a ship must never reach a
+		// ground or air squad even when the list misses it.
+		internal bool IsNavalUnit(Actor a) =>
+			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
 		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
@@ -906,7 +925,8 @@ namespace OpenRA.Mods.CA.Traits
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
 				&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
-				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()).ToList())
+				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
+				&& !IsNavalUnit(u.Actor)).ToList())
 			{
 				protectSq.Units.Add(u);
 				unitsHangingAroundTheBase.Remove(u);
@@ -950,6 +970,8 @@ namespace OpenRA.Mods.CA.Traits
 					guerrilla.Units.Add(u);
 				else if (Info.HarasserTypes.Contains(name))
 					AddToHarassSquad(bot, u);
+				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
+					releasedFs.Units.Add(u);
 				else
 					unitsHangingAroundTheBase.Add(u);
 			}
@@ -1241,6 +1263,14 @@ namespace OpenRA.Mods.CA.Traits
 			return guerrillas.Count < GuerrillaSquadCap(Info, World.WorldTick) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
 		}
 
+		// 12.4a: one fire-support squad is enough - the role's members plus their tank
+		// escorts trail the artillery squad and fight whatever threatens it.
+		SquadCA OpenFireSupportSquad(IBot bot)
+		{
+			var open = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
+			return open ?? RegisterNewSquad(bot, SquadCAType.FireSupport);
+		}
+
 		/// <summary>The guerrilla squad cap at `tick`: MaxGuerrillaSquads, ramping linearly to MaxGuerrillaSquadsLate.</summary>
 		public static int GuerrillaSquadCap(SquadManagerBotModuleCAInfo info, int tick)
 		{
@@ -1285,11 +1315,29 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var a in newUnits)
 			{
-				var guerrillaForce = Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll ? OpenGuerrillaSquad(bot) : null;
-				if (guerrillaForce != null)
+				// 12.4a naval guard FIRST: a `naval` locomotor ships off to a Naval
+				// squad before any other branch - a ship missing from NavalUnitsTypes
+				// can never land in a guerrilla/ground squad or the idle pool.
+				if (IsNavalUnit(a))
 				{
-					guerrillaForce.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
+					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
+					var matchingNavalSquadFound = false;
+
+					foreach (var navalSquad in navalSquads)
+					{
+						if (navalSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						{
+							navalSquad.Units.Add(new UnitWposWrapper(a));
+							matchingNavalSquadFound = true;
+							break;
+						}
+					}
+
+					if (!matchingNavalSquadFound)
+					{
+						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
+						newNavalSquad.Units.Add(new UnitWposWrapper(a));
+					}
 				}
 				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
 				{
@@ -1314,26 +1362,16 @@ namespace OpenRA.Mods.CA.Traits
 						newAirSquad.NewUnits.Add(a);
 					}
 				}
-				else if (Info.NavalUnitsTypes.Contains(a.Info.Name))
+				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
 				{
-					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
-					var matchingNavalSquadFound = false;
-
-					foreach (var navalSquad in navalSquads)
-					{
-						if (navalSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
-						{
-							navalSquad.Units.Add(new UnitWposWrapper(a));
-							matchingNavalSquadFound = true;
-							break;
-						}
-					}
-
-					if (!matchingNavalSquadFound)
-					{
-						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
-						newNavalSquad.Units.Add(new UnitWposWrapper(a));
-					}
+					// 12.4a: fire-support units form their own squads and never raid.
+					fsSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
+				}
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				{
+					guerrillaForce.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
 				else if (Info.HarasserTypes.Contains(a.Info.Name))
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
@@ -1451,8 +1489,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
+				// 12.4a: fire-support members never raid either - they route to the
+				// screen squad (release/load paths can leave them in the pool).
 				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
-				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)));
+				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
+				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)));
 				if (missionTarget != null)
 					attackForce.Target = Target.FromActor(missionTarget);
 				else if (missionFrozenTarget != null)
@@ -1469,6 +1512,38 @@ namespace OpenRA.Mods.CA.Traits
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
+				// 12.4a: the fire-support squad protects the artillery - it trails the
+				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
+				// tanks per artillery unit out of the assault.
+				var fsSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
+				if (fireSupportUnits.Count > 0 && fsSquad == null)
+					fsSquad = RegisterNewSquad(bot, SquadCAType.FireSupport);
+				if (fsSquad != null)
+				{
+					foreach (var u in fireSupportUnits)
+						fsSquad.Units.Add(u);
+
+					var artilleryParent = Squads.Where(s => s.Type == SquadCAType.Artillery && s.IsValid)
+						.MaxByOrDefault(s => s.Units.Count);
+					if (artilleryParent != null)
+					{
+						fsSquad.Parent = artilleryParent;
+						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
+							attackForce.Units.Count);
+						foreach (var escort in attackForce.Units
+							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name))
+							.OrderByDescending(u => UnitValue(u.Actor))
+							.Take(escortsNeeded)
+							.ToList())
+						{
+							attackForce.Units.Remove(escort);
+							fsSquad.Units.Add(escort);
+						}
+					}
+					else if (fsSquad.Parent == null || !fsSquad.Parent.IsValid)
+						fsSquad.Parent = attackForce.IsValid ? attackForce : null;
+				}
 
 				// 6f: support squads trail the newest assault, healing/repairing in its wake.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
@@ -1544,7 +1619,8 @@ namespace OpenRA.Mods.CA.Traits
 				// to Rush/Guerrilla/etc. — dual membership and competing orders.
 				var draftable = unitsHangingAroundTheBase
 					.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name) && u.Actor.Info.HasTraitInfo<AttackBaseInfo>()
-						&& !u.Actor.Info.HasTraitInfo<BuildingInfo>() && !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>())
+						&& !u.Actor.Info.HasTraitInfo<BuildingInfo>() && !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
+						&& !IsNavalUnit(u.Actor))
 					.ToList();
 
 				foreach (var u in draftable)

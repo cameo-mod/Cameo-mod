@@ -14191,3 +14191,42 @@ build prereqs. New-CN modules (MasterAi, Scout, Beacon, personalities,
 counter-demand, HumanPace budget, AdaptiveCounterProduction) and all Fransbot
 modules stay `genericbot`/`enable-fransbot` only — the classic bot never ticks
 them. Fluent `bot_ai.classic` added; AI_MODULE_MAP regenerated (75 instances).
+
+# 2026-09-29 — NOVA: §12.4a squad membership interlocks (`nova/squad-membership-124a`)
+
+**Squad classification reorder** (`SquadManagerBotModuleCA.FindNewUnits`): naval
+locomotor check now runs FIRST — a `Mobile.Locomotor == "naval"` unit can never
+land in a guerrilla/ground squad or the idle pool even when `NavalUnitsTypes`
+misses it (locomotor is authoritative, the list stays as belt). New order:
+naval → air → **firesupport** → guerrilla → harasser → support → idle pool.
+
+**FireSupport squad type** (`SquadCAType.FireSupport`, appended last — serialize
+is name-based so saves stay compatible): members come from the actor-declared
+`firesupport` role (`^FireSupportTemplate`), applied via `BotRoleSets.Targets` →
+`SquadManagerBotModuleCA.FireSupportTypes`. They never raid: a `ReleaseDefenders`
+branch routes released FS back to their squad, and the CreateAttackForce pool
+split diverts stray FS (load/release edge paths) out of the assault into the
+screen squad. `OpenFireSupportSquad` keeps one live squad.
+
+**Escort + parenting** (`CreateAttackForce`): the FS squad parents to the biggest
+artillery squad (fallback: the new assault) and pulls
+`FireSupportEscortPerArtillery` (=2) highest-value escorts per artillery piece
+OUT of the assault — the tank screen §12.4a specifies. `PriorityTagsFor` maps it
+to `SupportPriorityTags`. New `FireSupportUnitsIdleStateCA` re-attaches to the
+biggest artillery squad (else an assault), holds at the protected squad's
+position within `SupportFollowRangeCells`, AttackMoves back when pushed out —
+escorts fight whatever threatens the parent instead of walking through it.
+
+**Artillery by role, not range**: `IsArtilleryUnit` is now
+`ArtilleryTypes.Contains` (the `artillery` role off `^ArtilleryTemplate`/
+`^ArtilleryTankTemplate`) — mid-range tanks can no longer be drafted into
+artillery squads just for reaching a range threshold. `ArtilleryMinRangeCells`
+is DEPRECATED (kept for yaml load-compat); `MaximumEnabledRange` stays for the
+combat predictor.
+
+**Naval isolation completed**: `ProtectOwn` and `PrepositionDefenceTick` defence
+drafts now exclude `IsNavalUnit` — ships can no longer be pulled into ground
+protection squads.
+
+Boot-gate PASS (menu marker, 0 new exceptions); fog audit PASS (170 sites).
+`git add -A` never used; scoped paths only.
