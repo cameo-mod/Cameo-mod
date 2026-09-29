@@ -19,6 +19,11 @@ relational, `~`, unary `-`) are treated as undecidable: the armament is
 included and the actor is counted in the approximation report.
 
 Usage: python tools/ai/derive_roles_preview.py [--role fighter] [--show 30] [--compare]
+                                            [--allow-degraded]
+
+Requires a COMPLETE tree (engine/ sources present — same completeness rule as
+tools/audit/run_all.sh). Without them it refuses (exit 2) rather than printing
+numbers a missing corpus would falsify.
 
 Resolving every actor's inherit chain takes a few minutes on the full
 ruleset (~3.5k actors) — still far cheaper than booting a match for
@@ -71,11 +76,6 @@ def trait_table() -> tuple[dict[str, str], dict[str, dict[str, tuple[str, str | 
     """
     parents: dict[str, str] = {}
     decls: dict[str, dict[str, tuple[str, str | None]]] = {}
-    engine_present = (REPO / "engine" / "OpenRA.Mods.Common").is_dir()
-    if not engine_present:
-        print("warning: engine/ sources not in this tree — trait base-class "
-              "expansion is degraded (engine-side subclasses won't match their "
-              "base trait names); run from a complete checkout")
     cls_re = re.compile(r"class\s+(\w+Info)\s*:\s*([^\n{]+)")
     fld_re = re.compile(
         r"\bpublic\s+(?:readonly\s+)?([\w<>\[\],.]+)\s+(\w+)\s*(?:=\s*([^;]+?))?\s*;")
@@ -390,6 +390,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--role", help="only report this role")
     ap.add_argument("--show", type=int, default=40, help="members to print per role")
+    ap.add_argument("--allow-degraded", action="store_true",
+                    help="run without engine/ sources (results are NOT faithful: "
+                         "engine-side trait subclasses and field declarations are invisible)")
     ap.add_argument("--compare", action="store_true",
                     help="also diff each role against the written Targets lists")
     args = ap.parse_args()
@@ -408,6 +411,22 @@ def main() -> int:
         np_ = [parse_predicates(p) for p in csv(not_f.get(role, ""))]
         preds[role] = {"has": hp, "not": np_}
         field_keys |= {(t, f) for t, f, _, _ in hp} | {(t, f) for t, f, _, _ in np_}
+
+    # A tree without engine/ sources cannot answer the two questions this gate
+    # exists for — engine-side trait subclasses (AttackAircraft -> AttackBase)
+    # and engine field declarations (Aircraft.CanHover) are both invisible, so
+    # every report would be wrong AND the typo guard would fire on its own
+    # missing evidence. Refuse like tools/audit/environment.py diverts run_all;
+    # --allow-degraded is the documented escape hatch.
+    if not (REPO / "engine" / "OpenRA.Mods.Common").is_dir() and not args.allow_degraded:
+        print("refusing: engine/ sources not in this tree — derived memberships "
+              "would be wrong (engine trait subclasses and fields are invisible). "
+              "Run from a complete checkout, or pass --allow-degraded for a "
+              "known-degraded result.", file=sys.stderr)
+        return 2
+    if args.allow_degraded:
+        print("warning: --allow-degraded — engine/ sources may be missing; "
+              "results are not faithful", file=sys.stderr)
 
     parents, decls = trait_table()
     actors, field_seen = collect_actors(miniyaml.Ruleset(str(REPO)), parents, decls, field_keys)

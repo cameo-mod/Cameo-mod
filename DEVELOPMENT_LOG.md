@@ -1,3 +1,23 @@
+# 2026-09-29 - Devin (EMBER): CA-5 role split corrected per #648 review + preview refuses degraded trees
+
+Two fixes off Claude's review of #648:
+
+1. **§12.4 semantics:** `gunship` no longer excludes air-capable aircraft —
+   the hover+ground claim wins for dual-purpose helicopters (Orca, Apache,
+   Hind — the units that must hover over the frontline for §12.8 CAS).
+   `fighter` gained `DeriveNotField: Aircraft.CanHover any True`, so the
+   75-strong multirole helicopter fleet lands in gunship; the three
+   hovering pure-A2A units (zerg_devourer, zerg_scourge, terran_valkyrie)
+   keep `fighter` via explicit `BotRoles` tags in their ContentPacks
+   (explicit roles bypass DeriveNot* — BotRoleSets.cs:64). Faithful
+   re-measure: fighter 35 / gunship 78 / bomber 8, disjoint.
+2. **Tool integrity:** `derive_roles_preview.py` now refuses (exit 2)
+   when `engine/` sources are absent — a degraded tree can't see
+   engine-side trait subclasses or field declarations, so every role
+   report was wrong AND the typo guard fired on its own missing
+   evidence. `--allow-degraded` is the documented escape hatch
+   (same pattern as `tools/audit/environment.py` diverting run_all).
+
 # 2026-09-29 - Devin (EMBER): fixture speed raised insane -> maximum (maintainer order)
 
 The duel-gate fixtures and harness docs now lock `MapOptions.GameSpeed:

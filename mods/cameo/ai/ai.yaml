@@ -216,14 +216,19 @@ Player:
 			staticaa: Building, AttackBase
 			airunit: Aircraft, AttackBase
 			navalunit: Mobile, AttackBase
-			# CA-5 doctrine split (AI_ARCHITECTURE 12.4): fighters carry an air-to-air
-			# weapon, gunships can loiter (CanHover) and strike ground only, bombers
-			# are the ground-only strikers that must egress. Report-only for now;
+			# CA-5 doctrine split (AI_ARCHITECTURE 12.4): gunships are the hovering
+			# ground-strikers (CanHover + a ground weapon — helicopters win this
+			# claim even when they can also hit air, per the 12.4 ruling), fighters
+			# are the non-hovering air-to-air capable, bombers are non-hovering
+			# ground-only strikers that must egress. The three hovering pure-A2A
+			# units (zerg_devourer, zerg_scourge, terran_valkyrie) carry explicit
+			# BotRoles: fighter tags in their ContentPacks — CanHover excludes them
+			# from derivation but §12.4 classes them fighters. Report-only for now;
 			# air transports stay unroled. Measured on the resolved ruleset with
-			# tools/ai/derive_roles_preview.py: fighter 106 / gunship 7 / bomber 8,
-			# disjoint, 29 unroled air — ra2_soviets_siegechopper stays unroled
-			# because its ground armament sits behind a deploy condition, exactly
-			# as the engine's NoVariables evaluation sees it.
+			# tools/ai/derive_roles_preview.py: fighter 35 / gunship 78 / bomber 8,
+			# disjoint — Deploy-gated armaments evaluate false under NoVariables
+			# exactly as the engine sees them, so e.g. ra2_soviets_siegechopper
+			# stays unroled until its deploy condition is granted.
 			fighter: Aircraft, AttackBase
 			gunship: Aircraft, AttackBase
 			bomber: Aircraft, AttackBase
@@ -240,7 +245,7 @@ Player:
 		# builder picks a refinery at random among RefineryTypes. Land-and-water ones stay.
 		DeriveNotField:
 			refinery: Building.TerrainTypes only Water
-			gunship: Weapons.ValidTargets any Air|Aircraft
+			fighter: Aircraft.CanHover any True
 			bomber: Aircraft.CanHover any True, Weapons.ValidTargets any Air|Aircraft
 		Targets:
 			harvester: HarvesterBotModuleCA.HarvesterTypes, ResourceMapBotModule.HarvesterTypes, SquadManagerBotModuleCA.ExcludeFromSquadsTypes

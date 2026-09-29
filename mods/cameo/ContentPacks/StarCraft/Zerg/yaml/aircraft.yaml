@@ -371,6 +371,10 @@ zerg_devourer:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
 	Inherits@armor: ^ZergFlyerArmorUpgrades
+	# AI_ARCHITECTURE §12.4: a hovering pure-A2A unit — the CA-5 fighter derivation
+	# excludes CanHover, so the role is declared here (report-only role today).
+	BotRoles:
+		Roles: fighter
 	Tooltip:
 		Name: Devourer
 	Valued:
@@ -419,6 +423,10 @@ zerg_scourge:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
 	Inherits@armor: ^ZergFlyerArmorUpgrades
+	# AI_ARCHITECTURE §12.4: a hovering pure-A2A unit — the CA-5 fighter derivation
+	# excludes CanHover, so the role is declared here (report-only role today).
+	BotRoles:
+		Roles: fighter
 	SelectionDecorations:
 	Tooltip:
 		Name: Scourge
