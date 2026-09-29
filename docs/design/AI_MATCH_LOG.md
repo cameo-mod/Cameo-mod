@@ -258,15 +258,15 @@ honest draw. The referee slot exists only to satisfy the local server's
 non-empty-slots start rule; it is `NonCombatant` by map declaration, gets no
 starting units, and is invisible to the records.
 
-Operational semantics measured live (2026-09-28): the fixture locks
-`gamespeed: insane` via `MapOptions` — the maintainer's convention for bot
+Operational semantics measured live (2026-09-28; speed raised 2026-09-30): the fixture locks
+`gamespeed: maximum` via `MapOptions` — the maintainer's convention for bot
 matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
-by `ticksPerSecond`, so insane quadruples the tick cap while achieved speed
-stays whatever the box sustains; timeouts are therefore bounded by a
-`debug.log` stall detector (a live match writes every few seconds) plus a
-speed-aware wall backstop, never a tight fixed timeout. Insane shortens
-elimination matches only — a timeout match is wall-normalized at any speed,
-so drop `timelimit` when a quick pipeline check needs a fast draw. An `exit=1` with zero
+by `ticksPerSecond`, so maximum raises the tick cap 40x over default while
+achieved speed stays whatever the box sustains; timeouts are therefore bounded
+by a `debug.log` stall detector (a live match writes every few seconds) plus a
+speed-aware wall backstop, never a tight fixed timeout. Game speed shortens
+elimination matches only — drop `timelimit` when a quick pipeline check needs
+a fast draw. An `exit=1` with zero
 records and no exception is an external `TerminateProcess` — the engine only
 returns 0/-1 — so the harness retries a no-records attempt once and appends
 one durable line per attempt to `batch_results.jsonl`. Ally/opponent in the
@@ -302,8 +302,9 @@ The matchup axis is the franken-bot vs the classic bot:
 
 Acceptance criterion: **the candidate must win the series from both
 spawns** — run `--repeats 4 --swap-bots` minimum (repeat parity alternates
-which bot occupies which `mpspawn`). `gamespeed` stays locked at `insane`
-(the maintainer's "maximum game speed" for bot matches). A timed-out match
+which bot occupies which `mpspawn`). `gamespeed` stays locked at `maximum`
+(the maintainer's "maximum game speed" for bot matches — the literal top
+ladder tier since 2026-09-30). A timed-out match
 records both sides `lost`, never a fabricated winner.
 
 > ⚠ Validity note (2026-09-28, #611): before `IsEligible` admitted
@@ -317,7 +318,7 @@ Under the hood the harness extracts the `.oramap` into a variant dir, adds
 the `Referee` seat for the local client, converts `Multi0`/`Multi1` into
 map-side bots (`Playable: False` + `Bot:` + `HomeLocation` from the map's
 `mpspawn` actors), injects each faction's `StartingUnits` group at the spawn
-cell, and layers the duel-gate `rules.yaml` (insane speed, locked time cap,
+cell, and layers the duel-gate `rules.yaml` (maximum speed, locked time cap,
 restored `MustBeDestroyed`). The packaged map is never modified.
 
 Baseline measured 2026-09-28: `hard` beat `fransbot` on the first clean
