@@ -4941,6 +4941,11 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
   unit stats are never learned. Every learned entry is fingerprinted with the stats it was trained
   on and is discounted per unit when they change; serious training starts after the balance freeze
   and repeats per release. Design: `AI_ARCHITECTURE.md` §6.4.
+* **The weights combine (maintainer 2026-09-29):** a general per-faction file that is always
+  active × a weighted geometric mean of the per-enemy-faction counters × learned per-ally synergy
+  plus in-match gap filling × the in-match trade ratio. The main (hate) target's share is at least
+  max(1/2, 2/(n+1)), and the rest is split by a learnable blend of equal and threat shares.
+  Design: `AI_ARCHITECTURE.md` §6.4a.
 * **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
   host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
   claims, human-ally beacons) — the same no-cheat rule as the Director.

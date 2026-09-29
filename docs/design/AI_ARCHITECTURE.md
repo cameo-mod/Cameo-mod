@@ -654,6 +654,9 @@ Warcraft II share no family template (measured), so each race's building base ge
     weight(u) = mix[personality][role(u)] / |loaded units of that faction in role(u)|
                 × prior(own faction, enemy faction, u) × trade(u, this match)
 
+(With several enemies or allies `prior` becomes General × Enemies × Allies, and a team-gap factor
+joins it: §6.4a.)
+
 * `role(u)` comes from §12.4 (frontline, anti-infantry, anti-armour, artillery, AA, air, scout, …).
 * `mix` is one small table per personality, roles × shares, with **no unit ids**. That is how the
   personalities differ without copying a unit list. It starts calibrated from today's
@@ -1094,6 +1097,43 @@ balance target fits noise", Stage E above). The design therefore:
   starts after the balance freeze and is repeated once per release, whose learned files ship with it.
 * **Guard:** an audit reports how much of the committed learned evidence the current rules have
   invalidated, so a big rebalance shows up as "retrain before release".
+
+### 6.4a Combining the weights: general × enemies × allies (maintainer rulings 2026-09-29)
+
+This generalises the single-enemy `prior(own faction, enemy faction, u)` of §2.9's production
+weight to any number of enemies and allies; `mix` and the role split of §2.9 are unchanged.
+Every learned value is a **multiplier that defaults to 1**, and the layers combine in log space,
+where a geometric mean is a weighted average:
+
+    prior(u)   = General(own faction, u) × Enemies(u) × Allies(u)
+    weight(u)  = mix[personality][role(u)] / |role(u)| × prior(u) × Gap(u) × trade(u)      (§2.9)
+    Enemies(u) = exp( Σ_e α_e · ln M(u | e) )        Σ α_e = 1
+    Allies(u)  = exp( λ(n_allies) · Σ_a β_a · ln S(u | a) )        Σ β_a = 1
+
+* **General**: one file per own faction, trained against everyone and **always active**. When a
+  matchup has little data its `M` shrinks to 1, so the bot falls back to General automatically.
+* **Enemies**: the per-enemy-faction counter multipliers `M(u | e)`, combined as a **weighted
+  geometric mean**, so no single matchup can dominate a multi-faction game. **The share α of the
+  main (hate) target combines all three proposals** (maintainer: "a combination of all of them"):
+  1. a **floor** that keeps it dominant: `α_main ≥ max(1/2, 2/(n+1))`. That is 100 % with one
+     enemy, the double vote at 67 % with two, and 50 % from three enemies up, so it is never
+     diluted in a big game;
+  2. the **rest**, `1 − α_main`, is split among the other enemies by
+     `(1 − γ) · equal share + γ · threat share`. Threat is fog-honest: remembered enemy army
+     value near our assets. A quiet enemy still counts, and the one attacking us counts more;
+  3. **γ and the floor are learnable** (route 2, §6.4), so training finds how reactive to be.
+* **Allies** (ruled: **learned + fill gaps**): the trained synergy multipliers `S(u | a)` per
+  (own faction, ally faction) come from team-game training; that needs a 2v2 variant of the duel harness, built with
+  **TC** (Team Commander, ROADMAP; `AI_DEEP_RESEARCH.md` §9).
+  `β` splits equally among allies, and `λ` grows with the number of allies (the team's say in
+  what we build grows with the team). With no allies `Allies(u) = 1`.
+* **Gap** (the "fill gaps" half of the same ruling) is in-match, not learned from past games: a
+  role (§12.4) the whole team, us included, lacks gets a boost, bounded like every other factor.
+  Allied armies are visible, so this is not a cheat. With no allies it is 1.
+* **trade**: the live in-match trade ratio per role or type (§12.3), as in §2.9.
+
+Every factor is trained separately (routes 1–3, §6.4), bounded, fingerprinted against balance
+changes, and applied only inside the host's bot. With no data at all the bot plays today's defaults.
 
 **The training loop (dev only).**
 1. **League batch:** past masters, `classic` and the exploiters (LG), several tournament maps,
