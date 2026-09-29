@@ -16,7 +16,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery, Support, Harass }
+	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery, Support, Harass, FireSupport }
 
 	public class SquadCA
 	{
@@ -84,6 +84,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					break;
 				case SquadCAType.Support:
 					FuzzyStateMachine.ChangeState(this, new SupportUnitsIdleStateCA(), true);
+					break;
+				case SquadCAType.FireSupport:
+					FuzzyStateMachine.ChangeState(this, new FireSupportUnitsIdleStateCA(), true);
 					break;
 			}
 		}

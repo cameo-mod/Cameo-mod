@@ -14258,3 +14258,48 @@ build prereqs. New-CN modules (MasterAi, Scout, Beacon, personalities,
 counter-demand, HumanPace budget, AdaptiveCounterProduction) and all Fransbot
 modules stay `genericbot`/`enable-fransbot` only — the classic bot never ticks
 them. Fluent `bot_ai.classic` added; AI_MODULE_MAP regenerated (75 instances).
+
+# 2026-09-29 — NOVA: §12.4a squad membership interlocks (`nova/squad-membership-124a`)
+
+**Squad classification reorder** (`SquadManagerBotModuleCA.FindNewUnits`): naval
+locomotor check now runs FIRST — a `Mobile.Locomotor == "naval"` unit can never
+land in a guerrilla/ground squad or the idle pool even when `NavalUnitsTypes`
+misses it (locomotor is authoritative, the list stays as belt). New order:
+naval → air → **firesupport** → guerrilla → harasser → support → idle pool.
+
+**FireSupport squad type** (`SquadCAType.FireSupport`, appended last — serialize
+is name-based so saves stay compatible): members come from the actor-declared
+`firesupport` role (`^FireSupportTemplate`), applied via `BotRoleSets.Targets` →
+`SquadManagerBotModuleCA.FireSupportTypes`. They never raid: a `ReleaseDefenders`
+branch routes released FS back to their squad, and the CreateAttackForce pool
+split diverts stray FS (load/release edge paths) out of the assault into the
+screen squad. `OpenFireSupportSquad` keeps one live squad.
+
+**Escort + parenting** (`CreateAttackForce`): the FS squad parents to the biggest
+artillery squad (fallback: the new assault) and pulls
+`FireSupportEscortPerArtillery` (=2) highest-value escorts per artillery piece
+OUT of the assault — the tank screen §12.4a specifies. `PriorityTagsFor` maps it
+to `SupportPriorityTags`. New `FireSupportUnitsIdleStateCA` re-attaches to the
+biggest artillery squad (else an assault), holds at the protected squad's
+position within `SupportFollowRangeCells`, AttackMoves back when pushed out —
+escorts fight whatever threatens the parent instead of walking through it.
+
+Escort quality note (EMBER review #634): highest-value pick is deliberate —
+an escort must WIN the fight against flankers, not just soak hits, and the
+screened artillery is itself expensive. The cost is assault mass; if the A/B
+shows the main push starving, `FireSupportEscortPerArtillery` is the knob.
+
+**Artillery by role, not range**: `IsArtilleryUnit` prefers
+`ArtilleryTypes.Contains` when the role list is populated (the `artillery`
+role off `^ArtilleryTemplate`/`^ArtilleryTankTemplate`) and falls back to the
+old `ArtilleryMinRangeCells` range rule when it is empty — `@classic` keeps
+its written config byte-identical (the #633 convention: the A/B reference does
+not move). The apply itself stays report-only until #633's @instance-scoped
+Targets grammar lands and can fill only the six personalities.
+
+**Naval isolation completed**: `ProtectOwn` and `PrepositionDefenceTick` defence
+drafts now exclude `IsNavalUnit` — ships can no longer be pulled into ground
+protection squads.
+
+Boot-gate PASS x2 (menu marker, 0 new exceptions); fog audit PASS (170 sites). Apply left report-only so the FS/artillery-role machinery ships INERT - naval isolation is the only live behavior delta.
+`git add -A` never used; scoped paths only.
