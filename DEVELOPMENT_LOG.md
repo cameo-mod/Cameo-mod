@@ -1,3 +1,15 @@
+# 2026-09-29 — Devin (NOVA): CA-4 donor harvest — chokepoint stall lead
+
+- Fransbot donor evaluation (FransGroundCommanderBotModule, ~4.2k lines): its marcher cohesion uses a maximum
+  lead vs the trailing committed unit plus a TEMPORARY wider lead while the trailer is stalled in a chokepoint;
+  normal cohesion resumes the tick it moves. Also noted for later harvest: per-unit formation cells (vs shared
+  centroid target), PreMoveAssembly percent+timeout (richer spatial analog of the 12.5 gate), stale-progress
+  watchdog, InfantrySquadValuePercent value weighting, recovery slots clear of ore.
+- Shipped the chokepoint rule now: FormationMaxStalledLeadCells (default 12) replaces FormationMaxLeadCells (6)
+  as the hold bound while the rear frontline member's CenterPosition has not changed for >=25 ticks; reverts
+  the tick it moves. Prevents the vanguard freezing while the rear paths around an obstacle.
+- Verify: build 0 errors.
+
 # 2026-09-29 — Devin (NOVA): CA-4 formation movement (12.7)
 
 - Branch nova/ca4-formation (worktree C:/tmp/nova-ca4), stacked on nova/ca3-stage-gate (0b9cf0bda) — role
