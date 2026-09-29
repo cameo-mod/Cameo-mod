@@ -125,6 +125,9 @@ the fog sequencing.
     from weapons, P6 learned unit weights (after CA-3), P7 packs hold only exceptions. **Claude.**
   - [ ] **S** §2.8b derive `AirSquadTargetTypes` from weapons (fixes `@guerrilla`'s missing rows). **Claude.**
   - [ ] **M** §2.8b `UnitsToBuild` weights from stats + role mix, after CA-3 (ruled). **NOVA** + Claude.
+  - [ ] **L** §6.4 learn every number between matches (ruled 2026-09-29): L0 per-bot `Info` copy +
+    learned-file reader (desync test), L1 measured priors, L2 score + knobs, L3 knob training,
+    L4 personality/opening bandit, L5 raw numbers. Dev builds train, release reads. **Claude.**
   - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
     (§12.4a rule 3). **Claude.**
   - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
