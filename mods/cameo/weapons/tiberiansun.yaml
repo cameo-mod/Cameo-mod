@@ -111,6 +111,12 @@
 			Medium: 85
 			Heavy: 100
 			Concrete: 60
+			CyborgLight: 43
+			AntiAirVehicle: 80
+			ShipLight: 70
+			ShipMedium: 71
+			AntiAirShip: 70
+			SubmarineLight: 84
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew14.aud
@@ -305,6 +311,21 @@ TS90mmDep:
 			Helicopter: 67
 			Bomber: 57
 			Fighter: 51
+			FlyingInfantry: 89
+			CyborgLight: 99
+			CyborgMedium: 103
+			CyborgHeavy: 106
+			CyborgHeroic: 105
+			AntiAirInfantry: 77
+			AntiAirVehicle: 132
+			AntiAirBuilding: 125
+			ShipLight: 125
+			ShipMedium: 131
+			ShipHeavy: 128
+			ShipSuperheavy: 129
+			AntiAirShip: 128
+			SubmarineLight: 132
+			SubmarineHeavy: 132
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 2000
 		PercentageSpread: 50
@@ -346,6 +367,21 @@ TS90mmDep:
 			Helicopter: 64
 			Bomber: 58
 			Fighter: 44
+			FlyingInfantry: 80
+			CyborgLight: 87
+			CyborgMedium: 100
+			CyborgHeavy: 120
+			CyborgHeroic: 107
+			AntiAirInfantry: 68
+			AntiAirVehicle: 127
+			AntiAirBuilding: 132
+			ShipLight: 110
+			ShipMedium: 148
+			ShipHeavy: 125
+			ShipSuperheavy: 138
+			AntiAirShip: 128
+			SubmarineLight: 144
+			SubmarineHeavy: 147
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TSLaserShieldChip: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -370,6 +406,21 @@ TS90mmDep:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+			FlyingInfantry: 1
+			CyborgLight: 1
+			CyborgMedium: 1
+			CyborgHeavy: 1
+			CyborgHeroic: 1
+			AntiAirInfantry: 1
+			AntiAirVehicle: 1
+			AntiAirBuilding: 1
+			ShipLight: 1
+			ShipMedium: 1
+			ShipHeavy: 1
+			ShipSuperheavy: 1
+			AntiAirShip: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -476,6 +527,21 @@ TSLaser90mmDep:
 			Helicopter: 67
 			Bomber: 57
 			Fighter: 51
+			FlyingInfantry: 89
+			CyborgLight: 99
+			CyborgMedium: 103
+			CyborgHeavy: 106
+			CyborgHeroic: 105
+			AntiAirInfantry: 77
+			AntiAirVehicle: 132
+			AntiAirBuilding: 125
+			ShipLight: 125
+			ShipMedium: 131
+			ShipHeavy: 128
+			ShipSuperheavy: 129
+			AntiAirShip: 128
+			SubmarineLight: 132
+			SubmarineHeavy: 132
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 2000
 		PercentageSpread: 50
@@ -525,6 +591,21 @@ TSLaser90mmDep:
 			Fighter: 12
 			None: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 15
+			CyborgHeavy: 19
+			CyborgHeroic: 23
+			AntiAirInfantry: 12
+			AntiAirVehicle: 15
+			AntiAirBuilding: 21
+			ShipLight: 14
+			ShipMedium: 18
+			ShipHeavy: 22
+			ShipSuperheavy: 24
+			AntiAirShip: 16
+			SubmarineLight: 19
+			SubmarineHeavy: 23
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -602,6 +683,12 @@ TSHighVelocityTurChem:
 			Medium: 56
 			Heavy: 35
 			Concrete: 35
+			CyborgLight: 82
+			AntiAirVehicle: 62
+			ShipLight: 76
+			ShipMedium: 44
+			AntiAirShip: 58
+			SubmarineLight: 39
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
@@ -787,6 +874,21 @@ TSGrenadeAA:
 			Bomber: 67
 			Helicopter: 66
 			Spaceship: 46
+			FlyingInfantry: 101
+			CyborgLight: 138
+			CyborgMedium: 108
+			CyborgHeavy: 99
+			CyborgHeroic: 85
+			AntiAirInfantry: 127
+			AntiAirVehicle: 117
+			AntiAirBuilding: 97
+			ShipLight: 137
+			ShipMedium: 99
+			ShipHeavy: 105
+			ShipSuperheavy: 93
+			AntiAirShip: 116
+			SubmarineLight: 102
+			SubmarineHeavy: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9996
 		PercentageSpread: 50
@@ -808,6 +910,21 @@ TSGrenadeAA:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 6512
@@ -911,6 +1028,21 @@ TSGrenadeG:
 			Bomber: 67
 			Helicopter: 66
 			Spaceship: 46
+			FlyingInfantry: 101
+			CyborgLight: 138
+			CyborgMedium: 108
+			CyborgHeavy: 99
+			CyborgHeroic: 85
+			AntiAirInfantry: 127
+			AntiAirVehicle: 117
+			AntiAirBuilding: 97
+			ShipLight: 137
+			ShipMedium: 99
+			ShipHeavy: 105
+			ShipSuperheavy: 93
+			AntiAirShip: 116
+			SubmarineLight: 102
+			SubmarineHeavy: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9996
 		PercentageSpread: 50
@@ -932,6 +1064,21 @@ TSGrenadeG:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 	ValidTargets: Ground, Water
 	ReloadDelay: 45
 	Range: 6656
@@ -974,6 +1121,12 @@ TS105mm:
 			Light: 75
 			Medium: 95
 			Heavy: 115
+			CyborgLight: 43
+			AntiAirVehicle: 84
+			ShipLight: 70
+			ShipMedium: 75
+			AntiAirShip: 72
+			SubmarineLight: 93
 
 TS152mm:
 	Inherits: ^TSCannon
@@ -994,6 +1147,12 @@ TS152mm:
 			Light: 125
 			Medium: 135
 			Heavy: 150
+			CyborgLight: 35
+			AntiAirVehicle: 130
+			ShipLight: 112
+			ShipMedium: 90
+			AntiAirShip: 100
+			SubmarineLight: 116
 
 MammothTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -1128,6 +1287,21 @@ TSCABALPlasmaFire:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 38
@@ -1151,6 +1325,21 @@ TSCABALPlasmaFire:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		InvalidTargets: Air
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -1185,6 +1374,21 @@ TSCABALPlasmaFire:
 			Bomber: 9
 			Helicopter: 9
 			Spaceship: 9
+			FlyingInfantry: 21
+			CyborgLight: 31
+			CyborgMedium: 25
+			CyborgHeavy: 19
+			CyborgHeroic: 13
+			AntiAirInfantry: 30
+			AntiAirVehicle: 27
+			AntiAirBuilding: 9
+			ShipLight: 16
+			ShipMedium: 15
+			ShipHeavy: 13
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 16
+			SubmarineHeavy: 12
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		InvalidTargets: Air
 	Projectile: LaserZap
@@ -1440,6 +1644,8 @@ TSLaserFence:
 			ShipHeavy: 19
 			ShipSuperheavy: 18
 			AntiAirShip: 21
+			SubmarineLight: 18
+			SubmarineHeavy: 16
 		ValidTargets: Heal
 		DebugOverlayColor: 00FF00
 		FriendlyFireSpread: 100
@@ -1482,6 +1688,8 @@ TSLaserFence:
 			ShipHeavy: 60
 			ShipSuperheavy: 63
 			AntiAirShip: 52
+			SubmarineLight: 65
+			SubmarineHeavy: 71
 		DebugOverlayColor: 00FF00
 		DamageTypes: KillsDrone
 		Spread: 1000
@@ -1522,6 +1730,8 @@ TSLaserFence:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
 		ValidRelationships: Ally
@@ -1612,6 +1822,21 @@ ts_nod_mobilerepairvehicle:
 			Fighter: 48
 			None: 44
 			Scout: 40
+			FlyingInfantry: 56
+			CyborgLight: 48
+			CyborgMedium: 62
+			CyborgHeavy: 78
+			CyborgHeroic: 94
+			AntiAirInfantry: 50
+			AntiAirVehicle: 59
+			AntiAirBuilding: 84
+			ShipLight: 56
+			ShipMedium: 72
+			ShipHeavy: 88
+			ShipSuperheavy: 96
+			AntiAirShip: 63
+			SubmarineLight: 78
+			SubmarineHeavy: 94
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraRepair: SpreadDamage
@@ -1638,6 +1863,21 @@ ts_nod_mobilerepairvehicle:
 			Fighter: 100
 			None: 100
 			Scout: 100
+			FlyingInfantry: 100
+			CyborgLight: 100
+			CyborgMedium: 100
+			CyborgHeavy: 100
+			CyborgHeroic: 100
+			AntiAirInfantry: 100
+			AntiAirVehicle: 100
+			AntiAirBuilding: 100
+			ShipLight: 100
+			ShipMedium: 100
+			ShipHeavy: 100
+			ShipSuperheavy: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -1667,6 +1907,21 @@ ts_nod_mobilerepairvehicle:
 			Steel: 12
 			Spaceship: 11
 			Superheavy: 10
+			FlyingInfantry: 20
+			CyborgLight: 23
+			CyborgMedium: 19
+			CyborgHeavy: 15
+			CyborgHeroic: 11
+			AntiAirInfantry: 22
+			AntiAirVehicle: 20
+			AntiAirBuilding: 14
+			ShipLight: 21
+			ShipMedium: 17
+			ShipHeavy: 13
+			ShipSuperheavy: 11
+			AntiAirShip: 19
+			SubmarineLight: 15
+			SubmarineHeavy: 11
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -1783,6 +2038,12 @@ TSReaperTusk:
 			Medium: 77
 			Heavy: 88
 			Concrete: 33
+			CyborgLight: 60
+			AntiAirVehicle: 71
+			ShipLight: 54
+			ShipMedium: 50
+			AntiAirShip: 52
+			SubmarineLight: 66
 		ValidTargets: Ground
 
 TSAegisMissile:
@@ -2054,6 +2315,21 @@ TSSAPCCoreMissiles:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -2083,6 +2359,21 @@ TSSAPCCoreMissiles:
 			Flak: 3
 			None: 2
 			Heroic: 1
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Burst: 2
@@ -2161,6 +2452,21 @@ TSRedEye2:
 			Wood: 67
 			None: 54
 			Heroic: 43
+			FlyingInfantry: 92
+			CyborgLight: 72
+			CyborgMedium: 89
+			CyborgHeavy: 111
+			CyborgHeroic: 80
+			AntiAirInfantry: 63
+			AntiAirVehicle: 102
+			AntiAirBuilding: 93
+			ShipLight: 80
+			ShipMedium: 106
+			ShipHeavy: 105
+			ShipSuperheavy: 112
+			AntiAirShip: 92
+			SubmarineLight: 119
+			SubmarineHeavy: 125
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -2182,6 +2488,21 @@ TSRedEye2:
 			Plate: 12
 			Flak: 11
 			None: 10
+			FlyingInfantry: 16
+			CyborgLight: 13
+			CyborgMedium: 14
+			CyborgHeavy: 15
+			CyborgHeroic: 17
+			AntiAirInfantry: 10
+			AntiAirVehicle: 18
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 17
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
 
 	Projectile: Missile
 		Arm: 0
@@ -2361,6 +2682,21 @@ TSChemAdatsMissile_AA:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9992
 		PercentageSpread: 50
@@ -2382,6 +2718,21 @@ TSChemAdatsMissile_AA:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 TSSlimeAttack:
 	ReloadDelay: 80
 	Range: 1408
@@ -2396,6 +2747,9 @@ TSSlimeAttack:
 			Medium: 50
 			Heavy: 40
 			Concrete: 20
+			AntiAirVehicle: 55
+			ShipMedium: 32
+			SubmarineLight: 36
 		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
 
 TSTentacle:
@@ -2414,6 +2768,12 @@ TSTentacle:
 			Medium: 70
 			Heavy: 55
 			Concrete: 10
+			CyborgLight: 73
+			AntiAirVehicle: 79
+			ShipLight: 64
+			ShipMedium: 26
+			AntiAirShip: 41
+			SubmarineLight: 38
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 
 TSVeins:
@@ -2443,6 +2803,12 @@ TSVeinholeSmoke:
 			Wood: 30
 			Light: 20
 			Heavy: 20
+			CyborgLight: 49
+			AntiAirVehicle: 58
+			ShipLight: 24
+			ShipMedium: 106
+			AntiAirShip: 50
+			SubmarineLight: 46
 
 TSLimpetBomb_EMP:
 	ReloadDelay: 50
@@ -2635,6 +3001,7 @@ TSSniper_elite:
 			Light: 40
 			Medium: 30
 			Heavy: 20
+			AntiAirVehicle: 35
 	Warhead@Sniper_Light:
 		Damage: 10000
 		Spread: 1
@@ -2848,6 +3215,21 @@ TSTacticalChemMissile:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -2877,6 +3259,21 @@ TSTacticalChemMissile:
 			Flak: 3
 			None: 2
 			Heroic: 1
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	MinRange: 3072
@@ -2963,6 +3360,21 @@ TSTacticalChemMissileDamage:
 			Flak: 35
 			None: 30
 			Heroic: 25
+			FlyingInfantry: 51
+			CyborgLight: 42
+			CyborgMedium: 51
+			CyborgHeavy: 60
+			CyborgHeroic: 50
+			AntiAirInfantry: 32
+			AntiAirVehicle: 67
+			AntiAirBuilding: 72
+			ShipLight: 55
+			ShipMedium: 70
+			ShipHeavy: 85
+			ShipSuperheavy: 89
+			AntiAirShip: 62
+			SubmarineLight: 79
+			SubmarineHeavy: 92
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2986,6 +3398,21 @@ TSTacticalChemMissileDamage:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -3015,6 +3442,21 @@ TSTacticalChemMissileDamage:
 			Flak: 22
 			None: 16
 			Heroic: 10
+			FlyingInfantry: 39
+			CyborgLight: 29
+			CyborgMedium: 39
+			CyborgHeavy: 50
+			CyborgHeroic: 32
+			AntiAirInfantry: 19
+			AntiAirVehicle: 60
+			AntiAirBuilding: 66
+			ShipLight: 46
+			ShipMedium: 64
+			ShipHeavy: 82
+			ShipSuperheavy: 87
+			AntiAirShip: 54
+			SubmarineLight: 75
+			SubmarineHeavy: 91
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3038,6 +3480,21 @@ TSTacticalChemMissileDamage:
 			Flak: 3
 			None: 2
 			Heroic: 1
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	AirThreshold: 11c0
@@ -3163,6 +3620,8 @@ TSCloud:
 			Light: 50
 			Medium: 40
 			Heavy: 25
+			AntiAirVehicle: 45
+			ShipLight: 22
 		DamageTypes: TiberiumDeath
 
 MutSAPCSpawner:
@@ -3335,6 +3794,12 @@ ZClaw1:
 			Medium: 40
 			Heavy: 30 #10
 			Concrete: 10
+			CyborgLight: 70
+			AntiAirVehicle: 45
+			ShipLight: 39
+			ShipMedium: 20
+			AntiAirShip: 28
+			SubmarineLight: 24
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 ZClaw2:
@@ -3352,6 +3817,12 @@ ZClaw2:
 			Medium: 40
 			Heavy: 30 #10
 			Concrete: 10
+			CyborgLight: 70
+			AntiAirVehicle: 45
+			ShipLight: 39
+			ShipMedium: 20
+			AntiAirShip: 28
+			SubmarineLight: 24
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 ZClaw3:
@@ -3372,4 +3843,10 @@ ZClaw3:
 			Medium: 40
 			Heavy: 30 #10
 			Concrete: 10
+			CyborgLight: 70
+			AntiAirVehicle: 45
+			ShipLight: 39
+			ShipMedium: 20
+			AntiAirShip: 28
+			SubmarineLight: 24
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath

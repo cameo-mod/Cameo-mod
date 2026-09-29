@@ -31,6 +31,7 @@
 			ShipLight: 82
 			ShipMedium: 48
 			AntiAirShip: 63
+			SubmarineLight: 46
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 
@@ -84,6 +85,7 @@ ScrinShardBeam:
 			ShipLight: 95
 			ShipMedium: 37
 			AntiAirShip: 59
+			SubmarineLight: 36
 
 ScrinShardWalkerStreak:
 	Inherits: ScrinShardBeam
@@ -123,6 +125,7 @@ ScrinHeavyBeam:
 			ShipLight: 79
 			ShipMedium: 112
 			AntiAirShip: 94
+			SubmarineLight: 123
 
 ScrinAcidBeam:
 	Inherits: ^ScrinBeamBase
@@ -148,6 +151,7 @@ ScrinAcidBeam:
 			ShipLight: 105
 			ShipMedium: 48
 			AntiAirShip: 71
+			SubmarineLight: 46
 
 ScrinAirZap:
 	Inherits: ^ScrinBeamBase
@@ -187,6 +191,7 @@ ScrinCapitalBeam:
 			ShipLight: 105
 			ShipMedium: 110
 			AntiAirShip: 107
+			SubmarineLight: 120
 		ValidTargets: Ground, Water, Air
 
 # Combined Arms-derived projectile delivery and effect treatment. Damage,
@@ -305,6 +310,7 @@ ScrinCorrupterSpew:
 			ShipLight: 105
 			ShipMedium: 48
 			AntiAirShip: 71
+			SubmarineLight: 46
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -403,6 +409,7 @@ ScrinTripodLaser:
 			ShipLight: 79
 			ShipMedium: 112
 			AntiAirShip: 94
+			SubmarineLight: 123
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 	Warhead@2Eff: CreateEffect
@@ -435,6 +442,7 @@ ScrinReaperTripodLaser:
 			ShipLight: 105
 			ShipMedium: 110
 			AntiAirShip: 107
+			SubmarineLight: 120
 		ValidTargets: Ground, Water, Air
 
 ScrinMothershipBeam:

@@ -66,7 +66,9 @@ namespace OpenRA.Mods.Cameo.Warheads
 			("ShipMedium", new[] { "Medium", "Concrete" }),
 			("ShipHeavy", new[] { "Heavy", "Steel" }),
 			("ShipSuperheavy", new[] { "Superheavy", "Steel" }),
-			("AntiAirShip", new[] { "ShipLight", "ShipMedium" })
+			("AntiAirShip", new[] { "ShipLight", "ShipMedium" }),
+			("SubmarineLight", new[] { "ShipMedium", "Heavy" }),
+			("SubmarineHeavy", new[] { "ShipHeavy", "Superheavy" })
 		};
 
 		const double HeroicDivisor = 200.0;

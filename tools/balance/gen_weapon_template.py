@@ -833,7 +833,7 @@ BAND_MARGIN = 1.03                  # headroom so integer rounding cannot fall b
 # DESIGN §12.0l (maintainer 2026-09-26): every derived armour is the GEOMETRIC MEAN of its
 # parents (the n-th root of their product), computed LAST (in `emit_versus`) from the finished
 # row set. Order matters: a parent must be computed before its child (`CyborgHeroic` needs
-# `Heroic`, `AntiAirShip` the ships). Heroic alone stays a PRODUCT, `Plate x Scout / 200`,
+# `Heroic`, `AntiAirShip` and the submarines the ships). Heroic alone stays a PRODUCT, `Plate x Scout / 200`,
 # re-derived in the MAIN table only (§12.0l rule 4) — see `derive_rows`.
 GEO_DERIVED = (
     ("FlyingInfantry", ("Scout", "Flak", "Helicopter")),
@@ -849,6 +849,9 @@ GEO_DERIVED = (
     ("ShipHeavy", ("Heavy", "Steel")),
     ("ShipSuperheavy", ("Superheavy", "Steel")),
     ("AntiAirShip", ("ShipLight", "ShipMedium")),
+    # Rule 3b (maintainer 2026-09-28): a submarine is tougher than a surface ship of its class.
+    ("SubmarineLight", ("ShipMedium", "Heavy")),
+    ("SubmarineHeavy", ("ShipHeavy", "Superheavy")),
 )
 HEROIC_DIVISOR = 200
 DERIVED_ARMORS = ("Heroic",) + tuple(name for name, _ in GEO_DERIVED)

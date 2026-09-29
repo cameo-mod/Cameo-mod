@@ -56,6 +56,8 @@
 			ShipSuperheavy: 21
 			AntiAirShip: 45
 			FlyingInfantry: 62
+			SubmarineLight: 27
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -92,6 +94,8 @@
 			ShipSuperheavy: 3
 			AntiAirShip: 7
 			FlyingInfantry: 10
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -163,6 +167,8 @@
 			ShipSuperheavy: 46
 			AntiAirShip: 52
 			FlyingInfantry: 49
+			SubmarineLight: 52
+			SubmarineHeavy: 50
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -200,6 +206,8 @@
 			ShipSuperheavy: 46
 			AntiAirShip: 52
 			FlyingInfantry: 49
+			SubmarineLight: 52
+			SubmarineHeavy: 50
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -237,6 +245,8 @@
 			ShipSuperheavy: 20
 			AntiAirShip: 22
 			FlyingInfantry: 22
+			SubmarineLight: 22
+			SubmarineHeavy: 21
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -314,6 +324,8 @@
 			ShipSuperheavy: 32
 			AntiAirShip: 59
 			FlyingInfantry: 70
+			SubmarineLight: 43
+			SubmarineHeavy: 30
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -350,6 +362,8 @@
 			ShipSuperheavy: 6
 			AntiAirShip: 11
 			FlyingInfantry: 14
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -423,6 +437,8 @@
 			ShipSuperheavy: 32
 			AntiAirShip: 41
 			FlyingInfantry: 74
+			SubmarineLight: 42
+			SubmarineHeavy: 37
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -459,6 +475,8 @@
 			ShipSuperheavy: 6
 			AntiAirShip: 8
 			FlyingInfantry: 15
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -535,6 +553,8 @@
 			ShipSuperheavy: 63
 			AntiAirShip: 56
 			FlyingInfantry: 73
+			SubmarineLight: 68
+			SubmarineHeavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -571,6 +591,8 @@
 			ShipSuperheavy: 16
 			AntiAirShip: 13
 			FlyingInfantry: 18
+			SubmarineLight: 17
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -656,6 +678,8 @@
 			ShipSuperheavy: 87
 			AntiAirShip: 54
 			FlyingInfantry: 39
+			SubmarineLight: 75
+			SubmarineHeavy: 91
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -692,6 +716,8 @@
 			ShipSuperheavy: 14
 			AntiAirShip: 8
 			FlyingInfantry: 6
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -786,6 +812,8 @@
 			ShipSuperheavy: 89
 			AntiAirShip: 62
 			FlyingInfantry: 51
+			SubmarineLight: 79
+			SubmarineHeavy: 92
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -822,6 +850,8 @@
 			ShipSuperheavy: 18
 			AntiAirShip: 12
 			FlyingInfantry: 10
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -916,6 +946,8 @@
 			ShipSuperheavy: 92
 			AntiAirShip: 70
 			FlyingInfantry: 62
+			SubmarineLight: 84
+			SubmarineHeavy: 94
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -952,6 +984,8 @@
 			ShipSuperheavy: 23
 			AntiAirShip: 17
 			FlyingInfantry: 15
+			SubmarineLight: 21
+			SubmarineHeavy: 23
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1050,6 +1084,8 @@
 			ShipSuperheavy: 84
 			AntiAirShip: 72
 			FlyingInfantry: 43
+			SubmarineLight: 84
+			SubmarineHeavy: 90
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1086,6 +1122,8 @@
 			ShipSuperheavy: 13
 			AntiAirShip: 11
 			FlyingInfantry: 6
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1171,6 +1209,8 @@
 			ShipSuperheavy: 67
 			AntiAirShip: 87
 			FlyingInfantry: 55
+			SubmarineLight: 76
+			SubmarineHeavy: 66
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1207,6 +1247,8 @@
 			ShipSuperheavy: 13
 			AntiAirShip: 17
 			FlyingInfantry: 11
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1292,6 +1334,8 @@
 			ShipSuperheavy: 74
 			AntiAirShip: 90
 			FlyingInfantry: 66
+			SubmarineLight: 81
+			SubmarineHeavy: 73
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1327,6 +1371,8 @@
 			ShipSuperheavy: 18
 			AntiAirShip: 22
 			FlyingInfantry: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1412,6 +1458,8 @@
 			ShipSuperheavy: 96
 			AntiAirShip: 63
 			FlyingInfantry: 56
+			SubmarineLight: 78
+			SubmarineHeavy: 94
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1449,6 +1497,8 @@
 			ShipSuperheavy: 24
 			AntiAirShip: 16
 			FlyingInfantry: 14
+			SubmarineLight: 19
+			SubmarineHeavy: 23
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LaserExtraDamage: SpreadDamage
@@ -1487,6 +1537,8 @@
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -1563,6 +1615,8 @@
 			ShipSuperheavy: 80
 			AntiAirShip: 72
 			FlyingInfantry: 66
+			SubmarineLight: 84
+			SubmarineHeavy: 88
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
@@ -1600,6 +1654,8 @@
 			ShipSuperheavy: 20
 			AntiAirShip: 18
 			FlyingInfantry: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@RailgunExtraDamage: SpreadDamage
@@ -1638,6 +1694,8 @@
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -1698,6 +1756,8 @@
 			ShipSuperheavy: 73
 			AntiAirShip: 65
 			FlyingInfantry: 67
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1736,6 +1796,8 @@
 			ShipSuperheavy: 32
 			AntiAirShip: 19
 			FlyingInfantry: 25
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1773,6 +1835,8 @@
 			ShipSuperheavy: 18
 			AntiAirShip: 16
 			FlyingInfantry: 17
+			SubmarineLight: 18
+			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1831,6 +1895,8 @@
 			ShipSuperheavy: 80
 			AntiAirShip: 74
 			FlyingInfantry: 76
+			SubmarineLight: 80
+			SubmarineHeavy: 83
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1869,6 +1935,8 @@
 			ShipSuperheavy: 122
 			AntiAirShip: 70
 			FlyingInfantry: 63
+			SubmarineLight: 123
+			SubmarineHeavy: 152
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1906,6 +1974,8 @@
 			ShipSuperheavy: 23
 			AntiAirShip: 21
 			FlyingInfantry: 22
+			SubmarineLight: 23
+			SubmarineHeavy: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1968,6 +2038,8 @@
 			ShipSuperheavy: 47
 			AntiAirShip: 60
 			FlyingInfantry: 44
+			SubmarineLight: 48
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2007,6 +2079,8 @@
 			ShipSuperheavy: 7
 			AntiAirShip: 9
 			FlyingInfantry: 6
+			SubmarineLight: 7
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2090,6 +2164,8 @@
 			ShipSuperheavy: 56
 			AntiAirShip: 66
 			FlyingInfantry: 57
+			SubmarineLight: 57
+			SubmarineHeavy: 52
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2129,6 +2205,8 @@
 			ShipSuperheavy: 11
 			AntiAirShip: 13
 			FlyingInfantry: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2210,6 +2288,8 @@
 			ShipSuperheavy: 65
 			AntiAirShip: 74
 			FlyingInfantry: 67
+			SubmarineLight: 66
+			SubmarineHeavy: 62
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2250,6 +2330,8 @@
 			ShipSuperheavy: 16
 			AntiAirShip: 18
 			FlyingInfantry: 17
+			SubmarineLight: 16
+			SubmarineHeavy: 15
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2333,6 +2415,8 @@
 			ShipSuperheavy: 68
 			AntiAirShip: 51
 			FlyingInfantry: 45
+			SubmarineLight: 70
+			SubmarineHeavy: 80
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2372,6 +2456,8 @@
 			ShipSuperheavy: 11
 			AntiAirShip: 7
 			FlyingInfantry: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2443,6 +2529,8 @@
 			ShipSuperheavy: 74
 			AntiAirShip: 59
 			FlyingInfantry: 56
+			SubmarineLight: 75
+			SubmarineHeavy: 84
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2482,6 +2570,8 @@
 			ShipSuperheavy: 15
 			AntiAirShip: 12
 			FlyingInfantry: 11
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2556,6 +2646,8 @@
 			ShipSuperheavy: 80
 			AntiAirShip: 68
 			FlyingInfantry: 66
+			SubmarineLight: 81
+			SubmarineHeavy: 88
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -2595,6 +2687,8 @@
 			ShipSuperheavy: 20
 			AntiAirShip: 17
 			FlyingInfantry: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -2669,6 +2763,8 @@
 			ShipSuperheavy: 49
 			AntiAirShip: 65
 			FlyingInfantry: 43
+			SubmarineLight: 49
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -2708,6 +2804,8 @@
 			ShipSuperheavy: 49
 			AntiAirShip: 65
 			FlyingInfantry: 43
+			SubmarineLight: 49
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -2746,6 +2844,8 @@
 			ShipSuperheavy: 9
 			AntiAirShip: 13
 			FlyingInfantry: 6
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -2822,6 +2922,8 @@
 			ShipSuperheavy: 52
 			AntiAirShip: 79
 			FlyingInfantry: 62
+			SubmarineLight: 63
+			SubmarineHeavy: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -2861,6 +2963,8 @@
 			ShipSuperheavy: 52
 			AntiAirShip: 79
 			FlyingInfantry: 62
+			SubmarineLight: 63
+			SubmarineHeavy: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
@@ -2899,6 +3003,8 @@
 			ShipSuperheavy: 10
 			AntiAirShip: 15
 			FlyingInfantry: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -2973,6 +3079,8 @@
 			ShipSuperheavy: 72
 			AntiAirShip: 80
 			FlyingInfantry: 64
+			SubmarineLight: 68
+			SubmarineHeavy: 64
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
@@ -3010,6 +3118,8 @@
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge1: LeaveSmudge
@@ -3099,6 +3209,8 @@
 			ShipSuperheavy: 80
 			AntiAirShip: 68
 			FlyingInfantry: 66
+			SubmarineLight: 81
+			SubmarineHeavy: 88
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
@@ -3137,6 +3249,8 @@
 			ShipSuperheavy: 20
 			AntiAirShip: 17
 			FlyingInfantry: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge1: LeaveSmudge
@@ -3211,6 +3325,8 @@
 			ShipSuperheavy: 57
 			AntiAirShip: 58
 			FlyingInfantry: 61
+			SubmarineLight: 62
+			SubmarineHeavy: 60
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
@@ -3249,6 +3365,8 @@
 			ShipSuperheavy: 57
 			AntiAirShip: 58
 			FlyingInfantry: 61
+			SubmarineLight: 62
+			SubmarineHeavy: 60
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
@@ -3287,6 +3405,8 @@
 			ShipSuperheavy: 11
 			AntiAirShip: 12
 			FlyingInfantry: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -3348,6 +3468,8 @@
 			ShipSuperheavy: 25
 			AntiAirShip: 23
 			FlyingInfantry: 68
+			SubmarineLight: 29
+			SubmarineHeavy: 27
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3386,6 +3508,8 @@
 			ShipSuperheavy: 3
 			AntiAirShip: 3
 			FlyingInfantry: 11
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
@@ -3467,6 +3591,8 @@
 			ShipSuperheavy: 69
 			AntiAirShip: 58
 			FlyingInfantry: 69
+			SubmarineLight: 75
+			SubmarineHeavy: 81
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3505,6 +3631,8 @@
 			ShipSuperheavy: 17
 			AntiAirShip: 14
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 21
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@MagicExtraDamage: SpreadDamage
@@ -3544,6 +3672,8 @@
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
@@ -3626,6 +3756,8 @@
 			ShipSuperheavy: 63
 			AntiAirShip: 52
 			FlyingInfantry: 70
+			SubmarineLight: 65
+			SubmarineHeavy: 71
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraHealing: SpreadDamage
@@ -3665,6 +3797,8 @@
 			ShipSuperheavy: 100
 			AntiAirShip: 100
 			FlyingInfantry: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3707,6 +3841,8 @@
 			ShipSuperheavy: 18
 			AntiAirShip: 21
 			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 16
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3793,6 +3929,8 @@
 			ShipSuperheavy: 96
 			AntiAirShip: 63
 			FlyingInfantry: 56
+			SubmarineLight: 78
+			SubmarineHeavy: 94
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraRepair: SpreadDamage
@@ -3832,6 +3970,8 @@
 			ShipSuperheavy: 100
 			AntiAirShip: 100
 			FlyingInfantry: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3874,6 +4014,8 @@
 			ShipSuperheavy: 11
 			AntiAirShip: 19
 			FlyingInfantry: 20
+			SubmarineLight: 15
+			SubmarineHeavy: 11
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -3987,9 +4129,11 @@ DefuseKit:
 			ShipHeavy: 74
 			AntiAirBuilding: 73
 			ShipMedium: 72
+			SubmarineLight: 70
 			Heavy: 68
 			ShipSuperheavy: 67
 			Concrete: 66
+			SubmarineHeavy: 64
 			Spaceship: 61
 			Superheavy: 56
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -4022,9 +4166,11 @@ DefuseKit:
 			ShipHeavy: 5
 			Concrete: 4
 			CyborgHeroic: 4
+			SubmarineLight: 4
 			Heavy: 3
 			ShipSuperheavy: 3
 			Spaceship: 2
+			SubmarineHeavy: 2
 			Superheavy: 1
 
 ^Warhead_Bullet_Medium:
@@ -4072,7 +4218,9 @@ DefuseKit:
 			ShipMedium: 79
 			CyborgHeroic: 77
 			ShipSuperheavy: 76
+			SubmarineLight: 76
 			Heavy: 74
+			SubmarineHeavy: 72
 			Concrete: 69
 			Spaceship: 64
 			Superheavy: 62
@@ -4106,8 +4254,10 @@ DefuseKit:
 			ShipMedium: 9
 			ShipHeavy: 9
 			Concrete: 8
+			SubmarineLight: 8
 			Heavy: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Spaceship: 6
 			Superheavy: 5
 
@@ -4157,7 +4307,9 @@ DefuseKit:
 			ShipHeavy: 76
 			ShipSuperheavy: 76
 			Helicopter: 75
+			SubmarineLight: 75
 			Spaceship: 74
+			SubmarineHeavy: 74
 			Heavy: 73
 			Superheavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -4191,7 +4343,9 @@ DefuseKit:
 			ShipHeavy: 14
 			Concrete: 13
 			ShipSuperheavy: 13
+			SubmarineLight: 13
 			Heavy: 12
+			SubmarineHeavy: 12
 			Spaceship: 11
 			Superheavy: 10
 
@@ -4243,7 +4397,9 @@ DefuseKit:
 			ShipHeavy: 69
 			Concrete: 67
 			ShipSuperheavy: 66
+			SubmarineLight: 66
 			Heavy: 64
+			SubmarineHeavy: 64
 			Spaceship: 62
 			Superheavy: 59
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -4274,6 +4430,8 @@ DefuseKit:
 			Superheavy: 159
 			Concrete: 142
 			Heavy: 141
+			SubmarineLight: 140
+			SubmarineHeavy: 140
 			ShipMedium: 139
 			Medium: 136
 			AntiAirVehicle: 132
@@ -4308,9 +4466,11 @@ DefuseKit:
 			Superheavy: 16
 			Heavy: 15
 			Medium: 14
+			SubmarineHeavy: 14
 			Light: 13
 			AntiAirVehicle: 13
 			ShipSuperheavy: 13
+			SubmarineLight: 13
 			Scout: 12
 			ShipMedium: 12
 			ShipHeavy: 12
@@ -4358,6 +4518,8 @@ DefuseKit:
 			Superheavy: 200
 			Concrete: 182
 			ShipMedium: 168
+			SubmarineHeavy: 167
+			SubmarineLight: 164
 			Heavy: 161
 			Medium: 156
 			ShipSuperheavy: 156
@@ -4392,9 +4554,11 @@ DefuseKit:
 			Superheavy: 20
 			Heavy: 19
 			Medium: 18
+			SubmarineHeavy: 18
 			Light: 17
 			AntiAirVehicle: 17
 			ShipSuperheavy: 17
+			SubmarineLight: 17
 			Scout: 16
 			ShipMedium: 16
 			ShipHeavy: 16
@@ -4441,7 +4605,9 @@ DefuseKit:
 			Shield: 157
 			Superheavy: 180
 			Concrete: 157
+			SubmarineHeavy: 155
 			Heavy: 154
+			SubmarineLight: 148
 			CyborgHeavy: 147
 			ShipSuperheavy: 145
 			ShipMedium: 143
@@ -4476,9 +4642,11 @@ DefuseKit:
 			Superheavy: 25
 			Heavy: 24
 			Medium: 23
+			SubmarineHeavy: 23
 			Light: 22
 			AntiAirVehicle: 22
 			ShipSuperheavy: 22
+			SubmarineLight: 22
 			Scout: 21
 			CyborgHeroic: 21
 			ShipMedium: 21
@@ -4529,6 +4697,8 @@ DefuseKit:
 			Heavy: 157
 			Medium: 156
 			AntiAirVehicle: 154
+			SubmarineLight: 154
+			SubmarineHeavy: 154
 			Light: 152
 			ShipMedium: 152
 			Scout: 151
@@ -4592,11 +4762,13 @@ DefuseKit:
 			AntiAirBuilding: 117
 			None: 112
 			ShipMedium: 111
+			SubmarineLight: 110
 			Heavy: 109
 			FlyingInfantry: 106
 			ShipSuperheavy: 106
 			CyborgMedium: 104
 			Concrete: 101
+			SubmarineHeavy: 101
 			AntiAirInfantry: 100
 			CyborgHeavy: 91
 			Flak: 90
@@ -4628,6 +4800,8 @@ DefuseKit:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			Heavy: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Superheavy: 9
 			CyborgMedium: 9
 			None: 8
@@ -4693,6 +4867,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4727,6 +4903,8 @@ DefuseKit:
 			ShipSuperheavy: 15
 			AntiAirShip: 16
 			FlyingInfantry: 11
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 
 
 ^Warhead_CannonHE_Heavy_Flat:
@@ -4774,6 +4952,8 @@ DefuseKit:
 			ShipSuperheavy: 111
 			AntiAirShip: 118
 			FlyingInfantry: 96
+			SubmarineLight: 108
+			SubmarineHeavy: 108
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4808,6 +4988,8 @@ DefuseKit:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 16
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 
 # Percentage-inert class slices used by the retired-family shotgun and sniper
 # compatibility groups. Their percentage warheads remain separate on each weapon
@@ -4858,6 +5040,8 @@ DefuseKit:
 			ShipSuperheavy: 39
 			AntiAirShip: 51
 			FlyingInfantry: 112
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4892,6 +5076,8 @@ DefuseKit:
 			ShipSuperheavy: 7
 			AntiAirShip: 8
 			FlyingInfantry: 15
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 
 
 ^Warhead_Bullet_Medium_Flat:
@@ -4939,6 +5125,8 @@ DefuseKit:
 			ShipSuperheavy: 68
 			AntiAirShip: 86
 			FlyingInfantry: 112
+			SubmarineLight: 69
+			SubmarineHeavy: 64
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -4973,6 +5161,8 @@ DefuseKit:
 			ShipSuperheavy: 7
 			AntiAirShip: 11
 			FlyingInfantry: 14
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 
 
 ^Warhead_MissileAP_Heavy_Flat:
@@ -5020,6 +5210,8 @@ DefuseKit:
 			ShipSuperheavy: 115
 			AntiAirShip: 99
 			FlyingInfantry: 94
+			SubmarineLight: 128
+			SubmarineHeavy: 131
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -5054,6 +5246,8 @@ DefuseKit:
 			ShipSuperheavy: 19
 			AntiAirShip: 18
 			FlyingInfantry: 16
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 
 ###### MissileHE: VEH+BLD > AIR > INF (light, air=True) ######
 
@@ -5102,6 +5296,8 @@ DefuseKit:
 			ShipSuperheavy: 105
 			AntiAirShip: 101
 			FlyingInfantry: 85
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -5136,6 +5332,8 @@ DefuseKit:
 			ShipSuperheavy: 14
 			AntiAirShip: 13
 			FlyingInfantry: 11
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 
 # Compatibility slices for mixed legacy stacks where only part of the original
 # flat damage could hit walls. These deliberately omit PercentageScale so they
@@ -5171,12 +5369,14 @@ DefuseKit:
 			None: 145
 			AntiAirShip: 140
 			Heavy: 122
+			SubmarineLight: 120
 			ShipMedium: 119
 			ShipHeavy: 119
 			Steel: 116
 			CyborgMedium: 114
 			AntiAirInfantry: 113
 			AntiAirBuilding: 106
+			SubmarineHeavy: 105
 			Fighter: 104
 			ShipSuperheavy: 103
 			CyborgHeavy: 98
@@ -5210,6 +5410,8 @@ DefuseKit:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			Heavy: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Superheavy: 13
 			CyborgMedium: 13
 			None: 12
@@ -5262,6 +5464,8 @@ DefuseKit:
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -5302,6 +5506,8 @@ DefuseKit:
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -5358,7 +5564,9 @@ DefuseKit:
 			AntiAirBuilding: 118
 			ShipSuperheavy: 118
 			ShipMedium: 116
+			SubmarineHeavy: 115
 			CyborgMedium: 114
+			SubmarineLight: 114
 			Heavy: 113
 			Superheavy: 111
 			Concrete: 110
@@ -5392,6 +5600,8 @@ DefuseKit:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			Heavy: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 			Superheavy: 18
 			CyborgMedium: 18
 			None: 17
@@ -5443,6 +5653,8 @@ DefuseKit:
 			ShipSuperheavy: 118
 			ShipMedium: 117
 			Concrete: 114
+			SubmarineLight: 114
+			SubmarineHeavy: 114
 			Heavy: 111
 			CyborgMedium: 111
 			Superheavy: 110
@@ -5508,6 +5720,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunGrenadeAlly: AreaDamage
 		ValidRelationships: Ally
@@ -5551,6 +5765,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShotgunShrapnelEnemy: AreaDamage
@@ -5595,6 +5811,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunShrapnelAlly: AreaDamage
 		ValidRelationships: Ally
@@ -5638,6 +5856,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShotgunTankDestroyer: AreaDamage
@@ -5684,6 +5904,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunSmallArms: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5730,6 +5952,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShotgunChaingun: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5775,6 +5999,8 @@ DefuseKit:
 			ShipSuperheavy: 98
 			AntiAirShip: 123
 			FlyingInfantry: 93
+			SubmarineLight: 110
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^SniperBulletHeavyCompatibility:
@@ -5822,6 +6048,8 @@ DefuseKit:
 			ShipSuperheavy: 69
 			AntiAirShip: 81
 			FlyingInfantry: 113
+			SubmarineLight: 67
+			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperFlak: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5867,6 +6095,8 @@ DefuseKit:
 			ShipSuperheavy: 69
 			AntiAirShip: 81
 			FlyingInfantry: 113
+			SubmarineLight: 67
+			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperSmallArms: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5913,6 +6143,8 @@ DefuseKit:
 			ShipSuperheavy: 69
 			AntiAirShip: 81
 			FlyingInfantry: 113
+			SubmarineLight: 67
+			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@SniperChaingun: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5958,6 +6190,8 @@ DefuseKit:
 			ShipSuperheavy: 69
 			AntiAirShip: 81
 			FlyingInfantry: 113
+			SubmarineLight: 67
+			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ###### MissileAP: VEH > AIR > BLD > INF (heavy, air=True) ######
@@ -5986,6 +6220,8 @@ DefuseKit:
 			Medium: 180
 			AntiAirVehicle: 172
 			Light: 165
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 			Scout: 150
 			Spaceship: 148
 			Helicopter: 147
@@ -6021,6 +6257,8 @@ DefuseKit:
 			Light: 13
 			AntiAirVehicle: 13
 			Scout: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Spaceship: 11
 			Helicopter: 10
 			ShipMedium: 10
@@ -6070,6 +6308,8 @@ DefuseKit:
 			Medium: 167
 			AntiAirVehicle: 160
 			Light: 154
+			SubmarineLight: 151
+			SubmarineHeavy: 150
 			Spaceship: 135
 			Helicopter: 134
 			ShipMedium: 126
@@ -6104,7 +6344,9 @@ DefuseKit:
 			Medium: 18
 			Light: 17
 			AntiAirVehicle: 17
+			SubmarineHeavy: 17
 			Scout: 16
+			SubmarineLight: 16
 			Spaceship: 15
 			Helicopter: 14
 			ShipMedium: 14
@@ -6169,6 +6411,8 @@ DefuseKit:
 			ShipSuperheavy: 1
 			AntiAirShip: 1
 			FlyingInfantry: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
@@ -6217,6 +6461,8 @@ DefuseKit:
 			ShipSuperheavy: 129
 			AntiAirShip: 96
 			FlyingInfantry: 85
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6267,6 +6513,8 @@ DefuseKit:
 			ShipSuperheavy: 102
 			AntiAirShip: 98
 			FlyingInfantry: 89
+			SubmarineLight: 133
+			SubmarineHeavy: 132
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Medium_WallExcluded:
@@ -6315,6 +6563,8 @@ DefuseKit:
 			ShipSuperheavy: 105
 			AntiAirShip: 101
 			FlyingInfantry: 85
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Medium_GroundShip:
@@ -6362,6 +6612,8 @@ DefuseKit:
 			ShipSuperheavy: 105
 			AntiAirShip: 101
 			FlyingInfantry: 85
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ^Warhead_MissileAP_Heavy:
@@ -6387,6 +6639,8 @@ DefuseKit:
 			Superheavy: 196
 			Spaceship: 175
 			Heavy: 168
+			SubmarineHeavy: 152
+			SubmarineLight: 147
 			Medium: 144
 			AntiAirVehicle: 133
 			Helicopter: 128
@@ -6423,7 +6677,9 @@ DefuseKit:
 			Medium: 23
 			Light: 22
 			AntiAirVehicle: 22
+			SubmarineHeavy: 22
 			Scout: 21
+			SubmarineLight: 21
 			Spaceship: 20
 			Helicopter: 19
 			ShipMedium: 19
@@ -6476,7 +6732,9 @@ DefuseKit:
 			AntiAirVehicle: 180
 			Light: 179
 			Scout: 154
+			SubmarineHeavy: 154
 			Spaceship: 151
+			SubmarineLight: 151
 			Helicopter: 127
 			Bomber: 126
 			ShipHeavy: 119
@@ -6538,10 +6796,12 @@ DefuseKit:
 			FlyingInfantry: 110
 			AntiAirBuilding: 108
 			ShipMedium: 107
+			SubmarineLight: 105
 			Heavy: 104
 			None: 102
 			ShipSuperheavy: 102
 			Bomber: 99
+			SubmarineHeavy: 99
 			Concrete: 97
 			CyborgMedium: 96
 			AntiAirInfantry: 89
@@ -6572,6 +6832,8 @@ DefuseKit:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			Heavy: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Superheavy: 9
 			Fighter: 8
 			Bomber: 7
@@ -6620,9 +6882,11 @@ DefuseKit:
 			ShipMedium: 126
 			ShipHeavy: 126
 			Heavy: 125
+			SubmarineLight: 125
 			Fighter: 122
 			AntiAirBuilding: 112
 			ShipSuperheavy: 108
+			SubmarineHeavy: 107
 			None: 106
 			Bomber: 104
 			CyborgMedium: 103
@@ -6656,6 +6920,8 @@ DefuseKit:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			Heavy: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Superheavy: 13
 			Fighter: 12
 			CyborgLight: 12
@@ -6704,8 +6970,10 @@ DefuseKit:
 			Concrete: 125
 			AntiAirBuilding: 125
 			ShipHeavy: 124
+			SubmarineLight: 124
 			Heavy: 123
 			ShipSuperheavy: 123
+			SubmarineHeavy: 122
 			Superheavy: 121
 			Fighter: 108
 			CyborgLight: 104
@@ -6740,6 +7008,8 @@ DefuseKit:
 			ShipHeavy: 20
 			ShipSuperheavy: 20
 			Heavy: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 			Superheavy: 18
 			Fighter: 17
 			FlyingInfantry: 17
@@ -6791,6 +7061,8 @@ DefuseKit:
 			Medium: 120
 			ShipMedium: 118
 			Concrete: 117
+			SubmarineLight: 116
+			SubmarineHeavy: 116
 			Heavy: 114
 			Superheavy: 108
 			FlyingInfantry: 107
@@ -6842,6 +7114,8 @@ DefuseKit:
 			AntiAirVehicle: 137
 			Light: 135
 			Scout: 129
+			SubmarineLight: 123
+			SubmarineHeavy: 121
 			FlyingInfantry: 108
 			ShipMedium: 108
 			ShipSuperheavy: 103
@@ -6873,8 +7147,10 @@ DefuseKit:
 			Superheavy: 12
 			Heavy: 11
 			Medium: 10
+			SubmarineHeavy: 10
 			Light: 9
 			AntiAirVehicle: 9
+			SubmarineLight: 9
 			Scout: 8
 			ShipMedium: 8
 			ShipHeavy: 8
@@ -6923,8 +7199,10 @@ DefuseKit:
 			Heavy: 152
 			Fighter: 146
 			Medium: 130
+			SubmarineLight: 130
 			Light: 129
 			AntiAirVehicle: 129
+			SubmarineHeavy: 127
 			ShipMedium: 112
 			CyborgHeavy: 110
 			ShipSuperheavy: 105
@@ -6957,9 +7235,11 @@ DefuseKit:
 			Superheavy: 16
 			Heavy: 15
 			Medium: 14
+			SubmarineHeavy: 14
 			Light: 13
 			AntiAirVehicle: 13
 			ShipSuperheavy: 13
+			SubmarineLight: 13
 			Scout: 12
 			ShipMedium: 12
 			ShipHeavy: 12
@@ -7004,6 +7284,8 @@ DefuseKit:
 			Superheavy: 183
 			Helicopter: 164
 			Heavy: 156
+			SubmarineHeavy: 144
+			SubmarineLight: 136
 			Bomber: 135
 			ShipSuperheavy: 124
 			CyborgHeavy: 123
@@ -7041,9 +7323,11 @@ DefuseKit:
 			Superheavy: 21
 			Heavy: 20
 			Medium: 19
+			SubmarineHeavy: 19
 			Light: 18
 			AntiAirVehicle: 18
 			ShipSuperheavy: 18
+			SubmarineLight: 18
 			Scout: 17
 			CyborgHeroic: 17
 			ShipMedium: 17
@@ -7094,7 +7378,9 @@ DefuseKit:
 			Heavy: 153
 			Medium: 130
 			AntiAirVehicle: 129
+			SubmarineHeavy: 129
 			Light: 128
+			SubmarineLight: 123
 			ShipSuperheavy: 107
 			ShipHeavy: 106
 			FlyingInfantry: 105
@@ -7162,10 +7448,12 @@ DefuseKit:
 			Heroic: 62
 			Heavy: 61
 			ShipMedium: 61
+			SubmarineLight: 61
 			Steel: 60
 			ShipHeavy: 60
 			CyborgHeroic: 59
 			ShipSuperheavy: 58
+			SubmarineHeavy: 58
 			Superheavy: 57
 			AntiAirBuilding: 57
 			Concrete: 54
@@ -7199,6 +7487,8 @@ DefuseKit:
 			ShipHeavy: 3
 			ShipSuperheavy: 3
 			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 			Steel: 2
 			ShipMedium: 2
 			Concrete: 1
@@ -7244,8 +7534,10 @@ DefuseKit:
 			Wood: 73
 			AntiAirShip: 70
 			Heavy: 68
+			SubmarineLight: 66
 			ShipMedium: 64
 			ShipHeavy: 62
+			SubmarineHeavy: 60
 			Superheavy: 58
 			Steel: 57
 			ShipSuperheavy: 57
@@ -7280,10 +7572,12 @@ DefuseKit:
 			ShipLight: 9
 			Superheavy: 8
 			AntiAirShip: 8
+			SubmarineLight: 8
 			Wood: 7
 			ShipMedium: 7
 			ShipHeavy: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Steel: 6
 			Concrete: 5
 			AntiAirBuilding: 5
@@ -7330,7 +7624,9 @@ DefuseKit:
 			Superheavy: 68
 			AntiAirShip: 68
 			ShipHeavy: 67
+			SubmarineHeavy: 67
 			ShipSuperheavy: 66
+			SubmarineLight: 66
 			Steel: 65
 			ShipMedium: 63
 			CyborgHeroic: 62
@@ -7364,10 +7660,12 @@ DefuseKit:
 			ShipLight: 14
 			Superheavy: 13
 			AntiAirShip: 13
+			SubmarineLight: 13
 			Wood: 12
 			ShipMedium: 12
 			ShipHeavy: 12
 			ShipSuperheavy: 12
+			SubmarineHeavy: 12
 			Steel: 11
 			Concrete: 10
 			AntiAirBuilding: 10
@@ -7417,8 +7715,10 @@ DefuseKit:
 			Heavy: 58
 			Superheavy: 57
 			ShipMedium: 57
+			SubmarineLight: 57
 			Wood: 56
 			ShipHeavy: 56
+			SubmarineHeavy: 56
 			ShipSuperheavy: 55
 			Steel: 54
 			Concrete: 53
@@ -7450,9 +7750,11 @@ DefuseKit:
 			Shield: 257
 			Superheavy: 178
 			ShipSuperheavy: 145
+			SubmarineHeavy: 144
 			Concrete: 134
 			AntiAirBuilding: 126
 			ShipMedium: 123
+			SubmarineLight: 119
 			Steel: 118
 			ShipHeavy: 116
 			AntiAirShip: 116
@@ -7489,11 +7791,13 @@ DefuseKit:
 			CyborgHeroic: 15
 			Spaceship: 14
 			Concrete: 13
+			SubmarineHeavy: 13
 			Heavy: 12
 			ShipSuperheavy: 12
 			Plate: 11
 			CyborgHeavy: 11
 			AntiAirBuilding: 11
+			SubmarineLight: 11
 			Helicopter: 10
 			ShipMedium: 10
 			ShipHeavy: 10
@@ -7539,12 +7843,14 @@ DefuseKit:
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
+			SubmarineLight: 16
 			Heroic: 15
 			ShipMedium: 15
 			AntiAirShip: 15
 			CyborgHeroic: 13
 			ShipHeavy: 13
 			Superheavy: 12
+			SubmarineHeavy: 12
 			ShipSuperheavy: 10
 			Wood: 9
 			Steel: 9
@@ -7582,6 +7888,8 @@ DefuseKit:
 			CyborgHeavy: 179
 			Spaceship: 175
 			ShipMedium: 172
+			SubmarineHeavy: 172
+			SubmarineLight: 171
 			Heavy: 170
 			AntiAirBuilding: 165
 			ShipSuperheavy: 162
@@ -7617,11 +7925,13 @@ DefuseKit:
 			CyborgHeroic: 19
 			Spaceship: 18
 			Concrete: 17
+			SubmarineHeavy: 17
 			Heavy: 16
 			ShipSuperheavy: 16
 			Plate: 15
 			CyborgHeavy: 15
 			AntiAirBuilding: 15
+			SubmarineLight: 15
 			Helicopter: 14
 			ShipMedium: 14
 			ShipHeavy: 14
@@ -7667,12 +7977,14 @@ DefuseKit:
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
+			SubmarineLight: 16
 			Heroic: 15
 			ShipMedium: 15
 			AntiAirShip: 15
 			CyborgHeroic: 13
 			ShipHeavy: 13
 			Superheavy: 12
+			SubmarineHeavy: 12
 			ShipSuperheavy: 10
 			Wood: 9
 			Steel: 9
@@ -7707,10 +8019,12 @@ DefuseKit:
 			Superheavy: 200
 			Spaceship: 172
 			Concrete: 167
+			SubmarineHeavy: 159
 			Plate: 156
 			ShipSuperheavy: 150
 			CyborgHeavy: 149
 			Heavy: 142
+			SubmarineLight: 138
 			AntiAirBuilding: 137
 			ShipMedium: 134
 			Helicopter: 127
@@ -7745,11 +8059,13 @@ DefuseKit:
 			CyborgHeroic: 24
 			Spaceship: 23
 			Concrete: 22
+			SubmarineHeavy: 22
 			Heavy: 21
 			ShipSuperheavy: 21
 			Plate: 20
 			CyborgHeavy: 20
 			AntiAirBuilding: 20
+			SubmarineLight: 20
 			Helicopter: 19
 			ShipMedium: 19
 			ShipHeavy: 19
@@ -7795,12 +8111,14 @@ DefuseKit:
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
+			SubmarineLight: 16
 			Heroic: 15
 			ShipMedium: 15
 			AntiAirShip: 15
 			CyborgHeroic: 13
 			ShipHeavy: 13
 			Superheavy: 12
+			SubmarineHeavy: 12
 			ShipSuperheavy: 10
 			Wood: 9
 			Steel: 9
@@ -7837,9 +8155,11 @@ DefuseKit:
 			Superheavy: 181
 			Spaceship: 172
 			Concrete: 167
+			SubmarineHeavy: 167
 			ShipSuperheavy: 164
 			Heavy: 162
 			CyborgHeavy: 159
+			SubmarineLight: 158
 			Plate: 157
 			AntiAirBuilding: 157
 			ShipMedium: 155
@@ -7894,12 +8214,14 @@ DefuseKit:
 			CyborgHeavy: 19
 			Heavy: 18
 			ShipLight: 16
+			SubmarineLight: 16
 			Heroic: 15
 			ShipMedium: 15
 			AntiAirShip: 15
 			CyborgHeroic: 13
 			ShipHeavy: 13
 			Superheavy: 12
+			SubmarineHeavy: 12
 			ShipSuperheavy: 10
 			Wood: 9
 			Steel: 9
@@ -7951,6 +8273,8 @@ DefuseKit:
 			AntiAirBuilding: 98
 			ShipMedium: 97
 			ShipSuperheavy: 95
+			SubmarineLight: 90
+			SubmarineHeavy: 87
 			Plate: 86
 			Heroic: 86
 			CyborgHeavy: 85
@@ -7985,9 +8309,11 @@ DefuseKit:
 			ShipHeavy: 9
 			Concrete: 8
 			CyborgHeavy: 8
+			SubmarineLight: 8
 			Heavy: 7
 			FlyingInfantry: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Heroic: 6
 			Superheavy: 5
 			CyborgHeroic: 5
@@ -8030,12 +8356,14 @@ DefuseKit:
 			Flak: 123
 			Heavy: 118
 			ShipHeavy: 116
+			SubmarineLight: 115
 			Steel: 114
 			ShipMedium: 113
 			CyborgHeavy: 108
 			AntiAirBuilding: 104
 			FlyingInfantry: 103
 			Plate: 99
+			SubmarineHeavy: 99
 			ShipSuperheavy: 98
 			Concrete: 94
 			Heroic: 85
@@ -8071,7 +8399,9 @@ DefuseKit:
 			FlyingInfantry: 12
 			CyborgHeavy: 12
 			ShipSuperheavy: 12
+			SubmarineLight: 12
 			Heavy: 11
+			SubmarineHeavy: 11
 			Heroic: 10
 			Superheavy: 9
 			CyborgHeroic: 9
@@ -8119,7 +8449,9 @@ DefuseKit:
 			FlyingInfantry: 103
 			ShipSuperheavy: 103
 			Heavy: 102
+			SubmarineHeavy: 102
 			Superheavy: 101
+			SubmarineLight: 99
 			AntiAirBuilding: 98
 			ShipMedium: 97
 			Concrete: 90
@@ -8155,7 +8487,9 @@ DefuseKit:
 			Concrete: 17
 			CyborgHeavy: 17
 			ShipSuperheavy: 17
+			SubmarineLight: 17
 			Heavy: 16
+			SubmarineHeavy: 16
 			Heroic: 15
 			Superheavy: 14
 			CyborgHeroic: 14
@@ -8206,7 +8540,9 @@ DefuseKit:
 			CyborgHeavy: 113
 			Concrete: 112
 			ShipSuperheavy: 112
+			SubmarineLight: 112
 			Heavy: 108
+			SubmarineHeavy: 108
 			Superheavy: 102
 			CyborgHeroic: 99
 			Fighter: 97
@@ -8246,7 +8582,9 @@ DefuseKit:
 			ShipMedium: 133
 			CyborgHeavy: 132
 			AntiAirBuilding: 130
+			SubmarineLight: 130
 			Heavy: 128
+			SubmarineHeavy: 128
 			ShipSuperheavy: 125
 			Medium: 122
 			ShipHeavy: 122
@@ -8294,6 +8632,8 @@ DefuseKit:
 			AntiAirInfantry: 9
 			ShipMedium: 9
 			ShipHeavy: 9
+			SubmarineLight: 9
+			SubmarineHeavy: 9
 			Scout: 8
 			Light: 8
 			FlyingInfantry: 8
@@ -8331,6 +8671,8 @@ DefuseKit:
 			Superheavy: 176
 			CyborgHeavy: 157
 			ShipMedium: 150
+			SubmarineHeavy: 147
+			SubmarineLight: 143
 			AntiAirBuilding: 142
 			ShipSuperheavy: 139
 			Heavy: 137
@@ -8380,6 +8722,8 @@ DefuseKit:
 			AntiAirInfantry: 13
 			ShipMedium: 13
 			ShipHeavy: 13
+			SubmarineLight: 13
+			SubmarineHeavy: 13
 			Scout: 12
 			Light: 12
 			FlyingInfantry: 12
@@ -8415,9 +8759,11 @@ DefuseKit:
 			Superheavy: 189
 			Plate: 174
 			CyborgHeavy: 160
+			SubmarineHeavy: 156
 			Concrete: 150
 			Heavy: 148
 			ShipSuperheavy: 144
+			SubmarineLight: 137
 			AntiAirBuilding: 128
 			ShipHeavy: 128
 			ShipMedium: 127
@@ -8466,6 +8812,8 @@ DefuseKit:
 			AntiAirInfantry: 18
 			ShipMedium: 18
 			ShipHeavy: 18
+			SubmarineLight: 18
+			SubmarineHeavy: 18
 			Scout: 17
 			Light: 17
 			FlyingInfantry: 17
@@ -8506,10 +8854,12 @@ DefuseKit:
 			ShipSuperheavy: 131
 			CyborgHeavy: 130
 			AntiAirBuilding: 130
+			SubmarineHeavy: 130
 			Steel: 129
 			Flak: 127
 			ShipMedium: 127
 			ShipHeavy: 127
+			SubmarineLight: 126
 			Heavy: 125
 			CyborgMedium: 125
 			Medium: 124
@@ -8576,7 +8926,9 @@ DefuseKit:
 			CyborgHeavy: 92
 			ShipMedium: 91
 			AntiAirVehicle: 87
+			SubmarineHeavy: 86
 			Fighter: 84
+			SubmarineLight: 82
 			Medium: 80
 			Heroic: 74
 			Heavy: 73
@@ -8614,6 +8966,8 @@ DefuseKit:
 			Medium: 7
 			CyborgHeroic: 7
 			AntiAirVehicle: 7
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			Heavy: 6
 			FlyingInfantry: 6
 			Superheavy: 5
@@ -8663,6 +9017,8 @@ DefuseKit:
 			CyborgHeavy: 99
 			AntiAirVehicle: 99
 			Medium: 98
+			SubmarineLight: 89
+			SubmarineHeavy: 87
 			Heavy: 79
 			Fighter: 77
 			Bomber: 75
@@ -8701,6 +9057,8 @@ DefuseKit:
 			FlyingInfantry: 11
 			CyborgHeroic: 11
 			AntiAirVehicle: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Heavy: 10
 			Superheavy: 9
 			Fighter: 8
@@ -8746,6 +9104,8 @@ DefuseKit:
 			ShipMedium: 102
 			FlyingInfantry: 98
 			Scout: 91
+			SubmarineHeavy: 91
+			SubmarineLight: 88
 			Light: 86
 			AntiAirVehicle: 82
 			Medium: 78
@@ -8787,6 +9147,8 @@ DefuseKit:
 			Medium: 16
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Heavy: 15
 			Superheavy: 14
 			Fighter: 13
@@ -8835,7 +9197,9 @@ DefuseKit:
 			CyborgHeavy: 99
 			Light: 95
 			ShipMedium: 93
+			SubmarineHeavy: 87
 			AntiAirVehicle: 86
+			SubmarineLight: 80
 			Heroic: 78
 			Medium: 78
 			CyborgHeroic: 72
@@ -8884,7 +9248,9 @@ DefuseKit:
 			AntiAirInfantry: 145
 			CyborgHeroic: 141
 			CyborgLight: 139
+			SubmarineHeavy: 138
 			Scout: 137
+			SubmarineLight: 137
 			None: 132
 			Heroic: 118
 			ShipSuperheavy: 114
@@ -8915,9 +9281,11 @@ DefuseKit:
 			Plate: 13
 			CyborgHeavy: 13
 			Medium: 12
+			SubmarineHeavy: 12
 			Flak: 11
 			CyborgMedium: 11
 			AntiAirVehicle: 11
+			SubmarineLight: 11
 			Light: 10
 			AntiAirInfantry: 10
 			ShipSuperheavy: 10
@@ -8962,7 +9330,9 @@ DefuseKit:
 			Plate: 192
 			CyborgHeavy: 181
 			Heavy: 170
+			SubmarineHeavy: 154
 			Medium: 148
+			SubmarineLight: 146
 			AntiAirVehicle: 144
 			CyborgMedium: 142
 			Light: 140
@@ -9001,9 +9371,11 @@ DefuseKit:
 			Plate: 17
 			CyborgHeavy: 17
 			Medium: 16
+			SubmarineHeavy: 16
 			Flak: 15
 			CyborgMedium: 15
 			AntiAirVehicle: 15
+			SubmarineLight: 15
 			Light: 14
 			AntiAirInfantry: 14
 			ShipSuperheavy: 14
@@ -9048,6 +9420,8 @@ DefuseKit:
 			Plate: 194
 			CyborgHeavy: 183
 			Heavy: 173
+			SubmarineHeavy: 156
+			SubmarineLight: 153
 			Medium: 149
 			CyborgMedium: 146
 			Flak: 143
@@ -9086,10 +9460,12 @@ DefuseKit:
 			Heavy: 23
 			Plate: 22
 			CyborgHeavy: 22
+			SubmarineHeavy: 22
 			Medium: 21
 			Flak: 20
 			CyborgMedium: 20
 			AntiAirVehicle: 20
+			SubmarineLight: 20
 			Light: 19
 			AntiAirInfantry: 19
 			ShipHeavy: 19
@@ -9140,8 +9516,10 @@ DefuseKit:
 			CyborgMedium: 171
 			Flak: 167
 			AntiAirVehicle: 164
+			SubmarineLight: 154
 			Light: 153
 			AntiAirInfantry: 151
+			SubmarineHeavy: 149
 			CyborgLight: 144
 			CyborgHeroic: 141
 			None: 136
@@ -9212,7 +9590,9 @@ DefuseKit:
 			Medium: 97
 			ShipMedium: 97
 			ShipSuperheavy: 96
+			SubmarineLight: 88
 			Fighter: 86
+			SubmarineHeavy: 85
 			Heroic: 81
 			Heavy: 80
 			CyborgHeroic: 76
@@ -9249,8 +9629,10 @@ DefuseKit:
 			Medium: 7
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
+			SubmarineLight: 7
 			Heavy: 6
 			FlyingInfantry: 6
+			SubmarineHeavy: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -9300,7 +9682,9 @@ DefuseKit:
 			Medium: 97
 			ShipMedium: 97
 			ShipSuperheavy: 96
+			SubmarineLight: 88
 			Fighter: 86
+			SubmarineHeavy: 85
 			Heroic: 81
 			Heavy: 80
 			CyborgHeroic: 76
@@ -9337,8 +9721,10 @@ DefuseKit:
 			Medium: 7
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
+			SubmarineLight: 7
 			Heavy: 6
 			FlyingInfantry: 6
+			SubmarineHeavy: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -9388,7 +9774,9 @@ DefuseKit:
 			ShipMedium: 101
 			Medium: 100
 			ShipSuperheavy: 96
+			SubmarineLight: 96
 			Heavy: 91
+			SubmarineHeavy: 89
 			Heroic: 77
 			Superheavy: 76
 			CyborgHeroic: 76
@@ -9426,7 +9814,9 @@ DefuseKit:
 			Medium: 11
 			FlyingInfantry: 11
 			AntiAirVehicle: 11
+			SubmarineLight: 11
 			Heavy: 10
+			SubmarineHeavy: 10
 			Superheavy: 9
 			Fighter: 8
 			Bomber: 7
@@ -9479,6 +9869,8 @@ DefuseKit:
 			AntiAirVehicle: 101
 			Medium: 94
 			Heroic: 93
+			SubmarineLight: 93
+			SubmarineHeavy: 91
 			CyborgHeroic: 86
 			Heavy: 81
 			Superheavy: 79
@@ -9532,8 +9924,10 @@ DefuseKit:
 			ShipSuperheavy: 108
 			AntiAirBuilding: 107
 			FlyingInfantry: 105
+			SubmarineHeavy: 101
 			Heavy: 100
 			ShipMedium: 99
+			SubmarineLight: 99
 			Superheavy: 90
 			Concrete: 88
 			CyborgHeroic: 86
@@ -9573,6 +9967,8 @@ DefuseKit:
 			ShipHeavy: 9
 			ShipSuperheavy: 9
 			AntiAirShip: 9
+			SubmarineLight: 9
+			SubmarineHeavy: 9
 			Scout: 8
 			FlyingInfantry: 6
 			Fighter: 2
@@ -9620,6 +10016,8 @@ DefuseKit:
 			AntiAirBuilding: 104
 			FlyingInfantry: 102
 			ShipMedium: 101
+			SubmarineHeavy: 101
+			SubmarineLight: 100
 			Heavy: 99
 			Superheavy: 94
 			CyborgHeroic: 90
@@ -9660,6 +10058,8 @@ DefuseKit:
 			ShipHeavy: 13
 			ShipSuperheavy: 13
 			AntiAirShip: 13
+			SubmarineLight: 13
+			SubmarineHeavy: 13
 			Scout: 12
 			FlyingInfantry: 10
 			Fighter: 6
@@ -9708,7 +10108,9 @@ DefuseKit:
 			Medium: 105
 			FlyingInfantry: 105
 			ShipSuperheavy: 105
+			SubmarineLight: 102
 			Heroic: 97
+			SubmarineHeavy: 97
 			Heavy: 94
 			CyborgHeroic: 91
 			Superheavy: 85
@@ -9747,6 +10149,8 @@ DefuseKit:
 			ShipHeavy: 18
 			ShipSuperheavy: 18
 			AntiAirShip: 18
+			SubmarineLight: 18
+			SubmarineHeavy: 18
 			Scout: 17
 			FlyingInfantry: 16
 			Fighter: 11
@@ -9790,12 +10194,14 @@ DefuseKit:
 			ShipSuperheavy: 127
 			AntiAirBuilding: 122
 			AntiAirShip: 118
+			SubmarineHeavy: 118
 			Scout: 115
 			Light: 114
 			AntiAirVehicle: 113
 			Medium: 112
 			Heavy: 111
 			Superheavy: 108
+			SubmarineLight: 108
 			ShipMedium: 106
 			Concrete: 100
 			CyborgHeroic: 100
@@ -9854,7 +10260,9 @@ DefuseKit:
 			AntiAirVehicle: 96
 			CyborgHeavy: 90
 			Medium: 87
+			SubmarineLight: 87
 			Fighter: 86
+			SubmarineHeavy: 86
 			Heavy: 75
 			Heroic: 74
 			CyborgHeroic: 70
@@ -9890,6 +10298,8 @@ DefuseKit:
 			CyborgHeavy: 8
 			AntiAirVehicle: 8
 			ShipSuperheavy: 8
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			Heavy: 6
 			FlyingInfantry: 6
 			CyborgHeroic: 6
@@ -9940,6 +10350,8 @@ DefuseKit:
 			Medium: 101
 			FlyingInfantry: 101
 			CyborgHeavy: 100
+			SubmarineLight: 97
+			SubmarineHeavy: 89
 			Heavy: 86
 			Fighter: 74
 			Bomber: 71
@@ -9977,6 +10389,8 @@ DefuseKit:
 			AntiAirVehicle: 12
 			ShipSuperheavy: 12
 			FlyingInfantry: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Heavy: 10
 			CyborgHeroic: 10
 			Superheavy: 9
@@ -10021,6 +10435,8 @@ DefuseKit:
 			AntiAirShip: 122
 			ShipMedium: 115
 			CyborgHeavy: 113
+			SubmarineHeavy: 102
+			SubmarineLight: 99
 			FlyingInfantry: 97
 			Scout: 94
 			Light: 88
@@ -10063,6 +10479,8 @@ DefuseKit:
 			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirVehicle: 17
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Heavy: 15
 			CyborgHeroic: 15
 			Superheavy: 14
@@ -10112,7 +10530,9 @@ DefuseKit:
 			FlyingInfantry: 104
 			CyborgHeavy: 102
 			Light: 99
+			SubmarineHeavy: 92
 			AntiAirVehicle: 91
+			SubmarineLight: 91
 			Medium: 84
 			Heroic: 81
 			CyborgHeroic: 75
@@ -10155,6 +10575,8 @@ DefuseKit:
 			AntiAirVehicle: 138
 			Light: 137
 			Scout: 135
+			SubmarineLight: 133
+			SubmarineHeavy: 131
 			CyborgHeavy: 129
 			CyborgMedium: 126
 			ShipMedium: 123
@@ -10190,10 +10612,12 @@ DefuseKit:
 			CyborgHeroic: 14
 			Heroic: 13
 			Heavy: 13
+			SubmarineHeavy: 13
 			CyborgHeavy: 12
 			Plate: 11
 			Medium: 11
 			ShipSuperheavy: 11
+			SubmarineLight: 11
 			CyborgMedium: 10
 			AntiAirVehicle: 10
 			ShipMedium: 10
@@ -10240,6 +10664,8 @@ DefuseKit:
 			Plate: 172
 			CyborgHeavy: 169
 			Heavy: 166
+			SubmarineHeavy: 161
+			SubmarineLight: 155
 			Concrete: 153
 			ShipMedium: 145
 			ShipSuperheavy: 141
@@ -10277,10 +10703,12 @@ DefuseKit:
 			CyborgHeroic: 18
 			Heroic: 17
 			Heavy: 17
+			SubmarineHeavy: 17
 			CyborgHeavy: 16
 			Plate: 15
 			Medium: 15
 			ShipSuperheavy: 15
+			SubmarineLight: 15
 			CyborgMedium: 14
 			AntiAirVehicle: 14
 			ShipMedium: 14
@@ -10325,6 +10753,8 @@ DefuseKit:
 			Shield: 317
 			Superheavy: 200
 			Heavy: 171
+			SubmarineHeavy: 161
+			SubmarineLight: 150
 			CyborgHeavy: 149
 			Medium: 141
 			ShipSuperheavy: 140
@@ -10364,10 +10794,12 @@ DefuseKit:
 			CyborgHeroic: 23
 			Heroic: 22
 			Heavy: 22
+			SubmarineHeavy: 22
 			CyborgHeavy: 21
 			Plate: 20
 			Medium: 20
 			ShipSuperheavy: 20
+			SubmarineLight: 20
 			CyborgMedium: 19
 			AntiAirVehicle: 19
 			ShipMedium: 19
@@ -10414,8 +10846,10 @@ DefuseKit:
 			Shield: 194
 			Superheavy: 164
 			Heavy: 154
+			SubmarineHeavy: 146
 			CyborgHeavy: 144
 			Medium: 143
+			SubmarineLight: 141
 			Plate: 135
 			ShipSuperheavy: 134
 			CyborgMedium: 133
@@ -10477,7 +10911,9 @@ DefuseKit:
 			Superheavy: 136
 			Heavy: 133
 			CyborgMedium: 132
+			SubmarineLight: 132
 			ShipMedium: 131
+			SubmarineHeavy: 128
 			AntiAirInfantry: 127
 			Medium: 124
 			AntiAirBuilding: 122
@@ -10513,11 +10949,13 @@ DefuseKit:
 			Heavy: 12
 			Plate: 11
 			CyborgHeavy: 11
+			SubmarineHeavy: 11
 			Flak: 10
 			Medium: 10
 			CyborgMedium: 10
 			ShipHeavy: 10
 			ShipSuperheavy: 10
+			SubmarineLight: 10
 			None: 9
 			Light: 9
 			Concrete: 9
@@ -10561,8 +10999,10 @@ DefuseKit:
 			Superheavy: 175
 			CyborgHeavy: 169
 			Concrete: 159
+			SubmarineHeavy: 146
 			Heavy: 142
 			ShipMedium: 142
+			SubmarineLight: 142
 			ShipSuperheavy: 136
 			Flak: 131
 			CyborgMedium: 129
@@ -10600,11 +11040,13 @@ DefuseKit:
 			Heavy: 16
 			Plate: 15
 			CyborgHeavy: 15
+			SubmarineHeavy: 15
 			Flak: 14
 			Medium: 14
 			CyborgMedium: 14
 			ShipHeavy: 14
 			ShipSuperheavy: 14
+			SubmarineLight: 14
 			None: 13
 			Light: 13
 			Concrete: 13
@@ -10647,7 +11089,9 @@ DefuseKit:
 			Superheavy: 200
 			Plate: 175
 			CyborgHeavy: 169
+			SubmarineHeavy: 165
 			Heavy: 164
+			SubmarineLight: 153
 			Concrete: 151
 			ShipSuperheavy: 150
 			ShipMedium: 142
@@ -10687,11 +11131,13 @@ DefuseKit:
 			Heavy: 21
 			Plate: 20
 			CyborgHeavy: 20
+			SubmarineHeavy: 20
 			Flak: 19
 			Medium: 19
 			CyborgMedium: 19
 			ShipHeavy: 19
 			ShipSuperheavy: 19
+			SubmarineLight: 19
 			None: 18
 			Light: 18
 			Concrete: 18
@@ -10741,6 +11187,8 @@ DefuseKit:
 			CyborgMedium: 136
 			Heavy: 133
 			None: 131
+			SubmarineHeavy: 131
+			SubmarineLight: 129
 			Medium: 127
 			Concrete: 126
 			ShipMedium: 126
@@ -10794,8 +11242,10 @@ DefuseKit:
 			Superheavy: 171
 			Spaceship: 160
 			Heavy: 151
+			SubmarineHeavy: 140
 			Medium: 138
 			Helicopter: 137
+			SubmarineLight: 137
 			AntiAirVehicle: 132
 			Light: 126
 			ShipMedium: 124
@@ -10830,6 +11280,8 @@ DefuseKit:
 			Light: 10
 			Medium: 10
 			AntiAirVehicle: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Scout: 9
 			Helicopter: 9
 			Spaceship: 9
@@ -10878,6 +11330,8 @@ DefuseKit:
 			Spaceship: 162
 			Helicopter: 161
 			Heavy: 156
+			SubmarineLight: 139
+			SubmarineHeavy: 135
 			Medium: 132
 			AntiAirVehicle: 126
 			CyborgHeavy: 123
@@ -10913,6 +11367,8 @@ DefuseKit:
 			Light: 14
 			Medium: 14
 			AntiAirVehicle: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Scout: 13
 			Helicopter: 13
 			Spaceship: 13
@@ -10959,6 +11415,8 @@ DefuseKit:
 			Shield: 212
 			Superheavy: 200
 			Heavy: 171
+			SubmarineHeavy: 160
+			SubmarineLight: 147
 			ShipSuperheavy: 139
 			CyborgHeavy: 136
 			Spaceship: 135
@@ -10996,6 +11454,8 @@ DefuseKit:
 			Light: 19
 			Medium: 19
 			AntiAirVehicle: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 			Scout: 18
 			Helicopter: 18
 			Spaceship: 18
@@ -11049,9 +11509,11 @@ DefuseKit:
 			Helicopter: 137
 			Bomber: 136
 			Fighter: 129
+			SubmarineHeavy: 125
 			Medium: 123
 			Light: 122
 			AntiAirVehicle: 122
+			SubmarineLight: 121
 			Scout: 111
 			ShipSuperheavy: 109
 			ShipHeavy: 108
@@ -11117,6 +11579,8 @@ DefuseKit:
 			Concrete: 95
 			Medium: 94
 			ShipMedium: 94
+			SubmarineLight: 88
+			SubmarineHeavy: 88
 			Heavy: 82
 			Bomber: 79
 			CyborgHeavy: 79
@@ -11149,9 +11613,11 @@ DefuseKit:
 			ShipSuperheavy: 10
 			Medium: 9
 			AntiAirInfantry: 9
+			SubmarineLight: 9
 			Flak: 8
 			Heavy: 8
 			CyborgMedium: 8
+			SubmarineHeavy: 8
 			Plate: 7
 			Superheavy: 7
 			FlyingInfantry: 7
@@ -11201,7 +11667,9 @@ DefuseKit:
 			ShipMedium: 106
 			ShipSuperheavy: 104
 			FlyingInfantry: 103
+			SubmarineLight: 99
 			Concrete: 96
+			SubmarineHeavy: 93
 			Heavy: 92
 			Fighter: 90
 			CyborgHeavy: 89
@@ -11235,10 +11703,12 @@ DefuseKit:
 			ShipSuperheavy: 14
 			Medium: 13
 			AntiAirInfantry: 13
+			SubmarineLight: 13
 			Flak: 12
 			Heavy: 12
 			FlyingInfantry: 12
 			CyborgMedium: 12
+			SubmarineHeavy: 12
 			Plate: 11
 			Superheavy: 11
 			CyborgHeavy: 11
@@ -11287,6 +11757,8 @@ DefuseKit:
 			CyborgMedium: 110
 			Light: 105
 			CyborgHeavy: 104
+			SubmarineHeavy: 103
+			SubmarineLight: 101
 			AntiAirVehicle: 98
 			FlyingInfantry: 96
 			Medium: 92
@@ -11321,10 +11793,12 @@ DefuseKit:
 			ShipSuperheavy: 19
 			Medium: 18
 			AntiAirInfantry: 18
+			SubmarineLight: 18
 			Flak: 17
 			Heavy: 17
 			FlyingInfantry: 17
 			CyborgMedium: 17
+			SubmarineHeavy: 17
 			Plate: 16
 			Superheavy: 16
 			CyborgHeavy: 16
@@ -11375,8 +11849,10 @@ DefuseKit:
 			Concrete: 110
 			AntiAirVehicle: 100
 			ShipMedium: 98
+			SubmarineHeavy: 96
 			Plate: 94
 			Medium: 88
+			SubmarineLight: 88
 			CyborgHeavy: 86
 			Heavy: 79
 			Superheavy: 75
@@ -11418,7 +11894,9 @@ DefuseKit:
 			Medium: 175
 			AntiAirVehicle: 166
 			Light: 158
+			SubmarineLight: 142
 			Scout: 141
+			SubmarineHeavy: 141
 			CyborgHeavy: 130
 			CyborgMedium: 123
 			ShipMedium: 113
@@ -11454,6 +11932,8 @@ DefuseKit:
 			Medium: 13
 			CyborgHeroic: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Light: 11
 			CyborgHeavy: 11
 			Scout: 10
@@ -11503,7 +11983,9 @@ DefuseKit:
 			Heavy: 175
 			Medium: 156
 			AntiAirVehicle: 150
+			SubmarineHeavy: 149
 			CyborgHeavy: 148
+			SubmarineLight: 146
 			Light: 145
 			Plate: 126
 			ShipMedium: 122
@@ -11540,6 +12022,8 @@ DefuseKit:
 			Medium: 17
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Light: 15
 			CyborgHeavy: 15
 			Scout: 14
@@ -11588,7 +12072,9 @@ DefuseKit:
 			Superheavy: 200
 			Heavy: 173
 			CyborgHeavy: 156
+			SubmarineHeavy: 153
 			Medium: 149
+			SubmarineLight: 149
 			Plate: 140
 			AntiAirVehicle: 136
 			ShipMedium: 129
@@ -11624,8 +12110,10 @@ DefuseKit:
 			Superheavy: 25
 			Heavy: 23
 			Medium: 22
+			SubmarineHeavy: 22
 			CyborgHeroic: 21
 			AntiAirVehicle: 21
+			SubmarineLight: 21
 			Light: 20
 			CyborgHeavy: 20
 			Scout: 19
@@ -11678,6 +12166,8 @@ DefuseKit:
 			Medium: 181
 			AntiAirVehicle: 174
 			Light: 168
+			SubmarineLight: 151
+			SubmarineHeavy: 150
 			CyborgHeavy: 142
 			Scout: 134
 			CyborgMedium: 133
@@ -11737,6 +12227,8 @@ DefuseKit:
 			AntiAirVehicle: 140
 			Light: 137
 			CyborgMedium: 134
+			SubmarineLight: 133
+			SubmarineHeavy: 130
 			Flak: 125
 			Scout: 124
 			ShipMedium: 122
@@ -11769,8 +12261,10 @@ DefuseKit:
 			Heavy: 14
 			Medium: 13
 			CyborgHeroic: 13
+			SubmarineHeavy: 13
 			CyborgHeavy: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
 			Heroic: 11
 			Light: 11
 			ShipMedium: 11
@@ -11817,7 +12311,9 @@ DefuseKit:
 			Shield: 224
 			Superheavy: 200
 			Heavy: 165
+			SubmarineHeavy: 160
 			CyborgHeavy: 159
+			SubmarineLight: 155
 			Plate: 154
 			Medium: 151
 			ShipMedium: 145
@@ -11855,8 +12351,10 @@ DefuseKit:
 			Heavy: 18
 			Medium: 17
 			CyborgHeroic: 17
+			SubmarineHeavy: 17
 			CyborgHeavy: 16
 			AntiAirVehicle: 16
+			SubmarineLight: 16
 			Heroic: 15
 			Light: 15
 			ShipMedium: 15
@@ -11905,6 +12403,8 @@ DefuseKit:
 			Plate: 172
 			CyborgHeavy: 169
 			Heavy: 166
+			SubmarineHeavy: 158
+			SubmarineLight: 152
 			Medium: 142
 			ShipMedium: 140
 			Concrete: 138
@@ -11941,9 +12441,11 @@ DefuseKit:
 			Heavy: 23
 			Medium: 22
 			CyborgHeroic: 22
+			SubmarineHeavy: 22
 			CyborgHeavy: 21
 			AntiAirVehicle: 21
 			ShipSuperheavy: 21
+			SubmarineLight: 21
 			Heroic: 20
 			Light: 20
 			ShipMedium: 20
@@ -11993,7 +12495,9 @@ DefuseKit:
 			Heavy: 167
 			Medium: 162
 			AntiAirVehicle: 156
+			SubmarineLight: 152
 			Light: 150
+			SubmarineHeavy: 150
 			CyborgHeavy: 146
 			ShipMedium: 139
 			CyborgMedium: 138
@@ -12060,6 +12564,8 @@ DefuseKit:
 			AntiAirVehicle: 133
 			Heroic: 130
 			Scout: 130
+			SubmarineLight: 121
+			SubmarineHeavy: 121
 			ShipMedium: 108
 			ShipSuperheavy: 108
 			ShipHeavy: 107
@@ -12091,9 +12597,11 @@ DefuseKit:
 			CyborgMedium: 47
 			Heavy: 44
 			CyborgLight: 43
+			SubmarineHeavy: 41
 			Medium: 40
 			AntiAirVehicle: 37
 			ShipSuperheavy: 36
+			SubmarineLight: 36
 			Light: 35
 			ShipHeavy: 34
 			Scout: 31
@@ -12139,6 +12647,8 @@ DefuseKit:
 			CyborgMedium: 144
 			None: 138
 			Medium: 135
+			SubmarineLight: 134
+			SubmarineHeavy: 134
 			CyborgLight: 132
 			AntiAirVehicle: 130
 			Light: 126
@@ -12176,8 +12686,10 @@ DefuseKit:
 			CyborgMedium: 63
 			Heavy: 59
 			CyborgLight: 57
+			SubmarineHeavy: 54
 			Medium: 53
 			AntiAirVehicle: 50
+			SubmarineLight: 49
 			ShipSuperheavy: 48
 			Light: 47
 			ShipHeavy: 45
@@ -12222,6 +12734,8 @@ DefuseKit:
 			Heavy: 152
 			AntiAirInfantry: 147
 			CyborgMedium: 146
+			SubmarineHeavy: 143
+			SubmarineLight: 136
 			None: 132
 			Medium: 130
 			CyborgHeroic: 128
@@ -12261,9 +12775,11 @@ DefuseKit:
 			CyborgMedium: 79
 			Heavy: 74
 			CyborgLight: 71
+			SubmarineHeavy: 68
 			Medium: 66
 			AntiAirVehicle: 62
 			ShipSuperheavy: 60
+			SubmarineLight: 60
 			Light: 59
 			ShipHeavy: 57
 			Scout: 51
@@ -12310,7 +12826,9 @@ DefuseKit:
 			Heavy: 129
 			CyborgLight: 126
 			Medium: 122
+			SubmarineHeavy: 122
 			AntiAirVehicle: 118
+			SubmarineLight: 118
 			Light: 115
 			ShipSuperheavy: 112
 			ShipHeavy: 109
@@ -12346,8 +12864,10 @@ DefuseKit:
 			CyborgMedium: 95
 			Heavy: 89
 			CyborgLight: 86
+			SubmarineHeavy: 82
 			Medium: 80
 			AntiAirVehicle: 75
+			SubmarineLight: 73
 			ShipSuperheavy: 72
 			Light: 71
 			ShipHeavy: 69
@@ -12397,7 +12917,9 @@ DefuseKit:
 			Heavy: 154
 			CyborgLight: 148
 			Medium: 139
+			SubmarineHeavy: 139
 			CyborgHeroic: 136
+			SubmarineLight: 133
 			AntiAirVehicle: 132
 			Light: 126
 			ShipSuperheavy: 121
@@ -12462,6 +12984,8 @@ DefuseKit:
 			Medium: 98
 			ShipMedium: 98
 			Plate: 94
+			SubmarineLight: 92
+			SubmarineHeavy: 91
 			CyborgHeavy: 90
 			Heavy: 87
 			Fighter: 81
@@ -12497,8 +13021,10 @@ DefuseKit:
 			Plate: 9
 			Medium: 9
 			CyborgMedium: 9
+			SubmarineLight: 9
 			Heavy: 8
 			CyborgHeavy: 8
+			SubmarineHeavy: 8
 			Heroic: 7
 			Superheavy: 7
 			CyborgHeroic: 7
@@ -12547,8 +13073,10 @@ DefuseKit:
 			ShipSuperheavy: 105
 			Plate: 104
 			FlyingInfantry: 103
+			SubmarineLight: 99
 			Concrete: 98
 			CyborgHeavy: 98
+			SubmarineHeavy: 94
 			Heavy: 93
 			Fighter: 85
 			Superheavy: 76
@@ -12583,8 +13111,10 @@ DefuseKit:
 			Plate: 13
 			Medium: 13
 			CyborgMedium: 13
+			SubmarineLight: 13
 			Heavy: 12
 			CyborgHeavy: 12
+			SubmarineHeavy: 12
 			Heroic: 11
 			Superheavy: 11
 			FlyingInfantry: 11
@@ -12630,6 +13160,8 @@ DefuseKit:
 			ShipMedium: 119
 			ShipSuperheavy: 119
 			CyborgHeavy: 114
+			SubmarineLight: 106
+			SubmarineHeavy: 106
 			Scout: 104
 			FlyingInfantry: 98
 			Light: 96
@@ -12669,8 +13201,10 @@ DefuseKit:
 			Plate: 18
 			Medium: 18
 			CyborgMedium: 18
+			SubmarineLight: 18
 			Heavy: 17
 			CyborgHeavy: 17
+			SubmarineHeavy: 17
 			Heroic: 16
 			Superheavy: 16
 			FlyingInfantry: 16
@@ -12722,7 +13256,9 @@ DefuseKit:
 			ShipMedium: 101
 			CyborgHeavy: 100
 			AntiAirVehicle: 100
+			SubmarineHeavy: 99
 			Medium: 91
+			SubmarineLight: 90
 			Heroic: 87
 			CyborgHeroic: 83
 			Heavy: 80
@@ -12777,9 +13313,11 @@ DefuseKit:
 			Steel: 90
 			Heavy: 89
 			ShipHeavy: 89
+			SubmarineLight: 88
 			Bomber: 87
 			ShipMedium: 87
 			ShipSuperheavy: 87
+			SubmarineHeavy: 86
 			AntiAirBuilding: 85
 			Superheavy: 84
 			Concrete: 81
@@ -12809,11 +13347,13 @@ DefuseKit:
 			ShipLight: 9
 			Superheavy: 8
 			AntiAirShip: 8
+			SubmarineLight: 8
 			Wood: 7
 			FlyingInfantry: 7
 			ShipMedium: 7
 			ShipHeavy: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Steel: 6
 			Concrete: 5
 			AntiAirBuilding: 5
@@ -12858,10 +13398,12 @@ DefuseKit:
 			AntiAirVehicle: 98
 			Heavy: 94
 			AntiAirShip: 94
+			SubmarineLight: 91
 			Fighter: 90
 			ShipMedium: 89
 			Bomber: 88
 			ShipHeavy: 88
+			SubmarineHeavy: 86
 			Superheavy: 85
 			ShipSuperheavy: 84
 			Steel: 83
@@ -12894,10 +13436,12 @@ DefuseKit:
 			Superheavy: 12
 			FlyingInfantry: 12
 			AntiAirShip: 12
+			SubmarineLight: 12
 			Wood: 11
 			ShipMedium: 11
 			ShipHeavy: 11
 			ShipSuperheavy: 11
+			SubmarineHeavy: 11
 			Steel: 10
 			Concrete: 9
 			AntiAirBuilding: 9
@@ -12947,7 +13491,9 @@ DefuseKit:
 			Superheavy: 87
 			Fighter: 86
 			ShipHeavy: 86
+			SubmarineHeavy: 86
 			ShipSuperheavy: 85
+			SubmarineLight: 85
 			Steel: 84
 			ShipMedium: 82
 			Bomber: 79
@@ -12978,10 +13524,12 @@ DefuseKit:
 			ShipLight: 18
 			Superheavy: 17
 			AntiAirShip: 17
+			SubmarineLight: 17
 			Wood: 16
 			ShipMedium: 16
 			ShipHeavy: 16
 			ShipSuperheavy: 16
+			SubmarineHeavy: 16
 			Steel: 15
 			Concrete: 14
 			AntiAirBuilding: 14
@@ -13028,8 +13576,10 @@ DefuseKit:
 			Heavy: 91
 			Superheavy: 90
 			AntiAirShip: 90
+			SubmarineLight: 90
 			ShipMedium: 89
 			ShipHeavy: 89
+			SubmarineHeavy: 89
 			Wood: 88
 			ShipSuperheavy: 88
 			Steel: 87
@@ -13089,7 +13639,9 @@ DefuseKit:
 			ShipHeavy: 81
 			Heavy: 80
 			ShipMedium: 79
+			SubmarineLight: 79
 			ShipSuperheavy: 78
+			SubmarineHeavy: 78
 			AntiAirBuilding: 77
 			Superheavy: 75
 			Concrete: 72
@@ -13125,6 +13677,8 @@ DefuseKit:
 			ShipHeavy: 3
 			ShipSuperheavy: 3
 			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 			Steel: 2
 			ShipMedium: 2
 			Concrete: 1
@@ -13171,8 +13725,10 @@ DefuseKit:
 			Spaceship: 83
 			Heavy: 81
 			ShipMedium: 80
+			SubmarineLight: 80
 			ShipHeavy: 78
 			Superheavy: 77
+			SubmarineHeavy: 77
 			Steel: 76
 			ShipSuperheavy: 76
 			CyborgHeroic: 75
@@ -13206,10 +13762,12 @@ DefuseKit:
 			ShipLight: 9
 			Superheavy: 8
 			AntiAirShip: 8
+			SubmarineLight: 8
 			Wood: 7
 			ShipMedium: 7
 			ShipHeavy: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Steel: 6
 			Concrete: 5
 			AntiAirBuilding: 5
@@ -13258,8 +13816,10 @@ DefuseKit:
 			Steel: 77
 			ShipHeavy: 77
 			CyborgHeroic: 76
+			SubmarineLight: 76
 			ShipMedium: 75
 			ShipSuperheavy: 74
+			SubmarineHeavy: 74
 			Superheavy: 72
 			AntiAirBuilding: 72
 			Concrete: 67
@@ -13290,10 +13850,12 @@ DefuseKit:
 			ShipLight: 14
 			Superheavy: 13
 			AntiAirShip: 13
+			SubmarineLight: 13
 			Wood: 12
 			ShipMedium: 12
 			ShipHeavy: 12
 			ShipSuperheavy: 12
+			SubmarineHeavy: 12
 			Steel: 11
 			Concrete: 10
 			AntiAirBuilding: 10
@@ -13339,9 +13901,11 @@ DefuseKit:
 			Heavy: 82
 			Superheavy: 81
 			ShipLight: 81
+			SubmarineLight: 81
 			ShipMedium: 80
 			ShipHeavy: 80
 			AntiAirShip: 80
+			SubmarineHeavy: 80
 			Wood: 79
 			ShipSuperheavy: 79
 			Steel: 78
@@ -13403,6 +13967,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -13437,6 +14003,8 @@ DefuseKit:
 			ShipHeavy: 25
 			ShipSuperheavy: 25
 			AntiAirShip: 25
+			SubmarineLight: 25
+			SubmarineHeavy: 25
 
 ^Warhead_Magic_Medium:
 	ValidTargets: Ground, Water
@@ -13487,6 +14055,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -13521,6 +14091,8 @@ DefuseKit:
 			ShipHeavy: 40
 			ShipSuperheavy: 40
 			AntiAirShip: 40
+			SubmarineLight: 40
+			SubmarineHeavy: 40
 
 ^Warhead_Magic_Heavy:
 	ValidTargets: Ground, Water
@@ -13571,6 +14143,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -13605,6 +14179,8 @@ DefuseKit:
 			ShipHeavy: 50
 			ShipSuperheavy: 50
 			AntiAirShip: 50
+			SubmarineLight: 50
+			SubmarineHeavy: 50
 
 ^Warhead_Magic_Super:
 	ValidTargets: Ground, Water
@@ -13655,6 +14231,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -13689,6 +14267,8 @@ DefuseKit:
 			ShipHeavy: 65
 			ShipSuperheavy: 65
 			AntiAirShip: 65
+			SubmarineLight: 65
+			SubmarineHeavy: 65
 
 ^Warhead_Magic:
 	ValidTargets: Ground, Water
@@ -13741,6 +14321,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 4000
 		PercentageSpread: 50
@@ -13786,7 +14368,9 @@ DefuseKit:
 			Light: 97
 			CyborgHeavy: 90
 			AntiAirVehicle: 88
+			SubmarineLight: 86
 			Fighter: 82
+			SubmarineHeavy: 82
 			Medium: 80
 			Bomber: 73
 			Heroic: 70
@@ -13819,9 +14403,11 @@ DefuseKit:
 			ShipSuperheavy: 9
 			Light: 8
 			CyborgHeavy: 8
+			SubmarineLight: 8
 			Medium: 7
 			CyborgHeroic: 7
 			AntiAirVehicle: 7
+			SubmarineHeavy: 7
 			Heavy: 6
 			FlyingInfantry: 6
 			Superheavy: 5
@@ -13868,9 +14454,11 @@ DefuseKit:
 			CyborgHeavy: 99
 			Scout: 98
 			FlyingInfantry: 98
+			SubmarineLight: 98
 			Light: 95
 			Medium: 94
 			AntiAirVehicle: 94
+			SubmarineHeavy: 86
 			Heavy: 80
 			Fighter: 77
 			Bomber: 76
@@ -13903,10 +14491,12 @@ DefuseKit:
 			ShipSuperheavy: 13
 			Light: 12
 			CyborgHeavy: 12
+			SubmarineLight: 12
 			Medium: 11
 			FlyingInfantry: 11
 			CyborgHeroic: 11
 			AntiAirVehicle: 11
+			SubmarineHeavy: 11
 			Heavy: 10
 			Superheavy: 9
 			Fighter: 8
@@ -13950,7 +14540,9 @@ DefuseKit:
 			CyborgMedium: 112
 			ShipMedium: 110
 			CyborgHeavy: 104
+			SubmarineHeavy: 98
 			FlyingInfantry: 97
+			SubmarineLight: 95
 			Scout: 90
 			Light: 85
 			Medium: 84
@@ -13987,10 +14579,12 @@ DefuseKit:
 			ShipSuperheavy: 18
 			Light: 17
 			CyborgHeavy: 17
+			SubmarineLight: 17
 			Medium: 16
 			FlyingInfantry: 16
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
+			SubmarineHeavy: 16
 			Heavy: 15
 			Superheavy: 14
 			Fighter: 13
@@ -14038,7 +14632,9 @@ DefuseKit:
 			Scout: 103
 			FlyingInfantry: 101
 			CyborgHeavy: 100
+			SubmarineLight: 90
 			Light: 86
+			SubmarineHeavy: 86
 			AntiAirVehicle: 80
 			Heroic: 76
 			Medium: 74
@@ -14093,7 +14689,9 @@ DefuseKit:
 			AntiAirBuilding: 102
 			ShipMedium: 100
 			ShipSuperheavy: 98
+			SubmarineLight: 96
 			Heavy: 93
+			SubmarineHeavy: 91
 			CyborgHeavy: 89
 			Plate: 86
 			Concrete: 84
@@ -14127,9 +14725,11 @@ DefuseKit:
 			ShipHeavy: 9
 			Concrete: 8
 			CyborgHeavy: 8
+			SubmarineLight: 8
 			Heavy: 7
 			FlyingInfantry: 7
 			ShipSuperheavy: 7
+			SubmarineHeavy: 7
 			Heroic: 6
 			Superheavy: 5
 			CyborgHeroic: 5
@@ -14173,10 +14773,12 @@ DefuseKit:
 			Flak: 116
 			ShipHeavy: 115
 			Steel: 113
+			SubmarineLight: 111
 			FlyingInfantry: 107
 			CyborgHeavy: 105
 			ShipMedium: 105
 			AntiAirBuilding: 102
+			SubmarineHeavy: 97
 			ShipSuperheavy: 96
 			Plate: 95
 			Concrete: 92
@@ -14213,7 +14815,9 @@ DefuseKit:
 			FlyingInfantry: 12
 			CyborgHeavy: 12
 			ShipSuperheavy: 12
+			SubmarineLight: 12
 			Heavy: 11
+			SubmarineHeavy: 11
 			Heroic: 10
 			Superheavy: 9
 			CyborgHeroic: 9
@@ -14258,7 +14862,9 @@ DefuseKit:
 			ShipHeavy: 116
 			ShipSuperheavy: 113
 			Heavy: 112
+			SubmarineHeavy: 111
 			AntiAirBuilding: 110
+			SubmarineLight: 110
 			ShipMedium: 108
 			CyborgHeavy: 107
 			Superheavy: 106
@@ -14297,7 +14903,9 @@ DefuseKit:
 			Concrete: 17
 			CyborgHeavy: 17
 			ShipSuperheavy: 17
+			SubmarineLight: 17
 			Heavy: 16
+			SubmarineHeavy: 16
 			Heroic: 15
 			Superheavy: 14
 			CyborgHeroic: 14
@@ -14347,8 +14955,10 @@ DefuseKit:
 			Plate: 113
 			Concrete: 110
 			ShipSuperheavy: 110
+			SubmarineLight: 110
 			CyborgHeavy: 109
 			Heavy: 106
+			SubmarineHeavy: 106
 			Superheavy: 98
 			FlyingInfantry: 98
 			CyborgHeroic: 89
@@ -14411,6 +15021,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Resonance: 100
@@ -14447,6 +15059,8 @@ DefuseKit:
 			ShipHeavy: 5
 			ShipSuperheavy: 5
 			AntiAirShip: 5
+			SubmarineLight: 5
+			SubmarineHeavy: 5
 	Warhead@Sonic_Light_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
@@ -14503,6 +15117,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Resonance: 100
@@ -14539,6 +15155,8 @@ DefuseKit:
 			ShipHeavy: 8
 			ShipSuperheavy: 8
 			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 8
 	Warhead@Sonic_Medium_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
@@ -14595,6 +15213,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Resonance: 100
@@ -14631,6 +15251,8 @@ DefuseKit:
 			ShipHeavy: 10
 			ShipSuperheavy: 10
 			AntiAirShip: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 	Warhead@Sonic_Heavy_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
 		Amount: 5000
@@ -14689,6 +15311,8 @@ DefuseKit:
 			ShipHeavy: 100
 			ShipSuperheavy: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
+			SubmarineHeavy: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Resonance: 100
@@ -14725,6 +15349,8 @@ DefuseKit:
 			Superheavy: 200
 			Heavy: 183
 			Medium: 160
+			SubmarineHeavy: 159
+			SubmarineLight: 152
 			AntiAirVehicle: 144
 			CyborgHeavy: 138
 			ShipSuperheavy: 132
@@ -14762,8 +15388,10 @@ DefuseKit:
 			Light: 22
 			CyborgHeroic: 22
 			AntiAirVehicle: 22
+			SubmarineHeavy: 22
 			Scout: 21
 			CyborgHeavy: 21
+			SubmarineLight: 21
 			Heroic: 20
 			CyborgMedium: 20
 			Plate: 19
@@ -14803,8 +15431,10 @@ DefuseKit:
 			Wood: 150
 			ShipSuperheavy: 148
 			ShipHeavy: 132
+			SubmarineHeavy: 128
 			Superheavy: 125
 			ShipMedium: 122
+			SubmarineLight: 110
 			AntiAirShip: 103
 			Heavy: 100
 			ShipLight: 87
@@ -14854,6 +15484,8 @@ DefuseKit:
 			Heavy: 192
 			Medium: 175
 			AntiAirVehicle: 159
+			SubmarineHeavy: 159
+			SubmarineLight: 153
 			Light: 145
 			CyborgHeavy: 132
 			ShipSuperheavy: 130
@@ -14900,8 +15532,10 @@ DefuseKit:
 			Wood: 150
 			ShipSuperheavy: 148
 			ShipHeavy: 132
+			SubmarineHeavy: 128
 			Superheavy: 125
 			ShipMedium: 122
+			SubmarineLight: 110
 			AntiAirShip: 103
 			Heavy: 100
 			ShipLight: 87
@@ -14950,6 +15584,8 @@ DefuseKit:
 			Superheavy: 142
 			CyborgHeavy: 141
 			Heavy: 135
+			SubmarineLight: 130
+			SubmarineHeavy: 128
 			Medium: 127
 			Concrete: 126
 			ShipMedium: 126
@@ -14988,9 +15624,11 @@ DefuseKit:
 			Plate: 13
 			CyborgHeavy: 13
 			Medium: 12
+			SubmarineHeavy: 12
 			Flak: 11
 			CyborgMedium: 11
 			AntiAirVehicle: 11
+			SubmarineLight: 11
 			Light: 10
 			AntiAirInfantry: 10
 			ShipSuperheavy: 10
@@ -15033,7 +15671,9 @@ DefuseKit:
 			CyborgMedium: 87
 			Heavy: 75
 			CyborgLight: 56
+			SubmarineHeavy: 52
 			Medium: 50
+			SubmarineLight: 41
 			AntiAirVehicle: 35
 			ShipSuperheavy: 32
 			ShipHeavy: 27
@@ -15077,8 +15717,10 @@ DefuseKit:
 			Plate: 181
 			CyborgHeavy: 163
 			Concrete: 155
+			SubmarineHeavy: 148
 			Heavy: 146
 			ShipMedium: 145
+			SubmarineLight: 145
 			Medium: 135
 			ShipSuperheavy: 133
 			CyborgHeroic: 129
@@ -15115,9 +15757,11 @@ DefuseKit:
 			Plate: 17
 			CyborgHeavy: 17
 			Medium: 16
+			SubmarineHeavy: 16
 			Flak: 15
 			CyborgMedium: 15
 			AntiAirVehicle: 15
+			SubmarineLight: 15
 			Light: 14
 			AntiAirInfantry: 14
 			ShipSuperheavy: 14
@@ -15160,7 +15804,9 @@ DefuseKit:
 			CyborgMedium: 87
 			Heavy: 75
 			CyborgLight: 56
+			SubmarineHeavy: 52
 			Medium: 50
+			SubmarineLight: 41
 			AntiAirVehicle: 35
 			ShipSuperheavy: 32
 			ShipHeavy: 27
@@ -15204,7 +15850,9 @@ DefuseKit:
 			Plate: 176
 			CyborgHeavy: 167
 			Heavy: 159
+			SubmarineHeavy: 159
 			Concrete: 149
+			SubmarineLight: 149
 			ShipSuperheavy: 145
 			ShipMedium: 140
 			ShipHeavy: 133
@@ -15241,10 +15889,12 @@ DefuseKit:
 			Heavy: 23
 			Plate: 22
 			CyborgHeavy: 22
+			SubmarineHeavy: 22
 			Medium: 21
 			Flak: 20
 			CyborgMedium: 20
 			AntiAirVehicle: 20
+			SubmarineLight: 20
 			Light: 19
 			AntiAirInfantry: 19
 			ShipHeavy: 19
@@ -15287,7 +15937,9 @@ DefuseKit:
 			CyborgMedium: 87
 			Heavy: 75
 			CyborgLight: 56
+			SubmarineHeavy: 52
 			Medium: 50
+			SubmarineLight: 41
 			AntiAirVehicle: 35
 			ShipSuperheavy: 32
 			ShipHeavy: 27
@@ -15331,8 +15983,10 @@ DefuseKit:
 			Superheavy: 138
 			Heavy: 130
 			CyborgHeavy: 128
+			SubmarineHeavy: 127
 			Plate: 126
 			Medium: 124
+			SubmarineLight: 124
 			CyborgMedium: 123
 			Flak: 122
 			AntiAirVehicle: 122
@@ -15369,10 +16023,12 @@ DefuseKit:
 			Heavy: 28
 			Plate: 27
 			CyborgHeavy: 27
+			SubmarineHeavy: 27
 			Medium: 26
 			Flak: 25
 			CyborgMedium: 25
 			AntiAirVehicle: 25
+			SubmarineLight: 25
 			Light: 24
 			AntiAirInfantry: 24
 			ShipHeavy: 24
@@ -15415,9 +16071,11 @@ DefuseKit:
 			CyborgMedium: 194
 			Heavy: 175
 			CyborgLight: 168
+			SubmarineHeavy: 152
 			Medium: 150
 			AntiAirVehicle: 137
 			Light: 125
+			SubmarineLight: 123
 			ShipSuperheavy: 122
 			ShipHeavy: 115
 			Scout: 100
@@ -15462,8 +16120,10 @@ DefuseKit:
 			Plate: 133
 			CyborgHeavy: 133
 			Medium: 131
+			SubmarineHeavy: 130
 			CyborgMedium: 129
 			Flak: 128
+			SubmarineLight: 128
 			AntiAirVehicle: 127
 			Light: 124
 			AntiAirInfantry: 124
@@ -15513,7 +16173,9 @@ DefuseKit:
 			CyborgMedium: 87
 			Heavy: 75
 			CyborgLight: 56
+			SubmarineHeavy: 52
 			Medium: 50
+			SubmarineLight: 41
 			AntiAirVehicle: 35
 			ShipSuperheavy: 32
 			ShipHeavy: 27
@@ -15588,6 +16250,8 @@ DefuseKit:
 			ShipSuperheavy: 94
 			AntiAirShip: 90
 			FlyingInfantry: 69
+			SubmarineLight: 90
+			SubmarineHeavy: 91
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -15629,6 +16293,8 @@ DefuseKit:
 			ShipSuperheavy: 94
 			AntiAirShip: 90
 			FlyingInfantry: 69
+			SubmarineLight: 90
+			SubmarineHeavy: 91
 		UpdatesUnitStatistics: false
 
 ^Warhead_Sniper_Light:
@@ -15672,6 +16338,8 @@ DefuseKit:
 			ShipSuperheavy: 46
 			AntiAirShip: 52
 			FlyingInfantry: 49
+			SubmarineLight: 52
+			SubmarineHeavy: 50
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
@@ -15709,6 +16377,8 @@ DefuseKit:
 			ShipSuperheavy: 20
 			AntiAirShip: 22
 			FlyingInfantry: 22
+			SubmarineLight: 22
+			SubmarineHeavy: 21
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
@@ -15747,6 +16417,8 @@ DefuseKit:
 			ShipSuperheavy: 46
 			AntiAirShip: 52
 			FlyingInfantry: 49
+			SubmarineLight: 52
+			SubmarineHeavy: 50
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 
 ####################################################################
@@ -17403,6 +18075,7 @@ DefuseKit:
 			ShipLight: 70
 			ShipMedium: 58
 			AntiAirShip: 64
+			SubmarineLight: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
@@ -17441,6 +18114,7 @@ DefuseKit:
 			ShipLight: 75
 			ShipMedium: 73
 			AntiAirShip: 74
+			SubmarineLight: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
@@ -17490,6 +18164,7 @@ DefuseKit:
 			ShipLight: 115
 			ShipMedium: 122
 			AntiAirShip: 118
+			SubmarineLight: 123
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
@@ -17532,6 +18207,7 @@ DefuseKit:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -17550,6 +18226,7 @@ DefuseKit:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -17993,6 +18670,7 @@ Patriot:
 			ShipLight: 79
 			ShipMedium: 69
 			AntiAirShip: 74
+			SubmarineLight: 59
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
@@ -18079,6 +18757,7 @@ C4:
 			ShipLight: 99
 			ShipMedium: 87
 			AntiAirShip: 93
+			SubmarineLight: 76
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
@@ -18164,6 +18843,7 @@ Demolish:
 			ShipLight: 58
 			ShipMedium: 42
 			AntiAirShip: 49
+			SubmarineLight: 48
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@4Eff_2: CreateEffect
 		Explosions: piffs
@@ -18187,6 +18867,7 @@ Pistol:
 			ShipLight: 32
 			ShipMedium: 20
 			AntiAirShip: 25
+			SubmarineLight: 24
 
 ^LightMG:
 	Inherits: ^HeavyMG
@@ -18209,6 +18890,7 @@ Pistol:
 			ShipLight: 32
 			ShipMedium: 20
 			AntiAirShip: 25
+			SubmarineLight: 24
 		InvalidTargets: wall, BulletImmune
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
@@ -18487,6 +19169,7 @@ GLBarrelExplode:
 			ShipLight: 45
 			ShipMedium: 37
 			AntiAirShip: 41
+			SubmarineLight: 82
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
@@ -18523,6 +19206,7 @@ GLBarrelExplode2:
 			ShipLight: 45
 			ShipMedium: 37
 			AntiAirShip: 41
+			SubmarineLight: 82
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
 		ImpactSounds: gexpdema.wav, gexpdemb.wav, gexpdemc.wav
@@ -18547,6 +19231,7 @@ GLDemolitionExplode:
 			ShipLight: 73
 			ShipMedium: 63
 			AntiAirShip: 68
+			SubmarineLight: 66
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: TriggerProne, Prone75Percent, ExplosionDeath
 	Warhead@2Eff: CreateEffect
@@ -18613,6 +19298,8 @@ GLTerroristExplosive:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18647,6 +19334,8 @@ GLTerroristExplosive:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -18663,6 +19352,7 @@ GLTerroristExplosive:
 			ShipLight: 73
 			ShipMedium: 63
 			AntiAirShip: 68
+			SubmarineLight: 66
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
 		ImpactSounds: gexpmina.wav, gexpminb.wav
@@ -18722,6 +19412,8 @@ GLTerroristExplosive2:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -18756,6 +19448,8 @@ GLTerroristExplosive2:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -18772,6 +19466,7 @@ GLTerroristExplosive2:
 			ShipLight: 73
 			ShipMedium: 63
 			AntiAirShip: 68
+			SubmarineLight: 66
 		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
@@ -18801,6 +19496,7 @@ BloomExplosion:
 			ShipLight: 58
 			ShipMedium: 32
 			AntiAirShip: 43
+			SubmarineLight: 28
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, SpiceExplosion
 		DamageCalculationType: ClosestTargetablePosition
 		AffectsParent: true
@@ -18915,6 +19611,7 @@ CHFlameBlue:
 			ShipLight: 60
 			ShipMedium: 40
 			AntiAirShip: 49
+			SubmarineLight: 55
 	ReloadDelay: 11
 	Warhead@Flame_Medium: AreaDamage
 		Spread: 250
@@ -18941,6 +19638,7 @@ GLTunnelWeap:
 			ShipLight: 50
 			ShipMedium: 26
 			AntiAirShip: 36
+			SubmarineLight: 25
 	ReloadDelay: 10
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 4000
@@ -19142,6 +19840,7 @@ GiantBowlingTurret:
 			ShipLight: 75
 			ShipMedium: 73
 			AntiAirShip: 74
+			SubmarineLight: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
@@ -19299,6 +19998,7 @@ BHBombs:
 			ShipLight: 55
 			ShipMedium: 87
 			AntiAirShip: 69
+			SubmarineLight: 83
 	Warhead@3Eff: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: bflaattc.wav, bflaattd.wav, bflaattb.wav, bflaatta.wav
@@ -19341,6 +20041,7 @@ AngryMobTargeting:
 			ShipLight: 93
 			ShipMedium: 92
 			AntiAirShip: 92
+			SubmarineLight: 106
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -19367,6 +20068,7 @@ BigChemSpray:
 			ShipLight: 51
 			ShipMedium: 86
 			AntiAirShip: 66
+			SubmarineLight: 80
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: chemball
@@ -19402,6 +20104,7 @@ Spit:
 			ShipLight: 97
 			ShipMedium: 86
 			AntiAirShip: 91
+			SubmarineLight: 92
 		ValidTargets: Ground, Water
 	Warhead@2Dam: AreaDamagePercentage
 		Damage: 5
@@ -19420,6 +20123,7 @@ Spit:
 			ShipLight: 70
 			ShipMedium: 58
 			AntiAirShip: 64
+			SubmarineLight: 62
 		ValidTargets: Ground, Water, Air
 	Warhead@3Eff: CreateEffect
 		Explosions: chemball
@@ -19462,6 +20166,7 @@ Spit_AA:
 			ShipLight: 97
 			ShipMedium: 86
 			AntiAirShip: 91
+			SubmarineLight: 92
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 123, 33, 12, 3, 0
 	Warhead@2Smu: LeaveSmudge
@@ -19500,6 +20205,7 @@ Spit_AA:
 			ShipLight: 70
 			ShipMedium: 58
 			AntiAirShip: 64
+			SubmarineLight: 62
 		ValidTargets: Ground, Water, Air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
@@ -19564,6 +20270,8 @@ GLBombTruckToxExplosive:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -19598,6 +20306,8 @@ GLBombTruckToxExplosive:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -19616,6 +20326,7 @@ GLBombTruckToxExplosive:
 			ShipLight: 73
 			ShipMedium: 63
 			AntiAirShip: 68
+			SubmarineLight: 66
 		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
@@ -19677,6 +20388,8 @@ GLBombTruckToxExplosive2:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -19711,6 +20424,8 @@ GLBombTruckToxExplosive2:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
@@ -19729,6 +20444,7 @@ GLBombTruckToxExplosive2:
 			ShipLight: 73
 			ShipMedium: 63
 			AntiAirShip: 68
+			SubmarineLight: 66
 		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
@@ -19810,6 +20526,8 @@ GLASCUD:
 			ShipSuperheavy: 114
 			AntiAirShip: 121
 			FlyingInfantry: 94
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -19844,6 +20562,8 @@ GLASCUD:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 	-Warhead@Flame_Heavy:
 
 GLASCUDPOWER:
@@ -19925,6 +20645,8 @@ GLASCUDPOWER:
 			ShipSuperheavy: 114
 			AntiAirShip: 121
 			FlyingInfantry: 94
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -19959,6 +20681,8 @@ GLASCUDPOWER:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 	MinRange: 4096
 	Report: vscuweaa.wav
 	-Warhead@Flame_Heavy:
@@ -20021,6 +20745,8 @@ GLASCUDPOWER2:
 			ShipSuperheavy: 114
 			AntiAirShip: 121
 			FlyingInfantry: 94
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -20055,6 +20781,8 @@ GLASCUDPOWER2:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 	MinRange: 4096
 	Report: vscuweaa.wav
 	Warhead@1Dam: SpreadDamage
@@ -20145,6 +20873,8 @@ GLASCUDPOWER3:
 			ShipSuperheavy: 114
 			AntiAirShip: 121
 			FlyingInfantry: 94
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -20179,6 +20909,8 @@ GLASCUDPOWER3:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 	MinRange: 4096
 	Report: vscuweaa.wav
 	Warhead@1Dam: SpreadDamage
@@ -20258,6 +20990,7 @@ GLStingerSiteMissileToxin:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -20276,6 +21009,7 @@ GLStingerSiteMissileToxin:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -20331,6 +21065,7 @@ JetExplosion:
 			ShipLight: 100
 			ShipMedium: 100
 			AntiAirShip: 100
+			SubmarineLight: 100
 	#Warhead@2Eff: CreateEffect
 	#	Explosions: scscourgeexplosion
 	#	ValidTargets: Air
@@ -20536,6 +21271,7 @@ GLToxinBomb:
 			ShipLight: 71
 			ShipMedium: 50
 			AntiAirShip: 60
+			SubmarineLight: 87
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
@@ -20612,6 +21348,8 @@ GLToxinBombBlue:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -20646,6 +21384,8 @@ GLToxinBombBlue:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Flame_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@Effect: CreateEffect
@@ -20667,6 +21407,7 @@ GLToxinBombBlue:
 			ShipLight: 71
 			ShipMedium: 50
 			AntiAirShip: 60
+			SubmarineLight: 87
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
@@ -20737,6 +21478,8 @@ GLToxinBombPurple:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
@@ -20771,6 +21514,8 @@ GLToxinBombPurple:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@Flame_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@Effect: CreateEffect
@@ -20792,6 +21537,7 @@ GLToxinBombPurple:
 			ShipLight: 71
 			ShipMedium: 50
 			AntiAirShip: 60
+			SubmarineLight: 87
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
@@ -20878,6 +21624,7 @@ ThermobaricFlame:
 			ShipLight: 42
 			ShipMedium: 40
 			AntiAirShip: 41
+			SubmarineLight: 55
 	ReloadDelay: 11
 	Warhead@Flame_Medium: AreaDamage
 		Spread: 250
@@ -20895,6 +21642,7 @@ ThermobaricFlame:
 			ShipLight: 42
 			ShipMedium: 40
 			AntiAirShip: 41
+			SubmarineLight: 55
 RA2IMP:
 	ReloadDelay: 85
 	Range: 5120
@@ -20923,6 +21671,7 @@ RA2IMP:
 			ShipLight: 75
 			ShipMedium: 55
 			AntiAirShip: 64
+			SubmarineLight: 47
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 	Warhead@Effect: CreateEffect
@@ -20956,6 +21705,7 @@ PlasmaPuff:
 			ShipLight: 75
 			ShipMedium: 55
 			AntiAirShip: 64
+			SubmarineLight: 47
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 	Warhead@Effect: CreateEffect
@@ -21016,6 +21766,8 @@ Short8Inch:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9999
 		PercentageSpread: 50
@@ -21050,6 +21802,8 @@ Short8Inch:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Projectile: Bullet
 		Speed: 250
 		LaunchAngle: 100
@@ -21089,6 +21843,7 @@ bowFire_AA:
 			ShipLight: 63
 			ShipMedium: 40
 			AntiAirShip: 50
+			SubmarineLight: 49
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: bowhit.aud
@@ -21110,6 +21865,7 @@ bowFire_AA:
 			ShipLight: 63
 			ShipMedium: 40
 			AntiAirShip: 50
+			SubmarineLight: 49
 
 bowFire:
 	ReloadDelay: 40
@@ -21145,6 +21901,7 @@ bowFire:
 			ShipLight: 63
 			ShipMedium: 40
 			AntiAirShip: 50
+			SubmarineLight: 49
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 2
 		Spread: 150
@@ -21161,6 +21918,7 @@ bowFire:
 			ShipLight: 63
 			ShipMedium: 40
 			AntiAirShip: 50
+			SubmarineLight: 49
 
 wc_tower_fire:
 	Range: 8704
@@ -21183,6 +21941,7 @@ wc_tower_fire:
 			ShipLight: 50
 			ShipMedium: 30
 			AntiAirShip: 39
+			SubmarineLight: 39
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 3
 		Spread: 300
@@ -21198,6 +21957,7 @@ wc_tower_fire:
 			ShipLight: 50
 			ShipMedium: 30
 			AntiAirShip: 39
+			SubmarineLight: 39
 	ReloadDelay: 40
 	Report: bowfire.aud
 	ValidTargets: Ground
@@ -21236,6 +21996,7 @@ wc_tower_fire:
 			ShipLight: 75
 			ShipMedium: 67
 			AntiAirShip: 71
+			SubmarineLight: 71
 		InvalidTargets: Building, FireActor, WaterActor
 	Warhead@1DamBuildings: SpreadDamage
 		Spread: 56
@@ -21253,6 +22014,7 @@ wc_tower_fire:
 			ShipLight: 40
 			ShipMedium: 40
 			AntiAirShip: 40
+			SubmarineLight: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 DRPlasmaTankWeapon:
@@ -21295,6 +22057,7 @@ SWLaserG:
 			ShipLight: 32
 			ShipMedium: 20
 			AntiAirShip: 25
+			SubmarineLight: 24
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@4Eff_2: CreateEffect
 		Explosions: piffs
@@ -21335,6 +22098,7 @@ USALaserCannonAG:
 			ShipLight: 71
 			ShipMedium: 82
 			AntiAirShip: 76
+			SubmarineLight: 91
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 
@@ -21383,6 +22147,7 @@ SWGreenLaserG:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -21401,6 +22166,7 @@ SWGreenLaserG:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -21473,6 +22239,7 @@ SWGBigRedLaserG:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -21491,6 +22258,7 @@ SWGBigRedLaserG:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -21541,6 +22309,7 @@ GLRebelToxin:
 			ShipLight: 23
 			ShipMedium: 0
 			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: purplesplash
@@ -21598,6 +22367,7 @@ GLRebelToxinGarrison:
 			ShipLight: 23
 			ShipMedium: 0
 			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: purplesplash
@@ -21649,6 +22419,7 @@ GLTrooperRPGMissileG:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -21667,6 +22438,7 @@ GLTrooperRPGMissileG:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -21714,6 +22486,7 @@ GLTrooperRPGMissileG:
 			ShipLight: 14
 			ShipMedium: 4
 			AntiAirShip: 7
+			SubmarineLight: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@2Eff: CreateEffect
@@ -21747,6 +22520,7 @@ M_HMG:
 			ShipLight: 77
 			ShipMedium: 47
 			AntiAirShip: 60
+			SubmarineLight: 48
 	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 
@@ -21772,6 +22546,7 @@ Fremen_L:
 			ShipLight: 89
 			ShipMedium: 63
 			AntiAirShip: 75
+			SubmarineLight: 35
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_small_explosion
 	Projectile: InstantHit
@@ -21877,6 +22652,7 @@ GLTrooperRPGMissileToxin:
 			ShipLight: 141
 			ShipMedium: 106
 			AntiAirShip: 122
+			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -21895,6 +22671,7 @@ GLTrooperRPGMissileToxin:
 			ShipLight: 69
 			ShipMedium: 67
 			AntiAirShip: 68
+			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -21952,6 +22729,7 @@ SpiceExplosion:
 			ShipLight: 55
 			ShipMedium: 26
 			AntiAirShip: 38
+			SubmarineLight: 28
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, SpiceExplosion
 		DamageCalculationType: ClosestTargetablePosition
 		AffectsParent: true
@@ -22026,6 +22804,8 @@ generic_bullet_casing:
 			Concrete: 92
 			Fighter: 91
 			CyborgHeavy: 88
+			SubmarineHeavy: 85
+			SubmarineLight: 84
 			Heroic: 82
 			Heavy: 75
 			CyborgHeroic: 74
@@ -22062,8 +22842,10 @@ generic_bullet_casing:
 			ShipHeavy: 8
 			ShipSuperheavy: 8
 			FlyingInfantry: 7
+			SubmarineLight: 7
 			Heavy: 6
 			CyborgHeroic: 6
+			SubmarineHeavy: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -22111,6 +22893,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 104
 			CyborgHeavy: 102
 			Concrete: 98
+			SubmarineLight: 98
+			SubmarineHeavy: 93
 			Heavy: 92
 			Superheavy: 74
 			Fighter: 72
@@ -22148,6 +22932,8 @@ generic_bullet_casing:
 			CyborgHeavy: 12
 			ShipMedium: 12
 			ShipSuperheavy: 12
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Heavy: 10
 			CyborgHeroic: 10
 			Superheavy: 9
@@ -22194,6 +22980,8 @@ generic_bullet_casing:
 			Scout: 107
 			ShipSuperheavy: 107
 			FlyingInfantry: 100
+			SubmarineLight: 95
+			SubmarineHeavy: 94
 			Light: 90
 			AntiAirVehicle: 89
 			Medium: 88
@@ -22234,6 +23022,8 @@ generic_bullet_casing:
 			CyborgHeavy: 17
 			ShipMedium: 17
 			ShipSuperheavy: 17
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Heavy: 15
 			CyborgHeroic: 15
 			Superheavy: 14
@@ -22284,7 +23074,9 @@ generic_bullet_casing:
 			FlyingInfantry: 104
 			ShipMedium: 102
 			AntiAirVehicle: 100
+			SubmarineHeavy: 96
 			Medium: 92
+			SubmarineLight: 91
 			Heroic: 90
 			CyborgHeroic: 83
 			Heavy: 81
@@ -22334,6 +23126,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 125
 			Concrete: 123
 			CyborgLight: 122
+			SubmarineLight: 121
+			SubmarineHeavy: 117
 			Heavy: 116
 			Superheavy: 103
 			None: 102
@@ -22369,6 +23163,8 @@ generic_bullet_casing:
 			Heavy: 20
 			Superheavy: 20
 			AntiAirVehicle: 20
+			SubmarineLight: 20
+			SubmarineHeavy: 20
 			CyborgLight: 17
 			CyborgMedium: 16
 			CyborgHeavy: 16
@@ -22417,7 +23213,9 @@ generic_bullet_casing:
 			ShipMedium: 130
 			ShipSuperheavy: 129
 			Concrete: 127
+			SubmarineLight: 125
 			Heavy: 120
+			SubmarineHeavy: 120
 			CyborgLight: 117
 			Superheavy: 103
 			FlyingInfantry: 97
@@ -22453,6 +23251,8 @@ generic_bullet_casing:
 			Heavy: 11
 			Superheavy: 11
 			AntiAirVehicle: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			CyborgLight: 7
 			CyborgMedium: 7
 			CyborgHeavy: 7
@@ -22497,12 +23297,14 @@ generic_bullet_casing:
 			Medium: 135
 			ShipMedium: 128
 			Steel: 126
+			SubmarineLight: 126
 			Heavy: 125
 			ShipHeavy: 125
 			AntiAirBuilding: 124
 			Concrete: 122
 			CyborgLight: 121
 			ShipSuperheavy: 114
+			SubmarineHeavy: 114
 			None: 106
 			Superheavy: 104
 			Fighter: 97
@@ -22537,6 +23339,8 @@ generic_bullet_casing:
 			Heavy: 15
 			Superheavy: 15
 			AntiAirVehicle: 15
+			SubmarineLight: 15
+			SubmarineHeavy: 15
 			CyborgLight: 11
 			CyborgMedium: 11
 			CyborgHeavy: 11
@@ -22584,6 +23388,8 @@ generic_bullet_casing:
 			ShipMedium: 137
 			ShipHeavy: 137
 			ShipSuperheavy: 136
+			SubmarineLight: 131
+			SubmarineHeavy: 130
 			Light: 129
 			Medium: 128
 			AntiAirVehicle: 128
@@ -22629,8 +23435,10 @@ generic_bullet_casing:
 			Shield: 222
 			Superheavy: 191
 			Heavy: 161
+			SubmarineHeavy: 161
 			Concrete: 158
 			Spaceship: 156
+			SubmarineLight: 154
 			ShipSuperheavy: 148
 			ShipMedium: 147
 			Medium: 136
@@ -22665,6 +23473,8 @@ generic_bullet_casing:
 			Heavy: 22
 			Medium: 21
 			ShipSuperheavy: 21
+			SubmarineLight: 21
+			SubmarineHeavy: 21
 			Light: 20
 			Concrete: 20
 			AntiAirVehicle: 20
@@ -22714,7 +23524,9 @@ generic_bullet_casing:
 			Superheavy: 200
 			Heavy: 196
 			Medium: 182
+			SubmarineLight: 176
 			AntiAirVehicle: 175
+			SubmarineHeavy: 173
 			Light: 168
 			ShipMedium: 158
 			Scout: 155
@@ -22749,6 +23561,8 @@ generic_bullet_casing:
 			Heavy: 13
 			Medium: 12
 			ShipSuperheavy: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Light: 11
 			Concrete: 11
 			AntiAirVehicle: 11
@@ -22797,6 +23611,8 @@ generic_bullet_casing:
 			Shield: 200
 			Superheavy: 200
 			Heavy: 177
+			SubmarineLight: 163
+			SubmarineHeavy: 162
 			Medium: 159
 			AntiAirVehicle: 154
 			ShipMedium: 150
@@ -22833,6 +23649,8 @@ generic_bullet_casing:
 			Heavy: 17
 			Medium: 16
 			ShipSuperheavy: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Light: 15
 			Concrete: 15
 			AntiAirVehicle: 15
@@ -22885,7 +23703,9 @@ generic_bullet_casing:
 			Heavy: 194
 			Medium: 176
 			AntiAirVehicle: 172
+			SubmarineHeavy: 171
 			Light: 168
+			SubmarineLight: 167
 			ShipSuperheavy: 149
 			ShipHeavy: 147
 			Scout: 145
@@ -22936,6 +23756,8 @@ generic_bullet_casing:
 			Shield: 253
 			Superheavy: 200
 			Heavy: 172
+			SubmarineHeavy: 157
+			SubmarineLight: 150
 			Medium: 144
 			Spaceship: 138
 			CyborgHeavy: 138
@@ -22973,8 +23795,10 @@ generic_bullet_casing:
 			Shield: 35
 			Superheavy: 25
 			Heavy: 23
+			SubmarineHeavy: 22
 			Medium: 21
 			CyborgHeroic: 21
+			SubmarineLight: 21
 			Light: 20
 			AntiAirVehicle: 20
 			CyborgHeavy: 19
@@ -23027,6 +23851,8 @@ generic_bullet_casing:
 			AntiAirVehicle: 165
 			Light: 158
 			Scout: 151
+			SubmarineLight: 149
+			SubmarineHeavy: 148
 			ShipMedium: 118
 			Spaceship: 116
 			ShipHeavy: 116
@@ -23061,6 +23887,8 @@ generic_bullet_casing:
 			Superheavy: 16
 			Heavy: 14
 			Medium: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Light: 11
 			CyborgHeroic: 11
 			AntiAirVehicle: 11
@@ -23111,6 +23939,8 @@ generic_bullet_casing:
 			Superheavy: 200
 			Heavy: 175
 			Medium: 154
+			SubmarineHeavy: 152
+			SubmarineLight: 151
 			AntiAirVehicle: 150
 			Light: 146
 			CyborgHeavy: 136
@@ -23148,6 +23978,8 @@ generic_bullet_casing:
 			Superheavy: 20
 			Heavy: 18
 			Medium: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Light: 15
 			CyborgHeroic: 15
 			AntiAirVehicle: 15
@@ -23202,6 +24034,8 @@ generic_bullet_casing:
 			Medium: 172
 			AntiAirVehicle: 166
 			Light: 161
+			SubmarineHeavy: 155
+			SubmarineLight: 152
 			Spaceship: 132
 			Scout: 130
 			ShipSuperheavy: 125
@@ -23255,6 +24089,8 @@ generic_bullet_casing:
 			Shield: 271
 			Superheavy: 200
 			Heavy: 169
+			SubmarineHeavy: 158
+			SubmarineLight: 150
 			CyborgHeavy: 148
 			Medium: 142
 			Spaceship: 137
@@ -23291,8 +24127,10 @@ generic_bullet_casing:
 			Superheavy: 25
 			Heavy: 23
 			Medium: 22
+			SubmarineHeavy: 22
 			CyborgHeroic: 21
 			AntiAirVehicle: 21
+			SubmarineLight: 21
 			Light: 20
 			CyborgHeavy: 20
 			Scout: 19
@@ -23343,6 +24181,8 @@ generic_bullet_casing:
 			Medium: 165
 			AntiAirVehicle: 157
 			Light: 150
+			SubmarineLight: 148
+			SubmarineHeavy: 146
 			Scout: 135
 			ShipMedium: 121
 			CyborgHeavy: 119
@@ -23378,6 +24218,8 @@ generic_bullet_casing:
 			Medium: 13
 			CyborgHeroic: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Light: 11
 			CyborgHeavy: 11
 			Scout: 10
@@ -23426,6 +24268,8 @@ generic_bullet_casing:
 			Superheavy: 200
 			Heavy: 171
 			Medium: 157
+			SubmarineHeavy: 151
+			SubmarineLight: 150
 			AntiAirVehicle: 148
 			Light: 139
 			CyborgHeavy: 137
@@ -23463,6 +24307,8 @@ generic_bullet_casing:
 			Medium: 17
 			CyborgHeroic: 16
 			AntiAirVehicle: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Light: 15
 			CyborgHeavy: 15
 			Scout: 14
@@ -23515,6 +24361,8 @@ generic_bullet_casing:
 			Medium: 163
 			AntiAirVehicle: 160
 			Light: 158
+			SubmarineHeavy: 145
+			SubmarineLight: 144
 			Scout: 138
 			Spaceship: 124
 			CyborgHeavy: 120
@@ -23579,6 +24427,8 @@ generic_bullet_casing:
 			CyborgLight: 116
 			CyborgMedium: 113
 			Scout: 112
+			SubmarineHeavy: 111
+			SubmarineLight: 110
 			Light: 109
 			AntiAirVehicle: 108
 			Medium: 107
@@ -23615,10 +24465,12 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			None: 18
+			SubmarineLight: 18
 			Heavy: 17
 			FlyingInfantry: 17
 			CyborgMedium: 17
 			AntiAirInfantry: 17
+			SubmarineHeavy: 17
 			Flak: 16
 			Superheavy: 16
 			CyborgHeavy: 16
@@ -23670,6 +24522,8 @@ generic_bullet_casing:
 			Medium: 101
 			ShipMedium: 101
 			ShipSuperheavy: 100
+			SubmarineLight: 93
+			SubmarineHeavy: 88
 			Heavy: 86
 			Bomber: 79
 			CyborgHeavy: 78
@@ -23701,9 +24555,11 @@ generic_bullet_casing:
 			ShipHeavy: 10
 			ShipSuperheavy: 10
 			None: 9
+			SubmarineLight: 9
 			Heavy: 8
 			CyborgMedium: 8
 			AntiAirInfantry: 8
+			SubmarineHeavy: 8
 			Flak: 7
 			Superheavy: 7
 			FlyingInfantry: 7
@@ -23753,9 +24609,11 @@ generic_bullet_casing:
 			ShipMedium: 114
 			Flak: 111
 			Concrete: 108
+			SubmarineLight: 106
 			ShipSuperheavy: 103
 			FlyingInfantry: 102
 			Heavy: 99
+			SubmarineHeavy: 94
 			Fighter: 90
 			CyborgHeavy: 88
 			Bomber: 82
@@ -23787,9 +24645,11 @@ generic_bullet_casing:
 			ShipHeavy: 14
 			ShipSuperheavy: 14
 			None: 13
+			SubmarineLight: 13
 			Heavy: 12
 			CyborgMedium: 12
 			AntiAirInfantry: 12
+			SubmarineHeavy: 12
 			Flak: 11
 			Superheavy: 11
 			FlyingInfantry: 11
@@ -23842,6 +24702,8 @@ generic_bullet_casing:
 			CyborgMedium: 109
 			AntiAirVehicle: 106
 			FlyingInfantry: 105
+			SubmarineLight: 99
+			SubmarineHeavy: 99
 			Medium: 96
 			Heavy: 88
 			Plate: 87
@@ -23900,7 +24762,9 @@ generic_bullet_casing:
 			Heroic: 92
 			ShipMedium: 87
 			AntiAirVehicle: 83
+			SubmarineHeavy: 82
 			CyborgHeroic: 80
+			SubmarineLight: 79
 			Fighter: 76
 			Medium: 73
 			Heavy: 72
@@ -23940,6 +24804,8 @@ generic_bullet_casing:
 			ShipMedium: 15
 			ShipSuperheavy: 15
 			Bomber: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Heavy: 13
 			Superheavy: 12
 			Helicopter: 12
@@ -23989,6 +24855,8 @@ generic_bullet_casing:
 			ShipMedium: 81
 			Medium: 78
 			Bomber: 77
+			SubmarineLight: 75
+			SubmarineHeavy: 74
 			CyborgHeroic: 72
 			Heavy: 69
 			Helicopter: 67
@@ -24026,7 +24894,9 @@ generic_bullet_casing:
 			ShipHeavy: 6
 			Bomber: 5
 			ShipSuperheavy: 5
+			SubmarineLight: 5
 			Heavy: 4
+			SubmarineHeavy: 4
 			Superheavy: 3
 			Helicopter: 3
 			Spaceship: 1
@@ -24074,6 +24944,8 @@ generic_bullet_casing:
 			Fighter: 87
 			Bomber: 86
 			Concrete: 85
+			SubmarineLight: 81
+			SubmarineHeavy: 79
 			Heroic: 77
 			Helicopter: 76
 			Heavy: 74
@@ -24112,6 +24984,8 @@ generic_bullet_casing:
 			ShipMedium: 10
 			ShipSuperheavy: 10
 			Bomber: 9
+			SubmarineLight: 9
+			SubmarineHeavy: 9
 			Heavy: 8
 			Superheavy: 7
 			Helicopter: 7
@@ -24162,8 +25036,10 @@ generic_bullet_casing:
 			AntiAirVehicle: 86
 			ShipMedium: 80
 			CyborgHeroic: 79
+			SubmarineHeavy: 75
 			Bomber: 74
 			Medium: 73
+			SubmarineLight: 72
 			Heavy: 64
 			Helicopter: 63
 			Superheavy: 60
@@ -24214,6 +25090,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 93
 			Light: 91
 			AntiAirVehicle: 83
+			SubmarineLight: 83
+			SubmarineHeavy: 82
 			Heroic: 81
 			Fighter: 77
 			Medium: 76
@@ -24253,6 +25131,8 @@ generic_bullet_casing:
 			CyborgHeroic: 15
 			ShipSuperheavy: 15
 			Bomber: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Heavy: 13
 			Superheavy: 12
 			Helicopter: 12
@@ -24302,6 +25182,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 84
 			Bomber: 78
 			Medium: 76
+			SubmarineLight: 76
+			SubmarineHeavy: 71
 			CyborgHeroic: 70
 			Helicopter: 66
 			Heavy: 65
@@ -24337,6 +25219,8 @@ generic_bullet_casing:
 			CyborgHeroic: 6
 			ShipSuperheavy: 6
 			Bomber: 5
+			SubmarineLight: 5
+			SubmarineHeavy: 5
 			Heavy: 4
 			Superheavy: 3
 			Helicopter: 3
@@ -24384,8 +25268,10 @@ generic_bullet_casing:
 			Medium: 90
 			ShipSuperheavy: 87
 			Fighter: 85
+			SubmarineLight: 85
 			Bomber: 83
 			Heroic: 77
+			SubmarineHeavy: 76
 			Helicopter: 75
 			Heavy: 73
 			CyborgHeroic: 67
@@ -24421,6 +25307,8 @@ generic_bullet_casing:
 			CyborgHeroic: 10
 			ShipSuperheavy: 10
 			Bomber: 9
+			SubmarineLight: 9
+			SubmarineHeavy: 9
 			Heavy: 8
 			Superheavy: 7
 			Helicopter: 7
@@ -24471,7 +25359,9 @@ generic_bullet_casing:
 			ShipSuperheavy: 86
 			AntiAirVehicle: 81
 			CyborgHeroic: 77
+			SubmarineLight: 75
 			Bomber: 71
+			SubmarineHeavy: 71
 			Medium: 68
 			Heavy: 61
 			Helicopter: 60
@@ -24517,9 +25407,11 @@ generic_bullet_casing:
 			Wood: 103
 			Heavy: 102
 			AntiAirShip: 100
+			SubmarineLight: 99
 			ShipMedium: 96
 			ShipHeavy: 96
 			Superheavy: 95
+			SubmarineHeavy: 95
 			ShipSuperheavy: 93
 			Steel: 91
 			AntiAirBuilding: 90
@@ -24558,6 +25450,8 @@ generic_bullet_casing:
 			ShipHeavy: 16
 			ShipSuperheavy: 16
 			AntiAirShip: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Steel: 15
 			Fighter: 15
 			Concrete: 14
@@ -24607,8 +25501,10 @@ generic_bullet_casing:
 			Steel: 84
 			ShipHeavy: 83
 			Heavy: 82
+			SubmarineLight: 80
 			ShipMedium: 79
 			ShipSuperheavy: 78
+			SubmarineHeavy: 78
 			Bomber: 76
 			AntiAirBuilding: 76
 			Superheavy: 73
@@ -24643,6 +25539,8 @@ generic_bullet_casing:
 			ShipHeavy: 7
 			ShipSuperheavy: 7
 			AntiAirShip: 7
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			Steel: 6
 			Fighter: 6
 			Concrete: 5
@@ -24689,8 +25587,10 @@ generic_bullet_casing:
 			Heavy: 98
 			ShipHeavy: 97
 			Steel: 96
+			SubmarineLight: 95
 			ShipMedium: 93
 			ShipSuperheavy: 89
+			SubmarineHeavy: 89
 			Fighter: 87
 			AntiAirBuilding: 87
 			Heroic: 83
@@ -24728,6 +25628,8 @@ generic_bullet_casing:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			AntiAirShip: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Steel: 10
 			Fighter: 10
 			Concrete: 9
@@ -24777,8 +25679,10 @@ generic_bullet_casing:
 			Medium: 90
 			Heavy: 87
 			Superheavy: 85
+			SubmarineLight: 85
 			ShipMedium: 84
 			ShipHeavy: 84
+			SubmarineHeavy: 84
 			ShipSuperheavy: 83
 			Steel: 81
 			AntiAirBuilding: 80
@@ -24833,6 +25737,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 93
 			AntiAirVehicle: 88
 			Heroic: 86
+			SubmarineLight: 86
+			SubmarineHeavy: 85
 			CyborgHeroic: 81
 			Medium: 80
 			Fighter: 78
@@ -24873,6 +25779,8 @@ generic_bullet_casing:
 			CyborgHeroic: 15
 			ShipSuperheavy: 15
 			Bomber: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Heavy: 13
 			Superheavy: 12
 			Helicopter: 12
@@ -24922,7 +25830,9 @@ generic_bullet_casing:
 			ShipSuperheavy: 84
 			Medium: 81
 			Bomber: 78
+			SubmarineLight: 77
 			CyborgHeroic: 73
+			SubmarineHeavy: 73
 			Heavy: 70
 			Helicopter: 65
 			Superheavy: 60
@@ -24959,7 +25869,9 @@ generic_bullet_casing:
 			Bomber: 5
 			CyborgHeroic: 5
 			ShipSuperheavy: 5
+			SubmarineLight: 5
 			Heavy: 4
+			SubmarineHeavy: 4
 			Superheavy: 3
 			Helicopter: 3
 			Spaceship: 1
@@ -25006,7 +25918,9 @@ generic_bullet_casing:
 			Concrete: 92
 			ShipSuperheavy: 89
 			Fighter: 85
+			SubmarineLight: 85
 			Bomber: 84
+			SubmarineHeavy: 79
 			Heroic: 78
 			Heavy: 77
 			Helicopter: 74
@@ -25045,6 +25959,8 @@ generic_bullet_casing:
 			CyborgHeroic: 10
 			ShipSuperheavy: 10
 			Bomber: 9
+			SubmarineLight: 9
+			SubmarineHeavy: 9
 			Heavy: 8
 			Superheavy: 7
 			Helicopter: 7
@@ -25095,7 +26011,9 @@ generic_bullet_casing:
 			ShipSuperheavy: 87
 			ShipMedium: 86
 			CyborgHeroic: 82
+			SubmarineLight: 76
 			Medium: 75
+			SubmarineHeavy: 75
 			Bomber: 71
 			Heavy: 67
 			Superheavy: 62
@@ -25146,10 +26064,12 @@ generic_bullet_casing:
 			ShipMedium: 90
 			Steel: 89
 			ShipHeavy: 88
+			SubmarineLight: 88
 			Heavy: 87
 			AntiAirBuilding: 87
 			Concrete: 85
 			ShipSuperheavy: 85
+			SubmarineHeavy: 84
 			Bomber: 82
 			Superheavy: 81
 			Helicopter: 80
@@ -25189,6 +26109,8 @@ generic_bullet_casing:
 			Heavy: 15
 			Bomber: 15
 			ShipSuperheavy: 15
+			SubmarineLight: 15
+			SubmarineHeavy: 15
 			Superheavy: 14
 			Helicopter: 14
 			Spaceship: 13
@@ -25237,7 +26159,9 @@ generic_bullet_casing:
 			AntiAirBuilding: 78
 			Heavy: 76
 			ShipMedium: 76
+			SubmarineLight: 76
 			ShipSuperheavy: 75
+			SubmarineHeavy: 72
 			Concrete: 68
 			Helicopter: 67
 			Superheavy: 64
@@ -25275,6 +26199,8 @@ generic_bullet_casing:
 			Heavy: 6
 			Bomber: 6
 			ShipSuperheavy: 6
+			SubmarineLight: 6
+			SubmarineHeavy: 6
 			Superheavy: 5
 			Helicopter: 5
 			Spaceship: 4
@@ -25318,9 +26244,11 @@ generic_bullet_casing:
 			ShipHeavy: 94
 			Heavy: 92
 			ShipMedium: 91
+			SubmarineLight: 91
 			Fighter: 87
 			AntiAirBuilding: 87
 			ShipSuperheavy: 86
+			SubmarineHeavy: 85
 			Bomber: 83
 			Helicopter: 82
 			Heroic: 78
@@ -25361,6 +26289,8 @@ generic_bullet_casing:
 			Heavy: 10
 			Bomber: 10
 			ShipSuperheavy: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Superheavy: 9
 			Helicopter: 9
 			Spaceship: 8
@@ -25411,6 +26341,8 @@ generic_bullet_casing:
 			ShipHeavy: 82
 			ShipSuperheavy: 82
 			Concrete: 81
+			SubmarineLight: 80
+			SubmarineHeavy: 80
 			Heavy: 79
 			Superheavy: 78
 			Bomber: 68
@@ -25457,7 +26389,9 @@ generic_bullet_casing:
 			Heavy: 117
 			CyborgMedium: 116
 			ShipSuperheavy: 116
+			SubmarineHeavy: 116
 			Superheavy: 114
+			SubmarineLight: 114
 			ShipMedium: 112
 			AntiAirBuilding: 109
 			Flak: 107
@@ -25493,6 +26427,8 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 			CyborgLight: 18
 			CyborgMedium: 18
 			CyborgHeavy: 18
@@ -25544,8 +26480,10 @@ generic_bullet_casing:
 			Heavy: 109
 			ShipSuperheavy: 109
 			ShipMedium: 108
+			SubmarineLight: 108
 			AntiAirBuilding: 106
 			FlyingInfantry: 105
+			SubmarineHeavy: 105
 			Flak: 97
 			Superheavy: 94
 			Fighter: 90
@@ -25579,6 +26517,8 @@ generic_bullet_casing:
 			ShipHeavy: 10
 			ShipSuperheavy: 10
 			AntiAirShip: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			CyborgLight: 9
 			CyborgMedium: 9
 			CyborgHeavy: 9
@@ -25624,11 +26564,13 @@ generic_bullet_casing:
 			None: 148
 			AntiAirShip: 147
 			ShipMedium: 127
+			SubmarineLight: 123
 			Heavy: 119
 			ShipHeavy: 116
 			CyborgMedium: 115
 			AntiAirInfantry: 115
 			Steel: 113
+			SubmarineHeavy: 113
 			AntiAirBuilding: 111
 			ShipSuperheavy: 111
 			Superheavy: 110
@@ -25665,6 +26607,8 @@ generic_bullet_casing:
 			ShipHeavy: 14
 			ShipSuperheavy: 14
 			AntiAirShip: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			CyborgLight: 13
 			CyborgMedium: 13
 			CyborgHeavy: 13
@@ -25711,8 +26655,10 @@ generic_bullet_casing:
 			Wood: 135
 			ShipHeavy: 135
 			AntiAirShip: 135
+			SubmarineLight: 135
 			ShipMedium: 134
 			Steel: 133
+			SubmarineHeavy: 133
 			ShipSuperheavy: 132
 			Superheavy: 131
 			AntiAirBuilding: 131
@@ -25766,6 +26712,8 @@ generic_bullet_casing:
 			Superheavy: 130
 			Wood: 129
 			AntiAirShip: 123
+			SubmarineHeavy: 123
+			SubmarineLight: 120
 			ShipHeavy: 117
 			CyborgLight: 116
 			ShipSuperheavy: 116
@@ -25804,6 +26752,8 @@ generic_bullet_casing:
 			ShipHeavy: 19
 			ShipSuperheavy: 19
 			AntiAirShip: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 			Wood: 18
 			Steel: 18
 			Concrete: 18
@@ -25853,8 +26803,10 @@ generic_bullet_casing:
 			CyborgLight: 129
 			AntiAirShip: 128
 			Heavy: 120
+			SubmarineLight: 112
 			ShipHeavy: 110
 			FlyingInfantry: 108
+			SubmarineHeavy: 106
 			ShipMedium: 105
 			Bomber: 104
 			Superheavy: 102
@@ -25890,6 +26842,8 @@ generic_bullet_casing:
 			ShipHeavy: 10
 			ShipSuperheavy: 10
 			AntiAirShip: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Wood: 9
 			Steel: 9
 			Concrete: 9
@@ -25938,8 +26892,10 @@ generic_bullet_casing:
 			AntiAirShip: 131
 			CyborgLight: 129
 			Heavy: 125
+			SubmarineLight: 120
 			Superheavy: 118
 			ShipMedium: 115
+			SubmarineHeavy: 112
 			Fighter: 106
 			ShipHeavy: 106
 			None: 105
@@ -25976,6 +26932,8 @@ generic_bullet_casing:
 			ShipHeavy: 14
 			ShipSuperheavy: 14
 			AntiAirShip: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			Wood: 13
 			Steel: 13
 			Concrete: 13
@@ -26023,6 +26981,8 @@ generic_bullet_casing:
 			Medium: 151
 			Heavy: 150
 			Superheavy: 146
+			SubmarineLight: 136
+			SubmarineHeavy: 135
 			ShipLight: 128
 			AntiAirShip: 126
 			ShipMedium: 124
@@ -26089,8 +27049,10 @@ generic_bullet_casing:
 			CyborgMedium: 113
 			ShipMedium: 105
 			CyborgHeavy: 103
+			SubmarineHeavy: 103
 			Light: 101
 			FlyingInfantry: 98
+			SubmarineLight: 98
 			AntiAirVehicle: 96
 			Medium: 92
 			Heavy: 91
@@ -26130,8 +27092,10 @@ generic_bullet_casing:
 			FlyingInfantry: 17
 			CyborgHeavy: 17
 			AntiAirVehicle: 17
+			SubmarineLight: 17
 			Heavy: 16
 			CyborgHeroic: 16
+			SubmarineHeavy: 16
 			Superheavy: 15
 			Fighter: 12
 			Bomber: 12
@@ -26178,7 +27142,9 @@ generic_bullet_casing:
 			ShipSuperheavy: 103
 			Plate: 99
 			Medium: 96
+			SubmarineLight: 92
 			CyborgHeavy: 90
+			SubmarineHeavy: 88
 			Fighter: 87
 			Heavy: 81
 			Heroic: 74
@@ -26215,9 +27181,11 @@ generic_bullet_casing:
 			CyborgHeavy: 8
 			AntiAirVehicle: 8
 			ShipSuperheavy: 8
+			SubmarineLight: 8
 			Heavy: 7
 			FlyingInfantry: 7
 			CyborgHeroic: 7
+			SubmarineHeavy: 7
 			Superheavy: 6
 			Fighter: 3
 			Bomber: 3
@@ -26261,11 +27229,13 @@ generic_bullet_casing:
 			Plate: 110
 			CyborgMedium: 110
 			AntiAirVehicle: 105
+			SubmarineLight: 103
 			CyborgHeavy: 102
 			ShipSuperheavy: 101
 			Medium: 100
 			FlyingInfantry: 97
 			Heavy: 94
+			SubmarineHeavy: 93
 			Superheavy: 78
 			CyborgHeroic: 75
 			Fighter: 74
@@ -26302,8 +27272,10 @@ generic_bullet_casing:
 			FlyingInfantry: 12
 			CyborgHeavy: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
 			Heavy: 11
 			CyborgHeroic: 11
+			SubmarineHeavy: 11
 			Superheavy: 10
 			Fighter: 7
 			Bomber: 7
@@ -26349,7 +27321,9 @@ generic_bullet_casing:
 			ShipSuperheavy: 119
 			Scout: 110
 			CyborgHeavy: 110
+			SubmarineLight: 106
 			Light: 103
+			SubmarineHeavy: 103
 			AntiAirVehicle: 100
 			Medium: 98
 			FlyingInfantry: 97
@@ -26409,8 +27383,10 @@ generic_bullet_casing:
 			Heavy: 70
 			Superheavy: 68
 			ShipHeavy: 68
+			SubmarineHeavy: 68
 			Steel: 67
 			ShipSuperheavy: 67
+			SubmarineLight: 67
 			ShipMedium: 64
 			CyborgHeroic: 63
 			AntiAirBuilding: 60
@@ -26450,6 +27426,8 @@ generic_bullet_casing:
 			ShipHeavy: 15
 			ShipSuperheavy: 15
 			AntiAirShip: 15
+			SubmarineLight: 15
+			SubmarineHeavy: 15
 			Concrete: 14
 			AntiAirBuilding: 14
 
@@ -26496,8 +27474,10 @@ generic_bullet_casing:
 			ShipHeavy: 67
 			ShipMedium: 65
 			Heavy: 64
+			SubmarineLight: 64
 			ShipSuperheavy: 62
 			AntiAirBuilding: 61
+			SubmarineHeavy: 61
 			Heroic: 60
 			CyborgHeroic: 57
 			Superheavy: 55
@@ -26536,6 +27516,8 @@ generic_bullet_casing:
 			ShipHeavy: 6
 			ShipSuperheavy: 6
 			AntiAirShip: 6
+			SubmarineLight: 6
+			SubmarineHeavy: 6
 			Concrete: 5
 			AntiAirBuilding: 5
 
@@ -26580,7 +27562,9 @@ generic_bullet_casing:
 			AntiAirShip: 79
 			Heavy: 70
 			ShipMedium: 70
+			SubmarineLight: 70
 			ShipHeavy: 66
+			SubmarineHeavy: 65
 			Superheavy: 64
 			Steel: 63
 			ShipSuperheavy: 63
@@ -26622,6 +27606,8 @@ generic_bullet_casing:
 			ShipHeavy: 10
 			ShipSuperheavy: 10
 			AntiAirShip: 10
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 			Concrete: 9
 			AntiAirBuilding: 9
 
@@ -26666,8 +27652,10 @@ generic_bullet_casing:
 			Heavy: 72
 			ShipLight: 71
 			Superheavy: 70
+			SubmarineLight: 70
 			ShipHeavy: 69
 			AntiAirShip: 69
+			SubmarineHeavy: 69
 			Wood: 68
 			ShipMedium: 68
 			ShipSuperheavy: 68
@@ -26732,6 +27720,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 59
 			AntiAirShip: 86
 			FlyingInfantry: 117
+			SubmarineLight: 61
+			SubmarineHeavy: 56
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -26766,6 +27756,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 3
 			AntiAirShip: 7
 			FlyingInfantry: 10
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 
 ^Warhead_CannonAP_Light_Flat:
 	Warhead@CannonAP_Light_Flat: AreaDamage
@@ -26812,6 +27804,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 120
 			AntiAirShip: 111
 			FlyingInfantry: 93
+			SubmarineLight: 126
+			SubmarineHeavy: 126
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -26846,6 +27840,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 13
 			AntiAirShip: 11
 			FlyingInfantry: 6
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 
 
 ^Warhead_Chemical_Medium_Flat:
@@ -26893,6 +27889,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 118
 			AntiAirShip: 97
 			FlyingInfantry: 84
+			SubmarineLight: 132
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -26929,6 +27927,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 14
 			AntiAirShip: 12
 			FlyingInfantry: 11
+			SubmarineLight: 15
+			SubmarineHeavy: 16
 
 ^Warhead_Concussion_Medium_Flat:
 	Warhead@Concussion_Medium_Flat: AreaDamage
@@ -26975,6 +27975,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 93
 			AntiAirShip: 116
 			FlyingInfantry: 101
+			SubmarineLight: 102
+			SubmarineHeavy: 93
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27009,6 +28011,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 12
 			AntiAirShip: 15
 			FlyingInfantry: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 
 
 ^Warhead_Cryo_Medium_Flat:
@@ -27056,6 +28060,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 123
 			AntiAirShip: 113
 			FlyingInfantry: 83
+			SubmarineLight: 126
+			SubmarineHeavy: 129
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: -200
@@ -27092,6 +28098,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 14
 			AntiAirShip: 12
 			FlyingInfantry: 12
+			SubmarineLight: 13
+			SubmarineHeavy: 13
 
 ^Warhead_Demolition_Light_Flat:
 	Warhead@Demolition_Light_Flat: AreaDamage
@@ -27138,6 +28146,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 92
 			AntiAirShip: 113
 			FlyingInfantry: 94
+			SubmarineLight: 75
+			SubmarineHeavy: 71
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27172,6 +28182,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 9
 			AntiAirShip: 10
 			FlyingInfantry: 6
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 
 
 ^Warhead_Laser_Heavy_Flat:
@@ -27219,6 +28231,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 129
 			AntiAirShip: 96
 			FlyingInfantry: 85
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -27255,6 +28269,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 21
 			AntiAirShip: 16
 			FlyingInfantry: 14
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 
 
@@ -27304,6 +28320,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 77
 			AntiAirShip: 80
 			FlyingInfantry: 106
+			SubmarineLight: 77
+			SubmarineHeavy: 78
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27338,6 +28356,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 16
 			AntiAirShip: 17
 			FlyingInfantry: 18
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 
 ^Warhead_MissileAA_Light_Flat:
 	Warhead@MissileAA_Light_Flat: AreaDamage
@@ -27384,6 +28404,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 90
 			AntiAirShip: 89
 			FlyingInfantry: 94
+			SubmarineLight: 109
+			SubmarineHeavy: 108
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27418,6 +28440,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 8
 			AntiAirShip: 7
 			FlyingInfantry: 6
+			SubmarineLight: 9
+			SubmarineHeavy: 10
 
 
 ^Warhead_MissileHE_Heavy_Flat:
@@ -27465,6 +28489,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 114
 			AntiAirShip: 121
 			FlyingInfantry: 94
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27499,6 +28525,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 20
 			AntiAirShip: 21
 			FlyingInfantry: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 
 
 
@@ -27548,6 +28576,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 98
 			AntiAirShip: 109
 			FlyingInfantry: 98
+			SubmarineLight: 96
+			SubmarineHeavy: 92
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
@@ -27585,6 +28615,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 18
 			AntiAirShip: 18
 			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 18
 
 
 ^Warhead_Plasma_Medium_Flat:
@@ -27632,6 +28664,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 97
 			AntiAirShip: 111
 			FlyingInfantry: 92
+			SubmarineLight: 90
+			SubmarineHeavy: 92
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
@@ -27669,6 +28703,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 13
 			AntiAirShip: 13
 			FlyingInfantry: 10
+			SubmarineLight: 13
+			SubmarineHeavy: 13
 
 
 ^Warhead_Railgun_Heavy_Flat:
@@ -27716,6 +28752,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 126
 			AntiAirShip: 106
 			FlyingInfantry: 85
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27750,6 +28788,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 19
 			AntiAirShip: 18
 			FlyingInfantry: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 
 
 # Percentage-inert flat compatibility profiles for the final reviewed
@@ -27801,6 +28841,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 109
 			AntiAirShip: 111
 			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27835,6 +28877,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 18
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 
 
 # Percentage-inert flat compatibility profiles for the final reviewed
@@ -27886,6 +28930,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 72
 			AntiAirShip: 79
 			FlyingInfantry: 110
+			SubmarineLight: 73
+			SubmarineHeavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -27920,6 +28966,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 3
 			AntiAirShip: 3
 			FlyingInfantry: 11
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 
 
 
@@ -27968,6 +29016,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 90
 			AntiAirShip: 88
 			FlyingInfantry: 84
+			SubmarineLight: 117
+			SubmarineHeavy: 113
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -28002,6 +29052,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 13
 			AntiAirShip: 11
 			FlyingInfantry: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 
 
 ^Warhead_Quantum_Heavy_Flat:
@@ -28049,6 +29101,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 134
 			AntiAirShip: 104
 			FlyingInfantry: 82
+			SubmarineLight: 145
+			SubmarineHeavy: 157
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
 			Temperature: 25
@@ -28086,6 +29140,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 20
 			AntiAirShip: 17
 			FlyingInfantry: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 
 
@@ -28139,6 +29195,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 93
 			AntiAirShip: 127
 			FlyingInfantry: 101
+			SubmarineLight: 97
+			SubmarineHeavy: 90
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -28173,6 +29231,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 11
 			AntiAirShip: 12
 			FlyingInfantry: 7
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28223,6 +29283,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 95
 			AntiAirShip: 101
 			FlyingInfantry: 100
+			SubmarineLight: 70
+			SubmarineHeavy: 74
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -28259,6 +29321,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 8
 			AntiAirShip: 10
 			FlyingInfantry: 6
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28309,6 +29373,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 126
 			AntiAirShip: 106
 			FlyingInfantry: 85
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 100
 		PercentageScale: 0
@@ -28344,6 +29410,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 19
 			AntiAirShip: 17
 			FlyingInfantry: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28407,6 +29475,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 93
 			AntiAirShip: 109
 			FlyingInfantry: 92
+			SubmarineLight: 78
+			SubmarineHeavy: 76
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -28443,6 +29513,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 12
 			AntiAirShip: 14
 			FlyingInfantry: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 
 # Canonical flat profiles for explicit full-family state expansion.
 
@@ -28491,6 +29563,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 103
 			AntiAirShip: 98
 			FlyingInfantry: 95
+			SubmarineLight: 119
+			SubmarineHeavy: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -28527,6 +29601,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 10
 			AntiAirShip: 8
 			FlyingInfantry: 6
+			SubmarineLight: 11
+			SubmarineHeavy: 12
 
 ^Warhead_Thermobaric_Heavy_Flat:
 	Warhead@Thermobaric_Heavy_Flat: AreaDamage
@@ -28573,6 +29649,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 110
 			AntiAirShip: 109
 			FlyingInfantry: 91
+			SubmarineLight: 93
+			SubmarineHeavy: 95
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 33
@@ -28609,6 +29687,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 18
 			AntiAirShip: 19
 			FlyingInfantry: 17
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28659,6 +29739,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 102
 			AntiAirShip: 98
 			FlyingInfantry: 89
+			SubmarineLight: 133
+			SubmarineHeavy: 132
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -28693,6 +29775,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 10
 			AntiAirShip: 9
 			FlyingInfantry: 6
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28743,6 +29827,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 112
 			AntiAirShip: 92
 			FlyingInfantry: 92
+			SubmarineLight: 119
+			SubmarineHeavy: 125
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -28777,6 +29863,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 18
 			AntiAirShip: 16
 			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
 
 ^Warhead_MissileHE_Medium_Flat:
 	Warhead@MissileHE_Medium_Flat: AreaDamage
@@ -28823,6 +29911,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 100
 			AntiAirShip: 128
 			FlyingInfantry: 95
+			SubmarineLight: 112
+			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -28857,6 +29947,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 15
 			AntiAirShip: 16
 			FlyingInfantry: 11
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 
 # Percentage-inert flat compatibility profiles for the final reviewed
 # retired-family consolidation. Percentage applications stay on their
@@ -28907,6 +29999,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 108
 			AntiAirShip: 113
 			FlyingInfantry: 93
+			SubmarineLight: 99
+			SubmarineHeavy: 98
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
@@ -28943,6 +30037,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 19
 			AntiAirShip: 20
 			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 17
 
 
 
@@ -28969,8 +30065,10 @@ generic_bullet_casing:
 			Superheavy: 185
 			Plate: 158
 			CyborgHeavy: 157
+			SubmarineHeavy: 157
 			Heavy: 156
 			Concrete: 153
+			SubmarineLight: 149
 			ShipSuperheavy: 145
 			ShipMedium: 142
 			ShipHeavy: 133
@@ -29005,9 +30103,11 @@ generic_bullet_casing:
 			Heavy: 23
 			Medium: 22
 			CyborgHeroic: 22
+			SubmarineHeavy: 22
 			CyborgHeavy: 21
 			AntiAirVehicle: 21
 			ShipSuperheavy: 21
+			SubmarineLight: 21
 			Heroic: 20
 			Light: 20
 			ShipMedium: 20
@@ -29055,6 +30155,8 @@ generic_bullet_casing:
 			Heavy: 140
 			CyborgHeavy: 138
 			Plate: 136
+			SubmarineLight: 136
+			SubmarineHeavy: 135
 			Concrete: 133
 			Medium: 132
 			ShipMedium: 132
@@ -29090,8 +30192,10 @@ generic_bullet_casing:
 			Heavy: 14
 			Medium: 13
 			CyborgHeroic: 13
+			SubmarineHeavy: 13
 			CyborgHeavy: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
 			Heroic: 11
 			Light: 11
 			ShipMedium: 11
@@ -29138,7 +30242,9 @@ generic_bullet_casing:
 			Shield: 255
 			Superheavy: 200
 			Concrete: 175
+			SubmarineHeavy: 162
 			ShipMedium: 161
+			SubmarineLight: 159
 			Heavy: 158
 			CyborgHeavy: 151
 			Medium: 149
@@ -29175,8 +30281,10 @@ generic_bullet_casing:
 			Heavy: 18
 			Medium: 17
 			CyborgHeroic: 17
+			SubmarineHeavy: 17
 			CyborgHeavy: 16
 			AntiAirVehicle: 16
+			SubmarineLight: 16
 			Heroic: 15
 			Light: 15
 			ShipMedium: 15
@@ -29226,6 +30334,8 @@ generic_bullet_casing:
 			Superheavy: 149
 			Heavy: 146
 			Medium: 142
+			SubmarineHeavy: 142
+			SubmarineLight: 141
 			AntiAirVehicle: 139
 			Light: 137
 			ShipMedium: 136
@@ -29291,7 +30401,9 @@ generic_bullet_casing:
 			Heavy: 103
 			Superheavy: 102
 			ShipLight: 102
+			SubmarineLight: 97
 			AntiAirShip: 96
+			SubmarineHeavy: 96
 			CyborgHeroic: 94
 			Wood: 93
 			ShipMedium: 91
@@ -29334,6 +30446,8 @@ generic_bullet_casing:
 			ShipHeavy: 16
 			ShipSuperheavy: 16
 			AntiAirShip: 16
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 			Steel: 15
 			Fighter: 15
 			Concrete: 14
@@ -29381,7 +30495,9 @@ generic_bullet_casing:
 			AntiAirShip: 101
 			Heavy: 98
 			CyborgHeroic: 94
+			SubmarineLight: 90
 			ShipHeavy: 89
+			SubmarineHeavy: 88
 			Superheavy: 87
 			ShipMedium: 83
 			ShipSuperheavy: 83
@@ -29420,6 +30536,8 @@ generic_bullet_casing:
 			ShipHeavy: 7
 			ShipSuperheavy: 7
 			AntiAirShip: 7
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			Steel: 6
 			Fighter: 6
 			Concrete: 5
@@ -29464,10 +30582,12 @@ generic_bullet_casing:
 			Heavy: 109
 			Wood: 99
 			AntiAirShip: 99
+			SubmarineLight: 98
 			ShipHeavy: 95
 			Heroic: 94
 			Superheavy: 94
 			CyborgHeroic: 94
+			SubmarineHeavy: 94
 			ShipMedium: 88
 			ShipSuperheavy: 88
 			Steel: 82
@@ -29506,6 +30626,8 @@ generic_bullet_casing:
 			ShipHeavy: 11
 			ShipSuperheavy: 11
 			AntiAirShip: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Steel: 10
 			Fighter: 10
 			Concrete: 9
@@ -29553,6 +30675,8 @@ generic_bullet_casing:
 			Heavy: 109
 			Superheavy: 107
 			ShipLight: 104
+			SubmarineHeavy: 98
+			SubmarineLight: 97
 			AntiAirShip: 95
 			ShipHeavy: 89
 			ShipSuperheavy: 88
@@ -29618,7 +30742,9 @@ generic_bullet_casing:
 			AntiAirBuilding: 74
 			ShipMedium: 74
 			ShipSuperheavy: 72
+			SubmarineLight: 72
 			Heavy: 71
+			SubmarineHeavy: 69
 			Concrete: 66
 			Spaceship: 63
 			Superheavy: 61
@@ -29656,6 +30782,8 @@ generic_bullet_casing:
 			Concrete: 4
 			ShipMedium: 4
 			ShipSuperheavy: 4
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 			Superheavy: 3
 			Spaceship: 3
 	Warhead@BulletSonic_Light_Debuff: ApplyPhysicalState
@@ -29707,9 +30835,11 @@ generic_bullet_casing:
 			ShipHeavy: 89
 			ShipMedium: 85
 			AntiAirBuilding: 83
+			SubmarineLight: 83
 			Heavy: 82
 			ShipSuperheavy: 81
 			Heroic: 78
+			SubmarineHeavy: 78
 			CyborgHeroic: 73
 			Concrete: 72
 			Spaceship: 69
@@ -29749,6 +30879,8 @@ generic_bullet_casing:
 			Heavy: 7
 			Spaceship: 7
 			ShipSuperheavy: 7
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			Superheavy: 6
 	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
 		PhysicalStateName: Resonance
@@ -29801,7 +30933,9 @@ generic_bullet_casing:
 			AntiAirBuilding: 85
 			ShipMedium: 85
 			ShipSuperheavy: 85
+			SubmarineLight: 85
 			Spaceship: 84
+			SubmarineHeavy: 84
 			Concrete: 82
 			Superheavy: 81
 			CyborgHeroic: 79
@@ -29840,6 +30974,8 @@ generic_bullet_casing:
 			Concrete: 11
 			ShipMedium: 11
 			ShipSuperheavy: 11
+			SubmarineLight: 11
+			SubmarineHeavy: 11
 			Superheavy: 10
 			Spaceship: 10
 	Warhead@BulletSonic_Heavy_Debuff: ApplyPhysicalState
@@ -29897,7 +31033,9 @@ generic_bullet_casing:
 			ShipHeavy: 71
 			Concrete: 70
 			ShipSuperheavy: 70
+			SubmarineLight: 70
 			Heavy: 68
+			SubmarineHeavy: 68
 			Spaceship: 67
 			Superheavy: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -29936,6 +31074,8 @@ generic_bullet_casing:
 			Heavy: 187
 			Medium: 166
 			AntiAirVehicle: 156
+			SubmarineLight: 151
+			SubmarineHeavy: 150
 			Light: 147
 			Spaceship: 146
 			Helicopter: 140
@@ -29975,6 +31115,8 @@ generic_bullet_casing:
 			AntiAirVehicle: 9
 			Scout: 8
 			Spaceship: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 8
 			Bomber: 7
 			Helicopter: 7
 			ShipLight: 7
@@ -30028,6 +31170,8 @@ generic_bullet_casing:
 			Heavy: 170
 			Medium: 158
 			AntiAirVehicle: 148
+			SubmarineLight: 148
+			SubmarineHeavy: 147
 			Light: 138
 			Spaceship: 132
 			Helicopter: 130
@@ -30066,6 +31210,8 @@ generic_bullet_casing:
 			Scout: 12
 			Light: 12
 			AntiAirVehicle: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 			Helicopter: 11
 			Spaceship: 11
 			CyborgHeroic: 11
@@ -30119,7 +31265,9 @@ generic_bullet_casing:
 			Superheavy: 200
 			Spaceship: 176
 			Heavy: 171
+			SubmarineHeavy: 154
 			Medium: 147
+			SubmarineLight: 147
 			AntiAirVehicle: 136
 			ShipSuperheavy: 129
 			ShipMedium: 127
@@ -30159,6 +31307,8 @@ generic_bullet_casing:
 			AntiAirVehicle: 16
 			Scout: 15
 			Spaceship: 15
+			SubmarineLight: 15
+			SubmarineHeavy: 15
 			Bomber: 14
 			Helicopter: 14
 			CyborgHeavy: 14
@@ -30215,7 +31365,9 @@ generic_bullet_casing:
 			Medium: 160
 			AntiAirVehicle: 159
 			Light: 158
+			SubmarineHeavy: 141
 			Scout: 138
+			SubmarineLight: 138
 			Spaceship: 136
 			Helicopter: 117
 			Bomber: 115
@@ -30287,9 +31439,11 @@ generic_bullet_casing:
 			Heavy: 103
 			AntiAirInfantry: 103
 			ShipMedium: 103
+			SubmarineLight: 103
 			CyborgMedium: 102
 			ShipSuperheavy: 100
 			Fighter: 98
+			SubmarineHeavy: 95
 			Concrete: 91
 			Flak: 90
 			CyborgHeavy: 87
@@ -30324,6 +31478,8 @@ generic_bullet_casing:
 			Superheavy: 7
 			CyborgLight: 7
 			CyborgMedium: 7
+			SubmarineLight: 7
+			SubmarineHeavy: 7
 			None: 6
 			Flak: 6
 			FlyingInfantry: 6
@@ -30375,11 +31531,13 @@ generic_bullet_casing:
 			Heavy: 115
 			AntiAirInfantry: 111
 			ShipHeavy: 110
+			SubmarineLight: 110
 			Fighter: 106
 			ShipMedium: 106
 			Steel: 105
 			CyborgMedium: 103
 			FlyingInfantry: 101
+			SubmarineHeavy: 98
 			AntiAirBuilding: 97
 			ShipSuperheavy: 96
 			CyborgHeavy: 95
@@ -30414,11 +31572,13 @@ generic_bullet_casing:
 			ShipMedium: 11
 			ShipHeavy: 11
 			ShipSuperheavy: 11
+			SubmarineLight: 11
 			None: 10
 			Superheavy: 10
 			FlyingInfantry: 10
 			CyborgMedium: 10
 			CyborgHeavy: 10
+			SubmarineHeavy: 10
 			Flak: 9
 			Plate: 9
 			CyborgHeroic: 9
@@ -30471,6 +31631,8 @@ generic_bullet_casing:
 			AntiAirBuilding: 113
 			CyborgMedium: 112
 			ShipMedium: 112
+			SubmarineHeavy: 112
+			SubmarineLight: 111
 			Heavy: 110
 			Superheavy: 108
 			Concrete: 104
@@ -30508,6 +31670,8 @@ generic_bullet_casing:
 			Superheavy: 14
 			CyborgLight: 14
 			CyborgMedium: 14
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 			None: 13
 			Flak: 13
 			FlyingInfantry: 13
@@ -30563,6 +31727,8 @@ generic_bullet_casing:
 			ShipSuperheavy: 110
 			ShipMedium: 109
 			Concrete: 107
+			SubmarineLight: 107
+			SubmarineHeavy: 107
 			Heavy: 106
 			CyborgMedium: 105
 			Superheavy: 104
@@ -30631,7 +31797,9 @@ generic_bullet_casing:
 			Plate: 99
 			Medium: 94
 			Fighter: 93
+			SubmarineLight: 89
 			CyborgHeavy: 87
+			SubmarineHeavy: 84
 			Heavy: 76
 			Bomber: 74
 			Heroic: 71
@@ -30667,9 +31835,11 @@ generic_bullet_casing:
 			CyborgHeavy: 7
 			AntiAirVehicle: 7
 			ShipSuperheavy: 7
+			SubmarineLight: 7
 			Heavy: 6
 			FlyingInfantry: 6
 			CyborgHeroic: 6
+			SubmarineHeavy: 6
 			Superheavy: 5
 			Fighter: 4
 			Bomber: 3
@@ -30720,10 +31890,12 @@ generic_bullet_casing:
 			Plate: 106
 			AntiAirVehicle: 102
 			FlyingInfantry: 101
+			SubmarineLight: 101
 			CyborgHeavy: 99
 			ShipSuperheavy: 97
 			Medium: 96
 			Heavy: 93
+			SubmarineHeavy: 89
 			Fighter: 79
 			Bomber: 77
 			Superheavy: 71
@@ -30760,8 +31932,10 @@ generic_bullet_casing:
 			Heroic: 10
 			FlyingInfantry: 10
 			CyborgHeavy: 10
+			SubmarineLight: 10
 			Heavy: 9
 			CyborgHeroic: 9
+			SubmarineHeavy: 9
 			Superheavy: 8
 			Fighter: 8
 			Bomber: 7
@@ -30811,8 +31985,10 @@ generic_bullet_casing:
 			Scout: 110
 			ShipMedium: 106
 			CyborgHeavy: 102
+			SubmarineHeavy: 100
 			FlyingInfantry: 99
 			Light: 98
+			SubmarineLight: 98
 			AntiAirVehicle: 95
 			Medium: 93
 			Heavy: 90
@@ -30852,8 +32028,10 @@ generic_bullet_casing:
 			Heroic: 14
 			FlyingInfantry: 14
 			CyborgHeavy: 14
+			SubmarineLight: 14
 			Heavy: 13
 			CyborgHeroic: 13
+			SubmarineHeavy: 13
 			Superheavy: 12
 			Fighter: 12
 			Bomber: 11
@@ -30907,7 +32085,9 @@ generic_bullet_casing:
 			CyborgHeavy: 102
 			Light: 100
 			FlyingInfantry: 100
+			SubmarineLight: 99
 			AntiAirVehicle: 95
+			SubmarineHeavy: 95
 			Medium: 91
 			Heavy: 83
 			Superheavy: 78

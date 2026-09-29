@@ -813,6 +813,21 @@ wc2_tower_axe:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
 		ValidTargets: Ground, Water, Air
@@ -853,6 +868,21 @@ wc2_tower_axe:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@EffectWater: CreateEffect
@@ -884,6 +914,21 @@ wc2_tower_axe:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@EffectAir: CreateEffect
@@ -936,6 +981,12 @@ wc2lightshipFire:
 			Medium: 90
 			Heavy: 75
 			Concrete: 50
+			CyborgLight: 130
+			AntiAirVehicle: 100
+			ShipLight: 75
+			ShipMedium: 67
+			AntiAirShip: 71
+			SubmarineLight: 71
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -950,6 +1001,12 @@ wc2lightshipFire:
 			Medium: 90
 			Heavy: 75
 			Concrete: 50
+			CyborgLight: 130
+			AntiAirVehicle: 100
+			ShipLight: 75
+			ShipMedium: 67
+			AntiAirShip: 71
+			SubmarineLight: 71
 	Warhead@2Eff: CreateEffect
 		Image: wc2_cannon_impact
 		Explosions: idle
@@ -977,6 +1034,12 @@ wc2heavyshipFire:
 			Medium: 90
 			Heavy: 75
 			Concrete: 50
+			CyborgLight: 130
+			AntiAirVehicle: 100
+			ShipLight: 75
+			ShipMedium: 67
+			AntiAirShip: 71
+			SubmarineLight: 71
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 29
@@ -990,6 +1053,12 @@ wc2heavyshipFire:
 			Medium: 90
 			Heavy: 75
 			Concrete: 50
+			CyborgLight: 130
+			AntiAirVehicle: 100
+			ShipLight: 75
+			ShipMedium: 67
+			AntiAirShip: 71
+			SubmarineLight: 71
 	Warhead@2Eff: CreateEffect
 		Image: wc2_cannon_impact
 		Explosions: idle
@@ -1016,6 +1085,12 @@ wc2submarineFire:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 9
@@ -1029,6 +1104,12 @@ wc2submarineFire:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 	Warhead@2Eff: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
@@ -1052,6 +1133,12 @@ wc2tornadoTest:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -1065,6 +1152,12 @@ wc2tornadoTest:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: bowhit.aud
 
@@ -1093,6 +1186,12 @@ wc2daemonFire:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
@@ -1106,6 +1205,12 @@ wc2daemonFire:
 			Medium: 40
 			Heavy: 20
 			Concrete: 40
+			CyborgLight: 190
+			AntiAirVehicle: 69
+			ShipLight: 88
+			ShipMedium: 40
+			AntiAirShip: 59
+			SubmarineLight: 28
 	Warhead@2Eff: CreateEffect
 		Image: wc2_effect_daemon_attack
 		Explosions: hit
