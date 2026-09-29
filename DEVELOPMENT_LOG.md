@@ -1,3 +1,23 @@
+# 2026-09-29 — Devin (NOVA): CA-3 stage/composition gate (12.5)
+
+- Branch nova/ca3-stage-gate (worktree C:/tmp/nova-ca3b, base 3ed0712b2 = ca3-role-mix + post-#630 master).
+- SquadManagerBotModuleCA: new fields `StageCompositionTicks` (bound on the composition wait; 0 = gate off) and
+  `StageRequiredRoles` (roles the assault must contain, e.g. frontline+anti_air). Named StageCompositionTicks to
+  avoid colliding with the pre-existing 6f `StageTimeoutTicks` (spatial assembly).
+- CreateAttackForce: once the launch trigger fires, the assault now holds until the idle pool covers every
+  StageRequiredRoles role (via BotUnitRoles.ActorRoles — any of a unit's roles count), bounded by
+  StageCompositionTicks, then launches regardless so the gate can never deadlock. stageSinceTick resets on launch.
+- ai.yaml: per-personality StageCompositionTicks (rush 1500 / expansion 2000 / tech 2400 / turtle+steamroller 3000 /
+  guerrilla 1500) + StageRequiredRoles: frontline, anti_air on all six personality nodes. @classic untouched —
+  unconfigured gate is a pass-through, classic keeps its exact old launch timing.
+- tools/audit/audit_ai_personalities.py: RoleMix, StageCompositionTicks, StageRequiredRoles added to the tuning
+  allow-list (composition is personality flavour per 12.5) — also clears the pre-existing RoleMix failure the
+  ca3-role-mix branch shipped with.
+- Motivation: post-#630 candidate telemetry still shows ~71% of losses parked (idle+protection) while assaults
+  launch at MaxIdleUnits=12 without AA/frontline cover; 12.5 explicitly prescribes the composition wait.
+- Verify: build 0 errors; audit_ai_personalities PASS; audit_fog_honesty PASS (171 sites, unchanged); boot-gate
+  PASS (menu marker, no new exceptions).
+
 # 2026-09-29 — Devin (NOVA): coordination pass + CA-3 RoleMix (role-mix production)
 
 **Fleet review.** All four overnight PRs verified against authoritative GitHub state:

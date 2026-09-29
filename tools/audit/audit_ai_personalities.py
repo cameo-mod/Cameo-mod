@@ -46,6 +46,12 @@ TUNING_FIELDS = {
     "IndirectRouteChance",
     "HighValueTargetPriority",
     "HarasserTypes",
+    # CA-3 (AI_ARCHITECTURE 12.5): the role mix IS the personality flavour -
+    # compositions differ by design, and the stage/composition gate patience
+    # scales with the personality's tempo.
+    "RoleMix",
+    "StageCompositionTicks",
+    "StageRequiredRoles",
     # Fast-squad count per personality and game time (maintainer 2026-09-28, DESIGN §19.1a):
     # guerrilla at least twice steamroller's, which spends its units on the main army.
     "MaxGuerrillaSquads",

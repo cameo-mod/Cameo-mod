@@ -3372,6 +3372,10 @@ Player:
 			anti_air: 10
 			artillery: 5
 			scout: 5
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 1500
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
@@ -3434,6 +3438,10 @@ Player:
 			anti_infantry: 5
 			skirmisher: 5
 			scout: 5
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 3000
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
@@ -3496,6 +3504,10 @@ Player:
 			gunship: 10
 			anti_infantry: 5
 			skirmisher: 5
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 2400
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
@@ -3558,6 +3570,10 @@ Player:
 			skirmisher: 10
 			anti_infantry: 10
 			scout: 5
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 2000
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
@@ -3619,6 +3635,10 @@ Player:
 			anti_air: 15
 			anti_infantry: 5
 			skirmisher: 5
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 3000
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
@@ -3679,6 +3699,10 @@ Player:
 			anti_air: 15
 			scout: 10
 			gunship: 10
+		# 12.5 stage gate: an assault waits up to StageCompositionTicks for the pool
+		# to cover the required roles instead of trickling out under-strength.
+		StageCompositionTicks: 1500
+		StageRequiredRoles: frontline, anti_air
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		DefenceReleaseQuietTicks: 250
