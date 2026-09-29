@@ -194,7 +194,10 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
+- [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
+- [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
 - [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
@@ -248,6 +251,47 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
 
 ---
+
+## ⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)
+
+**What happened.** The canonical engine pipeline (below) says: edit the `cameo-engine` branch of
+`cameo-mod/OpenRA`, push, pin. On 2026-09-29 master's pin was `042b2fa787` (the bleed/.NET 10 sync,
+#569, plus the no-audio switch), and **`origin/cameo-engine` was 103 commits behind it**, still at
+`2b3da9e54d` (2026-08-29). The pin lived only on `origin/devin/1790592696-no-audio-switch` (and
+`bleed_sync_2026_09` one commit earlier): #569's plan was for the engine owner to fast-forward
+`cameo-engine`, which had not happened. An engine change branched from `cameo-engine` and pinned would
+have **silently reverted the whole bleed sync**: .NET 10, the map-generator port, 99 upstream commits.
+Nothing would crash at once; the build would just be a different engine.
+
+**Rule.** Before any engine change:
+`git merge-base --is-ancestor <pin from mod.config> origin/cameo-engine`. If the pin is NOT on it, branch
+the change **from the pin** (`git switch -c <branch> <pin>`), push that branch and pin to it. Never
+rebase or fast-forward `cameo-engine` yourself: that is the engine owner's call. Say so in the PR.
+Measured 2026-09-29: `cameo-engine` is a strict ancestor of the pin, so it can be fast-forwarded
+cleanly. The EX-3 hook (`d5d8b2a685`) sits on branch `claude/mcv_expansion_site`, on top of the pin.
+**Resolved 2026-09-30** (maintainer: "synchronize all branches … the latest engine update"):
+`origin/cameo-engine` was fast-forwarded to `d5d8b2a685` (104 commits), which is master's pin. The rule
+stays: check before every engine change.
+
+## A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)
+
+Two commits (the DESIGN §19.2 learning ruling and AI_ARCHITECTURE §6.4) were pushed to a PR branch
+**19 minutes after that PR had been merged** into its stacked base. `git push` succeeds, GitHub shows
+nothing, and the work silently never lands. It was caught only by
+`git log <base>..<branch>` and rescued as a follow-up PR (#638 for #635).
+Rule: before pushing more commits to an open PR's branch, run
+`gh pr view <n> -R cameo-mod/Cameo-mod --json state`; a stacked PR can be merged by someone else at any
+time. After a merge, open a new PR from the same branch.
+
+## A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)
+
+.NET randomises string hashing per process, so a `HashSet<string>` (and a `FrozenSet`) enumerates
+in a **different order on every boot of identical rules**. `FieldSaver.FormatValue` prints sets in
+enumeration order, so two dumps of the same ruleset differ textually. `BotModuleFieldDump`
+(AI_ARCHITECTURE §2.9 P0) sorts sets and dictionaries itself and keeps real lists in order. It is
+proven by dumping twice (2,168 fields, identical) and by a negative control: removing `guerrilla` from
+`Apply` shows exactly the six personalities' `GuerrillaTypes` (−154 each) and nothing else.
+Any tool that compares engine-side collections needs the same sort.
 
 ## ⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)
 
@@ -1375,7 +1419,7 @@ Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
 
-1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`).
+1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`). ⛔ **First check that the pin in `mod.config` is on that branch** (`git merge-base --is-ancestor <pin> origin/cameo-engine`); if it is not, branch from the pin instead (lesson 2026-09-29, "The pinned engine commit is NOT on `cameo-engine`").
 2. **Commit and push** to `origin/cameo-engine`. Check `git status` for stray entries before committing (see the nested-clone pitfall below).
 3. **Get the full commit hash** with `git rev-parse cameo-engine` — never hand-type or truncate/pad a hash.
 4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.

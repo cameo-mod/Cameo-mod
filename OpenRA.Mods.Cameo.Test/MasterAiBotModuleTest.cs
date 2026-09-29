@@ -147,7 +147,8 @@ namespace OpenRA.Mods.Cameo.Test
 				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
 				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
-				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score"
+				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score",
+				"army_value_delta" // §12.14 PL telemetry (#658)
 			}));
 		}
 

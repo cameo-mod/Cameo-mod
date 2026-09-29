@@ -4967,11 +4967,32 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
 * **Opponent memory — one profile per enemy faction.** The bot remembers, per faction it has
   played against, what was effective (which of its own roles/unit types traded well, which
   posture won, what that faction fielded when) and counters that faction more automatically the
-  more games it has played. Two layers: the committed, offline-fitted priors file
-  (`mods/cameo/ai/learned/`, shared by every install) and a host-local profile that keeps growing
-  with the games played on that machine. Keys are factions only — **nothing about individual
-  human players is stored.** Allowed by `AI_ARCHITECTURE.md` §6.1: it steers only unsynced bot
-  reasoning on the host.
+  more games it has played. Keys are factions only — **nothing about individual human players is
+  stored.** **Frozen in release, trained on dev (maintainer 2026-09-29, replacing the host-local
+  profile):** release builds only READ the committed, offline-fitted priors file
+  (`mods/cameo/ai/learned/`), so every player meets the same bot in every copy of a version.
+  Learning WRITES only on dev builds and harness training runs; developers review the new file and
+  commit it, and it ships with the next release. (A per-machine file could not desync a game —
+  bots run only on the host, `Player.cs:223` `IsBot && Game.IsHost`, and act only through orders —
+  but it would make every player's bot drift apart.) Learned values are applied only inside the
+  host's running bot, **never written into rules at load**: rules load on every client.
+* **Every bot number is learnable (maintainer 2026-09-29).** Today's values are starting points,
+  including per-faction building timers and limits (identical templates, different play styles).
+  Each number learns through one of three routes: **measured** from the logs (unit effectiveness,
+  combat strengths, enemy habits); **tuned** by paired experiments in training (build numbers,
+  timers, thresholds, role mix); **chosen** by a bandit (personality, opening). Tuned numbers learn
+  per own faction (falling back to game family, then global); only the army mix and counters also
+  split per enemy faction. They learn as ~8 knobs per faction first and as raw numbers once the
+  evidence is strong. A training match is scored as **win plus margin**, not win/loss alone.
+  Learned values are bounded multipliers on the defaults, difficulty (§19.1) applies on top, and
+  unit stats are never learned. Every learned entry is fingerprinted with the stats it was trained
+  on and is discounted per unit when they change; serious training starts after the balance freeze
+  and repeats per release. Design: `AI_ARCHITECTURE.md` §6.4.
+* **The weights combine (maintainer 2026-09-29):** a general per-faction file that is always
+  active × a weighted geometric mean of the per-enemy-faction counters × learned per-ally synergy
+  plus in-match gap filling × the in-match trade ratio. The main (hate) target's share is at least
+  max(1/2, 2/(n+1)), and the rest is split by a learnable blend of equal and threat shares.
+  Design: `AI_ARCHITECTURE.md` §6.4a.
 * **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
   host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
   claims, human-ally beacons) — the same no-cheat rule as the Director.

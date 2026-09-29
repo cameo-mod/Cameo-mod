@@ -31,6 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Maximum scouts held at once.")]
 		public readonly int MaxScouts = 2;
 
+		[Desc("Minimum ticks between two scout production requests (AI_ARCHITECTURE §12.12). A request is built ahead of",
+			"the unit builder's queue rotation and cash check, so unrationed replacements for scouts that die or get",
+			"drafted into squads took over the vehicle factory. 0 = request on every scan, as before.")]
+		public readonly int ScoutRebuildCooldownTicks = 0;
+
 		[Desc("Ticks between claim/retarget evaluations.")]
 		public readonly int ScanInterval = 50;
 
@@ -73,6 +78,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		ResourceMapBotModule resourceMap;
 		IBotRequestUnitProduction[] unitBuilders;
+		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
 		List<UnitWposWrapper> idlePool;
 		int scanTicks;
@@ -225,14 +231,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (!claimedAny && scouts.Count < Info.MaxScouts)
-				RequestScout(bot);
+			if (!claimedAny && scouts.Count < Info.MaxScouts && MayRequest(world.WorldTick, lastScoutRequestTick, Info.ScoutRebuildCooldownTicks)
+					&& RequestScout(bot))
+				lastScoutRequestTick = world.WorldTick;
 		}
 
-		void RequestScout(IBot bot)
+		internal static bool MayRequest(int tick, int lastRequestTick, int cooldownTicks)
+		{
+			return cooldownTicks <= 0 || lastRequestTick < 0 || tick - lastRequestTick >= cooldownTicks;
+		}
+
+		bool RequestScout(IBot bot)
 		{
 			if (unitBuilders == null || unitBuilders.Length == 0)
-				return;
+				return false;
 
 			foreach (var name in Info.ScoutUnitTypes.OrderBy(n => n, StringComparer.Ordinal))
 			{
@@ -253,8 +265,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				builder.RequestUnitProduction(bot, name);
-				return;
+				return true;
 			}
+
+			return false;
 		}
 
 		int ChooseScoutTarget(RegionMemory regions, CPos from, int tick, HashSet<int> taken)

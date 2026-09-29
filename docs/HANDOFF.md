@@ -1,5 +1,78 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-30 — Claude: merge-all completed — the last PRs land on engine `d5d8b2a685`; all branches in sync
+
+`Agent: Claude-Local (Opus 5.5) · integration branch claude/integration_0930b (the #630 precedent) · maintainer: "Merge everything to master! Synchronize all branches … the latest engine update"`
+
+**How it landed.** The fleet worked the same order in parallel: #644 #646 #648 (+EMBER's gunship fix)
+#649 #650 #632 #634 #655 (engine pin) #656 #657 #659 were merged directly. This integration brings the rest:
+#633 (guerrilla role applied; contains #638 and #641), #647 (scout rationing + garrison pricing), #651–#654
+(expansion planner EX-0…EX-3) and #658 (NOVA: Steamroller/Rush lead telemetry). **The maintainer's order
+overrides the §12.10 A/B gate** for #633, #647 and #652–#654: the first A/B on this master is the new baseline.
+
+**Conflicts, resolved by origin:** `ai.yaml` `BotRoleSets` unions all ten roles, with
+`Apply: harvester, refinery, conyard, guerrilla`; artillery, firesupport and the air roles stay report-only.
+`MasterAiBotModule` keeps both #656's `WeakIncludesDefence` and #647's `GarrisonOccupantValue`. #646 had been
+**squashed** on master, so the stacked branches still carried its pre-correction text; master's corrected
+text was kept, plus each PR's own later edits. HANDOFF, LESSONS_LEARNED and TASK_INDEX were unioned; every
+addition from both sides was verified present.
+
+**Fixed while integrating (each was red on its own PR or on master):**
+- `MasterAiBotModuleTest` expects #658's new enemy key `army_value_delta`.
+- The armoured-car non-damage digests are re-pinned after a reviewed resolve diff for #650 (+124–141 derived
+  Versus rows per weapon, 0 removed or changed).
+- §10.2 / `doc_claims` module counts 53 types / 76 instances; master was already red (51/69 documented,
+  52/75 measured after #656).
+- `AI_MODULE_MAP.md` regenerated. It also records that **#656 enabled the Fransbot modules for
+  `genericbot && hardbot`**: a behaviour change for `hard`, merged without an A/B (DAWN's lane).
+
+**Engine:** master pins `d5d8b2a685` (#655 and #654 agree). `origin/cameo-engine` has been fast-forwarded to
+it (104 commits), so the canonical engine branch and the pin agree again. **Every worktree: `make.cmd all`.**
+
+**Verified on the integrated tree:** C# 338/338; 17 audits + `find_empty_warhead` 0 + module map current;
+boot gate (isolated support dir, no exception log); Python compared with master (below); live smoke match.
+
+**Not merged (NOVA's 2026-09-28 reasons still hold):** #180, #245, #85. **Open:** #634's review points (unarmed
+WC2 oil tankers can be drafted into squads; escort stacking) with NOVA; the MCV escort hook proposal
+(NOVA); the Python suite hangs at exit on master (pre-existing); ~200 Python tests already fail on master.
+
+## 2026-09-29 — Claude: what the maintainer saw in play, measured; the expansion planner EX-0…EX-3; the engine-pin trap
+
+`Agent: Claude-Local (Opus 5.5) · lane: AI, by the maintainer's "split by owner" ruling (scout/garrison + expansion planner); balance continues on #650 · branches below`
+
+**Spectator report → measured causes** (AI_ARCHITECTURE §12.11; `hard` per match): ~72 Humvees and ~5 tanks
+(scout replacements jump the vehicle queue), infantry fed into civilian garrisons (valued 0, no `Valued`),
+no artillery-first or tanks-in-front (CA-2 DAWN, CA-4 NOVA, unbuilt), a timid base (random/omniscient
+`BaseCrawl`). **Rulings** in DESIGN §19.1b (expansion, garrisons, scouts; map-start resources are public)
+and §19.1c (each personality chases one lead over the enemy). `tools/ai/army_mix_report.py` flags spam
+from any batch.
+
+**Landed as PRs (stacked, each boot-gated in an isolated support dir):**
+
+| PR | what | state |
+|---|---|---|
+| #646 | design §12.11–§12.14 + army-mix report | ready |
+| #647 | SG: scout rebuild cooldown; garrisons priced by capacity × 250 | draft, A/B running (`sg_branch`/`sg_master`) |
+| #651 | EX-0: field score `V × S / (T + τ)`, telemetry | ready |
+| #652 | EX-1: `BaseCrawl` walks toward the target field (CA hook `IBotExpansionTargetProvider`) | draft, A/B pending |
+| #653 | EX-2: a refinery on every field in reach; missed claims park the field | draft, A/B pending |
+| (this) | EX-3: the MCV founds its base at the best far field (engine hook) | draft, A/B pending |
+
+Live, `hard` on A Nuclear Winter: target field 16,36 → refinery at 10,35 claims it (tick 1,380) →
+target 45,32 → a line of power plants toward it (17,44 → 19,45 → 23,40).
+
+**⛔ Engine pin trap (LESSONS_LEARNED 2026-09-29):** master's pin `042b2fa787` is **not on
+`origin/cameo-engine`** (103 commits ahead; only on `devin/1790592696-no-audio-switch`). The EX-3 hook
+`d5d8b2a685` is on `claude/mcv_expansion_site`, on top of the pin. **Done 2026-09-30:**
+`origin/cameo-engine` fast-forwarded to `d5d8b2a685` (maintainer order), which is master's pin. Every
+worktree needs `make.cmd all` after the integration merge.
+
+**Reviews today:** #644 (NOVA) approve, after my `norecord` point landed; #648 (EMBER) changes requested:
+75 dual-weapon helicopters (Orca, Apache, Hind…) are classed `fighter`; §12.4 makes them gunships.
+**Open for NOVA:** the escort hook (fleet `PROPOSAL_2026-09-29_claude_to_nova_escort_hook.md`).
+**Next (Claude):** A/B results for SG / EX-1..3; EX-4 (enemy creep × difficulty × aggression); towers per
+field; personality leads telemetry (§12.14: Expansion, Turtle, Tech).
+
 ## 2026-09-29 — Claude: §12.0l step 1 done (derived rows in every table) + the submarine types
 
 `Agent: Claude-Local (Opus 5.5) · lane: balance pipeline (maintainer 2026-09-29: "you continue with the balance pipeline while the other agents focus on the AI") · branch claude/submarine_armor_types`
@@ -21,6 +94,21 @@ subset this branch touches (13 files) has **56 failures already on master** (for
 `test_aa_weapon_routing`, which expects `*_FlatCompatibility` warhead keys); this branch adds none
 after regenerating the CannonAP fixture. `verify_generator_sync` reports 41 hand-made `^Warhead_*_Flat` /
 `_WallExcluded` / … templates the generator does not emit. It's not a value drift, but it is the A5 backlog.
+
+## 2026-09-29 — Claude: guerrilla role applied (A/B pending); ai.yaml generalisation ruled; lane handover
+
+`Agent: Claude-Local (Opus 5.5) · lanes: AI list rollout + the DF code review (took over from the ended session) · branch claude/role_guerrilla_apply`
+
+* **Guerrilla applied** to the six personalities through `Targets` of the new `TraitType@instance.Field`
+  form; `@classic` (A/B reference) keeps its list. Central ids **5,825 → 4,289**, now guarded by
+  `audit_central_ids.py` (lower-only `CEILING`). Draft PR: lands only after its Nuclear Winter A/B.
+* **Ruled (AI_ARCHITECTURE §2.8b):** per-building numbers become defaults per building type, with the
+  differing pack rows kept as overrides; `UnitsToBuild` weights derive from stats after CA-3. Measured:
+  intervals 100 % uniform for factory/refinery/barracks, limits 100 % for refinery/radar/repair.
+* **Bug found:** `@guerrilla` has no `AirSquadTargetTypes` rows (packs write 5 identical copies);
+  deriving it from the aircraft's weapons fixes it — queued.
+* **Reviewed #632 (NOVA):** changes requested — `DESIGN.md` §19.1a still names the deleted
+  `DefenceReleaseQuietTicks`, and the fogged-target quiet rule needs its A/B numbers.
 
 ## 2026-09-29 — Claude: guerrilla band on the actors; squad rulings for artillery, fire support and ships
 

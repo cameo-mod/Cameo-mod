@@ -23,11 +23,14 @@ WEAPONS = (
 # Every resolved runtime field except Damage and PercentageDenominator: targeting, cadence, projectile,
 # versus tables, effects. Re-pinned 2026-09-28 on the post-W24 layout (the pre-bake pins went stale when
 # the bullet and railgun warheads folded into one main); change them only with a reviewed resolve diff.
+# Re-pinned 2026-09-30 for #650 (DESIGN §12.0l step 1 + the submarine columns): the reviewed resolve diff
+# (master 1adffd61d vs the integration) ADDS 124-141 derived-armour Versus rows per weapon and removes or
+# changes nothing.
 NON_DAMAGE_HASHES = {
-    "ArmoredCarMG": "70574046aff059fd72ae33e11abb592123c502bedde15dea0c819b92e68625f5",
-    "ArmoredCarMG_AA": "97401fc1df7de321de40f3155ed61bba866dd229aa2d425eb43297923fdc3522",
-    "ArmoredCarMGWaveforce": "b005aa259a98a9da26c89676ed24ba09d88c88d99959b7fd38f315665a20d1cc",
-    "ArmoredCarMGAAWaveforce": "5d7c0501be6ce9e808d1114f26939742fc880dc4f5d1406faab711374274c389",
+    "ArmoredCarMG": "b88693f3f7a6e77e5bde4536d075f242254af9ee1fba345b21ed5aa0336abf79",
+    "ArmoredCarMG_AA": "b9ded8122b2fb602531b51d9421b7e5c6dce40e17644d1c5ee9f8f136b1aabab",
+    "ArmoredCarMGWaveforce": "0b39132b35bc50d9cba7190fbf688f213c60204dc47511ed7b7e51cc721752ef",
+    "ArmoredCarMGAAWaveforce": "cf7b95423fcfcd5346b57eca9217175dca151f1d072cafe85ae278e51b1f3362",
 }
 
 

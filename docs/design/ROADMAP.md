@@ -116,8 +116,20 @@ the fog sequencing.
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
   - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
     `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
-  - [ ] **S** Apply `guerrilla` (empties 7 × `GuerrillaTypes`, −1,776 central ids) after a Nuclear
-    Winter A/B; then the `count_central_ids.py --max` ratchet in `run_all.sh`. **Claude.**
+  - [~] **S** Apply `guerrilla` to the six personalities (`@classic` keeps its list), 5,825 → 4,289
+    central ids, `audit_central_ids.py` ratchet: branch `claude/role_guerrilla_apply`, lands after
+    its Nuclear Winter A/B. **Claude.**
+  - [ ] **L** §2.9 the empty `ai.yaml` (maintainer goal 2026-09-29), phases P0–P7: P0 engine dump +
+    diff gate, P1 count-tool case fix + dead ids, P2 type/family tags on templates, P3 type × family
+    building defaults (Outpost 2 + Scrin wired; A/B), P4 remaining lists → roles, P5 per-unit settings
+    from weapons, P6 learned unit weights (after CA-3), P7 packs hold only exceptions. **Claude.**
+  - [x] **S** §2.9 P0 the equivalence gate: `BotModuleFieldDump` + `dump_bot_modules.py` /
+    `diff_bot_modules.py` (2,168 fields; negative control caught the 7 changed fields). **Claude.**
+  - [ ] **S** §2.8b derive `AirSquadTargetTypes` from weapons (fixes `@guerrilla`'s missing rows). **Claude.**
+  - [ ] **M** §2.8b `UnitsToBuild` weights from stats + role mix, after CA-3 (ruled). **NOVA** + Claude.
+  - [ ] **L** §6.4 learn every number between matches (ruled 2026-09-29): L0 per-bot `Info` copy +
+    learned-file reader (desync test), L1 measured priors, L2 score + knobs, L3 knob training,
+    L4 personality/opening bandit, L5 raw numbers. Dev builds train, release reads. **Claude.**
   - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
     (§12.4a rule 3). **Claude.**
   - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
