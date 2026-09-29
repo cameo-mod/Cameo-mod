@@ -261,8 +261,12 @@ starting units, and is invisible to the records.
 Operational semantics measured live (2026-09-28; speed raised 2026-09-29): the fixture locks
 `gamespeed: maximum` via `MapOptions` — the maintainer's convention for bot
 matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
-by `ticksPerSecond`, so maximum raises the tick cap 40x over default while
-achieved speed stays whatever the box sustains; timeouts are therefore bounded
+by `ticksPerSecond` (60,000 ticks per minute at maximum), so the duel fixtures offer
+`TimeLimitOptions` 0/1/2/3/4/6/9, tick for tick the insane-era 0/10/20/30/40/60/90, and default to 3
+(180,000 ticks): the **engine** ends a stalemate at that depth and records it (both sides `lost`: a timed-out stalemate has no
+winner; proven live 2026-09-29, two `veryeasy` mirrors ended at 60,001 ticks under `--time-limit 1`), where a
+30-minute cap (1.8M ticks) left the harness to kill it with no record. Achieved speed stays whatever
+the box sustains; timeouts are therefore bounded
 by a `debug.log` stall detector (a live match writes every few seconds) plus a
 speed-aware wall backstop, never a tight fixed timeout. Game speed shortens
 elimination matches only — drop `timelimit` when a quick pipeline check needs

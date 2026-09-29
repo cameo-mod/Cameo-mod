@@ -4,8 +4,11 @@ World:
 	-CrateSpawner:
 	-SpawnStartingUnits:
 	-MapStartingLocations:
+	# Maximum (maintainer 2026-09-29, was insane); without -AdaptiveGameSpeed the pacing falls
+	# back toward Normal under load, so the speed alone gains nothing.
+	-AdaptiveGameSpeed:
 	MapOptions:
-		GameSpeed: insane
+		GameSpeed: maximum
 		GameSpeedDropdownLocked: True
 		ShortGameCheckboxEnabled: False
 Player:
