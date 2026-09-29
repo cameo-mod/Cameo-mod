@@ -1,3 +1,17 @@
+# 2026-09-30 - Devin (EMBER): fixture speed raised insane -> maximum (maintainer order)
+
+The duel-gate fixtures and harness docs now lock `MapOptions.GameSpeed:
+maximum` (1 ms timestep, CPU-bound) instead of `insane` (10 ms). Both
+`ai_duel_gate_20260928` and `ai_duel_nuclear_winter` rules carry the lock;
+the harness's stalemate bound rescales to `time_limit*60000` ticks (the
+1000 tps nominal ceiling) keeping the same pessimistic-20tps wall bound +
+debug.log stall detector. Normative docs (AI_ARCHITECTURE §12.10,
+AI_MATCH_LOG, LESSONS_LEARNED, HANDOFF) now state `maximum`; historical
+series entries stay `insane` since those runs genuinely were. Records are
+only comparable within one speed: the pooled 7-6 hard-vs-classic baseline
+is an insane-era number and a fresh post-integration league at maximum
+becomes the new baseline.
+
 # 2026-09-28 - Devin (EMBER): CA-5 air-threat routing (first slice)
 
 CA-5 air doctrine (AI_ARCHITECTURE §12.8), the slice that needs no

@@ -31,13 +31,14 @@ ConquestVictoryConditions decides on elimination and the map's locked
 TimeLimitManager is the stalemate failsafe (a timed-out duel records both
 bots "lost" — an honest draw, not an engine-invented winner).
 
-The fixture locks `gamespeed` to `insane` (10 ms timestep): bot tests run at
-4x target rate so matches can be iterated in quick succession — a decisive
-match resolves ~4x sooner in wall time. The minute-based cap scales to
-time_limit*6000 ticks at that speed, so under CPU contention a timeout match
-can legitimately run long; the stall detector (debug.log goes quiet after
-its first write this run — arming skips the load phase) kills hung matches
-in ~2 minutes while a generous wall bound protects slow-but-live ones. Run
+The fixture locks `gamespeed` to `maximum` (1 ms timestep): bot tests run
+uncapped at whatever tick rate the CPU sustains, so decisive matches resolve
+many times sooner in wall time. The minute-based cap scales to
+time_limit*60000 ticks at that speed, so a timeout match simulates far more
+gameplay than at slower speeds; the stall detector (debug.log goes quiet
+after its first write this run — arming skips the load phase) kills hung
+matches in ~2 minutes while a generous wall bound protects slow-but-live
+ones. Run
 bot batches serially and prefer an idle machine for consistent timings.
 
 On a shared box a bigger hazard is external kills: another agent's
@@ -374,7 +375,7 @@ def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int,
 def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     """Extract a shipped .oramap into a variant dir and convert its Multi slots
     into map-side bot duelists. The referee seat is added for the local client;
-    the duel gate's rules.yaml supplies the locked insane speed, time cap and
+    the duel gate's rules.yaml supplies the locked maximum speed, time cap and
     restored MustBeDestroyed bases that real elimination needs."""
     if dest.exists():
         shutil.rmtree(dest)
@@ -676,12 +677,13 @@ def main() -> int:
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 
-    # The fixture locks gamespeed to insane (10 ms timestep), so the minute
-    # cap is time_limit*6000 ticks — a CPU-contended box ticks well below the
-    # 100 tps target. Bound wall time at a pessimistic sustained 20 tps; the
-    # stall detector in run_match ends genuinely hung matches in ~2 minutes,
-    # so a generous bound here only ever waits on a match still progressing.
-    cap_ticks = args.time_limit * 6000
+    # The fixture locks gamespeed to maximum (1 ms timestep), so the minute
+    # cap is time_limit*60000 ticks — the 1000 tps target is pure ceiling;
+    # real throughput is whatever the CPU sustains. Bound wall time at a
+    # pessimistic sustained 20 tps; the stall detector in run_match ends
+    # genuinely hung matches in ~2 minutes, so a generous bound here only
+    # ever waits on a match still progressing.
+    cap_ticks = args.time_limit * 60000
     timeout = cap_ticks // 20 + 300
 
     results = []

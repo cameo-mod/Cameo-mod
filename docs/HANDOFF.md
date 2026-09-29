@@ -4792,7 +4792,8 @@ steal `BFRT` rows from the real Battle Fortress.
 
 Maintainer ruling: every bot-vs-bot test runs on the real tournament duel map
 **A Nuclear Winter** (extracted at runtime from the shipped
-`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: insane`.
+`mods/cameo/maps/_ra_a-nuclear-winter.oramap`), both real spawns, locked `gamespeed: maximum`
+(speed raised from `insane` per maintainer order 2026-09-30).
 `tools/ai/run_ai_match_batch.py` defaults its template there (old synthetic
 gate fixture remains via `--template` for debugging only).
 
