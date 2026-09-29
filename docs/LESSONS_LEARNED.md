@@ -3083,3 +3083,27 @@ first and sees `false` for every conditional trait. The first boot of the `Weapo
 crashed on exactly this ("no actor has a `Weapons` trait"). Evaluate `RequiresCondition == null ||
 RequiresCondition.Evaluate(VariableExpression.NoVariables)` yourself in load-time code; `EnabledByDefault` is
 safe only at runtime (after every ruleset step, as `BotUnitProfiles` and `AdaptiveCounterProduction` use it).
+
+## Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)
+
+A `run_ai_match_batch.py` run launches a fresh OpenRA process per match, and each launch parses
+`mods/` **from the worktree at that moment** — only the ruleset of the FIRST match is guaranteed to
+match the DLL that was built. Switching the worktree to a newer base mid-batch left `ai.yaml` /
+`player.yaml` carrying traits and derive predicates the running DLL did not contain:
+`BotRoleSets on player: no actor has a Weapons trait with a public field ValidTargets` — three
+matches died at ~40 s each while match 1 (already loaded) played to a clean finish.
+
+Two traps inside that one:
+
+- **The silent-drop rule (8b) does NOT cover derive vocabularies.** `DeriveHasField` was a *known*
+  field on the old `BotRoleSetsInfo` — parsed fine, then evaluated and crashed on the predicate
+  `Weapons.ValidTargets`, which only exists in the newer DLL. A field name surviving is not the
+  predicate surviving; gate new predicates on the binary that will read them.
+- The same skew would have hit `BotArsenalLedger:` in `player.yaml` (`Cannot locate type` class)
+  one hunk later — reverting one file is not enough; the whole `mods/` tree must match the DLL.
+
+Rule: **do not change branches, pull, or merge in a worktree while its batch is live.** Do branch
+work in a scratch worktree (`git worktree add`), and only rebuild `engine/bin` when no OpenRA
+process from that worktree is running — a loaded DLL is file-locked on Windows, and a half-written
+binary corrupts the next launch. If a mid-batch skew already happened, the record is still valid for
+the match that loaded before the switch; rerun only the crashed cells.
