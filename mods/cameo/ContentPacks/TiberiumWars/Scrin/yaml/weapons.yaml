@@ -26,6 +26,12 @@
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 92
+			AntiAirVehicle: 74
+			ShipLight: 82
+			ShipMedium: 48
+			AntiAirShip: 63
+			SubmarineLight: 46
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 
@@ -74,6 +80,12 @@ ScrinShardBeam:
 			Medium: 55
 			Heavy: 35
 			Concrete: 25
+			CyborgLight: 106
+			AntiAirVehicle: 70
+			ShipLight: 95
+			ShipMedium: 37
+			AntiAirShip: 59
+			SubmarineLight: 36
 
 ScrinShardWalkerStreak:
 	Inherits: ScrinShardBeam
@@ -108,6 +120,12 @@ ScrinHeavyBeam:
 			Medium: 115
 			Heavy: 135
 			Concrete: 110
+			CyborgLight: 64
+			AntiAirVehicle: 102
+			ShipLight: 79
+			ShipMedium: 112
+			AntiAirShip: 94
+			SubmarineLight: 123
 
 ScrinAcidBeam:
 	Inherits: ^ScrinBeamBase
@@ -128,6 +146,12 @@ ScrinAcidBeam:
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 109
+			AntiAirVehicle: 79
+			ShipLight: 105
+			ShipMedium: 48
+			AntiAirShip: 71
+			SubmarineLight: 46
 
 ScrinAirZap:
 	Inherits: ^ScrinBeamBase
@@ -162,6 +186,12 @@ ScrinCapitalBeam:
 			Medium: 120
 			Heavy: 130
 			Concrete: 100
+			CyborgLight: 88
+			AntiAirVehicle: 115
+			ShipLight: 105
+			ShipMedium: 110
+			AntiAirShip: 107
+			SubmarineLight: 120
 		ValidTargets: Ground, Water, Air
 
 # Combined Arms-derived projectile delivery and effect treatment. Damage,
@@ -275,6 +305,12 @@ ScrinCorrupterSpew:
 			Medium: 65
 			Heavy: 45
 			Concrete: 35
+			CyborgLight: 109
+			AntiAirVehicle: 79
+			ShipLight: 105
+			ShipMedium: 48
+			AntiAirShip: 71
+			SubmarineLight: 46
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
@@ -368,6 +404,12 @@ ScrinTripodLaser:
 			Medium: 115
 			Heavy: 135
 			Concrete: 110
+			CyborgLight: 64
+			AntiAirVehicle: 102
+			ShipLight: 79
+			ShipMedium: 112
+			AntiAirShip: 94
+			SubmarineLight: 123
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Ground, Water
 	Warhead@2Eff: CreateEffect
@@ -395,6 +437,12 @@ ScrinReaperTripodLaser:
 			Medium: 120
 			Heavy: 130
 			Concrete: 100
+			CyborgLight: 88
+			AntiAirVehicle: 115
+			ShipLight: 105
+			ShipMedium: 110
+			AntiAirShip: 107
+			SubmarineLight: 120
 		ValidTargets: Ground, Water, Air
 
 ScrinMothershipBeam:

@@ -48,6 +48,21 @@ CHGuardRifle:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
+			SubmarineLight: 69
+			SubmarineHeavy: 64
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -68,6 +83,21 @@ CHGuardRifle:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 japan_imperialscoutsman_rifle:
 	# Special-Forces baseline weapon (maintainer 2026-07-20): SmallArms +
 	# Chaingun + railgun-AP = 6000 dmg, precise (bullet projectile, no beam
@@ -128,6 +158,21 @@ japan_imperialscoutsman_rifle:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -165,6 +210,21 @@ japan_imperialscoutsman_rifle:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 japan_imperialscoutsman_rifle_waveforce:
@@ -213,6 +273,21 @@ japan_imperialscoutsman_rifle_waveforce:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -258,6 +333,21 @@ japan_imperialscoutsman_rifle_waveforce:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Glow:
@@ -318,6 +408,21 @@ TankBusterBeamCannon:
 			HAZMAT: 96
 			REFLECTOR: 64
 			Shield: 305
+			FlyingInfantry: 85
+			CyborgLight: 94
+			CyborgMedium: 114
+			CyborgHeavy: 133
+			CyborgHeroic: 96
+			AntiAirInfantry: 77
+			AntiAirVehicle: 139
+			AntiAirBuilding: 86
+			ShipLight: 93
+			ShipMedium: 120
+			ShipHeavy: 120
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		PercentageVersus:
 			None: 17
 			Light: 22
@@ -336,6 +441,21 @@ TankBusterBeamCannon:
 			Helicopter: 12
 			Spaceship: 13
 			Shield: 35
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 23000
@@ -366,6 +486,21 @@ TankBusterBeamCannon:
 			HAZMAT: 96
 			REFLECTOR: 64
 			Shield: 10
+			FlyingInfantry: 14
+			CyborgLight: 22
+			CyborgMedium: 27
+			CyborgHeavy: 32
+			CyborgHeroic: 35
+			AntiAirInfantry: 10
+			AntiAirVehicle: 61
+			AntiAirBuilding: 187
+			ShipLight: 87
+			ShipMedium: 122
+			ShipHeavy: 132
+			ShipSuperheavy: 148
+			AntiAirShip: 103
+			SubmarineLight: 110
+			SubmarineHeavy: 128
 		InvalidTargets: Air
 	Warhead@RailgunExtraDamage_Auxiliary:
 		InvalidTargets: Air
@@ -426,6 +561,21 @@ TankBusterBeamCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -457,6 +607,21 @@ TankBusterBeamCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -494,6 +659,21 @@ TankBusterBeamCannon:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+			FlyingInfantry: 1
+			CyborgLight: 1
+			CyborgMedium: 1
+			CyborgHeavy: 1
+			CyborgHeroic: 1
+			AntiAirInfantry: 1
+			AntiAirVehicle: 1
+			AntiAirBuilding: 1
+			ShipLight: 1
+			ShipMedium: 1
+			ShipHeavy: 1
+			ShipSuperheavy: 1
+			AntiAirShip: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Railgun_Heavy:
@@ -597,6 +777,21 @@ PlasmaFlamer:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -624,6 +819,21 @@ PlasmaFlamer:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -712,6 +922,21 @@ HeavyPlasmaFlamer:
 			HAZMAT: 39
 			REFLECTOR: 99
 			Shield: 239
+			FlyingInfantry: 86
+			CyborgLight: 120
+			CyborgMedium: 104
+			CyborgHeavy: 103
+			CyborgHeroic: 64
+			AntiAirInfantry: 176
+			AntiAirVehicle: 71
+			AntiAirBuilding: 139
+			ShipLight: 118
+			ShipMedium: 90
+			ShipHeavy: 102
+			ShipSuperheavy: 100
+			AntiAirShip: 103
+			SubmarineLight: 77
+			SubmarineHeavy: 80
 		PercentageVersus:
 			None: 25
 			Light: 17
@@ -730,6 +955,21 @@ HeavyPlasmaFlamer:
 			Helicopter: 11
 			Spaceship: 10
 			Shield: 35
+			FlyingInfantry: 17
+			CyborgLight: 21
+			CyborgMedium: 19
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 24
+			AntiAirVehicle: 16
+			AntiAirBuilding: 21
+			ShipLight: 20
+			ShipMedium: 18
+			ShipHeavy: 18
+			ShipSuperheavy: 18
+			AntiAirShip: 19
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -794,6 +1034,21 @@ SamuraiBladeCharged:
 			Bomber: 35
 			Helicopter: 30
 			Spaceship: 25
+			FlyingInfantry: 61
+			CyborgLight: 87
+			CyborgMedium: 82
+			CyborgHeavy: 76
+			CyborgHeroic: 71
+			AntiAirInfantry: 97
+			AntiAirVehicle: 72
+			AntiAirBuilding: 52
+			ShipLight: 58
+			ShipMedium: 59
+			ShipHeavy: 60
+			ShipSuperheavy: 57
+			AntiAirShip: 58
+			SubmarineLight: 62
+			SubmarineHeavy: 60
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
@@ -821,6 +1076,21 @@ SamuraiBladeCharged:
 			Helicopter: 10
 			Bomber: 10
 			Fighter: 10
+			FlyingInfantry: 25
+			CyborgLight: 56
+			CyborgMedium: 87
+			CyborgHeavy: 115
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			AntiAirVehicle: 35
+			AntiAirBuilding: 10
+			ShipLight: 16
+			ShipMedium: 22
+			ShipHeavy: 27
+			ShipSuperheavy: 32
+			AntiAirShip: 19
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
 		InvalidTargets: Air
@@ -846,6 +1116,21 @@ SamuraiBladeCharged:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 67
+			CyborgLight: 80
+			CyborgMedium: 84
+			CyborgHeavy: 88
+			CyborgHeroic: 92
+			AntiAirInfantry: 90
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 	Warhead@EMPUnit:
@@ -885,6 +1170,21 @@ SamuraiBladeCharged:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 17
+			CyborgMedium: 16
+			CyborgHeavy: 15
+			CyborgHeroic: 14
+			AntiAirInfantry: 19
+			AntiAirVehicle: 14
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 12
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -1060,6 +1360,21 @@ JapanMaidenBowEnergized:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -1087,6 +1402,21 @@ JapanMaidenBowEnergized:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -1113,6 +1443,21 @@ JapanMaidenBowEnergized:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -1144,6 +1489,21 @@ JapanMaidenBowEnergized:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@Smudge:
@@ -1372,6 +1732,21 @@ BallistaMultiShot:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -1417,6 +1792,21 @@ BallistaMultiShot:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -1449,6 +1839,21 @@ BallistaMultiShot:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -1477,6 +1882,21 @@ BallistaMultiShot:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 10
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 10
+			ShipLight: 10
+			ShipMedium: 9
+			ShipHeavy: 8
+			ShipSuperheavy: 7
+			AntiAirShip: 9
+			SubmarineLight: 7
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -1584,6 +2004,21 @@ BallistaMultiShotEnergized:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -1627,6 +2062,21 @@ BallistaMultiShotEnergized:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -1655,6 +2105,21 @@ BallistaMultiShotEnergized:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -1785,6 +2250,21 @@ RocketAngelRockets:
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
+			FlyingInfantry: 89
+			CyborgLight: 71
+			CyborgMedium: 82
+			CyborgHeavy: 88
+			CyborgHeroic: 78
+			AntiAirInfantry: 39
+			AntiAirVehicle: 148
+			AntiAirBuilding: 65
+			ShipLight: 92
+			ShipMedium: 104
+			ShipHeavy: 101
+			ShipSuperheavy: 102
+			AntiAirShip: 98
+			SubmarineLight: 133
+			SubmarineHeavy: 132
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -1803,6 +2283,21 @@ RocketAngelRockets:
 			Helicopter: 10
 			Spaceship: 11
 			Shield: 17
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 5
+			CyborgHeavy: 7
+			CyborgHeroic: 8
+			AntiAirInfantry: 1
+			AntiAirVehicle: 13
+			AntiAirBuilding: 6
+			ShipLight: 8
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 10
+			AntiAirShip: 9
+			SubmarineLight: 12
+			SubmarineHeavy: 12
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1858,6 +2353,21 @@ RocketAngelRockets:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -1903,6 +2413,21 @@ RocketAngelRockets:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@GroundFire:
@@ -1933,6 +2458,21 @@ RocketAngelRockets:
 			Flak: 12
 			None: 11
 			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@MediumChemicalWeaponPercentage:
@@ -1958,6 +2498,21 @@ RocketAngelRockets:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -1985,6 +2540,21 @@ RocketAngelRockets:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -2390,6 +2960,21 @@ NambuMGWaveforce:
 			HAZMAT: 60
 			REFLECTOR: 74
 			Shield: 282
+			FlyingInfantry: 85
+			CyborgLight: 95
+			CyborgMedium: 116
+			CyborgHeavy: 144
+			CyborgHeroic: 107
+			AntiAirInfantry: 102
+			AntiAirVehicle: 108
+			AntiAirBuilding: 116
+			ShipLight: 86
+			ShipMedium: 125
+			ShipHeavy: 120
+			ShipSuperheavy: 130
+			AntiAirShip: 104
+			SubmarineLight: 132
+			SubmarineHeavy: 140
 		PercentageVersus:
 			None: 18
 			Light: 18
@@ -2408,6 +2993,21 @@ NambuMGWaveforce:
 			Helicopter: 13
 			Spaceship: 14
 			Shield: 35
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 19
+			CyborgHeavy: 20
+			CyborgHeroic: 22
+			AntiAirInfantry: 18
+			AntiAirVehicle: 18
+			AntiAirBuilding: 17
+			ShipLight: 17
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 20
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -2526,6 +3126,21 @@ ZeroFighterArrows:
 			Superheavy: 69
 			Concrete: 66
 			Heroic: 64
+			FlyingInfantry: 110
+			CyborgLight: 132
+			CyborgMedium: 117
+			CyborgHeavy: 101
+			CyborgHeroic: 66
+			AntiAirInfantry: 184
+			AntiAirVehicle: 84
+			AntiAirBuilding: 71
+			ShipLight: 86
+			ShipMedium: 73
+			ShipHeavy: 75
+			ShipSuperheavy: 72
+			AntiAirShip: 79
+			SubmarineLight: 73
+			SubmarineHeavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2546,6 +3161,21 @@ ZeroFighterArrows:
 			Wood: 3
 			Steel: 2
 			Concrete: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 1
+			ShipLight: 5
+			ShipMedium: 2
+			ShipHeavy: 3
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 	# W7MAT inline of SkyHawkArrows
 	Range: 6615
 	MinRange: 1325
@@ -2605,6 +3235,8 @@ ZeroFighterArrows:
 			ShipHeavy: 75
 			ShipSuperheavy: 72
 			AntiAirShip: 79
+			SubmarineLight: 73
+			SubmarineHeavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2638,6 +3270,8 @@ ZeroFighterArrows:
 			ShipHeavy: 3
 			ShipSuperheavy: 3
 			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 ZeroFighterArrowsEnergized:
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
@@ -2807,6 +3441,21 @@ SkyHawkPlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 368
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		PercentageVersus:
 			None: 18
 			Light: 19
@@ -2825,6 +3474,21 @@ SkyHawkPlasmaCannon:
 			Helicopter: 12
 			Spaceship: 13
 			Shield: 35
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2852,6 +3516,21 @@ SkyHawkPlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 300
+			FlyingInfantry: 25
+			CyborgLight: 56
+			CyborgMedium: 87
+			CyborgHeavy: 115
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			AntiAirVehicle: 35
+			AntiAirBuilding: 10
+			ShipLight: 16
+			ShipMedium: 22
+			ShipHeavy: 27
+			ShipSuperheavy: 32
+			AntiAirShip: 19
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2947,6 +3626,21 @@ SkyHawkArrows:
 			Superheavy: 69
 			Concrete: 66
 			Heroic: 64
+			FlyingInfantry: 110
+			CyborgLight: 132
+			CyborgMedium: 117
+			CyborgHeavy: 101
+			CyborgHeroic: 66
+			AntiAirInfantry: 184
+			AntiAirVehicle: 84
+			AntiAirBuilding: 71
+			ShipLight: 86
+			ShipMedium: 73
+			ShipHeavy: 75
+			ShipSuperheavy: 72
+			AntiAirShip: 79
+			SubmarineLight: 73
+			SubmarineHeavy: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2967,6 +3661,21 @@ SkyHawkArrows:
 			Wood: 3
 			Steel: 2
 			Concrete: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 1
+			ShipLight: 5
+			ShipMedium: 2
+			ShipHeavy: 3
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
 
 SkyHawkArrowsEnergized:
 	Inherits@roleflat: ^Warhead_Arrow_Medium
@@ -3139,6 +3848,21 @@ SkyHawkArrowsEnergized:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -3236,6 +3960,21 @@ SkyHawkArrowsEnergized:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@HeavyCannonPercentage:
@@ -3259,6 +3998,21 @@ SkyHawkArrowsEnergized:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -3295,6 +4049,21 @@ SkyHawkArrowsEnergized:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge:
@@ -3369,6 +4138,21 @@ HovercraftCannon:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -3420,6 +4204,21 @@ HovercraftCannon:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@MediumCannonPercentage:
@@ -3444,6 +4243,21 @@ HovercraftCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -3480,6 +4294,21 @@ HovercraftCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@SmallArmsPercentage:
@@ -3504,6 +4333,21 @@ HovercraftCannon:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge:
@@ -3531,6 +4375,21 @@ HovercraftCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 
@@ -3670,6 +4529,21 @@ HovercraftPlasmaCannon:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
@@ -3718,6 +4592,21 @@ HovercraftPlasmaCannon:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		UpdatesUnitStatistics: false
 	Warhead@HeavyBombPercentage:
 		ValidTargets: Ground, Water, Air
@@ -3742,6 +4631,21 @@ HovercraftPlasmaCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@HeavyCannonPercentage:
@@ -3765,6 +4669,21 @@ HovercraftPlasmaCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@MediumCannonPercentage:
@@ -3789,6 +4708,21 @@ HovercraftPlasmaCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -3817,6 +4751,21 @@ HovercraftPlasmaCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		UpdatesUnitStatistics: false
 	Warhead@SmallArmsPercentage:
 		ValidTargets: Ground, Water, Air
@@ -3840,6 +4789,21 @@ HovercraftPlasmaCannon:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Smudge:
@@ -3880,6 +4844,21 @@ HovercraftPlasmaCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 
@@ -3933,6 +4912,21 @@ JapaneseHovercraftFlak:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -3953,6 +4947,21 @@ JapaneseHovercraftFlak:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 JapaneseHovercraftFlakAA:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -4003,6 +5012,21 @@ JapaneseHovercraftFlakAA:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -4023,6 +5047,21 @@ JapaneseHovercraftFlakAA:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	# W7MAT inline of JapaneseHovercraftFlak
 	Range: 7314
 	ValidTargets: Air
@@ -4079,6 +5118,8 @@ JapaneseHovercraftFlakAA:
 			ShipHeavy: 44
 			ShipSuperheavy: 39
 			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -4112,6 +5153,8 @@ JapaneseHovercraftFlakAA:
 			ShipHeavy: 7
 			ShipSuperheavy: 7
 			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 JapaneseHovercraftFlakWaveforce:
 	Inherits@xJapaneseHovercraftFlakWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakWaveforce1: ^Projectile_Railgun_Heavy
@@ -4296,6 +5339,21 @@ Type89PlasmaCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -4327,6 +5385,21 @@ Type89PlasmaCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -4383,6 +5456,21 @@ Type97PlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 368
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		PercentageVersus:
 			None: 18
 			Light: 19
@@ -4401,6 +5489,21 @@ Type97PlasmaCannon:
 			Helicopter: 12
 			Spaceship: 13
 			Shield: 35
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -4427,6 +5530,21 @@ Type97PlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 300
+			FlyingInfantry: 25
+			CyborgLight: 56
+			CyborgMedium: 87
+			CyborgHeavy: 115
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			AntiAirVehicle: 35
+			AntiAirBuilding: 10
+			ShipLight: 16
+			ShipMedium: 22
+			ShipHeavy: 27
+			ShipSuperheavy: 32
+			AntiAirShip: 19
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy:
@@ -4465,6 +5583,21 @@ Type97PlasmaCannon:
 			HAZMAT: 96
 			REFLECTOR: 64
 			Shield: 10
+			FlyingInfantry: 14
+			CyborgLight: 22
+			CyborgMedium: 27
+			CyborgHeavy: 32
+			CyborgHeroic: 35
+			AntiAirInfantry: 10
+			AntiAirVehicle: 61
+			AntiAirBuilding: 187
+			ShipLight: 87
+			ShipMedium: 122
+			ShipHeavy: 132
+			ShipSuperheavy: 148
+			AntiAirShip: 103
+			SubmarineLight: 110
+			SubmarineHeavy: 128
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -4570,6 +5703,21 @@ WaveforceCannon:
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 169
+			FlyingInfantry: 94
+			CyborgLight: 100
+			CyborgMedium: 94
+			CyborgHeavy: 85
+			CyborgHeroic: 84
+			AntiAirInfantry: 77
+			AntiAirVehicle: 122
+			AntiAirBuilding: 115
+			ShipLight: 127
+			ShipMedium: 116
+			ShipHeavy: 115
+			ShipSuperheavy: 114
+			AntiAirShip: 121
+			SubmarineLight: 115
+			SubmarineHeavy: 114
 		PercentageVersus:
 			None: 13
 			Light: 23
@@ -4588,6 +5736,21 @@ WaveforceCannon:
 			Helicopter: 15
 			Spaceship: 14
 			Shield: 35
+			FlyingInfantry: 17
+			CyborgLight: 17
+			CyborgMedium: 16
+			CyborgHeavy: 14
+			CyborgHeroic: 13
+			AntiAirInfantry: 12
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@Effect: CreateEffect
@@ -4740,6 +5903,21 @@ OISmallPlasmaCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -4766,6 +5944,21 @@ OISmallPlasmaCannon:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 21
+			CyborgHeavy: 23
+			CyborgHeroic: 21
+			AntiAirInfantry: 21
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 20
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -4832,6 +6025,21 @@ OIBigPlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 368
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		PercentageVersus:
 			None: 18
 			Light: 19
@@ -4850,6 +6058,21 @@ OIBigPlasmaCannon:
 			Helicopter: 12
 			Spaceship: 13
 			Shield: 35
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -4876,6 +6099,21 @@ OIBigPlasmaCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 300
+			FlyingInfantry: 25
+			CyborgLight: 56
+			CyborgMedium: 87
+			CyborgHeavy: 115
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			AntiAirVehicle: 35
+			AntiAirBuilding: 10
+			ShipLight: 16
+			ShipMedium: 22
+			ShipHeavy: 27
+			ShipSuperheavy: 32
+			AntiAirShip: 19
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy:
@@ -4914,6 +6152,21 @@ OIBigPlasmaCannon:
 			HAZMAT: 96
 			REFLECTOR: 64
 			Shield: 10
+			FlyingInfantry: 14
+			CyborgLight: 22
+			CyborgMedium: 27
+			CyborgHeavy: 32
+			CyborgHeroic: 35
+			AntiAirInfantry: 10
+			AntiAirVehicle: 61
+			AntiAirBuilding: 187
+			ShipLight: 87
+			ShipMedium: 122
+			ShipHeavy: 132
+			ShipSuperheavy: 148
+			AntiAirShip: 103
+			SubmarineLight: 110
+			SubmarineHeavy: 128
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -4997,6 +6250,21 @@ OIPlasmaFlamer:
 			HAZMAT: 39
 			REFLECTOR: 99
 			Shield: 239
+			FlyingInfantry: 86
+			CyborgLight: 120
+			CyborgMedium: 104
+			CyborgHeavy: 103
+			CyborgHeroic: 64
+			AntiAirInfantry: 176
+			AntiAirVehicle: 71
+			AntiAirBuilding: 139
+			ShipLight: 118
+			ShipMedium: 90
+			ShipHeavy: 102
+			ShipSuperheavy: 100
+			AntiAirShip: 103
+			SubmarineLight: 77
+			SubmarineHeavy: 80
 		PercentageVersus:
 			None: 25
 			Light: 17
@@ -5015,6 +6283,21 @@ OIPlasmaFlamer:
 			Helicopter: 11
 			Spaceship: 10
 			Shield: 35
+			FlyingInfantry: 17
+			CyborgLight: 21
+			CyborgMedium: 19
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 24
+			AntiAirVehicle: 16
+			AntiAirBuilding: 21
+			ShipLight: 20
+			ShipMedium: 18
+			ShipHeavy: 18
+			ShipSuperheavy: 18
+			AntiAirShip: 19
+			SubmarineLight: 16
+			SubmarineHeavy: 16
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -5267,6 +6550,21 @@ BuggyPlasmaGrenade:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -5295,6 +6593,21 @@ BuggyPlasmaGrenade:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@Smudge1:
@@ -5441,6 +6754,21 @@ JHighV:
 			Concrete: 62
 			Spaceship: 57
 			Superheavy: 55
+			FlyingInfantry: 112
+			CyborgLight: 147
+			CyborgMedium: 116
+			CyborgHeavy: 101
+			CyborgHeroic: 70
+			AntiAirInfantry: 179
+			AntiAirVehicle: 95
+			AntiAirBuilding: 73
+			ShipLight: 103
+			ShipMedium: 72
+			ShipHeavy: 75
+			ShipSuperheavy: 68
+			AntiAirShip: 86
+			SubmarineLight: 69
+			SubmarineHeavy: 64
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5461,6 +6789,21 @@ JHighV:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 JHighVWaveforce:
 	Inherits@xJHighVWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJHighVWaveforce1: ^Projectile_Railgun_Heavy
@@ -5499,6 +6842,21 @@ JHighVWaveforce:
 			HAZMAT: 60
 			REFLECTOR: 74
 			Shield: 282
+			FlyingInfantry: 85
+			CyborgLight: 95
+			CyborgMedium: 116
+			CyborgHeavy: 144
+			CyborgHeroic: 107
+			AntiAirInfantry: 102
+			AntiAirVehicle: 108
+			AntiAirBuilding: 116
+			ShipLight: 86
+			ShipMedium: 125
+			ShipHeavy: 120
+			ShipSuperheavy: 130
+			AntiAirShip: 104
+			SubmarineLight: 132
+			SubmarineHeavy: 140
 		PercentageVersus:
 			None: 18
 			Light: 18
@@ -5517,6 +6875,21 @@ JHighVWaveforce:
 			Helicopter: 13
 			Spaceship: 14
 			Shield: 35
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 19
+			CyborgHeavy: 20
+			CyborgHeroic: 22
+			AntiAirInfantry: 18
+			AntiAirVehicle: 18
+			AntiAirBuilding: 17
+			ShipLight: 17
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 19
+			SubmarineHeavy: 20
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 8325
@@ -5688,6 +7061,21 @@ NanoArtilleryAG:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@HeavyCannonPercentage:
@@ -5711,6 +7099,21 @@ NanoArtilleryAG:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@RA2Crater:
@@ -5747,6 +7150,21 @@ NanoArtilleryAG:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@Smudge:
@@ -5860,6 +7278,21 @@ NanoSmokeAG:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 10
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 10
+			ShipLight: 10
+			ShipMedium: 9
+			ShipHeavy: 8
+			ShipSuperheavy: 7
+			AntiAirShip: 9
+			SubmarineLight: 7
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -5888,6 +7321,21 @@ NanoSmokeAG:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 17
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 11
+			ShipLight: 14
+			ShipMedium: 15
+			ShipHeavy: 17
+			ShipSuperheavy: 17
+			AntiAirShip: 14
+			SubmarineLight: 19
+			SubmarineHeavy: 21
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -5914,6 +7362,21 @@ NanoSmokeAG:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -6173,6 +7636,21 @@ ArmoredCarMG:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6198,6 +7676,21 @@ ArmoredCarMG:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6245,6 +7738,21 @@ ArmoredCarMG:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6275,6 +7783,21 @@ ArmoredCarMG:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6300,6 +7823,21 @@ ArmoredCarMG:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6325,6 +7863,21 @@ ArmoredCarMG:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6361,6 +7914,21 @@ ArmoredCarMG:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6389,6 +7957,21 @@ ArmoredCarMG:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6462,6 +8045,21 @@ ArmoredCarMGWaveforce:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
+			SubmarineLight: 17
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 
@@ -6549,6 +8147,21 @@ ArmoredCarMGWaveforce:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6574,6 +8187,21 @@ ArmoredCarMGWaveforce:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6622,6 +8250,21 @@ ArmoredCarMGWaveforce:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6648,6 +8291,21 @@ ArmoredCarMGWaveforce:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6673,6 +8331,21 @@ ArmoredCarMGWaveforce:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6698,6 +8371,21 @@ ArmoredCarMGWaveforce:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6732,6 +8420,21 @@ ArmoredCarMGWaveforce:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6760,6 +8463,21 @@ ArmoredCarMGWaveforce:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6798,6 +8516,21 @@ ArmoredCarMGAAWaveforce:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
+			SubmarineLight: 17
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 	Warhead@Railgun_Heavy_ExtraDamage:
@@ -6870,6 +8603,21 @@ ArmoredCarMGAAWaveforce:
 			Steel: 3
 			Concrete: 2
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6894,6 +8642,21 @@ ArmoredCarMGAAWaveforce:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6941,6 +8704,21 @@ ArmoredCarMGAAWaveforce:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6966,6 +8744,21 @@ ArmoredCarMGAAWaveforce:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -6990,6 +8783,21 @@ ArmoredCarMGAAWaveforce:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -7014,6 +8822,21 @@ ArmoredCarMGAAWaveforce:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -7045,6 +8868,21 @@ ArmoredCarMGAAWaveforce:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
@@ -7072,6 +8910,21 @@ ArmoredCarMGAAWaveforce:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000

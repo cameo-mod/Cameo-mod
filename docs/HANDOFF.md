@@ -1,5 +1,27 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-29 — Claude: §12.0l step 1 done (derived rows in every table) + the submarine types
+
+`Agent: Claude-Local (Opus 5.5) · lane: balance pipeline (maintainer 2026-09-29: "you continue with the balance pipeline while the other agents focus on the AI") · branch claude/submarine_armor_types`
+
+**Landed on this branch (additive, no hit changes in play):**
+* **Rule 3b's submarine types** `SubmarineLight = ShipMedium x Heavy`, `SubmarineHeavy = ShipHeavy x
+  Superheavy` are in all four copies of the derived list (generator, `HeavinessBell.cs`,
+  `effective_heaviness.py`, `audit_versus_profile`); `test_derived_armor_types` now pins the fourth
+  copy too (it claimed to and did not). `splice_templates.py --all`: +754 rows, nothing else moved.
+* **§12.0l step 1 is complete:** `derive_versus_columns.py --write` wrote the 35,123 pending rows into
+  all 42 weapon files. A difflib check proved every change an inserted derived row (0 other hunks).
+  `audit_derived_armor_columns` 29,592 → **0**, ratchet 0. No actor wears a derived type yet
+  (re-measured), so no hit changes until step 3.
+* **Next in §12.0l:** step 2, the `<Family>Air` variants (§12.0k item 2, rule 3a). Then step 3, moving
+  actors onto the types; its per-unit membership lists are maintainer-reviewed.
+
+**Also today:** #645 (merged) re-greened master's derived-columns guard (Scrin's 40 rows). The test
+subset this branch touches (13 files) has **56 failures already on master** (for example
+`test_aa_weapon_routing`, which expects `*_FlatCompatibility` warhead keys); this branch adds none
+after regenerating the CannonAP fixture. `verify_generator_sync` reports 41 hand-made `^Warhead_*_Flat` /
+`_WallExcluded` / … templates the generator does not emit. It's not a value drift, but it is the A5 backlog.
+
 ## 2026-09-29 — Claude: guerrilla band on the actors; squad rulings for artillery, fire support and ships
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_guerrilla`

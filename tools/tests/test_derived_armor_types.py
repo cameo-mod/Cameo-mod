@@ -52,6 +52,23 @@ class DerivedListsAgree(unittest.TestCase):
         self.assertEqual(tuple(gen.GEO_DERIVED), tuple(eh.GEO_DERIVED))
         self.assertEqual(tuple(gen.GEO_DERIVED), _cs_geo_derived())
 
+    def test_profile_audit_excludes_exactly_the_derived_columns(self):
+        # audit_versus_profile keeps its own copy for the MEAN-100 / spread statistics; a derived
+        # type missing there would count as an armour class and skew every profile's mean.
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        import audit_versus_profile as avp
+        self.assertEqual(set(avp.DERIVED_ARMORS), set(gen.DERIVED_ARMORS))
+
+    def test_submarines_are_rule_3b(self):
+        # DESIGN §12.0l rule 3b (maintainer 2026-09-28): the light parent is ShipMedium x Heavy,
+        # revised from Medium; each sits after its ship parent so the parent is final first.
+        derived = dict(gen.GEO_DERIVED)
+        self.assertEqual(derived["SubmarineLight"], ("ShipMedium", "Heavy"))
+        self.assertEqual(derived["SubmarineHeavy"], ("ShipHeavy", "Superheavy"))
+        order = [name for name, _ in gen.GEO_DERIVED]
+        self.assertLess(order.index("ShipMedium"), order.index("SubmarineLight"))
+        self.assertLess(order.index("ShipHeavy"), order.index("SubmarineHeavy"))
+
     def test_heroic_divisor_is_200_everywhere(self):
         self.assertEqual(gen.HEROIC_DIVISOR, 200)
         self.assertEqual(eh.HEROIC_DIVISOR, 200)

@@ -102,6 +102,21 @@ schwarzermond_lunarsoldier_rifle:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -123,6 +138,21 @@ schwarzermond_lunarsoldier_rifle:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 schwarzermond_lunarsoldier_rifle_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Range: 5500
@@ -174,6 +204,21 @@ schwarzermond_lunarsoldier_rifle_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -195,6 +240,21 @@ schwarzermond_lunarsoldier_rifle_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 NaxiBeetleLaser_elite:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -279,6 +339,21 @@ NaxiBeetleLaser_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -317,6 +392,21 @@ NaxiBeetleLaser_elite:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -345,6 +435,21 @@ NaxiBeetleLaser_elite:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -521,6 +626,21 @@ NaxiTank2Laser:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -559,6 +679,21 @@ NaxiTank2Laser:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -587,6 +722,21 @@ NaxiTank2Laser:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -868,6 +1018,21 @@ NaxiMP40Laser:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedNaxiMP40LaserBullet_MediumPercentage: AreaDamagePercentage
@@ -896,6 +1061,21 @@ NaxiMP40Laser:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedNaxiMP40LaserCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -924,6 +1104,21 @@ NaxiMP40Laser:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedNaxiMP40LaserConcussion_LightPercentage: AreaDamagePercentage
@@ -952,6 +1147,21 @@ NaxiMP40Laser:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedNaxiMP40LaserLaser_HeavyPercentage: AreaDamagePercentage
@@ -982,6 +1192,21 @@ NaxiMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	-Warhead@Bullet_Medium:
@@ -1064,6 +1289,21 @@ NaxiMP40Laser:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1084,6 +1324,21 @@ NaxiMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 NaxiMP40Laser_elite:
 	Inherits: NaxiMP40Laser
 	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
@@ -1122,6 +1377,21 @@ NaxiMP40Laser_elite:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedNaxiMP40Laser_eliteBullet_MediumPercentage: AreaDamagePercentage
@@ -1150,6 +1420,21 @@ NaxiMP40Laser_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedNaxiMP40Laser_eliteCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -1178,6 +1463,21 @@ NaxiMP40Laser_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedNaxiMP40Laser_eliteConcussion_LightPercentage: AreaDamagePercentage
@@ -1206,6 +1506,21 @@ NaxiMP40Laser_elite:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedNaxiMP40Laser_eliteLaser_HeavyPercentage: AreaDamagePercentage
@@ -1236,6 +1551,21 @@ NaxiMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@Laser_Heavy_Flat:
@@ -1319,6 +1649,21 @@ NaxiMP40Laser_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1339,6 +1684,21 @@ NaxiMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 LunarNaxiJadgDestroyer:
 	Inherits@xLunarNaxiJadgDestroyer0: ^Warhead_CannonAP_Light
 	Inherits@xLunarNaxiJadgDestroyer1: ^Projectile_Shell_Light
@@ -1393,6 +1753,21 @@ LunarNaxiJadgDestroyer:
 			Bomber: 76
 			None: 74
 			Fighter: 68
+			FlyingInfantry: 93
+			CyborgLight: 94
+			CyborgMedium: 106
+			CyborgHeavy: 119
+			CyborgHeroic: 112
+			AntiAirInfantry: 82
+			AntiAirVehicle: 121
+			AntiAirBuilding: 115
+			ShipLight: 99
+			ShipMedium: 125
+			ShipHeavy: 114
+			ShipSuperheavy: 120
+			AntiAirShip: 111
+			SubmarineLight: 126
+			SubmarineHeavy: 126
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1413,6 +1788,21 @@ LunarNaxiJadgDestroyer:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 LunarNaxiJadgDestroyer_elite:
 	Inherits: LunarNaxiJadgDestroyer
 	Report: cannon1.aud
@@ -1470,6 +1860,21 @@ LunarNaxiJadgDestroyer_elite:
 			Bomber: 76
 			None: 74
 			Fighter: 68
+			FlyingInfantry: 93
+			CyborgLight: 94
+			CyborgMedium: 106
+			CyborgHeavy: 119
+			CyborgHeroic: 112
+			AntiAirInfantry: 82
+			AntiAirVehicle: 121
+			AntiAirBuilding: 115
+			ShipLight: 99
+			ShipMedium: 125
+			ShipHeavy: 114
+			ShipSuperheavy: 120
+			AntiAirShip: 111
+			SubmarineLight: 126
+			SubmarineHeavy: 126
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1490,6 +1895,21 @@ LunarNaxiJadgDestroyer_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 
 LunarTigerCannon:
 	Inherits@xLunarTigerCannon0: ^Warhead_CannonHE_Medium
@@ -1562,6 +1982,21 @@ LunarTigerCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LightChemicalWeaponPercentage:
@@ -1587,6 +2022,21 @@ LunarTigerCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -1614,6 +2064,21 @@ LunarTigerCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -1784,6 +2249,21 @@ NaxHaenebuQuadCannon:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1804,6 +2284,21 @@ NaxHaenebuQuadCannon:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 NaxHaenebuQuadCannon_elite:
 	Inherits: NaxHaenebuQuadCannon
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -1890,6 +2385,21 @@ NaxHaenebuQuadCannon_elite:
 			Steel: 39
 			Concrete: 37
 			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -1910,6 +2420,21 @@ NaxHaenebuQuadCannon_elite:
 			Wood: 7
 			Steel: 6
 			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 
 DalekCannon:
 	Inherits@xDalekCannon0: ^Warhead_Railgun_Heavy
@@ -1949,6 +2474,21 @@ DalekCannon:
 			HAZMAT: 61
 			REFLECTOR: 51
 			Shield: 300
+			FlyingInfantry: 25
+			CyborgLight: 56
+			CyborgMedium: 87
+			CyborgHeavy: 115
+			CyborgHeroic: 141
+			AntiAirInfantry: 137
+			AntiAirVehicle: 35
+			AntiAirBuilding: 10
+			ShipLight: 16
+			ShipMedium: 22
+			ShipHeavy: 27
+			ShipSuperheavy: 32
+			AntiAirShip: 19
+			SubmarineLight: 41
+			SubmarineHeavy: 52
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water
@@ -2004,6 +2544,21 @@ DalekCannon:
 			HAZMAT: 56
 			REFLECTOR: 59
 			Shield: 9
+			FlyingInfantry: 21
+			CyborgLight: 31
+			CyborgMedium: 25
+			CyborgHeavy: 19
+			CyborgHeroic: 13
+			AntiAirInfantry: 30
+			AntiAirVehicle: 27
+			AntiAirBuilding: 9
+			ShipLight: 16
+			ShipMedium: 15
+			ShipHeavy: 13
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 16
+			SubmarineHeavy: 12
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -2053,6 +2608,21 @@ DalekCannon:
 			Wood: 70
 			Fighter: 66
 			Heroic: 46
+			FlyingInfantry: 85
+			CyborgLight: 94
+			CyborgMedium: 114
+			CyborgHeavy: 133
+			CyborgHeroic: 96
+			AntiAirInfantry: 77
+			AntiAirVehicle: 139
+			AntiAirBuilding: 86
+			ShipLight: 93
+			ShipMedium: 120
+			ShipHeavy: 120
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2073,6 +2643,21 @@ DalekCannon:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
@@ -2149,6 +2734,21 @@ DalekCannon_elite:
 			Wood: 70
 			Fighter: 66
 			Heroic: 46
+			FlyingInfantry: 85
+			CyborgLight: 94
+			CyborgMedium: 114
+			CyborgHeavy: 133
+			CyborgHeroic: 96
+			AntiAirInfantry: 77
+			AntiAirVehicle: 139
+			AntiAirBuilding: 86
+			ShipLight: 93
+			ShipMedium: 120
+			ShipHeavy: 120
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2169,6 +2769,21 @@ DalekCannon_elite:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 	ValidTargets: Ground, Water
 	ReloadDelay: 76
 	TargetActorCenter: true
@@ -2289,6 +2904,21 @@ DalekCannonScatter:
 			Wood: 70
 			Fighter: 66
 			Heroic: 46
+			FlyingInfantry: 85
+			CyborgLight: 94
+			CyborgMedium: 114
+			CyborgHeavy: 133
+			CyborgHeroic: 96
+			AntiAirInfantry: 77
+			AntiAirVehicle: 139
+			AntiAirBuilding: 86
+			ShipLight: 93
+			ShipMedium: 120
+			ShipHeavy: 120
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2309,6 +2939,21 @@ DalekCannonScatter:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 	ValidTargets: Ground, Water
 	ReloadDelay: 76
 	TargetActorCenter: true
@@ -2405,6 +3050,21 @@ DalekCannonScatterE:
 			Wood: 70
 			Fighter: 66
 			Heroic: 46
+			FlyingInfantry: 85
+			CyborgLight: 94
+			CyborgMedium: 114
+			CyborgHeavy: 133
+			CyborgHeroic: 96
+			AntiAirInfantry: 77
+			AntiAirVehicle: 139
+			AntiAirBuilding: 86
+			ShipLight: 93
+			ShipMedium: 120
+			ShipHeavy: 120
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 147
+			SubmarineHeavy: 155
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2425,6 +3085,21 @@ DalekCannonScatterE:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 19
+			CyborgMedium: 20
+			CyborgHeavy: 21
+			CyborgHeroic: 22
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 	ValidTargets: Ground, Water
 	ReloadDelay: 76
 	TargetActorCenter: true
@@ -2668,6 +3343,21 @@ NaxCorrosionRocket:
 			Flak: 44
 			Heroic: 37
 			None: 33
+			FlyingInfantry: 85
+			CyborgLight: 69
+			CyborgMedium: 84
+			CyborgHeavy: 106
+			CyborgHeroic: 86
+			AntiAirInfantry: 38
+			AntiAirVehicle: 153
+			AntiAirBuilding: 67
+			ShipLight: 88
+			ShipMedium: 115
+			ShipHeavy: 99
+			ShipSuperheavy: 105
+			AntiAirShip: 101
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2688,6 +3378,21 @@ NaxCorrosionRocket:
 			Plate: 7
 			Flak: 6
 			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 
 NaxCorrosionExpand1:
 	ReloadDelay: 5
@@ -2793,6 +3498,21 @@ NaxCorrosionRocketTrooper_elite:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage: AreaDamagePercentage
@@ -2821,6 +3541,21 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 12
 			Flak: 11
 			None: 10
+			FlyingInfantry: 16
+			CyborgLight: 15
+			CyborgMedium: 16
+			CyborgHeavy: 17
+			CyborgHeroic: 18
+			AntiAirInfantry: 10
+			AntiAirVehicle: 22
+			AntiAirBuilding: 15
+			ShipLight: 18
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 18
+			SubmarineLight: 21
+			SubmarineHeavy: 22
 		Falloff: 100, 51
 		Range: 0, 42
 	Warhead@CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage: AreaDamagePercentage
@@ -2849,6 +3584,21 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@MissileAP_Medium_Flat:
@@ -2887,6 +3637,21 @@ NaxCorrosionRocketTrooper_elite:
 			Flak: 44
 			Heroic: 37
 			None: 33
+			FlyingInfantry: 85
+			CyborgLight: 69
+			CyborgMedium: 84
+			CyborgHeavy: 106
+			CyborgHeroic: 86
+			AntiAirInfantry: 38
+			AntiAirVehicle: 153
+			AntiAirBuilding: 67
+			ShipLight: 88
+			ShipMedium: 115
+			ShipHeavy: 99
+			ShipSuperheavy: 105
+			AntiAirShip: 101
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2907,6 +3672,21 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
@@ -2949,6 +3729,21 @@ NaxCorrosionBeast:
 			Flak: 44
 			Heroic: 37
 			None: 33
+			FlyingInfantry: 85
+			CyborgLight: 69
+			CyborgMedium: 84
+			CyborgHeavy: 106
+			CyborgHeroic: 86
+			AntiAirInfantry: 38
+			AntiAirVehicle: 153
+			AntiAirBuilding: 67
+			ShipLight: 88
+			ShipMedium: 115
+			ShipHeavy: 99
+			ShipSuperheavy: 105
+			AntiAirShip: 101
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -2969,6 +3764,21 @@ NaxCorrosionBeast:
 			Plate: 7
 			Flak: 6
 			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 NaxCorrosionBeast_elite:
 	Inherits: NaxCorrosionBeast
 	Range: 8984
@@ -3006,6 +3816,21 @@ NaxCorrosionBeast_elite:
 			Flak: 44
 			Heroic: 37
 			None: 33
+			FlyingInfantry: 85
+			CyborgLight: 69
+			CyborgMedium: 84
+			CyborgHeavy: 106
+			CyborgHeroic: 86
+			AntiAirInfantry: 38
+			AntiAirVehicle: 153
+			AntiAirBuilding: 67
+			ShipLight: 88
+			ShipMedium: 115
+			ShipHeavy: 99
+			ShipSuperheavy: 105
+			AntiAirShip: 101
+			SubmarineLight: 143
+			SubmarineHeavy: 141
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -3026,6 +3851,21 @@ NaxCorrosionBeast_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
 
 NaxCrystalLeech:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -3161,6 +4001,8 @@ UbermenschLaser:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -3196,6 +4038,8 @@ UbermenschLaser:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	TargetActorCenter: true
 	Projectile: ScaledBullet
@@ -3320,6 +4164,8 @@ UbermenschLaser_elite:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -3355,6 +4201,8 @@ UbermenschLaser_elite:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
@@ -3529,6 +4377,21 @@ Lunar_Green105mm_elite:
 			Helicopter: 61
 			Bomber: 51
 			Fighter: 44
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 100
 		PercentageSpread: 50
@@ -3550,6 +4413,21 @@ Lunar_Green105mm_elite:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 	ValidTargets: Ground, Water
 	ReloadDelay: 50
@@ -3684,6 +4562,21 @@ Lunar_GreenTigerCannon:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LightChemicalWeaponPercentage:
@@ -3709,6 +4602,21 @@ Lunar_GreenTigerCannon:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -3736,6 +4644,21 @@ Lunar_GreenTigerCannon:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -3852,6 +4775,21 @@ Lunar_GreenTigerCannon_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LightChemicalWeaponPercentage:
@@ -3877,6 +4815,21 @@ Lunar_GreenTigerCannon_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStates:
@@ -3904,6 +4857,21 @@ Lunar_GreenTigerCannon_elite:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
@@ -3980,6 +4948,21 @@ Lunar_GreenJadgDestroyer:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		Falloff: 100, 50
 		Range: 0, 40
 	Warhead@CollapsedLunar_GreenJadgDestroyerCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -4008,6 +4991,21 @@ Lunar_GreenJadgDestroyer:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_GreenJadgDestroyerConcussion_MediumPercentage: AreaDamagePercentage
@@ -4036,6 +5034,21 @@ Lunar_GreenJadgDestroyer:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedLunar_GreenJadgDestroyerTesla_HeavyPercentage: AreaDamagePercentage
@@ -4065,6 +5078,21 @@ Lunar_GreenJadgDestroyer:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 55
 		Range: 0, 93
 	-Warhead@CannonAP_Light_Flat:
@@ -4113,6 +5141,21 @@ Lunar_GreenJadgDestroyer:
 			Helicopter: 61
 			Bomber: 51
 			Fighter: 44
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 100
 		PercentageSpread: 50
@@ -4134,6 +5177,21 @@ Lunar_GreenJadgDestroyer:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 Lunar_GreenJadgDestroyer_elite:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -4172,6 +5230,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+			FlyingInfantry: 6
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		Falloff: 100, 50
 		Range: 0, 40
 	Warhead@CollapsedLunar_GreenJadgDestroyer_eliteCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -4200,6 +5273,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_GreenJadgDestroyer_eliteConcussion_MediumPercentage: AreaDamagePercentage
@@ -4228,6 +5316,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedLunar_GreenJadgDestroyer_eliteTesla_HeavyPercentage: AreaDamagePercentage
@@ -4257,6 +5360,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 55
 		Range: 0, 93
 	-Warhead@CannonAP_Light_Flat:
@@ -4317,6 +5435,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Helicopter: 61
 			Bomber: 51
 			Fighter: 44
+			FlyingInfantry: 85
+			CyborgLight: 96
+			CyborgMedium: 116
+			CyborgHeavy: 140
+			CyborgHeroic: 113
+			AntiAirInfantry: 102
+			AntiAirVehicle: 109
+			AntiAirBuilding: 115
+			ShipLight: 91
+			ShipMedium: 123
+			ShipHeavy: 118
+			ShipSuperheavy: 126
+			AntiAirShip: 106
+			SubmarineLight: 129
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 100
 		PercentageSpread: 50
@@ -4338,6 +5471,21 @@ Lunar_GreenJadgDestroyer_elite:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+			FlyingInfantry: 16
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 18
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			AntiAirShip: 17
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 Lunar_GreenGrilleArty:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -4558,6 +5706,21 @@ schwarzermond_lunarsoldier_rifle_yellow:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -4579,6 +5742,21 @@ schwarzermond_lunarsoldier_rifle_yellow:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 schwarzermond_lunarsoldier_rifle_yellow_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -4632,6 +5810,21 @@ schwarzermond_lunarsoldier_rifle_yellow_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -4653,6 +5846,21 @@ schwarzermond_lunarsoldier_rifle_yellow_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 schwarzermond_lunarsoldier_rifle_amplified:
 	Inherits: schwarzermond_lunarsoldier_rifle
@@ -4706,6 +5914,21 @@ schwarzermond_lunarsoldier_rifle_amplified:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -4727,6 +5950,21 @@ schwarzermond_lunarsoldier_rifle_amplified:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 schwarzermond_lunarsoldier_rifle_amplified_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -4780,6 +6018,21 @@ schwarzermond_lunarsoldier_rifle_amplified_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PercentageSpread: 50
@@ -4801,6 +6054,21 @@ schwarzermond_lunarsoldier_rifle_amplified_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 
 Lunar_YellowLaserT:
 	Inherits: NaxLaserT
@@ -5013,6 +6281,21 @@ Lunar_YellowMP40Laser:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedLunar_YellowMP40LaserBullet_MediumPercentage: AreaDamagePercentage
@@ -5041,6 +6324,21 @@ Lunar_YellowMP40Laser:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedLunar_YellowMP40LaserCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -5069,6 +6367,21 @@ Lunar_YellowMP40Laser:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_YellowMP40LaserConcussion_LightPercentage: AreaDamagePercentage
@@ -5097,6 +6410,21 @@ Lunar_YellowMP40Laser:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedLunar_YellowMP40LaserLaser_HeavyPercentage: AreaDamagePercentage
@@ -5127,6 +6455,21 @@ Lunar_YellowMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@Laser_Heavy_Flat:
@@ -5210,6 +6553,21 @@ Lunar_YellowMP40Laser:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5230,6 +6588,21 @@ Lunar_YellowMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 Lunar_YellowMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
 	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
@@ -5267,6 +6640,21 @@ Lunar_YellowMP40Laser_elite:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedLunar_YellowMP40Laser_eliteBullet_MediumPercentage: AreaDamagePercentage
@@ -5295,6 +6683,21 @@ Lunar_YellowMP40Laser_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedLunar_YellowMP40Laser_eliteCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -5323,6 +6726,21 @@ Lunar_YellowMP40Laser_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_YellowMP40Laser_eliteConcussion_LightPercentage: AreaDamagePercentage
@@ -5351,6 +6769,21 @@ Lunar_YellowMP40Laser_elite:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedLunar_YellowMP40Laser_eliteLaser_HeavyPercentage: AreaDamagePercentage
@@ -5381,6 +6814,21 @@ Lunar_YellowMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@Laser_Heavy_Flat:
@@ -5464,6 +6912,21 @@ Lunar_YellowMP40Laser_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5484,6 +6947,21 @@ Lunar_YellowMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 Lunar_AmplifiedMP40Laser:
 	Inherits: NaxiMP40Laser
 	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
@@ -5525,6 +7003,21 @@ Lunar_AmplifiedMP40Laser:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedLunar_AmplifiedMP40LaserBullet_MediumPercentage: AreaDamagePercentage
@@ -5553,6 +7046,21 @@ Lunar_AmplifiedMP40Laser:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedLunar_AmplifiedMP40LaserCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -5581,6 +7089,21 @@ Lunar_AmplifiedMP40Laser:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_AmplifiedMP40LaserConcussion_LightPercentage: AreaDamagePercentage
@@ -5609,6 +7132,21 @@ Lunar_AmplifiedMP40Laser:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedLunar_AmplifiedMP40LaserLaser_HeavyPercentage: AreaDamagePercentage
@@ -5639,6 +7177,21 @@ Lunar_AmplifiedMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@Laser_Heavy_Flat:
@@ -5722,6 +7275,21 @@ Lunar_AmplifiedMP40Laser:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5742,6 +7310,21 @@ Lunar_AmplifiedMP40Laser:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 Lunar_AmplifiedMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
 	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
@@ -5779,6 +7362,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			Heavy: 3
 			Spaceship: 2
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		Falloff: 100, 51
 		Range: 0, 33
 	Warhead@CollapsedLunar_AmplifiedMP40Laser_eliteBullet_MediumPercentage: AreaDamagePercentage
@@ -5807,6 +7405,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 50
 		Range: 0, 50
 	Warhead@CollapsedLunar_AmplifiedMP40Laser_eliteCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -5835,6 +7448,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 50, 35
 		Range: 0, 400, 600
 	Warhead@CollapsedLunar_AmplifiedMP40Laser_eliteConcussion_LightPercentage: AreaDamagePercentage
@@ -5863,6 +7491,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 7
+			CyborgLight: 14
+			CyborgMedium: 11
+			CyborgHeavy: 8
+			CyborgHeroic: 5
+			AntiAirInfantry: 13
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 9
+			ShipHeavy: 9
+			ShipSuperheavy: 7
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 72, 50, 32
 		Range: 0, 233, 466, 699
 	Warhead@CollapsedLunar_AmplifiedMP40Laser_eliteLaser_HeavyPercentage: AreaDamagePercentage
@@ -5893,6 +7536,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Falloff: 100, 50
 		Range: 0, 32
 	Warhead@Laser_Heavy_Flat:
@@ -5976,6 +7634,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			Fighter: 68
 			Scout: 55
 			Heroic: 45
+			FlyingInfantry: 85
+			CyborgLight: 75
+			CyborgMedium: 98
+			CyborgHeavy: 129
+			CyborgHeroic: 85
+			AntiAirInfantry: 82
+			AntiAirVehicle: 89
+			AntiAirBuilding: 121
+			ShipLight: 77
+			ShipMedium: 119
+			ShipHeavy: 113
+			ShipSuperheavy: 129
+			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
 		PercentageVersus:
@@ -5996,6 +7669,21 @@ Lunar_AmplifiedMP40Laser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+			FlyingInfantry: 14
+			CyborgLight: 12
+			CyborgMedium: 16
+			CyborgHeavy: 20
+			CyborgHeroic: 24
+			AntiAirInfantry: 14
+			AntiAirVehicle: 15
+			AntiAirBuilding: 20
+			ShipLight: 13
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 21
+			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 Lunar_YellowTank2Laser:
 	Inherits: NaxiTank2Laser
 	Burst: 5
@@ -6204,6 +7892,8 @@ Lunar_YellowUbermenschLaser:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6239,6 +7929,8 @@ Lunar_YellowUbermenschLaser:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
@@ -6368,6 +8060,8 @@ Lunar_YellowUbermenschLaser_elite:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6403,6 +8097,8 @@ Lunar_YellowUbermenschLaser_elite:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
@@ -6532,6 +8228,8 @@ Lunar_AmplifiedUbermenschLaser:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6567,6 +8265,8 @@ Lunar_AmplifiedUbermenschLaser:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
@@ -6700,6 +8400,8 @@ Lunar_AmplifiedUbermenschLaser_elite:
 			ShipHeavy: 113
 			ShipSuperheavy: 129
 			AntiAirShip: 96
+			SubmarineLight: 121
+			SubmarineHeavy: 135
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
@@ -6735,6 +8437,8 @@ Lunar_AmplifiedUbermenschLaser_elite:
 			ShipHeavy: 19
 			ShipSuperheavy: 21
 			AntiAirShip: 16
+			SubmarineLight: 20
+			SubmarineHeavy: 22
 		Damage: 18000
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
@@ -6909,6 +8613,21 @@ Naxis_Komet:
 			Wood: 7
 			Concrete: 6
 			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6935,6 +8654,21 @@ Naxis_Komet:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6960,6 +8694,21 @@ Naxis_Komet:
 			Steel: 12
 			Concrete: 11
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
+			SubmarineLight: 17
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
@@ -6985,6 +8734,21 @@ Naxis_Komet:
 			Flak: 7
 			None: 6
 			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
