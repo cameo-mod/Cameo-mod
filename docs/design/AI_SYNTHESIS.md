@@ -487,6 +487,8 @@ and merging where possible**. Measured on master `fd852d2fe` + the A/B rounds 2�
 
 ### 7.4 The best-of merge order (supersedes §6)
 
+> **2026-09-30:** the order and the state now live in [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md) (§3 the queue, §1.2 the harvest pipeline). The list below remains the reasoning behind it.
+
 Ordered by what the A/B says loses matches — fights — and every step is an A/B against the
 current master on A Nuclear Winter (≥ 8 matches, both spawns):
 

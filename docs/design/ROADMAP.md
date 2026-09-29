@@ -111,12 +111,13 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
+- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 40 items, ~850 agent-hours, 34 A/B gates, six waves). The lines below keep the per-phase detail.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
   - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
     `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
-  - [~] **S** Apply `guerrilla` to the six personalities (`@classic` keeps its list), 5,825 → 4,289
+  - [x] **S** (merged #633, 2026-09-30) Apply `guerrilla` to the six personalities (`@classic` keeps its list), 5,825 → 4,289
     central ids, `audit_central_ids.py` ratchet: branch `claude/role_guerrilla_apply`, lands after
     its Nuclear Winter A/B. **Claude.**
   - [ ] **L** §2.9 the empty `ai.yaml` (maintainer goal 2026-09-29), phases P0–P7: P0 engine dump +
@@ -132,7 +133,7 @@ the fog sequencing.
     L4 personality/opening bandit, L5 raw numbers. Dev builds train, release reads. **Claude.**
   - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
     (§12.4a rule 3). **Claude.**
-  - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
+  - [x] **M** (merged #634, 2026-09-30; `artillery`/`firesupport` roles still report-only) Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
     `artillery` role only (not the 10-cell range rule), fire-support squads with a tank escort
     protecting the artillery, and a guard that ships never join ground or air squads. **NOVA**
     (CA-3/CA-4), roles from Claude.
@@ -142,7 +143,7 @@ the fog sequencing.
     weight. **Claude.**
   - [~] **M** CA-1b offline fitter (**tool shipped:** `tools/ai/fit_arsenal_priors.py`; the priors file waits on ledger matches) → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
     (read at match start, §6.1); more harness matchups. **Claude** (Devin Cloud out of tokens).
-  - [ ] **L** CA-2 siege and force preservation: stand-off outside remembered defence range,
+  - [~] **L** (telemetry + failure memory shipped #656; behaviour off) CA-2 siege and force preservation: stand-off outside remembered defence range,
     artillery first, commit when the area's defences are gone or the Versus-weighted force
     ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
   - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
@@ -151,14 +152,14 @@ the fog sequencing.
   - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
-  - [ ] **S** Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
+  - [x] **S** (merged #647) Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
     §12.12; measured causes §12.11: `hard` builds ~72 Humvees and ~5 tanks per match, and feeds
     infantry into 0-value garrisons). **Claude.**
-  - [ ] **L** EX expansion planner (§12.13, DESIGN §19.1b): the field score
+  - [~] **L** (EX-0…EX-3 merged #651–#654; EX-4, towers, escort open) EX expansion planner (§12.13, DESIGN §19.1b): the field score
     `value × safety / time-until-it-pays`, distance-minimising placement toward the target field,
     one refinery per field plus towers, MCV hand-off, and the enemy creep scaled by difficulty ×
     aggression. Steps EX-0 … EX-4, each A/B-gated. **Claude.**
-  - [ ] **M** Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
+  - [~] **M** (Steamroller + Rush telemetry merged #658) Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
     **Claude**; Steamroller and Rush **NOVA**; Guerrilla map control **DAWN**.
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
