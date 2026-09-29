@@ -14787,8 +14787,9 @@ records && no new_exc now retries like the exit=N kill rule; prints the
 OpenRA output tail for diagnosis). #644 also carries an ab_summary
 --timestep filter for era-splitting (timestep 10 insane vs 1 maximum).
 
-v1 pair killed pre-phantom-exposure: ctrl m1 banked (hard loss, kept as
-interim), m2 + cand m1 discarded mid-flight. v2 launches into fresh dirs
+v1 pair killed pre-phantom-exposure: ctrl m1 banked (hard WIN 15289t,
+K/D 2.44 — corrected: the jsonl per-player ordering was misread first),
+m2 + cand m1 discarded mid-flight. v2 launches into fresh dirs
 ca2b2-ctrl / ca2b2-cand on HEAD 0365e4e9e (same source as 372b67825 +
 tooling; cand carries the BehaviourEnabled:true flip). Maximum speed,
 8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1.
