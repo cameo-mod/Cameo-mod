@@ -1,3 +1,87 @@
+# 2026-09-29 — Devin (NOVA): coordination pass + CA-3 RoleMix (role-mix production)
+
+**Fleet review.** All four overnight PRs verified against authoritative GitHub state:
+#624 (BotArsenalLedger, record-only CA-1) and #627 (BotRoleSets derivation + the
+`ValidTargets` virtual-field crash fix) were already merged by the time review
+finished; #625 (league harness + exploiter bot types) merged WITH its review gap —
+`DynamicBotInsurance.DifficultyAliases` only had `classic: hard`, leaving the
+`exploit_*` bots on hard's modifiers with no insurance. Follow-up PR #629 adds the
+three prescribed aliases (`nova/lg-exploit-insurance-alias`, boot-gated). #626 stays
+open pending its A/B.
+
+**CA-3 (role-mix production, §12.5) — first working pass on `nova/ca3-role-mix`.**
+
+- `BotUnitRoles` (new, CA, extends BotTargetTags per §12.4): unit + target roles
+  derived from traits, queues, weapon ranges, ValidTargets/InvalidTargets, and the
+  pooled Versus profile — zero actor ids. All 15 roles populate at ruleset load
+  (frontline 349, anti_air 311, defence 366, artillery 50, gunship 98, tech 31, ...).
+  Notable: the shared armour ladder leaves the Versus anti_* signal empty in some
+  packs — explicit type targeting (InvalidTargets: Infantry etc.) covers it.
+- `RoleMix` on `SquadManagerBotModuleCAInfo` (per personality): target composition
+  in percent of own mobile combat units. `UnitBuilderBotModuleCA` resolves the
+  ENABLED manager per pick (personalities unlatch at runtime — never cached) and
+  fills the largest role deficit after adaptive counters' first refusal; a satisfied
+  mix falls through to the proportional pick. `RoleMixRoleFloorPct` (5) keeps every
+  buildable role in play — spec's use-every-role floor. `@classic` has no mix:
+  upstream behaviour verbatim.
+- Gates: build 0 errors; boot to menu 0 exceptions; fog-honesty PASS (new own-units
+  enumeration re-baselined into fog_honesty_manifest.json).
+- A/B running same-session: candidate = nova-control @ de653e1af vs control =
+  nova-control2 @ f37342668 (pure master), hard vs classic, td_gdi, A Nuclear
+  Winter, 4 matches each covering both spawns, insane speed.
+
+**Protection dissolve (my lane, unchanged from yesterday):** round-1 at 500t was
+inert (candidate 1-3 vs control 2-2, parked-loss share ~67% both). Round-2 at 150t
+running on nova-staged; first match still a hard loss. The convergence contract
+(single trigger -> ReleaseDefenders + TryGetProtectionRally interlock) waits on
+Claude's unmerged DF branches — verified absent from master db36d83f3/f37342668.
+
+**Batch reliability note (Windows):** session-reaped overnight run produced zero
+records again; detached `cmd /c` Start-Process launchers survive — ab-cand2 and the
+two ca3 batches now run that way.
+
+# 2026-09-29 — Devin (NOVA): coordination pass + CA-3 RoleMix (role-mix production)
+
+**Fleet review.** All four overnight PRs verified against authoritative GitHub state:
+#624 (BotArsenalLedger, record-only CA-1) and #627 (BotRoleSets derivation + the
+`ValidTargets` virtual-field crash fix) were already merged by the time review
+finished; #625 (league harness + exploiter bot types) merged WITH its review gap —
+`DynamicBotInsurance.DifficultyAliases` only had `classic: hard`, leaving the
+`exploit_*` bots on hard's modifiers with no insurance. Follow-up PR #629 adds the
+three prescribed aliases (`nova/lg-exploit-insurance-alias`, boot-gated). #626 stays
+open pending its A/B.
+
+**CA-3 (role-mix production, §12.5) — first working pass on `nova/ca3-role-mix`.**
+
+- `BotUnitRoles` (new, CA, extends BotTargetTags per §12.4): unit + target roles
+  derived from traits, queues, weapon ranges, ValidTargets/InvalidTargets, and the
+  pooled Versus profile — zero actor ids. All 15 roles populate at ruleset load
+  (frontline 349, anti_air 311, defence 366, artillery 50, gunship 98, tech 31, ...).
+  Notable: the shared armour ladder leaves the Versus anti_* signal empty in some
+  packs — explicit type targeting (InvalidTargets: Infantry etc.) covers it.
+- `RoleMix` on `SquadManagerBotModuleCAInfo` (per personality): target composition
+  in percent of own mobile combat units. `UnitBuilderBotModuleCA` resolves the
+  ENABLED manager per pick (personalities unlatch at runtime — never cached) and
+  fills the largest role deficit after adaptive counters' first refusal; a satisfied
+  mix falls through to the proportional pick. `RoleMixRoleFloorPct` (5) keeps every
+  buildable role in play — spec's use-every-role floor. `@classic` has no mix:
+  upstream behaviour verbatim.
+- Gates: build 0 errors; boot to menu 0 exceptions; fog-honesty PASS (new own-units
+  enumeration re-baselined into fog_honesty_manifest.json).
+- A/B running same-session: candidate = nova-control @ de653e1af vs control =
+  nova-control2 @ f37342668 (pure master), hard vs classic, td_gdi, A Nuclear
+  Winter, 4 matches each covering both spawns, insane speed.
+
+**Protection dissolve (my lane, unchanged from yesterday):** round-1 at 500t was
+inert (candidate 1-3 vs control 2-2, parked-loss share ~67% both). Round-2 at 150t
+running on nova-staged; first match still a hard loss. The convergence contract
+(single trigger -> ReleaseDefenders + TryGetProtectionRally interlock) waits on
+Claude's unmerged DF branches — verified absent from master db36d83f3/f37342668.
+
+**Batch reliability note (Windows):** session-reaped overnight run produced zero
+records again; detached `cmd /c` Start-Process launchers survive — ab-cand2 and the
+two ca3 batches now run that way.
+
 # 2026-09-28 — Devin (EMBER): LG league harness — exploiter pins + run_league.py
 
 Maintainer-order work from AI_ARCHITECTURE §12 / AI_DEEP_RESEARCH §6.2 (LG,
