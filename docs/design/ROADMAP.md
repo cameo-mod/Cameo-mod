@@ -123,6 +123,8 @@ the fog sequencing.
     diff gate, P1 count-tool case fix + dead ids, P2 type/family tags on templates, P3 type × family
     building defaults (Outpost 2 + Scrin wired; A/B), P4 remaining lists → roles, P5 per-unit settings
     from weapons, P6 learned unit weights (after CA-3), P7 packs hold only exceptions. **Claude.**
+  - [x] **S** §2.9 P0 the equivalence gate: `BotModuleFieldDump` + `dump_bot_modules.py` /
+    `diff_bot_modules.py` (2,168 fields; negative control caught the 7 changed fields). **Claude.**
   - [ ] **S** §2.8b derive `AirSquadTargetTypes` from weapons (fixes `@guerrilla`'s missing rows). **Claude.**
   - [ ] **M** §2.8b `UnitsToBuild` weights from stats + role mix, after CA-3 (ruled). **NOVA** + Claude.
   - [ ] **L** §6.4 learn every number between matches (ruled 2026-09-29): L0 per-bot `Info` copy +

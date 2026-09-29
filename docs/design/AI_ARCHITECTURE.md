@@ -683,7 +683,7 @@ must also pass the boot gate. A phase that changes behaviour needs the Nuclear W
 
 | # | step | gate |
 |---|---|---|
-| P0 | engine dump of every bot-module field after load + `tools/ai/diff_bot_modules.py` | dump twice, diff empty |
+| P0 ✅ | **built 2026-09-29:** `BotModuleFieldDump` (opt-in, `CAMEO_DUMP_BOT_MODULES=1`, called at the end of `BotRoleSets` load) + `tools/ai/dump_bot_modules.py` (boots a worktree, isolated support dir, graceful close) + `tools/ai/diff_bot_modules.py` (`--allow` for a phase's declared changes) | dumped twice: 2,168 fields identical; negative control (`guerrilla` out of `Apply`) flags exactly 7 fields |
 | P1 | fix `count_central_ids.py` case handling (ids are lowercased at load, so `eden_*`/`plymouth_*` are live, not dead); delete the truly dead ids (`asianalliance_asian*`, `d2k_*`, `ra1_allies_allied*`, …) | dump diff empty |
 | P2 | building type and family tags on the templates, `^IsBarracks`, the exceptions above | dump diff empty (tags only) |
 | P3 | type × family defaults fill the four building tables; pack rows equal to their default deleted, the others kept as exceptions; Outpost 2 and Scrin gain rows | dump diff = only the no-row buildings; A/B with an Outpost 2 and a Scrin bot |
