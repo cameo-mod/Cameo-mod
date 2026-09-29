@@ -3338,6 +3338,10 @@ Player:
 	MasterAiBotModule:
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
+		# CA-6 (AI_ARCHITECTURE 12.9): remembered defences join the beatability
+		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
+		# variable -- flip on the candidate worktree only.
+		WeakIncludesDefence: false
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
