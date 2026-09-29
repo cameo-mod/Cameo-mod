@@ -1,3 +1,35 @@
+# 2026-09-28 — Devin (EMBER): LG league harness — exploiter pins + run_league.py
+
+Maintainer-order work from AI_ARCHITECTURE §12 / AI_DEEP_RESEARCH §6.2 (LG,
+my lane alongside CA-5 air doctrine and MI micro):
+
+- **Exploiters as bot types.** `exploit_rush` / `exploit_turtle` /
+  `exploit_guerrilla` are hidden `ModularBot` types granted `genericbot` +
+  `hardbot`: the full candidate stack at hard tier, fog-honest (no
+  RevealsMap — flaw-exposure must come from doctrine, not vision).
+- **Pin mechanism.** `BotPersonalityController.PinnedPersonalities`
+  (bot Type -> personality) resolves the pole at TraitEnabled from
+  `Owner.BotType` and makes `SetBotPersonality` orders for other names
+  no-ops — the master still thinks and issues orders; the controller just
+  refuses to leave the pole. Single instance retained (TraitDictionary
+  multi-instance would crash — the ScoutBotModule lesson).
+- **`tools/ai/run_league.py`**: JSON spec -> one `run_ai_match_batch.py`
+  cell per (member x map x faction) -> `league_summary.json` pooling
+  `batch_results.jsonl` bot_outcomes rows (candidate perspective only —
+  mirror rows would double-count), Wilson interval identical to
+  ab_summary.py, per-member + per-spawn splits, anomaly counters.
+  `tools/ai/league_standard.json` = classic + 3 exploiters x NW x td_gdi.
+- **"Past masters" mechanism** decided: freeze a stack as a hidden bot
+  TYPE (like classic), not an old binary — replays against any build.
+- Tests: 7 league-aggregation cases (mirror dedup, spawn split, missing
+  cell, Wilson) + 2 pin-mapping cases. 296/296 green.
+- **Live pin verified** (A Nuclear Winter, hard vs exploit_rush, 29,249
+  ticks): exploiter `personality_switches: 0`, `personality_current:
+  rush` constant while its master`s candidate cycled
+  expansion/turtle/tech; adaptive hard switched steamroller->turtle and
+  won. Rigidity loses to adaptivity — the exposure the
+  exploiter exists to prove.
+
 # 2026-09-28 — Devin (EMBER): sixth personality wired, personality-switch unlatch, fog-honesty ratchet
 
 Session outcome on the AI-architecture lane:

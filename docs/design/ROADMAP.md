@@ -137,7 +137,12 @@ the fog sequencing.
     layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
   - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
-  - [ ] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
+  - [~] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
+    In flight: `tools/ai/run_league.py` (spec → per-cell batch → `league_summary.json`
+    with pooled W-L, Wilson, per-member/spawn splits) + `exploit_rush` /
+    `exploit_turtle` / `exploit_guerrilla` hidden bot types pinned at one pole
+    via `BotPersonalityController.PinnedPersonalities`. "Past masters" freeze
+    as hidden bot types, not old binaries (classic is the first such freeze).
   - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
   - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
     (DESIGN §19.2). **NOVA**, with UT.

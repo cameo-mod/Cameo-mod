@@ -275,6 +275,29 @@ Player:
 	RevealsMap@classic:
 		RequiresCondition: classicbot
 		ValidRelationships: Ally
+	# League exploiters (AI_DEEP_RESEARCH §6.2): the full genericbot stack at
+	# hard tier, pinned to one personality pole via
+	# BotPersonalityController.PinnedPersonalities. Fog-honest like the
+	# candidate — the flaw-exposure must come from doctrine, not vision.
+	# Hidden from the lobby; harness-only opponents.
+	ModularBot@ExploitRushAI:
+		Name: bot_ai.exploit_rush
+		Type: exploit_rush
+		HiddenInLobby: True
+	ModularBot@ExploitTurtleAI:
+		Name: bot_ai.exploit_turtle
+		Type: exploit_turtle
+		HiddenInLobby: True
+	ModularBot@ExploitGuerrillaAI:
+		Name: bot_ai.exploit_guerrilla
+		Type: exploit_guerrilla
+		HiddenInLobby: True
+	GrantConditionOnBotOwner@exploitstack:
+		Condition: genericbot
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
+	GrantConditionOnBotOwner@exploittier:
+		Condition: hardbot
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
 		RequiresCondition: genericbot || classicbot
@@ -3257,6 +3280,12 @@ Player:
 		RequiresCondition: genericbot || classicbot
 	BotPersonalityController:
 		RequiresCondition: genericbot
+		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);
+		# every other genericbot still draws and adapts.
+		PinnedPersonalities:
+			exploit_rush: rush
+			exploit_turtle: turtle
+			exploit_guerrilla: guerrilla
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
