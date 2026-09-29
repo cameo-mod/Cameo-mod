@@ -4875,6 +4875,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
   with Hard at 100.
+* ⛔ **Every decision module runs on every tier; only its strength scales** (maintainer 2026-09-30:
+  *"I want all difficulties to scale in equal steps"*). A harvested or Cameo decision module (the
+  Fransbot services, CA-2 siege, the expansion planner…) is never gated to one tier (`hardbot`,
+  `brutalbot`, …). It loads for every `genericbot` tier, and its strength knobs (reaction interval,
+  horizon, action-budget share, self-preservation margin) sit on the line above. #656's
+  `genericbot && hardbot` gate moves to all tiers once its A/B shows it helps. The capability
+  thresholds in the previous bullet stay the only exceptions. Plan: `design/AI_MASTER_PLAN.md` §5 (F1).
 
 ### 19.1a Force structure: guerrillas always on, the main army follows the personality (maintainer 2026-09-28) — binding
 
