@@ -23,7 +23,18 @@ CA-1 dependency:
   the transit/routing layer only.
 
 Tests: 304/304 C# (+`AirborneLeadersPayAntiAirNotGroundThreat`).
-Boot-gate pending at write time.
+Boot-gate: menu reached, zero new exceptions.
+
+A/B vs master (§12.10 gate), td_gdi mirror on A Nuclear Winter:
+first attempt burned 3 matches to a mid-batch worktree branch switch
+(new `mods/` met the old DLL — `Weapons.ValidTargets` predicate and
+`BotArsenalLedger` trait unresolved; lesson filed). Rerun on a
+consistent build: **hard 1–3** (win from spawn 1; losses were
+emergency-dominated ground wars — hard held `turtle` under sustained
+pressure, air arm small: 3–8 orcas per match). Pooling every match on
+this binary (1–0 pre-rebase + 1–3 dedicated + 2–0 league classic cell)
+= **4–3**, inside the 7–6 baseline's coin-flip band; extending the
+dedicated sample before calling the gate.
 
 # 2026-09-28 — Devin (EMBER): LG league harness — exploiter pins + run_league.py
 
