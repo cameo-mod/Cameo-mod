@@ -14777,3 +14777,18 @@ batch runs CAN silently overwrite engine/bin DLLs (the running process
 keeps loaded IL; the NEXT match launch picks the new binaries = #637's
 skew class). This build luckily raced an already-dead batch — zero actual
 contamination, but the rule stands: verify drivers alive before building.
+
+## 2026-09-29 (cont.8) — ca2b pair v2: phantom-retry fix adopted + relaunched
+
+NOVA FINDINGS (phantom ok+0-record matches under maximum, clustered on the
+mirrored classic_vs_hard variant in contended windows): adopted their
+retry fix 922b9ba23 via cherry-pick -> 0365e4e9e (status=="ok" && no
+records && no new_exc now retries like the exit=N kill rule; prints the
+OpenRA output tail for diagnosis). #644 also carries an ab_summary
+--timestep filter for era-splitting (timestep 10 insane vs 1 maximum).
+
+v1 pair killed pre-phantom-exposure: ctrl m1 banked (hard loss, kept as
+interim), m2 + cand m1 discarded mid-flight. v2 launches into fresh dirs
+ca2b2-ctrl / ca2b2-cand on HEAD 0365e4e9e (same source as 372b67825 +
+tooling; cand carries the BehaviourEnabled:true flip). Maximum speed,
+8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1.
