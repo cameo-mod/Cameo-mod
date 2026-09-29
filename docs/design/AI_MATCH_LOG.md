@@ -358,8 +358,9 @@ economy pacing) over anything resembling a cheat — the acceptance is
 | nw-hard3 | hard vs classic (ra1_soviets mirror) | W1-armed hard | hard 1-3 | m1 loss 21831t (bld 2:35, rush→turtle latch), m2 loss 35790t (bld 9:53), m3 WIN 26664t (bld 45:4, army 97k:0), m4 loss 25005t (army 0:131k). Pooled ra1_soviets W1: hard 2-4. Wins dominant, losses die early — turtle-latch under continuous threat is the repeated signature |
 | nw-classic6 | fransbot vs classic (donor smoke) | 6-capacity ground + probes | fransbot 0-1 | 14410t, bld 2:23; structural proof only: ground1-6 all register + missions distribute in parallel (52 RECON, 15 DEFEND) |
 | nw-hard4 | hard vs classic (ra1_soviets mirror) | W2-armed hard (CommandBid+CommanderCore+General publish-only) | hard 1-1, 2 invalid | m1 loss (turtle), m2 WIN; m3/m4 died at ruleset load inside the mid-merge yaml window (17:50Z) — recorded invalid, not signal. Publish-only W2 shows no regression |
-| nw-donor-v12931 | fransbot vs classic (donor smoke) | NOVA merge + V1.29.31 re-vendor | running | runtime validation of EnemySpawnRecon + adaptive counters + negative-union pathfinding/ferry recovery |
-| nw-hard5 | hard vs classic (td_gdi mirror) | W2 on rebased tree (dc438d55e) | running | first canonical-axis W2 batch |
+| nw-donor-v12931 | fransbot vs classic (donor smoke) | NOVA merge + V1.29.31 re-vendor | fransbot 0-1 | 16102t clean exit: probes fire (publish->bid->dispatch->retreat-on-damage), V1.29.31 MCV/transport ticking, remembered-structure SECURE doctrine live; donor-only diagnostic, not acceptance |
+| nw-hard5 | hard vs classic (td_gdi mirror) | W2 on rebased tree (dc438d55e) | hard 1-0 decided, 1 invalid | m2 died at ruleset load in the yaml-before-DLL window (SiegeEvaluatorInfo) — documented as sequencing failure, not code failure |
+| nw-hard6 | hard vs classic (td_gdi mirror) | post-#623 rebase + CA-2a telemetry + CA-2b plumbing (OFF) | running | m1 WIN 46628t (bld 64:9, decisive +53k window, turtle posture); m2 retried after stale-Cameo binary window killed attempt 1; heartbeat telemetry live from m2 |
 
 ⚠ nw-ab-4/5 `hard`-side numbers predate #611 (`IsEligible` saw no enemies) —
 they read as "hard's squad machinery carries it anyway", not as a fair test.
