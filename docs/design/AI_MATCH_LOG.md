@@ -374,3 +374,4 @@ they read as "hard's squad machinery carries it anyway", not as a fair test.
   orders vs the genericbot stack's 210.
 - Remaining unset fields swept module-by-module; the benign 0/null defaults
   and the real gaps are filed in `docs/HANDOFF.md` (2026-09-28 EMBER block).
+| ca2b-ctrl/ca2b-cand | hard vs classic (td_gdi mirror) | F1 base + CA-2b BehaviourEnabled off/on | running | 8 matches/arm, both orientations, CAMEO_BOT_DEBUG=1; F1 validated: squads=2 by WT9k (was 0-for-74k pre-F1); candidate serving stand-off/commit/retreat orders; flag: remembered defence v=0 projection |

@@ -4135,6 +4135,10 @@ Player:
 		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
 		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
 		BehaviourEnabled: false
+		# CA-2c (§12.6 rule 5): retreat verdicts write a failed-siege memory into
+		# the region and later evaluations read the wall as heavier. Own A/B
+		# variable -- keep false while the CA-2b gate is measured.
+		SiegeMemoryEnabled: false
 
 World:
 	BeaconTracker:

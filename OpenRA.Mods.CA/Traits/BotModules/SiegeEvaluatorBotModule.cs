@@ -43,6 +43,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-2b: feed the verdict back to assault squads through IBotSiegeAdvisor (stand-off / retreat). False = telemetry only.")]
 		public readonly bool BehaviourEnabled = false;
 
+		[Desc("CA-2c (§12.6 rule 5): a retreat verdict writes a failed-siege memory into the target",
+			"region and remembered failures inflate the obstacle value on later evaluations,",
+			"so the next plan avoids the wall that beat it. False = verdicts compute against",
+			"raw memory only (control-arm identical).")]
+		public readonly bool SiegeMemoryEnabled = false;
+
 		public override object Create(ActorInitializer init) => new SiegeEvaluatorBotModule(init.Self, this);
 	}
 
@@ -53,7 +59,9 @@ namespace OpenRA.Mods.CA.Traits
 		SquadManagerBotModuleCA[] squadManagers;
 		IBotRegionThreatProvider[] threatProviders;
 		IBotRememberedDefenceProvider[] defenceProviders;
+		IBotSiegeFailureMemory[] failureMemory;
 		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff)> verdicts = new();
+		readonly Dictionary<SquadCA, SiegeVerdict> lastVerdictBySquad = new();
 		int lastEvaluationTick = -1;
 
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
@@ -78,6 +86,7 @@ namespace OpenRA.Mods.CA.Traits
 					.Where(t => !t.IsTraitDisabled).ToArray();
 			threatProviders ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			defenceProviders ??= player.PlayerActor.TraitsImplementing<IBotRememberedDefenceProvider>().ToArray();
+			failureMemory ??= player.PlayerActor.TraitsImplementing<IBotSiegeFailureMemory>().ToArray();
 			if (squadManagers.Length == 0 || defenceProviders.Length == 0)
 				return;
 
@@ -112,7 +121,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				var rememberedThreat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(targetCell));
 				var defenceValue = covering.Sum(d => d.Value);
-				var obstacleValue = defenceValue + rememberedThreat;
+
+				// CA-2c: regions that already beat a siege read heavier — the
+				// next plan avoids the wall (§12.6 rule 5, "the next plan avoids it").
+				var siegeMem = 100;
+				if (Info.SiegeMemoryEnabled && failureMemory.Length > 0)
+					siegeMem = failureMemory.Sum(p => p.FailedSiegeWeightPercentAt(targetCell, world.WorldTick));
+				var obstacleValue = (defenceValue + rememberedThreat) * siegeMem / 100;
 
 				// §12.6 rule order: hold at stand-off -> artillery works the defences ->
 				// commit on cleared area or overwhelming effective value -> retreat on loss.
@@ -164,6 +179,14 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						verdict = "retreat(predicted-loss)";
 						verdictKind = SiegeVerdict.Retreat;
+
+						// The failed siege writes the loss into the wall's region
+						// memory — once per retreat transition, not per pass spent
+						// pinned (a standing-off squad does not stack the count).
+						if (Info.SiegeMemoryEnabled &&
+							(!lastVerdictBySquad.TryGetValue(squad, out var prev) || prev != SiegeVerdict.Retreat))
+							foreach (var p in failureMemory)
+								p.RecordFailedSiege(nearest.Enemy, nearest.Cell, world.WorldTick);
 					}
 					else
 					{
@@ -173,16 +196,22 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				verdicts[squad] = (verdictKind, standOffCell);
+				lastVerdictBySquad[squad] = verdictKind;
 
 				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
 					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
 				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
 				// which the match harness does not set — the FransBotLog pattern.
-				Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} {2} squad v={3} units={4} at {5} -> {6}: defences={7} v={8} maxRange={9} threat={10} verdict={11} artillery={12}",
+				Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} {2} squad v={3} units={4} at {5} -> {6}: defences={7} v={8} maxRange={9} threat={10} verdict={11} artillery={12} siegeMem={13}",
 					world.WorldTick, player.ClientIndex, squad.Type, squadValue, squad.Units.Count, squadCell, targetCell,
 					covering.Length, defenceValue, standOffCells, rememberedThreat, verdict,
-					artilleryAttached ? "attached" : "none"));
+					artilleryAttached ? "attached" : "none", siegeMem));
 			}
+
+			// Drop transition entries for squads that left evaluation (dissolved
+			// or below value floor) — the dict must not grow with squad churn.
+			foreach (var stale in lastVerdictBySquad.Keys.Where(k => !verdicts.ContainsKey(k)).ToArray())
+				lastVerdictBySquad.Remove(stale);
 
 			// Heartbeat: distinguishes "module silent" from "no assault squads
 			// qualified" — a whole batch of silence means formation starves.

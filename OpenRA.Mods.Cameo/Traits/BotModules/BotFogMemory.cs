@@ -34,6 +34,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int EconomyValue;
 			public int LastSeenTick;
 			public bool EverSeen;
+
+			// CA-2c (§12.6 rule 5): sieges that failed against this region.
+			// Stamped per publish from MasterAiBotModule's durable store; the
+			// snapshot is rebuilt every pass so the count itself lives there.
+			public int FailedSiegeCount;
+			public int LastFailedSiegeTick;
 		}
 
 		public readonly int CellSize;

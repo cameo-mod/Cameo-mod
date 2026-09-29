@@ -14684,3 +14684,96 @@ never arms the module. Fog-honest, no conditions, self-adapting.
 - Atomicity confirmed: all consumers resolve IBotRequestUnitProduction via
   TraitsImplementing().ToArray() — both builders enabled = double production.
   The flip must be one commit, all four/five pairs together.
+
+## 2026-09-29 (cont.2) — F1 committed + CA-2b A/B launched
+
+- nw-hard6 FINAL: hard 2-1 decided + m4 invalid (external kill 35s). ab_summary:
+  hard 66% WR, mean 53529 ticks; both wins from spawn 11,45 (spawn confound noted).
+- F1 committed 22a74c6c7 (gate: menu 56.5s, 0 exceptions). Bin rebuilt all-3 @10:43.
+- dawn-ca2b-cand re-pointed to 22a74c6c7 + BehaviourEnabled:true (uncommitted);
+  full bin rebuild @10:50 — both arms share F1 + post-#631 base, single variable.
+- A/B LAUNCHED detached ~10:51: control=C:/tmp/ca2b-ctrl (BehaviourEnabled:false),
+  candidate=C:/tmp/ca2b-cand (true). Each: hard vs classic, td_gdi, A Nuclear
+  Winter, repeats 8 + swap-bots (4/4 orientation split), stall 400,
+  CAMEO_BOT_DEBUG=1 for rich squad telemetry on both arms.
+
+## 2026-09-29 (cont.3) — W3 swap staged in dawn-w3 worktree
+
+dawn-ai's ai.yaml is FROZEN while ca2b-ctrl runs (matches live-load yaml per
+match). W3 applied in detached worktree C:/tmp/dawn-w3 @22a74c6c7:
+
+- 4 CA flips verified at right nodes: HarvesterBotModuleCA:3291,
+  McvExpansionManagerBotModule:3321, BaseBuilderBotModuleCA@generic:3812,
+  UnitBuilderBotModuleCA@generic:3985 -> `classicbot || (genericbot && !hardbot)`
+- 5 Frans flips: FransBaseBuilder/FransMcvExpansion/FransUnitBuilder/
+  FransHarvester/FransSupplyTruck -> `enable-fransbot || (genericbot && hardbot)`
+- Uncommitted; candidate BehaviourEnabled stays OFF until the CA-2b verdict
+  decides the base (W3 measures economy swap on the post-verdict stack).
+- Needs engine copy + boot-gate before its own batch; box order: ca3 pair ->
+  ca2b pair -> w3.
+
+## 2026-09-29 (cont.4) — staged source items (build post-batch, bin frozen)
+
+- BotSituation.RememberedDefences: Value fallback to ruleset ValuedInfo.Cost
+  when the frozen actor reports 0 (map-placed/no-cost defs). Fog-honest —
+  type was observed. Fixes `defences=N v=0` telemetry artifact; provider-side
+  infra (lands on BOTH arms of any later A/B, not the CA-2b variable).
+- CA-2c seam surveyed (§12.6 item 6, failed-siege write-back):
+  RegionMemory.Region gains FailedSiegeCount/LastFailedSiegeTick; evaluator
+  increments when a committed Rush squad dissolves with heavy losses inside a
+  defended region; SelectMission/scoring reads it as avoidance penalty with
+  time decay. Deferred until CA-2b verdict is in.
+
+## 2026-09-29 (cont.5) — maximum gamespeed ruling (43696ac6d)
+
+Maintainer: use `maximum` (mod.yaml GameSpeeds: Timestep 1 = highest; insane
+is 10 ms = second-highest). Changed: gate fixture rules.yaml GameSpeed +
+comments, harness cap_ticks *6000 -> *60000 (engine converts minutes via
+timestep), README. Running ca2b pair unaffected (variants already written,
+locked at insane — internally consistent). NEXT candidate batches must
+re-point past 43696ac6d so their harness/rules carry maximum.
+
+## 2026-09-29 (cont.6) — rebased post-#642; speed commit dropped per fleet ruling
+
+EMBER #640 (rules.yaml -> maximum) + #642 (NOVA's depth-bound cap_ticks*6000)
+landed on master BEFORE my 43696ac6d merged anywhere -> dropped it on rebase
+(theirs/ours resolution; zero residual diff on fixture files). NOVA's
+semantic won on merits: cap_ticks is a wall-clock kill bound only; *60000
+would let a stalemated match burn ~25h of shared box vs ~2.6h.
+Running ca2b pair keeps insane (variants pre-written, symmetric, endorsed
+"do not restart" by EMBER). New batches: maximum + 6000 bound.
+F1 is now e18d336c0 on post-#642 master.
+
+## 2026-09-29 (cont.7) — ca2b pair found dead; CA-2c siege memory implemented
+
+ca2b-ctrl + ca2b-cand drivers died with the session restart (logs frozen
+11:52; zero ca2b python processes). Each arm banked exactly one match —
+both lost to classic (m1 each). Insane-era partial data kept as interim.
+
+Opportunity taken: the bin freeze is over, so the next pair launches at
+MAXIMUM on post-#642 master (EMBER #640/#642 carry the flip; my dup commit
+dropped on rebase).
+
+CA-2c (AI_ARCHITECTURE §12.6 rule 5 — "a failed siege writes the loss into
+the region memory so the next plan avoids it"), source-committed here:
+
+- New interface IBotSiegeFailureMemory (CA): RecordFailedSiege(enemy, cell,
+  tick) + FailedSiegeWeightPercentAt(cell, tick) -> percent multiplier.
+- MasterAiBotModule implements it over a durable per-(enemy, regionIndex)
+  store — RegionMemory is rebuilt per publish, so counts live on the
+  module and are stamped onto each snapshot's Region.FailedSiegeCount/
+  LastFailedSiegeTick. Staleness window SiegeFailureMemoryTicks=45000;
+  each fresh failure adds SiegeFailureWeightPercent=25 to the weight.
+- SiegeEvaluatorBotModule: new SiegeMemoryEnabled flag (default false —
+  own A/B variable, stays off while the CA-2b gate is measured). When on:
+  obstacleValue *= weight/100 (the wall reads heavier -> next plan avoids
+  it), and a retreat VERDICT TRANSITION records one failure keyed to the
+  nearest covering defence's enemy+region (standing-off squads do not
+  stack the count; lastVerdictBySquad tracks transitions, pruned to live
+  squads). Telemetry gained siegeMem=<weight>.
+
+Lesson re-verified the hard way both directions: building dawn-ai while a
+batch runs CAN silently overwrite engine/bin DLLs (the running process
+keeps loaded IL; the NEXT match launch picks the new binaries = #637's
+skew class). This build luckily raced an already-dead batch — zero actual
+contamination, but the rule stands: verify drivers alive before building.
