@@ -66,5 +66,42 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.Hops(20, 12, 4), Is.EqualTo(2));
 			Assert.That(ExpansionPlannerBotModule.Hops(21, 12, 4), Is.EqualTo(3));
 		}
+
+		[Test]
+		public void ARefineryWithinTheClaimRadiusClaimsTheField()
+		{
+			var field = new CPos(16, 36);
+			Assert.That(ExpansionPlannerBotModule.Claimed(field, new[] { new CPos(20, 40) }, 8), Is.True);
+			Assert.That(ExpansionPlannerBotModule.Claimed(field, new[] { new CPos(30, 36) }, 8), Is.False);
+			Assert.That(ExpansionPlannerBotModule.Claimed(field, new CPos[0], 8), Is.False);
+		}
+
+		[Test]
+		public void RefineriesBuiltWithoutClaimingTheFieldParkItAfterTheLimit()
+		{
+			// Start wanting field 6 with 1 refinery owned.
+			var (state, attempts, park) = ExpansionPlannerBotModule.TrackClaim((-1, 0), 6, 1, 0, 2);
+			Assert.That(state, Is.EqualTo((6, 1)));
+			Assert.That(park, Is.False);
+
+			// A refinery appears elsewhere, the field is still unclaimed: one missed attempt.
+			(state, attempts, park) = ExpansionPlannerBotModule.TrackClaim(state, 6, 2, attempts, 2);
+			Assert.That(attempts, Is.EqualTo(1));
+			Assert.That(park, Is.False);
+
+			// A second miss reaches the limit: park the field instead of building refineries forever.
+			(_, attempts, park) = ExpansionPlannerBotModule.TrackClaim(state, 6, 3, attempts, 2);
+			Assert.That(attempts, Is.EqualTo(2));
+			Assert.That(park, Is.True);
+		}
+
+		[Test]
+		public void ANewTargetStartsItsOwnCount()
+		{
+			var (state, attempts, park) = ExpansionPlannerBotModule.TrackClaim((6, 3), 7, 5, 0, 2);
+			Assert.That(state, Is.EqualTo((7, 5)));
+			Assert.That(attempts, Is.EqualTo(0));
+			Assert.That(park, Is.False);
+		}
 	}
 }

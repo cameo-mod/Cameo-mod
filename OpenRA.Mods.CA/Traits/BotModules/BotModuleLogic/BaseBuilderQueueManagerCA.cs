@@ -711,6 +711,21 @@ namespace OpenRA.Mods.CA.Traits
 
 					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
 
+					// Cameo (AI_ARCHITECTURE §12.13, EX-2): the planner's field is in reach and unclaimed, so the refinery goes
+					// there, close enough to count as claiming it. A refinery the MCV module requested keeps priority.
+					var claimer = requestRef == null ? baseBuilder.ExpansionWantsRefinery() : null;
+					if (claimer != null)
+					{
+						var field = claimer.ExpansionTarget.Value;
+						var claim = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, field,
+							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius, claimer.ExpansionTargetClaimRadius);
+						if (claim.Location != null)
+						{
+							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
+							return claim;
+						}
+					}
+
 					// Try and place the refinery near a resource field
 					if (resourceLayer != null)
 					{

@@ -18,5 +18,11 @@ namespace OpenRA.Mods.CA.Traits
 	public interface IBotExpansionTargetProvider
 	{
 		CPos? ExpansionTarget { get; }
+
+		/// <summary>EX-2: the target field is in reach and unclaimed, so a refinery should go there next.</summary>
+		bool WantsRefineryAtExpansionTarget { get; }
+
+		/// <summary>EX-2: how close (cells) to the target a refinery must stand to claim the field.</summary>
+		int ExpansionTargetClaimRadius { get; }
 	}
 }

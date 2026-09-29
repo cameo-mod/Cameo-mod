@@ -1882,6 +1882,20 @@ the A/B reference. Each steered placement writes `EX-1 BaseCrawl <type> at <cell
 to `debug.log`. Live: `hard` put its second power plant at 12,36 toward field 16,36 (tick 1,554).
 Refineries and defences still use their own placement; EX-2 adds refinery-per-field.
 
+**EX-2 as built (2026-09-29).** While the target field is in reach (0 hops) and unclaimed, the planner
+reports `WantsRefineryAtExpansionTarget`. `HasAdequateRefineryCount()` then answers "not adequate"
+even above the fixed optimum (initial + additional + per base), which is ruling (a): every field in
+reach gets a refinery. The refinery case places it with `findPos` toward the field, limited to
+`ClaimRadiusCells` (8), so it lands where it claims the field; an MCV-requested refinery keeps
+priority. "Claimed" is decided from rules: an own actor with the `Refinery` trait within the claim
+radius (or the resource map's own count). **Loop guard:** every refinery gained while the same field
+stays unclaimed is a missed claim, and after `MaxClaimAttempts` (2) the field is parked for
+`ParkTicks` (3000) with a `debug.log` line (`EX-2 parked field …`). So a placement that keeps missing
+cannot become a refinery loop. `DriveRefineries: true` (genericbot) needs `DriveBaseCrawl`, which
+publishes the target. Live: the home field was claimed by tick 1,500, then the target moved to field
+7 at 45,32 (7 hops), and the base built a line of power plants toward it (17,43 → 21,38 → 30,33 by
+tick 4,034).
+
 **Order of work** (each step: telemetry first, then behaviour behind a yaml switch, then the A/B):
 EX-0 compute and log `score_f`, `f*` and the placement choice (no behaviour change); EX-1 replace
 `BaseCrawl`'s random/omniscient target with `f*` and the distance-minimising placement; EX-2

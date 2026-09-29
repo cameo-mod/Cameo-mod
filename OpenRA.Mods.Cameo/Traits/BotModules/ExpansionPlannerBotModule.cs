@@ -47,6 +47,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"False = telemetry only (EX-0).")]
 		public readonly bool DriveBaseCrawl = false;
 
+		[Desc("EX-2: while the target field is in reach and unclaimed, ask the base builder for a refinery there, beyond",
+			"its fixed optimum (every field in reach gets one). Needs DriveBaseCrawl, which publishes the target.")]
+		public readonly bool DriveRefineries = false;
+
+		[Desc("EX-2: an own refinery this close (cells) to a field's resource centre claims it.")]
+		public readonly int ClaimRadiusCells = 8;
+
+		[Desc("EX-2: refineries built while a field stayed unclaimed before the field is parked (a placement that keeps",
+			"missing it must not turn into a refinery loop).")]
+		public readonly int MaxClaimAttempts = 2;
+
+		[Desc("EX-2: ticks a parked field is left out of the candidates.")]
+		public readonly int ParkTicks = 3000;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -89,6 +103,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		BaseBuilderBotModuleCA[] baseBuilders;
 		int ticks;
 		string lastIdleReason;
+		readonly Dictionary<int, int> claimAttempts = new();
+		readonly Dictionary<int, int> parkedUntil = new();
+		(int Field, int Refineries) wanting = (-1, 0);
+		bool wantsRefinery;
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -103,6 +121,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public IReadOnlyList<FieldScore> LastScores { get; private set; } = Array.Empty<FieldScore>();
 
 		CPos? IBotExpansionTargetProvider.ExpansionTarget => IsTraitDisabled || !Info.DriveBaseCrawl ? null : Target?.Center;
+
+		bool IBotExpansionTargetProvider.WantsRefineryAtExpansionTarget => !IsTraitDisabled && Info.DriveRefineries && wantsRefinery;
+
+		int IBotExpansionTargetProvider.ExpansionTargetClaimRadius => Info.ClaimRadiusCells;
+
+		/// <summary>EX-2: a field counts as ours when an own refinery stands within the claim radius of its resource centre.</summary>
+		public static bool Claimed(CPos center, IEnumerable<CPos> refineries, int claimRadiusCells)
+		{
+			return refineries.Any(r => (r - center).LengthSquared <= claimRadiusCells * claimRadiusCells);
+		}
+
+		/// <summary>
+		/// EX-2 loop guard: while we want a refinery at `field`, every refinery we gain without the field turning ours is a
+		/// missed claim. Returns the updated state and whether the field must now be parked.
+		/// </summary>
+		public static ((int Field, int Refineries) Wanting, int Attempts, bool Park) TrackClaim(
+			(int Field, int Refineries) wanting, int field, int refineries, int attempts, int maxAttempts)
+		{
+			if (wanting.Field != field)
+				return ((field, refineries), attempts, false);
+
+			if (refineries > wanting.Refineries)
+				attempts += refineries - wanting.Refineries;
+
+			return ((field, refineries), attempts, attempts >= maxAttempts);
+		}
 
 		protected override void TraitEnabled(Actor self)
 		{
@@ -166,11 +210,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// One pass over OUR OWN actors (always visible to us: fog-honest): the cells of the buildings that extend the
 			// base (GivesBuildableArea; a captured derrick or a garrisoned house does not), and guard units.
 			var buildingCells = new List<CPos>();
+			var refineryCells = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
 			foreach (var a in world.Actors)
 			{
 				if (a.Owner != player || a.IsDead || !a.IsInWorld)
 					continue;
+
+				// The Refinery trait, from rules (the by-name lists are filled by the role rollout, §2.8).
+				if (a.Info.HasTraitInfo<RefineryInfo>())
+					refineryCells.Add(a.Location);
 
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
 					buildingCells.Add(a.Location);
@@ -205,13 +254,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!initialCells.TryGetValue(i, out var value))
 					initialCells[i] = value = field.ResourceCellsCount;
 
-				if (field.PlayerRefineryCount > 0 || value <= 0)
+				var center = field.ResourceCellsCenter;
+				if (field.PlayerRefineryCount > 0 || Claimed(center, refineryCells, Info.ClaimRadiusCells) || value <= 0)
 				{
-					owned += field.PlayerRefineryCount > 0 ? 1 : 0;
+					owned += value > 0 ? 1 : 0;
 					continue;
 				}
 
-				var center = field.ResourceCellsCenter;
+				if (parkedUntil.TryGetValue(i, out var until) && world.WorldTick < until)
+					continue;
+
 				var distance = buildingCells.Min(c => (c - center).Length);
 				var hops = Hops(distance, reach, Info.LinkStepCells);
 				var threat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(center));
@@ -231,6 +283,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Idle($"no free field ({fields} map indices, {initialCells.Count} with resources, {owned} already ours)");
 			else
 				lastIdleReason = null;
+
+			// EX-2: want a refinery at the target only while it is in reach; park a field that keeps being missed.
+			wantsRefinery = Target is FieldScore w && w.Hops == 0;
+			if (wantsRefinery && Target is FieldScore want)
+			{
+				claimAttempts.TryGetValue(want.Index, out var attempts);
+				var (state, now, park) = TrackClaim(wanting, want.Index, refineryCells.Count, attempts, Info.MaxClaimAttempts);
+				wanting = state;
+				claimAttempts[want.Index] = now;
+				if (park)
+				{
+					parkedUntil[want.Index] = world.WorldTick + Info.ParkTicks;
+					claimAttempts.Remove(want.Index);
+					wantsRefinery = false;
+					var parked = $"AI ({player.ClientIndex}): EX-2 parked field {want.Index} at {want.Center} for {Info.ParkTicks} ticks: {now} refinery(ies) built without claiming it, at tick {world.WorldTick}";
+					Log.Write("debug", parked);
+					AIUtils.BotDebug(parked);
+				}
+			}
+			else
+				wanting = (-1, refineryCells.Count);
 
 			// Telemetry (EX-0): a debug.log line whenever the target field changes, so a batch shows where each bot
 			// wanted to expand and why. BotDebug alone only reaches the in-game chat.
