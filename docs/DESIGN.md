@@ -4912,7 +4912,9 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   attack is met, a guerrilla/harass squad that reaches the rally point before the enemy joins the
   defence; one that cannot punishes the enemy base while its army is out. A defence is released
   only when there is **no perceived threat** (no enemy pressure at home, master not
-  Pressured/Emergency) **and no predicted attack** for `DefenceReleaseQuietTicks`; then raiders
+  Pressured/Emergency) **and no predicted attack** for `ProtectionIdleDissolveTicks` (the squad must
+  see **no enemy in range and no valid _or visible_ target** - a target that fled into fog counts as
+  quiet); then raiders
   re-form guerrilla squads, spec ops their harass squads, the rest join the attack pool and its
   missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
