@@ -71,6 +71,10 @@ def load_spec(path: pathlib.Path) -> dict:
     spec.setdefault("repeats", 4)
     spec.setdefault("swap_bots", True)
     spec.setdefault("time_limit", 30)
+    for m in spec["maps"]:
+        resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else REPO_ROOT / m
+        if not resolved.exists():
+            raise ValueError(f"spec map does not exist: {m}")
     return spec
 
 
