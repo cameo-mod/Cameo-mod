@@ -1678,6 +1678,23 @@ The rule, in order of precedence:
 5. **Retreat** before the trade turns (fuzzy flee exists); a failed siege writes the loss into the
    region memory so the next plan avoids it.
 
+*Landed (2026-09-29, flag-gated):* `SiegeEvaluatorBotModule` computes the rules
+2/4/5 verdict each `EvaluationInterval` for every Rush/Guerrilla/Harass squad
+above a value floor — stand-off cell on the `maxRange + StandOffMarginCells`
+line, `BotCombatPredictor.Predict` on the squad's own unit profiles vs the
+remembered defences' observed types for the "effective" check (4b), commit at
+`CommitRatioPercent` — and serves it through `IBotSiegeAdvisor` to the assault
+states when `BehaviourEnabled` is on (the CA-2b A/B variable). Rule 5's
+write-back landed as `IBotSiegeFailureMemory`: a retreat-verdict *transition*
+records one failed siege against the nearest covering defence's
+(owner, region) on `MasterAiBotModule` — `RegionMemory` is a per-publish
+snapshot, so the durable count lives on the module and stamps onto each
+snapshot's `Region.FailedSiegeCount/LastFailedSiegeTick`; with
+`SiegeMemoryEnabled` the remembered failures inflate `obstacleValue`
+(`SiegeFailureWeightPercent` per failure inside `SiegeFailureMemoryTicks`),
+so the next plan reads the wall that beat it as heavier. Both flags default
+false — each is its own isolated A/B variable.
+
 Donor to evaluate first: `FransRiskModel` + `FransGroundDefendForcePreservationGuard`.
 
 ### 12.7 Formation movement (phase CA-4)
