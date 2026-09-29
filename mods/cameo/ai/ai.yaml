@@ -3361,7 +3361,7 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
@@ -3415,7 +3415,7 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
@@ -3469,7 +3469,7 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 4
 		UseCombatPredictor: true
@@ -3523,7 +3523,7 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
@@ -3577,7 +3577,7 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
@@ -3630,7 +3630,7 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
-		DefenceReleaseQuietTicks: 250
+		ProtectionIdleDissolveTicks: 250
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 6
 		UseCombatPredictor: true

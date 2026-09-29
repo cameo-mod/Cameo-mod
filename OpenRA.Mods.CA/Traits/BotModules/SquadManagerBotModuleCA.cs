@@ -117,11 +117,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("DF-3/4: a squad reacts to one predicted attack at most once per this many ticks.")]
 		public readonly int FastSquadReactionCooldownTicks = 1500;
 
-		[Desc("DF release: after this many ticks with no enemy in range, no target, no perceived threat to the base",
-			"(pressure at home, master Pressured/Emergency) and no predicted attack on an own asset, the protection squad is",
-			"released — raiders back to guerrilla squads, spec ops to harass squads, the rest to the attack pool.",
-			"0 = classic behaviour (the squad never releases).")]
-		public readonly int DefenceReleaseQuietTicks = 0;
+		[Desc("Protection release: after this many ticks with no enemy in range, no valid or visible target, no",
+			"perceived threat to the base (pressure at home, master Pressured/Emergency) and no predicted attack on an",
+			"own asset, the protection squad is released — raiders back to guerrilla squads, spec ops to harass",
+			"squads, the rest to the attack pool. 0 = classic behaviour (the squad never releases).")]
+		public readonly int ProtectionIdleDissolveTicks = 0;
 
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
@@ -962,16 +962,16 @@ namespace OpenRA.Mods.CA.Traits
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
 
-		// DF release trigger (maintainer 2026-09-28: "only disband defense squads if there is no more perceived and
-		// predicted threat to the base"): no enemy in range, no target, no PERCEIVED threat (pressure at home,
-		// Pressured/Emergency) and no PREDICTED attack on an own asset — all of it for DefenceReleaseQuietTicks.
-		// ⚠ TEMPORARY until NOVA's protection dissolve lands (one release decision per squad, §10.1): then that
-		// trigger calls ReleaseDefenders and this one is deleted.
+		// Protection release trigger (maintainer 2026-09-28: "only disband defense squads if there is no more
+		// perceived and predicted threat to the base"): the squad's own threat-free test reports quiet (no enemy
+		// in range, no valid or visible target) plus no PERCEIVED threat (pressure at home, Pressured/Emergency)
+		// and no PREDICTED attack on an own asset — all of it for ProtectionIdleDissolveTicks. This is the ONE
+		// release trigger (§10.1); it calls ReleaseDefenders.
 		internal bool ShouldReleaseDefenders(bool quiet)
 		{
 			var threatened = threatPredictionProviders != null && threatPredictionProviders.Any(p =>
 				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0);
-			if (Info.DefenceReleaseQuietTicks <= 0 || !quiet || threatened)
+			if (Info.ProtectionIdleDissolveTicks <= 0 || !quiet || threatened)
 			{
 				protectionQuietSinceTick = -1;
 				return false;
@@ -980,7 +980,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (protectionQuietSinceTick < 0)
 				protectionQuietSinceTick = World.WorldTick;
 
-			return World.WorldTick - protectionQuietSinceTick >= Info.DefenceReleaseQuietTicks;
+			return World.WorldTick - protectionQuietSinceTick >= Info.ProtectionIdleDissolveTicks;
 		}
 
 		/// <summary>DF-3/4: can this squad be at `rally` before the enemy? Travel time at its slowest unit's speed.</summary>

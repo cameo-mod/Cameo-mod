@@ -48,7 +48,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, protectionScanRadius);
 
 			var holding = owner.SquadManager.TryGetProtectionRally(out var rally);
-			if (closestEnemy == null && !owner.IsTargetValid)
+			// "Quiet" also covers a target that is still valid but invisible (fled into fog): the squad cannot
+			// fight it and would otherwise loop Attack→Flee forever with the release timer reset every pass.
+			if (closestEnemy == null && (!owner.IsTargetValid || !owner.IsTargetVisible))
 			{
 				// DF-2: a predicted attack is on its way — wait at the rally point instead of going home.
 				if (holding)
