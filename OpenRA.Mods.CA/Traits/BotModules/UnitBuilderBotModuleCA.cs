@@ -533,7 +533,11 @@ namespace OpenRA.Mods.CA.Traits
 				if (options.Count == 0)
 					continue;
 
-				return options.Random(world.LocalRandom);
+				// A multi-role unit counts toward its primary role only, so prefer
+				// members that actually relieve this deficit (e.g. a dual-role Orca
+				// fields as fighter, not the gunship share it also belongs to).
+				var relieving = options.Where(b => PrimaryRoleOf(b.Name) == role.Role).ToList();
+				return (relieving.Count > 0 ? relieving : options).Random(world.LocalRandom);
 			}
 
 			return null;
