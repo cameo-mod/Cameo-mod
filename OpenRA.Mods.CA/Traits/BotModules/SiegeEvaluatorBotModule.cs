@@ -70,11 +70,12 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			lastEvaluationTick = world.WorldTick;
 
-			// Personality-named squad managers (@rush/@turtle/…): TraitOrDefault
-			// throws on the multi-instance set — collect enabled instances and
-			// evaluate whichever personality's squads are live.
-			squadManagers ??= player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
-				.Where(t => !t.IsTraitDisabled).ToArray();
+			// Personality-named squad managers (@rush/@turtle/…) enable only after
+			// the personality latch and re-latch on switch — never cache an empty
+			// or stale set (the first pass predates the latch).
+			if (squadManagers == null || squadManagers.Length == 0 || squadManagers.Any(t => t.IsTraitDisabled))
+				squadManagers = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+					.Where(t => !t.IsTraitDisabled).ToArray();
 			threatProviders ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			defenceProviders ??= player.PlayerActor.TraitsImplementing<IBotRememberedDefenceProvider>().ToArray();
 			if (squadManagers.Length == 0 || defenceProviders.Length == 0)
