@@ -513,7 +513,9 @@ adds ~600 ids. The seven `SquadManagerBotModuleCA` copies hold ~4,270 of the 5,7
 `BigAirThreats` 284, `AirUnitsTypes` 222, `NavalUnitsTypes` 215, `StaticAntiAirTypes` 177. A role
 that targets a SquadManager field drains all seven copies at once, so the squad lists come first;
 the base-builder lists (`PowerTypes` 33, `BarracksTypes` 30, `ProductionTypes` 88) are worth far
-less. A `--max` ratchet in `run_all.sh` follows the next role that lowers the count.
+less. **Ratchet since 2026-09-29:** `tools/audit/audit_central_ids.py` (in `run_all.sh`) fails when
+the count rises above its `CEILING` (4,289 after the guerrilla role); lower it in the commit that
+lowers the count, never raise it.
 
 ### 2.8a The guerrilla role: generated onto the actors, because the band is per faction
 
@@ -546,10 +548,155 @@ Two traps the generator handles, both caught while building it:
   such a child (10 today), so `--check` also catches a new child of a guerrilla.
 * **A child `Roles:` replaces the parent's.** A new block repeats every role the actor keeps.
 
-**Not applied yet.** Tagging is inert: `guerrilla` has no `Targets` entry. Applying it
-(`guerrilla: SquadManagerBotModuleCA.GuerrillaTypes` + `Apply`, and the seven 254-id lists
-emptied) removes **1,776 central ids** and changes behaviour (254 raiders → 154, the 51 aircraft
-leave the ground guerrilla squad), so it lands only after a Nuclear Winter A/B (§12.10 gate).
+**Applied (branch `claude/role_guerrilla_apply`, lands after its Nuclear Winter A/B):** the
+role targets the **six personality instances only**, `SquadManagerBotModuleCA@rush.GuerrillaTypes`
+… `@guerrilla.GuerrillaTypes`. `Targets` gained the `TraitType@instance.Field` form for this, so
+`@classic`, the A/B reference, keeps its written 254-id list and does not move. Their six written
+lists are deleted: **5,825 → 4,289 central ids**. Behaviour changes: 254 raiders → 154, and the 51
+aircraft leave the ground guerrilla squad. `bot-roles.log` shows `154 members, 0 written; ADDED 154`
+on each of the six and no `@classic` line.
+
+### 2.8b Generalising the whole file: tags on templates, numbers per building type (ruled 2026-09-29)
+
+**Maintainer question:** can `ai.yaml` stop listing units and buildings everywhere, and instead fill
+itself at runtime from tags on the templates, so that each faction's folder is complete on its own?
+Yes. The file splits into four layers, and each one gets the same answer: the C# derives the value
+at rules load from the actors that are loaded, and a pack writes only a deliberate exception.
+
+1. **Lists** (§2.8, built): roles derived from traits or declared on templates and actors. A role
+   fills every personality instance at once. That matters because MiniYaml has no inheritance for
+   a trait node inside `Player`, so yaml alone cannot share one list between personalities.
+2. **Per-building numbers** (new). Measured over the 34 packs' ~940 rows, by building type derived
+   from traits:
+
+   | field | uniform by type |
+   |---|---|
+   | `BuildingIntervals` | factory, refinery, barracks **100 %** (1500) |
+   | `BuildingLimits` | refinery **100 %** (10), radar **100 %** (1), repair **100 %** (1); factory and barracks 77 % (10) |
+   | `BuildingFractions` | radar and repair **100 %** (1), superweapon 83 % (1), refinery 82 % (15), barracks 74 % (15) |
+   | `BuildingDelays` | repair **100 %** (4500), radar 86 % (3000) |
+
+   **Ruled: defaults per building type, exceptions kept.** One line per type in the central file
+   (e.g. `refinery: Fraction 15, Limit 10, Interval 1500`) fills every loaded building of that
+   type. A pack row that equals its type default is deleted. A row that differs stays in its pack
+   as an explicit override, and the list of overrides goes to the maintainer for review.
+   ⚠ **Buildings with no row at all DO change** (and they need the A/B): the bot never plans
+   them today. Measured: Scrin's `scrin_extractor`, `scrin_warp_gate` and `scrin_portal`
+   (refinery, vehicle factory, barracks); Outpost 2's smelters, vehicle factories,
+   consumer/arachnid factories, garages and spaceports; 8 naval yards (the base builder may place
+   those through its water logic instead, so check that first).
+   **Which type a building is: tag the templates** (the maintainer's suggestion), not trait
+   heuristics, which mislabel e.g. `EDEN_RESIDENCE` as radar. Template coverage of producible
+   buildings: `^RepairFacility` 18/18, `^IsWeaponFactory` 35/38, `^IsShipyard` 17/18, `^Refinery`
+   33/34, `^IsAircraftFactory` 28/31, `^RadarBuilding` 18/20, `^PowerPlant` 30/34. There is **no
+   barracks template** (0/35: a new `^IsBarracks` is needed), and `^Superweapon` is unreliable
+   (14/35, and 20 non-superweapons inherit it), so that type stays trait-derived.
+3. **Unit production weights** (`UnitsToBuild`, 1,421 rows; 67 % of them weight 1). **Ruled: derive
+   them from stats, after CA-3.** The personality sets a role mix (§12.5); a unit's weight follows
+   from its derived role and Versus profile. The hand rows stay until the derived mix wins an A/B.
+   CA-3 is NOVA's; the roles come from this lane.
+4. **Per-unit squad settings.** `AirSquadTargetTypes` is written 5 times in 17 packs, identically
+   (32 aircraft, 0 differences). **The `@guerrilla` personality never got the rows**, so its air
+   squads lack the setting for every one of them; `@classic` carries its own 28 rows in the central
+   file. The value (Ground / Aircraft / Naval) follows from each aircraft's weapons, so it can be
+   derived, which fixes the gap and removes the copies.
+
+The end state for ContentPacks: a pack holds its actors, and their tags come from the templates; an
+unloaded pack contributes nothing, and no faction needs its own `ai.yaml`.
+
+### 2.9 The empty `ai.yaml`: the plan (maintainer goal 2026-09-29) — binding goal
+
+**Goal.** The central `mods/cameo/ai/ai.yaml` keeps only module wiring, tuning numbers and
+*type* tables, with **zero actor ids**. At rules load the bot fills every list and every
+per-actor table from tags on the templates and actors that are actually loaded. A ContentPack's own
+`ai.yaml` carries only that faction's genuine exceptions. The bot keeps **today's behaviour**,
+except for deliberate, listed fixes (Outpost 2 and Scrin wiring, the guerrilla band). Unit production
+learns across matches instead of using fixed numbers. **Standing rule:** never add an actor id to the
+central file to fix something; add a role, a tag or a type row (TASK_INDEX already says so).
+
+**Why the C# must do it.** Packs load first and the central file last, so a pack cannot append to a
+central list or override a central scalar. MiniYaml also cannot share a trait node between the
+personality blocks. §2.8 therefore fills the fields at rules load, the `ScaledBullet` derive-at-load
+idiom: identical on every client, and sync-safe.
+
+**The layers**
+
+| layer | today | target |
+|---|---|---|
+| lists (harvester, guerrilla, AA, ships, …) | ids × 7 personality copies | roles from traits/templates, one role set fills all personalities (`BotRoleSets`, §2.8/§2.8a); `@instance` targets keep the A/B reference apart |
+| per-building numbers (fractions, limits, delays, intervals) | ~940 pack rows | one row per **building type × game family**; pack rows only for real exceptions (§2.8b) |
+| unit production weights (`UnitsToBuild`) | 1,421 static pack rows | derived and **learned** (below) |
+| per-unit squad settings (`AirSquadTargetTypes`, …) | 5 copies per pack, missing for `@guerrilla` | derived from the unit's weapons |
+
+**Building type.** A building's type is declared by a `BotRoles` tag on its template:
+`^Refinery`, `^IsWeaponFactory`, `^IsAircraftFactory`, `^IsShipyard`, `^RadarBuilding`,
+`^RepairFacility`, `^PowerPlant`, and a new `^IsBarracks` (none exists: 0/35). Without a template
+tag, the type is derived from traits, and a building with several roles takes the **first** of
+conyard > epic > airfield > navalyard > factory > barracks > refinery > power > radar > repair.
+Measured: 82 producible buildings carry several roles, and the precedence settles almost all of
+them. Every C&C yard is also power and radar → conyard; helipads, airfields and naval yards also
+repair or rearm → their production role; the RA2 Air Force Command HQ (airfield + radar +
+repair) → **airfield** (maintainer's example). **Exceptions ruled 2026-09-29:**
+* StarCraft/Warcraft main halls (Nexus, Command Center, Hatchery, Town Hall, Great Hall) →
+  **conyard only**, kept out of the refinery lists as today.
+* WC2 Gnomish Inventor, Goblin Alchemist, Zerg Infested Command Center → **factory**.
+* `scrin_warp_chasm` → its own **epic** type: it produces `ScrinAdvancedVehicle`,
+  `ScrinWarpAircraft` and `ScrinCapitalAircraft` (the Hexapod). **One per player is a rule of the
+  actor, not of the bot** (maintainer 2026-09-29): it had no build limit at all, and #636 gives it
+  `Buildable.BuildLimit: 1`. The epic type's bot row therefore needs no limit of its own. Scrin's
+  vehicle factory is the Warp Gate; its airfield is the Gravity Stabilizer.
+* `futuretech_launchpad` → **airfield**. It produces only aircraft; an early scan matched the "ship"
+  in `futuretech_harbingergunship`. Queue names must be compared whole, never as substrings.
+
+**Game family.** C&C buildings are uniform (refinery limit 10 in 24/24 packs, radar 1 in 22/24,
+conyard fraction 5 in 20/20). StarCraft and Warcraft II scale differently (supply buildings limit 50
+against C&C's 1, refinery fractions 20–30 against 15), and Outpost 2 has **no rows at all**. The
+type table therefore has one column per family: `cnc` (default), `starcraft`, `warcraft`, `outpost2`.
+The family is a tag on the family's building base template: `^OP2Building` exists; StarCraft and
+Warcraft II share no family template (measured), so each race's building base gets the tag.
+
+**Units: learned, not listed.** A unit's production weight at match start is
+
+    weight(u) = mix[personality][role(u)] / |loaded units of that faction in role(u)|
+                × prior(own faction, enemy faction, u) × trade(u, this match)
+
+(With several enemies or allies `prior` becomes General × Enemies × Allies, and a team-gap factor
+joins it: §6.4a.)
+
+* `role(u)` comes from §12.4 (frontline, anti-infantry, anti-armour, artillery, AA, air, scout, …).
+* `mix` is one small table per personality, roles × shares, with **no unit ids**. That is how the
+  personalities differ without copying a unit list. It starts calibrated from today's
+  `UnitsToBuild` role shares, so the first derived weights reproduce today's production.
+* `prior` is the cross-match memory ruled in DESIGN §19.2: the committed, offline-fitted
+  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers). **Release
+  builds only read it**, so every player meets the same bot; learning writes only on dev builds
+  and harness training runs, and developers commit the result (DESIGN §19.2, amended 2026-09-29).
+  It is read at match start only (§6.1), keyed by faction, never by player, and 1.0 where nothing
+  is known. ⛔ It is applied inside the host's running bot, never written into rules at load:
+  bots run only on the host (`Player.cs:223`), but rules load on every client.
+* `trade` is the in-match trade ratio per role or type (§12.3), smoothed toward the prior.
+
+Ruled 2026-09-29: the hand `UnitsToBuild` rows stay until the derived weights win a Nuclear Winter
+A/B, after CA-3 (NOVA) supplies the role mix.
+
+**The equivalence gate ("same functionality as now").** The Python resolver cannot see what the C#
+fills at load, so phase P0 adds an engine-side dump: after rules load, every list and table field of
+every bot module on `Player`, one line per field and instance. A diff tool compares two dumps.
+Every phase must diff **empty** against the previous one, except its listed deliberate changes, and
+must also pass the boot gate. A phase that changes behaviour needs the Nuclear Winter A/B.
+
+**Phases**
+
+| # | step | gate |
+|---|---|---|
+| P0 ✅ | **built 2026-09-29:** `BotModuleFieldDump` (opt-in, `CAMEO_DUMP_BOT_MODULES=1`, called at the end of `BotRoleSets` load) + `tools/ai/dump_bot_modules.py` (boots a worktree, isolated support dir, graceful close) + `tools/ai/diff_bot_modules.py` (`--allow` for a phase's declared changes) | dumped twice: 2,168 fields identical; negative control (`guerrilla` out of `Apply`) flags exactly 7 fields |
+| P1 | fix `count_central_ids.py` case handling (ids are lowercased at load, so `eden_*`/`plymouth_*` are live, not dead); delete the truly dead ids (`asianalliance_asian*`, `d2k_*`, `ra1_allies_allied*`, …) | dump diff empty |
+| P2 | building type and family tags on the templates, `^IsBarracks`, the exceptions above | dump diff empty (tags only) |
+| P3 | type × family defaults fill the four building tables; pack rows equal to their default deleted, the others kept as exceptions; Outpost 2 and Scrin gain rows | dump diff = only the no-row buildings; A/B with an Outpost 2 and a Scrin bot |
+| P4 | the remaining ~40 list fields → roles; the personality blocks keep only numbers | dump diff empty |
+| P5 | `AirSquadTargetTypes` and other per-unit settings from weapons | dump diff = only `@guerrilla`'s missing rows |
+| P6 | derived and learned unit weights (after CA-3) | A/B |
+| P7 | the packs' `ai.yaml` keep only exceptions; the central id count reaches 0 | `audit_central_ids` CEILING 0 |
 
 ---
 
@@ -891,6 +1038,127 @@ the user's own sequencing. Training against a moving balance target fits noise.
 Recording and coverage diagnostics help debug the current bots while balance moves. Learned
 weights remain §10.6 phase 7, after the earlier delivery phases; neither this section nor the
 batch-harness proposal authorizes skipping the observe-only and behavior-review gates.
+
+### 6.4 Learning every number between matches (maintainer rulings 2026-09-29)
+
+**Ruled:** every bot number is learnable, and today's values are only the starting point. That
+includes per-faction building timers and limits: identical templates, different play styles.
+
+**The inventory (measured 2026-09-29):**
+* 101 distinct numeric settings in 15 bot modules, 404 values over all instances;
+* 2,612 per-actor numbers (building tables, unit weights);
+* derived factors (combat-predictor strengths, unit priors).
+
+A training match takes ~10 min on an idle machine, so a day gives ~100–150 matches. Tuning
+3,000 numbers one by one on that is hopeless; every number therefore learns through the route that
+fits how its truth can be observed.
+
+| route | numbers | how it learns | data per match |
+|---|---|---|---|
+| **1. measured** | unit effectiveness per (unit, enemy faction) from the arsenal ledger (CA-1/CA-1b); combat-predictor strength per type (fitted to real fight outcomes); the enemy faction's usual composition and first-attack timing | statistics with evidence counts and shrinkage toward the parent level; every match counts, won or lost, both sides | hundreds of units, dozens of fights |
+| **2. tuned** | building fractions, limits, delays and intervals; timers; squad sizes; attack and retreat thresholds; the personality's role mix | experiments: in training, the harness nudges values per match (paired ± steps, SPSA-style), compares scores, and moves toward the better side within bounds | one score per match |
+| **3. chosen** | discrete options: which personality or opening against which enemy faction | a bandit (Thompson sampling) over the options per matchup | one outcome per match |
+
+**Rulings on route 2:**
+* **Granularity:** per own faction, falling back to its game family and then global while
+  evidence is thin. Only the army mix and counter weights also split per enemy faction.
+* **Knobs first, then raw:** about 8 knobs per faction scale their raw numbers together (tempo:
+  delays and intervals; economy greed: refinery and harvester numbers; tech speed; defence share;
+  army mix; aggression: attack and retreat thresholds; …). Once a knob settles, an individual number
+  with strong evidence of its own gets its own learned value.
+* **Score = win plus margin:** win or loss, plus how decisively, measured by army and building value
+  traded over the whole match (the timeline and fight report exist, #617). Win/loss alone is too
+  noisy; the 7–6 coin flip showed it.
+
+**Hierarchy and bounds.** A learned value is a multiplier on its default:
+`value = default × m(global) × m(family) × m(faction) [× m(matchup) for the mix]`. Each multiplier
+shrinks toward 1 in proportion to its evidence, and a training round may move it at most ×0.5–×2.
+Difficulty applies **on top**, so the DESIGN §19.1 equal-step line holds for every learned base.
+Unit and building stats are never learned (that is balance), and nothing learned may cheat (§19.2).
+
+**Where learned values live and apply.**
+* The committed files live in `mods/cameo/ai/learned/`, one per route. Each entry carries its
+  evidence count and the build it was trained on.
+* Release builds only read them; only dev builds and harness training runs write (DESIGN §19.2).
+* The modules read their numbers straight from the shared rules: 415 `Info.*` reads in
+  BaseBuilder, its queue manager, SquadManager and UnitBuilder. One `Info` object serves every bot
+  using that module, so a learned per-faction value cannot live there. **Mechanism:** when the
+  host's bot is enabled, it gives each of its modules a private **copy** of that module's `Info`
+  with the learned values applied. That is zero edits at the 415 read sites and no CA-sync conflict.
+  It stays host-only, because the modules only run in the host's bot (`Player.cs:223`). Never apply
+  learned values to rules at load: rules load on every client.
+
+**When balance moves (maintainer question 2026-09-29).** The reference mapping and the balance
+pipeline have not written their targets yet, so costs, HP, damage and Versus values will change a
+lot, and a value learned now describes a game that will not exist ("training against a moving
+balance target fits noise", Stage E above). The design therefore:
+* **Fingerprints every learned entry** with the stats it was trained on: the unit's cost, HP,
+  speed, armour and weapons, and a faction fingerprint for faction knobs. At match start, an entry
+  whose fingerprint changed is discounted toward its default **per unit**, not globally, so a small
+  patch invalidates only what it touched.
+* **Route 1 re-learns fast:** effectiveness is value traded per value lost, so a cost change alone is
+  largely absorbed, and every match brings hundreds of new points.
+* **Knobs survive better than raw numbers:** they are multipliers on defaults that come from the
+  templates. They are still discounted when their faction's fingerprint moves a lot.
+* **Sequencing:** L0–L2 (machinery, no behaviour change) are built now. Serious training (L3+)
+  starts after the balance freeze and is repeated once per release, whose learned files ship with it.
+* **Guard:** an audit reports how much of the committed learned evidence the current rules have
+  invalidated, so a big rebalance shows up as "retrain before release".
+
+### 6.4a Combining the weights: general × enemies × allies (maintainer rulings 2026-09-29)
+
+This generalises the single-enemy `prior(own faction, enemy faction, u)` of §2.9's production
+weight to any number of enemies and allies; `mix` and the role split of §2.9 are unchanged.
+Every learned value is a **multiplier that defaults to 1**, and the layers combine in log space,
+where a geometric mean is a weighted average:
+
+    prior(u)   = General(own faction, u) × Enemies(u) × Allies(u)
+    weight(u)  = mix[personality][role(u)] / |role(u)| × prior(u) × Gap(u) × trade(u)      (§2.9)
+    Enemies(u) = exp( Σ_e α_e · ln M(u | e) )        Σ α_e = 1
+    Allies(u)  = exp( λ(n_allies) · Σ_a β_a · ln S(u | a) )        Σ β_a = 1
+
+* **General**: one file per own faction, trained against everyone and **always active**. When a
+  matchup has little data its `M` shrinks to 1, so the bot falls back to General automatically.
+* **Enemies**: the per-enemy-faction counter multipliers `M(u | e)`, combined as a **weighted
+  geometric mean**, so no single matchup can dominate a multi-faction game. **The share α of the
+  main (hate) target combines all three proposals** (maintainer: "a combination of all of them"):
+  1. a **floor** that keeps it dominant: `α_main ≥ max(1/2, 2/(n+1))`. That is 100 % with one
+     enemy, the double vote at 67 % with two, and 50 % from three enemies up, so it is never
+     diluted in a big game;
+  2. the **rest**, `1 − α_main`, is split among the other enemies by
+     `(1 − γ) · equal share + γ · threat share`. Threat is fog-honest: remembered enemy army
+     value near our assets. A quiet enemy still counts, and the one attacking us counts more;
+  3. **γ and the floor are learnable** (route 2, §6.4), so training finds how reactive to be.
+* **Allies** (ruled: **learned + fill gaps**): the trained synergy multipliers `S(u | a)` per
+  (own faction, ally faction) come from team-game training; that needs a 2v2 variant of the duel harness, built with
+  **TC** (Team Commander, ROADMAP; `AI_DEEP_RESEARCH.md` §9).
+  `β` splits equally among allies, and `λ` grows with the number of allies (the team's say in
+  what we build grows with the team). With no allies `Allies(u) = 1`.
+* **Gap** (the "fill gaps" half of the same ruling) is in-match, not learned from past games: a
+  role (§12.4) the whole team, us included, lacks gets a boost, bounded like every other factor.
+  Allied armies are visible, so this is not a cheat. With no allies it is 1.
+* **trade**: the live in-match trade ratio per role or type (§12.3), as in §2.9.
+
+Every factor is trained separately (routes 1–3, §6.4), bounded, fingerprinted against balance
+changes, and applied only inside the host's bot. With no data at all the bot plays today's defaults.
+
+**The training loop (dev only).**
+1. **League batch:** past masters, `classic` and the exploiters (LG), several tournament maps,
+   both spawns.
+2. **Fitters:** route 1 is updated from the logs; route 2 is updated from the paired perturbations.
+3. **A/B:** the candidate learned files are tested against the current files.
+4. **Commit:** a PR with the evidence, if the candidate does not lose.
+
+**Phases** (after the §2.9 groundwork; the §10.6 gates still apply):
+
+| # | step | gate |
+|---|---|---|
+| L0 | the per-bot `Info` copy + a learned-file reader; empty files change nothing | the P0 dump is identical; a two-client desync test; boot |
+| L1 | route 1: unit priors (CA-1b), combat-predictor strengths, enemy models | A/B |
+| L2 | the score in the harness + the knob layer (defaults = 1) | the dump is identical with all knobs at 1 |
+| L3 | route 2 training: paired perturbations per faction knob | A/B per committed file |
+| L4 | route 3: personality and opening bandit per matchup | A/B |
+| L5 | raw numbers with strong evidence leave their knob | A/B |
 
 ---
 

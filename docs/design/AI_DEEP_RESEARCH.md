@@ -303,8 +303,8 @@ works this way. It never ships in the game.
 1. **DI Director: yes, no cheats, and part of the A/B.** Pacing and aggression only; it is **on**
    in the Nuclear Winter A/B (this replaces §7's "off in the A/B" proposal).
 2. **OM: one profile per enemy faction**, remembering what was effective against it and
-   countering it more automatically as games accumulate — committed offline priors plus a
-   host-local profile that grows with play. No per-human-player data.
+   countering it more automatically as games accumulate — committed offline priors, frozen in
+   release and trained on dev builds only (amended 2026-09-29, DESIGN §19.2). No per-human-player data.
 3. **LA offline LLM analyst: yes**, in `tools/` only, human-reviewed, A/B-verified.
 
 ---

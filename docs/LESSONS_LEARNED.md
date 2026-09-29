@@ -195,6 +195,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Process, tooling and platform**
 
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
+- [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
+- [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
 - [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
@@ -248,6 +250,26 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
 
 ---
+
+## A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)
+
+Two commits (the DESIGN §19.2 learning ruling and AI_ARCHITECTURE §6.4) were pushed to a PR branch
+**19 minutes after that PR had been merged** into its stacked base. `git push` succeeds, GitHub shows
+nothing, and the work silently never lands. It was caught only by
+`git log <base>..<branch>` and rescued as a follow-up PR (#638 for #635).
+Rule: before pushing more commits to an open PR's branch, run
+`gh pr view <n> -R cameo-mod/Cameo-mod --json state`; a stacked PR can be merged by someone else at any
+time. After a merge, open a new PR from the same branch.
+
+## A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)
+
+.NET randomises string hashing per process, so a `HashSet<string>` (and a `FrozenSet`) enumerates
+in a **different order on every boot of identical rules**. `FieldSaver.FormatValue` prints sets in
+enumeration order, so two dumps of the same ruleset differ textually. `BotModuleFieldDump`
+(AI_ARCHITECTURE §2.9 P0) sorts sets and dictionaries itself and keeps real lists in order. It is
+proven by dumping twice (2,168 fields, identical) and by a negative control: removing `guerrilla` from
+`Apply` shows exactly the six personalities' `GuerrillaTypes` (−154 each) and nothing else.
+Any tool that compares engine-side collections needs the same sort.
 
 ## ⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)
 
