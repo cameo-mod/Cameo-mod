@@ -147,6 +147,56 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(m["naval"], Is.EquivalentTo(new[] { "boat" }));
 		}
 
+		static Candidate WithFields(string name, string[] traits, Dictionary<string, string[]> fields) =>
+			new(name, traits.ToHashSet(), FrozenSet<string>.Empty, true,
+				fields.ToDictionary(kv => kv.Key, kv => (IReadOnlySet<string>)kv.Value.ToHashSet()));
+
+		// CA-5 doctrine split (AI_ARCHITECTURE 12.4): fighter = air-to-air weapon,
+		// gunship = CanHover (loiters) + ground weapon, bomber = non-hovering ground
+		// striker. Unarmed transports derive into none of the three.
+		[Test]
+		public void AirDoctrineRolesSplitByWeaponTargetsAndHover()
+		{
+			const string VT = "Aircraft.CanHover";
+			const string WT = "Weapons.ValidTargets";
+			var actors = new[]
+			{
+				WithFields("fighter_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Air", "Ground"] }),
+				WithFields("gunship_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Ground"] }),
+				WithFields("bomber_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Ground"] }),
+				WithFields("transport_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Ground"] }),
+				WithFields("scout_a", ["Aircraft"], new() { [VT] = ["True"], [WT] = new string[0] }),
+			};
+
+			var has = new Dictionary<string, string[]>
+			{
+				["fighter"] = ["Aircraft", "AttackBase"],
+				["gunship"] = ["Aircraft", "AttackBase"],
+				["bomber"] = ["Aircraft", "AttackBase"],
+			};
+			var hasF = new Dictionary<string, BotRoleSetsInfo.FieldPredicate[]>
+			{
+				["fighter"] = [BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Air|Aircraft")],
+				["gunship"] = [
+					BotRoleSetsInfo.FieldPredicate.Parse("Aircraft.CanHover any True"),
+					BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Ground")],
+				["bomber"] = [BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Ground")],
+			};
+			var notF = new Dictionary<string, BotRoleSetsInfo.FieldPredicate[]>
+			{
+				["gunship"] = [BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Air|Aircraft")],
+				["bomber"] = [
+					BotRoleSetsInfo.FieldPredicate.Parse("Aircraft.CanHover any True"),
+					BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Air|Aircraft")],
+			};
+
+			var m = BotRoleSetsInfo.ResolveMembers(actors, has, None, None, true, hasF, notF);
+
+			Assert.That(m["fighter"], Is.EquivalentTo(new[] { "fighter_a" }));
+			Assert.That(m["gunship"], Is.EquivalentTo(new[] { "gunship_a", "transport_a" }));
+			Assert.That(m["bomber"], Is.EquivalentTo(new[] { "bomber_a" }));
+		}
+
 		[Test]
 		public void UnionKeepsTheFieldsOwnSetType()
 		{

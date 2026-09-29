@@ -216,9 +216,20 @@ Player:
 			staticaa: Building, AttackBase
 			airunit: Aircraft, AttackBase
 			navalunit: Mobile, AttackBase
+			# CA-5 doctrine split (AI_ARCHITECTURE 12.4): fighters carry an air-to-air
+			# weapon, gunships can loiter (CanHover) and strike ground only, bombers
+			# are the ground-only strikers that must egress. Report-only for now;
+			# air transports stay unroled. Measured on the resolved ruleset:
+			# fighter 106 / gunship 8 / bomber 8, disjoint, 28 unroled air.
+			fighter: Aircraft, AttackBase
+			gunship: Aircraft, AttackBase
+			bomber: Aircraft, AttackBase
 		DeriveHasField:
 			staticaa: Weapons.ValidTargets any Air
 			navalunit: Mobile.Locomotor any naval
+			fighter: Weapons.ValidTargets any Air|Aircraft
+			gunship: Aircraft.CanHover any True, Weapons.ValidTargets any Ground
+			bomber: Weapons.ValidTargets any Ground
 		DeriveNot:
 			refinery: BaseBuilding
 			mcv: Building
@@ -226,6 +237,8 @@ Player:
 		# builder picks a refinery at random among RefineryTypes. Land-and-water ones stay.
 		DeriveNotField:
 			refinery: Building.TerrainTypes only Water
+			gunship: Weapons.ValidTargets any Air|Aircraft
+			bomber: Aircraft.CanHover any True, Weapons.ValidTargets any Air|Aircraft
 		Targets:
 			harvester: HarvesterBotModuleCA.HarvesterTypes, ResourceMapBotModule.HarvesterTypes, SquadManagerBotModuleCA.ExcludeFromSquadsTypes
 			refinery: HarvesterBotModuleCA.RefineryTypes, BaseBuilderBotModuleCA.RefineryTypes, ResourceMapBotModule.RefineryTypes
@@ -234,6 +247,9 @@ Player:
 			staticaa: SquadManagerBotModuleCA.StaticAntiAirTypes
 			airunit: SquadManagerBotModuleCA.AirUnitsTypes
 			navalunit: SquadManagerBotModuleCA.NavalUnitsTypes
+			fighter: SquadManagerBotModuleCA.AirUnitsTypes
+			gunship: SquadManagerBotModuleCA.AirUnitsTypes
+			bomber: SquadManagerBotModuleCA.AirUnitsTypes
 		# A role is applied after its additions are reviewed and a match with an affected faction (AI_ARCHITECTURE.md 2.8).
 		# refinery + conyard go together: a bot with neither listed keeps unit production paused forever.
 		Apply: harvester, refinery, conyard
