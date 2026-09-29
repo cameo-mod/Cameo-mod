@@ -101,6 +101,7 @@ def cell_summary(cell_dir: pathlib.Path) -> dict | None:
         "stalled": summary.get("stalled", 0),
         "timed_out": summary.get("timed_out", 0),
         "died": summary.get("died", 0),
+        "norecord": summary.get("norecord", 0),
         "new_exceptions": summary.get("new_exceptions") or [],
     }
 
@@ -123,6 +124,7 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     acc["stalled"] += data["stalled"]
     acc["timed_out"] += data["timed_out"]
     acc["died"] += data["died"]
+    acc["norecord"] += data["norecord"]
     acc["exceptions"] += data["new_exceptions"]
 
     results_path = cell_dir / "batch_results.jsonl"
@@ -163,6 +165,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "stalled": 0,
         "timed_out": 0,
         "died": 0,
+        "norecord": 0,
         "exceptions": [],
         "cells_missing": [],
     }
@@ -198,6 +201,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "stalled": acc["stalled"],
         "timed_out": acc["timed_out"],
         "died": acc["died"],
+        "norecord": acc["norecord"],
         "exceptions": acc["exceptions"],
         "cells_missing": acc["cells_missing"],
     }
@@ -215,7 +219,7 @@ def print_summary(summary: dict) -> None:
               f"(wr {m['winrate']}, wilson95 {m['wilson95']})")
     if summary["cells_missing"]:
         print(f"  MISSING CELLS: {summary['cells_missing']}")
-    bad = {k: summary[k] for k in ("stalled", "timed_out", "died") if summary[k]}
+    bad = {k: summary[k] for k in ("stalled", "timed_out", "died", "norecord") if summary[k]}
     if bad or summary["exceptions"]:
         print(f"  anomalies: {bad or '{}'} exceptions={summary['exceptions'] or 'none'}")
 
