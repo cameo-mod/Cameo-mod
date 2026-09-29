@@ -720,11 +720,18 @@ def main() -> int:
             # the external-kill signature (TerminateProcess → exit 1; the
             # engine itself only ever returns 0 or -1-with-exception). Retry
             # those; a real crash writes exception-*.log and would just fail
-            # the same way again.
-            if not (status.startswith("exit=") and not records and not new_exc and attempt <= args.retries):
+            # the same way again. A clean `ok` exit with no records is the
+            # phantom class: the process ended without a resolved world
+            # (lobby abort under contention, early clean exit) and is not a
+            # datapoint either — retry it the same bounded number of times.
+            # A match that truly ran records both bots at GameOver; zero
+            # appended records means nothing was played to judge.
+            no_data = not records and not new_exc
+            if not ((status.startswith("exit=") or status == "ok") and no_data and attempt <= args.retries):
                 break
-            print(f"    -> {status} in {elapsed}s, no records/exception — external kill? retry {attempt}/{args.retries}",
+            print(f"    -> {status} in {elapsed}s, no records/exception — external kill or phantom abort? retry {attempt}/{args.retries}",
                   flush=True)
+            print(f"    OpenRA output tail:\n{output_tail(output)}", flush=True)
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
