@@ -1,5 +1,41 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-30 — Claude: merge-all completed — the last PRs land on engine `d5d8b2a685`; all branches in sync
+
+`Agent: Claude-Local (Opus 5.5) · integration branch claude/integration_0930b (the #630 precedent) · maintainer: "Merge everything to master! Synchronize all branches … the latest engine update"`
+
+**How it landed.** The fleet worked the same order in parallel: #644 #646 #648 (+EMBER's gunship fix)
+#649 #650 #632 #634 #655 (engine pin) #656 #657 #659 were merged directly. This integration brings the rest:
+#633 (guerrilla role applied; contains #638 and #641), #647 (scout rationing + garrison pricing), #651–#654
+(expansion planner EX-0…EX-3) and #658 (NOVA: Steamroller/Rush lead telemetry). **The maintainer's order
+overrides the §12.10 A/B gate** for #633, #647 and #652–#654: the first A/B on this master is the new baseline.
+
+**Conflicts, resolved by origin:** `ai.yaml` `BotRoleSets` unions all ten roles, with
+`Apply: harvester, refinery, conyard, guerrilla`; artillery, firesupport and the air roles stay report-only.
+`MasterAiBotModule` keeps both #656's `WeakIncludesDefence` and #647's `GarrisonOccupantValue`. #646 had been
+**squashed** on master, so the stacked branches still carried its pre-correction text; master's corrected
+text was kept, plus each PR's own later edits. HANDOFF, LESSONS_LEARNED and TASK_INDEX were unioned; every
+addition from both sides was verified present.
+
+**Fixed while integrating (each was red on its own PR or on master):**
+- `MasterAiBotModuleTest` expects #658's new enemy key `army_value_delta`.
+- The armoured-car non-damage digests are re-pinned after a reviewed resolve diff for #650 (+124–141 derived
+  Versus rows per weapon, 0 removed or changed).
+- §10.2 / `doc_claims` module counts 53 types / 76 instances; master was already red (51/69 documented,
+  52/75 measured after #656).
+- `AI_MODULE_MAP.md` regenerated. It also records that **#656 enabled the Fransbot modules for
+  `genericbot && hardbot`**: a behaviour change for `hard`, merged without an A/B (DAWN's lane).
+
+**Engine:** master pins `d5d8b2a685` (#655 and #654 agree). `origin/cameo-engine` has been fast-forwarded to
+it (104 commits), so the canonical engine branch and the pin agree again. **Every worktree: `make.cmd all`.**
+
+**Verified on the integrated tree:** C# 338/338; 17 audits + `find_empty_warhead` 0 + module map current;
+boot gate (isolated support dir, no exception log); Python compared with master (below); live smoke match.
+
+**Not merged (NOVA's 2026-09-28 reasons still hold):** #180, #245, #85. **Open:** #634's review points (unarmed
+WC2 oil tankers can be drafted into squads; escort stacking) with NOVA; the MCV escort hook proposal
+(NOVA); the Python suite hangs at exit on master (pre-existing); ~200 Python tests already fail on master.
+
 ## 2026-09-29 — Claude: what the maintainer saw in play, measured; the expansion planner EX-0…EX-3; the engine-pin trap
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI, by the maintainer's "split by owner" ruling (scout/garrison + expansion planner); balance continues on #650 · branches below`
