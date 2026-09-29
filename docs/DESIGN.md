@@ -4920,11 +4920,15 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
 * **Opponent memory — one profile per enemy faction.** The bot remembers, per faction it has
   played against, what was effective (which of its own roles/unit types traded well, which
   posture won, what that faction fielded when) and counters that faction more automatically the
-  more games it has played. Two layers: the committed, offline-fitted priors file
-  (`mods/cameo/ai/learned/`, shared by every install) and a host-local profile that keeps growing
-  with the games played on that machine. Keys are factions only — **nothing about individual
-  human players is stored.** Allowed by `AI_ARCHITECTURE.md` §6.1: it steers only unsynced bot
-  reasoning on the host.
+  more games it has played. Keys are factions only — **nothing about individual human players is
+  stored.** **Frozen in release, trained on dev (maintainer 2026-09-29, replacing the host-local
+  profile):** release builds only READ the committed, offline-fitted priors file
+  (`mods/cameo/ai/learned/`), so every player meets the same bot in every copy of a version.
+  Learning WRITES only on dev builds and harness training runs; developers review the new file and
+  commit it, and it ships with the next release. (A per-machine file could not desync a game —
+  bots run only on the host, `Player.cs:223` `IsBot && Game.IsHost`, and act only through orders —
+  but it would make every player's bot drift apart.) Learned values are applied only inside the
+  host's running bot, **never written into rules at load**: rules load on every client.
 * **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
   host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
   claims, human-ally beacons) — the same no-cheat rule as the Director.

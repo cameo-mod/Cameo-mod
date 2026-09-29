@@ -659,9 +659,12 @@ Warcraft II share no family template (measured), so each race's building base ge
   personalities differ without copying a unit list. It starts calibrated from today's
   `UnitsToBuild` role shares, so the first derived weights reproduce today's production.
 * `prior` is the cross-match memory ruled in DESIGN §19.2: the committed, offline-fitted
-  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers), plus a
-  host-local profile that grows with the games played on that machine. It is read at match start
-  only (§6.1), keyed by faction, never by player, and 1.0 where nothing is known.
+  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers). **Release
+  builds only read it**, so every player meets the same bot; learning writes only on dev builds
+  and harness training runs, and developers commit the result (DESIGN §19.2, amended 2026-09-29).
+  It is read at match start only (§6.1), keyed by faction, never by player, and 1.0 where nothing
+  is known. ⛔ It is applied inside the host's running bot, never written into rules at load:
+  bots run only on the host (`Player.cs:223`), but rules load on every client.
 * `trade` is the in-match trade ratio per role or type (§12.3), smoothed toward the prior.
 
 Ruled 2026-09-29: the hand `UnitsToBuild` rows stay until the derived weights win a Nuclear Winter
