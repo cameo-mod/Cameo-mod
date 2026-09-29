@@ -139,6 +139,15 @@ the fog sequencing.
   - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+  - [ ] **S** Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
+    §12.12; measured causes §12.11: `hard` builds ~72 Humvees and ~5 tanks per match, and feeds
+    infantry into 0-value garrisons). **Claude.**
+  - [ ] **L** EX expansion planner (§12.13, DESIGN §19.1b): the field score
+    `value × safety / time-until-it-pays`, distance-minimising placement toward the target field,
+    one refinery per field plus towers, MCV hand-off, and the enemy creep scaled by difficulty ×
+    aggression. Steps EX-0 … EX-4, each A/B-gated. **Claude.**
+  - [ ] **M** Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
+    **Claude**; Steamroller and Rush **NOVA**; Guerrilla map control **DAWN**.
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
   - [~] **M** CP combat predictor (**shipped:** record-only #623; squads engage/retreat with it on the six genericbot personalities, `RetreatRatioPct` 0.1–1.0) — Versus-aware Lanchester strength, engage/retreat hysteresis,

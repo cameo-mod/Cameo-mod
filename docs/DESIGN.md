@@ -4908,6 +4908,42 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
 
+### 19.1b Expansion, garrisons and scouts (maintainer rulings 2026-09-29) — binding
+
+> *"Always expand, always build more harvesters, always build more units, never be idle, always try
+> to pressure and attack, always build towards the enemy and towards the resources. Always occupy all
+> the resource fields."*
+
+* **Every resource field within building reach gets one refinery**, protected by towers.
+* **The base builder never idles**, and every building it places moves the base closer to the next
+  resource field. When nothing else is due, a line of power plants does it. The target field is
+  the one with the best `value × safety / time-until-it-pays` (the formula and its knobs are in
+  `AI_ARCHITECTURE.md` §12.13).
+* **Fog:** where fields are and how rich they start is public map data, like the spawn points.
+  Depletion, enemy refineries and enemy defences count only once seen.
+* **Creeping toward the enemy base** scales with difficulty (§19.1) **and** with the personality's
+  aggressiveness.
+* **A garrisoned building is a defence**, valued by its garrison, never by the house's own cost
+  (civilian houses have none, so the bot treated them as free and fed infantry into them).
+* **Scout replacements are rationed**, so they can never take over a factory (the `hard` bot built
+  ~72 Humvees and ~5 tanks per match). Evidence and design: `AI_ARCHITECTURE.md` §12.11–12.12.
+
+### 19.1c Personality top priorities: a lead over the enemy (maintainer 2026-09-29) — binding
+
+| personality | top priority |
+|---|---|
+| **Expansion** | out-earn the enemy |
+| **Steamroller** | out-produce the enemy |
+| **Guerrilla** | out-scout the enemy and hold more of the map |
+| **Rush** | keep the enemy under pressure: attack as early and as often as possible, destroy their economy |
+| **Turtle** | have more defences than the enemy |
+| **Tech** | tech up faster: start research sooner, have more upgrades |
+
+Each lead is measured against what the bot has **seen** of the enemy (fog-honest), leans that
+personality's budget toward its driver while it trails, and never zeroes the other priorities.
+This extends the personality's effect beyond the squad manager (§19), into the base builder, the
+unit builder and the research queue. Mechanism and owners: `AI_ARCHITECTURE.md` §12.14.
+
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
 
 Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
