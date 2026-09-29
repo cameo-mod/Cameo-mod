@@ -339,6 +339,9 @@ namespace OpenRA.Mods.CA.Traits
 		readonly List<Actor> activeUnits = new();
 
 		public List<SquadCA> Squads = new();
+
+		// §12.14 PL: attacks-launched telemetry (record-only).
+		public int OffensiveSquadsLaunched;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> constructionYardBuildings;
 
 		IBot bot;
@@ -1094,6 +1097,9 @@ namespace OpenRA.Mods.CA.Traits
 			var ret = new SquadCA(bot, this, type, target);
 			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
+			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
+				or SquadCAType.Air or SquadCAType.Naval)
+				OffensiveSquadsLaunched++;
 			return ret;
 		}
 

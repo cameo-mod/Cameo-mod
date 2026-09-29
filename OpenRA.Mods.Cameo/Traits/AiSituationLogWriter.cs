@@ -244,6 +244,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendRoleCosts(builder, "away_losses_by_role", situation.AwayLossesByRole);
 			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_pct", situation.CombatRatioPct);
 			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_defended_pct", situation.CombatRatioDefendedPct);
+
+			// §12.14 PL telemetry (record-only).
+			AiMatchLogWriter.AppendNumber(builder, "production_window", situation.ProductionValueWindow);
+			AiMatchLogWriter.AppendNumber(builder, "production_per_game_min", situation.ProductionPerGameMin);
+			AiMatchLogWriter.AppendNumber(builder, "econ_destroyed_window", situation.EnemyEconValueDestroyedWindow);
+			AiMatchLogWriter.AppendNumber(builder, "econ_destroyed", situation.EnemyEconValueDestroyedTotal);
+			AiMatchLogWriter.AppendNumber(builder, "attacks_launched", situation.AttacksLaunched);
+			AiMatchLogWriter.AppendNumber(builder, "first_attack_tick", situation.FirstAttackTick);
+			AiMatchLogWriter.AppendNumber(builder, "attacks_per_game_min", situation.AttacksPerGameMin);
 			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 
@@ -278,6 +287,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "nearest_cells", enemy.NearestCells);
 				AiMatchLogWriter.AppendNumber(builder, "last_seen_tick", enemy.LastSeenTick);
 				AiMatchLogWriter.AppendNumber(builder, "score", enemy.Score);
+				AiMatchLogWriter.AppendNumber(builder, "army_value_delta", enemy.ArmyValueDelta);
 				builder.Append('}');
 			}
 			builder.Append("]}\n");
