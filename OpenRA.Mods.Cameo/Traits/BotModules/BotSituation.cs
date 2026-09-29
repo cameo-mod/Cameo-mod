@@ -282,37 +282,51 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (IsTraitDisabled || regions == null)
 				return 0;
 
-			return RememberedThreatAtRegion(regions, regions.IndexOf(cell));
+			return RememberedThreatAtRegion(regions, regions.IndexOf(cell), false);
 		}
 
-		// Summed remembered Army+Defence value across every enemy's region table —
-		// the shared threat read for the 6c gate and the 6e router.
-		static int RememberedThreatAtRegion(RegionMemory regions, int index)
+		// The per-region threat read, split by the leader's domain: ground squads
+		// pay remembered Army+Defence; air squads (CA-5, §12.8) pay remembered
+		// AntiAir — the "things that can hurt aircraft" layer RegionMemory keeps.
+		internal static int RememberedThreatAtRegion(RegionMemory.Region region, bool airborne)
+		{
+			return region == null ? 0 : airborne ? region.AntiAirValue : region.ArmyValue + region.DefenceValue;
+		}
+
+		// Summed remembered threat across every enemy's region table — the
+		// shared read for the 6c gate (ground) and the 6e router (per-domain).
+		static int RememberedThreatAtRegion(RegionMemory regions, int index, bool airborne)
 		{
 			var threat = 0;
 			foreach (var enemyRegions in regions.ByEnemy.Values)
-				if (index < enemyRegions.Length && enemyRegions[index] != null)
-					threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+				if (index < enemyRegions.Length)
+					threat += RememberedThreatAtRegion(enemyRegions[index], airborne);
 
 			return threat;
 		}
 
 		// 6e risk routing: coarse waypoints around remembered threat. The squad's
 		// locomotor filters out waypoints it cannot reach (region centers can land
-		// on water or cliffs).
+		// on water or cliffs); aircraft overfly every cell, so they skip the
+		// reachability filter and pay remembered anti-air coverage instead
+		// (CA-5 air-threat routing, AI_ARCHITECTURE §12.8).
 		List<CPos> IBotRouteThreatRouter.RouteAroundThreat(Actor leader, CPos to, int maxWaypoints)
 		{
 			var regions = Situation?.Regions;
 			if (IsTraitDisabled || !Info.UseRiskRouting || regions == null || leader == null || leader.IsDead || !leader.IsInWorld)
 				return null;
 
-			var mobile = leader.TraitOrDefault<Mobile>();
+			var airborne = leader.Info.HasTraitInfo<AircraftInfo>();
 			Func<CPos, CPos, bool> reachable = null;
-			if (mobile != null)
-				reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+			if (!airborne)
+			{
+				var mobile = leader.TraitOrDefault<Mobile>();
+				if (mobile != null)
+					reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+			}
 
 			return RegionRouter.Route(regions, leader.Location, to,
-				i => RememberedThreatAtRegion(regions, i), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
+				i => RememberedThreatAtRegion(regions, i, airborne), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
 		}
 
 		// The 6d fogged-scan switch: squads observe fog only when the master AI is
