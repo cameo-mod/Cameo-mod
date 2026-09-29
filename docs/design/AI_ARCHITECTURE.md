@@ -1628,7 +1628,22 @@ New **target** tags: `power` (positive `Power`), `defence` (building with an arm
 None of the three is a guerrilla (§2.8a excludes them). **Open, C# in `SquadManagerBotModuleCA`:**
 read the `artillery` role instead of the range rule, add the fire-support squad and its escort
 of tanks, and the naval guard. Owners per §12.10: CA-3/CA-4 (NOVA) for the squad composition,
-Claude for the roles and the `navalunit` application.
+Claude for the roles and the `navalunit` application; Claude-Local (who integrated the DF code
+below) reviews the C#.
+
+**Interlocks with the defence code on master `297c626f4`** (all in `SquadManagerBotModuleCA`):
+* **Naval check first.** `PrepositionDefenceTick` and `ProtectOwn` draft the idle pool (`AttackBase`,
+  not Building/Harvester/Aircraft), so a ship missing from `NavalUnitsTypes` can be drafted into a
+  *land* protection squad today. Put the naval branch **before** the guerrilla branch in
+  `FindNewUnits` (guerrilla assignment goes through `OpenGuerrillaSquad`, which respects
+  `MaxGuerrillaSquads` / `MaxGuerrillaSquadsLate`), so a ship never reaches the idle pool.
+* **`ReleaseDefenders`** routes released defenders by `GuerrillaTypes` / `HarasserTypes`, else to the
+  idle pool. The guerrilla role follows automatically once it has `Targets`; a fire-support squad
+  type needs its own branch there, or released fire-support units fall back into the idle pool.
+* **`FastSquadsReactToThreats`** moves only Guerrilla/Harass squads. Fire-support squads guard the
+  artillery and are not fast squads, so they stay out of it.
+* **Artillery by role** does not touch the combat predictor (`BotUnitProfiles` is independent of
+  `ArtilleryMinRangeCells`).
 
 ### 12.5 Composition and ratios (phase CA-3)
 
