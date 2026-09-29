@@ -43,6 +43,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Window (ticks) over which the income used to turn costs into time is measured.")]
 		public readonly int IncomeWindowTicks = 1500;
 
+		[Desc("EX-1: publish the target field to the base builder, whose BaseCrawl placements then walk toward it.",
+			"False = telemetry only (EX-0).")]
+		public readonly bool DriveBaseCrawl = false;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -50,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new ExpansionPlannerBotModule(init.Self, this); }
 	}
 
-	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick
+	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider
 	{
 		public readonly struct FieldScore
 		{
@@ -97,6 +101,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public FieldScore? Target { get; private set; }
 
 		public IReadOnlyList<FieldScore> LastScores { get; private set; } = Array.Empty<FieldScore>();
+
+		CPos? IBotExpansionTargetProvider.ExpansionTarget => IsTraitDisabled || !Info.DriveBaseCrawl ? null : Target?.Center;
 
 		protected override void TraitEnabled(Actor self)
 		{

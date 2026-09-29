@@ -764,6 +764,21 @@ namespace OpenRA.Mods.CA.Traits
 
 				case BuildingType.BaseCrawl:
 
+					// Cameo (AI_ARCHITECTURE §12.13, EX-1): walk toward the planner's target field, one building at a
+					// time (findPos takes the placeable cell nearest the target), instead of a random resource cell or
+					// the enemy building found by scanning every building on the map.
+					var expansionTarget = baseBuilder.ExpansionTarget();
+					if (expansionTarget != null)
+					{
+						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, expansionTarget.Value,
+							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius);
+						if (toward.Location != null)
+						{
+							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {expansionTarget.Value} at tick {world.WorldTick}");
+							return toward;
+						}
+					}
+
 					// Try and place the refinery near a resource field
 					if (resourceLayer != null)
 					{

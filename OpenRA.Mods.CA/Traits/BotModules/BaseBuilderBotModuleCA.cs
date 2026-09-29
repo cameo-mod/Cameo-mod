@@ -286,8 +286,25 @@ namespace OpenRA.Mods.CA.Traits
 		IResourceLayer resourceLayer;
 		IPathFinder pathFinder;
 		IBotPositionsUpdated[] positionsUpdatedModules;
+		IBotExpansionTargetProvider[] expansionTargetProviders;
 		CPos initialBaseCenter;
 		public CPos? ResourceConyardCenter;
+
+		// Cameo (AI_ARCHITECTURE §12.13, EX-1): the field an expansion planner wants the base to walk toward, if any.
+		public CPos? ExpansionTarget()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			foreach (var provider in expansionTargetProviders)
+			{
+				var target = provider.ExpansionTarget;
+				if (target != null)
+					return target;
+			}
+
+			return null;
+		}
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
@@ -407,6 +424,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+				expansionTargetProviders = bot.Player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>().ToArray();
 				firstTick = false;
 			}
 

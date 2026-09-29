@@ -1871,6 +1871,17 @@ refinement. Enemy threat comes only from `IBotRegionThreatProvider` (fog-honest)
 `ResourceMapBotModule`'s own enemy counts. The one own-actors pass is manifested in
 `fog_honesty_manifest.json`.
 
+**EX-1 as built (2026-09-29).** A CA-side `IBotExpansionTargetProvider` (the pattern of
+`IBotRegionThreatProvider`) lets `BaseBuilderBotModuleCA` ask for the target field without naming a
+Cameo type. In the `BaseCrawl` case, which `ai.yaml` already takes for every building under 1,000
+cost (`BaseCrawlChance: 100`), the builder first tries `findPos` toward that field: the placeable cell
+nearest to it, within `BaseCrawlRadius`. It falls back to the old logic only when no cell fits. The
+planner publishes the field only with `DriveBaseCrawl: true` (`genericbot`). `classic` shares
+`BaseBuilderBotModuleCA@generic` but has no enabled planner, so it keeps today's placement and stays
+the A/B reference. Each steered placement writes `EX-1 BaseCrawl <type> at <cell> toward field <cell>`
+to `debug.log`. Live: `hard` put its second power plant at 12,36 toward field 16,36 (tick 1,554).
+Refineries and defences still use their own placement; EX-2 adds refinery-per-field.
+
 **Order of work** (each step: telemetry first, then behaviour behind a yaml switch, then the A/B):
 EX-0 compute and log `score_f`, `f*` and the placement choice (no behaviour change); EX-1 replace
 `BaseCrawl`'s random/omniscient target with `f*` and the distance-minimising placement; EX-2

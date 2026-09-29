@@ -9,6 +9,7 @@
   "CheckBestResourceLocationInterval": "RV",
   "ConstructionYardBuildings": "RV",
   "ExcessPower": "RV",
+  "ExpansionTarget": "CAMEO",
   "ExpansionTolerate": "RV",
   "ForceExpansionTolerate": "RV",
   "FragileTypes": "CAMEO",
@@ -71,6 +72,9 @@
   "InitialHarvesters": "RV",
   "ResourceCellsPerHarvester": "RV",
   "ScanForLowEffectHarvestersInterval": "RV"
+ },
+ "OpenRA.Mods.CA/Traits/BotModules/IBotExpansionTargetProvider.cs": {
+  "IBotExpansionTargetProvider": "CAMEO"
  },
  "OpenRA.Mods.CA/Traits/BotModules/IBotFoggedEnemyProvider.cs": {
   "IBotFoggedEnemyProvider": "CAMEO"
