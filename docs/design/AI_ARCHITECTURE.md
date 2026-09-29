@@ -654,14 +654,20 @@ Warcraft II share no family template (measured), so each race's building base ge
     weight(u) = mix[personality][role(u)] / |loaded units of that faction in role(u)|
                 × prior(own faction, enemy faction, u) × trade(u, this match)
 
+(With several enemies or allies `prior` becomes General × Enemies × Allies, and a team-gap factor
+joins it: §6.4a.)
+
 * `role(u)` comes from §12.4 (frontline, anti-infantry, anti-armour, artillery, AA, air, scout, …).
 * `mix` is one small table per personality, roles × shares, with **no unit ids**. That is how the
   personalities differ without copying a unit list. It starts calibrated from today's
   `UnitsToBuild` role shares, so the first derived weights reproduce today's production.
 * `prior` is the cross-match memory ruled in DESIGN §19.2: the committed, offline-fitted
-  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers), plus a
-  host-local profile that grows with the games played on that machine. It is read at match start
-  only (§6.1), keyed by faction, never by player, and 1.0 where nothing is known.
+  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers). **Release
+  builds only read it**, so every player meets the same bot; learning writes only on dev builds
+  and harness training runs, and developers commit the result (DESIGN §19.2, amended 2026-09-29).
+  It is read at match start only (§6.1), keyed by faction, never by player, and 1.0 where nothing
+  is known. ⛔ It is applied inside the host's running bot, never written into rules at load:
+  bots run only on the host (`Player.cs:223`), but rules load on every client.
 * `trade` is the in-match trade ratio per role or type (§12.3), smoothed toward the prior.
 
 Ruled 2026-09-29: the hand `UnitsToBuild` rows stay until the derived weights win a Nuclear Winter
@@ -1025,6 +1031,127 @@ the user's own sequencing. Training against a moving balance target fits noise.
 Recording and coverage diagnostics help debug the current bots while balance moves. Learned
 weights remain §10.6 phase 7, after the earlier delivery phases; neither this section nor the
 batch-harness proposal authorizes skipping the observe-only and behavior-review gates.
+
+### 6.4 Learning every number between matches (maintainer rulings 2026-09-29)
+
+**Ruled:** every bot number is learnable, and today's values are only the starting point. That
+includes per-faction building timers and limits: identical templates, different play styles.
+
+**The inventory (measured 2026-09-29):**
+* 101 distinct numeric settings in 15 bot modules, 404 values over all instances;
+* 2,612 per-actor numbers (building tables, unit weights);
+* derived factors (combat-predictor strengths, unit priors).
+
+A training match takes ~10 min on an idle machine, so a day gives ~100–150 matches. Tuning
+3,000 numbers one by one on that is hopeless; every number therefore learns through the route that
+fits how its truth can be observed.
+
+| route | numbers | how it learns | data per match |
+|---|---|---|---|
+| **1. measured** | unit effectiveness per (unit, enemy faction) from the arsenal ledger (CA-1/CA-1b); combat-predictor strength per type (fitted to real fight outcomes); the enemy faction's usual composition and first-attack timing | statistics with evidence counts and shrinkage toward the parent level; every match counts, won or lost, both sides | hundreds of units, dozens of fights |
+| **2. tuned** | building fractions, limits, delays and intervals; timers; squad sizes; attack and retreat thresholds; the personality's role mix | experiments: in training, the harness nudges values per match (paired ± steps, SPSA-style), compares scores, and moves toward the better side within bounds | one score per match |
+| **3. chosen** | discrete options: which personality or opening against which enemy faction | a bandit (Thompson sampling) over the options per matchup | one outcome per match |
+
+**Rulings on route 2:**
+* **Granularity:** per own faction, falling back to its game family and then global while
+  evidence is thin. Only the army mix and counter weights also split per enemy faction.
+* **Knobs first, then raw:** about 8 knobs per faction scale their raw numbers together (tempo:
+  delays and intervals; economy greed: refinery and harvester numbers; tech speed; defence share;
+  army mix; aggression: attack and retreat thresholds; …). Once a knob settles, an individual number
+  with strong evidence of its own gets its own learned value.
+* **Score = win plus margin:** win or loss, plus how decisively, measured by army and building value
+  traded over the whole match (the timeline and fight report exist, #617). Win/loss alone is too
+  noisy; the 7–6 coin flip showed it.
+
+**Hierarchy and bounds.** A learned value is a multiplier on its default:
+`value = default × m(global) × m(family) × m(faction) [× m(matchup) for the mix]`. Each multiplier
+shrinks toward 1 in proportion to its evidence, and a training round may move it at most ×0.5–×2.
+Difficulty applies **on top**, so the DESIGN §19.1 equal-step line holds for every learned base.
+Unit and building stats are never learned (that is balance), and nothing learned may cheat (§19.2).
+
+**Where learned values live and apply.**
+* The committed files live in `mods/cameo/ai/learned/`, one per route. Each entry carries its
+  evidence count and the build it was trained on.
+* Release builds only read them; only dev builds and harness training runs write (DESIGN §19.2).
+* The modules read their numbers straight from the shared rules: 415 `Info.*` reads in
+  BaseBuilder, its queue manager, SquadManager and UnitBuilder. One `Info` object serves every bot
+  using that module, so a learned per-faction value cannot live there. **Mechanism:** when the
+  host's bot is enabled, it gives each of its modules a private **copy** of that module's `Info`
+  with the learned values applied. That is zero edits at the 415 read sites and no CA-sync conflict.
+  It stays host-only, because the modules only run in the host's bot (`Player.cs:223`). Never apply
+  learned values to rules at load: rules load on every client.
+
+**When balance moves (maintainer question 2026-09-29).** The reference mapping and the balance
+pipeline have not written their targets yet, so costs, HP, damage and Versus values will change a
+lot, and a value learned now describes a game that will not exist ("training against a moving
+balance target fits noise", Stage E above). The design therefore:
+* **Fingerprints every learned entry** with the stats it was trained on: the unit's cost, HP,
+  speed, armour and weapons, and a faction fingerprint for faction knobs. At match start, an entry
+  whose fingerprint changed is discounted toward its default **per unit**, not globally, so a small
+  patch invalidates only what it touched.
+* **Route 1 re-learns fast:** effectiveness is value traded per value lost, so a cost change alone is
+  largely absorbed, and every match brings hundreds of new points.
+* **Knobs survive better than raw numbers:** they are multipliers on defaults that come from the
+  templates. They are still discounted when their faction's fingerprint moves a lot.
+* **Sequencing:** L0–L2 (machinery, no behaviour change) are built now. Serious training (L3+)
+  starts after the balance freeze and is repeated once per release, whose learned files ship with it.
+* **Guard:** an audit reports how much of the committed learned evidence the current rules have
+  invalidated, so a big rebalance shows up as "retrain before release".
+
+### 6.4a Combining the weights: general × enemies × allies (maintainer rulings 2026-09-29)
+
+This generalises the single-enemy `prior(own faction, enemy faction, u)` of §2.9's production
+weight to any number of enemies and allies; `mix` and the role split of §2.9 are unchanged.
+Every learned value is a **multiplier that defaults to 1**, and the layers combine in log space,
+where a geometric mean is a weighted average:
+
+    prior(u)   = General(own faction, u) × Enemies(u) × Allies(u)
+    weight(u)  = mix[personality][role(u)] / |role(u)| × prior(u) × Gap(u) × trade(u)      (§2.9)
+    Enemies(u) = exp( Σ_e α_e · ln M(u | e) )        Σ α_e = 1
+    Allies(u)  = exp( λ(n_allies) · Σ_a β_a · ln S(u | a) )        Σ β_a = 1
+
+* **General**: one file per own faction, trained against everyone and **always active**. When a
+  matchup has little data its `M` shrinks to 1, so the bot falls back to General automatically.
+* **Enemies**: the per-enemy-faction counter multipliers `M(u | e)`, combined as a **weighted
+  geometric mean**, so no single matchup can dominate a multi-faction game. **The share α of the
+  main (hate) target combines all three proposals** (maintainer: "a combination of all of them"):
+  1. a **floor** that keeps it dominant: `α_main ≥ max(1/2, 2/(n+1))`. That is 100 % with one
+     enemy, the double vote at 67 % with two, and 50 % from three enemies up, so it is never
+     diluted in a big game;
+  2. the **rest**, `1 − α_main`, is split among the other enemies by
+     `(1 − γ) · equal share + γ · threat share`. Threat is fog-honest: remembered enemy army
+     value near our assets. A quiet enemy still counts, and the one attacking us counts more;
+  3. **γ and the floor are learnable** (route 2, §6.4), so training finds how reactive to be.
+* **Allies** (ruled: **learned + fill gaps**): the trained synergy multipliers `S(u | a)` per
+  (own faction, ally faction) come from team-game training; that needs a 2v2 variant of the duel harness, built with
+  **TC** (Team Commander, ROADMAP; `AI_DEEP_RESEARCH.md` §9).
+  `β` splits equally among allies, and `λ` grows with the number of allies (the team's say in
+  what we build grows with the team). With no allies `Allies(u) = 1`.
+* **Gap** (the "fill gaps" half of the same ruling) is in-match, not learned from past games: a
+  role (§12.4) the whole team, us included, lacks gets a boost, bounded like every other factor.
+  Allied armies are visible, so this is not a cheat. With no allies it is 1.
+* **trade**: the live in-match trade ratio per role or type (§12.3), as in §2.9.
+
+Every factor is trained separately (routes 1–3, §6.4), bounded, fingerprinted against balance
+changes, and applied only inside the host's bot. With no data at all the bot plays today's defaults.
+
+**The training loop (dev only).**
+1. **League batch:** past masters, `classic` and the exploiters (LG), several tournament maps,
+   both spawns.
+2. **Fitters:** route 1 is updated from the logs; route 2 is updated from the paired perturbations.
+3. **A/B:** the candidate learned files are tested against the current files.
+4. **Commit:** a PR with the evidence, if the candidate does not lose.
+
+**Phases** (after the §2.9 groundwork; the §10.6 gates still apply):
+
+| # | step | gate |
+|---|---|---|
+| L0 | the per-bot `Info` copy + a learned-file reader; empty files change nothing | the P0 dump is identical; a two-client desync test; boot |
+| L1 | route 1: unit priors (CA-1b), combat-predictor strengths, enemy models | A/B |
+| L2 | the score in the harness + the knob layer (defaults = 1) | the dump is identical with all knobs at 1 |
+| L3 | route 2 training: paired perturbations per faction knob | A/B per committed file |
+| L4 | route 3: personality and opening bandit per matchup | A/B |
+| L5 | raw numbers with strong evidence leave their knob | A/B |
 
 ---
 
