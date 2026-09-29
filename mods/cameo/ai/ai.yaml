@@ -203,6 +203,12 @@ Player:
 			refinery: Refinery
 			mcv: Transforms
 			conyard: BaseBuilding, Building
+			staticaa: Building, AttackBase
+			airunit: Aircraft, AttackBase
+			navalunit: Mobile, AttackBase
+		DeriveHasField:
+			staticaa: Weapons.ValidTargets any Air
+			navalunit: Mobile.Locomotor any naval
 		DeriveNot:
 			refinery: BaseBuilding
 			mcv: Building
@@ -215,6 +221,9 @@ Player:
 			refinery: HarvesterBotModuleCA.RefineryTypes, BaseBuilderBotModuleCA.RefineryTypes, ResourceMapBotModule.RefineryTypes
 			mcv: McvExpansionManagerBotModule.McvTypes
 			conyard: BaseBuilderBotModuleCA.ConstructionYardTypes, McvExpansionManagerBotModule.ConstructionYardTypes, SquadManagerBotModuleCA.ConstructionYardTypes
+			staticaa: SquadManagerBotModuleCA.StaticAntiAirTypes
+			airunit: SquadManagerBotModuleCA.AirUnitsTypes
+			navalunit: SquadManagerBotModuleCA.NavalUnitsTypes
 		# A role is applied after its additions are reviewed and a match with an affected faction (AI_ARCHITECTURE.md 2.8).
 		# refinery + conyard go together: a bot with neither listed keeps unit production paused forever.
 		Apply: harvester, refinery, conyard
