@@ -358,6 +358,36 @@ namespace OpenRA.Mods.Common.Traits
 			if (player.WinState != WinState.Undefined || --defaultAttackAnythingScanTicks > 0)
 				return;
 
+			// A CA squad manager owns stance doctrine on the Frankenstein stack:
+			// sallying the whole idle pool at contacts starves CreateAttackForce
+			// thresholds indefinitely (DAWN nw-hard6 m2: zero squads in 74k ticks).
+			// Donor bots have no SquadManagerBotModuleCA and keep this posture.
+			if (player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.SquadManagerBotModuleCA>().Any(t => !t.IsTraitDisabled))
+			{
+				// One-shot revert: units already forced into AttackAnything before the
+				// squad manager latched (first scan runs at WT1) mass-defend instead.
+				// Only ids this module stanced are in the set; squad-assigned stances
+				// are never touched.
+				if (defaultAttackAnythingActors.Count > 0)
+				{
+					foreach (var pair in world.ActorsWithTrait<AutoTarget>())
+					{
+						var actor = pair.Actor;
+						if (actor == null || !actor.IsInWorld || actor.IsDead || actor.Owner != player
+							|| !defaultAttackAnythingActors.Contains(actor.ActorID)
+							|| pair.Trait.Stance != UnitStance.AttackAnything)
+							continue;
+
+						pair.Trait.SetStance(actor, UnitStance.Defend);
+					}
+
+					defaultAttackAnythingActors.Clear();
+					missionOwnedLastScan.Clear();
+				}
+
+				return;
+			}
+
 			defaultAttackAnythingScanTicks = Info.DefaultAttackAnythingScanInterval;
 			var live = new HashSet<uint>();
 			foreach (var pair in world.ActorsWithTrait<AutoTarget>()

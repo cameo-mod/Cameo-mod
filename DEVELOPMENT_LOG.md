@@ -14609,3 +14609,78 @@ Implements §12.6 end-to-end, behaviour OFF by default:
 NOTE: m1 at WT24000+ shows zero SIEGE-EVAL lines — either no assault squads
 formed or none held a valid target. If the batch finishes silent, that is a
 finding: assault formation may be broken on hard (larger than siege).
+
+## 2026-09-29 — W3 swap map finalized (pending batch end — yaml is live-loaded)
+
+Atomic condition flip (partial = double-produce or starve; both sides
+implement IBotRequestUnitProduction):
+
+CA producers -> `classicbot || (genericbot && !hardbot)`:
+  HarvesterBotModuleCA (ai.yaml:3249), BaseBuilderBotModuleCA@generic (:3725),
+  UnitBuilderBotModuleCA@generic (:3898), McvExpansionManagerBotModule (:3271)
+Frans producers -> `enable-fransbot || (genericbot && hardbot)`:
+  FransBaseBuilderBotModule, FransMcvExpansionManagerBotModule,
+  FransUnitBuilderBotModule, FransHarvesterBotModule,
+  FransSupplyTruckBotModule (fransbot.yaml:53-78)
+
+Already armed (W1/W2): FransGeneral/CommandBid/CommanderCore, StrategicMap,
+CombatIntel, MineCluster, EconomicSaturation, ResourceMap@fransbot.
+Support/adjacent open questions for the swap diff: BuildingRepairBotModuleCA
+(genericbot||classicbot — does FransBaseBuilder cover repair?),
+ResourceMapBotModule@fransbot's current condition, plus whether
+FransHarvesterBotModule needs the CA HarvesterTypes role lists.
+
+Batch contamination rule re-verified: ai.yaml edits apply at match LOAD —
+any edit while a batch runs hits the next match's ruleset.
+
+## 2026-09-29 (cont.) — Squad starvation root-caused; rebased onto post-#630 master
+
+### nw-hard6 evidence
+- m1 hard WIN 46628t (bld 64:9, +53k decisive window, turtle/emergency, 4-5 squads)
+- m2 hard LOSS 74472t (bld 25:82, -64k window @60-62k, 2 squads/14k vs 61k, all losses home)
+- m2-attempt1 invalid (external kill); m1-attempt1 killed by stale-Cameo window (both flagged)
+
+### Root cause (findings posted: FINDINGS_2026-09-29_dawn_squad_starvation)
+- squads=0 for 24-74k ticks while owning/losing units = force-formation starvation
+- PRIMARY: FransCommanderCoreBotModule BotTick sets AttackAnything on every own
+  mobile/air unit not in a Frans mission; on hard no Frans commander executes
+  missions, so the whole CA idle pool sallies and dies piecemeal. Pool never
+  reaches MaxIdleUnits/desiredAttackForceValue -> CreateAttackForce never fires.
+- Secondary (Claude's lane, flagged): per-region Defend-hold reset is intentional
+  but aggregate under rotating multi-region pressure = indefinite hold; no
+  starvation floor in CreateAttackForce; ProtectOwn only on building/harvester damage.
+
+### F1 fix (staged, builds after batch ends)
+FransCommanderCore.BotTick early-returns when any enabled
+SquadManagerBotModuleCA exists on the player. hard -> yields stance doctrine
+to CA squads; fransbot donor (no SquadManagerCA) keeps AttackAnything; classic
+never arms the module. Fog-honest, no conditions, self-adapting.
+
+### Rebase onto origin/master 297c626f4 (post-#630 doctrine, #629 aliases)
+- Conflicts: ai.yaml (union: HumanPace fields + SiegeEvaluator block),
+  BotSituation.cs class line (union: IBotThreatPredictionProvider +
+  IBotRememberedDefenceProvider), AI_MODULE_MAP.md (ours; regen post-build).
+- Seam verified intact post-rebase: siegeAdvisors, EvaluateSiege,
+  GroundStatesCA consult, BehaviourEnabled:false, RememberedDefences provider.
+- Verdict telemetry confirmed live: `Guerrilla squad v=560 -> verdict=free-advance`
+  (only firing was a 1-unit starting squad; squads=0 thereafter = starvation).
+- run_ai_match_batch.py staged: CAMEO_BOT_DEBUG env -> Debug.BotDebug=true
+  launch arg (opt-in; default logs identical to reference batches).
+
+### Sequencing (locked)
+1. nw-hard6 finishes -> aggregate -> AI_MATCH_LOG
+2. Build F1 -> boot-gate -> commit (source + log + batch tool)
+3. dawn-ca2b-cand re-pointed to new HEAD + BehaviourEnabled:true -> rebuild bin
+4. CA-2b A/B: control dawn-ai + candidate, 8 matches each arm, parallel support dirs
+5. W3 atomic swap -> own batch (NEVER during a live batch — yaml live-loads)
+
+### W3 swap map — RESOLVED (open questions closed 2026-09-29)
+- BuildingRepairBotModule/BuildingRepairBotModuleCA: KEEP on hard — Frans stack
+  has no building-repair module (Frans Repair orders are unit->pad only,
+  donor-side). Not part of the swap.
+- FrozenSet plumbing: zero work — fransbot_lists.yaml (generated) populates
+  every Frans module's [ActorReference] sets unconditionally; arming on hard
+  inherits the resolved lists.
+- Atomicity confirmed: all consumers resolve IBotRequestUnitProduction via
+  TraitsImplementing().ToArray() — both builders enabled = double production.
+  The flip must be one commit, all four/five pairs together.

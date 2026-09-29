@@ -704,6 +704,10 @@ def main() -> int:
             f"Launch.Map={m['variant']}",
             f"Launch.Benchmark={BENCHMARK_PREFIX}",
         ]
+        # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
+        # off so support-dir logs stay identical to the reference batches.
+        if os.environ.get("CAMEO_BOT_DEBUG"):
+            launch_args.append("Debug.BotDebug=true")
 
         attempt = 0
         while True:
