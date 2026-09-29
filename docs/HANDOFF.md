@@ -75,6 +75,13 @@ The part of CA-5 air doctrine that needs no CA-1 roles:
   fighter pick-off of isolated units, bomber strike-team target
   priorities - waits on CA-1 roles (§12.10) plus this slice's
   A/B vs master.
+- A/B so far (same binary, pooled): hard 4-3 vs classic — parity with
+  the 7-6 baseline band; dedicated 1-3 sample being extended before
+  the gate is called. Losses were ground/emergency-decided (turtle
+  held under sustained pressure ~85% of ticks); air usage was small.
+- First `league_standard.json` league run in flight (4 cells x 4
+  swapped matches; classic cell already produced 2-0 for hard).
+  Spec map-path bug found+fixed in #628 before launch.
 ## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
 
 **Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,
