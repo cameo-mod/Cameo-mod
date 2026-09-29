@@ -14217,6 +14217,11 @@ biggest artillery squad (else an assault), holds at the protected squad's
 position within `SupportFollowRangeCells`, AttackMoves back when pushed out —
 escorts fight whatever threatens the parent instead of walking through it.
 
+Escort quality note (EMBER review #634): highest-value pick is deliberate —
+an escort must WIN the fight against flankers, not just soak hits, and the
+screened artillery is itself expensive. The cost is assault mass; if the A/B
+shows the main push starving, `FireSupportEscortPerArtillery` is the knob.
+
 **Artillery by role, not range**: `IsArtilleryUnit` prefers
 `ArtilleryTypes.Contains` when the role list is populated (the `artillery`
 role off `^ArtilleryTemplate`/`^ArtilleryTankTemplate`) and falls back to the
