@@ -293,6 +293,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		UnitWposWrapper leader = new(null);
 
+		// 12.7 formation: rear-frontline stall tracking (fransbot chokepoint rule)
+		WPos formationRearPos;
+		int formationRearStallTicks;
+
 		// Indirect/harass routing state
 		List<CPos> currentRoute;
 		int currentWaypointIndex;
@@ -650,11 +654,33 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Distance-to-go along the axis for every frontline member; the slowest
 			// (largest remaining) gates how far ahead the others may run.
 			var slowestRemaining = long.MinValue;
+			UnitWposWrapper rear = null;
 			foreach (var u in frontline)
 			{
 				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
 				if (rem > slowestRemaining)
+				{
 					slowestRemaining = rem;
+					rear = u;
+				}
+			}
+
+			// Fransbot donor rule: a rear member stalled in a chokepoint grants the
+			// leaders the wider FormationMaxStalledLeadCells allowance; the normal
+			// lead resumes the tick it moves again.
+			var lead = maxLead;
+			if (rear != null)
+			{
+				if (rear.Actor.CenterPosition == formationRearPos)
+					formationRearStallTicks++;
+				else
+				{
+					formationRearStallTicks = 0;
+					formationRearPos = rear.Actor.CenterPosition;
+				}
+
+				if (formationRearStallTicks >= 25)
+					lead = WDist.FromCells(owner.SquadManager.Info.FormationMaxStalledLeadCells).Length;
 			}
 
 			var holdFront = new List<Actor>();
@@ -662,7 +688,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			foreach (var u in frontline)
 			{
 				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
-				if (slowestRemaining - rem > maxLead)
+				if (slowestRemaining - rem > lead)
 					holdFront.Add(u.Actor);
 				else
 					pushFront.Add(u.Actor);
