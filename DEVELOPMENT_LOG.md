@@ -14568,3 +14568,19 @@ lifecycle); batch relaunched detached via nohup as nw-classic2.
 - NOVA donor runtime check (nw-donor-v12931): EnemySpawnProbe publishes,
   wins ground1 bid, humvee dispatched ETA 747 WT — spawn recon works end
   to end; V1.29.31 MCV/transport ticking without exception.
+
+## 2026-09-28 — CA-2a crash + fix + rebase (DAWN)
+
+**Incident**: nw-hard6 attempt 1 — all 4 matches died at first BotTick.
+`SiegeEvaluatorBotModule` called `TraitOrDefault<SquadManagerBotModuleCA>`
+but genericbot carries one SquadManagerCA per personality (6, now 7 with
+#621's @guerrilla). Fixed `6d76b556a`: iterate enabled instances.
+**Lesson**: grep yaml for `Trait@` instance count before TraitOrDefault.
+
+**Rebase** → `2163ed183` (#623 BotCombatPredictor on master, #621 guerrilla
+personality). Dropped own ai_module_map commit — master #622 covers it.
+
+**CA-2b seam**: `BotCombatPredictor.Predict(own, enemy)` live on master;
+`PredictsWin/PredictsLoss` wrappers still on claude/active_doctrine.
+
+nw-hard6 relaunched on fixed tree (4-match canonical td_gdi A/B).

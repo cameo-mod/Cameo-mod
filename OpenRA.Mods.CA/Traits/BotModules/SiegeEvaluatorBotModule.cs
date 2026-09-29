@@ -123,10 +123,12 @@ namespace OpenRA.Mods.CA.Traits
 
 				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
 					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
-				AIUtils.BotDebug("AI ({0}): SIEGE-EVAL {1} squad v={2} units={3} at {4} -> {5}: defences={6} v={7} maxRange={8} threat={9} verdict={10} artillery={11}",
-					player.ClientIndex, squad.Type, squadValue, squad.Units.Count, squadCell, targetCell,
+				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
+				// which the match harness does not set — the FransBotLog pattern.
+				Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} {2} squad v={3} units={4} at {5} -> {6}: defences={7} v={8} maxRange={9} threat={10} verdict={11} artillery={12}",
+					world.WorldTick, player.ClientIndex, squad.Type, squadValue, squad.Units.Count, squadCell, targetCell,
 					covering.Length, defenceValue, standOffCells, rememberedThreat, verdict,
-					artilleryAttached ? "attached" : "none");
+					artilleryAttached ? "attached" : "none"));
 			}
 		}
 	}
