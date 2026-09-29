@@ -732,6 +732,21 @@ def main() -> int:
             print(f"    -> {status} in {elapsed}s, no records/exception — external kill or phantom abort? retry {attempt}/{args.retries}",
                   flush=True)
             print(f"    OpenRA output tail:\n{output_tail(output)}", flush=True)
+            # The abort signature lives in the client's own log, not stdout:
+            # a host-level event drops the loopback socket mid-match, e.g.
+            # "An established connection was aborted by the software in your
+            # host machine".
+            client_log = logs_dir / "client.log"
+            if client_log.is_file():
+                tail = client_log.read_text(encoding="utf-8", errors="replace")[-2000:].strip()
+                if tail:
+                    print(f"    client.log tail:\n{tail}", flush=True)
+
+        # A no-data run that exhausted its retries is still not a datapoint:
+        # count it separately so a deterministic abort is visible in
+        # batch_summary.json / run_league instead of reading as clean.
+        if status == "ok" and not records:
+            status = "norecord"
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -781,6 +796,7 @@ def main() -> int:
         "timed_out": sum(1 for r in results if r["status"] == "timeout"),
         "stalled": sum(1 for r in results if r["status"] == "stalled"),
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
+        "norecord": sum(1 for r in results if r["status"] == "norecord"),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
         "scoreboard": scoreboard,
@@ -791,7 +807,8 @@ def main() -> int:
     print(
         f"\nbatch done: {summary['completed']}/{summary['matches']} clean, "
         f"{summary['timed_out']} timeout, {summary['stalled']} stalled, "
-        f"{summary['died']} died ({summary['retried']} retried), exceptions={new_exceptions or 'none'}"
+        f"{summary['died']} died, {summary['norecord']} norecord ({summary['retried']} retried), "
+        f"exceptions={new_exceptions or 'none'}"
     )
     if scoreboard:
         print("\nA/B scoreboard (decided 1v1s, deduplicated by game):")
