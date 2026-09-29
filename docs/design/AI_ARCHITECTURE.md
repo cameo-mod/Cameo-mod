@@ -1004,7 +1004,8 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**51 distinct trait types, 68 Player instances plus one World instance** (2026-09-28: #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
+**51 distinct trait types, 69 Player instances plus one World instance** (2026-09-28: #621 adds
+`SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
@@ -1605,6 +1606,12 @@ formation — they run ahead on their own (6b).
   `production`, `power`, `harvester`, `artillery`; `defence` when it opens a siege), routed over
   the **air-threat layer** (remembered anti-air coverage) with minimum exposure, regroup and
   return. This is risk routing for air — today's router is ground-only.
+  *Landed first slice (2026-09-28):* the 6e router now picks its remembered-threat
+  read by the leader's domain — airborne leaders pay `AntiAirValue`, ground
+  leaders pay `ArmyValue+DefenceValue` — and `AirAttackStateCA` transits a fresh
+  target through those waypoints (`Fly` chain + queued `Attack`, skipped by the
+  per-tick re-issue so transit is not cancelled). The doctrine split (gunship CAS,
+  fighter pick-off, bomber strike-team targets) still waits on CA-1 roles.
 
 ### 12.9 Scouting decides where to attack next
 

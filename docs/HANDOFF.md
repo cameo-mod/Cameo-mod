@@ -1,5 +1,57 @@
 # Cameo — THE HANDOFF
 
+
+## 2026-09-29 — Claude: the Frankenstein doctrine integrated on master (maintainer: "merge everything together")
+
+One integration merge (`claude/integration_0929`) brings the 2026-09-28 rulings together; every
+piece is behind a yaml switch that only the six `genericbot` personalities turn on, so `classic`
+(the A/B reference) is untouched. What the bot does now, in order of a match:
+
+1. **Sees:** fog memory (6a) + scouts that also check the enemy's possible spawns
+   (`EnemySpawnBonus`) — it remembered only 1–18 % of classic's army before (AI_DEEP_RESEARCH §2.3).
+2. **Tracks and predicts:** visible enemy groups are tracked and extrapolated to the own asset they
+   head for, with an ETA (`BotThreatTracker`, situation `own.threats`).
+3. **Fights smart:** every ground squad engages or turns back with the Lanchester combat predictor
+   over what it sees; `BotLimits.RetreatRatioPct` 0.1 (Easiest) … 1.0 (CameoGod) — never suicide.
+4. **Stays active:** guerrillas always on, several small squads, their count growing with game time
+   per personality (steamroller 1→3 … guerrilla 2→6); the main army follows the personality.
+5. **Defends ahead:** a predicted attack is met at the own defence nearest its target; defenders hold
+   and lure the enemy under the towers; fast squads that can arrive in time join, the others punish
+   the enemy base; defenders go back to their jobs only when there is no perceived and no predicted
+   threat (DESIGN §19.1a).
+6. **No APM cap** (DESIGN §19.1): the cap measured 0–4; `HumanPaceBotModule` limits are 0.
+7. **Learns:** the arsenal ledger (per-type created/lost/destroyed, both sides) feeds
+   `tools/ai/fit_arsenal_priors.py` (per-enemy-faction trade profiles, visibility, Elo);
+   `tools/ai/fight_report.py` explains each decisive fight.
+
+Also merged: #626 (air strikes route around remembered AA — its A/B is still EMBER's to report),
+#627 (roles report-only), and the #625 fix (league exploiters get Hard's bot insurance).
+**Not merged (by ruling or evidence):** the per-tier APM line and order lanes, `ReinforceProtection`
+(superseded by the DF release path), the continuous-threat branch (lost 1–3).
+**Open:** the integrated doctrine has not yet had its full A/B on A Nuclear Winter — the first run
+after this merge is the new baseline; NOVA's protection dissolve must reuse `ReleaseDefenders`
+(one release trigger); roles still report-only; central ai.yaml ids 5,825 (the roles are the way down).
+
+## 2026-09-28 - EMBER: CA-5 air-threat routing landed (first slice of §12.8)
+
+The part of CA-5 air doctrine that needs no CA-1 roles:
+
+- The 6e router's threat read now splits by the leader's domain in
+  `MasterAiBotModule.RouteAroundThreat`: airborne leaders (aircraft)
+  pay remembered `AntiAirValue` per entered region; ground leaders pay
+  `ArmyValue+DefenceValue` as before. `RegionMemory` already books AA
+  guns and air-to-air fighters into `AntiAirValue` - the air-threat
+  layer existed as data and is now consulted. The 6c ground gate is
+  unchanged.
+- `AirAttackStateCA` routes a fresh target through
+  `SquadManager.RouteAroundThreat`: chained `Fly` waypoints then a
+  queued `Attack`. Per-state `routedCurrentTarget` covers state entry
+  where `newTarget` never fires; `Fly` is excluded from the per-tick
+  re-issue so transit is not cancelled.
+- Still open for CA-5: the doctrine split - gunship CAS attach,
+  fighter pick-off of isolated units, bomber strike-team target
+  priorities - waits on CA-1 roles (§12.10) plus this slice's
+  A/B vs master.
 ## 2026-09-28 — Claude: combined-arms order (AI_ARCHITECTURE §12); Frankenstein vs classic is a coin flip (7–6)
 
 **Maintainer order:** an arsenal tracker (every unit and defence built, where they usually are,

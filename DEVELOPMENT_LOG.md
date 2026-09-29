@@ -114,6 +114,33 @@ my lane alongside CA-5 air doctrine and MI micro):
   won. Rigidity loses to adaptivity — the exposure the
   exploiter exists to prove.
 
+# 2026-09-28 - Devin (EMBER): CA-5 air-threat routing (first slice)
+
+CA-5 air doctrine (AI_ARCHITECTURE §12.8), the slice that needs no
+CA-1 dependency:
+
+- **Leader-aware threat read.** `MasterAiBotModule`'s 6e router now picks
+  the remembered-threat function by the leader's domain: ground leaders
+  pay `ArmyValue + DefenceValue`, airborne leaders pay `AntiAirValue`
+  (the "things that can hurt aircraft" layer `RegionMemory` already
+  keeps - AA guns AND air-to-air fighters both book it). The 6c risk
+  gate's ground read is unchanged.
+- **Air strike transit.** `AirAttackStateCA` routes a fresh target
+  through `SquadManager.RouteAroundThreat`: `Move` (`Fly`) orders chain
+  through the AA-skirting waypoints, then a queued `Attack` takes over.
+  A per-state `routedCurrentTarget` flag covers the AirIdle->AirAttack
+  entry where `newTarget` never fires; mid-`Fly` units are excluded
+  from the per-tick re-issue so transit is not cancelled every tick.
+- Aircraft skip the locomotor reachability filter (they overfly region
+  centers). Fogged waypoints the `Move` order rejects degrade to the
+  queued direct attack - never a stall.
+- Doctrine split (gunship CAS / fighter pick-off / bomber strike-team
+  target choice) still waits on CA-1 roles per §12.10 - this PR is
+  the transit/routing layer only.
+
+Tests: 304/304 C# (+`AirborneLeadersPayAntiAirNotGroundThreat`).
+Boot-gate pending at write time.
+
 # 2026-09-28 — Devin (EMBER): sixth personality wired, personality-switch unlatch, fog-honesty ratchet
 
 Session outcome on the AI-architecture lane:

@@ -49,6 +49,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Bonus interest per unit of remembered enemy value in a region.")]
 		public readonly int RememberedValueWeight = 1;
 
+		[Desc("Bonus interest for regions holding a multiplayer spawn other than this bot's own (public map data, as",
+			"every human sees in the lobby): scouts keep checking where the enemy base probably is. The bot saw only",
+			"1-18% of the enemy army without it (AI_DEEP_RESEARCH.md §2.3). 0 disables it.")]
+		public readonly int EnemySpawnBonus = 0;
+
 		public override object Create(ActorInitializer init) { return new ScoutBotModule(init.Self, this); }
 	}
 
@@ -313,9 +318,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return stalest;
 		}
 
+		HashSet<int> enemySpawnRegions;
+
+		// Region indices of the map's mpspawn cells, minus the one this bot starts on. Read from the map's actor
+		// definitions (as CheckPlayers does) — public, identical for every player, no world scan.
+		HashSet<int> EnemySpawnRegions(RegionMemory regions)
+		{
+			if (enemySpawnRegions != null)
+				return enemySpawnRegions;
+
+			var own = regions.IndexOf(player.HomeLocation);
+			enemySpawnRegions = world.Map.ActorDefinitions
+				.Where(d => d.Value.Value == "mpspawn")
+				.Select(d => new ActorReference(d.Value.Value, d.Value).Get<LocationInit>().Value)
+				.Select(regions.IndexOf)
+				.Where(i => i != own)
+				.ToHashSet();
+			return enemySpawnRegions;
+		}
+
 		int Interest(RegionMemory regions, int index)
 		{
 			var interest = 0;
+			if (Info.EnemySpawnBonus > 0 && EnemySpawnRegions(regions).Contains(index))
+				interest += Info.EnemySpawnBonus;
+
 			foreach (var enemyRegions in regions.ByEnemy.Values)
 			{
 				var region = index < enemyRegions.Length ? enemyRegions[index] : null;

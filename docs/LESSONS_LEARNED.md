@@ -238,6 +238,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)](#list-splice-hygiene-build-headblocktail-never-mutate-then-slice-2026-09-26-rule-4-remediation)
 - [Vendored-bot port traps (2026-09-28, DAWN Fransbot Route-A)](#vendored-bot-port-traps-2026-09-28-dawn-fransbot-route-a)
 - [Bot-test stall detectors must scale to real-map tick rates (2026-09-28, Nova)](#bot-test-stall-detectors-must-scale-to-real-map-tick-rates-2026-09-28-nova)
+- [`EnabledByDefault` is not set yet inside another trait's `RulesetLoaded` (2026-09-28)](#enabledbydefault-is-not-set-yet-inside-another-traits-rulesetloaded-2026-09-28)
 - [⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)](#-traitordefault-throws-on-an-actor-with-two-traits-of-that-type--76-units-carry-two-attack-traits-2026-09-27)
 - [⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)](#-cameos-ca-code-is-a-hand-copy--unused-means-check-what-ca-uses-it-for-never-dead-2026-09-27)
 - [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)

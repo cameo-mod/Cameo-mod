@@ -152,7 +152,7 @@ namespace OpenRA.Mods.Cameo.Test
 			AiMatchLogWriter.AppendObjectStart(b);
 			AiMatchLogWriter.AppendObjectPropertyStart(b, "stats", true);
 			AiMatchLogWriter.AppendNumber(b, "kills_cost", 100, true);
-			AiMatchLogWriter.AppendStatsTimeline(b, empty ? null : new List<int[]> { new[] { 750, 1200, 1000, 800, 5000, 0, 0 }, new[] { 1500, 2600, 2500, 1900, 7000, 300, 110 } });
+			AiMatchLogWriter.AppendStatsTimeline(b, empty ? null : new List<int[]> { new[] { 750, 1200, 1000, 800, 5000, 0, 0, 200, 1 }, new[] { 1500, 2600, 2500, 1900, 7000, 300, 110, 100, 0 } });
 			b.Append("}}");
 
 			using var doc = JsonDocument.Parse(b.ToString());

@@ -46,6 +46,10 @@ TUNING_FIELDS = {
     "IndirectRouteChance",
     "HighValueTargetPriority",
     "HarasserTypes",
+    # Fast-squad count per personality and game time (maintainer 2026-09-28, DESIGN §19.1a):
+    # guerrilla at least twice steamroller's, which spends its units on the main army.
+    "MaxGuerrillaSquads",
+    "MaxGuerrillaSquadsLate",
 }
 DEAD_FIELDS = {"RushInterval", "RushAttackScanRadius"}
 
