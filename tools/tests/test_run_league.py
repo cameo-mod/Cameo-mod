@@ -58,13 +58,31 @@ class SpecTests(unittest.TestCase):
 
     def test_defaults_fill(self):
         with tempfile.TemporaryDirectory() as td:
+            map_file = pathlib.Path(td) / "m.oramap"
+            map_file.write_text("x", encoding="utf-8")
             spec = pathlib.Path(td) / "spec.json"
             spec.write_text(json.dumps({
-                "candidate": "hard", "members": ["classic"], "maps": ["m.oramap"],
+                "candidate": "hard", "members": ["classic"], "maps": [str(map_file)],
             }), encoding="utf-8")
             loaded = run_league.load_spec(spec)
             self.assertEqual(loaded["repeats"], 4)
             self.assertTrue(loaded["swap_bots"])
+
+    def test_missing_map_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            spec = pathlib.Path(td) / "spec.json"
+            spec.write_text(json.dumps({
+                "candidate": "hard", "members": ["classic"],
+                "maps": ["mods/cameo/maps/does_not_exist.oramap"],
+            }), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                run_league.load_spec(spec)
+
+    def test_standard_spec_maps_resolve(self):
+        loaded = run_league.load_spec(ROOT / "tools/ai/league_standard.json")
+        for m in loaded["maps"]:
+            resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else ROOT / m
+            self.assertTrue(resolved.exists(), m)
 
     def test_cell_matrix_is_member_by_map_by_faction(self):
         spec = {"candidate": "h", "members": ["a", "b"], "maps": ["m1", "m2"], "factions": ["f1"]}
