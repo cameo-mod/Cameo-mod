@@ -286,8 +286,39 @@ namespace OpenRA.Mods.CA.Traits
 		IResourceLayer resourceLayer;
 		IPathFinder pathFinder;
 		IBotPositionsUpdated[] positionsUpdatedModules;
+		IBotExpansionTargetProvider[] expansionTargetProviders;
 		CPos initialBaseCenter;
 		public CPos? ResourceConyardCenter;
+
+		// Cameo (AI_ARCHITECTURE §12.13, EX-1): the field an expansion planner wants the base to walk toward, if any.
+		public CPos? ExpansionTarget()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			foreach (var provider in expansionTargetProviders)
+			{
+				var target = provider.ExpansionTarget;
+				if (target != null)
+					return target;
+			}
+
+			return null;
+		}
+
+		// Cameo (§12.13, EX-2): a provider whose target field is in reach and unclaimed wants a refinery there, so the
+		// refinery count is not adequate yet, whatever the fixed optimum says: every field in reach gets one.
+		public IBotExpansionTargetProvider ExpansionWantsRefinery()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			foreach (var provider in expansionTargetProviders)
+				if (provider.WantsRefineryAtExpansionTarget && provider.ExpansionTarget != null)
+					return provider;
+
+			return null;
+		}
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
@@ -407,6 +438,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+				expansionTargetProviders = bot.Player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>().ToArray();
 				firstTick = false;
 			}
 
@@ -737,7 +769,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Require at least one refinery, unless we can't build it.
 		public bool HasAdequateRefineryCount() =>
 			Info.RefineryTypes.Count == 0 ||
-			AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount() ||
+			(AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount() && ExpansionWantsRefinery() == null) ||
 			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
 			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
 

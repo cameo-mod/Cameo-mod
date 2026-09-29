@@ -9,6 +9,8 @@ ixian_lightinfantry:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	BotRoles:
+		Roles: guerrilla
 	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
 	# which redefines the shield traits keyed to its own upgrade and overwrites the
 	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.
@@ -277,6 +279,8 @@ ixian_heavy_inf:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:

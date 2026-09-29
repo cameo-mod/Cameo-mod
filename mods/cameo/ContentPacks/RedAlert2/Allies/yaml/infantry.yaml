@@ -10,6 +10,8 @@ ra2_allies_dog:
 	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
 	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
 	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29

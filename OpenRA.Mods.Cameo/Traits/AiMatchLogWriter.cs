@@ -27,6 +27,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Name of the append-only AI match log file.")]
 		public readonly string FileName = "cameo-ai-matches.jsonl";
 
+		[Desc("World ticks between two stats_timeline samples (earned, spent, army, assets, kills/deaths cost). 0 disables it.")]
+		public readonly int SampleIntervalTicks = 750;
+
 		public override object Create(ActorInitializer init) { return new AiMatchLogWriter(this); }
 	}
 
@@ -40,6 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
+		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
 		{
@@ -64,6 +68,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		void ITick.Tick(Actor self)
 		{
 			var world = self.World;
+			if (!written && info.SampleIntervalTicks > 0 && world.WorldTick % info.SampleIntervalTicks == 0)
+				Sample(world);
+
 			if (written || world.WorldTick < nextAttemptTick)
 				return;
 
@@ -115,6 +122,86 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// Fixed tick cadence, unlike PlayerStatistics' own graph samples, which follow wall-clock
+		// game time (every 3000 ticks at the harness's maximum speed, 750 at normal speed).
+		void Sample(World world)
+		{
+			foreach (var player in world.Players.Where(IsLoggableBot))
+			{
+				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
+				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
+				if (!samples.TryGetValue(player, out var list))
+					samples[player] = list = new List<int[]>();
+
+				list.Add(new[]
+				{
+					world.WorldTick, resources?.Earned ?? 0, resources?.Spent ?? 0, stats?.ArmyValue ?? 0,
+					stats?.AssetsValue ?? 0, stats?.KillsCost ?? 0, stats?.DeathsCost ?? 0,
+					(resources?.Cash ?? 0) + (resources?.Resources ?? 0), IdleQueues(player)
+				});
+			}
+		}
+
+		// The arsenal ledger (AI_ARCHITECTURE.md §12.3): per own actor type, created / lost / value lost / value
+		// destroyed, and what it destroyed by victim type — the input of the offline fitter (CA-1b) and the
+		// per-enemy-faction profiles (DESIGN.md §19.2).
+		internal static void AppendArsenal(StringBuilder builder, BotArsenalLedger ledger, bool first = false)
+		{
+			AppendArrayPropertyStart(builder, "arsenal", first);
+			if (ledger != null)
+			{
+				var i = 0;
+				foreach (var (type, e) in ledger.Ordered())
+				{
+					if (i++ > 0)
+						builder.Append(',');
+					AppendObjectStart(builder);
+					AppendString(builder, "type", type, true);
+					AppendNumber(builder, "created", e.Created);
+					AppendNumber(builder, "lost", e.Lost);
+					AppendNumber(builder, "lost_value", e.LostValue);
+					AppendNumber(builder, "killed_value", e.KilledValue);
+					AppendObjectPropertyStart(builder, "killed_by_victim");
+					var j = 0;
+					foreach (var (victim, value) in e.KilledValueByVictim.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key, StringComparer.Ordinal))
+						AppendNumber(builder, victim, value, j++ == 0);
+					builder.Append("}}");
+				}
+			}
+
+			builder.Append(']');
+		}
+
+		internal const string StatsTimelineFields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues";
+
+		// Discipline telemetry (AI_DEEP_RESEARCH.md §13 item 1): player-level production queues that could build
+		// something but have nothing queued. Humans leave factories idle; a strong bot should not. Building-level
+		// queues (per-factory production) are not counted.
+		static int IdleQueues(OpenRA.Player player)
+		{
+			var idle = 0;
+			foreach (var q in player.PlayerActor.TraitsImplementing<ProductionQueue>())
+				if (q.Enabled && !q.AllQueued().Any() && q.BuildableItems().Any())
+					idle++;
+
+			return idle;
+		}
+
+		internal static void AppendStatsTimeline(StringBuilder builder, IReadOnlyList<int[]> timeline, bool first = false)
+		{
+			AppendString(builder, "stats_timeline_fields", StatsTimelineFields, first);
+			AppendArrayPropertyStart(builder, "stats_timeline");
+			if (timeline != null)
+				for (var i = 0; i < timeline.Count; i++)
+				{
+					if (i > 0)
+						builder.Append(',');
+					builder.Append('[').Append(string.Join(",", timeline[i].Select(v => v.ToString(CultureInfo.InvariantCulture)))).Append(']');
+				}
+
+			builder.Append(']');
+		}
+
 		static bool AllBotsResolved(World world)
 		{
 			return world.Players
@@ -159,6 +246,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "team", team);
 				AppendNumber(lines, "handicap", player.Handicap);
 				AppendNumber(lines, "spawn", player.SpawnPoint);
+
+				// SpawnPoint is the lobby's choice and stays 0 for map-side players (the A/B harness),
+				// so the home cell is what tells the two sides of a duel apart.
+				AppendString(lines, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
 				AppendString(lines, "outcome", Outcome(player.WinState));
 				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
 				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
@@ -180,7 +271,11 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "assets_value", stats?.AssetsValue ?? 0);
 				AppendNumber(lines, "resources_earned", resources?.Earned ?? 0);
 				AppendNumber(lines, "resources_spent", resources?.Spent ?? 0);
+				samples.TryGetValue(player, out var timeline);
+				AppendStatsTimeline(lines, timeline);
 				lines.Append('}');
+
+				AppendArsenal(lines, player.PlayerActor.TraitOrDefault<BotArsenalLedger>());
 
 				AppendRelationships(lines, world, player, "opponents", false);
 				AppendRelationships(lines, world, player, "allies", true);
@@ -193,9 +288,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		static void AppendRelationships(StringBuilder builder, World world, OpenRA.Player subject, string property, bool allies, bool first = false)
 		{
 			AppendArrayPropertyStart(builder, property, first);
+			// Evaluate stances from the masks assigned at world creation rather than
+			// Player.IsAlliedWith: once the match resolves, decided players report
+			// Spectating (WinState != Undefined) and IsAlliedWith short-circuits to
+			// ally on non-mission maps, which would record every loser as an ally.
 			var relationships = world.Players
 				.Where(IsEligiblePlayer)
-				.Where(p => p != subject && p.IsAlliedWith(subject) == allies)
+				.Where(p => p != subject && p.AlliedPlayersMask.Overlaps(subject.PlayerMask) == allies)
 				.OrderBy(p => p.InternalName, StringComparer.Ordinal)
 				.ToArray();
 
@@ -276,13 +375,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		static bool IsEligiblePlayer(OpenRA.Player player)
 		{
-			return !player.NonCombatant && player.Playable;
+			// Player.NonCombatant only applies to map-side players: the lobby-client
+			// branch of the Player ctor ignores it, so a map-declared inert slot
+			// (e.g. the ai_duel referee) occupied by a real client keeps its intent
+			// only in PlayerReference. Honor the declared flag here so such slots
+			// never leak into opponents/allies and break the 1v1 contract.
+			// Map-declared bots are never Playable (only lobby clients are), but a
+			// headless bot-vs-bot match still fights real opponents, so IsBot
+			// admits them where Playable cannot.
+			return !player.NonCombatant && !player.PlayerReference.NonCombatant && (player.Playable || player.IsBot);
 		}
 
 		// Map-declared bots are real bot players even when they are not playable lobby slots.
+		// Same declared-intent rule as IsEligiblePlayer: a lobby-occupied slot ignores
+		// Player.NonCombatant, so PlayerReference.NonCombatant is what keeps an inert
+		// bot slot (or a hypothetical declared-noncombatant bot) out of the log.
 		internal static bool IsLoggableBot(OpenRA.Player player)
 		{
-			return player.IsBot && !player.NonCombatant;
+			return player.IsBot && !player.NonCombatant && !player.PlayerReference.NonCombatant;
 		}
 
 		static string Outcome(WinState state)
@@ -321,6 +431,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		internal static void AppendNumber(StringBuilder builder, string name, int value, bool first = false)
+		{
+			if (!first)
+				builder.Append(',');
+			builder.Append('"').Append(name).Append("\":")
+				.Append(value.ToString(CultureInfo.InvariantCulture));
+		}
+
+		internal static void AppendNumber(StringBuilder builder, string name, long value, bool first = false)
 		{
 			if (!first)
 				builder.Append(',');

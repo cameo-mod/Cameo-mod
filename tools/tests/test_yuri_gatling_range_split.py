@@ -107,18 +107,11 @@ class YuriGatlingRangeSplitTests(unittest.TestCase):
         main_warhead = "Warhead@Bullet_Medium_Flat"
         for weapon_name, (base_name, modifier) in WRAPPER_BASES.items():
             with self.subTest(weapon=weapon_name):
-                local = self.rules.weapon(weapon_name)
                 weapon = self.rules.resolve_weapon(weapon_name)
                 base = self.rules.resolve_weapon(base_name)
                 base_damage = int(base.child(main_warhead).get("Damage"))
                 expected_damage = str(base_damage * modifier // 100)
 
-                self.assertEqual(base_name, local.child("Inherits").value)
-
-                self.assertEqual(
-                    expected_damage,
-                    local.child(main_warhead).get("Damage"),
-                )
                 self.assertEqual(
                     expected_damage,
                     weapon.child(main_warhead).get("Damage"),

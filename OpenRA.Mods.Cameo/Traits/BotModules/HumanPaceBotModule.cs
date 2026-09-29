@@ -18,13 +18,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Human-likeness H1: a shared action + attention budget so a bot cannot spend",
-		"superhuman bursts and decision points take turns. Producer only — consumers",
-		"consult IBotActionBudget before issuing orders; nothing is wired yet.")]
+		"superhuman bursts and decision points take turns. Consumers: ModularBot's",
+		"order drain (TryConsumeActions) and SquadManagerBotModuleCA's squad updates",
+		"(TryConsumeAttention).")]
 	public class HumanPaceBotModuleInfo : ConditionalTraitInfo
 	{
 		[Desc("Orders admitted per sliding window (the sustained APM cap). 0 = unlimited.",
-			"Default ~144 APM — the AlphaStar lesson is that the cap must exist AND not",
-			"be spendable in a burst; MaxActionsPerTick is the other half.")]
+			"The default 6 per 25 ticks is 360 orders per game minute. Cameo's bots run UNCAPPED (0) by",
+			"maintainer ruling 2026-09-28 (DESIGN.md §19.1): the cap only made the bot weaker.")]
 		public readonly int ActionsPerWindow = 6;
 
 		[Desc("Window length in ticks for the sustained action budget (25 ticks = 1s at default timestep).")]

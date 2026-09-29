@@ -143,6 +143,8 @@ latinsyndicate_grenademonkey:
 	Inherits@MC: ^MCImmune
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
 	Inherits@flamerup: ^LatinFlameUpgrades
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Grenade Monkey
 	Valued:
@@ -576,6 +578,8 @@ latinsyndicate_terrorist:
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Terrorist
 	Valued:

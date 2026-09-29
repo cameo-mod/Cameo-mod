@@ -22,17 +22,22 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 
 		bool IUtilityCommand.ValidateArguments(string[] args) => true;
 
-		[Desc("[actor ...]",
+		[Desc("[--no-naval] [actor ...]",
 			"Print what the production tooltip shows for each buildable actor: damage % per armour ladder, the " +
-			"Armor Piercing tag, the target domains, and the derived Strong/Weak armours. Tab-separated. " +
+			"Armor Piercing tag, the target domains, the derived Strong/Weak armours, and the grouped " +
+			"Strong/Medium/Weak lines (--no-naval: as with the lobby's Naval Units option off). Tab-separated. " +
 			"Uses the SAME VersusSummary the tooltip does, so it is the tooltip's data proven without a hover.")]
 		void IUtilityCommand.Run(Utility utility, string[] args)
 		{
 			var modData = Game.ModData = utility.ModData;
 			var rules = modData.DefaultRules;
-			var only = args.Skip(1).Select(a => a.ToLowerInvariant()).ToHashSet();
+			var naval = !args.Contains("--no-naval");
+			var only = args.Skip(1).Where(a => a != "--no-naval").Select(a => a.ToLowerInvariant()).ToHashSet();
 
-			Console.WriteLine("actor\tinfantry\tvehicles\tbuildings\taircraft\tarmor_piercing\ttargets\tstrong\tweak");
+			static string Groups(System.Collections.Generic.List<VersusSummary.GroupValue> values) =>
+				string.Join(", ", values.Select(v => v.Percent is int p ? $"{v.Group} ({p}%)" : $"{v.Group} (cannot attack)"));
+
+			Console.WriteLine("actor\tinfantry\tvehicles\tbuildings\taircraft\tarmor_piercing\ttargets\tstrong\tweak\tgroup_strong\tgroup_medium\tgroup_weak");
 			foreach (var actor in rules.Actors.Values.OrderBy(a => a.Name, StringComparer.Ordinal))
 			{
 				if (actor.Name.StartsWith('^') || !actor.HasTraitInfo<BuildableInfo>())
@@ -40,9 +45,11 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 				if (only.Count > 0 && !only.Contains(actor.Name))
 					continue;
 
-				var summary = VersusSummary.For(actor, rules);
+				var summary = VersusSummary.For(actor, rules, naval);
 				if (!summary.HasWeapons)
 					continue;
+
+				var (strong, medium, weak) = VersusSummary.Bands(summary.GroupValues);
 
 				var ladders = summary.Rows.Select(r => r.CanAttack
 					? string.Join(" ", r.Rungs.Select(v => $"{v.Armor}={v.Percent}"))
@@ -52,7 +59,10 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 					.Append(summary.ArmorPiercing ? "AP" : "")
 					.Append(string.Join(",", summary.Targets))
 					.Append(string.Join(",", summary.Strong()))
-					.Append(string.Join(",", summary.Weak()))));
+					.Append(string.Join(",", summary.Weak()))
+					.Append(Groups(strong))
+					.Append(Groups(medium))
+					.Append(Groups(weak))));
 			}
 		}
 	}

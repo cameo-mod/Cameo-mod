@@ -81,6 +81,8 @@ GEO_DERIVED = (
     ("ShipHeavy", ("Heavy", "Steel")),
     ("ShipSuperheavy", ("Superheavy", "Steel")),
     ("AntiAirShip", ("ShipLight", "ShipMedium")),
+    ("SubmarineLight", ("ShipMedium", "Heavy")),
+    ("SubmarineHeavy", ("ShipHeavy", "Superheavy")),
 )
 HEROIC_DIVISOR = 200.0
 DERIVED_ARMORS = frozenset({"Heroic"} | {name for name, _ in GEO_DERIVED})

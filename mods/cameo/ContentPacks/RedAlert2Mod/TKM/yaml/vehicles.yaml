@@ -87,6 +87,8 @@ tkm_as42:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -164,6 +166,8 @@ tkm_technical:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -226,6 +230,8 @@ tkm_technicaltank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 700
 	Tooltip:

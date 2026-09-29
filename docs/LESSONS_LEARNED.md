@@ -11,6 +11,26 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches
+
+`Ruleset.cs:130` builds every actor as `new ActorInfo(..., k.Key.ToLowerInvariant(), ...)`, so the
+yaml key `EDEN_SMELTER_COMMON` becomes `eden_smelter_common` in the engine. Bot lists are compared
+case-sensitively (`Info.RefineryTypes.Contains(a.Info.Name)`), so writing the yaml spelling into a
+`*Types` list or a dictionary row is silently dead: no error, no warning, nothing at boot.
+**588 actors** have uppercase letters in their yaml key (legacy ids such as `E1`, `NUKE`, `SILO`,
+plus the `EDEN_*` / `PLYMOUTH_*` Outpost 2 set; measured 2026-09-28). On master only one AI entry
+spells one of them in uppercase: `RAPT: 3` in `UnitBuilderBotModuleCA@generic` → `UnitsToBuild`.
+PR #588 wrote 41 uppercase Outpost 2 ids into the central `ai.yaml` and 76 into the Outpost2 pack,
+and its own production gate (bot on `eden`) stayed at **2 actors**; lowercasing only those ids gave
+**22**. **Write actor ids in lowercase in every AI list.** `BotRoleSets` derives from `ActorInfo.Name`, which is already lowercase, so derived roles are
+immune. A related trap: the Python resolver (`miniyaml.Ruleset`) keeps the yaml spelling, so a
+Python check must lowercase before comparing with anything the engine logs (`bot-roles.log`).
+
+A second lesson from the same review: a runtime gate that starts the bot with a finished base
+(power, refinery, factory already placed) cannot see a list that blocks the FIRST building. #587's
+refinery/conyard A/B passed that way, while a bot starting from a bare construction yard still built
+nothing. Start economy gates from a bare construction yard.
+
 ### 2026-09-27 — Claude: a test map at `GameSpeed: insane` still runs at Normal unless you lock it AND drop AdaptiveGameSpeed
 
 Runtime gates are tick-based, so running them faster changes wall-clock time only. The maintainer's
@@ -37,6 +57,24 @@ World:
 
 Verify with wall time or the benchmark CSVs; never assume the setting took. `maximum`
 (Timestep 1) is for unattended fine-tuning batches only, since it's too fast for a human watching.
+
+### 2026-09-27 — NOVA: `Player.Spectating` is `WinState != Undefined` — post-game `IsAlliedWith` reports losers as ALLIES
+
+`Player.Spectating` (engine `Player.cs`) is `!inMissionMap && (spectating ||
+WinState != WinState.Undefined)` — on any non-mission map, **a decided player
+is a spectator**. `RelationshipWith` short-circuits `other.Spectating` to
+`Ally` for combatant evaluators before the stance masks are ever consulted, so
+any code that evaluates relationships *after* players resolve — the match-log
+writer builds its records at match end — sees every loser as an ally of every
+combatant. Symptom: schema-2 match records listing both duel bots as mutual
+`allies` with empty `opponents`, despite declared `Enemies:` and real combat.
+Correct source of truth for post-game relationships is the static mask pair
+`AlliedPlayersMask`/`EnemyPlayersMask` assigned once by
+`CreateMapPlayers.SetupPlayerMasks` (declared `Allies:`/`Enemies:` + lobby
+teams) — `p.AlliedPlayersMask.Overlaps(subject.PlayerMask)` survives WinState.
+Note `inMissionMap` (`Visibility: MissionSelector`) suppresses the whole
+Spectating flip, which is why the synthetic gate fixture masked the bug for
+weeks while the real donor map exposed it.
 
 ### 2026-09-27 — DAWN: merging onto a master that re-shaped the same defs — resolve BOTH sides, take structure from whichever passes the gates
 
@@ -152,9 +190,14 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
 - [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
 - [Mirror drift: `shared_versus_profile` skipped the MAIN-table Heroic rule (2026-09-27)](#mirror-drift-sharedversusprofile-skipped-the-main-table-heroic-rule-2026-09-27)
+- [`exit=1` on Windows is an external kill, not an engine exit — batch harnesses need kill resilience (2026-09-28, Nova)](#exit1-on-windows-is-an-external-kill-not-an-engine-exit--batch-harnesses-need-kill-resilience-2026-09-28-nova)
 
 **Process, tooling and platform**
 
+- [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
+- [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
+- [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
+- [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
 - [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
@@ -197,12 +240,58 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ Field provenance is (file, line) — matching by file alone fabricates a "live children" class (2026-09-27)](#-field-provenance-is-file-line--matching-by-file-alone-fabricates-a-live-children-class-2026-09-27)
 - [Dead-edge detection = resolve-drop probe; apply must share the test's def index (2026-09-26, W1 sweep)](#dead-edge-detection--resolve-drop-probe-apply-must-share-the-tests-def-index-2026-09-26-w1-sweep)
 - [List-splice hygiene: build head+block+tail, never mutate-then-slice (2026-09-26, rule-4 remediation)](#list-splice-hygiene-build-headblocktail-never-mutate-then-slice-2026-09-26-rule-4-remediation)
+- [Vendored-bot port traps (2026-09-28, DAWN Fransbot Route-A)](#vendored-bot-port-traps-2026-09-28-dawn-fransbot-route-a)
+- [Bot-test stall detectors must scale to real-map tick rates (2026-09-28, Nova)](#bot-test-stall-detectors-must-scale-to-real-map-tick-rates-2026-09-28-nova)
+- [`EnabledByDefault` is not set yet inside another trait's `RulesetLoaded` (2026-09-28)](#enabledbydefault-is-not-set-yet-inside-another-traits-rulesetloaded-2026-09-28)
 - [⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)](#-traitordefault-throws-on-an-actor-with-two-traits-of-that-type--76-units-carry-two-attack-traits-2026-09-27)
 - [⛔ Cameo's CA code is a HAND COPY — unused means check what CA uses it for, never dead (2026-09-27)](#-cameos-ca-code-is-a-hand-copy--unused-means-check-what-ca-uses-it-for-never-dead-2026-09-27)
 - [The AI runtime gate never forms an army — it cannot see squad-code bugs (2026-09-27)](#the-ai-runtime-gate-never-forms-an-army--it-cannot-see-squad-code-bugs-2026-09-27)
 - [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
+- [⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)](#-editor-writes-to-groundstatescacs-are-silently-lost--verify-c-edits-with-grepstat-2026-09-27)
+- [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
 
 ---
+
+## ⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)
+
+**What happened.** The canonical engine pipeline (below) says: edit the `cameo-engine` branch of
+`cameo-mod/OpenRA`, push, pin. On 2026-09-29 master's pin was `042b2fa787` (the bleed/.NET 10 sync,
+#569, plus the no-audio switch), and **`origin/cameo-engine` was 103 commits behind it**, still at
+`2b3da9e54d` (2026-08-29). The pin lived only on `origin/devin/1790592696-no-audio-switch` (and
+`bleed_sync_2026_09` one commit earlier): #569's plan was for the engine owner to fast-forward
+`cameo-engine`, which had not happened. An engine change branched from `cameo-engine` and pinned would
+have **silently reverted the whole bleed sync**: .NET 10, the map-generator port, 99 upstream commits.
+Nothing would crash at once; the build would just be a different engine.
+
+**Rule.** Before any engine change:
+`git merge-base --is-ancestor <pin from mod.config> origin/cameo-engine`. If the pin is NOT on it, branch
+the change **from the pin** (`git switch -c <branch> <pin>`), push that branch and pin to it. Never
+rebase or fast-forward `cameo-engine` yourself: that is the engine owner's call. Say so in the PR.
+Measured 2026-09-29: `cameo-engine` is a strict ancestor of the pin, so it can be fast-forwarded
+cleanly. The EX-3 hook (`d5d8b2a685`) sits on branch `claude/mcv_expansion_site`, on top of the pin.
+**Resolved 2026-09-30** (maintainer: "synchronize all branches … the latest engine update"):
+`origin/cameo-engine` was fast-forwarded to `d5d8b2a685` (104 commits), which is master's pin. The rule
+stays: check before every engine change.
+
+## A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)
+
+Two commits (the DESIGN §19.2 learning ruling and AI_ARCHITECTURE §6.4) were pushed to a PR branch
+**19 minutes after that PR had been merged** into its stacked base. `git push` succeeds, GitHub shows
+nothing, and the work silently never lands. It was caught only by
+`git log <base>..<branch>` and rescued as a follow-up PR (#638 for #635).
+Rule: before pushing more commits to an open PR's branch, run
+`gh pr view <n> -R cameo-mod/Cameo-mod --json state`; a stacked PR can be merged by someone else at any
+time. After a merge, open a new PR from the same branch.
+
+## A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)
+
+.NET randomises string hashing per process, so a `HashSet<string>` (and a `FrozenSet`) enumerates
+in a **different order on every boot of identical rules**. `FieldSaver.FormatValue` prints sets in
+enumeration order, so two dumps of the same ruleset differ textually. `BotModuleFieldDump`
+(AI_ARCHITECTURE §2.9 P0) sorts sets and dictionaries itself and keeps real lists in order. It is
+proven by dumping twice (2,168 fields, identical) and by a negative control: removing `guerrilla` from
+`Apply` shows exactly the six personalities' `GuerrillaTypes` (−154 each) and nothing else.
+Any tool that compares engine-side collections needs the same sort.
 
 ## ⛔ TraitOrDefault throws on an actor with TWO traits of that type — 76 units carry two attack traits (2026-09-27)
 
@@ -1330,7 +1419,7 @@ Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
 
-1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`).
+1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`). ⛔ **First check that the pin in `mod.config` is on that branch** (`git merge-base --is-ancestor <pin> origin/cameo-engine`); if it is not, branch from the pin instead (lesson 2026-09-29, "The pinned engine commit is NOT on `cameo-engine`").
 2. **Commit and push** to `origin/cameo-engine`. Check `git status` for stray entries before committing (see the nested-clone pitfall below).
 3. **Get the full commit hash** with `git rev-parse cameo-engine` — never hand-type or truncate/pad a hash.
 4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.
@@ -2867,3 +2956,200 @@ flag — a belled table is meaningless without saying WHICH side of rule 4 it is
 - A Python-vs-C# mirror mismatch on GENERATED data is a bug in the mirror or
   the engine — never "fix" it by editing expectations until you know which
   side violates the spec.
+
+## ⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)
+
+On 2026-09-27 the `edit` tool reported success on three separate writes to
+`OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs` and the file
+on disk never changed — `stat` showed an mtime older than the write, and a
+later build found the new type missing. Other files in the same session took
+identical edits fine, so this is file- or watcher-specific (likely an external
+process rewriting/restoring it — DAWN's status note confirms every worktree's
+`engine/` junctions to ONE shared `Cameo-mod\engine`, and several agent
+processes were live on the tree at the time). The same phantom-write pattern
+was observed twice in an earlier session on this same file.
+
+**Rules:**
+- After any C# edit, prove it hit disk before building: `grep -c <new symbol>`
+  + `stat` mtime newer than the write. If the tool says "edited" but grep says
+  0, rewrite via a shell write (python/`cat >`) and re-verify immediately.
+- Shared `engine/bin` is one physical directory across all worktrees — never
+  trust a build/gate whose copy step raced another agent's `--check-yaml`, and
+  check `Get-Process OpenRA*` before gating.
+
+## A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)
+
+Five factions (`atreides`, `harkonnen`, `corrino`, `EDEN`, `PLYMOUTH`) shipped
+buildable conyards, refineries, factories and units — and their bots never
+produced a single actor. The mechanism is name-keyed, not trait-keyed:
+`BaseBuilderQueueManagerCA.GetProducibleBuilding` filters
+`queue.BuildableItems()` against the `PowerTypes`/`RefineryTypes`/
+`BarracksTypes`/`ProductionTypes`/`SiloTypes` lists in `mods/cameo/ai/ai.yaml`,
+and `HasMinimalRefineryCount()` counts only actors whose ids are in
+`RefineryTypes` — an unlisted refinery is invisible, so
+`PauseUnitProduction` stayed true forever. Roughly 60 more list fields gate
+the same way (harvester/MCV/scout/engineer/squad/resource-map), so the bots
+were inert end-to-end. AI_ARCHITECTURE §2.8's report-only `BotRoleSets` table
+had already predicted the gap ("would add: the D2k spice harvesters,
+refineries, convecs").
+
+Why it survived: every runtime gate exercised `td_gdi`/`td_nod`, factions the
+lists already covered — green tests measured factions that were never broken.
+And a rename-era cleanup (`10b8f5915`) deleted the houses' dictionary rows as
+"stale" after `d2k_*` ids died, so the failure looked like the split working
+as designed.
+
+Rules:
+
+- After a faction rollout OR rename, census every `*Types`-shaped field in
+  `mods/cameo/ai/ai.yaml` for the new ids — the list cannot live in a pack
+  (MiniYaml scalars override; §2.8 derives it properly once `Apply:` rolls
+  out). Appending ids is additive and unions cleanly with `Apply:` later.
+- A "stale id" cleanup must verify nothing real replaced the dead spelling;
+  deleting the last central reference to a faction's buildings is a
+  functional removal wearing a hygiene costume.
+- Gates must cover a faction from the NEWEST content pack, not only the
+  oldest: `tools/tests/ai_d2k_production_gate.py` runs an Atreides HardBot
+  from one construction yard and asserts the owned-actor count grows —
+  negative control (lists spliced out) fails at 2 actors forever.
+- `AiMatchLogWriter`/situation records buffer until every bot's `WinState`
+  resolves — a timed-out or killed match writes NOTHING. For gates, print
+  progress from map lua (`Actor` counts, tick heartbeats) instead.
+
+## `exit=1` on Windows is an external kill, not an engine exit — batch harnesses need kill resilience (2026-09-28, Nova)
+
+The headless batch (`tools/ai/run_ai_match_batch.py`) lost four matches across
+two nights to the same signature: `exit=1` mid-simulation, zero match records,
+no new `exception-*.log`, `debug.log` simply stops. The engine's own launcher
+only ever returns `RunStatus.Success` (0) or `RunStatus.Error` (-1); `1` is
+what `TerminateProcess` produces — Python `Popen.terminate()`, `taskkill /F`,
+or a name-based `Stop-Process -Name OpenRA` from another agent's cleanup all
+land there. On a box running several agent lanes at once, a name sweep kills
+every lane's match.
+
+- Never kill OpenRA by process name — always by the PID you spawned. A
+  `Stop-Process -Name "OpenRA*"` in a boot-gate script is a cross-agent kill.
+- Treat `exit=1` + zero records + no exception as an external kill, not a
+  match result: `run_ai_match_batch.py` retries the matchup once and writes a
+  durable `batch_results.jsonl` line per attempt so a killed driver still
+  leaves evidence.
+- `gamespeed: insane` is a *request*: `TimeLimit *= 60 * ticksPerSecond`, so
+  the tick cap quadruples while `AdaptiveGameSpeed` keeps the achieved rate at
+  whatever the contended box sustains. Timeout matches can overrun any tight
+  wall bound — bound on `debug.log` quiet time (a live match writes every few
+  seconds), with a speed-aware backstop only.
+- `Player.Spectating` becomes true for every *decided* player on non-mission
+  maps (`WinState != Undefined`). Any post-game relationship query via
+  `IsAlliedWith` returns "ally" for both losers — read the static stance
+  masks (`AlliedPlayersMask`/`EnemyPlayersMask`) instead.
+- `Map.ComputeUID` hashes file bytes: two byte-identical variant dirs merge
+  into one `MapCache` preview, and `Launch.Map`'s name lookup can't see the
+  other — salt generated copies with a unique comment.
+## Vendored-bot port traps (2026-09-28, DAWN Fransbot Route-A)
+
+Three traps from porting Fransbot's 27 modules onto cameo-engine — all apply to the
+next vendored bot (CN CombatAnalysis consumption, harasser squads):
+
+- **`readonly` collection fields defaulted `= null` are a boot NRE.** Upstream fills
+  `UnitsToBuild`/`UnitLimits`/`UnitDelays` from its personalities yaml on every player;
+  in Cameo no faction row exists yet, so the field stays null and
+  `ActorIndex.OwnerAndNames(info.UnitsToBuild.Keys)` NRE'd inside `Player..ctor` during
+  shellmap world creation — before the menu, before any bot type check. Default to
+  `FrozenDictionary.Empty`/`FrozenSet.Empty` and let runtime `Count == 0` guards
+  idle the feature. `Actor.TraitsImplementing<T>` returns disabled traits too, so
+  `Created()` `?? throw` service lookups are safe, but ctor-time field dereferences
+  are not — trait constructors run for EVERY player actor regardless of conditions.
+- **`IBotRespondToAttack` is a fog-leak class.** `e.Attacker` may be a shroud-hidden
+  enemy; reading its `Info.Name`/`Location`/`ActorID` leaks what the player cannot
+  see. Fransbot's own convention (Minelayer): the ATTACK is legitimate information,
+  the attacker is not — inspect `e.Attacker` only behind `CanBeViewedByPlayer(player)`
+  and fall back to the victim's cell for any anchoring. Two handlers violated it
+  (DefenseCommander threat-type/defense-center, BaseBuilder `UpdatedDefenseCenter`).
+  Audit every `RespondToAttack` + every `ActorMap.AllActors`/`FindActorsInCircle`
+  enemy-side scan when porting; own-actor filters and `BlockedByActor` route sims are
+  fine (the engine pathfinder pays the same cost physically).
+- **Zombie `OpenRA.Utility` children pin the shared `engine/bin`.** All worktrees
+  junction to the same built engine; `--check-yaml` writes its printed output early
+  but the process keeps running (~1 GB, one CPU core) holding `bin\*.dll` read-locks
+  for tens of minutes, silently failing every `dotnet build` copy step with MSB3027.
+  Before building or booting: `Get-Process OpenRA*`; only ever kill a PID whose
+  binary path + command line resolve to YOUR worktree.
+- **Bot match tests must lock `GameSpeed: maximum`** (maintainer order 2026-09-29,
+  superseding the 2026-09-28 `insane` ruling) — the top `mod.yaml` GameSpeeds
+  tier (1 ms timestep, CPU-bound). Default speed made a 4,500-tick smoke take
+  ~19 min; `maximum` runs the same match ~40-50x faster at parity hardware —
+  matches become cheap enough to run in quick succession. Recipe for every
+  `ai_*` test map's `rules.yaml`:
+  `World: → MapOptions: → GameSpeed: maximum` (+ `GameSpeedDropdownLocked: True`
+  so a lobby default can't override). `MapOptions` is a WORLD trait — under
+  `Player:` it silently drops, and at yaml root it parses as an actor named
+  `mapoptions` (`Junk value` rules error). `Shroud`/`PlayerResources` are
+  Player-actor traits and stay under `Player:`.
+- **`ALSOFT_DRIVERS=null` unblocks every headless gate.** Since the .NET 10 /
+  bleed engine update, OpenAL Soft access-violates (0xC0000005) inside the
+  native `alcOpenDevice` P/Invoke — a hard crash the managed `try/catch` in
+  `DefaultPlatform.CreateSound` can never see, so it reproduces on unmodified
+  master and blocked all `ai_*` gates + `boot-test.cmd` on this host. The
+  bundled `soft_oal.dll` IS OpenAL Soft, whose `null` backend gives headless
+  runs a working silent device — set the env var (`os.environ.setdefault` in
+  `tools/tests/_bootstrap.py` covers every python gate; `run_ai_match_batch.py`
+  and `boot-test.cmd` set their own). Verified live: `ai_raid_gate` PASS.
+  This masks real-audio regressions in gates, so unset the var when testing sound.
+- **A runtime gate must not depend on a random personality roll or pre-window
+  publication.** `ai_raid_gate_20260928` asserted a `mission_assignment`, but
+  `BotPersonalityController` rolls one of five personalities at `TraitEnabled`
+  and assignments only record when a Rush squad forms AFTER the Raid mission
+  publishes — the starting army can exhaust the squad queue first (1-in-3-ish
+  pass rate observed). Fixture fix: pin `BotPersonalityController.Conditions`
+  to `personality-rush` in the map's `rules.yaml`, spawn a visible enemy-side
+  target so `FindClosestEnemy` doesn't depend on the fogged-scan fallback, and
+  land a second wave above `MaxIdleUnits` inside the window to force a
+  post-publication squad. Gate went from flaky to 2-for-2.
+
+## Bot-test stall detectors must scale to real-map tick rates (2026-09-28, Nova)
+
+`run_ai_match_batch.py`'s stall detector was tuned on the flat duel fixture
+(~100 tps sustained): `debug.log` quiet for 120s meant hung. On the real
+"A Nuclear Winter" template the sim sustains ~25 tps, the AI module-timing
+lines land 60-120s apart, and a busy stretch produced a false `stalled` kill
+mid-match. Default `--stall-timeout` is now 400s; keep in mind the same
+calibration applies to any future gate that infers liveness from log cadence
+on real maps.
+
+Sibling note, same day: merging a PR stacked on a *merged* base branch marks
+the PR MERGED without touching master (#605 → claude/bot_difficulty_scale
+after it landed as #602). Check `baseRefName` and verify the merge commit is
+an ancestor of master before calling it landed.
+
+## `EnabledByDefault` is not set yet inside another trait's `RulesetLoaded` (2026-09-28)
+
+`ConditionalTraitInfo.EnabledByDefault` is assigned in that trait's OWN `RulesetLoaded`. Code that runs in a
+DIFFERENT actor's `RulesetLoaded` (e.g. `BotRoleSets` on the Player, scanning every actor's armaments) can run
+first and sees `false` for every conditional trait. The first boot of the `Weapons.ValidTargets` role predicate
+crashed on exactly this ("no actor has a `Weapons` trait"). Evaluate `RequiresCondition == null ||
+RequiresCondition.Evaluate(VariableExpression.NoVariables)` yourself in load-time code; `EnabledByDefault` is
+safe only at runtime (after every ruleset step, as `BotUnitProfiles` and `AdaptiveCounterProduction` use it).
+
+## Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)
+
+A `run_ai_match_batch.py` run launches a fresh OpenRA process per match, and each launch parses
+`mods/` **from the worktree at that moment** — only the ruleset of the FIRST match is guaranteed to
+match the DLL that was built. Switching the worktree to a newer base mid-batch left `ai.yaml` /
+`player.yaml` carrying traits and derive predicates the running DLL did not contain:
+`BotRoleSets on player: no actor has a Weapons trait with a public field ValidTargets` — three
+matches died at ~40 s each while match 1 (already loaded) played to a clean finish.
+
+Two traps inside that one:
+
+- **The silent-drop rule (8b) does NOT cover derive vocabularies.** `DeriveHasField` was a *known*
+  field on the old `BotRoleSetsInfo` — parsed fine, then evaluated and crashed on the predicate
+  `Weapons.ValidTargets`, which only exists in the newer DLL. A field name surviving is not the
+  predicate surviving; gate new predicates on the binary that will read them.
+- The same skew would have hit `BotArsenalLedger:` in `player.yaml` (`Cannot locate type` class)
+  one hunk later — reverting one file is not enough; the whole `mods/` tree must match the DLL.
+
+Rule: **do not change branches, pull, or merge in a worktree while its batch is live.** Do branch
+work in a scratch worktree (`git worktree add`), and only rebuild `engine/bin` when no OpenRA
+process from that worktree is running — a loaded DLL is file-locked on Windows, and a half-written
+binary corrupts the next launch. If a mid-batch skew already happened, the record is still valid for
+the match that loaded before the switch; rerun only the crashed cells.

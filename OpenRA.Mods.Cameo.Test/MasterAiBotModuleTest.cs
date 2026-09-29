@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -77,10 +78,11 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
-				"main_target_score", "mission", "hints", "demand", "own", "enemies"
+				"main_target_score", "mission", "mission_assignment", "hints", "demand", "own", "enemies"
 			}));
 			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
 			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
+			Assert.That(doc.RootElement.GetProperty("own").GetProperty("losses_by_role").EnumerateObject().Count(), Is.Zero);
 		}
 
 		[Test]
@@ -113,9 +115,23 @@ namespace OpenRA.Mods.Cameo.Test
 			var situation = Situation(BotUrgency.Pressured, "steamroller", null,
 				new EnemyProfiles(enemy));
 			situation.Mission = new BotMission { Type = BotMissionType.Raid, Priority = 65, RegionIndex = 18 };
+			situation.Threats.Add((new BotThreatTracker.Group(40, 60, 3000, 5) { VelocityX = 0.05 },
+				new BotThreatTracker.Prediction(new CPos(80, 60), 2500, 800)));
+			situation.LossesByRole["rush"] = 5400;
+			situation.LossesByRole["idle"] = 700;
+			situation.AwayLossesByRole["rush"] = 4800;
 			AiSituationLogWriter.AppendSituation(b, "game", "", "map", "Multi0", "td_gdi", "medium", "rush",
 				situation);
 			using var doc = JsonDocument.Parse(b.ToString());
+			var own = doc.RootElement.GetProperty("own");
+			Assert.That(own.GetProperty("losses_by_role").EnumerateObject().Select(p => p.Name), Is.EqualTo(new[] { "idle", "rush" }));
+			Assert.That(own.GetProperty("losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(5400));
+			Assert.That(own.GetProperty("away_losses_by_role").GetProperty("rush").GetInt32(), Is.EqualTo(4800));
+			Assert.That(own.GetProperty("combat_ratio_pct").GetInt32(), Is.Zero);
+			var threat = own.GetProperty("threats")[0];
+			Assert.That(threat.GetProperty("target").GetString(), Is.EqualTo("80,60"));
+			Assert.That(threat.GetProperty("eta").GetInt32(), Is.EqualTo(800));
+			Assert.That(threat.GetProperty("vx_per_kilotick").GetInt32(), Is.EqualTo(50));
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
 			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
 			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));
@@ -131,7 +147,8 @@ namespace OpenRA.Mods.Cameo.Test
 				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
 				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
-				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score"
+				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score",
+				"army_value_delta" // §12.14 PL telemetry (#658)
 			}));
 		}
 
@@ -273,6 +290,32 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TargetScoreHurtPenalisesTheEnemyBeatingUs()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var profile = new EnemyProfile { Name = "aggressor", ArmyValue = 100, NearestCells = 5 };
+			var calm = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 0, info);
+			var hurt = MasterAiBotModule.TargetScore(profile, 1000, 0, 0, 100, info);
+
+			// §4.3: WeightHurt=150 is live now that the dealt-side producer landed —
+			// a high taken-share of the exchange lowers the target score.
+			Assert.That(hurt, Is.LessThan(calm));
+			Assert.That(hurt, Is.GreaterThanOrEqualTo(0));
+		}
+
+		[Test]
+		public void HurtShareTracksTheExchangeBalance()
+		{
+			// The bounded form of §4.3's dealt/taken ratio: our share of the exchange
+			// lost, 0-100. No exchange yet is neutral, not 100.
+			Assert.That(MasterAiBotModule.HurtShare(0, 0), Is.EqualTo(0));
+			Assert.That(MasterAiBotModule.HurtShare(50, 50), Is.EqualTo(50));
+			Assert.That(MasterAiBotModule.HurtShare(100, 0), Is.EqualTo(100));
+			Assert.That(MasterAiBotModule.HurtShare(0, 100), Is.EqualTo(0));
+			Assert.That(MasterAiBotModule.HurtShare(25, 75), Is.EqualTo(25));
+		}
+
+		[Test]
 		public void TargetChoiceHoldsIncumbentWithinMinimumHold()
 		{
 			var info = new MasterAiBotModuleInfo();
@@ -347,10 +390,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
 				available, info), Is.EqualTo("expansion"));
 			target.NearestCells = 10;
+			// Nothing matches a strong-but-unscouted enemy: the terminal fallback
+			// picks a posture (calm -> expansion, pressured -> turtle) instead of
+			// latching the incumbent forever.
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle",
-				available, info), Is.EqualTo("turtle"));
+				available, info), Is.EqualTo("expansion"));
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "guerrilla",
-				available, info), Is.EqualTo(""));
+				available, info), Is.EqualTo("expansion"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Pressured, target, 0, new[] { target }, "rush",
+				available, info), Is.EqualTo("turtle"));
 		}
 
 		[Test]
@@ -500,7 +548,28 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = new BotPersonalityControllerInfo();
 			Assert.That(BotPersonalityController.PersonalityName("personality-rush", info.PersonalityPrefix), Is.EqualTo("rush"));
 			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "steamroller"), Is.True);
-			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.False);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.True);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "berserker"), Is.False);
+		}
+
+		[Test]
+		public void PersonalityPinResolvesOnlyMappedBotTypes()
+		{
+			var pins = new System.Collections.Generic.Dictionary<string, string>
+			{
+				["exploit_rush"] = "rush",
+				["exploit_turtle"] = "turtle",
+			};
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "exploit_rush"), Is.EqualTo("rush"));
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "exploit_turtle"), Is.EqualTo("turtle"));
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, "hard"), Is.Null);
+			Assert.That(BotPersonalityController.PinnedPersonality(pins, null), Is.Null);
+		}
+
+		[Test]
+		public void PersonalityPinDefaultsToNullWithoutTable()
+		{
+			Assert.That(BotPersonalityController.PinnedPersonality(null, "exploit_rush"), Is.Null);
 		}
 
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
@@ -763,6 +832,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void NeighbourDefenceDoesNotPublishDefend()
+		{
+			var setup = MissionRegions((3, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions, Is.Empty);
+		}
+
+		[Test]
+		public void BaseRegionDefencePublishesDefend()
+		{
+			var setup = MissionRegions((4, 0, 100, 0));
+			var missions = MasterAiBotModule.DeriveMissions(setup.Regions, new[] { setup.Enemy }, 4, 0,
+				new MasterAiBotModuleInfo());
+
+			Assert.That(missions, Has.Count.EqualTo(1));
+			Assert.That(missions[0].Type, Is.EqualTo(BotMissionType.Defend));
+		}
+
+		[Test]
 		public void EqualMissionPrioritiesOrderDefendThenRegion()
 		{
 			var setup = MissionRegions((0, 49, 0, 50), (4, 0, 0, 0), (8, 49, 0, 50));
@@ -805,6 +895,62 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
+		}
+
+		[Test]
+		public void BestAffordableMissionSkipsAllExhaustedDefends()
+		{
+			var firstDefend = new BotMission
+			{
+				Type = BotMissionType.Defend,
+				RegionIndex = 4,
+				Priority = 90
+			};
+			var secondDefend = new BotMission
+			{
+				Type = BotMissionType.Defend,
+				RegionIndex = 5,
+				Priority = 80
+			};
+			var raid = new BotMission
+			{
+				Type = BotMissionType.Raid,
+				RegionIndex = 8,
+				RequiredValue = 100,
+				Priority = 60
+			};
+			var provider = new StubMissionProvider { Missions = new[] { firstDefend, secondDefend, raid } };
+
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(
+					new[] { provider },
+					100,
+					m => m.Type == BotMissionType.Defend &&
+						(firstDefend.RegionIndex == m.RegionIndex || secondDefend.RegionIndex == m.RegionIndex)),
+				Is.SameAs(raid));
+		}
+
+		[Test]
+		public void BestAffordableMissionSkipsExcludedMissions()
+		{
+			var defend = new BotMission { Type = BotMissionType.Defend, RequiredValue = 0, RegionIndex = 4 };
+			var raid = new BotMission { Type = BotMissionType.Raid, RequiredValue = 0, RegionIndex = 8 };
+			var providers = new[]
+			{
+				new StubMissionProvider { Missions = new[] { defend, raid } }
+			};
+
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 0), Is.SameAs(defend));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0,
+					m => m.Type == BotMissionType.Defend && m.RegionIndex == 4),
+				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => m.Type == BotMissionType.Defend),
+				Is.SameAs(raid));
+			Assert.That(
+				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => true),
+				Is.Null);
 		}
 	}
 }

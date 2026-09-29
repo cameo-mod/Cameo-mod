@@ -130,6 +130,8 @@ td_gdi_humvee:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: GDI Humvee
 	Valued:
@@ -641,6 +643,8 @@ td_gdi_humveemkii:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Humvee Mk. II
 	Buildable:

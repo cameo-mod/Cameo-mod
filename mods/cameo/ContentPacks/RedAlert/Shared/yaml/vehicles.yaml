@@ -11,6 +11,8 @@ ra1_allies_apc:
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@ChronoArmor: ^ChronoArmor
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 1680
 	Tooltip:

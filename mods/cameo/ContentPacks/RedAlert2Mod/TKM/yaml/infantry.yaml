@@ -9,6 +9,8 @@ tkm_rifleman:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@speed: ^UPBerezkaCloakUpgrade
 	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 120
 	Tooltip:

@@ -36,6 +36,8 @@ harkonnen_combat_tank:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
@@ -88,6 +90,8 @@ harkonnen_assaulttank:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 50
@@ -495,6 +499,8 @@ harkonnen_flametank:
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 45

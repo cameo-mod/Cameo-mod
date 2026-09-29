@@ -31,6 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Maximum scouts held at once.")]
 		public readonly int MaxScouts = 2;
 
+		[Desc("Minimum ticks between two scout production requests (AI_ARCHITECTURE §12.12). A request is built ahead of",
+			"the unit builder's queue rotation and cash check, so unrationed replacements for scouts that die or get",
+			"drafted into squads took over the vehicle factory. 0 = request on every scan, as before.")]
+		public readonly int ScoutRebuildCooldownTicks = 0;
+
 		[Desc("Ticks between claim/retarget evaluations.")]
 		public readonly int ScanInterval = 50;
 
@@ -48,6 +53,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("Bonus interest per unit of remembered enemy value in a region.")]
 		public readonly int RememberedValueWeight = 1;
+
+		[Desc("Bonus interest for regions holding a multiplayer spawn other than this bot's own (public map data, as",
+			"every human sees in the lobby): scouts keep checking where the enemy base probably is. The bot saw only",
+			"1-18% of the enemy army without it (AI_DEEP_RESEARCH.md §2.3). 0 disables it.")]
+		public readonly int EnemySpawnBonus = 0;
 
 		public override object Create(ActorInitializer init) { return new ScoutBotModule(init.Self, this); }
 	}
@@ -68,7 +78,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		ResourceMapBotModule resourceMap;
 		IBotRequestUnitProduction[] unitBuilders;
-		List<UnitWposWrapper> idlePool = new();
+		int lastScoutRequestTick = -1;
+		// Null until the squad manager supplies its shared idle-unit pool.
+		List<UnitWposWrapper> idlePool;
 		int scanTicks;
 
 		public ScoutBotModule(Actor self, ScoutBotModuleInfo info)
@@ -83,7 +95,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		protected override void TraitEnabled(Actor self)
 		{
-			resourceMap = self.TraitOrDefault<ResourceMapBotModule>();
+			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
 		}
@@ -130,12 +142,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
-
-			// Claiming while nothing is stale only churns the idle pool.
-			if (!AnyStaleRegion(regions, tick))
+			var hasStaleRegion = AnyStaleRegion(regions, tick);
+			if (ReleaseScoutsIfNoStaleRegions(hasStaleRegion, scouts, scoutTargets, idlePool))
 				return;
 
+			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
 			ClaimScouts(bot);
 
 			foreach (var scout in scouts.ToArray())
@@ -147,14 +158,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
 				if (region < 0)
 				{
-					// No stale region: release the unit so squads can claim it.
-					// Removing it from scouts alone strands it — it was pulled out
-					// of the manager's idle pool when claimed, and FindNewUnits
-					// skips activeUnits, so it must go back into the pool here.
-					scoutTargets.Remove(actor);
-					scouts.Remove(scout);
-					if (!unitCannotBeOrdered(actor) && idlePool != null && idlePool.All(u => u.Actor != actor))
-						idlePool.Add(scout);
+					// No unassigned stale region: return ownership to the shared pool.
+					ReturnScoutToIdlePool(scout, scouts, scoutTargets, idlePool);
 					continue;
 				}
 
@@ -162,6 +167,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				scoutTargets[actor] = (region, tick);
 				bot.QueueOrder(new Order("Move", actor, Target.FromCell(world, regions.CenterOf(region)), false));
 			}
+		}
+
+		internal static bool ReleaseScoutsIfNoStaleRegions(bool hasStaleRegion,
+			List<UnitWposWrapper> scouts, Dictionary<Actor, (int Region, int AssignedTick)> scoutTargets,
+			List<UnitWposWrapper> idlePool)
+		{
+			if (hasStaleRegion)
+				return false;
+
+			if (idlePool != null)
+				while (scouts.Count > 0)
+					ReturnScoutToIdlePool(scouts[0], scouts, scoutTargets, idlePool);
+
+			return true;
+		}
+
+		static void ReturnScoutToIdlePool(UnitWposWrapper scout, List<UnitWposWrapper> scouts,
+			Dictionary<Actor, (int Region, int AssignedTick)> scoutTargets, List<UnitWposWrapper> idlePool)
+		{
+			if (idlePool == null)
+				return;
+
+			scoutTargets.Remove(scout.Actor);
+			scouts.Remove(scout);
+			if (!IdlePoolContainsActor(idlePool, scout.Actor))
+				idlePool.Add(scout);
+		}
+
+		static bool IdlePoolContainsActor(List<UnitWposWrapper> idlePool, Actor actor)
+		{
+			foreach (var unit in idlePool)
+				if (unit.Actor == actor)
+					return true;
+
+			return false;
 		}
 
 		void ClaimScouts(IBot bot)
@@ -191,14 +231,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (!claimedAny && scouts.Count < Info.MaxScouts)
-				RequestScout(bot);
+			if (!claimedAny && scouts.Count < Info.MaxScouts && MayRequest(world.WorldTick, lastScoutRequestTick, Info.ScoutRebuildCooldownTicks)
+					&& RequestScout(bot))
+				lastScoutRequestTick = world.WorldTick;
 		}
 
-		void RequestScout(IBot bot)
+		internal static bool MayRequest(int tick, int lastRequestTick, int cooldownTicks)
+		{
+			return cooldownTicks <= 0 || lastRequestTick < 0 || tick - lastRequestTick >= cooldownTicks;
+		}
+
+		bool RequestScout(IBot bot)
 		{
 			if (unitBuilders == null || unitBuilders.Length == 0)
-				return;
+				return false;
 
 			foreach (var name in Info.ScoutUnitTypes.OrderBy(n => n, StringComparer.Ordinal))
 			{
@@ -219,8 +265,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				builder.RequestUnitProduction(bot, name);
-				return;
+				return true;
 			}
+
+			return false;
 		}
 
 		int ChooseScoutTarget(RegionMemory regions, CPos from, int tick, HashSet<int> taken)
@@ -284,9 +332,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return stalest;
 		}
 
+		HashSet<int> enemySpawnRegions;
+
+		// Region indices of the map's mpspawn cells, minus the one this bot starts on. Read from the map's actor
+		// definitions (as CheckPlayers does) — public, identical for every player, no world scan.
+		HashSet<int> EnemySpawnRegions(RegionMemory regions)
+		{
+			if (enemySpawnRegions != null)
+				return enemySpawnRegions;
+
+			var own = regions.IndexOf(player.HomeLocation);
+			enemySpawnRegions = world.Map.ActorDefinitions
+				.Where(d => d.Value.Value == "mpspawn")
+				.Select(d => new ActorReference(d.Value.Value, d.Value).Get<LocationInit>().Value)
+				.Select(regions.IndexOf)
+				.Where(i => i != own)
+				.ToHashSet();
+			return enemySpawnRegions;
+		}
+
 		int Interest(RegionMemory regions, int index)
 		{
 			var interest = 0;
+			if (Info.EnemySpawnBonus > 0 && EnemySpawnRegions(regions).Contains(index))
+				interest += Info.EnemySpawnBonus;
+
 			foreach (var enemyRegions in regions.ByEnemy.Values)
 			{
 				var region = index < enemyRegions.Length ? enemyRegions[index] : null;

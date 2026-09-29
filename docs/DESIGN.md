@@ -1541,6 +1541,18 @@ YAML remains an explicit design decision.
   (`OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs`), and hides any hand-written
   `Strong vs` / `Weak vs` line in the description. **Do not write new ones.** Check what the
   tooltip will say with `utility.cmd cameo --versus-summary [actor ...]`.
+  ⭐ **GROUPS, not armour rungs (maintainer 2026-09-28, #593).** The lines read
+  `• Strong vs. Tanks (188%), Vehicles (167%)` / `• Medium vs. …` / `• Weak vs. …`:
+  * **Groups:** Infantry, Heroes (`Heroic` armour), Vehicles, Tanks (the six tank class templates:
+    MainBattleTank, HighTechTank, Dreadnought, TankDestroyer, ArtilleryTank, LightTank), Ships,
+    Submarines (Underwater-targetable), Buildings, Defenses (armed buildings), Aircraft.
+    **Ships and Submarines appear only when the lobby's Naval Units option is on.**
+  * **Number:** the geometric mean of the unit's strongest weapon's Versus over the armour the
+    group's buildable members WEAR, each armour weighted by its wearer count. Unweighted, Tanks
+    and Vehicles would always show the same number.
+  * **Bands:** Strong >= 125, Medium 80–124, Weak < 80 (symmetric on the geometric scale).
+  * A group the unit cannot hit closes the Weak line with its reason: `(cannot attack ground |
+    air | water | underwater)`, or the missed class when the unit hits some land group.
 - Upgrade descriptions open with the tier tag ("Tech Upgrade (Only affects
   units of own faction)" / "Team Upgrade (…)" / "Promotion Upgrade (…)"),
   then one effect per line with exact stats and affected units (grouped
@@ -4161,6 +4173,24 @@ takes. **Heroic is the single exception** (rule 4).
 | `ShipHeavy` | `Heavy` x `Steel` | NAV | heavy ships |
 | `ShipSuperheavy` | `Superheavy` x `Steel` | NAV | capital ships (battleships, carriers) |
 | `AntiAirShip` | `ShipLight` x `ShipMedium` | NAV | anti-air ships (50% from air weapons, rule 3) |
+| `SubmarineLight` | `ShipMedium` x `Heavy` | NAV | light submarines (added 2026-09-28, rule 3b) |
+| `SubmarineHeavy` | `ShipHeavy` x `Superheavy` | NAV | heavy submarines (added 2026-09-28, rule 3b) |
+
+**Rule 3b — SUBMARINES (maintainer 2026-09-28).** Submarines get their own derived types, "like
+the cyborgs", each tougher than a surface ship of its class (a pressure hull):
+`SubmarineLight = ShipMedium x Heavy`, `SubmarineHeavy = ShipHeavy x Superheavy`, by rule 1's
+geomean (maintainer 2026-09-28 revised the light parent from `Medium` to `Heavy`; measured over
+1,594 weapon tables it ties with `SubmarineHeavy` in 53 against 72, at the same median gap). The anti-submarine bonus is a visible row, as in rule 3: **`AntiSub`** (depth charges,
+§12.0k item 5) ranks both `Submarine*` rows FIRST; **`Torpedo`** (anti-ship) ranks the `Ship*`
+rows first and the `Submarine*` rows SECOND; every other family writes the plain geomean. It lands
+when §12.0k item 5 builds those two families. Measured on `c5390178d`: 20 units are
+Underwater-targetable (wearing Medium 8, Heavy 7, Light 3, None 2), and 22 fired weapons can hit
+underwater: torpedoes filed as `MissileAP` (7) and `MissileHE` (2), depth charges as `Demolition`
+(5) and `BlastCryo` (2). Membership is reviewed per unit, like the cyborg list. Adding the two
+types touches the generator, `HeavinessBell.cs` and `effective_heaviness.py` together
+(`test_derived_armor_types.py` pins all three to one list, and since 2026-09-29 also
+`audit_versus_profile.DERIVED_ARMORS`). **Done 2026-09-29:** both types are in all four lists and
+in every Versus table as the plain geomean.
 
 Ships are the new NAVAL ladder (maintainer 2026-09-26: a hull is part vehicle, part floating
 structure, so each ship type pairs a vehicle rung with a building rung); it is also the ladder the
@@ -4235,10 +4265,17 @@ so the 50% has something to apply to; (3) move actors onto the new types, per th
 (4) re-extract ledgers. Derived columns sit OUTSIDE the R16 geomean-100 normalisation, like Heroic,
 and are computed last (they are functions of normalised parents).
 
+**Status 2026-09-29:** the derived rows are in **every** Versus table. The generated templates
+carry all 15 derived columns (`splice_templates.py --all`), `derive_versus_columns.py` wrote the
+35,123 missing rows into the 42 weapon files, and `audit_derived_armor_columns.py` is at **0**
+(ratchet 0). No actor wears a derived type yet, so none of these rows changes a hit in play until
+step (3); the submarine rows take the AntiSub / Torpedo bonus when §12.0k item 5 builds those
+families (rule 3b).
+
 ⭐ **The runtime bell follows these rules (2026-09-26).** An earlier note here called the bell
 INERT; that was wrong, measured the same day: the `^Warhead_CannonAP` continuous pilot base is
 LIVE for ~10 weapons and ~20 more set `Heaviness:`. `HeavinessBell.cs` and its mirror
-`effective_heaviness.py` now (1) exclude all 13 derived columns from the tilt, (2) renormalise on
+`effective_heaviness.py` now (1) exclude every derived column (15 since the submarines, 2026-09-29) from the tilt, (2) renormalise on
 the GEOMETRIC mean (R16) instead of the arithmetic one, (3) re-derive Heroic = Plate x Scout / 200
 in the MAIN table only and every derived column as the geometric mean of its belled parents.
 `test_derived_armor_types.py` pins the generator, the C# and the Python mirror to ONE list, and
@@ -4774,6 +4811,202 @@ the same early-game maximum, while the flat bonus path remains supported for
 other squad-manager instances. The ramp reaches its late-match range over the
 first 20 minutes using the default 25 ticks per second. Long-match ramp
 behavior has not been observed in-game; that verification is a follow-up.
+
+### 19.1 The difficulty scale — one straight line, equal steps (maintainer 2026-09-28) — binding
+
+> *"All AI difficulty levels should be on a continuous scale … The difficulty must always scale
+> with each level and have equal steps. Of course not all things can be scaled perfectly so try to
+> make it the best estimation possible."*
+
+**The law.** Every per-difficulty number lies on ONE straight line from `easiest` (index 0) to
+`cameogod` (index 9), in equal steps. An integer that cannot split evenly is the ROUNDED line
+(within 0.5). Every tier writes every field: a field left out silently falls back to its C#
+default and breaks the line. That is how `brutal` sat at modifier 100 and the six hardest tiers
+shared `InitialAttackDelay` 0 until 2026-09-28. **A new difficulty-dependent feature is a Min at
+easiest and a Max at cameogod, interpolated by tier index**, the pattern `DynamicBotInsurance`
+already uses (`Difficulties` list + `Min*`/`Max*` fields). A feature that switches on at "Hard and
+above" is not a scale. Only a genuine on/off capability may be a single threshold (off below, on
+from one tier up, never on-off-on), and it must say why it cannot scale.
+
+| value (index 0 → 9) | easiest | veryeasy | easy | medium | hard | veryhard | brutal | challenger | unbeatable | cameogod |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| production time % | 140 | 130 | 120 | 110 | **100** | 90 | 80 | 70 | 60 | 50 |
+| production cost % | 120 | 115 | 110 | 105 | **100** | 95 | 90 | 85 | 80 | 75 |
+| build/unit delay + interval modifier | 250 | 225 | 200 | 175 | 150 | 125 | 100 | 75 | 50 | 25 |
+| InitialAttackDelay (ticks) | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 | 0 |
+| PersonalityReactionDelay (ticks) | 7500 | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 |
+| RefineryLimit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| HarvesterLimit | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 |
+| ProductionTypeLimit, ConstructionYardLimit (rounded) | 1 | 2 | 2 | 3 | 4 | 4 | 5 | 6 | 6 | 7 |
+| NewProductionCashThreshold (extra factories above this cash) | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
+| MaximiseProductionCashRequirement (fill every queue above this cash) | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
+| AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 4 | 9 | 13 | 18 | 22 | 27 | 31 | 36 | 40 |
+
+* **`InitialAttackDelay` holds back only the MAIN army** (`CreateAttackForce`, the big assault
+  squads). Guerrilla, harasser, air and naval squads are formed in `FindNewUnits` and fight from
+  the first tick at every tier (maintainer 2026-09-28), so early pressure never waits for it.
+* **Adaptive counter-production** (#245, ported 2026-09-28): the unit builder spends up to
+  `AdaptiveCounterWeight` percent of its combat picks on the best COUNTER to the enemy army it has
+  SEEN (the master AI's fog memory through `IBotEnemyCompositionProvider`; the omniscient sample is
+  only the fallback when a bot does not observe through fog). A counter is scored by its weapons'
+  real Versus against each observed enemy's armour, weighted by that enemy's value, doubled for a
+  detector against cloaked units; #245's cost thresholds and per-actor override lists are gone.
+  Code: `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/AdaptiveCounterProduction.cs`.
+* **Extra production.** `NewProductionCashThreshold` was 0 (switched off) for every bot until
+  2026-09-28, so no bot ever added factories when rich; it is now on the line above.
+* **Hard is the fair tier** (100% time and cost; #245's intent): the economy cheats start at
+  Very Hard, and Easiest through Medium pay a surcharge on the same line.
+* `DynamicBotInsurance` interpolates its own Min/Max by the same index (already linear).
+* ⛔ **No APM cap (maintainer 2026-09-28).** `HumanPaceBotModule` runs with every limit at 0
+  (unlimited: actions, burst, attention) for the Frankenstein bot; `classic` never had one. Measured
+  on A Nuclear Winter: a per-tier cap with Hard at 120 orders/min went **0–4** vs the uncapped
+  baseline's 2–0 (orders piled up behind repeats and production was dropped); with an order-lane
+  fix **1–1**. The ruling: *"our bot does not have the super unfair advantage of AlphaStar and we are
+  actively looking for ways to make it stronger and not weaker"*. Difficulty scales through delays,
+  self-preservation and the production line above — never through the bot's hands.
+* ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
+  deploys, micro-management and every other ability a unit has work the same for every bot. A trait
+  that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);
+  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` only. Until 2026-09-28 the
+  WC2 mage's starting-spell grant listed eight of the ten tiers, so Very Easy and Very Hard mages
+  never got a spell.
+* Single thresholds, kept on purpose: `PrioritizeBarracksBeforeRefinery` (hard up); the capture,
+  engineer, crate-pickup and garrison modules are off for `easiest` only (capabilities, not strength).
+* Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
+  `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
+  with Hard at 100.
+* ⛔ **Every decision module runs on every tier; only its strength scales** (maintainer 2026-09-30:
+  *"I want all difficulties to scale in equal steps"*). A harvested or Cameo decision module (the
+  Fransbot services, CA-2 siege, the expansion planner…) is never gated to one tier (`hardbot`,
+  `brutalbot`, …). It loads for every `genericbot` tier, and its strength knobs (reaction interval,
+  horizon, action-budget share, self-preservation margin) sit on the line above. #656's
+  `genericbot && hardbot` gate moves to all tiers once its A/B shows it helps. The capability
+  thresholds in the previous bullet stay the only exceptions. Plan: `design/AI_MASTER_PLAN.md` §5 (F1).
+
+### 19.1a Force structure: guerrillas always on, the main army follows the personality (maintainer 2026-09-28) — binding
+
+> "The guerrilla squads should always be active 100 % of the time and only the main army (or later
+> several big armies) should be more passive and try to defend or steamroll." / "Never suicide
+> units: if it sees something that's going to win against the attack squad they should return
+> instead and try to attack somewhere else."
+
+* **Every Frankenstein personality** runs a small-squad layer: `JoinGuerrilla: 100`,
+  `MaxGuerrillaSize: 6`, and several small parties at once (the smallest open one is filled
+  first). **Their number grows with game time and depends on the personality** (maintainer, same
+  day): `MaxGuerrillaSquads` → `MaxGuerrillaSquadsLate` over `GuerrillaSquadRampTicks` (30,000) —
+  steamroller 1→3, turtle 1→3, tech 1→4, rush 2→5, expansion 2→5, **guerrilla 2→6, at least twice
+  steamroller's at every moment**; steamroller spends the rest on its main army.
+  Guerrillas raid, recon and hit soft targets whatever the posture;
+  harasser (spec-ops) squads and `ScoutBotModule` scouts run beside them. **Only the main army**
+  (SquadValue, staging, attack interval) differs per personality — turtle defends, steamroller
+  builds up and rolls.
+* **Never suicide:** with `UseCombatPredictor` every ground squad — main army and guerrillas —
+  engages only when the Lanchester predictor over the enemies it SEES clears
+  `RetreatRatioPct × EngageMarginPct` and turns back below `BotLimits.RetreatRatioPct`; the squad
+  dissolves home and the next attack avoids that region (the 6c risk gate remembers the threat).
+  `RetreatRatioPct` is the tier's self-preservation on the §19.1 line (maintainer, same day):
+  **0.1 at Easiest to 1.0 at CameoGod in steps of 0.1** (10, 20 … 100 %; Hard 50) — CameoGod only
+  takes fights it at least draws.
+* **Scouting:** `ScoutBotModule.EnemySpawnBonus` keeps scouts checking the enemy's possible spawn
+  regions (public `mpspawn` data).
+* **Predictive defence, lure and punish** (maintainer, same day; design and phase **DF** in
+  `docs/design/AI_DEEP_RESEARCH.md` §14): track visible enemy groups, extrapolate their heading to
+  predict WHERE and WHEN they will hit; a defence squad is there first, pokes the attackers and
+  falls back under its own defences (the lure). Guerrilla/recon/spec-ops squads convert to
+  defence when the threat is high and they can arrive in time; when they cannot, they — and the
+  main army if the predictor agrees — **punish the enemy base while its army is out**.
+* **Fast squads react, defenders go home when it is over** (maintainer, same day): when a predicted
+  attack is met, a guerrilla/harass squad that reaches the rally point before the enemy joins the
+  defence; one that cannot punishes the enemy base while its army is out. A defence is released
+  only when there is **no perceived threat** (no enemy pressure at home, master not
+  Pressured/Emergency) **and no predicted attack** for `ProtectionIdleDissolveTicks` (the squad must
+  see **no enemy in range and no valid _or visible_ target** - a target that fled into fog counts as
+  quiet); then raiders
+  re-form guerrilla squads, spec ops their harass squads, the rest join the attack pool and its
+  missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
+* `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
+
+### 19.1b Expansion, garrisons and scouts (maintainer rulings 2026-09-29) — binding
+
+> *"Always expand, always build more harvesters, always build more units, never be idle, always try
+> to pressure and attack, always build towards the enemy and towards the resources. Always occupy all
+> the resource fields."*
+
+* **Every resource field within building reach gets one refinery**, protected by towers.
+* **The base builder never idles**, and every building it places moves the base closer to the next
+  resource field. When nothing else is due, a line of power plants does it. The target field is
+  the one with the best `value × safety / time-until-it-pays` (the formula and its knobs are in
+  `AI_ARCHITECTURE.md` §12.13).
+* **Fog:** where fields are and how rich they start is public map data, like the spawn points.
+  Depletion, enemy refineries and enemy defences count only once seen.
+* **Creeping toward the enemy base** scales with difficulty (§19.1) **and** with the personality's
+  aggressiveness.
+* **A garrisoned building is a defence**, valued by its garrison, never by the house's own cost
+  (civilian houses have none, so the bot treated them as free and fed infantry into them).
+* **Scout replacements are rationed**, so they can never take over a factory (the `hard` bot built
+  ~72 Humvees and ~5 tanks per match). Evidence and design: `AI_ARCHITECTURE.md` §12.11–12.12.
+
+### 19.1c Personality top priorities: a lead over the enemy (maintainer 2026-09-29) — binding
+
+| personality | top priority |
+|---|---|
+| **Expansion** | out-earn the enemy |
+| **Steamroller** | out-produce the enemy |
+| **Guerrilla** | out-scout the enemy and hold more of the map |
+| **Rush** | keep the enemy under pressure: attack as early and as often as possible, destroy their economy |
+| **Turtle** | have more defences than the enemy |
+| **Tech** | tech up faster: start research sooner, have more upgrades |
+
+Each lead is measured against what the bot has **seen** of the enemy (fog-honest), leans that
+personality's budget toward its driver while it trails, and never zeroes the other priorities.
+This extends the personality's effect beyond the squad manager (§19), into the base builder, the
+unit builder and the research queue. Mechanism and owners: `AI_ARCHITECTURE.md` §12.14.
+
+### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
+
+Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
+
+* **Director — yes, no cheats, and part of the A/B.** A Director may pace the bot's pressure on a
+  tension curve (build-up → pressure → climax → relief) by changing attack timing and aggression
+  only. It never changes income, unit stats, production speed or vision. It is **on** in the
+  Nuclear Winter A/B, so every candidate is measured with it; a Director change is itself a
+  candidate that must beat master.
+* **Opponent memory — one profile per enemy faction.** The bot remembers, per faction it has
+  played against, what was effective (which of its own roles/unit types traded well, which
+  posture won, what that faction fielded when) and counters that faction more automatically the
+  more games it has played. Keys are factions only — **nothing about individual human players is
+  stored.** **Frozen in release, trained on dev (maintainer 2026-09-29, replacing the host-local
+  profile):** release builds only READ the committed, offline-fitted priors file
+  (`mods/cameo/ai/learned/`), so every player meets the same bot in every copy of a version.
+  Learning WRITES only on dev builds and harness training runs; developers review the new file and
+  commit it, and it ships with the next release. (A per-machine file could not desync a game —
+  bots run only on the host, `Player.cs:223` `IsBot && Game.IsHost`, and act only through orders —
+  but it would make every player's bot drift apart.) Learned values are applied only inside the
+  host's running bot, **never written into rules at load**: rules load on every client.
+* **Every bot number is learnable (maintainer 2026-09-29).** Today's values are starting points,
+  including per-faction building timers and limits (identical templates, different play styles).
+  Each number learns through one of three routes: **measured** from the logs (unit effectiveness,
+  combat strengths, enemy habits); **tuned** by paired experiments in training (build numbers,
+  timers, thresholds, role mix); **chosen** by a bandit (personality, opening). Tuned numbers learn
+  per own faction (falling back to game family, then global); only the army mix and counters also
+  split per enemy faction. They learn as ~8 knobs per faction first and as raw numbers once the
+  evidence is strong. A training match is scored as **win plus margin**, not win/loss alone.
+  Learned values are bounded multipliers on the defaults, difficulty (§19.1) applies on top, and
+  unit stats are never learned. Every learned entry is fingerprinted with the stats it was trained
+  on and is discounted per unit when they change; serious training starts after the balance freeze
+  and repeats per release. Design: `AI_ARCHITECTURE.md` §6.4.
+* **The weights combine (maintainer 2026-09-29):** a general per-faction file that is always
+  active × a weighted geometric mean of the per-enemy-faction counters × learned per-ally synergy
+  plus in-match gap filling × the in-match trade ratio. The main (hate) target's share is at least
+  max(1/2, 2/(n+1)), and the rest is split by a learnable blend of equal and threat shares.
+  Design: `AI_ARCHITECTURE.md` §6.4a.
+* **Team Commander — yes (maintainer, same day):** in team games allied bots coordinate through a
+  host-only team blackboard (shared target, synchronised attacks, defend requests, expansion
+  claims, human-ally beacons) — the same no-cheat rule as the Director.
+* **Offline LLM analyst — yes, tools only; until a local model exists the analyst is an agent
+  (Claude while Devin Cloud is out of tokens).** A script in `tools/` may summarise match/situation
+  logs with an LLM and propose tuning changes; nothing is applied without human review and an A/B.
+  No LLM or network call ever runs in the game.
 
 ## 20. AI bot unit compositions
 

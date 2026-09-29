@@ -28,6 +28,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public string FactionName;
 		public bool Alive;
 		public int ArmyValue;
+
+		// §12.14 PL: net seen army growth since the previous snapshot (can go negative; 0 on the first).
+		public int ArmyValueDelta;
 		public int InfantryValue, VehicleValue, AirValue, NavalValue;
 		public int DefenceCount, DefenceValue;
 		public int TechBuildings;
@@ -58,11 +61,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public IReadOnlyDictionary<OpenRA.Player, EnemyProfile> Enemies;
 		public CounterDemand Demand;
 		public BotMission Mission;
+		public BotMissionAssignment MissionAssignment;
 		public int DefenceFractionHint, ExpansionAppetiteHint;
 		public RegionMemory Regions;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
 		internal int SquadCount, SquadUnitCount;
+
+		// Record-only combat prediction (AI_DEEP_RESEARCH.md §2.3, phase CP): the square-law ratio x100 of the own
+		// army against the enemy army this bot REMEMBERS, and against that army plus remembered defences.
+		// Above 100 the own side is predicted to win. No decision reads these yet.
+		internal int CombatRatioPct, CombatRatioDefendedPct;
+
+		// §12.14 personality-lead telemetry (record-only): Steamroller's out-produce side is the
+		// arsenal ledger's created-cost delta per game minute; Rush's pressure side is the
+		// cumulative offensive-squad launches, their per-minute rate and first launch tick, plus
+		// the seen-cost of enemy economy types (harvester/refinery) this bot's units destroyed.
+		internal long ProductionValueWindow, ProductionPerGameMin;
+		internal long EnemyEconValueDestroyedWindow, EnemyEconValueDestroyedTotal, AttacksPerGameMin;
+		internal int AttacksLaunched, FirstAttackTick = -1;
+
+		// Phase DF step 1 (AI_DEEP_RESEARCH.md §14), record-only: the enemy groups seen this snapshot, heaviest
+		// first, with their tracked velocity and, when moving, the own asset they head for and when.
+		internal List<(BotThreatTracker.Group Group, BotThreatTracker.Prediction? Prediction)> Threats = new();
+
+		// Cumulative unit losses by the role the unit held (squad type or "idle"), and the part lost
+		// away from the base; summed over every squad manager, disabled personalities included.
+		internal SortedDictionary<string, int> LossesByRole = new(StringComparer.Ordinal), AwayLossesByRole = new(StringComparer.Ordinal);
 		internal string OwnPersonality = "";
 	}
 
@@ -91,10 +116,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly BitSet<TargetableType> NavalTargetTypes = new("Water", "Ship");
 		public readonly BitSet<TargetableType> DefenceTargetTypes = new("Defense");
 
+		[Desc("Value per unit of garrison weight of an enemy-held garrisonable building that has no Valued cost",
+			"(the civilian houses), so fog memory prices the garrison, not the house (AI_ARCHITECTURE §12.12).",
+			"0 keeps the house's own cost, which is none.")]
+		public readonly int GarrisonOccupantValue = 0;
+
 		public readonly int ClusterRadius = 12;
 		public readonly int PressureRadius = 15;
 		public readonly int LossWindowTicks = 750;
 		public readonly int EmergencyLossThreshold = 600;
+
+		[Desc("Loss-window value below which an active emergency de-escalates. Kept below " +
+			"EmergencyLossThreshold so the urgency state has on/off hysteresis — a window " +
+			"bouncing across a single threshold flickered Emergency on and off every check " +
+			"interval, which starved the sustained-candidate timer and latched the " +
+			"personality (observed: turtle held ~38k ticks while the candidate stayed rush).")]
+		public readonly int EmergencyLossClearThreshold = 300;
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -105,6 +142,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int WeightKill = 100;
 		public readonly int WeightDefence = 150;
 		public readonly int WeightAlly = 100;
+
+		[Desc("CA-6 (§12.9): remembered static defences join the enemy force the own",
+			"army must outmass for a target to be 'beatable' — weak measures",
+			"ownArmy vs ArmyValue + DefenceValue instead of ArmyValue alone.",
+			"False = pre-CA-6 scoring, bit-identical.")]
+		public readonly bool WeakIncludesDefence = false;
+
+		[Desc("CA-2c (§12.6 rule 5): world ticks a failed-siege memory stays fresh.",
+			"Older entries contribute no avoidance weight. ~30 game-minutes at",
+			"standard speed.")]
+		public readonly int SiegeFailureMemoryTicks = 45000;
+
+		[Desc("CA-2c: remembered-obstacle weight added per failed siege against the",
+			"region, percent — the wall reads 25% heavier per failed attempt.")]
+		public readonly int SiegeFailureWeightPercent = 25;
+
+		[Desc("w_hurt weight: an enemy winning the exchange against us loses target score (§4.3).",
+			"hurt = taken/(taken+dealt) — the bounded share form of the spec's dealt/taken",
+			"ratio, so 'damage dealt to us' only penalises once we have fought back some too.")]
+		public readonly int WeightHurt = 150;
+
+		[Desc("Nemesis score that counts as 'actively killing our base' — mandatory re-target,",
+			"bypassing the decision interval and the incumbent hold (§4.3 override).")]
+		public readonly int NemesisOverrideWeight = 60;
 		public readonly int IncumbentMomentum = 75;
 		public readonly int MinimumHoldTicks = 3000;
 		public readonly int FortifiedDefenceCount = 6;
@@ -147,6 +208,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RiskRoutingThreatWeight = 1000;
 		[Desc("Ticks after which a remembered non-building that was never seen again is dropped.")]
 		public readonly int ObservationTimeoutTicks = 30000;
+
+		[Desc("DF threat tracking: enemy combat units within this many cells of a group's centre join that group.")]
+		public readonly int ThreatGroupRadiusCells = 10;
+
+		[Desc("DF threat tracking: a group keeps its identity (and gets a velocity) if last snapshot's group was this close.")]
+		public readonly int ThreatMatchRadiusCells = 30;
+
+		[Desc("DF threat tracking: the predicted target must lie within this cone around the heading (cosine x100).")]
+		public readonly int ThreatConeCosPercent = 70;
+
+		[Desc("DF threat tracking: slower than this (cells per 1000 ticks) counts as standing, with no prediction.")]
+		public readonly int ThreatMinSpeedCellsPerKiloTick = 10;
+
+		[Desc("DF threat tracking: how many of the heaviest groups the situation log records.")]
+		public readonly int ThreatsLogged = 3;
 		[Desc("Publish fog-honest Raid and Defend missions from the latest situation snapshot.")]
 		public readonly bool PublishMissions = true;
 		[Desc("Percentage of remembered enemy army and defence value required before attempting a Raid.")]
@@ -177,9 +253,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
 	{
-		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
+		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
 		readonly BotFogMemory fogMemory;
@@ -207,6 +283,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool emergencyPersonalityHandled;
 		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
 		string[] lastIssuedCounterDemands = Array.Empty<string>();
+
+		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
+		long prevLedgerCreatedCost = -1, prevEconDestroyed;
+		int prevSnapshotTick = -1, prevAttacksLaunched, firstAttackTick = -1;
+		readonly Dictionary<OpenRA.Player, int> prevEnemyArmyValue = new();
+		readonly Dictionary<string, int> ledgerTypeCosts = new(StringComparer.Ordinal);
+		readonly Dictionary<string, bool> econVictimTypes = new(StringComparer.Ordinal);
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -237,37 +320,87 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (IsTraitDisabled || regions == null)
 				return 0;
 
-			return RememberedThreatAtRegion(regions, regions.IndexOf(cell));
+			return RememberedThreatAtRegion(regions, regions.IndexOf(cell), false);
 		}
 
-		// Summed remembered Army+Defence value across every enemy's region table —
-		// the shared threat read for the 6c gate and the 6e router.
-		static int RememberedThreatAtRegion(RegionMemory regions, int index)
+		// CA-2c (§12.6 rule 5): durable per-(enemy, region) failed-siege memory.
+		// RegionMemory is rebuilt every Rebuild, so the counts live here and are
+		// stamped onto the snapshot each pass. Reads apply a staleness window —
+		// a wall that beat us an hour ago no longer steers the plan.
+		readonly Dictionary<OpenRA.Player, Dictionary<int, (int Count, int Tick)>> failedSieges = new();
+
+		void IBotSiegeFailureMemory.RecordFailedSiege(OpenRA.Player enemy, CPos cell, int tick)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || enemy == null || regions == null)
+				return;
+
+			var index = regions.IndexOf(cell);
+			if (!failedSieges.TryGetValue(enemy, out var table))
+				failedSieges[enemy] = table = new Dictionary<int, (int, int)>();
+
+			if (table.TryGetValue(index, out var e) && tick - e.Tick <= Info.SiegeFailureMemoryTicks)
+				table[index] = (e.Count + 1, tick);
+			else
+				table[index] = (1, tick);
+		}
+
+		int IBotSiegeFailureMemory.FailedSiegeWeightPercentAt(CPos cell, int tick)
+		{
+			var regions = Situation?.Regions;
+			if (IsTraitDisabled || regions == null || failedSieges.Count == 0)
+				return 100;
+
+			var index = regions.IndexOf(cell);
+			var extra = 0;
+			foreach (var table in failedSieges.Values)
+				if (table.TryGetValue(index, out var e) && tick - e.Tick <= Info.SiegeFailureMemoryTicks)
+					extra += e.Count * Info.SiegeFailureWeightPercent;
+			return 100 + extra;
+		}
+
+		// The per-region threat read, split by the leader's domain: ground squads
+		// pay remembered Army+Defence; air squads (CA-5, §12.8) pay remembered
+		// AntiAir — the "things that can hurt aircraft" layer RegionMemory keeps.
+		internal static int RememberedThreatAtRegion(RegionMemory.Region region, bool airborne)
+		{
+			return region == null ? 0 : airborne ? region.AntiAirValue : region.ArmyValue + region.DefenceValue;
+		}
+
+		// Summed remembered threat across every enemy's region table — the
+		// shared read for the 6c gate (ground) and the 6e router (per-domain).
+		static int RememberedThreatAtRegion(RegionMemory regions, int index, bool airborne)
 		{
 			var threat = 0;
 			foreach (var enemyRegions in regions.ByEnemy.Values)
-				if (index < enemyRegions.Length && enemyRegions[index] != null)
-					threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+				if (index < enemyRegions.Length)
+					threat += RememberedThreatAtRegion(enemyRegions[index], airborne);
 
 			return threat;
 		}
 
 		// 6e risk routing: coarse waypoints around remembered threat. The squad's
 		// locomotor filters out waypoints it cannot reach (region centers can land
-		// on water or cliffs).
+		// on water or cliffs); aircraft overfly every cell, so they skip the
+		// reachability filter and pay remembered anti-air coverage instead
+		// (CA-5 air-threat routing, AI_ARCHITECTURE §12.8).
 		List<CPos> IBotRouteThreatRouter.RouteAroundThreat(Actor leader, CPos to, int maxWaypoints)
 		{
 			var regions = Situation?.Regions;
 			if (IsTraitDisabled || !Info.UseRiskRouting || regions == null || leader == null || leader.IsDead || !leader.IsInWorld)
 				return null;
 
-			var mobile = leader.TraitOrDefault<Mobile>();
+			var airborne = leader.Info.HasTraitInfo<AircraftInfo>();
 			Func<CPos, CPos, bool> reachable = null;
-			if (mobile != null)
-				reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+			if (!airborne)
+			{
+				var mobile = leader.TraitOrDefault<Mobile>();
+				if (mobile != null)
+					reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
+			}
 
 			return RegionRouter.Route(regions, leader.Location, to,
-				i => RememberedThreatAtRegion(regions, i), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
+				i => RememberedThreatAtRegion(regions, i, airborne), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
 		}
 
 		// The 6d fogged-scan switch: squads observe fog only when the master AI is
@@ -275,6 +408,64 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// the same condition Rebuild uses to fog its own snapshot.
 		bool IBotFoggedEnemyProvider.FoggedObservation =>
 			!IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null;
+
+		// CA-2 stand-off input (AI_ARCHITECTURE §12.6): the static defences this
+		// bot has actually seen, each projected with its observed type's longest
+		// weapon range. Range comes from public ruleset data for a seen type —
+		// fog-honest. Empty when nothing has been observed, never a claim that
+		// no defences exist.
+		IEnumerable<BotRememberedDefence> IBotRememberedDefenceProvider.RememberedDefences()
+		{
+			if (IsTraitDisabled)
+				yield break;
+
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (!seen.Defence || seen.Info == null)
+						continue;
+
+					var maxRange = 0;
+					foreach (var armament in seen.Info.TraitInfos<ArmamentInfo>())
+						if (armament.WeaponInfo != null && armament.WeaponInfo.Range.Length > maxRange)
+							maxRange = armament.WeaponInfo.Range.Length;
+
+					// Frozen actors without resolvable cost report Value 0; the
+					// observed type's ruleset Valued cost is fog-honest (the type
+					// itself was seen) and keeps siege scoring non-degenerate.
+					var value = seen.Value > 0 ? seen.Value : seen.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+					yield return new BotRememberedDefence(seen.Location, value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy, seen.Info);
+				}
+			}
+		}
+
+		// The enemy army as this bot has SEEN it, for adaptive counter-production (DESIGN §19.1). Only when it
+		// observes through fog; otherwise false, and the unit builder falls back to its omniscient sample.
+		bool IBotEnemyCompositionProvider.TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)
+		{
+			valueByActorType = null;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+
+			var composition = new Dictionary<string, int>();
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+					if (seen.Combat && !seen.Building && seen.Info != null)
+						composition[seen.Info.Name] = composition.GetValueOrDefault(seen.Info.Name) + Math.Max(1, seen.Value);
+			}
+
+			valueByActorType = composition;
+			return true;
+		}
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
@@ -313,6 +504,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var ownActors = actorsByOwner.TryGetValue(player, out var ownedActors) ? ownedActors : Array.Empty<Actor>();
 			var ownBuildings = ownActors.Where(IsBuilding).ToArray();
 			var ownArmy = ownActors.Where(IsCombatUnit).Sum(Value);
+			var combatRatios = CombatRatios(ownActors);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
 			var ownHarvesters = ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
 			var enemies = player.World.Players.Where(IsEligible)
@@ -341,10 +533,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							.Select(a => BotFogMemory.Classify(a.Info, a.ActorID, a.Location, a.GetEnabledTargetTypes(), tick, Info))));
 				}
 
+				// CA-2c: stamp the durable failed-siege counts onto the fresh
+				// snapshot (the published Region fields are read-only memory).
+				if (failedSieges.TryGetValue(enemy, out var sieges) && sieges.Count > 0 &&
+					regions.ByEnemy.TryGetValue(enemy, out var stampedRegions))
+					foreach (var kv in sieges)
+						if (kv.Key < stampedRegions.Length && stampedRegions[kv.Key] != null)
+						{
+							stampedRegions[kv.Key].FailedSiegeCount = kv.Value.Count;
+							stampedRegions[kv.Key].LastFailedSiegeTick = kv.Value.Tick;
+						}
+
 				profile.KnownRegions = regions.KnownRegionCount(enemy);
 				profiles.Add(enemy, profile);
 			}
 
+			// §12.14: seen army growth per enemy since the last snapshot; players that left the
+			// enemy list drop out of the remembered table with the rebuild below.
+			foreach (var profile in profiles.Values)
+				profile.ArmyValueDelta = prevEnemyArmyValue.TryGetValue(profile.Player, out var prevArmy)
+					? profile.ArmyValue - prevArmy : 0;
+			prevEnemyArmyValue.Clear();
+			foreach (var profile in profiles.Values)
+				prevEnemyArmyValue[profile.Player] = profile.ArmyValue;
+
+			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
 			var urgency = currentUrgency == BotUrgency.Emergency
 				? BotUrgency.Emergency
@@ -355,9 +568,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (urgency != BotUrgency.Emergency)
 				emergencyPersonalityHandled = false;
 
+			var threatAnalysis = player.PlayerActor.TraitsImplementing<IBotThreatAnalysis>()
+				.FirstEnabledTraitOrDefault();
+
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
-				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
+				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal,
+					threatAnalysis == null ? 0 : HurtShare((int)threatAnalysis.GetNemesisScore(profile.Player),
+						(int)threatAnalysis.GetDealtScore(profile.Player)), Info);
 
 			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
 			var decision = ShouldEvaluateTargetDecision(
@@ -373,6 +591,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
+			}
+
+			// §4.3 override: a player actively killing our base is the mandatory target,
+			// bypassing both the decision interval and MinimumHoldTicks.
+			var nemesis = threatAnalysis?.GetNemesis();
+			if (nemesis != null && nemesis != incumbentTarget &&
+				threatAnalysis.GetNemesisScore(nemesis) >= Info.NemesisOverrideWeight)
+			{
+				var nemesisProfile = profiles.Values.FirstOrDefault(p => p.Alive && p.NearestCells >= 0 && p.Player == nemesis);
+				if (nemesisProfile != null)
+				{
+					incumbentTarget = nemesis;
+					incumbentSince = tick;
+					target = nemesis;
+					targetProfile = nemesisProfile;
+				}
 			}
 
 			var currentPersonality = CurrentPersonality();
@@ -440,6 +674,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var squadCount = 0;
 			var squadUnitCount = 0;
+			var missionAssignment = player.PlayerActor.TraitsImplementing<IBotMissionAssignmentProvider>()
+				.Select(p => p.LastMissionAssignment)
+				.FirstOrDefault(a => a != null);
 			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
 			{
 				if (!sm.IsTraitEnabled())
@@ -448,6 +685,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				squadCount += sm.Squads.Count;
 				squadUnitCount += sm.Squads.Sum(q => q.Units.Count);
 			}
+
+			var lossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			var awayLossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			var attacksLaunched = 0;
+			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
+			{
+				foreach (var (role, cost) in sm.LossesByRole)
+					lossesByRole[role] = lossesByRole.GetValueOrDefault(role) + cost;
+				foreach (var (role, cost) in sm.AwayLossesByRole)
+					awayLossesByRole[role] = awayLossesByRole.GetValueOrDefault(role) + cost;
+				attacksLaunched += sm.OffensiveSquadsLaunched;
+			}
+
+			// §12.14 PL telemetry (record-only): production and enemy-econ-kill windows off the
+			// arsenal ledger, plus offensive launches off the squad managers, per game minute.
+			var ledger = player.PlayerActor.TraitOrDefault<BotArsenalLedger>();
+			var ledgerCreatedCost = LedgerCreatedCost(ledger);
+			var econDestroyed = EconValueDestroyed(ledger);
+			var productionWindow = prevLedgerCreatedCost < 0 || ledgerCreatedCost < 0
+				? 0 : Math.Max(0, ledgerCreatedCost - prevLedgerCreatedCost);
+			var econWindow = Math.Max(0, econDestroyed - prevEconDestroyed);
+			if (ledgerCreatedCost >= 0)
+				prevLedgerCreatedCost = ledgerCreatedCost;
+			prevEconDestroyed = econDestroyed;
+			var attacksDelta = Math.Max(0, attacksLaunched - prevAttacksLaunched);
+			prevAttacksLaunched = attacksLaunched;
+			if (firstAttackTick < 0 && attacksLaunched > 0)
+				firstAttackTick = tick;
+			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
+			prevSnapshotTick = tick;
+			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
 
 			var situation = new BotSituation
 			{
@@ -458,6 +726,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Enemies = profiles,
 				Demand = demand,
 				Mission = Missions.FirstOrDefault(),
+				MissionAssignment = missionAssignment,
 				Regions = regions,
 				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
 				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
@@ -469,6 +738,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				SquadCount = squadCount,
 				SquadUnitCount = squadUnitCount,
+				Threats = threats,
+				CombatRatioPct = combatRatios.Army,
+				CombatRatioDefendedPct = combatRatios.Defended,
+				LossesByRole = lossesByRole,
+				AwayLossesByRole = awayLossesByRole,
+				ProductionValueWindow = productionWindow,
+				ProductionPerGameMin = actualDeltaTicks > 0 ? productionWindow * ticksPerGameMin / actualDeltaTicks : 0,
+				EnemyEconValueDestroyedWindow = econWindow,
+				EnemyEconValueDestroyedTotal = econDestroyed,
+				AttacksLaunched = attacksLaunched,
+				FirstAttackTick = firstAttackTick,
+				AttacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
@@ -523,9 +804,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			DeathsCostWindow = lossSamples.Sum(s => s.Delta);
 			KillsCostWindow = killSamples.Sum(s => s.Delta);
-			currentUrgency = DeathsCostWindow > Info.EmergencyLossThreshold || productionLossTicks.Count > 0
-				? BotUrgency.Emergency
-				: BotUrgency.Normal;
+			var emergency = DeathsCostWindow > Info.EmergencyLossThreshold || productionLossTicks.Count > 0;
+			if (!emergency && currentUrgency == BotUrgency.Emergency)
+				emergency = DeathsCostWindow > Info.EmergencyLossClearThreshold;
+			currentUrgency = emergency ? BotUrgency.Emergency : BotUrgency.Normal;
 		}
 
 		internal static List<BotMission> DeriveMissions(
@@ -574,7 +856,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var index = row * regions.Columns + column;
 					foreach (var enemyRegions in regions.ByEnemy.Values)
 						if (index < enemyRegions.Length && enemyRegions[index] != null)
-							threat += enemyRegions[index].ArmyValue + enemyRegions[index].DefenceValue;
+							threat += enemyRegions[index].ArmyValue +
+								(index == ownBaseRegionIndex ? enemyRegions[index].DefenceValue : 0);
 				}
 
 			var defendPriority = threat <= ownNearBaseValue
@@ -811,8 +1094,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				if (cells[i] == null)
 				{
+					// A visible region with no observed actors is still an observation —
+					// stamp it so scout staleness ordering doesn't treat it as never-seen.
 					if (shroud.IsVisible(regions.CenterOf(i)))
-						cells[i] = new RegionMemory.Region { EverSeen = true };
+						cells[i] = new RegionMemory.Region { EverSeen = true, LastSeenTick = player.World.WorldTick };
 				}
 				else if (!cells[i].EverSeen && shroud.IsVisible(regions.CenterOf(i)))
 					cells[i].EverSeen = true;
@@ -877,21 +1162,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return ClampSignal((long)100 * x / (x + (long)k));
 		}
 
-		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)
-			=> TargetScore(profile, ownArmy, 0, 0, info);
+		/// <summary>
+		/// §4.3's w_hurt as the bounded share form of dealt/taken: what fraction of
+		/// the exchange's total damage the enemy dealt us. 0-100; 0 until any damage
+		/// has flowed either way. Ordered identically to the raw ratio (winning the
+		/// exchange lowers hurt, losing raises it) without dividing by a near-zero
+		/// taken score.
+		/// </summary>
+		internal static int HurtShare(int taken, int dealt)
+		{
+			var total = taken + dealt;
+			return total <= 0 ? 0 : (int)((long)100 * taken / total);
+		}
 
-		static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal,
+		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)
+			=> TargetScore(profile, ownArmy, 0, 0, 0, info);
+
+		internal static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal, int hurt,
 			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
-			var weak = Saturate(ownArmy, profile.ArmyValue);
+			var weak = Saturate(ownArmy, profile.ArmyValue + (info.WeakIncludesDefence ? profile.DefenceValue : 0));
 			var econProxy = profile.Harvesters + profile.Refineries * 2;
 			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
 			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);
 			var fort = Saturate(profile.DefenceValue, 1500);
-			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly);
+			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly + info.WeightHurt);
 			var score = (long)info.WeightReach * reach + (long)info.WeightWeak * weak + (long)info.WeightEcon * econ +
-				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally;
+				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally -
+				(long)info.WeightHurt * hurt;
 			return ClampScore(score * 10 / total);
 		}
 
@@ -967,6 +1266,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				yield return "rush";
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
 				yield return "expansion";
+
+			// Terminal posture so a thin fogged enemy profile cannot latch the
+			// incumbent forever: under pressure consolidate defensively, when
+			// calm keep spreading out.
+			yield return urgency >= BotUrgency.Pressured ? "turtle" : "expansion";
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)
@@ -1205,11 +1509,138 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return samples.ToArray();
 		}
 
-		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && p.Playable;
+		// A map-side bot (Playable: False + Bot:) is a real opponent too: campaign enemy AIs and the A/B duel
+		// harness's two duelists. `Playable` alone made the master AI blind to them: in every Nuclear Winter
+		// A/B match (2026-09-28) the fog-honest bot saw NO enemy for the whole game (0 of 253 snapshots; 246 of
+		// 246 after). A declared-NonCombatant slot stays out, as in #594's match writer.
+		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && !p.PlayerReference.NonCombatant && (p.Playable || p.IsBot);
 		static int EconProxy(EnemyProfile profile) => profile.Harvesters + profile.Refineries * 2;
+
+		// §12.14 PL telemetry reads: cumulative produced cost, and cumulative destroyed value of
+		// victim types classified ECON (harvester or refinery). -1 = ledger trait absent.
+		long LedgerCreatedCost(BotArsenalLedger ledger)
+		{
+			if (ledger == null)
+				return -1;
+
+			var total = 0L;
+			foreach (var (type, entry) in ledger.ByType)
+				total += (long)entry.Created * LedgerTypeCost(type);
+			return total;
+		}
+
+		int LedgerTypeCost(string name)
+		{
+			if (!ledgerTypeCosts.TryGetValue(name, out var cost))
+			{
+				cost = player.World.Map.Rules.Actors.TryGetValue(name, out var info)
+					? info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0
+					: 0;
+				ledgerTypeCosts[name] = cost;
+			}
+
+			return cost;
+		}
+
+		long EconValueDestroyed(BotArsenalLedger ledger)
+		{
+			if (ledger == null)
+				return 0;
+
+			var total = 0L;
+			foreach (var entry in ledger.ByType.Values)
+				foreach (var (victim, value) in entry.KilledValueByVictim)
+					if (IsEconVictimType(victim))
+						total += value;
+			return total;
+		}
+
+		bool IsEconVictimType(string name)
+		{
+			if (!econVictimTypes.TryGetValue(name, out var econ))
+			{
+				econ = player.World.Map.Rules.Actors.TryGetValue(name, out var info) &&
+					(info.HasTraitInfo<HarvesterInfo>() || info.HasTraitInfo<RefineryInfo>());
+				econVictimTypes[name] = econ;
+			}
+
+			return econ;
+		}
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
+		List<BotThreatTracker.Group> previousThreatGroups = new();
+		List<BotPredictedThreat> predictedThreats = new();
+
+		IReadOnlyList<BotPredictedThreat> IBotThreatPredictionProvider.PredictedThreats => predictedThreats;
+
+		bool IBotThreatPredictionProvider.PerceivedBaseThreat =>
+			Situation != null && (Situation.Urgency != BotUrgency.Normal || Situation.Enemies.Values.Any(e => e.PressureValue > 0));
+
+		// DF step 1: enemy combat units SEEN this snapshot (fogged: remembered entries refreshed at this tick),
+		// grouped, tracked against the previous snapshot, and extrapolated to the own building they head for.
+		List<(BotThreatTracker.Group, BotThreatTracker.Prediction?)> TrackThreats(int tick, OpenRA.Player[] enemies,
+			Dictionary<OpenRA.Player, Actor[]> actorsByOwner, Actor[] ownBuildings, bool fogged)
+		{
+			var seen = new List<BotThreatTracker.Unit>();
+			foreach (var enemy in enemies)
+			{
+				if (fogged)
+					seen.AddRange(fogMemory.Remembered(enemy).Where(s => s.Combat && s.LastSeenTick == tick)
+						.Select(s => new BotThreatTracker.Unit(s.Location, Math.Max(1, s.Value))));
+				else if (actorsByOwner.TryGetValue(enemy, out var list))
+					seen.AddRange(list.Where(IsCombatUnit).Select(a => new BotThreatTracker.Unit(a.Location, Math.Max(1, Value(a)))));
+			}
+
+			var groups = BotThreatTracker.Track(previousThreatGroups,
+				BotThreatTracker.Cluster(seen, Info.ThreatGroupRadiusCells, tick), Info.ThreatMatchRadiusCells);
+			previousThreatGroups = groups;
+
+			var assets = ownBuildings.Select(b => (b.Location, Value(b))).ToList();
+			var predicted = groups.OrderByDescending(g => g.Value)
+				.Select(g => (g, BotThreatTracker.Predict(g, assets, Info.ThreatConeCosPercent / 100.0,
+					Info.ThreatMinSpeedCellsPerKiloTick / 1000.0)))
+				.ToList();
+
+			predictedThreats = predicted.Where(t => t.Item2.HasValue)
+				.Select(t => new BotPredictedThreat(t.Item2.Value.Target, t.Item2.Value.EtaTicks, t.Item1.Value, tick)).ToList();
+
+			return predicted.Take(Math.Max(0, Info.ThreatsLogged)).ToList();
+		}
+
+		(int Army, int Defended) CombatRatios(IEnumerable<Actor> ownActors)
+		{
+			var rules = player.World.Map.Rules;
+			var own = ownActors.Where(IsCombatUnit).GroupBy(a => a.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+
+			var army = new Dictionary<ActorInfo, int>();
+			var defences = new Dictionary<ActorInfo, int>();
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				// Fog memory marks buildings Combat=false and flags armed ones Defence instead.
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (seen.Info == null || !(seen.Combat || seen.Defence))
+						continue;
+
+					var bucket = seen.Combat ? army : defences;
+					bucket[seen.Info] = bucket.GetValueOrDefault(seen.Info) + 1;
+				}
+			}
+
+			var enemyArmy = army.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value)).ToList();
+			// Walls count as defences for targeting but cannot shoot back: only armed defences join the fight.
+			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value))
+				.Where(d => d.Item1.Weapons.Length > 0)).ToList();
+			return (RatioPct(BotCombatPredictor.Predict(own, enemyArmy)), RatioPct(BotCombatPredictor.Predict(own, enemyAll)));
+		}
+
+		static int RatioPct(BotCombatPredictor.Prediction p) => (int)Math.Round(p.Ratio * 100);
+
 		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
 		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 		static int Clamp(long value) => (int)Math.Max(0, Math.Min(100, value));

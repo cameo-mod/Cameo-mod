@@ -29,6 +29,8 @@ atreides_mobileconstructionvehicle:
 
 atreides_combattank:
 	Inherits: ^CombatTank
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: actor_atreides_combattank.name
 	Buildable:
@@ -93,8 +95,9 @@ atreides_spiceharvester:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	WithHarvestOverlay:
-		Palette: effect50alpha
+	# `harvest` is this sheet's harvesting pose of the whole vehicle (frames 8-31, 3 per facing), not a
+	# spray effect: as an overlay in effect50alpha it drew an uncoloured copy (hue-300 pixels purple).
+	WithHarvestAnimation:
 	WithDockingAnimation:
 	-RevealOnFire:
 	Voiced:
@@ -294,6 +297,8 @@ atreides_sandbike:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport

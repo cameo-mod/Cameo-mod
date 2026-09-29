@@ -1328,6 +1328,8 @@ wc2_orc_skeleton:
 	Inherits@wc2_orcs_grunt: wc2_orcs_grunt
 	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
 	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Skeleton
 	Buildable:

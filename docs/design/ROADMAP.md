@@ -111,6 +111,85 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
+- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 40 items, ~850 agent-hours, 34 A/B gates, six waves). The lines below keep the per-phase detail.
+- [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
+  Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
+  against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
+  - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
+    `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
+  - [x] **S** (merged #633, 2026-09-30) Apply `guerrilla` to the six personalities (`@classic` keeps its list), 5,825 → 4,289
+    central ids, `audit_central_ids.py` ratchet: branch `claude/role_guerrilla_apply`, lands after
+    its Nuclear Winter A/B. **Claude.**
+  - [ ] **L** §2.9 the empty `ai.yaml` (maintainer goal 2026-09-29), phases P0–P7: P0 engine dump +
+    diff gate, P1 count-tool case fix + dead ids, P2 type/family tags on templates, P3 type × family
+    building defaults (Outpost 2 + Scrin wired; A/B), P4 remaining lists → roles, P5 per-unit settings
+    from weapons, P6 learned unit weights (after CA-3), P7 packs hold only exceptions. **Claude.**
+  - [x] **S** §2.9 P0 the equivalence gate: `BotModuleFieldDump` + `dump_bot_modules.py` /
+    `diff_bot_modules.py` (2,168 fields; negative control caught the 7 changed fields). **Claude.**
+  - [ ] **S** §2.8b derive `AirSquadTargetTypes` from weapons (fixes `@guerrilla`'s missing rows). **Claude.**
+  - [ ] **M** §2.8b `UnitsToBuild` weights from stats + role mix, after CA-3 (ruled). **NOVA** + Claude.
+  - [ ] **L** §6.4 learn every number between matches (ruled 2026-09-29): L0 per-bot `Info` copy +
+    learned-file reader (desync test), L1 measured priors, L2 score + knobs, L3 knob training,
+    L4 personality/opening bandit, L5 raw numbers. Dev builds train, release reads. **Claude.**
+  - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
+    (§12.4a rule 3). **Claude.**
+  - [x] **M** (merged #634, 2026-09-30; `artillery`/`firesupport` roles still report-only) Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the
+    `artillery` role only (not the 10-cell range rule), fire-support squads with a tank escort
+    protecting the artillery, and a guard that ships never join ground or air squads. **NOVA**
+    (CA-3/CA-4), roles from Claude.
+  - [~] **L** CA-1 arsenal tracker (**shipped 2026-09-29:** `BotArsenalLedger` + stats shadow #624, `BotUnitProfiles`, roles `staticaa`/`airunit`/`navalunit` report-only #627; open: apply roles, in-match production weight) — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
+    per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
+    with defence ranges and a per-region heat map, log fields; then the in-match production
+    weight. **Claude.**
+  - [~] **M** CA-1b offline fitter (**tool shipped:** `tools/ai/fit_arsenal_priors.py`; the priors file waits on ledger matches) → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
+    (read at match start, §6.1); more harness matchups. **Claude** (Devin Cloud out of tokens).
+  - [~] **L** (telemetry + failure memory shipped #656; behaviour off) CA-2 siege and force preservation: stand-off outside remembered defence range,
+    artillery first, commit when the area's defences are gone or the Versus-weighted force
+    ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
+  - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
+  - [ ] **M** CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
+    artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
+  - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
+    teams on an air-threat route layer. **EMBER.**
+  - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+  - [x] **S** (merged #647) Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
+    §12.12; measured causes §12.11: `hard` builds ~72 Humvees and ~5 tanks per match, and feeds
+    infantry into 0-value garrisons). **Claude.**
+  - [~] **L** (EX-0…EX-3 merged #651–#654; EX-4, towers, escort open) EX expansion planner (§12.13, DESIGN §19.1b): the field score
+    `value × safety / time-until-it-pays`, distance-minimising placement toward the target field,
+    one refinery per field plus towers, MCV hand-off, and the enemy creep scaled by difficulty ×
+    aggression. Steps EX-0 … EX-4, each A/B-gated. **Claude.**
+  - [~] **M** (Steamroller + Rush telemetry merged #658) Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
+    **Claude**; Steamroller and Rush **NOVA**; Guerrilla map control **DAWN**.
+- [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
+  league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
+  - [~] **M** CP combat predictor (**shipped:** record-only #623; squads engage/retreat with it on the six genericbot personalities, `RetreatRatioPct` 0.1–1.0) — Versus-aware Lanchester strength, engage/retreat hysteresis,
+    learned per-type factors; replaces the 6c scalar. **Claude.**
+  - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
+    layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
+  - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
+  - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
+  - [x] **M** LG league harness (#625; exploiters get Hard's insurance since 2026-09-29) (past masters + exploiter personalities + maps/factions). **EMBER.**
+    In flight: `tools/ai/run_league.py` (spec → per-cell batch → `league_summary.json`
+    with pooled W-L, Wilson, per-member/spawn splits) + `exploit_rush` /
+    `exploit_turtle` / `exploit_guerrilla` hidden bot types pinned at one pole
+    via `BotPersonalityController.PinnedPersonalities`. "Past masters" freeze
+    as hidden bot types, not old binaries (classic is the first such freeze).
+  - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
+  - [~] **L** DF predictive defence, lure and punish (**shipped 2026-09-29, A/B pending:** DF-1 tracking, DF-2 pre-position + hold + lure, DF-3/4 fast squads join or punish, release by threat) (AI_DEEP_RESEARCH §14): enemy-group
+    tracking + heading extrapolation (record-only first), defence squad pre-positioned under own
+    towers with a poke-and-fall-back lure, fast squads convert by threat and reach, punish the
+    enemy base while its army is out. **Claude.**
+  - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
+    (DESIGN §19.2). **NOVA**, with UT.
+  - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the
+    analyst; input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
+    candidate per finding. **Claude** (Devin Cloud out of tokens until next week).
+  - [ ] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
+    defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant. **NOVA**, with DI.
+  - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
+    refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
+    control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
@@ -150,7 +229,9 @@ the fog sequencing.
   6b `ScoutBotModule` (`c2dab139a`), 6c pre-commit risk gate
   `IBotRegionThreatProvider` + `AttackRiskMargin` (`295396dfd`), 6d fogged
   squad scans + `FrozenActorLayer` fallback targets (`16d876f51`), 6e risk
-  routing `IBotRouteThreatRouter` + `RegionRouter` (`951e480d7`).
+  routing `IBotRouteThreatRouter` + `RegionRouter` (`951e480d7`), 6f p1
+  artillery attach (`9fdb6e236`), 6g per-squad priority tags `BotTargetTags`
+  (`735a30db4`), 6b scout/squad ownership release (`257a4cbff`).
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),
@@ -177,6 +258,8 @@ the fog sequencing.
 - [x] **M** Phase 7a assign-layer missions: `MasterAiBotModule` publishes fog-honest,
   ordered `Raid`/`Defend` intent and `SquadManagerBotModuleCA` consumes it only when forming
   a new force; `Recon` remains with `ScoutBotModule`, `Secure` is deferred.
+- [x] **M** Phase 7a follow-up (after #592): replace the single exhausted-Defend
+region with multi-region exclusion, fix exhausted Defend/Raid consumer selection, count static defence only in the own base region, document the inherited non-fogged fallback, and add the permanent fog-enabled Raid runtime gate.
 - [ ] **M** Phase 7b mission bidding: squads bid for missions instead of the forming squad
   taking the first affordable mission.
 - [ ] **M** Phase 7c `Secure` missions plus Fransbot anchors and squad rejoin.
@@ -2095,6 +2178,10 @@ types, creating a unified wall+turret defense system across the mod.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
+- [x] Scrin structures foundation: hidden faction metadata plus nine
+  map/editor-ready structure actors and independent Kane's Wrath-derived sprites.
+- [ ] Add the Drone Ship and its deployment into the Drone Platform before
+  enabling Scrin in the lobby or defining starting units and production.
 
 ## Phase E — Platform & engine (background, L)
 - [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all

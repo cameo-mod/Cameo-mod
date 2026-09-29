@@ -4,8 +4,8 @@ Metadata:
 	Website: https://www.moddb.com/mods/cameo
 	WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png
 	WindowTitle: mod_windowtitle
-PackageFormats: Mix, AudioBag, D2kSoundResources
-FileSystem: ContentInstallerFileSystem
+PackageFormats: Mix, AudioBag, D2kSoundResources, MegV3
+FileSystem: CameoRemasterFileSystem
 	ContentInstallerMod: cameo-content
 	SystemPackages:
 		~^SupportDir|Content/cameo/: game
@@ -33,6 +33,8 @@ FileSystem: ContentInstallerFileSystem
 		~cameo|ContentPacks/TiberianSun/Shared/files/sprites: ts_shared_sprites
 		~cameo|ContentPacks/TiberianSun/Shared/files/voxels: ts_shared_voxels
 		~cameo|ContentPacks/TiberianSun/Shared/files/sounds: ts_shared_sounds
+		~cameo|ContentPacks/TiberiumWars/Scrin/files/sprites: scrin_sprites
+		~cameo|ContentPacks/TiberiumWars/Scrin/files/sounds: scrin_sounds
 		~cameo|ContentPacks/Shared/files/icons: shared_icons
 		~cameo|ContentPacks/Shared/files/sprites: shared_sprites
 		~cameo|ContentPacks/Shared/files/voxels: shared_voxels
@@ -215,6 +217,7 @@ Include: ContentPacks/TiberianSun/CABAL/content.yaml
 Include: ContentPacks/TiberianSun/Nod/content.yaml
 Include: ContentPacks/TiberianSun/GDI/content.yaml
 Include: ContentPacks/TiberianSun/Forgotten/content.yaml
+Include: ContentPacks/TiberiumWars/Scrin/content.yaml
 Include: ContentPacks/RedAlert2/Shared/content.yaml
 Include: ContentPacks/RedAlert2/Allies/content.yaml
 Include: ContentPacks/RedAlert2/Soviets/content.yaml
@@ -258,6 +261,8 @@ Rules:
 	cameo|rules/husks.yaml
 	cameo|rules/promotions.yaml
 	cameo|ai/ai.yaml
+	cameo|ai/fransbot.yaml
+	cameo|ai/fransbot_lists.yaml
 	# redalert.yaml, tiberiansun.yaml, redalert2.yaml are now loaded via include-only
 	# wrapper packs (ContentPacks/{RedAlert,TiberianSun,RedAlert2}/) so their factions
 	# can be ordered in the lobby; not loaded here to avoid duplicate keys.
@@ -423,7 +428,7 @@ Cursors:
 	cameo|cursors.yaml
 Chrome:
 	cameo|chrome.yaml
-Assemblies: OpenRA.Mods.AS.dll, OpenRA.Mods.CA.dll, OpenRA.Mods.Cameo.dll, OpenRA.Mods.Cnc.dll, OpenRA.Mods.D2k.dll, OpenRA.Mods.Common.dll
+Assemblies: OpenRA.Mods.AS.dll, OpenRA.Mods.CA.dll, OpenRA.Mods.Cameo.dll, OpenRA.Mods.Cnc.dll, OpenRA.Mods.D2k.dll, OpenRA.Mods.Common.dll, OpenRA.Mods.Fransbot.dll
 ChromeLayout:
 	common|chrome/assetbrowser.yaml
 	common|chrome/color-picker.yaml
@@ -482,6 +487,7 @@ ChromeLayout:
 	common|chrome/text-notifications.yaml
 	cameo|chrome/tooltips.yaml
 Voices:
+	ContentPacks|TiberiumWars/Scrin/yaml/voices.yaml
 	cameo|audio/advancewars.yaml
 	cameo|audio/315custom.yaml
 	cameo|audio/classicdoom.yaml
@@ -607,8 +613,8 @@ WorldViewportSizes:
 DefaultOrderGenerator: UnitOrderGenerator
 SupportsMapsFrom: cnc, ra, cameo
 SoundFormats: Aud, Wav, Mp3, Ogg
-SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8
-TerrainFormat: DefaultTerrain
+SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8, ShpRemastered, Tga, Dds
+TerrainFormat: CameoRemasterTerrain
 SpriteSequenceFormat: CameoSpriteSequence
 	IndexedSheetSize: 2048
 AssetBrowser:

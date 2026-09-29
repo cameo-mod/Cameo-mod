@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -27,6 +28,19 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		[Desc("Actor types that are valid for naval squads.")]
 		public readonly HashSet<string> NavalUnitsTypes = new HashSet<string>();
+
+		[Desc("Artillery squad members by ROLE: BotRoleSets fills this from the actor-declared",
+			"`artillery` role (the ^ArtilleryTemplate/^ArtilleryTankTemplate actors). AI_ARCHITECTURE.md",
+			"12.4a: artillery squads are these units ONLY - not any unit that reaches a range threshold.")]
+		public readonly HashSet<string> ArtilleryTypes = new HashSet<string>();
+
+		[Desc("Fire-support escort members by ROLE: BotRoleSets fills this from the actor-declared",
+			"`firesupport` role (the ^FireSupportTemplate actors). 12.4a: they form their own squads",
+			"with tanks and protect the artillery - never assault or raid units.")]
+		public readonly HashSet<string> FireSupportTypes = new HashSet<string>();
+
+		[Desc("Frontline escorts a fire-support squad pulls per artillery unit it protects.")]
+		public readonly int FireSupportEscortPerArtillery = 2;
 
 		[Desc("Actor types that are excluded from ground attacks.")]
 		public readonly HashSet<string> AirUnitsTypes = new HashSet<string>();
@@ -64,6 +78,75 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Max number of units AI has in guerrilla squad")]
 		public readonly int MaxGuerrillaSize = 10;
+
+		[Desc("Cameo (maintainer 2026-09-28): how many guerrilla squads may exist at once. New guerrilla units fill the",
+			"smallest open squad and a full set opens another, so several small raiding parties work at the same time.",
+			"1 keeps the single guerrilla squad of the classic bot.")]
+		public readonly int MaxGuerrillaSquads = 1;
+
+		[Desc("Cameo (maintainer 2026-09-28): the guerrilla squad cap grows with game time from MaxGuerrillaSquads to",
+			"this value over GuerrillaSquadRampTicks — the later the game, the more fast squads. Below",
+			"MaxGuerrillaSquads means no ramp.")]
+		public readonly int MaxGuerrillaSquadsLate = 0;
+
+		[Desc("Ticks over which the guerrilla squad cap ramps from MaxGuerrillaSquads to MaxGuerrillaSquadsLate.")]
+		public readonly int GuerrillaSquadRampTicks = 30000;
+
+		[Desc("Cameo (AI_DEEP_RESEARCH.md §2.3, CP): ground squads decide to engage and to retreat with the Lanchester",
+			"combat predictor over the enemies they can SEE, instead of the fuzzy health/count rule. They retreat when the",
+			"predicted ratio drops below the tier's BotLimits.RetreatRatioPct and engage only at EngageMarginPct of it.")]
+		public readonly bool UseCombatPredictor = false;
+
+		[Desc("Engage threshold as a percent of the retreat threshold (hysteresis, so a squad does not dither at the line).")]
+		public readonly int EngageMarginPct = 150;
+
+		[Desc("Retreat threshold when no BotLimits trait is enabled (percent of predicted strength ratio).")]
+		public readonly int DefaultRetreatRatioPct = 50;
+
+		[Desc("Cameo DF-2 (AI_DEEP_RESEARCH.md §14): when the master predicts an enemy group heading for an own asset,",
+			"draft the idle pool into the protection squad and send it to the own defence nearest that asset BEFORE the",
+			"enemy arrives; the squad holds there instead of wandering home, and falls back to it (the lure) when the",
+			"combat predictor says it loses alone. False = classic behaviour.")]
+		public readonly bool PrepositionDefence = false;
+
+		[Desc("DF-2: only threats predicted to arrive within this many ticks are met in advance.")]
+		public readonly int PrepositionMaxEtaTicks = 1500;
+
+		[Desc("DF-2: only threats worth at least this much (cost of the group) are met in advance.")]
+		public readonly int PrepositionMinThreatValue = 1500;
+
+		[Desc("DF-2: the rally point is the own armed building within this many cells of the predicted target.")]
+		public readonly int PrepositionDefenceSearchCells = 12;
+
+		[Desc("DF-2: a protection squad farther than this from its rally point falls back when it would lose alone.")]
+		public readonly int LureRallyRadiusCells = 5;
+
+		[Desc("Cameo DF-3/4 (AI_DEEP_RESEARCH.md §14, maintainer 2026-09-28): when a predicted attack is met, each fast",
+			"(guerrilla / harass) squad that can reach the rally point before the enemy JOINS the defence; one that cannot",
+			"PUNISHES instead — it strikes a remembered enemy building (its priority tags first: harvesters, production)",
+			"while the enemy army is away. Needs PrepositionDefence.")]
+		public readonly bool FastSquadsReactToThreats = false;
+
+		[Desc("DF-3/4: a squad reacts to one predicted attack at most once per this many ticks.")]
+		public readonly int FastSquadReactionCooldownTicks = 1500;
+
+		[Desc("Protection release: after this many ticks with no enemy in range, no valid or visible target, no",
+			"perceived threat to the base (pressure at home, master Pressured/Emergency) and no predicted attack on an",
+			"own asset, the protection squad is released — raiders back to guerrilla squads, spec ops to harass",
+			"squads, the rest to the attack pool. 0 = classic behaviour (the squad never releases).")]
+		public readonly int ProtectionIdleDissolveTicks = 0;
+
+		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
+			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
+			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
+		public readonly HashSet<string> HarasserTypes = new HashSet<string>();
+
+		[Desc("Harasser squads wait for at least this many units before launching.")]
+		public readonly int HarassMinLaunchSize = 3;
+
+		[Desc("Distinct route candidates a harasser squad requests — the flanking breadth.",
+			"It then picks randomly from the last (least direct) routes.")]
+		public readonly int HarassRouteCount = 12;
 
 		[Desc("Delay (in ticks) between giving out orders to units.")]
 		public readonly int AssignRolesInterval = 50;
@@ -121,6 +204,26 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
+		public readonly bool StageBeforeAssault = false;
+
+		[Desc("Percent of squad units that must reach the staging point before the assault proceeds.")]
+		public readonly int StageAssemblePercent = 60;
+
+		[Desc("Cells around the staging point within which a unit counts as assembled.")]
+		public readonly int StageRadiusCells = 8;
+
+		[Desc("Ticks a staging squad waits before committing regardless of assembly.")]
+		public readonly int StageTimeoutTicks = 750;
+
+		[Desc("Extra units to treat as heal/repair support squads, beyond the derived set. " +
+			"Derived at rules load: every armament must carry a negative-damage, ally-valid " +
+			"warhead for the carrier to count as support — no central ids.")]
+		public readonly HashSet<string> SupportUnitTypes = [];
+
+		[Desc("Cells a support squad may trail behind its assault squad before catching up.")]
+		public readonly int SupportFollowRangeCells = 6;
+
 		[Desc("Prefer actors owned by the bot's main target player when picking a proactive attack target. Falls back to the nearest enemy when that player has no valid candidates.")]
 		public readonly bool PreferMainTarget = false;
 		[Desc("Allow published master-AI missions to defer or focus newly formed attack forces.")]
@@ -135,7 +238,11 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly HashSet<string> AirPriorityTags = [];
 		public readonly HashSet<string> NavalPriorityTags = [];
 		public readonly HashSet<string> GuerrillaPriorityTags = [];
+		public readonly HashSet<string> HarassPriorityTags = [];
 		public readonly HashSet<string> ProtectionPriorityTags = [];
+
+		[Desc("Actor tags the support squads prefer to target.")]
+		public readonly HashSet<string> SupportPriorityTags = [];
 
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
@@ -167,7 +274,8 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
 		public readonly bool UseRiskRouting = true;
 
-		[Desc("Ground units whose maximum weapon range reaches this many cells split into artillery squads that hang back behind assault squads (AI_FRANSBOT_RESEARCH.md 6f). Negative disables artillery squads.")]
+		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership now comes from ArtilleryTypes,",
+			"the role-derived list - this field is ignored. Kept so existing yaml entries load silently.")]
 		public readonly int ArtilleryMinRangeCells = 10;
 
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
@@ -189,12 +297,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
+
+			// Derive support units from weapon metadata: an actor is support only when
+			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
+			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
+			// Tesla Trooper, WC2 knights/paladins and the SCV each carry a heal weapon
+			// alongside damage weapons and must not be pulled out of combat squads.
+			foreach (var actor in rules.Actors.Values)
+			{
+				// Support must be mobile to follow a squad — a heal-armament building
+				// (repair aura/depot) is not a squad member.
+				if (actor.Name.StartsWith('^') ||
+					(!actor.HasTraitInfo<MobileInfo>() && !actor.HasTraitInfo<AircraftInfo>()))
+					continue;
+
+				var armaments = actor.TraitInfos<ArmamentInfo>()
+					.Where(a => !string.IsNullOrEmpty(a.Weapon))
+					.ToList();
+
+				if (armaments.Count == 0)
+					continue;
+
+				// An unresolvable weapon cannot be proven to heal, so it disqualifies.
+				if (armaments.All(a =>
+					rules.Weapons.TryGetValue(a.Weapon.ToLowerInvariant(), out var weapon) &&
+					weapon.Warheads.Any(w => w is DamageWarhead dw && dw.Damage < 0 &&
+						dw.ValidRelationships.HasRelationship(PlayerRelationship.Ally))))
+				{
+					SupportUnitTypes.Add(actor.Name);
+				}
+			}
 		}
 
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
 	}
 
-	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing
+	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
 	{
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
 
@@ -215,6 +353,9 @@ namespace OpenRA.Mods.CA.Traits
 		readonly List<Actor> activeUnits = new();
 
 		public List<SquadCA> Squads = new();
+
+		// §12.14 PL: attacks-launched telemetry (record-only).
+		public int OffensiveSquadsLaunched;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> constructionYardBuildings;
 
 		IBot bot;
@@ -226,6 +367,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
+		IBotSiegeAdvisor[] siegeAdvisors;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -235,10 +377,19 @@ namespace OpenRA.Mods.CA.Traits
 		int assignRolesTicks;
 		int attackForceTicks;
 		int protectionForceTicks;
+
+		// DF-2: where the protection squad waits for a predicted attack, and until when.
+		CPos? protectionRally;
+		int protectionHoldUntilTick = -1;
+		int nextPrepositionTick;
+		IBotThreatPredictionProvider[] threatPredictionProviders;
+		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
+		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
 		BotMission heldDefendMission;
 		int defendMissionHeldSince = -1;
-		int defendMissionExhaustedRegion = -1;
+		readonly HashSet<int> defendMissionExhaustedRegions = [];
+		public BotMissionAssignment LastMissionAssignment { get; private set; }
 
 		int protectOwnTicks;
 		Actor protectOwnFrom;
@@ -247,8 +398,27 @@ namespace OpenRA.Mods.CA.Traits
 		int desiredAttackForceSize;
 		readonly Dictionary<string, int> cachedUnitValues = new();
 
+		// Loss telemetry (situation log): the role, cost and position each unit held at the last
+		// role pass. Squads drop dead units at several sites, so a death is detected here, on the
+		// next pass, from this snapshot rather than at any one removal site.
+		readonly Dictionary<Actor, (string Role, int Cost, CPos Location)> lastKnownRoles = new();
+		readonly Dictionary<string, int> lossesByRole = new();
+		readonly Dictionary<string, int> awayLossesByRole = new();
+
+		/// <summary>Cumulative cost of units lost, by the role they held: a squad type or "idle".</summary>
+		public IReadOnlyDictionary<string, int> LossesByRole => lossesByRole;
+
+		/// <summary>The part of <see cref="LossesByRole"/> lost outside MaxBaseRadius of the base centre.</summary>
+		public IReadOnlyDictionary<string, int> AwayLossesByRole => awayLossesByRole;
+
 		BotLimits botLimits;
 		int initialAttackDelay;
+
+		// H1 attention consumer: null when no IBotActionBudget producer is on the
+		// player (then squads act unconditionally, as before). squadCursor rotates
+		// the per-round pass order so a spent budget staggers rather than starves.
+		IBotActionBudget actionBudget;
+		int squadCursor;
 
 		public SquadManagerBotModuleCA(Actor self, SquadManagerBotModuleCAInfo info)
 			: base(info)
@@ -275,7 +445,10 @@ namespace OpenRA.Mods.CA.Traits
 				SquadCAType.Naval => Info.NavalPriorityTags,
 				SquadCAType.Rush => Info.RushPriorityTags,
 				SquadCAType.Guerrilla => Info.GuerrillaPriorityTags,
+				SquadCAType.Harass => Info.HarassPriorityTags,
 				SquadCAType.Protection => Info.ProtectionPriorityTags,
+				SquadCAType.Support => Info.SupportPriorityTags,
+				SquadCAType.FireSupport => Info.SupportPriorityTags,
 				_ => Info.AssaultPriorityTags,
 			};
 		}
@@ -376,17 +549,30 @@ namespace OpenRA.Mods.CA.Traits
 			return !traitDisabled && providers != null && providers.Any(p => p.FoggedObservation);
 		}
 
-		// 6f: rules-derived artillery classification — a mobile ground unit whose
-		// weapons reach ArtilleryMinRangeCells. No actor ids, so every faction's
-		// artillery qualifies automatically (CN's tag-derivation rule).
+		// 6f + 12.4a: role-derived artillery classification - members of the artillery
+		// role (ArtilleryTypes). The range rule this replaced is kept as MaximumEnabledRange
+		// for the combat predictor and other callers.
 		internal bool IsArtilleryUnit(Actor a)
 		{
-			if (Info.ArtilleryMinRangeCells < 0 || a == null
-				|| a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+			if (a == null || a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
 				return false;
 
-			return MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+			// The role list wins when populated; an unapplied instance (e.g. @classic,
+			// which stays on its written config) keeps the old range rule so the A/B
+			// reference does not move (cameo-mod#633 convention).
+			if (Info.ArtilleryTypes.Count > 0)
+				return Info.ArtilleryTypes.Contains(a.Info.Name);
+
+			return Info.ArtilleryMinRangeCells >= 0
+				&& MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
 		}
+
+		// A ship is a `naval` locomotor (the navalunit role's rule); hover and amphibious
+		// units move on land and stay ground units (12.4a). NavalUnitsTypes stays as a
+		// belt for naval actors carried on other locomotors - a ship must never reach a
+		// ground or air squad even when the list misses it.
+		internal bool IsNavalUnit(Actor a) =>
+			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
 		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
@@ -522,15 +708,18 @@ namespace OpenRA.Mods.CA.Traits
 			aircraftBuilders = self.Owner.PlayerActor.TraitsImplementing<IBotAircraftBuilder>().ToArray();
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
+			threatPredictionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotThreatPredictionProvider>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
+			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
 		protected override void TraitEnabled(Actor self)
 		{
 			botLimits = self.Owner.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			actionBudget = self.Owner.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 
 			if (botLimits != null)
 				initialAttackDelay = botLimits.Info.InitialAttackDelay;
@@ -541,19 +730,28 @@ namespace OpenRA.Mods.CA.Traits
 			protectionForceTicks = World.LocalRandom.Next(0, Info.ProtectInterval);
 			minAttackForceDelayTicks = World.LocalRandom.Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
+
+			// Without this the desired force stays 0/0 and the very first
+			// `idleUnits >= desired` check passes unconditionally — an empty Rush
+			// squad on the first tick the module runs (and after every load).
+			SetNextDesiredAttackForce();
 		}
 
 		protected override void TraitDisabled(Actor self)
 		{
 			heldDefendMission = null;
 			defendMissionHeldSince = -1;
-			defendMissionExhaustedRegion = -1;
+			defendMissionExhaustedRegions.Clear();
 			foreach (var squad in Squads)
 				DismissSquad(squad);
 
 			Squads.Clear();
 			activeUnits.Clear();
 			unitsHangingAroundTheBase.Clear();
+
+			// The next personality's manager takes these units over; counting their deaths here too
+			// when this one is re-enabled would book them twice.
+			lastKnownRoles.Clear();
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
@@ -607,6 +805,10 @@ namespace OpenRA.Mods.CA.Traits
 			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
+		// Fogged scans require a currently visible actor; mission consumers add remembered
+		// FrozenActor targets separately. With FoggedScans disabled, the fallback may
+		// select an unseen actor, inheriting the existing omniscient behavior of that
+		// mode rather than introducing a mission-layer cheat.
 		internal Actor FindClosestEnemy(CPos location, int attackerValue, Player targetPlayer, SquadCA owner = null)
 		{
 			if (targetPlayer == null)
@@ -691,12 +893,183 @@ namespace OpenRA.Mods.CA.Traits
 			return (long)attackerValue * 100 >= (long)threat * (100 + marginPercent);
 		}
 
+		// CA-2 siege consult (§12.6): ask the siege advisors what an advancing
+		// assault squad should do. No advisor or all advising Advance leaves the
+		// state machine's behaviour bit-identical to before.
+		internal SiegeVerdict EvaluateSiege(SquadCA squad, out CPos standOffCell)
+		{
+			if (siegeAdvisors != null)
+				foreach (var advisor in siegeAdvisors)
+				{
+					var verdict = advisor.VerdictFor(squad, out standOffCell);
+					if (verdict != SiegeVerdict.Advance)
+						return verdict;
+				}
+
+			standOffCell = CPos.Zero;
+			return SiegeVerdict.Advance;
+		}
+
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
 		{
-			var candidates = World.FindActorsInCircle(sourceActor.CenterPosition, radius)
-				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			var candidates = VisibleEnemiesNear(sourceActor.CenterPosition, radius);
 			candidates = PreferSquadTargets(candidates, owner, TagsOf);
 			return candidates.ClosestToIgnoringPath(sourceActor);
+		}
+
+		// Enemies this bot can SEE within `radius` (the one radius scan this file keeps for squad targeting).
+		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius) =>
+			World.FindActorsInCircle(center, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+
+		/// <summary>DF-2: the protection squad's rally point while a predicted attack is pending.</summary>
+		internal bool TryGetProtectionRally(out CPos rally)
+		{
+			rally = protectionRally ?? CPos.Zero;
+			return protectionRally.HasValue && World.WorldTick <= protectionHoldUntilTick;
+		}
+
+		/// <summary>DF-2: the most valuable predicted attack that arrives soon enough and is big enough to meet, or null.</summary>
+		public static BotPredictedThreat? SelectPrepositionThreat(IEnumerable<BotPredictedThreat> threats, int maxEtaTicks, int minValue) =>
+			threats.Where(t => t.EtaTicks <= maxEtaTicks && t.Value >= minValue)
+				.OrderByDescending(t => t.Value).ThenBy(t => t.EtaTicks).Cast<BotPredictedThreat?>().FirstOrDefault();
+
+		// DF-2: meet the most valuable predicted attack at the own defence nearest its target.
+		void PrepositionDefenceTick(IBot bot)
+		{
+			if (!Info.PrepositionDefence || threatPredictionProviders == null || threatPredictionProviders.Length == 0 || World.WorldTick < nextPrepositionTick)
+				return;
+
+			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
+			var threat = SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
+				Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue);
+			if (threat == null)
+				return;
+
+			var target = threat.Value.Target;
+			var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
+			var rally = World.ActorsHavingTrait<AttackBase>()
+				.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
+					&& (a.Location - target).LengthSquared <= searchSquared)
+				.OrderBy(a => (a.Location - target).LengthSquared)
+				.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+
+			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
+			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
+				&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
+				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
+				&& !IsNavalUnit(u.Actor)).ToList())
+			{
+				protectSq.Units.Add(u);
+				unitsHangingAroundTheBase.Remove(u);
+			}
+
+			if (!protectSq.IsValid)
+				return;
+
+			protectionRally = rally;
+			protectionHoldUntilTick = World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+
+			if (Info.FastSquadsReactToThreats)
+				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
+		}
+
+		// A harasser joins the harass squad of its own type, or starts one.
+		void AddToHarassSquad(IBot bot, UnitWposWrapper unit)
+		{
+			var squad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Harass && s.Units.Any(u => u.Actor.Info.Name == unit.Actor.Info.Name))
+				?? RegisterNewSquad(bot, SquadCAType.Harass);
+			squad.Units.Add(unit);
+		}
+
+		/// <summary>
+		/// DF release (maintainer 2026-09-28): after a successful defence every defender goes back to its job — raider
+		/// types re-form guerrilla squads (within MaxGuerrillaSquads), spec-ops types their harass squads, the rest the
+		/// idle pool, from which attack forces form and take the open missions. The one release path for protection squads.
+		/// </summary>
+		internal void ReleaseDefenders(IBot bot, SquadCA protectSq)
+		{
+			foreach (var u in protectSq.Units.ToList())
+			{
+				if (unitCannotBeOrdered(u.Actor))
+					continue;
+
+				var name = u.Actor.Info.Name;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 ? OpenGuerrillaSquad(bot) : null;
+				if (guerrilla != null)
+					guerrilla.Units.Add(u);
+				else if (Info.HarasserTypes.Contains(name))
+					AddToHarassSquad(bot, u);
+				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
+					releasedFs.Units.Add(u);
+				else
+					unitsHangingAroundTheBase.Add(u);
+			}
+
+			protectSq.Units.Clear();
+			protectionRally = null;
+			protectionHoldUntilTick = -1;
+			protectionQuietSinceTick = -1;
+			foreach (var n in notifyIdleBaseUnits)
+				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
+		}
+
+		// Protection release trigger (maintainer 2026-09-28: "only disband defense squads if there is no more
+		// perceived and predicted threat to the base"): the squad's own threat-free test reports quiet (no enemy
+		// in range, no valid or visible target) plus no PERCEIVED threat (pressure at home, Pressured/Emergency)
+		// and no PREDICTED attack on an own asset — all of it for ProtectionIdleDissolveTicks. This is the ONE
+		// release trigger (§10.1); it calls ReleaseDefenders.
+		internal bool ShouldReleaseDefenders(bool quiet)
+		{
+			var threatened = threatPredictionProviders != null && threatPredictionProviders.Any(p =>
+				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0);
+			if (Info.ProtectionIdleDissolveTicks <= 0 || !quiet || threatened)
+			{
+				protectionQuietSinceTick = -1;
+				return false;
+			}
+
+			if (protectionQuietSinceTick < 0)
+				protectionQuietSinceTick = World.WorldTick;
+
+			return World.WorldTick - protectionQuietSinceTick >= Info.ProtectionIdleDissolveTicks;
+		}
+
+		/// <summary>DF-3/4: can this squad be at `rally` before the enemy? Travel time at its slowest unit's speed.</summary>
+		public static bool ArrivesInTime(double distanceCells, double slowestSpeedCellsPerTick, int etaTicks) =>
+			slowestSpeedCellsPerTick > 0 && distanceCells / slowestSpeedCellsPerTick <= etaTicks;
+
+		// DF-3 join the defence if in reach; DF-4 punish the enemy base if not.
+		void ReactWithFastSquads(IBot bot, SquadCA protectSq, CPos rally, int etaTicks)
+		{
+			foreach (var sq in Squads.Where(s => (s.Type == SquadCAType.Guerrilla || s.Type == SquadCAType.Harass) && s.IsValid).ToList())
+			{
+				if (fastSquadReactedUntil.TryGetValue(sq, out var until) && World.WorldTick < until)
+					continue;
+
+				fastSquadReactedUntil[sq] = World.WorldTick + Math.Max(1, Info.FastSquadReactionCooldownTicks);
+				var leader = sq.Units[0].Actor;
+				var slowest = sq.Units.Min(u => (u.Actor.Info.TraitInfoOrDefault<MobileInfo>()?.Speed ?? 0) / 1024.0);
+				var distance = (leader.Location - rally).Length;
+				if (ArrivesInTime(distance, slowest, etaTicks))
+				{
+					// DF-3: join the defence for this attack; protection release returns them to the pool afterwards.
+					protectSq.Units.AddRange(sq.Units);
+					sq.Units.Clear();
+					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					continue;
+				}
+
+				// DF-4: too far to help — hit the enemy's base while its army is out.
+				var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);
+				if (target != null)
+					sq.Target = Target.FromFrozenActor(target);
+			}
+
+			foreach (var gone in fastSquadReactedUntil.Keys.Where(s => !Squads.Contains(s)).ToList())
+				fastSquadReactedUntil.Remove(gone);
 		}
 
 		Player EffectiveMainTarget()
@@ -718,14 +1091,15 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
-		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue)
+		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue,
+			Func<BotMission, bool> exclude = null)
 		{
 			if (providers == null)
 				return null;
 
 			foreach (var provider in providers)
 				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue)
+					if (mission != null && mission.RequiredValue <= idleForceValue && (exclude == null || !exclude(mission)))
 						return mission;
 
 			return null;
@@ -773,6 +1147,9 @@ namespace OpenRA.Mods.CA.Traits
 			var ret = new SquadCA(bot, this, type, target);
 			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
+			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
+				or SquadCAType.Air or SquadCAType.Naval)
+				OffensiveSquadsLaunched++;
 			return ret;
 		}
 
@@ -783,8 +1160,62 @@ namespace OpenRA.Mods.CA.Traits
 			squad.Units.Clear();
 		}
 
+		// Squads kick stuck/blocked units out of their Units list; without a route
+		// back those actors stay in activeUnits but in no squad and no pool — the
+		// manager never touches them again. Return them to the idle pool so
+		// FindNewUnits can reclassify them.
+		internal void ReturnToIdlePool(Actor actor)
+		{
+			if (actor == null || unitCannotBeOrdered(actor))
+				return;
+
+			unitsHangingAroundTheBase.Add(new UnitWposWrapper(actor));
+		}
+
+		int UnitValue(Actor actor)
+		{
+			if (!cachedUnitValues.TryGetValue(actor.Info.Name, out var cost))
+			{
+				cost = actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+				cachedUnitValues[actor.Info.Name] = cost;
+			}
+
+			return cost;
+		}
+
+		void TrackRoleLosses()
+		{
+			var maxRadiusSquared = Info.MaxBaseRadius * Info.MaxBaseRadius;
+			foreach (var (actor, known) in lastKnownRoles)
+			{
+				if (!actor.IsDead)
+					continue;
+
+				lossesByRole[known.Role] = lossesByRole.GetValueOrDefault(known.Role) + known.Cost;
+				if ((known.Location - initialBaseCenter).LengthSquared > maxRadiusSquared)
+					awayLossesByRole[known.Role] = awayLossesByRole.GetValueOrDefault(known.Role) + known.Cost;
+			}
+
+			lastKnownRoles.Clear();
+			foreach (var squad in Squads)
+			{
+				var role = squad.Type.ToString().ToLowerInvariant();
+				foreach (var unit in squad.Units)
+					if (unit.Actor != null && !unit.Actor.IsDead && unit.Actor.IsInWorld)
+						lastKnownRoles[unit.Actor] = (role, UnitValue(unit.Actor), unit.Actor.Location);
+			}
+
+			foreach (var unit in unitsHangingAroundTheBase)
+				if (unit.Actor != null && !unit.Actor.IsDead && unit.Actor.IsInWorld)
+					lastKnownRoles.TryAdd(unit.Actor, ("idle", UnitValue(unit.Actor), unit.Actor.Location));
+		}
+
 		void AssignRolesToIdleUnits(IBot bot)
 		{
+			// Telemetry only: a snapshot every role pass is fresh enough for a death's position.
+			if (World.WorldTick % Math.Max(1, Info.AssignRolesInterval) == 0)
+				TrackRoleLosses();
+
 			CleanSquads();
 
 			activeUnits.RemoveAll(unitCannotBeOrdered);
@@ -796,9 +1227,29 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				attackForceTicks = Info.AttackForceInterval;
 				foreach (var s in Squads)
-				{
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-					s.Update();
+
+				// H1: squads consult the attention budget before acting. The cursor
+				// rotates the pass order so a spent budget staggers squads instead of
+				// starving the tail of the list.
+				if (Squads.Count > 0)
+				{
+					var start = squadCursor % Squads.Count;
+					for (var i = 0; i < Squads.Count; i++)
+					{
+						var index = (start + i) % Squads.Count;
+						var s = Squads[index];
+
+						// The Units pruning above can empty a squad after CleanSquads ran —
+						// a corpse must not burn an attention slot on a no-op Update.
+						if (!s.IsValid)
+							continue;
+						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
+							continue;
+
+						s.Update();
+						squadCursor = index + 1;
+					}
 				}
 			}
 
@@ -819,6 +1270,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (--protectOwnTicks <= 0 && protectOwnFrom != null)
 				ProtectOwn(protectOwnFrom);
+
+			PrepositionDefenceTick(bot);
 		}
 
 		public void SetAirStrikeTarget(Actor target)
@@ -833,6 +1286,55 @@ namespace OpenRA.Mods.CA.Traits
 			return target;
 		}
 
+		// The smallest guerrilla squad with room, or a new one while fewer than MaxGuerrillaSquads exist; null when all are full.
+		SquadCA OpenGuerrillaSquad(IBot bot)
+		{
+			var guerrillas = Squads.Where(s => s.Type == SquadCAType.Guerrilla).ToList();
+			var open = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize).MinByOrDefault(s => s.Units.Count);
+			if (open != null)
+				return open;
+
+			return guerrillas.Count < GuerrillaSquadCap(Info, World.WorldTick) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
+		}
+
+		// 12.4a: one fire-support squad is enough - the role's members plus their tank
+		// escorts trail the artillery squad and fight whatever threatens it.
+		SquadCA OpenFireSupportSquad(IBot bot)
+		{
+			var open = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
+			return open ?? RegisterNewSquad(bot, SquadCAType.FireSupport);
+		}
+
+		/// <summary>The guerrilla squad cap at `tick`: MaxGuerrillaSquads, ramping linearly to MaxGuerrillaSquadsLate.</summary>
+		public static int GuerrillaSquadCap(SquadManagerBotModuleCAInfo info, int tick)
+		{
+			var early = Math.Max(1, info.MaxGuerrillaSquads);
+			if (info.MaxGuerrillaSquadsLate <= early || info.GuerrillaSquadRampTicks <= 0)
+				return early;
+
+			var t = Math.Min(1.0, (double)tick / info.GuerrillaSquadRampTicks);
+			return early + (int)Math.Round((info.MaxGuerrillaSquadsLate - early) * t);
+		}
+
+		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
+		internal double PredictedRatio(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var rules = World.Map.Rules;
+			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+			var foes = enemies.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
+				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+			return BotCombatPredictor.Predict(own, foes).Ratio;
+		}
+
+		int RetreatRatioPct => botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct;
+
+		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies) =>
+			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct;
+
+		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
+			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+
 		void FindNewUnits(IBot bot)
 		{
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
@@ -840,17 +1342,36 @@ namespace OpenRA.Mods.CA.Traits
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
 					!activeUnits.Contains(a) && a.IsInWorld);
 
-			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
-			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) < Info.JoinGuerrilla));
+			// JoinGuerrilla gates creation too: 0 means this personality never forms
+			// guerrilla squads, not "the first unit always joins". The size cap is
+			// evaluated per actor — a single pass may add a whole production wave.
+			var guerrillaRoll = World.LocalRandom.Next(100) < Info.JoinGuerrilla;
 
 			foreach (var a in newUnits)
 			{
-				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
+				// 12.4a naval guard FIRST: a `naval` locomotor ships off to a Naval
+				// squad before any other branch - a ship missing from NavalUnitsTypes
+				// can never land in a guerrilla/ground squad or the idle pool.
+				if (IsNavalUnit(a))
 				{
-					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
+					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
+					var matchingNavalSquadFound = false;
 
-					guerrillaForce.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
+					foreach (var navalSquad in navalSquads)
+					{
+						if (navalSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						{
+							navalSquad.Units.Add(new UnitWposWrapper(a));
+							matchingNavalSquadFound = true;
+							break;
+						}
+					}
+
+					if (!matchingNavalSquadFound)
+					{
+						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
+						newNavalSquad.Units.Add(new UnitWposWrapper(a));
+					}
 				}
 				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
 				{
@@ -875,26 +1396,29 @@ namespace OpenRA.Mods.CA.Traits
 						newAirSquad.NewUnits.Add(a);
 					}
 				}
-				else if (Info.NavalUnitsTypes.Contains(a.Info.Name))
+				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
 				{
-					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
-					var matchingNavalSquadFound = false;
-
-					foreach (var navalSquad in navalSquads)
+					// 12.4a: fire-support units form their own squads and never raid.
+					fsSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
+				}
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				{
+					guerrillaForce.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
+				}
+				else if (Info.HarasserTypes.Contains(a.Info.Name))
+					AddToHarassSquad(bot, new UnitWposWrapper(a));
+				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
+				{
+					var supportSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Support);
+					if (supportSquad == null)
 					{
-						if (navalSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
-						{
-							navalSquad.Units.Add(new UnitWposWrapper(a));
-							matchingNavalSquadFound = true;
-							break;
-						}
+						supportSquad = RegisterNewSquad(bot, SquadCAType.Support);
+						AIUtils.BotDebug("AI ({0}): Created support squad {1}", Player.ClientIndex, supportSquad.Type);
 					}
 
-					if (!matchingNavalSquadFound)
-					{
-						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
-						newNavalSquad.Units.Add(new UnitWposWrapper(a));
-					}
+					supportSquad.Units.Add(new UnitWposWrapper(a));
 				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
@@ -934,49 +1458,49 @@ namespace OpenRA.Mods.CA.Traits
 				FrozenActor missionFrozenTarget = null;
 				if (Info.UseMissions && missionProviders?.Length > 0)
 				{
-					mission = BestAffordableMission(missionProviders, idleUnitsValue);
-					if (mission?.Type == BotMissionType.Defend)
+					// A Defend whose hold window already lapsed this cycle is excluded at
+					// selection time so it can't shadow a Raid sitting behind it in the
+					// published order (Defend has RequiredValue 0 and would always win).
+					mission = SelectMission();
+					while (mission?.Type == BotMissionType.Defend)
 					{
-						if (defendMissionExhaustedRegion != mission.RegionIndex)
-							defendMissionExhaustedRegion = -1;
-
-						if (defendMissionExhaustedRegion == mission.RegionIndex)
+						if (heldDefendMission == null)
 						{
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							heldDefendMission = mission;
+							defendMissionHeldSince = World.WorldTick;
 						}
 						else
 						{
-							if (heldDefendMission == null)
-							{
-								heldDefendMission = mission;
+							// A different region re-published as Defend must not inherit the
+							// previous region's elapsed hold (it could exhaust instantly).
+							if (heldDefendMission.RegionIndex != mission.RegionIndex)
 								defendMissionHeldSince = World.WorldTick;
-							}
-							else
-								heldDefendMission = mission;
-
-							var heldTicks = World.WorldTick - defendMissionHeldSince;
-							if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
-							{
-								AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
-									Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
-								return;
-							}
-
-							AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
-								Player.ClientIndex, mission.RegionIndex, heldTicks);
-							defendMissionExhaustedRegion = mission.RegionIndex;
-							heldDefendMission = null;
-							defendMissionHeldSince = -1;
-							mission = null;
+							heldDefendMission = mission;
 						}
+
+						var heldTicks = World.WorldTick - defendMissionHeldSince;
+						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						{
+							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
+								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
+							return;
+						}
+
+						AIUtils.BotDebug("AI ({0}): releasing Defend mission in region {1} after {2} ticks",
+							Player.ClientIndex, mission.RegionIndex, heldTicks);
+						defendMissionExhaustedRegions.Add(mission.RegionIndex);
+						heldDefendMission = null;
+						defendMissionHeldSince = -1;
+						mission = SelectMission();
 					}
-					else
+
+					// Null is "no mission published this tick", not "a non-Defend won" —
+					// clearing here would re-arm an exhausted region between publishes.
+					if (mission != null && mission.Type != BotMissionType.Defend)
 					{
 						heldDefendMission = null;
 						defendMissionHeldSince = -1;
-						defendMissionExhaustedRegion = -1;
+						defendMissionExhaustedRegions.Clear();
 					}
 
 					if (mission?.Type == BotMissionType.Raid)
@@ -988,14 +1512,28 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
-				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush, missionTarget);
-				if (missionFrozenTarget != null)
-					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
+				BotMission SelectMission()
+				{
+					return BestAffordableMission(missionProviders, idleUnitsValue,
+						m => m.Type == BotMissionType.Defend
+							&& defendMissionExhaustedRegions.Contains(m.RegionIndex));
+				}
+
+				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
+				// 12.4a: fire-support members never raid either - they route to the
+				// screen squad (release/load paths can leave them in the pool).
 				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
-				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)));
+				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
+				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)));
+				if (missionTarget != null)
+					attackForce.Target = Target.FromActor(missionTarget);
+				else if (missionFrozenTarget != null)
+					attackForce.Target = Target.FromFrozenActor(missionFrozenTarget);
 
 				if (artilleryUnits.Count > 0)
 				{
@@ -1009,6 +1547,42 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
+				// 12.4a: the fire-support squad protects the artillery - it trails the
+				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
+				// tanks per artillery unit out of the assault.
+				var fsSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
+				if (fireSupportUnits.Count > 0 && fsSquad == null)
+					fsSquad = RegisterNewSquad(bot, SquadCAType.FireSupport);
+				if (fsSquad != null)
+				{
+					foreach (var u in fireSupportUnits)
+						fsSquad.Units.Add(u);
+
+					var artilleryParent = Squads.Where(s => s.Type == SquadCAType.Artillery && s.IsValid)
+						.MaxByOrDefault(s => s.Units.Count);
+					if (artilleryParent != null)
+					{
+						fsSquad.Parent = artilleryParent;
+						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
+							attackForce.Units.Count);
+						foreach (var escort in attackForce.Units
+							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name))
+							.OrderByDescending(u => UnitValue(u.Actor))
+							.Take(escortsNeeded)
+							.ToList())
+						{
+							attackForce.Units.Remove(escort);
+							fsSquad.Units.Add(escort);
+						}
+					}
+					else if (fsSquad.Parent == null || !fsSquad.Parent.IsValid)
+						fsSquad.Parent = attackForce.IsValid ? attackForce : null;
+				}
+
+				// 6f: support squads trail the newest assault, healing/repairing in its wake.
+				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
+					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
 				unitsHangingAroundTheBase.Clear();
 				foreach (var n in notifyIdleBaseUnits)
@@ -1016,7 +1590,15 @@ namespace OpenRA.Mods.CA.Traits
 
 				SetNextDesiredAttackForce();
 				if (mission?.Type == BotMissionType.Raid && (missionTarget != null || missionFrozenTarget != null))
+				{
+					LastMissionAssignment = new BotMissionAssignment
+					{
+						Type = mission.Type,
+						RegionIndex = mission.RegionIndex,
+						Frozen = missionFrozenTarget != null
+					};
 					MissionTaken(mission);
+				}
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
 			}
@@ -1066,12 +1648,20 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!protectSq.IsValid)
 			{
-				var ownUnits = World.FindActorsInCircle(World.Map.CenterOfCell(GetRandomBaseCenter()), WDist.FromCells(Info.ProtectUnitScanRadius))
-					.Where(unit => unit.Owner == Player && !Info.ExcludeFromSquadsTypes.Contains(unit.Info.Name) && unit.Info.HasTraitInfo<AttackBaseInfo>() && !unit.Info.HasTraitInfo<BuildingInfo>()
-						&& !unit.Info.HasTraitInfo<HarvesterInfo>() && !unit.Info.HasTraitInfo<AircraftInfo>());
+				// Draft from the idle pool only. activeUnits contains both squad members
+				// and hanging units, so a world scan would draft units already assigned
+				// to Rush/Guerrilla/etc. — dual membership and competing orders.
+				var draftable = unitsHangingAroundTheBase
+					.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name) && u.Actor.Info.HasTraitInfo<AttackBaseInfo>()
+						&& !u.Actor.Info.HasTraitInfo<BuildingInfo>() && !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
+						&& !IsNavalUnit(u.Actor))
+					.ToList();
 
-				foreach (var a in ownUnits)
-					protectSq.Units.Add(new UnitWposWrapper(a));
+				foreach (var u in draftable)
+				{
+					protectSq.Units.Add(u);
+					unitsHangingAroundTheBase.Remove(u);
+				}
 			}
 
 			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
@@ -1131,6 +1721,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (self.World.IsReplay)
 				return;
 
+			defendMissionExhaustedRegions.Clear();
+
 			var nodes = data.ToDictionary();
 
 			if (nodes.TryGetValue("InitialBaseCenter", out var initialBaseCenterNode))
@@ -1174,6 +1766,13 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var n in squadsNode.Nodes)
 					Squads.Add(SquadCA.Deserialize(bot, this, n.Value));
 			}
+
+			// Reconcile stranded units: an actor restored into activeUnits that belongs to
+			// no squad and no idle pool would never be managed again — park it in the pool.
+			var inSquads = Squads.SelectMany(s => s.Units.Select(u => u.Actor)).ToHashSet();
+			var inPool = unitsHangingAroundTheBase.Select(u => u.Actor).ToHashSet();
+			foreach (var a in activeUnits.Where(a => !inSquads.Contains(a) && !inPool.Contains(a) && !unitCannotBeOrdered(a)))
+				unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 		}
 
 		public bool CanBuildMoreOfAircraft(ActorInfo actorInfo)

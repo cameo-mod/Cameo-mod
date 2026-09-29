@@ -27,10 +27,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			"personality-turtle",
 			"personality-tech",
 			"personality-expansion",
-			"personality-steamroller"
+			"personality-steamroller",
+			"personality-guerrilla"
 		};
 
 		public readonly string PersonalityPrefix = "personality-";
+
+		[Desc("Bot type -> personality pins for league-harness exploiters (AI_DEEP_RESEARCH §6.2). " +
+			"A pinned bot always draws its pole at enable time and ignores SetBotPersonality orders " +
+			"for any other personality, so the A/B harness can expose candidate flaws deterministically.")]
+		public readonly Dictionary<string, string> PinnedPersonalities = null;
 
 		// Declares the runtime-granted `personality-*` conditions to the yaml linter (see
 		// BotCounterDemandController), so their consumers stop reading as "not granted".
@@ -46,6 +52,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			if (Conditions.Any(c => !c.StartsWith(PersonalityPrefix, StringComparison.Ordinal)))
 				throw new YamlException($"Every personality condition must start with '{PersonalityPrefix}'.");
+
+			if (PinnedPersonalities != null)
+				foreach (var kv in PinnedPersonalities)
+					if (!Conditions.Any(c => BotPersonalityController.PersonalityName(c, PersonalityPrefix) == kv.Value))
+						throw new YamlException($"PinnedPersonalities[{kv.Key}] names '{kv.Value}', which has no matching personality-* condition.");
 		}
 
 		public override object Create(ActorInitializer init) { return new BotPersonalityController(init.Self, this); }
@@ -54,15 +65,38 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class BotPersonalityController : ConditionalTrait<BotPersonalityControllerInfo>, IResolveOrder
 	{
 		int personalityToken = Actor.InvalidConditionToken;
+		string pinnedTo;
 
 		public string CurrentPersonality { get; private set; } = "";
 
 		public BotPersonalityController(Actor self, BotPersonalityControllerInfo info)
 			: base(info) { }
 
+		internal static string PinnedPersonality(Dictionary<string, string> pins, string botType)
+		{
+			if (botType == null || pins == null)
+				return null;
+
+			return pins.TryGetValue(botType, out var pinned) ? pinned : null;
+		}
+
+		string PinnedPersonality(Actor self)
+		{
+			if (pinnedTo == null)
+			{
+				var botType = self.Owner.IsBot ? self.Owner.BotType : null;
+				pinnedTo = PinnedPersonality(Info.PinnedPersonalities, botType) ?? "";
+			}
+
+			return pinnedTo.Length > 0 ? pinnedTo : null;
+		}
+
 		protected override void TraitEnabled(Actor self)
 		{
-			var condition = Info.Conditions.Random(self.World.SharedRandom);
+			var pinned = PinnedPersonality(self);
+			var condition = pinned != null
+				? Info.Conditions.First(c => PersonalityName(c, Info.PersonalityPrefix) == pinned)
+				: Info.Conditions.Random(self.World.SharedRandom);
 			personalityToken = self.GrantCondition(condition);
 			CurrentPersonality = PersonalityName(condition, Info.PersonalityPrefix);
 		}
@@ -73,11 +107,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				personalityToken = self.RevokeCondition(personalityToken);
 
 			CurrentPersonality = "";
+			pinnedTo = null;
 		}
 
 		void IResolveOrder.ResolveOrder(Actor self, Order order)
 		{
 			if (IsTraitDisabled || order.OrderString != "SetBotPersonality" || string.IsNullOrEmpty(order.TargetString))
+				return;
+
+			if (PinnedPersonality(self) != null)
 				return;
 
 			var condition = Info.Conditions.FirstOrDefault(c => PersonalityName(c, Info.PersonalityPrefix) == order.TargetString);

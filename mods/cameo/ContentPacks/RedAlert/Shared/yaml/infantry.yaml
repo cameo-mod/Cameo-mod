@@ -57,6 +57,8 @@ ra1_soviets_molotovconscript:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Molotov Conscript
 	Valued:

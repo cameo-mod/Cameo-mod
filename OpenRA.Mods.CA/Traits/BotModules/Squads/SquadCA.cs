@@ -16,7 +16,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery }
+	public enum SquadCAType { Guerrilla, Air, Rush, Protection, Naval, Artillery, Support, Harass, FireSupport }
 
 	public class SquadCA
 	{
@@ -64,6 +64,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				case SquadCAType.Guerrilla:
 					FuzzyStateMachine.ChangeState(this, new GroundUnitsIdleStateCA(), true);
 					break;
+				case SquadCAType.Harass:
+					FuzzyStateMachine.ChangeState(this, new HarasserUnitsIdleStateCA(), true);
+					break;
 				case SquadCAType.Rush:
 					FuzzyStateMachine.ChangeState(this, new GroundUnitsIdleStateCA(), true);
 					break;
@@ -78,6 +81,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					break;
 				case SquadCAType.Artillery:
 					FuzzyStateMachine.ChangeState(this, new ArtilleryUnitsIdleStateCA(), true);
+					break;
+				case SquadCAType.Support:
+					FuzzyStateMachine.ChangeState(this, new SupportUnitsIdleStateCA(), true);
+					break;
+				case SquadCAType.FireSupport:
+					FuzzyStateMachine.ChangeState(this, new FireSupportUnitsIdleStateCA(), true);
 					break;
 			}
 		}
@@ -96,7 +105,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			set => Target = Target.FromActor(value);
 		}
 
-		public bool IsTargetValid => Target.IsValidFor(Units.FirstOrDefault().Actor);
+		public bool IsTargetValid => IsValid && Target.IsValidFor(Units[0].Actor);
 
 		public bool IsTargetVisible => Target.Actor == null || Target.Actor.CanBeViewedByPlayer(Bot.Player);
 
@@ -130,11 +139,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			var squad = new SquadCA(bot, squadManager, type, targetActor);
 
+			// RegisterNewSquad assigns this — Deserialize bypassed it, losing the
+			// per-type target preferences (PreferTagged) for every loaded squad.
+			squad.PriorityTags = squadManager.PriorityTagsFor(type);
+
 			var unitsNode = yaml.NodeWithKeyOrDefault("Units");
 			if (unitsNode != null)
 			{
+				// GetActorById can return null for actors removed between save
+				// versions; a null wrapper survives Count>0 IsValid checks and
+				// then NREs on the first .Actor dereference.
 				foreach (var a in FieldLoader.GetValue<uint[]>("Units", unitsNode.Value.Value)
-					.Select(a => squadManager.World.GetActorById(a)))
+					.Select(a => squadManager.World.GetActorById(a))
+					.Where(a => a != null))
 				{
 					squad.Units.Add(new UnitWposWrapper(a));
 				}

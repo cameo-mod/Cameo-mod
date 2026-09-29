@@ -29,6 +29,7 @@ Strings are the internal names, never the display/translated names.
     "team": 1,
     "handicap": 0,
     "spawn": 3,
+    "home": "42,17",
     "outcome": "won",
     "personality": "rush",
     "personality_switches": 0,
@@ -49,7 +50,9 @@ Strings are the internal names, never the display/translated names.
     "army_value": 0,
     "assets_value": 0,
     "resources_earned": 0,
-    "resources_spent": 0
+    "resources_spent": 0,
+    "stats_timeline_fields": "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues",
+    "stats_timeline": [ [750, 1200, 1000, 800, 5000, 0, 0, 200, 1], [1500, 2600, 2500, 1900, 7000, 300, 110, 100, 0] ]
   },
   "opponents": [
     { "name": "Multi1", "is_bot": true, "bot_type": "hard", "faction": "td_nod",
@@ -60,6 +63,17 @@ Strings are the internal names, never the display/translated names.
 ```
 
 ## Field rules
+
+- `home` — `player.HomeLocation` as `"x,y"`. `spawn` is the LOBBY's spawn choice and is `0`
+  for every map-side player, which is how the A/B harness seats both duelists — so in a
+  harness run `spawn` is constant and says nothing about side. Key side analysis on `home`.
+- `stats_timeline` — one row per `AiMatchLogWriter.SampleIntervalTicks` (default 750) world
+  ticks, columns named by `stats_timeline_fields`; cumulative except `army_value`,
+  `assets_value`, `banked` (cash + stored resources) and `idle_queues` (player-level production
+  queues that could build something but have nothing queued — the discipline metric of
+  AI_DEEP_RESEARCH §13 item 1). Sampled on TICKS, not on `PlayerStatistics`' own graph cadence, which follows
+  game time (every 3000 ticks at the harness's maximum speed). Optional: records written
+  before it existed have no timeline.
 
 `schema` is `2` for records carrying the composition/episode fields; older
 schema-1 records in the same file remain valid and the aggregator pools both
@@ -98,8 +112,31 @@ schema-1 records in the same file remain valid and the aggregator pools both
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.
-- `opponents` / `allies` — every non-neutral, non-spectating player other than
-  the subject, split by `player.IsAlliedWith`. Same key order as shown.
+- `arsenal` — the player's `BotArsenalLedger` (AI_ARCHITECTURE.md §12.3, CA-1): one object per own
+  actor type, ordered by `killed_value` — `created`, `lost`, `lost_value`, `killed_value` (value of
+  enemy actors this type destroyed) and `killed_by_victim` (that value split by victim type). Booked
+  by Cameo's `UpdatesPlayerStatistics` shadow (Info subclasses the engine's, trait wraps it), so
+  every actor carrying that trait counts; pre-placed and starting units count as `created`.
+  Empty when the ledger trait is absent.
+- `opponents` / `allies` — every eligible player other than the subject, split
+  by the **stance masks** (`p.AlliedPlayersMask.Overlaps(subject.PlayerMask)`),
+  NOT by `player.IsAlliedWith`. The masks are assigned once by
+  `CreateMapPlayers.SetupPlayerMasks` from `PlayerReference.Allies`/`Enemies`
+  and lobby teams, and never mutate — so they still describe the matchup after
+  the match resolves. `Player.Spectating` is `spectating || WinState !=
+  Undefined` on non-mission maps (`Player.cs`), and `RelationshipWith`
+  short-circuits `other.Spectating` to Ally for combatant evaluators — the log
+  is built only after players resolve, so `IsAlliedWith` at write time reports
+  every decided player as an ally of every combatant. Eligible means
+  `!NonCombatant && (Playable || IsBot)`, where `NonCombatant` is taken from
+  **both** the runtime flag and the declared `PlayerReference.NonCombatant` —
+  a lobby-occupied slot ignores the runtime flag (`Player` ctor client branch),
+  so map-declared inert slots (the `ai_duel_gate` referee) must be read off the
+  reference or they leak into `opponents` and silently turn every record
+  non-1v1. `IsBot` admits map-side bots: `Playable` is true only for lobby
+  clients, but a headless `Launch.Map` match's duelists are map players
+  (`Playable: False` + `Bot:`) that are nonetheless each other's real
+  opponents.
 - `handicap` and `bot_type` are recorded because they are the cheat axes: an
   aggregation that mixes handicaps or difficulty tiers is meaningless.
 - Ordering: `opponents` and `allies` sorted by `name` ordinal, so two records of
@@ -178,3 +215,165 @@ when there is no candidate. Enemy records are sorted by ordinal player name.
 Candidate personality and target values are observations only. The phase-2
 target score deliberately has no pairwise-damage (`w_hurt`) term because no
 usable attribution hook exists; that term is phase-4 work.
+
+`own.losses_by_role` / `own.away_losses_by_role` (objects, keys sorted) are the
+CUMULATIVE cost of units lost, by the role the unit held at the last role pass
+(`AssignRolesInterval`): a squad type (`rush` = the main attack force, `protection`,
+`guerrilla`, `harass`, `artillery`, `support`, `air`, `naval`) or `idle` (at the base,
+in no squad). `away_` is the part lost farther than `MaxBaseRadius` from the base
+centre. Units in no squad and not idle (harvesters, MCVs) are not counted, so the
+difference to `PlayerStatistics.DeathsCost` is buildings plus those. Summed over
+every squad manager, including disabled personalities' (a disabled manager forgets
+its snapshot, so a unit is never booked twice).
+
+`own.combat_ratio_pct` / `own.combat_ratio_defended_pct` (record-only, phase CP of
+`AI_DEEP_RESEARCH.md` §2.3): the Lanchester square-law ratio ×100 of the own combat units against
+the enemy combat units this bot REMEMBERS (fog memory; mobile contacts expire), and against those
+plus remembered enemy defences. Damage per tick uses each weapon's main warhead, burst cycle and
+Versus against the target's armour, spread over the enemy by HP share. Above 100 the own side is
+predicted to win; capped at 10000 (an enemy with nothing remembered that can shoot back). No
+decision reads it yet — it is being validated against the decisive fights (`tools/ai/fight_report.py`).
+
+## Batch harvest (Stage D)
+
+**Maintainer test mandate (2026-09-28):** every bot A/B test runs on the real
+tournament map — `mods/cameo/maps/ai_duel_nuclear_winter/` (a byte-faithful
+extract of `_ra_a-nuclear-winter.oramap` whose two `Playable` slots become
+map-side `BotA`/`BotB` players on the real mpspawn cells Actor705/Actor971) —
+at the fixture's locked `insane` gamespeed. No hand-made duel fixtures: earlier
+synthetic maps misled testing (disconnected pockets, painted-ore-only fields).
+The acceptance match-up is the asymmetric one — `fransbot` (fog-honest: the
+Cameo x RV x CA x CN x Fransbot composite) must beat `classic` (the pre-wave
+stack with `RevealsMap` omniscience, `bot_ai.classic` / `classicbot` condition).
+Default invocation:
+`python tools/ai/run_ai_match_batch.py --factions ra1_soviets --bot-a fransbot --bot-b classic --repeats N`
+(the harness template already defaults to the Nuclear Winter fixture).
+
+
+`tools/ai/run_ai_match_batch.py` multiplies the log's value: it generates a
+variant of the duel map per matchup inside the
+batch's isolated `Engine.SupportDir` user-map cache (`maps/cameo/{DEV_VERSION}`)
+— since 2026-09-28 the default source is `_ra_a-nuclear-winter.oramap` (see
+the A/B acceptance protocol below; `--map` still accepts the legacy
+`ai_duel_gate_20260928/` template dir),
+launches `OpenRA.exe` with `Launch.Map` + `Launch.Benchmark`, and slices the
+appended `cameo-ai-matches.jsonl` per run by byte offset. The duelists are
+map-side bots (`Playable: False` + `Bot:`) — the only bot path under a Local
+server — so `SpawnStartingUnits` cannot serve them; the harness resolves each
+faction's `StartingUnits` group from the mod yaml and writes it into the
+variant's `Actors:` section at that bot's `HomeLocation`. The template's
+terrain is a real melee map (Desert Rats donor) with both `HomeLocation`s on
+its two real `mpspawn` cells — a hand-made fixture once put one duelist on a
+disconnected pocket, and the bot sat inert all match. Match end is
+`ConquestVictoryConditions` (map restores `MustBeDestroyed` on the base unit
+templates — Cameo strips it) or the locked `TimeLimitManager`; timeout ranks
+`Playable` players only, so a stalemated duel records both bots `lost` — an
+honest draw. The referee slot exists only to satisfy the local server's
+non-empty-slots start rule; it is `NonCombatant` by map declaration, gets no
+starting units, and is invisible to the records.
+
+Operational semantics measured live (2026-09-28; speed raised 2026-09-29): the fixture locks
+`gamespeed: maximum` via `MapOptions` — the maintainer's convention for bot
+matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
+by `ticksPerSecond` (60,000 ticks per minute at maximum), so the duel fixtures offer
+`TimeLimitOptions` 0/1/2/3/4/6/9, tick for tick the insane-era 0/10/20/30/40/60/90, and default to 3
+(180,000 ticks): the **engine** ends a stalemate at that depth and records it (both sides `lost`: a timed-out stalemate has no
+winner; proven live 2026-09-29, two `veryeasy` mirrors ended at 60,001 ticks under `--time-limit 1`), where a
+30-minute cap (1.8M ticks) left the harness to kill it with no record. Achieved speed stays whatever
+the box sustains; timeouts are therefore bounded
+by a `debug.log` stall detector (a live match writes every few seconds) plus a
+speed-aware wall backstop, never a tight fixed timeout. Game speed shortens
+elimination matches only — drop `timelimit` when a quick pipeline check needs
+a fast draw. An `exit=1` with zero
+records and no exception is an external `TerminateProcess` — the engine only
+returns 0/-1 — so the harness retries a no-records attempt once and appends
+one durable line per attempt to `batch_results.jsonl`. Ally/opponent in the
+records comes from the static stance masks, not `IsAlliedWith`: on
+non-mission maps every decided player reports `Spectating`, which
+short-circuits `RelationshipWith` to Ally for both losers. Generated variants
+carry a unique comment salt because `Map.ComputeUID` hashes bytes and
+identical copies merge into one `MapCache` preview.
+
+## The A/B acceptance protocol (maintainer ruling 2026-09-28)
+
+All bot-vs-bot testing runs on the shipped tournament duel map **"A Nuclear
+Winter"** (`mods/cameo/maps/_ra_a-nuclear-winter.oramap`) — real melee terrain,
+two `mpspawn` cells, `Categories: Tournament`. Generated shell fixtures are no
+longer the test surface for bot comparisons.
+
+The matchup axis is the franken-bot vs the classic bot:
+
+- **Side A — the candidate stack**: the fog-honest merged stack, no global
+  map vision — scouts, fog memory, region intel, nothing omniscient.
+  Concretely that is the `hard` type (the `genericbot` modules = the
+  Cameo × RV × CA × CN merge) — while `fransbot` is the Frans-module
+  **donor** stack, kept as a separate lobby-hidden type so its modules can
+  be A/B-tested in isolation before joining `hard` (maintainer 2026-09-28:
+  "its modules join the Frankenstein stack one at a time"). `fransbot`
+  does NOT receive the `genericbot` condition — the two stacks are
+  disjoint. Both pairings against `classic` are informative; the named
+  acceptance candidate is whichever stack carries the merged modules
+  (today: `hard`).
+- **Side B — `classic`**: the old `ModularBot` type — `classicbot` module
+  gate plus the shared `hardbot` difficulty tier, and deliberate
+  omniscience via `RevealsMap@classic` (self+allies shroud/fog reveal).
+
+Acceptance criterion: **the candidate must win the series from both
+spawns** — run `--repeats 4 --swap-bots` minimum (repeat parity alternates
+which bot occupies which `mpspawn`). `gamespeed` stays locked at `maximum`
+(the maintainer's "maximum game speed" for bot matches, taken literally
+2026-09-29 — series before then ran at `insane` and are not win-rate
+comparable: OrderLatency also shifts 7 -> 10). A timed-out match
+records both sides `lost`, never a fabricated winner.
+
+> ⚠ Validity note (2026-09-28, #611): before `IsEligible` admitted
+> `Playable || IsBot`, the `genericbot` master AI saw **no enemy** in
+> harness matches (both duelists are `Playable: False` map-side bots) —
+> every `hard`-side result predating #611 measures a blind master AI and
+> is not a baseline. Fransbot-side records are unaffected: the Frans stack
+> never consumed MasterAi.
+
+Under the hood the harness extracts the `.oramap` into a variant dir, adds
+the `Referee` seat for the local client, converts `Multi0`/`Multi1` into
+map-side bots (`Playable: False` + `Bot:` + `HomeLocation` from the map's
+`mpspawn` actors), injects each faction's `StartingUnits` group at the spawn
+cell, and layers the duel-gate `rules.yaml` (maximum speed, locked time cap,
+restored `MustBeDestroyed`). The packaged map is never modified.
+
+Baseline measured 2026-09-28: `hard` beat `fransbot` on the first clean
+match — the franken-bot is not there yet; iterate until it takes the series.
+While iterating, prefer the smallest honest lever (targeting, scouting,
+economy pacing) over anything resembling a cheat — the acceptance is
+"fight smart, not hard".
+
+### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`; maximum from 2026-09-29, insane before)
+
+| series | axis | tree | result | notes |
+|---|---|---|---|---|
+| nw-ab-4 | fransbot vs hard | pre-ResourceMap fix | fransbot 0-4 | `army_value: 0` every match, 0 enemy buildings killed — donor stack tabled by a master-AI-blind `hard` |
+| nw-ab-5 | fransbot vs hard | post-ResourceMap (#607) | fransbot 0-2 | expansion live (LandOre/BuildingRefinery commit + retry), first building kill, longest survival ~22k ticks; RAIDs get `bids 0` — recon never reaches the enemy base so no fresh visible targets exist |
+| nw-ab-6 | fransbot vs classic | post-#607 | fransbot 0-2 | vs true omniscient `classic`: 0:16 and 0:18 buildings, army$ 0 both — donor stack alone cannot fight the reference |
+| nw-ab-7 | hard vs classic | post-#611 | running | first VALID `hard` baseline — pre-#611 hard-side numbers were a blind master AI |
+| nw-hard2 | hard vs classic (ra1_soviets mirror) | W1-armed hard (genericbot && hardbot) | hard 1-1 | first post-W1 lane; m1 loss 48067t (units 427:474, assets 65k:184k), m2 WIN 33447t (buildings 54:7, assets 301k:50k); m3/m4 died inside a mid-edit yaml window — invalid |
+| nw-hard3 | hard vs classic (ra1_soviets mirror) | W1-armed hard | hard 1-3 | m1 loss 21831t (bld 2:35, rush→turtle latch), m2 loss 35790t (bld 9:53), m3 WIN 26664t (bld 45:4, army 97k:0), m4 loss 25005t (army 0:131k). Pooled ra1_soviets W1: hard 2-4. Wins dominant, losses die early — turtle-latch under continuous threat is the repeated signature |
+| nw-classic6 | fransbot vs classic (donor smoke) | 6-capacity ground + probes | fransbot 0-1 | 14410t, bld 2:23; structural proof only: ground1-6 all register + missions distribute in parallel (52 RECON, 15 DEFEND) |
+| nw-hard4 | hard vs classic (ra1_soviets mirror) | W2-armed hard (CommandBid+CommanderCore+General publish-only) | hard 1-1, 2 invalid | m1 loss (turtle), m2 WIN; m3/m4 died at ruleset load inside the mid-merge yaml window (17:50Z) — recorded invalid, not signal. Publish-only W2 shows no regression |
+| nw-donor-v12931 | fransbot vs classic (donor smoke) | NOVA merge + V1.29.31 re-vendor | fransbot 0-1 | 16102t clean exit: probes fire (publish->bid->dispatch->retreat-on-damage), V1.29.31 MCV/transport ticking, remembered-structure SECURE doctrine live; donor-only diagnostic, not acceptance |
+| nw-hard5 | hard vs classic (td_gdi mirror) | W2 on rebased tree (dc438d55e) | hard 1-0 decided, 1 invalid | m2 died at ruleset load in the yaml-before-DLL window (SiegeEvaluatorInfo) — documented as sequencing failure, not code failure |
+| nw-hard6 | hard vs classic (td_gdi mirror) | post-#623 rebase + CA-2a telemetry + CA-2b plumbing (OFF) | running | m1 hard WIN 46628t (bld 64:9, decisive +53k, turtle/emergency, 4-5 sq); m2 hard LOSS 74472t (bld 25:82, decisive -64k @60-62k, turtle/emergency, only 2 sq/14k army vs 61k — all losses 0% away); squads=0 heartbeat ~24k WT in m2 → traced to FransCommanderCore AttackAnything draining idle pool below CreateAttackForce thresholds (starvation, no floor; see FINDINGS_2026-09-29_dawn_squad_starvation); m1 attempt-1 + m2 attempt-1 invalid (external kills / stale-Cameo DLL window) |
+
+⚠ nw-ab-4/5 `hard`-side numbers predate #611 (`IsEligible` saw no enemies) —
+they read as "hard's squad machinery carries it anyway", not as a fair test.
+
+### Fog-honest capability gaps closed 2026-09-28 (donor stack)
+
+- `ResourceMapBotModule@fransbot` instance (#607) — expansion was inert.
+- `ScoutBotModule` multi-instance resolution (#607).
+- Strategic-map probe actors (#614) — passability layers inert without them.
+- Support-power `Decisions` table ported verbatim (#615) — fransbot had zero
+  orders vs the genericbot stack's 210.
+- Remaining unset fields swept module-by-module; the benign 0/null defaults
+  and the real gaps are filed in `docs/HANDOFF.md` (2026-09-28 EMBER block).
+| ca2b-ctrl/ca2b-cand | hard vs classic (td_gdi mirror) | F1 base + CA-2b BehaviourEnabled off/on | running | 8 matches/arm, both orientations, CAMEO_BOT_DEBUG=1; F1 validated: squads=2 by WT9k (was 0-for-74k pre-F1); candidate serving stand-off/commit/retreat orders; flag: remembered defence v=0 projection |
+| ca2b-ctrl-max/-cand-max (v1, killed) | hard vs classic (td_gdi mirror) | 372b67825 + BehaviourEnabled off/on, maximum | partial | drivers killed by session restart @11:52; ctrl m1 **hard WON** 15289t (K/D 2.44; decisive +30.8k @10.5-12k; turtle/emergency, raid; bld 31:0), cand m1 never completed (killed mid-flight, no record); v1 ctrl verdict distribution @~WT35k: retreat(predicted-loss) 204, commit 75, free-advance 13, commit-no-defences 11, stand-off 1 — squads form (F1), advisor reads real walls |
+| ca2b2-ctrl/ca2b2-cand (v2) | hard vs classic (td_gdi mirror) | 0365e4e9e (+phantom-retry) + BehaviourEnabled off/on, maximum | running | 8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1; phantom ok+0-retry adopted (NOVA 922b9ba23) |

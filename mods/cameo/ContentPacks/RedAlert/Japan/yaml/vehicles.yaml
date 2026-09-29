@@ -54,6 +54,8 @@ japan_scoutcar:
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
@@ -634,6 +636,8 @@ japan_hovercrafttransport:
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
@@ -725,6 +729,8 @@ japan_armoredcar:
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
@@ -1032,6 +1038,8 @@ japan_grenadebuggy:
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 900
 	Tooltip:

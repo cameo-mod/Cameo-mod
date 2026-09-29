@@ -1,7 +1,140 @@
 # AI configuration owned by this ContentPack (Outpost2).
 #
-# This pack defines no faction actors of its own that the bot modules key on, so it carries no
-# AI rows yet. A faction pack owns its AI rows in its own yaml/ai.yaml (see the sibling faction
-# packs). Packs can ADD rows to the modules declared in mods/cameo/ai/ai.yaml, never override
-# or remove them: docs/design/AI_ARCHITECTURE.md section 1.2 and 2.7, docs/MIGRATION.md.
+# Eden and Plymouth build their bases through the standard Building/Defence/Vehicle queues, so
+# the generic bot modules drive them like any other faction. Rows here are MERGED into the bot
+# modules that mods/cameo/ai/ai.yaml declares: a pack can ADD dictionary rows (they union), but
+# it can never override or remove a key the central file sets
+# (docs/design/AI_ARCHITECTURE.md section 1.2 and 2.7, docs/MIGRATION.md).
 Player:
+	BaseBuilderBotModuleCA@generic:
+		BuildingIntervals:
+			eden_smelter_common: 1500
+			eden_smelter_rare: 1500
+			eden_factory_consumer: 1500
+			eden_factory_vehicle: 1500
+			eden_lab_basic: 3000
+			eden_lab_standard: 3000
+			eden_lab_advanced: 3000
+			plymouth_smelter_common: 1500
+			plymouth_smelter_rare: 1500
+			plymouth_factory_arachnid: 1500
+			plymouth_factory_vehicle: 1500
+			plymouth_basic_lab: 3000
+			plymouth_lab_standard: 3000
+			plymouth_lab_advanced: 3000
+		BuildingDelays:
+			eden_garage: 4500
+			eden_university: 6000
+			eden_spaceport: 9000
+			plymouth_garage: 4500
+			plymouth_university: 6000
+			plymouth_spaceport: 9000
+		BuildingLimits:
+			eden_smelter_common: 10
+			eden_smelter_rare: 5
+			eden_factory_consumer: 10
+			eden_factory_vehicle: 10
+			eden_garage: 1
+			eden_lab_basic: 2
+			eden_lab_standard: 2
+			eden_lab_advanced: 2
+			eden_spaceport: 1
+			plymouth_smelter_common: 10
+			plymouth_smelter_rare: 5
+			plymouth_factory_arachnid: 10
+			plymouth_factory_vehicle: 10
+			plymouth_garage: 1
+			plymouth_basic_lab: 2
+			plymouth_lab_standard: 2
+			plymouth_lab_advanced: 2
+			plymouth_spaceport: 1
+		BuildingFractions:
+			eden_factory_structure: 5
+			eden_smelter_common: 15
+			eden_smelter_rare: 5
+			eden_factory_consumer: 10
+			eden_factory_vehicle: 15
+			eden_storage_common: 5
+			eden_residence: 3
+			eden_agridome: 1
+			eden_nursery: 1
+			eden_university: 1
+			eden_garage: 1
+			eden_rcc: 1
+			eden_gorf: 1
+			eden_lab_basic: 5
+			eden_lab_standard: 5
+			eden_lab_advanced: 5
+			eden_spaceport: 1
+			eden_dirt: 1
+			eden_gp_laser: 15
+			eden_gp_railgun: 10
+			eden_gp_emp: 5
+			plymouth_structure_factory: 5
+			plymouth_smelter_common: 15
+			plymouth_smelter_rare: 5
+			plymouth_factory_arachnid: 10
+			plymouth_factory_vehicle: 15
+			plymouth_storage_common: 5
+			plymouth_residence: 3
+			plymouth_agridome: 1
+			plymouth_nursery: 1
+			plymouth_university: 1
+			plymouth_garage: 1
+			plymouth_rcc: 1
+			plymouth_gorf: 1
+			plymouth_basic_lab: 5
+			plymouth_lab_standard: 5
+			plymouth_lab_advanced: 5
+			plymouth_spaceport: 1
+			plymouth_dirt: 1
+			plymouth_gp_microwave: 15
+			plymouth_gp_rpg: 10
+			plymouth_gp_stickyfoam: 5
+	UnitBuilderBotModuleCA@generic:
+		UnitDelays:
+			eden_convec_structure_factory: 5000
+			plymouth_convec_structure_factory: 5000
+		UnitIntervals:
+			eden_convec_structure_factory: 2500
+			plymouth_convec_structure_factory: 2500
+			eden_cargotruck_empty: 1000
+			plymouth_cargotruck_empty: 1000
+		UnitsToBuild:
+			eden_cargotruck_empty: 10
+			eden_scout: 3
+			eden_lynx_laser: 10
+			eden_lynx_railgun: 7
+			eden_lynx_emp: 3
+			eden_lynx_acidcloud: 3
+			eden_lynx_starflare: 3
+			eden_lynx_thorshammer: 5
+			eden_tiger_laser: 5
+			eden_tiger_railgun: 5
+			eden_tiger_emp: 3
+			eden_tiger_acidcloud: 3
+			eden_tiger_starflare: 3
+			eden_tiger_thorshammer: 3
+			plymouth_cargotruck_empty: 10
+			plymouth_scout: 3
+			plymouth_scorpion: 7
+			plymouth_spider: 3
+			plymouth_lynx_microwave: 10
+			plymouth_lynx_rpg: 7
+			plymouth_lynx_esg: 5
+			plymouth_lynx_emp: 3
+			plymouth_lynx_stickyfoam: 3
+			plymouth_lynx_starflare: 3
+			plymouth_lynx_supernova: 3
+			plymouth_tiger_microwave: 5
+			plymouth_tiger_rpg: 5
+			plymouth_tiger_esg: 5
+			plymouth_tiger_emp: 3
+			plymouth_tiger_stickyfoam: 3
+			plymouth_tiger_starflare: 3
+			plymouth_tiger_supernova: 3
+		UnitLimits:
+			eden_cargotruck_empty: 20
+			plymouth_cargotruck_empty: 20
+			eden_scout: 2
+			plymouth_scout: 2

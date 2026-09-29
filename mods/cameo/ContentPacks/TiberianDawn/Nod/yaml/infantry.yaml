@@ -95,6 +95,8 @@ td_nod_flamethrower:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Tooltip:
 		Name: Nod Flamethrower
 	Valued:
@@ -404,6 +406,8 @@ td_nod_blackhandflamer:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
+	BotRoles:
+		Roles: guerrilla
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100

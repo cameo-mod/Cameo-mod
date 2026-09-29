@@ -141,5 +141,30 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("map_title").GetString(),
 				Is.EqualTo("a \"quoted\"	map\name"));
 		}
+
+		// stats_timeline follows kills_cost inside "stats", so a missing separator would break every
+		// line the same way the personality timeline once did.
+		[TestCase(false)]
+		[TestCase(true)]
+		public void StatsTimelineRoundTrips(bool empty)
+		{
+			var b = new StringBuilder();
+			AiMatchLogWriter.AppendObjectStart(b);
+			AiMatchLogWriter.AppendObjectPropertyStart(b, "stats", true);
+			AiMatchLogWriter.AppendNumber(b, "kills_cost", 100, true);
+			AiMatchLogWriter.AppendStatsTimeline(b, empty ? null : new List<int[]> { new[] { 750, 1200, 1000, 800, 5000, 0, 0, 200, 1 }, new[] { 1500, 2600, 2500, 1900, 7000, 300, 110, 100, 0 } });
+			b.Append("}}");
+
+			using var doc = JsonDocument.Parse(b.ToString());
+			var stats = doc.RootElement.GetProperty("stats");
+			Assert.That(stats.GetProperty("stats_timeline_fields").GetString(), Is.EqualTo(AiMatchLogWriter.StatsTimelineFields));
+			var timeline = stats.GetProperty("stats_timeline");
+			Assert.That(timeline.GetArrayLength(), Is.EqualTo(empty ? 0 : 2));
+			if (!empty)
+			{
+				Assert.That(timeline[1].GetArrayLength(), Is.EqualTo(AiMatchLogWriter.StatsTimelineFields.Split(',').Length));
+				Assert.That(timeline[1][3].GetInt32(), Is.EqualTo(1900));
+			}
+		}
 	}
 }

@@ -9,7 +9,11 @@ Task queue: [`ROADMAP.md`](ROADMAP.md) section "AI ARCHITECTURE"._
 fact with source evidence. Sections 2–7 are proposals except the record-only implementation in
 §6.2a, delivered on the follow-up branch for coordinator review. Section 8 is outside research. Section 9 records what is
 still undecided. Section 10 is the module-by-module build plan and section 11 reconciles the
-five-agent research round against sections 1–10. The §6.2a match logger has runtime and replay
+five-agent research round against sections 1–10. **Section 12 is the maintainer's combined-arms
+order of 2026-09-28** (arsenal tracker with self-learning, role ratios, formation, siege, air
+doctrine, scouting) mapped onto what ships, with phases CA-1…CA-6 and an owner for each.
+Research round 2 — how the strongest RTS bots fight, reason about space, micro, learn and stay
+fun, with the phases CP/ZG/IM/UT/MI/OM/LG it adds — is [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md). The §6.2a match logger has runtime and replay
 evidence in `docs/audit/ASTRA_REVIEW.md`; this does not validate the proposed decision system.
 
 ---
@@ -39,6 +43,50 @@ The second point is the single most important finding in this document. It also 
 *better* rather than worse to fix: an opponent model that can be wrong is what makes scouting,
 feints and hidden tech meaningful, and it is what the whole opponent-modelling literature in §8
 is about.
+
+### 0a. The acceptance test (maintainer rulings, 2026-09-27)
+
+> *"The new Frankenstein monster AI with no map wide vision [must be] able to beat our existing AI of
+> the same difficulty level with map wide vision … every time with any faction. … At least as a
+> first step it should win with the same faction on both sides. Later any match up."*
+
+The program is done when this test passes. It is binding and still **unmeasured** (status below).
+
+| | ruling |
+|---|---|
+| **Candidate** | the new bot (the CA × RV × CN × Fransbot merge), with **no map-wide vision**: every module reads the world only through what its player can see or remembers (§3.1). |
+| **Opponent** | the existing bot **at the same difficulty**, **with** map-wide vision, i.e. today's omniscient squad targeting (§0 point 2). |
+| **Pass** | the candidate wins **at least 16 of 20** matches, one match per map. |
+| **Maps** | the **20 two-player maps in the `Tournament` category**, ordered by player count, then title. There are 21; **Twin Lakes CAMEO** is left out. |
+| **Stage 1** | the same faction on both sides. |
+| **Stage 2** | any match-up: every faction against every faction. |
+
+The 20 maps (measured 2026-09-28 from each map's `Categories:`, `Title:` and `Playable: True`
+count; file in brackets):
+
+1. 16:9 (`16-9.oramap`) · 2. 420 blaze it (`420bzt`) · 3. A Nuclear Winter (`_ra_a-nuclear-winter`) ·
+4. Alpine Assault (`AlpineAssault`) · 5. Bombshell Beach (`BombshellBeach`) · 6. Death Valley
+(`DeathValley`) · 7. Frozen Rift CAMEO (`frozen_rift_cameo`) · 8. Model 200 (`model-200`) ·
+9. Mountain Pass (`MountainPass`) · 10. Northern Lights CAMEO (`NL04`) · 11. Only Blood Is Accepted
+(`Only_Blood_Is_Accepted_1v1_BI-4.4`) · 12. Pitfight (`_ra_pitfight`) · 13. Plan B (`plan-b`) ·
+14. Proto Blood (`proto_map_blood`) · 15. Proto Desert Night (`proto_map_desert_night`) ·
+16. Proto Mediterranean Conflict (`proto_map_mediterranean`) · 17. Proto Snow (`proto_map_snow`) ·
+18. Satan's Clutch (`SatansClutch`) · 19. Snowy Woodlands (`SnowyWoodlands`) · 20. Ysmir (`_ra_ysmir`)
+
+**Status 2026-09-28: the test cannot be run yet.** Two pieces are missing from master:
+1. **A fog-honesty check.** Nothing verifies "no map-wide vision" across *all* modules;
+   `MasterAiBotModule.UseFoggedObservation: true` (`mods/cameo/ai/ai.yaml`) covers only the modules
+   that consume the fogged provider, and the squad manager still scans `World.Actors` (§0 point 2).
+2. **A match runner** that plays one match per map and records the winner. DAWN's #578 branch has a
+   Fransbot versus map; nothing on master plays the 20-map set.
+
+Also, **the candidate must first be able to play every faction.** On 2026-09-28 an Atreides bot
+starting from a bare construction yard still built nothing (the power, barracks and production lists
+lack the D2k and Outpost2 ids; #588 and the next list-rollout roles fix this).
+
+Speed for the runs: `GameSpeed: maximum` — the top ladder tier — with the dropdown locked
+and adaptive speed off (see `LESSONS_LEARNED.md`); promoted from `insane` for unattended
+tuning runs (maintainer order 2026-09-29).
 
 ---
 
@@ -383,7 +431,12 @@ predicate that no trait can satisfy fails the load, so a typo can't silently mat
 is the primitive DAWN's Fransbot field spec (Class B: `Mobile.Locomotor`, `Production.Produces`)
 builds on. Every other role **reports** to `bot-roles.log`: its member count,
 what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
-predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
+predicts the same numbers without booting a match: it re-implements `ResolveMembers` in
+Python (trait base-class expansion from the C# sources, the `Weapons.ValidTargets` union over
+`RequiresCondition`-enabled armaments via a full NoVariables boolean evaluator, C# field
+defaults, explicit `BotRoles` members, and the fieldSeen typo check — an unresolvable
+predicate field exits 1), and `--compare` diffs each role against its written `Targets`
+lists — the review gate before anything joins `Apply`. **First report (2026-09-27, report-only):**
 
 | Role → target | Written | Would add | Written, not derived |
 |---|---|---|---|
@@ -443,6 +496,208 @@ because a bot with neither listed stays paused):
 | harvester | 2026-09-27 | 50: `HarvesterBotModuleCA.HarvesterTypes` emptied, and `ResourceMapBotModule.HarvesterTypes` reduced to `naxis_slaveoverseer` (a slave whip with no `Harvester` trait; kept so its behaviour doesn't change) | `ai_harvester_gate_20260927`, 4 paired runs to tick 6000: TKM (refinery listed, harvester not) **built +1, +1 without the role and +5, +6 with it**. Atreides built 0 either way: it needs refinery + conyard. `bot-roles.log`: `34 members, 0 written; ADDED 34` |
 | refinery + conyard, and harvester → `SquadManagerBotModuleCA.ExcludeFromSquadsTypes` | 2026-09-27 | 388: `HarvesterBotModuleCA.RefineryTypes` emptied; the other two `RefineryTypes` keep only `wc2_humans_townhall`/`wc2_orcs_greathall` (refinery-yards); the 7 `ConstructionYardTypes` lists keep only `zerg_hive`/`zerg_lair` (and `td_gdi_defenserig` in `McvExpansionManagerBotModule`); 4 dead ids deleted (`chsupply`, `glsupply`, `usasupply`, `refinery`); 26 harvesters × 5 personalities out of `ExcludeFromSquadsTypes` | `ai_harvester_gate_20260927` to tick 6000: the Atreides bot owned **7 → 7** actors (inert) with the harvester role only and **11 → 22/24** with these roles, +2 harvesters built in both runs; its harvesters (`far`: more than 25 cells from base) were **4 of 4 far by tick 6000 without** the `ExcludeFromSquadsTypes` target, drafted into attack squads as the maintainer saw, and **0 in 4 of 4 runs with it**; the same gap already existed on master for `ra1_soviets_heavyindustrialminer`, `futuretech_prospectormk2` and `wc2_humans_militiapeasant`. `bot-roles.log`: 31 refinery and 31 conyard members |
 
+**Interim repair (2026-09-28, EMBER, `devin/ember/ai-faction-wiring`):** the "would add" set was
+a live bug — the five newest factions were inert because their ids were in no central list. The
+ids were hand-appended (119 ids across 66 rows, all verified defined) until `Apply:` drains them;
+`Apply` unions into set types so the enumeration dedupe-composes with the role mechanism. The
+table's "written" column therefore now includes these ids — do not re-review them as pending
+additions.
+
+**Where the central ids are (measured 2026-09-29, master `f37342668`: 5,825).** The metric went
+**up** from 4,092, and nothing caught it, because `count_central_ids.py` is in no gate: +670 from
+#588's interim repair (4,601 after `06c74eff4` lowercased it), +580 from `1d754587f`
+(`SquadManagerBotModuleCA@classic`) and +644 from `3fc9e7e5f` (`SquadManagerBotModuleCA@guerrilla`).
+Every personality block carries its **own full copy** of the squad lists, so each new personality
+adds ~600 ids. The seven `SquadManagerBotModuleCA` copies hold ~4,270 of the 5,746 list entries:
+`GuerrillaTypes` 1,776 (254 × 7), `HighValueTargetTypes` 794, `ExcludeFromSquadsTypes` 745,
+`BigAirThreats` 284, `AirUnitsTypes` 222, `NavalUnitsTypes` 215, `StaticAntiAirTypes` 177. A role
+that targets a SquadManager field drains all seven copies at once, so the squad lists come first;
+the base-builder lists (`PowerTypes` 33, `BarracksTypes` 30, `ProductionTypes` 88) are worth far
+less. **Ratchet since 2026-09-29:** `tools/audit/audit_central_ids.py` (in `run_all.sh`) fails when
+the count rises above its `CEILING` (4,289 after the guerrilla role); lower it in the commit that
+lowers the count, never raise it.
+
+### 2.8a The guerrilla role: generated onto the actors, because the band is per faction
+
+**Ruled 2026-09-27:** guerrilla (raid) units are fast/light only, generated from traits, never
+hand-typed (AI_SYNTHESIS.md §3.1). **Bands ruled 2026-09-29 (maintainer, from four measured
+options):** a unit is a guerrilla when it is in the **fastest third** of its own faction's infantry
+(or vehicles) **and** costs **at most that group's median**.
+
+The band is relative to the *faction*, and the bot cannot see ContentPacks at rules load, so
+`BotRoleSets` cannot compute it. `tools/ai/derive_guerrilla_roles.py` computes it offline (the
+faction is the pack, `ContentPacks/<Theme>/<Faction>/`; an actor still in a central rules file is
+`<file stem>/<id prefix>`, e.g. `outpost2/eden`) and writes `BotRoles: Roles: guerrilla` on the
+actor **in its own file**. That keeps the id out of `ai.yaml` (plug and play) and the unit list
+out of human hands. `tools/audit/audit_guerrilla_roles.py` (in `run_all.sh`) reruns it with
+`--check` and fails on any drift.
+
+The pool, per faction and per infantry/vehicle group: producible (a queue some trait `Produces` or
+some `*ProductionQueue` declares: no factory makes the `Disabled` queue, and the Zerg queue
+is a player queue), armed with a weapon that can hurt an enemy (`scrin_repair_drone`'s beam is
+ally-only), ground-mobile (not `naval` or `subterranean`), not an engineer, saboteur or spy
+(`Captures` with a `building` type, or `Infiltrates`: every infantryman also `Captures`
+`ra2garrison`), and not from the artillery, artillery-tank or fire-support template (§12.4a).
+**Result: 154 actors in 37 factions, 57 infantry and 97 vehicles, 1–8 per faction; 12 of them
+live in central rules files (Outpost 2, TS, WC2).**
+
+Two traps the generator handles, both caught while building it:
+* **A tag leaks to children.** An actor that inherits another actor inherits its `BotRoles`:
+  the Plymouth Lynx chassis is in the band and the heavier Tiger (`PLYMOUTH_TIGER_*`) that
+  inherits it is not. The generator compares the **resolved** roles and writes `-BotRoles:` on
+  such a child (10 today), so `--check` also catches a new child of a guerrilla.
+* **A child `Roles:` replaces the parent's.** A new block repeats every role the actor keeps.
+
+**Applied (branch `claude/role_guerrilla_apply`, lands after its Nuclear Winter A/B):** the
+role targets the **six personality instances only**, `SquadManagerBotModuleCA@rush.GuerrillaTypes`
+… `@guerrilla.GuerrillaTypes`. `Targets` gained the `TraitType@instance.Field` form for this, so
+`@classic`, the A/B reference, keeps its written 254-id list and does not move. Their six written
+lists are deleted: **5,825 → 4,289 central ids**. Behaviour changes: 254 raiders → 154, and the 51
+aircraft leave the ground guerrilla squad. `bot-roles.log` shows `154 members, 0 written; ADDED 154`
+on each of the six and no `@classic` line.
+
+### 2.8b Generalising the whole file: tags on templates, numbers per building type (ruled 2026-09-29)
+
+**Maintainer question:** can `ai.yaml` stop listing units and buildings everywhere, and instead fill
+itself at runtime from tags on the templates, so that each faction's folder is complete on its own?
+Yes. The file splits into four layers, and each one gets the same answer: the C# derives the value
+at rules load from the actors that are loaded, and a pack writes only a deliberate exception.
+
+1. **Lists** (§2.8, built): roles derived from traits or declared on templates and actors. A role
+   fills every personality instance at once. That matters because MiniYaml has no inheritance for
+   a trait node inside `Player`, so yaml alone cannot share one list between personalities.
+2. **Per-building numbers** (new). Measured over the 34 packs' ~940 rows, by building type derived
+   from traits:
+
+   | field | uniform by type |
+   |---|---|
+   | `BuildingIntervals` | factory, refinery, barracks **100 %** (1500) |
+   | `BuildingLimits` | refinery **100 %** (10), radar **100 %** (1), repair **100 %** (1); factory and barracks 77 % (10) |
+   | `BuildingFractions` | radar and repair **100 %** (1), superweapon 83 % (1), refinery 82 % (15), barracks 74 % (15) |
+   | `BuildingDelays` | repair **100 %** (4500), radar 86 % (3000) |
+
+   **Ruled: defaults per building type, exceptions kept.** One line per type in the central file
+   (e.g. `refinery: Fraction 15, Limit 10, Interval 1500`) fills every loaded building of that
+   type. A pack row that equals its type default is deleted. A row that differs stays in its pack
+   as an explicit override, and the list of overrides goes to the maintainer for review.
+   ⚠ **Buildings with no row at all DO change** (and they need the A/B): the bot never plans
+   them today. Measured: Scrin's `scrin_extractor`, `scrin_warp_gate` and `scrin_portal`
+   (refinery, vehicle factory, barracks); Outpost 2's smelters, vehicle factories,
+   consumer/arachnid factories, garages and spaceports; 8 naval yards (the base builder may place
+   those through its water logic instead, so check that first).
+   **Which type a building is: tag the templates** (the maintainer's suggestion), not trait
+   heuristics, which mislabel e.g. `EDEN_RESIDENCE` as radar. Template coverage of producible
+   buildings: `^RepairFacility` 18/18, `^IsWeaponFactory` 35/38, `^IsShipyard` 17/18, `^Refinery`
+   33/34, `^IsAircraftFactory` 28/31, `^RadarBuilding` 18/20, `^PowerPlant` 30/34. There is **no
+   barracks template** (0/35: a new `^IsBarracks` is needed), and `^Superweapon` is unreliable
+   (14/35, and 20 non-superweapons inherit it), so that type stays trait-derived.
+3. **Unit production weights** (`UnitsToBuild`, 1,421 rows; 67 % of them weight 1). **Ruled: derive
+   them from stats, after CA-3.** The personality sets a role mix (§12.5); a unit's weight follows
+   from its derived role and Versus profile. The hand rows stay until the derived mix wins an A/B.
+   CA-3 is NOVA's; the roles come from this lane.
+4. **Per-unit squad settings.** `AirSquadTargetTypes` is written 5 times in 17 packs, identically
+   (32 aircraft, 0 differences). **The `@guerrilla` personality never got the rows**, so its air
+   squads lack the setting for every one of them; `@classic` carries its own 28 rows in the central
+   file. The value (Ground / Aircraft / Naval) follows from each aircraft's weapons, so it can be
+   derived, which fixes the gap and removes the copies.
+
+The end state for ContentPacks: a pack holds its actors, and their tags come from the templates; an
+unloaded pack contributes nothing, and no faction needs its own `ai.yaml`.
+
+### 2.9 The empty `ai.yaml`: the plan (maintainer goal 2026-09-29) — binding goal
+
+**Goal.** The central `mods/cameo/ai/ai.yaml` keeps only module wiring, tuning numbers and
+*type* tables, with **zero actor ids**. At rules load the bot fills every list and every
+per-actor table from tags on the templates and actors that are actually loaded. A ContentPack's own
+`ai.yaml` carries only that faction's genuine exceptions. The bot keeps **today's behaviour**,
+except for deliberate, listed fixes (Outpost 2 and Scrin wiring, the guerrilla band). Unit production
+learns across matches instead of using fixed numbers. **Standing rule:** never add an actor id to the
+central file to fix something; add a role, a tag or a type row (TASK_INDEX already says so).
+
+**Why the C# must do it.** Packs load first and the central file last, so a pack cannot append to a
+central list or override a central scalar. MiniYaml also cannot share a trait node between the
+personality blocks. §2.8 therefore fills the fields at rules load, the `ScaledBullet` derive-at-load
+idiom: identical on every client, and sync-safe.
+
+**The layers**
+
+| layer | today | target |
+|---|---|---|
+| lists (harvester, guerrilla, AA, ships, …) | ids × 7 personality copies | roles from traits/templates, one role set fills all personalities (`BotRoleSets`, §2.8/§2.8a); `@instance` targets keep the A/B reference apart |
+| per-building numbers (fractions, limits, delays, intervals) | ~940 pack rows | one row per **building type × game family**; pack rows only for real exceptions (§2.8b) |
+| unit production weights (`UnitsToBuild`) | 1,421 static pack rows | derived and **learned** (below) |
+| per-unit squad settings (`AirSquadTargetTypes`, …) | 5 copies per pack, missing for `@guerrilla` | derived from the unit's weapons |
+
+**Building type.** A building's type is declared by a `BotRoles` tag on its template:
+`^Refinery`, `^IsWeaponFactory`, `^IsAircraftFactory`, `^IsShipyard`, `^RadarBuilding`,
+`^RepairFacility`, `^PowerPlant`, and a new `^IsBarracks` (none exists: 0/35). Without a template
+tag, the type is derived from traits, and a building with several roles takes the **first** of
+conyard > epic > airfield > navalyard > factory > barracks > refinery > power > radar > repair.
+Measured: 82 producible buildings carry several roles, and the precedence settles almost all of
+them. Every C&C yard is also power and radar → conyard; helipads, airfields and naval yards also
+repair or rearm → their production role; the RA2 Air Force Command HQ (airfield + radar +
+repair) → **airfield** (maintainer's example). **Exceptions ruled 2026-09-29:**
+* StarCraft/Warcraft main halls (Nexus, Command Center, Hatchery, Town Hall, Great Hall) →
+  **conyard only**, kept out of the refinery lists as today.
+* WC2 Gnomish Inventor, Goblin Alchemist, Zerg Infested Command Center → **factory**.
+* `scrin_warp_chasm` → its own **epic** type: it produces `ScrinAdvancedVehicle`,
+  `ScrinWarpAircraft` and `ScrinCapitalAircraft` (the Hexapod). **One per player is a rule of the
+  actor, not of the bot** (maintainer 2026-09-29): it had no build limit at all, and #636 gives it
+  `Buildable.BuildLimit: 1`. The epic type's bot row therefore needs no limit of its own. Scrin's
+  vehicle factory is the Warp Gate; its airfield is the Gravity Stabilizer.
+* `futuretech_launchpad` → **airfield**. It produces only aircraft; an early scan matched the "ship"
+  in `futuretech_harbingergunship`. Queue names must be compared whole, never as substrings.
+
+**Game family.** C&C buildings are uniform (refinery limit 10 in 24/24 packs, radar 1 in 22/24,
+conyard fraction 5 in 20/20). StarCraft and Warcraft II scale differently (supply buildings limit 50
+against C&C's 1, refinery fractions 20–30 against 15), and Outpost 2 has **no rows at all**. The
+type table therefore has one column per family: `cnc` (default), `starcraft`, `warcraft`, `outpost2`.
+The family is a tag on the family's building base template: `^OP2Building` exists; StarCraft and
+Warcraft II share no family template (measured), so each race's building base gets the tag.
+
+**Units: learned, not listed.** A unit's production weight at match start is
+
+    weight(u) = mix[personality][role(u)] / |loaded units of that faction in role(u)|
+                × prior(own faction, enemy faction, u) × trade(u, this match)
+
+(With several enemies or allies `prior` becomes General × Enemies × Allies, and a team-gap factor
+joins it: §6.4a.)
+
+* `role(u)` comes from §12.4 (frontline, anti-infantry, anti-armour, artillery, AA, air, scout, …).
+* `mix` is one small table per personality, roles × shares, with **no unit ids**. That is how the
+  personalities differ without copying a unit list. It starts calibrated from today's
+  `UnitsToBuild` role shares, so the first derived weights reproduce today's production.
+* `prior` is the cross-match memory ruled in DESIGN §19.2: the committed, offline-fitted
+  `mods/cameo/ai/learned/arsenal_priors.yaml` (CA-1b fitter over the CA-1 ledgers). **Release
+  builds only read it**, so every player meets the same bot; learning writes only on dev builds
+  and harness training runs, and developers commit the result (DESIGN §19.2, amended 2026-09-29).
+  It is read at match start only (§6.1), keyed by faction, never by player, and 1.0 where nothing
+  is known. ⛔ It is applied inside the host's running bot, never written into rules at load:
+  bots run only on the host (`Player.cs:223`), but rules load on every client.
+* `trade` is the in-match trade ratio per role or type (§12.3), smoothed toward the prior.
+
+Ruled 2026-09-29: the hand `UnitsToBuild` rows stay until the derived weights win a Nuclear Winter
+A/B, after CA-3 (NOVA) supplies the role mix.
+
+**The equivalence gate ("same functionality as now").** The Python resolver cannot see what the C#
+fills at load, so phase P0 adds an engine-side dump: after rules load, every list and table field of
+every bot module on `Player`, one line per field and instance. A diff tool compares two dumps.
+Every phase must diff **empty** against the previous one, except its listed deliberate changes, and
+must also pass the boot gate. A phase that changes behaviour needs the Nuclear Winter A/B.
+
+**Phases**
+
+| # | step | gate |
+|---|---|---|
+| P0 ✅ | **built 2026-09-29:** `BotModuleFieldDump` (opt-in, `CAMEO_DUMP_BOT_MODULES=1`, called at the end of `BotRoleSets` load) + `tools/ai/dump_bot_modules.py` (boots a worktree, isolated support dir, graceful close) + `tools/ai/diff_bot_modules.py` (`--allow` for a phase's declared changes) | dumped twice: 2,168 fields identical; negative control (`guerrilla` out of `Apply`) flags exactly 7 fields |
+| P1 | fix `count_central_ids.py` case handling (ids are lowercased at load, so `eden_*`/`plymouth_*` are live, not dead); delete the truly dead ids (`asianalliance_asian*`, `d2k_*`, `ra1_allies_allied*`, …) | dump diff empty |
+| P2 | building type and family tags on the templates, `^IsBarracks`, the exceptions above | dump diff empty (tags only) |
+| P3 | type × family defaults fill the four building tables; pack rows equal to their default deleted, the others kept as exceptions; Outpost 2 and Scrin gain rows | dump diff = only the no-row buildings; A/B with an Outpost 2 and a Scrin bot |
+| P4 | the remaining ~40 list fields → roles; the personality blocks keep only numbers | dump diff empty |
+| P5 | `AirSquadTargetTypes` and other per-unit settings from weapons | dump diff = only `@guerrilla`'s missing rows |
+| P6 | derived and learned unit weights (after CA-3) | A/B |
+| P7 | the packs' `ai.yaml` keep only exceptions; the central id count reaches 0 | `audit_central_ids` CEILING 0 |
+
 ---
 
 ## 3. Reading the enemy: the observation model
@@ -498,12 +753,16 @@ patches). CN's danger score is the precedent for the shape.
 
 ### 4.1 What a personality is, extended
 
-Today a personality is a condition that selects one of five `SquadManagerBotModuleCA` instances
-(§19). The manager keeps that mechanism and adds the missing personality the user named:
-**Guerrilla** — many small simultaneous raids against expansions, rather than one blob. Cameo's
-squad manager already has the knobs (`JoinGuerrilla`, `MaxGuerrillaSize`, `GuerrillaTypes`), and
-`JoinGuerrilla` is the join chance in percent (it was inverted until 2026-09-27; see
-`AI_SYNTHESIS.md` §3.1).
+A personality is a condition that selects one of six `SquadManagerBotModuleCA` instances
+(§19). The sixth — **Guerrilla**, the missing personality the user named — is now wired end
+to end (2026-09-28, EMBER): `personality-guerrilla` joined the controller's default
+`Conditions`, `SquadManagerBotModuleCA@guerrilla` fields the small-squad harassment tuning
+(`JoinGuerrilla: 100`, `IndirectRouteChance: 60`, `StageBeforeAssault: false`, `PreferMainTarget:
+false`, 700-tick attack cadence, `HarasserTypes` — the dormant CA HVT-strike list — finally
+populated with the cross-faction elite/commando roster), and the observer notification exists. Its trigger was already in the master module:
+`ExpansionClusters >= GuerrillaMinClusters` on the main target yields `guerrilla` — an enemy
+spread across many expansion clusters gets its economy raided from several directions instead
+of meeting one blob.
 
 ### 4.2 The switch mechanism, given §1.1
 
@@ -559,9 +818,13 @@ steamrolls into a fortified target while a second player razes its base.
 
 The `w_hurt` **producer** landed 2026-09-28: `CombatAnalysisBotModule` (Cameo, ported from CN
 `30cf70a`) implements `IBotThreatAnalysis` — per-role threat weights fed by `IBotRespondToAttack`
-with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side; the
-damage-dealt side still has no producer). Nothing consumes it yet — wiring it into this score is
-a separate lane.
+with decay, plus a nemesis score per enemy player (the "damage e has dealt to us" side). The
+dealt side landed the same day (EMBER): `INotifyAppliedDamage` fires on the *attacker's* player
+actor (`Health.cs`), so `dealtScores` mirrors `nemesisScores` with the same per-player throttle,
+weight, cap and decay. Consumed 2026-09-28 (EMBER): `WeightHurt` scores the **taken share**
+`taken/(taken+dealt)` — the bounded form of the dealt/taken ratio — and a nemesis above
+`NemesisOverrideWeight` force-retargets regardless of hold time — the 'do not ignore who is
+hitting you' clause.
 
 ### 4.4 Transition table
 
@@ -585,9 +848,19 @@ for the main target unless stated.
 | We lost production structures | Turtle | rebuild before committing |
 | Two enemies focusing one ally | (keep) | target the aggressor, not the score leader |
 | No contact / nothing known | Expansion | scout; take map while blind |
+| No signal crosses a threshold (terminal fallback) | Turtle if Pressured, else Expansion | the candidate set always yields a posture; the incumbent is no longer a silent default |
+
+**Measured defect, fixed 2026-09-28 (EMBER):** in nw-ab-7 both `hard` matches sat in `turtle`
+for ~38k ticks while the candidate stayed `rush`. The latch was not a missing candidate — the
+emergency checker had a single 600-loss threshold, so the loss window bounced across it every
+25-tick check, each flicker flipped the candidate to `turtle` and back and reset the
+sustained-candidate timer, so `rush` never accumulated its reaction delay. Two changes: an
+off-threshold (`EmergencyLossClearThreshold = 300`, half the on-threshold) gives the emergency
+state hysteresis, and `PersonalityCandidates` now always ends with a posture yield (Turtle under
+pressure, Expansion when calm) so no profile can starve the switcher of a decision.
 
 Note the "(keep)" rows: **most enemy facts should change composition and priorities, not
-personality.** Personality is the coarse posture; a five-state machine cannot express "he went
+personality.** Personality is the coarse posture; a six-state machine cannot express "he went
 air" and should not try. This split is deliberate and is the main structural opinion in this
 document.
 
@@ -626,6 +899,13 @@ readers (unchanged authorities, now better informed)
 ├── UnitCompositionsBotModule (world, singleton) via personality tokens (§1.4)
 └── specialists (harvester, MCV, power, support powers, capture, repair, scout)
 ```
+
+As of 2026-09-28 the published snapshot is still **telemetry-only**: `DefenceFractionHint` and
+`ExpansionAppetiteHint` reach `cameo-ai-situations.jsonl` but no in-game reader exists — there is
+no `IBotSituationProvider` interface and `BaseBuilderBotModuleCA` does not consult it. Wiring it
+means a new CA-side interface plus defaults for the `classic` stack (which has no master module);
+that is the next integration seam, deliberately left for coordination since it touches the
+CA-sync-tracked builder.
 
 Publication should be pull-based — readers ask the master for the current snapshot — so the master
 never has to know who its readers are, and a missing master degrades to today's behaviour instead
@@ -720,7 +1000,37 @@ over the fixed-policy comparator on compatible Cameo data (§11.3.5).
 
 **Stage D — AI-vs-AI batch harness.** Headless repeated matches across matchups, feeding stages
 B–C. This is what makes the data volume possible; it should be a script and a map rotation, not
-engine work.
+engine work. *Shipped:* `tools/ai/run_ai_match_batch.py`. **Since the 2026-09-28 maintainer
+ruling the duel map is the shipped tournament map "A Nuclear Winter"
+(`mods/cameo/maps/_ra_a-nuclear-winter.oramap`)** — the harness extracts the .oramap into a
+variant dir, seats a `Referee`, and converts `Multi0`/`Multi1` into map-side bots bound to the
+map's real `mpspawn` cells. The acceptance A/B is the Frankenstein bot at a tier (`hard`,
+fog-honest, every merged module) vs the `classic` `ModularBot` type (omniscient, pre-merge
+modules, same difficulty scaling) — **not** the `fransbot` type, which is a hidden donor
+(maintainer ruling 2026-09-28) — both spawns (`--repeats 4 --swap-bots`), `gamespeed: maximum`
+locked — see `docs/design/AI_MATCH_LOG.md` § "The A/B acceptance protocol". Legacy fixture:
+`mods/cameo/maps/ai_duel_gate_20260928/` (Desert Rats donor terrain, two real mirrored mpspawns)
+remains usable via `--map` —
+the harness copies the template into an isolated `Engine.SupportDir` user-map cache per matchup
+(faction × bot × time-limit patching + faction starting-unit actors written into `Actors:`),
+launches `Launch.Map`+`Launch.Benchmark` (exits on `GameOver`), and slices the appended
+`cameo-ai-matches.jsonl` per run. Constraints the map design had to satisfy, verified against
+the engine: a `Local` server refuses to start with every slot empty, so the map keeps an inert
+host-occupied `Referee` slot whose `PlayerReference.NonCombatant` keeps it out of every record's
+`opponents`/`allies` (lobby clients ignore `Player.NonCombatant`); empty playable slots produce
+no `Player` at all, so the duelists are `Playable: False` + `Bot:` map-side players (the writer
+admits them via `IsBot`) with `SpawnStartingUnits` bypassed by preplaced actors; Cameo strips
+`MustBeDestroyed` from most actors so the map re-adds it to the base templates for real
+elimination, and `TimeLimitManager` (locked) is the guaranteed terminator — its timeout ranking
+reads `Playable` only, so a drawn duel records both bots `lost`. **Run bot tests at high game
+speed:** the fixture locks `gamespeed: maximum` (1 ms timestep — CPU-bound, ~25x default at
+parity hardware) so decisive matches resolve as fast as the box can tick them — the minutes
+cap then spans 40x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitManager`), and
+`AdaptiveGameSpeed` pacing slows the target rate under CPU contention rather than janking, so a
+generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
+match timeout. Match records are only comparable within one speed — a `10`-minute maximum match
+contains 40x the simulated play of a default-speed one and 10x an insane-era one, so pooled
+baselines do not carry across the 2026-09-29 speed change.
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.
@@ -728,6 +1038,127 @@ the user's own sequencing. Training against a moving balance target fits noise.
 Recording and coverage diagnostics help debug the current bots while balance moves. Learned
 weights remain §10.6 phase 7, after the earlier delivery phases; neither this section nor the
 batch-harness proposal authorizes skipping the observe-only and behavior-review gates.
+
+### 6.4 Learning every number between matches (maintainer rulings 2026-09-29)
+
+**Ruled:** every bot number is learnable, and today's values are only the starting point. That
+includes per-faction building timers and limits: identical templates, different play styles.
+
+**The inventory (measured 2026-09-29):**
+* 101 distinct numeric settings in 15 bot modules, 404 values over all instances;
+* 2,612 per-actor numbers (building tables, unit weights);
+* derived factors (combat-predictor strengths, unit priors).
+
+A training match takes ~10 min on an idle machine, so a day gives ~100–150 matches. Tuning
+3,000 numbers one by one on that is hopeless; every number therefore learns through the route that
+fits how its truth can be observed.
+
+| route | numbers | how it learns | data per match |
+|---|---|---|---|
+| **1. measured** | unit effectiveness per (unit, enemy faction) from the arsenal ledger (CA-1/CA-1b); combat-predictor strength per type (fitted to real fight outcomes); the enemy faction's usual composition and first-attack timing | statistics with evidence counts and shrinkage toward the parent level; every match counts, won or lost, both sides | hundreds of units, dozens of fights |
+| **2. tuned** | building fractions, limits, delays and intervals; timers; squad sizes; attack and retreat thresholds; the personality's role mix | experiments: in training, the harness nudges values per match (paired ± steps, SPSA-style), compares scores, and moves toward the better side within bounds | one score per match |
+| **3. chosen** | discrete options: which personality or opening against which enemy faction | a bandit (Thompson sampling) over the options per matchup | one outcome per match |
+
+**Rulings on route 2:**
+* **Granularity:** per own faction, falling back to its game family and then global while
+  evidence is thin. Only the army mix and counter weights also split per enemy faction.
+* **Knobs first, then raw:** about 8 knobs per faction scale their raw numbers together (tempo:
+  delays and intervals; economy greed: refinery and harvester numbers; tech speed; defence share;
+  army mix; aggression: attack and retreat thresholds; …). Once a knob settles, an individual number
+  with strong evidence of its own gets its own learned value.
+* **Score = win plus margin:** win or loss, plus how decisively, measured by army and building value
+  traded over the whole match (the timeline and fight report exist, #617). Win/loss alone is too
+  noisy; the 7–6 coin flip showed it.
+
+**Hierarchy and bounds.** A learned value is a multiplier on its default:
+`value = default × m(global) × m(family) × m(faction) [× m(matchup) for the mix]`. Each multiplier
+shrinks toward 1 in proportion to its evidence, and a training round may move it at most ×0.5–×2.
+Difficulty applies **on top**, so the DESIGN §19.1 equal-step line holds for every learned base.
+Unit and building stats are never learned (that is balance), and nothing learned may cheat (§19.2).
+
+**Where learned values live and apply.**
+* The committed files live in `mods/cameo/ai/learned/`, one per route. Each entry carries its
+  evidence count and the build it was trained on.
+* Release builds only read them; only dev builds and harness training runs write (DESIGN §19.2).
+* The modules read their numbers straight from the shared rules: 415 `Info.*` reads in
+  BaseBuilder, its queue manager, SquadManager and UnitBuilder. One `Info` object serves every bot
+  using that module, so a learned per-faction value cannot live there. **Mechanism:** when the
+  host's bot is enabled, it gives each of its modules a private **copy** of that module's `Info`
+  with the learned values applied. That is zero edits at the 415 read sites and no CA-sync conflict.
+  It stays host-only, because the modules only run in the host's bot (`Player.cs:223`). Never apply
+  learned values to rules at load: rules load on every client.
+
+**When balance moves (maintainer question 2026-09-29).** The reference mapping and the balance
+pipeline have not written their targets yet, so costs, HP, damage and Versus values will change a
+lot, and a value learned now describes a game that will not exist ("training against a moving
+balance target fits noise", Stage E above). The design therefore:
+* **Fingerprints every learned entry** with the stats it was trained on: the unit's cost, HP,
+  speed, armour and weapons, and a faction fingerprint for faction knobs. At match start, an entry
+  whose fingerprint changed is discounted toward its default **per unit**, not globally, so a small
+  patch invalidates only what it touched.
+* **Route 1 re-learns fast:** effectiveness is value traded per value lost, so a cost change alone is
+  largely absorbed, and every match brings hundreds of new points.
+* **Knobs survive better than raw numbers:** they are multipliers on defaults that come from the
+  templates. They are still discounted when their faction's fingerprint moves a lot.
+* **Sequencing:** L0–L2 (machinery, no behaviour change) are built now. Serious training (L3+)
+  starts after the balance freeze and is repeated once per release, whose learned files ship with it.
+* **Guard:** an audit reports how much of the committed learned evidence the current rules have
+  invalidated, so a big rebalance shows up as "retrain before release".
+
+### 6.4a Combining the weights: general × enemies × allies (maintainer rulings 2026-09-29)
+
+This generalises the single-enemy `prior(own faction, enemy faction, u)` of §2.9's production
+weight to any number of enemies and allies; `mix` and the role split of §2.9 are unchanged.
+Every learned value is a **multiplier that defaults to 1**, and the layers combine in log space,
+where a geometric mean is a weighted average:
+
+    prior(u)   = General(own faction, u) × Enemies(u) × Allies(u)
+    weight(u)  = mix[personality][role(u)] / |role(u)| × prior(u) × Gap(u) × trade(u)      (§2.9)
+    Enemies(u) = exp( Σ_e α_e · ln M(u | e) )        Σ α_e = 1
+    Allies(u)  = exp( λ(n_allies) · Σ_a β_a · ln S(u | a) )        Σ β_a = 1
+
+* **General**: one file per own faction, trained against everyone and **always active**. When a
+  matchup has little data its `M` shrinks to 1, so the bot falls back to General automatically.
+* **Enemies**: the per-enemy-faction counter multipliers `M(u | e)`, combined as a **weighted
+  geometric mean**, so no single matchup can dominate a multi-faction game. **The share α of the
+  main (hate) target combines all three proposals** (maintainer: "a combination of all of them"):
+  1. a **floor** that keeps it dominant: `α_main ≥ max(1/2, 2/(n+1))`. That is 100 % with one
+     enemy, the double vote at 67 % with two, and 50 % from three enemies up, so it is never
+     diluted in a big game;
+  2. the **rest**, `1 − α_main`, is split among the other enemies by
+     `(1 − γ) · equal share + γ · threat share`. Threat is fog-honest: remembered enemy army
+     value near our assets. A quiet enemy still counts, and the one attacking us counts more;
+  3. **γ and the floor are learnable** (route 2, §6.4), so training finds how reactive to be.
+* **Allies** (ruled: **learned + fill gaps**): the trained synergy multipliers `S(u | a)` per
+  (own faction, ally faction) come from team-game training; that needs a 2v2 variant of the duel harness, built with
+  **TC** (Team Commander, ROADMAP; `AI_DEEP_RESEARCH.md` §9).
+  `β` splits equally among allies, and `λ` grows with the number of allies (the team's say in
+  what we build grows with the team). With no allies `Allies(u) = 1`.
+* **Gap** (the "fill gaps" half of the same ruling) is in-match, not learned from past games: a
+  role (§12.4) the whole team, us included, lacks gets a boost, bounded like every other factor.
+  Allied armies are visible, so this is not a cheat. With no allies it is 1.
+* **trade**: the live in-match trade ratio per role or type (§12.3), as in §2.9.
+
+Every factor is trained separately (routes 1–3, §6.4), bounded, fingerprinted against balance
+changes, and applied only inside the host's bot. With no data at all the bot plays today's defaults.
+
+**The training loop (dev only).**
+1. **League batch:** past masters, `classic` and the exploiters (LG), several tournament maps,
+   both spawns.
+2. **Fitters:** route 1 is updated from the logs; route 2 is updated from the paired perturbations.
+3. **A/B:** the candidate learned files are tested against the current files.
+4. **Commit:** a PR with the evidence, if the candidate does not lose.
+
+**Phases** (after the §2.9 groundwork; the §10.6 gates still apply):
+
+| # | step | gate |
+|---|---|---|
+| L0 | the per-bot `Info` copy + a learned-file reader; empty files change nothing | the P0 dump is identical; a two-client desync test; boot |
+| L1 | route 1: unit priors (CA-1b), combat-predictor strengths, enemy models | A/B |
+| L2 | the score in the harness + the knob layer (defaults = 1) | the dump is identical with all knobs at 1 |
+| L3 | route 2 training: paired perturbations per faction knob | A/B per committed file |
+| L4 | route 3: personality and opening bandit per matchup | A/B |
+| L5 | raw numbers with strong evidence leave their knob | A/B |
 
 ---
 
@@ -837,6 +1268,26 @@ weights, hence bandits with exploration rather than fixed tables), and **distrib
 11. **Do CN's hysteresis constants ship as Cameo's defaults**, or get re-fitted from phase-2 logs
     before phase 3 turns switching on? Leaning: ship CN's as the starting point, since they were
     tuned against a switching bot in this engine family, and re-fit after the first logged matches.
+12. **How does a fog-honest offense get fresh target intel?** Measured 2026-09-28 (nw-ab-5/6,
+    `FransGeneralBotModule` recon loop): ordinary RECON selects only the nearest *stale
+    MineCluster* on a geographic fan from home — there is no candidate class for "the enemy's
+    probable base". `FransMissionType` has no assault verb; `Raid` is the only offense, and
+    `TryBuildGroundRaidBid` rejects remembered-intel targets (a deliberate fog-honesty rule —
+    `FransRaidIntel` docs reserve remembered-building strikes for Sea). Result on A Nuclear
+    Winter: recon fans stall on mineral waypoints short of the enemy base, every RAID publishes
+    `bids 0`, zero enemy buildings die across six matches. The choices, in increasing size:
+    a. **Spawn-directed recon** — `Map.ActorDefinitions` `mpspawn` cells are public map data
+       (lobby-visible to every human). Add unscouted-spawn cells as a RECON candidate class
+       alongside mine clusters (same cooldown/staleness machinery, higher priority for cells
+       whose fan arm is unexplored). Fog-honest, minimal, and it is what every human does.
+    b. **Bounded remembered-building raids for ground** — permit `IsRememberedIntel` targets
+       when `IsBuilding` is true (buildings cannot move; last-seen cell stays valid), inside a
+       freshness window. Extends the Sea-only rule by one axis.
+    c. **A distinct assault/base-attack verb** — a heavier mission type with escort/consolidation
+       semantics, versus teaching Raid to fill the gap.
+    Leaning (a)+(b): they are orthogonal, both fog-honest, and together they close the
+    "no fresh targets -> no bids -> no pressure" funnel without new verbs. (c) only if the
+    combined change still cannot produce raid bids in measured matches.
 
 ---
 
@@ -876,7 +1327,8 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**26 distinct trait types, 41 Player instances plus one World instance** (2026-09-28: `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
+**53 distinct trait types, 76 Player instances plus one World instance** (2026-09-30: #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+`SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
 `GrantConditionOnBotOwner`, `BotInsurance`, generic condition/prerequisite traits, or observers;
@@ -916,6 +1368,7 @@ master snapshot today. "Hint" below is a future read-only integration, not shipp
 | `LoadGarrisonerBotModuleCA` (@Infantry) | passenger-to-garrison assignment | configured passengers, garrisons, capacity/proximity; posture hint only in a later phase | Stop/AttackMove/EnterGarrison orders; scan default 457 ticks; U |
 | `LoadCargoBotModule` (@Infantry/@TankBunker/@Battery) | configured cargo loading | passengers, transport capacity and proximity; no phase-1 hint | cargo-related orders; scan default 317, Battery configured 799 ticks; U |
 | `MinelayerBotModule` (1) | minefield assignment | minelayers, positions and attack events; posture hint later | mine-related orders; scan default 320 ticks and attack callbacks; U |
+| `ExpansionPlannerBotModule` (genericbot) | EX-0 target field (§12.13): telemetry only, no orders | own actors, resource indices, base-builder queues, `IBotRegionThreatProvider`; nothing reads its target yet | `Target` / `LastScores` and a `debug.log` line on each target change; re-plan default 250 ticks; U |
 | `ResourceMapBotModule` (1) | resource-index information | resource layer and nearby actors; no snapshot hint | index/threat query methods; `UpdateResourceMapInverval` default 67 ticks, randomized initialization; U provider |
 | `ExternalBotOrdersManager` (1) | forwarding registered external requests | direct entries / `IssueOrderToBot` registrations and current issuer validity | queued orders each bot tick; local bridge, not a new strategy owner; U |
 | `BotLimits` (10 difficulty instances) | configured cap/delay inputs | enabled difficulty condition; no master replacement | enabled `Info` queried by consumers; no independent tick; R |
@@ -1171,6 +1624,8 @@ hold or focus a newly formed raid, but it never moves units between existing squ
 assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is deferred to a later
 phase. The assign layer must never become a second owner of a unit.
 
+The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
@@ -1332,3 +1787,458 @@ Recorded because they were stated as settled fact, and two of them would have ch
 * **Any fixed numeric threshold before phase-2 logs exist**, including the CN constants as Cameo
   defaults. CN's numbers are the starting point for *hysteresis* (they were tuned against a switching
   bot in the same engine family), not for *detection*.
+
+---
+
+## 12. Combined arms: the arsenal tracker, composition, formation, siege and air doctrine
+
+**Maintainer order, 2026-09-28** (paraphrased; every clause below is binding):
+
+> Add a unit/defence tracker that keeps count of every unit and defence built and where they
+> usually are, and that is **self-learning**. The AI must use **everything in its arsenal, in the
+> right ratio**; build squads of the right composition; move them **in formation** (tanky units in
+> front, long-range artillery behind, infantry supporting the tanks, aircraft giving air support)
+> while **fast scouts** roam to spot enemies and decide where to attack next. Build **quick air
+> strike teams** that hit high-value targets along the route of **least remembered resistance**.
+> **Most importantly, always move so as to minimise losses: no suicide runs into defences.** Stop
+> just outside their range, take them down with artillery, and move in only when every defence in
+> the area is destroyed or the army is strong enough to destroy them. Helicopters and spaceships
+> give air support to the ground army; fighters pick off enemies that are out of position and join
+> big battles; bombers take out high-value targets, sometimes defences and power plants.
+
+Two standing laws shape every item. **§10.1: one owner per decision.** Each item below changes the
+*inputs* of a decision an existing module owns; none adds a second producer, a second squad
+manager, or a second target picker. **§6.1: learning tiers.** In-match learning is live bot
+reasoning (host-local, unsynced, acts only through orders; §1.1) and is free. Cross-match learning
+is a **committed data file read at match start and frozen**, fitted offline from harness runs
+(§6.2a Stage C) and reviewed like a balance change. "Self-learning" means both: the bot adapts
+inside a match, and the batch harness plus the fitter improve its priors between matches.
+
+### 12.1 What already exists (do not rebuild it)
+
+| Order clause | Shipped today | Where |
+|---|---|---|
+| Enemy memory, "where they are" | `BotFogMemory` + `RegionMemory`: remembered hostile value per region, fog-honest | `OpenRA.Mods.Cameo/Traits/BotModules/BotFogMemory.cs` (§6a) |
+| Enemy composition | `IBotEnemyCompositionProvider` from fog memory; Versus-scored counters | `AdaptiveCounterProduction.cs` (#605) |
+| Who hurts us | `CombatAnalysisBotModule`: per-role threat weights from damage events, nemesis | `OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs` |
+| Compositions | personality-tagged compositions, zero C# (§1.4) | `UnitCompositionsBotModule.cs` |
+| Artillery behind the assault | artillery squads attach to an assault and hang back (`ArtilleryMinRangeCells`, `ArtilleryHangBackCells`) | `SquadManagerBotModuleCA.cs` (6f, #554) |
+| Support follows | `SquadCAType.Support` trails its parent (`SupportFollowRangeCells`) | same (6f) |
+| Rally before assault | `StageBeforeAssault` / `StageAssemblePercent` / `StageTimeoutTicks` | `GroundUnitsStageStateCA` (6f) |
+| No suicide (partial) | pre-commit gate `AttackRiskMargin`: squad value must beat remembered regional threat | `SquadManagerBotModuleCA.cs` (6c) |
+| Avoid defences en route (ground) | `UseRiskRouting` → `IBotRouteThreatRouter` waypoints around remembered threat | `GroundStatesCA.cs:508`, `RegionRouter.cs` (6e) |
+| Flee when losing | fuzzy attack-or-flee | `AttackOrFleeFuzzyCA.cs` |
+| Scouts | `ScoutBotModule`: cheap fast units cycle the stalest regions | `ScoutBotModule.cs` (6b) |
+| Target priorities | rules-derived tags `artillery`, `harvester`, `production`, `superweapon`; per-squad `*PriorityTags`; air hunts artillery | `BotTargetTags.cs` (6g) |
+| Donor stack | `FransRiskModel` (role-aware cell/route risk), `FransGroundDefendForcePreservationGuard`, `FransCombatIntel` (last-seen force estimate), `FransAirCommander` | `OpenRA.Mods.Fransbot/Traits/` — merge one module at a time, A/B each (§0a) |
+
+### 12.2 The gaps, precisely
+
+1. **No arsenal ledger.** Nothing counts *per unit type* what was built, lost, or destroyed, on
+   either side; `PlayerStatistics` only holds per-player totals. So the bot cannot learn "our
+   type X trades well against this enemy", and cannot know "the enemy usually has N defences of
+   range R at choke C".
+2. **No ratio law.** Production follows demand counters and compositions, but nothing guarantees
+   every role the faction owns is used, in a target mix.
+3. **No formation.** Artillery and support trail; tanks, infantry, AA and air do not hold roles
+   relative to one another, and a squad moves at each unit's own speed.
+4. **Siege is missing.** The 6c gate says *whether* to attack, not *how*: there is no stand-off
+   outside defence range, no "artillery first", no "commit when the area's defences are gone".
+5. **No air doctrine.** Air squads are one type with one tag set; risk routing is ground-only
+   (`GroundStatesCA` is its only consumer), so strike aircraft fly straight through remembered AA.
+
+### 12.3 The arsenal tracker (phase CA-1) — the foundation for everything else
+
+* **Own ledger, per unit type:** built, alive, lost (count and cost), value destroyed (cost of
+  victims killed), per enemy faction. **Mechanism:** a Cameo shadow of
+  `UpdatesPlayerStatistics` (engine `PlayerStatistics.cs:215`; carried by 1,243 actor nodes, so no
+  yaml changes). Its `INotifyKilled.Killed(self, e)` already receives the attacker actor; the
+  shadow keeps the engine behaviour verbatim and additionally books `victim cost` to
+  `(attacker owner, attacker type)` and `victim type` to the victim owner's ledger. The ledger
+  lives on a player-level `BotArsenalTracker` trait and is read only by bot code (never `[Sync]`).
+  Prove the shadow with a Cameo-only field (CLAUDE.md rule 7).
+* **Enemy ledger, fog-honest:** distinct enemy actors *seen* (dedupe by actor id), per rules-derived
+  role (§12.4), with the region they were seen in; for defences also the **max weapon range**
+  (read from rules once the type is known). Extends `RegionMemory`; never enumerates unseen
+  actors (`audit_fog_honesty.py` ratchet).
+* **Where they usually are:** per region, a decaying average of remembered enemy defence value and
+  army value — a heat map the siege planner (§12.6) and air router (§12.8) read.
+* **In-match learning:** for each own role, the trade ratio `value destroyed / value lost` against
+  this enemy, smoothed (prior-weighted), becomes a production *weight input* to the existing owner
+  (`UnitBuilderBotModuleCA` via the master's demand inputs — §10.1).
+* **Cross-match learning:** the match record gains the per-type ledger; `tools/ai/` aggregates it
+  per (own faction, enemy faction, role and type) across harness runs and writes
+  `mods/cameo/ai/learned/arsenal_priors.yaml` — **committed, reviewed, read at match start**.
+  Every harness batch is therefore a training run; nothing is learned from a file only one client has.
+* **Record-only first:** CA-1 ships as telemetry (match and situation logs) with no behaviour
+  change; the in-match weight is a separate, A/B-tested step.
+
+### 12.4 Roles are derived from rules, never listed
+
+Extend `BotTargetTags` into `BotUnitRoles` (same load-time derivation, no actor ids, 25 factions):
+`frontline` (high HP × armour, short range), `skirmisher`, `anti_infantry` / `anti_armour` (from the
+weapon's Versus profile, as `AdaptiveCounterProduction` scores it), `artillery` (existing tag),
+`anti_air`, `scout` (fast, cheap, long vision), `support` (heal/repair), `transport`, and for air:
+`gunship` (VTOL/hovering, ground weapons — helicopters and hovering spaceships), `fighter`
+(air-to-air weapons), `bomber` (bomb/drop attacks or fixed-wing ground-only), `air_transport`.
+New **target** tags: `power` (positive `Power`), `defence` (building with an armament), `tech`.
+
+### 12.4a Squad membership rulings (maintainer, 2026-09-29)
+
+1. **Artillery squads are the `^ArtilleryTemplate` and `^ArtilleryTankTemplate` units ONLY.**
+   Both templates now declare `BotRoles: Roles: artillery` (`rules/defaults.yaml`; 50 actors
+   resolve to it). This replaces the range rule the code uses today: `SquadManagerBotModuleCA
+   .ArtilleryMinRangeCells` (10) splits *any* ground unit with a 10-cell weapon into an artillery
+   squad, and `BotTargetTags` tags *any* 12-cell unit as artillery.
+2. **Fire-support units form their own squads, with tanks, and protect the artillery.**
+   `^FireSupportTemplate` declares `BotRoles: Roles: firesupport` (37 actors: e.g. the Tesla tank,
+   the GDI exosuit). They are support, never assault or raid units.
+3. **Ships are their own squads, never mixed into ground or air squads.** A ship is a `naval`
+   locomotor (the `navalunit` role's rule; `hover` and `amphibius` units such as hovercraft move on
+   land and stay ground units). Today `FindNewUnits` checks `GuerrillaTypes` before
+   `NavalUnitsTypes` and sends anything unlisted to a ground squad, and #627 measured **19 naval
+   units missing from `NavalUnitsTypes`**: those ships are drafted into ground squads now.
+   Applying `navalunit` is the list fix; a guard that a naval unit can never enter a ground or air
+   squad is the code fix.
+
+None of the three is a guerrilla (§2.8a excludes them). **Open, C# in `SquadManagerBotModuleCA`:**
+read the `artillery` role instead of the range rule, add the fire-support squad and its escort
+of tanks, and the naval guard. Owners per §12.10: CA-3/CA-4 (NOVA) for the squad composition,
+Claude for the roles and the `navalunit` application; Claude-Local (who integrated the DF code
+below) reviews the C#.
+
+**Interlocks with the defence code on master `297c626f4`** (all in `SquadManagerBotModuleCA`):
+* **Naval check first.** `PrepositionDefenceTick` and `ProtectOwn` draft the idle pool (`AttackBase`,
+  not Building/Harvester/Aircraft), so a ship missing from `NavalUnitsTypes` can be drafted into a
+  *land* protection squad today. Put the naval branch **before** the guerrilla branch in
+  `FindNewUnits` (guerrilla assignment goes through `OpenGuerrillaSquad`, which respects
+  `MaxGuerrillaSquads` / `MaxGuerrillaSquadsLate`), so a ship never reaches the idle pool.
+* **`ReleaseDefenders`** routes released defenders by `GuerrillaTypes` / `HarasserTypes`, else to the
+  idle pool. The guerrilla role follows automatically once it has `Targets`; a fire-support squad
+  type needs its own branch there, or released fire-support units fall back into the idle pool.
+* **`FastSquadsReactToThreats`** moves only Guerrilla/Harass squads. Fire-support squads guard the
+  artillery and are not fast squads, so they stay out of it.
+* **Artillery by role** does not touch the combat predictor (`BotUnitProfiles` is independent of
+  `ArtilleryMinRangeCells`).
+
+### 12.5 Composition and ratios (phase CA-3)
+
+* A **target mix by role** per personality (starting values in yaml; e.g. frontline 35 %,
+  anti-infantry 20 %, artillery 15 %, anti-air 10 %, air 15 %, scout 5 %), shifted by the enemy
+  ledger (counters) and by the learned trade ratios, with a **floor** so every role the faction
+  can build is used. Production fills the largest *deficit* against the mix — through the existing
+  builder, as a demand input.
+* Squads are formed to the same mix (a main assault without frontline or AA waits for them,
+  bounded by `StageTimeoutTicks`), and compositions (§1.4) remain the personality flavour.
+
+### 12.6 Siege and force preservation (phase CA-2) — the maintainer's "most importantly"
+
+The rule, in order of precedence:
+
+1. **Never path through remembered defence coverage** (6e, now fed by §12.3 ranges).
+2. **Stop at stand-off**: the assault halts at `max remembered defence range + margin` from the
+   nearest remembered defence of the target area (margin per difficulty on the DESIGN.md §19.1 equal-step line).
+3. **Artillery first**: the attached artillery squad (6f) engages the defences from outside their
+   range; frontline screens the artillery; air (§12.8) may strike defences.
+4. **Commit** only when (a) no remembered defence in the area survives (re-verified by sight), or
+   (b) `effective squad value ≥ R × (remembered defence value + remembered army in the region)`,
+   where "effective" is Versus-weighted (the 6c gate, generalised) and `R` is a per-personality
+   input the Aggression axis moves.
+5. **Retreat** before the trade turns (fuzzy flee exists); a failed siege writes the loss into the
+   region memory so the next plan avoids it.
+
+*Landed (2026-09-29, flag-gated):* `SiegeEvaluatorBotModule` computes the rules
+2/4/5 verdict each `EvaluationInterval` for every Rush/Guerrilla/Harass squad
+above a value floor — stand-off cell on the `maxRange + StandOffMarginCells`
+line, `BotCombatPredictor.Predict` on the squad's own unit profiles vs the
+remembered defences' observed types for the "effective" check (4b), commit at
+`CommitRatioPercent` — and serves it through `IBotSiegeAdvisor` to the assault
+states when `BehaviourEnabled` is on (the CA-2b A/B variable). Rule 5's
+write-back landed as `IBotSiegeFailureMemory`: a retreat-verdict *transition*
+records one failed siege against the nearest covering defence's
+(owner, region) on `MasterAiBotModule` — `RegionMemory` is a per-publish
+snapshot, so the durable count lives on the module and stamps onto each
+snapshot's `Region.FailedSiegeCount/LastFailedSiegeTick`; with
+`SiegeMemoryEnabled` the remembered failures inflate `obstacleValue`
+(`SiegeFailureWeightPercent` per failure inside `SiegeFailureMemoryTicks`),
+so the next plan reads the wall that beat it as heavier. Both flags default
+false — each is its own isolated A/B variable.
+
+Donor to evaluate first: `FransRiskModel` + `FransGroundDefendForcePreservationGuard`.
+
+### 12.7 Formation movement (phase CA-4)
+
+Engine orders have no formation, so the bot moves a squad **in steps along its route** (orders
+only, §1.1): per step the frontline goes first; infantry holds just behind/alongside the tanks;
+anti-air sits inside the group; artillery hangs back (6f exists); support trails (6f exists);
+gunships hover over the frontline centroid. The group advances at the **pace of its slowest
+frontline unit** (units that run ahead wait at the step point). Fast scouts are never in the
+formation — they run ahead on their own (6b).
+
+### 12.8 Air doctrine (phase CA-5)
+
+* **Gunships (helicopters, hovering spaceships): close air support** — attach to the main
+  assault like support squads and engage what the frontline engages.
+* **Fighters: air superiority and pick-off** — hunt enemy aircraft and **isolated** enemy units
+  (far from their army and from remembered defences), and join big battles near the own army.
+* **Bombers: strike teams** — 2–4 aircraft, targets by tag priority (`superweapon`, `tech`,
+  `production`, `power`, `harvester`, `artillery`; `defence` when it opens a siege), routed over
+  the **air-threat layer** (remembered anti-air coverage) with minimum exposure, regroup and
+  return. This is risk routing for air — today's router is ground-only.
+  *Landed first slice (2026-09-28):* the 6e router now picks its remembered-threat
+  read by the leader's domain — airborne leaders pay `AntiAirValue`, ground
+  leaders pay `ArmyValue+DefenceValue` — and `AirAttackStateCA` transits a fresh
+  target through those waypoints (`Fly` chain + queued `Attack`, skipped by the
+  per-tick re-issue so transit is not cancelled). The doctrine split (gunship CAS,
+  fighter pick-off, bomber strike-team targets) still waits on CA-1 roles.
+
+### 12.9 Scouting decides where to attack next
+
+`ScoutBotModule` (6b) keeps running; add **spawn-directed recon** (§9 item 12 (a): `mpspawn` cells are
+public map data) and feed each scout report into the main-target / region choice: attack the
+most valuable region whose remembered defence the available force beats (§12.6 rule 4), not the
+nearest one.
+
+### 12.10 Order of work, owners, and the gate for each phase
+
+Every phase: record-only telemetry first where it applies, then the behaviour behind a yaml
+switch, then **an A/B on A Nuclear Winter against the current master** (≥ 8 matches, both spawns,
+`--bot-a hard --bot-b classic --swap-bots`, compared with a master run in the same session). A
+phase lands only if it does not lose to master; the standing target stays "beat `classic`".
+
+| Phase | What | Owner | Depends on |
+|---|---|---|---|
+| **CA-1** | arsenal tracker: `BotUnitRoles`/new target tags, own ledger (stats shadow), enemy ledger with defence ranges and region heat map, match/situation log fields; then the in-match production weight | **Claude** | — |
+| **CA-1b** | offline fitter: aggregate harness ledgers → `learned/arsenal_priors.yaml`; harness runs more matchups | **Claude** (was Devin Cloud, out of tokens 2026-09-28) | CA-1 log fields |
+| **CA-2** | siege and force preservation (§12.6) incl. evaluating the Fransbot donor guard | **DAWN** | CA-1 defence ranges |
+| **CA-3** | role mix production + squad composition (§12.5), personality starting mixes | **NOVA** | CA-1 roles |
+| **CA-4** | formation movement (§12.7) | **NOVA** | CA-3 |
+| **CA-5** | air doctrine: gunship CAS, fighter pick-off, bomber strike teams, air-threat routing (§12.8) | **EMBER** | CA-1 roles |
+| **CA-6** | scouting → target choice (§12.9), with §9 item 12 (a)+(b) | **DAWN** (owns recon) | CA-1 heat map |
+| **SG** | scout-rebuild rationing and garrisons as defences (§12.12) | **Claude** | — |
+| **EX** | expansion planner: field score, placement, refinery per field, MCV hand-off, enemy creep (§12.13) | **Claude** | CA-1 (fog memory) |
+| **PL** | personality leads (§12.14): telemetry, then each lead's budget lean | Claude / NOVA / DAWN per row | CA-1 |
+
+CA-2 and CA-5 may start on the parts that do not need CA-1 (reading the existing
+`RegionMemory`), and switch to the tracker's ranges when it lands.
+
+Research round 2 ([`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9) adds phases that interleave
+with these: **CP** combat predictor (the single engage/commit/retreat authority; CA-2's commit
+rule and the 6c gate become its inputs), **ZG/IM** zone graph + influence layers (the region set
+and "where they usually are"), **UT** utility strategist (absorbs CA-3's blended squad manager),
+**MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
+
+### 12.11 What a spectator saw, measured (maintainer review of the #633 A/B, 2026-09-29)
+
+The maintainer watched `hard` vs `classic` (td_gdi, A Nuclear Winter) and reported suicidal
+infantry at garrisoned buildings, infantry blobs without tanks, Humvees instead of tanks, no
+artillery, idle armies and a timid base. The arsenal ledger (§12.3) of the 8 master-half matches
+plus 3 branch-half matches confirms each, per match:
+
+| `hard` built | per match | the composition asks for (`UnitsToBuild`, td_gdi vehicles) |
+|---|--:|---|
+| Humvee Mk2 + Humvee | 59.4 + 13.0 | Humvee Mk2 weight 5 of 100 |
+| battle tank, Predator, Mammoth (all marks) | 1.2 + 1.5 + 0.6 | 45 + 20 + 15 of 100 |
+| MLRS + Archer artillery | 0.9 + 1.1 | 10 of 100 |
+| minigunner, grenadier, rocket soldier | 184.5, 81.1, 81.5 | — |
+
+Causes, each traced to code:
+1. **Humvees are scout replacements that jump the queue.** `td_gdi_humvee`/`humveemkii` are
+   `ScoutBotModule.ScoutUnitTypes`. Below `MaxScouts` (2) the scout module calls
+   `RequestUnitProduction` on every scan (`ScanInterval` 50), and `UnitBuilderBotModuleCA` builds a
+   requested unit at the start of every production cycle, **before the cash check and outside the
+   queue rotation**. Scouts die at the enemy base (`EnemySpawnBonus` 20000), and a new Humvee can be
+   drafted by `FindNewUnits` into a guerrilla squad before the scout module claims it (both types are
+   in `GuerrillaTypes`). The count stays below 2, and the vehicle queue builds Humvees instead of the
+   composition's tanks. Fix: §12.12 item 1.
+2. **Garrisoned buildings count as free.** The civilian houses (`^CivBuilding` →
+   `^GarrisonableBuilding`) carry `AttackOpenTopped` and `ChangeOwnerOnGarrisoner`. Once enemy
+   infantry enter, `BotFogMemory.Classify` marks them `Defence`, but their `Value` is the house's
+   `Valued.Cost`, and the houses have **none** (`v02`, `v03`: no `Valued`; a GDI guard tower: 500).
+   The occupants are cargo, invisible to the memory. The 6c risk gate therefore sees a garrison as
+   worth 0 and lets infantry walk in one by one. Fix: §12.12 item 2.
+3. **No artillery first, no tanks in front:** not built yet (CA-2 siege, CA-4 formation, §12.6–12.7).
+4. **Idle blobs:** `IdleBaseUnitsMaximum: 50` holds the army at base until squads form. The CA-2/CA-3
+   owners take it with the commit rule.
+5. **A timid base:** `BaseCrawl` takes every building under 1,000 cost (`BaseCrawlChance: 100` in
+   `ai.yaml`; the C# default is 50), but aims it at a **random** resource cell within 50 cells, else at
+   the enemy building nearest the defence centre, found by
+   scanning `world.ActorsHavingTrait<Building>()`: omniscient. `ExpansionAppetiteHint` has no reader
+   (§5). The engine `ResourceMapBotModule` also counts enemy units per field without fog. Fix: §12.13.
+
+**Army-mix tracking (maintainer 2026-09-29):** *"add a unit tracking to see the army composition so
+that you can easily notice … just Humvee and infantry spam instead of building a mix of all
+available units."* `tools/ai/army_mix_report.py <support dirs>` reads the arsenal ledger of any
+batch and prints, per bot type, the units built per match: shares by class (infantry, vehicle,
+aircraft, ship; harvesters and MCVs apart as economy), the heavy and artillery share of the
+vehicles, and the top types. Classes come from the resolved rules (`Aircraft`, the locomotor,
+`Infantry` target type, `Armor.Type` Heavy/Superheavy, the `artillery` role). It **flags** one type
+above 25 % of all units, heavy vehicles below 5 % of vehicles, and artillery below 5 % (each a
+flag), and exits 1 when anything is flagged. On the master half above it flags all three for
+`hard` (minigunner 34 %, heavy 4 %, artillery 1 %). Run it after every batch.
+
+### 12.12 Scout rebuilds and garrisons (maintainer rulings 2026-09-29; owner Claude)
+
+1. **A scout request is rationed.** `ScoutBotModule` requests a replacement at most once per
+   `ScoutRebuildCooldownTicks` (`genericbot`: 3000; 0 = the old request-every-scan). So the
+   requests can no longer take over the vehicle queue, whatever happens to the scouts.
+2. **A garrisoned building is a defence, priced by its garrison.** An enemy-owned `Garrisonable`
+   building (owned means occupied: `ChangeOwnerOnGarrisoner`) is valued at
+   `Garrisonable.MaxWeight × GarrisonOccupantValue` when it has no `Valued` cost, and is a `Defence`
+   like a tower. `genericbot`: 250, half the median cost (500) of the 323 buildable garrisoning
+   infantry, because an observer cannot see how full the house is; 235 garrisonable buildings have
+   no cost (capacity 1–40). So the 6c risk gate, the risk router (6e) and the siege planner (CA-2) all avoid
+   it, stand off from it and shell it. Fog-honest: ownership is visible, and the value is a rules
+   constant, never the real passenger list.
+
+Both are behaviour changes, so each runs the §12.10 gate: a Nuclear Winter A/B (≥ 8 matches, both spawns).
+
+### 12.13 The expansion planner (phase EX; maintainer rulings 2026-09-29; owner Claude)
+
+> *"Always expand, always build more harvesters, always build more units, never be idle, always try
+> to pressure and attack, always build towards the enemy and towards the resources. Always occupy all
+> the resource fields … make a formula estimating where to place the next building so you can get
+> the most money in the shortest amount of time … distance and value … and the less enemies the
+> safer."*
+
+**Rulings.** (a) Every resource field within building reach gets **one refinery**, protected by
+towers. (b) The base builder never idles: **every building it places moves the base closer to the
+next resource field**, and power plants make the line when nothing else is due. (c) **Fog:** where
+the fields are and how rich they are at match start is public map data (like the spawn points).
+Depletion, enemy refineries and enemy defences count only once seen, through `BotFogMemory` /
+`RegionMemory`, never through `ResourceMapBotModule`'s omniscient enemy counts. (d) **Creeping toward
+the enemy base** scales with difficulty (DESIGN §19.1) **and** aggressiveness (the personality's
+Aggression axis).
+
+**The score of a resource field `f`** (every constant is a yaml knob, learnable by route 2, §6.4):
+
+    V_f    = value of f: its initial resource cells × value per cell, minus the depletion seen
+    hops_f = ceil( max(0, d_f − R_reach) / R_link )   d_f: distance from our nearest building that gives buildable area
+    C_f    = refinery cost + hops_f × link cost + towers_f × tower cost
+    T_f    = C_f / income + hops_f × link build time + refinery build time   (seconds until it pays)
+    S_f    = 1 / (1 + threat_f / max(own force near f, 1))   threat_f: remembered enemy value near f
+    score_f = V_f × S_f / (T_f + τ₀)
+
+Higher value ranks higher, a shorter distance ranks higher (fewer hops, so a smaller `T_f`), and
+fewer remembered enemies rank safer. `τ₀` keeps a field next to the yard from dividing by nearly
+zero. A field with a seen enemy refinery is not a candidate. It becomes a raid target for Rush and
+Guerrilla (§12.14).
+
+**Placement.** The planner keeps a target field `f*` (the best score, re-chosen every
+`ExpansionReplanTicks`). The next non-refinery building goes on the valid cell that **minimises
+the path distance to `f*`**, ties broken toward home, so the base walks toward the field one
+building at a time. Once `f*` is in reach, its refinery goes on the free cell nearest the field's
+resource centre on the home side, ahead of every other building; then `towers_f` towers, where
+`towers_f` grows with `threat_f`, placed on the side of the highest remembered threat. When
+`hops_f` exceeds `MaxLinkHops`, the MCV module is asked to found a yard at `f*` instead
+(`McvExpansionManagerBotModule` owns the deployment, §10.1).
+
+**The MCV goes to the best field, and never alone (maintainer 2026-09-29).** An MCV's site is
+the field with the best `score_f`, where `d_f` is the MCV's own path distance and the link terms
+become its travel time. Each factor comes from its own analytics: value from the map's resource
+layer (public, ruling (c)), distance from the pathfinder, and safety from `RegionMemory`'s
+remembered threat along the route **and** at the site (the 6e router's cost). Before the MCV
+moves, the planner asks the squad manager for an **escort**, sized so its Versus-weighted strength
+beats the route's remembered threat (the CP predictor's ratio). The escort travels with the MCV
+and stays to guard the new yard until its first tower stands (`OutpostGuardTicks`). The request
+goes through the squad manager's existing protection path (`ProtectOwn` / `PrepositionDefenceTick`,
+§12.4a), never a second squad manager (§10.1). The hook in `SquadManagerBotModuleCA` is agreed
+with its owner (NOVA, CA-3/CA-4).
+
+**Creeping toward the enemy.** The enemy's probable base (a spawn, or seen buildings) is one more
+candidate, with `score = CreepWeight × difficulty step × Aggression`. It wins only when no field
+scores higher. Its towers go on the enemy-facing edge.
+
+**EX-0 as built (2026-09-29).** `ExpansionPlannerBotModule` (genericbot) scores every field we hold no
+refinery at, every `ReplanTicks` (250), and writes a `debug.log` line whenever the target changes
+(`EX-0 target field …`) or it has none, with the reason (`EX-0 no target …`). Measured choices:
+`V_f` is the field's resource-cell count at its first scan: a common factor leaves the ranking
+unchanged, so no price per cell is invented. The refinery and the cheapest building (the link) are
+whatever the base builder's own queues can build now, with their real cost and `GetBuildTime`.
+Income is `PlayerResources.Earned` over `IncomeWindowTicks`. `d_f` is measured from buildings that give
+buildable area only: a captured derrick or a garrisoned house does not extend the base, and the
+first live run picked a field 35 cells away because of one. `R_reach` = `ReachCells` (6),
+`R_link` = `LinkStepCells` (4). It is straight-line distance for now; path distance is an EX-1
+refinement. Enemy threat comes only from `IBotRegionThreatProvider` (fog-honest), never from
+`ResourceMapBotModule`'s own enemy counts. The one own-actors pass is manifested in
+`fog_honesty_manifest.json`.
+
+**EX-1 as built (2026-09-29).** A CA-side `IBotExpansionTargetProvider` (the pattern of
+`IBotRegionThreatProvider`) lets `BaseBuilderBotModuleCA` ask for the target field without naming a
+Cameo type. In the `BaseCrawl` case, which `ai.yaml` already takes for every building under 1,000
+cost (`BaseCrawlChance: 100`), the builder first tries `findPos` toward that field: the placeable cell
+nearest to it, within `BaseCrawlRadius`. It falls back to the old logic only when no cell fits. The
+planner publishes the field only with `DriveBaseCrawl: true` (`genericbot`). `classic` shares
+`BaseBuilderBotModuleCA@generic` but has no enabled planner, so it keeps today's placement and stays
+the A/B reference. Each steered placement writes `EX-1 BaseCrawl <type> at <cell> toward field <cell>`
+to `debug.log`. Live: `hard` put its second power plant at 12,36 toward field 16,36 (tick 1,554).
+Refineries and defences still use their own placement; EX-2 adds refinery-per-field.
+
+**EX-2 as built (2026-09-29).** While the target field is in reach (0 hops) and unclaimed, the planner
+reports `WantsRefineryAtExpansionTarget`. `HasAdequateRefineryCount()` then answers "not adequate"
+even above the fixed optimum (initial + additional + per base), which is ruling (a): every field in
+reach gets a refinery. The refinery case places it with `findPos` toward the field, limited to
+`ClaimRadiusCells` (8), so it lands where it claims the field; an MCV-requested refinery keeps
+priority. "Claimed" is decided from rules: an own actor with the `Refinery` trait within the claim
+radius (or the resource map's own count). **Loop guard:** every refinery gained while the same field
+stays unclaimed is a missed claim, and after `MaxClaimAttempts` (2) the field is parked for
+`ParkTicks` (3000) with a `debug.log` line (`EX-2 parked field …`). So a placement that keeps missing
+cannot become a refinery loop. `DriveRefineries: true` (genericbot) needs `DriveBaseCrawl`, which
+publishes the target. Live: the home field was claimed by tick 1,500, then the target moved to field
+7 at 45,32 (7 hops), and the base built a line of power plants toward it (17,43 → 21,38 → 30,33 by
+tick 4,034).
+
+**EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
+engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
+`claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after
+`GetExpansionCenter`, the module asks the player's `IBotMcvExpansionSiteProvider` traits for a site and
+deploys toward the first non-null one. The engine still decides **when** to expand (its cash and
+yard-count triggers); the planner decides **where**. The planner answers only for a mobile MCV (a yard
+relocation keeps the engine's choice) and only among fields at least `McvMinHops` (3) links away, which
+the building line would not reach soon. It ranks them by `V × S / (distance from the MCV + McvTauCells)`;
+value, safety and distance each come from their own analytics, as ruled. Each site is logged
+(`EX-3 MCV … sent to field …`). `genericbot` only (`DriveMcvSite: true`). **Still open:** the escort
+and outpost guard, whose hook in `SquadManagerBotModuleCA` is proposed to its owner (NOVA), not built.
+
+**Order of work** (each step: telemetry first, then behaviour behind a yaml switch, then the A/B):
+EX-0 compute and log `score_f`, `f*` and the placement choice (no behaviour change); EX-1 replace
+`BaseCrawl`'s random/omniscient target with `f*` and the distance-minimising placement; EX-2
+refinery-per-field priority plus towers; EX-3 the MCV hand-off; EX-4 the enemy creep, scaled per
+(d). The CA base builder is CA-sync-tracked: the planner lives in a Cameo module that the builder
+consults (a pull interface, as §5 prescribes for the master's hints), so the CA file changes by a
+small hook only.
+
+### 12.14 Personality leads: one top priority each, measured against the enemy (maintainer ruling 2026-09-29)
+
+DESIGN §19.1c gives every personality **one top priority, measured as a lead over the enemy**:
+`lead = own metric / remembered enemy metric`. It is fog-honest: the enemy side comes only from
+what was seen (§3). While the lead is below its target, the personality's budget leans toward the
+lead's driver. The other priorities keep their floors, so no personality abandons the rest.
+
+| personality | top priority | own metric | enemy metric (seen only) | driver it leans on | owner |
+|---|---|---|---|---|---|
+| Expansion | out-earn | income per minute | seen refineries × seen harvesters (the economy proxy, §3.2) | EX planner (§12.13), harvesters | Claude |
+| Steamroller | out-produce | army value produced per minute | seen production buildings, seen army growth | unit builder budget, factories | NOVA (CA-3) |
+| Guerrilla | out-scout, map control | regions seen within `StaleAfterTicks`, share held | regions with remembered enemy presence | scouts, guerrilla squads | DAWN (CA-6 recon) |
+| Rush | pressure: attack early and often, kill the economy | attacks launched, enemy economy value destroyed | none: it is absolute (first-attack tick, attack frequency) | squad manager attack thresholds | NOVA / DAWN |
+| Turtle | more defences | own defence value | remembered enemy defence value | base builder defence share | Claude (base builder) |
+| Tech | tech up faster | research and upgrades done, tier reached | seen tech buildings and upgrades | research queue priority | Claude (base builder) |
+
+Telemetry first, as for EX-0: every lead goes into the situation log, so the targets are tuned
+from data rather than invented (§10.6).
+
+**Telemetry (2026-09-29, NOVA):** the situation log now records the Steamroller and Rush lead
+inputs, record-only — no decision reads them, and the enemy-side numbers stay fog-honest
+(remembered sightings only). Feeds: Steamroller own = `production_per_game_min`, enemy =
+`production_buildings` + `army_value_delta`; Rush = `attacks_launched`, `attacks_per_game_min`,
+`first_attack_tick`, `econ_destroyed`.
+
+- `own.production_window`, `own.production_per_game_min` — arsenal-ledger created-cost delta since
+  the last snapshot, raw and per game minute.
+- `own.econ_destroyed_window`, `own.econ_destroyed` — seen-cost of enemy harvester/refinery types
+  this bot's units destroyed, window and cumulative.
+- `own.attacks_launched`, `own.first_attack_tick`, `own.attacks_per_game_min` — cumulative
+  Rush/Harass/Guerrilla/Air/Naval squads across all squad managers (counters persist while a
+  personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
+  tick, and the per-minute rate.
+- `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
 using OpenRA.Traits;
@@ -44,6 +45,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Cameo-only: how many of the slowest modules to list in each timing report.")]
 		public readonly int ModulePerfReportTop = 8;
 
+		[Desc("Cap on queued orders. Once full, the oldest deferred order is dropped —",
+			"it refers to the stalest world state. Bounds memory when an action budget",
+			"or lag keeps orders pending longer than producers emit them.")]
+		public readonly int MaxQueuedOrders = 512;
+
+		[Desc("Cameo-only: not offered in the lobby's bot lists. The type still exists for map-side bots, scripts",
+			"and the A/B harness (the `fransbot` donor and the `classic` reference bot, maintainer 2026-09-28).")]
+		public readonly bool HiddenInLobby = false;
+
 		string IBotInfo.Type => Type;
 
 		string IBotInfo.Name => Name;
@@ -60,6 +70,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Queue<Order> orders = [];
 
 		OpenRA.Player player;
+		IBotActionBudget actionBudget;
 
 		IBotTick[] tickModules;
 		IBotRespondToAttack[] attackResponseModules;
@@ -88,6 +99,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			IsEnabled = true;
 			player = p;
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
+			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
 			foreach (var ibe in p.PlayerActor.TraitsImplementing<IBotEnabled>())
 				ibe.BotEnabled(this);
@@ -95,6 +107,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBot.QueueOrder(Order order)
 		{
+			while (orders.Count >= info.MaxQueuedOrders)
+				orders.Dequeue();
+
 			orders.Enqueue(order);
 		}
 
@@ -106,6 +121,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			var timed = info.ModulePerfReportIntervalTicks > 0;
 			using (new PerfSample("bot_tick"))
 			{
+				// Every module ticks every tick — timers (scan intervals, countdowns)
+				// live inside BotTick, so an attention budget must not skip whole
+				// modules here. Attention gating needs a clock/decision split first.
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
 					foreach (var t in tickModules)
@@ -136,7 +154,12 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
 			for (var i = 0; i < ordersToIssueThisTick; i++)
+			{
+				if (actionBudget != null && !actionBudget.TryConsumeActions())
+					break;
+
 				world.IssueOrder(orders.Dequeue());
+			}
 		}
 
 		void ReportModuleTiming(Actor self)

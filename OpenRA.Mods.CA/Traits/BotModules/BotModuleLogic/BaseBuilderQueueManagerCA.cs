@@ -43,6 +43,12 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? baseCenterKeepsFailing = null;
 
 		bool itemQueuedThisTick = false;
+
+		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
+		int RandomTolerance(ImmutableArray<int> values)
+		{
+			return values.IsDefaultOrEmpty ? 0 : values.Random(world.LocalRandom);
+		}
 		bool limitBuildRadius = false;
 
 		WaterCheck waterState = WaterCheck.NotChecked;
@@ -86,6 +92,10 @@ namespace OpenRA.Mods.CA.Traits
 			buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
+
+		// BotLimits carries the per-difficulty value on the DESIGN §19.1 line; negative there means the module's own.
+		int NewProductionCashThreshold => botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
+			? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
 
 		public void Tick(IBot bot)
 		{
@@ -133,7 +143,8 @@ namespace OpenRA.Mods.CA.Traits
 				// a) the number of buildings has decreased since last failure M ticks ago,
 				// or b) number of BaseProviders (construction yard or similar) has increased since then.
 				// Otherwise reset failRetryTicks instead to wait again.
-				else if (baseBuilder.BaseExpansionModules == null && --failRetryTicks <= 0)
+				// (BaseExpansionModules is a .ToArray() — never null; Length==0 was the intent.)
+				else if (baseBuilder.BaseExpansionModules.Length == 0 && --failRetryTicks <= 0)
 				{
 					var currentBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
 					var baseProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
@@ -168,6 +179,8 @@ namespace OpenRA.Mods.CA.Traits
 					cachedBases = currentBases;
 					waterState = WaterCheck.NotChecked;
 				}
+				else
+					checkForBasesTicks = baseBuilder.Info.CheckForNewBasesDelay;
 			}
 
 			// Only update once per second or so
@@ -277,7 +290,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
 							type = BuildingType.Defense;
 					}
-					else if (!limitBuildRadius && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
+					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
 
 					(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
@@ -330,9 +343,9 @@ namespace OpenRA.Mods.CA.Traits
 						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
 
 						if (numRef >= baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount
-							&& numProd > 0 && numProd + numTech - baseBuilder.Info.ExpansionTolerate.Random(world.LocalRandom) - tolerateOnCash >= numRef)
+							&& numProd > 0 && numProd + numTech - RandomTolerance(baseBuilder.Info.ExpansionTolerate) - tolerateOnCash >= numRef)
 						{
-							var undeployEvenNoBase = numProd + numTech - baseBuilder.Info.ForceExpansionTolerate.Random(world.LocalRandom) - tolerateOnCash >= numRef;
+							var undeployEvenNoBase = numProd + numTech - RandomTolerance(baseBuilder.Info.ForceExpansionTolerate) - tolerateOnCash >= numRef;
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
@@ -452,7 +465,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Make sure that we can spend as fast as we are earning
-			if (baseBuilder.Info.NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold)
+			if (NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > NewProductionCashThreshold)
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
@@ -473,8 +486,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Only consider building this if there is enough water inside the base perimeter and there are close enough adjacent buildings
-			if (waterState == WaterCheck.EnoughWater && baseBuilder.Info.NewProductionCashThreshold > 0
-				&& playerResources.Resources > baseBuilder.Info.NewProductionCashThreshold
+			if (waterState == WaterCheck.EnoughWater && NewProductionCashThreshold > 0
+				&& playerResources.Resources > NewProductionCashThreshold
 				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
 			{
 				var navalproduction = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
@@ -698,6 +711,21 @@ namespace OpenRA.Mods.CA.Traits
 
 					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
 
+					// Cameo (AI_ARCHITECTURE §12.13, EX-2): the planner's field is in reach and unclaimed, so the refinery goes
+					// there, close enough to count as claiming it. A refinery the MCV module requested keeps priority.
+					var claimer = requestRef == null ? baseBuilder.ExpansionWantsRefinery() : null;
+					if (claimer != null)
+					{
+						var field = claimer.ExpansionTarget.Value;
+						var claim = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, field,
+							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius, claimer.ExpansionTargetClaimRadius);
+						if (claim.Location != null)
+						{
+							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
+							return claim;
+						}
+					}
+
 					// Try and place the refinery near a resource field
 					if (resourceLayer != null)
 					{
@@ -750,6 +778,21 @@ namespace OpenRA.Mods.CA.Traits
 					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseCenter, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius);
 
 				case BuildingType.BaseCrawl:
+
+					// Cameo (AI_ARCHITECTURE §12.13, EX-1): walk toward the planner's target field, one building at a
+					// time (findPos takes the placeable cell nearest the target), instead of a random resource cell or
+					// the enemy building found by scanning every building on the map.
+					var expansionTarget = baseBuilder.ExpansionTarget();
+					if (expansionTarget != null)
+					{
+						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, expansionTarget.Value,
+							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius);
+						if (toward.Location != null)
+						{
+							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {expansionTarget.Value} at tick {world.WorldTick}");
+							return toward;
+						}
+					}
 
 					// Try and place the refinery near a resource field
 					if (resourceLayer != null)

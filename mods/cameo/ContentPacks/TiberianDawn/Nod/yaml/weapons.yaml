@@ -43,6 +43,21 @@ M16Laser:
 			Steel: 7
 			Superheavy: 1
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
@@ -67,6 +82,21 @@ M16Laser:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -252,6 +282,21 @@ td_nod_laserturret_laser:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+			FlyingInfantry: 1
+			CyborgLight: 1
+			CyborgMedium: 1
+			CyborgHeavy: 1
+			CyborgHeroic: 1
+			AntiAirInfantry: 1
+			AntiAirVehicle: 1
+			AntiAirBuilding: 1
+			ShipLight: 1
+			ShipMedium: 1
+			ShipHeavy: 1
+			ShipSuperheavy: 1
+			AntiAirShip: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 	# Warhead@Effect: CreateEffect
 	# 	-ImpactSounds:
 	# Warhead@EffectAir: CreateEffect
@@ -383,6 +428,21 @@ td_nod_artillery_artilleryshellupgrade:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -412,6 +472,21 @@ td_nod_artillery_artilleryshellupgrade:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -444,6 +519,21 @@ td_nod_artillery_artilleryshellupgrade:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -568,6 +658,21 @@ td_nod_reconbike_rocket:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -597,6 +702,21 @@ td_nod_reconbike_rocket:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
@@ -623,6 +743,21 @@ td_nod_reconbike_rocket:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
@@ -649,6 +784,21 @@ td_nod_reconbike_rocket:
 			Steel: 12
 			Superheavy: 16
 			Wood: 6
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 
 	-Warhead@TankDestroyerCannon:
 	-Warhead@ShrapnelWeapon:
@@ -879,6 +1029,21 @@ td_nod_gunturret_turretgun:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -904,6 +1069,21 @@ td_nod_gunturret_turretgun:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -928,6 +1108,21 @@ td_nod_gunturret_turretgun:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -952,6 +1147,21 @@ td_nod_gunturret_turretgun:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Warhead@Concussion_Medium:
 		Damage: 19000
 		PercentageScale: 0
@@ -1034,6 +1244,8 @@ td_nod_gunturret_turretgunblackmarket:
 			ShipHeavy: 115
 			ShipSuperheavy: 96
 			AntiAirShip: 129
+			SubmarineLight: 111
+			SubmarineHeavy: 97
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
@@ -1068,6 +1280,8 @@ td_nod_gunturret_turretgunblackmarket:
 			ShipHeavy: 13
 			ShipSuperheavy: 12
 			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 	Inherits@fx: ^td_nod_td_nod_gunturret_turretgunblackmarket
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -1113,6 +1327,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1138,6 +1367,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -1162,6 +1406,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1186,6 +1445,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Inherits@w6fx: ^td_nod_td_nod_gunturret_turretgunblackmarket_fx
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
@@ -1212,6 +1486,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 23
 			Superheavy: 14
 			Wood: 25
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1235,6 +1524,21 @@ td_nod_gunturret_turretgunblackmarket:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1383,6 +1687,21 @@ td_nod_chemicalrocketsoldier_chemrockets:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
@@ -1410,6 +1729,21 @@ td_nod_chemicalrocketsoldier_chemrockets:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
@@ -1434,6 +1768,21 @@ td_nod_chemicalrocketsoldier_chemrockets:
 			Steel: 12
 			Superheavy: 16
 			Wood: 6
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1470,6 +1819,21 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 			Flak: 7
 			Heroic: 5
 			Steel: 11
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 		Falloff: 100, 50, 33, 25, 20
 		ValidTargets: Ground, Water, Air
 		UpdatesUnitStatistics: false
@@ -1495,6 +1859,21 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 			Light: 10
 			Scout: 8
 			Steel: 7
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
@@ -1522,6 +1901,21 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 			Heroic: 1
 			Shield: 17
 			Fighter: 7
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 		Spread: 100
 		UpdatesUnitStatistics: false
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -1624,6 +2018,21 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -1651,6 +2060,21 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -1675,6 +2099,21 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -1699,6 +2138,21 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 
 	TargetActorCenter: false
 	Warhead@MissileChem_Medium:
@@ -1767,6 +2221,21 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 			Steel: 16
 			Flak: 7
 			Scout: 9
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		Damage: 4
 		Spread: 200
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -1791,6 +2260,21 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 			None: 11
 			Scout: 8
 			Steel: 7
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
@@ -1819,6 +2303,21 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 			Superheavy: 16
 			Flak: 7
 			Plate: 8
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 		Spread: 75
 		UpdatesUnitStatistics: false
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -1844,6 +2343,21 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 			Scout: 12
 			Heavy: 9
 			Light: 11
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Damage: 4
 		UpdatesUnitStatistics: false
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -1911,6 +2425,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -1938,6 +2467,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -1962,6 +2506,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 
 	TargetActorCenter: false
 	Warhead@MissileChem_Medium:
@@ -2020,6 +2579,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 			Fighter: 5
 			Superheavy: 20
 			Helicopter: 7
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 		Spread: 350
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
@@ -2048,6 +2622,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 			Scout: 9
 			Superheavy: 20
 			Shield: 25
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 		Damage: 5
 		Spread: 200
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -2076,6 +2665,21 @@ td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 			Fighter: 8
 			None: 19
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		ValidTargets: Ground, Water, Air
@@ -2186,6 +2790,21 @@ td_nod_buggymkii_machinegunbuggy2:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -2211,6 +2830,21 @@ td_nod_buggymkii_machinegunbuggy2:
 			Steel: 7
 			Superheavy: 1
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -2236,6 +2870,21 @@ td_nod_buggymkii_machinegunbuggy2:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 	-TargetActorCenter:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
@@ -2314,6 +2963,21 @@ td_nod_buggymkii_machinegunbuggy2_AA:
 			Heroic: 14
 			Superheavy: 17
 			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 		UpdatesUnitStatistics: false
 		Spread: 225
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -2339,6 +3003,21 @@ td_nod_buggymkii_machinegunbuggy2_AA:
 			Light: 9
 			Bomber: 8
 			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 		UpdatesUnitStatistics: false
 		Spread: 50
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
@@ -2364,6 +3043,21 @@ td_nod_buggymkii_machinegunbuggy2_AA:
 			Superheavy: 5
 			Steel: 8
 			Concrete: 11
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 		Spread: 100
@@ -2434,6 +3128,21 @@ td_nod_buggymkii_laserbuggy2:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+			FlyingInfantry: 1
+			CyborgLight: 1
+			CyborgMedium: 1
+			CyborgHeavy: 1
+			CyborgHeroic: 1
+			AntiAirInfantry: 1
+			AntiAirVehicle: 1
+			AntiAirBuilding: 1
+			ShipLight: 1
+			ShipMedium: 1
+			ShipHeavy: 1
+			ShipSuperheavy: 1
+			AntiAirShip: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 
 td_nod_buggymkii_laserbuggy2inferno:
 	Inherits@wh: ^Warhead_Inferno_Light
@@ -2624,6 +3333,21 @@ td_nod_lighttankmkii_lighttank2cannon:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
@@ -2650,6 +3374,21 @@ td_nod_lighttankmkii_lighttank2cannon:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumCannon:
@@ -2778,6 +3517,21 @@ td_nod_lasertrooper_blackhandlaser:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 2500
 		Damage: 108
@@ -2803,6 +3557,21 @@ td_nod_lasertrooper_blackhandlaser:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -2912,6 +3681,21 @@ td_nod_stealthsoldier_bhreddarts:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
@@ -2937,6 +3721,21 @@ td_nod_stealthsoldier_bhreddarts:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
@@ -2963,6 +3762,21 @@ td_nod_stealthsoldier_bhreddarts:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
@@ -2988,6 +3802,21 @@ td_nod_stealthsoldier_bhreddarts:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 5000
 		Spread: 1
@@ -3098,6 +3927,21 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3143,6 +3987,21 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 4000
 
@@ -3169,6 +4028,21 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	-Warhead@Effect:
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyCannon:
@@ -3223,6 +4097,21 @@ td_nod_venom_laser:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+			FlyingInfantry: 1
+			CyborgLight: 1
+			CyborgMedium: 1
+			CyborgHeavy: 1
+			CyborgHeroic: 1
+			AntiAirInfantry: 1
+			AntiAirVehicle: 1
+			AntiAirBuilding: 1
+			ShipLight: 1
+			ShipMedium: 1
+			ShipHeavy: 1
+			ShipSuperheavy: 1
+			AntiAirShip: 1
+			SubmarineLight: 1
+			SubmarineHeavy: 1
 
 td_nod_venom_venomlaserinferno:
 	Inherits@wh: ^Warhead_Inferno_Medium
@@ -3453,6 +4342,21 @@ td_nod_minigunner_minigun_laser:
 			Steel: 7
 			Superheavy: 1
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		PercentageDenominator: 10000
 		InvalidTargets: Air
@@ -3479,6 +4383,21 @@ td_nod_minigunner_minigun_laser:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage

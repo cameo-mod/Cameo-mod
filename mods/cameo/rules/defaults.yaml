@@ -1747,6 +1747,9 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^AdvancedGuerillaTactics
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): fire-support squads, with tanks, protect the artillery.
+	BotRoles:
+		Roles: firesupport
 	# TurnSpeedMultiplier@FireSupportBuff:
 	# 	Modifier: 200
 	Armor:
@@ -1771,6 +1774,9 @@
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@AntiInf: ^PrioritizeInfantry
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): artillery squads are this template and ^ArtilleryTankTemplate only.
+	BotRoles:
+		Roles: artillery
 	# Indirect-fire: tilt the muzzle flash up out of the ground like a howitzer (Pitch is a WAngle, 1024=360deg).
 	WithMuzzleGlow:
 		Pitch: 113
@@ -1911,6 +1917,9 @@
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@AntiInf: ^PrioritizeInfantry
+	# AI_ARCHITECTURE.md §12.4a (ruled 2026-09-29): artillery squads are ^ArtilleryTemplate and this template only.
+	BotRoles:
+		Roles: artillery
 	WithMuzzleGlow:
 		Pitch: 113
 	AutoTargetPriority@INFANTRY:
@@ -4044,65 +4053,67 @@
 		Color: FF0000AA
 
 ^BotProductionBehavior:
+	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): Hard is the fair 100% tier; time 140 -> 50 in
+	# steps of 10, cost 120 -> 75 in steps of 5. Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
 	ProductionTimeMultiplier@easiestbotplayer:
-		Multiplier: 130
+		Multiplier: 140
 		Prerequisites: easiestbotplayer
 	ProductionTimeMultiplier@veryeasybotplayer:
-		Multiplier: 120
+		Multiplier: 130
 		Prerequisites: veryeasybotplayer
 	ProductionTimeMultiplier@easybotplayer:
-		Multiplier: 110
+		Multiplier: 120
 		Prerequisites: easybotplayer
 	ProductionTimeMultiplier@mediumbotplayer:
-		Multiplier: 100
+		Multiplier: 110
 		Prerequisites: mediumbotplayer
 	ProductionTimeMultiplier@hardbotplayer:
-		Multiplier: 90
+		Multiplier: 100
 		Prerequisites: hardbotplayer
 	ProductionTimeMultiplier@veryhardbotplayer:
-		Multiplier: 80
-		Prerequisites: veryhardbotplayer
-	ProductionTimeMultiplier@brutalbotplayer:
-		Multiplier: 70
-		Prerequisites: brutalbotplayer
-	ProductionTimeMultiplier@challengerbotplayer:
-		Multiplier: 60
-		Prerequisites: challengerbotplayer
-	ProductionTimeMultiplier@unbeatablebotplayer:
-		Multiplier: 50
-		Prerequisites: unbeatablebotplayer
-	ProductionTimeMultiplier@cameogodbotplayer:
-		Multiplier: 40
-		Prerequisites: cameogodbotplayer
-	ProductionCostMultiplier@easiestbotplayer:
-		Multiplier: 115
-		Prerequisites: easiestbotplayer
-	ProductionCostMultiplier@veryeasybotplayer:
-		Multiplier: 110
-		Prerequisites: veryeasybotplayer
-	ProductionCostMultiplier@easybotplayer:
-		Multiplier: 105
-		Prerequisites: easybotplayer
-	ProductionCostMultiplier@mediumbotplayer:
-		Multiplier: 100
-		Prerequisites: mediumbotplayer
-	ProductionCostMultiplier@hardbotplayer:
-		Multiplier: 95
-		Prerequisites: hardbotplayer
-	ProductionCostMultiplier@veryhardbotplayer:
 		Multiplier: 90
 		Prerequisites: veryhardbotplayer
+	ProductionTimeMultiplier@brutalbotplayer:
+		Multiplier: 80
+		Prerequisites: brutalbotplayer
+	ProductionTimeMultiplier@challengerbotplayer:
+		Multiplier: 70
+		Prerequisites: challengerbotplayer
+	ProductionTimeMultiplier@unbeatablebotplayer:
+		Multiplier: 60
+		Prerequisites: unbeatablebotplayer
+	ProductionTimeMultiplier@cameogodbotplayer:
+		Multiplier: 50
+		Prerequisites: cameogodbotplayer
+	ProductionCostMultiplier@easiestbotplayer:
+		Multiplier: 120
+		Prerequisites: easiestbotplayer
+	ProductionCostMultiplier@veryeasybotplayer:
+		Multiplier: 115
+		Prerequisites: veryeasybotplayer
+	ProductionCostMultiplier@easybotplayer:
+		Multiplier: 110
+		Prerequisites: easybotplayer
+	ProductionCostMultiplier@mediumbotplayer:
+		Multiplier: 105
+		Prerequisites: mediumbotplayer
+	ProductionCostMultiplier@hardbotplayer:
+		Multiplier: 100
+		Prerequisites: hardbotplayer
+	ProductionCostMultiplier@veryhardbotplayer:
+		Multiplier: 95
+		Prerequisites: veryhardbotplayer
 	ProductionCostMultiplier@brutalbotplayer:
-		Multiplier: 85
+		Multiplier: 90
 		Prerequisites: brutalbotplayer
 	ProductionCostMultiplier@challengerbotplayer:
-		Multiplier: 80
+		Multiplier: 85
 		Prerequisites: challengerbotplayer
 	ProductionCostMultiplier@unbeatablebotplayer:
-		Multiplier: 75
+		Multiplier: 80
 		Prerequisites: unbeatablebotplayer
 	ProductionCostMultiplier@cameogodbotplayer:
-		Multiplier: 70
+		Multiplier: 75
 		Prerequisites: cameogodbotplayer
 
 ^BaseBuilding:
@@ -8883,9 +8894,10 @@ CPQDEBUGDUMMY:
 		Condition: CashTrickler
 
 ^BotMicromanageable:
-	GrantConditionOnBotOwner@aimicro:
+	# Unit abilities are never gated by bot difficulty or type (maintainer 2026-09-28): the CA trait with no
+	# `Bots:` list applies to every bot.
+	GrantConditionOnBotOwnerCA@aimicro:
 		Condition: botmicro
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
 
 ^BotAutoDeployTransport:
 	Inherits: ^BotMicromanageable

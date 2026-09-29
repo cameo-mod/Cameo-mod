@@ -177,6 +177,8 @@ forgotten_missilevan:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 forgotten_raidercar:
+	BotRoles:
+		Roles: guerrilla
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -229,6 +231,8 @@ forgotten_raidercar:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
 forgotten_bowler:
+	BotRoles:
+		Roles: guerrilla
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -281,6 +285,8 @@ forgotten_bowler:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
 forgotten_ruiner:
+	BotRoles:
+		Roles: guerrilla
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -355,6 +361,8 @@ forgotten_rattytank:
 	Inherits@JunkArmor: ^JunkArmor
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
+	BotRoles:
+		Roles: guerrilla
 	Valued:
 		Cost: 600
 	Tooltip:

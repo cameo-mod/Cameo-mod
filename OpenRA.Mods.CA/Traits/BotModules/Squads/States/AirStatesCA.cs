@@ -244,6 +244,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 	class AirAttackStateCA : AirStateBaseCA, IState
 	{
+		// Set after the strike route is attempted for the current target —
+		// the state may be entered with a valid target (AirIdle already
+		// picked one), where newTarget never fires but routing still applies.
+		bool routedCurrentTarget;
+
 		public void Activate(SquadCA owner) { }
 
 		public void Tick(SquadCA owner)
@@ -289,6 +294,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var leader = owner.Units.FirstOrDefault().Actor;
 			var buildableInfo = leader.Info.TraitInfoOrDefault<BuildableInfo>();
 			var limitOne = buildableInfo != null && buildableInfo.BuildLimit == 1;
+
+			// CA-5 (AI_ARCHITECTURE §12.8): on a fresh target, transit through
+			// waypoints that skirt remembered anti-air coverage instead of
+			// beelining. The router picks the threat read by leader domain —
+			// aircraft pay remembered AntiAir, ground pays Army+Defence.
+			var needRoute = newTarget || !routedCurrentTarget;
+			var strikeRoute = needRoute && leader != null
+				? owner.SquadManager.RouteAroundThreat(leader, owner.World.Map.CellContaining(owner.TargetActor.CenterPosition))
+				: null;
+
+			if (needRoute)
+				routedCurrentTarget = true;
+
 			var canBuildMoreOfAircraft = leader != null ? !limitOne && owner.SquadManager.CanBuildMoreOfAircraft(leader.Info) : false;
 			var waitingCount = owner.WaitingUnits.Count();
 
@@ -346,10 +364,21 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						continue;
 					}
 
-					// target switched or not attacking, attack the target
-					if ((newTarget || activityType != typeof(FlyAttack)) && CanAttackTarget(a.Actor, owner.TargetActor))
+					// target switched or not attacking, attack the target. A unit
+					// mid-Fly is transiting the strike route's waypoints — its
+					// queued Attack takes over on arrival, so leave it alone.
+					if ((newTarget || (activityType != typeof(FlyAttack) && activityType != typeof(Fly))) && CanAttackTarget(a.Actor, owner.TargetActor))
 					{
-						owner.Bot.QueueOrder(new Order("Attack", a.Actor, Target.FromActor(owner.TargetActor), false));
+						if (strikeRoute != null && strikeRoute.Count > 0)
+						{
+							for (var i = 0; i < strikeRoute.Count; i++)
+								owner.Bot.QueueOrder(new Order("Move", a.Actor, Target.FromCell(owner.World, strikeRoute[i]), i != 0));
+
+							owner.Bot.QueueOrder(new Order("Attack", a.Actor, Target.FromActor(owner.TargetActor), true));
+						}
+						else
+							owner.Bot.QueueOrder(new Order("Attack", a.Actor, Target.FromActor(owner.TargetActor), false));
+
 						continue;
 					}
 					else if (activityType == typeof(FlyIdle))

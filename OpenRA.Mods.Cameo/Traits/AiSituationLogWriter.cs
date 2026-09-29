@@ -133,6 +133,47 @@ namespace OpenRA.Mods.Cameo.Traits
 			return lines.ToString();
 		}
 
+		// DF step 1: per tracked enemy group its centre, value, velocity (cells per 1000 ticks) and, if moving, the
+		// own asset it heads for with the ETA in ticks. `target` is empty for a standing group.
+		internal static void AppendThreats(StringBuilder builder,
+			IReadOnlyList<(BotThreatTracker.Group Group, BotThreatTracker.Prediction? Prediction)> threats)
+		{
+			AiMatchLogWriter.AppendArrayPropertyStart(builder, "threats");
+			for (var i = 0; threats != null && i < threats.Count; i++)
+			{
+				if (i > 0)
+					builder.Append(',');
+				var (g, p) = threats[i];
+				AiMatchLogWriter.AppendObjectStart(builder);
+				AiMatchLogWriter.AppendNumber(builder, "value", g.Value, true);
+				AiMatchLogWriter.AppendNumber(builder, "count", g.Count);
+				AiMatchLogWriter.AppendNumber(builder, "x", (int)Math.Round(g.X));
+				AiMatchLogWriter.AppendNumber(builder, "y", (int)Math.Round(g.Y));
+				AiMatchLogWriter.AppendNumber(builder, "vx_per_kilotick", (int)Math.Round(g.VelocityX * 1000));
+				AiMatchLogWriter.AppendNumber(builder, "vy_per_kilotick", (int)Math.Round(g.VelocityY * 1000));
+				AiMatchLogWriter.AppendString(builder, "target", p.HasValue ? $"{p.Value.Target.X},{p.Value.Target.Y}" : "");
+				AiMatchLogWriter.AppendNumber(builder, "target_value", p?.TargetValue ?? 0);
+				AiMatchLogWriter.AppendNumber(builder, "eta", p?.EtaTicks ?? 0);
+				builder.Append('}');
+			}
+
+			builder.Append(']');
+		}
+
+		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
+		{
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
+			var first = true;
+			if (costs != null)
+				foreach (var (role, cost) in costs.OrderBy(c => c.Key, StringComparer.Ordinal))
+				{
+					AiMatchLogWriter.AppendNumber(builder, role, cost, first);
+					first = false;
+				}
+
+			builder.Append('}');
+		}
+
 		internal static void AppendSituation(StringBuilder builder, string gameUid, string worldGameUid,
 			string mapUid, string playerName, string faction, string botType, string currentPersonality,
 			BotSituation situation)
@@ -165,6 +206,18 @@ namespace OpenRA.Mods.Cameo.Traits
 					.Append(situation.Mission.RegionIndex)
 					.Append('}');
 			}
+			if (situation.MissionAssignment == null)
+				builder.Append(",\"mission_assignment\":null");
+			else
+			{
+				builder.Append(",\"mission_assignment\":{\"type\":\"")
+					.Append(situation.MissionAssignment.Type.ToString().ToLowerInvariant())
+					.Append("\",\"region_index\":")
+					.Append(situation.MissionAssignment.RegionIndex)
+					.Append(",\"frozen\":")
+					.Append(situation.MissionAssignment.Frozen ? "true" : "false")
+					.Append('}');
+			}
 
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, "hints");
 			AiMatchLogWriter.AppendNumber(builder, "defence_fraction", situation.DefenceFractionHint, true);
@@ -187,6 +240,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", situation.OwnDeathsCostWindow);
 			AiMatchLogWriter.AppendNumber(builder, "squad_count", situation.SquadCount);
 			AiMatchLogWriter.AppendNumber(builder, "squad_units", situation.SquadUnitCount);
+			AppendRoleCosts(builder, "losses_by_role", situation.LossesByRole);
+			AppendRoleCosts(builder, "away_losses_by_role", situation.AwayLossesByRole);
+			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_pct", situation.CombatRatioPct);
+			AiMatchLogWriter.AppendNumber(builder, "combat_ratio_defended_pct", situation.CombatRatioDefendedPct);
+
+			// §12.14 PL telemetry (record-only).
+			AiMatchLogWriter.AppendNumber(builder, "production_window", situation.ProductionValueWindow);
+			AiMatchLogWriter.AppendNumber(builder, "production_per_game_min", situation.ProductionPerGameMin);
+			AiMatchLogWriter.AppendNumber(builder, "econ_destroyed_window", situation.EnemyEconValueDestroyedWindow);
+			AiMatchLogWriter.AppendNumber(builder, "econ_destroyed", situation.EnemyEconValueDestroyedTotal);
+			AiMatchLogWriter.AppendNumber(builder, "attacks_launched", situation.AttacksLaunched);
+			AiMatchLogWriter.AppendNumber(builder, "first_attack_tick", situation.FirstAttackTick);
+			AiMatchLogWriter.AppendNumber(builder, "attacks_per_game_min", situation.AttacksPerGameMin);
+			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
@@ -220,6 +287,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "nearest_cells", enemy.NearestCells);
 				AiMatchLogWriter.AppendNumber(builder, "last_seen_tick", enemy.LastSeenTick);
 				AiMatchLogWriter.AppendNumber(builder, "score", enemy.Score);
+				AiMatchLogWriter.AppendNumber(builder, "army_value_delta", enemy.ArmyValueDelta);
 				builder.Append('}');
 			}
 			builder.Append("]}\n");

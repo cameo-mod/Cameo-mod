@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -34,6 +35,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int EconomyValue;
 			public int LastSeenTick;
 			public bool EverSeen;
+
+			// CA-2c (§12.6 rule 5): sieges that failed against this region.
+			// Stamped per publish from MasterAiBotModule's durable store; the
+			// snapshot is rebuilt every pass so the count itself lives there.
+			public int FailedSiegeCount;
+			public int LastFailedSiegeTick;
 		}
 
 		public readonly int CellSize;
@@ -98,6 +105,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal sealed class ObservedActor
 	{
+		// The type, for consumers that reason per unit type (adaptive counter-production).
+		public ActorInfo Info;
 		public uint ActorID;
 		public CPos Location;
 		public int LastSeenTick;
@@ -218,10 +227,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var hasAttack = actorInfo.HasTraitInfo<AttackBaseInfo>();
 			return new ObservedActor
 			{
+				Info = actorInfo,
 				ActorID = actorID,
 				Location = location,
 				LastSeenTick = tick,
-				Value = actorInfo.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0,
+				Value = ObservedValue(actorInfo.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0, building && hasAttack,
+					actorInfo.TraitInfoOrDefault<GarrisonableInfo>()?.MaxWeight ?? 0, info.GarrisonOccupantValue),
 				Building = building,
 				BaseBuilding = building && actorInfo.HasTraitInfo<BaseBuildingInfo>(),
 				Combat = hasAttack && !building && !actorInfo.HasTraitInfo<HarvesterInfo>(),
@@ -236,6 +247,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Vehicle = targetTypes.Overlaps(info.VehicleTargetTypes),
 				Naval = targetTypes.Overlaps(info.NavalTargetTypes)
 			};
+		}
+
+		// AI_ARCHITECTURE §12.12: an enemy-held garrisonable building is occupied (ChangeOwnerOnGarrisoner), and the
+		// civilian houses carry no Valued cost, so pricing them by their own cost made a garrison worth 0 to the risk
+		// gate and infantry were fed into it one by one. Price the garrison instead: the building's capacity times a
+		// rules constant, never the real passenger list, which the observer cannot see.
+		internal static int ObservedValue(int valuedCost, bool armedBuilding, int garrisonMaxWeight, int occupantValue)
+		{
+			if (valuedCost > 0 || !armedBuilding || garrisonMaxWeight <= 0 || occupantValue <= 0)
+				return valuedCost;
+
+			return garrisonMaxWeight * occupantValue;
 		}
 
 		static bool HasAntiAirWeapon(ActorInfo actorInfo)
