@@ -14793,3 +14793,27 @@ m2 + cand m1 discarded mid-flight. v2 launches into fresh dirs
 ca2b2-ctrl / ca2b2-cand on HEAD 0365e4e9e (same source as 372b67825 +
 tooling; cand carries the BehaviourEnabled:true flip). Maximum speed,
 8 matches/arm, swap orientations, CAMEO_BOT_DEBUG=1.
+
+## 2026-09-29 — DAWN lane merged to master (PR #656)
+
+Maintainer ordered "merge everything to master / sync all branches / latest
+engine update". Executed on the DAWN lane (others' live worktrees untouched —
+claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
+
+- Rebased `devin/dawn/fransbot-strengthening` onto post-#650/#634/#648/#655
+  master; one devlog union conflict only; NOVA's #634 §12.4a seam verified
+  disjoint from the CA-2b `GroundUnitsAttackMoveStateCA` consult (both present).
+- Engine pin is now `d5d8b2a685` (NOVA #655) — dawn-sync's engine refreshed by
+  copy from `nova-speed`; `engine/VERSION` verified; CA/Cameo/Fransbot rebuilt
+  clean; isolated-support-dir boot-gate green (~68s to menu, zero exceptions).
+- PR #656 merged `ac19928f9`: F1 stance-yield, CA-2a/2b advisor (BehaviourEnabled
+  off), CA-2c failure memory (SiegeMemoryEnabled off), v=0 provider fix,
+  WeakIncludesDefence CA-6 knob (off). Master's `hard` behavior unchanged — all
+  new machinery flag-gated.
+- `dawn-w3` re-pointed onto merged master; the W3 atomic economy swap
+  (4 CA producers `&& !hardbot`, 5 Frans producers `|| hardbot`) verified intact.
+- ca2b2 A/B at maximum, m3 each: ctrl 2-1 / cand 2-1 → pooled 4-2 hard over
+  classic. Spawn-0 is 2-2 (weaker asymmetry than v1). Pair still running.
+- Outstanding non-DAWN: `cameo-engine` branch 103 commits behind the pinned
+  revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
+  live A/B trees stay frozen for their owners.
