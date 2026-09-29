@@ -3029,7 +3029,7 @@ next vendored bot (CN CombatAnalysis consumption, harasser squads):
   for tens of minutes, silently failing every `dotnet build` copy step with MSB3027.
   Before building or booting: `Get-Process OpenRA*`; only ever kill a PID whose
   binary path + command line resolve to YOUR worktree.
-- **Bot match tests must lock `GameSpeed: maximum`** (maintainer order 2026-09-30,
+- **Bot match tests must lock `GameSpeed: maximum`** (maintainer order 2026-09-29,
   superseding the 2026-09-28 `insane` ruling) — the top `mod.yaml` GameSpeeds
   tier (1 ms timestep, CPU-bound). Default speed made a 4,500-tick smoke take
   ~19 min; `maximum` runs the same match ~40-50x faster at parity hardware —

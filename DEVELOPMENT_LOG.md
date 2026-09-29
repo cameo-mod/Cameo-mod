@@ -1,4 +1,4 @@
-# 2026-09-30 - Devin (EMBER): fixture speed raised insane -> maximum (maintainer order)
+# 2026-09-29 - Devin (EMBER): fixture speed raised insane -> maximum (maintainer order)
 
 The duel-gate fixtures and harness docs now lock `MapOptions.GameSpeed:
 maximum` (1 ms timestep, CPU-bound) instead of `insane` (10 ms). Both
