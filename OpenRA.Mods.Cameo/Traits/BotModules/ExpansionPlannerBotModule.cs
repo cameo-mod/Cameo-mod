@@ -61,6 +61,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("EX-2: ticks a parked field is left out of the candidates.")]
 		public readonly int ParkTicks = 3000;
 
+		[Desc("EX-3: tell McvExpansionManagerBotModule where an MCV should found its next base (it still decides when).")]
+		public readonly bool DriveMcvSite = false;
+
+		[Desc("EX-3: only fields at least this many link buildings away are MCV sites; nearer ones the building line reaches.")]
+		public readonly int McvMinHops = 3;
+
+		[Desc("EX-3: smoothing (cells) added to the MCV's distance to a site, so the nearest field does not divide by ~0.")]
+		public readonly int McvTauCells = 10;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -68,7 +77,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new ExpansionPlannerBotModule(init.Self, this); }
 	}
 
-	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider
+	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
+		IBotMcvExpansionSiteProvider
 	{
 		public readonly struct FieldScore
 		{
@@ -79,9 +89,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public readonly int PaybackTicks;
 			public readonly int Threat;
 			public readonly double Score;
+			public readonly double Safety;
 
-			public FieldScore(int index, CPos center, int value, int hops, int paybackTicks, int threat, double score)
+			public FieldScore(int index, CPos center, int value, int hops, int paybackTicks, int threat, double score, double safety = 1)
 			{
+				Safety = safety;
 				Index = index;
 				Center = center;
 				Value = value;
@@ -95,6 +107,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly Dictionary<int, int> initialCells = new();
+		readonly Dictionary<int, CPos> initialCenters = new();
 		readonly Queue<(int Tick, int Earned)> income = new();
 
 		ResourceMapBotModule resourceMap;
@@ -166,8 +179,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// No income yet: every credit costs a tick, so fields still rank by cost, distance and value.
 			var costTicks = incomePerTick > 0 ? costCredits / incomePerTick : costCredits;
 			paybackTicks = (int)Math.Min(int.MaxValue, costTicks + (long)hops * linkBuildTicks + refineryBuildTicks);
-			var safety = 1.0 / (1.0 + threat / (double)Math.Max(guard, 1));
+			var safety = Safety(threat, guard);
 			return value * safety / (paybackTicks + Math.Max(tauTicks, 1));
+		}
+
+		public static double Safety(int threat, int guard) => 1.0 / (1.0 + threat / (double)Math.Max(guard, 1));
+
+		/// <summary>
+		/// EX-3: the MCV site among the far fields (at least `minHops` links away): value x safety / (distance from the
+		/// MCV + tau). Nearer fields are the building line's job (EX-1/EX-2). Null when no far field is free.
+		/// </summary>
+		public static FieldScore? McvSite(IEnumerable<FieldScore> fields, CPos mcv, int minHops, int tauCells)
+		{
+			FieldScore? best = null;
+			var bestScore = double.MinValue;
+			foreach (var f in fields)
+			{
+				if (f.Hops < minHops)
+					continue;
+
+				var score = f.Value * f.Safety / ((f.Center - mcv).Length + Math.Max(tauCells, 1));
+				if (score > bestScore)
+				{
+					bestScore = score;
+					best = f;
+				}
+			}
+
+			return best;
+		}
+
+		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
+		{
+			// A deploying yard relocation (no Mobile) keeps the MCV module's own choice.
+			if (IsTraitDisabled || !Info.DriveMcvSite || mcv == null || !mcv.Info.HasTraitInfo<MobileInfo>())
+				return null;
+
+			var site = McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells);
+			if (site is FieldScore s)
+				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2} at tick {world.WorldTick}");
+
+			return site?.Center;
 		}
 
 		/// <summary>Buildings needed to bring the base within reach of a field `distance` cells away.</summary>
@@ -252,10 +304,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Ruling (c): the field's size at match start is public map data. The first scan of a field
 				// fixes its value; depletion under the fog is never read (EX-1 adds depletion that was seen).
 				if (!initialCells.TryGetValue(i, out var value))
+				{
 					initialCells[i] = value = field.ResourceCellsCount;
+					initialCenters[i] = field.ResourceCellsCenter;
+				}
 
+				// The centre drifts as the field depletes (the resource map recomputes it every scan), so a refinery near
+				// either the current or the first-seen centre claims it; otherwise a claimed field could look free again.
 				var center = field.ResourceCellsCenter;
-				if (field.PlayerRefineryCount > 0 || Claimed(center, refineryCells, Info.ClaimRadiusCells) || value <= 0)
+				var claimed = Claimed(center, refineryCells, Info.ClaimRadiusCells)
+					|| Claimed(initialCenters[i], refineryCells, Info.ClaimRadiusCells);
+				if (field.PlayerRefineryCount > 0 || claimed || value <= 0)
 				{
 					owned += value > 0 ? 1 : 0;
 					continue;
@@ -272,7 +331,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var cost = refinery.Cost + hops * link.Cost;
 				var score = Score(value, threat, guardValue, cost, incomePerTick, hops, link.BuildTicks, refinery.BuildTicks,
 					Info.TauTicks, out var payback);
-				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score));
+				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
 			scores.Sort((a, b) => b.Score.CompareTo(a.Score));

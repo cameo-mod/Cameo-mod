@@ -103,5 +103,34 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(attempts, Is.EqualTo(0));
 			Assert.That(park, Is.False);
 		}
+
+		static ExpansionPlannerBotModule.FieldScore Field(int index, int x, int y, int value, int hops, double safety = 1)
+		{
+			return new ExpansionPlannerBotModule.FieldScore(index, new CPos(x, y), value, hops, 0, 0, 0, safety);
+		}
+
+		[Test]
+		public void TheMcvGoesToAFarFieldNeverOneTheBuildingLineReaches()
+		{
+			var fields = new[] { Field(1, 12, 12, 200, 1), Field(2, 40, 10, 60, 5) };
+			var site = ExpansionPlannerBotModule.McvSite(fields, new CPos(10, 10), 3, 10);
+			Assert.That(site?.Index, Is.EqualTo(2));
+			Assert.That(ExpansionPlannerBotModule.McvSite(new[] { Field(1, 12, 12, 200, 1) }, new CPos(10, 10), 3, 10), Is.Null);
+		}
+
+		[Test]
+		public void TheMcvWeighsValueSafetyAndDistance()
+		{
+			var mcv = new CPos(10, 10);
+
+			// Same distance: the richer field wins.
+			Assert.That(ExpansionPlannerBotModule.McvSite(new[] { Field(1, 40, 10, 60, 4), Field(2, 10, 40, 90, 4) }, mcv, 3, 10)?.Index, Is.EqualTo(2));
+
+			// Same value: the safer field wins.
+			Assert.That(ExpansionPlannerBotModule.McvSite(new[] { Field(1, 40, 10, 60, 4, 0.25), Field(2, 10, 40, 60, 4, 1) }, mcv, 3, 10)?.Index, Is.EqualTo(2));
+
+			// Same value and safety: the nearer field wins.
+			Assert.That(ExpansionPlannerBotModule.McvSite(new[] { Field(1, 60, 10, 60, 4), Field(2, 30, 10, 60, 4) }, mcv, 3, 10)?.Index, Is.EqualTo(2));
+		}
 	}
 }

@@ -1896,6 +1896,18 @@ publishes the target. Live: the home field was claimed by tick 1,500, then the t
 7 at 45,32 (7 hops), and the base built a line of power plants toward it (17,43 → 21,38 → 30,33 by
 tick 4,034).
 
+**EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
+engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
+`claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after
+`GetExpansionCenter`, the module asks the player's `IBotMcvExpansionSiteProvider` traits for a site and
+deploys toward the first non-null one. The engine still decides **when** to expand (its cash and
+yard-count triggers); the planner decides **where**. The planner answers only for a mobile MCV (a yard
+relocation keeps the engine's choice) and only among fields at least `McvMinHops` (3) links away, which
+the building line would not reach soon. It ranks them by `V × S / (distance from the MCV + McvTauCells)`;
+value, safety and distance each come from their own analytics, as ruled. Each site is logged
+(`EX-3 MCV … sent to field …`). `genericbot` only (`DriveMcvSite: true`). **Still open:** the escort
+and outpost guard, whose hook in `SquadManagerBotModuleCA` is proposed to its owner (NOVA), not built.
+
 **Order of work** (each step: telemetry first, then behaviour behind a yaml switch, then the A/B):
 EX-0 compute and log `score_f`, `f*` and the placement choice (no behaviour change); EX-1 replace
 `BaseCrawl`'s random/omniscient target with `f*` and the distance-minimising placement; EX-2
