@@ -258,7 +258,7 @@ honest draw. The referee slot exists only to satisfy the local server's
 non-empty-slots start rule; it is `NonCombatant` by map declaration, gets no
 starting units, and is invisible to the records.
 
-Operational semantics measured live (2026-09-28; speed raised 2026-09-30): the fixture locks
+Operational semantics measured live (2026-09-28; speed raised 2026-09-29): the fixture locks
 `gamespeed: maximum` via `MapOptions` — the maintainer's convention for bot
 matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
 by `ticksPerSecond`, so maximum raises the tick cap 40x over default while
@@ -303,8 +303,9 @@ The matchup axis is the franken-bot vs the classic bot:
 Acceptance criterion: **the candidate must win the series from both
 spawns** — run `--repeats 4 --swap-bots` minimum (repeat parity alternates
 which bot occupies which `mpspawn`). `gamespeed` stays locked at `maximum`
-(the maintainer's "maximum game speed" for bot matches — the literal top
-ladder tier since 2026-09-30). A timed-out match
+(the maintainer's "maximum game speed" for bot matches, taken literally
+2026-09-29 — series before then ran at `insane` and are not win-rate
+comparable: OrderLatency also shifts 7 -> 10). A timed-out match
 records both sides `lost`, never a fabricated winner.
 
 > ⚠ Validity note (2026-09-28, #611): before `IsEligible` admitted
@@ -327,7 +328,7 @@ While iterating, prefer the smallest honest lever (targeting, scouting,
 economy pacing) over anything resembling a cheat — the acceptance is
 "fight smart, not hard".
 
-### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`, insane)
+### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`; maximum from 2026-09-29, insane before)
 
 | series | axis | tree | result | notes |
 |---|---|---|---|---|

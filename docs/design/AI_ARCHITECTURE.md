@@ -86,7 +86,7 @@ lack the D2k and Outpost2 ids; #588 and the next list-rollout roles fix this).
 
 Speed for the runs: `GameSpeed: maximum` — the top ladder tier — with the dropdown locked
 and adaptive speed off (see `LESSONS_LEARNED.md`); promoted from `insane` for unattended
-tuning runs (maintainer order 2026-09-30).
+tuning runs (maintainer order 2026-09-29).
 
 ---
 
@@ -878,7 +878,7 @@ cap then spans 40x the ticks (`TimeLimit *= 60 * ticksPerSecond`, `TimeLimitMana
 generous wall bound plus a debug.log stall detector (`run_ai_match_batch.py`) replaces a tight
 match timeout. Match records are only comparable within one speed — a `10`-minute maximum match
 contains 40x the simulated play of a default-speed one and 10x an insane-era one, so pooled
-baselines do not carry across the 2026-09-30 speed change.
+baselines do not carry across the 2026-09-29 speed change.
 
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.
