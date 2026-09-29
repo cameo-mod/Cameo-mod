@@ -28,6 +28,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public string FactionName;
 		public bool Alive;
 		public int ArmyValue;
+
+		// §12.14 PL: net seen army growth since the previous snapshot (can go negative; 0 on the first).
+		public int ArmyValueDelta;
 		public int InfantryValue, VehicleValue, AirValue, NavalValue;
 		public int DefenceCount, DefenceValue;
 		public int TechBuildings;
@@ -69,6 +72,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// army against the enemy army this bot REMEMBERS, and against that army plus remembered defences.
 		// Above 100 the own side is predicted to win. No decision reads these yet.
 		internal int CombatRatioPct, CombatRatioDefendedPct;
+
+		// §12.14 personality-lead telemetry (record-only): Steamroller's out-produce side is the
+		// arsenal ledger's created-cost delta per game minute; Rush's pressure side is the
+		// cumulative offensive-squad launches, their per-minute rate and first launch tick, plus
+		// the seen-cost of enemy economy types (harvester/refinery) this bot's units destroyed.
+		internal long ProductionValueWindow, ProductionPerGameMin;
+		internal long EnemyEconValueDestroyedWindow, EnemyEconValueDestroyedTotal, AttacksPerGameMin;
+		internal int AttacksLaunched, FirstAttackTick = -1;
 
 		// Phase DF step 1 (AI_DEEP_RESEARCH.md §14), record-only: the enemy groups seen this snapshot, heaviest
 		// first, with their tracked velocity and, when moving, the own asset they head for and when.
@@ -272,6 +283,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool emergencyPersonalityHandled;
 		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
 		string[] lastIssuedCounterDemands = Array.Empty<string>();
+
+		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
+		long prevLedgerCreatedCost = -1, prevEconDestroyed;
+		int prevSnapshotTick = -1, prevAttacksLaunched, firstAttackTick = -1;
+		readonly Dictionary<OpenRA.Player, int> prevEnemyArmyValue = new();
+		readonly Dictionary<string, int> ledgerTypeCosts = new(StringComparer.Ordinal);
+		readonly Dictionary<string, bool> econVictimTypes = new(StringComparer.Ordinal);
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -530,6 +548,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				profiles.Add(enemy, profile);
 			}
 
+			// §12.14: seen army growth per enemy since the last snapshot; players that left the
+			// enemy list drop out of the remembered table with the rebuild below.
+			foreach (var profile in profiles.Values)
+				profile.ArmyValueDelta = prevEnemyArmyValue.TryGetValue(profile.Player, out var prevArmy)
+					? profile.ArmyValue - prevArmy : 0;
+			prevEnemyArmyValue.Clear();
+			foreach (var profile in profiles.Values)
+				prevEnemyArmyValue[profile.Player] = profile.ArmyValue;
+
 			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
 			var urgency = currentUrgency == BotUrgency.Emergency
@@ -661,13 +688,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var lossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
 			var awayLossesByRole = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			var attacksLaunched = 0;
 			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())
 			{
 				foreach (var (role, cost) in sm.LossesByRole)
 					lossesByRole[role] = lossesByRole.GetValueOrDefault(role) + cost;
 				foreach (var (role, cost) in sm.AwayLossesByRole)
 					awayLossesByRole[role] = awayLossesByRole.GetValueOrDefault(role) + cost;
+				attacksLaunched += sm.OffensiveSquadsLaunched;
 			}
+
+			// §12.14 PL telemetry (record-only): production and enemy-econ-kill windows off the
+			// arsenal ledger, plus offensive launches off the squad managers, per game minute.
+			var ledger = player.PlayerActor.TraitOrDefault<BotArsenalLedger>();
+			var ledgerCreatedCost = LedgerCreatedCost(ledger);
+			var econDestroyed = EconValueDestroyed(ledger);
+			var productionWindow = prevLedgerCreatedCost < 0 || ledgerCreatedCost < 0
+				? 0 : Math.Max(0, ledgerCreatedCost - prevLedgerCreatedCost);
+			var econWindow = Math.Max(0, econDestroyed - prevEconDestroyed);
+			if (ledgerCreatedCost >= 0)
+				prevLedgerCreatedCost = ledgerCreatedCost;
+			prevEconDestroyed = econDestroyed;
+			var attacksDelta = Math.Max(0, attacksLaunched - prevAttacksLaunched);
+			prevAttacksLaunched = attacksLaunched;
+			if (firstAttackTick < 0 && attacksLaunched > 0)
+				firstAttackTick = tick;
+			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
+			prevSnapshotTick = tick;
+			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
 
 			var situation = new BotSituation
 			{
@@ -695,6 +743,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				CombatRatioDefendedPct = combatRatios.Defended,
 				LossesByRole = lossesByRole,
 				AwayLossesByRole = awayLossesByRole,
+				ProductionValueWindow = productionWindow,
+				ProductionPerGameMin = actualDeltaTicks > 0 ? productionWindow * ticksPerGameMin / actualDeltaTicks : 0,
+				EnemyEconValueDestroyedWindow = econWindow,
+				EnemyEconValueDestroyedTotal = econDestroyed,
+				AttacksLaunched = attacksLaunched,
+				FirstAttackTick = firstAttackTick,
+				AttacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
@@ -1460,6 +1515,57 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// 246 after). A declared-NonCombatant slot stays out, as in #594's match writer.
 		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && !p.PlayerReference.NonCombatant && (p.Playable || p.IsBot);
 		static int EconProxy(EnemyProfile profile) => profile.Harvesters + profile.Refineries * 2;
+
+		// §12.14 PL telemetry reads: cumulative produced cost, and cumulative destroyed value of
+		// victim types classified ECON (harvester or refinery). -1 = ledger trait absent.
+		long LedgerCreatedCost(BotArsenalLedger ledger)
+		{
+			if (ledger == null)
+				return -1;
+
+			var total = 0L;
+			foreach (var (type, entry) in ledger.ByType)
+				total += (long)entry.Created * LedgerTypeCost(type);
+			return total;
+		}
+
+		int LedgerTypeCost(string name)
+		{
+			if (!ledgerTypeCosts.TryGetValue(name, out var cost))
+			{
+				cost = player.World.Map.Rules.Actors.TryGetValue(name, out var info)
+					? info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0
+					: 0;
+				ledgerTypeCosts[name] = cost;
+			}
+
+			return cost;
+		}
+
+		long EconValueDestroyed(BotArsenalLedger ledger)
+		{
+			if (ledger == null)
+				return 0;
+
+			var total = 0L;
+			foreach (var entry in ledger.ByType.Values)
+				foreach (var (victim, value) in entry.KilledValueByVictim)
+					if (IsEconVictimType(victim))
+						total += value;
+			return total;
+		}
+
+		bool IsEconVictimType(string name)
+		{
+			if (!econVictimTypes.TryGetValue(name, out var econ))
+			{
+				econ = player.World.Map.Rules.Actors.TryGetValue(name, out var info) &&
+					(info.HasTraitInfo<HarvesterInfo>() || info.HasTraitInfo<RefineryInfo>());
+				econVictimTypes[name] = econ;
+			}
+
+			return econ;
+		}
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));

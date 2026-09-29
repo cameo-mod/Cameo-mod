@@ -2226,3 +2226,19 @@ lead's driver. The other priorities keep their floors, so no personality abandon
 
 Telemetry first, as for EX-0: every lead goes into the situation log, so the targets are tuned
 from data rather than invented (§10.6).
+
+**Telemetry (2026-09-29, NOVA):** the situation log now records the Steamroller and Rush lead
+inputs, record-only — no decision reads them, and the enemy-side numbers stay fog-honest
+(remembered sightings only). Feeds: Steamroller own = `production_per_game_min`, enemy =
+`production_buildings` + `army_value_delta`; Rush = `attacks_launched`, `attacks_per_game_min`,
+`first_attack_tick`, `econ_destroyed`.
+
+- `own.production_window`, `own.production_per_game_min` — arsenal-ledger created-cost delta since
+  the last snapshot, raw and per game minute.
+- `own.econ_destroyed_window`, `own.econ_destroyed` — seen-cost of enemy harvester/refinery types
+  this bot's units destroyed, window and cumulative.
+- `own.attacks_launched`, `own.first_attack_tick`, `own.attacks_per_game_min` — cumulative
+  Rush/Harass/Guerrilla/Air/Naval squads across all squad managers (counters persist while a
+  personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
+  tick, and the per-minute rate.
+- `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).
