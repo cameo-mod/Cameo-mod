@@ -33,7 +33,10 @@ import derive_versus_columns as D  # noqa: E402
 # 2026-09-27b: post-#516 merge — the merged pack tables' derived rows were written
 # (2,886 rows across 15 files: only tables whose pending count grew vs ccfd7830a);
 # the merges also cleared 923 pre-existing pending rows. Landing: 29,592.
-RATCHET = 29592
+# 2026-09-29: the two rule-3b submarine columns joined GEO_DERIVED and the tool wrote EVERY
+# pending row in all 42 weapon files (35,123, purely additive; the 754 template rows came from
+# `splice_templates.py --all`). Landing: 0 — from here any table without its rows fails.
+RATCHET = 0
 
 
 def main() -> int:

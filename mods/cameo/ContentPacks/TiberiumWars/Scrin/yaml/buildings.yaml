@@ -944,6 +944,7 @@ scrin_warp_chasm:
 		Name: actor_scrin_warp_chasm.name
 	Buildable:
 		Queue: Building, RABuilding
+		BuildLimit: 1
 		BuildPaletteOrder: 85
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		Icon: icon

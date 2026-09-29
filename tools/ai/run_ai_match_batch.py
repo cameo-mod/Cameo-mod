@@ -31,13 +31,18 @@ ConquestVictoryConditions decides on elimination and the map's locked
 TimeLimitManager is the stalemate failsafe (a timed-out duel records both
 bots "lost" — an honest draw, not an engine-invented winner).
 
-The fixture locks `gamespeed` to `insane` (10 ms timestep): bot tests run at
-4x target rate so matches can be iterated in quick succession — a decisive
-match resolves ~4x sooner in wall time. The minute-based cap scales to
-time_limit*6000 ticks at that speed, so under CPU contention a timeout match
-can legitimately run long; the stall detector (debug.log goes quiet after
-its first write this run — arming skips the load phase) kills hung matches
-in ~2 minutes while a generous wall bound protects slow-but-live ones. Run
+The fixture locks `gamespeed` to `maximum` (1 ms timestep): bot tests run
+uncapped at whatever tick rate the CPU sustains, so decisive matches resolve
+many times sooner in wall time. At maximum one in-game minute is 60,000 ticks,
+so the fixture offers TimeLimitOptions 0/1/2/3/4/6/9 (tick for tick the
+insane-era 0/10/20/30/40/60/90) and the default is 3 = 180,000 ticks: the
+ENGINE ends a stalemate at that depth and the match is recorded (both sides
+`lost`: a timed-out stalemate has no winner),
+where a 30-minute cap (1.8M ticks) left the harness to kill it with no record.
+The stall detector
+(debug.log goes quiet after its first write this run — arming skips the load
+phase) kills hung matches in ~2 minutes while a generous wall bound protects
+slow-but-live ones. Run
 bot batches serially and prefer an idle machine for consistent timings.
 
 On a shared box a bigger hazard is external kills: another agent's
@@ -105,9 +110,11 @@ BENCHMARK_PREFIX = "ai-duel-batch-"
 # directory name inside the support dir.
 USER_MAP_DIR = os.path.join("maps", "cameo", "{DEV_VERSION}")
 
-# Engine TimeLimitManager only accepts these minute values (mod.yaml
-# TimeLimitOptions). --time-limit must be one of them.
-VALID_TIME_LIMITS = {0, 10, 20, 30, 40, 60, 90}
+# The fixture's TimeLimitManager.TimeLimitOptions (rules.yaml): the engine only accepts
+# these minute values. At maximum speed 1 min = 60,000 ticks, so they equal the
+# insane-era 0/10/20/30/40/60/90 caps tick for tick.
+VALID_TIME_LIMITS = {0, 1, 2, 3, 4, 6, 9}
+TICKS_PER_MINUTE = 60 * 1000  # maximum: Timestep 1 ms
 
 
 def fail(message: str, record=None) -> None:
@@ -374,7 +381,7 @@ def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int,
 def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     """Extract a shipped .oramap into a variant dir and convert its Multi slots
     into map-side bot duelists. The referee seat is added for the local client;
-    the duel gate's rules.yaml supplies the locked insane speed, time cap and
+    the duel gate's rules.yaml supplies the locked maximum speed, time cap and
     restored MustBeDestroyed bases that real elimination needs."""
     if dest.exists():
         shutil.rmtree(dest)
@@ -613,7 +620,7 @@ def main() -> int:
     parser.add_argument("--swap-bots", action="store_true",
                         help="alternate which bot occupies which spawn per repeat — "
                              "the A/B acceptance requires both spawns covered")
-    parser.add_argument("--time-limit", type=int, default=30, choices=sorted(VALID_TIME_LIMITS))
+    parser.add_argument("--time-limit", type=int, default=3, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
@@ -676,12 +683,12 @@ def main() -> int:
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 
-    # The fixture locks gamespeed to insane (10 ms timestep), so the minute
-    # cap is time_limit*6000 ticks — a CPU-contended box ticks well below the
-    # 100 tps target. Bound wall time at a pessimistic sustained 20 tps; the
-    # stall detector in run_match ends genuinely hung matches in ~2 minutes,
-    # so a generous bound here only ever waits on a match still progressing.
-    cap_ticks = args.time_limit * 6000
+    # The fixture locks gamespeed to maximum (1 ms timestep) and scales its minute
+    # options so the engine cap equals the insane-era depth (3 min = 180,000 ticks):
+    # the engine ends a stalemate and records it. The wall bound allows that
+    # depth at a pessimistic sustained 20 tps; the stall detector in run_match ends
+    # genuinely hung matches in ~2 minutes regardless.
+    cap_ticks = args.time_limit * TICKS_PER_MINUTE
     timeout = cap_ticks // 20 + 300
 
     results = []
@@ -717,11 +724,33 @@ def main() -> int:
             # the external-kill signature (TerminateProcess → exit 1; the
             # engine itself only ever returns 0 or -1-with-exception). Retry
             # those; a real crash writes exception-*.log and would just fail
-            # the same way again.
-            if not (status.startswith("exit=") and not records and not new_exc and attempt <= args.retries):
+            # the same way again. A clean `ok` exit with no records is the
+            # phantom class: the process ended without a resolved world
+            # (lobby abort under contention, early clean exit) and is not a
+            # datapoint either — retry it the same bounded number of times.
+            # A match that truly ran records both bots at GameOver; zero
+            # appended records means nothing was played to judge.
+            no_data = not records and not new_exc
+            if not ((status.startswith("exit=") or status == "ok") and no_data and attempt <= args.retries):
                 break
-            print(f"    -> {status} in {elapsed}s, no records/exception — external kill? retry {attempt}/{args.retries}",
+            print(f"    -> {status} in {elapsed}s, no records/exception — external kill or phantom abort? retry {attempt}/{args.retries}",
                   flush=True)
+            print(f"    OpenRA output tail:\n{output_tail(output)}", flush=True)
+            # The abort signature lives in the client's own log, not stdout:
+            # a host-level event drops the loopback socket mid-match, e.g.
+            # "An established connection was aborted by the software in your
+            # host machine".
+            client_log = logs_dir / "client.log"
+            if client_log.is_file():
+                tail = client_log.read_text(encoding="utf-8", errors="replace")[-2000:].strip()
+                if tail:
+                    print(f"    client.log tail:\n{tail}", flush=True)
+
+        # A no-data run that exhausted its retries is still not a datapoint:
+        # count it separately so a deterministic abort is visible in
+        # batch_summary.json / run_league instead of reading as clean.
+        if status == "ok" and not records:
+            status = "norecord"
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -771,6 +800,7 @@ def main() -> int:
         "timed_out": sum(1 for r in results if r["status"] == "timeout"),
         "stalled": sum(1 for r in results if r["status"] == "stalled"),
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
+        "norecord": sum(1 for r in results if r["status"] == "norecord"),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
         "scoreboard": scoreboard,
@@ -781,7 +811,8 @@ def main() -> int:
     print(
         f"\nbatch done: {summary['completed']}/{summary['matches']} clean, "
         f"{summary['timed_out']} timeout, {summary['stalled']} stalled, "
-        f"{summary['died']} died ({summary['retried']} retried), exceptions={new_exceptions or 'none'}"
+        f"{summary['died']} died, {summary['norecord']} norecord ({summary['retried']} retried), "
+        f"exceptions={new_exceptions or 'none'}"
     )
     if scoreboard:
         print("\nA/B scoreboard (decided 1v1s, deduplicated by game):")

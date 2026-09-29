@@ -107,6 +107,12 @@ wc2paladinholyvision:
 			Medium: 100
 			Heavy: 100
 			Concrete: 100
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 100
+			ShipMedium: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Projectiles: FireCluster
 		Weapon: wc2paladinholyvision_hit
@@ -133,6 +139,12 @@ wc2paladinholyvision_hit:
 			Medium: 100
 			Heavy: 100
 			Concrete: 100
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 100
+			ShipMedium: 100
+			AntiAirShip: 100
+			SubmarineLight: 100
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Inherits@w6fx: ^wc2_humans_wc2paladinholyvision_hit
 	Warhead@3Reveal: RevealShroud
@@ -221,6 +233,12 @@ wc2paladinhealing:
 			Medium: 100
 			Heavy: 100
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Heal, Healing
 		# InvalidTargets: wc2_ballista
@@ -250,6 +268,12 @@ wc2priesthealing:
 			Medium: 100
 			Heavy: 100
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: Heal, Healing
 		# InvalidTargets: wc2_ballista
@@ -300,6 +324,12 @@ wc2paladinexorcism:
 			Medium: 0
 			Heavy: 0
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 0
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 		ValidTargets: undeadtarget
 	Inherits@w6fx: ^wc2_humans_wc2paladinexorcism
@@ -658,6 +688,12 @@ wc2mageSlow:
 			Medium: 100
 			Heavy: 100
 			Concrete: 0
+			CyborgLight: 100
+			AntiAirVehicle: 100
+			ShipLight: 0
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
 		DamageTypes: DefaultDeathwc2
 		ValidTargets: Ground, Water, Air
 	Inherits@w6fx: ^wc2_humans_wc2mageslow

@@ -16,7 +16,7 @@ League spec (JSON):
       "factions": ["td_gdi"],
       "repeats": 4,
       "swap_bots": true,
-      "time_limit": 30
+      "time_limit": 3
     }
 
 `members` are the opposing bot types. The classic omniscient reference is
@@ -70,7 +70,7 @@ def load_spec(path: pathlib.Path) -> dict:
     spec.setdefault("factions", ["td_gdi"])
     spec.setdefault("repeats", 4)
     spec.setdefault("swap_bots", True)
-    spec.setdefault("time_limit", 30)
+    spec.setdefault("time_limit", 3)
     for m in spec["maps"]:
         resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else REPO_ROOT / m
         if not resolved.exists():
@@ -101,6 +101,7 @@ def cell_summary(cell_dir: pathlib.Path) -> dict | None:
         "stalled": summary.get("stalled", 0),
         "timed_out": summary.get("timed_out", 0),
         "died": summary.get("died", 0),
+        "norecord": summary.get("norecord", 0),
         "new_exceptions": summary.get("new_exceptions") or [],
     }
 
@@ -123,6 +124,7 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     acc["stalled"] += data["stalled"]
     acc["timed_out"] += data["timed_out"]
     acc["died"] += data["died"]
+    acc["norecord"] += data["norecord"]
     acc["exceptions"] += data["new_exceptions"]
 
     results_path = cell_dir / "batch_results.jsonl"
@@ -163,6 +165,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "stalled": 0,
         "timed_out": 0,
         "died": 0,
+        "norecord": 0,
         "exceptions": [],
         "cells_missing": [],
     }
@@ -198,6 +201,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "stalled": acc["stalled"],
         "timed_out": acc["timed_out"],
         "died": acc["died"],
+        "norecord": acc["norecord"],
         "exceptions": acc["exceptions"],
         "cells_missing": acc["cells_missing"],
     }
@@ -215,7 +219,7 @@ def print_summary(summary: dict) -> None:
               f"(wr {m['winrate']}, wilson95 {m['wilson95']})")
     if summary["cells_missing"]:
         print(f"  MISSING CELLS: {summary['cells_missing']}")
-    bad = {k: summary[k] for k in ("stalled", "timed_out", "died") if summary[k]}
+    bad = {k: summary[k] for k in ("stalled", "timed_out", "died", "norecord") if summary[k]}
     if bad or summary["exceptions"]:
         print(f"  anomalies: {bad or '{}'} exceptions={summary['exceptions'] or 'none'}")
 
@@ -227,7 +231,7 @@ def main() -> int:
     parser.add_argument("--league-dir", type=pathlib.Path, required=True,
                         help="directory that holds one subdirectory per league cell")
     parser.add_argument("--repeats", type=int, default=None, help="override spec repeats")
-    parser.add_argument("--time-limit", type=int, default=None, choices=sorted({30, 60}),
+    parser.add_argument("--time-limit", type=int, default=None, choices=sorted({3, 6}),
                         help="override spec time_limit")
     parser.add_argument("--stall-timeout", type=int, default=400)
     parser.add_argument("--dry-run", action="store_true")

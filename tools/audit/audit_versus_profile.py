@@ -91,7 +91,8 @@ LADDERS = {
 DERIVED_ARMORS = ("Heroic", "FlyingInfantry",
                   "CyborgLight", "CyborgMedium", "CyborgHeavy", "CyborgHeroic",
                   "AntiAirInfantry", "AntiAirVehicle", "AntiAirBuilding",
-                  "ShipLight", "ShipMedium", "ShipHeavy", "ShipSuperheavy", "AntiAirShip")
+                  "ShipLight", "ShipMedium", "ShipHeavy", "ShipSuperheavy", "AntiAirShip",
+                  "SubmarineLight", "SubmarineHeavy")
 LEVELS = ("Light", "Medium", "Heavy", "Super")
 COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete",
              "Effect", "ShieldHit", "Glow", "Smudge")

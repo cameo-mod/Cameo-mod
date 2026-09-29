@@ -258,15 +258,19 @@ honest draw. The referee slot exists only to satisfy the local server's
 non-empty-slots start rule; it is `NonCombatant` by map declaration, gets no
 starting units, and is invisible to the records.
 
-Operational semantics measured live (2026-09-28): the fixture locks
-`gamespeed: insane` via `MapOptions` — the maintainer's convention for bot
+Operational semantics measured live (2026-09-28; speed raised 2026-09-29): the fixture locks
+`gamespeed: maximum` via `MapOptions` — the maintainer's convention for bot
 matches so batches iterate quickly. `TimeLimitManager` scales the minute cap
-by `ticksPerSecond`, so insane quadruples the tick cap while achieved speed
-stays whatever the box sustains; timeouts are therefore bounded by a
-`debug.log` stall detector (a live match writes every few seconds) plus a
-speed-aware wall backstop, never a tight fixed timeout. Insane shortens
-elimination matches only — a timeout match is wall-normalized at any speed,
-so drop `timelimit` when a quick pipeline check needs a fast draw. An `exit=1` with zero
+by `ticksPerSecond` (60,000 ticks per minute at maximum), so the duel fixtures offer
+`TimeLimitOptions` 0/1/2/3/4/6/9, tick for tick the insane-era 0/10/20/30/40/60/90, and default to 3
+(180,000 ticks): the **engine** ends a stalemate at that depth and records it (both sides `lost`: a timed-out stalemate has no
+winner; proven live 2026-09-29, two `veryeasy` mirrors ended at 60,001 ticks under `--time-limit 1`), where a
+30-minute cap (1.8M ticks) left the harness to kill it with no record. Achieved speed stays whatever
+the box sustains; timeouts are therefore bounded
+by a `debug.log` stall detector (a live match writes every few seconds) plus a
+speed-aware wall backstop, never a tight fixed timeout. Game speed shortens
+elimination matches only — drop `timelimit` when a quick pipeline check needs
+a fast draw. An `exit=1` with zero
 records and no exception is an external `TerminateProcess` — the engine only
 returns 0/-1 — so the harness retries a no-records attempt once and appends
 one durable line per attempt to `batch_results.jsonl`. Ally/opponent in the
@@ -302,8 +306,10 @@ The matchup axis is the franken-bot vs the classic bot:
 
 Acceptance criterion: **the candidate must win the series from both
 spawns** — run `--repeats 4 --swap-bots` minimum (repeat parity alternates
-which bot occupies which `mpspawn`). `gamespeed` stays locked at `insane`
-(the maintainer's "maximum game speed" for bot matches). A timed-out match
+which bot occupies which `mpspawn`). `gamespeed` stays locked at `maximum`
+(the maintainer's "maximum game speed" for bot matches, taken literally
+2026-09-29 — series before then ran at `insane` and are not win-rate
+comparable: OrderLatency also shifts 7 -> 10). A timed-out match
 records both sides `lost`, never a fabricated winner.
 
 > ⚠ Validity note (2026-09-28, #611): before `IsEligible` admitted
@@ -317,7 +323,7 @@ Under the hood the harness extracts the `.oramap` into a variant dir, adds
 the `Referee` seat for the local client, converts `Multi0`/`Multi1` into
 map-side bots (`Playable: False` + `Bot:` + `HomeLocation` from the map's
 `mpspawn` actors), injects each faction's `StartingUnits` group at the spawn
-cell, and layers the duel-gate `rules.yaml` (insane speed, locked time cap,
+cell, and layers the duel-gate `rules.yaml` (maximum speed, locked time cap,
 restored `MustBeDestroyed`). The packaged map is never modified.
 
 Baseline measured 2026-09-28: `hard` beat `fransbot` on the first clean
@@ -326,7 +332,7 @@ While iterating, prefer the smallest honest lever (targeting, scouting,
 economy pacing) over anything resembling a cheat — the acceptance is
 "fight smart, not hard".
 
-### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`, insane)
+### Series log (A Nuclear Winter, td_gdi mirror, `--swap-bots`; maximum from 2026-09-29, insane before)
 
 | series | axis | tree | result | notes |
 |---|---|---|---|---|

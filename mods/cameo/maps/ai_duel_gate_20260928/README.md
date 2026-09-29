@@ -48,13 +48,14 @@ retries forever; worth and liquidity stay frozen at spawn values).
   locked `TimeLimitManager` caps the game — its `NotifyTimerExpired` only
   ranks `Playable` players, so a timed-out duel records both bots `lost`
   (honest draw; it still exits via `CheckIfGameIsOver`).
-- Speed: `MapOptions.GameSpeed: insane` + `GameSpeedDropdownLocked` — a locked
+- Speed: `MapOptions.GameSpeed: maximum` + `GameSpeedDropdownLocked` — a locked
   lobby option makes the local server's hard-coded `option gamespeed default`
   order a no-op (`LobbyCommands` rejects locked options), so fixtures always
-  run 4x fast. Bot tests SHOULD run at high game speed: iterations are short
-  and comparable. Note the minute cap then spans 4x the ticks
-  (`TimeLimit *= 60 * ticksPerSecond`), so duration_ticks reads ~60000 for a
-  10-minute cap — compare records only within one speed.
+  run at max CPU-bound rate. Bot tests SHOULD run at high game speed: iterations are short
+  and comparable. The minute cap spans 60,000 ticks per minute at maximum
+  (`TimeLimit *= 60 * ticksPerSecond`), so `TimeLimitOptions: 0, 1, 2, 3, 4, 6, 9`
+  equal the insane-era 0/10/20/30/40/60/90 caps tick for tick; the default 3 is
+  180,000 ticks — compare records only within one speed.
 
 ## Variant generation
 

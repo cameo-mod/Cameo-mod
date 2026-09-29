@@ -194,6 +194,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
 - [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
@@ -3029,12 +3030,13 @@ next vendored bot (CN CombatAnalysis consumption, harasser squads):
   for tens of minutes, silently failing every `dotnet build` copy step with MSB3027.
   Before building or booting: `Get-Process OpenRA*`; only ever kill a PID whose
   binary path + command line resolve to YOUR worktree.
-- **Bot match tests must lock `GameSpeed: insane`** (maintainer order 2026-09-28).
-  Default speed made a 4,500-tick smoke take ~19 min; `insane` (10 ms timestep,
-  `mod.yaml` GameSpeeds) runs the same match ~4-5x faster and a 25,000-tick
-  versus duel finishes in minutes — matches become cheap enough to run in quick
-  succession. Recipe for every `ai_*` test map's `rules.yaml`:
-  `World: → MapOptions: → GameSpeed: insane` (+ `GameSpeedDropdownLocked: True`
+- **Bot match tests must lock `GameSpeed: maximum`** (maintainer order 2026-09-29,
+  superseding the 2026-09-28 `insane` ruling) — the top `mod.yaml` GameSpeeds
+  tier (1 ms timestep, CPU-bound). Default speed made a 4,500-tick smoke take
+  ~19 min; `maximum` runs the same match ~40-50x faster at parity hardware —
+  matches become cheap enough to run in quick succession. Recipe for every
+  `ai_*` test map's `rules.yaml`:
+  `World: → MapOptions: → GameSpeed: maximum` (+ `GameSpeedDropdownLocked: True`
   so a lobby default can't override). `MapOptions` is a WORLD trait — under
   `Player:` it silently drops, and at yaml root it parses as an actor named
   `mapoptions` (`Junk value` rules error). `Shroud`/`PlayerResources` are
@@ -3083,3 +3085,27 @@ first and sees `false` for every conditional trait. The first boot of the `Weapo
 crashed on exactly this ("no actor has a `Weapons` trait"). Evaluate `RequiresCondition == null ||
 RequiresCondition.Evaluate(VariableExpression.NoVariables)` yourself in load-time code; `EnabledByDefault` is
 safe only at runtime (after every ruleset step, as `BotUnitProfiles` and `AdaptiveCounterProduction` use it).
+
+## Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)
+
+A `run_ai_match_batch.py` run launches a fresh OpenRA process per match, and each launch parses
+`mods/` **from the worktree at that moment** — only the ruleset of the FIRST match is guaranteed to
+match the DLL that was built. Switching the worktree to a newer base mid-batch left `ai.yaml` /
+`player.yaml` carrying traits and derive predicates the running DLL did not contain:
+`BotRoleSets on player: no actor has a Weapons trait with a public field ValidTargets` — three
+matches died at ~40 s each while match 1 (already loaded) played to a clean finish.
+
+Two traps inside that one:
+
+- **The silent-drop rule (8b) does NOT cover derive vocabularies.** `DeriveHasField` was a *known*
+  field on the old `BotRoleSetsInfo` — parsed fine, then evaluated and crashed on the predicate
+  `Weapons.ValidTargets`, which only exists in the newer DLL. A field name surviving is not the
+  predicate surviving; gate new predicates on the binary that will read them.
+- The same skew would have hit `BotArsenalLedger:` in `player.yaml` (`Cannot locate type` class)
+  one hunk later — reverting one file is not enough; the whole `mods/` tree must match the DLL.
+
+Rule: **do not change branches, pull, or merge in a worktree while its batch is live.** Do branch
+work in a scratch worktree (`git worktree add`), and only rebuild `engine/bin` when no OpenRA
+process from that worktree is running — a loaded DLL is file-locked on Windows, and a half-written
+binary corrupts the next launch. If a mid-batch skew already happened, the record is still valid for
+the match that loaded before the switch; rerun only the crashed cells.

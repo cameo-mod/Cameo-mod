@@ -278,6 +278,21 @@ TSCABALObeliskLaserFire:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@MediumFlameWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 111, 33, 11, 3
@@ -302,6 +317,21 @@ TSCABALObeliskLaserFire:
 			Steel: 14
 			Superheavy: 9
 			Wood: 16
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 	Warhead@ShieldHit:
 		Duration: 8
 	Warhead@ShieldHitEffect:
@@ -332,6 +362,21 @@ TSCABALObeliskLaserFire:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	-Warhead@Laser_Heavy_ExtraDamage:
 TSHellfireTwin:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
@@ -450,6 +495,21 @@ TSHellfireTwin:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@HeavyCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 225
@@ -471,6 +531,21 @@ TSHellfireTwin:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@HeavyMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 300
@@ -493,6 +568,21 @@ TSHellfireTwin:
 			Steel: 21
 			Superheavy: 25
 			Wood: 15
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
 	Warhead@MediumMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
@@ -515,6 +605,21 @@ TSHellfireTwin:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -543,6 +648,21 @@ TSHellfireTwin:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@TankDestroyerCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 75
@@ -565,6 +685,21 @@ TSHellfireTwin:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 TSCABALEnlightedLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	-TargetActorCenter:
@@ -677,6 +812,21 @@ TSCABALEnlightedLaser:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@MediumFlameWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 111, 33, 11, 3
@@ -701,6 +851,21 @@ TSCABALEnlightedLaser:
 			Steel: 14
 			Superheavy: 9
 			Wood: 16
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
 	Warhead@ShieldHit:
 		Duration: 8
 	Warhead@ShieldHitEffect:
@@ -731,6 +896,21 @@ TSCABALEnlightedLaser:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 	-Warhead@Laser_Heavy_ExtraDamage:
 TSRobotHackingControl:
 	ReloadDelay: 50
@@ -927,6 +1107,21 @@ CabalReaperMissiles:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalReaperMissilesDemolition_LightPercentage: AreaDamagePercentage
@@ -956,6 +1151,21 @@ CabalReaperMissiles:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalReaperMissilesMissileHE_LightPercentage: AreaDamagePercentage
@@ -985,6 +1195,21 @@ CabalReaperMissiles:
 			Flak: 3
 			Plate: 2
 			Heroic: 1
+			FlyingInfantry: 7
+			CyborgLight: 7
+			CyborgMedium: 6
+			CyborgHeavy: 4
+			CyborgHeroic: 3
+			AntiAirInfantry: 3
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 11
+			ShipHeavy: 11
+			ShipSuperheavy: 11
+			AntiAirShip: 12
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 		Falloff: 100, 45, 30
 		Range: 0, 100, 150
 	Warhead@CollapsedCabalReaperMissilesMissileHE_MediumPercentage: AreaDamagePercentage
@@ -1014,6 +1239,21 @@ CabalReaperMissiles:
 			Flak: 7
 			Plate: 6
 			Heroic: 5
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
 	Warhead@MissileHE_Medium_Flat:
@@ -1094,6 +1334,21 @@ CabalReaperMissiles_AA:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalReaperMissiles_AADemolition_LightPercentage: AreaDamagePercentage
@@ -1122,6 +1377,21 @@ CabalReaperMissiles_AA:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalReaperMissiles_AAMissileHE_LightPercentage: AreaDamagePercentage
@@ -1150,6 +1420,21 @@ CabalReaperMissiles_AA:
 			Flak: 3
 			Plate: 2
 			Heroic: 1
+			FlyingInfantry: 7
+			CyborgLight: 7
+			CyborgMedium: 6
+			CyborgHeavy: 4
+			CyborgHeroic: 3
+			AntiAirInfantry: 3
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 11
+			ShipHeavy: 11
+			ShipSuperheavy: 11
+			AntiAirShip: 12
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 		Falloff: 100, 45, 30
 		Range: 0, 100, 150
 	Warhead@CollapsedCabalReaperMissiles_AAMissileHE_MediumPercentage: AreaDamagePercentage
@@ -1178,6 +1463,21 @@ CabalReaperMissiles_AA:
 			Flak: 7
 			Plate: 6
 			Heroic: 5
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
@@ -1253,6 +1553,21 @@ CabalHeavyReaperMissiles:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalHeavyReaperMissilesDemolition_LightPercentage: AreaDamagePercentage
@@ -1282,6 +1597,21 @@ CabalHeavyReaperMissiles:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalHeavyReaperMissilesMissileHE_HeavyPercentage: AreaDamagePercentage
@@ -1311,6 +1641,21 @@ CabalHeavyReaperMissiles:
 			Flak: 12
 			Plate: 11
 			Heroic: 10
+			FlyingInfantry: 17
+			CyborgLight: 17
+			CyborgMedium: 16
+			CyborgHeavy: 14
+			CyborgHeroic: 13
+			AntiAirInfantry: 12
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
 	Warhead@CollapsedCabalHeavyReaperMissilesMissileHE_MediumPercentage: AreaDamagePercentage
@@ -1340,6 +1685,21 @@ CabalHeavyReaperMissiles:
 			Flak: 7
 			Plate: 6
 			Heroic: 5
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
 	Warhead@MissileHE_Heavy_Flat:
@@ -1421,6 +1781,21 @@ CabalHeavyReaperMissiles_AA:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalHeavyReaperMissiles_AADemolition_LightPercentage: AreaDamagePercentage
@@ -1449,6 +1824,21 @@ CabalHeavyReaperMissiles_AA:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalHeavyReaperMissiles_AAMissileHE_HeavyPercentage: AreaDamagePercentage
@@ -1477,6 +1867,21 @@ CabalHeavyReaperMissiles_AA:
 			Flak: 12
 			Plate: 11
 			Heroic: 10
+			FlyingInfantry: 17
+			CyborgLight: 17
+			CyborgMedium: 16
+			CyborgHeavy: 14
+			CyborgHeroic: 13
+			AntiAirInfantry: 12
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			AntiAirShip: 21
+			SubmarineLight: 19
+			SubmarineHeavy: 19
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
 	Warhead@CollapsedCabalHeavyReaperMissiles_AAMissileHE_MediumPercentage: AreaDamagePercentage
@@ -1505,6 +1910,21 @@ CabalHeavyReaperMissiles_AA:
 			Flak: 7
 			Plate: 6
 			Heroic: 5
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
@@ -1609,6 +2029,21 @@ CabalArtilleryWalkerShell:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@HeavyCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 225
@@ -1631,6 +2066,21 @@ CabalArtilleryWalkerShell:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@MediumCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 150
@@ -1654,6 +2104,21 @@ CabalArtilleryWalkerShell:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -1683,6 +2148,21 @@ CabalArtilleryWalkerShell:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 CabalArtilleryWalkerShellUpgraded:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@6: ^TeslaChargedWeapon
@@ -1800,6 +2280,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
+			FlyingInfantry: 6
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 8
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 12
+			ShipHeavy: 10
+			ShipSuperheavy: 9
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 9
 	Warhead@HeavyCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 225
@@ -1822,6 +2317,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@MagicWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 		Falloff: 111, 88, 44, 22, 11
@@ -1847,6 +2357,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 12
 			Superheavy: 25
 			Wood: 10
+			FlyingInfantry: 17
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 11
+			ShipLight: 14
+			ShipMedium: 15
+			ShipHeavy: 17
+			ShipSuperheavy: 17
+			AntiAirShip: 14
+			SubmarineLight: 19
+			SubmarineHeavy: 21
 	Warhead@MediumCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 150
@@ -1870,6 +2395,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 15
 			Superheavy: 12
 			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
 	Warhead@MediumChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -1896,6 +2436,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -1925,6 +2480,21 @@ CabalArtilleryWalkerShellUpgraded:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
 CabalHunterKillerLasers:
@@ -2002,6 +2572,21 @@ CabalHunterKillerLasers:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -2086,6 +2671,21 @@ CabalHunterKillerLasers_elite:
 			Steel: 21
 			Superheavy: 25
 			Wood: 15
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -2240,6 +2840,21 @@ CabalDissolverSpray:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
 	Warhead@TankDestroyerCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 75
@@ -2263,6 +2878,21 @@ CabalDissolverSpray:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 CabalCommandoPlasma:
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
@@ -2565,6 +3195,21 @@ CabalManticoreMissiles_AA:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 13
+			ShipHeavy: 13
+			ShipSuperheavy: 12
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 11
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalManticoreMissilesAADemolition_LightPercentage: AreaDamagePercentage
@@ -2593,6 +3238,21 @@ CabalManticoreMissiles_AA:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+			FlyingInfantry: 6
+			CyborgLight: 10
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 7
+			AntiAirInfantry: 12
+			AntiAirVehicle: 7
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 10
+			ShipHeavy: 9
+			ShipSuperheavy: 9
+			AntiAirShip: 10
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalManticoreMissilesAAMissileHE_LightPercentage: AreaDamagePercentage
@@ -2621,6 +3281,21 @@ CabalManticoreMissiles_AA:
 			Flak: 3
 			Plate: 2
 			Heroic: 1
+			FlyingInfantry: 7
+			CyborgLight: 7
+			CyborgMedium: 6
+			CyborgHeavy: 4
+			CyborgHeroic: 3
+			AntiAirInfantry: 3
+			AntiAirVehicle: 13
+			AntiAirBuilding: 12
+			ShipLight: 14
+			ShipMedium: 11
+			ShipHeavy: 11
+			ShipSuperheavy: 11
+			AntiAirShip: 12
+			SubmarineLight: 10
+			SubmarineHeavy: 10
 		Falloff: 100, 45, 30
 		Range: 0, 100, 150
 	Warhead@CollapsedCabalManticoreMissilesAAMissileHE_MediumPercentage: AreaDamagePercentage
@@ -2649,6 +3324,21 @@ CabalManticoreMissiles_AA:
 			Flak: 7
 			Plate: 6
 			Heroic: 5
+			FlyingInfantry: 11
+			CyborgLight: 12
+			CyborgMedium: 11
+			CyborgHeavy: 9
+			CyborgHeroic: 8
+			AntiAirInfantry: 7
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 15
+			ShipHeavy: 15
+			ShipSuperheavy: 15
+			AntiAirShip: 16
+			SubmarineLight: 14
+			SubmarineHeavy: 14
 		Falloff: 100, 45, 30
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
@@ -2872,6 +3562,21 @@ CabalMothershipRockets:
 			Steel: 3
 			Superheavy: 4
 			Wood: 1
+			FlyingInfantry: 11
+			CyborgLight: 11
+			CyborgMedium: 9
+			CyborgHeavy: 8
+			CyborgHeroic: 6
+			AntiAirInfantry: 15
+			AntiAirVehicle: 6
+			AntiAirBuilding: 2
+			ShipLight: 3
+			ShipMedium: 3
+			ShipHeavy: 4
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 4
+			SubmarineHeavy: 4
 	Warhead@MediumChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -2897,6 +3602,21 @@ CabalMothershipRockets:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 	Warhead@ShieldHit:
 		Duration: 3
 	Warhead@ShieldHitEffect:
@@ -3013,6 +3733,21 @@ CabalAscendedRockets:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
 	Warhead@HeavyAAWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 250
@@ -3035,6 +3770,21 @@ CabalAscendedRockets:
 			Steel: 12
 			Superheavy: 21
 			Wood: 10
+			FlyingInfantry: 18
+			CyborgLight: 16
+			CyborgMedium: 17
+			CyborgHeavy: 18
+			CyborgHeroic: 17
+			AntiAirInfantry: 14
+			AntiAirVehicle: 18
+			AntiAirBuilding: 11
+			ShipLight: 13
+			ShipMedium: 14
+			ShipHeavy: 15
+			ShipSuperheavy: 16
+			AntiAirShip: 13
+			SubmarineLight: 17
+			SubmarineHeavy: 18
 	Warhead@HeavyMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 300
@@ -3057,6 +3807,21 @@ CabalAscendedRockets:
 			Steel: 21
 			Superheavy: 25
 			Wood: 15
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
 	Warhead@LightMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 100
@@ -3079,6 +3844,21 @@ CabalAscendedRockets:
 			Steel: 12
 			Superheavy: 16
 			Wood: 6
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
 	Warhead@MediumMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
@@ -3101,6 +3881,21 @@ CabalAscendedRockets:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -3128,6 +3923,21 @@ CabalAscendedRockets:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+			FlyingInfantry: 6
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 13
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
 CabalRavagerPlasma:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -3219,6 +4029,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 0
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
@@ -3260,6 +4085,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 3
 		ValidTargets: Ground, Water, Underwater, Air
 		AffectsParent: true
@@ -3290,6 +4130,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 6
 		ValidTargets: Ground, Water, Underwater, Air
 		AffectsParent: true
@@ -3320,6 +4175,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 9
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3350,6 +4220,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 12
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3376,6 +4261,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 15
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3401,6 +4301,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3426,6 +4341,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3451,6 +4381,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3476,6 +4421,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3501,6 +4461,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3526,6 +4501,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3551,6 +4541,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3576,6 +4581,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3601,6 +4621,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3626,6 +4661,21 @@ CabalMagicNuke:
 			Helicopter: 48
 			Bomber: 44
 			Fighter: 40
+			FlyingInfantry: 68
+			CyborgLight: 85
+			CyborgMedium: 85
+			CyborgHeavy: 86
+			CyborgHeroic: 86
+			AntiAirInfantry: 98
+			AntiAirVehicle: 74
+			AntiAirBuilding: 62
+			ShipLight: 63
+			ShipMedium: 68
+			ShipHeavy: 72
+			ShipSuperheavy: 73
+			AntiAirShip: 65
+			SubmarineLight: 74
+			SubmarineHeavy: 78
 		Delay: 18
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
@@ -3786,6 +4836,21 @@ CabalCommandoPlasmaNeutron:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 CabalCommandoPlasmaMk2Neutron:
 	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits: ^HeavyCannon
@@ -3888,6 +4953,21 @@ CabalCommandoPlasmaMk2Neutron:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
 CabalRavagerPlasmaNeutron:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -3996,6 +5076,21 @@ CabalBeholderLaser:
 			Steel: 20
 			Superheavy: 17
 			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@ShieldHit:
 		Duration: 10
 	Warhead@Smudge:

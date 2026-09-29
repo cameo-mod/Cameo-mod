@@ -1,3 +1,97 @@
+# 2026-09-29 - Devin (EMBER): CA-5 role split corrected per #648 review + preview refuses degraded trees
+
+Two fixes off Claude's review of #648:
+
+1. **§12.4 semantics:** `gunship` no longer excludes air-capable aircraft —
+   the hover+ground claim wins for dual-purpose helicopters (Orca, Apache,
+   Hind — the units that must hover over the frontline for §12.8 CAS).
+   `fighter` gained `DeriveNotField: Aircraft.CanHover any True`, so the
+   75-strong multirole helicopter fleet lands in gunship; the three
+   hovering pure-A2A units (zerg_devourer, zerg_scourge, terran_valkyrie)
+   keep `fighter` via explicit `BotRoles` tags in their ContentPacks
+   (explicit roles bypass DeriveNot* — BotRoleSets.cs:64). Faithful
+   re-measure: fighter 35 / gunship 78 / bomber 8, disjoint.
+2. **Tool integrity:** `derive_roles_preview.py` now refuses (exit 2)
+   when `engine/` sources are absent — a degraded tree can't see
+   engine-side trait subclasses or field declarations, so every role
+   report was wrong AND the typo guard fired on its own missing
+   evidence. `--allow-degraded` is the documented escape hatch
+   (same pattern as `tools/audit/environment.py` diverting run_all).
+
+# 2026-09-29 - Devin (EMBER): fixture speed raised insane -> maximum (maintainer order)
+
+The duel-gate fixtures and harness docs now lock `MapOptions.GameSpeed:
+maximum` (1 ms timestep, CPU-bound) instead of `insane` (10 ms). Both
+`ai_duel_gate_20260928` and `ai_duel_nuclear_winter` rules carry the lock;
+the harness's stalemate bound stays `time_limit*6000` ticks — a deliberate
+match-depth bound (Nova's reconciliation in #642), not the engine's full
+maximum-speed cap — keeping the same pessimistic-20tps wall bound +
+debug.log stall detector. Normative docs (AI_ARCHITECTURE §12.10,
+AI_MATCH_LOG, LESSONS_LEARNED, HANDOFF) now state `maximum`; historical
+series entries stay `insane` since those runs genuinely were. Records are
+only comparable within one speed: the pooled 7-6 hard-vs-classic baseline
+is an insane-era number and a fresh post-integration league at maximum
+becomes the new baseline.
+
+# 2026-09-29 - Devin (EMBER): derive_roles_preview.py — the §2.8 review gate, generalized
+
+`tools/ai/derive_roles_preview.py` now reads the live `BotRoleSets` spec
+from `mods/cameo/ai/ai.yaml` (roles, Derive*, Exclude, Targets, Apply)
+instead of a hardcoded rule table, and mirrors the C# `ResolveMembers`
+faithfully: trait base-class expansion from the C# sources, virtual
+`Weapons.ValidTargets` over armaments whose `RequiresCondition` evaluates
+under `VariableExpression.NoVariables` (a full boolean evaluator — `!x`,
+`&&`, `||`, `==`, `!=`, relations, parens — every identifier is 0, so the
+teslacoil-style nested conditions decide), C# field defaults for unset
+predicate fields, explicit `BotRoles.Roles` members, the `DeriveOnlyBuildable`
+queue gate, and the fieldSeen typo check (a predicate field no actor
+resolves prints ERROR + exit 1, matching the engine's YamlException).
+`--compare` diffs each role against its written `Targets` lists
+(both / written-only / derived-only). Measured on the resolved ruleset:
+fighter 106 / gunship 7 / bomber 8, pairwise-disjoint, 29 unroled armed
+air; artillery 50 / firesupport 37 via explicit `BotRoles`; refinery 32
+after the water-only `Building.TerrainTypes only Water` exclusion.
+`tools/tests/test_preview_role_derivation.py` locks the evaluator,
+predicate grammar and defaults tokenizer (24 tests).
+
+# 2026-09-28 - Devin (EMBER): CA-5 air-threat routing (first slice)
+
+CA-5 air doctrine (AI_ARCHITECTURE §12.8), the slice that needs no
+CA-1 dependency:
+
+- **Leader-aware threat read.** `MasterAiBotModule`'s 6e router now picks
+  the remembered-threat function by the leader's domain: ground leaders
+  pay `ArmyValue + DefenceValue`, airborne leaders pay `AntiAirValue`
+  (the "things that can hurt aircraft" layer `RegionMemory` already
+  keeps - AA guns AND air-to-air fighters both book it). The 6c risk
+  gate's ground read is unchanged.
+- **Air strike transit.** `AirAttackStateCA` routes a fresh target
+  through `SquadManager.RouteAroundThreat`: `Move` (`Fly`) orders chain
+  through the AA-skirting waypoints, then a queued `Attack` takes over.
+  A per-state `routedCurrentTarget` flag covers the AirIdle->AirAttack
+  entry where `newTarget` never fires; mid-`Fly` units are excluded
+  from the per-tick re-issue so transit is not cancelled every tick.
+- Aircraft skip the locomotor reachability filter (they overfly region
+  centers). Fogged waypoints the `Move` order rejects degrade to the
+  queued direct attack - never a stall.
+- Doctrine split (gunship CAS / fighter pick-off / bomber strike-team
+  target choice) still waits on CA-1 roles per §12.10 - this PR is
+  the transit/routing layer only.
+
+Tests: 304/304 C# (+`AirborneLeadersPayAntiAirNotGroundThreat`).
+Boot-gate: menu reached, zero new exceptions.
+
+A/B vs master (§12.10 gate), td_gdi mirror on A Nuclear Winter:
+first attempt burned 3 matches to a mid-batch worktree branch switch
+(new `mods/` met the old DLL — `Weapons.ValidTargets` predicate and
+`BotArsenalLedger` trait unresolved; lesson filed). Rerun on a
+consistent build: **hard 1–3** (win from spawn 1; losses were
+emergency-dominated ground wars — hard held `turtle` under sustained
+pressure, air arm small: 3–8 orcas per match). Pooling every match on
+this binary (1–0 pre-rebase + 1–3 dedicated + 2–0 league classic cell)
+= **4–3**, inside the 7–6 baseline's coin-flip band; extending the
+dedicated sample before calling the gate.
+
 # 2026-09-28 — Devin (EMBER): LG league harness — exploiter pins + run_league.py
 
 Maintainer-order work from AI_ARCHITECTURE §12 / AI_DEEP_RESEARCH §6.2 (LG,
@@ -29,33 +123,6 @@ my lane alongside CA-5 air doctrine and MI micro):
   expansion/turtle/tech; adaptive hard switched steamroller->turtle and
   won. Rigidity loses to adaptivity — the exposure the
   exploiter exists to prove.
-
-# 2026-09-28 - Devin (EMBER): CA-5 air-threat routing (first slice)
-
-CA-5 air doctrine (AI_ARCHITECTURE §12.8), the slice that needs no
-CA-1 dependency:
-
-- **Leader-aware threat read.** `MasterAiBotModule`'s 6e router now picks
-  the remembered-threat function by the leader's domain: ground leaders
-  pay `ArmyValue + DefenceValue`, airborne leaders pay `AntiAirValue`
-  (the "things that can hurt aircraft" layer `RegionMemory` already
-  keeps - AA guns AND air-to-air fighters both book it). The 6c risk
-  gate's ground read is unchanged.
-- **Air strike transit.** `AirAttackStateCA` routes a fresh target
-  through `SquadManager.RouteAroundThreat`: `Move` (`Fly`) orders chain
-  through the AA-skirting waypoints, then a queued `Attack` takes over.
-  A per-state `routedCurrentTarget` flag covers the AirIdle->AirAttack
-  entry where `newTarget` never fires; mid-`Fly` units are excluded
-  from the per-tick re-issue so transit is not cancelled every tick.
-- Aircraft skip the locomotor reachability filter (they overfly region
-  centers). Fogged waypoints the `Move` order rejects degrade to the
-  queued direct attack - never a stall.
-- Doctrine split (gunship CAS / fighter pick-off / bomber strike-team
-  target choice) still waits on CA-1 roles per §12.10 - this PR is
-  the transit/routing layer only.
-
-Tests: 304/304 C# (+`AirborneLeadersPayAntiAirNotGroundThreat`).
-Boot-gate pending at write time.
 
 # 2026-09-28 — Devin (EMBER): sixth personality wired, personality-switch unlatch, fog-honesty ratchet
 

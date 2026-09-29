@@ -181,6 +181,10 @@ terran_valkyrie:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranShipWeaponUpgrades
 	Inherits@weapon: ^TerranShipArmorUpgrades
+	# AI_ARCHITECTURE §12.4: a hovering pure-A2A unit — the CA-5 fighter derivation
+	# excludes CanHover, so the role is declared here (report-only role today).
+	BotRoles:
+		Roles: fighter
 	Tooltip:
 		Name: Valkyrie
 	Valued:

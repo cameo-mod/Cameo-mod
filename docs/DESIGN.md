@@ -4188,7 +4188,9 @@ Underwater-targetable (wearing Medium 8, Heavy 7, Light 3, None 2), and 22 fired
 underwater: torpedoes filed as `MissileAP` (7) and `MissileHE` (2), depth charges as `Demolition`
 (5) and `BlastCryo` (2). Membership is reviewed per unit, like the cyborg list. Adding the two
 types touches the generator, `HeavinessBell.cs` and `effective_heaviness.py` together
-(`test_derived_armor_types.py` pins all three to one list).
+(`test_derived_armor_types.py` pins all three to one list, and since 2026-09-29 also
+`audit_versus_profile.DERIVED_ARMORS`). **Done 2026-09-29:** both types are in all four lists and
+in every Versus table as the plain geomean.
 
 Ships are the new NAVAL ladder (maintainer 2026-09-26: a hull is part vehicle, part floating
 structure, so each ship type pairs a vehicle rung with a building rung); it is also the ladder the
@@ -4263,10 +4265,17 @@ so the 50% has something to apply to; (3) move actors onto the new types, per th
 (4) re-extract ledgers. Derived columns sit OUTSIDE the R16 geomean-100 normalisation, like Heroic,
 and are computed last (they are functions of normalised parents).
 
+**Status 2026-09-29:** the derived rows are in **every** Versus table. The generated templates
+carry all 15 derived columns (`splice_templates.py --all`), `derive_versus_columns.py` wrote the
+35,123 missing rows into the 42 weapon files, and `audit_derived_armor_columns.py` is at **0**
+(ratchet 0). No actor wears a derived type yet, so none of these rows changes a hit in play until
+step (3); the submarine rows take the AntiSub / Torpedo bonus when §12.0k item 5 builds those
+families (rule 3b).
+
 ⭐ **The runtime bell follows these rules (2026-09-26).** An earlier note here called the bell
 INERT; that was wrong, measured the same day: the `^Warhead_CannonAP` continuous pilot base is
 LIVE for ~10 weapons and ~20 more set `Heaviness:`. `HeavinessBell.cs` and its mirror
-`effective_heaviness.py` now (1) exclude all 13 derived columns from the tilt, (2) renormalise on
+`effective_heaviness.py` now (1) exclude every derived column (15 since the submarines, 2026-09-29) from the tilt, (2) renormalise on
 the GEOMETRIC mean (R16) instead of the arithmetic one, (3) re-derive Heroic = Plate x Scout / 200
 in the MAIN table only and every derived column as the geometric mean of its belled parents.
 `test_derived_armor_types.py` pins the generator, the C# and the Python mirror to ONE list, and
@@ -4907,6 +4916,42 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
   re-form guerrilla squads, spec ops their harass squads, the rest join the attack pool and its
   missions (`SquadManagerBotModuleCA.ReleaseDefenders` — the one release path).
 * `classic` keeps one guerrilla squad (25 %, size 10) and the fuzzy engage rule.
+
+### 19.1b Expansion, garrisons and scouts (maintainer rulings 2026-09-29) — binding
+
+> *"Always expand, always build more harvesters, always build more units, never be idle, always try
+> to pressure and attack, always build towards the enemy and towards the resources. Always occupy all
+> the resource fields."*
+
+* **Every resource field within building reach gets one refinery**, protected by towers.
+* **The base builder never idles**, and every building it places moves the base closer to the next
+  resource field. When nothing else is due, a line of power plants does it. The target field is
+  the one with the best `value × safety / time-until-it-pays` (the formula and its knobs are in
+  `AI_ARCHITECTURE.md` §12.13).
+* **Fog:** where fields are and how rich they start is public map data, like the spawn points.
+  Depletion, enemy refineries and enemy defences count only once seen.
+* **Creeping toward the enemy base** scales with difficulty (§19.1) **and** with the personality's
+  aggressiveness.
+* **A garrisoned building is a defence**, valued by its garrison, never by the house's own cost
+  (civilian houses have none, so the bot treated them as free and fed infantry into them).
+* **Scout replacements are rationed**, so they can never take over a factory (the `hard` bot built
+  ~72 Humvees and ~5 tanks per match). Evidence and design: `AI_ARCHITECTURE.md` §12.11–12.12.
+
+### 19.1c Personality top priorities: a lead over the enemy (maintainer 2026-09-29) — binding
+
+| personality | top priority |
+|---|---|
+| **Expansion** | out-earn the enemy |
+| **Steamroller** | out-produce the enemy |
+| **Guerrilla** | out-scout the enemy and hold more of the map |
+| **Rush** | keep the enemy under pressure: attack as early and as often as possible, destroy their economy |
+| **Turtle** | have more defences than the enemy |
+| **Tech** | tech up faster: start research sooner, have more upgrades |
+
+Each lead is measured against what the bot has **seen** of the enemy (fog-honest), leans that
+personality's budget toward its driver while it trails, and never zeroes the other priorities.
+This extends the personality's effect beyond the squad manager (§19), into the base builder, the
+unit builder and the research queue. Mechanism and owners: `AI_ARCHITECTURE.md` §12.14.
 
 ### 19.2 Learning, the Director and offline analysis (maintainer rulings 2026-09-28) — binding
 
