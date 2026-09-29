@@ -16,7 +16,7 @@ League spec (JSON):
       "factions": ["td_gdi"],
       "repeats": 4,
       "swap_bots": true,
-      "time_limit": 30
+      "time_limit": 3
     }
 
 `members` are the opposing bot types. The classic omniscient reference is
@@ -70,7 +70,7 @@ def load_spec(path: pathlib.Path) -> dict:
     spec.setdefault("factions", ["td_gdi"])
     spec.setdefault("repeats", 4)
     spec.setdefault("swap_bots", True)
-    spec.setdefault("time_limit", 30)
+    spec.setdefault("time_limit", 3)
     for m in spec["maps"]:
         resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else REPO_ROOT / m
         if not resolved.exists():
@@ -227,7 +227,7 @@ def main() -> int:
     parser.add_argument("--league-dir", type=pathlib.Path, required=True,
                         help="directory that holds one subdirectory per league cell")
     parser.add_argument("--repeats", type=int, default=None, help="override spec repeats")
-    parser.add_argument("--time-limit", type=int, default=None, choices=sorted({30, 60}),
+    parser.add_argument("--time-limit", type=int, default=None, choices=sorted({3, 6}),
                         help="override spec time_limit")
     parser.add_argument("--stall-timeout", type=int, default=400)
     parser.add_argument("--dry-run", action="store_true")

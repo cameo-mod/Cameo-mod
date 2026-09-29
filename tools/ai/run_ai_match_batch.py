@@ -33,10 +33,13 @@ bots "lost" — an honest draw, not an engine-invented winner).
 
 The fixture locks `gamespeed` to `maximum` (1 ms timestep): bot tests run
 uncapped at whatever tick rate the CPU sustains, so decisive matches resolve
-many times sooner in wall time. The in-game minute cap now spans ~10x more
-ticks than under the old insane lock, so under CPU contention a timeout match
-is terminated by the wall bound below rather than the engine cap —
-effectively a stalled draw that produces no record. The stall detector
+many times sooner in wall time. At maximum one in-game minute is 60,000 ticks,
+so the fixture offers TimeLimitOptions 0/1/2/3/4/6/9 (tick for tick the
+insane-era 0/10/20/30/40/60/90) and the default is 3 = 180,000 ticks: the
+ENGINE ends a stalemate at that depth and the match is recorded (both sides
+`lost`: a timed-out stalemate has no winner),
+where a 30-minute cap (1.8M ticks) left the harness to kill it with no record.
+The stall detector
 (debug.log goes quiet after its first write this run — arming skips the load
 phase) kills hung matches in ~2 minutes while a generous wall bound protects
 slow-but-live ones. Run
@@ -107,9 +110,11 @@ BENCHMARK_PREFIX = "ai-duel-batch-"
 # directory name inside the support dir.
 USER_MAP_DIR = os.path.join("maps", "cameo", "{DEV_VERSION}")
 
-# Engine TimeLimitManager only accepts these minute values (mod.yaml
-# TimeLimitOptions). --time-limit must be one of them.
-VALID_TIME_LIMITS = {0, 10, 20, 30, 40, 60, 90}
+# The fixture's TimeLimitManager.TimeLimitOptions (rules.yaml): the engine only accepts
+# these minute values. At maximum speed 1 min = 60,000 ticks, so they equal the
+# insane-era 0/10/20/30/40/60/90 caps tick for tick.
+VALID_TIME_LIMITS = {0, 1, 2, 3, 4, 6, 9}
+TICKS_PER_MINUTE = 60 * 1000  # maximum: Timestep 1 ms
 
 
 def fail(message: str, record=None) -> None:
@@ -615,7 +620,7 @@ def main() -> int:
     parser.add_argument("--swap-bots", action="store_true",
                         help="alternate which bot occupies which spawn per repeat — "
                              "the A/B acceptance requires both spawns covered")
-    parser.add_argument("--time-limit", type=int, default=30, choices=sorted(VALID_TIME_LIMITS))
+    parser.add_argument("--time-limit", type=int, default=3, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
@@ -678,13 +683,12 @@ def main() -> int:
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 
-    # The fixture locks gamespeed to maximum (1 ms timestep); the engine-side
-    # time cap therefore spans far more ticks than a CPU-contended box can ever
-    # tick. Keep the deliberate match-depth bound used under the insane lock:
-    # time_limit*6000 ticks at a pessimistic sustained 20 tps — a match that
-    # deep without a winner is a stalemate in practice, and the stall detector
-    # in run_match ends genuinely hung matches in ~2 minutes regardless.
-    cap_ticks = args.time_limit * 6000
+    # The fixture locks gamespeed to maximum (1 ms timestep) and scales its minute
+    # options so the engine cap equals the insane-era depth (3 min = 180,000 ticks):
+    # the engine ends a stalemate and records it. The wall bound allows that
+    # depth at a pessimistic sustained 20 tps; the stall detector in run_match ends
+    # genuinely hung matches in ~2 minutes regardless.
+    cap_ticks = args.time_limit * TICKS_PER_MINUTE
     timeout = cap_ticks // 20 + 300
 
     results = []

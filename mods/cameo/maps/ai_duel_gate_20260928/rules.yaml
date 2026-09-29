@@ -13,8 +13,13 @@ World:
 		GameSpeedDropdownLocked: True
 	# Hard stalemate cap: locked so every batch match terminates and
 	# NotifyTimerExpired (via ConquestVictoryConditions) decides by experience.
+	# Minutes convert to ticks at the game speed (TimeLimitManager: 60 x 1000/Timestep): at
+	# maximum 1 min = 60,000 ticks, so these options equal the insane-era 0/10/20/30/40/60/90
+	# caps tick for tick, and 3 = the old 30 (180,000 ticks). The ENGINE then ends a stalemate
+	# and records it (both sides `lost`), instead of the harness killing it with no record.
 	TimeLimitManager:
-		TimeLimitDefault: 30
+		TimeLimitOptions: 0, 1, 2, 3, 4, 6, 9
+		TimeLimitDefault: 3
 		TimeLimitLocked: True
 	# Referee gets nothing: no BaseActor and no SupportActors means
 	# SpawnStartingUnits spawns zero actors, so HasNoRequiredUnits fails the
