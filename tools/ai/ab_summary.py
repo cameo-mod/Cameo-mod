@@ -7,9 +7,13 @@ tools/ai/run_ai_match_batch.py collects them in <support-dir>/Logs/). The accept
 `classic` bot, so the question is "how often does bot type X win", not a faction/personality table.
 
 Usage:
-    python tools/ai/ab_summary.py <support-dir-or-jsonl> [...]
+    python tools/ai/ab_summary.py <support-dir-or-jsonl> [...] [--timestep N]
 
 A match whose two records both say "lost" is a timeout draw (the fixture's locked time limit).
+`--timestep N` keeps only records written at that engine timestep — the speed-era separator:
+the duel fixture ran `insane` (timestep 10) until 2026-09-29 and `maximum` (timestep 1) after,
+and a reused support dir holds both populations, which must not be pooled (OrderLatency
+differed too: 7 vs 10).
 The 95% interval is Wilson's, so 3 wins of 3 reads as "somewhere between 44% and 100%", which is
 the honest statement about three games.
 """
@@ -45,8 +49,23 @@ def main(argv: list[str]) -> int:
         print(__doc__)
         return 2
 
+    timestep = None
+    paths = []
+    it = iter(argv)
+    for arg in it:
+        if arg == "--timestep":
+            try:
+                timestep = int(next(it))
+            except StopIteration:
+                print(__doc__)
+                return 2
+        else:
+            paths.append(arg)
+
     games = collections.defaultdict(list)
-    for r in records(argv):
+    for r in records(paths):
+        if timestep is not None and r.get("timestep") != timestep:
+            continue
         games[r.get("game_uid")].append(r)
 
     stats = collections.defaultdict(lambda: {"won": 0, "lost": 0, "draw": 0, "spawn_wins": collections.Counter(), "ticks": []})
