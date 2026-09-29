@@ -14217,16 +14217,17 @@ biggest artillery squad (else an assault), holds at the protected squad's
 position within `SupportFollowRangeCells`, AttackMoves back when pushed out —
 escorts fight whatever threatens the parent instead of walking through it.
 
-**Artillery by role, not range**: `IsArtilleryUnit` is now
-`ArtilleryTypes.Contains` (the `artillery` role off `^ArtilleryTemplate`/
-`^ArtilleryTankTemplate`) — mid-range tanks can no longer be drafted into
-artillery squads just for reaching a range threshold. `ArtilleryMinRangeCells`
-is DEPRECATED (kept for yaml load-compat); `MaximumEnabledRange` stays for the
-combat predictor.
+**Artillery by role, not range**: `IsArtilleryUnit` prefers
+`ArtilleryTypes.Contains` when the role list is populated (the `artillery`
+role off `^ArtilleryTemplate`/`^ArtilleryTankTemplate`) and falls back to the
+old `ArtilleryMinRangeCells` range rule when it is empty — `@classic` keeps
+its written config byte-identical (the #633 convention: the A/B reference does
+not move). The apply itself stays report-only until #633's @instance-scoped
+Targets grammar lands and can fill only the six personalities.
 
 **Naval isolation completed**: `ProtectOwn` and `PrepositionDefenceTick` defence
 drafts now exclude `IsNavalUnit` — ships can no longer be pulled into ground
 protection squads.
 
-Boot-gate PASS (menu marker, 0 new exceptions); fog audit PASS (170 sites).
+Boot-gate PASS x2 (menu marker, 0 new exceptions); fog audit PASS (170 sites). Apply left report-only so the FS/artillery-role machinery ships INERT - naval isolation is the only live behavior delta.
 `git add -A` never used; scoped paths only.

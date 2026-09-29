@@ -238,8 +238,9 @@ Player:
 			firesupport: SquadManagerBotModuleCA.FireSupportTypes
 		# A role is applied after its additions are reviewed and a match with an affected faction (AI_ARCHITECTURE.md 2.8).
 		# refinery + conyard go together: a bot with neither listed keeps unit production paused forever.
-		# artillery + firesupport are actor-declared (^ArtilleryTemplate/^FireSupportTemplate, §12.4a).
-		Apply: harvester, refinery, conyard, artillery, firesupport
+		# artillery + firesupport stay REPORT-ONLY here: applying them needs the @instance-scoped
+		# Targets grammar (cameo-mod#633) so @classic keeps its written config unmoved.
+		Apply: harvester, refinery, conyard
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest

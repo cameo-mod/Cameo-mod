@@ -550,8 +550,17 @@ namespace OpenRA.Mods.CA.Traits
 		// for the combat predictor and other callers.
 		internal bool IsArtilleryUnit(Actor a)
 		{
-			return a != null && !a.Info.HasTraitInfo<AircraftInfo>() && !a.Info.HasTraitInfo<BuildingInfo>()
-				&& Info.ArtilleryTypes.Contains(a.Info.Name);
+			if (a == null || a.Info.HasTraitInfo<AircraftInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return false;
+
+			// The role list wins when populated; an unapplied instance (e.g. @classic,
+			// which stays on its written config) keeps the old range rule so the A/B
+			// reference does not move (cameo-mod#633 convention).
+			if (Info.ArtilleryTypes.Count > 0)
+				return Info.ArtilleryTypes.Contains(a.Info.Name);
+
+			return Info.ArtilleryMinRangeCells >= 0
+				&& MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
 		}
 
 		// A ship is a `naval` locomotor (the navalunit role's rule); hover and amphibious
