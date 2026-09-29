@@ -1,3 +1,28 @@
+# 2026-09-29 — Devin (NOVA): protection-release convergence (PR #632) + CA-3 A/B on post-#630 master
+
+Maintainer-contract converge (fleet REPLY_2026-09-28_claude_round_late, ORDERS
+addendum 9): two protection-release triggers collapse into ONE named
+`ProtectionIdleDissolveTicks` gating Claude's `ReleaseDefenders`
+(role-aware: guerrilla types -> guerrilla squads, harassers -> harass,
+rest -> attack pool) behind `PerceivedBaseThreat` + `PredictedThreats`.
+The temporary `DefenceReleaseQuietTicks` is deleted; `@classic` keeps 0.
+
+Bug ported from my dissolve A/B post-mortem: a protection squad whose
+target is valid-but-invisible (fled into fog) skipped the threat-free
+test (`closestEnemy == null && !IsTargetValid`), fell to the visibility
+flee, and looped Attack->Flee->Idle forever with the quiet timer reset
+every pass — permanently locked out of offense. The quiet test is now
+`!IsTargetValid || !IsTargetVisible`; DF-2 rally `holding` still returns
+early and the predicted-threat veto still applies.
+
+CA-3 state: RoleMix deficit-fill + primary-role relief preference
+(`e891ac837`) rebased onto post-#630 master (`3ed0712b2`); A/B batches
+relaunched vs control at `297c626f4` (old pre-#630 batches killed per
+"rebase and rerun" order). Role capture verified across all factions;
+`anti_infantry`/`support` are honestly empty for td_gdi (no explicit
+Infantry-typed weapons / no repair unit) and fall through to the next
+deficit.
+
 # 2026-09-28 — Devin (EMBER): LG league harness — exploiter pins + run_league.py
 
 Maintainer-order work from AI_ARCHITECTURE §12 / AI_DEEP_RESEARCH §6.2 (LG,
