@@ -1769,8 +1769,9 @@ Causes, each traced to code:
 3. **No artillery first, no tanks in front:** not built yet (CA-2 siege, CA-4 formation, §12.6–12.7).
 4. **Idle blobs:** `IdleBaseUnitsMaximum: 50` holds the army at base until squads form. The CA-2/CA-3
    owners take it with the commit rule.
-5. **A timid base:** `BaseCrawl` is a 50 % roll per building under 1,000 cost, aimed at a **random**
-   resource cell within 50 cells, else at the enemy building nearest the defence centre, found by
+5. **A timid base:** `BaseCrawl` takes every building under 1,000 cost (`BaseCrawlChance: 100` in
+   `ai.yaml`; the C# default is 50), but aims it at a **random** resource cell within 50 cells, else at
+   the enemy building nearest the defence centre, found by
    scanning `world.ActorsHavingTrait<Building>()`: omniscient. `ExpansionAppetiteHint` has no reader
    (§5). The engine `ResourceMapBotModule` also counts enemy units per field without fog. Fix: §12.13.
 
