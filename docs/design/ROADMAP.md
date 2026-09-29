@@ -114,11 +114,11 @@ the fog sequencing.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
-  - [ ] **L** CA-1 arsenal tracker — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
+  - [~] **L** CA-1 arsenal tracker (**shipped 2026-09-29:** `BotArsenalLedger` + stats shadow #624, `BotUnitProfiles`, roles `staticaa`/`airunit`/`navalunit` report-only #627; open: apply roles, in-match production weight) — `BotUnitRoles` + `power`/`defence`/`tech` tags, own
     per-type ledger via a Cameo shadow of `UpdatesPlayerStatistics`, fog-honest enemy ledger
     with defence ranges and a per-region heat map, log fields; then the in-match production
     weight. **Claude.**
-  - [ ] **M** CA-1b offline fitter → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
+  - [~] **M** CA-1b offline fitter (**tool shipped:** `tools/ai/fit_arsenal_priors.py`; the priors file waits on ledger matches) → committed `mods/cameo/ai/learned/arsenal_priors.yaml`
     (read at match start, §6.1); more harness matchups. **Claude** (Devin Cloud out of tokens).
   - [ ] **L** CA-2 siege and force preservation: stand-off outside remembered defence range,
     artillery first, commit when the area's defences are gone or the Versus-weighted force
@@ -131,20 +131,20 @@ the fog sequencing.
   - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
-  - [ ] **M** CP combat predictor: Versus-aware Lanchester strength, engage/retreat hysteresis,
+  - [~] **M** CP combat predictor (**shipped:** record-only #623; squads engage/retreat with it on the six genericbot personalities, `RetreatRatioPct` 0.1–1.0) — Versus-aware Lanchester strength, engage/retreat hysteresis,
     learned per-type factors; replaces the 6c scalar. **Claude.**
   - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
     layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
   - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
-  - [~] **M** LG league harness (past masters + exploiter personalities + maps/factions). **EMBER.**
+  - [x] **M** LG league harness (#625; exploiters get Hard's insurance since 2026-09-29) (past masters + exploiter personalities + maps/factions). **EMBER.**
     In flight: `tools/ai/run_league.py` (spec → per-cell batch → `league_summary.json`
     with pooled W-L, Wilson, per-member/spawn splits) + `exploit_rush` /
     `exploit_turtle` / `exploit_guerrilla` hidden bot types pinned at one pole
     via `BotPersonalityController.PinnedPersonalities`. "Past masters" freeze
     as hidden bot types, not old binaries (classic is the first such freeze).
   - [ ] **M** OM per-enemy-faction profiles with a bandit start (DESIGN §19.2). **Claude.**
-  - [ ] **L** DF predictive defence, lure and punish (AI_DEEP_RESEARCH §14): enemy-group
+  - [~] **L** DF predictive defence, lure and punish (**shipped 2026-09-29, A/B pending:** DF-1 tracking, DF-2 pre-position + hold + lure, DF-3/4 fast squads join or punish, release by threat) (AI_DEEP_RESEARCH §14): enemy-group
     tracking + heading extrapolation (record-only first), defence squad pre-positioned under own
     towers with a poke-and-fall-back lure, fast squads convert by threat and reach, punish the
     enemy base while its army is out. **Claude.**
