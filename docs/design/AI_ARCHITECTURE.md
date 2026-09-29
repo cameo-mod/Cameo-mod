@@ -635,10 +635,10 @@ repair) → **airfield** (maintainer's example). **Exceptions ruled 2026-09-29:*
   **conyard only**, kept out of the refinery lists as today.
 * WC2 Gnomish Inventor, Goblin Alchemist, Zerg Infested Command Center → **factory**.
 * `scrin_warp_chasm` → its own **epic** type: it produces `ScrinAdvancedVehicle`,
-  `ScrinWarpAircraft` and `ScrinCapitalAircraft` (the Hexapod), and the bot builds at most one.
-  ⚠ The rules give it **no build limit** (no `BuildLimit`, no `Buildable.BuildLimit`), although the
-  maintainer expects one per player: a gameplay question, flagged, not an AI change. Scrin's vehicle
-  factory is the Warp Gate; its airfield is the Gravity Stabilizer.
+  `ScrinWarpAircraft` and `ScrinCapitalAircraft` (the Hexapod). **One per player is a rule of the
+  actor, not of the bot** (maintainer 2026-09-29): it had no build limit at all, and #636 gives it
+  `Buildable.BuildLimit: 1`. The epic type's bot row therefore needs no limit of its own. Scrin's
+  vehicle factory is the Warp Gate; its airfield is the Gravity Stabilizer.
 * `futuretech_launchpad` → **airfield**. It produces only aircraft; an early scan matched the "ship"
   in `futuretech_harbingergunship`. Queue names must be compared whole, never as substrings.
 
