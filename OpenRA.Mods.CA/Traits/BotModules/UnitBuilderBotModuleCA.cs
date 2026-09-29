@@ -143,6 +143,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider compositionProvider;
+		BotUnitRoles unitRoles;
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
@@ -168,6 +169,7 @@ namespace OpenRA.Mods.CA.Traits
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
 			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
+			unitRoles = self.TraitOrDefault<BotUnitRoles>();
 
 			var referencedUnitTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 			if (Info.UnitsToBuild != null)
@@ -443,6 +445,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			if (deficit != null)
+				return deficit;
+
 			var unit = buildableThings.Random(world.LocalRandom);
 			return CanBuildMoreOfAircraft(unit) ? unit : null;
 		}
@@ -462,6 +468,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			if (deficit != null)
+				return deficit;
+
 			var myUnits = player.World
 				.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == player)
@@ -473,6 +483,70 @@ namespace OpenRA.Mods.CA.Traits
 						if (myUnits.Count(a => a == unit.Key) * 100 < unit.Value * myUnits.Count)
 							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
 								return world.Map.Rules.Actors[unit.Key];
+
+			return null;
+		}
+
+		// CA-3 (AI_ARCHITECTURE.md 12.5): the enabled personality's RoleMix is a target
+		// army composition by role, in percent of own mobile combat units. Each pick
+		// fills the largest deficit — counter production still gets first refusal, and
+		// a fully satisfied mix falls through to the proportional pick. Roles the mix
+		// does not name get RoleMixRoleFloorPct whenever this queue can serve them.
+		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			var mix = manager?.Info.RoleMix;
+			if (mix == null || mix.Count == 0 || unitRoles == null)
+				return null;
+
+			var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+			var total = 0;
+			foreach (var a in world.ActorsHavingTrait<IPositionable>())
+			{
+				if (a.IsDead || a.Owner != player)
+					continue;
+
+				var primary = PrimaryRoleOf(a.Info.Name);
+				if (primary == null)
+					continue;
+
+				counts[primary] = counts.GetValueOrDefault(primary) + 1;
+				total++;
+			}
+
+			foreach (var role in mix.Keys
+				.Concat(unitRoles.RoleMembers.Keys)
+				.Distinct(StringComparer.Ordinal)
+				.Select(r => (Role: r, Target: mix.TryGetValue(r, out var t) ? t : manager.Info.RoleMixRoleFloorPct))
+				.Where(rt => rt.Target > 0)
+				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total)))
+			{
+				var members = unitRoles.RoleMembers.GetValueOrDefault(role.Role);
+				if (members == null || members.Count == 0)
+					continue;
+
+				var options = buildableThings.Where(b => members.Contains(b.Name) &&
+					unitsToBuildShares.ContainsKey(b.Name) &&
+					(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+					ShouldBuild(b.Name, false) && CanBuildMoreOfAircraft(b)).ToList();
+
+				if (options.Count == 0)
+					continue;
+
+				return options.Random(world.LocalRandom);
+			}
+
+			return null;
+		}
+
+		string PrimaryRoleOf(string actorName)
+		{
+			if (!unitRoles.ActorRoles.TryGetValue(actorName, out var roles))
+				return null;
+
+			foreach (var role in BotUnitRoles.PrimaryRoleOrder)
+				if (roles.Contains(role))
+					return role;
 
 			return null;
 		}

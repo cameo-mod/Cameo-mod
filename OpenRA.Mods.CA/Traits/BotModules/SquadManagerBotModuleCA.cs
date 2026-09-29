@@ -134,6 +134,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("CA-3 (AI_ARCHITECTURE.md 12.5): target army composition by role, percent of own mobile combat units.",
+			"Production fills the largest deficit against this mix; absent or empty keeps the proportional pick.",
+			"Classic carries no mix on purpose — verbatim upstream behaviour.")]
+		public readonly Dictionary<string, int> RoleMix = null;
+
+		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
+			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
+		public readonly int RoleMixRoleFloorPct = 5;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 

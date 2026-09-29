@@ -3352,6 +3352,14 @@ Player:
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
 		RequiresCondition: genericbot && personality-rush
+		RoleMix:
+			frontline: 30
+			skirmisher: 25
+			anti_infantry: 15
+			anti_armour: 10
+			anti_air: 10
+			artillery: 5
+			scout: 5
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -3400,6 +3408,14 @@ Player:
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
 		RequiresCondition: genericbot && personality-turtle
+		RoleMix:
+			frontline: 35
+			artillery: 20
+			anti_armour: 15
+			anti_air: 15
+			anti_infantry: 5
+			skirmisher: 5
+			scout: 5
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -3448,6 +3464,14 @@ Player:
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
 		RequiresCondition: genericbot && personality-tech
+		RoleMix:
+			frontline: 30
+			anti_armour: 20
+			artillery: 15
+			anti_air: 15
+			gunship: 10
+			anti_infantry: 5
+			skirmisher: 5
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -3496,6 +3520,14 @@ Player:
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
 		RequiresCondition: genericbot && personality-expansion
+		RoleMix:
+			frontline: 35
+			anti_armour: 15
+			anti_air: 15
+			artillery: 10
+			skirmisher: 10
+			anti_infantry: 10
+			scout: 5
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -3544,6 +3576,13 @@ Player:
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
 		RequiresCondition: genericbot && personality-steamroller
+		RoleMix:
+			frontline: 45
+			anti_armour: 15
+			artillery: 15
+			anti_air: 15
+			anti_infantry: 5
+			skirmisher: 5
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -3591,6 +3630,13 @@ Player:
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
 		RequiresCondition: genericbot && personality-guerrilla
+		RoleMix:
+			skirmisher: 30
+			frontline: 20
+			anti_infantry: 15
+			anti_air: 15
+			scout: 10
+			gunship: 10
 		PreferMainTarget: false
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: false
