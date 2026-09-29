@@ -116,8 +116,13 @@ the fog sequencing.
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
   - [x] **S** Guerrilla band tagged on the actors (§2.8a, bands ruled 2026-09-29): 154 actors,
     `derive_guerrilla_roles.py` + `audit_guerrilla_roles.py`. Inert until applied. **Claude.**
-  - [ ] **S** Apply `guerrilla` (empties 7 × `GuerrillaTypes`, −1,776 central ids) after a Nuclear
-    Winter A/B; then the `count_central_ids.py --max` ratchet in `run_all.sh`. **Claude.**
+  - [~] **S** Apply `guerrilla` to the six personalities (`@classic` keeps its list), 5,825 → 4,289
+    central ids, `audit_central_ids.py` ratchet: branch `claude/role_guerrilla_apply`, lands after
+    its Nuclear Winter A/B. **Claude.**
+  - [ ] **M** §2.8b building-type defaults (ruled 2026-09-29: defaults + exceptions kept as pack
+    overrides): one line per building type fills ~940 pack rows. **Claude.**
+  - [ ] **S** §2.8b derive `AirSquadTargetTypes` from weapons (fixes `@guerrilla`'s missing rows). **Claude.**
+  - [ ] **M** §2.8b `UnitsToBuild` weights from stats + role mix, after CA-3 (ruled). **NOVA** + Claude.
   - [ ] **S** Apply `navalunit` after reviewing #627's misses: 19 ships are in ground squads today
     (§12.4a rule 3). **Claude.**
   - [ ] **M** Squad membership rulings §12.4a in `SquadManagerBotModuleCA`: artillery squads from the

@@ -507,7 +507,9 @@ adds ~600 ids. The seven `SquadManagerBotModuleCA` copies hold ~4,270 of the 5,7
 `BigAirThreats` 284, `AirUnitsTypes` 222, `NavalUnitsTypes` 215, `StaticAntiAirTypes` 177. A role
 that targets a SquadManager field drains all seven copies at once, so the squad lists come first;
 the base-builder lists (`PowerTypes` 33, `BarracksTypes` 30, `ProductionTypes` 88) are worth far
-less. A `--max` ratchet in `run_all.sh` follows the next role that lowers the count.
+less. **Ratchet since 2026-09-29:** `tools/audit/audit_central_ids.py` (in `run_all.sh`) fails when
+the count rises above its `CEILING` (4,289 after the guerrilla role); lower it in the commit that
+lowers the count, never raise it.
 
 ### 2.8a The guerrilla role: generated onto the actors, because the band is per faction
 
@@ -540,10 +542,51 @@ Two traps the generator handles, both caught while building it:
   such a child (10 today), so `--check` also catches a new child of a guerrilla.
 * **A child `Roles:` replaces the parent's.** A new block repeats every role the actor keeps.
 
-**Not applied yet.** Tagging is inert: `guerrilla` has no `Targets` entry. Applying it
-(`guerrilla: SquadManagerBotModuleCA.GuerrillaTypes` + `Apply`, and the seven 254-id lists
-emptied) removes **1,776 central ids** and changes behaviour (254 raiders → 154, the 51 aircraft
-leave the ground guerrilla squad), so it lands only after a Nuclear Winter A/B (§12.10 gate).
+**Applied (branch `claude/role_guerrilla_apply`, lands after its Nuclear Winter A/B):** the
+role targets the **six personality instances only**, `SquadManagerBotModuleCA@rush.GuerrillaTypes`
+… `@guerrilla.GuerrillaTypes`. `Targets` gained the `TraitType@instance.Field` form for this, so
+`@classic`, the A/B reference, keeps its written 254-id list and does not move. Their six written
+lists are deleted: **5,825 → 4,289 central ids**. Behaviour changes: 254 raiders → 154, and the 51
+aircraft leave the ground guerrilla squad. `bot-roles.log` shows `154 members, 0 written; ADDED 154`
+on each of the six and no `@classic` line.
+
+### 2.8b Generalising the whole file: tags on templates, numbers per building type (ruled 2026-09-29)
+
+**Maintainer question:** can `ai.yaml` stop listing units and buildings everywhere, and instead fill
+itself at runtime from tags on the templates, so that each faction's folder is complete on its own?
+Yes. The file splits into four layers, and each one gets the same answer: the C# derives the value
+at rules load from the actors that are loaded, and a pack writes only a deliberate exception.
+
+1. **Lists** (§2.8, built): roles derived from traits or declared on templates and actors. A role
+   fills every personality instance at once. That matters because MiniYaml has no inheritance for
+   a trait node inside `Player`, so yaml alone cannot share one list between personalities.
+2. **Per-building numbers** (new). Measured over the 34 packs' ~940 rows, by building type derived
+   from traits:
+
+   | field | uniform by type |
+   |---|---|
+   | `BuildingIntervals` | factory, refinery, barracks **100 %** (1500) |
+   | `BuildingLimits` | refinery **100 %** (10), radar **100 %** (1), repair **100 %** (1); factory and barracks 77 % (10) |
+   | `BuildingFractions` | radar and repair **100 %** (1), superweapon 83 % (1), refinery 82 % (15), barracks 74 % (15) |
+   | `BuildingDelays` | repair **100 %** (4500), radar 86 % (3000) |
+
+   **Ruled: defaults per building type, exceptions kept.** One line per type in the central file
+   (e.g. `refinery: Fraction 15, Limit 10, Interval 1500`) fills every loaded building of that
+   type. A pack row that equals its type default is deleted. A row that differs stays in its pack
+   as an explicit override, so no bot changes behaviour, and the list of overrides goes to the
+   maintainer for review.
+3. **Unit production weights** (`UnitsToBuild`, 1,421 rows; 67 % of them weight 1). **Ruled: derive
+   them from stats, after CA-3.** The personality sets a role mix (§12.5); a unit's weight follows
+   from its derived role and Versus profile. The hand rows stay until the derived mix wins an A/B.
+   CA-3 is NOVA's; the roles come from this lane.
+4. **Per-unit squad settings.** `AirSquadTargetTypes` is written 5 times in 17 packs, identically
+   (32 aircraft, 0 differences). **The `@guerrilla` personality never got the rows**, so its air
+   squads lack the setting for every one of them; `@classic` carries its own 28 rows in the central
+   file. The value (Ground / Aircraft / Naval) follows from each aircraft's weapons, so it can be
+   derived, which fixes the gap and removes the copies.
+
+The end state for ContentPacks: a pack holds its actors, and their tags come from the templates; an
+unloaded pack contributes nothing, and no faction needs its own `ai.yaml`.
 
 ---
 

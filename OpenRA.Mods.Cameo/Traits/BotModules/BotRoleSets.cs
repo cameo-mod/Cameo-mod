@@ -68,7 +68,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"YRSLAV carry Buildable for its tooltip but no Queue: their master drives them, not the bot.")]
 		public readonly bool DeriveOnlyBuildable = true;
 
-		[Desc("Role -> the module list fields it fills, as TraitType.Field. Every instance of that trait on this actor is filled.")]
+		[Desc("Role -> the module list fields it fills, as TraitType.Field (every instance of that trait on this actor)",
+			"or TraitType@instance.Field (that instance only, e.g. to leave the A/B reference bot's list as written).")]
 		public readonly Dictionary<string, string[]> Targets = [];
 
 		[Desc("Roles whose members are ADDED to their Targets. Any other role only reports to bot-roles.log.")]
@@ -110,13 +111,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					var dot = target.LastIndexOf('.');
 					if (dot <= 0)
-						throw new YamlException($"BotRoleSets on {info.Name}: target `{target}` must be TraitType.Field");
+						throw new YamlException($"BotRoleSets on {info.Name}: target `{target}` must be TraitType.Field or TraitType@instance.Field");
 
 					var traitType = target[..dot];
 					var fieldName = target[(dot + 1)..];
-					var traitInfos = info.TraitInfos<TraitInfo>().Where(t => t.GetType().Name == traitType + "Info").ToList();
+					var at = traitType.IndexOf('@');
+					var instance = at < 0 ? null : traitType[(at + 1)..];
+					if (at >= 0)
+						traitType = traitType[..at];
+
+					var traitInfos = info.TraitInfos<TraitInfo>()
+						.Where(t => t.GetType().Name == traitType + "Info" && (instance == null || t.InstanceName == instance)).ToList();
 					if (traitInfos.Count == 0)
-						throw new YamlException($"BotRoleSets on {info.Name}: role `{role}` targets `{traitType}`, which this actor does not have");
+						throw new YamlException($"BotRoleSets on {info.Name}: role `{role}` targets `{target[..dot]}`, which this actor does not have");
 
 					foreach (var ti in traitInfos)
 					{

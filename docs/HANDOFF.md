@@ -1,5 +1,20 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-29 — Claude: guerrilla role applied (A/B pending); ai.yaml generalisation ruled; lane handover
+
+`Agent: Claude-Local (Opus 5.5) · lanes: AI list rollout + the DF code review (took over from the ended session) · branch claude/role_guerrilla_apply`
+
+* **Guerrilla applied** to the six personalities through `Targets` of the new `TraitType@instance.Field`
+  form; `@classic` (A/B reference) keeps its list. Central ids **5,825 → 4,289**, now guarded by
+  `audit_central_ids.py` (lower-only `CEILING`). Draft PR: lands only after its Nuclear Winter A/B.
+* **Ruled (AI_ARCHITECTURE §2.8b):** per-building numbers become defaults per building type, with the
+  differing pack rows kept as overrides; `UnitsToBuild` weights derive from stats after CA-3. Measured:
+  intervals 100 % uniform for factory/refinery/barracks, limits 100 % for refinery/radar/repair.
+* **Bug found:** `@guerrilla` has no `AirSquadTargetTypes` rows (packs write 5 identical copies);
+  deriving it from the aircraft's weapons fixes it — queued.
+* **Reviewed #632 (NOVA):** changes requested — `DESIGN.md` §19.1a still names the deleted
+  `DefenceReleaseQuietTicks`, and the fogged-target quiet rule needs its A/B numbers.
+
 ## 2026-09-29 — Claude: guerrilla band on the actors; squad rulings for artillery, fire support and ships
 
 `Agent: Claude-Local (Opus 5.5) · lane: AI list rollout (§2.8) · branch claude/role_guerrilla`
