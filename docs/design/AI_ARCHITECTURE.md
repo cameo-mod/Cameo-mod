@@ -431,7 +431,12 @@ predicate that no trait can satisfy fails the load, so a typo can't silently mat
 is the primitive DAWN's Fransbot field spec (Class B: `Mobile.Locomotor`, `Production.Produces`)
 builds on. Every other role **reports** to `bot-roles.log`: its member count,
 what it would add, and what is written but not in the role. `tools/ai/derive_roles_preview.py`
-predicts the same numbers from the yaml. **First report (2026-09-27, report-only):**
+predicts the same numbers without booting a match: it re-implements `ResolveMembers` in
+Python (trait base-class expansion from the C# sources, the `Weapons.ValidTargets` union over
+`RequiresCondition`-enabled armaments via a full NoVariables boolean evaluator, C# field
+defaults, explicit `BotRoles` members, and the fieldSeen typo check — an unresolvable
+predicate field exits 1), and `--compare` diffs each role against its written `Targets`
+lists — the review gate before anything joins `Apply`. **First report (2026-09-27, report-only):**
 
 | Role → target | Written | Would add | Written, not derived |
 |---|---|---|---|

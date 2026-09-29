@@ -3,14 +3,36 @@
 The duel-gate fixtures and harness docs now lock `MapOptions.GameSpeed:
 maximum` (1 ms timestep, CPU-bound) instead of `insane` (10 ms). Both
 `ai_duel_gate_20260928` and `ai_duel_nuclear_winter` rules carry the lock;
-the harness's stalemate bound rescales to `time_limit*60000` ticks (the
-1000 tps nominal ceiling) keeping the same pessimistic-20tps wall bound +
+the harness's stalemate bound stays `time_limit*6000` ticks — a deliberate
+match-depth bound (Nova's reconciliation in #642), not the engine's full
+maximum-speed cap — keeping the same pessimistic-20tps wall bound +
 debug.log stall detector. Normative docs (AI_ARCHITECTURE §12.10,
 AI_MATCH_LOG, LESSONS_LEARNED, HANDOFF) now state `maximum`; historical
 series entries stay `insane` since those runs genuinely were. Records are
 only comparable within one speed: the pooled 7-6 hard-vs-classic baseline
 is an insane-era number and a fresh post-integration league at maximum
 becomes the new baseline.
+
+# 2026-09-29 - Devin (EMBER): derive_roles_preview.py — the §2.8 review gate, generalized
+
+`tools/ai/derive_roles_preview.py` now reads the live `BotRoleSets` spec
+from `mods/cameo/ai/ai.yaml` (roles, Derive*, Exclude, Targets, Apply)
+instead of a hardcoded rule table, and mirrors the C# `ResolveMembers`
+faithfully: trait base-class expansion from the C# sources, virtual
+`Weapons.ValidTargets` over armaments whose `RequiresCondition` evaluates
+under `VariableExpression.NoVariables` (a full boolean evaluator — `!x`,
+`&&`, `||`, `==`, `!=`, relations, parens — every identifier is 0, so the
+teslacoil-style nested conditions decide), C# field defaults for unset
+predicate fields, explicit `BotRoles.Roles` members, the `DeriveOnlyBuildable`
+queue gate, and the fieldSeen typo check (a predicate field no actor
+resolves prints ERROR + exit 1, matching the engine's YamlException).
+`--compare` diffs each role against its written `Targets` lists
+(both / written-only / derived-only). Measured on the resolved ruleset:
+fighter 106 / gunship 7 / bomber 8, pairwise-disjoint, 29 unroled armed
+air; artillery 50 / firesupport 37 via explicit `BotRoles`; refinery 32
+after the water-only `Building.TerrainTypes only Water` exclusion.
+`tools/tests/test_preview_role_derivation.py` locks the evaluator,
+predicate grammar and defaults tokenizer (24 tests).
 
 # 2026-09-28 - Devin (EMBER): CA-5 air-threat routing (first slice)
 

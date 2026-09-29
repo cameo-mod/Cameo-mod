@@ -219,8 +219,11 @@ Player:
 			# CA-5 doctrine split (AI_ARCHITECTURE 12.4): fighters carry an air-to-air
 			# weapon, gunships can loiter (CanHover) and strike ground only, bombers
 			# are the ground-only strikers that must egress. Report-only for now;
-			# air transports stay unroled. Measured on the resolved ruleset:
-			# fighter 106 / gunship 8 / bomber 8, disjoint, 28 unroled air.
+			# air transports stay unroled. Measured on the resolved ruleset with
+			# tools/ai/derive_roles_preview.py: fighter 106 / gunship 7 / bomber 8,
+			# disjoint, 29 unroled air — ra2_soviets_siegechopper stays unroled
+			# because its ground armament sits behind a deploy condition, exactly
+			# as the engine's NoVariables evaluation sees it.
 			fighter: Aircraft, AttackBase
 			gunship: Aircraft, AttackBase
 			bomber: Aircraft, AttackBase
