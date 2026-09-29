@@ -593,8 +593,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					lossesByRole[role] = lossesByRole.GetValueOrDefault(role) + cost;
 				foreach (var (role, cost) in sm.AwayLossesByRole)
 					awayLossesByRole[role] = awayLossesByRole.GetValueOrDefault(role) + cost;
-				if (sm.IsTraitEnabled())
-					attacksLaunched += sm.OffensiveSquadsLaunched;
+				attacksLaunched += sm.OffensiveSquadsLaunched;
 			}
 
 			// §12.14 PL telemetry (record-only): production and enemy-econ-kill windows off the

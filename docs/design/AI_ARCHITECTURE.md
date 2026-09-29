@@ -1895,6 +1895,7 @@ inputs, record-only — no decision reads them, and the enemy-side numbers stay 
 - `own.econ_destroyed_window`, `own.econ_destroyed` — seen-cost of enemy harvester/refinery types
   this bot's units destroyed, window and cumulative.
 - `own.attacks_launched`, `own.first_attack_tick`, `own.attacks_per_game_min` — cumulative
-  Rush/Harass/Guerrilla/Air/Naval squads across all enabled squad managers, the first launch's
+  Rush/Harass/Guerrilla/Air/Naval squads across all squad managers (counters persist while a
+  personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
   tick, and the per-minute rate.
 - `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).
