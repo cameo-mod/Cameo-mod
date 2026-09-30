@@ -44,6 +44,32 @@ def records(paths: list[str]):
                     yield json.loads(line)
 
 
+def arm_fingerprints(paths: list[str]):
+    """Per-batch fingerprint audit. One 'arm' is one batch_results.jsonl
+    (a support dir's batch history). Pre-LC7 files carry no fingerprint
+    field; LC7 files carry one per result. A file whose real results span
+    more than one fingerprint is a mixed arm — the batch crossed a mid-run
+    change and its matches are not one experiment. `fingerprint_drift`
+    tombstones are the abort trail, not data, and don't count as mixing."""
+    for arg in paths:
+        p = pathlib.Path(arg)
+        if p.is_file():
+            files = [p] if p.name == "batch_results.jsonl" else []
+        else:
+            files = list(p.rglob("batch_results.jsonl"))
+        for f in files:
+            arms = collections.defaultdict(lambda: {"results": 0, "drift_only": True})
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                e = arms[r.get("fingerprint")]
+                e["results"] += 1
+                if r.get("status") != "fingerprint_drift":
+                    e["drift_only"] = False
+            yield f, arms
+
+
 def main(argv: list[str]) -> int:
     if not argv:
         print(__doc__)
@@ -97,7 +123,19 @@ def main(argv: list[str]) -> int:
         mean = sum(s["ticks"]) // max(1, len(s["ticks"]))
         print(f"| `{bot}` | {s['won']} | {s['lost']} | {s['draw']} | {100 * s['won'] // max(1, n)}% | "
               f"{100 * lo:.0f}–{100 * hi:.0f}% | {dict(s['spawn_wins'])} | {mean} |")
-    return 0
+
+    mixed = False
+    for f, arms in arm_fingerprints(paths):
+        fps = sorted(k for k in arms if k) or [None]
+        real = [k for k in arms if k and not arms[k]["drift_only"]]
+        for fp in fps:
+            tag = f"{fp} ({arms[fp]['results']} results)" if fp else "none recorded (pre-LC7)"
+            print(f"arm fingerprint {tag}: {f}")
+        if len(real) > 1:
+            print(f"FAIL: mixed fingerprints within one arm in {f}: "
+                  + ", ".join(f"{k} ({arms[k]['results']} results)" for k in real))
+            mixed = True
+    return 1 if mixed else 0
 
 
 if __name__ == "__main__":

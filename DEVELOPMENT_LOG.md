@@ -1,3 +1,19 @@
+# 2026-09-30 (pm3) — Devin (EMBER): LC7 review items — ab_summary arm fingerprints
+
+- #671 review item: `ab_summary` now audits arm fingerprints. One "arm" =
+  one `batch_results.jsonl`; it prints each arm's fingerprint id (+result
+  count) and FAILS (exit 1) when a single file's real results span more
+  than one fingerprint — the mixed-arm corruption signature LC7 prevents
+  going forward. `fingerprint_drift` tombstones don't count as mixing
+  (they're the abort working as designed); pre-LC7 files report
+  `none recorded (pre-LC7)`. Per-`player.home` split lives on #674
+  (devin/ember/ab-spawn-split) — separate tools PR, merges cleanly.
+- Merged origin/master (post-#663, `7b89bb899`) into this branch;
+  devlog prepend conflict only.
+- 4 new tests (ArmFingerprintSummaryTests): 33/33 harness green.
+  Verified live: drift-demo dir prints its tombstone fp, league-4's four
+  pre-LC7 batch files print `none recorded`. Tools-only; boot-gate N/A.
+
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
 - Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in

@@ -403,3 +403,68 @@ class FingerprintTests(unittest.TestCase):
             self.assertIn("config", batch.fingerprint_drift(a, b))
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
+
+
+class ArmFingerprintSummaryTests(unittest.TestCase):
+    """ab_summary's arm check: fingerprints live in batch_results.jsonl; a
+    single arm file must hold exactly one fingerprint over its real results."""
+
+    def _arm_dir(self, td, rows):
+        import json as _json
+        p = pathlib.Path(td) / "support"
+        p.mkdir(parents=True, exist_ok=True)
+        with open(p / "batch_results.jsonl", "w", encoding="utf-8") as f:
+            for r in rows:
+                f.write(_json.dumps(r) + "\n")
+        return td
+
+    def _run(self, td):
+        import contextlib
+        import io
+        sys.path.insert(0, str(ROOT / "tools" / "ai"))
+        import ab_summary
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            rc = ab_summary.main([td])
+        return rc, out.getvalue()
+
+    def test_single_fingerprint_arm_prints_id(self):
+        with tempfile.TemporaryDirectory() as td:
+            self._arm_dir(td, [
+                {"variant": "v", "status": "ok", "fingerprint": "aaaa1111bbbb"},
+                {"variant": "v", "status": "ok", "fingerprint": "aaaa1111bbbb"},
+            ])
+            rc, out = self._run(td)
+        self.assertEqual(rc, 0)
+        self.assertIn("arm fingerprint aaaa1111bbbb (2 results)", out)
+        self.assertNotIn("FAIL", out)
+
+    def test_mixed_real_fingerprints_fail(self):
+        with tempfile.TemporaryDirectory() as td:
+            self._arm_dir(td, [
+                {"variant": "v", "status": "ok", "fingerprint": "aaaa1111bbbb"},
+                {"variant": "v", "status": "ok", "fingerprint": "cccc2222dddd"},
+            ])
+            rc, out = self._run(td)
+        self.assertEqual(rc, 1)
+        self.assertIn("FAIL: mixed fingerprints within one arm", out)
+
+    def test_drift_tombstone_tail_does_not_fail(self):
+        # An aborted batch records the NEW fingerprint on its drift tombstone;
+        # that file is the abort working as designed, not a mixed arm.
+        with tempfile.TemporaryDirectory() as td:
+            self._arm_dir(td, [
+                {"variant": "v", "status": "ok", "fingerprint": "aaaa1111bbbb"},
+                {"variant": "v", "status": "fingerprint_drift", "fingerprint": "cccc2222dddd"},
+            ])
+            rc, out = self._run(td)
+        self.assertEqual(rc, 0)
+        self.assertIn("cccc2222dddd", out)
+        self.assertNotIn("FAIL", out)
+
+    def test_pre_lc7_file_reports_none(self):
+        with tempfile.TemporaryDirectory() as td:
+            self._arm_dir(td, [{"variant": "v", "status": "ok"}])
+            rc, out = self._run(td)
+        self.assertEqual(rc, 0)
+        self.assertIn("none recorded (pre-LC7)", out)
