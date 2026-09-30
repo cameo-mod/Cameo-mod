@@ -14842,3 +14842,28 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
 - Outstanding non-DAWN: `cameo-engine` branch 103 commits behind the pinned
   revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
   live A/B trees stay frozen for their owners.
+
+## 2026-09-30 — CA-2b verdict: BehaviourEnabled LOSES its A/B
+
+Pooled ca2b2+ca2b3 (17 matches/arm, identical pre-#660 base, maximum, both
+orientations, phantom-retry): **ctrl hard 10-7 (58%) vs cand hard 6-11 (35%)**.
+Mirror-faction cells (faction-clean per maintainer ruling): ctrl 5-2 / cand 4-6.
+
+The machinery is verified working — squads form (F1 holds), verdicts compute
+fog-honestly, orders are served. The failure is POLICY: a served retreat
+dissolves the squad; dissolved-squad units re-enter the idle pool, never
+re-mass, and classic's omniscient press snowballs. Cand matches end 23% faster
+(28.8k vs 37.4k ticks). §12.6's commit path presumes artillery-first + tank
+screens the production layer does not deliver (army mix 77% inf / 5% heavy /
+4% arty on the pre-#660 base — pre-#647 rationing).
+
+Decision: `BehaviourEnabled` stays OFF (record-only advisor retained for
+telemetry). Next levers in order: (a) production composition upstream
+(#647 rationing + CA-3 role-mix), (b) CA-2c's SiegeMemoryEnabled as its own
+A/B once the army can actually siege, (c) stand-off→artillery-first policy
+revision when CA-3/CA-4 land.
+
+Also: fbal-cc classic-vs-classic probe stopped per maintainer order
+(rebalance later); 6 records banked before kill: Nod-classic beat Gdi-classic
+on both cross orientations (2-0, thin n) and GDI-mirror spawn1 won all 4 —
+kept as provenance, not a balance claim.
