@@ -304,6 +304,42 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Actor tags the support squads prefer to target.")]
 		public readonly HashSet<string> SupportPriorityTags = [];
 
+		[Desc("CA-5 (AI_ARCHITECTURE.md 12.8): split air units into fighter/gunship/bomber doctrine squads instead of one generic Air pool per actor type. Off = unchanged classic behaviour.")]
+		public readonly bool AirDoctrineEnabled = false;
+
+		[Desc("LC6: log a FOGCANARY-VIOLATION line when a decision consumes an actor this bot cannot observe (unfiltered enumeration or stale target). Diagnostic only - behavior unchanged.")]
+		public readonly bool FogCanaryEnabled = false;
+
+		[Desc("12.8: air-superiority role - hunt enemy aircraft, then pick off isolated units. Filled by BotRoleSets.")]
+		public readonly HashSet<string> FighterTypes = [];
+
+		[Desc("12.8: close air support role - attach to the main assault and engage what the frontline engages. Filled by BotRoleSets.")]
+		public readonly HashSet<string> GunshipTypes = [];
+
+		[Desc("12.8: strike-team role - mass, hit tag-priority targets through the air-threat router, regroup. Filled by BotRoleSets.")]
+		public readonly HashSet<string> BomberTypes = [];
+
+		[Desc("Bomber strike teams wait for this many members before flying (12.8: 2-4 aircraft).")]
+		public readonly int BomberSquadMinSize = 2;
+
+		[Desc("Bomber strike team cap; further bombers form another team.")]
+		public readonly int BomberSquadMaxSize = 4;
+
+		[Desc("Fighters pick off an enemy unit that has at most this many armed allies within DangerScanRadius of it (12.8: isolated targets).")]
+		public readonly int FighterPickoffMaxEscorts = 3;
+
+		[Desc("Gunships engage enemies within this many cells of their anchor squad's centre (12.8 CAS radius).")]
+		public readonly int GunshipCASRadiusCells = 8;
+
+		[Desc("Priority target tags for fighter pick-offs (e.g. harvester).")]
+		public readonly HashSet<string> FighterPriorityTags = [BotTargetTags.Harvester];
+
+		[Desc("Priority target tags for gunship CAS scans near the frontline: kill enemy artillery and straying harvesters first.")]
+		public readonly HashSet<string> GunshipPriorityTags = [BotTargetTags.Artillery, BotTargetTags.Harvester];
+
+		[Desc("Priority target tags for bomber strike teams (12.8 strike list: superweapon, conyard, production, refinery, power, harvester, artillery). 'defence' exists in BotTargetTags but is siege-conditional and stays off.")]
+		public readonly HashSet<string> BomberPriorityTags = [BotTargetTags.Superweapon, BotTargetTags.Conyard, BotTargetTags.Production, BotTargetTags.Refinery, BotTargetTags.Power, BotTargetTags.Harvester, BotTargetTags.Artillery];
+
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
 
@@ -504,6 +540,9 @@ namespace OpenRA.Mods.CA.Traits
 			return type switch
 			{
 				SquadCAType.Air => Info.AirPriorityTags,
+				SquadCAType.Fighter => Info.FighterPriorityTags,
+				SquadCAType.Gunship => Info.GunshipPriorityTags,
+				SquadCAType.Bomber => Info.BomberPriorityTags,
 				SquadCAType.Artillery => Info.ArtilleryPriorityTags,
 				SquadCAType.Naval => Info.NavalPriorityTags,
 				SquadCAType.Rush => Info.RushPriorityTags,
@@ -589,6 +628,31 @@ namespace OpenRA.Mods.CA.Traits
 		// rule as the risk gate.
 		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
 
+		// LC6 semantic fog canary: when enabled, every actor a decision consumes must
+		// already be observable to this bot — an unfiltered enumeration, a stale
+		// remembered target, or a gate counted on an unseen unit all surface as a
+		// greppable FOGCANARY-VIOLATION line. Log-only: behavior is unchanged, the
+		// line is the evidence the harness greps for.
+		internal void CanaryObserved(Actor a, string site)
+		{
+			if (!Info.FogCanaryEnabled || a == null)
+				return;
+
+			FogCanaryViolation(FoggedScans, IsNotHiddenUnit(a), site, a.Info.Name,
+				line => AIUtils.BotDebug("AI ({0}): {1}", Player.ClientIndex, line));
+		}
+
+		// The pure core so tests can drive it without an Actor/World: a violation is
+		// exactly "fog is binding AND the consumed actor was not observable".
+		public static bool FogCanaryViolation(bool foggedScans, bool observed, string site, string actorName, Action<string> log)
+		{
+			if (!foggedScans || observed)
+				return false;
+
+			log?.Invoke($"FOGCANARY-VIOLATION site={site} actor={actorName} — decision consumed an unseen actor");
+			return true;
+		}
+
 		// 6e risk routing: ask region-memory routers for waypoints that skirt
 		// remembered threat. Returns null (caller keeps direct routing) when
 		// disabled, no router answers, or the router has no useful detour.
@@ -650,6 +714,63 @@ namespace OpenRA.Mods.CA.Traits
 		// ground or air squad even when the list misses it.
 		internal bool IsNavalUnit(Actor a) =>
 			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
+
+		// CA-5 (12.8): air-family squad bookkeeping (NewUnits/Waiting/Rearming) applies
+		// to the generic Air squads and the three doctrine types alike.
+		internal static bool IsAirFamily(SquadCAType type) =>
+			type is SquadCAType.Air or SquadCAType.Fighter or SquadCAType.Gunship or SquadCAType.Bomber;
+
+		// CA-5 (12.8): which squad an air actor joins when AirDoctrineEnabled splits the
+		// air pool by role. Unroled air (transports, scouts) stays in generic Air squads.
+		// Pure so tests can drive it without a World.
+		public static SquadCAType AirSquadTypeFor(
+			bool doctrineEnabled, string actorName,
+			IReadOnlySet<string> fighterTypes, IReadOnlySet<string> gunshipTypes, IReadOnlySet<string> bomberTypes)
+		{
+			if (!doctrineEnabled)
+				return SquadCAType.Air;
+
+			if (fighterTypes.Contains(actorName))
+				return SquadCAType.Fighter;
+
+			if (gunshipTypes.Contains(actorName))
+				return SquadCAType.Gunship;
+
+			if (bomberTypes.Contains(actorName))
+				return SquadCAType.Bomber;
+
+			return SquadCAType.Air;
+		}
+
+		// CA-5 ordering rule (12.8): a WRITTEN GuerrillaTypes listing outranks a derived
+		// fighter/gunship/bomber role — but only when the doctrine is on. With the flag
+		// off the master order stands (the air branch runs before guerrilla), so
+		// @classic's overlap actors keep routing to Air squads exactly as written.
+		public static bool GuerrillaOutranksAir(
+			bool doctrineEnabled, string actorName, IReadOnlySet<string> guerrillaTypes)
+		{
+			return doctrineEnabled && guerrillaTypes.Contains(actorName);
+		}
+
+		// A member of the written AirUnitsTypes list or - only when the doctrine split is
+		// enabled - an actor the role derivation classes as fighter/gunship/bomber. The
+		// role lists heal actors the written list misses, but never pull one out of
+		// a role squad into generic Air.
+		internal bool IsAirUnit(Actor a)
+		{
+			if (a == null)
+				return false;
+
+			if (Info.AirUnitsTypes.Contains(a.Info.Name))
+				return true;
+
+			return AirSquadTypeFor(
+				Info.AirDoctrineEnabled, a.Info.Name,
+				Info.FighterTypes, Info.GunshipTypes, Info.BomberTypes) != SquadCAType.Air;
+		}
+
+		internal SquadCAType AirSquadTypeFor(string actorName) =>
+			AirSquadTypeFor(Info.AirDoctrineEnabled, actorName, Info.FighterTypes, Info.GunshipTypes, Info.BomberTypes);
 
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 		static readonly BitSet<TargetableType> GroundTargetTypes = new("Ground");
@@ -1442,7 +1563,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 
-				if (s.Type == SquadCAType.Air)
+				if (IsAirFamily(s.Type))
 				{
 					s.NewUnits.RemoveWhere(unitCannotBeOrdered);
 					s.RearmingUnits.RemoveWhere(unitCannotBeOrdered);
@@ -1468,7 +1589,8 @@ namespace OpenRA.Mods.CA.Traits
 			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
-				or SquadCAType.Air or SquadCAType.Naval)
+				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
+				or SquadCAType.Gunship or SquadCAType.Bomber)
 				OffensiveSquadsLaunched++;
 			return ret;
 		}
@@ -1695,27 +1817,43 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
-				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
+				else if (IsAirUnit(a))
 				{
-					var airSquads = Squads.Where(s => s.Type == SquadCAType.Air);
-					var matchingAirSquadFound = false;
-
-					foreach (var airSquad in airSquads)
+					// CA-5 (12.8): with the doctrine split on, fighter/gunship/bomber
+					// members form role squads; unroled air keeps generic Air squads.
+					// Bomber teams are capped (a full team becomes its own strike team);
+					// role squads merge across actor types - the doctrine is the
+					// formation, not the chassis - but a same-name squad is preferred.
+					// Ordering rule: a WRITTEN GuerrillaTypes listing outranks a
+					// derived air role, but only when the doctrine is on - flag off
+					// keeps master's air-first order so @classic is unmoved.
+					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
+						&& guerrillaRoll && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
-						if (airSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						airGuerrilla.Units.Add(new UnitWposWrapper(a));
+						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
+					}
+					else
+					{
+						var squadType = AirSquadTypeFor(a.Info.Name);
+						var openSquads = Squads.Where(s => s.Type == squadType &&
+							(squadType != SquadCAType.Bomber || s.Units.Count < Info.BomberSquadMaxSize)).ToList();
+
+						var airSquad = openSquads.FirstOrDefault(s => s.Units.Any(u => u.Actor.Info.Name == a.Info.Name));
+						if (airSquad == null && squadType != SquadCAType.Air)
+							airSquad = openSquads.MinByOrDefault(s => s.Units.Count);
+
+						if (airSquad != null)
 						{
 							airSquad.Units.Add(new UnitWposWrapper(a));
 							airSquad.NewUnits.Add(a);
-							matchingAirSquadFound = true;
-							break;
 						}
-					}
-
-					if (!matchingAirSquadFound)
-					{
-						var newAirSquad = RegisterNewSquad(bot, SquadCAType.Air);
-						newAirSquad.Units.Add(new UnitWposWrapper(a));
-						newAirSquad.NewUnits.Add(a);
+						else
+						{
+							var newAirSquad = RegisterNewSquad(bot, squadType);
+							newAirSquad.Units.Add(new UnitWposWrapper(a));
+							newAirSquad.NewUnits.Add(a);
+						}
 					}
 				}
 				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)

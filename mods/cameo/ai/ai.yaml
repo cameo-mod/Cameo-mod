@@ -219,23 +219,35 @@ Player:
 			# CA-5 doctrine split (AI_ARCHITECTURE 12.4): gunships are the hovering
 			# ground-strikers (CanHover + a ground weapon — helicopters win this
 			# claim even when they can also hit air, per the 12.4 ruling), fighters
-			# are the non-hovering air-to-air capable, bombers are non-hovering
-			# ground-only strikers that must egress. The three hovering pure-A2A
-			# units (zerg_devourer, zerg_scourge, terran_valkyrie) carry explicit
-			# BotRoles: fighter tags in their ContentPacks — CanHover excludes them
-			# from derivation but §12.4 classes them fighters. Report-only for now;
-			# air transports stay unroled. Measured on the resolved ruleset with
-			# tools/ai/derive_roles_preview.py: fighter 35 / gunship 78 / bomber 8,
-			# disjoint — Deploy-gated armaments evaluate false under NoVariables
-			# exactly as the engine sees them, so e.g. ra2_soviets_siegechopper
-			# stays unroled until its deploy condition is granted.
+			# are the non-hovering air interceptors — a DEDICATED AA armament
+			# (Weapons.AirArmament any dedicated) whose ValidTargets may only hit
+			# air, per the maintainer ruling 2026-09-30 — and bombers are the
+			# non-hovering ground strikers. Multirole aircraft whose air-capable
+			# gun ALSO hits ground/water are `auxiliary` — defensive only — so
+			# they stay bombers (e.g. japan_japanesebomber's ZeroFighterChainGun),
+			# while purpose-AA strikers like td_gdi_firehawk go fighter and can
+			# snipe high-value aircraft. The three hovering pure-A2A units
+			# (zerg_devourer, zerg_scourge, terran_valkyrie) carry explicit
+			# BotRoles: fighter tags in their ContentPacks — CanHover excludes
+			# them from derivation but §12.4 classes them fighters. Applied to
+			# the CA-5 doctrine fields; AirDoctrineEnabled (off everywhere) keeps
+			# that inert. Air transports stay unroled. Measured on the resolved
+			# ruleset with tools/ai/derive_roles_preview.py:
+			# fighter 7 / gunship 78 / bomber 36, disjoint — deploy-gated
+			# armaments evaluate false under NoVariables exactly as the engine
+			# sees them, so e.g. ra2_soviets_siegechopper stays unroled until its
+			# deploy condition is granted.
 			fighter: Aircraft, AttackBase
 			gunship: Aircraft, AttackBase
 			bomber: Aircraft, AttackBase
 		DeriveHasField:
 			staticaa: Weapons.ValidTargets any Air
 			navalunit: Mobile.Locomotor any naval
-			fighter: Weapons.ValidTargets any Air|Aircraft
+			# Weapons.AirArmament: `dedicated` = a purpose-built AA armament whose
+			# weapon may ONLY hit air (firehawk's missiles — real interceptors);
+			# `auxiliary` = air-capable guns that also hit ground/water (the
+			# japanese bomber's chaingun — defensive only, stays a bomber).
+			fighter: Weapons.AirArmament any dedicated
 			gunship: Aircraft.CanHover any True, Weapons.ValidTargets any Ground
 			bomber: Weapons.ValidTargets any Ground
 		DeriveNot:
@@ -246,7 +258,7 @@ Player:
 		DeriveNotField:
 			refinery: Building.TerrainTypes only Water
 			fighter: Aircraft.CanHover any True
-			bomber: Aircraft.CanHover any True, Weapons.ValidTargets any Air|Aircraft
+			bomber: Aircraft.CanHover any True, Weapons.AirArmament any dedicated
 		Targets:
 			harvester: HarvesterBotModuleCA.HarvesterTypes, ResourceMapBotModule.HarvesterTypes, SquadManagerBotModuleCA.ExcludeFromSquadsTypes
 			refinery: HarvesterBotModuleCA.RefineryTypes, BaseBuilderBotModuleCA.RefineryTypes, ResourceMapBotModule.RefineryTypes
@@ -255,9 +267,9 @@ Player:
 			staticaa: SquadManagerBotModuleCA.StaticAntiAirTypes
 			airunit: SquadManagerBotModuleCA.AirUnitsTypes
 			navalunit: SquadManagerBotModuleCA.NavalUnitsTypes
-			fighter: SquadManagerBotModuleCA.AirUnitsTypes
-			gunship: SquadManagerBotModuleCA.AirUnitsTypes
-			bomber: SquadManagerBotModuleCA.AirUnitsTypes
+			fighter: SquadManagerBotModuleCA.FighterTypes
+			gunship: SquadManagerBotModuleCA.GunshipTypes
+			bomber: SquadManagerBotModuleCA.BomberTypes
 			artillery: SquadManagerBotModuleCA.ArtilleryTypes
 			firesupport: SquadManagerBotModuleCA.FireSupportTypes
 			# the six personalities only: @classic, the A/B reference, keeps its list as written (§2.8a)
@@ -267,7 +279,9 @@ Player:
 		# artillery + firesupport stay REPORT-ONLY here: applying them needs the @instance-scoped
 		# Targets grammar (cameo-mod#633, merged 2026-09-30) so @classic keeps its written config unmoved;
 		# that application is the CA-3 owner's next step (NOVA), behind its own A/B.
-		Apply: harvester, refinery, conyard, guerrilla
+		# fighter/gunship/bomber fill the CA-5 doctrine lists (FighterTypes etc.): inert until a
+		# personality sets AirDoctrineEnabled, so @classic's AirUnitsTypes stays byte-identical.
+		Apply: harvester, refinery, conyard, guerrilla, fighter, gunship, bomber
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
