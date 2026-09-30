@@ -184,6 +184,18 @@ namespace OpenRA.Mods.CA.Traits
 			"trusted - below this the mixed-army time ramp stays the prior.")]
 		public readonly int AntiAirEscortMinArmySample = 3000;
 
+		[Desc("Siege artillery (CA-3): the main army always fields guns that outrange",
+			"base defences - at least ArtillerySiegeMinUnits pieces plus artillery worth",
+			"ArtillerySiegeSharePct of the assault's value. A shortfall is requested from",
+			"unit production (cheapest buildable artillery). False = classic behaviour.")]
+		public readonly bool EnsureArtillerySiege = false;
+
+		[Desc("Siege artillery: flat floor - the main army never fields fewer pieces.")]
+		public readonly int ArtillerySiegeMinUnits = 2;
+
+		[Desc("Siege artillery: required share of the assault's value in artillery, percent.")]
+		public readonly int ArtillerySiegeSharePct = 15;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -618,6 +630,20 @@ namespace OpenRA.Mods.CA.Traits
 				&& MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
 		}
 
+		// ActorInfo twin of IsArtilleryUnit - the same role-list-first rule applied to a
+		// buildable candidate (MaxRange comes from the unit profile, not live traits).
+		internal bool IsArtilleryUnit(ActorInfo ai)
+		{
+			if (ai == null || ai.HasTraitInfo<AircraftInfo>() || ai.HasTraitInfo<BuildingInfo>())
+				return false;
+
+			if (Info.ArtilleryTypes.Count > 0)
+				return Info.ArtilleryTypes.Contains(ai.Name);
+
+			return Info.ArtilleryMinRangeCells >= 0
+				&& BotUnitProfiles.Get(World.Map.Rules, ai).MaxRange >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+		}
+
 		// A ship is a `naval` locomotor (the navalunit role's rule); hover and amphibious
 		// units move on land and stay ground units (12.4a). NavalUnitsTypes stays as a
 		// belt for naval actors carried on other locomotors - a ship must never reach a
@@ -724,9 +750,63 @@ namespace OpenRA.Mods.CA.Traits
 				.SelectMany(q => q.BuildableItems())
 				.Where(ai => !ai.HasTraitInfo<BuildingInfo>() && !ai.HasTraitInfo<AircraftInfo>()
 					&& ai.HasTraitInfo<MobileInfo>()
+					&& ai.TraitInfoOrDefault<MobileInfo>()?.Locomotor != "naval"
 					&& BotUnitProfiles.Get(rules, ai).Weapons.Any(w => w.CanTarget(AirTargetTypes)))
 				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
 				.FirstOrDefault();
+		}
+
+		// The cheapest buildable ground artillery - a siege piece must trail a land
+		// assault, so ships are out (same locomotor rule as the AA pick).
+		ActorInfo PickArtilleryUnit()
+		{
+			return Player.PlayerActor.TraitsImplementing<ProductionQueue>()
+				.SelectMany(q => q.BuildableItems())
+				.Where(ai => ai.HasTraitInfo<MobileInfo>()
+					&& ai.TraitInfoOrDefault<MobileInfo>()?.Locomotor != "naval"
+					&& IsArtilleryUnit(ai))
+				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.FirstOrDefault();
+		}
+
+		// CA-3 siege artillery: the main army always carries guns that outrange base
+		// defences - at least ArtillerySiegeMinUnits pieces plus ArtillerySiegeSharePct
+		// of assault value. Artillery already fielded in squads counts (it is the same
+		// siege asset); a shortfall is pushed to production like the AA coverage.
+		void RequestSiegeArtillery(IBot bot, SquadCA attackForce, List<UnitWposWrapper> freshArtillery)
+		{
+			var requester = unitRequesters.FirstOrDefault();
+			if (requester == null)
+				return;
+
+			var candidate = PickArtilleryUnit();
+			if (candidate == null)
+				return;
+
+			var fieldedCount = freshArtillery.Count;
+			var fieldedValue = freshArtillery.Sum(u => UnitValue(u.Actor));
+			foreach (var sq in Squads.Where(s => s.Type == SquadCAType.Artillery && s.IsValid))
+			{
+				fieldedCount += sq.Units.Count;
+				fieldedValue += sq.Units.Sum(u => UnitValue(u.Actor));
+			}
+
+			var forceValue = attackForce.Units.Sum(u => UnitValue(u.Actor)) + fieldedValue;
+			var share = Info.ArtillerySiegeSharePct / 100.0;
+			var unitCost = candidate.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+			var neededForShare = unitCost > 0 && share > 0 && share < 1
+				? (int)Math.Ceiling(Math.Max(0, share * forceValue - fieldedValue) / (unitCost * (1 - share)))
+				: 0;
+			var needed = Math.Max(Info.ArtillerySiegeMinUnits - fieldedCount, neededForShare);
+			if (needed <= 0)
+				return;
+
+			var queued = requester.RequestedProductionCount(bot, candidate.Name);
+			for (var i = queued; i < needed; i++)
+				requester.RequestUnitProduction(bot, candidate.Name);
+
+			AIUtils.BotDebug("AI ({0}): siege artillery {1} pieces - requested {2}x {3}",
+				Player.ClientIndex, fieldedCount, needed - queued, candidate.Name);
 		}
 
 		// CA-3 anti-air coverage: an assault without AA dies to the first gunship it
@@ -1787,6 +1867,8 @@ namespace OpenRA.Mods.CA.Traits
 					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
 				if (Info.EnsureAntiAirEscort)
 					RequestAntiAirCoverage(bot, attackForce);
+				if (Info.EnsureArtillerySiege)
+					RequestSiegeArtillery(bot, attackForce, artilleryUnits);
 				if (missionTarget != null)
 					attackForce.Target = Target.FromActor(missionTarget);
 				else if (missionFrozenTarget != null)
