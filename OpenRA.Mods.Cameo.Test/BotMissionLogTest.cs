@@ -31,11 +31,14 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheStateSetIsFransottosSixPlusFailedAndReleased()
+		public void AnAttemptExistsOnlyFromCommit()
 		{
+			// fransotto, 2026-09-30: DENIED is mission/bid feedback — a mission can be denied by every commander without
+			// any execution attempt existing — so it is a mission event, not an attempt state.
 			Assert.That(Enum.GetNames<BotMissionAttemptState>(), Is.EqualTo(new[]
-				{ "Denied", "Committed", "Progressing", "Stalled", "Recover", "Success", "Failed", "Released" }));
-			Assert.That(BotMissionLog.IsTerminal(BotMissionAttemptState.Denied), Is.True);
+				{ "Committed", "Progressing", "Stalled", "Recover", "Success", "Failed", "Released" }));
+			Assert.That(Enum.GetNames<BotMissionEvent>(), Is.EqualTo(new[] { "Published", "Denied", "Dormant", "Reopened" }));
+			Assert.That(BotMissionLog.IsTerminal(BotMissionAttemptState.Success), Is.True);
 			Assert.That(BotMissionLog.IsTerminal(BotMissionAttemptState.Released), Is.True);
 			Assert.That(BotMissionLog.IsTerminal(BotMissionAttemptState.Stalled), Is.False);
 			Assert.That(BotMissionLog.IsTerminal(BotMissionAttemptState.Recover), Is.False);
@@ -53,6 +56,26 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AMissionEventIsItsOwnRecordKindWithNoAttempt()
+		{
+			var record = new BotMissionRecord
+			{
+				MissionId = "capture:oilb:611", Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
+				Executor = "Engineers", Tick = 6919
+			};
+
+			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			using var doc = JsonDocument.Parse(line);
+			var root = doc.RootElement;
+			Assert.That(root.GetProperty("record_kind").GetString(), Is.EqualTo("mission"));
+			Assert.That(root.GetProperty("event").GetString(), Is.EqualTo("DORMANT"));
+			Assert.That(root.TryGetProperty("attempt", out _), Is.False);
+			Assert.That(root.TryGetProperty("attempt_id", out _), Is.False);
+			Assert.That(BotMissionLog.FormatEventLine("Multi0", "capture:oilb:611", BotMissionEvent.Dormant, "outmatched", "Engineers", 6919),
+				Is.EqualTo("AI Multi0: MISSION capture:oilb:611 DORMANT reason=outmatched by=Engineers tick=6919"));
+		}
+
+		[Test]
 		public void TheArchiveLineIsOneJsonObjectWithTheSchemaAndIds()
 		{
 			var record = new BotMissionRecord
@@ -66,6 +89,7 @@ namespace OpenRA.Mods.Cameo.Test
 			using var doc = JsonDocument.Parse(line);
 			var root = doc.RootElement;
 			Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("mission-card/1"));
+			Assert.That(root.GetProperty("record_kind").GetString(), Is.EqualTo("attempt"));
 			Assert.That(root.GetProperty("mission_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526"));
 			Assert.That(root.GetProperty("attempt_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526|A1"));
 			Assert.That(root.GetProperty("state").GetString(), Is.EqualTo("SUCCESS"));

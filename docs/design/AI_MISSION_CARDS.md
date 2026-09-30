@@ -61,12 +61,19 @@ below is what `OpenRA.Mods.CA/Traits/BotModules/BotMissionLog.cs` implements, an
   client index (`Player.cs:189`), and the first proposal's XOR hash collided 4,185 times over realistic ranges.
 * **Attempt** = 1, 2, 3 … per MissionId, counted by whoever commits units; `attempt_id` = `<mission_id>|A<n>`.
 
-### 2.2 Attempt states — fransotto's six, plus two
-`DENIED  COMMITTED  PROGRESSING  STALLED  RECOVER  SUCCESS` (his vocabulary, verbatim) **+ `FAILED`** (the units were
-lost — his list had no terminal loss; NOVA) **+ `RELEASED`** (the executor handed the attempt back without a verdict —
-DAWN's broker release, a dissolved squad, an engineer that went idle). Terminal: `DENIED`, `SUCCESS`, `FAILED`,
-`RELEASED`. **Dormant is not a state**: a mission with no live attempt is dormant, and the next commit simply opens
-attempt n+1 (EMBER's reading of fransotto's model).
+### 2.2 Two levels: the mission's events and each attempt's states (fransotto's boundary, 2026-09-30)
+The **card is the strategic memory; commander progress is evidence written back to it** (fransotto, reviewing MC3).
+So a record is one of two kinds (`record_kind`):
+
+* **Mission events** (`record_kind: "mission"`, no attempt): `PUBLISHED` (a strategist put it on the board), **`DENIED`**
+  (no executor would take it — bid/mission feedback; *a mission can be denied by Air, Ground and Sea without any
+  execution attempt ever existing*), **`DORMANT`** (on the shelf — observable, not merely "no live attempt"),
+  `REOPENED` (off the shelf again: new recon, a changed Best Read, a rest that ended).
+* **Attempt states** (`record_kind: "attempt"`): an attempt exists **only from COMMIT** — `COMMITTED  PROGRESSING  STALLED
+  RECOVER` then one terminal `SUCCESS` / `FAILED` (units lost; NOVA) / `RELEASED` (handed back without a verdict; DAWN).
+
+So `proposal → attempts → outcome` is reconstructable from the records alone (MC2). Historical cards may influence
+reconsideration; the current Best Read stays authoritative.
 
 **Reasons** (closed set, lowercase): `no_units unreachable undeployable reserved outmatched target_gone timeout stuck
 superseded lost_units done dropped`. A project-private reason carries an `x_` prefix (`x_frans_board_closed`); any
@@ -149,13 +156,19 @@ fold of one `mission_id`'s lines, which the story tool (MC2) does. The shape `Ai
 ```json
 {"schema":"mission-card/1","recorded_utc":"2026-09-30T12:00:00.0000000Z","game_uid":"…","map_uid":"…",
  "map_title":"A Nuclear Winter","player":"Multi0","faction":"td_gdi","bot":"hard",
- "mission_id":"capture:oilb:526","attempt_id":"capture:oilb:526|A1","attempt":1,
+ "mission_id":"capture:oilb:526","attempt_id":"capture:oilb:526|A1","record_kind":"attempt","attempt":1,
  "state":"SUCCESS","terminal":true,"reason":"done","by":"Engineers","tick":2790,
  "type":"capture","target_cell":"61,33","units":1}
 ```
 
-* Required: `schema game_uid player mission_id attempt state terminal by tick`. Optional context (`type region
-  target_cell units value reason faction bot map_*`) is omitted when unknown, never written as null.
+* **Identity is the composite `(game_uid, mission_id, attempt)`**: mission and attempt ids are unique within one match
+  only, never across matches (fransotto).
+* Required: `schema game_uid player mission_id record_kind by tick`, plus `event` for a mission record or
+  `attempt attempt_id state terminal` for an attempt record. Optional context (`type region target_cell units value
+  reason faction bot map_*`) is omitted when unknown, never written as null.
+* **The physical file layout is NOT part of the shared contract** (fransotto): Cameo appends one support-dir JSONL
+  (`Logs/cameo-ai-missions.jsonl`); Fransbot may package one JSONL per match with replay/debug/runtime evidence. The
+  records are the contract.
 * The **states and reasons** of §2.2 are the shared vocabulary; private reasons use the `x_` prefix, which the other
   project's tools pass through.
 * **Versioning:** `schema` is `mission-card/<major>`; a reader rejects an unknown major and ignores unknown fields.

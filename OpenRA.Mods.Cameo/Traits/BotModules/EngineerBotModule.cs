@@ -551,6 +551,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var target = job.Target;
 			job.MissionId = CaptureMissionId(target.Info.Name, target.ActorID);
+
+			// A card leaving the shelf is its own event, before the attempt that follows it.
+			if (dormantUntil.Remove(job.MissionId))
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Reopened, Reason = BotMissionReasons.Timeout,
+					Executor = "Engineers", MissionType = "capture", TargetCell = target.Location
+				});
+
 			job.Attempt = missionAttempts.GetValueOrDefault(job.MissionId) + 1;
 			missionAttempts[job.MissionId] = job.Attempt;
 			BotMissionLog.Write(new BotMissionRecord
@@ -586,7 +595,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					missionFailStreak.Remove(job.MissionId);
 					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
-					Log.Write("debug", $"AI {player.InternalName}: MISSION {job.MissionId} DORMANT until tick {world.WorldTick + Info.CaptureDormantTicks} after {streak} failed attempts in a row (tick {world.WorldTick})");
+					BotMissionLog.Write(new BotMissionRecord
+					{
+						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
+						Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location
+					});
 				}
 			}
 		}
