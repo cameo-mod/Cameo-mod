@@ -113,7 +113,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (health == null)
 					continue;
 
-				if (Consider(bot, a, tp.Trait, health.DamageState, false, tick) == BaseRepairDecision.Order)
+				if (Consider(bot, a, tp.Trait, health.DamageState, false, tick, "sweep") == BaseRepairDecision.Order)
 					SweepOrders++;
 			}
 		}
@@ -132,7 +132,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (rb == null || rb.IsTraitDisabled)
 				return;
 
-			var decision = Consider(bot, self, rb, e.DamageState, e.Damage.Value <= 0, world.WorldTick);
+			var decision = Consider(bot, self, rb, e.DamageState, e.Damage.Value <= 0, world.WorldTick, "hit");
 			if (decision == BaseRepairDecision.Order)
 			{
 				RepairOrders++;
@@ -143,7 +143,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				TogglesAvoided++;
 		}
 
-		BaseRepairDecision Consider(IBot bot, Actor building, RepairableBuilding rb, DamageState state, bool isHeal, int tick)
+		BaseRepairDecision Consider(IBot bot, Actor building, RepairableBuilding rb, DamageState state, bool isHeal, int tick, string source)
 		{
 			var inFlight = pendingSince.TryGetValue(building, out var since) && tick - since < Info.PendingOrderTicks;
 			var decision = Decide(state, Info.MinimumDamageState, isHeal, rb.Repairers.Contains(player), inFlight,
@@ -154,6 +154,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				PruneExpired(tick);
 				pendingSince[building] = tick;
 				bot.QueueOrder(new Order("RepairBuilding", player.PlayerActor, Target.FromActor(building), false));
+
+				// Plan step 4 telemetry: a batch shows every repair decision (BotDebug alone only reaches chat).
+				Log.Write("debug", $"AI ({player.ClientIndex}): RV1 repair {building.Info.Name} {building.ActorID} at {state} ({source}) tick {tick}");
 			}
 
 			return decision;
