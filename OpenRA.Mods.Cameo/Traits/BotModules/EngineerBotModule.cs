@@ -115,6 +115,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int OrderedTick;
 			public int SampleTick;
 			public WPos SamplePos;
+			public Actor Target;
+			public string MissionId;
+			public int Attempt;
 		}
 
 		readonly World world;
@@ -126,6 +129,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<string> capturableTypes;
 		readonly Dictionary<Actor, Assignment> assigned = [];
 		readonly Dictionary<Actor, int> stuckUntil = [];
+		readonly Dictionary<string, int> missionAttempts = [];
 
 		int captureTicks;
 		int repairTicks;
@@ -239,13 +243,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					case EngineerCheck.Gone:
 						assigned.Remove(a);
+						EndMission(a, job, check);
 						break;
 					case EngineerCheck.Done:
 						assigned.Remove(a);
 						leases?.Release(a, LeaseOwner);
+						EndMission(a, job, check);
 						break;
 					case EngineerCheck.Stuck:
 						assigned.Remove(a);
+						EndMission(a, job, check);
 						leases?.Release(a, LeaseOwner);
 						stuckUntil[a] = tick + Info.StuckRetryTicks;
 						StuckStops++;
@@ -294,8 +301,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			var tick = world.WorldTick;
-			assigned[engineer] = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition };
+			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target };
+			assigned[engineer] = assignment;
 			bot.QueueOrder(order);
+			if (job == EngineerJob.Capture)
+				StartMission(assignment, engineer);
+
 			switch (job)
 			{
 				case EngineerJob.Capture: CaptureOrders++; break;
@@ -484,6 +495,59 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					break;
 				}
 			}
+		}
+
+		// MC1 (docs/design/AI_MISSION_CARDS.md): every capture is a mission card. The mission is the building (its
+		// strategic reason survives a lost engineer); each engineer sent at it is one attempt.
+		public static string CaptureMissionId(string ownerName, string actorType, uint actorId) =>
+			$"capture:{ownerName}:{actorType}:{actorId}";
+
+		/// <summary>How a capture attempt ended, free of world state so it can be tested. Order matters: an engineer
+		/// consumed by a successful capture is also "dead" (Actor.IsDead includes Disposed).</summary>
+		public static (BotMissionAttemptState State, string Reason) CaptureVerdict(bool targetOurs, bool stuck, bool engineerDead, bool targetGone)
+		{
+			if (targetOurs)
+				return (BotMissionAttemptState.Success, BotMissionReasons.Done);
+
+			if (stuck)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Stuck);
+
+			if (engineerDead)
+				return (BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+
+			if (targetGone)
+				return (BotMissionAttemptState.Released, BotMissionReasons.TargetGone);
+
+			return (BotMissionAttemptState.Released, BotMissionReasons.Dropped);
+		}
+
+		void StartMission(Assignment job, Actor engineer)
+		{
+			var target = job.Target;
+			job.MissionId = CaptureMissionId(target.Owner.InternalName, target.Info.Name, target.ActorID);
+			job.Attempt = missionAttempts.GetValueOrDefault(job.MissionId) + 1;
+			missionAttempts[job.MissionId] = job.Attempt;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = BotMissionAttemptState.Committed,
+				Executor = "Engineers", MissionType = "capture", TargetCell = target.Location, Units = 1
+			});
+		}
+
+		void EndMission(Actor engineer, Assignment job, EngineerCheck check)
+		{
+			if (job.MissionId == null)
+				return;
+
+			var target = job.Target;
+			var targetGone = target == null || target.IsDead || !target.IsInWorld;
+			var (state, reason) = CaptureVerdict(!targetGone && target.Owner == player, check == EngineerCheck.Stuck,
+				engineer.IsDead, targetGone);
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
+				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1
+			});
 		}
 
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
