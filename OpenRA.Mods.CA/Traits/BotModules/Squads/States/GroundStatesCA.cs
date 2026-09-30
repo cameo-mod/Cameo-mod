@@ -296,6 +296,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// 12.7 formation: rear-frontline stall tracking (fransbot chokepoint rule)
 		WPos formationRearPos;
 		int formationRearStallTicks;
+		int formationRearHp = -1;
 
 		// Indirect/harass routing state
 		List<CPos> currentRoute;
@@ -671,7 +672,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			var axisLen = axis.HorizontalLength;
 			var maxLead = (long)WDist.FromCells(owner.SquadManager.Info.FormationMaxLeadCells).Length;
-			var trailDist = (long)WDist.FromCells(owner.SquadManager.Info.FormationTrailCells).Length;
 
 			// Distance-to-go along the axis for every frontline member; the slowest
 			// (largest remaining) gates how far ahead the others may run.
@@ -689,16 +689,30 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// Fransbot donor rule: a rear member stalled in a chokepoint grants the
 			// leaders the wider FormationMaxStalledLeadCells allowance; the normal
-			// lead resumes the tick it moves again.
+			// lead resumes the tick it moves again. MI watches the stall's HP:
+			// a stalled rear that is losing HP is under fire and becomes the
+			// pull-back trigger below.
 			var lead = maxLead;
+			var stalledRearUnderFire = false;
 			if (rear != null)
 			{
 				if (rear.Actor.CenterPosition == formationRearPos)
+				{
 					formationRearStallTicks++;
+					var rearHealth = rear.Actor.TraitOrDefault<IHealth>();
+					if (rearHealth != null)
+					{
+						if (formationRearHp >= 0 && rearHealth.HP < formationRearHp)
+							stalledRearUnderFire = true;
+
+						formationRearHp = rearHealth.HP;
+					}
+				}
 				else
 				{
 					formationRearStallTicks = 0;
 					formationRearPos = rear.Actor.CenterPosition;
+					formationRearHp = -1;
 				}
 
 				if (formationRearStallTicks >= 25)
@@ -716,6 +730,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					pushFront.Add(u.Actor);
 			}
 
+			// The trail line doubles as the pull-back rally behind the
+			// formation anchor for MI below.
+			var trailPos = SquadMicroEvalCA.PullBackPoint(centroid, routePos,
+				WDist.FromCells(owner.SquadManager.Info.FormationTrailCells));
+
 			if (pushFront.Count > 0)
 				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: pushFront.ToArray()));
 			if (holdFront.Count > 0)
@@ -729,12 +748,46 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: scouts.Select(u => u.Actor).ToArray()));
 
 			if (trailing.Count > 0)
-			{
-				var trailPos = centroid - new WVec(
-					(int)(axis.X * trailDist / axisLen),
-					(int)(axis.Y * trailDist / axisLen),
-					0);
 				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(trailPos), false, groupedActors: trailing.Select(u => u.Actor).ToArray()));
+
+			// MI pull-back (budgeted per order): members at/below
+			// SquadMicroRetreatPct fall back to the trail line — behind the
+			// formation anchor, still with the squad. A stalled rear that is
+			// taking fire pulls back past itself to break contact in the
+			// chokepoint. Queued after the formation orders so the micro order
+			// wins for that member this tick; a denied member keeps its
+			// formation order.
+			if (owner.SquadManager.Info.SquadMicroEnabled)
+			{
+				var retreatPct = owner.SquadManager.Info.SquadMicroRetreatPct;
+				foreach (var u in frontline)
+				{
+					var hp = u.Actor.TraitOrDefault<IHealth>();
+					if (hp == null || !SquadMicroEvalCA.ShouldPullBack(hp.HP, hp.MaxHP, retreatPct))
+						continue;
+
+					if (!owner.SquadManager.TryConsumeMicroActions())
+						break;
+
+					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(trailPos), false));
+				}
+
+				foreach (var u in trailing)
+				{
+					var hp = u.Actor.TraitOrDefault<IHealth>();
+					if (hp == null || !SquadMicroEvalCA.ShouldPullBack(hp.HP, hp.MaxHP, retreatPct))
+						continue;
+
+					if (!owner.SquadManager.TryConsumeMicroActions())
+						break;
+
+					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(trailPos), false));
+				}
+
+				if (stalledRearUnderFire && rear != null && owner.SquadManager.TryConsumeMicroActions())
+					owner.Bot.QueueOrder(new Order("Move", rear.Actor,
+						Target.FromPos(SquadMicroEvalCA.PullBackPoint(rear.Actor.CenterPosition, routePos,
+							WDist.FromCells(owner.SquadManager.Info.FormationTrailCells))), false));
 			}
 
 			return true;
@@ -784,12 +837,120 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// MI order half (SquadMicroEnabled, Rush only — its own A/B cell):
+			// one focus target per squad tick, members that can reach it
+			// concentrate fire, damaged members pull back behind the squad,
+			// outranging members kite. Candidates come through
+			// IsPreferredObservedEnemyUnit — only what the bot can currently see
+			// or legitimately remember. Budget denial or no pick degrades to the
+			// plain AttackMove below.
+			var micro = owner.SquadManager.Info.SquadMicroEnabled && owner.Type == SquadCAType.Rush;
+			Actor focus = null;
+			BotUnitProfile focusProfile = null;
+			if (micro)
+			{
+				var targets = owner.World.FindActorsInCircle(owner.TargetActor.CenterPosition,
+						WDist.FromCells(owner.SquadManager.Info.AttackScanRadius))
+					.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
+
+				if (targets.Count > 0)
+				{
+					var squadProfiles = owner.Units.ConvertAll(u => BotUnitProfiles.Get(owner.World.Map.Rules, u.Actor.Info));
+					var pick = SquadMicroEvalCA.PickFocusTarget(squadProfiles,
+						targets.ConvertAll(t => LiveHpProfile(owner.World, t)));
+
+					if (pick >= 0)
+					{
+						focus = targets[pick];
+						focusProfile = LiveHpProfile(owner.World, focus);
+					}
+				}
+			}
+
 			foreach (var a in owner.Units)
-				if (!BusyAttack(a.Actor))
-					owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
+			{
+				if (BusyAttack(a.Actor))
+					continue;
+
+				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile))
+					continue;
+
+				owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
+			}
 
 			if (ShouldFlee(owner))
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), true);
+		}
+
+		// One member's micro order (the order half of SquadMicroEvalCA),
+		// priority pull-back > kite standoff > focus-fire. Spends one
+		// IBotActionBudget action per issued order; false means the member
+		// keeps the default AttackMove.
+		static bool TryIssueMicroOrder(SquadCA owner, Actor unit, Actor focus, BotUnitProfile focusProfile)
+		{
+			var assignedTarget = focus ?? owner.TargetActor;
+
+			var health = unit.TraitOrDefault<IHealth>();
+			if (health != null && SquadMicroEvalCA.ShouldPullBack(health.HP, health.MaxHP, owner.SquadManager.Info.SquadMicroRetreatPct))
+			{
+				if (!owner.SquadManager.TryConsumeMicroActions())
+					return false;
+
+				// Retreat behind the squad centre — regroup with the squad, not a rout home.
+				var waypoint = SquadMicroEvalCA.PullBackPoint(owner.CenterPosition, assignedTarget.CenterPosition,
+					WDist.FromCells(owner.SquadManager.Info.FormationTrailCells));
+				owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(waypoint), false));
+				return true;
+			}
+
+			var ownProfile = BotUnitProfiles.Get(owner.World.Map.Rules, unit.Info);
+			var targetProfile = BotUnitProfiles.Get(owner.World.Map.Rules, assignedTarget.Info);
+			var standoff = SquadMicroEvalCA.KiteStandoff(ownProfile, targetProfile,
+				WDist.FromCells(owner.SquadManager.Info.SquadMicroKiteMarginCells));
+			if (standoff is WDist standoffDist)
+			{
+				// Kite only when inside the target's reply range — beyond it
+				// AttackMove already holds the unit at its own weapon range.
+				var dist = (unit.CenterPosition - assignedTarget.CenterPosition).HorizontalLength;
+				if (dist < targetProfile.MaxRange.Length)
+				{
+					if (!owner.SquadManager.TryConsumeMicroActions())
+						return false;
+
+					var waypoint = SquadMicroEvalCA.PullBackPoint(unit.CenterPosition, assignedTarget.CenterPosition,
+						new WDist((int)Math.Max(0, standoffDist.Length - dist)));
+					owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(waypoint), false));
+					return true;
+				}
+			}
+
+			if (focus != null && focusProfile != null
+				&& ownProfile.DamagePerTickAgainst(focusProfile) > 0
+				&& (focus.CenterPosition - unit.CenterPosition).HorizontalLengthSquared
+					<= (long)ownProfile.MaxRange.Length * ownProfile.MaxRange.Length)
+			{
+				if (!owner.SquadManager.TryConsumeMicroActions())
+					return false;
+
+				owner.Bot.QueueOrder(new Order("Attack", unit, Target.FromActor(focus), false));
+				return true;
+			}
+
+			return false;
+		}
+
+		// A rules profile with the actor's CURRENT hit points — PickFocusTarget's
+		// time-to-kill must see a near-dead target as near-dead, not at the
+		// pristine MaxHP the cache stores.
+		static BotUnitProfile LiveHpProfile(World world, Actor actor)
+		{
+			var profile = BotUnitProfiles.Get(world.Map.Rules, actor.Info);
+			var health = actor.TraitOrDefault<IHealth>();
+			if (health == null || health.HP == profile.Hp)
+				return profile;
+
+			return new BotUnitProfile(profile.Name, profile.Cost, health.HP, profile.Armor, profile.Speed,
+				profile.IsAircraft, profile.IsBuilding, profile.TargetTypes, profile.Weapons);
 		}
 
 		public void Deactivate(SquadCA owner) { }
