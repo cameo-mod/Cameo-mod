@@ -274,6 +274,7 @@ namespace OpenRA.Mods.Common.Traits
 			public bool Initialized;
 			public int StrategicPriority;
 			public int OpenedWorldTick;
+			public int AttemptNumber;
 			public readonly Dictionary<string, Bid> Bids = [];
 			public readonly Dictionary<string, FransActiveMission> ActiveMissions = [];
 
@@ -297,6 +298,7 @@ namespace OpenRA.Mods.Common.Traits
 		readonly World world;
 		readonly Player player;
 		readonly Dictionary<uint, Auction> auctions = [];
+		readonly Dictionary<uint, int> missionAttemptSeq = [];
 		readonly Dictionary<string, TransientReservation> transientReservations = [];
 
 		// PERFORMANCE-ONLY mission-availability index. The previous hot path repeatedly walked
@@ -428,6 +430,17 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		static uint MissionAuctionId(FransMission mission) => mission.MissionId != 0 ? mission.MissionId : mission.TargetActorId;
+
+		// MissionCard telemetry: durable attempt lineage per MissionAuctionId. An attempt ends when an
+		// auction commits (COMMITTED), dies uncommitted (DENIED), is restarted by a MissionType change,
+		// or terminates with its incident (ENDED). The ledger survives auction eviction so a later
+		// re-published attempt on the same mission identity continues the sequence.
+		int NextMissionAttempt(uint missionAuctionId)
+		{
+			var n = missionAttemptSeq.TryGetValue(missionAuctionId, out var current) ? current + 1 : 1;
+			missionAttemptSeq[missionAuctionId] = n;
+			return n;
+		}
 
 		public void SubmitMissionBid(FransMission mission, FransCommanderBidReport report)
 		{
@@ -781,10 +794,14 @@ namespace OpenRA.Mods.Common.Traits
 					continue;
 				auction.ActiveMissions.Remove(key);
 				InvalidateMissionBidAvailabilityIndex();
+				FransBotLog.BotDebug(world,
+					"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} RELEASED by {3}/{4} reason={5}.",
+					player, auction.MissionId, auction.AttemptNumber, commander, bidderKey, reason);
 				if (auction.ActiveMissions.Count == 0)
 				{
 					auction.OpenedWorldTick = world.WorldTick;
 					auction.Bids.Clear();
+					auction.AttemptNumber = 0;
 				}
 				FransBotLog.BotDebug(world, "{0}: {1} Commander releases MISSION for target {2}: {3}.",
 					player, commander, mission.TargetActorId, reason);
@@ -860,6 +877,9 @@ namespace OpenRA.Mods.Common.Traits
 							FransBotLog.BotDebug(world,
 								"{0}: [DEFEND RELEASE] mission={1} representative={2} authoritativeIncident=Inactive reason=General incident lease ended; Broker releases {3}/{4}.",
 								player, auction.MissionId, auction.TargetActorId, active.Commander, active.BidderKey);
+						FransBotLog.BotDebug(world,
+							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} ENDED reason=incident-lease-ended actives={3}.",
+							player, auction.MissionId, auction.AttemptNumber, auction.ActiveMissions.Count);
 						auctions.Remove(pair.Key);
 						InvalidateMissionBidAvailabilityIndex();
 						continue;
@@ -891,6 +911,14 @@ namespace OpenRA.Mods.Common.Traits
 
 				if (!currentMissions.TryGetValue(pair.Key, out var mission))
 				{
+					// An uncommitted auction closing is a DENIED attempt only if it was genuinely
+					// auctioned — bids arrived or a full bid window elapsed. A freshly re-opened
+					// auction closing after its committed attempt released is no new attempt.
+					if (auction.Bids.Count > 0 || world.WorldTick - auction.OpenedWorldTick >= Info.BidWindowTicks)
+						FransBotLog.BotDebug(world,
+							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=mission-board-closed bids={3} window-open-ticks={4}.",
+							player, auction.MissionId, NextMissionAttempt(pair.Key), auction.Bids.Count,
+							world.WorldTick - auction.OpenedWorldTick);
 					auctions.Remove(pair.Key);
 					continue;
 				}
@@ -955,6 +983,9 @@ namespace OpenRA.Mods.Common.Traits
 				FransBotLog.BotDebug(world,
 					"{0}: MISSION BROKER target {1} changes pending MissionType {2} -> {3}; clears {4} stale bids and restarts the bid window. No bid may cross MissionType identity.",
 					player, mission.TargetActorId, previousType, mission.Type, staleBidCount);
+				FransBotLog.BotDebug(world,
+					"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=missiontype-changed ({3} -> {4}).",
+					player, auction.MissionId, NextMissionAttempt(auction.MissionId), previousType, mission.Type);
 			}
 
 			auction.MissionId = MissionAuctionId(mission);
@@ -1036,6 +1067,11 @@ namespace OpenRA.Mods.Common.Traits
 					player, auction.MissionType.ToString().ToUpperInvariant(), auction.TargetActorId, auction.LastVisibleCell,
 					next.Commander, next.BidderKey, next.InitialOrder, next.StrategicPriority,
 					string.Join(",", next.CommittedActorIds), next.TotalCost, next.EstimatedEtaTicks, next.RouteRisk);
+			if (auction.AttemptNumber == 0)
+				auction.AttemptNumber = NextMissionAttempt(auction.MissionId);
+			FransBotLog.BotDebug(world,
+				"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} COMMITTED to {3}/{4} ({5} active).",
+				player, auction.MissionId, auction.AttemptNumber, winner.Commander, winner.BidderKey, auction.ActiveMissions.Count);
 			return true;
 		}
 
