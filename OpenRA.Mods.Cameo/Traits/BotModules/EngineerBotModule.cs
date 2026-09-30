@@ -98,6 +98,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a stuck engineer is left alone before it may be ordered again.")]
 		public readonly int StuckRetryTicks = 1500;
 
+		[Desc("Most engineers sent at one capture target at a time (one mission, one live attempt). 0 = no limit,",
+			"the parents' behaviour and the default until its A/B: a smoke match sent three engineers at one oil derrick",
+			"within 400 ticks; the candidate sets 1 (AI_MASTER_PLAN §1.2 step 6).")]
+		public readonly int MaxEngineersPerTarget = 0;
+
+		[Desc("A capture mission whose attempts fail this many times in a row (the engineer died) goes dormant: its target",
+			"is skipped for CaptureDormantTicks (fransotto's dormant shelf; AI_MISSION_CARDS §2.2). 0 disables. A smoke match",
+			"lost five engineers one after another at one defended derrick. Off until its A/B; the candidate sets 2.")]
+		public readonly int CaptureFailuresBeforeDormant = 0;
+
+		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
+		public readonly int CaptureDormantTicks = 3000;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -115,6 +128,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int OrderedTick;
 			public int SampleTick;
 			public WPos SamplePos;
+			public Actor Target;
+			public string MissionId;
+			public int Attempt;
 		}
 
 		readonly World world;
@@ -126,6 +142,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<string> capturableTypes;
 		readonly Dictionary<Actor, Assignment> assigned = [];
 		readonly Dictionary<Actor, int> stuckUntil = [];
+		readonly Dictionary<string, int> missionAttempts = [];
+		readonly Dictionary<string, int> missionFailStreak = [];
+		readonly Dictionary<string, int> dormantUntil = [];
 
 		int captureTicks;
 		int repairTicks;
@@ -239,13 +258,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					case EngineerCheck.Gone:
 						assigned.Remove(a);
+						EndMission(a, job, check);
 						break;
 					case EngineerCheck.Done:
 						assigned.Remove(a);
 						leases?.Release(a, LeaseOwner);
+						EndMission(a, job, check);
 						break;
 					case EngineerCheck.Stuck:
 						assigned.Remove(a);
+						EndMission(a, job, check);
 						leases?.Release(a, LeaseOwner);
 						stuckUntil[a] = tick + Info.StuckRetryTicks;
 						StuckStops++;
@@ -294,8 +316,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			var tick = world.WorldTick;
-			assigned[engineer] = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition };
+			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target };
+			assigned[engineer] = assignment;
 			bot.QueueOrder(order);
+			if (job == EngineerJob.Capture)
+				StartMission(assignment, engineer);
+
 			switch (job)
 			{
 				case EngineerJob.Capture: CaptureOrders++; break;
@@ -335,7 +361,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var ordered = priorityTargets.OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var ordered = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 
 				// As the CA parent: each attempt uses up a target; a capturer is used up only when it is sent.
 				var attempts = Math.Min(capturers.Count, ordered.Count);
@@ -383,7 +409,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			foreach (var capturer in remaining)
 			{
-				var target = targets.MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
+				var target = targets.Where(t => !TargetFull(t) && !Dormant(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
 				if (target == null || SafePath(capturer.Actor, target).Type == TargetType.Invalid)
 					continue;
 
@@ -482,6 +508,85 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						return;
 
 					break;
+				}
+			}
+		}
+
+		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
+		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
+
+		bool TargetFull(Actor target) =>
+			TargetFull(assigned.Values.Count(j => j.Job == EngineerJob.Capture && j.Target == target), Info.MaxEngineersPerTarget);
+
+		// MC1 (docs/design/AI_MISSION_CARDS.md): every capture is a mission card. The mission is the building (its
+		// strategic reason survives a lost engineer, and a change of owner); each engineer sent at it is one attempt.
+		public static string CaptureMissionId(string actorType, uint actorId) => $"capture:{actorType}:{actorId}";
+
+		/// <summary>The dormant shelf's trigger, free of world state so it can be tested.</summary>
+		public static bool GoesDormant(int failStreak, int threshold) => threshold > 0 && failStreak >= threshold;
+
+		bool Dormant(Actor target) =>
+			dormantUntil.TryGetValue(CaptureMissionId(target.Info.Name, target.ActorID), out var until) && world.WorldTick < until;
+
+		/// <summary>How a capture attempt ended, free of world state so it can be tested. Order matters: an engineer
+		/// consumed by a successful capture is also "dead" (Actor.IsDead includes Disposed).</summary>
+		public static (BotMissionAttemptState State, string Reason) CaptureVerdict(bool targetOurs, bool stuck, bool engineerDead, bool targetGone)
+		{
+			if (targetOurs)
+				return (BotMissionAttemptState.Success, BotMissionReasons.Done);
+
+			if (stuck)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Stuck);
+
+			if (engineerDead)
+				return (BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+
+			if (targetGone)
+				return (BotMissionAttemptState.Released, BotMissionReasons.TargetGone);
+
+			return (BotMissionAttemptState.Released, BotMissionReasons.Dropped);
+		}
+
+		void StartMission(Assignment job, Actor engineer)
+		{
+			var target = job.Target;
+			job.MissionId = CaptureMissionId(target.Info.Name, target.ActorID);
+			job.Attempt = missionAttempts.GetValueOrDefault(job.MissionId) + 1;
+			missionAttempts[job.MissionId] = job.Attempt;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = BotMissionAttemptState.Committed,
+				Executor = "Engineers", MissionType = "capture", TargetCell = target.Location, Units = 1
+			});
+		}
+
+		void EndMission(Actor engineer, Assignment job, EngineerCheck check)
+		{
+			if (job.MissionId == null)
+				return;
+
+			var target = job.Target;
+			var targetGone = target == null || target.IsDead || !target.IsInWorld;
+			var (state, reason) = CaptureVerdict(!targetGone && target.Owner == player, check == EngineerCheck.Stuck,
+				engineer.IsDead, targetGone);
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
+				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1
+			});
+
+			// The dormant shelf: a success clears the streak; consecutive losses rest the mission.
+			if (state == BotMissionAttemptState.Success)
+				missionFailStreak.Remove(job.MissionId);
+			else if (state == BotMissionAttemptState.Failed)
+			{
+				var streak = missionFailStreak.GetValueOrDefault(job.MissionId) + 1;
+				missionFailStreak[job.MissionId] = streak;
+				if (GoesDormant(streak, Info.CaptureFailuresBeforeDormant))
+				{
+					missionFailStreak.Remove(job.MissionId);
+					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					Log.Write("debug", $"AI {player.InternalName}: MISSION {job.MissionId} DORMANT until tick {world.WorldTick + Info.CaptureDormantTicks} after {streak} failed attempts in a row (tick {world.WorldTick})");
 				}
 			}
 		}

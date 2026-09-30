@@ -237,7 +237,7 @@ start, frozen, host-local): no new ruling needed.
 
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
-| MC1 | `MissionId` / `AttemptId`, the closed state set (Proposed … Dormant), `IBotMissionOutcomeSink` (executors report exactly one terminal state per attempt; the owner decides), lease `MissionId`, the General's plain-text log lines; first consumers MCV site, capture, refinery claim, squad raid | Claude | LC1, LC8 | 3 | 6 | 12 | 7 |
+| MC1 | **writer + first consumer built 2026-09-30 (`claude/mc1_mission_log`):** one vocabulary ruled for all three stacks (AI_MISSION_CARDS §2), `BotMissionLog` (CA) + `AiMissionLogWriter` (`cameo-ai-missions.jsonl`), capture cards from `EngineerBotModule`; squad raids = NOVA #681, Fransbot broker = DAWN #679, both switching to the writer. `MissionId` / `AttemptId`, the closed state set (Proposed … Dormant), `IBotMissionOutcomeSink` (executors report exactly one terminal state per attempt; the owner decides), lease `MissionId`, the General's plain-text log lines; first consumers MCV site, capture, refinery claim, squad raid | Claude | LC1, LC8 | 3 | 6 | 12 | 7 |
 | MC2 | `tools/ai/mission_story.py` (per-mission story, success rate per type, missions without a terminal state) + situation-log schema 3; replay correlation by `game_uid` + tick | Claude | MC1 | 2 | 4 | 8 | 4 |
 | MC3 | `mission_card.schema.json` (versioned, shared vocabulary, `x_` private reasons), per-match JSONL archive, the offer to fransotto | Claude | MC1 | 2 | 3 | 6 | 3 |
 
