@@ -74,6 +74,9 @@ Player:
 		UnitIntervals:
 			ts_gdi_mobileconstructionvehicle: 2500
 		UnitsToBuild:
+			# Engineers (maintainer 2026-09-30: bots must build them again). Share 1, as the RA2 and D2k packs do; the
+			# engineer owner (CaptureManagerBotModuleCA / EngineerBotModule) sends them to capture and to repair bridge huts.
+			tsengineer: 1
 			ts_gdi_discthrower: 5
 			ts_gdi_falconenforcer: 5
 			ts_gdi_lightinfantry: 5

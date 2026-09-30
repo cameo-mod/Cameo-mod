@@ -110,6 +110,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			lastProcessedTick = maxSeen;
 
+			// LC1 heartbeat: renew every responder each scan; one dropped by the release below stops being renewed.
+			var leases = BotUnitLeases.Of(player);
+			if (leases != null)
+				foreach (var r in responders)
+					leases.TryClaim(r.Actor, LeaseOwner, BotLeasePurpose.Beacon, ResponderLeaseTicks);
+
 			// Release responders that are done (same ownership-release discipline as scouts).
 			if (responders.Count != 0)
 			{
@@ -164,14 +170,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				SupportResponse(bot, cell);
 		}
 
+		const string LeaseOwner = nameof(BeaconResponderBotModule);
+
+		// LC1: three scans — survives the order latency, frees a dropped responder within seconds.
+		int ResponderLeaseTicks => 3 * System.Math.Max(1, Info.ScanInterval);
+
 		void CombatResponse(IBot bot, CPos cell, int threat)
 		{
 			if (idlePool == null)
 				return;
 
+			var leases = BotUnitLeases.Of(player);
 			var candidates = idlePool
 				.Where(u => !unitCannotBeOrdered(u.Actor) && u.Actor.Info.HasTraitInfo<ArmamentInfo>()
-					&& responders.All(r => r.Actor != u.Actor))
+					&& responders.All(r => r.Actor != u.Actor)
+					&& !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner))
 				.OrderBy(u => (u.Actor.CenterPosition - world.Map.CenterOfCell(cell)).Length)
 				.Take(Info.MaxResponseUnits)
 				.ToList();
@@ -193,6 +206,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				idlePool.Remove(u);
 				responders.Add(u);
 				responderAssignedTick[u.Actor] = world.WorldTick;
+				BotUnitLeases.TryClaim(leases, u.Actor, LeaseOwner, BotLeasePurpose.Beacon, ResponderLeaseTicks);
 			}
 
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(world, cell), false,

@@ -264,6 +264,34 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("CA-3 (AI_ARCHITECTURE.md 12.5): target army composition by role, percent of own mobile combat units.",
+			"Production fills the largest deficit against this mix; absent or empty keeps the proportional pick.",
+			"Keys must be combat roles (BotUnitRole.PrimaryRoleOrder); classic carries no mix on purpose -",
+			"verbatim upstream behaviour.")]
+		public readonly Dictionary<string, int> RoleMix = null;
+
+		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
+			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
+		public readonly int RoleMixRoleFloorPct = 5;
+
+		[Desc("CA-3 (12.5): max ticks a ready attack force waits for the idle pool to cover every role in StageRequiredRoles before launching anyway. 0 disables the composition gate.")]
+		public readonly int StageCompositionTicks = 0;
+
+		[Desc("CA-3 (12.5): roles a staged assault must contain at least one pool member of (e.g. frontline, anti_air). Empty disables the stage gate.")]
+		public readonly HashSet<string> StageRequiredRoles = new HashSet<string>();
+
+		[Desc("CA-4 (12.7): assault (Rush) squads move in formation - frontline leads at its slowest member's pace, anti-air sits inside, other ground trails behind the frontline centroid, scouts run free.")]
+		public readonly bool FormationMovement = false;
+
+		[Desc("CA-4 (12.7): cells behind the frontline centroid that trailing members aim for.")]
+		public readonly int FormationTrailCells = 3;
+
+		[Desc("CA-4 (12.7): cells a frontline member may outrun the slowest frontline member before it holds.")]
+		public readonly int FormationMaxLeadCells = 6;
+
+		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
+		public readonly int FormationMaxStalledLeadCells = 12;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -303,6 +331,42 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Actor tags the support squads prefer to target.")]
 		public readonly HashSet<string> SupportPriorityTags = [];
+
+		[Desc("CA-5 (AI_ARCHITECTURE.md 12.8): split air units into fighter/gunship/bomber doctrine squads instead of one generic Air pool per actor type. Off = unchanged classic behaviour.")]
+		public readonly bool AirDoctrineEnabled = false;
+
+		[Desc("LC6: log a FOGCANARY-VIOLATION line when a decision consumes an actor this bot cannot observe (unfiltered enumeration or stale target). Diagnostic only - behavior unchanged.")]
+		public readonly bool FogCanaryEnabled = false;
+
+		[Desc("12.8: air-superiority role - hunt enemy aircraft, then pick off isolated units. Filled by BotRoleSets.")]
+		public readonly HashSet<string> FighterTypes = [];
+
+		[Desc("12.8: close air support role - attach to the main assault and engage what the frontline engages. Filled by BotRoleSets.")]
+		public readonly HashSet<string> GunshipTypes = [];
+
+		[Desc("12.8: strike-team role - mass, hit tag-priority targets through the air-threat router, regroup. Filled by BotRoleSets.")]
+		public readonly HashSet<string> BomberTypes = [];
+
+		[Desc("Bomber strike teams wait for this many members before flying (12.8: 2-4 aircraft).")]
+		public readonly int BomberSquadMinSize = 2;
+
+		[Desc("Bomber strike team cap; further bombers form another team.")]
+		public readonly int BomberSquadMaxSize = 4;
+
+		[Desc("Fighters pick off an enemy unit that has at most this many armed allies within DangerScanRadius of it (12.8: isolated targets).")]
+		public readonly int FighterPickoffMaxEscorts = 3;
+
+		[Desc("Gunships engage enemies within this many cells of their anchor squad's centre (12.8 CAS radius).")]
+		public readonly int GunshipCASRadiusCells = 8;
+
+		[Desc("Priority target tags for fighter pick-offs (e.g. harvester).")]
+		public readonly HashSet<string> FighterPriorityTags = [BotTargetTags.Harvester];
+
+		[Desc("Priority target tags for gunship CAS scans near the frontline: kill enemy artillery and straying harvesters first.")]
+		public readonly HashSet<string> GunshipPriorityTags = [BotTargetTags.Artillery, BotTargetTags.Harvester];
+
+		[Desc("Priority target tags for bomber strike teams (12.8 strike list: superweapon, conyard, production, refinery, power, harvester, artillery). 'defence' exists in BotTargetTags but is siege-conditional and stays off.")]
+		public readonly HashSet<string> BomberPriorityTags = [BotTargetTags.Superweapon, BotTargetTags.Conyard, BotTargetTags.Production, BotTargetTags.Refinery, BotTargetTags.Power, BotTargetTags.Harvester, BotTargetTags.Artillery];
 
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
@@ -358,6 +422,13 @@ namespace OpenRA.Mods.CA.Traits
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
+
+			// A RoleMix key outside the combat taxonomy can never be counted or filled —
+			// fail at load like a predicate typo instead of silently starving the queue.
+			if (RoleMix != null)
+				foreach (var role in RoleMix.Keys)
+					if (!BotUnitRole.CombatRoles.Contains(role))
+						throw new YamlException($"RoleMix key `{role}` is not a combat role (valid: {string.Join(", ", BotUnitRole.PrimaryRoleOrder)}).");
 
 			// Derive support units from weapon metadata: an actor is support only when
 			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
@@ -429,6 +500,16 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
 		IBotSiegeAdvisor[] siegeAdvisors;
+		IBotUnitRoles unitRoles;
+
+		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
+		// ConditionalTrait, so resolve lazily — at Created its condition may not be
+		// granted yet. Null provider = every roles-driven feature stays off.
+		internal IBotUnitRoles UnitRoles =>
+			unitRoles ??= Player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+
+		// Squad states read the actor->roles map through here (12.7 formation).
+		internal IReadOnlyDictionary<string, HashSet<string>> ActorRoles => UnitRoles?.ActorRoles;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -459,6 +540,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
+		int stageSinceTick = -1;
 		readonly Dictionary<string, int> cachedUnitValues = new();
 
 		// Loss telemetry (situation log): the role, cost and position each unit held at the last
@@ -476,6 +558,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int initialAttackDelay;
+		bool limitsRechecked;
 
 		// H1 attention consumer: null when no IBotActionBudget producer is on the
 		// player (then squads act unconditionally, as before). squadCursor rotates
@@ -504,6 +587,9 @@ namespace OpenRA.Mods.CA.Traits
 			return type switch
 			{
 				SquadCAType.Air => Info.AirPriorityTags,
+				SquadCAType.Fighter => Info.FighterPriorityTags,
+				SquadCAType.Gunship => Info.GunshipPriorityTags,
+				SquadCAType.Bomber => Info.BomberPriorityTags,
 				SquadCAType.Artillery => Info.ArtilleryPriorityTags,
 				SquadCAType.Naval => Info.NavalPriorityTags,
 				SquadCAType.Rush => Info.RushPriorityTags,
@@ -589,6 +675,31 @@ namespace OpenRA.Mods.CA.Traits
 		// rule as the risk gate.
 		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
 
+		// LC6 semantic fog canary: when enabled, every actor a decision consumes must
+		// already be observable to this bot — an unfiltered enumeration, a stale
+		// remembered target, or a gate counted on an unseen unit all surface as a
+		// greppable FOGCANARY-VIOLATION line. Log-only: behavior is unchanged, the
+		// line is the evidence the harness greps for.
+		internal void CanaryObserved(Actor a, string site)
+		{
+			if (!Info.FogCanaryEnabled || a == null)
+				return;
+
+			FogCanaryViolation(FoggedScans, IsNotHiddenUnit(a), site, a.Info.Name,
+				line => AIUtils.BotDebug("AI ({0}): {1}", Player.ClientIndex, line));
+		}
+
+		// The pure core so tests can drive it without an Actor/World: a violation is
+		// exactly "fog is binding AND the consumed actor was not observable".
+		public static bool FogCanaryViolation(bool foggedScans, bool observed, string site, string actorName, Action<string> log)
+		{
+			if (!foggedScans || observed)
+				return false;
+
+			log?.Invoke($"FOGCANARY-VIOLATION site={site} actor={actorName} — decision consumed an unseen actor");
+			return true;
+		}
+
 		// 6e risk routing: ask region-memory routers for waypoints that skirt
 		// remembered threat. Returns null (caller keeps direct routing) when
 		// disabled, no router answers, or the router has no useful detour.
@@ -650,6 +761,63 @@ namespace OpenRA.Mods.CA.Traits
 		// ground or air squad even when the list misses it.
 		internal bool IsNavalUnit(Actor a) =>
 			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
+
+		// CA-5 (12.8): air-family squad bookkeeping (NewUnits/Waiting/Rearming) applies
+		// to the generic Air squads and the three doctrine types alike.
+		internal static bool IsAirFamily(SquadCAType type) =>
+			type is SquadCAType.Air or SquadCAType.Fighter or SquadCAType.Gunship or SquadCAType.Bomber;
+
+		// CA-5 (12.8): which squad an air actor joins when AirDoctrineEnabled splits the
+		// air pool by role. Unroled air (transports, scouts) stays in generic Air squads.
+		// Pure so tests can drive it without a World.
+		public static SquadCAType AirSquadTypeFor(
+			bool doctrineEnabled, string actorName,
+			IReadOnlySet<string> fighterTypes, IReadOnlySet<string> gunshipTypes, IReadOnlySet<string> bomberTypes)
+		{
+			if (!doctrineEnabled)
+				return SquadCAType.Air;
+
+			if (fighterTypes.Contains(actorName))
+				return SquadCAType.Fighter;
+
+			if (gunshipTypes.Contains(actorName))
+				return SquadCAType.Gunship;
+
+			if (bomberTypes.Contains(actorName))
+				return SquadCAType.Bomber;
+
+			return SquadCAType.Air;
+		}
+
+		// CA-5 ordering rule (12.8): a WRITTEN GuerrillaTypes listing outranks a derived
+		// fighter/gunship/bomber role — but only when the doctrine is on. With the flag
+		// off the master order stands (the air branch runs before guerrilla), so
+		// @classic's overlap actors keep routing to Air squads exactly as written.
+		public static bool GuerrillaOutranksAir(
+			bool doctrineEnabled, string actorName, IReadOnlySet<string> guerrillaTypes)
+		{
+			return doctrineEnabled && guerrillaTypes.Contains(actorName);
+		}
+
+		// A member of the written AirUnitsTypes list or - only when the doctrine split is
+		// enabled - an actor the role derivation classes as fighter/gunship/bomber. The
+		// role lists heal actors the written list misses, but never pull one out of
+		// a role squad into generic Air.
+		internal bool IsAirUnit(Actor a)
+		{
+			if (a == null)
+				return false;
+
+			if (Info.AirUnitsTypes.Contains(a.Info.Name))
+				return true;
+
+			return AirSquadTypeFor(
+				Info.AirDoctrineEnabled, a.Info.Name,
+				Info.FighterTypes, Info.GunshipTypes, Info.BomberTypes) != SquadCAType.Air;
+		}
+
+		internal SquadCAType AirSquadTypeFor(string actorName) =>
+			AirSquadTypeFor(Info.AirDoctrineEnabled, actorName, Info.FighterTypes, Info.GunshipTypes, Info.BomberTypes);
 
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 		static readonly BitSet<TargetableType> GroundTargetTypes = new("Ground");
@@ -995,6 +1163,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (botLimits != null)
 				initialAttackDelay = botLimits.Info.InitialAttackDelay;
 
+			limitsRechecked = false;
+
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
 			assignRolesTicks = World.LocalRandom.Next(0, Info.AssignRolesInterval);
 			attackForceTicks = World.LocalRandom.Next(0, Info.AttackForceInterval);
@@ -1039,6 +1209,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver). A corrected
+			// tier also corrects the initial attack delay; it only ever lengthens the wait already scheduled.
+			if (!limitsRechecked)
+			{
+				limitsRechecked = true;
+				var limits = BotLimitsResolver.Recheck(Player, botLimits, nameof(SquadManagerBotModuleCA));
+				if (limits != botLimits)
+				{
+					botLimits = limits;
+					initialAttackDelay = botLimits?.Info.InitialAttackDelay ?? 0;
+					minAttackForceDelayTicks = Math.Max(minAttackForceDelayTicks, RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick));
+				}
+
+				actionBudget ??= Player.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
+			}
+
 			AssignRolesToIdleUnits(bot);
 		}
 
@@ -1442,7 +1628,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 
-				if (s.Type == SquadCAType.Air)
+				if (IsAirFamily(s.Type))
 				{
 					s.NewUnits.RemoveWhere(unitCannotBeOrdered);
 					s.RearmingUnits.RemoveWhere(unitCannotBeOrdered);
@@ -1468,7 +1654,8 @@ namespace OpenRA.Mods.CA.Traits
 			ret.PriorityTags = PriorityTagsFor(type);
 			Squads.Add(ret);
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
-				or SquadCAType.Air or SquadCAType.Naval)
+				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
+				or SquadCAType.Gunship or SquadCAType.Bomber)
 				OffensiveSquadsLaunched++;
 			return ret;
 		}
@@ -1695,27 +1882,43 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
-				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
+				else if (IsAirUnit(a))
 				{
-					var airSquads = Squads.Where(s => s.Type == SquadCAType.Air);
-					var matchingAirSquadFound = false;
-
-					foreach (var airSquad in airSquads)
+					// CA-5 (12.8): with the doctrine split on, fighter/gunship/bomber
+					// members form role squads; unroled air keeps generic Air squads.
+					// Bomber teams are capped (a full team becomes its own strike team);
+					// role squads merge across actor types - the doctrine is the
+					// formation, not the chassis - but a same-name squad is preferred.
+					// Ordering rule: a WRITTEN GuerrillaTypes listing outranks a
+					// derived air role, but only when the doctrine is on - flag off
+					// keeps master's air-first order so @classic is unmoved.
+					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
+						&& guerrillaRoll && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
-						if (airSquad.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						airGuerrilla.Units.Add(new UnitWposWrapper(a));
+						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
+					}
+					else
+					{
+						var squadType = AirSquadTypeFor(a.Info.Name);
+						var openSquads = Squads.Where(s => s.Type == squadType &&
+							(squadType != SquadCAType.Bomber || s.Units.Count < Info.BomberSquadMaxSize)).ToList();
+
+						var airSquad = openSquads.FirstOrDefault(s => s.Units.Any(u => u.Actor.Info.Name == a.Info.Name));
+						if (airSquad == null && squadType != SquadCAType.Air)
+							airSquad = openSquads.MinByOrDefault(s => s.Units.Count);
+
+						if (airSquad != null)
 						{
 							airSquad.Units.Add(new UnitWposWrapper(a));
 							airSquad.NewUnits.Add(a);
-							matchingAirSquadFound = true;
-							break;
 						}
-					}
-
-					if (!matchingAirSquadFound)
-					{
-						var newAirSquad = RegisterNewSquad(bot, SquadCAType.Air);
-						newAirSquad.Units.Add(new UnitWposWrapper(a));
-						newAirSquad.NewUnits.Add(a);
+						else
+						{
+							var newAirSquad = RegisterNewSquad(bot, squadType);
+							newAirSquad.Units.Add(new UnitWposWrapper(a));
+							newAirSquad.NewUnits.Add(a);
+						}
 					}
 				}
 				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
@@ -1775,6 +1978,18 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
 			{
+				// 12.5: squads form to the same mix production builds - an assault
+				// missing a required role stages until the pool covers it, bounded
+				// by StageCompositionTicks, instead of trickling out under-strength.
+				if (!StagedCompositionReady())
+				{
+					if (stageSinceTick < 0)
+						stageSinceTick = World.WorldTick;
+					else if (World.WorldTick - stageSinceTick < Info.StageCompositionTicks)
+						return;
+				}
+
+				stageSinceTick = -1;
 				BotMission mission = null;
 				Actor missionTarget = null;
 				FrozenActor missionFrozenTarget = null;
@@ -1932,6 +2147,32 @@ namespace OpenRA.Mods.CA.Traits
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
 			}
+		}
+
+		// 12.5: the staged assault must cover every StageRequiredRoles entry with
+		// at least one pool member (any of the unit's roles count). Disabled when
+		// unconfigured or when the faction's role map is unavailable.
+		bool StagedCompositionReady()
+		{
+			if (Info.StageCompositionTicks <= 0 || Info.StageRequiredRoles.Count == 0)
+				return true;
+
+			var roles = UnitRoles;
+			if (roles == null)
+				return true;
+
+			var needed = new HashSet<string>(Info.StageRequiredRoles);
+			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (!roles.ActorRoles.TryGetValue(u.Actor.Info.Name, out var actorRoles))
+					continue;
+
+				needed.ExceptWith(actorRoles);
+				if (needed.Count == 0)
+					return true;
+			}
+
+			return false;
 		}
 
 		void SetNextDesiredAttackForce()
