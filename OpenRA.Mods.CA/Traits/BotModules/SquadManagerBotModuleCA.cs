@@ -1273,16 +1273,23 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The most valuable live protection request, or null. Requests refresh
 		/// every tick from their publishers; expired or retracted ones are skipped.</summary>
+		public static BotProtectionRequest? SelectProtectionRequest(
+			IEnumerable<BotProtectionRequest> requests, int now, int minValue)
+		{
+			return requests
+				.Where(r => r.ExpiresTick > now && r.Value >= minValue)
+				.OrderByDescending(r => r.Value).ThenBy(r => r.ExpiresTick)
+				.Cast<BotProtectionRequest?>().FirstOrDefault();
+		}
+
 		BotProtectionRequest? SelectProtectionRequest()
 		{
 			if (!Info.UseProtectionRequests || protectionRequestProviders == null || protectionRequestProviders.Length == 0)
 				return null;
 
-			var now = World.WorldTick;
-			return protectionRequestProviders.SelectMany(p => p.ProtectionRequests ?? [])
-				.Where(r => r.ExpiresTick > now && r.Value >= Info.PrepositionMinThreatValue)
-				.OrderByDescending(r => r.Value).ThenBy(r => r.ExpiresTick)
-				.Cast<BotProtectionRequest?>().FirstOrDefault();
+			return SelectProtectionRequest(
+				protectionRequestProviders.SelectMany(p => p.ProtectionRequests ?? []),
+				World.WorldTick, Info.PrepositionMinThreatValue);
 		}
 
 		// A harasser joins the harass squad of its own type, or starts one.

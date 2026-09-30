@@ -39,5 +39,32 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(SquadManagerBotModuleCA.SelectPrepositionThreat(new[] { T(3000, 20000), T(200, 500) }, 1500, 1500), Is.Null);
 		}
+
+		static BotProtectionRequest R(int x, int value, int expires) => new(new CPos(x, 0), value, expires);
+
+		[Test]
+		public void ExpiredAndSmallRequestsAreSkipped()
+		{
+			var pick = SquadManagerBotModuleCA.SelectProtectionRequest(
+				new[] { R(1, 5000, 90), R(2, 400, 900), R(3, 8000, 900) }, 100, 1500);
+			Assert.That(pick?.Location, Is.EqualTo(new CPos(3, 0)));
+		}
+
+		[Test]
+		public void TheMostValuableLiveRequestWins()
+		{
+			var pick = SquadManagerBotModuleCA.SelectProtectionRequest(
+				new[] { R(1, 3000, 800), R(2, 9000, 900), R(3, 6000, 700) }, 100, 1500);
+			Assert.That(pick?.Location, Is.EqualTo(new CPos(2, 0)));
+		}
+
+		[Test]
+		public void NoLiveRequestReturnsNull()
+		{
+			Assert.That(SquadManagerBotModuleCA.SelectProtectionRequest(
+				new[] { R(1, 5000, 99) }, 100, 1500), Is.Null);
+			Assert.That(SquadManagerBotModuleCA.SelectProtectionRequest(
+				new BotProtectionRequest[0], 100, 1500), Is.Null);
+		}
 	}
 }
