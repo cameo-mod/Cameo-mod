@@ -274,6 +274,12 @@ namespace OpenRA.Mods.CA.Traits
 			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
 		public readonly int RoleMixRoleFloorPct = 5;
 
+		[Desc("CA-3 (12.5): max ticks a ready attack force waits for the idle pool to cover every role in StageRequiredRoles before launching anyway. 0 disables the composition gate.")]
+		public readonly int StageCompositionTicks = 0;
+
+		[Desc("CA-3 (12.5): roles a staged assault must contain at least one pool member of (e.g. frontline, anti_air). Empty disables the stage gate.")]
+		public readonly HashSet<string> StageRequiredRoles = new HashSet<string>();
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -522,6 +528,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
+		int stageSinceTick = -1;
 		readonly Dictionary<string, int> cachedUnitValues = new();
 
 		// Loss telemetry (situation log): the role, cost and position each unit held at the last
@@ -1940,6 +1947,18 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
 			{
+				// 12.5: squads form to the same mix production builds - an assault
+				// missing a required role stages until the pool covers it, bounded
+				// by StageCompositionTicks, instead of trickling out under-strength.
+				if (!StagedCompositionReady())
+				{
+					if (stageSinceTick < 0)
+						stageSinceTick = World.WorldTick;
+					else if (World.WorldTick - stageSinceTick < Info.StageCompositionTicks)
+						return;
+				}
+
+				stageSinceTick = -1;
 				BotMission mission = null;
 				Actor missionTarget = null;
 				FrozenActor missionFrozenTarget = null;
@@ -2097,6 +2116,32 @@ namespace OpenRA.Mods.CA.Traits
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
 			}
+		}
+
+		// 12.5: the staged assault must cover every StageRequiredRoles entry with
+		// at least one pool member (any of the unit's roles count). Disabled when
+		// unconfigured or when the faction's role map is unavailable.
+		bool StagedCompositionReady()
+		{
+			if (Info.StageCompositionTicks <= 0 || Info.StageRequiredRoles.Count == 0)
+				return true;
+
+			var roles = UnitRoles;
+			if (roles == null)
+				return true;
+
+			var needed = new HashSet<string>(Info.StageRequiredRoles);
+			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (!roles.ActorRoles.TryGetValue(u.Actor.Info.Name, out var actorRoles))
+					continue;
+
+				needed.ExceptWith(actorRoles);
+				if (needed.Count == 0)
+					return true;
+			}
+
+			return false;
 		}
 
 		void SetNextDesiredAttackForce()
