@@ -69,6 +69,14 @@ module field (false everywhere → master-classic behaviour unchanged):
   !CanHover & !dedicated-AA. Re-measured: fighter 7 (incl.
   td_gdi_firehawk), gunship 78, bomber 36 (incl. japan_japanesebomber);
   the ~28 multirole units no longer inflate fighter. Preview mirrors it.
+- #663 review fixes (Claude, 2026-09-30): fog-honesty manifest records the
+  6 reviewed sites (every enumeration is filtered through
+  IsPreferredObservedEnemyUnit/IsNotHiddenUnit before use — observed-only
+  under FoggedScans); guerrilla-vs-doctrine ordering made explicit via
+  `GuerrillaOutranksAir` — a WRITTEN GuerrillaTypes listing outranks a
+  derived air role ONLY when the doctrine is on, so flag-off keeps
+  master's air-first order and @classic's overlap actors (ixian_airdrone,
+  ra2_allies_harrier) still route to Air as written. +1 test.
 
 Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
 nothing sets it. The flag-on A/B is the gate for turning it on per

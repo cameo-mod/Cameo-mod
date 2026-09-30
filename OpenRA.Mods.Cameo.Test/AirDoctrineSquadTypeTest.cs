@@ -51,6 +51,20 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Classify(true, "chinook"), Is.EqualTo(SquadCAType.Air));
 		}
 
+		// §12.8 ordering rule (PR #663 review): a WRITTEN GuerrillaTypes listing
+		// outranks a derived air role - but only with the doctrine on. Flag off
+		// keeps master's air-first order so @classic's overlap actors
+		// (ixian_airdrone, ra2_allies_harrier) keep routing to Air as written.
+		[Test]
+		public void WrittenGuerrillaOutranksDerivedAirRole()
+		{
+			var guerrilla = new HashSet<string> { "raider_jet" };
+
+			Assert.That(SquadManagerBotModuleCA.GuerrillaOutranksAir(true, "raider_jet", guerrilla), Is.True);
+			Assert.That(SquadManagerBotModuleCA.GuerrillaOutranksAir(false, "raider_jet", guerrilla), Is.False);
+			Assert.That(SquadManagerBotModuleCA.GuerrillaOutranksAir(true, "mig", guerrilla), Is.False);
+		}
+
 		// §12.8 strike/CAS lists as shipped defaults - a yaml override can change
 		// them, but the code defaults pin the doctrine's intent.
 		[Test]

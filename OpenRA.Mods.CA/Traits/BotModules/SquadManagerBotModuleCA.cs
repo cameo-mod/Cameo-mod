@@ -637,6 +637,16 @@ namespace OpenRA.Mods.CA.Traits
 			return SquadCAType.Air;
 		}
 
+		// CA-5 ordering rule (12.8): a WRITTEN GuerrillaTypes listing outranks a derived
+		// fighter/gunship/bomber role — but only when the doctrine is on. With the flag
+		// off the master order stands (the air branch runs before guerrilla), so
+		// @classic's overlap actors keep routing to Air squads exactly as written.
+		public static bool GuerrillaOutranksAir(
+			bool doctrineEnabled, string actorName, IReadOnlySet<string> guerrillaTypes)
+		{
+			return doctrineEnabled && guerrillaTypes.Contains(actorName);
+		}
+
 		// A member of the written AirUnitsTypes list or - only when the doctrine split is
 		// enabled - an actor the role derivation classes as fighter/gunship/bomber. The
 		// role lists heal actors the written list misses, but never pull one out of
@@ -1464,24 +1474,36 @@ namespace OpenRA.Mods.CA.Traits
 					// Bomber teams are capped (a full team becomes its own strike team);
 					// role squads merge across actor types - the doctrine is the
 					// formation, not the chassis - but a same-name squad is preferred.
-					var squadType = AirSquadTypeFor(a.Info.Name);
-					var openSquads = Squads.Where(s => s.Type == squadType &&
-						(squadType != SquadCAType.Bomber || s.Units.Count < Info.BomberSquadMaxSize)).ToList();
-
-					var airSquad = openSquads.FirstOrDefault(s => s.Units.Any(u => u.Actor.Info.Name == a.Info.Name));
-					if (airSquad == null && squadType != SquadCAType.Air)
-						airSquad = openSquads.MinByOrDefault(s => s.Units.Count);
-
-					if (airSquad != null)
+					// Ordering rule: a WRITTEN GuerrillaTypes listing outranks a
+					// derived air role, but only when the doctrine is on - flag off
+					// keeps master's air-first order so @classic is unmoved.
+					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
+						&& guerrillaRoll && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
-						airSquad.Units.Add(new UnitWposWrapper(a));
-						airSquad.NewUnits.Add(a);
+						airGuerrilla.Units.Add(new UnitWposWrapper(a));
+						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
 					}
 					else
 					{
-						var newAirSquad = RegisterNewSquad(bot, squadType);
-						newAirSquad.Units.Add(new UnitWposWrapper(a));
-						newAirSquad.NewUnits.Add(a);
+						var squadType = AirSquadTypeFor(a.Info.Name);
+						var openSquads = Squads.Where(s => s.Type == squadType &&
+							(squadType != SquadCAType.Bomber || s.Units.Count < Info.BomberSquadMaxSize)).ToList();
+
+						var airSquad = openSquads.FirstOrDefault(s => s.Units.Any(u => u.Actor.Info.Name == a.Info.Name));
+						if (airSquad == null && squadType != SquadCAType.Air)
+							airSquad = openSquads.MinByOrDefault(s => s.Units.Count);
+
+						if (airSquad != null)
+						{
+							airSquad.Units.Add(new UnitWposWrapper(a));
+							airSquad.NewUnits.Add(a);
+						}
+						else
+						{
+							var newAirSquad = RegisterNewSquad(bot, squadType);
+							newAirSquad.Units.Add(new UnitWposWrapper(a));
+							newAirSquad.NewUnits.Add(a);
+						}
 					}
 				}
 				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
