@@ -1,3 +1,20 @@
+# 2026-09-30 (night) — Claude: LC5 ownership watchdog
+
+- `BotOwnershipWatchdog` (OpenRA.Mods.Cameo, Player, `genericbot || classicbot`): every 100 ticks it reads who holds
+  each of the bot's units (the LC1 lease table, every squad manager's squads, the idle pools it receives through the
+  engine's `IBotNotifyIdleBaseUnits` hook, so no squad-manager edit) and reports once per unit: DOUBLE_OWNER, TWO_SQUADS,
+  HELD_BY_DISABLED, DEAD_HELD (> 400 t), ORPHAN (a live squad-eligible Mobile unit in no squad, pool or lease > 750 t).
+  Read-only: it never orders, claims or releases, so classic's decisions are untouched. Active in bot-only matches
+  (the harness referee is recognised by its declared NonCombatant flag) and with `Debug.BotDebug`.
+- Per-bot `ownership` object in `cameo-ai-matches.jsonl` (checks + every kind, zero included + worst types): every A/B
+  now reports ownership health per arm. The check is `BotOwnershipLedger<TKey>`, world-free; 6 ledger tests + 1 JSON test.
+- Smoke (hard vs classic, td_gdi, A Nuclear Winter, 1 match to 17486 t): classic 175 checks, 0 violations; hard 175
+  checks, **4 DOUBLE_OWNER — `CratePickupBotModule` leased Guerrilla/Protection squad members it found `IsIdle`**
+  (humvee ×2, shotgunner, officer). That is the review's P0b class live; NOVA's #681 (squads claim their members) closes
+  it — the watchdog is its acceptance test.
+- Also: an executor-less mission record omits `by` instead of writing `""` (DAWN's #679 smoke nit); debug lines print `by=?`.
+- 400/400 tests; fog manifest +1 (own units only, §19.5-honest); boot gate to the menu.
+
 # 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
 
 - `tools/ai/ab_summary.py` gains a `spawn split (pooled, N decided)` line:

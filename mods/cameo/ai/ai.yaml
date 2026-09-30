@@ -3360,6 +3360,11 @@ Player:
 	# untouched. Squads join when NOVA's lane adopts it; the engineers claim through EngineerBotModule (ENG).
 	BotUnitLeaseRegistry:
 		RequiresCondition: genericbot
+	# LC5 (AI_MASTER_PLAN §3): the ownership watchdog. Read-only (never orders, claims or releases), so it runs on
+	# classic too: classic's squad layer is the baseline the genericbot owners are compared against. Active in
+	# bot-only matches (the A/B harness) and with Debug.BotDebug; the counts land in cameo-ai-matches.jsonl.
+	BotOwnershipWatchdog:
+		RequiresCondition: genericbot || classicbot
 	BotPersonalityController:
 		RequiresCondition: genericbot
 		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);

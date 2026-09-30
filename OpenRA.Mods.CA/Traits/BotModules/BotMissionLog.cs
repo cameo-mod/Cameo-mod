@@ -111,7 +111,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (reason != null)
 				line += $" reason={reason}";
 
-			return line + $" by={by ?? "?"} tick={tick}";
+			return line + $" by={(string.IsNullOrEmpty(by) ? "?" : by)} tick={tick}";
 		}
 
 		/// <summary>The debug.log line, free of world state so it can be tested. Grep key: `MISSION &lt;id&gt; ATTEMPT &lt;n&gt;`.</summary>
@@ -122,7 +122,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (reason != null)
 				line += $" reason={reason}";
 
-			return line + $" by={executor ?? "?"} tick={tick}";
+			return line + $" by={(string.IsNullOrEmpty(executor) ? "?" : executor)} tick={tick}";
 		}
 
 		public static void Write(BotMissionRecord record)
