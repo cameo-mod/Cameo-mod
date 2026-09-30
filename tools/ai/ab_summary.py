@@ -69,6 +69,11 @@ def main(argv: list[str]) -> int:
         games[r.get("game_uid")].append(r)
 
     stats = collections.defaultdict(lambda: {"won": 0, "lost": 0, "draw": 0, "spawn_wins": collections.Counter(), "ticks": []})
+    # Pooled spawn-position W/L: the map-asymmetry readout. `spawn` in a record
+    # is the lobby slot, not the physical side — `home` (the start cell) is the
+    # position. Per-bot "wins by side" stays above; this pools every bot so a
+    # side bias shows even when each bot's row is thin.
+    side = collections.defaultdict(lambda: {"won": 0, "lost": 0})
     for uid, recs in games.items():
         if len(recs) != 2:
             continue
@@ -77,15 +82,18 @@ def main(argv: list[str]) -> int:
         for r in recs:
             bot = r["player"]["bot_type"]
             s = stats[bot]
+            home = r["player"].get("home") or r["player"].get("name", "?")
             if draw:
                 s["draw"] += 1
             elif r["player"]["outcome"] == "won":
                 s["won"] += 1
                 # `spawn` is the lobby choice, 0 for every map-side harness player; the home
                 # cell (or, in records older than it, the seat name) is what tells sides apart.
-                s["spawn_wins"][r["player"].get("home") or r["player"].get("name", "?")] += 1
+                s["spawn_wins"][home] += 1
+                side[home]["won"] += 1
             else:
                 s["lost"] += 1
+                side[home]["lost"] += 1
             s["ticks"].append(r.get("duration_ticks") or 0)
 
     print(f"{len(games)} match(es)")
@@ -97,6 +105,13 @@ def main(argv: list[str]) -> int:
         mean = sum(s["ticks"]) // max(1, len(s["ticks"]))
         print(f"| `{bot}` | {s['won']} | {s['lost']} | {s['draw']} | {100 * s['won'] // max(1, n)}% | "
               f"{100 * lo:.0f}–{100 * hi:.0f}% | {dict(s['spawn_wins'])} | {mean} |")
+
+    # The pooled side split answers "is one spawn position favoured" across the
+    # whole corpus fed in — thin per-bot rows pool into one number per side.
+    decided = sum(v["won"] + v["lost"] for v in side.values())
+    if side and decided:
+        print(f"spawn split (pooled, {decided} decided): " +
+              " | ".join(f"{k}: {v['won']}W-{v['lost']}L" for k, v in sorted(side.items())))
     return 0
 
 

@@ -1,3 +1,18 @@
+# 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
+
+- `tools/ai/ab_summary.py` gains a `spawn split (pooled, N decided)` line:
+  W/L grouped by `player.home` (the start cell — the physical position),
+  pooled across every bot type, name-fallback for pre-`home` records.
+  Claude's correction stands implemented: `bot_outcomes[].spawn` is the
+  lobby slot, never read for position. 4 new unit tests
+  (`test_ab_summary.py`): cross-bot pooling + swaps, name fallback,
+  draws excluded, slot-vs-home trap. Measured on the machine's full
+  486-record corpus: `90,24` won 68-43 (61%) vs `11,45` on Nuclear
+  Winter — a real positional lean, still small-N per position; the
+  league-4 subset alone was 11-4 (73%).
+- Boot-gate: N/A — tools/py only, zero engine/mods content (same
+  precedent as the LC7 tools commit).
+
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
 - Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
