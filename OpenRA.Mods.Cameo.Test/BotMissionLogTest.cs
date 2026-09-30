@@ -153,6 +153,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 5), Is.EqualTo(new[] { 0, 2, 4, 3, 1 }));
 			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 2), Is.EqualTo(new[] { 0, 2 }), "one engineer per stop");
 			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 1), Is.EqualTo(new[] { 0 }));
+
+		public void AnEscortRequestAlwaysClearsTheSquadManagersBar()
+		{
+			// The first flag-on match published 440, 500, 700 and 1000 against a 1500 bar: no escort ever came.
+			Assert.That(EngineerBotModule.EscortRequestValue(440, 1500), Is.EqualTo(1500));
+			Assert.That(EngineerBotModule.EscortRequestValue(2600, 1500), Is.EqualTo(2600));
+			Assert.That(EngineerBotModule.EscortRequestValue(0, 0), Is.EqualTo(1));
 		}
 
 		[Test]

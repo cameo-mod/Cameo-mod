@@ -184,6 +184,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		EscortPlan escort;
 
+		// The squad manager serves a protection request only at or above its PrepositionMinThreatValue: a request valued at
+		// a few riflemen (the first flag-on match published 440-1000) is dropped in silence. Read the bar from the squad
+		// managers on this player (Info-level, fixed for the match) instead of copying the number.
+		int escortRequestFloor = -1;
+
+		int EscortRequestFloor() =>
+			escortRequestFloor >= 0 ? escortRequestFloor
+				: escortRequestFloor = player.PlayerActor.Info.TraitInfos<SquadManagerBotModuleCAInfo>()
+					.Select(i => i.PrepositionMinThreatValue).DefaultIfEmpty(0).Max();
+
+		/// <summary>The request value, free of world state so it can be tested: the defenders' value, never below the bar
+		/// the squad manager serves requests at.</summary>
+		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
+
 		int captureTicks;
 		int repairTicks;
 		int nextRepairJob;
@@ -795,7 +809,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
 			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
 				? []
-				: [new BotProtectionRequest(escort.Target.Location, Math.Max(1, escort.DefenceValue), world.WorldTick + Info.EscortRequestTicks)];
+				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks)];
 
 		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
 		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
