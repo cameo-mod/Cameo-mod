@@ -282,6 +282,14 @@ Player:
 		# fighter/gunship/bomber fill the CA-5 doctrine lists (FighterTypes etc.): inert until a
 		# personality sets AirDoctrineEnabled, so @classic's AirUnitsTypes stays byte-identical.
 		Apply: harvester, refinery, conyard, guerrilla, fighter, gunship, bomber
+	# AI_ARCHITECTURE.md 12.4/12.5 (CA-3, merged per DESIGN §19.3): the runtime unit/target
+	# role map — declared BotRoles + BotRoleSets derivations + the statistical classifier for
+	# whatever those leave unroled. Served via IBotUnitRoles; consumers (RoleMix production
+	# deficits, the stage-gate role coverage, formation movement) are all flag-gated and off
+	# by default, so the provider itself is inert until a personality opts in. Classic gets
+	# no provider on purpose.
+	BotUnitRoles:
+		RequiresCondition: genericbot
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest

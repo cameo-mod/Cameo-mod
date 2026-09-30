@@ -264,6 +264,34 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("CA-3 (AI_ARCHITECTURE.md 12.5): target army composition by role, percent of own mobile combat units.",
+			"Production fills the largest deficit against this mix; absent or empty keeps the proportional pick.",
+			"Keys must be combat roles (BotUnitRole.PrimaryRoleOrder); classic carries no mix on purpose -",
+			"verbatim upstream behaviour.")]
+		public readonly Dictionary<string, int> RoleMix = null;
+
+		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
+			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
+		public readonly int RoleMixRoleFloorPct = 5;
+
+		[Desc("CA-3 (12.5): max ticks a ready attack force waits for the idle pool to cover every role in StageRequiredRoles before launching anyway. 0 disables the composition gate.")]
+		public readonly int StageCompositionTicks = 0;
+
+		[Desc("CA-3 (12.5): roles a staged assault must contain at least one pool member of (e.g. frontline, anti_air). Empty disables the stage gate.")]
+		public readonly HashSet<string> StageRequiredRoles = new HashSet<string>();
+
+		[Desc("CA-4 (12.7): assault (Rush) squads move in formation - frontline leads at its slowest member's pace, anti-air sits inside, other ground trails behind the frontline centroid, scouts run free.")]
+		public readonly bool FormationMovement = false;
+
+		[Desc("CA-4 (12.7): cells behind the frontline centroid that trailing members aim for.")]
+		public readonly int FormationTrailCells = 3;
+
+		[Desc("CA-4 (12.7): cells a frontline member may outrun the slowest frontline member before it holds.")]
+		public readonly int FormationMaxLeadCells = 6;
+
+		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
+		public readonly int FormationMaxStalledLeadCells = 12;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -395,6 +423,13 @@ namespace OpenRA.Mods.CA.Traits
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
 
+			// A RoleMix key outside the combat taxonomy can never be counted or filled —
+			// fail at load like a predicate typo instead of silently starving the queue.
+			if (RoleMix != null)
+				foreach (var role in RoleMix.Keys)
+					if (!BotUnitRole.CombatRoles.Contains(role))
+						throw new YamlException($"RoleMix key `{role}` is not a combat role (valid: {string.Join(", ", BotUnitRole.PrimaryRoleOrder)}).");
+
 			// Derive support units from weapon metadata: an actor is support only when
 			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
 			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
@@ -465,6 +500,16 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
 		IBotSiegeAdvisor[] siegeAdvisors;
+		IBotUnitRoles unitRoles;
+
+		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
+		// ConditionalTrait, so resolve lazily — at Created its condition may not be
+		// granted yet. Null provider = every roles-driven feature stays off.
+		internal IBotUnitRoles UnitRoles =>
+			unitRoles ??= Player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+
+		// Squad states read the actor->roles map through here (12.7 formation).
+		internal IReadOnlyDictionary<string, HashSet<string>> ActorRoles => UnitRoles?.ActorRoles;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
@@ -495,6 +540,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
+		int stageSinceTick = -1;
 		readonly Dictionary<string, int> cachedUnitValues = new();
 
 		// Loss telemetry (situation log): the role, cost and position each unit held at the last
@@ -1913,6 +1959,18 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
 			{
+				// 12.5: squads form to the same mix production builds - an assault
+				// missing a required role stages until the pool covers it, bounded
+				// by StageCompositionTicks, instead of trickling out under-strength.
+				if (!StagedCompositionReady())
+				{
+					if (stageSinceTick < 0)
+						stageSinceTick = World.WorldTick;
+					else if (World.WorldTick - stageSinceTick < Info.StageCompositionTicks)
+						return;
+				}
+
+				stageSinceTick = -1;
 				BotMission mission = null;
 				Actor missionTarget = null;
 				FrozenActor missionFrozenTarget = null;
@@ -2070,6 +2128,32 @@ namespace OpenRA.Mods.CA.Traits
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
 			}
+		}
+
+		// 12.5: the staged assault must cover every StageRequiredRoles entry with
+		// at least one pool member (any of the unit's roles count). Disabled when
+		// unconfigured or when the faction's role map is unavailable.
+		bool StagedCompositionReady()
+		{
+			if (Info.StageCompositionTicks <= 0 || Info.StageRequiredRoles.Count == 0)
+				return true;
+
+			var roles = UnitRoles;
+			if (roles == null)
+				return true;
+
+			var needed = new HashSet<string>(Info.StageRequiredRoles);
+			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (!roles.ActorRoles.TryGetValue(u.Actor.Info.Name, out var actorRoles))
+					continue;
+
+				needed.ExceptWith(actorRoles);
+				if (needed.Count == 0)
+					return true;
+			}
+
+			return false;
 		}
 
 		void SetNextDesiredAttackForce()

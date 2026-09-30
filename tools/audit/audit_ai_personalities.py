@@ -46,6 +46,19 @@ TUNING_FIELDS = {
     "IndirectRouteChance",
     "HighValueTargetPriority",
     "HarasserTypes",
+    # CA-3 (AI_ARCHITECTURE 12.5): the role mix IS the personality flavour -
+    # compositions differ by design, and the stage/composition gate patience
+    # scales with the personality's tempo.
+    "RoleMix",
+    "RoleMixRoleFloorPct",
+    "StageCompositionTicks",
+    "StageRequiredRoles",
+    # CA-4 (AI_ARCHITECTURE 12.7): formation movement knobs; whether a personality
+    # marches in formation and how far the vanguard may lead is its tempo.
+    "FormationMovement",
+    "FormationTrailCells",
+    "FormationMaxLeadCells",
+    "FormationMaxStalledLeadCells",
     # Fast-squad count per personality and game time (maintainer 2026-09-28, DESIGN §19.1a):
     # guerrilla at least twice steamroller's, which spends its units on the main army.
     "MaxGuerrillaSquads",
