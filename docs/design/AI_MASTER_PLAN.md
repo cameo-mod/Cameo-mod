@@ -29,8 +29,8 @@
 3. **Research status (§2):** of the research round's ten headline changes, **1 is done, 4 are
    partial, 5 are not started**. Of the twelve "beat the best humans" items, **0 are done, 9 are
    partial, 3 are not started**. The combined-arms phases are mostly partial or in flight.
-4. **What is left:** 51 work items (§3), **~940 agent-hours expected (≈190 sessions of 5 h)**,
-   510 h if everything goes well and 1,570 h if everything goes badly, plus **40 A/B gates**
+4. **What is left:** 55 work items (§3), **~956 agent-hours expected (≈191 sessions of 5 h)**,
+   520 h if everything goes well and 1,604 h if everything goes badly, plus **42 A/B gates**
    worth 60–120 hours of match compute on this machine.
 5. **Calendar:** with four agents in parallel that is ~43 sessions each, **about 3–6 weeks** of
    fleet time at 1–2 sessions per agent per day. The real limits are A/B compute (one shared machine) and the order of the critical path
@@ -209,10 +209,10 @@ agent leaves.
 | CN2 | CN garrison + repair manager | DAWN | — | 6 | 10 | 18 | 11 |
 | CN3 | CN bridge repair, cliff demolition, deploy, veinhole assault, stealth/subterranean/transport states | DAWN | — | 16 | 28 | 50 | 30 |
 | RV1 | **built, #664 (draft, A/B pending):** `genericbot` gets `BaseRepairBotModule`, OpenRA + CA repair merged (DESIGN §19.3); classic runs only the CA copy, the OpenRA module is unloaded; BevManager and SharedCargo held for content (DESIGN §19.4); CncEngineer already loaded (§1.1) | Claude | — | 4 | 8 | 14 | 8 |
-| RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5 | Claude | — | 3 | 6 | 12 | 7 |
+| RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5, and the **28 `IgnoreVisibility: true` power decisions** (NOVA, 2026-09-30: `SupportPowerBotASModule` then targets unseen enemies; EMBER's LC6 ratchet counts 56 resolved): for `genericbot` the merged owner targets seen or remembered (frozen) actors only; `classic` keeps its copy | Claude | — | 3 | 6 | 12 | 7 |
 
 **Lifecycle hardening (the Fransbot author's review, [`AI_REVIEW_FRANSOTTO_2026-09-30.md`](AI_REVIEW_FRANSOTTO_2026-09-30.md))**,
-expected 81 h. Every finding was verified in the code first (that document's §1); the review itself is the
+expected 85 h. Every finding was verified in the code first (that document's §1); the review itself is the
 author's own file, [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md). **LC1 and LC5 gate the harvest
 items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until ownership is a contract.
 
@@ -228,6 +228,18 @@ items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until owner
 | ENG | merge `CaptureManagerBotModuleCA` + `CncEngineerBotModule` into one engineer owner (DESIGN §19.3) on LC1: capture routing (omniscient, §19.5), priority targets, hut/bridge repair, instant repair | Claude | LC1 | 4 | 8 | 14 | 8 |
 | LC8 | failure write-back (the review's sixth boundary): every executor that fails an objective another layer chose reports the outcome to that layer — MCV site (LC3's engine half), capture target, refinery claim (EX-2's missed claim already parks), squad attack target; CA-2c's siege failure memory is the working pattern | Claude | LC1 | 3 | 6 | 12 | 7 |
 | BEV | merge BevManager into the MCV owner: base-building vehicles (Japan's nanocores) deploy next to the base, MCVs and field-refineries (slave miner) go to fields; verify in a Japan match first | Claude | LC3 | 4 | 8 | 16 | 9 |
+| LC9 | fog: `ResourceMapBotModule` (engine) counts enemy units and bases per resource field through fog (`FindActorsInCircle`, no visibility check), and the engine `McvExpansionManagerBotModule` scores expansion threat from those counts (NOVA's verification, 2026-09-30). The planner is already honest (`RememberedEnemyThreatAt`); fix the manager's input the same way — a Cameo shadow of `ResourceMapBotModule` that counts only seen or remembered enemies | Claude | BEV | 2 | 4 | 8 | 4 |
+
+**Mission cards: one id from the strategist to the actors and back ([`AI_MISSION_CARDS.md`](AI_MISSION_CARDS.md), fransotto's
+proposal 2026-09-30)**, expected 14 h. LC8 is the return path; MC gives it ids, states, a readable log and a format
+Cameo and Fransbot can share. Learning across matches stays **OM**, under AI_ARCHITECTURE §6.1 (read at match
+start, frozen, host-local): no new ruling needed.
+
+| id | work | owner | needs | O | M | P | E |
+|---|---|---|---|--:|--:|--:|--:|
+| MC1 | `MissionId` / `AttemptId`, the closed state set (Proposed … Dormant), `IBotMissionOutcomeSink` (executors report exactly one terminal state per attempt; the owner decides), lease `MissionId`, the General's plain-text log lines; first consumers MCV site, capture, refinery claim, squad raid | Claude | LC1, LC8 | 3 | 6 | 12 | 7 |
+| MC2 | `tools/ai/mission_story.py` (per-mission story, success rate per type, missions without a terminal state) + situation-log schema 3; replay correlation by `game_uid` + tick | Claude | MC1 | 2 | 4 | 8 | 4 |
+| MC3 | `mission_card.schema.json` (versioned, shared vocabulary, `x_` private reasons), per-match JSONL archive, the offer to fransotto | Claude | MC1 | 2 | 3 | 6 | 3 |
 
 **Learning and feel (AI_ARCHITECTURE §6.4, AI_SYNTHESIS §5)**, expected 127 h
 
@@ -255,9 +267,9 @@ items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until owner
 
 | | expected | range (all go well … all go badly) |
 |---|--:|---|
-| agent work, 51 items | **~940 h ≈ 190 sessions** | 510 h … 1,570 h |
-| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~235 h ≈ 47 sessions | 130 h … 390 h |
-| A/B gates | **40** | — |
+| agent work, 55 items | **~956 h ≈ 191 sessions** | 520 h … 1,604 h |
+| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~239 h ≈ 48 sessions | 130 h … 401 h |
+| A/B gates | **42** (LC9 and MC1 change behaviour; MC2/MC3 are tools and a format) | — |
 | A/B compute: 16 matches per gate, 20–40 min per match at maximum on this machine, 3 batches in parallel | **60–120 h of wall-clock** | more when other agents' batches share the machine |
 
 Read the range, not the midpoint: the items are correlated (a slow UT delays DI, TC and §13), so the
@@ -282,7 +294,7 @@ real spread is closer to the O…P columns than the statistical ±. These are es
 | Wave | Goal | Items | Expected |
 |---|---|---|--:|
 | **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, RV2, DF A/B, CA-1 | ~74 h |
-| **1b: ownership before brains** (the Fransbot author's review) | one owner per actor and per decision, stale state and failure feedback fixed, fog canaries, fingerprinted A/B | LC1–LC8, ENG, BEV | ~81 h |
+| **1b: ownership before brains** (the Fransbot author's review) | one owner per actor and per decision, stale state and failure feedback fixed, fog canaries, fingerprinted A/B | LC1–LC9, ENG, BEV, MC1–MC3 | ~99 h |
 | **2: win the fights** (the measured loss mode: fights traded 2:1) | siege, role mix, formation, air, scouting | CA-2, CA-3, CA-4, CA-5, CA-6, CP | ~114 h |
 | **3: one brain on a real map** | CN chokepoints, influence, the utility strategist, micro | ZG, IM, UT, MI | ~142 h |
 | **4: economy, expansion, map-wide play** | the rest of EX and the leads, Fransbot island/transports/SpecOps/sea/support, CN waves and utilities | EX, PL, FB1–FB4, CN1–CN3, §2.9 (F4) | ~257 h |

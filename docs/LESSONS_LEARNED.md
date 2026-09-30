@@ -198,6 +198,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)
 - [`dotnet test` fails silently while a match holds `engine/bin` — read the tail, never grep for `Passed!` (2026-09-30)](#dotnet-test-fails-silently-while-a-match-holds-enginebin--read-the-tail-never-grep-for-passed-2026-09-30)
+- [`bot_outcomes[].spawn` is the player SLOT, not the map position — split A/B verdicts by `player.home` (2026-09-30)](#botoutcomesspawn-is-the-player-slot-not-the-map-position--split-ab-verdicts-by-playerhome-2026-09-30)
 - [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
 - [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
@@ -3178,3 +3179,19 @@ re-run: 344/344).
 
 **Rule:** read the last lines of the test output and require the `Passed!  - Failed: 0, Passed: N` line with the
 expected N; no line means no run. Run tests in a worktree no match is using (or after the batch).
+
+## `bot_outcomes[].spawn` is the player SLOT, not the map position — split A/B verdicts by `player.home` (2026-09-30)
+
+Three agents read Nuclear Winter's spawn balance on 2026-09-30 and produced three different answers, two wrong.
+`batch_results.jsonl` → `bot_outcomes[].spawn` is the **player slot** (Multi0 / Multi1); `--swap-bots` swaps
+the slots, and which map spawn a slot gets is not fixed. Counting wins by `spawn` gave "spawn 1 won 38 of 57"
+(coordinator) and "strong spawn asymmetry" (EMBER); a third note claimed "hard 10-1 from 11,45, 1-12 from 90,24"
+for ca2b, where the records show `hard` played **every** ca2b3 match from (11,45).
+
+The map position is `player.home` in `Logs/cameo-ai-matches.jsonl` (e.g. `"11,45"`). Counted that way, over every
+Nuclear Winter record with a home cell: the (90,24) side won **65 of 107** decided matches (61%) and 5 of 6
+classic mirrors — a real, moderate lean.
+
+**Rule:** split every A/B verdict by `player.home`, never by `spawn`, and check that each arm actually played both
+homes (ca2b3 did not). A swapped A/B cancels a spawn lean; an unswapped one silently measures the spawn.
+
