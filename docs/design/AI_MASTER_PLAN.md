@@ -138,7 +138,7 @@ CA: `audit_ca_drift` + `ca_vendor_sync` (a standing duty). Fransbot: `fransbot_d
 | CA-2 siege | partial | `SiegeEvaluatorBotModule` telemetry + failure memory (#656); behaviour switched off |
 | CA-3 role mix | in flight | `nova/ca3-role-mix`, `nova/ca3-stage-gate` (unmerged) |
 | CA-4 formation | in flight | `nova/ca4-formation` (10 commits, unmerged) |
-| CA-5 air doctrine | partial | AA-aware air routing; fighter/gunship/bomber roles report-only (#648) |
+| CA-5 air doctrine | in flight | AA-aware air routing; roles applied to doctrine fields + role squads behind `AirDoctrineEnabled` (off) (#648, this PR) |
 | CA-6 scouting → target | partial | spawn recon; `WeakIncludesDefence` knob off |
 | DF predictive defence | done, A/B pending | `BotThreatTracker`, DF-1…4 |
 | SG scouts + garrisons | done | #647 |

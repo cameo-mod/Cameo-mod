@@ -25,6 +25,10 @@ namespace OpenRA.Mods.CA.Traits
 		public const string Harvester = "harvester";
 		public const string Production = "production";
 		public const string Superweapon = "superweapon";
+		public const string Power = "power";
+		public const string Refinery = "refinery";
+		public const string Conyard = "conyard";
+		public const string Defence = "defence";
 
 		// A mobile actor counts as artillery when its longest-ranged armament
 		// reaches at least this far (the siege threshold, 12 cells).
@@ -62,6 +66,21 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (superweaponSources.Contains(info.Name))
 				tags.Add(Superweapon);
+
+			// Generators only - consumers carry the same trait with Amount <= 0.
+			if (info.TraitInfos<PowerInfo>().Any(p => p.Amount > 0))
+				tags.Add(Power);
+
+			if (info.HasTraitInfo<RefineryInfo>())
+				tags.Add(Refinery);
+
+			// Same shape as the `conyard` role (DeriveHas: BaseBuilding, Building).
+			if (info.HasTraitInfo<BaseBuildingInfo>() && info.HasTraitInfo<BuildingInfo>())
+				tags.Add(Conyard);
+
+			// Armed buildings - the `staticaa` role's shape without the air restriction.
+			if (info.HasTraitInfo<BuildingInfo>() && info.HasTraitInfo<AttackBaseInfo>())
+				tags.Add(Defence);
 
 			if (info.HasTraitInfo<MobileInfo>())
 				foreach (var armament in info.TraitInfos<ArmamentInfo>())

@@ -60,6 +60,91 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return missileUnitsCount / StaticAntiAirMultiplier;
 		}
 
+		// CA-5: the farthest this unit's air-valid weapons reach. Zero = not AA.
+		protected static WDist AntiAirRange(Actor unit)
+		{
+			var range = WDist.Zero;
+			foreach (var ab in unit.TraitsImplementing<AttackBase>())
+			{
+				if (ab.IsTraitDisabled || ab.IsTraitPaused)
+					continue;
+
+				foreach (var a in ab.Armaments)
+					if (a.Weapon.IsValidTarget(AirTargetTypes) && a.Weapon.Range > range)
+						range = a.Weapon.Range;
+			}
+
+			return range;
+		}
+
+		// CA-5: same weighting as CountAntiAirUnits, but an enemy only counts when
+		// its air weapons actually reach `loc` - a SAM site beyond its range is
+		// scenery, and a long-range one outside DangerScanRadius still threatens.
+		protected static int CountAntiAirUnitsInRange(IEnumerable<Actor> units, WPos loc, SquadCA owner)
+		{
+			if (!units.Any())
+				return 0;
+
+			var missileUnitsCount = 0;
+			foreach (var unit in units)
+			{
+				if (unit == null || unit.IsDead)
+					continue;
+
+				var range = AntiAirRange(unit);
+				if (range == WDist.Zero || (unit.CenterPosition - loc).HorizontalLength > range.Length)
+					continue;
+
+				// LC6: a unit counted toward the gate IS consumed by the decision -
+				// an unseen AA must never move this count.
+				owner.SquadManager.CanaryObserved(unit, "aa-gate");
+
+				missileUnitsCount += owner.SquadManager.Info.StaticAntiAirTypes.Contains(unit.Info.Name)
+					? StaticAntiAirMultiplier
+					: 1;
+			}
+
+			return missileUnitsCount / StaticAntiAirMultiplier;
+		}
+
+		// CA-5: NearToPosSafely with per-unit AA ranges for the doctrine states.
+		// One wider sweep covers long-range AA; targets are still judged inside
+		// DangerScanRadius so target selection matches the generic air wing.
+		protected static bool NearToPosSafelyAircraft(SquadCA owner, WPos loc)
+		{
+			return NearToPosSafelyAircraft(owner, loc, out _);
+		}
+
+		protected static bool NearToPosSafelyAircraft(SquadCA owner, WPos loc, out Actor detectedEnemyTarget)
+		{
+			detectedEnemyTarget = null;
+			var dangerRadius = owner.SquadManager.Info.DangerScanRadius;
+
+			var nearby = owner.World.FindActorsInCircle(loc, WDist.FromCells(dangerRadius * 2))
+				.Where(a => owner.SquadManager.IsPreferredObservedEnemyUnit(a))
+				.ToList();
+
+			if (nearby.Count == 0)
+				return true;
+
+			if (CountAntiAirUnitsInRange(nearby, loc, owner) >= owner.Units.Count)
+				return false;
+
+			var dangerRadiusLength = WDist.FromCells(dangerRadius).Length;
+			var possibleTargets = nearby
+				.Where(a => (a.CenterPosition - loc).HorizontalLength <= dangerRadiusLength
+					&& owner.SquadManager.IsAirSquadTargetType(a, owner))
+				.ToList();
+
+			if (possibleTargets.Count > 0)
+			{
+				possibleTargets = owner.SquadManager.PreferSquadTargets(possibleTargets, owner, owner.SquadManager.TagsOf);
+				detectedEnemyTarget = possibleTargets.Random(owner.Random);
+			}
+
+			return true;
+		}
+
 		protected static bool IsPathSafe(SquadCA owner, WPos start, WPos end)
 		{
 			var map = owner.World.Map;
@@ -148,9 +233,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			var target = FindAirTarget(owner);
 			if (target != null)
+			{
+				owner.SquadManager.CanaryObserved(target, "air-target");
 				return target;
+			}
 
 			FindSafePlace(owner, out target, true);
+			if (target != null)
+				owner.SquadManager.CanaryObserved(target, "air-safescan");
+
 			return target;
 		}
 
@@ -214,6 +305,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			return ShouldFlee(owner, enemies => CountAntiAirUnits(enemies, owner) > owner.Units.Count);
 		}
+
+		// CA-5 (12.8): the idle state an air-family squad returns to after fleeing.
+		// Doctrine squads keep their role behaviour; generic Air squads keep theirs.
+		protected static IState IdleStateFor(SquadCA owner) => owner.Type switch
+		{
+			SquadCAType.Fighter => new FighterIdleStateCA(),
+			SquadCAType.Gunship => new GunshipCASStateCA(),
+			SquadCAType.Bomber => new BomberIdleStateCA(),
+			_ => new AirIdleStateCA(),
+		};
 	}
 
 	class AirIdleStateCA : AirStateBaseCA, IState
@@ -415,7 +516,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			Retreat(owner, flee: false, rearm: true, repair: true);
 
-			owner.FuzzyStateMachine.ChangeState(owner, new AirIdleStateCA(), true);
+			owner.FuzzyStateMachine.ChangeState(owner, IdleStateFor(owner), true);
 		}
 
 		public void Deactivate(SquadCA owner) { }

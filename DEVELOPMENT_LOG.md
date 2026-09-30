@@ -1,3 +1,121 @@
+# 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
+
+- Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
+  `SquadManagerBotModuleCA.cs` — kept both blocks (NOVA's AA-coverage
+  machinery + CA-5 helpers); `FindNewUnits` keeps master's
+  naval→air→fire→guerrilla order, `GuerrillaOutranksAir` still
+  doctrine-gated. Verified: 0 errors, 344/344 tests, boot-gate PASS.
+  PR #663 reports MERGEABLE/CLEAN.
+- LC6 extended (`28fd04a69`): `audit_fog_honesty.py` now ratchets
+  enemy-targeting `IgnoreVisibility: true` support-power decisions on
+  the resolved Player at 56 (NOVA's verify finding 1 — engine-side
+  `SupportPowerBotASModule` strikes unobserved enemies; the manifest
+  never counted the yaml flags). Raise = FAIL pending a §19.5 ruling;
+  lower = noted free improvement. Detection only, zero behavior delta.
+- LC7 shipped as draft PR #671 (`devin/ember/lc7-ab-fingerprint`):
+  batch arms fingerprint (mod commit/dirty, engine VERSION, bin DLL
+  digest, ai+all mod yaml digests, map, batch spec) recomputed before
+  every match attempt; drift aborts with `fingerprint_drift` status;
+  `run_league.py` surfaces `cells_aborted`. 29/29 harness tests.
+- fbal-cc classic-vs-classic probe stopped on maintainer order
+  (partial: spawn-1 won all 4 mirrors; Nod 2-0 cross-faction, n too
+  small for a balance read).
+- League-4 nearly drained: hard 2-1 classic (+1 stall), 3-1
+  exploit_rush, 1-3 exploit_turtle; guerrilla cell on final match.
+
+# 2026-09-30 — Devin (EMBER): CA-5 doctrine split — role squads behind `AirDoctrineEnabled`
+
+CA-5 continuation after the merged #648 roles. Implements the §12.8
+doctrine split as squad types, gated by a new `AirDoctrineEnabled`
+module field (false everywhere → master-classic behaviour unchanged):
+
+- `SquadCAType` gains `Fighter`, `Gunship`, `Bomber`. `FindNewUnits`
+  routes `AirUnitsTypes` members (plus, when the flag is on, role
+  members the written list missed) through `AirSquadTypeFor` — a pure
+  classifier unit-tested in `AirDoctrineSquadTypeTest`. Same-name
+  squads are preferred; role squads merge across actor types; bomber
+  teams cap at `BomberSquadMaxSize` (4) so extra bombers form a second
+  strike team.
+- `BotRoleSets` Targets retargeted: `fighter/gunship/bomber` now fill
+  `FighterTypes`/`GunshipTypes`/`BomberTypes` and are added to `Apply`
+  (§2.8 review data: the #648 measured 35/78/8 disjoint sets). The
+  fields are new and empty by default, and doctrine is flag-gated, so
+  `@classic`'s written `AirUnitsTypes` is untouched — master's A/B
+  reference does not move.
+- New idle states in `AirDoctrineStatesCA.cs` implement the doctrine's
+  target selection; `AirAttackStateCA` (threat routing, rearm cycle,
+  NewUnits→WaitingUnits bookkeeping) is reused unchanged, and
+  `AirFleeStateCA` returns each squad to its role idle via
+  `IdleStateFor`.
+  - `FighterIdleStateCA`: air superiority first (visible enemy
+    aircraft, `BigAirThreats` preferred) — but targets sitting under
+    AA cover the squad cannot take are rejected, so fighters do not
+    dive covered airspace; then pick-off of isolated enemies (≤
+    `FighterPickoffMaxEscorts` armed allies in `DangerScanRadius`),
+    tag-preferring `FighterPriorityTags` (harvester by default).
+  - `GunshipCASStateCA`: anchors on the largest ground combat squad
+    (Rush/Protection/FireSupport/Guerrilla/**Artillery** — the wing
+    rides shotgun over the siege line), engages its target or enemies
+    within `GunshipCASRadiusCells` of its centre preferring `artillery`
+    + `harvester` tags, else hovers over the frontline — but only via a
+    safe line (`RouteAroundThreat` remembered-AA waypoints, else a clean
+    `IsPathSafe` line, else hold). No frontline → generic-air
+    `FindDefenselessTarget` behaviour.
+  - `BomberIdleStateCA`: holds below `BomberSquadMinSize` (2), strikes
+    tag-priority targets whose position passes the AA gate; a full team
+    takes an opportunity target like generic air.
+- Maintainer ruling (2026-09-30): aircraft survive by staying out of AA
+  range; they only engage targets inside AA cover the squad outguns.
+  Implemented as `CountAntiAirUnitsInRange`/`NearToPosSafelyAircraft` in
+  `AirStateBaseCA` — per-unit air-weapon range decides the threat, not
+  a fixed circle, and the sweep is widened (2×DangerScanRadius) so
+  long-range batteries outside the old radius still register. Statics
+  keep their ×3 weight. Generic `Air` squads keep the original
+  `NearToPosSafely` — the range-aware gate is doctrine-only.
+- `BotTargetTags` gains `power` (PowerInfo with Amount > 0 — generators
+  only), `refinery`, `conyard` (BaseBuilding+Building, the `conyard`
+  role's shape) and `defence` (armed buildings). Additive: a squad only
+  prefers a tag if its PriorityTags name it. Bomber defaults now carry
+  the full maintainer strike list: superweapon, conyard, production,
+  refinery, power, harvester, artillery (defence stays siege-conditional
+  per §12.8).
+- `RegisterNewSquad` counts the three types in `OffensiveSquadsLaunched`;
+  `CleanSquads` runs the air bookkeeping (`IsAirFamily`) on them.
+- Maintainer ruling (2026-09-30, second): dedicated-AA bombers (firehawk
+  class — a weapon whose ValidTargets may ONLY hit air, i.e. purpose-built
+  AA missiles) hunt heavy aircraft; bombers with merely AUXILIARY air
+  weapons (a gun that also hits ground/water, e.g. the Japanese bomber's
+  chaingun) stay ground-strikers. Implemented as a new role field
+  `Weapons.AirArmament` = dedicated|auxiliary in `BotRoleSets` (virtual,
+  computed per armament off each weapon's resolved ValidTargets — a
+  damage-number test fails: the chaingun's 12x6000 out-vollies the
+  firehawk's 2x20000, but only the missile is dedicated). Predicates:
+  fighter <- AirArmament dedicated & !CanHover; bomber <- ground weapon &
+  !CanHover & !dedicated-AA. Re-measured: fighter 7 (incl.
+  td_gdi_firehawk), gunship 78, bomber 36 (incl. japan_japanesebomber);
+  the ~28 multirole units no longer inflate fighter. Preview mirrors it.
+- #663 review fixes (Claude, 2026-09-30): fog-honesty manifest records the
+  6 reviewed sites (every enumeration is filtered through
+  IsPreferredObservedEnemyUnit/IsNotHiddenUnit before use — observed-only
+  under FoggedScans); guerrilla-vs-doctrine ordering made explicit via
+  `GuerrillaOutranksAir` — a WRITTEN GuerrillaTypes listing outranks a
+  derived air role ONLY when the doctrine is on, so flag-off keeps
+  master's air-first order and @classic's overlap actors (ixian_airdrone,
+  ra2_allies_harrier) still route to Air as written. +1 test.
+- LC6 first instance (claimed wave-1b): semantic fog canary wired into the
+  CA-5 sites. `FogCanaryEnabled` (default off) makes every decision
+  consumption assert the actor is observable — chosen targets
+  (fighter/gunship/bomber picks), the isolation escort count, the AA-gate
+  counted units, and the shared air fallback. An unfiltered enumeration or
+  a stale re-hidden target surfaces as `FOGCANARY-VIOLATION site=… actor=…`
+  in bot debug output — log-only, behavior unchanged. Pure core
+  `FogCanaryViolation` is unit-tested; other modules adopt the same helper
+  (it lives on SquadManagerBotModuleCA, where the fog plumbing already is).
+
+Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
+nothing sets it. The flag-on A/B is the gate for turning it on per
+personality (§12.10: a phase lands only if it does not lose to master).
+
 # 2026-09-30 — Devin (EMBER): LC7 A/B fingerprint (PR #671, draft)
 
 `run_ai_match_batch.py` now freezes the batch's arms: mod commit +
