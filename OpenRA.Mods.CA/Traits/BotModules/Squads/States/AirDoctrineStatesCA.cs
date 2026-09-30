@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
@@ -20,6 +21,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	// squads. They pick targets per role; AirAttackStateCA still flies the strike
 	// (threat routing, rearm cycle) and AirFleeStateCA returns here via
 	// IdleStateFor.
+	//
+	// Survival rule for all three: a target is only accepted inside AA cover the
+	// squad can take - per-unit weapon range decides, not a fixed circle
+	// (NearToPosSafelyAircraft). Route legs are plotted around remembered AA by
+	// the 6e router in AirAttackStateCA / RouteAroundThreat.
 
 	class FighterIdleStateCA : AirStateBaseCA, IState
 	{
@@ -46,7 +52,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		// Air superiority first: hunt visible enemy aircraft, preferring the
 		// configured big threats; otherwise pick off an enemy unit isolated from
-		// its army - few armed allies nearby and light anti-air.
+		// its army - few armed allies nearby and no AA reaching it that the squad
+		// cannot take.
 		static Actor FindFighterTarget(SquadCA owner)
 		{
 			var squadManager = owner.SquadManager;
@@ -57,10 +64,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.Where(a => squadManager.IsPreferredEnemyAircraft(a) && squadManager.IsNotHiddenUnit(a) && a.IsTargetableBy(leader))
 				.ToList();
 
-			var target = aircraft.Where(a => squadManager.Info.BigAirThreats.Contains(a.Info.Name)).ClosestToIgnoringPath(pos)
-				?? aircraft.ClosestToIgnoringPath(pos);
-			if (target != null)
-				return target;
+			// Big threats first, then nearest; skip targets sitting under AA the
+			// squad cannot outgun - diving covered airspace is suicide.
+			var ordered = aircraft
+				.OrderByDescending(a => squadManager.Info.BigAirThreats.Contains(a.Info.Name))
+				.ThenBy(a => (a.CenterPosition - pos).LengthSquared);
+			foreach (var c in ordered)
+				if (NearToPosSafelyAircraft(owner, c.CenterPosition))
+					return c;
 
 			var candidates = owner.World.Actors
 				.Where(a => squadManager.IsPreferredObservedEnemyUnit(a) && squadManager.IsNotHiddenUnit(a)
@@ -70,7 +81,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			foreach (var c in squadManager.PreferSquadTargets(candidates, owner, squadManager.TagsOf)
 				.OrderBy(c => (c.CenterPosition - pos).LengthSquared))
 			{
-				if (IsIsolated(owner, c))
+				if (IsIsolated(owner, c) && NearToPosSafelyAircraft(owner, c.CenterPosition))
 					return c;
 			}
 
@@ -84,8 +95,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.Where(a => squadManager.IsPreferredObservedEnemyUnit(a))
 				.ToList();
 
-			return near.Count(a => a.Info.HasTraitInfo<AttackBaseInfo>()) <= squadManager.Info.FighterPickoffMaxEscorts
-				&& CountAntiAirUnits(near, owner) < owner.Units.Count;
+			return near.Count(a => a.Info.HasTraitInfo<AttackBaseInfo>()) <= squadManager.Info.FighterPickoffMaxEscorts;
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -107,11 +117,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			// 12.8 CAS: attach to the main assault and engage what the frontline
-			// engages. The largest ground-combat squad stands in for the frontline.
+			// engages. The largest ground-combat squad (artillery included, so the
+			// wing rides shotgun over the siege line) stands in for the frontline.
 			var anchor = owner.SquadManager.Squads
 				.Where(s => s.IsValid && s != owner &&
 					(s.Type == SquadCAType.Rush || s.Type == SquadCAType.Protection ||
-					 s.Type == SquadCAType.FireSupport || s.Type == SquadCAType.Guerrilla))
+					 s.Type == SquadCAType.FireSupport || s.Type == SquadCAType.Guerrilla ||
+					 s.Type == SquadCAType.Artillery))
 				.MaxByOrDefault(s => s.Units.Count);
 
 			var leader = owner.Units[0].Actor;
@@ -130,7 +142,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			var anchorPos = anchor.CenterPosition;
 			var anchorTarget = anchor.TargetActor;
-			var target = anchor.IsTargetValid && anchorTarget != null && NearToPosSafely(owner, anchorTarget.CenterPosition)
+			var target = anchor.IsTargetValid && anchorTarget != null && NearToPosSafelyAircraft(owner, anchorTarget.CenterPosition)
 				? anchorTarget
 				: FindCasTarget(owner, anchorPos);
 
@@ -141,18 +153,31 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			// Nothing to engage: hover over the frontline. A unit already flying
-			// there (Fly) is left alone; hovering/landed ones get the move.
+			// Nothing to engage: hover over the frontline - but never cross AA
+			// cover to get there. Remembered-threat routing first, the direct
+			// line only if it is clean; otherwise hold position.
 			var casRadius = WDist.FromCells(owner.SquadManager.Info.GunshipCASRadiusCells).Length;
 			if ((leader.CenterPosition - anchorPos).HorizontalLength <= casRadius)
 				return;
 
 			var anchorCell = owner.World.Map.CellContaining(anchorPos);
+			var route = owner.SquadManager.RouteAroundThreat(leader, anchorCell);
+			List<CPos> waypoints;
+			if (route != null && route.Count > 0)
+				waypoints = route;
+			else if (IsPathSafe(owner, leader.CenterPosition, anchorPos))
+				waypoints = [anchorCell];
+			else
+				return;
+
 			foreach (var u in owner.Units)
 			{
 				var current = u.Actor.CurrentActivity;
 				if (current == null || current is FlyIdle)
-					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, anchorCell), false));
+				{
+					for (var i = 0; i < waypoints.Count; i++)
+						owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, waypoints[i]), i != 0));
+				}
 			}
 		}
 
@@ -171,7 +196,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return null;
 
 			return squadManager.PreferSquadTargets(candidates, owner, squadManager.TagsOf)
-				.Where(a => NearToPosSafely(owner, a.CenterPosition))
+				.Where(a => NearToPosSafelyAircraft(owner, a.CenterPosition))
 				.ClosestToIgnoringPath(anchorPos);
 		}
 
@@ -211,9 +236,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			owner.FuzzyStateMachine.ChangeState(owner, new AirAttackStateCA(), true);
 		}
 
-		// Tag-priority targets (12.8's strike list) the team can hit and whose
-		// position is not saturated with anti-air. The strike itself routes over
-		// the remembered air-threat layer in AirAttackStateCA.
+		// Tag-priority targets (12.8's strike list: superweapon, conyard,
+		// production, refinery, power, harvester, artillery) the team can hit and
+		// whose position is not covered by AA it cannot take. The strike itself
+		// routes over the remembered air-threat layer in AirAttackStateCA.
 		static Actor FindBomberTarget(SquadCA owner)
 		{
 			var squadManager = owner.SquadManager;
@@ -227,7 +253,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.OrderBy(a => (a.CenterPosition - pos).LengthSquared);
 
 			foreach (var c in candidates)
-				if (NearToPosSafely(owner, c.CenterPosition))
+				if (NearToPosSafelyAircraft(owner, c.CenterPosition))
 					return c;
 
 			return null;

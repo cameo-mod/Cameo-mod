@@ -271,11 +271,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Priority target tags for fighter pick-offs (e.g. harvester).")]
 		public readonly HashSet<string> FighterPriorityTags = [BotTargetTags.Harvester];
 
-		[Desc("Priority target tags for gunship CAS scans near the frontline.")]
-		public readonly HashSet<string> GunshipPriorityTags = [];
+		[Desc("Priority target tags for gunship CAS scans near the frontline: kill enemy artillery and straying harvesters first.")]
+		public readonly HashSet<string> GunshipPriorityTags = [BotTargetTags.Artillery, BotTargetTags.Harvester];
 
-		[Desc("Priority target tags for bomber strike teams (12.8: superweapon, production, harvester, artillery; only tags BotTargetTags emits).")]
-		public readonly HashSet<string> BomberPriorityTags = [BotTargetTags.Superweapon, BotTargetTags.Production, BotTargetTags.Harvester, BotTargetTags.Artillery];
+		[Desc("Priority target tags for bomber strike teams (12.8 strike list: superweapon, conyard, production, refinery, power, harvester, artillery). 'defence' exists in BotTargetTags but is siege-conditional and stays off.")]
+		public readonly HashSet<string> BomberPriorityTags = [BotTargetTags.Superweapon, BotTargetTags.Conyard, BotTargetTags.Production, BotTargetTags.Refinery, BotTargetTags.Power, BotTargetTags.Harvester, BotTargetTags.Artillery];
 
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;

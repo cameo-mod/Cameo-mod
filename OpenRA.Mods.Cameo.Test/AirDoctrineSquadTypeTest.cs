@@ -50,5 +50,19 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(Classify(true, "chinook"), Is.EqualTo(SquadCAType.Air));
 		}
+
+		// §12.8 strike/CAS lists as shipped defaults - a yaml override can change
+		// them, but the code defaults pin the doctrine's intent.
+		[Test]
+		public void PriorityTagDefaultsMatchTheDoctrine()
+		{
+			var info = new SquadManagerBotModuleCAInfo();
+
+			Assert.That(info.BomberPriorityTags, Is.SupersetOf(new[]
+				{ "superweapon", "conyard", "production", "refinery", "power" }));
+			Assert.That(info.GunshipPriorityTags, Is.SupersetOf(new[] { "artillery", "harvester" }));
+			Assert.That(info.FighterPriorityTags, Is.SupersetOf(new[] { "harvester" }));
+			Assert.That(info.AirDoctrineEnabled, Is.False);
+		}
 	}
 }

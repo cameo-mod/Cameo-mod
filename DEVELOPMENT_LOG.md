@@ -23,20 +23,37 @@ module field (false everywhere → master-classic behaviour unchanged):
   `AirFleeStateCA` returns each squad to its role idle via
   `IdleStateFor`.
   - `FighterIdleStateCA`: air superiority first (visible enemy
-    aircraft, `BigAirThreats` preferred), then pick-off of isolated
-    enemies (≤ `FighterPickoffMaxEscorts` armed allies + light AA in
-    `DangerScanRadius`), tag-preferring `FighterPriorityTags`
-    (harvester by default).
+    aircraft, `BigAirThreats` preferred) — but targets sitting under
+    AA cover the squad cannot take are rejected, so fighters do not
+    dive covered airspace; then pick-off of isolated enemies (≤
+    `FighterPickoffMaxEscorts` armed allies in `DangerScanRadius`),
+    tag-preferring `FighterPriorityTags` (harvester by default).
   - `GunshipCASStateCA`: anchors on the largest ground combat squad
-    (Rush/Protection/FireSupport/Guerrilla), engages its target or
-    enemies within `GunshipCASRadiusCells` of its centre, else hovers
-    over it (Move to anchor cell). No frontline → generic-air
+    (Rush/Protection/FireSupport/Guerrilla/**Artillery** — the wing
+    rides shotgun over the siege line), engages its target or enemies
+    within `GunshipCASRadiusCells` of its centre preferring `artillery`
+    + `harvester` tags, else hovers over the frontline — but only via a
+    safe line (`RouteAroundThreat` remembered-AA waypoints, else a clean
+    `IsPathSafe` line, else hold). No frontline → generic-air
     `FindDefenselessTarget` behaviour.
   - `BomberIdleStateCA`: holds below `BomberSquadMinSize` (2), strikes
-    tag-priority targets (superweapon, production, harvester,
-    artillery — the tags `BotTargetTags` actually emits) whose position
-    passes the AA gate; a full team takes an opportunity target like
-    generic air.
+    tag-priority targets whose position passes the AA gate; a full team
+    takes an opportunity target like generic air.
+- Maintainer ruling (2026-09-30): aircraft survive by staying out of AA
+  range; they only engage targets inside AA cover the squad outguns.
+  Implemented as `CountAntiAirUnitsInRange`/`NearToPosSafelyAircraft` in
+  `AirStateBaseCA` — per-unit air-weapon range decides the threat, not
+  a fixed circle, and the sweep is widened (2×DangerScanRadius) so
+  long-range batteries outside the old radius still register. Statics
+  keep their ×3 weight. Generic `Air` squads keep the original
+  `NearToPosSafely` — the range-aware gate is doctrine-only.
+- `BotTargetTags` gains `power` (PowerInfo with Amount > 0 — generators
+  only), `refinery`, `conyard` (BaseBuilding+Building, the `conyard`
+  role's shape) and `defence` (armed buildings). Additive: a squad only
+  prefers a tag if its PriorityTags name it. Bomber defaults now carry
+  the full maintainer strike list: superweapon, conyard, production,
+  refinery, power, harvester, artillery (defence stays siege-conditional
+  per §12.8).
 - `RegisterNewSquad` counts the three types in `OffensiveSquadsLaunched`;
   `CleanSquads` runs the air bookkeeping (`IsAirFamily`) on them.
 
