@@ -112,7 +112,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (r.Reason != null)
 				AiMatchLogWriter.AppendString(b, "reason", r.Reason);
 
-			AiMatchLogWriter.AppendString(b, "by", r.Executor);
+			// An executor-less record (a DENIED no commander bid on) omits `by` rather than writing an empty name.
+			if (!string.IsNullOrEmpty(r.Executor))
+				AiMatchLogWriter.AppendString(b, "by", r.Executor);
 			AiMatchLogWriter.AppendNumber(b, "tick", r.Tick);
 			if (r.MissionType != null)
 				AiMatchLogWriter.AppendString(b, "type", r.MissionType);

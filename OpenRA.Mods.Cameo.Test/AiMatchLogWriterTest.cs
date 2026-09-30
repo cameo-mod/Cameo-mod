@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits;
+using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -165,6 +166,37 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(timeline[1].GetArrayLength(), Is.EqualTo(AiMatchLogWriter.StatsTimelineFields.Split(',').Length));
 				Assert.That(timeline[1][3].GetInt32(), Is.EqualTo(1900));
 			}
+		}
+
+		[Test]
+		public void OwnershipCountsAreOneObjectWithEveryKindAndTheWorstTypesFirst()
+		{
+			var counts = new Dictionary<BotOwnershipViolation, int> { [BotOwnershipViolation.DoubleOwner] = 3, [BotOwnershipViolation.Orphan] = 1 };
+			var byType = new Dictionary<(BotOwnershipViolation, string), int>
+			{
+				[(BotOwnershipViolation.DoubleOwner, "td_gdi_humveemkii")] = 2,
+				[(BotOwnershipViolation.DoubleOwner, "td_gdi_shotgunner")] = 1,
+				[(BotOwnershipViolation.Orphan, "td_gdi_apc")] = 1,
+			};
+
+			var b = new StringBuilder("{");
+			AiMatchLogWriter.AppendNumber(b, "schema", 2, true);
+			AiMatchLogWriter.AppendOwnership(b, 240, counts, byType);
+			b.Append('}');
+
+			using var doc = JsonDocument.Parse(b.ToString());
+			var o = doc.RootElement.GetProperty("ownership");
+			Assert.That(o.GetProperty("checks").GetInt32(), Is.EqualTo(240));
+			Assert.That(o.GetProperty("double_owner").GetInt32(), Is.EqualTo(3));
+			Assert.That(o.GetProperty("two_squads").GetInt32(), Is.EqualTo(0), "every kind is present, zero included");
+			Assert.That(o.GetProperty("held_by_disabled").GetInt32(), Is.EqualTo(0));
+			Assert.That(o.GetProperty("dead_held").GetInt32(), Is.EqualTo(0));
+			Assert.That(o.GetProperty("orphan").GetInt32(), Is.EqualTo(1));
+			var first = o.GetProperty("by_type")[0];
+			Assert.That(first.GetProperty("kind").GetString(), Is.EqualTo("double_owner"));
+			Assert.That(first.GetProperty("type").GetString(), Is.EqualTo("td_gdi_humveemkii"));
+			Assert.That(first.GetProperty("units").GetInt32(), Is.EqualTo(2));
+			Assert.That(o.GetProperty("by_type").GetArrayLength(), Is.EqualTo(3));
 		}
 	}
 }

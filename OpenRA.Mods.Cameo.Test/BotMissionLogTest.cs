@@ -76,6 +76,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ADenialNobodyBidOnHasNoExecutorRatherThanAnEmptyOne()
+		{
+			// DAWN's #679 smoke: broker DENIED rows serialized `by: ""`.
+			var record = new BotMissionRecord { MissionId = "frans:77", Event = BotMissionEvent.Denied, Executor = "", Tick = 500 };
+			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			using var doc = JsonDocument.Parse(line);
+			Assert.That(doc.RootElement.TryGetProperty("by", out _), Is.False);
+			Assert.That(BotMissionLog.FormatEventLine("Multi0", "frans:77", BotMissionEvent.Denied, null, "", 500),
+				Is.EqualTo("AI Multi0: MISSION frans:77 DENIED by=? tick=500"));
+		}
+
+		[Test]
 		public void TheArchiveLineIsOneJsonObjectWithTheSchemaAndIds()
 		{
 			var record = new BotMissionRecord
