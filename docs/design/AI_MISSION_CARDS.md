@@ -107,6 +107,14 @@ logged `MISSION <id> DORMANT until tick N`) — fransotto's dormant shelf, owned
 executes captures. Both ship OFF (0) until their A/B (AI_MASTER_PLAN §1.2 step 6); the candidate sets 1 and 2. For
 missions the master AI chooses and squads execute, the shelf is LC8.
 
+**Escorted captures — one mission, two executors (maintainer 2026-09-30, `EscortDefendedCaptures`, off until its A/B).**
+A target with enemy armed units within `EnemyAvoidanceRadius` is never attempted solo: the engineer owner writes the
+mission `PUBLISHED` and raises a protection request at the target through the squad manager's escort seam
+(`IBotProtectionRequestProvider`, which needs `UseProtectionRequests`); the engineer goes — attempt `COMMITTED` — only
+once our armed value there reaches `EscortSuperiority` (100%) of the defenders', and the request stands while the attempt
+lives. No escort within `EscortWaitTicks` (3000): the mission is `DENIED no_units` and goes `DORMANT` — no execution
+attempt ever existed, exactly fransotto's distinction.
+
 `grep "MISSION <id>"` tells one mission's whole story; when "then nothing happens", the last line names the layer
 that went quiet — fransotto's point about finding the bug in the right commander file. Emitters, in order:
 engineer owner (built, MC1), squad raids/defends (NOVA #681, switching to the writer), Fransbot broker (DAWN #679),

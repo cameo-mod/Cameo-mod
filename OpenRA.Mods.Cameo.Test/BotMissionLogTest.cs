@@ -129,6 +129,16 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AnEscortedCaptureWaitsForSuperiority()
+		{
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");
+			Assert.That(EngineerBotModule.EscortReady(1500, 1600, 100), Is.False);
+			Assert.That(EngineerBotModule.EscortReady(1600, 1600, 100), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 150), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(int.MaxValue / 50, int.MaxValue / 60, 100), Is.True, "no int overflow");
+		}
+
+		[Test]
 		public void OneMissionOneLiveAttemptByDefault()
 		{
 			Assert.That(EngineerBotModule.TargetFull(0, 1), Is.False);

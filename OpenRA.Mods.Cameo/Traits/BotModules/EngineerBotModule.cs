@@ -111,6 +111,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
+		[Desc("Escort as ONE mission (maintainer 2026-09-30): a capture target defended by enemy armed units (within",
+			"EnemyAvoidanceRadius) is not attempted solo. The mission is PUBLISHED and a protection request is raised at the",
+			"target (IBotProtectionRequestProvider, the squad manager's escort seam — it needs UseProtectionRequests); the",
+			"engineer goes once our armed value there reaches EscortSuperiority percent of the defenders'. Off until its A/B.")]
+		public readonly bool EscortDefendedCaptures = false;
+
+		[Desc("Percent of the defenders' value our armed units near the target must reach before the engineer goes.")]
+		public readonly int EscortSuperiority = 100;
+
+		[Desc("Ticks an escorted capture waits for its escort before the mission is DENIED (no_units) and goes dormant.")]
+		public readonly int EscortWaitTicks = 3000;
+
+		[Desc("Ticks a published protection request stays valid; it is re-published while the mission lives.")]
+		public readonly int EscortRequestTicks = 250;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -118,7 +133,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
-	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData
+	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
+		IBotProtectionRequestProvider
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -145,6 +161,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> missionAttempts = [];
 		readonly Dictionary<string, int> missionFailStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
+
+		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
+		sealed class EscortPlan
+		{
+			public Actor Target;
+			public string MissionId;
+			public int SinceTick;
+			public int DefenceValue;
+			public bool Committed;
+		}
+
+		EscortPlan escort;
 
 		int captureTicks;
 		int repairTicks;
@@ -247,6 +275,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			housekeptTick = tick;
+			HousekeepEscort(tick);
 			var leases = BotUnitLeases.Of(player);
 			foreach (var (a, job) in assigned.ToList())
 			{
@@ -320,7 +349,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			assigned[engineer] = assignment;
 			bot.QueueOrder(order);
 			if (job == EngineerJob.Capture)
+			{
 				StartMission(assignment, engineer);
+				if (escort != null && escort.Target == target)
+					escort.Committed = true;
+			}
 
 			switch (job)
 			{
@@ -361,7 +394,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var ordered = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				ConsiderEscort(candidates);
+				var ordered = candidates.Where(t => !BlockedByEscort(t)).ToList();
 
 				// As the CA parent: each attempt uses up a target; a capturer is used up only when it is sent.
 				var attempts = Math.Min(capturers.Count, ordered.Count);
@@ -409,7 +444,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			foreach (var capturer in remaining)
 			{
-				var target = targets.Where(t => !TargetFull(t) && !Dormant(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
+				ConsiderEscort(targets.Where(t => !TargetFull(t) && !Dormant(t)).OrderByDescending(t => t.GetSellValue()));
+				var target = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
 				if (target == null || SafePath(capturer.Actor, target).Type == TargetType.Invalid)
 					continue;
 
@@ -512,6 +548,112 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		/// <summary>The escort rule, free of world state so it can be tested: an undefended target needs no escort;
+		/// otherwise our armed value near it must reach `superiorityPct` percent of the defenders'.</summary>
+		public static bool EscortReady(int ownValue, int defenceValue, int superiorityPct) =>
+			defenceValue <= 0 || (long)ownValue * 100 >= (long)defenceValue * superiorityPct;
+
+		static int CostOf(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+		// DESIGN §19.5: the engineer owner is omniscient as a whole (maintainer 2026-09-30) — these scans see through fog.
+		int DefenceValue(Actor target) =>
+			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
+				.Where(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& u.Info.HasTraitInfo<AttackBaseInfo>())
+				.Sum(CostOf);
+
+		int OwnArmedValueNear(Actor target) =>
+			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
+				.Where(u => !u.IsDead && u.IsInWorld && u.Owner == player && u.Info.HasTraitInfo<AttackBaseInfo>()
+					&& !u.Info.HasTraitInfo<BuildingInfo>())
+				.Sum(CostOf);
+
+		/// <summary>True when a defended target may not be attempted yet: escorts on, defenders present, and no ready
+		/// escort plan for exactly this target.</summary>
+		bool BlockedByEscort(Actor target)
+		{
+			if (!Info.EscortDefendedCaptures)
+				return false;
+
+			var defence = DefenceValue(target);
+			if (defence <= 0)
+				return false;
+
+			if (escort == null || escort.Target != target)
+				return true;
+
+			escort.DefenceValue = defence;
+			return !EscortReady(OwnArmedValueNear(target), defence, Info.EscortSuperiority);
+		}
+
+		/// <summary>Opens the one escort plan for the first defended candidate (the candidates arrive best first).</summary>
+		void ConsiderEscort(IEnumerable<Actor> candidates)
+		{
+			if (!Info.EscortDefendedCaptures || escort != null)
+				return;
+
+			foreach (var t in candidates)
+			{
+				var defence = DefenceValue(t);
+				if (defence <= 0)
+					continue;
+
+				escort = new EscortPlan
+				{
+					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence
+				};
+
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Published,
+					Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = defence
+				});
+				return;
+			}
+		}
+
+		/// <summary>Ends a plan whose target is gone or ours, and denies one whose escort never came.</summary>
+		void HousekeepEscort(int tick)
+		{
+			if (escort == null || escort.Committed)
+				return;
+
+			var t = escort.Target;
+			if (t.IsDead || !t.IsInWorld || t.Owner == player)
+			{
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.TargetGone,
+					Executor = "Engineers", MissionType = "capture"
+				});
+				escort = null;
+				return;
+			}
+
+			if (tick - escort.SinceTick < Info.EscortWaitTicks)
+				return;
+
+			// No escort in time: no execution attempt ever existed — mission feedback, then the shelf.
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.NoUnits,
+				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = escort.DefenceValue
+			});
+			dormantUntil[escort.MissionId] = tick + Info.CaptureDormantTicks;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.NoUnits,
+				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location
+			});
+			escort = null;
+		}
+
+		/// <summary>The escort seam: one standing guard request at the escorted target while its mission lives.</summary>
+		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
+			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
+				? []
+				: [new BotProtectionRequest(escort.Target.Location, Math.Max(1, escort.DefenceValue), world.WorldTick + Info.EscortRequestTicks)];
+
 		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
 		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
 
@@ -573,6 +715,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (job.MissionId == null)
 				return;
+
+			// The escorted attempt is over either way: the escort's job ends with it.
+			if (escort != null && escort.MissionId == job.MissionId)
+				escort = null;
 
 			var target = job.Target;
 			var targetGone = target == null || target.IsDead || !target.IsInWorld;
