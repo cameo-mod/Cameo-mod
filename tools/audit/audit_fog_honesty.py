@@ -27,6 +27,8 @@ Second check (DESIGN §19.5, maintainer 2026-09-30): no module that can run for 
 visibility check off (`Check…Visibility: false`, `UseFoggedObservation: false`, `RespectShroud: false`) —
 the allowed omniscient modules are `CaptureManagerBotModuleCA` (engineers route around the army to the
 construction yard / tech centres) and `CratePickupBotModule` (a bot that lost its MCV finds a crate anywhere). `classic` is the omniscient A/B reference and is not checked.
+`EngineerBotModule` (the ENG merge of the capture manager with the AS engineer module) is omniscient as a whole:
+the maintainer ruled on 2026-09-30 that the engineer owner may see through fog for capture AND repair.
 
 A count-only ratchet cannot tell "enumerating my own units" (honest — own
 actors are always visible) from "enumerating enemy targets" (a cheat). It does
@@ -112,7 +114,13 @@ def count_sites(path: pathlib.Path) -> int:
 
 # DESIGN §19.5 (maintainer 2026-09-30): the only modules of the Frankenstein bot allowed to see through fog —
 # engineers routing around the army to capture, and crate pickup for a bot that lost its MCV.
-ALLOWED_OMNISCIENT = {"CaptureManagerBotModuleCA", "CratePickupBotModule"}
+# module -> the visibility switches it may turn off (None = any). DESIGN §19.5; the engineer owner is omniscient
+# as a whole (maintainer 2026-09-30), so the ENG merge inherits the capture manager's exception whole.
+ALLOWED_OMNISCIENT: dict[str, set[str] | None] = {
+    "CaptureManagerBotModuleCA": None,
+    "EngineerBotModule": None,
+    "CratePickupBotModule": None,
+}
 VISIBILITY_SWITCH = re.compile(r"^(Check\w*Visibility|UseFoggedObservation|RespectShroud)$")
 IDENT = re.compile(r"[A-Za-z_][\w\-.]*")
 
@@ -156,10 +164,11 @@ def visibility_switch_failures() -> list[str]:
     failures = []
     for c in player.children:
         base = c.key.split("@", 1)[0]
-        if c.key.startswith("-") or base in ALLOWED_OMNISCIENT:
+        allowed = ALLOWED_OMNISCIENT.get(base, set())
+        if c.key.startswith("-") or allowed is None:
             continue
         switches = [k for k in c.children if VISIBILITY_SWITCH.match(k.key)
-                    and k.value.strip().lower() == "false"]
+                    and k.value.strip().lower() == "false" and k.key not in allowed]
         if not switches:
             continue
         expr = c.get("RequiresCondition") or ""
