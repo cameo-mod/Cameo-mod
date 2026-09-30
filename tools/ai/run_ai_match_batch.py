@@ -727,7 +727,13 @@ def compute_fingerprint(
     version_file = engine / "VERSION"
     engine_version = None
     if version_file.is_file():
-        engine_version = version_file.read_text(encoding="utf-8", errors="replace").strip() or None
+        # The engine writes VERSION as UTF-16 (BOM'd) on Windows; a utf-8
+        # read yields NUL-separated mojibake. Decode by BOM, fall back plain.
+        raw = version_file.read_bytes()
+        if raw.startswith(b"\xff\xfe") or raw.startswith(b"\xfe\xff"):
+            engine_version = raw.decode("utf-16", errors="replace").strip() or None
+        else:
+            engine_version = raw.decode("utf-8", errors="replace").strip() or None
     ai_sha, ai_count = _ai_yaml_sha256(repo_root / "mods")
     mod_sha, mod_count = _mod_yaml_sha256(repo_root / "mods")
     return {

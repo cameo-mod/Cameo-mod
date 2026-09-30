@@ -1,3 +1,18 @@
+# 2026-09-30 — Devin (EMBER): LC7 A/B fingerprint (PR #671, draft)
+
+`run_ai_match_batch.py` now freezes the batch's arms: mod commit +
+scoped dirty-flag, engine VERSION, `engine/bin/OpenRA*.dll` digest
+(mid-batch rebuilds), ai.yaml + ai/*.yaml digest, ALL mods/**/*.yaml
+digest (mod_yaml_sha256 — the league-3 corruption class, where a rules
+edit only ever tripped a boolean dirty flag that cannot tell two dirty
+states apart), map source, and the batch spec. Recomputed before EVERY
+match attempt; any drift records status `fingerprint_drift` +
+per-component was→now in batch_results.jsonl and aborts the batch.
+`--allow-fingerprint-drift` logs and continues. `run_league.py`
+surfaces the abort per-cell and as `cells_aborted` in the aggregate.
+Verified: 29/29 test_ai_batch_harness (8 new fingerprint cases). Tools-
+only — no engine/mods/C# content; boot-gate N/A, recorded per protocol.
+
 # 2026-09-29 — Devin (NOVA): protection-release convergence (PR #632) + CA-3 A/B on post-#630 master
 
 Maintainer-contract converge (fleet REPLY_2026-09-28_claude_round_late, ORDERS
