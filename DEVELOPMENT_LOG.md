@@ -1,3 +1,26 @@
+# 2026-09-30 (late pm) — Devin (NOVA): #678 merged; MissionCard lineage slice
+
+- #678 (CA-3/CA-4 port) merged → master `1dbbfe136`. Ported the stale
+  `ca3-role-mix`/`ca3-stage-gate`/`ca4-formation` stack as a fresh patch
+  set: merged `IBotUnitRoles`/`BotUnitRoles` (consumes `BotRoleSets`,
+  statistical fill only for unroled units — no parallel roles system per
+  §19.3), `RoleMix` production filler, `StageRequiredRoles` launch gate,
+  `FormationMovement` — all flag-gated inert. 359 tests, boot-gate PASS.
+  Latent flag-for-later: formation `WVec.Dot` can overflow on huge maps
+  (inert until `FormationMovement` is flipped).
+- MissionCard lineage slice (#681, telemetry-only): `BotMission.MissionId`
+  deterministic from `(Type, TargetPlayer, RegionIndex)` — stable across
+  re-derived situation passes. `MissionTaken` numbers each attempt; the
+  squad carries `(MissionId, attempt)`; debug log emits
+  `MISSION n ATTEMPT m COMMITTED/FAILED`. New opt-in
+  `IBotMissionOutcomeSink` + `BotMissionAttemptState` (fransotto's
+  vocabulary + `Failed`). Provider-side dormant-shelf/success detection
+  and the JSONL card archive remain open (MasterAi lane / LA lane).
+- Note for agents: `SquadManagerBotModuleCA.cs` hit the stale-editor
+  overwrite again mid-edit (write landed, then reverted silently) —
+  verify `git status` lists your files before committing; I had to
+  re-apply via scripted patch.
+
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
 - Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
