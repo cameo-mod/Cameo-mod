@@ -10,7 +10,10 @@ DeriveHas trait type (C# base-class names count — `AttackAircraft` satisfies
 predicate, and is not Excluded. Trait type names are expanded by walking the
 `class XInfo : YInfo` declarations in the C# sources, and the virtual
 `Weapons.ValidTargets` is the union of the ValidTargets of the weapons on the
-actor's enabled armaments. An armament counts as enabled exactly when its
+actor's enabled armaments, and the sibling virtual `Weapons.AirArmament`
+classes each actor `dedicated` (an enabled armament whose weapon may ONLY hit
+air), `auxiliary` (air-capable but no pure-AA armament) or nothing. An armament
+counts as enabled exactly when its
 RequiresCondition BooleanExpression evaluates true under
 `VariableExpression.NoVariables` — every identifier resolves false, so
 `!token` is true while a bare token, `a && b` and `a || b` are all false.
@@ -62,6 +65,11 @@ CS_GLOBS = (
 
 # WeaponInfo.ValidTargets default when a weapon declares none.
 VALID_TARGETS_DEFAULT = {"ground", "water"}
+
+# Target classes that count as "air" for Weapons.AirArmament (mirrors
+# BotRoleSets.AirClasses): a weapon whose ValidTargets is a subset is a
+# `dedicated` AA armament; merely overlapping makes it `auxiliary`.
+AIR_CLASSES = {"air", "aircraft"}
 
 
 def trait_table() -> tuple[dict[str, str], dict[str, dict[str, tuple[str, str | None]]]]:
@@ -280,6 +288,7 @@ def collect_actors(rs: miniyaml.Ruleset, parents, decls, field_keys) -> tuple[di
                 types |= ex
         fields: dict[str, set[str]] = {}
         targets, approx, armed = set(), 0, False
+        air_capable = dedicated_aa = False
         for c in node.children:
             if c.key.split("@", 1)[0] != "Armament":
                 continue
@@ -294,12 +303,22 @@ def collect_actors(rs: miniyaml.Ruleset, parents, decls, field_keys) -> tuple[di
             if weapon is None:
                 continue
             raw = weapon.get("ValidTargets")
-            targets |= {x.strip() for x in raw.split(",") if x.strip()} if raw else set(VALID_TARGETS_DEFAULT)
+            vt = {x.strip() for x in raw.split(",") if x.strip()} if raw else set(VALID_TARGETS_DEFAULT)
+            targets |= vt
+            if {t.lower() for t in vt} & AIR_CLASSES:
+                air_capable = True
+                if {t.lower() for t in vt} <= AIR_CLASSES:
+                    dedicated_aa = True
         if armed:
             field_seen.add(("Weapons", "ValidTargets"))
+            field_seen.add(("Weapons", "AirArmament"))
+        air_class = {"dedicated"} if dedicated_aa else ({"auxiliary"} if air_capable else set())
         for trait, field in field_keys:
             if (trait, field) == ("Weapons", "ValidTargets"):
                 fields[f"{trait}.{field}"] = targets
+                continue
+            if (trait, field) == ("Weapons", "AirArmament"):
+                fields[f"{trait}.{field}"] = air_class
                 continue
             vals: set[str] = set()
             for c in node.children:

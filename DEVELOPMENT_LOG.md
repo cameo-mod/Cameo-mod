@@ -56,6 +56,19 @@ module field (false everywhere → master-classic behaviour unchanged):
   per §12.8).
 - `RegisterNewSquad` counts the three types in `OffensiveSquadsLaunched`;
   `CleanSquads` runs the air bookkeeping (`IsAirFamily`) on them.
+- Maintainer ruling (2026-09-30, second): dedicated-AA bombers (firehawk
+  class — a weapon whose ValidTargets may ONLY hit air, i.e. purpose-built
+  AA missiles) hunt heavy aircraft; bombers with merely AUXILIARY air
+  weapons (a gun that also hits ground/water, e.g. the Japanese bomber's
+  chaingun) stay ground-strikers. Implemented as a new role field
+  `Weapons.AirArmament` = dedicated|auxiliary in `BotRoleSets` (virtual,
+  computed per armament off each weapon's resolved ValidTargets — a
+  damage-number test fails: the chaingun's 12x6000 out-vollies the
+  firehawk's 2x20000, but only the missile is dedicated). Predicates:
+  fighter <- AirArmament dedicated & !CanHover; bomber <- ground weapon &
+  !CanHover & !dedicated-AA. Re-measured: fighter 7 (incl.
+  td_gdi_firehawk), gunship 78, bomber 36 (incl. japan_japanesebomber);
+  the ~28 multirole units no longer inflate fighter. Preview mirrors it.
 
 Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
 nothing sets it. The flag-on A/B is the gate for turning it on per

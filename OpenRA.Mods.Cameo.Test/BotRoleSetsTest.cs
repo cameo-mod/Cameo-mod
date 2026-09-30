@@ -154,26 +154,34 @@ namespace OpenRA.Mods.Cameo.Test
 			new(name, traits.ToHashSet(), roles.ToFrozenSet(), true,
 				fields.ToDictionary(kv => kv.Key, kv => (IReadOnlySet<string>)kv.Value.ToHashSet()));
 
-		// CA-5 doctrine split (AI_ARCHITECTURE 12.4): gunship = CanHover (loiters)
-		// + ground weapon — a dual-purpose helicopter is a gunship even when it
-		// can also hit air. fighter = air-capable, excluding CanHover entirely;
-		// a hovering pure-A2A unit keeps its role through an explicit BotRoles
-		// tag. bomber = non-hovering ground-only striker. Transports/scouts
-		// derive into none of the three.
+		// CA-5 doctrine split (AI_ARCHITECTURE 12.4 + maintainer ruling 2026-09-30):
+		// gunship = CanHover (loiters) + ground weapon — a dual-purpose helicopter
+		// is a gunship even when it can also hit air. fighter = non-hovering with a
+		// DEDICATED AA armament (Weapons.AirArmament any dedicated — ValidTargets
+		// that may only hit air, like firehawk's missiles); a multirole gun that
+		// also hits ground/water is merely `auxiliary` and stays out of fighter.
+		// A hovering pure-A2A unit keeps its role through an explicit BotRoles tag.
+		// bomber = non-hovering ground striker; auxiliary-AA bombers stay bombers
+		// and their defensive guns do not drag them into fighter squads.
+		// Transports/scouts derive into none of the three.
 		[Test]
 		public void AirDoctrineRolesSplitByWeaponTargetsAndHover()
 		{
 			const string VT = "Aircraft.CanHover";
 			const string WT = "Weapons.ValidTargets";
+			const string AA = "Weapons.AirArmament";
 			var actors = new[]
 			{
-				WithFields("fighter_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Air", "Ground"] }),
-				WithFields("gunship_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Ground"] }),
-				WithFields("multirole_heli", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Air", "Ground"] }),
-				WithFields("hover_a2a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Air"] }, new HashSet<string> { "fighter" }),
-				WithFields("bomber_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Ground"] }),
-				WithFields("transport_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = new string[0] }),
-				WithFields("scout_a", ["Aircraft"], new() { [VT] = ["False"], [WT] = new string[0] }),
+				// td_gdi_firehawk: dedicated AA missiles + bombs.
+				WithFields("fighter_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Air", "Ground"], [AA] = ["dedicated"] }),
+				WithFields("gunship_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Ground"], [AA] = new string[0] }),
+				WithFields("multirole_heli", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Air", "Ground"], [AA] = ["auxiliary"] }),
+				WithFields("hover_a2a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = ["Air"], [AA] = ["dedicated"] }, new HashSet<string> { "fighter" }),
+				WithFields("bomber_a", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Ground"], [AA] = new string[0] }),
+				// japan_japanesebomber: bombs + auxiliary chaingun - defensive only.
+				WithFields("auxaa_bomber", ["Aircraft", "AttackBase"], new() { [VT] = ["False"], [WT] = ["Ground", "Air"], [AA] = ["auxiliary"] }),
+				WithFields("transport_a", ["Aircraft", "AttackBase"], new() { [VT] = ["True"], [WT] = new string[0], [AA] = new string[0] }),
+				WithFields("scout_a", ["Aircraft"], new() { [VT] = ["False"], [WT] = new string[0], [AA] = new string[0] }),
 			};
 
 			var has = new Dictionary<string, string[]>
@@ -184,7 +192,7 @@ namespace OpenRA.Mods.Cameo.Test
 			};
 			var hasF = new Dictionary<string, BotRoleSetsInfo.FieldPredicate[]>
 			{
-				["fighter"] = [BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Air|Aircraft")],
+				["fighter"] = [BotRoleSetsInfo.FieldPredicate.Parse("Weapons.AirArmament any dedicated")],
 				["gunship"] = [
 					BotRoleSetsInfo.FieldPredicate.Parse("Aircraft.CanHover any True"),
 					BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Ground")],
@@ -195,14 +203,14 @@ namespace OpenRA.Mods.Cameo.Test
 				["fighter"] = [BotRoleSetsInfo.FieldPredicate.Parse("Aircraft.CanHover any True")],
 				["bomber"] = [
 					BotRoleSetsInfo.FieldPredicate.Parse("Aircraft.CanHover any True"),
-					BotRoleSetsInfo.FieldPredicate.Parse("Weapons.ValidTargets any Air|Aircraft")],
+					BotRoleSetsInfo.FieldPredicate.Parse("Weapons.AirArmament any dedicated")],
 			};
 
 			var m = BotRoleSetsInfo.ResolveMembers(actors, has, None, None, true, hasF, notF);
 
 			Assert.That(m["fighter"], Is.EquivalentTo(new[] { "fighter_a", "hover_a2a" }));
 			Assert.That(m["gunship"], Is.EquivalentTo(new[] { "gunship_a", "multirole_heli" }));
-			Assert.That(m["bomber"], Is.EquivalentTo(new[] { "bomber_a" }));
+			Assert.That(m["bomber"], Is.EquivalentTo(new[] { "bomber_a", "auxaa_bomber" }));
 		}
 
 		[Test]
