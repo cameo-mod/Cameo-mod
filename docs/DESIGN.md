@@ -5074,7 +5074,10 @@ into the enemy army."*
 
 * **Exception 1, `CaptureManagerBotModuleCA`** may see through fog (`CheckCaptureTargetsForVisibility: false`):
   it needs the enemy's positions to route engineers around the army to the construction yard, tech centres and
-  the other `PriorityCapturableActorTypes`.
+  the other `PriorityCapturableActorTypes`. **Its `genericbot` successor `EngineerBotModule`** (the ENG merge with
+  the AS `CncEngineerBotModule`, §19.3) **is omniscient as a whole** — maintainer, 2026-09-30: *"The engineer
+  module can be omniscient as a whole."* That covers capture, the `SafePath` enemy scan and destroyed bridge huts
+  (`CheckRepairTargetsForVisibility: false`); `classic` keeps the CA copy alone.
 * **Exception 2, `CratePickupBotModule`** (`CheckTargetsForVisibility: false`): a bot that has lost its MCV
   must find a crate anywhere on the map to get one back.
 * **Every other module of the Frankenstein bot (`genericbot`) is fog-honest:** it acts on what the bot has seen
@@ -5084,7 +5087,7 @@ into the enemy army."*
 * **`classic`** stays the omniscient A/B reference (the Nuclear Winter gate is fog-blind Frankenstein vs
   omniscient `classic`).
 * **Guard:** `tools/audit/audit_fog_honesty.py` fails when a `genericbot` module switches a visibility check off
-  (only these two are allowed, `ALLOWED_OMNISCIENT`), and its manifest ratchet makes every new world enumeration a reviewed act.
+  (only these two — the engineer owner under either name — are allowed, `ALLOWED_OMNISCIENT`), and its manifest ratchet makes every new world enumeration a reviewed act.
 
 ## 20. AI bot unit compositions
 

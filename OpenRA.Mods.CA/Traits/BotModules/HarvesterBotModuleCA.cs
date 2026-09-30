@@ -107,6 +107,7 @@ namespace OpenRA.Mods.CA.Traits
 		int scanForIdleHarvestersTicks;
 		int respondToAttackCooldown = 40; // prevent too many responses to the same wave of attacks
 		bool firstTick = true;
+		bool limitsRechecked;
 
 		BotLimits botLimits;
 		int harvesterLimit;
@@ -134,6 +135,8 @@ namespace OpenRA.Mods.CA.Traits
 			botLimits = self.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			if (botLimits != null)
 				harvesterLimit = botLimits.Info.HarvesterLimit;
+
+			limitsRechecked = false;
 
 			// Avoid all AIs scanning for idle harvesters on the same tick, randomize their initial scan delay.
 			scanForIdleHarvestersTicks = world.LocalRandom.Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
@@ -169,6 +172,14 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotTick.BotTick(IBot bot)
 		{
 			respondToAttackCooldown--;
+
+			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver).
+			if (!limitsRechecked)
+			{
+				botLimits = BotLimitsResolver.Recheck(player, botLimits, nameof(HarvesterBotModuleCA));
+				harvesterLimit = botLimits?.Info.HarvesterLimit ?? 0;
+				limitsRechecked = true;
+			}
 
 			if (resourceLayer == null || resourceLayer.IsEmpty)
 				return;

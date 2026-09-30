@@ -10,8 +10,11 @@
 # Moved from the central file by tools/packs/split_ai_rows.py. Edit rows HERE, never there.
 
 Player:
+	# Engineers (maintainer 2026-09-30: bots must build them again). Share 1, as the RA2 and D2k packs already do; the
+	# engineer owner (CaptureManagerBotModuleCA / EngineerBotModule) sends them to capture and to repair bridge huts.
 	UnitBuilderBotModuleCA@generic:
 		UnitsToBuild:
+			ra1_engineer: 1
 			japan_japanesespeedboat: 10
 			japan_japanesecarrier: 10
 			japan_yamatobattleship: 10
