@@ -111,8 +111,8 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
-- ⭐ **One implementation per mechanic (DESIGN §22, maintainer 2026-09-30): [`TYPE_MERGE_PLAN.md`](TYPE_MERGE_PLAN.md)** — 119 families of duplicate C# types (22 live side by side), ~660 agent-hours outside the bot layer; M1 = the 12 non-bot families running side by side, M2 = `Missile` (the Generals weapons need `MissileCA`).
-- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 51 items, ~940 agent-hours, 40 A/B gates, six waves plus the 1b hardening wave from the Fransbot author's review). The lines below keep the per-phase detail.
+- ⭐ **One implementation per mechanic (DESIGN §22, maintainer 2026-09-30): [`TYPE_MERGE_PLAN.md`](TYPE_MERGE_PLAN.md)** — 119 families of duplicate C# types (21 live side by side), ~660 agent-hours outside the bot layer; M1 = the 12 non-bot families running side by side, M2 = `Missile` (the Generals weapons need `MissileCA`).
+- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 55 items, ~956 agent-hours, 42 A/B gates, six waves plus the 1b hardening wave from the Fransbot author's review, now with LC9 and the mission cards MC1–MC3 — [`AI_MISSION_CARDS.md`](AI_MISSION_CARDS.md)). The lines below keep the per-phase detail.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.
