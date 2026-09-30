@@ -25,36 +25,30 @@ namespace OpenRA.Mods.CA.Traits
 		public int RequiredValue;
 		public int Priority;
 
-		// MissionCard id (docs/design/AI_MISSION_CARDS.md §2.1): allocated by the
-		// mission's owner as a stable per-player integer; 0 = not yet allocated,
-		// consumers fall back to IdentityKey until owner allocation lands (MC1).
-		public int MissionId;
+		// MissionCard id (docs/design/AI_MISSION_CARDS.md §2.1): the owner
+		// allocates the string key; null = unallocated, consumers fall back to
+		// IdentityKey until owner allocation lands (MC1).
+		public string MissionId;
 
-		// The identity key — deterministic from (Type, TargetPlayer, RegionIndex).
-		// Providers re-derive missions every situation rebuild, so re-published
-		// instances of the same underlying mission share the key; it is what the
-		// owner allocates MissionId from and what consumers key attempts on.
-		public int IdentityKey => unchecked(((int)Type * 397) ^ (RegionIndex * 31) ^ ((TargetPlayer?.ClientIndex ?? -1) * 17));
+		// The identity key — deterministic from (Type, TargetPlayer, RegionIndex),
+		// in the contract's grammar (raid:<target internal name>:r<region>).
+		// InternalName, never ClientIndex — every non-human player carries the
+		// host's ClientIndex (Player.cs). Re-derived instances of the same
+		// underlying mission share the key, so attempts accumulate against it.
+		public string IdentityKey =>
+			$"{Type.ToString().ToLowerInvariant()}:{TargetPlayer?.InternalName ?? "self"}:r{RegionIndex}";
 
-		public int EffectiveMissionId => MissionId != 0 ? MissionId : IdentityKey;
+		public string EffectiveMissionId => MissionId ?? IdentityKey;
 	}
 
-	// Closed attempt/mission lifecycle (AI_MISSION_CARDS.md §2.2). Proposed,
-	// Denied and Dormant are owner-side states; executors emit Committed onward
-	// and must report exactly one terminal state (Succeeded, Failed, Abandoned)
-	// per attempt.
-	public enum BotMissionState { Proposed, Denied, Dormant, Committed, Progressing, Stalled, Recovering, Succeeded, Failed, Abandoned }
-
-	// Closed transition reasons (AI_MISSION_CARDS.md §2.2); projects may extend
-	// under their own prefix in serialized cards.
-	public enum BotMissionReason { None, NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done }
-
 	// The return path (AI_MISSION_CARDS.md §2.3): executors report attempt
-	// transitions; the owner alone decides what a failure means. Opt-in —
-	// providers adopt without forcing every provider to implement it.
+	// transitions; the owner alone decides what a failure means. The shared
+	// state/reason vocabulary lives in BotMissionLog.cs (BotMissionAttemptState,
+	// BotMissionReasons) — one contract, ruled under §22. Opt-in: providers
+	// adopt without forcing every provider to implement it.
 	public interface IBotMissionOutcomeSink
 	{
-		void Report(int missionId, int attemptId, BotMissionState state, BotMissionReason reason, int tick);
+		void Report(string missionId, int attemptId, BotMissionAttemptState state, string reason, int tick);
 	}
 
 	public sealed class BotMissionAssignment

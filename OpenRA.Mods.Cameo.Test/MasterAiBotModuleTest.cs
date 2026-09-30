@@ -961,6 +961,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var first = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
 			var second = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8, Priority = 99, RequiredValue = 4000 };
 			Assert.That(second.IdentityKey, Is.EqualTo(first.IdentityKey));
+			Assert.That(second.IdentityKey, Does.StartWith("raid:").And.EndsWith(":r8"));
 		}
 
 		[Test]
@@ -980,8 +981,8 @@ namespace OpenRA.Mods.Cameo.Test
 			// allocated, the owner id wins so cards and logs share one id space.
 			var mission = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
 			Assert.That(mission.EffectiveMissionId, Is.EqualTo(mission.IdentityKey));
-			mission.MissionId = 42;
-			Assert.That(mission.EffectiveMissionId, Is.EqualTo(42));
+			mission.MissionId = "owner:m42";
+			Assert.That(mission.EffectiveMissionId, Is.EqualTo("owner:m42"));
 		}
 	}
 }

@@ -1618,7 +1618,7 @@ namespace OpenRA.Mods.CA.Traits
 		// for its lifetime, so "General -> commander -> actors -> result" resolves
 		// as one grep-able chain in the debug log. Counters persist per match, so
 		// a mission that dies and re-publishes continues the lineage (Attempt 2+).
-		readonly Dictionary<int, int> missionAttemptCounters = new();
+		readonly Dictionary<string, int> missionAttemptCounters = new();
 		readonly Dictionary<SquadCA, MissionAttempt> squadMissions = new();
 
 		sealed class MissionAttempt
@@ -1704,21 +1704,30 @@ namespace OpenRA.Mods.CA.Traits
 					var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
 					missionAttemptCounters[id] = attempt;
 					squadMissions[taker] = new MissionAttempt { Mission = mission, Number = attempt };
-					ReportMissionAttempt(mission, attempt, BotMissionState.Committed, BotMissionReason.None);
+					ReportMissionAttempt(mission, attempt, BotMissionAttemptState.Committed, null);
 					return;
 				}
 		}
 
-		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionState state, BotMissionReason reason)
+		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionAttemptState state, string reason)
 		{
-			var reasonText = reason == BotMissionReason.None ? string.Empty : " " + reason.ToString().ToLowerInvariant();
-			AIUtils.BotDebug("AI ({0}) Squads    M{1}/A{2} {3}{4} ({5} region {6})",
-				Player.ClientIndex, mission.EffectiveMissionId, attempt, state.ToString().ToUpperInvariant(), reasonText, mission.Type, mission.RegionIndex);
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = mission.EffectiveMissionId,
+				Attempt = attempt,
+				State = state,
+				Reason = reason,
+				Executor = "Squads",
+				MissionType = mission.Type.ToString().ToLowerInvariant(),
+				RegionIndex = mission.RegionIndex,
+				Tick = World.WorldTick
+			});
 			foreach (var sink in missionOutcomeSinks ?? Array.Empty<IBotMissionOutcomeSink>())
 				sink.Report(mission.EffectiveMissionId, attempt, state, reason, World.WorldTick);
 		}
 
-		void ResolveMissionAttempt(SquadCA squad, BotMissionState state, BotMissionReason reason)
+		void ResolveMissionAttempt(SquadCA squad, BotMissionAttemptState state, string reason)
 		{
 			if (squadMissions.TryGetValue(squad, out var attempt) && squadMissions.Remove(squad))
 				ReportMissionAttempt(attempt.Mission, attempt.Number, state, reason);
@@ -1727,7 +1736,7 @@ namespace OpenRA.Mods.CA.Traits
 		void CleanSquads()
 		{
 			foreach (var s in Squads.Where(s => !s.IsValid))
-				ResolveMissionAttempt(s, BotMissionState.Failed, BotMissionReason.LostUnits);
+				ResolveMissionAttempt(s, BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
 			Squads.RemoveAll(s => !s.IsValid);
 			foreach (var s in Squads)
 			{
@@ -1773,7 +1782,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (u.Actor != null && claimedBySquads.Remove(u.Actor))
 						leases.Release(u.Actor, LeaseOwner);
 
-			ResolveMissionAttempt(squad, BotMissionState.Abandoned, BotMissionReason.Superseded);
+			ResolveMissionAttempt(squad, BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 			unitsHangingAroundTheBase.AddRange(squad.Units);
 
 			squad.Units.Clear();

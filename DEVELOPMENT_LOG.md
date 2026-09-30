@@ -1,3 +1,23 @@
+# 2026-09-30 (late pm2) — Devin (NOVA): #681 conformed to the MC1 contract + LC1 squads
+
+- Merged master (`2638c6cbc`, MC1 writer #683) into the #681 branch and
+  conformed per RULING_2026-09-30_claude_mission_cards_one_contract:
+  `MissionId`/`IdentityKey` are now STRINGS in the ruled grammar
+  (`raid:<internal>:r<region>` — InternalName, never ClientIndex; every
+  non-human player shares the host's ClientIndex). The local
+  `BotMissionState`/`BotMissionReason` enums are gone — emission is
+  exclusively `BotMissionLog.Write` with `BotMissionAttemptState` +
+  `BotMissionReasons` constants. `DismissSquad` reports
+  `Released`/`superseded`; `CleanSquads` reports `Failed`/`lost_units`
+  only when units actually died.
+- LC1 squad consumer rides in the same PR (claim/heartbeat/release +
+  hand-off of units claimed by another owner; null lease service =
+  classic-identical).
+- `WVec.Dot` overflow fix (long widening) is also on this branch —
+  prerequisite for the CA-4 flag-on A/B.
+- Verified on the merged tree: build 0 errors, 394/394 tests, audits
+  PASS (fog 218 sites, no new omniscience), boot-gate PASS.
+
 # 2026-09-30 (late pm) — Devin (NOVA): #678 merged; MissionCard lineage slice
 
 - #678 (CA-3/CA-4 port) merged → master `1dbbfe136`. Ported the stale
