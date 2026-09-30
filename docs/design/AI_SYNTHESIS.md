@@ -56,7 +56,7 @@ the code wins._
 
 | Source | How it reaches Cameo | Size here | Strongest parts | Kept current by |
 |---|---|---|---|---|
-| **RV engine** (`engine/OpenRA.Mods.Common`, `engine/OpenRA.Mods.AS` bot modules) | the engine (`mod.config` `ENGINE_VERSION`) | engine-side | guerrilla squad states; stuck-unit kick / make-way; base expansion (`McvExpansionManagerBotModule`); `LoadCargo`, `ExternalBotOrdersManager`, `SendUnitToAttack`; **unused**: `CncEngineerManagerBotModule` (bridge repair) | engine updates (automatic) |
+| **RV engine** (`engine/OpenRA.Mods.Common`, `engine/OpenRA.Mods.AS` bot modules) | the engine (`mod.config` `ENGINE_VERSION`) | engine-side | guerrilla squad states; stuck-unit kick / make-way; base expansion (`McvExpansionManagerBotModule`); `LoadCargo`, `ExternalBotOrdersManager`, `SendUnitToAttack`; `CncEngineerManagerBotModule` (bridge repair, loaded as `CncEngineerBotModule`); **unused**: `BevManagerBotModule`, `SharedCargoBotModule` (AI_MASTER_PLAN RV1) | engine updates (automatic) |
 | **CA** (`OpenRA.Mods.CA/Traits/BotModules/`) | **copied by hand** | 24 files | squad manager and states, base/unit builders, compositions, fuzzy attack-or-flee | `audit_ca_drift` + `ca_vendor_sync` (§3) |
 | **Cameo** (`OpenRA.Mods.Cameo/Traits/BotModules`, `Traits/Bot*`) | own | phases 1–6f | master module + snapshot, personality switching, counter demand, fog memory, `ScoutBotModule`, risk gate, risk routing, artillery squads, match logs | own |
 | **Crystallized Nexus** (`~/Documents/GitHub/crystallized-nexus`, `30cf70a`, GPLv3) | not yet | 18 modules, ~20k lines | terrain topology (chokepoints and doors from the pathfinder graph), region roles, combat analysis + nemesis, coordinated and pincer waves, observer-gated artillery, transports | port by module |
@@ -462,8 +462,13 @@ and merging where possible**. Measured on master `fd852d2fe` + the A/B rounds 2�
    #96). `RepairBuilding` is a **toggle** (`RepairableBuilding.RepairBuilding`: a second order
    removes the repairer), and each module queues it when `!RepairActive`. On a hit that jumps a
    building from Undamaged/Light straight to Medium or worse, both queue in the same pass and
-   the second cancels the first. **Fix:** gate the Common module `classicbot` only (the
-   reference keeps its verbatim stack). Claude, with the next A/B.
+   the second cancels the first. The same `!RepairActive` test also re-toggles a repair whose
+   order has not resolved yet, or one the bot cannot pay for (it stays in `Repairers` while
+   `RepairActive` is false). **Fixed 2026-09-30 (RV1, DESIGN §19.3):** the OpenRA module is
+   unloaded, `classic` runs only the CA copy (as upstream CA), and `genericbot` runs
+   `BaseRepairBotModule`, the two merged: CA's trigger at Light, OpenRA's repair-all sweep (now
+   on the bot tick), and never a second order (`Repairers.Contains` + an in-flight window).
+   Telemetry: situation log `own.repair_orders`, `repair_sweep_orders`, `repair_toggles_avoided`.
 2. **Base defence never grows** (`ProtectOwn` drafts only into an empty squad; the squad never
    disbands). Found by #617's loss-by-role log: idle units at home were the biggest loss
    category. Fixed behind `ReinforceProtection` (Frankenstein personalities only); **A/B round 5

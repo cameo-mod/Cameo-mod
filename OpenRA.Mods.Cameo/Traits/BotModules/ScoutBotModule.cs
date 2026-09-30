@@ -137,6 +137,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
+			// LC1 heartbeat: renew every held scout each scan; a scout dropped by any path above or below simply stops
+			// being renewed and its lease expires, so no release call can be forgotten. A scout another module holds
+			// goes back to the pool (it was claimed out from under us between scans).
+			var leases = BotUnitLeases.Of(player);
+			if (leases != null)
+				foreach (var scout in scouts.ToArray())
+					if (!leases.TryClaim(scout.Actor, LeaseOwner, BotLeasePurpose.Scout, ScoutLeaseTicks))
+						ReturnScoutToIdlePool(scout, scouts, scoutTargets, idlePool);
+
 			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
 			if (regions == null)
 				return;
@@ -204,6 +213,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return false;
 		}
 
+		const string LeaseOwner = nameof(ScoutBotModule);
+
+		// LC1: three scans — survives the order latency, frees a dropped scout within seconds.
+		int ScoutLeaseTicks => 3 * System.Math.Max(1, Info.ScanInterval);
+
 		void ClaimScouts(IBot bot)
 		{
 			if (Info.ScoutUnitTypes.Count == 0 || scouts.Count >= Info.MaxScouts)
@@ -222,6 +236,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						continue;
 
 					if (scouts.Any(u => u.Actor == actor))
+						continue;
+
+					// LC1: never claim a unit another module holds (a crate run, a capture, a beacon response).
+					if (!BotUnitLeases.TryClaim(BotUnitLeases.Of(player), actor, LeaseOwner, BotLeasePurpose.Scout, ScoutLeaseTicks))
 						continue;
 
 					scouts.Add(candidate);

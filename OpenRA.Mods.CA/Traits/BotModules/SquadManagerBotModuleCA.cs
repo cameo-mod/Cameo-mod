@@ -559,6 +559,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int initialAttackDelay;
+		bool limitsRechecked;
 
 		// H1 attention consumer: null when no IBotActionBudget producer is on the
 		// player (then squads act unconditionally, as before). squadCursor rotates
@@ -1164,6 +1165,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (botLimits != null)
 				initialAttackDelay = botLimits.Info.InitialAttackDelay;
 
+			limitsRechecked = false;
+
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
 			assignRolesTicks = World.LocalRandom.Next(0, Info.AssignRolesInterval);
 			attackForceTicks = World.LocalRandom.Next(0, Info.AttackForceInterval);
@@ -1208,6 +1211,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver). A corrected
+			// tier also corrects the initial attack delay; it only ever lengthens the wait already scheduled.
+			if (!limitsRechecked)
+			{
+				limitsRechecked = true;
+				var limits = BotLimitsResolver.Recheck(Player, botLimits, nameof(SquadManagerBotModuleCA));
+				if (limits != botLimits)
+				{
+					botLimits = limits;
+					initialAttackDelay = botLimits?.Info.InitialAttackDelay ?? 0;
+					minAttackForceDelayTicks = Math.Max(minAttackForceDelayTicks, RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick));
+				}
+
+				actionBudget ??= Player.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
+			}
+
 			AssignRolesToIdleUnits(bot);
 		}
 
