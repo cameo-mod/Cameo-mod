@@ -223,8 +223,9 @@ Player:
 			# ground-only strikers that must egress. The three hovering pure-A2A
 			# units (zerg_devourer, zerg_scourge, terran_valkyrie) carry explicit
 			# BotRoles: fighter tags in their ContentPacks — CanHover excludes them
-			# from derivation but §12.4 classes them fighters. Report-only for now;
-			# air transports stay unroled. Measured on the resolved ruleset with
+			# from derivation but §12.4 classes them fighters. Applied to the CA-5
+			# doctrine fields; AirDoctrineEnabled (off everywhere) keeps that inert.
+			# Air transports stay unroled. Measured on the resolved ruleset with
 			# tools/ai/derive_roles_preview.py: fighter 35 / gunship 78 / bomber 8,
 			# disjoint — Deploy-gated armaments evaluate false under NoVariables
 			# exactly as the engine sees them, so e.g. ra2_soviets_siegechopper
@@ -255,9 +256,9 @@ Player:
 			staticaa: SquadManagerBotModuleCA.StaticAntiAirTypes
 			airunit: SquadManagerBotModuleCA.AirUnitsTypes
 			navalunit: SquadManagerBotModuleCA.NavalUnitsTypes
-			fighter: SquadManagerBotModuleCA.AirUnitsTypes
-			gunship: SquadManagerBotModuleCA.AirUnitsTypes
-			bomber: SquadManagerBotModuleCA.AirUnitsTypes
+			fighter: SquadManagerBotModuleCA.FighterTypes
+			gunship: SquadManagerBotModuleCA.GunshipTypes
+			bomber: SquadManagerBotModuleCA.BomberTypes
 			artillery: SquadManagerBotModuleCA.ArtilleryTypes
 			firesupport: SquadManagerBotModuleCA.FireSupportTypes
 			# the six personalities only: @classic, the A/B reference, keeps its list as written (§2.8a)
@@ -267,7 +268,9 @@ Player:
 		# artillery + firesupport stay REPORT-ONLY here: applying them needs the @instance-scoped
 		# Targets grammar (cameo-mod#633, merged 2026-09-30) so @classic keeps its written config unmoved;
 		# that application is the CA-3 owner's next step (NOVA), behind its own A/B.
-		Apply: harvester, refinery, conyard, guerrilla
+		# fighter/gunship/bomber fill the CA-5 doctrine lists (FighterTypes etc.): inert until a
+		# personality sets AirDoctrineEnabled, so @classic's AirUnitsTypes stays byte-identical.
+		Apply: harvester, refinery, conyard, guerrilla, fighter, gunship, bomber
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest

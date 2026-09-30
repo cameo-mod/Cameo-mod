@@ -1,3 +1,49 @@
+# 2026-09-30 — Devin (EMBER): CA-5 doctrine split — role squads behind `AirDoctrineEnabled`
+
+CA-5 continuation after the merged #648 roles. Implements the §12.8
+doctrine split as squad types, gated by a new `AirDoctrineEnabled`
+module field (false everywhere → master-classic behaviour unchanged):
+
+- `SquadCAType` gains `Fighter`, `Gunship`, `Bomber`. `FindNewUnits`
+  routes `AirUnitsTypes` members (plus, when the flag is on, role
+  members the written list missed) through `AirSquadTypeFor` — a pure
+  classifier unit-tested in `AirDoctrineSquadTypeTest`. Same-name
+  squads are preferred; role squads merge across actor types; bomber
+  teams cap at `BomberSquadMaxSize` (4) so extra bombers form a second
+  strike team.
+- `BotRoleSets` Targets retargeted: `fighter/gunship/bomber` now fill
+  `FighterTypes`/`GunshipTypes`/`BomberTypes` and are added to `Apply`
+  (§2.8 review data: the #648 measured 35/78/8 disjoint sets). The
+  fields are new and empty by default, and doctrine is flag-gated, so
+  `@classic`'s written `AirUnitsTypes` is untouched — master's A/B
+  reference does not move.
+- New idle states in `AirDoctrineStatesCA.cs` implement the doctrine's
+  target selection; `AirAttackStateCA` (threat routing, rearm cycle,
+  NewUnits→WaitingUnits bookkeeping) is reused unchanged, and
+  `AirFleeStateCA` returns each squad to its role idle via
+  `IdleStateFor`.
+  - `FighterIdleStateCA`: air superiority first (visible enemy
+    aircraft, `BigAirThreats` preferred), then pick-off of isolated
+    enemies (≤ `FighterPickoffMaxEscorts` armed allies + light AA in
+    `DangerScanRadius`), tag-preferring `FighterPriorityTags`
+    (harvester by default).
+  - `GunshipCASStateCA`: anchors on the largest ground combat squad
+    (Rush/Protection/FireSupport/Guerrilla), engages its target or
+    enemies within `GunshipCASRadiusCells` of its centre, else hovers
+    over it (Move to anchor cell). No frontline → generic-air
+    `FindDefenselessTarget` behaviour.
+  - `BomberIdleStateCA`: holds below `BomberSquadMinSize` (2), strikes
+    tag-priority targets (superweapon, production, harvester,
+    artillery — the tags `BotTargetTags` actually emits) whose position
+    passes the AA gate; a full team takes an opportunity target like
+    generic air.
+- `RegisterNewSquad` counts the three types in `OffensiveSquadsLaunched`;
+  `CleanSquads` runs the air bookkeeping (`IsAirFamily`) on them.
+
+Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
+nothing sets it. The flag-on A/B is the gate for turning it on per
+personality (§12.10: a phase lands only if it does not lose to master).
+
 # 2026-09-29 — Devin (NOVA): protection-release convergence (PR #632) + CA-3 A/B on post-#630 master
 
 Maintainer-contract converge (fleet REPLY_2026-09-28_claude_round_late, ORDERS

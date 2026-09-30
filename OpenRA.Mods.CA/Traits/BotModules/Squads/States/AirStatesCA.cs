@@ -214,6 +214,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			return ShouldFlee(owner, enemies => CountAntiAirUnits(enemies, owner) > owner.Units.Count);
 		}
+
+		// CA-5 (12.8): the idle state an air-family squad returns to after fleeing.
+		// Doctrine squads keep their role behaviour; generic Air squads keep theirs.
+		protected static IState IdleStateFor(SquadCA owner) => owner.Type switch
+		{
+			SquadCAType.Fighter => new FighterIdleStateCA(),
+			SquadCAType.Gunship => new GunshipCASStateCA(),
+			SquadCAType.Bomber => new BomberIdleStateCA(),
+			_ => new AirIdleStateCA(),
+		};
 	}
 
 	class AirIdleStateCA : AirStateBaseCA, IState
@@ -415,7 +425,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			Retreat(owner, flee: false, rearm: true, repair: true);
 
-			owner.FuzzyStateMachine.ChangeState(owner, new AirIdleStateCA(), true);
+			owner.FuzzyStateMachine.ChangeState(owner, IdleStateFor(owner), true);
 		}
 
 		public void Deactivate(SquadCA owner) { }
