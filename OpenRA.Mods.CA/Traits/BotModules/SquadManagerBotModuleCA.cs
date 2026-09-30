@@ -136,6 +136,13 @@ namespace OpenRA.Mods.CA.Traits
 			"squads, the rest to the attack pool. 0 = classic behaviour (the squad never releases).")]
 		public readonly int ProtectionIdleDissolveTicks = 0;
 
+		[Desc("Escort requests (EX): consume IBotProtectionRequestProvider jobs - a module asking for a guard",
+			"(e.g. an MCV driving to an expansion site) drafts the same idle pool into the protection squad, which",
+			"rallies AT the guarded point. Live requests count as a task against ProtectionIdleDissolveTicks;",
+			"a real predicted threat outranks any request. False = classic behaviour (the",
+			"frankenstein instances flip it on for the A/B).")]
+		public readonly bool UseProtectionRequests = false;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -384,6 +391,7 @@ namespace OpenRA.Mods.CA.Traits
 		int protectionHoldUntilTick = -1;
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
+		IBotProtectionRequestProvider[] protectionRequestProviders;
 		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
@@ -727,6 +735,7 @@ namespace OpenRA.Mods.CA.Traits
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			threatPredictionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotThreatPredictionProvider>().ToArray();
+			protectionRequestProviders = self.Owner.PlayerActor.TraitsImplementing<IBotProtectionRequestProvider>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
@@ -954,22 +963,40 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: meet the most valuable predicted attack at the own defence nearest its target.
 		void PrepositionDefenceTick(IBot bot)
 		{
-			if (!Info.PrepositionDefence || threatPredictionProviders == null || threatPredictionProviders.Length == 0 || World.WorldTick < nextPrepositionTick)
+			var prepositionOn = Info.PrepositionDefence && threatPredictionProviders is { Length: > 0 };
+			var requestsOn = Info.UseProtectionRequests && protectionRequestProviders is { Length: > 0 };
+			if ((!prepositionOn && !requestsOn) || World.WorldTick < nextPrepositionTick)
 				return;
 
 			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
-			var threat = SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
-				Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue);
-			if (threat == null)
+			var threat = prepositionOn
+				? SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
+					Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue)
+				: null;
+
+			// An escort request is a standing defence job on the same army_value
+			// scale - but a real incoming attack always outranks a guard job.
+			var request = threat == null ? SelectProtectionRequest() : null;
+			if (threat == null && request == null)
 				return;
 
-			var target = threat.Value.Target;
-			var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
-			var rally = World.ActorsHavingTrait<AttackBase>()
-				.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
-					&& (a.Location - target).LengthSquared <= searchSquared)
-				.OrderBy(a => (a.Location - target).LengthSquared)
-				.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+			CPos rally;
+			if (request.HasValue)
+			{
+				// Escorts go TO the guarded point - no defensive-building snap:
+				// the MCV/outpost is usually nowhere near a building.
+				rally = request.Value.Location;
+			}
+			else
+			{
+				var target = threat.Value.Target;
+				var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
+				rally = World.ActorsHavingTrait<AttackBase>()
+					.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
+						&& (a.Location - target).LengthSquared <= searchSquared)
+					.OrderBy(a => (a.Location - target).LengthSquared)
+					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+			}
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
@@ -985,12 +1012,33 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			protectionRally = rally;
-			protectionHoldUntilTick = World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+
+			// Threat path: hold for the attack's ETA plus grace. Request path: the
+			// publisher refreshes its request every ProtectInterval, so the hold is a
+			// rolling window - a retracted request lets the escort release within one
+			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
+			protectionHoldUntilTick = request.HasValue
+				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
+				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
-			if (Info.FastSquadsReactToThreats)
+			if (request == null && Info.FastSquadsReactToThreats)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
+		}
+
+		/// <summary>The most valuable live protection request, or null. Requests refresh
+		/// every tick from their publishers; expired or retracted ones are skipped.</summary>
+		BotProtectionRequest? SelectProtectionRequest()
+		{
+			if (!Info.UseProtectionRequests || protectionRequestProviders == null || protectionRequestProviders.Length == 0)
+				return null;
+
+			var now = World.WorldTick;
+			return protectionRequestProviders.SelectMany(p => p.ProtectionRequests ?? [])
+				.Where(r => r.ExpiresTick > now && r.Value >= Info.PrepositionMinThreatValue)
+				.OrderByDescending(r => r.Value).ThenBy(r => r.ExpiresTick)
+				.Cast<BotProtectionRequest?>().FirstOrDefault();
 		}
 
 		// A harasser joins the harass squad of its own type, or starts one.
@@ -1040,8 +1088,11 @@ namespace OpenRA.Mods.CA.Traits
 		// release trigger (§10.1); it calls ReleaseDefenders.
 		internal bool ShouldReleaseDefenders(bool quiet)
 		{
-			var threatened = threatPredictionProviders != null && threatPredictionProviders.Any(p =>
-				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0);
+			// Live escort requests are a standing task: the escort must survive the
+			// quiet-dissolve while a publisher still wants the guard (12.4a review).
+			var threatened = (threatPredictionProviders != null && threatPredictionProviders.Any(p =>
+				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0))
+				|| SelectProtectionRequest() != null;
 			if (Info.ProtectionIdleDissolveTicks <= 0 || !quiet || threatened)
 			{
 				protectionQuietSinceTick = -1;
