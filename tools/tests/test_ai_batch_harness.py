@@ -297,3 +297,109 @@ class ScoreboardTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FingerprintTests(unittest.TestCase):
+    """LC7: the batch fingerprint freezes the arms — mod commit, engine build,
+    AI yaml, map source, batch spec — and any drift aborts the batch."""
+
+    def _tree(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="fingerprint_test_"))
+        (tmp / "mods" / "cameo" / "ai").mkdir(parents=True)
+        (tmp / "mods" / "cameo" / "ai" / "ai.yaml").write_text("players: {}\n", encoding="utf-8")
+        (tmp / "engine" / "bin").mkdir(parents=True)
+        (tmp / "engine" / "bin" / "OpenRA.Game.dll").write_bytes(b"fake-dll-a")
+        (tmp / "engine" / "bin" / "OpenRA.Mods.Cameo.dll").write_bytes(b"fake-dll-b")
+        (tmp / "engine" / "VERSION").write_text("abc123\n", encoding="utf-8")
+        (tmp / "map.oramap").write_bytes(b"map-bytes")
+        return tmp
+
+    def _fingerprint(self, tmp, config=None):
+        return batch.compute_fingerprint(
+            tmp / "map.oramap", tmp / "engine",
+            config or {"bot_a": "hard", "bot_b": "classic"},
+            repo_root=tmp)
+
+    def test_stable_across_calls(self):
+        tmp = self._tree()
+        try:
+            a, b = self._fingerprint(tmp), self._fingerprint(tmp)
+            self.assertEqual(batch.fingerprint_drift(a, b), {})
+            self.assertEqual(batch.fingerprint_id(a), batch.fingerprint_id(b))
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_nongit_tree_records_null_commit(self):
+        tmp = self._tree()
+        try:
+            fp = self._fingerprint(tmp)
+            self.assertIsNone(fp["mod_commit"])
+            self.assertIsNone(fp["mod_dirty"])
+            self.assertEqual(fp["engine_version"], "abc123")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_ai_yaml_drift_detected(self):
+        tmp = self._tree()
+        try:
+            a = self._fingerprint(tmp)
+            (tmp / "mods" / "cameo" / "ai" / "ai.yaml").write_text("players: {changed: true}\n", encoding="utf-8")
+            drift = batch.fingerprint_drift(a, self._fingerprint(tmp))
+            self.assertIn("ai_yaml_sha256", drift)
+            self.assertNotIn("map_sha256", drift)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_rules_yaml_drift_detected(self):
+        """A weapon/rules edit mid-batch moves mod_yaml_sha256 — the class the
+        auto-sync service actually caused (league-3)."""
+        tmp = self._tree()
+        try:
+            a = self._fingerprint(tmp)
+            (tmp / "mods" / "cameo" / "weapons.yaml").write_text("weapon: x\n", encoding="utf-8")
+            drift = batch.fingerprint_drift(a, self._fingerprint(tmp))
+            self.assertIn("mod_yaml_sha256", drift)
+            self.assertNotIn("ai_yaml_sha256", drift)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_dll_rebuild_drift_detected(self):
+        tmp = self._tree()
+        try:
+            a = self._fingerprint(tmp)
+            (tmp / "engine" / "bin" / "OpenRA.Mods.Cameo.dll").write_bytes(b"rebuilt-dll")
+            drift = batch.fingerprint_drift(a, self._fingerprint(tmp))
+            self.assertIn("mod_dlls_sha256", drift)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_map_file_and_dir_both_hash(self):
+        tmp = self._tree()
+        try:
+            file_fp = self._fingerprint(tmp)
+            map_dir = tmp / "mapdir"
+            map_dir.mkdir()
+            (map_dir / "map.yaml").write_text("map: x\n", encoding="utf-8")
+            dir_fp = batch.compute_fingerprint(
+                map_dir, tmp / "engine", {"bot_a": "h"}, repo_root=tmp)
+            self.assertNotEqual(file_fp["map_sha256"], dir_fp["map_sha256"])
+            self.assertIsNotNone(dir_fp["map_sha256"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_fingerprint_id_is_compact_hex(self):
+        tmp = self._tree()
+        try:
+            fp_id = batch.fingerprint_id(self._fingerprint(tmp))
+            self.assertRegex(fp_id, r"^[0-9a-f]{12}$")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_config_moves_the_fingerprint(self):
+        tmp = self._tree()
+        try:
+            a = self._fingerprint(tmp, {"bot_a": "hard"})
+            b = self._fingerprint(tmp, {"bot_a": "easy"})
+            self.assertIn("config", batch.fingerprint_drift(a, b))
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
