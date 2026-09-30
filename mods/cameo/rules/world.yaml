@@ -912,6 +912,8 @@ World:
 	CameoCareerFinalizer:
 	AiMatchLogWriter:
 	AiSituationLogWriter:
+	# MC1: record-only mission-card archive, cameo-ai-missions.jsonl (docs/design/AI_MISSION_CARDS.md, DESIGN §21.1).
+	AiMissionLogWriter:
 	ChatCommands:
 	DevCommands:
 	DebugVisualizationCommands:
