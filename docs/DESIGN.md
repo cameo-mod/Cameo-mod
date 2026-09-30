@@ -5054,11 +5054,14 @@ the content it serves, and only as the ONE owner of its decision (§19.3).
   `SharedPassenger`, add a `HasTunnel` prerequisite and load `SharedCargoBotModule` behind a `has-tunnel`
   condition for `genericbot`, with its transports and passengers taken from roles/tags (§2.9 empty ai.yaml),
   never an id list.
-* **`BevManagerBotModule` (`OpenRA.Mods.AS`) — do not load.** A trimmed copy of OpenRA's old MCV manager: it
-  moves idle "base expansion vehicles" (a vehicle that deploys into a building) near the base and deploys
-  them. That decision is owned by `McvExpansionManagerBotModule`, whose `McvTypes` already covers Japan's
-  nanocores and the Yuri slave miner; loading both would create two owners. Anything it does better is
-  merged into the MCV owner instead (EX in `AI_MASTER_PLAN.md` §3).
+* **`BevManagerBotModule` (`OpenRA.Mods.AS`) — merge into the MCV owner, never load beside it** (maintainer,
+  same day: *"they are the same thing, they should be merged"*). A trimmed copy of OpenRA's old MCV manager: it
+  moves idle "base expansion vehicles" (a vehicle that deploys into a building) to a free spot 2–20 cells from a
+  base centre and deploys them. `McvExpansionManagerBotModule` owns the deploy decision and already lists Japan's
+  nanocores and the Yuri slave miner in `McvTypes`, but it sends EVERY `McvTypes` vehicle through its expansion-site
+  logic (away from existing yards; since EX-3, to a far field). The merge gives the MCV owner BevManager's
+  near-base category: production cores deploy next to the base, MCVs and field refineries go to fields
+  (**BEV** in `AI_MASTER_PLAN.md` §3; verify the Japan behaviour in a match first).
 
 ### 19.5 Fog honesty: two omniscient modules — engineer captures and MCV-recovery crates (maintainer 2026-09-30) — binding
 
@@ -5141,3 +5144,45 @@ because both fail in ways that reading the yaml will not reveal:
   trait dictionary - so condition-gating multiple composition modules crashes
   on the first bot tick rather than degrading. Personality-specific compositions use
   condition-gated `ProvidesPrerequisite` tokens instead.
+
+## 22. One implementation per mechanic: the engine-wide merge programme (maintainer 2026-09-30) — binding
+
+*"Literally ANYTHING where there is a similar trait needs to be merged, for example Missile.cs and MissileCA.cs and
+any other variant you might find in the engine, and then only use the new merged version that has all the features
+included, and also try to use all the available features. We want to merge the best features from all the
+references like with a cherry pick."*
+
+§19.3 made this law for bot modules; this section extends it to **every yaml-facing C# type** — traits, projectiles,
+warheads, bot modules — in every assembly Cameo loads (OpenRA `Common`, `Cnc`, `D2k`, RV's `AS`, the CA copy,
+`Cameo`, `Fransbot`) **and** in the reference mods (upstream CA, Shattered Paradise, Generals Alpha, Romanov's
+Vengeance), whose better variants are harvested even when Cameo never copied them (upstream CA's `MissileCA`,
+`BulletCA`, `AreaBeamCA`, `RailgunCA`, `TeslaZapCA` are not in Cameo's CA snapshot).
+
+**The per-family pipeline** (the plan, the order and the estimate: `design/TYPE_MERGE_PLAN.md`):
+
+1. **Inventory.** `python tools/audit/type_merge_inventory.py` → `design/TYPE_MERGE_INVENTORY.md`: every family with
+   2+ variants, the resolved USE of each, fields only one variant has, shared fields whose defaults differ. A name
+   match is a candidate: read the code; add different-name duplicates (BevManager / McvExpansionManager) to its
+   `KNOWN_PAIRS`.
+2. **Read every variant** (engine, CA copy, upstream CA, the other references) and list what each does that the
+   others do not. Check upstream CA for a newer version first (standing duty).
+3. **Build ONE merged type in `OpenRA.Mods.Cameo`** holding the union of the features. Where the name is free it
+   takes the most-used yaml name and **shadows** the engine type (`ObjectCreator.FindType` takes the first assembly
+   in `mod.yaml`, and Cameo precedes Cnc, D2k and Common — the `RenderSprites` / `SelectionDecorations` precedent),
+   so existing users need no yaml change; prove the shadow with a Cameo-only field. An AS type precedes Cameo, so an
+   AS-named family gets a new name and a yaml conversion. Engine files are never edited in place (`engine/` is not
+   in this repo); an engine change goes through the canonical engine pipeline only when a shadow cannot do it.
+4. **Preserve resolved behaviour.** The merged type keeps the most-used variant's defaults; every user of another
+   variant gets that variant's old default written explicitly wherever the defaults differ, so the conversion is a
+   no-op. Prove it with `tools/audit/review_resolve_diff.py` (resolved before/after) and a boot gate; weapons follow
+   rule 5 (`Damage` verbatim, `find_empty_warhead.py` = 0). A balance number never moves by hand (rule 3).
+5. **Switch every user to the merged type**, then delete Cameo-side dead siblings (the CA copy's and Cameo's own
+   files). Engine-side siblings stay in the engine, unloaded.
+6. **Register the merge** in `tools/audit/merged_bot_modules.json` (the name predates §22; every merged type goes
+   there): `audit_merged_bot_modules.py` fails when a parent file changes, so upstream fixes keep flowing in.
+7. **Use the new features** where the content wants them — a separate, reviewed content change after the no-op
+   conversion, never mixed into it (and a balance-relevant one goes through the pipeline).
+
+**Order:** families with two variants **live at once** first (they run side by side today), then prerequisites for
+returning content (the Generals factions' weapons in the unloaded `weapons/generals.yaml` use `Projectile:
+MissileCA`, which Cameo does not have — mounting that file today would stop the boot), then by resolved USE.
