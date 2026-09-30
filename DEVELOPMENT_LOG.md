@@ -15025,3 +15025,25 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
   producer modules stay donor-only.
 - ca6ab-cand marathon still running (no records). Machine at cap during
   boot-gate only.
+
+## 2026-09-30 (cont.4) — host restart recovery + F1 verdict + MC1 contract
+
+- Host restart killed all drivers (box at 0 instances). Resumed on
+  ORIGINAL baselines (internal consistency): w3ab-ctrl n-mirror x8
+  (final matrix 8/8/4/3, one cross repeat lost); ca6ab-cand full
+  repeats-8 rerun (g-mirror oversamples to 16 — no skip logic in
+  run_ai_match_batch.py, disclosed).
+- W3/F1 VERDICT posted as PR #689 (AI_MATCH_LOG row): cand hard 0-24
+  complete; forensics = production starvation (FransMcvExpansion never
+  tasks an MCV; mcv=0/stage=Idle all game; idle_queues; deaths 4-5x
+  kills). Fail path: CA producers stay on hard; dawn-w3 never merges.
+- #679 now emits through BotMissionLog.Write (MC1 contract on master
+  via #687): frans:<MissionAuctionId> ids, x_frans_* reasons,
+  RELEASED reason=target_gone; FransBotLog keeps narrative context.
+  Drift baseline re-written; boot-gate PASS (menu 36s, no exceptions).
+  Validation smoke: fransbot vs classic x4 on C:/tmp/mc1-frans-smoke
+  checking cameo-ai-missions.jsonl frans: lines.
+- Fleet absorbed: mission-card one-contract ruling, standing orders
+  update (merge = Claude only), EMBER #671/#674 READY, NOVA #681
+  sibling lineage + LC1 squad consumer ready, #678 CA-3/CA-4 landed
+  inert on master.
