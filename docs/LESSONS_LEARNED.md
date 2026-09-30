@@ -196,6 +196,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 - [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
+- [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)
+- [`dotnet test` fails silently while a match holds `engine/bin` — read the tail, never grep for `Passed!` (2026-09-30)](#dotnet-test-fails-silently-while-a-match-holds-enginebin--read-the-tail-never-grep-for-passed-2026-09-30)
 - [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
 - [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
@@ -3153,3 +3155,26 @@ work in a scratch worktree (`git worktree add`), and only rebuild `engine/bin` w
 process from that worktree is running — a loaded DLL is file-locked on Windows, and a half-written
 binary corrupts the next launch. If a mid-batch skew already happened, the record is still valid for
 the match that loaded before the switch; rerun only the crashed cells.
+
+## Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)
+
+league-3 ran from the shared main folder. `sync_main_checkout.ps1` fast-forwarded it mid-league to a master that
+had merged #656, so the next matches read #656's `ai.yaml` (which names `SiegeEvaluatorBotModule`) against the
+pre-#656 DLLs that were already loaded for the batch: **15 matches died with `Cannot locate type:
+SiegeEvaluatorBotModuleInfo`**, one completed, and the league's era was split in two.
+
+**Rule:** a batch runs from a **frozen** worktree of its own (a detached checkout at a named commit, with its own
+built engine), never from the main folder and never from a worktree anyone may switch. league-4 ran from
+`C:/tmp/league4-tree` for this reason. The general fix is AI_MASTER_PLAN **LC7**: every batch records mod commit,
+engine commit and the resolved AI yaml hash, and aborts when any of them moves.
+
+## `dotnet test` fails silently while a match holds `engine/bin` — read the tail, never grep for `Passed!` (2026-09-30)
+
+A C# test run in a worktree whose engine a running match is using cannot overwrite `engine/bin/OpenRA.Game.dll`
+("The file is locked by: OpenRA (…)"), so the test build fails and **no test runs**. Filtered through
+`grep -E "Passed!|Failed!"`, that prints nothing at all — which reads like "nothing to report" — and a commit
+message then claimed "C# tests pass" for tests that never ran (#664, `5edeb6403`, corrected on the PR after a
+re-run: 344/344).
+
+**Rule:** read the last lines of the test output and require the `Passed!  - Failed: 0, Passed: N` line with the
+expected N; no line means no run. Run tests in a worktree no match is using (or after the batch).
