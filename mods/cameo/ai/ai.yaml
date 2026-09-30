@@ -3395,8 +3395,10 @@ Player:
 		CheckCaptureTargetsForVisibility: false
 		MinimumCaptureDelay: 125
 		MaximumCaptureTargetOptions: 25
-	# Idle engineers repair destroyed bridge huts; capture stays with CaptureManagerBotModuleCA
-	# (both only pick idle engineers, so whichever orders first wins — no double-assignment)
+	# Idle engineers repair destroyed bridge huts; capture stays with CaptureManagerBotModuleCA.
+	# ⚠ Both modules pick IDLE engineers from overlapping lists, and ModularBot runs every module's BotTick
+	# before it issues any queued order, so both CAN order the same engineer in one tick: IsIdle is not
+	# ownership (AI_REVIEW_FRANSOTTO P0b). Fixed by the LC1 lease + the ENG merge (AI_MASTER_PLAN §3).
 	CncEngineerBotModule:
 		RequiresCondition: genericbot && !easiestbot
 		EngineerActorTypes: e6, engineer, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, steelconsortium_engineer, futuretech_engineer, latinsyndicate_engineer, tkm_engineer, crab, n64e6gdi, n64e6nod, wc_h_peasant_engineer, wormengineer, op2_commonore_beacon_3bar, atreides_engineer, corrino_engineer, harkonnen_engineer

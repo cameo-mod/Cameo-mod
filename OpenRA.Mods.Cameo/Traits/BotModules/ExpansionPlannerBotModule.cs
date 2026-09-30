@@ -70,6 +70,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("EX-3: smoothing (cells) added to the MCV's distance to a site, so the nearest field does not divide by ~0.")]
 		public readonly int McvTauCells = 10;
 
+		[Desc("LC3 (AI_REVIEW_FRANSOTTO P1a): the same field handed out this many times in a row is parked for ParkTicks.",
+			"The MCV module only asks again for an IDLE MCV, so a repeat means the last attempt there failed (no deploy",
+			"cell, blocked, or rejected); the module records its own checkspot, not ours, so without this the field comes",
+			"back forever. 0 disables.")]
+		public readonly int McvMaxSiteHandouts = 3;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -118,6 +124,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		string lastIdleReason;
 		readonly Dictionary<int, int> claimAttempts = new();
 		readonly Dictionary<int, int> parkedUntil = new();
+
+		// LC3: the field last handed to an MCV and how many times in a row; fields an MCV's locomotor cannot reach
+		// (kept as their own class: a future transport objective, FB1).
+		(int Field, int Count) mcvHandout = (-1, 0);
+		readonly HashSet<int> landUnreachableLogged = new();
+		IPathFinder pathFinder;
+		Actor self;
 		(int Field, int Refineries) wanting = (-1, 0);
 		bool wantsRefinery;
 
@@ -163,6 +176,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		protected override void TraitEnabled(Actor self)
 		{
+			this.self = self;
+			pathFinder = self.World.WorldActor.TraitOrDefault<IPathFinder>();
 			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			resources = self.TraitOrDefault<PlayerResources>();
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
@@ -189,13 +204,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// EX-3: the MCV site among the far fields (at least `minHops` links away): value x safety / (distance from the
 		/// MCV + tau). Nearer fields are the building line's job (EX-1/EX-2). Null when no far field is free.
 		/// </summary>
-		public static FieldScore? McvSite(IEnumerable<FieldScore> fields, CPos mcv, int minHops, int tauCells)
+		public static FieldScore? McvSite(IEnumerable<FieldScore> fields, CPos mcv, int minHops, int tauCells,
+			Func<FieldScore, bool> eligible = null)
 		{
 			FieldScore? best = null;
 			var bestScore = double.MinValue;
 			foreach (var f in fields)
 			{
-				if (f.Hops < minHops)
+				if (f.Hops < minHops || (eligible != null && !eligible(f)))
 					continue;
 
 				var score = f.Value * f.Safety / ((f.Center - mcv).Length + Math.Max(tauCells, 1));
@@ -209,17 +225,62 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return best;
 		}
 
+		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
+		public static ((int Field, int Count) Streak, bool Park) TrackMcvHandout((int Field, int Count) streak, int field, int maxHandouts)
+		{
+			var count = streak.Field == field ? streak.Count + 1 : 1;
+			if (maxHandouts > 0 && count > maxHandouts)
+				return ((-1, 0), true);
+
+			return ((field, count), false);
+		}
+
 		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
 		{
 			// A deploying yard relocation (no Mobile) keeps the MCV module's own choice.
 			if (IsTraitDisabled || !Info.DriveMcvSite || mcv == null || !mcv.Info.HasTraitInfo<MobileInfo>())
 				return null;
 
-			var site = McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells);
-			if (site is FieldScore s)
-				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2} at tick {world.WorldTick}");
+			var tick = world.WorldTick;
+			var locomotor = mcv.TraitOrDefault<Mobile>()?.Locomotor;
+			bool Eligible(FieldScore f)
+			{
+				if (parkedUntil.TryGetValue(f.Index, out var until) && tick < until)
+					return false;
 
-			return site?.Center;
+				// LC3: never send an MCV to a field its locomotor cannot reach (the MCV module's deploy search would
+				// reject it and record its own checkspot, not this field).
+				if (pathFinder != null && locomotor != null
+					&& !pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, mcv.Location, f.Center))
+				{
+					if (landUnreachableLogged.Add(f.Index))
+						Log.Write("debug", $"AI ({player.ClientIndex}): LC3 field {f.Index} at {f.Center} is not reachable for {mcv.Info.Name} ({locomotor.Info.Name}) from {mcv.Location} at tick {tick}");
+
+					return false;
+				}
+
+				return true;
+			}
+
+			// At most one park per request: a parked field falls out and the next best is offered.
+			for (var attempt = 0; attempt < 2; attempt++)
+			{
+				if (McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells, Eligible) is not FieldScore s)
+					return null;
+
+				(mcvHandout, var park) = TrackMcvHandout(mcvHandout, s.Index, Info.McvMaxSiteHandouts);
+				if (park)
+				{
+					parkedUntil[s.Index] = tick + Info.ParkTicks;
+					Log.Write("debug", $"AI ({player.ClientIndex}): LC3 parked field {s.Index} at {s.Center} for {Info.ParkTicks} ticks: handed to an idle MCV more than {Info.McvMaxSiteHandouts} times in a row, no yard founded, at tick {tick}");
+					continue;
+				}
+
+				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count} at tick {tick}");
+				return s.Center;
+			}
+
+			return null;
 		}
 
 		/// <summary>Buildings needed to bring the base within reach of a field `distance` cells away.</summary>
@@ -231,6 +292,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// LC4 (AI_REVIEW_FRANSOTTO P1c): TraitEnabled may run before the resource map's own condition is granted in
+			// the same batch, so a null / disabled cache is re-resolved here instead of idling for the whole match.
+			if (resourceMap == null || !resourceMap.IsTraitEnabled())
+				resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+
 			if (resourceMap == null || resources == null)
 			{
 				if (++ticks % Info.ReplanTicks == 0)

@@ -41,6 +41,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Should visibility (Shroud, Fog, Cloak, etc) be considered when searching for Crates?")]
 		public readonly bool CheckTargetsForVisibility = true;
 
+		[Desc("LC2 (AI_REVIEW_FRANSOTTO P1b): a crate stays reserved for its collector at most this many ticks.",
+			"-1 = never released (the old behaviour: a crate whose collector died or gave up stayed reserved forever).")]
+		public readonly int ReservationTimeoutTicks = 1500;
+
+		[Desc("LC2: the reservation is released when its collector has been idle this long after the order",
+			"(the Move lost to another module, or the collector gave up).")]
+		public readonly int CollectorIdleGraceTicks = 100;
+
 		public override object Create(ActorInitializer init) { return new CratePickupBotModule(init.Self, this); }
 	}
 
@@ -54,7 +62,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		int scanForCratesTicks;
 
-		readonly List<Actor> alreadyPursuitCrates = [];
+		// LC2: crate -> (collector, tick ordered). Released by ReservationStale; the old List<Actor> was never cleared.
+		readonly Dictionary<Actor, (Actor Collector, int Tick)> reservations = [];
 
 		public CratePickupBotModule(Actor self, CratePickupBotModuleInfo info)
 			: base(info)
@@ -85,6 +94,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			scanForCratesTicks = Info.ScanForCratesInterval;
 
+			ReleaseStaleReservations();
+
 			var crates = world.ActorsHavingTrait<Crate>().ToList();
 			if (crates.Count < 1)
 				return;
@@ -100,7 +111,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			foreach (var crate in crates)
 			{
-				if (alreadyPursuitCrates.Contains(crate))
+				if (reservations.ContainsKey(crate))
 					continue;
 
 				if (!crate.IsAtGroundLevel())
@@ -122,7 +133,36 @@ namespace OpenRA.Mods.Cameo.Traits
 				var cell = world.Map.CellContaining(target.CenterPosition);
 				AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
 				bot.QueueOrder(new Order("Move", crateCollector, target, true));
-				alreadyPursuitCrates.Add(crate);
+				reservations[crate] = (crateCollector, world.WorldTick);
+			}
+		}
+
+		/// <summary>LC2: whether a crate reservation must be released. Pure, so tests can drive every case.</summary>
+		public static bool ReservationStale(bool crateGone, bool collectorGone, bool collectorIdle, int ageTicks,
+			int idleGraceTicks, int timeoutTicks)
+		{
+			if (crateGone || collectorGone)
+				return true;
+
+			if (collectorIdle && ageTicks > idleGraceTicks)
+				return true;
+
+			return timeoutTicks >= 0 && ageTicks > timeoutTicks;
+		}
+
+		void ReleaseStaleReservations()
+		{
+			if (reservations.Count == 0)
+				return;
+
+			var tick = world.WorldTick;
+			foreach (var crate in reservations.Keys.ToList())
+			{
+				var (collector, ordered) = reservations[crate];
+				var collectorGone = collector.IsDead || !collector.IsInWorld || collector.Owner != player;
+				if (ReservationStale(crate.IsDead || !crate.IsInWorld, collectorGone, !collectorGone && collector.IsIdle,
+					tick - ordered, Info.CollectorIdleGraceTicks, Info.ReservationTimeoutTicks))
+					reservations.Remove(crate);
 			}
 		}
 

@@ -132,5 +132,37 @@ namespace OpenRA.Mods.Cameo.Test
 			// Same value and safety: the nearer field wins.
 			Assert.That(ExpansionPlannerBotModule.McvSite(new[] { Field(1, 60, 10, 60, 4), Field(2, 30, 10, 60, 4) }, mcv, 3, 10)?.Index, Is.EqualTo(2));
 		}
+
+		[Test]
+		public void AnIneligibleFieldFallsOutAndTheNextBestIsOffered()
+		{
+			// LC3: an unreachable or parked field is skipped, never handed to the MCV again.
+			var fields = new[] { Field(1, 40, 10, 90, 4), Field(2, 10, 40, 60, 4) };
+			var mcv = new CPos(10, 10);
+			Assert.That(ExpansionPlannerBotModule.McvSite(fields, mcv, 3, 10)?.Index, Is.EqualTo(1));
+			Assert.That(ExpansionPlannerBotModule.McvSite(fields, mcv, 3, 10, f => f.Index != 1)?.Index, Is.EqualTo(2));
+			Assert.That(ExpansionPlannerBotModule.McvSite(fields, mcv, 3, 10, f => false), Is.Null);
+		}
+
+		[Test]
+		public void AFieldHandedOutTooOftenInARowIsParked()
+		{
+			// LC3: the MCV module only asks again for an idle MCV, so a repeat means the last attempt failed.
+			var streak = (Field: -1, Count: 0);
+			for (var i = 1; i <= 3; i++)
+			{
+				(streak, var park) = ExpansionPlannerBotModule.TrackMcvHandout(streak, 7, 3);
+				Assert.That(park, Is.False);
+				Assert.That(streak.Count, Is.EqualTo(i));
+			}
+
+			(streak, var parked) = ExpansionPlannerBotModule.TrackMcvHandout(streak, 7, 3);
+			Assert.That(parked, Is.True);
+			Assert.That(streak, Is.EqualTo((-1, 0)));
+
+			// A different field restarts the streak; 0 disables parking.
+			Assert.That(ExpansionPlannerBotModule.TrackMcvHandout((7, 3), 8, 3), Is.EqualTo(((8, 1), false)));
+			Assert.That(ExpansionPlannerBotModule.TrackMcvHandout((7, 50), 7, 0).Park, Is.False);
+		}
 	}
 }
