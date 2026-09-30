@@ -53,6 +53,15 @@ write exception-*.log and are never retried. Per-match results also append
 to <support>/batch_results.jsonl as they land, so a batch whose driver is
 itself swept still leaves usable evidence.
 
+The batch fingerprints its arms once at start (LC7): the mod commit and its
+dirty state, the engine VERSION, a sha256 over engine/bin/OpenRA*.dll, a
+sha256 over the resolved AI yaml set (mods/**/ai.yaml + mods/**/ai/*.yaml),
+the map source, and the batch spec. The fingerprint is recomputed before
+every match attempt and any drift aborts the batch — a mid-batch checkout or
+rebuild (the auto-sync service landing new yaml under stale DLLs killed
+league-3 this way) silently changes the A/B arms otherwise.
+--allow-fingerprint-drift records the drift and keeps running.
+
 Usage:
     python tools/ai/run_ai_match_batch.py [options]
 
@@ -66,6 +75,8 @@ Usage:
     --time-limit 30                 per-match cap in minutes (engine options only)
     --support-dir PATH              batch support dir (default: %TEMP%/ai-match-batch-<ts>)
     --dry-run                       print the matrix + variants, launch nothing
+    --allow-fingerprint-drift       log mid-batch arm changes and continue
+                                    (default: abort — a changed arm voids the A/B)
 
 Exit codes: 0 = batch complete, 2 = no usable records collected, 1 = failure.
 """
@@ -73,6 +84,7 @@ Exit codes: 0 = batch complete, 2 = no usable records collected, 1 = failure.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import itertools
 import json
 import os
@@ -608,6 +620,157 @@ def ab_scoreboard(results: list[dict]) -> dict:
     return {f"{a} vs {b}": cell for (a, b), cell in sorted(board.items())}
 
 
+# ---------------------------------------------------------------------------
+# LC7 — the A/B fingerprint
+#
+# A batch's "arms" are not just the bot names on the command line: the mod
+# checkout, the built DLLs, the resolved AI yaml, the map source and the
+# batch spec all decide what is actually being compared. A mid-batch change —
+# the auto-sync service fast-forwarding the checkout, a rebuild landing in
+# engine/bin, a map edit — silently swaps the arms (league-3 lost 15 matches
+# to new yaml meeting stale DLLs). The fingerprint is therefore computed once
+# at batch start and recomputed before EVERY match attempt; any drift aborts
+# the batch unless --allow-fingerprint-drift was passed.
+# ---------------------------------------------------------------------------
+
+FINGERPRINT_GIT_PATHS = (
+    "mods",
+    "OpenRA.Mods.CA",
+    "OpenRA.Mods.Cameo",
+    "OpenRA.Mods.Fransbot",
+    "tools/ai",
+)
+
+
+def _git(repo_root: pathlib.Path, *args: str) -> str | None:
+    """stdout of a git call against the mod checkout, or None when git or the
+    repository itself is unavailable (no git binary, non-git tree, timeout)."""
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(repo_root), *args],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=30,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return proc.stdout if proc.returncode == 0 else None
+
+
+def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
+    """One sha256 over (relative name, bytes) per file in sorted order — set
+    membership and contents both move the digest; an empty set hashes clean."""
+    digest = hashlib.sha256()
+    for path in sorted(files, key=lambda p: p.relative_to(base).as_posix()):
+        digest.update(path.relative_to(base).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def _mod_dlls_sha256(engine: pathlib.Path) -> str | None:
+    """sha256 over the sorted engine/bin/OpenRA*.dll set — catches a mid-batch
+    `dotnet build` changing behavior without changing any commit."""
+    bin_dir = engine / "bin"
+    if not bin_dir.is_dir():
+        return None
+    return _hash_files(bin_dir, [p for p in bin_dir.glob("OpenRA*.dll") if p.is_file()])
+
+
+def _ai_yaml_sha256(mods_root: pathlib.Path) -> tuple[str, int]:
+    """(digest, file count) over the AI yaml the engine resolves: the union of
+    mods/**/ai.yaml and mods/**/ai/*.yaml. An empty set is still a valid
+    digest (hash of nothing) — only the count distinguishes it."""
+    files: list[pathlib.Path] = []
+    if mods_root.is_dir():
+        files = [
+            p for p in set(mods_root.rglob("ai.yaml")) | set(mods_root.glob("**/ai/*.yaml"))
+            if p.is_file()
+        ]
+    return _hash_files(mods_root, files), len(files)
+
+
+def _mod_yaml_sha256(mods_root: pathlib.Path) -> tuple[str, int]:
+    """(digest, file count) over EVERY mods/**/*.yaml — the rules side of the
+    arms. A weapon/rules edit mid-batch changes what the match actually plays
+    just as much as an ai.yaml change, and the boolean mod_dirty flag cannot
+    tell two different dirty states apart. An empty set is still a valid
+    digest — only the count distinguishes it."""
+    files: list[pathlib.Path] = []
+    if mods_root.is_dir():
+        files = [p for p in mods_root.rglob("*.yaml") if p.is_file()]
+    return _hash_files(mods_root, files), len(files)
+
+
+def _map_sha256(map_source: pathlib.Path) -> str | None:
+    """A .oramap file hashes its bytes; a template dir hashes every file in it."""
+    if map_source.is_file():
+        return hashlib.sha256(map_source.read_bytes()).hexdigest()
+    if map_source.is_dir():
+        return _hash_files(map_source, [p for p in map_source.rglob("*") if p.is_file()])
+    return None
+
+
+def compute_fingerprint(
+    map_source: pathlib.Path,
+    engine: pathlib.Path,
+    config: dict,
+    repo_root: pathlib.Path = REPO_ROOT,
+) -> dict:
+    """The batch's arms as one dict. Null-tolerant: a component that cannot be
+    read (no git, no engine, no map) records None rather than failing."""
+    commit = (_git(repo_root, "rev-parse", "HEAD") or "").strip() or None
+    status = _git(repo_root, "status", "--porcelain", "--", *FINGERPRINT_GIT_PATHS)
+    version_file = engine / "VERSION"
+    engine_version = None
+    if version_file.is_file():
+        # The engine writes VERSION as UTF-16 (BOM'd) on Windows; a utf-8
+        # read yields NUL-separated mojibake. Decode by BOM, fall back plain.
+        raw = version_file.read_bytes()
+        if raw.startswith(b"\xff\xfe") or raw.startswith(b"\xfe\xff"):
+            engine_version = raw.decode("utf-16", errors="replace").strip() or None
+        else:
+            engine_version = raw.decode("utf-8", errors="replace").strip() or None
+    ai_sha, ai_count = _ai_yaml_sha256(repo_root / "mods")
+    mod_sha, mod_count = _mod_yaml_sha256(repo_root / "mods")
+    return {
+        "mod_commit": commit,
+        "mod_dirty": None if status is None else bool(status.strip()),
+        "engine_version": engine_version,
+        "mod_dlls_sha256": _mod_dlls_sha256(engine),
+        "ai_yaml_sha256": ai_sha,
+        "ai_yaml_files": ai_count,
+        "mod_yaml_sha256": mod_sha,
+        "mod_yaml_files": mod_count,
+        "map_sha256": _map_sha256(map_source),
+        "config": config,
+    }
+
+
+def fingerprint_id(components: dict) -> str:
+    """Compact handle for a fingerprint: first 12 hex of the sha256 over the
+    canonical json of its components."""
+    canonical = json.dumps(components, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:12]
+
+
+def fingerprint_drift(baseline: dict, current: dict) -> dict:
+    """{component: {"was", "now"}} for every component that moved — an empty
+    dict means identical arms."""
+    return {
+        key: {"was": baseline.get(key), "now": current.get(key)}
+        for key in sorted(set(baseline) | set(current))
+        if baseline.get(key) != current.get(key)
+    }
+
+
+def _short_hash(value: str | None) -> str:
+    return value[:12] if value else "null"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
@@ -633,6 +796,9 @@ def main() -> int:
     parser.add_argument("--stall-timeout", type=int, default=400,
                         help="seconds of debug.log silence before a live match counts as hung")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--allow-fingerprint-drift", action="store_true",
+                        help="log arm drift between attempts and keep running "
+                             "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
     args = parser.parse_args()
 
@@ -661,6 +827,19 @@ def main() -> int:
 
     matchups = build_matchups(factions, args.bot_a, args.bot_b, args.repeats, swap_bots=args.swap_bots)
 
+    # LC7: fingerprint the arms once, before any variant is written; every
+    # match attempt below recomputes it and aborts on drift.
+    batch_config = {
+        "bot_a": args.bot_a,
+        "bot_b": args.bot_b,
+        "factions": factions,
+        "repeats": args.repeats,
+        "swap_bots": args.swap_bots,
+        "time_limit": args.time_limit,
+    }
+    batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+    batch_fp_id = fingerprint_id(batch_fingerprint)
+
     # One variant dir per distinct matchup (repeats reuse it).
     variants = {}
     for m in matchups:
@@ -670,6 +849,16 @@ def main() -> int:
         )
 
     print(f"batch: {len(matchups)} match(es) across {len(variants)} variant(s), support={support}")
+    print(
+        f"fingerprint {batch_fp_id}: "
+        f"commit={batch_fingerprint['mod_commit'] or 'null'} "
+        f"dirty={batch_fingerprint['mod_dirty']} "
+        f"engine={batch_fingerprint['engine_version'] or 'null'} "
+        f"dlls={_short_hash(batch_fingerprint['mod_dlls_sha256'])} "
+        f"ai_yaml={_short_hash(batch_fingerprint['ai_yaml_sha256'])} ({batch_fingerprint['ai_yaml_files']} files) "
+        f"yaml={_short_hash(batch_fingerprint['mod_yaml_sha256'])} ({batch_fingerprint['mod_yaml_files']} files) "
+        f"map={_short_hash(batch_fingerprint['map_sha256'])}"
+    )
     for name, v in variants.items():
         print(f"  variant {name}: {v['a']['faction']}({v['a']['bot']}) vs {v['b']['faction']}({v['b']['bot']})")
 
@@ -693,6 +882,7 @@ def main() -> int:
 
     results = []
     progress_path = support / "batch_results.jsonl"
+    drift_aborted = None
     for run, m in enumerate(matchups, 1):
         before = log_path.stat().st_size if log_path.is_file() else 0
         launch_args = [
@@ -710,8 +900,20 @@ def main() -> int:
             launch_args.append("Debug.BotDebug=true")
 
         attempt = 0
+        drift = None
+        current_fingerprint = batch_fingerprint
         while True:
             attempt += 1
+            # LC7: re-fingerprint before EVERY attempt — a rebuild or sync
+            # landing mid-retry is still drift. Any changed component aborts
+            # the batch rather than launching under different arms.
+            current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+            drift = fingerprint_drift(batch_fingerprint, current_fingerprint)
+            if drift:
+                if not args.allow_fingerprint_drift:
+                    break
+                print(f"    fingerprint drift ({', '.join(drift)}) — continuing per --allow-fingerprint-drift",
+                      flush=True)
             exc_before = {p.name for p in logs_dir.glob("exception-*.log")}
             print(f"[{run}/{len(matchups)}] {m['variant']} (repeat {m['repeat']}, attempt {attempt}) ...", flush=True)
             started = time.time()
@@ -750,6 +952,29 @@ def main() -> int:
                 if tail:
                     print(f"    client.log tail:\n{tail}", flush=True)
 
+        # Arms moved between batch start and this attempt: record the drift as
+        # the match result, then stop the batch — no result gathered under
+        # changed arms is a valid A/B datapoint.
+        if drift and not args.allow_fingerprint_drift:
+            print(f"[{run}/{len(matchups)}] {m['variant']} — FINGERPRINT DRIFT, batch aborted: "
+                  f"{', '.join(drift)}", flush=True)
+            for key, change in drift.items():
+                print(f"    {key}: {json.dumps(change['was'], sort_keys=True)} -> "
+                      f"{json.dumps(change['now'], sort_keys=True)}", flush=True)
+            result = {
+                "variant": m["variant"],
+                "status": "fingerprint_drift",
+                "fingerprint": fingerprint_id(current_fingerprint),
+                "fingerprint_drift": drift,
+                "attempts": attempt - 1,
+                "records": 0,
+            }
+            results.append(result)
+            with progress_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(result) + "\n")
+            drift_aborted = drift
+            break
+
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
@@ -763,6 +988,7 @@ def main() -> int:
         result = {
             "variant": m["variant"],
             "status": status,
+            "fingerprint": fingerprint_id(current_fingerprint),
             "exit_code": exit_code,
             "attempts": attempt,
             "wall_seconds": elapsed,
@@ -799,6 +1025,8 @@ def main() -> int:
     scoreboard = ab_scoreboard(results)
     summary = {
         "support_dir": str(support),
+        "fingerprint": batch_fingerprint,
+        "fingerprint_id": batch_fp_id,
         "matches": len(matchups),
         "completed": sum(1 for r in results if r["status"] == "ok"),
         "timed_out": sum(1 for r in results if r["status"] == "timeout"),
@@ -810,6 +1038,9 @@ def main() -> int:
         "scoreboard": scoreboard,
         "results": results,
     }
+    if drift_aborted is not None:
+        summary["aborted"] = "fingerprint_drift"
+        summary["fingerprint_drift"] = drift_aborted
     (support / "batch_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(
@@ -818,6 +1049,9 @@ def main() -> int:
         f"{summary['died']} died, {summary['norecord']} norecord ({summary['retried']} retried), "
         f"exceptions={new_exceptions or 'none'}"
     )
+    if drift_aborted is not None:
+        print(f"batch ABORTED on fingerprint drift ({', '.join(drift_aborted)}) — "
+              f"the arms changed mid-batch; see batch_summary.json 'fingerprint_drift'")
     if scoreboard:
         print("\nA/B scoreboard (decided 1v1s, deduplicated by game):")
         for pairing, cell in scoreboard.items():
@@ -830,6 +1064,8 @@ def main() -> int:
         for name in variants:
             shutil.rmtree(variants_root / name, ignore_errors=True)
 
+    if drift_aborted is not None:
+        return 1
     if new_exceptions:
         return 1
     if not any(r["records"] for r in results):
