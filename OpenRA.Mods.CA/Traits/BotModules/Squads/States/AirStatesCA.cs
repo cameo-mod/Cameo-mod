@@ -95,6 +95,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (range == WDist.Zero || (unit.CenterPosition - loc).HorizontalLength > range.Length)
 					continue;
 
+				// LC6: a unit counted toward the gate IS consumed by the decision -
+				// an unseen AA must never move this count.
+				owner.SquadManager.CanaryObserved(unit, "aa-gate");
+
 				missileUnitsCount += owner.SquadManager.Info.StaticAntiAirTypes.Contains(unit.Info.Name)
 					? StaticAntiAirMultiplier
 					: 1;
@@ -229,9 +233,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			var target = FindAirTarget(owner);
 			if (target != null)
+			{
+				owner.SquadManager.CanaryObserved(target, "air-target");
 				return target;
+			}
 
 			FindSafePlace(owner, out target, true);
+			if (target != null)
+				owner.SquadManager.CanaryObserved(target, "air-safescan");
+
 			return target;
 		}
 

@@ -77,6 +77,15 @@ module field (false everywhere → master-classic behaviour unchanged):
   derived air role ONLY when the doctrine is on, so flag-off keeps
   master's air-first order and @classic's overlap actors (ixian_airdrone,
   ra2_allies_harrier) still route to Air as written. +1 test.
+- LC6 first instance (claimed wave-1b): semantic fog canary wired into the
+  CA-5 sites. `FogCanaryEnabled` (default off) makes every decision
+  consumption assert the actor is observable — chosen targets
+  (fighter/gunship/bomber picks), the isolation escort count, the AA-gate
+  counted units, and the shared air fallback. An unfiltered enumeration or
+  a stale re-hidden target surfaces as `FOGCANARY-VIOLATION site=… actor=…`
+  in bot debug output — log-only, behavior unchanged. Pure core
+  `FogCanaryViolation` is unit-tested; other modules adopt the same helper
+  (it lives on SquadManagerBotModuleCA, where the fog plumbing already is).
 
 Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
 nothing sets it. The flag-on A/B is the gate for turning it on per

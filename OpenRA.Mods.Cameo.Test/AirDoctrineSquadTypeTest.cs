@@ -65,6 +65,25 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(SquadManagerBotModuleCA.GuerrillaOutranksAir(true, "mig", guerrilla), Is.False);
 		}
 
+		// LC6 semantic fog canary: a violation is exactly "fog is binding AND the
+		// consumed actor was not observable". No fog provider -> legacy omniscient
+		// scans are honest by design -> silent; observed actor -> silent.
+		[Test]
+		public void FogCanaryFiresOnlyOnUnseenConsumedActor()
+		{
+			var lines = new List<string>();
+			void Log(string s) => lines.Add(s);
+
+			Assert.That(SquadManagerBotModuleCA.FogCanaryViolation(true, false, "site", "sam", Log), Is.True);
+			Assert.That(lines, Has.Count.EqualTo(1));
+			Assert.That(lines[0], Does.Contain("FOGCANARY-VIOLATION").And.Contain("site").And.Contain("sam"));
+
+			lines.Clear();
+			Assert.That(SquadManagerBotModuleCA.FogCanaryViolation(false, false, "site", "sam", Log), Is.False);
+			Assert.That(SquadManagerBotModuleCA.FogCanaryViolation(true, true, "site", "harv", Log), Is.False);
+			Assert.That(lines, Is.Empty);
+		}
+
 		// §12.8 strike/CAS lists as shipped defaults - a yaml override can change
 		// them, but the code defaults pin the doctrine's intent.
 		[Test]

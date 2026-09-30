@@ -247,6 +247,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-5 (AI_ARCHITECTURE.md 12.8): split air units into fighter/gunship/bomber doctrine squads instead of one generic Air pool per actor type. Off = unchanged classic behaviour.")]
 		public readonly bool AirDoctrineEnabled = false;
 
+		[Desc("LC6: log a FOGCANARY-VIOLATION line when a decision consumes an actor this bot cannot observe (unfiltered enumeration or stale target). Diagnostic only - behavior unchanged.")]
+		public readonly bool FogCanaryEnabled = false;
+
 		[Desc("12.8: air-superiority role - hunt enemy aircraft, then pick off isolated units. Filled by BotRoleSets.")]
 		public readonly HashSet<string> FighterTypes = [];
 
@@ -561,6 +564,31 @@ namespace OpenRA.Mods.CA.Traits
 		// provider the legacy omniscient scans run unchanged — same degradation
 		// rule as the risk gate.
 		internal bool FoggedScans => FoggedScansActive(IsTraitDisabled, fogProviders);
+
+		// LC6 semantic fog canary: when enabled, every actor a decision consumes must
+		// already be observable to this bot — an unfiltered enumeration, a stale
+		// remembered target, or a gate counted on an unseen unit all surface as a
+		// greppable FOGCANARY-VIOLATION line. Log-only: behavior is unchanged, the
+		// line is the evidence the harness greps for.
+		internal void CanaryObserved(Actor a, string site)
+		{
+			if (!Info.FogCanaryEnabled || a == null)
+				return;
+
+			FogCanaryViolation(FoggedScans, IsNotHiddenUnit(a), site, a.Info.Name,
+				line => AIUtils.BotDebug("AI ({0}): {1}", Player.ClientIndex, line));
+		}
+
+		// The pure core so tests can drive it without an Actor/World: a violation is
+		// exactly "fog is binding AND the consumed actor was not observable".
+		public static bool FogCanaryViolation(bool foggedScans, bool observed, string site, string actorName, Action<string> log)
+		{
+			if (!foggedScans || observed)
+				return false;
+
+			log?.Invoke($"FOGCANARY-VIOLATION site={site} actor={actorName} — decision consumed an unseen actor");
+			return true;
+		}
 
 		// 6e risk routing: ask region-memory routers for waypoints that skirt
 		// remembered threat. Returns null (caller keeps direct routing) when

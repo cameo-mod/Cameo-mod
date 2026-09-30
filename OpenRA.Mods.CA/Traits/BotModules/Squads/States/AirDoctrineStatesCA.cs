@@ -71,7 +71,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.ThenBy(a => (a.CenterPosition - pos).LengthSquared);
 			foreach (var c in ordered)
 				if (NearToPosSafelyAircraft(owner, c.CenterPosition))
+				{
+					owner.SquadManager.CanaryObserved(c, "fighter-air-target");
 					return c;
+				}
 
 			var candidates = owner.World.Actors
 				.Where(a => squadManager.IsPreferredObservedEnemyUnit(a) && squadManager.IsNotHiddenUnit(a)
@@ -82,7 +85,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.OrderBy(c => (c.CenterPosition - pos).LengthSquared))
 			{
 				if (IsIsolated(owner, c) && NearToPosSafelyAircraft(owner, c.CenterPosition))
+				{
+					owner.SquadManager.CanaryObserved(c, "fighter-pickoff");
 					return c;
+				}
 			}
 
 			return null;
@@ -95,7 +101,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.Where(a => squadManager.IsPreferredObservedEnemyUnit(a))
 				.ToList();
 
-			return near.Count(a => a.Info.HasTraitInfo<AttackBaseInfo>()) <= squadManager.Info.FighterPickoffMaxEscorts;
+			// LC6: each counted escort is consumed by the isolation decision -
+			// an unseen escort must never change it.
+			var escorts = near.Where(a => a.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			foreach (var e in escorts)
+				squadManager.CanaryObserved(e, "fighter-isolation");
+
+			return escorts.Count <= squadManager.Info.FighterPickoffMaxEscorts;
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -145,6 +157,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var target = anchor.IsTargetValid && anchorTarget != null && NearToPosSafelyAircraft(owner, anchorTarget.CenterPosition)
 				? anchorTarget
 				: FindCasTarget(owner, anchorPos);
+
+			if (target != null)
+				owner.SquadManager.CanaryObserved(target, "gunship-cas-target");
 
 			if (target != null)
 			{
@@ -254,7 +269,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			foreach (var c in candidates)
 				if (NearToPosSafelyAircraft(owner, c.CenterPosition))
+				{
+					owner.SquadManager.CanaryObserved(c, "bomber-target");
 					return c;
+				}
 
 			return null;
 		}
