@@ -137,6 +137,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OnlyAStealthInfiltrationRollsForATransport()
+		{
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 24, chancePct: 25), Is.True);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 25, chancePct: 25), Is.False);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: false, roll: 0, chancePct: 25), Is.False, "tech buildings: escort rules");
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 0, chancePct: 0), Is.False);
+		}
+
+		[Test]
+		public void ARunVisitsTheNearestNextBuildingAndStopsAtItsSize()
+		{
+			// Stops: 0 the chosen yard, then buildings at increasing distances in a scattered order.
+			var stops = new[] { new CPos(10, 10), new CPos(40, 40), new CPos(12, 10), new CPos(20, 10), new CPos(11, 14) };
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 5), Is.EqualTo(new[] { 0, 2, 4, 3, 1 }));
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 2), Is.EqualTo(new[] { 0, 2 }), "one engineer per stop");
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 1), Is.EqualTo(new[] { 0 }));
+		}
+
+		[Test]
 		public void AnEscortedCaptureWaitsForSuperiority()
 		{
 			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");

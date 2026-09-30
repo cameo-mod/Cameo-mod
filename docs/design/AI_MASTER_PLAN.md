@@ -202,7 +202,7 @@ agent leaves.
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
 | FB1 | Fransbot MCV/island expansion + transports + ground transfer (13.5k lines, V1.29.31) | DAWN | EX | 30 | 50 | 90 | 53 |
-| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) | DAWN | CA-6 | 10 | 18 | 30 | 19 |
+| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) — **incl. ENG-T** (maintainer 2026-09-30): implement `IBotCaptureTransportProvider` (CA; consumer `EngineerBotModule.TransportChance`, built) over `IFransCaptureTransportService`: a run carries 1–5 engineers into the enemy base around its army and defences, drops ONE next to each building and drives on (or unloads all at the first stop and each runs to its own building), then the A/B at `TransportChance: 25` | DAWN | CA-6 | 10 | 18 | 30 | 19 |
 | FB3 | Fransbot sea commander (naval squads) | EMBER | CA-5 | 12 | 20 | 36 | 21 |
 | FB4 | Fransbot support coordinator (powers timed with assaults) | EMBER | CA-5 | 6 | 10 | 18 | 11 |
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |
