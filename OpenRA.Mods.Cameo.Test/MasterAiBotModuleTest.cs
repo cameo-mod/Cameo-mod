@@ -954,23 +954,34 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void MissionIdIsStableAcrossRederivedInstances()
+		public void MissionIdentityKeyIsStableAcrossRederivedInstances()
 		{
 			// The same strategic mission re-published by a later DeriveMissions
-			// pass must carry the same id, or attempt lineage fractures.
+			// pass must carry the same key, or attempt lineage fractures.
 			var first = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
 			var second = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8, Priority = 99, RequiredValue = 4000 };
-			Assert.That(second.MissionId, Is.EqualTo(first.MissionId));
+			Assert.That(second.IdentityKey, Is.EqualTo(first.IdentityKey));
 		}
 
 		[Test]
-		public void MissionIdSeparatesDistinctMissions()
+		public void MissionIdentityKeySeparatesDistinctMissions()
 		{
 			var raid8 = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
 			var raid9 = new BotMission { Type = BotMissionType.Raid, RegionIndex = 9 };
 			var defend8 = new BotMission { Type = BotMissionType.Defend, RegionIndex = 8 };
-			Assert.That(raid9.MissionId, Is.Not.EqualTo(raid8.MissionId));
-			Assert.That(defend8.MissionId, Is.Not.EqualTo(raid8.MissionId));
+			Assert.That(raid9.IdentityKey, Is.Not.EqualTo(raid8.IdentityKey));
+			Assert.That(defend8.IdentityKey, Is.Not.EqualTo(raid8.IdentityKey));
+		}
+
+		[Test]
+		public void EffectiveMissionIdPrefersOwnerAllocation()
+		{
+			// Until the owner allocates (MC1), consumers key on IdentityKey; once
+			// allocated, the owner id wins so cards and logs share one id space.
+			var mission = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
+			Assert.That(mission.EffectiveMissionId, Is.EqualTo(mission.IdentityKey));
+			mission.MissionId = 42;
+			Assert.That(mission.EffectiveMissionId, Is.EqualTo(42));
 		}
 	}
 }

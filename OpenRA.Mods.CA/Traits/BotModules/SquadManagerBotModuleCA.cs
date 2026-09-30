@@ -1627,38 +1627,107 @@ namespace OpenRA.Mods.CA.Traits
 			public int Number;
 		}
 
+		// LC1 (AI_ARCHITECTURE 10.1): squad membership is a lease. The pool stays
+		// unclaimed so engineers/scouts/collectors can borrow it; squad members are
+		// claimed with a heartbeat so nothing else can take them mid-job, and a
+		// member another module holds is handed off, never fought over. Null
+		// service = no contract, which keeps classic byte-identical.
+		const string LeaseOwner = nameof(SquadManagerBotModuleCA);
+		readonly HashSet<Actor> claimedBySquads = new();
+
+		int LeaseHeartbeatTicks() => Math.Max(200, Info.AttackForceInterval * 4);
+
+		void ReconcileSquadLeases()
+		{
+			var leases = BotUnitLeases.Of(Player);
+			if (leases == null)
+			{
+				claimedBySquads.Clear();
+				return;
+			}
+
+			// The pool is unowned: drop entries another module claimed since they
+			// entered, before any draft site can pull them this pass. They leave
+			// activeUnits too, so FindNewUnits re-adopts them once released.
+			unitsHangingAroundTheBase.RemoveAll(u =>
+			{
+				if (u.Actor == null || !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner))
+					return false;
+
+				activeUnits.Remove(u.Actor);
+				return true;
+			});
+
+			var held = new HashSet<Actor>();
+			foreach (var squad in Squads)
+			{
+				if (!squad.IsValid)
+					continue;
+
+				foreach (var u in squad.Units.ToList())
+				{
+					var a = u.Actor;
+					if (a == null)
+						continue;
+
+					if (BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Squad, LeaseHeartbeatTicks()))
+						held.Add(a);
+					else
+					{
+						// Another owner holds it — hand the unit off cleanly: out of the
+						// squad and out of activeUnits, so FindNewUnits re-adopts it once
+						// the other module releases.
+						squad.Units.Remove(u);
+						activeUnits.Remove(a);
+					}
+				}
+			}
+
+			claimedBySquads.RemoveWhere(a =>
+			{
+				if (held.Contains(a))
+					return false;
+
+				leases.Release(a, LeaseOwner);
+				return true;
+			});
+			claimedBySquads.UnionWith(held);
+		}
+
 		void MissionTaken(BotMission mission, SquadCA taker)
 		{
 			foreach (var provider in missionProviders ?? Array.Empty<IBotMissionProvider>())
 				if ((provider.Missions ?? Array.Empty<BotMission>()).Any(candidate => ReferenceEquals(candidate, mission)))
 				{
 					provider.MissionTaken(mission);
-					var attempt = missionAttemptCounters.GetValueOrDefault(mission.MissionId) + 1;
-					missionAttemptCounters[mission.MissionId] = attempt;
+					var id = mission.EffectiveMissionId;
+					var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+					missionAttemptCounters[id] = attempt;
 					squadMissions[taker] = new MissionAttempt { Mission = mission, Number = attempt };
-					ReportMissionAttempt(mission, attempt, BotMissionAttemptState.Committed);
+					ReportMissionAttempt(mission, attempt, BotMissionState.Committed, BotMissionReason.None);
 					return;
 				}
 		}
 
-		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionAttemptState state)
+		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionState state, BotMissionReason reason)
 		{
-			AIUtils.BotDebug("AI ({0}): MISSION {1} ATTEMPT {2} {3} ({4} region {5})",
-				Player.ClientIndex, mission.MissionId, attempt, state.ToString().ToUpperInvariant(), mission.Type, mission.RegionIndex);
+			var reasonText = reason == BotMissionReason.None ? string.Empty : " " + reason.ToString().ToLowerInvariant();
+			AIUtils.BotDebug("AI ({0}) Squads    M{1}/A{2} {3}{4} ({5} region {6})",
+				Player.ClientIndex, mission.EffectiveMissionId, attempt, state.ToString().ToUpperInvariant(), reasonText, mission.Type, mission.RegionIndex);
 			foreach (var sink in missionOutcomeSinks ?? Array.Empty<IBotMissionOutcomeSink>())
-				sink.MissionAttemptResolved(mission, attempt, state);
+				sink.Report(mission.EffectiveMissionId, attempt, state, reason, World.WorldTick);
 		}
 
-		void ResolveMissionAttempt(SquadCA squad, BotMissionAttemptState state)
+		void ResolveMissionAttempt(SquadCA squad, BotMissionState state, BotMissionReason reason)
 		{
 			if (squadMissions.TryGetValue(squad, out var attempt) && squadMissions.Remove(squad))
-				ReportMissionAttempt(attempt.Mission, attempt.Number, state);
+				ReportMissionAttempt(attempt.Mission, attempt.Number, state, reason);
 		}
 
 		void CleanSquads()
 		{
 			foreach (var s in Squads.Where(s => !s.IsValid))
-				ResolveMissionAttempt(s, BotMissionAttemptState.Failed);
+				ResolveMissionAttempt(s, BotMissionState.Failed, BotMissionReason.LostUnits);
 			Squads.RemoveAll(s => !s.IsValid);
 			foreach (var s in Squads)
 			{
@@ -1698,6 +1767,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void DismissSquad(SquadCA squad)
 		{
+			var leases = BotUnitLeases.Of(Player);
+			if (leases != null)
+				foreach (var u in squad.Units)
+					if (u.Actor != null && claimedBySquads.Remove(u.Actor))
+						leases.Release(u.Actor, LeaseOwner);
+
+			ResolveMissionAttempt(squad, BotMissionState.Abandoned, BotMissionReason.Superseded);
 			unitsHangingAroundTheBase.AddRange(squad.Units);
 
 			squad.Units.Clear();
@@ -1760,6 +1836,7 @@ namespace OpenRA.Mods.CA.Traits
 				TrackRoleLosses();
 
 			CleanSquads();
+			ReconcileSquadLeases();
 
 			activeUnits.RemoveAll(unitCannotBeOrdered);
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
@@ -1880,10 +1957,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void FindNewUnits(IBot bot)
 		{
+			var leases = BotUnitLeases.Of(Player);
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == Player &&
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
-					!activeUnits.Contains(a) && a.IsInWorld);
+					!activeUnits.Contains(a) && a.IsInWorld &&
+					!BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner));
 
 			// JoinGuerrilla gates creation too: 0 means this personality never forms
 			// guerrilla squads, not "the first unit always joins". The size cap is

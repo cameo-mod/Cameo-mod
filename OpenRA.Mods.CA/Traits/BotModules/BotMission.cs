@@ -25,24 +25,36 @@ namespace OpenRA.Mods.CA.Traits
 		public int RequiredValue;
 		public int Priority;
 
-		// MissionCard identity: the stable strategic reason, deterministic from
-		// (Type, TargetPlayer, RegionIndex). Providers re-derive missions every
-		// situation rebuild, so re-published instances of the same underlying
-		// mission share an id and attempts accumulate against it.
-		public int MissionId => unchecked(((int)Type * 397) ^ (RegionIndex * 31) ^ ((TargetPlayer?.ClientIndex ?? -1) * 17));
+		// MissionCard id (docs/design/AI_MISSION_CARDS.md §2.1): allocated by the
+		// mission's owner as a stable per-player integer; 0 = not yet allocated,
+		// consumers fall back to IdentityKey until owner allocation lands (MC1).
+		public int MissionId;
+
+		// The identity key — deterministic from (Type, TargetPlayer, RegionIndex).
+		// Providers re-derive missions every situation rebuild, so re-published
+		// instances of the same underlying mission share the key; it is what the
+		// owner allocates MissionId from and what consumers key attempts on.
+		public int IdentityKey => unchecked(((int)Type * 397) ^ (RegionIndex * 31) ^ ((TargetPlayer?.ClientIndex ?? -1) * 17));
+
+		public int EffectiveMissionId => MissionId != 0 ? MissionId : IdentityKey;
 	}
 
-	// Attempt lifecycle, fransotto's MissionCard vocabulary. Denied precedes a
-	// commit; Recover is a mid-attempt state; Success/Failed are terminal.
-	public enum BotMissionAttemptState { Denied, Committed, Progressing, Stalled, Recover, Success, Failed }
+	// Closed attempt/mission lifecycle (AI_MISSION_CARDS.md §2.2). Proposed,
+	// Denied and Dormant are owner-side states; executors emit Committed onward
+	// and must report exactly one terminal state (Succeeded, Failed, Abandoned)
+	// per attempt.
+	public enum BotMissionState { Proposed, Denied, Dormant, Committed, Progressing, Stalled, Recovering, Succeeded, Failed, Abandoned }
 
-	// Opt-in write-back: providers implementing this receive attempt outcomes the
-	// squad layer resolved. Strategic-layer consumers (dormant shelf, failure
-	// memory — the generalized form of the per-region siege memory) adopt it
-	// without forcing every provider to implement it.
+	// Closed transition reasons (AI_MISSION_CARDS.md §2.2); projects may extend
+	// under their own prefix in serialized cards.
+	public enum BotMissionReason { None, NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done }
+
+	// The return path (AI_MISSION_CARDS.md §2.3): executors report attempt
+	// transitions; the owner alone decides what a failure means. Opt-in —
+	// providers adopt without forcing every provider to implement it.
 	public interface IBotMissionOutcomeSink
 	{
-		void MissionAttemptResolved(BotMission mission, int attempt, BotMissionAttemptState state);
+		void Report(int missionId, int attemptId, BotMissionState state, BotMissionReason reason, int tick);
 	}
 
 	public sealed class BotMissionAssignment
