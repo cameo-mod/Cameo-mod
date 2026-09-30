@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -103,8 +104,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (Info.CheckTargetsForVisibility)
 				crates.RemoveAll(c => !c.CanBeViewedByPlayer(player));
 
+			// LC1: an idle unit may still belong to a scout, a beacon response or a capture — never take a claimed one.
+			var leases = BotUnitLeases.Of(player);
 			var idleUnits = world.ActorsHavingTrait<Mobile>().Where(a => a.Owner == player && a.IsIdle
-				&& (Info.IncludedUnitTypes.Contains(a.Info.Name) || (Info.IncludedUnitTypes.Count < 1 && !Info.ExcludedUnitTypes.Contains(a.Info.Name)))).ToList();
+				&& (Info.IncludedUnitTypes.Contains(a.Info.Name) || (Info.IncludedUnitTypes.Count < 1 && !Info.ExcludedUnitTypes.Contains(a.Info.Name)))
+				&& !BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner)).ToList();
 
 			if (idleUnits.Count < 1)
 				return;
@@ -130,12 +134,18 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (target.Type == TargetType.Invalid)
 					continue;
 
+				if (!BotUnitLeases.TryClaim(leases, crateCollector, LeaseOwner, BotLeasePurpose.Crate,
+					Math.Max(0, Info.ReservationTimeoutTicks)))
+					continue;
+
 				var cell = world.Map.CellContaining(target.CenterPosition);
 				AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
 				bot.QueueOrder(new Order("Move", crateCollector, target, true));
 				reservations[crate] = (crateCollector, world.WorldTick);
 			}
 		}
+
+		const string LeaseOwner = nameof(CratePickupBotModule);
 
 		/// <summary>LC2: whether a crate reservation must be released. Pure, so tests can drive every case.</summary>
 		public static bool ReservationStale(bool crateGone, bool collectorGone, bool collectorIdle, int ageTicks,
@@ -156,13 +166,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			var tick = world.WorldTick;
+			var leases = BotUnitLeases.Of(player);
 			foreach (var crate in reservations.Keys.ToList())
 			{
 				var (collector, ordered) = reservations[crate];
 				var collectorGone = collector.IsDead || !collector.IsInWorld || collector.Owner != player;
 				if (ReservationStale(crate.IsDead || !crate.IsInWorld, collectorGone, !collectorGone && collector.IsIdle,
 					tick - ordered, Info.CollectorIdleGraceTicks, Info.ReservationTimeoutTicks))
+				{
 					reservations.Remove(crate);
+					leases?.Release(collector, LeaseOwner);
+				}
 			}
 		}
 

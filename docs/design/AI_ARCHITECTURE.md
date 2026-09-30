@@ -1311,6 +1311,14 @@ picks which squad attacks what. Every past AI regression in this tree came from 
 same state, and §1.3 shows the engine punishes duplicate authorities with a hard crash rather than
 a subtle bug.
 
+**One owner per ACTOR, too (LC1, 2026-09-30).** A module that sends a unit on a long-lived job claims it through
+`IBotUnitLeases` (`OpenRA.Mods.CA/Traits/BotModules/IBotUnitLeases.cs`; the registry `BotUnitLeaseRegistry` loads for
+`genericbot`) and skips units another module holds. `Actor.IsIdle` is never ownership: `ModularBot` runs every
+module's `BotTick` before it issues any queued order, so two modules can both see one unit idle in the same tick
+(the Fransbot author's review, P0). Holders either release, or renew every evaluation (a heartbeat) and let the
+lease expire when they drop the unit — no release path can be forgotten. Resolve the service with
+`BotUnitLeases.Of(player)` at every use; a null service means "no contract", the old behaviour (`classic`).
+
 The second rule follows from it: **absence degrades, it never breaks.** Every reader treats a
 missing master, a missing snapshot, or a stale snapshot as "carry on as today". That is what makes
 this incrementally shippable — each phase in 10.6 is a complete, playable state.

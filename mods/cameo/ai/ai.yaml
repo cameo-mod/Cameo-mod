@@ -3332,6 +3332,12 @@ Player:
 		RequiresCondition: classicbot
 	BaseRepairBotModule:
 		RequiresCondition: genericbot
+	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
+	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
+	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
+	# untouched. Squads join when NOVA's lane adopts it; CncEngineerBotModule (engine) joins through the ENG merge.
+	BotUnitLeaseRegistry:
+		RequiresCondition: genericbot
 	BotPersonalityController:
 		RequiresCondition: genericbot
 		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);
