@@ -1240,8 +1240,8 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   charge-delay/frontal-facing negatives — so K is never under/over-counted.
 - [ ] Then vehicle anchor proposal (MBT live; light tank / heavy / tank
   destroyer / artillery / AA / scout / battlefortress / APC).
-- [ ] DEFERRED to elite-weapon audit: elite weapon range = base + 1000
-  (naxis elite is 6500, should be 6000).
+- [ ] Elite weapon range = base + 1000 — **ruled 2026-09-30, DESIGN §12.0m**; guarded by
+  `audit_elite_range.py` (56 off-rule pairs, lower-only); fix them in the rebalance, through the pipeline.
 - [ ] **Class descriptions rework** (maintainer 2026-07-22): every unit CLASS
   needs its own fluent `.description` (only a few exist so far —
   scout/antitank/mbt/commando + the 4 added today: heavy_sniper/rocket_trooper/

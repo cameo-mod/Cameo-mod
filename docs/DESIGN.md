@@ -4287,6 +4287,17 @@ Cameo uses **two distinct experience systems** with different rank counts,
 stat curves, and decoration images. Every faction must use exactly one
 system consistently across all its actors.
 
+
+### 12.0m ELITE WEAPONS REACH 1000 FURTHER (maintainer 2026-09-30) — binding
+
+*"Yes, exactly that's the rule for RA2 styled elite weapons having +1000 range."* A weapon `X_elite` (the veteran
+swap of `X`) has **`Range` = base + 1000**; nothing else about it is implied by this rule. Melee weapons (both ranges
+below `2c0` and equal) are exempt: a melee weapon must touch its target. Measured on master 2026-09-30 over the
+resolved rules: **209 pairs — 149 follow, 4 melee, 56 off-rule** (11 at +1111, the RA2Mod step; 8 equal; several
+elites SHORTER than their base). The off-rule pairs are rebalance debt: ranges move through the balance pipeline
+(hard rule 3), never by hand. **Guard:** `tools/audit/audit_elite_range.py`, a lower-only ratchet (`--list` prints the
+pairs).
+
 ### 16.1 The two experience systems
 
 **TD/TS system** (`^GainsExperienceTD` in
