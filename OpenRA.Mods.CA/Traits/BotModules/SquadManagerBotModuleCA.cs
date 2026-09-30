@@ -143,6 +143,22 @@ namespace OpenRA.Mods.CA.Traits
 			"frankenstein instances flip it on for the A/B).")]
 		public readonly bool UseProtectionRequests = false;
 
+		[Desc("Anti-air escort (CA-3): every assault force should contain at least",
+			"AntiAirEscortMin units whose weapons can hit air targets, growing by one per",
+			"AntiAirEscortTicksPerStep game ticks up to AntiAirEscortMax - the longer the",
+			"game runs, the more air the enemy fields. A shortfall is requested from unit",
+			"production (cheapest buildable AA-capable unit). False = classic behaviour.")]
+		public readonly bool EnsureAntiAirEscort = false;
+
+		[Desc("Anti-air escort: minimum AA-capable units per assault force.")]
+		public readonly int AntiAirEscortMin = 1;
+
+		[Desc("Anti-air escort: one additional required AA unit per this many game ticks.")]
+		public readonly int AntiAirEscortTicksPerStep = 30000;
+
+		[Desc("Anti-air escort: cap on required AA units per assault force.")]
+		public readonly int AntiAirEscortMax = 3;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -392,6 +408,7 @@ namespace OpenRA.Mods.CA.Traits
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 		IBotProtectionRequestProvider[] protectionRequestProviders;
+		IBotRequestUnitProduction[] unitRequesters;
 		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
@@ -585,6 +602,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 		static readonly BitSet<TargetableType> GroundTargetTypes = new("Ground");
+		static readonly BitSet<TargetableType> AirTargetTypes = new("Air");
 
 		// An artillery escort is the screen's frontline: an armed ground vehicle that
 		// can hit ground targets. Infantry cannot keep up, AA-only platforms and
@@ -599,6 +617,62 @@ namespace OpenRA.Mods.CA.Traits
 			&& !Info.SupportUnitTypes.Contains(a.Info.Name)
 			&& !a.GetAllTargetTypes().Overlaps(InfantryTargetTypes)
 			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(GroundTargetTypes));
+
+		// A unit covers its squad against air if any of its weapons can hit an air
+		// target - the unit-profile weapon table keeps this faction-agnostic (no
+		// hard-coded type lists, 12.4a/CA-3).
+		internal bool CanHitAir(Actor a) =>
+			a.Info.HasTraitInfo<AttackBaseInfo>()
+			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(AirTargetTypes));
+
+		// At least AntiAirEscortMin, growing by one per step as the match runs long
+		// enough for the enemy to field real air, capped at AntiAirEscortMax.
+		internal int RequiredAntiAirEscort()
+		{
+			var step = Info.AntiAirEscortTicksPerStep > 0 ? World.WorldTick / Info.AntiAirEscortTicksPerStep : 0;
+			return Math.Min(Info.AntiAirEscortMax, Info.AntiAirEscortMin + step);
+		}
+
+		// The cheapest buildable ground unit that can hit air - it fields fastest and
+		// masses easiest. Returns null when no queue can make one (e.g. tech not up).
+		string PickAntiAirUnit()
+		{
+			var rules = World.Map.Rules;
+			return Player.PlayerActor.TraitsImplementing<ProductionQueue>()
+				.SelectMany(q => q.BuildableItems())
+				.Where(ai => !ai.HasTraitInfo<BuildingInfo>() && !ai.HasTraitInfo<AircraftInfo>()
+					&& ai.HasTraitInfo<MobileInfo>()
+					&& BotUnitProfiles.Get(rules, ai).Weapons.Any(w => w.CanTarget(AirTargetTypes)))
+				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.Select(ai => ai.Name).FirstOrDefault();
+		}
+
+		// CA-3 anti-air coverage: an assault without AA dies to the first gunship it
+		// cannot shoot back at. The idle pool is already drafted whole, so a shortfall
+		// can only be fixed by production - request one unit per missing escort; the
+		// produced AA joins the pool and rides the next assault (or protection draft).
+		void RequestAntiAirCoverage(IBot bot, SquadCA attackForce)
+		{
+			var requester = unitRequesters.FirstOrDefault();
+			if (requester == null)
+				return;
+
+			var shortfall = RequiredAntiAirEscort() - attackForce.Units.Count(u => CanHitAir(u.Actor));
+			if (shortfall <= 0)
+				return;
+
+			var candidate = PickAntiAirUnit();
+			if (candidate == null)
+				return;
+
+			// Don't stack requests: only ask for what isn't already queued.
+			var queued = requester.RequestedProductionCount(bot, candidate);
+			for (var i = queued; i < shortfall; i++)
+				requester.RequestUnitProduction(bot, candidate);
+
+			AIUtils.BotDebug("AI ({0}): assault AA coverage {1}/{2} - requested {3}x {4}",
+				Player.ClientIndex, attackForce.Units.Count(u => CanHitAir(u.Actor)) , RequiredAntiAirEscort(), shortfall, candidate);
+		}
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
 		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
@@ -736,6 +810,7 @@ namespace OpenRA.Mods.CA.Traits
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			threatPredictionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotThreatPredictionProvider>().ToArray();
 			protectionRequestProviders = self.Owner.PlayerActor.TraitsImplementing<IBotProtectionRequestProvider>().ToArray();
+			unitRequesters = self.Owner.PlayerActor.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
@@ -1605,6 +1680,8 @@ namespace OpenRA.Mods.CA.Traits
 				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
 					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
+				if (Info.EnsureAntiAirEscort)
+					RequestAntiAirCoverage(bot, attackForce);
 				if (missionTarget != null)
 					attackForce.Target = Target.FromActor(missionTarget);
 				else if (missionFrozenTarget != null)
