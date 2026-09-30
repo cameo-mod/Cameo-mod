@@ -17,11 +17,16 @@ compares them to a committed manifest
     the donor is the fog-honest candidate in isolation.
 
 What counts as a "site": `World.Actors`, `world.Actors`, `ActorsHavingTrait`,
-`ActorsInBox`, `FindActorsInCircle` on a World — enumerations that see every
+`ActorsWithTrait` (missed until 2026-09-30: it sees every actor too), `ActorsInBox`, `FindActorsInCircle` on a World — enumerations that see every
 actor regardless of shroud. Honest mechanisms (`Shroud.IsVisible`,
 `CanBeViewedByPlayer`, `FrozenActor` memory, `Player.PlayerActor` scans) do not
 match these patterns and are not counted. Sites inside `//` comments are
 stripped before counting.
+
+Second check (DESIGN §19.5, maintainer 2026-09-30): no module that can run for `genericbot` may switch a
+visibility check off (`Check…Visibility: false`, `UseFoggedObservation: false`, `RespectShroud: false`) —
+the allowed omniscient modules are `CaptureManagerBotModuleCA` (engineers route around the army to the
+construction yard / tech centres) and `CratePickupBotModule` (a bot that lost its MCV finds a crate anywhere). `classic` is the omniscient A/B reference and is not checked.
 
 A count-only ratchet cannot tell "enumerating my own units" (honest — own
 actors are always visible) from "enumerating enemy targets" (a cheat). It does
@@ -65,6 +70,7 @@ SCAN_GLOBS = [
 PATTERNS = re.compile(
     r"\b(?:World|world)\.Actors\b"
     r"|\bActorsHavingTrait\b"
+    r"|\bActorsWithTrait\b"
     r"|\bActorsInBox\b"
     r"|\bFindActorsInCircle\b"
     r"|\bWorld\.FindActorsInCircle\b"
@@ -104,6 +110,56 @@ def count_sites(path: pathlib.Path) -> int:
     return count
 
 
+# DESIGN §19.5 (maintainer 2026-09-30): the only modules of the Frankenstein bot allowed to see through fog —
+# engineers routing around the army to capture, and crate pickup for a bot that lost its MCV.
+ALLOWED_OMNISCIENT = {"CaptureManagerBotModuleCA", "CratePickupBotModule"}
+VISIBILITY_SWITCH = re.compile(r"^(Check\w*Visibility|UseFoggedObservation|RespectShroud)$")
+IDENT = re.compile(r"[A-Za-z_][\w\-.]*")
+
+
+def condition_active(expr: str, granted: set[str], known: set[str]) -> bool:
+    """Can `expr` hold for a bot granted `granted`? Conditions no bot grants (prerequisites, personalities)
+    count as possibly true, so the check errs toward flagging."""
+    if not expr.strip():
+        return True
+    py = IDENT.sub(lambda m: "True" if m.group(0) in granted or m.group(0) not in known else "False", expr)
+    py = py.replace("&&", " and ").replace("||", " or ").replace("!", " not ")
+    return bool(eval(py, {"__builtins__": {}}))
+
+
+def visibility_switch_failures() -> list[str]:
+    """A genericbot module that turns a visibility check off (DESIGN §19.5) — only the capture manager may."""
+    sys.path.insert(0, str(REPO / "tools" / "audit"))
+    import miniyaml  # noqa: E402
+
+    player = miniyaml.Ruleset(REPO).resolve("Player")
+    if player is None:
+        return ["Player actor does not resolve"]
+    bots: dict[str, set[str]] = {}
+    for c in player.children:
+        if c.key.split("@", 1)[0] == "GrantConditionOnBotOwner":
+            for b in (c.get("Bots") or "").split(","):
+                bots.setdefault(b.strip(), set()).add(c.get("Condition") or "")
+    known = set().union(*bots.values()) if bots else set()
+    frankenstein = [conds for conds in bots.values() if "genericbot" in conds]
+
+    failures = []
+    for c in player.children:
+        base = c.key.split("@", 1)[0]
+        if c.key.startswith("-") or base in ALLOWED_OMNISCIENT:
+            continue
+        switches = [k for k in c.children if VISIBILITY_SWITCH.match(k.key)
+                    and k.value.strip().lower() == "false"]
+        if not switches:
+            continue
+        expr = c.get("RequiresCondition") or ""
+        if any(condition_active(expr, conds, known) for conds in frankenstein):
+            for k in switches:
+                failures.append(f"Player.{c.key}: {k.key}: false reaches genericbot ({expr or 'no condition'}) — "
+                                f"only {', '.join(sorted(ALLOWED_OMNISCIENT))} may see through fog (DESIGN §19.5)")
+    return failures
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--write", action="store_true", help="re-baseline the manifest")
@@ -130,6 +186,7 @@ def main() -> int:
 
     failures: list[str] = []
     notes: list[str] = []
+    switch_failures = visibility_switch_failures()
     for rel, n in sorted(current.items()):
         base = baseline.get(rel)
         if base is None:
@@ -146,6 +203,11 @@ def main() -> int:
 
     for note in notes:
         print(f"  note: {note}")
+    for f in switch_failures:
+        print(f"FAIL: {f}")
+    if switch_failures and not failures:
+        print(f"{len(switch_failures)} Frankenstein module(s) switch a visibility check off")
+        return 1
     if failures:
         for f in failures:
             print(f"FAIL: {f}")

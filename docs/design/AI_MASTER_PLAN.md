@@ -29,8 +29,8 @@
 3. **Research status (§2):** of the research round's ten headline changes, **1 is done, 4 are
    partial, 5 are not started**. Of the twelve "beat the best humans" items, **0 are done, 9 are
    partial, 3 are not started**. The combined-arms phases are mostly partial or in flight.
-4. **What is left:** 40 work items (§3), **~850 agent-hours expected (≈170 sessions of 5 h)**,
-   470 h if everything goes well and 1,420 h if everything goes badly, plus **34 A/B gates**
+4. **What is left:** 51 work items (§3), **~940 agent-hours expected (≈190 sessions of 5 h)**,
+   510 h if everything goes well and 1,570 h if everything goes badly, plus **40 A/B gates**
    worth 60–120 hours of match compute on this machine.
 5. **Calendar:** with four agents in parallel that is ~43 sessions each, **about 3–6 weeks** of
    fleet time at 1–2 sessions per agent per day. The real limits are A/B compute (one shared machine) and the order of the critical path
@@ -48,7 +48,7 @@
 
 | Parent | How its code reaches Cameo | Harvested so far (measured 2026-09-30) | Its best, still unharvested parts |
 |---|---|---|---|
-| **OpenRA** (engine `OpenRA.Mods.Common` bot modules) | the engine pin (`mod.config`) | the base of the stack: harvester, support powers, repair, `McvExpansionManager` (+ the EX-3 site hook, `d5d8b2a685`) | unloaded: `BevManager`, `SharedCargo`, `CncEngineerManager`; **bug:** `BuildingRepairBotModule` and `…CA` both run for the same bots (the repair toggle cancels itself, AI_SYNTHESIS §7.3) |
+| **OpenRA** (engine `OpenRA.Mods.Common` bot modules) | the engine pin (`mod.config`) | the base of the stack: harvester, support powers, repair, `McvExpansionManager` (+ the EX-3 site hook, `d5d8b2a685`) | unloaded, evaluated (RV1): `BevManager` (base-expansion vehicles: the decision EX and `McvExpansionManager` own, so merged into the MCV owner if ever needed, never loaded beside it), `SharedCargo` (for the returning Generals factions' GLA Tunnel Network, DESIGN §19.4). `CncEngineerManager` **is** loaded (`genericbot && !easiestbot`). The double repair owner's fix is in #664 (draft, A/B pending): `genericbot` gets the merged `BaseRepairBotModule` (DESIGN §19.3); `SupportPowerBotModule` + `SupportPowerBotASModule` are the next duplicate (RV2) |
 | **Romanov's Vengeance** (engine fork + `OpenRA.Mods.AS`) | the engine pin; RV features merged into the CA copies | guerrilla squads, stuck-kick / make-way, base expansion fields: **65 protected symbols** | — (merged) |
 | **Combined Arms** (`OpenRA.Mods.CA`) | hand copy, `audit_ca_drift` + `ca_vendor_sync` | squad manager + states, base/unit builders, compositions, fuzzy attack-or-flee | **upstream drift not yet synced:** "Updated AI routing", "harasser squads", "AI updates" (2025-08), air fixes (F2) |
 | **Crystallized Nexus** (GPLv3, `crystallized-nexus` `30cf70a`, unchanged upstream) | port by module | `CombatAnalysisBotModule` (code); staging, observer-gated artillery, priority tags (ideas) | **`CNTacticalMap`** (chokepoints and doors from the pathfinder graph → ZG), wave and pincer attacks, garrison, repair manager, bridge repair, cliff demolition, deploy, veinhole assault, stealth / subterranean / transport states |
@@ -59,7 +59,7 @@
 
 1. **Map it to a layer** in AI_SYNTHESIS §7.2's table, and name the Cameo owner of that decision.
    **One owner per decision** (AI_ARCHITECTURE §10.1): a harvested module *replaces* or *feeds* the
-   current owner, never runs beside it. The double repair owner shows what happens otherwise.
+   current owner, never runs beside it. The double repair owner (fix in #664) showed what happens otherwise.
 2. **Pick the best-of by reading the code** of every parent that has the layer. Record the pick and
    the reason in §7.2 before porting.
 3. **Port under Cameo's contracts:**
@@ -67,6 +67,8 @@
      manifest entry;
    * **no faction ids:** rules-derived roles and tags (`BotRoleSets`, §2.8), never id lists;
    * **no cheats, host-only**, orders only (§1.1);
+   * **claim before a long-lived assignment** (LC1): a module that sends an actor on a job claims it and releases it
+     when the job ends; `Actor.IsIdle` is never ownership (AI_REVIEW_FRANSOTTO §1, P0b);
    * the **CA hand-copy stays protected:** new symbols go into `ai_frankenstein_manifest.json`;
    * the **engine** only via the canonical pipeline, preferring a small hook (the EX-3 pattern) or a
      Cameo shadow;
@@ -195,7 +197,7 @@ agent leaves.
 | TC | Team Commander + 2v2 harness | DAWN | UT | 20 | 32 | 56 | 34 |
 | H13 | beat-humans list §13: power windows, superweapon dispersal, veterans, vision posts, human rows, ratings, watchdogs | all | UT, MI | 24 | 40 | 70 | 42 |
 
-**Parent harvest (AI_SYNTHESIS §7.2)**, expected 174 h
+**Parent harvest (AI_SYNTHESIS §7.2)**, expected 181 h
 
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
@@ -206,7 +208,26 @@ agent leaves.
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |
 | CN2 | CN garrison + repair manager | DAWN | — | 6 | 10 | 18 | 11 |
 | CN3 | CN bridge repair, cliff demolition, deploy, veinhole assault, stealth/subterranean/transport states | DAWN | — | 16 | 28 | 50 | 30 |
-| RV1 | RV/OpenRA unloaded modules: evaluate BevManager, SharedCargo, CncEngineer; fix the double repair owner | Claude | — | 4 | 8 | 14 | 8 |
+| RV1 | **built, #664 (draft, A/B pending):** `genericbot` gets `BaseRepairBotModule`, OpenRA + CA repair merged (DESIGN §19.3); classic runs only the CA copy, the OpenRA module is unloaded; BevManager and SharedCargo held for content (DESIGN §19.4); CncEngineer already loaded (§1.1) | Claude | — | 4 | 8 | 14 | 8 |
+| RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5 | Claude | — | 3 | 6 | 12 | 7 |
+
+**Lifecycle hardening (the Fransbot author's review, [`AI_REVIEW_FRANSOTTO_2026-09-30.md`](AI_REVIEW_FRANSOTTO_2026-09-30.md))**,
+expected 81 h. Every finding was verified in the code first (that document's §1); the review itself is the
+author's own file, [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md). **LC1 and LC5 gate the harvest
+items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until ownership is a contract.
+
+| id | work | owner | needs | O | M | P | E |
+|---|---|---|---|--:|--:|--:|--:|
+| LC1 | unit lease contract (`ActorID → owner, purpose, acquired tick, expiry`; `TryClaim` / `Release` / `IsClaimedByOther`), a small common service, first consumers engineer, capture, scout, beacon, crate; the SiegeEvaluator pattern (advisers advise, one module orders) | Claude | — | 8 | 14 | 24 | 15 |
+| LC2 | `CratePickupBotModule`: `alreadyPursuitCrates` → reservation `crate → collector + tick`, released when the crate or collector goes, the collector is claimed elsewhere, idles past a grace period, or times out | Claude | — | 1 | 2 | 4 | 2 |
+| LC3 | EX-3 failure lifecycle: the planner checks the MCV's locomotor path to the field and parks a field it keeps handing out with no yard founded; then a candidate object (site, field id, kind, score, reachability) with accepted / unreachable / undeployable / reserved feedback via the engine hook; "not land-reachable" kept as a class for FB1 transports | Claude | — | 4 | 8 | 14 | 8 |
+| LC4 | conditional-trait cache sweep: every `TraitsImplementing<T>()` filtered by enabled state and stored (the SiegeEvaluator bug class) — cache all instances and check at use, or refresh on transitions; assert single providers instead of trusting enumeration order | Claude | — | 3 | 6 | 12 | 7 |
+| LC5 | ownership watchdog (debug/test builds): one exclusive owner per actor, every active actor owned, one squad manager per squad member, no dead actor reserved, released actors reach the idle pool | Claude | LC1 | 6 | 10 | 18 | 11 |
+| LC6 | semantic fog canaries: an unseen actor / crate / building must not change any decision until observed (the two DESIGN §19.5 exceptions excepted) | EMBER | — | 4 | 8 | 14 | 8 |
+| LC7 | A/B fingerprint: mod commit, engine commit, resolved AI yaml/rules hash, map hash, bot type/personality config recorded per batch; any change mid-batch aborts it | EMBER | F3 | 3 | 5 | 10 | 6 |
+| ENG | merge `CaptureManagerBotModuleCA` + `CncEngineerBotModule` into one engineer owner (DESIGN §19.3) on LC1: capture routing (omniscient, §19.5), priority targets, hut/bridge repair, instant repair | Claude | LC1 | 4 | 8 | 14 | 8 |
+| LC8 | failure write-back (the review's sixth boundary): every executor that fails an objective another layer chose reports the outcome to that layer — MCV site (LC3's engine half), capture target, refinery claim (EX-2's missed claim already parks), squad attack target; CA-2c's siege failure memory is the working pattern | Claude | LC1 | 3 | 6 | 12 | 7 |
+| BEV | merge BevManager into the MCV owner: base-building vehicles (Japan's nanocores) deploy next to the base, MCVs and field-refineries (slave miner) go to fields; verify in a Japan match first | Claude | LC3 | 4 | 8 | 16 | 9 |
 
 **Learning and feel (AI_ARCHITECTURE §6.4, AI_SYNTHESIS §5)**, expected 127 h
 
@@ -234,9 +255,9 @@ agent leaves.
 
 | | expected | range (all go well … all go badly) |
 |---|--:|---|
-| agent work, 40 items | **~850 h ≈ 170 sessions** | 470 h … 1,420 h |
-| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~210 h ≈ 43 sessions | 120 h … 355 h |
-| A/B gates | **34** | — |
+| agent work, 51 items | **~940 h ≈ 190 sessions** | 510 h … 1,570 h |
+| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~235 h ≈ 47 sessions | 130 h … 390 h |
+| A/B gates | **40** | — |
 | A/B compute: 16 matches per gate, 20–40 min per match at maximum on this machine, 3 batches in parallel | **60–120 h of wall-clock** | more when other agents' batches share the machine |
 
 Read the range, not the midpoint: the items are correlated (a slow UT delays DI, TC and §13), so the
@@ -245,21 +266,23 @@ real spread is closer to the O…P columns than the statistical ±. These are es
 ### 4.2 What actually sets the calendar
 
 1. **The critical path**, from the dependency column: **CA-1 → CA-3 → CA-4 → UT → (DI, TC, §13)**, and
-   **ZG → IM → UT** alongside it. UT alone is 50–90 h. Everything else can run in parallel lanes.
+   **ZG → IM → UT** alongside it. UT alone is 50–90 h. Everything else can run in parallel lanes. **LC1 → LC5** gate
+   the harvest items (the Fransbot author's order of work: ownership contracts before more brains).
 2. **Machine time.** Every behaviour change needs its A/B, and this one machine ran ~11 matches at
    once on 2026-09-29, which made a 16-match gate take hours. F3 (a nightly queue with the league as the
    default gate) is therefore in the first wave.
 3. **The balance freeze.** Learning (L1, L3–L5) can be built now, but serious training waits for the
    frozen balance (DESIGN §19.2). A rebalance invalidates what was learned (the fingerprints, §6.4).
 4. **Fleet availability.** The Devin agents are booked until ~2026-10-22: 22 days. At 1–2 sessions
-   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~323 h) with margin; all
-   851 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
+   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~411 h with the hardening wave) with a
+   little margin; all 939 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
 
 ### 4.3 The waves (the order the fleet works in)
 
 | Wave | Goal | Items | Expected |
 |---|---|---|--:|
-| **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, DF A/B, CA-1 | ~67 h |
+| **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, RV2, DF A/B, CA-1 | ~74 h |
+| **1b: ownership before brains** (the Fransbot author's review) | one owner per actor and per decision, stale state and failure feedback fixed, fog canaries, fingerprinted A/B | LC1–LC8, ENG, BEV | ~81 h |
 | **2: win the fights** (the measured loss mode: fights traded 2:1) | siege, role mix, formation, air, scouting | CA-2, CA-3, CA-4, CA-5, CA-6, CP | ~114 h |
 | **3: one brain on a real map** | CN chokepoints, influence, the utility strategist, micro | ZG, IM, UT, MI | ~142 h |
 | **4: economy, expansion, map-wide play** | the rest of EX and the leads, Fransbot island/transports/SpecOps/sea/support, CN waves and utilities | EX, PL, FB1–FB4, CN1–CN3, §2.9 (F4) | ~257 h |
@@ -293,7 +316,9 @@ Waves overlap: a lane moves to the next wave as soon as its own items land.
 
 | Risk | Handling |
 |---|---|
-| Two owners for one decision (as with the double repair module today) | §1.2 step 1; the module map (`ai_module_map.py`) shows providers and consumers; RV1 fixes the known case |
+| Two modules claim one ACTOR (engineers: capture vs CncEngineer both read `IsIdle`) | LC1 lease, LC5 watchdog, ENG merge |
+| A batch runs on files that changed under it (yaml re-read per match) | LC7 fingerprint aborts it |
+| Two owners for one decision (as with the double repair module, fix in #664) | DESIGN §19.3 (one module per decision, merge duplicates); §1.2 step 1; the module map (`ai_module_map.py`) shows providers and consumers; RV2 fixes the support-power pair |
 | A harvested module cheats (enumerates the world) | `audit_fog_honesty` manifest; every new site reviewed |
 | A CA sync drops a merged feature | `audit_ai_frankenstein` (140 + protected symbols) |
 | An engine change reverts the bleed sync | LESSONS_LEARNED "The pinned engine commit is NOT on `cameo-engine`"; the branch now equals the pin |
