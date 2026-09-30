@@ -29,8 +29,8 @@
 3. **Research status (§2):** of the research round's ten headline changes, **1 is done, 4 are
    partial, 5 are not started**. Of the twelve "beat the best humans" items, **0 are done, 9 are
    partial, 3 are not started**. The combined-arms phases are mostly partial or in flight.
-4. **What is left:** 50 work items (§3), **~930 agent-hours expected (≈185 sessions of 5 h)**,
-   510 h if everything goes well and 1,560 h if everything goes badly, plus **40 A/B gates**
+4. **What is left:** 51 work items (§3), **~940 agent-hours expected (≈190 sessions of 5 h)**,
+   510 h if everything goes well and 1,570 h if everything goes badly, plus **40 A/B gates**
    worth 60–120 hours of match compute on this machine.
 5. **Calendar:** with four agents in parallel that is ~43 sessions each, **about 3–6 weeks** of
    fleet time at 1–2 sessions per agent per day. The real limits are A/B compute (one shared machine) and the order of the critical path
@@ -212,7 +212,8 @@ agent leaves.
 | RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5 | Claude | — | 3 | 6 | 12 | 7 |
 
 **Lifecycle hardening (the Fransbot author's review, [`AI_REVIEW_FRANSOTTO_2026-09-30.md`](AI_REVIEW_FRANSOTTO_2026-09-30.md))**,
-expected 74 h. Every finding was verified in the code first (that document's §1). **LC1 and LC5 gate the harvest
+expected 81 h. Every finding was verified in the code first (that document's §1); the review itself is the
+author's own file, [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md). **LC1 and LC5 gate the harvest
 items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until ownership is a contract.
 
 | id | work | owner | needs | O | M | P | E |
@@ -225,6 +226,7 @@ items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until owner
 | LC6 | semantic fog canaries: an unseen actor / crate / building must not change any decision until observed (the two DESIGN §19.5 exceptions excepted) | EMBER | — | 4 | 8 | 14 | 8 |
 | LC7 | A/B fingerprint: mod commit, engine commit, resolved AI yaml/rules hash, map hash, bot type/personality config recorded per batch; any change mid-batch aborts it | EMBER | F3 | 3 | 5 | 10 | 6 |
 | ENG | merge `CaptureManagerBotModuleCA` + `CncEngineerBotModule` into one engineer owner (DESIGN §19.3) on LC1: capture routing (omniscient, §19.5), priority targets, hut/bridge repair, instant repair | Claude | LC1 | 4 | 8 | 14 | 8 |
+| LC8 | failure write-back (the review's sixth boundary): every executor that fails an objective another layer chose reports the outcome to that layer — MCV site (LC3's engine half), capture target, refinery claim (EX-2's missed claim already parks), squad attack target; CA-2c's siege failure memory is the working pattern | Claude | LC1 | 3 | 6 | 12 | 7 |
 | BEV | merge BevManager into the MCV owner: base-building vehicles (Japan's nanocores) deploy next to the base, MCVs and field-refineries (slave miner) go to fields; verify in a Japan match first | Claude | LC3 | 4 | 8 | 16 | 9 |
 
 **Learning and feel (AI_ARCHITECTURE §6.4, AI_SYNTHESIS §5)**, expected 127 h
@@ -253,7 +255,7 @@ items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until owner
 
 | | expected | range (all go well … all go badly) |
 |---|--:|---|
-| agent work, 50 items | **~930 h ≈ 185 sessions** | 510 h … 1,560 h |
+| agent work, 51 items | **~940 h ≈ 190 sessions** | 510 h … 1,570 h |
 | per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~235 h ≈ 47 sessions | 130 h … 390 h |
 | A/B gates | **40** | — |
 | A/B compute: 16 matches per gate, 20–40 min per match at maximum on this machine, 3 batches in parallel | **60–120 h of wall-clock** | more when other agents' batches share the machine |
@@ -272,15 +274,15 @@ real spread is closer to the O…P columns than the statistical ±. These are es
 3. **The balance freeze.** Learning (L1, L3–L5) can be built now, but serious training waits for the
    frozen balance (DESIGN §19.2). A rebalance invalidates what was learned (the fingerprints, §6.4).
 4. **Fleet availability.** The Devin agents are booked until ~2026-10-22: 22 days. At 1–2 sessions
-   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~404 h with the hardening wave) with a
-   little margin; all 932 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
+   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~411 h with the hardening wave) with a
+   little margin; all 939 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
 
 ### 4.3 The waves (the order the fleet works in)
 
 | Wave | Goal | Items | Expected |
 |---|---|---|--:|
 | **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, RV2, DF A/B, CA-1 | ~74 h |
-| **1b: ownership before brains** (the Fransbot author's review) | one owner per actor and per decision, stale state and failure feedback fixed, fog canaries, fingerprinted A/B | LC1–LC7, ENG, BEV | ~74 h |
+| **1b: ownership before brains** (the Fransbot author's review) | one owner per actor and per decision, stale state and failure feedback fixed, fog canaries, fingerprinted A/B | LC1–LC8, ENG, BEV | ~81 h |
 | **2: win the fights** (the measured loss mode: fights traded 2:1) | siege, role mix, formation, air, scouting | CA-2, CA-3, CA-4, CA-5, CA-6, CP | ~114 h |
 | **3: one brain on a real map** | CN chokepoints, influence, the utility strategist, micro | ZG, IM, UT, MI | ~142 h |
 | **4: economy, expansion, map-wide play** | the rest of EX and the leads, Fransbot island/transports/SpecOps/sea/support, CN waves and utilities | EX, PL, FB1–FB4, CN1–CN3, §2.9 (F4) | ~257 h |
