@@ -31,8 +31,9 @@ namespace OpenRA.Mods.CA.Traits
 		public const string Defence = "defence";
 
 		// A mobile actor counts as artillery when its longest-ranged armament
-		// reaches at least this far (the siege threshold, 12 cells).
-		internal static readonly int ArtilleryMinRange = new WDist(12 * 1024).Length;
+		// reaches at least this far (the siege threshold, 12 cells). Public: the
+		// merged roles provider (Cameo BotUnitRoles) reuses the same line (§12.4).
+		public static readonly int ArtilleryMinRange = new WDist(12 * 1024).Length;
 
 		public static IReadOnlyDictionary<string, HashSet<string>> BuildTagMap(Ruleset rules)
 		{

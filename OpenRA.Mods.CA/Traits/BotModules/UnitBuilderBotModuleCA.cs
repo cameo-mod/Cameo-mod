@@ -143,6 +143,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider compositionProvider;
+		IBotUnitRoles unitRoles;
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
@@ -443,6 +444,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			if (deficit != null)
+				return deficit;
+
 			var unit = buildableThings.Random(world.LocalRandom);
 			return CanBuildMoreOfAircraft(unit) ? unit : null;
 		}
@@ -462,6 +467,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			if (deficit != null)
+				return deficit;
+
 			var myUnits = player.World
 				.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == player)
@@ -473,6 +482,72 @@ namespace OpenRA.Mods.CA.Traits
 						if (myUnits.Count(a => a == unit.Key) * 100 < unit.Value * myUnits.Count)
 							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
 								return world.Map.Rules.Actors[unit.Key];
+
+			return null;
+		}
+
+		// CA-3 (AI_ARCHITECTURE.md 12.5): the enabled personality's RoleMix is a target
+		// army composition by role, in percent of own mobile combat units. Each pick
+		// fills the largest deficit — counter production still gets first refusal, and
+		// a fully satisfied mix falls through to the proportional pick. Roles the mix
+		// does not name get RoleMixRoleFloorPct whenever this queue can serve them.
+		// The provider resolves lazily: BotUnitRoles is a genericbot-gated
+		// ConditionalTrait whose condition settles after Created.
+		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			var mix = manager?.Info.RoleMix;
+			if (mix == null || mix.Count == 0)
+				return null;
+
+			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			if (roles == null)
+				return null;
+
+			var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+			var total = 0;
+			foreach (var a in world.ActorsHavingTrait<IPositionable>())
+			{
+				if (a.IsDead || a.Owner != player)
+					continue;
+
+				var primary = roles.PrimaryRoleOf(a.Info.Name);
+				if (primary == null)
+					continue;
+
+				counts[primary] = counts.GetValueOrDefault(primary) + 1;
+				total++;
+			}
+
+			// The deficit domain is the combat taxonomy: list/doctrine roles (guerrilla,
+			// firesupport, navalunit, ...) and the building target tags never become
+			// mix dimensions — a unit counts toward exactly one primary role.
+			foreach (var role in mix.Keys
+				.Concat(roles.RoleMembers.Keys)
+				.Where(r => BotUnitRole.CombatRoles.Contains(r))
+				.Distinct(StringComparer.Ordinal)
+				.Select(r => (Role: r, Target: mix.TryGetValue(r, out var t) ? t : manager.Info.RoleMixRoleFloorPct))
+				.Where(rt => rt.Target > 0)
+				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total)))
+			{
+				var members = roles.RoleMembers.GetValueOrDefault(role.Role);
+				if (members == null || members.Count == 0)
+					continue;
+
+				var options = buildableThings.Where(b => members.Contains(b.Name) &&
+					unitsToBuildShares.ContainsKey(b.Name) &&
+					(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+					ShouldBuild(b.Name, false) && CanBuildMoreOfAircraft(b)).ToList();
+
+				if (options.Count == 0)
+					continue;
+
+				// A multi-role unit counts toward its primary role only, so prefer
+				// members that actually relieve this deficit (e.g. a dual-role Orca
+				// fields as fighter, not the gunship share it also belongs to).
+				var relieving = options.Where(b => roles.PrimaryRoleOf(b.Name) == role.Role).ToList();
+				return (relieving.Count > 0 ? relieving : options).Random(world.LocalRandom);
+			}
 
 			return null;
 		}

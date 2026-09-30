@@ -79,3 +79,23 @@ The author's committed version lives at [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](
 (cameo-mod#665). It differs from the draft first relayed on 2026-09-30 in two places: the heading "Things Cameo is
 doing very well", and a "Main takeaway" section whose list of boundary bugs adds *"whether a failed execution
 writes its outcome back to the strategic layer"* (→ LC8). Read that file for the review; do not copy it here again.
+
+---
+
+## 4. Second verification and follow-ups (2026-09-30, afternoon)
+
+* **NOVA re-verified every claim independently** (17 rows, fleet note `VERIFY_2026-09-30_nova_fransotto_review_claims.md`,
+  cross-checked by EMBER): all hold. Three findings the review did not list, each re-checked by the coordinator
+  against the code:
+  1. **28 `IgnoreVisibility: true` support-power decisions** in `ai.yaml`; `SupportPowerBotASModule.cs:138` accepts
+     `IgnoreVisibility || CanBeViewedByPlayer`, so unseen enemies attract strikes. EMBER's LC6 ratchet now counts
+     them (56 resolved nodes). → **RV2** scope: the merged owner targets seen or remembered actors for `genericbot`.
+  2. **`ResourceMapBotModule.cs:186`** (engine) counts enemies per resource field through fog; the engine MCV manager
+     scores expansion threat from those counts (our planner already uses remembered threat). → **LC9**.
+  3. `CncEngineerBotModule` enables only bridge-hut repair in `ai.yaml`, so the live P0b race is capture vs bridge
+     repair. → fixed by **ENG** (#673).
+* **Maintainer ruling:** *"The engineer module can be omniscient as a whole."* (DESIGN §19.5; `EngineerBotModule`.)
+* **Mission cards.** In conversation afterwards fransotto described Fransbot's move from bids to mission cards
+  (`MatchId → MissionId → AttemptId`, dormant missions, feedback to the General, a local experience archive) and
+  proposed sharing neutral infrastructure. Cameo's answer and the shared-format offer:
+  [`AI_MISSION_CARDS.md`](AI_MISSION_CARDS.md) (plan rows MC1–MC3, on LC8).

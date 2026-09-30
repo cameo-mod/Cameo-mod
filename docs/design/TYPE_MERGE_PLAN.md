@@ -15,7 +15,7 @@ measured scope, order, estimate and risks.
 | | count |
 |---|--:|
 | families with 2+ variants (106 trait, 8 projectile, 5 warhead families) | **119** |
-| … with two or more variants **in use at once** (the repair pair drops out when #664 lands) | **22** |
+| … with two or more variants **in use at once** (22 before #664 merged the repair pair) | **21** |
 | … identical or already a pure shadow (0 field differences: point users at one type, verify) | 21 |
 | … small: 1–9 field differences | 71 |
 | … medium: 10–29 (e.g. `Bullet`, `FireWarheadsOnDeath`, `AirstrikePower`, `AreaBeam`) | 18 |

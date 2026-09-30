@@ -65,6 +65,8 @@
  },
  "OpenRA.Mods.CA/Traits/BotModules/CaptureManagerBotModuleCA.cs": {
   "CapturableRelationships": "RV",
+  "CaptureLeaseTicks": "CAMEO",
+  "LeaseOwner": "CAMEO",
   "PriorityCapturableActorTypes": "RV",
   "PriorityCaptureChance": "RV"
  },
@@ -88,6 +90,12 @@
  },
  "OpenRA.Mods.CA/Traits/BotModules/IBotRouteThreatRouter.cs": {
   "IBotRouteThreatRouter": "CAMEO"
+ },
+ "OpenRA.Mods.CA/Traits/BotModules/IBotUnitLeases.cs": {
+  "BotLease": "CAMEO",
+  "BotLeasePurpose": "CAMEO",
+  "BotUnitLeases": "CAMEO",
+  "IBotUnitLeases": "CAMEO"
  },
  "OpenRA.Mods.CA/Traits/BotModules/LoadGarrisonerBotModuleCA.cs": {
   "Create": "RV",

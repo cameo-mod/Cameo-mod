@@ -293,6 +293,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		UnitWposWrapper leader = new(null);
 
+		// 12.7 formation: rear-frontline stall tracking (fransbot chokepoint rule)
+		WPos formationRearPos;
+		int formationRearStallTicks;
+
 		// Indirect/harass routing state
 		List<CPos> currentRoute;
 		int currentWaypointIndex;
@@ -598,8 +602,142 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			else
 				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, routeTarget, false));
 
+			// 12.7: assault squads keep formation steps - frontline leads, anti-air
+			// inside, the rest trails the frontline centroid. Other squad types keep
+			// the plain straggler catch-up (guerrilla/harass mobility is doctrinal).
+			if (owner.SquadManager.Info.FormationMovement && owner.Type == SquadCAType.Rush
+				&& IssueFormationOrders(owner, leader, routeTarget))
+				return;
+
 			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToArray();
 			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp));
+		}
+
+		// 12.7 formation step, once per squad tick (orders only, no activities):
+		// frontline leads toward the route target at the pace of its slowest
+		// member - anyone FormationMaxLeadCells ahead of the rear frontline
+		// projection holds; anti-air sits on the frontline centroid; every other
+		// ground unit aims FormationTrailCells behind the centroid. Scouts are
+		// never constrained - they run ahead on their own. Returns false when no
+		// usable role/frontline data exists so the caller keeps the old path.
+		bool IssueFormationOrders(SquadCA owner, UnitWposWrapper leader, Target routeTarget)
+		{
+			var roleMap = owner.SquadManager.ActorRoles;
+			if (roleMap == null || roleMap.Count == 0)
+				return false;
+
+			var frontline = new List<UnitWposWrapper>();
+			var antiAir = new List<UnitWposWrapper>();
+			var scouts = new List<UnitWposWrapper>();
+			var trailing = new List<UnitWposWrapper>();
+
+			foreach (var u in owner.Units)
+			{
+				if (u.Actor == leader.Actor)
+					continue;
+
+				if (!roleMap.TryGetValue(u.Actor.Info.Name, out var roles))
+				{
+					trailing.Add(u);
+					continue;
+				}
+
+				if (roles.Contains(BotUnitRole.Frontline))
+					frontline.Add(u);
+				else if (roles.Contains(BotUnitRole.Scout))
+					scouts.Add(u);
+				else if (roles.Contains(BotUnitRole.AntiAir))
+					antiAir.Add(u);
+				else
+					trailing.Add(u);
+			}
+
+			if (frontline.Count == 0)
+				return false;
+
+			// Axis of advance: frontline centroid -> route target.
+			var routePos = routeTarget.CenterPosition;
+			long cx = leader.Actor.CenterPosition.X, cy = leader.Actor.CenterPosition.Y;
+			foreach (var u in frontline)
+			{
+				cx += u.Actor.CenterPosition.X;
+				cy += u.Actor.CenterPosition.Y;
+			}
+
+			var centroid = new WPos((int)(cx / (frontline.Count + 1)), (int)(cy / (frontline.Count + 1)), 0);
+			var axis = routePos - centroid;
+			if (axis.HorizontalLengthSquared < (long)WDist.FromCells(2).Length * WDist.FromCells(2).Length)
+				return false;
+
+			var axisLen = axis.HorizontalLength;
+			var maxLead = (long)WDist.FromCells(owner.SquadManager.Info.FormationMaxLeadCells).Length;
+			var trailDist = (long)WDist.FromCells(owner.SquadManager.Info.FormationTrailCells).Length;
+
+			// Distance-to-go along the axis for every frontline member; the slowest
+			// (largest remaining) gates how far ahead the others may run.
+			var slowestRemaining = long.MinValue;
+			UnitWposWrapper rear = null;
+			foreach (var u in frontline)
+			{
+				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
+				if (rem > slowestRemaining)
+				{
+					slowestRemaining = rem;
+					rear = u;
+				}
+			}
+
+			// Fransbot donor rule: a rear member stalled in a chokepoint grants the
+			// leaders the wider FormationMaxStalledLeadCells allowance; the normal
+			// lead resumes the tick it moves again.
+			var lead = maxLead;
+			if (rear != null)
+			{
+				if (rear.Actor.CenterPosition == formationRearPos)
+					formationRearStallTicks++;
+				else
+				{
+					formationRearStallTicks = 0;
+					formationRearPos = rear.Actor.CenterPosition;
+				}
+
+				if (formationRearStallTicks >= 25)
+					lead = WDist.FromCells(owner.SquadManager.Info.FormationMaxStalledLeadCells).Length;
+			}
+
+			var holdFront = new List<Actor>();
+			var pushFront = new List<Actor>();
+			foreach (var u in frontline)
+			{
+				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
+				if (slowestRemaining - rem > lead)
+					holdFront.Add(u.Actor);
+				else
+					pushFront.Add(u.Actor);
+			}
+
+			if (pushFront.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: pushFront.ToArray()));
+			if (holdFront.Count > 0)
+				owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: holdFront.ToArray()));
+
+			var centroidCell = owner.World.Map.CellContaining(centroid);
+			if (antiAir.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, centroidCell), false, groupedActors: antiAir.Select(u => u.Actor).ToArray()));
+
+			if (scouts.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: scouts.Select(u => u.Actor).ToArray()));
+
+			if (trailing.Count > 0)
+			{
+				var trailPos = centroid - new WVec(
+					(int)(axis.X * trailDist / axisLen),
+					(int)(axis.Y * trailDist / axisLen),
+					0);
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(trailPos), false, groupedActors: trailing.Select(u => u.Actor).ToArray()));
+			}
+
+			return true;
 		}
 
 		public void Deactivate(SquadCA owner) { }

@@ -1,6 +1,8 @@
 user.config
-engine
-engine*
+# Anchored to the repo root: an unanchored `engine*` also hid every new file named Engine…
+# (case-insensitive on Windows) — EngineerBotModule.cs, docs/audit/latest/engine_freshness.md. LESSONS_LEARNED 2026-09-30.
+/engine
+/engine*
 
 # Visual Studio
 Release

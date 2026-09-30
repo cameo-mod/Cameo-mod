@@ -75,7 +75,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Roles whose members are ADDED to their Targets. Any other role only reports to bot-roles.log.")]
 		public readonly FrozenSet<string> Apply = FrozenSet<string>.Empty;
 
-		void IRulesetLoaded<ActorInfo>.RulesetLoaded(Ruleset rules, ActorInfo info)
+		// role -> member actor names: every actor's declared BotRoles entries plus this
+		// instance's derivation config, resolved over the ruleset. Pure recompute — the
+		// merged IBotUnitRoles provider (BotUnitRoles, same assembly) calls this to compose
+		// its map, so the derivation predicates are written once, here (DESIGN §19.3).
+		public Dictionary<string, HashSet<string>> ComputeMembers(Ruleset rules, ActorInfo owner)
 		{
 			var hasField = ParsePredicates(DeriveHasField);
 			var notField = ParsePredicates(DeriveNotField);
@@ -99,9 +103,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// A predicate no trait can ever satisfy is a typo, not a filter: fail at rules load.
 			foreach (var (trait, field) in fieldKeys)
 				if (!fieldSeen.Contains((trait, field)))
-					throw new YamlException($"BotRoleSets on {info.Name}: no actor has a `{trait}` trait with a public field `{field}`");
+					throw new YamlException($"BotRoleSets on {owner.Name}: no actor has a `{trait}` trait with a public field `{field}`");
 
-			var members = ResolveMembers(actors, DeriveHas, DeriveNot, Exclude, DeriveOnlyBuildable, hasField, notField);
+			return ResolveMembers(actors, DeriveHas, DeriveNot, Exclude, DeriveOnlyBuildable, hasField, notField);
+		}
+
+		void IRulesetLoaded<ActorInfo>.RulesetLoaded(Ruleset rules, ActorInfo info)
+		{
+			var members = ComputeMembers(rules, info);
 
 			Log.AddChannel("bot-roles", "bot-roles.log");
 			foreach (var (role, targets) in Targets)
