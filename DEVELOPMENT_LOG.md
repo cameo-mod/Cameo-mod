@@ -1,3 +1,15 @@
+# 2026-09-30 (eve2) — Devin (EMBER): mission_story tracks the #691 record split
+
+- Fransotto's boundary landed on master as #691: an attempt exists only
+  from COMMIT; `record_kind` splits mission events
+  (PUBLISHED/DENIED/DORMANT/REOPENED — the shelf) from attempt
+  transitions. `mission_story.py` now renders the mission-level line as
+  `shelf: PUBLISHED@t -> DORMANT@t reason -> REOPENED@t`, counts
+  mission-level DENIED separately from attempt outcomes, and reports
+  never-attempted missions as `shelf_only` (not bugs). Pre-#691 records
+  (no record_kind) still group as attempts — verified on the live
+  mc1-smoke corpus. 9 tests, tools-only.
+
 # 2026-09-30 (eve) — Devin (EMBER): MC2 mission_story.py (ruling lane)
 
 - `tools/ai/mission_story.py`: groups `cameo-ai-missions.jsonl` transitions into
