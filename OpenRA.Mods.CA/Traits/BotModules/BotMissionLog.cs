@@ -15,11 +15,18 @@ using System.Linq;
 namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>
-	/// The shared attempt vocabulary of a mission card (docs/design/AI_MISSION_CARDS.md §2.2, schema `mission-card/1`):
-	/// fransotto's six states, plus FAILED (the units were lost) and RELEASED (the executor handed the attempt back
-	/// without a verdict). Terminal: DENIED, SUCCESS, FAILED, RELEASED. A mission with no live attempt is dormant.
+	/// The execution lifecycle of ONE attempt (docs/design/AI_MISSION_CARDS.md §2.2, schema `mission-card/1`). An attempt
+	/// exists only from COMMIT — fransotto, 2026-09-30: a mission can be published and denied by every commander without
+	/// any execution ever existing. Terminal: SUCCESS, FAILED (the units were lost), RELEASED (handed back, no verdict).
 	/// </summary>
-	public enum BotMissionAttemptState { Denied, Committed, Progressing, Stalled, Recover, Success, Failed, Released }
+	public enum BotMissionAttemptState { Committed, Progressing, Stalled, Recover, Success, Failed, Released }
+
+	/// <summary>
+	/// Mission-level events: the card's own story, observable apart from any attempt. DENIED is bid/mission feedback (no
+	/// executor took it); DORMANT puts the card on the shelf; REOPENED takes it off again (new recon, a changed Best Read,
+	/// a rest that ended). The card is the strategic memory; attempts are evidence written back to it.
+	/// </summary>
+	public enum BotMissionEvent { Published, Denied, Dormant, Reopened }
 
 	/// <summary>The closed reason set. Project-private reasons carry an `x_` prefix (e.g. `x_frans_board_closed`).</summary>
 	public static class BotMissionReasons
@@ -51,11 +58,16 @@ namespace OpenRA.Mods.CA.Traits
 					&& reason.All(c => c == '_' || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')));
 	}
 
-	/// <summary>One attempt transition. Everything except the ids and the state is optional context.</summary>
+	/// <summary>
+	/// One record: a mission-level event when <see cref="Event"/> is set (no attempt), otherwise an attempt transition.
+	/// Identity is the composite (game_uid, mission_id, attempt) — unique within one match, never across matches.
+	/// Everything except the ids and the state/event is optional context.
+	/// </summary>
 	public sealed class BotMissionRecord
 	{
 		public Player Player;
 		public string MissionId;
+		public BotMissionEvent? Event;
 		public int Attempt;
 		public BotMissionAttemptState State;
 		public string Reason;
@@ -87,9 +99,20 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		public static string StateName(BotMissionAttemptState state) => state.ToString().ToUpperInvariant();
 
+		public static string EventName(BotMissionEvent e) => e.ToString().ToUpperInvariant();
+
 		public static bool IsTerminal(BotMissionAttemptState state) =>
-			state is BotMissionAttemptState.Denied or BotMissionAttemptState.Success
-				or BotMissionAttemptState.Failed or BotMissionAttemptState.Released;
+			state is BotMissionAttemptState.Success or BotMissionAttemptState.Failed or BotMissionAttemptState.Released;
+
+		/// <summary>The debug.log line of a mission-level event. Grep key: `MISSION &lt;id&gt;`.</summary>
+		public static string FormatEventLine(string playerName, string missionId, BotMissionEvent e, string reason, string by, int tick)
+		{
+			var line = $"AI {playerName}: MISSION {missionId} {EventName(e)}";
+			if (reason != null)
+				line += $" reason={reason}";
+
+			return line + $" by={by ?? "?"} tick={tick}";
+		}
 
 		/// <summary>The debug.log line, free of world state so it can be tested. Grep key: `MISSION &lt;id&gt; ATTEMPT &lt;n&gt;`.</summary>
 		public static string FormatLine(string playerName, string missionId, int attempt, BotMissionAttemptState state,
@@ -114,8 +137,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var world = record.Player.World;
 			record.Tick = world.WorldTick;
-			Log.Write("debug", FormatLine(record.Player.InternalName, record.MissionId, record.Attempt, record.State,
-				record.Reason, record.Executor, record.Tick));
+			Log.Write("debug", record.Event is BotMissionEvent e
+				? FormatEventLine(record.Player.InternalName, record.MissionId, e, record.Reason, record.Executor, record.Tick)
+				: FormatLine(record.Player.InternalName, record.MissionId, record.Attempt, record.State, record.Reason, record.Executor, record.Tick));
 
 			foreach (var sink in world.WorldActor.TraitsImplementing<IBotMissionRecordSink>())
 				sink.MissionRecorded(record);

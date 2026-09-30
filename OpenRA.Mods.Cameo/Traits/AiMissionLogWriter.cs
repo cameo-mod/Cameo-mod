@@ -95,10 +95,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(b, "faction", r.Player?.Faction?.InternalName);
 			AiMatchLogWriter.AppendString(b, "bot", r.Player?.BotType);
 			AiMatchLogWriter.AppendString(b, "mission_id", r.MissionId);
-			AiMatchLogWriter.AppendString(b, "attempt_id", r.MissionId + "|A" + r.Attempt.ToString(CultureInfo.InvariantCulture));
-			AiMatchLogWriter.AppendNumber(b, "attempt", r.Attempt);
-			AiMatchLogWriter.AppendString(b, "state", BotMissionLog.StateName(r.State));
-			AiMatchLogWriter.AppendBoolean(b, "terminal", BotMissionLog.IsTerminal(r.State));
+			if (r.Event is BotMissionEvent e)
+			{
+				// A mission-level event: the card's own story, no attempt (AI_MISSION_CARDS §2.2).
+				AiMatchLogWriter.AppendString(b, "record_kind", "mission");
+				AiMatchLogWriter.AppendString(b, "event", BotMissionLog.EventName(e));
+			}
+			else
+			{
+				AiMatchLogWriter.AppendString(b, "record_kind", "attempt");
+				AiMatchLogWriter.AppendNumber(b, "attempt", r.Attempt);
+				AiMatchLogWriter.AppendString(b, "attempt_id", r.MissionId + "|A" + r.Attempt.ToString(CultureInfo.InvariantCulture));
+				AiMatchLogWriter.AppendString(b, "state", BotMissionLog.StateName(r.State));
+				AiMatchLogWriter.AppendBoolean(b, "terminal", BotMissionLog.IsTerminal(r.State));
+			}
 			if (r.Reason != null)
 				AiMatchLogWriter.AppendString(b, "reason", r.Reason);
 
