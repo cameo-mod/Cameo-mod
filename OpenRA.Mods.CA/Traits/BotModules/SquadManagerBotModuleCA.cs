@@ -280,6 +280,18 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-3 (12.5): roles a staged assault must contain at least one pool member of (e.g. frontline, anti_air). Empty disables the stage gate.")]
 		public readonly HashSet<string> StageRequiredRoles = new HashSet<string>();
 
+		[Desc("CA-4 (12.7): assault (Rush) squads move in formation - frontline leads at its slowest member's pace, anti-air sits inside, other ground trails behind the frontline centroid, scouts run free.")]
+		public readonly bool FormationMovement = false;
+
+		[Desc("CA-4 (12.7): cells behind the frontline centroid that trailing members aim for.")]
+		public readonly int FormationTrailCells = 3;
+
+		[Desc("CA-4 (12.7): cells a frontline member may outrun the slowest frontline member before it holds.")]
+		public readonly int FormationMaxLeadCells = 6;
+
+		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
+		public readonly int FormationMaxStalledLeadCells = 12;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
