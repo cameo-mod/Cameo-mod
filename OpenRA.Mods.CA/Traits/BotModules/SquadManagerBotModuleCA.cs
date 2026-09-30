@@ -143,21 +143,46 @@ namespace OpenRA.Mods.CA.Traits
 			"frankenstein instances flip it on for the A/B).")]
 		public readonly bool UseProtectionRequests = false;
 
-		[Desc("Anti-air escort (CA-3): every assault force should contain at least",
-			"AntiAirEscortMin units whose weapons can hit air targets, growing by one per",
-			"AntiAirEscortTicksPerStep game ticks up to AntiAirEscortMax - the longer the",
-			"game runs, the more air the enemy fields. A shortfall is requested from unit",
-			"production (cheapest buildable AA-capable unit). False = classic behaviour.")]
+		[Desc("Anti-air escort (CA-3): every assault force must field at least",
+			"AntiAirEscortMinUnits AA-capable units AND enough AA value to cover the",
+			"share ramp (AntiAirEscortMinSharePct early up to AntiAirEscortMaxSharePct",
+			"late, over AntiAirEscortRampTicks) - the longer the game, the more air the",
+			"enemy fields. A shortfall is requested from unit production (cheapest",
+			"buildable AA-capable unit). False = classic behaviour.")]
 		public readonly bool EnsureAntiAirEscort = false;
 
-		[Desc("Anti-air escort: minimum AA-capable units per assault force.")]
-		public readonly int AntiAirEscortMin = 1;
+		[Desc("Anti-air escort: flat floor - an assault never fields fewer AA-capable",
+			"units than this.")]
+		public readonly int AntiAirEscortMinUnits = 3;
 
-		[Desc("Anti-air escort: one additional required AA unit per this many game ticks.")]
-		public readonly int AntiAirEscortTicksPerStep = 30000;
+		[Desc("Anti-air escort: required share of the assault's value in AA-capable",
+			"units at game start, percent.")]
+		public readonly int AntiAirEscortMinSharePct = 20;
 
-		[Desc("Anti-air escort: cap on required AA units per assault force.")]
-		public readonly int AntiAirEscortMax = 3;
+		[Desc("Anti-air escort: required share of assault value at ramp end, percent -",
+			"the late-game floor (a third of the force must answer air).")]
+		public readonly int AntiAirEscortMaxSharePct = 33;
+
+		[Desc("Anti-air escort: game ticks over which the required share ramps from",
+			"min to max.")]
+		public readonly int AntiAirEscortRampTicks = 60000;
+
+		[Desc("Anti-air escort: the share the requirement falls to when a confident",
+			"enemy-army read shows NO air units - token cover against unseen tech.")]
+		public readonly int AntiAirEscortRelaxedSharePct = 10;
+
+		[Desc("Anti-air escort: respond to observed enemy air at this percent of the",
+			"enemy's air share of their army value (150 = answer 30% air with a 45%",
+			"AA share).")]
+		public readonly int AntiAirEscortResponsePct = 150;
+
+		[Desc("Anti-air escort: absolute cap on the required AA share, percent - the",
+			"assault still needs a ground punch.")]
+		public readonly int AntiAirEscortCapSharePct = 60;
+
+		[Desc("Anti-air escort: observed enemy army value at which the air read is",
+			"trusted - below this the mixed-army time ramp stays the prior.")]
+		public readonly int AntiAirEscortMinArmySample = 3000;
 
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
@@ -625,17 +650,74 @@ namespace OpenRA.Mods.CA.Traits
 			a.Info.HasTraitInfo<AttackBaseInfo>()
 			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(AirTargetTypes));
 
-		// At least AntiAirEscortMin, growing by one per step as the match runs long
-		// enough for the enemy to field real air, capped at AntiAirEscortMax.
-		internal int RequiredAntiAirEscort()
+		// Fog-honest enemy mix read: mobile enemies visible now plus remembered
+		// (frozen) ones - never what the bot cannot know. Buildings are excluded:
+		// they are targets, not the force the assault must answer.
+		internal (double Air, double Total) ObservedEnemyMix()
 		{
-			var step = Info.AntiAirEscortTicksPerStep > 0 ? World.WorldTick / Info.AntiAirEscortTicksPerStep : 0;
-			return Math.Min(Info.AntiAirEscortMax, Info.AntiAirEscortMin + step);
+			var air = 0.0;
+			var total = 0.0;
+			foreach (var a in World.Actors)
+			{
+				if (!IsValidEnemyUnit(a) || !IsNotHiddenUnit(a) || a.Info.HasTraitInfo<BuildingInfo>()
+					|| (!a.Info.HasTraitInfo<MobileInfo>() && !a.Info.HasTraitInfo<AircraftInfo>()))
+					continue;
+
+				var v = a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+				total += v;
+				if (a.Info.HasTraitInfo<AircraftInfo>())
+					air += v;
+			}
+
+			var layer = Player.FrozenActorLayer;
+			if (layer != null)
+			{
+				foreach (var fa in layer.FrozenActorsInRegion(World.Map.AllCells))
+				{
+					var info = fa.Info;
+					if (!fa.IsValid || !fa.Visible || fa.Hidden || fa.Owner == null
+						|| Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy
+						|| fa.TargetTypes.IsEmpty || fa.TargetTypes.Overlaps(Info.IgnoredEnemyTargetTypes)
+						|| info.HasTraitInfo<BuildingInfo>()
+						|| (!info.HasTraitInfo<MobileInfo>() && !info.HasTraitInfo<AircraftInfo>()))
+						continue;
+
+					var v = info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					total += v;
+					if (info.HasTraitInfo<AircraftInfo>())
+						air += v;
+				}
+			}
+
+			return (air, total);
+		}
+
+		// The required AA share of the assault's value. Base = the time ramp (the
+		// mixed-army prior); with a confident enemy read it instead answers the
+		// OBSERVED air share at AntiAirEscortResponsePct - or relaxes to the token
+		// floor when the enemy provably fields no air.
+		internal double RequiredAntiAirShare()
+		{
+			var baseShare = Info.AntiAirEscortRampTicks <= 0
+				? Info.AntiAirEscortMaxSharePct / 100.0
+				: (Info.AntiAirEscortMinSharePct
+					+ (Info.AntiAirEscortMaxSharePct - Info.AntiAirEscortMinSharePct)
+						* Math.Min(1.0, (double)World.WorldTick / Info.AntiAirEscortRampTicks)) / 100.0;
+
+			var (air, total) = ObservedEnemyMix();
+			if (total < Info.AntiAirEscortMinArmySample)
+				return baseShare;
+
+			if (air <= 0)
+				return Math.Min(baseShare, Info.AntiAirEscortRelaxedSharePct / 100.0);
+
+			var respond = air / total * Info.AntiAirEscortResponsePct / 100.0;
+			return Math.Min(Info.AntiAirEscortCapSharePct / 100.0, Math.Max(baseShare, respond));
 		}
 
 		// The cheapest buildable ground unit that can hit air - it fields fastest and
 		// masses easiest. Returns null when no queue can make one (e.g. tech not up).
-		string PickAntiAirUnit()
+		ActorInfo PickAntiAirUnit()
 		{
 			var rules = World.Map.Rules;
 			return Player.PlayerActor.TraitsImplementing<ProductionQueue>()
@@ -644,34 +726,57 @@ namespace OpenRA.Mods.CA.Traits
 					&& ai.HasTraitInfo<MobileInfo>()
 					&& BotUnitProfiles.Get(rules, ai).Weapons.Any(w => w.CanTarget(AirTargetTypes)))
 				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
-				.Select(ai => ai.Name).FirstOrDefault();
+				.FirstOrDefault();
 		}
 
 		// CA-3 anti-air coverage: an assault without AA dies to the first gunship it
-		// cannot shoot back at. The idle pool is already drafted whole, so a shortfall
-		// can only be fixed by production - request one unit per missing escort; the
-		// produced AA joins the pool and rides the next assault (or protection draft).
+		// cannot shoot back at. Required = the larger of a flat unit floor (never
+		// fewer than AntiAirEscortMinUnits) and a share of the force's value ramping
+		// 20->33% over the match. The idle pool is already drafted whole, so a
+		// shortfall can only be fixed by production - request the missing escorts;
+		// produced AA joins the pool and rides the next assault or protection draft.
 		void RequestAntiAirCoverage(IBot bot, SquadCA attackForce)
 		{
 			var requester = unitRequesters.FirstOrDefault();
 			if (requester == null)
 				return;
 
-			var shortfall = RequiredAntiAirEscort() - attackForce.Units.Count(u => CanHitAir(u.Actor));
-			if (shortfall <= 0)
-				return;
-
 			var candidate = PickAntiAirUnit();
 			if (candidate == null)
 				return;
 
-			// Don't stack requests: only ask for what isn't already queued.
-			var queued = requester.RequestedProductionCount(bot, candidate);
-			for (var i = queued; i < shortfall; i++)
-				requester.RequestUnitProduction(bot, candidate);
+			var aaCount = 0;
+			var aaValue = 0;
+			var forceValue = 0;
+			foreach (var u in attackForce.Units)
+			{
+				var v = UnitValue(u.Actor);
+				forceValue += v;
+				if (CanHitAir(u.Actor))
+				{
+					aaCount++;
+					aaValue += v;
+				}
+			}
 
-			AIUtils.BotDebug("AI ({0}): assault AA coverage {1}/{2} - requested {3}x {4}",
-				Player.ClientIndex, attackForce.Units.Count(u => CanHitAir(u.Actor)) , RequiredAntiAirEscort(), shortfall, candidate);
+			// Units needed for the value share - each requested unit also grows the
+			// force, so solve the fixpoint: x >= (share*V - aa) / (cost*(1-share)).
+			var share = RequiredAntiAirShare();
+			var unitCost = candidate.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+			var neededForShare = unitCost > 0 && share > 0 && share < 1
+				? (int)Math.Ceiling(Math.Max(0, share * forceValue - aaValue) / (unitCost * (1 - share)))
+				: 0;
+			var needed = Math.Max(Info.AntiAirEscortMinUnits - aaCount, neededForShare);
+			if (needed <= 0)
+				return;
+
+			// Don't stack requests: only ask for what isn't already queued.
+			var queued = requester.RequestedProductionCount(bot, candidate.Name);
+			for (var i = queued; i < needed; i++)
+				requester.RequestUnitProduction(bot, candidate.Name);
+
+			AIUtils.BotDebug("AI ({0}): assault AA coverage {1} units / {2}% of value - requested {3}x {4} (target share {5}%)",
+				Player.ClientIndex, aaCount, aaValue * 100 / Math.Max(1, forceValue), needed - queued, candidate.Name, (int)(share * 100));
 		}
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
