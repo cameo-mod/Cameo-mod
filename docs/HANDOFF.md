@@ -1,5 +1,53 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-30 (evening) — Claude: wave 1b landed, bots build engineers again, one mission-card contract; the next steps
+
+`Agent: Claude-Local (Opus 5.5) · coordinator · master 40b30e000 · fleet orders ../Cameo-mod-fleet/ORDERS_2026-09-30_claude_standing_orders.md (UPDATE blocks) + RULING_2026-09-30_claude_mission_cards_one_contract.md`
+
+**Maintainer rulings today (binding).** (1) *No faction-balance batches until the full rebalance* — DAWN's classic-vs-classic
+GDI/Nod probe was stopped after 6 of 12 matches (GDI mirror: one side won all 4; GDI vs Nod: Nod 2–0, once from each
+side — n too small). (2) *"The engineer module can be omniscient as a whole"* (DESIGN §19.5). (3) *"You're the only one
+who is allowed to merge"* — Claude merges; #662, #663 and #678 had been self-merged by agents. (4) Merge the stack now
+(#682), A/Bs continue as post-merge checks.
+
+**Landed (#682 + #684).** RV1 one repair owner · LC1 unit leases · LC2 crate reservations · LC3 unreachable MCV fields
+parked · LC4 first-tick `BotLimits` re-check · **ENG** `EngineerBotModule` (one owner of engineers) · **#680 engineers built
+again** — no LOADED AI file had listed TD `e6`, RA1 or TS engineers since ≥ 2025-06 (TD's rows lived in the never-loaded
+`ai_airforce.yaml`); a smoke match now builds 22 (hard) / 12 (classic) and captures oil derricks · #676 mission-card plan
+· #684 `audit_fransbot_drift` re-baselined (blocking, red since `ff7da50a4` on 09-29). **classic moved** (#664, #680).
+
+**Measured in play.** First live LC1 refusals (`ScoutBotModule` denied a Humvee `CratePickupBotModule` held) — the
+contract works beyond unit tests. #664's post-merge A/B (hard vs classic, 8/arm, frozen trees): old master hard 6–2,
+#664 hard 5–1 after 6 — not losing. ⚠ **Spawn lean:** `bot_outcomes[].spawn` is the SLOT; by `player.home` the (90,24)
+side of A Nuclear Winter won 65 of 107 decided matches (LESSONS_LEARNED) — split every verdict by home.
+
+**Mission cards (MC1, #683 draft).** Three agents built three dialects in an afternoon; the coordinator ruled ONE contract
+(AI_MISSION_CARDS §2): string MissionIds, fransotto's six states + FAILED + RELEASED, one writer `BotMissionLog` (CA) →
+`debug.log` + `cameo-ai-missions.jsonl` (record-only, DESIGN §21.1). First live match: 18 capture attempts, **all
+terminal**, 6 SUCCESS / 11 FAILED / 1 RELEASED — one derrick ate five engineers, so #683 adds one engineer per target and
+a dormant shelf (2 losses → rest 3000 ticks). ⚠ **Capture success is 33%**: routing or escorting engineers is the next
+lever.
+
+**Audit state on master (full `run_all.sh`, complete tree).** Release-critical green: `find_empty_warhead` 0,
+`duplicate_inherits`, `balance_drift`, boot. `verify_generator_sync` drift 41 (the known R12 shims, unchanged). **Eight
+quality gates red since at least `1ee562ec4` (09-29) — none caused today:** `ammo_cadence`, `armor_upgrade_harm` (8
+plating rows), `duplicate_keys` (**D1 = 7: one node inheriting two different templates under one label, the later
+silently wins** — e.g. `RA2MultiHoverMissile_AA` takes `^Warhead_MissileHE_Light_Flat` over `…MissileAA…`; `TanyaBomb`,
+`RA2DepthCharge`, `SteelKatyCannons_EMP`, Volkov's tesla), `effect_pairings` (silent 418 > 396), `meter_dilution`,
+`nuclear_flash_bindings`, `release_drift` (inflated 137 > 133), `weapon_shape`. These are weapon/content lanes and rule 4
+(warheads) applies: they wait for the rebalance wave or an explicit order.
+
+### The next steps (priority order; each agent's queue is in the fleet orders)
+1. **Claude:** land MC1 (#683) → **LC8** (the master AI's dormant shelf consumes `IBotMissionOutcomeSink`: a raid that
+   fails twice rests until recon changes) → BEV (#685, verify in the queued Japan match) → **LC5** watchdog (one owner per
+   actor + every attempt terminal) → RV2 (support-power merge + the 28 `IgnoreVisibility` strikes) → LC9 → F2 CA sync.
+2. **NOVA:** #681 onto the writer (string ids, RELEASED vs FAILED) → squads claim through LC1 → ZG (chokepoints).
+3. **EMBER:** MC2 `mission_story.py` → #671 (LC7 fingerprint) + #674 (home split) merge-ready → one post-merge A/B of the
+   whole stack (`9d419e12e` vs `1dbbfe136`) → LC6 canaries.
+4. **DAWN:** #679 onto the writer + drift baseline → #672 (one `BotDifficultyLadder`, DESIGN §22) → W3 verdict → F1 → CA-6.
+5. **Waiting on the maintainer:** permission for the 7 `duplicate_keys` weapon labels (rule 4); whether capture should
+   get an escort (engineer + a guard squad as one mission) before or after LC8.
+
 ## 2026-09-30 — Claude: merge-all completed — the last PRs land on engine `d5d8b2a685`; all branches in sync
 
 `Agent: Claude-Local (Opus 5.5) · integration branch claude/integration_0930b (the #630 precedent) · maintainer: "Merge everything to master! Synchronize all branches … the latest engine update"`
