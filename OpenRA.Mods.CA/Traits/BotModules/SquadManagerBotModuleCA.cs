@@ -136,6 +136,66 @@ namespace OpenRA.Mods.CA.Traits
 			"squads, the rest to the attack pool. 0 = classic behaviour (the squad never releases).")]
 		public readonly int ProtectionIdleDissolveTicks = 0;
 
+		[Desc("Escort requests (EX): consume IBotProtectionRequestProvider jobs - a module asking for a guard",
+			"(e.g. an MCV driving to an expansion site) drafts the same idle pool into the protection squad, which",
+			"rallies AT the guarded point. Live requests count as a task against ProtectionIdleDissolveTicks;",
+			"a real predicted threat outranks any request. False = classic behaviour (the",
+			"frankenstein instances flip it on for the A/B).")]
+		public readonly bool UseProtectionRequests = false;
+
+		[Desc("Anti-air escort (CA-3): every assault force must field at least",
+			"AntiAirEscortMinUnits AA-capable units AND enough AA value to cover the",
+			"share ramp (AntiAirEscortMinSharePct early up to AntiAirEscortMaxSharePct",
+			"late, over AntiAirEscortRampTicks) - the longer the game, the more air the",
+			"enemy fields. A shortfall is requested from unit production (cheapest",
+			"buildable AA-capable unit). False = classic behaviour.")]
+		public readonly bool EnsureAntiAirEscort = false;
+
+		[Desc("Anti-air escort: flat floor - an assault never fields fewer AA-capable",
+			"units than this.")]
+		public readonly int AntiAirEscortMinUnits = 3;
+
+		[Desc("Anti-air escort: required share of the assault's value in AA-capable",
+			"units at game start, percent.")]
+		public readonly int AntiAirEscortMinSharePct = 20;
+
+		[Desc("Anti-air escort: required share of assault value at ramp end, percent -",
+			"the late-game floor (a third of the force must answer air).")]
+		public readonly int AntiAirEscortMaxSharePct = 33;
+
+		[Desc("Anti-air escort: game ticks over which the required share ramps from",
+			"min to max.")]
+		public readonly int AntiAirEscortRampTicks = 60000;
+
+		[Desc("Anti-air escort: the share the requirement falls to when a confident",
+			"enemy-army read shows NO air units - token cover against unseen tech.")]
+		public readonly int AntiAirEscortRelaxedSharePct = 10;
+
+		[Desc("Anti-air escort: respond to observed enemy air at this percent of the",
+			"enemy's air share of their army value (150 = answer 30% air with a 45%",
+			"AA share).")]
+		public readonly int AntiAirEscortResponsePct = 150;
+
+		[Desc("Anti-air escort: absolute cap on the required AA share, percent - the",
+			"assault still needs a ground punch.")]
+		public readonly int AntiAirEscortCapSharePct = 60;
+
+		[Desc("Anti-air escort: observed enemy army value at which the air read is",
+			"trusted - below this the mixed-army time ramp stays the prior.")]
+		public readonly int AntiAirEscortMinArmySample = 3000;
+
+		[Desc("Siege artillery (CA-3): the main army always fields guns that outrange",
+			"base defences - at least ArtillerySiegeMinUnits pieces plus artillery worth",
+			"ArtillerySiegeSharePct of the assault's value. A shortfall is requested from",
+			"unit production (cheapest buildable artillery). False = classic behaviour.")]
+		public readonly bool EnsureArtillerySiege = false;
+
+		[Desc("Siege artillery: flat floor - the main army never fields fewer pieces.")]
+		public readonly int ArtillerySiegeMinUnits = 2;
+
+		[Desc("Siege artillery: required share of the assault's value in artillery, percent.")]
+		public readonly int ArtillerySiegeSharePct = 15;
+
 		[Desc("Units that form harasser squads — high-value-target raids that launch once a",
 			"quorum gathers (upstream CA harasser port; empty = off). Shares the guerrilla",
 			"hit/run-adjacent routing exemption but fights with ordinary attack states.")]
@@ -310,8 +370,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
 		public readonly bool UseRiskRouting = true;
 
-		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership now comes from ArtilleryTypes,",
-			"the role-derived list - this field is ignored. Kept so existing yaml entries load silently.")]
+		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership prefers ArtilleryTypes,",
+			"the role-derived list; this field is the FALLBACK when that list is empty - @classic",
+			"still relies on it. Kept so existing yaml entries load silently.")]
 		public readonly int ArtilleryMinRangeCells = 10;
 
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
@@ -419,6 +480,8 @@ namespace OpenRA.Mods.CA.Traits
 		int protectionHoldUntilTick = -1;
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
+		IBotProtectionRequestProvider[] protectionRequestProviders;
+		IBotRequestUnitProduction[] unitRequesters;
 		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
@@ -631,6 +694,20 @@ namespace OpenRA.Mods.CA.Traits
 				&& MaximumEnabledRange(a) >= WDist.FromCells(Info.ArtilleryMinRangeCells);
 		}
 
+		// ActorInfo twin of IsArtilleryUnit - the same role-list-first rule applied to a
+		// buildable candidate (MaxRange comes from the unit profile, not live traits).
+		internal bool IsArtilleryUnit(ActorInfo ai)
+		{
+			if (ai == null || ai.HasTraitInfo<AircraftInfo>() || ai.HasTraitInfo<BuildingInfo>())
+				return false;
+
+			if (Info.ArtilleryTypes.Count > 0)
+				return Info.ArtilleryTypes.Contains(ai.Name);
+
+			return Info.ArtilleryMinRangeCells >= 0
+				&& BotUnitProfiles.Get(World.Map.Rules, ai).MaxRange >= WDist.FromCells(Info.ArtilleryMinRangeCells);
+		}
+
 		// A ship is a `naval` locomotor (the navalunit role's rule); hover and amphibious
 		// units move on land and stay ground units (12.4a). NavalUnitsTypes stays as a
 		// belt for naval actors carried on other locomotors - a ship must never reach a
@@ -694,6 +771,198 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal SquadCAType AirSquadTypeFor(string actorName) =>
 			AirSquadTypeFor(Info.AirDoctrineEnabled, actorName, Info.FighterTypes, Info.GunshipTypes, Info.BomberTypes);
+
+		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
+		static readonly BitSet<TargetableType> GroundTargetTypes = new("Ground");
+		static readonly BitSet<TargetableType> AirTargetTypes = new("Air");
+
+		// An artillery escort is the screen's frontline: an armed ground vehicle that
+		// can hit ground targets. Infantry cannot keep up, AA-only platforms and
+		// support units cannot win the flanker fight, ships cannot screen land guns
+		// (12.4a review: the escort pull must pick fighters, not any-kind units).
+		internal bool CanEscortArtillery(Actor a) =>
+			a.Info.HasTraitInfo<AttackBaseInfo>()
+			&& !a.Info.HasTraitInfo<AircraftInfo>()
+			&& !a.Info.HasTraitInfo<HarvesterInfo>()
+			&& !a.Info.HasTraitInfo<BuildingInfo>()
+			&& !IsNavalUnit(a)
+			&& !Info.SupportUnitTypes.Contains(a.Info.Name)
+			&& !a.GetAllTargetTypes().Overlaps(InfantryTargetTypes)
+			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(GroundTargetTypes));
+
+		// A unit covers its squad against air if any of its weapons can hit an air
+		// target - the unit-profile weapon table keeps this faction-agnostic (no
+		// hard-coded type lists, 12.4a/CA-3).
+		internal bool CanHitAir(Actor a) =>
+			a.Info.HasTraitInfo<AttackBaseInfo>()
+			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(AirTargetTypes));
+
+		// Fog-honest enemy mix read via the canonical composition provider: the
+		// master AI's fog memory carries remembered mobile combat value by actor
+		// type, buildings already excluded. A caller with no provider (no fog
+		// observation) gets (0, 0) - below the sample floor, so the mixed-army
+		// prior stands and nothing omniscient leaks in.
+		internal (double Air, double Total) ObservedEnemyMix()
+		{
+			var provider = Player.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			if (provider == null || !provider.TryGetEnemyComposition(out var valueByActorType))
+				return (0, 0);
+
+			var air = 0.0;
+			var total = 0.0;
+			foreach (var (name, value) in valueByActorType)
+			{
+				if (!World.Map.Rules.Actors.TryGetValue(name, out var info))
+					continue;
+
+				total += value;
+				if (info.HasTraitInfo<AircraftInfo>())
+					air += value;
+			}
+
+			return (air, total);
+		}
+
+		// The required AA share of the assault's value. Base = the time ramp (the
+		// mixed-army prior); with a confident enemy read it instead answers the
+		// OBSERVED air share at AntiAirEscortResponsePct - or relaxes to the token
+		// floor when the enemy provably fields no air.
+		internal double RequiredAntiAirShare()
+		{
+			var baseShare = Info.AntiAirEscortRampTicks <= 0
+				? Info.AntiAirEscortMaxSharePct / 100.0
+				: (Info.AntiAirEscortMinSharePct
+					+ (Info.AntiAirEscortMaxSharePct - Info.AntiAirEscortMinSharePct)
+						* Math.Min(1.0, (double)World.WorldTick / Info.AntiAirEscortRampTicks)) / 100.0;
+
+			var (air, total) = ObservedEnemyMix();
+			if (total < Info.AntiAirEscortMinArmySample)
+				return baseShare;
+
+			if (air <= 0)
+				return Math.Min(baseShare, Info.AntiAirEscortRelaxedSharePct / 100.0);
+
+			var respond = air / total * Info.AntiAirEscortResponsePct / 100.0;
+			return Math.Min(Info.AntiAirEscortCapSharePct / 100.0, Math.Max(baseShare, respond));
+		}
+
+		// The cheapest buildable ground unit that can hit air - it fields fastest and
+		// masses easiest. Returns null when no queue can make one (e.g. tech not up).
+		ActorInfo PickAntiAirUnit()
+		{
+			var rules = World.Map.Rules;
+			return Player.PlayerActor.TraitsImplementing<ProductionQueue>()
+				.SelectMany(q => q.BuildableItems())
+				.Where(ai => !ai.HasTraitInfo<BuildingInfo>() && !ai.HasTraitInfo<AircraftInfo>()
+					&& ai.HasTraitInfo<MobileInfo>()
+					&& ai.TraitInfoOrDefault<MobileInfo>()?.Locomotor != "naval"
+					&& BotUnitProfiles.Get(rules, ai).Weapons.Any(w => w.CanTarget(AirTargetTypes)))
+				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.FirstOrDefault();
+		}
+
+		// The cheapest buildable ground artillery - a siege piece must trail a land
+		// assault, so ships are out (same locomotor rule as the AA pick).
+		ActorInfo PickArtilleryUnit()
+		{
+			return Player.PlayerActor.TraitsImplementing<ProductionQueue>()
+				.SelectMany(q => q.BuildableItems())
+				.Where(ai => ai.HasTraitInfo<MobileInfo>()
+					&& ai.TraitInfoOrDefault<MobileInfo>()?.Locomotor != "naval"
+					&& IsArtilleryUnit(ai))
+				.OrderBy(ai => ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.FirstOrDefault();
+		}
+
+		// CA-3 siege artillery: the main army always carries guns that outrange base
+		// defences - at least ArtillerySiegeMinUnits pieces plus ArtillerySiegeSharePct
+		// of assault value. Artillery already fielded in squads counts (it is the same
+		// siege asset); a shortfall is pushed to production like the AA coverage.
+		void RequestSiegeArtillery(IBot bot, SquadCA attackForce, List<UnitWposWrapper> freshArtillery)
+		{
+			var requester = unitRequesters.FirstOrDefault();
+			if (requester == null)
+				return;
+
+			var candidate = PickArtilleryUnit();
+			if (candidate == null)
+				return;
+
+			var fieldedCount = freshArtillery.Count;
+			var fieldedValue = freshArtillery.Sum(u => UnitValue(u.Actor));
+			foreach (var sq in Squads.Where(s => s.Type == SquadCAType.Artillery && s.IsValid))
+			{
+				fieldedCount += sq.Units.Count;
+				fieldedValue += sq.Units.Sum(u => UnitValue(u.Actor));
+			}
+
+			var forceValue = attackForce.Units.Sum(u => UnitValue(u.Actor)) + fieldedValue;
+			var share = Info.ArtillerySiegeSharePct / 100.0;
+			var unitCost = candidate.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+			var neededForShare = unitCost > 0 && share > 0 && share < 1
+				? (int)Math.Ceiling(Math.Max(0, share * forceValue - fieldedValue) / (unitCost * (1 - share)))
+				: 0;
+			var needed = Math.Max(Info.ArtillerySiegeMinUnits - fieldedCount, neededForShare);
+			if (needed <= 0)
+				return;
+
+			var queued = requester.RequestedProductionCount(bot, candidate.Name);
+			for (var i = queued; i < needed; i++)
+				requester.RequestUnitProduction(bot, candidate.Name);
+
+			AIUtils.BotDebug("AI ({0}): siege artillery {1} pieces - requested {2}x {3}",
+				Player.ClientIndex, fieldedCount, needed - queued, candidate.Name);
+		}
+
+		// CA-3 anti-air coverage: an assault without AA dies to the first gunship it
+		// cannot shoot back at. Required = the larger of a flat unit floor (never
+		// fewer than AntiAirEscortMinUnits) and a share of the force's value ramping
+		// 20->33% over the match. The idle pool is already drafted whole, so a
+		// shortfall can only be fixed by production - request the missing escorts;
+		// produced AA joins the pool and rides the next assault or protection draft.
+		void RequestAntiAirCoverage(IBot bot, SquadCA attackForce)
+		{
+			var requester = unitRequesters.FirstOrDefault();
+			if (requester == null)
+				return;
+
+			var candidate = PickAntiAirUnit();
+			if (candidate == null)
+				return;
+
+			var aaCount = 0;
+			var aaValue = 0;
+			var forceValue = 0;
+			foreach (var u in attackForce.Units)
+			{
+				var v = UnitValue(u.Actor);
+				forceValue += v;
+				if (CanHitAir(u.Actor))
+				{
+					aaCount++;
+					aaValue += v;
+				}
+			}
+
+			// Units needed for the value share - each requested unit also grows the
+			// force, so solve the fixpoint: x >= (share*V - aa) / (cost*(1-share)).
+			var share = RequiredAntiAirShare();
+			var unitCost = candidate.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+			var neededForShare = unitCost > 0 && share > 0 && share < 1
+				? (int)Math.Ceiling(Math.Max(0, share * forceValue - aaValue) / (unitCost * (1 - share)))
+				: 0;
+			var needed = Math.Max(Info.AntiAirEscortMinUnits - aaCount, neededForShare);
+			if (needed <= 0)
+				return;
+
+			// Don't stack requests: only ask for what isn't already queued.
+			var queued = requester.RequestedProductionCount(bot, candidate.Name);
+			for (var i = queued; i < needed; i++)
+				requester.RequestUnitProduction(bot, candidate.Name);
+
+			AIUtils.BotDebug("AI ({0}): assault AA coverage {1} units / {2}% of value - requested {3}x {4} (target share {5}%)",
+				Player.ClientIndex, aaCount, aaValue * 100 / Math.Max(1, forceValue), needed - queued, candidate.Name, (int)(share * 100));
+		}
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
 		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
@@ -830,6 +1099,8 @@ namespace OpenRA.Mods.CA.Traits
 			mainTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			threatProviders = self.Owner.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			threatPredictionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotThreatPredictionProvider>().ToArray();
+			protectionRequestProviders = self.Owner.PlayerActor.TraitsImplementing<IBotProtectionRequestProvider>().ToArray();
+			unitRequesters = self.Owner.PlayerActor.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
@@ -1057,22 +1328,40 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: meet the most valuable predicted attack at the own defence nearest its target.
 		void PrepositionDefenceTick(IBot bot)
 		{
-			if (!Info.PrepositionDefence || threatPredictionProviders == null || threatPredictionProviders.Length == 0 || World.WorldTick < nextPrepositionTick)
+			var prepositionOn = Info.PrepositionDefence && threatPredictionProviders is { Length: > 0 };
+			var requestsOn = Info.UseProtectionRequests && protectionRequestProviders is { Length: > 0 };
+			if ((!prepositionOn && !requestsOn) || World.WorldTick < nextPrepositionTick)
 				return;
 
 			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
-			var threat = SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
-				Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue);
-			if (threat == null)
+			var threat = prepositionOn
+				? SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
+					Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue)
+				: null;
+
+			// An escort request is a standing defence job on the same army_value
+			// scale - but a real incoming attack always outranks a guard job.
+			var request = threat == null ? SelectProtectionRequest() : null;
+			if (threat == null && request == null)
 				return;
 
-			var target = threat.Value.Target;
-			var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
-			var rally = World.ActorsHavingTrait<AttackBase>()
-				.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
-					&& (a.Location - target).LengthSquared <= searchSquared)
-				.OrderBy(a => (a.Location - target).LengthSquared)
-				.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+			CPos rally;
+			if (request.HasValue)
+			{
+				// Escorts go TO the guarded point - no defensive-building snap:
+				// the MCV/outpost is usually nowhere near a building.
+				rally = request.Value.Location;
+			}
+			else
+			{
+				var target = threat.Value.Target;
+				var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
+				rally = World.ActorsHavingTrait<AttackBase>()
+					.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
+						&& (a.Location - target).LengthSquared <= searchSquared)
+					.OrderBy(a => (a.Location - target).LengthSquared)
+					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
+			}
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
@@ -1088,12 +1377,40 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			protectionRally = rally;
-			protectionHoldUntilTick = World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+
+			// Threat path: hold for the attack's ETA plus grace. Request path: the
+			// publisher refreshes its request every ProtectInterval, so the hold is a
+			// rolling window - a retracted request lets the escort release within one
+			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
+			protectionHoldUntilTick = request.HasValue
+				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
+				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
-			if (Info.FastSquadsReactToThreats)
+			if (request == null && Info.FastSquadsReactToThreats)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
+		}
+
+		/// <summary>The most valuable live protection request, or null. Requests refresh
+		/// every tick from their publishers; expired or retracted ones are skipped.</summary>
+		public static BotProtectionRequest? SelectProtectionRequest(
+			IEnumerable<BotProtectionRequest> requests, int now, int minValue)
+		{
+			return requests
+				.Where(r => r.ExpiresTick > now && r.Value >= minValue)
+				.OrderByDescending(r => r.Value).ThenBy(r => r.ExpiresTick)
+				.Cast<BotProtectionRequest?>().FirstOrDefault();
+		}
+
+		BotProtectionRequest? SelectProtectionRequest()
+		{
+			if (!Info.UseProtectionRequests || protectionRequestProviders == null || protectionRequestProviders.Length == 0)
+				return null;
+
+			return SelectProtectionRequest(
+				protectionRequestProviders.SelectMany(p => p.ProtectionRequests ?? []),
+				World.WorldTick, Info.PrepositionMinThreatValue);
 		}
 
 		// A harasser joins the harass squad of its own type, or starts one.
@@ -1143,8 +1460,11 @@ namespace OpenRA.Mods.CA.Traits
 		// release trigger (§10.1); it calls ReleaseDefenders.
 		internal bool ShouldReleaseDefenders(bool quiet)
 		{
-			var threatened = threatPredictionProviders != null && threatPredictionProviders.Any(p =>
-				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0);
+			// Live escort requests are a standing task: the escort must survive the
+			// quiet-dissolve while a publisher still wants the guard (12.4a review).
+			var threatened = (threatPredictionProviders != null && threatPredictionProviders.Any(p =>
+				p.PerceivedBaseThreat || p.PredictedThreats.Count > 0))
+				|| SelectProtectionRequest() != null;
 			if (Info.ProtectionIdleDissolveTicks <= 0 || !quiet || threatened)
 			{
 				protectionQuietSinceTick = -1;
@@ -1471,10 +1791,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var a in newUnits)
 			{
-				// 12.4a naval guard FIRST: a `naval` locomotor ships off to a Naval
+				// 12.4a naval guard FIRST: an armed `naval` locomotor ships off to a Naval
 				// squad before any other branch - a ship missing from NavalUnitsTypes
-				// can never land in a guerrilla/ground squad or the idle pool.
-				if (IsNavalUnit(a))
+				// can never land in a guerrilla/ground squad or the idle pool. Unarmed
+				// ships (wc2 oil tankers, transports) are not squad material: they fall
+				// through to the armed-only idle gate below and stay unmanaged.
+				if (IsNavalUnit(a) && a.Info.HasTraitInfo<AttackBaseInfo>())
 				{
 					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
 					var matchingNavalSquadFound = false;
@@ -1558,7 +1880,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					supportSquad.Units.Add(new UnitWposWrapper(a));
 				}
-				else
+				else if (a.Info.HasTraitInfo<AttackBaseInfo>())
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 
 				activeUnits.Add(a);
@@ -1667,7 +1989,12 @@ namespace OpenRA.Mods.CA.Traits
 				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
 				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
-					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)));
+					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
+					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
+				if (Info.EnsureAntiAirEscort)
+					RequestAntiAirCoverage(bot, attackForce);
+				if (Info.EnsureArtillerySiege)
+					RequestSiegeArtillery(bot, attackForce, artilleryUnits);
 				if (missionTarget != null)
 					attackForce.Target = Target.FromActor(missionTarget);
 				else if (missionFrozenTarget != null)
@@ -1701,10 +2028,13 @@ namespace OpenRA.Mods.CA.Traits
 					if (artilleryParent != null)
 					{
 						fsSquad.Parent = artilleryParent;
+						// Ground vehicles that can hit ground, at most a third of the
+						// assault: the screen must win the flanker fight without
+						// stripping the raid itself (12.4a review item).
 						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
-							attackForce.Units.Count);
+							attackForce.Units.Count / 3);
 						foreach (var escort in attackForce.Units
-							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name))
+							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name) && CanEscortArtillery(u.Actor))
 							.OrderByDescending(u => UnitValue(u.Actor))
 							.Take(escortsNeeded)
 							.ToList())
