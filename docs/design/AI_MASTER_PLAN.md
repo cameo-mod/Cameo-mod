@@ -206,7 +206,7 @@ agent leaves.
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |
 | CN2 | CN garrison + repair manager | DAWN | — | 6 | 10 | 18 | 11 |
 | CN3 | CN bridge repair, cliff demolition, deploy, veinhole assault, stealth/subterranean/transport states | DAWN | — | 16 | 28 | 50 | 30 |
-| RV1 | **done 2026-09-30:** `genericbot` runs `BaseRepairBotModule`, OpenRA + CA repair merged (DESIGN §19.3; classic keeps both); BevManager and SharedCargo held for content (DESIGN §19.4); CncEngineer already loaded (§1.1) | Claude | — | 4 | 8 | 14 | 8 |
+| RV1 | **done 2026-09-30:** `genericbot` runs `BaseRepairBotModule`, OpenRA + CA repair merged (DESIGN §19.3); classic runs only the CA copy, the OpenRA module is unloaded; BevManager and SharedCargo held for content (DESIGN §19.4); CncEngineer already loaded (§1.1) | Claude | — | 4 | 8 | 14 | 8 |
 | RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5 | Claude | — | 3 | 6 | 12 | 7 |
 
 **Learning and feel (AI_ARCHITECTURE §6.4, AI_SYNTHESIS §5)**, expected 127 h

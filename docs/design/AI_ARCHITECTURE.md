@@ -1327,7 +1327,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**54 distinct trait types, 77 Player instances plus one World instance** (2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, +1 type / +1 instance; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**53 distinct trait types, 76 Player instances plus one World instance** (2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -1361,7 +1361,7 @@ master snapshot today. "Hint" below is a future read-only integration, not shipp
 | `HarvesterBotModuleCA` (1) | harvester task/threat handling | collectors, resources, threats and unit requests; economy-pressure hint later | harvesting/movement and production requests; idle scan configured 1000 ticks plus other source callbacks; U |
 | `McvExpansionManagerBotModule` (1) | MCV deployment and expansion | mobile construction actors, resource map, base positions, unit builder; expansion hint | movement/deploy orders, production requests, position callbacks; new-MCV scan default 20, build check 101; U |
 | `CaptureManagerBotModuleCA` (1) | capture assignment | eligible capturers/targets and visibility configuration; target preference | capture orders; minimum capture delay configured 125 ticks; U |
-| `BuildingRepairBotModule` (1) | Common building repair response (`classicbot` only since RV1) | attacked actor, damage state, repair capability | repair orders on `IBotRespondToAttack`, including cooldown-gated all-building scan inside that callback; U |
+| `BuildingRepairBotModule` (0, unloaded since RV1) | Common building repair response | attacked actor, damage state, repair capability | repair orders on `IBotRespondToAttack`, including cooldown-gated all-building scan inside that callback; U |
 | `BuildingRepairBotModuleCA` (1) | CA repair response path | attacked actor's repair trait, damage event and attacker relationship | conditional repair orders on `IBotRespondToAttack`; U |
 | `PowerDownBotModule` (1) | power toggling | power totals and toggleable buildings; no new hint | PowerDown orders; interval default 150 ticks; U |
 | `CratePickupBotModule` (1) | crate collector assignment | crate candidates, collectors and visibility setting; no new hint | movement orders; scan configured 300 ticks; U |
@@ -1437,16 +1437,15 @@ appetite hint does not implicitly enable that separate relocation behavior.
 main target is discarded as a preference, not forced through capture restrictions. Easiest-bot
 condition gating remains; waiting for the minimum delay cannot transfer ownership to the master.
 
-**BuildingRepairBotModule.** Receives attack callbacks and inspects repair-capable actors
+**BuildingRepairBotModule** (unloaded since RV1; its sweep lives on in `BaseRepairBotModule`). Receives attack callbacks and inspects repair-capable actors
 through the existing Common path. Its all-building scan is cooldown-gated inside the attack
 callback, not independently scheduled; without callbacks there is no scan. Unsupported actors
 produce no direct repair order; future hints must not create an unconditional expenditure loop.
 
 **BuildingRepairBotModuleCA.** Is separately loaded, not an alias of Common. It looks up
 `RepairableBuilding` on each attacked actor (the creation-time cache that left it inert was
-fixed, as upstream CA did). Since RV1 (2026-09-30) both repair modules are `classicbot` only
-(there the two toggles can still cancel, AI_SYNTHESIS §7.3); `genericbot` runs the merged
-`BaseRepairBotModule` (DESIGN §19.3).
+fixed, as upstream CA did). Since RV1 (2026-09-30) it is `classic`'s only repair module (the Common
+one is unloaded); `genericbot` runs the merged `BaseRepairBotModule` (DESIGN §19.3).
 
 **PowerDownBotModule.** Reads the power manager and eligible buildings, then queues toggles.
 It does not own construction of replacement generators. Insufficient toggleable capacity

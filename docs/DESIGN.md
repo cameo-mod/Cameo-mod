@@ -5028,13 +5028,15 @@ best from both. There should only be one bot module per type and no competing du
   before anything is ported; a harvested module *replaces* or *feeds* that owner. The module map
   (`tools/ai/ai_module_map.py`) is where duplicates show up.
 * **Parents keep updating, and the merge follows them.** The parent copies stay in the tree verbatim
-  (`classic` runs them), so CA upstream syncs (`ca_vendor_sync.py`) and engine pins keep landing in them as
+  (the CA copies are what `classic` runs), so CA upstream syncs (`ca_vendor_sync.py`) and engine pins keep landing in them as
   before. The merged module is a separate file and does not inherit those fixes by itself:
   `tools/audit/merged_bot_modules.json` records each parent's content hash at merge time, and
   `audit_merged_bot_modules.py` (in `run_all.sh`) FAILS when a parent changes. Port the change into the
   merged module (or rule it irrelevant in the PR), then `--write`. Register every new merge there.
-* **`classic`** is the A/B reference and keeps its historical stack unchanged (`AI_MASTER_PLAN.md` §5);
-  the rule governs every bot the player can face as the Frankenstein bot.
+* **`classic`** is the A/B reference, and it is the **CA** bot: where duplicates exist it runs only the CA copy,
+  as upstream CA does (maintainer, same day: *"Classic should only use the CA modules where duplicates
+  exist"*). Where no CA copy exists (support powers: OpenRA vs AS) the pair is merged as for any bot.
+  Moving classic moves the benchmark: the first A/B after such a change is the new baseline.
 
 ### 19.4 Bot modules held for content that is coming (2026-09-30) — binding
 

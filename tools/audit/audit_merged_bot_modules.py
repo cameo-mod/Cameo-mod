@@ -3,7 +3,7 @@
 A merged module (e.g. `BaseRepairBotModule` = OpenRA `BuildingRepairBotModule` + CA
 `BuildingRepairBotModuleCA`) is a SEPARATE file: an upstream fix to a parent lands in the parent's
 copy (CA via `ca_vendor_sync.py`, OpenRA/AS via the engine pin) and never reaches the merge by itself.
-The parents stay in the tree verbatim (`classic` still runs them), so their content is the signal.
+The parents stay in the tree verbatim (`classic` runs the CA copies), so their content is the signal.
 
 `merged_bot_modules.json` records, per merged module, each parent file and the hash of its content at
 the time of the merge. When a parent's hash changes, this audit FAILS until someone ports the change

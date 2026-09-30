@@ -3325,11 +3325,9 @@ Player:
 		AdditionalHarvesters: 1
 		ScanForIdleHarvestersInterval: 1000
 	# ONE repair owner per bot (DESIGN §19.3, AI_MASTER_PLAN RV1): RepairBuilding is a TOGGLE, so when the
-	# OpenRA and CA modules both answered the same hit the second order switched the repair back off.
-	# genericbot runs BaseRepairBotModule, the two merged (CA's early trigger + OpenRA's repair-all sweep,
-	# never a second order); classic keeps both originals, unchanged, as the A/B reference.
-	BuildingRepairBotModule:
-		RequiresCondition: classicbot
+	# OpenRA BuildingRepairBotModule and the CA module both answered the same hit, the second order switched
+	# the repair back off. genericbot runs BaseRepairBotModule, the two merged (CA's early trigger + OpenRA's
+	# repair-all sweep, never a second order); classic, the CA reference, runs only the CA copy (as upstream CA).
 	BuildingRepairBotModuleCA:
 		RequiresCondition: classicbot
 	BaseRepairBotModule:

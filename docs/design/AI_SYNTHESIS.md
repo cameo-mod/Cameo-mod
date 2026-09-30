@@ -464,8 +464,8 @@ and merging where possible**. Measured on master `fd852d2fe` + the A/B rounds 2�
    building from Undamaged/Light straight to Medium or worse, both queue in the same pass and
    the second cancels the first. The same `!RepairActive` test also re-toggles a repair whose
    order has not resolved yet, or one the bot cannot pay for (it stays in `Repairers` while
-   `RepairActive` is false). **Fixed 2026-09-30 (RV1, DESIGN §19.3):** both are gated
-   `classicbot` only (the reference keeps its verbatim stack), and `genericbot` runs
+   `RepairActive` is false). **Fixed 2026-09-30 (RV1, DESIGN §19.3):** the OpenRA module is
+   unloaded, `classic` runs only the CA copy (as upstream CA), and `genericbot` runs
    `BaseRepairBotModule`, the two merged: CA's trigger at Light, OpenRA's repair-all sweep (now
    on the bot tick), and never a second order (`Repairers.Contains` + an in-flight window).
    Telemetry: situation log `own.repair_orders`, `repair_sweep_orders`, `repair_toggles_avoided`.
