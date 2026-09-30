@@ -99,13 +99,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int StuckRetryTicks = 1500;
 
 		[Desc("Most engineers sent at one capture target at a time (one mission, one live attempt). 0 = no limit,",
-			"the parents' behaviour: a smoke match sent three engineers at one oil derrick within 400 ticks.")]
-		public readonly int MaxEngineersPerTarget = 1;
+			"the parents' behaviour and the default until its A/B: a smoke match sent three engineers at one oil derrick",
+			"within 400 ticks; the candidate sets 1 (AI_MASTER_PLAN §1.2 step 6).")]
+		public readonly int MaxEngineersPerTarget = 0;
 
 		[Desc("A capture mission whose attempts fail this many times in a row (the engineer died) goes dormant: its target",
 			"is skipped for CaptureDormantTicks (fransotto's dormant shelf; AI_MISSION_CARDS §2.2). 0 disables. A smoke match",
-			"lost five engineers one after another at one defended derrick.")]
-		public readonly int CaptureFailuresBeforeDormant = 2;
+			"lost five engineers one after another at one defended derrick. Off until its A/B; the candidate sets 2.")]
+		public readonly int CaptureFailuresBeforeDormant = 0;
 
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;

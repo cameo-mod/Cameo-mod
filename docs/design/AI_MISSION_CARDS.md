@@ -97,7 +97,8 @@ terminal state** (6 SUCCESS, 11 FAILED lost_units, 1 RELEASED target_gone). One 
 in a row**, two of them at once — so the engineer owner now sends one engineer per target (`MaxEngineersPerTarget: 1`)
 and rests a mission after two consecutive losses (`CaptureFailuresBeforeDormant: 2`, `CaptureDormantTicks: 3000`,
 logged `MISSION <id> DORMANT until tick N`) — fransotto's dormant shelf, owned by the module that both chooses and
-executes captures. For missions the master AI chooses and squads execute, the shelf is LC8.
+executes captures. Both ship OFF (0) until their A/B (AI_MASTER_PLAN §1.2 step 6); the candidate sets 1 and 2. For
+missions the master AI chooses and squads execute, the shelf is LC8.
 
 `grep "MISSION <id>"` tells one mission's whole story; when "then nothing happens", the last line names the layer
 that went quiet — fransotto's point about finding the bug in the right commander file. Emitters, in order:
