@@ -198,6 +198,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)
 - [`dotnet test` fails silently while a match holds `engine/bin` — read the tail, never grep for `Passed!` (2026-09-30)](#dotnet-test-fails-silently-while-a-match-holds-enginebin--read-the-tail-never-grep-for-passed-2026-09-30)
+- [⛔ `.gitignore`'s `engine*` hid every new file named Engine… — anchor ignore patterns to the root (2026-09-30)](#-gitignores-engine-hid-every-new-file-named-engine--anchor-ignore-patterns-to-the-root-2026-09-30)
 - [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
 - [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
@@ -3178,3 +3179,16 @@ re-run: 344/344).
 
 **Rule:** read the last lines of the test output and require the `Passed!  - Failed: 0, Passed: N` line with the
 expected N; no line means no run. Run tests in a worktree no match is using (or after the batch).
+
+## ⛔ `.gitignore`'s `engine*` hid every new file named Engine… — anchor ignore patterns to the root (2026-09-30)
+
+`.gitignore` carried `engine` and `engine*` unanchored, meant for the root `engine/` build output and its fetch
+leftovers. With `core.ignorecase=true` (every Windows clone) `engine*` matches **any file whose name starts with
+"engine", in any folder, in any case**: `OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs` and its test
+never appeared in `git status` (ENG, 2026-09-30), and `docs/audit/latest/engine_freshness.md` — written by
+`run_all.sh` on every run — had never been committed. Nothing warns: the file builds, the tests pass, and a scoped
+`git add <file>` refuses it only if you notice the "ignored by .gitignore" hint.
+
+**Rule:** anchor build-output patterns to the root (`/engine`, `/engine*`). After adding a NEW file, check
+`git status -s -uall` lists it (or `git check-ignore -v <file>` prints nothing) before you commit.
+

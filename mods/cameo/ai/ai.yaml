@@ -3335,7 +3335,7 @@ Player:
 	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
-	# untouched. Squads join when NOVA's lane adopts it; CncEngineerBotModule (engine) joins through the ENG merge.
+	# untouched. Squads join when NOVA's lane adopts it; the engineers claim through EngineerBotModule (ENG).
 	BotUnitLeaseRegistry:
 		RequiresCondition: genericbot
 	BotPersonalityController:
@@ -3392,8 +3392,10 @@ Player:
 		MoveConyardTick: 0
 		RelocateConyardsForExpansion: false
 		MinimumConyardRelocationDistance: 10
+	# classic (the CA A/B reference) runs the CA capture manager alone, as upstream CA does. genericbot runs
+	# EngineerBotModule below instead: the ENG merge (DESIGN §19.3) of this module and the AS CncEngineerBotModule.
 	CaptureManagerBotModuleCA:
-		RequiresCondition: classicbot || genericbot && !easiestbot
+		RequiresCondition: classicbot
 		CapturingActorTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, naxis_engineeringtruck, futuretech_engineer, futuretech_repairdroid, tsengineer, ts_nod_engineer, cabal_engineer, engineer, d2k_hijacker, d2k_mechanic, terran_scv, tkm_engineer, atreides_engineer, corrino_engineer, harkonnen_engineer, plymouth_spider
 		PriorityCapturableActorTypes: v19, hosp, fcom, miss, ramiss, rabio, oilb, v19.husk, hosp.husk, bio.husk, miss.husk, fcom.husk, oilb.husk
 		CapturableActorTypes: td_gdi_constructionyard, td_nod_constructionyard, td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, td_gdi_weaponsfactory, td_nod_airstrip, td_nod_communicationscenter, td_gdi_communicationscenter, ts_nod_radar, cabal_radar, ts_gdi_radar, forgotten_radar, td_gdi_advancedcommunicationscenter, ts_nod_techcenter, ts_gdi_techcenter, forgotten_church, cabal_techcenter, tsnttmpl, ts_gdi_dropshipbay, cabal_core, td_nod_templeofnod, td_nod_templeprime, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra1_allies_orerefinery, ra1_soviets_orerefinery, japan_japaneseorerefinery, ra1_soviets_warfactory, ra1_soviets_largefactory, ra1_allies_warfactory, japan_japanesewarfactory, ra1_allies_radardome, ra1_soviets_radardome, japan_japaneseradararray, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra1_allies_reinforcementpad, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ra2_soviets_orerefinery, ra2_allies_orerefinery, ra2_soviets_warfactory, ra2_allies_warfactory, yuri_warfactory, ra2_allies_airforcecommandhq, ra2_soviets_radar, yuri_psychicsensor, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, asianalliance_constructionyard, asianalliance_warfactory, asianalliance_radar, asianalliance_battlelab, ixian_constructionyard, ixian_advancedheavyfactory, ixian_refineryixian, ixian_ixresearchcenter, ixian_starport, latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory, latinsyndicate_recyclingrefinery, latinsyndicate_spycenter, naxis_constructionyard, naxis_warfactory, naxis_orerefinery, naxis_academy, naxis_techcenter, schwarzermond_constructionyard, schwarzermond_warfactory, schwarzermond_orerefinery, schwarzermond_radar, schwarzermond_techcenter, futuretech_constructionyard, futuretech_refinery, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, terran_commandcenter, terran_weaponsfactory, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, tkm_constructionyard, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_outpost, corrino_outpost, harkonnen_outpost, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_structure, eden_smelter_common, eden_smelter_rare, eden_factory_vehicle, eden_factory_consumer, eden_lab_basic, eden_lab_standard, eden_lab_advanced, plymouth_structure_factory, plymouth_smelter_common, plymouth_smelter_rare, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_basic_lab, plymouth_lab_standard, plymouth_lab_advanced
@@ -3401,14 +3403,22 @@ Player:
 		CheckCaptureTargetsForVisibility: false
 		MinimumCaptureDelay: 125
 		MaximumCaptureTargetOptions: 25
-	# Idle engineers repair destroyed bridge huts; capture stays with CaptureManagerBotModuleCA.
-	# ⚠ Both modules pick IDLE engineers from overlapping lists, and ModularBot runs every module's BotTick
-	# before it issues any queued order, so both CAN order the same engineer in one tick: IsIdle is not
-	# ownership (AI_REVIEW_FRANSOTTO P0b). Fixed by the LC1 lease + the ENG merge (AI_MASTER_PLAN §3).
-	CncEngineerBotModule:
-		RequiresCondition: genericbot && !easiestbot
-		EngineerActorTypes: e6, engineer, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, steelconsortium_engineer, futuretech_engineer, latinsyndicate_engineer, tkm_engineer, crab, n64e6gdi, n64e6nod, wc_h_peasant_engineer, wormengineer, op2_commonore_beacon_3bar, atreides_engineer, corrino_engineer, harkonnen_engineer
+	# ENG (AI_MASTER_PLAN §3): the ONE owner of genericbot's engineers, merged from CaptureManagerBotModuleCA (capture)
+	# and the AS CncEngineerBotModule (bridge huts, instant repair). The two used to pick the same IDLE engineers and
+	# ModularBot runs every BotTick before it issues any order, so both could order one engineer in one tick (review
+	# P0b, "IsIdle is not ownership"). Every order is now an LC1 claim; engineers held by another module are skipped.
+	# DESIGN §19.5: the engineer owner is one of the two omniscient modules, as a whole (maintainer 2026-09-30):
+	# capture targets, the SafePath enemy scan and destroyed bridge huts are all seen through fog.
+	EngineerBotModule:
+		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
+		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
+		PriorityCaptureChance: 75
+		CheckCaptureTargetsForVisibility: false
+		MinimumCaptureDelay: 125
+		MaximumCaptureTargetOptions: 25
+		RepairingActorTypes: e6, engineer, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, steelconsortium_engineer, futuretech_engineer, latinsyndicate_engineer, tkm_engineer, crab, n64e6gdi, n64e6nod, wc_h_peasant_engineer, wormengineer, op2_commonore_beacon_3bar, atreides_engineer, corrino_engineer, harkonnen_engineer
 		RepairableHutActorTypes: bridgehut, bridgehut.small
+		CheckRepairTargetsForVisibility: false
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
 		RequiresCondition: classicbot || genericbot && !easiestbot # && nobase no conyard condition defined in player.yaml
