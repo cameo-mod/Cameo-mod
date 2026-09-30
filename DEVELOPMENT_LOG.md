@@ -15017,8 +15017,11 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
 - Boot-gate lesson: copying engine/ between worktrees needs rebuild of
   ALL mod projects — msbuild skipped OpenRA.Mods.Cameo.dll (stale
   pre-#663, no BotRoleSets.AirArmament) and the boot crashed on it.
-- W3 corrected: ctrl 7-7, cand 12-12 — the 0-9 opening was a streak
-  artifact, not a verdict. Frans producers ~= CA producers at parity in
-  the mirror. Full 24/arm before any F1 call.
+- W3 CORRECTED AGAIN (counting bug): earlier tally counted ALL player
+  rows — every match writes a hard row AND a classic row, so any tally
+  without bot_type=='hard' reads ~1:1 by construction. True hard-only
+  record: ctrl 7-4, cand **0-22** — Frans producers lose every match.
+  F1 fail path now near-certain: CA producers stay on hard, Frans
+  producer modules stay donor-only.
 - ca6ab-cand marathon still running (no records). Machine at cap during
   boot-gate only.
