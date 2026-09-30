@@ -97,9 +97,26 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TwoLostEngineersInARowRestTheMission()
+		{
+			Assert.That(EngineerBotModule.GoesDormant(1, 2), Is.False);
+			Assert.That(EngineerBotModule.GoesDormant(2, 2), Is.True);
+			Assert.That(EngineerBotModule.GoesDormant(9, 0), Is.False, "0 disables the shelf");
+		}
+
+		[Test]
+		public void OneMissionOneLiveAttemptByDefault()
+		{
+			Assert.That(EngineerBotModule.TargetFull(0, 1), Is.False);
+			Assert.That(EngineerBotModule.TargetFull(1, 1), Is.True);
+			Assert.That(EngineerBotModule.TargetFull(5, 0), Is.False, "0 keeps the parents' unlimited behaviour");
+		}
+
+		[Test]
 		public void TheCaptureMissionIsTheBuildingNotTheEngineer()
 		{
-			Assert.That(EngineerBotModule.CaptureMissionId("Multi1", "oilb", 526), Is.EqualTo("capture:Multi1:oilb:526"));
+			// No owner in the id: a derrick that changes hands is still the same mission (a smoke match split one in two).
+			Assert.That(EngineerBotModule.CaptureMissionId("oilb", 526), Is.EqualTo("capture:oilb:526"));
 		}
 	}
 }

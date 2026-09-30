@@ -56,7 +56,7 @@ below is what `OpenRA.Mods.CA/Traits/BotModules/BotMissionLog.cs` implements, an
 * **MatchId** = the existing `game_uid` (every match record and the replay metadata already carry it).
 * **MissionId** = a **string key, deterministic from the strategic reason**, so a mission re-published every
   situation rebuild keeps its identity without any registry (NOVA's insight — `BotMission` objects are recreated
-  each pass): `raid:<target player>:r<region>`, `capture:<owner>:<actor type>:<actor id>`, `frans:<MissionAuctionId>`
+  each pass): `raid:<target player>:r<region>`, `capture:<actor type>:<actor id>` (no owner: a building that changes hands is still the same mission), `frans:<MissionAuctionId>`
   for the Fransbot broker. ⛔ Never a hash, and never a `ClientIndex`: every non-human player carries the HOST's
   client index (`Player.cs:189`), and the first proposal's XOR hash collided 4,185 times over realistic ranges.
 * **Attempt** = 1, 2, 3 … per MissionId, counted by whoever commits units; `attempt_id` = `<mission_id>|A<n>`.
@@ -87,11 +87,18 @@ an actor answers "which mission is this unit on?", and the LC5 watchdog will fla
 ### 2.4 The General's log (fransotto: *"Attack the harvester! — Air: I can't — Sea: I can — General: Sea, do it!"*)
 The exact format, with illustrative ids and ticks (the engineer owner, `EngineerBotModule`, is the first consumer):
 ```
-AI Multi0: MISSION capture:Multi1:oilb:526 ATTEMPT 1 COMMITTED by=Engineers tick=2561
-AI Multi0: MISSION capture:Multi1:oilb:526 ATTEMPT 1 SUCCESS reason=done by=Engineers tick=2790
-AI Multi0: MISSION capture:Multi1:td_gdi_constructionyard:412 ATTEMPT 1 FAILED reason=lost_units by=Engineers tick=6120
-AI Multi0: MISSION capture:Multi1:td_gdi_constructionyard:412 ATTEMPT 2 RELEASED reason=stuck by=Engineers tick=7400
+AI Multi0: MISSION capture:oilb:526 ATTEMPT 1 COMMITTED by=Engineers tick=2561
+AI Multi0: MISSION capture:oilb:526 ATTEMPT 1 SUCCESS reason=done by=Engineers tick=2790
+AI Multi0: MISSION capture:td_gdi_constructionyard:412 ATTEMPT 1 FAILED reason=lost_units by=Engineers tick=6120
+AI Multi0: MISSION capture:td_gdi_constructionyard:412 ATTEMPT 2 RELEASED reason=stuck by=Engineers tick=7400
 ```
+**First live match** (hard vs classic, td_gdi, Nuclear Winter, 2026-09-30): 18 capture attempts, **every one reached a
+terminal state** (6 SUCCESS, 11 FAILED lost_units, 1 RELEASED target_gone). One enemy derrick took **five engineers
+in a row**, two of them at once — so the engineer owner now sends one engineer per target (`MaxEngineersPerTarget: 1`)
+and rests a mission after two consecutive losses (`CaptureFailuresBeforeDormant: 2`, `CaptureDormantTicks: 3000`,
+logged `MISSION <id> DORMANT until tick N`) — fransotto's dormant shelf, owned by the module that both chooses and
+executes captures. For missions the master AI chooses and squads execute, the shelf is LC8.
+
 `grep "MISSION <id>"` tells one mission's whole story; when "then nothing happens", the last line names the layer
 that went quiet — fransotto's point about finding the bug in the right commander file. Emitters, in order:
 engineer owner (built, MC1), squad raids/defends (NOVA #681, switching to the writer), Fransbot broker (DAWN #679),
@@ -141,7 +148,7 @@ fold of one `mission_id`'s lines, which the story tool (MC2) does. The shape `Ai
 ```json
 {"schema":"mission-card/1","recorded_utc":"2026-09-30T12:00:00.0000000Z","game_uid":"…","map_uid":"…",
  "map_title":"A Nuclear Winter","player":"Multi0","faction":"td_gdi","bot":"hard",
- "mission_id":"capture:Multi1:oilb:526","attempt_id":"capture:Multi1:oilb:526|A1","attempt":1,
+ "mission_id":"capture:oilb:526","attempt_id":"capture:oilb:526|A1","attempt":1,
  "state":"SUCCESS","terminal":true,"reason":"done","by":"Engineers","tick":2790,
  "type":"capture","target_cell":"61,33","units":1}
 ```
