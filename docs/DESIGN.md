@@ -4287,6 +4287,17 @@ Cameo uses **two distinct experience systems** with different rank counts,
 stat curves, and decoration images. Every faction must use exactly one
 system consistently across all its actors.
 
+
+### 12.0m ELITE WEAPONS REACH 1000 FURTHER (maintainer 2026-09-30) — binding
+
+*"Yes, exactly that's the rule for RA2 styled elite weapons having +1000 range."* A weapon `X_elite` (the veteran
+swap of `X`) has **`Range` = base + 1000**; nothing else about it is implied by this rule. Melee weapons (both ranges
+below `2c0` and equal) are exempt: a melee weapon must touch its target. Measured on master 2026-09-30 over the
+resolved rules: **209 pairs — 149 follow, 4 melee, 56 off-rule** (11 at +1111, the RA2Mod step; 8 equal; several
+elites SHORTER than their base). The off-rule pairs are rebalance debt: ranges move through the balance pipeline
+(hard rule 3), never by hand. **Guard:** `tools/audit/audit_elite_range.py`, a lower-only ratchet (`--list` prints the
+pairs).
+
 ### 16.1 The two experience systems
 
 **TD/TS system** (`^GainsExperienceTD` in
@@ -5124,6 +5135,10 @@ grants no conditions, or touches synced state; its enemy observation is now
 fog-limited by the landed phase-6 perception work.
 The situation records use schema version 2 in the same record-only boundary; schema-1 records
 remain valid, and schema 2 adds the published mission intent.
+The mission-card archive (`cameo-ai-missions.jsonl`, schema `mission-card/1`, MC1 — `docs/design/AI_MISSION_CARDS.md`)
+is the third record-only log under the same rule: one line per attempt transition, written by `BotMissionLog` through
+`AiMissionLogWriter`, never read back during a match. Learning from it across matches goes through a profile distilled
+between matches and read once at match start (AI_ARCHITECTURE §6.1), never through the archive itself.
 
 The forward design for bot modules, per-ContentPack AI splitting, the dynamic
 personality manager, the master AI module, and match logging lives in
