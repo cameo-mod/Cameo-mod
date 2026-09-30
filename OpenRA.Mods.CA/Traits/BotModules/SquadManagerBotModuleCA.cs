@@ -274,8 +274,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Ask region-memory routers (IBotRouteThreatRouter) for waypoints that skirt remembered enemy threat (AI_FRANSBOT_RESEARCH.md 6e). Squads fall back to normal routing when no router answers.")]
 		public readonly bool UseRiskRouting = true;
 
-		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership now comes from ArtilleryTypes,",
-			"the role-derived list - this field is ignored. Kept so existing yaml entries load silently.")]
+		[Desc("DEPRECATED (AI_ARCHITECTURE.md 12.4a): artillery membership prefers ArtilleryTypes,",
+			"the role-derived list; this field is the FALLBACK when that list is empty - @classic",
+			"still relies on it. Kept so existing yaml entries load silently.")]
 		public readonly int ArtilleryMinRangeCells = 10;
 
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
@@ -573,6 +574,23 @@ namespace OpenRA.Mods.CA.Traits
 		// ground or air squad even when the list misses it.
 		internal bool IsNavalUnit(Actor a) =>
 			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
+
+		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
+		static readonly BitSet<TargetableType> GroundTargetTypes = new("Ground");
+
+		// An artillery escort is the screen's frontline: an armed ground vehicle that
+		// can hit ground targets. Infantry cannot keep up, AA-only platforms and
+		// support units cannot win the flanker fight, ships cannot screen land guns
+		// (12.4a review: the escort pull must pick fighters, not any-kind units).
+		internal bool CanEscortArtillery(Actor a) =>
+			a.Info.HasTraitInfo<AttackBaseInfo>()
+			&& !a.Info.HasTraitInfo<AircraftInfo>()
+			&& !a.Info.HasTraitInfo<HarvesterInfo>()
+			&& !a.Info.HasTraitInfo<BuildingInfo>()
+			&& !IsNavalUnit(a)
+			&& !Info.SupportUnitTypes.Contains(a.Info.Name)
+			&& !a.GetAllTargetTypes().Overlaps(InfantryTargetTypes)
+			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(GroundTargetTypes));
 
 		// Longest range over the actor's enabled attack traits. Never TraitOrDefault<AttackBase>:
 		// 76 mobile ground actors carry two or more (e.g. AttackFrontal + AttackFollow on
@@ -1349,10 +1367,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var a in newUnits)
 			{
-				// 12.4a naval guard FIRST: a `naval` locomotor ships off to a Naval
+				// 12.4a naval guard FIRST: an armed `naval` locomotor ships off to a Naval
 				// squad before any other branch - a ship missing from NavalUnitsTypes
-				// can never land in a guerrilla/ground squad or the idle pool.
-				if (IsNavalUnit(a))
+				// can never land in a guerrilla/ground squad or the idle pool. Unarmed
+				// ships (wc2 oil tankers, transports) are not squad material: they fall
+				// through to the armed-only idle gate below and stay unmanaged.
+				if (IsNavalUnit(a) && a.Info.HasTraitInfo<AttackBaseInfo>())
 				{
 					var navalSquads = Squads.Where(s => s.Type == SquadCAType.Naval);
 					var matchingNavalSquadFound = false;
@@ -1373,8 +1393,22 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
+				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
+				{
+					// 12.4a: fire-support units form their own squads and never raid.
+					fsSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
+				}
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				{
+					guerrillaForce.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
+				}
 				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
 				{
+					// Guerrilla-before-air keeps the pre-12.4a order: aircraft listed
+					// in both GuerrillaTypes and AirUnitsTypes stay guerrillas, so the
+					// @classic A/B reference does not move (12.4a review item).
 					var airSquads = Squads.Where(s => s.Type == SquadCAType.Air);
 					var matchingAirSquadFound = false;
 
@@ -1396,17 +1430,6 @@ namespace OpenRA.Mods.CA.Traits
 						newAirSquad.NewUnits.Add(a);
 					}
 				}
-				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
-				{
-					// 12.4a: fire-support units form their own squads and never raid.
-					fsSquad.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
-				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
-				{
-					guerrillaForce.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
-				}
 				else if (Info.HarasserTypes.Contains(a.Info.Name))
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
@@ -1420,7 +1443,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					supportSquad.Units.Add(new UnitWposWrapper(a));
 				}
-				else
+				else if (a.Info.HasTraitInfo<AttackBaseInfo>())
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
 
 				activeUnits.Add(a);
@@ -1529,7 +1552,8 @@ namespace OpenRA.Mods.CA.Traits
 				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
 				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
-					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)));
+					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
+					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
 				if (missionTarget != null)
 					attackForce.Target = Target.FromActor(missionTarget);
 				else if (missionFrozenTarget != null)
@@ -1563,10 +1587,13 @@ namespace OpenRA.Mods.CA.Traits
 					if (artilleryParent != null)
 					{
 						fsSquad.Parent = artilleryParent;
+						// Ground vehicles that can hit ground, at most a third of the
+						// assault: the screen must win the flanker fight without
+						// stripping the raid itself (12.4a review item).
 						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
-							attackForce.Units.Count);
+							attackForce.Units.Count / 3);
 						foreach (var escort in attackForce.Units
-							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name))
+							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name) && CanEscortArtillery(u.Actor))
 							.OrderByDescending(u => UnitValue(u.Actor))
 							.Take(escortsNeeded)
 							.ToList())

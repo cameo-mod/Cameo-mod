@@ -957,7 +957,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	class FireSupportUnitsIdleStateCA : GroundStateBaseCA, IState
 	{
 		const int HoldTicks = 250;
+		const int OrderCooldownTicks = 25;
 		int holdTicks;
+		int orderCooldown;
 
 		public void Activate(SquadCA owner) { }
 
@@ -990,6 +992,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// Re-check follow range on a cooldown - issuing AttackMove every tick
+			// resets the unit's current activity before it can close the distance.
+			if (--orderCooldown > 0)
+				return;
+
+			orderCooldown = OrderCooldownTicks;
 			var followRangeSquared = (long)WDist.FromCells(owner.SquadManager.Info.SupportFollowRangeCells).LengthSquared;
 			var parentPos = parent.CenterPosition;
 			foreach (var u in owner.Units)
