@@ -24,6 +24,25 @@ namespace OpenRA.Mods.CA.Traits
 		public int RegionIndex;
 		public int RequiredValue;
 		public int Priority;
+
+		// MissionCard identity: the stable strategic reason, deterministic from
+		// (Type, TargetPlayer, RegionIndex). Providers re-derive missions every
+		// situation rebuild, so re-published instances of the same underlying
+		// mission share an id and attempts accumulate against it.
+		public int MissionId => unchecked(((int)Type * 397) ^ (RegionIndex * 31) ^ ((TargetPlayer?.ClientIndex ?? -1) * 17));
+	}
+
+	// Attempt lifecycle, fransotto's MissionCard vocabulary. Denied precedes a
+	// commit; Recover is a mid-attempt state; Success/Failed are terminal.
+	public enum BotMissionAttemptState { Denied, Committed, Progressing, Stalled, Recover, Success, Failed }
+
+	// Opt-in write-back: providers implementing this receive attempt outcomes the
+	// squad layer resolved. Strategic-layer consumers (dormant shelf, failure
+	// memory — the generalized form of the per-region siege memory) adopt it
+	// without forcing every provider to implement it.
+	public interface IBotMissionOutcomeSink
+	{
+		void MissionAttemptResolved(BotMission mission, int attempt, BotMissionAttemptState state);
 	}
 
 	public sealed class BotMissionAssignment

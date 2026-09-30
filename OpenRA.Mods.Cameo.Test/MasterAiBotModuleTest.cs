@@ -952,5 +952,25 @@ namespace OpenRA.Mods.Cameo.Test
 				SquadManagerBotModuleCA.BestAffordableMission(providers, 0, m => true),
 				Is.Null);
 		}
+
+		[Test]
+		public void MissionIdIsStableAcrossRederivedInstances()
+		{
+			// The same strategic mission re-published by a later DeriveMissions
+			// pass must carry the same id, or attempt lineage fractures.
+			var first = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
+			var second = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8, Priority = 99, RequiredValue = 4000 };
+			Assert.That(second.MissionId, Is.EqualTo(first.MissionId));
+		}
+
+		[Test]
+		public void MissionIdSeparatesDistinctMissions()
+		{
+			var raid8 = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
+			var raid9 = new BotMission { Type = BotMissionType.Raid, RegionIndex = 9 };
+			var defend8 = new BotMission { Type = BotMissionType.Defend, RegionIndex = 8 };
+			Assert.That(raid9.MissionId, Is.Not.EqualTo(raid8.MissionId));
+			Assert.That(defend8.MissionId, Is.Not.EqualTo(raid8.MissionId));
+		}
 	}
 }

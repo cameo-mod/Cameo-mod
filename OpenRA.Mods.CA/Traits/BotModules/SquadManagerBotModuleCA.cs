@@ -499,6 +499,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
+		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
 		IBotUnitRoles unitRoles;
 
@@ -1150,6 +1151,7 @@ namespace OpenRA.Mods.CA.Traits
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
+			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
@@ -1592,18 +1594,52 @@ namespace OpenRA.Mods.CA.Traits
 			return null;
 		}
 
-		void MissionTaken(BotMission mission)
+		// MissionCard lineage (fransotto's model): a MissionId identifies the
+		// strategic reason; every take is a numbered attempt carried by the squad
+		// for its lifetime, so "General -> commander -> actors -> result" resolves
+		// as one grep-able chain in the debug log. Counters persist per match, so
+		// a mission that dies and re-publishes continues the lineage (Attempt 2+).
+		readonly Dictionary<int, int> missionAttemptCounters = new();
+		readonly Dictionary<SquadCA, MissionAttempt> squadMissions = new();
+
+		sealed class MissionAttempt
+		{
+			public BotMission Mission;
+			public int Number;
+		}
+
+		void MissionTaken(BotMission mission, SquadCA taker)
 		{
 			foreach (var provider in missionProviders ?? Array.Empty<IBotMissionProvider>())
 				if ((provider.Missions ?? Array.Empty<BotMission>()).Any(candidate => ReferenceEquals(candidate, mission)))
 				{
 					provider.MissionTaken(mission);
+					var attempt = missionAttemptCounters.GetValueOrDefault(mission.MissionId) + 1;
+					missionAttemptCounters[mission.MissionId] = attempt;
+					squadMissions[taker] = new MissionAttempt { Mission = mission, Number = attempt };
+					ReportMissionAttempt(mission, attempt, BotMissionAttemptState.Committed);
 					return;
 				}
 		}
 
+		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionAttemptState state)
+		{
+			AIUtils.BotDebug("AI ({0}): MISSION {1} ATTEMPT {2} {3} ({4} region {5})",
+				Player.ClientIndex, mission.MissionId, attempt, state.ToString().ToUpperInvariant(), mission.Type, mission.RegionIndex);
+			foreach (var sink in missionOutcomeSinks ?? Array.Empty<IBotMissionOutcomeSink>())
+				sink.MissionAttemptResolved(mission, attempt, state);
+		}
+
+		void ResolveMissionAttempt(SquadCA squad, BotMissionAttemptState state)
+		{
+			if (squadMissions.TryGetValue(squad, out var attempt) && squadMissions.Remove(squad))
+				ReportMissionAttempt(attempt.Mission, attempt.Number, state);
+		}
+
 		void CleanSquads()
 		{
+			foreach (var s in Squads.Where(s => !s.IsValid))
+				ResolveMissionAttempt(s, BotMissionAttemptState.Failed);
 			Squads.RemoveAll(s => !s.IsValid);
 			foreach (var s in Squads)
 			{
@@ -2123,7 +2159,7 @@ namespace OpenRA.Mods.CA.Traits
 						RegionIndex = mission.RegionIndex,
 						Frozen = missionFrozenTarget != null
 					};
-					MissionTaken(mission);
+					MissionTaken(mission, attackForce);
 				}
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
