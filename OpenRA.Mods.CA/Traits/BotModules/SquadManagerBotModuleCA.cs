@@ -264,6 +264,16 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Percent change for ground squads to attack a random priority target rather than the closest enemy.")]
 		public readonly int HighValueTargetPriority = 0;
 
+		[Desc("CA-3 (AI_ARCHITECTURE.md 12.5): target army composition by role, percent of own mobile combat units.",
+			"Production fills the largest deficit against this mix; absent or empty keeps the proportional pick.",
+			"Keys must be combat roles (BotUnitRole.PrimaryRoleOrder); classic carries no mix on purpose -",
+			"verbatim upstream behaviour.")]
+		public readonly Dictionary<string, int> RoleMix = null;
+
+		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
+			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
+		public readonly int RoleMixRoleFloorPct = 5;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -395,6 +405,13 @@ namespace OpenRA.Mods.CA.Traits
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
 				throw new YamlException("SquadValueRandomBonus cannot be combined with squad value ramp bonuses.");
 
+			// A RoleMix key outside the combat taxonomy can never be counted or filled —
+			// fail at load like a predicate typo instead of silently starving the queue.
+			if (RoleMix != null)
+				foreach (var role in RoleMix.Keys)
+					if (!BotUnitRole.CombatRoles.Contains(role))
+						throw new YamlException($"RoleMix key `{role}` is not a combat role (valid: {string.Join(", ", BotUnitRole.PrimaryRoleOrder)}).");
+
 			// Derive support units from weapon metadata: an actor is support only when
 			// EVERY armament it carries heals (negative-damage, ally-valid warhead).
 			// Requiring all armaments excludes hybrids that also fight — the RA2 IFVs,
@@ -465,6 +482,16 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
 		IBotSiegeAdvisor[] siegeAdvisors;
+		IBotUnitRoles unitRoles;
+
+		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
+		// ConditionalTrait, so resolve lazily — at Created its condition may not be
+		// granted yet. Null provider = every roles-driven feature stays off.
+		internal IBotUnitRoles UnitRoles =>
+			unitRoles ??= Player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+
+		// Squad states read the actor->roles map through here (12.7 formation).
+		internal IReadOnlyDictionary<string, HashSet<string>> ActorRoles => UnitRoles?.ActorRoles;
 
 		CPos initialBaseCenter;
 		Actor airStrikeTarget;
