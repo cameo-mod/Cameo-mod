@@ -139,6 +139,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (firstTick)
 			{
+				// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver).
+				botLimits = BotLimitsResolver.Recheck(bot.Player, botLimits, nameof(McvManagerBotModuleCA));
 				DeployMcvs(bot, false);
 				firstTick = false;
 			}
