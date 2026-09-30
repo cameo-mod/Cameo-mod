@@ -1,3 +1,28 @@
+# 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
+
+- Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
+  `SquadManagerBotModuleCA.cs` — kept both blocks (NOVA's AA-coverage
+  machinery + CA-5 helpers); `FindNewUnits` keeps master's
+  naval→air→fire→guerrilla order, `GuerrillaOutranksAir` still
+  doctrine-gated. Verified: 0 errors, 344/344 tests, boot-gate PASS.
+  PR #663 reports MERGEABLE/CLEAN.
+- LC6 extended (`28fd04a69`): `audit_fog_honesty.py` now ratchets
+  enemy-targeting `IgnoreVisibility: true` support-power decisions on
+  the resolved Player at 56 (NOVA's verify finding 1 — engine-side
+  `SupportPowerBotASModule` strikes unobserved enemies; the manifest
+  never counted the yaml flags). Raise = FAIL pending a §19.5 ruling;
+  lower = noted free improvement. Detection only, zero behavior delta.
+- LC7 shipped as draft PR #671 (`devin/ember/lc7-ab-fingerprint`):
+  batch arms fingerprint (mod commit/dirty, engine VERSION, bin DLL
+  digest, ai+all mod yaml digests, map, batch spec) recomputed before
+  every match attempt; drift aborts with `fingerprint_drift` status;
+  `run_league.py` surfaces `cells_aborted`. 29/29 harness tests.
+- fbal-cc classic-vs-classic probe stopped on maintainer order
+  (partial: spawn-1 won all 4 mirrors; Nod 2-0 cross-faction, n too
+  small for a balance read).
+- League-4 nearly drained: hard 2-1 classic (+1 stall), 3-1
+  exploit_rush, 1-3 exploit_turtle; guerrilla cell on final match.
+
 # 2026-09-30 — Devin (EMBER): CA-5 doctrine split — role squads behind `AirDoctrineEnabled`
 
 CA-5 continuation after the merged #648 roles. Implements the §12.8
