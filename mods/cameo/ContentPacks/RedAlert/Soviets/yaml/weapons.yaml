@@ -13349,7 +13349,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 	Warhead@ShieldHit:
 		Duration: 10
 	# W7MAT inline of ra1_soviets_volkov_volkovmagneticweapon
-	Inherits@3: ^TeslaWeapon
+	Inherits@3_w7own: ^TeslaWeapon
 	Inherits@fx_cover: ^Effect_Flame_Heavy
 	ReloadDelay: 30
 	Range: 5660
