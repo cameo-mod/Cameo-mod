@@ -9,6 +9,7 @@
 #endregion
 
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -42,9 +43,9 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void DifficultyInterpolationKeepsExactEndpoints()
 		{
-			Assert.That(DynamicBotInsurance.InterpolateByRank(1, 10, 0, 10), Is.EqualTo(1));
-			Assert.That(DynamicBotInsurance.InterpolateByRank(1, 10, 9, 10), Is.EqualTo(10));
-			Assert.That(DynamicBotInsurance.InterpolateByRank(10, 100, 4, 10), Is.EqualTo(50));
+			Assert.That(BotDifficultyLadder.InterpolateByRank(1, 10, 0, 10), Is.EqualTo(1));
+			Assert.That(BotDifficultyLadder.InterpolateByRank(1, 10, 9, 10), Is.EqualTo(10));
+			Assert.That(BotDifficultyLadder.InterpolateByRank(10, 100, 4, 10), Is.EqualTo(50));
 		}
 
 		[Test]
