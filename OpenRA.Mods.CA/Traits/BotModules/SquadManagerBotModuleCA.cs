@@ -676,43 +676,27 @@ namespace OpenRA.Mods.CA.Traits
 			a.Info.HasTraitInfo<AttackBaseInfo>()
 			&& BotUnitProfiles.Get(World.Map.Rules, a.Info).Weapons.Any(w => w.CanTarget(AirTargetTypes));
 
-		// Fog-honest enemy mix read: mobile enemies visible now plus remembered
-		// (frozen) ones - never what the bot cannot know. Buildings are excluded:
-		// they are targets, not the force the assault must answer.
+		// Fog-honest enemy mix read via the canonical composition provider: the
+		// master AI's fog memory carries remembered mobile combat value by actor
+		// type, buildings already excluded. A caller with no provider (no fog
+		// observation) gets (0, 0) - below the sample floor, so the mixed-army
+		// prior stands and nothing omniscient leaks in.
 		internal (double Air, double Total) ObservedEnemyMix()
 		{
+			var provider = Player.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			if (provider == null || !provider.TryGetEnemyComposition(out var valueByActorType))
+				return (0, 0);
+
 			var air = 0.0;
 			var total = 0.0;
-			foreach (var a in World.Actors)
+			foreach (var (name, value) in valueByActorType)
 			{
-				if (!IsValidEnemyUnit(a) || !IsNotHiddenUnit(a) || a.Info.HasTraitInfo<BuildingInfo>()
-					|| (!a.Info.HasTraitInfo<MobileInfo>() && !a.Info.HasTraitInfo<AircraftInfo>()))
+				if (!World.Map.Rules.Actors.TryGetValue(name, out var info))
 					continue;
 
-				var v = a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
-				total += v;
-				if (a.Info.HasTraitInfo<AircraftInfo>())
-					air += v;
-			}
-
-			var layer = Player.FrozenActorLayer;
-			if (layer != null)
-			{
-				foreach (var fa in layer.FrozenActorsInRegion(World.Map.AllCells))
-				{
-					var info = fa.Info;
-					if (!fa.IsValid || !fa.Visible || fa.Hidden || fa.Owner == null
-						|| Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy
-						|| fa.TargetTypes.IsEmpty || fa.TargetTypes.Overlaps(Info.IgnoredEnemyTargetTypes)
-						|| info.HasTraitInfo<BuildingInfo>()
-						|| (!info.HasTraitInfo<MobileInfo>() && !info.HasTraitInfo<AircraftInfo>()))
-						continue;
-
-					var v = info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
-					total += v;
-					if (info.HasTraitInfo<AircraftInfo>())
-						air += v;
-				}
+				total += value;
+				if (info.HasTraitInfo<AircraftInfo>())
+					air += value;
 			}
 
 			return (air, total);
@@ -1704,22 +1688,8 @@ namespace OpenRA.Mods.CA.Traits
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
-				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
-				{
-					// 12.4a: fire-support units form their own squads and never raid.
-					fsSquad.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
-				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
-				{
-					guerrillaForce.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
-				}
 				else if (Info.AirUnitsTypes.Contains(a.Info.Name))
 				{
-					// Guerrilla-before-air keeps the pre-12.4a order: aircraft listed
-					// in both GuerrillaTypes and AirUnitsTypes stay guerrillas, so the
-					// @classic A/B reference does not move (12.4a review item).
 					var airSquads = Squads.Where(s => s.Type == SquadCAType.Air);
 					var matchingAirSquadFound = false;
 
@@ -1740,6 +1710,17 @@ namespace OpenRA.Mods.CA.Traits
 						newAirSquad.Units.Add(new UnitWposWrapper(a));
 						newAirSquad.NewUnits.Add(a);
 					}
+				}
+				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
+				{
+					// 12.4a: fire-support units form their own squads and never raid.
+					fsSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
+				}
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				{
+					guerrillaForce.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
 				else if (Info.HarasserTypes.Contains(a.Info.Name))
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
