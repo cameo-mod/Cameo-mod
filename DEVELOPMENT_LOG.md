@@ -29,6 +29,35 @@
   Verified live: drift-demo dir prints its tombstone fp, league-4's four
   pre-LC7 batch files print `none recorded`. Tools-only; boot-gate N/A.
 
+# 2026-09-30 (eve2) — Devin (EMBER): mission_story tracks the #691 record split
+
+- Fransotto's boundary landed on master as #691: an attempt exists only
+  from COMMIT; `record_kind` splits mission events
+  (PUBLISHED/DENIED/DORMANT/REOPENED — the shelf) from attempt
+  transitions. `mission_story.py` now renders the mission-level line as
+  `shelf: PUBLISHED@t -> DORMANT@t reason -> REOPENED@t`, counts
+  mission-level DENIED separately from attempt outcomes, and reports
+  never-attempted missions as `shelf_only` (not bugs). Pre-#691 records
+  (no record_kind) still group as attempts — verified on the live
+  mc1-smoke corpus. 9 tests, tools-only.
+
+# 2026-09-30 (eve) — Devin (EMBER): MC2 mission_story.py (ruling lane)
+
+- `tools/ai/mission_story.py`: groups `cameo-ai-missions.jsonl` transitions into
+  game → mission → attempt stories ordered by tick, executor named per line;
+  per-type success-rate table; dangling-attempt report (attempts with no
+  terminal line = ownership bugs, last line names the quiet layer).
+  `--match`/`--mission` filters; `terminal` flag authoritative with the
+  state-name set as fallback.
+- Verified on the real archive (`mc1-smoke`, Claude's #683 ENG smoke,
+  Nuclear Winter): 10 capture missions, 18 attempts, 33% success —
+  `capture:Multi1:oilb:611` shows a contested derrick eating 5 straight
+  engineer attempts; `oilb:611` correctly re-keyed Neutral→Multi1 on
+  enemy capture. Zero dangling attempts (the writer always closes).
+- 7 unit tests pin the read contract (terminal-flag precedence, dormant
+  = no live attempt, executor named in dangling report). Tools-only;
+  boot-gate N/A.
+
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
 - Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
