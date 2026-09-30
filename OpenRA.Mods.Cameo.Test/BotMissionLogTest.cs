@@ -137,6 +137,15 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AnEscortRequestAlwaysClearsTheSquadManagersBar()
+		{
+			// The first flag-on match published 440, 500, 700 and 1000 against a 1500 bar: no escort ever came.
+			Assert.That(EngineerBotModule.EscortRequestValue(440, 1500), Is.EqualTo(1500));
+			Assert.That(EngineerBotModule.EscortRequestValue(2600, 1500), Is.EqualTo(2600));
+			Assert.That(EngineerBotModule.EscortRequestValue(0, 0), Is.EqualTo(1));
+		}
+
+		[Test]
 		public void AnEscortedCaptureWaitsForSuperiority()
 		{
 			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");
