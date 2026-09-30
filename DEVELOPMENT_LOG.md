@@ -1,3 +1,34 @@
+# 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
+
+- `tools/ai/ab_summary.py` gains a `spawn split (pooled, N decided)` line:
+  W/L grouped by `player.home` (the start cell — the physical position),
+  pooled across every bot type, name-fallback for pre-`home` records.
+  Claude's correction stands implemented: `bot_outcomes[].spawn` is the
+  lobby slot, never read for position. 4 new unit tests
+  (`test_ab_summary.py`): cross-bot pooling + swaps, name fallback,
+  draws excluded, slot-vs-home trap. Measured on the machine's full
+  486-record corpus: `90,24` won 68-43 (61%) vs `11,45` on Nuclear
+  Winter — a real positional lean, still small-N per position; the
+  league-4 subset alone was 11-4 (73%).
+- Boot-gate: N/A — tools/py only, zero engine/mods content (same
+  precedent as the LC7 tools commit).
+
+# 2026-09-30 (pm3) — Devin (EMBER): LC7 review items — ab_summary arm fingerprints
+
+- #671 review item: `ab_summary` now audits arm fingerprints. One "arm" =
+  one `batch_results.jsonl`; it prints each arm's fingerprint id (+result
+  count) and FAILS (exit 1) when a single file's real results span more
+  than one fingerprint — the mixed-arm corruption signature LC7 prevents
+  going forward. `fingerprint_drift` tombstones don't count as mixing
+  (they're the abort working as designed); pre-LC7 files report
+  `none recorded (pre-LC7)`. Per-`player.home` split lives on #674
+  (devin/ember/ab-spawn-split) — separate tools PR, merges cleanly.
+- Merged origin/master (post-#663, `7b89bb899`) into this branch;
+  devlog prepend conflict only.
+- 4 new tests (ArmFingerprintSummaryTests): 33/33 harness green.
+  Verified live: drift-demo dir prints its tombstone fp, league-4's four
+  pre-LC7 batch files print `none recorded`. Tools-only; boot-gate N/A.
+
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
 - Merged post-#662 master into ca5 (`c552ecdf0`). One conflict in
@@ -115,6 +146,25 @@ module field (false everywhere → master-classic behaviour unchanged):
 Master behaviour: unchanged — `AirDoctrineEnabled` defaults false and
 nothing sets it. The flag-on A/B is the gate for turning it on per
 personality (§12.10: a phase lands only if it does not lose to master).
+
+# 2026-09-30 — Devin (EMBER): LC7 A/B fingerprint (PR #671, draft)
+
+`run_ai_match_batch.py` now freezes the batch's arms: mod commit +
+scoped dirty-flag, engine VERSION, `engine/bin/OpenRA*.dll` digest
+(mid-batch rebuilds), ai.yaml + ai/*.yaml digest, ALL mods/**/*.yaml
+digest (mod_yaml_sha256 — the league-3 corruption class, where a rules
+edit only ever tripped a boolean dirty flag that cannot tell two dirty
+states apart), map source, and the batch spec. Recomputed before EVERY
+match attempt; any drift records status `fingerprint_drift` +
+per-component was→now in batch_results.jsonl and aborts the batch.
+`--allow-fingerprint-drift` logs and continues. `run_league.py`
+surfaces the abort per-cell and as `cells_aborted` in the aggregate.
+Verified: 29/29 test_ai_batch_harness (8 new fingerprint cases). Tools-
+only — no engine/mods/C# content; boot-gate N/A, recorded per protocol.
+Review caught: engine/VERSION is UTF-16 BOM'd — decoded via BOM detection.
+Live proof: mid-run map edit + forced retry → retry boundary re-fingerprinted,
+`fingerprint_drift` recorded with was→now, batch aborted (`aborted` in
+batch_summary.json). Done-condition met end-to-end.
 
 # 2026-09-29 — Devin (NOVA): protection-release convergence (PR #632) + CA-3 A/B on post-#630 master
 
@@ -14960,3 +15010,28 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
 - Outstanding non-DAWN: `cameo-engine` branch 103 commits behind the pinned
   revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
   live A/B trees stay frozen for their owners.
+
+## 2026-09-30 — CA-2b verdict: BehaviourEnabled LOSES its A/B
+
+Pooled ca2b2+ca2b3 (17 matches/arm, identical pre-#660 base, maximum, both
+orientations, phantom-retry): **ctrl hard 10-7 (58%) vs cand hard 6-11 (35%)**.
+Mirror-faction cells (faction-clean per maintainer ruling): ctrl 5-2 / cand 4-6.
+
+The machinery is verified working — squads form (F1 holds), verdicts compute
+fog-honestly, orders are served. The failure is POLICY: a served retreat
+dissolves the squad; dissolved-squad units re-enter the idle pool, never
+re-mass, and classic's omniscient press snowballs. Cand matches end 23% faster
+(28.8k vs 37.4k ticks). §12.6's commit path presumes artillery-first + tank
+screens the production layer does not deliver (army mix 77% inf / 5% heavy /
+4% arty on the pre-#660 base — pre-#647 rationing).
+
+Decision: `BehaviourEnabled` stays OFF (record-only advisor retained for
+telemetry). Next levers in order: (a) production composition upstream
+(#647 rationing + CA-3 role-mix), (b) CA-2c's SiegeMemoryEnabled as its own
+A/B once the army can actually siege, (c) stand-off→artillery-first policy
+revision when CA-3/CA-4 land.
+
+Also: fbal-cc classic-vs-classic probe stopped per maintainer order
+(rebalance later); 6 records banked before kill: Nod-classic beat Gdi-classic
+on both cross orientations (2-0, thin n) and GDI-mirror spawn1 won all 4 —
+kept as provenance, not a balance claim.

@@ -19,7 +19,7 @@ of that proposal, plus the offer back.
    report from the executor back to the owner. The unit leases (LC1) carry the `MissionId`, so an actor can be traced
    to the reason it is moving.
 3. The same transitions are written as **plain sentences** in `debug.log` ("the General and his commanders", as
-   fransotto describes Fransbot's log) and as records in the situation log. **MC2** turns them into a per-mission story.
+   fransotto describes Fransbot's log) and as records in `cameo-ai-missions.jsonl`, through ONE writer. **MC2** turns them into a per-mission story.
 4. Learning across matches is **OM**, already planned, under AI_ARCHITECTURE §6.1: read at match start, frozen for
    the match, steers only host-local reasoning. fransotto's own rule, *"current information > historical experience"*,
    is the same boundary.
@@ -45,73 +45,72 @@ So the vocabulary is in place; the missing parts are the **ids**, the **states**
 
 ---
 
-## 2. MC1 — the contract
+## 2. MC1 — the contract (ruled 2026-09-30, after three agents built three dialects)
+
+Within hours of this document, NOVA (#681, squad missions), DAWN (#679, the Fransbot broker) and EMBER (a schema
+note) each built or proposed a mission-card format — with four different id schemes and three state sets. DESIGN
+§22 (one implementation per mechanic) applies to formats too, so the coordinator ruled ONE contract; everything
+below is what `OpenRA.Mods.CA/Traits/BotModules/BotMissionLog.cs` implements, and every emitter goes through it.
 
 ### 2.1 Ids
-* **MatchId** = the existing `game_uid` (already in every match record and in the replay metadata).
-* **MissionId** = a per-player integer, allocated by the mission's **owner** (the strategist for Raid/Defend/Secure,
-  `ScoutBotModule` for Recon, the MCV owner for expansion sites, the engineer owner for captures). A mission is
-  **one strategic reason** — "secure resource field 7", "raid the refinery at region 12" — so re-publishing the
-  same reason keeps its id. Identity key: `(type, region or field id, target player)`.
-* **AttemptId** = 1, 2, 3 … within a mission: one per commitment of units. An attempt can fail without deleting
-  the mission.
+* **MatchId** = the existing `game_uid` (every match record and the replay metadata already carry it).
+* **MissionId** = a **string key, deterministic from the strategic reason**, so a mission re-published every
+  situation rebuild keeps its identity without any registry (NOVA's insight — `BotMission` objects are recreated
+  each pass): `raid:<target player>:r<region>`, `capture:<actor type>:<actor id>` (no owner: a building that changes hands is still the same mission), `frans:<MissionAuctionId>`
+  for the Fransbot broker. ⛔ Never a hash, and never a `ClientIndex`: every non-human player carries the HOST's
+  client index (`Player.cs:189`), and the first proposal's XOR hash collided 4,185 times over realistic ranges.
+* **Attempt** = 1, 2, 3 … per MissionId, counted by whoever commits units; `attempt_id` = `<mission_id>|A<n>`.
 
-### 2.2 States (closed set)
-```
-Proposed ──► Denied ──► Dormant ◄─────────────┐
-    │                     │ (situation changed:        │
-    ▼                     ▼  new recon, new value)     │
-Committed ──► Progressing ──► Succeeded               │
-                 │   ▲                                 │
-                 ▼   │                                 │
-              Stalled ─► Recovering                    │
-                 │                                     │
-                 ▼                                     │
-              Failed ─────────────────────────────────┘ (or Abandoned: the reason no longer exists)
-```
-`Denied` = no executor would take it (no units, unreachable, outmatched). `Dormant` keeps the card and its history;
-the owner reconsiders it only when an input it depends on changes (the review's "objective disappears" boundary).
-Every transition carries a **reason** from a closed enum: `no_units`, `unreachable`, `undeployable`, `reserved`,
-`outmatched`, `target_gone`, `timeout`, `stuck`, `superseded`, `lost_units`, `done`.
+### 2.2 Attempt states — fransotto's six, plus two
+`DENIED  COMMITTED  PROGRESSING  STALLED  RECOVER  SUCCESS` (his vocabulary, verbatim) **+ `FAILED`** (the units were
+lost — his list had no terminal loss; NOVA) **+ `RELEASED`** (the executor handed the attempt back without a verdict —
+DAWN's broker release, a dissolved squad, an engineer that went idle). Terminal: `DENIED`, `SUCCESS`, `FAILED`,
+`RELEASED`. **Dormant is not a state**: a mission with no live attempt is dormant, and the next commit simply opens
+attempt n+1 (EMBER's reading of fransotto's model).
 
-### 2.3 The return path
-```csharp
-// Owner side: publishes cards and receives outcomes. Executors never change a card's strategy, only report.
-public interface IBotMissionOutcomeSink
-{
-	void Report(int missionId, int attemptId, BotMissionState state, BotMissionReason reason, int tick);
-}
-```
-* The executor that took an attempt (squad manager, MCV owner, engineer owner, scout) **must** report exactly one
-  terminal state per attempt (`Succeeded`, `Failed`, `Abandoned`) — the LC5 watchdog (not built yet) will assert
-  it, the way it will assert one owner per actor.
-* The **owner decides** what a failure means (retry, dormant, abandon). This is the SiegeEvaluator pattern the
-  review praised, one level up: the executor advises by reporting, the owner decides.
-* LC1 leases gain an optional `MissionId`; an actor's lease therefore answers "which mission is this unit on?".
-* The first consumers, in order: the MCV site (LC3's engine half: `unreachable` / `undeployable` / `reserved`
-  become reasons), the capture target (ENG), the refinery claim (EX-2), the squad raid target (CA-2c's memory).
+**Reasons** (closed set, lowercase): `no_units unreachable undeployable reserved outmatched target_gone timeout stuck
+superseded lost_units done dropped`. A project-private reason carries an `x_` prefix (`x_frans_board_closed`); any
+other spelling is rewritten to `x_invalid_…` by the writer so a dialect is caught, never archived.
+
+### 2.3 One writer, two outputs
+`BotMissionLog.Write(BotMissionRecord)` (CA — both the genericbot stack and the vendored Fransbot can call it):
+1. one plain-text `debug.log` line — `Log.Write`, never `AIUtils.BotDebug`, which only reaches chat and only with
+   the bot-debug setting on;
+2. the record to every `IBotMissionRecordSink` on the World actor — today Cameo's `AiMissionLogWriter`, which appends
+   `cameo-ai-missions.jsonl` (§5) through the existing `AiLogFileAppender`, host-only, record-only (DESIGN §21.1).
+
+The return path to the strategist stays `IBotMissionOutcomeSink` (NOVA's #681): executors report exactly one terminal
+state per attempt, the **owner decides** what it means (retry, dormant, give up) — the SiegeEvaluator pattern one
+level up. That decision half is **LC8** (the dormant shelf in the master AI). LC1 leases will carry the MissionId so
+an actor answers "which mission is this unit on?", and the LC5 watchdog will flag attempts that never end.
 
 ### 2.4 The General's log (fransotto: *"Attack the harvester! — Air: I can't — Sea: I can — General: Sea, do it!"*)
-One `debug.log` line per transition, readable without tooling, in the order the decision flows:
+The exact format, with illustrative ids and ticks (the engineer owner, `EngineerBotModule`, is the first consumer):
 ```
-AI (1) General   M42 RAID harvester field 7 (region 12) PROPOSED  value 3200  [Rush 0.71, margin +0.08]
-AI (1) Squads    M42/A1 DENIED     no_units (idle value 1400 < 3200)
-AI (1) General   M42 DORMANT       until idle value >= 3200 or new recon of region 12
-AI (1) Squads    M42/A2 COMMITTED  squad 5, 11 units, value 3650
-AI (1) Squads    M42/A2 STALLED    stuck at chokepoint (region 9) 250 ticks
-AI (1) Squads    M42/A2 FAILED     lost_units 8 of 11
-AI (1) General   M42 DORMANT       outmatched at region 9; siege memory +1
+AI Multi0: MISSION capture:oilb:526 ATTEMPT 1 COMMITTED by=Engineers tick=2561
+AI Multi0: MISSION capture:oilb:526 ATTEMPT 1 SUCCESS reason=done by=Engineers tick=2790
+AI Multi0: MISSION capture:td_gdi_constructionyard:412 ATTEMPT 1 FAILED reason=lost_units by=Engineers tick=6120
+AI Multi0: MISSION capture:td_gdi_constructionyard:412 ATTEMPT 2 RELEASED reason=stuck by=Engineers tick=7400
 ```
-When "then nothing happens", the last line names the layer that went quiet — which is fransotto's point about
-finding the bug in the right commander file.
+**First live match** (hard vs classic, td_gdi, Nuclear Winter, 2026-09-30): 18 capture attempts, **every one reached a
+terminal state** (6 SUCCESS, 11 FAILED lost_units, 1 RELEASED target_gone). One enemy derrick took **five engineers
+in a row**, two of them at once — so the engineer owner now sends one engineer per target (`MaxEngineersPerTarget: 1`)
+and rests a mission after two consecutive losses (`CaptureFailuresBeforeDormant: 2`, `CaptureDormantTicks: 3000`,
+logged `MISSION <id> DORMANT until tick N`) — fransotto's dormant shelf, owned by the module that both chooses and
+executes captures. Both ship OFF (0) until their A/B (AI_MASTER_PLAN §1.2 step 6); the candidate sets 1 and 2. For
+missions the master AI chooses and squads execute, the shelf is LC8.
 
-The same transitions go into the situation log as records (**schema 3**, record-only, DESIGN §21.1 unchanged).
+`grep "MISSION <id>"` tells one mission's whole story; when "then nothing happens", the last line names the layer
+that went quiet — fransotto's point about finding the bug in the right commander file. Emitters, in order:
+engineer owner (built, MC1), squad raids/defends (NOVA #681, switching to the writer), Fransbot broker (DAWN #679),
+MCV sites (LC3's engine half), refinery claims (EX-2).
 
 ---
 
 ## 3. MC2 — the story tool
 
-`tools/ai/mission_story.py <support dir> [--match <game_uid>] [--mission 42]` prints each mission as a short story
+`tools/ai/mission_story.py <support dir> [--match <game_uid>] [--mission <id>]` reads `Logs/cameo-ai-missions.jsonl`
+(no new situation-log schema) and prints each mission as a short story
 (proposal → attempts → outcome, with ticks as game time), the per-type success rate, and the missions that ended
 **without** a terminal state (the ownership bugs). It correlates with the replay by `game_uid` and tick; the
 replay's own metadata comes from `OpenRA.Utility.exe cameo --replay-metadata <file.orarep>` (the route fransotto
@@ -143,29 +142,22 @@ is not.
 
 ## 5. MC3 — what to share with Fransbot (the offer)
 
-**Share the format, not the brain.** A versioned JSON Schema, `docs/design/mission_card.schema.json`, that both
-projects write and both projects' tools read:
+**Share the format, not the brain.** One JSON object per attempt transition, append-only, one file per support dir
+(`Logs/cameo-ai-missions.jsonl`) — EMBER's per-transition shape: crash-safe to append, and a "card" is simply the
+fold of one `mission_id`'s lines, which the story tool (MC2) does. The shape `AiMissionLogWriter` writes (values illustrative):
 
 ```json
-{
-  "schema": "mission-card/1",
-  "match_id": "<game_uid>", "map_uid": "…", "player": "Multi0", "faction": "td_gdi", "bot": "hard",
-  "mission_id": 42, "type": "raid", "owner": "General",
-  "target": { "kind": "economy", "cell": "61,33", "region": 12, "actor_type": "harvester" },
-  "context": { "tick": 18200, "own_value": 3650, "enemy_estimate": 2900, "confidence": 0.6, "eta_ticks": 900 },
-  "attempts": [
-    { "attempt_id": 1, "executor": "Squads", "states": [ ["proposed", 18200, null], ["denied", 18210, "no_units"] ] },
-    { "attempt_id": 2, "executor": "Squads", "units": 11,
-      "states": [ ["committed", 20400, null], ["stalled", 21100, "stuck"], ["failed", 22900, "lost_units"] ],
-      "losses": 8, "kills": 3 }
-  ],
-  "outcome": { "state": "dormant", "reason": "outmatched" }
-}
+{"schema":"mission-card/1","recorded_utc":"2026-09-30T12:00:00.0000000Z","game_uid":"…","map_uid":"…",
+ "map_title":"A Nuclear Winter","player":"Multi0","faction":"td_gdi","bot":"hard",
+ "mission_id":"capture:oilb:526","attempt_id":"capture:oilb:526|A1","attempt":1,
+ "state":"SUCCESS","terminal":true,"reason":"done","by":"Engineers","tick":2790,
+ "type":"capture","target_cell":"61,33","units":1}
 ```
 
-* The **states and reasons** above are the shared vocabulary; each project may add private reasons under an
-  `x_` prefix (`x_fransbot_bid_lost`), which the other's tools pass through.
-* **Archive:** one JSONL file per match (`<support dir>/Logs/mission-cards-<game_uid>.jsonl`), local, append-only.
+* Required: `schema game_uid player mission_id attempt state terminal by tick`. Optional context (`type region
+  target_cell units value reason faction bot map_*`) is omitted when unknown, never written as null.
+* The **states and reasons** of §2.2 are the shared vocabulary; private reasons use the `x_` prefix, which the other
+  project's tools pass through.
 * **Versioning:** `schema` is `mission-card/<major>`; a reader rejects an unknown major and ignores unknown fields.
 * **Replay correlation:** `match_id` + `tick` (+ the replay metadata) — no replay parser is needed for this.
 * Cameo will put the schema and `mission_story.py` in this repository under GPLv3; Fransbot can take them with a
@@ -178,8 +170,8 @@ projects write and both projects' tools read:
 
 | id | work | needs | done when |
 |---|---|---|---|
-| **MC1** | ids + states + `IBotMissionOutcomeSink` + lease `MissionId` + the General's log lines; first consumers MCV site, capture, refinery claim, squad raid | LC1, LC8 | a smoke match's `debug.log` tells every mission's story end to end, and LC5 finds no attempt without a terminal state |
-| **MC2** | `mission_story.py` + situation-log schema 3 | MC1 | one Nuclear Winter batch summarised per mission type (success rate, median attempts, top failure reasons) |
+| **MC1** | ids + states + one writer (`BotMissionLog`, `AiMissionLogWriter`) + the General's log lines; first consumer the engineer owner (built 2026-09-30), then squad raids (#681), the Fransbot broker (#679), MCV sites, refinery claims; lease `MissionId` | LC1 | a smoke match's `debug.log` tells every mission's story end to end, and LC5 finds no attempt without a terminal state |
+| **MC2** | `mission_story.py` over `cameo-ai-missions.jsonl` (owner: EMBER, the A/B-tooling lane) | MC1 | one Nuclear Winter batch summarised per mission type (success rate, median attempts, top failure reasons) |
 | **MC3** | `mission_card.schema.json`, the JSONL archive, the offer to fransotto | MC1 | the schema validates Cameo's archive; fransotto has the link |
 | (OM) | reads a distilled per-faction profile at match start (§6.1) — mission outcomes become its input | MC2, CA-1b | as in AI_DEEP_RESEARCH §6.1 |
 

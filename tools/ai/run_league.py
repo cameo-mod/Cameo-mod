@@ -103,6 +103,10 @@ def cell_summary(cell_dir: pathlib.Path) -> dict | None:
         "died": summary.get("died", 0),
         "norecord": summary.get("norecord", 0),
         "new_exceptions": summary.get("new_exceptions") or [],
+        # LC7: a batch that aborted on fingerprint drift says so here, so the
+        # league aggregate surfaces "arms changed mid-cell" instead of the
+        # cell just reading as quietly incomplete.
+        "aborted": summary.get("aborted"),
     }
 
 
@@ -126,6 +130,8 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     acc["died"] += data["died"]
     acc["norecord"] += data["norecord"]
     acc["exceptions"] += data["new_exceptions"]
+    if data["aborted"]:
+        acc["cells_aborted"].append(f"{cell['name']} ({data['aborted']})")
 
     results_path = cell_dir / "batch_results.jsonl"
     if not results_path.is_file():
@@ -168,6 +174,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "norecord": 0,
         "exceptions": [],
         "cells_missing": [],
+        "cells_aborted": [],
     }
     for cell in league_cells(spec):
         name = f"{spec['candidate']}_vs_{cell['member']}__{cell['faction']}__{pathlib.Path(cell['map']).stem}"
@@ -204,6 +211,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "norecord": acc["norecord"],
         "exceptions": acc["exceptions"],
         "cells_missing": acc["cells_missing"],
+        "cells_aborted": acc["cells_aborted"],
     }
 
 
@@ -219,6 +227,8 @@ def print_summary(summary: dict) -> None:
               f"(wr {m['winrate']}, wilson95 {m['wilson95']})")
     if summary["cells_missing"]:
         print(f"  MISSING CELLS: {summary['cells_missing']}")
+    if summary["cells_aborted"]:
+        print(f"  ABORTED CELLS: {summary['cells_aborted']}")
     bad = {k: summary[k] for k in ("stalled", "timed_out", "died", "norecord") if summary[k]}
     if bad or summary["exceptions"]:
         print(f"  anomalies: {bad or '{}'} exceptions={summary['exceptions'] or 'none'}")

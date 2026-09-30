@@ -5124,6 +5124,10 @@ grants no conditions, or touches synced state; its enemy observation is now
 fog-limited by the landed phase-6 perception work.
 The situation records use schema version 2 in the same record-only boundary; schema-1 records
 remain valid, and schema 2 adds the published mission intent.
+The mission-card archive (`cameo-ai-missions.jsonl`, schema `mission-card/1`, MC1 — `docs/design/AI_MISSION_CARDS.md`)
+is the third record-only log under the same rule: one line per attempt transition, written by `BotMissionLog` through
+`AiMissionLogWriter`, never read back during a match. Learning from it across matches goes through a profile distilled
+between matches and read once at match start (AI_ARCHITECTURE §6.1), never through the archive itself.
 
 The forward design for bot modules, per-ContentPack AI splitting, the dynamic
 personality manager, the master AI module, and match logging lives in
