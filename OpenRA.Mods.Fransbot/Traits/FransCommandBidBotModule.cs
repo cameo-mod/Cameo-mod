@@ -442,6 +442,19 @@ namespace OpenRA.Mods.Common.Traits
 			return n;
 		}
 
+		// Shared-vocabulary ruling (coordinator, PR #679): attempt states come from the pinned set
+		// DENIED/COMMITTED/PROGRESSING/STALLED/RECOVER/SUCCESS/FAILED/RELEASED; project-specific
+		// reasons ride as x_frans_<slug>.
+		static string XFransReason(string reason)
+		{
+			if (string.IsNullOrWhiteSpace(reason))
+				return "x_frans_release";
+			var slug = new string(reason.ToLowerInvariant().Select(c => char.IsLetterOrDigit(c) ? c : '_').ToArray()).Trim('_');
+			while (slug.Contains("__"))
+				slug = slug.Replace("__", "_");
+			return slug.Length > 80 ? "x_frans_" + slug.Substring(0, 80) : "x_frans_" + slug;
+		}
+
 		public void SubmitMissionBid(FransMission mission, FransCommanderBidReport report)
 		{
 			if (report.Commander == FransCommanderKind.Transport || mission.TargetActorId == 0 ||
@@ -796,7 +809,7 @@ namespace OpenRA.Mods.Common.Traits
 				InvalidateMissionBidAvailabilityIndex();
 				FransBotLog.BotDebug(world,
 					"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} RELEASED by {3}/{4} reason={5}.",
-					player, auction.MissionId, auction.AttemptNumber, commander, bidderKey, reason);
+					player, auction.MissionId, auction.AttemptNumber, commander, bidderKey, XFransReason(reason));
 				if (auction.ActiveMissions.Count == 0)
 				{
 					auction.OpenedWorldTick = world.WorldTick;
@@ -878,7 +891,7 @@ namespace OpenRA.Mods.Common.Traits
 								"{0}: [DEFEND RELEASE] mission={1} representative={2} authoritativeIncident=Inactive reason=General incident lease ended; Broker releases {3}/{4}.",
 								player, auction.MissionId, auction.TargetActorId, active.Commander, active.BidderKey);
 						FransBotLog.BotDebug(world,
-							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} ENDED reason=incident-lease-ended actives={3}.",
+							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} RELEASED reason=target_gone actives={3}.",
 							player, auction.MissionId, auction.AttemptNumber, auction.ActiveMissions.Count);
 						auctions.Remove(pair.Key);
 						InvalidateMissionBidAvailabilityIndex();
@@ -916,7 +929,7 @@ namespace OpenRA.Mods.Common.Traits
 					// auction closing after its committed attempt released is no new attempt.
 					if (auction.Bids.Count > 0 || world.WorldTick - auction.OpenedWorldTick >= Info.BidWindowTicks)
 						FransBotLog.BotDebug(world,
-							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=mission-board-closed bids={3} window-open-ticks={4}.",
+							"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=x_frans_board_closed bids={3} window-open-ticks={4}.",
 							player, auction.MissionId, NextMissionAttempt(pair.Key), auction.Bids.Count,
 							world.WorldTick - auction.OpenedWorldTick);
 					auctions.Remove(pair.Key);
@@ -984,7 +997,7 @@ namespace OpenRA.Mods.Common.Traits
 					"{0}: MISSION BROKER target {1} changes pending MissionType {2} -> {3}; clears {4} stale bids and restarts the bid window. No bid may cross MissionType identity.",
 					player, mission.TargetActorId, previousType, mission.Type, staleBidCount);
 				FransBotLog.BotDebug(world,
-					"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=missiontype-changed ({3} -> {4}).",
+					"{0}: MISSION BROKER MISSION {1} ATTEMPT {2} DENIED reason=x_frans_missiontype_changed ({3} -> {4}).",
 					player, auction.MissionId, NextMissionAttempt(auction.MissionId), previousType, mission.Type);
 			}
 
