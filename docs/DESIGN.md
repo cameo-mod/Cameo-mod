@@ -5008,6 +5008,79 @@ Design: `docs/design/AI_DEEP_RESEARCH.md` §6–§8.
   logs with an LLM and propose tuning changes; nothing is applied without human review and an A/B.
   No LLM or network call ever runs in the game.
 
+### 19.3 One bot module per decision: merge duplicates, never run them side by side (maintainer 2026-09-30) — binding
+
+*"When there are multiple bot modules from different sources that basically do the same thing, only use the
+better version, and if both versions have something the other one doesn't, merge them together and pick the
+best from both. There should only be one bot module per type and no competing duplicates."*
+
+* **One module per decision.** A bot type loads exactly one module for each decision (repair, harvesting,
+  MCV deployment, support powers, production, squads, …), whichever parent it came from (OpenRA, RV/AS, CA,
+  Crystallized Nexus, Fransbot, Cameo). This extends `AI_ARCHITECTURE.md` §10.1 ("one authority per
+  decision") from *writers of the same state* to *copies of the same module*.
+* **The better one wins; if each has something the other lacks, merge.** Read every copy, list what each
+  does that the others do not, and build ONE module holding the best of all of them. The merged module
+  replaces the copies for the Frankenstein bot (`genericbot`); it never runs beside them.
+* **Why:** two copies answering the same event issue orders that fight each other. The case that set this
+  rule: `BuildingRepairBotModule` (OpenRA) and `BuildingRepairBotModuleCA` both answered the same hit, and
+  because `RepairBuilding` is a toggle the second order switched the repair back off (AI_SYNTHESIS §7.3).
+* **How to apply:** step 1 of the harvest pipeline (`AI_MASTER_PLAN.md` §1.2) names the current owner
+  before anything is ported; a harvested module *replaces* or *feeds* that owner. The module map
+  (`tools/ai/ai_module_map.py`) is where duplicates show up.
+* **Parents keep updating, and the merge follows them.** The parent copies stay in the tree verbatim
+  (`classic` runs them), so CA upstream syncs (`ca_vendor_sync.py`) and engine pins keep landing in them as
+  before. The merged module is a separate file and does not inherit those fixes by itself:
+  `tools/audit/merged_bot_modules.json` records each parent's content hash at merge time, and
+  `audit_merged_bot_modules.py` (in `run_all.sh`) FAILS when a parent changes. Port the change into the
+  merged module (or rule it irrelevant in the PR), then `--write`. Register every new merge there.
+* **`classic`** is the A/B reference and keeps its historical stack unchanged (`AI_MASTER_PLAN.md` §5);
+  the rule governs every bot the player can face as the Frankenstein bot.
+
+### 19.4 Bot modules held for content that is coming (2026-09-30) — binding
+
+Engine modules that Cameo compiles but does not load, and what to do with each. Load one only together with
+the content it serves, and only as the ONE owner of its decision (§19.3).
+
+* **`SharedCargoBotModule` (`OpenRA.Mods.AS`) — for the Generals factions' GLA Tunnel Network.** It drives the
+  bot's vehicles into a tunnel network: with `SharedCargo`, every tunnel of one player shares one cargo hold,
+  so a unit that enters one tunnel can leave from any other. Generals Alpha uses it for the GLA Tunnel Network
+  (`mods/gen/rules/player/ai.yaml`, `RequiresCondition: enable-any-ai && has-tunnel`, `Transports:` the tunnel
+  network variants, `Passengers:` GLA/USA/China vehicles), Shattered Paradise for the Mutant tunnel vents.
+  Cameo's `gltunnel` (`rules/generals.yaml`) is today only a defence turret, not buildable (`~disabled`) and
+  without `SharedCargo`. **When the Generals factions return** (kmoney is bringing them back, GLA included;
+  that work may be in a private repository): give the Tunnel Network `SharedCargo`, its passengers
+  `SharedPassenger`, add a `HasTunnel` prerequisite and load `SharedCargoBotModule` behind a `has-tunnel`
+  condition for `genericbot`, with its transports and passengers taken from roles/tags (§2.9 empty ai.yaml),
+  never an id list.
+* **`BevManagerBotModule` (`OpenRA.Mods.AS`) — do not load.** A trimmed copy of OpenRA's old MCV manager: it
+  moves idle "base expansion vehicles" (a vehicle that deploys into a building) near the base and deploys
+  them. That decision is owned by `McvExpansionManagerBotModule`, whose `McvTypes` already covers Japan's
+  nanocores and the Yuri slave miner; loading both would create two owners. Anything it does better is
+  merged into the MCV owner instead (EX in `AI_MASTER_PLAN.md` §3).
+
+### 19.5 Fog honesty: two omniscient modules — engineer captures and MCV-recovery crates (maintainer 2026-09-30) — binding
+
+*"There is only one omniscient bot module allowed and it's the engineer's capture manager — the manager that lets
+the engineer go around enemies and capture their high-value buildings like the construction yard or tech centres.
+Without omniscient behaviour this module would be very useless because they would just suicide their engineer
+into the enemy army."*
+
+*Same day, second exception: "Picking up the crates when they have lost their MCV should always be omniscient."*
+
+* **Exception 1, `CaptureManagerBotModuleCA`** may see through fog (`CheckCaptureTargetsForVisibility: false`):
+  it needs the enemy's positions to route engineers around the army to the construction yard, tech centres and
+  the other `PriorityCapturableActorTypes`.
+* **Exception 2, `CratePickupBotModule`** (`CheckTargetsForVisibility: false`): a bot that has lost its MCV
+  must find a crate anywhere on the map to get one back.
+* **Every other module of the Frankenstein bot (`genericbot`) is fog-honest:** it acts on what the bot has seen
+  (own actors, `Shroud.IsVisible`, `CanBeViewedByPlayer`, frozen/fog memory), never on an enumeration of enemy
+  actors it cannot see, and never sets a visibility switch (`Check…Visibility: false`,
+  `UseFoggedObservation: false`) off.
+* **`classic`** stays the omniscient A/B reference (the Nuclear Winter gate is fog-blind Frankenstein vs
+  omniscient `classic`).
+* **Guard:** `tools/audit/audit_fog_honesty.py` fails when a `genericbot` module switches a visibility check off
+  (only these two are allowed, `ALLOWED_OMNISCIENT`), and its manifest ratchet makes every new world enumeration a reviewed act.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on

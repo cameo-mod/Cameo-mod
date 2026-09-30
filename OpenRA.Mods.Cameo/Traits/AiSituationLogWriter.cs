@@ -253,6 +253,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "attacks_launched", situation.AttacksLaunched);
 			AiMatchLogWriter.AppendNumber(builder, "first_attack_tick", situation.FirstAttackTick);
 			AiMatchLogWriter.AppendNumber(builder, "attacks_per_game_min", situation.AttacksPerGameMin);
+
+			// RV1 repair-owner telemetry (cumulative).
+			AiMatchLogWriter.AppendNumber(builder, "repair_orders", situation.RepairOrders);
+			AiMatchLogWriter.AppendNumber(builder, "repair_sweep_orders", situation.RepairSweepOrders);
+			AiMatchLogWriter.AppendNumber(builder, "repair_toggles_avoided", situation.RepairTogglesAvoided);
 			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 

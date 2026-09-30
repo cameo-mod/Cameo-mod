@@ -29,8 +29,8 @@
 3. **Research status (§2):** of the research round's ten headline changes, **1 is done, 4 are
    partial, 5 are not started**. Of the twelve "beat the best humans" items, **0 are done, 9 are
    partial, 3 are not started**. The combined-arms phases are mostly partial or in flight.
-4. **What is left:** 40 work items (§3), **~850 agent-hours expected (≈170 sessions of 5 h)**,
-   470 h if everything goes well and 1,420 h if everything goes badly, plus **34 A/B gates**
+4. **What is left:** 41 work items (§3), **~860 agent-hours expected (≈170 sessions of 5 h)**,
+   470 h if everything goes well and 1,430 h if everything goes badly, plus **35 A/B gates**
    worth 60–120 hours of match compute on this machine.
 5. **Calendar:** with four agents in parallel that is ~43 sessions each, **about 3–6 weeks** of
    fleet time at 1–2 sessions per agent per day. The real limits are A/B compute (one shared machine) and the order of the critical path
@@ -48,7 +48,7 @@
 
 | Parent | How its code reaches Cameo | Harvested so far (measured 2026-09-30) | Its best, still unharvested parts |
 |---|---|---|---|
-| **OpenRA** (engine `OpenRA.Mods.Common` bot modules) | the engine pin (`mod.config`) | the base of the stack: harvester, support powers, repair, `McvExpansionManager` (+ the EX-3 site hook, `d5d8b2a685`) | unloaded: `BevManager`, `SharedCargo`, `CncEngineerManager`; **bug:** `BuildingRepairBotModule` and `…CA` both run for the same bots (the repair toggle cancels itself, AI_SYNTHESIS §7.3) |
+| **OpenRA** (engine `OpenRA.Mods.Common` bot modules) | the engine pin (`mod.config`) | the base of the stack: harvester, support powers, repair, `McvExpansionManager` (+ the EX-3 site hook, `d5d8b2a685`) | unloaded, evaluated (RV1): `BevManager` (base-expansion vehicles: the decision EX and `McvExpansionManager` own, so merged into the MCV owner if ever needed, never loaded beside it), `SharedCargo` (for the returning Generals factions' GLA Tunnel Network, DESIGN §19.4). `CncEngineerManager` **is** loaded (`genericbot && !easiestbot`). The double repair owner is fixed (RV1): `genericbot` runs the merged `BaseRepairBotModule` (DESIGN §19.3); `SupportPowerBotModule` + `SupportPowerBotASModule` are the next duplicate (RV2) |
 | **Romanov's Vengeance** (engine fork + `OpenRA.Mods.AS`) | the engine pin; RV features merged into the CA copies | guerrilla squads, stuck-kick / make-way, base expansion fields: **65 protected symbols** | — (merged) |
 | **Combined Arms** (`OpenRA.Mods.CA`) | hand copy, `audit_ca_drift` + `ca_vendor_sync` | squad manager + states, base/unit builders, compositions, fuzzy attack-or-flee | **upstream drift not yet synced:** "Updated AI routing", "harasser squads", "AI updates" (2025-08), air fixes (F2) |
 | **Crystallized Nexus** (GPLv3, `crystallized-nexus` `30cf70a`, unchanged upstream) | port by module | `CombatAnalysisBotModule` (code); staging, observer-gated artillery, priority tags (ideas) | **`CNTacticalMap`** (chokepoints and doors from the pathfinder graph → ZG), wave and pincer attacks, garrison, repair manager, bridge repair, cliff demolition, deploy, veinhole assault, stealth / subterranean / transport states |
@@ -59,7 +59,7 @@
 
 1. **Map it to a layer** in AI_SYNTHESIS §7.2's table, and name the Cameo owner of that decision.
    **One owner per decision** (AI_ARCHITECTURE §10.1): a harvested module *replaces* or *feeds* the
-   current owner, never runs beside it. The double repair owner shows what happens otherwise.
+   current owner, never runs beside it. The double repair owner (fixed in RV1) showed what happens otherwise.
 2. **Pick the best-of by reading the code** of every parent that has the layer. Record the pick and
    the reason in §7.2 before porting.
 3. **Port under Cameo's contracts:**
@@ -195,7 +195,7 @@ agent leaves.
 | TC | Team Commander + 2v2 harness | DAWN | UT | 20 | 32 | 56 | 34 |
 | H13 | beat-humans list §13: power windows, superweapon dispersal, veterans, vision posts, human rows, ratings, watchdogs | all | UT, MI | 24 | 40 | 70 | 42 |
 
-**Parent harvest (AI_SYNTHESIS §7.2)**, expected 174 h
+**Parent harvest (AI_SYNTHESIS §7.2)**, expected 181 h
 
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
@@ -206,7 +206,8 @@ agent leaves.
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |
 | CN2 | CN garrison + repair manager | DAWN | — | 6 | 10 | 18 | 11 |
 | CN3 | CN bridge repair, cliff demolition, deploy, veinhole assault, stealth/subterranean/transport states | DAWN | — | 16 | 28 | 50 | 30 |
-| RV1 | RV/OpenRA unloaded modules: evaluate BevManager, SharedCargo, CncEngineer; fix the double repair owner | Claude | — | 4 | 8 | 14 | 8 |
+| RV1 | **done 2026-09-30:** `genericbot` runs `BaseRepairBotModule`, OpenRA + CA repair merged (DESIGN §19.3; classic keeps both); BevManager and SharedCargo held for content (DESIGN §19.4); CncEngineer already loaded (§1.1) | Claude | — | 4 | 8 | 14 | 8 |
+| RV2 | merge `SupportPowerBotModule` (OpenRA, 9 powers, no condition: also runs for `fransbot`) into `SupportPowerBotASModule` (210 powers); the WC2 Blizzard and Death and Decay are in both today. Then review the 30 world-enumeration sites `audit_fog_honesty` began counting on 2026-09-30 (`ActorsWithTrait`) against DESIGN §19.5 | Claude | — | 3 | 6 | 12 | 7 |
 
 **Learning and feel (AI_ARCHITECTURE §6.4, AI_SYNTHESIS §5)**, expected 127 h
 
@@ -234,9 +235,9 @@ agent leaves.
 
 | | expected | range (all go well … all go badly) |
 |---|--:|---|
-| agent work, 40 items | **~850 h ≈ 170 sessions** | 470 h … 1,420 h |
-| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~210 h ≈ 43 sessions | 120 h … 355 h |
-| A/B gates | **34** | — |
+| agent work, 41 items | **~860 h ≈ 170 sessions** | 470 h … 1,430 h |
+| per agent, four in parallel (Claude, NOVA, EMBER, DAWN) | ~215 h ≈ 43 sessions | 120 h … 360 h |
+| A/B gates | **35** | — |
 | A/B compute: 16 matches per gate, 20–40 min per match at maximum on this machine, 3 batches in parallel | **60–120 h of wall-clock** | more when other agents' batches share the machine |
 
 Read the range, not the midpoint: the items are correlated (a slow UT delays DI, TC and §13), so the
@@ -252,14 +253,14 @@ real spread is closer to the O…P columns than the statistical ±. These are es
 3. **The balance freeze.** Learning (L1, L3–L5) can be built now, but serious training waits for the
    frozen balance (DESIGN §19.2). A rebalance invalidates what was learned (the fingerprints, §6.4).
 4. **Fleet availability.** The Devin agents are booked until ~2026-10-22: 22 days. At 1–2 sessions
-   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~323 h) with margin; all
-   851 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
+   per agent per day, four agents deliver 440–880 h. That covers waves 1–3 (~330 h) with margin; all
+   858 h fit only at the fast end, and only if the A/B machine keeps up. Plan the rest past that date.
 
 ### 4.3 The waves (the order the fleet works in)
 
 | Wave | Goal | Items | Expected |
 |---|---|---|--:|
-| **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, DF A/B, CA-1 | ~67 h |
+| **1: fair and fast to measure** | every tier on the line, A/B throughput, CA synced, known bugs fixed | F1, F2, F3, RV1, RV2, DF A/B, CA-1 | ~74 h |
 | **2: win the fights** (the measured loss mode: fights traded 2:1) | siege, role mix, formation, air, scouting | CA-2, CA-3, CA-4, CA-5, CA-6, CP | ~114 h |
 | **3: one brain on a real map** | CN chokepoints, influence, the utility strategist, micro | ZG, IM, UT, MI | ~142 h |
 | **4: economy, expansion, map-wide play** | the rest of EX and the leads, Fransbot island/transports/SpecOps/sea/support, CN waves and utilities | EX, PL, FB1–FB4, CN1–CN3, §2.9 (F4) | ~257 h |
@@ -293,7 +294,7 @@ Waves overlap: a lane moves to the next wave as soon as its own items land.
 
 | Risk | Handling |
 |---|---|
-| Two owners for one decision (as with the double repair module today) | §1.2 step 1; the module map (`ai_module_map.py`) shows providers and consumers; RV1 fixes the known case |
+| Two owners for one decision (as with the double repair module, fixed in RV1) | DESIGN §19.3 (one module per decision, merge duplicates); §1.2 step 1; the module map (`ai_module_map.py`) shows providers and consumers; RV2 fixes the support-power pair |
 | A harvested module cheats (enumerates the world) | `audit_fog_honesty` manifest; every new site reviewed |
 | A CA sync drops a merged feature | `audit_ai_frankenstein` (140 + protected symbols) |
 | An engine change reverts the bleed sync | LESSONS_LEARNED "The pinned engine commit is NOT on `cameo-engine`"; the branch now equals the pin |

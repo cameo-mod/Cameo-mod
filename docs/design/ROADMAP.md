@@ -111,7 +111,7 @@ each phase shippable on its own. §11 reconciles the five-agent research round: 
 what was rejected as unsourced, and the amendments it made to the target score, the log schema and
 the fog sequencing.
 
-- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 40 items, ~850 agent-hours, 34 A/B gates, six waves). The lines below keep the per-phase detail.
+- ⭐ **The bot's ordered queue, measured status and effort estimate: [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md)** (2026-09-30: 41 items, ~860 agent-hours, 35 A/B gates, six waves). The lines below keep the per-phase detail.
 - [ ] **Combined arms — maintainer order 2026-09-28, [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md) §12.**
   Each phase: telemetry first, behaviour behind a yaml switch, then a Nuclear Winter A/B
   against the current master (≥ 8 matches, both spawns); lands only if it does not lose.

@@ -81,6 +81,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal long EnemyEconValueDestroyedWindow, EnemyEconValueDestroyedTotal, AttacksPerGameMin;
 		internal int AttacksLaunched, FirstAttackTick = -1;
 
+		// RV1 (AI_MASTER_PLAN §3, DESIGN §19.3), cumulative: repair orders the one repair owner sent on a hit and
+		// from its sweep, and the hits where master's second repair module would have toggled a repair back OFF.
+		internal int RepairOrders, RepairSweepOrders, RepairTogglesAvoided;
+
 		// Phase DF step 1 (AI_DEEP_RESEARCH.md §14), record-only: the enemy groups seen this snapshot, heaviest
 		// first, with their tracked velocity and, when moving, the own asset they head for and when.
 		internal List<(BotThreatTracker.Group Group, BotThreatTracker.Prediction? Prediction)> Threats = new();
@@ -698,6 +702,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				attacksLaunched += sm.OffensiveSquadsLaunched;
 			}
 
+			int repairOrders = 0, repairSweepOrders = 0, repairTogglesAvoided = 0;
+			foreach (var rm in player.PlayerActor.TraitsImplementing<BaseRepairBotModule>())
+			{
+				repairOrders += rm.RepairOrders;
+				repairSweepOrders += rm.SweepOrders;
+				repairTogglesAvoided += rm.TogglesAvoided;
+			}
+
 			// §12.14 PL telemetry (record-only): production and enemy-econ-kill windows off the
 			// arsenal ledger, plus offensive launches off the squad managers, per game minute.
 			var ledger = player.PlayerActor.TraitOrDefault<BotArsenalLedger>();
@@ -750,6 +762,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				AttacksLaunched = attacksLaunched,
 				FirstAttackTick = firstAttackTick,
 				AttacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0,
+				RepairOrders = repairOrders,
+				RepairSweepOrders = repairSweepOrders,
+				RepairTogglesAvoided = repairTogglesAvoided,
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
