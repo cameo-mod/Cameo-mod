@@ -25,8 +25,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	// Merged from CA CaptureManagerBotModuleCA (Cameo's copy of CAmod's, itself from OpenRA.Mods.AS) and AS
 	// CncEngineerManagerBotModule (engine d5d8b2a685) under DESIGN §19.3 (one module per decision). AI_MASTER_PLAN ENG.
 	//   from CA: capture — a priority target by chance (nearest to the base first), otherwise the most valuable
-	//            capturable of a random enemy/neutral player, nearest per engineer; SafePath routes the engineer
-	//            around enemy fire.
+	//            capturable of a random enemy/neutral player, nearest per engineer; SafePath was meant to route the
+	//            engineer around enemy fire but never did (its goal predicate matched the start cell and the path was
+	//            discarded) — SafeRoute below does it for real when MaxExposedRouteCells >= 0.
 	//   from AS: bridge-hut repair and instant building repair (nearest path-reachable target, one engineer per
 	//            evaluation, the repair jobs taking turns); the stuck check (moving, not moved since the last sample).
 	//            DESIGN §19.5 lets the whole module see through fog (maintainer 2026-09-30); both visibility switches
@@ -58,6 +59,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("Avoid enemy actors this close to the path when routing a capturer. Near the maximum weapon range.")]
 		public readonly WDist EnemyAvoidanceRadius = WDist.FromCells(8);
+
+		[Desc("Route engineers for real (maintainer 2026-09-30: if three engineers die at one target, the path was not",
+			"safe enough). The parents' SafePath never scored a route: its goal predicate matched the engineer's own cell,",
+			"and the order ignored the result, so engineers walked the default shortest path. With this >= 0 the module",
+			"searches the least-exposed path (cost: nearness of ARMED enemies within EnemyAvoidanceRadius), skips a target",
+			"whose safest path still has more than this many exposed cells outside the final approach, and walks the",
+			"engineer along it through waypoints. -1 = the parents' behaviour, the default until its A/B.")]
+		public readonly int MaxExposedRouteCells = -1;
+
+		[Desc("Cells around the target excluded from the exposure count: the final approach to a defended target is the",
+			"escort's question (EscortDefendedCaptures), not the route's.")]
+		public readonly int ApproachCells = 6;
+
+		[Desc("Cells between the waypoints of a safe route (MaxExposedRouteCells >= 0).")]
+		public readonly int RouteWaypointSpacing = 5;
+
+		[Desc("Targets tried per engineer, nearest first, before it waits for the next evaluation. A target that is full",
+			"(MaxEngineersPerTarget), dormant or unsafe is passed over so the engineer goes to a DIFFERENT target.")]
+		public readonly int CaptureTargetTries = 3;
 
 		[Desc("Ticks between capture evaluations.")]
 		public readonly int MinimumCaptureDelay = 375;
@@ -159,6 +179,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int BuildingRepairOrders { get; private set; }
 		public int StuckStops { get; private set; }
 		public int SkippedClaimed { get; private set; }
+
+		/// <summary>Capture targets passed over because even the safest route was too exposed.</summary>
+		public int UnsafeRoutes { get; private set; }
 
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)
@@ -310,7 +333,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return true;
 		}
 
-		bool Assign(IBot bot, IBotUnitLeases leases, Actor engineer, EngineerJob job, Order order, Actor target)
+		bool Assign(IBot bot, IBotUnitLeases leases, Actor engineer, EngineerJob job, Order order, Actor target,
+			IReadOnlyList<CPos> waypoints = null)
 		{
 			if (!BotUnitLeases.TryClaim(leases, engineer, LeaseOwner, PurposeOf(job), Info.LeaseTicks))
 				return false;
@@ -318,6 +342,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tick = world.WorldTick;
 			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target };
 			assigned[engineer] = assignment;
+			if (waypoints != null && waypoints.Count > 0)
+			{
+				// Walk the safe route: the first leg replaces whatever the engineer was doing, the rest queue behind it,
+				// and the capture order (queued) follows the last waypoint.
+				for (var i = 0; i < waypoints.Count; i++)
+					bot.QueueOrder(new Order("Move", engineer, Target.FromCell(world, waypoints[i]), i > 0));
+			}
+
 			bot.QueueOrder(order);
 			if (job == EngineerJob.Capture)
 				StartMission(assignment, engineer);
@@ -370,8 +402,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var capturer = capturers[next];
 					var target = ordered[i];
 					var captureManager = target.TraitOrDefault<CaptureManager>();
-					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && SafePath(capturer.Actor, target).Type != TargetType.Invalid
-						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target))
+					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && TryRoute(capturer.Actor, target, out var route)
+						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route))
 						next++;
 				}
 
@@ -409,16 +441,132 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			foreach (var capturer in remaining)
 			{
-				var target = targets.Where(t => !TargetFull(t) && !Dormant(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
-				if (target == null || SafePath(capturer.Actor, target).Type == TargetType.Invalid)
-					continue;
+				// TargetFull is re-read per engineer: the previous engineer's Assign already counts, so with
+				// MaxEngineersPerTarget 1 the next engineer goes to a different target.
+				var tries = targets.Where(t => !TargetFull(t) && !Dormant(t))
+					.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
+					.Take(Math.Max(1, Info.CaptureTargetTries))
+					.ToList();
+				foreach (var target in tries)
+				{
+					if (!TryRoute(capturer.Actor, target, out var route))
+						continue;
 
-				Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target);
+					Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route);
+					break;
+				}
 			}
 		}
 
-		// CA parent verbatim. The enemy scan along the path has no visibility check: DESIGN §19.5's engineer exception
-		// (engineers route around the army).
+		/// <summary>
+		/// The route gate for one capture. MaxExposedRouteCells &lt; 0: the parents' check (a path exists; no waypoints).
+		/// Otherwise the least-exposed path, rejected when too exposed; its waypoints are returned for the order.
+		/// </summary>
+		bool TryRoute(Actor capturer, Actor target, out IReadOnlyList<CPos> waypoints)
+		{
+			waypoints = null;
+			if (Info.MaxExposedRouteCells < 0)
+				return SafePath(capturer, target).Type != TargetType.Invalid;
+
+			var route = SafeRoute(capturer, target);
+			if (route == null)
+				return false;
+
+			var exposed = ExposedCells(route.Select(c => (c, Danger(capturer, c))), target.Location, Info.ApproachCells);
+			if (exposed > Info.MaxExposedRouteCells)
+			{
+				UnsafeRoutes++;
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENG route to {target.Info.Name} {target.ActorID} too exposed: {exposed} cells under fire > {Info.MaxExposedRouteCells} (tick {world.WorldTick}; unsafe {UnsafeRoutes})");
+				return false;
+			}
+
+			waypoints = Waypoints(route, Info.RouteWaypointSpacing, Info.ApproachCells, target.Location);
+			return true;
+		}
+
+		/// <summary>Cells of the route within reach of armed enemies, the final approach (within `approachCells` of the
+		/// target) excluded. Free of world state so it can be tested.</summary>
+		public static int ExposedCells(IEnumerable<(CPos Cell, int Danger)> route, CPos target, int approachCells) =>
+			route.Count(c => c.Danger > 0 && (c.Cell - target).LengthSquared > approachCells * approachCells);
+
+		/// <summary>Every `spacing`-th cell of a source-first route, stopping before the final approach (the capture
+		/// order walks that part). Free of world state so it can be tested.</summary>
+		public static List<CPos> Waypoints(IReadOnlyList<CPos> route, int spacing, int approachCells, CPos target)
+		{
+			var result = new List<CPos>();
+			spacing = Math.Max(1, spacing);
+			for (var i = spacing; i < route.Count; i += spacing)
+			{
+				if ((route[i] - target).LengthSquared <= approachCells * approachCells)
+					break;
+
+				result.Add(route[i]);
+			}
+
+			return result;
+		}
+
+		readonly Dictionary<CPos, int> dangerCache = [];
+		int dangerCacheTick = -1;
+
+		// DESIGN §19.5: the engineer owner is omniscient as a whole, so this scan sees through fog. Only ARMED enemies
+		// count (the parent counted every actor that could target an engineer's type, harvesters and MCVs included).
+		// Cached per tick: one evaluation routes several engineers over the same cells.
+		int Danger(Actor capturer, CPos loc)
+		{
+			if (dangerCacheTick != world.WorldTick)
+			{
+				dangerCache.Clear();
+				dangerCacheTick = world.WorldTick;
+			}
+
+			if (dangerCache.TryGetValue(loc, out var d))
+				return d;
+
+			var center = world.Map.CenterOfCell(loc);
+			var sum = 0L;
+			foreach (var u in world.FindActorsInCircle(center, Info.EnemyAvoidanceRadius))
+				if (!u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u))
+					sum += Math.Max(0, Info.EnemyAvoidanceRadius.Length - (center - u.CenterPosition).Length);
+
+			// Bounded so a long route through a crowded base cannot overflow the path cost.
+			return dangerCache[loc] = (int)Math.Min(sum, 1 << 20);
+		}
+
+		/// <summary>The least-exposed path from the engineer to a cell next to the target, source first; null when none.</summary>
+		List<CPos> SafeRoute(Actor capturer, Actor target)
+		{
+			var mobile = capturer.TraitOrDefault<Mobile>();
+			if (mobile == null || !mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, capturer.Location, target.Location))
+				return null;
+
+			var footprint = target.OccupiesSpace?.OccupiedCells().Select(c => c.Cell).ToHashSet() ?? [target.Location];
+			var ring = new HashSet<CPos>();
+			foreach (var c in footprint)
+				for (var dx = -1; dx <= 1; dx++)
+					for (var dy = -1; dy <= 1; dy++)
+					{
+						var n = new CPos(c.X + dx, c.Y + dy);
+						if (!footprint.Contains(n) && world.Map.Contains(n))
+							ring.Add(n);
+					}
+
+			var path = mobile.PathFinder.FindPathToTargetCellByPredicate(
+				capturer, [capturer.Location], ring.Contains, BlockedByActor.Stationary, loc => Danger(capturer, loc));
+			if (path.Count == 0)
+				return null;
+
+			// The engine returns paths goal-first.
+			if ((path[0] - capturer.Location).LengthSquared > (path[^1] - capturer.Location).LengthSquared)
+				path.Reverse();
+
+			return path;
+		}
+
+		// CA parent verbatim, kept for MaxExposedRouteCells < 0 (the default until its A/B). It is only a reachability
+		// check: the goal predicate `loc => true` matches the start cell, so the danger cost is never scored along any
+		// route, and the caller discards the path anyway (maintainer's question, 2026-09-30). SafeRoute is the real one.
 		Target SafePath(Actor capturer, Actor target)
 		{
 			var mobile = capturer.TraitOrDefault<Mobile>();
@@ -581,7 +729,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
-				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1
+				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1,
+
+				// Where the attempt ended: for a lost engineer, where it fell (on the route or at the target).
+				UnitCell = world.Map.CellContaining(engineer.CenterPosition)
 			});
 
 			// The dormant shelf: a success clears the streak; consecutive losses rest the mission.
