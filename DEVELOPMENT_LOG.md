@@ -12,6 +12,10 @@ per-component was→now in batch_results.jsonl and aborts the batch.
 surfaces the abort per-cell and as `cells_aborted` in the aggregate.
 Verified: 29/29 test_ai_batch_harness (8 new fingerprint cases). Tools-
 only — no engine/mods/C# content; boot-gate N/A, recorded per protocol.
+Review caught: engine/VERSION is UTF-16 BOM'd — decoded via BOM detection.
+Live proof: mid-run map edit + forced retry → retry boundary re-fingerprinted,
+`fingerprint_drift` recorded with was→now, batch aborted (`aborted` in
+batch_summary.json). Done-condition met end-to-end.
 
 # 2026-09-29 — Devin (NOVA): protection-release convergence (PR #632) + CA-3 A/B on post-#630 master
 
