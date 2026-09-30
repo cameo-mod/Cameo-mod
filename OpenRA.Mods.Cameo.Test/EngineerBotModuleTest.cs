@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -74,6 +75,32 @@ namespace OpenRA.Mods.Cameo.Test
 			table.Release(7, "SquadManagerBotModuleCA");
 			Assert.That(table.TryClaim(7, nameof(EngineerBotModule), BotLeasePurpose.Capture, 20, 3000), Is.True);
 			Assert.That(table.LeaseOf(7, 20)?.Purpose, Is.EqualTo(BotLeasePurpose.Capture));
+		}
+
+		// ENG-T: the transport roll is the seam's own gate — stealth target only, chance > 0,
+		// roll strictly below the percentage.
+		[Test]
+		public void TransportRollsOnlyForStealthTargetsWithAChance()
+		{
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: false, 0, 25), Is.False);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, 0, 0), Is.False);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, 24, 25), Is.True);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, 25, 25), Is.False);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, 99, 100), Is.True);
+		}
+
+		[Test]
+		public void GreedyRouteStartsAtStartAndAlwaysPicksTheNearestUnvisited()
+		{
+			// A row of cells: 0 ---- 5 ---- 20 ---- 21; from cell 5 the nearest-next walk is 0 -> 20 -> 21.
+			var stops = new List<CPos> { new(0, 0), new(5, 0), new(20, 0), new(21, 0) };
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 1, 5), Is.EqualTo(new[] { 1, 0, 2, 3 }));
+
+			// max caps the run length: the farthest two stops are cut off first.
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 1, 2), Is.EqualTo(new[] { 1, 0 }));
+
+			// A single stop is a run of one.
+			Assert.That(EngineerBotModule.GreedyRoute(new List<CPos> { new(9, 9) }, 0, 5), Is.EqualTo(new[] { 0 }));
 		}
 	}
 }
