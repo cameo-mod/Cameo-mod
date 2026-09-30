@@ -129,6 +129,14 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OnlyTechBuildingsGetAnEscortTheEnemyBaseIsTakenByStealth()
+		{
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: false, priorityType: true), Is.True, "neutral derrick");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: true), Is.True, "a tech building the enemy holds");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: false), Is.False, "their yard: sneak, never escort");
+		}
+
+		[Test]
 		public void AnEscortedCaptureWaitsForSuperiority()
 		{
 			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");

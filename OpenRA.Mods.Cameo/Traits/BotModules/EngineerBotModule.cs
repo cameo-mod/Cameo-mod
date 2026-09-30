@@ -111,8 +111,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
-		[Desc("Escort as ONE mission (maintainer 2026-09-30): a capture target defended by enemy armed units (within",
-			"EnemyAvoidanceRadius) is not attempted solo. The mission is PUBLISHED and a protection request is raised at the",
+		[Desc("Escort as ONE mission (maintainer 2026-09-30): a TECH building (neutral, or a PriorityCapturableActorTypes",
+			"entry) defended by enemy armed units (within EnemyAvoidanceRadius) is not attempted solo; a building in the",
+			"enemy base is never escorted — the engineer sneaks in alone (SafePath), an escort would give it away. The mission is PUBLISHED and a protection request is raised at the",
 			"target (IBotProtectionRequestProvider, the squad manager's escort seam — it needs UseProtectionRequests); the",
 			"engineer goes once our armed value there reaches EscortSuperiority percent of the defenders'. Off until its A/B.")]
 		public readonly bool EscortDefendedCaptures = false;
@@ -568,11 +569,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& !u.Info.HasTraitInfo<BuildingInfo>())
 				.Sum(CostOf);
 
-		/// <summary>True when a defended target may not be attempted yet: escorts on, defenders present, and no ready
-		/// escort plan for exactly this target.</summary>
+		/// <summary>
+		/// Maintainer 2026-09-30: escorts are ONLY for tech buildings (neutral, or a PriorityCapturableActorTypes
+		/// entry) in an unsafe area. A building in the enemy's base is taken by stealth — an escort would give the
+		/// engineer away — so it is never escorted: the engineer sneaks in alone along SafePath.
+		/// </summary>
+		public static bool EscortEligible(bool enemyOwned, bool priorityType) => priorityType || !enemyOwned;
+
+		bool EscortEligible(Actor target) =>
+			EscortEligible(player.RelationshipWith(target.Owner) == PlayerRelationship.Enemy,
+				priorityCapturableTypes.Contains(target.Info.Name.ToLowerInvariant()));
+
+		/// <summary>True when a defended tech target may not be attempted yet: escorts on, defenders present, and no
+		/// ready escort plan for exactly this target. Enemy-base buildings are never blocked (stealth).</summary>
 		bool BlockedByEscort(Actor target)
 		{
-			if (!Info.EscortDefendedCaptures)
+			if (!Info.EscortDefendedCaptures || !EscortEligible(target))
 				return false;
 
 			var defence = DefenceValue(target);
@@ -594,6 +606,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			foreach (var t in candidates)
 			{
+				if (!EscortEligible(t))
+					continue;
+
 				var defence = DefenceValue(t);
 				if (defence <= 0)
 					continue;

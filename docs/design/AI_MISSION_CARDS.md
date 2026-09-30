@@ -108,7 +108,11 @@ executes captures. Both ship OFF (0) until their A/B (AI_MASTER_PLAN §1.2 step 
 missions the master AI chooses and squads execute, the shelf is LC8.
 
 **Escorted captures — one mission, two executors (maintainer 2026-09-30, `EscortDefendedCaptures`, off until its A/B).**
-A target with enemy armed units within `EnemyAvoidanceRadius` is never attempted solo: the engineer owner writes the
+**Maintainer's rule: escorts are only for TECH buildings in an unsafe area; the enemy base is taken by stealth.** A
+building in the enemy's base is never escorted — an escort gives the engineer away; it sneaks in alone along
+`SafePath` (and, planned, ~25% of the time inside a transport: ENG-T). A tech building (neutral, or a
+`PriorityCapturableActorTypes` entry) in a safe area is taken solo too. A tech building with enemy armed units within
+`EnemyAvoidanceRadius` is never attempted solo: the engineer owner writes the
 mission `PUBLISHED` and raises a protection request at the target through the squad manager's escort seam
 (`IBotProtectionRequestProvider`, which needs `UseProtectionRequests`); the engineer goes — attempt `COMMITTED` — only
 once our armed value there reaches `EscortSuperiority` (100%) of the defenders', and the request stands while the attempt
