@@ -150,6 +150,19 @@ BOOLEAN_LIMIT_FIELDS = {"PrioritizeBarracksBeforeRefinery"}
 PRODUCTION_TIERS = ("easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "cameogod")
 FAIR_TIER = "hard"
 
+# DESIGN §19.1 (binding, maintainer 2026-09-28): every module runs on EVERY difficulty and only
+# its strength scales. A `RequiresCondition` that names a difficulty condition is a tier gate and
+# is forbidden — difficulty-selective behaviour belongs in BotLimits fields, not in which modules
+# exist.
+TIER_CONDITIONS = {
+    "easiestbot", "veryeasybot", "easybot", "mediumbot", "hardbot",
+    "veryhardbot", "brutalbot", "challengerbot", "unbeatablebot", "cameogodbot",
+}
+# Structural nodes that legitimately reference a tier condition: the BotLimits ladder IS the
+# strength scale, ProvidesPrerequisite exports each tier's `Xbotplayer` token, and
+# GrantConditionOnBotOwner defines the tier conditions themselves.
+TIER_GATE_ALLOW_PREFIXES = ("BotLimits@", "ProvidesPrerequisite@", "GrantConditionOnBotOwner@")
+
 
 def on_line(values: list[int]) -> bool:
     """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1)."""
@@ -198,6 +211,30 @@ def difficulty_scale_failures() -> list[str]:
         fair = values[PRODUCTION_TIERS.index(FAIR_TIER)]
         if fair != 100:
             failures.append(f"{trait}: the fair tier `{FAIR_TIER}` must be 100, is {fair}")
+    return failures
+
+
+def tier_gate_failures() -> list[str]:
+    """DESIGN §19.1: no module is switched on per tier. Any `RequiresCondition` on the resolved
+    Player that names a difficulty condition is a violation — the module either runs everywhere
+    (strength scaled through BotLimits / per-tier fields) or it is removed."""
+    sys.path.insert(0, str(ROOT / "tools" / "audit"))
+    from miniyaml import Ruleset
+
+    rules = Ruleset(ROOT)
+    failures = []
+    for node in rules.resolve("player").children:
+        if node.key.startswith(TIER_GATE_ALLOW_PREFIXES):
+            continue
+        condition = node.get("RequiresCondition")
+        if not condition:
+            continue
+        tiers = sorted(set(re.findall(r"[A-Za-z0-9_-]+", condition)) & TIER_CONDITIONS)
+        if tiers:
+            failures.append(
+                f"{node.key} gates on tier condition(s) {tiers} — DESIGN 19.1: modules run on "
+                f"every difficulty; scale strength via BotLimits/per-tier fields, not RequiresCondition"
+            )
     return failures
 
 
@@ -301,6 +338,7 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(tier_gate_failures())
 
     print("# AI personality audit")
     print()
@@ -322,6 +360,7 @@ def main() -> int:
     print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
     print("- Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN §19.1).")
+    print("- No module gates on a difficulty-tier condition (DESIGN §19.1); strength scales via BotLimits.")
     return 0
 
 
