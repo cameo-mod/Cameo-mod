@@ -116,6 +116,16 @@ ALLOWED_OMNISCIENT = {"CaptureManagerBotModuleCA", "CratePickupBotModule"}
 VISIBILITY_SWITCH = re.compile(r"^(Check\w*Visibility|UseFoggedObservation|RespectShroud)$")
 IDENT = re.compile(r"[A-Za-z_][\w\-.]*")
 
+# A support-power decision carrying IgnoreVisibility: true strikes enemies the
+# bot has never seen (engine-side SupportPowerBotASModule does
+# `IgnoreVisibility || CanBeViewedByPlayer` over all IOccupySpace actors).
+# §19.5's two sanctioned exceptions do not cover this class. The resolved
+# Player carries 56 such decisions today; that count is ratcheted here — a
+# NEW invisible-strike decision fails the audit, removing one is free.
+# Whether the inherited 56 should be flipped off is a maintainer ruling
+# (it changes @classic), not a silent fix. (NOVA VERIFY_2026-09-30 finding 1.)
+IGNORE_VISIBILITY_ENEMY_BASELINE = 56
+
 
 def condition_active(expr: str, granted: set[str], known: set[str]) -> bool:
     """Can `expr` hold for a bot granted `granted`? Conditions no bot grants (prerequisites, personalities)
@@ -160,6 +170,31 @@ def visibility_switch_failures() -> list[str]:
     return failures
 
 
+def count_ignore_visibility_enemy() -> int | None:
+    """Resolved-Player count of IgnoreVisibility: true decisions whose
+    Consideration targets Enemy. None when Player does not resolve."""
+    sys.path.insert(0, str(REPO / "tools" / "audit"))
+    import miniyaml  # noqa: E402
+
+    player = miniyaml.Ruleset(REPO).resolve("Player")
+    if player is None:
+        return None
+
+    hits = 0
+    stack = list(player.children)
+    while stack:
+        node = stack.pop()
+        iv = node.get("IgnoreVisibility")
+        if isinstance(iv, str) and iv.strip().lower() == "true":
+            if any(c.key.startswith("Consideration")
+                   and isinstance(c.get("Against"), str)
+                   and c.get("Against").strip().lower() == "enemy"
+                   for c in node.children):
+                hits += 1
+        stack.extend(node.children)
+    return hits
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--write", action="store_true", help="re-baseline the manifest")
@@ -187,6 +222,16 @@ def main() -> int:
     failures: list[str] = []
     notes: list[str] = []
     switch_failures = visibility_switch_failures()
+    iv_count = count_ignore_visibility_enemy()
+    if iv_count is None:
+        switch_failures.append("Player actor does not resolve — IgnoreVisibility ratchet cannot run")
+    elif iv_count > IGNORE_VISIBILITY_ENEMY_BASELINE:
+        switch_failures.append(
+            f"{iv_count} IgnoreVisibility(enemy) support-power decisions "
+            f"(baseline {IGNORE_VISIBILITY_ENEMY_BASELINE}) — new invisible strikes need a §19.5 maintainer ruling")
+    elif iv_count < IGNORE_VISIBILITY_ENEMY_BASELINE:
+        notes.append(f"IgnoreVisibility(enemy) decisions: {IGNORE_VISIBILITY_ENEMY_BASELINE} -> "
+                     f"{iv_count} (fewer invisible strikes — lower the baseline)")
     for rel, n in sorted(current.items()):
         base = baseline.get(rel)
         if base is None:
