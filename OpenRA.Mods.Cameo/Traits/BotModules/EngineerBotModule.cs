@@ -121,6 +121,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Percent of the defenders' value our armed units near the target must reach before the engineer goes.")]
 		public readonly int EscortSuperiority = 100;
 
+		[Desc("The engineer also waits until the defenders' value near the target has fallen to this percent of their value",
+			"when the mission was published: the escort must have thinned them out, not merely arrived (#693's first A/B",
+			"smoke: the escort arrived, the engineer went into the firefight and died twice). 100 = no thinning required.")]
+		public readonly int EscortThinnedPercent = 100;
+
 		[Desc("Ticks an escorted capture waits for its escort before the mission is DENIED (no_units) and goes dormant.")]
 		public readonly int EscortWaitTicks = 3000;
 
@@ -170,6 +175,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public string MissionId;
 			public int SinceTick;
 			public int DefenceValue;
+			public int InitialDefenceValue;
 			public bool Committed;
 		}
 
@@ -568,6 +574,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static bool EscortReady(int ownValue, int defenceValue, int superiorityPct) =>
 			defenceValue <= 0 || (long)ownValue * 100 >= (long)defenceValue * superiorityPct;
 
+		/// <summary>Superiority AND thinning: the defenders must also have fallen to `thinnedPct` percent of their value
+		/// at publish. Free of world state so it can be tested.</summary>
+		public static bool EscortReady(int ownValue, int defenceValue, int initialDefenceValue, int superiorityPct, int thinnedPct) =>
+			defenceValue <= 0 || (EscortReady(ownValue, defenceValue, superiorityPct)
+				&& (long)defenceValue * 100 <= (long)Math.Max(defenceValue, initialDefenceValue) * thinnedPct);
+
 		static int CostOf(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 
 		// DESIGN §19.5: the engineer owner is omniscient as a whole (maintainer 2026-09-30) — these scans see through fog.
@@ -609,7 +621,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return true;
 
 			escort.DefenceValue = defence;
-			return !EscortReady(OwnArmedValueNear(target), defence, Info.EscortSuperiority);
+			return !EscortReady(OwnArmedValueNear(target), defence, escort.InitialDefenceValue, Info.EscortSuperiority, Info.EscortThinnedPercent);
 		}
 
 		/// <summary>Opens the one escort plan for the first defended candidate (the candidates arrive best first).</summary>
@@ -629,7 +641,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				escort = new EscortPlan
 				{
-					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence
+					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence,
+					InitialDefenceValue = defence
 				};
 
 				BotMissionLog.Write(new BotMissionRecord

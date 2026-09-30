@@ -153,6 +153,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(EngineerBotModule.EscortReady(1600, 1600, 100), Is.True);
 			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 150), Is.True);
 			Assert.That(EngineerBotModule.EscortReady(int.MaxValue / 50, int.MaxValue / 60, 100), Is.True, "no int overflow");
+
+			// Thinning: 150% superiority alone is not enough while the defenders are still at full strength.
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 50), Is.False, "escort arrived, fight not won");
+			Assert.That(EngineerBotModule.EscortReady(2400, 800, 1600, 150, 50), Is.True, "defenders halved");
+			Assert.That(EngineerBotModule.EscortReady(1000, 800, 1600, 150, 50), Is.False, "halved but escort too weak");
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 100), Is.True, "100 = no thinning required");
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 1600, 150, 50), Is.True, "defenders gone");
+			Assert.That(EngineerBotModule.EscortReady(5000, 2000, 1600, 150, 50), Is.False, "reinforced past the publish value");
 		}
 
 		[Test]
