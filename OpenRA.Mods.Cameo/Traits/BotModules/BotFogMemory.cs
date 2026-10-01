@@ -42,6 +42,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int DefenceValue;
 			public int AntiAirValue;
 			public int EconomyValue;
+
+			// IM-1 (§3.3): remembered value of production/tech buildings — the non-economy
+			// half of the influence layers' Interest read. Counted once even when a building
+			// is both production and tech.
+			public int ProductionTechValue;
 			public int LastSeenTick;
 			public bool EverSeen;
 
