@@ -2253,3 +2253,11 @@ inputs, record-only — no decision reads them, and the enemy-side numbers stay 
   personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
   tick, and the per-minute rate.
 - `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).
+
+**Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
+snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
+(per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count
+per enabled `ProductionQueue` sitting with no current item and nothing queued — each idle
+factory counts separately) and `own.production_queues`. Own-side trait reads only —
+record-only, publish-always, no consumer and no flag; the LA analyst reads them for §13.1's
+drive-to-zero goal, and a save/load restarts the counters at 0 (honest reset, same as DI-1).

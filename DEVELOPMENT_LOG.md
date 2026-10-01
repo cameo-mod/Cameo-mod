@@ -15455,3 +15455,18 @@ ZG-b fog-honest territory/ownership/doors merged).
   centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+# 2026-10-01 — NOVA: §13.1 discipline telemetry — the "never do" counters
+
+- `MasterAiBotModule` accumulates per-tick in `BotTick` (before the snapshot gate):
+  `brownoutTicks` (`PowerManager.ExcessPower < 0`) and `idleProductionTicks` (each enabled
+  `ProductionQueue` with no `CurrentItem` and nothing `AllQueued` counts once per tick).
+  Trait refs cached lazily on first tick. Snapshot publishes `BankedCash`
+  (`Cash + Resources`), `BrownoutTicks`, `IdleProductionTicks`, `ProductionQueues`.
+- `AiSituationLogWriter`: `own.banked_cash`, `own.brownout_ticks`,
+  `own.idle_production_ticks`, `own.production_queues` — publish-always, record-only.
+- Not persisted in `MasterAiBotSavedState` — record-only telemetry restarts at 0 on
+  load, same convention as the Director wave. No consumer, no flag, no switch letter.
+- Docs: AI_ARCHITECTURE telemetry note appended (§12.14 list tail).
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
