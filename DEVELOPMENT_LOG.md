@@ -1,3 +1,29 @@
+# 2026-10-01 — Devin (DAWN): ENG-T order-gate handoff + INC-3 flag arm; the fake boot-gate lesson
+
+- **PR #707** (`devin/dawn/engt-craft-gate`, on `f605c145f`-era master): `bb0ebad17` makes transport runs assign a
+  real craft synchronously (no more ~3000-tick `WaitingForTransport` park → timeout; refusal leaves a production
+  tickle and the engineers walk) and moves the transport roll ABOVE the ENG-R v2 route gate — a target the ground
+  path can't serve is exactly when insertion matters. `acc466a37` adds `IBotUnitLeases.Transfer` + all-or-nothing
+  passenger handoff so the provider owns its passengers' leases while ordering them — without it,
+  `EnforceAtOrderGate` (on in the increment's `all` arm) refuses every provider `EnterTransport` and runs stall
+  at boarding. 434/434 tests, boot PASS, verification correction posted on the PR.
+- **PR #708** (`devin/dawn/inc3-frans-services` @ `fb1cc7780`): **INC-3 ready** — the F1 question (8 Frans
+  pure-service modules on `hard`) as switch group `C_f1_frans_services`: services gain `|| inc3_frans_services`,
+  `GrantConditionOnBotOwner@inc3f1` defaults to `Bots: fransbot` (inert), the arm flips it to the F1 population
+  (hard + 3 exploiters). Dry-run: 1 targeted change. Boot PASS. `audit_ai_personalities` PASS — §19.1-clean.
+- **Fake boot-gate lesson (for every agent):** `cmd //c launch-game.cmd` from an MSYS shell fails the script's
+  `find` VERSION check — GNU find shadows cmd's in the inherited PATH — and the launcher exits to `pause` without
+  starting a game. The `PostWorldLoaded` line then visible in the SHARED `%APPDATA%/OpenRA/Logs/perf.log` belongs
+  to someone else's match: a boot "PASS" with no game is a false positive. Verify the log's write-time matches
+  your launch and that YOUR `OpenRA.exe` (ExecutablePath) is actually running. Direct exe launch with the
+  launcher's arg surface (`Game.Mod=cameo Engine.EngineDir=.. Engine.LaunchPath=… Engine.ModSearchPaths=…`) is
+  the reliable gate.
+- **Fleet orders absorbed:** only Claude runs A/Bs (maintainer 2026-10-01 10:30) — F1's drivers were stopped and
+  its question became INC-3 (above); the ENG-T smoke stays superseded by the increment `all` arm. F1 partials
+  (ctrl hard 3W-1L/4g, cand 0W-2L/2g) posted as evidence. Reviewed EMBER's #706 (ab_increment driver) — verified.
+- DAWN queue state: CA-2b verdict recorded (flag stays off; CA-2c still needs `BehaviourEnabled` so no removal PR);
+  CA-6/FB1 await A/B-runner capacity; CN2/CN3 are the next unblocked harvests.
+
 # 2026-10-01 — Claude: the order gate (DESIGN §19.6, maintainer ruling)
 
 - Maintainer, 2026-09-30: *"Refuse, but emergencies can override."* Now DESIGN §19.6 (binding): a module may order a
