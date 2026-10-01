@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (39 file(s)) | 432 | >= 24 |
-| T2 | `def test_*` in tools/tests (291 file(s)) | 2924 | >= 177 |
-| T3 | modules with no test mentioning them | 320 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (42 file(s)) | 468 | >= 24 |
+| T2 | `def test_*` in tools/tests (292 file(s)) | 2945 | >= 177 |
+| T3 | modules with no test mentioning them | 323 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (320)
+## T3 — untested modules (323)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -53,8 +53,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs | DeployBotGroup, DeployBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs | GarrisonDefenseBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/UnitRepairBotModule.cs | UnitRepairBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/CameoSettings.cs | CameoSettings |
 | C# | OpenRA.Mods.Cameo/Traits/ChangesPhysicalState.cs | ChangesPhysicalState |
 | C# | OpenRA.Mods.Cameo/Traits/Conditions/GrantConditionOnPower.cs | GrantConditionOnPower |
@@ -343,5 +346,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 320 untested > baseline 224
+- T3: 323 untested > baseline 224
 

@@ -2,19 +2,19 @@
 
 _Engine uses System.Numerics vectors: upstream text is compared after the float2/float3 -> Vector2/Vector3 conversion (tools/audit/vector_codemod.py)._
 
-Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HEAD`; `git fetch` the clone first)
+Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HEAD`; `git fetch` the clone first)
 
 | status | files |
 |---|--:|
-| IDENTICAL | 38 |
-| STALE | 39 |
-| MODIFIED | 26 |
-| MODIFIED+STALE | 46 |
-| MOVED/REMOVED | 12 |
-| CAMEO_ONLY | 45 |
-| MISSING (upstream files never copied) | 312 |
+| IDENTICAL | 67 |
+| STALE | 9 |
+| MODIFIED | 25 |
+| MODIFIED+STALE | 47 |
+| MOVED/REMOVED | 13 |
+| CAMEO_ONLY | 49 |
+| MISSING (upstream files never copied) | 317 |
 
-## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (39)
+## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (9)
 
 - `OpenRA.Mods.CA/Traits/AttachableTo.cs`: base 2023-05-27, 9 upstream commits since
     - 2026-06-10 - Prevent Nanite Repair from targeting attached Mini Drones. - Added missing Mobile Sensor discount for ARC. - Cap Ichor Spike to affecting 3 resource nodes. - AI uses IC on damaged units only. - SSM voice. - Speculative fix for failed Mini Drone detachment.
@@ -22,12 +22,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-11-02 Attachable crash fix.
     - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
     - 2025-06-22 Fix stuck Mini Drone after host is sold.
-- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnOrders.cs`: base 2023-05-27, 5 upstream commits since
-    - 2025-05-10 - Fixed upgrading existing units. - Fixed Subterranean APC armor type. - Increased Confessor range by 1. - Storm Spikes no longer count towards Nod Covenant acquisition. - Voidspikes will also convert Ore/Gems. - Tormentor fires 6 shots per pass instead of 4 (taking 2 passes to fully unload, down from 3). Increased damage per shot slightly. - Allied Development meter threshold bars won't use the lighter color until the exact percentage is reached. - Fixed Aurora gaining afterburner when attacking friendly targets. - Increaded Voidspike HP from 30k to 40k. Increased conversion rate. Reduced cooldown from 5:00 to 4:00. Starts fully charged. - Reduced development level times from 4/12/20 minutes to 4/10/16 minutes. Reverted Time Skip cost/cooldown to 1000/2s. - Reduced cost of coalition upgrades from 750 to 500. Reduced policy upgrades from 500 to 300.
-    - 2024-04-20 Fix queued orders cancelling Aurora afterburner.
-    - 2024-04-01 Aurora afterburner fix.
-    - 2024-03-26 Updates. - Increased V2 splash radius slightly. Reduced cost of V2 upgrade from 1000 to 500. - Raised Iron Curtained unit speed cap to 60 (Heavy Tank speed), or 112 for aircraft (Hind speed). - Increased power consumption of basic defenses from 10 to 15 (was previously reduced from 25). - Increased Battle Fortress HP from 120k to 130k HP. Range to 5.75 (to match Apoc, Tripod etc.). - Reduced Tesla Track HP from 22k to 20k. - Increased Floating Disc range by 1. - Increased Tank Destroyer range by 1. Reduced HP from 46k to 44k. - Reduced Tomahawk price from 2000 to 1850. - Reduced Hypercharge upgrade cost from 1000 to 750. - Changed Mobile Sensor to light armor. - Increased Aurora cost from 2200 to 2300. Reduced splash radius vs infantry. Damage reduction reduced from 20% to 10% when afternburner is active. Target must be enemy unit/building to activate afterburner. - Slightly increased Banshee splash damage. - Reduced X-O Powersuit range by 1. Increased turn rate by 33%. - Increased Desolator damage vs light. Slightly increased splash damage vs infantry. Reduced deploy time. - Atomized debuff slows target by 25%, up from 15%. - Reduced Pitbull cost from 1000 to 900. Increased missile speed. - Increased Peacemaker cost from 2400 to 2500. - 8x RAGL 15 1v1 maps. - 3x other 1v1 maps. - 37x new team game maps. - Fixed undeployable starting location on Basalt Badlands map. - Prevent wormholes being destroyed in certain campaign missions. - Exclude Supply Truck from Oil Refinery price reduction.
-    - 2024-01-12 Updates. - Added Hypercharge upgrade for Scrin Seeker & Lacerator. - Chem Warrior gains Tiberium Surge ability. - Yuri/Mastermind ability no longer kills slaves. Slaves are killed either manually by deploying them, or when exceeding capacity. - Minor mission 9 fix - prevent MAD Tank deploying when player does a sat hack on it. - Minor mission 15 fix - prevent player's units auto attacking disabled defenses. - Reduce Kirov separation distance to make them less prone to blocking each other from dropping bombs. - Improvements to targeted ability traits. - Battle Drone self-repairs to 50% instead of 100%.
 - `OpenRA.Mods.CA/Traits/ProductionQueueFromSelectionCA.cs`: base 2023-05-27, 5 upstream commits since
     - 2025-12-12 - More generic trait for conditions based on lobby options. - Queue selection from selecting allied production structures in co-op. - Mission prerequisite cleanup. - Campaign GPS timer correction (w/ no fog). - Increase Seeker speed from 113 to 126.
     - 2025-10-18 - Rebel Gateway can be linked to any number of production structures. Can now be linked either from the source or the gateway. Increased cooldown from 3:00 to 4:00. - Scrin basic infantry can benefit from Commissar buff (Warrior, Disintegrator, Assimilator, Rejuvenator, Artificer).
@@ -44,96 +38,23 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-12-02 Encyclopedia updates.
     - 2025-11-14 - Voidspike ambient sound now audible through fog. Added sound effect when created. Reduced initial timer from 2 minutes to 30 seconds. Visual effect applied to resource spawners no longer visible through fog. - Reduced Chem Mortar damage vs cyborgs. All mortars now affected by flak vest mitigation. - Adjusted Crossrip/Schism ending phase scaling.
     - 2023-12-29 Buggy decoy upgrade.
-- `OpenRA.Mods.CA/Traits/Render/RenderShroudCircleCA.cs`: base 2023-05-27, 4 upstream commits since
-    - 2025-07-02 Engine update part 7.
-    - 2024-05-30 Reduce alpha of player coloured range circles.
-    - 2024-05-04 Updates. - Added Cryostorm. - Improved Cryo Trooper voice. - Added icons. - Use player colour for all range indicators where owner is significant. - Yaml fixes.
-    - 2024-02-27 Show range circle for enemy Veil of War. Fix cluster mines causing damage when defused.
 - `OpenRA.Mods.CA/Traits/AttachOnTransform.cs`: base 2023-05-27, 3 upstream commits since
     - 2025-12-07 Clean up trait lookups.
     - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
     - 2023-07-24 Fixed crash when deploying an MCV with Mini Drone attached.
-- `OpenRA.Mods.CA/Traits/GuidedMissile.cs`: base 2024-05-07, 3 upstream commits since
-    - 2024-11-06 - Reduced Patriot missile damage & splash. Reduced distance to avoid slightly. - UI indicators for GDI strategy level and Nod building/harvester kills.
-    - 2024-07-07 Remove debugging. Don't apply seek and destroy speed bonus to Aurora's while afterburner enabled.
-    - 2024-07-05 Balance/fixes: - Replaced XO machinegun with coilgun. Increased range from 5.75 to 7.5. Reduced HP from 32k to 25k. Reduced rate of fire slightly. - The distance at which Patriot missiles will lose tracking now scales with the speed of the target. - Increased volume of beacon sound. - Fixed Patriot Strike crash when target dies at the moment of being targeted. - Fixed PACs/Devastators being destroyed when a slave is freed directly beneath them.
 - `OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs`: base 2023-06-18, 3 upstream commits since
     - 2026-09-12 - Increased Cryo Trooper damage vs defenses. - Easy difficulty tweak. - Selection box trait improvements (currently unused).
     - 2025-07-02 Engine update part 7.
     - 2025-01-01 - Player coloured selection box for mines. - Troop Crawler dummy weapon no longer targets vehicles. - Increase Hoplite blind duration by 1s. Increase radius vs infantry slightly. Reset weapon after not attacking for a few seconds. - Corrected Scrin unit palettes in campaign so they appear grey when built by Nod.
-- `OpenRA.Mods.CA/Activities/GuidedMissileFly.cs`: base 2024-05-07, 2 upstream commits since
-    - 2024-12-18 - Increased Grand Cannon damage vs heavy armor. Increased range by from 9 to 10. First shot is accurate. - Replaced Patriot Strike with Black Sky Strike. Hits up to 6 ground targets, prioritizing the most valuable. - Reduced Troop Crawler cost from 1600 to 1500. - Hoplite range reduced by 1. Added empowered shots which blind enemies (9s cooldown). - Increased Black Eagle splash damage. - Avatar shadow. - Stealth Harvester research icon. - Fix Teleport/Leap abilities being permanently disabled if unit is warped while recharging. - Fix Chrono Tank moving to destination if long distance teleport is temporarily interrupted by being warped.
-    - 2024-11-06 - Reduced Patriot missile damage & splash. Reduced distance to avoid slightly. - UI indicators for GDI strategy level and Nod building/harvester kills.
 - `OpenRA.Mods.CA/Traits/AttachOnCreation.cs`: base 2023-05-27, 2 upstream commits since
     - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
     - 2024-05-19 Reworked Attachable/AttachableTo traits. Allows multiple AttachableTo traits, each for a different type of attachable.
-- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnAttackCA.cs`: base 2023-05-27, 2 upstream commits since
-    - 2025-07-02 Engine update part 7.
-    - 2024-03-26 Updates. - Increased V2 splash radius slightly. Reduced cost of V2 upgrade from 1000 to 500. - Raised Iron Curtained unit speed cap to 60 (Heavy Tank speed), or 112 for aircraft (Hind speed). - Increased power consumption of basic defenses from 10 to 15 (was previously reduced from 25). - Increased Battle Fortress HP from 120k to 130k HP. Range to 5.75 (to match Apoc, Tripod etc.). - Reduced Tesla Track HP from 22k to 20k. - Increased Floating Disc range by 1. - Increased Tank Destroyer range by 1. Reduced HP from 46k to 44k. - Reduced Tomahawk price from 2000 to 1850. - Reduced Hypercharge upgrade cost from 1000 to 750. - Changed Mobile Sensor to light armor. - Increased Aurora cost from 2200 to 2300. Reduced splash radius vs infantry. Damage reduction reduced from 20% to 10% when afternburner is active. Target must be enemy unit/building to activate afterburner. - Slightly increased Banshee splash damage. - Reduced X-O Powersuit range by 1. Increased turn rate by 33%. - Increased Desolator damage vs light. Slightly increased splash damage vs infantry. Reduced deploy time. - Atomized debuff slows target by 25%, up from 15%. - Reduced Pitbull cost from 1000 to 900. Increased missile speed. - Increased Peacemaker cost from 2400 to 2500. - 8x RAGL 15 1v1 maps. - 3x other 1v1 maps. - 37x new team game maps. - Fixed undeployable starting location on Basalt Badlands map. - Prevent wormholes being destroyed in certain campaign missions. - Exclude Supply Truck from Oil Refinery price reduction.
-- `OpenRA.Mods.CA/Traits/Conditions/UnloadOnCondition.cs`: base 2023-05-27, 2 upstream commits since
-    - 2024-12-04 - Technology Hack power available to Legion only on radar. - Removed Overload power. - Reduced Mutilator HP from 15k to 13k. Increased cost from 475 to 500 (correction). - Reduced Ravager damage vs buildings. - Fixed Troop Crawler auto unloading when not owned by AI. - Increased Zone Trooper/Raider jump cooldown from 7s to 10s. - Reduced opacity of dog detection circle.
-    - 2024-10-12 - Added line damage back to Wolverine. Reverted XO damage changes. - Increased Overlord's Wrath damage. - Malefic tooltip/prerequisite corrections. - Reduced Ravager HP from 7k to 6k. Reduced damage & rate of fire slightly. - Watcher defaults to hold fire stance. - Reduced Eviscerator rate of fire and damage. Now affected by Resource Conversion upgrade. - Increased Mutilator HP. - Added small amount of splash to Impaler projectiles. - Stormcrawler clouds form immediately on dealing/taking damage with Ion Conduits upgrade. - Reduced Plasma Cannon damage vs heavy armor. - Increased Rad Trooper damage slightly. Increased HP from 7.5k to 8k. - Increased Desolator splash radius slightly. Increased HP from 17k to 18.5k. - Increased Zone Trooper rate of fire and damage. - Increased Zone Defender rate of fire. - Increased Tesla Trooper HP from 17k to 18k. - Reduced Cyborg HP from 21k to 20k. Increased cost from 250 to 275. - Increased Zone Trooper/Raider jump pack cooldown by 1s. - Reduced Acolyte HP from 10k to 9k. - Reduced Leecher damage vs buildings and light armor. - Added support for random charge times to AttackFrontalCharged.
-- `OpenRA.Mods.CA/Traits/ConvertsDamageToHealth.cs`: base 2023-05-27, 2 upstream commits since
-    - 2025-12-07 Clean up trait lookups.
-    - 2024-07-18 Balancing. - Reduced Orca Bomber HP from 38k to 32k. - Reduced Peacemaker HP from 40k to 36k. - Shadow Operatives throw Shadow Beacons rather than plant them, and have 2 instead of 1. Increased pistol rate of fire slightly. - Chaos cloud duration reduced from 12 seconds to 10 seconds. - Watcher parasite duration increased from 1:00 to 1:30. - Inferno Bomb charge time increased from 6:00 to 6:30. - Burster speed increased from 80 to 92. HP reduced from 7k to 5k. On exploding, will only do 25% damage to other Bursters. - Increased Obliterator rate of fire, reduced damage (overall DPS is increased). Increased turn rate slightly. - Leechers no longer heal via crushing husks. - Reduced Stormrider price from 1750 to 1650. - Increased Mobile EMP turn rate. Reduced shockwave delay from 2s to 1s. - Removed Apocalyptic Eradicator AA rockets. - Increased Nuke Cannon splash radius and damage vs infantry. - Pitbull no longer blinds shielded units. - Reduced Hacker range by 1. - Increased PAC damage. - Increased time before and between Gateway waves by 5s.
-- `OpenRA.Mods.CA/Traits/KeepsDistance.cs`: base 2023-05-27, 2 upstream commits since
-    - 2026-05-31 - Missile lock on based on burst count for (H)MLRS, AGT, Seeker, Intruder (odd numbered shots will lock on). - Slightly increased projectile speed of Intruder, Seeker, Marauder. - Subs default to return fire instead of hold fire. - Fixed KeepsDistance preventing move orders. - Renamed GuardsSelection to AutoGuard. Shorter radius to check for units to guard that are further away from the target. - Corrected Psychic IFV tooltip.
-    - 2026-05-30 GuardsSelection responsiveness improvements.
-- `OpenRA.Mods.CA/Traits/ReflectsDamage.cs`: base 2023-05-27, 2 upstream commits since
-    - 2025-10-28 - Flak Vest upgrade partially mitigates damage from Disruptor. - Voidspike reflected damage reduced by any damage reduction applied to the attacker. - Fix Nod Covenant tooltip going above level 3. - Increased initial charge time for Assassin Squad, Hacker Cell and Confessor Cabal from 1:00 to 2:30.
-    - 2025-05-29 - Fixed Jackknife losing building target in fog when it comes into vision. - Increased Jackknife damage vs defenses. - Reduced Tormentor damage. Increased turn rate from 28 to 32. - Voidspike reflects 50% damage. - MAD Tank can't be mind controlled or driver killed after deploying. - Simplified driver kill yaml (use DriverKill immune instead of removing all the traits). - Increased AGT base damage. Reduced rate of fire. Increased projectile speed. - Increased Prism Tower damage vs heavy/light armor.
-- `OpenRA.Mods.CA/Traits/Render/LeavesTrailsCA.cs`: base 2023-05-27, 2 upstream commits since
-    - 2025-07-02 Engine update part 7.
-    - 2024-02-09 Updates. - Increased Juggernaut cost from $1500 to $2000. Increased range, HP and damage. - Reduced PAC cost from $3000 to $2800. - Reduced damage radius from shot down missiles a little more. - Limited AI V3/TH at Hard difficulty and below. - Fixed rare crashing bug caused by missiles effectively diving underground.
-- `OpenRA.Mods.CA/Traits/Render/WithProductionDoorOverlayCA.cs`: base 2023-05-27, 2 upstream commits since
-    - 2026-01-10 Co-op improvements.
-    - 2025-07-02 Engine update part 7.
-- `OpenRA.Mods.CA/Traits/Sound/AnnounceOnCreation.cs`: base 2023-05-27, 2 upstream commits since
-    - 2024-02-05 Heavy Flame Tank voice. Hypercharge doesn't drain until firing. +0.5 Devourer/Darkener range. Yaml fixes/cleanup.
-    - 2024-02-05 Add TITN VO
-- `OpenRA.Mods.CA/Widgets/Logic/SimpleTooltipWithDescLogic.cs`: base 2023-07-01, 2 upstream commits since
-    - 2025-07-02 Engine update part 11.
-    - 2025-06-23 Fix disabled Allied influence indicator tooltip crash.
-- `OpenRA.Mods.CA/Activities/CruiseMissileFly.cs`: base 2024-05-27, 1 upstream commits since
-    - 2025-06-26 Speculative fix for cruise missile crash.
-- `OpenRA.Mods.CA/Activities/Dive.cs`: base 2024-05-11, 1 upstream commits since
-    - 2026-01-10 Targeted dive ability for Shadow Team.
-- `OpenRA.Mods.CA/Traits/Air/AttackAircraftCA.cs`: base 2023-05-27, 1 upstream commits since
-    - 2024-12-19 Avenger & Ceramic Armor upgrades for Warthog on Bombardment & Hold the Line strategies respectively. Sidewinders for Seek & Destroy only.
-- `OpenRA.Mods.CA/Traits/Air/DiveOnAttack.cs`: base 2024-05-11, 1 upstream commits since
-    - 2026-01-10 Targeted dive ability for Shadow Team.
-- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnHealingReceived.cs`: base 2023-05-27, 1 upstream commits since
-    - 2023-07-30 Collector-73 reworks & misc changes. - Atomized debuff pulses AoE damage and slows movement speed, instead of being a single target DoT that also reduces firepower. No longer spreads. - Replaced Feeder Mutation power with Greater Coalescence. Spawns a larger controllable version of Leecher orb which heals allies and slows/drains enemies. - Feeder renamed to Burster and can be produced by all Scrin with Tech Center. No longer harvests to charge up. - Added spawn/death animation for Buzzer Swarm. - Added player coloured selection box to Buzzer Swarm, Leecher Orb. - Increased Nanite Repair tick rate slightly. - Fixed PeriodicExplosion initial delay. - Corrected ARC Recon Drone voice line.
-- `OpenRA.Mods.CA/Traits/Conditions/GrantStackingCondition.cs`: base 2023-05-27, 1 upstream commits since
-    - 2024-10-06 - Added Malefic allegiance (with Mutilator/Tormentor units and Anathema power). - Reduced delay between Guardian Drone burst shots. - Fixed support powers that spawn actors not spawning directly on top of other actors. - Corrected Bombardier damage. - Reverted Leecher damage buff. - Reduced Greater Coalescence healing of infantry & light armor.
-- `OpenRA.Mods.CA/Traits/Multipliers/TimedDamageMultiplier.cs`: base 2023-05-27, 1 upstream commits since
-    - 2025-07-02 Scale point defense laser in the same way as point defense shield.
-- `OpenRA.Mods.CA/Traits/PaletteEffects/PulsingPaletteEffect.cs`: base 2023-05-27, 1 upstream commits since
-    - 2026-01-17 Fix encyclopedia preview positioning for different camera settings.
-- `OpenRA.Mods.CA/Traits/Player/CapturedFactionsManager.cs`: base 2023-05-27, 1 upstream commits since
-    - 2025-07-11 - Reworked CountManager and related traits. - Removed unused/redundant traits. - Yaml fixes.
 - `OpenRA.Mods.CA/Traits/Player/LobbyPrerequisiteDropdown.cs`: base 2025-07-02, 1 upstream commits since
     - 2025-07-11 - Reworked CountManager and related traits. - Removed unused/redundant traits. - Yaml fixes.
 - `OpenRA.Mods.CA/Traits/PopControlled.cs`: base 2023-05-27, 1 upstream commits since
     - 2025-05-21 - Increased Killzone duration from 30s to 1 min. Reduced cooldown from 4 min to 3 min. - Improved PopControlled trait so it can deal with actors created in the same tick. - Improved SpawnActorWarhead so it doesn't create then dispose an actor if it's not positionable.
-- `OpenRA.Mods.CA/Traits/Render/WithEnabledAnimation.cs`: base 2023-05-27, 1 upstream commits since
-    - 2024-08-26 Balance/misc. - Increase Nuke Cannon splash radius and damage vs heavy armor. - Improved Nuke Cannon deploy behaviour to allow pre-targeting. - Mission 22 improvements. - Removed base regen from Yuri/Mastermind in missions 15/20. - Terror Dogs take reduced damage from each other's explosions. - Tibcore upgrade applies to IFV/Reckoner. - Increased range of Laser IFV/Reckoner by 1. Increased damage. - Increased Disruptor damage vs defenses. - Increased Viper damage. - Increased Cyclops range by 1. - Increased Obliterator spread so damage applies more consistently. - Increased Firestorm Missile damage vs heavy armor. - Reduced gren/flamer Heroes damage reduction a little more. - Troop Crawler from 1.5k to 1.6k. - Tooltip corrections.
-- `OpenRA.Mods.CA/Traits/Render/WithRangeCircleCA.cs`: base 2024-05-30, 1 upstream commits since
-    - 2025-07-02 Engine update part 7.
-- `OpenRA.Mods.CA/Traits/ResourcePurifierCA.cs`: base 2023-05-27, 1 upstream commits since
-    - 2025-07-02 Engine update part 7.
-- `OpenRA.Mods.CA/Traits/TurnOnIdleCA.cs`: base 2023-05-27, 1 upstream commits since
-    - 2026-05-31 Replaced AttachedAircraft trait with ImmobilePositionable.
-- `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 1 upstream commits since
-    - 2026-09-12 Random factions revealed on game start.
-- `OpenRA.Mods.CA/Widgets/ExternalLinkButtonWidget.cs`: base 2023-07-06, 1 upstream commits since
-    - 2023-08-19 Improved targeting for GrantExternalConditionPowerCA and ChronoshiftPowerCA.
-- `OpenRA.Mods.CA/Widgets/Logic/AddFactionSuffixLogicCA.cs`: base 2023-05-27, 1 upstream commits since
-    - 2025-07-05 Update UI classes to match engine changes.
-- `OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs`: base 2023-06-16, 1 upstream commits since
-    - 2023-08-19 Improved targeting for GrantExternalConditionPowerCA and ChronoshiftPowerCA.
 
-## MODIFIED+STALE: port the upstream diff by hand (46)
+## MODIFIED+STALE: port the upstream diff by hand (47)
 
 - `OpenRA.Mods.CA/Traits/MindController.cs`: base 2023-09-01, 17 upstream commits since, Cameo diff 91 lines
     - 2026-01-10 Mind control trait improvements.
@@ -201,13 +122,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2030 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2265 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1088 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1253 lines
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 - V3 now Ukraine unique unit. - Siege Tank now replaces V2 for Ukraine. - Yaml fixes.
@@ -248,7 +169,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-07-02 Engine update fixes part 3.
     - 2024-12-07 - Added voice announcement for when Covenants become available. - Added tracers effects to Wolverine & updated firing sound. - Increased Chrono Tank rate of fire, damage vs light/buildings, range (+1) and turn speed. Reduced HP from 45k to 32k. - Increased JumpJet/Bombardier speed. - Ships targetable by Anathema. - Tripled PAC damage vs buildings. - Reduced duration of Cyborg Reaper snare from 8s to 6s. - Zone Defender shield stacks up to 6 times providing between 25% and 50% damage reduction. - Updated Stromberg maps.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 84 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 93 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
@@ -303,7 +224,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-12-07 Clean up trait lookups.
 - `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 792 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 642 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 667 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 437 lines
     - 2025-08-10 AI updates.
@@ -321,12 +242,14 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-05-13 - Allow multiple types of mind control on a single unit. - Yuri/Mastermind/Hacker IFV reworked to allow control which passes to/from the passenger on exit/entry. - Re-remove Jackknife air to ground modifier.
 - `OpenRA.Mods.CA/Traits/Palettes/OverlayPlayerColorPalette.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 2 lines
     - 2026-01-19 Lock player colors in co-op missions.
+- `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisiteValidatedFaction.cs`: base 2025-11-24, 1 upstream commits since, Cameo diff 2 lines
+    - 2026-09-19 Campaign tweaks/fixes.
 - `OpenRA.Mods.CA/Traits/Sound/AmbientSoundCA.cs`: base 2023-05-29, 1 upstream commits since, Cameo diff 5 lines
     - 2024-08-23 Stop looping ambient sounds when game is paused. Don't include Troop Crawler in statistics.
 - `OpenRA.Mods.CA/Traits/Warpable.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 4 lines
     - 2023-12-22 Fixed empty warp damage bar appearing when units have very low health. Minor spelling/yaml corrections.
 
-## MOVED/REMOVED upstream (12)
+## MOVED/REMOVED upstream (13)
 
 - `OpenRA.Mods.CA/Traits/Attack/AttackBomberCA.cs`: base ?, 1 upstream commits since
     - now at OpenRA.Mods.CA/Traits/Air/AttackBomberCA.cs
@@ -342,17 +265,18 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Infiltration/InfiltrateForSupportPowerCA.cs`: base 2023-05-27, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/Player/ProvidesDelayedPrerequisite.cs`: base ?, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/TransferStanceToDeathActor.cs`: base 2023-05-27, 0 upstream commits since
+- `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 0 upstream commits since
 
-## MISSING: upstream files never adopted (312), by area
+## MISSING: upstream files never adopted (317), by area
 
-- `Traits`: **81**
+- `Traits`: **82**
 - `Traits/SupportPowers`: **26**
-- `Traits/Conditions`: **23**
+- `Traits/Conditions`: **25**
 - `Warheads`: **23**
 - `Widgets/Logic`: **22**
+- `Traits/Player`: **18**
+- `Traits/Render`: **18**
 - `Activities`: **17**
-- `Traits/Player`: **17**
-- `Traits/Render`: **17**
 - `Scripting`: **16**
 - `Projectiles`: **13**
 - `Graphics`: **11**
@@ -470,11 +394,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Conditions/DummyConditionGranter.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionIfOwnerIsNeutral.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnActivity.cs`
+- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnActorTypes.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnCapture.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnDamageStateCA.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnDeployTurreted.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnEnemiesNearby.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnLobbyOption.cs`
+- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnNonPlayableOwner.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnPlayerFunds.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnResupply.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnResupplying.cs`
@@ -544,6 +470,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisitesOnTimeline.cs`
 - `OpenRA.Mods.CA/Traits/Player/ReclaimableExperiencePool.cs`
 - `OpenRA.Mods.CA/Traits/Player/ReclaimableValueProducer.cs`
+- `OpenRA.Mods.CA/Traits/Player/RevealedFactionsManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/StackableSupportPowerManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/SupportPowerInstanceManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/TeleportNetworkManager.cs`
@@ -569,8 +496,10 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Render/WithRadiatingCircle.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithSpawnedActorIdentifier.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithSpawnerMasterPipsDecoration.cs`
+- `OpenRA.Mods.CA/Traits/Render/WithTeleportNetworkLinkVisualization.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithUnitConverterCountDecoration.cs`
 - `OpenRA.Mods.CA/Traits/ReturnsToBaseOnAmmoDepleted.cs`
+- `OpenRA.Mods.CA/Traits/RevealsFaction.cs`
 - `OpenRA.Mods.CA/Traits/ScatterOnExitCargo.cs`
 - `OpenRA.Mods.CA/Traits/SeedsResourceCA.cs`
 - `OpenRA.Mods.CA/Traits/Shielded.cs`
