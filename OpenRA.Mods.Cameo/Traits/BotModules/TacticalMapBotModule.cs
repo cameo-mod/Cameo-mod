@@ -24,6 +24,10 @@
  * state on this module — the donor parked RegionOwners on the shared
  * topology, which only works when every bot computes the identical answer.
  *
+ * ZG-c scope: NearestRegionId (a gate/barrier cell's nearest region) moved onto
+ * IBotZoneTopology so RegionMemory's zone backing can fold unzoned cells into a
+ * region's memory instead of dropping them.
+ *
  * Adaptations: CNChokepoint/CNRegion/CNSealableCorridor -> ZoneChokepoint/Zone/
  * ZoneGateCorridor (see IBotZoneTopology.cs); MaxDoorWidth -> MaxGateWidth
  * (its only ZG-a use is bounding the corridor the region cut resolves to);
@@ -1348,7 +1352,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return comp;
 		}
 
-		internal static CPos Centroid(List<CPos> cells)
+		internal static CPos Centroid(IReadOnlyList<CPos> cells)
 		{
 			long sx = 0;
 			long sy = 0;
@@ -2859,26 +2863,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// The region at a cell, or the nearest one a couple of cells out. A base reference can sit on a
-		/// gate or ramp cell, which belongs to no region at all.
-		/// </summary>
-		int NearestRegionId(CPos cell)
-		{
-			var id = RegionIdAt(cell);
-			if (id >= 0)
-				return id;
-
-			foreach (var near in world.Map.FindTilesInCircle(cell, 3))
-			{
-				id = RegionIdAt(near);
-				if (id >= 0)
-					return id;
-			}
-
-			return -1;
-		}
-
-		/// <summary>
 		/// Ground behind a gap that sits inside our own territory, where "behind" has to be worked out
 		/// rather than read off the claim. The pinch is sealed across its narrow axis - the same barrier
 		/// the chokepoint scan builds - and the flood starts on the side away from the base. Last resort,
@@ -3014,6 +2998,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <inheritdoc/>
 		public int RegionIdAt(CPos cell) => regionIdByCell != null && world.Map.Contains(cell) ? regionIdByCell[cell] : -1;
+
+		/// <inheritdoc/>
+		public int NearestRegionId(CPos cell)
+		{
+			// A base reference (or a remembered actor) can sit on a gate or ramp cell, which
+			// belongs to no region at all - look a couple of cells out before giving up.
+			var id = RegionIdAt(cell);
+			if (id >= 0)
+				return id;
+
+			foreach (var near in world.Map.FindTilesInCircle(cell, 3))
+			{
+				id = RegionIdAt(near);
+				if (id >= 0)
+					return id;
+			}
+
+			return -1;
+		}
 
 		/// <summary>
 		/// The generation this bot has ADOPTED, not the one currently published. The two differ for a tick

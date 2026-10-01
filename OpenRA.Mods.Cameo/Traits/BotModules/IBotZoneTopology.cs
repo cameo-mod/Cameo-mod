@@ -206,6 +206,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int RegionIdAt(CPos cell);
 
 		/// <summary>
+		/// The region at a cell, or the nearest one a few cells out when the cell itself sits on a
+		/// gate corridor or barrier and belongs to no region. This is how a caller lands SOMETHING:
+		/// threat remembered on a bridge or ramp counts in an adjacent zone rather than dropping
+		/// out of the index space entirely. -1 when nothing region-like is in reach (deep water,
+		/// off-map) — callers must treat that as "no region", never index with it.
+		/// </summary>
+		int NearestRegionId(CPos cell);
+
+		/// <summary>
 		/// The generation this bot has ADOPTED, bumped whenever the shared topology is re-cut
 		/// (a destroyed or repaired bridge). Anything cached per region id must be dropped when this
 		/// changes — after a re-cut nothing says id 4 is the same ground it was. -1 while unbuilt.
