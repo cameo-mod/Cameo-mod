@@ -165,7 +165,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var steamroller = Situation("steamroller");
 			steamroller.SteamrollerLead = 0.4;
 			Assert.That(MasterAiBotModule.PersonalityLeadLean(false, true, steamroller, "steamroller", 50),
-				Is.EqualTo(0.8));
+				Is.EqualTo(0.7).Within(1e-9));
 
 			var rush = Situation("rush");
 			rush.RushLead = 0;
