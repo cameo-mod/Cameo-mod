@@ -292,6 +292,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
+		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
+		public readonly bool SquadMicroEnabled = false;
+
+		[Desc("MI: percent of max HP at or below which a squad member pulls back (at the threshold pulls back).")]
+		public readonly int SquadMicroRetreatPct = 35;
+
+		[Desc("MI: cells beyond the target's own range that a kiting member keeps as standoff margin.")]
+		public readonly int SquadMicroKiteMarginCells = 2;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -499,6 +508,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
 		IBotMissionProvider[] missionProviders;
+		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
 		IBotUnitRoles unitRoles;
 
@@ -565,6 +575,15 @@ namespace OpenRA.Mods.CA.Traits
 		// the per-round pass order so a spent budget staggers rather than starves.
 		IBotActionBudget actionBudget;
 		int squadCursor;
+
+		// MI order consumer: micro orders (focus-fire, pull-back, kite) spend
+		// action budget; a null producer (no HumanPace module) means unlimited,
+		// as before. Per-squad attention is already spent by the update loop —
+		// callers must not consume TryConsumeAttention again.
+		internal bool TryConsumeMicroActions(int count = 1)
+		{
+			return actionBudget == null || actionBudget.TryConsumeActions(count);
+		}
 
 		public SquadManagerBotModuleCA(Actor self, SquadManagerBotModuleCAInfo info)
 			: base(info)
@@ -687,6 +706,18 @@ namespace OpenRA.Mods.CA.Traits
 
 			FogCanaryViolation(FoggedScans, IsNotHiddenUnit(a), site, a.Info.Name,
 				line => AIUtils.BotDebug("AI ({0}): {1}", Player.ClientIndex, line));
+		}
+
+		// LC6: same canary over a consumed list — each element is a decision
+		// input. Violations stay zero while every upstream filter holds; the
+		// list overload keeps per-call-site loops out of the states.
+		internal void CanaryObservedAll(IEnumerable<Actor> actors, string site)
+		{
+			if (!Info.FogCanaryEnabled || actors == null)
+				return;
+
+			foreach (var a in actors)
+				CanaryObserved(a, site);
 		}
 
 		// The pure core so tests can drive it without an Actor/World: a violation is
@@ -1151,6 +1182,7 @@ namespace OpenRA.Mods.CA.Traits
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
+			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
@@ -1238,10 +1270,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Fogged scans never fall back to actors the bot cannot see; remembered
 			// enemy buildings are offered separately as FrozenActor targets.
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
-
-			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
+				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			CanaryObserved(picked, "find-closest-enemy");
+			return picked;
 		}
 
 		// 6c pre-commit risk gate: as FindClosestEnemy, but candidates whose region's
@@ -1256,10 +1289,12 @@ namespace OpenRA.Mods.CA.Traits
 			units = PreferSquadTargets(units, owner, TagsOf);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
 
-			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
+				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			CanaryObserved(picked, "find-closest-enemy");
+			return picked;
 		}
 
 		// Fogged scans require a currently visible actor; mission consumers add remembered
@@ -1278,12 +1313,13 @@ namespace OpenRA.Mods.CA.Traits
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 			var targetPosition = World.Map.CenterOfCell(location);
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(targetPosition);
-
-			return visible.ClosestToIgnoringPath(targetPosition) ??
-				units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
-				units.ClosestToIgnoringPath(targetPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(targetPosition)
+				: visible.ClosestToIgnoringPath(targetPosition) ??
+					units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
+					units.ClosestToIgnoringPath(targetPosition);
+			CanaryObserved(picked, "find-closest-enemy-loc");
+			return picked;
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
@@ -1294,7 +1330,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			return units.RandomOrDefault(World.LocalRandom);
+			var picked = units.RandomOrDefault(World.LocalRandom);
+			CanaryObserved(picked, "find-hv-target");
+			return picked;
 		}
 
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
@@ -1306,7 +1344,9 @@ namespace OpenRA.Mods.CA.Traits
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
-			return units.RandomOrDefault(World.LocalRandom);
+			var picked = units.RandomOrDefault(World.LocalRandom);
+			CanaryObserved(picked, "find-hv-target");
+			return picked;
 		}
 
 		internal int SquadValueOf(SquadCA squad)
@@ -1375,8 +1415,13 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Enemies this bot can SEE within `radius` (the one radius scan this file keeps for squad targeting).
-		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius) =>
-			World.FindActorsInCircle(center, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius)
+		{
+			var enemies = World.FindActorsInCircle(center, radius)
+				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			CanaryObservedAll(enemies, "visible-enemies-near");
+			return enemies;
+		}
 
 		/// <summary>DF-2: the protection squad's rally point while a predicted attack is pending.</summary>
 		internal bool TryGetProtectionRally(out CPos rally)
@@ -1611,18 +1656,186 @@ namespace OpenRA.Mods.CA.Traits
 			return null;
 		}
 
-		void MissionTaken(BotMission mission)
+		// MissionCard lineage (fransotto's model): a MissionId identifies the
+		// strategic reason; every take is a numbered attempt carried by the squad
+		// for its lifetime, so "General -> commander -> actors -> result" resolves
+		// as one grep-able chain in the debug log. Counters persist per match, so
+		// a mission that dies and re-publishes continues the lineage (Attempt 2+).
+		readonly Dictionary<string, int> missionAttemptCounters = new();
+		readonly Dictionary<SquadCA, MissionAttempt> squadMissions = new();
+
+		sealed class MissionAttempt
+		{
+			public BotMission Mission;
+			public int Number;
+
+			// The mission's own objective: the actor the squad was aimed at when the
+			// attempt opened (MissionTaken runs after SelectMission set the target).
+			// Null for a remembered (frozen) target — then only the squad's fate
+			// decides, never whatever unit it happens to shoot next.
+			public Actor CommittedTarget;
+		}
+
+		// The verdict on an open attempt from state the squad already holds. World-free so
+		// it is testable: null = still running, otherwise the state and reason to book.
+		public static (BotMissionAttemptState State, string Reason)? AttemptVerdict(
+			bool targetGone, bool targetOursOrAllied, bool retargeted, bool squadEmpty, bool anyMemberDied)
+		{
+			if (squadEmpty && anyMemberDied)
+				return (BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+			if (targetGone || targetOursOrAllied)
+				return (BotMissionAttemptState.Success, BotMissionReasons.Done);
+			if (squadEmpty)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Reserved);
+			if (retargeted)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			return null;
+		}
+
+		void CheckAttemptVerdict(SquadCA squad)
+		{
+			if (!squadMissions.TryGetValue(squad, out var attempt))
+				return;
+
+			// Only the objective's fate decides. A squad switching to the enemy in front
+			// of it is not a new mission (attack squads retarget constantly), so the
+			// retarget clause stays false here; DismissSquad books the real supersede.
+			var committed = attempt.CommittedTarget;
+			if (committed == null)
+				return;
+
+			var gone = committed.IsDead;
+			var oursOrAllied = !gone && committed.Owner != null && committed.Owner.RelationshipWith(Player) != PlayerRelationship.Enemy;
+			var verdict = AttemptVerdict(gone, oursOrAllied, false, !squad.IsValid, false);
+			if (verdict != null)
+				ResolveMissionAttempt(squad, verdict.Value.State, verdict.Value.Reason);
+		}
+
+		// LC1 (AI_ARCHITECTURE 10.1): squad membership is a lease. The pool stays
+		// unclaimed so engineers/scouts/collectors can borrow it; squad members are
+		// claimed with a heartbeat so nothing else can take them mid-job, and a
+		// member another module holds is handed off, never fought over. Null
+		// service = no contract, which keeps classic byte-identical.
+		const string LeaseOwner = nameof(SquadManagerBotModuleCA);
+		readonly HashSet<Actor> claimedBySquads = new();
+
+		int LeaseHeartbeatTicks() => Math.Max(200, Info.AttackForceInterval * 4);
+
+		void ReconcileSquadLeases()
+		{
+			var leases = BotUnitLeases.Of(Player);
+			if (leases == null)
+			{
+				claimedBySquads.Clear();
+				return;
+			}
+
+			// The pool is unowned: drop entries another module claimed since they
+			// entered, before any draft site can pull them this pass. They leave
+			// activeUnits too, so FindNewUnits re-adopts them once released.
+			unitsHangingAroundTheBase.RemoveAll(u =>
+			{
+				if (u.Actor == null || !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner))
+					return false;
+
+				activeUnits.Remove(u.Actor);
+				return true;
+			});
+
+			var held = new HashSet<Actor>();
+			foreach (var squad in Squads)
+			{
+				if (!squad.IsValid)
+					continue;
+
+				var handedOff = false;
+				foreach (var u in squad.Units.ToList())
+				{
+					var a = u.Actor;
+					if (a == null)
+						continue;
+
+					if (BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Squad, LeaseHeartbeatTicks()))
+						held.Add(a);
+					else
+					{
+						// Another owner holds it — hand the unit off cleanly: out of the
+						// squad and out of activeUnits, so FindNewUnits re-adopts it once
+						// the other module releases.
+						squad.Units.Remove(u);
+						activeUnits.Remove(a);
+						handedOff = true;
+					}
+				}
+
+				// A hand-off is not a loss: a squad emptied by it is released as reserved,
+				// so CleanSquads never books it as lost_units.
+				if (handedOff && !squad.IsValid)
+				{
+					var verdict = AttemptVerdict(false, false, false, true, false);
+					ResolveMissionAttempt(squad, verdict.Value.State, verdict.Value.Reason);
+				}
+			}
+
+			claimedBySquads.RemoveWhere(a =>
+			{
+				if (held.Contains(a))
+					return false;
+
+				leases.Release(a, LeaseOwner);
+				return true;
+			});
+			claimedBySquads.UnionWith(held);
+		}
+
+		void MissionTaken(BotMission mission, SquadCA taker)
 		{
 			foreach (var provider in missionProviders ?? Array.Empty<IBotMissionProvider>())
 				if ((provider.Missions ?? Array.Empty<BotMission>()).Any(candidate => ReferenceEquals(candidate, mission)))
 				{
 					provider.MissionTaken(mission);
+					var id = mission.EffectiveMissionId;
+					var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+					missionAttemptCounters[id] = attempt;
+					squadMissions[taker] = new MissionAttempt
+					{
+						Mission = mission,
+						Number = attempt,
+						CommittedTarget = taker.Target.Type == TargetType.Actor ? taker.Target.Actor : null
+					};
+					ReportMissionAttempt(mission, attempt, BotMissionAttemptState.Committed, null);
 					return;
 				}
 		}
 
+		void ReportMissionAttempt(BotMission mission, int attempt, BotMissionAttemptState state, string reason)
+		{
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = mission.EffectiveMissionId,
+				Attempt = attempt,
+				State = state,
+				Reason = reason,
+				Executor = "Squads",
+				MissionType = mission.Type.ToString().ToLowerInvariant(),
+				RegionIndex = mission.RegionIndex,
+				Tick = World.WorldTick
+			});
+			foreach (var sink in missionOutcomeSinks ?? Array.Empty<IBotMissionOutcomeSink>())
+				sink.Report(mission.EffectiveMissionId, attempt, state, reason, World.WorldTick);
+		}
+
+		void ResolveMissionAttempt(SquadCA squad, BotMissionAttemptState state, string reason)
+		{
+			if (squadMissions.TryGetValue(squad, out var attempt) && squadMissions.Remove(squad))
+				ReportMissionAttempt(attempt.Mission, attempt.Number, state, reason);
+		}
+
 		void CleanSquads()
 		{
+			foreach (var s in Squads.Where(s => !s.IsValid))
+				ResolveMissionAttempt(s, BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
 			Squads.RemoveAll(s => !s.IsValid);
 			foreach (var s in Squads)
 			{
@@ -1662,6 +1875,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void DismissSquad(SquadCA squad)
 		{
+			var leases = BotUnitLeases.Of(Player);
+			if (leases != null)
+				foreach (var u in squad.Units)
+					if (u.Actor != null && claimedBySquads.Remove(u.Actor))
+						leases.Release(u.Actor, LeaseOwner);
+
+			ResolveMissionAttempt(squad, BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 			unitsHangingAroundTheBase.AddRange(squad.Units);
 
 			squad.Units.Clear();
@@ -1724,6 +1944,7 @@ namespace OpenRA.Mods.CA.Traits
 				TrackRoleLosses();
 
 			CleanSquads();
+			ReconcileSquadLeases();
 
 			activeUnits.RemoveAll(unitCannotBeOrdered);
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
@@ -1754,6 +1975,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
+						CheckAttemptVerdict(s);
 						s.Update();
 						squadCursor = index + 1;
 					}
@@ -1826,10 +2048,13 @@ namespace OpenRA.Mods.CA.Traits
 		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
 		internal double PredictedRatio(SquadCA squad, IEnumerable<Actor> enemies)
 		{
+			var enemyList = enemies as IReadOnlyList<Actor> ?? enemies.ToList();
+			CanaryObservedAll(enemyList, "predicted-ratio");
+
 			var rules = World.Map.Rules;
 			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
 				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
-			var foes = enemies.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
+			var foes = enemyList.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
 				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
 			return BotCombatPredictor.Predict(own, foes).Ratio;
 		}
@@ -1844,10 +2069,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void FindNewUnits(IBot bot)
 		{
+			var leases = BotUnitLeases.Of(Player);
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == Player &&
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
-					!activeUnits.Contains(a) && a.IsInWorld);
+					!activeUnits.Contains(a) && a.IsInWorld &&
+					!BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner));
 
 			// JoinGuerrilla gates creation too: 0 means this personality never forms
 			// guerrilla squads, not "the first unit always joins". The size cap is
@@ -2142,7 +2369,7 @@ namespace OpenRA.Mods.CA.Traits
 						RegionIndex = mission.RegionIndex,
 						Frozen = missionFrozenTarget != null
 					};
-					MissionTaken(mission);
+					MissionTaken(mission, attackForce);
 				}
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;

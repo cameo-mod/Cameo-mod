@@ -1,3 +1,107 @@
+# 2026-10-01 — Claude: the order gate (DESIGN §19.6, maintainer ruling)
+
+- Maintainer, 2026-09-30: *"Refuse, but emergencies can override."* Now DESIGN §19.6 (binding): a module may order a
+  unit only while it holds the unit's lease (or nobody does); emergencies (attack responses from `EmergencyModules`)
+  take the unit over and the old holder is told (`IBotUnitLeaseLost`).
+- Enforced in ONE place: Cameo's `ModularBot` calls every module, so it records which module is running and judges each
+  queued unit order at `IBot.QueueOrder` — no change to the 246 `QueueOrder` sites (38 files; 5 claim units at all),
+  Fransbot included. `BotOrderGate<TKey>` is the world-free rule + counters; `BotLeaseTable.Preempt`; LC1 gains
+  `Preempt` + `BotLeasePurpose.Emergency` + `IBotUnitLeaseLost`.
+- Also counted: crossed orders (two modules ordering one unit within 100 ticks, claims or not), unattributed orders,
+  and orders the full queue dropped (`MaxQueuedOrders` used to drop them silently).
+- Off until its A/B: `BotUnitLeaseRegistry.EnforceAtOrderGate: false` = count only (`conflicts`). genericbot records
+  in `cameo-ai-matches.jsonl` gain `order_gate`. `classic` (no registry) passes untouched.
+- 406/406 tests (6 new); fog PASS; doc-claims/task-index PASS; boot gate to the menu (the one new exception log in that
+  window is another worktree's engine, `C:/tmp/lc6w`, failing on a support-dir argument at startup — not this tree).
+
+# 2026-09-30 (night) — Claude: LC5 ownership watchdog
+
+- `BotOwnershipWatchdog` (OpenRA.Mods.Cameo, Player, `genericbot || classicbot`): every 100 ticks it reads who holds
+  each of the bot's units (the LC1 lease table, every squad manager's squads, the idle pools it receives through the
+  engine's `IBotNotifyIdleBaseUnits` hook, so no squad-manager edit) and reports once per unit: DOUBLE_OWNER, TWO_SQUADS,
+  HELD_BY_DISABLED, DEAD_HELD (> 400 t), ORPHAN (a live squad-eligible Mobile unit in no squad, pool or lease > 750 t).
+  Read-only: it never orders, claims or releases, so classic's decisions are untouched. Active in bot-only matches
+  (the harness referee is recognised by its declared NonCombatant flag) and with `Debug.BotDebug`.
+- Per-bot `ownership` object in `cameo-ai-matches.jsonl` (checks + every kind, zero included + worst types): every A/B
+  now reports ownership health per arm. The check is `BotOwnershipLedger<TKey>`, world-free; 6 ledger tests + 1 JSON test.
+- Smoke (hard vs classic, td_gdi, A Nuclear Winter, 1 match to 17486 t): classic 175 checks, 0 violations; hard 175
+  checks, **4 DOUBLE_OWNER — `CratePickupBotModule` leased Guerrilla/Protection squad members it found `IsIdle`**
+  (humvee ×2, shotgunner, officer). That is the review's P0b class live; NOVA's #681 (squads claim their members) closes
+  it — the watchdog is its acceptance test.
+- Also: an executor-less mission record omits `by` instead of writing `""` (DAWN's #679 smoke nit); debug lines print `by=?`.
+- 400/400 tests; fog manifest +1 (own units only, §19.5-honest); boot gate to the menu.
+# 2026-09-30 (late pm2) — Devin (NOVA): #681 conformed to the MC1 contract + LC1 squads
+
+- Merged master (`2638c6cbc`, MC1 writer #683) into the #681 branch and
+  conformed per RULING_2026-09-30_claude_mission_cards_one_contract:
+  `MissionId`/`IdentityKey` are now STRINGS in the ruled grammar
+  (`raid:<internal>:r<region>` — InternalName, never ClientIndex; every
+  non-human player shares the host's ClientIndex). The local
+  `BotMissionState`/`BotMissionReason` enums are gone — emission is
+  exclusively `BotMissionLog.Write` with `BotMissionAttemptState` +
+  `BotMissionReasons` constants. `DismissSquad` reports
+  `Released`/`superseded`; `CleanSquads` reports `Failed`/`lost_units`
+  only when units actually died.
+- LC1 squad consumer rides in the same PR (claim/heartbeat/release +
+  hand-off of units claimed by another owner; null lease service =
+  classic-identical).
+- `WVec.Dot` overflow fix (long widening) is also on this branch —
+  prerequisite for the CA-4 flag-on A/B.
+- Verified on the merged tree: build 0 errors, 394/394 tests, audits
+  PASS (fog 218 sites, no new omniscience), boot-gate PASS.
+
+# 2026-09-30 (late pm) — Devin (NOVA): #678 merged; MissionCard lineage slice
+
+- #678 (CA-3/CA-4 port) merged → master `1dbbfe136`. Ported the stale
+  `ca3-role-mix`/`ca3-stage-gate`/`ca4-formation` stack as a fresh patch
+  set: merged `IBotUnitRoles`/`BotUnitRoles` (consumes `BotRoleSets`,
+  statistical fill only for unroled units — no parallel roles system per
+  §19.3), `RoleMix` production filler, `StageRequiredRoles` launch gate,
+  `FormationMovement` — all flag-gated inert. 359 tests, boot-gate PASS.
+  Latent flag-for-later: formation `WVec.Dot` can overflow on huge maps
+  (inert until `FormationMovement` is flipped).
+- MissionCard lineage slice (#681, telemetry-only): `BotMission.MissionId`
+  deterministic from `(Type, TargetPlayer, RegionIndex)` — stable across
+  re-derived situation passes. `MissionTaken` numbers each attempt; the
+  squad carries `(MissionId, attempt)`; debug log emits
+  `MISSION n ATTEMPT m COMMITTED/FAILED`. New opt-in
+  `IBotMissionOutcomeSink` + `BotMissionAttemptState` (fransotto's
+  vocabulary + `Failed`). Provider-side dormant-shelf/success detection
+  and the JSONL card archive remain open (MasterAi lane / LA lane).
+- Note for agents: `SquadManagerBotModuleCA.cs` hit the stale-editor
+  overwrite again mid-edit (write landed, then reverted silently) —
+  verify `git status` lists your files before committing; I had to
+  re-apply via scripted patch.
+# 2026-09-30 (eve) — Devin (EMBER): MI order half — focus-fire, pull-back, kite
+
+- `SquadMicroEvalCA` gets its order half wired into `GroundStatesCA.cs` per
+  NOVA's seam spec (REPLY_2026-09-30_nova_to_ember_mi_wiring.md), behind a new
+  `SquadMicroEnabled` flag — its OWN A/B cell, independent of
+  `FormationMovement`. Default off everywhere; zero behaviour change.
+- `GroundUnitsAttackState` member pass (Rush only): once per squad tick the
+  observed enemies around the target (`IsPreferredObservedEnemyUnit`, live-HP
+  profiles) feed `PickFocusTarget`; members within their own `MaxRange`
+  `Attack` it, members inside the target's reply range while outranging it
+  `Move` back to kite standoff, members at/below `SquadMicroRetreatPct`
+  (35%) `Move` behind the squad centre. Every micro order spends one
+  `IBotActionBudget.TryConsumeActions`; denial or no pick degrades to the
+  plain AttackMove — the budget shapes the burst, never the intent.
+- `IssueFormationOrders` composes pull-back with the rear-stall tracker:
+  low-HP frontline/trailing members rally to the trail line (computed via
+  the new `SquadMicroEvalCA.PullBackPoint`, which replaces the inline trail
+  math), and a stalled rear whose HP is dropping — under fire in the
+  chokepoint — steps further back along the axis to break contact. Micro
+  orders queue AFTER the formation orders so they win that tick.
+- Fog honesty: the one new `FindActorsInCircle` filters through
+  `IsPreferredObservedEnemyUnit` (same upstream filter as IdleState:121);
+  manifest bumped 3 -> 4 with this reasoning.
+- `SquadManagerBotModuleCA.TryConsumeMicroActions`: internal accessor —
+  null `IBotActionBudget` producer = unlimited, matching the existing
+  attention consumer's semantics.
+- 3 new PullBackPoint tests (cardinal, diagonal truncation, coincident).
+  Build: 0 errors; SquadMicroEvalTest 9/9. Boot-gate PASS (menu reached,
+  no new exception logs).
+
 # 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
 
 - `tools/ai/ab_summary.py` gains a `spawn split (pooled, N decided)` line:
@@ -28,6 +132,35 @@
 - 4 new tests (ArmFingerprintSummaryTests): 33/33 harness green.
   Verified live: drift-demo dir prints its tombstone fp, league-4's four
   pre-LC7 batch files print `none recorded`. Tools-only; boot-gate N/A.
+
+# 2026-09-30 (eve2) — Devin (EMBER): mission_story tracks the #691 record split
+
+- Fransotto's boundary landed on master as #691: an attempt exists only
+  from COMMIT; `record_kind` splits mission events
+  (PUBLISHED/DENIED/DORMANT/REOPENED — the shelf) from attempt
+  transitions. `mission_story.py` now renders the mission-level line as
+  `shelf: PUBLISHED@t -> DORMANT@t reason -> REOPENED@t`, counts
+  mission-level DENIED separately from attempt outcomes, and reports
+  never-attempted missions as `shelf_only` (not bugs). Pre-#691 records
+  (no record_kind) still group as attempts — verified on the live
+  mc1-smoke corpus. 9 tests, tools-only.
+
+# 2026-09-30 (eve) — Devin (EMBER): MC2 mission_story.py (ruling lane)
+
+- `tools/ai/mission_story.py`: groups `cameo-ai-missions.jsonl` transitions into
+  game → mission → attempt stories ordered by tick, executor named per line;
+  per-type success-rate table; dangling-attempt report (attempts with no
+  terminal line = ownership bugs, last line names the quiet layer).
+  `--match`/`--mission` filters; `terminal` flag authoritative with the
+  state-name set as fallback.
+- Verified on the real archive (`mc1-smoke`, Claude's #683 ENG smoke,
+  Nuclear Winter): 10 capture missions, 18 attempts, 33% success —
+  `capture:Multi1:oilb:611` shows a contested derrick eating 5 straight
+  engineer attempts; `oilb:611` correctly re-keyed Neutral→Multi1 on
+  enemy capture. Zero dangling attempts (the writer always closes).
+- 7 unit tests pin the read contract (terminal-flag precedence, dormant
+  = no live attempt, executor named in dangling report). Tools-only;
+  boot-gate N/A.
 
 # 2026-09-30 (pm) — Devin (EMBER): post-#662 merge, LC6 ratchet extension, LC7 shipped
 
@@ -15011,6 +15144,95 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
   revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
   live A/B trees stay frozen for their owners.
 
+
+## 2026-09-30 (cont.) — F1 ladder + W3 semantics correction
+
+- Verified the REAL W3 variable against worktree diff (earlier summary had
+  it inverted): master already arms the 8 Frans service modules on
+  `genericbot && hardbot` (#656). W3 swaps producer OWNERSHIP on hard —
+  4 CA economy modules off, 5 Frans producers on. ResourceMapBotModule is
+  no gap (unqualified instance already genericbot||classicbot).
+- `FransDifficultyLadder` (OpenRA.Mods.Fransbot/Traits/) committed on
+  devin/dawn/19-1-ungate-all-tiers + pushed to PR #672 (34d96c5b9):
+  DynamicBotInsurance-style easiest/cameogod endpoints, linear by rank,
+  fransbot+classic alias to hard. Dead code until W3 verdict.
+- Knob table drafted for all 13 modules on §19.1's four axes; risk-aversion
+  weights stay structural (direction ambiguous).
+- CA-6 ca6-cand verified flag-only (WeakIncludesDefence false→true);
+  control pools w3ab-ctrl. First match in-game at WT 20k+.
+- Early W3: ctrl 0-2 / cand 0-5 (GDI mirror only). Machine at 6-instance
+  cap (my 3 + Claude 2 + EMBER lc7 1). No launches until <=5.
+- NOVA verified all of fransotto's review claims + found 28
+  IgnoreVisibility support-power fog leaks (LC6/EMBER, needs ruling).
+
+## 2026-09-30 (cont.2) — orphaned #412 recovery + W3 signal
+
+- FOUND: fleet row said "#412 sequences landed" — false. PR #412 merged
+  into d2k-weapon-closure 11s after that base had landed on master via
+  #411; its ~2500-line drain never reached master (498686947 not an
+  ancestor of origin/master). Artifact-vs-doc: artifact wins.
+- RECOVERED on devin/dawn/d2k-sequence-closure-v2 -> PR #675: 19 blocks
+  to Shared (unconditional include), 3 Ordos / 2 Ixian / 1 Harkonnen,
+  ordos_eye_bombs dedupe-only. NOT ported: 19 dotted *.faction blocks
+  (R18 renamed them faction-front; old names unreferenced) and ~22
+  same-file dupes (already 1 block each on master).
+- Verified: audit_sequences S1=0/S2=0 before+after, strict word-boundary
+  ref scan per id, boot-gate PASS (menu, no new exceptions).
+- W3 mid-run: ctrl 3-2, cand 0-9 — Frans producer stack losing every
+  match so far; F1 fail-path increasingly likely (revert arm set, keep
+  CA producers on hard). ~15 matches/arm left.
+- CA-6 cand first match a marathon turtle (WT 86k+, still live).
+- Claude ab664: cand 3-0 so far (repair-owner fix looking positive).
+
+## 2026-09-30 (cont.3) — MissionCard telemetry + W3 corrected tally
+
+- fransotto brainstormed MatchId -> MissionId -> AttemptId mission cards
+  (dormant-retry lifecycle, local-first cross-match archive, shared
+  neutral infra with Cameo). Verified claim-by-claim vs our code:
+  MissionId + stable DEFEND incident ids + bid->commit->release spine +
+  record_id/map_uid match records already exist; gaps are AttemptId,
+  dormant shelf, outcome vocabulary, persistence.
+- SHIPPED increment 1: devin/dawn/missioncard-telemetry -> PR #679.
+  Attempt ledger in the broker; normalized lines
+  `MISSION <id> ATTEMPT <n> COMMITTED|DENIED|RELEASED|ENDED`. Telemetry
+  only. First committer mints the attempt; a full release resets
+  AttemptNumber so the next commit is the next attempt (implicit
+  dormant-retry already existed — now it's visible).
+- Boot-gate lesson: copying engine/ between worktrees needs rebuild of
+  ALL mod projects — msbuild skipped OpenRA.Mods.Cameo.dll (stale
+  pre-#663, no BotRoleSets.AirArmament) and the boot crashed on it.
+- W3 CORRECTED AGAIN (counting bug): earlier tally counted ALL player
+  rows — every match writes a hard row AND a classic row, so any tally
+  without bot_type=='hard' reads ~1:1 by construction. True hard-only
+  record: ctrl 7-4, cand **0-22** — Frans producers lose every match.
+  F1 fail path now near-certain: CA producers stay on hard, Frans
+  producer modules stay donor-only.
+- ca6ab-cand marathon still running (no records). Machine at cap during
+  boot-gate only.
+
+## 2026-09-30 (cont.4) — host restart recovery + F1 verdict + MC1 contract
+
+- Host restart killed all drivers (box at 0 instances). Resumed on
+  ORIGINAL baselines (internal consistency): w3ab-ctrl n-mirror x8
+  (final matrix 8/8/4/3, one cross repeat lost); ca6ab-cand full
+  repeats-8 rerun (g-mirror oversamples to 16 — no skip logic in
+  run_ai_match_batch.py, disclosed).
+- W3/F1 VERDICT posted as PR #689 (AI_MATCH_LOG row): cand hard 0-24
+  complete; forensics = production starvation (FransMcvExpansion never
+  tasks an MCV; mcv=0/stage=Idle all game; idle_queues; deaths 4-5x
+  kills). Fail path: CA producers stay on hard; dawn-w3 never merges.
+- #679 now emits through BotMissionLog.Write (MC1 contract on master
+  via #687): frans:<MissionAuctionId> ids, x_frans_* reasons,
+  RELEASED reason=target_gone; FransBotLog keeps narrative context.
+  Drift baseline re-written; boot-gate PASS (menu 36s, no exceptions).
+  Validation smoke: fransbot vs classic x4 on C:/tmp/mc1-frans-smoke
+  checking cameo-ai-missions.jsonl frans: lines.
+- Fleet absorbed: mission-card one-contract ruling, standing orders
+  update (merge = Claude only), EMBER #671/#674 READY, NOVA #681
+  sibling lineage + LC1 squad consumer ready, #678 CA-3/CA-4 landed
+  inert on master.
+
+
 ## 2026-09-30 — CA-2b verdict: BehaviourEnabled LOSES its A/B
 
 Pooled ca2b2+ca2b3 (17 matches/arm, identical pre-#660 base, maximum, both
@@ -15035,6 +15257,75 @@ Also: fbal-cc classic-vs-classic probe stopped per maintainer order
 (rebalance later); 6 records banked before kill: Nod-classic beat Gdi-classic
 on both cross orientations (2-0, thin n) and GDI-mirror spawn1 won all 4 —
 kept as provenance, not a balance claim.
+
+## 2026-10-01 — ab_summary: watchdog readout for ownership + order_gate (Devin/EMBER)
+
+Branch `devin/ember/absum-order-gate` @ `bea5573a2`. Per the §19.6 order-gate
+notice (#699), `ab_summary.py` now sums LC5 `ownership` and §19.6 `order_gate`
+counters per bot type across the corpus and prints a `watchdogs` line per bot
+beside the win table — so an arm's conflicts/double_owner read next to its
+W/L. `by_type` detail stays in the records. Fields absent (pre-#695/#699 or
+classic records) print nothing. Two tests pin the contract (summation + the
+silent-absent case). Real-run check on the in-flight #681 ctrl arm: block
+correctly silent on pre-#699 records.
+## 2026-10-01 — LC6 widening: central consumption-point canaries (Devin/EMBER)
+
+Branch `devin/ember/lc6-canary-widen` off `f1f47c879`. Widened fog canaries
+from per-state sites to the central chokepoints in `SquadManagerBotModuleCA`:
+- `FindClosestEnemy` x3, `FindHighValueTarget` x2: canary on the picked actor
+  at the single return path (no behavior change — same pick, instrumented).
+- `VisibleEnemiesNear`: `CanaryObservedAll` on the returned list — covers the
+  radius overload, the engage scan, and micro focus candidates.
+- `PredictedRatio`: `enemies` materialized once and canaried — catches any
+  caller feeding the predictor from an unfiltered scan.
+- `SquadCA.Update`: stale-target canary — an `Actor` target still committed
+  while unobservable logs `squad-update-target`; `FrozenActor` memory targets
+  are legal and skip the check (they're the designed retention mechanism).
+`CanaryObservedAll` added next to `CanaryObserved`; same pure
+`FogCanaryViolation` core (already pinned by AirDoctrineSquadTypeTest).
+Zero new enumerations — fog manifest stays 218 sites. Build 0 errors;
+boot-gate PASS (menu marker, no new runtime exceptions; two pre-boot
+launcher-arg exceptions from failed SupportDir quoting, not runtime faults).
+
+## 2026-10-01 (later) — fog-canary ratchet (same branch)
+
+The canaries get their own ratchet inside `audit_fog_honesty.py`: a third
+check pins every literal canary site NAME and call count per file in
+`fog_canary_manifest.json` (seeded: 4 files / 16 sites — the seven new
+consumption points plus the nine inherited air-squad sites). A removed or
+renamed site FAILs; additions are noted for `--write`. Negative-tested:
+renaming `squad-update-target` fails the audit and names both sides of
+the swap.
+## 2026-09-30 ENG-T transport provider (devin/dawn/engt-transport-provider @ 72d429685, PR #698)
+
+Delivered Claude's order (ORDER_2026-09-30_claude_to_dawn_eng_t_provider.md): the CA seam
+`IBotCaptureTransportProvider` (#694) is served by Fransbot's FransTransportCommanderBotModule —
+DESIGN §22 one-transport-system, no second implementation.
+
+- Run model: one TransportMission per 1-5 engineer run; every leg keyed in `missions`;
+  Distinct() single driver pass; native EnterTransport per leg; native all-at-once Unload at the
+  first stop (no single-passenger Unload order path — Cargo's order always unloads all);
+  per-leg TryConsumeDelivered hands each passenger its OWN target (the documented fallback).
+- Run edges: RunBoardingIssued per leg, partial departure after BoardingRetryInterval*4 stall,
+  dead-leg pruning, dead-anchor-during-Waiting releases run early, CancelAfterDrop releases all.
+  Single-passenger + reusable SpecOps untouched (IsRunMission branches only).
+- LC1: transport claimed as BotLeasePurpose.Mission (owner FransTransportCommanderBotModule,
+  TransportLeaseTicks heartbeat in ManageMission, release in ReleaseTransport);
+  FindAvailableTransports skips other-owner claims.
+- Null-safety arm: Created tolerates missing Frans services — NullFransRiskModelService (neutral,
+  fog-honest), no strategic map => ground/LST proofs decline (air only) + their production
+  suppressed, no general => loss corridors allowed, no commandBid => compatible,
+  no combatIntel => plain owner scan.
+- Arming: RequiresCondition `enable-fransbot || engt-transport`; GrantConditionOnBotOwner
+  @engttransport grants it to all genericbot tiers + exploit bots; classic excluded; inert by
+  default since EngineerBotModule only rolls when TransportChance > 0.
+- PassengerTypes +d2k_hijacker/+d2k_mechanic (were missing capturers).
+- MC1 cards: transport:<anchorId> COMMITTED -> PROGRESSING -> done/dropped/target_gone/timeout/
+  lost_units, Executor "Transport".
+- Tests: WantsTransport boundaries + GreedyRoute nearest-next. 399/399 pass. Audit suite clean
+  for the diff (latest/ drift = base ContentPack migration). Boot-gate PASS (~39s, no new exc).
+- Smoke in flight: engt-smoke @ 72d429685 dirty (TransportChance:25), hard vs classic td_gdi x2,
+  Nuclear Winter — done-when = archive shows COMMITTED by=Transport -> PROGRESSING -> SUCCESS.
 
 ## 2026-10-01 — NOVA: duplicate-key collapse (D2 4,965 -> 158), resolved-identical, boot-verified
 

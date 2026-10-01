@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **447**, files touched: **4629**
+Commits reviewed: **448**, files touched: **4687**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -98,10 +98,10 @@ Commits reviewed: **447**, files touched: **4629**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 109 |
+| DEVELOPMENT_LOG.md | 110 |
 | docs/HANDOFF.md | 97 |
 | mods/cameo/ai/ai.yaml | 68 |
-| docs/LESSONS_LEARNED.md | 65 |
+| docs/LESSONS_LEARNED.md | 66 |
 | docs/design/AI_ARCHITECTURE.md | 65 |
 | docs/DESIGN.md | 56 |
 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 48 |

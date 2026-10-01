@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (36 file(s)) | 392 | >= 24 |
-| T2 | `def test_*` in tools/tests (289 file(s)) | 2911 | >= 177 |
-| T3 | modules with no test mentioning them | 321 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (39 file(s)) | 432 | >= 24 |
+| T2 | `def test_*` in tools/tests (291 file(s)) | 2924 | >= 177 |
+| T3 | modules with no test mentioning them | 320 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (321)
+## T3 — untested modules (320)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -52,7 +52,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs | BotCounterDemandController |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/BeaconResponderBotModule.cs | BeaconResponderBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
@@ -344,5 +343,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 321 untested > baseline 224
+- T3: 320 untested > baseline 224
 

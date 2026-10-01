@@ -13,3 +13,4 @@
 - Personality conditions have exactly one matching notification block each.
 - No dead RushInterval/RushAttackScanRadius keys remain.
 - Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN §19.1).
+- No module gates on a difficulty-tier condition (DESIGN §19.1); strength scales via BotLimits.

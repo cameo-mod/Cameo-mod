@@ -21,14 +21,14 @@ Player:
 		RequiresCondition: enable-fransbot
 		DecisionInterval: 25
 	# W1 intel substrate: these pure-service modules (no orders, no production
-	# requests) also arm on `hard` — the Frankenstein candidate — via
-	# `genericbot && hardbot`. `classic` gets hardbot but never genericbot, and
-	# lower tiers get genericbot but never hardbot, so the reference bot and
-	# easier difficulties stay Frans-free.
+	# requests) armed on `hard` via `genericbot && hardbot` until the W3 verdict
+	# (cand 0-24) sent the whole Frans stack back to donor-only: `hard` keeps
+	# the CA producers/services, and DESIGN 19.1 forbids tier-gated modules
+	# anyway — strength scales via BotLimits, not RequiresCondition.
 	FransCombatIntelBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransStrategicMapBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 		# Representative actors whose locomotives derive the passability layers.
 		# All ContentPacks are unconditionally Included today, so TD/RA picks
 		# always resolve; a missing actor leaves that layer inert by design.
@@ -36,17 +36,17 @@ Player:
 		McvProbeActorType: td_gdi_mobileconstructionvehicle
 		NavalProbeActorType: ra1_allies_gunboat
 	FransRiskModelBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransMineClusterBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransEconomicSaturationBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransCommanderCoreBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransCommandBidBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 	FransGeneralBotModule:
-		RequiresCondition: enable-fransbot || (genericbot && hardbot)
+		RequiresCondition: enable-fransbot
 		RaidPublishRememberedBuildings: true
 		ReconProbeSpawnRepeatTicks: 4500
 		RaidInterferencePriorityBonus: 40
@@ -205,7 +205,9 @@ Player:
 		PeacetimeDefensePerAnchorTarget: 5
 		PeacetimeDefenseEarliestTick: 3200
 	FransTransportCommanderBotModule:
-		RequiresCondition: enable-fransbot
+		# ENG-T (DESIGN §22): the ONE transport system — also armed for genericbot under its own
+		# flag so EngineerBotModule can request capture runs through IBotCaptureTransportProvider.
+		RequiresCondition: enable-fransbot || engt-transport
 	FransMinelayerBotModule:
 		RequiresCondition: enable-fransbot
 	FransSupportPowerBotModule:

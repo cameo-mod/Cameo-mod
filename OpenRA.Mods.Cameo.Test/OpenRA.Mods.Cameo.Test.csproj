@@ -5,6 +5,7 @@
   </PropertyGroup>
   <Import Project="../engine/Directory.Build.props" />
   <ItemGroup>
+    <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />

@@ -24,7 +24,7 @@ Everything else under `docs/` is either **generated** (regenerate it, never hand
 
 | # | document | what it is |
 |---|---|---|
-| 1 | [`../CLAUDE.md`](../CLAUDE.md) | the hard rules, loaded every session. Top authority. |
+| 1 | [`../CLAUDE.md`](../CLAUDE.md) | the hard rules (core, loaded every session); full text [`AGENT_CONTRACT.md`](AGENT_CONTRACT.md). Top authority. |
 | 2 | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) | every trap someone already paid for |
 | 3 | [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) | workflow, evidence rules, commit gate |
 | 4 | [`HANDOFF.md`](HANDOFF.md) | **the entry point** — verified state + the priority queue |

@@ -80,6 +80,16 @@
 6. **A/B gate:** ≥ 8 matches per arm on A Nuclear Winter, both spawns, vs master in the same session,
    plus `army_mix_report.py` for composition sanity. From F3 on, also a league score. It lands only if
    it does not lose.
+   **Amended by the maintainer, 2026-10-01 — the A/B unit is the INCREMENT, not the PR:** *"I don't have enough
+   time to test every single little incremental step … the increments should include the work of all the agents
+   combined … then create a new increment which should be A/B tested thoroughly."* Every agent's open work is merged
+   into one increment (`inc/<date>`), which lands on master after build + tests + audits + boot gate with each new
+   behaviour behind its switch; the increment's A/B then runs ALL its switches ON against the previous master
+   (≥ 16 matches per arm, **MIRROR matches only** — `--factions td_gdi` and `--factions td_nod` as separate
+   shards, never the cross pairing: *"Why would you run GDI vs Nod if they are not balanced yet? Nod is going to win
+   every single time"* (maintainer, 2026-10-01) — swapped spawns, arms in parallel, early stop once the verdict cannot flip).
+   Telemetry attributes inside the increment (`ownership`, `order_gate`, mission stories); a LOSING increment is
+   bisected by switch groups, never re-tested PR by PR.
 7. **Difficulty (§4):** its strength knobs go on the §19.1 line for all ten tiers. The donor's own
    copy is then deleted from the `fransbot` bot type; when nothing is left, the `fransbot` type goes
    too (§7.4 step 7).
@@ -202,7 +212,7 @@ agent leaves.
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
 | FB1 | Fransbot MCV/island expansion + transports + ground transfer (13.5k lines, V1.29.31) | DAWN | EX | 30 | 50 | 90 | 53 |
-| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) | DAWN | CA-6 | 10 | 18 | 30 | 19 |
+| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) — **incl. ENG-T** (maintainer 2026-09-30): implement `IBotCaptureTransportProvider` (CA; consumer `EngineerBotModule.TransportChance`, built) over `IFransCaptureTransportService`: a run carries 1–5 engineers into the enemy base around its army and defences, drops ONE next to each building and drives on (or unloads all at the first stop and each runs to its own building), then the A/B at `TransportChance: 25` | DAWN | CA-6 | 10 | 18 | 30 | 19 |
 | FB3 | Fransbot sea commander (naval squads) | EMBER | CA-5 | 12 | 20 | 36 | 21 |
 | FB4 | Fransbot support coordinator (powers timed with assaults) | EMBER | CA-5 | 6 | 10 | 18 | 11 |
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |
@@ -222,7 +232,7 @@ items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until owner
 | LC2 | **done 2026-09-30 (#667):** `CratePickupBotModule`: `alreadyPursuitCrates` → reservation `crate → collector + tick`, released when the crate or collector goes, the collector is claimed elsewhere, idles past a grace period, or times out | Claude | — | 1 | 2 | 4 | 2 |
 | LC3 | **first half done 2026-09-30 (#667: path check + park after 3 hand-outs, `McvMaxSiteHandouts`)**; still open: EX-3 failure lifecycle via the engine: the planner checks the MCV's locomotor path to the field and parks a field it keeps handing out with no yard founded; then a candidate object (site, field id, kind, score, reachability) with accepted / unreachable / undeployable / reserved feedback via the engine hook; "not land-reachable" kept as a class for FB1 transports | Claude | — | 4 | 8 | 14 | 8 |
 | LC4 | **done 2026-09-30 (#667 planner resource map; #677 `BotLimitsResolver`: squad, harvester and MCV managers re-check `BotLimits` on their first tick, logged — measured "kept" ×4, nothing stale; every other enabled-filtered lookup resolves at use):** first instance fixed 2026-09-30 (#667: `ExpansionPlannerBotModule.resourceMap` re-resolved at use); conditional-trait cache sweep: every `TraitsImplementing<T>()` filtered by enabled state and stored (the SiegeEvaluator bug class) — cache all instances and check at use, or refresh on transitions; assert single providers instead of trusting enumeration order | Claude | — | 3 | 6 | 12 | 7 |
-| LC5 | ownership watchdog (debug/test builds): one exclusive owner per actor, every active actor owned, one squad manager per squad member, no dead actor reserved, released actors reach the idle pool | Claude | LC1 | 6 | 10 | 18 | 11 |
+| LC5 | ownership watchdog (debug/test builds): one exclusive owner per actor, every active actor owned, one squad manager per squad member, no dead actor reserved, released actors reach the idle pool. **Built 2026-09-30 (`claude/lc5_ownership_watchdog`):** `BotOwnershipWatchdog` (read-only, `genericbot || classicbot`, active in bot-only matches and with `Debug.BotDebug`) checks DOUBLE_OWNER / TWO_SQUADS / HELD_BY_DISABLED / DEAD_HELD / ORPHAN once per unit (`LC5 OWNERSHIP` in debug.log) and writes per-bot `ownership` counts into `cameo-ai-matches.jsonl`, so every A/B reports ownership health per arm. **First smoke (hard vs classic, td_gdi):** `CratePickupBotModule` leases squad members it found `IsIdle` (Guerrilla/Protection squads) — the review's P0b class, live; squads adopting LC1 (#681) closes it | Claude | LC1 | 6 | 10 | 18 | 11 |
 | LC6 | semantic fog canaries: an unseen actor / crate / building must not change any decision until observed (the two DESIGN §19.5 exceptions excepted) | EMBER | — | 4 | 8 | 14 | 8 |
 | LC7 | A/B fingerprint: mod commit, engine commit, resolved AI yaml/rules hash, map hash, bot type/personality config recorded per batch; any change mid-batch aborts it | EMBER | F3 | 3 | 5 | 10 | 6 |
 | ENG | **done 2026-09-30 (#673, merged on the maintainer's order; A/B as a post-merge check; engineers are built again since #680 — no loaded AI file had listed TD/RA1/TS engineers since ≥ 2025-06):** `EngineerBotModule` (Cameo) — LC1 claim on every order, its own in-flight set (a same-owner re-claim cannot stop a module double-ordering itself), stuck engineers stopped and retried after `StuckRetryTicks`, capture ids read from the CA module (one copy in `ai.yaml`); omniscient as a whole (maintainer 2026-09-30, DESIGN §19.5). Merge `CaptureManagerBotModuleCA` + `CncEngineerBotModule` into one engineer owner (DESIGN §19.3) on LC1: capture routing (omniscient, §19.5), priority targets, hut/bridge repair, instant repair | Claude | LC1 | 4 | 8 | 14 | 8 |

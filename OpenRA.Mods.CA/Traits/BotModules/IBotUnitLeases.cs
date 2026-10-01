@@ -14,7 +14,7 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>Why a module holds a unit (LC1, AI_MASTER_PLAN §3). Logged, and read by the ownership watchdog (LC5).</summary>
-	public enum BotLeasePurpose { Squad, Scout, Beacon, Capture, Engineer, Crate, McvExpansion, Mission }
+	public enum BotLeasePurpose { Squad, Scout, Beacon, Capture, Engineer, Crate, McvExpansion, Mission, Emergency }
 
 	/// <summary>One module's claim on one unit. `ExpiresTick` is the failsafe: a holder that stops renewing loses it.</summary>
 	public readonly record struct BotLease(string Owner, BotLeasePurpose Purpose, int AcquiredTick, int ExpiresTick);
@@ -37,6 +37,22 @@ namespace OpenRA.Mods.CA.Traits
 		bool IsClaimedByOther(Actor actor, string owner);
 
 		BotLease? LeaseOf(Actor actor);
+
+		/// <summary>
+		/// DESIGN §19.6 (maintainer 2026-09-30): an emergency takes a claimed unit over. The holder loses the lease and is
+		/// told through <see cref="IBotUnitLeaseLost"/>; false when the unit is gone.
+		/// </summary>
+		bool Preempt(Actor actor, string owner, BotLeasePurpose purpose, int durationTicks);
+	}
+
+	/// <summary>
+	/// Implemented by a lease holder that wants to hear when an emergency took its unit (DESIGN §19.6). Matched by owner
+	/// name: the registry notifies the Player traits whose type name is the old lease owner (the `nameof(...)` convention
+	/// every holder uses). A holder without it learns on its next heartbeat, when its re-claim is denied.
+	/// </summary>
+	public interface IBotUnitLeaseLost
+	{
+		void LeaseLost(Actor actor, string newOwner, BotLeasePurpose purpose);
 	}
 
 	public static class BotUnitLeases

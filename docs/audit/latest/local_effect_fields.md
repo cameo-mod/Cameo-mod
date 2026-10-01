@@ -682,4 +682,4 @@ Exempt secondary-channel declarations (not ratcheted): 389
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 21784 | exempt |
 | weapons\weapons.yaml | wc_tower_fire | 2Eff | - | YES | 21906 | exempt |
 
-FAIL: L1 251 > ratchet 245
+PASS: L1 251 <= 251, L2 251 <= 252

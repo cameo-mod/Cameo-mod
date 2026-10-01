@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **786** (min 5 statements), C# files: **420** (min 8 lines)
+Python files: **791** (min 5 statements), C# files: **426** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -12,7 +12,7 @@ Python files: **786** (min 5 statements), C# files: **420** (min 8 lines)
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 30 | 10 |
-| C2 | identical C# method bodies | 17 | 14 |
+| C2 | identical C# method bodies | 19 | 14 |
 | C3 | identical module-level literal tables | 43 | 10 |
 
 
@@ -52,20 +52,22 @@ Python files: **786** (min 5 statements), C# files: **420** (min 8 lines)
 | 2 | f7586bdb04bd3e37 | tools/balance/consolidate_exact_profile_duplicates.py:231 remove_node(); tools/balance/consolidate_laser_heavy_routes.py:212 remove_node() |
 
 
-## C2 — C# method clones (17 group(s))
+## C2 — C# method clones (19 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
+| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1001 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1008 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1013 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1033 BlockedByEscort() |
 | 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
-| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:830 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:843 CanHitAir() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:861 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:874 CanHitAir() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
 | 2 | 2ed6818d4fa1dcc1 | OpenRA.Mods.CA/Traits/AttachOnCreation.cs:43 Attach(); OpenRA.Mods.CA/Traits/AttachOnTransform.cs:45 Attach() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
+| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:510 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:517 RankBySafety() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
-| 2 | 58f4e69a7f3a03b1 | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1192 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1195 TargetScore() |
+| 2 | 58f4e69a7f3a03b1 | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1264 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1267 TargetScore() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
 | 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:338 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:354 HandleMiddleClick() |
@@ -127,6 +129,6 @@ Python files: **786** (min 5 statements), C# files: **420** (min 8 lines)
 ## FAIL
 
 - C1: 30 > baseline 10
-- C2: 17 > baseline 14
+- C2: 19 > baseline 14
 - C3: 43 > baseline 10
 

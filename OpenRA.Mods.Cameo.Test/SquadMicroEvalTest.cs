@@ -94,5 +94,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(SquadMicroEvalCA.KiteStandoff(tank, artillery, WDist.FromCells(1)), Is.Null);
 			Assert.That(SquadMicroEvalCA.KiteStandoff(tank, tank, WDist.FromCells(1)), Is.Null); // equal range: no kite
 		}
+
+		[Test]
+		public void PullBackPointRetreatsDirectlyAwayFromThreat()
+		{
+			var squadPos = new WPos(5000, 0, 0);
+			var threatPos = new WPos(2000, 0, 0);
+			var point = SquadMicroEvalCA.PullBackPoint(squadPos, threatPos, WDist.FromCells(3));
+
+			Assert.That(point.X, Is.EqualTo(5000 + WDist.FromCells(3).Length));
+			Assert.That(point.Y, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void PullBackPointDiagonalKeepsDirection()
+		{
+			// away = (-3000, -4000), |away| = 5000: the point lands at
+			// (-3000/5000*1024, -4000/5000*1024) = (-614, -819) after truncation.
+			var point = SquadMicroEvalCA.PullBackPoint(new WPos(0, 0, 0), new WPos(3000, 4000, 0), WDist.FromCells(1));
+			Assert.That(point.X, Is.EqualTo(-614));
+			Assert.That(point.Y, Is.EqualTo(-819));
+		}
+
+		[Test]
+		public void PullBackPointCoincidentPositionsStayPut()
+		{
+			var pos = new WPos(1234, 567, 0);
+			Assert.That(SquadMicroEvalCA.PullBackPoint(pos, pos, WDist.FromCells(4)), Is.EqualTo(pos));
+		}
 	}
 }
