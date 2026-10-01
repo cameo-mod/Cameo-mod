@@ -20,3 +20,16 @@ groups:
   E_engt_transport:                  # re-arm the Frans transport provider ONLY after #716 (orders-only, DESIGN §19.8) lands
     GrantConditionOnBotOwner@engttransport:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  J_rolemix_production:              # NOVA CA-3 (§12.5) — the six personalities' starting RoleMixes fill production deficits (classic carries none)
+    SquadManagerBotModuleCA@rush:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@turtle:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@tech:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@expansion:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@steamroller:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@guerrilla:
+      UseRoleMix: true
