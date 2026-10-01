@@ -983,8 +983,7 @@ large_gun_turret.xcom:
 		InitialFacing: 2048
 		RealignDelay: -1
 	AttackTurreted:
-	# WithWallSpriteBody:
-	# 	RequiresCondition: !build-incomplete
+		RequiresCondition: !build-incomplete
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	WithSpriteBody:
@@ -995,8 +994,6 @@ large_gun_turret.xcom:
 		BodyNames: make
 	Replacement:
 		ReplaceableTypes: Tower
-	AttackTurreted:
-		RequiresCondition: !build-incomplete
 	-WithDeathAnimation:
 	FireProjectilesOnDeath:
 		Weapons: Debris2, Debris3
@@ -1180,9 +1177,11 @@ xcom_drmn:
 		VoiceSet: AsianDroneVoice
 	RenderSprites:
 		PlayerPalette: playerra2
+		Image: aa_drmn
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
+		Locomotor: chem
 	Harvester:
 		BaleLoadDelay: 8
 		BaleUnloadDelay: 8
@@ -1196,14 +1195,8 @@ xcom_drmn:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 4
-	Mobile:
-		Locomotor: chem
 	SlaveMinerSpawnerSlave:
 		MovingCallBackCellDistance: 0
-	RenderSprites:
-		Image: aa_drmn
-	DockClientManager:
-
 xcom_scalpel:
 	Inherits: ^SteelDefensiveDrones
 	Valued:

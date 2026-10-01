@@ -9,7 +9,10 @@ ra2_allies_constructionyard:
 		Length: 29
 		ShadowStart: 29
 	dead:
-		Filename: ra2_allies_sprites|ra2_allies_constructionyard_ggcnst.shp
+		Filename: ra2_allies_sprites|ra2_allies_constructionyard_ggcnstdm.shp
+		Length: 30
+		ShadowStart: 30
+		Tick: 90
 	build:
 		Filename: invisibleitem.shp
 	damaged-idle:
@@ -34,11 +37,6 @@ ra2_allies_constructionyard:
 		Start: 20
 		Length: 20
 		Tick: 150
-	dead:
-		Filename: ra2_allies_sprites|ra2_allies_constructionyard_ggcnstdm.shp
-		Length: 30
-		ShadowStart: 30
-		Tick: 90
 	icon:
 		Filename: ra2_allies_icons|ra2_allies_constructionyard_icon.png
 		Offset: 0,0

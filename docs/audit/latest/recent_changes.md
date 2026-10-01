@@ -1,19 +1,34 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **219**, files touched: **1698**
+Commits reviewed: **448**, files touched: **4687**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 9 | yes |
+| R1 | balance yaml edited without the ledger | 23 | yes |
 | R2 | audit script never run by run_all.sh | 9 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 15 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 0 | no |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 23 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
-## R1 — hand-edited balance numbers (9)
+## R1 — hand-edited balance numbers (23)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 2f440999 | 2026-09-26 | W7 tail-2: 5 more de-parented after collision pr | Burst, BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
+| 5eff1183 | 2026-09-26 | rule-4 Versus remediation: restore weapon-parent | BurstDelays, MinRange |
+| 01c89a5a | 2026-09-26 | fix(W7): restore Inherits edges where splices ma | Damage |
+| 8e553991 | 2026-09-26 | feat(W7): chain-collapse batch-3 — 57 children o | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
+| 9ec11477 | 2026-09-26 | feat(W7): collapse 52 more weapon->weapon edges  | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
+| e4000127 | 2026-09-26 | feat(W7): collapse 55 weapon->weapon edges onto  | BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
+| 1ae9c7d0 | 2026-09-26 | R17 chip folds (W5 batch-1): 20 weapons / 21 chi | Damage |
+| 2c0cf719 | 2026-09-26 | W8 batch-2: 13 more legacy edges -> covering edg | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed |
+| 2ba249f0 | 2026-09-26 | feat(W7): convert YuriGatlingTankMG{1,2,3}[_AA]  | ReloadDelay, Speed |
+| bc676e8d | 2026-09-26 | W8 batch-1: 52 legacy-template edges -> covering | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
+| 90aef52d | 2026-09-26 | W7: replace 19 concrete-weapon inherits with cov | Damage, Range, ReloadDelay, Speed, Spread |
+| 6b0f3fdb | 2026-09-25 | W2 sweep: drop 152 dead ^Warhead_ edges (-77), 4 | Range, ReloadDelay |
+| 450dcea5 | 2026-09-26 | feat(W7): materialize held-67 ExtraDamage batch  | BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
+| 434413f0 | 2026-09-26 | W7 packs: restore resolved child-order parity (N | Damage, Range, Spread |
+| 5407fd8a | 2026-09-25 | W7 ContentPack batch: 97 pack-level weapon-paren | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 | c63c0415 | 2026-09-25 | W7: materialize 33 remaining DAWN-file-set weapo | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 | 95e18490 | 2026-09-25 | pack self-containment: eliminate hard value-ref  | Burst, BurstDelays, Damage, HP, MinRange, Range, ReloadDelay, Speed, Spread |
 | 72468eb3 | 2026-09-25 | TD/TS/SC self-containment: eliminate cross-pack  | Damage, Range, ReloadDelay, Speed |
@@ -22,7 +37,6 @@ Commits reviewed: **219**, files touched: **1698**
 | 86577a7a | 2026-09-24 | W7: convert unclaimed weapon-parent edges in out | Damage, Range, ReloadDelay, Speed, Spread |
 | 004a9cb8 | 2026-09-24 | W7: convert all weapon-parent edges in weapons.y | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 | d36f3b0a | 2026-09-24 | W23-RA batch 1: TKM file retrofit (20/21 weapons | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
-| 20e99dbc | 2026-09-13 | test(R8): add carrier ammo runtime gate | Burst, BurstDelays, HP, MinRange, Range, ReloadDelay |
 
 
 ## R2 — audits missing from run_all.sh (9)
@@ -40,51 +54,65 @@ Commits reviewed: **219**, files touched: **1698**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (15)
+## R3 — commits without provenance (23)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| d891992d | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 2a7e2e29 | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| cefceacd | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 624348f6 | 2026-09-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 7b0cd5d7 | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 5b526e79 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 86b463d6 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 58005b41 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| b862072c | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 8f1e5579 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| c6c990b7 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| b92183f3 | 2026-09-28 | Blackrobe | agent trailer `OpenAI GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
+| cfafbbf0 | 2026-09-28 | Blackrobe | agent trailer `OpenAI GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
+| 045d0c37 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| 67b18009 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| e9d50021 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 56de7db0 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
 | 043e6c40 | 2026-09-24 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 8f53b8dd | 2026-09-23 | devin-ai-integration[bot] | agent trailer `Zan Yewang <inyucedora@gmail.com>` on a non-shared identity | review |
 | c6894f19 | 2026-09-23 | devin-ai-integration[bot] | agent trailer `Zan Yewang <inyucedora@gmail.com>` on a non-shared identity | review |
 | d81a1bfd | 2026-09-23 | Blackrobe | agent trailer `Codex GPT-5.6 Luna <noreply@openai.com>` on a non-shared identity | review |
 | 1519a758 | 2026-09-22 | devin-ai-integration[bot] | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | fdbb58ef | 2026-09-22 | devin-ai-integration[bot] | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 4a1139b3 | 2026-09-16 | Blackrobe | agent trailer `DeepSeek Flash <noreply@deepseek.com>` on a non-shared identity | review |
-| 03049aad | 2026-09-16 | Blackrobe | agent trailer `DeepSeek Flash <noreply@deepseek.com>` on a non-shared identity | review |
-| ce93267b | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| ab498104 | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 1b12b7fd | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 96fc961b | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 0c164ff8 | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| f2dd0fe1 | 2026-09-13 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 0f908e7a | 2026-09-12 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 
 
-## R4 — engine/config changes to re-verify (0)
+## R4 — engine/config changes to re-verify (5)
 
-_none found_
+| commit | date | note |
+|---|---|---|
+| 11f1825c | 2026-09-29 | mod.config changed (rebuild + boot gate required) |
+| 5441ace1 | 2026-09-29 | mod.config changed (rebuild + boot gate required) |
+| 5b526e79 | 2026-09-28 | mod.config changed (rebuild + boot gate required) |
+| 86b463d6 | 2026-09-28 | mod.config changed (rebuild + boot gate required) |
+| 7489f8e9 | 2026-09-28 | mod.config changed (rebuild + boot gate required) |
 
 
 ## R5 — most-churned files (re-read these first)
 
 | file | commits touching it |
 |---|---|
-| docs/HANDOFF.md | 58 |
-| docs/DESIGN.md | 44 |
-| docs/LESSONS_LEARNED.md | 28 |
-| DEVELOPMENT_LOG.md | 25 |
-| docs/balance/derived/redalert2_allies.json | 21 |
-| docs/balance/derived/redalert_allies.json | 21 |
-| docs/balance/derived/redalert_japan.json | 21 |
-| docs/balance/derived/shared_redalert.json | 21 |
-| docs/balance/derived/tiberiandawn_gdi.json | 21 |
-| docs/balance/derived/tiberiandawn_nod.json | 21 |
-| docs/balance/derived/redalert2mod_futuretech.json | 20 |
-| docs/balance/derived/redalert_soviets.json | 20 |
-| docs/balance/derived/starcraft_terran.json | 20 |
-| docs/balance/derived/tiberiansun_cabal.json | 20 |
-| docs/balance/derived/tiberiansun_forgotten.json | 20 |
+| DEVELOPMENT_LOG.md | 110 |
+| docs/HANDOFF.md | 97 |
+| mods/cameo/ai/ai.yaml | 68 |
+| docs/LESSONS_LEARNED.md | 66 |
+| docs/design/AI_ARCHITECTURE.md | 65 |
+| docs/DESIGN.md | 56 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 48 |
+| docs/design/ROADMAP.md | 40 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 35 |
+| docs/balance/derived/tiberiandawn_nod.json | 31 |
+| docs/balance/derived/redalert2_allies.json | 29 |
+| docs/balance/derived/redalert2mod_syndicate.json | 29 |
+| docs/balance/derived/redalert_allies.json | 29 |
+| docs/balance/derived/tiberiansun_cabal.json | 29 |
+| tools/audit/audit_weapon_shape.py | 29 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -98,10 +126,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 9 R1 and 0 R3 of 9/15 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 23 R1 and 0 R3 of 23/23 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 9 R1, 9 R2, 0 R3 blocking finding(s)
+- 23 R1, 9 R2, 0 R3 blocking finding(s)
 

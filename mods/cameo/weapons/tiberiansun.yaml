@@ -756,12 +756,6 @@ TSGrenade:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water
-		Damage: 12000
-	Warhead@CannonHE_Medium:
-		ValidTargets: Ground, Water
-		Damage: 12000
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -1215,10 +1209,6 @@ TSTurretLaser:
 		GlowIntensity: 0.5
 		SecondaryBeamWidth: 48
 		-HitAnim:
-	Warhead@Bullet_Medium:
-		Damage: 10000
-	Warhead@Laser_Heavy:
-		Damage: 10000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
@@ -1428,10 +1418,6 @@ TSLaserTurretLaser:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 48
 		-HitAnim:
-	Warhead@Bullet_Medium:
-		Damage: 16000
-	Warhead@Laser_Heavy:
-		Damage: 16000
 	Warhead@3: FireShrapnel
 		Weapon: TurretLaserFragment
 		Amount: 1
@@ -1465,10 +1451,6 @@ TurretLaserFragment:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 12
 		-HitAnim:
-	Warhead@Bullet_Medium:
-		Damage: 8000
-	Warhead@Laser_Heavy:
-		Damage: 8000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
@@ -1569,10 +1551,6 @@ ObeliskLaserFragment:
 		Duration: 38
 		SecondaryBeamWidth: 24
 		-HitAnim:
-	Warhead@Bullet_Medium:
-		Damage: 40000
-	Warhead@Laser_Heavy:
-		Damage: 40000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
@@ -2111,10 +2089,6 @@ TSBikeMissile:
 		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@MissileHE_Medium:
-		Damage: 12000
-		ValidTargets: Ground, Water, Air
-	-Warhead@MissileHE_Medium:
 	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2142,32 +2116,14 @@ TSBikeTibMissile:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 42
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 2
@@ -2194,17 +2150,8 @@ TSSAPCMissiles:
 		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-		ValidTargets: Ground, Water, Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
-		ValidTargets: Ground, Water, Air
-	Warhead@LightMissile: SpreadDamage
-		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
@@ -2212,11 +2159,6 @@ TSSAPCMissiles:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@LightMissile:
-	Warhead@MissileHE_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 0
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		Damage: 16000
 		PercentageScale: 0
@@ -2378,9 +2320,6 @@ TSSAPCCoreMissiles:
 		UpdatesUnitStatistics: false
 	Burst: 2
 	BurstDelays: 2
-	Warhead@Chemical_Light:
-		Damage: 8000
-		ValidTargets: Ground, Water, Air
 	-Warhead@Chemical_Light:
 	Warhead@Chemical_Light_Flat:
 		ValidTargets: Ground, Water, Air
@@ -2865,10 +2804,8 @@ TSM1Carbine:
 	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
 	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile: Bullet
 		Speed: 2000
-	Projectile: Bullet  # W7MAT w8-repin
-	Projectile:  # W7MAT w8-repin
 		Inaccuracy: 200
 	ReloadDelay: 20  # W7MAT w8-repin
 	Range: 4000  # W7MAT w8-repin
@@ -2878,10 +2815,8 @@ TSVulcan:
 	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
 	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile: Bullet
 		Speed: 2000
-	Projectile: Bullet  # W7MAT w8-repin
-	Projectile:  # W7MAT w8-repin
 		Inaccuracy: 200
 	ReloadDelay: 20  # W7MAT w8-repin
 	Range: 4000  # W7MAT w8-repin
@@ -2893,10 +2828,8 @@ TSVulcan2:
 	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
 	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile: Bullet
 		Speed: 2000
-	Projectile: Bullet  # W7MAT w8-repin
-	Projectile:  # W7MAT w8-repin
 		Inaccuracy: 200
 	ReloadDelay: 50
 	Burst: 3
@@ -2919,12 +2852,6 @@ TSAssaultCannon:
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Bullet_Medium_Flat:
@@ -2948,10 +2875,6 @@ TSLaserRaiderCannon:
 	BurstDelays: 2
 	Range: 4964
 	Report: chaingn1.aud
-	Warhead@Bullet_Light:
-		Damage: 6000
-	Warhead@Laser_Heavy:
-		Damage: 6000
 	-Warhead@Bullet_Light:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
@@ -2963,10 +2886,8 @@ TSPistola:
 	Inherits@w81: ^Warhead_Bullet_Light  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Bullet_Light  # W7MAT covering-edge
 	Inherits@w83: ^Effect_Bullet_Light  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile: Bullet
 		Speed: 2000
-	Projectile: Bullet  # W7MAT w8-repin
-	Projectile:  # W7MAT w8-repin
 		Inaccuracy: 200
 	ReloadDelay: 20  # W7MAT w8-repin
 	Inherits@fx: ^ts_tiberiansun_tspistola

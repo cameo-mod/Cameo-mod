@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **3351** — orphans: **397**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
+Live weapons: **3604** — orphans: **404**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -266,6 +266,14 @@ _none found_
 | SardDeath | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | Scarab | mods/cameo/weapons/starcraft.yaml |
 | ScrapCarSpawner | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml |
+| ScrinAirZap | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinCapitalBeam | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinDefenseBeam | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinHeavyBeam | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinLightBeam | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinLightBeamAA | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinMothershipBeam | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
+| ScrinRiftInit | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml |
 | Short8Inch | mods/cameo/weapons/weapons.yaml |
 | SmallHeliCrash | mods/cameo/weapons/weapons.yaml |
 | Sound2 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
@@ -303,7 +311,6 @@ _none found_
 | TSVulcan2 | mods/cameo/weapons/tiberiansun.yaml |
 | TSVulcanTower | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml |
 | TSZapWeapon_EMP | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
-| Tail | mods/cameo/weapons/weapons.yaml |
 | Teeth | mods/cameo/weapons/weapons.yaml |
 | TeslaArmorDischargeDummy | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | TeslaZap | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |

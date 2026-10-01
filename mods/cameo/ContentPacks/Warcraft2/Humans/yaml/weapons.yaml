@@ -355,12 +355,9 @@ wc2ballistaFire:
 		Inaccuracy: 384
 		Image: wc2_human_ballistabolt
 		Blockable: false
-	Warhead@Concussion_Medium:
-		Damage: 30000
 	Warhead@Demolition_Heavy:
 		Damage: 90000
 		PercentageScale: 9999
-	-Warhead@Concussion_Medium:
 	Inherits@w6fx: ^wc2_humans_wc2ballistafire
 
 ^wc2_humans_mortarteamartilleryshell:

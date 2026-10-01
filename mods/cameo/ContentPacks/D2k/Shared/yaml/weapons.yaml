@@ -465,8 +465,6 @@
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
-	ReloadDelay: 50
-	Range: 7979
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
@@ -571,9 +569,8 @@ D2KUnitExplodeLarge:
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MEDTANK1.WAV  # W7MAT w8-repin
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
 		PercentageScale: 2500
 
 D2KUnitExplodeMed:
@@ -653,20 +650,16 @@ Debris2:
 	Inherits@w83: ^Effect_Flame_Light  # W7MAT covering-edge
 	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
 	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile:
 		TrailImage: small_trail
-	Projectile:  # W7MAT w8-repin
 		TrailPalette: effect75alpha
-	Projectile:  # W7MAT w8-repin
 		TrailInterval: 1
-	Projectile:  # W7MAT w8-repin
 		Image: shrapnel2
 	Report: d2khc.wav  # W7MAT w8-repin
 	ReloadDelay: 60  # W7MAT w8-repin
 	Range: 2816  # W7MAT w8-repin
-	Warhead@Effect:  # W7MAT w8-repin
+	Warhead@Effect:
 		Explosions: d2k_small_napalm
-	Warhead@Effect:  # W7MAT w8-repin
 		ImpactSounds: EXPLSML2.WAV
 	Warhead@Concrete:  # W7MAT w8-repin
 		Damage: 2250
@@ -684,12 +677,6 @@ Debris3:
 	Projectile: Bullet
 		Image: shrapnel3
 		TrailImage: small_trail2
-	Warhead@Demolition_Light:
-		Damage: 8000
-	Warhead@Flame_Light:
-		Damage: 8000
-	-Warhead@Demolition_Light:
-	-Warhead@Flame_Light:
 	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -732,10 +719,7 @@ D2K_Rocket_Trooper:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
-	ReloadDelay: 64
-	Range: 6185
 	Report: ROCKET1.WAV
-	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: d2k_RPG
 		Palette: d2keffect
@@ -751,15 +735,6 @@ D2K_Rocket_Trooper:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 12
 		Acceleration: 6
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -889,15 +864,11 @@ D2K_Rocket_Trooper:
 			SubmarineHeavy: 17
 		Falloff: 100, 50
 		Range: 0, 32
-	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Light:
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
 
-	TargetActorCenter: true
 WormJaw:
 	ReloadDelay: 10
 	InvalidTargets: Structure
@@ -920,22 +891,12 @@ light_inf_lmg:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
-	ReloadDelay: 20
-	Range: 5475
 	Report: gun11.aud
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
-	ValidTargets: Ground, Water, Air
 light_inf_lmg_upgrade:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	ValidTargets: Ground, Water, Air
@@ -945,28 +906,12 @@ light_inf_lmg_upgrade:
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
-	ReloadDelay: 20
-	Range: 4500
 	Report: gun11.aud
-	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 
-	TargetActorCenter: true
 Fremen_RPG:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
@@ -1265,22 +1210,14 @@ HMG_turret:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_shared_hmg_turret
-	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
-	Range: 7394
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy

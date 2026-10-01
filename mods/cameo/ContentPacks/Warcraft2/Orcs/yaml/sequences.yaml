@@ -164,7 +164,6 @@ wc2_orcs_cannontower:
 wc2_orcs_wall:
 	Defaults:
 		Filename: wc2_orcs_sprites|wc2_orcs_wall.shp
-	Defaults:
 		Scale: 1.6
 	idle:
 		Length: 16
@@ -580,10 +579,6 @@ wc2_orcs_ogre:
 	die-crushed:
 		Length: 5
 		Offset: 0,0
-	idle-ogremage:
-		Filename: wc2_orcs_sprites|wc2_orcs_ogremage.shp
-		Start: 0
-		Facings: -8
 	idle-ogremage:
 		Filename: wc2_orcs_sprites|wc2_orcs_ogremage.shp
 		Start: 0

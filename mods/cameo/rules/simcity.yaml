@@ -239,10 +239,9 @@ CITYHARVESTER:
 CITYTRUCK:
 	Inherits: TRUCK
 	Buildable:
-		Prerequisites:
+		Prerequisites: Police Department
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: Police Department
 	Tooltip:
 		Name: Money Truck
 	RenderSprites:
@@ -359,7 +358,7 @@ CITYFIRETRUCK:
 		Range: 7c0
 	RenderSprites:
 	Voiced:
-		VoiceSet: RAVehicleVoice
+		VoiceSet: FireFighterVoice
 	Cargo:
 		MaxWeight: 4
 		InitialUnits: CITYFIREFIGHTER, CITYFIREFIGHTER, CITYFIREFIGHTER, CITYFIREFIGHTER
@@ -367,8 +366,6 @@ CITYFIRETRUCK:
 		LoadingCondition: notmobile
 	AutoDeployer:
 		DeployChance: 100
-	Voiced:
-		VoiceSet: FireFighterVoice
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -1724,13 +1721,11 @@ CITYPOLICEOFFICER:
 	Crushable:
 		CrushSound: squish2.aud
 	Voiced:
-		VoiceSet: RAGenericVoice
+		VoiceSet: CopVoice
 	WithInfantryBody:
 		IdleSequences: stand
 		DefaultAttackSequence: shoot
 	-TakeCover:
-	Voiced:
-		VoiceSet: CopVoice
 CITYARCHITECT:
 	Inherits: ^CITYINFANTRY
 	Inherits@selection: ^SelectableSupportUnit
@@ -2048,9 +2043,6 @@ CITYSWAT1:
 		HP: 12500
 	Valued:
 		Cost: 500
-	Passenger:
-		CustomPipType: green
-		Voice: Move
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:
@@ -2127,9 +2119,6 @@ CITYSWATGL:
 		Voice: Move
 	Health:
 		HP: 50000
-	Passenger:
-		CustomPipType: green
-		Voice: Move
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:

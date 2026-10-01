@@ -58,7 +58,7 @@
 | Allied Sniper | ra1_allies_sniper | Damage 30000 vs game 60015 |
 | Ghost | terran_ghost | HP 45000 vs game 44000; Damage 10000 vs game 78064 |
 | Specter | terran_specter | Damage 20000 vs game 156078 |
-| Virus | yuri_virus | Damage 24000 vs game 144111 |
+| Virus | yuri_virus | Damage 24000 vs game 144093 |
 | ASDF | asianalliance_asdf | HP 40000 vs game 39000; Speed 60 vs game 58 |
 | Laser Commando | td_nod_lasercommando | Damage 12000 vs game 3025 |
 | Havoc | td_gdi_havoc | Damage 160000 vs game 220410 |

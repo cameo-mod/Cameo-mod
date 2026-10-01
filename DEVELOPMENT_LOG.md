@@ -15326,3 +15326,26 @@ DESIGN §22 one-transport-system, no second implementation.
   for the diff (latest/ drift = base ContentPack migration). Boot-gate PASS (~39s, no new exc).
 - Smoke in flight: engt-smoke @ 72d429685 dirty (TransportChance:25), hard vs classic td_gdi x2,
   Nuclear Winter — done-when = archive shows COMMITTED by=Transport -> PROGRESSING -> SUCCESS.
+
+## 2026-10-01 — NOVA: duplicate-key collapse (D2 4,965 -> 158), resolved-identical, boot-verified
+
+Worktree `nova/dupkey-cleanup` (C:/tmp/nova-dupekeys). The 2026-09-26 W7 batch tools materialized
+inherited fields by appending a second `Warhead@X:`/`Projectile:` block instead of merging into the
+existing one, leaving ~4.9k same-key siblings the engine merges silently. Collapse tool:
+`C:/tmp/nova_tools/collapse_dup_keys.py` (fold same-key occurrences per `Inherits`-separated segment,
+recursive merge, same-value scalar re-asserts dropped, then `strict_strip` removes `-K` removals that
+are provably dead under the engine's sequential accumulation — incl. merge partners supplied by
+sibling files and `Inherits` splices).
+
+Verification: resolved dump byte-identical to pristine (3604 weapons + 4438 actors, `__order__`/
+`__value` serialization); strict-strip fixpoint = 0 dangling removals at every depth; D2 audit
+158 < baseline 260 (baseline ratcheted in `tools/audit/audit_duplicate_keys.py`);
+`find_empty_warhead` 0; `duplicate_inherits` unchanged vs pristine (1990 both); boot gate PASS —
+`MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions.
+
+Two real bugs the boot gate caught that static checks missed: (1) nested `-K` removals are STRICT —
+`MergeIntoResolved` re-runs `ResolveInherits` on merged node children at every depth; (2)
+`tools/audit/miniyaml.py` counted leading whitespace *characters* while the engine counts `\t`=1
+level / 4 spaces=1 level — 15 files mix space+tab prefixes and mis-parsed, producing phantom
+duplicates the fold then "merged" (e.g. `tscloud1`'s `idle`/`die` `Filename` keys). Parser fixed;
+full lesson writeup in LESSONS_LEARNED (2026-10-01 entry).

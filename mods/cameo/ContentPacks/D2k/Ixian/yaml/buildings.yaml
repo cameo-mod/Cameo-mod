@@ -604,8 +604,6 @@ ixian_machinegunturret:
 		ReplaceableTypes: Tower
 	WithWallSpriteBody:
 		RequiresCondition: !build-incomplete
-	WithSpriteTurret:
-		RequiresCondition: !build-incomplete
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	-WithDeathAnimation:

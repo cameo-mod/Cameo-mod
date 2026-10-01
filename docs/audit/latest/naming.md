@@ -5,36 +5,37 @@
 
 | faction | compliant | % | proposal collisions | asset files to rename | unrepairable stems |
 |---|---|---|---|---|---|
-| asianalliance | 73/73 | 100% | 0 | 1 | 6 |
-| atreides | 27/27 | 100% | 0 | 10 | 10 |
+| asianalliance | 73/73 | 100% | 0 | 0 | 0 |
+| atreides | 34/34 | 100% | 0 | 0 | 0 |
 | cabal | 80/80 | 100% | 0 | 0 | 0 |
-| corrino | 29/29 | 100% | 0 | 6 | 1 |
+| corrino | 31/31 | 100% | 0 | 0 | 0 |
 | eden | 43/43 | 100% | 0 | 0 | 0 |
 | forgotten | 78/78 | 100% | 0 | 1 | 0 |
-| futuretech | 56/56 | 100% | 0 | 1 | 0 |
-| harkonnen | 48/50 | 96% | 0 | 2 | 2 |
-| ixian | 64/65 | 98% | 0 | 2 | 0 |
-| japan | 68/68 | 100% | 0 | 1 | 0 |
+| futuretech | 56/56 | 100% | 0 | 0 | 0 |
+| harkonnen | 48/50 | 96% | 0 | 0 | 0 |
+| ixian | 64/65 | 98% | 0 | 0 | 0 |
+| japan | 68/68 | 100% | 0 | 0 | 0 |
 | latinsyndicate | 65/65 | 100% | 0 | 0 | 0 |
-| naxis | 73/73 | 100% | 0 | 4 | 2 |
-| ordos | 72/72 | 100% | 0 | 3 | 6 |
+| naxis | 73/73 | 100% | 0 | 0 | 0 |
+| ordos | 73/73 | 100% | 0 | 0 | 0 |
 | plymouth | 44/44 | 100% | 0 | 0 | 0 |
 | protoss | 72/72 | 100% | 0 | 0 | 0 |
 | ra1_allies | 62/62 | 100% | 0 | 0 | 0 |
-| ra1_soviets | 106/106 | 100% | 0 | 13 | 0 |
-| ra2_allies | 66/66 | 100% | 0 | 0 | 2 |
-| ra2_soviets | 56/56 | 100% | 0 | 2 | 2 |
+| ra1_soviets | 106/106 | 100% | 0 | 0 | 0 |
+| ra2_allies | 66/66 | 100% | 0 | 0 | 0 |
+| ra2_soviets | 56/56 | 100% | 0 | 1 | 0 |
 | schwarzermond | 59/59 | 100% | 0 | 0 | 0 |
-| steelconsortium | 60/60 | 100% | 0 | 6 | 0 |
+| scrin | 49/49 | 100% | 0 | 0 | 0 |
+| steelconsortium | 60/60 | 100% | 0 | 0 | 0 |
 | td_gdi | 60/60 | 100% | 0 | 0 | 0 |
-| td_nod | 65/65 | 100% | 0 | 0 | 0 |
+| td_nod | 66/66 | 100% | 0 | 0 | 0 |
 | terran | 77/77 | 100% | 0 | 0 | 0 |
-| tkm | 72/72 | 100% | 0 | 1 | 0 |
+| tkm | 72/72 | 100% | 0 | 0 | 0 |
 | ts_gdi | 65/65 | 100% | 0 | 0 | 0 |
 | ts_nod | 46/46 | 100% | 0 | 0 | 0 |
 | wc2_humans | 73/73 | 100% | 0 | 0 | 0 |
 | wc2_orcs | 64/64 | 100% | 0 | 0 | 0 |
-| yuri | 64/64 | 100% | 0 | 1 | 0 |
+| yuri | 64/64 | 100% | 0 | 0 | 0 |
 | zerg | 75/75 | 100% | 0 | 0 | 0 |
 
 
@@ -42,36 +43,37 @@
 
 | faction | icons compliant | % |
 |---|---|---|
-| asianalliance | 56/57 | 98% |
-| atreides | 10/10 | 100% |
+| asianalliance | 1/1 | 100% |
+| atreides | 0/0 | — |
 | cabal | 2/2 | 100% |
-| corrino | 1/1 | 100% |
-| eden | 41/41 | 100% |
+| corrino | 0/0 | — |
+| eden | 0/0 | — |
 | forgotten | 58/58 | 100% |
-| futuretech | 43/43 | 100% |
-| harkonnen | 10/10 | 100% |
-| ixian | 32/32 | 100% |
-| japan | 43/44 | 97% |
-| latinsyndicate | 45/45 | 100% |
-| naxis | 56/56 | 100% |
-| ordos | 35/35 | 100% |
-| plymouth | 44/44 | 100% |
+| futuretech | 1/1 | 100% |
+| harkonnen | 0/0 | — |
+| ixian | 0/0 | — |
+| japan | 0/0 | — |
+| latinsyndicate | 3/3 | 100% |
+| naxis | 1/1 | 100% |
+| ordos | 0/0 | — |
+| plymouth | 0/0 | — |
 | protoss | 53/53 | 100% |
-| ra1_allies | 42/42 | 100% |
-| ra1_soviets | 87/87 | 100% |
-| ra2_allies | 51/51 | 100% |
-| ra2_soviets | 48/49 | 97% |
-| schwarzermond | 47/47 | 100% |
-| steelconsortium | 44/45 | 97% |
+| ra1_allies | 0/0 | — |
+| ra1_soviets | 0/0 | — |
+| ra2_allies | 8/8 | 100% |
+| ra2_soviets | 6/7 | 85% |
+| schwarzermond | 0/0 | — |
+| scrin | 0/0 | — |
+| steelconsortium | 1/1 | 100% |
 | td_gdi | 38/38 | 100% |
-| td_nod | 41/41 | 100% |
+| td_nod | 42/42 | 100% |
 | terran | 55/55 | 100% |
-| tkm | 53/53 | 100% |
+| tkm | 2/2 | 100% |
 | ts_gdi | 46/46 | 100% |
 | ts_nod | 36/36 | 100% |
-| wc2_humans | 12/12 | 100% |
-| wc2_orcs | 5/5 | 100% |
-| yuri | 60/61 | 98% |
+| wc2_humans | 0/0 | — |
+| wc2_orcs | 0/0 | — |
+| yuri | 4/4 | 100% |
 | zerg | 51/51 | 100% |
 
 

@@ -223,8 +223,6 @@ Player:
 		Footprint: xxxx xxxx xxxx ====
 		Dimensions: 4,4
 		LocalCenterOffset: 0,-512,0
-	Selectable:
-		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 500000
@@ -3704,7 +3702,7 @@ swpalace:
 		Range: 6c0
 	RenderDetectionCircle:
 	DetectCloaked:
-		Range: 5c0
+		Range: 2c0
 		RequiresCondition: !lowpower
 	NukePower:
 		AllowMultiple: True
@@ -3748,7 +3746,6 @@ swpalace:
 		Prerequisite: nodnuke
 	ProvidesPrerequisite@2:
 		Prerequisite: tek
-	ProvidesPrerequisite@buildingname:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -3764,8 +3761,6 @@ swpalace:
 		QuantizedFacings: 8
 	RangeMultiplier@Extrarange:
 		Modifier: 175
-	DetectCloaked:
-		Range: 2c0
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -7120,8 +7115,6 @@ swexecutor.husk:
 		Explosion: Atomic
 		Velocity: 5
 		MaximumSpinSpeed: 4
-	RenderSprites:
-
 swaclamator:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience

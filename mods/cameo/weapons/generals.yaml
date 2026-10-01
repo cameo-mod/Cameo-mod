@@ -1793,19 +1793,17 @@ USAAvengerPDLaser:
 #####################################################
 USACrusaderCannon:
 	Inherits: CHBattlemasterCannon
-	Report: vcruweaa.wav, vcruweab.wav
+	Report: vbatweaa.wav, vbatweab.wav
 	ReloadDelay: 50
 	Range: 5120
-	Report: vbatweaa.wav, vbatweab.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
 
 USAPaladinCannon:
 	Inherits: USACrusaderCannon
-	Report: vpalweaa.wav, vpalweab.wav
+	Report: vbatweaa.wav, vbatweab.wav
 	ReloadDelay: 60
 	Range: 6144
-	Report: vbatweaa.wav, vbatweab.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 24000
 

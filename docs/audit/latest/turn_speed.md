@@ -15,7 +15,7 @@
    atreides_mongoose                    speed=64    hull=20    want=13
    … and 37 more
 
-## T2 — turretless ground: hull != round(2*Speed/5): **154** (ratchet 142) ⛔ RAISED
+## T2 — turretless ground: hull != round(2*Speed/5): **167** (ratchet 142) ⛔ RAISED
    EDEN_CARGOTRUCK_EMPTY                speed=85    hull=17    want=34
    EDEN_CONVEC_STRUCTURE_FACTORY        speed=75    hull=15    want=30
    PLYMOUTH_CARGOTRUCK_EMPTY            speed=80    hull=16    want=32
@@ -28,7 +28,7 @@
    ^Monster                             speed=50    hull=32    want=20
    ^RAHARV                              speed=90    hull=18    want=36
    ^RAMCV                               speed=75    hull=15    want=30
-   … and 142 more
+   … and 155 more
 
 ## T3 — turret turn speed != hull turn speed: **27** (ratchet 27) ok
    ^IFVBase                             hull=30     turret=60
@@ -45,7 +45,7 @@
    latin_sub                            hull=22     turret=11
    … and 15 more
 
-## T4 — turreted actor with NO hull speed (immobile — own rule pending): **137** (ratchet 137) ok
+## T4 — turreted actor with NO hull speed (immobile — own rule pending): **139** (ratchet 137) ⛔ RAISED
    C2KFIREDEPARTMENT                    turret=None
    EDEN_GP_EMP                          turret=12
    EDEN_GP_LASER                        turret=12
@@ -58,6 +58,6 @@
    TECHBCANNON2                         turret=32
    ^DefenseTurretedEMP                  turret=None
    ^HunterSeekersPower                  turret=None
-   … and 125 more
+   … and 127 more
 
 exit=1

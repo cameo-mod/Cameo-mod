@@ -581,7 +581,6 @@ mslo.camea:
 	RevealsShroud:
 		Range: 6c0
 		RequiresCondition: !lowpower
-		RequiresCondition: !lowpower
 	NukePower:
 		AllowMultiple: True
 		PauseOnCondition: lowpower

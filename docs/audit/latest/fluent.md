@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5613** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
+Fluent messages loaded: **5768** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -553,13 +553,13 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 13/35 | 37% |
+| atreides | 18/49 | 36% |
 | cabal | 0/84 | 0% |
-| corrino | 18/37 | 48% |
+| corrino | 19/46 | 41% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |
-| harkonnen | 19/68 | 27% |
+| harkonnen | 19/67 | 28% |
 | ixian | 26/82 | 31% |
 | japan | 1/76 | 1% |
 | latinsyndicate | 0/71 | 0% |
@@ -572,9 +572,10 @@ _none found_
 | ra2_allies | 7/70 | 10% |
 | ra2_soviets | 1/60 | 1% |
 | schwarzermond | 0/62 | 0% |
+| scrin | 48/51 | 94% |
 | steelconsortium | 0/63 | 0% |
 | td_gdi | 1/69 | 1% |
-| td_nod | 3/74 | 4% |
+| td_nod | 3/75 | 4% |
 | terran | 0/79 | 0% |
 | tkm | 1/75 | 1% |
 | ts_gdi | 0/69 | 0% |

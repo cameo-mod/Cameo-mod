@@ -8,7 +8,7 @@
 | R4 | MissileHE reachable against Air (hard rule) | 8 | 50 | PASS |
 
 
-365 concrete weapon(s) fly a Missile* main; 267 already match their role.
+363 concrete weapon(s) fly a Missile* main; 267 already match their role.
 
 
 ## custom selectors - domain verdict withheld
@@ -31,8 +31,6 @@
 | RA2FreedomRocket_elite | Ground, Water, Air, Garrisoned |  |
 | RA2TorpTube | Water, Underwater, Bridge |  |
 | RA2TorpTube_elite | Water, Underwater, Bridge |  |
-| RA2Virusgun3 | Ground, Ship, Garrisoned |  |
-| RA2Virusgun_elite | Ground, Ship, Garrisoned |  |
 | TSTorpTube | Water, Underwater, Bridge |  |
 | TSTorpTube_elite | Water, Underwater, Bridge |  |
 | YRBoomerTorpedo | Water, Underwater, Bridge |  |

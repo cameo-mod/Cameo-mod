@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1757
+*Multiplier trait families seen: 1756
 
 | trait family |
 |---|
@@ -363,7 +363,6 @@
 | `DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment` |
 | `DamageMultiplier@td_gdi_upgrade_heavyaircraftarmorplating` |
 | `DamageMultiplier@td_gdi_upgrade_lightweightarmorplating` |
-| `DamageMultiplier@td_nod_upgrade_cyberneticmodifications` |
 | `DamageMultiplier@td_nod_upgrade_elementalwarfare` |
 | `DamageMultiplier@td_nod_upgrade_tiberiuminfusion` |
 | `DamageMultiplier@terran` |

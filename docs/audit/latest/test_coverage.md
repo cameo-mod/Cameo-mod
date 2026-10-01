@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 226 | >= 24 |
-| T2 | `def test_*` in tools/tests (269 file(s)) | 2784 | >= 177 |
-| T3 | modules with no test mentioning them | 287 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (39 file(s)) | 432 | >= 24 |
+| T2 | `def test_*` in tools/tests (291 file(s)) | 2924 | >= 177 |
+| T3 | modules with no test mentioning them | 320 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (287)
+## T3 — untested modules (320)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -23,6 +23,8 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/CyberintelThemes.cs | CyberintelThemes |
 | C# | OpenRA.Mods.Cameo/Effects/TintedSpriteEffect.cs | TintedSpriteEffect |
 | C# | OpenRA.Mods.Cameo/FileSystem/BagFile.cs | AudioBagLoader |
+| C# | OpenRA.Mods.Cameo/FileSystem/CameoRemasterFileSystemLoader.cs | CameoRemasterFileSystemLoader |
+| C# | OpenRA.Mods.Cameo/FileSystem/RemasterContent.cs | RemasterContent |
 | C# | OpenRA.Mods.Cameo/Graphics/CameoSpriteSequence.cs | CameoSpriteSequenceLoader, CameoSpriteSequence |
 | C# | OpenRA.Mods.Cameo/Graphics/LayeredSelectionBarsRenderable.cs | LayeredSelectionBarsRenderable |
 | C# | OpenRA.Mods.Cameo/Graphics/LightningGeometry.cs | LightningGeometry |
@@ -34,8 +36,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Orders/CustomFormationsUnitOrderGenerator.cs | CustomFormationsUnitOrderGenerator |
 | C# | OpenRA.Mods.Cameo/Projectiles/InstantHitWithFakeBullets.cs | InstantHitWithFakeBullets |
 | C# | OpenRA.Mods.Cameo/Projectiles/LightningZap.cs | LightningZap |
+| C# | OpenRA.Mods.Cameo/RemasterSettings.cs | RemasterSettings |
 | C# | OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs | ColorPickerColorShift |
 | C# | OpenRA.Mods.Cameo/Rendering/PlayerColorShift.cs | PlayerColorShift |
+| C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTerrain.cs | CameoRemasterTerrainLoader, CameoRemasterTerrain |
+| C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTileCache.cs | CameoRemasterTileCache |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
@@ -47,7 +52,8 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs | BotCounterDemandController |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/CratePickupBotModule.cs | CratePickupBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
 | C# | OpenRA.Mods.Cameo/Traits/CameoSettings.cs | CameoSettings |
 | C# | OpenRA.Mods.Cameo/Traits/ChangesPhysicalState.cs | ChangesPhysicalState |
@@ -75,6 +81,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/NewConstructionOptionsNotification.cs | NewConstructionOptionsNotification, NewConstructionOptionsOnDeploy |
 | C# | OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs | OneActorPerCell |
 | C# | OpenRA.Mods.Cameo/Traits/PaletteEffects/TAStealthTankCloakPaletteEffect.cs | TAStealthTankCloakPaletteEffect |
+| C# | OpenRA.Mods.Cameo/Traits/PlaceBeacon.cs | PlaceBeacon |
 | C# | OpenRA.Mods.Cameo/Traits/Player/CountManager.cs | CountManager |
 | C# | OpenRA.Mods.Cameo/Traits/Player/CriticalUnitAttackNotifier.cs | CriticalUnit, CriticalUnitAttackNotifier |
 | C# | OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs | CustomFormationsModOptions |
@@ -91,8 +98,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/Render/OverlayPlayerColorPalette.cs | OverlayPlayerColorPalette |
 | C# | OpenRA.Mods.Cameo/Traits/Render/RenderSprites.cs | ColorPickerPreviewInit |
 | C# | OpenRA.Mods.Cameo/Traits/Render/SelectionDecorations.cs | SelectionDecorations |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithActorMaterialization.cs | MaterializingProductionInit, MaterializingProduction, WithActorMaterialization |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithAlpha.cs | WithAlpha |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithAttackLensFlare.cs | WithAttackLensFlare |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithBuildingBibCA.cs | WithBuildingBibCA |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithBuildingMaterialization.cs | WithBuildingMaterialization |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithCargoBuilding.cs | WithCargoBuilding |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithCreepOverlay.cs | CreepLayer, WithCreepOverlay |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithDeterministicOffsetIdleOverlay.cs | WithDeterministicOffsetIdleOverlay |
@@ -100,6 +110,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithLoopedMakeAnimation.cs | WithLoopedMakeAnimation |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleGlow.cs | WithMuzzleGlow |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleSmoke.cs | WithMuzzleSmoke |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithRotatingSprite.cs | WithRotatingSprite |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithTurretSearchlight.cs | WithTurretSearchlight |
 | C# | OpenRA.Mods.Cameo/Traits/ScaledSelfHeal.cs | ScaledSelfHeal |
 | C# | OpenRA.Mods.Cameo/Traits/ShadeMaster.cs | ShadeMaster |
@@ -114,10 +125,12 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/TerrainLightSourceCA.cs | TerrainLightSourceCA |
 | C# | OpenRA.Mods.Cameo/Traits/UpdatesBuildOrder.cs | UpdatesBuildOrder |
 | C# | OpenRA.Mods.Cameo/Traits/UpdatesCount.cs | UpdatesCount |
+| C# | OpenRA.Mods.Cameo/Traits/UpdatesPlayerStatistics.cs | UpdatesPlayerStatistics |
 | C# | OpenRA.Mods.Cameo/Traits/UpdatesUnitsProduced.cs | UpdatesUnitsProduced |
 | C# | OpenRA.Mods.Cameo/Traits/UsePointsOnProduction.cs | UsePointsOnProduction |
 | C# | OpenRA.Mods.Cameo/Traits/World/AutoControlGroupsManager.cs | AutoControlGroupsManager |
 | C# | OpenRA.Mods.Cameo/Traits/World/BackstabGameMode.cs | BackstabGameMode |
+| C# | OpenRA.Mods.Cameo/Traits/World/CameoRemasterTerrainRenderer.cs | CameoRemasterTerrainRenderer |
 | C# | OpenRA.Mods.Cameo/Traits/World/ConditionalTintPostProcessEffect.cs | ConditionalTintPostProcessEffect |
 | C# | OpenRA.Mods.Cameo/Traits/World/ConditionalWorldTint.cs | ConditionalWorldTint |
 | C# | OpenRA.Mods.Cameo/Traits/World/HeatDistortionRenderer.cs | HeatDistortionRenderer |
@@ -148,16 +161,16 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ArmyValueTooltipLogic.cs | ArmyValueTooltipLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoDisplaySettingsLogic.cs | CameoDisplaySettingsLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoGameplaySettingsLogic.cs | CameoGameplaySettingsLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoLobbyBots.cs | CameoLobbyBots |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoMainMenuLogic.cs | CameoMainMenuLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoObserverStatsLogic.cs | CameoObserverStatsLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoRemasterDisplaySettingsLogic.cs | CameoRemasterDisplaySettingsLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CommanderTreeWindowLogic.cs | CommanderTreeWindowLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/Ingame/PromotionTreeButtonLogic.cs | PromotionTreeButtonLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/IngameActorStatsLogicCameo.cs | IngameActorStatsLogicCameo |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/LobbyLogic.cs | LobbyLogic, LobbyFaction |
-| C# | OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs | ProductionTooltipCameoLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ReplayControlBarLogicCameo.cs | ReplayControlBarLogicCameo |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/StarportBatchStatusLogic.cs | StarportBatchStatusLogic |
-| C# | OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs | VersusSummary |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverArmyValuesWidget.cs | ObserverArmyValuesWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs | ObserverBuildOrderIconsWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs | ObserverPromotionsIconsWidget |
@@ -167,6 +180,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
 | python | tools/audit/audit_ai.py | audit_ai |
+| python | tools/audit/audit_ai_frankenstein.py | audit_ai_frankenstein |
 | python | tools/audit/audit_ai_personalities.py | audit_ai_personalities |
 | python | tools/audit/audit_ammo_cadence.py | audit_ammo_cadence |
 | python | tools/audit/audit_armament_naming.py | audit_armament_naming |
@@ -178,25 +192,34 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
 | python | tools/audit/audit_ca_drift.py | audit_ca_drift |
+| python | tools/audit/audit_ca_unused.py | audit_ca_unused |
+| python | tools/audit/audit_central_ids.py | audit_central_ids |
 | python | tools/audit/audit_chrome_master_freshness.py | audit_chrome_master_freshness |
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
+| python | tools/audit/audit_derived_armor_columns.py | audit_derived_armor_columns |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_drain_status.py | audit_drain_status |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_effect_pairings.py | audit_effect_pairings |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
+| python | tools/audit/audit_elite_range.py | audit_elite_range |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
 | python | tools/audit/audit_faction_leaks.py | audit_faction_leaks |
 | python | tools/audit/audit_fluent.py | audit_fluent |
+| python | tools/audit/audit_fog_honesty.py | audit_fog_honesty |
+| python | tools/audit/audit_fransbot_drift.py | audit_fransbot_drift |
+| python | tools/audit/audit_fransbot_lists.py | audit_fransbot_lists |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
+| python | tools/audit/audit_guerrilla_roles.py | audit_guerrilla_roles |
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
 | python | tools/audit/audit_local_effect_fields.py | audit_local_effect_fields |
 | python | tools/audit/audit_map_actors.py | audit_map_actors |
+| python | tools/audit/audit_merged_bot_modules.py | audit_merged_bot_modules |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
@@ -205,7 +228,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
 | python | tools/audit/audit_original_coverage.py | audit_original_coverage |
-| python | tools/audit/audit_orphan_cancels.py | audit_orphan_cancels |
 | python | tools/audit/audit_orphan_removals.py | audit_orphan_removals |
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
@@ -231,9 +253,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/branch_manifest.py | branch_manifest |
 | python | tools/audit/building_shape_damage.py | building_shape_damage |
+| python | tools/audit/ca_vendor_sync.py | ca_vendor_sync |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/collapse_dead_warhead_inherits.py | collapse_dead_warhead_inherits |
 | python | tools/audit/content_pack_dependencies.py | content_pack_dependencies |
+| python | tools/audit/dead_field_sources.py | dead_field_sources |
 | python | tools/audit/delivery_element_inventory.py | delivery_element_inventory |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
@@ -249,6 +273,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/propose_sonic_mapping.py | propose_sonic_mapping |
 | python | tools/audit/status_effect_inventory.py | status_effect_inventory |
 | python | tools/audit/summarize_role_comparison.py | summarize_role_comparison |
+| python | tools/audit/type_merge_inventory.py | type_merge_inventory |
 | python | tools/balance/_fix_min_range.py | _fix_min_range |
 | python | tools/balance/_requantize_ledgers.py | _requantize_ledgers |
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
@@ -260,6 +285,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_active_class_coverage.py | audit_active_class_coverage |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
+| python | tools/balance/b3_intent_draft.py | b3_intent_draft |
 | python | tools/balance/carrier_slave_ammo.py | carrier_slave_ammo |
 | python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compare_defense_armor_curves.py | compare_defense_armor_curves |
@@ -267,6 +293,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
 | python | tools/balance/convert_apply_to_scaled_v2.py | convert_apply_to_scaled_v2 |
 | python | tools/balance/count_mixed.py | count_mixed |
+| python | tools/balance/derive_versus_columns.py | derive_versus_columns |
 | python | tools/balance/design_invented_profiles.py | design_invented_profiles |
 | python | tools/balance/firepower_consumer_report.py | firepower_consumer_report |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
@@ -295,13 +322,19 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/retrofit_legacy_template.py | retrofit_legacy_template |
 | python | tools/balance/retrofit_weapon_family.py | retrofit_weapon_family |
 | python | tools/balance/run_with_guard.py | run_with_guard |
-| python | tools/balance/splice_templates.py | splice_templates |
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
+| python | tools/balance/verify_generator_sync.py | verify_generator_sync |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
+| python | tools/balance/w22_roster_census.py | w22_roster_census |
+| python | tools/balance/w22_triage_unreachable.py | w22_triage_unreachable |
 | python | tools/balance/yaml_ops.py | yaml_ops |
+| python | tools/packs/audit_bits_refs.py | audit_bits_refs |
+| python | tools/packs/compare_resolved.py | compare_resolved |
 | python | tools/packs/extract_shared.py | extract_shared |
+| python | tools/packs/migrate_assets.py | migrate_assets |
+| python | tools/packs/split_ai_rows.py | split_ai_rows |
 | python | tools/packs/split_faction.py | split_faction |
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
 | python | tools/rename/convert_maps.py | convert_maps |
@@ -310,5 +343,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 287 untested > baseline 224
+- T3: 320 untested > baseline 224
 

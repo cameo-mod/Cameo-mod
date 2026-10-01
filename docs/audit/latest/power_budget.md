@@ -1,6 +1,6 @@
 # audit_power_budget — worst-case stacked multipliers (R2)
 
-Units above the 2.0× effective-power budget: **823**
+Units above the 2.0× effective-power budget: **828**
 
 
 ## Breaches (damage× × surv× = power×), largest first
@@ -755,16 +755,21 @@ Units above the 2.0× effective-power budget: **823**
 | ts_nod | ts_nod_subterraneanapc | 1.86 | 1.59 | 2.95 | DamageMultiplier@ts_nod_upgrade_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_combattank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_lightinfantry | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| atreides | atreides_minotaurus | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| atreides | atreides_missiletank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| atreides | atreides_mongoose | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_repairtank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_rockettrooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_sandbike | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_siegetank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| atreides | atreides_sonictank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | light_inf | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | trooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_bmp | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_buggy | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_combattank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_lightinfantry | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| corrino | corrino_missiletank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_bazooka | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_javelin | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_laser | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |

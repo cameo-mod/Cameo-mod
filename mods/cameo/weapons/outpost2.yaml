@@ -52,27 +52,6 @@ edenMobileLaser:
 		SecondaryBeamWidth: 24
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	TargetActorCenter: false
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Laser_Heavy:
-		Damage: 8600
-		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:
-
-	Projectile:
 		ContrailEndColor: 000000FF
 		ContrailEndWidth: 100
 		ContrailLength: 10
@@ -83,90 +62,10 @@ edenMobileLaser:
 		Inaccuracy: 250
 		Shadow: true
 		Speed: 10000
-	Warhead@ChaingunPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		Spread: 100
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 12
-			Concrete: 11
-			Fighter: 15
-			Flak: 19
-			Heavy: 7
-			Helicopter: 9
-			Heroic: 17
-			Light: 13
-			Medium: 10
-			None: 20
-			Plate: 18
-			Scout: 16
-			Shield: 25
-			Spaceship: 6
-			Steel: 8
-			Superheavy: 5
-			Wood: 14
-			FlyingInfantry: 14
-			CyborgLight: 16
-			CyborgMedium: 14
-			CyborgHeavy: 11
-			CyborgHeroic: 9
-			AntiAirInfantry: 19
-			AntiAirVehicle: 11
-			AntiAirBuilding: 9
-			ShipLight: 13
-			ShipMedium: 10
-			ShipHeavy: 7
-			ShipSuperheavy: 6
-			AntiAirShip: 11
-			SubmarineLight: 8
-			SubmarineHeavy: 6
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@FlakWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-		Spread: 125
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 19
-			Concrete: 6
-			Fighter: 20
-			Flak: 15
-			Heavy: 9
-			Helicopter: 18
-			Heroic: 13
-			Light: 11
-			Medium: 10
-			None: 16
-			Plate: 14
-			Scout: 12
-			Shield: 25
-			Spaceship: 17
-			Steel: 5
-			Superheavy: 8
-			Wood: 7
-			FlyingInfantry: 15
-			CyborgLight: 13
-			CyborgMedium: 12
-			CyborgHeavy: 11
-			CyborgHeroic: 10
-			AntiAirInfantry: 15
-			AntiAirVehicle: 10
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 8
-			ShipHeavy: 7
-			ShipSuperheavy: 6
-			AntiAirShip: 8
-			SubmarineLight: 8
-			SubmarineHeavy: 7
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 10
-	Warhead@Smudge:
-		SmudgeType: Scorch
-	Warhead@TankDestroyerCannonPercentage:
+	TargetActorCenter: false
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 75
 		UpdatesUnitStatistics: false
@@ -203,6 +102,103 @@ edenMobileLaser:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+			FlyingInfantry: 14
+			CyborgLight: 16
+			CyborgMedium: 14
+			CyborgHeavy: 11
+			CyborgHeroic: 9
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 9
+			ShipLight: 13
+			ShipMedium: 10
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 11
+			SubmarineLight: 8
+			SubmarineHeavy: 6
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 19
+			Concrete: 6
+			Fighter: 20
+			Flak: 15
+			Heavy: 9
+			Helicopter: 18
+			Heroic: 13
+			Light: 11
+			Medium: 10
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 25
+			Spaceship: 17
+			Steel: 5
+			Superheavy: 8
+			Wood: 7
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 8600
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
+
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 ^op2_outpost2_edenmobilelasertiger:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
@@ -700,88 +696,50 @@ edenRailgun:
 		HorizontalRateOfTurn: 5
 		VerticalRateOfTurn: 5
 		RangeLimit: 14000
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	-Warhead@HeavyCannon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumCannon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TankDestroyerCannon:
-	Warhead@Railgun_Heavy_Flat:
-		ValidTargets: Ground, Water
-		Damage: 25000
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	TargetActorCenter: true
-	Warhead@HeavyCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 225
+		Falloff: 100, 75, 50, 25
+		Spread: 300
 		UpdatesUnitStatistics: false
 		ValidTargets: Ground, Water
 		Versus:
-			Bomber: 12
-			Concrete: 22
-			Fighter: 13
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
 			Flak: 16
-			Heavy: 19
-			Helicopter: 11
-			Heroic: 14
-			Light: 23
-			Medium: 21
-			None: 18
-			Plate: 15
-			Scout: 25
-			Spaceship: 10
-			Steel: 20
-			Superheavy: 17
-			Wood: 24
-			FlyingInfantry: 16
-			CyborgLight: 20
-			CyborgMedium: 18
-			CyborgHeavy: 17
-			CyborgHeroic: 15
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
 			AntiAirInfantry: 17
-			AntiAirVehicle: 22
-			AntiAirBuilding: 21
-			ShipLight: 23
-			ShipMedium: 21
-			ShipHeavy: 19
-			ShipSuperheavy: 18
-			AntiAirShip: 22
-			SubmarineLight: 20
-			SubmarineHeavy: 18
-	Warhead@LightChemicalWeaponPercentage:
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 175
@@ -822,89 +780,8 @@ edenRailgun:
 			AntiAirShip: 7
 			SubmarineLight: 11
 			SubmarineHeavy: 13
-	Warhead@MediumCannonPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		Spread: 150
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 17
-			Fighter: 8
-			Flak: 11
-			Heavy: 14
-			Helicopter: 6
-			Heroic: 9
-			Light: 18
-			Medium: 16
-			None: 13
-			Plate: 10
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 15
-			Superheavy: 12
-			Wood: 19
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 10
-	Warhead@ShrapnelWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
-			FlyingInfantry: 12
-			CyborgLight: 18
-			CyborgMedium: 15
-			CyborgHeavy: 12
-			CyborgHeroic: 9
-			AntiAirInfantry: 17
-			AntiAirVehicle: 15
-			AntiAirBuilding: 13
-			ShipLight: 17
-			ShipMedium: 14
-			ShipHeavy: 11
-			ShipSuperheavy: 10
-			AntiAirShip: 15
-			SubmarineLight: 12
-			SubmarineHeavy: 10
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 75
 		UpdatesUnitStatistics: false
@@ -942,6 +819,97 @@ edenRailgun:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 150
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 17
+			Fighter: 8
+			Flak: 11
+			Heavy: 14
+			Helicopter: 6
+			Heroic: 9
+			Light: 18
+			Medium: 16
+			None: 13
+			Plate: 10
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 15
+			Superheavy: 12
+			Wood: 19
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 225
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@Railgun_Heavy_Flat:
+		ValidTargets: Ground, Water
+		Damage: 25000
+		PercentageScale: 0
+
+	InvalidTargets: wall
+	TargetActorCenter: true
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 10
 edenTigerRailgun:
 	Inherits@w70: ^Warhead_Railgun_Heavy_Flat
 	Inherits@fx: ^op2_outpost2_set3
@@ -1517,33 +1485,16 @@ eden_EMP:
 		ContrailLength: 8
 		Speed: 256
 		TrailImage: blue_smokey
-	Warhead@TeslaChargedWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -1551,50 +1502,131 @@ eden_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 225
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -1611,11 +1643,7 @@ eden_EMP:
 	-Warhead@TeslaWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyCannon:
 	-Warhead@MediumCannon:
-	-Warhead@MediumMissile:
 	-Warhead@HeavyMissile:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
@@ -1627,114 +1655,6 @@ eden_EMP:
 		IntegrityScale: 0
 		PercentageScale: 0
 
-	Warhead@HeavyCannonPercentage:
-		Spread: 225
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 12
-			Concrete: 22
-			Fighter: 13
-			Flak: 16
-			Heavy: 19
-			Helicopter: 11
-			Heroic: 14
-			Light: 23
-			Medium: 21
-			None: 18
-			Plate: 15
-			Scout: 25
-			Spaceship: 10
-			Steel: 20
-			Superheavy: 17
-			Wood: 24
-			FlyingInfantry: 16
-			CyborgLight: 20
-			CyborgMedium: 18
-			CyborgHeavy: 17
-			CyborgHeroic: 15
-			AntiAirInfantry: 17
-			AntiAirVehicle: 22
-			AntiAirBuilding: 21
-			ShipLight: 23
-			ShipMedium: 21
-			ShipHeavy: 19
-			ShipSuperheavy: 18
-			AntiAirShip: 22
-			SubmarineLight: 20
-			SubmarineHeavy: 18
-	Warhead@MediumMissilePercentage:
-		Spread: 200
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 14
-			Concrete: 13
-			Fighter: 11
-			Flak: 7
-			Heavy: 18
-			Helicopter: 17
-			Heroic: 5
-			Light: 12
-			Medium: 15
-			None: 6
-			Plate: 8
-			Scout: 9
-			Shield: 25
-			Spaceship: 19
-			Steel: 16
-			Superheavy: 20
-			Wood: 10
-			FlyingInfantry: 10
-			CyborgLight: 8
-			CyborgMedium: 10
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 6
-			AntiAirVehicle: 13
-			AntiAirBuilding: 14
-			ShipLight: 11
-			ShipMedium: 14
-			ShipHeavy: 17
-			ShipSuperheavy: 18
-			AntiAirShip: 12
-			SubmarineLight: 16
-			SubmarineHeavy: 18
-	Warhead@ShrapnelWeaponPercentage:
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
-			FlyingInfantry: 12
-			CyborgLight: 18
-			CyborgMedium: 15
-			CyborgHeavy: 12
-			CyborgHeroic: 9
-			AntiAirInfantry: 17
-			AntiAirVehicle: 15
-			AntiAirBuilding: 13
-			ShipLight: 17
-			ShipMedium: 14
-			ShipHeavy: 11
-			ShipSuperheavy: 10
-			AntiAirShip: 15
-			SubmarineLight: 12
-			SubmarineHeavy: 10
 eden_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
 	Inherits@fx: ^op2_outpost2_set0
@@ -1745,35 +1665,6 @@ eden_EMP_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-	Warhead@Tesla_Super:
-		ValidTargets: Air
-	Warhead@TeslaChargedWeaponPercentage:
-		ValidTargets: Air
-	Warhead@TeslaWeaponPercentage:
-		ValidTargets: Air
-	Warhead@MediumFlameWeaponPercentage:
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Air
-	Warhead@HeavyCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Air
-	Warhead@HeavyMissilePercentage:
-		ValidTargets: Air
-	Warhead@EMPCompatibility:
-		InvalidTargets: Shielded
-		ValidTargets: Air
-	ReloadDelay: 45
-	Warhead@Tesla_Super: AreaDamage
-		Damage: 18000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		IntegrityScale: 0
-		PercentageScale: 0
-	Report: bazook1.aud
-	Projectile: Missile
 		Image: DRAGON
 		Speed: 256
 		Inaccuracy: 128
@@ -1792,7 +1683,14 @@ eden_EMP_AA:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
+	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Air
+		Damage: 18000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 100
 		Damage: 1
 		Versus:
@@ -1831,12 +1729,8 @@ eden_EMP_AA:
 			SubmarineHeavy: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 50
 		Damage: 1
 		Versus:
@@ -1875,8 +1769,8 @@ eden_EMP_AA:
 			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 375
 		Damage: 1
 		Falloff: 111, 33, 11, 3
@@ -1917,89 +1811,8 @@ eden_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Falloff: 100, 75, 50, 25
@@ -2039,6 +1852,7 @@ eden_EMP_AA:
 			SubmarineLight: 12
 			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 225
@@ -2075,7 +1889,47 @@ eden_EMP_AA:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 200
@@ -2113,10 +1967,65 @@ eden_EMP_AA:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@EMPCompatibility: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 32000
 		Spread: 1600
 		ValidRelationships: Neutral, Enemy
+	ReloadDelay: 45
+	Report: bazook1.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	InvalidTargets: wall
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	-Warhead@Tesla_Super_ExtraDamage:
 edenTiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
@@ -2125,41 +2034,344 @@ edenTiger_EMP:
 	Range: 6000
 	MinRange: 1200
 
-	Warhead@Tesla_Super:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@TeslaChargedWeaponPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@TeslaWeaponPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumFlameWeaponPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@ShrapnelWeaponPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannonPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-	Warhead@MediumCannonPercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-	Warhead@MediumMissilePercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@HeavyMissilePercentage:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-	Warhead@EMPCompatibility:
-		InvalidTargets: Shielded, Air
-		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 	Warhead@Tesla_Super: AreaDamage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
+	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 1
+		Versus:
+			REFLECTOR: 50
+			Shield: 50
+			Heroic: 30
+			Plate: 29
+			Flak: 28
+			None: 27
+			Superheavy: 26
+			Heavy: 25
+			Medium: 24
+			Light: 23
+			Scout: 22
+			Steel: 21
+			Concrete: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+			FlyingInfantry: 22
+			CyborgLight: 25
+			CyborgMedium: 26
+			CyborgHeavy: 27
+			CyborgHeroic: 28
+			AntiAirInfantry: 27
+			AntiAirVehicle: 23
+			AntiAirBuilding: 20
+			ShipLight: 21
+			ShipMedium: 22
+			ShipHeavy: 23
+			ShipSuperheavy: 23
+			AntiAirShip: 21
+			SubmarineLight: 23
+			SubmarineHeavy: 24
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Damage: 1
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Heroic: 25
+			Plate: 24
+			Flak: 23
+			None: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+			FlyingInfantry: 17
+			CyborgLight: 20
+			CyborgMedium: 21
+			CyborgHeavy: 22
+			CyborgHeroic: 23
+			AntiAirInfantry: 22
+			AntiAirVehicle: 18
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 17
+			ShipHeavy: 18
+			ShipSuperheavy: 18
+			AntiAirShip: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 14
+			CyborgHeavy: 13
+			CyborgHeroic: 12
+			AntiAirInfantry: 19
+			AntiAirVehicle: 11
+			AntiAirBuilding: 14
+			ShipLight: 14
+			ShipMedium: 13
+			ShipHeavy: 12
+			ShipSuperheavy: 11
+			AntiAirShip: 13
+			SubmarineLight: 11
+			SubmarineHeavy: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 225
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@EMPCompatibility: AffectsIntegrity
+		InvalidTargets: Shielded, Air
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		Damage: 32000
+		Spread: 1600
+		ValidRelationships: Neutral, Enemy
 	Report: bazook1.aud
 	Projectile: Missile
 		Image: DRAGON
@@ -2181,331 +2393,18 @@ edenTiger_EMP:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
-		Spread: 100
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 50
-			Heroic: 30
-			Plate: 29
-			Flak: 28
-			None: 27
-			Superheavy: 26
-			Heavy: 25
-			Medium: 24
-			Light: 23
-			Scout: 22
-			Steel: 21
-			Concrete: 20
-			Wood: 19
-			Spaceship: 18
-			Helicopter: 17
-			Bomber: 16
-			Fighter: 15
-			FlyingInfantry: 22
-			CyborgLight: 25
-			CyborgMedium: 26
-			CyborgHeavy: 27
-			CyborgHeroic: 28
-			AntiAirInfantry: 27
-			AntiAirVehicle: 23
-			AntiAirBuilding: 20
-			ShipLight: 21
-			ShipMedium: 22
-			ShipHeavy: 23
-			ShipSuperheavy: 23
-			AntiAirShip: 21
-			SubmarineLight: 23
-			SubmarineHeavy: 24
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		Spread: 50
-		Damage: 1
-		Versus:
-			REFLECTOR: 50
-			Shield: 35
-			Heroic: 25
-			Plate: 24
-			Flak: 23
-			None: 22
-			Superheavy: 21
-			Heavy: 20
-			Medium: 19
-			Light: 18
-			Scout: 17
-			Steel: 16
-			Concrete: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-			FlyingInfantry: 17
-			CyborgLight: 20
-			CyborgMedium: 21
-			CyborgHeavy: 22
-			CyborgHeroic: 23
-			AntiAirInfantry: 22
-			AntiAirVehicle: 18
-			AntiAirBuilding: 15
-			ShipLight: 16
-			ShipMedium: 17
-			ShipHeavy: 18
-			ShipSuperheavy: 18
-			AntiAirShip: 16
-			SubmarineLight: 18
-			SubmarineHeavy: 19
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
 	InvalidTargets: wall
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Spread: 375
-		Damage: 1
-		Falloff: 111, 33, 11, 3
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Wood: 16
-			Concrete: 15
-			Steel: 14
-			Scout: 13
-			Light: 12
-			Medium: 11
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 14
-			CyborgHeavy: 13
-			CyborgHeroic: 12
-			AntiAirInfantry: 19
-			AntiAirVehicle: 11
-			AntiAirBuilding: 14
-			ShipLight: 14
-			ShipMedium: 13
-			ShipHeavy: 12
-			ShipSuperheavy: 11
-			AntiAirShip: 13
-			SubmarineLight: 11
-			SubmarineHeavy: 10
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
-			FlyingInfantry: 12
-			CyborgLight: 18
-			CyborgMedium: 15
-			CyborgHeavy: 12
-			CyborgHeroic: 9
-			AntiAirInfantry: 17
-			AntiAirVehicle: 15
-			AntiAirBuilding: 13
-			ShipLight: 17
-			ShipMedium: 14
-			ShipHeavy: 11
-			ShipSuperheavy: 10
-			AntiAirShip: 15
-			SubmarineLight: 12
-			SubmarineHeavy: 10
-	Warhead@HeavyCannonPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		Spread: 225
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 12
-			Concrete: 22
-			Fighter: 13
-			Flak: 16
-			Heavy: 19
-			Helicopter: 11
-			Heroic: 14
-			Light: 23
-			Medium: 21
-			None: 18
-			Plate: 15
-			Scout: 25
-			Spaceship: 10
-			Steel: 20
-			Superheavy: 17
-			Wood: 24
-			FlyingInfantry: 16
-			CyborgLight: 20
-			CyborgMedium: 18
-			CyborgHeavy: 17
-			CyborgHeroic: 15
-			AntiAirInfantry: 17
-			AntiAirVehicle: 22
-			AntiAirBuilding: 21
-			ShipLight: 23
-			ShipMedium: 21
-			ShipHeavy: 19
-			ShipSuperheavy: 18
-			AntiAirShip: 22
-			SubmarineLight: 20
-			SubmarineHeavy: 18
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		Spread: 200
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 14
-			Concrete: 13
-			Fighter: 11
-			Flak: 7
-			Heavy: 18
-			Helicopter: 17
-			Heroic: 5
-			Light: 12
-			Medium: 15
-			None: 6
-			Plate: 8
-			Scout: 9
-			Shield: 25
-			Spaceship: 19
-			Steel: 16
-			Superheavy: 20
-			Wood: 10
-			FlyingInfantry: 10
-			CyborgLight: 8
-			CyborgMedium: 10
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 6
-			AntiAirVehicle: 13
-			AntiAirBuilding: 14
-			ShipLight: 11
-			ShipMedium: 14
-			ShipHeavy: 17
-			ShipSuperheavy: 18
-			AntiAirShip: 12
-			SubmarineLight: 16
-			SubmarineHeavy: 18
-	Warhead@EMPCompatibility: AffectsIntegrity
-		Damage: 32000
-		Spread: 1600
-		ValidRelationships: Neutral, Enemy
 	-Warhead@Tesla_Super_ExtraDamage:
 edenTiger_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
@@ -2517,35 +2416,6 @@ edenTiger_EMP_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-	Warhead@Tesla_Super:
-		ValidTargets: Air
-	Warhead@TeslaChargedWeaponPercentage:
-		ValidTargets: Air
-	Warhead@TeslaWeaponPercentage:
-		ValidTargets: Air
-	Warhead@MediumFlameWeaponPercentage:
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Air
-	Warhead@HeavyCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Air
-	Warhead@HeavyMissilePercentage:
-		ValidTargets: Air
-	Warhead@EMPCompatibility:
-		InvalidTargets: Shielded
-		ValidTargets: Air
-	ReloadDelay: 41
-	Warhead@Tesla_Super: AreaDamage
-		Damage: 18000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		IntegrityScale: 0
-		PercentageScale: 0
-	Report: bazook1.aud
-	Projectile: Missile
 		Image: DRAGON
 		Speed: 256
 		Inaccuracy: 128
@@ -2564,7 +2434,14 @@ edenTiger_EMP_AA:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
+	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Air
+		Damage: 18000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 100
 		Damage: 1
 		Versus:
@@ -2603,12 +2480,8 @@ edenTiger_EMP_AA:
 			SubmarineHeavy: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 50
 		Damage: 1
 		Versus:
@@ -2647,8 +2520,8 @@ edenTiger_EMP_AA:
 			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 375
 		Damage: 1
 		Falloff: 111, 33, 11, 3
@@ -2689,89 +2562,8 @@ edenTiger_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Falloff: 100, 75, 50, 25
@@ -2811,6 +2603,7 @@ edenTiger_EMP_AA:
 			SubmarineLight: 12
 			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 225
@@ -2847,7 +2640,47 @@ edenTiger_EMP_AA:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 200
@@ -2885,10 +2718,65 @@ edenTiger_EMP_AA:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@EMPCompatibility: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 32000
 		Spread: 1600
 		ValidRelationships: Neutral, Enemy
+	ReloadDelay: 41
+	Report: bazook1.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	InvalidTargets: wall
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	-Warhead@Tesla_Super_ExtraDamage:
 eden_GP_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
@@ -2901,66 +2789,16 @@ eden_GP_EMP:
 		Range: 768
 		ValidTargets: Vehicle
 
-	Warhead@Tesla_Super:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@TeslaChargedWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		InvalidTargets: Air
-	Warhead@TeslaWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@MediumFlameWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@HeavyCannonPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumCannonPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@HeavyMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@EMPCompatibility:
-		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
-		InvalidTargets: Shielded, Air
-	Range: 5500
 	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Report: bazook1.aud
-	Projectile: Missile
-		Image: DRAGON
-		Speed: 256
-		Inaccuracy: 128
-		Shadow: true
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		HorizontalRateOfTurn: 15
-		VerticalRateOfTurn: 20
-		TrailImage: blue_smokey
-		TrailInterval: 1
-		ContrailLength: 8
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		CloseEnough: 400
-		Acceleration: 2
-		HomingActivationDelay: 3
-		RangeLimit: 30000
-		PointDefenseTypes: Missile
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 100
 		Damage: 1
 		Versus:
@@ -3000,11 +2838,14 @@ eden_GP_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
+		InvalidTargets: Air
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 50
 		Damage: 1
 		Versus:
@@ -3043,8 +2884,9 @@ eden_GP_EMP:
 			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 375
 		Damage: 1
 		Falloff: 111, 33, 11, 3
@@ -3085,90 +2927,9 @@ eden_GP_EMP:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	MinRange: 1100
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Falloff: 100, 75, 50, 25
@@ -3208,6 +2969,8 @@ eden_GP_EMP:
 			SubmarineLight: 12
 			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 225
@@ -3244,7 +3007,49 @@ eden_GP_EMP:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 200
@@ -3282,10 +3087,82 @@ eden_GP_EMP:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@EMPCompatibility: AffectsIntegrity
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
 		Damage: 32000
 		Spread: 1600
 		ValidRelationships: Neutral, Enemy
+	Range: 5500
+	Report: bazook1.aud
+	Projectile: Missile
+		Image: DRAGON
+		Speed: 256
+		Inaccuracy: 128
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		HorizontalRateOfTurn: 15
+		VerticalRateOfTurn: 20
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		ContrailLength: 8
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	InvalidTargets: wall
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	MinRange: 1100
 	-Warhead@Tesla_Super_ExtraDamage:
 edenMobileThorsHammer:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -3418,11 +3295,6 @@ plymouthTigerRPG:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	Range: 6144
-	MinRange: 1230
-	Report: bazook1.aud
-	ValidTargets: Ground, Air
-	Projectile: Missile
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 128
@@ -3433,6 +3305,10 @@ plymouthTigerRPG:
 		ContrailLength: 8
 		Speed: 298
 		RangeLimit: 7c204
+	Range: 6144
+	MinRange: 1230
+	Report: bazook1.aud
+	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 4500
@@ -3454,9 +3330,6 @@ plymouthDefenceRPG:
 	MinRange: 1435
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	Report: bazook1.aud
-	ValidTargets: Ground, Air
-	Projectile: Missile
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 128
@@ -3467,6 +3340,8 @@ plymouthDefenceRPG:
 		ContrailLength: 8
 		Speed: 298
 		RangeLimit: 7c204
+	Report: bazook1.aud
+	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 4500
@@ -3499,35 +3374,10 @@ plymouthSticky:
 		Image: green_smokey
 		Shadow: true
 		LaunchAngle: 75
+		Inaccuracy: 150
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 3
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@stickyfoam: GrantExternalCondition
-		Condition: stickyfoam
-		Range: 1000
-		Duration: 100
-		ValidTargets: snareable
-		ValidRelationships: Enemy
-	Warhead@snared: GrantExternalCondition
-		Condition: snared
-		Range: 1000
-		Duration: 100
-		ValidTargets: snareable
-		ValidRelationships: Enemy
-	Warhead@Chemical_Light:
-		ValidTargets: Ground, Water
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PercentageScale: 0
-
-	Projectile:
-		Inaccuracy: 150
-	Warhead@Concrete:
-		Damage: 100
-	Warhead@LightChemicalWeaponPercentage:
 		Falloff: 99, 66, 33
 		Spread: 175
 		UpdatesUnitStatistics: false
@@ -3567,12 +3417,9 @@ plymouthSticky:
 			AntiAirShip: 7
 			SubmarineLight: 11
 			SubmarineHeavy: 13
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 12
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Spread: 75
 		UpdatesUnitStatistics: false
 		ValidTargets: Ground, Water
@@ -3609,6 +3456,31 @@ plymouthSticky:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
+	Warhead@stickyfoam: GrantExternalCondition
+		Condition: stickyfoam
+		Range: 1000
+		Duration: 100
+		ValidTargets: snareable
+		ValidRelationships: Enemy
+	Warhead@snared: GrantExternalCondition
+		Condition: snared
+		Range: 1000
+		Duration: 100
+		ValidTargets: snareable
+		ValidRelationships: Enemy
+	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PercentageScale: 0
+
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 12
 plymouthStickyTiger:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -3617,22 +3489,6 @@ plymouthStickyTiger:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium:
-		Damage: 16000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Projectile:
-		Inaccuracy: 150
-	Warhead@Concrete:
-		Damage: 100
-	Warhead@Glow:
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@LightChemicalWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 175
 		Falloff: 99, 66, 33
@@ -3672,7 +3528,13 @@ plymouthStickyTiger:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@CannonHE_Medium:
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 350
 		Damage: 2
@@ -3714,12 +3576,7 @@ plymouthStickyTiger:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 12
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 75
 		Damage: 3
@@ -3758,12 +3615,23 @@ plymouthStickyTiger:
 			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
-	ValidTargets: Infantry, Vehicle
-	Range: 6000
 	Projectile: Bullet
+		Inaccuracy: 150
 		Image: green_smokey
 		Speed: 600
 		LaunchAngle: 75
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 12
+	ValidTargets: Infantry, Vehicle
+	Range: 6000
 	InvalidTargets: StickyFoamed
 	Report: fireweb1.aud
 	Warhead@stickyfoam: GrantExternalCondition
@@ -3788,25 +3656,94 @@ plymouthStickyDefence:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		ValidTargets: Ground, Water
+		Spread: 175
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Plate: 15
+			Heavy: 14
+			Flak: 13
+			Medium: 12
+			None: 11
+			Light: 10
+			Heroic: 9
+			Scout: 8
+			Steel: 7
+			Concrete: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+			FlyingInfantry: 7
+			CyborgLight: 10
+			CyborgMedium: 12
+			CyborgHeavy: 14
+			CyborgHeroic: 12
+			AntiAirInfantry: 12
+			AntiAirVehicle: 11
+			AntiAirBuilding: 6
+			ShipLight: 7
+			ShipMedium: 8
+			ShipHeavy: 10
+			ShipSuperheavy: 11
+			AntiAirShip: 7
+			SubmarineLight: 11
+			SubmarineHeavy: 13
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		ValidTargets: Ground, Water
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+			FlyingInfantry: 11
+			CyborgLight: 14
+			CyborgMedium: 16
+			CyborgHeavy: 18
+			CyborgHeroic: 16
+			AntiAirInfantry: 16
+			AntiAirVehicle: 15
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 13
+			ShipHeavy: 14
+			ShipSuperheavy: 15
+			AntiAirShip: 12
+			SubmarineLight: 15
+			SubmarineHeavy: 17
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Projectile:
-		Inaccuracy: 150
-	Warhead@Concrete:
-		Damage: 100
-	Warhead@Glow:
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@HeavyChemicalWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 525
 		Damage: 1
@@ -3848,89 +3785,7 @@ plymouthStickyDefence:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@LightChemicalWeaponPercentage:
-		ValidTargets: Ground, Water
-		Spread: 175
-		Falloff: 99, 66, 33
-		Versus:
-			Shield: 17
-			Superheavy: 16
-			Plate: 15
-			Heavy: 14
-			Flak: 13
-			Medium: 12
-			None: 11
-			Light: 10
-			Heroic: 9
-			Scout: 8
-			Steel: 7
-			Concrete: 6
-			Wood: 5
-			Spaceship: 4
-			Helicopter: 3
-			Bomber: 2
-			Fighter: 1
-			FlyingInfantry: 7
-			CyborgLight: 10
-			CyborgMedium: 12
-			CyborgHeavy: 14
-			CyborgHeroic: 12
-			AntiAirInfantry: 12
-			AntiAirVehicle: 11
-			AntiAirBuilding: 6
-			ShipLight: 7
-			ShipMedium: 8
-			ShipHeavy: 10
-			ShipSuperheavy: 11
-			AntiAirShip: 7
-			SubmarineLight: 11
-			SubmarineHeavy: 13
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-	Warhead@MediumChemicalWeaponPercentage:
-		ValidTargets: Ground, Water
-		Spread: 350
-		Falloff: 99, 66, 33
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Plate: 19
-			Heavy: 18
-			Flak: 17
-			Medium: 16
-			None: 15
-			Light: 14
-			Heroic: 13
-			Scout: 12
-			Steel: 11
-			Concrete: 10
-			Wood: 9
-			Spaceship: 8
-			Helicopter: 7
-			Bomber: 6
-			Fighter: 5
-			FlyingInfantry: 11
-			CyborgLight: 14
-			CyborgMedium: 16
-			CyborgHeavy: 18
-			CyborgHeroic: 16
-			AntiAirInfantry: 16
-			AntiAirVehicle: 15
-			AntiAirBuilding: 10
-			ShipLight: 11
-			ShipMedium: 13
-			ShipHeavy: 14
-			ShipSuperheavy: 15
-			AntiAirShip: 12
-			SubmarineLight: 15
-			SubmarineHeavy: 17
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-	Warhead@ShieldHit:
-		Duration: 12
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 75
 		Damage: 3
@@ -3969,11 +3824,19 @@ plymouthStickyDefence:
 			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
-	ValidTargets: Infantry, Vehicle
 	Projectile: Bullet
+		Inaccuracy: 150
 		Image: green_smokey
 		Speed: 600
 		LaunchAngle: 75
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
+	ValidTargets: Infantry, Vehicle
 	InvalidTargets: StickyFoamed
 	Report: fireweb1.aud
 	Warhead@stickyfoam: GrantExternalCondition
@@ -4095,33 +3958,16 @@ plymouth_EMP:
 		ContrailLength: 8
 		Speed: 256
 		TrailImage: blue_smokey
-	Warhead@TeslaChargedWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4129,50 +3975,131 @@ plymouth_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+			FlyingInfantry: 12
+			CyborgLight: 18
+			CyborgMedium: 15
+			CyborgHeavy: 12
+			CyborgHeroic: 9
+			AntiAirInfantry: 17
+			AntiAirVehicle: 15
+			AntiAirBuilding: 13
+			ShipLight: 17
+			ShipMedium: 14
+			ShipHeavy: 11
+			ShipSuperheavy: 10
+			AntiAirShip: 15
+			SubmarineLight: 12
+			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 225
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+			FlyingInfantry: 16
+			CyborgLight: 20
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 15
+			AntiAirInfantry: 17
+			AntiAirVehicle: 22
+			AntiAirBuilding: 21
+			ShipLight: 23
+			ShipMedium: 21
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 22
+			SubmarineLight: 20
+			SubmarineHeavy: 18
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4189,11 +4116,7 @@ plymouth_EMP:
 	-Warhead@TeslaWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyCannon:
 	-Warhead@MediumCannon:
-	-Warhead@MediumMissile:
 	-Warhead@HeavyMissile:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
@@ -4205,114 +4128,6 @@ plymouth_EMP:
 		IntegrityScale: 0
 		PercentageScale: 0
 
-	Warhead@HeavyCannonPercentage:
-		Spread: 225
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 12
-			Concrete: 22
-			Fighter: 13
-			Flak: 16
-			Heavy: 19
-			Helicopter: 11
-			Heroic: 14
-			Light: 23
-			Medium: 21
-			None: 18
-			Plate: 15
-			Scout: 25
-			Spaceship: 10
-			Steel: 20
-			Superheavy: 17
-			Wood: 24
-			FlyingInfantry: 16
-			CyborgLight: 20
-			CyborgMedium: 18
-			CyborgHeavy: 17
-			CyborgHeroic: 15
-			AntiAirInfantry: 17
-			AntiAirVehicle: 22
-			AntiAirBuilding: 21
-			ShipLight: 23
-			ShipMedium: 21
-			ShipHeavy: 19
-			ShipSuperheavy: 18
-			AntiAirShip: 22
-			SubmarineLight: 20
-			SubmarineHeavy: 18
-	Warhead@MediumMissilePercentage:
-		Spread: 200
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 14
-			Concrete: 13
-			Fighter: 11
-			Flak: 7
-			Heavy: 18
-			Helicopter: 17
-			Heroic: 5
-			Light: 12
-			Medium: 15
-			None: 6
-			Plate: 8
-			Scout: 9
-			Shield: 25
-			Spaceship: 19
-			Steel: 16
-			Superheavy: 20
-			Wood: 10
-			FlyingInfantry: 10
-			CyborgLight: 8
-			CyborgMedium: 10
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 6
-			AntiAirVehicle: 13
-			AntiAirBuilding: 14
-			ShipLight: 11
-			ShipMedium: 14
-			ShipHeavy: 17
-			ShipSuperheavy: 18
-			AntiAirShip: 12
-			SubmarineLight: 16
-			SubmarineHeavy: 18
-	Warhead@ShrapnelWeaponPercentage:
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
-			FlyingInfantry: 12
-			CyborgLight: 18
-			CyborgMedium: 15
-			CyborgHeavy: 12
-			CyborgHeroic: 9
-			AntiAirInfantry: 17
-			AntiAirVehicle: 15
-			AntiAirBuilding: 13
-			ShipLight: 17
-			ShipMedium: 14
-			ShipHeavy: 11
-			ShipSuperheavy: 10
-			AntiAirShip: 15
-			SubmarineLight: 12
-			SubmarineHeavy: 10
 plymouth_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
 	Inherits@fx: ^op2_outpost2_set1
@@ -4321,55 +4136,14 @@ plymouth_EMP_AA:
 	ValidTargets: Air
 
 #Also used by Eden
-	Warhead@Tesla_Super:
-		ValidTargets: Air
-	Warhead@TeslaChargedWeaponPercentage:
-		ValidTargets: Air
-	Warhead@TeslaWeaponPercentage:
-		ValidTargets: Air
-	Warhead@MediumFlameWeaponPercentage:
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Air
-	Warhead@HeavyCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumCannonPercentage:
-		ValidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Air
-	Warhead@HeavyMissilePercentage:
-		ValidTargets: Air
-	Warhead@EMPCompatibility:
-		InvalidTargets: Shielded
-		ValidTargets: Air
-	ReloadDelay: 45
 	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Air
 		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Report: bazook1.aud
-	Projectile: Missile
-		Image: DRAGON
-		Speed: 256
-		Inaccuracy: 128
-		Shadow: true
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		HorizontalRateOfTurn: 15
-		VerticalRateOfTurn: 20
-		TrailImage: blue_smokey
-		TrailInterval: 1
-		ContrailLength: 8
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		CloseEnough: 400
-		Acceleration: 2
-		HomingActivationDelay: 3
-		RangeLimit: 30000
-		PointDefenseTypes: Missile
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 100
 		Damage: 1
 		Versus:
@@ -4408,12 +4182,8 @@ plymouth_EMP_AA:
 			SubmarineHeavy: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 50
 		Damage: 1
 		Versus:
@@ -4452,8 +4222,8 @@ plymouth_EMP_AA:
 			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Spread: 375
 		Damage: 1
 		Falloff: 111, 33, 11, 3
@@ -4494,89 +4264,8 @@ plymouth_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Falloff: 100, 75, 50, 25
@@ -4616,6 +4305,7 @@ plymouth_EMP_AA:
 			SubmarineLight: 12
 			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 225
@@ -4652,7 +4342,47 @@ plymouth_EMP_AA:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 200
@@ -4690,10 +4420,85 @@ plymouth_EMP_AA:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@EMPCompatibility: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 32000
 		Spread: 1600
 		ValidRelationships: Neutral, Enemy
+	ReloadDelay: 45
+	Report: bazook1.aud
+	Projectile: Missile
+		Image: DRAGON
+		Speed: 256
+		Inaccuracy: 128
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		HorizontalRateOfTurn: 15
+		VerticalRateOfTurn: 20
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		ContrailLength: 8
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	InvalidTargets: wall
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	-Warhead@Tesla_Super_ExtraDamage:
 plymouth_Tiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
@@ -4706,66 +4511,16 @@ plymouth_Tiger_EMP:
 		Range: 768
 		ValidTargets: Vehicle
 
-	Warhead@Tesla_Super:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@TeslaChargedWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		InvalidTargets: Air
-	Warhead@TeslaWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@MediumFlameWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@HeavyCannonPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumCannonPercentage:
-		ValidTargets: Ground, Water
-		InvalidTargets: Air
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@HeavyMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Air
-	Warhead@EMPCompatibility:
-		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
-		InvalidTargets: Shielded, Air
-	Range: 5500
 	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Report: bazook1.aud
-	Projectile: Missile
-		Image: DRAGON
-		Speed: 256
-		Inaccuracy: 128
-		Shadow: true
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		HorizontalRateOfTurn: 15
-		VerticalRateOfTurn: 20
-		TrailImage: blue_smokey
-		TrailInterval: 1
-		ContrailLength: 8
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		CloseEnough: 400
-		Acceleration: 2
-		HomingActivationDelay: 3
-		RangeLimit: 30000
-		PointDefenseTypes: Missile
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 100
 		Damage: 1
 		Versus:
@@ -4805,11 +4560,14 @@ plymouth_Tiger_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit: GrantExternalCondition
+		InvalidTargets: Air
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 50
 		Damage: 1
 		Versus:
@@ -4848,8 +4606,9 @@ plymouth_Tiger_EMP:
 			SubmarineHeavy: 19
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	InvalidTargets: wall
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Spread: 375
 		Damage: 1
 		Falloff: 111, 33, 11, 3
@@ -4890,90 +4649,9 @@ plymouth_Tiger_EMP:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumCannonPercentage: AreaDamagePercentage
-		Spread: 150
-		Damage: 1
-		Versus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Concrete: 17
-			Medium: 16
-			Steel: 15
-			Heavy: 14
-			None: 13
-			Superheavy: 12
-			Flak: 11
-			Plate: 10
-			Heroic: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-			FlyingInfantry: 11
-			CyborgLight: 15
-			CyborgMedium: 13
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 12
-			AntiAirVehicle: 17
-			AntiAirBuilding: 16
-			ShipLight: 18
-			ShipMedium: 16
-			ShipHeavy: 14
-			ShipSuperheavy: 13
-			AntiAirShip: 17
-			SubmarineLight: 15
-			SubmarineHeavy: 13
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Heavy: 23
-			Helicopter: 22
-			Steel: 21
-			Medium: 20
-			Bomber: 19
-			Concrete: 18
-			Light: 17
-			Fighter: 16
-			Wood: 15
-			Scout: 14
-			Plate: 13
-			Flak: 12
-			None: 11
-			Heroic: 10
-			FlyingInfantry: 15
-			CyborgLight: 14
-			CyborgMedium: 15
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 11
-			AntiAirVehicle: 18
-			AntiAirBuilding: 19
-			ShipLight: 16
-			ShipMedium: 19
-			ShipHeavy: 22
-			ShipSuperheavy: 23
-			AntiAirShip: 17
-			SubmarineLight: 21
-			SubmarineHeavy: 23
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		UpdatesUnitStatistics: false
-	MinRange: 1100
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Falloff: 100, 75, 50, 25
@@ -5013,6 +4691,8 @@ plymouth_Tiger_EMP:
 			SubmarineLight: 12
 			SubmarineHeavy: 10
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 225
@@ -5049,7 +4729,49 @@ plymouth_Tiger_EMP:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+		Spread: 150
+		Damage: 1
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Concrete: 17
+			Medium: 16
+			Steel: 15
+			Heavy: 14
+			None: 13
+			Superheavy: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			FlyingInfantry: 11
+			CyborgLight: 15
+			CyborgMedium: 13
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 12
+			AntiAirVehicle: 17
+			AntiAirBuilding: 16
+			ShipLight: 18
+			ShipMedium: 16
+			ShipHeavy: 14
+			ShipSuperheavy: 13
+			AntiAirShip: 17
+			SubmarineLight: 15
+			SubmarineHeavy: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		Spread: 200
@@ -5087,10 +4809,82 @@ plymouth_Tiger_EMP:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+			FlyingInfantry: 15
+			CyborgLight: 14
+			CyborgMedium: 15
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 11
+			AntiAirVehicle: 18
+			AntiAirBuilding: 19
+			ShipLight: 16
+			ShipMedium: 19
+			ShipHeavy: 22
+			ShipSuperheavy: 23
+			AntiAirShip: 17
+			SubmarineLight: 21
+			SubmarineHeavy: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@EMPCompatibility: AffectsIntegrity
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
 		Damage: 32000
 		Spread: 1600
 		ValidRelationships: Neutral, Enemy
+	Range: 5500
+	Report: bazook1.aud
+	Projectile: Missile
+		Image: DRAGON
+		Speed: 256
+		Inaccuracy: 128
+		Shadow: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		HorizontalRateOfTurn: 15
+		VerticalRateOfTurn: 20
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		ContrailLength: 8
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	InvalidTargets: wall
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	MinRange: 1100
 	-Warhead@Tesla_Super_ExtraDamage:
 MiniNova:
 	ValidTargets: Ground, Water, Underwater, Air

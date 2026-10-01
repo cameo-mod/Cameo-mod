@@ -1,15 +1,13 @@
 # audit_buildable_order — buildable actor order checks
 
-Buildable combat actors checked: **910**
-Prerequisite order violations: **1**
-Build palette order violations: **987**
+Buildable combat actors checked: **933**
+Prerequisite order violations: **0**
+Build palette order violations: **1015**
 
 
 ## Prerequisite order violations
 
-| actor | queue | prerequisites | problem |
-|---|---|---|---|
-| steelconsortium_consortiummobileconstructionvehicle |  | steelconsortium_consortiumradar, ~steelconsortium_consortiumwarfactory | production token '~steelconsortium_consortiumwarfactory' appears after tech/promotion token |
+_none found_
 
 
 ## Build palette order violations
@@ -46,10 +44,25 @@ Build palette order violations: **987**
 | asianalliance | Vehicle | asianalliance_ptnk | 3 | 2400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
 | asianalliance | Vehicle | asianalliance_pulverizermecha | 3 | 3000 | 75 | should be before asianalliance_oiltruck (tier/cost order) |
 | asianalliance | Vehicle | asianalliance_warturtle | 3 | 5000 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| atreides | Aircraft | atreides_airdrone | 3 | 1000 | 30 | should be before atreides_advancedcarryall (tier/cost order) |
 | atreides | Infantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | Infantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
+| atreides | RAAircraft | atreides_airdrone | 3 | 1000 | 30 | should be before atreides_advancedcarryall (tier/cost order) |
 | atreides | RAInfantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | RAInfantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
+| atreides | RAVehicle | atreides_apc | 2 | 800 | 45 | should be before atreides_missiletank (tier/cost order) |
+| atreides | RAVehicle | atreides_repairtank | 2 | 800 | 55 | should be before atreides_missiletank (tier/cost order) |
+| atreides | RAVehicle | atreides_mongoose | 3 | 750 | 57 | should be before atreides_missiletank (tier/cost order) |
+| atreides | RAVehicle | atreides_minotaurus | 3 | 900 | 65 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | RAVehicle | atreides_sonictank | 3 | 1000 | 80 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Starport | atreides_mongoose | 3 | 750 | 57 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Starport | atreides_minotaurus | 3 | 900 | 65 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Starport | atreides_sonictank | 3 | 1000 | 80 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Vehicle | atreides_apc | 2 | 800 | 45 | should be before atreides_missiletank (tier/cost order) |
+| atreides | Vehicle | atreides_repairtank | 2 | 800 | 55 | should be before atreides_missiletank (tier/cost order) |
+| atreides | Vehicle | atreides_mongoose | 3 | 750 | 57 | should be before atreides_missiletank (tier/cost order) |
+| atreides | Vehicle | atreides_minotaurus | 3 | 900 | 65 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Vehicle | atreides_sonictank | 3 | 1000 | 80 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1_elite | 2 | 3000 | 21 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterdronecarrier | 3 | 4000 | 20 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_mothership | 3 | 10000 | 30 | should be before cabal_overkillgunship (tier/cost order) |
@@ -113,11 +126,11 @@ Build palette order violations: **987**
 | corrino | RAVehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
 | corrino | RAVehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
 | corrino | RAVehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
-| corrino | RAVehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_mobileconstructionvehicle (tier/cost order) |
+| corrino | RAVehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_missiletank (tier/cost order) |
 | corrino | Vehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
 | corrino | Vehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
 | corrino | Vehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
-| corrino | Vehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_mobileconstructionvehicle (tier/cost order) |
+| corrino | Vehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_missiletank (tier/cost order) |
 | eden | RAVehicle | eden_lynx_emp | 1 | 1050 | 40 | should be before eden_lynx_railgun (tier/cost order) |
 | eden | RAVehicle | eden_cargotruck_empty | 2 | 1000 | 10 | should be before eden_lynx_laser (tier/cost order) |
 | eden | RAVehicle | eden_lynx_acidcloud | 2 | 1100 | 30 | should be before eden_lynx_railgun (tier/cost order) |
@@ -665,6 +678,19 @@ Build palette order violations: **987**
 | schwarzermond | Vehicle | schwarzermond_mars | 3 | 2000 | 80 | should be before schwarzermond_naxismobileconstructionvehicle (tier/cost order) |
 | schwarzermond | Vehicle | schwarzermond_komet | 3 | 2500 | 80 | should be before schwarzermond_naxismobileconstructionvehicle (tier/cost order) |
 | schwarzermond | Vehicle | schwarzermond_korruptesbiest | 3 | 3500 | 75 | should be before schwarzermond_naxismobileconstructionvehicle (tier/cost order) |
+| scrin | ScrinAdvancedVehicle | scrin_repair_drone | 2 | 600 | 50 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinAdvancedVehicle | scrin_seeker | 2 | 700 | 30 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinAdvancedVehicle | scrin_explorer | 2 | 800 | 10 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinAdvancedVehicle | scrin_devourer_tank | 2 | 1200 | 40 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinAdvancedVehicle | scrin_harvester | 2 | 1400 | 20 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinAircraft | scrin_drone_ship | 2 | 5000 | 10 | should be before scrin_stormrider (tier/cost order) |
+| scrin | ScrinInfantry | scrin_shock_trooper_blink_pack | 2 | 900 | 40 | should be before scrin_ravager (tier/cost order) |
+| scrin | ScrinVehicle | scrin_repair_drone | 2 | 600 | 50 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinVehicle | scrin_seeker | 2 | 700 | 30 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinVehicle | scrin_explorer | 2 | 800 | 10 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinVehicle | scrin_devourer_tank | 2 | 1200 | 40 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinVehicle | scrin_harvester | 2 | 1400 | 20 | should be before scrin_gun_walker (tier/cost order) |
+| scrin | ScrinWarpAircraft | scrin_drone_ship | 2 | 5000 | 10 | should be before scrin_stormrider (tier/cost order) |
 | steelconsortium | Aircraft | steelconsortium_cargoship | 1 | 4000 | 20 | should be before steelconsortium_twister (tier/cost order) |
 | steelconsortium | Aircraft | steelconsortium_cloudbreaker | 3 | 5000 | 20 | should be before steelconsortium_twister (tier/cost order) |
 | steelconsortium | Infantry | steelconsortium_hoverboardgrenadier | 2 | 650 | 20 | should be before steelconsortium_engineer (tier/cost order) |
