@@ -82,3 +82,6 @@ groups:
   Q_ut3_defend_share:                # NOVA UT-3 — TurtleRush axis scales the CA-2 defend reserve (turtles dig deeper, rushers strip the pool); needs O_ca2 armed to have a reserve to scale
     SquadManagerBotModuleCA:
       UseUtilityDefendReserve: true
+  R_tc2_sync_attacks:                # NOVA TC-2a — an ally's Director Climax opens our launch window too; team waves surge together (reads TC-1 blackboard, inert in 1v1)
+    SquadManagerBotModuleCA:
+      UseTeamSyncAttacks: true

@@ -2449,6 +2449,13 @@ enumerates enemy actors.
   identical because there is no flag. TC-2's consumers are already named in
   §11, all deferred: synchronised attack windows, defend-request answering,
   expansion-claim deconfliction, role-split bias and human-ally beacons.
+- **First consumer (TC-2a — synchronised attack windows):** `SquadManagerBotModuleCAInfo.
+  UseTeamSyncAttacks` (default false) folds the allied blackboard's `AnyClimax` into the
+  launch-bar scale — `TeamSyncForceScale` takes `min(ownPhaseScale,
+  DirectorClimaxForceScalePercent)` while an ally's wave crests, so every team's bots
+  release inside the same fleeting window. Runs standalone (pacing-off reads scale 100)
+  or composed with DI-2; a 1v1 or absent ally provider yields `AnyClimax = false` —
+  bit-identical. Switch group `R_tc2_sync_attacks`.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count

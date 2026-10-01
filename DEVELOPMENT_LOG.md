@@ -1,3 +1,23 @@
+# 2026-10-01 — NOVA: TC-2a synchronised attack windows — ally Climax opens the launch bar
+
+- `SquadManagerBotModuleCAInfo.UseTeamSyncAttacks` (default **false**) — first TC-2
+  consumer of the TC-1 team blackboard. While any allied bot's Director wave is at
+  Climax (`TeamBlackboard.Collect(player).AnyClimax`), the effective launch-bar scale
+  becomes `min(ownPhaseScale, DirectorClimaxForceScalePercent)` — every team's bots
+  release inside the same fleeting window. `TeamSyncForceScale` is the static-testable
+  helper.
+- Runs standalone (pacing-off = scale 100 folded by the same min) and composes with DI-2;
+  the shared surface stays multiplicative, no new coupling — own phase still answers first.
+- Fog-honest: the only input is ally-published broadcasts (host-side blackboard, allies
+  only). 1v1 or absent ally providers yield `AnyClimax = false` — bit-identical.
+- ai.yaml: `UseTeamSyncAttacks: false` on the six SquadManagerBotModuleCA instances;
+  manifest group `R_tc2_sync_attacks` (bare key, @classic skip-guarded).
+- 3 tests (`TeamSyncAttackTest`): ally climax caps every own phase at the climax scale,
+  a lower own climax is never raised, no climax leaves the own scale alone.
+- Docs: ARCHITECTURE 12.17 first-consumer bullet; ROADMAP TC row updated.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
 # 2026-10-01 — NOVA: UT-3 defence share — TurtleRush scales the CA-2 defend reserve
 
 - `SquadManagerBotModuleCAInfo.UseUtilityDefendReserve` (default **false**) — its OWN flag,

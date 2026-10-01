@@ -208,7 +208,8 @@ the fog sequencing.
   - [~] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
     defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant.
     **NOVA**, with DI. TC-1 team blackboard publisher `nova/team-commander-1` —
-    publish-only, no switch.
+    publish-only, no switch. TC-2a `nova/tc2-sync-attacks` — ally Climax opens our
+    launch window (group `R_tc2_sync_attacks`, inert in 1v1).
   - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
     refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
     control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.

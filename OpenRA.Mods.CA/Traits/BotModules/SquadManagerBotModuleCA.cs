@@ -226,6 +226,12 @@ namespace OpenRA.Mods.CA.Traits
 			"False = the Director publishes telemetry only, bit-identical.")]
 		public readonly bool UseDirectorPacing = false;
 
+		[Desc("TC-2 (12.17): an allied bot's Director Climax also opens this bot's launch window —",
+			"team waves surge together. Applies DirectorClimaxForceScalePercent as a cap on the",
+			"effective scale even when own pacing is off (scale 100). Reads the TC-1 ally",
+			"blackboard (ally-published data only); a 1v1 or absent ally provider is bit-identical.")]
+		public readonly bool UseTeamSyncAttacks = false;
+
 		[Desc("Percent of the desired attack force bar required while the Director is in BuildUp.",
 			"A disabled/absent Director also reads BuildUp — 100 keeps the baseline bar.")]
 		public readonly int DirectorBuildUpForceScalePercent = 100;
@@ -2333,18 +2339,22 @@ namespace OpenRA.Mods.CA.Traits
 			// Climax releases on a smaller pool, Relief holds for a rebuild. Scaling the
 			// bar itself (not the stored desired force) lets a phase change mid-wait
 			// take effect immediately; flag-off or no provider = scale 100, identical.
-			var requiredValue = desiredAttackForceValue;
-			var requiredSize = desiredAttackForceSize;
+			var forceScale = 100;
 			if (Info.UseDirectorPacing)
 			{
 				var director = Player.PlayerActor.TraitsImplementing<IBotDirector>().FirstOrDefault();
 				if (director != null)
-				{
-					var scale = DirectorForceScalePercent(director.DirectorPhase, Info);
-					requiredValue = ApplyForceScale(desiredAttackForceValue, scale);
-					requiredSize = ApplyForceScale(desiredAttackForceSize, scale);
-				}
+					forceScale = DirectorForceScalePercent(director.DirectorPhase, Info);
 			}
+
+			// TC-2 (12.17): an allied Director's Climax opens our launch window too —
+			// team waves surge together. The min keeps a slacker own phase from
+			// skipping a fleeting ally climax; a shredded pool can't launch anyway.
+			if (Info.UseTeamSyncAttacks && TeamBlackboard.Collect(Player).AnyClimax)
+				forceScale = TeamSyncForceScale(forceScale, true, Info.DirectorClimaxForceScalePercent);
+
+			var requiredValue = ApplyForceScale(desiredAttackForceValue, forceScale);
+			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && unitsHangingAroundTheBase.Count >= requiredSize))
 			{
@@ -2586,6 +2596,11 @@ namespace OpenRA.Mods.CA.Traits
 				_ => info.DirectorBuildUpForceScalePercent,
 			};
 		}
+
+		// TC-2 (12.17): the effective launch-bar scale after an ally's wave is folded in —
+		// an allied Climax caps the scale at our own climax scale; no climax = unchanged.
+		public static int TeamSyncForceScale(int ownPhaseScale, bool allyClimax, int climaxScale) =>
+			allyClimax ? Math.Min(ownPhaseScale, climaxScale) : ownPhaseScale;
 
 		// Zero stays zero: a SquadValue 0 bar trivially passes and must keep passing.
 		public static int ApplyForceScale(int threshold, int scalePercent)
