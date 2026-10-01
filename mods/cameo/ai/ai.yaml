@@ -3420,6 +3420,36 @@ Player:
 		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
 		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
 		UsePersonalityLeads: false
+		# UT-1 (AI_DEEP_RESEARCH §5.1): each personality's starting/resting point on the three
+		# bipolar axes, [0,100] with 100 the SECOND pole. Record-only until a consumer arms
+		# UseUtilityAxes (switch group M_utility_axes); a missing key rests at neutral 50.
+		#   rush:        presses home (Rush 80) off a small early force; TechRush-lean, mixed mass.
+		#   turtle:      holds and fortifies (Turtle 20), techs up (TechRush 30), keeps the army home.
+		#   tech:        rushes tiers (TechRush 20), stays cautious (Turtle 35), balanced mass.
+		#   expansion:   takes the map (Expansion 75) at a neutral posture elsewhere.
+		#   steamroller: massed frontal force (Steamroller 20) that presses the attack (Rush 65).
+		#   guerrilla:   raids and harassment (Guerrilla 80) with a high-attack tempo (Rush 70).
+		UtilityTurtleRushRest:
+			rush: 80
+			turtle: 20
+			tech: 35
+			expansion: 45
+			steamroller: 65
+			guerrilla: 70
+		UtilityTechRushExpansionRest:
+			rush: 35
+			turtle: 30
+			tech: 20
+			expansion: 75
+			steamroller: 55
+			guerrilla: 60
+		UtilitySteamrollerGuerrillaRest:
+			rush: 45
+			turtle: 40
+			tech: 50
+			expansion: 55
+			steamroller: 20
+			guerrilla: 80
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).

@@ -42,3 +42,20 @@ groups:
       UseRoleMix: true
     SquadManagerBotModuleCA@guerrilla:
       UseRoleMix: true
+  # UT-1 (AI_DEEP_RESEARCH §5.1): the squad manager's attack-delay reset scales by the
+  # master's Turtle<->Rush utility axis. Explicit @-keys arm the six genericbot
+  # personality instances only; @classic (the A/B control) is skipped above and never
+  # listed. K and L stay reserved for DAWN.
+  M_utility_axes:
+    SquadManagerBotModuleCA@rush:
+      UseUtilityAxes: true
+    SquadManagerBotModuleCA@turtle:
+      UseUtilityAxes: true
+    SquadManagerBotModuleCA@tech:
+      UseUtilityAxes: true
+    SquadManagerBotModuleCA@expansion:
+      UseUtilityAxes: true
+    SquadManagerBotModuleCA@steamroller:
+      UseUtilityAxes: true
+    SquadManagerBotModuleCA@guerrilla:
+      UseUtilityAxes: true

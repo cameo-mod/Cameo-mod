@@ -2299,3 +2299,28 @@ Steamroller leans `UnitBuilderBotModuleCA`'s `ProductionMinCashRequirement` /
 `MaximiseProductionCashRequirement` floors; Rush leans `SquadManagerBotModuleCA`'s
 `minAttackForceDelayTicks` reset — each by up to `PersonalityLeadMaxLeanPercent` (50),
 linear in the deficit. The other four personalities' leads remain telemetry-only.
+### 12.15 UT-1 — the utility axes, first slice (NOVA, 2026-10-01; AI_DEEP_RESEARCH.md §5.1)
+
+The maintainer's axis ruling lands as `BotUtilityAxes`: three bipolar posture axes —
+Turtle↔Rush, TechRush↔Expansion, Steamroller↔Guerrilla — each [0,100] with 100 the
+second-named pole. Every snapshot, `MasterAiBotModule.Rebuild` folds the snapshot's own
+fog-honest inputs into `target = rest[personality] + terms x UtilityInputWeightPercent`,
+then EMA-steps the published axis toward it by `UtilityAxisDecayPercent` — quiet inputs
+decay back to the resting value, and a personality switch moves the rest, not the axis.
+Every raw input is squashed (`Saturate`/`HurtShare`) before its capped term, so no single
+term dominates; the term units sit in `BotUtilityAxes.cs`.
+
+- **Published, always on:** `BotSituation.UtilityTurtleRush`/`...TechRushExpansion`/
+  `...SteamrollerGuerrilla`, plus `own.utility_turtlerush` etc. in the situation log —
+  explainable against the same record's inputs (§5.1's "logged with their inputs").
+- **Seam:** `IBotUtilityAxes` (OpenRA.Mods.CA) is implemented by the master; absent or
+  disabled providers read neutral 50 — never a behaviour change.
+- **First consumer, flag-gated:** `SquadManagerBotModuleCAInfo.UseUtilityAxes` (default
+  false) scales the `minAttackForceDelayTicks` reset by TurtleRush — Rush 100 → x0.6,
+  50 → x1.0, Turtle 0 → x1.5. Flag off is byte-identical; `@classic` never arms it.
+- **Second consumer (UT-2):** under the same flag the time-ramped guerrilla-squad cap
+  scales by SteamrollerGuerrilla — Guerrilla 100 → x1.5, 50 → x1.0, Steamroller 0 → x0.5.
+- **Arm:** switch group `M_utility_axes` (explicit `@`-keys on the six genericbot
+  personality instances; K and L remain reserved for DAWN).
+- Rest points per personality live on `MasterAiBotModule` in ai.yaml (`Utility*Rest`
+  dicts, keyed `rush`/`turtle`/...; missing → 50).

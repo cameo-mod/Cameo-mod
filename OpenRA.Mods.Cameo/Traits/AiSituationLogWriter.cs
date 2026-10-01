@@ -263,6 +263,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "repair_orders", situation.RepairOrders);
 			AiMatchLogWriter.AppendNumber(builder, "repair_sweep_orders", situation.RepairSweepOrders);
 			AiMatchLogWriter.AppendNumber(builder, "repair_toggles_avoided", situation.RepairTogglesAvoided);
+
+			// UT-1 (AI_DEEP_RESEARCH.md §5.1): the bipolar posture axes, each [0,100]
+			// with 100 the second pole — record-only, explainable against the inputs above.
+			AiMatchLogWriter.AppendNumber(builder, "utility_turtlerush", situation.UtilityTurtleRush);
+			AiMatchLogWriter.AppendNumber(builder, "utility_techrushexpansion", situation.UtilityTechRushExpansion);
+			AiMatchLogWriter.AppendNumber(builder, "utility_steamrollerguerrilla", situation.UtilitySteamrollerGuerrilla);
 			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 
