@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
-"""audit_bot_direct_mutation â€” multiplayer-desync ratchet on bot modules.
+"""audit_bot_direct_mutation — multiplayer-desync ratchet on bot modules.
 
-A bot runs on the host alone and may touch actors ONLY through orders â€”
+A bot runs on the host alone and may touch actors ONLY through orders —
 the order stream is what every client simulates. A direct
-`actor.CancelActivity()` or `actor.QueueActivity(...)` inside a bot module
-bypasses the order gate's issuer/lease accounting (DESIGN Â§19.6) AND desyncs
-a multiplayer game. The INC-3b review found 94 `CancelActivity` and 5
-`QueueActivity` leftovers in the vendored Fransbot stack; this audit pins
-the count at zero so the pattern cannot creep back in.
+`actor.CancelActivity()`, `actor.QueueActivity(...)`, or a trait-level
+`autoTarget.SetStance(actor, ...)` inside a bot module bypasses the order
+gate's issuer/lease accounting (DESIGN §19.6) AND desyncs
+a multiplayer game — the synchronized paths are `Order("Stop")` /
+`Order("Move"...)` / `Order("SetUnitStance")`. The INC-3b review found 94
+`CancelActivity`, 5 `QueueActivity` and 8 `SetStance` leftovers in the
+vendored Fransbot stack; this audit pins the count at zero so the pattern
+cannot creep back in.
 
 Scanned (must stay at ZERO calls, `//` comments excluded):
 
-  * `OpenRA.Mods.Fransbot/Traits/**`      â€” the vendored donor stack
+  * `OpenRA.Mods.Fransbot/Traits/**`      — the vendored donor stack
   * `OpenRA.Mods.CA/Traits/BotModules/**`
   * `OpenRA.Mods.Cameo/Traits/BotModules/**` and `*Bot*.cs` at Traits/ root
 
 Not scanned on purpose: `engine/` (upstream order-resolution traits legitimately
-call CancelActivity while *implementing* orders â€” that is the engine's job) and
+call CancelActivity while *implementing* orders — that is the engine's job) and
 non-bot traits elsewhere in the mod (spawner/deploy traits own their actor's
 activity directly; they are not bot logic). If a bot module ever NEEDS a
-direct call, add the file to ALLOWLIST below with a maintainer-visible reason â€”
+direct call, add the file to ALLOWLIST below with a maintainer-visible reason —
 like the fog-honesty manifest, an exception must be a deliberate act.
 
 Usage:
@@ -43,10 +46,10 @@ SCAN_GLOBS = [
     ("OpenRA.Mods.Cameo/Traits", "*Bot*.cs"),
 ]
 
-PATTERN = re.compile(r"\.(?:CancelActivity|QueueActivity)\s*\(")
+PATTERN = re.compile(r"\.(?:CancelActivity|QueueActivity|SetStance)\s*\(")
 LINE_COMMENT = re.compile(r"//.*$")
 
-# Deliberate exceptions â€” {repo-relative path: (max_sites, reason)}. Empty today.
+# Deliberate exceptions — {repo-relative path: (max_sites, reason)}. Empty today.
 ALLOWLIST: dict[str, tuple[int, str]] = {}
 
 
@@ -96,15 +99,15 @@ def main() -> int:
     print("# audit_bot_direct_mutation")
     print()
     print(f"Scanned {scanned} bot-module source files for direct actor "
-          "`CancelActivity`/`QueueActivity` calls.")
+          "`CancelActivity`/`QueueActivity`/`SetStance` calls.")
     print()
     if not failures:
-        print("PASS â€” zero direct-activity sites. Bots drive actors exclusively "
+        print("PASS — zero direct-activity sites. Bots drive actors exclusively "
               "through the order stream; multiplayer stays in sync and the "
-              "order gate (Â§19.6) sees every issuer/lease pairing.")
+              "order gate (§19.6) sees every issuer/lease pairing.")
         return 0
 
-    print(f"FAIL â€” {len(failures)} direct-activity site(s) in bot modules "
+    print(f"FAIL — {len(failures)} direct-activity site(s) in bot modules "
           "(bots run on the host alone; these desync multiplayer and evade "
           "the order gate):")
     print()

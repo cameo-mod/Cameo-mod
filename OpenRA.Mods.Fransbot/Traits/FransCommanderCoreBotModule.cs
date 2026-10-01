@@ -536,7 +536,7 @@ namespace OpenRA.Mods.Common.Traits
 							|| pair.Trait.Stance != UnitStance.AttackAnything)
 							continue;
 
-						pair.Trait.SetStance(actor, UnitStance.Defend);
+						bot.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)UnitStance.Defend });
 					}
 
 					defaultAttackAnythingActors.Clear();
@@ -569,7 +569,7 @@ namespace OpenRA.Mods.Common.Traits
 					continue;
 
 				if (pair.Trait.Stance != UnitStance.AttackAnything)
-					pair.Trait.SetStance(actor, UnitStance.AttackAnything);
+					bot.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)UnitStance.AttackAnything });
 			}
 
 			defaultAttackAnythingActors.RemoveWhere(id => !live.Contains(id));

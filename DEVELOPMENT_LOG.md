@@ -15437,6 +15437,15 @@ effect_pairings, meter_dilution, nuclear_flash_bindings — unrelated weapon/bal
 fog manifest +2 surgical entries (new upstream own-actor producer enumerations, Owner==player —
 fog-honest); drift audit re-baselined to 9150ded (UPSTREAM_REF label updated). Boot-gate PASS via
 private Engine.SupportDir (menu marker, zero exceptions, unambiguous attribution).
+Follow-on (same PR): a wider desync sweep found 8 direct `AutoTarget.SetStance` writes
+the first pass missed (Air/Ground/Sea recon HoldFire<->AttackAnything + CommanderCore's
+default-stance doctrine). Converted to `Order("SetUnitStance")`: the three commanders got the
+transport module's `pendingStanceOrders`/`QueueSetUnitStanceOrder` shape (orderBot fallback for
+the no-bot `ResetReconState` path); CommanderCore queues directly (bot in scope, AutoTarget
+guaranteed by `ActorsWithTrait`). `audit_bot_direct_mutation.py` now also ratchets `.SetStance(`;
+a mojibake in the generated report (cp1252 `Â§`) was fixed in-source so `audit_doc_health` D2
+stays clean. 468/468 tests, boot-gate PASS (private Engine.SupportDir), zero exceptions.
+
 ## 2026-10-02 — NOVA: ZG-c zone-backed RegionMemory/RegionRouter (nova/zg-region-memory)
 
 Task ZG-c: spatial value memory and risk routing now index by the zone topology when one exists.

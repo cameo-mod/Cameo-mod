@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **791**
+Files scanned: **794**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 135 | 30 |
+| E2 | handler discards the error | 139 | 30 |
 | E3 | open() without encoding= | 161 | 90 |
-| E4 | subprocess call without check= | 53 | 9 |
+| E4 | subprocess call without check= | 61 | 9 |
 
 
 ## Files that do not parse
@@ -28,10 +28,14 @@ Files scanned: **791**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 135 finding(s)
+## E2 — 139 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/ai/ab_increment.py | 334 | handler body discards the error |
+| tools/ai/ab_increment.py | 469 | handler body discards the error |
+| tools/ai/ab_increment.py | 633 | handler body discards the error |
+| tools/ai/ab_increment.py | 692 | handler body discards the error |
 | tools/ai/derive_guerrilla_roles.py | 113 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 94 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 275 | handler body discards the error |
@@ -336,10 +340,18 @@ Files scanned: **791**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 53 finding(s)
+## E4 — 61 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/ai/ab_increment.py | 249 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 255 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 276 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 301 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 481 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 510 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 559 | `subprocess.Popen()` without check= |
+| tools/ai/ab_increment.py | 724 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
 | tools/ai/run_ai_match_batch.py | 512 | `subprocess.Popen()` without check= |
@@ -398,8 +410,8 @@ Files scanned: **791**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 135 > baseline 30
+- E2: 139 > baseline 30
 - E3: 161 > baseline 90
-- E4: 53 > baseline 9
+- E4: 61 > baseline 9
 - 1 file(s) do not parse
 

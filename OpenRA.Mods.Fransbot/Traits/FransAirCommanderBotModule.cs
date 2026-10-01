@@ -387,6 +387,7 @@ namespace OpenRA.Mods.Common.Traits
 		readonly Player player;
 
 		readonly HashSet<Actor> pendingStopOrders = [];
+		readonly Dictionary<Actor, UnitStance> pendingStanceOrders = [];
 		IBot orderBot;
 
 		void IBotEnabled.BotEnabled(IBot bot)
@@ -419,16 +420,41 @@ namespace OpenRA.Mods.Common.Traits
 			pendingStopOrders.Add(actor);
 		}
 
-		void FlushPendingSynchronizedActions(IBot bot)
+		void QueueSetUnitStanceOrder(IBot bot, Actor actor, UnitStance stance)
 		{
-			if (bot == null || pendingStopOrders.Count == 0)
+			if (!IsValidOrderSubject(actor) || actor.TraitOrDefault<AutoTarget>() == null)
 				return;
 
-			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
-				if (IsValidOrderSubject(actor))
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStanceOrders.Remove(actor);
+				sink.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)stance });
+				return;
+			}
+
+			pendingStanceOrders[actor] = stance;
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0 && pendingStanceOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.Concat(pendingStanceOrders.Keys).Distinct().OrderBy(a => a.ActorID).ToArray())
+			{
+				if (!IsValidOrderSubject(actor))
+					continue;
+
+				if (pendingStopOrders.Contains(actor))
 					bot.QueueOrder(new Order("Stop", actor, false));
 
+				if (pendingStanceOrders.TryGetValue(actor, out var stance) && actor.TraitOrDefault<AutoTarget>() != null)
+					bot.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)stance });
+			}
+
 			pendingStopOrders.Clear();
+			pendingStanceOrders.Clear();
 		}
 
 		readonly HashSet<Actor> activeAircraft = [];
@@ -581,6 +607,7 @@ namespace OpenRA.Mods.Common.Traits
 		protected override void TraitDisabled(Actor self)
 		{
 			pendingStopOrders.Clear();
+			pendingStanceOrders.Clear();
 			activeAircraft.Clear();
 			lastMoveDestination.Clear();
 			lastMoveWorldTick.Clear();
@@ -3483,7 +3510,7 @@ namespace OpenRA.Mods.Common.Traits
 				activeAircraft.Clear();
 				activeAircraft.Add(selected);
 				reconActor = selected;
-				selected.TraitOrDefault<AutoTarget>()?.SetStance(selected, UnitStance.HoldFire);
+				QueueSetUnitStanceOrder(bot, selected, UnitStance.HoldFire);
 				reconOrigin = selected.Location;
 				reconStart = mission.LastVisibleTargetCell;
 				reconPioneerValidationActive = false;
@@ -3728,7 +3755,7 @@ namespace OpenRA.Mods.Common.Traits
 			// turn into an incidental fight. Returning to normal ownership restores the global default.
 			if (reconActor != null && reconActor.IsInWorld && !reconActor.IsDead)
 			{
-				reconActor.TraitOrDefault<AutoTarget>()?.SetStance(reconActor, UnitStance.AttackAnything);
+				QueueSetUnitStanceOrder(null, reconActor, UnitStance.AttackAnything);
 				QueueStopOrder(null, reconActor);
 			}
 			reconActor = null;

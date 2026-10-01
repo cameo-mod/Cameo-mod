@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **509**, files touched: **4715**
+Commits reviewed: **522**, files touched: **4752**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -101,15 +101,15 @@ Commits reviewed: **509**, files touched: **4715**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 126 |
-| docs/HANDOFF.md | 97 |
-| mods/cameo/ai/ai.yaml | 76 |
+| DEVELOPMENT_LOG.md | 129 |
+| docs/HANDOFF.md | 99 |
+| mods/cameo/ai/ai.yaml | 79 |
+| docs/design/AI_ARCHITECTURE.md | 66 |
 | docs/LESSONS_LEARNED.md | 66 |
-| docs/design/AI_ARCHITECTURE.md | 65 |
-| docs/DESIGN.md | 57 |
+| docs/DESIGN.md | 58 |
 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 54 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 40 |
 | docs/design/ROADMAP.md | 40 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 37 |
 | docs/balance/derived/tiberiandawn_nod.json | 31 |
 | docs/balance/derived/redalert2_allies.json | 29 |
 | docs/balance/derived/redalert2mod_syndicate.json | 29 |

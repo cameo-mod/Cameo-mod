@@ -1,5 +1,5 @@
 # audit_bot_direct_mutation
 
-Scanned 106 bot-module source files for direct actor `CancelActivity`/`QueueActivity` calls.
+Scanned 106 bot-module source files for direct actor `CancelActivity`/`QueueActivity`/`SetStance` calls.
 
-PASS â€” zero direct-activity sites. Bots drive actors exclusively through the order stream; multiplayer stays in sync and the order gate (Â§19.6) sees every issuer/lease pairing.
+PASS — zero direct-activity sites. Bots drive actors exclusively through the order stream; multiplayer stays in sync and the order gate (§19.6) sees every issuer/lease pairing.
