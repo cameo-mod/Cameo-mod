@@ -1568,10 +1568,26 @@ namespace OpenRA.Mods.Common.Traits
 				BotUnitLeases.TryClaim(leases, mission.Transport, LeaseOwner,
 					BotLeasePurpose.Mission, Info.TransportLeaseTicks);
 			if (mission.RunLegs != null)
+			{
+				List<Actor> lostLegs = null;
 				foreach (var leg in mission.RunLegs)
-					if (missions.ContainsKey(leg.Passenger) && leg.Passenger.IsInWorld && leg.Passenger.Owner == player)
-						BotUnitLeases.TryClaim(leases, leg.Passenger, LeaseOwner,
-							BotLeasePurpose.Mission, Info.TransportLeaseTicks);
+					if (missions.ContainsKey(leg.Passenger) && leg.Passenger.IsInWorld && leg.Passenger.Owner == player
+						&& !BotUnitLeases.TryClaim(leases, leg.Passenger, LeaseOwner,
+							BotLeasePurpose.Mission, Info.TransportLeaseTicks))
+						(lostLegs ??= new List<Actor>()).Add(leg.Passenger);
+
+				// A denied renewal means a §19.6 emergency took the passenger mid-run — drop its leg so
+				// the run stops waiting on a unit this module no longer owns. A queued boarding order
+				// must not still fire: the emergency's unit would ride along under foreign orders.
+				if (lostLegs != null)
+					foreach (var lost in lostLegs)
+					{
+						if (!lost.Disposed && lost.IsInWorld && !lost.IsDead
+							&& lost.TraitOrDefault<Passenger>()?.Transport == null)
+							lost.CancelActivity();
+						ReleaseRunLeg(mission, lost);
+					}
+			}
 
 			if (mission.State == MissionState.Escort)
 			{
