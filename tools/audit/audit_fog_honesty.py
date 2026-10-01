@@ -36,9 +36,16 @@ not try: the manifest freezes today's totals so any new site gets a human
 review. Semantic review lives with the reviewer; the audit's job is to make
 omniscience a deliberate act.
 
+Third check (LC6): the runtime canaries — `CanaryObserved`/`CanaryObservedAll`
+calls logging `FOGCANARY-VIOLATION` when a decision consumes an unseen actor —
+are pinned per file by SITE NAME and count
+(tools/audit/fog_canary_manifest.json). A name disappearing or its count
+dropping means instrumentation was silently removed — FAIL. New sites or
+higher counts are improvements the manifest only records after `--write`.
+
 Usage:
   python tools/audit/audit_fog_honesty.py                # check
-  python tools/audit/audit_fog_honesty.py --write        # re-baseline manifest
+  python tools/audit/audit_fog_honesty.py --write        # re-baseline manifests
 """
 
 from __future__ import annotations
@@ -51,6 +58,14 @@ import sys
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 MANIFEST = REPO / "tools" / "audit" / "fog_honesty_manifest.json"
+CANARY_MANIFEST = REPO / "tools" / "audit" / "fog_canary_manifest.json"
+
+# LC6 runtime canaries: a consumption point calls CanaryObserved(actor,
+# "site-name")/CanaryObservedAll(list, "site-name") with a LITERAL site tag;
+# the manifest pins each tag's count per file so a refactor cannot silently
+# drop or rename instrumentation (the variable `site` inside CanaryObservedAll
+# forwards — not a literal — and is not counted).
+CANARY_SITE = re.compile(r'\bCanaryObserved(?:All)?\s*\([^,]+,\s*"([^"]+)"')
 
 # Bot-module roots, relative to the repo. The engine copy is gitignored but
 # present in built worktrees; a missing dir is skipped, not an error.
@@ -110,6 +125,15 @@ def count_sites(path: pathlib.Path) -> int:
         code = LINE_COMMENT.sub("", line)
         count += len(PATTERNS.findall(code))
     return count
+
+
+def canary_sites(path: pathlib.Path) -> dict[str, int]:
+    sites: dict[str, int] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        code = LINE_COMMENT.sub("", line)
+        for m in CANARY_SITE.finditer(code):
+            sites[m.group(1)] = sites.get(m.group(1), 0) + 1
+    return sites
 
 
 # DESIGN §19.5 (maintainer 2026-09-30): the only modules of the Frankenstein bot allowed to see through fog —
@@ -210,17 +234,24 @@ def main() -> int:
     args = ap.parse_args()
 
     current: dict[str, int] = {}
+    canary_current: dict[str, dict[str, int]] = {}
     strict_files: set[str] = set()
     for rel, strict in iter_sources():
         n = count_sites(REPO / rel)
         if n:
             current[rel] = n
+        canary = canary_sites(REPO / rel)
+        if canary:
+            canary_current[rel] = canary
         if strict:
             strict_files.add(rel)
 
     if args.write:
         MANIFEST.write_text(json.dumps(current, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        CANARY_MANIFEST.write_text(json.dumps(canary_current, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(f"wrote {MANIFEST.name}: {len(current)} files, {sum(current.values())} sites")
+        print(f"wrote {CANARY_MANIFEST.name}: {len(canary_current)} files, "
+              f"{sum(sum(f.values()) for f in canary_current.values())} canary sites")
         return 0
 
     if not MANIFEST.is_file():
@@ -254,6 +285,27 @@ def main() -> int:
     for rel in baseline:
         if rel not in current:
             notes.append(f"{rel}: manifest entry stale (file gone or clean) - refresh with --write")
+
+    # LC6 canary ratchet: every manifested site name must still exist with at
+    # least its recorded call count — a vanished tag is coverage silently lost.
+    if not CANARY_MANIFEST.is_file():
+        failures.append(f"canary manifest missing ({CANARY_MANIFEST}) — run with --write to seed it")
+    else:
+        canary_baseline = json.loads(CANARY_MANIFEST.read_text(encoding="utf-8"))
+        for rel, sites in sorted(canary_baseline.items()):
+            got = canary_current.get(rel, {})
+            for site, n in sites.items():
+                if site not in got:
+                    failures.append(f"{rel}: canary site \"{site}\" removed ({n} call(s) manifested)")
+                elif got[site] < n:
+                    failures.append(f"{rel}: canary site \"{site}\" {n} -> {got[site]} call(s) — coverage dropped")
+                elif got[site] > n:
+                    notes.append(f"{rel}: canary site \"{site}\" {n} -> {got[site]} call(s) — refresh with --write")
+            for site in sorted(set(got) - set(sites)):
+                notes.append(f"{rel}: new canary site \"{site}\" ({got[site]} call(s)) — refresh with --write")
+        for rel in sorted(set(canary_current) - set(canary_baseline)):
+            for site, n in sorted(canary_current[rel].items()):
+                notes.append(f"{rel}: new canary site \"{site}\" ({n} call(s)) — refresh with --write")
 
     for note in notes:
         print(f"  note: {note}")

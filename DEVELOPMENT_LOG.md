@@ -15108,3 +15108,31 @@ W/L. `by_type` detail stays in the records. Fields absent (pre-#695/#699 or
 classic records) print nothing. Two tests pin the contract (summation + the
 silent-absent case). Real-run check on the in-flight #681 ctrl arm: block
 correctly silent on pre-#699 records.
+## 2026-10-01 — LC6 widening: central consumption-point canaries (Devin/EMBER)
+
+Branch `devin/ember/lc6-canary-widen` off `f1f47c879`. Widened fog canaries
+from per-state sites to the central chokepoints in `SquadManagerBotModuleCA`:
+- `FindClosestEnemy` x3, `FindHighValueTarget` x2: canary on the picked actor
+  at the single return path (no behavior change — same pick, instrumented).
+- `VisibleEnemiesNear`: `CanaryObservedAll` on the returned list — covers the
+  radius overload, the engage scan, and micro focus candidates.
+- `PredictedRatio`: `enemies` materialized once and canaried — catches any
+  caller feeding the predictor from an unfiltered scan.
+- `SquadCA.Update`: stale-target canary — an `Actor` target still committed
+  while unobservable logs `squad-update-target`; `FrozenActor` memory targets
+  are legal and skip the check (they're the designed retention mechanism).
+`CanaryObservedAll` added next to `CanaryObserved`; same pure
+`FogCanaryViolation` core (already pinned by AirDoctrineSquadTypeTest).
+Zero new enumerations — fog manifest stays 218 sites. Build 0 errors;
+boot-gate PASS (menu marker, no new runtime exceptions; two pre-boot
+launcher-arg exceptions from failed SupportDir quoting, not runtime faults).
+
+## 2026-10-01 (later) — fog-canary ratchet (same branch)
+
+The canaries get their own ratchet inside `audit_fog_honesty.py`: a third
+check pins every literal canary site NAME and call count per file in
+`fog_canary_manifest.json` (seeded: 4 files / 16 sites — the seven new
+consumption points plus the nine inherited air-squad sites). A removed or
+renamed site FAILs; additions are noted for `--write`. Negative-tested:
+renaming `squad-update-target` fails the audit and names both sides of
+the swap.
