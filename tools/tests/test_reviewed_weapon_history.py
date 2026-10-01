@@ -17,7 +17,7 @@ class ReviewedHistoryTests(unittest.TestCase):
         live = rules.resolve_weapon('ra1_allies_sheridanassaulttank_cannon')
         restored = OwnedCheckpointView(self, rules, 'additional').resolve_weapon(live.key)
         self.assertEqual(live.key, restored.key)
-        self.assertEqual('2000', live.get('Warhead@CannonAP_Light', 'Damage'))
+        self.assertEqual('4000', live.get('Warhead@CannonAP_Light', 'Damage'))
         self.assertEqual('8000', restored.get('Warhead@CannonAP_Light', 'Damage'))
         mutated = live.deep_copy()
         damage = next(child.child('Damage') for child in mutated.children

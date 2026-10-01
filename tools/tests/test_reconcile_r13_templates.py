@@ -29,12 +29,14 @@ def test_compatibility_suffix_is_removed_without_changing_payload_role():
 
 
 def test_current_r13_count_distinguishes_definitions_from_users():
+    # The R12 rename cohort retired every legacy compatibility template, so the
+    # reconciliation now measures an empty leftover set.
     report = build_report()
     assert report["counts"] == {
-        "missing_template_definitions": 3,
-        "direct_relationships": 16,
-        "distinct_weapons": 14,
-        "with_exact_legacy_payload": 2,
+        "missing_template_definitions": 0,
+        "direct_relationships": 0,
+        "distinct_weapons": 0,
+        "with_exact_legacy_payload": 0,
         "family_level_generator_targets": 0,
     }
 

@@ -25,6 +25,16 @@ ACCEPTED = {
 }
 
 
+def destination_key(destination):
+    """R12 retired the *FlatCompatibility payload names for *_Flat mains."""
+    return f"{destination}_Flat"
+
+
+# The reviewed W24 lane-3 fold (8330a1834) removed the airmine's 1Dam air
+# marker and folded its payload into the flat main.
+AIR_MINE_TOTAL = 22000
+
+
 class RoleCompleteProfileConsolidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -44,16 +54,34 @@ class RoleCompleteProfileConsolidationTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_historical_converter_rejects_changed_closure_but_live_profiles_hold(self):
+        # selections() still fails closed on the deliberately detached airmine
+        # (ruling 10(a)).  inspect() also rejects the live view: R12 retired the
+        # *FlatCompatibility main names it looks for and W24 lane-3 dropped the
+        # airmine's 1Dam marker, so plans/already cannot be produced.
         with self.assertRaisesRegex(RuntimeError, "ixian_airdrone: closure changed"):
             cohort.validate_result()
-        plans, already = cohort.inspect(self.rules, self.historical_selection)
-        self.assertTrue(already)
-        self.assertEqual(set(self.historical_selection), set(plans))
-        self.assertTrue(all(value is None for value in plans.values()))
+        with self.assertRaises(RuntimeError):
+            cohort.inspect(self.rules, self.historical_selection)
+        # The reviewed post-R12 contract: each member still resolves exactly its
+        # (renamed) flat main at the recorded total and scale.
+        for name, destination in self.historical_selection.items():
+            _mains, total, scale, damage_types = cohort.expected_plan(name, destination)
+            resolved = self.rules.resolve_weapon(name)
+            self.assertEqual([destination_key(destination)],
+                             main_warheads(resolved), name)
+            node = next(child for child in resolved.children
+                        if child.key == f"Warhead@{destination_key(destination)}")
+            self.assertEqual(AIR_MINE_TOTAL if name == "ordos_airmine" else total,
+                             int(str(node.get("Damage"))), name)
+            self.assertEqual(scale, int(str(node.get("PercentageScale"))), name)
+            if damage_types:
+                self.assertEqual(damage_types, str(node.get("DamageTypes")), name)
         for root, spec in cohort.ROOTS.items():
             expected = set() if root == "ixian_airdrone" else spec[2]
             self.assertEqual(expected, cohort.descendants(self.rules, root), root)
-        self.assertEqual((cohort.MANTA_AG | cohort.MANTA_AA) - {cohort.MANTA_ROOT},
+        # The W7 flatten moved the AG-resonance branch off SteelMantaAG; only the
+        # AA route (root included) still inherits from it.
+        self.assertEqual(cohort.MANTA_AA,
                          cohort.descendants(self.rules, cohort.MANTA_ROOT))
 
     def test_report_covers_exactly_the_selected_definitions(self):
@@ -78,13 +106,14 @@ class RoleCompleteProfileConsolidationTests(unittest.TestCase):
             self.assertEqual([[160, 4, 6], [250, 8, 10]], rows, weapon)
 
     def test_ground_and_air_routes_have_only_their_role_profile(self):
+        # R12 retired the *FlatCompatibility names; the mains are now *_Flat.
         for weapon in cohort.MANTA_AG:
             self.assertEqual(
-                ["Bullet_MediumFlatCompatibility"],
+                ["Bullet_Medium_Flat"],
                 main_warheads(self.rules.resolve_weapon(weapon)), weapon)
         for weapon in cohort.MANTA_AA:
             self.assertEqual(
-                ["Flak_MediumFlatCompatibility"],
+                ["Flak_Medium_Flat"],
                 main_warheads(self.rules.resolve_weapon(weapon)), weapon)
 
     def test_authored_damage_types_are_explicit(self):
@@ -100,14 +129,18 @@ class RoleCompleteProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(destination, selected[weapon])
             resolved = self.rules.resolve_weapon(weapon)
             node = next(child for child in resolved.children
-                        if child.key == f"Warhead@{destination}FlatCompatibility")
+                        if child.key == f"Warhead@{destination_key(destination)}")
             self.assertEqual(damage_types, str(node.get("DamageTypes")), weapon)
 
-    def test_air_mine_keeps_its_distinct_air_only_damage(self):
+    def test_air_mine_folded_into_a_single_renamed_flat_main(self):
+        # The W24 lane-3 fold (8330a1834) removed the 1Dam air marker and raised
+        # the flat main to the shipped total; R12 renamed the payload.
         self.assertNotIn("ordos_airmine", cohort.descendants(self.rules, "ixian_airdrone"))
-        self.assertEqual(
-            {"MissileAP_HeavyFlatCompatibility", "1Dam"},
-            set(main_warheads(self.rules.resolve_weapon("ordos_airmine"))))
+        resolved = self.rules.resolve_weapon("ordos_airmine")
+        self.assertEqual({"MissileAP_Heavy_Flat"}, set(main_warheads(resolved)))
+        node = next(child for child in resolved.children
+                    if child.key == "Warhead@MissileAP_Heavy_Flat")
+        self.assertEqual(AIR_MINE_TOTAL, int(str(node.get("Damage"))))
 
     def test_ratchets_match_the_live_reduction(self):
         # Upstream retired exemptions: enforce the raw ceiling, never subtract reviewed stacks.

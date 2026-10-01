@@ -117,7 +117,13 @@ def test_the_dynamic_trait_replaces_the_legacy_ladder_and_covers_every_bot_type(
     assert abi.ladder_rungs(rules) == []
     difficulties = abi.dynamic_difficulties(rules)
     assert difficulties == abi.DIFFICULTIES
-    assert abi.check_dynamic_trait(difficulties) == 0
+    # classic + the exploit bots are insured THROUGH `DifficultyAliases` -> hard, and
+    # fransbot is deliberately uninsured (legacy secondaryinsurance fallback covers it).
+    aliases = abi.dynamic_difficulty_aliases(rules)
+    assert aliases == {"classic": "hard", "exploit_rush": "hard",
+                       "exploit_turtle": "hard", "exploit_guerrilla": "hard"}
+    assert "fransbot" in abi.UNINSURED_BOT_TYPES
+    assert abi.check_dynamic_trait(difficulties, aliases) == 0
 
 
 def test_supported_bots_do_not_stack_the_legacy_no_base_fallback():

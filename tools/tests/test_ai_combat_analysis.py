@@ -20,6 +20,12 @@ INTERFACE = ROOT / "OpenRA.Mods.CA/Traits/BotModules/IBotThreatAnalysis.cs"
 CODE_DIRS = [ROOT / "OpenRA.Mods.CA", ROOT / "OpenRA.Mods.Cameo"]
 OWNED = {MODULE.resolve(), INTERFACE.resolve()}
 
+# The consumption lane landed with INC-1/2/3 (#720): BotSituation reads the
+# analysis. Any FURTHER consumer must be added here deliberately.
+LANDED_CONSUMERS = {
+    (ROOT / "OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs").resolve(),
+}
+
 
 class CombatAnalysisContractTests(unittest.TestCase):
     def test_module_is_registered_on_the_player_actor(self):
@@ -65,7 +71,7 @@ class CombatAnalysisContractTests(unittest.TestCase):
         offenders = []
         for directory in CODE_DIRS:
             for path in sorted(directory.rglob("*.cs")):
-                if "obj" in path.parts or path.resolve() in OWNED:
+                if "obj" in path.parts or path.resolve() in OWNED or path.resolve() in LANDED_CONSUMERS:
                     continue
                 for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
                     code = line.split("//", 1)[0]
@@ -74,8 +80,8 @@ class CombatAnalysisContractTests(unittest.TestCase):
 
         self.assertEqual(
             [], offenders,
-            "IBotThreatAnalysis is producer-only until target-scoring wiring lands; "
-            "no other file may reference it yet:\n" + "\n".join(offenders))
+            "IBotThreatAnalysis consumers are the landed set in LANDED_CONSUMERS; "
+            "any new consumer needs a deliberate review:\n" + "\n".join(offenders))
 
 
 if __name__ == "__main__":

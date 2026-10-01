@@ -13,10 +13,10 @@ from miniyaml import Ruleset
 
 
 ACTORS = {
-    "ra1_allies_alliedartillery": (1240, 30000, 58, 1500, 12),
-    "ra1_allies_alliedlighttank": (1040, 75000, 111, 3750, 30),
-    "ra1_allies_alliedmediumtank": (1280, 127000, 81, 6350, 51),
-    "ra1_allies_alliedrocketsoldier": (480, 13000, 54, None, 13),
+    "ra1_allies_artillery": (1240, 30000, 58, 1500, 12),
+    "ra1_allies_lighttank": (1040, 75000, 111, 3750, 30),
+    "ra1_allies_mediumtank": (1280, 127000, 81, 6350, 51),
+    "ra1_allies_rocketsoldier": (480, 13000, 54, None, 13),
     "ra1_allies_rifleinfantry": (110, 20000, 56, None, 21),
     "ra1_allies_ranger": (510, 40000, 157, 2000, 16),
 }
@@ -161,9 +161,9 @@ class AcceptedRaAlliesBalanceBatchTests(unittest.TestCase):
 
     def test_upgrade_conditions_remain_mutually_exclusive(self):
         actors = {
-            "ra1_allies_alliedartillery": ("Armament", "Armament@Upgrade"),
-            "ra1_allies_alliedmediumtank": ("Armament", "Armament@Cryo"),
-            "ra1_allies_alliedrocketsoldier": ("Armament@PRIMARY", "Armament@Upgrade"),
+            "ra1_allies_artillery": ("Armament", "Armament@Upgrade"),
+            "ra1_allies_mediumtank": ("Armament", "Armament@Cryo"),
+            "ra1_allies_rocketsoldier": ("Armament@PRIMARY", "Armament@Upgrade"),
             "ra1_allies_rifleinfantry": ("Armament@PRIMARY", "Armament@Upgrade"),
             "ra1_allies_ranger": ("Armament", "Armament@Cryo"),
         }

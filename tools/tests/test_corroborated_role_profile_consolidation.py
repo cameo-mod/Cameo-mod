@@ -26,6 +26,39 @@ from percentage_damage import runtime_percentage_hp
 from survey_weapon_structure import weapon_reference_sets
 
 
+# Re-pinned closures: reviewed de-parenting waves split these roots.
+# 450dcea59 (W7 ExtraDamage materialization) de-parented RA2FreedomAK47_elite;
+# 8e553991e (W7 chain-collapse batch-3) de-parented the SteelCloneGun family.
+# The orphans keep the same consolidated Bullet_Medium flat mains, so they are
+# re-anchored as their own roots to preserve the full 50-name cohort.
+ROOTS["RA2FreedomAK47"] = ("Bullet_Medium", set(), "name")
+ROOTS["RA2FreedomAK47_elite"] = ("Bullet_Medium", set(), "name")
+ROOTS["SteelCloneGun"] = ("Bullet_Medium", set(), "local-scout-anti-infantry")
+ROOTS["SteelCloneGun_elite"] = (
+    "Bullet_Medium",
+    {
+        "SteelCloneGunResonance_elite",
+        "SteelCloneGunResonanceBounce1_elite",
+        "SteelCloneGunResonanceBounce2_elite",
+    },
+    "name",
+)
+ROOTS["SteelCloneGunResonance"] = (
+    "Bullet_Medium",
+    {"SteelCloneGunResonanceBounce1", "SteelCloneGunResonanceBounce2"},
+    "name",
+)
+
+# The pre-migration "existing-roleflat" precondition is stale now that the
+# consolidation has landed.  NaxiShrek/NaxiShrekCons now inherit the sole
+# canonical family ^Warhead_MissileAP_Medium, so they keep a truthful
+# "canonical" check; AsianMLRS was re-routed (now inherits
+# ^Warhead_Demolition_Light), so only the closure pin still applies.
+ROOTS["AsianMLRS"] = ("MissileAA_Medium", {"AsianSpitfireRockets"}, "name")
+ROOTS["NaxiShrek"] = ("MissileAP_Medium", {"NaxiShrek_elite"}, "canonical")
+ROOTS["NaxiShrekCons"] = (
+    "MissileAP_Medium", {"NaxiShrekCons_elite"}, "canonical")
+
 CURRENT_MAIN_OVERRIDES = {
     "RA2CosmonautLaser": "Laser_Light",
     "NaxisBlackBombSmaller": "Demolition_Medium",
@@ -76,11 +109,14 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         excluded = {
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
             "HMG_Duelist_upgrade", "autogun_tank",
-            "TSRPGTowerRail", "ra1_soviets_volkov_volkovmagneticweapon",
+            "TSRPGTowerRail",
             "BCLaser", "BCYamatoCannon",
-            "edenMobileLaserTiger",
-            "JimRaynorMachineGun",
         }
+        # edenMobileLaserTiger, JimRaynorMachineGun and
+        # ra1_soviets_volkov_volkovmagneticweapon left the holdout set:
+        # reviewed waves gave each a single consolidated main
+        # (CannonHE_Medium and Bullet_Heavy respectively), so the ">= 2 mains"
+        # premise below no longer applies to them.
         self.assertTrue(excluded.isdisjoint(self.selected))
         for name in excluded:
             self.assertGreaterEqual(
@@ -100,9 +136,9 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(1, len(main_warheads(weapon)), name)
             self.assertIsNotNone(weapon.child("Warhead@EMPUnit"), name)
             self.assertIsNotNone(
-                weapon.child("Warhead@PreservedFlat_MagicExtraDamage"), name)
+                weapon.child("Warhead@MagicWeaponPercentage"), name)
             self.assertIsNotNone(
-                weapon.child("Warhead@PreservedFlat_TeslaExtraDamage"), name)
+                weapon.child("Warhead@TeslaWeaponPercentage"), name)
 
     def test_all_selected_definitions_are_reachable(self):
         concrete = {
@@ -124,7 +160,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual("1500", node.get("Damage"), name)
 
     def test_pulverizer_child_does_not_reinherit_parent_template(self):
-        template = "^Warhead_Bullet_Medium_Flat"
+        template = "^Warhead_Bullet_Medium"
         parent = self.rules.weapon("AsianPulverizerGatling")
         child_weapon = self.rules.weapon("AsianPulverizerMechaGatling")
         parent_inherits = {

@@ -74,14 +74,14 @@ class AcceptedTdNodBalanceBatchTests(unittest.TestCase):
                 self.assert_weapon(*case)
 
     def test_recon_bike_keeps_both_compatibility_channels_equal(self):
+        # W24 lane-3 folded the twin CollapseTargetCompatibility channel into the
+        # single MissileAP_Medium main at twice the per-channel damage.
         weapon = self.rules.resolve_weapon("td_nod_reconbike_rocket")
         self.assertEqual("5376", weapon.get("Range"))
-        self.assertEqual("7985", weapon.child("Warhead@MissileAP_Medium").get("Damage"))
-        self.assertEqual(
-            "7985", weapon.child("Warhead@CollapseTargetCompatibility1").get("Damage")
-        )
+        self.assertEqual("15970", weapon.child("Warhead@MissileAP_Medium").get("Damage"))
+        self.assertIsNone(weapon.child("Warhead@CollapseTargetCompatibility1"))
         # Four preserved percentage channels contribute 8 nominal points per shot.
-        total = formula.dps(7985 + 7985 + 8, 55, 2, "10")
+        total = formula.dps(15970 + 8, 55, 2, "10")
         self.assertAlmostEqual(491.630, total, delta=0.1)
 
     def test_newer_td_rocket_pair_is_not_reverted(self):

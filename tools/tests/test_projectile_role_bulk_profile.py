@@ -13,16 +13,16 @@ from miniyaml import Ruleset
 
 
 ROOTS = {
-    "CabalAscendedRockets": ("MissileHE_Heavy", 30000, 6),
+    "CabalAscendedRockets": ("MissileHE_Heavy", 36000, 6),
     "td_gdi_havoc_grenade": ("Concussion_Medium", 40000, 2),
-    "td_nod_buggymkii_machinegunbuggy2": ("Bullet_Medium", 6000, 3),
+    "td_nod_buggymkii_machinegunbuggy2": ("Bullet_Medium", 3000, 3),
     "NanoArtilleryAG": ("Concussion_Heavy", 23331, 3),
     "155mm": ("Concussion_Heavy", 30000, 3),
-    "ra1_allies_chronotank_missile": ("MissileHE_Heavy", 20000, 5),
+    "ra1_allies_chronotank_missile": ("MissileAP_Heavy", 20000, 5),
     "td_gdi_defenserig_gdirigphalanx": ("Bullet_Medium", 24000, 6),
     "HMG_Duelist": ("Bullet_Medium", 12000, 6),
     "HermitShoot": ("Concussion_Medium", 12000, 6),
-    "ra1_soviets_samsite_missile_AA": ("MissileHE_Heavy", 16000, 4),
+    "ra1_soviets_samsite_missile_AA": ("MissileAA_Heavy", 17600, 4),
     "PatriarchShoot": ("Concussion_Medium", 12000, 6),
     "SpithidSpit": ("Bullet_Light", 6000, 3),
     "ra120mm": ("CannonHE_Heavy", 24000, 4),
@@ -81,22 +81,25 @@ class ProjectileRoleBulkProfileTests(unittest.TestCase):
 
     def test_nike_damage_is_air_only(self):
         weapon = self.rules.resolve_weapon("ra1_soviets_samsite_missile_AA")
-        main = child(weapon, "Warhead@MissileHE_Heavy")
+        main = child(weapon, "Warhead@MissileAA_Heavy")
         self.assertEqual("Air", child(main, "ValidTargets").value)
 
     def test_cabal_rockets_keep_the_ground_only_legacy_slice(self):
         weapon = self.rules.resolve_weapon("CabalAscendedRockets")
         main = child(weapon, "Warhead@MissileHE_Heavy")
-        bonus = child(weapon, "Warhead@MissileHE_HeavyGroundBonus")
         self.assertEqual("Ground, Water, Air", child(main, "ValidTargets").value)
+        # The W24 multi-main fold merged the 6000 ground-only bonus slice into
+        # the flat main (30000 -> 36000); the surviving ground-only slice now
+        # lives in the standalone percentage warhead.
+        self.assertEqual("36000", child(main, "Damage").value)
+        bonus = child(weapon, "Warhead@TankDestroyerCannonPercentage")
         self.assertEqual("Ground, Water", child(bonus, "ValidTargets").value)
-        self.assertEqual("6000", child(bonus, "Damage").value)
 
     def test_buggy_aa_child_has_functional_air_damage(self):
         weapon = self.rules.resolve_weapon("td_nod_buggymkii_machinegunbuggy2_AA")
         main = child(weapon, "Warhead@Bullet_Medium")
         self.assertEqual("Air", child(main, "ValidTargets").value)
-        self.assertEqual("6000", child(main, "Damage").value)
+        self.assertEqual("3000", child(main, "Damage").value)
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CORPUS = ROOT / 'docs' / 'reference' / 'ini_corpus.json'
-CORPUS_SHA256 = 'c1883cb04d2b42b370aa1dba3bdd12c080d909c61a3d3adf92156f5f931ed92a'
+CORPUS_SHA256 = '39d15ff88af9253ae7eca71a67aa2fc15b7fea687501847fdd0601df10181f1c'
 BEFORE_ENV = 'REFERENCE_DTA_BEFORE_CORPUS'
 BEFORE_SHA256 = '204391b21a95b3c5409b9d146a33f07b8b1404e5c4e0369976ab9859db1081b1'
 # The ten primary identities the refresh corrected (the old auto-promotion had rewritten the

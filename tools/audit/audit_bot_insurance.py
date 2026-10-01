@@ -58,8 +58,10 @@ HOSTS = ["Player", "^Conyard"]
 INSURANCE_RE = re.compile(r"\b\w+botinsurance\b")
 
 # Bot types that are deliberately uninsured. `campaign` drives scripted missions; handing it an
-# income drip would change mission pacing that was tuned without one.
-UNINSURED_BOT_TYPES = {"campaign"}
+# income drip would change mission pacing that was tuned without one. `fransbot` keeps the legacy
+# `secondaryinsurance` fallback instead (player.yaml: RequiresCondition excludes `genericbot`, and
+# DynamicBotInsurance is `genericbot`-gated) — its own stack manages its economy.
+UNINSURED_BOT_TYPES = {"campaign", "fransbot"}
 
 CS_TRAIT = pathlib.Path("OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs")
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_.-]*|\(|\)|&&|\|\||!")
@@ -163,20 +165,41 @@ def conditions_for(kind: str) -> dict[str, bool]:
     return cond
 
 
-def check_dynamic_trait(difficulties: list[str]) -> int:
+def dynamic_difficulty_aliases(rules: miniyaml.Ruleset) -> dict[str, str]:
+    """The `DifficultyAliases` map of `DynamicBotInsurance` on `Player:` (classic->hard, ...).
+
+    Aliased bot types are insured THROUGH their alias — they are covered, not missing.
+    """
+    node = rules.resolve("Player")
+    aliases = node and node.child("DynamicBotInsurance") and node.child("DynamicBotInsurance").child("DifficultyAliases")
+    if aliases is None:
+        return {}
+    return {child.key: child.value for child in aliases.children}
+
+
+def check_dynamic_trait(difficulties: list[str], aliases: dict[str, str] | None = None) -> int:
     """TRAIT world: the only reachability question left is whether the list covers the bot types."""
+    aliases = aliases or {}
     loaded = loaded_bot_types()
     print("Mechanism: **one `DynamicBotInsurance` on `Player:`** — scaling is by list index, so "
           "monotonicity is structural and only COVERAGE can go wrong.\n")
     print(f"`Difficulties` ({len(difficulties)}): {', '.join(difficulties) or '_empty_'}\n")
+    if aliases:
+        print("`DifficultyAliases`: "
+              + ", ".join(f"{k}->{v}" for k, v in sorted(aliases.items())) + "\n")
 
-    missing = [b for b in loaded if b not in difficulties and b not in UNINSURED_BOT_TYPES]
+    covered = set(difficulties) | set(aliases)
+    missing = [b for b in loaded if b not in covered and b not in UNINSURED_BOT_TYPES]
+    unknown = [d for d in difficulties if d not in loaded]
+    dead_alias = [a for a in aliases if a not in loaded]
+    orphan_alias = [a for a, v in aliases.items() if v not in difficulties]
     unknown = [d for d in difficulties if d not in loaded]
 
     print("| bot type | insured |")
     print("|---|---|")
     for b in loaded:
-        state = ("yes" if b in difficulties
+        state = (f"yes — aliased to `{aliases[b]}`" if b in aliases
+                 else "yes" if b in difficulties
                  else "no — deliberately" if b in UNINSURED_BOT_TYPES else "⛔ NO")
         print(f"| {b} | {state} |")
     print()
@@ -184,13 +207,21 @@ def check_dynamic_trait(difficulties: list[str]) -> int:
     problems = []
     if missing:
         problems.append(
-            "these bot types load but are in no `Difficulties` entry, so they get **no insurance "
-            "at all**: " + ", ".join(f"`{b}`" for b in missing)
+            "these bot types load but are in no `Difficulties`/`DifficultyAliases` entry, so they "
+            "get **no insurance at all**: " + ", ".join(f"`{b}`" for b in missing)
             + ". Add them to the trait, or to UNINSURED_BOT_TYPES here if that is deliberate.")
     if unknown:
         problems.append(
             "these `Difficulties` entries match no loaded `ModularBot` `Type:`, so they are dead "
             "list entries: " + ", ".join(f"`{d}`" for d in unknown) + ".")
+    if dead_alias:
+        problems.append(
+            "these `DifficultyAliases` keys match no loaded `ModularBot` `Type:`, so they are "
+            "dead aliases: " + ", ".join(f"`{a}`" for a in dead_alias) + ".")
+    if orphan_alias:
+        problems.append(
+            "these `DifficultyAliases` map to entries that are not in `Difficulties`, so the "
+            "alias targets nothing: " + ", ".join(f"`{a}->{aliases[a]}`" for a in orphan_alias) + ".")
 
     if problems:
         print("## ⛔ FAIL\n")
@@ -209,7 +240,7 @@ def main() -> int:
 
     difficulties = dynamic_difficulties(rules)
     if difficulties is not None:
-        return check_dynamic_trait(difficulties)
+        return check_dynamic_trait(difficulties, dynamic_difficulty_aliases(rules))
 
     rungs = ladder_rungs(rules)
     if not rungs:

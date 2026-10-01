@@ -195,12 +195,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly int ParAsymptotePerRank = 15000;
 
 		[Desc("Ticks to the curve's midpoint for the EASIEST difficulty.",
-			"⭐ 23400 = 12 minutes x ProductionTimeMultiplier 130%, reusing a ladder that is already",
+			"⭐ 25200 = 12 minutes x ProductionTimeMultiplier 140%, reusing a ladder that is already",
 			"tuned instead of adding a second one to keep in sync.")]
-		public readonly int ParMidpointEasiest = 23400;
+		public readonly int ParMidpointEasiest = 25200;
 
-		[Desc("Ticks to the curve's midpoint for the HARDEST difficulty (12 min x 40%).")]
-		public readonly int ParMidpointHardest = 7200;
+		[Desc("Ticks to the curve's midpoint for the HARDEST difficulty (12 min x 50%).")]
+		public readonly int ParMidpointHardest = 9000;
 
 		[Desc("Ticks between debug log lines recording measured-vs-expected worth. 0 disables.",
 			"⚠ Left ON by default: the par curve's magnitudes are invented, and this is how they",
