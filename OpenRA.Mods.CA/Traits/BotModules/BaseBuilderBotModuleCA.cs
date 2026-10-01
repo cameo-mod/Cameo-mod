@@ -118,6 +118,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("How many randomly chosen cells with resources to check when deciding refinery placement.")]
 		public readonly int MaxResourceCellsToCheck = 3;
 
+		[Desc("Cameo (AI_ARCHITECTURE §12.13, EX-2): while an expansion target provider is mounted, refinery placement",
+			"samples resource cells no own refinery serves yet (farther than this many cells from every own refinery),",
+			"so refineries spread over new ground instead of stacking on the same home field. Classic mounts no provider",
+			"and keeps the old farthest-from-refinery ordering.")]
+		public readonly int RefineryUnservedRadiusCells = 10;
+
 		[Desc("Delay (in ticks) until rechecking for new BaseProviders.")]
 		public readonly int CheckForNewBasesDelay = 1500;
 
@@ -319,6 +325,27 @@ namespace OpenRA.Mods.CA.Traits
 
 			return null;
 		}
+
+		// Cameo (§12.13, EX-2): an expansion planner is mounted at all (genericbot). Classic shares this module but
+		// mounts no provider, so refinery placement keyed on this stays bit-identical there.
+		public bool HasExpansionGuidance => expansionTargetProviders is { Length: > 0 };
+
+		/// <summary>
+		/// §12.13 EX-2: keep the resource cells farther than <paramref name="servedRadiusCells"/> from every own
+		/// refinery — the ground we do not harvest yet. Own-actor cells only, so fog-honest. Falls back to the full
+		/// candidate list when everything in reach is already served, so the caller keeps today's ordering then.
+		/// </summary>
+		public static IEnumerable<CPos> PreferUnservedResourceCells(IEnumerable<CPos> candidates, IReadOnlyCollection<CPos> ownRefineryCells, int servedRadiusCells)
+		{
+			var list = candidates as IReadOnlyList<CPos> ?? candidates.ToList();
+			if (ownRefineryCells.Count == 0)
+				return list;
+
+			var radiusSquared = (long)servedRadiusCells * servedRadiusCells;
+			var unserved = list.Where(c => ownRefineryCells.All(r => (c - r).LengthSquared > radiusSquared)).ToList();
+			return unserved.Count > 0 ? unserved : list;
+		}
+
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
@@ -990,7 +1017,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotSuggestRefineryProduction.RequestLocation(CPos refineryLocation, CPos conyardLocation, Actor expandActor)
 		{
-			if (ResourceMapModule == null || ResourceMapModule.FindClosestIndiceFromCPos(refineryLocation).PlayerRefineryCount < Info.MaxRefineryPerIndice)
+			if (ResourceMapModule == null)
+			{
+				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+				return;
+			}
+
+			// Cameo (§12.13, EX-2): with an expansion planner, pending requests to the same field count toward its
+			// cap as well — otherwise several queued requests can stack on one index before PlayerRefineryCount has
+			// seen a built refinery. Classic mounts no provider and keeps the old check, request for request.
+			var indice = ResourceMapModule.FindClosestIndiceFromCPos(refineryLocation);
+			var held = indice.PlayerRefineryCount;
+			if (HasExpansionGuidance)
+				held += RequestedRefineries.Count(r =>
+					r.Key != expandActor && ResourceMapModule.FindClosestIndiceFromCPos(r.Value.ResourceLoc) == indice);
+
+			if (held < Info.MaxRefineryPerIndice)
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
 		}
 	}

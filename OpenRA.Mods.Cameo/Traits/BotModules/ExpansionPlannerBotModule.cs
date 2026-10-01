@@ -76,6 +76,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"back forever. 0 disables.")]
 		public readonly int McvMaxSiteHandouts = 3;
 
+		[Desc("Greedy expansion: the planner requests construction-MCV production itself while a free field beyond the",
+			"building line's reach (McvMinHops) exists, instead of waiting for the MCV module's high cash trigger.",
+			"The engine module still decides where to send it (EX-3) and placement/dedup is unchanged.")]
+		public readonly bool DriveMcvRequests = false;
+
+		[Desc("Greedy expansion: request a construction MCV only while cash+resources stays above this reserve.",
+			"Well below the MCV module's own cash trigger, so a second MCV comes early.")]
+		public readonly int McvRequestReserve = 1500;
+
+		[Desc("Greedy expansion: construction yards + construction MCVs + queued MCVs the driver aims for.",
+			"The engine module's own count/cash gates still apply to its requests on top of this.")]
+		public readonly int McvTargetCount = 3;
+
 		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
 			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
 			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
@@ -146,7 +159,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// construction MCVs of every MCV module on this player (Info-level: fixed for the match, safe to cache).
 		CPos? baseCenter;
 		readonly HashSet<string> constructionMcvTypes;
+		readonly HashSet<string> constructionYardTypes;
 		readonly Dictionary<string, McvRole> mcvRoles = new();
+		IBotRequestUnitProduction[] unitBuilders;
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -155,6 +170,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			player = self.Owner;
 			constructionMcvTypes = self.Info.TraitInfos<McvExpansionManagerBotModuleInfo>()
 				.SelectMany(i => i.ConstructionMcvTypes).ToHashSet();
+			constructionYardTypes = self.Info.TraitInfos<McvExpansionManagerBotModuleInfo>()
+				.SelectMany(i => i.ConstructionYardTypes).ToHashSet();
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { baseCenter = newLocation; }
@@ -218,6 +235,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			resources = self.TraitOrDefault<PlayerResources>();
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			baseBuilders = self.TraitsImplementing<BaseBuilderBotModuleCA>().ToArray();
+			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 		}
 
 		/// <summary>
@@ -269,6 +287,62 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return ((-1, 0), true);
 
 			return ((field, count), false);
+		}
+
+		/// <summary>
+		/// Greedy expansion: an extra construction MCV is worth its queue slot while a field beyond the building
+		/// line's reach is free and we still hold the cash reserve. Pure, for the tests.
+		/// </summary>
+		public static bool ShouldRequestMcv(int cash, int reserve, bool farFieldFree, int activePlusQueued, int targetCount)
+		{
+			return farFieldFree && cash >= reserve && activePlusQueued < targetCount;
+		}
+
+		void RequestMcv(IBot bot)
+		{
+			if (unitBuilders == null || resources == null)
+				return;
+
+			// A construction MCV pays only if the building line cannot reach a free field soon.
+			var farFieldFree = LastScores.Any(f => f.Hops >= Info.McvMinHops
+				&& !(parkedUntil.TryGetValue(f.Index, out var until) && world.WorldTick < until));
+
+			// Yards + construction MCVs in the field + MCVs already in a queue (factory-level and player-level).
+			var active = world.Actors.Count(a => a.Owner == player && !a.IsDead
+				&& (constructionMcvTypes.Contains(a.Info.Name) || constructionYardTypes.Contains(a.Info.Name)));
+			var queued = world.ActorsWithTrait<ProductionQueue>()
+				.Where(tp => tp.Actor.Owner == player && tp.Trait.Enabled)
+				.SelectMany(tp => tp.Trait.AllQueued())
+				.Concat(player.PlayerActor.TraitsImplementing<ProductionQueue>()
+					.Where(t => t.Enabled)
+					.SelectMany(t => t.AllQueued()))
+				.Count(q => constructionMcvTypes.Contains(q.Item));
+
+			if (!ShouldRequestMcv(resources.GetCashAndResources(), Info.McvRequestReserve, farFieldFree, active + queued, Info.McvTargetCount))
+				return;
+
+			var unitBuilder = unitBuilders.FirstEnabledTraitOrDefault();
+			if (unitBuilder == null)
+				return;
+
+			var producible = world.ActorsWithTrait<ProductionQueue>()
+				.Where(a => a.Actor.Owner == player && a.Trait.Enabled)
+				.SelectMany(a => a.Trait.BuildableItems())
+				.Select(i => i.Name)
+				.Where(constructionMcvTypes.Contains)
+				.Distinct()
+				.ToArray();
+			if (producible.Length == 0)
+				return;
+
+			var mcvType = producible.Random(world.LocalRandom);
+			if (unitBuilder.RequestedProductionCount(bot, mcvType) > 0)
+				return;
+
+			unitBuilder.RequestUnitProduction(bot, mcvType);
+			var line = $"AI ({player.ClientIndex}): greedy MCV request {mcvType}: {active} active yards/MCVs, {queued} queued, cash {resources.GetCashAndResources()}, at tick {world.WorldTick}";
+			Log.Write("debug", line);
+			AIUtils.BotDebug(line);
 		}
 
 		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
@@ -357,10 +431,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (++ticks % Info.ReplanTicks != 0)
 				return;
 
-			Replan();
+			Replan(bot);
 		}
 
-		void Replan()
+		void Replan(IBot bot)
 		{
 			var (refinery, link, queues) = CheapestBuildables();
 			if (refinery.Info == null)
@@ -485,6 +559,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Log.Write("debug", line);
 				AIUtils.BotDebug(line);
 			}
+
+			// Greedy expansion: ask for the next construction MCV right away; the engine module would wait for its
+			// high cash trigger first. LastScores is this tick's fresh list, so a freed field is seen immediately.
+			if (Info.DriveMcvRequests)
+				RequestMcv(bot);
 		}
 
 		void Idle(string reason)

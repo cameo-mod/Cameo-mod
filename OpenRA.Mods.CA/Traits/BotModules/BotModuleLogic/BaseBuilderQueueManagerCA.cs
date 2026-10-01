@@ -781,8 +781,24 @@ namespace OpenRA.Mods.CA.Traits
 								.Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						}
 						else
-							resourcesShouldCheck = nearbyResources.OrderByDescending(c => (c - closestRefinery.Location).LengthSquared)
+						{
+							// Cameo (§12.13, EX-2): an expansion planner wants every field served — sample cells no own
+							// refinery covers yet so refineries spread to new ground instead of stacking on the far
+							// edge of the home field. No provider (classic): today's ordering, unchanged.
+							var candidates = nearbyResources;
+							if (baseBuilder.HasExpansionGuidance)
+							{
+								var ownRefineryCells = baseBuilder.RefineryBuildings.Actors
+									.Where(a => !a.IsDead)
+									.Select(a => a.Location)
+									.ToList();
+								candidates = BaseBuilderBotModuleCA.PreferUnservedResourceCells(
+									nearbyResources, ownRefineryCells, baseBuilder.Info.RefineryUnservedRadiusCells);
+							}
+
+							resourcesShouldCheck = candidates.OrderByDescending(c => (c - closestRefinery.Location).LengthSquared)
 								.Take(baseBuilder.Info.MaxResourceCellsToCheck);
+						}
 
 						foreach (var r in resourcesShouldCheck)
 						{

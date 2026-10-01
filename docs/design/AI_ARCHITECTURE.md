@@ -2254,6 +2254,26 @@ publishes the target. Live: the home field was claimed by tick 1,500, then the t
 7 at 45,32 (7 hops), and the base built a line of power plants toward it (17,43 → 21,38 → 30,33 by
 tick 4,034).
 
+**EX-2 spread fix (2026-10-01).** The claim path above only fires while a field is wanted and in
+reach; the fallback then sampled the resource cells *farthest from the newest own refinery inside the
+same conyard annulus* — the far edge of the home field — so repeated refineries stacked on one field
+(seen live: three on the home field). Two repairs, both keyed on a mounted `IBotExpansionTargetProvider`
+(`BaseBuilderBotModuleCA.HasExpansionGuidance`, so classic — which shares the base builder — is
+unchanged): (a) that fallback now first keeps the candidate cells farther than
+`RefineryUnservedRadiusCells` (10) from every own refinery (`PreferUnservedResourceCells`, own-actor
+cells only, fog-honest), spreading each new refinery onto unserved ground; the far-edge ordering still
+ranks the survivors, and an all-served annulus keeps the old candidate set. (b) `RequestLocation`
+counts refineries already *requested* for an index toward `MaxRefineryPerIndice`, not only built ones,
+so queued MCV requests can no longer stack on one index before `PlayerRefineryCount` catches up.
+
+**Greedy expansion (2026-10-01, same section family).** `DriveMcvRequests` lets the planner ask for a
+construction MCV itself once per re-plan — while a free field at `McvMinHops` or farther exists, cash
+stays above `McvRequestReserve` (1500), and owned yards + construction MCVs + queued MCVs stay under
+`McvTargetCount` (3). The engine module alone only builds a second MCV above a 4000-cash trigger, so
+without this the second expansion waits minutes; where the MCV goes is still EX-3's job, and its LC3
+hand-out parking is untouched. `ShouldRequestMcv` is the pure gate; all inputs are own-side counts or
+public map data, so fog-honest, and the flag lives only on the genericbot planner.
+
 **EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
 engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
 `claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after

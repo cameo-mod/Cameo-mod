@@ -1,3 +1,23 @@
+# 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
+
+- Smoke batch showed the armed `hard` bot stacking three refineries on the home
+  field. Root cause in the placement fallback: it sampled the resource cells
+  farthest from the newest own refinery *inside the same conyard annulus* — the
+  far edge of the same field — every time.
+- Fix (genericbot only, keyed on `BaseBuilderBotModuleCA.HasExpansionGuidance` —
+  classic shares the module and mounts no provider, so it stays bit-identical):
+  `PreferUnservedResourceCells` keeps only cells farther than
+  `RefineryUnservedRadiusCells` (10) from every own refinery before the
+  farthest-first ordering; an all-served annulus falls back unchanged.
+  `RequestLocation` now also counts refineries already *requested* at an index
+  toward `MaxRefineryPerIndice`, so pending MCV requests cannot stack on one
+  field before `PlayerRefineryCount` catches up.
+- Greedy expansion: `DriveMcvRequests` on `ExpansionPlannerBotModule` requests
+  construction-MCV production itself once per re-plan while a far free field
+  exists (the engine module alone waits for its 4000-cash trigger), holding a
+  1500 reserve and capping at `McvTargetCount` yards+MCVs. `ShouldRequestMcv`
+  pure gate tested; `RefinerySpreadTest` pins the spread semantics.
+
 # 2026-10-01 — NOVA: TC-2b defend-request answering — allies get a protect squad
 
 - `UseTeamDefendAnswers` (default **false**): third channel inside
