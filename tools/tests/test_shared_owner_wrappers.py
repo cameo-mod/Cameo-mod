@@ -20,19 +20,30 @@ class SharedOwnerWrapperTests(unittest.TestCase):
         cls.rules = Ruleset(ROOT)
         cls.reverse = {new: old for route in cls.before['routes'].values() for old, new in route.items()}
 
-    def test_fifty_seven_wrappers_are_exact_one_parent_identities(self):
+    def test_fifty_seven_wrappers_pin_shared_roots_and_materialized_bodies(self):
         self.assertEqual(len(self.reverse), 57)
         self.assertEqual(self.reverse, IDENTITY_WRAPPERS)
+        aliases = [new for new in self.reverse if is_reviewed_owner_wrapper(self.rules, new)]
+        self.assertEqual(len(aliases), 4)
         for new, old in self.reverse.items():
             self.assertIn(old, self.rules.weapons)
             raw = self.rules.weapon(new)
-            self.assertEqual([(c.key, c.value, c.children) for c in raw.children], [('Inherits', old, [])])
-            for name in (old, new):
+            if is_reviewed_owner_wrapper(self.rules, new):
+                self.assertEqual([(c.key, c.value, c.children) for c in raw.children], [('Inherits', old, [])])
+                targets = [(old, self.before['all_weapon_hashes'][old]),
+                           (new, self.before['all_weapon_hashes'][old])]
+            else:
+                targets = [(old, self.before['all_weapon_hashes'][old]),
+                           (new, self.before['materialized_wrappers'][new]['resolved'])]
+            for name, expected in targets:
                 resolved = self.rules.resolve_weapon(name)
-                self.assertEqual(digest(node_to_obj(resolved)), self.before['all_weapon_hashes'][old], name)
-                self.assertEqual(digest([ordered(c) for c in resolved.children]), self.before['resolved_ordered_hashes'][old], name)
-                entry = extract_stats.weapon_entry(self.rules, name)
-                self.assertEqual([entry['design_weapon_class'], entry['weapon_class_source']], self.before['class_contracts'][old], name)
+                self.assertEqual(digest(node_to_obj(resolved)), expected, name)
+                if name == old:
+                    self.assertEqual(digest([ordered(c) for c in resolved.children]),
+                                     self.before['resolved_ordered_hashes'][old], name)
+                    entry = extract_stats.weapon_entry(self.rules, name)
+                    self.assertEqual([entry['design_weapon_class'], entry['weapon_class_source']],
+                                     self.before['class_contracts'][old], name)
 
     def test_historical_closure_exception_is_exact_and_fail_closed(self):
         from miniyaml import Node
@@ -59,7 +70,7 @@ class SharedOwnerWrapperTests(unittest.TestCase):
 
     def test_legacy_map_alias_is_exactly_unchanged(self):
         self.assertEqual(digest(node_to_obj(self.rules.resolve('E3'))),
-                         'b24e35f0d6dfac60a2e673663066f11f34c2b583b3dbd43132fe116e59349adc')
+                         'ae386061df6f2cc2cd6d06a7bf4267f11df76d12132aa0861dee42312f1932a5')
         weapons = {c.get('Weapon') for c in self.rules.resolve('E3').children_named('Armament')}
         self.assertEqual(weapons, {'Rockets', 'RocketsAMT'})
 

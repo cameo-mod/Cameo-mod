@@ -70,7 +70,7 @@ class AlliedOwnedNameTests(unittest.TestCase):
                     trait['Weapon'] = reverse[trait['Weapon']]
                     arms += 1
                 if key.split('@')[0]=='WithMuzzleSmoke' and trait.get('Weapons') in reverse:
-                    self.assertEqual(actor,'ra1_allies_alliedmediumtank')
+                    self.assertEqual(actor,'ra1_allies_mediumtank')
                     trait['Weapons'] = reverse[trait['Weapons']]
                     smoke += 1
             self.assertEqual(digest(obj),self.before['actor_hashes'][actor],actor)

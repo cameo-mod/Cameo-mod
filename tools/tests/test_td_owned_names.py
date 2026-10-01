@@ -55,7 +55,7 @@ class TDOwnedNameTests(unittest.TestCase):
                 count += 1
             self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)
         self.assertEqual(count, 23)
-        self.assertIn('Armament@ra1_allies_alliedsniper', self.before['weapon_slots']['td_gdi_havoc'])
+        self.assertIn('Armament@ra1_allies_sniper', self.before['weapon_slots']['td_gdi_havoc'])
 
     def test_class_contracts_and_concrete_ownership_remain_exact(self):
         assert_owned_weapon_consumers(self, self.rules, self.before['routes'])

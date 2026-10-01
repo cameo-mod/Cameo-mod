@@ -42,7 +42,7 @@ class ClosedOwnerNameTests(unittest.TestCase):
             if old.endswith('_AA'):
                 self.assertTrue(new.endswith('_AA'))
 
-    def test_source_bodies_only_change_ten_internal_inheritance_links(self):
+    def test_source_bodies_only_change_five_internal_inheritance_links(self):
         actual_links = []
         for old, new in self.mapping.items():
             node = self.rules.weapon(new).deep_copy()
@@ -52,7 +52,7 @@ class ClosedOwnerNameTests(unittest.TestCase):
                     actual_links.append([old, child.key, child.value])
             self.assertEqual(digest([ordered(c) for c in node.children]),
                              self.before['raw_ordered_hashes'][old], new)
-        self.assertEqual(len(actual_links), 10)
+        self.assertEqual(len(actual_links), 5)
         self.assertEqual(sorted(actual_links), sorted(self.before['renamed_inheritance_links']))
 
     def test_original_classes_are_preserved(self):

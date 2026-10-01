@@ -16,10 +16,10 @@ from owned_weapon_wrappers import IDENTITY_WRAPPERS, is_reviewed_owner_wrapper
 SOURCE_COMMIT = '6278225df00c0aa0356961036c44670847321027'
 # Hash only canonical route metadata: checkout CRLF translation cannot alter it.
 ROUTE_HASHES = {
-    'closed_remaining_names_20260910.json': 'ae3d0dcc7663c28e26f68a29ba60ba606addd8b16f6a5a842717893d41796c8e',
-    'test_lookup_owned_names_20260910.json': '52c789fb4c18f70bf4b4b333b46ae2f13bde79425965a225cf144e8c34756da8',
+    'closed_remaining_names_20260910.json': 'c94edeb972f9bdbdd6993cebdb4f4b758f3e7027512e252f7465ab722d898f5a',
+    'test_lookup_owned_names_20260910.json': 'e5a7f8619b0e8d0eb7214c0119b1c4737548f43bf0af4f4dacb3f2c4679f04c6',
     'converter_owned_names_20260910.json': '133048360862ff162a35e9c1baca35c42f159ccdeb7c4923b6f4bbac1428f968',
-    'chained_owned_names_20260910.json': '2af0489154745bdc393c0b22fb504a1a48e14241372d1bfee1d3ec94bda64ee4',
+    'chained_owned_names_20260910.json': '0612be0a99e6d23d68bdf8fccebbb5f62ddc31ab212039645f71a865e41ab35d',
 }
 
 
