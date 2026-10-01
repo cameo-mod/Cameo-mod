@@ -110,6 +110,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Player relationships whose actors capturers target.")]
 		public readonly PlayerRelationship CapturableRelationships = PlayerRelationship.Enemy | PlayerRelationship.Neutral;
 
+		[Desc("FB2 (Frans SpecOps demand-capturers): with zero live capturers the capture pipeline never",
+			"even enumerates targets, so the first specialist only ever appears by unit-mix luck. On each",
+			"capture evaluation, count the safe capturable targets (not full, not dormant, not escort-blocked);",
+			"while live capturers < min(MaximumDemandCapturers, safe/DemandTargetsPerCapturer), request one",
+			"more capturer type from the unit builders. The route/escort checks still gate the dispatch itself.")]
+		public readonly bool UseDemandCapturers = false;
+
+		[Desc("FB2 demand-capturers: never keep more live capturers than this.")]
+		public readonly int MaximumDemandCapturers = 1;
+
+		[Desc("FB2 demand-capturers: how many safe targets justify one specialist (Frans DemandTargetsPerCapturer).")]
+		public readonly int DemandTargetsPerCapturer = 1;
+
 		[Desc("Actor types that repair: bridge huts (via `RepairsBridges`) and buildings (via `InstantlyRepairs`).")]
 		public readonly HashSet<string> RepairingActorTypes = [];
 
@@ -213,6 +226,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<string> capturableTypes;
 		readonly Dictionary<Actor, Assignment> assigned = [];
 		readonly Dictionary<Actor, int> stuckUntil = [];
+		readonly IBotRequestUnitProduction[] unitBuilders;
 		readonly Dictionary<string, int> missionAttempts = [];
 		readonly Dictionary<string, int> missionFailStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
@@ -289,6 +303,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (info.RepairableActorTypes.Count > 0)
 				jobs.Add(EngineerJob.RepairBuilding);
 			repairJobs = jobs.ToArray();
+
+			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -535,6 +551,58 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.ToList();
 		}
 
+		/// <summary>FB2: how many capturers the safe-target count justifies (Frans
+		/// DemandTargetsPerCapturer / MaximumDemandCapturers). Static for tests.</summary>
+		public static int DemandCapturersDesired(int safeTargets, int maximum, int targetsPerCapturer) =>
+			Math.Min(Math.Max(0, maximum), Math.Max(0, safeTargets) / Math.Max(1, targetsPerCapturer));
+
+		// FB2 (Frans SpecOps, DESIGN §19.5 omniscient-owner exemption applies to the same scans the
+		// assign path already runs): count the safe capturable targets across EVERY capturable owner —
+		// the assign path picks one random owner because one attempt needs one target, but demand is a
+		// production question and must see the whole opportunity set deterministically. "Safe" reuses
+		// the assign path's own gates (full / dormant / escort-blocked); route and guard checks still
+		// apply when a real engineer is dispatched.
+		void DemandCapturers(IBot bot, int liveCapturers)
+		{
+			if (liveCapturers >= Math.Max(0, Info.MaximumDemandCapturers))
+				return;
+
+			var targets = world.Actors.Where(a => !a.IsDead && a.IsInWorld
+				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
+				&& a.TraitOrDefault<CaptureManager>() != null);
+			if (Info.CheckCaptureTargetsForVisibility)
+				targets = targets.Where(a => a.CanBeViewedByPlayer(player));
+			if (capturableTypes.Count > 0)
+				targets = targets.Where(t => capturableTypes.Contains(t.Info.Name.ToLowerInvariant()));
+
+			var safeTargets = targets.Count(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t));
+			if (liveCapturers < DemandCapturersDesired(safeTargets, Info.MaximumDemandCapturers, Info.DemandTargetsPerCapturer))
+				RequestCapturer(bot);
+		}
+
+		// ScoutBotModule.RequestScout's contract verbatim: ordinal-sorted names, skip anything a builder
+		// already queued or no queue of this faction can build, request the first buildable capturer type.
+		void RequestCapturer(IBot bot)
+		{
+			foreach (var name in capturingTypes.OrderBy(n => n, StringComparer.Ordinal))
+			{
+				var builder = unitBuilders.FirstOrDefault(b => b.RequestedProductionCount(bot, name) == 0);
+				if (builder == null)
+					continue;
+
+				// Unloaded ContentPacks leave their actor names out of Rules.Actors; TryGetValue is load-bearing.
+				if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
+					continue;
+				if (actorInfo?.TraitInfoOrDefault<BuildableInfo>() is not { } buildable)
+					continue;
+				if (!buildable.Queue.Any(q => OpenRA.Mods.CA.AIUtils.FindQueues(player, q).Any(pq => pq.BuildableItems().Any(b => b.Name == name))))
+					continue;
+
+				builder.RequestUnitProduction(bot, name);
+				return;
+			}
+		}
+
 		static BotLeasePurpose PurposeOf(EngineerJob job) => job == EngineerJob.Capture ? BotLeasePurpose.Capture : BotLeasePurpose.Engineer;
 
 		/// <summary>An engineer this module may order now: ours, idle, not already on a job, not benched, not held by another module.</summary>
@@ -598,10 +666,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var leases = BotUnitLeases.Of(player);
 			var capturers = world.ActorsHavingTrait<Captures>()
-				.Where(a => a.Owner == player && capturingTypes.Contains(a.Info.Name.ToLowerInvariant()) && Available(a, leases, false))
+				.Where(a => a.Owner == player && capturingTypes.Contains(a.Info.Name.ToLowerInvariant()))
 				.Select(a => new TraitPair<CaptureManager>(a, a.TraitOrDefault<CaptureManager>()))
 				.Where(tp => tp.Trait != null)
 				.ToList();
+			var liveCapturers = capturers.Count;
+			capturers = capturers.Where(tp => Available(tp.Actor, leases, false)).ToList();
+
+			// FB2: safe targets justify building a specialist even when none is available — without
+			// this, the first capturer only ever appears by unit-mix luck (the enumeration above is
+			// the module's own-units scan; the demand count includes assigned and riding engineers).
+			if (Info.UseDemandCapturers)
+				DemandCapturers(bot, liveCapturers);
 
 			if (capturers.Count == 0)
 				return;
