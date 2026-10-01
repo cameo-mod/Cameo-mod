@@ -301,8 +301,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int ChooseScoutTarget(RegionMemory regions, CPos from, int tick, HashSet<int> taken)
 		{
+			// IM-1 (AI_DEEP_RESEARCH §3.3): when the master snapshot publishes the influence
+			// layers, they are the interest/danger/staleness source — threat_ground answers
+			// the danger callback — instead of re-deriving per-index values from ByEnemy.
+			// The score formula and the ByEnemy derivation below stay the fallback.
+			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
+			if (LayersMatch(regions, influence))
+				return PickScoutRegion(regions, from, taken,
+					i => influence.Staleness[i], i => influence.Interest[i], i => influence.ThreatGround[i]);
+
 			return PickScoutRegion(regions, from, taken,
 				i => Staleness(regions, i, tick), i => Interest(regions, i), DangerAt);
+		}
+
+		// IM-1: the published layers answer in the same index space as this Regions only when
+		// the (ZoneBacked, Generation, CellCount) triples agree — they are built in the same
+		// snapshot, but a consumer must never read ids across a zone re-cut or backing switch.
+		static bool LayersMatch(RegionMemory regions, IBotInfluenceMap influence)
+		{
+			return influence != null && influence.Count == regions.CellCount &&
+				influence.ZoneBacked == regions.ZoneBacked && influence.Generation == regions.Generation;
 		}
 
 		internal static int PickScoutRegion(RegionMemory regions, CPos from, IReadOnlySet<int> taken,
@@ -334,9 +352,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool AnyStaleRegion(RegionMemory regions, int tick)
 		{
+			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
+			var layered = LayersMatch(regions, influence);
 			for (var i = 0; i < regions.CellCount; i++)
 			{
-				if (Staleness(regions, i, tick) > 0)
+				if ((layered ? influence.Staleness[i] : Staleness(regions, i, tick)) > 0)
 					return true;
 			}
 
