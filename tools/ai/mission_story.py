@@ -112,6 +112,7 @@ def main(argv: list[str]) -> int:
     print(f"{len(games)} match(es), {sum(len(m) for _, _, m in games)} mission(s)")
     for uid, recs, missions in games:
         meta = recs[0] if recs else {}
+        game_max_tick = max((r.get("tick") or 0) for r in recs)
         print(f"\n== {meta.get('map_title', '?')} — {meta.get('bot', '?')} ({meta.get('player', '?')}, {meta.get('faction', '?')}) — {str(uid)[:8]}")
         for mid, m in missions:
             # Mission meta comes from any record carrying it (attempts first, else events).
@@ -141,7 +142,11 @@ def main(argv: list[str]) -> int:
                     type_stats[t][str(last.get("state")).lower()] += 1
                 else:
                     type_stats[t]["open"] += 1
-                    dangling.append((mid, a, last))
+                    # Within ~2 game-minutes of the last logged tick the match simply
+                    # ended mid-attempt (a straggler); going quiet earlier is a dropped
+                    # terminal. Absolute window: a fraction mislabels short matches.
+                    straggler = last.get("tick", 0) >= game_max_tick - 3000
+                    dangling.append((mid, a, last, straggler))
             if not m["attempts"]:
                 # A mission that only ever published/denied/dormant — the shelf, not a bug.
                 t = first.get("type") or (mid.split(":", 1)[0] if mid else "?")
@@ -160,9 +165,14 @@ def main(argv: list[str]) -> int:
         print(f"  ({denied_missions} mission-level DENIED event(s) — refused before any attempt existed)")
 
     if dangling:
-        print("\n== attempts with no terminal line (ownership bugs — the last line names the layer that went quiet) ==")
-        for mid, a, last in dangling:
-            print(f"  {mid} A{a}: last {state_line(last)} by {last.get('by', '?')}")
+        drops = [(mid, a, last) for mid, a, last, s in dangling if not s]
+        strays = [(mid, a, last) for mid, a, last, s in dangling if s]
+        print(f"\n== {len(dangling)} attempt(s) with no terminal line "
+              f"({len(drops)} dropped mid-match, {len(strays)} match-end stragglers) ==")
+        for mid, a, last in drops:
+            print(f"  {mid} A{a}: last {state_line(last)} by {last.get('by', '?')}  *dropped*")
+        for mid, a, last in strays:
+            print(f"  {mid} A{a}: last {state_line(last)} by {last.get('by', '?')}  (ended in flight)")
     else:
         print("\nno dangling attempts — every attempt reached a terminal state")
     return 0
