@@ -76,6 +76,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Exposed read-only for the 6c risk gate; keys are RegionMemory region indices.
 		readonly Dictionary<int, (int Value, int Tick)> dangerByRegion = new();
 
+		// ZG-c: scoutTargets, dangerByRegion and enemySpawnRegions all key Situation.Regions'
+		// index space — grid cells, or zone ids when zone-backed. A zone re-cut or a backing
+		// switch re-shuffles every id, so those caches drop on the (ZoneBacked, Generation)
+		// change rather than alias onto different ground.
+		bool lastRegionsZoned;
+		int lastRegionsGeneration = -1;
+
 		ResourceMapBotModule resourceMap;
 		IBotRequestUnitProduction[] unitBuilders;
 		int lastScoutRequestTick = -1;
@@ -151,6 +158,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
+			if (RegionSpaceChanged(regions))
+				DropRegionCaches();
+
 			var hasStaleRegion = AnyStaleRegion(regions, tick);
 			if (ReleaseScoutsIfNoStaleRegions(hasStaleRegion, scouts, scoutTargets, idlePool))
 				return;
@@ -333,6 +343,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return false;
 		}
 
+		// True when the memory's region index space moved (backing switch or zone re-cut)
+		// since the last check — every id-keyed cache this module holds goes stale at once.
+		bool RegionSpaceChanged(RegionMemory regions)
+		{
+			var zoned = regions.ZoneBacked;
+			var generation = regions.Generation;
+			if (zoned == lastRegionsZoned && generation == lastRegionsGeneration)
+				return false;
+
+			lastRegionsZoned = zoned;
+			lastRegionsGeneration = generation;
+			return true;
+		}
+
+		void DropRegionCaches()
+		{
+			dangerByRegion.Clear();
+			enemySpawnRegions = null;
+			scoutTargets.Clear();
+		}
+
 		int Staleness(RegionMemory regions, int index, int tick)
 		{
 			var stalest = 0;
@@ -354,6 +385,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Region indices of the map's mpspawn cells, minus the one this bot starts on. Read from the map's actor
 		// definitions (as CheckPlayers does) — public, identical for every player, no world scan.
+		// Recomputed whenever the index space moves (DropRegionCaches nulls the cache).
 		HashSet<int> EnemySpawnRegions(RegionMemory regions)
 		{
 			if (enemySpawnRegions != null)
@@ -364,7 +396,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(d => d.Value.Value == "mpspawn")
 				.Select(d => new ActorReference(d.Value.Value, d.Value).Get<LocationInit>().Value)
 				.Select(regions.IndexOf)
-				.Where(i => i != own)
+				.Where(i => i >= 0 && i != own)
 				.ToHashSet();
 			return enemySpawnRegions;
 		}
@@ -426,6 +458,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
 			if (regions == null)
 				return;
+
+			// Same index-space guard as the scan loop: a mark written under the new ids must
+			// not sit beside stale ones keyed under the old.
+			if (RegionSpaceChanged(regions))
+				DropRegionCaches();
 
 			var value = e.Attacker.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 			var index = regions.IndexOf(e.Attacker.Location);

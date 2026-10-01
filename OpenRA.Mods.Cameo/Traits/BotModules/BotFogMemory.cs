@@ -24,6 +24,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// Values persist while the region is dark and are overwritten when it is observed again
 	/// (Fransbot-style "threat map", see docs/design/AI_FRANSBOT_RESEARCH.md §2).
 	/// Published read-only on each BotSituation; consumers must not mutate.
+	/// <para>
+	/// ZG-c: the index space is either the fixed square grid (default, unchanged) or — when
+	/// constructed with an <see cref="IBotZoneTopology"/> — that topology's zone ids, so a
+	/// "region" becomes one chokepoint-bounded pocket of ground instead of an 8x8 cell block.
+	/// <see cref="IndexOf"/> then answers <see cref="IBotZoneTopology.NearestRegionId"/>
+	/// (gate/barrier cells fold into the nearest zone; unreachable answers are -1, never
+	/// a valid index), <see cref="CenterOf"/> answers the zone's centroid cell, and
+	/// adjacency comes from <see cref="NeighborsOf"/> rather than grid coordinates.
+	/// </para>
 	/// </summary>
 	public sealed class RegionMemory
 	{
@@ -49,8 +58,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly CPos Origin;
 		readonly Dictionary<OpenRA.Player, Region[]> byEnemy = new();
 
+		// ZG-c zone backing: when set, region indices are the topology's zone ids (positions
+		// in IBotZoneTopology.Regions), not grid cells. The grid fields are still computed —
+		// consumers must check ZoneBacked before reading geometry off Columns/Rows.
+		readonly IBotZoneTopology zones;
+		int zoneGeneration;
+		CPos[] zoneCenters;
+
 		public RegionMemory(Map map, int cellSize)
 			: this(map.AllCells.TopLeft, map.AllCells.BottomRight, cellSize) { }
+
+		/// <summary>Zone-backed memory: region indices are <paramref name="zoneTopology"/>'s region ids.</summary>
+		public RegionMemory(Map map, int cellSize, IBotZoneTopology zoneTopology)
+			: this(map.AllCells.TopLeft, map.AllCells.BottomRight, cellSize, zoneTopology) { }
 
 		internal RegionMemory(CPos topLeft, CPos bottomRight, int cellSize)
 		{
@@ -60,12 +80,73 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Rows = Math.Max(1, (bottomRight.Y - Origin.Y) / CellSize + 1);
 		}
 
-		public int CellCount => Columns * Rows;
+		internal RegionMemory(CPos topLeft, CPos bottomRight, int cellSize, IBotZoneTopology zoneTopology)
+			: this(topLeft, bottomRight, cellSize)
+		{
+			zones = zoneTopology;
+			zoneGeneration = zoneTopology?.Generation ?? -1;
+		}
 
-		public IReadOnlyDictionary<OpenRA.Player, Region[]> ByEnemy => byEnemy;
+		/// <summary>
+		/// True when region indices are a zone topology's region ids rather than grid cells.
+		/// Anything else keyed by region id (the per-enemy arrays here, a caller's own caches)
+		/// belongs to one (<see cref="ZoneBacked"/>, <see cref="Generation"/>) pair and must be
+		/// dropped when that pair moves.
+		/// </summary>
+		public bool ZoneBacked => zones != null;
+
+		/// <summary>
+		/// The generation of the index space this memory currently answers in: the zone
+		/// topology's adopted generation, constant 0 on the grid. A bridge re-cut bumps it —
+		/// nothing says zone id 4 is the same ground it was.
+		/// </summary>
+		public int Generation
+		{
+			get
+			{
+				if (zones == null)
+					return 0;
+
+				SyncZoneGeneration();
+				return zoneGeneration;
+			}
+		}
+
+		public int CellCount
+		{
+			get
+			{
+				if (zones == null)
+					return Columns * Rows;
+
+				SyncZoneGeneration();
+				return zones.Regions.Count;
+			}
+		}
+
+		public IReadOnlyDictionary<OpenRA.Player, Region[]> ByEnemy
+		{
+			get
+			{
+				SyncZoneGeneration();
+				return byEnemy;
+			}
+		}
 
 		public int IndexOf(CPos cell)
 		{
+			if (zones != null)
+			{
+				SyncZoneGeneration();
+
+				// Zone ids only exist on passable ground: a cell on a gate corridor, a ramp
+				// barrier or a wall folds into the nearest region a few cells out, so threat
+				// sitting on a chokepoint still lands in a region's memory instead of dropping
+				// out of the index space. -1 means nothing was in reach at all (deep water,
+				// off-map) — callers must treat it as "no region", not index with it.
+				return zones.NearestRegionId(cell);
+			}
+
 			var col = Math.Clamp((cell.X - Origin.X) / CellSize, 0, Columns - 1);
 			var row = Math.Clamp((cell.Y - Origin.Y) / CellSize, 0, Rows - 1);
 			return row * Columns + col;
@@ -73,18 +154,57 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public CPos CenterOf(int index)
 		{
+			if (zones != null)
+			{
+				SyncZoneGeneration();
+				var centers = zoneCenters ??= ZoneCenters();
+				return index >= 0 && index < centers.Length ? centers[index] : Origin;
+			}
+
 			var row = index / Columns;
 			var col = index - row * Columns;
 			return new CPos(Origin.X + col * CellSize + CellSize / 2, Origin.Y + row * CellSize + CellSize / 2);
 		}
 
+		/// <summary>
+		/// Region indices a path may step to from <paramref name="index"/>: the zone's
+		/// <see cref="Zone.AdjacentRegionIds"/> when zone-backed, the 4-connected grid
+		/// neighbours otherwise (in the same left/right/up/down order the router's old
+		/// inline loop used). This is the adjacency-as-data seam: consumers walking
+		/// region-to-region read it instead of re-deriving neighbours from grid coordinates.
+		/// </summary>
+		public IReadOnlyList<int> NeighborsOf(int index)
+		{
+			if (zones != null)
+			{
+				SyncZoneGeneration();
+				var list = zones.Regions;
+				return index >= 0 && index < list.Count ? list[index].AdjacentRegionIds : Array.Empty<int>();
+			}
+
+			var row = index / Columns;
+			var col = index - row * Columns;
+			var neighbors = new List<int>(4);
+			if (col > 0)
+				neighbors.Add(index - 1);
+			if (col < Columns - 1)
+				neighbors.Add(index + 1);
+			if (row > 0)
+				neighbors.Add(index - Columns);
+			if (row < Rows - 1)
+				neighbors.Add(index + Columns);
+			return neighbors;
+		}
+
 		internal void SetRegions(OpenRA.Player enemy, Region[] regions)
 		{
+			SyncZoneGeneration();
 			byEnemy[enemy] = regions;
 		}
 
 		public int KnownRegionCount(OpenRA.Player enemy)
 		{
+			SyncZoneGeneration();
 			return byEnemy.TryGetValue(enemy, out var regions) ? CountKnown(regions) : 0;
 		}
 
@@ -95,6 +215,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (region != null && region.EverSeen)
 					count++;
 			return count;
+		}
+
+		// A bridge re-cut re-shuffles every zone id, so per-zone memory built against the old
+		// cut must not alias onto the new ground: the per-enemy arrays and cached centres are
+		// dropped wholesale, and SetRegions re-derives them from remembered actors on the next
+		// snapshot anyway. (A zone that no longer exists simply loses its remembered values —
+		// honest fog semantics, not a salvage job.) Grid-backed memories never reach here.
+		void SyncZoneGeneration()
+		{
+			if (zones == null || zones.Generation == zoneGeneration)
+				return;
+
+			zoneGeneration = zones.Generation;
+			zoneCenters = null;
+			byEnemy.Clear();
+		}
+
+		// The representative cell of every zone — the member nearest its geometric centre —
+		// so a waypoint or visibility probe lands on real ground of that zone rather than a
+		// bounding-box middle that can sit on water or a cliff.
+		CPos[] ZoneCenters()
+		{
+			var list = zones.Regions;
+			var centers = new CPos[list.Count];
+			for (var i = 0; i < list.Count; i++)
+				centers[i] = list[i].Cells.Length > 0 ? TacticalMapBotModule.Centroid(list[i].Cells) : Origin;
+			return centers;
 		}
 	}
 
