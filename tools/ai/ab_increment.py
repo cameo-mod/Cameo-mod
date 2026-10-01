@@ -281,9 +281,14 @@ def terminate_shard(shard: Shard) -> None:
         shard.done = True
         shard.returncode = proc.returncode
         return
-    for pid in openra_child_pids(proc.pid):
+    children = openra_child_pids(proc.pid)
+    for pid in children:
         subprocess.run(["taskkill", "/f", "/t", "/pid", str(pid)],
                        capture_output=True, text=True)
+    if not children:
+        print(f"  warn: {shard.name} driver pid={proc.pid} is live but has no OpenRA.exe"
+              " child — if run_ai_match_batch ever gains a shell wrapper, its game"
+              " is now orphaned and still holds an instance slot", flush=True)
     proc.terminate()
     try:
         proc.wait(timeout=15)
