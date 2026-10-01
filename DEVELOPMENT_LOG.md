@@ -15144,6 +15144,95 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
   revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
   live A/B trees stay frozen for their owners.
 
+
+## 2026-09-30 (cont.) — F1 ladder + W3 semantics correction
+
+- Verified the REAL W3 variable against worktree diff (earlier summary had
+  it inverted): master already arms the 8 Frans service modules on
+  `genericbot && hardbot` (#656). W3 swaps producer OWNERSHIP on hard —
+  4 CA economy modules off, 5 Frans producers on. ResourceMapBotModule is
+  no gap (unqualified instance already genericbot||classicbot).
+- `FransDifficultyLadder` (OpenRA.Mods.Fransbot/Traits/) committed on
+  devin/dawn/19-1-ungate-all-tiers + pushed to PR #672 (34d96c5b9):
+  DynamicBotInsurance-style easiest/cameogod endpoints, linear by rank,
+  fransbot+classic alias to hard. Dead code until W3 verdict.
+- Knob table drafted for all 13 modules on §19.1's four axes; risk-aversion
+  weights stay structural (direction ambiguous).
+- CA-6 ca6-cand verified flag-only (WeakIncludesDefence false→true);
+  control pools w3ab-ctrl. First match in-game at WT 20k+.
+- Early W3: ctrl 0-2 / cand 0-5 (GDI mirror only). Machine at 6-instance
+  cap (my 3 + Claude 2 + EMBER lc7 1). No launches until <=5.
+- NOVA verified all of fransotto's review claims + found 28
+  IgnoreVisibility support-power fog leaks (LC6/EMBER, needs ruling).
+
+## 2026-09-30 (cont.2) — orphaned #412 recovery + W3 signal
+
+- FOUND: fleet row said "#412 sequences landed" — false. PR #412 merged
+  into d2k-weapon-closure 11s after that base had landed on master via
+  #411; its ~2500-line drain never reached master (498686947 not an
+  ancestor of origin/master). Artifact-vs-doc: artifact wins.
+- RECOVERED on devin/dawn/d2k-sequence-closure-v2 -> PR #675: 19 blocks
+  to Shared (unconditional include), 3 Ordos / 2 Ixian / 1 Harkonnen,
+  ordos_eye_bombs dedupe-only. NOT ported: 19 dotted *.faction blocks
+  (R18 renamed them faction-front; old names unreferenced) and ~22
+  same-file dupes (already 1 block each on master).
+- Verified: audit_sequences S1=0/S2=0 before+after, strict word-boundary
+  ref scan per id, boot-gate PASS (menu, no new exceptions).
+- W3 mid-run: ctrl 3-2, cand 0-9 — Frans producer stack losing every
+  match so far; F1 fail-path increasingly likely (revert arm set, keep
+  CA producers on hard). ~15 matches/arm left.
+- CA-6 cand first match a marathon turtle (WT 86k+, still live).
+- Claude ab664: cand 3-0 so far (repair-owner fix looking positive).
+
+## 2026-09-30 (cont.3) — MissionCard telemetry + W3 corrected tally
+
+- fransotto brainstormed MatchId -> MissionId -> AttemptId mission cards
+  (dormant-retry lifecycle, local-first cross-match archive, shared
+  neutral infra with Cameo). Verified claim-by-claim vs our code:
+  MissionId + stable DEFEND incident ids + bid->commit->release spine +
+  record_id/map_uid match records already exist; gaps are AttemptId,
+  dormant shelf, outcome vocabulary, persistence.
+- SHIPPED increment 1: devin/dawn/missioncard-telemetry -> PR #679.
+  Attempt ledger in the broker; normalized lines
+  `MISSION <id> ATTEMPT <n> COMMITTED|DENIED|RELEASED|ENDED`. Telemetry
+  only. First committer mints the attempt; a full release resets
+  AttemptNumber so the next commit is the next attempt (implicit
+  dormant-retry already existed — now it's visible).
+- Boot-gate lesson: copying engine/ between worktrees needs rebuild of
+  ALL mod projects — msbuild skipped OpenRA.Mods.Cameo.dll (stale
+  pre-#663, no BotRoleSets.AirArmament) and the boot crashed on it.
+- W3 CORRECTED AGAIN (counting bug): earlier tally counted ALL player
+  rows — every match writes a hard row AND a classic row, so any tally
+  without bot_type=='hard' reads ~1:1 by construction. True hard-only
+  record: ctrl 7-4, cand **0-22** — Frans producers lose every match.
+  F1 fail path now near-certain: CA producers stay on hard, Frans
+  producer modules stay donor-only.
+- ca6ab-cand marathon still running (no records). Machine at cap during
+  boot-gate only.
+
+## 2026-09-30 (cont.4) — host restart recovery + F1 verdict + MC1 contract
+
+- Host restart killed all drivers (box at 0 instances). Resumed on
+  ORIGINAL baselines (internal consistency): w3ab-ctrl n-mirror x8
+  (final matrix 8/8/4/3, one cross repeat lost); ca6ab-cand full
+  repeats-8 rerun (g-mirror oversamples to 16 — no skip logic in
+  run_ai_match_batch.py, disclosed).
+- W3/F1 VERDICT posted as PR #689 (AI_MATCH_LOG row): cand hard 0-24
+  complete; forensics = production starvation (FransMcvExpansion never
+  tasks an MCV; mcv=0/stage=Idle all game; idle_queues; deaths 4-5x
+  kills). Fail path: CA producers stay on hard; dawn-w3 never merges.
+- #679 now emits through BotMissionLog.Write (MC1 contract on master
+  via #687): frans:<MissionAuctionId> ids, x_frans_* reasons,
+  RELEASED reason=target_gone; FransBotLog keeps narrative context.
+  Drift baseline re-written; boot-gate PASS (menu 36s, no exceptions).
+  Validation smoke: fransbot vs classic x4 on C:/tmp/mc1-frans-smoke
+  checking cameo-ai-missions.jsonl frans: lines.
+- Fleet absorbed: mission-card one-contract ruling, standing orders
+  update (merge = Claude only), EMBER #671/#674 READY, NOVA #681
+  sibling lineage + LC1 squad consumer ready, #678 CA-3/CA-4 landed
+  inert on master.
+
+
 ## 2026-09-30 — CA-2b verdict: BehaviourEnabled LOSES its A/B
 
 Pooled ca2b2+ca2b3 (17 matches/arm, identical pre-#660 base, maximum, both

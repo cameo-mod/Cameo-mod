@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -279,28 +280,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// <summary>Linear interpolation across the difficulty list by index.</summary>
 		int ByRank(int min, int max)
 		{
-			return InterpolateByRank(min, max, rank, info.Difficulties.Length);
-		}
-
-		internal static int InterpolateByRank(int min, int max, int rank, int difficultyCount)
-		{
-			var steps = difficultyCount - 1;
-			if (steps <= 0)
-				return min;
-
-			return min + ((max - min) * rank) / steps;
+			return BotDifficultyLadder.InterpolateByRank(min, max, rank, info.Difficulties.Length);
 		}
 
 		void Configure(OpenRA.Player owner)
 		{
-			var botType = owner?.BotType;
-			if (!string.IsNullOrEmpty(botType) && info.DifficultyAliases.TryGetValue(botType, out var alias))
-				botType = alias;
-
-			rank = owner != null && owner.IsBot && !string.IsNullOrEmpty(botType)
-				? Array.FindIndex(info.Difficulties,
-					d => string.Equals(d, botType, StringComparison.OrdinalIgnoreCase))
-				: -1;
+			rank = BotDifficultyLadder.RankOf(owner, info.Difficulties, info.DifficultyAliases);
 
 			history = new int[Math.Max(1, info.AverageWindow)];
 			historyIndex = historyCount = 0;
@@ -384,7 +369,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		internal static int ParWorthAt(DynamicBotInsuranceInfo info, int rank, int gameTicks)
 		{
-			var midpoint = InterpolateByRank(
+			var midpoint = BotDifficultyLadder.InterpolateByRank(
 				info.ParMidpointEasiest, info.ParMidpointHardest, rank, info.Difficulties.Length);
 			if (midpoint <= 0 || info.ParShape.Length < 2 || info.ParShapeStep <= 0)
 				return info.ParBaseWorth;
