@@ -118,6 +118,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// attack-timing consumer (pacing and aggression only — DESIGN §19.2).
 		internal int DirectorTension;
 		internal DirectorPhase DirectorPhase;
+
+		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
+		// this snapshot — the caller's own broadcast is never folded in, so these read
+		// the allies' half only; all zeros in 1v1 or without an allied bot.
+		internal int TeamAlliedBots, TeamArmyValue, TeamMaxTension, TeamDefendRequests, TeamSharedTarget;
 	}
 
 	internal sealed class MasterAiBotSavedState
@@ -342,7 +347,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotDirector
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotDirector, IBotTeamMember
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -379,6 +384,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// every snapshot in Rebuild and published through IBotDirector and the situation log.
 		readonly BotDirector director = new();
 
+		// TC-1 (AI_ARCHITECTURE §12.17): the team blackboard broadcast — refreshed at the
+		// same per-snapshot point as the Director fold and published through
+		// IBotTeamMember; a disabled or never-snapshotted master reads Empty instead.
+		TeamBroadcast broadcast = TeamBroadcast.Empty;
+
 		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
 		long prevLedgerCreatedCost = -1, prevEconDestroyed;
 		int prevSnapshotTick = -1, prevAttacksLaunched, firstAttackTick = -1;
@@ -396,6 +406,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// reads as a fresh wave — never a behaviour change.
 		int IBotDirector.DirectorTension => IsTraitDisabled ? 0 : director.Tension;
 		DirectorPhase IBotDirector.DirectorPhase => IsTraitDisabled ? DirectorPhase.BuildUp : director.Phase;
+
+		// TC-1: what allies read off this bot on the team blackboard; a disabled or
+		// not-yet-snapshotted master publishes the empty broadcast — never a
+		// behaviour change.
+		TeamBroadcast IBotTeamMember.Broadcast => IsTraitDisabled ? TeamBroadcast.Empty : broadcast;
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
 			? Array.Empty<BotMission>()
 			: missions.Where(m => (!missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
@@ -939,6 +954,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				killSamples.Where(s => s.Tick > prevSnapshotTick).Sum(s => s.Delta),
 				lossSamples.Where(s => s.Tick > prevSnapshotTick).Sum(s => s.Delta), Info);
 
+			// TC-1 (AI_ARCHITECTURE §12.17): publish this bot's broadcast to the team
+			// blackboard at the same snapshot cadence — the scalars this pass already
+			// computed (own army, the urgency ordinal, the fresh Director wave, the
+			// chosen target), never new enemy data. The defend position is the own
+			// base centre while under pressure, Zero when help isn't needed or no
+			// base stands.
+			var requestsDefence = urgency >= BotUrgency.Pressured;
+			broadcast = new TeamBroadcast(tick, ownArmy, (int)urgency, director.Tension, director.Phase,
+				target, requestsDefence,
+				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero);
+
+			// TC-1: and read the allies' half of the board for the situation log —
+			// the caller's own broadcast stays out of the summary by design; a 1v1
+			// or a team without an allied bot provider reads all zeros.
+			var team = TeamBlackboard.Collect(player);
+
 			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
@@ -982,7 +1013,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				RepairTogglesAvoided = repairTogglesAvoided,
 				OwnPersonality = CurrentPersonality(),
 				DirectorTension = director.Tension,
-				DirectorPhase = director.Phase
+				DirectorPhase = director.Phase,
+				TeamAlliedBots = team.AlliedBots,
+				TeamArmyValue = team.TotalArmyValue,
+				TeamMaxTension = team.MaxTension,
+				TeamDefendRequests = team.DefendRequests,
+				TeamSharedTarget = team.SharedTargetCount
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
@@ -1492,6 +1528,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(p => p != player && p.IsBot && IsEligible(p) && player.IsAlliedWith(p))
 				.Select(p => p.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation)
 				.Count(s => s?.MainTarget == enemy);
+		}
+
+		// TC-1: where a defend request should rally — the centroid of the own
+		// construction-yard class (BaseBuilding), or the one building left standing;
+		// WPos.Zero when nothing stands. The same own-base convention NearestCells
+		// scoring uses, read off ownLiveBuildings so only in-world actors count.
+		static WPos OwnBaseCenter(World world, Actor[] ownLiveBuildings)
+		{
+			if (ownLiveBuildings.Length == 0)
+				return WPos.Zero;
+
+			var ownBase = ownLiveBuildings.Where(a => a.Info.HasTraitInfo<BaseBuildingInfo>()).ToArray();
+			var baseActors = ownBase.Length > 0 ? ownBase : ownLiveBuildings.Take(1).ToArray();
+			var center = new CPos(baseActors.Sum(a => a.Location.X) / baseActors.Length,
+				baseActors.Sum(a => a.Location.Y) / baseActors.Length);
+			return world.Map.CenterOfCell(center);
 		}
 
 		internal static string CandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,

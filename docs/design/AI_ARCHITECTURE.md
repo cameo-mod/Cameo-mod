@@ -2306,3 +2306,42 @@ and aggression telemetry only, never income, unit stats or vision.
   `UseDirectorPacing` (switch group P), flag-off = scale 100 = bit-identical.
   A Director change is itself an A/B candidate that must beat master
   (DESIGN §19.2).
+
+### 12.17 TC-1 — the team blackboard, publish-only slice (NOVA, 2026-10-02; AI_DEEP_RESEARCH.md §11)
+
+The Team Commander ruling lands its foundation as `IBotTeamMember` +
+`TeamBlackboard` (CA-side, next to `IBotDirector`): every allied bot publishes a
+`TeamBroadcast` once per situation snapshot — refreshed at the same point where
+`director.Observe` folds the pacing wave — and every bot can read the allies'
+half of the board. It is cheap because **every bot of a match runs on the host**
+(§1.1): allied bots read each other's PlayerActor traits directly, so the
+blackboard is unsynced by design — no sync work, no network traffic. Fog-honest
+by construction: only own-side scalars and ally-published data cross it; nothing
+enumerates enemy actors.
+
+- **What a broadcast carries.** `SnapshotTick`, `OwnArmyValue`, `UrgencyLevel`
+  (0/1/2 = Normal/Pressured/Emergency — the Cameo `BotUrgency` ordinals carried
+  as an int because CA cannot reference that enum), the DI-1 wave verbatim
+  (`DirectorTension`, `DirectorPhase`), the committed `MainTarget`,
+  `RequestsDefence` (urgency ≥ Pressured) and `DefendPosition` — the own base
+  centre while under pressure (the `BaseBuilding` centroid the `NearestCells`
+  scoring uses), `WPos.Zero` when help isn't needed or no base stands. A
+  disabled or never-snapshotted provider publishes `TeamBroadcast.Empty` —
+  never a behaviour change.
+- **The summary.** `TeamBlackboard.Collect(me)` folds the broadcasts of every
+  allied bot (`World.Players` filtered to `IsBot && IsAlliedWith` — the same
+  seam `AlliedCommitments` already uses, one `FirstEnabledTraitOrDefault` read
+  per ally) into a `TeamBlackboardSummary`: allied-bot count, summed army
+  value, max tension, an any-Climax flag, the defend-request count and the
+  largest same-`MainTarget` group (allies committed to the same enemy). The
+  caller's own broadcast is NOT folded in — a bot reads its own scalars
+  directly; the summary answers "what is the rest of the team doing".
+- **Published, always on:** five `own.team_*` fields in the situation log —
+  `team_allied_bots`, `team_army_value`, `team_max_tension`,
+  `team_defend_requests`, `team_shared_target`. In 1v1, or on a team without an
+  allied bot provider, every field reads 0 — absence is the honest answer, not
+  an error.
+- **Publish-only:** no consumer, no yaml flag — flag-off and flag-on are
+  identical because there is no flag. TC-2's consumers are already named in
+  §11, all deferred: synchronised attack windows, defend-request answering,
+  expansion-claim deconfliction, role-split bias and human-ally beacons.

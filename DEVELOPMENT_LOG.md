@@ -15512,3 +15512,43 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
 - Docs: AI_ARCHITECTURE 12.16 DI-2 paragraph; ROADMAP row M updated.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+## 2026-10-01 — NOVA TC-1: the team blackboard, publish-only slice (nova/team-commander-1)
+
+Task TC-1: the publish end of the Team Commander (AI_DEEP_RESEARCH §11). Worktree
+`C:\tmp\nova-tc`, branch `nova/team-commander-1` stacked on `nova/director-2`
+(DI-1+DI-2 on master).
+
+- New seam `OpenRA.Mods.CA/Traits/BotModules/IBotTeamMember.cs` (same layout as
+  `IBotDirector.cs`): `TeamBroadcast` — immutable carrier of SnapshotTick,
+  OwnArmyValue, UrgencyLevel (Cameo BotUrgency ordinals as int: CA cannot
+  reference the enum), DirectorTension/DirectorPhase verbatim, MainTarget,
+  RequestsDefence (urgency >= Pressured), DefendPosition (own base centre while
+  pressured, WPos.Zero when none) — plus `IBotTeamMember.Broadcast`,
+  `TeamBlackboardSummary`, and the static `TeamBlackboard` aggregator.
+  `TeamBroadcast.Empty` is what absent/disabled/never-snapshotted providers
+  publish.
+- `MasterAiBotModule` implements `IBotTeamMember`: the broadcast refreshes in
+  Rebuild at the same per-snapshot point as `director.Observe`, reusing only the
+  scalars DI-1 already reads plus `target` and the `BaseBuilding`-centroid
+  `OwnBaseCenter` helper (the NearestCells own-base convention over
+  `ownLiveBuildings`). Disabled module -> `TeamBroadcast.Empty`.
+- `TeamBlackboard.Collect(me)` reads the allies' half: `World.Players` filtered
+  to `IsBot && IsAlliedWith` (the AlliedCommitments seam), one
+  `FirstEnabledTraitOrDefault<IBotTeamMember>` per ally; the caller's own
+  broadcast is deliberately NOT folded in. `Aggregate` is pure — AlliedBots,
+  TotalArmyValue (sum), MaxTension (max), AnyClimax, DefendRequests,
+  SharedTargetCount (largest same-MainTarget group, nulls uncounted).
+- Telemetry: five `own.team_*` fields in `AiSituationLogWriter`
+  (team_allied_bots, team_army_value, team_max_tension, team_defend_requests,
+  team_shared_target) carried on `BotSituation` like the DI-1 fields — computed
+  via `Collect` at snapshot cadence; all zeros in 1v1. No consumer, no yaml flag.
+- Tests: `TeamBlackboardTest` (13): empty/null input, Empty-broadcast semantics,
+  ctor round-trip, army sum, max tension, AnyClimax both ways, defend-request
+  count, shared-target grouping (same Player -> 2, distinct -> 1, null -> 0),
+  situation-log emission. Fake ally Players via the established
+  `RuntimeHelpers.GetUninitializedObject` stand-in.
+- Docs: AI_ARCHITECTURE 12.17; ROADMAP row M TC marked [~]. Boot-gate deferred
+  to orchestrator.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
