@@ -233,8 +233,6 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
   to NOVA's #728 addition, so the two branches auto-merge.
 - `GuerrillaLeadTest` +3 (at-target when unseen, fresh÷presence ordering,
   edge counts). No flag, no switch group — telemetry changes no decision.
->>>>>>> pr-743
-
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
@@ -15728,7 +15726,6 @@ ZG-b fog-honest territory/ownership/doors merged).
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
 
-<<<<<<< HEAD
 # 2026-10-01 — NOVA: IM-2 — threats spread across the region boundary, router reads the blend
 
 IM-1 stacked branch `nova/im-2-spread`: the published `ThreatGround`/`ThreatAir`
@@ -15893,7 +15890,7 @@ Task TC-1: the publish end of the Team Commander (AI_DEEP_RESEARCH §11). Worktr
   `RuntimeHelpers.GetUninitializedObject` stand-in.
 - Docs: AI_ARCHITECTURE 12.17; ROADMAP row M TC marked [~]. Boot-gate deferred
   to orchestrator.
-=======
+
 # 2026-10-01 — NOVA: §13.1 discipline telemetry — the "never do" counters
 
 - `MasterAiBotModule` accumulates per-tick in `BotTick` (before the snapshot gate):
