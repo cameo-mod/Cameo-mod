@@ -1,3 +1,36 @@
+# 2026-10-01 — Devin (NOVA): UT-1 — the utility strategist's first slice (utility axes)
+
+- `OpenRA.Mods.Cameo/Traits/BotModules/BotUtilityAxes.cs` (new): the three bipolar
+  posture axes from the maintainer's §5.1 ruling — Turtle↔Rush, TechRush↔Expansion,
+  Steamroller↔Guerrilla, each [0,100] with 100 the second pole. Per snapshot:
+  `target = rest[personality] + Σ terms x UtilityInputWeightPercent/100`, then the
+  published axis EMA-steps toward the target by `UtilityAxisDecayPercent` (default 5)
+  — quiet inputs decay back to rest; a personality switch moves the rest, the axis
+  glides after it. First observation parks ON the rest (a personality is a starting
+  point). Every raw input is squashed (`Saturate`/`HurtShare`) before its capped term —
+  no single term dominates; each term's units are documented in-file. All inputs come
+  off the existing snapshot/remembered profiles — fog-honest, no new world scans.
+- `MasterAiBotModuleInfo` gains `UtilityTurtleRushRest`/`UtilityTechRushExpansionRest`/
+  `UtilitySteamrollerGuerrillaRest` (dicts keyed by bare personality name, missing → 50)
+  plus the two percent knobs; `RulesetLoaded` range-validates them. The axes publish on
+  `BotSituation` and into the situation log (`own.utility_turtlerush`,
+  `utility_techrushexpansion`, `utility_steamrollerguerrilla`) — record-only, explainable.
+- `IBotUtilityAxes` (OpenRA.Mods.CA) is the provider seam; `MasterAiBotModule`
+  implements it (disabled → neutral 50s; provider-less consumers also read neutral).
+- First flag-gated consumer proving the loop: `SquadManagerBotModuleCAInfo.
+  UseUtilityAxes` (default false) scales the `minAttackForceDelayTicks` reset by
+  TurtleRush — 100 → x0.6, 50 → x1.0, 0 → x1.5, piecewise-linear, clamped. Flag off is
+  byte-identical; `@classic` is in the switch-file's global skip and stays untouched.
+- ai.yaml `MasterAiBotModule` carries the six personalities' rest points (rush 80/35/45,
+  turtle 20/30/40, tech 35/20/50, expansion 45/75/55, steamroller 65/55/20,
+  guerrilla 70/60/80). Switch group `M_utility_axes` arms `UseUtilityAxes` on the six
+  genericbot `SquadManagerBotModuleCA@*` instances via explicit @-keys; K/L stay
+  reserved for DAWN.
+- 16 new tests (`BotUtilityAxesTest`) — suite 468 → 484, all green. Build clean
+  (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release`). Boot-gate not run
+  (coordinator runs it at review); `audit_fog_honesty.py` PASS — no new enumeration
+  sites.
+
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
