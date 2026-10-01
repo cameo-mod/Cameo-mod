@@ -259,6 +259,7 @@ namespace OpenRA.Mods.CA.Traits
 				var plugInfo = actorInfo.TraitInfoOrDefault<PlugInfo>();
 				var valueInfo = actorInfo.TraitInfoOrDefault<ValuedInfo>();
 				var distanceToBaseIsImportant = true;
+				CPos? advisedDefense = null;
 				if (plugInfo != null)
 				{
 					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
@@ -284,16 +285,25 @@ namespace OpenRA.Mods.CA.Traits
 					}
 					else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
 					{
-						if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
-							placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+						// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
+						// without one, or when it has no answer, the code below is unchanged.
+						advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
+						if (advisedDefense == null)
+						{
+							if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
+								placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
 
-						if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
-							type = BuildingType.Defense;
+							if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
+								type = BuildingType.Defense;
+						}
 					}
 					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
 
-					(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
+					if (advisedDefense != null)
+						location = advisedDefense;
+					else
+						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
 				}
 
 				if (location == null)
@@ -682,6 +692,21 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return (null, center, 0);
+		}
+
+		// Cameo: ask the first ACTIVE defence-placement advisor (resolved on each use, so a late-enabled one is seen)
+		// for a cell. canPlace is the check findPos applies.
+		CPos? AdvisedDefenseCell(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer)
+		{
+			var advisor = player.PlayerActor.TraitsImplementing<IBotDefensePlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
+			if (advisor == null || bi == null)
+				return null;
+
+			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+			return advisor.ChooseDefenseCell(actorInfo, baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name), baseCenter,
+				cell => world.CanPlaceBuilding(cell, actorInfo, bi, null)
+					&& (!distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell)));
 		}
 
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)

@@ -3415,6 +3415,10 @@ Player:
 		DriveRefineries: true
 		# EX-3: an MCV founds its base at the best far field (value x safety / distance); the MCV module decides when.
 		DriveMcvSite: true
+	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
+	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
+	DefenseCoveragePlanner:
+		RequiresCondition: genericbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot || classicbot
 		McvTypes: td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, yuri_slaveminer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, asianalliance_mobileconstructionvehicle, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, futuretech_mobileconstructionvehicle, terran_mobilecommandcenter, protoss_mobilenexus, zerg_hatcherydrone, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, tkm_mobileconstructionvehicletkm, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
