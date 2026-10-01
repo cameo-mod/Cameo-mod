@@ -35,9 +35,13 @@
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
+	# DISARMED by default (Claude, 2026-10-01): FransTransportCommanderBotModule touches actors DIRECTLY (15 CancelActivity/
+	# QueueActivity sites). A bot runs on the host only and must act through orders, so in a multiplayer game this would
+	# desync. Inert `Bots: fransbot` (that type arms it anyway) until its sites are orders; the increment A/B re-arms it
+	# for genericbot through tools/ai/increment_switches.yaml (single-player harness: no desync possible).
 	GrantConditionOnBotOwner@engttransport:
 		Condition: engt-transport
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: fransbot
 	# INC-3 (the F1 question as a switch): arms the eight Frans pure-service modules on the
 	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla`
 	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
