@@ -188,6 +188,31 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
   no `wc2_blizzard`/`wc2_deathanddecay` left in the shared instance; `audit_fog_honesty` PASS,
   `audit_duplicate_keys` unchanged. Boot-gate: YAML-only change (no engine rebuild needed;
   maintainer review boots it).
+# 2026-10-01 — Devin (DAWN): CA-2 — defend-reserve guard (Frans ForcePreservation port)
+
+- `SquadManagerBotModuleCA`: the Fransbot V1.29.48
+  `FransGroundDefendForcePreservationGuard` evaluated against genericbot — the
+  equivalent gap was real: `ProtectOwn` (attack ping) and
+  `PrepositionDefenceTick` (predicted threat / escort request) each drafted
+  **100% of the idle pool** into the protection squad, zero reserve. New
+  `UseDefendPreservation` + `DefendDraftLimit` keep a reserve floor
+  (`max(MinReserveUnits=4, pool × ReservePercent=25%)`) once the pool reaches
+  `TriggerUnits=6`; the donor's "emergency" (any-utility / sub-`LongEta` travel)
+  maps to "attacker / rally inside `MaxBaseRadius` of the base centre". Both
+  draft sites guarded; order/lease model untouched — the reserve units are
+  simply never moved.
+- `DefendDraftLimitTest` +5 (below-trigger pass-through, floor clamp, 25% head,
+  emergency bypass both sites' semantics, flag-off bit-identical).
+- `ai.yaml`: `UseDefendPreservation: false` on the six genericbot instances;
+  `@classic` untouched — classic keeps the full-pool draft for comparability.
+- `tools/ai/increment_switches.yaml`: new group `O_ca2_defend_reserve` (O next
+  free letter — M mine via cn3, N mine via CA-6). Dry-run: 6 instance flips,
+  `@classic` skipped by the global `skip:`.
+- Verification: build 0E/8W · tests 473/473 · fog audit PASS (231 sites —
+  the guard reads only the module's own idle pool, no new enumeration).
+- `docs/design/AI_ARCHITECTURE.md` §12.6: donor-evaluation verdict recorded;
+  `FransRiskModel` left open (route-risk, ZG-adjacent).
+- `docs/design/ROADMAP.md`: CA-2 row annotated — guard evaluated + ported.
 
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 

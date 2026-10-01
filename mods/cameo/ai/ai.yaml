@@ -3657,6 +3657,10 @@ Player:
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
 		UseProtectionRequests: true
+		# CA-2 (AI_ARCHITECTURE 12.6): the defend draft keeps a reserve instead of
+		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
+		# donor shape); waived when the attacker is inside the base. Group O.
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3728,6 +3732,7 @@ Player:
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
 		UseProtectionRequests: true
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3798,6 +3803,7 @@ Player:
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
 		UseProtectionRequests: true
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3870,6 +3876,7 @@ Player:
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
 		UseProtectionRequests: true
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3941,6 +3948,7 @@ Player:
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
 		UseProtectionRequests: true
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4010,6 +4018,7 @@ Player:
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
 		UseProtectionRequests: true
+		UseDefendPreservation: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true

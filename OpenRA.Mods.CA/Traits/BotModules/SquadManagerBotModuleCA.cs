@@ -239,6 +239,23 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Radius in cells that protecting squads should scan for enemies around their position.")]
 		public readonly int ProtectionScanRadius = 8;
 
+		[Desc("CA-2 (§12.6, Fransbot donor port): the defend draft keeps a reserve instead of",
+			"committing the whole idle pool on every attack ping. Waived when the attacker is",
+			"already inside MaxBaseRadius of the base centre (the donor's short-ETA emergency).",
+			"False = draft everything, bit-identical.")]
+		public readonly bool UseDefendPreservation = false;
+
+		[Desc("Idle units the defend draft refuses to commit below (DefendPreservationReservePercent",
+			"raises the floor for bigger pools).")]
+		public readonly int DefendPreservationMinReserveUnits = 4;
+
+		[Desc("Percent of the draftable idle pool kept in reserve when the preservation guard engages.")]
+		public readonly int DefendPreservationReservePercent = 25;
+
+		[Desc("Pools smaller than this always commit fully — a reserve only exists once the",
+			"idle force is large enough to split.")]
+		public readonly int DefendPreservationTriggerUnits = 6;
+
 		[Desc("Radius in cells that naval squads should scan for targets.")]
 		public readonly int NavalScanRadius = 8;
 
@@ -1487,11 +1504,20 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
-			foreach (var u in unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
+			var draftable = unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
 				&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
 				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
-				&& !IsNavalUnit(u.Actor)).ToList())
+				&& !IsNavalUnit(u.Actor)).ToList();
+
+			// CA-2: forward defence keeps a reserve too — the rally outside the base
+			// radius is the donor's non-emergency case; a rally inside it means the
+			// threat is at the doorstep and gets the full pool.
+			var emergency = (rally - initialBaseCenter).LengthSquared <=
+				(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
+			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info);
+			for (var i = 0; i < toDraft; i++)
 			{
+				var u = draftable[i];
 				protectSq.Units.Add(u);
 				unitsHangingAroundTheBase.Remove(u);
 			}
@@ -2506,8 +2532,18 @@ namespace OpenRA.Mods.CA.Traits
 						&& !IsNavalUnit(u.Actor))
 					.ToList();
 
-				foreach (var u in draftable)
+				// CA-2 (§12.6): keep a reserve when the response would strip the idle pool —
+				// FransGroundDefendForcePreservationGuard's shape ported to the draft site.
+				// The donor's short-ETA emergency maps to an attacker already inside the
+				// base radius: near threats get the full pool.
+				var emergency = attacker == null ||
+					(long)(attacker.Location - initialBaseCenter).LengthSquared <=
+						(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
+				var toDraft = DefendDraftLimit(draftable.Count, emergency, Info);
+
+				for (var i = 0; i < toDraft; i++)
 				{
+					var u = draftable[i];
 					protectSq.Units.Add(u);
 					unitsHangingAroundTheBase.Remove(u);
 				}
@@ -2515,6 +2551,18 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
 				protectSq.TargetActor = protectTarget;
+		}
+
+		// CA-2: how much of the draftable idle pool a protect-squad refill may take.
+		// Full commit when the flag is off, the pool is too small to split, or the
+		// attacker is already inside the base (emergency — the donor's short-ETA case).
+		public static int DefendDraftLimit(int draftableCount, bool emergency, SquadManagerBotModuleCAInfo info)
+		{
+			if (!info.UseDefendPreservation || emergency || draftableCount < info.DefendPreservationTriggerUnits)
+				return draftableCount;
+			var reserve = Math.Max(info.DefendPreservationMinReserveUnits,
+				(int)((long)draftableCount * info.DefendPreservationReservePercent / 100));
+			return Math.Max(0, draftableCount - reserve);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)

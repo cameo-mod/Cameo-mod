@@ -73,3 +73,6 @@ groups:
       WeightIntelAge: 120
     ScoutBotModule:
       UseTargetIntelBias: true
+  O_ca2_defend_reserve:              # DAWN CA-2 - defend-draft keeps a reserve (FransGroundDefendForcePreservationGuard port); attacker inside base = emergency, commits all
+    SquadManagerBotModuleCA:
+      UseDefendPreservation: true

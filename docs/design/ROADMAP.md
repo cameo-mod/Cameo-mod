@@ -147,6 +147,9 @@ the fog sequencing.
   - [~] **L** (telemetry + failure memory shipped #656; behaviour off) CA-2 siege and force preservation: stand-off outside remembered defence range,
     artillery first, commit when the area's defences are gone or the Versus-weighted force
     ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
+    (Guard evaluated 2026-10-01: genericbot `ProtectOwn`/`PrepositionDefenceTick` drafted the
+    whole idle pool — `UseDefendPreservation` port behind `O_ca2_defend_reserve` on
+    `devin/dawn/ca2-defend-reserve`.)
   - [~] **M** CA-3 role-mix production + squad composition with a use-every-role floor (**mechanism merged #678:**
     `RoleMix` + `RoleMixRoleFloorPct` + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
     land behind `UseRoleMix` as switch group `J_rolemix_production` in #731). **NOVA.**
