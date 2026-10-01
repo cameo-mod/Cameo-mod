@@ -1154,7 +1154,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnPersonality = CurrentPersonality(),
 				UtilityTurtleRush = utilityAxes.TurtleRush,
 				UtilityTechRushExpansion = utilityAxes.TechRushExpansion,
-				UtilitySteamrollerGuerrilla = utilityAxes.SteamrollerGuerrilla
+				UtilitySteamrollerGuerrilla = utilityAxes.SteamrollerGuerrilla,
 				DirectorTension = director.Tension,
 				DirectorPhase = director.Phase
 			};
