@@ -1,3 +1,32 @@
+# 2026-10-01 — Devin (DAWN): CA-6 — scout↔target-choice loop closure
+
+- **§9 item 12 was already shipped in the stack:** the V1.29.48 Fransbot
+  revendor carries `mpspawn` recon probes (`FransGeneralBotModule`, public
+  map data) and bounded remembered-building ground raids
+  (`FransGroundCommanderBotModule`, `GroundRememberedRaidMaximumAge`);
+  genericbot's `EnemySpawnBonus` spawn-watch merged earlier. CA-6 added no
+  duplicate — the missing half was the genericbot *loop*.
+- `ScoutBotModule`: `UseTargetIntelBias` + `TargetIntelBonus` (default 2000)
+  — regions remembered as the current `IBotMainTargetProvider.MainTarget`'s
+  footprint gain interest, so scouts refresh the intel the target choice
+  consumes (AI_ARCHITECTURE §12.9). Consumes the provider read-only; the
+  provider already nulls `MainTarget` when disabled.
+- `MasterAiBotModule`: `WeightIntelAge` (default 0 = pre-CA-6 byte-identical)
+  subtracts `Saturate(tick - LastSeenTick, IntelStaleTicks)` in `TargetScore`
+  and joins the normalizer; never-seen profiles take the strict maximum.
+  A scout report now measurably raises a target's score.
+- `WeakIncludesDefence` (existing CA-6 seed) stays its own A/B variable per
+  its yaml comment — not folded into the N group.
+- Switch group `N_ca6_target_intel` (N free: NOVA's M_utility_axes vs
+  M_cn3_deploy collision still open). Dry-run: WeightIntelAge 0→120,
+  UseTargetIntelBias false→true. Modules already `genericbot`-gated — no
+  grant needed; classic untouched.
+- Branch `devin/dawn/ca6-scout-target-intel` stacked on cn3 head
+  (contains the revendor). Build 0E, 469/469 tests (+1 new: stale/unseen/
+  fresh ordering + weight-0 invariance), fog audit 242 sites PASS,
+  AI_MODULE_MAP resynced (ScoutBotModule now consumes
+  IBotMainTargetProvider).
+
 # 2026-10-01 — Devin (DAWN): CN3 — DeployBotModule port + full CN-harvest inventory verdict
 
 - `OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs` — port of

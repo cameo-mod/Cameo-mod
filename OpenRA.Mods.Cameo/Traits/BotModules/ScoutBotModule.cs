@@ -59,6 +59,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"1-18% of the enemy army without it (AI_DEEP_RESEARCH.md §2.3). 0 disables it.")]
 		public readonly int EnemySpawnBonus = 0;
 
+		[Desc("CA-6: keep fresh eyes on the current main target's remembered footprint. Regions where the target",
+			"enemy was last seen gain this much interest, so scouting refreshes the intel that target choice and",
+			"raid bidding consume (AI_ARCHITECTURE §12.9) instead of wandering stale regions uniformly.")]
+		public readonly bool UseTargetIntelBias = false;
+
+		[Desc("Interest added to a region remembered as occupied by the current main target.")]
+		public readonly int TargetIntelBonus = 2000;
+
 		public override object Create(ActorInitializer init) { return new ScoutBotModule(init.Self, this); }
 	}
 
@@ -84,6 +92,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int lastRegionsGeneration = -1;
 
 		ResourceMapBotModule resourceMap;
+		IBotMainTargetProvider mainTargetProvider;
 		IBotRequestUnitProduction[] unitBuilders;
 		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
@@ -103,6 +112,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstOrDefault();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
 		}
@@ -406,6 +416,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var interest = 0;
 			if (Info.EnemySpawnBonus > 0 && EnemySpawnRegions(regions).Contains(index))
 				interest += Info.EnemySpawnBonus;
+
+			if (Info.UseTargetIntelBias && mainTargetProvider != null)
+			{
+				var target = mainTargetProvider.MainTarget;
+				if (target != null
+					&& regions.ByEnemy.TryGetValue(target, out var targetRegions)
+					&& index < targetRegions.Length && targetRegions[index] != null)
+					interest += Info.TargetIntelBonus;
+			}
 
 			foreach (var enemyRegions in regions.ByEnemy.Values)
 			{

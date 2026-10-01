@@ -186,6 +186,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"ratio, so 'damage dealt to us' only penalises once we have fought back some too.")]
 		public readonly int WeightHurt = 150;
 
+		[Desc("CA-6 (§12.9): intel-freshness weight — the score penalty grows toward the",
+			"never-seen maximum as a sighting ages past IntelStaleTicks. Freshly-scouted",
+			"enemies win over forgotten ones, so scouting and target choice close the loop.",
+			"0 = pre-CA-6 scoring, bit-identical.")]
+		public readonly int WeightIntelAge = 0;
+
+		[Desc("World ticks until a sighting counts as fully stale for WeightIntelAge.")]
+		public readonly int IntelStaleTicks = 4500;
+
 		[Desc("Nemesis score that counts as 'actively killing our base' — mandatory re-target,",
 			"bypassing the decision interval and the incumbent hold (§4.3 override).")]
 		public readonly int NemesisOverrideWeight = 60;
@@ -718,7 +727,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
 				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal,
 					threatAnalysis == null ? 0 : HurtShare((int)threatAnalysis.GetNemesisScore(profile.Player),
-						(int)threatAnalysis.GetDealtScore(profile.Player)), Info);
+						(int)threatAnalysis.GetDealtScore(profile.Player)), tick, Info);
 
 			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
 			var decision = ShouldEvaluateTargetDecision(
@@ -1362,10 +1371,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)
-			=> TargetScore(profile, ownArmy, 0, 0, 0, info);
+			=> TargetScore(profile, ownArmy, 0, 0, 0, 0, info);
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal, int hurt,
 			MasterAiBotModuleInfo info)
+			=> TargetScore(profile, ownArmy, ally, econTotal, hurt, 0, info);
+
+		internal static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal, int hurt,
+			int tick, MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
 			var weak = Saturate(ownArmy, profile.ArmyValue + (info.WeakIncludesDefence ? profile.DefenceValue : 0));
@@ -1373,10 +1386,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
 			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);
 			var fort = Saturate(profile.DefenceValue, 1500);
-			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly + info.WeightHurt);
+			var stale = info.WeightIntelAge <= 0 ? 0 :
+				profile.LastSeenTick <= 0 ? 100 : Saturate(tick - profile.LastSeenTick, info.IntelStaleTicks);
+			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly + info.WeightHurt + info.WeightIntelAge);
 			var score = (long)info.WeightReach * reach + (long)info.WeightWeak * weak + (long)info.WeightEcon * econ +
 				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally -
-				(long)info.WeightHurt * hurt;
+				(long)info.WeightHurt * hurt - (long)info.WeightIntelAge * stale;
 			return ClampScore(score * 10 / total);
 		}
 

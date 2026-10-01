@@ -2007,6 +2007,22 @@ public map data) and feed each scout report into the main-target / region choice
 most valuable region whose remembered defence the available force beats (§12.6 rule 4), not the
 nearest one.
 
+**Shipped shape (DAWN `devin/dawn/ca6-scout-target-intel`, switch `N_ca6_target_intel`).** The loop
+closes in both directions on remembered intel only:
+
+- *Target choice → scouting:* `ScoutBotModule.UseTargetIntelBias` adds `TargetIntelBonus` interest to
+  regions remembered as the current `IBotMainTargetProvider.MainTarget`'s footprint, so scouts refresh
+  the intel target choice and raid bidding consume instead of wandering stale regions uniformly.
+- *Scouting → target choice:* `MasterAiBotModule.WeightIntelAge` subtracts a `Saturate(age,
+  IntelStaleTicks)` term in `TargetScore`; a sighting's value decays toward the never-seen maximum as
+  it ages, so freshly-scouted enemies win near-ties and a scout report measurably moves the target.
+- *Beatability:* `WeakIncludesDefence` (earlier CA-6 seed, own A/B variable) folds remembered static
+  defence into the `weak` term — the force-vs-defence check of §12.6 rule 4.
+- The Fransbot donor side of §9 item 12 shipped with the V1.29.48 revendor: `FransGeneralBotModule`
+  runs `mpspawn` recon probes off public map data and `FransGroundCommanderBotModule` bids bounded
+  remembered-building raids (`GroundRememberedRaidMaximumAge`); the genericbot `EnemySpawnBonus`
+  spawn-watch landed earlier. CA-6 adds no duplicate of either.
+
 ### 12.10 Order of work, owners, and the gate for each phase
 
 Every phase: record-only telemetry first where it applies, then the behaviour behind a yaml
