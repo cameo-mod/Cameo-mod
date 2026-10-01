@@ -160,3 +160,8 @@ Player:
 	SquadManagerBotModuleCA@classic:
 		AirSquadTargetTypes:
 			ra1_allies_rapierjumpjet: Aircraft, Building, Epic, Naval
+			# Dead id kept for provenance: the Allies pack defines
+			# ra1_allies_chinooktransport (no "allied"); this row named a never-defined
+			# actor and resolves nothing. It lives here so the shared file carries no
+			# ra1_allies leftovers — if the actor is ever re-added it activates here.
+			ra1_allies_alliedchinooktransport: Ground
