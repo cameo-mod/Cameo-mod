@@ -15035,3 +15035,22 @@ Also: fbal-cc classic-vs-classic probe stopped per maintainer order
 (rebalance later); 6 records banked before kill: Nod-classic beat Gdi-classic
 on both cross orientations (2-0, thin n) and GDI-mirror spawn1 won all 4 —
 kept as provenance, not a balance claim.
+
+## 2026-10-01 — LC6 widening: central consumption-point canaries (Devin/EMBER)
+
+Branch `devin/ember/lc6-canary-widen` off `f1f47c879`. Widened fog canaries
+from per-state sites to the central chokepoints in `SquadManagerBotModuleCA`:
+- `FindClosestEnemy` x3, `FindHighValueTarget` x2: canary on the picked actor
+  at the single return path (no behavior change — same pick, instrumented).
+- `VisibleEnemiesNear`: `CanaryObservedAll` on the returned list — covers the
+  radius overload, the engage scan, and micro focus candidates.
+- `PredictedRatio`: `enemies` materialized once and canaried — catches any
+  caller feeding the predictor from an unfiltered scan.
+- `SquadCA.Update`: stale-target canary — an `Actor` target still committed
+  while unobservable logs `squad-update-target`; `FrozenActor` memory targets
+  are legal and skip the check (they're the designed retention mechanism).
+`CanaryObservedAll` added next to `CanaryObserved`; same pure
+`FogCanaryViolation` core (already pinned by AirDoctrineSquadTypeTest).
+Zero new enumerations — fog manifest stays 218 sites. Build 0 errors;
+boot-gate PASS (menu marker, no new runtime exceptions; two pre-boot
+launcher-arg exceptions from failed SupportDir quoting, not runtime faults).

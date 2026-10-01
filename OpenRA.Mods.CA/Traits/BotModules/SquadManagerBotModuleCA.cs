@@ -689,6 +689,18 @@ namespace OpenRA.Mods.CA.Traits
 				line => AIUtils.BotDebug("AI ({0}): {1}", Player.ClientIndex, line));
 		}
 
+		// LC6: same canary over a consumed list — each element is a decision
+		// input. Violations stay zero while every upstream filter holds; the
+		// list overload keeps per-call-site loops out of the states.
+		internal void CanaryObservedAll(IEnumerable<Actor> actors, string site)
+		{
+			if (!Info.FogCanaryEnabled || actors == null)
+				return;
+
+			foreach (var a in actors)
+				CanaryObserved(a, site);
+		}
+
 		// The pure core so tests can drive it without an Actor/World: a violation is
 		// exactly "fog is binding AND the consumed actor was not observable".
 		public static bool FogCanaryViolation(bool foggedScans, bool observed, string site, string actorName, Action<string> log)
@@ -1238,10 +1250,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Fogged scans never fall back to actors the bot cannot see; remembered
 			// enemy buildings are offered separately as FrozenActor targets.
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
-
-			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
+				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			CanaryObserved(picked, "find-closest-enemy");
+			return picked;
 		}
 
 		// 6c pre-commit risk gate: as FindClosestEnemy, but candidates whose region's
@@ -1256,10 +1269,12 @@ namespace OpenRA.Mods.CA.Traits
 			units = PreferSquadTargets(units, owner, TagsOf);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(sourceActor.CenterPosition);
 
-			return visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
+				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+			CanaryObserved(picked, "find-closest-enemy");
+			return picked;
 		}
 
 		// Fogged scans require a currently visible actor; mission consumers add remembered
@@ -1278,12 +1293,13 @@ namespace OpenRA.Mods.CA.Traits
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 			var targetPosition = World.Map.CenterOfCell(location);
-			if (FoggedScans)
-				return visible.ClosestToIgnoringPath(targetPosition);
-
-			return visible.ClosestToIgnoringPath(targetPosition) ??
-				units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
-				units.ClosestToIgnoringPath(targetPosition);
+			var picked = FoggedScans
+				? visible.ClosestToIgnoringPath(targetPosition)
+				: visible.ClosestToIgnoringPath(targetPosition) ??
+					units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(targetPosition) ??
+					units.ClosestToIgnoringPath(targetPosition);
+			CanaryObserved(picked, "find-closest-enemy-loc");
+			return picked;
 		}
 
 		internal Actor FindHighValueTarget(WPos pos)
@@ -1294,7 +1310,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			return units.RandomOrDefault(World.LocalRandom);
+			var picked = units.RandomOrDefault(World.LocalRandom);
+			CanaryObserved(picked, "find-hv-target");
+			return picked;
 		}
 
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
@@ -1306,7 +1324,9 @@ namespace OpenRA.Mods.CA.Traits
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
-			return units.RandomOrDefault(World.LocalRandom);
+			var picked = units.RandomOrDefault(World.LocalRandom);
+			CanaryObserved(picked, "find-hv-target");
+			return picked;
 		}
 
 		internal int SquadValueOf(SquadCA squad)
@@ -1375,8 +1395,13 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Enemies this bot can SEE within `radius` (the one radius scan this file keeps for squad targeting).
-		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius) =>
-			World.FindActorsInCircle(center, radius).Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+		internal List<Actor> VisibleEnemiesNear(WPos center, WDist radius)
+		{
+			var enemies = World.FindActorsInCircle(center, radius)
+				.Where(a => IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ToList();
+			CanaryObservedAll(enemies, "visible-enemies-near");
+			return enemies;
+		}
 
 		/// <summary>DF-2: the protection squad's rally point while a predicted attack is pending.</summary>
 		internal bool TryGetProtectionRally(out CPos rally)
@@ -1826,10 +1851,13 @@ namespace OpenRA.Mods.CA.Traits
 		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
 		internal double PredictedRatio(SquadCA squad, IEnumerable<Actor> enemies)
 		{
+			var enemyList = enemies as IReadOnlyList<Actor> ?? enemies.ToList();
+			CanaryObservedAll(enemyList, "predicted-ratio");
+
 			var rules = World.Map.Rules;
 			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
 				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
-			var foes = enemies.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
+			var foes = enemyList.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
 				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
 			return BotCombatPredictor.Predict(own, foes).Ratio;
 		}

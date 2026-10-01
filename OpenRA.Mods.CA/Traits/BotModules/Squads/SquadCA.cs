@@ -103,7 +103,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public void Update()
 		{
 			if (IsValid)
+			{
+				// LC6: the target the state is about to act on must still be
+				// observable — an Actor that went hidden while committed is
+				// stale consumption and the canary logs it. FrozenActor memory
+				// targets are legal by design and skip the check.
+				if (Target.Type == TargetType.Actor)
+					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
+
 				FuzzyStateMachine.Update(this);
+			}
 		}
 
 		public bool IsValid => Units.Count > 0;
