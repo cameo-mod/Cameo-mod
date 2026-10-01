@@ -48,6 +48,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>Ticks since the region's newest sighting across all enemy memories; never-seen regions report tick + the never-seen constant.</summary>
 		IReadOnlyList<int> Staleness { get; }
+
+		/// <summary>
+		/// Whether these layers answer in <paramref name="regions"/>' index space — same
+		/// <see cref="Count"/>, <see cref="ZoneBacked"/> and <see cref="Generation"/>. A consumer
+		/// must never read ids across a zone re-cut or a backing switch; always check first.
+		/// </summary>
+		bool MatchesIndexSpace(RegionMemory regions);
 	}
 
 	/// <summary>
@@ -81,6 +88,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int[] threatGround = [];
 		int[] threatAir = [];
+
+		// The published arrays: the blended values after the neighbour-spread pass.
+		int[] threatGroundSpread = [];
+		int[] threatAirSpread = [];
 		int[] interest = [];
 		int[] ownStrength = [];
 		int[] staleness = [];
@@ -95,11 +106,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int Count => count;
 		public bool ZoneBacked => zoneBacked;
 		public int Generation => generation;
-		public IReadOnlyList<int> ThreatGround => threatGround;
-		public IReadOnlyList<int> ThreatAir => threatAir;
+
+		// The published threats are post-spread: each region's blended value plus a share of
+		// every neighbour's — a remembered unit's reach crosses the boundary it guards.
+		public IReadOnlyList<int> ThreatGround => threatGroundSpread;
+		public IReadOnlyList<int> ThreatAir => threatAirSpread;
 		public IReadOnlyList<int> Interest => interest;
 		public IReadOnlyList<int> OwnStrength => ownStrength;
 		public IReadOnlyList<int> Staleness => staleness;
+
+		public bool MatchesIndexSpace(RegionMemory regions)
+		{
+			return regions != null && count == regions.CellCount &&
+				zoneBacked == regions.ZoneBacked && generation == regions.Generation;
+		}
 
 		// Internal for tests: the EMA the published threats decay toward.
 		internal IReadOnlyList<float> ThreatGroundHistory => histGround;
@@ -219,6 +239,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				threatGround[i] = BlendWithHistory(threatGround[i], histGround[i], staleness[i], decayTicks);
 				threatAir[i] = BlendWithHistory(threatAir[i], histAir[i], staleness[i], decayTicks);
 			}
+
+			// Spread over the boundary: a remembered unit's weapon reach crosses into the
+			// neighbouring regions, so each region publishes its own believed threat plus
+			// InfluenceSpreadPercent of every neighbour's (Mark's "spread over the weapon's
+			// range" approximated at region granularity — one adjacency hop, not a flood).
+			var spreadPercent = Math.Clamp(info.InfluenceSpreadPercent, 0, 100);
+			for (var i = 0; i < count; i++)
+			{
+				var g = threatGround[i];
+				var a = threatAir[i];
+				if (spreadPercent > 0)
+					foreach (var neighbor in regions.NeighborsOf(i))
+						if (neighbor >= 0 && neighbor < count)
+						{
+							g += threatGround[neighbor] * spreadPercent / 100;
+							a += threatAir[neighbor] * spreadPercent / 100;
+						}
+
+				threatGroundSpread[i] = g;
+				threatAirSpread[i] = a;
+			}
 		}
 
 		// Rebuild every per-index array when the index space moves. History drops with the
@@ -237,6 +278,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			generation = gen;
 			threatGround = new int[size];
 			threatAir = new int[size];
+			threatGroundSpread = new int[size];
+			threatAirSpread = new int[size];
 			interest = new int[size];
 			ownStrength = new int[size];
 			staleness = new int[size];

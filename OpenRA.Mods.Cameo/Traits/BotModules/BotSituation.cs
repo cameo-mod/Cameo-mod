@@ -249,6 +249,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("IM-1: staleness a region reports when no enemy memory has ever seen it",
 			"(mirrors ScoutBotModule.StaleAfterTicks).")]
 		public readonly int InfluenceStaleAfterTicks = 2500;
+		[Desc("IM-1: percent of each neighbour region's believed threat that bleeds across the",
+			"boundary — a remembered unit's reach covers the ground past the gate it holds.",
+			"One adjacency hop only; 0 disables the spread.")]
+		public readonly int InfluenceSpreadPercent = 50;
 		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
 		public readonly bool UseRiskRouting = true;
 		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
@@ -539,8 +543,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					reachable = (a, b) => mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, a, b);
 			}
 
+			// IM-2: prefer the published influence layers (EMA-blended and spread over the
+			// boundary) as the risk map; the raw per-region remembered threat stays the
+			// fallback whenever the layers are off or answer in a different index space.
+			var influence = Situation?.Influence;
+			var layered = influence != null && influence.MatchesIndexSpace(regions);
+
 			return RegionRouter.Route(regions, leader.Location, to,
-				i => RememberedThreatAtRegion(regions, i, airborne), Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
+				i => layered
+					? (airborne ? influence.ThreatAir[i] : influence.ThreatGround[i])
+					: RememberedThreatAtRegion(regions, i, airborne),
+				Info.RiskRoutingThreatWeight, maxWaypoints, reachable);
 		}
 
 		// The 6d fogged-scan switch: squads observe fog only when the master AI is

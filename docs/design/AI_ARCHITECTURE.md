@@ -2039,9 +2039,12 @@ stays the fallback whenever no enabled, built `TacticalMapBotModule` exists; **I
 the layers on that index space — `BotInfluenceLayers` publishes `threat_ground`, `threat_air`,
 `interest`, `own_strength` and `staleness` per region on the master snapshot behind
 `UseInfluenceLayers`, remembered threat decaying toward a per-zone EMA as sightings go stale —
-the spec's "where they usually are". `ScoutBotModule` is the first consumer; the siege stand-off
-edge (CA-2), air-threat routing (CA-5), raid/guerrilla interest÷threat (§12.9) and expansion
-safety (EX) stay with their owners), **UT** utility
+the spec's "where they usually are". IM-2 spreads each published threat across the region
+boundary (`InfluenceSpreadPercent` of every neighbour, one hop — a remembered unit's reach
+covers the ground past the gate it holds), and `RouteAroundThreat` now risks squads on the
+blended+spread layer instead of the raw per-region memory. `ScoutBotModule` is the first
+consumer; the siege stand-off edge (CA-2), air-threat routing (CA-5), raid/guerrilla
+interest÷threat (§12.9) and expansion safety (EX) stay with their owners), **UT** utility
 strategist (absorbs CA-3's blended squad manager),
 **MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
 

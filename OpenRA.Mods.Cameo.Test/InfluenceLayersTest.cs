@@ -273,5 +273,66 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(layers.Interest[1], Is.EqualTo(40), "a zone's static resource cells are interest");
 			Assert.That(layers.Interest[0], Is.EqualTo(0));
 		}
+
+		[Test]
+		public void ThreatSpreadsIntoNeighbourRegions()
+		{
+			var regions = Grid();
+			var enemy = FakePlayer();
+			var cells = new RegionMemory.Region[regions.CellCount];
+			cells[3] = new RegionMemory.Region { ArmyValue = 1000, EverSeen = true, LastSeenTick = 100 };
+			regions.SetRegions(enemy, cells);
+
+			var layers = Layers();
+			layers.Refresh(regions, Array.Empty<OpenRA.Actor>(), null, null, 100);
+
+			// Fresh sighting: the seat keeps its full 1000; each grid neighbour (index 3's
+			// left 2, right 4, down 11) publishes half of it — the remembered unit's reach
+			// covers the ground past the boundary it holds.
+			Assert.That(layers.ThreatGround[3], Is.EqualTo(1000));
+			Assert.That(layers.ThreatGround[4], Is.EqualTo(500), "neighbour bleeds in SpreadPercent of the sighting");
+			Assert.That(layers.ThreatGround[11], Is.EqualTo(500));
+			Assert.That(layers.ThreatGround[0], Is.EqualTo(0), "a non-neighbour stays clear — one hop only");
+		}
+
+		[Test]
+		public void SpreadFollowsZoneAdjacency()
+		{
+			var topology = new FakeZoneTopology();
+			topology.AddZone(Block(0, 0), 0, 1);      // zone 0 neighbours zone 1
+			topology.AddZone(Block(8, 0), 0, 0);      // zone 1 neighbours zone 0 only
+			topology.AddZone(Block(16, 0), 0);        // zone 2 has no declared neighbours
+			var regions = Zoned(topology);
+			var enemy = FakePlayer();
+
+			var cells = new RegionMemory.Region[regions.CellCount];
+			cells[0] = new RegionMemory.Region { ArmyValue = 800, EverSeen = true, LastSeenTick = 100 };
+			regions.SetRegions(enemy, cells);
+
+			var layers = Layers();
+			layers.Refresh(regions, Array.Empty<OpenRA.Actor>(), topology, null, 100);
+
+			Assert.That(layers.ThreatGround[0], Is.EqualTo(800));
+			Assert.That(layers.ThreatGround[1], Is.EqualTo(400), "spread crosses the declared zone adjacency");
+			Assert.That(layers.ThreatGround[2], Is.EqualTo(0), "no adjacency, no bleed");
+		}
+
+		[Test]
+		public void MatchesIndexSpaceTracksTheTriple()
+		{
+			var topology = new FakeZoneTopology();
+			topology.AddZone(Block(0, 0));
+			var regions = Zoned(topology);
+			var layers = Layers();
+			layers.Refresh(regions, Array.Empty<OpenRA.Actor>(), topology, null, 100);
+
+			Assert.That(layers.MatchesIndexSpace(regions), Is.True);
+			Assert.That(layers.MatchesIndexSpace(Grid()), Is.False, "grid-backed space is a different index space");
+			Assert.That(layers.MatchesIndexSpace(null), Is.False);
+
+			topology.Generation++;
+			layers.Refresh(regions, Array.Empty<OpenRA.Actor>(), topology, null, 200);
+			Assert.That(layers.MatchesIndexSpace(regions), Is.True, "both re-derived under the new generation");
+		}
 	}
 }

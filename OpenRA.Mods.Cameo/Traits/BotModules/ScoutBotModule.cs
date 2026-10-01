@@ -319,8 +319,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// snapshot, but a consumer must never read ids across a zone re-cut or backing switch.
 		static bool LayersMatch(RegionMemory regions, IBotInfluenceMap influence)
 		{
-			return influence != null && influence.Count == regions.CellCount &&
-				influence.ZoneBacked == regions.ZoneBacked && influence.Generation == regions.Generation;
+			return influence != null && influence.MatchesIndexSpace(regions);
 		}
 
 		internal static int PickScoutRegion(RegionMemory regions, CPos from, IReadOnlySet<int> taken,

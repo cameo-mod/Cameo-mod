@@ -15455,3 +15455,17 @@ ZG-b fog-honest territory/ownership/doors merged).
   centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+# 2026-10-01 — NOVA: IM-2 — threats spread across the region boundary, router reads the blend
+
+IM-1 stacked branch `nova/im-2-spread`: the published `ThreatGround`/`ThreatAir`
+are now the believed value PLUS `InfluenceSpreadPercent` (default 50) of every
+neighbouring region's — a remembered defender's reach covers the ground past the
+gate it holds, one adjacency hop (the spec's "spread over the weapon's range" at
+region granularity). `MatchesIndexSpace(RegionMemory)` moved onto
+`IBotInfluenceMap` as the canonical id-space guard; `ScoutBotModule`'s private
+triple-check now calls it, and `RouteAroundThreat` prices squads on the
+blended+spread layer whenever the layers answer in the same index space —
+remembered AA in the approach zone now tolls air paths a hop early, not only
+inside the defended zone itself. Flag still ships OFF (`UseInfluenceLayers`,
+manifest group `F_influence_layers`); merge blocked on #725.
