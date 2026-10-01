@@ -1,3 +1,26 @@
+# 2026-10-01 — Devin (DAWN): CN3 — DeployBotModule port + full CN-harvest inventory verdict
+
+- `OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs` — port of
+  crystallized-nexus `30cf70a` DeployBotModule: unified deploy driving for
+  `GrantConditionOnDeploy` units across four modes (Artillery = move into
+  range/deploy/retreat from dead zone; Stats = entrench when idle+threatened;
+  Support = deploy near allies; Ability = fire once then pack). §19.6: units
+  claimed by other modules are skipped for the tick; deploy is a state
+  toggle, no lease purpose added. Enemy reads gated on `shroud.IsVisible`
+  (the donor's Support-mode threat scan had no visibility gate — added).
+  ActorID-ordered iteration, order-stream only, cooldowns stop oscillation.
+- **CN3 inventory verdict** (recorded in PR #733): bridge repair already
+  owned by `EngineerBotModule`; cliff demolition + veinhole assault are
+  content-blocked (no `CNDestroyableCliff` actors; `forgotten_veinhole` is a
+  nuke silo). Deploy was the only realizable row → CN harvest is complete.
+- Wired `genericbot && cn3_deploy`, switch group `H_cn3_deploy` (off by
+  default). Groups: `ts_nod_artillery` (Artillery), `ts_nod_ticktank` (Stats).
+- Open contract question for the INC spec: squad-held artillery cannot be
+  deploy-toggled here (issuer != holder); needs a squad-side call or a
+  transfer protocol. Flagged in module docstring + fleet checkin.
+- 57 module types / 80 Player instances; claims + AI_MODULE_MAP resynced.
+- Build 0W/0E, 468/468 tests, boot-gate PASS, fog audit 240 sites PASS.
+
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
