@@ -238,12 +238,12 @@ namespace OpenRA.Mods.Common.Traits
 			lastDefenseEmergencyTick = int.MinValue;
 			emergencyCenter = null;
 			emergencyThreatType = null;
-			lastDefenseQueuedTick = int.MinValue;
+			if (pendingDefenseType == null)
+				lastDefenseQueuedTick = int.MinValue;
 			nextGateLogTick = 0;
-			pendingSecureTargetId = 0;
-			pendingFrontCenter = null;
 			ClearGeneralIncident();
-			ClearPendingDefense();
+			if (pendingDefenseType == null)
+				ClearPendingDefense();
 			FransBotLog.BotDebug(world,
 				"{0}: FransDefenseCommander GROUND EGRESS-AWARE PLACEMENT active: multi-foothold/committed-MSLO and active-front defense remain unchanged, but armed defenses, strategic Defense-queue structures and walls may not occupy Ground Commander's live large-army staging/egress reservation.",
 				player);
@@ -252,7 +252,8 @@ namespace OpenRA.Mods.Common.Traits
 		protected override void TraitDisabled(Actor self)
 		{
 			ClearGeneralIncident();
-			ClearPendingDefense();
+			// No IBot/order context exists at this callback. Retain exact pending ownership
+			// so a later re-enable resumes it instead of orphaning native queue work.
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
@@ -298,10 +299,9 @@ namespace OpenRA.Mods.Common.Traits
 			// Defense-queue spending are forbidden until the first PIONEER MCV physically
 			// exists. The sole exception is a real attack callback against an owned building.
 			// Merely seeing an enemy or receiving a General DEFEND mission is not enough.
-			if (baseBuilderService.OpeningLocked && !emergency)
+			// Exact native work already owned below is managed to a real terminal; it is not a new start.
+			if (baseBuilderService.OpeningLocked && !emergency && pendingDefenseType == null)
 			{
-				if (pendingDefenseType != null)
-					ClearPendingDefense();
 				ClearGeneralIncident();
 				return;
 			}
@@ -363,8 +363,9 @@ namespace OpenRA.Mods.Common.Traits
 				}
 				else if (pendingFrontCenter.HasValue)
 				{
-					pendingPurposeValid = emergency;
-					if (!pendingPurposeValid && hasGeneralDefend &&
+					// Emergency freshness gates new work only. Once the exact queue item has
+					// started, keep owning it at that front while its relevant FACT survives.
+					if (!emergency && hasGeneralDefend &&
 						(pendingFrontCenter.Value - generalMission.LastVisibleTargetCell).LengthSquared <=
 						Info.GeneralIncidentRetargetRadius * Info.GeneralIncidentRetargetRadius)
 					{

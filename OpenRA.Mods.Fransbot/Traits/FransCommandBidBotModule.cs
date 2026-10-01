@@ -493,9 +493,11 @@ namespace OpenRA.Mods.Common.Traits
 					return;
 
 				// MaintainAuctions() above already reconciled this target to General's current
-				// MissionType. Never let a Commander submit an older mission snapshot and
-				// silently reclassify the pending auction back to its stale type.
-				if (!auction.Initialized || auction.MissionType != mission.Type)
+				// mission identity. Never let a Commander submit an older mission snapshot and
+				// silently reclassify the pending auction back to its stale type/objective.
+				if (!auction.Initialized || auction.MissionType != mission.Type ||
+					(IsTransportLossSecure(auction) &&
+						(!IsTransportLossSecure(mission) || auction.LastVisibleCell != mission.LastVisibleTargetCell)))
 					return;
 			}
 
@@ -1010,22 +1012,35 @@ namespace OpenRA.Mods.Common.Traits
 
 		void UpdateAuctionFromMission(Auction auction, FransMission mission)
 		{
-			if (auction.Initialized && !auction.Mission.HasValue && auction.MissionType != mission.Type)
+			var pendingTypeChanged = auction.Initialized && !auction.Mission.HasValue && auction.MissionType != mission.Type;
+			var pendingTransportLossObjectiveChanged = auction.Initialized && !auction.Mission.HasValue &&
+				IsTransportLossSecure(auction) && IsTransportLossSecure(mission) &&
+				auction.LastVisibleCell != mission.LastVisibleTargetCell;
+			if (pendingTypeChanged || pendingTransportLossObjectiveChanged)
 			{
 				var previousType = auction.MissionType;
+				var previousCell = auction.LastVisibleCell;
 				var staleBidCount = auction.Bids.Count;
 				auction.Bids.Clear();
 				auction.OpenedWorldTick = world.WorldTick;
-				FransBotLog.BotDebug(world,
-					"{0}: MISSION BROKER target {1} changes pending MissionType {2} -> {3}; clears {4} stale bids and restarts the bid window. No bid may cross MissionType identity.",
-					player, mission.TargetActorId, previousType, mission.Type, staleBidCount);
-				BotMissionLog.Write(new BotMissionRecord
+				if (pendingTransportLossObjectiveChanged)
+					FransBotLog.BotDebug(world,
+						"{0}: MISSION BROKER LST-loss SECURE incident {1} changes pending objective {2} -> {3}; clears {4} stale bids and restarts the bid window. No bid may cross loss-evidence generations.",
+						player, MissionAuctionId(mission), previousCell, mission.LastVisibleTargetCell, staleBidCount);
+				else
 				{
-					Player = player, MissionId = $"frans:{auction.MissionId}",
-					Event = BotMissionEvent.Denied, Reason = "x_frans_missiontype_changed",
-					MissionType = previousType.ToString().ToLowerInvariant(),
-					TargetCell = auction.LastVisibleCell
-				});
+					FransBotLog.BotDebug(world,
+						"{0}: MISSION BROKER target {1} changes pending MissionType {2} -> {3}; clears {4} stale bids and restarts the bid window. No bid may cross MissionType identity.",
+						player, mission.TargetActorId, previousType, mission.Type, staleBidCount);
+					BotMissionLog.Write(new BotMissionRecord
+					{
+						Player = player, MissionId = $"frans:{auction.MissionId}",
+						Event = BotMissionEvent.Denied, Reason = "x_frans_missiontype_changed",
+						MissionType = previousType.ToString().ToLowerInvariant(),
+						TargetCell = auction.LastVisibleCell
+					});
+				}
+
 			}
 
 			auction.MissionId = MissionAuctionId(mission);
@@ -1040,6 +1055,14 @@ namespace OpenRA.Mods.Common.Traits
 			auction.StrategicPriority = mission.StrategicPriority;
 			auction.Initialized = true;
 		}
+
+		static bool IsTransportLossSecure(Auction auction) =>
+			auction.MissionType == FransMissionType.Secure &&
+			auction.TargetActorType == FransGeneralBotModule.TransportLossSecureTargetType;
+
+		static bool IsTransportLossSecure(FransMission mission) =>
+			mission.Type == FransMissionType.Secure &&
+			mission.TargetActorType == FransGeneralBotModule.TransportLossSecureTargetType;
 
 		bool IsCommanderCapacityCommitted(Bid bid)
 		{

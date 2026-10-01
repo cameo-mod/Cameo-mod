@@ -316,6 +316,8 @@ namespace OpenRA.Mods.Common.Traits
 		bool TryGetGroundLandmassId(CPos cell, out int landmassId);
 		bool TryGetNavalRegionId(CPos cell, out int navalRegionId);
 		int GetKnownBeachDistance(CPos cell, int maximumDistance);
+		IReadOnlyList<FransGroundShoreAccess> AmphibiousHandoffs { get; }
+		bool IsAmphibiousHandoff(CPos groundCell, CPos navalCell);
 		IReadOnlyList<FransGroundShoreAccess> GetGroundShoreAccess(int groundLandmassId);
 
 	}
@@ -453,7 +455,7 @@ namespace OpenRA.Mods.Common.Traits
 		public readonly FrozenSet<string> ResourceCreatorTypes =
 			FrozenSet<string>.Empty;
 
-		[Desc("Terrain types treated as shoreline/beach markers.")]
+		[Desc("Terrain types treated as tactical/visual shoreline markers. These do not define amphibious transport legality.")]
 		public readonly FrozenSet<string> BeachTerrainTypes =
 			new[] { "Beach" }.ToFrozenSet();
 
@@ -641,6 +643,8 @@ namespace OpenRA.Mods.Common.Traits
 		readonly Dictionary<CPos, int> groundLandmassByCell = [];
 		readonly Dictionary<CPos, int> navalRegionByCell = [];
 		readonly Dictionary<int, FransGroundShoreAccess[]> groundShoreAccessByLandmass = [];
+		readonly HashSet<(CPos GroundCell, CPos NavalCell)> amphibiousHandoffPairs = [];
+		FransGroundShoreAccess[] amphibiousHandoffs = [];
 
 		readonly Dictionary<(int A, int B), int> groundBoundaryWidths = [];
 		readonly HashSet<int> groundArticulationPoints = [];
@@ -710,6 +714,7 @@ namespace OpenRA.Mods.Common.Traits
 		public IReadOnlyList<FransStrategicSector> Sectors => sectors;
 		public IReadOnlyList<FransStrategicSectorMetrics> SectorMetrics => sectorMetrics;
 		public IReadOnlyList<FransKnownEnemyStructure> KnownEnemyStructures => knownEnemyStructures;
+		public IReadOnlyList<FransGroundShoreAccess> AmphibiousHandoffs => amphibiousHandoffs;
 		public int SnapshotWorldTick { get; private set; } = -1;
 		public int TerrainKnowledgeVersion { get; private set; }
 
@@ -755,6 +760,8 @@ namespace OpenRA.Mods.Common.Traits
 			groundLandmassByCell.Clear();
 			navalRegionByCell.Clear();
 			groundShoreAccessByLandmass.Clear();
+			amphibiousHandoffPairs.Clear();
+			amphibiousHandoffs = [];
 			groundBoundaryWidths.Clear();
 			groundArticulationPoints.Clear();
 			strategicSectorRouteCache.Clear();
@@ -1051,14 +1058,18 @@ namespace OpenRA.Mods.Common.Traits
 			groundLandmassByCell.Clear();
 			navalRegionByCell.Clear();
 			groundShoreAccessByLandmass.Clear();
+			amphibiousHandoffPairs.Clear();
+			amphibiousHandoffs = [];
 
 			BuildExactCellComponents(knownGroundCells, groundLandmassByCell);
 			BuildExactCellComponents(knownNavalCells, navalRegionByCell);
 
+			// Native Cargo does not make a terrain label into a handoff. The representative
+			// LST must be able to occupy the naval-side cell, and the representative Ground
+			// passenger must be able to occupy an adjacent known cell. Actual passengers and
+			// craft still apply their live IPositionable/Mobile checks before execution.
 			var mutable = new Dictionary<int, List<FransGroundShoreAccess>>();
-			foreach (var navalCell in knownNavalCells
-				.Where(c => Info.BeachTerrainTypes.Contains(world.Map.GetTerrainInfo(c).Type))
-				.OrderBy(c => c.X).ThenBy(c => c.Y))
+			foreach (var navalCell in knownNavalCells.OrderBy(c => c.X).ThenBy(c => c.Y))
 			{
 				if (!navalRegionByCell.TryGetValue(navalCell, out var navalRegionId))
 					continue;
@@ -1090,6 +1101,16 @@ namespace OpenRA.Mods.Common.Traits
 					.ThenBy(a => a.NavalCell.X).ThenBy(a => a.NavalCell.Y)
 					.ThenBy(a => a.GroundCell.X).ThenBy(a => a.GroundCell.Y)
 					.ToArray();
+
+			amphibiousHandoffs = groundShoreAccessByLandmass.Values
+				.SelectMany(access => access)
+				.OrderBy(a => a.GroundLandmassId)
+				.ThenBy(a => a.NavalRegionId)
+				.ThenBy(a => a.NavalCell.X).ThenBy(a => a.NavalCell.Y)
+				.ThenBy(a => a.GroundCell.X).ThenBy(a => a.GroundCell.Y)
+				.ToArray();
+			foreach (var handoff in amphibiousHandoffs)
+				amphibiousHandoffPairs.Add((handoff.GroundCell, handoff.NavalCell));
 		}
 
 		void BuildExactCellComponents(HashSet<CPos> passableCells, Dictionary<CPos, int> componentByCell)
@@ -2003,6 +2024,11 @@ namespace OpenRA.Mods.Common.Traits
 			if (!knownBeachDistanceByCell.TryGetValue(cell, out var distance) || distance > maximumDistance)
 				return -1;
 			return distance;
+		}
+
+		public bool IsAmphibiousHandoff(CPos groundCell, CPos navalCell)
+		{
+			return amphibiousHandoffPairs.Contains((groundCell, navalCell));
 		}
 
 		public IReadOnlyList<FransGroundShoreAccess> GetGroundShoreAccess(int groundLandmassId)

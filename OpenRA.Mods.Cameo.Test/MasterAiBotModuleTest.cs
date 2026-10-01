@@ -304,6 +304,35 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TargetScoreIntelAgePenalisesStaleIntel()
+		{
+			// CA-6 (§12.9): with WeightIntelAge armed, an enemy unseen for
+			// IntelStaleTicks scores below an identical freshly-scouted one;
+			// never-seen saturates at maximum staleness. Weight 0 is byte-identical.
+			var info = FieldLoader.Load<MasterAiBotModuleInfo>(new MiniYaml("", new[]
+			{
+				new MiniYamlNode("WeightIntelAge", new MiniYaml("120")),
+				new MiniYamlNode("IntelStaleTicks", new MiniYaml("4500"))
+			}));
+			var fresh = new EnemyProfile { Name = "fresh", ArmyValue = 100, NearestCells = 5, LastSeenTick = 9900 };
+			var stale = new EnemyProfile { Name = "stale", ArmyValue = 100, NearestCells = 5, LastSeenTick = 1000 };
+			var unseen = new EnemyProfile { Name = "unseen", ArmyValue = 100, NearestCells = 5, LastSeenTick = 0 };
+			const int tick = 10000;
+
+			Assert.That(MasterAiBotModule.TargetScore(fresh, 1000, 0, 0, 0, tick, info),
+				Is.GreaterThan(MasterAiBotModule.TargetScore(stale, 1000, 0, 0, 0, tick, info)),
+				"stale intel must score below fresh intel for identical profiles");
+			Assert.That(MasterAiBotModule.TargetScore(stale, 1000, 0, 0, 0, tick, info),
+				Is.GreaterThan(MasterAiBotModule.TargetScore(unseen, 1000, 0, 0, 0, tick, info)),
+				"never-seen carries the strict maximum penalty (Saturate is asymptotic, age only approaches it)");
+
+			var defaultInfo = new MasterAiBotModuleInfo();
+			Assert.That(MasterAiBotModule.TargetScore(stale, 1000, 0, 0, 0, tick, defaultInfo),
+				Is.EqualTo(MasterAiBotModule.TargetScore(fresh, 1000, 0, 0, 0, tick, defaultInfo)),
+				"WeightIntelAge=0 must ignore intel age entirely");
+		}
+
+		[Test]
 		public void HurtShareTracksTheExchangeBalance()
 		{
 			// The bounded form of §4.3's dealt/taken ratio: our share of the exchange

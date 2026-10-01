@@ -1908,7 +1908,7 @@ anywhere without tier restriction (W13 rule 5).
 ### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
 
 Historical planning snapshot below, including the dated 2026-08-16 empty search.
-Current authored-field inventory (2026-09-27, nova post-merge): **436** raw (was 423 on 2026-09-26)
+Current authored-field inventory (2026-10-01, post-dupkey-collapse `3e14d9b4a`): **423** raw (was 436 on 2026-09-27 — the dupkey collapse removed 13 dead duplicate occurrences; was 423 on 2026-09-26)
 `PercentageDenominator` occurrences in active weapon files, compared with 183
 on 2026-09-05. Freedom elite's explicit companion adds the single occurrence
 while preserving its prior percentage units. The registry's historical

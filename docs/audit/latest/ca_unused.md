@@ -5,7 +5,7 @@
 | activity | 15 | 4 | 1 |
 | logic | 19 | 19 | 0 |
 | projectile | 9 | 0 | 0 |
-| trait | 274 | 87 | 57 |
+| trait | 279 | 87 | 56 |
 | warhead | 16 | 0 | 0 |
 | widget | 21 | 6 | 5 |
 
@@ -19,8 +19,8 @@
 - **WithRestartableIdleOverlay** (trait, `OpenRA.Mods.CA/Traits/Render/WithRestartableIdleOverlay.cs`): CA uses it 23x, e.g. `mods/ca/missions/main-campaign/ca01-crossrip/crossrip-rules.yaml`, `mods/ca/missions/main-campaign/ca30-singularity/singularity-rules.yaml`, `mods/ca/missions/main-campaign/ca42-schism/schism-rules.yaml`
 - **AnnounceOnCreation** (trait, `OpenRA.Mods.CA/Traits/Sound/AnnounceOnCreation.cs`): CA uses it 21x, e.g. `mods/ca/missions/main-campaign/ca09-salvation/salvation-rules.yaml`, `mods/ca/missions/main-campaign/ca27-emancipation/emancipation-rules.yaml`, `mods/ca/rules/scrin.yaml`
 - **ChronoshiftableCA** (trait, `OpenRA.Mods.CA/Traits/ChronoshiftableCA.cs`): CA uses it 13x, e.g. `mods/ca/rules/defaults.yaml`, `mods/ca/rules/vehicles.yaml`
+- **GrantConditionOnHealingReceived** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnHealingReceived.cs`): CA uses it 13x, e.g. `mods/ca/maps/tfca/tfca-rules-base.yaml`, `mods/ca/missions/main-campaign/ca53-defiance/defiance-rules.yaml`, `mods/ca/rules/defaults.yaml`
 - **PulsingPaletteEffect** (trait, `OpenRA.Mods.CA/Traits/PaletteEffects/PulsingPaletteEffect.cs`): CA uses it 13x, e.g. `mods/ca/rules/palettes.yaml`
-- **GrantConditionOnHealingReceived** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnHealingReceived.cs`): CA uses it 12x, e.g. `mods/ca/maps/tfca/tfca-rules-base.yaml`, `mods/ca/rules/defaults.yaml`, `mods/ca/rules/infantry.yaml`
 - **MindControllableProgressBar** (trait, `OpenRA.Mods.CA/Traits/MindControllableProgressBar.cs`): CA uses it 11x, e.g. `mods/ca/rules/defaults.yaml`, `mods/ca/rules/scrin.yaml`, `mods/ca/rules/structures.yaml`
 - **TargetedAttackAbility** (trait, `OpenRA.Mods.CA/Traits/TargetedAttackAbility.cs`): CA uses it 9x, e.g. `mods/ca/maps/tfca/tfca-rules-base.yaml`, `mods/ca/rules/aircraft.yaml`, `mods/ca/rules/infantry.yaml`
 - **ExternalLinkButton** (widget, `OpenRA.Mods.CA/Widgets/ExternalLinkButtonWidget.cs`): CA uses it 8x, e.g. `mods/ca/chrome/mainmenu.yaml`
@@ -66,7 +66,6 @@
 - **ProductionPaletteCA** (widget, `OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs`): CA uses it 1x, e.g. `mods/ca/chrome/ingame-player.yaml`
 - **ReflectsDamage** (trait, `OpenRA.Mods.CA/Traits/ReflectsDamage.cs`): CA uses it 1x, e.g. `mods/ca/rules/scrin.yaml`
 - **RevealOnFireCA** (trait, `OpenRA.Mods.CA/Traits/RevealOnFireCA.cs`): CA uses it 1x, e.g. `mods/ca/rules/defaults.yaml`
-- **RevealedPlayersManager** (trait, `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`): CA uses it 1x, e.g. `mods/ca/rules/player.yaml`
 - **SpawnActorOnSell** (trait, `OpenRA.Mods.CA/Traits/SpawnActorOnSell.cs`): CA uses it 1x, e.g. `mods/ca/rules/structures.yaml`
 - **SpritePowerMeter** (widget, `OpenRA.Mods.CA/Widgets/SpritePowerMeterWidget.cs`): CA uses it 1x, e.g. `mods/ca/chrome/ingame-player.yaml`
 - **TurnOnIdleCA** (trait, `OpenRA.Mods.CA/Traits/TurnOnIdleCA.cs`): CA uses it 1x, e.g. `mods/ca/rules/vehicles.yaml`
@@ -115,6 +114,7 @@
 - PromotionPalette (trait, `OpenRA.Mods.Cameo/Traits/PromotionPalette.cs`)
 - PromotionTreeButton (logic, `OpenRA.Mods.Cameo/Widgets/Logic/Ingame/PromotionTreeButtonLogic.cs`)
 - ProvidesDelayedPrerequisite (trait, `OpenRA.Mods.CA/Traits/Player/ProvidesDelayedPrerequisite.cs`)
+- RevealedPlayersManager (trait, `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`)
 - ScaledBullet (trait, `OpenRA.Mods.Cameo/Projectiles/ScaledBullet.cs`)
 - ScaledImage (widget, `OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs`)
 - ScaledSelfHeal (trait, `OpenRA.Mods.Cameo/Traits/ScaledSelfHeal.cs`)

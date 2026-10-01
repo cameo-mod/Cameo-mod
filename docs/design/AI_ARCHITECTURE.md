@@ -1344,7 +1344,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**53 distinct trait types, 76 Player instances plus one World instance** (2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**57 distinct trait types, 80 Player instances plus one World instance** (2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2025,6 +2025,22 @@ formation — they run ahead on their own (6b).
 public map data) and feed each scout report into the main-target / region choice: attack the
 most valuable region whose remembered defence the available force beats (§12.6 rule 4), not the
 nearest one.
+
+**Shipped shape (DAWN `devin/dawn/ca6-scout-target-intel`, switch `N_ca6_target_intel`).** The loop
+closes in both directions on remembered intel only:
+
+- *Target choice → scouting:* `ScoutBotModule.UseTargetIntelBias` adds `TargetIntelBonus` interest to
+  regions remembered as the current `IBotMainTargetProvider.MainTarget`'s footprint, so scouts refresh
+  the intel target choice and raid bidding consume instead of wandering stale regions uniformly.
+- *Scouting → target choice:* `MasterAiBotModule.WeightIntelAge` subtracts a `Saturate(age,
+  IntelStaleTicks)` term in `TargetScore`; a sighting's value decays toward the never-seen maximum as
+  it ages, so freshly-scouted enemies win near-ties and a scout report measurably moves the target.
+- *Beatability:* `WeakIncludesDefence` (earlier CA-6 seed, own A/B variable) folds remembered static
+  defence into the `weak` term — the force-vs-defence check of §12.6 rule 4.
+- The Fransbot donor side of §9 item 12 shipped with the V1.29.48 revendor: `FransGeneralBotModule`
+  runs `mpspawn` recon probes off public map data and `FransGroundCommanderBotModule` bids bounded
+  remembered-building raids (`GroundRememberedRaidMaximumAge`); the genericbot `EnemySpawnBonus`
+  spawn-watch landed earlier. CA-6 adds no duplicate of either.
 
 ### 12.10 Order of work, owners, and the gate for each phase
 

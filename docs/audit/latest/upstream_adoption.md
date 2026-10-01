@@ -1,12 +1,12 @@
 # audit_upstream_adoption — upstream mod types Cameo already has, and what is new
 
-Cameo resolves **1138** yaml-visible type names across 7 assemblies.
+Cameo resolves **1143** yaml-visible type names across 7 assemblies.
 
 | mod | types | already in Cameo | same mechanic, other name | candidates | of the candidates |
 |---|--:|--:|--:|--:|---|
 | Romanov's Vengeance | 26 | 11 | 8 | 7 | 6 used in its own yaml |
 | Shattered Paradise | 46 | 7 | 7 | 32 | 31 used in its own yaml |
-| Crystallized Nexus | 107 | 6 | 2 | 99 | 89 used in its own yaml |
+| Crystallized Nexus | 107 | 7 | 4 | 96 | 86 used in its own yaml |
 | Combined Arms | 350 | 182 | 35 | 133 | 121 used in its own yaml |
 | Generals Alpha | 23 | 2 | 1 | 20 | 20 used in its own yaml |
 
@@ -102,8 +102,10 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 |---|---|---|
 | `CNBaseBuilderBotModule` | `BaseBuilderBotModule, BaseBuilderBotModuleCA` | identical `[Desc]` text |
 | `CNMcvExpansionManagerBotModule` | `McvExpansionManagerBotModule` | identical `[Desc]` text |
+| `CNRepairManagerBotModule` | `UnitRepairBotModule` | identical `[Desc]` text |
+| `CNTacticalMapBotModule` | `TacticalMapBotModule` | identical `[Desc]` text |
 
-**89 of 99** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
+**86 of 96** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
 
 | type | file | uses in its yaml |
 |---|---|--:|
@@ -164,16 +166,13 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `CNOffsetSpriteSequenceShadow` | `Traits/Render/CNOffsetSpriteSequenceShadow.cs` | 1 |
 | `CNProductionQueueFromSelection` | `Traits/Player/CNProductionQueueFromSelection.cs` | 1 |
 | `CNRegionManagerBotModule` | `Traits/BotModules/CNRegionManagerBotModule.cs` | 1 |
-| `CNRepairManagerBotModule` | `Traits/BotModules/CNRepairManagerBotModule.cs` | 1 |
 | `CNResourceMapBotModule` | `Traits/BotModules/CNResourceMapBotModule.cs` | 1 |
-| `CNTacticalMapBotModule` | `Traits/BotModules/CNTacticalMapBotModule.cs` | 1 |
 | `CNTacticalMapOverlay` | `Traits/CNTacticalMapOverlay.cs` | 1 |
 | `CNVeinholeAssaultBotModule` | `Traits/BotModules/CNVeinholeAssaultBotModule.cs` | 1 |
 | `CNWindSway` | `Traits/Render/CNWindSway.cs` | 1 |
 | `CNWithVoxelWalkerBody` | `Traits/Render/CNWithVoxelWalkerBody.cs` | 1 |
 | `CombatChatter` | `Traits/CombatChatter.cs` | 1 |
 | `DayNightCycle` | `Traits/World/DayNightCycle.cs` | 1 |
-| `DeployBotModule` | `Traits/BotModules/DeployBotModule.cs` | 1 |
 | `ExploresMapOnOwnerChange` | `Traits/ExploresMapOnOwnerChange.cs` | 1 |
 | `FaceTurretOnOrder` | `Traits/FaceTurretOnOrder.cs` | 1 |
 | `FadeOut` | `Traits/FadeOut.cs` | 1 |

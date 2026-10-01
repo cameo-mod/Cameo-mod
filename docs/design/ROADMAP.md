@@ -152,7 +152,10 @@ the fog sequencing.
     artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
   - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
-  - [ ] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+  - [~] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
+    (§9-12a/b already shipped in the V1.29.48 Fransbot revendor + `EnemySpawnBonus`; genericbot loop
+    closure — `WeightIntelAge` + `UseTargetIntelBias` behind `N_ca6_target_intel` — on
+    `devin/dawn/ca6-scout-target-intel`.)
   - [x] **S** (merged #647) Scout-rebuild rationing + garrisoned buildings valued as defences (AI_ARCHITECTURE
     §12.12; measured causes §12.11: `hard` builds ~72 Humvees and ~5 tanks per match, and feeds
     infantry into 0-value garrisons). **Claude.**

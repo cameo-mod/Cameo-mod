@@ -192,7 +192,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Radius around an engineer searched for a ground-transport pickup cell.")]
 		public readonly int GroundPickupSearchRadius = 3;
 
-		[Desc("Maximum distance from engineer to search for an LST pickup Beach.")]
+		[Desc("Maximum distance from engineer to search for a native-passable LST pickup handoff.")]
 		public readonly int LandingCraftPickupSearchRadius = 24;
 
 		[Desc("Minimum distance from capture target for transport drop planning.")]
@@ -201,7 +201,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum distance from capture target for transport drop planning.")]
 		public readonly int MaximumDropRadius = 8;
 
-		[Desc("Maximum distance from a capture target to search for an LST landing Beach.")]
+		[Desc("Maximum distance from a capture target to search for a native-passable LST landing handoff.")]
 		public readonly int LandingCraftDropSearchRadius = 18;
 
 		[Desc("Maximum radius around the target that the unloaded engineer must be able to path into.")]
@@ -210,10 +210,10 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum pickup/drop cells path-tested for one transport plan.")]
 		public readonly int MaximumCellCandidates = 32;
 
-		[Desc("Maximum source beach cells path-tested by one LST capture route proof. bounds the expensive pickup x drop fan-out.")]
+		[Desc("Maximum source handoff cells path-tested by one LST capture route proof. bounds the expensive pickup x drop fan-out.")]
 		public readonly int LandingCraftMaximumPickupCandidates = 3;
 
-		[Desc("Maximum destination beach cells path-tested for each accepted LST pickup candidate.")]
+		[Desc("Maximum destination handoff cells path-tested for each accepted LST pickup candidate.")]
 		public readonly int LandingCraftMaximumDropCandidates = 3;
 
 		[Desc("hard cap on APC pickup candidates. Ground capture planning must never expand into an unbounded pickup x drop search.")]
@@ -373,6 +373,11 @@ namespace OpenRA.Mods.Common.Traits
 			public int LastTransportLossExclusionRevision = -1;
 			public bool LandingCraftLegValidationPending;
 			public int LastProductionLossBlockRevision = -1;
+
+			// §19.6: requests arrive from OTHER modules' ticks — orders issued there would run
+			// under the caller's issuer and bounce off the order gate (holder is this module).
+			// Defer the first pickup/extraction orders to this module's own BotTick instead.
+			public bool InitialOrdersPending;
 
 			public CPos LastTransportProgressCell;
 			public int LastTransportProgressTick;
@@ -787,7 +792,10 @@ namespace OpenRA.Mods.Common.Traits
 				.Distinct()
 				.OrderBy(m => m.Passenger.ActorID)
 				.ToArray())
+			{
 				ManageMission(bot, mission);
+				FlushInitialOrders(bot, mission);
+			}
 		}
 
 		bool IsMissionCompatibleTransportRequest(Actor passenger, Actor target)
@@ -906,7 +914,7 @@ namespace OpenRA.Mods.Common.Traits
 			mission.StartedTick = world.WorldTick;
 			if (mission.Transport != null && !mission.Transport.Disposed && mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(null, mission.Transport);
 				if (Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
 					ApplyCaptureEscortHoldFire(mission);
 			}
@@ -943,9 +951,9 @@ namespace OpenRA.Mods.Common.Traits
 				((IFransCaptureTransportService)this).CancelCaptureTransport(bot, mission.Passenger);
 				return false;
 			}
-			if (Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
-				ApplyCaptureEscortHoldFire(mission);
-			QueueExtractionPickupMoves(bot, mission);
+			// §19.6: deferred to this module's own tick — these orders would carry the caller's
+			// issuer (SpecOps/seam) and bounce off the order gate.
+			mission.InitialOrdersPending = true;
 			FransBotLog.BotDebug(world, "{0}: reusable SpecOps extraction begins for {1} with {2}; rendezvous {3}/{4} then return toward {5}.",
 				player, passenger, mission.Transport, passengerCell, transportCell, mission.PickupTransportCell);
 			return true;
@@ -1150,7 +1158,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			var transport = mission.Transport;
 			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 			ReleaseTransport(mission);
 			mission.RunLegs = null;
 			mission.RunDeliveredTargets.Clear();
@@ -1186,7 +1194,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (mission.IsRunMission)
 			{
 				if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead && passenger.TraitOrDefault<Passenger>()?.Transport == null)
-					passenger.CancelActivity();
+					QueueStopOrder(bot, passenger);
 				ReleaseRunLeg(mission, passenger);
 				if (mission.RunLegs.Count == 0)
 					EndRunMission(bot, mission, BotMissionAttemptState.Released, "dropped");
@@ -1200,7 +1208,7 @@ namespace OpenRA.Mods.Common.Traits
 					"{0}: capture transport cancellation found vanished/destroyed transport {1} for {2}; mission is released without reading traits from the destroyed actor.",
 					player, transport, passenger);
 				if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead)
-					passenger.CancelActivity();
+					QueueStopOrder(bot, passenger);
 
 				ReleaseTransport(mission);
 				missions.Remove(passenger);
@@ -1214,9 +1222,9 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead)
-				passenger.CancelActivity();
+				QueueStopOrder(bot, passenger);
 			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 
 			ReleaseTransport(mission);
 			missions.Remove(passenger);
@@ -1555,6 +1563,25 @@ namespace OpenRA.Mods.Common.Traits
 				ReleaseRunLeg(mission, leg.Passenger);
 		}
 
+		// §19.6 order-gate hygiene: a service call arriving on another module's tick can only
+		// mutate mission bookkeeping — the caller's issuer would make our orders look foreign.
+		// The first physical orders therefore ride this flag and land here, under our own issuer.
+		void FlushInitialOrders(IBot bot, TransportMission mission)
+		{
+			if (!mission.InitialOrdersPending)
+				return;
+
+			mission.InitialOrdersPending = false;
+			if (mission.State == MissionState.Pickup)
+				QueuePickupMoves(bot, mission);
+			else if (mission.State == MissionState.ExtractPickup)
+				QueueExtractionPickupMoves(bot, mission);
+
+			if (mission.Transport != null && mission.Transport.IsInWorld && !mission.Transport.Disposed &&
+				Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
+				ApplyCaptureEscortHoldFire(mission);
+		}
+
 		void ManageMission(IBot bot, TransportMission mission)
 		{
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "Transport.ManageMission");
@@ -1832,9 +1859,6 @@ namespace OpenRA.Mods.Common.Traits
 					ResetTransportMoveState(mission);
 					ClearWaitingTransportFailure(mission.Passenger, mission.Target);
 
-					if (Info.GroundTransportTypes.Contains(transport.Info.Name))
-						ApplyCaptureEscortHoldFire(mission);
-
 					planningPass.Success = true;
 					planningPass.SelectedTransport = transport;
 					planningPass.SelectedPickup = plan.PickupTransportCell;
@@ -1846,7 +1870,11 @@ namespace OpenRA.Mods.Common.Traits
 						player, transport, mission.Passenger, plan.PickupPassengerCell,
 						plan.PickupTransportCell, plan.DropTransportCell, mission.Target);
 
-					QueuePickupMoves(bot, mission);
+					// §19.6: requests can arrive on ANOTHER module's tick — orders issued here carry
+					// the caller's issuer and bounce off the order gate (holder is this module). The
+					// BotTick loop flushes them under our own issuer — still same tick when assignment
+					// runs inside the manage loop.
+					mission.InitialOrdersPending = true;
 					return true;
 				}
 			}
@@ -2231,7 +2259,7 @@ namespace OpenRA.Mods.Common.Traits
 				foreach (var leg in mission.RunLegs.Where(leg => !IsLegPassengerLoaded(mission, leg.Passenger)).ToArray())
 				{
 					if (!leg.Passenger.Disposed && leg.Passenger.IsInWorld && !leg.Passenger.IsDead)
-						leg.Passenger.CancelActivity();
+						QueueStopOrder(bot, leg.Passenger);
 					FransBotLog.BotDebug(world,
 						"{0}: capture RUN {1} departs without {2}; boarding stalled and the craft already carries engineers — this leg walks to {3}.",
 						player, mission.RunMissionId, leg.Passenger, leg.Target);
@@ -2510,7 +2538,7 @@ namespace OpenRA.Mods.Common.Traits
 			else if (!mission.Passenger.Disposed && mission.Passenger.IsInWorld && !mission.Passenger.IsDead &&
 				!mission.Transport.Disposed && mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(null, mission.Transport);
 				ApplyCaptureEscortHoldFire(mission);
 			}
 
@@ -2591,7 +2619,7 @@ namespace OpenRA.Mods.Common.Traits
 			}
 			else if (mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(bot, mission.Transport);
 				ApplyCaptureEscortHoldFire(mission);
 			}
 
@@ -2668,9 +2696,11 @@ namespace OpenRA.Mods.Common.Traits
 				strategicMapService.TryGetNavalRegionId(transportMobile.ToCell, out transportRegion);
 			var candidateLimit = landingCraft ? Info.LandingCraftMaximumPickupCandidates : int.MaxValue;
 			var pickupSearchRadius = landingCraft ? Info.LandingCraftPickupSearchRadius : Math.Max(2, Info.GroundPickupSearchRadius);
-			foreach (var cell in world.Map.FindTilesInAnnulus(passenger.Location, 1, pickupSearchRadius)
+			var pickupCells = landingCraft
+				? AmphibiousHandoffCellsNear(passenger.Location, pickupSearchRadius)
+				: world.Map.FindTilesInAnnulus(passenger.Location, 1, pickupSearchRadius);
+			foreach (var cell in pickupCells
 				.Where(world.Map.Contains)
-				.Where(c => !landingCraft || IsBeach(c))
 				.Where(c => transportMobile.CanEnterCell(c, check: BlockedByActor.Immovable) && transportMobile.CanStayInCell(c))
 				.Where(c => !landingCraft || !hasTransportRegion ||
 					(strategicMapService.TryGetNavalRegionId(c, out var region) && region == transportRegion))
@@ -2685,6 +2715,7 @@ namespace OpenRA.Mods.Common.Traits
 					continue;
 
 				foreach (var adjacent in AdjacentCells(cell).Where(c => world.Map.Contains(c) &&
+					(!landingCraft || strategicMapService.IsAmphibiousHandoff(c, cell)) &&
 					passengerMobile.CanEnterCell(c, check: BlockedByActor.Immovable) && passengerMobile.CanStayInCell(c) &&
 					!riskModelService.EvaluateCell(passenger, c, FransRiskRole.Capturer, FransRiskTolerance.Cautious).IsCritical &&
 					(!landingCraft || HasPassengerPath(passenger, passengerMobile, passengerMobile.ToCell, c))))
@@ -2706,7 +2737,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (IsAirTransport(mission.Transport) && Info.EnableAirTransportRiskRouting)
 				{
 					if (!StartAirMove(bot, mission, mission.ExtractionTransportCell, "reusable extraction pickup"))
-						mission.Transport.CancelActivity();
+						QueueStopOrder(bot, mission.Transport);
 				}
 				else
 					QueueTransportMove(bot, mission.Transport, mission.ExtractionTransportCell);
@@ -2737,7 +2768,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (IsAirTransport(mission.Transport) && Info.EnableAirTransportRiskRouting)
 				{
 					if (!StartAirMove(bot, mission, mission.PickupTransportCell, "reusable extraction return"))
-						mission.Transport.CancelActivity();
+						QueueStopOrder(bot, mission.Transport);
 				}
 				else
 					QueueTransportMove(bot, mission.Transport, mission.PickupTransportCell);
@@ -2900,7 +2931,7 @@ namespace OpenRA.Mods.Common.Traits
 					(mission.EscortThreat.Location - mission.Passenger.Location).LengthSquared >
 						Info.CaptureEscortThreatRadius * Info.CaptureEscortThreatRadius)
 				{
-					transport.CancelActivity();
+					QueueStopOrder(bot, transport);
 					mission.EscortThreat = null;
 					ApplyCaptureEscortHoldFire(mission);
 				}
@@ -3028,7 +3059,7 @@ namespace OpenRA.Mods.Common.Traits
 			var distanceSquared = (transport.Location - mission.PickupTransportCell).LengthSquared;
 			if (distanceSquared <= Info.PickupArrivalRadius * Info.PickupArrivalRadius)
 			{
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 				ReleaseTransport(mission);
 				missions.Remove(mission.Passenger);
 				return;
@@ -3408,13 +3439,13 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			// APC only makes sense when a land route exists. TRAN is geography-independent.
-			// LST production is only requested when both the engineer and target have nearby Beach.
+			// LST production is only requested when both endpoints have a known native-passable handoff.
 			if (Info.GroundTransportTypes.Contains(type) && !landPathAvailable)
 				return false;
 
 			if (Info.LandingCraftTypes.Contains(type) &&
-				(!HasNearbyBeach(passenger.Location, Info.LandingCraftPickupSearchRadius) ||
-				 !HasNearbyBeach(target.Location, Info.LandingCraftDropSearchRadius)))
+				(!HasNearbyAmphibiousHandoff(passenger.Location, Info.LandingCraftPickupSearchRadius) ||
+				 !HasNearbyAmphibiousHandoff(target.Location, Info.LandingCraftDropSearchRadius)))
 				return false;
 
 			var queues = AIUtils.FindQueuesByCategory(player);
@@ -3471,8 +3502,8 @@ namespace OpenRA.Mods.Common.Traits
 				return landPathAvailable;
 
 			if (Info.LandingCraftTypes.Contains(transport.Info.Name))
-				return HasNearbyBeach(passenger.Location, Info.LandingCraftPickupSearchRadius) &&
-					HasNearbyBeach(target.Location, Info.LandingCraftDropSearchRadius);
+				return HasNearbyAmphibiousHandoff(passenger.Location, Info.LandingCraftPickupSearchRadius) &&
+					HasNearbyAmphibiousHandoff(target.Location, Info.LandingCraftDropSearchRadius);
 
 			return true;
 		}
@@ -3968,9 +3999,8 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			var hasTransportRegion = strategicMapService.TryGetNavalRegionId(craftMobile.ToCell, out var transportRegion);
-			foreach (var pickupBeach in world.Map.FindTilesInAnnulus(
-					passenger.Location, 1, Info.LandingCraftPickupSearchRadius)
-				.Where(IsBeach)
+			foreach (var pickupHandoff in AmphibiousHandoffCellsNear(
+					passenger.Location, Info.LandingCraftPickupSearchRadius)
 				.Where(c => !hasTransportRegion || (strategicMapService.TryGetNavalRegionId(c, out var region) && region == transportRegion))
 				.Where(c => craftMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
 					craftMobile.CanStayInCell(c) &&
@@ -3979,11 +4009,12 @@ namespace OpenRA.Mods.Common.Traits
 				.Take(Info.LandingCraftMaximumPickupCandidates))
 			{
 				planningPass.RetainedPickupCount++;
-				if (!TryFindPath(transport, craftMobile, craftMobile.ToCell, pickupBeach, out _))
+				if (!TryFindPath(transport, craftMobile, craftMobile.ToCell, pickupHandoff, out _))
 					continue;
 
-				CPos? passengerPickup = AdjacentCells(pickupBeach)
-					.Where(c => passengerMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
+				CPos? passengerPickup = AdjacentCells(pickupHandoff)
+					.Where(c => strategicMapService.IsAmphibiousHandoff(c, pickupHandoff) &&
+						passengerMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
 						passengerMobile.CanStayInCell(c))
 					.OrderBy(c => (c - passenger.Location).LengthSquared)
 					.Cast<CPos?>()
@@ -3992,9 +4023,8 @@ namespace OpenRA.Mods.Common.Traits
 				if (!passengerPickup.HasValue)
 					continue;
 
-				foreach (var dropBeach in world.Map.FindTilesInAnnulus(
-						target.Location, 1, Info.LandingCraftDropSearchRadius)
-					.Where(IsBeach)
+				foreach (var dropHandoff in AmphibiousHandoffCellsNear(
+						target.Location, Info.LandingCraftDropSearchRadius)
 					.Where(c => !hasTransportRegion || (strategicMapService.TryGetNavalRegionId(c, out var region) && region == transportRegion))
 					.Where(c => craftMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
 						craftMobile.CanStayInCell(c) &&
@@ -4003,13 +4033,14 @@ namespace OpenRA.Mods.Common.Traits
 					.Take(Info.LandingCraftMaximumDropCandidates))
 				{
 					planningPass.RetainedDropCount++;
-					if (!TryFindPath(transport, craftMobile, pickupBeach, dropBeach, out _))
+					if (!TryFindPath(transport, craftMobile, pickupHandoff, dropHandoff, out _))
 						continue;
 
-					if (FindPassengerExitCell(passenger, passengerMobile, dropBeach, target, planningPass) == null)
+					if (FindPassengerExitCell(passenger, passengerMobile, dropHandoff, target, planningPass,
+						requireAmphibiousHandoff: true) == null)
 						continue;
 
-					plan = new TransportPlan(passengerPickup.Value, pickupBeach, dropBeach);
+					plan = new TransportPlan(passengerPickup.Value, pickupHandoff, dropHandoff);
 					return true;
 				}
 			}
@@ -4018,10 +4049,11 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		CPos? FindPassengerExitCell(Actor passenger, Mobile passengerMobile, CPos transportCell, Actor target,
-			PassengerTargetProofPlanningPass planningPass)
+			PassengerTargetProofPlanningPass planningPass, bool requireAmphibiousHandoff = false)
 		{
 			foreach (var exit in AdjacentCells(transportCell)
-				.Where(c => passengerMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
+				.Where(c => (!requireAmphibiousHandoff || strategicMapService.IsAmphibiousHandoff(c, transportCell)) &&
+					passengerMobile.CanEnterCell(c, check: BlockedByActor.Immovable) &&
 					passengerMobile.CanStayInCell(c))
 				.OrderBy(c => (c - target.Location).LengthSquared))
 			{
@@ -4156,14 +4188,21 @@ namespace OpenRA.Mods.Common.Traits
 				.Where(c => c != cell && world.Map.Contains(c));
 		}
 
-		bool IsBeach(CPos cell)
+		IEnumerable<CPos> AmphibiousHandoffCellsNear(CPos cell, int radius)
 		{
-			return world.Map.Contains(cell) && world.Map.GetTerrainInfo(cell).Type == "Beach";
+			if (radius <= 0)
+				return Enumerable.Empty<CPos>();
+
+			var nearby = world.Map.FindTilesInAnnulus(cell, 1, radius).ToHashSet();
+			return strategicMapService.AmphibiousHandoffs
+				.Select(handoff => handoff.NavalCell)
+				.Distinct()
+				.Where(nearby.Contains);
 		}
 
-		bool HasNearbyBeach(CPos cell, int radius)
+		bool HasNearbyAmphibiousHandoff(CPos cell, int radius)
 		{
-			return world.Map.FindTilesInAnnulus(cell, 1, radius).Any(IsBeach);
+			return AmphibiousHandoffCellsNear(cell, radius).Any();
 		}
 
 		bool IsAirTransport(Actor transport)
@@ -4464,7 +4503,7 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.BotDebug(world,
 				"{0}: capture transport {1} enters RETREAT for loaded {2}: {3}; no legal unload cell is currently available, so it holds and retries only after the bounded RETREAT interval.",
 				player, transport, mission.Passenger, reason);
-			transport.CancelActivity();
+			QueueStopOrder(bot, transport);
 		}
 
 		void ManageRetreat(IBot bot, TransportMission mission)
@@ -4552,7 +4591,7 @@ namespace OpenRA.Mods.Common.Traits
 					player, fallback, mission.Passenger);
 			}
 			else
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 		}
 
 		bool TryFindRetreatDrop(TransportMission mission, bool requireNonCritical, out CPos drop)
