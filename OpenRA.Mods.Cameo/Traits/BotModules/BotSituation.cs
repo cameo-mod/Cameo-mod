@@ -112,6 +112,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// away from the base; summed over every squad manager, disabled personalities included.
 		internal SortedDictionary<string, int> LossesByRole = new(StringComparer.Ordinal), AwayLossesByRole = new(StringComparer.Ordinal);
 		internal string OwnPersonality = "";
+
+		// UT-1 (AI_DEEP_RESEARCH.md §5.1), record-only: the bipolar posture axes as of this
+		// snapshot, each [0,100] with 100 the SECOND-named pole. Consumers read them through
+		// IBotUtilityAxes on the master module, not from here.
+		internal int UtilityTurtleRush = IBotUtilityAxes.Neutral;
+		internal int UtilityTechRushExpansion = IBotUtilityAxes.Neutral;
+		internal int UtilitySteamrollerGuerrilla = IBotUtilityAxes.Neutral;
 	}
 
 	internal sealed class MasterAiBotSavedState
@@ -265,6 +272,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks for which a taken mission pair remains reserved from other consumers.")]
 		public readonly int MissionReservationTicks = 1500;
 
+		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): per-personality resting point of the",
+			"Turtle<->Rush utility axis on [0,100] — 100 = Rush. Keyed by personality name",
+			"(rush, turtle, ...); a personality missing here rests at the 50 neutral point.")]
+		public readonly Dictionary<string, int> UtilityTurtleRushRest = new(StringComparer.Ordinal);
+
+		[Desc("UT-1: per-personality resting point of the TechRush<->Expansion axis,",
+			"100 = Expansion. Same keying and neutral default as UtilityTurtleRushRest.")]
+		public readonly Dictionary<string, int> UtilityTechRushExpansionRest = new(StringComparer.Ordinal);
+
+		[Desc("UT-1: per-personality resting point of the Steamroller<->Guerrilla axis,",
+			"100 = Guerrilla. Same keying and neutral default as UtilityTurtleRushRest.")]
+		public readonly Dictionary<string, int> UtilitySteamrollerGuerrillaRest = new(StringComparer.Ordinal);
+
+		[Desc("UT-1: percent of the distance to each axis target (rest + inputs) the published",
+			"axis travels per snapshot — the EMA that decays an axis back to rest once its",
+			"inputs go quiet. 0 freezes the axes at their starting point, 100 tracks instantly.")]
+		public readonly int UtilityAxisDecayPercent = 5;
+
+		[Desc("UT-1: percent scaling on each axis's summed input terms before they move the",
+			"target off its rest. 0 pins every axis at rest (pure personality), 100 = the",
+			"documented term caps.")]
+		public readonly int UtilityInputWeightPercent = 100;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -273,6 +303,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			ValidateDemandThreshold("AntiInfantry", AntiInfantryDemandOn, AntiInfantryDemandOff);
 			ValidateDemandThreshold("Detector", DetectorDemandOn, DetectorDemandOff);
 			ValidateDemandThreshold("Artillery", ArtilleryDemandOn, ArtilleryDemandOff);
+			ValidateUtilityRest(nameof(UtilityTurtleRushRest), UtilityTurtleRushRest);
+			ValidateUtilityRest(nameof(UtilityTechRushExpansionRest), UtilityTechRushExpansionRest);
+			ValidateUtilityRest(nameof(UtilitySteamrollerGuerrillaRest), UtilitySteamrollerGuerrillaRest);
+			if (UtilityAxisDecayPercent < 0 || UtilityAxisDecayPercent > 100)
+				throw new YamlException("UtilityAxisDecayPercent must be within [0,100].");
+			if (UtilityInputWeightPercent < 0 || UtilityInputWeightPercent > 100)
+				throw new YamlException("UtilityInputWeightPercent must be within [0,100].");
 		}
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
@@ -282,9 +319,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (off > on)
 				throw new YamlException($"{name}DemandOff must be less than or equal to {name}DemandOn.");
 		}
+
+		static void ValidateUtilityRest(string name, IReadOnlyDictionary<string, int> rests)
+		{
+			if (rests == null)
+				return;
+			foreach (var kv in rests)
+				if (kv.Value < 0 || kv.Value > 100)
+					throw new YamlException($"{name}[{kv.Key}] must be within [0,100].");
+		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotUtilityAxes
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -317,6 +363,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
 		string[] lastIssuedCounterDemands = Array.Empty<string>();
 
+		// UT-1 (AI_DEEP_RESEARCH.md §5.1): the EMA-smoothed posture axes, refreshed
+		// every snapshot in Rebuild and published through IBotUtilityAxes.
+		readonly BotUtilityAxes utilityAxes = new();
+
 		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
 		long prevLedgerCreatedCost = -1, prevEconDestroyed;
 		int prevSnapshotTick = -1, prevAttacksLaunched, firstAttackTick = -1;
@@ -329,6 +379,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
+
+		// UT-1: the cooked posture axes for consumers; a disabled master reads as neutral.
+		int IBotUtilityAxes.UtilityTurtleRush => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.TurtleRush;
+		int IBotUtilityAxes.UtilityTechRushExpansion => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.TechRushExpansion;
+		int IBotUtilityAxes.UtilitySteamrollerGuerrilla => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.SteamrollerGuerrilla;
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
 			? Array.Empty<BotMission>()
 			: missions.Where(m => (!missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
@@ -624,6 +679,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var combatRatios = CombatRatios(ownActors);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
 			var ownHarvesters = ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
+			var ownRefineries = ownBuildings.Count(b => b.Info.HasTraitInfo<RefineryInfo>());
 			var enemies = player.World.Players.Where(IsEligible)
 				.Where(p => p != player && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.ToArray();
@@ -868,6 +924,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
 
+			// UT-1 (AI_DEEP_RESEARCH.md §5.1): fold this snapshot into the bipolar posture
+			// axes. Every input is fog-honest — enemy figures are the remembered profile
+			// sums, own figures are always visible. Cluster counts use the same ClusterRadius
+			// rule on both sides.
+			var utilitySample = new UtilityAxisSample
+			{
+				CombatRatioDefendedPct = combatRatios.Defended,
+				EnemyArmyValue = enemyArmy,
+				EnemyPressureValue = profiles.Values.Sum(p => p.PressureValue),
+				EnemyDefenceValue = profiles.Values.Sum(p => p.DefenceValue),
+				EnemyExpansionClusters = profiles.Values.Where(p => p.Alive).Sum(p => p.ExpansionClusters),
+				EnemyStealthShare = enemyArmy == 0 ? 0
+					: (int)(profiles.Values.Sum(p => (long)p.ArmyValue * p.StealthShare) / enemyArmy),
+				OwnEconomy = ownHarvesters + ownRefineries * 2,
+				OwnExpansionClusters = ClusterCount(ownBuildings
+					.Where(b => b.Info.HasTraitInfo<BaseBuildingInfo>() || b.Info.HasTraitInfo<RefineryInfo>())
+					.Select(b => b.Location)),
+				OwnDeathsCostWindow = DeathsCostWindow,
+				OwnKillsCostWindow = KillsCostWindow
+			};
+			utilityAxes.Observe(utilitySample, currentPersonality, Info);
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -905,7 +983,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				RepairOrders = repairOrders,
 				RepairSweepOrders = repairSweepOrders,
 				RepairTogglesAvoided = repairTogglesAvoided,
-				OwnPersonality = CurrentPersonality()
+				OwnPersonality = CurrentPersonality(),
+				UtilityTurtleRush = utilityAxes.TurtleRush,
+				UtilityTechRushExpansion = utilityAxes.TechRushExpansion,
+				UtilitySteamrollerGuerrilla = utilityAxes.SteamrollerGuerrilla
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
