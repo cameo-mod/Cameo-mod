@@ -2213,6 +2213,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var lead = personality == "steamroller" ? situation.SteamrollerLead
 				: personality == "rush" ? situation.RushLead
+				: personality == "guerrilla" ? situation.GuerrillaLead
 				: 1.0;
 			return LeadLeanMultiplier(lead, maxLeanPercent);
 		}

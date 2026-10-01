@@ -51,6 +51,37 @@
 - Tests: `DemandScalesWithSafeTargetsAndCapsAtTheMaximum` (cap is a ceiling not
   a target; zero safe targets always means zero demand) +
   `DemandIsDefensiveAgainstBadConfigAndNegativeCounts`. 591/591 green.
+# 2026-10-01 — DAWN: PL-2 guerrilla lead consumer — trailing map control raises the scout cap
+
+- §12.14 gives each personality one lead and a driver to lean on while it
+  trails. Guerrilla's lead (`own.guerrilla_lead`, #743, telemetry on master)
+  measures fresh-intel regions per remembered-enemy region; its driver column
+  is "scouts, guerrilla squads". This lands the scout leg.
+- `PersonalityLeadLean` now answers "guerrilla" from `Situation.GuerrillaLead`
+  — one extra arm in the same seam NOVA's PL-1 built, no new provider.
+- `ScoutBotModule` collects `IBotPersonalityLeadProvider`s (the same
+  `PlayerActor.TraitsImplementing` pattern the squad manager and unit builder
+  use) and computes `EffectiveMaxScouts = MaxScouts + (1 - lean) x
+  GuerrillaLeadExtraScouts` (2), rounding to whole scouts. lean >= 1 — flag
+  off, wrong personality, or at target — keeps `MaxScouts` bit-identical.
+- Scouts close the loop honestly: they are the lead's numerator driver, so a
+  trailing guerrilla literally buys back map coverage; nothing reads the
+  enemy side beyond the remembered-presence the lead already counts.
+- No new switch group: the consumer inherits `G_personality_leads` /
+  `UsePersonalityLeads` — the group now carries three consumers (cash floors,
+  attack delay, scout cap), all under the same §12.14 contract.
+- Second leg, same deficit signal: `SquadManagerBotModuleCA`'s `JoinGuerrilla`
+  roll rises toward 100 while the lead trails (`EffectiveJoinGuerrilla`) —
+  raiders crossing the map are incidental scouts feeding `regions_fresh`.
+  A configured 0 stays 0: the lean never revives guerrilla squads for a
+  personality that has none. This leans the FILL; UT-2's axis keeps the
+  squad CAP — different knobs, no double-count.
+- No new switch group: the consumer inherits `G_personality_leads` /
+  `UsePersonalityLeads` — the group now carries four consumers (cash floors,
+  attack delay, scout cap, join chance), all under the same §12.14 contract.
+- Tests: `TrailingLeadRaisesTheScoutCap` + `TheGuerrillaLeadReachesTheConsumerSeam`
+  + `TrailingLeadRaisesTheJoinChanceTowardFull` (linear-to-100, at-target and
+  JoinGuerrilla-0 exact). 592/592 green.
 
 # 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
 

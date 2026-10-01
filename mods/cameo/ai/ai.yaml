@@ -3560,6 +3560,9 @@ Player:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
 		EnemySpawnBonus: 20000
+		# PL-2 (§12.14): while the guerrilla lead trails, the effective MaxScouts grows by up to
+		# this many, scaled by the deficit. Inert unless switch G arms UsePersonalityLeads.
+		GuerrillaLeadExtraScouts: 2
 		# CA-6 (AI_ARCHITECTURE 12.9): scouts refresh the current main target's footprint first --
 		# the intel that target choice and raid bidding consume. Switch group N_ca6_target_intel.
 		UseTargetIntelBias: false

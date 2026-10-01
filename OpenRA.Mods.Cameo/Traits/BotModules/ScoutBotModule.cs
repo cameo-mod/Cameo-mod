@@ -67,6 +67,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Interest added to a region remembered as occupied by the current main target.")]
 		public readonly int TargetIntelBonus = 2000;
 
+		[Desc("PL-2 (§12.14): extra scout cap added while the guerrilla lead trails, scaled by the",
+			"deficit — behind on map control means leaning on scouts, the lead's driver. Inert unless",
+			"UsePersonalityLeads is armed and the running personality is guerrilla.")]
+		public readonly int GuerrillaLeadExtraScouts = 2;
+
 		public override object Create(ActorInitializer init) { return new ScoutBotModule(init.Self, this); }
 	}
 
@@ -94,6 +99,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		ResourceMapBotModule resourceMap;
 		IBotMainTargetProvider mainTargetProvider;
 		IBotRequestUnitProduction[] unitBuilders;
+		IBotPersonalityLeadProvider[] leadProviders;
 		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
 		List<UnitWposWrapper> idlePool;
@@ -114,6 +120,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstOrDefault();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
+			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
 		}
 
@@ -238,9 +245,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// LC1: three scans — survives the order latency, frees a dropped scout within seconds.
 		int ScoutLeaseTicks => 3 * System.Math.Max(1, Info.ScanInterval);
 
+		// PL-2 (§12.14): behind on the guerrilla lead grows the cap toward base + extra,
+		// linear in the deficit. lean >= 1 keeps the configured cap bit-identical.
+		internal static int EffectiveMaxScouts(int baseMax, double lean, int extra) =>
+			baseMax + (lean >= 1 ? 0 : (int)Math.Round((1 - Math.Max(0, lean)) * extra));
+
 		void ClaimScouts(IBot bot)
 		{
-			if (Info.ScoutUnitTypes.Count == 0 || scouts.Count >= Info.MaxScouts)
+			var maxScouts = EffectiveMaxScouts(Info.MaxScouts,
+				BotPersonalityLeads.Lean(leadProviders, "guerrilla"), Info.GuerrillaLeadExtraScouts);
+			if (Info.ScoutUnitTypes.Count == 0 || scouts.Count >= maxScouts)
 				return;
 
 			var claimedAny = false;
@@ -248,7 +262,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				foreach (var candidate in idlePool.ToArray())
 				{
-					if (scouts.Count >= Info.MaxScouts)
+					if (scouts.Count >= maxScouts)
 						break;
 
 					var actor = candidate.Actor;
@@ -269,7 +283,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (!claimedAny && scouts.Count < Info.MaxScouts && MayRequest(world.WorldTick, lastScoutRequestTick, Info.ScoutRebuildCooldownTicks)
+			if (!claimedAny && scouts.Count < maxScouts && MayRequest(world.WorldTick, lastScoutRequestTick, Info.ScoutRebuildCooldownTicks)
 					&& RequestScout(bot))
 				lastScoutRequestTick = world.WorldTick;
 		}
