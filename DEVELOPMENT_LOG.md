@@ -55,6 +55,49 @@
 - UT-4 merged to master (`4944417e5`, PR #752); DAWN #750 (T) + #751 (PL-2 both
   legs) reviewed and merged — master `523e29b90`, 598/598, boot PASS.
 
+# 2026-10-02 — DAWN: TC-3 2v2 match harness (--team-size 2)
+
+- `tools/ai/run_ai_match_batch.py` gains `--team-size 2`: `--bot-a`/`--bot-b`
+  take a comma-separated bot type per seat (`hard,classic` mixes a team; one
+  name duplicates across both slots — a count ≠ team_size fails fast).
+  `build_matchups` emits `team_a`/`team_b` + `slots_a`/`slots_b` (repeat
+  parity and `--swap-bots` alternate the PAIR exactly like the 1v1 seat axes)
+  and `ai_duo_<fa>_<bots>__vs__<fb>_<bots>` variants.
+- Default doubles map is the shipped `mods/cameo/maps/_ra_doubles.oramap` —
+  four mpspawns, consecutive Multi pairs are the teams (Multi0+Multi1 vs
+  Multi2+Multi3). `patch_mp_block` append-merges `Allies:` (the teammate) and
+  BOTH enemy refs into `Enemies:` with `Creeps` kept first — the engine
+  resolves map-side stances per ORDERED pair
+  (`CreateMapPlayers.SetupPlayerMasks`), so both directions must declare or
+  the same-Team lobby default wins. Referee seat, rules.yaml copy,
+  TimeLimitDefault patch and uid-salt are unchanged.
+- Team verdict for aggregation: a team won iff ANY member record reads `won`
+  (ConquestVictoryConditions: a side loses only when every non-ally is Lost;
+  an early-dead teammate still records `lost`). Each 2v2 match appends four
+  schema-2 records sharing one game_uid — the existing writer already emits
+  `allies`/`opponents`; `bot_outcomes` rows now carry both lists, plus a
+  `team_scoreboard` (sorted "+"-joined member bot_types; spawn sub-table on
+  the sorted member-spawn pair) printed + written to batch_summary.json when
+  team_size>1. The 1v1 scoreboard line is skipped for teams (its
+  first-opponent pairing would read degenerate).
+- `tools/ai/run_league.py` spec gains `"team_size": 2` (validated 1|2): cells
+  stay candidate×member×map×faction but launch homogeneous duos
+  (`--bot-a c,c --bot-b m,m`), and `merge_cell` dedupes to ONE datapoint per
+  match uid with the same team verdict; spawn axis = the sorted member-spawn
+  pair string.
+- Verification: `--dry-run` 2v2 matrix (both seat pairs covered across
+  repeats/swaps) + 1v1 dry-run byte-identical; offline variant inspection —
+  all four Multi refs Playable:False + Bot + Faction + HomeLocation,
+  symmetric Allies/Enemies with `Creeps` preserved, Referee block present,
+  four `<ref>_base` starting-actor groups.
+- Live 2v2 smoke (batch `--support-dir` under the agent's temp dir): `hard,hard` vs `classic,classic` on
+  `_ra_doubles.oramap` — ok in 540s, four records, team elimination at
+  43,284 ticks (no timer): Multi0+Multi1 (hard) `won` with allies/opponents
+  wired exactly as declared; Multi2+Multi3 (classic) `lost`. Team
+  scoreboard: `hard+hard 1-0 (seats 0,1)` + symmetric mirror row. Zero
+  exceptions — the headless match is the commit's boot-gate evidence (game
+  loaded the mod, ran a world to GameOver, exited clean).
+
 # 2026-10-01 — NOVA: UT-4 expansion appetite (switch U_ut4_expansion_appetite)
 
 - `UseUtilityExpansionAppetite` on `ExpansionPlannerBotModule`: the

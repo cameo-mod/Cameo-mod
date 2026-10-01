@@ -16,8 +16,15 @@ League spec (JSON):
       "factions": ["td_gdi"],
       "repeats": 4,
       "swap_bots": true,
-      "time_limit": 3
+      "time_limit": 3,
+      "team_size": 1
     }
+
+With `"team_size": 2` every side is a homogeneous duo (2v2): the cells pass
+`--team-size 2 --bot-a <candidate>,<candidate> --bot-b <member>,<member>` to
+the batch runner on a 4-player doubles map (consecutive Multi pairs are the
+teams), and aggregation dedupes to one datapoint per match — a team won iff
+any candidate-side record reads "won".
 
 `members` are the opposing bot types. The classic omniscient reference is
 the standing anchor; the `exploit_*` types are the full genericbot stack
@@ -71,6 +78,9 @@ def load_spec(path: pathlib.Path) -> dict:
     spec.setdefault("repeats", 4)
     spec.setdefault("swap_bots", True)
     spec.setdefault("time_limit", 3)
+    spec.setdefault("team_size", 1)
+    if spec["team_size"] not in (1, 2):
+        raise ValueError(f"spec 'team_size' must be 1 or 2, got {spec['team_size']}")
     for m in spec["maps"]:
         resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else REPO_ROOT / m
         if not resolved.exists():
@@ -110,7 +120,8 @@ def cell_summary(cell_dir: pathlib.Path) -> dict | None:
     }
 
 
-def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, acc: dict) -> None:
+def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, acc: dict,
+               team_size: int = 1) -> None:
     """Fold one cell into the league accumulators.
 
     Reads `batch_results.jsonl` bot_outcomes rows (one per player per match,
@@ -118,6 +129,12 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     rows — the mirror member rows describe the same matches, so taking both
     would double-count. `spawn` on the row is already the candidate's physical
     spawn index (slot-derived, #619).
+
+    team_size=2 (2v2): the same rows carry the full `allies`/`opponents`
+    lists. Each match (game_uid = `record_id.rsplit("|",1)[0]`) counts ONCE:
+    the candidate team won iff any of its member records reads "won" (an
+    early-dead teammate still records "lost"), and the spawn axis is the
+    team's sorted member-spawn pair ("0,1").
     """
     data = cell_summary(cell_dir)
     if data is None:
@@ -136,6 +153,35 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     results_path = cell_dir / "batch_results.jsonl"
     if not results_path.is_file():
         acc["cells_missing"].append(cell["name"] + " (no batch_results.jsonl)")
+        return
+
+    if team_size == 2:
+        # One datapoint per match uid: collect the candidate-side rows of each
+        # match (both member rows qualify — the duo is homogeneous) and take
+        # the team verdict "any member won".
+        match_rows: dict[str, list[dict]] = {}
+        for line in results_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            match = json.loads(line)
+            for row in match.get("bot_outcomes") or []:
+                if row.get("bot_type") != candidate:
+                    continue
+                opponents = [o.get("bot_type") for o in row.get("opponents") or []]
+                if member not in opponents:
+                    continue
+                uid = str(row.get("record_id") or "").rsplit("|", 1)[0]
+                match_rows.setdefault(uid, []).append(row)
+        for uid, rows in match_rows.items():
+            won = any(r.get("outcome") == "won" for r in rows)
+            acc["won" if won else "lost"] += 1
+            per = acc["per_member"].setdefault(member, {"won": 0, "lost": 0, "spawn": {}})
+            per["won" if won else "lost"] += 1
+            spawn = ",".join(sorted(str(r.get("spawn")) for r in rows if r.get("spawn") is not None))
+            if spawn:
+                for table in (acc["spawn"], per["spawn"]):
+                    slot = table.setdefault(spawn, [0, 0])
+                    slot[0 if won else 1] += 1
         return
 
     seen = set()
@@ -179,7 +225,8 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
     for cell in league_cells(spec):
         name = f"{spec['candidate']}_vs_{cell['member']}__{cell['faction']}__{pathlib.Path(cell['map']).stem}"
         cell["name"] = name
-        merge_cell(league_dir / name, cell, spec["candidate"], cell["member"], acc)
+        merge_cell(league_dir / name, cell, spec["candidate"], cell["member"], acc,
+                   team_size=spec.get("team_size", 1))
 
     total = acc["won"] + acc["lost"]
     lo, hi = wilson(acc["won"], total)
@@ -290,10 +337,11 @@ def main() -> int:
 
     for index, cell in enumerate(cells, 1):
         cell_dir = league_dir / cell["name"]
+        team_size = spec.get("team_size", 1)
         cmd = [
             sys.executable, str(BATCH_RUNNER),
-            "--bot-a", spec["candidate"],
-            "--bot-b", cell["member"],
+            "--bot-a", ",".join([spec["candidate"]] * team_size),
+            "--bot-b", ",".join([cell["member"]] * team_size),
             "--map", str(REPO_ROOT / cell["map"]) if not pathlib.Path(cell["map"]).is_absolute() else cell["map"],
             "--factions", cell["faction"],
             "--repeats", str(spec["repeats"]),
@@ -301,6 +349,8 @@ def main() -> int:
             "--support-dir", str(cell_dir),
             "--stall-timeout", str(args.stall_timeout),
         ]
+        if team_size == 2:
+            cmd += ["--team-size", "2"]
         if spec["swap_bots"]:
             cmd.append("--swap-bots")
         print(f"[{index}/{len(cells)}] {cell['name']} ...", flush=True)
