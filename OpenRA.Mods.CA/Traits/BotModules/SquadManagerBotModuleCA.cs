@@ -292,6 +292,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
+		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
+		public readonly bool SquadMicroEnabled = false;
+
+		[Desc("MI: percent of max HP at or below which a squad member pulls back (at the threshold pulls back).")]
+		public readonly int SquadMicroRetreatPct = 35;
+
+		[Desc("MI: cells beyond the target's own range that a kiting member keeps as standoff margin.")]
+		public readonly int SquadMicroKiteMarginCells = 2;
+
 		[Desc("6f: Rush squads gather at the own building nearest the target before committing, so the wave arrives together.")]
 		public readonly bool StageBeforeAssault = false;
 
@@ -566,6 +575,15 @@ namespace OpenRA.Mods.CA.Traits
 		// the per-round pass order so a spent budget staggers rather than starves.
 		IBotActionBudget actionBudget;
 		int squadCursor;
+
+		// MI order consumer: micro orders (focus-fire, pull-back, kite) spend
+		// action budget; a null producer (no HumanPace module) means unlimited,
+		// as before. Per-squad attention is already spent by the update loop —
+		// callers must not consume TryConsumeAttention again.
+		internal bool TryConsumeMicroActions(int count = 1)
+		{
+			return actionBudget == null || actionBudget.TryConsumeActions(count);
+		}
 
 		public SquadManagerBotModuleCA(Actor self, SquadManagerBotModuleCAInfo info)
 			: base(info)

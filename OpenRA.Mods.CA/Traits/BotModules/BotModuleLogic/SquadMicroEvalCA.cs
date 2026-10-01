@@ -90,5 +90,26 @@ namespace OpenRA.Mods.CA.Traits
 
 			return target.MaxRange + margin;
 		}
+
+		/// <summary>
+		/// The waypoint a pulled-back (or kiting) unit runs to:
+		/// <paramref name="fromPos"/> continued past itself, directly away from
+		/// <paramref name="threatPos"/>, by <paramref name="distance"/>. Passing
+		/// the formation centroid yields a rally behind the formation anchor;
+		/// passing a unit's own position yields a personal retreat. Returns
+		/// <paramref name="fromPos"/> when the two positions coincide.
+		/// </summary>
+		public static WPos PullBackPoint(WPos fromPos, WPos threatPos, WDist distance)
+		{
+			var away = fromPos - threatPos;
+			var len = away.HorizontalLength;
+			if (len <= 0)
+				return fromPos;
+
+			return fromPos + new WVec(
+				(int)(away.X * (long)distance.Length / len),
+				(int)(away.Y * (long)distance.Length / len),
+				0);
+		}
 	}
 }

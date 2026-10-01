@@ -72,6 +72,35 @@
   overwrite again mid-edit (write landed, then reverted silently) —
   verify `git status` lists your files before committing; I had to
   re-apply via scripted patch.
+# 2026-09-30 (eve) — Devin (EMBER): MI order half — focus-fire, pull-back, kite
+
+- `SquadMicroEvalCA` gets its order half wired into `GroundStatesCA.cs` per
+  NOVA's seam spec (REPLY_2026-09-30_nova_to_ember_mi_wiring.md), behind a new
+  `SquadMicroEnabled` flag — its OWN A/B cell, independent of
+  `FormationMovement`. Default off everywhere; zero behaviour change.
+- `GroundUnitsAttackState` member pass (Rush only): once per squad tick the
+  observed enemies around the target (`IsPreferredObservedEnemyUnit`, live-HP
+  profiles) feed `PickFocusTarget`; members within their own `MaxRange`
+  `Attack` it, members inside the target's reply range while outranging it
+  `Move` back to kite standoff, members at/below `SquadMicroRetreatPct`
+  (35%) `Move` behind the squad centre. Every micro order spends one
+  `IBotActionBudget.TryConsumeActions`; denial or no pick degrades to the
+  plain AttackMove — the budget shapes the burst, never the intent.
+- `IssueFormationOrders` composes pull-back with the rear-stall tracker:
+  low-HP frontline/trailing members rally to the trail line (computed via
+  the new `SquadMicroEvalCA.PullBackPoint`, which replaces the inline trail
+  math), and a stalled rear whose HP is dropping — under fire in the
+  chokepoint — steps further back along the axis to break contact. Micro
+  orders queue AFTER the formation orders so they win that tick.
+- Fog honesty: the one new `FindActorsInCircle` filters through
+  `IsPreferredObservedEnemyUnit` (same upstream filter as IdleState:121);
+  manifest bumped 3 -> 4 with this reasoning.
+- `SquadManagerBotModuleCA.TryConsumeMicroActions`: internal accessor —
+  null `IBotActionBudget` producer = unlimited, matching the existing
+  attention consumer's semantics.
+- 3 new PullBackPoint tests (cardinal, diagonal truncation, coincident).
+  Build: 0 errors; SquadMicroEvalTest 9/9. Boot-gate PASS (menu reached,
+  no new exception logs).
 
 # 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
 
