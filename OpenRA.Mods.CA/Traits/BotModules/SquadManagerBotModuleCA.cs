@@ -1668,6 +1668,47 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			public BotMission Mission;
 			public int Number;
+
+			// The mission's own objective: the actor the squad was aimed at when the
+			// attempt opened (MissionTaken runs after SelectMission set the target).
+			// Null for a remembered (frozen) target — then only the squad's fate
+			// decides, never whatever unit it happens to shoot next.
+			public Actor CommittedTarget;
+		}
+
+		// The verdict on an open attempt from state the squad already holds. World-free so
+		// it is testable: null = still running, otherwise the state and reason to book.
+		public static (BotMissionAttemptState State, string Reason)? AttemptVerdict(
+			bool targetGone, bool targetOursOrAllied, bool retargeted, bool squadEmpty, bool anyMemberDied)
+		{
+			if (squadEmpty && anyMemberDied)
+				return (BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+			if (targetGone || targetOursOrAllied)
+				return (BotMissionAttemptState.Success, BotMissionReasons.Done);
+			if (squadEmpty)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Reserved);
+			if (retargeted)
+				return (BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			return null;
+		}
+
+		void CheckAttemptVerdict(SquadCA squad)
+		{
+			if (!squadMissions.TryGetValue(squad, out var attempt))
+				return;
+
+			// Only the objective's fate decides. A squad switching to the enemy in front
+			// of it is not a new mission (attack squads retarget constantly), so the
+			// retarget clause stays false here; DismissSquad books the real supersede.
+			var committed = attempt.CommittedTarget;
+			if (committed == null)
+				return;
+
+			var gone = committed.IsDead;
+			var oursOrAllied = !gone && committed.Owner != null && committed.Owner.RelationshipWith(Player) != PlayerRelationship.Enemy;
+			var verdict = AttemptVerdict(gone, oursOrAllied, false, !squad.IsValid, false);
+			if (verdict != null)
+				ResolveMissionAttempt(squad, verdict.Value.State, verdict.Value.Reason);
 		}
 
 		// LC1 (AI_ARCHITECTURE 10.1): squad membership is a lease. The pool stays
@@ -1707,6 +1748,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (!squad.IsValid)
 					continue;
 
+				var handedOff = false;
 				foreach (var u in squad.Units.ToList())
 				{
 					var a = u.Actor;
@@ -1722,7 +1764,16 @@ namespace OpenRA.Mods.CA.Traits
 						// the other module releases.
 						squad.Units.Remove(u);
 						activeUnits.Remove(a);
+						handedOff = true;
 					}
+				}
+
+				// A hand-off is not a loss: a squad emptied by it is released as reserved,
+				// so CleanSquads never books it as lost_units.
+				if (handedOff && !squad.IsValid)
+				{
+					var verdict = AttemptVerdict(false, false, false, true, false);
+					ResolveMissionAttempt(squad, verdict.Value.State, verdict.Value.Reason);
 				}
 			}
 
@@ -1746,7 +1797,12 @@ namespace OpenRA.Mods.CA.Traits
 					var id = mission.EffectiveMissionId;
 					var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
 					missionAttemptCounters[id] = attempt;
-					squadMissions[taker] = new MissionAttempt { Mission = mission, Number = attempt };
+					squadMissions[taker] = new MissionAttempt
+					{
+						Mission = mission,
+						Number = attempt,
+						CommittedTarget = taker.Target.Type == TargetType.Actor ? taker.Target.Actor : null
+					};
 					ReportMissionAttempt(mission, attempt, BotMissionAttemptState.Committed, null);
 					return;
 				}
@@ -1919,6 +1975,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
+						CheckAttemptVerdict(s);
 						s.Update();
 						squadCursor = index + 1;
 					}

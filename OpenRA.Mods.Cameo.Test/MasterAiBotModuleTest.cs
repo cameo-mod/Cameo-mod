@@ -984,5 +984,53 @@ namespace OpenRA.Mods.Cameo.Test
 			mission.MissionId = "owner:m42";
 			Assert.That(mission.EffectiveMissionId, Is.EqualTo("owner:m42"));
 		}
+
+		[Test]
+		public void AttemptVerdictBooksLossHandOffAndSuccessApart()
+		{
+			// died + empty = the only Failed; empty without a death = a hand-off (Released/reserved).
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(false, false, false, true, true),
+				Is.EqualTo((BotMissionAttemptState.Failed, BotMissionReasons.LostUnits)));
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(false, false, false, true, false),
+				Is.EqualTo((BotMissionAttemptState.Released, BotMissionReasons.Reserved)));
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(true, false, false, false, false),
+				Is.EqualTo((BotMissionAttemptState.Success, BotMissionReasons.Done)));
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(false, true, false, false, false),
+				Is.EqualTo((BotMissionAttemptState.Success, BotMissionReasons.Done)));
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(false, false, true, false, false),
+				Is.EqualTo((BotMissionAttemptState.Released, BotMissionReasons.Superseded)));
+			Assert.That(SquadManagerBotModuleCA.AttemptVerdict(false, false, false, false, false), Is.Null);
+		}
+
+		[Test]
+		public void DormantShelfStreakGoesDormantAtThresholdAndZeroIsOff()
+		{
+			Assert.That(MasterAiBotModule.GoesDormant(5, 0), Is.False);
+			Assert.That(MasterAiBotModule.GoesDormant(1, 2), Is.False);
+			Assert.That(MasterAiBotModule.GoesDormant(2, 2), Is.True);
+		}
+
+		[Test]
+		public void DormantShelfFailAddsSuccessClearsReleaseLeavesStreak()
+		{
+			var streak = MasterAiBotModule.NextFailStreak(0, BotMissionAttemptState.Failed);
+			streak = MasterAiBotModule.NextFailStreak(streak, BotMissionAttemptState.Failed);
+			Assert.That(streak, Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.NextFailStreak(streak, BotMissionAttemptState.Released), Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.NextFailStreak(streak, BotMissionAttemptState.Committed), Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.NextFailStreak(streak, BotMissionAttemptState.Success), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void DormantShelfFilterHidesOnlyUntilExpiry()
+		{
+			var mission = new BotMission { Type = BotMissionType.Raid, RegionIndex = 8 };
+			var other = new BotMission { Type = BotMissionType.Raid, RegionIndex = 9 };
+			var shelf = new Dictionary<string, int>(StringComparer.Ordinal) { [mission.EffectiveMissionId] = 5000 };
+			Assert.That(MasterAiBotModule.IsDormant(shelf, mission.EffectiveMissionId, 4999), Is.True);
+			Assert.That(MasterAiBotModule.IsDormant(shelf, mission.EffectiveMissionId, 5000), Is.False);
+			Assert.That(MasterAiBotModule.IsDormant(shelf, other.EffectiveMissionId, 100), Is.False);
+			Assert.That(MasterAiBotModule.IsDormant(new Dictionary<string, int>(), mission.EffectiveMissionId, 100), Is.False);
+		}
 	}
 }
