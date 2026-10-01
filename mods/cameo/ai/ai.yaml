@@ -3416,6 +3416,12 @@ Player:
 		ScoutUnitTypes: ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog, td_nod_reconbike, td_nod_buggy, td_nod_buggymkii, td_gdi_humvee, td_gdi_humveemkii, ra1_allies_ranger, ra1_allies_reconranger, japan_scoutcar, japan_imperialscoutsman, ordos_dustdrone, ordos_swarmerdrone, ixian_airdrone, atreides_airdrone, latinsyndicate_raiderbuggy, futuretech_scoutdroid, ordos_raider, atreides_sandbike, ix_raider, corrino_buggy, zerg_zergling, terran_reaper, harkonnen_buzzsaw, eden_scout, plymouth_scout
 	BeaconResponderBotModule:
 		RequiresCondition: genericbot
+	# ZG-a (CN CNTacticalMapBotModule port): the static zone topology — chokepoints and the
+	# regions they gate, plus a Generation counter bumped on bridge re-cuts. Read-only terrain
+	# analysis; produced for ZG-c consumers (BotFogMemory/RegionRouter/BotSituation).
+	TacticalMapBotModule:
+		RequiresCondition: genericbot
+		TopologyLocomotors: tracked
 	# AI_ARCHITECTURE §12.13: scores every free resource field (value x safety / time-until-it-pays) and keeps the
 	# best as the target field (EX-0). EX-1: BaseCrawl placements walk toward it (genericbot only; classic, which
 	# shares BaseBuilderBotModuleCA@generic, gets no provider and keeps today's placement).
