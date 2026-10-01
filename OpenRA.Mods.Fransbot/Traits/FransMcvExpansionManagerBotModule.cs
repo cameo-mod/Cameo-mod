@@ -2534,12 +2534,12 @@ namespace OpenRA.Mods.Common.Traits
 			// ownership from the old ore task survives in parallel.
 			if (expansionTask.Id > 0 && expansionTask.Mode != ExpansionTaskMode.EmergencyRecovery)
 			{
-				activeMcv?.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				AbortExpansionTaskToIdle(bot, "emergency main-base recovery preempted the active expansion");
 				activeMcv = null;
 			}
 
-			candidate.CancelActivity();
+			QueueStopOrder(bot, candidate);
 			emergencyRecoveryMcv = candidate;
 			emergencyRecoveryDeployCell = null;
 			emergencyRecoveryDeployIssuedTick = -1;
@@ -3643,7 +3643,7 @@ namespace OpenRA.Mods.Common.Traits
 					FransBotLog.BotDebug(world,
 						"{0}: MCV MOVE WATCHDOG releases stalled objective {1}: {2} remained at {3} through {4} bounded retries. The field receives normal retry cooldown and the roaming MCV replans instead of deadlocking.",
 						player, stalledField, activeMcv, mobile.ToCell, Info.MovingMcvStallMaximumRetries);
-					activeMcv.CancelActivity();
+					QueueStopOrder(bot, activeMcv);
 					failedFieldsUntil[stalledField] = world.WorldTick + Info.FailedFieldRetryDelay;
 					AbortExpansionTaskToIdle(bot, "land MCV no-progress watchdog rejected the current ore objective", stalledField);
 					nextLandExpansionPlanningTick = world.WorldTick;
@@ -3666,7 +3666,7 @@ namespace OpenRA.Mods.Common.Traits
 					FransBotLog.BotDebug(world, "{0}: RiskModel aborts MCV destination {1}: risk {2} >= critical {3} (visible {4}, strategic {5}, static threats {6}).",
 						player, targetDeployCell.Value, targetRisk.Score, targetRisk.CriticalThreshold,
 						targetRisk.VisibleRiskScore, targetRisk.StrategicRiskScore, targetRisk.StaticThreatCount);
-					activeMcv.CancelActivity();
+					QueueStopOrder(bot, activeMcv);
 					AbortExpansionTaskToIdle(bot, "critical destination validation rejected the current expansion objective", targetResourceCenter ?? targetDeployCell.Value);
 					nextLandExpansionPlanningTick = world.WorldTick;
 				}
@@ -3729,7 +3729,7 @@ namespace OpenRA.Mods.Common.Traits
 				FransBotLog.BotDebug(world,
 					"{0}: MCV MOVE WATCHDOG releases idle stalled objective {1}: {2} remained at {3} through {4} bounded retries. Normal target selection resumes.",
 					player, stalledField, activeMcv, mobile.ToCell, Info.MovingMcvStallMaximumRetries);
-				activeMcv.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				failedFieldsUntil[stalledField] = world.WorldTick + Info.FailedFieldRetryDelay;
 				AbortExpansionTaskToIdle(bot, "moving MCV no-progress watchdog exhausted retries for the current ore", stalledField);
 				nextLandExpansionPlanningTick = world.WorldTick;
@@ -3799,7 +3799,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			var failedObjective = targetResourceCenter ?? targetDeployCell;
-			mcv.CancelActivity();
+			QueueStopOrder(bot, mcv);
 			MarkCurrentFieldFailed();
 			if (failedObjective.HasValue)
 				MarkExpansionAreaFailed(failedObjective.Value, "MCV RETREAT");
@@ -7416,7 +7416,7 @@ namespace OpenRA.Mods.Common.Traits
 					{
 						seaPickupApproachRecoveryAttempts++;
 						seaPickupMcvCell = alternatePickup;
-						activeMcv.CancelActivity();
+						QueueStopOrder(bot, activeMcv);
 						QueueMcvMoveAlongProvenPath(activeMcv, mcvMobile, alternatePickup, alternatePath,
 							"SeaPickupApproachRecovery");
 						seaPickupMcvLastProgressCell = mcvMobile.ToCell;
@@ -7445,7 +7445,7 @@ namespace OpenRA.Mods.Common.Traits
 					return;
 				}
 
-				activeMcv.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				QueueRiskAwareMove(activeMcv, mcvMobile, seaPickupMcvCell.Value);
 				seaPickupMcvStallRetries++;
 				seaPickupMcvLastProgressTick = world.WorldTick;
@@ -7472,7 +7472,7 @@ namespace OpenRA.Mods.Common.Traits
 					seaPickupCraftStallRetries = 0;
 				}
 
-				activeLandingCraft.CancelActivity();
+				QueueStopOrder(bot, activeLandingCraft);
 				QueueNavalTransportPlainMove(activeLandingCraft, craftMobile, seaPickupCraftCell.Value,
 					routeAlreadyValidated: true);
 				seaPickupCraftStallRetries++;
@@ -7664,7 +7664,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (seaBoardingLastProgressTick >= 0 &&
 				world.WorldTick - seaBoardingLastProgressTick >= Info.SeaBoardingNoProgressTimeout)
 			{
-				activeMcv.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				seaBoardingRecoveryAttempts++;
 				if (seaBoardingRecoveryAttempts > Info.SeaBoardingMaximumRecoveryAttempts)
 				{
@@ -7761,7 +7761,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (!IsTransportLossSafeNavalRoute(activeLandingCraft, craftMobile, craftMobile.ToCell, seaLandingCraftCell.Value))
 				{
 					seaTransportLossBlockedRevision = seaLastTransportLossExclusionRevision;
-					activeLandingCraft.CancelActivity();
+					QueueStopOrder(bot, activeLandingCraft);
 					FransBotLog.BotDebug(world,
 						"{0}: SIMPLE FERRY holds loaded LST {1}: active LST-loss SECURE revision {2} blocks the remaining route to {3}. No further crossing order is issued until a loss incident is cleared/changed.",
 						player, activeLandingCraft, seaLastTransportLossExclusionRevision, seaLandingCraftCell.Value);
@@ -7790,14 +7790,14 @@ namespace OpenRA.Mods.Common.Traits
 					{
 						if (!TryFindNavalTransportPath(activeLandingCraft, craftMobile, craftMobile.ToCell, seaLandingCraftCell.Value, out _, out _, FransRiskTolerance.Balanced))
 						{
-							activeLandingCraft.CancelActivity();
+							QueueStopOrder(bot, activeLandingCraft);
 							seaTransportLastProgressTick = world.WorldTick;
 							FransBotLog.BotDebug(world, "{0}: SIMPLE FERRY pauses loaded LST {1}: new CRITICAL risk at current/landing endpoint under RiskRevision {2}, and no safe remaining path exists. No repeated route search occurs while the plan is held.",
 								player, activeLandingCraft, seaLastRiskRevision);
 							return;
 						}
 
-						activeLandingCraft.CancelActivity();
+						QueueStopOrder(bot, activeLandingCraft);
 						QueueNavalTransportPlainMove(activeLandingCraft, craftMobile, seaLandingCraftCell.Value,
 							routeAlreadyValidated: true);
 						seaTransportLastProgressTick = world.WorldTick;
@@ -7821,7 +7821,7 @@ namespace OpenRA.Mods.Common.Traits
 								FransRiskRole.NavalTransport, FransRiskTolerance.Balanced);
 							if (!immediate.IsCritical && !landing.IsCritical)
 							{
-								activeLandingCraft.CancelActivity();
+								QueueStopOrder(bot, activeLandingCraft);
 								QueueNavalTransportPlainMove(activeLandingCraft, craftMobile, seaLandingCraftCell.Value, routeAlreadyValidated: true);
 								seaTransportLastProgressTick = world.WorldTick;
 								seaTransportStallRetries = 0;
@@ -7838,7 +7838,7 @@ namespace OpenRA.Mods.Common.Traits
 						seaTransportStallRetries = 0;
 					}
 
-					activeLandingCraft.CancelActivity();
+					QueueStopOrder(bot, activeLandingCraft);
 					QueueNavalTransportPlainMove(activeLandingCraft, craftMobile, seaLandingCraftCell.Value,
 						routeAlreadyValidated: true);
 					seaTransportStallRetries++;
@@ -8356,7 +8356,7 @@ namespace OpenRA.Mods.Common.Traits
 			// Once accepted, native OpenRA Move owns all cell-by-cell path execution.
 			// Do not inject Frans GetPathCost into Move's dynamic path callback: that caused
 			// repeated expensive A* work while an LST was already making normal progress.
-			actor.QueueActivity(false, new Move(actor, destination));
+			QueueMoveOrder(null, actor, destination);
 
 			if (!routeAlreadyValidated && !routeRisk.IsPreferred)
 				FransBotLog.BotDebug(world, "{0}: unified RiskModel accepts elevated but non-critical LST corridor for {1}: peak risk {2}/{3} near {4}; native Move owns execution.",
@@ -9169,10 +9169,10 @@ namespace OpenRA.Mods.Common.Traits
 		void AbortSeaMissionBeforeLoad(IBot bot)
 		{
 			if (activeMcv != null && activeMcv.IsInWorld)
-				activeMcv.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 
 			if (activeLandingCraft != null && activeLandingCraft.IsInWorld && !activeLandingCraft.IsDead)
-				activeLandingCraft.CancelActivity();
+				QueueStopOrder(bot, activeLandingCraft);
 
 			AbortExpansionTaskToIdle(bot, "sea mission aborted before MCV loading completed");
 			nextLandExpansionPlanningTick = world.WorldTick;
@@ -9263,7 +9263,7 @@ namespace OpenRA.Mods.Common.Traits
 
 				var oldObjective = targetResourceCenter.Value;
 				var oldDeploy = targetDeployCell.Value;
-				activeMcv.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				FransBotLog.BotDebug(world,
 					"{0}: ALLIED MCV RESERVATION YIELD: MCV {1} releases objective {2}/deploy {3}; allied PlayerActor {4} MCV {5} reserved conflicting objective {6}/deploy {7} earlier at WT {8} (ours WT {9}). Earlier reservation wins; same-WT ties use PlayerActor ID, so allied MCVs cannot deadlock on one FACT footprint.",
 					player, activeMcv, oldObjective, oldDeploy, allyPlayerActor.ActorID, allyMcvActorId, allyObjective, allyDeploy, allyReservationTick, targetReservationStartedTick);
@@ -9308,7 +9308,7 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.BotDebug(world,
 				"{0}: MCV stale-deploy revalidation rejects objective {1}: FACT cell {2} is permanently occupied by known {3}:{4} and no alternate legal deploy remains.",
 				player, targetResourceCenter.Value, oldDeploy, blocker.Info.Name, blocker.ActorID);
-			mcv.CancelActivity();
+			QueueStopOrder(bot, mcv);
 			MarkCurrentFieldFailed();
 			AbortExpansionTaskToIdle(bot, "known permanent building blocker left no legal deploy cell for this ore");
 			nextLandExpansionPlanningTick = world.WorldTick;
@@ -9901,7 +9901,7 @@ namespace OpenRA.Mods.Common.Traits
 					player, failedCell, activeMcv, conyardTransformRetries);
 				LogMcvDeployment(activeMcv, false, "DeployConfirmRetriesExhausted");
 				MarkCurrentFieldFailed();
-				activeMcv?.CancelActivity();
+				QueueStopOrder(bot, activeMcv);
 				AbortExpansionTaskToIdle(bot, "MCV deploy-confirm abort after bounded transform retries", failedCell);
 				return;
 			}
@@ -10988,7 +10988,7 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				repackTransformRetries++;
 				repackTransformIssuedTick = world.WorldTick;
-				activeConyard.CancelActivity();
+				QueueStopOrder(bot, activeConyard);
 				FransBotLog.BotDebug(world,
 					"{0}: expansion FACT {1} is still deployed after repack request; repack-confirm watchdog retry {2}/{3}.",
 					player, activeConyard, repackTransformRetries, Info.ExpansionRepackMaximumRetries);

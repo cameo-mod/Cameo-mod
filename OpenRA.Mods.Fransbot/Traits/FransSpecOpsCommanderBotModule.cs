@@ -340,10 +340,101 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransSpecOpsCommanderBotModule : ConditionalTrait<FransSpecOpsCommanderBotModuleInfo>,
-		IBotTick, IBotRespondToAttack, INotifyActorDisposing, IFransCaptureSecurityService
+		IBotTick, IBotEnabled, IBotRespondToAttack, INotifyActorDisposing, IFransCaptureSecurityService
 	{
 		readonly World world;
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		readonly Dictionary<Actor, PendingMoveOrder> pendingMoveOrders = [];
+		readonly record struct PendingMoveOrder(CPos Destination, bool Queued);
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				pendingMoveOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingMoveOrders.Remove(actor);
+			pendingStopOrders.Add(actor);
+		}
+
+		void QueueMoveOrder(IBot bot, Actor actor, CPos destination, bool queued = false)
+		{
+			if (!IsValidOrderSubject(actor) || !world.Map.Contains(destination) ||
+				actor.TraitOrDefault<Mobile>() == null)
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				pendingMoveOrders.Remove(actor);
+				sink.QueueOrder(new Order("Move", actor, Target.FromCell(world, destination), queued));
+				return;
+			}
+
+			pendingStopOrders.Remove(actor);
+			pendingMoveOrders[actor] = new PendingMoveOrder(destination, queued);
+		}
+
+		// The accepted risk-aware route is preserved as a bounded native waypoint
+		// packet (same recipe as the transport commander) — a custom synchronized
+		// Move callback is an activity and would desync a multiplayer game.
+		void QueueMovePacketOrder(IBot bot, Actor actor, IReadOnlyList<CPos> orderedPath)
+		{
+			const int MaximumMoveWaypoints = 4;
+			var waypointCount = Math.Min(MaximumMoveWaypoints, orderedPath.Count);
+			var queued = false;
+			for (var i = 1; i <= waypointCount; i++)
+			{
+				var index = (int)((long)i * orderedPath.Count / waypointCount) - 1;
+				QueueMoveOrder(bot, actor, orderedPath[index], queued);
+				queued = true;
+			}
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0 && pendingMoveOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			foreach (var pair in pendingMoveOrders.OrderBy(p => p.Key.ActorID).ToArray())
+				if (IsValidOrderSubject(pair.Key) && world.Map.Contains(pair.Value.Destination) &&
+					pair.Key.TraitOrDefault<Mobile>() != null)
+					bot.QueueOrder(new Order("Move", pair.Key, Target.FromCell(world, pair.Value.Destination), pair.Value.Queued));
+
+			pendingStopOrders.Clear();
+			pendingMoveOrders.Clear();
+		}
+
 		readonly ActorIndex.OwnerAndNames managedActors;
 		readonly Dictionary<Actor, Actor> missions = [];
 		readonly Dictionary<Actor, CPos> waypoints = [];
@@ -485,6 +576,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransSpecOpsCommander.BotTick");
 			riskAwarePathMemo.Clear();
 			if (player.WinState != WinState.Undefined)
@@ -987,7 +1079,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			if (raidSearchStartedWorldTick >= 0)
 			{
-				actor.CancelActivity();
+				QueueStopOrder(bot, actor);
 				ResetRaidLostTargetSearch(false);
 				FransBotLog.BotDebug(world,
 					"{0}: SpecOps {1} RAID reacquires exact target {2}; bounded local RECON ends and the same RAID resumes.",
@@ -1059,7 +1151,7 @@ namespace OpenRA.Mods.Common.Traits
 				}
 				if (actor.IsIdle || !hasRaidSearchWaypoint || raidSearchWaypoint != approach.Value)
 				{
-					actor.CancelActivity();
+					QueueStopOrder(bot, actor);
 					bot.QueueOrder(new Order("Move", actor, Target.FromCell(world, approach.Value), false));
 					raidSearchWaypoint = approach.Value;
 					hasRaidSearchWaypoint = true;
@@ -1072,7 +1164,7 @@ namespace OpenRA.Mods.Common.Traits
 				raidSearchStartedWorldTick = world.WorldTick;
 				raidSearchSpiral.Reset(center, commanderCoreService.GetReconVisionCells(actor));
 				hasRaidSearchWaypoint = false;
-				actor.CancelActivity();
+				QueueStopOrder(bot, actor);
 				FransBotLog.BotDebug(world,
 					"{0}: SpecOps {1} RAID target {2} is gone/unseen at LastVisibleTargetCell {3}; begins {4}-WT local plain-Move RECON before ANCHOR return.",
 					player, Info.BidderKey, mission.TargetActorId, center, commanderCoreService.RaidLostTargetReconTicks);
@@ -1117,7 +1209,7 @@ namespace OpenRA.Mods.Common.Traits
 		void ResetRaidLostTargetSearch(bool cancelActivity, Actor actor = null)
 		{
 			if (cancelActivity && actor != null && actor.IsInWorld && !actor.IsDead)
-				actor.CancelActivity();
+				QueueStopOrder(null, actor);
 			raidSearchStartedWorldTick = -1;
 			raidSearchWaypoint = default;
 			hasRaidSearchWaypoint = false;
@@ -1238,7 +1330,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			if (!sameTarget)
-				actor.CancelActivity();
+				QueueStopOrder(bot, actor);
 			bot.QueueOrder(new Order("C4", actor, Target.FromActor(target), false));
 			demolitionTargets[actor] = target.ActorID;
 			lastDemolitionOrderTick[actor] = world.WorldTick;
@@ -1272,7 +1364,7 @@ namespace OpenRA.Mods.Common.Traits
 				world.WorldTick - last < Info.DemolitionAttackRefreshInterval)
 				return;
 			if (!sameTarget)
-				actor.CancelActivity();
+				QueueStopOrder(bot, actor);
 			bot.QueueOrder(new Order("Attack", actor, Target.FromActor(target), false));
 			demolitionTargets[actor] = target.ActorID;
 			lastDemolitionOrderTick[actor] = world.WorldTick;
@@ -1310,7 +1402,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 			}
 
-			actor.CancelActivity();
+			QueueStopOrder(bot, actor);
 			var mobile = actor.TraitOrDefault<Mobile>();
 			if (mobile == null || mobile.IsTraitDisabled || mobile.IsTraitPaused)
 				return;
@@ -1740,7 +1832,7 @@ namespace OpenRA.Mods.Common.Traits
 							FransRiskRole.Capturer, tolerance);
 						if (route.IsCritical)
 						{
-							capturer.CancelActivity();
+							QueueStopOrder(bot, capturer);
 							waypoints.Remove(capturer);
 							activeCaptureOrders.Remove(capturer);
 							AIUtils.BotDebug("{0}: {1} cancels a capture approach after unified RiskModel route risk rose to {2} at {3}.",
@@ -1791,7 +1883,7 @@ namespace OpenRA.Mods.Common.Traits
 					return;
 
 				if (!capturer.IsIdle)
-					capturer.CancelActivity();
+					QueueStopOrder(bot, capturer);
 
 				var landPathAvailable = TryFindRiskAwareApproachPath(capturer, mobile, missionTarget, tolerance,
 					out var approachCell, out _);
@@ -1951,7 +2043,7 @@ namespace OpenRA.Mods.Common.Traits
 			waypoints.Remove(capturer);
 			activeCaptureOrders.Remove(capturer);
 			nextRouteRecheckTick.Remove(capturer);
-			capturer.CancelActivity();
+			QueueStopOrder(bot, capturer);
 
 			AIUtils.BotDebug("{0}: {1} handed capture target {2} to FransTransportCommanderBotModule.",
 				player, capturer, target);
@@ -2110,29 +2202,33 @@ namespace OpenRA.Mods.Common.Traits
 		void QueueRiskAwareMoveAndCapture(IBot bot, Actor capturer, Mobile mobile, CPos destination,
 			Actor target, FransRiskTolerance tolerance, string reason)
 		{
-			waypoints[capturer] = destination;
-			activeCaptureOrders[capturer] = target;
-			nextRouteRecheckTick[capturer] = world.WorldTick + Info.RouteRecheckInterval;
 			int CustomCost(CPos cell) => cell == mobile.ToCell ? 0 :
 				riskModelService.GetPathCost(capturer, cell, FransRiskRole.Capturer, tolerance);
 
+			if (mobile.PathFinder is not PathFinder pathFinder)
+				return;
+			var initialPath = pathFinder.FindPathToTargetCell(capturer, [mobile.ToCell], destination,
+				BlockedByActor.Immovable, CustomCost, laneBias: false);
+			if (initialPath == null || initialPath.Count == 0)
+				return;
+
+			waypoints[capturer] = destination;
+			activeCaptureOrders[capturer] = target;
+			nextRouteRecheckTick[capturer] = world.WorldTick + Info.RouteRecheckInterval;
+
 			AIUtils.BotDebug("{0}: {1} {2}; unified RiskModel Move -> CaptureActor via {3} to {4}.",
 				player, capturer, reason, destination, target);
-			capturer.QueueActivity(false, new Move(capturer, check =>
-			{
-				if (mobile.ToCell == destination)
-					return (true, new List<CPos>());
-				if (mobile.PathFinder is not PathFinder pathFinder)
-					return (false, new List<CPos>());
-				var path = pathFinder.FindPathToTargetCell(capturer, [mobile.ToCell], destination,
-					check, CustomCost, laneBias: false);
-				return (false, path);
-			}));
-			capturer.QueueActivity(true, new OpenRA.Activities.CallFunc(() =>
-			{
-				waypoints.Remove(capturer);
-				nextRouteRecheckTick.Remove(capturer);
-			}));
+
+			// §19.6: the accepted route rides a bounded native waypoint packet instead of a
+			// dynamic Move callback (an activity, desync-unsafe). ManageCapturer clears the
+			// route bookkeeping on arrival or idle — the role the queued CallFunc used to play.
+			var orderedPath = initialPath
+				.AsEnumerable()
+				.Reverse()
+				.Where(cell => cell != mobile.ToCell)
+				.ToArray();
+			if (orderedPath.Length > 0)
+				QueueMovePacketOrder(bot, capturer, orderedPath);
 			bot.QueueOrder(new Order("CaptureActor", capturer, Target.FromActor(target), true));
 		}
 
@@ -2158,13 +2254,12 @@ namespace OpenRA.Mods.Common.Traits
 					BlockedByActor.Immovable, CustomCost, laneBias: false);
 				if (path == null || path.Count == 0)
 					continue;
-				capturer.CancelActivity();
-				capturer.QueueActivity(false, new Move(capturer, check =>
-				{
-					var dynamicPath = pathFinder.FindPathToTargetCell(capturer, [mobile.ToCell], candidate.Cell,
-						check, CustomCost, laneBias: false);
-					return (false, dynamicPath);
-				}));
+				QueueStopOrder(bot, capturer);
+				QueueMovePacketOrder(bot, capturer, path
+					.AsEnumerable()
+					.Reverse()
+					.Where(cell => cell != mobile.ToCell)
+					.ToArray());
 				return true;
 			}
 			return false;

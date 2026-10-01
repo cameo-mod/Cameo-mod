@@ -199,7 +199,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransGroundTransferBotModule : ConditionalTrait<FransGroundTransferBotModuleInfo>,
-		IBotTick, IFransGroundTransferService
+		IBotTick, IBotEnabled, IFransGroundTransferService
 	{
 		enum TransferState
 		{
@@ -272,6 +272,52 @@ namespace OpenRA.Mods.Common.Traits
 			QueueDomains.Naval.Union(new[] { Info.LandingCraftQueueCategory })
 				.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			pendingStopOrders.Clear();
+		}
+
 		Actor reservationOwner;
 		IFransStrategicMapService strategicMap;
 		IFransGeneralService general;
@@ -333,6 +379,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
 			ReleaseWave(cancelActivities: false, "trait disabled");
 			reservedGroundUnits.Clear();
 		}
@@ -343,6 +390,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransGroundTransfer.BotTick");
 			if (world.Type == WorldType.Editor || player.WinState != WinState.Undefined)
 				return;
@@ -1144,7 +1192,7 @@ namespace OpenRA.Mods.Common.Traits
 
 				// Native EnterTransport owns the passenger for as long as the actor is physically
 				// progressing. Only a real no-cell-progress timeout may cancel that one attempt.
-				unit.CancelActivity();
+				QueueStopOrder(bot, unit);
 				ClearBoardingTracking(wave, unit);
 				TryRelocateBoardingSlot(wave, unit);
 				wave.LastProgressTick = world.WorldTick;
@@ -1236,7 +1284,7 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var unit in unboarded)
 			{
 				if (unit.IsInWorld)
-					unit.CancelActivity();
+					QueueStopOrder(bot, unit);
 				wave.Units.Remove(unit);
 				wave.UnitCraft.Remove(unit);
 				ClearBoardingTracking(wave, unit);
@@ -1337,7 +1385,7 @@ namespace OpenRA.Mods.Common.Traits
 				// passenger now. Once EnterTransport starts, native Cargo owns the final approach.
 				wave.UnitCraft[unit] = craft;
 				if (!unit.IsIdle)
-					unit.CancelActivity();
+					QueueStopOrder(bot, unit);
 				bot.QueueOrder(new Order("EnterTransport", unit, Target.FromActor(craft), false));
 				wave.BoardingOrderUntilTick[unit] = world.WorldTick + Info.BoardingNativeTimeout;
 				wave.BoardingLastProgressCell[unit] = unit.Location;
@@ -1456,7 +1504,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.CrossingSameLegRetryCount[craft] = sameRetries + 1;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 					FransBotLog.BotDebug(world,
 						"{0}: GROUND TRANSFER LST {1} crossing stalled; cached-leg retry {2}/{3} toward {4}.",
@@ -1472,7 +1520,7 @@ namespace OpenRA.Mods.Common.Traits
 					wave.TargetCraftSlots[craft] = alternate;
 					wave.CrossingLastProgressCell[craft] = craft.Location;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
 					FransBotLog.BotDebug(world,
 						"{0}: GROUND TRANSFER LST {1} switches to bounded local landing recovery {2}/{3} at {4}. At most {5} cells are considered; no full shoreline replan.",
@@ -1544,7 +1592,7 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var craft in wave.Crafts.Where(IsLiveActor).OrderBy(a => a.ActorID))
 				if (wave.SourceCraftSlots.TryGetValue(craft, out var slot))
 				{
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 				}
 			FransBotLog.BotDebug(world,
@@ -1583,7 +1631,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.CrossingSameLegRetryCount[craft] = sameRetries + 1;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 					continue;
 				}
@@ -1596,7 +1644,7 @@ namespace OpenRA.Mods.Common.Traits
 					wave.SourceCraftSlots[craft] = alternate;
 					wave.CrossingLastProgressCell[craft] = craft.Location;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
 					continue;
 				}
@@ -1604,7 +1652,7 @@ namespace OpenRA.Mods.Common.Traits
 				// Return is already the safe fallback. Keep the final bounded source-side slot and
 				// re-issue it instead of starting another expensive strategic replan.
 				wave.CrossingLastProgressTick[craft] = world.WorldTick;
-				craft.CancelActivity();
+				QueueStopOrder(bot, craft);
 				bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 			}
 
@@ -1637,7 +1685,7 @@ namespace OpenRA.Mods.Common.Traits
 					wave.ReturnLastCargoProgressTick[craft] = cargoTick = world.WorldTick;
 				if ((!wave.ReturnUnloadIssued.Contains(craft) || world.WorldTick - cargoTick >= Info.UnloadStallTimeout) && cargo.CanUnload())
 				{
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Unload", craft, false));
 					wave.ReturnUnloadIssued.Add(craft);
 					wave.ReturnLastCargoProgressTick[craft] = world.WorldTick;
@@ -1670,7 +1718,7 @@ namespace OpenRA.Mods.Common.Traits
 				wave.CraftUnloadRecoveryAttempts[craft] = 0;
 				if (!cargo.CanUnload())
 					continue;
-				craft.CancelActivity();
+				QueueStopOrder(bot, craft);
 				bot.QueueOrder(new Order("Unload", craft, false));
 				wave.UnloadIssued.Add(craft);
 			}
@@ -1729,7 +1777,7 @@ namespace OpenRA.Mods.Common.Traits
 						wave.CraftUnloadRecoveryCell.Remove(craft);
 						if (cargo.CanUnload())
 						{
-							craft.CancelActivity();
+							QueueStopOrder(bot, craft);
 							bot.QueueOrder(new Order("Unload", craft, false));
 							wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
 						}
@@ -1745,7 +1793,7 @@ namespace OpenRA.Mods.Common.Traits
 						wave.CraftUnloadRecoveryAttempts[craft] = attempt + 1;
 						wave.CraftUnloadRecoveryCell[craft] = alternate;
 						wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
-						craft.CancelActivity();
+						QueueStopOrder(bot, craft);
 						bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
 						FransBotLog.BotDebug(world,
 							"{0}: GROUND TRANSFER LST {1} unload stalled with {2} passenger(s); bounded beach recovery {3}/{4} moves to alternate naval cell {5} before another native Unload.",
@@ -1759,7 +1807,7 @@ namespace OpenRA.Mods.Common.Traits
 					wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
 					if (cargo.CanUnload())
 					{
-						craft.CancelActivity();
+						QueueStopOrder(bot, craft);
 						bot.QueueOrder(new Order("Unload", craft, false));
 					}
 				}
@@ -1917,9 +1965,9 @@ namespace OpenRA.Mods.Common.Traits
 			if (cancelActivities)
 			{
 				foreach (var unit in wave.Units.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					unit.CancelActivity();
+					QueueStopOrder(null, unit);
 				foreach (var craft in wave.Crafts.Where(IsLiveActor))
-					craft.CancelActivity();
+					QueueStopOrder(null, craft);
 			}
 
 			foreach (var unit in wave.Units)

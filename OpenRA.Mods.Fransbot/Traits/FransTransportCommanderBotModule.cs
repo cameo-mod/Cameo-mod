@@ -374,6 +374,11 @@ namespace OpenRA.Mods.Common.Traits
 			public bool LandingCraftLegValidationPending;
 			public int LastProductionLossBlockRevision = -1;
 
+			// §19.6: requests arrive from OTHER modules' ticks — orders issued there would run
+			// under the caller's issuer and bounce off the order gate (holder is this module).
+			// Defer the first pickup/extraction orders to this module's own BotTick instead.
+			public bool InitialOrdersPending;
+
 			public CPos LastTransportProgressCell;
 			public int LastTransportProgressTick;
 			public bool CancelAfterDrop;
@@ -787,7 +792,10 @@ namespace OpenRA.Mods.Common.Traits
 				.Distinct()
 				.OrderBy(m => m.Passenger.ActorID)
 				.ToArray())
+			{
 				ManageMission(bot, mission);
+				FlushInitialOrders(bot, mission);
+			}
 		}
 
 		bool IsMissionCompatibleTransportRequest(Actor passenger, Actor target)
@@ -906,7 +914,7 @@ namespace OpenRA.Mods.Common.Traits
 			mission.StartedTick = world.WorldTick;
 			if (mission.Transport != null && !mission.Transport.Disposed && mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(null, mission.Transport);
 				if (Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
 					ApplyCaptureEscortHoldFire(mission);
 			}
@@ -943,9 +951,9 @@ namespace OpenRA.Mods.Common.Traits
 				((IFransCaptureTransportService)this).CancelCaptureTransport(bot, mission.Passenger);
 				return false;
 			}
-			if (Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
-				ApplyCaptureEscortHoldFire(mission);
-			QueueExtractionPickupMoves(bot, mission);
+			// §19.6: deferred to this module's own tick — these orders would carry the caller's
+			// issuer (SpecOps/seam) and bounce off the order gate.
+			mission.InitialOrdersPending = true;
 			FransBotLog.BotDebug(world, "{0}: reusable SpecOps extraction begins for {1} with {2}; rendezvous {3}/{4} then return toward {5}.",
 				player, passenger, mission.Transport, passengerCell, transportCell, mission.PickupTransportCell);
 			return true;
@@ -1150,7 +1158,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			var transport = mission.Transport;
 			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 			ReleaseTransport(mission);
 			mission.RunLegs = null;
 			mission.RunDeliveredTargets.Clear();
@@ -1186,7 +1194,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (mission.IsRunMission)
 			{
 				if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead && passenger.TraitOrDefault<Passenger>()?.Transport == null)
-					passenger.CancelActivity();
+					QueueStopOrder(bot, passenger);
 				ReleaseRunLeg(mission, passenger);
 				if (mission.RunLegs.Count == 0)
 					EndRunMission(bot, mission, BotMissionAttemptState.Released, "dropped");
@@ -1200,7 +1208,7 @@ namespace OpenRA.Mods.Common.Traits
 					"{0}: capture transport cancellation found vanished/destroyed transport {1} for {2}; mission is released without reading traits from the destroyed actor.",
 					player, transport, passenger);
 				if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead)
-					passenger.CancelActivity();
+					QueueStopOrder(bot, passenger);
 
 				ReleaseTransport(mission);
 				missions.Remove(passenger);
@@ -1214,9 +1222,9 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead)
-				passenger.CancelActivity();
+				QueueStopOrder(bot, passenger);
 			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 
 			ReleaseTransport(mission);
 			missions.Remove(passenger);
@@ -1555,6 +1563,25 @@ namespace OpenRA.Mods.Common.Traits
 				ReleaseRunLeg(mission, leg.Passenger);
 		}
 
+		// §19.6 order-gate hygiene: a service call arriving on another module's tick can only
+		// mutate mission bookkeeping — the caller's issuer would make our orders look foreign.
+		// The first physical orders therefore ride this flag and land here, under our own issuer.
+		void FlushInitialOrders(IBot bot, TransportMission mission)
+		{
+			if (!mission.InitialOrdersPending)
+				return;
+
+			mission.InitialOrdersPending = false;
+			if (mission.State == MissionState.Pickup)
+				QueuePickupMoves(bot, mission);
+			else if (mission.State == MissionState.ExtractPickup)
+				QueueExtractionPickupMoves(bot, mission);
+
+			if (mission.Transport != null && mission.Transport.IsInWorld && !mission.Transport.Disposed &&
+				Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
+				ApplyCaptureEscortHoldFire(mission);
+		}
+
 		void ManageMission(IBot bot, TransportMission mission)
 		{
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "Transport.ManageMission");
@@ -1832,9 +1859,6 @@ namespace OpenRA.Mods.Common.Traits
 					ResetTransportMoveState(mission);
 					ClearWaitingTransportFailure(mission.Passenger, mission.Target);
 
-					if (Info.GroundTransportTypes.Contains(transport.Info.Name))
-						ApplyCaptureEscortHoldFire(mission);
-
 					planningPass.Success = true;
 					planningPass.SelectedTransport = transport;
 					planningPass.SelectedPickup = plan.PickupTransportCell;
@@ -1846,7 +1870,11 @@ namespace OpenRA.Mods.Common.Traits
 						player, transport, mission.Passenger, plan.PickupPassengerCell,
 						plan.PickupTransportCell, plan.DropTransportCell, mission.Target);
 
-					QueuePickupMoves(bot, mission);
+					// §19.6: requests can arrive on ANOTHER module's tick — orders issued here carry
+					// the caller's issuer and bounce off the order gate (holder is this module). The
+					// BotTick loop flushes them under our own issuer — still same tick when assignment
+					// runs inside the manage loop.
+					mission.InitialOrdersPending = true;
 					return true;
 				}
 			}
@@ -2231,7 +2259,7 @@ namespace OpenRA.Mods.Common.Traits
 				foreach (var leg in mission.RunLegs.Where(leg => !IsLegPassengerLoaded(mission, leg.Passenger)).ToArray())
 				{
 					if (!leg.Passenger.Disposed && leg.Passenger.IsInWorld && !leg.Passenger.IsDead)
-						leg.Passenger.CancelActivity();
+						QueueStopOrder(bot, leg.Passenger);
 					FransBotLog.BotDebug(world,
 						"{0}: capture RUN {1} departs without {2}; boarding stalled and the craft already carries engineers — this leg walks to {3}.",
 						player, mission.RunMissionId, leg.Passenger, leg.Target);
@@ -2510,7 +2538,7 @@ namespace OpenRA.Mods.Common.Traits
 			else if (!mission.Passenger.Disposed && mission.Passenger.IsInWorld && !mission.Passenger.IsDead &&
 				!mission.Transport.Disposed && mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(null, mission.Transport);
 				ApplyCaptureEscortHoldFire(mission);
 			}
 
@@ -2591,7 +2619,7 @@ namespace OpenRA.Mods.Common.Traits
 			}
 			else if (mission.Transport.IsInWorld && !mission.Transport.IsDead)
 			{
-				mission.Transport.CancelActivity();
+				QueueStopOrder(bot, mission.Transport);
 				ApplyCaptureEscortHoldFire(mission);
 			}
 
@@ -2706,7 +2734,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (IsAirTransport(mission.Transport) && Info.EnableAirTransportRiskRouting)
 				{
 					if (!StartAirMove(bot, mission, mission.ExtractionTransportCell, "reusable extraction pickup"))
-						mission.Transport.CancelActivity();
+						QueueStopOrder(bot, mission.Transport);
 				}
 				else
 					QueueTransportMove(bot, mission.Transport, mission.ExtractionTransportCell);
@@ -2737,7 +2765,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (IsAirTransport(mission.Transport) && Info.EnableAirTransportRiskRouting)
 				{
 					if (!StartAirMove(bot, mission, mission.PickupTransportCell, "reusable extraction return"))
-						mission.Transport.CancelActivity();
+						QueueStopOrder(bot, mission.Transport);
 				}
 				else
 					QueueTransportMove(bot, mission.Transport, mission.PickupTransportCell);
@@ -2900,7 +2928,7 @@ namespace OpenRA.Mods.Common.Traits
 					(mission.EscortThreat.Location - mission.Passenger.Location).LengthSquared >
 						Info.CaptureEscortThreatRadius * Info.CaptureEscortThreatRadius)
 				{
-					transport.CancelActivity();
+					QueueStopOrder(bot, transport);
 					mission.EscortThreat = null;
 					ApplyCaptureEscortHoldFire(mission);
 				}
@@ -3028,7 +3056,7 @@ namespace OpenRA.Mods.Common.Traits
 			var distanceSquared = (transport.Location - mission.PickupTransportCell).LengthSquared;
 			if (distanceSquared <= Info.PickupArrivalRadius * Info.PickupArrivalRadius)
 			{
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 				ReleaseTransport(mission);
 				missions.Remove(mission.Passenger);
 				return;
@@ -4464,7 +4492,7 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.BotDebug(world,
 				"{0}: capture transport {1} enters RETREAT for loaded {2}: {3}; no legal unload cell is currently available, so it holds and retries only after the bounded RETREAT interval.",
 				player, transport, mission.Passenger, reason);
-			transport.CancelActivity();
+			QueueStopOrder(bot, transport);
 		}
 
 		void ManageRetreat(IBot bot, TransportMission mission)
@@ -4552,7 +4580,7 @@ namespace OpenRA.Mods.Common.Traits
 					player, fallback, mission.Passenger);
 			}
 			else
-				transport.CancelActivity();
+				QueueStopOrder(bot, transport);
 		}
 
 		bool TryFindRetreatDrop(TransportMission mission, bool requireNonCritical, out CPos drop)

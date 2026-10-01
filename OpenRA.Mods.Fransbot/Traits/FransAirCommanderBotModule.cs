@@ -129,7 +129,7 @@ namespace OpenRA.Mods.Common.Traits
 		public override object Create(ActorInitializer init) { return new FransAirCommanderBotModule(init.Self, this); }
 	}
 
-	public class FransAirCommanderBotModule : ConditionalTrait<FransAirCommanderBotModuleInfo>, IBotTick, IBotRespondToAttack
+	public class FransAirCommanderBotModule : ConditionalTrait<FransAirCommanderBotModuleInfo>, IBotTick, IBotEnabled, IBotRespondToAttack
 	{
 		enum RaidLostTargetConfirmationState
 		{
@@ -142,6 +142,52 @@ namespace OpenRA.Mods.Common.Traits
 
 		readonly World world;
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			pendingStopOrders.Clear();
+		}
+
 		readonly HashSet<Actor> activeAircraft = [];
 		readonly Dictionary<Actor, CPos> lastMoveDestination = [];
 		readonly Dictionary<Actor, int> lastMoveWorldTick = [];
@@ -275,6 +321,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
 			activeAircraft.Clear();
 			lastMoveDestination.Clear();
 			lastMoveWorldTick.Clear();
@@ -340,6 +387,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransAirCommander.BotTick");
 			if (player.WinState != WinState.Undefined)
 				return;
@@ -381,7 +429,7 @@ namespace OpenRA.Mods.Common.Traits
 					var aircraftToRelease = aircraft.FirstOrDefault(a => a.ActorID == id && a.IsInWorld && !a.IsDead);
 					if (aircraftToRelease == null)
 						continue;
-					aircraftToRelease.CancelActivity();
+					QueueStopOrder(bot, aircraftToRelease);
 					if (!HasAmmo(aircraftToRelease))
 						QueueReturnToBase(bot, aircraftToRelease, true);
 				}
@@ -1594,7 +1642,7 @@ namespace OpenRA.Mods.Common.Traits
 				combinedSecureHoldTargetActorId = mission.TargetActorId;
 				combinedSecureHoldUntilTick = mission.ExecuteAfterWorldTick;
 				foreach (var aircraft in ResolveCommittedAirActors(mission))
-					aircraft.CancelActivity();
+					QueueStopOrder(null, aircraft);
 				FransBotLog.BotDebug(world,
 					"{0}: Air {1} holds COMBINED SECURE {2} until WT {3}; its ETA is {4} WT and {5} domains are timing departure toward the same area.",
 					player, BidderKey, mission.TargetActorId, mission.ExecuteAfterWorldTick, mission.EstimatedEtaTicks, mission.CombinedSecureGroupSize);
@@ -2130,7 +2178,7 @@ namespace OpenRA.Mods.Common.Traits
 						var droppedAircraft = combatIntelService.OwnedActors.FirstOrDefault(a => a.ActorID == id && IsManagedAircraft(a) && a.IsInWorld && !a.IsDead);
 						if (droppedAircraft == null || raidRecoverySince.ContainsKey(droppedAircraft))
 							continue;
-						droppedAircraft.CancelActivity();
+						QueueStopOrder(bot, droppedAircraft);
 						if (!HasFullRaidAmmo(droppedAircraft))
 							QueueReturnToBase(bot, droppedAircraft, true);
 					}
@@ -2257,7 +2305,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (!TryBuildKnownAntiAirSafePath(a.Location, activeObjective, knownAaZones, out var safePath))
 					{
 						foreach (var aircraft in activeAircraft.Where(x => x != null && x.IsInWorld && !x.IsDead))
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						ReleaseRaidForRebid(bot, mission.TargetActorId,
 							$"known SAM/AA exclusion blocks precision RAID PathMove to {activeObjective}");
 						return;
@@ -2291,7 +2339,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (heldFor >= Info.RaidCommittedRiskAbortHoldTicks)
 					{
 						foreach (var aircraft in activeAircraft.Where(x => x != null && x.IsInWorld && !x.IsDead))
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						ReleaseRaidForRebid(bot, mission.TargetActorId,
 							$"committed AA-safe route remained at/above risk {Info.RaidCommittedRiskAbortScore} for {heldFor} WT; peak {committedHardPeak} at {committedHardPeakCell}");
 						return;
@@ -2308,7 +2356,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (raidLostTargetConfirmationState == RaidLostTargetConfirmationState.Active)
 			{
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 				raidLostTargetConfirmationState = RaidLostTargetConfirmationState.Consumed;
 				ResetRaidApproachProgress(target);
 				if (raidStrikeIssued)
@@ -2425,7 +2473,7 @@ namespace OpenRA.Mods.Common.Traits
 				// and make exactly one confirmation pass through the last legitimately observed cell.
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead).OrderBy(a => a.ActorID))
 				{
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 					if (!QueueMove(bot, a, activeObjective, true))
 					{
 						ReleaseRaidForRebid(bot, mission.TargetActorId, "known SAM/AA exclusion blocks lost-target confirmation pass");
@@ -2459,7 +2507,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (cancelActivities)
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(null, a);
 			raidLostTargetConfirmationState = RaidLostTargetConfirmationState.Available;
 		}
 
@@ -2607,7 +2655,7 @@ namespace OpenRA.Mods.Common.Traits
 				raidRecoveryAnchors[aircraft] = missionAnchorPoint;
 			var recoveryAnchor = raidRecoveryAnchors.TryGetValue(aircraft, out var savedAnchor) ? savedAnchor : aircraft.Location;
 			ObserveRecoveryProgress(aircraft, recoveryAnchor, requireFullAmmo: true, initialize: true);
-			aircraft.CancelActivity();
+			QueueStopOrder(bot, aircraft);
 			RouteAirServiceUnit(bot, aircraft, requireFullAmmo: true, watchdog: false);
 			activeAircraft.Remove(aircraft);
 			RefreshTransientReservations();
@@ -2628,7 +2676,7 @@ namespace OpenRA.Mods.Common.Traits
 				raidRecoverySince[a] = world.WorldTick;
 				raidRecoveryAnchors[a] = origin;
 				ObserveRecoveryProgress(a, origin, requireFullAmmo: false, initialize: true);
-				a.CancelActivity();
+				QueueStopOrder(bot, a);
 				if (HasAmmo(a))
 				{
 					raidAttackMoveHomeActors.Add(a);
@@ -2662,7 +2710,7 @@ namespace OpenRA.Mods.Common.Traits
 					raidRecoveryAnchors[a] = missionAnchorPoint;
 				var recoveryAnchor = raidRecoveryAnchors.TryGetValue(a, out var savedAnchor) ? savedAnchor : a.Location;
 				ObserveRecoveryProgress(a, recoveryAnchor, requireFullAmmo: true, initialize: true);
-				a.CancelActivity();
+				QueueStopOrder(bot, a);
 				RouteAirServiceUnit(bot, a, requireFullAmmo: true, watchdog: false);
 			}
 
@@ -2694,7 +2742,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (HasAmmo(a) && (a.Location - origin).LengthSquared > 4)
 					{
 						if (returnWatchdog && !a.IsIdle)
-							a.CancelActivity();
+							QueueStopOrder(bot, a);
 						QueueAttackMove(bot, a, origin, returnWatchdog);
 						if (returnWatchdog)
 							MarkRecoveryWatchdogReissue(a, "RAID AttackMove return toward sortie origin");
@@ -2713,7 +2761,7 @@ namespace OpenRA.Mods.Common.Traits
 					if ((a.Location - recoveryAnchor).LengthSquared > 4)
 					{
 						if (watchdog && !a.IsIdle)
-							a.CancelActivity();
+							QueueStopOrder(bot, a);
 						QueueMove(bot, a, recoveryAnchor, watchdog);
 						if (watchdog)
 							MarkRecoveryWatchdogReissue(a, "RAID recovery ANCHOR regroup Move");
@@ -2894,7 +2942,7 @@ namespace OpenRA.Mods.Common.Traits
 					ResetPioneerReconProgress(reconActor, activeObjective);
 					activeOrder = FransCommanderOrder.Move;
 					hasReconSearchWaypoint = false;
-					reconActor.CancelActivity();
+					QueueStopOrder(bot, reconActor);
 					FransBotLog.BotDebug(world, "{0}: Air RECON {1} redirects to PIONEER exact objective {2}; persistent probing is temporarily superseded until the exact ore cell is scout-cleared.", player, activeTargetActorId, activeObjective);
 				}
 				else if (!pioneerWasActive)
@@ -3104,7 +3152,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (reconActor != null && reconActor.IsInWorld && !reconActor.IsDead)
 			{
 				reconActor.TraitOrDefault<AutoTarget>()?.SetStance(reconActor, UnitStance.AttackAnything);
-				reconActor.CancelActivity();
+				QueueStopOrder(null, reconActor);
 			}
 			reconActor = null;
 			reconOrigin = default;
@@ -3342,7 +3390,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (NeedsNativeRepair(aircraft) && watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "ANCHOR fallback because no repair building exists");
 			if (watchdog && !aircraft.IsIdle)
-				aircraft.CancelActivity();
+				QueueStopOrder(bot, aircraft);
 			QueueMove(bot, aircraft, retreatAnchorPoint, forceMove || watchdog);
 			if (watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "ANCHOR regroup Move");
@@ -3359,7 +3407,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (aircraft.IsIdle || watchdog)
 					{
 						if (watchdog && !aircraft.IsIdle)
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						bot.QueueOrder(new Order("Repair", aircraft, Target.FromActor(repairBuilding), false));
 						if (watchdog)
 							MarkRecoveryWatchdogReissue(aircraft, $"native Repair toward {repairBuilding}");
@@ -3376,7 +3424,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			if (watchdog && !aircraft.IsIdle)
-				aircraft.CancelActivity();
+				QueueStopOrder(bot, aircraft);
 			QueueReturnToBase(bot, aircraft, watchdog);
 			if (watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "native ReturnToBase/rearm");
