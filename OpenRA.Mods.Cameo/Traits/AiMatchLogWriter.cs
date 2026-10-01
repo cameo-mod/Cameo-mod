@@ -540,6 +540,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				.Append(value.ToString(CultureInfo.InvariantCulture));
 		}
 
+		internal static void AppendNumber(StringBuilder builder, string name, double value, bool first = false)
+		{
+			if (!first)
+				builder.Append(',');
+			builder.Append('"').Append(name).Append("\":")
+				.Append(value.ToString(CultureInfo.InvariantCulture));
+		}
+
 		internal static void AppendBoolean(StringBuilder builder, string name, bool value, bool first = false)
 		{
 			if (!first)

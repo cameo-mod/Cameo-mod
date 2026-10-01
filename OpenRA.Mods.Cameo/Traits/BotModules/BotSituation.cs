@@ -100,6 +100,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal long EnemyEconValueDestroyedWindow, EnemyEconValueDestroyedTotal, AttacksPerGameMin;
 		internal int AttacksLaunched, FirstAttackTick = -1;
 
+		// §12.14 Guerrilla map-control lead (record-only): regions where this bot holds fresh
+		// intel (seen within ScoutBotModule's StaleAfterTicks horizon — empty-but-visible counts,
+		// a region we look at and find empty IS fresh information), the total region count, and
+		// the union across enemies of regions with remembered enemy presence. GuerrillaLead is
+		// the lead ratio own-fresh/enemy-presence — 1 (at-target) while no enemy region is
+		// remembered, matching Steamroller's unseen-enemy convention.
+		internal int RegionsFresh, RegionsTotal, RegionsEnemyPresence;
+		internal double GuerrillaLead = 1;
+
 		// RV1 (AI_MASTER_PLAN §3, DESIGN §19.3), cumulative: repair orders the one repair owner sent on a hit and
 		// from its sweep, and the hits where master's second repair module would have toggled a repair back OFF.
 		internal int RepairOrders, RepairSweepOrders, RepairTogglesAvoided;
@@ -700,6 +709,38 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var profile in profiles.Values)
 				prevEnemyArmyValue[profile.Player] = profile.ArmyValue;
 
+			// §12.14 Guerrilla map-control inputs: fresh = our intel on the region is no older than
+			// the scout staleness horizon (currently visible counts as fresh — an empty look is still
+			// information); presence = any enemy's remembered army/defence/economy sits there. Both
+			// are unions over the per-enemy region tables, so one enemy's stale sightings don't hide
+			// behind another's fresh look and two enemies in one region still count once.
+			var staleAfterTicks = player.PlayerActor.TraitsImplementing<ScoutBotModule>()
+				.FirstEnabledTraitOrDefault()?.Info.StaleAfterTicks ?? 2500;
+			var regionsFresh = 0;
+			var regionsEnemyPresence = 0;
+			for (var i = 0; i < regions.CellCount; i++)
+			{
+				var fresh = false;
+				var presence = false;
+				foreach (var enemyRegions in regions.ByEnemy.Values)
+				{
+					if (i >= enemyRegions.Length)
+						continue;
+					var r = enemyRegions[i];
+					if (r == null)
+						continue;
+					if (!fresh && r.EverSeen && tick - r.LastSeenTick <= staleAfterTicks)
+						fresh = true;
+					if (!presence && r.ArmyValue + r.DefenceValue + r.EconomyValue > 0)
+						presence = true;
+					if (fresh && presence)
+						break;
+				}
+
+				regionsFresh += fresh ? 1 : 0;
+				regionsEnemyPresence += presence ? 1 : 0;
+			}
+
 			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
 			var urgency = currentUrgency == BotUrgency.Emergency
@@ -905,6 +946,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				RepairOrders = repairOrders,
 				RepairSweepOrders = repairSweepOrders,
 				RepairTogglesAvoided = repairTogglesAvoided,
+				RegionsFresh = regionsFresh,
+				RegionsTotal = regions.CellCount,
+				RegionsEnemyPresence = regionsEnemyPresence,
+				GuerrillaLead = GuerrillaLeadFor(regionsFresh, regionsEnemyPresence),
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
@@ -1826,6 +1871,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		static int RatioPct(BotCombatPredictor.Prediction p) => (int)Math.Round(p.Ratio * 100);
+
+		/// <summary>§12.14 Guerrilla lead: fresh-intel regions per region with remembered enemy
+		/// presence (the share denominators cancel). No remembered presence reads as at-target
+		/// (1.0) — an unseen enemy is never a lead reason to scout harder.</summary>
+		public static double GuerrillaLeadFor(int regionsFresh, int regionsEnemyPresence) =>
+			regionsEnemyPresence <= 0 ? 1.0 : (double)regionsFresh / regionsEnemyPresence;
 
 		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
 		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;

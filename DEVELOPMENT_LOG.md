@@ -1,3 +1,24 @@
+# 2026-10-01 — Devin (DAWN): §12.14 Guerrilla map-control lead — telemetry slice
+
+- `MasterAiBotModule` publishes the Guerrilla lead inputs on every snapshot
+  (record-only, no consumer — same convention as NOVA's merged #658 telemetry):
+  `own.regions_fresh` — regions whose intel is no older than the scout staleness
+  horizon (union over the per-enemy `RegionMemory` tables; a currently visible
+  but empty region counts — an empty look IS information);
+  `own.regions_total` / `own.regions_enemy_presence` (union of regions holding
+  remembered enemy army/defence/economy value); `own.guerrilla_lead` =
+  fresh ÷ presence (1.0 = at-target while no enemy region is remembered —
+  Steamroller's unseen→at-target convention).
+- Freshness horizon read off `ScoutBotModule.Info.StaleAfterTicks` via
+  `TraitsImplementing` — single source, the lead and the scout can never
+  disagree about "fresh". Fallback 2500 (the field's default) when no scout
+  module is mounted. New consumer edge `MasterAiBotModule → ScoutBotModule`
+  regenerated into `AI_MODULE_MAP.md`.
+- `AiMatchLogWriter` gains the `AppendNumber(double)` overload — byte-identical
+  to NOVA's #728 addition, so the two branches auto-merge.
+- `GuerrillaLeadTest` +3 (at-target when unseen, fresh÷presence ordering,
+  edge counts). No flag, no switch group — telemetry changes no decision.
+
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B

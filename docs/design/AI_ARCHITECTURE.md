@@ -2253,3 +2253,12 @@ inputs, record-only — no decision reads them, and the enemy-side numbers stay 
   personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
   tick, and the per-minute rate.
 - `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).
+
+**Telemetry (2026-10-01, DAWN):** the Guerrilla map-control lead is published too —
+`own.regions_fresh` (regions with intel no older than the scout staleness horizon — the union over
+the per-enemy region tables, so one enemy's stale sightings can't hide behind another's fresh look),
+`own.regions_total`, `own.regions_enemy_presence` (union of regions holding remembered enemy
+army/defence/economy value), and `own.guerrilla_lead` = fresh ÷ presence (the share denominators
+cancel; 1.0 — at-target — while nothing of the enemy is remembered). Record-only: no consumer reads
+it yet, and the horizon is read off `ScoutBotModule`'s `StaleAfterTicks` so the lead and the scout
+can never disagree about what "fresh" means.
