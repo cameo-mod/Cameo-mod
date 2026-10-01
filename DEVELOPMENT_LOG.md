@@ -1,3 +1,22 @@
+# 2026-10-01 — NOVA: TC-2b defend-request answering — allies get a protect squad
+
+- `UseTeamDefendAnswers` (default **false**): third channel inside
+  `PrepositionDefenceTick`, below own threat and own escort requests.
+  `TeamBlackboard.TopDefendRequest` picks the most urgent ally broadcast (ties go to
+  the weakest army); the answer is synthesised as a `BotProtectionRequest` so the
+  rally / draft / AttackMove / rolling hold-expiry path runs verbatim.
+- The ally position is outside our base radius — never an emergency — so the CA-2
+  reserve keeps a floor at home while we help; `TeamDefendAnswerMinPoolUnits` (8)
+  means a thin pool declines entirely. Fast squads still react to own threats only.
+- `TeamBlackboard.CollectBroadcasts` exposes per-ally detail the summary drops;
+  `Collect` now delegates to it. Fog-honest: ally-published data only; inert in 1v1.
+- ai.yaml `UseTeamDefendAnswers: false` x6; manifest group `S_tc2_defend_answers`.
+- 4 tests (`TeamDefendAnswerTest`): highest urgency wins, tie → weakest, non-requests
+  and positionless broadcasts skipped, empty/1v1 → null.
+- Docs: ARCHITECTURE 12.17 second-consumer bullet; ROADMAP TC row.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
 # 2026-10-01 — NOVA: TC-2a synchronised attack windows — ally Climax opens the launch bar
 
 - `SquadManagerBotModuleCAInfo.UseTeamSyncAttacks` (default **false**) — first TC-2

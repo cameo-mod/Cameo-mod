@@ -163,12 +163,19 @@ namespace OpenRA.Mods.CA.Traits
 		/// unsynced by design (every bot runs on the host); an ally without an
 		/// enabled provider contributes nothing, so a 1v1 yields a zeroed summary.
 		/// </summary>
-		public static TeamBlackboardSummary Collect(Player me)
-		{
-			if (me?.World == null)
-				return new TeamBlackboardSummary();
+		public static TeamBlackboardSummary Collect(Player me) => Aggregate(CollectBroadcasts(me));
 
+		/// <summary>
+		/// The allied broadcasts themselves (allies only, never the caller) — for
+		/// consumers that need per-ally detail the summary drops, like which ally is
+		/// asking for help and where.
+		/// </summary>
+		public static List<TeamBroadcast> CollectBroadcasts(Player me)
+		{
 			var broadcasts = new List<TeamBroadcast>();
+			if (me?.World == null)
+				return broadcasts;
+
 			foreach (var p in me.World.Players.Where(p => p != me && p.IsBot && me.IsAlliedWith(p)))
 			{
 				var member = p.PlayerActor?.TraitsImplementing<IBotTeamMember>().FirstEnabledTraitOrDefault();
@@ -176,7 +183,24 @@ namespace OpenRA.Mods.CA.Traits
 					broadcasts.Add(member.Broadcast);
 			}
 
-			return Aggregate(broadcasts);
+			return broadcasts;
+		}
+
+		/// <summary>
+		/// TC-2b: the ally most worth answering — highest urgency level first; a tie
+		/// goes to the weakest ally (lowest published army value is the most desperate
+		/// defence). Broadcasts without a usable defend position are skipped; null or
+		/// empty input yields null.
+		/// </summary>
+		public static TeamBroadcast TopDefendRequest(IEnumerable<TeamBroadcast> broadcasts)
+		{
+			if (broadcasts == null)
+				return null;
+
+			return broadcasts
+				.Where(b => b != null && b.RequestsDefence && b.DefendPosition != WPos.Zero)
+				.OrderByDescending(b => b.UrgencyLevel).ThenBy(b => b.OwnArmyValue)
+				.FirstOrDefault();
 		}
 	}
 }

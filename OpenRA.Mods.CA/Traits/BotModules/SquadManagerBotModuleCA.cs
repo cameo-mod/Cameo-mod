@@ -232,6 +232,17 @@ namespace OpenRA.Mods.CA.Traits
 			"blackboard (ally-published data only); a 1v1 or absent ally provider is bit-identical.")]
 		public readonly bool UseTeamSyncAttacks = false;
 
+		[Desc("TC-2b (12.17): answer an allied bot's broadcast defend request — a protect squad",
+			"rallies at the ally's published defend position, below own threat and own escort",
+			"requests in priority. The draft still honours the CA-2 reserve (the ally's position",
+			"is outside our base radius, so it is never treated as an emergency).",
+			"False = allies are never answered, bit-identical.")]
+		public readonly bool UseTeamDefendAnswers = false;
+
+		[Desc("Minimum idle units at home before an ally defend request is answered — a thin",
+			"pool stays home regardless of how loud the request is.")]
+		public readonly int TeamDefendAnswerMinPoolUnits = 8;
+
 		[Desc("Percent of the desired attack force bar required while the Director is in BuildUp.",
 			"A disabled/absent Director also reads BuildUp — 100 keeps the baseline bar.")]
 		public readonly int DirectorBuildUpForceScalePercent = 100;
@@ -1525,7 +1536,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var prepositionOn = Info.PrepositionDefence && threatPredictionProviders is { Length: > 0 };
 			var requestsOn = Info.UseProtectionRequests && protectionRequestProviders is { Length: > 0 };
-			if ((!prepositionOn && !requestsOn) || World.WorldTick < nextPrepositionTick)
+			var teamAnswersOn = Info.UseTeamDefendAnswers;
+			if ((!prepositionOn && !requestsOn && !teamAnswersOn) || World.WorldTick < nextPrepositionTick)
 				return;
 
 			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
@@ -1537,6 +1549,21 @@ namespace OpenRA.Mods.CA.Traits
 			// An escort request is a standing defence job on the same army_value
 			// scale - but a real incoming attack always outranks a guard job.
 			var request = threat == null ? SelectProtectionRequest() : null;
+
+			// TC-2b: an ally's broadcast defend request is a third channel, below own
+			// threat and own escort. Synthesised as a BotProtectionRequest so rally,
+			// draft, AttackMove and hold-expiry all reuse the escort path verbatim —
+			// the rolling hold lets a retracted request release within one interval.
+			// A thin home pool stays home regardless of how loud the request is.
+			if (threat == null && request == null && teamAnswersOn &&
+				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			{
+				var ally = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
+				if (ally != null)
+					request = new BotProtectionRequest(World.Map.CellContaining(ally.DefendPosition),
+						ally.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+			}
+
 			if (threat == null && request == null)
 				return;
 

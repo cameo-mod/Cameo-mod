@@ -209,7 +209,9 @@ the fog sequencing.
     defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant.
     **NOVA**, with DI. TC-1 team blackboard publisher `nova/team-commander-1` —
     publish-only, no switch. TC-2a `nova/tc2-sync-attacks` — ally Climax opens our
-    launch window (group `R_tc2_sync_attacks`, inert in 1v1).
+    launch window (group `R_tc2_sync_attacks`, inert in 1v1). TC-2b
+    `nova/tc2-defend-answers` — ally defend requests answered via the protect-squad
+    escort path (group `S_tc2_defend_answers`).
   - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
     refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
     control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.

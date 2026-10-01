@@ -2456,6 +2456,15 @@ enumerates enemy actors.
   release inside the same fleeting window. Runs standalone (pacing-off reads scale 100)
   or composed with DI-2; a 1v1 or absent ally provider yields `AnyClimax = false` —
   bit-identical. Switch group `R_tc2_sync_attacks`.
+- **Second consumer (TC-2b — defend-request answering):** `UseTeamDefendAnswers` (default
+  false) adds a third channel inside `PrepositionDefenceTick`, below own threat and own
+  escort requests: `TeamBlackboard.TopDefendRequest` picks the most urgent broadcast
+  (ties to the weakest ally), and the answer is synthesised as a `BotProtectionRequest`
+  — rally, draft, AttackMove and rolling hold-expiry reuse the escort path verbatim.
+  The ally's position sits outside our base radius, so the CA-2 reserve still keeps a
+  floor at home, and `TeamDefendAnswerMinPoolUnits` (default 8) means a thin pool stays
+  home entirely. `CollectBroadcasts` exposes the per-ally detail the summary drops.
+  Switch group `S_tc2_defend_answers`; inert in 1v1.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count
