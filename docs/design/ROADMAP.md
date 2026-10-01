@@ -202,8 +202,10 @@ the fog sequencing.
   - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the
     analyst; input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
     candidate per finding. **Claude** (Devin Cloud out of tokens until next week).
-  - [ ] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
-    defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant. **NOVA**, with DI.
+  - [~] **M** TC Team Commander for team games (§11): shared target + synchronised attacks,
+    defend requests, expansion claims, role split, human-ally beacons; 2v2 harness variant.
+    **NOVA**, with DI. TC-1 team blackboard publisher `nova/team-commander-1` —
+    publish-only, no switch.
   - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
     refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
     control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.

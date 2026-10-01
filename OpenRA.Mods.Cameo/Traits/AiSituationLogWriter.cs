@@ -277,6 +277,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			// pacing/aggression telemetry; no consumer yet (DI-2).
 			AiMatchLogWriter.AppendNumber(builder, "director_tension", situation.DirectorTension);
 			AiMatchLogWriter.AppendString(builder, "director_phase", situation.DirectorPhase.ToString().ToLowerInvariant());
+
+			// TC-1 (AI_ARCHITECTURE §12.17): the team blackboard summary — allied bots
+			// only (the own broadcast is never folded in), publish-always; a 1v1 or a
+			// team without an allied bot provider reads all zeros.
+			AiMatchLogWriter.AppendNumber(builder, "team_allied_bots", situation.TeamAlliedBots);
+			AiMatchLogWriter.AppendNumber(builder, "team_army_value", situation.TeamArmyValue);
+			AiMatchLogWriter.AppendNumber(builder, "team_max_tension", situation.TeamMaxTension);
+			AiMatchLogWriter.AppendNumber(builder, "team_defend_requests", situation.TeamDefendRequests);
+			AiMatchLogWriter.AppendNumber(builder, "team_shared_target", situation.TeamSharedTarget);
 			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 
