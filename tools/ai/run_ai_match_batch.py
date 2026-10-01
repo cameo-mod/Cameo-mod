@@ -506,6 +506,9 @@ def run_match(
     file is shared across matches in a batch — the previous match's mtime
     must not arm the next match's window.
     """
+    # BELOW_NORMAL priority (Windows): an uncapped match uses every cycle it gets; the maintainer's desktop and input
+    # must stay responsive (2026-10-01: 7 instances froze the mouse). The game still gets all otherwise-idle CPU.
+    priority = getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0) if os.name == "nt" else 0
     process = subprocess.Popen(
         [str(executable), *args],
         cwd=engine,
@@ -514,6 +517,7 @@ def run_match(
         text=True,
         encoding="utf-8",
         errors="replace",
+        creationflags=priority,
     )
 
     output_parts = []
