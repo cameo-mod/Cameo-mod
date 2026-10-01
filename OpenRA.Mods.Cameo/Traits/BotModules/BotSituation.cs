@@ -123,6 +123,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// remembered, matching Steamroller's unseen-enemy convention.
 		internal int RegionsFresh, RegionsTotal, RegionsEnemyPresence;
 		internal double GuerrillaLead = 1;
+		// §13.1 discipline telemetry (record-only): the "never do" failures a top-tier bot
+		// drives to zero — banked cash (Cash+Resources at snapshot), brownout ticks
+		// (ExcessPower < 0), and idle-production ticks (per enabled queue sitting with no
+		// current item and nothing queued — each idle factory counts separately).
+		// Own-side scalars only; a disabled master never accumulates and publishes zeros.
+		internal long BankedCash, BrownoutTicks, IdleProductionTicks;
+		internal int ProductionQueues;
 
 		// RV1 (AI_MASTER_PLAN §3, DESIGN §19.3), cumulative: repair orders the one repair owner sent on a hit and
 		// from its sweep, and the hits where master's second repair module would have toggled a repair back OFF.
@@ -470,6 +477,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// IM-1: the persistent layers object — its EMA history lives across snapshots, so it is
 		// constructed once and republished in place (Situation.Influence hands out the live read).
 		readonly BotInfluenceLayers influenceLayers;
+		// §13.1 discipline telemetry: cached own-Player trait refs (filled lazily on the
+		// first tick — PlayerActor traits don't change) plus the per-tick counters the
+		// snapshot publishes. Record-only: deliberately not in MasterAiBotSavedState —
+		// a save/load restarts the counters at 0, the honest reset for telemetry.
+		PlayerResources cachedResources;
+		PowerManager cachedPower;
+		ProductionQueue[] cachedQueues;
+		long brownoutTicks, idleProductionTicks;
+		int productionQueueCount;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
 		readonly Queue<(int Tick, int Delta)> killSamples = new();
@@ -815,6 +831,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (IsTraitDisabled || bot.Player != player)
 				return;
+
+			// §13.1: per-tick discipline counters — brownout (ExcessPower < 0) and
+			// fully-idle enabled production queues (each idle factory counts).
+			if (cachedPower == null)
+			{
+				cachedResources = player.PlayerActor.TraitOrDefault<PlayerResources>();
+				cachedPower = player.PlayerActor.TraitOrDefault<PowerManager>();
+				cachedQueues = player.PlayerActor.TraitsImplementing<ProductionQueue>().ToArray();
+				productionQueueCount = cachedQueues.Length;
+			}
+
+			if (cachedPower != null && cachedPower.ExcessPower < 0)
+				brownoutTicks++;
+			foreach (var queue in cachedQueues)
+				if (queue.Enabled && queue.CurrentItem() == null && !queue.AllQueued().Any())
+					idleProductionTicks++;
 
 			var tick = player.World.WorldTick;
 			ReopenDormant(tick);
@@ -1236,7 +1268,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				TeamArmyValue = team.TotalArmyValue,
 				TeamMaxTension = team.MaxTension,
 				TeamDefendRequests = team.DefendRequests,
-				TeamSharedTarget = team.SharedTargetCount
+				TeamSharedTarget = team.SharedTargetCount,
+				BankedCash = cachedResources == null ? 0 : cachedResources.Cash + cachedResources.Resources,
+				BrownoutTicks = brownoutTicks,
+				IdleProductionTicks = idleProductionTicks,
+				ProductionQueues = productionQueueCount
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

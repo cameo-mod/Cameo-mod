@@ -263,6 +263,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "steamroller_lead", situation.SteamrollerLead);
 			AiMatchLogWriter.AppendNumber(builder, "rush_lead", situation.RushLead);
 
+			// §13.1 discipline telemetry (record-only): the "never do" counters — banked
+			// cash at snapshot, brownout ticks, per-queue idle production ticks.
+			AiMatchLogWriter.AppendNumber(builder, "banked_cash", situation.BankedCash);
+			AiMatchLogWriter.AppendNumber(builder, "brownout_ticks", situation.BrownoutTicks);
+			AiMatchLogWriter.AppendNumber(builder, "idle_production_ticks", situation.IdleProductionTicks);
+			AiMatchLogWriter.AppendNumber(builder, "production_queues", situation.ProductionQueues);
+
 			// RV1 repair-owner telemetry (cumulative).
 			AiMatchLogWriter.AppendNumber(builder, "repair_orders", situation.RepairOrders);
 			AiMatchLogWriter.AppendNumber(builder, "repair_sweep_orders", situation.RepairSweepOrders);

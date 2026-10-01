@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 2026-10-01 — Devin (NOVA): UW-1 — derived `UnitsToBuild` weights (AI_ARCHITECTURE §2.8b item 3)
 
 - `UnitBuilderBotModuleCAInfo.UseDerivedUnitWeights` (default **false**) plus new
@@ -214,7 +213,6 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
 - `docs/design/AI_ARCHITECTURE.md` §12.6: donor-evaluation verdict recorded;
   `FransRiskModel` left open (route-risk, ZG-adjacent).
 - `docs/design/ROADMAP.md`: CA-2 row annotated — guard evaluated + ported.
-=======
 # 2026-10-01 — Devin (DAWN): §12.14 Guerrilla map-control lead — telemetry slice
 
 - `MasterAiBotModule` publishes the Guerrilla lead inputs on every snapshot
@@ -15730,6 +15728,7 @@ ZG-b fog-honest territory/ownership/doors merged).
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
 
+<<<<<<< HEAD
 # 2026-10-01 — NOVA: IM-2 — threats spread across the region boundary, router reads the blend
 
 IM-1 stacked branch `nova/im-2-spread`: the published `ThreatGround`/`ThreatAir`
@@ -15894,5 +15893,18 @@ Task TC-1: the publish end of the Team Commander (AI_DEEP_RESEARCH §11). Worktr
   `RuntimeHelpers.GetUninitializedObject` stand-in.
 - Docs: AI_ARCHITECTURE 12.17; ROADMAP row M TC marked [~]. Boot-gate deferred
   to orchestrator.
+=======
+# 2026-10-01 — NOVA: §13.1 discipline telemetry — the "never do" counters
+
+- `MasterAiBotModule` accumulates per-tick in `BotTick` (before the snapshot gate):
+  `brownoutTicks` (`PowerManager.ExcessPower < 0`) and `idleProductionTicks` (each enabled
+  `ProductionQueue` with no `CurrentItem` and nothing `AllQueued` counts once per tick).
+  Trait refs cached lazily on first tick. Snapshot publishes `BankedCash`
+  (`Cash + Resources`), `BrownoutTicks`, `IdleProductionTicks`, `ProductionQueues`.
+- `AiSituationLogWriter`: `own.banked_cash`, `own.brownout_ticks`,
+  `own.idle_production_ticks`, `own.production_queues` — publish-always, record-only.
+- Not persisted in `MasterAiBotSavedState` — record-only telemetry restarts at 0 on
+  load, same convention as the Director wave. No consumer, no flag, no switch letter.
+- Docs: AI_ARCHITECTURE telemetry note appended (§12.14 list tail).
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>

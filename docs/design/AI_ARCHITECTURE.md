@@ -2441,3 +2441,10 @@ enumerates enemy actors.
   identical because there is no flag. TC-2's consumers are already named in
   §11, all deferred: synchronised attack windows, defend-request answering,
   expansion-claim deconfliction, role-split bias and human-ally beacons.
+**Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
+snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
+(per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count
+per enabled `ProductionQueue` sitting with no current item and nothing queued — each idle
+factory counts separately) and `own.production_queues`. Own-side trait reads only —
+record-only, publish-always, no consumer and no flag; the LA analyst reads them for §13.1's
+drive-to-zero goal, and a save/load restarts the counters at 0 (honest reset, same as DI-1).
