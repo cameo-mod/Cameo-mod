@@ -84,6 +84,7 @@ World:
 
 Player:
 	SupportPowerBotModule:
+		RequiresCondition: classicbot
 		Decisions:
 			wc2_holyvision:
 				OrderName: wc2_holyvision

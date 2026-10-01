@@ -500,7 +500,6 @@ Player:
 			ZombieToxins:
 				OrderName: ZombieToxins
 				MinimumAttractiveness: 1000
-				FineScanRadius: 3
 				Consideration@1:
 					Against: Enemy
 					Types: Infantry
@@ -643,7 +642,7 @@ Player:
 			spyplane:
 				OrderName: SovietSpyPlane
 				MinimumAttractiveness: 1111
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Infantry, Vehicle, Defense
@@ -665,7 +664,6 @@ Player:
 			IronCurtain:
 				OrderName: IronCurtain
 				MinimumAttractiveness: 3333
-				FineScanRadius: 3
 				Consideration@1:
 					Against: Ally
 					Types: Vehicle, Tank
@@ -681,7 +679,7 @@ Player:
 			Chronoshift:
 				OrderName: ChronoshiftAI
 				MinimumAttractiveness: 5
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -697,7 +695,7 @@ Player:
 			ChronoReinforcements:
 				OrderName: ChronoReinforcements
 				MinimumAttractiveness: 1234
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -719,7 +717,6 @@ Player:
 			GeneticMutator:
 				OrderName: GeneticMutator
 				MinimumAttractiveness: 1000
-				FineScanRadius: 3
 				Consideration@1:
 					Against: Enemy
 					Types: Infantry
@@ -729,7 +726,6 @@ Player:
 			ForceShield:
 				OrderName: ForceShield
 				MinimumAttractiveness: 1000
-				FineScanRadius: 3
 				Consideration@1:
 					Against: Ally
 					Types: aiforceshield
@@ -739,7 +735,7 @@ Player:
 			ra2spyplane:
 				OrderName: SovietRA2SpyPlane
 				MinimumAttractiveness: 1
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -749,7 +745,7 @@ Player:
 			paratroopers:
 				OrderName: SovietParatroopers
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -783,7 +779,7 @@ Player:
 			japanparatroopers:
 				OrderName: japanparatroopers
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -817,7 +813,7 @@ Player:
 			NaxisParatroopers:
 				OrderName: NaxisParatroopers
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -851,7 +847,7 @@ Player:
 			NaxiSupportZombies:
 				OrderName: NaxiSupportZombies
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -885,7 +881,7 @@ Player:
 			rapidreinforcements:
 				OrderName: rapidreinforcements
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -919,7 +915,7 @@ Player:
 			ra2paratroopers:
 				OrderName: USA Paratroopers
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -953,7 +949,7 @@ Player:
 			aaparatroopers:
 				OrderName: aaparatroopers
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -987,7 +983,7 @@ Player:
 			SteelSupportSpawner:
 				OrderName: SteelSupportSpawner
 				MinimumAttractiveness: 3333
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Building
@@ -1021,7 +1017,7 @@ Player:
 			aaclusterbomb:
 				OrderName: AAClusterBomb
 				MinimumAttractiveness: 5
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Vehicle, Structure
@@ -1037,7 +1033,7 @@ Player:
 			aachaospower:
 				OrderName: AsianChaosSuperweapon
 				MinimumAttractiveness: 7
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Vehicle, Infantry
@@ -1053,7 +1049,7 @@ Player:
 			ra2airportpara:
 				OrderName: Allies2Paratroopers
 				MinimumAttractiveness: 5
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1069,7 +1065,7 @@ Player:
 			ra2chrono:
 				OrderName: RA2ChronoshiftAI
 				MinimumAttractiveness: 5
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1085,7 +1081,7 @@ Player:
 			droppods:
 				OrderName: GDI Drop
 				MinimumAttractiveness: 5
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1293,7 +1289,7 @@ Player:
 			JapanSuperBomber:
 				OrderName: JapanSuperBomber
 				MinimumAttractiveness: 1
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Ground
@@ -1309,63 +1305,6 @@ Player:
 			IonCannonPower:
 				OrderName: IonCannonPowerInfoOrder
 				MinimumAttractiveness: 1000
-				FineScanRadius: 2
-				Consideration@1:
-					Against: Enemy
-					Types: Air, Tank, Vehicle, Infantry, Water
-					Attractiveness: 2
-					TargetMetric: Value
-					CheckRadius: 6000
-				Consideration@2:
-					Against: Enemy
-					Types: Structure
-					Attractiveness: 4
-					TargetMetric: Value
-					CheckRadius: 2000
-				Consideration@3:
-					Against: Enemy
-					Types: Defense
-					Attractiveness: 3
-					TargetMetric: Value
-					CheckRadius: 3000
-				Consideration@4:
-					Against: Ally
-					Types: Ground, Water
-					Attractiveness: -9
-					TargetMetric: Value
-					CheckRadius: 9000
-			Blizzard:
-				OrderName: wc2_blizzard
-				MinimumAttractiveness: 1000
-				FineScanRadius: 2
-				Consideration@1:
-					Against: Enemy
-					Types: Air, Tank, Vehicle, Infantry, Water
-					Attractiveness: 2
-					TargetMetric: Value
-					CheckRadius: 6000
-				Consideration@2:
-					Against: Enemy
-					Types: Structure
-					Attractiveness: 4
-					TargetMetric: Value
-					CheckRadius: 2000
-				Consideration@3:
-					Against: Enemy
-					Types: Defense
-					Attractiveness: 3
-					TargetMetric: Value
-					CheckRadius: 3000
-				Consideration@4:
-					Against: Ally
-					Types: Ground, Water
-					Attractiveness: -9
-					TargetMetric: Value
-					CheckRadius: 9000
-			DeathAndDecay:
-				OrderName: wc2_deathanddecay
-				MinimumAttractiveness: 1000
-				FineScanRadius: 2
 				Consideration@1:
 					Against: Enemy
 					Types: Air, Tank, Vehicle, Infantry, Water
@@ -1393,7 +1332,6 @@ Player:
 			InquisitionIonCannon:
 				OrderName: InquisitionIonCannon
 				MinimumAttractiveness: 1000
-				FineScanRadius: 2
 				Consideration@1:
 					Against: Enemy
 					Types: Air, Tank, Vehicle, Infantry, Water
@@ -1439,7 +1377,7 @@ Player:
 			NukePower:
 				OrderName: NukePowerInfoOrder
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1455,7 +1393,7 @@ Player:
 			NaxiMeteor:
 				OrderName: NaxiMeteor
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1471,7 +1409,7 @@ Player:
 			NaxiV1Rocket:
 				OrderName: NaxiV1Rocket
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1487,7 +1425,7 @@ Player:
 			PulseMissile:
 				OrderName: PulseMissile
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1503,7 +1441,7 @@ Player:
 			LightningStorm:
 				OrderName: LightningStorm
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1519,7 +1457,7 @@ Player:
 			12Rockets:
 				OrderName: 12Rockets
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1535,7 +1473,7 @@ Player:
 			MagicOrbHailstorm:
 				OrderName: MagicOrbHailstorm
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1551,7 +1489,7 @@ Player:
 			ra1_allies_chronovortex:
 				OrderName: ra1_allies_chronovortex
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Structure
@@ -1654,7 +1592,7 @@ Player:
 			PsychicDominator:
 				OrderName: PsychicDominator
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Vehicle, Infantry
@@ -1676,7 +1614,7 @@ Player:
 			TraitorsPower:
 				OrderName: TraitorsPower
 				MinimumAttractiveness: 3000
-				IgnoreVisibility: true
+				IgnoreVisibility: false
 				Consideration@1:
 					Against: Enemy
 					Types: Vehicle, Infantry
@@ -1743,7 +1681,6 @@ Player:
 			EmergencyRepair:
 				OrderName: EmergencyRepair
 				MinimumAttractiveness: 3000
-				FineScanRadius: 2
 				Consideration@1:
 					Against: Ally
 					Types: Repair
@@ -1753,7 +1690,6 @@ Player:
 			FrenzyPower:
 				OrderName: FrenzyPower
 				MinimumAttractiveness: 3000
-				FineScanRadius: 2
 				Consideration@1:
 					Against: Ally
 					Types: Vehicle, Tank
@@ -3287,7 +3223,6 @@ Player:
 			AnswerA10Strike:
 				OrderName: AnswerA10Strike
 				MinimumAttractiveness: 1000
-				FineScanRadius: 2
 				Consideration@1:
 					Against: Enemy
 					Types: Air, Tank, Vehicle, Infantry, Water
@@ -3357,6 +3292,126 @@ Player:
 					Attractiveness: -10
 					TargetMetric: Value
 					CheckRadius: 7c0
+	SupportPowerBotASModule@wc2:
+		RequiresCondition: genericbot
+		Decisions:
+			wc2_holyvision:
+				OrderName: wc2_holyvision
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 1
+					TargetMetric: None
+					CheckRadius: 5c0
+			wc2_spy_of_kilrogg:
+				OrderName: wc2_spy_of_kilrogg
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 1
+					TargetMetric: None
+					CheckRadius: 5c0
+			wc2_healing:
+				OrderName: wc2_healing
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Ally
+					Types: Heal, Healing
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_bloodlust:
+				OrderName: wc2_bloodlust
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_haste:
+				OrderName: wc2_haste
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_slow:
+				OrderName: wc2_slow
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_invisibility:
+				OrderName: wc2_invisibility
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			Blizzard:
+				OrderName: wc2_blizzard
+				MinimumAttractiveness: 1000
+				Consideration@1:
+					Against: Enemy
+					Types: Air, Tank, Vehicle, Infantry, Water
+					Attractiveness: 2
+					TargetMetric: Value
+					CheckRadius: 6000
+				Consideration@2:
+					Against: Enemy
+					Types: Structure
+					Attractiveness: 4
+					TargetMetric: Value
+					CheckRadius: 2000
+				Consideration@3:
+					Against: Enemy
+					Types: Defense
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 3000
+				Consideration@4:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -9
+					TargetMetric: Value
+					CheckRadius: 9000
+			DeathAndDecay:
+				OrderName: wc2_deathanddecay
+				MinimumAttractiveness: 1000
+				Consideration@1:
+					Against: Enemy
+					Types: Air, Tank, Vehicle, Infantry, Water
+					Attractiveness: 2
+					TargetMetric: Value
+					CheckRadius: 6000
+				Consideration@2:
+					Against: Enemy
+					Types: Structure
+					Attractiveness: 4
+					TargetMetric: Value
+					CheckRadius: 2000
+				Consideration@3:
+					Against: Enemy
+					Types: Defense
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 3000
+				Consideration@4:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -9
+					TargetMetric: Value
+					CheckRadius: 9000
 	HarvesterBotModuleCA:
 		RequiresCondition: genericbot || classicbot
 		HarvestersPerRefinery: 3
