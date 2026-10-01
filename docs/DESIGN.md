@@ -5125,6 +5125,40 @@ override": *"Refuse, but emergencies can override."*
 * **Guard:** `BotOwnershipWatchdog` (LC5) measures the result: with the gate enforcing and squads on LC1 (#681),
   `ownership.double_owner` must be 0.
 
+### 19.7 Base defences cover the whole base, per specialty; ~75% on the rim (maintainer 2026-10-01) — binding
+
+*"The whole base should always be covered by defenses so the radius of the defenses should be taken into account when
+placing them … every defense building has their own specialty — guard tower against infantry, advanced guard tower
+against vehicles, skyshield against aircraft — so the total coverage must be from all those types … there should always
+be a bias towards the enemy base and the outside of the base with around 75% of all defenses placed on the
+circumference … but still some defenses to protect against intruders who have managed to sneak by."*
+
+* A base cell is protected only when it is in weapon range of a defence of EACH specialty (anti-infantry, anti-armour,
+  anti-air — taken from `BotUnitRoles`, the one classifier). A new defence goes where it newly covers the most base
+  cells for the specialties it holds; coverage dominates, the rim and the enemy side break near-ties.
+* ~75% of defences stand on the rim (`PerimeterSharePercent`), biased toward the enemy (fog-honest: remembered enemy
+  defences, else the map centre); the rest inside, by coverage only.
+* Implementation: `DefenseCoveragePlanner` (genericbot) through `IBotDefensePlacementAdvisor`; `classic` keeps its placement.
+
+### 19.8 A bot acts only through orders (2026-10-01) — binding
+
+A bot runs on the host only (`Player.cs`: `IsBot && Game.IsHost`). Any direct change to an actor (`CancelActivity`,
+`QueueActivity`, setting state) happens on the host alone and **desyncs a multiplayer game**. Every bot decision is an
+`Order` through `IBot.QueueOrder` (which is also where the §19.6 order gate sees it). Measured 2026-10-01: 99 direct-call
+sites in 8 vendored Fransbot modules, 0 in CA and Cameo; a module with such sites is not armed for `genericbot` until
+they are orders (`FransTransportCommanderBotModule` was disarmed for this reason).
+
+### 19.9 Engineers: stealth into the base, escorts to defended tech, one engineer per target (maintainer 2026-09-30) — binding
+
+* **Enemy-base buildings are taken by STEALTH** — never escorted (an escort gives the engineer away); the engineer
+  walks a safe route; ~25% of such infiltrations ride in a transport run of 1–5 engineers, one dropped per building.
+* **Tech buildings (neutral or priority captures) get an ESCORT only when armed enemies hold the area**; a safe one is
+  taken solo. The engineer goes once the escort has thinned the defenders, not merely arrived.
+* *"If you send 3 engineers to the same target and they all die then maybe that path was not safe enough … they should
+  try to be sent to different targets"*: one engineer per target, the next one goes to a different target; a target that
+  keeps killing engineers goes on the dormant shelf. A "safe path" must really be scored along the route and walked
+  (the inherited CA `SafePath` never was), and re-checked while walking.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on
@@ -5229,3 +5263,12 @@ Vengeance), whose better variants are harvested even when Cameo never copied the
 **Order:** families with two variants **live at once** first (they run side by side today), then prerequisites for
 returning content (the Generals factions' weapons in the unloaded `weapons/generals.yaml` use `Projectile:
 MissileCA`, which Cameo does not have — mounting that file today would stop the boot), then by resolved USE.
+
+## 23. Gameplay rulings
+
+### 23.1 The Floating Disc's power drain inverts a power plant (maintainer 2026-10-01) — binding
+
+After CA `7fe5495a1`: a drained power plant produces **−1 x its output** instead of shutting off — *"instead of
+multiplying it by 0 it should multiply by minus 1"*. `^PowerPlant` keeps its `Power` under `diskdrain` and applies
+`PowerMultiplier@DISKDRAIN: -100`, derived from each plant's own amount (CA hard-codes −2x per plant), so it survives
+rebalancing and stacks with veterancy/upgrades. All 36 plants verified through the resolver, incl. the garrison reactors.

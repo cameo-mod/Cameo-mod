@@ -7,6 +7,10 @@ Provider files add technical context and should point here for collaboration pro
 
 ## Start every task
 
+0. **Read `docs/WORKFLOW.md` — the standing operating rules (binding, maintainer 2026-10-01):** plan first; the
+   coordinator (Claude) is the only one who merges and runs A/B tests; Devin agents code on branches and hand in
+   "INC-N ready: <branch>@<hash> — switch: <name>"; work goes into increments, not per-PR tests; ≤ 3 game drivers on
+   the machine; boot gates launch `OpenRA.exe` directly; minimum tokens (read sections, script sweeps, short notes).
 1. Read `docs/TASK_INDEX.md`, then the exact sections and existing tools it routes for the task.
 2. Inspect the current checkout, branch, remotes, worktrees, open task record, and related pull
    requests before deciding that work is missing.
