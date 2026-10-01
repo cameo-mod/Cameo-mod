@@ -78,6 +78,14 @@ namespace OpenRA.Mods.CA.Traits
 			"If false, the bot will ignore compositions and just use UnitsToBuild.")]
 		public readonly bool UseCompositions = false;
 
+		[Desc("AI_ARCHITECTURE.md §2.8b item 3 (UW-1): derive the UnitsToBuild weights from the enabled",
+			"personality's RoleMix and each candidate's Versus-weighted strength instead of using the",
+			"yaml shares. The yaml rows stay the membership gate; rows for units with no combat role",
+			"pass through as overrides, and an active composition still wins. Off until the next",
+			"increment A/B (switch group I_derived_unit_weights). Inert on classic: it carries no",
+			"RoleMix and no IBotUnitRoles provider.")]
+		public readonly bool UseDerivedUnitWeights = false;
+
 		[Desc("Minimum ticks before selecting a new composition.")]
 		public readonly int MinCompositionSelectInterval = 750;
 
@@ -144,6 +152,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider compositionProvider;
 		IBotUnitRoles unitRoles;
+		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
@@ -611,11 +620,33 @@ namespace OpenRA.Mods.CA.Traits
 
 		Dictionary<string, int> GetUnitsToBuildForCategory(string queueCategory)
 		{
-			if (compositionsModule == null || compositionsModule.UnitCompositions.Count == 0 ||
-				activeComposition == null || !CompositionAppliesToCategory(activeComposition, queueCategory))
-				return Info.UnitsToBuild;
+			var compositionWeights = compositionsModule != null && compositionsModule.UnitCompositions.Count != 0 &&
+				activeComposition != null && CompositionAppliesToCategory(activeComposition, queueCategory)
+					? activeComposition.UnitsToBuild : null;
 
-			return activeComposition.UnitsToBuild;
+			// UW-1 (AI_ARCHITECTURE.md §2.8b item 3): the inputs are resolved only when the flag
+			// is on and no composition claims the category — an enabled squad manager carrying a
+			// RoleMix plus an enabled IBotUnitRoles provider (genericbot-gated). Flag off skips
+			// every lookup and returns the pre-change table byte-identical.
+			SquadManagerBotModuleCA manager = null;
+			IReadOnlyDictionary<string, int> mix = null;
+			IBotUnitRoles roles = null;
+			if (compositionWeights == null && Info.UseDerivedUnitWeights &&
+				(manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault()) != null &&
+				(mix = manager.Info.RoleMix) != null && mix.Count != 0)
+				roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+
+			return derivedUnitWeights.Select(Info.UseDerivedUnitWeights, compositionWeights, Info.UnitsToBuild,
+				mix, manager?.Info.RoleMixRoleFloorPct ?? 0, roles, DerivedUnitStrength);
+		}
+
+		// A candidate's strength is read off its own type profile — no enemy is ever
+		// enumerated (fog-honest, DESIGN §19.5).
+		double DerivedUnitStrength(string name)
+		{
+			return world.Map.Rules.Actors.TryGetValue(name, out var actorInfo)
+				? DerivedUnitWeights.Strength(BotUnitProfiles.Get(world.Map.Rules, actorInfo))
+				: 1.0;
 		}
 
 		void UpdateComposition()
