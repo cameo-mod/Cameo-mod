@@ -68,6 +68,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"engineer along it through waypoints. -1 = the parents' behaviour, the default until its A/B.")]
 		public readonly int MaxExposedRouteCells = -1;
 
+		[Desc("Re-check a routed capture while the engineer walks (v2): every this many ticks the REMAINING route cells (ahead",
+			"of the engineer, outside ApproachCells) are scored; if more than MaxExposedRouteCells are exposed a fresh safe route",
+			"from the engineer's cell is issued, and if none passes the engineer is pulled back to the base and the attempt is",
+			"released (outmatched). Needs MaxExposedRouteCells >= 0; runs on its own countdown in BotTick (independent of",
+			"MinimumCaptureDelay). 0 = off, the default.")]
+		public readonly int RouteRecheckTicks = 0;
+
+		[Desc("Stealth means unguarded (v2): a target that is not escort-eligible (an enemy-base building) is skipped when",
+			"more than this many armed enemy actors stand within EnemyAvoidanceRadius of it. -1 = off, the default.")]
+		public readonly int StealthMaxDefenders = -1;
+
+		[Desc("Rank capture candidates by safety and value (v2) instead of pure distance: score = target value / (1 + distance",
+			"in cells + ExposureWeight x exposed route cells); only the nearest CaptureTargetTries x 2 are scored. false = off.")]
+		public readonly bool RankTargetsBySafety = false;
+
+		[Desc("Cost of one exposed route cell, in cells of distance, for RankTargetsBySafety.")]
+		public readonly int ExposureWeight = 10;
+
 		[Desc("Cells around the target excluded from the exposure count: the final approach to a defended target is the",
 			"escort's question (EscortDefendedCaptures), not the route's.")]
 		public readonly int ApproachCells = 6;
@@ -183,6 +201,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public string MissionId;
 			public int Attempt;
 			public bool ViaTransport;
+			public List<CPos> Route;
 		}
 
 		readonly World world;
@@ -226,6 +245,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
 
 		int captureTicks;
+		int routeRecheckCountdown;
 		int repairTicks;
 		int nextRepairJob;
 		int housekeptTick = -1;
@@ -241,6 +261,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>Capture targets passed over because even the safest route was too exposed.</summary>
 		public int UnsafeRoutes { get; private set; }
+
+		/// <summary>Routed captures whose remaining route turned exposed and were given a fresh safe route.</summary>
+		public int Reroutes { get; private set; }
+
+		/// <summary>Routed captures pulled back to the base because no safe route remained.</summary>
+		public int Pullbacks { get; private set; }
+
+		/// <summary>Stealth targets passed over because more than StealthMaxDefenders armed enemies guard them.</summary>
+		public int GuardedSkips { get; private set; }
 
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)
@@ -309,6 +338,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					else
 						QueueRepairBuildingOrder(bot);
 				}
+			}
+
+			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && --routeRecheckCountdown <= 0)
+			{
+				routeRecheckCountdown = Info.RouteRecheckTicks;
+				var tick = world.WorldTick;
+				var leases = BotUnitLeases.Of(player);
+				foreach (var (a, job) in assigned.ToList())
+					if (job.Route != null && !job.ViaTransport && job.Job == EngineerJob.Capture && !IsGone(a))
+						Recheck(bot, leases, a, job, tick);
 			}
 
 			if (--captureTicks <= 0)
@@ -404,6 +443,94 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				stuckUntil.Remove(a);
 		}
 
+		/// <summary>Re-scores the remaining route of a walking engineer. Returns true when the attempt ended (pull back).</summary>
+		bool Recheck(IBot bot, IBotUnitLeases leases, Actor a, Assignment job, int tick)
+		{
+			var target = job.Target;
+			if (target == null || target.IsDead || !target.IsInWorld || job.Job != EngineerJob.Capture)
+				return false;
+
+			var remaining = RemainingExposure(job.Route, a.Location, target.Location, Info.ApproachCells, c => Danger(a, c));
+			if (remaining <= Info.MaxExposedRouteCells)
+				return false;
+
+			var fresh = SafeRoute(a, target);
+			if (fresh != null && ExposedCells(fresh.Select(c => (c, Danger(a, c))), target.Location, Info.ApproachCells) <= Info.MaxExposedRouteCells)
+			{
+				var waypoints = Waypoints(fresh, Info.RouteWaypointSpacing, Info.ApproachCells, target.Location);
+				for (var i = 0; i < waypoints.Count; i++)
+					bot.QueueOrder(new Order("Move", a, Target.FromCell(world, waypoints[i]), i > 0));
+
+				bot.QueueOrder(new Order("CaptureActor", a, Target.FromActor(target), waypoints.Count > 0));
+				job.Route = fresh;
+				job.OrderedTick = job.SampleTick = tick;
+				job.SamplePos = a.CenterPosition;
+				Reroutes++;
+				BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENG reroute {a.Info.Name} {a.ActorID} -> {target.Info.Name} {target.ActorID}: {remaining} exposed cells ahead > {Info.MaxExposedRouteCells} (tick {tick}; reroutes {Reroutes}, pullbacks {Pullbacks})");
+				return false;
+			}
+
+			assigned.Remove(a);
+			bot.QueueOrder(new Order("Move", a, Target.FromCell(world, initialBaseCenter), false));
+			leases?.Release(a, LeaseOwner);
+			EndMission(a, job, EngineerCheck.Working, true);
+			Pullbacks++;
+			Log.Write("debug", $"AI ({player.ClientIndex}): ENG pullback {a.Info.Name} {a.ActorID} from {target.Info.Name} {target.ActorID}: {remaining} exposed cells ahead, no safe route (tick {tick}; reroutes {Reroutes}, pullbacks {Pullbacks})");
+			return true;
+		}
+
+		/// <summary>Exposed cells still AHEAD of the engineer: the route cells after the one nearest its cell, outside the
+		/// approach of the target. Free of world state so it can be tested.</summary>
+		public static int RemainingExposure(IReadOnlyList<CPos> route, CPos engineerCell, CPos target, int approachCells, Func<CPos, int> danger)
+		{
+			if (route == null || route.Count == 0)
+				return 0;
+
+			var at = 0;
+			for (var i = 1; i < route.Count; i++)
+				if ((route[i] - engineerCell).LengthSquared < (route[at] - engineerCell).LengthSquared)
+					at = i;
+
+			var count = 0;
+			for (var i = at + 1; i < route.Count; i++)
+				if ((route[i] - target).LengthSquared > approachCells * approachCells && danger(route[i]) > 0)
+					count++;
+
+			return count;
+		}
+
+		/// <summary>The stealth gate, free of world state so it can be tested: guarded when more than `max` defenders (-1 = off).</summary>
+		public static bool StealthGuarded(int defenders, int max) => max >= 0 && defenders > max;
+
+		/// <summary>RankTargetsBySafety's score (higher is better), free of world state so it can be tested: value per cell
+		/// of effective cost, each exposed cell costing `exposureWeight` cells of walking.</summary>
+		public static double RankScore(int value, int distanceCells, int exposedCells, int exposureWeight) =>
+			(double)Math.Max(0, value) / (1 + Math.Max(0, distanceCells) + (long)Math.Max(0, exposureWeight) * Math.Max(0, exposedCells));
+
+		int GuardingEnemies(Actor capturer, Actor target) =>
+			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
+				.Count(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u));
+
+		/// <summary>Orders the try-candidates by RankScore over the nearest CaptureTargetTries x 2 (the rest are dropped).</summary>
+		List<Actor> RankBySafety(Actor capturer, IEnumerable<Actor> candidates)
+		{
+			var tries = Math.Max(1, Info.CaptureTargetTries);
+			return candidates.OrderBy(t => (t.CenterPosition - capturer.CenterPosition).LengthSquared)
+				.Take(tries * 2)
+				.Select(t =>
+				{
+					var route = SafeRoute(capturer, t);
+					var exposed = route == null ? int.MaxValue / 2 : ExposedCells(route.Select(c => (c, Danger(capturer, c))), t.Location, Info.ApproachCells);
+					return (Target: t, Score: RankScore(t.GetSellValue(), (t.Location - capturer.Location).Length, exposed, Info.ExposureWeight));
+				})
+				.OrderByDescending(x => x.Score)
+				.Take(tries)
+				.Select(x => x.Target)
+				.ToList();
+		}
+
 		static BotLeasePurpose PurposeOf(EngineerJob job) => job == EngineerJob.Capture ? BotLeasePurpose.Capture : BotLeasePurpose.Engineer;
 
 		/// <summary>An engineer this module may order now: ours, idle, not already on a job, not benched, not held by another module.</summary>
@@ -425,13 +552,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		bool Assign(IBot bot, IBotUnitLeases leases, Actor engineer, EngineerJob job, Order order, Actor target,
-			IReadOnlyList<CPos> waypoints = null)
+			IReadOnlyList<CPos> waypoints = null, List<CPos> route = null)
 		{
 			if (!BotUnitLeases.TryClaim(leases, engineer, LeaseOwner, PurposeOf(job), Info.LeaseTicks))
 				return false;
 
 			var tick = world.WorldTick;
-			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target };
+			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target, Route = route };
 			assigned[engineer] = assignment;
 			if (waypoints != null && waypoints.Count > 0)
 			{
@@ -499,8 +626,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var capturer = capturers[next];
 					var target = ordered[i];
 					var captureManager = target.TraitOrDefault<CaptureManager>();
-					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && TryRoute(capturer.Actor, target, out var route)
-						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route))
+					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute)
+						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, waypoints, fullRoute))
 						next++;
 				}
 
@@ -544,13 +671,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Nearest first. A full, dormant, escort-blocked or unsafe target passes the engineer on to the next one, so
 				// with MaxEngineersPerTarget 1 engineers spread over DIFFERENT targets (TargetFull is re-read per engineer:
 				// the previous engineer's Assign already counts). CaptureTargetTries 1 = the parents' single nearest target.
-				var tries = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t))
-					.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
-					.Take(Math.Max(1, Info.CaptureTargetTries))
-					.ToList();
+			var open = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t));
+				var tries = Info.RankTargetsBySafety
+					? RankBySafety(capturer.Actor, open)
+					: open.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
+						.Take(Math.Max(1, Info.CaptureTargetTries))
+						.ToList();
 				foreach (var target in tries)
 				{
-					if (!TryRoute(capturer.Actor, target, out var route))
+					if (!TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute))
 						continue;
 
 					// ENG-T: sometimes a stealth infiltration rides in. The roll is drawn only when it can matter, so a chance
@@ -567,7 +696,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						}
 					}
 
-					Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route);
+					Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, waypoints, fullRoute);
 					break;
 				}
 			}
@@ -651,9 +780,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// The route gate for one capture. MaxExposedRouteCells &lt; 0: the parents' check (a path exists; no waypoints).
 		/// Otherwise the least-exposed path, rejected when too exposed; its waypoints are returned for the order.
 		/// </summary>
-		bool TryRoute(Actor capturer, Actor target, out IReadOnlyList<CPos> waypoints)
+		bool TryRoute(Actor capturer, Actor target, out IReadOnlyList<CPos> waypoints, out List<CPos> fullRoute)
 		{
 			waypoints = null;
+			fullRoute = null;
+			if (Info.StealthMaxDefenders >= 0 && !EscortEligible(target))
+			{
+				var defenders = GuardingEnemies(capturer, target);
+				if (StealthGuarded(defenders, Info.StealthMaxDefenders))
+				{
+					GuardedSkips++;
+					Log.Write("debug", $"AI ({player.ClientIndex}): ENG stealth target {target.Info.Name} {target.ActorID} guarded by {defenders} > {Info.StealthMaxDefenders} (tick {world.WorldTick}; guarded {GuardedSkips})");
+					return false;
+				}
+			}
+
 			if (Info.MaxExposedRouteCells < 0)
 				return SafePath(capturer, target).Type != TargetType.Invalid;
 
@@ -670,6 +811,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			waypoints = Waypoints(route, Info.RouteWaypointSpacing, Info.ApproachCells, target.Location);
+			fullRoute = route;
 			return true;
 		}
 
@@ -1033,7 +1175,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			});
 		}
 
-		void EndMission(Actor engineer, Assignment job, EngineerCheck check)
+		void EndMission(Actor engineer, Assignment job, EngineerCheck check, bool pulledBack = false)
 		{
 			if (job.MissionId == null)
 				return;
@@ -1046,7 +1188,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var targetGone = target == null || target.IsDead || !target.IsInWorld;
 			var (state, reason) = CaptureVerdict(!targetGone && target.Owner == player, check == EngineerCheck.Stuck,
 				engineer.IsDead, targetGone);
-			BotMissionLog.Write(new BotMissionRecord
+
+							// A voluntary retreat (RouteRecheckTicks): released, outmatched; it does not feed the dormant shelf.
+							if (pulledBack && state == BotMissionAttemptState.Released && reason == BotMissionReasons.Dropped)
+								reason = BotMissionReasons.Outmatched;
+							BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
 				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1,
