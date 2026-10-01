@@ -448,8 +448,43 @@ namespace OpenRA.Mods.CA.Traits
 			if (deficit != null)
 				return deficit;
 
-			var unit = buildableThings.Random(world.LocalRandom);
+			var weights = ActiveProductionWeights();
+			var unit = weights.Count > 0 ? ChooseWeighted(buildableThings.ToList(), weights) : buildableThings.Random(world.LocalRandom);
 			return CanBuildMoreOfAircraft(unit) ? unit : null;
+		}
+
+		// The ACTIVE IBotProductionWeight providers (Cameo's learned priors, genericbot only, off by default). Resolved
+		// from the player actor on each use: their conditions settle after Created, so an empty set is never cached.
+		// None active = the unit builder's original path, random draws included.
+		List<IBotProductionWeight> ActiveProductionWeights() =>
+			player.PlayerActor.TraitsImplementing<IBotProductionWeight>().Where(p => p.IsActive).ToList();
+
+		// Product of the providers' factors, in percent (100 = neutral).
+		int LearnedWeightPercent(ActorInfo unit, List<IBotProductionWeight> providers)
+		{
+			var weight = 100L;
+			foreach (var provider in providers)
+				weight = weight * provider.WeightPercent(player, unit) / 100;
+
+			return (int)Math.Max(weight, 0);
+		}
+
+		ActorInfo ChooseWeighted(List<ActorInfo> candidates, List<IBotProductionWeight> providers)
+		{
+			var weights = candidates.Select(c => LearnedWeightPercent(c, providers)).ToList();
+			var total = weights.Sum();
+			if (total <= 0)
+				return candidates.Random(world.LocalRandom);
+
+			var roll = world.LocalRandom.Next(total);
+			for (var i = 0; i < candidates.Count; i++)
+			{
+				roll -= weights[i];
+				if (roll < 0)
+					return candidates[i];
+			}
+
+			return candidates[^1];
 		}
 
 		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited)
@@ -479,11 +514,17 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var unit in unitsToBuildShares.Shuffle(world.LocalRandom))
 				if (buildableThings.Any(b => b.Name == unit.Key))
 					if (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(unit.Key))
-						if (myUnits.Count(a => a == unit.Key) * 100 < unit.Value * myUnits.Count)
+						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
 							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
 								return world.Map.Rules.Actors[unit.Key];
 
 			return null;
+		}
+
+		int ShareFor(string name, int share)
+		{
+			var providers = ActiveProductionWeights();
+			return providers.Count > 0 ? share * LearnedWeightPercent(world.Map.Rules.Actors[name], providers) / 100 : share;
 		}
 
 		// CA-3 (AI_ARCHITECTURE.md 12.5): the enabled personality's RoleMix is a target
