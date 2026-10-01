@@ -3401,7 +3401,7 @@ Player:
 		UseFoggedObservation: true
 		# ZG-c: spatial memory + risk routing index by the zone graph when an enabled, built
 		# TacticalMapBotModule exists (genericbot); the square grid stays the fallback otherwise.
-		UseZoneTopology: true
+		UseZoneTopology: false # ZG-c merged default-on without an A/B (#718); switch group D re-arms it for the next increment A/B
 		# CA-6 (AI_ARCHITECTURE 12.9): remembered defences join the beatability
 		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
 		# variable -- flip on the candidate worktree only.
