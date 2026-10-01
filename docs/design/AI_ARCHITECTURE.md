@@ -2518,6 +2518,18 @@ enumerates enemy actors.
   floor at home, and `TeamDefendAnswerMinPoolUnits` (default 8) means a thin pool stays
   home entirely. `CollectBroadcasts` exposes the per-ally detail the summary drops.
   Switch group `S_tc2_defend_answers`; inert in 1v1.
+- **Third consumer (TC-2c — expansion-claim deconfliction):** the broadcast gains
+  `ClientIndex` (the publisher's own index) and `ExpansionClaim` (the bot's planner
+  target, `WPos.Zero` when none — own-side intent, publish-always, inert without a
+  consumer). `ExpansionPlannerBotModuleInfo.UseTeamExpansionClaims` (default false)
+  then makes the planner skip a free field an outranking ally already claims —
+  `AllyClaimWins` gives the field to the lower `ClientIndex`, a stable precedence both
+  bots compute identically, so a contested field converges instead of both allies
+  yielding forever or two refineries landing on one patch. `AllyClaimRadiusCells`
+  (10) is the contest distance. Switch group `V_tc2_expansion_claims`; inert in 1v1
+  because no allied broadcasts exist. (An ally's *built* refinery is deliberately not
+  enumerated — `world.Actors` is omniscient and fog forbids reading ally positions
+  outside shared vision; the claim broadcast is the honest channel.)
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count

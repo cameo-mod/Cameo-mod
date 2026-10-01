@@ -181,5 +181,30 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.BestClaimField(
 				System.Array.Empty<ExpansionPlannerBotModule.FieldScore>()), Is.Null);
 		}
+
+		// TC-2c (AI_ARCHITECTURE.md 12.17): contested expansion claims resolve deterministically —
+		// the lower ClientIndex wins, so both allies compute the same precedence and converge.
+		[Test]
+		public void LowerClientIndexWinsAContestedField()
+		{
+			var field = new WPos(5 * 1024, 5 * 1024, 0);
+			var claims = new[] { (1, new WPos(6 * 1024, 5 * 1024, 0)) };
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWins(field, claims, 2, 10), Is.True,
+				"ally index 1 outranks our 2 — we yield");
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWins(field, claims, 0, 10), Is.False,
+				"we are index 0 — the ally yields to us instead");
+		}
+
+		[Test]
+		public void DistantOrAbsentClaimsDoNotContest()
+		{
+			var field = new WPos(5 * 1024, 5 * 1024, 0);
+			var far = new[] { (0, new WPos(30 * 1024, 5 * 1024, 0)) };
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWins(field, far, 2, 10), Is.False,
+				"beyond the claim radius it is not contested");
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWins(field,
+				System.Array.Empty<(int, WPos)>(), 2, 10), Is.False,
+				"no allied claims (1v1) — nothing yields");
+		}
 	}
 }

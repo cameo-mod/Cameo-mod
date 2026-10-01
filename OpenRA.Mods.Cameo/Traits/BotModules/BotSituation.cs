@@ -1160,9 +1160,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// base centre while under pressure, Zero when help isn't needed or no
 			// base stands.
 			var requestsDefence = urgency >= BotUrgency.Pressured;
+			var expansionClaim = player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>()
+				.FirstEnabledTraitOrDefault()?.ExpansionTarget;
 			broadcast = new TeamBroadcast(tick, ownArmy, (int)urgency, director.Tension, director.Phase,
 				target, requestsDefence,
-				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero);
+				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero,
+				player.ClientIndex,
+				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero);
 
 			// TC-1: and read the allies' half of the board for the situation log —
 			// the caller's own broadcast stays out of the summary by design; a 1v1

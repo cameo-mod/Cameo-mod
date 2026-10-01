@@ -54,8 +54,22 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public readonly WPos DefendPosition;
 
+		/// <summary>
+		/// TC-2c (AI_ARCHITECTURE §12.17): the publisher's own client index — the deterministic
+		/// precedence when two allies claim the same resource field (lower index keeps its claim).
+		/// </summary>
+		public readonly int ClientIndex;
+
+		/// <summary>
+		/// TC-2c: the resource field this bot is currently expanding toward (its planner's
+		/// expansion target), <see cref="WPos.Zero"/> when none. Own-side intent shared with
+		/// allies so expansion claims do not collide.
+		/// </summary>
+		public readonly WPos ExpansionClaim;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
-			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition)
+			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
+			int clientIndex = 0, WPos expansionClaim = default)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -65,6 +79,8 @@ namespace OpenRA.Mods.CA.Traits
 			MainTarget = mainTarget;
 			RequestsDefence = requestsDefence;
 			DefendPosition = defendPosition;
+			ClientIndex = clientIndex;
+			ExpansionClaim = expansionClaim;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>

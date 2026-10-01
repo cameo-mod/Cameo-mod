@@ -100,6 +100,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("UT-4: at the full TechRush pole the effective McvTargetCount shrinks by this many (floor 1).")]
 		public readonly int TechRushAxisMinusMcvs = 1;
 
+		[Desc("TC-2c (AI_ARCHITECTURE §12.17): yield a free field to an allied bot's published expansion claim",
+			"when it outranks us (lower ClientIndex). Deterministic precedence, so contested fields converge",
+			"instead of oscillating. Inert in 1v1 — no allied broadcasts exist.")]
+		public readonly bool UseTeamExpansionClaims = false;
+
+		[Desc("TC-2c: an allied claim this close (cells) to a field's resource centre contests it.")]
+		public readonly int AllyClaimRadiusCells = 10;
+
 		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
 			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
 			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
@@ -308,6 +316,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return scores[i];
 
 			return null;
+		}
+
+		/// <summary>
+		/// TC-2c: does an allied claim outrank ours on `field`? The lower ClientIndex wins — a stable,
+		/// arbitrary precedence both bots compute identically, so a contested field converges instead of
+		/// both allies yielding forever. Pure, for the tests.
+		/// </summary>
+		public static bool AllyClaimWins(WPos field, IEnumerable<(int ClientIndex, WPos Claim)> allyClaims,
+			int myClientIndex, int radiusCells)
+		{
+			var radiusW = 1024L * radiusCells;
+			foreach (var (index, claim) in allyClaims)
+				if (index < myClientIndex && (field - claim).HorizontalLengthSquared <= radiusW * radiusW)
+					return true;
+
+			return false;
 		}
 
 		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
@@ -534,6 +558,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var fields = resourceMap.GetIndicesLength();
 			var owned = 0;
 
+			// TC-2c (§12.17): allied expansion claims off the team blackboard — only the ones that
+			// outrank us (lower ClientIndex). No allies → empty → every field behaves as before.
+			List<(int ClientIndex, WPos Claim)> allyClaims = null;
+			if (Info.UseTeamExpansionClaims)
+			{
+				allyClaims = TeamBlackboard.CollectBroadcasts(player)
+					.Where(b => b != null && b.ExpansionClaim != WPos.Zero)
+					.Select(b => (b.ClientIndex, b.ExpansionClaim))
+					.ToList();
+			}
+
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
 			{
 				var field = resourceMap.GetIndice(i);
@@ -560,6 +595,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				if (parkedUntil.TryGetValue(i, out var until) && world.WorldTick < until)
+					continue;
+
+				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
+				if (allyClaims != null && allyClaims.Count > 0
+					&& AllyClaimWins(world.Map.CenterOfCell(center), allyClaims, player.ClientIndex, Info.AllyClaimRadiusCells))
 					continue;
 
 				var distance = buildingCells.Min(c => (c - center).Length);

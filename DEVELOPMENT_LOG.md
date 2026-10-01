@@ -1,3 +1,18 @@
+# 2026-10-02 — NOVA: TC-2c expansion-claim deconfliction (switch V_tc2_expansion_claims)
+
+- `TeamBroadcast` gains `ClientIndex` + `ExpansionClaim` (planner target, own-side
+  intent, publish-always — inert without a consumer; `Empty`/old callers unchanged
+  via defaulted ctor params).
+- `UseTeamExpansionClaims` on the planner: skip a free field an outranking ally
+  claims — `AllyClaimWins` = lower ClientIndex wins (stable precedence both sides
+  compute identically; converges, never oscillates, never double-stacks).
+  `AllyClaimRadiusCells` 10. Inert in 1v1 (no allied broadcasts).
+- Deliberately NOT enumerated: allied refineries on the map — `world.Actors` is
+  omniscient and fog forbids ally positions beyond shared vision; the broadcast
+  is the honest channel (documented in §12.17).
+- Verified: +2 tests (precedence, radius/absence). Fog audit manifests one new
+  `World.Players` site (the CollectBroadcasts seam TC-2b already runs).
+
 # 2026-10-01 — NOVA: EX-2c claim any in-reach field + UT-4/DAWN merge receipt
 
 - `BestClaimField` + `IBotExpansionTargetProvider.RefineryClaimTarget`: the EX-2
