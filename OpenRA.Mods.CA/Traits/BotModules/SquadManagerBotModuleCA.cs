@@ -270,6 +270,10 @@ namespace OpenRA.Mods.CA.Traits
 			"verbatim upstream behaviour.")]
 		public readonly Dictionary<string, int> RoleMix = null;
 
+		[Desc("CA-3 (12.5): arm this personality's RoleMix — production deficit-fills toward it.",
+			"Off until the increment A/B (switch group J_rolemix_production); a mix without the flag is inert data.")]
+		public readonly bool UseRoleMix = false;
+
 		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
 			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
 		public readonly int RoleMixRoleFloorPct = 5;

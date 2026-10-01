@@ -21,6 +21,24 @@
 - Boot gate: PASS (PostWorldLoaded reached, no new exception-*.log). PR body has the evidence.
 
 
+# 2026-10-01 — Devin (NOVA): CA-3 personality starting RoleMixes + UseRoleMix gate (§12.5)
+
+- `SquadManagerBotModuleCAInfo.UseRoleMix` (default false) — the mixes were
+  ungated data: `ChooseRoleDeficit` read `manager.Info.RoleMix` directly, so
+  writing a mix would have armed deficit-filling on master with no switch.
+  Now the flag gates it per personality instance (switch group
+  `J_rolemix_production`, the six genericbot personalities only — classic
+  carries neither flag nor mix).
+- ai.yaml: starting `RoleMix` per personality — rush skirmisher/anti-infantry,
+  steamroller frontline+artillery, turtle artillery+anti-air, expansion
+  balanced+scouts, tech air split, guerrilla skirmisher+scout+gunship. All
+  sum to 100; unlisted roles produce at the 5% floor. Inert data until J arms.
+- Verified: applier dry-run flips exactly the 6 genericbot instances;
+  miniyaml resolves RoleMix dicts; role keys ∈ BotUnitRole.CombatRoles
+  (loader throws otherwise); flag-off path byte-identical (mix==null early
+  return, same as before).
+
+# 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
   (AI_MASTER_PLAN §1.2 step 6, amended 2026-10-01). `--ctrl <sha> --cand <sha>

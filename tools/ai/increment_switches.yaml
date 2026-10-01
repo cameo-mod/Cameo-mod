@@ -29,3 +29,16 @@ groups:
   I_derived_unit_weights:            # NOVA UW-1 — derive UnitsToBuild weights from RoleMix x Versus strength (§2.8b item 3)
     UnitBuilderBotModuleCA:
       UseDerivedUnitWeights: true
+  J_rolemix_production:              # NOVA CA-3 (§12.5) — the six personalities' starting RoleMixes fill production deficits (classic carries none)
+    SquadManagerBotModuleCA@rush:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@turtle:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@tech:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@expansion:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@steamroller:
+      UseRoleMix: true
+    SquadManagerBotModuleCA@guerrilla:
+      UseRoleMix: true

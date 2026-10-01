@@ -1948,6 +1948,16 @@ below) reviews the C#.
 * Squads are formed to the same mix (a main assault without frontline or AA waits for them,
   bounded by `StageTimeoutTicks`), and compositions (§1.4) remain the personality flavour.
 
+*Landed (2026-10-01, NOVA, `nova/rolemix-mixes`):* the six genericbot personalities carry their
+starting `RoleMix` rows in ai.yaml, gated by `SquadManagerBotModuleCAInfo.UseRoleMix` (default
+false — a mix without the flag is inert data, and the deficit pick checks the flag, so writing
+a mix can never silently arm behaviour; switch group `J_rolemix_production` arms the six
+personality instances only — `SquadManagerBotModuleCA@classic` carries neither flag nor mix).
+Starting shares: rush skirmisher/anti-infantry heavy, steamroller frontline+artillery, turtle
+artillery+anti-air, expansion balanced + extra scouts, tech adds the air split, guerrilla
+skirmisher+scout+gunship. Pairs with UW-1's derived weights (group `I_derived_unit_weights`),
+which reads the same mixes through its own flag for the share×strength table.
+
 ### 12.6 Siege and force preservation (phase CA-2) — the maintainer's "most importantly"
 
 The rule, in order of precedence:

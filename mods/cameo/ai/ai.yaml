@@ -3524,6 +3524,18 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-rush
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
+		UseRoleMix: false
+		RoleMix:
+			frontline: 20
+			skirmisher: 25
+			anti_infantry: 20
+			anti_armour: 10
+			anti_air: 10
+			scout: 10
+			gunship: 5
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
@@ -3583,6 +3595,17 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-turtle
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
+		UseRoleMix: false
+		RoleMix:
+			frontline: 25
+			artillery: 25
+			anti_air: 20
+			anti_armour: 15
+			anti_infantry: 10
+			scout: 5
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
@@ -3642,6 +3665,19 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-tech
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
+		UseRoleMix: false
+		RoleMix:
+			frontline: 30
+			artillery: 15
+			anti_air: 15
+			gunship: 10
+			fighter: 10
+			anti_infantry: 10
+			scout: 5
+			bomber: 5
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
@@ -3701,6 +3737,18 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-expansion
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
+		UseRoleMix: false
+		RoleMix:
+			frontline: 30
+			anti_air: 15
+			skirmisher: 15
+			anti_armour: 15
+			anti_infantry: 10
+			scout: 10
+			artillery: 5
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
@@ -3760,6 +3808,17 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-steamroller
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
+		UseRoleMix: false
+		RoleMix:
+			frontline: 40
+			artillery: 20
+			anti_air: 15
+			anti_armour: 15
+			anti_infantry: 5
+			scout: 5
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
@@ -3818,6 +3877,18 @@ Player:
 		SquadMicroEnabled: true
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-guerrilla
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
+		UseRoleMix: false
+		RoleMix:
+			skirmisher: 25
+			scout: 15
+			gunship: 15
+			anti_infantry: 15
+			anti_air: 10
+			frontline: 10
+			fighter: 10
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
 		ProtectionIdleDissolveTicks: 250
