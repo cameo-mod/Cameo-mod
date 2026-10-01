@@ -32,6 +32,12 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
+	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
+	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
+	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
+	GrantConditionOnBotOwner@engttransport:
+		Condition: engt-transport
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3448,7 +3454,7 @@ Player:
 		CheckRepairTargetsForVisibility: false
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
-		RequiresCondition: classicbot || genericbot && !easiestbot # && nobase no conyard condition defined in player.yaml
+		RequiresCondition: classicbot || genericbot # && nobase no conyard condition defined in player.yaml
 		ScanForCratesInterval: 300
 		# Omniscient on purpose (DESIGN §19.5): a bot that lost its MCV must find a crate anywhere.
 		CheckTargetsForVisibility: false
@@ -3865,7 +3871,7 @@ Player:
 		InvalidTargets: Water, Defense
 		TargetDistances: Furthest
 	LoadGarrisonerBotModuleCA@Infantry:
-		RequiresCondition: classicbot || genericbot && !easiestbot
+		RequiresCondition: classicbot || genericbot
 		PassengersPerScan: 6
 		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry
 	LoadCargoBotModule@Infantry:
@@ -4198,7 +4204,7 @@ Player:
 	# Issues no orders; the CA-2b behaviour lands behind its own switch after this
 	# validates the remembered-defence inputs on the hard candidate.
 	SiegeEvaluatorBotModule:
-		RequiresCondition: genericbot && hardbot
+		RequiresCondition: genericbot
 		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
 		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
 		BehaviourEnabled: false

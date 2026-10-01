@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Pathfinder;
@@ -58,6 +59,17 @@ namespace OpenRA.Mods.Common.Traits
 		bool TryRequestReusableTransport(IBot bot, Actor passenger, Actor target, bool landPathAvailable);
 		bool TryConsumeCompletedReusableInsertion(Actor passenger, out Actor target);
 		bool TryBeginReusableExtraction(IBot bot, Actor passenger);
+
+		/// <summary>
+		/// ENG-T run (maintainer 2026-09-30): ONE transport carries `passengers[i]` to `targets[i]`
+		/// (same length, 1-5, targets in visiting order). Native Unload drops everyone at the first
+		/// stop, so each passenger is then delivered for ITS OWN target — the caller orders the capture.
+		/// False when no craft or route exists: the caller sends them on foot.
+		/// </summary>
+		bool TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets);
+
+		/// <summary>True exactly once after a run passenger was dropped; yields that passenger's own target.</summary>
+		bool TryConsumeDelivered(Actor passenger, out Actor target);
 
 		void CancelCaptureTransport(IBot bot, Actor passenger);
 		void CancelCaptureTransport(IBot bot, uint passengerActorId);
@@ -135,6 +147,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		[Desc("Ticks between active mission state checks.")]
 		public readonly int MissionUpdateInterval = 25;
+
+		[Desc("Ticks a claimed transport's LC1 lease lasts before the mission heartbeat renews it.")]
+		public readonly int TransportLeaseTicks = 250;
 
 		[Desc("World ticks before a failed passenger/target/transport plan may be path-tested again if mission endpoint geometry has not materially changed. Equivalent LSTs and same-landmass Jeep/APC craft share the negative proof, so producing a new actor does not bypass the cooldown.")]
 		public readonly int TransportPlanFailureRetryCooldown = 1500;
@@ -275,7 +290,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransTransportCommanderBotModule : ConditionalTrait<FransTransportCommanderBotModuleInfo>,
-		IBotEnabled, IBotTick, IFransCaptureTransportService
+		IBotEnabled, IBotTick, IFransCaptureTransportService, IBotCaptureTransportProvider
 	{
 		enum MissionState
 		{
@@ -295,8 +310,22 @@ namespace OpenRA.Mods.Common.Traits
 
 		sealed class TransportMission
 		{
+			// For a run mission these stay the CREATION anchor (leg 0): pickup/drop cells are
+			// planned from them, and a dead anchor does not cancel the run while other legs live.
 			public readonly Actor Passenger;
 			public readonly Actor Target;
+
+			// ENG-T run mode: every leg rides the SAME transport and unloads together at the first
+			// stop (native Unload drops all cargo at once); each passenger then walks to its own
+			// target. Null for ordinary single-passenger missions — fransbot's SpecOps path is
+			// unchanged. RunTargets records each passenger's assigned building from request time.
+			public List<(Actor Passenger, Actor Target)> RunLegs;
+			public Dictionary<Actor, Actor> RunTargetByPassenger;
+			public readonly Dictionary<Actor, Actor> RunDeliveredTargets = [];
+			public readonly HashSet<Actor> RunBoardingIssued = [];
+			public int LastBoardingProgressTick;
+			public string RunMissionId;
+			public bool IsRunMission => RunLegs != null;
 			public readonly int MissionStartedTick;
 			public int StartedTick;
 			public int LastProductionRequestTick = -1;
@@ -542,6 +571,8 @@ namespace OpenRA.Mods.Common.Traits
 			public int CooldownUntil;
 		}
 
+		const string LeaseOwner = nameof(FransTransportCommanderBotModule);
+
 		readonly World world;
 		readonly Player player;
 
@@ -586,16 +617,18 @@ namespace OpenRA.Mods.Common.Traits
 
 			requestUnitProduction = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			playerResources = self.Trait<PlayerResources>();
+
+			// ENG-T: the service arms on `genericbot` for the CA capture-transport provider. The full
+			// Frans intel stack only exists for `fransbot` itself, so its services degrade honestly
+			// instead of requiring the stack: no risk model = neutral corridor costs (the fog-visible
+			// route checks in the planners still apply), no strategic map = air transports only
+			// (ground/LST proofs need landmass/region topology), no loss memory = corridors allowed.
 			riskModelService = self.TraitsImplementing<IFransRiskModelService>().FirstOrDefault()
-				?? throw new InvalidOperationException("FransTransportCommanderBotModule requires FransRiskModelBotModule.");
-			combatIntelService = self.TraitsImplementing<IFransCombatIntelService>().FirstOrDefault()
-				?? throw new InvalidOperationException("FransTransportCommanderBotModule requires FransCombatIntelBotModule.");
-			strategicMapService = self.TraitsImplementing<IFransStrategicMapService>().FirstOrDefault()
-				?? throw new InvalidOperationException("FransTransportCommanderBotModule requires FransStrategicMapBotModule.");
-			generalService = self.TraitsImplementing<IFransGeneralService>().FirstOrDefault()
-				?? throw new InvalidOperationException("FransTransportCommanderBotModule requires FransGeneralBotModule.");
-			commandBidService = self.TraitsImplementing<IFransCommandBidService>().FirstOrDefault()
-				?? throw new InvalidOperationException("FransTransportCommanderBotModule requires FransCommandBidBotModule.");
+				?? NullFransRiskModelService.Instance;
+			combatIntelService = self.TraitsImplementing<IFransCombatIntelService>().FirstOrDefault();
+			strategicMapService = self.TraitsImplementing<IFransStrategicMapService>().FirstOrDefault();
+			generalService = self.TraitsImplementing<IFransGeneralService>().FirstOrDefault();
+			commandBidService = self.TraitsImplementing<IFransCommandBidService>().FirstOrDefault();
 			amphibiousExpansionService = self.TraitsImplementing<IFransAmphibiousExpansionService>().FirstOrDefault();
 		}
 
@@ -748,7 +781,10 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.SetPerfContext(world, $"TRANSPORT:{player.PlayerActor.ActorID}",
 				$"{player}:missions={missions.Count},lst=[{string.Join(",", perfLstStates)}]");
 
+			// ENG-T: a run mission is registered under EVERY passenger key — the same object
+			// appears once per leg, so Distinct() keeps one management pass per craft per tick.
 			foreach (var mission in missions.Values
+				.Distinct()
 				.OrderBy(m => m.Passenger.ActorID)
 				.ToArray())
 				ManageMission(bot, mission);
@@ -777,8 +813,9 @@ namespace OpenRA.Mods.Common.Traits
 			// Native Cargo removes a loaded passenger from World.GetActorById(), but this module
 			// intentionally retains the exact Actor reference. Expose immutable ActorID ownership so
 			// SpecOps does not mistake a correctly loaded Tanya/E6 for a dead specialist.
-			return passengerActorId != 0 && missions.Values.Any(m =>
-				m.Passenger != null && m.Passenger.ActorID == passengerActorId && IsHandlingPassengerMission(m));
+			// every leg passenger is a key of `missions`, so the id lookup reads keys, not leg 0.
+			return passengerActorId != 0 && missions.Any(kv =>
+				kv.Key != null && kv.Key.ActorID == passengerActorId && IsHandlingPassengerMission(kv.Value));
 		}
 
 		static bool IsHandlingPassengerMission(TransportMission mission)
@@ -793,12 +830,12 @@ namespace OpenRA.Mods.Common.Traits
 			if (target == null)
 				return false;
 
-			return missions.Values.Any(m =>
-				m.Passenger != null && !m.Passenger.Disposed &&
-				m.Passenger != exceptPassenger &&
+			return missions.Values.Distinct().Any(m =>
 				m.State != MissionState.Retreat &&
-				m.Target == target &&
-				!m.Passenger.IsDead);
+				AllLegs(m).Any(leg =>
+					leg.Passenger != null && !leg.Passenger.Disposed &&
+					leg.Passenger != exceptPassenger && leg.Target == target &&
+					!leg.Passenger.IsDead));
 		}
 
 		bool CanAcceptTransportRequest(Actor passenger, Actor target, bool reusableRoundTrip, out TransportMission existing)
@@ -811,7 +848,8 @@ namespace OpenRA.Mods.Common.Traits
 			if (missions.TryGetValue(passenger, out existing))
 				return existing.Target == target && existing.ReusableRoundTrip == reusableRoundTrip;
 
-			return missions.Count < Info.MaximumActiveMissions;
+			// a run registers once per leg passenger — count physical missions, not keys.
+			return missions.Values.Distinct().Count() < Info.MaximumActiveMissions;
 		}
 
 		bool HasPotentialTransport(Actor passenger, Actor target, bool landPathAvailable, bool reusableRoundTrip, out TransportMission existing)
@@ -956,18 +994,171 @@ namespace OpenRA.Mods.Common.Traits
 
 		int IFransCaptureTransportService.CountTransportedPassengers(string actorType)
 		{
-			return missions.Values.Count(m =>
-				m.Passenger != null &&
-				!m.Passenger.Disposed &&
-				!m.Passenger.IsDead &&
-				!m.Passenger.IsInWorld &&
-				m.Passenger.Info.Name == actorType);
+			// keys are one entry per leg passenger, so run riders count individually.
+			return missions.Keys.Count(p =>
+				p != null &&
+				!p.Disposed &&
+				!p.IsDead &&
+				!p.IsInWorld &&
+				p.Info.Name == actorType);
 		}
+
+		static IEnumerable<(Actor Passenger, Actor Target)> AllLegs(TransportMission mission)
+		{
+			if (mission.RunLegs != null)
+				foreach (var leg in mission.RunLegs)
+					yield return leg;
+			else if (mission.Passenger != null)
+				yield return (mission.Passenger, mission.Target);
+		}
+
+		/// <summary>
+		/// ENG-T: one transport carries the whole run. The run mission is registered under EVERY
+		/// leg passenger (single-owner semantics per passenger — SpecOps/Engineer leases and
+		/// IsHandlingPassenger/IsCaptureTargetReserved see each rider) while one shared
+		/// TransportMission drives the craft; Distinct() in the manage loop keeps it single-owner.
+		/// </summary>
+		bool IFransCaptureTransportService.TryRequestCaptureRun(
+			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets)
+		{
+			if (bot == null || passengers == null || targets == null ||
+				passengers.Count == 0 || passengers.Count != targets.Count)
+				return false;
+
+			// every leg must be individually valid before any state is registered.
+			for (var i = 0; i < passengers.Count; i++)
+			{
+				var passenger = passengers[i];
+				var target = targets[i];
+				if (!IsValidPassenger(passenger) || !IsValidCaptureTarget(target) ||
+					missions.ContainsKey(passenger) ||
+					!IsMissionCompatibleTransportRequest(passenger, target) ||
+					IsWaitingTransportPairCoolingDown(passenger, target))
+					return false;
+			}
+
+			if (missions.Values.Distinct().Count() >= Info.MaximumActiveMissions)
+				return false;
+
+			// Transport choice rides on the anchor leg only: the run unloads everyone at the
+			// first stop, so legs past the first never steer the craft. The caller only rolls
+			// the dice once a foot path exists — declare land reachability honestly so ground
+			// transports stay eligible next to air inserts.
+			if (!HasPotentialTransport(passengers[0], targets[0], landPathAvailable: true,
+				reusableRoundTrip: false, out var existing) || existing != null)
+				return false;
+
+			var mission = new TransportMission(passengers[0], targets[0], landPathAvailable: true,
+				world.WorldTick, reusableRoundTrip: false)
+			{
+				RunLegs = Enumerable.Range(0, passengers.Count)
+					.Select(i => (passengers[i], targets[i])).ToList(),
+				RunTargetByPassenger = Enumerable.Range(0, passengers.Count)
+					.ToDictionary(i => passengers[i], i => targets[i]),
+				RunMissionId = $"transport:{passengers[0].ActorID}"
+			};
+
+			foreach (var leg in mission.RunLegs)
+				missions[leg.Passenger] = mission;
+
+			FransBotLog.BotDebug(world,
+				"{0}: Frans transport accepted capture RUN {1} ({2} engineers) led by {3} for first stop {4}.",
+				player, mission.RunMissionId, passengers.Count, mission.Passenger, mission.Target);
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = mission.RunMissionId, Attempt = 1,
+				State = BotMissionAttemptState.Committed, Executor = "Transport",
+				MissionType = "transport", TargetCell = mission.Target.Location, Units = passengers.Count
+			});
+
+			if (!TryAssignExistingTransport(bot, mission))
+				RequestBestTransport(bot, mission, landPathAvailable: true);
+			return true;
+		}
+
+		bool IFransCaptureTransportService.TryConsumeDelivered(Actor passenger, out Actor target)
+		{
+			target = null;
+			if (passenger == null || !missions.TryGetValue(passenger, out var mission) ||
+				mission.State != MissionState.Handoff || mission.RunLegs == null)
+				return false;
+
+			if (!mission.RunDeliveredTargets.Remove(passenger, out target))
+				return false;
+
+			// this passenger is now owned by the engineer module again; drop its key. The run
+			// mission itself ends when every delivered leg has been consumed (or pruned dead).
+			missions.Remove(passenger);
+			if (mission.RunDeliveredTargets.Count == 0 &&
+				!AllLegs(mission).Any(leg => missions.ContainsKey(leg.Passenger)))
+			{
+				ReleaseTransport(mission);
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = mission.RunMissionId, Attempt = 1,
+					State = BotMissionAttemptState.Success, Reason = "done", Executor = "Transport",
+					MissionType = "transport", TargetCell = mission.Target?.Location
+				});
+			}
+
+			return true;
+		}
+
+		/// <summary>Run-aware teardown: remove every leg key, release the craft, emit the terminal card.</summary>
+		void EndRunMission(IBot bot, TransportMission mission, BotMissionAttemptState state, string reason)
+		{
+			if (mission.RunLegs == null)
+				return;
+
+			var units = AllLegs(mission).Count();
+			foreach (var leg in mission.RunLegs.ToArray())
+				missions.Remove(leg.Passenger);
+
+			var transport = mission.Transport;
+			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
+				transport.CancelActivity();
+			ReleaseTransport(mission);
+			mission.RunLegs = null;
+			mission.RunDeliveredTargets.Clear();
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = mission.RunMissionId, Attempt = 1,
+				State = state, Reason = reason, Executor = "Transport",
+				MissionType = "transport", Units = units
+			});
+		}
+
+		// ENG-T seam (#694): the CA-neutral provider contract for EngineerBotModule forwards onto
+		// the Frans capture-transport service — one transport system (DESIGN §22), not two.
+		bool IBotCaptureTransportProvider.TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
+			IReadOnlyList<Actor> targets) =>
+			((IFransCaptureTransportService)this).TryRequestCaptureRun(bot, passengers, targets);
+
+		bool IBotCaptureTransportProvider.IsHandlingPassenger(Actor passenger) =>
+			((IFransCaptureTransportService)this).IsHandlingPassenger(passenger);
+
+		bool IBotCaptureTransportProvider.TryConsumeDelivered(Actor passenger, out Actor target) =>
+			((IFransCaptureTransportService)this).TryConsumeDelivered(passenger, out target);
 
 		void IFransCaptureTransportService.CancelCaptureTransport(IBot bot, Actor passenger)
 		{
 			if (passenger == null || !missions.TryGetValue(passenger, out var mission))
 				return;
+
+			// ENG-T: cancelling ONE run passenger releases just that leg — a leg already inside
+			// the cargo bay still rides to the drop (native Unload is all-at-once) but is never
+			// delivered, so its owner reclaims it on the ground and sends it on foot.
+			if (mission.IsRunMission)
+			{
+				if (!passenger.Disposed && passenger.IsInWorld && !passenger.IsDead && passenger.TraitOrDefault<Passenger>()?.Transport == null)
+					passenger.CancelActivity();
+				ReleaseRunLeg(mission, passenger);
+				if (mission.RunLegs.Count == 0)
+					EndRunMission(bot, mission, BotMissionAttemptState.Released, "dropped");
+				return;
+			}
 
 			var transport = mission.Transport;
 			if (transport != null && (transport.Disposed || !transport.IsInWorld || transport.IsDead))
@@ -1099,7 +1290,7 @@ namespace OpenRA.Mods.Common.Traits
 					: mobile.IsTraitPaused ? "Paused" : "Operational";
 			var regionState = mobile == null || mobile.IsTraitDisabled || mobile.IsTraitPaused
 				? "NotEvaluated"
-				: strategicMapService.TryGetNavalRegionId(mobile.ToCell, out var region)
+				: strategicMapService != null && strategicMapService.TryGetNavalRegionId(mobile.ToCell, out var region)
 					? region.ToString()
 					: "Unknown";
 
@@ -1292,12 +1483,11 @@ namespace OpenRA.Mods.Common.Traits
 				waitingTransportFailures.Remove((passenger.ActorID, target.ActorID));
 		}
 
-		bool IsPassengerLoaded(TransportMission mission)
+		bool IsLegPassengerLoaded(TransportMission mission, Actor passenger)
 		{
-			if (mission?.Passenger == null || mission.Transport == null)
+			if (mission?.Transport == null || passenger == null)
 				return false;
 
-			var passenger = mission.Passenger;
 			var transport = mission.Transport;
 			if (passenger.Disposed || passenger.IsDead || passenger.IsInWorld ||
 				transport.Disposed || !transport.IsInWorld || transport.IsDead)
@@ -1308,9 +1498,45 @@ namespace OpenRA.Mods.Common.Traits
 			return passengerTrait?.Transport == transport && cargo != null && cargo.Passengers.Contains(passenger);
 		}
 
+		bool IsPassengerLoaded(TransportMission mission)
+		{
+			return IsLegPassengerLoaded(mission, mission?.Passenger);
+		}
+
+		// ENG-T: a run is "loaded" when ANY surviving leg passenger is aboard (retreat still
+		// carries them out), and "done boarding" only when EVERY living leg is aboard.
+		bool AnyRunPassengerLoaded(TransportMission mission) =>
+			mission.RunLegs != null && mission.RunLegs.Any(leg => IsLegPassengerLoaded(mission, leg.Passenger));
+
+		bool AllLiveRunPassengersLoaded(TransportMission mission) =>
+			mission.RunLegs != null && mission.RunLegs.All(leg => IsLegPassengerLoaded(mission, leg.Passenger));
+
+		static bool LegAlive(Actor actor) => actor != null && !actor.Disposed && !actor.IsDead;
+
+		void PruneRunLegs(TransportMission mission)
+		{
+			if (mission.RunLegs == null)
+				return;
+
+			foreach (var leg in mission.RunLegs.Where(leg => !LegAlive(leg.Passenger)).ToArray())
+			{
+				missions.Remove(leg.Passenger);
+				mission.RunDeliveredTargets.Remove(leg.Passenger);
+			}
+
+			mission.RunLegs.RemoveAll(leg => !LegAlive(leg.Passenger));
+		}
+
 		void ManageMission(IBot bot, TransportMission mission)
 		{
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "Transport.ManageMission");
+
+			// LC1 heartbeat: re-claim the leased transport so the failsafe expiry never fires
+			// mid-mission; ReleaseTransport ends it when the craft is freed.
+			if (mission.Transport != null)
+				BotUnitLeases.TryClaim(BotUnitLeases.Of(player), mission.Transport, LeaseOwner,
+					BotLeasePurpose.Mission, Info.TransportLeaseTicks);
+
 			if (mission.State == MissionState.Escort)
 			{
 				ManageEscort(bot, mission);
@@ -1343,24 +1569,72 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 			}
 
+			// ENG-T: dead legs are pruned every scan; the run survives losing the creation
+			// anchor as long as another leg is still alive. Handoff (delivered) runs only
+			// drain here — the engineer owner consumes each leg through TryConsumeDelivered.
+			if (mission.IsRunMission)
+			{
+				PruneRunLegs(mission);
+				if (mission.RunLegs.Count == 0)
+				{
+					EndRunMission(bot, mission,
+						mission.RunDeliveredTargets.Count > 0 || mission.State == MissionState.Handoff
+							? BotMissionAttemptState.Success : BotMissionAttemptState.Failed,
+						mission.RunDeliveredTargets.Count > 0 || mission.State == MissionState.Handoff
+							? "done" : "lost_units");
+					return;
+				}
+
+				// a Handoff run has no driver work left; Consume/cleanup owns the rest.
+				if (mission.State == MissionState.Handoff)
+					return;
+			}
+
 			var passenger = mission.Passenger;
 			if (passenger == null || passenger.Disposed || passenger.IsDead)
 			{
-				ReleaseTransport(mission);
-				if (passenger != null)
-					missions.Remove(passenger);
-				return;
+				if (mission.IsRunMission)
+				{
+					// the anchor leg died but others live — legs already hold their own targets.
+					// A Waiting run has no assigned transport yet and all planning reads the dead
+					// anchor's geometry, so release now instead of stalling until MissionTimeout.
+					if (mission.State == MissionState.Waiting)
+					{
+						EndRunMission(bot, mission, BotMissionAttemptState.Released, "lost_units");
+						return;
+					}
+
+					passenger = null;
+				}
+				else
+				{
+					ReleaseTransport(mission);
+					if (passenger != null)
+						missions.Remove(passenger);
+					return;
+				}
 			}
 
 			// a retreat-triggered native Unload changes the phase to DROP while
 			// CancelAfterDrop remains latched. Do not re-enter RETREAT every mission scan
 			// just because the original capture target is still invalid; DROP owns the
 			// passenger until physical unload succeeds or the normal phase timeout fires.
-			if (!mission.ReusableRoundTrip && mission.State != MissionState.Retreat && !mission.CancelAfterDrop && !IsValidCaptureTarget(mission.Target))
+			var allTargetsInvalid = mission.IsRunMission
+				? !AllLegs(mission).Any(leg => IsValidCaptureTarget(leg.Target))
+				: !IsValidCaptureTarget(mission.Target);
+			if (!mission.ReusableRoundTrip && mission.State != MissionState.Retreat && !mission.CancelAfterDrop && allTargetsInvalid)
 			{
-				if (IsPassengerLoaded(mission))
+				if (mission.IsRunMission ? AnyRunPassengerLoaded(mission) : IsPassengerLoaded(mission))
 				{
 					BeginRetreat(bot, mission, "capture target is no longer valid while E6 is aboard");
+					return;
+				}
+
+				if (mission.IsRunMission)
+				{
+					FransBotLog.BotDebug(world, "{0}: capture RUN {1} released; no leg target remains capturable.",
+						player, mission.RunMissionId);
+					EndRunMission(bot, mission, BotMissionAttemptState.Released, "target_gone");
 					return;
 				}
 
@@ -1388,9 +1662,15 @@ namespace OpenRA.Mods.Common.Traits
 				if (mission.State == MissionState.Waiting)
 					RegisterWaitingTransportFailure(mission);
 
-				if (IsPassengerLoaded(mission))
+				if (mission.IsRunMission ? AnyRunPassengerLoaded(mission) : IsPassengerLoaded(mission))
 				{
 					BeginRetreat(bot, mission, "mission timeout while E6 was already aboard");
+					return;
+				}
+
+				if (mission.IsRunMission)
+				{
+					EndRunMission(bot, mission, BotMissionAttemptState.Failed, "timeout");
 					return;
 				}
 
@@ -1476,6 +1756,15 @@ namespace OpenRA.Mods.Common.Traits
 
 					if (!TryReserveTransport(transport, mission.Passenger))
 						continue;
+
+					// LC1: the transport is mission-owned — claim it through the shared lease
+					// registry (Mission purpose) so squad/beacon/crate modules leave it alone.
+					if (!BotUnitLeases.TryClaim(BotUnitLeases.Of(player), transport, LeaseOwner,
+						BotLeasePurpose.Mission, Info.TransportLeaseTicks))
+					{
+						ReleaseTransportReservation(transport, mission.Passenger);
+						continue;
+					}
 
 					mission.Transport = transport;
 					mission.RequestedTransportType = null;
@@ -1676,6 +1965,12 @@ namespace OpenRA.Mods.Common.Traits
 
 		void ManagePickup(IBot bot, TransportMission mission)
 		{
+			if (mission.IsRunMission)
+			{
+				ManageRunPickup(bot, mission);
+				return;
+			}
+
 			if (!ValidateAssignedTransport(mission))
 			{
 				FailAssignedTransport(mission);
@@ -1779,6 +2074,133 @@ namespace OpenRA.Mods.Common.Traits
 			bot.QueueOrder(new Order("EnterTransport", passenger, Target.FromActor(transport), false));
 		}
 
+		/// <summary>
+		/// ENG-T run boarding: every living leg converges on the one craft through native
+		/// EnterTransport. A leg that cannot board (no space, dead, diverted) is RELEASED so its
+		/// owner sends it on foot, and once at least one engineer is aboard a stalled boarding
+		/// line no longer holds the craft — the loaded subset departs and the rest walk.
+		/// </summary>
+		void ManageRunPickup(IBot bot, TransportMission mission)
+		{
+			if (!ValidateAssignedTransport(mission))
+			{
+				FailAssignedTransport(mission);
+				return;
+			}
+
+			if (mission.RunLegs.All(leg => IsLegPassengerLoaded(mission, leg.Passenger)))
+			{
+				mission.BoardingOrderIssued = false;
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = mission.RunMissionId, Attempt = 1,
+					State = BotMissionAttemptState.Progressing, Executor = "Transport",
+					MissionType = "transport", Units = mission.RunLegs.Count
+				});
+				BeginLoadedMove(bot, mission);
+				return;
+			}
+
+			var transport = mission.Transport;
+			var cargo = transport.TraitOrDefault<Cargo>();
+			if (cargo == null || cargo.IsTraitDisabled)
+			{
+				FailAssignedTransport(mission);
+				return;
+			}
+
+			var transportAtPickup =
+				(transport.Location - mission.PickupTransportCell).LengthSquared <= Info.PickupArrivalRadius * Info.PickupArrivalRadius;
+			if (!transportAtPickup)
+			{
+				if (IsAirTransport(transport) && Info.EnableAirTransportRiskRouting)
+				{
+					if (!ManageAirMove(bot, mission, mission.PickupTransportCell, "run pickup", loaded: false))
+					{
+						FransBotLog.BotDebug(world,
+							"{0}: capture RUN {1} TRAN {2} cannot keep a non-critical bounded corridor to pickup {3}; releasing it and trying another transport.",
+							player, mission.RunMissionId, transport, mission.PickupTransportCell);
+						FailAssignedTransport(mission);
+						return;
+					}
+				}
+				else
+					ManageNonAirMove(bot, mission, mission.PickupTransportCell);
+			}
+
+			if (Info.GroundTransportTypes.Contains(transport.Info.Name))
+				ApplyCaptureEscortHoldFire(mission);
+
+			// Native EnterTransport owns each passenger's approach once issued; legs that never
+			// board fall out on the partial-departure/timeout rules below and walk instead.
+			var boardingStalled = world.WorldTick >= mission.NextBoardingRetryTick;
+			foreach (var leg in mission.RunLegs.ToArray())
+			{
+				var passenger = leg.Passenger;
+				if (IsLegPassengerLoaded(mission, passenger))
+					continue;
+
+				var passengerTrait = passenger.TraitOrDefault<Passenger>();
+				if (passengerTrait == null || !passenger.IsInWorld)
+				{
+					ReleaseRunLeg(mission, passenger);
+					continue;
+				}
+
+				if (mission.RunBoardingIssued.Contains(passenger))
+				{
+					if (passengerTrait.ReservedCargo != null || !passenger.IsIdle || !boardingStalled)
+						continue;
+
+					mission.RunBoardingIssued.Remove(passenger);
+				}
+
+				if (!cargo.Info.Types.Contains(passengerTrait.Info.CargoType) || !cargo.HasSpace(passengerTrait.Info.Weight))
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: capture RUN {1} releases leg {2}; transport {3} has no room for it — the engineer walks to {4}.",
+						player, mission.RunMissionId, passenger, transport, leg.Target);
+					ReleaseRunLeg(mission, passenger);
+					continue;
+				}
+
+				if (world.WorldTick < mission.NextBoardingRetryTick && mission.RunBoardingIssued.Count > 0)
+					continue;
+
+				mission.RunBoardingIssued.Add(passenger);
+				mission.NextBoardingRetryTick = world.WorldTick + Info.BoardingRetryInterval;
+				mission.LastBoardingProgressTick = world.WorldTick;
+				bot.QueueOrder(new Order("EnterTransport", passenger, Target.FromActor(transport), false));
+			}
+
+			// Partial departure: with passengers already aboard, a boarding line that made no
+			// progress for a few retry windows releases the stragglers and flies with the subset.
+			var anyLoaded = mission.RunLegs.Any(leg => IsLegPassengerLoaded(mission, leg.Passenger));
+			if (anyLoaded && mission.RunBoardingIssued.Count == 0 &&
+				mission.RunLegs.Any(leg => !IsLegPassengerLoaded(mission, leg.Passenger)) &&
+				world.WorldTick - mission.LastBoardingProgressTick >= Info.BoardingRetryInterval * 4)
+			{
+				foreach (var leg in mission.RunLegs.Where(leg => !IsLegPassengerLoaded(mission, leg.Passenger)).ToArray())
+				{
+					if (!leg.Passenger.Disposed && leg.Passenger.IsInWorld && !leg.Passenger.IsDead)
+						leg.Passenger.CancelActivity();
+					FransBotLog.BotDebug(world,
+						"{0}: capture RUN {1} departs without {2}; boarding stalled and the craft already carries engineers — this leg walks to {3}.",
+						player, mission.RunMissionId, leg.Passenger, leg.Target);
+					ReleaseRunLeg(mission, leg.Passenger);
+				}
+			}
+		}
+
+		/// <summary>Drop one leg out of a run so the owner module sees the passenger as unhandled again.</summary>
+		void ReleaseRunLeg(TransportMission mission, Actor passenger)
+		{
+			missions.Remove(passenger);
+			mission.RunBoardingIssued.Remove(passenger);
+			mission.RunDeliveredTargets.Remove(passenger);
+			mission.RunLegs.RemoveAll(leg => leg.Passenger == passenger);
+		}
+
 		void BeginLoadedMove(IBot bot, TransportMission mission)
 		{
 			mission.BoardingOrderIssued = false;
@@ -1807,7 +2229,10 @@ namespace OpenRA.Mods.Common.Traits
 
 		void RefreshMovingTargetGroundDropAtBoarding(TransportMission mission)
 		{
-			if (mission?.Target == null || mission.Target.Disposed || !mission.Target.IsInWorld || mission.Target.IsDead ||
+			// strategicMapService is null on the genericbot provider arm: without landmass
+			// topology no ground drop refresh is possible (ground planning already declined).
+			if (strategicMapService == null ||
+				mission?.Target == null || mission.Target.Disposed || !mission.Target.IsInWorld || mission.Target.IsDead ||
 				mission.Target.Info.HasTraitInfo<BuildingInfo>() || mission.Transport == null ||
 				!Info.GroundTransportTypes.Contains(mission.Transport.Info.Name))
 				return;
@@ -1954,6 +2379,12 @@ namespace OpenRA.Mods.Common.Traits
 
 		void ManageDrop(IBot bot, TransportMission mission)
 		{
+			if (mission.IsRunMission)
+			{
+				ManageRunDrop(bot, mission);
+				return;
+			}
+
 			var passenger = mission.Passenger;
 			var transport = mission.Transport;
 			if (passenger == null || passenger.Disposed || passenger.IsDead || transport == null ||
@@ -2038,6 +2469,87 @@ namespace OpenRA.Mods.Common.Traits
 			mission.State = MissionState.Handoff;
 		}
 
+		/// <summary>
+		/// ENG-T run drop: native Unload empties the whole cargo bay at the first stop. The run
+		/// completes when every surviving leg is physically out; each out-leg is then "delivered"
+		/// for ITS OWN target so the engineer owner orders exactly that capture (maintainer spec:
+		/// after a shared drop, each capturer runs to its own building).
+		/// </summary>
+		void ManageRunDrop(IBot bot, TransportMission mission)
+		{
+			var transport = mission.Transport;
+			var allOut = mission.RunLegs.Count > 0 &&
+				mission.RunLegs.All(leg => leg.Passenger.IsInWorld &&
+					leg.Passenger.TraitOrDefault<Passenger>()?.Transport == null);
+			if (allOut)
+			{
+				CompleteRunDrop(bot, mission);
+				return;
+			}
+
+			if (transport == null || transport.Disposed || !transport.IsInWorld || transport.IsDead)
+			{
+				// whatever already stepped out is still delivered; whoever stayed aboard is lost.
+				CompleteRunDrop(bot, mission);
+				return;
+			}
+
+			var cargo = transport.TraitOrDefault<Cargo>();
+			if (cargo == null || world.WorldTick < mission.NextUnloadRetryTick)
+				return;
+
+			if (mission.RunLegs.Any(leg => IsLegPassengerLoaded(mission, leg.Passenger)) && cargo.CanUnload())
+			{
+				if (Info.GroundTransportTypes.Contains(transport.Info.Name))
+					ApplyCaptureEscortHoldFire(mission);
+				if (!transport.IsIdle)
+					return;
+
+				mission.NextUnloadRetryTick = world.WorldTick + Info.UnloadRetryInterval;
+				bot.QueueOrder(new Order("Unload", transport, false));
+			}
+		}
+
+		void CompleteRunDrop(IBot bot, TransportMission mission)
+		{
+			// CancelAfterDrop = the craft retreated and unloaded at a SAFE cell: no leg counts as
+			// delivered, everyone goes back to the engineer owner and walks.
+			if (mission.CancelAfterDrop)
+			{
+				FransBotLog.BotDebug(world,
+					"{0}: capture RUN {1} safely unloaded all passengers from {2} after transport RETREAT; the run is cancelled and every engineer is released.",
+					player, mission.RunMissionId, mission.Transport);
+				RegisterAbortedLoadedMissionCooldown(mission);
+				EndRunMission(bot, mission, BotMissionAttemptState.Released, "dropped");
+				return;
+			}
+
+			foreach (var leg in mission.RunLegs)
+				if (leg.Passenger.IsInWorld && leg.Passenger.TraitOrDefault<Passenger>()?.Transport == null &&
+					mission.RunTargetByPassenger.TryGetValue(leg.Passenger, out var legTarget))
+					mission.RunDeliveredTargets[leg.Passenger] = legTarget;
+
+			FransBotLog.BotDebug(world,
+				"{0}: capture RUN {1} unloaded {2}/{3} passengers from {4}; each delivered engineer is handed back for its own target.",
+				player, mission.RunMissionId, mission.RunDeliveredTargets.Count, mission.RunLegs.Count, mission.Transport);
+
+			var keepGroundEscort = mission.Transport != null && !mission.Transport.Disposed &&
+				Info.GroundTransportTypes.Contains(mission.Transport.Info.Name);
+			if (!keepGroundEscort)
+			{
+				ReleaseTransport(mission);
+				mission.Transport = null;
+			}
+			else if (mission.Transport.IsInWorld && !mission.Transport.IsDead)
+			{
+				mission.Transport.CancelActivity();
+				ApplyCaptureEscortHoldFire(mission);
+			}
+
+			mission.StartedTick = world.WorldTick;
+			mission.State = MissionState.Handoff;
+		}
+
 		void ManageReusableStandby(TransportMission mission)
 		{
 			if (!ValidateAssignedTransport(mission))
@@ -2103,7 +2615,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 			var landingCraft = Info.LandingCraftTypes.Contains(transport.Info.Name);
 			var transportRegion = 0;
-			var hasTransportRegion = landingCraft &&
+			var hasTransportRegion = landingCraft && strategicMapService != null &&
 				strategicMapService.TryGetNavalRegionId(transportMobile.ToCell, out transportRegion);
 			var candidateLimit = landingCraft ? Info.LandingCraftMaximumPickupCandidates : int.MaxValue;
 			var pickupSearchRadius = landingCraft ? Info.LandingCraftPickupSearchRadius : Math.Max(2, Info.GroundPickupSearchRadius);
@@ -2511,9 +3023,10 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var initialLegValidation = mission.LandingCraftLegValidationPending;
-			if (initialLegValidation || mission.LastTransportLossExclusionRevision != generalService.TransportLossExclusionRevision)
+			var lossRevision = generalService?.TransportLossExclusionRevision ?? -1;
+			if (initialLegValidation || mission.LastTransportLossExclusionRevision != lossRevision)
 			{
-				mission.LastTransportLossExclusionRevision = generalService.TransportLossExclusionRevision;
+				mission.LastTransportLossExclusionRevision = lossRevision;
 				if (!IsLandingCraftRouteLossSafe(transport, mobile, mobile.ToCell, destination))
 				{
 					failureReason = "new LST-loss SECURE blocks the remaining naval transport leg";
@@ -2596,9 +3109,10 @@ namespace OpenRA.Mods.Common.Traits
 					!HasLossSafeLandingCraftProductionCorridor(mission.Passenger, mission.Target))
 				{
 					mission.NextProductionRequestTick = world.WorldTick + Info.ProductionRequestCooldown;
-					if (mission.LastProductionLossBlockRevision != generalService.TransportLossExclusionRevision)
+					var lossBlockRevision = generalService?.TransportLossExclusionRevision ?? -1;
+					if (mission.LastProductionLossBlockRevision != lossBlockRevision)
 					{
-						mission.LastProductionLossBlockRevision = generalService.TransportLossExclusionRevision;
+						mission.LastProductionLossBlockRevision = lossBlockRevision;
 						FransBotLog.BotDebug(world,
 							"{0}: capture/SpecOps transport does not request a fresh {1} for {2} -> {3}; every fair-known common shoreline corridor currently intersects an active LST-loss SECURE exclusion. Air/ground alternatives may still be considered, and LST demand retries automatically when the incident revision changes.",
 							player, type, mission.Passenger, mission.Target);
@@ -2721,8 +3235,15 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool HasLossSafeLandingCraftProductionCorridor(Actor passenger, Actor target)
 		{
-			if (passenger == null || target == null || strategicMapService == null || generalService == null ||
-				!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
+			if (passenger == null || target == null)
+				return true;
+
+			// without the Frans strategic map no LST corridor can ever be proven — treat that as
+			// no safe corridor instead of producing craft that can never be planned.
+			if (strategicMapService == null || generalService == null)
+				return false;
+
+			if (!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(target.Location, out var targetLandmass))
 				return true;
 
@@ -2752,8 +3273,14 @@ namespace OpenRA.Mods.Common.Traits
 		bool IsLandingCraftProductionSuppressed(string type, Actor passenger, Actor target, out bool structuralFailure)
 		{
 			structuralFailure = false;
-			if (!Info.LandingCraftTypes.Contains(type) || passenger == null || target == null ||
-				!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
+			if (!Info.LandingCraftTypes.Contains(type) || passenger == null || target == null)
+				return false;
+
+			// no strategic map = no LST route proofs at all, so producing one is never useful here.
+			if (strategicMapService == null)
+				return true;
+
+			if (!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(target.Location, out var targetLandmass))
 				return false;
 
@@ -2861,10 +3388,16 @@ namespace OpenRA.Mods.Common.Traits
 				amphibiousExpansionService?.HasStrategicLandingCraftProductionDemand == true)
 				return Enumerable.Empty<Actor>();
 
-			combatIntelService.EnsureCurrentSnapshot();
-			return combatIntelService.OwnedActors
+			combatIntelService?.EnsureCurrentSnapshot();
+
+			// without the Frans intel stack (genericbot arm), owned transports come from a plain
+			// owner scan — the filters below apply identically either way.
+			var owned = combatIntelService?.OwnedActors ?? world.Actors.Where(a => a.Owner == player);
+			var leases = BotUnitLeases.Of(player);
+			return owned
 				.Where(a => !a.Disposed && a.IsInWorld && !a.IsDead && a.Info.Name == type)
 				.Where(a => !transportReservations.ContainsKey(a))
+				.Where(a => !BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner))
 				.Where(a => !IsPendingExpansionLandingCraft(a))
 				.Where(a =>
 				{
@@ -3070,7 +3603,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			key = default;
 			topologyImpossible = false;
-			if (passenger == null || target == null || transport == null ||
+			if (passenger == null || target == null || transport == null || strategicMapService == null ||
 				!strategicMapService.TryGetGroundLandmassId(transport.Location, out var transportLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(target.Location, out var targetLandmass))
@@ -3084,8 +3617,14 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IsGroundTransportProductionSuppressed(string transportType, Actor passenger, Actor target)
 		{
-			if (passenger == null || target == null || !Info.GroundTransportTypes.Contains(transportType) ||
-				!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
+			if (passenger == null || target == null || !Info.GroundTransportTypes.Contains(transportType))
+				return false;
+
+			// no strategic map = no landmass topology = no ground-transport proof can ever pass.
+			if (strategicMapService == null)
+				return true;
+
+			if (!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(target.Location, out var targetLandmass))
 				return false;
 
@@ -3121,7 +3660,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			key = default;
 			topologyImpossible = false;
-			if (passenger == null || target == null || transport == null ||
+			if (passenger == null || target == null || transport == null || strategicMapService == null ||
 				!strategicMapService.TryGetGroundLandmassId(passenger.Location, out var sourceLandmass) ||
 				!strategicMapService.TryGetGroundLandmassId(target.Location, out var targetLandmass) ||
 				!strategicMapService.TryGetNavalRegionId(transport.Location, out var navalRegion))
@@ -3236,6 +3775,13 @@ namespace OpenRA.Mods.Common.Traits
 			Actor transport, PassengerTargetProofPlanningPass planningPass, out TransportPlan plan)
 		{
 			plan = default;
+
+			// ground-transport proofs are landmass-topology proofs: without the Frans strategic
+			// map (genericbot provider arm) no APC/Jeep route can be certified, so ground legs are
+			// simply never planned and the run falls back to air craft.
+			if (strategicMapService == null)
+				return false;
+
 			var transportMobile = transport.TraitOrDefault<Mobile>();
 			if (transportMobile == null || transportMobile.IsTraitDisabled || transportMobile.IsTraitPaused)
 				return false;
@@ -3369,7 +3915,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			plan = default;
 			var craftMobile = transport.TraitOrDefault<Mobile>();
-			if (craftMobile == null || craftMobile.IsTraitDisabled || craftMobile.IsTraitPaused)
+			if (craftMobile == null || craftMobile.IsTraitDisabled || craftMobile.IsTraitPaused || strategicMapService == null)
 				return false;
 
 			var hasTransportRegion = strategicMapService.TryGetNavalRegionId(craftMobile.ToCell, out var transportRegion);
@@ -3520,7 +4066,7 @@ namespace OpenRA.Mods.Common.Traits
 			int NoExtraCost(CPos cell) => 0;
 			var path = pathFinder.FindPathToTargetCell(actor, [source], destination,
 				BlockedByActor.Immovable, NoExtraCost, laneBias: false);
-			return path != null && path.Count > 0 && generalService.IsTransportLossRouteAllowed(path);
+			return path != null && path.Count > 0 && (generalService?.IsTransportLossRouteAllowed(path) ?? true);
 		}
 
 		bool TryFindPath(Actor actor, Mobile mobile, CPos source, CPos destination, out int length)
@@ -3543,7 +4089,8 @@ namespace OpenRA.Mods.Common.Traits
 			if (path == null || path.Count == 0)
 				return false;
 
-			if (Info.LandingCraftTypes.Contains(actor.Info.Name) && !generalService.IsTransportLossRouteAllowed(path))
+			if (Info.LandingCraftTypes.Contains(actor.Info.Name) &&
+				!(generalService?.IsTransportLossRouteAllowed(path) ?? true))
 				return false;
 
 			var routeRisk = riskModelService.EvaluateRoute(actor, path, role, FransRiskTolerance.Cautious);
@@ -4036,6 +4583,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			RestoreCaptureEscortStance(mission);
 			ReleaseTransportReservation(mission.Transport, mission.Passenger);
+			BotUnitLeases.Of(player)?.Release(mission.Transport, LeaseOwner);
 		}
 
 		void FailAssignedTransport(TransportMission mission)
@@ -4094,5 +4642,39 @@ namespace OpenRA.Mods.Common.Traits
 			return PlayerRelationship.Enemy.HasRelationship(relationship) ||
 				PlayerRelationship.Neutral.HasRelationship(relationship);
 		}
+	}
+
+	/// <summary>
+	/// ENG-T provider arm: neutral stand-in when no FransRiskModelBotModule is armed (genericbot).
+	/// Every cell/route scores zero risk — never preferred-boosted, never critical — so routing
+	/// falls back to native pathfinding with the planners' own fog-visible checks intact. It
+	/// grants NO information: the absence of a risk model is honest degradation, not omniscience.
+	/// </summary>
+	sealed class NullFransRiskModelService : IFransRiskModelService
+	{
+		public static readonly NullFransRiskModelService Instance = new();
+
+		static readonly FransRiskAssessment Neutral =
+			new(0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, int.MaxValue);
+
+		static readonly FransRouteRiskAssessment NeutralRoute =
+			new(0, 0, 0, 0, default, 0, int.MaxValue);
+
+		NullFransRiskModelService() { }
+
+		public FransRiskAssessment EvaluateCell(Actor subject, CPos cell, FransRiskRole role, FransRiskTolerance tolerance) => Neutral;
+		public FransRiskAssessment EvaluateImmediateRisk(Actor subject, CPos cell, FransRiskRole role, FransRiskTolerance tolerance) => Neutral;
+		public FransRiskAssessment EvaluateStrategicCell(CPos cell, FransRiskRole role, FransRiskTolerance tolerance) => Neutral;
+		public FransExpansionExposureAssessment EvaluateExpansionExposure(CPos cell) =>
+			new(FransExpansionExposureLevel.Safe, 0, 0, 0, 0, 0);
+		public FransRouteRiskAssessment EvaluateRoute(Actor subject, IReadOnlyList<CPos> path, FransRiskRole role, FransRiskTolerance tolerance) => NeutralRoute;
+		public FransRouteRiskAssessment EvaluateDirectRoute(Actor subject, CPos from, CPos to, FransRiskRole role, FransRiskTolerance tolerance) => NeutralRoute;
+		public int GetPathCost(Actor subject, CPos cell, FransRiskRole role, FransRiskTolerance tolerance) => 0;
+		public T ExecuteWithPreparedPathCost<T>(Actor subject, FransRiskRole role, FransRiskTolerance tolerance,
+			Func<Func<CPos, int>, T> synchronousSearch) => synchronousSearch(_ => 0);
+		public void ReportRiskIncident(FransRiskRole role, CPos center, int riskScore, int radiusCells, int durationTicks) { }
+		public void ReportGlobalRiskIncident(CPos center, int riskScore, int radiusCells, int durationTicks) { }
+		public int SnapshotWorldTick => 0;
+		public int RiskRevision => 0;
 	}
 }

@@ -80,6 +80,14 @@
 6. **A/B gate:** ≥ 8 matches per arm on A Nuclear Winter, both spawns, vs master in the same session,
    plus `army_mix_report.py` for composition sanity. From F3 on, also a league score. It lands only if
    it does not lose.
+   **Amended by the maintainer, 2026-10-01 — the A/B unit is the INCREMENT, not the PR:** *"I don't have enough
+   time to test every single little incremental step … the increments should include the work of all the agents
+   combined … then create a new increment which should be A/B tested thoroughly."* Every agent's open work is merged
+   into one increment (`inc/<date>`), which lands on master after build + tests + audits + boot gate with each new
+   behaviour behind its switch; the increment's A/B then runs ALL its switches ON against the previous master
+   (≥ 16 matches per arm, both factions, swapped spawns, arms in parallel, early stop once the verdict cannot flip).
+   Telemetry attributes inside the increment (`ownership`, `order_gate`, mission stories); a LOSING increment is
+   bisected by switch groups, never re-tested PR by PR.
 7. **Difficulty (§4):** its strength knobs go on the §19.1 line for all ten tiers. The donor's own
    copy is then deleted from the `fransbot` bot type; when nothing is left, the `fransbot` type goes
    too (§7.4 step 7).
@@ -202,7 +210,7 @@ agent leaves.
 | id | work | owner | needs | O | M | P | E |
 |---|---|---|---|--:|--:|--:|--:|
 | FB1 | Fransbot MCV/island expansion + transports + ground transfer (13.5k lines, V1.29.31) | DAWN | EX | 30 | 50 | 90 | 53 |
-| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) | DAWN | CA-6 | 10 | 18 | 30 | 19 |
+| FB2 | Fransbot SpecOps (capture, demolition, Tanya C4) — **incl. ENG-T** (maintainer 2026-09-30): implement `IBotCaptureTransportProvider` (CA; consumer `EngineerBotModule.TransportChance`, built) over `IFransCaptureTransportService`: a run carries 1–5 engineers into the enemy base around its army and defences, drops ONE next to each building and drives on (or unloads all at the first stop and each runs to its own building), then the A/B at `TransportChance: 25` | DAWN | CA-6 | 10 | 18 | 30 | 19 |
 | FB3 | Fransbot sea commander (naval squads) | EMBER | CA-5 | 12 | 20 | 36 | 21 |
 | FB4 | Fransbot support coordinator (powers timed with assaults) | EMBER | CA-5 | 6 | 10 | 18 | 11 |
 | CN1 | CN waves + pincer attacks | NOVA | UT | 12 | 20 | 36 | 21 |

@@ -25,8 +25,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	// Merged from CA CaptureManagerBotModuleCA (Cameo's copy of CAmod's, itself from OpenRA.Mods.AS) and AS
 	// CncEngineerManagerBotModule (engine d5d8b2a685) under DESIGN §19.3 (one module per decision). AI_MASTER_PLAN ENG.
 	//   from CA: capture — a priority target by chance (nearest to the base first), otherwise the most valuable
-	//            capturable of a random enemy/neutral player, nearest per engineer; SafePath routes the engineer
-	//            around enemy fire.
+	//            capturable of a random enemy/neutral player, nearest per engineer; SafePath was meant to route the
+	//            engineer around enemy fire but never did (its goal predicate matched the start cell and the path was
+	//            discarded) — SafeRoute below does it for real when MaxExposedRouteCells >= 0.
 	//   from AS: bridge-hut repair and instant building repair (nearest path-reachable target, one engineer per
 	//            evaluation, the repair jobs taking turns); the stuck check (moving, not moved since the last sample).
 	//            DESIGN §19.5 lets the whole module see through fog (maintainer 2026-09-30); both visibility switches
@@ -58,6 +59,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("Avoid enemy actors this close to the path when routing a capturer. Near the maximum weapon range.")]
 		public readonly WDist EnemyAvoidanceRadius = WDist.FromCells(8);
+
+		[Desc("Route engineers for real (maintainer 2026-09-30: if three engineers die at one target, the path was not",
+			"safe enough). The parents' SafePath never scored a route: its goal predicate matched the engineer's own cell,",
+			"and the order ignored the result, so engineers walked the default shortest path. With this >= 0 the module",
+			"searches the least-exposed path (cost: nearness of ARMED enemies within EnemyAvoidanceRadius), skips a target",
+			"whose safest path still has more than this many exposed cells outside the final approach, and walks the",
+			"engineer along it through waypoints. -1 = the parents' behaviour, the default until its A/B.")]
+		public readonly int MaxExposedRouteCells = -1;
+
+		[Desc("Cells around the target excluded from the exposure count: the final approach to a defended target is the",
+			"escort's question (EscortDefendedCaptures), not the route's.")]
+		public readonly int ApproachCells = 6;
+
+		[Desc("Cells between the waypoints of a safe route (MaxExposedRouteCells >= 0).")]
+		public readonly int RouteWaypointSpacing = 5;
+
+		[Desc("Targets tried per engineer, nearest first, before it waits for the next evaluation. A target that is full",
+			"(MaxEngineersPerTarget), dormant or unsafe is passed over so the engineer goes to a DIFFERENT target. 1 = the",
+			"parents' single nearest target, the default until its A/B.")]
+		public readonly int CaptureTargetTries = 1;
 
 		[Desc("Ticks between capture evaluations.")]
 		public readonly int MinimumCaptureDelay = 375;
@@ -111,6 +132,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
+		[Desc("Escort as ONE mission (maintainer 2026-09-30): a TECH building (neutral, or a PriorityCapturableActorTypes",
+			"entry) defended by enemy armed units (within EnemyAvoidanceRadius) is not attempted solo; a building in the",
+			"enemy base is never escorted — the engineer sneaks in alone (SafePath), an escort would give it away. The mission is PUBLISHED and a protection request is raised at the",
+			"target (IBotProtectionRequestProvider, the squad manager's escort seam — it needs UseProtectionRequests); the",
+			"engineer goes once our armed value there reaches EscortSuperiority percent of the defenders'. Off until its A/B.")]
+		public readonly bool EscortDefendedCaptures = false;
+
+		[Desc("Percent of the defenders' value our armed units near the target must reach before the engineer goes.")]
+		public readonly int EscortSuperiority = 100;
+
+		[Desc("The engineer also waits until the defenders' value near the target has fallen to this percent of their value",
+			"when the mission was published: the escort must have thinned them out, not merely arrived (#693's first A/B",
+			"smoke: the escort arrived, the engineer went into the firefight and died twice). 100 = no thinning required.")]
+		public readonly int EscortThinnedPercent = 100;
+
+		[Desc("Ticks an escorted capture waits for its escort before the mission is DENIED (no_units) and goes dormant.")]
+		public readonly int EscortWaitTicks = 3000;
+
+		[Desc("Ticks a published protection request stays valid; it is re-published while the mission lives.")]
+		public readonly int EscortRequestTicks = 250;
+
+		[Desc("ENG-T (maintainer 2026-09-30): percent of stealth infiltrations (a building in the enemy base) that ask an",
+			"IBotCaptureTransportProvider to carry the engineer in (APC, transport helicopter) along a route around the enemy;",
+			"the rest go on foot. 0 = never (and no random number is drawn). The A/B candidate sets 25.")]
+		public readonly int TransportChance = 0;
+
+		[Desc("ENG-T: most engineers (and buildings) in one infiltration run — one per stop.")]
+		public readonly int TransportRunMax = 5;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -118,7 +168,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
-	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData
+	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
+		IBotProtectionRequestProvider
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -131,6 +182,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public Actor Target;
 			public string MissionId;
 			public int Attempt;
+			public bool ViaTransport;
 		}
 
 		readonly World world;
@@ -146,6 +198,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> missionFailStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
 
+		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
+		sealed class EscortPlan
+		{
+			public Actor Target;
+			public string MissionId;
+			public int SinceTick;
+			public int DefenceValue;
+			public int InitialDefenceValue;
+			public bool Committed;
+		}
+
+		EscortPlan escort;
+
+		// The squad manager serves a protection request only at or above its PrepositionMinThreatValue: a request valued at
+		// a few riflemen (the first flag-on match published 440-1000) is dropped in silence. Read the bar from the squad
+		// managers on this player (Info-level, fixed for the match) instead of copying the number.
+		int escortRequestFloor = -1;
+
+		int EscortRequestFloor() =>
+			escortRequestFloor >= 0 ? escortRequestFloor
+				: escortRequestFloor = player.PlayerActor.Info.TraitInfos<SquadManagerBotModuleCAInfo>()
+					.Select(i => i.PrepositionMinThreatValue).DefaultIfEmpty(0).Max();
+
+		/// <summary>The request value, free of world state so it can be tested: the defenders' value, never below the bar
+		/// the squad manager serves requests at.</summary>
+		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
+
 		int captureTicks;
 		int repairTicks;
 		int nextRepairJob;
@@ -159,6 +238,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int BuildingRepairOrders { get; private set; }
 		public int StuckStops { get; private set; }
 		public int SkippedClaimed { get; private set; }
+
+		/// <summary>Capture targets passed over because even the safest route was too exposed.</summary>
+		public int UnsafeRoutes { get; private set; }
 
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)
@@ -247,9 +329,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			housekeptTick = tick;
+			HousekeepEscort(tick);
 			var leases = BotUnitLeases.Of(player);
 			foreach (var (a, job) in assigned.ToList())
 			{
+				// ENG-T: a passenger is out of the world while it rides, so the normal checks would read it as gone.
+				if (job.ViaTransport)
+				{
+					var provider = TransportProvider();
+					if (provider != null && provider.TryConsumeDelivered(a, out var delivered))
+					{
+						job.ViaTransport = false;
+						job.OrderedTick = job.SampleTick = tick;
+						job.SamplePos = a.CenterPosition;
+						var t = delivered ?? job.Target;
+						bot.QueueOrder(new Order("CaptureActor", a, Target.FromActor(t), true));
+						BotMissionLog.Write(new BotMissionRecord
+						{
+							Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = BotMissionAttemptState.Progressing,
+							Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Units = 1
+						});
+						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						continue;
+					}
+
+					if (provider != null && provider.IsHandlingPassenger(a))
+					{
+						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						continue;
+					}
+
+					// Dropped by the provider (or no provider any more): from here the normal checks decide.
+					job.ViaTransport = false;
+					job.OrderedTick = tick;
+				}
+
 				var moving = !IsGone(a) && a.CurrentActivity?.ChildActivity?.ActivityType == ActivityType.Move;
 				var check = Check(IsGone(a), !IsGone(a) && a.IsIdle, moving, IsGone(a) || a.CenterPosition != job.SamplePos,
 					tick - job.OrderedTick, tick - job.SampleTick, Info.OrderGraceTicks, Info.AssignRoleDelay);
@@ -310,7 +424,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return true;
 		}
 
-		bool Assign(IBot bot, IBotUnitLeases leases, Actor engineer, EngineerJob job, Order order, Actor target)
+		bool Assign(IBot bot, IBotUnitLeases leases, Actor engineer, EngineerJob job, Order order, Actor target,
+			IReadOnlyList<CPos> waypoints = null)
 		{
 			if (!BotUnitLeases.TryClaim(leases, engineer, LeaseOwner, PurposeOf(job), Info.LeaseTicks))
 				return false;
@@ -318,9 +433,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tick = world.WorldTick;
 			var assignment = new Assignment { Job = job, OrderedTick = tick, SampleTick = tick, SamplePos = engineer.CenterPosition, Target = target };
 			assigned[engineer] = assignment;
+			if (waypoints != null && waypoints.Count > 0)
+			{
+				// Walk the safe route: the first leg replaces whatever the engineer was doing, the rest queue behind it,
+				// and the capture order (queued) follows the last waypoint.
+				for (var i = 0; i < waypoints.Count; i++)
+					bot.QueueOrder(new Order("Move", engineer, Target.FromCell(world, waypoints[i]), i > 0));
+			}
+
 			bot.QueueOrder(order);
 			if (job == EngineerJob.Capture)
+			{
 				StartMission(assignment, engineer);
+				if (escort != null && escort.Target == target)
+					escort.Committed = true;
+			}
 
 			switch (job)
 			{
@@ -361,7 +488,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var ordered = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				ConsiderEscort(candidates);
+				var ordered = candidates.Where(t => !BlockedByEscort(t)).ToList();
 
 				// As the CA parent: each attempt uses up a target; a capturer is used up only when it is sent.
 				var attempts = Math.Min(capturers.Count, ordered.Count);
@@ -370,8 +499,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var capturer = capturers[next];
 					var target = ordered[i];
 					var captureManager = target.TraitOrDefault<CaptureManager>();
-					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && SafePath(capturer.Actor, target).Type != TargetType.Invalid
-						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target))
+					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && TryRoute(capturer.Actor, target, out var route)
+						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route))
 						next++;
 				}
 
@@ -407,18 +536,226 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (targets.Count == 0)
 				return;
 
-			foreach (var capturer in remaining)
+			for (var ci = 0; ci < remaining.Count; ci++)
 			{
-				var target = targets.Where(t => !TargetFull(t) && !Dormant(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
-				if (target == null || SafePath(capturer.Actor, target).Type == TargetType.Invalid)
-					continue;
+				var capturer = remaining[ci];
+				ConsiderEscort(targets.Where(t => !TargetFull(t) && !Dormant(t)).OrderByDescending(t => t.GetSellValue()));
 
-				Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target);
+				// Nearest first. A full, dormant, escort-blocked or unsafe target passes the engineer on to the next one, so
+				// with MaxEngineersPerTarget 1 engineers spread over DIFFERENT targets (TargetFull is re-read per engineer:
+				// the previous engineer's Assign already counts). CaptureTargetTries 1 = the parents' single nearest target.
+				var tries = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t))
+					.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
+					.Take(Math.Max(1, Info.CaptureTargetTries))
+					.ToList();
+				foreach (var target in tries)
+				{
+					if (!TryRoute(capturer.Actor, target, out var route))
+						continue;
+
+					// ENG-T: sometimes a stealth infiltration rides in. The roll is drawn only when it can matter, so a chance
+					// of 0 leaves LocalRandom's sequence — and every later random choice — exactly as before.
+					if (Info.TransportChance > 0 && !EscortEligible(target)
+						&& WantsTransport(true, world.LocalRandom.Next(100), Info.TransportChance)
+						&& TransportProvider() is IBotCaptureTransportProvider provider)
+					{
+						var used = TryTransportRun(bot, leases, remaining.Skip(ci).Select(tp => tp.Actor).ToList(), target, targets, provider);
+						if (used > 0)
+						{
+							ci += used - 1;
+							break;
+						}
+					}
+
+					Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, route);
+					break;
+				}
 			}
 		}
 
-		// CA parent verbatim. The enemy scan along the path has no visibility check: DESIGN §19.5's engineer exception
-		// (engineers route around the army).
+		/// <summary>ENG-T's gate, free of world state so it can be tested.</summary>
+		public static bool WantsTransport(bool stealthTarget, int roll, int chancePct) => stealthTarget && chancePct > 0 && roll < chancePct;
+
+		/// <summary>The enabled transport provider, resolved at use (never cached: LC4's bug class).</summary>
+		IBotCaptureTransportProvider TransportProvider() =>
+			player.PlayerActor.TraitsImplementing<IBotCaptureTransportProvider>().FirstOrDefault(p => p is not IDisabledTrait d || !d.IsTraitDisabled);
+
+		/// <summary>The visiting order of a run, free of world state so it can be tested: start at `start`, then always the
+		/// nearest unvisited stop (squared cell distance), at most `max` stops.</summary>
+		public static List<int> GreedyRoute(IReadOnlyList<CPos> stops, int start, int max)
+		{
+			var route = new List<int> { start };
+			var left = Enumerable.Range(0, stops.Count).Where(i => i != start).ToList();
+			while (route.Count < max && left.Count > 0)
+			{
+				var from = stops[route[^1]];
+				var next = left.MinBy(i => (stops[i] - from).LengthSquared);
+				route.Add(next);
+				left.Remove(next);
+			}
+
+			return route;
+		}
+
+		/// <summary>ENG-T: one run of up to TransportRunMax engineers, one per stealth building; returns the engineers used.</summary>
+		int TryTransportRun(IBot bot, IBotUnitLeases leases, List<Actor> candidates, Actor first, List<Actor> pool, IBotCaptureTransportProvider provider)
+		{
+			// The stops: the chosen building, then other stealth buildings that are free for an attempt.
+			var stops = new List<Actor> { first };
+			stops.AddRange(pool.Where(t => t != first && !TargetFull(t) && !Dormant(t) && !EscortEligible(t)));
+			var order = GreedyRoute(stops.Select(t => t.Location).ToList(), 0, Math.Min(Info.TransportRunMax, candidates.Count));
+
+			var passengers = new List<Actor>();
+			var targets = new List<Actor>();
+			foreach (var engineer in candidates)
+			{
+				if (passengers.Count == order.Count)
+					break;
+
+				if (!BotUnitLeases.TryClaim(leases, engineer, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks))
+					continue;
+
+				passengers.Add(engineer);
+				targets.Add(stops[order[passengers.Count - 1]]);
+			}
+
+			if (passengers.Count == 0 || !provider.TryRequestCaptureRun(bot, passengers, targets))
+			{
+				foreach (var p in passengers)
+					leases?.Release(p, LeaseOwner);
+
+				return 0;
+			}
+
+			var tick = world.WorldTick;
+			for (var k = 0; k < passengers.Count; k++)
+			{
+				var job = new Assignment
+				{
+					Job = EngineerJob.Capture, OrderedTick = tick, SampleTick = tick, SamplePos = passengers[k].CenterPosition,
+					Target = targets[k], ViaTransport = true
+				};
+				assigned[passengers[k]] = job;
+				CaptureOrders++;
+				StartMission(job, passengers[k], "Transport");
+			}
+
+			Log.Write("debug", $"AI ({player.ClientIndex}): ENG transport run: {passengers.Count} engineer(s) -> {string.Join(", ", targets.Select(t => $"{t.Info.Name} {t.ActorID}"))} (tick {tick})");
+
+			// The remaining candidates list may skip engineers whose claim failed; the caller advances by the scanned count.
+			return candidates.IndexOf(passengers[^1]) + 1;
+		}
+
+
+		/// <summary>
+		/// The route gate for one capture. MaxExposedRouteCells &lt; 0: the parents' check (a path exists; no waypoints).
+		/// Otherwise the least-exposed path, rejected when too exposed; its waypoints are returned for the order.
+		/// </summary>
+		bool TryRoute(Actor capturer, Actor target, out IReadOnlyList<CPos> waypoints)
+		{
+			waypoints = null;
+			if (Info.MaxExposedRouteCells < 0)
+				return SafePath(capturer, target).Type != TargetType.Invalid;
+
+			var route = SafeRoute(capturer, target);
+			if (route == null)
+				return false;
+
+			var exposed = ExposedCells(route.Select(c => (c, Danger(capturer, c))), target.Location, Info.ApproachCells);
+			if (exposed > Info.MaxExposedRouteCells)
+			{
+				UnsafeRoutes++;
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENG route to {target.Info.Name} {target.ActorID} too exposed: {exposed} cells under fire > {Info.MaxExposedRouteCells} (tick {world.WorldTick}; unsafe {UnsafeRoutes})");
+				return false;
+			}
+
+			waypoints = Waypoints(route, Info.RouteWaypointSpacing, Info.ApproachCells, target.Location);
+			return true;
+		}
+
+		/// <summary>Cells of the route within reach of armed enemies, the final approach (within `approachCells` of the
+		/// target) excluded. Free of world state so it can be tested.</summary>
+		public static int ExposedCells(IEnumerable<(CPos Cell, int Danger)> route, CPos target, int approachCells) =>
+			route.Count(c => c.Danger > 0 && (c.Cell - target).LengthSquared > approachCells * approachCells);
+
+		/// <summary>Every `spacing`-th cell of a source-first route, stopping before the final approach (the capture
+		/// order walks that part). Free of world state so it can be tested.</summary>
+		public static List<CPos> Waypoints(IReadOnlyList<CPos> route, int spacing, int approachCells, CPos target)
+		{
+			var result = new List<CPos>();
+			spacing = Math.Max(1, spacing);
+			for (var i = spacing; i < route.Count; i += spacing)
+			{
+				if ((route[i] - target).LengthSquared <= approachCells * approachCells)
+					break;
+
+				result.Add(route[i]);
+			}
+
+			return result;
+		}
+
+		readonly Dictionary<CPos, int> dangerCache = [];
+		int dangerCacheTick = -1;
+
+		// DESIGN §19.5: the engineer owner is omniscient as a whole, so this scan sees through fog. Only ARMED enemies
+		// count (the parent counted every actor that could target an engineer's type, harvesters and MCVs included).
+		// Cached per tick: one evaluation routes several engineers over the same cells.
+		int Danger(Actor capturer, CPos loc)
+		{
+			if (dangerCacheTick != world.WorldTick)
+			{
+				dangerCache.Clear();
+				dangerCacheTick = world.WorldTick;
+			}
+
+			if (dangerCache.TryGetValue(loc, out var d))
+				return d;
+
+			var center = world.Map.CenterOfCell(loc);
+			var sum = 0L;
+			foreach (var u in world.FindActorsInCircle(center, Info.EnemyAvoidanceRadius))
+				if (!u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u))
+					sum += Math.Max(0, Info.EnemyAvoidanceRadius.Length - (center - u.CenterPosition).Length);
+
+			// Bounded so a long route through a crowded base cannot overflow the path cost.
+			return dangerCache[loc] = (int)Math.Min(sum, 1 << 20);
+		}
+
+		/// <summary>The least-exposed path from the engineer to a cell next to the target, source first; null when none.</summary>
+		List<CPos> SafeRoute(Actor capturer, Actor target)
+		{
+			var mobile = capturer.TraitOrDefault<Mobile>();
+			if (mobile == null || !mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, capturer.Location, target.Location))
+				return null;
+
+			var footprint = target.OccupiesSpace?.OccupiedCells().Select(c => c.Cell).ToHashSet() ?? [target.Location];
+			var ring = new HashSet<CPos>();
+			foreach (var c in footprint)
+				for (var dx = -1; dx <= 1; dx++)
+					for (var dy = -1; dy <= 1; dy++)
+					{
+						var n = new CPos(c.X + dx, c.Y + dy);
+						if (!footprint.Contains(n) && world.Map.Contains(n))
+							ring.Add(n);
+					}
+
+			var path = mobile.PathFinder.FindPathToTargetCellByPredicate(
+				capturer, [capturer.Location], ring.Contains, BlockedByActor.Stationary, loc => Danger(capturer, loc));
+			if (path.Count == 0)
+				return null;
+
+			// The engine returns paths goal-first.
+			if ((path[0] - capturer.Location).LengthSquared > (path[^1] - capturer.Location).LengthSquared)
+				path.Reverse();
+
+			return path;
+		}
+
+		// CA parent verbatim, kept for MaxExposedRouteCells < 0 (the default until its A/B). It is only a reachability
+		// check: the goal predicate `loc => true` matches the start cell, so the danger cost is never scored along any
+		// route, and the caller discards the path anyway (maintainer's question, 2026-09-30). SafeRoute is the real one.
 		Target SafePath(Actor capturer, Actor target)
 		{
 			var mobile = capturer.TraitOrDefault<Mobile>();
@@ -512,6 +849,133 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		/// <summary>The escort rule, free of world state so it can be tested: an undefended target needs no escort;
+		/// otherwise our armed value near it must reach `superiorityPct` percent of the defenders'.</summary>
+		public static bool EscortReady(int ownValue, int defenceValue, int superiorityPct) =>
+			defenceValue <= 0 || (long)ownValue * 100 >= (long)defenceValue * superiorityPct;
+
+		/// <summary>Superiority AND thinning: the defenders must also have fallen to `thinnedPct` percent of their value
+		/// at publish. Free of world state so it can be tested.</summary>
+		public static bool EscortReady(int ownValue, int defenceValue, int initialDefenceValue, int superiorityPct, int thinnedPct) =>
+			defenceValue <= 0 || (EscortReady(ownValue, defenceValue, superiorityPct)
+				&& (long)defenceValue * 100 <= (long)Math.Max(defenceValue, initialDefenceValue) * thinnedPct);
+
+		static int CostOf(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+		// DESIGN §19.5: the engineer owner is omniscient as a whole (maintainer 2026-09-30) — these scans see through fog.
+		int DefenceValue(Actor target) =>
+			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
+				.Where(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& u.Info.HasTraitInfo<AttackBaseInfo>())
+				.Sum(CostOf);
+
+		int OwnArmedValueNear(Actor target) =>
+			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
+				.Where(u => !u.IsDead && u.IsInWorld && u.Owner == player && u.Info.HasTraitInfo<AttackBaseInfo>()
+					&& !u.Info.HasTraitInfo<BuildingInfo>())
+				.Sum(CostOf);
+
+		/// <summary>
+		/// Maintainer 2026-09-30: escorts are ONLY for tech buildings (neutral, or a PriorityCapturableActorTypes
+		/// entry) in an unsafe area. A building in the enemy's base is taken by stealth — an escort would give the
+		/// engineer away — so it is never escorted: the engineer sneaks in alone along SafePath.
+		/// </summary>
+		public static bool EscortEligible(bool enemyOwned, bool priorityType) => priorityType || !enemyOwned;
+
+		bool EscortEligible(Actor target) =>
+			EscortEligible(player.RelationshipWith(target.Owner) == PlayerRelationship.Enemy,
+				priorityCapturableTypes.Contains(target.Info.Name.ToLowerInvariant()));
+
+		/// <summary>True when a defended tech target may not be attempted yet: escorts on, defenders present, and no
+		/// ready escort plan for exactly this target. Enemy-base buildings are never blocked (stealth).</summary>
+		bool BlockedByEscort(Actor target)
+		{
+			if (!Info.EscortDefendedCaptures || !EscortEligible(target))
+				return false;
+
+			var defence = DefenceValue(target);
+			if (defence <= 0)
+				return false;
+
+			if (escort == null || escort.Target != target)
+				return true;
+
+			escort.DefenceValue = defence;
+			return !EscortReady(OwnArmedValueNear(target), defence, escort.InitialDefenceValue, Info.EscortSuperiority, Info.EscortThinnedPercent);
+		}
+
+		/// <summary>Opens the one escort plan for the first defended candidate (the candidates arrive best first).</summary>
+		void ConsiderEscort(IEnumerable<Actor> candidates)
+		{
+			if (!Info.EscortDefendedCaptures || escort != null)
+				return;
+
+			foreach (var t in candidates)
+			{
+				if (!EscortEligible(t))
+					continue;
+
+				var defence = DefenceValue(t);
+				if (defence <= 0)
+					continue;
+
+				escort = new EscortPlan
+				{
+					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence,
+					InitialDefenceValue = defence
+				};
+
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Published,
+					Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = defence
+				});
+				return;
+			}
+		}
+
+		/// <summary>Ends a plan whose target is gone or ours, and denies one whose escort never came.</summary>
+		void HousekeepEscort(int tick)
+		{
+			if (escort == null || escort.Committed)
+				return;
+
+			var t = escort.Target;
+			if (t.IsDead || !t.IsInWorld || t.Owner == player)
+			{
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.TargetGone,
+					Executor = "Engineers", MissionType = "capture"
+				});
+				escort = null;
+				return;
+			}
+
+			if (tick - escort.SinceTick < Info.EscortWaitTicks)
+				return;
+
+			// No escort in time: no execution attempt ever existed — mission feedback, then the shelf.
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.NoUnits,
+				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = escort.DefenceValue
+			});
+			dormantUntil[escort.MissionId] = tick + Info.CaptureDormantTicks;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.NoUnits,
+				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location
+			});
+			escort = null;
+		}
+
+		/// <summary>The escort seam: one standing guard request at the escorted target while its mission lives.</summary>
+		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
+			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
+				? []
+				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks)];
+
 		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
 		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
 
@@ -547,7 +1011,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return (BotMissionAttemptState.Released, BotMissionReasons.Dropped);
 		}
 
-		void StartMission(Assignment job, Actor engineer)
+		void StartMission(Assignment job, Actor engineer, string executor = "Engineers")
 		{
 			var target = job.Target;
 			job.MissionId = CaptureMissionId(target.Info.Name, target.ActorID);
@@ -574,6 +1038,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (job.MissionId == null)
 				return;
 
+			// The escorted attempt is over either way: the escort's job ends with it.
+			if (escort != null && escort.MissionId == job.MissionId)
+				escort = null;
+
 			var target = job.Target;
 			var targetGone = target == null || target.IsDead || !target.IsInWorld;
 			var (state, reason) = CaptureVerdict(!targetGone && target.Owner == player, check == EngineerCheck.Stuck,
@@ -581,7 +1049,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
-				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1
+				Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location, Units = 1,
+
+				// Where the attempt ended: for a lost engineer, where it fell (on the route or at the target).
+				UnitCell = world.Map.CellContaining(engineer.CenterPosition)
 			});
 
 			// The dormant shelf: a success clears the streak; consecutive losses rest the mission.

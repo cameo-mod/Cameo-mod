@@ -182,6 +182,57 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append("]}");
 		}
 
+		/// <summary>
+		/// DESIGN §19.6: what the order gate did for this bot — orders refused (another module held the unit), preempted
+		/// (an emergency took it), conflicts (watch mode: would have been refused), crossed orders (two modules ordered one
+		/// unit inside the window), plus the module pairs. Written only for bots with a lease registry (genericbot).
+		/// </summary>
+		internal static void AppendOrderGate(StringBuilder builder, ModularBot bot)
+		{
+			if (bot == null)
+				return;
+
+			var g = bot.OrderGate;
+			AppendObjectPropertyStart(builder, "order_gate");
+			AppendNumber(builder, "refused", g.Refused, true);
+			AppendNumber(builder, "preempted", g.Preempted);
+			AppendNumber(builder, "conflicts", g.Conflicts);
+			AppendNumber(builder, "crossed", g.Crossed);
+			AppendNumber(builder, "unattributed", g.Unattributed);
+			AppendNumber(builder, "dropped_full_queue", bot.DroppedOrders);
+			AppendArrayPropertyStart(builder, "pairs");
+			var i = 0;
+			foreach (var ((issuer, holder, verdict), n) in g.Pairs.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key.Issuer, StringComparer.Ordinal))
+			{
+				if (i++ > 0)
+					builder.Append(',');
+
+				AppendObjectStart(builder);
+				AppendString(builder, "issuer", issuer ?? "", true);
+				AppendString(builder, "holder", holder ?? "");
+				AppendString(builder, "verdict", SnakeCase(verdict.ToString()));
+				AppendNumber(builder, "orders", n);
+				builder.Append('}');
+			}
+
+			builder.Append(']');
+			AppendArrayPropertyStart(builder, "crossed_pairs");
+			i = 0;
+			foreach (var ((first, second), n) in g.CrossedPairs.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key.First, StringComparer.Ordinal))
+			{
+				if (i++ > 0)
+					builder.Append(',');
+
+				AppendObjectStart(builder);
+				AppendString(builder, "first", first, true);
+				AppendString(builder, "then", second);
+				AppendNumber(builder, "orders", n);
+				builder.Append('}');
+			}
+
+			builder.Append("]}");
+		}
+
 		static string SnakeCase(string pascal) =>
 			string.Concat(pascal.Select((c, i) => i > 0 && char.IsUpper(c) ? "_" + char.ToLowerInvariant(c) : char.ToLowerInvariant(c).ToString()));
 
@@ -317,6 +368,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				AppendArsenal(lines, player.PlayerActor.TraitOrDefault<BotArsenalLedger>());
 				AppendOwnership(lines, player.PlayerActor.TraitsImplementing<BotModules.BotOwnershipWatchdog>().FirstOrDefault(w => w.Passes > 0));
+				if (OpenRA.Mods.CA.Traits.BotUnitLeases.Of(player) != null)
+					AppendOrderGate(lines, player.PlayerActor.TraitsImplementing<ModularBot>().FirstOrDefault(b => b.IsEnabled));
 
 				AppendRelationships(lines, world, player, "opponents", false);
 				AppendRelationships(lines, world, player, "allies", true);

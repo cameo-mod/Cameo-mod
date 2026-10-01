@@ -89,5 +89,30 @@ class PooledSpawnSplitTests(unittest.TestCase):
         self.assertNotIn("0: 1W-1L", out)
 
 
+class WatchdogReadoutTests(unittest.TestCase):
+    def test_ownership_and_order_gate_sum_per_bot(self):
+        # LC5 `ownership` and §19.6 `order_gate` (post-#695/#699 records) sum per
+        # bot type across the corpus; `by_type` detail and absent fields stay out.
+        recs = [
+            {**record("m1", "hard", "won"), "ownership": {"checks": 10, "double_owner": 1, "orphan": 2, "by_type": [{"kind": "orphan", "type": "e1", "units": 2}]}, "order_gate": {"refused": 3, "conflicts": 0, "crossed": 4}},
+            {**record("m1", "classic", "lost")},
+            {**record("m2", "hard", "lost"), "ownership": {"checks": 8, "double_owner": 0, "orphan": 1}, "order_gate": {"refused": 1, "conflicts": 2, "crossed": 1}},
+            {**record("m2", "classic", "won")},
+        ]
+        out = run_summary(recs)
+        self.assertIn("watchdogs `hard`: ownership[checks=18 double_owner=1 orphan=3] "
+                      "order_gate[conflicts=2 crossed=5 refused=4]", out)
+        self.assertNotIn("watchdogs `classic`", out)
+        self.assertNotIn("by_type", out)
+
+    def test_pre_watchdog_records_print_nothing(self):
+        recs = [
+            record("m1", "hard", "won"),
+            record("m1", "classic", "lost"),
+        ]
+        out = run_summary(recs)
+        self.assertNotIn("watchdogs", out)
+
+
 if __name__ == "__main__":
     unittest.main()

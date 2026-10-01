@@ -24,6 +24,31 @@ namespace OpenRA.Mods.CA.Traits
 		public int RegionIndex;
 		public int RequiredValue;
 		public int Priority;
+
+		// MissionCard id (docs/design/AI_MISSION_CARDS.md §2.1): the owner
+		// allocates the string key; null = unallocated, consumers fall back to
+		// IdentityKey until owner allocation lands (MC1).
+		public string MissionId;
+
+		// The identity key — deterministic from (Type, TargetPlayer, RegionIndex),
+		// in the contract's grammar (raid:<target internal name>:r<region>).
+		// InternalName, never ClientIndex — every non-human player carries the
+		// host's ClientIndex (Player.cs). Re-derived instances of the same
+		// underlying mission share the key, so attempts accumulate against it.
+		public string IdentityKey =>
+			$"{Type.ToString().ToLowerInvariant()}:{TargetPlayer?.InternalName ?? "self"}:r{RegionIndex}";
+
+		public string EffectiveMissionId => MissionId ?? IdentityKey;
+	}
+
+	// The return path (AI_MISSION_CARDS.md §2.3): executors report attempt
+	// transitions; the owner alone decides what a failure means. The shared
+	// state/reason vocabulary lives in BotMissionLog.cs (BotMissionAttemptState,
+	// BotMissionReasons) — one contract, ruled under §22. Opt-in: providers
+	// adopt without forcing every provider to implement it.
+	public interface IBotMissionOutcomeSink
+	{
+		void Report(string missionId, int attemptId, BotMissionAttemptState state, string reason, int tick);
 	}
 
 	public sealed class BotMissionAssignment

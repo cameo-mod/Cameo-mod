@@ -5100,6 +5100,31 @@ into the enemy army."*
 * **Guard:** `tools/audit/audit_fog_honesty.py` fails when a `genericbot` module switches a visibility check off
   (only these two — the engineer owner under either name — are allowed, `ALLOWED_OMNISCIENT`), and its manifest ratchet makes every new world enumeration a reviewed act.
 
+### 19.6 One owner per unit: the order gate refuses, emergencies may override (maintainer 2026-09-30) — binding
+
+The maintainer, 2026-09-30, choosing between "always refuse", "only watch and count" and "refuse, but emergencies can
+override": *"Refuse, but emergencies can override."*
+
+* **The rule.** A bot module may order a unit only while it holds the unit's lease (LC1, `IBotUnitLeases`; AI_ARCHITECTURE
+  §10.1), or while nobody holds it. An order from any other module is **refused** — dropped, counted and logged
+  (`ORDERGATE REFUSE`). `IsIdle` is never ownership.
+* **Where it is enforced: one funnel, not 250 call sites.** Every bot module's orders pass through `IBot.QueueOrder`,
+  and Cameo's `ModularBot` (the shadow of the engine's) is the one that calls each module, so it knows which module
+  queued each order. The gate lives there; modules do not opt in, and the vendored Fransbot stack is covered the
+  moment it runs under `ModularBot`. (Measured 2026-09-30: 246 `QueueOrder` sites — unit and production orders — in 38 bot files, of which 5 files claim units at all.)
+* **Emergencies.** An order queued from an attack response (`IBotRespondToAttack`) by a module on the registry's
+  `EmergencyModules` list (default `SquadManagerBotModuleCA`) **takes the unit over** (`Preempt`, purpose `Emergency`,
+  `EmergencyLeaseTicks`); the old holder is told through `IBotUnitLeaseLost`, and a holder without it learns when its
+  next heartbeat claim is denied.
+* **Scope.** Units only (actors that can move); buildings and production are not leased. Bots without a lease registry
+  — `classic`, the omniscient A/B reference — pass untouched. Orders queued outside a module call are never refused
+  (counted as `unattributed`).
+* **Rollout (AI_MASTER_PLAN §1.2 step 6).** `BotUnitLeaseRegistry.EnforceAtOrderGate` is false until its A/B: the gate then
+  only COUNTS (`conflicts`) and records crossed orders (two modules ordering one unit inside `CrossedOrderWindowTicks`).
+  Each genericbot record in `cameo-ai-matches.jsonl` carries `order_gate`, beside LC5's `ownership`.
+* **Guard:** `BotOwnershipWatchdog` (LC5) measures the result: with the gate enforcing and squads on LC1 (#681),
+  `ownership.double_owner` must be 0.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on

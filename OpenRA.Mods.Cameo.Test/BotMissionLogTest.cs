@@ -9,6 +9,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
@@ -141,6 +143,60 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OnlyTechBuildingsGetAnEscortTheEnemyBaseIsTakenByStealth()
+		{
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: false, priorityType: true), Is.True, "neutral derrick");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: true), Is.True, "a tech building the enemy holds");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: false), Is.False, "their yard: sneak, never escort");
+		}
+
+		[Test]
+		public void OnlyAStealthInfiltrationRollsForATransport()
+		{
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 24, chancePct: 25), Is.True);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 25, chancePct: 25), Is.False);
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: false, roll: 0, chancePct: 25), Is.False, "tech buildings: escort rules");
+			Assert.That(EngineerBotModule.WantsTransport(stealthTarget: true, roll: 0, chancePct: 0), Is.False);
+		}
+
+		[Test]
+		public void ARunVisitsTheNearestNextBuildingAndStopsAtItsSize()
+		{
+			// Stops: 0 the chosen yard, then buildings at increasing distances in a scattered order.
+			var stops = new[] { new CPos(10, 10), new CPos(40, 40), new CPos(12, 10), new CPos(20, 10), new CPos(11, 14) };
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 5), Is.EqualTo(new[] { 0, 2, 4, 3, 1 }));
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 2), Is.EqualTo(new[] { 0, 2 }), "one engineer per stop");
+			Assert.That(EngineerBotModule.GreedyRoute(stops, 0, 1), Is.EqualTo(new[] { 0 }));
+		}
+
+		[Test]
+		public void AnEscortRequestAlwaysClearsTheSquadManagersBar()
+		{
+			// The first flag-on match published 440, 500, 700 and 1000 against a 1500 bar: no escort ever came.
+			Assert.That(EngineerBotModule.EscortRequestValue(440, 1500), Is.EqualTo(1500));
+			Assert.That(EngineerBotModule.EscortRequestValue(2600, 1500), Is.EqualTo(2600));
+			Assert.That(EngineerBotModule.EscortRequestValue(0, 0), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void AnEscortedCaptureWaitsForSuperiority()
+		{
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");
+			Assert.That(EngineerBotModule.EscortReady(1500, 1600, 100), Is.False);
+			Assert.That(EngineerBotModule.EscortReady(1600, 1600, 100), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 150), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(int.MaxValue / 50, int.MaxValue / 60, 100), Is.True, "no int overflow");
+
+			// Thinning: 150% superiority alone is not enough while the defenders are still at full strength.
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 50), Is.False, "escort arrived, fight not won");
+			Assert.That(EngineerBotModule.EscortReady(2400, 800, 1600, 150, 50), Is.True, "defenders halved");
+			Assert.That(EngineerBotModule.EscortReady(1000, 800, 1600, 150, 50), Is.False, "halved but escort too weak");
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 100), Is.True, "100 = no thinning required");
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 1600, 150, 50), Is.True, "defenders gone");
+			Assert.That(EngineerBotModule.EscortReady(5000, 2000, 1600, 150, 50), Is.False, "reinforced past the publish value");
+		}
+
+		[Test]
 		public void OneMissionOneLiveAttemptByDefault()
 		{
 			Assert.That(EngineerBotModule.TargetFull(0, 1), Is.False);
@@ -153,6 +209,46 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// No owner in the id: a derrick that changes hands is still the same mission (a smoke match split one in two).
 			Assert.That(EngineerBotModule.CaptureMissionId("oilb", 526), Is.EqualTo("capture:oilb:526"));
+		}
+
+		[Test]
+		public void ExposureCountsRouteCellsUnderFireButNotTheFinalApproach()
+		{
+			var target = new CPos(50, 10);
+			var route = new List<(CPos, int)>
+			{
+				(new CPos(10, 10), 0), (new CPos(20, 10), 900), (new CPos(30, 10), 1200), (new CPos(40, 10), 0),
+				(new CPos(46, 10), 700), (new CPos(49, 10), 5000),
+			};
+
+			// (46,10) is 4 cells out and (49,10) 1 cell out: both inside a 6-cell approach, so only 2 cells count.
+			Assert.That(EngineerBotModule.ExposedCells(route, target, 6), Is.EqualTo(2));
+			Assert.That(EngineerBotModule.ExposedCells(route, target, 0), Is.EqualTo(4), "no approach excluded");
+		}
+
+		[Test]
+		public void WaypointsFollowTheRouteAndStopBeforeTheApproach()
+		{
+			var route = Enumerable.Range(0, 21).Select(x => new CPos(x, 5)).ToList();
+			var target = new CPos(21, 5);
+			Assert.That(EngineerBotModule.Waypoints(route, 5, 6, target),
+				Is.EqualTo(new[] { new CPos(5, 5), new CPos(10, 5) }), "(15,5) is 6 cells out: inside the approach");
+			Assert.That(EngineerBotModule.Waypoints(route.Take(4).ToList(), 5, 6, target), Is.Empty, "short route: capture order alone");
+		}
+
+		[Test]
+		public void AFailedAttemptRecordsWhereTheEngineerFell()
+		{
+			var record = new BotMissionRecord
+			{
+				MissionId = "capture:oilb:1067", Attempt = 3, State = BotMissionAttemptState.Failed, Reason = BotMissionReasons.LostUnits,
+				Executor = "Engineers", TargetCell = new CPos(60, 8), UnitCell = new CPos(41, 22), Tick = 14720
+			};
+
+			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			using var doc = JsonDocument.Parse(line);
+			Assert.That(doc.RootElement.GetProperty("target_cell").GetString(), Is.EqualTo("60,8"));
+			Assert.That(doc.RootElement.GetProperty("unit_cell").GetString(), Is.EqualTo("41,22"));
 		}
 	}
 }

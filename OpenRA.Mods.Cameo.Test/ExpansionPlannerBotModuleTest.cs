@@ -164,5 +164,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.TrackMcvHandout((7, 3), 8, 3), Is.EqualTo(((8, 1), false)));
 			Assert.That(ExpansionPlannerBotModule.TrackMcvHandout((7, 50), 7, 0).Park, Is.False);
 		}
+
+		[Test]
+		public void BevSendsOnlyBaseBuildingVehiclesHome()
+		{
+			// Construction MCVs found bases at fields (EX-3); Yuri's slave miner and Japan's core refinery deploy into
+			// refineries and go to fields too; Japan's other cores are base buildings and deploy at home.
+			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: true, deploysIntoRefinery: false), Is.EqualTo(McvRole.Expansion));
+			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: true, deploysIntoRefinery: true), Is.EqualTo(McvRole.Expansion),
+				"a StarCraft command centre is a construction MCV that also accepts resources: still an expansion");
+			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: false, deploysIntoRefinery: true), Is.EqualTo(McvRole.FieldRefinery));
+			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: false, deploysIntoRefinery: false), Is.EqualTo(McvRole.BaseBuilding));
+		}
 	}
 }

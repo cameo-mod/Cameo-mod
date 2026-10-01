@@ -125,6 +125,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (r.TargetCell.HasValue)
 				AiMatchLogWriter.AppendString(b, "target_cell", r.TargetCell.Value.X + "," + r.TargetCell.Value.Y);
 
+			if (r.UnitCell.HasValue)
+				AiMatchLogWriter.AppendString(b, "unit_cell", r.UnitCell.Value.X + "," + r.UnitCell.Value.Y);
+
 			if (r.Units.HasValue)
 				AiMatchLogWriter.AppendNumber(b, "units", r.Units.Value);
 
