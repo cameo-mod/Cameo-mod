@@ -394,7 +394,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 					if (provider != null && provider.IsHandlingPassenger(a))
 					{
-						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						// §19.6: the run hands each passenger's lease to the provider for the ride —
+						// renew ours only once it is back or free, so housekeeping isn't a refused
+						// claim against the transport module on every pass.
+						if (!BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner))
+							BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
 						continue;
 					}
 
@@ -679,11 +683,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						.ToList();
 				foreach (var target in tries)
 				{
-					if (!TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute))
+					if (StealthTargetGuarded(capturer.Actor, target))
 						continue;
 
-					// ENG-T: sometimes a stealth infiltration rides in. The roll is drawn only when it can matter, so a chance
-					// of 0 leaves LocalRandom's sequence — and every later random choice — exactly as before.
+					// ENG-T: sometimes a stealth infiltration rides in. Transport answers a hot or missing ground route,
+					// so the roll precedes the route check; the provider plans its own way in, and a refused run falls
+					// through to the foot path. The roll is drawn only when it can matter, so a chance of 0 leaves
+					// LocalRandom's sequence — and every later random choice — exactly as before.
 					if (Info.TransportChance > 0 && !EscortEligible(target)
 						&& WantsTransport(true, world.LocalRandom.Next(100), Info.TransportChance)
 						&& TransportProvider() is IBotCaptureTransportProvider provider)
@@ -695,6 +701,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							break;
 						}
 					}
+
+					if (!TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute))
+						continue;
 
 					Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, waypoints, fullRoute);
 					break;
@@ -780,21 +789,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// The route gate for one capture. MaxExposedRouteCells &lt; 0: the parents' check (a path exists; no waypoints).
 		/// Otherwise the least-exposed path, rejected when too exposed; its waypoints are returned for the order.
 		/// </summary>
+		/// <summary>The stealth-guard veto, shared by the foot and transport paths: a stealth target ringed by more
+		/// than StealthMaxDefenders armed guards is skipped entirely — escorted targets never gate on it.</summary>
+		bool StealthTargetGuarded(Actor capturer, Actor target)
+		{
+			if (Info.StealthMaxDefenders < 0 || EscortEligible(target))
+				return false;
+
+			var defenders = GuardingEnemies(capturer, target);
+			if (!StealthGuarded(defenders, Info.StealthMaxDefenders))
+				return false;
+
+			GuardedSkips++;
+			Log.Write("debug", $"AI ({player.ClientIndex}): ENG stealth target {target.Info.Name} {target.ActorID} guarded by {defenders} > {Info.StealthMaxDefenders} (tick {world.WorldTick}; guarded {GuardedSkips})");
+			return true;
+		}
+
 		bool TryRoute(Actor capturer, Actor target, out IReadOnlyList<CPos> waypoints, out List<CPos> fullRoute)
 		{
 			waypoints = null;
 			fullRoute = null;
-			if (Info.StealthMaxDefenders >= 0 && !EscortEligible(target))
-			{
-				var defenders = GuardingEnemies(capturer, target);
-				if (StealthGuarded(defenders, Info.StealthMaxDefenders))
-				{
-					GuardedSkips++;
-					Log.Write("debug", $"AI ({player.ClientIndex}): ENG stealth target {target.Info.Name} {target.ActorID} guarded by {defenders} > {Info.StealthMaxDefenders} (tick {world.WorldTick}; guarded {GuardedSkips})");
-					return false;
-				}
-			}
-
 			if (Info.MaxExposedRouteCells < 0)
 				return SafePath(capturer, target).Type != TargetType.Invalid;
 

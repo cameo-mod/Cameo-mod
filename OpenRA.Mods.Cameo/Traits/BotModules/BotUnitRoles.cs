@@ -252,6 +252,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return roles;
 		}
 
+		// The three specialties of a static defence (AntiInfantry / AntiArmour / AntiAir) from the SAME classifier: a
+		// building's own role set only says `defence`, so each attacking building is run through ClassifyRoles as a
+		// mobile ground combatant (same RoleFacts, same Versus / target-type predicates; the percentile cuts only
+		// feed frontline / skirmisher / scout, which are discarded here). Used by DefenseCoveragePlanner.
+		public static IReadOnlyDictionary<string, HashSet<string>> BuildDefenceSpecialties(Ruleset rules)
+		{
+			var actors = rules.Actors.Values.Where(a => !a.Name.StartsWith('^')).ToList();
+			var infantryArmors = ArmorsOfQueue(actors, "Infantry");
+			var vehicleArmors = ArmorsOfQueue(actors, "Vehicle");
+
+			var result = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+			foreach (var a in actors.Where(a => a.HasTraitInfo<BuildingInfo>() && a.HasTraitInfo<AttackBaseInfo>()))
+			{
+				var f = Collect(a, rules, infantryArmors, vehicleArmors);
+				f.Building = false;
+				f.Mobile = true;
+				var roles = ClassifyRoles(f, int.MaxValue, int.MaxValue, 0);
+				roles.IntersectWith(new[] { BotUnitRole.AntiInfantry, BotUnitRole.AntiArmour, BotUnitRole.AntiAir });
+				result[a.Name] = roles;
+			}
+
+			return result;
+		}
+
 		static HashSet<string> ArmorsOfQueue(List<ActorInfo> actors, string queue)
 		{
 			var set = new HashSet<string>(StringComparer.Ordinal);

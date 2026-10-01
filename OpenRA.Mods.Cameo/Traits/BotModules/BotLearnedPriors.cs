@@ -154,6 +154,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (IsTraitDisabled || !loaded)
 				return 100;
 
+			// A kill/loss trade ratio only measures combat units: transports, harvesters and other unarmed units never kill,
+			// so the first fitted file scored the Chinook 0.01 and harvesters 0.05 — they stay neutral here.
+			if (!unit.HasTraitInfo<AttackBaseInfo>())
+				return 100;
+
 			var pct = priors.TradePercent(self.Faction?.InternalName, EnemyFaction(), unit.Name);
 			return Math.Clamp(pct, Info.MinWeightPercent, Info.MaxWeightPercent);
 		}
