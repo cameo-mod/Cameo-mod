@@ -800,6 +800,11 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--render", choices=("fast", "default"), default="fast",
+                        help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
+                             "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
+                             "Rendering never touches the simulation (bot logic is tick-based), so results are unchanged; "
+                             "'default' keeps the player's settings")
     args = parser.parse_args()
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
@@ -898,6 +903,8 @@ def main() -> int:
         # off so support-dir logs stay identical to the reference batches.
         if os.environ.get("CAMEO_BOT_DEBUG"):
             launch_args.append("Debug.BotDebug=true")
+        if getattr(args, "render", "fast") == "fast":
+            launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 
         attempt = 0
         drift = None
