@@ -389,6 +389,29 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Limit target types for specific air unit squads.")]
 		public readonly Dictionary<string, BitSet<TargetableType>> AirSquadTargetTypes = null;
 
+		[Desc("CA F2p2 (162f00bb6): limit the targets of specific air unit squads by the ARMOR type of the target (key: air unit actor type,",
+			"value: armor type names, matched against the target's Armor traits). Squads whose unit type has no entry are unaffected.",
+			"Empty (the default) keeps the targetable-type behaviour of AirSquadTargetTypes.")]
+		public readonly Dictionary<string, HashSet<string>> AirSquadTargetArmorTypes = null;
+
+		[Desc("CA F2p2 (upstream 'Prioritize buildings over other enemy units', maintainer ruling 2026-10-01): the general squad target search picks the",
+			"closest VISIBLE enemy building before other enemy units. Candidates stay the observed, fog-honest ones.")]
+		public readonly bool PreferBuildingTargets = false;
+
+		[Desc("CA F2p2 (upstream value-only attack force, maintainer ruling 2026-10-01): launch an attack squad on idle unit value alone (SquadValue > 0),",
+			"without the SquadSize unit-count gate. MaxIdleUnits still forces a launch.")]
+		public readonly bool ValueOnlyAttackLaunch = false;
+
+		[Desc("CA F2p2 (2bad89a77): harass / indirect routes start from the own base building closest to the target (or the squad leader when closer)",
+			"instead of from the squad leader. Falls back to the leader when no route is found from the building.")]
+		public readonly bool RouteFromNearestOwnBuilding = false;
+
+		[Desc("CA F2p2 (2bad89a77, 9a68fea15, b831676de): upstream squad state tweaks.",
+			"Idle squads return to base with AttackMove instead of Move; an attacking ground squad that loses its target picks an opportunity target",
+			"in AttackScanRadius or resumes AttackMove instead of fleeing; its stuck-drop-to-idle delay is 100 ticks instead of 63;",
+			"buildings are recognised by RepairableBuilding instead of Building (walls and some defences stop counting as buildings).")]
+		public readonly bool UseUpstreamStateTweaks = false;
+
 		[Desc("Enemy building types around which to scan for targets for naval squads.")]
 		public readonly HashSet<string> StaticAntiAirTypes = new HashSet<string>();
 
@@ -476,6 +499,9 @@ namespace OpenRA.Mods.CA.Traits
 	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
 	{
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
+
+		// CA F2p2 (2bad89a77): own base buildings for route planning, from the construction yard index (no world scan).
+		public IEnumerable<Actor> OwnBaseBuildings => constructionYardBuildings.Actors;
 
 		public CPos GetRandomBaseCenter()
 		{
@@ -653,7 +679,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool IsPreferredEnemyBuilding(Actor a)
 		{
-			return IsValidEnemyUnit(a) && a.Info.HasTraitInfo<BuildingInfo>();
+			return IsValidEnemyUnit(a) && (Info.UseUpstreamStateTweaks
+				? a.Info.HasTraitInfo<RepairableBuildingInfo>()
+				: a.Info.HasTraitInfo<BuildingInfo>());
 		}
 
 		public bool IsPreferredEnemyAircraft(Actor a)
@@ -672,6 +700,13 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var airSquadUnitType = owner.Units[0].Actor.Info.Name;
+
+			// CA F2p2 (162f00bb6): per-type armor filter; only for unit types that have an entry.
+			var armorTypes = owner.SquadManager.Info.AirSquadTargetArmorTypes;
+			if (armorTypes != null && armorTypes.TryGetValue(airSquadUnitType, out var desiredArmorTypes)
+				&& !a.Info.TraitInfos<ArmorInfo>().Any(ai => desiredArmorTypes.Contains(ai.Type)))
+				return false;
+
 			if (owner.SquadManager.Info.AirSquadTargetTypes.ContainsKey(airSquadUnitType))
 			{
 				var targetTypes = a.GetEnabledTargetTypes();
@@ -1267,6 +1302,14 @@ namespace OpenRA.Mods.CA.Traits
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
+
+			// CA F2p2 (A5-1): visible enemy buildings first; only the already-observed candidates are re-ordered.
+			if (Info.PreferBuildingTargets)
+			{
+				var visibleBuildings = visible.Where(IsPreferredEnemyBuilding).ToList();
+				if (visibleBuildings.Count > 0)
+					visible = visibleBuildings;
+			}
 
 			// Fogged scans never fall back to actors the bot cannot see; remembered
 			// enemy buildings are offered separately as FrozenActor targets.
@@ -2203,7 +2246,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
+			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
+			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= desiredAttackForceSize;
+			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && countGateMet))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded

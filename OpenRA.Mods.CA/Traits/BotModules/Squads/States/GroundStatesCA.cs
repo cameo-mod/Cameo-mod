@@ -559,7 +559,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 					if (maxRoutes > 2 || useIndirectRoutes)
 					{
-						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
+						// CA F2p2 (2bad89a77): plan the flank from the own building closest to the target (leader included), not from the leader.
+						var startCell = leader.Actor.Location;
+						if (owner.SquadManager.Info.RouteFromNearestOwnBuilding)
+						{
+							var startActor = owner.SquadManager.OwnBaseBuildings.Concat(new[] { leader.Actor })
+								.ClosestToIgnoringPath(owner.Target.CenterPosition);
+							if (startActor != null)
+								startCell = startActor.Location;
+						}
+
+						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, startCell, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
+						if (routes.Count == 0 && startCell != leader.Actor.Location)
+							routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
 
 						if (owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
 							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
@@ -815,6 +827,21 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
+				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
+				// FindClosestEnemy(leader, range) is the observed overload (visible or remembered enemies only).
+				if (owner.SquadManager.Info.UseUpstreamStateTweaks)
+				{
+					var opportunity = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+					if (opportunity != null)
+					{
+						owner.TargetActor = opportunity;
+						return;
+					}
+
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), true);
 				return;
 			}
@@ -835,7 +862,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// HACK: Drop back to the idle state if we haven't moved in 2.5 seconds
 			// This works around the squad being stuck trying to attack-move to a location
 			// that they cannot path to, generating expensive pathfinding calls each tick.
-			if (owner.World.WorldTick > lastUpdatedTick + 63)
+			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63)) // CA F2p2 (9a68fea15)
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 				return;

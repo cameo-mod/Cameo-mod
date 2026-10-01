@@ -126,7 +126,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 						if (!ReloadsAutomatically(ammoPools, u.Actor.TraitOrDefault<Rearmable>()))
 						{
-							if (IsRearming(u.Actor))
+							if (IsRearming(u.Actor, owner))
 								continue;
 
 							if (!HasAmmo(ammoPools))
