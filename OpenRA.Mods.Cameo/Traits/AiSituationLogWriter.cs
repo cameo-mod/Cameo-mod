@@ -254,6 +254,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "first_attack_tick", situation.FirstAttackTick);
 			AiMatchLogWriter.AppendNumber(builder, "attacks_per_game_min", situation.AttacksPerGameMin);
 
+			// §12.14 PL-1 leads (record-only; UsePersonalityLeads gates only the consumers).
+			AiMatchLogWriter.AppendNumber(builder, "enemy_production_per_game_min", situation.EnemyProductionPerGameMin);
+			AiMatchLogWriter.AppendNumber(builder, "steamroller_lead", situation.SteamrollerLead);
+			AiMatchLogWriter.AppendNumber(builder, "rush_lead", situation.RushLead);
+
 			// RV1 repair-owner telemetry (cumulative).
 			AiMatchLogWriter.AppendNumber(builder, "repair_orders", situation.RepairOrders);
 			AiMatchLogWriter.AppendNumber(builder, "repair_sweep_orders", situation.RepairSweepOrders);

@@ -100,6 +100,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal long EnemyEconValueDestroyedWindow, EnemyEconValueDestroyedTotal, AttacksPerGameMin;
 		internal int AttacksLaunched, FirstAttackTick = -1;
 
+		// §12.14 PL-1 leads, computed on every snapshot (UsePersonalityLeads gates only the
+		// consumers): the remembered enemy production estimate behind Steamroller (cost per
+		// game minute — positive army growth plus the per-seen-production-building proxy),
+		// Steamroller's out-produce ratio own/enemy (1 when nothing of the enemy is
+		// remembered — no denominator means at-target, not infinite or zero), and Rush's
+		// pressure score (min of the launch-rate and first-attack-timing scores; 0 until
+		// the first launch).
+		internal long EnemyProductionPerGameMin;
+		internal double SteamrollerLead = 1, RushLead;
+
 		// RV1 (AI_MASTER_PLAN §3, DESIGN §19.3), cumulative: repair orders the one repair owner sent on a hit and
 		// from its sweep, and the hits where master's second repair module would have toggled a repair back OFF.
 		internal int RepairOrders, RepairSweepOrders, RepairTogglesAvoided;
@@ -265,6 +275,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks for which a taken mission pair remains reserved from other consumers.")]
 		public readonly int MissionReservationTicks = 1500;
 
+		[Desc("PL-1 (§12.14): while this bot's personality lead trails its target, lean that",
+			"personality's budget knobs toward the lead's driver — Steamroller relaxes the",
+			"unit builder's cash floors, Rush shortens the squad attack-force delay.",
+			"The leads themselves are computed on every snapshot either way.")]
+		public readonly bool UsePersonalityLeads = false; // off until the next increment A/B (WORKFLOW §3; group G)
+
+		[Desc("PL-1: assumed enemy output per seen production building, cost per game",
+			"minute, inside the Steamroller lead's enemy-side estimate.")]
+		public readonly int PersonalityLeadEnemyProductionPerBuildingPerMin = 200;
+
+		[Desc("PL-1: Rush lead target — offensive-squad launches per game minute that read as at-target pressure.")]
+		public readonly double PersonalityLeadRushAttacksPerGameMinTarget = 2;
+
+		[Desc("PL-1: Rush lead target — a first attack at or before this tick reads as on time.")]
+		public readonly int PersonalityLeadRushFirstAttackTargetTick = 4500;
+
+		[Desc("PL-1: cap, percent, on how far a trailing lead may move a consumer knob.")]
+		public readonly int PersonalityLeadMaxLeanPercent = 50;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -284,7 +313,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -867,6 +896,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
+			var productionPerGameMin = actualDeltaTicks > 0 ? productionWindow * ticksPerGameMin / actualDeltaTicks : 0;
+			var attacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0;
+
+			// §12.14 PL-1: the leads over every seen enemy combined, computed always —
+			// UsePersonalityLeads only gates the consumers that lean on them.
+			var enemyProductionPerGameMin = EnemyProductionPerGameMin(profiles.Values,
+				actualDeltaTicks, ticksPerGameMin, Info.PersonalityLeadEnemyProductionPerBuildingPerMin);
+			var steamrollerLead = SteamrollerLead(productionPerGameMin, enemyProductionPerGameMin);
+			var rushLead = RushLead(attacksPerGameMin, Info.PersonalityLeadRushAttacksPerGameMinTarget,
+				firstAttackTick, Info.PersonalityLeadRushFirstAttackTargetTick, econDestroyed);
 
 			var situation = new BotSituation
 			{
@@ -896,12 +935,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				LossesByRole = lossesByRole,
 				AwayLossesByRole = awayLossesByRole,
 				ProductionValueWindow = productionWindow,
-				ProductionPerGameMin = actualDeltaTicks > 0 ? productionWindow * ticksPerGameMin / actualDeltaTicks : 0,
+				ProductionPerGameMin = productionPerGameMin,
 				EnemyEconValueDestroyedWindow = econWindow,
 				EnemyEconValueDestroyedTotal = econDestroyed,
 				AttacksLaunched = attacksLaunched,
 				FirstAttackTick = firstAttackTick,
-				AttacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0,
+				AttacksPerGameMin = attacksPerGameMin,
+				EnemyProductionPerGameMin = enemyProductionPerGameMin,
+				SteamrollerLead = steamrollerLead,
+				RushLead = rushLead,
 				RepairOrders = repairOrders,
 				RepairSweepOrders = repairSweepOrders,
 				RepairTogglesAvoided = repairTogglesAvoided,
@@ -1752,6 +1794,86 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return econ;
 		}
+
+		// §12.14 PL-1: the remembered enemy production estimate behind Steamroller's lead,
+		// cost per game minute — every enemy's positive seen army growth over the window
+		// (a shrinking army is not negative production) plus a flat proxy per remembered
+		// production building. No baseline window (first snapshot) reads 0, not a guess.
+		internal static long EnemyProductionPerGameMin(IEnumerable<EnemyProfile> enemies,
+			int deltaTicks, long ticksPerGameMin, int perBuildingPerMin)
+		{
+			if (deltaTicks <= 0)
+				return 0;
+
+			long growth = 0, buildings = 0;
+			if (enemies != null)
+				foreach (var profile in enemies)
+				{
+					growth += Math.Max(0, (long)profile.ArmyValueDelta);
+					buildings += Math.Max(0, (long)profile.ProductionBuildings);
+				}
+
+			return growth * ticksPerGameMin / deltaTicks + buildings * perBuildingPerMin;
+		}
+
+		// Steamroller's out-produce ratio. An empty enemy-side estimate reads as
+		// at-target (1), not infinite or zero: until something of the enemy's output
+		// is remembered there is nothing to trail.
+		internal static double SteamrollerLead(long ownProductionPerGameMin, long enemyProductionPerGameMin)
+		{
+			return enemyProductionPerGameMin <= 0 ? 1.0 : ownProductionPerGameMin / (double)enemyProductionPerGameMin;
+		}
+
+		// Rush's pressure score: the minimum of the launch-rate score and the
+		// first-attack-timing score — fast once but silent since reads as trailing, as does
+		// steady pressure that started late. No launches yet scores 0. Any remembered
+		// enemy-economy kill credits the attack score a flat quarter point (EconLeadBonus):
+		// having already bled their economy lightly relieves the launch-rate ask without
+		// ever carrying the lead alone.
+		internal const double RushEconLeadBonus = 0.25;
+
+		internal static double RushLead(long attacksPerGameMin, double attacksPerGameMinTarget,
+			int firstAttackTick, int firstAttackTargetTick, long econValueDestroyed)
+		{
+			var attackScore = attacksPerGameMin / Math.Max(1e-9, attacksPerGameMinTarget) +
+				(econValueDestroyed > 0 ? RushEconLeadBonus : 0);
+			var timingScore = firstAttackTick > 0
+				? Math.Clamp(firstAttackTargetTick / (double)firstAttackTick, 0.0, 1.0)
+				: 0.0;
+			return Math.Min(attackScore, timingScore);
+		}
+
+		// The shared consumer lean: while a lead trails, its budget knob moves toward the
+		// driver by up to maxLeanPercent, linear in the deficit — and never past it.
+		// (0,1] always: a lead at/above target leans nothing, so flag-off and at-target
+		// consumers keep their unscaled values bit-identically.
+		internal static double LeadLeanMultiplier(double lead, int maxLeanPercent)
+		{
+			return 1.0 - (1.0 - Math.Clamp(lead, 0.0, 1.0)) * Math.Clamp(maxLeanPercent, 0, 100) / 100.0;
+		}
+
+		// PL-1 gate, pure for tests: the flag, the running personality matching the asked
+		// one, and the snapshot's published lead all decide the multiplier together.
+		// Unknown personalities lean nothing.
+		internal static double PersonalityLeadLean(bool traitDisabled, bool usePersonalityLeads,
+			BotSituation situation, string personality, int maxLeanPercent)
+		{
+			if (traitDisabled || !usePersonalityLeads || situation == null || personality == null ||
+				!string.Equals(situation.OwnPersonality, personality, StringComparison.Ordinal))
+				return 1.0;
+
+			var lead = personality == "steamroller" ? situation.SteamrollerLead
+				: personality == "rush" ? situation.RushLead
+				: 1.0;
+			return LeadLeanMultiplier(lead, maxLeanPercent);
+		}
+
+		double IBotPersonalityLeadProvider.PersonalityLeadLean(string personality)
+		{
+			return PersonalityLeadLean(IsTraitDisabled, Info.UsePersonalityLeads, Situation,
+				personality, Info.PersonalityLeadMaxLeanPercent);
+		}
+
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
