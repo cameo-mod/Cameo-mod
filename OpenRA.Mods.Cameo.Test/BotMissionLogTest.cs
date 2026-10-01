@@ -141,6 +141,41 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OnlyTechBuildingsGetAnEscortTheEnemyBaseIsTakenByStealth()
+		{
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: false, priorityType: true), Is.True, "neutral derrick");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: true), Is.True, "a tech building the enemy holds");
+			Assert.That(EngineerBotModule.EscortEligible(enemyOwned: true, priorityType: false), Is.False, "their yard: sneak, never escort");
+		}
+
+		[Test]
+		public void AnEscortRequestAlwaysClearsTheSquadManagersBar()
+		{
+			// The first flag-on match published 440, 500, 700 and 1000 against a 1500 bar: no escort ever came.
+			Assert.That(EngineerBotModule.EscortRequestValue(440, 1500), Is.EqualTo(1500));
+			Assert.That(EngineerBotModule.EscortRequestValue(2600, 1500), Is.EqualTo(2600));
+			Assert.That(EngineerBotModule.EscortRequestValue(0, 0), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void AnEscortedCaptureWaitsForSuperiority()
+		{
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 100), Is.True, "undefended: no escort needed");
+			Assert.That(EngineerBotModule.EscortReady(1500, 1600, 100), Is.False);
+			Assert.That(EngineerBotModule.EscortReady(1600, 1600, 100), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 150), Is.True);
+			Assert.That(EngineerBotModule.EscortReady(int.MaxValue / 50, int.MaxValue / 60, 100), Is.True, "no int overflow");
+
+			// Thinning: 150% superiority alone is not enough while the defenders are still at full strength.
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 50), Is.False, "escort arrived, fight not won");
+			Assert.That(EngineerBotModule.EscortReady(2400, 800, 1600, 150, 50), Is.True, "defenders halved");
+			Assert.That(EngineerBotModule.EscortReady(1000, 800, 1600, 150, 50), Is.False, "halved but escort too weak");
+			Assert.That(EngineerBotModule.EscortReady(2400, 1600, 1600, 150, 100), Is.True, "100 = no thinning required");
+			Assert.That(EngineerBotModule.EscortReady(0, 0, 1600, 150, 50), Is.True, "defenders gone");
+			Assert.That(EngineerBotModule.EscortReady(5000, 2000, 1600, 150, 50), Is.False, "reinforced past the publish value");
+		}
+
+		[Test]
 		public void OneMissionOneLiveAttemptByDefault()
 		{
 			Assert.That(EngineerBotModule.TargetFull(0, 1), Is.False);
