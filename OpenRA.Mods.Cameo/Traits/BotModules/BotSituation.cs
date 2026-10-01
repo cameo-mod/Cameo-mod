@@ -641,14 +641,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				: new RegionMemory(player.World.Map, Info.RegionCellSize);
 
 			// Region-index-keyed durable state belongs to the index space it was recorded in:
-			// a zone re-cut or a backing switch re-shuffles every id, so both tables drop on
-			// the change rather than alias onto different ground.
+			// a zone re-cut or a backing switch re-shuffles every id, so these tables drop on
+			// the change rather than alias onto different ground. BotMission.EffectiveMissionId
+			// embeds the region index too, so the dormant shelf and fail streaks are the same
+			// kind of state — they go with it.
 			if (regions.ZoneBacked != lastRegionsZoned || regions.Generation != lastRegionsGeneration)
 			{
 				lastRegionsZoned = regions.ZoneBacked;
 				lastRegionsGeneration = regions.Generation;
 				failedSieges.Clear();
 				missionReservations.Clear();
+				missionFailStreak.Clear();
+				dormantUntil.Clear();
 			}
 
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
