@@ -1,5 +1,70 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-01 — Claude (coordinator): three increments landed, the increment A/B says ship the switches, the plan for every agent
+
+**Read first, every session: [`WORKFLOW.md`](WORKFLOW.md)** (binding: plan first; Opus specs/reviews/merges; Sonnet
+sub-agents code; only Claude merges and runs A/B tests; increments not per-PR tests; ≤ 3 game drivers). Design rulings
+of this day: DESIGN §19.6 (order gate), §19.7 (defence coverage), §19.8 (a bot acts only through orders), §19.9
+(engineers), §23.1 (disc drain ×−1).
+
+### Verified state (master after this entry's merge)
+* **INC-1 (#702), INC-2 (#703), INC-3 (#709, #710)** carry every agent's work of 09-30/10-01: LC1 squad claims (#681),
+  MI squad micro (#696), §19.6 order gate (#699), LC5 ownership watchdog (#695), LC6 canaries (#700), LC8 squad outcomes +
+  raid dormant shelf, engineers v2 (safe route re-check, stealth only when unguarded, one per target, escorts #693,
+  transport runs #694/#698/#707), BEV (#685), §19.1 ungating (#672), F1 as switch group C (#708), defence coverage v1+v2,
+  the learning loop's return leg (`BotLearnedPriors` + the first `mods/cameo/ai/learned/arsenal_priors.yaml`),
+  `round_trip_check.py`, fast A/B harness (`--render fast`, BELOW_NORMAL), `ab_increment.py` (#706).
+* Also: CLAUDE.md core (#705), Floating Disc drain inverts plants (#714, DESIGN §23.1), WORKFLOW.md (#717), NOVA's
+  ZG-a/b/c tactical map (#711/#713/#718 — ⚠ merged by agents; ZG-c's `UseZoneTopology` is now **default off**, group D),
+  29 CA verbatim syncs (this entry's increment).
+* 444+ C# tests green; fog audit green (master went red twice after agent merges without manifests — #712, #715).
+
+### The INC-1+2+3 A/B (`C:/tmp/inc3ab-out`, hard vs classic, A Nuclear Winter, mirrors only, 16 per arm)
+| arm | hard | win % (95% CI) | mean length | units ordered by two modules | order gate |
+|---|---|---|---|---|---|
+| ctrl `bea5573a2` (pre-INC-1) | 12–4 | 75% (51–90) | 31,562 t | **216** | — |
+| base `dfef889b6` (defaults) | 8–6 (14/16) | 57% (33–79) | 32,782 t | **0** | would refuse 238, crossed 111 |
+| all (+53 switch changes, groups A+B+C) | **12–3** (15/16) | **80% (55–93)** | **27,981 t** | **0** | refused 325, crossed 12 |
+Read: `all` does not lose (it leads, and wins faster); ownership is fixed in both new arms; `base` alone trails — the
+defaults ship machinery whose payoff needs its switches. **Decision pending the last 3 matches → next step 1.**
+
+### What is left — the plan, in order
+1. **Ship the A/B result (Claude, first thing):** when the supervisor log says `all shards DONE`, re-run `ab_summary`
+   per arm. If `all` ≥ `ctrl`: make groups **A** (squad tactics) and **B** (ownership/engineers/missions/learning/defence
+   coverage) the master defaults for genericbot — EXCEPT the `engt-transport` re-arm (a multiplayer desync risk until
+   #716 lands, DESIGN §19.8) — and group **C** for EVERY genericbot tier (§19.1 forbids a hard-only gate). If `all` loses:
+   bisect A vs B vs C in one A/B (arms per group). Record the verdict in `AI_MATCH_LOG.md`.
+2. **INC-4 (collect, then ONE A/B):** DAWN #716 (99 direct actor mutations → orders) **after** the Fransbot re-vendor;
+   NOVA ZG-c (group D) + IM-1 influence layers; CA F2 part 2 (hand-port CA's Feb-2026 AI routing / harasser squads /
+   indirect routes / air targeting-by-armour into our modified squad files — Opus specs, Sonnet codes); the 9 CA files
+   that need new upstream types (attachables, PopController, LinkedProducerTarget, SelectionBoxAnnotationRenderableCA).
+3. **Round-trip test of the whole AI** (maintainer order): fit priors from the INC A/B logs
+   (`fit_arsenal_priors.py … --write mods/cameo/ai/learned/arsenal_priors.yaml`), run matches with `UseLearnedPriors`,
+   then `round_trip_check.py` over them — all 10 layers PASS or a named fix.
+4. **Upstreams (WORKFLOW §6 — each ENGINE once):** OpenRA bleed (engine pipeline, LESSONS_LEARNED), CA, CN, Fransbot
+   always current; the rv-engine family (RV, SP, GA) checked once through its engine plus each mod assembly. 10-01:
+   RV 0, SP 0, CN 0 new; CA 24 (campaign + small gameplay); Fransbot 25 (V1.29.19 → V1.29.48); GA 53 (Generals SFX,
+   AI fixes); bleed: measure from `cameo-engine`. Harvest, then MERGE duplicates (DESIGN §22, `type_merge_inventory.py`).
+5. **Then:** RV2 (support-power merge + 28 IgnoreVisibility decisions), LC9 (ResourceMap fog), the reactors under EMP
+   (they keep power — maintainer to rule), the 15 pre-existing red pytest tests (`test_accepted_*_balance_batch.py`,
+   `test_armament_roles.py`).
+
+### Who does what
+| agent | long-term lane | now |
+|---|---|---|
+| **Claude (Opus)** — coordinator | integration, review, merges, the ONE A/B per increment, specs for Sonnet sub-agents, maintainer questions | step 1, then INC-4 integration + its A/B, round-trip test, CA F2 part 2 spec |
+| **NOVA** (Devin) | map intelligence: ZG → IM → UT (zone graph, influence maps, unit tactics) | IM-1 on a branch; no merges |
+| **DAWN** (Devin) | Fransbot: re-vendor, orders-only conversion, harvest into genericbot with claims (§19.6) | re-vendor V1.29.48 FIRST, then rebase #716 onto it; `audit_bot_direct_mutation` ratchet |
+| **EMBER** (Devin) | test tooling + observability: ab_increment, ab_summary, canaries, mission stories | keep the tools mirror-only, cap-aware; the round-trip checker's evidence |
+| **Sonnet sub-agents** | coding packages specced by Claude | CA F2 part 2, any large self-contained item |
+
+### Long-term goals (unchanged, restated)
+* **The Frankenstein bot** (`hard`/genericbot) beats the omniscient `classic` while fog-honest, on every difficulty tier
+  scaled on one straight line (§19.1), with one module per decision (§19.3) and one owner per unit (§19.6).
+* **One implementation per mechanic** engine-wide (§22): harvest every upstream, then merge the duplicates.
+* **Dynamic faction loading** via self-contained ContentPacks (`MIGRATION.md`) — the 12 GB RAM problem.
+* **The balance program** (BALANCE_PROGRAM_PLAN, W-board) — paused for bots until the full rebalance; no faction-balance batches.
+
 ## 2026-09-30 (evening) — Claude: wave 1b landed, bots build engineers again, one mission-card contract; the next steps
 
 `Agent: Claude-Local (Opus 5.5) · coordinator · master 40b30e000 · fleet orders ../Cameo-mod-fleet/ORDERS_2026-09-30_claude_standing_orders.md (UPDATE blocks) + RULING_2026-09-30_claude_mission_cards_one_contract.md`

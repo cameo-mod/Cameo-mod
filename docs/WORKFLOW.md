@@ -79,11 +79,25 @@ Rules here change only by a maintainer ruling; record the quote and the date whe
   reasoning in the PR; master must never go red.
 * **Never** parse yaml by hand (`miniyaml.Ruleset`), never `git stash`, never `git add -A`, sign commits as yourself.
 
-## 6. Upstream reference mods (standing duty)
+## 6. Upstream references — keep them ALL current, harvest everything, check each ENGINE once (standing duty)
 
-Check CA (`Inq8/CAmod`), Romanov's Vengeance, Crystallized Nexus and Fransbot (`f850484/OpenRA-Fransbot`) for new commits
-when asked and before a sync: `git fetch` in `../<clone>`, compare with what Cameo vendored (`tools/audit/audit_ca_drift.py`;
-`tools/ai/fransbot_drift_baseline.json` → `upstream_ref`). Safe verbatim syncs via `tools/audit/ca_vendor_sync.py --only STALE`;
-bot-module files are hand-ported. **Re-vendor first, then apply Cameo-side conversions** (never the other way round).
-Port mechanics DERIVED from existing values, not as copied literals (the disc drain: CA hard-codes −2x per plant;
-Cameo uses a −100% multiplier).
+Maintainer, 2026-10-01: *"keep them always up to date and always try to harvest as much as possible from all of them,
+then merge the traits that are doing the same thing or similar things"* — and *"only check and harvest each engine
+once to prevent duplicates."* Registry and lineage: [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md).
+
+| upstream | clone (`../`) | what we take | how |
+|---|---|---|---|
+| **OpenRA bleed** (`OpenRA/OpenRA` `bleed`) | `OpenRA`, merged in `cameo-engine` | the ENGINE everything descends from | engine pipeline (LESSONS_LEARNED): `cameo-engine` → push → `mod.config` pin → `make.cmd all` → recreate `engine/glsl/` → boot |
+| **rv-engine** (`MustaphaTR/OpenRA`) — ONE engine for **RV, Shattered Paradise, Generals Alpha** | via `cameo-engine` | `OpenRA.Mods.AS` and the RV engine work | checked ONCE through the engine, never three times |
+| Romanov's Vengeance | `Romanovs-Vengeance` | `OpenRA.Mods.RA2` (32 files) | mod assembly only |
+| Shattered Paradise | `Shattered-Paradise-SDK` | `OpenRA.Mods.Sp` (50) | mod assembly only |
+| Generals Alpha | `Generals-Alpha` | `OpenRA.Mods.GenSDK` (33) + content | mod assembly only |
+| **Combined Arms** (`Inq8/CAmod`) | `CAmod` | `OpenRA.Mods.CA` (vendored) | `audit_ca_drift.py` → `ca_vendor_sync.py --only STALE`; bot modules hand-ported |
+| **Crystallized Nexus** | `crystallized-nexus` | `OpenRA.Mods.CN` (ZG/IM donor) | port per harvest pipeline |
+| **Fransbot** (`f850484/OpenRA-Fransbot`) | `OpenRA-Fransbot` | `OpenRA.Mods.Fransbot` (vendored) | re-vendor to tip; `fransbot_drift_baseline.json` `upstream_ref` |
+
+Rules: `git fetch` each clone and count commits since what Cameo absorbed (the drift audits / baselines above). A
+mechanic that appears in several upstreams is harvested ONCE, from the best source, and the duplicates are MERGED
+(DESIGN §22, `tools/audit/type_merge_inventory.py`). **Re-vendor first, then apply Cameo-side conversions** (never the
+other way round). Port mechanics DERIVED from existing values, not copied literals (the disc drain: CA hard-codes −2x
+per plant; Cameo uses a −100% multiplier). Status of 2026-10-01: RV 0, SP 0, CN 0 new; CA 24; Fransbot 25; GA 53.

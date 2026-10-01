@@ -228,7 +228,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("ZG-c: index spatial memory and threat routing by the TacticalMapBotModule's zone graph",
 			"(one region per chokepoint-bounded pocket of ground) whenever an enabled, built topology",
 			"exists; the square RegionCellSize grid stays the fallback. False forces the grid always.")]
-		public readonly bool UseZoneTopology = true;
+		public readonly bool UseZoneTopology = false; // off until the next increment A/B (WORKFLOW §3; group D)
 		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
 		public readonly bool UseRiskRouting = true;
 		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
