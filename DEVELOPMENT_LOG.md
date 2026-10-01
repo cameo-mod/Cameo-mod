@@ -1,3 +1,24 @@
+# 2026-10-01 — NOVA: INC-4 wave merged to master (maintainer-authorized), 23 PRs landed
+
+- User explicitly authorized the merge; executed as a verified fast-forward of the
+  scratch integration branch `nova/inc4-integration-check` (built from master
+  62547b159 + every open AI-wave PR). New master head: aded64b22.
+- Landed: #721, #723, #725, #726, #727, #728, #729, #730, #731, #732, #733, #734,
+  #735, #736, #737, #738, #739, #740, #741, #742, #743, #744, #745 — ZG memory,
+  IM layers+spread, PL leads, UW weights, CA-2/CA-3/CA-6, CN-2/CN-3, RV-2,
+  UT axes, DI-1/DI-2, TC-1 blackboard, §13.1 discipline telemetry, guerrilla
+  telemetry, regreen, pack hard-refs, mission_story straggler split.
+- Verification on the merged tree before each push: Release build 0 errors,
+  567/567 tests, fog audit PASS (73 files, 242 manifested sites, no new
+  omniscience), boot-gate PASS (menu marker, zero exceptions, private SupportDir).
+- All behaviour switches ship OFF; classic isolation via manifest skip. The
+  increment A/B is the maintainer/coordinator step on the new master.
+- Still open (stale, pre-wave, real conflicts vs new architecture — owner
+  review needed, NOT merged): #245 codex hard-bot (17 conflict files),
+  #180 low-VRAM UI (34), #85 Vulkan experiment (15).
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
 # 2026-10-01 — Devin (NOVA): UW-1 — derived `UnitsToBuild` weights (AI_ARCHITECTURE §2.8b item 3)
 
 - `UnitBuilderBotModuleCAInfo.UseDerivedUnitWeights` (default **false**) plus new
