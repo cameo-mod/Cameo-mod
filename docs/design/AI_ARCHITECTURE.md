@@ -2286,6 +2286,14 @@ TechRush&harr;Expansion axis scales that appetite — `EffectiveMcvTargetCount` 
 floor 1) at TechRush. Expansion personalities spread wider; TechRush ones hold the home front and
 tech. Neutral axis = verbatim count.
 
+**EX-2c (same section, 2026-10-01; not §12.13's reserved EX-4 "enemy creep").** The claim driver no
+longer waits for the crawl target itself to be in reach: `BestClaimField` picks the best-scoring
+free field whose hops are already 0 — any own buildable area counts, so a freshly deployed outpost
+yard claims its local field the same replan instead of queueing behind the walk to a different
+target. The provider publishes it as `RefineryClaimTarget` (the queue manager falls back to
+`ExpansionTarget`); when the crawl target is in reach the pick is identical to EX-2's, and
+parked/missed-claim bookkeeping is unchanged and still per-field.
+
 **EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
 engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
 `claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after

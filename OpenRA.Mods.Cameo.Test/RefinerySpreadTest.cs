@@ -151,5 +151,35 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, -10, 2, 1), Is.EqualTo(2),
 				"out-of-contract axes clamp defensively");
 		}
+
+		// EX-2c (AI_ARCHITECTURE.md 12.13): the claim field is the best-scoring free field ALREADY in
+		// reach — not only the crawl target — so an outpost yard claims its local field immediately.
+		static ExpansionPlannerBotModule.FieldScore FS(int index, int hops, double score) =>
+			new(index, new CPos(index * 10, 0), 100, hops, 0, 0, score);
+
+		[Test]
+		public void ClaimFieldIsTheBestInReachNotTheBestOverall()
+		{
+			var scores = new[] { FS(1, 4, 9.0), FS(2, 0, 5.0), FS(3, 0, 3.0) };
+			Assert.That(ExpansionPlannerBotModule.BestClaimField(scores)?.Index, Is.EqualTo(2),
+				"the crawl target stays field 1 (far), but field 2 is the best already reachable");
+		}
+
+		[Test]
+		public void ClaimFieldMatchesTheTargetWhenItIsInReach()
+		{
+			var scores = new[] { FS(1, 0, 9.0), FS(2, 0, 5.0) };
+			Assert.That(ExpansionPlannerBotModule.BestClaimField(scores)?.Index, Is.EqualTo(1),
+				"the top field being in reach = the EX-2 behaviour verbatim");
+		}
+
+		[Test]
+		public void ClaimFieldIsNullWhenNothingIsInReach()
+		{
+			var scores = new[] { FS(1, 4, 9.0), FS(2, 7, 5.0) };
+			Assert.That(ExpansionPlannerBotModule.BestClaimField(scores), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.BestClaimField(
+				System.Array.Empty<ExpansionPlannerBotModule.FieldScore>()), Is.Null);
+		}
 	}
 }

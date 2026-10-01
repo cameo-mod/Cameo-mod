@@ -165,6 +165,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		Actor self;
 		(int Field, int Refineries) wanting = (-1, 0);
 		bool wantsRefinery;
+		FieldScore? claimField;
 
 		// BEV: the base centre the base builder publishes (the parent BevManagerBotModule used the same signal), and the
 		// construction MCVs of every MCV module on this player (Info-level: fixed for the match, safe to cache).
@@ -216,6 +217,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IBotExpansionTargetProvider.WantsRefineryAtExpansionTarget => !IsTraitDisabled && Info.DriveRefineries && wantsRefinery;
 
 		int IBotExpansionTargetProvider.ExpansionTargetClaimRadius => Info.ClaimRadiusCells;
+
+		CPos? IBotExpansionTargetProvider.RefineryClaimTarget => IsTraitDisabled || !Info.DriveRefineries ? null : claimField?.Center;
 
 		/// <summary>EX-2: a field counts as ours when an own refinery stands within the claim radius of its resource centre.</summary>
 		public static bool Claimed(CPos center, IEnumerable<CPos> refineries, int claimRadiusCells)
@@ -290,6 +293,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			return best;
+		}
+
+		/// <summary>
+		/// EX-2c: the field the next refinery should claim — the best-scoring free field already in buildable
+		/// reach (`scores` is score-sorted, parked and claimed fields never reach it). Any in-reach field
+		/// qualifies, not only the crawl target: an outpost yard draws its refinery the moment it can place
+		/// one. Pure, for the tests.
+		/// </summary>
+		public static FieldScore? BestClaimField(IReadOnlyList<FieldScore> scores)
+		{
+			for (var i = 0; i < scores.Count; i++)
+				if (scores[i].Hops == 0)
+					return scores[i];
+
+			return null;
 		}
 
 		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
@@ -564,9 +582,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			else
 				lastIdleReason = null;
 
-			// EX-2: want a refinery at the target only while it is in reach; park a field that keeps being missed.
-			wantsRefinery = Target is FieldScore w && w.Hops == 0;
-			if (wantsRefinery && Target is FieldScore want)
+			// EX-2/EX-2c: want a refinery at the best free field already in reach — any in-reach field counts,
+			// not only the crawl target, so an outpost yard claims its local field right away (EX-2c). Park a
+			// field that keeps being missed.
+			claimField = BestClaimField(scores);
+			wantsRefinery = claimField.HasValue;
+			if (wantsRefinery && claimField is FieldScore want)
 			{
 				claimAttempts.TryGetValue(want.Index, out var attempts);
 				var (state, now, park) = TrackClaim(wanting, want.Index, refineryCells.Count, attempts, Info.MaxClaimAttempts);
@@ -576,6 +597,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					parkedUntil[want.Index] = world.WorldTick + Info.ParkTicks;
 					claimAttempts.Remove(want.Index);
+					claimField = null;
 					wantsRefinery = false;
 					var parked = $"AI ({player.ClientIndex}): EX-2 parked field {want.Index} at {want.Center} for {Info.ParkTicks} ticks: {now} refinery(ies) built without claiming it, at tick {world.WorldTick}";
 					Log.Write("debug", parked);

@@ -24,5 +24,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>EX-2: how close (cells) to the target a refinery must stand to claim the field.</summary>
 		int ExpansionTargetClaimRadius { get; }
+
+		/// <summary>
+		/// EX-2c: the field whose resource centre the next refinery should claim. May differ from
+		/// <see cref="ExpansionTarget"/> (the crawl aim): any free field already in reach qualifies, so an
+		/// outpost yard draws its refinery the moment it can place one instead of waiting to become the
+		/// crawl target. Null = claim <see cref="ExpansionTarget"/> (the EX-2 behaviour).
+		/// </summary>
+		CPos? RefineryClaimTarget { get; }
 	}
 }

@@ -1,3 +1,15 @@
+# 2026-10-01 — NOVA: EX-2c claim any in-reach field + UT-4/DAWN merge receipt
+
+- `BestClaimField` + `IBotExpansionTargetProvider.RefineryClaimTarget`: the EX-2
+  claim driver now picks the best-scoring FREE field whose hops are already 0 —
+  not only the crawl target. An outpost yard at a remote field draws its
+  refinery the same replan instead of waiting for the walk to a different
+  target. Strictly additive: crawl-target-in-reach picks are identical to EX-2;
+  parked/missed-claim bookkeeping unchanged per-field. No new enumeration, no
+  new switch letter — under the already-armed `DriveRefineries`.
+- UT-4 merged to master (`4944417e5`, PR #752); DAWN #750 (T) + #751 (PL-2 both
+  legs) reviewed and merged — master `523e29b90`, 598/598, boot PASS.
+
 # 2026-10-01 — NOVA: UT-4 expansion appetite (switch U_ut4_expansion_appetite)
 
 - `UseUtilityExpansionAppetite` on `ExpansionPlannerBotModule`: the

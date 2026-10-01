@@ -741,7 +741,10 @@ namespace OpenRA.Mods.CA.Traits
 					var claimer = requestRef == null ? baseBuilder.ExpansionWantsRefinery() : null;
 					if (claimer != null)
 					{
-						var field = claimer.ExpansionTarget.Value;
+						// EX-2c: the claim field may differ from the crawl aim — any free field already in
+						// reach qualifies, so an outpost yard claims its local field without waiting to
+						// become the crawl target. Null falls back to the expansion target (EX-2).
+						var field = claimer.RefineryClaimTarget ?? claimer.ExpansionTarget.Value;
 
 						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
 						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
