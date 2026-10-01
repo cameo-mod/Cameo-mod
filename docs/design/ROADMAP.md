@@ -168,7 +168,9 @@ the fog sequencing.
     learned per-type factors; replaces the 6c scalar. **Claude.**
   - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
     layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
-  - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
+  - [x] **M** MI budgeted micro: focus fire, kiting, pull back damaged (INC-1), concave arc
+    (`devin/ember/mi-concave` — out-of-range members take symmetric ring slots on the squad's
+    side of the target instead of clumping the target point). **EMBER.**
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
   - [x] **M** LG league harness (#625; exploiters get Hard's insurance since 2026-09-29) (past masters + exploiter personalities + maps/factions). **EMBER.**
     In flight: `tools/ai/run_league.py` (spec → per-cell batch → `league_summary.json`

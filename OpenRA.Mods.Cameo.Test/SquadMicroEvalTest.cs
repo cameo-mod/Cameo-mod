@@ -9,7 +9,9 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Primitives;
@@ -121,6 +123,94 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var pos = new WPos(1234, 567, 0);
 			Assert.That(SquadMicroEvalCA.PullBackPoint(pos, pos, WDist.FromCells(4)), Is.EqualTo(pos));
+		}
+
+		[Test]
+		public void ConcaveArcDistinctSlotsLandOnDistinctPoints()
+		{
+			var targetPos = new WPos(10000, 10000, 0);
+			var squadCenter = new WPos(10000, 15000, 0);
+			var radius = WDist.FromCells(5);
+			var points = Enumerable.Range(0, 5)
+				.Select(i => SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, i, 5, radius))
+				.ToList();
+
+			Assert.That(points.Distinct().Count(), Is.EqualTo(points.Count));
+		}
+
+		[Test]
+		public void ConcaveArcSlotsMirrorAcrossAxis()
+		{
+			// Axis along +X: mirrored slots share the along-axis coordinate and
+			// flip the cross-axis one — the fan is symmetric about the axis.
+			var targetPos = new WPos(0, 0, 0);
+			var squadCenter = new WPos(8000, 0, 0);
+			var radius = WDist.FromCells(4);
+			const int count = 6;
+			for (var i = 0; i < count; i++)
+			{
+				var a = SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, i, count, radius);
+				var b = SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, count - 1 - i, count, radius);
+				Assert.That(a.X, Is.EqualTo(b.X), $"slot {i} along-axis");
+				Assert.That(a.Y, Is.EqualTo(-b.Y), $"slot {i} cross-axis");
+			}
+		}
+
+		[Test]
+		public void ConcaveArcSlotsSitOnRing()
+		{
+			var targetPos = new WPos(10000, -4000, 0);
+			var squadCenter = new WPos(2000, -8000, 0);
+			var radius = WDist.FromCells(6);
+			for (var i = 0; i < 8; i++)
+			{
+				var p = SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, i, 8, radius);
+				var d = (p - targetPos).HorizontalLength;
+				Assert.That(d, Is.InRange(radius.Length - 4, radius.Length + 4), $"slot {i} radius");
+			}
+		}
+
+		[Test]
+		public void ConcaveArcSingleMemberLandsOnAxisPoint()
+		{
+			var targetPos = new WPos(1000, 1000, 0);
+			var squadCenter = new WPos(4000, 1000, 0); // axis +X
+			var radius = WDist.FromCells(3);
+			var p = SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, 0, 1, radius);
+			Assert.That(p, Is.EqualTo(new WPos(1000 + radius.Length, 1000, 0)));
+		}
+
+		[Test]
+		public void ConcaveArcCoincidentAxisDoesNotThrow()
+		{
+			var pos = new WPos(5000, 5000, 0);
+			var radius = WDist.FromCells(4);
+			Assert.DoesNotThrow(() => SquadMicroEvalCA.ConcaveArcPoint(pos, pos, 2, 5, radius));
+
+			// Fallback axis is +X: the slot still lands on the ring.
+			var p = SquadMicroEvalCA.ConcaveArcPoint(pos, pos, 0, 5, radius);
+			var d = (p - pos).HorizontalLength;
+			Assert.That(d, Is.InRange(radius.Length - 4, radius.Length + 4));
+		}
+
+		[Test]
+		public void ConcaveArcWingsNeverWrapBehindTarget()
+		{
+			// A 20-strong squad hits the 135° spread cap: every slot stays
+			// within ±75° of the squad's side of the target.
+			var targetPos = new WPos(0, 0, 0);
+			var squadCenter = new WPos(6000, 0, 0);
+			var radius = WDist.FromCells(5);
+			var axisYaw = WAngle.ArcTan(squadCenter.Y - targetPos.Y, squadCenter.X - targetPos.X);
+			const int wingCap = 75 * 1024 / 360; // 213 units ≈ 75°
+			for (var i = 0; i < 20; i++)
+			{
+				var p = SquadMicroEvalCA.ConcaveArcPoint(targetPos, squadCenter, i, 20, radius);
+				var slotYaw = WAngle.ArcTan(p.Y - targetPos.Y, p.X - targetPos.X);
+				var diff = (slotYaw - axisYaw).Angle;
+				var abs = Math.Min(diff, 1024 - diff);
+				Assert.That(abs, Is.LessThanOrEqualTo(wingCap + 2), $"slot {i} angle");
+			}
 		}
 	}
 }

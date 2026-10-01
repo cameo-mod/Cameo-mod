@@ -15455,3 +15455,18 @@ ZG-b fog-honest territory/ownership/doors merged).
   centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+# 2026-10-01 — Devin (EMBER): MI concave arc — the fourth micro element
+
+- `SquadMicroEvalCA.ConcaveArcPoint(target, squadCenter, slot, count, ringRadius)`: pure
+  deterministic slot on the ring at the member's own weapon range, fanned symmetrically
+  around the squad→target axis (30°/member, 135° cap, ±75° wings so the arc never curls
+  behind). Mirrored via WRot conjugate — a wrapped WAngle halves asymmetrically and would
+  skew the wings by ~35 wu. Coincident axis → +X; single member → axis point.
+- `GroundUnitsAttackState`/`TryIssueMicroOrder` gains a lowest-priority branch: members
+  still beyond own `MaxRange` take `AttackMove` to their ActorID-sorted arc slot (≥3 units,
+  weaponed only) instead of piling onto the target point. One `TryConsumeMicroActions()`
+  per order; denial degrades to the plain fallback. `SquadMicroEnabled` + Rush gating
+  unchanged — rides switch group A.
+- 6 new tests (15/15 SquadMicroEvalTest), build 0 errors, audit_fog_honesty PASS
+  (231 sites, no new enumeration — the arc re-uses `assignedTarget`).

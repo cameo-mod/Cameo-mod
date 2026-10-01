@@ -871,12 +871,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
+			// Concave arc membership: a member's slot is its rank by ActorID —
+			// stable and deterministic as the roster churns. Computed once per
+			// tick on a sorted copy; owner.Units itself is never reordered.
+			var arcOrder = micro && owner.Units.Count >= 3
+				? owner.Units.Select(u => u.Actor).OrderBy(u => u.ActorID).ToList()
+				: null;
+
 			foreach (var a in owner.Units)
 			{
 				if (BusyAttack(a.Actor))
 					continue;
 
-				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile))
+				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile, arcOrder))
 					continue;
 
 				owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
@@ -887,10 +894,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		// One member's micro order (the order half of SquadMicroEvalCA),
-		// priority pull-back > kite standoff > focus-fire. Spends one
-		// IBotActionBudget action per issued order; false means the member
-		// keeps the default AttackMove.
-		static bool TryIssueMicroOrder(SquadCA owner, Actor unit, Actor focus, BotUnitProfile focusProfile)
+		// priority pull-back > kite standoff > focus-fire > concave arc.
+		// Spends one IBotActionBudget action per issued order; false means the
+		// member keeps the default AttackMove.
+		static bool TryIssueMicroOrder(SquadCA owner, Actor unit, Actor focus, BotUnitProfile focusProfile, List<Actor> arcOrder)
 		{
 			var assignedTarget = focus ?? owner.TargetActor;
 
@@ -937,6 +944,28 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					return false;
 
 				owner.Bot.QueueOrder(new Order("Attack", unit, Target.FromActor(focus), false));
+				return true;
+			}
+
+			// Concave arc (lowest priority): a member still beyond its own
+			// weapon range takes a ring slot on the squad's side of the target —
+			// the wings wrap and more units arrive with a firing line instead of
+			// piling onto one point. Weaponless members have no firing ring; the
+			// plain AttackMove covers them.
+			if (arcOrder != null && arcOrder.Count >= 3 && ownProfile.MaxRange > WDist.Zero
+				&& (assignedTarget.CenterPosition - unit.CenterPosition).HorizontalLengthSquared
+					> (long)ownProfile.MaxRange.Length * ownProfile.MaxRange.Length)
+			{
+				var slot = arcOrder.IndexOf(unit);
+				if (slot < 0)
+					return false;
+
+				if (!owner.SquadManager.TryConsumeMicroActions())
+					return false;
+
+				var arc = SquadMicroEvalCA.ConcaveArcPoint(assignedTarget.CenterPosition,
+					owner.CenterPosition, slot, arcOrder.Count, ownProfile.MaxRange);
+				owner.Bot.QueueOrder(new Order("AttackMove", unit, Target.FromPos(arc), false));
 				return true;
 			}
 

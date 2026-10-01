@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 
 namespace OpenRA.Mods.CA.Traits
@@ -110,6 +111,58 @@ namespace OpenRA.Mods.CA.Traits
 				(int)(away.X * (long)distance.Length / len),
 				(int)(away.Y * (long)distance.Length / len),
 				0);
+		}
+
+		/// <summary>
+		/// MI concave arc: the ring slot for member <paramref name="slot"/> of
+		/// <paramref name="count"/> on the firing ring of radius
+		/// <paramref name="ringRadius"/> around <paramref name="targetPos"/>, on
+		/// the squad's side of the target — the axis runs from the target toward
+		/// <paramref name="squadCenter"/>. Slots fan symmetrically around that
+		/// axis: 30° per member past the first, capped at a 135° total spread and
+		/// ±75° per wing so the arc wraps the target but never curls behind it.
+		/// A coincident axis falls back to +X; a single member degenerates to the
+		/// axis point. Pure integer math, no RNG — the same inputs always land on
+		/// the same slot.
+		/// </summary>
+		public static WPos ConcaveArcPoint(WPos targetPos, WPos squadCenter, int slot, int count, WDist ringRadius)
+		{
+			// WAngle runs 1024 units per circle: 135° = 384, 30° = 1024/12, 75° = ~213.
+			const int MaxSpread = 3 * 1024 / 8;
+			const int WingCap = 75 * 1024 / 360;
+
+			var axis = squadCenter - targetPos;
+			var axisLen = axis.HorizontalLength;
+			if (axisLen <= 0)
+			{
+				axis = new WVec(1024, 0, 0);
+				axisLen = 1024;
+			}
+
+			// Slot i sits at -spread/2 + spread*i/(count-1); written as a single
+			// division so slot i and slot count-1-i have exactly opposite offsets.
+			var offset = 0;
+			if (count > 1)
+			{
+				var spread = Math.Min(MaxSpread, (count - 1) * 1024 / 12);
+				offset = Math.Clamp(
+					spread * (2 * slot - (count - 1)) / (2 * (count - 1)), -WingCap, WingCap);
+			}
+
+			var ringVec = new WVec(
+				(int)(axis.X * (long)ringRadius.Length / axisLen),
+				(int)(axis.Y * (long)ringRadius.Length / axisLen),
+				0);
+
+			// Rotate by |offset| and conjugate for the negative wing: a wrapped
+			// WAngle halves asymmetrically inside WRot (odd offsets lose half a
+			// unit), while -rot is the exact inverse rotation — mirrored slots
+			// stay exactly mirrored.
+			var rot = WRot.FromYaw(new WAngle(Math.Abs(offset)));
+			if (offset < 0)
+				rot = -rot;
+
+			return targetPos + ringVec.Rotate(rot);
 		}
 	}
 }
