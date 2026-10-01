@@ -537,7 +537,7 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited)
 		{
 			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
-			var mix = manager?.Info.RoleMix;
+			var mix = manager?.Info.UseRoleMix == true ? manager.Info.RoleMix : null;
 			if (mix == null || mix.Count == 0)
 				return null;
 
