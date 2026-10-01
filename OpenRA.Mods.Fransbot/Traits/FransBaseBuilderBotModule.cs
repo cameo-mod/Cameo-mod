@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Mods.Common;
-using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Traits;
 
@@ -316,7 +315,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransBaseBuilderBotModule : ConditionalTrait<FransBaseBuilderBotModuleInfo>, IGameSaveTraitData,
-		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction,
+		IBotTick, IBotEnabled, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction,
 		INotifyActorDisposing, IResolveOrder, IFransBaseBuilderService
 	{
 		const string OrdinaryStartProductionAcknowledgedOrder = "FransBaseBuilderStartProductionAcknowledged";
@@ -338,6 +337,71 @@ namespace OpenRA.Mods.Common.Traits
 
 		readonly World world;
 		readonly Player player;
+
+		readonly Dictionary<Actor, PendingMoveOrder> pendingMoveOrders = [];
+		readonly record struct PendingMoveOrder(CPos Destination, bool Queued);
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueMoveOrder(IBot bot, Actor actor, CPos destination, bool queued = false)
+		{
+			if (!IsValidOrderSubject(actor) || !world.Map.Contains(destination) ||
+				actor.TraitOrDefault<Mobile>() == null)
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingMoveOrders.Remove(actor);
+				sink.QueueOrder(new Order("Move", actor, Target.FromCell(world, destination), queued));
+				return;
+			}
+
+			pendingMoveOrders[actor] = new PendingMoveOrder(destination, queued);
+		}
+
+		// The accepted risk-aware route is preserved as a bounded native waypoint
+		// packet (same recipe as the transport commander) — a custom synchronized
+		// Move callback is an activity and would desync a multiplayer game.
+		void QueueMovePacketOrder(IBot bot, Actor actor, IReadOnlyList<CPos> orderedPath)
+		{
+			const int MaximumMoveWaypoints = 4;
+			var waypointCount = Math.Min(MaximumMoveWaypoints, orderedPath.Count);
+			var queued = false;
+			for (var i = 1; i <= waypointCount; i++)
+			{
+				var index = (int)((long)i * orderedPath.Count / waypointCount) - 1;
+				QueueMoveOrder(bot, actor, orderedPath[index], queued);
+				queued = true;
+			}
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingMoveOrders.Count == 0)
+				return;
+
+			foreach (var pair in pendingMoveOrders.OrderBy(p => p.Key.ActorID).ToArray())
+				if (IsValidOrderSubject(pair.Key) && world.Map.Contains(pair.Value.Destination) &&
+					pair.Key.TraitOrDefault<Mobile>() != null)
+					bot.QueueOrder(new Order("Move", pair.Key, Target.FromCell(world, pair.Value.Destination), pair.Value.Queued));
+
+			pendingMoveOrders.Clear();
+		}
+
 		PowerManager playerPower;
 		PlayerResources playerResources;
 		IResourceLayer resourceLayer;
@@ -552,6 +616,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransBaseBuilder.BotTick");
 			if (world.Type == WorldType.Editor || player.WinState != WinState.Undefined)
 				return;
@@ -1421,15 +1486,20 @@ namespace OpenRA.Mods.Common.Traits
 			var initialPath = actorPathFinder.FindPathToTargetCell(actor, [mobile.ToCell], destination, BlockedByActor.Immovable, CustomCost, laneBias: false);
 			if (initialPath == null || initialPath.Count == 0 || riskModelService.EvaluateRoute(actor, initialPath, FransRiskRole.GroundCombat, FransRiskTolerance.Balanced).IsCritical)
 				return false;
-			actor.QueueActivity(false, new Move(actor, check =>
+			// §19.6: the accepted route rides a bounded native waypoint packet instead of a
+			// dynamic Move callback (an activity, desync-unsafe under a networked bot).
+			var orderedPath = initialPath
+				.AsEnumerable()
+				.Reverse()
+				.Where(cell => cell != mobile.ToCell)
+				.ToArray();
+			if (orderedPath.Length == 0)
 			{
-				if (mobile.ToCell == destination)
-					return (true, new List<CPos>());
-				if (mobile.PathFinder is not PathFinder dynamicPathFinder)
-					return (false, new List<CPos>());
-				var path = dynamicPathFinder.FindPathToTargetCell(actor, [mobile.ToCell], destination, check, CustomCost, laneBias: false);
-				return (false, path);
-			}));
+				QueueMoveOrder(null, actor, destination);
+				return true;
+			}
+
+			QueueMovePacketOrder(null, actor, orderedPath);
 			return true;
 		}
 

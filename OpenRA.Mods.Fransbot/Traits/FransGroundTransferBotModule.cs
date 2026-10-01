@@ -28,7 +28,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	[TraitLocation(SystemActors.Player)]
-	[Desc("Ground logistics convoy service. Moves ordinary Ground combat units between fair-known static land masses in concentrated demand-sized LST waves. GroundTransfer owns Ground passengers and LST logistics only; Sea combat ships remain under Sea Commander and may independently answer a Sea-only SECURE around the destination beach. It creates no new Ground strategic MISSION.")]
+	[Desc("Ground logistics convoy service. Moves ordinary Ground combat units between fair-known static land masses in concentrated demand-sized LST waves. GroundTransfer owns Ground passengers and LST logistics only; Sea combat ships remain under Sea Commander and may independently answer a Sea-only SECURE around the destination landing shore. It creates no new Ground strategic MISSION.")]
 	public class FransGroundTransferBotModuleInfo : ConditionalTraitInfo, Requires<PlayerResourcesInfo>
 	{
 		[Desc("World ticks between state-machine updates.")]
@@ -60,7 +60,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum radius used to assign distinct LST water staging cells around embark and landing shorelines.")]
 		public readonly int NavalFormationRadius = 4;
 
-		[Desc("Lease duration in world ticks refreshed while a GroundTransfer wave is active for the independent Sea-only SECURE around the destination beach.")]
+		[Desc("Lease duration in world ticks refreshed while a GroundTransfer wave is active for the independent Sea-only SECURE around the destination landing shore.")]
 		public readonly int SeaSecureLeaseTicks = 500;
 
 		[ActorReference]
@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Maximum cells from a unit's assigned embark slot considered assembled for initial convoy staging diagnostics.")]
 		public readonly int BoardingAssemblyRadius = 3;
 
-		[Desc("Broad ground-side embark zone around the selected beach. Units inside this zone may receive native EnterTransport directly without waiting on an exact staging slot.")]
+		[Desc("Broad ground-side embark zone around the selected amphibious handoff. Units inside this zone may receive native EnterTransport directly without waiting on an exact staging slot.")]
 		public readonly int BoardingZoneRadius = 8;
 
 		[Desc("Maximum cells an LST may be from its assigned source naval slot and still count as ready for streaming boarding. One ready LST is enough to start loading; later LSTs join as they arrive.")]
@@ -115,7 +115,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("World ticks with no physical progress before a crossing/return movement leg is treated as stalled.")]
 		public readonly int StallTimeout = 250;
 
-		[Desc("Same cached crossing-leg retries before a bounded local alternate landing cell is tried around the already selected beach.")]
+		[Desc("Same cached crossing-leg retries before a bounded local alternate landing cell is tried around the already selected handoff.")]
 		public readonly int CrossingSameLegRetries = 2;
 
 		[Desc("Maximum bounded local alternate naval cells tried before the convoy retreats to its embark shore instead of remaining stalled.")]
@@ -151,13 +151,13 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Known local tactical enemy value multiplier retained on a source landmass before surplus Ground units may be exported. Strategic DEFEND/SECURE demand can require a larger reserve. This replaces the old all-or-nothing source block.")]
 		public readonly int SourceTacticalReservePercent = 150;
 
-		[Desc("World ticks between native Unload retries at the destination beach.")]
+		[Desc("World ticks between native Unload retries at the destination landing handoff.")]
 		public readonly int UnloadRetryInterval = 75;
 
-		[Desc("World ticks with no decrease in one LST's cargo count before GroundTransfer treats that craft as unload-stalled and tries a bounded alternate beach slot.")]
+		[Desc("World ticks with no decrease in one LST's cargo count before GroundTransfer treats that craft as unload-stalled and tries a bounded alternate landing slot.")]
 		public readonly int UnloadStallTimeout = 150;
 
-		[Desc("Maximum bounded alternate beach-slot recovery moves for one LST before it keeps retrying native Unload in place.")]
+		[Desc("Maximum bounded alternate landing-slot recovery moves for one LST before it keeps retrying native Unload in place.")]
 		public readonly int MaximumUnloadRecoveryAttempts = 3;
 
 		[Desc("Radius around the selected landing naval cell used for bounded alternate unload slots after a stalled native Unload.")]
@@ -199,8 +199,11 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransGroundTransferBotModule : ConditionalTrait<FransGroundTransferBotModuleInfo>,
-		IBotTick, IFransGroundTransferService
+		IBotTick, IBotEnabled, IFransGroundTransferService
 	{
+		const string LivenessDiagnosticPrefix = "[GROUND TRANSFER LIVENESS]";
+		const string PlanningDiagnosticPrefix = "[GROUND TRANSFER PLAN]";
+
 		enum TransferState
 		{
 			Assemble,
@@ -209,6 +212,24 @@ namespace OpenRA.Mods.Common.Traits
 			Returning,
 			Unloading,
 			Regroup
+		}
+
+		readonly record struct RegionalLandingCraftSupply(
+			int NavalRegionId,
+			int PhysicalCount,
+			int RegionBoundQueuedCount,
+			bool HasEligibleProducer,
+			string EligibleProducerActorIds)
+		{
+			public int GuaranteedCount => PhysicalCount + RegionBoundQueuedCount;
+		}
+
+		enum LandingCraftCorridorState
+		{
+			SafeCommonRegion,
+			TopologyUnresolved,
+			NoCommonNavalRegion,
+			TransportLossBlocked
 		}
 
 		sealed class TransferWave
@@ -244,6 +265,16 @@ namespace OpenRA.Mods.Common.Traits
 			public readonly HashSet<Actor> ReturnUnloadIssued = [];
 			public readonly Dictionary<Actor, int> ReturnLastCargoCount = [];
 			public readonly Dictionary<Actor, int> ReturnLastCargoProgressTick = [];
+			// Diagnostic-only objective/cargo progress epochs. Gameplay continues to use the
+			// existing Crossing*/Return* fields above; these values only make a final fallback
+			// distinguishable from slow but real progress in a fresh runtime packet.
+			public readonly Dictionary<Actor, CPos> ReturnDiagnosticTarget = [];
+			public readonly Dictionary<Actor, int> ReturnBestDistanceSquared = [];
+			public readonly Dictionary<Actor, int> ReturnLastDistanceProgressTick = [];
+			public readonly Dictionary<Actor, int> ReturnUnloadLastRealProgressTick = [];
+			public readonly Dictionary<Actor, int> ReturnUnloadNextDiagnosticTick = [];
+			public readonly Dictionary<Actor, int> DestinationUnloadLastRealProgressTick = [];
+			public bool ReturnUnloadPhaseLogged;
 			public TransferState State;
 			public int StartedTick;
 			public int StateStartedTick;
@@ -272,6 +303,52 @@ namespace OpenRA.Mods.Common.Traits
 			QueueDomains.Naval.Union(new[] { Info.LandingCraftQueueCategory })
 				.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			pendingStopOrders.Clear();
+		}
+
 		Actor reservationOwner;
 		IFransStrategicMapService strategicMap;
 		IFransGeneralService general;
@@ -288,6 +365,8 @@ namespace OpenRA.Mods.Common.Traits
 		int scanTicks;
 		int nextPlanningTick;
 		int nextLandingCraftProductionRequestTick;
+		string lastPlanningDiagnosticSignature;
+		int lastPlanningDiagnosticTick = -1;
 
 		public FransGroundTransferBotModule(Actor self, FransGroundTransferBotModuleInfo info)
 			: base(info)
@@ -327,12 +406,13 @@ namespace OpenRA.Mods.Common.Traits
 			nextPlanningTick = world.WorldTick;
 			nextLandingCraftProductionRequestTick = world.WorldTick;
 			FransBotLog.BotDebug(world,
-				"{0}: Ground Transfer FOLLOW-ON REINFORCEMENT active. GroundTransfer owns Ground passengers + LST logistics only. One ready LST may begin streaming boarding immediately; passengers use a broad embark zone and dynamically choose the nearest compatible ready LST with free Cargo instead of being permanently locked to one craft. Busy/reserved LSTs remain part of the shared bounded pool, so logistics waits for reuse instead of manufacturing replacement craft. Sea remains fully decoupled and supports only through the independent destination-beach SECURE.",
+				"{0}: Ground Transfer FOLLOW-ON REINFORCEMENT active. GroundTransfer owns Ground passengers + LST logistics only. One ready LST may begin streaming boarding immediately; passengers use a broad embark zone and dynamically choose the nearest compatible ready LST with free Cargo instead of being permanently locked to one craft. Busy/reserved LSTs remain part of the shared bounded pool, so logistics waits for reuse instead of manufacturing replacement craft. Sea remains fully decoupled and supports only through the independent destination-shore SECURE.",
 				player);
 		}
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
 			ReleaseWave(cancelActivities: false, "trait disabled");
 			reservedGroundUnits.Clear();
 		}
@@ -343,6 +423,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransGroundTransfer.BotTick");
 			if (world.Type == WorldType.Editor || player.WinState != WinState.Undefined)
 				return;
@@ -353,7 +434,7 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.SetPerfContext(world, $"GROUND-XFER:{player.PlayerActor.ActorID}",
 				activeWave == null
 					? "Idle"
-					: $"{activeWave.State} src={activeWave.SourceLandmassId} dst={activeWave.TargetLandmassId} lst=[{string.Join(",", activeWave.Crafts.Select(a => a?.ActorID ?? 0))}] sea-secure={activeWave.SeaSupportRequestId} units={activeWave.Units.Count}");
+					: $"wave={WaveDiagnosticId(activeWave)} {activeWave.State} src={activeWave.SourceLandmassId} dst={activeWave.TargetLandmassId} lst=[{ActorIds(activeWave.Crafts)}] sea-secure={activeWave.SeaSupportRequestId} units={activeWave.Units.Count}");
 
 			combatIntel.EnsureCurrentSnapshot();
 			if (activeWave != null)
@@ -373,10 +454,14 @@ namespace OpenRA.Mods.Common.Traits
 		void TryStartWave(IBot bot)
 		{
 			if (!TrySelectDemand(out var missionType, out var targetActorId, out var targetCell, out var targetLandmassId,
-				out var requiredTargetValue, out var currentTargetValue, out var reason))
+				out var requiredTargetValue, out var currentTargetValue, out var reason, out var demandDiagnostic))
+			{
+				LogPlanningOutcome(null, 0, default, 0,
+					"Reject", "NoRemoteDemand", demandDiagnostic);
 				return;
+			}
 
-			var sourceGroups = EligibleGroundUnits()
+			var allSourceGroups = EligibleGroundUnits()
 				.Select(a => strategicMap.TryGetGroundLandmassId(a.Location, out var landmassId) ? (Actor: a, LandmassId: landmassId) : default)
 				.Where(x => x.Actor != null && x.LandmassId != targetLandmassId)
 				.GroupBy(x => x.LandmassId, x => x.Actor)
@@ -388,11 +473,26 @@ namespace OpenRA.Mods.Common.Traits
 					var transferable = SelectTransferableSurplusUnits(units, reserveCount, reserveValue);
 					return new { LandmassId = g.Key, Units = units, Transferable = transferable, ReserveCount = reserveCount, ReserveValue = reserveValue };
 				})
-				.Where(g => g.Transferable.Length > 0)
 				.OrderByDescending(g => g.Transferable.Sum(GetUnitValue))
 				.ThenByDescending(g => g.Transferable.Length)
 				.ThenBy(g => g.LandmassId)
 				.ToArray();
+			var sourceGroups = allSourceGroups.Where(group => group.Transferable.Length > 0).ToArray();
+			if (sourceGroups.Length == 0)
+			{
+				var pool = transportService.GetLandingCraftPoolDiagnostic(bot);
+				var sourceState = allSourceGroups.Length == 0
+					? "none"
+					: string.Join(";", allSourceGroups.Select(source =>
+						$"sourceLM={source.LandmassId}:eligible={source.Units.Length}/{source.Units.Sum(GetUnitValue)}," +
+						$"reserve={source.ReserveCount}/{source.ReserveValue},transferable={source.Transferable.Length}/{source.Transferable.Sum(GetUnitValue)}"));
+				LogPlanningOutcome(missionType, targetActorId, targetCell, targetLandmassId,
+					"Reject", "NoTransferableSource",
+					$"targetValue={currentTargetValue}/{requiredTargetValue} sources=[{sourceState}] {pool.Details} physicalEligibility=[{LandingCraftInventoryDiagnostic()}]");
+				return;
+			}
+
+			var sourceRejections = new List<string>();
 
 			foreach (var source in sourceGroups)
 			{
@@ -403,37 +503,62 @@ namespace OpenRA.Mods.Common.Traits
 				var emergencyDefend = missionType == FransMissionType.Defend;
 				var desiredCraftCount = DesiredCraftCount(transferable.Length);
 				var sourceHint = new CPos((int)transferable.Average(a => a.Location.X), (int)transferable.Average(a => a.Location.Y));
-				EnsureLandingCraftCapacity(bot, desiredCraftCount, source.LandmassId, targetLandmassId, sourceHint, targetCell);
+				var supplyDiagnostic = EnsureLandingCraftCapacity(bot, desiredCraftCount, source.LandmassId, targetLandmassId, sourceHint, targetCell,
+					missionType, targetActorId);
+				var sourceDiagnostic = SourcePlanningDiagnostic(source.LandmassId, source.Units, transferable,
+					source.ReserveCount, source.ReserveValue, desiredCraftCount, supplyDiagnostic);
 
 				if (!TryChooseConvoyAndShorePair(source.LandmassId, targetLandmassId, transferable, targetCell,
-					desiredCraftCount, emergencyDefend, out var crafts, out var sourceShore, out var targetShore, out var landingRisk))
+					desiredCraftCount, emergencyDefend, out var crafts, out var sourceShore, out var targetShore, out var landingRisk,
+					out var convoyDiagnostic))
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}]");
 					continue;
+				}
 
 				if (!TryBuildUnitCraftAssignments(transferable, sourceShore.GroundCell, crafts, out var selected, out var unitCraft))
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=NoCompatibleUnitCraftAssignment");
 					continue;
+				}
 
 				var minimumUnits = emergencyDefend ? Info.MinimumDefendWaveUnits : Info.MinimumStrategicWaveUnits;
 				var effectiveMinimumUnits = Math.Min(minimumUnits, transferable.Length);
 				if (selected.Length < effectiveMinimumUnits)
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=BelowMinimumWave selected={selected.Length}/{effectiveMinimumUnits}");
 					continue;
+				}
 
 				var usedCrafts = unitCraft.Values.Distinct().OrderBy(a => a.ActorID).ToArray();
 				// Do not launch a deliberately under-capacity convoy. Production demand is derived
 				// from the currently transferable passengers, so wait for that exact capacity.
 				if (usedCrafts.Length < desiredCraftCount)
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=InsufficientRegionalCraftCapacity usedCrafts={usedCrafts.Length}/{desiredCraftCount} selectedUnits={selected.Length}");
 					continue;
+				}
 
-				if (!TryAssignNavalSlots(usedCrafts, sourceShore.NavalCell, sourceShore.NavalRegionId, Info.NavalFormationRadius, out var sourceCraftSlots) ||
-					!TryAssignNavalSlots(usedCrafts, targetShore.NavalCell, targetShore.NavalRegionId, Info.NavalFormationRadius, out var targetCraftSlots))
+				if (!TryAssignNavalSlots(usedCrafts, sourceShore.NavalCell, sourceShore.NavalRegionId, Info.NavalFormationRadius, out var sourceCraftSlots))
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=NoSourceNavalFormationSlots crafts=[{ActorIds(usedCrafts)}]");
 					continue;
+				}
+				if (!TryAssignNavalSlots(usedCrafts, targetShore.NavalCell, targetShore.NavalRegionId, Info.NavalFormationRadius, out var targetCraftSlots))
+				{
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=NoTargetNavalFormationSlots crafts=[{ActorIds(usedCrafts)}]");
+					continue;
+				}
 
 				var reservedCrafts = new List<Actor>();
 				var reserveFailed = false;
+				uint reserveFailedCraftId = 0;
 				foreach (var craft in usedCrafts)
 				{
 					if (!transportService.TryReserveExternalTransport(craft, reservationOwner))
 					{
 						reserveFailed = true;
+						reserveFailedCraftId = craft.ActorID;
 						break;
 					}
 					reservedCrafts.Add(craft);
@@ -442,6 +567,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					foreach (var craft in reservedCrafts)
 						transportService.ReleaseExternalTransport(craft, reservationOwner);
+					sourceRejections.Add($"{sourceDiagnostic} convoy=[{convoyDiagnostic}] result=ExternalReservationRejected craft={reserveFailedCraftId} releasedPartial=[{ActorIds(reservedCrafts)}]");
 					continue;
 				}
 
@@ -480,13 +606,47 @@ namespace OpenRA.Mods.Common.Traits
 
 				IssueAssembleOrders(bot, wave, force: true);
 				FransBotLog.BotDebug(world,
-					"{0}: GROUND TRANSFER CONVOY starts {1}-unit wave {2}->{3} using {4} LST(s) [{5}], embark {6}/{7}, landing {8}/{9}; target {10} ({11}), local value {12}/{13}, landing risk {14}/{15}. {16}. Sea combat is fully decoupled: General opened independent Sea-only SECURE {17} at the destination beach; no Sea ship is reserved or ordered by GroundTransfer.",
+					"{0}: GROUND TRANSFER CONVOY starts {1}-unit wave {2}->{3} using {4} LST(s) [{5}], embark {6}/{7}, landing {8}/{9}; target {10} ({11}), local value {12}/{13}, landing risk {14}/{15}. {16}. Sea combat is fully decoupled: General opened independent Sea-only SECURE {17} at the destination landing shore; no Sea ship is reserved or ordered by GroundTransfer.",
 					player, wave.Units.Count, wave.SourceLandmassId, wave.TargetLandmassId, wave.Crafts.Count,
 					string.Join(",", wave.Crafts.Select(a => a.ActorID)), wave.SourceShore.GroundCell, wave.SourceShore.NavalCell,
 					wave.TargetShore.NavalCell, wave.TargetShore.GroundCell, targetCell, missionType?.ToString() ?? "ForwardAnchor",
 					currentTargetValue, requiredTargetValue, landingRisk.Score, landingRisk.CriticalThreshold, reason, wave.SeaSupportRequestId);
+				FransBotLog.BotDebug(world,
+					"{0}: {1} wave={2} transition=None->Assemble reason=acquired mission={3}/{4} groundActors=[{5}] crafts=[{6}] sourceShore={7}/{8} destinationShore={9}/{10} seaLease={11} {12}.",
+					player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), missionType?.ToString() ?? "ForwardAnchor", targetActorId,
+					ActorIds(wave.Units), ActorIds(wave.Crafts), wave.SourceShore.GroundCell, wave.SourceShore.NavalCell,
+					wave.TargetShore.GroundCell, wave.TargetShore.NavalCell, wave.SeaSupportRequestId, ReservationDiagnostic(wave));
+				LogPlanningOutcome(missionType, targetActorId, targetCell, targetLandmassId,
+					"Acquire", "NoneToAssemble",
+					$"{sourceDiagnostic} convoy=[{convoyDiagnostic}] selectedUnits=[{ActorIds(selected)}] reservedCrafts=[{ActorIds(usedCrafts)}]");
 				return;
 			}
+
+			LogPlanningOutcome(missionType, targetActorId, targetCell, targetLandmassId,
+				"Reject", "AllSourcesRejected",
+				$"targetValue={currentTargetValue}/{requiredTargetValue} sources=[{string.Join(" || ", sourceRejections)}]");
+		}
+
+		string SourcePlanningDiagnostic(int sourceLandmassId, Actor[] eligible, Actor[] transferable,
+			int reserveCount, int reserveValue, int desiredCraftCount, string supplyDiagnostic) =>
+			$"sourceLM={sourceLandmassId} eligibleUnits={eligible.Length} transferableUnits={transferable.Length}" +
+			$"/{transferable.Sum(GetUnitValue)} reserve={reserveCount}/{reserveValue} desiredCrafts={desiredCraftCount} supply=[{supplyDiagnostic}]";
+
+		void LogPlanningOutcome(FransMissionType? missionType, uint targetActorId, CPos targetCell,
+			int targetLandmassId, string result, string rejectionReason, string details)
+		{
+			var signature = $"mission={missionType}/{targetActorId}|target={targetCell}/{targetLandmassId}|result={result}|reason={rejectionReason}|{details}";
+			var heartbeat = Math.Max(1000, Info.PlanningInterval * 4);
+			if (signature == lastPlanningDiagnosticSignature && lastPlanningDiagnosticTick >= 0 &&
+				world.WorldTick - lastPlanningDiagnosticTick < heartbeat)
+				return;
+
+			lastPlanningDiagnosticSignature = signature;
+			lastPlanningDiagnosticTick = world.WorldTick;
+			FransBotLog.BotDebug(world,
+				"{0}: {1} mission={2}/{3} targetCell={4} targetLM={5} result={6} reason={7} {8}.",
+				player, PlanningDiagnosticPrefix, missionType?.ToString() ?? "ForwardAnchor", targetActorId,
+				targetCell, targetLandmassId, result, rejectionReason, details);
 		}
 
 		int DesiredCraftCount(int transferableUnits)
@@ -497,36 +657,56 @@ namespace OpenRA.Mods.Common.Traits
 			return Math.Min(byUnits, Info.MaximumConvoyLandingCraft);
 		}
 
-		void EnsureLandingCraftCapacity(IBot bot, int desiredCraftCount, int sourceLandmassId, int targetLandmassId, CPos sourceHint, CPos targetHint)
+		string EnsureLandingCraftCapacity(IBot bot, int desiredCraftCount, int sourceLandmassId, int targetLandmassId,
+			CPos sourceHint, CPos targetHint, FransMissionType? missionType, uint targetActorId)
 		{
+			var pool = transportService.GetLandingCraftPoolDiagnostic(bot);
+			var nonStrategicCap = transportService.MaximumNonStrategicLandingCraftPool;
+			var desiredBoundedCount = Math.Min(desiredCraftCount, nonStrategicCap);
+			string SupplyState(string outcome, string detail) =>
+				$"outcome={outcome} desired={desiredBoundedCount} global={pool.AuthoritativeCount}/{nonStrategicCap}" +
+				$" hardCap={transportService.MaximumLandingCraftPool} {pool.Details} {detail}";
+
 			if (amphibiousExpansion?.HasStrategicLandingCraftProductionDemand == true)
 			{
 				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
-				return;
+				return SupplyState("McvStrategicProductionPriority", "new GroundTransfer production yielded");
 			}
 
-			if (desiredCraftCount <= 0 || world.WorldTick < nextLandingCraftProductionRequestTick ||
-				playerResources == null || playerResources.GetCashAndResources() < Info.MinimumCashForLandingCraftRequest)
-				return;
+			if (desiredCraftCount <= 0)
+				return SupplyState("NoCraftDemand", "no production requested");
+			if (playerResources == null || playerResources.GetCashAndResources() < Info.MinimumCashForLandingCraftRequest)
+				return SupplyState("InsufficientBudget", $"minimumCash={Info.MinimumCashForLandingCraftRequest}");
 
-			if (!HasLossSafeLandingCraftProductionCorridor(sourceLandmassId, targetLandmassId, sourceHint, targetHint))
+			var corridorState = ClassifyLandingCraftProductionCorridor(sourceLandmassId, targetLandmassId, sourceHint, targetHint,
+				out var safeNavalRegions, out var sourceShoreCandidates, out var targetShoreCandidates,
+				out var commonShorePairs, out var lossSafeShorePairs, out var blockerAttribution);
+			if (corridorState == LandingCraftCorridorState.TransportLossBlocked)
 			{
 				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
 				FransBotLog.BotDebug(world,
-					"{0}: GROUND TRANSFER suppresses new LST production for landmass {1} -> {2}; all fair-known common shoreline corridors intersect an active LST-loss SECURE exclusion. Existing combat SECURE work may clear it; logistics retries after cooldown/revision change.",
-					player, sourceLandmassId, targetLandmassId);
-				return;
+					"{0}: GROUND TRANSFER suppresses new LST production for mission {1}/{2}, landmass {3} -> {4}; all fair-known common shoreline corridors intersect an active LST-loss SECURE exclusion. Existing combat SECURE work may clear it; logistics retries after cooldown/revision change. {5}",
+					player, missionType?.ToString() ?? "ForwardAnchor", targetActorId, sourceLandmassId, targetLandmassId,
+					blockerAttribution);
+				return SupplyState("TransportLossCorridorBlocked",
+					$"sourceShores={sourceShoreCandidates} targetShores={targetShoreCandidates} commonPairs={commonShorePairs} lossSafePairs={lossSafeShorePairs} regions=[{string.Join(",", safeNavalRegions)}] {blockerAttribution}");
+			}
+			if (corridorState == LandingCraftCorridorState.NoCommonNavalRegion)
+			{
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				return SupplyState("NoCommonNavalRegion",
+					$"sourceShores={sourceShoreCandidates} targetShores={targetShoreCandidates} commonPairs=0; known shoreline topology cannot execute this corridor");
 			}
 
 			var unitBuilder = requestUnitProduction?.FirstEnabledTraitOrDefault();
 			if (unitBuilder == null)
-				return;
+				return SupplyState("NoUnitBuilder", "production service unavailable");
 
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
 			var shipQueueNames = ShipQueueNames();
 			var shipQueues = shipQueueNames.SelectMany(name => queuesByCategory[name]).Where(q => q.Enabled).Distinct().ToArray();
 			if (shipQueues.Length == 0)
-				return;
+				return SupplyState("NoEnabledShipQueue", "no Ship queue can receive LST production");
 
 			var craftType = Info.LandingCraftTypes.OrderBy(x => x).FirstOrDefault(type =>
 				world.Map.Rules.Actors.TryGetValue(type, out var actorInfo) &&
@@ -534,48 +714,297 @@ namespace OpenRA.Mods.Common.Traits
 				buildable.Queue.Any(shipQueueNames.Contains) &&
 				shipQueues.Any(q => q.BuildableItems().Any(i => i.Name == type)));
 			if (craftType == null)
-				return;
+				return SupplyState("NoBuildableLandingCraftType", "configured LST types expose no Ship buildable");
 
-			var sharedPoolCount = transportService.CountLandingCraftPool(bot);
-			var nonStrategicCap = transportService.MaximumNonStrategicLandingCraftPool;
-			var desiredBoundedCount = Math.Min(desiredCraftCount, nonStrategicCap);
-			if (sharedPoolCount >= desiredBoundedCount || sharedPoolCount >= nonStrategicCap)
+			var regionSupplies = safeNavalRegions
+				.Select(region => GetRegionalLandingCraftSupply(shipQueues, craftType, region))
+				.ToArray();
+			var unboundSharedQueued = CountUnboundSharedLandingCraftProduction(shipQueues);
+			var regionalDetails = regionSupplies.Length == 0
+				? "none"
+				: string.Join(";", regionSupplies.Select(s =>
+					$"region={s.NavalRegionId}:physical={s.PhysicalCount},regionBoundQueued={s.RegionBoundQueuedCount}," +
+					$"producerAvailable={s.HasEligibleProducer},producerActors={s.EligibleProducerActorIds}"));
+
+			if (regionSupplies.Any(s => s.GuaranteedCount >= desiredBoundedCount))
 			{
 				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
-				return;
+				return SupplyState("RegionalSupplySatisfied",
+					$"sourceShores={sourceShoreCandidates} targetShores={targetShoreCandidates} commonPairs={commonShorePairs} lossSafePairs={lossSafeShorePairs} " +
+					$"unboundSharedQueued={unboundSharedQueued} regional=[{regionalDetails}]");
+			}
+
+			if (pool.AuthoritativeCount >= nonStrategicCap)
+			{
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				return SupplyState("RegionalSupplyMissingAtNonStrategicCap",
+					$"regions=[{regionalDetails}] wrong-region/global supply cannot create another non-strategic LST");
+			}
+
+			if (unboundSharedQueued > 0)
+			{
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				return SupplyState("AwaitingUnboundSharedProduction",
+					$"unboundSharedQueued={unboundSharedQueued} regions=[{regionalDetails}]; producer region becomes authoritative only after delivery");
+			}
+
+			if (world.WorldTick < nextLandingCraftProductionRequestTick)
+				return SupplyState("ProductionCooldown",
+					$"untilWT={nextLandingCraftProductionRequestTick} regions=[{regionalDetails}]");
+
+			// GroundTransfer may use any common source/destination naval region. Prefer an
+			// already-partially-supplied region so the convoy's exact craft count can eventually
+			// be satisfied in one sea; otherwise use the best loss-safe common region with a
+			// producer. StrategicMap remains the sole topology authority.
+			RegionalLandingCraftSupply? selectedRegionalSupply = regionSupplies
+				.Where(s => s.HasEligibleProducer)
+				.OrderByDescending(s => s.GuaranteedCount)
+				.ThenBy(s => Array.IndexOf(safeNavalRegions, s.NavalRegionId))
+				.Select(s => (RegionalLandingCraftSupply?)s)
+				.FirstOrDefault();
+
+			if (selectedRegionalSupply.HasValue)
+			{
+				var selected = selectedRegionalSupply.Value;
+				if (!TryQueueLandingCraftSupply(bot, shipQueues, craftType, selected.NavalRegionId,
+					out var producerBinding, out var queueState))
+				{
+					nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+					return SupplyState("RegionalQueueRejected",
+						$"requiredRegion={selected.NavalRegionId} regions=[{regionalDetails}] queue={queueState}");
+				}
+
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				FransBotLog.BotDebug(world,
+					"{0}: GROUND TRANSFER logistics demand queues {1} for naval region {2}; producerBinding={3}. Global non-strategic pool {4}/{5}, hard cap {6}, guaranteed regional supply {7}/{8}. Wrong-region craft remain reusable but do not satisfy this exact corridor.",
+					player, craftType, selected.NavalRegionId, producerBinding, pool.AuthoritativeCount, nonStrategicCap,
+					transportService.MaximumLandingCraftPool, selected.GuaranteedCount, desiredBoundedCount);
+				return SupplyState(producerBinding == "RegionBound" ? "RegionBoundProductionStarted" : "UnboundProductionRequested",
+					$"requiredRegion={selected.NavalRegionId} unboundSharedQueued={unboundSharedQueued} regions=[{regionalDetails}] queue={queueState}");
+			}
+
+			if (corridorState == LandingCraftCorridorState.SafeCommonRegion)
+			{
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				return SupplyState("NoRegionalProducer",
+					$"regions=[{regionalDetails}] no safe/common region has an enabled Ship producer for the missing supply");
+			}
+
+			// Preserve the prior fallback only while one side has no known shore access. If both
+			// shore sets are known then a zero-region intersection is an authoritative current
+			// topology rejection, not a reason to produce an unplaceable generic LST.
+			if (pool.AuthoritativeCount >= desiredBoundedCount || pool.AuthoritativeCount >= nonStrategicCap)
+			{
+				nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
+				return SupplyState("GlobalSupplySatisfiedTopologyUnresolved",
+					$"sourceShores={sourceShoreCandidates} targetShores={targetShoreCandidates} commonPairs={commonShorePairs}");
 			}
 
 			nextLandingCraftProductionRequestTick = world.WorldTick + Info.LandingCraftProductionRequestCooldown;
 			unitBuilder.RequestUnitProduction(bot, craftType);
 			FransBotLog.BotDebug(world,
 				"{0}: GROUND TRANSFER logistics demand requests {1}; non-strategic physical+queued+requested LST pool {2}/{3}, global hard cap {4}, convoy demand {5}. The final pool slot stays reserved for PIONEER regional sea supply; all existing craft remain reusable when strategically free.",
-				player, craftType, sharedPoolCount, nonStrategicCap, transportService.MaximumLandingCraftPool, desiredBoundedCount);
+				player, craftType, pool.AuthoritativeCount, nonStrategicCap, transportService.MaximumLandingCraftPool, desiredBoundedCount);
+			return SupplyState("GenericRequestTopologyUnresolved",
+				$"sourceShores={sourceShoreCandidates} targetShores={targetShoreCandidates} commonPairs={commonShorePairs}");
 		}
 
-		bool HasLossSafeLandingCraftProductionCorridor(int sourceLandmassId, int targetLandmassId, CPos sourceHint, CPos targetHint)
+		LandingCraftCorridorState ClassifyLandingCraftProductionCorridor(int sourceLandmassId, int targetLandmassId,
+			CPos sourceHint, CPos targetHint, out int[] safeNavalRegions,
+			out int sourceShoreCandidates, out int targetShoreCandidates,
+			out int commonShorePairs, out int lossSafeShorePairs, out string blockerAttribution)
 		{
-			var sourceAccess = strategicMap.GetGroundShoreAccess(sourceLandmassId)
-				.OrderBy(s => (s.GroundCell - sourceHint).LengthSquared)
-				.ThenBy(s => s.NavalCell.X).ThenBy(s => s.NavalCell.Y).Take(8).ToArray();
-			var targetAccess = strategicMap.GetGroundShoreAccess(targetLandmassId)
-				.OrderBy(s => (s.GroundCell - targetHint).LengthSquared)
-				.ThenBy(s => s.NavalCell.X).ThenBy(s => s.NavalCell.Y).Take(8).ToArray();
-			var foundCommonNavalRegion = false;
-			foreach (var source in sourceAccess)
-				foreach (var target in targetAccess)
+			var allSourceAccess = strategicMap.GetGroundShoreAccess(sourceLandmassId);
+			var allTargetAccess = strategicMap.GetGroundShoreAccess(targetLandmassId);
+			var blockers = new Dictionary<uint, string>();
+			var safeRegionScores = new Dictionary<int, long>();
+			sourceShoreCandidates = allSourceAccess.Count;
+			targetShoreCandidates = allTargetAccess.Count;
+			commonShorePairs = 0;
+			lossSafeShorePairs = 0;
+			if (allSourceAccess.Count == 0 || allTargetAccess.Count == 0)
+			{
+				safeNavalRegions = Array.Empty<int>();
+				blockerAttribution = "[TRANSPORT-LOSS BLOCKER] attribution=None";
+				return LandingCraftCorridorState.TopologyUnresolved;
+			}
+
+			var commonRegions = allSourceAccess.Select(access => access.NavalRegionId)
+				.Intersect(allTargetAccess.Select(access => access.NavalRegionId))
+				.OrderBy(region => region)
+				.ToArray();
+			if (commonRegions.Length == 0)
+			{
+				safeNavalRegions = Array.Empty<int>();
+				blockerAttribution = "[TRANSPORT-LOSS BLOCKER] attribution=None";
+				return LandingCraftCorridorState.NoCommonNavalRegion;
+			}
+
+			foreach (var regionId in commonRegions)
+				foreach (var source in allSourceAccess.Where(access => access.NavalRegionId == regionId)
+					.OrderBy(access => (access.GroundCell - sourceHint).LengthSquared)
+					.ThenBy(access => access.NavalCell.X).ThenBy(access => access.NavalCell.Y).Take(8))
+				foreach (var target in allTargetAccess.Where(access => access.NavalRegionId == regionId)
+					.OrderBy(access => (access.GroundCell - targetHint).LengthSquared)
+					.ThenBy(access => access.NavalCell.X).ThenBy(access => access.NavalCell.Y).Take(8))
 				{
-					if (source.NavalRegionId != target.NavalRegionId)
-						continue;
-					foundCommonNavalRegion = true;
+					commonShorePairs++;
 					if (general.IsTransportLossCorridorAllowed(source.NavalCell, target.NavalCell))
-						return true;
+					{
+						lossSafeShorePairs++;
+						var score = (long)(source.GroundCell - sourceHint).LengthSquared +
+							(target.GroundCell - targetHint).LengthSquared;
+						if (!safeRegionScores.TryGetValue(source.NavalRegionId, out var previous) || score < previous)
+							safeRegionScores[source.NavalRegionId] = score;
+						continue;
+					}
+					if (general.TryGetTransportLossCorridorBlocker(source.NavalCell, target.NavalCell, out var blocker) &&
+						!blockers.ContainsKey(blocker.IncidentId))
+						blockers.Add(blocker.IncidentId,
+							$"[TRANSPORT-LOSS BLOCKER] incident={blocker.IncidentId},incidentCell={blocker.IncidentCell}," +
+							$"latestLossCell={blocker.LatestLossCell},blockingCorridorCell={blocker.BlockingRouteCell}," +
+							$"radius={blocker.ExclusionRadius},state={blocker.LifecycleState},owner={blocker.Owner}," +
+							$"corridor={source.NavalCell}->{target.NavalCell}");
 				}
 
-			return !foundCommonNavalRegion;
+			safeNavalRegions = safeRegionScores
+				.OrderBy(pair => pair.Value)
+				.ThenBy(pair => pair.Key)
+				.Select(pair => pair.Key)
+				.ToArray();
+
+			blockerAttribution = blockers.Count == 0
+				? "[TRANSPORT-LOSS BLOCKER] attribution=None"
+				: string.Join(" | ", blockers.OrderBy(kv => kv.Key).Select(kv => kv.Value));
+			return safeNavalRegions.Length > 0
+				? LandingCraftCorridorState.SafeCommonRegion
+				: LandingCraftCorridorState.TransportLossBlocked;
+		}
+
+		RegionalLandingCraftSupply GetRegionalLandingCraftSupply(ProductionQueue[] shipQueues, string craftType, int navalRegionId)
+		{
+			combatIntel.EnsureCurrentSnapshot();
+			var physical = combatIntel.OwnedActors.Count(actor =>
+				actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player &&
+				Info.LandingCraftTypes.Contains(actor.Info.Name) &&
+				actor.TraitOrDefault<Mobile>() is Mobile mobile &&
+				strategicMap.TryGetNavalRegionId(mobile.ToCell, out var region) && region == navalRegionId);
+			var regionBoundQueued = shipQueues.Sum(queue => queue.AllQueued().Count(item =>
+				Info.LandingCraftTypes.Contains(item.Item) &&
+				TryGetRegionBoundProductionQueueNavalRegion(queue, item.Item, out var region) && region == navalRegionId));
+			var eligibleProducers = GetEligibleLandingCraftProducers(shipQueues, craftType, navalRegionId);
+			return new RegionalLandingCraftSupply(navalRegionId, physical, regionBoundQueued,
+				eligibleProducers.Length > 0,
+				eligibleProducers.Length == 0 ? "none" : string.Join(",", eligibleProducers.Select(a => a.ActorID)));
+		}
+
+		int CountUnboundSharedLandingCraftProduction(IEnumerable<ProductionQueue> shipQueues) => shipQueues
+			.Sum(queue => queue.AllQueued().Count(item => Info.LandingCraftTypes.Contains(item.Item) &&
+				!TryGetRegionBoundProductionQueueNavalRegion(queue, item.Item, out _)));
+
+		bool TryQueueLandingCraftSupply(IBot bot, ProductionQueue[] shipQueues, string craftType,
+			int navalRegionId, out string producerBinding, out string state)
+		{
+			var producers = GetEligibleLandingCraftProducers(shipQueues, craftType, navalRegionId);
+			var queue = shipQueues
+				.Where(q => TryGetRegionBoundProductionQueueNavalRegion(q, craftType, out var region) && region == navalRegionId)
+				.Where(q => producers.Contains(q.Actor))
+				.Where(q => q.BuildableItems().Any(item => item.Name == craftType))
+				.OrderBy(q => q.AllQueued().Count())
+				.ThenBy(q => q.Actor.ActorID)
+				.FirstOrDefault();
+			if (queue != null)
+			{
+				producerBinding = "RegionBound";
+				state = $"queueActor={queue.Actor.ActorID}/{queue.Actor.Info.Name},producerBinding=RegionBound,region={navalRegionId}";
+			}
+			else
+			{
+				queue = shipQueues
+					.Where(q => !TryGetRegionBoundProductionQueueNavalRegion(q, craftType, out _))
+					.Where(q => q.BuildableItems().Any(item => item.Name == craftType))
+					.OrderBy(q => q.AllQueued().Count())
+					.ThenBy(q => q.Actor.ActorID)
+					.FirstOrDefault();
+				if (queue == null || producers.Length == 0)
+				{
+					producerBinding = "Unavailable";
+					state = $"no eligible producer in naval region {navalRegionId} is backed by an enabled Ship queue for {craftType}";
+					return false;
+				}
+
+				producerBinding = "UnboundUntilDelivery";
+				state = $"queueActor={queue.Actor.ActorID}/{queue.Actor.Info.Name},producerBinding=UnboundUntilDelivery," +
+					$"candidateProducerActors={string.Join(",", producers.Select(a => a.ActorID))},desiredRegion={navalRegionId}";
+			}
+
+			bot.QueueOrder(Order.StartProduction(queue.Actor, craftType, 1));
+			return true;
+		}
+
+		Actor[] GetEligibleLandingCraftProducers(IEnumerable<ProductionQueue> shipQueues, string craftType, int navalRegionId)
+		{
+			var queues = shipQueues.Where(queue => queue.Enabled &&
+				queue.BuildableItems().Any(item => item.Name == craftType)).ToArray();
+			var productionType = world.Map.Rules.Actors[craftType].TraitInfo<BuildableInfo>().BuildAtProductionType ??
+				queues.Select(queue => queue.Info.Type).FirstOrDefault();
+			var boundProducers = queues
+				.Where(queue => TryGetRegionBoundProductionQueueNavalRegion(queue, craftType, out var region) &&
+					region == navalRegionId)
+				.Where(queue => queue.Actor.TraitsImplementing<Production>().Any(production =>
+					!production.IsTraitDisabled && !production.IsTraitPaused && production.Info.Produces.Contains(productionType)))
+				.Select(queue => queue.Actor);
+			var sharedProductionTypes = queues
+				.Where(queue => !TryGetRegionBoundProductionQueueNavalRegion(queue, craftType, out _))
+				.Select(queue => world.Map.Rules.Actors[craftType].TraitInfo<BuildableInfo>().BuildAtProductionType ?? queue.Info.Type)
+				.ToHashSet();
+			var sharedQueueProducers = world.ActorsWithTrait<Production>()
+				.Where(pair => pair.Actor.Owner == player && pair.Actor.IsInWorld && !pair.Actor.IsDead &&
+					!pair.Trait.IsTraitDisabled && !pair.Trait.IsTraitPaused &&
+					pair.Trait.Info.Produces.Any(sharedProductionTypes.Contains) &&
+					TryGetNavalRegionNearActor(pair.Actor, out var region) && region == navalRegionId)
+				.Select(pair => pair.Actor);
+			return boundProducers.Concat(sharedQueueProducers)
+				.Distinct()
+				.OrderBy(actor => actor.ActorID)
+				.ToArray();
+		}
+
+		bool TryGetRegionBoundProductionQueueNavalRegion(ProductionQueue queue, string craftType, out int navalRegionId)
+		{
+			navalRegionId = -1;
+			if (queue == null || !queue.Enabled || !world.Map.Rules.Actors.TryGetValue(craftType, out var actorInfo) ||
+				actorInfo.TraitInfoOrDefault<BuildableInfo>() is not BuildableInfo buildable)
+				return false;
+
+			var productionType = buildable.BuildAtProductionType ?? queue.Info.Type;
+			var queueOwnsProducer = queue.Actor.TraitsImplementing<Production>()
+				.Any(production => production.Info.Produces.Contains(productionType));
+			return queueOwnsProducer && TryGetNavalRegionNearActor(queue.Actor, out navalRegionId);
+		}
+
+		bool TryGetNavalRegionNearActor(Actor actor, out int navalRegionId)
+		{
+			navalRegionId = -1;
+			if (actor == null || !actor.IsInWorld || actor.IsDead || actor.OccupiesSpace == null)
+				return false;
+			if (strategicMap.TryGetNavalRegionId(actor.Location, out navalRegionId))
+				return true;
+
+			foreach (var cell in world.Map.FindTilesInCircle(actor.Location, 3)
+				.Where(world.Map.Contains)
+				.OrderBy(c => (c - actor.Location).LengthSquared)
+				.ThenBy(c => c.X)
+				.ThenBy(c => c.Y))
+				if (strategicMap.TryGetNavalRegionId(cell, out navalRegionId))
+					return true;
+
+			return false;
 		}
 
 		bool TrySelectDemand(out FransMissionType? missionType, out uint targetActorId, out CPos targetCell,
-			out int targetLandmassId, out int requiredValue, out int currentValue, out string reason)
+			out int targetLandmassId, out int requiredValue, out int currentValue, out string reason,
+			out string diagnostic)
 		{
 			missionType = null;
 			targetActorId = 0;
@@ -584,8 +1013,10 @@ namespace OpenRA.Mods.Common.Traits
 			requiredValue = 0;
 			currentValue = 0;
 			reason = null;
+			diagnostic = null;
 
 			general.EnsureCurrentMissions();
+			var missionEvaluations = new List<string>();
 			foreach (var mission in general.CurrentMissions
 				.Where(m => (m.Type == FransMissionType.Defend || m.Type == FransMissionType.Secure) &&
 					m.TargetActorType != FransGeneralBotModule.SeaTransportBeachSecureTargetType &&
@@ -595,7 +1026,10 @@ namespace OpenRA.Mods.Common.Traits
 				.ThenBy(m => m.TargetActorId))
 			{
 				if (!strategicMap.TryGetGroundLandmassId(mission.LastVisibleTargetCell, out var landmassId))
+				{
+					missionEvaluations.Add($"{mission.Type}/{mission.TargetActorId}:NoTargetLandmass cell={mission.LastVisibleTargetCell}");
 					continue;
+				}
 
 				var observedTacticalValue = (mission.SiteIntel.Actors ?? Array.Empty<FransSiteIntelActor>())
 					.Where(a => a.IsCombatActor || a.IsDefensiveBuilding)
@@ -610,7 +1044,10 @@ namespace OpenRA.Mods.Common.Traits
 						(int)Math.Min(int.MaxValue, (long)needed * Info.SecureFollowOnReinforcementPercent / 100));
 				var local = GroundValueOnLandmass(landmassId);
 				if (local >= needed)
+				{
+					missionEvaluations.Add($"{mission.Type}/{mission.TargetActorId}:LocalValueSufficient landmass={landmassId} value={local}/{needed}");
 					continue;
+				}
 
 				missionType = mission.Type;
 				targetActorId = mission.TargetActorId;
@@ -619,12 +1056,20 @@ namespace OpenRA.Mods.Common.Traits
 				requiredValue = needed;
 				currentValue = local;
 				reason = $"General {mission.Type} demand is understrength on another landmass";
+				diagnostic = $"selected={mission.Type}/{mission.TargetActorId} targetLM={landmassId} value={local}/{needed}";
 				return true;
 			}
 
-			if (!general.TryGetLatestGroundAnchor(out var anchor) ||
-				!strategicMap.TryGetGroundLandmassId(anchor, out var anchorLandmass))
+			if (!general.TryGetLatestGroundAnchor(out var anchor))
+			{
+				diagnostic = $"missions=[{string.Join(";", missionEvaluations)}] forwardAnchor=Unavailable";
 				return false;
+			}
+			if (!strategicMap.TryGetGroundLandmassId(anchor, out var anchorLandmass))
+			{
+				diagnostic = $"missions=[{string.Join(";", missionEvaluations)}] forwardAnchor={anchor}:NoTargetLandmass";
+				return false;
+			}
 
 			var anchorValue = GroundValueOnLandmass(anchorLandmass);
 			targetCell = anchor;
@@ -632,6 +1077,7 @@ namespace OpenRA.Mods.Common.Traits
 			requiredValue = Math.Max(Info.ForwardAnchorDesiredGroundValue, anchorValue == int.MaxValue ? int.MaxValue : anchorValue + 1);
 			currentValue = anchorValue;
 			reason = "Forward Anchor redeployment/remote-landmass evacuation";
+			diagnostic = $"selected=ForwardAnchor/0 targetLM={anchorLandmass} value={anchorValue}/{requiredValue}";
 			return true;
 		}
 
@@ -721,69 +1167,134 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool TryChooseConvoyAndShorePair(int sourceLandmassId, int targetLandmassId, Actor[] sourceUnits, CPos targetCell,
 			int desiredCraftCount, bool emergencyDefend, out Actor[] crafts, out FransGroundShoreAccess sourceShore,
-			out FransGroundShoreAccess targetShore, out FransRiskAssessment landingRisk)
+			out FransGroundShoreAccess targetShore, out FransRiskAssessment landingRisk, out string diagnostic)
 		{
 			using var fransPerf = FransBotLog.Profile(world, player, "GroundTransfer.ShoreSelect");
 			crafts = Array.Empty<Actor>();
 			sourceShore = default;
 			targetShore = default;
 			landingRisk = default;
+			diagnostic = null;
 			var sourceAccess = strategicMap.GetGroundShoreAccess(sourceLandmassId);
 			var targetAccess = strategicMap.GetGroundShoreAccess(targetLandmassId);
-			if (sourceAccess.Count == 0 || targetAccess.Count == 0)
+			var commonRegions = sourceAccess.Select(access => access.NavalRegionId)
+				.Intersect(targetAccess.Select(access => access.NavalRegionId))
+				.OrderBy(region => region)
+				.ToArray();
+			if (sourceAccess.Count == 0)
+			{
+				diagnostic = $"result=NoSourceShoreAccess sourceShores=0 targetShores={targetAccess.Count} commonRegions=[] physical=[{LandingCraftInventoryDiagnostic()}]";
 				return false;
+			}
+			if (targetAccess.Count == 0)
+			{
+				diagnostic = $"result=NoTargetShoreAccess sourceShores={sourceAccess.Count} targetShores=0 commonRegions=[] physical=[{LandingCraftInventoryDiagnostic()}]";
+				return false;
+			}
 
 			var available = combatIntel.OwnedActors.Where(IsAvailableLandingCraft).OrderBy(a => a.ActorID).ToArray();
 			if (available.Length == 0)
+			{
+				diagnostic = $"result=NoAvailablePhysicalLandingCraft sourceShores={sourceAccess.Count} targetShores={targetAccess.Count} commonRegions=[{string.Join(",", commonRegions)}] physical=[{LandingCraftInventoryDiagnostic()}]";
 				return false;
+			}
 
 			var centroid = new CPos((int)sourceUnits.Average(a => a.Location.X), (int)sourceUnits.Average(a => a.Location.Y));
 			var bestScore = long.MaxValue;
 			var bestRegion = 0;
 			var hasBestRegion = false;
 			FransRiskAssessment bestRisk = default;
+			var regionResolvedCrafts = 0;
+			var commonRegionCrafts = 0;
+			var consideredShorePairs = 0;
+			var legalShorePairs = 0;
+			var nativeRoutePairs = 0;
+			var transportLossSafePairs = 0;
+			var nonCriticalPairs = 0;
+			var routeRejections = new HashSet<string>();
 			foreach (var seed in available)
 			{
 				var mobile = seed.TraitOrDefault<Mobile>();
 				if (mobile == null || !strategicMap.TryGetNavalRegionId(mobile.ToCell, out var regionId))
 					continue;
-
-				var source = sourceAccess.Where(a => a.NavalRegionId == regionId)
-					.OrderBy(a => (a.GroundCell - centroid).LengthSquared)
-					.ThenBy(a => a.NavalCell.X).ThenBy(a => a.NavalCell.Y).FirstOrDefault();
-				if (source.GroundLandmassId == 0)
+				regionResolvedCrafts++;
+				if (!commonRegions.Contains(regionId))
 					continue;
+				commonRegionCrafts++;
 
-				foreach (var target in targetAccess.Where(a => a.NavalRegionId == regionId)
-					.OrderBy(a => (a.GroundCell - targetCell).LengthSquared)
+				// Both sides are bounded alternative sets. The old single-source-shore choice
+				// could permanently reject a same-region convoy when only the nearest embark
+				// cell was blocked even though a later source shore was executable.
+				foreach (var source in sourceAccess.Where(a => a.NavalRegionId == regionId)
+					.OrderBy(a => (a.GroundCell - centroid).LengthSquared)
 					.ThenBy(a => a.NavalCell.X).ThenBy(a => a.NavalCell.Y).Take(8))
-				{
-					if (target.GroundLandmassId == 0 ||
-						!mobile.CanEnterCell(source.NavalCell, check: BlockedByActor.Immovable) || !mobile.CanStayInCell(source.NavalCell) ||
-						!mobile.CanEnterCell(target.NavalCell, check: BlockedByActor.Immovable) || !mobile.CanStayInCell(target.NavalCell) ||
-						!HasTransportLossSafeNavalRoute(seed, mobile, source.NavalCell, target.NavalCell))
-						continue;
+					foreach (var target in targetAccess.Where(a => a.NavalRegionId == regionId)
+						.OrderBy(a => (a.GroundCell - targetCell).LengthSquared)
+						.ThenBy(a => a.NavalCell.X).ThenBy(a => a.NavalCell.Y).Take(8))
+					{
+						if (source.GroundLandmassId == 0 || target.GroundLandmassId == 0)
+							continue;
+						consideredShorePairs++;
+						if (!mobile.CanEnterCell(source.NavalCell, check: BlockedByActor.Immovable) || !mobile.CanStayInCell(source.NavalCell) ||
+							!mobile.CanEnterCell(target.NavalCell, check: BlockedByActor.Immovable) || !mobile.CanStayInCell(target.NavalCell))
+							continue;
+						legalShorePairs++;
+						if (!HasTransportLossSafeNavalRoute(seed, mobile, source.NavalCell, target.NavalCell,
+							out var nativeRouteFound, out var routeRejection))
+						{
+							if (nativeRouteFound)
+								nativeRoutePairs++;
+							if (!string.IsNullOrEmpty(routeRejection))
+								routeRejections.Add(routeRejection);
+							continue;
+						}
+						nativeRoutePairs++;
+						transportLossSafePairs++;
 
-					var risk = riskModel.EvaluateStrategicCell(target.NavalCell, FransRiskRole.NavalTransport,
-						emergencyDefend ? FransRiskTolerance.Balanced : FransRiskTolerance.Cautious);
-					if (risk.IsCritical)
-						continue;
-					var score = (long)(seed.Location - source.NavalCell).LengthSquared +
-						(source.GroundCell - centroid).LengthSquared + (target.GroundCell - targetCell).LengthSquared +
-						(long)risk.Score * 64;
-					if (score >= bestScore)
-						continue;
-					bestScore = score;
-					bestRegion = regionId;
-					hasBestRegion = true;
-					sourceShore = source;
-					targetShore = target;
-					bestRisk = risk;
-				}
+						var risk = riskModel.EvaluateStrategicCell(target.NavalCell, FransRiskRole.NavalTransport,
+							emergencyDefend ? FransRiskTolerance.Balanced : FransRiskTolerance.Cautious);
+						if (risk.IsCritical)
+							continue;
+						nonCriticalPairs++;
+						var score = (long)(seed.Location - source.NavalCell).LengthSquared +
+							(source.GroundCell - centroid).LengthSquared + (target.GroundCell - targetCell).LengthSquared +
+							(long)risk.Score * 64;
+						if (score >= bestScore)
+							continue;
+						bestScore = score;
+						bestRegion = regionId;
+						hasBestRegion = true;
+						sourceShore = source;
+						targetShore = target;
+						bestRisk = risk;
+					}
 			}
 
 			if (!hasBestRegion || sourceShore.GroundLandmassId == 0 || targetShore.GroundLandmassId == 0)
+			{
+				var rejection = commonRegions.Length == 0
+					? "NoCommonNavalRegion"
+					: regionResolvedCrafts == 0
+						? "NoCraftNavalRegion"
+						: commonRegionCrafts == 0
+							? "NoUsableCraftInCommonNavalRegion"
+							: consideredShorePairs == 0
+								? "NoShorePairInCraftRegion"
+								: legalShorePairs == 0
+									? "NoLegalShoreCells"
+									: nativeRoutePairs == 0
+										? "NoNativeRoute"
+										: transportLossSafePairs == 0
+											? "TransportLossExclusion"
+											: nonCriticalPairs == 0 ? "CriticalLandingRisk" : "NoSelectableShorePair";
+				diagnostic = $"result={rejection} sourceShores={sourceAccess.Count} targetShores={targetAccess.Count}" +
+					$" commonRegions=[{string.Join(",", commonRegions)}] available=[{ActorIds(available)}]" +
+					$" regionResolvedCrafts={regionResolvedCrafts} commonRegionCrafts={commonRegionCrafts}" +
+					$" consideredPairs={consideredShorePairs} legalPairs={legalShorePairs} nativeRoutePairs={nativeRoutePairs}" +
+					$" transportLossSafePairs={transportLossSafePairs} nonCriticalPairs={nonCriticalPairs}" +
+					$" routeRejections=[{string.Join(";", routeRejections.OrderBy(reason => reason))}] physical=[{LandingCraftInventoryDiagnostic()}]";
 				return false;
+			}
 
 			var selectedSourceNavalCell = sourceShore.NavalCell;
 			crafts = available.Where(a =>
@@ -796,18 +1307,47 @@ namespace OpenRA.Mods.Common.Traits
 			.Take(Math.Min(Info.MaximumConvoyLandingCraft, desiredCraftCount))
 			.ToArray();
 			landingRisk = bestRisk;
+			diagnostic = $"result=Selected region={bestRegion} sourceShores={sourceAccess.Count} targetShores={targetAccess.Count}" +
+				$" commonRegions=[{string.Join(",", commonRegions)}] consideredPairs={consideredShorePairs}" +
+				$" legalPairs={legalShorePairs} nativeRoutePairs={nativeRoutePairs} transportLossSafePairs={transportLossSafePairs}" +
+				$" nonCriticalPairs={nonCriticalPairs} routeRejections=[{string.Join(";", routeRejections.OrderBy(reason => reason))}]" +
+				$" source={sourceShore.GroundCell}/{sourceShore.NavalCell} target={targetShore.GroundCell}/{targetShore.NavalCell}" +
+				$" selectedCrafts=[{ActorIds(crafts)}] physical=[{LandingCraftInventoryDiagnostic()}]";
 			return true;
 		}
 
-		bool HasTransportLossSafeNavalRoute(Actor craft, Mobile mobile, CPos source, CPos destination)
+		bool HasTransportLossSafeNavalRoute(Actor craft, Mobile mobile, CPos source, CPos destination) =>
+			HasTransportLossSafeNavalRoute(craft, mobile, source, destination, out _, out _);
+
+		bool HasTransportLossSafeNavalRoute(Actor craft, Mobile mobile, CPos source, CPos destination,
+			out bool nativeRouteFound, out string rejection)
 		{
+			nativeRouteFound = false;
+			rejection = null;
 			if (craft == null || mobile == null || mobile.PathFinder is not PathFinder pathFinder)
+			{
+				rejection = "NativePathFinderUnavailable";
 				return false;
+			}
 
 			int NoExtraCost(CPos cell) => 0;
 			var path = pathFinder.FindPathToTargetCell(craft, [source], destination,
 				BlockedByActor.Immovable, NoExtraCost, laneBias: false);
-			return path != null && path.Count > 0 && general.IsTransportLossRouteAllowed(path);
+			if (path == null || path.Count == 0)
+			{
+				rejection = $"NoNativeRoute:{source}->{destination}";
+				return false;
+			}
+
+			nativeRouteFound = true;
+			if (general.IsTransportLossRouteAllowed(path))
+				return true;
+
+			rejection = general.TryGetTransportLossRouteBlocker(path, out var blocker)
+				? $"TransportLossExclusion:incident={blocker.IncidentId},latestLossCell={blocker.LatestLossCell}," +
+					$"blockingRouteCell={blocker.BlockingRouteCell},state={blocker.LifecycleState},owner={blocker.Owner}"
+				: $"TransportLossExclusion:incident=Unresolved,route={source}->{destination}";
+			return false;
 		}
 
 		bool TryBuildUnitCraftAssignments(Actor[] candidates, CPos embarkGroundCell, Actor[] crafts,
@@ -867,16 +1407,75 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IsAvailableLandingCraft(Actor actor)
 		{
-			if (amphibiousExpansion?.HasStrategicLandingCraftProductionDemand == true)
-				return false;
+			// Strategic MCV demand arbitrates new LST production in EnsureLandingCraftCapacity.
+			// Physical ownership is actor-specific: canonical Transport reservations and the
+			// exact expansion-pending predicate below decide whether this craft may be used.
+			return LandingCraftAvailabilityReason(actor) == "Available";
+		}
 
-			if (actor == null || actor.Disposed || !actor.IsInWorld || actor.IsDead || actor.Owner != player || !actor.IsIdle ||
-				!Info.LandingCraftTypes.Contains(actor.Info.Name) || transportService.IsTransportReserved(actor) ||
-				(amphibiousExpansion?.IsLandingCraftPendingForExpansion(actor) ?? false))
-				return false;
+		string LandingCraftAvailabilityReason(Actor actor)
+		{
+			if (actor == null)
+				return "MissingActor";
+			if (actor.Disposed)
+				return "Disposed";
+			if (!actor.IsInWorld)
+				return "NotInWorld";
+			if (actor.IsDead)
+				return "Dead";
+			if (actor.Owner != player)
+				return "WrongOwner";
+			if (!actor.IsIdle)
+				return $"NonIdle({actor.CurrentActivity?.GetType().Name ?? "None"})";
+			if (!Info.LandingCraftTypes.Contains(actor.Info.Name))
+				return "WrongType";
+			if (transportService.IsTransportReserved(actor))
+				return "TransportReserved";
+			if (amphibiousExpansion?.IsLandingCraftPendingForExpansion(actor) ?? false)
+				return "McvExactPending";
+
 			var cargo = actor.TraitOrDefault<Cargo>();
 			var mobile = actor.TraitOrDefault<Mobile>();
-			return cargo != null && !cargo.IsTraitDisabled && cargo.IsEmpty() && mobile != null && !mobile.IsTraitDisabled && !mobile.IsTraitPaused;
+			if (cargo == null)
+				return "MissingCargo";
+			if (cargo.IsTraitDisabled)
+				return "CargoDisabled";
+			if (!cargo.IsEmpty())
+				return $"CargoNotEmpty({cargo.Passengers.Count()})";
+			if (mobile == null)
+				return "MissingMobile";
+			if (mobile.IsTraitDisabled)
+				return "MobileDisabled";
+			if (mobile.IsTraitPaused)
+				return "MobilePaused";
+			return "Available";
+		}
+
+		string LandingCraftInventoryDiagnostic()
+		{
+			var crafts = combatIntel.OwnedActors
+				.Where(actor => actor != null && Info.LandingCraftTypes.Contains(actor.Info.Name))
+				.OrderBy(actor => actor.ActorID)
+				.Select(actor =>
+				{
+					var mobile = actor.TraitOrDefault<Mobile>();
+					var region = mobile != null && strategicMap.TryGetNavalRegionId(mobile.ToCell, out var navalRegion)
+						? navalRegion.ToString()
+						: "Unknown";
+					var cargo = actor.TraitOrDefault<Cargo>();
+					var cargoState = cargo == null
+						? "Missing"
+						: cargo.IsTraitDisabled
+							? "Disabled"
+							: $"Count{cargo.Passengers.Count()}";
+					return $"{actor.ActorID}/{actor.Info.Name}:cell={actor.Location},region={region},idle={actor.IsIdle}," +
+						$"activity={actor.CurrentActivity?.GetType().Name ?? "None"},cargo={cargoState}," +
+						$"transportReserved={transportService.IsTransportReserved(actor)}," +
+						$"mcvPending={(amphibiousExpansion?.IsLandingCraftPendingForExpansion(actor) ?? false)}," +
+						$"availability={LandingCraftAvailabilityReason(actor)}";
+				})
+				.ToArray();
+			return crafts.Length == 0 ? "none" : string.Join(";", crafts);
 		}
 
 		void AssignGroundSlots(TransferWave wave, bool sourceSide)
@@ -900,7 +1499,7 @@ namespace OpenRA.Mods.Common.Traits
 					.ThenBy(c => c.X).ThenBy(c => c.Y)
 					.Select(c => (CPos?)c).FirstOrDefault();
 
-				// Extremely cramped beaches may not expose an inland slot. Fall back to the old
+				// Extremely cramped handoffs may not expose an inland slot. Fall back to the old
 				// close staging ring rather than rejecting an otherwise valid convoy.
 				if (!slot.HasValue && !sourceSide)
 					slot = new[] { center }.Concat(world.Map.FindTilesInAnnulus(center, 1, Info.StagingSlotRadius))
@@ -1016,7 +1615,8 @@ namespace OpenRA.Mods.Common.Traits
 						FransBotLog.BotDebug(world,
 							"{0}: GROUND TRANSFER sister-LST safety reacts immediately after {1} convoy loss(es): surviving craft {2} now crosses the fresh LST-loss SECURE, so the convoy returns instead of continuing into the same incident.",
 							player, lost.Length, craft.ActorID);
-						BeginConvoyReturn(bot, craft.ActorID);
+						BeginConvoyReturn(bot, craft.ActorID,
+							"sister LST loss created or refreshed a blocking transport-loss exclusion");
 						return true;
 					}
 				}
@@ -1059,6 +1659,8 @@ namespace OpenRA.Mods.Common.Traits
 				wave.StallRetries = 0;
 				wave.NextBoardingRetryTick = 0;
 				IssueBoardingOrders(bot, survivors);
+				LogWaveTransition(wave, TransferState.Assemble, TransferState.Boarding,
+					"first compatible LST entered the boarding-ready radius");
 				FransBotLog.BotDebug(world,
 					"{0}: GROUND TRANSFER dynamic BOARDING begins as soon as {1}/{2} LST(s) are inside the boarding-ready radius; {3}/{4} passengers are already near staging. Remaining LSTs and passengers may keep approaching while ready Cargo starts loading.",
 					player, readyCrafts, wave.Crafts.Count, assembled, survivors.Length);
@@ -1144,7 +1746,7 @@ namespace OpenRA.Mods.Common.Traits
 
 				// Native EnterTransport owns the passenger for as long as the actor is physically
 				// progressing. Only a real no-cell-progress timeout may cancel that one attempt.
-				unit.CancelActivity();
+				QueueStopOrder(bot, unit);
 				ClearBoardingTracking(wave, unit);
 				TryRelocateBoardingSlot(wave, unit);
 				wave.LastProgressTick = world.WorldTick;
@@ -1236,7 +1838,7 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var unit in unboarded)
 			{
 				if (unit.IsInWorld)
-					unit.CancelActivity();
+					QueueStopOrder(bot, unit);
 				wave.Units.Remove(unit);
 				wave.UnitCraft.Remove(unit);
 				ClearBoardingTracking(wave, unit);
@@ -1337,7 +1939,7 @@ namespace OpenRA.Mods.Common.Traits
 				// passenger now. Once EnterTransport starts, native Cargo owns the final approach.
 				wave.UnitCraft[unit] = craft;
 				if (!unit.IsIdle)
-					unit.CancelActivity();
+					QueueStopOrder(bot, unit);
 				bot.QueueOrder(new Order("EnterTransport", unit, Target.FromActor(craft), false));
 				wave.BoardingOrderUntilTick[unit] = world.WorldTick + Info.BoardingNativeTimeout;
 				wave.BoardingLastProgressCell[unit] = unit.Location;
@@ -1375,8 +1977,10 @@ namespace OpenRA.Mods.Common.Traits
 			wave.StallRetries = 0;
 			ResetCrossingProgress(wave);
 			IssueCrossingOrders(bot, force: true);
+			LogWaveTransition(wave, TransferState.Boarding, TransferState.Crossing,
+				$"convoy departed with {loadedCount} loaded passenger(s)");
 			FransBotLog.BotDebug(world,
-				"{0}: GROUND TRANSFER convoy fully/partially boarded ({1} passenger(s)); {2} LST(s) cross toward cached landing slots around {3}. uses bounded recovery: same leg -> local beach alternatives -> retreat to embark shore, never indefinite crossing stall.",
+				"{0}: GROUND TRANSFER convoy fully/partially boarded ({1} passenger(s)); {2} LST(s) cross toward cached landing slots around {3}. uses bounded recovery: same leg -> local landing alternatives -> retreat to embark shore, never indefinite crossing stall.",
 				player, loadedCount, wave.Crafts.Count, wave.TargetShore.NavalCell);
 		}
 
@@ -1419,7 +2023,8 @@ namespace OpenRA.Mods.Common.Traits
 						FransBotLog.BotDebug(world,
 							"{0}: GROUND TRANSFER aborts active crossing because a new LST-loss SECURE now blocks the cached sea leg for craft {1}; convoy returns toward embark instead of feeding more transports through the unresolved incident.",
 							player, craft.ActorID);
-						BeginConvoyReturn(bot, craft.ActorID);
+						BeginConvoyReturn(bot, craft.ActorID,
+							"transport-loss exclusion revision blocked the cached crossing leg");
 						return;
 					}
 				}
@@ -1456,7 +2061,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.CrossingSameLegRetryCount[craft] = sameRetries + 1;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 					FransBotLog.BotDebug(world,
 						"{0}: GROUND TRANSFER LST {1} crossing stalled; cached-leg retry {2}/{3} toward {4}.",
@@ -1472,7 +2077,7 @@ namespace OpenRA.Mods.Common.Traits
 					wave.TargetCraftSlots[craft] = alternate;
 					wave.CrossingLastProgressCell[craft] = craft.Location;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
 					FransBotLog.BotDebug(world,
 						"{0}: GROUND TRANSFER LST {1} switches to bounded local landing recovery {2}/{3} at {4}. At most {5} cells are considered; no full shoreline replan.",
@@ -1480,7 +2085,7 @@ namespace OpenRA.Mods.Common.Traits
 					continue;
 				}
 
-				BeginConvoyReturn(bot, craft.ActorID);
+				BeginConvoyReturn(bot, craft.ActorID, "destination crossing recovery exhausted");
 				return;
 			}
 
@@ -1492,6 +2097,8 @@ namespace OpenRA.Mods.Common.Traits
 			wave.StateStartedTick = world.WorldTick;
 			wave.LastProgressTick = world.WorldTick;
 			wave.NextUnloadRetryTick = world.WorldTick + Info.UnloadRetryInterval;
+			LogWaveTransition(wave, TransferState.Crossing, TransferState.Unloading,
+				"all surviving LSTs reached their cached destination slots");
 			BeginUnload(bot);
 		}
 
@@ -1526,15 +2133,26 @@ namespace OpenRA.Mods.Common.Traits
 			return true;
 		}
 
-		void BeginConvoyReturn(IBot bot, uint stalledCraftId)
+		void BeginConvoyReturn(IBot bot, uint stalledCraftId, string reason)
 		{
 			var wave = activeWave;
+			var previousState = wave.State;
+			var stalledCraft = wave.Crafts.FirstOrDefault(c => c != null && c.ActorID == stalledCraftId);
+			var sameLegRetries = stalledCraft != null && wave.CrossingSameLegRetryCount.TryGetValue(stalledCraft, out var retries) ? retries : 0;
+			var recoveryAttempts = stalledCraft != null && wave.CrossingRecoveryAttempts.TryGetValue(stalledCraft, out var attempts) ? attempts : 0;
+			var seaLeaseBefore = wave.SeaSupportRequestId;
 			wave.State = TransferState.Returning;
 			wave.StateStartedTick = world.WorldTick;
 			wave.LastProgressTick = world.WorldTick;
 			wave.ReturnUnloadIssued.Clear();
 			wave.ReturnLastCargoCount.Clear();
 			wave.ReturnLastCargoProgressTick.Clear();
+			wave.ReturnDiagnosticTarget.Clear();
+			wave.ReturnBestDistanceSquared.Clear();
+			wave.ReturnLastDistanceProgressTick.Clear();
+			wave.ReturnUnloadLastRealProgressTick.Clear();
+			wave.ReturnUnloadNextDiagnosticTick.Clear();
+			wave.ReturnUnloadPhaseLogged = false;
 			if (wave.SeaSupportRequestId != 0)
 			{
 				general.ReleaseSeaTransportBeachSecure(wave.SeaSupportRequestId);
@@ -1544,12 +2162,16 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var craft in wave.Crafts.Where(IsLiveActor).OrderBy(a => a.ActorID))
 				if (wave.SourceCraftSlots.TryGetValue(craft, out var slot))
 				{
-					craft.CancelActivity();
+					RebaseReturnDiagnostic(wave, craft, slot);
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
 				}
 			FransBotLog.BotDebug(world,
-				"{0}: GROUND TRANSFER crossing ABORTS after LST {1} exhausted bounded destination recovery. Surviving convoy retreats to embark shore and unloads its Ground cargo instead of waiting/dying in place.",
-				player, stalledCraftId);
+				"{0}: {1} wave={2} transition={3}->Returning reason={4} triggerCraft={5} sameLegRetries={6}/{7} alternateAttempts={8}/{9} returnTargets=[{10}] groundActors=[{11}] crafts=[{12}] seaLeaseBefore={13} seaLeaseHeld=False {14}; native Moves queued for the exact surviving convoy.",
+				player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), previousState, reason, stalledCraftId,
+				sameLegRetries, Info.CrossingSameLegRetries, recoveryAttempts, Info.MaximumCrossingRecoveryAttempts,
+				CraftTargets(wave, wave.SourceCraftSlots), ActorIds(wave.Units), ActorIds(wave.Crafts), seaLeaseBefore,
+				ReservationDiagnostic(wave));
 		}
 
 		void ManageReturning(IBot bot, Actor[] survivors)
@@ -1560,7 +2182,9 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				if (!wave.SourceCraftSlots.TryGetValue(craft, out var slot))
 					continue;
-				if ((craft.Location - slot).LengthSquared <= 1)
+				var distanceSquared = (craft.Location - slot).LengthSquared;
+				ObserveReturnDiagnosticProgress(wave, craft, slot, distanceSquared);
+				if (distanceSquared <= 1)
 				{
 					wave.CrossingLastProgressCell[craft] = craft.Location;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
@@ -1583,8 +2207,11 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.CrossingSameLegRetryCount[craft] = sameRetries + 1;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					var activity = craft.CurrentActivity?.GetType().Name ?? "None";
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
+					LogReturnMoveReissue(wave, craft, slot, sameRetries + 1, false,
+						"SameLegRetry", activity);
 					continue;
 				}
 
@@ -1596,22 +2223,38 @@ namespace OpenRA.Mods.Common.Traits
 					wave.SourceCraftSlots[craft] = alternate;
 					wave.CrossingLastProgressCell[craft] = craft.Location;
 					wave.CrossingLastProgressTick[craft] = world.WorldTick;
-					craft.CancelActivity();
+					RebaseReturnDiagnostic(wave, craft, alternate);
+					var activity = craft.CurrentActivity?.GetType().Name ?? "None";
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
+					LogReturnMoveReissue(wave, craft, alternate, 0, false,
+						$"AlternateReturn{recoveryAttempt + 1}", activity);
 					continue;
 				}
 
 				// Return is already the safe fallback. Keep the final bounded source-side slot and
 				// re-issue it instead of starting another expensive strategic replan.
 				wave.CrossingLastProgressTick[craft] = world.WorldTick;
-				craft.CancelActivity();
+				var finalActivity = craft.CurrentActivity?.GetType().Name ?? "None";
+				QueueStopOrder(bot, craft);
 				bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, slot), false));
+				LogReturnMoveReissue(wave, craft, slot, sameRetries, true,
+					"FinalReturnReissue", finalActivity);
 			}
 
 			if (!allAtSource)
 				return;
 
 			IssueReturnBeachClearOrders(bot, survivors);
+			if (!wave.ReturnUnloadPhaseLogged)
+			{
+				wave.ReturnUnloadPhaseLogged = true;
+				FransBotLog.BotDebug(world,
+					"{0}: {1} wave={2} state=Returning event=ReturnShoreReached crafts=[{3}] cargo={4} {5}.",
+					player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), ActorIds(wave.Crafts),
+					wave.Crafts.Where(IsLiveActor).Sum(c => c.TraitOrDefault<Cargo>()?.PassengerCount ?? 0),
+					ReservationDiagnostic(wave));
+			}
 			var loaded = survivors.Count(IsLoadedIntoAssignedCraft);
 			if (loaded == 0)
 			{
@@ -1632,15 +2275,34 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.ReturnLastCargoCount[craft] = count;
 					wave.ReturnLastCargoProgressTick[craft] = world.WorldTick;
+					wave.ReturnUnloadLastRealProgressTick[craft] = world.WorldTick;
 				}
 				if (!wave.ReturnLastCargoProgressTick.TryGetValue(craft, out var cargoTick))
 					wave.ReturnLastCargoProgressTick[craft] = cargoTick = world.WorldTick;
-				if ((!wave.ReturnUnloadIssued.Contains(craft) || world.WorldTick - cargoTick >= Info.UnloadStallTimeout) && cargo.CanUnload())
+				if (!wave.ReturnUnloadLastRealProgressTick.TryGetValue(craft, out var realProgressTick))
+					wave.ReturnUnloadLastRealProgressTick[craft] = realProgressTick = world.WorldTick;
+				var canUnload = cargo.CanUnload();
+				var shouldIssueUnload = (!wave.ReturnUnloadIssued.Contains(craft) || world.WorldTick - cargoTick >= Info.UnloadStallTimeout) && canUnload;
+				var currentActivity = craft.CurrentActivity?.GetType().Name ?? "None";
+				if (shouldIssueUnload)
 				{
-					craft.CancelActivity();
+					QueueStopOrder(bot, craft);
 					bot.QueueOrder(new Order("Unload", craft, false));
 					wave.ReturnUnloadIssued.Add(craft);
 					wave.ReturnLastCargoProgressTick[craft] = world.WorldTick;
+				}
+
+				var diagnosticDue = !wave.ReturnUnloadNextDiagnosticTick.TryGetValue(craft, out var nextDiagnosticTick) ||
+					world.WorldTick >= nextDiagnosticTick;
+				if (shouldIssueUnload || (diagnosticDue && (!canUnload || world.WorldTick - realProgressTick >= Info.UnloadStallTimeout)))
+				{
+					wave.ReturnUnloadNextDiagnosticTick[craft] = world.WorldTick + Info.UnloadStallTimeout;
+					FransBotLog.BotDebug(world,
+						"{0}: {1} wave={2} state=Returning event=ReturnUnload craft={3}:{4} cell={5} cargo={6} canUnload={7} lastCargoProgressWT={8} noCargoProgressWT={9} unloadEverIssued={10} unloadQueued={11} currentActivity={12} isIdle={13} {14}.",
+						player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), craft.ActorID, craft.Info.Name,
+						craft.Location, count, canUnload, realProgressTick, world.WorldTick - realProgressTick,
+						wave.ReturnUnloadIssued.Contains(craft), shouldIssueUnload, currentActivity, craft.IsIdle,
+						ReservationDiagnostic(wave));
 				}
 			}
 		}
@@ -1667,15 +2329,16 @@ namespace OpenRA.Mods.Common.Traits
 					continue;
 				wave.LastCraftCargoCount[craft] = cargo.PassengerCount;
 				wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
+				wave.DestinationUnloadLastRealProgressTick[craft] = world.WorldTick;
 				wave.CraftUnloadRecoveryAttempts[craft] = 0;
 				if (!cargo.CanUnload())
 					continue;
-				craft.CancelActivity();
+				QueueStopOrder(bot, craft);
 				bot.QueueOrder(new Order("Unload", craft, false));
 				wave.UnloadIssued.Add(craft);
 			}
 			FransBotLog.BotDebug(world,
-				"{0}: GROUND TRANSFER convoy reached landing screen at {1}/{2}; native Unload is issued independently to {3} craft. tracks cargo progress per LST and may use bounded alternate beach slots if one ramp stalls.",
+				"{0}: GROUND TRANSFER convoy reached landing screen at {1}/{2}; native Unload is issued independently to {3} craft. tracks cargo progress per LST and may use bounded alternate landing slots if one ramp stalls.",
 				player, wave.TargetShore.NavalCell, wave.TargetShore.GroundCell, wave.UnloadIssued.Count);
 		}
 
@@ -1697,6 +2360,8 @@ namespace OpenRA.Mods.Common.Traits
 				wave.StateStartedTick = world.WorldTick;
 				wave.LastProgressTick = world.WorldTick;
 				wave.LastRegroupedCount = -1;
+				LogWaveTransition(wave, TransferState.Unloading, TransferState.Regroup,
+					"all surviving passengers left their assigned LSTs");
 				IssueRegroupOrders(bot, survivors, force: true);
 				return;
 			}
@@ -1712,6 +2377,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					wave.LastCraftCargoCount[craft] = count;
 					wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
+					wave.DestinationUnloadLastRealProgressTick[craft] = world.WorldTick;
 					wave.CraftUnloadRecoveryAttempts[craft] = 0;
 					wave.CraftUnloadRecoveryCell.Remove(craft);
 				}
@@ -1729,7 +2395,7 @@ namespace OpenRA.Mods.Common.Traits
 						wave.CraftUnloadRecoveryCell.Remove(craft);
 						if (cargo.CanUnload())
 						{
-							craft.CancelActivity();
+							QueueStopOrder(bot, craft);
 							bot.QueueOrder(new Order("Unload", craft, false));
 							wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
 						}
@@ -1745,23 +2411,38 @@ namespace OpenRA.Mods.Common.Traits
 						wave.CraftUnloadRecoveryAttempts[craft] = attempt + 1;
 						wave.CraftUnloadRecoveryCell[craft] = alternate;
 						wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
-						craft.CancelActivity();
+						QueueStopOrder(bot, craft);
 						bot.QueueOrder(new Order("Move", craft, Target.FromCell(world, alternate), false));
 						FransBotLog.BotDebug(world,
-							"{0}: GROUND TRANSFER LST {1} unload stalled with {2} passenger(s); bounded beach recovery {3}/{4} moves to alternate naval cell {5} before another native Unload.",
+							"{0}: GROUND TRANSFER LST {1} unload stalled with {2} passenger(s); bounded landing recovery {3}/{4} moves to alternate naval cell {5} before another native Unload.",
 							player, craft.ActorID, count, attempt + 1, Info.MaximumUnloadRecoveryAttempts, alternate);
 						continue;
 					}
 
-					// If no alternate is legal, force one clean retry at the current beach instead
+					// If no alternate is legal, force one clean retry at the current landing cell instead
 					// of waiting forever for IsIdle. A currently progressing Unload is never touched
 					// because this branch only runs after UnloadStallTimeout without cargo decrease.
 					wave.LastCraftUnloadProgressTick[craft] = world.WorldTick;
-					if (cargo.CanUnload())
+					var canUnload = cargo.CanUnload();
+					var currentActivity = craft.CurrentActivity?.GetType().Name ?? "None";
+					var unloadQueued = false;
+					if (canUnload)
 					{
-						craft.CancelActivity();
+						QueueStopOrder(bot, craft);
 						bot.QueueOrder(new Order("Unload", craft, false));
+						unloadQueued = true;
 					}
+					var realProgressTick = wave.DestinationUnloadLastRealProgressTick.TryGetValue(craft, out var lastRealProgress)
+						? lastRealProgress : wave.StateStartedTick;
+					var target = wave.TargetCraftSlots.TryGetValue(craft, out var targetSlot) ? targetSlot : wave.TargetShore.NavalCell;
+					FransBotLog.BotDebug(world,
+						"{0}: {1} wave={2} state=Unloading event=FinalUnloadRetry craft={3}:{4} cell={5} target={6} distanceSq={7} cargo={8} bestCargo={9} canUnload={10} lastCargoProgressWT={11} noCargoProgressWT={12} alternateAttempts={13}/{14} alternateExhausted=True unloadQueued={15} currentActivity={16} isIdle={17} {18}.",
+						player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), craft.ActorID, craft.Info.Name,
+						craft.Location, target, (craft.Location - target).LengthSquared, count,
+						wave.LastCraftCargoCount.TryGetValue(craft, out var bestCargo) ? bestCargo : count,
+						canUnload, realProgressTick, world.WorldTick - realProgressTick, attempt,
+						Info.MaximumUnloadRecoveryAttempts, unloadQueued, currentActivity, craft.IsIdle,
+						ReservationDiagnostic(wave));
 				}
 				else if (world.WorldTick >= wave.NextUnloadRetryTick && craft.IsIdle && cargo.CanUnload())
 					bot.QueueOrder(new Order("Unload", craft, false));
@@ -1779,10 +2460,10 @@ namespace OpenRA.Mods.Common.Traits
 				if (!wave.TargetUnitSlots.TryGetValue(unit, out var slot) || (unit.Location - slot).LengthSquared <= 1)
 					continue;
 
-				// As soon as a passenger materializes on the beach, queue its native Move behind
+				// As soon as a passenger materializes at the landing handoff, queue its native Move behind
 				// the current unload/disembark activity. This clears the LST ramp without waiting
 				// for IsIdle, while preserving OpenRA's native Unload sequencing. Idle units still
-				// receive an immediate non-queued retry if their first beach-clear order finished
+				// receive an immediate non-queued retry if their first landing-clear order finished
 				// before reaching the assigned inland slot.
 				if (!wave.BeachClearMoveIssued.Contains(unit))
 				{
@@ -1885,6 +2566,71 @@ namespace OpenRA.Mods.Common.Traits
 			return total;
 		}
 
+		string WaveDiagnosticId(TransferWave wave) =>
+			$"{player.PlayerActor.ActorID}:{wave.StartedTick}:{wave.SourceLandmassId}>{wave.TargetLandmassId}:{wave.TargetActorId}";
+
+		static string ActorIds(IEnumerable<Actor> actors) =>
+			string.Join(",", actors.Where(a => a != null).OrderBy(a => a.ActorID).Select(a => a.ActorID));
+
+		static string CraftTargets(TransferWave wave, IReadOnlyDictionary<Actor, CPos> targets) =>
+			string.Join(",", wave.Crafts.Where(a => a != null).OrderBy(a => a.ActorID)
+				.Select(a => targets.TryGetValue(a, out var target) ? $"{a.ActorID}:{target}" : $"{a.ActorID}:none"));
+
+		string ReservationDiagnostic(TransferWave wave) =>
+			$"groundReservations={wave.Units.Count(reservedGroundUnits.Contains)}/{wave.Units.Count} " +
+			$"transportReservations={wave.Crafts.Count(c => c != null && transportService.IsTransportReserved(c))}/{wave.Crafts.Count} " +
+			$"seaLeaseHeld={wave.SeaSupportRequestId != 0} seaLease={wave.SeaSupportRequestId}";
+
+		void LogWaveTransition(TransferWave wave, TransferState previous, TransferState current, string reason)
+		{
+			FransBotLog.BotDebug(world,
+				"{0}: {1} wave={2} transition={3}->{4} reason={5} ageWT={6} stateAgeWT={7} groundActors=[{8}] crafts=[{9}] {10}.",
+				player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), previous, current, reason,
+				world.WorldTick - wave.StartedTick, world.WorldTick - wave.StateStartedTick,
+				ActorIds(wave.Units), ActorIds(wave.Crafts), ReservationDiagnostic(wave));
+		}
+
+		void RebaseReturnDiagnostic(TransferWave wave, Actor craft, CPos target)
+		{
+			var distanceSquared = (craft.Location - target).LengthSquared;
+			wave.ReturnDiagnosticTarget[craft] = target;
+			wave.ReturnBestDistanceSquared[craft] = distanceSquared;
+			wave.ReturnLastDistanceProgressTick[craft] = world.WorldTick;
+		}
+
+		void ObserveReturnDiagnosticProgress(TransferWave wave, Actor craft, CPos target, int distanceSquared)
+		{
+			if (!wave.ReturnDiagnosticTarget.TryGetValue(craft, out var previousTarget) || previousTarget != target ||
+				!wave.ReturnBestDistanceSquared.TryGetValue(craft, out var bestDistanceSquared))
+			{
+				RebaseReturnDiagnostic(wave, craft, target);
+				return;
+			}
+
+			if (distanceSquared < bestDistanceSquared)
+			{
+				wave.ReturnBestDistanceSquared[craft] = distanceSquared;
+				wave.ReturnLastDistanceProgressTick[craft] = world.WorldTick;
+			}
+		}
+
+		void LogReturnMoveReissue(TransferWave wave, Actor craft, CPos target, int sameLegRetries,
+			bool alternateExhausted, string outcome, string currentActivity)
+		{
+			var distanceSquared = (craft.Location - target).LengthSquared;
+			var bestDistanceSquared = wave.ReturnBestDistanceSquared.TryGetValue(craft, out var best) ? best : distanceSquared;
+			var lastProgressTick = wave.ReturnLastDistanceProgressTick.TryGetValue(craft, out var progressTick)
+				? progressTick : wave.StateStartedTick;
+			var recoveryAttempts = wave.CrossingRecoveryAttempts.TryGetValue(craft, out var attempts) ? attempts : 0;
+			FransBotLog.BotDebug(world,
+				"{0}: {1} wave={2} state=Returning event=MoveReissue outcome={3} craft={4}:{5} cell={6} target={7} distanceSq={8} bestDistanceSq={9} lastProgressWT={10} noProgressWT={11} sameLegRetries={12}/{13} alternateAttempts={14}/{15} alternateExhausted={16} moveReissued=True currentActivity={17} isIdle={18} {19}.",
+				player, LivenessDiagnosticPrefix, WaveDiagnosticId(wave), outcome, craft.ActorID, craft.Info.Name,
+				craft.Location, target, distanceSquared, bestDistanceSquared, lastProgressTick,
+				world.WorldTick - lastProgressTick, sameLegRetries, Info.CrossingSameLegRetries,
+				recoveryAttempts, Info.MaximumCrossingRecoveryAttempts, alternateExhausted,
+				currentActivity, craft.IsIdle, ReservationDiagnostic(wave));
+		}
+
 
 		bool IsLoadedIntoAssignedCraft(Actor actor)
 		{
@@ -1913,24 +2659,39 @@ namespace OpenRA.Mods.Common.Traits
 			var wave = activeWave;
 			if (wave == null)
 				return;
+			var waveId = WaveDiagnosticId(wave);
+			var state = wave.State;
+			var groundActorIds = ActorIds(wave.Units);
+			var craftIds = ActorIds(wave.Crafts);
+			var seaSupportRequestId = wave.SeaSupportRequestId;
+			var seaLeaseReleased = seaSupportRequestId == 0;
 
 			if (cancelActivities)
 			{
 				foreach (var unit in wave.Units.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					unit.CancelActivity();
+					QueueStopOrder(null, unit);
 				foreach (var craft in wave.Crafts.Where(IsLiveActor))
-					craft.CancelActivity();
+					QueueStopOrder(null, craft);
 			}
 
 			foreach (var unit in wave.Units)
 				reservedGroundUnits.Remove(unit);
 			ReleaseTransports();
 			if (wave.SeaSupportRequestId != 0)
+			{
 				general.ReleaseSeaTransportBeachSecure(wave.SeaSupportRequestId);
+				seaLeaseReleased = true;
+			}
 			FransBotLog.BotDebug(world,
 				"{0}: GROUND TRANSFER CONVOY closes wave {1}->{2}: {3}. LSTs={4}, Sea support request={5}, reserved Ground survivors released={6}.",
 				player, wave.SourceLandmassId, wave.TargetLandmassId, reason, wave.Crafts.Count, wave.SeaSupportRequestId,
 				wave.Units.Count(a => a != null && !a.Disposed && !a.IsDead));
+			FransBotLog.BotDebug(world,
+				"{0}: {1} wave={2} transition={3}->Released reason={4} groundActors=[{5}] crafts=[{6}] groundReservationsAfter={7} transportReservationsAfter={8} seaLeaseReleased={9} seaLease={10}.",
+				player, LivenessDiagnosticPrefix, waveId, state, reason, groundActorIds, craftIds,
+				wave.Units.Count(reservedGroundUnits.Contains),
+				wave.Crafts.Count(c => c != null && transportService.IsTransportReserved(c)),
+				seaLeaseReleased, seaSupportRequestId);
 			activeWave = null;
 			nextPlanningTick = world.WorldTick + Info.WaveCooldown;
 		}

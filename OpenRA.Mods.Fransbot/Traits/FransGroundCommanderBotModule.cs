@@ -276,7 +276,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransGroundCommanderBotModule : ConditionalTrait<FransGroundCommanderBotModuleInfo>,
-		IBotTick, IBotRespondToAttack, IFransGroundCommanderService, IFransGroundUnitReservationService
+		IBotTick, IBotEnabled, IBotRespondToAttack, IFransGroundCommanderService, IFransGroundUnitReservationService
 	{
 		string BidderKey => Info.BidderKey;
 
@@ -296,6 +296,78 @@ namespace OpenRA.Mods.Common.Traits
 
 		readonly World world;
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		readonly Dictionary<Actor, UnitStance> pendingStanceOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void QueueSetUnitStanceOrder(IBot bot, Actor actor, UnitStance stance)
+		{
+			if (!IsValidOrderSubject(actor) || actor.TraitOrDefault<AutoTarget>() == null)
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStanceOrders.Remove(actor);
+				sink.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)stance });
+				return;
+			}
+
+			pendingStanceOrders[actor] = stance;
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0 && pendingStanceOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.Concat(pendingStanceOrders.Keys).Distinct().OrderBy(a => a.ActorID).ToArray())
+			{
+				if (!IsValidOrderSubject(actor))
+					continue;
+
+				if (pendingStopOrders.Contains(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+				if (pendingStanceOrders.TryGetValue(actor, out var stance) && actor.TraitOrDefault<AutoTarget>() != null)
+					bot.QueueOrder(new Order("SetUnitStance", actor, false) { ExtraData = (uint)stance });
+			}
+
+			pendingStopOrders.Clear();
+			pendingStanceOrders.Clear();
+		}
+
 		readonly HashSet<Actor> managedUnits = [];
 		readonly Dictionary<string, bool> managedGroundActorTypeCache = new(StringComparer.Ordinal);
 		readonly HashSet<Actor> activeUnits = [];
@@ -466,6 +538,8 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
+			pendingStanceOrders.Clear();
 			anchorStandbySlots.Clear();
 			groundStagingReservationCells.Clear();
 			groundStagingReservationTick = int.MinValue;
@@ -537,6 +611,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransGroundCommander.BotTick");
 			if (player.WinState != WinState.Undefined)
 				return;
@@ -568,6 +643,12 @@ namespace OpenRA.Mods.Common.Traits
 					else if (emptyMission.MissionType == FransMissionType.Raid)
 					{
 						commandBidService.ReleaseMission(FransCommanderKind.Ground, BidderKey, "RAID force was wiped out");
+					}
+					else if (emptyMission.MissionType == FransMissionType.Secure)
+					{
+						ReportSecureRetreatIfLast(emptyMission.TargetActorId, "Ground SECURE force was wiped out");
+						commandBidService.ReleaseMission(FransCommanderKind.Ground, BidderKey,
+							"SECURE force was wiped out; accepted ownership released before local mission reset");
 					}
 				}
 
@@ -623,7 +704,7 @@ namespace OpenRA.Mods.Common.Traits
 				{
 					// Cancel the locally owned SECURE squad so the actors become available for strategic DEFEND.
 					foreach (var unit in activeUnits.Where(a => a != null && a.IsInWorld && !a.IsDead).ToArray())
-						unit.CancelActivity();
+						QueueStopOrder(bot, unit);
 					commandBidService.ReleaseMission(FransCommanderKind.Ground, BidderKey, "SECURE preempted by active DEFEND pressure");
 					FransBotLog.BotDebug(world,
 						"{0}: Ground Commander {1} releases SECURE {2} because strategic DEFEND pressure reached the SECURE-preempt threshold; committed actors are freed for defense.",
@@ -636,7 +717,7 @@ namespace OpenRA.Mods.Common.Traits
 					// release its exact committed actors immediately instead of protecting an enemy HARV/building
 					// while the home economy is under attack. RETREAT/recovery remains non-preemptible above.
 					foreach (var unit in ResolveCommittedGroundActors(mission))
-						unit.CancelActivity();
+						QueueStopOrder(bot, unit);
 					commandBidService.ReleaseMission(FransCommanderKind.Ground, BidderKey, "RAID preempted by strategic DEFEND pressure");
 					FransBotLog.BotDebug(world,
 						"{0}: Ground Commander {1} releases RAID {2} because strategic DEFEND pressure is active; committed actors are freed for defense.",
@@ -2023,7 +2104,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (raidSearchStartedWorldTick >= 0)
 			{
 				foreach (var a in activeUnits.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 				ResetRaidLostTargetSearch(false);
 				raidStrikeIssued = false;
 				raidProgressiveAttackActorIds.Clear();
@@ -2174,7 +2255,7 @@ namespace OpenRA.Mods.Common.Traits
 				hasRaidSearchWaypoint = false;
 				activeOrder = FransCommanderOrder.Search;
 				foreach (var a in activeUnits)
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 				FransBotLog.BotDebug(world,
 					"{0}: Ground RAID target {1} is gone/unseen at LastVisibleTargetCell {2}; begins {3}-WT local plain-Move RECON before ANCHOR return.",
 					player, mission.TargetActorId, activeObjective, commanderCoreService.RaidLostTargetReconTicks);
@@ -2208,7 +2289,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (cancelActivities)
 				foreach (var a in activeUnits.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(null, a);
 			raidSearchStartedWorldTick = -1;
 			raidSearchWaypoint = default;
 			hasRaidSearchWaypoint = false;
@@ -2551,7 +2632,7 @@ namespace OpenRA.Mods.Common.Traits
 				combinedSecureHoldTargetActorId = mission.TargetActorId;
 				combinedSecureHoldUntilTick = mission.ExecuteAfterWorldTick;
 				foreach (var unit in ResolveCommittedGroundActors(mission))
-					unit.CancelActivity();
+					QueueStopOrder(null, unit);
 				FransBotLog.BotDebug(world,
 					"{0}: Ground {1} holds COMBINED SECURE {2} until WT {3}; its ETA is {4} WT and {5} domains are timing departure toward the same area.",
 					player, BidderKey, mission.TargetActorId, mission.ExecuteAfterWorldTick, mission.EstimatedEtaTicks, mission.CombinedSecureGroupSize);
@@ -3949,7 +4030,7 @@ namespace OpenRA.Mods.Common.Traits
 				reconActor = selected;
 				if (reconPioneerValidationActive)
 					ResetPioneerReconProgress(selected, missionObjective);
-				selected.TraitOrDefault<AutoTarget>()?.SetStance(selected, UnitStance.HoldFire);
+				QueueSetUnitStanceOrder(bot, selected, UnitStance.HoldFire);
 				reconOrigin = selected.Location;
 				reconStart = start.Value;
 				hasReconSearchWaypoint = false;
@@ -3982,7 +4063,7 @@ namespace OpenRA.Mods.Common.Traits
 					ResetPioneerReconProgress(reconActor, activeObjective);
 					activeOrder = FransCommanderOrder.Move;
 					hasReconSearchWaypoint = false;
-					reconActor.CancelActivity();
+					QueueStopOrder(bot, reconActor);
 					FransBotLog.BotDebug(world, "{0}: Ground RECON {1} redirects to PIONEER exact objective {2}; persistent fan probing is temporarily superseded until the exact ore cell is scout-cleared.", player, activeTargetActorId, activeObjective);
 				}
 				else if (!pioneerWasActive)
@@ -4193,8 +4274,8 @@ namespace OpenRA.Mods.Common.Traits
 			// turn into an incidental fight. Returning to normal ownership restores the global default.
 			if (reconActor != null && reconActor.IsInWorld && !reconActor.IsDead)
 			{
-				reconActor.TraitOrDefault<AutoTarget>()?.SetStance(reconActor, UnitStance.AttackAnything);
-				reconActor.CancelActivity();
+				QueueSetUnitStanceOrder(null, reconActor, UnitStance.AttackAnything);
+				QueueStopOrder(null, reconActor);
 			}
 			reconActor = null;
 			reconOrigin = default;
