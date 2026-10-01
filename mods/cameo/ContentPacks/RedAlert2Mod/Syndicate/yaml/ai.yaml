@@ -150,3 +150,8 @@ Player:
 			latinsyndicate_collectiontruck: 20
 			latinsyndicate_demolitiontruck: 1
 			latinsyndicate_nuketruck: 1
+	SquadManagerBotModuleCA@classic:
+		AirSquadTargetTypes:
+			latinsyndicate_hindtransport: Aircraft, Ground, Naval
+			latinsyndicate_yakovlev: Aircraft, Infantry, Building
+			latinsyndicate_mig21: Aircraft, Building, Epic, Naval
