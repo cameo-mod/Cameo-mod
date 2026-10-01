@@ -15455,3 +15455,20 @@ ZG-b fog-honest territory/ownership/doors merged).
   centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+## 2026-10-02 — NOVA: PL-1 personality leads, Steamroller/Rush budget lean (nova/personality-leads)
+
+AI_ARCHITECTURE §12.14 / DESIGN §19.1c first slice: the leads are now COMPUTED on every
+`MasterAiBotModule` snapshot and published on `BotSituation` (`EnemyProductionPerGameMin`,
+`SteamrollerLead`, `RushLead`; logged as `own.enemy_production_per_game_min`,
+`own.steamroller_lead`, `own.rush_lead`). `UsePersonalityLeads` (default false, switch group
+`G_personality_leads`) gates only the consumers: Steamroller's trailing lead relaxes
+`UnitBuilderBotModuleCA`'s two production cash floors, Rush's shortens
+`SquadManagerBotModuleCA`'s `minAttackForceDelayTicks` reset — each by up to
+`PersonalityLeadMaxLeanPercent` (50), linear in the deficit, via the new
+`IBotPersonalityLeadProvider` seam. Enemy-side numbers stay fog-honest (remembered
+sightings only); an unseen enemy's production reads as at-target, and Rush's score is the
+weaker of launch rate and first-attack timing with a +0.25 credit for remembered econ kills.
+Tests: `PersonalityLeadsTest`.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>

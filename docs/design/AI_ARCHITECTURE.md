@@ -2253,3 +2253,21 @@ inputs, record-only — no decision reads them, and the enemy-side numbers stay 
   personality is disabled, so switches don't erase history — same semantics as `losses_by_role`), the first launch's
   tick, and the per-minute rate.
 - `enemies[].army_value_delta` — net seen army growth since the previous snapshot (can go negative).
+
+**PL-1 (NOVA, branch nova/personality-leads):** the Steamroller and Rush leads are now
+computed on every snapshot and published on the situation (`own.enemy_production_per_game_min`,
+`own.steamroller_lead`, `own.rush_lead` in the situation log) — always-on telemetry; the new
+`UsePersonalityLeads` flag (default **false**, increment-switch group `G_personality_leads`)
+gates only the consumers. Enemy production is estimated fog-honestly as Σ positive
+`army_value_delta` per game minute plus `PersonalityLeadEnemyProductionPerBuildingPerMin`
+(200) per remembered production building; `steamroller_lead` is own/enemy — with nothing
+remembered the denominator reads as at-target (1), not infinite. `rush_lead` is
+`min(attacks_per_game_min / target, clamp(first_attack_target / first_attack_tick))`, 0
+until the first launch, with a flat +0.25 attack-score credit once any enemy economy value
+has been destroyed. Consumers reach the leads through `IBotPersonalityLeadProvider` (the
+usual CA seam — Mods.CA does not reference Mods.Cameo): `PersonalityLeadLean(personality)`
+returns the snapshot's multiplier, gated by flag, running-personality match and lead < 1.
+Steamroller leans `UnitBuilderBotModuleCA`'s `ProductionMinCashRequirement` /
+`MaximiseProductionCashRequirement` floors; Rush leans `SquadManagerBotModuleCA`'s
+`minAttackForceDelayTicks` reset — each by up to `PersonalityLeadMaxLeanPercent` (50),
+linear in the deficit. The other four personalities' leads remain telemetry-only.
