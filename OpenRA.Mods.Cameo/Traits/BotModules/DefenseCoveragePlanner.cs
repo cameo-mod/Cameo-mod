@@ -34,6 +34,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Score per percent (-100..100) of how well the cell lies toward the enemy.")]
 		public readonly int ThreatWeight = 40;
 
+		[Desc("Share (percent) of our defences that should stand on the perimeter; the rest guard the inside against intruders.")]
+		public readonly int PerimeterSharePercent = 75;
+
+		[Desc("A cell is on the perimeter when its edgeness (percent of the maximum defence radius) is at least this.")]
+		public readonly int PerimeterEdgePercent = 70;
+
 		[Desc("Search annulus (cells) when no base builder is found.")]
 		public readonly int MinimumRadius = 5;
 
@@ -56,6 +62,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Own buildings, kept from the world's add/remove events: no enumeration of the world's actors.
 		readonly HashSet<Actor> buildings = new();
 		BaseBuilderBotModuleCA[] baseBuilders;
+		IReadOnlyDictionary<string, HashSet<string>> specialties;
 
 		public DefenseCoveragePlanner(Actor self, DefenseCoveragePlannerInfo info)
 			: base(info)
@@ -144,6 +151,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return newlyCovered * CoverageScore + edgeWeight * edgeness + threatWeight * threatAlignment;
 		}
 
+		/// <summary>
+		/// The perimeter quota: true when the next defence belongs on the perimeter (its share is below the target),
+		/// false when it belongs inside. With no defences yet the first goes to the perimeter.
+		/// </summary>
+		public static bool PlacePerimeter(int perimeterCount, int interiorCount, int sharePercent)
+		{
+			var total = perimeterCount + interiorCount;
+			return total == 0 || perimeterCount * 100 < sharePercent * total;
+		}
+
+		/// <summary>The specialties a defence holds; one with none falls back to anti-air (AntiAirTypes) else anti-armour.</summary>
+		public static IReadOnlyCollection<string> RolesOf(IReadOnlyDictionary<string, HashSet<string>> specialties, string name, bool antiAirType)
+		{
+			if (specialties != null && specialties.TryGetValue(name, out var set) && set.Count > 0)
+				return set;
+
+			return new[] { antiAirType ? BotUnitRole.AntiAir : BotUnitRole.AntiArmour };
+		}
+
 		// --- placement ---
 
 		CPos? IBotDefensePlacementAdvisor.ChooseDefenseCell(ActorInfo defense, bool antiAir, CPos baseCenter, Func<CPos, bool> canPlace)
@@ -158,9 +184,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var minRadius = builder?.Info.MinimumDefenseRadius ?? Info.MinimumRadius;
 			var maxRadius = builder?.Info.MaximumDefenseRadius ?? Info.MaximumRadius;
 
-			// Our own buildings and, of those, the defences of this role (buildings under construction are in the world already).
+			specialties ??= BotUnitRoles.BuildDefenceSpecialties(world.Map.Rules);
+			IReadOnlyCollection<string> RolesFor(ActorInfo i) =>
+				RolesOf(specialties, i.Name, antiAirTypes != null && antiAirTypes.Contains(i.Name));
+			var roles = RolesFor(defense);
+
+			// Our own buildings and, of those, the defences per role (buildings under construction are in the world already).
 			var baseCells = new HashSet<CPos>();
-			var sameRole = new List<(CPos Center, int Range)>();
+			var byRole = new Dictionary<string, List<(CPos Center, int Range)>>();
+			var perimeter = 0;
+			var interior = 0;
 			foreach (var b in buildings)
 			{
 				if (b.IsDead || !b.IsInWorld || b.Owner != player) // captured since it was added
@@ -172,39 +205,68 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				if (b.Info.HasTraitInfo<AttackBaseInfo>())
 				{
-					var isAa = antiAirTypes != null && antiAirTypes.Contains(b.Info.Name);
 					var r = MaxRangeCells(b.Info);
-					if (isAa == antiAir && r > 0)
-						sameRole.Add((b.Location, r));
+					if (r <= 0)
+						continue;
+
+					foreach (var role in RolesFor(b.Info))
+					{
+						if (!byRole.TryGetValue(role, out var list))
+							byRole[role] = list = new List<(CPos Center, int Range)>();
+						list.Add((b.Location, r));
+					}
+
+					if (Edgeness(b.Location, baseCenter, maxRadius) >= Info.PerimeterEdgePercent)
+						perimeter++;
+					else
+						interior++;
 				}
 			}
 
-			var uncovered = baseCells.Where(c => !Covered(c, sameRole)).ToArray();
+			// A base cell is protected only when every role covers it; a candidate scores per role it holds.
+			var uncovered = new Dictionary<string, CPos[]>();
+			foreach (var role in roles)
+			{
+				var list = byRole.TryGetValue(role, out var l) ? l : new List<(CPos Center, int Range)>();
+				uncovered[role] = baseCells.Where(c => !Covered(c, list)).ToArray();
+			}
 
 			var cells = world.Map.FindTilesInAnnulus(baseCenter, minRadius, maxRadius).ToArray();
 			var stride = Math.Max(1, (cells.Length + Info.MaxCandidates - 1) / Math.Max(1, Info.MaxCandidates));
 
+			// The quota picks the ring; an empty ring falls back to the other rather than to nothing.
+			var wantPerimeter = PlacePerimeter(perimeter, interior, Info.PerimeterSharePercent);
 			var threat = ThreatCell();
 			CPos? best = null;
 			var bestScore = int.MinValue;
 			int bestNew = 0, bestEdge = 0, bestThreat = 0;
+			var bestOnWanted = false;
 			for (var i = 0; i < cells.Length; i += stride)
 			{
 				var cell = cells[i];
 				if (!canPlace(cell))
 					continue;
 
-				var n = NewlyCovered(cell, range, uncovered);
 				var edge = Edgeness(cell, baseCenter, maxRadius);
-				var t = ThreatAlignment(cell, baseCenter, threat);
-				var score = Score(n, edge, t, Info.EdgeWeight, Info.ThreatWeight);
-				if (score > bestScore)
+				var onWanted = (edge >= Info.PerimeterEdgePercent) == wantPerimeter;
+				if (best != null && bestOnWanted && !onWanted)
+					continue;
+
+				var n = 0;
+				foreach (var role in roles)
+					n += NewlyCovered(cell, range, uncovered[role]);
+
+				// Inside, only the coverage of the base counts; on the perimeter the edge and threat bias stay.
+				var t = wantPerimeter ? ThreatAlignment(cell, baseCenter, threat) : 0;
+				var score = Score(n, wantPerimeter ? edge : 0, t, Info.EdgeWeight, Info.ThreatWeight);
+				if ((onWanted && !bestOnWanted) || score > bestScore)
 				{
 					bestScore = score;
 					best = cell;
 					bestNew = n;
 					bestEdge = edge;
 					bestThreat = t;
+					bestOnWanted = onWanted;
 				}
 			}
 
@@ -212,7 +274,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return null;
 
 			Log.Write("debug", $"AI ({player.ClientIndex}): DEFENSE PLACE {defense.Name} at {best.Value}: covers {bestNew} new base cells " +
-				$"(role {(antiAir ? "AA" : "ground")}), edge {bestEdge}, threat {bestThreat}" +
+				$"(roles {string.Join("+", roles)}), {(wantPerimeter ? "perimeter" : "interior")} ({perimeter} out / {interior} in), edge {bestEdge}, threat {bestThreat}" +
 				(bestNew == 0 ? " [no new coverage: redundant edge/threat cell]" : "") + $" at tick {world.WorldTick}");
 			return best;
 		}

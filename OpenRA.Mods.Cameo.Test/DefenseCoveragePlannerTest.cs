@@ -11,6 +11,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -95,6 +96,80 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(DefenseCoveragePlanner.Score(80, 0, 0, 30, 40), Is.GreaterThan(DefenseCoveragePlanner.Score(0, 100, 100, 30, 40)));
 			Assert.That(DefenseCoveragePlanner.Score(8, 0, 0, 30, 40), Is.GreaterThan(DefenseCoveragePlanner.Score(0, 100, 100, 30, 40)),
 				"eight newly covered base cells beat the full edge + enemy-side bonus: coverage dominates");
+		}
+
+		static readonly IReadOnlyDictionary<string, HashSet<string>> Specialties = new Dictionary<string, HashSet<string>>
+		{
+			["guard"] = new() { BotUnitRole.AntiInfantry },
+			["advanced"] = new() { BotUnitRole.AntiArmour },
+			["sky"] = new() { BotUnitRole.AntiAir },
+			["multi"] = new() { BotUnitRole.AntiInfantry, BotUnitRole.AntiArmour },
+			["none"] = new(),
+		};
+
+		[Test]
+		public void AnInfantryTowerDoesNotCoverForAntiAir()
+		{
+			var guardRoles = DefenseCoveragePlanner.RolesOf(Specialties, "guard", false);
+			Assert.That(guardRoles, Does.Contain(BotUnitRole.AntiInfantry));
+			Assert.That(guardRoles, Does.Not.Contain(BotUnitRole.AntiAir));
+
+			// Coverage is kept per role: the tower is in the anti-infantry list only, so the anti-air list leaves the cell uncovered.
+			var byRole = new Dictionary<string, List<(CPos Center, int Range)>>
+			{
+				[BotUnitRole.AntiInfantry] = new() { (Center, 12) },
+				[BotUnitRole.AntiAir] = new(),
+			};
+			Assert.That(DefenseCoveragePlanner.Covered(Center, byRole[BotUnitRole.AntiInfantry]), Is.True);
+			Assert.That(DefenseCoveragePlanner.Covered(Center, byRole[BotUnitRole.AntiAir]), Is.False);
+		}
+
+		[Test]
+		public void AMultiRoleDefenceSumsItsRoles()
+		{
+			var roles = DefenseCoveragePlanner.RolesOf(Specialties, "multi", false);
+			Assert.That(roles, Has.Count.EqualTo(2));
+
+			// Anti-infantry already covers the centre; anti-armour covers nothing: the sum counts both roles' uncovered cells.
+			var all = Uncovered();
+			var covered = new List<(CPos Center, int Range)> { (Center, 4) };
+			var perRole = new Dictionary<string, CPos[]>
+			{
+				[BotUnitRole.AntiInfantry] = all.Where(c => !DefenseCoveragePlanner.Covered(c, covered)).ToArray(),
+				[BotUnitRole.AntiArmour] = all,
+			};
+			var sum = roles.Sum(r => DefenseCoveragePlanner.NewlyCovered(Center, 4, perRole[r]));
+			Assert.That(sum, Is.EqualTo(DefenseCoveragePlanner.NewlyCovered(Center, 4, all)));
+			Assert.That(sum, Is.GreaterThan(0));
+			Assert.That(sum, Is.LessThan(2 * DefenseCoveragePlanner.NewlyCovered(Center, 4, all)));
+		}
+
+		[Test]
+		public void ARolelessDefenceFallsBackToAntiAirOrAntiArmour()
+		{
+			Assert.That(DefenseCoveragePlanner.RolesOf(Specialties, "none", true), Is.EquivalentTo(new[] { BotUnitRole.AntiAir }));
+			Assert.That(DefenseCoveragePlanner.RolesOf(Specialties, "missing", false), Is.EquivalentTo(new[] { BotUnitRole.AntiArmour }));
+		}
+
+		[Test]
+		public void TheQuotaSwitchesBetweenRingAndInterior()
+		{
+			Assert.That(DefenseCoveragePlanner.PlacePerimeter(0, 0, 75), Is.True);
+			Assert.That(DefenseCoveragePlanner.PlacePerimeter(2, 2, 75), Is.True);
+			Assert.That(DefenseCoveragePlanner.PlacePerimeter(3, 1, 75), Is.False);
+			Assert.That(DefenseCoveragePlanner.PlacePerimeter(6, 3, 75), Is.True);
+
+			// Placing in the wanted ring in turn converges on the share.
+			int ring = 0, inside = 0;
+			for (var i = 0; i < 20; i++)
+			{
+				if (DefenseCoveragePlanner.PlacePerimeter(ring, inside, 75))
+					ring++;
+				else
+					inside++;
+			}
+
+			Assert.That(ring, Is.EqualTo(15));
 		}
 	}
 }
