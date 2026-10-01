@@ -595,6 +595,15 @@ at rules load from the actors that are loaded, and a pack writes only a delibera
    them from stats, after CA-3.** The personality sets a role mix (§12.5); a unit's weight follows
    from its derived role and Versus profile. The hand rows stay until the derived mix wins an A/B.
    CA-3 is NOVA's; the roles come from this lane.
+   **UW-1 implemented** (`nova/derived-unit-weights`): `UnitBuilderBotModuleCA.UseDerivedUnitWeights`
+   (default **false**; switch group `I_derived_unit_weights`) derives the table as
+   `max(1, round(share[r] x strength[u] / mean strength of the candidates sharing r))` where `r` is
+   the unit's primary role (`IBotUnitRoles.PrimaryRoleOf`, combat taxonomy only), `share[r]` is the
+   `RoleMix` value or `RoleMixRoleFloorPct`, and `strength[u]` is the best weapon's
+   `DamagePerTick x mean(Versus)/100` floored at 1 (`BotUnitProfiles`, own-side stats only — no
+   enemy enumerated). The yaml rows stay the membership gate and pass through verbatim for unroled
+   units; an active composition still wins; flag off, absent mix or absent provider return the yaml
+   dict byte-identical. Cached on the (mix, floorPct) reference so a personality switch rebuilds.
 4. **Per-unit squad settings.** `AirSquadTargetTypes` is written 5 times in 17 packs, identically
    (32 aircraft, 0 differences). **The `@guerrilla` personality never got the rows**, so its air
    squads lack the setting for every one of them; `@classic` carries its own 28 rows in the central
