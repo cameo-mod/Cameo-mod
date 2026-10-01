@@ -15512,3 +15512,39 @@ regression. Sampled failures reproduce on `f1f47c879` (pre-collapse parent).
 **Open for coordinator:** target_policy_field_history has 3 records for weapons deleted in
 the RA1 pack split (`BallistaSingleShotAir*`, `CabalLaserBoatLaserAA`) — dead fixture rows,
 never consulted; and `generals.yaml` dormant dead ids (shared debt above).
+
+## 2026-10-04 — Devin: owned/history fixture regreen, phase 2 (branch devin/regreen-suite)
+
+Finished re-greening the owned-weapon/history cohort (76/76 green). Root cause of the
+remaining failures: reviewed materialization waves (W7 conversions `d46ecd9d1`,
+ExtraDamage "ExplicitDamage" batch, AA suffix normalization) orphaned several chain-root
+bases — `td_gdi_guardtower_highv_base`, `ra1_soviets_mortarsoldier_siegemortar`,
+`..._siegemortarthermobaric`, `ra1_soviets_heavyteslatank_ttankzap2` now have ZERO
+references from actors or weapons.
+
+Decisions:
+- Repointed stale routes to the armed successors (`HighV`→`td_gdi_guardtower_highv`,
+  `SiegeMortar*`→`_ExplicitDamage3of4` variants, buggymkii AA→`*_AA` suffix order).
+- `TTankZap2` dropped from `chained` routes (no free armed successor; `ttankzap2_emp`
+  already claimed by `TTankZap2_EMP`; `validate_renames` forbids many-to-one). Count
+  91→90. Its hash/dependency entries remain as historical evidence.
+- `closed_owner` renamed_inheritance_links 10→5 (five owned-sibling `Inherits` edges
+  were materialized away by `b235c6980`/`4f9d29658` — reviewed).
+- `shared_owner_wrappers`: 53 of 57 identity wrappers were materialized into divergent
+  owned bodies (e.g. grenadier grenade Damage 19346 vs shared Grenade 16000). Test now
+  count-pins the 4 remaining true aliases and validates materialized wrappers against a
+  new `materialized_wrappers` fixture section. `is_reviewed_owner_wrapper` stays
+  fail-closed so audits degrade safely.
+- `E3` legacy map-alias digest re-pinned (drift came through `td_gdi_rocketsoldier`
+  parent from reviewed baseline waves; armament contract {Rockets, RocketsAMT} asserted
+  separately and still holds).
+- `ownership_lineage.ROUTE_HASHES` updated for the three route-bearing fixtures that
+  legitimately changed (chained, closed_remaining, lookup — the last from the reviewed
+  `ra1_allies_allied*` actor rename).
+- Verified: no `before`/`checkpoint`/`source_before`/`snapshot` fixture subtree was
+  rewritten — all edits are live pins, route targets, or actor `changes` extensions.
+
+Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
+`siegemortarthermobaric`, `ttankzap2`) are now dead content in production — flagging to
+the coordinator for a cleanup decision rather than touching production YAML from the
+test lane.

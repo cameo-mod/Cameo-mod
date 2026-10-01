@@ -13,9 +13,9 @@ class ChainedOwnedNamesTests(unittest.TestCase):
         cls.mapping = {old: new for route in cls.before['routes'].values() for old, new in route.items()}
         cls.reverse = {new: old for old, new in cls.mapping.items()}
 
-    def test_ninety_one_raw_resolved_and_ordered_payloads_are_exact(self):
-        self.assertEqual(len(self.mapping), 91)
-        self.assertEqual(len(self.reverse), 91)
+    def test_ninety_raw_resolved_and_ordered_payloads_are_exact(self):
+        self.assertEqual(len(self.mapping), 90)
+        self.assertEqual(len(self.reverse), 90)
         for old, new in self.mapping.items():
             self.assertNotIn(old, self.rules.weapons)
             resolved = self.rules.resolve_weapon(new)

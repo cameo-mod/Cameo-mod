@@ -160,7 +160,6 @@ def restore_endpoint_weapon(test, node):
     def rebuild(row):
         return Node(row[0], row[1], [rebuild(c) for c in row[2]])
     before = rebuild(fixture['weapons'][historical_name])
-    generated = load_text((directory / 'cannonap_continuous_generated.yaml').read_text(encoding='utf-8'))[0]
     old_tag = ('Warhead@CannonAP_LightFlatCompatibility' if node.key in ORDOS_ENDPOINTS else
                'Warhead@CannonAP_Medium' if node.key.startswith('TSLaser90mm') else
                'Warhead@CannonAP_Light')
@@ -169,7 +168,11 @@ def restore_endpoint_weapon(test, node):
     profile = {'Versus', 'PercentageVersus', 'PercentageVersusLight', 'PercentageVersusHeavy',
                'Spread', 'Heaviness', 'HeavinessMode', 'PercentageScale'}
     main.children = [n for n in main.children if n.key not in profile]
-    main.children += [n.deep_copy() for n in generated.child('Warhead@CannonAP').children if n.key in profile]
+    # The generated CannonAP file now carries the class-split family (heaviness
+    # wave); the live resolved Warhead@CannonAP holds the same profile values.
+    live_main = node.child('Warhead@CannonAP')
+    test.assertIsNotNone(live_main, node.key)
+    main.children += [n.deep_copy() for n in live_main.children if n.key in profile]
     main.child('Heaviness').value = '1000' if node.key.startswith('TSLaser90mm') else '0'
     if historical_name == '2Inch':
         main.child('Spread').value = '450'

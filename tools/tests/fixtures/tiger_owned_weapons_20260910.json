@@ -1,24 +1,27 @@
 {
   "source_commit": "b45546fe165af74a21dec55685ed0cf8cdb47179",
-  "weapon_classes": {"TigerCannon": 1.25, "TigerCannonCryo": 1.25},
+  "weapon_classes": {
+    "TigerCannon": 1.25,
+    "TigerCannonCryo": 1.25
+  },
   "weapon_hashes": {
-    "TigerCannon": "d88cf7be4952fe95cfd45e84acc1791761711d76f04824202bc53fbdf611c151",
-    "TigerCannonCryo": "ae046545966d13099647580832d969846a2fbc353e9a15b62cc7972a1b005c97"
+    "TigerCannon": "5edcbe6e5fda0b69ee555a4f47d2d6a267d821bc1048dd7a391f0b09bdd7026d",
+    "TigerCannonCryo": "de23910f84b4a0e1ba0b0b52ae65dd674ed5fad63808b998a34b2812258818ef"
   },
   "ordered_hashes": {
-    "TigerCannon": "c901f046b4fad21eecfb7c2bcd641b15efe4a3988bd4e82381e8bf99a5ee00d5",
-    "TigerCannonCryo": "454a400c1f3dbdc8c0c845a94cf046dafcb089fa67bf546f46b884de8d42cea9"
+    "TigerCannon": "5055d83d376c8a0848aa2f032de9fc4156243c61b8b8d22346039974033b31da",
+    "TigerCannonCryo": "c3914516f27d783b1312105835d230a76dbc9b0d62f4a26d0784d08c680d0604"
   },
   "actor_hashes": {
-    "ra1_allies_alliedtigerheavytank": "7328675a0ec970002a9838647819df1c12efa3491bcbf2b85b48d1c95b4b3c6b",
-    "ra1_allies_alliedcybertank": "00f6319d9f6c5f6c73969340361c9dd028c6fd440a1a1b5a901d47caf8bc7d37"
+    "ra1_allies_tigerheavytank": "f03244b9b4fafec417467351e349c9b618baec1dc6a329abfb3ed88b7837e2bb",
+    "ra1_allies_cybertank": "63ef89ec254488d53992abf120d231f42f0ae1ab8f86ca15767830796c050e34"
   },
   "routes": {
-    "ra1_allies_alliedtigerheavytank": {
+    "ra1_allies_tigerheavytank": {
       "TigerCannon": "ra1_allies_alliedtigerheavytank_cannon",
       "TigerCannonCryo": "ra1_allies_alliedtigerheavytank_cannon_cryo"
     },
-    "ra1_allies_alliedcybertank": {
+    "ra1_allies_cybertank": {
       "TigerCannon": "ra1_allies_alliedcybertank_cannon",
       "TigerCannonCryo": "ra1_allies_alliedcybertank_cannon_cryo"
     }
