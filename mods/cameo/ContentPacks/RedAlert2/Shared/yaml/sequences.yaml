@@ -3778,8 +3778,6 @@ yrslav:
 		Start: 86
 	die2:
 		Start: 101
-	cheer:
-		Start: 276
 	icon:
 		Filename: naxis_slave_icon.png
 
@@ -3912,26 +3910,22 @@ ra2howi:
 	idle:
 		Filename: invisibleitem.shp
 	muzzle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2_allies_tankdestroyer_icon.shp
-	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
+	icon:
+		Filename: ra2_allies_tankdestroyer_icon.shp
 ra2arty:
 	Defaults:
 		Filename: ra2arty.shp
 	idle:
 		Filename: invisibleitem.shp
 	muzzle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2_allies_tankdestroyer_icon.shp
-	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
+	icon:
+		Filename: ra2_allies_tankdestroyer_icon.shp
 ra2amcv.Bot:
 	Inherits: ra2_allies_mobileconstructionvehicle
 

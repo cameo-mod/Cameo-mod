@@ -26,6 +26,7 @@
 | wc2_critter | 0 | 4 | mods\cameo\rules\warcraft2.yaml |
 | eden | 0 | 3 | mods\cameo\rules\outpost2.yaml |
 | sglmobilesupplytruck | 0 | 3 | mods\cameo\rules\shockwave.yaml |
+| aircraft | 0 | 2 | mods\cameo\rules\husks.yaml |
 | op2 | 0 | 2 | mods\cameo\rules\outpost2.yaml |
 | ra1_soviets | 121 | 2 | mods\cameo\rules\heroes.yaml |
 | ra2_ambu | 2 | 2 | mods\cameo\rules\redalert2.yaml |
@@ -57,7 +58,6 @@
 | wc2_h | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | wc2_o | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
-| aircraft | 0 | 1 | mods\cameo\rules\husks.yaml |
 | camea | 0 | 1 | mods\cameo\rules\camea.yaml |
 | cute | 0 | 1 | mods\cameo\rules\valentine.yaml |
 | dummy | 1 | 1 | mods\cameo\rules\redalert2.yaml |
@@ -66,6 +66,7 @@
 | htc | 0 | 1 | mods\cameo\rules\sow.yaml |
 | htd | 0 | 1 | mods\cameo\rules\sow.yaml |
 | hte | 0 | 1 | mods\cameo\rules\sow.yaml |
+| infantry | 0 | 1 | mods\cameo\rules\misc.yaml |
 | large | 0 | 1 | mods\cameo\rules\xcom.yaml |
 | medium | 0 | 1 | mods\cameo\rules\xcom.yaml |
 | mta | 0 | 1 | mods\cameo\rules\sow.yaml |
@@ -94,9 +95,11 @@
 | swdroidheli | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| td_nod | 70 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
+| td_nod | 71 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
+| techbuilding | 0 | 1 | mods\cameo\rules\misc.yaml |
 | upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
 | upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
+| vehicles | 0 | 1 | mods\cameo\rules\misc.yaml |
 | wc2 | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
 | wc2_camera | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
 | wc2_neutral | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
@@ -116,7 +119,7 @@
 | worms | 0 | 1 | mods\cameo\rules\worms.yaml |
 | zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
 
-Fully converted prefixes (51): asianalliance, atreides, cabal, corrino, d2k, farasha, forgotten, fremen, futu, futuretech, harkonnen, ixian, japan, latin, latinsyndicate, light, missile, nax, naxis, ordos, protoss, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, schwarzermond, siege, sietch, steel, steelconsortium, td, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, up, upgrade, wc2_humans, wc2_orcs, yuri, zerg
+Fully converted prefixes (56): asianalliance, atreides, cabal, corrino, d2k, farasha, forgotten, fremen, futu, futuretech, harkonnen, ixian, japan, latin, latinsyndicate, light, missile, nax, naxis, ordos, protoss, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2e2, ra2gacnst, ra2nacnst, schwarzermond, scrin, siege, sietch, steel, steelconsortium, td, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, up, upgrade, wc2_humans, wc2_orcs, yrnacnst, yuri, zerg
 
 ## P2 — actors whose id does not match the pack's dominant prefix
 
@@ -174,9 +177,13 @@ Fully converted prefixes (51): asianalliance, atreides, cabal, corrino, d2k, far
 - `D2k\Ordos`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
 - `D2k\Shared`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
 - `TiberianSun\Shared`: `misc.yaml` on disk but NOT in content.yaml
+- `TiberiumWars\Scrin`: `voices.yaml` on disk but NOT in content.yaml
+- `TiberiumWars\Scrin`: nonstandard filename `buildup-palettes.yaml` (closed set, DESIGN §2)
+- `TiberiumWars\Scrin`: nonstandard filename `palettes.yaml` (closed set, DESIGN §2)
+- `TiberiumWars\Scrin`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
 
 ## P4 — naming summary (counts; details via gen_rename_maps)
 
-- actor ids violating the lowercase grammar: **1530** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
+- actor ids violating the lowercase grammar: **1576** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 654
+Total findings: 662

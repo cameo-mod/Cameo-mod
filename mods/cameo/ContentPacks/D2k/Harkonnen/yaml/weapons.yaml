@@ -3,9 +3,8 @@
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MEDTANK1.WAV  # W7MAT w8-repin
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
 		PercentageScale: 2500
 	ReloadDelay: 55
 
@@ -179,9 +178,8 @@ ExplosiveDebris:
 	Inherits@w84: ^Warhead_Demolition_Light  # W7MAT covering-edge
 	Inherits@w85: ^Projectile_Grenade_Light_D2K_Debris  # W7MAT covering-edge
 	Inherits@w86: ^Effect_Demolition_Light_D2K  # W7MAT covering-edge
-	Projectile:  # W7MAT w8-repin
+	Projectile:
 		TrailPalette: effect75alpha
-	Projectile:  # W7MAT w8-repin
 		TrailInterval: 1
 	Warhead@Demolition_Light:  # W7MAT w8-repin
 		DamageCalculationType: ClosestTargetablePosition
@@ -226,16 +224,15 @@ D2K70mmH:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2500
+		Damage: 10250
+
 	ReloadDelay: 90
 	StartBurstReport: d2k_harkonnen_sounds|d2k_buzzsaw_att.wav
 	Range: 4352
 	Burst: 2
 	BurstDelays: 0
-	Warhead@CannonHE_Medium:
-		Damage: 10250
-
 DevBullet:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
 	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet

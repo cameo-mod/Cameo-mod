@@ -1066,9 +1066,6 @@ Player:
 	TimedConditionBar@sonjapower2:
 		Condition: sonjapower2
 	RevealsShroudMultiplier@sonjapower1:
-		RequiresCondition: sonjapower1
-		Modifier: 200
-	RevealsShroudMultiplier@sonjapower1:
 		RequiresCondition: sonjapower2
 		Modifier: 300
 	ExternalCondition@isabellapower1:
@@ -1134,8 +1131,8 @@ Player:
 		RequiresCondition: jesspower1
 		Modifier: 140
 	SpeedMultiplier@jesspower1:
-		RequiresCondition: jesspower1
-		Modifier: 110
+		RequiresCondition: jesspower2
+		Modifier: 120
 	ExternalCondition@jesspower2:
 		Condition: jesspower2
 	TimedConditionBar@jesspower2:
@@ -1143,9 +1140,6 @@ Player:
 	FirepowerMultiplier@jesspower2:
 		RequiresCondition: jesspower2
 		Modifier: 160
-	SpeedMultiplier@jesspower1:
-		RequiresCondition: jesspower2
-		Modifier: 120
 	ProducibleWithLevel@selectjess:
 		Prerequisites: selectjess
 		InitialLevels: 1
@@ -2391,8 +2385,6 @@ hq.orange:
 	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
-	Production@Research:
-		Produces: Research
 	ProvidesRadar:
 	BaseBuilding:
 	ProductionBar@BuildingGDI:
@@ -5116,6 +5108,12 @@ awfortress:
 		BuildDuration: 2000
 		BuildDurationModifier: 100
 	Building:
+		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,4
+		BuildSounds: AWBuilding.wav
+########################################################
+#	AW Factories
+########################################################
 	Power:
 		Amount: -40
 	Health:
@@ -5149,13 +5147,6 @@ awfortress:
 		Type: Rectangle
 			TopLeft: -2000, -2000
 			BottomRight: 2000, 2000
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx
-		Dimensions: 4,4
-		BuildSounds: AWBuilding.wav
-########################################################
-#	AW Factories
-########################################################
 awweap.orange:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -5636,12 +5627,10 @@ awyard.orange:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	HitShape:
-		UseTargetableCellsOffsets: True
+		UseTargetableCellsOffsets: false
 		Type: Rectangle
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
-	HitShape:
-		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
 	Valued:
 		Cost: 1000
@@ -5969,27 +5958,6 @@ awlab:
 		SupportPowerPaletteOrder: 40
 	ClassicAirstrikePower@Duster:
 		Squad:
-			awdustersupport:
-				SpawnOffset: -2000,1500,0
-				TargetOffset: -500,0,0
-			awdustersupport:
-				SpawnOffset: -1500,2000,0
-				TargetOffset: 0,500,0
-			awdustersupport:
-				SpawnOffset: -1500,1500,0
-				TargetOffset: 500,0,0
-			awdustersupport:
-				SpawnOffset: -2000,2000,0
-				TargetOffset: 0,500,0
-			awdustersupport:
-				SpawnOffset: -2500,2000,0
-				TargetOffset: -500,0,0
-			awdustersupport:
-				SpawnOffset: -2000,2500,0
-				TargetOffset: 0,500,0
-			awdustersupport:
-				SpawnOffset: -2000,2000,0
-				TargetOffset: 500,0,0
 			awdustersupport:
 				SpawnOffset: -2500,2000,0
 				TargetOffset: 0,500,0
@@ -10782,7 +10750,8 @@ awbomber:
 		Type: CenterPosition
 		RequiresCondition: enable-smoke
 	ProducibleWithLevel:
-		Prerequisites: aircraft.upgraded
+		Prerequisites: selecteagle
+		InitialLevels: 1
 	Voiced:
 		VoiceSet: AWPlaneVoice
 	RenderSprites:
@@ -10842,9 +10811,6 @@ awbomber:
 			awtasha: awbomberids
 			awforsythe: awbomberids
 			awgage: awbomberids
-	ProducibleWithLevel:
-		Prerequisites: selecteagle
-		InitialLevels: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10944,13 +10910,11 @@ awblackbomb:
 		Type: CenterPosition
 		RequiresCondition: enable-smoke
 	ProducibleWithLevel:
-		Prerequisites: aircraft.upgraded
+		Prerequisites: selecteagle
+		InitialLevels: 1
 	Voiced:
 		VoiceSet: AWPlaneVoice
 	RenderSprites:
-	ProducibleWithLevel:
-		Prerequisites: selecteagle
-		InitialLevels: 1
 	Explodes:
 		Weapon: AWBlackBombExplode
 		EmptyWeapon: AWBlackBombExplode
@@ -12320,14 +12284,12 @@ awhydrosupport:
 	Tooltip:
 		Name: Hydro
 	RenderSprites:
-		Image: a10
+		Image: awhydro
 	SpawnActorOnDeath:
 		Actor: awhydro.husk
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 240
-	RenderSprites:
-		Image: awhydro
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -12344,14 +12306,12 @@ awdustersupport:
 	Tooltip:
 		Name: Duster
 	RenderSprites:
-		Image: a10
+		Image: awduster
 	SpawnActorOnDeath:
 		Actor: awhydro.husk
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 240
-	RenderSprites:
-		Image: awduster
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True

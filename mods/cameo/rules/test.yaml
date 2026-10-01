@@ -546,13 +546,11 @@ TRIPOD:
 		DeathPaletteIsPlayerPalette: false
 	DeathSounds:
 		Voice: Die
+		VolumeMultiplier: 5
 	ShakeOnDeath:
 		Intensity: 26
 	AnnounceOnKill:
 		Voice: Kill
-	DeathSounds:
-		Voice: Die
-		VolumeMultiplier: 5
 	Voiced:
 		VoiceSet: TripodVoices
 		Volume: 3

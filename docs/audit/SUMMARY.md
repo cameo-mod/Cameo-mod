@@ -67,7 +67,7 @@ shares.
 | **B8** | crash-class content | **0** | — |
 | B1 | cross-faction leaks | 6 L1 · 0 L3 · 91 shared | `faction_leaks.md` |
 | B2 | illegal inherits | 276 V1 · **0** V2 · **0** V3 dangling · 2094 V4 depth>3 · 102 V5 | `inherits.md` |
-| B2b | duplicate inherit paths | 1952 definitions reach a parent by >1 path | `duplicate_inherits.md` |
+| B2b | duplicate inherit paths | 1990 definitions reach a parent by >1 path | `duplicate_inherits.md` |
 | B3 | upgrade direction | 624 items · **0** inverted · 1 deferred · 10 dead · 20 dead tokens · 587 without an intent entry | `upgrades.md` |
 | B4 | upgrade coverage | 24 tagged upgrades · 21 uncovered unit slots | `upgrade_coverage.md` |
 | B5 | AI wiring | 1867 refs · **0** defined nowhere · **0** unloaded · 2 unwired pool factions | `ai.md` |
@@ -84,7 +84,7 @@ shares.
 | F | house stat formulas | 685 violations across 2009 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 60 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | **1** prerequisite-order · 985 build-palette-order violations across 910 buildables | `buildable_order.md` |
-| D | duplicate keys | **0 D1 ambiguous labels** · 3984 D2 merged duplicates | `duplicate_keys.md` |
+| D | duplicate keys | **0 D1 ambiguous labels** · 158 D2 merged duplicates (was 4,965; residual = `Inherits`-separated generations + value-differing overrides) | `duplicate_keys.md` |
 
 ## Green — and must stay green
 

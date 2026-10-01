@@ -74,11 +74,14 @@ Of those, **17** hold only ONE shot, so no rate exists for them either.
 
 
 
-## A2 — carrier slaves: 0 of 14 in scope break the rule (ratchet 0)
+## A2 — carrier slaves: 1 of 15 in scope break the rule (ratchet 0)
 
 Every `CarrierSlave` must have an `AmmoPool`, an empty-pool firing gate, and a reload. The failures are opposite: no pool means the engine grants unlimited ammo (`CarrierSlave.cs:59-65`) so the carrier cycle never runs; a pool without a gate still permits an empty shot because ammo is consumed after attack selection. Carrier re-entry refills pools; `ReloadAmmoPool` is the explicit in-flight recovery policy.
 
-_All in-scope slaves carry a sized pool and a reload_ — sized by `tools/balance/carrier_slave_ammo.py` (R8: one full burst attack empties the pool, empty to full in exactly 100 ticks).
+| actor | pool | ammo | reload | rearmable | defect |
+|---|---|---|---|---|---|
+| scrin_invader_fighter | False | — | False | False | unlimited ammo — no pool |
+
 
 **5 suicide slaves are OUT OF SCOPE**, not a backlog — a reload is dead weight on a unit that dies when it attacks. Two were named by the maintainer; their self-destruct lives in the WEAPON and appears in no trait, which is why the detector alone would miss them.
 
@@ -91,3 +94,5 @@ _All in-scope slaves carry a sized pool and a reload_ — sized by `tools/balanc
 | tsprobe | trait SpawnedExplodes | False | False |
 
 
+
+FAIL — carrier-slave defects 1 > ratchet 0

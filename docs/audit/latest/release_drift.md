@@ -1,11 +1,11 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1344 shared with the tree · **1157 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1344 shared with the tree · **1151 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 131 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 137 | 133 | FAIL |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
 | D4 | UNMATCHED - in the release, gone under that name | 568 | 335 | FAIL |
@@ -44,7 +44,7 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 |---|---|
 | matched | 1500 |
 | unmatched | 412 |
-| inflated | 156 |
+| inflated | 162 |
 | weakened | 81 |
 | extreme | 22 |
 | accepted | 30 |
@@ -110,5 +110,5 @@ Recovered **156** release identities hidden by name-only matching. Raw D4 and al
 | YakTeslaGunArc | ra1_soviets_teslayak_yakteslagunarc | 16000 | 4000 | 0.25 | 2 -> 1 | weakened |
 
 
-**FAIL: D4 above ratchet.** A rise means a weapon moved FURTHER from the shipped build, or that the gate went BLIND to more of them. Lower a baseline as the repair lands; never raise one.
+**FAIL: D1, D4 above ratchet.** A rise means a weapon moved FURTHER from the shipped build, or that the gate went BLIND to more of them. Lower a baseline as the repair lands; never raise one.
 

@@ -2721,19 +2721,14 @@ LightningBolt:
 		Damage: 24000
 		ValidTargets: Air, Ground, Water
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		Spread: 2000
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 24000
+		Spread: 3333
+		Falloff: 100, 67, 33, 0
+		Damage: 66666
 		DamageTypes: Tesla
+		ValidTargets: Shielded
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Shielded
-		Falloff: 100, 67, 33, 0
-		Spread: 3333
-		Damage: 66666
-		DamageTypes: Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect

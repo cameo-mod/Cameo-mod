@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **727**
+Files scanned: **791**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 122 | 30 |
-| E3 | open() without encoding= | 155 | 90 |
-| E4 | subprocess call without check= | 38 | 9 |
+| E2 | handler discards the error | 135 | 30 |
+| E3 | open() without encoding= | 161 | 90 |
+| E4 | subprocess call without check= | 53 | 9 |
 
 
 ## Files that do not parse
@@ -28,10 +28,17 @@ Files scanned: **727**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 122 finding(s)
+## E2 — 135 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/ai/derive_guerrilla_roles.py | 113 | handler body discards the error |
+| tools/ai/derive_roles_preview.py | 94 | handler body discards the error |
+| tools/ai/derive_roles_preview.py | 275 | handler body discards the error |
+| tools/ai/fight_report.py | 32 | handler body discards the error |
+| tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
+| tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 582 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
@@ -39,9 +46,9 @@ Files scanned: **727**
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_engine_freshness.py | 76 | handler body discards the error |
-| tools/audit/audit_garrison_weapons.py | 61 | handler body discards the error |
-| tools/audit/audit_k_linearity.py | 165 | handler body discards the error |
-| tools/audit/audit_k_linearity.py | 183 | handler body discards the error |
+| tools/audit/audit_garrison_weapons.py | 77 | handler body discards the error |
+| tools/audit/audit_k_linearity.py | 162 | handler body discards the error |
+| tools/audit/audit_k_linearity.py | 180 | handler body discards the error |
 | tools/audit/audit_missile_role_family.py | 134 | handler body discards the error |
 | tools/audit/audit_missing_elite.py | 21 | handler body discards the error |
 | tools/audit/audit_orphans.py | 93 | handler body discards the error |
@@ -64,7 +71,7 @@ Files scanned: **727**
 | tools/audit/audit_weapon_uniqueness.py | 99 | handler body discards the error |
 | tools/audit/gen_damage_matrix.py | 52 | handler body discards the error |
 | tools/audit/gen_release_baseline.py | 50 | handler body discards the error |
-| tools/audit/miniyaml.py | 210 | handler body discards the error |
+| tools/audit/miniyaml.py | 223 | handler body discards the error |
 | tools/audit/phase_b_survey.py | 40 | handler body discards the error |
 | tools/audit/review_batch_diff.py | 80 | handler body discards the error |
 | tools/audit/review_resolve_diff.py | 159 | handler body discards the error |
@@ -78,6 +85,7 @@ Files scanned: **727**
 | tools/balance/assign_references.py | 567 | handler body discards the error |
 | tools/balance/assign_references.py | 794 | handler body discards the error |
 | tools/balance/audit_deprecated_name_lane.py | 51 | handler body discards the error |
+| tools/balance/b3_intent_draft.py | 239 | handler body discards the error |
 | tools/balance/build_armament_pairing_report.py | 138 | handler body discards the error |
 | tools/balance/build_reference_report.py | 1474 | handler body discards the error |
 | tools/balance/class_membership.py | 233 | handler body discards the error |
@@ -89,11 +97,12 @@ Files scanned: **727**
 | tools/balance/consolidate_reviewed_weapon_roots.py | 268 | handler body discards the error |
 | tools/balance/consolidate_reviewed_weapon_roots.py | 320 | handler body discards the error |
 | tools/balance/consolidate_same_family_stacks.py | 136 | handler body discards the error |
+| tools/balance/derive_versus_columns.py | 72 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
 | tools/balance/extract_stats.py | 301 | handler body discards the error |
-| tools/balance/extract_stats.py | 359 | handler body discards the error |
-| tools/balance/extract_stats.py | 1219 | handler body discards the error |
+| tools/balance/extract_stats.py | 365 | handler body discards the error |
+| tools/balance/extract_stats.py | 1225 | handler body discards the error |
 | tools/balance/formula.py | 589 | handler body discards the error |
 | tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
@@ -122,10 +131,14 @@ Files scanned: **727**
 | tools/balance/tier_chain.py | 384 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 79 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
+| tools/balance/w22_triage_unreachable.py | 119 | handler body discards the error |
+| tools/balance/w22_triage_unreachable.py | 147 | handler body discards the error |
 | tools/hooks/bash_guard.py | 117 | handler body discards the error |
 | tools/hooks/bash_guard.py | 140 | handler body discards the error |
 | tools/hooks/bash_guard.py | 154 | handler body discards the error |
 | tools/hooks/bash_guard.py | 214 | handler body discards the error |
+| tools/packs/migrate_assets.py | 226 | handler body discards the error |
+| tools/packs/split_ai_rows.py | 66 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 898 | handler body discards the error |
 | tools/reference/compress_warheads.py | 412 | handler body discards the error |
 | tools/reference/compress_warheads.py | 430 | handler body discards the error |
@@ -156,7 +169,7 @@ Files scanned: **727**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 155 finding(s)
+## E3 — 161 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -164,6 +177,7 @@ Files scanned: **727**
 | tools/audit/audit_effect_pairings.py | 112 | `args.baseline.read_text()` without encoding= |
 | tools/audit/collapse_dead_warhead_inherits.py | 43 | `open()` without encoding= |
 | tools/audit/collapse_dead_warhead_inherits.py | 80 | `open()` without encoding= |
+| tools/audit/dead_field_sources.py | 173 | `write_text()` without encoding= |
 | tools/audit/infantry_artillery_pressure.py | 33 | `path.open()` without encoding= |
 | tools/bake_d2k_overlay.py | 28 | `Image.open()` without encoding= |
 | tools/bake_d2k_overlay_zap.py | 10 | `Image.open()` without encoding= |
@@ -171,18 +185,23 @@ Files scanned: **727**
 | tools/balance/assemble_four_voice_pilot.py | 49 | `path.open()` without encoding= |
 | tools/balance/compare_defense_armor_curves.py | 116 | `args.matrix.read_text()` without encoding= |
 | tools/balance/compare_defense_armor_curves.py | 126 | `payload_path.read_text()` without encoding= |
+| tools/balance/derive_versus_columns.py | 114 | `read_text()` without encoding= |
 | tools/balance/peer_corpus.py | 64 | `path.open()` without encoding= |
 | tools/balance/prepare_promotion_discount.py | 37 | `path.open()` without encoding= |
 | tools/balance/propose_reference_anchors.py | 427 | `read_text()` without encoding= |
 | tools/balance/shrapnel_scenario_report.py | 47 | `path.open()` without encoding= |
+| tools/check_hd_coverage.py | 10 | `open()` without encoding= |
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
 | tools/d2k_to_openra.py | 164 | `Image.open()` without encoding= |
+| tools/dump_meg_names.py | 16 | `open()` without encoding= |
 | tools/extract_insignias.py | 113 | `Image.open()` without encoding= |
 | tools/hooks/bash_guard.py | 206 | `read_text()` without encoding= |
 | tools/hooks/bash_guard.py | 232 | `perf.read_text()` without encoding= |
 | tools/hooks/exec_guard.py | 69 | `perf.read_text()` without encoding= |
 | tools/make_syndicate_insignia.py | 41 | `Image.open()` without encoding= |
 | tools/make_syndicate_insignia.py | 63 | `Image.open()` without encoding= |
+| tools/packs/migrate_assets.py | 149 | `cy.read_text()` without encoding= |
+| tools/packs/migrate_assets.py | 288 | `write_text()` without encoding= |
 | tools/reference/cameo_projectile_evidence.py | 71 | `read_text()` without encoding= |
 | tools/reference/dta_projectile_evidence.py | 30 | `args.matrix.read_text()` without encoding= |
 | tools/reference/extract_emperor_units.py | 477 | `path.open()` without encoding= |
@@ -317,19 +336,32 @@ Files scanned: **727**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 38 finding(s)
+## E4 — 53 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
+| tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 509 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 649 | `subprocess.run()` without check= |
+| tools/ai/run_league.py | 307 | `subprocess.run()` without check= |
+| tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
+| tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |
+| tools/audit/audit_central_ids.py | 26 | `subprocess.run()` without check= |
 | tools/audit/audit_chrome_master_freshness.py | 136 | `subprocess.run()` without check= |
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
 | tools/audit/audit_doc_health.py | 139 | `subprocess.run()` without check= |
 | tools/audit/audit_engine_freshness.py | 52 | `subprocess.run()` without check= |
+| tools/audit/audit_fransbot_lists.py | 33 | `subprocess.run()` without check= |
+| tools/audit/audit_guerrilla_roles.py | 29 | `subprocess.run()` without check= |
+| tools/audit/ca_vendor_sync.py | 107 | `subprocess.run()` without check= |
+| tools/audit/ca_vendor_sync.py | 161 | `subprocess.run()` without check= |
+| tools/audit/ca_vendor_sync.py | 183 | `subprocess.run()` without check= |
 | tools/audit/gen_release_baseline.py | 94 | `subprocess.run()` without check= |
 | tools/audit/gen_release_baseline.py | 112 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 164 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 120 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 144 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 170 | `subprocess.run()` without check= |
 | tools/audit/triage_release_identities.py | 139 | `subprocess.run()` without check= |
 | tools/balance/check_determinism.py | 94 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
@@ -337,7 +369,7 @@ Files scanned: **727**
 | tools/balance/gen_derived_stats.py | 60 | `subprocess.run()` without check= |
 | tools/balance/run_pipeline.py | 117 | `subprocess.run()` without check= |
 | tools/balance/run_with_guard.py | 39 | `subprocess.Popen()` without check= |
-| tools/balance/splice_templates.py | 58 | `subprocess.run()` without check= |
+| tools/balance/splice_templates.py | 115 | `subprocess.run()` without check= |
 | tools/balance/verify_generator_sync.py | 56 | `subprocess.run()` without check= |
 | tools/balance/verify_retrofit.py | 239 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 112 | `subprocess.run()` without check= |
@@ -354,8 +386,10 @@ Files scanned: **727**
 | tools/prep_overmind_dataset.py | 132 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
 | tools/tests/ai_bot_player_gate.py | 86 | `subprocess.Popen()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 106 | `subprocess.run()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 115 | `subprocess.run()` without check= |
+| tools/tests/ai_d2k_production_gate.py | 70 | `subprocess.Popen()` without check= |
+| tools/tests/ai_raid_gate.py | 93 | `subprocess.Popen()` without check= |
+| tools/tests/ai_squad_gate.py | 92 | `subprocess.Popen()` without check= |
+| tools/tests/test_family_bases.py | 68 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 454 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 541 | `subprocess.run()` without check= |
 | tools/wav_to_aud.py | 128 | `subprocess.run()` without check= |
@@ -364,8 +398,8 @@ Files scanned: **727**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 122 > baseline 30
-- E3: 155 > baseline 90
-- E4: 38 > baseline 9
+- E2: 135 > baseline 30
+- E3: 161 > baseline 90
+- E4: 53 > baseline 9
 - 1 file(s) do not parse
 

@@ -25,10 +25,14 @@ Player:
 	# (cand 0-24) sent the whole Frans stack back to donor-only: `hard` keeps
 	# the CA producers/services, and DESIGN 19.1 forbids tier-gated modules
 	# anyway — strength scales via BotLimits, not RequiresCondition.
+	# INC-3 (F1's question as a switch): `inc3_frans_services` re-arms exactly
+	# these eight services on the A/B arm's bot population; granted only via
+	# GrantConditionOnBotOwner@inc3f1 in ai.yaml, which names `fransbot` by
+	# default so master behaviour is unchanged.
 	FransCombatIntelBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransStrategicMapBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 		# Representative actors whose locomotives derive the passability layers.
 		# All ContentPacks are unconditionally Included today, so TD/RA picks
 		# always resolve; a missing actor leaves that layer inert by design.
@@ -36,17 +40,17 @@ Player:
 		McvProbeActorType: td_gdi_mobileconstructionvehicle
 		NavalProbeActorType: ra1_allies_gunboat
 	FransRiskModelBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransMineClusterBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransEconomicSaturationBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransCommanderCoreBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransCommandBidBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransGeneralBotModule:
-		RequiresCondition: enable-fransbot
+		RequiresCondition: enable-fransbot || inc3_frans_services
 		RaidPublishRememberedBuildings: true
 		ReconProbeSpawnRepeatTicks: 4500
 		RaidInterferencePriorityBonus: 40

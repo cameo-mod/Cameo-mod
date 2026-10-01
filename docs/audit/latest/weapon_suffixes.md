@@ -9,11 +9,11 @@ X5 suffix ordering violations: **0**
 ## X1 — Elite weapons not following _elite convention
 | File | Line | Actor | Trait | Weapon |
 |---|---|---|---|---|
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2298 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
-| rules/redalert2.yaml | 2609 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
+| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2302 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
+| rules/redalert2.yaml | 2594 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
 
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml | 1452 | ConsortiumMissileSystem | Air |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml | 1675 | ConsortiumMissileSystem | Air |
 

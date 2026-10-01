@@ -506,6 +506,9 @@ def run_match(
     file is shared across matches in a batch — the previous match's mtime
     must not arm the next match's window.
     """
+    # BELOW_NORMAL priority (Windows): an uncapped match uses every cycle it gets; the maintainer's desktop and input
+    # must stay responsive (2026-10-01: 7 instances froze the mouse). The game still gets all otherwise-idle CPU.
+    priority = getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0) if os.name == "nt" else 0
     process = subprocess.Popen(
         [str(executable), *args],
         cwd=engine,
@@ -514,6 +517,7 @@ def run_match(
         text=True,
         encoding="utf-8",
         errors="replace",
+        creationflags=priority,
     )
 
     output_parts = []
@@ -800,6 +804,11 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--render", choices=("fast", "default"), default="fast",
+                        help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
+                             "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
+                             "Rendering never touches the simulation (bot logic is tick-based), so results are unchanged; "
+                             "'default' keeps the player's settings")
     args = parser.parse_args()
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
@@ -898,6 +907,8 @@ def main() -> int:
         # off so support-dir logs stay identical to the reference batches.
         if os.environ.get("CAMEO_BOT_DEBUG"):
             launch_args.append("Debug.BotDebug=true")
+        if getattr(args, "render", "fast") == "fast":
+            launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 
         attempt = 0
         drift = None

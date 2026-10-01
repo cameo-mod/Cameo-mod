@@ -84,7 +84,20 @@ def load_text(text: str, source: str = "<memory>") -> list[Node]:
         stripped_full = _strip_comment(raw)
         if not stripped_full.strip():
             continue
-        indent = len(stripped_full) - len(stripped_full.lstrip("\t "))
+        # Engine-faithful depth: '\t' = +1 level, every SpacesPerLevel=4
+        # spaces = +1 level (MiniYaml.cs ~L239-256). A raw whitespace-char
+        # count overcounts mixed " \t"/" \t\t" prefixes and mis-parents
+        # children in files that mix spaces and tabs.
+        indent = 0
+        _sp = 0
+        for _ch in stripped_full[:len(stripped_full) - len(stripped_full.lstrip("\t "))]:
+            if _ch == "\t":
+                indent += 1
+            else:
+                _sp += 1
+                if _sp >= 4:
+                    _sp = 0
+                    indent += 1
         body = stripped_full.strip()
         key, _, val = body.partition(":")
         node = Node(key.strip(), val.strip(), [], source, lineno)

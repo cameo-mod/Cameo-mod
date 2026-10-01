@@ -114,8 +114,6 @@ TSProton:
 			SubmarineHeavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 30000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 
@@ -166,14 +164,6 @@ TSStankTusk:
 		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@MissileHE_Medium:
-		Damage: 10000
-		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
-		Damage: 10000
-		ValidTargets: Ground, Water, Air
-	-Warhead@CannonHE_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -197,16 +187,6 @@ TSSBoatTusk:
 		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@MissileHE_Medium:
-		PercentageScale: 11111
-		Damage: 9000
-		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
-		PercentageScale: 11111
-		Damage: 9000
-		ValidTargets: Ground, Water, Air
-	-Warhead@CannonHE_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -225,10 +205,8 @@ TSStankTibTusk:
 	TargetActorCenter: true
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@fx: ^ts_nod_tsstanktibtusk
-	Range: 6385
 	Burst: 2
 	BurstDelays: 2
-	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -332,19 +310,10 @@ TSStankTibTusk:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@CannonHE_Medium:
-		Damage: 10000
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannonFriendlyFire: SpreadDamage
-		Damage: 5000
-		ValidTargets: Ground, Water, Air
-	-Warhead@MediumCannonFriendlyFire:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 35000
 		PercentageScale: 2855
-	-Warhead@CannonHE_Medium:
-	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	Warhead@ShieldHit:
 		Condition: shieldhit
@@ -352,7 +321,6 @@ TSStankTibTusk:
 		ValidTargets: Shielded
 		Duration: 8
 
-	TargetActorCenter: true
 TSNODRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -439,11 +407,6 @@ TSLasergun:
 	ReloadDelay: 18
 	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
-	Warhead@Laser_Heavy:
-		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -662,8 +625,6 @@ TSCommandoShotgun:
 			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
-	Warhead@ShotgunGrenadeEnemy:
-		Damage: 8000
 	Warhead@ShotgunGrenadeAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 4000
@@ -758,8 +719,6 @@ TSCommandoShotgun:
 			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	-Warhead@ShotgunGrenadeEnemy:
-
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 4
@@ -793,21 +752,13 @@ elitecadregun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ReloadDelay: 52
 	Burst: 5
 	BurstDelays: 2
 	Report: cygun1.aud
-	Range: 6217
-	ValidTargets: Ground, Air
-	Warhead@Bullet_Medium:
-		PercentageScale: 2500
-		Damage: 8000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
-	TargetActorCenter: true
 laserelitecadregun:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@3: ^LaserWeapon
@@ -1084,13 +1035,6 @@ TSLaserHarpyClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
-	Warhead@Bullet_Medium:
-		Damage: 4000
-		ValidTargets: Ground, Air
-	Warhead@Laser_Heavy:
-		Damage: 4000
-		ValidTargets: Ground, Air
-	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Air
@@ -1105,16 +1049,12 @@ TSLaserHarpyMultiClaw:
 	Projectile: LaserZap
 		Inaccuracy: 1024
 		TrackTarget: false
-	Warhead@Bullet_Medium: AreaDamage
-		Damage: 0
-		ValidTargets: Ground, Air
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 0
 		ValidTargets: Ground, Air
-	-Warhead@Bullet_Medium:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Air
 		Damage: 4000
@@ -1122,16 +1062,12 @@ TSLaserHarpyMultiClaw:
 
 TSLaserHarpyAOEClaw:
 	Inherits: TSLaserHarpyClaw
-	Warhead@Bullet_Medium: AreaDamage
-		Spread: 300
-		Falloff: 100, 50, 25
 	Warhead@LaserWeapon: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Spread: 300
 		Falloff: 100, 50, 25
-	-Warhead@Bullet_Medium:
 	Warhead@Laser_Heavy_Flat:
 		Spread: 300
 		Falloff: 100, 50, 25

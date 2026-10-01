@@ -1,6 +1,6 @@
 # Split definitions — one weapon, two live files, one silent merge
 
-Live weapon files in the manifest: **47** · names defined more than once: **2**
+Live weapon files in the manifest: **48** · names defined more than once: **2**
 
 The engine MERGES same-named top-level nodes across files. Editing one copy leaves the other supplying its own fields, so a removal can silently do nothing — see the `HMG` incident in this file's docstring.
 
@@ -21,8 +21,8 @@ _none found_
 
 | weapon | defined at |
 |---|---|
-| `Flamethrower` | `weapons/tiberiandawn.yaml:138` · `weapons/starcraft.yaml:1` |
-| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:3098` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
+| `Flamethrower` | `weapons/tiberiandawn.yaml:168` · `weapons/starcraft.yaml:1` |
+| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:4864` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
 
 
 _at or below baseline_ — pre-existing migration residue. **Lower `S1_BASELINE`/`S2_BASELINE` as duplicates are deleted; never raise them.**

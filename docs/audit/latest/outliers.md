@@ -1,6 +1,6 @@
 # audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **165**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **166**, selection bounds > 5120: **0**
 
 
 ## Hard screen — Selectable bounds above the 5x5-cell maximum
@@ -65,31 +65,31 @@ _none found_
 | ChangesHealth.Step | latinsyndicate_tortugatank | 350 | 20 | 11.1 |
 | ChangesHealth.Step | ts_gdi_mammothprototype | 320 | 20 | 10.1 |
 | ChangesHealth.Step | ra2_soviets_kirovairship | 320 | 20 | 10.1 |
-| Health.HP | schwarzermond_dieglocke | 3750000 | 55000 | 71.2 |
-| Health.HP | japan_shogunexecutioner | 3000000 | 55000 | 56.8 |
-| Health.HP | cabal_avatar_backup | 2500000 | 55000 | 47.1 |
-| Health.HP | cabal_coredefender | 2000000 | 55000 | 37.5 |
-| Health.HP | naxis_ratte | 2000000 | 55000 | 37.5 |
-| Health.HP | steelconsortium_empressstation | 1500000 | 55000 | 27.8 |
-| Health.HP | schwarzermond_spacezeppelin | 1350000 | 55000 | 25.0 |
-| Health.HP | naxis_transportzeppelin | 1250000 | 55000 | 23.0 |
-| Health.HP | ts_gdi_mammothmkii | 1200000 | 55000 | 22.1 |
-| Health.HP | td_gdi_constructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | td_gdi_advancedcommunicationscenter | 1000000 | 55000 | 18.2 |
-| Health.HP | td_nod_constructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | td_nod_templeofnod | 1000000 | 55000 | 18.2 |
-| Health.HP | japan_japaneseconstructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | japan_japaneseshrine | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_soviets_constructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_soviets_missilesilo | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_soviets_ironcurtain | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_soviets_monstertank | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_allies_constructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | ra1_allies_chronosphere | 1000000 | 55000 | 18.2 |
-| Health.HP | TSGTCNST | 1000000 | 55000 | 18.2 |
-| Health.HP | cabal_core | 1000000 | 55000 | 18.2 |
-| Health.HP | cabal_constructionyard | 1000000 | 55000 | 18.2 |
-| Health.HP | cabal_avatar | 1000000 | 55000 | 18.2 |
+| Health.HP | schwarzermond_dieglocke | 3750000 | 60000 | 62.2 |
+| Health.HP | japan_shogunexecutioner | 3000000 | 60000 | 49.6 |
+| Health.HP | cabal_avatar_backup | 2500000 | 60000 | 41.1 |
+| Health.HP | cabal_coredefender | 2000000 | 60000 | 32.7 |
+| Health.HP | naxis_ratte | 2000000 | 60000 | 32.7 |
+| Health.HP | steelconsortium_empressstation | 1500000 | 60000 | 24.3 |
+| Health.HP | schwarzermond_spacezeppelin | 1350000 | 60000 | 21.8 |
+| Health.HP | naxis_transportzeppelin | 1250000 | 60000 | 20.1 |
+| Health.HP | ts_gdi_mammothmkii | 1200000 | 60000 | 19.2 |
+| Health.HP | td_gdi_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | td_gdi_advancedcommunicationscenter | 1000000 | 60000 | 15.9 |
+| Health.HP | td_nod_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | td_nod_templeofnod | 1000000 | 60000 | 15.9 |
+| Health.HP | japan_japaneseconstructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | japan_japaneseshrine | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_missilesilo | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_ironcurtain | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_monstertank | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_allies_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_allies_chronosphere | 1000000 | 60000 | 15.9 |
+| Health.HP | TSGTCNST | 1000000 | 60000 | 15.9 |
+| Health.HP | cabal_core | 1000000 | 60000 | 15.9 |
+| Health.HP | cabal_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | cabal_avatar | 1000000 | 60000 | 15.9 |
 | Mobile.TurnSpeed | schwarzermond_hole_small | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | schwarzermond_hole | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
@@ -103,6 +103,7 @@ _none found_
 | Power.Amount | futuretech_hypercore | 750 | -40 | 17.8 |
 | Power.Amount | latinsyndicate_powerstation | 500 | -40 | 12.1 |
 | Power.Amount | C2KNUKE | 500 | -40 | 12.1 |
+| Power.Amount | scrin_fusion_reactor | 450 | -40 | 11.0 |
 | Power.Amount | protoss_starshipsovereign | -500 | -40 | 10.3 |
 | Power.Amount | terran_phobos | -500 | -40 | 10.3 |
 | Power.Amount | yuri_bioreactor | 400 | -40 | 9.9 |

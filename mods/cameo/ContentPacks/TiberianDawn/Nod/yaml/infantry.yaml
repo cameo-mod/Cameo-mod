@@ -378,8 +378,6 @@ td_nod_lasertrooper:
 	Armament@Garrison:
 		Name: garrisoned
 		Weapon: td_nod_lasertrooper_blackhandlaser
-	WithInfantryBody:
-		IdleSequences: idle1,idle2
 	AttackFrontal:
 		FacingTolerance: 0
 	WithSplitAttackPaletteInfantryBody:
@@ -430,8 +428,6 @@ td_nod_blackhandflamer:
 	Armament@Garrison:
 		Name: garrisoned
 		Weapon: td_nod_blackhandflamer_blackhandflamer
-	WithInfantryBody:
-		IdleSequences: idle1,idle2
 	AttackFrontal:
 		FacingTolerance: 0
 	WithSplitAttackPaletteInfantryBody:
@@ -488,8 +484,6 @@ td_nod_stealthsoldier:
 		Name: garrisoned
 		Weapon: td_nod_stealthsoldier_bhreddarts
 	-Targetable@ParachuteAir:
-	WithInfantryBody:
-		IdleSequences: idle1,idle2
 	AttackFrontal:
 		FacingTolerance: 0
 	WithSplitAttackPaletteInfantryBody:

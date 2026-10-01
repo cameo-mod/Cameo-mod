@@ -43,6 +43,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// told through <see cref="IBotUnitLeaseLost"/>; false when the unit is gone.
 		/// </summary>
 		bool Preempt(Actor actor, string owner, BotLeasePurpose purpose, int durationTicks);
+
+		/// <summary>
+		/// The negotiated handoff: atomically re-keys the unit's lease to `newOwner`, whoever currently holds it — one
+		/// module passing a unit to another it agreed to work with (e.g. an engineer run's passengers going to the
+		/// transport provider for the ride, so §19.6's order gate counts the rider orders as owned). Cooperation, not
+		/// an emergency: no <see cref="IBotUnitLeaseLost"/> fires and the takeover is not counted as a preempt.
+		/// False when the unit is gone.
+		/// </summary>
+		bool Transfer(Actor actor, string newOwner, BotLeasePurpose purpose, int durationTicks);
 	}
 
 	/// <summary>
@@ -71,5 +80,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public static bool IsClaimedByOther(IBotUnitLeases leases, Actor actor, string owner) =>
 			leases != null && leases.IsClaimedByOther(actor, owner);
+
+		/// <summary>Hand off through a possibly-absent service: without one, the transfer "succeeds" (the old behaviour).</summary>
+		public static bool Transfer(IBotUnitLeases leases, Actor actor, string newOwner, BotLeasePurpose purpose, int durationTicks) =>
+			leases == null || leases.Transfer(actor, newOwner, purpose, durationTicks);
 	}
 }

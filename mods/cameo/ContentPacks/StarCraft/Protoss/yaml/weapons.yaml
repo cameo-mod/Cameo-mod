@@ -85,20 +85,12 @@ PositronBounce1:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
 	Range: 2522
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 2
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 2
@@ -115,16 +107,11 @@ PositronBounce1:
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-	-Warhead@Bullet_Light:
-
 	Warhead@SmallArmsPercentage:
 		InvalidTargets: Air
 	Warhead@TankDestroyerCannonPercentage:
@@ -134,20 +121,12 @@ PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
 	Range: 1261
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
@@ -163,16 +142,11 @@ PositronBounce2:
 		InvalidTargets: Air
 		Damage: 1
 	-Warhead@shrapnel:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
-	-Warhead@Bullet_Light:
-
 	Warhead@SmallArmsPercentage:
 		InvalidTargets: Air
 	Warhead@TankDestroyerCannonPercentage:
@@ -202,27 +176,15 @@ InterceptorLauncher:
 		Inaccuracy: 0
 		CloseEnough: 822
 		AllowSnapping: true
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -1087,9 +1049,6 @@ CorsairFlash:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: sc_corsair_attack.aud
-	ValidTargets: Air
-	Range: 5500
-	ReloadDelay: 65
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -1114,7 +1073,6 @@ CorsairFlash:
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
 ^sc_protoss_corsair_emp:
 	Warhead@Effect: CreateEffect
 		Explosions: pulse_explosion_small
@@ -1445,9 +1403,6 @@ ScoutMG:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: blastgn2.aud
-	ValidTargets: Ground, Water
-	Range: 4500
-	ReloadDelay: 32
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -1464,7 +1419,6 @@ ScoutMG:
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
 ^sc_protoss_epigraphmg:
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_blast
@@ -1847,10 +1801,6 @@ ProtossWaveforceCannonChargedLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 		Inaccuracy: 100
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy: AreaDamage
 		Versus:
 			None: 79
@@ -2046,16 +1996,6 @@ ProtossWaveforceCannonDistortedBeam1:
 		Range: 1250
 		ValidTargets: Shielded
 	TargetActorCenter: false
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
@@ -2244,10 +2184,6 @@ ProtossWaveforceCannonDistortedBeam2:
 			Corrosion: 100
 		PercentageScale: 10000
 		PercentageSpread: 50
-	Warhead@Flame_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@Flame_Heavy:
 
 ProtossHeal:

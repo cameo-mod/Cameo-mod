@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **31** — L1 leaks: **6**, L3 concrete-inherit leaks: **0**, shared/unattributed buildables: **91**
+Factions checked: **32** — L1 leaks: **5**, L3 concrete-inherit leaks: **0**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -12,7 +12,6 @@ Factions checked: **31** — L1 leaks: **6**, L3 concrete-inherit leaks: **0**, 
 | latinsyndicate | asianalliance_ptnk | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
 | latinsyndicate | naxis_tiger | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | latinsyndicate | naxis_wirbelwind | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
-| harkonnen | ordos_upgrade_lightfactory | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml |
 
 
 ## L3 — buildable inherits concrete actor owned by another faction

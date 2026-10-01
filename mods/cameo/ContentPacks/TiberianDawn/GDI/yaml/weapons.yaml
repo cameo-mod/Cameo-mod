@@ -146,34 +146,15 @@ APCGun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
-	ValidTargets: Ground, Water
-	ReloadDelay: 10
-	Range: 5668
 	Report: gun20.aud
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
-	TargetActorCenter: true
-
 td_gdi_apc_apcgun_AA:
 	Inherits: APCGun
 	Range: 8502
 	ValidTargets: Air
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Air
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
@@ -185,9 +166,6 @@ td_gdi_boxer_boxercannonag:
 	ReloadDelay: 11
 	Range: 4860
 	#Report: gun13.aud
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -228,9 +206,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 7
 			SubmarineLight: 4
 			SubmarineHeavy: 2
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -271,12 +246,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 8
 			SubmarineLight: 12
 			SubmarineHeavy: 14
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -318,9 +287,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -361,9 +327,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 17
 			SubmarineLight: 15
 			SubmarineHeavy: 13
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -404,9 +367,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 11
 			SubmarineLight: 8
 			SubmarineHeavy: 6
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Ground, Water
@@ -447,13 +407,6 @@ td_gdi_boxer_boxercannonag:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@LightMissile:
-	-Warhead@MediumCannon:
-	-Warhead@SmallArms:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -513,12 +466,8 @@ td_gdi_boxer_boxercannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Air
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		PercentageDenominator: 200
-		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		PercentageDenominator: 200
@@ -531,15 +480,10 @@ td_gdi_boxer_boxercannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Air
 	-Warhead@Bullet_Medium_Flat:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@LightMissile:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
@@ -563,9 +507,6 @@ td_gdi_skyshield_skyshieldcannon:
 	ReloadDelay: 11
 	Range: 13800
 	#Report: gun13.aud
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Air
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
@@ -605,9 +546,6 @@ td_gdi_skyshield_skyshieldcannon:
 			AntiAirShip: 7
 			SubmarineLight: 4
 			SubmarineHeavy: 2
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
@@ -647,9 +585,6 @@ td_gdi_skyshield_skyshieldcannon:
 			AntiAirShip: 8
 			SubmarineLight: 12
 			SubmarineHeavy: 14
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Air
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
@@ -689,9 +624,6 @@ td_gdi_skyshield_skyshieldcannon:
 			AntiAirShip: 11
 			SubmarineLight: 8
 			SubmarineHeavy: 6
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
@@ -731,10 +663,6 @@ td_gdi_skyshield_skyshieldcannon:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	-Warhead@SmallArms:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LightMissile:
 	Warhead@Flak_Heavy:
 		ValidTargets: Air
 		Damage: 8000
@@ -800,13 +728,8 @@ td_gdi_archerartillery_archerartilleryshell:
 		ContrailEndColor: FF884422
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 14000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 14000
-
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 7
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -845,31 +768,17 @@ td_gdi_archerartillery_archerartilleryshell:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 14000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 7
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 14000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 7000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 14000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 7
 	-Warhead@Effect:
 
 	-Warhead@MediumCannon:
-	-Warhead@HeavyCannon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
@@ -1041,9 +950,6 @@ td_gdi_orca_orcamissiles:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5442
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1082,9 +988,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 22
 			SubmarineLight: 20
 			SubmarineHeavy: 18
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1124,12 +1027,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1170,12 +1067,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1216,9 +1107,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1258,9 +1146,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 17
 			SubmarineLight: 21
 			SubmarineHeavy: 23
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1300,15 +1185,6 @@ td_gdi_orca_orcamissiles:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	-Warhead@HeavyCannon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumMissile:
-
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 		Acceleration: 3
@@ -1641,9 +1517,6 @@ Napalm:
 	Projectile: GravityBomb
 		Image: BOMBLET
 		Shadow: true
-	Warhead@Demolition_Heavy:
-		Damage: 6000
-	-Warhead@Demolition_Heavy:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -1677,9 +1550,6 @@ NapalmA10Carrier:
 	Projectile: GravityBomb
 		Image: BOMBLET
 		Shadow: true
-	Warhead@Demolition_Heavy:
-		Damage: 4000
-	-Warhead@Demolition_Heavy:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1759,10 +1629,6 @@ td_gdi_advancedguardtower_towermissile:
 		Speed: 500
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1803,14 +1669,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1852,14 +1710,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1901,10 +1751,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1945,10 +1791,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1989,10 +1831,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 13
 			SubmarineLight: 17
 			SubmarineHeavy: 18
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -2033,10 +1871,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 17
 			SubmarineLight: 21
 			SubmarineHeavy: 23
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -2077,15 +1911,6 @@ td_gdi_advancedguardtower_towermissile:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	-Warhead@TankDestroyerCannon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@HeavyAAWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumMissile:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2450,9 +2275,6 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 		RangeLimit: 30000
 		Shadow: true
 		VerticalRateOfTurn: 20
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2492,12 +2314,6 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2540,12 +2356,6 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 			AntiAirShip: 7
 			SubmarineLight: 11
 			SubmarineHeavy: 13
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2586,15 +2396,9 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2634,13 +2438,8 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 			AntiAirShip: 17
 			SubmarineLight: 21
 			SubmarineHeavy: 23
-	-Warhead@TankDestroyerCannon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
-	-Warhead@HeavyMissile:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 51000
@@ -3054,8 +2853,6 @@ td_gdi_heavysniper_rifle:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 0
-	Warhead@SniperFlak:
-		Damage: 8000
 	Warhead@SniperGrenadeFriendlyFire: AreaDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Air
@@ -3102,7 +2899,6 @@ td_gdi_heavysniper_rifle:
 			SubmarineHeavy: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	-Warhead@SniperFlak:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@ShieldHit:
@@ -3406,10 +3202,6 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		Range: 1250
 		ValidTargets: Shielded
 	Report: bazook1.aud
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 16000
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileHE_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3967,22 +3759,14 @@ td_gdi_officer_machinegun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 4
-	Range: 5596
 	Report: mgun11.aud
-	Warhead@Bullet_Medium:
-		PercentageScale: 2500
-		Damage: 8000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
 		Damage: 17280
 		PercentageScale: 625
-	TargetActorCenter: true
 td_gdi_officer_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -4817,10 +4601,6 @@ td_gdi_havoc_rocket:
 		ContrailStartColor: 5500ff
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
-	Warhead@MissileHE_Medium:
-		ValidTargets: Ground, Air, Water
-		Damage: 40000
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -5110,35 +4890,15 @@ td_gdi_firehawk_firehawkbomb:
 		Acceleration: 0, 0, -10
 		Image: MISSILE
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 10000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 5
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 10000
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 5
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 5
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Ship
-		Damage: 10000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 5
@@ -5341,19 +5101,13 @@ td_gdi_shotgunner_shotgun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ReloadDelay: 70
-	Range: 3500
 	Burst: 5
 	BurstDelays: 0
-	ValidTargets: Ground, Water
 	Report: DSDSHTGN.wav
 	SoundVolume: 0.2
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 800
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -5362,7 +5116,6 @@ td_gdi_shotgunner_shotgun:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	TargetActorCenter: true
 td_gdi_grenadier_grenade:
 	Inherits@w71: ^Warhead_Demolition_Light
 	Inherits@w72: ^Projectile_Grenade_Light

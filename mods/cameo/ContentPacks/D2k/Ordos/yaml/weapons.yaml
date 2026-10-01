@@ -227,15 +227,6 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 30000
-	Warhead@CannonAP_Light:
-		Damage: 30000
-	Warhead@Concussion_Medium:
-		Damage: 30000
-	Warhead@Demolition_Light:
-		Damage: 30000
 	Warhead@Collapsed120mm_cobraCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -408,10 +399,6 @@ HeavyOrdosCombatTankRockets:
 			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -1448,10 +1435,6 @@ eye_bomberguy:
 		Image: ordos_eye_bombs
 		Palette: d2keffect
 		Blockable: false
-	Warhead@Grenade: SpreadDamage
-		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1492,11 +1475,6 @@ eye_bomberguy:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -1539,32 +1517,16 @@ eye_bomberguy:
 			AntiAirShip: 12
 			SubmarineLight: 15
 			SubmarineHeavy: 17
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 20000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 10
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
@@ -1589,19 +1551,8 @@ D2K_155mm_turret:
 	Warhead@Effect1:  # W7MAT order-pin
 	Warhead@Effect2:  # W7MAT order-pin
 	Inherits@fx: ^d2k_ordos_d2k_155mm_turret
-	ReloadDelay: 74
-	Range: 10000
 	Projectile: Bullet
 		Speed: 228
-	Warhead@Demolition_Light:
-		Damage: 12000
-	Warhead@Concussion_Medium:
-		Damage: 12000
-	Warhead@Demolition_Heavy:
-		Damage: 12000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 12000
 	Warhead@CollapsedD2K_155mm_turretCannonHE_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1774,10 +1725,6 @@ D2K_155mm_turret:
 			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@CannonHE_Medium:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
@@ -1800,9 +1747,6 @@ Dune_SiegeMortar:
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MORTAR1.WAV  # W7MAT order-pin
 	MinRange: 1985  # W7MAT order-pin
-	ReloadDelay: 80
-	Range: 9920
-	TargetActorCenter: true
 	Projectile: Bullet
 		LaunchAngle: 125
 		ContrailLength: 30
@@ -1811,15 +1755,6 @@ Dune_SiegeMortar:
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
 		InaccuracyType: PerCellIncrement
-	Warhead@Concussion_Medium:
-		Damage: 10000
-	Warhead@Demolition_Light:
-		Damage: 10000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 10000
-	Warhead@CannonAP_Light:
-		Damage: 10000
 	Warhead@CollapsedDune_SiegeMortarCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1992,10 +1927,6 @@ Dune_SiegeMortar:
 			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -2068,8 +1999,6 @@ D2K_APC_Rocket:
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K_Rocket  # W7MAT covering-edge
 	Report: ROCKET1.WAV  # W7MAT w8-repin
-	ReloadDelay: 42
-	Range: 6500
 	Projectile: Missile
 		Acceleration: 6
 		Speed: 666
@@ -2077,9 +2006,6 @@ D2K_APC_Rocket:
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 12
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2209,7 +2135,6 @@ D2K_APC_Rocket:
 			SubmarineHeavy: 17
 		Falloff: 100, 50
 		Range: 0, 32
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -2483,9 +2408,6 @@ DeviatorMissile:
 		TrailImage: deviator_trail
 		TrailPalette: deviatorgas
 		TrailUsePlayerPalette: true
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@MissileAP_Heavy:
 		PercentageScale: 4998
 		ValidTargets: Ground, Water, Air
@@ -3079,12 +3001,6 @@ Laboratory_Bioball:
 		ContrailStartWidth: 52
 		ContrailEndWidth: 13
 	Inherits@fx: ^d2k_ordos_laboratory_bioball
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 8
-		Range: 1250
-		ValidTargets: Shielded
-		InvalidTargets: Air
 	-Warhead@Smudge:
 	-Warhead@RA2Scorch:
 	-Warhead@Effect:
@@ -3717,8 +3633,6 @@ d2kChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Laser_Heavy:
-		Damage: 4000
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -3732,21 +3646,13 @@ HMGstealth:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ordos_bullet_medium
-	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 2
-	Range: 4857
 	StartBurstReport: hmgo1.wav, hmgo2.wav
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	TargetActorCenter: true
 autogun_tank:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -3996,7 +3902,7 @@ ordos_airmine:
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
 	MinRange: 410  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT order-pin
+	Report: ROCKET1.WAV
 	Warhead@DuneRock:  # W7MAT order-pin
 	Warhead@DuneSand:  # W7MAT order-pin
 	Warhead@RA2Crater:  # W7MAT order-pin
@@ -4014,7 +3920,6 @@ ordos_airmine:
 	Warhead@MediumMissilePercentage:  # W7MAT order-pin
 	Warhead@HeavyBombPercentage:  # W7MAT order-pin
 	Warhead@Shrapnel:  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT w8-repin
 	Inherits: ^d2k_ordos_ordos_airmine
 	ReloadDelay: 132
 	Range: 2048
@@ -4040,11 +3945,6 @@ ordos_airmine:
 		ContrailStartColor: FF884400
 		ContrailStartWidth: 50
 		ContrailZOffset: 4000
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4085,13 +3985,6 @@ ordos_airmine:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4135,11 +4028,6 @@ ordos_airmine:
 			AntiAirShip: 7
 			SubmarineLight: 11
 			SubmarineHeavy: 13
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4180,11 +4068,6 @@ ordos_airmine:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4225,11 +4108,6 @@ ordos_airmine:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4271,21 +4149,12 @@ ordos_airmine:
 			AntiAirShip: 20
 			SubmarineLight: 17
 			SubmarineHeavy: 16
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Shrapnel: FireShrapnel
 		ValidTargets: Ground, Water, Air
 		Weapon: PhoenixRocketShrapnel
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	-Warhead@TankDestroyerCannon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyBomb:
 	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 22000
@@ -4603,8 +4472,6 @@ d2kCarryallChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Laser_Heavy:
-		Damage: 2000
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -4690,10 +4557,6 @@ LMG_ordos_upgrade:
 		Width: 40
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -4718,22 +4581,6 @@ light_inf_lmg_ordos_upgrade:
 		Width: 40
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Laser_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
-	Warhead@Bullet_Light_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
-	-Warhead@Bullet_Light_Flat:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
@@ -4823,25 +4670,23 @@ D2K_alshabah_autocannon:
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
 	Report: MEDTANK1.WAV  # W7MAT w8-repin
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
-		PercentageScale: 2500
-	Range: 5555
-	ReloadDelay: 15
 	Warhead@CannonHE_Medium:
+		PercentageScale: 2500
 		Damage: 11333
 
+	Range: 5555
+	ReloadDelay: 15
 Emperor_Sardaukar_E:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2500
+		Damage: 17000
+
 	ReloadDelay: 60
 	Report: d2k_ordos_sounds|d2k_gauss.wav
 	Range: 6000
-	Warhead@CannonHE_Medium:
-		Damage: 17000
-
 PlasBullet:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
 	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
@@ -4891,15 +4736,6 @@ d2k_tyrant:
 	MinRange: 1230  # W7MAT order-pin
 	Report: d2k_ordos_sounds|tyrantshot.wav  # W7MAT order-pin
 	Burst: 1  # W7MAT order-pin
-	Warhead@1Dam:  # W7MAT order-pin
-	ReloadDelay: 130
-	Range: 6144
-	ValidTargets: Ground
-	Projectile: Missile
-		RangeLimit: 6c512
-		Speed: 400
-		LockOnProbability: 0
-		HorizontalRateOfTurn: 20
 	Warhead@1Dam: SpreadDamage
 		Damage: 27500
 		ValidTargets: Ground
@@ -4917,6 +4753,14 @@ d2k_tyrant:
 			AntiAirShip: 65
 			SubmarineLight: 77
 
+	ReloadDelay: 130
+	Range: 6144
+	ValidTargets: Ground
+	Projectile: Missile
+		RangeLimit: 6c512
+		Speed: 400
+		LockOnProbability: 0
+		HorizontalRateOfTurn: 20
 Rocket_stealth:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
@@ -5100,15 +4944,14 @@ d2k25mm:
 	Inherits@w81: ^Warhead_CannonHE_Medium  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Shell_Medium_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_CannonHE_Medium_D2K  # W7MAT covering-edge
-	Warhead@CannonHE_Medium:  # W7MAT w8-repin
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2500
+		Damage: 10000
+
 	Report: TURRET1.WAV
 	ReloadDelay: 30
 	Range: 3328
 	InvalidTargets: Air
-	Warhead@CannonHE_Medium:
-		Damage: 10000
-
 HMG_tleilaxu:
 	Inherits@w71: ^Warhead_Bullet_Medium
 	Inherits@w72: ^Projectile_Bullet_Light

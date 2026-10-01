@@ -48,7 +48,7 @@
 | weapons/valentine.yaml | 21 | 0 | 21 |  |
 | weapons/warcraft1.yaml | 27 | 0 | 27 |  |
 | weapons/warcraft2.yaml | 26 | 24 | 2 | GLOBAL:warcraft2, RedAlert2Mod/Naxis, Warcraft2/Humans, Warcraft2/Orcs |
-| weapons/weapons.yaml | 474 | 61 | 413 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
+| weapons/weapons.yaml | 525 | 61 | 464 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
 | weapons/wh40k.yaml | 95 | 0 | 95 |  |
 | weapons/win98.yaml | 7 | 0 | 7 |  |
 | weapons/worms.yaml | 23 | 1 | 22 | GLOBAL:outpost2, RedAlert/Soviets, RedAlert2/Allies, RedAlert2/Shared, RedAlert2Mod/AsianAlliance, RedAlert2Mod/FutureTech… |
@@ -63,7 +63,7 @@
 | sequences/challenge.yaml | 15 | 0 | 15 |  |
 | sequences/civilian.yaml | 17 | 0 | 17 |  |
 | sequences/classicdoom.yaml | 46 | 0 | 46 |  |
-| sequences/d2k.yaml | 176 | 50 | 126 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
+| sequences/d2k.yaml | 150 | 27 | 123 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared |
 | sequences/darkreign.yaml | 245 | 1 | 244 | GLOBAL:weapons |
 | sequences/decorations.yaml | 431 | 22 | 409 | GLOBAL:misc, GLOBAL:trees |
 | sequences/dune2.yaml | 40 | 1 | 39 | RedAlert2/Allies, RedAlert2Mod/AsianAlliance |

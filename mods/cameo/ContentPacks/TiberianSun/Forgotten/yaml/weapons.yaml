@@ -57,18 +57,10 @@ TS70mmTur:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@CannonAP_Light:
-		Damage: 4000
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
-	ValidTargets: Ground, Water
-	TargetActorCenter: true
 TS70mmTurChem:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -388,18 +380,10 @@ TSScoopDualTur:
 	Range: 6404
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonHE_Heavy:
-		Damage: 16000
-	Warhead@Concussion_Medium:
-		Damage: 16000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
 	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
-	ValidTargets: Ground, Water
-	TargetActorCenter: true
 TSScoopDualTurChem:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1032,8 +1016,6 @@ TSInfantryMortarChem:
 	Report: flamer2.aud
 	Range: 10830
 	ReloadDelay: 88
-	Warhead@Chemical_Medium:
-		Damage: 16000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -1175,7 +1157,6 @@ TSInfantryMortarChem:
 			SubmarineHeavy: 16
 		Falloff: 100, 45, 18
 		Range: 0, 466, 932
-	-Warhead@Chemical_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	Warhead@Chemical_Medium_Flat:
@@ -1192,9 +1173,6 @@ TS120mmxChem:
 	Burst: 2
 	BurstDelays: 4
 	Report: tnkfire4.aud
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 40000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
 		Duration: 50
@@ -1205,7 +1183,6 @@ TS120mmxChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@Demolition_Heavy:
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -1764,14 +1741,6 @@ TSRuinerMissile:
 	Range: 5919
 	ReloadDelay: 50
 	Report: misl1.aud
-	Warhead@Demolition_Light:
-		Damage: 18000
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Medium:
-		Damage: 18000
-		ValidTargets: Ground, Water, Air
-	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Medium:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 	Warhead@MissileAP_Medium: AreaDamage
@@ -2117,25 +2086,13 @@ TSAdatsMissile:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
-	Range: 5606
 	Burst: 4
 	BurstDelays: 2
-	ReloadDelay: 54
 	Report: misl1.aud
-	ValidTargets: Ground, Water
-	Warhead@Flak_Medium:
-		Damage: 4000
-		ValidTargets: Ground, Water
-	Warhead@MissileHE_Light:
-		Damage: 4000
-		ValidTargets: Ground, Water
-	-Warhead@Flak_Medium:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_Light_Flat:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Ground, Water
-	TargetActorCenter: true
 ^ts_forgotten_tsadatsmissile_aa:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
@@ -2262,13 +2219,6 @@ MutFlamerChem:
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 28000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 14
 		PhysicalStateName: Temperature
@@ -2311,11 +2261,6 @@ MutFlamerChem:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 10
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 14000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -2369,8 +2314,6 @@ MutFlamerChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water
 		Damage: 42000
@@ -2506,13 +2449,6 @@ MutHFlamerChem:
 	ReloadDelay: 65
 	Range: 2425
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		PhysicalStateName: Temperature
@@ -2555,13 +2491,6 @@ MutHFlamerChem:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 10
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		PhysicalStateName: Temperature
@@ -2605,11 +2534,6 @@ MutHFlamerChem:
 			AntiAirShip: 18
 			SubmarineLight: 16
 			SubmarineHeavy: 15
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -2652,11 +2576,6 @@ MutHFlamerChem:
 			AntiAirShip: 12
 			SubmarineLight: 15
 			SubmarineHeavy: 17
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -2710,10 +2629,6 @@ MutHFlamerChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -3799,8 +3714,6 @@ TSMutShotgun:
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
 		Damage: 24000
-	Warhead@ShotgunGrenadeEnemy:
-		Damage: 4000
 	Warhead@ShotgunGrenadeAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
@@ -3895,8 +3808,6 @@ TSMutShotgun:
 			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	-Warhead@ShotgunGrenadeEnemy:
-
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 4
@@ -4132,13 +4043,7 @@ TSMutVulcanTurret:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ValidTargets: Ground, Water
-	ReloadDelay: 6
-	Range: 6272
 	Report: tsgun4.aud
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4146,7 +4051,6 @@ TSMutVulcanTurret:
 		PercentageScale: 9975
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	TargetActorCenter: true
 TSRaiderCarCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -4167,18 +4071,11 @@ TSBowlerCannon:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ValidTargets: Ground, Water, Air
-	ReloadDelay: 5
-	Range: 6603
 	Report: chaingn1.aud
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	TargetActorCenter: true
 TSWaspClaw:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -4203,8 +4100,6 @@ TSMutApcCannon:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
-	ReloadDelay: 12
-	Range: 6147
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Flat:
@@ -4212,7 +4107,6 @@ TSMutApcCannon:
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
 TSNomadGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -4313,20 +4207,11 @@ TSSergGun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ReloadDelay: 8
-	Range: 5611
 	Report: cygun1.aud
-	Warhead@Bullet_Medium:
-		PercentageScale: 2500
-		Damage: 16000
-		ValidTargets: Ground, Water
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 2494
-	ValidTargets: Ground, Water, Air
-	TargetActorCenter: true
 forgotten_mutantsoldier_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
