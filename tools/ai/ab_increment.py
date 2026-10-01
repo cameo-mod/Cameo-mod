@@ -163,6 +163,12 @@ class Shard:
     returncode: int | None = None
     early_stopped: bool = False
     log_handle: object = None
+    attempt: int = 1           # relaunches go to <support>_rN; results pool across dirs
+    dirs: list[pathlib.Path] = None
+
+    def __post_init__(self):
+        if self.dirs is None:
+            self.dirs = [self.support]
 
 
 def build_plan(args: argparse.Namespace) -> tuple[list[Arm], list[Shard], list[Shard]]:
@@ -306,22 +312,23 @@ def shard_progress(shard: Shard, bot_a: str) -> tuple[int, int]:
     """(matches consumed, bot_a wins) from the shard's batch_results.jsonl. Every row
     is one matchup the batch will not revisit — retries collapse into the single row
     the batch appends per matchup, and drift tombstones still burned the slot."""
-    path = shard.support / BATCH_RESULTS
     played = won = 0
-    if not path.is_file():
-        return played, won
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        if not line.strip():
+    for d in shard.dirs:
+        path = d / BATCH_RESULTS
+        if not path.is_file():
             continue
-        try:
-            row = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        played += 1
-        for bo in row.get("bot_outcomes") or []:
-            if bo.get("bot_type") == bot_a and bo.get("outcome") == "won":
-                won += 1
-                break
+        for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            played += 1
+            for bo in row.get("bot_outcomes") or []:
+                if bo.get("bot_type") == bot_a and bo.get("outcome") == "won":
+                    won += 1
+                    break
     return played, won
 
 
@@ -333,6 +340,15 @@ def shard_remaining(shard: Shard) -> int:
         return 0
     played, _ = shard_progress(shard, bot_a="")
     return max(0, shard.planned - played)
+
+
+def shard_needs_retry(shard: Shard, played: int, shard_retries: int) -> bool:
+    """A full shard whose driver exited before its plan played out gets relaunched
+    into a fresh <support>_rN dir (results pool across dirs) until the retry budget
+    is spent. Early-stopped shards never retry — that stop was deliberate; smoke
+    shards never retry (a dead smoke aborts the arm loudly)."""
+    return (shard.kind == "full" and not shard.early_stopped
+            and played < shard.planned and shard.attempt <= shard_retries)
 
 
 def arm_tally(arm: str, shards: list[Shard], bot_a: str) -> dict:
@@ -552,9 +568,27 @@ def drive(shards: list[Shard], args: argparse.Namespace,
                 s.returncode = s.proc.returncode
                 if s.log_handle:
                     s.log_handle.close()
+                    s.log_handle = None
                 running.remove(s)
-                print(f"[done] {s.label} exit={s.returncode} "
-                      f"({'early-stopped' if s.early_stopped else 'finished'})", flush=True)
+                played, _ = shard_progress(s, args.bot_a)
+                tail = 'early-stopped' if s.early_stopped else 'finished'
+                if shard_needs_retry(s, played, args.shard_retries):
+                    # Driver died short of its plan — relaunch the remainder into a
+                    # fresh _rN dir (results pool across dirs; matches Claude's
+                    # supervisor semantics, minus re-playing finished matchups).
+                    s.attempt += 1
+                    s.support = s.dirs[0].parent / f"{s.dirs[0].name}_r{s.attempt}"
+                    s.dirs.append(s.support)
+                    remaining = s.planned - played
+                    s.argv = shard_argv(s.cwd, faction=s.faction, support=s.support,
+                                        repeats=remaining, bot_a=args.bot_a,
+                                        bot_b=args.bot_b, time_limit=args.time_limit,
+                                        stall_timeout=args.stall_timeout)
+                    s.done = False
+                    s.returncode = None
+                    pending.append(s)
+                    tail = f'retrying ({played}/{s.planned} played, attempt {s.attempt})'
+                print(f"[done] {s.label} exit={s.returncode} ({tail})", flush=True)
         if stop_ctx is not None and time.monotonic() - last_eval >= args.poll_seconds:
             last_eval = time.monotonic()
             arms, all_shards, decided = stop_ctx
@@ -636,9 +670,11 @@ def arm_stats(records) -> dict:
 def shard_fingerprints(shard: Shard) -> list[str]:
     """Distinct fingerprint ids in one shard's batch_results.jsonl — one expected
     per shard (the batch aborts on drift); drift tombstones still count as sightings."""
-    path = shard.support / BATCH_RESULTS
     fps: set[str] = set()
-    if path.is_file():
+    for d in shard.dirs:
+        path = d / BATCH_RESULTS
+        if not path.is_file():
+            continue
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
             if not line.strip():
                 continue
@@ -671,7 +707,7 @@ def summarize(out: pathlib.Path, arms: list[Arm], shards: list[Shard],
     worst = 0
     for arm in arms:
         arm_shards = [s for s in shards if s.arm == arm.name]
-        dirs = [s.support for s in arm_shards]
+        dirs = [d for s in arm_shards for d in s.dirs]
         print(f"\n===== arm {arm.name} ({arm.commit[:12] if arm.commit else '?'}, "
               f"groups={arm.groups or '-'}) =====", flush=True)
         rc = None
@@ -699,7 +735,8 @@ def summarize(out: pathlib.Path, arms: list[Arm], shards: list[Shard],
             "shards": {
                 s.label: {
                     "faction": s.faction,
-                    "support": str(s.support),
+                    "support": [str(d) for d in s.dirs],
+                    "attempts": s.attempt,
                     "returncode": s.returncode,
                     "early_stopped": s.early_stopped,
                     "played": shard_progress(s, args.bot_a)[0],
@@ -762,6 +799,10 @@ def build_parser() -> argparse.ArgumentParser:
                         choices=sorted({0, 1, 2, 3, 4, 6, 9}))
     parser.add_argument("--stall-timeout", type=int, default=400,
                         help="forwarded to run_ai_match_batch (default: 400)")
+    parser.add_argument("--shard-retries", type=int, default=2,
+                        help="relaunch a full shard whose driver exits before its plan "
+                             "is played out, into a fresh <support>_rN dir; results pool "
+                             "across dirs (default: 2, matching supervisor rounds)")
     parser.add_argument("--max-instances", type=int, default=3,
                         help="machine-wide OpenRA.exe cap, ours + foreign "
                              "(default: 3 — maintainer ruling 2026-10-01)")

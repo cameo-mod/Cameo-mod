@@ -153,6 +153,54 @@ class EarlyStopTests(unittest.TestCase):
             self.assertEqual(tally["remaining"], 6)
 
 
+class ShardRetryTests(unittest.TestCase):
+    def _shard(self, td, rows_per_dir):
+        base = pathlib.Path(td)
+        dirs = []
+        for i, rows in enumerate(rows_per_dir):
+            d = base / ("ctrl_td_gdi" if i == 0 else f"ctrl_td_gdi_r{i + 1}")
+            d.mkdir(parents=True)
+            (d / "batch_results.jsonl").write_text(
+                "".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+            dirs.append(d)
+        s = ab_increment.Shard("ctrl", "td_gdi", "full", 8, dirs[0], [], base, "ctrl_td_gdi")
+        s.dirs = dirs
+        s.attempt = len(dirs)
+        s.done = True
+        return s
+
+    def test_progress_pools_retry_dirs(self):
+        with tempfile.TemporaryDirectory() as td:
+            row = {"bot_outcomes": [{"bot_type": "hard", "outcome": "won"},
+                                    {"bot_type": "classic", "outcome": "lost"}]}
+            s = self._shard(td, [[row] * 5, [row] * 3])
+            self.assertEqual(ab_increment.shard_progress(s, "hard"), (8, 8))
+
+    def test_fingerprints_pool_retry_dirs(self):
+        with tempfile.TemporaryDirectory() as td:
+            s = self._shard(td, [[{"fingerprint": "fp-a"}], [{"fingerprint": "fp-a"}]])
+            self.assertEqual(ab_increment.shard_fingerprints(s), ["fp-a"])
+            # Drift between rounds still surfaces as two sightings.
+            (s.dirs[1] / "batch_results.jsonl").write_text(
+                json.dumps({"fingerprint": "fp-b"}) + "\n", encoding="utf-8")
+            self.assertEqual(ab_increment.shard_fingerprints(s), ["fp-a", "fp-b"])
+
+    def test_retry_predicate(self):
+        with tempfile.TemporaryDirectory() as td:
+            row = {"bot_outcomes": []}
+            s = self._shard(td, [[row] * 5])
+            self.assertTrue(ab_increment.shard_needs_retry(s, 5, 2))    # 5 < 8, attempt 1
+            self.assertFalse(ab_increment.shard_needs_retry(s, 8, 2))   # plan complete
+            s.attempt = 3
+            self.assertFalse(ab_increment.shard_needs_retry(s, 5, 2))   # budget spent
+            s.attempt = 1
+            s.early_stopped = True
+            self.assertFalse(ab_increment.shard_needs_retry(s, 5, 2))   # deliberate stop
+            s.early_stopped = False
+            s.kind = "smoke"
+            self.assertFalse(ab_increment.shard_needs_retry(s, 0, 2))   # smoke aborts loudly
+
+
 class TasklistParseTests(unittest.TestCase):
     def test_counts_only_openra_rows(self):
         out = (
