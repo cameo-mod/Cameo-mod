@@ -415,6 +415,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
 		public readonly int ArtilleryHangBackCells = 8;
 
+		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset scales by the",
+			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
+			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
+		public readonly bool UseUtilityAxes = false;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -537,6 +542,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 		IBotProtectionRequestProvider[] protectionRequestProviders;
 		IBotRequestUnitProduction[] unitRequesters;
+		IBotUtilityAxes[] utilityAxesProviders;
 		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
@@ -1184,6 +1190,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
+			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -1992,7 +1999,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (--minAttackForceDelayTicks <= 0)
 			{
-				minAttackForceDelayTicks = Info.MinimumAttackForceDelay;
+				// UT-1: with UseUtilityAxes on, the delay reset scales by the TurtleRush
+				// axis; flag off is byte-identical, and so is an absent provider
+				// (the axis reads neutral 50 -> x1.0).
+				minAttackForceDelayTicks = MinAttackDelayResetTicks(Info, utilityAxesProviders);
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				CreateAttackForce(bot);
 			}
@@ -2043,6 +2053,26 @@ namespace OpenRA.Mods.CA.Traits
 
 			var t = Math.Min(1.0, (double)tick / info.GuerrillaSquadRampTicks);
 			return early + (int)Math.Round((info.MaxGuerrillaSquadsLate - early) * t);
+		}
+
+		// UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset in percent of the
+		// yaml value, piecewise-linear on the TurtleRush axis — 100 (Rush) -> 60, 50 -> 100,
+		// 0 (Turtle) -> 150. Axis input is clamped to [0,100].
+		public static int UtilityAttackDelayPercent(int turtleRushAxis)
+		{
+			var axis = Math.Clamp(turtleRushAxis, 0, 100);
+			return axis >= 50 ? 100 - (axis - 50) * 40 / 50 : 150 - axis;
+		}
+
+		/// <summary>The MinimumAttackForceDelay reset: the plain yaml value unless UseUtilityAxes
+		/// is on, in which case it scales by the first enabled provider's TurtleRush axis.</summary>
+		public static int MinAttackDelayResetTicks(SquadManagerBotModuleCAInfo info, IBotUtilityAxes[] providers)
+		{
+			if (!info.UseUtilityAxes)
+				return info.MinimumAttackForceDelay;
+
+			var axis = providers?.FirstEnabledTraitOrDefault()?.UtilityTurtleRush ?? IBotUtilityAxes.Neutral;
+			return info.MinimumAttackForceDelay * UtilityAttackDelayPercent(axis) / 100;
 		}
 
 		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
