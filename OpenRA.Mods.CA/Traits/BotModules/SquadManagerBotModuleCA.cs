@@ -2033,7 +2033,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (open != null)
 				return open;
 
-			return guerrillas.Count < GuerrillaSquadCap(Info, World.WorldTick) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
+			return guerrillas.Count < GuerrillaSquadCap(Info, World.WorldTick, utilityAxesProviders) ? RegisterNewSquad(bot, SquadCAType.Guerrilla) : null;
 		}
 
 		// 12.4a: one fire-support squad is enough - the role's members plus their tank
@@ -2053,6 +2053,19 @@ namespace OpenRA.Mods.CA.Traits
 
 			var t = Math.Min(1.0, (double)tick / info.GuerrillaSquadRampTicks);
 			return early + (int)Math.Round((info.MaxGuerrillaSquadsLate - early) * t);
+		}
+
+		// UT-2: the time-ramped cap above scales by the Steamroller<->Guerrilla utility axis —
+		// 100 (Guerrilla) x1.5, 50 x1.0, 0 (Steamroller) x0.5 — same lean shape as the attack
+		// delay. UseUtilityAxes off or no provider: the yaml ramp unchanged.
+		public static int GuerrillaSquadCap(SquadManagerBotModuleCAInfo info, int tick, IBotUtilityAxes[] providers)
+		{
+			var cap = GuerrillaSquadCap(info, tick);
+			if (!info.UseUtilityAxes)
+				return cap;
+
+			var axis = providers?.FirstEnabledTraitOrDefault()?.UtilitySteamrollerGuerrilla ?? IBotUtilityAxes.Neutral;
+			return (int)Math.Round(cap * (50 + axis) / 100.0);
 		}
 
 		// UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset in percent of the

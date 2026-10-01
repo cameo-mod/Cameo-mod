@@ -2273,6 +2273,8 @@ term dominates; the term units sit in `BotUtilityAxes.cs`.
 - **First consumer, flag-gated:** `SquadManagerBotModuleCAInfo.UseUtilityAxes` (default
   false) scales the `minAttackForceDelayTicks` reset by TurtleRush — Rush 100 → x0.6,
   50 → x1.0, Turtle 0 → x1.5. Flag off is byte-identical; `@classic` never arms it.
+- **Second consumer (UT-2):** under the same flag the time-ramped guerrilla-squad cap
+  scales by SteamrollerGuerrilla — Guerrilla 100 → x1.5, 50 → x1.0, Steamroller 0 → x0.5.
 - **Arm:** switch group `M_utility_axes` (explicit `@`-keys on the six genericbot
   personality instances; K and L remain reserved for DAWN).
 - Rest points per personality live on `MasterAiBotModule` in ai.yaml (`Utility*Rest`

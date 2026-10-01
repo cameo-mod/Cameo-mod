@@ -1,3 +1,13 @@
+# 2026-10-01 — Devin (NOVA): UT-2 — Steamroller↔Guerrilla axis drives the guerrilla-squad cap
+
+- `SquadManagerBotModuleCA.GuerrillaSquadCap(info, tick, providers)`: under
+  `UseUtilityAxes` the time-ramped cap scales by the master's
+  SteamrollerGuerrilla axis — Guerrilla 100 → ×1.5, neutral ×1.0, Steamroller 0
+  → ×0.5 (same lean envelope as UT-1's attack-delay scale). Flag off or no
+  provider → the yaml ramp byte-identical.
+- Rides switch group `M_utility_axes` (no new group). +1 test
+  (cap scaling, flag-off, provider-less neutral) → 485 total.
+
 # 2026-10-01 — Devin (NOVA): UT-1 — the utility strategist's first slice (utility axes)
 
 - `OpenRA.Mods.Cameo/Traits/BotModules/BotUtilityAxes.cs` (new): the three bipolar

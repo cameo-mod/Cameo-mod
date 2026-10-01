@@ -25,10 +25,16 @@ namespace OpenRA.Mods.Cameo.Test
 		sealed class StubUtilityAxes : IBotUtilityAxes
 		{
 			readonly int turtleRush;
-			public StubUtilityAxes(int turtleRush) { this.turtleRush = turtleRush; }
+			readonly int steamrollerGuerrilla;
+			public StubUtilityAxes(int turtleRush, int steamrollerGuerrilla = IBotUtilityAxes.Neutral)
+			{
+				this.turtleRush = turtleRush;
+				this.steamrollerGuerrilla = steamrollerGuerrilla;
+			}
+
 			public int UtilityTurtleRush => turtleRush;
 			public int UtilityTechRushExpansion => IBotUtilityAxes.Neutral;
-			public int UtilitySteamrollerGuerrilla => IBotUtilityAxes.Neutral;
+			public int UtilitySteamrollerGuerrilla => steamrollerGuerrilla;
 		}
 
 		sealed class DisabledStubUtilityAxes : IBotUtilityAxes, IDisabledTrait
@@ -286,6 +292,24 @@ namespace OpenRA.Mods.Cameo.Test
 				new IBotUtilityAxes[] { new StubUtilityAxes(0) }), Is.EqualTo(600));
 			Assert.That(SquadManagerBotModuleCA.MinAttackDelayResetTicks(armed,
 				new IBotUtilityAxes[] { new StubUtilityAxes(50) }), Is.EqualTo(400));
+		}
+
+		[Test]
+		public void GuerrillaCapScalesBySteamrollerGuerrilla()
+		{
+			var yaml = "MaxGuerrillaSquads: 2\n";
+			var off = FieldLoader.Load<SquadManagerBotModuleCAInfo>(new MiniYaml("", MiniYaml.FromString(yaml, "test")));
+			var armed = FieldLoader.Load<SquadManagerBotModuleCAInfo>(new MiniYaml("",
+				MiniYaml.FromString("UseUtilityAxes: true\n" + yaml, "test")));
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(50, 100) };
+
+			Assert.That(SquadManagerBotModuleCA.GuerrillaSquadCap(off, 0, providers), Is.EqualTo(2));
+			Assert.That(SquadManagerBotModuleCA.GuerrillaSquadCap(armed, 0, null), Is.EqualTo(2));
+			Assert.That(SquadManagerBotModuleCA.GuerrillaSquadCap(armed, 0, providers), Is.EqualTo(3));
+			Assert.That(SquadManagerBotModuleCA.GuerrillaSquadCap(armed, 0,
+				new IBotUtilityAxes[] { new StubUtilityAxes(50, 0) }), Is.EqualTo(1));
+			Assert.That(SquadManagerBotModuleCA.GuerrillaSquadCap(armed, 0,
+				new IBotUtilityAxes[] { new StubUtilityAxes(50, 50) }), Is.EqualTo(2));
 		}
 
 		[Test]
