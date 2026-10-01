@@ -12,7 +12,7 @@
 - Off until its A/B: `BotUnitLeaseRegistry.EnforceAtOrderGate: false` = count only (`conflicts`). genericbot records
   in `cameo-ai-matches.jsonl` gain `order_gate`. `classic` (no registry) passes untouched.
 - 406/406 tests (6 new); fog PASS; doc-claims/task-index PASS; boot gate to the menu (the one new exception log in that
-  window is another worktree's engine, `C:	mp\lc6w`, failing on a support-dir argument at startup — not this tree).
+  window is another worktree's engine, `C:/tmp/lc6w`, failing on a support-dir argument at startup — not this tree).
 
 # 2026-09-30 (night) — Claude: LC5 ownership watchdog
 
