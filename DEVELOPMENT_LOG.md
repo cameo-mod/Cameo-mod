@@ -15054,3 +15054,13 @@ from per-state sites to the central chokepoints in `SquadManagerBotModuleCA`:
 Zero new enumerations — fog manifest stays 218 sites. Build 0 errors;
 boot-gate PASS (menu marker, no new runtime exceptions; two pre-boot
 launcher-arg exceptions from failed SupportDir quoting, not runtime faults).
+
+## 2026-10-01 (later) — fog-canary ratchet (same branch)
+
+The canaries get their own ratchet inside `audit_fog_honesty.py`: a third
+check pins every literal canary site NAME and call count per file in
+`fog_canary_manifest.json` (seeded: 4 files / 16 sites — the seven new
+consumption points plus the nine inherited air-squad sites). A removed or
+renamed site FAILs; additions are noted for `--write`. Negative-tested:
+renaming `squad-update-target` fails the audit and names both sides of
+the swap.
