@@ -29,8 +29,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// never charged (the risk gate, not the router, decides whether to go).
 		/// </summary>
 		/// <returns>Waypoints ending at <paramref name="to"/>, or null when start
-		/// and goal share a region or no path exists (grid is finite so a path
-		/// always exists — null means "nothing useful to emit").</returns>
+		/// and goal share a region, when an endpoint resolves to no region (zone-backed
+		/// indexOf can answer -1 for cells beyond every zone), or when no path exists —
+		/// disjoint zones are real islands, unlike the always-connected grid.</returns>
 		public static List<CPos> Route(
 			RegionMemory regions,
 			CPos from,
@@ -42,7 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var start = regions.IndexOf(from);
 			var goal = regions.IndexOf(to);
-			if (start == goal)
+			if (start == goal || start < 0 || goal < 0)
 				return null;
 
 			var weight = Math.Max(1, threatWeight);
@@ -97,12 +98,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return waypoints;
 		}
 
-		// A* over the region grid, 4-connected. Region counts are small (a few
-		// hundred on typical maps) so a PriorityQueue suffices.
+		// A* over the region index space: 4-connected grid neighbours when grid-backed,
+		// the zone graph's AdjacentRegionIds when zone-backed. Region counts are small
+		// (a few hundred grid cells, tens of zones on typical maps) so a PriorityQueue
+		// suffices.
 		static List<int> FindPath(RegionMemory regions, int start, int goal, Func<int, double> enterCost)
 		{
-			var columns = regions.Columns;
-			var rows = regions.Rows;
 			var count = regions.CellCount;
 
 			var g = new double[count];
@@ -111,11 +112,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			parent[start] = -1;
 			g[start] = 0;
 
-			var goalRow = goal / columns;
-			var goalCol = goal - goalRow * columns;
-
 			var open = new PriorityQueue<int, double>();
 			open.Enqueue(start, 0);
+
+			if (regions.ZoneBacked)
+			{
+				// ZG-c: expansion is zone adjacency, and there is no grid metric left to aim
+				// at — the heuristic is 0, so A* degrades to Dijkstra. Still cheapest-first
+				// (the threat costs are what the route exists for), just not steered.
+				while (open.Count > 0)
+				{
+					var current = open.Dequeue();
+					if (current == goal)
+						return Reconstruct(parent, goal);
+
+					foreach (var neighbor in regions.NeighborsOf(current))
+					{
+						if (neighbor < 0 || neighbor >= count)
+							continue;
+
+						var tentative = g[current] + 1 + enterCost(neighbor);
+						if (parent[neighbor] != -2 && tentative >= g[neighbor])
+							continue;
+
+						parent[neighbor] = current;
+						g[neighbor] = tentative;
+						open.Enqueue(neighbor, tentative);
+					}
+				}
+
+				return null;
+			}
+
+			var columns = regions.Columns;
+			var rows = regions.Rows;
+			var goalRow = goal / columns;
+			var goalCol = goal - goalRow * columns;
 
 			while (open.Count > 0)
 			{

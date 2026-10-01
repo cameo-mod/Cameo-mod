@@ -1,3 +1,38 @@
+# 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
+
+- `tools/ai/ab_increment.py`: one command runs the whole increment A/B
+  (AI_MASTER_PLAN §1.2 step 6, amended 2026-10-01). `--ctrl <sha> --cand <sha>
+  --groups all --out <dir>` builds three arms — ctrl (no switches), half
+  (`--groups A_squad_tactics`, overridable via `--half-groups`), all
+  (`--groups all`) — each frozen in its own `git worktree` under
+  `<out>/trees/<arm>` with switches applied in-tree by THIS checkout's
+  `apply_increment_switches.py` (uncommitted, per the increment design).
+  Engine per tree: `--engine-donor` copy or `make.cmd all`, then
+  `dotnet build -c Release` with `DOTNET_ROLL_FORWARD=LatestMajor`;
+  `--skip-build` reuses prepared trees.
+- Mirror-only by construction (maintainer ruling 2026-10-01): each arm runs
+  `--factions td_gdi` and `--factions td_nod` as SEPARATE batch invocations —
+  a comma'd `--factions` is asserted out (`enforce_single_faction`). Shards
+  invoke the TREE'S own run_ai_match_batch.py with cwd=tree — the runner
+  resolves REPO_ROOT/mods/./engine from its location, and tools/ai is itself
+  in the batch fingerprint.
+- Capacity: ≤ `--max-instances` (default 6) OpenRA.exe machine-wide via
+  `tasklist` + a launch-credit window so bursts can't overshoot before the
+  child appears. `--smoke` runs one verified match per arm first (records +
+  fingerprint required; dead smoke aborts the arm). Early stop polls
+  batch_results.jsonl every ~60s; a pair decides when the trailer can't reach
+  the leader winning everything left, and an arm's shards terminate once ALL
+  pairs touching it are decided (killing earlier would freeze the other
+  comparisons on partial data).
+- After drain: `ab_summary.py` per arm (both faction shards pooled) +
+  `<out>/increment_summary.json` (fingerprints, per-bot W-L-draw,
+  ownership/order_gate totals, early-stop verdicts, wall time). `--dry-run`
+  prints the full plan.
+- 18 new tests (`test_ab_increment.py`): single-faction shard enforcement,
+  two-mirror-shards-per-arm construction, early-stop boundary math (a
+  reachable tie stays live), tasklist CSV parse, smoke verification,
+  arm-stats pooling. Boot-gate: N/A — tools/py only.
+
 # 2026-10-01 — Devin (DAWN): ENG-T order-gate handoff + INC-3 flag arm; the fake boot-gate lesson
 
 - **PR #707** (`devin/dawn/engt-craft-gate`, on `f605c145f`-era master): `bb0ebad17` makes transport runs assign a
@@ -15402,3 +15437,47 @@ effect_pairings, meter_dilution, nuclear_flash_bindings — unrelated weapon/bal
 fog manifest +2 surgical entries (new upstream own-actor producer enumerations, Owner==player —
 fog-honest); drift audit re-baselined to 9150ded (UPSTREAM_REF label updated). Boot-gate PASS via
 private Engine.SupportDir (menu marker, zero exceptions, unambiguous attribution).
+## 2026-10-02 — NOVA: ZG-c zone-backed RegionMemory/RegionRouter (nova/zg-region-memory)
+
+Task ZG-c: spatial value memory and risk routing now index by the zone topology when one exists.
+Worktree `C:\tmp\nova-zg`, branch `nova/zg-region-memory` off master `6c1856215` (ZG-a topology +
+ZG-b fog-honest territory/ownership/doors merged).
+
+- `IBotZoneTopology.NearestRegionId` (new member): the module's existing private
+  gate-cell fallback promoted onto the interface — region id, else nearest zone within a
+  3-cell ring, else -1. This is the -1 policy: gate/barrier/unzoned cells fold INTO the
+  nearest zone so threat on a bridge lands in a region's memory; -1 (deep water, off-map)
+  means "no region" and is guarded at every consumer, never indexed with.
+- `RegionMemory` keeps its public shape (no call-site churn) and gains an optional zone
+  backing: `IndexOf`=NearestRegionId, `CenterOf`=zone centroid member cell (Centroid widened
+  to `IReadOnlyList<CPos>`), `CellCount`=Regions.Count, `NeighborsOf`=zone adjacency (grid
+  answers the old 4-connected set, same expansion order). New surface: `ZoneBacked`,
+  `Generation`, `NeighborsOf`. `SyncZoneGeneration` drops `byEnemy` + cached centres when the
+  adopted generation moves — honest policy: a re-cut re-shuffles every zone id, so stale
+  positional claims die rather than alias.
+- `RegionRouter`: zone branch expands `AdjacentRegionIds` with a 0 heuristic (Dijkstra at
+  zone counts); `-1` endpoints and disjoint zones now legitimately yield no route. Grid path
+  is byte-identical (same loop verbatim). Router stays pure — adjacency arrives as data.
+- Consumers re-keyed in `BotSituation`: `Rebuild` picks the zone backing when the player has
+  an enabled (`!IsTraitDisabled`) `TacticalMapBotModule` with `TopologyReady` and
+  `UseZoneTopology` (new yaml lever on `MasterAiBotModule`, default true) — grid otherwise,
+  so classic bots / disabled module / unbuilt topology are untouched. Guards added for the
+  -1 case at `RecordFailedSiege`, `FailedSiegeWeightPercentAt`, `RememberedThreatAtRegion`,
+  `BuildRegions`. `DeriveMissions`' near-base threat sums base zone + gate-adjacent zones
+  under zones (grid keeps its 3x3 ring); `IsNearRegion` is self-or-adjacent under zones.
+  Durable region-keyed state (`failedSieges`, `missionReservations`, `missionFailStreak`,
+  `dormantUntil` — mission ids embed `r<region>`) clears on a `(ZoneBacked, Generation)` move.
+- `ScoutBotModule`: `dangerByRegion`, `enemySpawnRegions`, `scoutTargets` drop on the same
+  index-space signal (watched in the scan loop and `RespondToAttack`); mpspawn resolution
+  filters -1. Iterate-0..CellCount picks and the danger/read paths are zone-safe as-is.
+- Accepted residual (documented, transient): CA-side `defendMissionExhaustedRegions` and
+  `heldDefendMission.RegionIndex` can alias for up to a defend-hold window after a re-cut —
+  self-corrects on the next mission publish; teaching Mods.CA about the index space wasn't
+  worth it. Sightings beyond every zone (naval units deep offshore, aircraft over water)
+  have no zone memory — zone topology is a ground-locomotor cut.
+- Tests: `ZoneRegionMemoryTest` (13): zone IndexOf/-1→nearest fold, centroid-is-member,
+  adjacency walk, threat detour, disjoint-zone null, -1 endpoint null, grid↔zone route
+  equivalence on an isomorphic 4x4 graph, grid neighbour order pin, generation reset +
+  centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>

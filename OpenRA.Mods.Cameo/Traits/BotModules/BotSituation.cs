@@ -63,6 +63,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public BotMission Mission;
 		public BotMissionAssignment MissionAssignment;
 		public int DefenceFractionHint, ExpansionAppetiteHint;
+
+		// ZG-c: spatial value memory. Index space is either the fixed square grid or — when this
+		// bot has an enabled, built TacticalMapBotModule and UseZoneTopology is on — that zone
+		// topology's region ids (check Regions.ZoneBacked/Generation before assuming geometry).
 		public RegionMemory Regions;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
@@ -221,6 +225,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly bool UseFoggedObservation = true;
 		[Desc("Cell-edge length of one spatial memory region.")]
 		public readonly int RegionCellSize = 8;
+		[Desc("ZG-c: index spatial memory and threat routing by the TacticalMapBotModule's zone graph",
+			"(one region per chokepoint-bounded pocket of ground) whenever an enabled, built topology",
+			"exists; the square RegionCellSize grid stays the fallback. False forces the grid always.")]
+		public readonly bool UseZoneTopology = false; // off until the next increment A/B (WORKFLOW §3; group D)
 		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
 		public readonly bool UseRiskRouting = true;
 		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
@@ -419,13 +427,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// a wall that beat us an hour ago no longer steers the plan.
 		readonly Dictionary<OpenRA.Player, Dictionary<int, (int Count, int Tick)>> failedSieges = new();
 
+		// ZG-c: the index space the durable tables (failedSieges, missionReservations) were
+		// last keyed under. A zone re-cut or a grid<->zone backing switch re-shuffles every
+		// region id, so both drop on the change rather than alias onto different ground.
+		bool lastRegionsZoned;
+		int lastRegionsGeneration = -1;
+
 		void IBotSiegeFailureMemory.RecordFailedSiege(OpenRA.Player enemy, CPos cell, int tick)
 		{
 			var regions = Situation?.Regions;
 			if (IsTraitDisabled || enemy == null || regions == null)
 				return;
 
+			// Zone-backed IndexOf answers -1 for cells beyond every zone: a siege failing
+			// there has no region to hang the memory on.
 			var index = regions.IndexOf(cell);
+			if (index < 0)
+				return;
+
 			if (!failedSieges.TryGetValue(enemy, out var table))
 				failedSieges[enemy] = table = new Dictionary<int, (int, int)>();
 
@@ -442,6 +461,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return 100;
 
 			var index = regions.IndexOf(cell);
+			if (index < 0)
+				return 100;
+
 			var extra = 0;
 			foreach (var table in failedSieges.Values)
 				if (table.TryGetValue(index, out var e) && tick - e.Tick <= Info.SiegeFailureMemoryTicks)
@@ -459,8 +481,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Summed remembered threat across every enemy's region table — the
 		// shared read for the 6c gate (ground) and the 6e router (per-domain).
+		// index can be -1 under a zone backing (cell beyond every zone): no region, no threat.
 		static int RememberedThreatAtRegion(RegionMemory regions, int index, bool airborne)
 		{
+			if (index < 0)
+				return 0;
+
 			var threat = 0;
 			foreach (var enemyRegions in regions.ByEnemy.Values)
 				if (index < enemyRegions.Length)
@@ -602,7 +628,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(p => p != player && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.ToArray();
 			var fogged = Info.UseFoggedObservation && player.Shroud != null;
-			var regions = new RegionMemory(player.World.Map, Info.RegionCellSize);
+
+			// ZG-c: run the spatial memory on the zone topology when this bot has an enabled,
+			// built TacticalMapBotModule (genericbot only — classic never attaches one); the
+			// square RegionCellSize grid stays the fallback for a missing, disabled or
+			// still-unbuilt topology, and when the yaml lever is off.
+			var zoneTopology = Info.UseZoneTopology
+				? player.PlayerActor.TraitOrDefault<TacticalMapBotModule>()
+				: null;
+			var regions = zoneTopology != null && !zoneTopology.IsTraitDisabled && zoneTopology.TopologyReady
+				? new RegionMemory(player.World.Map, Info.RegionCellSize, zoneTopology)
+				: new RegionMemory(player.World.Map, Info.RegionCellSize);
+
+			// Region-index-keyed durable state belongs to the index space it was recorded in:
+			// a zone re-cut or a backing switch re-shuffles every id, so these tables drop on
+			// the change rather than alias onto different ground. BotMission.EffectiveMissionId
+			// embeds the region index too, so the dormant shelf and fail streaks are the same
+			// kind of state — they go with it.
+			if (regions.ZoneBacked != lastRegionsZoned || regions.Generation != lastRegionsGeneration)
+			{
+				lastRegionsZoned = regions.ZoneBacked;
+				lastRegionsGeneration = regions.Generation;
+				failedSieges.Clear();
+				missionReservations.Clear();
+				missionFailStreak.Clear();
+				dormantUntil.Clear();
+			}
+
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
 			foreach (var enemy in enemies)
 			{
@@ -951,17 +1003,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var threat = 0L;
-			var baseRow = ownBaseRegionIndex / regions.Columns;
-			var baseColumn = ownBaseRegionIndex - baseRow * regions.Columns;
-			for (var row = Math.Max(0, baseRow - 1); row <= Math.Min(regions.Rows - 1, baseRow + 1); row++)
-				for (var column = Math.Max(0, baseColumn - 1); column <= Math.Min(regions.Columns - 1, baseColumn + 1); column++)
+			if (regions.ZoneBacked)
+			{
+				// Zone adjacency stands in for the grid's 3x3 ring: remembered value in the
+				// base's own zone plus every zone a gate corridor joins it to. Zones are far
+				// bigger than grid cells, so the ring itself is the adjacency list.
+				var near = new List<int>(regions.NeighborsOf(ownBaseRegionIndex)) { ownBaseRegionIndex };
+				foreach (var index in near)
 				{
-					var index = row * regions.Columns + column;
+					if (index < 0)
+						continue;
+
 					foreach (var enemyRegions in regions.ByEnemy.Values)
 						if (index < enemyRegions.Length && enemyRegions[index] != null)
 							threat += enemyRegions[index].ArmyValue +
 								(index == ownBaseRegionIndex ? enemyRegions[index].DefenceValue : 0);
 				}
+			}
+			else
+			{
+				var baseRow = ownBaseRegionIndex / regions.Columns;
+				var baseColumn = ownBaseRegionIndex - baseRow * regions.Columns;
+				for (var row = Math.Max(0, baseRow - 1); row <= Math.Min(regions.Rows - 1, baseRow + 1); row++)
+					for (var column = Math.Max(0, baseColumn - 1); column <= Math.Min(regions.Columns - 1, baseColumn + 1); column++)
+					{
+						var index = row * regions.Columns + column;
+						foreach (var enemyRegions in regions.ByEnemy.Values)
+							if (index < enemyRegions.Length && enemyRegions[index] != null)
+								threat += enemyRegions[index].ArmyValue +
+									(index == ownBaseRegionIndex ? enemyRegions[index].DefenceValue : 0);
+					}
+			}
 
 			var defendPriority = threat <= ownNearBaseValue
 				? 0
@@ -1010,9 +1082,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		internal static bool IsNearRegion(RegionMemory regions, int regionIndex, CPos location)
 		{
+			var locationIndex = regions.IndexOf(location);
+			if (regions.ZoneBacked)
+			{
+				// "Near" under zones is the zone itself or one gated straight onto it —
+				// the same one-ring reach the grid's 3x3 window meant.
+				return locationIndex >= 0 && regionIndex >= 0 &&
+					(locationIndex == regionIndex || regions.NeighborsOf(regionIndex).Contains(locationIndex));
+			}
+
 			var row = regionIndex / regions.Columns;
 			var column = regionIndex - row * regions.Columns;
-			var locationIndex = regions.IndexOf(location);
 			var locationRow = locationIndex / regions.Columns;
 			var locationColumn = locationIndex - locationRow * regions.Columns;
 			return Math.Abs(row - locationRow) <= 1 && Math.Abs(column - locationColumn) <= 1;
@@ -1178,6 +1258,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var actor in observed.OrderBy(a => a.ActorID))
 			{
 				var index = regions.IndexOf(actor.Location);
+				if (index < 0 || index >= cells.Length)
+					continue;   // zone-backed: a sighting beyond every zone (deep water, off-map) has no memory
+
 				var region = cells[index] ??= new RegionMemory.Region();
 				if (actor.Combat)
 					region.ArmyValue += actor.Value;
