@@ -132,6 +132,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a published protection request stays valid; it is re-published while the mission lives.")]
 		public readonly int EscortRequestTicks = 250;
 
+		[Desc("ENG-T (maintainer 2026-09-30): percent of stealth infiltrations (a building in the enemy base) that ask an",
+			"IBotCaptureTransportProvider to carry the engineer in (APC, transport helicopter) along a route around the enemy;",
+			"the rest go on foot. 0 = never (and no random number is drawn). The A/B candidate sets 25.")]
+		public readonly int TransportChance = 0;
+
+		[Desc("ENG-T: most engineers (and buildings) in one infiltration run — one per stop.")]
+		public readonly int TransportRunMax = 5;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -153,6 +161,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public Actor Target;
 			public string MissionId;
 			public int Attempt;
+			public bool ViaTransport;
 		}
 
 		readonly World world;
@@ -300,6 +309,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var leases = BotUnitLeases.Of(player);
 			foreach (var (a, job) in assigned.ToList())
 			{
+				// ENG-T: a passenger is out of the world while it rides, so the normal checks would read it as gone.
+				if (job.ViaTransport)
+				{
+					var provider = TransportProvider();
+					if (provider != null && provider.TryConsumeDelivered(a, out var delivered))
+					{
+						job.ViaTransport = false;
+						job.OrderedTick = job.SampleTick = tick;
+						job.SamplePos = a.CenterPosition;
+						var t = delivered ?? job.Target;
+						bot.QueueOrder(new Order("CaptureActor", a, Target.FromActor(t), true));
+						BotMissionLog.Write(new BotMissionRecord
+						{
+							Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = BotMissionAttemptState.Progressing,
+							Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Units = 1
+						});
+						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						continue;
+					}
+
+					if (provider != null && provider.IsHandlingPassenger(a))
+					{
+						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						continue;
+					}
+
+					// Dropped by the provider (or no provider any more): from here the normal checks decide.
+					job.ViaTransport = false;
+					job.OrderedTick = tick;
+				}
+
 				var moving = !IsGone(a) && a.CurrentActivity?.ChildActivity?.ActivityType == ActivityType.Move;
 				var check = Check(IsGone(a), !IsGone(a) && a.IsIdle, moving, IsGone(a) || a.CenterPosition != job.SamplePos,
 					tick - job.OrderedTick, tick - job.SampleTick, Info.OrderGraceTicks, Info.AssignRoleDelay);
@@ -463,15 +503,103 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (targets.Count == 0)
 				return;
 
-			foreach (var capturer in remaining)
+			for (var ci = 0; ci < remaining.Count; ci++)
 			{
+				var capturer = remaining[ci];
 				ConsiderEscort(targets.Where(t => !TargetFull(t) && !Dormant(t)).OrderByDescending(t => t.GetSellValue()));
 				var target = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t)).MinByOrDefault(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared);
 				if (target == null || SafePath(capturer.Actor, target).Type == TargetType.Invalid)
 					continue;
 
+				// ENG-T: sometimes a stealth infiltration rides in. The roll is drawn only when it can matter, so a chance of
+				// 0 leaves LocalRandom's sequence — and every later random choice — exactly as before.
+				if (Info.TransportChance > 0 && !EscortEligible(target)
+					&& WantsTransport(true, world.LocalRandom.Next(100), Info.TransportChance)
+					&& TransportProvider() is IBotCaptureTransportProvider provider)
+				{
+					var used = TryTransportRun(bot, leases, remaining.Skip(ci).Select(tp => tp.Actor).ToList(), target, targets, provider);
+					if (used > 0)
+					{
+						ci += used - 1;
+						continue;
+					}
+				}
+
 				Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target);
 			}
+		}
+
+		/// <summary>ENG-T's gate, free of world state so it can be tested.</summary>
+		public static bool WantsTransport(bool stealthTarget, int roll, int chancePct) => stealthTarget && chancePct > 0 && roll < chancePct;
+
+		/// <summary>The enabled transport provider, resolved at use (never cached: LC4's bug class).</summary>
+		IBotCaptureTransportProvider TransportProvider() =>
+			player.PlayerActor.TraitsImplementing<IBotCaptureTransportProvider>().FirstOrDefault(p => p is not IDisabledTrait d || !d.IsTraitDisabled);
+
+		/// <summary>The visiting order of a run, free of world state so it can be tested: start at `start`, then always the
+		/// nearest unvisited stop (squared cell distance), at most `max` stops.</summary>
+		public static List<int> GreedyRoute(IReadOnlyList<CPos> stops, int start, int max)
+		{
+			var route = new List<int> { start };
+			var left = Enumerable.Range(0, stops.Count).Where(i => i != start).ToList();
+			while (route.Count < max && left.Count > 0)
+			{
+				var from = stops[route[^1]];
+				var next = left.MinBy(i => (stops[i] - from).LengthSquared);
+				route.Add(next);
+				left.Remove(next);
+			}
+
+			return route;
+		}
+
+		/// <summary>ENG-T: one run of up to TransportRunMax engineers, one per stealth building; returns the engineers used.</summary>
+		int TryTransportRun(IBot bot, IBotUnitLeases leases, List<Actor> candidates, Actor first, List<Actor> pool, IBotCaptureTransportProvider provider)
+		{
+			// The stops: the chosen building, then other stealth buildings that are free for an attempt.
+			var stops = new List<Actor> { first };
+			stops.AddRange(pool.Where(t => t != first && !TargetFull(t) && !Dormant(t) && !EscortEligible(t)));
+			var order = GreedyRoute(stops.Select(t => t.Location).ToList(), 0, Math.Min(Info.TransportRunMax, candidates.Count));
+
+			var passengers = new List<Actor>();
+			var targets = new List<Actor>();
+			foreach (var engineer in candidates)
+			{
+				if (passengers.Count == order.Count)
+					break;
+
+				if (!BotUnitLeases.TryClaim(leases, engineer, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks))
+					continue;
+
+				passengers.Add(engineer);
+				targets.Add(stops[order[passengers.Count - 1]]);
+			}
+
+			if (passengers.Count == 0 || !provider.TryRequestCaptureRun(bot, passengers, targets))
+			{
+				foreach (var p in passengers)
+					leases?.Release(p, LeaseOwner);
+
+				return 0;
+			}
+
+			var tick = world.WorldTick;
+			for (var k = 0; k < passengers.Count; k++)
+			{
+				var job = new Assignment
+				{
+					Job = EngineerJob.Capture, OrderedTick = tick, SampleTick = tick, SamplePos = passengers[k].CenterPosition,
+					Target = targets[k], ViaTransport = true
+				};
+				assigned[passengers[k]] = job;
+				CaptureOrders++;
+				StartMission(job, passengers[k], "Transport");
+			}
+
+			Log.Write("debug", $"AI ({player.ClientIndex}): ENG transport run: {passengers.Count} engineer(s) -> {string.Join(", ", targets.Select(t => $"{t.Info.Name} {t.ActorID}"))} (tick {tick})");
+
+			// The remaining candidates list may skip engineers whose claim failed; the caller advances by the scanned count.
+			return candidates.IndexOf(passengers[^1]) + 1;
 		}
 
 		// CA parent verbatim. The enemy scan along the path has no visibility check: DESIGN §19.5's engineer exception
@@ -731,7 +859,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return (BotMissionAttemptState.Released, BotMissionReasons.Dropped);
 		}
 
-		void StartMission(Assignment job, Actor engineer)
+		void StartMission(Assignment job, Actor engineer, string executor = "Engineers")
 		{
 			var target = job.Target;
 			job.MissionId = CaptureMissionId(target.Info.Name, target.ActorID);
