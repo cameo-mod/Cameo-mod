@@ -234,11 +234,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("ZG-c: index spatial memory and threat routing by the TacticalMapBotModule's zone graph",
 			"(one region per chokepoint-bounded pocket of ground) whenever an enabled, built topology",
 			"exists; the square RegionCellSize grid stays the fallback. False forces the grid always.")]
-		public readonly bool UseZoneTopology = true;
+		public readonly bool UseZoneTopology = false; // off until the next increment A/B (WORKFLOW §3; group D)
 		[Desc("IM-1 (AI_DEEP_RESEARCH §3.3): publish per-region influence layers (threat_ground,",
 			"threat_air, interest, own_strength, staleness) on each situation snapshot, so",
-			"consumers read one publisher instead of re-deriving RegionMemory.")]
-		public readonly bool UseInfluenceLayers = true;
+			"consumers read one publisher instead of re-deriving RegionMemory. Off until the",
+			"next increment A/B (same convention as UseZoneTopology; switch group F).")]
+		public readonly bool UseInfluenceLayers = false;
 		[Desc("IM-1: EMA weight percent per snapshot on each zone's remembered-threat history —",
 			"the 'where they usually are' average a stale sighting decays toward.")]
 		public readonly int InfluenceHistoryAlphaPercent = 20;

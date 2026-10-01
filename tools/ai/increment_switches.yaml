@@ -11,37 +11,15 @@
 skip: [SquadManagerBotModuleCA@classic]
 
 groups:
-  A_squad_tactics:
-    SquadManagerBotModuleCA:
-      FormationMovement: true          # CA-4 (#678), WVec.Dot overflow fixed in #681
-      SquadMicroEnabled: true          # MI order half (#696)
-      EnsureAntiAirEscort: true        # #662
-      EnsureArtillerySiege: true       # #662
-      AirDoctrineEnabled: true         # #663
-      UseProtectionRequests: true      # the escort seam (#693 needs it)
-  B_ownership_engineers_missions:
-    BotUnitLeaseRegistry:
-      EnforceAtOrderGate: true         # DESIGN §19.6 (#699)
-    EngineerBotModule:
-      MaxEngineersPerTarget: 1         # one engineer per target
-      CaptureFailuresBeforeDormant: 2  # engineer dormant shelf
-      CaptureTargetTries: 3            # spread to the next target
-      EscortDefendedCaptures: true     # #693
-      EscortSuperiority: 150
-      EscortThinnedPercent: 50
-      TransportChance: 25              # #694 + #698 (engt-transport is armed for every genericbot tier)
-      MaxExposedRouteCells: 3          # #697 safe route ...
-      RouteRecheckTicks: 100           # ... v2: re-check while walking
-      StealthMaxDefenders: 2           # v2: stealth only when unguarded
-      RankTargetsBySafety: true        # v2: safety + value
+  # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
+  # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
+  # Still OFF on master, for the next increment A/B:
+  D_zone_topology:                   # NOVA ZG-a/b/c — zone-backed RegionMemory + zone-adjacency RegionRouter (#711/#713/#718)
     MasterAiBotModule:
-      RaidFailuresBeforeDormant: 2     # LC8 dormant shelf
-    BotLearnedPriors:                # genericbot only — NOT UnitBuilderBotModuleCA@generic, which classic shares
-      UseLearnedPriors: true           # the learning loop's return leg (neutral without a priors file)
-    DefenseCoveragePlanner:          # INC-3: defences cover the whole base per specialty (AI/AT/AA), ~75% on the rim
-      Enabled: true
-    GrantConditionOnBotOwner@engttransport:  # re-arm the Frans transport provider (master: fransbot only, multiplayer desync risk)
+      UseZoneTopology: true
+  E_engt_transport:                  # re-arm the Frans transport provider ONLY after #716 (orders-only, DESIGN §19.8) lands
+    GrantConditionOnBotOwner@engttransport:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
-  C_f1_frans_services:               # INC-3: F1's question as a flag arm (needs the inc3_frans_services gates)
-    GrantConditionOnBotOwner@inc3f1: # instance-targeted key — only this grantor's Bots changes
-      Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla  # genericbot && hardbot, F1-ctrl population
+  F_influence_layers:                # NOVA IM-1 — BotInfluenceLayers on the situation snapshot + scout consumption
+    MasterAiBotModule:
+      UseInfluenceLayers: true

@@ -1,3 +1,38 @@
+# 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
+
+- `tools/ai/ab_increment.py`: one command runs the whole increment A/B
+  (AI_MASTER_PLAN §1.2 step 6, amended 2026-10-01). `--ctrl <sha> --cand <sha>
+  --groups all --out <dir>` builds three arms — ctrl (no switches), half
+  (`--groups A_squad_tactics`, overridable via `--half-groups`), all
+  (`--groups all`) — each frozen in its own `git worktree` under
+  `<out>/trees/<arm>` with switches applied in-tree by THIS checkout's
+  `apply_increment_switches.py` (uncommitted, per the increment design).
+  Engine per tree: `--engine-donor` copy or `make.cmd all`, then
+  `dotnet build -c Release` with `DOTNET_ROLL_FORWARD=LatestMajor`;
+  `--skip-build` reuses prepared trees.
+- Mirror-only by construction (maintainer ruling 2026-10-01): each arm runs
+  `--factions td_gdi` and `--factions td_nod` as SEPARATE batch invocations —
+  a comma'd `--factions` is asserted out (`enforce_single_faction`). Shards
+  invoke the TREE'S own run_ai_match_batch.py with cwd=tree — the runner
+  resolves REPO_ROOT/mods/./engine from its location, and tools/ai is itself
+  in the batch fingerprint.
+- Capacity: ≤ `--max-instances` (default 6) OpenRA.exe machine-wide via
+  `tasklist` + a launch-credit window so bursts can't overshoot before the
+  child appears. `--smoke` runs one verified match per arm first (records +
+  fingerprint required; dead smoke aborts the arm). Early stop polls
+  batch_results.jsonl every ~60s; a pair decides when the trailer can't reach
+  the leader winning everything left, and an arm's shards terminate once ALL
+  pairs touching it are decided (killing earlier would freeze the other
+  comparisons on partial data).
+- After drain: `ab_summary.py` per arm (both faction shards pooled) +
+  `<out>/increment_summary.json` (fingerprints, per-bot W-L-draw,
+  ownership/order_gate totals, early-stop verdicts, wall time). `--dry-run`
+  prints the full plan.
+- 18 new tests (`test_ab_increment.py`): single-faction shard enforcement,
+  two-mirror-shards-per-arm construction, early-stop boundary math (a
+  reachable tie stays live), tasklist CSV parse, smoke verification,
+  arm-stats pooling. Boot-gate: N/A — tools/py only.
+
 # 2026-10-01 — Devin (DAWN): ENG-T order-gate handoff + INC-3 flag arm; the fake boot-gate lesson
 
 - **PR #707** (`devin/dawn/engt-craft-gate`, on `f605c145f`-era master): `bb0ebad17` makes transport runs assign a
