@@ -1048,14 +1048,32 @@ namespace OpenRA.Mods.Common.Traits
 				reusableRoundTrip: false, out var existing) || existing != null)
 				return false;
 
-			var mission = new TransportMission(passengers[0], targets[0], landPathAvailable: true,
+			// §19.6 order-gate compatibility: whoever drives a unit must hold its lease, so each leg's
+			// lease moves from the consumer (the seam's Capture claim) to this module for the ride —
+			// boarding orders then count as owned. The handoff is all-or-nothing so the seam's
+			// assignments never record a leg the run did not take; a refused run frees the
+			// transferred claims so the seam's foot path re-takes them on its next scan.
+			var leases = BotUnitLeases.Of(player);
+			var legs = new List<(Actor Passenger, Actor Target)>();
+			for (var i = 0; i < passengers.Count; i++)
+			{
+				if (BotUnitLeases.Transfer(leases, passengers[i], LeaseOwner, BotLeasePurpose.Mission, Info.TransportLeaseTicks))
+				{
+					legs.Add((passengers[i], targets[i]));
+					continue;
+				}
+
+				foreach (var taken in legs)
+					leases?.Release(taken.Passenger, LeaseOwner);
+				return false;
+			}
+
+			var mission = new TransportMission(legs[0].Passenger, legs[0].Target, landPathAvailable: true,
 				world.WorldTick, reusableRoundTrip: false)
 			{
-				RunLegs = Enumerable.Range(0, passengers.Count)
-					.Select(i => (passengers[i], targets[i])).ToList(),
-				RunTargetByPassenger = Enumerable.Range(0, passengers.Count)
-					.ToDictionary(i => passengers[i], i => targets[i]),
-				RunMissionId = $"transport:{passengers[0].ActorID}"
+				RunLegs = legs,
+				RunTargetByPassenger = legs.ToDictionary(l => l.Passenger, l => l.Target),
+				RunMissionId = $"transport:{legs[0].Passenger.ActorID}"
 			};
 
 			// Commit only when the planner can put a real craft on the run NOW: a craft that
@@ -1064,6 +1082,8 @@ namespace OpenRA.Mods.Common.Traits
 			// so run demand grows the transport fleet for the next roll; the engineers walk.
 			if (!TryAssignExistingTransport(bot, mission))
 			{
+				foreach (var leg in legs)
+					leases?.Release(leg.Passenger, LeaseOwner);
 				RequestBestTransport(bot, mission, landPathAvailable: true);
 				return false;
 			}
@@ -1073,7 +1093,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			FransBotLog.BotDebug(world,
 				"{0}: Frans transport accepted capture RUN {1} ({2} engineers) led by {3} for first stop {4}.",
-				player, mission.RunMissionId, passengers.Count, mission.Passenger, mission.Target);
+				player, mission.RunMissionId, legs.Count, mission.Passenger, mission.Target);
 
 			BotMissionLog.Write(new BotMissionRecord
 			{
@@ -1094,8 +1114,10 @@ namespace OpenRA.Mods.Common.Traits
 			if (!mission.RunDeliveredTargets.Remove(passenger, out target))
 				return false;
 
-			// this passenger is now owned by the engineer module again; drop its key. The run
+			// this passenger is now owned by the engineer module again; drop its key and its
+			// ride lease (§19.6) so the seam's orders on it pass the order gate at once. The run
 			// mission itself ends when every delivered leg has been consumed (or pruned dead).
+			BotUnitLeases.Of(player)?.Release(passenger, LeaseOwner);
 			missions.Remove(passenger);
 			if (mission.RunDeliveredTargets.Count == 0 &&
 				!AllLegs(mission).Any(leg => missions.ContainsKey(leg.Passenger)))
@@ -1119,8 +1141,12 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var units = AllLegs(mission).Count();
+			var legLeases = BotUnitLeases.Of(player);
 			foreach (var leg in mission.RunLegs.ToArray())
+			{
+				legLeases?.Release(leg.Passenger, LeaseOwner);
 				missions.Remove(leg.Passenger);
+			}
 
 			var transport = mission.Transport;
 			if (transport != null && !transport.Disposed && transport.IsInWorld && !transport.IsDead)
@@ -1526,12 +1552,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			foreach (var leg in mission.RunLegs.Where(leg => !LegAlive(leg.Passenger)).ToArray())
-			{
-				missions.Remove(leg.Passenger);
-				mission.RunDeliveredTargets.Remove(leg.Passenger);
-			}
-
-			mission.RunLegs.RemoveAll(leg => !LegAlive(leg.Passenger));
+				ReleaseRunLeg(mission, leg.Passenger);
 		}
 
 		void ManageMission(IBot bot, TransportMission mission)
@@ -1539,10 +1560,18 @@ namespace OpenRA.Mods.Common.Traits
 			using var fransPerfBlock = FransBotLog.Profile(world, player, "Transport.ManageMission");
 
 			// LC1 heartbeat: re-claim the leased transport so the failsafe expiry never fires
-			// mid-mission; ReleaseTransport ends it when the craft is freed.
+			// mid-mission; ReleaseTransport ends it when the craft is freed. Run legs ride under
+			// this module's lease for the duration (handed over at commit, §19.6) — renew them too.
+			// Aboard passengers are not in the world and cannot be claimed or stolen anyway.
+			var leases = BotUnitLeases.Of(player);
 			if (mission.Transport != null)
-				BotUnitLeases.TryClaim(BotUnitLeases.Of(player), mission.Transport, LeaseOwner,
+				BotUnitLeases.TryClaim(leases, mission.Transport, LeaseOwner,
 					BotLeasePurpose.Mission, Info.TransportLeaseTicks);
+			if (mission.RunLegs != null)
+				foreach (var leg in mission.RunLegs)
+					if (missions.ContainsKey(leg.Passenger) && leg.Passenger.IsInWorld && leg.Passenger.Owner == player)
+						BotUnitLeases.TryClaim(leases, leg.Passenger, LeaseOwner,
+							BotLeasePurpose.Mission, Info.TransportLeaseTicks);
 
 			if (mission.State == MissionState.Escort)
 			{
@@ -2202,6 +2231,7 @@ namespace OpenRA.Mods.Common.Traits
 		/// <summary>Drop one leg out of a run so the owner module sees the passenger as unhandled again.</summary>
 		void ReleaseRunLeg(TransportMission mission, Actor passenger)
 		{
+			BotUnitLeases.Of(player)?.Release(passenger, LeaseOwner);
 			missions.Remove(passenger);
 			mission.RunBoardingIssued.Remove(passenger);
 			mission.RunDeliveredTargets.Remove(passenger);

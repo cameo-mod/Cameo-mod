@@ -394,7 +394,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 					if (provider != null && provider.IsHandlingPassenger(a))
 					{
-						BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+						// §19.6: the run hands each passenger's lease to the provider for the ride —
+						// renew ours only once it is back or free, so housekeeping isn't a refused
+						// claim against the transport module on every pass.
+						if (!BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner))
+							BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
 						continue;
 					}
 

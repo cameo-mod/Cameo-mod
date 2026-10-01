@@ -64,6 +64,34 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TransferMovesTheLeaseToTheNewOwner()
+		{
+			// ENG-T: the run hands each passenger's lease to the transport provider for the ride,
+			// so §19.6's order gate counts the rider orders as owned; the old owner is not told
+			// (a negotiation, not an emergency) and simply finds the lease gone on its next renew.
+			var t = new BotLeaseTable<int>();
+			t.TryClaim(1, "engineer", BotLeasePurpose.Capture, 100, 50);
+			t.Transfer(1, "transport", BotLeasePurpose.Mission, 120, 250);
+			var lease = t.LeaseOf(1, 120);
+			Assert.That(lease?.Owner, Is.EqualTo("transport"));
+			Assert.That(lease?.Purpose, Is.EqualTo(BotLeasePurpose.Mission));
+			Assert.That(lease?.AcquiredTick, Is.EqualTo(120));
+			Assert.That(lease?.ExpiresTick, Is.EqualTo(370));
+			Assert.That(t.TryClaim(1, "engineer", BotLeasePurpose.Capture, 130, 50), Is.False,
+				"the old owner's renew is refused while the ride lease lives");
+			Assert.That(t.TryClaim(1, "transport", BotLeasePurpose.Mission, 130, 250), Is.True,
+				"the new owner heartbeats it");
+		}
+
+		[Test]
+		public void TransferClaimsAnUnheldUnit()
+		{
+			var t = new BotLeaseTable<int>();
+			t.Transfer(1, "transport", BotLeasePurpose.Mission, 100, 100);
+			Assert.That(t.LeaseOf(1, 100)?.Owner, Is.EqualTo("transport"));
+		}
+
+		[Test]
 		public void PruneDropsExpiredAndGoneUnitsSeparately()
 		{
 			var t = new BotLeaseTable<int>();
