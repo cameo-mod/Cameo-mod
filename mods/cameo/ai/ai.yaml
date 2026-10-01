@@ -57,6 +57,9 @@
 	GrantConditionOnBotOwner@cn2garrison:
 		Condition: cn2_garrison_defense
 		Bots: fransbot
+	GrantConditionOnBotOwner@cn3deploy:
+		Condition: cn3_deploy
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3396,6 +3399,25 @@ Player:
 		# Dual-purpose rocket infantry cover both threat classes in most packs; packs tune the lists.
 		AntiArmorInfantryTypes: td_nod_rocketsoldier, td_gdi_rocketsoldier, ra1_allies_rocketsoldier, ra1_soviets_rocketsoldier, ra2_soviets_flaktrooper
 		AntiAirInfantryTypes: td_nod_rocketsoldier, td_gdi_rocketsoldier, ra1_allies_rocketsoldier, ra1_soviets_rocketsoldier, ra2_soviets_flaktrooper, ra2_allies_guardiangi
+	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
+	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
+	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
+	# (§19.6 - their squad owns orders for the tick; deploy-on-squad-unit is the open contract question).
+	# `genericbot && cn3_deploy`: off on master until the increment A/B arms it.
+	DeployBotModule:
+		RequiresCondition: genericbot && cn3_deploy
+		Groups:
+			artillery:
+				ActorTypes: ts_nod_artillery
+				Mode: Artillery
+				ScanRadius: 22
+				DeployRange: 14
+				SafeRange: 6
+			ticktank:
+				ActorTypes: ts_nod_ticktank
+				Mode: Stats
+				DeployRange: 12
+				SafeRange: 4
 	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
