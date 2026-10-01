@@ -2271,8 +2271,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static double GuerrillaLeadFor(int regionsFresh, int regionsEnemyPresence) =>
 			regionsEnemyPresence <= 0 ? 1.0 : (double)regionsFresh / regionsEnemyPresence;
 
-		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
-		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 		static int Clamp(long value) => (int)Math.Max(0, Math.Min(100, value));
 		static int ClampSignal(long value) => (int)Math.Max(0, Math.Min(100, value));
 		static int ClampScore(long value) => (int)Math.Max(0, Math.Min(1000, value));
