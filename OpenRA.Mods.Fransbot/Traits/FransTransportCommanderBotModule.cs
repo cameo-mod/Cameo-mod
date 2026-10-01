@@ -1058,6 +1058,16 @@ namespace OpenRA.Mods.Common.Traits
 				RunMissionId = $"transport:{passengers[0].ActorID}"
 			};
 
+			// Commit only when the planner can put a real craft on the run NOW: a craft that
+			// has to be BUILT outlasts the pickup budget, and legs parked in Waiting just burn
+			// the full mission timeout. The refusal still leaves one production request behind
+			// so run demand grows the transport fleet for the next roll; the engineers walk.
+			if (!TryAssignExistingTransport(bot, mission))
+			{
+				RequestBestTransport(bot, mission, landPathAvailable: true);
+				return false;
+			}
+
 			foreach (var leg in mission.RunLegs)
 				missions[leg.Passenger] = mission;
 
@@ -1071,9 +1081,6 @@ namespace OpenRA.Mods.Common.Traits
 				State = BotMissionAttemptState.Committed, Executor = "Transport",
 				MissionType = "transport", TargetCell = mission.Target.Location, Units = passengers.Count
 			});
-
-			if (!TryAssignExistingTransport(bot, mission))
-				RequestBestTransport(bot, mission, landPathAvailable: true);
 			return true;
 		}
 
