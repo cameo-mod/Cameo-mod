@@ -2388,7 +2388,18 @@ and aggression telemetry only, never income, unit stats or vision.
   provider reads 0/`BuildUp`), and `own.director_tension` + `own.director_phase` in the
   situation log. State is deliberately NOT in `MasterAiBotSavedState` — a save/load
   restarts the wave at 0/`BuildUp`, which for record-only telemetry is the honest reset.
-- **DI-2 (deferred):** the consumer — most likely attack timing in the squad manager,
-  alongside `UseUtilityAxes` (pressure shortens, relief lengthens the launch delay) — is
-  left open. A Director change is itself an A/B candidate that must beat master
+- **DI-2 — the phase-scaled launch bar (consumer slice).** `SquadManagerBotModuleCA`
+  re-targets the dispatch bar every check: `desiredAttackForceValue`/`Size` are
+  multiplied by a per-phase percent — `DirectorBuildUpForceScalePercent` (100, the
+  baseline and also what a disabled/absent provider reads), `Pressure` (85),
+  `Climax` (55 — the wave's release: launch on a smaller pool), `Relief` (150 —
+  rebuild past the baseline before committing again). Scaling the *bar* rather
+  than the stored desired force means a phase change mid-wait takes effect
+  immediately — a loss spike into `Relief` raises the bar that same tick instead
+  of next cycle. Zero stays zero, so `SquadValue 0` configs keep their trivially
+  passing value check. The chosen surface deliberately avoids
+  `minAttackForceDelayTicks`, which `UseUtilityAxes` and personality leads already
+  multiply — no shared-knob ordering, no cross-switch interaction. Armed by
+  `UseDirectorPacing` (switch group P), flag-off = scale 100 = bit-identical.
+  A Director change is itself an A/B candidate that must beat master
   (DESIGN §19.2).

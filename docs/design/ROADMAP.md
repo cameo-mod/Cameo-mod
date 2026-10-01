@@ -193,8 +193,10 @@ the fog sequencing.
     tracking + heading extrapolation (record-only first), defence squad pre-positioned under own
     towers with a poke-and-fall-back lure, fast squads convert by threat and reach, punish the
     enemy base while its army is out. **Claude.**
-  - [ ] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
-    (DESIGN §19.2). **NOVA**, with UT.
+  - [~] **M** DI Director: pacing/aggression on a tension curve, no cheats, **on in the A/B**
+    (DESIGN §19.2). **NOVA**, with UT. DI-1 publisher `nova/director-1` (#740 —
+    publish-only telemetry, no switch); DI-2 consumer `nova/director-2` — phase-scaled
+    launch bar, group P.
   - [ ] **S** LA offline analyst loop (AI_DEEP_RESEARCH §12): no local LLM, so an agent is the
     analyst; input `tools/ai/fight_report.py` (#617), output `FINDINGS_*` + one A/B'd
     candidate per finding. **Claude** (Devin Cloud out of tokens until next week).

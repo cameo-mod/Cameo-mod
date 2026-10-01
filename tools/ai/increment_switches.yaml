@@ -76,3 +76,6 @@ groups:
   O_ca2_defend_reserve:              # DAWN CA-2 - defend-draft keeps a reserve (FransGroundDefendForcePreservationGuard port); attacker inside base = emergency, commits all
     SquadManagerBotModuleCA:
       UseDefendPreservation: true
+  P_di2_director_pacing:             # NOVA DI-2 — Director wave phase scales the assault launch bar (stacked on director-1 publisher)
+    SquadManagerBotModuleCA:
+      UseDirectorPacing: true

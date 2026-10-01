@@ -15811,3 +15811,25 @@ regression. Sampled failures reproduce on `f1f47c879` (pre-collapse parent).
 **Open for coordinator:** target_policy_field_history has 3 records for weapons deleted in
 the RA1 pack split (`BallistaSingleShotAir*`, `CabalLaserBoatLaserAA`) — dead fixture rows,
 never consulted; and `generals.yaml` dormant dead ids (shared debt above).
+## 2026-10-01 — NOVA DI-2: the Director's first consumer (phase-scaled launch bar)
+
+- `SquadManagerBotModuleCA`: `UseDirectorPacing` (default false) scales the assault
+  dispatch bar — `desiredAttackForceValue`/`Size` × per-phase percent — at the
+  `CreateAttackForce` gate each check. BuildUp 100 (baseline = disabled/absent
+  provider), Pressure 85, Climax 55 (release), Relief 150 (rebuild). Scaling the
+  bar not the stored force = a phase change mid-wait applies same-tick; zero bars
+  stay zero so `SquadValue 0` configs keep their trivially passing value check.
+- Surface choice: the force *threshold*, not `minAttackForceDelayTicks` — that
+  knob already carries `UseUtilityAxes` + personality-lead multipliers; this keeps
+  DI-2 order-independent of the M/G combines. Static helpers
+  `DirectorForceScalePercent` / `ApplyForceScale` for the test fixture.
+- yaml: `UseDirectorPacing: false` on the six genericbot personalities; switch
+  group `P_di2_director_pacing` arms the bare `SquadManagerBotModuleCA` key
+  (the manifest's `SquadManagerBotModuleCA@classic` skip protects the control).
+- Stacked on `nova/director-1` (#740) for the `IBotDirector` seam.
+- Tests: `DirectorForceScaleTest` (7): phase→scale map, BuildUp neutrality,
+  Climax sub-baseline, Relief super-baseline, zero-bar preservation,
+  no-round-to-zero, yaml override load.
+- Docs: AI_ARCHITECTURE 12.16 DI-2 paragraph; ROADMAP row M updated.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>

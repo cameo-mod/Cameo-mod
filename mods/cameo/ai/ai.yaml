@@ -3661,6 +3661,9 @@ Player:
 		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
 		# donor shape); waived when the attacker is inside the base. Group O.
 		UseDefendPreservation: false
+		# DI-2 (AI_ARCHITECTURE 12.16): the Director wave phase scales the assault
+		# launch bar — Climax releases smaller, Relief rebuilds longer. Group P.
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3733,6 +3736,7 @@ Player:
 	SquadManagerBotModuleCA@turtle:
 		UseProtectionRequests: true
 		UseDefendPreservation: false
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3804,6 +3808,7 @@ Player:
 	SquadManagerBotModuleCA@tech:
 		UseProtectionRequests: true
 		UseDefendPreservation: false
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3877,6 +3882,7 @@ Player:
 	SquadManagerBotModuleCA@expansion:
 		UseProtectionRequests: true
 		UseDefendPreservation: false
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -3949,6 +3955,7 @@ Player:
 	SquadManagerBotModuleCA@steamroller:
 		UseProtectionRequests: true
 		UseDefendPreservation: false
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4019,6 +4026,7 @@ Player:
 	SquadManagerBotModuleCA@guerrilla:
 		UseProtectionRequests: true
 		UseDefendPreservation: false
+		UseDirectorPacing: false
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
