@@ -1,3 +1,20 @@
+# 2026-10-02 — NOVA: EX-2d depleted-field centre fallback + armed-smoke receipt
+
+- Armed smoke (all increment groups A→W, hard vs classic, A Nuclear Winter):
+  0-3, zero exceptions. Match 1 ran 65k ticks — hard earned 607,895 resources
+  vs losing 102 buildings to classic's 26: the expansion economy works, the
+  losses are military/endgame. Expansion telemetry confirmed live: EX-2 claim
+  fired at the crawled field (13,43 claims 16,36 @ tick 2362), greedy MCV
+  requests from tick 7750 at ~1.7-4k cash (engine alone waits for 4000),
+  four MCVs to four distinct far fields.
+- Smoke finding → EX-2d: two depleted fields both surfaced with centre 0,0
+  (`field 4 at 0,0`, `field 9 at 0,0`) — the resource map recomputes a field's
+  centre every scan and an empty field gets a degenerate one, yet it keeps its
+  first-seen VALUE, so the planner could aim a refinery at the map corner.
+  `EffectiveCenter` falls back to the remembered first-seen centre when
+  `ResourceCellsCount == 0` — Tiberium regrows in place. +1 test (606/606),
+  fog audit PASS (246 sites).
+
 # 2026-10-02 — NOVA: TC-2d role split (switch W_tc2_role_split)
 
 - `UseTeamRoleSplit` on `MasterAiBotModule` (genericbot-only): allied bots

@@ -195,6 +195,19 @@ namespace OpenRA.Mods.Cameo.Test
 				"we are index 0 — the ally yields to us instead");
 		}
 
+		// EX-2d: a depleted field's live centre collapses to a degenerate cell — the
+		// remembered first-seen centre is the honest fallback (fields regrow in place).
+		[Test]
+		public void DepletedFieldKeepsItsRememberedCenter()
+		{
+			var live = new CPos(40, 40);
+			var remembered = new CPos(30, 12);
+			Assert.That(ExpansionPlannerBotModule.EffectiveCenter(0, new CPos(0, 0), remembered),
+				Is.EqualTo(remembered), "empty field: live centre is meaningless — use the memory");
+			Assert.That(ExpansionPlannerBotModule.EffectiveCenter(12, live, remembered),
+				Is.EqualTo(live), "live cells present: the live centre leads");
+		}
+
 		[Test]
 		public void DistantOrAbsentClaimsDoNotContest()
 		{

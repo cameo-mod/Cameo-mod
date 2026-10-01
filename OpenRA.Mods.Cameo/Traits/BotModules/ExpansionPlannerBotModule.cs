@@ -480,6 +480,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return null;
 		}
 
+		/// <summary>
+		/// EX-2d: the centre to score/claim for a field — the live centre while resource cells exist;
+		/// a depleted field's live centre collapses (the resource map recomputes it every scan and an
+		/// empty field has none), so fall back to the remembered first-seen centre instead of aiming
+		/// refineries at the map corner. Pure, for the tests.
+		/// </summary>
+		public static CPos EffectiveCenter(int liveCellCount, CPos liveCenter, CPos rememberedCenter)
+		{
+			return liveCellCount > 0 ? liveCenter : rememberedCenter;
+		}
+
 		/// <summary>Buildings needed to bring the base within reach of a field `distance` cells away.</summary>
 		public static int Hops(int distanceCells, int reachCells, int stepCells)
 		{
@@ -585,7 +596,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// The centre drifts as the field depletes (the resource map recomputes it every scan), so a refinery near
 				// either the current or the first-seen centre claims it; otherwise a claimed field could look free again.
-				var center = field.ResourceCellsCenter;
+				// EX-2d: fully depleted fields report a degenerate live centre — score/aim at the remembered
+				// first-seen centre instead (the field regrows; its location does not move).
+				var center = EffectiveCenter(field.ResourceCellsCount, field.ResourceCellsCenter, initialCenters[i]);
 				var claimed = Claimed(center, refineryCells, Info.ClaimRadiusCells)
 					|| Claimed(initialCenters[i], refineryCells, Info.ClaimRadiusCells);
 				if (field.PlayerRefineryCount > 0 || claimed || value <= 0)

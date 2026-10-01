@@ -2294,6 +2294,13 @@ target. The provider publishes it as `RefineryClaimTarget` (the queue manager fa
 `ExpansionTarget`); when the crawl target is in reach the pick is identical to EX-2's, and
 parked/missed-claim bookkeeping is unchanged and still per-field.
 
+**EX-2d (same section, 2026-10-02).** A fully depleted field's live `ResourceCellsCenter` collapses
+to a degenerate cell (the resource map recomputes it every scan and an empty field has none), so a
+depleted field could score or claim toward the map corner. `EffectiveCenter` falls back to the
+remembered first-seen centre whenever the field reports no live cells — Tiberium regrows in place,
+the field's location does not move. Armed-smoke finding: two depleted fields both surfaced at
+`0,0` as expansion candidates.
+
 **EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
 engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
 `claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after
