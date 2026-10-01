@@ -76,6 +76,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		IBotRespondToAttack[] attackResponseModules;
 
 		readonly Dictionary<IBotTick, (long Ticks, long Count)> moduleTiming = [];
+
+		// DESIGN §19.6, the order gate: every module's orders pass through QueueOrder, and ModularBot is the one that calls
+		// each module, so it knows who is ordering. `issuer` is the module running now (null outside a module call);
+		// `emergency` is true inside an attack response.
+		readonly BotModules.BotOrderGate<Actor> gate = new();
+		string issuer;
+		bool emergency;
+		int gatePruneTick;
+
+		public BotModules.BotOrderGate<Actor> OrderGate => gate;
+
+		/// <summary>Orders dropped because the queue was full (MaxQueuedOrders): the oldest first.</summary>
+		public int DroppedOrders { get; private set; }
 		readonly Stopwatch moduleStopwatch = new();
 		int ticksSinceReport;
 
@@ -107,10 +120,56 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBot.QueueOrder(Order order)
 		{
+			if (!PassesGate(order))
+				return;
+
 			while (orders.Count >= info.MaxQueuedOrders)
+			{
 				orders.Dequeue();
+				DroppedOrders++;
+			}
 
 			orders.Enqueue(order);
+		}
+
+		/// <summary>
+		/// DESIGN §19.6: a unit order from a module that does not hold the unit's lease is refused when the registry
+		/// enforces, counted when it only watches; an emergency (an attack response from a listed module) takes the unit
+		/// over. Units without a lease, orders on buildings and bots without a registry (`classic`) pass untouched.
+		/// </summary>
+		bool PassesGate(Order order)
+		{
+			var unit = order.Subject;
+			if (unit == null || unit.IsDead || unit.Owner != player || unit == player.PlayerActor || !unit.Info.HasTraitInfo<IMoveInfo>())
+				return true;
+
+			var registry = BotUnitLeases.Of(player) as BotModules.BotUnitLeaseRegistry;
+			if (registry == null)
+				return true;
+
+			var holder = ((IBotUnitLeases)registry).LeaseOf(unit)?.Owner;
+			var ri = registry.Info;
+			var (verdict, first) = gate.Judge(issuer, holder, ri.EnforceAtOrderGate, emergency, ri.EmergencyModules);
+			if (first)
+				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE {verdict.ToString().ToUpperInvariant()} {issuer ?? "?"} ordered {unit.Info.Name} {unit.ActorID} ({order.OrderString}) held by {holder} (tick {world.WorldTick}; first of this pair)");
+
+			if (verdict == BotModules.BotOrderVerdict.Refuse)
+				return false;
+
+			if (verdict == BotModules.BotOrderVerdict.Preempt)
+				((IBotUnitLeases)registry).Preempt(unit, issuer, BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
+
+			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks);
+			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
+				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE CROSSED {earlier} then {issuer} ordered {unit.Info.Name} {unit.ActorID} within {ri.CrossedOrderWindowTicks} ticks (tick {world.WorldTick}; first of this pair)");
+
+			if (world.WorldTick - gatePruneTick > 500)
+			{
+				gatePruneTick = world.WorldTick;
+				gate.Prune(a => a.IsDead || !a.IsInWorld);
+			}
+
+			return true;
 		}
 
 		void ITick.Tick(Actor self)
@@ -131,6 +190,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						if (!t.IsTraitEnabled())
 							continue;
 
+						issuer = t.GetType().Name;
 						if (timed)
 						{
 							moduleStopwatch.Restart();
@@ -142,6 +202,8 @@ namespace OpenRA.Mods.Cameo.Traits
 						}
 						else
 							t.BotTick(this);
+
+						issuer = null;
 					}
 				});
 			}
@@ -195,9 +257,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
+					emergency = true;
 					foreach (var t in attackResponseModules)
-						if (t.IsTraitEnabled())
-							t.RespondToAttack(this, self, e);
+					{
+						if (!t.IsTraitEnabled())
+							continue;
+
+						issuer = t.GetType().Name;
+						t.RespondToAttack(this, self, e);
+					}
+
+					issuer = null;
+					emergency = false;
 				});
 			}
 		}

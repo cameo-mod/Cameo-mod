@@ -47,6 +47,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				leases.Remove(key);
 		}
 
+		/// <summary>Take the key over whoever holds it; returns the previous active owner (null if none).</summary>
+		public string Preempt(TKey key, string owner, BotLeasePurpose purpose, int now, int durationTicks)
+		{
+			var previous = leases.TryGetValue(key, out var l) && Active(l, now) ? l.Owner : null;
+			leases[key] = new BotLease(owner, purpose, now, durationTicks > 0 ? now + durationTicks : int.MaxValue);
+			return previous;
+		}
+
 		public bool IsClaimedByOther(TKey key, string owner, int now) =>
 			leases.TryGetValue(key, out var l) && Active(l, now) && l.Owner != owner;
 
@@ -87,6 +95,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		[Desc("Ticks between prunes (expired leases, dead or lost units) and the debug.log summary.")]
 		public readonly int PruneIntervalTicks = 250;
+
+		[Desc("DESIGN §19.6: the order gate (Cameo's ModularBot) REFUSES a unit order from a module that does not hold the",
+			"unit's lease. False = it only counts the conflicts (the default until its A/B).")]
+		public readonly bool EnforceAtOrderGate = false;
+
+		[Desc("Modules whose orders from an attack response (an emergency) take a claimed unit over instead of being",
+			"refused; the old holder is told (IBotUnitLeaseLost).")]
+		public readonly HashSet<string> EmergencyModules = ["SquadManagerBotModuleCA"];
+
+		[Desc("Ticks an emergency keeps a preempted unit before the lease expires (its module may renew it).")]
+		public readonly int EmergencyLeaseTicks = 500;
+
+		[Desc("Two different modules ordering one unit within this many ticks count as a crossed order. 0 disables.")]
+		public readonly int CrossedOrderWindowTicks = 100;
 
 		public override object Create(ActorInitializer init) { return new BotUnitLeaseRegistry(init.Self, this); }
 	}
@@ -142,6 +164,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			actor != null && table.IsClaimedByOther(actor, owner, world.WorldTick);
 
 		BotLease? IBotUnitLeases.LeaseOf(Actor actor) => actor == null ? null : table.LeaseOf(actor, world.WorldTick);
+
+		public int Preempts { get; private set; }
+
+		bool IBotUnitLeases.Preempt(Actor actor, string owner, BotLeasePurpose purpose, int durationTicks)
+		{
+			if (actor == null || IsGone(actor))
+				return false;
+
+			var previous = table.Preempt(actor, owner, purpose, world.WorldTick, durationTicks);
+			Preempts++;
+			if (previous != null && previous != owner)
+			{
+				Log.Write("debug", $"AI ({player.ClientIndex}): LC1 lease preempted: {owner} took {actor.Info.Name} {actor.ActorID} from {previous} for {purpose} (tick {world.WorldTick})");
+				foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
+					if (lost.GetType().Name == previous)
+						lost.LeaseLost(actor, owner, purpose);
+			}
+
+			return true;
+		}
 
 		/// <summary>Every unexpired lease, for the ownership watchdog (LC5) and tests.</summary>
 		public IEnumerable<(Actor Actor, BotLease Lease)> ActiveLeases => table.ActiveLeases(world.WorldTick);
