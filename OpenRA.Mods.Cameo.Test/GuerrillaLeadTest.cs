@@ -48,5 +48,35 @@ namespace OpenRA.Mods.Cameo.Test
 				"zero fresh intel on a remembered enemy is a zero lead, the worst case");
 			Assert.That(MasterAiBotModule.GuerrillaLeadFor(0, 0), Is.EqualTo(1.0));
 		}
+
+		// PL-2 (§12.14): the consumer leg — behind on map control grows the scout cap,
+		// linear in the deficit, capped at base + extra. lean >= 1 (at target, flag off,
+		// wrong personality) keeps the configured cap bit-identical.
+		[Test]
+		public void TrailingLeadRaisesTheScoutCap()
+		{
+			Assert.That(ScoutBotModule.EffectiveMaxScouts(2, 1.0, 2), Is.EqualTo(2),
+				"at target: configured cap, untouched");
+			Assert.That(ScoutBotModule.EffectiveMaxScouts(2, 0.5, 2), Is.EqualTo(3),
+				"half a lead adds half the extra allowance");
+			Assert.That(ScoutBotModule.EffectiveMaxScouts(2, 0.0, 2), Is.EqualTo(4),
+				"full deficit adds the whole extra allowance");
+			Assert.That(ScoutBotModule.EffectiveMaxScouts(2, 1.0, 0), Is.EqualTo(2),
+				"zero extra configured: nothing to add");
+		}
+
+		[Test]
+		public void TheGuerrillaLeadReachesTheConsumerSeam()
+		{
+			var situation = new BotSituation { OwnPersonality = "guerrilla" };
+			situation.GuerrillaLead = 0.4;
+
+			Assert.That(MasterAiBotModule.PersonalityLeadLean(false, true, situation, "guerrilla", 50),
+				Is.EqualTo(0.7).Within(1e-9), "0.4 lead, 50% max lean: multiplier 1 - 0.6 x 0.5");
+			Assert.That(MasterAiBotModule.PersonalityLeadLean(false, true, situation, "steamroller", 50),
+				Is.EqualTo(1.0), "a different personality asks and leans nothing");
+			Assert.That(MasterAiBotModule.PersonalityLeadLean(false, false, situation, "guerrilla", 50),
+				Is.EqualTo(1.0), "flag off: bit-identical no-lean");
+		}
 	}
 }

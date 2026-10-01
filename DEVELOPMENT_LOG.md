@@ -16,6 +16,31 @@
     index's resource centre — pure cell distance let the same field's far edge
     through (the residual 3-stack).
 
+# 2026-10-01 — DAWN: PL-2 guerrilla lead consumer — trailing map control raises the scout cap
+
+- §12.14 gives each personality one lead and a driver to lean on while it
+  trails. Guerrilla's lead (`own.guerrilla_lead`, #743, telemetry on master)
+  measures fresh-intel regions per remembered-enemy region; its driver column
+  is "scouts, guerrilla squads". This lands the scout leg.
+- `PersonalityLeadLean` now answers "guerrilla" from `Situation.GuerrillaLead`
+  — one extra arm in the same seam NOVA's PL-1 built, no new provider.
+- `ScoutBotModule` collects `IBotPersonalityLeadProvider`s (the same
+  `PlayerActor.TraitsImplementing` pattern the squad manager and unit builder
+  use) and computes `EffectiveMaxScouts = MaxScouts + (1 - lean) x
+  GuerrillaLeadExtraScouts` (2), rounding to whole scouts. lean >= 1 — flag
+  off, wrong personality, or at target — keeps `MaxScouts` bit-identical.
+- Scouts close the loop honestly: they are the lead's numerator driver, so a
+  trailing guerrilla literally buys back map coverage; nothing reads the
+  enemy side beyond the remembered-presence the lead already counts.
+- No new switch group: the consumer inherits `G_personality_leads` /
+  `UsePersonalityLeads` — the group now carries three consumers (cash floors,
+  attack delay, scout cap), all under the same §12.14 contract.
+- Tests: `TrailingLeadRaisesTheScoutCap` (cap growth linear in deficit,
+  at-target and zero-extra exact) + `TheGuerrillaLeadReachesTheConsumerSeam`
+  (guerrilla asks get the guerrilla lead; other personalities and flag-off
+  lean nothing). 593/593 green.
+>>>>>>> 154c0a582 (ai(pl2): guerrilla lead consumer — trailing map control raises the scout cap)
+
 # 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
 
 - Smoke batch showed the armed `hard` bot stacking three refineries on the home

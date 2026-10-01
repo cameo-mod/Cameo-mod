@@ -2351,7 +2351,16 @@ returns the snapshot's multiplier, gated by flag, running-personality match and 
 Steamroller leans `UnitBuilderBotModuleCA`'s `ProductionMinCashRequirement` /
 `MaximiseProductionCashRequirement` floors; Rush leans `SquadManagerBotModuleCA`'s
 `minAttackForceDelayTicks` reset — each by up to `PersonalityLeadMaxLeanPercent` (50),
-linear in the deficit. The other four personalities' leads remain telemetry-only.
+linear in the deficit.
+
+**PL-2 (DAWN, 2026-10-01):** the Guerrilla lead gains its consumer leg — `PersonalityLeadLean`
+now answers "guerrilla" from `Situation.GuerrillaLead`, and `ScoutBotModule` adds up to
+`GuerrillaLeadExtraScouts` (2) to its effective `MaxScouts` while the lead trails, linear in
+the deficit (`EffectiveMaxScouts`). Scouts are the lead's own driver: behind on map control
+means more eyes, which raises `regions_fresh` and closes the loop. Gated by the same
+`UsePersonalityLeads` (group `G_personality_leads`) — flag-off leaves `MaxScouts`
+bit-identical, and a non-guerrilla personality reads lean 1.0 via the seam's personality
+match. The Expansion/Turtle/Tech leads remain telemetry-only.
 ### 12.15 UT-1 — the utility axes, first slice (NOVA, 2026-10-01; AI_DEEP_RESEARCH.md §5.1)
 
 The maintainer's axis ruling lands as `BotUtilityAxes`: three bipolar posture axes —
