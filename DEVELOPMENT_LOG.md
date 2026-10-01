@@ -1,3 +1,13 @@
+# 2026-10-01 — NOVA: UT-4 expansion appetite (switch U_ut4_expansion_appetite)
+
+- `UseUtilityExpansionAppetite` on `ExpansionPlannerBotModule`: the
+  TechRush↔Expansion utility axis scales `McvTargetCount` — Expansion pole adds
+  `ExpansionAxisBonusMcvs` (default 2), TechRush pole subtracts
+  `TechRushAxisMinusMcvs` (default 1, floor 1 yard). Neutral axis = verbatim
+  count (flag-off parity via provider-absent fallback to Neutral).
+- `EffectiveMcvTargetCount` pure helper; planner is genericbot-only so classic
+  is untouched by construction. +4 tests in RefinerySpreadTest.
+
 # 2026-10-01 — NOVA: refinery fix round 2 (live smoke evidence) + CN-2 crash
 
 - Verification smoke on the spread fix caught two more defects:

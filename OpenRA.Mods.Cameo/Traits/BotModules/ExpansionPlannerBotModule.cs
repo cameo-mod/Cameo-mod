@@ -89,6 +89,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"The engine module's own count/cash gates still apply to its requests on top of this.")]
 		public readonly int McvTargetCount = 3;
 
+		[Desc("UT-4 (AI_ARCHITECTURE §12.13): the TechRush<->Expansion utility axis scales the appetite —",
+			"an Expansion-leaning personality raises the effective McvTargetCount, a TechRush-leaning one",
+			"lowers it. Needs DriveMcvRequests. genericbot-only module, so classic is unaffected.")]
+		public readonly bool UseUtilityExpansionAppetite = false;
+
+		[Desc("UT-4: at the full Expansion pole the effective McvTargetCount grows by this many.")]
+		public readonly int ExpansionAxisBonusMcvs = 2;
+
+		[Desc("UT-4: at the full TechRush pole the effective McvTargetCount shrinks by this many (floor 1).")]
+		public readonly int TechRushAxisMinusMcvs = 1;
+
 		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
 			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
 			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
@@ -162,6 +173,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<string> constructionYardTypes;
 		readonly Dictionary<string, McvRole> mcvRoles = new();
 		IBotRequestUnitProduction[] unitBuilders;
+		IBotUtilityAxes[] utilityAxesProviders;
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -236,6 +248,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
 			baseBuilders = self.TraitsImplementing<BaseBuilderBotModuleCA>().ToArray();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
+			utilityAxesProviders = self.TraitsImplementing<IBotUtilityAxes>().ToArray();
 		}
 
 		/// <summary>
@@ -298,6 +311,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return farFieldFree && cash >= reserve && activePlusQueued < targetCount;
 		}
 
+		/// <summary>
+		/// UT-4: the effective MCV appetite under the TechRush&lt;-&gt;Expansion axis — Expansion leans add up to
+		/// +expansionBonus at the pole, TechRush leans subtract up to -techrushMinus (floor 1: never zero appetite).
+		/// Neutral (50) returns the base count verbatim. Pure, for the tests.
+		/// </summary>
+		public static int EffectiveMcvTargetCount(int baseTarget, int axis, int expansionBonus, int techrushMinus)
+		{
+			if (axis > IBotUtilityAxes.Neutral)
+				return baseTarget + (int)Math.Round((axis - IBotUtilityAxes.Neutral) / (double)IBotUtilityAxes.Neutral * expansionBonus);
+
+			return Math.Max(1, baseTarget - (int)Math.Round((IBotUtilityAxes.Neutral - Math.Max(0, axis)) / (double)IBotUtilityAxes.Neutral * techrushMinus));
+		}
+
 		void RequestMcv(IBot bot)
 		{
 			if (unitBuilders == null || resources == null)
@@ -318,7 +344,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					.SelectMany(t => t.AllQueued()))
 				.Count(q => constructionMcvTypes.Contains(q.Item));
 
-			if (!ShouldRequestMcv(resources.GetCashAndResources(), Info.McvRequestReserve, farFieldFree, active + queued, Info.McvTargetCount))
+			// UT-4: the TechRush<->Expansion axis scales the appetite — Expansion personalities keep more
+			// MCVs flowing, TechRush ones hold back (the engine's own gates still apply on top either way).
+			var targetCount = Info.McvTargetCount;
+			if (Info.UseUtilityExpansionAppetite)
+			{
+				var axis = utilityAxesProviders?.FirstEnabledTraitOrDefault()?.UtilityTechRushExpansion ?? IBotUtilityAxes.Neutral;
+				targetCount = EffectiveMcvTargetCount(Info.McvTargetCount, axis, Info.ExpansionAxisBonusMcvs, Info.TechRushAxisMinusMcvs);
+			}
+
+			if (!ShouldRequestMcv(resources.GetCashAndResources(), Info.McvRequestReserve, farFieldFree, active + queued, targetCount))
 				return;
 
 			var unitBuilder = unitBuilders.FirstEnabledTraitOrDefault();

@@ -2280,6 +2280,12 @@ without this the second expansion waits minutes; where the MCV goes is still EX-
 hand-out parking is untouched. `ShouldRequestMcv` is the pure gate; all inputs are own-side counts or
 public map data, so fog-honest, and the flag lives only on the genericbot planner.
 
+**UT-4 (switch group `U_ut4_expansion_appetite`, off until the increment A/B):** the
+TechRush&harr;Expansion axis scales that appetite — `EffectiveMcvTargetCount` adds up to
+`ExpansionAxisBonusMcvs` (2) at the Expansion pole and subtracts up to `TechRushAxisMinusMcvs` (1,
+floor 1) at TechRush. Expansion personalities spread wider; TechRush ones hold the home front and
+tech. Neutral axis = verbatim count.
+
 **EX-3 as built (2026-09-29; maintainer ruling: a small engine hook).** `McvExpansionManagerBotModule` is
 engine code, so the hook lives in the engine (`cameo-mod/OpenRA` `d5d8b2a685`, branch
 `claude/mcv_expansion_site`, on top of the pin `042b2fa787`; pinned in `mod.config`). Right after

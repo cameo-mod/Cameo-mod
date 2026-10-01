@@ -116,5 +116,40 @@ namespace OpenRA.Mods.Cameo.Test
 				"three yards/MCVs including queued already covers the appetite");
 			Assert.That(ExpansionPlannerBotModule.ShouldRequestMcv(9000, 1500, true, 2, 3), Is.True);
 		}
+
+		// UT-4 (AI_ARCHITECTURE.md 12.13): the TechRush<->Expansion axis scales the appetite —
+		// neutral keeps the base count, the Expansion pole adds the bonus, the TechRush pole
+		// subtracts (floor 1: never zero appetite).
+		[Test]
+		public void NeutralAxisKeepsTheBaseCount()
+		{
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, 50, 2, 1), Is.EqualTo(3),
+				"neutral = flag-off behaviour verbatim");
+		}
+
+		[Test]
+		public void ExpansionPoleWidensTheAppetite()
+		{
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, 100, 2, 1), Is.EqualTo(5));
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, 75, 2, 1), Is.EqualTo(4),
+				"half-lean rounds to half the bonus");
+		}
+
+		[Test]
+		public void TechRushPoleSlimsTheAppetite()
+		{
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, 0, 2, 1), Is.EqualTo(2));
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, 25, 2, 1), Is.EqualTo(3),
+				"a half-lean of minus-one rounds back to base");
+		}
+
+		[Test]
+		public void TheFloorIsOneYard()
+		{
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(1, 0, 2, 5), Is.EqualTo(1),
+				"a full TechRush lean never zeroes the appetite");
+			Assert.That(ExpansionPlannerBotModule.EffectiveMcvTargetCount(3, -10, 2, 1), Is.EqualTo(2),
+				"out-of-contract axes clamp defensively");
+		}
 	}
 }

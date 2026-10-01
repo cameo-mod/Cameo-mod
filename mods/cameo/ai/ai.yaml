@@ -3589,6 +3589,9 @@ Player:
 		# Greedy expansion: while a far field is free, request construction-MCV production ourselves
 		# (engine module alone waits for its 4000-cash trigger first — too late to be a menace).
 		DriveMcvRequests: true
+		# UT-4: TechRush<->Expansion axis scales the MCV appetite (switch group U). Off until the
+		# increment A/B arms it.
+		UseUtilityExpansionAppetite: false
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
