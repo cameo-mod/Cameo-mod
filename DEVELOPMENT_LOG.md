@@ -1,4 +1,26 @@
-# 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
+# 2026-10-01 — Devin (NOVA): UW-1 — derived `UnitsToBuild` weights (AI_ARCHITECTURE §2.8b item 3)
+
+- `UnitBuilderBotModuleCAInfo.UseDerivedUnitWeights` (default **false**) plus new
+  `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/DerivedUnitWeights.cs`: when the flag is on and
+  no composition applies, the enabled squad manager's `RoleMix` drives the production table —
+  `w[u] = max(1, round(share[primaryRole(u)] x strength[u] / mean strength over the candidates
+  sharing that role))`, `share[r]` = mix value or `RoleMixRoleFloorPct`, `strength[u]` = best
+  weapon's `DamagePerTick x mean(Versus)/100` floored at 1 (`BotUnitProfiles`). The yaml rows stay
+  the membership gate and pass through verbatim for unroled units; flag off, absent `RoleMix`, or
+  absent `IBotUnitRoles` provider return `Info.UnitsToBuild` byte-identical — so the shared
+  `@generic` instance is inert on classic. Table cached on the (mix, floorPct) reference; a
+  personality switch swaps the enabled manager and rebuilds.
+- Switch manifest group `I_derived_unit_weights` maps `UnitBuilderBotModuleCA.UseDerivedUnitWeights:
+  true` (`apply_increment_switches.py` --dry-run verified: 1 change on the `@generic` instance).
+- `mods/cameo/ai/ai.yaml`: `UseDerivedUnitWeights: false` on `UnitBuilderBotModuleCA@generic` — the
+  only instance. Note: no personality carries a `RoleMix` yet (that yaml is CA-3's), so the flag is
+  inert until those starting mixes land; the machinery + switch are what UW-1 ships.
+- 9 new tests (`DerivedUnitWeightsTest`): formula, floor-pct for unnamed roles, yaml passthrough
+  for unroled rows, weight floor at 1, flag-off/no-mix/no-provider fallback, composition
+  precedence, cache-on-mix-reference, strength proxy incl. empty-Versus=100. Suite: 477 green.
+- Boot gate: PASS (PostWorldLoaded reached, no new exception-*.log). PR body has the evidence.
+
+
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
   (AI_MASTER_PLAN §1.2 step 6, amended 2026-10-01). `--ctrl <sha> --cand <sha>

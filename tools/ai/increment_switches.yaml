@@ -26,3 +26,6 @@ groups:
   G_personality_leads:               # NOVA PL-1 — Steamroller/Rush leads lean their budget drivers while trailing (§12.14)
     MasterAiBotModule:
       UsePersonalityLeads: true
+  I_derived_unit_weights:            # NOVA UW-1 — derive UnitsToBuild weights from RoleMix x Versus strength (§2.8b item 3)
+    UnitBuilderBotModuleCA:
+      UseDerivedUnitWeights: true

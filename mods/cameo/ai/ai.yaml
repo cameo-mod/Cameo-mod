@@ -4173,6 +4173,11 @@ Player:
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
 		UseCompositions: true
+		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
+		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
+		# A/B — switch group I_derived_unit_weights. Inert on classic: it carries no RoleMix and no
+		# IBotUnitRoles provider, so the same @generic instance keeps the yaml table there.
+		UseDerivedUnitWeights: false
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
