@@ -2,19 +2,19 @@
 
 _Engine uses System.Numerics vectors: upstream text is compared after the float2/float3 -> Vector2/Vector3 conversion (tools/audit/vector_codemod.py)._
 
-Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HEAD`; `git fetch` the clone first)
+Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HEAD`; `git fetch` the clone first)
 
 | status | files |
 |---|--:|
 | IDENTICAL | 38 |
-| STALE | 39 |
-| MODIFIED | 26 |
-| MODIFIED+STALE | 46 |
-| MOVED/REMOVED | 12 |
-| CAMEO_ONLY | 45 |
-| MISSING (upstream files never copied) | 312 |
+| STALE | 38 |
+| MODIFIED | 25 |
+| MODIFIED+STALE | 47 |
+| MOVED/REMOVED | 13 |
+| CAMEO_ONLY | 49 |
+| MISSING (upstream files never copied) | 317 |
 
-## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (39)
+## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (38)
 
 - `OpenRA.Mods.CA/Traits/AttachableTo.cs`: base 2023-05-27, 9 upstream commits since
     - 2026-06-10 - Prevent Nanite Repair from targeting attached Mini Drones. - Added missing Mobile Sensor discount for ARC. - Cap Ichor Spike to affecting 3 resource nodes. - AI uses IC on damaged units only. - SSM voice. - Speculative fix for failed Mini Drone detachment.
@@ -124,8 +124,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-07-02 Engine update part 7.
 - `OpenRA.Mods.CA/Traits/TurnOnIdleCA.cs`: base 2023-05-27, 1 upstream commits since
     - 2026-05-31 Replaced AttachedAircraft trait with ImmobilePositionable.
-- `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 1 upstream commits since
-    - 2026-09-12 Random factions revealed on game start.
 - `OpenRA.Mods.CA/Widgets/ExternalLinkButtonWidget.cs`: base 2023-07-06, 1 upstream commits since
     - 2023-08-19 Improved targeting for GrantExternalConditionPowerCA and ChronoshiftPowerCA.
 - `OpenRA.Mods.CA/Widgets/Logic/AddFactionSuffixLogicCA.cs`: base 2023-05-27, 1 upstream commits since
@@ -133,7 +131,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs`: base 2023-06-16, 1 upstream commits since
     - 2023-08-19 Improved targeting for GrantExternalConditionPowerCA and ChronoshiftPowerCA.
 
-## MODIFIED+STALE: port the upstream diff by hand (46)
+## MODIFIED+STALE: port the upstream diff by hand (47)
 
 - `OpenRA.Mods.CA/Traits/MindController.cs`: base 2023-09-01, 17 upstream commits since, Cameo diff 91 lines
     - 2026-01-10 Mind control trait improvements.
@@ -201,13 +199,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2030 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2265 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1088 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1253 lines
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 - V3 now Ukraine unique unit. - Siege Tank now replaces V2 for Ukraine. - Yaml fixes.
@@ -248,7 +246,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-07-02 Engine update fixes part 3.
     - 2024-12-07 - Added voice announcement for when Covenants become available. - Added tracers effects to Wolverine & updated firing sound. - Increased Chrono Tank rate of fire, damage vs light/buildings, range (+1) and turn speed. Reduced HP from 45k to 32k. - Increased JumpJet/Bombardier speed. - Ships targetable by Anathema. - Tripled PAC damage vs buildings. - Reduced duration of Cyborg Reaper snare from 8s to 6s. - Zone Defender shield stacks up to 6 times providing between 25% and 50% damage reduction. - Updated Stromberg maps.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 84 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 93 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
@@ -303,7 +301,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-12-07 Clean up trait lookups.
 - `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 792 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 642 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 667 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 437 lines
     - 2025-08-10 AI updates.
@@ -321,12 +319,14 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
     - 2025-05-13 - Allow multiple types of mind control on a single unit. - Yuri/Mastermind/Hacker IFV reworked to allow control which passes to/from the passenger on exit/entry. - Re-remove Jackknife air to ground modifier.
 - `OpenRA.Mods.CA/Traits/Palettes/OverlayPlayerColorPalette.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 2 lines
     - 2026-01-19 Lock player colors in co-op missions.
+- `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisiteValidatedFaction.cs`: base 2025-11-24, 1 upstream commits since, Cameo diff 2 lines
+    - 2026-09-19 Campaign tweaks/fixes.
 - `OpenRA.Mods.CA/Traits/Sound/AmbientSoundCA.cs`: base 2023-05-29, 1 upstream commits since, Cameo diff 5 lines
     - 2024-08-23 Stop looping ambient sounds when game is paused. Don't include Troop Crawler in statistics.
 - `OpenRA.Mods.CA/Traits/Warpable.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 4 lines
     - 2023-12-22 Fixed empty warp damage bar appearing when units have very low health. Minor spelling/yaml corrections.
 
-## MOVED/REMOVED upstream (12)
+## MOVED/REMOVED upstream (13)
 
 - `OpenRA.Mods.CA/Traits/Attack/AttackBomberCA.cs`: base ?, 1 upstream commits since
     - now at OpenRA.Mods.CA/Traits/Air/AttackBomberCA.cs
@@ -342,17 +342,18 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Infiltration/InfiltrateForSupportPowerCA.cs`: base 2023-05-27, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/Player/ProvidesDelayedPrerequisite.cs`: base ?, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/TransferStanceToDeathActor.cs`: base 2023-05-27, 0 upstream commits since
+- `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 0 upstream commits since
 
-## MISSING: upstream files never adopted (312), by area
+## MISSING: upstream files never adopted (317), by area
 
-- `Traits`: **81**
+- `Traits`: **82**
 - `Traits/SupportPowers`: **26**
-- `Traits/Conditions`: **23**
+- `Traits/Conditions`: **25**
 - `Warheads`: **23**
 - `Widgets/Logic`: **22**
+- `Traits/Player`: **18**
+- `Traits/Render`: **18**
 - `Activities`: **17**
-- `Traits/Player`: **17**
-- `Traits/Render`: **17**
 - `Scripting`: **16**
 - `Projectiles`: **13**
 - `Graphics`: **11**
@@ -470,11 +471,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Conditions/DummyConditionGranter.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionIfOwnerIsNeutral.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnActivity.cs`
+- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnActorTypes.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnCapture.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnDamageStateCA.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnDeployTurreted.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnEnemiesNearby.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnLobbyOption.cs`
+- `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnNonPlayableOwner.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnPlayerFunds.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnResupply.cs`
 - `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnResupplying.cs`
@@ -544,6 +547,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisitesOnTimeline.cs`
 - `OpenRA.Mods.CA/Traits/Player/ReclaimableExperiencePool.cs`
 - `OpenRA.Mods.CA/Traits/Player/ReclaimableValueProducer.cs`
+- `OpenRA.Mods.CA/Traits/Player/RevealedFactionsManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/StackableSupportPowerManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/SupportPowerInstanceManager.cs`
 - `OpenRA.Mods.CA/Traits/Player/TeleportNetworkManager.cs`
@@ -569,8 +573,10 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `f31049d2d` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Render/WithRadiatingCircle.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithSpawnedActorIdentifier.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithSpawnerMasterPipsDecoration.cs`
+- `OpenRA.Mods.CA/Traits/Render/WithTeleportNetworkLinkVisualization.cs`
 - `OpenRA.Mods.CA/Traits/Render/WithUnitConverterCountDecoration.cs`
 - `OpenRA.Mods.CA/Traits/ReturnsToBaseOnAmmoDepleted.cs`
+- `OpenRA.Mods.CA/Traits/RevealsFaction.cs`
 - `OpenRA.Mods.CA/Traits/ScatterOnExitCargo.cs`
 - `OpenRA.Mods.CA/Traits/SeedsResourceCA.cs`
 - `OpenRA.Mods.CA/Traits/Shielded.cs`

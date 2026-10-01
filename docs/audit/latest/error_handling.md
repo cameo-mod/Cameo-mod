@@ -38,7 +38,7 @@ Files scanned: **791**
 | tools/ai/fight_report.py | 32 | handler body discards the error |
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
-| tools/ai/run_ai_match_batch.py | 582 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 586 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
@@ -342,8 +342,8 @@ Files scanned: **791**
 |---|---|---|
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
-| tools/ai/run_ai_match_batch.py | 509 | `subprocess.Popen()` without check= |
-| tools/ai/run_ai_match_batch.py | 649 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 512 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 653 | `subprocess.run()` without check= |
 | tools/ai/run_league.py | 307 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
 | tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |

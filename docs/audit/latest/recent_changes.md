@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **448**, files touched: **4687**
+Commits reviewed: **509**, files touched: **4715**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 23 | yes |
 | R2 | audit script never run by run_all.sh | 9 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 23 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 26 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
@@ -54,10 +54,13 @@ Commits reviewed: **448**, files touched: **4687**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (23)
+## R3 — commits without provenance (26)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 3e889dc5 | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| a47642cf | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 2e52abaf | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | d891992d | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 2a7e2e29 | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | cefceacd | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
@@ -98,15 +101,15 @@ Commits reviewed: **448**, files touched: **4687**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 110 |
+| DEVELOPMENT_LOG.md | 126 |
 | docs/HANDOFF.md | 97 |
-| mods/cameo/ai/ai.yaml | 68 |
+| mods/cameo/ai/ai.yaml | 76 |
 | docs/LESSONS_LEARNED.md | 66 |
 | docs/design/AI_ARCHITECTURE.md | 65 |
-| docs/DESIGN.md | 56 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 48 |
+| docs/DESIGN.md | 57 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 54 |
 | docs/design/ROADMAP.md | 40 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 35 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 37 |
 | docs/balance/derived/tiberiandawn_nod.json | 31 |
 | docs/balance/derived/redalert2_allies.json | 29 |
 | docs/balance/derived/redalert2mod_syndicate.json | 29 |
@@ -126,7 +129,7 @@ Commits reviewed: **448**, files touched: **4687**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 23 R1 and 0 R3 of 23/23 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 23 R1 and 0 R3 of 23/26 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

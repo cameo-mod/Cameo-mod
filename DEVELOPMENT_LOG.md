@@ -15375,3 +15375,30 @@ Two real bugs the boot gate caught that static checks missed: (1) nested `-K` re
 level / 4 spaces=1 level — 15 files mix space+tab prefixes and mis-parsed, producing phantom
 duplicates the fold then "merged" (e.g. `tscloud1`'s `idle`/`die` `Filename` keys). Parser fixed;
 full lesson writeup in LESSONS_LEARNED (2026-10-01 entry).
+
+## 2026-10-01 — DAWN: Fransbot re-vendor 3cb13dd→9150ded + order-conversion replay (PR #716)
+
+Worktree `devin/dawn/fransbot-revendor` (C:/tmp/dawn-vendor). Maintainer ruling: re-vendor BEFORE
+converting direct activity mutations (the first pass at bfc5a57fc targeted stale source; PR #716
+was drafted pending the redo).
+
+Re-vendor: 3-way merge per file (base=3cb13dd, ours=vendored HEAD, theirs=9150ded V1.29.48,
+"Native Amphibious Handoffs + Ferry Liveness"). Upstream rewrote the E25 sea-corridor recovery
+(TaskId generations, pause/resume, source rebases, amphibious-handoff model replacing the beach
+model, region-bound LST production). 33 conflicts: CommandBid (kept both conditional log + mission
+card), General (theirs — new fields/validation), Transport (kept strategicMapService null-guard),
+McvExpansion x30 (resolved toward upstream's newer recovery model; preserved FrozenSet.Empty config
+overrides, service seams, order-sink layer, ENG-T lease/InitialOrdersPending machinery; deleted
+stale duplicate method clusters + dead RankRoutinePickupBeaches superseded by RankRoutinePickupHandoffs).
+
+Conversion replay: applied the bfc5a57fc per-file patches with `git apply --reject` (5 files clean,
+3 files needed manual site fixes — all had `bot` in scope). 100 post-vendor sites (95 CancelActivity
++ 5 QueueActivity) -> all order-based; audit renamed to the maintainer-requested
+tools/audit/audit_bot_direct_mutation.py (zero-tolerance ratchet over the bot-module dirs).
+
+Verification: solution build 0W/0E; 455/455 tests; audit suite green except PRE-EXISTING master
+debt (TacticalMapBotModule fog +4 from NOVA #713 — not manifested, left for review; ammo_cadence,
+effect_pairings, meter_dilution, nuclear_flash_bindings — unrelated weapon/balance rows);
+fog manifest +2 surgical entries (new upstream own-actor producer enumerations, Owner==player —
+fog-honest); drift audit re-baselined to 9150ded (UPSTREAM_REF label updated). Boot-gate PASS via
+private Engine.SupportDir (menu marker, zero exceptions, unambiguous attribution).

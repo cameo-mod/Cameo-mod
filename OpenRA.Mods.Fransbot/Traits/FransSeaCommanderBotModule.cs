@@ -143,12 +143,58 @@ namespace OpenRA.Mods.Common.Traits
 		public override object Create(ActorInitializer init) { return new FransSeaCommanderBotModule(init.Self, this); }
 	}
 
-	public class FransSeaCommanderBotModule : ConditionalTrait<FransSeaCommanderBotModuleInfo>, IBotTick, IBotRespondToAttack
+	public class FransSeaCommanderBotModule : ConditionalTrait<FransSeaCommanderBotModuleInfo>, IBotTick, IBotEnabled, IBotRespondToAttack
 	{
 		string BidderKey => Info.BidderKey;
 
 		readonly World world;
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			pendingStopOrders.Clear();
+		}
+
 		readonly HashSet<Actor> activeShips = [];
 		readonly Dictionary<Actor, CPos> lastMoveDestination = [];
 		readonly Dictionary<Actor, int> lastMoveWorldTick = [];
@@ -295,6 +341,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
 			activeShips.Clear();
 			lastMoveDestination.Clear();
 			lastMoveWorldTick.Clear();
@@ -352,6 +399,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransSeaCommander.BotTick");
 			if (player.WinState != WinState.Undefined)
 				return;
@@ -1091,7 +1139,7 @@ namespace OpenRA.Mods.Common.Traits
 				combinedSecureHoldUntilTick = mission.ExecuteAfterWorldTick;
 				var committedIds = (mission.CommittedActorIds ?? Array.Empty<uint>()).ToHashSet();
 				foreach (var ship in ships.Where(s => s != null && s.IsInWorld && !s.IsDead && committedIds.Contains(s.ActorID)))
-					ship.CancelActivity();
+					QueueStopOrder(null, ship);
 				FransBotLog.BotDebug(world,
 					"{0}: Sea {1} holds COMBINED SECURE {2} until WT {3}; its ETA is {4} WT and {5} domains are timing departure toward the same area.",
 					player, BidderKey, mission.TargetActorId, mission.ExecuteAfterWorldTick, mission.EstimatedEtaTicks, mission.CombinedSecureGroupSize);
@@ -1935,7 +1983,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (raidSearchStartedWorldTick >= 0)
 			{
 				foreach (var ship in activeShips.Where(s => s != null && s.IsInWorld && !s.IsDead))
-					ship.CancelActivity();
+					QueueStopOrder(bot, ship);
 				ResetRaidLostTargetSearch(false);
 				raidStrikeIssued = false;
 				cohesionHeldShips.Clear();
@@ -2024,7 +2072,7 @@ namespace OpenRA.Mods.Common.Traits
 				hasRaidSearchWaypoint = false;
 				activeOrder = FransCommanderOrder.Search;
 				foreach (var ship in activeShips)
-					ship.CancelActivity();
+					QueueStopOrder(bot, ship);
 				FransBotLog.BotDebug(world,
 					"{0}: Sea RAID target {1} is gone/unseen at LastVisibleTargetCell {2}; begins {3}-WT local plain-Move RECON before ANCHOR return.",
 					player, mission.TargetActorId, activeObjective, commanderCoreService.RaidLostTargetReconTicks);
@@ -2058,7 +2106,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (cancelActivities)
 				foreach (var ship in activeShips.Where(s => s != null && s.IsInWorld && !s.IsDead))
-					ship.CancelActivity();
+					QueueStopOrder(null, ship);
 			raidSearchStartedWorldTick = -1;
 			raidSearchWaypoint = default;
 			hasRaidSearchWaypoint = false;
@@ -2499,7 +2547,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (reconActor != null && reconActor.IsInWorld && !reconActor.IsDead)
 			{
 				reconActor.TraitOrDefault<AutoTarget>()?.SetStance(reconActor, UnitStance.AttackAnything);
-				reconActor.CancelActivity();
+				QueueStopOrder(null, reconActor);
 			}
 			reconActor = null;
 			reconOrigin = default;

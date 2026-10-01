@@ -12,11 +12,156 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using OpenRA.Mods.Common.Activities;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits
 {
+	internal struct FransKnownAntiAirPreparedWork
+	{
+		public bool Enabled;
+		public int SegmentChecks;
+		public long SegmentZoneChecks;
+		public long SegmentCellSamples;
+		public long PreparedCellChecks;
+		public int EscapeFallbackSegmentChecks;
+	}
+
+	/// <summary>
+	/// Exact discrete-cell union of the current known-AA exclusion circles. Ordinary segments
+	/// sample the same cells as the legacy per-zone loop, but test the prepared union once per
+	/// sample. A segment starting inside the union retains the legacy per-zone escape rule.
+	/// </summary>
+	internal sealed class FransKnownAntiAirPreparedExclusion
+	{
+		readonly FransKnownAntiAirGeometryIdentity geometryIdentity;
+		readonly CPos[] zoneCenters;
+		readonly HashSet<long> excludedCoordinates = [];
+		readonly long radiusSquared;
+
+		public FransKnownAntiAirGeometryIdentity GeometryIdentity => geometryIdentity;
+		public int Signature => geometryIdentity.Signature;
+		public int SafetyRadius => geometryIdentity.SafetyRadius;
+		public int ZoneCount => zoneCenters.Length;
+		public int ExcludedCellCount => excludedCoordinates.Count;
+		public CPos ZoneCenterAt(int index) => zoneCenters[index];
+
+		public FransKnownAntiAirPreparedExclusion(FransKnownAntiAirGeometryIdentity geometryIdentity)
+		{
+			this.geometryIdentity = geometryIdentity ?? throw new ArgumentNullException(nameof(geometryIdentity));
+			zoneCenters = Enumerable.Range(0, geometryIdentity.ZoneCount)
+				.Select(i => geometryIdentity.ZoneAt(i).Center).ToArray();
+			radiusSquared = (long)SafetyRadius * SafetyRadius;
+
+			var extent = SafetyRadius - 1;
+			foreach (var center in zoneCenters)
+				for (var dx = -extent; dx <= extent; dx++)
+					for (var dy = -extent; dy <= extent; dy++)
+						if ((long)dx * dx + (long)dy * dy < radiusSquared)
+							excludedCoordinates.Add(CoordinateKey(center.X + dx, center.Y + dy));
+		}
+
+		static long CoordinateKey(int x, int y) => ((long)x << 32) ^ (uint)y;
+
+		static long CellDistanceSquared(CPos a, CPos b)
+		{
+			var dx = (long)a.X - b.X;
+			var dy = (long)a.Y - b.Y;
+			return dx * dx + dy * dy;
+		}
+
+		internal static int InterpolateCellCoordinate(int origin, int delta, int step, int steps)
+		{
+			var numerator = (long)delta * step;
+			if (numerator >= 0)
+				numerator += steps / 2;
+			else
+				numerator -= steps / 2;
+			return origin + (int)(numerator / steps);
+		}
+
+		bool IsExcluded(CPos cell) => excludedCoordinates.Contains(CoordinateKey(cell.X, cell.Y));
+
+		public bool IsCellOutside(CPos cell, ref FransKnownAntiAirPreparedWork work)
+		{
+			if (work.Enabled)
+				work.PreparedCellChecks++;
+			return !IsExcluded(cell);
+		}
+
+		public bool SegmentStaysOutside(CPos from, CPos to, ref FransKnownAntiAirPreparedWork work)
+		{
+			if (work.Enabled)
+				work.SegmentChecks++;
+			if (zoneCenters.Length == 0)
+				return true;
+
+			var dx = to.X - from.X;
+			var dy = to.Y - from.Y;
+			var steps = Math.Max(Math.Abs(dx), Math.Abs(dy));
+			if (steps == 0)
+				return IsCellOutside(from, ref work);
+
+			if (IsCellOutside(from, ref work))
+			{
+				for (var i = 1; i <= steps; i++)
+				{
+					var cell = new CPos(
+						InterpolateCellCoordinate(from.X, dx, i, steps),
+						InterpolateCellCoordinate(from.Y, dy, i, steps));
+					if (work.Enabled)
+					{
+						work.SegmentCellSamples++;
+						work.PreparedCellChecks++;
+					}
+					if (IsExcluded(cell))
+						return false;
+				}
+
+				return true;
+			}
+
+			// Preserve the legacy semantics exactly when the segment begins inside one or
+			// more known-AA zones. Every zone is checked independently: an existing zone
+			// may only be escaped without first moving closer, and no other zone may be entered.
+			if (work.Enabled)
+				work.EscapeFallbackSegmentChecks++;
+			foreach (var center in zoneCenters)
+			{
+				if (work.Enabled)
+					work.SegmentZoneChecks++;
+				var previousDistance = CellDistanceSquared(from, center);
+				var escapedExistingZone = previousDistance >= radiusSquared;
+				for (var i = 1; i <= steps; i++)
+				{
+					var cell = new CPos(
+						InterpolateCellCoordinate(from.X, dx, i, steps),
+						InterpolateCellCoordinate(from.Y, dy, i, steps));
+					var distance = CellDistanceSquared(cell, center);
+					if (work.Enabled)
+						work.SegmentCellSamples++;
+
+					if (!escapedExistingZone)
+					{
+						if (distance < previousDistance)
+							return false;
+						if (distance >= radiusSquared)
+							escapedExistingZone = true;
+						previousDistance = distance;
+						continue;
+					}
+
+					if (distance < radiusSquared)
+						return false;
+				}
+			}
+
+			return true;
+		}
+	}
+
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Fransbot Air Commander. Uses the General auction/mission lifecycle for DEFEND/SECURE/RECON/RAID. Air SECURE owns domain-specific CLEAR validation with persistent remembered enemy buildings; domain CLEAR closes Air work without changing Ground territorial state. OpenRA-native aircraft orders execute movement, combat and return-to-base behavior.")]
 	public class FransAirCommanderBotModuleInfo : ConditionalTraitInfo
@@ -129,7 +274,7 @@ namespace OpenRA.Mods.Common.Traits
 		public override object Create(ActorInitializer init) { return new FransAirCommanderBotModule(init.Self, this); }
 	}
 
-	public class FransAirCommanderBotModule : ConditionalTrait<FransAirCommanderBotModuleInfo>, IBotTick, IBotRespondToAttack
+	public class FransAirCommanderBotModule : ConditionalTrait<FransAirCommanderBotModuleInfo>, IBotTick, IBotEnabled, IBotRespondToAttack
 	{
 		enum RaidLostTargetConfirmationState
 		{
@@ -138,10 +283,154 @@ namespace OpenRA.Mods.Common.Traits
 			Consumed
 		}
 
+		sealed class SecureProgressDiagnostic
+		{
+			public CPos Objective;
+			public CPos LastCell;
+			public long PreviousDistanceSquared;
+			public long LastDistanceSquared;
+			public long BestDistanceSquared;
+			public int LastMovementWorldTick;
+			public int LastProgressWorldTick;
+			public bool ImprovedOnLastSample;
+			public bool ImprovedSinceLastReport;
+		}
+
+		sealed class SecureMoveIntentDiagnostic
+		{
+			public CPos RequestedDestination;
+			public CPos CurrentCell;
+			public bool IsIdle;
+			public bool CachedDestinationMatched;
+			public bool KnownAaSignatureMatched;
+			public int PreviousMoveWorldTick = -1;
+			public int EventWorldTick;
+			public int WaypointCount;
+			public int QueuedCount;
+			public int SuppressedNonIdleCount;
+			public int SuppressedRefreshHoldCount;
+			public int RejectedKnownAaCount;
+			public string Outcome = "None";
+			public string CurrentActivity = "NotCaptured";
+			public bool? ActivityIsExpectedMove;
+		}
+
+		sealed class KnownAntiAirPathPerformanceDiagnostic
+		{
+			public bool GeometryCacheHit;
+			public bool PhysicalGeometrySolve;
+			public int ZoneCount;
+			public int CandidatePointChecks;
+			public int PreparedExcludedCellCount;
+			public long PreparedCellChecks;
+			public bool PreparedGeometryReused;
+			public int EscapeFallbackSegmentChecks;
+			public int SegmentChecks;
+			public long SegmentZoneChecks;
+			public long SegmentCellSamples;
+			public int NodeCount;
+			public int GraphPasses;
+			public long GraphSelectionChecks;
+			public long GraphNeighborChecks;
+			public long PathElapsedTimestampTicks;
+			public long NodeBuildElapsedTimestampTicks;
+			public long GraphElapsedTimestampTicks;
+			public long RiskElapsedTimestampTicks;
+			public long EtaElapsedTimestampTicks;
+			public int RiskCellCount;
+			public string Outcome = "NotRun";
+		}
+
+		readonly record struct AirRaidRoutePerformanceDiagnostic(
+			uint ActorId,
+			CPos StartCell,
+			CPos TargetCell,
+			bool CacheHit,
+			bool Feasible,
+			bool IsCritical,
+			KnownAntiAirPathPerformanceDiagnostic Path);
+
+		sealed class AirRaidCandidatePerformanceDiagnostic
+		{
+			public readonly uint TargetActorId;
+			public readonly string TargetActorType;
+			public readonly CPos TargetCell;
+			public readonly List<AirRaidRoutePerformanceDiagnostic> Routes = [];
+			public int AvailableAttackers;
+			public int AntiAirPathRejected;
+			public int MetricRejected;
+			public long ElapsedTimestampTicks;
+
+			public AirRaidCandidatePerformanceDiagnostic(FransMission mission)
+			{
+				TargetActorId = mission.TargetActorId;
+				TargetActorType = mission.TargetActorType;
+				TargetCell = mission.LastVisibleTargetCell;
+			}
+		}
+
+		sealed class AirRaidBidPassPerformanceDiagnostic
+		{
+			public int RaidMissionCount;
+			public int RaidTemplateHits;
+			public int RaidTemplateMisses;
+			public int KnownAntiAirSignature = -1;
+			public int RiskRevision = -1;
+			public readonly List<AirRaidCandidatePerformanceDiagnostic> Candidates = [];
+		}
+
+		const double AirRaidBidPerformanceLogThresholdMilliseconds = 10.0;
+
 		string BidderKey => Info.BidderKey;
 
 		readonly World world;
 		readonly Player player;
+
+		readonly HashSet<Actor> pendingStopOrders = [];
+		IBot orderBot;
+
+		void IBotEnabled.BotEnabled(IBot bot)
+		{
+			orderBot = bot;
+		}
+
+		// §19.6: a bot runs on the host alone and may touch actors ONLY through orders — a
+		// direct CancelActivity/QueueActivity desyncs a multiplayer game. With no live bot
+		// sink the request parks in the pending sets; FlushPendingSynchronizedActions
+		// replays it on this module's own tick, keeping issuer/holder pairing correct.
+		bool IsValidOrderSubject(Actor actor)
+		{
+			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player;
+		}
+
+		void QueueStopOrder(IBot bot, Actor actor)
+		{
+			if (!IsValidOrderSubject(actor))
+				return;
+
+			var sink = bot ?? orderBot;
+			if (sink != null)
+			{
+				pendingStopOrders.Remove(actor);
+				sink.QueueOrder(new Order("Stop", actor, false));
+				return;
+			}
+
+			pendingStopOrders.Add(actor);
+		}
+
+		void FlushPendingSynchronizedActions(IBot bot)
+		{
+			if (bot == null || pendingStopOrders.Count == 0)
+				return;
+
+			foreach (var actor in pendingStopOrders.OrderBy(a => a.ActorID).ToArray())
+				if (IsValidOrderSubject(actor))
+					bot.QueueOrder(new Order("Stop", actor, false));
+
+			pendingStopOrders.Clear();
+		}
+
 		readonly HashSet<Actor> activeAircraft = [];
 		readonly Dictionary<Actor, CPos> lastMoveDestination = [];
 		readonly Dictionary<Actor, int> lastMoveWorldTick = [];
@@ -149,6 +438,7 @@ namespace OpenRA.Mods.Common.Traits
 		readonly Dictionary<Actor, uint> lastFightTarget = [];
 		readonly Dictionary<Actor, int> lastFightWorldTick = [];
 		readonly Dictionary<Actor, int> lastReturnWorldTick = [];
+		readonly Dictionary<Actor, int> lastRepairWorldTick = [];
 		readonly Dictionary<Actor, int> raidRecoverySince = [];
 		readonly Dictionary<Actor, CPos> raidRecoveryAnchors = [];
 		readonly Dictionary<Actor, CPos> raidMissionOrigins = [];
@@ -164,6 +454,8 @@ namespace OpenRA.Mods.Common.Traits
 		uint lastRaidCapacityProtectedTargetActorId;
 		readonly Dictionary<uint, int> factRaidDiagnosticNextTick = [];
 		readonly Dictionary<uint, string> factRaidDiagnosticLastOutcome = [];
+		readonly Dictionary<uint, SecureProgressDiagnostic> secureProgressDiagnostics = [];
+		readonly Dictionary<uint, SecureMoveIntentDiagnostic> secureMoveIntentDiagnostics = [];
 
 		IFransCombatIntelService combatIntelService;
 		IFransRiskModelService riskModelService;
@@ -211,6 +503,11 @@ namespace OpenRA.Mods.Common.Traits
 		int raidCommittedCriticalRiskSinceTick = -1;
 		int nextMoveRiskCheckTick;
 		int secureClearSinceWorldTick = -1;
+		FransActiveMission? secureDiagnosticMission;
+		string lastSecureDiagnosticSignature;
+		string lastSecureDiagnosticBranch = "None";
+		int nextSecureDiagnosticHeartbeatWorldTick;
+		bool secureDiagnosticOwnershipActive;
 		bool hasLastSafeMoveAnchor;
 		CPos lastSafeMoveAnchor;
 		bool hasMissionAnchorPoint;
@@ -223,6 +520,10 @@ namespace OpenRA.Mods.Common.Traits
 		int nextIdleBidTick;
 		int cachedKnownAntiAirWorldTick = -1;
 		KnownAntiAirZone[] cachedKnownAntiAirZones = Array.Empty<KnownAntiAirZone>();
+		FransKnownAntiAirGeometryIdentity cachedKnownAntiAirGeometryIdentity;
+		FransKnownAntiAirPreparedExclusion cachedKnownAntiAirPreparedExclusion;
+		int lastAirRaidPerformanceRiskRevision = int.MinValue;
+		bool airRaidGeometryCacheReuseProofLogged;
 
 		public FransAirCommanderBotModule(Actor self, FransAirCommanderBotModuleInfo info)
 			: base(info)
@@ -257,6 +558,10 @@ namespace OpenRA.Mods.Common.Traits
 			nextIdleBidTick = world.WorldTick + (Info.WingIndex * Math.Max(1, Info.IdleBidInterval / 10));
 			cachedKnownAntiAirWorldTick = -1;
 			cachedKnownAntiAirZones = Array.Empty<KnownAntiAirZone>();
+			cachedKnownAntiAirGeometryIdentity = null;
+			cachedKnownAntiAirPreparedExclusion = null;
+			lastAirRaidPerformanceRiskRevision = int.MinValue;
+			airRaidGeometryCacheReuseProofLogged = false;
 			factRaidDiagnosticNextTick.Clear();
 			factRaidDiagnosticLastOutcome.Clear();
 			hasLastSafeMoveAnchor = false;
@@ -275,6 +580,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			pendingStopOrders.Clear();
 			activeAircraft.Clear();
 			lastMoveDestination.Clear();
 			lastMoveWorldTick.Clear();
@@ -282,6 +588,7 @@ namespace OpenRA.Mods.Common.Traits
 			lastFightTarget.Clear();
 			lastFightWorldTick.Clear();
 			lastReturnWorldTick.Clear();
+			lastRepairWorldTick.Clear();
 			raidRecoverySince.Clear();
 			raidRecoveryAnchors.Clear();
 			raidMissionOrigins.Clear();
@@ -325,6 +632,7 @@ namespace OpenRA.Mods.Common.Traits
 			PruneDeadActorKeys(lastFightTarget);
 			PruneDeadActorKeys(lastFightWorldTick);
 			PruneDeadActorKeys(lastReturnWorldTick);
+			PruneDeadActorKeys(lastRepairWorldTick);
 			PruneDeadActorKeys(raidRecoverySince);
 			PruneDeadActorKeys(raidRecoveryAnchors);
 			PruneDeadActorKeys(raidMissionOrigins);
@@ -340,6 +648,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			FlushPendingSynchronizedActions(bot);
 			using var fransPerfScope = FransBotLog.Profile(world, player, "FransAirCommander.BotTick");
 			if (player.WinState != WinState.Undefined)
 				return;
@@ -381,11 +690,13 @@ namespace OpenRA.Mods.Common.Traits
 					var aircraftToRelease = aircraft.FirstOrDefault(a => a.ActorID == id && a.IsInWorld && !a.IsDead);
 					if (aircraftToRelease == null)
 						continue;
-					aircraftToRelease.CancelActivity();
+					QueueStopOrder(bot, aircraftToRelease);
 					if (!HasAmmo(aircraftToRelease))
 						QueueReturnToBase(bot, aircraftToRelease, true);
 				}
 				commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey, "Air SECURE preempted by active DEFEND pressure");
+				LogAirSecureReleased(preemptableMission, preemptableMission.LastVisibleTargetCell,
+					"strategic DEFEND pressure invoked the existing SECURE preemption transition");
 				FransBotLog.BotDebug(world,
 					"{0}: Air Commander {1} releases SECURE {2} because strategic DEFEND pressure reached the SECURE-preempt threshold; aircraft are freed for defense/rearm.",
 					player, BidderKey, preemptableMission.TargetActorId);
@@ -476,6 +787,9 @@ namespace OpenRA.Mods.Common.Traits
 			// on the normal ScanInterval, but a free wing only recomputes the full auction periodically.
 			if (activeMissionType == FransMissionType.Raid && activeTargetActorId != 0)
 				StartRaidAttackMoveReturn(bot, "RAID mission disappeared / target completed");
+			if (activeMissionType == FransMissionType.Secure && secureDiagnosticMission.HasValue && secureDiagnosticOwnershipActive)
+				LogAirSecureReleased(secureDiagnosticMission.Value, activeObjective,
+					"Broker no longer exposes the accepted SECURE assignment to this bidder");
 			ResetMission();
 			var urgentDefendBid = commandBidService.IsStrategicDefendPressureActive();
 			if (!urgentDefendBid && world.WorldTick < nextIdleBidTick)
@@ -586,84 +900,148 @@ namespace OpenRA.Mods.Common.Traits
 				.Select(c => new KnownAntiAirZone(c.ActorId, c.ActorType, c.LastSeenCell))
 				.ToArray();
 			cachedKnownAntiAirWorldTick = world.WorldTick;
+			cachedKnownAntiAirGeometryIdentity = BuildKnownAntiAirGeometryIdentity(cachedKnownAntiAirZones);
+			GetPreparedKnownAntiAirExclusion(cachedKnownAntiAirZones, out _);
 			return cachedKnownAntiAirZones;
 		}
 
-		static long CellDistanceSquared(CPos a, CPos b)
+		FransKnownAntiAirGeometryIdentity BuildKnownAntiAirGeometryIdentity(IReadOnlyList<KnownAntiAirZone> zones)
 		{
-			var dx = (long)a.X - b.X;
-			var dy = (long)a.Y - b.Y;
-			return dx * dx + dy * dy;
+			return new FransKnownAntiAirGeometryIdentity(Info.KnownAntiAirPathSafetyRadius,
+				zones.Select(z => new FransKnownAntiAirGeometryZone(z.ActorId, z.Center)).ToArray());
+		}
+
+		FransKnownAntiAirGeometryIdentity GetKnownAntiAirGeometryIdentity(IReadOnlyList<KnownAntiAirZone> zones)
+		{
+			if (ReferenceEquals(zones, cachedKnownAntiAirZones) && cachedKnownAntiAirGeometryIdentity != null)
+				return cachedKnownAntiAirGeometryIdentity;
+			return BuildKnownAntiAirGeometryIdentity(zones);
+		}
+
+		FransKnownAntiAirPreparedExclusion GetPreparedKnownAntiAirExclusion(
+			IReadOnlyList<KnownAntiAirZone> zones, out bool reused)
+		{
+			var identity = GetKnownAntiAirGeometryIdentity(zones);
+			if (cachedKnownAntiAirPreparedExclusion != null &&
+				cachedKnownAntiAirPreparedExclusion.GeometryIdentity.Equals(identity))
+			{
+				reused = true;
+				return cachedKnownAntiAirPreparedExclusion;
+			}
+
+			cachedKnownAntiAirPreparedExclusion = new FransKnownAntiAirPreparedExclusion(identity);
+			reused = false;
+			return cachedKnownAntiAirPreparedExclusion;
 		}
 
 		bool IsCellOutsideKnownAntiAir(CPos cell, IReadOnlyList<KnownAntiAirZone> zones)
 		{
-			var radiusSq = (long)Info.KnownAntiAirPathSafetyRadius * Info.KnownAntiAirPathSafetyRadius;
-			return zones.All(z => CellDistanceSquared(cell, z.Center) >= radiusSq);
+			var prepared = GetPreparedKnownAntiAirExclusion(zones, out _);
+			var work = default(FransKnownAntiAirPreparedWork);
+			return prepared.IsCellOutside(cell, ref work);
 		}
 
 		static int InterpolateCellCoordinate(int origin, int delta, int step, int steps)
-		{
-			var numerator = (long)delta * step;
-			if (numerator >= 0)
-				numerator += steps / 2;
-			else
-				numerator -= steps / 2;
-			return origin + (int)(numerator / steps);
-		}
+			=> FransKnownAntiAirPreparedExclusion.InterpolateCellCoordinate(origin, delta, step, steps);
 
 		bool SegmentStaysOutsideKnownAntiAir(CPos from, CPos to, IReadOnlyList<KnownAntiAirZone> zones)
 		{
-			if (zones.Count == 0)
-				return true;
-
-			var dx = to.X - from.X;
-			var dy = to.Y - from.Y;
-			var steps = Math.Max(Math.Abs(dx), Math.Abs(dy));
-			if (steps == 0)
-				return IsCellOutsideKnownAntiAir(from, zones);
-
-			var radiusSq = (long)Info.KnownAntiAirPathSafetyRadius * Info.KnownAntiAirPathSafetyRadius;
-			foreach (var zone in zones)
-			{
-				var previousDistance = CellDistanceSquared(from, zone.Center);
-				var escapedExistingZone = previousDistance >= radiusSq;
-				for (var i = 1; i <= steps; i++)
-				{
-					var cell = new CPos(
-						InterpolateCellCoordinate(from.X, dx, i, steps),
-						InterpolateCellCoordinate(from.Y, dy, i, steps));
-					var distance = CellDistanceSquared(cell, zone.Center);
-
-					// If new intel appears while an aircraft is already inside the configured zone,
-					// permit only an outward escape segment. It may never move closer before exiting.
-					if (!escapedExistingZone)
-					{
-						if (distance < previousDistance)
-							return false;
-						if (distance >= radiusSq)
-							escapedExistingZone = true;
-						previousDistance = distance;
-						continue;
-					}
-
-					if (distance < radiusSq)
-						return false;
-				}
-			}
-
-			return true;
+			var prepared = GetPreparedKnownAntiAirExclusion(zones, out _);
+			var work = default(FransKnownAntiAirPreparedWork);
+			return prepared.SegmentStaysOutside(from, to, ref work);
 		}
 
 		bool TryBuildKnownAntiAirSafePath(CPos from, CPos to, IReadOnlyList<KnownAntiAirZone> zones, out CPos[] waypoints)
 		{
-			waypoints = Array.Empty<CPos>();
-			if (!world.Map.Contains(from) || !world.Map.Contains(to) || !IsCellOutsideKnownAntiAir(to, zones))
-				return false;
+			return TryBuildKnownAntiAirSafePath(from, to, zones, out waypoints, null);
+		}
 
-			if (SegmentStaysOutsideKnownAntiAir(from, to, zones))
+		bool TryBuildKnownAntiAirSafePath(CPos from, CPos to, IReadOnlyList<KnownAntiAirZone> zones,
+			out CPos[] waypoints, KnownAntiAirPathPerformanceDiagnostic diagnostic)
+		{
+			var prepared = GetPreparedKnownAntiAirExclusion(zones, out var preparedReused);
+			var identity = prepared.GeometryIdentity;
+			if (commanderCoreService.TryGetSharedAirKnownAntiAirGeometryRoute(from, to, identity, out var cached))
+			{
+				waypoints = cached.Waypoints ?? Array.Empty<CPos>();
+				if (diagnostic != null)
+				{
+					diagnostic.GeometryCacheHit = true;
+					diagnostic.ZoneCount = zones.Count;
+					diagnostic.PreparedExcludedCellCount = prepared.ExcludedCellCount;
+					diagnostic.PreparedGeometryReused = preparedReused;
+					diagnostic.Outcome = cached.Outcome.ToString();
+				}
+
+				return cached.Feasible;
+			}
+
+			if (diagnostic != null)
+				diagnostic.PhysicalGeometrySolve = true;
+			var feasible = TryBuildKnownAntiAirSafePathPhysical(from, to, zones, prepared, preparedReused,
+				out waypoints, out var outcome, diagnostic);
+			commanderCoreService.StoreSharedAirKnownAntiAirGeometryRoute(from, to, identity,
+				new FransAirKnownAntiAirGeometryRoute(feasible, outcome, waypoints));
+			return feasible;
+		}
+
+		static void ApplyKnownAntiAirPreparedWork(KnownAntiAirPathPerformanceDiagnostic diagnostic,
+			FransKnownAntiAirPreparedExclusion prepared, bool preparedReused, FransKnownAntiAirPreparedWork work)
+		{
+			if (diagnostic == null)
+				return;
+			diagnostic.PreparedExcludedCellCount = prepared.ExcludedCellCount;
+			diagnostic.PreparedCellChecks = work.PreparedCellChecks;
+			diagnostic.PreparedGeometryReused = preparedReused;
+			diagnostic.EscapeFallbackSegmentChecks = work.EscapeFallbackSegmentChecks;
+			diagnostic.SegmentChecks = work.SegmentChecks;
+			diagnostic.SegmentZoneChecks = work.SegmentZoneChecks;
+			diagnostic.SegmentCellSamples = work.SegmentCellSamples;
+		}
+
+		void CompleteKnownAntiAirPathDiagnostic(KnownAntiAirPathPerformanceDiagnostic diagnostic,
+			FransAirKnownAntiAirGeometryOutcome outcome, long startedTimestamp, FransKnownAntiAirPreparedExclusion prepared,
+			bool preparedReused, FransKnownAntiAirPreparedWork work)
+		{
+			if (diagnostic == null)
+				return;
+			ApplyKnownAntiAirPreparedWork(diagnostic, prepared, preparedReused, work);
+			diagnostic.Outcome = outcome.ToString();
+			diagnostic.PathElapsedTimestampTicks += Stopwatch.GetTimestamp() - startedTimestamp;
+		}
+
+		bool TryBuildKnownAntiAirSafePathPhysical(CPos from, CPos to, IReadOnlyList<KnownAntiAirZone> zones,
+			FransKnownAntiAirPreparedExclusion prepared, bool preparedReused, out CPos[] waypoints,
+			out FransAirKnownAntiAirGeometryOutcome outcome, KnownAntiAirPathPerformanceDiagnostic diagnostic)
+		{
+			var pathStarted = diagnostic == null ? 0 : Stopwatch.GetTimestamp();
+			if (diagnostic != null)
+				diagnostic.ZoneCount = zones.Count;
+			var preparedWork = new FransKnownAntiAirPreparedWork { Enabled = diagnostic != null };
+			waypoints = Array.Empty<CPos>();
+			if (!world.Map.Contains(from) || !world.Map.Contains(to))
+			{
+				outcome = FransAirKnownAntiAirGeometryOutcome.OutsideMap;
+				CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+					prepared, preparedReused, preparedWork);
+				return false;
+			}
+			if (!prepared.IsCellOutside(to, ref preparedWork))
+			{
+				outcome = FransAirKnownAntiAirGeometryOutcome.TargetInsideKnownAa;
+				CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+					prepared, preparedReused, preparedWork);
+				return false;
+			}
+
+			if (prepared.SegmentStaysOutside(from, to, ref preparedWork))
 			{
 				waypoints = new[] { to };
+				if (diagnostic != null)
+					diagnostic.NodeCount = 2;
+				outcome = FransAirKnownAntiAirGeometryOutcome.Direct;
+				CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+					prepared, preparedReused, preparedWork);
 				return true;
 			}
 
@@ -679,13 +1057,21 @@ namespace OpenRA.Mods.Common.Traits
 				(-clearance, 0), (-clearance, -clearance), (0, -clearance), (clearance, -clearance)
 			};
 
+			var nodeBuildStarted = diagnostic == null ? 0 : Stopwatch.GetTimestamp();
 			foreach (var zone in zones)
 				foreach (var (ox, oy) in offsets)
 				{
+					if (diagnostic != null)
+						diagnostic.CandidatePointChecks++;
 					var candidate = new CPos(zone.Center.X + ox, zone.Center.Y + oy);
-					if (world.Map.Contains(candidate) && IsCellOutsideKnownAntiAir(candidate, zones) && seen.Add(candidate))
+					if (world.Map.Contains(candidate) && prepared.IsCellOutside(candidate, ref preparedWork) && seen.Add(candidate))
 						nodes.Add(candidate);
 				}
+			if (diagnostic != null)
+			{
+				diagnostic.NodeCount = nodes.Count;
+				diagnostic.NodeBuildElapsedTimestampTicks += Stopwatch.GetTimestamp() - nodeBuildStarted;
+			}
 
 			var count = nodes.Count;
 			var distance = Enumerable.Repeat(long.MaxValue, count).ToArray();
@@ -693,16 +1079,23 @@ namespace OpenRA.Mods.Common.Traits
 			var visited = new bool[count];
 			distance[0] = 0;
 
+			var graphStarted = diagnostic == null ? 0 : Stopwatch.GetTimestamp();
 			for (var pass = 0; pass < count; pass++)
 			{
+				if (diagnostic != null)
+					diagnostic.GraphPasses++;
 				var u = -1;
 				var best = long.MaxValue;
 				for (var i = 0; i < count; i++)
+				{
+					if (diagnostic != null)
+						diagnostic.GraphSelectionChecks++;
 					if (!visited[i] && distance[i] < best)
 					{
 						best = distance[i];
 						u = i;
 					}
+				}
 
 				if (u < 0)
 					break;
@@ -712,7 +1105,9 @@ namespace OpenRA.Mods.Common.Traits
 
 				for (var v = 0; v < count; v++)
 				{
-					if (v == u || visited[v] || !SegmentStaysOutsideKnownAntiAir(nodes[u], nodes[v], zones))
+					if (diagnostic != null)
+						diagnostic.GraphNeighborChecks++;
+					if (v == u || visited[v] || !prepared.SegmentStaysOutside(nodes[u], nodes[v], ref preparedWork))
 						continue;
 
 					var edgeCost = Math.Max(Math.Abs(nodes[u].X - nodes[v].X), Math.Abs(nodes[u].Y - nodes[v].Y));
@@ -724,19 +1119,34 @@ namespace OpenRA.Mods.Common.Traits
 					}
 				}
 			}
+			if (diagnostic != null)
+				diagnostic.GraphElapsedTimestampTicks += Stopwatch.GetTimestamp() - graphStarted;
 
 			if (distance[1] == long.MaxValue)
+			{
+				outcome = FransAirKnownAntiAirGeometryOutcome.NoGraphRoute;
+				CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+					prepared, preparedReused, preparedWork);
 				return false;
+			}
 
 			var reverse = new List<CPos>();
 			for (var cursor = 1; cursor > 0; cursor = previous[cursor])
 			{
 				if (cursor < 0)
+				{
+					outcome = FransAirKnownAntiAirGeometryOutcome.BrokenPredecessor;
+					CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+						prepared, preparedReused, preparedWork);
 					return false;
+				}
 				reverse.Add(nodes[cursor]);
 			}
 			reverse.Reverse();
 			waypoints = reverse.ToArray();
+			outcome = FransAirKnownAntiAirGeometryOutcome.GraphRoute;
+			CompleteKnownAntiAirPathDiagnostic(diagnostic, outcome, pathStarted,
+				prepared, preparedReused, preparedWork);
 			return waypoints.Length > 0;
 		}
 
@@ -770,8 +1180,10 @@ namespace OpenRA.Mods.Common.Traits
 			}
 		}
 
-		FransRouteRiskAssessment EvaluateAirPathRisk(Actor aircraft, IReadOnlyList<CPos> path)
+		FransRouteRiskAssessment EvaluateAirPathRisk(Actor aircraft, IReadOnlyList<CPos> path,
+			KnownAntiAirPathPerformanceDiagnostic diagnostic = null)
 		{
+			var started = diagnostic == null ? 0 : Stopwatch.GetTimestamp();
 			var cells = new List<CPos>();
 			var cursor = aircraft.Location;
 			foreach (var waypoint in path)
@@ -779,14 +1191,26 @@ namespace OpenRA.Mods.Common.Traits
 				AppendLineCells(cells, cursor, waypoint);
 				cursor = waypoint;
 			}
-			return riskModelService.EvaluateRoute(aircraft, cells, FransRiskRole.Aircraft, FransRiskTolerance.Balanced);
+			var result = riskModelService.EvaluateRoute(aircraft, cells, FransRiskRole.Aircraft, FransRiskTolerance.Balanced);
+			if (diagnostic != null)
+			{
+				diagnostic.RiskCellCount += cells.Count;
+				diagnostic.RiskElapsedTimestampTicks += Stopwatch.GetTimestamp() - started;
+			}
+			return result;
 		}
 
-		int EstimateAirPathEtaTicks(Actor aircraft, IReadOnlyList<CPos> path)
+		int EstimateAirPathEtaTicks(Actor aircraft, IReadOnlyList<CPos> path,
+			KnownAntiAirPathPerformanceDiagnostic diagnostic = null)
 		{
+			var started = diagnostic == null ? 0 : Stopwatch.GetTimestamp();
 			var movement = aircraft?.TraitOrDefault<Aircraft>();
 			if (movement == null || movement.IsTraitDisabled || movement.IsTraitPaused || path == null || path.Count == 0)
+			{
+				if (diagnostic != null)
+					diagnostic.EtaElapsedTimestampTicks += Stopwatch.GetTimestamp() - started;
 				return int.MaxValue;
+			}
 
 			var from = aircraft.CenterPosition;
 			long total = 0;
@@ -798,9 +1222,15 @@ namespace OpenRA.Mods.Common.Traits
 					eta = 1;
 				total += eta;
 				if (total >= int.MaxValue)
+				{
+					if (diagnostic != null)
+						diagnostic.EtaElapsedTimestampTicks += Stopwatch.GetTimestamp() - started;
 					return int.MaxValue;
+				}
 				from = to;
 			}
+			if (diagnostic != null)
+				diagnostic.EtaElapsedTimestampTicks += Stopwatch.GetTimestamp() - started;
 			return (int)total;
 		}
 
@@ -846,31 +1276,46 @@ namespace OpenRA.Mods.Common.Traits
 		bool TryGetSharedCombatBidRouteMetrics(Actor aircraft, CPos targetCell, IReadOnlyList<KnownAntiAirZone> knownAaZones,
 			out FransAirBidRouteMetrics metrics)
 		{
+			return TryGetSharedCombatBidRouteMetrics(aircraft, targetCell, knownAaZones, null, out metrics);
+		}
+
+		bool TryGetSharedCombatBidRouteMetrics(Actor aircraft, CPos targetCell, IReadOnlyList<KnownAntiAirZone> knownAaZones,
+			AirRaidCandidatePerformanceDiagnostic diagnostic, out FransAirBidRouteMetrics metrics)
+		{
 			metrics = default;
 			if (aircraft == null || !aircraft.IsInWorld || aircraft.IsDead)
 				return false;
 
 			var startCell = aircraft.Location;
-			var knownAaSignature = KnownAntiAirSignature(knownAaZones);
+			var geometryIdentity = GetKnownAntiAirGeometryIdentity(knownAaZones);
 			var riskRevision = riskModelService?.RiskRevision ?? -1;
-			if (commanderCoreService.TryGetSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell, knownAaSignature,
-				Info.KnownAntiAirPathSafetyRadius, riskRevision, out metrics))
+			if (commanderCoreService.TryGetSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell,
+				geometryIdentity, riskRevision, out metrics))
+			{
+				diagnostic?.Routes.Add(new AirRaidRoutePerformanceDiagnostic(
+					aircraft.ActorID, startCell, targetCell, true, metrics.Feasible, metrics.IsCritical, null));
 				return metrics.Feasible;
+			}
 
-			if (!TryBuildKnownAntiAirSafePath(startCell, targetCell, knownAaZones, out var safePath))
+			var pathDiagnostic = diagnostic == null ? null : new KnownAntiAirPathPerformanceDiagnostic();
+			if (!TryBuildKnownAntiAirSafePath(startCell, targetCell, knownAaZones, out var safePath, pathDiagnostic))
 			{
 				metrics = new FransAirBidRouteMetrics(false, true, int.MaxValue, int.MaxValue, int.MaxValue);
-				commanderCoreService.StoreSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell, knownAaSignature,
-					Info.KnownAntiAirPathSafetyRadius, riskRevision, metrics);
+				commanderCoreService.StoreSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell,
+					geometryIdentity, riskRevision, metrics);
+				diagnostic?.Routes.Add(new AirRaidRoutePerformanceDiagnostic(
+					aircraft.ActorID, startCell, targetCell, false, false, true, pathDiagnostic));
 				return false;
 			}
 
-			var route = EvaluateAirPathRisk(aircraft, safePath);
-			var eta = EstimateAirPathEtaTicks(aircraft, safePath);
+			var route = EvaluateAirPathRisk(aircraft, safePath, pathDiagnostic);
+			var eta = EstimateAirPathEtaTicks(aircraft, safePath, pathDiagnostic);
 			var travel = GetAirPathTravelCells(startCell, safePath);
 			metrics = new FransAirBidRouteMetrics(true, route.IsCritical, route.PeakScore, eta, travel);
-			commanderCoreService.StoreSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell, knownAaSignature,
-				Info.KnownAntiAirPathSafetyRadius, riskRevision, metrics);
+			commanderCoreService.StoreSharedAirBidRouteMetrics(aircraft.ActorID, startCell, targetCell,
+				geometryIdentity, riskRevision, metrics);
+			diagnostic?.Routes.Add(new AirRaidRoutePerformanceDiagnostic(
+				aircraft.ActorID, startCell, targetCell, false, true, route.IsCritical, pathDiagnostic));
 			return true;
 		}
 
@@ -1000,10 +1445,16 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool TryBuildRaidBid(FransMission mission, IReadOnlyCollection<Actor> aircraft, out FransCommanderBidReport report)
 		{
-			return TryBuildRaidBid(mission, aircraft, GetKnownAntiAirZones(), out report);
+			return TryBuildRaidBid(mission, aircraft, GetKnownAntiAirZones(), null, out report);
 		}
 
 		bool TryBuildRaidBid(FransMission mission, IReadOnlyCollection<Actor> aircraft, IReadOnlyList<KnownAntiAirZone> knownAaZones, out FransCommanderBidReport report)
+		{
+			return TryBuildRaidBid(mission, aircraft, knownAaZones, null, out report);
+		}
+
+		bool TryBuildRaidBid(FransMission mission, IReadOnlyCollection<Actor> aircraft, IReadOnlyList<KnownAntiAirZone> knownAaZones,
+			AirRaidBidPassPerformanceDiagnostic passDiagnostic, out FransCommanderBidReport report)
 		{
 			using var raidPerf = FransBotLog.Profile(world, player, "Air.SubmitBids.RaidEvaluation");
 			report = default;
@@ -1041,22 +1492,34 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 			}
 
-			var knownAaSignature = KnownAntiAirSignature(knownAaZones);
+			var geometryIdentity = GetKnownAntiAirGeometryIdentity(knownAaZones);
 			var riskRevision = riskModelService?.RiskRevision ?? -1;
 			var candidateSignature = BuildRaidCandidateSignature(aircraft);
-			if (commanderCoreService.TryGetSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required, knownAaSignature,
-				Info.KnownAntiAirPathSafetyRadius, riskRevision, candidateSignature, out var sharedTemplate))
+			if (passDiagnostic != null)
 			{
+				passDiagnostic.KnownAntiAirSignature = geometryIdentity.Signature;
+				passDiagnostic.RiskRevision = riskRevision;
+			}
+			if (commanderCoreService.TryGetSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required,
+				geometryIdentity, riskRevision, candidateSignature, out var sharedTemplate))
+			{
+				if (passDiagnostic != null)
+					passDiagnostic.RaidTemplateHits++;
 				if (!sharedTemplate.Feasible)
 					return false;
 				report = MaterializeSharedRaidBid(sharedTemplate, BidderKey);
 				return true;
 			}
+			if (passDiagnostic != null)
+				passDiagnostic.RaidTemplateMisses++;
 
 			var availableAttackers = 0;
 			var antiAirPathRejected = 0;
 			var metricRejected = 0;
 			var ranked = new List<(Actor Actor, int Preference, int Eta, int Contribution, int Price, int PeakRisk, int Cost, int Travel)>();
+			var candidateDiagnostic = passDiagnostic == null ? null : new AirRaidCandidatePerformanceDiagnostic(mission);
+			var candidateStarted = candidateDiagnostic == null ? 0 : Stopwatch.GetTimestamp();
+			var candidateElapsed = 0L;
 			using (FransBotLog.Profile(world, player, "Air.SubmitBids.RaidCandidateEvaluation"))
 			{
 				foreach (var a in aircraft
@@ -1064,7 +1527,7 @@ namespace OpenRA.Mods.Common.Traits
 					.Where(a => a != reconRetreatActor && !raidRecoverySince.ContainsKey(a) && a.TraitOrDefault<Cargo>() == null && HasFullRaidAmmo(a) && CanAttackActor(a, target)))
 				{
 					availableAttackers++;
-					if (!TryGetSharedCombatBidRouteMetrics(a, target.Location, knownAaZones, out var routeMetrics))
+					if (!TryGetSharedCombatBidRouteMetrics(a, target.Location, knownAaZones, candidateDiagnostic, out var routeMetrics))
 					{
 						antiAirPathRejected++;
 						continue;
@@ -1080,6 +1543,16 @@ namespace OpenRA.Mods.Common.Traits
 					var preference = GetRaidTargetPriorityRank(a, world.Map.Rules, mission.TargetActorType, mission.IsBuilding);
 					ranked.Add((a, preference, eta, contribution, price, routeMetrics.PeakRisk, GetCombatValue(a), routeMetrics.TravelCells));
 				}
+				if (candidateDiagnostic != null)
+					candidateElapsed = Stopwatch.GetTimestamp() - candidateStarted;
+			}
+			if (candidateDiagnostic != null)
+			{
+				candidateDiagnostic.AvailableAttackers = availableAttackers;
+				candidateDiagnostic.AntiAirPathRejected = antiAirPathRejected;
+				candidateDiagnostic.MetricRejected = metricRejected;
+				candidateDiagnostic.ElapsedTimestampTicks = candidateElapsed;
+				passDiagnostic.Candidates.Add(candidateDiagnostic);
 			}
 
 			var ordered = ranked
@@ -1089,8 +1562,8 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				LogFactRaidDiagnostic(mission,
 					$"rejected: no feasible full-ammo attacker; initial-capable {availableAttackers}, AA-path rejected {antiAirPathRejected}, ETA/risk/damage/price rejected {metricRejected}");
-				commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required, knownAaSignature,
-					Info.KnownAntiAirPathSafetyRadius, riskRevision, candidateSignature, new FransAirRaidBidTemplate(false, 0, Array.Empty<uint>(), 0, 0, 0, 0, 0, 0, required));
+				commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required,
+					geometryIdentity, riskRevision, candidateSignature, new FransAirRaidBidTemplate(false, 0, Array.Empty<uint>(), 0, 0, 0, 0, 0, 0, required));
 				return false;
 			}
 
@@ -1116,8 +1589,8 @@ namespace OpenRA.Mods.Common.Traits
 			if (groupPrice == int.MaxValue)
 			{
 				LogFactRaidDiagnostic(mission, "rejected: assembled FACT strike group could not receive a finite bid price");
-				commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required, knownAaSignature,
-					Info.KnownAntiAirPathSafetyRadius, riskRevision, candidateSignature, new FransAirRaidBidTemplate(false, 0, Array.Empty<uint>(), 0, 0, 0, 0, 0, 0, required));
+				commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required,
+					geometryIdentity, riskRevision, candidateSignature, new FransAirRaidBidTemplate(false, 0, Array.Empty<uint>(), 0, 0, 0, 0, 0, 0, required));
 				return false;
 			}
 			groupPrice = ApplyRaidTargetPriorityToPrice(groupPrice, GetRaidGroupTargetPriorityRank(chosen, world.Map.Rules, mission.TargetActorType, mission.IsBuilding));
@@ -1127,15 +1600,15 @@ namespace OpenRA.Mods.Common.Traits
 					: $"FEASIBLE PARTIAL only: {chosen.Count} aircraft, contribution {offered}/{required}, ETA {slowestEta}, risk {peakRisk}, final price {groupPrice}");
 			var committedIds = chosen.Select(a => a.ActorID).ToArray();
 			var template = new FransAirRaidBidTemplate(true, chosen[0].ActorID, committedIds, groupPrice, peakRisk, travel, totalCost, slowestEta, offered, required);
-			commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required, knownAaSignature,
-				Info.KnownAntiAirPathSafetyRadius, riskRevision, candidateSignature, template);
+			commanderCoreService.StoreSharedAirRaidBidTemplate(mission.TargetActorId, target.Location, required,
+				geometryIdentity, riskRevision, candidateSignature, template);
 			report = MaterializeSharedRaidBid(template, BidderKey);
 			return true;
 		}
 
 		bool TryGetOrBuildRaidBid(FransMission mission, IReadOnlyCollection<Actor> aircraft, IReadOnlyList<KnownAntiAirZone> knownAaZones,
 			Dictionary<FransMission, FransCommanderBidReport> successfulRaidBids, HashSet<FransMission> failedRaidBids,
-			out FransCommanderBidReport report)
+			AirRaidBidPassPerformanceDiagnostic passDiagnostic, out FransCommanderBidReport report)
 		{
 			if (successfulRaidBids.TryGetValue(mission, out report))
 				return true;
@@ -1145,7 +1618,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 			}
 
-			if (TryBuildRaidBid(mission, aircraft, knownAaZones, out report))
+			if (TryBuildRaidBid(mission, aircraft, knownAaZones, passDiagnostic, out report))
 			{
 				successfulRaidBids[mission] = report;
 				return true;
@@ -1157,7 +1630,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		HashSet<uint> GetRaidCapacityProtectedActorIds(IReadOnlyCollection<Actor> aircraft, IReadOnlyList<KnownAntiAirZone> knownAaZones,
 			Dictionary<FransMission, FransCommanderBidReport> successfulRaidBids, HashSet<FransMission> failedRaidBids,
-			out uint protectedTargetActorId)
+			AirRaidBidPassPerformanceDiagnostic passDiagnostic, out uint protectedTargetActorId)
 		{
 			protectedTargetActorId = 0;
 			FransCommanderBidReport best = default;
@@ -1166,7 +1639,10 @@ namespace OpenRA.Mods.Common.Traits
 				.Where(m => m.Type == FransMissionType.Raid)
 				.OrderBy(m => m.TargetActorId))
 			{
-				if (!TryGetOrBuildRaidBid(mission, aircraft, knownAaZones, successfulRaidBids, failedRaidBids, out var candidate) ||
+				if (passDiagnostic != null)
+					passDiagnostic.RaidMissionCount++;
+				if (!TryGetOrBuildRaidBid(mission, aircraft, knownAaZones, successfulRaidBids, failedRaidBids,
+					passDiagnostic, out var candidate) ||
 					candidate.OfferedContribution < candidate.RequiredContribution)
 					continue;
 
@@ -1183,6 +1659,95 @@ namespace OpenRA.Mods.Common.Traits
 			if (!found)
 				return [];
 			return best.CommittedActorIds.ToHashSet();
+		}
+
+		static double AirRaidPerformanceMilliseconds(long timestampTicks) =>
+			timestampTicks * 1000.0 / Stopwatch.Frequency;
+
+		static string FormatAirRaidRoutePerformance(AirRaidRoutePerformanceDiagnostic route)
+		{
+			var path = route.Path;
+			if (route.CacheHit)
+				return $"actor={route.ActorId}@{route.StartCell}->{route.TargetCell},cache=Hit," +
+					"geometryCache=NotChecked,physicalGeometrySolve=False," +
+					$"outcome={(route.Feasible ? (route.IsCritical ? "FeasibleCritical" : "Feasible") : "NoSafeRoute")}";
+			if (path == null)
+				return $"actor={route.ActorId}@{route.StartCell}->{route.TargetCell},cache=Miss,outcome=NoDiagnostic";
+			return $"actor={route.ActorId}@{route.StartCell}->{route.TargetCell},cache=Miss," +
+				$"geometryCache={(path.GeometryCacheHit ? "Hit" : "Miss")},physicalGeometrySolve={path.PhysicalGeometrySolve}," +
+				$"outcome={path.Outcome}," +
+				$"feasible={route.Feasible},critical={route.IsCritical},zones={path.ZoneCount},nodes={path.NodeCount}," +
+				$"ringCandidates={path.CandidatePointChecks},preparedExcludedCells={path.PreparedExcludedCellCount}," +
+				$"preparedCellChecks={path.PreparedCellChecks},preparedReused={path.PreparedGeometryReused}," +
+				$"escapeFallbackSegments={path.EscapeFallbackSegmentChecks}," +
+				$"segmentChecks={path.SegmentChecks},segmentZoneChecks={path.SegmentZoneChecks}," +
+				$"segmentCellSamples={path.SegmentCellSamples},graphPasses={path.GraphPasses}," +
+				$"graphSelectionChecks={path.GraphSelectionChecks},graphNeighborChecks={path.GraphNeighborChecks}," +
+				$"pathMs={AirRaidPerformanceMilliseconds(path.PathElapsedTimestampTicks):0.00}," +
+				$"nodeBuildMs={AirRaidPerformanceMilliseconds(path.NodeBuildElapsedTimestampTicks):0.00}," +
+				$"graphMs={AirRaidPerformanceMilliseconds(path.GraphElapsedTimestampTicks):0.00}," +
+				$"riskCells={path.RiskCellCount},riskMs={AirRaidPerformanceMilliseconds(path.RiskElapsedTimestampTicks):0.00}," +
+				$"etaMs={AirRaidPerformanceMilliseconds(path.EtaElapsedTimestampTicks):0.00}";
+		}
+
+		void LogAirRaidBidPassPerformance(AirRaidBidPassPerformanceDiagnostic diagnostic,
+			IReadOnlyCollection<Actor> aircraft, IReadOnlyList<KnownAntiAirZone> knownAaZones, long elapsedTimestampTicks)
+		{
+			var elapsedMs = AirRaidPerformanceMilliseconds(elapsedTimestampTicks);
+			var routeRequests = diagnostic.Candidates.Sum(c => c.Routes.Count);
+			var routeCacheHits = diagnostic.Candidates.Sum(c => c.Routes.Count(r => r.CacheHit));
+			var geometryCacheHits = diagnostic.Candidates.Sum(c => c.Routes.Count(r => !r.CacheHit && r.Path?.GeometryCacheHit == true));
+			var pathSearches = diagnostic.Candidates.Sum(c => c.Routes.Count(r => r.Path?.PhysicalGeometrySolve == true));
+			var previousRiskRevision = lastAirRaidPerformanceRiskRevision;
+			var riskRevisionChanged = previousRiskRevision != int.MinValue && previousRiskRevision != diagnostic.RiskRevision;
+			lastAirRaidPerformanceRiskRevision = diagnostic.RiskRevision;
+			if (elapsedMs < AirRaidBidPerformanceLogThresholdMilliseconds)
+			{
+				if (airRaidGeometryCacheReuseProofLogged || geometryCacheHits == 0 || !riskRevisionChanged)
+					return;
+				airRaidGeometryCacheReuseProofLogged = true;
+				OpenRA.Log.Write("debug",
+					$"[AIR RAID BID PERF][WT {world.WorldTick}] player={player} bidder={BidderKey} " +
+					$"cacheProof=FastGeometryReuse raidCapacityMs={elapsedMs:0.00} routeRequests={routeRequests} " +
+					$"routeCacheHits={routeCacheHits} geometryCacheHits={geometryCacheHits} pathSearches={pathSearches} " +
+					$"knownAaZones={knownAaZones.Count} knownAaSignature={diagnostic.KnownAntiAirSignature} " +
+					$"previousRiskRevision={previousRiskRevision} riskRevision={diagnostic.RiskRevision} " +
+					"diagnosticLogWriteExcluded=True");
+				return;
+			}
+			if (geometryCacheHits > 0 && riskRevisionChanged)
+				airRaidGeometryCacheReuseProofLogged = true;
+
+			OpenRA.Log.Write("debug",
+				$"[AIR RAID BID PERF][WT {world.WorldTick}] player={player} bidder={BidderKey} " +
+				$"raidCapacityMs={elapsedMs:0.00} raidMissions={diagnostic.RaidMissionCount} " +
+				$"templateHits={diagnostic.RaidTemplateHits} templateMisses={diagnostic.RaidTemplateMisses} " +
+				$"candidateEvaluations={diagnostic.Candidates.Count} routeRequests={routeRequests} " +
+				$"routeCacheHits={routeCacheHits} geometryCacheHits={geometryCacheHits} " +
+				$"pathSearches={pathSearches} aircraft={aircraft.Count} " +
+				$"knownAaZones={knownAaZones.Count} knownAaSignature={diagnostic.KnownAntiAirSignature} " +
+				$"preparedExcludedCells={cachedKnownAntiAirPreparedExclusion?.ExcludedCellCount ?? 0} " +
+				$"knownAaSnapshotWT={cachedKnownAntiAirWorldTick} combatSnapshotWT={combatIntelService.SnapshotWorldTick} " +
+				$"previousRiskRevision={previousRiskRevision} riskRevision={diagnostic.RiskRevision} " +
+				$"riskRevisionChanged={riskRevisionChanged} diagnosticLogWriteExcluded=True");
+
+			foreach (var candidate in diagnostic.Candidates)
+			{
+				var candidatePathTicks = candidate.Routes.Sum(r => r.Path?.PathElapsedTimestampTicks ?? 0);
+				var candidateRiskTicks = candidate.Routes.Sum(r => r.Path?.RiskElapsedTimestampTicks ?? 0);
+				var candidateEtaTicks = candidate.Routes.Sum(r => r.Path?.EtaElapsedTimestampTicks ?? 0);
+				var candidateAttributedTicks = candidatePathTicks + candidateRiskTicks + candidateEtaTicks;
+				OpenRA.Log.Write("debug",
+					$"[AIR RAID BID PERF][WT {world.WorldTick}] player={player} bidder={BidderKey} " +
+					$"target={candidate.TargetActorId}/{candidate.TargetActorType}@{candidate.TargetCell} " +
+					$"candidateMs={AirRaidPerformanceMilliseconds(candidate.ElapsedTimestampTicks):0.00} " +
+					$"pathMs={AirRaidPerformanceMilliseconds(candidatePathTicks):0.00} " +
+					$"riskMs={AirRaidPerformanceMilliseconds(candidateRiskTicks):0.00} " +
+					$"etaMs={AirRaidPerformanceMilliseconds(candidateEtaTicks):0.00} " +
+					$"otherMs={AirRaidPerformanceMilliseconds(Math.Max(0, candidate.ElapsedTimestampTicks - candidateAttributedTicks)):0.00} " +
+					$"availableAttackers={candidate.AvailableAttackers} aaPathRejected={candidate.AntiAirPathRejected} " +
+					$"metricRejected={candidate.MetricRejected} routes=[{string.Join(" | ", candidate.Routes.Select(FormatAirRaidRoutePerformance))}]");
+			}
 		}
 
 		void LogRaidCapacityProtection(HashSet<uint> protectedActorIds, uint protectedTargetActorId)
@@ -1223,13 +1788,18 @@ namespace OpenRA.Mods.Common.Traits
 			// sizing, ranking and tie-break logic still runs once with the same inputs.
 			var successfulRaidBids = new Dictionary<FransMission, FransCommanderBidReport>();
 			var failedRaidBids = new HashSet<FransMission>();
+			var raidPassDiagnostic = new AirRaidBidPassPerformanceDiagnostic();
+			var raidCapacityStarted = Stopwatch.GetTimestamp();
+			var raidCapacityElapsed = 0L;
 			HashSet<uint> raidCapacityProtectedActorIds;
 			using (FransBotLog.Profile(world, player, "Air.SubmitBids.RaidCapacity"))
 			{
 				raidCapacityProtectedActorIds = GetRaidCapacityProtectedActorIds(aircraft, knownAaZones,
-					successfulRaidBids, failedRaidBids, out var protectedRaidTargetActorId);
+					successfulRaidBids, failedRaidBids, raidPassDiagnostic, out var protectedRaidTargetActorId);
 				LogRaidCapacityProtection(raidCapacityProtectedActorIds, protectedRaidTargetActorId);
+				raidCapacityElapsed = Stopwatch.GetTimestamp() - raidCapacityStarted;
 			}
+			LogAirRaidBidPassPerformance(raidPassDiagnostic, aircraft, knownAaZones, raidCapacityElapsed);
 
 			using var missionScanPerf = FransBotLog.Profile(world, player, "Air.SubmitBids.MissionScan");
 			foreach (var mission in generalService.CurrentMissions)
@@ -1250,7 +1820,8 @@ namespace OpenRA.Mods.Common.Traits
 
 				if (mission.Type == FransMissionType.Raid)
 				{
-					if (TryGetOrBuildRaidBid(mission, aircraft, knownAaZones, successfulRaidBids, failedRaidBids, out var raidBid))
+					if (TryGetOrBuildRaidBid(mission, aircraft, knownAaZones, successfulRaidBids, failedRaidBids,
+						null, out var raidBid))
 						commandBidService.SubmitMissionBid(mission, raidBid);
 					continue;
 				}
@@ -1594,7 +2165,7 @@ namespace OpenRA.Mods.Common.Traits
 				combinedSecureHoldTargetActorId = mission.TargetActorId;
 				combinedSecureHoldUntilTick = mission.ExecuteAfterWorldTick;
 				foreach (var aircraft in ResolveCommittedAirActors(mission))
-					aircraft.CancelActivity();
+					QueueStopOrder(null, aircraft);
 				FransBotLog.BotDebug(world,
 					"{0}: Air {1} holds COMBINED SECURE {2} until WT {3}; its ETA is {4} WT and {5} domains are timing departure toward the same area.",
 					player, BidderKey, mission.TargetActorId, mission.ExecuteAfterWorldTick, mission.EstimatedEtaTicks, mission.CombinedSecureGroupSize);
@@ -1617,7 +2188,11 @@ namespace OpenRA.Mods.Common.Traits
 		void ExecuteSecureMission(IBot bot, IReadOnlyCollection<Actor> ready, FransActiveMission mission)
 		{
 			if (HoldCombinedSecureUntilLaunch(mission))
+			{
+				LogAirSecureLiveness(mission, "CombinedHold", mission.LastVisibleTargetCell,
+					$"executeAfterWT={mission.ExecuteAfterWorldTick}");
 				return;
+			}
 
 			RememberMissionAnchor(mission);
 			var changed = activeTargetActorId != mission.TargetActorId || activeMissionType != FransMissionType.Secure;
@@ -1626,6 +2201,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			if (changed)
 			{
+				ResetAirSecureLivenessDiagnostics();
 				activeTargetActorId = mission.TargetActorId;
 				activeObjective = mission.LastVisibleTargetCell;
 				activeOrder = FransCommanderOrder.Move;
@@ -1636,13 +2212,17 @@ namespace OpenRA.Mods.Common.Traits
 				var committed = ResolveCommittedAirActors(mission);
 				if (committed.Length != mission.CommittedActorIds.Length || committed.Length == 0)
 				{
+					LogAirSecureLiveness(mission, "CommittedSnapshotUnavailable", activeObjective,
+						$"resolved={committed.Length}/{mission.CommittedActorIds.Length}");
 					ReportSecureRetreatIfLast(mission.TargetActorId, "Air SECURE exact committed actor snapshot became unavailable");
 					commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey, "SECURE exact committed Air actor snapshot is unavailable");
+					LogAirSecureReleased(mission, activeObjective, "exact committed actor snapshot unavailable");
 					ResetMission();
 					return;
 				}
 				foreach (var aircraft in committed)
 					activeAircraft.Add(aircraft);
+				LogAirSecureLiveness(mission, "Accepted", activeObjective, "immutable committed snapshot resolved");
 				FransBotLog.BotDebug(world,
 					"{0}: Air Commander accepts GENERAL SECURE {1} {2} at {3}; {4} aircraft, bid cost {5}. Air owns domain-specific CLEAR, including persistent remembered buildings; Air CLEAR closes only the Air domain and never moves Ground ANCHOR.",
 					player, mission.TargetActorType == "fact" ? "enemy FACT" : "MineCluster", mission.TargetActorId, activeObjective, activeAircraft.Count, mission.TotalCost);
@@ -1656,8 +2236,11 @@ namespace OpenRA.Mods.Common.Traits
 				var liveCommitted = ResolveCommittedAirActors(mission);
 				if (liveCommitted.Length == 0)
 				{
+					LogAirSecureLiveness(mission, "CommittedSnapshotUnavailable", activeObjective,
+						"every committed aircraft is physically missing/dead");
 					ReportSecureRetreatIfLast(mission.TargetActorId, "Air SECURE committed snapshot physically lost");
 					commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey, "SECURE committed Air snapshot was physically lost; capacity released for rebid");
+					LogAirSecureReleased(mission, activeObjective, "committed snapshot physically lost");
 					FransBotLog.BotDebug(world,
 						"{0}: Air SECURE MISSION {1} releases {2}: every committed aircraft is dead/missing; this is not a rearm wait.",
 						player, mission.TargetActorId, BidderKey);
@@ -1672,6 +2255,8 @@ namespace OpenRA.Mods.Common.Traits
 				if (activeAircraft.Count == 0)
 				{
 					secureClearSinceWorldTick = -1;
+					LogAirSecureLiveness(mission, "ServiceWait", activeObjective,
+						"committed aircraft remain alive but none are currently ammo-ready");
 					return;
 				}
 			}
@@ -1680,6 +2265,8 @@ namespace OpenRA.Mods.Common.Traits
 			if (armedSecureAircraft.Length == 0)
 			{
 				secureClearSinceWorldTick = -1;
+				LogAirSecureLiveness(mission, "ServiceWait", activeObjective,
+					"live immutable committed snapshot has no usable ammo");
 				return;
 			}
 
@@ -1700,6 +2287,8 @@ namespace OpenRA.Mods.Common.Traits
 				if (activeOrder != FransCommanderOrder.Fight)
 					BeginFight();
 				ExecuteFightMicro(bot, threat);
+				LogAirSecureLiveness(mission, "VisibleThreatFight", mission.LastVisibleTargetCell,
+					$"target={threat.ActorID}/{threat.Info.Name}@{threat.Location}");
 				return;
 			}
 
@@ -1716,8 +2305,12 @@ namespace OpenRA.Mods.Common.Traits
 						IsAirAttackCorridorKnownAaSafe(a, visibleRemembered, secureKnownAaZones));
 					if (!canEngage)
 					{
+						LogAirSecureLiveness(mission, "VisibleRememberedCapabilityRejected", rememberedBuilding.LastSeenCell,
+							"visible remembered building is not safely attackable by committed wing", rememberedBuilding);
 						commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey,
 							"Air SECURE visible remembered building is not safely attackable by the committed wing; release for rebid");
+						LogAirSecureReleased(mission, rememberedBuilding.LastSeenCell,
+							"visible remembered building is not safely attackable");
 						ResetMission();
 						return;
 					}
@@ -1725,18 +2318,26 @@ namespace OpenRA.Mods.Common.Traits
 					if (activeOrder != FransCommanderOrder.Fight)
 						BeginFight();
 					ExecuteFightMicro(bot, visibleRemembered);
+					LogAirSecureLiveness(mission, "VisibleThreatFight", rememberedBuilding.LastSeenCell,
+						$"rememberedTarget={rememberedBuilding.ActorId}/{rememberedBuilding.ActorType}", rememberedBuilding);
 					return;
 				}
 
 				activeObjective = rememberedBuilding.LastSeenCell;
 				foreach (var aircraft in armedSecureAircraft.OrderBy(a => a.ActorID))
-					if (!QueueMove(bot, aircraft, activeObjective, false))
+					if (!QueueMove(bot, aircraft, activeObjective, false, allowSecureFlyIdleReacquire: true))
 					{
+						LogAirSecureLiveness(mission, "PathRejected", activeObjective,
+							"known SAM/AA exclusion blocks remembered-building verification", rememberedBuilding);
 						commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey,
 							"known SAM/AA exclusion blocks remembered-building SECURE verification");
+						LogAirSecureReleased(mission, activeObjective,
+							"known SAM/AA exclusion blocks remembered-building verification");
 						ResetMission();
 						return;
 					}
+				LogAirSecureLiveness(mission, "RememberedBuildingVerification", activeObjective,
+					"persistent remembered building keeps CLEAR open pending direct verification", rememberedBuilding);
 				return;
 			}
 
@@ -1745,10 +2346,13 @@ namespace OpenRA.Mods.Common.Traits
 			hasLastSafeMoveAnchor = true;
 			lastSafeMoveAnchor = GetGroupCenter(activeAircraft);
 			foreach (var aircraft in armedSecureAircraft.OrderBy(a => a.ActorID))
-				if (!QueueMove(bot, aircraft, activeObjective, false))
+				if (!QueueMove(bot, aircraft, activeObjective, false, allowSecureFlyIdleReacquire: true))
 				{
+					LogAirSecureLiveness(mission, "PathRejected", activeObjective,
+						"known SAM/AA exclusion blocks objective move");
 					ReportSecureRetreatIfLast(mission.TargetActorId, "known SAM/AA exclusion blocks Air SECURE PathMove");
 					commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey, "known SAM/AA exclusion blocks Air SECURE PathMove");
+					LogAirSecureReleased(mission, activeObjective, "known SAM/AA exclusion blocks objective move");
 					ResetMission();
 					return;
 				}
@@ -1759,16 +2363,26 @@ namespace OpenRA.Mods.Common.Traits
 			if (assembled.Length < requiredCount)
 			{
 				secureClearSinceWorldTick = -1;
+				var branch = assembled.Length == 0 ? "ObjectiveMove" : "AssemblyWait";
+				LogAirSecureLiveness(mission, branch, activeObjective,
+					"committed armed aircraft have not met the unchanged assembly requirement",
+					assembled: assembled.Length, required: requiredCount);
 				return;
 			}
 
 			if (secureClearSinceWorldTick < 0)
 			{
 				secureClearSinceWorldTick = world.WorldTick;
+				LogAirSecureLiveness(mission, "ClearHold", activeObjective,
+					"assembly reached; unchanged clear hold begins", assembled: assembled.Length, required: requiredCount);
 				return;
 			}
 			if (world.WorldTick - secureClearSinceWorldTick < Info.SecureClearHoldTicks)
+			{
+				LogAirSecureLiveness(mission, "ClearHold", activeObjective,
+					"unchanged clear hold remains in progress", assembled: assembled.Length, required: requiredCount);
 				return;
+			}
 
 			var securePoint = mission.LastVisibleTargetCell;
 			var transportLossSecure = mission.TargetActorType == FransGeneralBotModule.TransportLossSecureTargetType;
@@ -1776,7 +2390,14 @@ namespace OpenRA.Mods.Common.Traits
 				!generalService.CompleteDomainSecureMission(mission.TargetActorId, FransCommanderKind.Air, securePoint,
 					$"Air cleared {Info.SecureThreatRadius}-cell area including persistent remembered enemy buildings and assembled {assembled.Length}/{activeAircraft.Count} committed aircraft") &&
 				!(transportLossSecure && !generalService.IsTransportLossSecure(mission.TargetActorId)))
+			{
+				LogAirSecureLiveness(mission, "ClearHold", activeObjective,
+					"General has not accepted domain completion; ownership remains unchanged",
+					assembled: assembled.Length, required: requiredCount);
 				return;
+			}
+			LogAirSecureLiveness(mission, "ClearComplete", securePoint,
+				"General accepted the unchanged Commander CLEAR transition", assembled: assembled.Length, required: requiredCount);
 
 			if (mission.CombinedSecureGroupSize > 1 && !transportLossSecure)
 				FransBotLog.BotDebug(world,
@@ -1786,6 +2407,7 @@ namespace OpenRA.Mods.Common.Traits
 			var releasedAircraft = ResolveCommittedAirActors(mission);
 			commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey,
 				"Air SECURE clear complete; domain mission closed without changing Ground ANCHOR");
+			LogAirSecureReleased(mission, securePoint, "normal Air SECURE CLEAR released Broker ownership");
 			foreach (var aircraft in releasedAircraft.OrderBy(a => a.ActorID))
 			{
 				if (!HasAmmo(aircraft) || NeedsNativeRepair(aircraft))
@@ -1886,6 +2508,9 @@ namespace OpenRA.Mods.Common.Traits
 				ReportSecureRetreatIfLast(retreatTargetId, $"Air force collapse {currentCombatValue}/{retreatBaselineCombatValue}");
 			commandBidService.ReleaseMission(FransCommanderKind.Air, BidderKey,
 				$"FIGHT force collapse {currentCombatValue}/{retreatBaselineCombatValue}; RETREAT owns ANCHOR POINT recovery");
+			if (retreatMissionType == FransMissionType.Secure && secureDiagnosticMission.HasValue)
+				LogAirSecureReleased(secureDiagnosticMission.Value, activeObjective,
+					$"existing FIGHT force-collapse RETREAT {currentCombatValue}/{retreatBaselineCombatValue}");
 			retreatRecoveryActive = true;
 			retreatStartedWorldTick = world.WorldTick;
 			activeTargetActorId = 0;
@@ -2130,7 +2755,7 @@ namespace OpenRA.Mods.Common.Traits
 						var droppedAircraft = combatIntelService.OwnedActors.FirstOrDefault(a => a.ActorID == id && IsManagedAircraft(a) && a.IsInWorld && !a.IsDead);
 						if (droppedAircraft == null || raidRecoverySince.ContainsKey(droppedAircraft))
 							continue;
-						droppedAircraft.CancelActivity();
+						QueueStopOrder(bot, droppedAircraft);
 						if (!HasFullRaidAmmo(droppedAircraft))
 							QueueReturnToBase(bot, droppedAircraft, true);
 					}
@@ -2257,7 +2882,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (!TryBuildKnownAntiAirSafePath(a.Location, activeObjective, knownAaZones, out var safePath))
 					{
 						foreach (var aircraft in activeAircraft.Where(x => x != null && x.IsInWorld && !x.IsDead))
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						ReleaseRaidForRebid(bot, mission.TargetActorId,
 							$"known SAM/AA exclusion blocks precision RAID PathMove to {activeObjective}");
 						return;
@@ -2291,7 +2916,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (heldFor >= Info.RaidCommittedRiskAbortHoldTicks)
 					{
 						foreach (var aircraft in activeAircraft.Where(x => x != null && x.IsInWorld && !x.IsDead))
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						ReleaseRaidForRebid(bot, mission.TargetActorId,
 							$"committed AA-safe route remained at/above risk {Info.RaidCommittedRiskAbortScore} for {heldFor} WT; peak {committedHardPeak} at {committedHardPeakCell}");
 						return;
@@ -2308,7 +2933,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (raidLostTargetConfirmationState == RaidLostTargetConfirmationState.Active)
 			{
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 				raidLostTargetConfirmationState = RaidLostTargetConfirmationState.Consumed;
 				ResetRaidApproachProgress(target);
 				if (raidStrikeIssued)
@@ -2425,7 +3050,7 @@ namespace OpenRA.Mods.Common.Traits
 				// and make exactly one confirmation pass through the last legitimately observed cell.
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead).OrderBy(a => a.ActorID))
 				{
-					a.CancelActivity();
+					QueueStopOrder(bot, a);
 					if (!QueueMove(bot, a, activeObjective, true))
 					{
 						ReleaseRaidForRebid(bot, mission.TargetActorId, "known SAM/AA exclusion blocks lost-target confirmation pass");
@@ -2459,7 +3084,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (cancelActivities)
 				foreach (var a in activeAircraft.Where(a => a != null && a.IsInWorld && !a.IsDead))
-					a.CancelActivity();
+					QueueStopOrder(null, a);
 			raidLostTargetConfirmationState = RaidLostTargetConfirmationState.Available;
 		}
 
@@ -2607,7 +3232,7 @@ namespace OpenRA.Mods.Common.Traits
 				raidRecoveryAnchors[aircraft] = missionAnchorPoint;
 			var recoveryAnchor = raidRecoveryAnchors.TryGetValue(aircraft, out var savedAnchor) ? savedAnchor : aircraft.Location;
 			ObserveRecoveryProgress(aircraft, recoveryAnchor, requireFullAmmo: true, initialize: true);
-			aircraft.CancelActivity();
+			QueueStopOrder(bot, aircraft);
 			RouteAirServiceUnit(bot, aircraft, requireFullAmmo: true, watchdog: false);
 			activeAircraft.Remove(aircraft);
 			RefreshTransientReservations();
@@ -2628,7 +3253,7 @@ namespace OpenRA.Mods.Common.Traits
 				raidRecoverySince[a] = world.WorldTick;
 				raidRecoveryAnchors[a] = origin;
 				ObserveRecoveryProgress(a, origin, requireFullAmmo: false, initialize: true);
-				a.CancelActivity();
+				QueueStopOrder(bot, a);
 				if (HasAmmo(a))
 				{
 					raidAttackMoveHomeActors.Add(a);
@@ -2662,7 +3287,7 @@ namespace OpenRA.Mods.Common.Traits
 					raidRecoveryAnchors[a] = missionAnchorPoint;
 				var recoveryAnchor = raidRecoveryAnchors.TryGetValue(a, out var savedAnchor) ? savedAnchor : a.Location;
 				ObserveRecoveryProgress(a, recoveryAnchor, requireFullAmmo: true, initialize: true);
-				a.CancelActivity();
+				QueueStopOrder(bot, a);
 				RouteAirServiceUnit(bot, a, requireFullAmmo: true, watchdog: false);
 			}
 
@@ -2694,7 +3319,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (HasAmmo(a) && (a.Location - origin).LengthSquared > 4)
 					{
 						if (returnWatchdog && !a.IsIdle)
-							a.CancelActivity();
+							QueueStopOrder(bot, a);
 						QueueAttackMove(bot, a, origin, returnWatchdog);
 						if (returnWatchdog)
 							MarkRecoveryWatchdogReissue(a, "RAID AttackMove return toward sortie origin");
@@ -2713,7 +3338,7 @@ namespace OpenRA.Mods.Common.Traits
 					if ((a.Location - recoveryAnchor).LengthSquared > 4)
 					{
 						if (watchdog && !a.IsIdle)
-							a.CancelActivity();
+							QueueStopOrder(bot, a);
 						QueueMove(bot, a, recoveryAnchor, watchdog);
 						if (watchdog)
 							MarkRecoveryWatchdogReissue(a, "RAID recovery ANCHOR regroup Move");
@@ -2894,7 +3519,7 @@ namespace OpenRA.Mods.Common.Traits
 					ResetPioneerReconProgress(reconActor, activeObjective);
 					activeOrder = FransCommanderOrder.Move;
 					hasReconSearchWaypoint = false;
-					reconActor.CancelActivity();
+					QueueStopOrder(bot, reconActor);
 					FransBotLog.BotDebug(world, "{0}: Air RECON {1} redirects to PIONEER exact objective {2}; persistent probing is temporarily superseded until the exact ore cell is scout-cleared.", player, activeTargetActorId, activeObjective);
 				}
 				else if (!pioneerWasActive)
@@ -3104,7 +3729,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (reconActor != null && reconActor.IsInWorld && !reconActor.IsDead)
 			{
 				reconActor.TraitOrDefault<AutoTarget>()?.SetStance(reconActor, UnitStance.AttackAnything);
-				reconActor.CancelActivity();
+				QueueStopOrder(null, reconActor);
 			}
 			reconActor = null;
 			reconOrigin = default;
@@ -3115,6 +3740,246 @@ namespace OpenRA.Mods.Common.Traits
 			reconPioneerBestDistanceSquared = int.MaxValue;
 			reconPioneerLastProgressWorldTick = -1;
 			reconLoggedContactIds.Clear();
+		}
+
+		void ResetAirSecureLivenessDiagnostics()
+		{
+			secureDiagnosticMission = null;
+			lastSecureDiagnosticSignature = null;
+			lastSecureDiagnosticBranch = "None";
+			nextSecureDiagnosticHeartbeatWorldTick = 0;
+			secureDiagnosticOwnershipActive = false;
+			secureProgressDiagnostics.Clear();
+			secureMoveIntentDiagnostics.Clear();
+		}
+
+		void EnsureAirSecureDiagnosticMission(FransActiveMission mission)
+		{
+			var changed = !secureDiagnosticMission.HasValue ||
+				secureDiagnosticMission.Value.TargetActorId != mission.TargetActorId ||
+				secureDiagnosticMission.Value.StartedWorldTick != mission.StartedWorldTick ||
+				!string.Equals(secureDiagnosticMission.Value.BidderKey, mission.BidderKey, StringComparison.Ordinal);
+			if (!changed)
+				return;
+
+			ResetAirSecureLivenessDiagnostics();
+			secureDiagnosticMission = mission;
+			secureDiagnosticOwnershipActive = true;
+			nextSecureDiagnosticHeartbeatWorldTick = world.WorldTick + Info.UtilizationLogInterval;
+		}
+
+		void ObserveAirSecureDiagnosticProgress(FransActiveMission mission, CPos objective)
+		{
+			EnsureAirSecureDiagnosticMission(mission);
+			var liveById = combatIntelService.OwnedActors
+				.Where(a => a != null && a.IsInWorld && !a.IsDead)
+				.ToDictionary(a => a.ActorID);
+			foreach (var actorId in mission.CommittedActorIds ?? Array.Empty<uint>())
+			{
+				if (!liveById.TryGetValue(actorId, out var aircraft))
+					continue;
+
+				var distanceSquared = (long)(aircraft.Location - objective).LengthSquared;
+				if (!secureProgressDiagnostics.TryGetValue(actorId, out var progress) || progress.Objective != objective)
+				{
+					RebaseAirSecureDiagnosticProgress(aircraft, objective);
+					continue;
+				}
+
+				progress.PreviousDistanceSquared = progress.LastDistanceSquared;
+				progress.ImprovedOnLastSample = distanceSquared < progress.LastDistanceSquared;
+				if (aircraft.Location != progress.LastCell)
+					progress.LastMovementWorldTick = world.WorldTick;
+				if (distanceSquared < progress.BestDistanceSquared)
+				{
+					progress.BestDistanceSquared = distanceSquared;
+					progress.LastProgressWorldTick = world.WorldTick;
+					progress.ImprovedSinceLastReport = true;
+				}
+				progress.LastCell = aircraft.Location;
+				progress.LastDistanceSquared = distanceSquared;
+			}
+		}
+
+		void RebaseAirSecureDiagnosticProgress(Actor aircraft, CPos objective)
+		{
+			if (!secureDiagnosticOwnershipActive || aircraft == null || !secureDiagnosticMission.HasValue ||
+				!(secureDiagnosticMission.Value.CommittedActorIds ?? Array.Empty<uint>()).Contains(aircraft.ActorID))
+				return;
+
+			var distanceSquared = (long)(aircraft.Location - objective).LengthSquared;
+			secureProgressDiagnostics[aircraft.ActorID] = new SecureProgressDiagnostic
+			{
+				Objective = objective,
+				LastCell = aircraft.Location,
+				PreviousDistanceSquared = distanceSquared,
+				LastDistanceSquared = distanceSquared,
+				BestDistanceSquared = distanceSquared,
+				LastMovementWorldTick = world.WorldTick,
+				LastProgressWorldTick = world.WorldTick,
+				ImprovedOnLastSample = false
+			};
+		}
+
+		string GetAirSecureServiceState(Actor aircraft)
+		{
+			if (aircraft == null || !aircraft.IsInWorld || aircraft.IsDead || aircraft.Owner != player)
+				return "MissingOrDead";
+			var armed = HasAmmo(aircraft);
+			var repair = NeedsNativeRepair(aircraft);
+			var damaged = aircraft.GetDamageState() > DamageState.Undamaged;
+			if (!armed)
+				return repair ? "AliveUnarmedRepairRequired" : "AliveUnarmedRearming";
+			if (repair)
+				return "AliveArmedRepairRequired";
+			return damaged ? "AliveArmedDamaged" : "AliveArmedHealthy";
+		}
+
+		string FormatAirSecureActorDiagnostic(uint actorId, CPos objective)
+		{
+			var aircraft = combatIntelService.OwnedActors.FirstOrDefault(a => a != null && a.ActorID == actorId);
+			if (aircraft == null || !aircraft.IsInWorld || aircraft.IsDead || aircraft.Owner != player)
+				return $"{actorId}:state=MissingOrDead,immutableCommitted=True,activeTracked=False";
+
+			var armed = HasAmmo(aircraft);
+			var fullAmmo = HasFullRaidAmmo(aircraft);
+			var repairRequired = NeedsNativeRepair(aircraft);
+			var damageState = aircraft.GetDamageState();
+			var health = aircraft.TraitOrDefault<Health>();
+			var hp = health == null ? "n/a" : $"{health.HP}/{health.MaxHP}";
+			var repairable = aircraft.TraitOrDefault<Repairable>();
+			var repairBuilding = repairRequired ? repairable?.FindRepairBuilding(aircraft) : null;
+			var repairSite = repairBuilding == null
+				? "None"
+				: $"{repairBuilding.ActorID}/{repairBuilding.Info.Name}@{repairBuilding.Location}";
+			var distanceSquared = (long)(aircraft.Location - objective).LengthSquared;
+			var previousDistance = distanceSquared;
+			var bestDistance = distanceSquared;
+			var lastMovement = world.WorldTick;
+			var lastProgress = world.WorldTick;
+			var improved = false;
+			var improvedSinceReport = false;
+			if (secureProgressDiagnostics.TryGetValue(actorId, out var progress) && progress.Objective == objective)
+			{
+				previousDistance = progress.PreviousDistanceSquared;
+				bestDistance = progress.BestDistanceSquared;
+				lastMovement = progress.LastMovementWorldTick;
+				lastProgress = progress.LastProgressWorldTick;
+				improved = progress.ImprovedOnLastSample;
+				improvedSinceReport = progress.ImprovedSinceLastReport;
+			}
+			var returnTick = lastReturnWorldTick.TryGetValue(aircraft, out var lastReturn) ? lastReturn.ToString() : "None";
+			var repairTick = lastRepairWorldTick.TryGetValue(aircraft, out var lastRepair) ? lastRepair.ToString() : "None";
+			return $"{actorId}/{aircraft.Info.Name}:state={GetAirSecureServiceState(aircraft)},immutableCommitted=True," +
+				$"activeTracked={activeAircraft.Contains(aircraft)}," +
+				$"cell={aircraft.Location},objective={objective},distanceSq={distanceSquared},previousDistanceSq={previousDistance}," +
+				$"bestDistanceSq={bestDistance},lastMovementWT={lastMovement},lastProgressWT={lastProgress},improvedLastSample={improved}," +
+				$"improvedSinceLastReport={improvedSinceReport}," +
+				$"ammo={armed},fullAmmo={fullAmmo},repairRequired={repairRequired},damage={damageState},hp={hp}," +
+				$"repairBuilding={repairSite},idle={aircraft.IsIdle},currentActivity={aircraft.CurrentActivity?.GetType().Name ?? "None"}," +
+				$"lastReturnToBaseWT={returnTick},lastRepairOrderWT={repairTick}";
+		}
+
+		string FormatAirSecureMoveDiagnostic(uint actorId)
+		{
+			if (!secureMoveIntentDiagnostics.TryGetValue(actorId, out var move))
+				return $"{actorId}:outcome=None";
+			return $"{actorId}:outcome={move.Outcome},requested={move.RequestedDestination},cell={move.CurrentCell}," +
+				$"idle={move.IsIdle},cachedDestinationMatched={move.CachedDestinationMatched}," +
+				$"knownAaSignatureMatched={move.KnownAaSignatureMatched},previousMoveWT={move.PreviousMoveWorldTick}," +
+				$"currentActivity={move.CurrentActivity},activityIsExpectedMove=" +
+				$"{(move.ActivityIsExpectedMove.HasValue ? move.ActivityIsExpectedMove.Value.ToString() : "n/a")}," +
+				$"eventWT={move.EventWorldTick},waypoints={move.WaypointCount},counts=queued:{move.QueuedCount}/" +
+				$"suppressedNonIdle:{move.SuppressedNonIdleCount}/suppressedRefreshHold:{move.SuppressedRefreshHoldCount}/" +
+				$"rejectedKnownAa:{move.RejectedKnownAaCount}";
+		}
+
+		void RecordAirSecureMoveIntent(Actor aircraft, CPos destination, bool cachedDestinationMatched,
+			bool knownAaSignatureMatched, int previousMoveWorldTick, string outcome, int waypointCount = 0,
+			string currentActivity = "NotCaptured", bool? activityIsExpectedMove = null)
+		{
+			if (!secureDiagnosticOwnershipActive || aircraft == null || !secureDiagnosticMission.HasValue ||
+				!(secureDiagnosticMission.Value.CommittedActorIds ?? Array.Empty<uint>()).Contains(aircraft.ActorID))
+				return;
+
+			if (!secureMoveIntentDiagnostics.TryGetValue(aircraft.ActorID, out var move))
+			{
+				move = new SecureMoveIntentDiagnostic();
+				secureMoveIntentDiagnostics.Add(aircraft.ActorID, move);
+			}
+			move.RequestedDestination = destination;
+			move.CurrentCell = aircraft.Location;
+			move.IsIdle = aircraft.IsIdle;
+			move.CachedDestinationMatched = cachedDestinationMatched;
+			move.KnownAaSignatureMatched = knownAaSignatureMatched;
+			move.PreviousMoveWorldTick = previousMoveWorldTick;
+			move.EventWorldTick = world.WorldTick;
+			move.WaypointCount = waypointCount;
+			move.Outcome = outcome;
+			move.CurrentActivity = currentActivity;
+			move.ActivityIsExpectedMove = activityIsExpectedMove;
+			switch (outcome)
+			{
+				case "QueuedNativeMove": move.QueuedCount++; break;
+				case "SuppressedNonIdle": move.SuppressedNonIdleCount++; break;
+				case "SuppressedRefreshHold": move.SuppressedRefreshHoldCount++; break;
+				case "RejectedKnownAaPath": move.RejectedKnownAaCount++; break;
+			}
+		}
+
+		void LogAirSecureLiveness(FransActiveMission mission, string branch, CPos objective, string detail,
+			FransCombatIntelContact? rememberedBuilding = null, int assembled = -1, int required = -1, bool force = false)
+		{
+			ObserveAirSecureDiagnosticProgress(mission, objective);
+			var committedIds = (mission.CommittedActorIds ?? Array.Empty<uint>()).OrderBy(id => id).ToArray();
+			var remembered = rememberedBuilding.HasValue
+				? $"{rememberedBuilding.Value.ActorId}/{rememberedBuilding.Value.ActorType}@{rememberedBuilding.Value.LastSeenCell}:" +
+					$"visible={rememberedBuilding.Value.IsVisible},defensive={rememberedBuilding.Value.IsDefensiveBuilding}"
+				: "None";
+			var serviceSignature = string.Join(",", committedIds.Select(id =>
+			{
+				var aircraft = combatIntelService.OwnedActors.FirstOrDefault(a => a != null && a.ActorID == id);
+				return aircraft == null || !aircraft.IsInWorld || aircraft.IsDead || aircraft.Owner != player
+					? $"{id}:MissingOrDead"
+					: $"{id}:{GetAirSecureServiceState(aircraft)}:{aircraft.GetDamageState()}:fullAmmo={HasFullRaidAmmo(aircraft)}";
+			}));
+			var moveSignature = string.Join(",", committedIds.Select(id =>
+				secureMoveIntentDiagnostics.TryGetValue(id, out var move)
+					? $"{id}:{move.Outcome}:{move.CurrentActivity}:{move.ActivityIsExpectedMove}"
+					: $"{id}:None"));
+			var signature = $"{mission.TargetActorId}|{mission.StartedWorldTick}|{branch}|{objective}|" +
+				$"{rememberedBuilding?.ActorId ?? 0}|{rememberedBuilding?.IsVisible ?? false}|{assembled}|{required}|" +
+				$"{serviceSignature}|{moveSignature}";
+			var heartbeat = world.WorldTick >= nextSecureDiagnosticHeartbeatWorldTick;
+			if (!force && !heartbeat && string.Equals(signature, lastSecureDiagnosticSignature, StringComparison.Ordinal))
+				return;
+
+			var previousBranch = lastSecureDiagnosticBranch;
+			var eventKind = force || !string.Equals(signature, lastSecureDiagnosticSignature, StringComparison.Ordinal)
+				? "StateChange"
+				: "Heartbeat";
+			var actorDetails = string.Join(" | ", committedIds.Select(id => FormatAirSecureActorDiagnostic(id, objective)));
+			var moveDetails = string.Join(" | ", committedIds.Select(FormatAirSecureMoveDiagnostic));
+			var clearHold = secureClearSinceWorldTick < 0 ? 0 : Math.Max(0, world.WorldTick - secureClearSinceWorldTick);
+			FransBotLog.BotDebug(world,
+				"{0}: [AIR SECURE LIVENESS] event={1} WT={2} mission={3} targetType={4} bidder={5} branch={6} previousBranch={7} " +
+				"acceptedObjective={8} currentObjective={9} acceptedWT={10} ageWT={11} committed=[{12}] assembled={13}/{14} " +
+				"clearHoldWT={15}/{16} remembered={17} actors=[{18}] moveIntent=[{19}] detail={20}.",
+				player, eventKind, world.WorldTick, mission.TargetActorId, mission.TargetActorType, BidderKey, branch, previousBranch,
+				mission.LastVisibleTargetCell, objective, mission.StartedWorldTick, Math.Max(0, world.WorldTick - mission.StartedWorldTick),
+				string.Join(",", committedIds), assembled < 0 ? "n/a" : assembled.ToString(), required < 0 ? "n/a" : required.ToString(),
+				clearHold, Info.SecureClearHoldTicks, remembered, actorDetails, moveDetails, detail ?? "None");
+			lastSecureDiagnosticSignature = signature;
+			lastSecureDiagnosticBranch = branch;
+			nextSecureDiagnosticHeartbeatWorldTick = world.WorldTick + Info.UtilizationLogInterval;
+			foreach (var progress in secureProgressDiagnostics.Values)
+				progress.ImprovedSinceLastReport = false;
+		}
+
+		void LogAirSecureReleased(FransActiveMission mission, CPos objective, string reason)
+		{
+			LogAirSecureLiveness(mission, "Released", objective, reason, force: true);
+			secureDiagnosticOwnershipActive = false;
 		}
 
 		void QueueAttack(IBot bot, Actor aircraft, Actor target, bool force)
@@ -3136,21 +4001,56 @@ namespace OpenRA.Mods.Common.Traits
 			lastMoveWorldTick[aircraft] = world.WorldTick;
 		}
 
-		bool QueueMove(IBot bot, Actor aircraft, CPos destination, bool force)
+		bool QueueMove(IBot bot, Actor aircraft, CPos destination, bool force,
+			bool allowSecureFlyIdleReacquire = false)
 		{
 			var knownAaZones = GetKnownAntiAirZones();
 			var aaSignature = KnownAntiAirSignature(knownAaZones);
-			if (!force && lastMoveDestination.TryGetValue(aircraft, out var old) && old == destination &&
-				lastMoveKnownAntiAirSignature.TryGetValue(aircraft, out var oldSignature) && oldSignature == aaSignature)
+			var cachedDestinationMatched = lastMoveDestination.TryGetValue(aircraft, out var old) && old == destination;
+			var knownAaSignatureMatched = lastMoveKnownAntiAirSignature.TryGetValue(aircraft, out var oldSignature) && oldSignature == aaSignature;
+			var previousMoveWorldTick = lastMoveWorldTick.TryGetValue(aircraft, out var last) ? last : -1;
+			string replacedActivity = null;
+			bool? replacedActivityWasExpectedMove = null;
+			if (!force && cachedDestinationMatched && knownAaSignatureMatched)
 			{
 				// Do not restart an in-progress native Move on a timer. A changed known-AA signature
 				// deliberately bypasses this guard so a newly learned SAM/AA replans immediately.
-				if (!aircraft.IsIdle || (lastMoveWorldTick.TryGetValue(aircraft, out var last) && world.WorldTick - last < Info.MoveRefreshInterval))
+				if (!aircraft.IsIdle)
+				{
+					var currentActivity = aircraft.CurrentActivity;
+					var activityIsExpectedMove = currentActivity is Fly;
+					var canReacquireSecureObjective = allowSecureFlyIdleReacquire && currentActivity is FlyIdle;
+					if (activityIsExpectedMove || !canReacquireSecureObjective)
+					{
+						RecordAirSecureMoveIntent(aircraft, destination, cachedDestinationMatched,
+							knownAaSignatureMatched, previousMoveWorldTick, "SuppressedNonIdle",
+							currentActivity: currentActivity?.GetType().Name ?? "None",
+							activityIsExpectedMove: activityIsExpectedMove);
+						return true;
+					}
+
+					// FlyIdle is OpenRA's indefinite passive holding activity after ordinary aircraft work ends.
+					// Only accepted SECURE objective execution may replace it here. Active combat, ReturnToBase,
+					// repair, resupply, landing, and every non-SECURE QueueMove retain the existing suppression.
+					replacedActivity = currentActivity.GetType().Name;
+					replacedActivityWasExpectedMove = false;
+				}
+				if (previousMoveWorldTick >= 0 && world.WorldTick - previousMoveWorldTick < Info.MoveRefreshInterval)
+				{
+					RecordAirSecureMoveIntent(aircraft, destination, cachedDestinationMatched,
+						knownAaSignatureMatched, previousMoveWorldTick, "SuppressedRefreshHold");
 					return true;
+				}
 			}
 
 			if (!TryBuildKnownAntiAirSafePath(aircraft.Location, destination, knownAaZones, out var safePath))
+			{
+				RecordAirSecureMoveIntent(aircraft, destination, cachedDestinationMatched,
+					knownAaSignatureMatched, previousMoveWorldTick, "RejectedKnownAaPath",
+					currentActivity: replacedActivity ?? "NotCaptured",
+					activityIsExpectedMove: replacedActivityWasExpectedMove);
 				return false;
+			}
 
 			// Normal Air mission transit still uses native plain Move. The Commander queues deterministic
 			// safe waypoints so no planned segment enters the YAML-configured known SAM/AA radius.
@@ -3160,6 +4060,12 @@ namespace OpenRA.Mods.Common.Traits
 			lastMoveDestination[aircraft] = destination;
 			lastMoveWorldTick[aircraft] = world.WorldTick;
 			lastMoveKnownAntiAirSignature[aircraft] = aaSignature;
+			if (replacedActivity != null)
+				RebaseAirSecureDiagnosticProgress(aircraft, destination);
+			RecordAirSecureMoveIntent(aircraft, destination, cachedDestinationMatched,
+				knownAaSignatureMatched, previousMoveWorldTick, "QueuedNativeMove", safePath.Length,
+				currentActivity: replacedActivity ?? "NotCaptured",
+				activityIsExpectedMove: replacedActivityWasExpectedMove);
 			return true;
 		}
 
@@ -3342,7 +4248,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (NeedsNativeRepair(aircraft) && watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "ANCHOR fallback because no repair building exists");
 			if (watchdog && !aircraft.IsIdle)
-				aircraft.CancelActivity();
+				QueueStopOrder(bot, aircraft);
 			QueueMove(bot, aircraft, retreatAnchorPoint, forceMove || watchdog);
 			if (watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "ANCHOR regroup Move");
@@ -3359,8 +4265,9 @@ namespace OpenRA.Mods.Common.Traits
 					if (aircraft.IsIdle || watchdog)
 					{
 						if (watchdog && !aircraft.IsIdle)
-							aircraft.CancelActivity();
+							QueueStopOrder(bot, aircraft);
 						bot.QueueOrder(new Order("Repair", aircraft, Target.FromActor(repairBuilding), false));
+						lastRepairWorldTick[aircraft] = world.WorldTick;
 						if (watchdog)
 							MarkRecoveryWatchdogReissue(aircraft, $"native Repair toward {repairBuilding}");
 					}
@@ -3376,7 +4283,7 @@ namespace OpenRA.Mods.Common.Traits
 				return false;
 
 			if (watchdog && !aircraft.IsIdle)
-				aircraft.CancelActivity();
+				QueueStopOrder(bot, aircraft);
 			QueueReturnToBase(bot, aircraft, watchdog);
 			if (watchdog)
 				MarkRecoveryWatchdogReissue(aircraft, "native ReturnToBase/rearm");
@@ -3427,6 +4334,7 @@ namespace OpenRA.Mods.Common.Traits
 			activeOrderStartedWorldTick = world.WorldTick;
 			lostContactSinceWorldTick = -1;
 			secureClearSinceWorldTick = -1;
+			ResetAirSecureLivenessDiagnostics();
 			hasMissionAnchorPoint = false;
 			missionAnchorPoint = default;
 			ResetReconState();

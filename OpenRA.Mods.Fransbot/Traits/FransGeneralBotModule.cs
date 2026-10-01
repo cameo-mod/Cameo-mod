@@ -56,6 +56,15 @@ namespace OpenRA.Mods.Common.Traits
 
 	public readonly record struct FransSecureFoothold(uint TargetActorId, CPos Cell, int ControlObservedWorldTick);
 
+	public readonly record struct FransTransportLossBlockerDiagnostic(
+		uint IncidentId,
+		CPos IncidentCell,
+		CPos LatestLossCell,
+		CPos BlockingRouteCell,
+		int ExclusionRadius,
+		string LifecycleState,
+		string Owner);
+
 	/// <summary>
 	/// Strategic mission board. Strategic ATTACK is retired. General publishes only DEFEND, SECURE, RECON and
 	/// RAID. General publishes a MISSION plus raw SiteIntel and never decides Commander-specific risk/feasibility.
@@ -86,7 +95,9 @@ namespace OpenRA.Mods.Common.Traits
 		bool IsTransportLossSecure(uint targetActorId);
 		int TransportLossExclusionRevision { get; }
 		bool IsTransportLossRouteAllowed(IReadOnlyList<CPos> route);
+		bool TryGetTransportLossRouteBlocker(IReadOnlyList<CPos> route, out FransTransportLossBlockerDiagnostic blocker);
 		bool IsTransportLossCorridorAllowed(CPos from, CPos to);
+		bool TryGetTransportLossCorridorBlocker(CPos from, CPos to, out FransTransportLossBlockerDiagnostic blocker);
 		IReadOnlyList<FransSecureFoothold> PendingSecureFootholds { get; }
 		bool IsSecureFootholdDevelopmentReady(uint secureTargetActorId);
 		bool TryGetSecureDefensePoint(out uint secureTargetActorId, out CPos secureCell, out int strategicPriority);
@@ -212,14 +223,17 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Nearby destroyed transports inside this radius merge into the same persistent LST-loss SECURE incident instead of publishing duplicate missions.")]
 		public readonly int TransportLossSecureMergeRadius = 10;
 
-		[Desc("Transport-only exclusion radius around every active LST-loss SECURE incident. New LST routes may not cross this area until Ground/Air/Sea reports the incident CLEAR; combat units remain free to enter and clear it.")]
+		[Desc("Transport-only exclusion radius around every active LST-loss SECURE incident. New LST routes may not cross this area until Ground/Air/Sea reports CLEAR or an ownerless incident's latest loss evidence is continuously observed with no authoritative danger; combat units remain free to enter and clear it.")]
 		public readonly int TransportLossRouteExclusionRadius = 10;
 
-		[Desc("Repeated losses inside one merged LST-loss SECURE incident at/above this count escalate the incident into a strategic transport closure until the same SECURE is genuinely reported CLEAR.")]
+		[Desc("Repeated losses inside one ownerless merged LST-loss SECURE incident at/above this count escalate the incident into a strategic transport closure until the same SECURE is genuinely cleared or invalidated by continuous directly observed clear evidence.")]
 		public readonly int TransportLossSevereLossCount = 4;
 
 		[Desc("Transport-only exclusion radius used after TransportLossSevereLossCount is reached. This widens logistics avoidance for a proven kill-zone without changing combat Commander access or the SECURE mission itself.")]
 		public readonly int TransportLossSevereRouteExclusionRadius = 18;
+
+		[Desc("World ticks of continuous direct observation of an ownerless incident's latest loss cell with no nearby authoritative CombatIntel danger evidence required before General invalidates it. This never expires a Commander-owned, unobserved, or still-dangerous incident by age alone.")]
+		public readonly int TransportLossObservedClearHoldTicks = 250;
 
 		[Desc("Maximum simultaneous General SECURE opportunities. Each target has an independent no-bid/ETA/ANCHOR lifecycle and may be owned by a different Commander capacity.")]
 		public readonly int MaximumActiveSecureMissions = 3;
@@ -379,8 +393,8 @@ namespace OpenRA.Mods.Common.Traits
 				RaidStrategicPriority <= ReconStrategicPriority || MaximumActiveRaidMissions <= 0 || RaidSiteIntelRadius <= 0 || RaidIntelFreshTicks <= 0 || RaidRememberedBuildingLifetimeTicks <= 0 || RaidMinimumFreshAreaSamples <= 0 || RaidMinimumFreshAreaSamples > 9 ||
 				RaidPostEtaRecheckMarginTicks < 0 || RaidRetreatCooldownTicks <= 0 || RaidNoBidBackoffTicks <= 0 || RaidNextSecurePriorityBonus < 0 || RaidNextSecurePriorityRadius <= 0 || RaidInterferencePriorityBonus <= 0 || RaidInterferenceMemoryTicks <= 0 || (long)RaidStrategicPriority + RaidNextSecurePriorityBonus + RaidInterferencePriorityBonus >= SecureStrategicPriority || SecureStrategicPriority <= RaidStrategicPriority ||
 				SecureFrontierContinuityBonus < 0 || SecureFrontierContinuityRadius <= 0 ||
-				MaximumActiveSecureMissions <= 0 || SecureTargetCooldownTicks <= 0 || SecureNoBidBackoffTicks <= 0 || SecureAlliedClaimRadius <= 0 || SecureDefenseHoldTicks < 0 ||
-				TransportBeachSecureStrategicPriority < 0 || TransportLossSecureMergeRadius <= 0 || TransportLossRouteExclusionRadius <= 0 || TransportLossSevereLossCount < 2 || TransportLossSevereRouteExclusionRadius < TransportLossRouteExclusionRadius ||
+				MaximumActiveSecureMissions <= 0 || SecureTargetCooldownTicks <= 0 || SecureNoBidBackoffTicks <= 0 || SecureAlliedClaimStructureTypes.Count == 0 || SecureAlliedClaimRadius <= 0 || SecureDefenseHoldTicks < 0 ||
+				TransportBeachSecureStrategicPriority < 0 || TransportLossSecureMergeRadius <= 0 || TransportLossRouteExclusionRadius <= 0 || TransportLossSevereLossCount < 2 || TransportLossSevereRouteExclusionRadius < TransportLossRouteExclusionRadius || TransportLossObservedClearHoldTicks <= 0 ||
 				SecureRiskAssessmentRadius <= 0 || SecureMinimumRiskScore < 0 ||
 				SecureMineNodeScore < 0 || SecureConstructionYardMergeRadius <= 0 || SecureRiskScorePenaltyWeight < 0 || SecureDistanceScorePerCell < 0 || ExpansionBlockedSecurePriorityBonus < 0 || ExpansionBlockedSecureRadius <= 0 ||
 				DefenseMemoryTicks <= 0 || DefenseIncidentReassessmentInterval <= 0 || DefenseIncidentMergeRadius < 0 || DefenseClusterRadius <= 0 ||
@@ -398,6 +412,29 @@ namespace OpenRA.Mods.Common.Traits
 	public class FransGeneralBotModule : ConditionalTrait<FransGeneralBotModuleInfo>,
 		IBotTick, IBotRespondToAttack, IFransGeneralService
 	{
+		sealed class TransportLossSecureIncident
+		{
+			public readonly CPos Cell;
+			public readonly int OpenedWorldTick;
+			public CPos LatestLossCell;
+			public int LastLossWorldTick;
+			public int LossCount;
+			public uint LatestLostActorId;
+			public int ObservedClearSinceWorldTick = -1;
+			public int NextLifecycleDiagnosticWorldTick;
+
+			public TransportLossSecureIncident(CPos cell, int worldTick, uint lostActorId, int diagnosticInterval)
+			{
+				Cell = cell;
+				OpenedWorldTick = worldTick;
+				LatestLossCell = cell;
+				LastLossWorldTick = worldTick;
+				LossCount = 1;
+				LatestLostActorId = lostActorId;
+				NextLifecycleDiagnosticWorldTick = worldTick + diagnosticInterval;
+			}
+		}
+
 		readonly World world;
 		readonly Player player;
 
@@ -462,7 +499,7 @@ namespace OpenRA.Mods.Common.Traits
 		readonly HashSet<uint> pioneerExpansionPrioritySecureTargets = [];
 		readonly Dictionary<uint, int> activeSecurePublishedWorldTick = [];
 		readonly Dictionary<uint, (CPos Cell, int ValidThroughWorldTick)> seaTransportBeachSecureRequests = [];
-		readonly Dictionary<uint, (CPos Cell, int LastLossWorldTick, int LossCount, uint LatestLostActorId)> transportLossSecureIncidents = [];
+		readonly Dictionary<uint, TransportLossSecureIncident> transportLossSecureIncidents = [];
 		readonly Dictionary<uint, CPos> ownedTransportLastKnownCells = [];
 		uint nextTransportLossSecureSequence;
 		int transportLossExclusionRevision;
@@ -810,6 +847,7 @@ namespace OpenRA.Mods.Common.Traits
 			// The old all-map ore-occupation gate is intentionally no longer part of mission publication.
 			CleanupSeaTransportBeachSecureRequests();
 			ObserveOwnedTransportLosses();
+			UpdateTransportLossSecureIncidentValidity();
 
 			missionsByActorId.Clear();
 			currentMissions.Clear();
@@ -913,37 +951,117 @@ namespace OpenRA.Mods.Common.Traits
 			return !route.Any(IsTransportLossExclusionCell);
 		}
 
+		public bool TryGetTransportLossRouteBlocker(IReadOnlyList<CPos> route, out FransTransportLossBlockerDiagnostic blocker)
+		{
+			blocker = default;
+			if (route == null || route.Count == 0 || transportLossSecureIncidents.Count == 0)
+				return false;
+
+			foreach (var cell in route)
+			{
+				if (!world.Map.Contains(cell))
+					continue;
+				foreach (var incident in transportLossSecureIncidents.OrderBy(kv => kv.Key))
+				{
+					var radius = GetTransportLossExclusionRadius(incident.Value.LossCount);
+					if ((incident.Value.Cell - cell).LengthSquared > radius * radius)
+						continue;
+
+					var lifecycleState = GetTransportLossDiagnosticLifecycleState(incident.Key, incident.Value, out var owner);
+					blocker = new FransTransportLossBlockerDiagnostic(
+						incident.Key, incident.Value.Cell, incident.Value.LatestLossCell, cell,
+						radius, lifecycleState, owner);
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		string GetTransportLossDiagnosticLifecycleState(uint incidentId, TransportLossSecureIncident incident, out string owner)
+		{
+			if (TryGetTransportLossSecureOwner(incidentId, out var active))
+			{
+				owner = $"{active.Commander}/{active.BidderKey}:startedWT={active.StartedWorldTick}";
+				return "ActiveCommanderOwned";
+			}
+
+			owner = "None";
+			if (incident.ObservedClearSinceWorldTick >= 0)
+				return "ObservedClearPending";
+			if (GetTransportLossDangerEvidenceCount(incident.LatestLossCell) > 0)
+				return "ActiveDangerEvidence";
+			return IsTransportLossCellCurrentlyObserved(incident.LatestLossCell)
+				? "ActiveObservedNoDanger"
+				: "ActiveUnobserved";
+		}
+
 		public bool IsTransportLossCorridorAllowed(CPos from, CPos to)
 		{
+			return !TryFindTransportLossCorridorIntersection(from, to, out _, out _, out _);
+		}
+
+		bool TryFindTransportLossCorridorIntersection(CPos from, CPos to, out uint incidentId,
+			out TransportLossSecureIncident blockingIncident, out CPos blockingCell)
+		{
+			incidentId = 0;
+			blockingIncident = null;
+			blockingCell = default;
 			if (!world.Map.Contains(from) || !world.Map.Contains(to) || transportLossSecureIncidents.Count == 0)
-				return true;
+				return false;
 
 			var dx = to.X - from.X;
 			var dy = to.Y - from.Y;
 			var segmentLengthSquared = (double)dx * dx + (double)dy * dy;
-			foreach (var incident in transportLossSecureIncidents.Values)
+			foreach (var incident in transportLossSecureIncidents.OrderBy(kv => kv.Key))
 			{
-				var radius = Math.Max(1, GetTransportLossExclusionRadius(incident.LossCount));
+				var radius = Math.Max(1, GetTransportLossExclusionRadius(incident.Value.LossCount));
 				var radiusSquared = (double)radius * radius;
 				double distanceSquared;
+				double nearestX;
+				double nearestY;
 				if (segmentLengthSquared <= 0)
-					distanceSquared = (incident.Cell - from).LengthSquared;
+				{
+					nearestX = from.X;
+					nearestY = from.Y;
+					distanceSquared = (incident.Value.Cell - from).LengthSquared;
+				}
 				else
 				{
-					var px = incident.Cell.X - from.X;
-					var py = incident.Cell.Y - from.Y;
+					var px = incident.Value.Cell.X - from.X;
+					var py = incident.Value.Cell.Y - from.Y;
 					var t = Math.Clamp(((double)px * dx + (double)py * dy) / segmentLengthSquared, 0.0, 1.0);
-					var nearestX = from.X + t * dx;
-					var nearestY = from.Y + t * dy;
-					var ex = incident.Cell.X - nearestX;
-					var ey = incident.Cell.Y - nearestY;
+					nearestX = from.X + t * dx;
+					nearestY = from.Y + t * dy;
+					var ex = incident.Value.Cell.X - nearestX;
+					var ey = incident.Value.Cell.Y - nearestY;
 					distanceSquared = ex * ex + ey * ey;
 				}
 
 				if (distanceSquared <= radiusSquared)
-					return false;
+				{
+					incidentId = incident.Key;
+					blockingIncident = incident.Value;
+					blockingCell = new CPos((int)Math.Round(nearestX), (int)Math.Round(nearestY));
+					return true;
+				}
 			}
 
+			return false;
+		}
+
+		public bool TryGetTransportLossCorridorBlocker(CPos from, CPos to,
+			out FransTransportLossBlockerDiagnostic blocker)
+		{
+			blocker = default;
+			if (!TryFindTransportLossCorridorIntersection(from, to, out var incidentId,
+				out var incident, out var blockingCell))
+				return false;
+
+			var lifecycleState = GetTransportLossDiagnosticLifecycleState(incidentId, incident, out var owner);
+			blocker = new FransTransportLossBlockerDiagnostic(
+				incidentId, incident.Cell, incident.LatestLossCell, blockingCell,
+				Math.Max(1, GetTransportLossExclusionRadius(incident.LossCount)), lifecycleState, owner);
 			return true;
 		}
 
@@ -987,36 +1105,178 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var mergeRadiusSq = Info.TransportLossSecureMergeRadius * Info.TransportLossSecureMergeRadius;
-			var existing = transportLossSecureIncidents
+			var nearbyIncidents = transportLossSecureIncidents
 				.Where(kv => (kv.Value.Cell - lossCell).LengthSquared <= mergeRadiusSq)
 				.OrderBy(kv => (kv.Value.Cell - lossCell).LengthSquared)
 				.ThenBy(kv => kv.Key)
+				.ToArray();
+			var existing = nearbyIncidents
+				.Where(kv => !TryGetTransportLossSecureOwner(kv.Key, out _))
 				.Select(kv => (Found: true, Id: kv.Key, Incident: kv.Value))
 				.FirstOrDefault();
 
 			if (existing.Found)
 			{
-				var newLossCount = existing.Incident.LossCount + 1;
-				transportLossSecureIncidents[existing.Id] = (existing.Incident.Cell, world.WorldTick, newLossCount, lostActorId);
+				var previousEvidenceCell = existing.Incident.LatestLossCell;
+				existing.Incident.LatestLossCell = lossCell;
+				existing.Incident.LastLossWorldTick = world.WorldTick;
+				existing.Incident.LossCount++;
+				existing.Incident.LatestLostActorId = lostActorId;
+				existing.Incident.ObservedClearSinceWorldTick = -1;
+				existing.Incident.NextLifecycleDiagnosticWorldTick = world.WorldTick + Math.Max(Info.ScanInterval, Info.StrategicAssessmentInterval);
 				transportLossExclusionRevision++;
 				lastPublishedWorldTick = -1;
-				FransBotLog.BotDebug(world,
-					"{0}: observed LST loss {1} at {2} reinforces existing domain-neutral SECURE incident {3} at {4}; loss count is now {5}. Ground/Air/Sea may all bid, but Ground must prove native land access and GroundTransfer never ferries units for this incident.",
-					player, lostActorId, lossCell, existing.Id, existing.Incident.Cell, newLossCount);
-				if (newLossCount == Info.TransportLossSevereLossCount)
+				LogTransportLossLifecycle(existing.Id, existing.Incident, "ActiveReinforced",
+					$"new LST loss {lostActorId} at {lossCell} moves clear-evidence anchor from {previousEvidenceCell} and resets any pending observed-clear evidence",
+					GetTransportLossDangerEvidenceCount(existing.Incident.LatestLossCell));
+				if (existing.Incident.LossCount == Info.TransportLossSevereLossCount)
 					FransBotLog.BotDebug(world,
 						"{0}: LST-loss SECURE incident {1} escalates to STRATEGIC TRANSPORT CLOSURE after {2} losses. Logistics exclusion expands from {3} to {4} cells and remains closed until this exact incident is genuinely CLEAR; combat Commanders may still enter normally.",
-						player, existing.Id, newLossCount, Info.TransportLossRouteExclusionRadius, GetTransportLossExclusionRadius(newLossCount));
+						player, existing.Id, existing.Incident.LossCount, Info.TransportLossRouteExclusionRadius, GetTransportLossExclusionRadius(existing.Incident.LossCount));
 				return;
 			}
 
 			var incidentId = NextTransportLossSecureId();
-			transportLossSecureIncidents[incidentId] = (lossCell, world.WorldTick, 1, lostActorId);
+			var incident = new TransportLossSecureIncident(lossCell, world.WorldTick, lostActorId,
+				Math.Max(Info.ScanInterval, Info.StrategicAssessmentInterval));
+			var nearbyOwnedIncidentId = nearbyIncidents
+				.Where(kv => TryGetTransportLossSecureOwner(kv.Key, out _))
+				.Select(kv => kv.Key)
+				.FirstOrDefault();
+			transportLossSecureIncidents[incidentId] = incident;
 			transportLossExclusionRevision++;
 			lastPublishedWorldTick = -1;
+			LogTransportLossLifecycle(incidentId, incident, "Active",
+				nearbyOwnedIncidentId != 0
+					? $"transport destruction opens a new generation because nearby incident {nearbyOwnedIncidentId} has an immutable accepted SECURE owner; Ground/Air/Sea bid normally"
+					: "transport destruction opens domain-neutral SECURE; Ground/Air/Sea bid normally",
+				GetTransportLossDangerEvidenceCount(lossCell));
+		}
+
+		bool IsTransportLossCellCurrentlyObserved(CPos cell) =>
+			world.Map.Contains(cell) && (shroud == null || shroud.Disabled || shroud.IsVisible(cell));
+
+		int GetTransportLossDangerEvidenceCount(CPos lossCell)
+		{
+			var radiusSquared = Info.SecureRiskAssessmentRadius * Info.SecureRiskAssessmentRadius;
+			return combatIntelService.EnemyCombatContacts.Count(contact =>
+				contact.EstimatedValue > 0 &&
+				(contact.IsDefensiveBuilding || !contact.IsBuilding) &&
+				(contact.LastSeenCell - lossCell).LengthSquared <= radiusSquared);
+		}
+
+		bool TryGetTransportLossSecureOwner(uint incidentId, out FransActiveMission mission)
+		{
+			mission = default;
+			return commandBidService != null && commandBidService.TryGetActiveMissionForTarget(incidentId, out mission) &&
+				mission.MissionType == FransMissionType.Secure;
+		}
+
+		string GetTransportLossSecureOwner(uint incidentId) =>
+			TryGetTransportLossSecureOwner(incidentId, out var mission)
+				? $"{mission.Commander}/{mission.BidderKey}:mission={mission.MissionId}:startedWT={mission.StartedWorldTick}"
+				: "None";
+
+		void LogTransportLossLifecycle(uint incidentId, TransportLossSecureIncident incident, string state,
+			string reason, int dangerEvidenceCount, bool exclusionActive = true)
+		{
+			var clearHeldFor = incident.ObservedClearSinceWorldTick < 0
+				? 0
+				: Math.Max(0, world.WorldTick - incident.ObservedClearSinceWorldTick);
 			FransBotLog.BotDebug(world,
-				"{0}: observed LST loss {1} at {2} opens ordinary domain-neutral MISSION SECURE incident {3}. Ground/Air/Sea bid normally; no Commander receives hard-coded priority.",
-				player, lostActorId, lossCell, incidentId);
+				"{0}: [LST-LOSS LIFECYCLE] incident={1} mission={1} sourceActor={2} incidentCell={3} latestLossCell={4} ageWT={5} sinceLastLossWT={6} losses={7} state={8} exclusionActive={9} exclusionRadius={10} owner={11} observedClearWT={12}/{13} dangerEvidence={14} reason={15}.",
+				player, incidentId, incident.LatestLostActorId, incident.Cell, incident.LatestLossCell,
+				Math.Max(0, world.WorldTick - incident.OpenedWorldTick), Math.Max(0, world.WorldTick - incident.LastLossWorldTick),
+				incident.LossCount, state, exclusionActive, GetTransportLossExclusionRadius(incident.LossCount),
+				GetTransportLossSecureOwner(incidentId), clearHeldFor, Info.TransportLossObservedClearHoldTicks,
+				dangerEvidenceCount, reason ?? "unspecified");
+			incident.NextLifecycleDiagnosticWorldTick = world.WorldTick + Math.Max(Info.ScanInterval, Info.StrategicAssessmentInterval);
+		}
+
+		void UpdateTransportLossSecureIncidentValidity()
+		{
+			foreach (var pair in transportLossSecureIncidents.OrderBy(kv => kv.Key).ToArray())
+			{
+				var incidentId = pair.Key;
+				var incident = pair.Value;
+				var evidenceCell = incident.LatestLossCell;
+				var observed = IsTransportLossCellCurrentlyObserved(evidenceCell);
+				var dangerEvidenceCount = GetTransportLossDangerEvidenceCount(evidenceCell);
+				if (TryGetTransportLossSecureOwner(incidentId, out var owner))
+				{
+					var reason = $"accepted {owner.Commander}/{owner.BidderKey} SECURE owns the next CLEAR or release/RETREAT transition; General observed-clear invalidation is ownerless-only";
+					if (incident.ObservedClearSinceWorldTick >= 0)
+					{
+						incident.ObservedClearSinceWorldTick = -1;
+						LogTransportLossLifecycle(incidentId, incident, "ActiveCommanderOwned",
+							$"observed-clear evidence reset: {reason}", dangerEvidenceCount);
+					}
+					else if (world.WorldTick >= incident.NextLifecycleDiagnosticWorldTick)
+						LogTransportLossLifecycle(incidentId, incident, "ActiveCommanderOwned", reason, dangerEvidenceCount);
+					continue;
+				}
+
+				if (!observed || dangerEvidenceCount > 0)
+				{
+					var state = dangerEvidenceCount > 0 ? "ActiveDangerEvidence" : "ActiveUnobserved";
+					var reason = !observed && dangerEvidenceCount > 0
+						? "latest loss evidence cell is not currently visible and nearby CombatIntel danger evidence remains"
+						: !observed
+							? "latest loss evidence cell is not currently visible; failed/no-bid SECURE execution is not clear evidence"
+							: "nearby authoritative CombatIntel danger evidence remains";
+					if (incident.ObservedClearSinceWorldTick >= 0)
+					{
+						incident.ObservedClearSinceWorldTick = -1;
+						LogTransportLossLifecycle(incidentId, incident, state, $"observed-clear evidence reset: {reason}", dangerEvidenceCount);
+					}
+					else if (world.WorldTick >= incident.NextLifecycleDiagnosticWorldTick)
+						LogTransportLossLifecycle(incidentId, incident, state, reason, dangerEvidenceCount);
+					continue;
+				}
+
+				if (incident.ObservedClearSinceWorldTick < 0)
+				{
+					incident.ObservedClearSinceWorldTick = world.WorldTick;
+					LogTransportLossLifecycle(incidentId, incident, "ObservedClearPending",
+						"latest loss evidence cell is directly visible, no Commander owns SECURE, and no nearby CombatIntel danger evidence remains; continuous clear-evidence hold begins",
+						dangerEvidenceCount);
+					continue;
+				}
+
+				if (world.WorldTick - incident.ObservedClearSinceWorldTick >= Info.TransportLossObservedClearHoldTicks)
+				{
+					CloseTransportLossSecureIncident(incidentId, null, evidenceCell, "InvalidatedObservedClear",
+						"ownerless continuous direct observation of the latest loss evidence plus absence of nearby authoritative CombatIntel danger evidence invalidated the old loss obligation",
+						dangerEvidenceCount);
+					continue;
+				}
+
+				if (world.WorldTick >= incident.NextLifecycleDiagnosticWorldTick)
+					LogTransportLossLifecycle(incidentId, incident, "ObservedClearPending",
+						"continuous observed-clear evidence has not yet reached the configured hold", dangerEvidenceCount);
+			}
+		}
+
+		bool CloseTransportLossSecureIncident(uint incidentId, FransCommanderKind? commander, CPos clearCell,
+			string transition, string reason, int dangerEvidenceCount)
+		{
+			if (!transportLossSecureIncidents.Remove(incidentId, out var incident))
+				return false;
+
+			transportLossExclusionRevision++;
+			activeSecureTargets.Remove(incidentId);
+			activeSecurePublishedWorldTick.Remove(incidentId);
+			secureTargetCooldownUntil.Remove(incidentId);
+			domainSecureClearWorldTick.Remove((incidentId, FransCommanderKind.Air));
+			domainSecureClearWorldTick.Remove((incidentId, FransCommanderKind.Sea));
+			domainSecureClearCells.Remove((incidentId, FransCommanderKind.Air));
+			domainSecureClearCells.Remove((incidentId, FransCommanderKind.Sea));
+			lastPublishedWorldTick = -1;
+			var authority = commander.HasValue ? $"{commander.Value}CommanderClear" : "GeneralObservedClearEvidence";
+			LogTransportLossLifecycle(incidentId, incident, transition,
+				$"authority={authority}; clearCell={clearCell}; {reason ?? "loss area clear"}; exclusion removed without Ground ANCHOR/foothold",
+				dangerEvidenceCount, exclusionActive: false);
+			return true;
 		}
 
 		void CleanupSeaTransportBeachSecureRequests()
@@ -1037,9 +1297,9 @@ namespace OpenRA.Mods.Common.Traits
 				if (currentMissions.Count >= Info.MaximumPublishedMissions)
 					break;
 
-				var siteIntel = BuildSiteIntel(incident.Value.Cell, Info.SecureRiskAssessmentRadius, Info.StrategicIntelAgingAgeTicks);
+				var siteIntel = BuildSiteIntel(incident.Value.LatestLossCell, Info.SecureRiskAssessmentRadius, Info.StrategicIntelAgingAgeTicks);
 				PublishUniqueMission(new FransMission(null, incident.Key, TransportLossSecureTargetType, player,
-					incident.Value.Cell, false, false, siteIntel, FransMissionType.Secure,
+					incident.Value.LatestLossCell, false, false, siteIntel, FransMissionType.Secure,
 					Info.SecureStrategicPriority, world.WorldTick, incident.Key));
 			}
 		}
@@ -2506,20 +2766,9 @@ namespace OpenRA.Mods.Common.Traits
 			if (secureTargetActorId == 0)
 				return false;
 
-			if (transportLossSecureIncidents.Remove(secureTargetActorId, out var lossIncident))
-			{
-				transportLossExclusionRevision++;
-				activeSecureTargets.Remove(secureTargetActorId);
-				activeSecurePublishedWorldTick.Remove(secureTargetActorId);
-				secureTargetCooldownUntil.Remove(secureTargetActorId);
-				domainSecureClearWorldTick.Remove((secureTargetActorId, FransCommanderKind.Air));
-				domainSecureClearWorldTick.Remove((secureTargetActorId, FransCommanderKind.Sea));
-				lastPublishedWorldTick = -1;
-				FransBotLog.BotDebug(world,
-					"{0}: GENERAL closes LST-loss SECURE incident {1} at {2} after {3} reports CLEAR at {4}: {5}. Loss count {6}; no Ground ANCHOR/foothold is created and transport routing may use the area normally again.",
-					player, secureTargetActorId, lossIncident.Cell, commander, clearCell, reason ?? "loss area clear", lossIncident.LossCount);
-				return true;
-			}
+			if (transportLossSecureIncidents.TryGetValue(secureTargetActorId, out var lossIncident))
+				return CloseTransportLossSecureIncident(secureTargetActorId, commander, clearCell, "ResolvedCommanderClear",
+					reason ?? "Commander reports loss area clear", GetTransportLossDangerEvidenceCount(lossIncident.LatestLossCell));
 
 			if (commander == FransCommanderKind.Ground)
 				return false;

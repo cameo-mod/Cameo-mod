@@ -18,6 +18,141 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits
 {
+	public readonly record struct FransKnownAntiAirGeometryZone(uint ActorId, CPos Center);
+
+	/// <summary>
+	/// Exact identity of one ordered known-AA geometry snapshot. Signature is diagnostic/hash
+	/// acceleration only; equality always compares the radius and every authoritative zone.
+	/// </summary>
+	public sealed class FransKnownAntiAirGeometryIdentity : IEquatable<FransKnownAntiAirGeometryIdentity>
+	{
+		readonly FransKnownAntiAirGeometryZone[] zones;
+		readonly int hashCode;
+
+		public int Signature { get; }
+		public int SafetyRadius { get; }
+		public int ZoneCount => zones.Length;
+		public FransKnownAntiAirGeometryZone ZoneAt(int index) => zones[index];
+
+		public FransKnownAntiAirGeometryIdentity(int safetyRadius, IReadOnlyList<FransKnownAntiAirGeometryZone> zones)
+		{
+			if (safetyRadius <= 0)
+				throw new ArgumentOutOfRangeException(nameof(safetyRadius));
+
+			SafetyRadius = safetyRadius;
+			this.zones = zones?.ToArray() ?? Array.Empty<FransKnownAntiAirGeometryZone>();
+			unchecked
+			{
+				var signature = 17;
+				var hash = safetyRadius;
+				foreach (var zone in this.zones)
+				{
+					signature = signature * 31 + (int)zone.ActorId;
+					signature = signature * 31 + zone.Center.X;
+					signature = signature * 31 + zone.Center.Y;
+					hash = hash * 31 + zone.GetHashCode();
+				}
+
+				Signature = signature;
+				hashCode = hash;
+			}
+		}
+
+		public bool Equals(FransKnownAntiAirGeometryIdentity other)
+		{
+			if (ReferenceEquals(this, other))
+				return true;
+			if (other == null || SafetyRadius != other.SafetyRadius || zones.Length != other.zones.Length)
+				return false;
+			for (var i = 0; i < zones.Length; i++)
+				if (zones[i] != other.zones[i])
+					return false;
+			return true;
+		}
+
+		public override bool Equals(object obj) => Equals(obj as FransKnownAntiAirGeometryIdentity);
+		public override int GetHashCode() => hashCode;
+	}
+
+	public enum FransAirKnownAntiAirGeometryOutcome
+	{
+		OutsideMap,
+		TargetInsideKnownAa,
+		Direct,
+		NoGraphRoute,
+		BrokenPredecessor,
+		GraphRoute
+	}
+
+	public readonly record struct FransAirKnownAntiAirGeometryRoute(
+		bool Feasible,
+		FransAirKnownAntiAirGeometryOutcome Outcome,
+		CPos[] Waypoints);
+
+	/// <summary>
+	/// Shared bounded cache for pure known-AA geometry. One exact AA snapshot is retained at a
+	/// time; dynamic RiskModel revisions are deliberately outside this cache.
+	/// </summary>
+	internal sealed class FransAirKnownAntiAirGeometryRouteCache
+	{
+		readonly record struct RouteKey(CPos StartCell, CPos TargetCell);
+		readonly Dictionary<RouteKey, FransAirKnownAntiAirGeometryRoute> routes = [];
+		readonly int maximumEntries;
+		FransKnownAntiAirGeometryIdentity currentIdentity;
+
+		public int Count => routes.Count;
+
+		public FransAirKnownAntiAirGeometryRouteCache(int maximumEntries)
+		{
+			if (maximumEntries <= 0)
+				throw new ArgumentOutOfRangeException(nameof(maximumEntries));
+			this.maximumEntries = maximumEntries;
+		}
+
+		void EnsureIdentity(FransKnownAntiAirGeometryIdentity identity)
+		{
+			if (identity == null)
+				throw new ArgumentNullException(nameof(identity));
+			if (currentIdentity != null && currentIdentity.Equals(identity))
+				return;
+			routes.Clear();
+			currentIdentity = identity;
+		}
+
+		static FransAirKnownAntiAirGeometryRoute Copy(FransAirKnownAntiAirGeometryRoute route) =>
+			new(route.Feasible, route.Outcome, route.Waypoints?.ToArray() ?? Array.Empty<CPos>());
+
+		public bool TryGet(FransKnownAntiAirGeometryIdentity identity, CPos startCell, CPos targetCell,
+			out FransAirKnownAntiAirGeometryRoute route)
+		{
+			EnsureIdentity(identity);
+			if (!routes.TryGetValue(new RouteKey(startCell, targetCell), out var stored))
+			{
+				route = default;
+				return false;
+			}
+
+			route = Copy(stored);
+			return true;
+		}
+
+		public void Store(FransKnownAntiAirGeometryIdentity identity, CPos startCell, CPos targetCell,
+			FransAirKnownAntiAirGeometryRoute route)
+		{
+			EnsureIdentity(identity);
+			var key = new RouteKey(startCell, targetCell);
+			if (routes.Count >= maximumEntries && !routes.ContainsKey(key))
+				routes.Clear();
+			routes[key] = Copy(route);
+		}
+
+		public void Clear()
+		{
+			routes.Clear();
+			currentIdentity = null;
+		}
+	}
+
 	public readonly record struct FransAirBidRouteMetrics(
 		bool Feasible,
 		bool IsCritical,
@@ -82,10 +217,18 @@ namespace OpenRA.Mods.Common.Traits
 		bool IsGroundVehicleCombatUnitOwned(Actor actor);
 		IReadOnlyList<Actor> GetSharedGroundCombatRoster();
 		bool TryGetSharedGroundCombatActor(uint actorId, out Actor actor);
-		bool TryGetSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell, int knownAntiAirSignature, int knownAntiAirSafetyRadius, int riskRevision, out FransAirBidRouteMetrics metrics);
-		void StoreSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell, int knownAntiAirSignature, int knownAntiAirSafetyRadius, int riskRevision, FransAirBidRouteMetrics metrics);
-		bool TryGetSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution, int knownAntiAirSignature, int knownAntiAirSafetyRadius, int riskRevision, int candidateSignature, out FransAirRaidBidTemplate template);
-		void StoreSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution, int knownAntiAirSignature, int knownAntiAirSafetyRadius, int riskRevision, int candidateSignature, FransAirRaidBidTemplate template);
+		bool TryGetSharedAirKnownAntiAirGeometryRoute(CPos startCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, out FransAirKnownAntiAirGeometryRoute route);
+		void StoreSharedAirKnownAntiAirGeometryRoute(CPos startCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, FransAirKnownAntiAirGeometryRoute route);
+		bool TryGetSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, out FransAirBidRouteMetrics metrics);
+		void StoreSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, FransAirBidRouteMetrics metrics);
+		bool TryGetSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, int candidateSignature, out FransAirRaidBidTemplate template);
+		void StoreSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, int candidateSignature, FransAirRaidBidTemplate template);
 		bool IntersectsGroundStagingReservation(CPos topLeft, int width, int height);
 	}
 
@@ -197,10 +340,11 @@ namespace OpenRA.Mods.Common.Traits
 		Actor[] sharedGroundCombatRoster = Array.Empty<Actor>();
 		Dictionary<uint, Actor> sharedGroundCombatById = [];
 		int sharedGroundCombatSnapshotTick = -1;
-		readonly record struct AirBidRouteCacheKey(uint ActorId, CPos ActorCell, CPos TargetCell, int KnownAntiAirSignature, int KnownAntiAirSafetyRadius, int RiskRevision);
-		readonly record struct AirRaidBidCacheKey(uint TargetActorId, CPos TargetCell, int RequiredContribution, int KnownAntiAirSignature, int KnownAntiAirSafetyRadius, int RiskRevision, int CandidateSignature);
+		readonly record struct AirBidRouteCacheKey(uint ActorId, CPos ActorCell, CPos TargetCell, FransKnownAntiAirGeometryIdentity GeometryIdentity, int RiskRevision);
+		readonly record struct AirRaidBidCacheKey(uint TargetActorId, CPos TargetCell, int RequiredContribution, FransKnownAntiAirGeometryIdentity GeometryIdentity, int RiskRevision, int CandidateSignature);
 		readonly Dictionary<AirBidRouteCacheKey, FransAirBidRouteMetrics> sharedAirBidRouteMetrics = [];
 		readonly Dictionary<AirRaidBidCacheKey, FransAirRaidBidTemplate> sharedAirRaidBidTemplates = [];
+		readonly FransAirKnownAntiAirGeometryRouteCache sharedAirKnownAntiAirGeometryRoutes = new(4096);
 		int sharedAirBidRouteRiskRevision = -1;
 		const int SharedAirBidRouteMaximumEntries = 4096;
 		const int SharedAirRaidBidMaximumEntries = 512;
@@ -237,6 +381,7 @@ namespace OpenRA.Mods.Common.Traits
 			sharedGroundCombatSnapshotTick = -1;
 			sharedAirBidRouteMetrics.Clear();
 			sharedAirRaidBidTemplates.Clear();
+			sharedAirKnownAntiAirGeometryRoutes.Clear();
 			sharedAirBidRouteRiskRevision = -1;
 			defaultAttackAnythingScanTicks = 1;
 			FransBotLog.BotDebug(world,
@@ -253,6 +398,7 @@ namespace OpenRA.Mods.Common.Traits
 			sharedGroundCombatSnapshotTick = -1;
 			sharedAirBidRouteMetrics.Clear();
 			sharedAirRaidBidTemplates.Clear();
+			sharedAirKnownAntiAirGeometryRoutes.Clear();
 			sharedAirBidRouteRiskRevision = -1;
 		}
 
@@ -319,38 +465,50 @@ namespace OpenRA.Mods.Common.Traits
 			sharedAirBidRouteRiskRevision = riskRevision;
 		}
 
-		public bool TryGetSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell, int knownAntiAirSignature,
-			int knownAntiAirSafetyRadius, int riskRevision, out FransAirBidRouteMetrics metrics)
+		public bool TryGetSharedAirKnownAntiAirGeometryRoute(CPos startCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, out FransAirKnownAntiAirGeometryRoute route)
+		{
+			return sharedAirKnownAntiAirGeometryRoutes.TryGet(geometryIdentity, startCell, targetCell, out route);
+		}
+
+		public void StoreSharedAirKnownAntiAirGeometryRoute(CPos startCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, FransAirKnownAntiAirGeometryRoute route)
+		{
+			sharedAirKnownAntiAirGeometryRoutes.Store(geometryIdentity, startCell, targetCell, route);
+		}
+
+		public bool TryGetSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, out FransAirBidRouteMetrics metrics)
 		{
 			EnsureSharedAirBidRouteRevision(riskRevision);
 			return sharedAirBidRouteMetrics.TryGetValue(
-				new AirBidRouteCacheKey(actorId, actorCell, targetCell, knownAntiAirSignature, knownAntiAirSafetyRadius, riskRevision), out metrics);
+				new AirBidRouteCacheKey(actorId, actorCell, targetCell, geometryIdentity, riskRevision), out metrics);
 		}
 
-		public void StoreSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell, int knownAntiAirSignature,
-			int knownAntiAirSafetyRadius, int riskRevision, FransAirBidRouteMetrics metrics)
+		public void StoreSharedAirBidRouteMetrics(uint actorId, CPos actorCell, CPos targetCell,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, FransAirBidRouteMetrics metrics)
 		{
 			EnsureSharedAirBidRouteRevision(riskRevision);
 			if (sharedAirBidRouteMetrics.Count >= SharedAirBidRouteMaximumEntries)
 				sharedAirBidRouteMetrics.Clear();
-			sharedAirBidRouteMetrics[new AirBidRouteCacheKey(actorId, actorCell, targetCell, knownAntiAirSignature, knownAntiAirSafetyRadius, riskRevision)] = metrics;
+			sharedAirBidRouteMetrics[new AirBidRouteCacheKey(actorId, actorCell, targetCell, geometryIdentity, riskRevision)] = metrics;
 		}
 
-		public bool TryGetSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution, int knownAntiAirSignature,
-			int knownAntiAirSafetyRadius, int riskRevision, int candidateSignature, out FransAirRaidBidTemplate template)
+		public bool TryGetSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, int candidateSignature, out FransAirRaidBidTemplate template)
 		{
 			EnsureSharedAirBidRouteRevision(riskRevision);
 			return sharedAirRaidBidTemplates.TryGetValue(
-				new AirRaidBidCacheKey(targetActorId, targetCell, requiredContribution, knownAntiAirSignature, knownAntiAirSafetyRadius, riskRevision, candidateSignature), out template);
+				new AirRaidBidCacheKey(targetActorId, targetCell, requiredContribution, geometryIdentity, riskRevision, candidateSignature), out template);
 		}
 
-		public void StoreSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution, int knownAntiAirSignature,
-			int knownAntiAirSafetyRadius, int riskRevision, int candidateSignature, FransAirRaidBidTemplate template)
+		public void StoreSharedAirRaidBidTemplate(uint targetActorId, CPos targetCell, int requiredContribution,
+			FransKnownAntiAirGeometryIdentity geometryIdentity, int riskRevision, int candidateSignature, FransAirRaidBidTemplate template)
 		{
 			EnsureSharedAirBidRouteRevision(riskRevision);
 			if (sharedAirRaidBidTemplates.Count >= SharedAirRaidBidMaximumEntries)
 				sharedAirRaidBidTemplates.Clear();
-			sharedAirRaidBidTemplates[new AirRaidBidCacheKey(targetActorId, targetCell, requiredContribution, knownAntiAirSignature, knownAntiAirSafetyRadius, riskRevision, candidateSignature)] = template;
+			sharedAirRaidBidTemplates[new AirRaidBidCacheKey(targetActorId, targetCell, requiredContribution, geometryIdentity, riskRevision, candidateSignature)] = template;
 		}
 
 		void IBotTick.BotTick(IBot bot)
