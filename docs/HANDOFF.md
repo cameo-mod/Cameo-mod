@@ -25,6 +25,7 @@ of this day: DESIGN §19.6 (order gate), §19.7 (defence coverage), §19.8 (a bo
 | ctrl `bea5573a2` (pre-INC-1) | 12–4 | 75% (51–90) | 31,562 t | **216** | — |
 | base `dfef889b6` (defaults) | 8–6 (14/16) | 57% (33–79) | 32,782 t | **0** | would refuse 238, crossed 111 |
 | all (+53 switch changes, groups A+B+C) | **12–3** (15/16) | **80% (55–93)** | **27,981 t** | **0** | refused 325, crossed 12 |
+**FINAL 48/48: ctrl 12–4 · base 9–7 · all 13–3 (81%, 26,770 t). Step 1 DONE: groups A+B+C shipped as defaults (#720).**
 Read: `all` does not lose (it leads, and wins faster); ownership is fixed in both new arms; `base` alone trails — the
 defaults ship machinery whose payoff needs its switches. **Decision pending the last 3 matches → next step 1.**
 
