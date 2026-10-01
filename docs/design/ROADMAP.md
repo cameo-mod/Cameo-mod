@@ -147,9 +147,13 @@ the fog sequencing.
   - [~] **L** (telemetry + failure memory shipped #656; behaviour off) CA-2 siege and force preservation: stand-off outside remembered defence range,
     artillery first, commit when the area's defences are gone or the Versus-weighted force
     ratio wins; evaluate `FransGroundDefendForcePreservationGuard`. **DAWN.**
-  - [ ] **M** CA-3 role-mix production + squad composition with a use-every-role floor. **NOVA.**
-  - [ ] **M** CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
-    artillery back, gunships over the front, pace of the slowest frontline). **NOVA.**
+  - [~] **M** CA-3 role-mix production + squad composition with a use-every-role floor (**mechanism merged #678:**
+    `RoleMix` + `RoleMixRoleFloorPct` + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
+    land behind `UseRoleMix` as switch group `J_rolemix_production` in #731). **NOVA.**
+  - [x] **M** (merged #678) CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
+    artillery back, gunships over the front, pace of the slowest frontline): `FormationMovement` +
+    `FormationTrailCells`/`FormationMaxLeadCells`/`FormationMaxStalledLeadCells` on
+    `SquadManagerBotModuleCA`, default off. **NOVA.**
   - [~] **L** CA-5 air doctrine: gunship close air support, fighter pick-off, bomber strike
     teams on an air-threat route layer. **EMBER.**
   - [~] **M** CA-6 scouting → target choice incl. spawn-directed recon (§9 item 12). **DAWN.**
@@ -169,8 +173,10 @@ the fog sequencing.
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.
   - [~] **M** CP combat predictor (**shipped:** record-only #623; squads engage/retreat with it on the six genericbot personalities, `RetreatRatioPct` 0.1–1.0) — Versus-aware Lanchester strength, engage/retreat hysteresis,
     learned per-type factors; replaces the 6c scalar. **Claude.**
-  - [ ] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
-    layers (threat ground/air, own strength, interest, staleness; decay to averages). **NOVA.**
+  - [~] **L** ZG zone graph (CN `CNTacticalMap` port, precomputed zone paths) + **IM** influence
+    layers (threat ground/air, own strength, interest, staleness; decay to averages) — **ZG-a/b/c
+    merged** (#711/#713/#718, `UseZoneTopology` off = group `D_zone_topology`); IM-1/IM-2 on
+    drafts #725/#726 (group `H_influence_layers`). **NOVA.**
   - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
   - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
   - [x] **M** LG league harness (#625; exploiters get Hard's insurance since 2026-09-29) (past masters + exploiter personalities + maps/factions). **EMBER.**
