@@ -143,6 +143,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider compositionProvider;
+		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
@@ -168,6 +169,7 @@ namespace OpenRA.Mods.CA.Traits
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
 			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
 
 			var referencedUnitTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -255,8 +257,13 @@ namespace OpenRA.Mods.CA.Traits
 					queuedBuildRequests.Remove(buildRequest);
 				}
 
+				// §12.14 PL-1: a trailing Steamroller lead relaxes both cash floors
+				// toward spending sooner — at target (or leads off) the multiplier
+				// is 1 and the floors are unchanged.
+				var cashLean = BotPersonalityLeads.Lean(leadProviders, "steamroller");
+
 				// Don't produce if we don't have enough cash
-				if (playerResources.Cash + playerResources.Resources < Info.ProductionMinCashRequirement)
+				if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
 					return;
 
 				for (var i = 0; i < Info.UnitQueues.Length; i++)
@@ -270,7 +277,7 @@ namespace OpenRA.Mods.CA.Traits
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
 						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false);
 
-						if (playerResources.Cash + playerResources.Resources < MaximiseProductionCash)
+						if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean))
 							break;
 					}
 				}

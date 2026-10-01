@@ -507,6 +507,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRegionThreatProvider[] threatProviders;
 		IBotFoggedEnemyProvider[] fogProviders;
 		IBotRouteThreatRouter[] routeRouters;
+		IBotPersonalityLeadProvider[] leadProviders;
 		IBotMissionProvider[] missionProviders;
 		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
@@ -1181,6 +1182,7 @@ namespace OpenRA.Mods.CA.Traits
 			unitRequesters = self.Owner.PlayerActor.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			fogProviders = self.Owner.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
 			routeRouters = self.Owner.PlayerActor.TraitsImplementing<IBotRouteThreatRouter>().ToArray();
+			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
@@ -1992,7 +1994,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (--minAttackForceDelayTicks <= 0)
 			{
-				minAttackForceDelayTicks = Info.MinimumAttackForceDelay;
+				// §12.14 PL-1: a trailing Rush lead shortens the reset delay —
+				// pressure comes sooner. At target (or leads off) the reset is unchanged.
+				minAttackForceDelayTicks = BotPersonalityLeads.Scaled(Info.MinimumAttackForceDelay,
+					BotPersonalityLeads.Lean(leadProviders, "rush"));
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				CreateAttackForce(bot);
 			}
