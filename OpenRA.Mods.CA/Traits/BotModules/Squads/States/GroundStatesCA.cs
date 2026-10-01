@@ -674,12 +674,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var trailDist = (long)WDist.FromCells(owner.SquadManager.Info.FormationTrailCells).Length;
 
 			// Distance-to-go along the axis for every frontline member; the slowest
-			// (largest remaining) gates how far ahead the others may run.
+			// (largest remaining) gates how far ahead the others may run. The
+			// projection is computed in long: WVec.Dot returns int and overflows
+			// beyond ~45 cells of span, which is most real routes.
 			var slowestRemaining = long.MinValue;
 			UnitWposWrapper rear = null;
 			foreach (var u in frontline)
 			{
-				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
+				var delta = routePos - u.Actor.CenterPosition;
+				var rem = ((long)delta.X * axis.X + (long)delta.Y * axis.Y + (long)delta.Z * axis.Z) / axisLen;
 				if (rem > slowestRemaining)
 				{
 					slowestRemaining = rem;
@@ -709,7 +712,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var pushFront = new List<Actor>();
 			foreach (var u in frontline)
 			{
-				var rem = WVec.Dot(routePos - u.Actor.CenterPosition, axis) / axisLen;
+				var delta = routePos - u.Actor.CenterPosition;
+				var rem = ((long)delta.X * axis.X + (long)delta.Y * axis.Y + (long)delta.Z * axis.Z) / axisLen;
 				if (slowestRemaining - rem > lead)
 					holdFront.Add(u.Actor);
 				else

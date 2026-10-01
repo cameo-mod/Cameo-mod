@@ -30,6 +30,48 @@
   it — the watchdog is its acceptance test.
 - Also: an executor-less mission record omits `by` instead of writing `""` (DAWN's #679 smoke nit); debug lines print `by=?`.
 - 400/400 tests; fog manifest +1 (own units only, §19.5-honest); boot gate to the menu.
+# 2026-09-30 (late pm2) — Devin (NOVA): #681 conformed to the MC1 contract + LC1 squads
+
+- Merged master (`2638c6cbc`, MC1 writer #683) into the #681 branch and
+  conformed per RULING_2026-09-30_claude_mission_cards_one_contract:
+  `MissionId`/`IdentityKey` are now STRINGS in the ruled grammar
+  (`raid:<internal>:r<region>` — InternalName, never ClientIndex; every
+  non-human player shares the host's ClientIndex). The local
+  `BotMissionState`/`BotMissionReason` enums are gone — emission is
+  exclusively `BotMissionLog.Write` with `BotMissionAttemptState` +
+  `BotMissionReasons` constants. `DismissSquad` reports
+  `Released`/`superseded`; `CleanSquads` reports `Failed`/`lost_units`
+  only when units actually died.
+- LC1 squad consumer rides in the same PR (claim/heartbeat/release +
+  hand-off of units claimed by another owner; null lease service =
+  classic-identical).
+- `WVec.Dot` overflow fix (long widening) is also on this branch —
+  prerequisite for the CA-4 flag-on A/B.
+- Verified on the merged tree: build 0 errors, 394/394 tests, audits
+  PASS (fog 218 sites, no new omniscience), boot-gate PASS.
+
+# 2026-09-30 (late pm) — Devin (NOVA): #678 merged; MissionCard lineage slice
+
+- #678 (CA-3/CA-4 port) merged → master `1dbbfe136`. Ported the stale
+  `ca3-role-mix`/`ca3-stage-gate`/`ca4-formation` stack as a fresh patch
+  set: merged `IBotUnitRoles`/`BotUnitRoles` (consumes `BotRoleSets`,
+  statistical fill only for unroled units — no parallel roles system per
+  §19.3), `RoleMix` production filler, `StageRequiredRoles` launch gate,
+  `FormationMovement` — all flag-gated inert. 359 tests, boot-gate PASS.
+  Latent flag-for-later: formation `WVec.Dot` can overflow on huge maps
+  (inert until `FormationMovement` is flipped).
+- MissionCard lineage slice (#681, telemetry-only): `BotMission.MissionId`
+  deterministic from `(Type, TargetPlayer, RegionIndex)` — stable across
+  re-derived situation passes. `MissionTaken` numbers each attempt; the
+  squad carries `(MissionId, attempt)`; debug log emits
+  `MISSION n ATTEMPT m COMMITTED/FAILED`. New opt-in
+  `IBotMissionOutcomeSink` + `BotMissionAttemptState` (fransotto's
+  vocabulary + `Failed`). Provider-side dormant-shelf/success detection
+  and the JSONL card archive remain open (MasterAi lane / LA lane).
+- Note for agents: `SquadManagerBotModuleCA.cs` hit the stale-editor
+  overwrite again mid-edit (write landed, then reverted silently) —
+  verify `git status` lists your files before committing; I had to
+  re-apply via scripted patch.
 
 # 2026-09-30 (pm2) — Devin (EMBER): ab_summary pooled spawn split
 
