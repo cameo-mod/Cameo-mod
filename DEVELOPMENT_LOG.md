@@ -1,3 +1,19 @@
+# 2026-10-01 — Claude: the order gate (DESIGN §19.6, maintainer ruling)
+
+- Maintainer, 2026-09-30: *"Refuse, but emergencies can override."* Now DESIGN §19.6 (binding): a module may order a
+  unit only while it holds the unit's lease (or nobody does); emergencies (attack responses from `EmergencyModules`)
+  take the unit over and the old holder is told (`IBotUnitLeaseLost`).
+- Enforced in ONE place: Cameo's `ModularBot` calls every module, so it records which module is running and judges each
+  queued unit order at `IBot.QueueOrder` — no change to the 246 `QueueOrder` sites (38 files; 5 claim units at all),
+  Fransbot included. `BotOrderGate<TKey>` is the world-free rule + counters; `BotLeaseTable.Preempt`; LC1 gains
+  `Preempt` + `BotLeasePurpose.Emergency` + `IBotUnitLeaseLost`.
+- Also counted: crossed orders (two modules ordering one unit within 100 ticks, claims or not), unattributed orders,
+  and orders the full queue dropped (`MaxQueuedOrders` used to drop them silently).
+- Off until its A/B: `BotUnitLeaseRegistry.EnforceAtOrderGate: false` = count only (`conflicts`). genericbot records
+  in `cameo-ai-matches.jsonl` gain `order_gate`. `classic` (no registry) passes untouched.
+- 406/406 tests (6 new); fog PASS; doc-claims/task-index PASS; boot gate to the menu (the one new exception log in that
+  window is another worktree's engine, `C:/tmp/lc6w`, failing on a support-dir argument at startup — not this tree).
+
 # 2026-09-30 (night) — Claude: LC5 ownership watchdog
 
 - `BotOwnershipWatchdog` (OpenRA.Mods.Cameo, Player, `genericbot || classicbot`): every 100 ticks it reads who holds
