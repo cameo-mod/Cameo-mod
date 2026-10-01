@@ -55,6 +55,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return previous;
 		}
 
+		/// <summary>The negotiated handoff: re-key the lease to a new owner whoever held it (or was free).</summary>
+		public void Transfer(TKey key, string newOwner, BotLeasePurpose purpose, int now, int durationTicks)
+		{
+			leases[key] = new BotLease(newOwner, purpose, now, durationTicks > 0 ? now + durationTicks : int.MaxValue);
+		}
+
 		public bool IsClaimedByOther(TKey key, string owner, int now) =>
 			leases.TryGetValue(key, out var l) && Active(l, now) && l.Owner != owner;
 
@@ -182,6 +188,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						lost.LeaseLost(actor, owner, purpose);
 			}
 
+			return true;
+		}
+
+		bool IBotUnitLeases.Transfer(Actor actor, string newOwner, BotLeasePurpose purpose, int durationTicks)
+		{
+			if (actor == null || IsGone(actor))
+				return false;
+
+			table.Transfer(actor, newOwner, purpose, world.WorldTick, durationTicks);
 			return true;
 		}
 
