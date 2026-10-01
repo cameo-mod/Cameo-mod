@@ -653,17 +653,236 @@ ScrinRiftShockwavePulse:
 # deals damage and nothing else: no freezing (PhysicalStateCryo1..12), no smudges,
 # no effect explosions, no impact sounds and no shield-hit condition.
 ScrinRiftDamage:
-	Inherits: ra1_allies_chronovortex
-	# Reference cadence kept as-is: PeriodicExplosion fires every 6 ticks
-	# (ReloadDelay 5 + 1). The 17 s reference budget is NOT compressed into the
-	# Rift's 10 s lifetime - only the damage RATE is reproduced.
+	Inherits@roleflat: ^Warhead_Magic_Heavy
+	Inherits@fx_cover: ^Effect_Concussion_Heavy
 	ReloadDelay: 5
-	# Drop the inherited ^MagicWeapon Missile projectile (and every field merged
-	# into it) outright: PeriodicExplosion calls Weapon.Impact directly, so the
-	# weapon needs the point-of-impact projectile only.
+	Range: 1250
+	ValidTargets: Ground, Water
+	Projectile: InstantHit
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 33
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 33
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		Blockable: false
+	Report: ra1_shared_sounds|rift1.aud, ra1_shared_sounds|rift2.aud, ra1_shared_sounds|rift3.aud
+	Warhead@PhysicalStateCryo1: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 1000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo2: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 2000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo3: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 3000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo4: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 4000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo5: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 5000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo6: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 6000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo7: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 7000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo8: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 8000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo9: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 9000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo10: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1000
+		Range: 10000
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo11: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1111
+		Range: 11111
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@PhysicalStateCryo12: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -1234
+		Range: 12345
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Warhead@Magic_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 4888
+		PercentageScale: 0
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Air, Ground, Water
+		Spread: 12345
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+			FlyingInfantry: 16
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 20
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			SubmarineLight: 17
+			SubmarineHeavy: 16
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 25
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete:
+		Damage: 250
+	Warhead@MagicWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air, Ground, Water
+		Spread: 12345
+		Damage: 1
+		Falloff: 111, 88, 44, 22, 11
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Spaceship: 16
+			Helicopter: 15
+			Bomber: 14
+			Fighter: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+			FlyingInfantry: 17
+			CyborgLight: 18
+			CyborgMedium: 20
+			CyborgHeavy: 22
+			CyborgHeroic: 24
+			AntiAirInfantry: 19
+			AntiAirVehicle: 20
+			AntiAirBuilding: 11
+			ShipLight: 14
+			ShipMedium: 15
+			ShipHeavy: 17
+			ShipSuperheavy: 17
+			AntiAirShip: 14
+			SubmarineLight: 19
+			SubmarineHeavy: 21
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	-Warhead@Effect1:
+	-Warhead@Glow:
+	# Materialized from ra1_allies_chronovortex for pack self-containment
+	# (resolved-identical). Reference cadence kept: PeriodicExplosion fires
+	# every 6 ticks (ReloadDelay 5 + 1); the 17 s budget is NOT compressed
+	# into the Rift's 10 s lifetime - only the damage RATE is reproduced.
+	# Drop the donor's InstantHit children (point-of-impact only) and Report
+	# (the Rift stays silent; the reference reports rift1/rift2/rift3.aud).
+	ReloadDelay: 5
 	-Projectile:
 	Projectile: InstantHit
-	# The Rift stays silent; the reference reports rift1/rift2/rift3.aud.
 	-Report:
 	-Warhead@Smudge1:
 	-Warhead@RA2Crater:

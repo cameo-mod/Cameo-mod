@@ -8361,17 +8361,334 @@ MutateEffect:
 ####################################################################################################
 
 ReactorNuke:
-	Inherits: MiniNuke
+	ValidTargets: Ground, Water, Underwater, Air
+	Warhead@Damage: SpreadDamage
+		Spread: 1600
+		Falloff: 160, 80, 40, 20, 10
+		Damage: 160000
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 500
+		Damage: 80000
+		Falloff: 1000, 500, 250, 125, 50, 25, 5
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 2
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
-		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@4Dam_areanuke1: SpreadDamage
+		Spread: 1000
+		Damage: 40000
+		Falloff: 1000, 500, 250, 125, 50, 25
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 4
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+		ResourceAmount: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: kaboom22.aud
+		Delay: 5
+		ImpactActors: false
+	Warhead@7Dam_areanuke2: SpreadDamage
+		Spread: 1500
+		Damage: 20000
+		Falloff: 1000, 500, 250, 125, 50
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 6
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 6
+		Delay: 6
+		ResourceAmount: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@8Dam_areanuke2: SpreadDamage
+		Spread: 2000
+		Damage: 10000
+		Falloff: 1000, 500, 250, 125
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 8
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 9
+		Delay: 9
+		ResourceAmount: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
+	Warhead@10Dam_areanuke3: SpreadDamage
+		Spread: 2500
+		Damage: 5000
+		Falloff: 1000, 500, 250
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 10
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@11Dam_areanuke3: SpreadDamage
+		Spread: 3000
+		Damage: 2500
+		Falloff: 1000, 500
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 12
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@13Smu_areanuke3: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 4
+		Delay: 12
+	Warhead@13Shake: ShakeScreen
+		Duration: 15
+		Intensity: 5
+		Multiplier: 1,1
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 750
 		Level: 375
 		LayerName: ra2radiation
-
 ReactorNukeWeak:
 	Inherits: ReactorNuke
 	Warhead@Effect: CreateEffect
@@ -8381,22 +8698,337 @@ ReactorNukeWeak:
 		Level: 250
 
 RA2DemoBomb:
-	Inherits: MiniNuke
+	ValidTargets: Ground, Water, Underwater, Air
+	Warhead@Damage: SpreadDamage
+		Spread: 1600
+		Falloff: 160, 80, 40, 20, 10
+		Damage: 160000
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 500
+		Damage: 80000
+		Falloff: 1000, 500, 250, 125, 50, 25, 5
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 2
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Effect: CreateEffect
+		Explosions: demotruck_explosion
+		ImpactSounds: vdemdiea.wav
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@4Dam_areanuke1: SpreadDamage
+		Spread: 1000
+		Damage: 40000
+		Falloff: 1000, 500, 250, 125, 50, 25
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 4
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+		ResourceAmount: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: kaboom22.aud
+		Delay: 5
+		ImpactActors: false
+	Warhead@7Dam_areanuke2: SpreadDamage
+		Spread: 1500
+		Damage: 20000
+		Falloff: 1000, 500, 250, 125, 50
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 6
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 6
+		Delay: 6
+		ResourceAmount: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@8Dam_areanuke2: SpreadDamage
+		Spread: 2000
+		Damage: 10000
+		Falloff: 1000, 500, 250, 125
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 8
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 9
+		Delay: 9
+		ResourceAmount: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
+	Warhead@10Dam_areanuke3: SpreadDamage
+		Spread: 2500
+		Damage: 5000
+		Falloff: 1000, 500, 250
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 10
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@11Dam_areanuke3: SpreadDamage
+		Spread: 3000
+		Damage: 2500
+		Falloff: 1000, 500
+		Versus:
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+			FlyingInfantry: 64
+			CyborgLight: 77
+			CyborgMedium: 73
+			CyborgHeavy: 69
+			CyborgHeroic: 65
+			AntiAirInfantry: 86
+			AntiAirVehicle: 66
+			AntiAirBuilding: 94
+			ShipLight: 82
+			ShipMedium: 78
+			ShipHeavy: 74
+			ShipSuperheavy: 72
+			AntiAirShip: 80
+			SubmarineLight: 68
+			SubmarineHeavy: 64
+		Delay: 12
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@13Smu_areanuke3: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 4
+		Delay: 12
+	Warhead@13Shake: ShakeScreen
+		Duration: 15
+		Intensity: 5
+		Multiplier: 1,1
 	Range: 1500
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@Damage: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Effect: CreateEffect
-		Explosions: demotruck_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: vdemdiea.wav
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 1000
 		Level: 500
 		LayerName: ra2radiation
-
 ^RA2TerroristLegacy:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium

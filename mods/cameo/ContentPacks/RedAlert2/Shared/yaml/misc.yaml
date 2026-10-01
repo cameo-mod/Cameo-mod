@@ -117,17 +117,6 @@ ra2gacnst_infiltrated:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: ra2_allies_constructionyard
 
-dummy_dock:
-	Interactable:
-	Reservable:
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-		AllowInvalidPlacement: true
-	Exit@1:
-	RejectsOrders:
-	Targetable:
-
 ra2gayard:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
