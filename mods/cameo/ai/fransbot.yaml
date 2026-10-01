@@ -205,7 +205,9 @@ Player:
 		PeacetimeDefensePerAnchorTarget: 5
 		PeacetimeDefenseEarliestTick: 3200
 	FransTransportCommanderBotModule:
-		RequiresCondition: enable-fransbot
+		# ENG-T (DESIGN §22): the ONE transport system — also armed for genericbot under its own
+		# flag so EngineerBotModule can request capture runs through IBotCaptureTransportProvider.
+		RequiresCondition: enable-fransbot || engt-transport
 	FransMinelayerBotModule:
 		RequiresCondition: enable-fransbot
 	FransSupportPowerBotModule:

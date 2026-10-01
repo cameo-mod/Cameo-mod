@@ -15296,3 +15296,33 @@ consumption points plus the nine inherited air-squad sites). A removed or
 renamed site FAILs; additions are noted for `--write`. Negative-tested:
 renaming `squad-update-target` fails the audit and names both sides of
 the swap.
+## 2026-09-30 ENG-T transport provider (devin/dawn/engt-transport-provider @ 72d429685, PR #698)
+
+Delivered Claude's order (ORDER_2026-09-30_claude_to_dawn_eng_t_provider.md): the CA seam
+`IBotCaptureTransportProvider` (#694) is served by Fransbot's FransTransportCommanderBotModule —
+DESIGN §22 one-transport-system, no second implementation.
+
+- Run model: one TransportMission per 1-5 engineer run; every leg keyed in `missions`;
+  Distinct() single driver pass; native EnterTransport per leg; native all-at-once Unload at the
+  first stop (no single-passenger Unload order path — Cargo's order always unloads all);
+  per-leg TryConsumeDelivered hands each passenger its OWN target (the documented fallback).
+- Run edges: RunBoardingIssued per leg, partial departure after BoardingRetryInterval*4 stall,
+  dead-leg pruning, dead-anchor-during-Waiting releases run early, CancelAfterDrop releases all.
+  Single-passenger + reusable SpecOps untouched (IsRunMission branches only).
+- LC1: transport claimed as BotLeasePurpose.Mission (owner FransTransportCommanderBotModule,
+  TransportLeaseTicks heartbeat in ManageMission, release in ReleaseTransport);
+  FindAvailableTransports skips other-owner claims.
+- Null-safety arm: Created tolerates missing Frans services — NullFransRiskModelService (neutral,
+  fog-honest), no strategic map => ground/LST proofs decline (air only) + their production
+  suppressed, no general => loss corridors allowed, no commandBid => compatible,
+  no combatIntel => plain owner scan.
+- Arming: RequiresCondition `enable-fransbot || engt-transport`; GrantConditionOnBotOwner
+  @engttransport grants it to all genericbot tiers + exploit bots; classic excluded; inert by
+  default since EngineerBotModule only rolls when TransportChance > 0.
+- PassengerTypes +d2k_hijacker/+d2k_mechanic (were missing capturers).
+- MC1 cards: transport:<anchorId> COMMITTED -> PROGRESSING -> done/dropped/target_gone/timeout/
+  lost_units, Executor "Transport".
+- Tests: WantsTransport boundaries + GreedyRoute nearest-next. 399/399 pass. Audit suite clean
+  for the diff (latest/ drift = base ContentPack migration). Boot-gate PASS (~39s, no new exc).
+- Smoke in flight: engt-smoke @ 72d429685 dirty (TransportChance:25), hard vs classic td_gdi x2,
+  Nuclear Winter — done-when = archive shows COMMITTED by=Transport -> PROGRESSING -> SUCCESS.
