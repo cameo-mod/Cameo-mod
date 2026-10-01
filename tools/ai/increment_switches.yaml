@@ -20,3 +20,6 @@ groups:
   E_engt_transport:                  # re-arm the Frans transport provider ONLY after #716 (orders-only, DESIGN §19.8) lands
     GrantConditionOnBotOwner@engttransport:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  P_di2_director_pacing:             # NOVA DI-2 — Director wave phase scales the assault launch bar (stacked on director-1 publisher)
+    SquadManagerBotModuleCA:
+      UseDirectorPacing: true

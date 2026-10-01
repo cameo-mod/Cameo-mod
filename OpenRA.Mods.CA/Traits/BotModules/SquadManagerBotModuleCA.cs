@@ -220,6 +220,27 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Minimum delay (in ticks) between creating squads.")]
 		public readonly int MinimumAttackForceDelay = 0;
 
+		[Desc("DI-2 (12.16): the assault dispatch bar scales with the pacing Director's wave phase —",
+			"Climax releases on a smaller pool, Relief holds for a rebuild. The bar is re-targeted",
+			"every dispatch check so a phase change mid-wait takes effect immediately.",
+			"False = the Director publishes telemetry only, bit-identical.")]
+		public readonly bool UseDirectorPacing = false;
+
+		[Desc("Percent of the desired attack force bar required while the Director is in BuildUp.",
+			"A disabled/absent Director also reads BuildUp — 100 keeps the baseline bar.")]
+		public readonly int DirectorBuildUpForceScalePercent = 100;
+
+		[Desc("Percent of the desired attack force bar required while the Director is in Pressure.")]
+		public readonly int DirectorPressureForceScalePercent = 85;
+
+		[Desc("Percent of the desired attack force bar required while the Director is in Climax —",
+			"the wave's release: launch with less than the baseline bar demands.")]
+		public readonly int DirectorClimaxForceScalePercent = 55;
+
+		[Desc("Percent of the desired attack force bar required while the Director is in Relief —",
+			"the wave broke; rebuild above the baseline bar before committing again.")]
+		public readonly int DirectorReliefForceScalePercent = 150;
+
 		[Desc("Radius in cells around the base that should be scanned for units to be protected.")]
 		public readonly int ProtectUnitScanRadius = 15;
 
@@ -427,6 +448,14 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (SquadValueMinLateBonus > SquadValueMaxLateBonus)
 				throw new YamlException("SquadValueMinLateBonus cannot be greater than SquadValueMaxLateBonus.");
+
+			if (DirectorBuildUpForceScalePercent < 0 || DirectorPressureForceScalePercent < 0 ||
+				DirectorClimaxForceScalePercent < 0 || DirectorReliefForceScalePercent < 0)
+				throw new YamlException("Director force scale percents cannot be negative.");
+
+			if (DirectorBuildUpForceScalePercent > 400 || DirectorPressureForceScalePercent > 400 ||
+				DirectorClimaxForceScalePercent > 400 || DirectorReliefForceScalePercent > 400)
+				throw new YamlException("Director force scale percents above 400 are not supported.");
 
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
@@ -2203,7 +2232,24 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= desiredAttackForceValue && unitsHangingAroundTheBase.Count >= desiredAttackForceSize))
+			// DI-2 (12.16): the Director re-targets the launch bar every dispatch check —
+			// Climax releases on a smaller pool, Relief holds for a rebuild. Scaling the
+			// bar itself (not the stored desired force) lets a phase change mid-wait
+			// take effect immediately; flag-off or no provider = scale 100, identical.
+			var requiredValue = desiredAttackForceValue;
+			var requiredSize = desiredAttackForceSize;
+			if (Info.UseDirectorPacing)
+			{
+				var director = Player.PlayerActor.TraitsImplementing<IBotDirector>().FirstOrDefault();
+				if (director != null)
+				{
+					var scale = DirectorForceScalePercent(director.DirectorPhase, Info);
+					requiredValue = ApplyForceScale(desiredAttackForceValue, scale);
+					requiredSize = ApplyForceScale(desiredAttackForceSize, scale);
+				}
+			}
+
+			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && unitsHangingAroundTheBase.Count >= requiredSize))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
@@ -2428,6 +2474,27 @@ namespace OpenRA.Mods.CA.Traits
 						desiredAttackForceValue += World.LocalRandom.Next(minBonus, maxBonus);
 				}
 			}
+		}
+
+		// DI-2 (12.16): the Director's wave phase scales the assault launch bar — this
+		// is the wave's release valve. BuildUp is also what a disabled or absent
+		// provider reports, so 100 keeps it neutral by default. Static for tests.
+		public static int DirectorForceScalePercent(DirectorPhase phase, SquadManagerBotModuleCAInfo info)
+		{
+			return phase switch
+			{
+				DirectorPhase.Pressure => info.DirectorPressureForceScalePercent,
+				DirectorPhase.Climax => info.DirectorClimaxForceScalePercent,
+				DirectorPhase.Relief => info.DirectorReliefForceScalePercent,
+				_ => info.DirectorBuildUpForceScalePercent,
+			};
+		}
+
+		// Zero stays zero: a SquadValue 0 bar trivially passes and must keep passing.
+		public static int ApplyForceScale(int threshold, int scalePercent)
+		{
+			var scaled = (int)((long)threshold * scalePercent / 100);
+			return threshold > 0 ? Math.Max(1, scaled) : scaled;
 		}
 
 		void ProtectOwn(Actor attacker)
