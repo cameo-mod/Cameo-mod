@@ -68,6 +68,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// bot has an enabled, built TacticalMapBotModule and UseZoneTopology is on — that zone
 		// topology's region ids (check Regions.ZoneBacked/Generation before assuming geometry).
 		public RegionMemory Regions;
+
+		// IM-1 (AI_DEEP_RESEARCH §3.3): the per-region influence layers — threat_ground/threat_air
+		// (remembered enemy value decaying toward a per-zone average), interest, own strength and
+		// staleness — published in Regions' index space. Live handle like FogMemory: republished in
+		// place every snapshot. Null when UseInfluenceLayers is off.
+		public IBotInfluenceMap Influence;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
 		internal int SquadCount, SquadUnitCount;
@@ -229,6 +235,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(one region per chokepoint-bounded pocket of ground) whenever an enabled, built topology",
 			"exists; the square RegionCellSize grid stays the fallback. False forces the grid always.")]
 		public readonly bool UseZoneTopology = true;
+		[Desc("IM-1 (AI_DEEP_RESEARCH §3.3): publish per-region influence layers (threat_ground,",
+			"threat_air, interest, own_strength, staleness) on each situation snapshot, so",
+			"consumers read one publisher instead of re-deriving RegionMemory.")]
+		public readonly bool UseInfluenceLayers = true;
+		[Desc("IM-1: EMA weight percent per snapshot on each zone's remembered-threat history —",
+			"the 'where they usually are' average a stale sighting decays toward.")]
+		public readonly int InfluenceHistoryAlphaPercent = 20;
+		[Desc("IM-1: staleness horizon in ticks at which a published threat is fully the zone",
+			"history rather than the last sighting.")]
+		public readonly int InfluenceDecayTicks = 7500;
+		[Desc("IM-1: staleness a region reports when no enemy memory has ever seen it",
+			"(mirrors ScoutBotModule.StaleAfterTicks).")]
+		public readonly int InfluenceStaleAfterTicks = 2500;
 		[Desc("Offer squads coarse waypoints that skirt regions with remembered enemy threat (6e risk routing). Squads fall back to direct routing when this is off.")]
 		public readonly bool UseRiskRouting = true;
 		[Desc("Remembered enemy value that makes one region cost an extra hop to route through. Lower = squads skirt weaker threats.")]
@@ -290,6 +309,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
 		readonly BotFogMemory fogMemory;
+
+		// IM-1: the persistent layers object — its EMA history lives across snapshots, so it is
+		// constructed once and republished in place (Situation.Influence hands out the live read).
+		readonly BotInfluenceLayers influenceLayers;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
 		readonly Queue<(int Tick, int Delta)> killSamples = new();
@@ -588,6 +611,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			player = self.Owner;
 			fogMemory = new BotFogMemory(player, info);
+			influenceLayers = new BotInfluenceLayers(info);
 			costCountersInitialized = !player.World.IsLoadingGameSave;
 			lastDecisionTick = -Math.Max(1, info.DecisionInterval);
 			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
@@ -868,6 +892,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
 
+			// IM-1 (AI_DEEP_RESEARCH §3.3): the one publisher — refresh the influence layers once
+			// per snapshot, after ByEnemy is complete. Enemy inputs are the fog-gated region tables;
+			// own strength is real data. Zone resource cells come from the topology when the memory
+			// is zone-backed, else from the resource map's sites.
+			if (Info.UseInfluenceLayers)
+				influenceLayers.Refresh(regions, ownActors, zoneTopology,
+					player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstEnabledTraitOrDefault(), tick);
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -879,6 +911,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Mission = Missions.FirstOrDefault(),
 				MissionAssignment = missionAssignment,
 				Regions = regions,
+				Influence = Info.UseInfluenceLayers ? influenceLayers : null,
 				FogMemory = fogMemory,
 				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
 				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
@@ -1270,6 +1303,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					region.AntiAirValue += actor.Value;
 				if (actor.Harvester || actor.Refinery)
 					region.EconomyValue += actor.Value;
+				if (actor.Production || actor.Tech)
+					region.ProductionTechValue += actor.Value;
 				region.EverSeen = true;
 				if (actor.LastSeenTick > region.LastSeenTick)
 					region.LastSeenTick = actor.LastSeenTick;
@@ -1827,8 +1862,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		static int RatioPct(BotCombatPredictor.Prediction p) => (int)Math.Round(p.Ratio * 100);
 
-		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
-		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+		// IM-1: internal so the influence layers classify and price own actors the same way.
+		internal static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
+		internal static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 		static int Clamp(long value) => (int)Math.Max(0, Math.Min(100, value));
 		static int ClampSignal(long value) => (int)Math.Max(0, Math.Min(100, value));
 		static int ClampScore(long value) => (int)Math.Max(0, Math.Min(1000, value));
