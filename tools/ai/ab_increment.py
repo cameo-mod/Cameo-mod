@@ -63,6 +63,15 @@ remaining shards are terminated only once EVERY pair touching it is decided — 
 the moment its data can no longer change any verdict. Decisions land in the run summary
 as "early_stop" entries.
 
+Resilience: a full shard whose batch driver exits before its plan played out is
+relaunched into a fresh <support>_rN dir — up to --shard-retries times, replaying only
+the unplayed remainder (--repeats = planned - played). Progress, fingerprints and the
+pooled summary union across a shard's rounds. Early-stopped shards never retry; a dead
+smoke aborts its arm. When tearing a shard down the driver kills the OpenRA.exe child
+BEFORE the python parent (an orphaned game still holds an instance slot) and warns if a
+live driver shows no OpenRA child — that invariant breaks silently if the batch runner
+ever gains a shell wrapper.
+
 Usage:
     python tools/ai/ab_increment.py --ctrl <sha> --cand <sha> --groups all --out C:/tmp/inc2ab-x
     python tools/ai/ab_increment.py --ctrl <sha> --cand <sha> --out ... \
