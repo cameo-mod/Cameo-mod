@@ -1,3 +1,37 @@
+# 2026-10-01 — Devin (NOVA): DI-1 — the Director's tension wave, publish-only
+
+- `BotDirector` (new, `OpenRA.Mods.Cameo/Traits/BotModules/`): the L4D-style pacing wave
+  of AI_DEEP_RESEARCH §7 / DESIGN §19.2 — `DirectorTension` [0,100] and
+  `DirectorPhase` {BuildUp, Pressure, Climax, Relief}, advanced once per situation
+  snapshot inside `MasterAiBotModule.Rebuild`. Fog-honest scalars only: own army value,
+  launch deltas (`attacksDelta`), and the loss/kill sample windows since the previous
+  snapshot — no enemy enumeration, no new actor scans.
+- Model: tension rises while the army is massed (`DirectorArmyMassValue` 2500) — rise
+  rate 3/snapshot plus impatience (idle ticks since last attack / 1500, capped at
+  +10/snapshot) — and decays 2/snapshot while thin. BuildUp→Pressure at 60, →Climax at
+  85 or on a launch out of Pressure; Climax→Relief when the kill window flattens (750
+  quiet ticks) or on a 600 own-loss spike (Pressure breaks the same way); Relief resets
+  tension to 20 and re-arms at 45. Every boundary carries hysteresis (dead-band 10
+  under the pressure threshold; relief exit above the reset) — proven by driving the
+  same tensions through both directions in tests.
+- Seam + telemetry: `IBotDirector` + `DirectorPhase` enum in `OpenRA.Mods.CA`
+  (`Traits/BotModules/IBotDirector.cs`), implemented by the master — disabled reads
+  0/BuildUp, never a behaviour change. `BotSituation` gains `DirectorTension`/
+  `DirectorPhase`; the situation log gains `own.director_tension`/`own.director_phase`.
+  No consumer, no flag, no `increment_switches.yaml` entry — publish-only per the slice.
+- Twelve `Director*` knobs on `MasterAiBotModuleInfo` (defaults above), validated in
+  `RulesetLoaded`. Director state deliberately stays out of `MasterAiBotSavedState`:
+  a save/load restarts the wave — honest for record-only telemetry.
+- Tests: `BotDirectorTest` (14) — massed-idle rise into Pressure, thin-army decay floor,
+  attack-from-Pressure→Climax, BuildUp-attack stays BuildUp, quiet-window→Relief,
+  fresh kills keep Climax alive, loss spikes break Pressure/Climax, Relief re-arm
+  hysteresis, dead-band two-direction proof, impatience cap, 0-100 clamp incl. the
+  sustained-climax ceiling, and the JSON emit.
+- Doc: AI_ARCHITECTURE §12.16 (12.15 reserved for UT-1's utility axes). Boot-gate:
+  deferred to coordinator per the standing workflow; Release build 0 errors.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 
 - `tools/ai/ab_increment.py`: one command runs the whole increment A/B
