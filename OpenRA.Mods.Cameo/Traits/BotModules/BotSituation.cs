@@ -231,6 +231,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly bool PublishMissions = true;
 		[Desc("Percentage of remembered enemy army and defence value required before attempting a Raid.")]
 		public readonly int RaidForceRatioPercent = 120;
+		[Desc("LC8: consecutive failed attempts (units lost) of one mission id before it goes on the dormant shelf. 0 = off.")]
+		public readonly int RaidFailuresBeforeDormant = 0;
+		[Desc("LC8: ticks a dormant mission stays off the shelf of published missions before it is reopened.")]
+		public readonly int RaidDormantTicks = 4500;
 		[Desc("Minimum Raid priority required before publishing a mission.")]
 		public readonly int RaidPriorityThreshold = 40;
 		[Desc("Minimum Defend priority required before publishing a mission.")]
@@ -257,7 +261,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -270,6 +274,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<uint> productionBuildings = [];
 		readonly Dictionary<(BotMissionType Type, int RegionIndex), int> missionReservations = [];
 		List<BotMission> missions = [];
+		readonly Dictionary<string, int> missionFailStreak = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> dormantUntil = new(StringComparer.Ordinal);
 		int missionTick;
 		int nextSnapshotTick;
 		int nextEmergencyTick;
@@ -302,8 +308,73 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
 			? Array.Empty<BotMission>()
-			: missions.Where(m => !missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
-				!ReservationActive(reservedTick, missionTick, Info.MissionReservationTicks)).ToArray();
+			: missions.Where(m => (!missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
+				!ReservationActive(reservedTick, missionTick, Info.MissionReservationTicks)) &&
+				!IsDormant(dormantUntil, m.EffectiveMissionId, player.World.WorldTick)).ToArray();
+
+		// LC8: the dormant shelf. A mission id whose squads keep dying rests for
+		// RaidDormantTicks instead of being re-published into the same grinder.
+		internal static bool GoesDormant(int failStreak, int threshold) => threshold > 0 && failStreak >= threshold;
+
+		internal static bool IsDormant(Dictionary<string, int> shelf, string missionId, int tick) =>
+			shelf.Count > 0 && missionId != null && shelf.TryGetValue(missionId, out var until) && tick < until;
+
+		// Streak step: Failed adds one, Success clears, anything else (Released...) leaves it.
+		internal static int NextFailStreak(int streak, BotMissionAttemptState state) =>
+			state == BotMissionAttemptState.Failed ? streak + 1 : state == BotMissionAttemptState.Success ? 0 : streak;
+
+		static string MissionTypeOf(string missionId)
+		{
+			var i = missionId?.IndexOf(':') ?? -1;
+			return i > 0 ? missionId[..i] : "raid";
+		}
+
+		void IBotMissionOutcomeSink.Report(string missionId, int attemptId, BotMissionAttemptState state, string reason, int tick)
+		{
+			if (IsTraitDisabled || missionId == null || Info.RaidFailuresBeforeDormant <= 0)
+				return;
+
+			var streak = NextFailStreak(missionFailStreak.GetValueOrDefault(missionId), state);
+			if (streak == 0)
+				missionFailStreak.Remove(missionId);
+			else
+				missionFailStreak[missionId] = streak;
+
+			if (!GoesDormant(streak, Info.RaidFailuresBeforeDormant))
+				return;
+
+			missionFailStreak.Remove(missionId);
+			dormantUntil[missionId] = tick + Info.RaidDormantTicks;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player, MissionId = missionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
+				Executor = "Master", MissionType = MissionTypeOf(missionId), Tick = tick
+			});
+		}
+
+		void ReopenDormant(int tick)
+		{
+			if (dormantUntil.Count == 0)
+				return;
+
+			List<string> expired = null;
+			foreach (var kv in dormantUntil)
+				if (tick >= kv.Value)
+					(expired ??= []).Add(kv.Key);
+
+			if (expired == null)
+				return;
+
+			foreach (var id in expired)
+			{
+				dormantUntil.Remove(id);
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player, MissionId = id, Event = BotMissionEvent.Reopened, Reason = BotMissionReasons.Timeout,
+					Executor = "Master", MissionType = MissionTypeOf(id), Tick = tick
+				});
+			}
+		}
 
 		public void MissionTaken(BotMission mission)
 		{
@@ -489,6 +560,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = player.World.WorldTick;
+			ReopenDormant(tick);
 			if (tick >= nextEmergencyTick)
 			{
 				nextEmergencyTick = tick + Math.Max(1, Info.EmergencyCheckInterval);

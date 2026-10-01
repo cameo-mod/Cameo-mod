@@ -227,6 +227,46 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void RemainingExposureCountsOnlyCellsAheadOutsideTheApproach()
+		{
+			var route = Enumerable.Range(0, 21).Select(x => new CPos(x, 5)).ToList();
+			var target = new CPos(21, 5);
+			Func<CPos, int> hot = c => c.X is 2 or 8 or 12 or 19 ? 1 : 0;
+
+			// From the start: 2, 8, 12 count; 19 is 2 cells from the target (inside a 6-cell approach).
+			Assert.That(EngineerBotModule.RemainingExposure(route, new CPos(0, 5), target, 6, hot), Is.EqualTo(3));
+			Assert.That(EngineerBotModule.RemainingExposure(route, new CPos(8, 5), target, 6, hot), Is.EqualTo(1), "behind the engineer is walked already");
+			Assert.That(EngineerBotModule.RemainingExposure(route, new CPos(13, 6), target, 6, hot), Is.EqualTo(0));
+			Assert.That(EngineerBotModule.RemainingExposure(null, new CPos(0, 5), target, 6, hot), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void StealthGateIsOffAtMinusOneAndTripsAboveTheThreshold()
+		{
+			Assert.That(EngineerBotModule.StealthGuarded(50, -1), Is.False, "-1 = off");
+			Assert.That(EngineerBotModule.StealthGuarded(0, 0), Is.False);
+			Assert.That(EngineerBotModule.StealthGuarded(1, 0), Is.True);
+			Assert.That(EngineerBotModule.StealthGuarded(2, 2), Is.False, "at the threshold is allowed");
+			Assert.That(EngineerBotModule.StealthGuarded(3, 2), Is.True);
+		}
+
+		[Test]
+		public void RankScorePrefersValueAndPunishesExposure()
+		{
+			// Same distance and value: the less exposed target wins.
+			Assert.That(EngineerBotModule.RankScore(1000, 20, 0, 10), Is.GreaterThan(EngineerBotModule.RankScore(1000, 20, 5, 10)));
+
+			// A far valuable safe target beats a near cheap one; an exposed valuable one does not.
+			var nearCheap = EngineerBotModule.RankScore(300, 10, 0, 10);
+			Assert.That(EngineerBotModule.RankScore(3000, 40, 0, 10), Is.GreaterThan(nearCheap));
+			Assert.That(EngineerBotModule.RankScore(3000, 40, 30, 10), Is.LessThan(EngineerBotModule.RankScore(3000, 40, 0, 10)));
+
+			// Weight 0 ignores exposure; with no exposure the order is value per distance.
+			Assert.That(EngineerBotModule.RankScore(1000, 20, 9, 0), Is.EqualTo(EngineerBotModule.RankScore(1000, 20, 0, 10)));
+			Assert.That(EngineerBotModule.RankScore(0, 5, 0, 10), Is.EqualTo(0));
+		}
+
+		[Test]
 		public void WaypointsFollowTheRouteAndStopBeforeTheApproach()
 		{
 			var route = Enumerable.Range(0, 21).Select(x => new CPos(x, 5)).ToList();
