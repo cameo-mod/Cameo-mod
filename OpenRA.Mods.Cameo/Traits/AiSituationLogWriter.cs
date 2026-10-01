@@ -269,6 +269,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "utility_turtlerush", situation.UtilityTurtleRush);
 			AiMatchLogWriter.AppendNumber(builder, "utility_techrushexpansion", situation.UtilityTechRushExpansion);
 			AiMatchLogWriter.AppendNumber(builder, "utility_steamrollerguerrilla", situation.UtilitySteamrollerGuerrilla);
+			// DI-1 (AI_ARCHITECTURE §12.16): the pacing Director's wave — record-only,
+			// pacing/aggression telemetry; no consumer yet (DI-2).
+			AiMatchLogWriter.AppendNumber(builder, "director_tension", situation.DirectorTension);
+			AiMatchLogWriter.AppendString(builder, "director_phase", situation.DirectorPhase.ToString().ToLowerInvariant());
 			AppendThreats(builder, situation.Threats);
 			builder.Append('}');
 

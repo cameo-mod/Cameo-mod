@@ -135,6 +135,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int UtilityTurtleRush = IBotUtilityAxes.Neutral;
 		internal int UtilityTechRushExpansion = IBotUtilityAxes.Neutral;
 		internal int UtilitySteamrollerGuerrilla = IBotUtilityAxes.Neutral;
+		// DI-1 (AI_ARCHITECTURE §12.16), record-only: the pacing Director's tension [0,100]
+		// and wave phase as of this snapshot. Nothing consumes them; DI-2 adds the
+		// attack-timing consumer (pacing and aggression only — DESIGN §19.2).
+		internal int DirectorTension;
+		internal DirectorPhase DirectorPhase;
 	}
 
 	internal sealed class MasterAiBotSavedState
@@ -347,6 +352,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"target off its rest. 0 pins every axis at rest (pure personality), 100 = the",
 			"documented term caps.")]
 		public readonly int UtilityInputWeightPercent = 100;
+		[Desc("DI-1 Director (AI_ARCHITECTURE §12.16): own army value that counts as massed —",
+			"tension only builds while there is an army to send.")]
+		public readonly int DirectorArmyMassValue = 2500;
+		[Desc("DI-1: tension added per snapshot while the own army is massed.")]
+		public readonly int DirectorTensionRisePerSnapshot = 3;
+		[Desc("DI-1: tension shed per snapshot while the own army is below DirectorArmyMassValue.")]
+		public readonly int DirectorTensionDecayPerSnapshot = 2;
+		[Desc("DI-1: while massed, one extra tension per this many ticks since the last",
+			"delivered attack (since game start when none was launched), added per snapshot.")]
+		public readonly int DirectorImpatienceTicksPerPoint = 1500;
+		[Desc("DI-1: cap on the impatience tension added in one snapshot.")]
+		public readonly int DirectorImpatienceMaxPerSnapshot = 10;
+		[Desc("DI-1: tension at which BuildUp promotes to Pressure — the attack is overdue.")]
+		public readonly int DirectorPressureThreshold = 60;
+		[Desc("DI-1: tension at which the wave crests into Climax — or a launch while already Pressure.")]
+		public readonly int DirectorClimaxThreshold = 85;
+		[Desc("DI-1: Pressure only relaxes back to BuildUp this far below",
+			"DirectorPressureThreshold — hysteresis so the phase cannot flutter on the boundary.")]
+		public readonly int DirectorHysteresis = 10;
+		[Desc("DI-1: tension the wave resets to when it breaks into Relief.")]
+		public readonly int DirectorReliefTension = 20;
+		[Desc("DI-1: tension at which Relief re-arms to BuildUp.")]
+		public readonly int DirectorReliefExitThreshold = 45;
+		[Desc("DI-1: ticks without a launched attack or a fresh kill delta before",
+			"Climax relaxes into Relief.")]
+		public readonly int DirectorReliefQuietTicks = 750;
+		[Desc("DI-1: own-loss value accrued since the previous snapshot that breaks",
+			"a Pressure or Climax wave straight into Relief.")]
+		public readonly int DirectorLossSpikeValue = 600;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -363,6 +397,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				throw new YamlException("UtilityAxisDecayPercent must be within [0,100].");
 			if (UtilityInputWeightPercent < 0 || UtilityInputWeightPercent > 100)
 				throw new YamlException("UtilityInputWeightPercent must be within [0,100].");
+			ValidateDirectorThresholds();
 		}
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
@@ -381,9 +416,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (kv.Value < 0 || kv.Value > 100)
 					throw new YamlException($"{name}[{kv.Key}] must be within [0,100].");
 		}
+		void ValidateDirectorThresholds()
+		{
+			if (DirectorPressureThreshold < 0 || DirectorPressureThreshold > 100 ||
+				DirectorClimaxThreshold < 0 || DirectorClimaxThreshold > 100 ||
+				DirectorReliefTension < 0 || DirectorReliefTension > 100 ||
+				DirectorReliefExitThreshold < 0 || DirectorReliefExitThreshold > 100)
+				throw new YamlException("Director tension thresholds must be within [0,100].");
+			if (DirectorPressureThreshold > DirectorClimaxThreshold)
+				throw new YamlException("DirectorPressureThreshold must not exceed DirectorClimaxThreshold.");
+			if (DirectorReliefTension > DirectorReliefExitThreshold)
+				throw new YamlException("DirectorReliefTension must not exceed DirectorReliefExitThreshold.");
+			if (DirectorHysteresis < 0 || DirectorHysteresis >= DirectorPressureThreshold)
+				throw new YamlException("DirectorHysteresis must be within [0, DirectorPressureThreshold).");
+			if (DirectorTensionRisePerSnapshot < 0 || DirectorTensionDecayPerSnapshot < 0 ||
+				DirectorImpatienceTicksPerPoint < 0 || DirectorImpatienceMaxPerSnapshot < 0 ||
+				DirectorReliefQuietTicks < 0 || DirectorArmyMassValue < 0)
+				throw new YamlException("Director rates, windows and the army-mass value must be non-negative.");
+			if (DirectorLossSpikeValue <= 0)
+				throw new YamlException("DirectorLossSpikeValue must be positive (0 would relieve every armed wave).");
+		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -423,6 +478,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// UT-1 (AI_DEEP_RESEARCH.md §5.1): the EMA-smoothed posture axes, refreshed
 		// every snapshot in Rebuild and published through IBotUtilityAxes.
 		readonly BotUtilityAxes utilityAxes = new();
+		// DI-1 (AI_ARCHITECTURE §12.16): the pacing wave — tension and phase, refreshed
+		// every snapshot in Rebuild and published through IBotDirector and the situation log.
+		readonly BotDirector director = new();
 
 		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
 		long prevLedgerCreatedCost = -1, prevEconDestroyed;
@@ -441,6 +499,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int IBotUtilityAxes.UtilityTurtleRush => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.TurtleRush;
 		int IBotUtilityAxes.UtilityTechRushExpansion => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.TechRushExpansion;
 		int IBotUtilityAxes.UtilitySteamrollerGuerrilla => IsTraitDisabled ? IBotUtilityAxes.Neutral : utilityAxes.SteamrollerGuerrilla;
+		// DI-1: the pacing wave for consumers; a disabled or not-yet-snapshotted master
+		// reads as a fresh wave — never a behaviour change.
+		int IBotDirector.DirectorTension => IsTraitDisabled ? 0 : director.Tension;
+		DirectorPhase IBotDirector.DirectorPhase => IsTraitDisabled ? DirectorPhase.BuildUp : director.Phase;
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
 			? Array.Empty<BotMission>()
 			: missions.Where(m => (!missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
@@ -987,6 +1049,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			prevAttacksLaunched = attacksLaunched;
 			if (firstAttackTick < 0 && attacksLaunched > 0)
 				firstAttackTick = tick;
+
+			// DI-1 (AI_ARCHITECTURE §12.16): fold the snapshot into the pacing wave.
+			// Fog-honest scalars only — the fresh loss/kill windows are the samples
+			// accrued since the previous snapshot (prevSnapshotTick still points at it).
+			director.Observe(tick, ownArmy, attacksDelta,
+				killSamples.Where(s => s.Tick > prevSnapshotTick).Sum(s => s.Delta),
+				lossSamples.Where(s => s.Tick > prevSnapshotTick).Sum(s => s.Delta), Info);
+
 			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
@@ -1076,6 +1146,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				UtilityTurtleRush = utilityAxes.TurtleRush,
 				UtilityTechRushExpansion = utilityAxes.TechRushExpansion,
 				UtilitySteamrollerGuerrilla = utilityAxes.SteamrollerGuerrilla
+				DirectorTension = director.Tension,
+				DirectorPhase = director.Phase
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

@@ -2324,3 +2324,44 @@ term dominates; the term units sit in `BotUtilityAxes.cs`.
   personality instances; K and L remain reserved for DAWN).
 - Rest points per personality live on `MasterAiBotModule` in ai.yaml (`Utility*Rest`
   dicts, keyed `rush`/`turtle`/...; missing → 50).
+### 12.16 DI-1 — the Director's tension wave, publish-only slice (NOVA, 2026-10-01; AI_DEEP_RESEARCH.md §7, DESIGN.md §19.2)
+
+The Director ruling lands as `BotDirector`: an L4D-style pacing wave over the bot's own
+tempo — **build-up → pressure → climax → relief** — computed once per situation snapshot
+from fog-honest scalars only (own army value, launch deltas, the loss/kill sample
+windows; nothing enumerates enemy actors). **Publish-only:** no consumer, no yaml flag —
+flag-off and flag-on are identical because there is no flag. The ruling stands: pacing
+and aggression telemetry only, never income, unit stats or vision.
+
+- **Tension [0,100].** While the own army is massed (`OwnArmyValue ≥ DirectorArmyMassValue`,
+  default 2500 — personality-agnostic, between `RushMaxEnemyArmyValue` and
+  `SteamrollerMinArmyValue`), each snapshot adds `DirectorTensionRisePerSnapshot` (3) plus
+  impatience: one point per `DirectorImpatienceTicksPerPoint` (1500) ticks since the last
+  delivered attack — since game start while none was ever launched — capped at
+  `DirectorImpatienceMaxPerSnapshot` (10) per snapshot so a never-attacking bot cannot
+  jump thresholds in one step. A thin army sheds `DirectorTensionDecayPerSnapshot` (2)
+  instead; impatience only feeds a massed army — there is nothing to be impatient *with*.
+- **Phases.** `BuildUp` promotes to `Pressure` at `DirectorPressureThreshold` (60);
+  `Pressure` crests into `Climax` at `DirectorClimaxThreshold` (85) or immediately on a
+  launch (`attacksDelta > 0` — an attack out of BuildUp is just early, the spec's crest
+  condition is Pressure-only). `Climax` relaxes into `Relief` once the post-attack kill
+  window flattens — no launches and no fresh kill-sample delta for
+  `DirectorReliefQuietTicks` (750, armed at Climax entry and refreshed by any fresh
+  attack/kill) — or immediately on a heavy own-loss spike
+  (`freshLossDelta ≥ DirectorLossSpikeValue`, 600 = `EmergencyLossThreshold`; the spike
+  also breaks `Pressure`, the other armed wave). `Relief` resets tension to
+  `DirectorReliefTension` (20) and re-arms to `BuildUp` at
+  `DirectorReliefExitThreshold` (45).
+- **Hysteresis everywhere a boundary could flutter:** `Pressure` relaxes only
+  `DirectorHysteresis` (10) below its entry point, and `Relief`'s exit sits above its
+  reset level — a tension value parked in a dead-band keeps its phase by history, which
+  the tests prove by driving the same readings through both directions.
+- **Published, always on:** `BotSituation.DirectorTension`/`.DirectorPhase`, the
+  `IBotDirector` seam on the master module (CA-side; a disabled or never-snapshotted
+  provider reads 0/`BuildUp`), and `own.director_tension` + `own.director_phase` in the
+  situation log. State is deliberately NOT in `MasterAiBotSavedState` — a save/load
+  restarts the wave at 0/`BuildUp`, which for record-only telemetry is the honest reset.
+- **DI-2 (deferred):** the consumer — most likely attack timing in the squad manager,
+  alongside `UseUtilityAxes` (pressure shortens, relief lengthens the launch delay) — is
+  left open. A Director change is itself an A/B candidate that must beat master
+  (DESIGN §19.2).
