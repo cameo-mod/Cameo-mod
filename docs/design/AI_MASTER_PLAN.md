@@ -85,7 +85,9 @@
    combined … then create a new increment which should be A/B tested thoroughly."* Every agent's open work is merged
    into one increment (`inc/<date>`), which lands on master after build + tests + audits + boot gate with each new
    behaviour behind its switch; the increment's A/B then runs ALL its switches ON against the previous master
-   (≥ 16 matches per arm, both factions, swapped spawns, arms in parallel, early stop once the verdict cannot flip).
+   (≥ 16 matches per arm, **MIRROR matches only** — `--factions td_gdi` and `--factions td_nod` as separate
+   shards, never the cross pairing: *"Why would you run GDI vs Nod if they are not balanced yet? Nod is going to win
+   every single time"* (maintainer, 2026-10-01) — swapped spawns, arms in parallel, early stop once the verdict cannot flip).
    Telemetry attributes inside the increment (`ownership`, `order_gate`, mission stories); a LOSING increment is
    bisected by switch groups, never re-tested PR by PR.
 7. **Difficulty (§4):** its strength knobs go on the §19.1 line for all ten tiers. The donor's own
