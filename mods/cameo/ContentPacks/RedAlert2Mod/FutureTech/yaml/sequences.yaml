@@ -937,10 +937,22 @@ futuretech_beehivedronecarrier:
 		Filename: ra2m_futuretech_icons|futuretech_beehivedronecarrier_icon.png
 
 futu_landcarr_drone:
-	Inherits: ra2hornet
 	Defaults:
+		Filename: ra2_hornet.shp
 		Scale: 0.5
-
+	idle:
+		Facings: 64
+	move:
+		Start: 64
+		Facings: 64
+	move-l:
+		Start: 128
+		Facings: 64
+	move-r:
+		Start: 192
+		Facings: 64
+	icon:
+		Filename: ra2horneticon.shp
 futuretech_oriontank:
 	Inherits: ^RA2CannonMuzzle
 	icon:

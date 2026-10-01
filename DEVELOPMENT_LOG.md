@@ -15686,3 +15686,22 @@ weaker of launch rate and first-attack timing with a +0.25 credit for remembered
 Tests: `PersonalityLeadsTest`.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+## 2026-10-01 — hard cross-pack reference materialization (resolved-verified)
+
+Fixed all 12 class-C hard edges from the soft-ref census (foreign `Inherits`/`ActorTypes`
+refs that break under selective pack loading), every fix verified **resolved-identical**
+via `utility.cmd cameo --resolved-sequences/--resolved-weapons/--resolved-rules` + `compare_resolved.py`.
+
+- 7 sequence nodes + 4 weapon nodes materialized: donor subtree inlined into the consumer,
+  the foreign `Inherits` dropped. `dummy_dock` (8-line invisible helper spawned by 4 foreign
+  airfields) promoted to core-mounted `rules/misc.yaml` — name kept, zero ref churn.
+- LESSON: materializing a donor whose own children carry `Inherits@x` template refs must NOT
+  use child-level merge (`merge_children`): consumer `-Key` removals target keys that only
+  exist *after* the donor's own inherits expand, so they silently fail and the resolved tree
+  grows keys (AAGunBoatFlak +82, ScrinRiftDamage +36 on the first attempt). The correct shape
+  is **document-order concatenation**: donor children verbatim, then consumer children
+  verbatim — OpenRA resolves `Inherits@`/`-Key:`/re-adds in order, replicating the original
+  two-hop cascade exactly. Verified: 12/12 targets, 0 key diffs.
+- yaml miniyaml round-trip drops comments — restore intent comments by hand after emitting.
+
+Boot-gate PASS (private SupportDir, menu marker, 0 exceptions). Branch: devin/dawn/pack-hard-refs.

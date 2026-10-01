@@ -1281,3 +1281,15 @@ jamming.field:
 		Range: 10000
 		ValidRelationships: Enemy, Neutral
 		Condition: jammed
+
+dummy_dock:
+	Interactable:
+	Reservable:
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		AllowInvalidPlacement: true
+	Exit@1:
+	RejectsOrders:
+	Targetable:
+
