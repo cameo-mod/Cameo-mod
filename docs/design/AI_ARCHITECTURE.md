@@ -2033,7 +2033,10 @@ CA-2 and CA-5 may start on the parts that do not need CA-1 (reading the existing
 Research round 2 ([`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9) adds phases that interleave
 with these: **CP** combat predictor (the single engage/commit/retreat authority; CA-2's commit
 rule and the 6c gate become its inputs), **ZG/IM** zone graph + influence layers (the region set
-and "where they usually are"), **UT** utility strategist (absorbs CA-3's blended squad manager),
+and "where they usually are" — ZG-a topology, ZG-b fog-honest territory/ownership and ZG-c
+zone-backed `RegionMemory`/`RegionRouter` behind `UseZoneTopology` have landed; the square grid
+stays the fallback whenever no enabled, built `TacticalMapBotModule` exists), **UT** utility
+strategist (absorbs CA-3's blended squad manager),
 **MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
 
 ### 12.11 What a spectator saw, measured (maintainer review of the #633 A/B, 2026-09-29)

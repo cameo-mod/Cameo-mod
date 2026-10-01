@@ -15375,3 +15375,48 @@ Two real bugs the boot gate caught that static checks missed: (1) nested `-K` re
 level / 4 spaces=1 level — 15 files mix space+tab prefixes and mis-parsed, producing phantom
 duplicates the fold then "merged" (e.g. `tscloud1`'s `idle`/`die` `Filename` keys). Parser fixed;
 full lesson writeup in LESSONS_LEARNED (2026-10-01 entry).
+
+## 2026-10-02 — NOVA: ZG-c zone-backed RegionMemory/RegionRouter (nova/zg-region-memory)
+
+Task ZG-c: spatial value memory and risk routing now index by the zone topology when one exists.
+Worktree `C:\tmp\nova-zg`, branch `nova/zg-region-memory` off master `6c1856215` (ZG-a topology +
+ZG-b fog-honest territory/ownership/doors merged).
+
+- `IBotZoneTopology.NearestRegionId` (new member): the module's existing private
+  gate-cell fallback promoted onto the interface — region id, else nearest zone within a
+  3-cell ring, else -1. This is the -1 policy: gate/barrier/unzoned cells fold INTO the
+  nearest zone so threat on a bridge lands in a region's memory; -1 (deep water, off-map)
+  means "no region" and is guarded at every consumer, never indexed with.
+- `RegionMemory` keeps its public shape (no call-site churn) and gains an optional zone
+  backing: `IndexOf`=NearestRegionId, `CenterOf`=zone centroid member cell (Centroid widened
+  to `IReadOnlyList<CPos>`), `CellCount`=Regions.Count, `NeighborsOf`=zone adjacency (grid
+  answers the old 4-connected set, same expansion order). New surface: `ZoneBacked`,
+  `Generation`, `NeighborsOf`. `SyncZoneGeneration` drops `byEnemy` + cached centres when the
+  adopted generation moves — honest policy: a re-cut re-shuffles every zone id, so stale
+  positional claims die rather than alias.
+- `RegionRouter`: zone branch expands `AdjacentRegionIds` with a 0 heuristic (Dijkstra at
+  zone counts); `-1` endpoints and disjoint zones now legitimately yield no route. Grid path
+  is byte-identical (same loop verbatim). Router stays pure — adjacency arrives as data.
+- Consumers re-keyed in `BotSituation`: `Rebuild` picks the zone backing when the player has
+  an enabled (`!IsTraitDisabled`) `TacticalMapBotModule` with `TopologyReady` and
+  `UseZoneTopology` (new yaml lever on `MasterAiBotModule`, default true) — grid otherwise,
+  so classic bots / disabled module / unbuilt topology are untouched. Guards added for the
+  -1 case at `RecordFailedSiege`, `FailedSiegeWeightPercentAt`, `RememberedThreatAtRegion`,
+  `BuildRegions`. `DeriveMissions`' near-base threat sums base zone + gate-adjacent zones
+  under zones (grid keeps its 3x3 ring); `IsNearRegion` is self-or-adjacent under zones.
+  Durable region-keyed state (`failedSieges`, `missionReservations`, `missionFailStreak`,
+  `dormantUntil` — mission ids embed `r<region>`) clears on a `(ZoneBacked, Generation)` move.
+- `ScoutBotModule`: `dangerByRegion`, `enemySpawnRegions`, `scoutTargets` drop on the same
+  index-space signal (watched in the scan loop and `RespondToAttack`); mpspawn resolution
+  filters -1. Iterate-0..CellCount picks and the danger/read paths are zone-safe as-is.
+- Accepted residual (documented, transient): CA-side `defendMissionExhaustedRegions` and
+  `heldDefendMission.RegionIndex` can alias for up to a defend-hold window after a re-cut —
+  self-corrects on the next mission publish; teaching Mods.CA about the index space wasn't
+  worth it. Sightings beyond every zone (naval units deep offshore, aircraft over water)
+  have no zone memory — zone topology is a ground-locomotor cut.
+- Tests: `ZoneRegionMemoryTest` (13): zone IndexOf/-1→nearest fold, centroid-is-member,
+  adjacency walk, threat detour, disjoint-zone null, -1 endpoint null, grid↔zone route
+  equivalence on an isomorphic 4x4 graph, grid neighbour order pin, generation reset +
+  centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
