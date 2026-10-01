@@ -76,6 +76,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"back forever. 0 disables.")]
 		public readonly int McvMaxSiteHandouts = 3;
 
+		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
+			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
+			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
+			"(EX-3) and field refineries (Yuri's slave miner, Japan's core refinery) keep going to fields.")]
+		public readonly bool BaseVehiclesAtBase = true;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -83,8 +89,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new ExpansionPlannerBotModule(init.Self, this); }
 	}
 
+	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
+
 	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
-		IBotMcvExpansionSiteProvider
+		IBotMcvExpansionSiteProvider, IBotPositionsUpdated
 	{
 		public readonly struct FieldScore
 		{
@@ -134,11 +142,39 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		(int Field, int Refineries) wanting = (-1, 0);
 		bool wantsRefinery;
 
+		// BEV: the base centre the base builder publishes (the parent BevManagerBotModule used the same signal), and the
+		// construction MCVs of every MCV module on this player (Info-level: fixed for the match, safe to cache).
+		CPos? baseCenter;
+		readonly HashSet<string> constructionMcvTypes;
+		readonly Dictionary<string, McvRole> mcvRoles = new();
+
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
 		{
 			world = self.World;
 			player = self.Owner;
+			constructionMcvTypes = self.Info.TraitInfos<McvExpansionManagerBotModuleInfo>()
+				.SelectMany(i => i.ConstructionMcvTypes).ToHashSet();
+		}
+
+		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { baseCenter = newLocation; }
+
+		void IBotPositionsUpdated.UpdatedDefenseCenter(CPos newLocation) { }
+
+		/// <summary>BEV's rule, free of world state so it can be tested.</summary>
+		public static McvRole ClassifyMcv(bool constructionMcv, bool deploysIntoRefinery) =>
+			constructionMcv ? McvRole.Expansion : deploysIntoRefinery ? McvRole.FieldRefinery : McvRole.BaseBuilding;
+
+		McvRole RoleOf(ActorInfo vehicle)
+		{
+			if (mcvRoles.TryGetValue(vehicle.Name, out var role))
+				return role;
+
+			var into = vehicle.TraitInfoOrDefault<TransformsInfo>()?.IntoActor;
+			var intoInfo = into != null && world.Map.Rules.Actors.TryGetValue(into, out var ai) ? ai : null;
+			role = ClassifyMcv(constructionMcvTypes.Contains(vehicle.Name), intoInfo?.HasTraitInfo<RefineryInfo>() ?? false);
+			mcvRoles[vehicle.Name] = role;
+			return role;
 		}
 
 		/// <summary>The best field of the last re-plan; null when there is none (EX-1 reads it).</summary>
@@ -238,7 +274,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
 		{
 			// A deploying yard relocation (no Mobile) keeps the MCV module's own choice.
-			if (IsTraitDisabled || !Info.DriveMcvSite || mcv == null || !mcv.Info.HasTraitInfo<MobileInfo>())
+			if (IsTraitDisabled || mcv == null || !mcv.Info.HasTraitInfo<MobileInfo>())
+				return null;
+
+			// BEV: a base-building vehicle deploys at home; the MCV module's deploy search takes the cells 2-20 around it.
+			if (Info.BaseVehiclesAtBase && baseCenter.HasValue && RoleOf(mcv.Info) == McvRole.BaseBuilding)
+			{
+				Log.Write("debug", $"AI ({player.ClientIndex}): BEV {mcv.Info.Name} {mcv.ActorID} deploys at the base {baseCenter.Value} (not a construction MCV, not a refinery) at tick {world.WorldTick}");
+				return baseCenter;
+			}
+
+			if (!Info.DriveMcvSite)
 				return null;
 
 			var tick = world.WorldTick;
