@@ -19,36 +19,55 @@ namespace OpenRA.Mods.Cameo.Test
 {
 	// EX-2 follow-up (AI_ARCHITECTURE.md 12.13): DriveRefineries means "every field in reach gets a
 	// refinery", but the placement fallback only sampled the resource cells farthest from the newest
-	// refinery — the far edge of the SAME home field, so refineries stacked there. With an expansion
-	// planner mounted the sample now prefers cells no own refinery covers yet (spread to new ground);
-	// with everything served it falls back to the old candidate set unchanged.
+	// refinery — the far edge of the SAME home field, so refineries stacked there. The filter is
+	// field-level: a field counts as served when an own refinery stands within the served radius of
+	// the field's resource centre, no matter how far a candidate cell sits from the refinery itself.
 	[TestFixture]
 	public class RefinerySpreadTest
 	{
+		// Stand-in for ResourceMapBotModule.FindClosestIndiceFromCPos().ResourceCellsCenter.
+		static CPos FieldCenter(CPos c) => c.Y < 20 ? new CPos(10, 10) : new CPos(40, 30);
+
 		[Test]
-		public void UnservedGroundIsPreferred()
+		public void UnservedFieldIsPreferred()
 		{
 			var homeField = new[] { new CPos(10, 10), new CPos(11, 10), new CPos(12, 10) };
 			var farField = new[] { new CPos(40, 30), new CPos(41, 30) };
 			var refineries = new List<CPos> { new(10, 12) };
 
 			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(
-				homeField.Concat(farField), refineries, 10).ToList();
+				homeField.Concat(farField), FieldCenter, refineries, 10).ToList();
 
 			Assert.That(picked, Is.EquivalentTo(farField),
-				"cells the home refinery already serves must not be sampled again");
+				"cells of the field the refinery already serves must not be sampled again");
+		}
+
+		[Test]
+		public void FarEdgeOfServedFieldStillCountsAsServed()
+		{
+			// The v1 bug shape: a candidate cell far from the refinery but on the SAME field's index
+			// centre must still be dropped — cell distance alone cannot see that.
+			var sameFieldFarEdge = new[] { new CPos(19, 15) }; // 11+ cells from the refinery, centre (10,10)
+			var otherField = new[] { new CPos(40, 30) };
+			var refineries = new List<CPos> { new(10, 12) };
+
+			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(
+				sameFieldFarEdge.Concat(otherField), FieldCenter, refineries, 10).ToList();
+
+			Assert.That(picked, Is.EquivalentTo(otherField),
+				"(19,15) is far from the refinery but on its field — only the second field may remain");
 		}
 
 		[Test]
 		public void EverythingServedKeepsAllCandidates()
 		{
 			var cells = new[] { new CPos(10, 10), new CPos(12, 10) };
-			var refineries = new List<CPos> { new(10, 12), new(12, 12) };
+			var refineries = new List<CPos> { new(10, 11) };
 
-			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(cells, refineries, 10).ToList();
+			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(cells, FieldCenter, refineries, 10).ToList();
 
 			Assert.That(picked, Is.EquivalentTo(cells),
-				"with every candidate served the caller's ordering must see the full set");
+				"with every candidate's field served the caller's ordering must see the full set");
 		}
 
 		[Test]
@@ -56,21 +75,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var cells = new[] { new CPos(10, 10), new CPos(40, 30) };
 
-			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(cells, new List<CPos>(), 10).ToList();
+			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(cells, FieldCenter, new List<CPos>(), 10).ToList();
 
 			Assert.That(picked, Is.EquivalentTo(cells), "first refinery placement is unchanged");
-		}
-
-		[Test]
-		public void EdgeCellJustOutsideRadiusQualifies()
-		{
-			var cells = new[] { new CPos(10, 10), new CPos(10, 21) };
-			var refineries = new List<CPos> { new(10, 10) };
-
-			var picked = BaseBuilderBotModuleCA.PreferUnservedResourceCells(cells, refineries, 10).ToList();
-
-			Assert.That(picked, Is.EqualTo(new[] { new CPos(10, 21) }),
-				"11 cells out is beyond the 10-cell served radius; the same-field cell is not");
 		}
 	}
 

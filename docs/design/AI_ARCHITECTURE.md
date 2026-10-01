@@ -2259,12 +2259,18 @@ reach; the fallback then sampled the resource cells *farthest from the newest ow
 same conyard annulus* — the far edge of the home field — so repeated refineries stacked on one field
 (seen live: three on the home field). Two repairs, both keyed on a mounted `IBotExpansionTargetProvider`
 (`BaseBuilderBotModuleCA.HasExpansionGuidance`, so classic — which shares the base builder — is
-unchanged): (a) that fallback now first keeps the candidate cells farther than
-`RefineryUnservedRadiusCells` (10) from every own refinery (`PreferUnservedResourceCells`, own-actor
-cells only, fog-honest), spreading each new refinery onto unserved ground; the far-edge ordering still
-ranks the survivors, and an all-served annulus keeps the old candidate set. (b) `RequestLocation`
+unchanged): (a) that fallback now first keeps only cells of fields no own refinery serves — a field is
+served when a refinery stands within `RefineryUnservedRadiusCells` (10) of the index's resource centre
+(`PreferUnservedResourceCells`, own-actor cells only, fog-honest) — spreading each new refinery onto a
+new field; an all-served annulus keeps the old candidate set. A pure cell-to-refinery distance filter
+was tried first and is wrong: a big field's far edge is still the same field. (b) `RequestLocation`
 counts refineries already *requested* for an index toward `MaxRefineryPerIndice`, not only built ones,
 so queued MCV requests can no longer stack on one index before `PlayerRefineryCount` catches up.
+(c) The claim placement itself searched an annulus around the BASE centre bounded by
+`MinBaseRadius`/`MaxBaseRadius` — a crawled-to field beyond `baseCenter + MaxBaseRadius + claimRadius`
+had zero candidate cells, so the claim silently failed and the refinery fell back to home (seen live:
+crawl reached the field, no refinery followed). The claim annulus now centres on the field with radius
+`ExpansionTargetClaimRadius`, sorted toward the base so the refinery takes the home-facing edge.
 
 **Greedy expansion (2026-10-01, same section family).** `DriveMcvRequests` lets the planner ask for a
 construction MCV itself once per re-plan — while a free field at `McvMinHops` or farther exists, cash

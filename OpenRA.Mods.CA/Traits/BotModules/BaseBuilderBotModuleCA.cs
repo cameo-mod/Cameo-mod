@@ -119,9 +119,9 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int MaxResourceCellsToCheck = 3;
 
 		[Desc("Cameo (AI_ARCHITECTURE §12.13, EX-2): while an expansion target provider is mounted, refinery placement",
-			"samples resource cells no own refinery serves yet (farther than this many cells from every own refinery),",
-			"so refineries spread over new ground instead of stacking on the same home field. Classic mounts no provider",
-			"and keeps the old farthest-from-refinery ordering.")]
+			"samples only resource cells of fields no own refinery serves (no refinery within this many cells of the",
+			"field's resource centre), so refineries spread over new fields instead of stacking on the same home field.",
+			"Classic mounts no provider and keeps the old farthest-from-refinery ordering.")]
 		public readonly int RefineryUnservedRadiusCells = 10;
 
 		[Desc("Delay (in ticks) until rechecking for new BaseProviders.")]
@@ -331,18 +331,25 @@ namespace OpenRA.Mods.CA.Traits
 		public bool HasExpansionGuidance => expansionTargetProviders is { Length: > 0 };
 
 		/// <summary>
-		/// §12.13 EX-2: keep the resource cells farther than <paramref name="servedRadiusCells"/> from every own
-		/// refinery — the ground we do not harvest yet. Own-actor cells only, so fog-honest. Falls back to the full
-		/// candidate list when everything in reach is already served, so the caller keeps today's ordering then.
+		/// §12.13 EX-2: keep only the resource cells whose field no own refinery serves — a field counts as served
+		/// when a refinery stands within <paramref name="servedRadiusCells"/> of the field's resource centre
+		/// (<paramref name="fieldCenterOf"/> maps a cell to its index centre, e.g. ResourceMapBotModule's).
+		/// Cell-to-refinery distance alone is wrong: a big field's far edge is still the same field. Own-actor
+		/// cells only, so fog-honest. Falls back to the full list when every field in reach is already served.
 		/// </summary>
-		public static IEnumerable<CPos> PreferUnservedResourceCells(IEnumerable<CPos> candidates, IReadOnlyCollection<CPos> ownRefineryCells, int servedRadiusCells)
+		public static IEnumerable<CPos> PreferUnservedResourceCells(IEnumerable<CPos> candidates,
+			Func<CPos, CPos> fieldCenterOf, IReadOnlyCollection<CPos> ownRefineryCells, int servedRadiusCells)
 		{
 			var list = candidates as IReadOnlyList<CPos> ?? candidates.ToList();
 			if (ownRefineryCells.Count == 0)
 				return list;
 
 			var radiusSquared = (long)servedRadiusCells * servedRadiusCells;
-			var unserved = list.Where(c => ownRefineryCells.All(r => (c - r).LengthSquared > radiusSquared)).ToList();
+			var unserved = list.Where(c =>
+			{
+				var center = fieldCenterOf(c);
+				return ownRefineryCells.All(r => (r - center).LengthSquared > radiusSquared);
+			}).ToList();
 			return unserved.Count > 0 ? unserved : list;
 		}
 

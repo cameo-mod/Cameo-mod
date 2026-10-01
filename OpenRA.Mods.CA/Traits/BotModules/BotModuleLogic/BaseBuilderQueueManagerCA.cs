@@ -742,8 +742,12 @@ namespace OpenRA.Mods.CA.Traits
 					if (claimer != null)
 					{
 						var field = claimer.ExpansionTarget.Value;
-						var claim = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, field,
-							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius, claimer.ExpansionTargetClaimRadius);
+
+						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
+						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
+						// cells, the claim silently fails, and the fallback drops the refinery back home.
+						var claim = findPos(actorType, distanceToBaseIsImportant, producer, field, baseCenter,
+							0, claimer.ExpansionTargetClaimRadius);
 						if (claim.Location != null)
 						{
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
@@ -782,18 +786,21 @@ namespace OpenRA.Mods.CA.Traits
 						}
 						else
 						{
-							// Cameo (§12.13, EX-2): an expansion planner wants every field served — sample cells no own
-							// refinery covers yet so refineries spread to new ground instead of stacking on the far
-							// edge of the home field. No provider (classic): today's ordering, unchanged.
+							// Cameo (§12.13, EX-2): an expansion planner wants every field served — sample only cells
+							// of fields no own refinery covers yet, so refineries spread to new fields instead of
+							// stacking on the far edge of the home field. No provider or no resource map (classic):
+							// today's ordering, unchanged.
 							var candidates = nearbyResources;
-							if (baseBuilder.HasExpansionGuidance)
+							if (baseBuilder.HasExpansionGuidance && baseBuilder.ResourceMapModule != null)
 							{
 								var ownRefineryCells = baseBuilder.RefineryBuildings.Actors
 									.Where(a => !a.IsDead)
 									.Select(a => a.Location)
 									.ToList();
 								candidates = BaseBuilderBotModuleCA.PreferUnservedResourceCells(
-									nearbyResources, ownRefineryCells, baseBuilder.Info.RefineryUnservedRadiusCells);
+									nearbyResources,
+									c => baseBuilder.ResourceMapModule.FindClosestIndiceFromCPos(c).ResourceCellsCenter,
+									ownRefineryCells, baseBuilder.Info.RefineryUnservedRadiusCells);
 							}
 
 							resourcesShouldCheck = candidates.OrderByDescending(c => (c - closestRefinery.Location).LengthSquared)

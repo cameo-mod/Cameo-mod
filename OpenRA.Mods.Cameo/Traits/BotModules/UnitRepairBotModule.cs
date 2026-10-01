@@ -100,9 +100,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var prune = new List<Actor>();
 			foreach (var a in heldUnits)
 			{
+				// A held unit can be destroyed between scans; TraitOrDefault on it throws, so the
+				// alive/in-world check must come before any trait access.
+				if (a.IsDead || !a.IsInWorld || a.Owner != bot.Player)
+				{
+					prune.Add(a);
+					continue;
+				}
+
 				var health = a.TraitOrDefault<IHealth>();
-				if (a.IsDead || !a.IsInWorld || a.Owner != bot.Player ||
-					health == null || health.DamageState < Info.MinimumDamageState || health.DamageState >= DamageState.Dead ||
+				if (health == null || health.DamageState < Info.MinimumDamageState || health.DamageState >= DamageState.Dead ||
 					leases == null || !leases.TryClaim(a, LeaseOwner, BotLeasePurpose.Repair, LeaseHeartbeatTicks()))
 					prune.Add(a);
 			}

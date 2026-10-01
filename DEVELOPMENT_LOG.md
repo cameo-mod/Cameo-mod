@@ -1,3 +1,21 @@
+# 2026-10-01 — NOVA: refinery fix round 2 (live smoke evidence) + CN-2 crash
+
+- Verification smoke on the spread fix caught two more defects:
+  - `UnitRepairBotModule.BotTick` (CN-2) crashed the match: `TraitOrDefault`
+    on a destroyed held unit at scan time. Guard order fixed — `IsDead`/
+    `IsInWorld`/`Owner` before any trait access.
+  - The EX-2 claimer searched its placement annulus around the BASE centre
+    (MinBaseRadius..MaxBaseRadius) with a claim-radius filter — a crawled-to
+    field beyond `baseCenter + MaxBaseRadius + claimRadius` had zero candidate
+    cells, so the claim silently failed and the refinery fell back to home.
+    This is the user's "crawl there, then no refinery" report. The claim
+    annulus now centres on the field (0..`ExpansionTargetClaimRadius`), sorted
+    toward base for the home-facing edge.
+  - `PreferUnservedResourceCells` upgraded to field-level semantics: a field is
+    served iff an own refinery is within `RefineryUnservedRadiusCells` of the
+    index's resource centre — pure cell distance let the same field's far edge
+    through (the residual 3-stack).
+
 # 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
 
 - Smoke batch showed the armed `hard` bot stacking three refineries on the home
