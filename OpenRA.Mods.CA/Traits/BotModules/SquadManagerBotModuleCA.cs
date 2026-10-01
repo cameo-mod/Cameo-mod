@@ -2204,6 +2204,12 @@ namespace OpenRA.Mods.CA.Traits
 			return info.MinimumAttackForceDelay * UtilityAttackDelayPercent(axis) / 100;
 		}
 
+		/// <summary>PL-2 (§12.14): while the guerrilla lead trails, the join chance rises toward 100,
+		/// linear in the deficit (lean is (0,1] — the lead's multiplier). A configured 0 stays 0:
+		/// personalities that never form guerrilla squads are not revived by the lean.</summary>
+		public static int EffectiveJoinGuerrilla(int basePct, double lean) =>
+			basePct <= 0 ? 0 : basePct + (int)Math.Round((1 - Math.Clamp(lean, 0.0, 1.0)) * (100 - basePct));
+
 		// CP (AI_DEEP_RESEARCH.md §2.3): the square-law ratio of this squad against the enemies it can see that can fight.
 		internal double PredictedRatio(SquadCA squad, IEnumerable<Actor> enemies)
 		{
@@ -2238,7 +2244,12 @@ namespace OpenRA.Mods.CA.Traits
 			// JoinGuerrilla gates creation too: 0 means this personality never forms
 			// guerrilla squads, not "the first unit always joins". The size cap is
 			// evaluated per actor — a single pass may add a whole production wave.
-			var guerrillaRoll = World.LocalRandom.Next(100) < Info.JoinGuerrilla;
+			// PL-2 (§12.14): a guerrilla personality trailing its map-control lead fills
+			// raider squads faster — raiders crossing the map ARE incidental scouts, they
+			// feed the same regions_fresh the lead measures. lean >= 1 keeps the roll exact.
+			var joinGuerrilla = EffectiveJoinGuerrilla(Info.JoinGuerrilla,
+				BotPersonalityLeads.Lean(leadProviders, "guerrilla"));
+			var guerrillaRoll = joinGuerrilla > 0 && World.LocalRandom.Next(100) < joinGuerrilla;
 
 			foreach (var a in newUnits)
 			{

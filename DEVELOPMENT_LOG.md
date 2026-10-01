@@ -35,11 +35,18 @@
 - No new switch group: the consumer inherits `G_personality_leads` /
   `UsePersonalityLeads` — the group now carries three consumers (cash floors,
   attack delay, scout cap), all under the same §12.14 contract.
-- Tests: `TrailingLeadRaisesTheScoutCap` (cap growth linear in deficit,
-  at-target and zero-extra exact) + `TheGuerrillaLeadReachesTheConsumerSeam`
-  (guerrilla asks get the guerrilla lead; other personalities and flag-off
-  lean nothing). 593/593 green.
->>>>>>> 154c0a582 (ai(pl2): guerrilla lead consumer — trailing map control raises the scout cap)
+- Second leg, same deficit signal: `SquadManagerBotModuleCA`'s `JoinGuerrilla`
+  roll rises toward 100 while the lead trails (`EffectiveJoinGuerrilla`) —
+  raiders crossing the map are incidental scouts feeding `regions_fresh`.
+  A configured 0 stays 0: the lean never revives guerrilla squads for a
+  personality that has none. This leans the FILL; UT-2's axis keeps the
+  squad CAP — different knobs, no double-count.
+- No new switch group: the consumer inherits `G_personality_leads` /
+  `UsePersonalityLeads` — the group now carries four consumers (cash floors,
+  attack delay, scout cap, join chance), all under the same §12.14 contract.
+- Tests: `TrailingLeadRaisesTheScoutCap` + `TheGuerrillaLeadReachesTheConsumerSeam`
+  + `TrailingLeadRaisesTheJoinChanceTowardFull` (linear-to-100, at-target and
+  JoinGuerrilla-0 exact). 592/592 green.
 
 # 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
 

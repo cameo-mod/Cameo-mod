@@ -10,6 +10,7 @@
 #endregion
 
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -77,6 +78,22 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(1.0), "a different personality asks and leans nothing");
 			Assert.That(MasterAiBotModule.PersonalityLeadLean(false, false, situation, "guerrilla", 50),
 				Is.EqualTo(1.0), "flag off: bit-identical no-lean");
+		}
+
+		// PL-2 squad leg: while the lead trails, the join chance rises toward 100 —
+		// more raiders crossing the map are incidental scouts feeding regions_fresh.
+		// A configured 0 is a hard off-switch the lean must not revive.
+		[Test]
+		public void TrailingLeadRaisesTheJoinChanceTowardFull()
+		{
+			Assert.That(SquadManagerBotModuleCA.EffectiveJoinGuerrilla(50, 1.0), Is.EqualTo(50),
+				"at target: the configured roll, untouched");
+			Assert.That(SquadManagerBotModuleCA.EffectiveJoinGuerrilla(50, 0.0), Is.EqualTo(100),
+				"full deficit: every new raider joins");
+			Assert.That(SquadManagerBotModuleCA.EffectiveJoinGuerrilla(50, 0.5), Is.EqualTo(75),
+				"half-deficit at 50% max-lean: halfway to full");
+			Assert.That(SquadManagerBotModuleCA.EffectiveJoinGuerrilla(0, 0.0), Is.EqualTo(0),
+				"JoinGuerrilla 0 means never — the lean cannot create guerrilla squads from nothing");
 		}
 	}
 }
