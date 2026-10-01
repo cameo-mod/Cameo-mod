@@ -73,6 +73,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Above 100 the own side is predicted to win. No decision reads these yet.
 		internal int CombatRatioPct, CombatRatioDefendedPct;
 
+		// ZG-b (zone territory/ownership): the fog-memory tables this snapshot's profiles were built
+		// from. Live handle, not a copy — but the tables only change inside MasterAiBotModule.Rebuild
+		// (Observe runs there), so a read between snapshots sees exactly what the last snapshot saw.
+		// Null before the first snapshot; stays empty when UseFoggedObservation is off, which is the
+		// honest answer there ("we have seen nothing"), not an error.
+		internal BotFogMemory FogMemory;
+
+		/// <summary>
+		/// This bot's remembered actors of one enemy — BELIEF under fog, possibly stale, empty when
+		/// nothing of theirs was ever seen. The fog-honest replacement for enumerating their actors
+		/// live (the donor's omniscient `world.Actors` scans).
+		/// </summary>
+		internal IReadOnlyCollection<ObservedActor> Remembered(OpenRA.Player enemy) =>
+			FogMemory == null ? [] : FogMemory.Remembered(enemy);
+
 		// §12.14 personality-lead telemetry (record-only): Steamroller's out-produce side is the
 		// arsenal ledger's created-cost delta per game minute; Rush's pressure side is the
 		// cumulative offensive-squad launches, their per-minute rate and first launch tick, plus
@@ -812,6 +827,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Mission = Missions.FirstOrDefault(),
 				MissionAssignment = missionAssignment,
 				Regions = regions,
+				FogMemory = fogMemory,
 				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
 				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
 				OwnArmyValue = ownArmy,
