@@ -2035,7 +2035,13 @@ with these: **CP** combat predictor (the single engage/commit/retreat authority;
 rule and the 6c gate become its inputs), **ZG/IM** zone graph + influence layers (the region set
 and "where they usually are" — ZG-a topology, ZG-b fog-honest territory/ownership and ZG-c
 zone-backed `RegionMemory`/`RegionRouter` behind `UseZoneTopology` have landed; the square grid
-stays the fallback whenever no enabled, built `TacticalMapBotModule` exists), **UT** utility
+stays the fallback whenever no enabled, built `TacticalMapBotModule` exists; **IM-1** then laid
+the layers on that index space — `BotInfluenceLayers` publishes `threat_ground`, `threat_air`,
+`interest`, `own_strength` and `staleness` per region on the master snapshot behind
+`UseInfluenceLayers`, remembered threat decaying toward a per-zone EMA as sightings go stale —
+the spec's "where they usually are". `ScoutBotModule` is the first consumer; the siege stand-off
+edge (CA-2), air-threat routing (CA-5), raid/guerrilla interest÷threat (§12.9) and expansion
+safety (EX) stay with their owners), **UT** utility
 strategist (absorbs CA-3's blended squad manager),
 **MI** budgeted micro (with CA-5), **OM** opponent model and **LG** league harness (with CA-1b).
 
