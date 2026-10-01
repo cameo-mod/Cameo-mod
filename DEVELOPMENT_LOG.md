@@ -15081,3 +15081,14 @@ Also: fbal-cc classic-vs-classic probe stopped per maintainer order
 (rebalance later); 6 records banked before kill: Nod-classic beat Gdi-classic
 on both cross orientations (2-0, thin n) and GDI-mirror spawn1 won all 4 —
 kept as provenance, not a balance claim.
+
+## 2026-10-01 — ab_summary: watchdog readout for ownership + order_gate (Devin/EMBER)
+
+Branch `devin/ember/absum-order-gate` @ `bea5573a2`. Per the §19.6 order-gate
+notice (#699), `ab_summary.py` now sums LC5 `ownership` and §19.6 `order_gate`
+counters per bot type across the corpus and prints a `watchdogs` line per bot
+beside the win table — so an arm's conflicts/double_owner read next to its
+W/L. `by_type` detail stays in the records. Fields absent (pre-#695/#699 or
+classic records) print nothing. Two tests pin the contract (summation + the
+silent-absent case). Real-run check on the in-flight #681 ctrl arm: block
+correctly silent on pre-#699 records.

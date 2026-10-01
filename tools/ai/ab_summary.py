@@ -100,6 +100,10 @@ def main(argv: list[str]) -> int:
     # position. Per-bot "wins by side" stays above; this pools every bot so a
     # side bias shows even when each bot's row is thin.
     side = collections.defaultdict(lambda: {"won": 0, "lost": 0})
+    # Watchdog counters (LC5 `ownership`, §19.6 `order_gate`): summed per bot
+    # type across the corpus. Absent fields (pre-#695/#699 records, classic)
+    # contribute nothing, so the block prints only what the data carries.
+    health = collections.defaultdict(lambda: {"own": collections.Counter(), "gate": collections.Counter()})
     for uid, recs in games.items():
         if len(recs) != 2:
             continue
@@ -121,6 +125,16 @@ def main(argv: list[str]) -> int:
                 s["lost"] += 1
                 side[home]["lost"] += 1
             s["ticks"].append(r.get("duration_ticks") or 0)
+            own = r.get("ownership")
+            if isinstance(own, dict):
+                for k, v in own.items():
+                    if k != "by_type" and isinstance(v, int):
+                        health[bot]["own"][k] += v
+            gate = r.get("order_gate")
+            if isinstance(gate, dict):
+                for k, v in gate.items():
+                    if isinstance(v, int):
+                        health[bot]["gate"][k] += v
 
     print(f"{len(games)} match(es)")
     print("| bot type | won | lost | draw | win rate | 95% interval | wins by side | mean length (ticks) |")
@@ -138,6 +152,15 @@ def main(argv: list[str]) -> int:
     if side and decided:
         print(f"spawn split (pooled, {decided} decided): " +
               " | ".join(f"{k}: {v['won']}W-{v['lost']}L" for k, v in sorted(side.items())))
+    for bot, h in sorted(health.items()):
+        if not h["own"] and not h["gate"]:
+            continue
+        parts = []
+        if h["own"]:
+            parts.append("ownership[" + " ".join(f"{k}={v}" for k, v in sorted(h["own"].items())) + "]")
+        if h["gate"]:
+            parts.append("order_gate[" + " ".join(f"{k}={v}" for k, v in sorted(h["gate"].items())) + "]")
+        print(f"watchdogs `{bot}`: " + " ".join(parts))
     mixed = False
     for f, arms in arm_fingerprints(paths):
         fps = sorted(k for k in arms if k) or [None]
