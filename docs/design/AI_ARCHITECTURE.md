@@ -1974,6 +1974,17 @@ false — each is its own isolated A/B variable.
 
 Donor to evaluate first: `FransRiskModel` + `FransGroundDefendForcePreservationGuard`.
 
+*Guard evaluation (2026-10-01, DAWN):* `FransGroundDefendForcePreservationGuard` (shipped in the
+V1.29.48 revendor) gates a defend bid: commit ≥ trigger AND reserve below floor → shrink the package
+to a reserve target, waived when the response is an emergency (utility ≥ 0 or sub-`LongEta` travel).
+The genericbot equivalent lands at the two full-pool draft sites in `SquadManagerBotModuleCA`:
+`ProtectOwn` (attack ping) and `PrepositionDefenceTick` (predicted threat / escort request), both of
+which committed 100% of the idle pool. `UseDefendPreservation` keeps
+`max(MinReserveUnits, pool × ReservePercent/100)` back once the pool reaches `TriggerUnits`; the
+donor's emergency maps to "attacker / rally inside `MaxBaseRadius` of the base centre". Behind
+`O_ca2_defend_reserve`, bit-identical off. `FransRiskModel` remains open (route-risk scoring is
+ZG/IM-adjacent, not a defend-side gap).
+
 ### 12.7 Formation movement (phase CA-4)
 
 Engine orders have no formation, so the bot moves a squad **in steps along its route** (orders
