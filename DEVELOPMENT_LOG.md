@@ -26,6 +26,32 @@
     index's resource centre — pure cell distance let the same field's far edge
     through (the residual 3-stack).
 
+# 2026-10-01 — DAWN: FB2 demand-capturers — safe targets justify building a specialist (switch T)
+
+- The capture pipeline only enumerated targets while a live capturer existed:
+  zero engineers meant zero demand forever — the first specialist appeared only
+  by unit-mix luck. Frans SpecOps solves this with `DemandTargetsPerCapturer` /
+  `MaximumDemandCapturers`; this is that port on the merged engineer owner.
+- `UseDemandCapturers` (default **false**, armed by `T_fb2_demand_capturers`):
+  each capture evaluation counts safe capturable targets across EVERY
+  capturable-relationship owner — not the assign path's one random owner, since
+  demand is a production question and needs the whole opportunity set
+  deterministically. "Safe" reuses the assign path's own gates (not full, not
+  dormant, not escort-blocked); route and guard checks still gate the dispatch.
+  While `liveCapturers < min(MaximumDemandCapturers, safe / DemandTargetsPerCapturer)`
+  one more buildable capturer type is requested via `IBotRequestUnitProduction`
+  — the `ScoutBotModule.RequestScout` contract verbatim (ordinal order, skip
+  already-queued, skip queues this faction cannot build).
+- The live-capturer count deliberately includes assigned and riding engineers —
+  the own-units scan now runs before the `Available` lease filter instead of
+  inside it, so demand sees the true roster, not just idle ones.
+- §19.5 omniscient-owner exemption: the scan uses the same convention the
+  assign path already runs (`CheckCaptureTargetsForVisibility` still applies
+  when set). Manifest 13 -> 14 for the one new `world.Actors` enumeration.
+- Tests: `DemandScalesWithSafeTargetsAndCapsAtTheMaximum` (cap is a ceiling not
+  a target; zero safe targets always means zero demand) +
+  `DemandIsDefensiveAgainstBadConfigAndNegativeCounts`. 591/591 green.
+
 # 2026-10-01 — NOVA: refinery spread fix + greedy MCV driver (smoke finding)
 
 - Smoke batch showed the armed `hard` bot stacking three refineries on the home

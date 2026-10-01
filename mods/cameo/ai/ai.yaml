@@ -3640,6 +3640,8 @@ Player:
 		CaptureTargetTries: 3
 		CaptureFailuresBeforeDormant: 2
 		MaxEngineersPerTarget: 1
+		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
+		UseDemandCapturers: false
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75

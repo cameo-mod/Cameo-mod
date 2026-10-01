@@ -102,5 +102,23 @@ namespace OpenRA.Mods.Cameo.Test
 			// A single stop is a run of one.
 			Assert.That(EngineerBotModule.GreedyRoute(new List<CPos> { new(9, 9) }, 0, 5), Is.EqualTo(new[] { 0 }));
 		}
+
+		// FB2 (switch T): safe capturable targets justify a specialist even with none alive;
+		// the cap is a ceiling, not a target — zero safe targets always means zero demand.
+		[Test]
+		public void DemandScalesWithSafeTargetsAndCapsAtTheMaximum()
+		{
+			Assert.That(EngineerBotModule.DemandCapturersDesired(0, 3, 2), Is.EqualTo(0));
+			Assert.That(EngineerBotModule.DemandCapturersDesired(1, 3, 2), Is.EqualTo(0));
+			Assert.That(EngineerBotModule.DemandCapturersDesired(2, 3, 2), Is.EqualTo(1));
+			Assert.That(EngineerBotModule.DemandCapturersDesired(5, 3, 2), Is.EqualTo(2));
+			Assert.That(EngineerBotModule.DemandCapturersDesired(100, 3, 2), Is.EqualTo(3));
+		}
+
+		[Test]
+		public void DemandIsDefensiveAgainstBadConfigAndNegativeCounts()
+		{
+			Assert.That(EngineerBotModule.DemandCapturersDesired(9, -2, 0), Is.EqualTo(0));
+		}
 	}
 }
