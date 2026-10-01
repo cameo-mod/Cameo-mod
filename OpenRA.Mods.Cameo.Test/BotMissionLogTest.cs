@@ -9,6 +9,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
@@ -207,6 +209,46 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// No owner in the id: a derrick that changes hands is still the same mission (a smoke match split one in two).
 			Assert.That(EngineerBotModule.CaptureMissionId("oilb", 526), Is.EqualTo("capture:oilb:526"));
+		}
+
+		[Test]
+		public void ExposureCountsRouteCellsUnderFireButNotTheFinalApproach()
+		{
+			var target = new CPos(50, 10);
+			var route = new List<(CPos, int)>
+			{
+				(new CPos(10, 10), 0), (new CPos(20, 10), 900), (new CPos(30, 10), 1200), (new CPos(40, 10), 0),
+				(new CPos(46, 10), 700), (new CPos(49, 10), 5000),
+			};
+
+			// (46,10) is 4 cells out and (49,10) 1 cell out: both inside a 6-cell approach, so only 2 cells count.
+			Assert.That(EngineerBotModule.ExposedCells(route, target, 6), Is.EqualTo(2));
+			Assert.That(EngineerBotModule.ExposedCells(route, target, 0), Is.EqualTo(4), "no approach excluded");
+		}
+
+		[Test]
+		public void WaypointsFollowTheRouteAndStopBeforeTheApproach()
+		{
+			var route = Enumerable.Range(0, 21).Select(x => new CPos(x, 5)).ToList();
+			var target = new CPos(21, 5);
+			Assert.That(EngineerBotModule.Waypoints(route, 5, 6, target),
+				Is.EqualTo(new[] { new CPos(5, 5), new CPos(10, 5) }), "(15,5) is 6 cells out: inside the approach");
+			Assert.That(EngineerBotModule.Waypoints(route.Take(4).ToList(), 5, 6, target), Is.Empty, "short route: capture order alone");
+		}
+
+		[Test]
+		public void AFailedAttemptRecordsWhereTheEngineerFell()
+		{
+			var record = new BotMissionRecord
+			{
+				MissionId = "capture:oilb:1067", Attempt = 3, State = BotMissionAttemptState.Failed, Reason = BotMissionReasons.LostUnits,
+				Executor = "Engineers", TargetCell = new CPos(60, 8), UnitCell = new CPos(41, 22), Tick = 14720
+			};
+
+			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			using var doc = JsonDocument.Parse(line);
+			Assert.That(doc.RootElement.GetProperty("target_cell").GetString(), Is.EqualTo("60,8"));
+			Assert.That(doc.RootElement.GetProperty("unit_cell").GetString(), Is.EqualTo("41,22"));
 		}
 	}
 }

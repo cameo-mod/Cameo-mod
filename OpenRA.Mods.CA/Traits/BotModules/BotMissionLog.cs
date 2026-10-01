@@ -75,6 +75,9 @@ namespace OpenRA.Mods.CA.Traits
 		public string MissionType;
 		public int? RegionIndex;
 		public CPos? TargetCell;
+
+		/// <summary>Where the executing unit was when the record was written (a lost unit: where it fell).</summary>
+		public CPos? UnitCell;
 		public int? Units;
 		public int? Value;
 		public int Tick;

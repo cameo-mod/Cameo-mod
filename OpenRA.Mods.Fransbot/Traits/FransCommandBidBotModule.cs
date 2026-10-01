@@ -941,15 +941,16 @@ namespace OpenRA.Mods.Common.Traits
 					// auction closing after its committed attempt released is no new attempt.
 					if (auction.Bids.Count > 0 || world.WorldTick - auction.OpenedWorldTick >= Info.BidWindowTicks)
 					{
-						var deniedAttempt = NextMissionAttempt(pair.Key);
+						// MC1 as amended (#691, fransotto): a board that closes unexecuted is a mission-level DENIED event —
+						// no attempt ever existed, so it consumes no attempt number.
 						FransBotLog.BotDebug(world,
-							"{0}: MISSION BROKER board closed for mission {1} attempt {2}: bids={3} window-open-ticks={4}.",
-							player, auction.MissionId, deniedAttempt, auction.Bids.Count,
+							"{0}: MISSION BROKER board closed for mission {1}: bids={2} window-open-ticks={3}.",
+							player, auction.MissionId, auction.Bids.Count,
 							world.WorldTick - auction.OpenedWorldTick);
 						BotMissionLog.Write(new BotMissionRecord
 						{
-							Player = player, MissionId = $"frans:{auction.MissionId}", Attempt = deniedAttempt,
-							State = BotMissionAttemptState.Denied, Reason = "x_frans_board_closed",
+							Player = player, MissionId = $"frans:{auction.MissionId}",
+							Event = BotMissionEvent.Denied, Reason = "x_frans_board_closed",
 							MissionType = auction.MissionType.ToString().ToLowerInvariant(),
 							TargetCell = auction.LastVisibleCell
 						});
@@ -1020,8 +1021,8 @@ namespace OpenRA.Mods.Common.Traits
 					player, mission.TargetActorId, previousType, mission.Type, staleBidCount);
 				BotMissionLog.Write(new BotMissionRecord
 				{
-					Player = player, MissionId = $"frans:{auction.MissionId}", Attempt = NextMissionAttempt(auction.MissionId),
-					State = BotMissionAttemptState.Denied, Reason = "x_frans_missiontype_changed",
+					Player = player, MissionId = $"frans:{auction.MissionId}",
+					Event = BotMissionEvent.Denied, Reason = "x_frans_missiontype_changed",
 					MissionType = previousType.ToString().ToLowerInvariant(),
 					TargetCell = auction.LastVisibleCell
 				});
