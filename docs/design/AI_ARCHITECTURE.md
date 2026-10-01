@@ -1983,6 +1983,64 @@ gunships hover over the frontline centroid. The group advances at the **pace of 
 frontline unit** (units that run ahead wait at the step point). Fast scouts are never in the
 formation — they run ahead on their own (6b).
 
+### 12.7a Concave engagement (phase CV, maintainer order 2026-10-01)
+
+> *Maintainer:* "units are not running into a fight in a straight line but engage in a perfect concave shape that
+> allows them all to fire at the same time they arrive in range. The larger the army the wider the concave. Having
+> the perfect formation before any fight is the key to win any engagement."
+
+§12.7 governs the **march**; CV governs the **deployment** between contact and the first shot. Today a Rush squad
+that meets the enemy goes straight from `GroundUnitsAttackMoveStateCA` to `GroundUnitsAttackState` and every member
+attack-moves at one point: the column arrives one unit at a time and loses the first seconds of the fight piecemeal.
+CV inserts one state, **`GroundUnitsConcaveStateCA`** (Rush squads only; switch `ConcaveEngagement`, default off),
+owned by `SquadManagerBotModuleCA` (§19.3 — it remains the sole owner of force formation; orders only, §1.1).
+
+**Geometry — a pure, deterministic planner `ConcaveEvalCA` (integer math, no RNG, unit-tested):**
+1. **Anchor `A`**: the centroid of the *observed* enemy combat units in contact (only `IsPreferredObservedEnemyUnit`
+   — fog-honest), else the squad target's position (a remembered/visible building or defence). Approach axis
+   `d` = unit vector `A → frontline centroid`. **Enemy front depth** `F` = the largest projection of an observed enemy
+   onto `d` (how far the enemy line already sits toward us); 0 for a lone target.
+2. **Per-member radius** `rᵢ = F + MaxRangeᵢ + ConcaveStageMarginCells` — every member stands the SAME distance
+   (the margin) outside its OWN range, so long-range units naturally form outer ranks and everyone is the same
+   step from firing. Weaponless members (and scouts) are not placed; they keep the plain order.
+3. **Ranks**: members whose `rᵢ` lie within `ConcaveRankBandCells` of each other share one arc (the band radius is
+   the band's minimum `rᵢ`, so nobody in it stands inside its range).
+4. **Width grows with the army**: a band of `n` members needs arc length `L = n × spacing` (spacing =
+   `ConcaveSpacingCells`, infantry half of it). The arc's angle is `θ = L / r`, centred on `d` — a bigger army
+   is a wider, never a denser, concave. If `θ > ConcaveMaxArcDegrees`, spacing first compresses down to
+   `ConcaveMinSpacingCells`; members that still do not fit go to a second arc `ConcaveRankGapCells` further out.
+5. **Slot assignment without crossing**: sort the band's members by their current bearing around `A` and its
+   slots by bearing, pair in order. Paths never cross, so wings fill from the side they already stand on.
+6. **Terrain**: each slot snaps to the nearest cell within 2 cells that the member's locomotor can enter and reach
+   (same domain). If fewer than `ConcaveMinValidSlotPct` of the slots are valid (a choke, a cliff edge), CV aborts:
+   the squad engages as today.
+
+**Phases (`GroundUnitsConcaveStateCA`):**
+* **Trigger** (in the attack-move state, BEFORE the existing `AttackScanRadius` switch to the attack state): the
+  squad has ≥ `ConcaveMinUnits` weaponed ground members, is not on cooldown, and either an observed enemy combat
+  unit is within `ConcaveContactCells` of the frontline centroid, or the squad target is within that distance.
+  Fog limits how early a contact is seen; a partial concave formed late still beats a column.
+* **Form**: each placed member gets a `Move` (not `AttackMove` — nobody gets drawn into the fight early) to its slot.
+  Orders are re-issued only to members that are idle and off their slot; every order spends one
+  `IBotActionBudget` action (§19.1 — lower tiers form worse, on the same straight line); a denied member keeps its
+  last order. The plan re-runs only if `A` moves more than 3 cells (at most once per 25 ticks).
+* **Commit** when ANY of: ≥ `ConcaveFormedPct` of the placed members are within 1.5 cells of their slot; the form
+  timer reaches `ConcaveFormTicks`; a member took damage or an observed enemy is inside some member's own range
+  (the enemy engaged us — never keep forming under fire).
+* **Synchronised arrival**: on commit, each member's time to its own firing range is `tᵢ = margin_i / speedᵢ`
+  (its real distance to range, over its locomotor speed); member `i`'s `AttackMove` toward `A` is issued
+  `max(t) − tᵢ` ticks after the commit tick, so the slowest starts first and **all arrive in range together**.
+  When the last delayed order is out, the state hands over to `GroundUnitsAttackState` (focus fire, kiting and
+  pull-back take over, §MI).
+* **Abort** to the attack-move state when the anchor is gone (no observed enemy and the target is invalid); after a
+  commit or an abort the squad cannot re-enter CV for `ConcaveCooldownTicks`.
+
+Supersedes the ring slot on `devin/ember/mi-concave` (`a64a294ae`, not merged): fixed 30°-per-member angles under a
+135° cap (an army past 5 units packs denser instead of wider), slots by ActorID (paths cross), no form or commit
+phase (units still arrive one by one), no terrain check, and it would have changed group A's shipped default behaviour
+without a new switch. Its integer mirroring trick (`WRot` conjugate for the negative wing) is reused.
+Switch group **F_concave** in `tools/ai/increment_switches.yaml`; A/B in INC-4.
+
 ### 12.8 Air doctrine (phase CA-5)
 
 * **Gunships (helicopters, hovering spaceships): close air support** — attach to the main
