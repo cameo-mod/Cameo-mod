@@ -757,8 +757,9 @@ def build_parser() -> argparse.ArgumentParser:
                         choices=sorted({0, 1, 2, 3, 4, 6, 9}))
     parser.add_argument("--stall-timeout", type=int, default=400,
                         help="forwarded to run_ai_match_batch (default: 400)")
-    parser.add_argument("--max-instances", type=int, default=6,
-                        help="machine-wide OpenRA.exe cap, ours + foreign (default: 6)")
+    parser.add_argument("--max-instances", type=int, default=3,
+                        help="machine-wide OpenRA.exe cap, ours + foreign "
+                             "(default: 3 — maintainer ruling 2026-10-01)")
     parser.add_argument("--spawn-grace", type=float, default=120,
                         help="seconds a launched shard counts against the cap before "
                              "its OpenRA.exe can appear in tasklist (default: 120)")
