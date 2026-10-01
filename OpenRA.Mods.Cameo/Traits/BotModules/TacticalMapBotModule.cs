@@ -1101,6 +1101,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return centers;
 		}
 
+		// One 8-connected component of `cells`, grown from `start`. The caller must already have
+		// added `start` to `visited` — the donors all do `if (!visited.Add(start)) continue;` —
+		// otherwise the walk re-enters through a neighbour and `start` is collected twice.
 		internal static List<CPos> ConnectedComponent(CPos start, HashSet<CPos> cells, HashSet<CPos> visited)
 		{
 			var comp = new List<CPos> { start };
