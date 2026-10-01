@@ -37,8 +37,14 @@ Dated handoffs in `docs/history/handoffs/` are provenance only, never status.
 * **Increments, not per-PR A/Bs** (AI_MASTER_PLAN §1.2 step 6): every agent's work is merged into one increment that
   lands on master (behaviour behind switches), then ONE A/B with `tools/ai/apply_increment_switches.py`.
   **A/B = mirror matches only** (`--factions td_gdi` and `--factions td_nod` as separate shards) until the rebalance.
-* **Opus specs, reviews, merges; Sonnet sub-agents write code** in prepared worktrees (engine copied — git worktrees
-  have no `engine/`) and never commit. Mechanical sweeps go into scripts, not file-by-file reading.
+* **⛔ STANDING WORKFLOW — [`docs/WORKFLOW.md`](docs/WORKFLOW.md), binding in every session, every agent (maintainer
+  2026-10-01: "survive this project with minimum tokens"):** **plan first**, then delegate — **Opus plans, specs,
+  reviews, merges; Sonnet sub-agents (`model: sonnet`, background) write the code** in prepared worktrees (engine
+  copied — git worktrees have no `engine/`) and never commit; resume a sub-agent with SendMessage; never delegate tiny
+  edits. Read sections not files, scripts over reading, short replies, wait in the background — never poll.
+  **Only Claude merges and runs A/B tests**; Devin agents only code (hand in "INC-N ready"). Machine: ≤ 3 game
+  drivers, `--render fast`, stop the newest game if the PC slows. Boot gates run `OpenRA.exe` directly; rebuild after
+  every branch switch.
 * **Balance:** the pipeline only; damage grid `formula.DAMAGE_STEP = 10`; `FirepowerMultiplier` is retired (W17).
 * **Memory is provenance, not authority** — promote anything binding into DESIGN / LESSONS_LEARNED / `doc_claims.yaml`.
 * **Mission:** dynamic faction loading via self-contained ContentPacks (`docs/MIGRATION.md`). Work queue:
