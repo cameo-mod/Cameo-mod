@@ -211,7 +211,10 @@ the fog sequencing.
     publish-only, no switch. TC-2a `nova/tc2-sync-attacks` — ally Climax opens our
     launch window (group `R_tc2_sync_attacks`, inert in 1v1). TC-2b
     `nova/tc2-defend-answers` — ally defend requests answered via the protect-squad
-    escort path (group `S_tc2_defend_answers`).
+    escort path (group `S_tc2_defend_answers`). TC-3 2v2 harness landed
+    `devin/dawn/tc3-2v2-harness` — `--team-size 2` on
+    `tools/ai/run_ai_match_batch.py` + `"team_size"` league spec key, on the
+    shipped doubles map (DEVELOPMENT_LOG 2026-10-02).
   - [ ] Beating the best humans (§13): discipline telemetry, multi-front pressure, base trade,
     refuse bait, planned unpredictability, power-spike timing, superweapons, veterans, map
     control, human-game logging, Elo per bot version, watchdogs — slotted as phases mature.

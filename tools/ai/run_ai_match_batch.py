@@ -31,6 +31,16 @@ ConquestVictoryConditions decides on elimination and the map's locked
 TimeLimitManager is the stalemate failsafe (a timed-out duel records both
 bots "lost" — an honest draw, not an engine-invented winner).
 
+--team-size 2 turns each side into a duo (2v2, TC-3): --bot-a/--bot-b take a
+comma-separated bot type per seat (a single name duplicates across both
+slots) and the default map becomes the shipped doubles map
+mods/cameo/maps/_ra_doubles.oramap, whose consecutive Multi pairs are the
+teams (Multi0+Multi1 vs Multi2+Multi3). The engine resolves map-side stances
+per ORDERED pair, so each member declares its teammate in Allies: and BOTH
+enemy refs in Enemies: (the map's own Creeps hostility is preserved). A 2v2
+match appends four schema-2 records sharing one game_uid; the team verdict
+is "any member record won" — a teammate eliminated early still records lost.
+
 The fixture locks `gamespeed` to `maximum` (1 ms timestep): bot tests run
 uncapped at whatever tick rate the CPU sustains, so decisive matches resolve
 many times sooner in wall time. At maximum one in-game minute is 60,000 ticks,
@@ -71,6 +81,10 @@ Usage:
     --repeats 4                     matches per matchup (spawn sides alternate)
     --swap-bots                     also alternate which bot takes which spawn —
                                     the A/B acceptance requires both spawns
+    --team-size 2 --bot-a hard,hard --bot-b classic,classic
+                                    2v2: one bot type per team slot (a single
+                                    name duplicates); teams seat on consecutive
+                                    Multi pairs (default map _ra_doubles.oramap)
     --map PATH                      duel map (default: _ra_a-nuclear-winter.oramap)
     --time-limit 30                 per-match cap in minutes (engine options only)
     --support-dir PATH              batch support dir (default: %TEMP%/ai-match-batch-<ts>)
@@ -113,6 +127,10 @@ TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
 # .oramap; variants are extracted copies patched in the support dir, so the
 # packaged map itself is never touched.
 DEFAULT_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oramap"
+
+# --team-size 2 default: the shipped 4-player doubles map — consecutive Multi
+# pairs are the teams (Multi0+Multi1 vs Multi2+Multi3 on its four mpspawns).
+DEFAULT_TEAM_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_doubles.oramap"
 
 MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
@@ -170,7 +188,14 @@ def load_config() -> tuple[str, pathlib.Path]:
     return mod_id, engine.resolve()
 
 
-def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int, swap_bots: bool = False) -> list[dict]:
+def build_matchups(
+    factions: list[str],
+    bots_a: list[str],
+    bots_b: list[str],
+    repeats: int,
+    swap_bots: bool = False,
+    team_size: int = 1,
+) -> list[dict]:
     """One unordered faction pair per matchup; repeats alternate spawn sides.
 
     Spawn side is a real axis (corner map geometry is asymmetric), so repeat
@@ -178,6 +203,14 @@ def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int, sw
     assignment alternates too — required for the A/B acceptance runs, where a
     bot must win from BOTH spawns, not just the lucky one. Mirrors (same
     faction both sides) are included: mirror records are honest 1v1 data.
+
+    team_size=2 (2v2): each side is a team of `team_size` members sharing the
+    side's faction. `team_a`/`team_b` are the occupants of the consecutive
+    Multi seat pairs `slots_a`/`slots_b` — the same alternation as 1v1 applies
+    to the PAIR: repeat parity swaps which faction's team sits on pair (0,1),
+    and --swap-bots alternates which bot team sits on pair (0,1) (the
+    swap-both-spawns acceptance, per team). Member m of a team binds
+    `Multi{slots[m]}`.
     """
     matchups = []
     for index, (fa, fb) in enumerate(itertools.combinations_with_replacement(factions, 2)):
@@ -186,16 +219,30 @@ def build_matchups(factions: list[str], bot_a: str, bot_b: str, repeats: int, sw
                 a, b = fa, fb
             else:
                 a, b = fb, fa
-            ba, bb = (bot_a, bot_b) if not (swap_bots and repeat % 2 == 1) else (bot_b, bot_a)
-            matchups.append(
-                {
-                    "index": index,
-                    "repeat": repeat,
-                    "side_a": {"faction": a, "bot": ba},
-                    "side_b": {"faction": b, "bot": bb},
-                    "variant": f"ai_duel_{a}_{ba}_vs_{b}_{bb}".replace(" ", "_"),
-                }
-            )
+            ba, bb = (bots_a, bots_b) if not (swap_bots and repeat % 2 == 1) else (bots_b, bots_a)
+            if team_size == 2:
+                matchups.append(
+                    {
+                        "index": index,
+                        "repeat": repeat,
+                        "team_size": 2,
+                        "team_a": [{"bot": bot, "faction": a} for bot in ba],
+                        "team_b": [{"bot": bot, "faction": b} for bot in bb],
+                        "slots_a": [0, 1],
+                        "slots_b": [2, 3],
+                        "variant": f"ai_duo_{a}_{'_'.join(ba)}__vs__{b}_{'_'.join(bb)}".replace(" ", "_"),
+                    }
+                )
+            else:
+                matchups.append(
+                    {
+                        "index": index,
+                        "repeat": repeat,
+                        "side_a": {"faction": a, "bot": ba[0]},
+                        "side_b": {"faction": b, "bot": bb[0]},
+                        "variant": f"ai_duel_{a}_{ba[0]}_vs_{b}_{bb[0]}".replace(" ", "_"),
+                    }
+                )
     return matchups
 
 
@@ -343,14 +390,48 @@ REFEREE_BLOCK = """\tPlayerReference@Referee:
 """
 
 
-def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int, int], other_ref: str) -> str:
+def _append_merge_relation(block: str, key: str, refs: list[str]) -> str:
+    """Append-merge refs into a block's `\t\t{key}:` line (Enemies:/Allies:).
+
+    Existing entries keep their position (a shipped map's `Enemies: Creeps`
+    stays first) and are never duplicated; absent keys get a new line.
+    """
+    pattern = re.compile(rf"^\t\t{key}: .+$", re.MULTILINE)
+    declared = pattern.search(block)
+    existing = [e.strip() for e in declared.group(0).split(":", 1)[1].split(",")] if declared else []
+    additions = [r for r in refs if r not in existing]
+    if declared:
+        if additions:
+            block = pattern.sub(lambda _: declared.group(0) + ", " + ", ".join(additions), block, count=1)
+    elif refs:
+        block += f"\t\t{key}: {', '.join(refs)}\n"
+    return block
+
+
+def patch_mp_block(
+    text: str,
+    ref: str,
+    bot: str,
+    faction: str,
+    home: tuple[int, int],
+    other_refs,
+    ally_refs=(),
+) -> str:
     """Convert a Playable Multi slot into a map-side bot duelist.
 
     Multi refs on shipped maps carry `Playable: True` + `Faction: Random` and
     no Bot/HomeLocation — the bot's home comes from an mpspawn actor instead.
-    We write everything the map-side bot branch honors and cross-wire the two
-    duelists as enemies while keeping the map's declared Creeps hostility.
+    We write everything the map-side bot branch honors and declare every
+    stance explicitly while keeping the map's declared Creeps hostility.
+
+    `other_refs` (a ref name or a list of them) are append-merged into
+    `Enemies:`; `ally_refs` into `Allies:`. The engine resolves map-side
+    stances per ORDERED pair (CreateMapPlayers.SetupPlayerMasks), so team
+    play needs both directions declared on every member: each teammate gets
+    `Allies: <mate>` and each side's members list BOTH enemy refs.
     """
+    if isinstance(other_refs, str):
+        other_refs = [other_refs]
     marker = f"\tPlayerReference@{ref}:"
     start = text.find(marker)
     if start < 0:
@@ -379,13 +460,8 @@ def patch_mp_block(text: str, ref: str, bot: str, faction: str, home: tuple[int,
 
     block += f"\t\tHomeLocation: {home[0]},{home[1]}\n"
 
-    enemies = re.compile(r"^\t\tEnemies: .+$", re.MULTILINE)
-    declared = enemies.search(block)
-    extra = f", {other_ref}" if other_ref not in (declared.group(0) if declared else "") else ""
-    if declared:
-        block = enemies.sub(lambda _: declared.group(0) + extra, block, count=1)
-    else:
-        block += f"\t\tEnemies: {other_ref}\n"
+    block = _append_merge_relation(block, "Enemies", list(other_refs))
+    block = _append_merge_relation(block, "Allies", list(ally_refs))
 
     return text[:start] + block + text[block_end:]
 
@@ -405,6 +481,13 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
     text = map_yaml.read_text(encoding="utf-8")
 
     spawns = mp_spawn_cells(text)
+    team_size = matchup.get("team_size", 1)
+    if team_size == 2:
+        if len(spawns) < 4:
+            fail(f"team-size 2 needs a map with at least four mpspawn actors, got {len(spawns)}")
+        for ref in ("Multi0", "Multi1", "Multi2", "Multi3"):
+            if text.count(f"\tPlayerReference@{ref}:") != 1:
+                fail(f"team-size 2 expects exactly one PlayerReference@{ref} block")
     if not re.search(r"^Rules: ", text, re.MULTILINE):
         categories = re.search(r"^Categories: .+$", text, re.MULTILINE)
         if not categories:
@@ -416,13 +499,31 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
         fail("real-map mode expects exactly one PlayerReference@Multi0 block")
     text = text.replace(marker, REFEREE_BLOCK + marker, 1)
 
-    text = patch_mp_block(text, "Multi0", matchup["side_a"]["bot"], matchup["side_a"]["faction"], spawns[0], "Multi1")
-    text = patch_mp_block(text, "Multi1", matchup["side_b"]["bot"], matchup["side_b"]["faction"], spawns[1], "Multi0")
+    if team_size == 2:
+        slots_a = matchup["slots_a"]
+        slots_b = matchup["slots_b"]
+        sides = []
+        for slots, team, enemy_slots in (
+            (slots_a, matchup["team_a"], slots_b),
+            (slots_b, matchup["team_b"], slots_a),
+        ):
+            enemy_refs = [f"Multi{s}" for s in enemy_slots]
+            for member_index, slot in enumerate(slots):
+                ref = f"Multi{slot}"
+                member = team[member_index]
+                text = patch_mp_block(
+                    text, ref, member["bot"], member["faction"], spawns[slot],
+                    enemy_refs, ally_refs=[f"Multi{slots[1 - member_index]}"],
+                )
+                sides.append((ref, member["faction"], spawns[slot]))
+    else:
+        text = patch_mp_block(text, "Multi0", matchup["side_a"]["bot"], matchup["side_a"]["faction"], spawns[0], "Multi1")
+        text = patch_mp_block(text, "Multi1", matchup["side_b"]["bot"], matchup["side_b"]["faction"], spawns[1], "Multi0")
 
-    sides = [
-        ("Multi0", matchup["side_a"]["faction"], spawns[0]),
-        ("Multi1", matchup["side_b"]["faction"], spawns[1]),
-    ]
+        sides = [
+            ("Multi0", matchup["side_a"]["faction"], spawns[0]),
+            ("Multi1", matchup["side_b"]["faction"], spawns[1]),
+        ]
     rendered = "".join(render_side_actors(ref, faction, home) for ref, faction, home in sides)
     text = text.rstrip("\n") + "\n" + rendered
     text += f"\n# ai-match-batch variant: {dest.name}\n"
@@ -442,6 +543,8 @@ def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit:
         write_variant_from_oramap(template, dest, matchup, time_limit)
         return
 
+    if matchup.get("team_size", 1) != 1:
+        fail("the legacy template dir only supports --team-size 1 (it has BotA/BotB, no Multi slots)")
     if dest.exists():
         shutil.rmtree(dest)
     shutil.copytree(template, dest)
@@ -590,7 +693,7 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
-SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "BotA": 0, "BotB": 1}
+SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
 
 
 def ab_scoreboard(results: list[dict]) -> dict:
@@ -622,6 +725,63 @@ def ab_scoreboard(results: list[dict]) -> dict:
                 side = cell["spawn"].setdefault(str(spawn), [0, 0])
                 side[0 if outcome == "won" else 1] += 1
     return {f"{a} vs {b}": cell for (a, b), cell in sorted(board.items())}
+
+
+def team_scoreboard(results: list[dict]) -> dict:
+    """Team-mode head-to-head: group records by match uid, then by TEAM.
+
+    A 2v2 match appends four records sharing one game_uid
+    (`record_id.rsplit("|", 1)[0]`). Each record's team is
+    {player.name} ∪ {allies[].name}; its board key is the sorted "+"-joined
+    member bot_types ("hard+hard"). Team verdict mirrors
+    ConquestVictoryConditions: the team won iff ANY member record reads
+    "won" (a teammate eliminated early still records "lost"). Each match
+    lands in both ordered pairings — same symmetric convention as
+    ab_scoreboard — and the spawn sub-table keys the team's sorted
+    member-spawn pair ("0,1").
+    """
+    seen_records: set[str] = set()
+    matches: dict[str, list[dict]] = {}
+    for result in results:
+        for record in result.get("bot_outcomes") or []:
+            record_id = str(record.get("record_id") or "")
+            if not record_id or record_id in seen_records:
+                continue
+            seen_records.add(record_id)
+            matches.setdefault(record_id.rsplit("|", 1)[0], []).append(record)
+
+    board: dict[str, dict] = {}
+    for rows in matches.values():
+        by_members: dict[frozenset, dict] = {}
+        for row in rows:
+            allies = row.get("allies") or []
+            members = frozenset(
+                {str(row.get("record_id") or "").rsplit("|", 1)[1]}
+                | {str(a.get("name")) for a in allies}
+            )
+            team = by_members.get(members)
+            if team is None:
+                bots = sorted(
+                    [str(row.get("bot_type"))] + [str(a.get("bot_type")) for a in allies]
+                )
+                team = {"key": "+".join(bots), "won": False, "spawns": set()}
+                by_members[members] = team
+            if row.get("outcome") == "won":
+                team["won"] = True
+            if row.get("spawn") is not None:
+                team["spawns"].add(str(row["spawn"]))
+        teams = list(by_members.values())
+        if len(teams) != 2:
+            continue
+        for mine, theirs in ((teams[0], teams[1]), (teams[1], teams[0])):
+            cell = board.setdefault(f"{mine['key']} vs {theirs['key']}",
+                                    {"won": 0, "lost": 0, "spawn": {}})
+            cell["won" if mine["won"] else "lost"] += 1
+            spawn_key = ",".join(sorted(mine["spawns"]))
+            if spawn_key:
+                slot = cell["spawn"].setdefault(spawn_key, [0, 0])
+                slot[0 if mine["won"] else 1] += 1
+    return {key: board[key] for key in sorted(board)}
 
 
 # ---------------------------------------------------------------------------
@@ -778,8 +938,13 @@ def _short_hash(value: str | None) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
-    parser.add_argument("--bot-a", default="hard", help="bot type for side A (default: hard — the Frankenstein candidate)")
-    parser.add_argument("--bot-b", default="classic", help="bot type for side B (default: classic — the omniscient pre-wave reference bot)")
+    parser.add_argument("--bot-a", default="hard", help="bot type for side A (default: hard — the Frankenstein candidate); "
+                            "with --team-size 2 a comma-separated list (hard,classic) — one name fills both slots")
+    parser.add_argument("--bot-b", default="classic", help="bot type for side B (default: classic — the omniscient pre-wave reference bot); "
+                            "with --team-size 2 a comma-separated list — one name fills both slots")
+    parser.add_argument("--team-size", type=int, choices=(1, 2), default=1,
+                        help="members per side: 1 = duel (default), 2 = 2v2 — each team's seats are "
+                             "consecutive Multi pairs on a 4-player map (default _ra_doubles.oramap)")
     parser.add_argument("--repeats", type=int, default=4, help="matches per matchup; sides alternate (default: 4)")
     parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,
                         help="duel map: the shipped .oramap (default: A Nuclear Winter) "
@@ -816,7 +981,23 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
-    map_source = args.map_path.resolve()
+
+    def parse_team(raw: str, flag: str) -> list[str]:
+        bots = [b.strip() for b in raw.split(",") if b.strip()]
+        if len(bots) == 1:
+            bots = bots * args.team_size
+        if len(bots) != args.team_size:
+            fail(f"{flag} needs exactly {args.team_size} comma-separated bot type(s) "
+                 f"for --team-size {args.team_size} (got {raw!r})")
+        return bots
+
+    bots_a = parse_team(args.bot_a, "--bot-a")
+    bots_b = parse_team(args.bot_b, "--bot-b")
+
+    map_arg = args.map_path
+    if args.team_size == 2 and map_arg == DEFAULT_MAP:
+        map_arg = DEFAULT_TEAM_MAP
+    map_source = map_arg.resolve()
     if not map_source.exists():
         fail(f"map source missing: {map_source}")
     if map_source.is_dir() and map_source != TEMPLATE_MAP:
@@ -834,13 +1015,18 @@ def main() -> int:
     logs_dir.mkdir(parents=True, exist_ok=True)
     log_path = logs_dir / MATCH_LOG
 
-    matchups = build_matchups(factions, args.bot_a, args.bot_b, args.repeats, swap_bots=args.swap_bots)
+    matchups = build_matchups(factions, bots_a, bots_b, args.repeats,
+                              swap_bots=args.swap_bots, team_size=args.team_size)
 
     # LC7: fingerprint the arms once, before any variant is written; every
-    # match attempt below recomputes it and aborts on drift.
+    # match attempt below recomputes it and aborts on drift. team_size and the
+    # parsed bot lists are part of the arms — a team-size change IS an arm change.
     batch_config = {
         "bot_a": args.bot_a,
         "bot_b": args.bot_b,
+        "team_size": args.team_size,
+        "bots_a": bots_a,
+        "bots_b": bots_b,
         "factions": factions,
         "repeats": args.repeats,
         "swap_bots": args.swap_bots,
@@ -852,10 +1038,17 @@ def main() -> int:
     # One variant dir per distinct matchup (repeats reuse it).
     variants = {}
     for m in matchups:
-        variants.setdefault(
-            m["variant"],
-            {"a": m["side_a"], "b": m["side_b"]},
-        )
+        if args.team_size == 2:
+            variants.setdefault(
+                m["variant"],
+                {"team_size": 2, "team_a": m["team_a"], "team_b": m["team_b"],
+                 "slots_a": m["slots_a"], "slots_b": m["slots_b"]},
+            )
+        else:
+            variants.setdefault(
+                m["variant"],
+                {"a": m["side_a"], "b": m["side_b"]},
+            )
 
     print(f"batch: {len(matchups)} match(es) across {len(variants)} variant(s), support={support}")
     print(
@@ -869,7 +1062,14 @@ def main() -> int:
         f"map={_short_hash(batch_fingerprint['map_sha256'])}"
     )
     for name, v in variants.items():
-        print(f"  variant {name}: {v['a']['faction']}({v['a']['bot']}) vs {v['b']['faction']}({v['b']['bot']})")
+        if args.team_size == 2:
+            print(
+                f"  variant {name}: "
+                f"{v['team_a'][0]['faction']}({'+'.join(m['bot'] for m in v['team_a'])})@{'/'.join(map(str, v['slots_a']))} vs "
+                f"{v['team_b'][0]['faction']}({'+'.join(m['bot'] for m in v['team_b'])})@{'/'.join(map(str, v['slots_b']))}"
+            )
+        else:
+            print(f"  variant {name}: {v['a']['faction']}({v['a']['bot']}) vs {v['b']['faction']}({v['b']['bot']})")
 
     if args.dry_run:
         for m in matchups:
@@ -877,7 +1077,10 @@ def main() -> int:
         return 0
 
     for name, v in variants.items():
-        write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
+        if args.team_size == 2:
+            write_variant(map_source, variants_root / name, v, args.time_limit)
+        else:
+            write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
     exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
 
@@ -1016,6 +1219,15 @@ def main() -> int:
                     "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
                                                    (r.get("player") or {}).get("spawn")),
                     "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
+                    # Full relationship lists (2v2: one ally, two opponents).
+                    "allies": [
+                        {"name": a.get("name"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
+                        for a in (r.get("allies") or [])
+                    ],
+                    "opponents": [
+                        {"name": o.get("name"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
+                        for o in (r.get("opponents") or [])
+                    ],
                 }
                 for r in records
             ],
@@ -1034,6 +1246,7 @@ def main() -> int:
 
     new_exceptions = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exceptions_before)
     scoreboard = ab_scoreboard(results)
+    team_board = team_scoreboard(results) if args.team_size > 1 else None
     summary = {
         "support_dir": str(support),
         "fingerprint": batch_fingerprint,
@@ -1049,6 +1262,8 @@ def main() -> int:
         "scoreboard": scoreboard,
         "results": results,
     }
+    if team_board is not None:
+        summary["team_scoreboard"] = team_board
     if drift_aborted is not None:
         summary["aborted"] = "fingerprint_drift"
         summary["fingerprint_drift"] = drift_aborted
@@ -1063,10 +1278,18 @@ def main() -> int:
     if drift_aborted is not None:
         print(f"batch ABORTED on fingerprint drift ({', '.join(drift_aborted)}) — "
               f"the arms changed mid-batch; see batch_summary.json 'fingerprint_drift'")
-    if scoreboard:
+    # For 2v2 the per-record 1v1 board would pair each bot against only its
+    # first listed opponent — a degenerate reading; only the team board is
+    # printed (ab_scoreboard still lands in batch_summary.json as "scoreboard").
+    if scoreboard and args.team_size == 1:
         print("\nA/B scoreboard (decided 1v1s, deduplicated by game):")
         for pairing, cell in scoreboard.items():
             spawn_note = ", ".join(f"spawn {s}: {w}-{l}" for s, (w, l) in sorted(cell["spawn"].items()))
+            print(f"  {pairing}: {cell['won']}-{cell['lost']}" + (f"  ({spawn_note})" if spawn_note else ""))
+    if team_board:
+        print("\nTeam scoreboard (decided matches, deduplicated by game):")
+        for pairing, cell in team_board.items():
+            spawn_note = ", ".join(f"seats {s}: {w}-{l}" for s, (w, l) in sorted(cell["spawn"].items()))
             print(f"  {pairing}: {cell['won']}-{cell['lost']}" + (f"  ({spawn_note})" if spawn_note else ""))
     print(f"records appended to {log_path}; aggregate with tools/ai/aggregate_ai_matches.py")
     print(f"win-rate + Wilson interval per bot type: tools/ai/ab_summary.py {support}")

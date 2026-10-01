@@ -1041,6 +1041,20 @@ match timeout. Match records are only comparable within one speed — a `10`-min
 contains 40x the simulated play of a default-speed one and 10x an insane-era one, so pooled
 baselines do not carry across the 2026-09-29 speed change.
 
+**2v2 team mode (TC-3, landed 2026-10-02, DAWN).** The same harness runs duos:
+`--team-size 2` makes `--bot-a`/`--bot-b` comma-separated team lists (one name
+duplicates across both slots) and defaults the map to the shipped doubles map
+`mods/cameo/maps/_ra_doubles.oramap`, whose consecutive `Multi` pairs are the
+teams (Multi0+Multi1 vs Multi2+Multi3 on its four mpspawns). Map-side stances
+must be declared **symmetrically** — `CreateMapPlayers.SetupPlayerMasks`
+resolves every ORDERED pair and same-Team clients fall to the allied default,
+so each member append-merges its teammate into `Allies:` and BOTH enemy refs
+into `Enemies:` (the map's `Creeps` hostility stays). A 2v2 match appends four
+schema-2 records sharing one game_uid; the team verdict for aggregation is
+"any member record `won`" — ConquestVictoryConditions beats a side only when
+every non-ally is Lost, so a teammate eliminated early still records `lost`.
+`run_league.py` takes `"team_size": 2` for homogeneous-duo league cells.
+
 **Stage E — anything neural.** Explicitly deferred until factions and balance are finished, per
 the user's own sequencing. Training against a moving balance target fits noise.
 
