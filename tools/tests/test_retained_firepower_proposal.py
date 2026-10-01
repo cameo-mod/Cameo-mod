@@ -223,10 +223,18 @@ class LiveProposalTests(unittest.TestCase):
     def setUpClass(cls):
         cls.rules = Ruleset(tool.ROOT)
 
-    def test_spy_is_a_supported_retained_factor_case(self):
-        result = tool.propose(self.rules, 'ra1_allies_raspy', '1815/16')
-        self.assertEqual(result['proposed_damage'], 15000)
-        self.assertEqual(result['retained_factor'], '121/200')
+    def test_spy_retained_case_is_now_blocked_by_the_blinded_pause(self):
+        # The reviewed || blinded pause wave added a compound PauseOnCondition
+        # ('disabled || blinded') to the spy's AttackFrontal, and the
+        # conservative screen deliberately refuses compound conditions rather
+        # than assume them away — so the once-supported case now blocks.
+        with self.assertRaisesRegex(tool.Unsupported, 'disabled, paused or unknown'):
+            tool.propose(self.rules, 'ra1_allies_raspy', '1815/16')
+
+    def test_live_supported_case_still_proposes(self):
+        result = tool.propose(self.rules, 'PLYMOUTH_GP_RPG', '40')
+        self.assertEqual(result['proposed_damage'], 2000)
+        self.assertEqual(result['retained_factor'], '1')
         self.assertEqual(result['residual_dps'], '0')
 
     def test_hydra_stays_blocked(self):

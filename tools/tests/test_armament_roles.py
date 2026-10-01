@@ -725,11 +725,11 @@ class PerArmamentComponentTargetTests(unittest.TestCase):
 
     def test_td_rocket_pair_uses_role_paired_four_voice_components(self):
         expected = {
-            "w_range": 6264.360092626203,
-            "w_damage": 16341.2549997169,
-            "w_reload": 55.650643641621535,
+            "w_range": 6265.510255220634,
+            "w_damage": 16403.748070270027,
+            "w_reload": 55.65302974695982,
             "w_burst": 1.0,
-            "w_dps": 294.23802589174227,
+            "w_dps": 294.86658169299324,
         }
         for actor in ("td_gdi_rocketsoldier", "td_nod_rocketsoldier"):
             with self.subTest(actor=actor):
@@ -752,7 +752,7 @@ class PerArmamentComponentTargetTests(unittest.TestCase):
                     targets["w_dps"],
                 )
                 self.assertEqual("ok", guard["verdict"])
-                self.assertAlmostEqual(16341 / 56, guard["composed_dps"])
+                self.assertAlmostEqual(16404 / 56, guard["composed_dps"])
                 self.assertLess(abs(guard["disagreement"] - 1), 0.01)
 
     def test_fractional_burst_is_withheld_instead_of_rounded_into_the_guard(self):

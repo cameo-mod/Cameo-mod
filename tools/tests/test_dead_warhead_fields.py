@@ -441,7 +441,10 @@ class AuditRunTest(unittest.TestCase):
         self.set_weapons({
             "ttnk": Yaml("ttnk", None, [warhead_node("main", "AreaDamage", ["Bogus"])])
         })
-        code, _out = self.run_audit()
+        # The real baseline is 0 (every known dead kind was fixed); simulate the warn band
+        # the way test_dead_above_ratchet_fails simulates the fail band.
+        with mock.patch.object(audit, "DEAD_FIELD_BASELINE", 1):
+            code, _out = self.run_audit()
         self.assertEqual(code, audit.EXIT_OK)
 
     def test_dead_above_ratchet_fails(self):

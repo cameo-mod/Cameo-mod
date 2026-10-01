@@ -23,7 +23,11 @@ class RangeEvidenceTest(unittest.TestCase):
     def test_sniper_percentage_damage_does_not_block_independent_range(self):
         sniper=next(r for r in rd.peer_rows() if (r['source'],r['id'])==('Combined Arms','SNIP'))
         self.assertTrue(rd.eligible(sniper,'w_range'))
-        self.assertFalse(rd.eligible(sniper,'w_dps'))
+        # The reviewed nominal-evidence wave separately certified a named-target
+        # uncapped w_dps comparison convention for the sniper; range eligibility
+        # was never the thing certifying it.
+        self.assertEqual(sniper['w_evidence'],'nominal_direct')
+        self.assertTrue(rd.eligible(sniper,'w_dps'))
         self.assertEqual(sniper['w_range_evidence'],pe.SELECTED_VERDICT)
 
     def test_changed_source_row_refuses_saved_proof(self):

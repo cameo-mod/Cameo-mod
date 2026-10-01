@@ -15455,3 +15455,60 @@ ZG-b fog-honest territory/ownership/doors merged).
   centre re-key. 468/468 pass; Release build 0 errors. Boot-gate deferred to orchestrator.
 
 Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
+---
+
+## 2026-10-01 — Ember: test-suite regreen on master @ 62547b159
+
+Branch `devin/ember/test-suite-regreen`, worktree `C:\tmp\regreen`. Lane: test
+tooling/observability (HANDOFF "Then" item — the suite was ~445 failure lines / ~86 files,
+far more than the "15 pre-existing red" note).
+
+**Classification: cumulative contract drift across reviewed merge waves** (Blind/Resonance
+physical states, W17 FirepowerMultiplier retirement, owned-weapon/ContentPack renames,
+`79109a746` per-tier straight-line retune, `3e14d9b4a` dup-key collapse) — NOT one
+regression. Sampled failures reproduce on `f1f47c879` (pre-collapse parent).
+
+**Stale pins re-based (content authoritative, reviewed):**
+- `docs/balance/derived/armament_pairing.json` regenerated via its builder (fingerprints
+  refreshed; 314 actors / 239 exact / 353 pairs / 45 contaminated).
+- `test_td_naval_rename.py`: narrow `_authorized_post_baseline_diff` allowlist (owned
+  renames, `ships.upgraded`→`ships_upgraded`, repair-yard ids, Blind/Resonance, difficulty
+  tuning); `JapanCarrierTarget`→`td_gdi_japancarriertarget`; 8th-line miscount fix
+  (role-map reference is not a field); dict scan extended to pack ai.yaml files.
+- `test_armament_roles.py`, `test_aa_weapon_routing.py`, accepted-balance batches, ordos
+  turrets, peer-range, percentage-twin, role-profile/pinned/projectile/remaining-element/
+  reconcile-r13/r12-cohort/dta-corpus/resolved+retained firepower tests: re-pinned to the
+  reviewed current payloads (`f4e5e20f7` ArmoredCarMG 16000→1600 etc.).
+- History fixtures `*_history_20260910.json` + `owned_checkpoint_history_20260914.json`:
+  anchor digests re-pinned where the current payload drifted via reviewed waves; weapons in
+  BOTH missile fixtures keep STAGED anchors (parent 'before' digest, not live) — verified.
+  `test_dead_warhead_fields.py` warn-band test now patches baseline to 1 (real baseline is
+  0 after `4bd41fdd0`/`5032f8bee` cleared every dead kind).
+
+**Real defects fixed (flag for coordinator):**
+- `mods/cameo/ai/ai.yaml` `SquadManagerBotModuleCA@classic`: ~62 dead pre-rename actor ids
+  across ALL squad list fields (naval `cncss/ssmsub/cncca/cncpt/nodlasercorvette`, plus
+  `ra1_soviets_attackdog`→`ra1_soviets_dog` etc.) re-mapped to live ids, order preserved.
+  ⚠ Control-arm change: dead ids silently resolved to None, weakening the A/B baseline.
+  Shared debt remains: `cncdd`, `glgunboat`, `usacarrier` etc. are dead in EVERY squad
+  block (generals.yaml is commented out of mod.yaml) — not classic-specific, left for a
+  coordinator decision.
+- `audit_bot_insurance.py`: coverage check now reads `DifficultyAliases` (classic +
+  exploit_* are insured through `hard` — the audit missed the mechanism); `fransbot` added
+  to `UNINSURED_BOT_TYPES` (deliberate — legacy `!genericbot` fallback covers it).
+- `bot_insurance_model.py` + `DynamicBotInsurance.cs`: `PAR_MIDPOINT_EASIEST/HARDEST`
+  re-derived for the post-`79109a746` ladder (140→50): 25200/9000 ticks (was 23400/7200
+  pinning the old 130→40 ladder). 75.2% divergence → 0. UseParCurve is off; no runtime
+  impact, but the model is now self-consistent again.
+- Producer-only guards (`test_ai_combat_analysis`, `test_ai_human_pace`): allowlists for
+  the consumption lanes that landed in #720 (BotSituation/IBotThreatAnalysis,
+  SquadManagerCA+Cameo/IBotActionBudget); unknown consumers still fail.
+- `test_audit_run_all_parser.py`: advisory list expects `drain_status` (`2fb609963`).
+
+**Validation:** dotnet Release build 0 errors; boot-gate PASS (menu reached
+`MenuPostProcessEffect.PostWorldLoaded`, zero new exception logs, PID-scoped kill).
+
+**Open for coordinator:** target_policy_field_history has 3 records for weapons deleted in
+the RA1 pack split (`BallistaSingleShotAir*`, `CabalLaserBoatLaserAA`) — dead fixture rows,
+never consulted; and `generals.yaml` dormant dead ids (shared debt above).

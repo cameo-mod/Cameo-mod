@@ -141,8 +141,8 @@ PAR_SHAPE_STEP = 125             # permille of the midpoint between samples
 PAR_BASE_WORTH = 10000
 PAR_ASYMPTOTE_PER_RANK = 15000
 # Midpoint in ticks, interpolated by rank: easiest slowest. 12 min x ProductionTimeMultiplier/100,
-# so 15.6 min (23400 ticks) at easiest down to 4.8 min (7200) at cameogod.
-PAR_MIDPOINT_EASIEST, PAR_MIDPOINT_HARDEST = 23400, 7200
+# so 16.8 min (25200 ticks) at easiest down to 6.0 min (9000) at cameogod.
+PAR_MIDPOINT_EASIEST, PAR_MIDPOINT_HARDEST = 25200, 9000
 
 
 def par_worth(rank: int, ticks: int, count: int = len(DIFFICULTIES)) -> int:

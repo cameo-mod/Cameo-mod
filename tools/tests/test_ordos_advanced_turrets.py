@@ -88,17 +88,19 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
                 self.assertEqual("!build-incomplete", actor.child("WithSpriteTurret").get("RequiresCondition"))
                 self.assertEqual("!build-incomplete", actor.child("AttackTurreted").get("RequiresCondition"))
                 block = sequence_block(name)
-                self.assertIn(f"Filename: {image}", block)
-                self.assertIn(f"Filename: {icon}", block)
+                seq_image = "d2k_ordos_sprites|" + image
+                seq_icon = "d2k_ordos_icons|" + icon
+                self.assertIn(f"Filename: {seq_image}", block)
+                self.assertIn(f"Filename: {seq_icon}", block)
                 sequence = self.rules.sequence_image(name)
                 self.assertEqual("0.9", sequence.child("Defaults").get("Scale"))
                 self.assertEqual("-2,0", sequence.child("Defaults").get("Offset"))
                 self.assertEqual("1", sequence.child("icon").get("Scale"))
                 self.assertEqual("0,0", sequence.child("icon").get("Offset"))
-                self.assertIn("make:\n\t\tFilename: " + image + "\n\t\tStart: 0\n\t\tLength: 16", block)
-                self.assertIn("turret:\n\t\tFilename: " + image + "\n\t\tStart: 16\n\t\tFacings: 64", block)
-                self.assertTrue((ROOT / "mods/cameo/bits/d2k" / image).is_file())
-                icon_path = ROOT / "mods/cameo/bits/d2k" / icon
+                self.assertIn("make:\n\t\tFilename: " + seq_image + "\n\t\tStart: 0\n\t\tLength: 16", block)
+                self.assertIn("turret:\n\t\tFilename: " + seq_image + "\n\t\tStart: 16\n\t\tFacings: 64", block)
+                self.assertTrue((ORDOS / "files/sprites" / image).is_file())
+                icon_path = ORDOS / "files/icons" / icon
                 self.assertTrue(icon_path.is_file())
                 self.assertEqual((64, 48), png_size(icon_path))
                 self.assertEqual(ICON_PINS[icon], hashlib.sha256(icon_path.read_bytes()).hexdigest())
@@ -113,7 +115,7 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
         self.assertEqual("3", weapon.get("Burst"))
         self.assertEqual("5", weapon.get("BurstDelays"))
         self.assertEqual("7275", weapon.get("Range"))
-        self.assertEqual("PopupTurretAttack.wav", weapon.get("Report"))
+        self.assertEqual("d2k_ordos_sounds|PopupTurretAttack.wav", weapon.get("Report"))
         self.assertEqual("LaserZap", weapon.get("Projectile"))
         self.assertEqual("55", weapon.get("Projectile", "Width"))
         self.assertEqual("2047", weapon.get("Projectile", "ZOffset"))
@@ -147,8 +149,8 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
         weapon = self.rules.resolve_weapon("ordos_chemturret")
         self.assertEqual("90", weapon.get("ReloadDelay"))
         self.assertEqual("14000", weapon.get("Range"))
-        self.assertEqual("1985", weapon.get("MinRange"))
-        self.assertEqual("ChemTurretAttack.wav", weapon.get("Report"))
+        self.assertEqual("2800", weapon.get("MinRange"))
+        self.assertEqual("d2k_ordos_sounds|ChemTurretAttack.wav", weapon.get("Report"))
         self.assertEqual("true", weapon.get("TargetActorCenter"))
         self.assertEqual("Ground", weapon.get("ValidTargets"))
 
@@ -180,7 +182,7 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
         self.assertEqual("1536", chemical.get("Spread"))
         for armor, expected in {
             "None": "200",
-            "Flak": "159",
+            "Flak": "163",
             "Scout": "100",
             "Light": "40",
             "Medium": "20",
@@ -195,7 +197,7 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
             for armor in ("None", "Flak", "Scout", "Light", "Medium", "Heavy", "Superheavy")
         }
         self.assertEqual(
-            {"None": 40000, "Flak": 31800, "Scout": 20000, "Light": 8000, "Medium": 4000,
+            {"None": 40000, "Flak": 32600, "Scout": 20000, "Light": 8000, "Medium": 4000,
              "Heavy": 4000, "Superheavy": 4000},
             center_damage,
         )
@@ -227,7 +229,7 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
             misc_sequences,
         )
 
-        toxic_palette = ROOT / "mods/cameo/bits/d2k/d2k_toxic_explosion.pal"
+        toxic_palette = ORDOS / "files/sprites/d2k_toxic_explosion.pal"
         palette_bytes = toxic_palette.read_bytes()
         self.assertEqual(768, len(palette_bytes))
         self.assertEqual(
@@ -239,7 +241,7 @@ class OrdosAdvancedTurretTests(unittest.TestCase):
 
         for filename, expected_hash in AUDIO_PINS.items():
             with self.subTest(audio=filename):
-                path = ROOT / "mods/cameo/bits/d2k" / filename
+                path = ORDOS / "files/sounds" / filename
                 payload = path.read_bytes()
                 self.assertEqual(b"RIFF", payload[:4])
                 self.assertEqual(b"WAVE", payload[8:12])

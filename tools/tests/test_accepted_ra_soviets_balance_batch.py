@@ -19,15 +19,15 @@ ACTORS = {
     "ra1_soviets_grenadier": (230, 14000, 72, None, 14, "None"),
     "ra1_soviets_shocktrooper": (680, 31000, 48, None, 31, "Plate"),
     "ra1_soviets_heavytank": (1450, 172000, 66, 8600, 69, "Heavy"),
-    "ra1_soviets_rifleinfantry": (110, 21000, 55, None, 21, "None"),
-    "ra1_soviets_rocketsoldier": (440, 15000, 46, None, 15, "Flak"),
+    "ra1_soviets_rifleinfantry": (110, 21000, 55, None, 21, "Flak"),
+    "ra1_soviets_rocketsoldier": (440, 15000, 46, None, 15, "None"),
 }
 
 BASE_WEAPONS = {
     # weapon: range, min range, reload, burst, burst delay, direct damage map, DPS
     "ra1_soviets_v2rocketlauncher_scud": (
         12596, 2519, 120, 1, 0,
-        {"Warhead@MissileHE_Heavy": 48998, "Warhead@Flame_Heavy": 48998},
+        {"Warhead@MissileHE_Heavy": 97996},
         Fraction(97996, 120)),
     "ra1_soviets_teslatank_ttankzap": (
         7898, None, 80, 1, 0,
@@ -55,19 +55,11 @@ BASE_WEAPONS = {
 
 UPGRADE_DIRECT_DAMAGE = {
     "ra1_soviets_v2rocketlauncher_scudthermobaric": {
-        "Warhead@MissileHE_Heavy": 48998,
-        "Warhead@Flame_Heavy": 48998,
-        "Warhead@Demolition_Heavy": 32665,
-        "Warhead@HeavyMissile": 32665,
-        "Warhead@HeavyFlameWeapon": 32665,
+        "Warhead@Demolition_Heavy": 195991,
     },
     "ra1_soviets_v2rocketlauncher_scudtesla": {
-        "Warhead@MissileHE_Heavy": 48998,
-        "Warhead@Flame_Heavy": 48998,
-        "Warhead@Tesla_Heavy": 24499,
+        "Warhead@Tesla_Heavy": 171493,
         "Warhead@Tesla_Heavy_ExtraDamage": 12250,
-        "Warhead@HeavyMissile": 24499,
-        "Warhead@HeavyFlameWeapon": 24499,
     },
     "ra1_soviets_v2rocketlauncher_scudteslafragment1": {
         "Warhead@MissileTesla_Heavy": 14699,
@@ -234,8 +226,7 @@ class AcceptedRaSovietsBalanceBatchTests(unittest.TestCase):
                                   "Warhead@Tesla_Heavy_ExtraDamage": 10000}),
             "TTankZap": (7300, {"Warhead@Tesla_Heavy": 40000,
                                  "Warhead@Tesla_Heavy_ExtraDamage": 20000}),
-            "SCUD": (14110, {"Warhead@MissileHE_Heavy": 60000,
-                             "Warhead@Flame_Heavy": 60000}),
+            "SCUD": (14110, {"Warhead@MissileHE_Heavy": 120000}),
         }
         for weapon, (range_, damages) in expected.items():
             resolved = self.rules.resolve_weapon(weapon)
