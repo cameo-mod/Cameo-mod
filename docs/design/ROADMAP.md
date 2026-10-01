@@ -170,7 +170,9 @@ the fog sequencing.
     `value × safety / time-until-it-pays`, distance-minimising placement toward the target field,
     one refinery per field plus towers, MCV hand-off, and the enemy creep scaled by difficulty ×
     aggression. Steps EX-0 … EX-4, each A/B-gated. **Claude.**
-  - [~] **M** (Steamroller + Rush telemetry merged #658) Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
+  - [~] **M** (Steamroller + Rush telemetry merged #658; Guerrilla telemetry on
+    `devin/dawn/pl-guerrilla-telemetry` — `own.regions_fresh`/`regions_enemy_presence`/`guerrilla_lead`,
+    record-only) Personality leads (§12.14, DESIGN §19.1c): telemetry first. Expansion, Turtle and Tech
     **Claude**; Steamroller and Rush **NOVA**; Guerrilla map control **DAWN**.
 - [ ] **Research round 2 — [`AI_DEEP_RESEARCH.md`](AI_DEEP_RESEARCH.md) §9** (same gate; a
   league score once LG exists). Order of value: CP → ZG/IM → MI → UT → LG/OM.

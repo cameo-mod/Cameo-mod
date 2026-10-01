@@ -253,6 +253,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "attacks_launched", situation.AttacksLaunched);
 			AiMatchLogWriter.AppendNumber(builder, "first_attack_tick", situation.FirstAttackTick);
 			AiMatchLogWriter.AppendNumber(builder, "attacks_per_game_min", situation.AttacksPerGameMin);
+			AiMatchLogWriter.AppendNumber(builder, "regions_fresh", situation.RegionsFresh);
+			AiMatchLogWriter.AppendNumber(builder, "regions_total", situation.RegionsTotal);
+			AiMatchLogWriter.AppendNumber(builder, "regions_enemy_presence", situation.RegionsEnemyPresence);
+			AiMatchLogWriter.AppendNumber(builder, "guerrilla_lead", situation.GuerrillaLead);
 
 			// §12.14 PL-1 leads (record-only; UsePersonalityLeads gates only the consumers).
 			AiMatchLogWriter.AppendNumber(builder, "enemy_production_per_game_min", situation.EnemyProductionPerGameMin);
