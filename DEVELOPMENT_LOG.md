@@ -15469,3 +15469,19 @@ blended+spread layer whenever the layers answer in the same index space —
 remembered AA in the approach zone now tolls air paths a hop early, not only
 inside the defended zone itself. Flag still ships OFF (`UseInfluenceLayers`,
 manifest group `F_influence_layers`); merge blocked on #725.
+## 2026-10-02 — NOVA: PL-1 personality leads, Steamroller/Rush budget lean (nova/personality-leads)
+
+AI_ARCHITECTURE §12.14 / DESIGN §19.1c first slice: the leads are now COMPUTED on every
+`MasterAiBotModule` snapshot and published on `BotSituation` (`EnemyProductionPerGameMin`,
+`SteamrollerLead`, `RushLead`; logged as `own.enemy_production_per_game_min`,
+`own.steamroller_lead`, `own.rush_lead`). `UsePersonalityLeads` (default false, switch group
+`G_personality_leads`) gates only the consumers: Steamroller's trailing lead relaxes
+`UnitBuilderBotModuleCA`'s two production cash floors, Rush's shortens
+`SquadManagerBotModuleCA`'s `minAttackForceDelayTicks` reset — each by up to
+`PersonalityLeadMaxLeanPercent` (50), linear in the deficit, via the new
+`IBotPersonalityLeadProvider` seam. Enemy-side numbers stay fog-honest (remembered
+sightings only); an unseen enemy's production reads as at-target, and Rush's score is the
+weaker of launch rate and first-attack timing with a +0.25 credit for remembered econ kills.
+Tests: `PersonalityLeadsTest`.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>

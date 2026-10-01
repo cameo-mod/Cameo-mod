@@ -23,3 +23,6 @@ groups:
   H_influence_layers:                # NOVA IM-1 — BotInfluenceLayers on the situation snapshot + scout consumption
     MasterAiBotModule:
       UseInfluenceLayers: true
+  G_personality_leads:               # NOVA PL-1 — Steamroller/Rush leads lean their budget drivers while trailing (§12.14)
+    MasterAiBotModule:
+      UsePersonalityLeads: true

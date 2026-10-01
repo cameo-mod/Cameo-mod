@@ -3415,6 +3415,11 @@ Player:
 		# so the risk gate stops feeding infantry into it. 250 = half the median cost (500) of the 323 buildable
 		# garrisoning infantry, per slot of MaxWeight: the observer cannot see how full it is.
 		GarrisonOccupantValue: 250
+		# PL-1 (AI_ARCHITECTURE §12.14): while the bot's personality lead trails its target, lean that
+		# personality's budget knobs toward the lead's driver — Steamroller relaxes the unit builder's
+		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
+		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
+		UsePersonalityLeads: false
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
