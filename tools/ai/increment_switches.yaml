@@ -1,0 +1,40 @@
+# Behaviour switches of the current increment (AI_MASTER_PLAN §1.2 step 6, amended 2026-10-01).
+# Applied to a FROZEN A/B worktree by tools/ai/apply_increment_switches.py — never committed into ai.yaml itself:
+# master keeps every behaviour at its default until the increment's A/B says otherwise.
+#
+# Arms: ctrl = previous master (no switches); all = groups A + B; half = group A only.
+# A trait key matches every instance of that trait in mods/cameo/ai/*.yaml (Trait or Trait@name), except the
+# instances named in `skip` (classic stays the untouched A/B reference).
+# Off on purpose: SiegeEvaluatorBotModule.BehaviourEnabled (lost its A/B, AI_MATCH_LOG ca2b), and the engineer safe
+# route v1 alone (lost its smoke) — v2 below replaces it.
+
+skip: [SquadManagerBotModuleCA@classic]
+
+groups:
+  A_squad_tactics:
+    SquadManagerBotModuleCA:
+      FormationMovement: true          # CA-4 (#678), WVec.Dot overflow fixed in #681
+      SquadMicroEnabled: true          # MI order half (#696)
+      EnsureAntiAirEscort: true        # #662
+      EnsureArtillerySiege: true       # #662
+      AirDoctrineEnabled: true         # #663
+      UseProtectionRequests: true      # the escort seam (#693 needs it)
+  B_ownership_engineers_missions:
+    BotUnitLeaseRegistry:
+      EnforceAtOrderGate: true         # DESIGN §19.6 (#699)
+    EngineerBotModule:
+      MaxEngineersPerTarget: 1         # one engineer per target
+      CaptureFailuresBeforeDormant: 2  # engineer dormant shelf
+      CaptureTargetTries: 3            # spread to the next target
+      EscortDefendedCaptures: true     # #693
+      EscortSuperiority: 150
+      EscortThinnedPercent: 50
+      TransportChance: 25              # #694 + #698 (engt-transport is armed for every genericbot tier)
+      MaxExposedRouteCells: 3          # #697 safe route ...
+      RouteRecheckTicks: 100           # ... v2: re-check while walking
+      StealthMaxDefenders: 2           # v2: stealth only when unguarded
+      RankTargetsBySafety: true        # v2: safety + value
+    MasterAiBotModule:
+      RaidFailuresBeforeDormant: 2     # LC8 dormant shelf
+    BotLearnedPriors:                # genericbot only — NOT UnitBuilderBotModuleCA@generic, which classic shares
+      UseLearnedPriors: true           # the learning loop's return leg (neutral without a priors file)
