@@ -163,6 +163,31 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
   transfer protocol. Flagged in module docstring + fleet checkin.
 - 57 module types / 80 Player instances; claims + AI_MODULE_MAP resynced.
 - Build 0W/0E, 468/468 tests, boot-gate PASS, fog audit 240 sites PASS.
+# 2026-10-01 — Devin (EMBER): RV2 — support-power merge, one owner per decision (YAML-only)
+
+- AI_MASTER_PLAN row RV2 / DESIGN §19.3: the OpenRA `SupportPowerBotModule` (warcraft2.yaml
+  `Player:`, 9 WC2 decisions, previously NO `RequiresCondition` — so it ran for genericbot AND
+  leaked into fransbot) is now gated `RequiresCondition: classicbot`. classic keeps its own
+  Common-schema copy of the 9 WC2 decisions; the module no longer runs for genericbot/fransbot.
+- `SupportPowerBotASModule` in ai.yaml split in two: the shared instance (`genericbot ||
+  classicbot`, 208 decisions) keeps every non-WC2 power; a new `SupportPowerBotASModule@wc2`
+  (`RequiresCondition: genericbot`, 9 decisions) owns the WC2 set for genericbot. WC2 Blizzard +
+  DeathAndDecay moved verbatim (AS-schema versions, the better ones) and the other 7
+  (holyvision, spy_of_kilrogg, healing, bloodlust, haste, slow, invisibility) ported from the
+  warcraft2.yaml Common-schema block — `OrderName`/`MinimumAttractiveness`/`Consideration@N`
+  verbatim, `FineScanRadius`/`CoarseScanRadius` dropped (not AS fields; FieldLoader silently
+  drops them — dead-key trap, CLAUDE.md 8b). No `IgnoreVisibility` added: AS default false =
+  seen/remembered only, which is the intent.
+- Fog honesty: all 28 `IgnoreVisibility: true` in the shared instance flipped to `false`.
+  classic is unaffected at runtime (RevealsMap makes everything viewable); genericbot is now
+  fog-honest on support powers — live targets must pass `CanBeViewedByPlayer`, remembered
+  targets score via `FrozenActorsInRegion` (already wired in `SupportPowerDecisionAS`).
+- Dead-key cleanup: all 11 `FineScanRadius:` lines deleted from ai.yaml (no `CoarseScanRadius`
+  existed) — FieldLoader dropped them silently; they only misled readers.
+- Verified: `IgnoreVisibility: true` = 0 file-wide; shared ∪ @wc2 OrderNames unique (208 + 9);
+  no `wc2_blizzard`/`wc2_deathanddecay` left in the shared instance; `audit_fog_honesty` PASS,
+  `audit_duplicate_keys` unchanged. Boot-gate: YAML-only change (no engine rebuild needed;
+  maintainer review boots it).
 
 # 2026-10-01 — Devin (EMBER): ab_increment — the increment A/B driver (tools-only)
 

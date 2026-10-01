@@ -152,11 +152,13 @@ IDENT = re.compile(r"[A-Za-z_][\w\-.]*")
 # bot has never seen (engine-side SupportPowerBotASModule does
 # `IgnoreVisibility || CanBeViewedByPlayer` over all IOccupySpace actors).
 # §19.5's two sanctioned exceptions do not cover this class. The resolved
-# Player carries 56 such decisions today; that count is ratcheted here — a
-# NEW invisible-strike decision fails the audit, removing one is free.
-# Whether the inherited 56 should be flipped off is a maintainer ruling
-# (it changes @classic), not a silent fix. (NOVA VERIFY_2026-09-30 finding 1.)
-IGNORE_VISIBILITY_ENEMY_BASELINE = 56
+# Player carried 56 such decisions; RV2 (AI_MASTER_PLAN §3) flipped the 28
+# genericbot-shared ones to seen/remembered-only — classic is unaffected at
+# runtime because its RevealsMap leaves nothing invisible. The remaining 28
+# live outside the merged AS block. A NEW invisible-strike decision fails
+# the audit, removing one is free. (NOVA VERIFY_2026-09-30 finding 1; flip
+# ruled by the maintainer-documented RV2 row.)
+IGNORE_VISIBILITY_ENEMY_BASELINE = 28
 
 
 def condition_active(expr: str, granted: set[str], known: set[str]) -> bool:
