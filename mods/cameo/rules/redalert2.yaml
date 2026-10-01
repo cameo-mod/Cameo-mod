@@ -1100,7 +1100,6 @@ ra2sqd:
 		DefaultAttackSequence: shoot
 		IdleSequences: idle
 		StandSequences: stand
-	AttackFrontal:
 	InfectorOld:
 		ArmamentNames: secondary
 		Damage: 1000
@@ -1233,7 +1232,6 @@ ra2dest:
 		Voice: Attack
 		FacingTolerance: 0
 	RenderDetectionCircle:
-	Selectable:
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	CarrierMaster:
@@ -1668,28 +1666,20 @@ yrbpln:
 	Contrail@1:
 		Offset: -640,171,0
 		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
 	Contrail@2:
 		Offset: -640,-171,0
 		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
 	SpawnActorOnDeath:
 		Actor: yrbpln.husk
-	Contrail@1:
-		Offset: -640,171,0
-		TrailLength: 15
-		StartWidth: 0c96
-		StartColor: DD0000
-		StartColorUsePlayerColor: false
-	Contrail@2:
-		Offset: -640,-171,0
-		TrailLength: 15
-		StartWidth: 0c96
-		StartColor: DD0000
-		StartColorUsePlayerColor: false
 	HasParent:
 	AirstrikeSlaveCA:
 		LandingDistance: 1c0
-	SpawnActorOnDeath:
-		Actor: yrbpln.husk
 	RejectsOrders:
 	GivesExperienceToMaster:
 	-DamagedByTintedCells@rad:
@@ -2471,12 +2461,7 @@ ra2sidewind:
 	AttackFrontal:
 		FacingTolerance: 2
 	Voiced:
-		VoiceSet: GGIVoice
-	Voiced:
 		VoiceSet: TechConscriptVoice
-
-# Black Operation Vehicles
-
 ra2leopard:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate

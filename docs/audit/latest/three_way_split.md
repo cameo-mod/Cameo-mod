@@ -2,8 +2,8 @@
 
 _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1). Nothing is subtracted — every stack is debt._
 
-   2063  correct — exactly one main warhead
-    324  none — utility / effect-only weapons
+   2092  correct — exactly one main warhead
+    329  none — utility / effect-only weapons
      88  RAW STACKS — structural inventory
      88  STACKS — all debt under §11b.1
 

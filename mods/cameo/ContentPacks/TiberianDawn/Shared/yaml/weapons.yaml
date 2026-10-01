@@ -58,12 +58,7 @@ td_ivanbomb:
 		Range: 1250
 		ValidTargets: Shielded
 	Report: M203.aud
-	Warhead@Concussion_Medium:
-		Damage: 30000
-	Warhead@Demolition_Heavy:
-		Damage: 60000
 	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 90000
@@ -329,19 +324,6 @@ td_tanyabomb:
 			SubmarineLight: 17
 			SubmarineHeavy: 16
 	Inherits: ^td_tanyabomb
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 200000
-
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 200000
-	Warhead@CannonAP_Light:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
 	Warhead@CollapsedTanyaBombCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -600,11 +582,6 @@ td_tanyabomb:
 			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
-
 td_tanyaattach:
 	Projectile: InstantHit
 	TargetActorCenter: true

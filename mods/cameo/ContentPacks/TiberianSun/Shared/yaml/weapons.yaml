@@ -18,12 +18,7 @@ TS8Inch:
 		ContrailEndWidth: 1
 		ContrailStartColor: FF9933
 		ContrailEndColor: FFFFFF
-	Warhead@Demolition_Heavy:
-		Damage: 40000
-	Warhead@Demolition_Light:
-		Damage: 40000
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -220,15 +215,6 @@ TSAPCGun:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: gun20.aud
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
-
 TSCarrierTarget:
 	ReloadDelay: 50
 	Range: 17500
@@ -296,12 +282,6 @@ TSTorpTube:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Light:
-		Damage: 18000
-	Warhead@MissileAP_Heavy:
-		Damage: 18000
-		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_Heavy_Flat: AreaDamage
 		ValidTargets: Water, Underwater, Bridge, Structure

@@ -63,12 +63,10 @@ tkmjuggap:
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
 	-Warhead@Demolition_Light:
-	Warhead@CannonAP_Light_Flat:
+	Warhead@CannonAP_Light_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
-	Warhead@CannonAP_Light_Flat: AreaDamage
-	Warhead@CannonAP_Light_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -156,18 +154,11 @@ tkmbunkmg:
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun11.aud
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Flat:
+	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Bullet_Medium_Flat: AreaDamage
-	Warhead@Bullet_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -279,7 +270,6 @@ tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
 	Warhead@CannonAP_Light_Flat: AreaDamage
-	Warhead@CannonAP_Light_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -376,17 +366,13 @@ tkmtwinrocketstechnicaltank:
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 64
-	Range: 7214
+	Range: 5243
 	Burst: 2
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-	Range: 5243
-	Projectile: Missile
-		VerticalRateOfTurn: 20
-
 tkmfirerockets:
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
@@ -394,9 +380,6 @@ tkmfirerockets:
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
-	Warhead@MissileAP_Light:
-		InvalidTargets: Air
-		Damage: 18000
 	Warhead@Flame_Light:
 		InvalidTargets: Air
 		Damage: 22000
@@ -408,7 +391,6 @@ tkmfirerockets:
 		ImpactSounds: firebl3.aud
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	-Warhead@MissileAP_Light:
 tkmdronesummon:
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
@@ -445,7 +427,7 @@ tkmakap:
 	ReloadDelay: 17
 	Range: 5621
 	Report: mgun2.aud
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: AreaDamage
 		Versus:
 			None: 200
 			Light: 110
@@ -519,12 +501,6 @@ tkmakap:
 			SubmarineHeavy: 2
 		PercentageScale: 3333
 		Damage: 8000
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	-Warhead@Demolition_Light:
-	Warhead@Bullet_Light: AreaDamage
-	Warhead@Bullet_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -533,6 +509,7 @@ tkmakap:
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
+	-Warhead@Demolition_Light:
 tkmkord:
 	Inherits@ra2cgWh: ^Warhead_Bullet_Medium
 	Inherits@ra2cgProj: ^Projectile_Bullet_Medium
@@ -623,7 +600,7 @@ tkmm203:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Versus:
 			None: 183
 			Light: 86
@@ -696,11 +673,6 @@ tkmm203:
 			SubmarineLight: 8
 			SubmarineHeavy: 7
 		Damage: 8000
-	Warhead@Flame_Light:
-		Damage: 4000
-	-Warhead@Flame_Light:
-	Warhead@Demolition_Light: AreaDamage
-	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -710,6 +682,7 @@ tkmm203:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	-Warhead@Flame_Light:
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -777,20 +750,11 @@ TKMQuadCannonAG:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_Medium_Flat:
+	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Flak_Medium_Flat: AreaDamage
-	Warhead@Flak_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -872,12 +836,10 @@ TKMQuadCannonAG:
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
-	Warhead@Flak_Medium_Flat:
+	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Flak_Medium_Flat: AreaDamage
-	Warhead@Flak_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -965,20 +927,13 @@ tkmturretcannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonAP_Light:
-		Damage: 8000
-	Warhead@CannonHE_Medium:
-		Damage: 8000
-	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonAP_Light_Flat:
+	Warhead@CannonAP_Light_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
 		Spread: 300
 		Falloff: 100, 50, 20, 0
-	Warhead@CannonAP_Light_Flat: AreaDamage
-	Warhead@CannonAP_Light_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1094,20 +1049,11 @@ TKMZazaCannonAG:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_Medium_Flat:
+	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Flak_Medium_Flat: AreaDamage
-	Warhead@Flak_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1189,12 +1135,10 @@ TKMZazaCannonAG:
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
-	Warhead@Flak_Medium_Flat:
+	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Flak_Medium_Flat: AreaDamage
-	Warhead@Flak_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1281,21 +1225,11 @@ TKMAATurretCannon:
 	ReloadDelay: 5
 	Range: 11604
 	ValidTargets: Air
-	Warhead@MissileHE_Medium:
-		PercentageScale: 20000
-		ValidTargets: Air
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		Damage: 2000
 	-Warhead@Flak_Medium:
-	-Warhead@MissileHE_Medium:
-	Warhead@Flak_Medium_Flat:
+	Warhead@Flak_Medium_Flat: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 14975
-	Warhead@Flak_Medium_Flat: AreaDamage
-	Warhead@Flak_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1461,13 +1395,11 @@ t30shell:
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
 	-Warhead@Railgun_Heavy:
-	Warhead@Railgun_Heavy_Flat:
+	Warhead@Railgun_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 80000
 		Spread: 512
 		PercentageScale: 3000
-	Warhead@Railgun_Heavy_Flat: AreaDamage
-	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1563,15 +1495,6 @@ HueyCryoMissiles:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@CryoFreeze: GrantExternalCondition
 		Condition: CryoFreeze
 		Duration: 125
@@ -1584,14 +1507,10 @@ HueyCryoMissiles:
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
-	Warhead@Cryo_Medium_Flat:
+	Warhead@Cryo_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
-	Warhead@Cryo_Medium_Flat: AreaDamage
-	Warhead@Cryo_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1682,31 +1601,16 @@ HueyTwinMissiles:
 	Range: 5528
 	MinRange: 1105
 	Report: missile6.aud
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_Medium_Flat:
+	Warhead@MissileAP_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
-	Projectile: Missile
-		VerticalRateOfTurn: 16
-	Warhead@MissileAP_Medium_Flat: AreaDamage
-	Warhead@MissileAP_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1786,6 +1690,8 @@ HueyTwinMissiles:
 			SubmarineLight: 16
 			SubmarineHeavy: 17
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
 sandmarinemortar:
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -1804,79 +1710,13 @@ sandmarinemortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 120000
-	Warhead@Flame_Medium:
-		Damage: 120000
-	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Medium:
-	Warhead@Demolition_Heavy_Flat:
+	Warhead@Demolition_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 240000
 		PercentageScale: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	Warhead@RA2Scorch:
-	Warhead@GroundFire: SpawnActor
-	Warhead@Effect:
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@GroundFire:
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@RA2Scorch:
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectAir:
-	Warhead@Concrete:
-	Warhead@EffectWater:
-	Warhead@Concrete:
-		Damage: 150
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Ship
-		ExplosionPalette: ra2effect
-	Warhead@EffectAir:
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow:
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Duration: 8
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Demolition_Heavy_Flat: AreaDamage
-	Warhead@Demolition_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1955,6 +1795,55 @@ sandmarinemortar:
 			AntiAirShip: 20
 			SubmarineLight: 17
 			SubmarineHeavy: 16
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		Explosions: ra2_large_explosion
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 bigshieemortar:
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -1973,79 +1862,13 @@ bigshieemortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 80000
-	Warhead@Flame_Medium:
-		Damage: 80000
-	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Medium:
-	Warhead@Demolition_Heavy_Flat:
+	Warhead@Demolition_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 160000
 		PercentageScale: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	Warhead@RA2Scorch:
-	Warhead@GroundFire: SpawnActor
-	Warhead@Effect:
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@GroundFire:
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@RA2Scorch:
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@RA2Crater:
-	Warhead@EffectAir:
-	Warhead@Concrete:
-	Warhead@EffectWater:
-	Warhead@Concrete:
-		Damage: 150
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Ship
-		ExplosionPalette: ra2effect
-	Warhead@EffectAir:
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow:
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Duration: 8
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Demolition_Heavy_Flat: AreaDamage
-	Warhead@Demolition_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2124,6 +1947,55 @@ bigshieemortar:
 			AntiAirShip: 20
 			SubmarineLight: 17
 			SubmarineHeavy: 16
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		Explosions: ra2_large_explosion
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -2183,7 +2055,7 @@ tkmkatyushalalauncherrocketscryo:
 	ReloadDelay: 157
 	Burst: 8
 	BurstDelays: 4
-	Range: 12437
+	Range: 14000
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -2198,29 +2070,23 @@ tkmkatyushalalauncherrocketscryo:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water
-		Damage: 20000
-	Warhead@Effect:
-		ImpactActors: false
-	Report: vintatta.wav
-	Range: 14000
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-	Projectile:
 		TrailInterval: 1
 		ContrailStartColor: 77CCFF
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@PhysicalStateCryo:
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 20000
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -2000
 		Range: 200
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect:
-		ImpactActors: false
 tkmkatyushalalauncherrocketsfire:
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@flameeffect: ^Effect_Flame_Light
@@ -2254,7 +2120,7 @@ tkmkatyushalalauncherrocketstwin:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 157
-	Burst: 8
+	Burst: 16
 	BurstDelays: 4
 	Range: 12437
 	Report: vintatta.wav
@@ -2274,9 +2140,6 @@ tkmkatyushalalauncherrocketstwin:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@Effect:
-		ImpactActors: false
-	Burst: 16
 	Warhead@Effect:
 		ImpactActors: false
 ^SandmarineTuskLegacy:
@@ -2301,17 +2164,10 @@ SandmarineTusk:
 	Inherits@xSandmarineTusk2: ^Projectile_Missile_Heavy
 	Inherits@xSandmarineTusk3: ^Effect_Concussion_Medium
 	-Warhead@Concussion_Medium:
-	Warhead@MissileHE_Heavy_Flat:
+	Warhead@MissileHE_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
-	ReloadDelay: 129
-	Range: 6464
-	Burst: 3
-	BurstDelays: 3
-	Report: missile6.aud
-	Warhead@MissileHE_Heavy_Flat: AreaDamage
-	Warhead@MissileHE_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2390,6 +2246,11 @@ SandmarineTusk:
 			AntiAirShip: 21
 			SubmarineLight: 19
 			SubmarineHeavy: 19
+	ReloadDelay: 129
+	Range: 6464
+	Burst: 3
+	BurstDelays: 3
+	Report: missile6.aud
 BigShieeTusk:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -2400,20 +2261,11 @@ BigShieeTusk:
 	Range: 7238
 	Report: missile6.aud
 	ValidTargets: Ground, Water
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 40000
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water
-		Damage: 40000
 	-Warhead@Concussion_Medium:
-	-Warhead@MissileHE_Heavy:
-	Warhead@MissileHE_Heavy_Flat:
+	Warhead@MissileHE_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
-	Warhead@MissileHE_Heavy_Flat: AreaDamage
-	Warhead@MissileHE_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2502,88 +2354,62 @@ SandmarineTuskTwin:
 	Range: 6102
 	Report: missile6.aud
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 4000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 60000
-	-Warhead@FlakWeapon:
-	-Warhead@MissileHE_Heavy:
-	-Warhead@Grenade:
-	-Warhead@Bullet_Medium:
-	Warhead@EffectWater:
-	Warhead@Effect:
-		ImpactActors: false
 	Warhead@EffectWater:
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Effect:
+		ImpactActors: false
+		Explosions: med_frag
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
 	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
 	Warhead@Smudge:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@RA2Crater:
-	Warhead@Concrete:
-		Damage: 150
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@DuneRock:
 		SmudgeType: RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@DuneSand:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: med_frag
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@EffectAir:
 		Explosions: med_explosion_air
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@Glow:
-		Color: FFB84D
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 SandmarineTuskCryo:
 	Inherits@finalmain: ^Warhead_MissileCryo_Heavy
 	Inherits@fx_cover: ^Effect_Cryo
@@ -2595,7 +2421,13 @@ SandmarineTuskCryo:
 		PercentageScale: 9999
 		-PhysicalStates:
 	Warhead@EffectAir:
+		Explosions: cryo_blast
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -2000
+		Range: 200
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
 	Projectile:
 		TrailImage: blue_smokey
 		ContrailLength: 15
@@ -2605,16 +2437,8 @@ SandmarineTuskCryo:
 		ContrailEndWidth: 25
 	Warhead@Effect:
 		Explosions: cryo_blast
-	Warhead@EffectAir:
-		Explosions: cryo_blast
 	Warhead@EffectWater:
 		Explosions: cryo_blast
-	Warhead@PhysicalStateCryo:
-		PhysicalStateName: Temperature
-		Amount: -2000
-		Range: 200
-		ValidRelationships: Enemy, Neutral, Ally
-		ValidTargets: Ground, Water, Air
 SandmarineTuskFire:
 	Inherits@xSandmarineTuskFire1: ^Warhead_Concussion_Medium
 	Inherits@xSandmarineTuskFire2: ^Projectile_Missile_Heavy
@@ -2623,7 +2447,7 @@ SandmarineTuskFire:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Light:
+	Warhead@Flame_Light: AreaDamage
 		Versus:
 			None: 200
 			Light: 84
@@ -2700,67 +2524,6 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 88000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	-Warhead@Concussion_Medium:
-	Warhead@ShieldHit:
-		InvalidTargets: Air
-	ReloadDelay: 129
-	Range: 6464
-	Burst: 3
-	BurstDelays: 3
-	Report: missile6.aud
-	Warhead@RA2Scorch:
-	Warhead@GroundFire: SpawnActor
-	Warhead@GroundFire:
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@RA2Scorch:
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge:
-		Chance: 15
-	Warhead@Effect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@EffectWater:
-	Warhead@Concrete:
-	Warhead@Concrete:
-		Damage: 175
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater:
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow:
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@ShieldHit:
-		Duration: 12
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	-Warhead@EffectAir:
-	-Warhead@RA2Crater:
-	Warhead@RA2Scorch: LeaveSmudge
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@Flame_Light: AreaDamage
-	Warhead@Flame_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2769,6 +2532,54 @@ SandmarineTuskFire:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageSpread: 50
+	-Warhead@Concussion_Medium:
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+		Duration: 12
+	ReloadDelay: 129
+	Range: 6464
+	Burst: 3
+	BurstDelays: 3
+	Report: missile6.aud
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Smudge:
+		Chance: 15
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete:
+		Damage: 175
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
 ^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -2804,35 +2615,10 @@ ViperMissiles:
 	Inherits@xViperMissiles3: ^Projectile_Missile_Medium
 	Inherits@xViperMissiles4: ^Effect_Clsn_Medium_RA2
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_Medium_Flat:
+	Warhead@MissileAP_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
-	ReloadDelay: 50
-	Range: 6271
-	Burst: 4
-	BurstDelays: 2
-	Report: vbleatta.wav, vbleattb.wav
-	Projectile:
-		Arm: 2
-		Inaccuracy: 2000
-		Image: d2k_missile2
-		ContrailLength: 33
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Speed: 400
-		Acceleration: 10
-		RangeLimit: 20000
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
-		Palette: d2keffect
-		TrailImage: large_trail
-		MinimumLaunchAngle: 200
-		MaximumLaunchAngle: 200
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@MissileAP_Medium_Flat: AreaDamage
-	Warhead@MissileAP_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2911,15 +2697,36 @@ ViperMissiles:
 			AntiAirShip: 13
 			SubmarineLight: 16
 			SubmarineHeavy: 17
+	ReloadDelay: 50
+	Range: 6271
+	Burst: 4
+	BurstDelays: 2
+	Report: vbleatta.wav, vbleattb.wav
+	Projectile:
+		Arm: 2
+		Inaccuracy: 2000
+		Image: d2k_missile2
+		ContrailLength: 33
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 20000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+	Warhead@Effect:
+		ImpactActors: false
 ViperMissilesTwin:
 	Inherits: ViperMissiles
 	Burst: 8
-	Warhead@MissileAP_Medium_Flat:
+	Warhead@MissileAP_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
-	Warhead@MissileAP_Medium_Flat: AreaDamage
-	Warhead@MissileAP_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -3000,32 +2807,10 @@ ViperMissilesTwin:
 			SubmarineHeavy: 17
 ViperMissilesCryo:
 	Inherits: ViperMissiles
-	Warhead@MissileAP_Medium_Flat:
+	Warhead@MissileAP_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-	Projectile:
-		ContrailLength: 15
-		ContrailStartWidth: 75
-		ContrailEndWidth: 25
-		TrailImage: blue_smokey
-		ContrailStartColor: 77CCFF
-		ContrailEndColor: 33221100
-	Warhead@Effect:
-		Explosions: cryo_blast
-	Warhead@EffectAir:
-		Explosions: cryo_blast
-	Warhead@EffectWater:
-		Explosions: cryo_blast
-	Warhead@PhysicalStateCryo:
-		PhysicalStateName: Temperature
-		Amount: -2000
-		Range: 200
-		ValidRelationships: Enemy, Neutral, Ally
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium_Flat: AreaDamage
-	Warhead@MissileAP_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -3104,6 +2889,25 @@ ViperMissilesCryo:
 			AntiAirShip: 13
 			SubmarineLight: 16
 			SubmarineHeavy: 17
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		Amount: -2000
+		Range: 200
+		ValidRelationships: Enemy, Neutral, Ally
+		ValidTargets: Ground, Water, Air
+	Projectile:
+		ContrailLength: 15
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		TrailImage: blue_smokey
+		ContrailStartColor: 77CCFF
+		ContrailEndColor: 33221100
+	Warhead@Effect:
+		Explosions: cryo_blast
+	Warhead@EffectAir:
+		Explosions: cryo_blast
+	Warhead@EffectWater:
+		Explosions: cryo_blast
 ViperMissilesFire:
 	Inherits@xViperMissilesFire2: ^Warhead_MissileAP_Medium
 	Inherits@xViperMissilesFire3: ^Projectile_Missile_Medium
@@ -3112,7 +2916,21 @@ ViperMissilesFire:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Light:
+		Arm: 2
+		Inaccuracy: 2000
+		Image: d2k_missile2
+		ContrailLength: 33
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 20000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		Palette: d2keffect
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+	Warhead@Flame_Light: AreaDamage
 		Versus:
 			None: 200
 			Light: 84
@@ -3188,90 +3006,6 @@ ViperMissilesFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	-Warhead@MissileAP_Medium:
-	ReloadDelay: 50
-	Range: 6271
-	Burst: 4
-	BurstDelays: 2
-	Report: vbleatta.wav, vbleattb.wav
-	Projectile:
-		Arm: 2
-		Inaccuracy: 2000
-		Image: d2k_missile2
-		ContrailLength: 33
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Speed: 400
-		Acceleration: 10
-		RangeLimit: 20000
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
-		Palette: d2keffect
-		MinimumLaunchAngle: 200
-		MaximumLaunchAngle: 200
-	Warhead@RA2Scorch:
-	Warhead@GroundFire: SpawnActor
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@GroundFire:
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@RA2Scorch:
-		SmudgeType: RA2Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Smudge:
-		Chance: 15
-	Warhead@Effect:
-	Warhead@DuneRock:
-	Warhead@DuneSand:
-	Warhead@EffectWater:
-	Warhead@Concrete:
-	Warhead@RA2Crater:
-	Warhead@EffectAir:
-	Warhead@Concrete:
-		Damage: 150
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: ra2_medium_clsn
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-		ExplosionPalette: ra2effect
-	Warhead@EffectAir:
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: ra2_small_watersplash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-		ExplosionPalette: ra2effect
-	Warhead@Glow:
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-	Warhead@ShieldHit:
-		Duration: 10
-	Warhead@Flame_Light: AreaDamage
-	Warhead@Flame_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -3280,6 +3014,61 @@ ViperMissilesFire:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageSpread: 50
+	-Warhead@MissileAP_Medium:
+	ReloadDelay: 50
+	Range: 6271
+	Burst: 4
+	BurstDelays: 2
+	Report: vbleatta.wav, vbleattb.wav
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Effect:
+		ImpactActors: false
+		Explosions: ra2_medium_clsn
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@Smudge:
+		Chance: 15
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@ShieldHit:
+		Duration: 10
 DronePodTruckLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Water
@@ -3315,23 +3104,6 @@ VonSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
-	Warhead@Bullet_Heavy: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		Damage: 30000
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-	Warhead@SniperChaingun:
-		Damage: 18000
-		PercentageScale: 0
-	-Warhead@SniperChaingun:
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Projectile:
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -3349,7 +3121,136 @@ VonSniper:
 		ContrailZOffset: 4000
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
-	Warhead@ChaingunPercentage:
+	Warhead@Bullet_Heavy: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
+		ValidTargets: Ground, Water, Air
+		Damage: 30000
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 3
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			FlyingInfantry: 10
+			CyborgLight: 8
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 10
+			AntiAirInfantry: 6
+			AntiAirVehicle: 13
+			AntiAirBuilding: 14
+			ShipLight: 11
+			ShipMedium: 14
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 12
+			SubmarineLight: 16
+			SubmarineHeavy: 18
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 3
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		Falloff: 100, 0
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 1
 		Damage: 3
@@ -3391,137 +3292,15 @@ VonSniper:
 		Falloff: 100, 0
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		ValidTargets: Ground, Ship, Air
 	Warhead@EffectAir:
 		Explosions: small_explosion_air
 		ImpactSounds: xplos.aud
 	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@FlakWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 1
-		Damage: 3
-		Versus:
-			Shield: 25
-			Fighter: 20
-			Bomber: 19
-			Helicopter: 18
-			Spaceship: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Light: 11
-			Medium: 10
-			Heavy: 9
-			Superheavy: 8
-			Wood: 7
-			Concrete: 6
-			Steel: 5
-			FlyingInfantry: 15
-			CyborgLight: 13
-			CyborgMedium: 12
-			CyborgHeavy: 11
-			CyborgHeroic: 10
-			AntiAirInfantry: 15
-			AntiAirVehicle: 10
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 8
-			ShipHeavy: 7
-			ShipSuperheavy: 6
-			AntiAirShip: 8
-			SubmarineLight: 8
-			SubmarineHeavy: 7
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-		UpdatesUnitStatistics: false
-		Falloff: 100, 0
-	Warhead@MediumMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 1
-		Damage: 3
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-			FlyingInfantry: 10
-			CyborgLight: 8
-			CyborgMedium: 10
-			CyborgHeavy: 12
-			CyborgHeroic: 10
-			AntiAirInfantry: 6
-			AntiAirVehicle: 13
-			AntiAirBuilding: 14
-			ShipLight: 11
-			ShipMedium: 14
-			ShipHeavy: 17
-			ShipSuperheavy: 18
-			AntiAirShip: 12
-			SubmarineLight: 16
-			SubmarineHeavy: 18
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-		Falloff: 100, 0
 	Warhead@ShieldHit:
 		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 1
-		Damage: 3
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-			FlyingInfantry: 10
-			CyborgLight: 12
-			CyborgMedium: 9
-			CyborgHeavy: 6
-			CyborgHeroic: 4
-			AntiAirInfantry: 15
-			AntiAirVehicle: 7
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 5
-			ShipHeavy: 5
-			ShipSuperheavy: 3
-			AntiAirShip: 7
-			SubmarineLight: 4
-			SubmarineHeavy: 2
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-		Falloff: 100, 0
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -3530,29 +3309,16 @@ VonSniperAP:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@SniperMediumMissile:
-		Damage: 16000
-	Warhead@SniperFlak:
-		Damage: 16000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Heavy: AreaDamage
 		Damage: 92000
-	Warhead@Bullet_Light: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		Damage: 16000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Spread: 1
 		Falloff: 100, 0
 		Damage: 8
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-	Warhead@Bullet_Medium: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		Damage: 32000
-		PercentageScale: 0
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Spread: 1
 		Falloff: 100, 0
@@ -3560,14 +3326,6 @@ VonSniperAP:
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-	Warhead@SniperChaingun:
-		Damage: 38000
-		PercentageScale: 0
-	-Warhead@SniperFlak:
-	-Warhead@SniperMediumMissile:
-	-Warhead@Bullet_Light:
-	-Warhead@SniperChaingun:
-	-Warhead@Bullet_Medium:
 VonSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -3594,30 +3352,10 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SniperMediumMissile:
-		ValidRelationships: Enemy, Neutral
-		Damage: 32000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SniperFlak: AreaDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		FriendlyFireDamage: 100
-		Damage: 64000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PercentageScale: 0
-	Warhead@SniperChaingun:
-		Damage: 6000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Heavy: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3629,12 +3367,6 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 64000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PercentageScale: 0
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -3645,12 +3377,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@SniperMediumMissile:
-	-Warhead@SniperFlak:
-	-Warhead@SniperChaingun:
 	-Warhead@Bullet_Heavy:
-	-Warhead@Bullet_Medium:
-
 tkmm16ap:
 	Inherits@ra2cgWh: ^Warhead_Bullet_Medium
 	Inherits@ra2cgProj: ^Projectile_Bullet_Medium
@@ -3693,13 +3420,9 @@ tkmstrykerfirerockets:
 		VerticalRateOfTurn: 16
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@MissileAP_Medium:
-		Damage: 24000
-		ValidTargets: Ground, Water, Trees, Air
 	Warhead@Flame_Medium:
 		Damage: 30000
 		ValidTargets: Ground, Water, Air
-	-Warhead@MissileAP_Medium:
 VanSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -3764,16 +3487,11 @@ tkmquadcannonmg:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_Medium_Flat:
+	Warhead@Bullet_Medium_Flat: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@Bullet_Medium_Flat: AreaDamage
-	Warhead@Bullet_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -3866,21 +3584,6 @@ HeavyAATankCannontkm:
 		Damage: 8000
 		PercentageScale: 0
 	Projectile: Bullet
-	Warhead@LightMissilePercentage: AreaDamagePercentage
-	Warhead@Smudge:
-	Warhead@DuneRock:
-	Warhead@RA2Crater:
-	Warhead@DuneSand:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Projectile:
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -3905,7 +3608,161 @@ HeavyAATankCannontkm:
 		ContrailEndColor: 88664422
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
-	Warhead@ChaingunPercentage:
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Spaceship: 15
+			Heavy: 14
+			Helicopter: 13
+			Steel: 12
+			Medium: 11
+			Bomber: 10
+			Concrete: 9
+			Light: 8
+			Fighter: 7
+			Wood: 6
+			Scout: 5
+			Plate: 4
+			Flak: 3
+			None: 2
+			Heroic: 1
+			FlyingInfantry: 6
+			CyborgLight: 4
+			CyborgMedium: 6
+			CyborgHeavy: 7
+			CyborgHeroic: 4
+			AntiAirInfantry: 2
+			AntiAirVehicle: 9
+			AntiAirBuilding: 10
+			ShipLight: 7
+			ShipMedium: 10
+			ShipHeavy: 13
+			ShipSuperheavy: 14
+			AntiAirShip: 8
+			SubmarineLight: 12
+			SubmarineHeavy: 14
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: piffs
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectAir:
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 1
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		-ImpactSounds:
+
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Damage: 1
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+			FlyingInfantry: 10
+			CyborgLight: 12
+			CyborgMedium: 9
+			CyborgHeavy: 6
+			CyborgHeroic: 4
+			AntiAirInfantry: 15
+			AntiAirVehicle: 7
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 5
+			ShipHeavy: 5
+			ShipSuperheavy: 3
+			AntiAirShip: 7
+			SubmarineLight: 4
+			SubmarineHeavy: 2
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Air, Air
 		Spread: 100
 		Damage: 1
@@ -3944,67 +3801,46 @@ HeavyAATankCannontkm:
 			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectAir:
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@FlakWeaponPercentage:
+	-Warhead@Glow:
+tkmheavyaaturret:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
+	ValidTargets: Ground, Water, Air
+	-TargetActorCenter:
+	ReloadDelay: 10
+	Range: 10588
+	MinRange: 2120
+	Report: gun13.aud
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Spread: 125
-		Damage: 1
-		Versus:
-			Shield: 25
-			Fighter: 20
-			Bomber: 19
-			Helicopter: 18
-			Spaceship: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Light: 11
-			Medium: 10
-			Heavy: 9
-			Superheavy: 8
-			Wood: 7
-			Concrete: 6
-			Steel: 5
-			FlyingInfantry: 15
-			CyborgLight: 13
-			CyborgMedium: 12
-			CyborgHeavy: 11
-			CyborgHeroic: 10
-			AntiAirInfantry: 15
-			AntiAirVehicle: 10
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 8
-			ShipHeavy: 7
-			ShipSuperheavy: 6
-			AntiAirShip: 8
-			SubmarineLight: 8
-			SubmarineHeavy: 7
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-		UpdatesUnitStatistics: false
-	Warhead@LightMissilePercentage:
+		Damage: 8000
+		PercentageScale: 0
+	Projectile: Bullet
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 200
+		Image: 50CAL
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 8
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 4000
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
@@ -4043,18 +3879,83 @@ HeavyAATankCannontkm:
 			SubmarineHeavy: 14
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@RA2Crater:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: piffs
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectAir:
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 4
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@Concrete:
+		Damage: 25
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@SmallArmsPercentage:
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 1
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 8
+			ShipHeavy: 7
+			ShipSuperheavy: 6
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		-ImpactSounds:
+
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -4093,67 +3994,7 @@ HeavyAATankCannontkm:
 			SubmarineHeavy: 2
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	-Warhead@Glow:
-	Warhead@EffectWater:
-		-ImpactSounds:
-
-tkmheavyaaturret:
-	Inherits@collapsewh: ^Warhead_Bullet_Medium
-	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	ValidTargets: Ground, Water, Air
-	-TargetActorCenter:
-	ReloadDelay: 10
-	Range: 10588
-	MinRange: 2120
-	Report: gun13.aud
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PercentageScale: 0
-	Projectile: Bullet
-	Warhead@LightMissilePercentage: AreaDamagePercentage
-	Warhead@Smudge:
-	Warhead@DuneRock:
-	Warhead@RA2Crater:
-	Warhead@DuneSand:
-	Warhead@Effect:
-	Warhead@EffectAir:
-	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete:
-	Warhead@ShieldHitEffect:
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectWater:
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Projectile:
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		Inaccuracy: 200
-		Image: 50CAL
-		Shadow: true
-		HorizontalRateOfTurn: 40
-		VerticalRateOfTurn: 40
-		TrailImage: smokey
-		TrailInterval: 1
-		ContrailLength: 8
-		MaximumLaunchSpeed: 300
-		MinimumLaunchSpeed: 300
-		Speed: 4000
-		CloseEnough: 600
-		Acceleration: 4
-		HomingActivationDelay: 1
-		RangeLimit: 20000
-		PointDefenseTypes: Missile
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-	Warhead@ChaingunPercentage:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
@@ -4192,162 +4033,7 @@ tkmheavyaaturret:
 			SubmarineHeavy: 6
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@DuneRock:
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand:
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectAir:
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@FlakWeaponPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 125
-		Damage: 1
-		Versus:
-			Shield: 25
-			Fighter: 20
-			Bomber: 19
-			Helicopter: 18
-			Spaceship: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Light: 11
-			Medium: 10
-			Heavy: 9
-			Superheavy: 8
-			Wood: 7
-			Concrete: 6
-			Steel: 5
-			FlyingInfantry: 15
-			CyborgLight: 13
-			CyborgMedium: 12
-			CyborgHeavy: 11
-			CyborgHeroic: 10
-			AntiAirInfantry: 15
-			AntiAirVehicle: 10
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 8
-			ShipHeavy: 7
-			ShipSuperheavy: 6
-			AntiAirShip: 8
-			SubmarineLight: 8
-			SubmarineHeavy: 7
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-		UpdatesUnitStatistics: false
-	Warhead@LightMissilePercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 1
-		Versus:
-			Shield: 17
-			Superheavy: 16
-			Spaceship: 15
-			Heavy: 14
-			Helicopter: 13
-			Steel: 12
-			Medium: 11
-			Bomber: 10
-			Concrete: 9
-			Light: 8
-			Fighter: 7
-			Wood: 6
-			Scout: 5
-			Plate: 4
-			Flak: 3
-			None: 2
-			Heroic: 1
-			FlyingInfantry: 6
-			CyborgLight: 4
-			CyborgMedium: 6
-			CyborgHeavy: 7
-			CyborgHeroic: 4
-			AntiAirInfantry: 2
-			AntiAirVehicle: 9
-			AntiAirBuilding: 10
-			ShipLight: 7
-			ShipMedium: 10
-			ShipHeavy: 13
-			ShipSuperheavy: 14
-			AntiAirShip: 8
-			SubmarineLight: 12
-			SubmarineHeavy: 14
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@RA2Crater:
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Damage: 1
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-			FlyingInfantry: 10
-			CyborgLight: 12
-			CyborgMedium: 9
-			CyborgHeavy: 6
-			CyborgHeroic: 4
-			AntiAirInfantry: 15
-			AntiAirVehicle: 7
-			AntiAirBuilding: 5
-			ShipLight: 9
-			ShipMedium: 5
-			ShipHeavy: 5
-			ShipSuperheavy: 3
-			AntiAirShip: 7
-			SubmarineLight: 4
-			SubmarineHeavy: 2
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@Smudge:
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	-Warhead@Glow:
-	Warhead@EffectWater:
-		-ImpactSounds:
-
 tkmrh120gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -4368,18 +4054,11 @@ tkmtrenchcannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 850
-	Warhead@Concussion_Medium:
-		Damage: 20000
-	Warhead@CannonHE_Heavy:
-		Damage: 20000
 	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
-	Warhead@CannonHE_Heavy_Flat:
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
-	Warhead@CannonHE_Heavy_Flat: AreaDamage
-	Warhead@CannonHE_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -4462,12 +4141,10 @@ tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon
 	ReloadDelay: 36
 	Range: 11071
-	Warhead@CannonHE_Heavy_Flat:
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
-	Warhead@CannonHE_Heavy_Flat: AreaDamage
-	Warhead@CannonHE_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -4597,11 +4274,7 @@ FlakbusAA:
 		Width: 44
 		Inaccuracy: 2000
 	ValidTargets: Air
-	Warhead@MissileHE_Medium:
-		ValidTargets: Air
-		Damage: 16000
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 32000
 		PercentageScale: 9997
-	-Warhead@MissileHE_Medium:

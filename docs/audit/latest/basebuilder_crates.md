@@ -1,6 +1,6 @@
 # audit_basebuilder_crates — faction MCV crate coverage
 
-Real factions: **31** — covered by crate: **31** — missing: **0**
+Real factions: **32** — covered by crate: **31** — missing: **1**
 
 
 ## Covered factions
@@ -38,5 +38,12 @@ Real factions: **31** — covered by crate: **31** — missing: **0**
 | wc2_orcs | wc2_orcs | wc2_orcs_mobileconstructionvehicleorc | 10000 |
 | yuri | yuri | yuri_mobileconstructionvehicle | 10000 |
 | zerg | zerg | zerg_hatcherydrone | 10000 |
+
+
+## Missing crate coverage
+
+| faction |
+|---|
+| scrin |
 
 

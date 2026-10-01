@@ -229,6 +229,7 @@ cabal_hunterdrone:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	AttackAircraft:
 		RequiresCondition: ammo
+		FacingTolerance: 40
 	AmmoPool:
 		Ammo: 1
 		AmmoCondition: ammo
@@ -265,8 +266,6 @@ cabal_hunterdrone:
 		PauseOnCondition: !ammo
 		Weapon: CabalOverkillDroneLaser
 		LocalOffset: 150,0,0
-	AttackAircraft:
-		FacingTolerance: 40
 	Voiced:
 		VoiceSet: TSScrin
 	RejectsOrders:

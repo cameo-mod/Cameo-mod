@@ -29,10 +29,10 @@
 
 ## U3 — per-stat collisions (ratchets hp 779 · speed 716 · cost 809)
 
-   hp          902 values   140 distinct   762 collisions ( 84%)  most-shared: 50000 x67
-   speed       799 values    89 distinct   710 collisions ( 89%)  most-shared: 75 x79
-   w_range     749 values   436 distinct   313 collisions ( 42%)  most-shared: 5000 x29
-   w_dps       729 values   418 distinct   311 collisions ( 43%)  most-shared: 500 x22
-   cost        901 values   127 distinct   774 collisions ( 86%)  most-shared: 500 x73
+   hp          927 values   140 distinct   787 collisions ( 85%)  most-shared: 50000 x68
+   speed       818 values    89 distinct   729 collisions ( 89%)  most-shared: 75 x81
+   w_range     750 values   436 distinct   314 collisions ( 42%)  most-shared: 5000 x29
+   w_dps       748 values   432 distinct   316 collisions ( 42%)  most-shared: 500 x22
+   cost        926 values   127 distinct   799 collisions ( 86%)  most-shared: 500 x75
 
 exit=1

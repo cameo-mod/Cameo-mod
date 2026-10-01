@@ -1,14 +1,14 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4373**
+Actors+templates scanned: **4438**
 
 | violation | meaning | count |
 |---|---|---|
-| V1 | concrete actor inherits from concrete actor | 276 |
+| V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 2094 |
-| V5 | > 2 -Trait removals (warning) | 102 |
+| V4 | chain depth > 3 | 2144 |
+| V5 | > 2 -Trait removals (warning) | 104 |
 
 
 ## V3 — dangling inherit targets (blocking)
@@ -271,6 +271,7 @@ _none found_
 | schwarzermond_bbomb2_husk | schwarzermond_bbomb_husk | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_bbomb3_husk | schwarzermond_bbomb_husk | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_hole_small | schwarzermond_hole | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
+| scrin_fusion_reactor | scrin_reactor | tiberiumwars/scrin | tiberiumwars/scrin | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
 | sonar | camera.spyplane | ? | ? | mods/cameo/rules/misc.yaml |
 | td_gdi_humveemkii | td_gdi_humvee | tiberiandawn/gdi | tiberiandawn/gdi | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml |
 | td_nod_buggymkii | td_nod_buggy | tiberiandawn/nod | tiberiandawn/nod | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
@@ -1661,7 +1662,7 @@ _none found_
 | ra2dest | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2dlph | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2dred | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
-| ra2e2.black | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
+| ra2e2_black | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2gayard | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2hornet | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2hospt | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
@@ -1726,6 +1727,56 @@ _none found_
 | schwarzermond_techcenter | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | schwarzermond_ubermensch | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | schwarzermond_warfactory | 6 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
+| scrin_annihilator_tripod | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_assimilator | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_buzzer_hive | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_control_node | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_corrupter | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_devastator_warship | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_devourer_tank | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_disintegrator | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_drone_platform | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_drone_ship | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_explorer | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_extractor | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_foundry | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_fusion_reactor | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_gravity_stabilizer | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_growth_accelerator | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_growth_stimulator | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_gun_walker | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_harvester | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_invader_fighter | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_lifeform_recycling_plant | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_lightning_spike | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_mastermind | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_mothership | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_nerve_center | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_outpost | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_phase_generator | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_photon_cannon | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_planetary_assault_carrier | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_plasma_missile_battery | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_portal | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_prodigy | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_ravager | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_reactor | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_reaper_tripod | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_repair_drone | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_rift_generator | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_seeker | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_shard_walker | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/vehicles.yaml |
+| scrin_shock_trooper | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_shock_trooper_blink_pack | 4 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/infantry.yaml |
+| scrin_signal_transmitter | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_stasis_chamber | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_storm_column | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_stormrider | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
+| scrin_technology_assembler | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_terraforming_nexus | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_tiberium_hive | 6 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_warp_chasm | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_warp_gate | 5 | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
 | siege_tank | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml |
 | sietch_creep | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sietch_creep_disabled | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
@@ -2434,8 +2485,8 @@ _none found_
 | farasha_drone_ixian | 3 | -ActorLostNotification, -UpdatesPlayerStatistics, -MapEditorData | mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml |
 | forgotten_apache_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/husks.yaml |
 | forgotten_ghoststalker_sp | 4 | -Buildable, -MapEditorData, -Voiced, -Armament@c4 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
-| forgotten_mutant_sp | 3 | -Buildable, -MapEditorData, -Voiced | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
-| forgotten_mutantsniper_sp | 3 | -Buildable, -MapEditorData, -Voiced | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
+| forgotten_mutant_sp | 4 | -BotRoles, -Buildable, -MapEditorData, -Voiced | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
+| forgotten_mutantsniper_sp | 4 | -BotRoles, -Buildable, -MapEditorData, -Voiced | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
 | forgotten_mutantsoldier_sp | 3 | -Buildable, -MapEditorData, -Voiced | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml |
 | fremen_creep | 3 | -MustBeDestroyed, -RevealsShroud@base-reve, -GrantConditionOnPrerequ | mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml |
 | futu_landcarr_drone | 4 | -AutoTarget, -UpdatesPlayerStatistics, -MapEditorData, -ActorLostNotification | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml |
@@ -2474,6 +2525,8 @@ _none found_
 | scadept.shade | 11 | -UpdatesPlayerStatistics, -MapEditorData, -ActorLostNotification, -GrantTimedConditionOnDe, -ShadeMaster, -Passenger | mods/cameo/rules/starcraft.yaml |
 | schwarzermond_drone | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData, -Voiced | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_hole | 3 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
+| scrin_drone_platform | 6 | -Buildable, -TransformsIntoMobile, -TransformsIntoPassenger, -TransformsIntoRepairabl, -TransferTimedExternalCo, -GrantConditionOnPrerequ | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/buildings.yaml |
+| scrin_drone_ship | 4 | -WithShadow, -Hovers@CRUISING, -AttackAircraft, -SpawnActorOnDeath | mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/aircraft.yaml |
 | sietch_creep | 10 | -RevealsShroud@base-reve, -GrantConditionOnPrerequ, -DamagedByTerrain, -GivesBuildableArea, -Sellable, -RepairableBuilding | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sietch_creep_disabled | 11 | -Targetable, -Selectable, -Targetable@ivan, -Targetable@trappable, -Targetable@chrono, -RevealsShroud@base-reve | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | steel_cruiser_f | 5 | -Selectable, -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml |

@@ -1491,10 +1491,6 @@ resources:
 		Scale: 1.3
 		Length: 12
 	ra2gold18:
-		Filename: ra2_tib16.tem
-		Scale: 1.3
-		Length: 12
-	ra2gold18:
 		Filename: ra2_tib18.tem
 		Scale: 1.3
 		Length: 12
@@ -3577,7 +3573,7 @@ overlay:
 		Start: 2
 	target-valid:
 	target-select:
-		Start: 1
+		Start: 3
 	target-invalid:
 		Start: 2
 	build-valid-desert:
@@ -3585,8 +3581,6 @@ overlay:
 	build-valid-temperat:
 	build-valid-winter:
 	build-valid-jungle:
-	target-select:
-		Start: 3
 	target-valid-desert:
 	target-valid-snow:
 		Start: 2

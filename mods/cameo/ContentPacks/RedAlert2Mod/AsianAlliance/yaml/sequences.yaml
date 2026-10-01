@@ -10,6 +10,7 @@ asianalliance_constructionyard:
 		ShadowStart: 32
 	dead:
 		Filename: ra2m_asianalliance_sprites|asianalliance_constructionyard_aa_cgcnst.shp
+		Start: 1
 	build:
 		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
@@ -28,9 +29,6 @@ asianalliance_constructionyard:
 		Filename: ra2m_asianalliance_sprites|asianalliance_constructionyard_aa_cgcnst_b.shp
 		Length: 32
 		Tick: 150
-	dead:
-		Filename: ra2m_asianalliance_sprites|asianalliance_constructionyard_aa_cgcnst.shp
-		Start: 1
 	icon:
 		Filename: ra2m_asianalliance_icons|asianalliance_constructionyard_icon.shp
 		Offset: 0,0
@@ -1274,6 +1272,11 @@ asianalliance_flametrooper:
 	idle:
 	shoot:
 		ShadowStart: 326
+		Start: 116
+		Length: 10
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 80
 	run:
 		Tick: 120
 		ShadowStart: 218
@@ -1298,15 +1301,8 @@ asianalliance_flametrooper:
 		ShadowStart: 266
 	idle2:
 		ShadowStart: 281
-	cheer:
 	icon:
 		Filename: ra2m_asianalliance_icons|asianalliance_flametrooper_icon.shp
-	shoot:
-		Start: 116
-		Length: 10
-		Facings: 8
-		InterpolatedFacings: 32
-		Tick: 80
 	prone-shoot:
 		Start: 116
 		Tick: 106

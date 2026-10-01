@@ -7,24 +7,12 @@ TS30mm:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
-	ReloadDelay: 26
 	Burst: 3
-	Range: 6125
 	BurstDelays: 2
-	Warhead@MissileHE_Medium:
-		PercentageScale: 2500
-		Damage: 8000
-	Warhead@Flak_Medium:
-		PercentageScale: 2500
-		Damage: 8000
-	-Warhead@Flak_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 2494
-	TargetActorCenter: true
-	ValidTargets: Ground, Water, Air
 TS30mmRail:
 	Inherits@collapsewh: ^Warhead_Flak_Medium
 	Inherits@3: ^RailgunWeapon
@@ -63,8 +51,6 @@ TS30mmRail:
 	Burst: 3
 	Range: 6125
 	BurstDelays: 2
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -104,8 +90,6 @@ TS30mmRail:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
@@ -145,14 +129,10 @@ TS30mmRail:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Flak_Medium:
@@ -175,11 +155,6 @@ TS120mmRail:
 	Report: bigggun1.aud
 	ReloadDelay: 44
 	Range: 6201
-	Warhead@CannonHE_Medium:
-		Damage: 8000
-	Warhead@Railgun_Heavy:
-		Damage: 8000
-	-Warhead@CannonHE_Medium:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
@@ -208,11 +183,6 @@ TS120mmTalRail:
 	Report: bigggun1.aud
 	ReloadDelay: 50
 	Range: 6201
-	Warhead@CannonHE_Medium:
-		Damage: 18000
-	Warhead@Railgun_Heavy:
-		Damage: 18000
-	-Warhead@CannonHE_Medium:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
@@ -226,26 +196,16 @@ TSRPGTower:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
-	ReloadDelay: 46
-	Range: 8544
 	Report: glnch4.aud
 	Projectile: Bullet
 		Speed: 384
 		Blockable: false
 		Image: 120MM
 		Palette: player
-	Warhead@Concussion_Medium:
-		Damage: 16000
-	Warhead@CannonHE_Heavy:
-		Damage: 16000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
 	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
-	TargetActorCenter: true
-	ValidTargets: Ground, Water
 TSRPGTowerRail:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -255,8 +215,6 @@ TSRPGTowerRail:
 	Range: 8544
 	Warhead@CannonHE_Heavy:
 		Damage: 48000
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 16000
 	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	-Warhead@RailgunExtraDamage:
@@ -386,12 +344,6 @@ KodiakCannon:
 		TrailImage: smokey
 		TrailInterval: 1
 		VerticalRateOfTurn: 20
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -435,16 +387,10 @@ KodiakCannon:
 			AntiAirShip: 17
 			SubmarineLight: 20
 			SubmarineHeavy: 22
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -490,18 +436,13 @@ KodiakCannon:
 		PercentageScale: 1998
 		ValidTargets: Ground, Water
 		Damage: 41000
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4
 
-	-Warhead@HeavyChemicalWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
-	-Warhead@HeavyMissile:
 	-Warhead@HeavyBomb:
 	Warhead@ShieldHit:
 		Condition: shieldhit
@@ -828,9 +769,6 @@ TSHoverMissile:
 		Speed: 500
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -870,9 +808,6 @@ TSHoverMissile:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -912,12 +847,6 @@ TSHoverMissile:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -958,10 +887,6 @@ TSHoverMissile:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1014,9 +939,6 @@ TSDestroyerMissiles:
 		Speed: 500
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -1056,9 +978,6 @@ TSDestroyerMissiles:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -1098,12 +1017,6 @@ TSDestroyerMissiles:
 			AntiAirShip: 12
 			SubmarineLight: 16
 			SubmarineHeavy: 18
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -1144,10 +1057,6 @@ TSDestroyerMissiles:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1316,11 +1225,8 @@ TSBomb:
 	Range: 1500
 	TargetActorCenter: true
 	Inherits@fx: ^ts_gdi_tsbomb
-	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
-	Range: 1500
-	TargetActorCenter: true
 	Projectile: GravityBomb
 		Velocity: 100, 0, -100
 		Acceleration: 0, 0, -10
@@ -1331,7 +1237,6 @@ TSBomb:
 		Damage: 20000
 		PercentageScale: 9995
 
-	ValidTargets: Ground, Water
 TSBombSonic:
 	ValidTargets: Ground, Ship
 	ReloadDelay: 38
@@ -1344,7 +1249,6 @@ TSBombSonic:
 	Burst: 5
 	BurstDelays: 3
 	Range: 1500
-	TargetActorCenter: true
 	Report: 120mmf.aud
 	ValidTargets: Ground, Ship
 	Warhead@BlastSonic_Heavy: AreaDamage
@@ -1396,8 +1300,6 @@ TSShotgun:
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
 		Damage: 24000
-	Warhead@ShotgunGrenadeEnemy:
-		Damage: 4000
 	Warhead@ShotgunGrenadeAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
@@ -1492,8 +1394,6 @@ TSShotgun:
 			SubmarineHeavy: 99
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	-Warhead@ShotgunGrenadeEnemy:
-
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Duration: 4
@@ -1728,15 +1628,6 @@ TSJumpCannon:
 	ReloadDelay: 25
 	Range: 5090
 	Report: jumpjet1.aud
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Air, Water
-		Damage: 4000
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 4000
-	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
-	# ^Projectile_Bullet_* would take the type and orphan the other one's
-	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 		Speed: 4000
 	-Warhead@Bullet_Medium:
@@ -1758,10 +1649,6 @@ TSAssaultCannonSonic:
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Inaccuracy: 250
-	Warhead@Flak_Medium: AreaDamage
-		PercentageScale: 5000
-		Damage: 4000
-	-Warhead@Flak_Medium:
 	Warhead@BulletSonic_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1821,14 +1708,8 @@ TSVulcanGun:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
-	ValidTargets: Ground, Water
-	ReloadDelay: 48
 	Burst: 4
 	BurstDelays: 2
-	Range: 6809
-	Warhead@Bullet_Medium:
-		Damage: 4000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -1836,7 +1717,6 @@ TSVulcanGun:
 		PercentageScale: 9988
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	TargetActorCenter: true
 TSVulcanGunSonic:
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
@@ -1846,10 +1726,6 @@ TSVulcanGunSonic:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6809
-	Warhead@Bullet_Medium: AreaDamage
-		PercentageScale: 2500
-		Damage: 8000
-	-Warhead@Bullet_Medium:
 	Warhead@BulletSonic_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1896,8 +1772,6 @@ TSAAPCCannon:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: aacanon3.aud
-	ReloadDelay: 10
-	Range: 6263
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Flat:
@@ -1905,7 +1779,6 @@ TSAAPCCannon:
 		Damage: 4000
 		PercentageScale: 9975
 
-	TargetActorCenter: true
 TSMechMGII:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium

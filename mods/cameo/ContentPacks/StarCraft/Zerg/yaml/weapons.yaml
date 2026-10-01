@@ -152,8 +152,6 @@ MutaliskSpore:
 	ReloadDelay: 20
 	Range: 4444
 	Report: zmufir00.aud
-	ValidTargets: Ground, Water, Air
-	TargetActorCenter: true
 	Projectile: Bullet
 		Image: scmspore
 		Speed: 892
@@ -189,15 +187,6 @@ MutaliskSpore:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@SmallArms:
 	-Warhead@ArrowWeapon:
-	Warhead@Chemical_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -214,18 +203,8 @@ MutaBounce1:
 		Damage: 2
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Chemical_Medium:
-		Damage: 8000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility:
-		Damage: 12000
-	Warhead@MutaWildcardCompatibility: AreaDamage
-		Damage: 4000
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -242,17 +221,7 @@ MutaBounce2:
 		Damage: 1
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chemical_Medium:
-		Damage: 4000
-		PercentageScale: 0
-	Warhead@MutaliskCompatibility:
-		Damage: 10000
-	Warhead@MutaWildcardCompatibility: AreaDamage
-		Damage: 2000
 	-Warhead@shrapnel:
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -513,16 +482,12 @@ SCScourgeExplosion:
 	TargetActorCenter: true
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
-	ValidTargets: Air
 	Inherits@w6fx: ^sc_zerg_scscourgeexplosion
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 100000
 		PercentageScale: 9999
 
-	ReloadDelay: 25
-	TargetActorCenter: true
-	Range: 5120
 ^sc_zerg_guardianshoot:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
@@ -541,7 +506,6 @@ GuardianShoot:
 	ReloadDelay: 60
 	Range: 10000
 	Report: zgufir00.aud
-	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 240
 		Blockable: false
@@ -1072,10 +1036,6 @@ InfestedExplosion:
 		Damage: 150000
 		PercentageScale: 10000
 
-	ValidTargets: Ground, Water
-	ReloadDelay: 25
-	TargetActorCenter: true
-	Range: 5120
 ^sc_zerg_behemothshoot:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
@@ -1320,7 +1280,6 @@ Tentacle:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	TargetActorCenter: true
 ^sc_zerg_droneattack:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud

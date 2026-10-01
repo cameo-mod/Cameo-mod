@@ -200,6 +200,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`dotnet test` fails silently while a match holds `engine/bin` — read the tail, never grep for `Passed!` (2026-09-30)](#dotnet-test-fails-silently-while-a-match-holds-enginebin--read-the-tail-never-grep-for-passed-2026-09-30)
 - [⛔ `.gitignore`'s `engine*` hid every new file named Engine… — anchor ignore patterns to the root (2026-09-30)](#-gitignores-engine-hid-every-new-file-named-engine--anchor-ignore-patterns-to-the-root-2026-09-30)
 - [`bot_outcomes[].spawn` is the player SLOT, not the map position — split A/B verdicts by `player.home` (2026-09-30)](#botoutcomesspawn-is-the-player-slot-not-the-map-position--split-ab-verdicts-by-playerhome-2026-09-30)
+- [Duplicate-key collapse: the four traps that each produced a wrong-but-plausible pass (2026-10-01, NOVA)](#duplicate-key-collapse-the-four-traps-that-each-produced-a-wrong-but-plausible-pass-2026-10-01-nova)
 - [A push after the merge strands the commit — check a PR's state before pushing to its branch (2026-09-29)](#a-push-after-the-merge-strands-the-commit--check-a-prs-state-before-pushing-to-its-branch-2026-09-29)
 - [A HashSet prints in a different order every boot — sort it before comparing dumps (2026-09-29)](#a-hashset-prints-in-a-different-order-every-boot--sort-it-before-comparing-dumps-2026-09-29)
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
@@ -3208,3 +3209,38 @@ classic mirrors — a real, moderate lean.
 **Rule:** split every A/B verdict by `player.home`, never by `spawn`, and check that each arm actually played both
 homes (ca2b3 did not). A swapped A/B cancels a spawn lean; an unswapped one silently measures the spawn.
 
+
+## Duplicate-key collapse: the four traps that each produced a wrong-but-plausible pass (2026-10-01, NOVA)
+
+Cleaning the 4,965 merged-duplicate keys the 2026-09-26 batch tools introduced (D2 audit, baseline
+ratcheted 260 -> 158) took five fold-algorithm iterations. Each wrong model produced output that
+looked finished and passed weaker gates:
+
+1. **`Inherits`/`Inherits@` is a positional barrier, not just a parent pull.** `ResolveInherits`
+   splices the parent's children AT the directive's position, so a node can carry multiple
+   generations of the same key separated by mid-node `Inherits` lines (the W7 materializer stacked
+   exactly that). Folding same-key nodes across an `Inherits` boundary moves a post-splice override
+   back before the splice and silently changes resolved values. Fold each `Inherits`-separated
+   segment independently.
+2. **A nested `-Key:` removal is STRICT, not weak.** `MergeIntoResolved` re-runs
+   `ResolveInherits` on the merged node's children, so a `-K` inside a nested node (e.g. inside a
+   `Warhead@X:` block) throws `There are no elements with key K to remove` at boot the same as a
+   top-level one. The crash surfaced at `shared_effects/weapons` load, not in any audit.
+3. **Fold and dangling-removal cleanup are separate passes.** The fold keeps every `-K` verbatim
+   (it cannot know whether the target survives); a second `strict_strip` pass replays the engine's
+   sequential accumulation — literal children + `Inherits` splices + same-key merge partners
+   (earlier segments, inherited siblings, cross-file same-name tops) — and drops a `-K` only when no
+   target is alive at its position. Dropping a dead `-K` cannot change resolution; keeping one
+   crashes the boot.
+4. **The Python resolver's indent measure was wrong.** `miniyaml.load` counted leading whitespace
+   *characters*; the engine counts `\t` = 1 level and every 4 spaces = 1 level (SpacesPerLevel=4).
+   Fifteen files mix ` \t`/`  \t` prefixes with `\t\t`, so the parser saw phantom sibling duplicates
+   (e.g. `idle:`/`die:`/`Filename:` flattened to one level) and the fold merged a sequence's two
+   distinct `Filename:` nodes into one — the engine then read a null sprite key and crashed at map
+   load. The resolved-diff never saw it because the dump covers weapons+actors, not sequences.
+   Fixed in `tools/audit/miniyaml.py`; re-verified byte-identical resolved output under the fixed
+   parser.
+
+**Rule:** after any bulk yaml rewrite, gate on (a) resolved-diff of actors+weapons, (b) a
+strict-removal replay over the OUTPUT files, (c) the boot gate — each catches a class the others
+miss.

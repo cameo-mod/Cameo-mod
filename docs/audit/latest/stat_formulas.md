@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **708** across 2068 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (44)
@@ -53,20 +53,25 @@ Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher,
 | ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (131)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (136)
 
 | actor | actual | expected |
 |---|---|---|
 | asianalliance_pulverizermecha | Step 114 | expected 285 (HP 285000/1000) |
 | atreides_combattank | Step 10 | expected 40 (HP 100000/2500) |
+| atreides_minotaurus | Step 10 | expected 16 (HP 40000/2500) |
+| atreides_missiletank | Step 10 | expected 20 (HP 50000/2500) |
+| atreides_mongoose | Step 10 | expected 20 (HP 50000/2500) |
 | atreides_repairtank | Step 10 | expected 24 (HP 60000/2500) |
 | atreides_rockettrooper | Step 10 | expected 40 (HP 40000/1000) |
 | atreides_sandbike | Step 10 | expected 12 (HP 30000/2500) |
 | atreides_siegetank | Step 10 | expected 16 (HP 40000/2500) |
+| atreides_sonictank | Step 10 | expected 40 (HP 100000/2500) |
 | atreides_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
 | corrino_bmp | Step 10 | expected 16 (HP 40000/2500) |
 | corrino_combattank | Step 10 | expected 40 (HP 100000/2500) |
+| corrino_missiletank | Step 10 | expected 20 (HP 50000/2500) |
 | corrino_sardaukar_bazooka | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_berserker | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_javelin | Step 50 | expected 120 (HP 120000/1000) |
@@ -206,10 +211,10 @@ Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher,
 | wc2_humans_militiapeasant | infantry declares Repairable locally |  |
 
 
-_267 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_274 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
-## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (69)
+## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (56)
 
 | actor | actual | expected |
 |---|---|---|
@@ -221,7 +226,6 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | corrino_spiceharvester | RegenAmount 10 | expected 160 (2 x SelfHealing 80) |
 | corrino_trooper | RegenAmount 10 | expected 20 (2 x SelfHealing 10) |
 | eden_cargotruck_empty | RegenAmount 10 | expected 88 (2 x SelfHealing 44) |
-| forgotten_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | forgotten_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | futuretech_prospector | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | futuretech_prospectormk2 | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
@@ -259,24 +263,12 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | schwarzermond_noidharvester | RegenAmount 10 | expected 60 (2 x SelfHealing 30) |
 | steelconsortium_consortiumminer | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | td_gdi_tiberiumharvester | RegenAmount 10 | expected 192 (2 x SelfHealing 96) |
-| td_nod_blackhandflamer | RegenAmount 25 | expected 72 (2 x SelfHealing 36) |
-| td_nod_chemicalrocketsoldier | RegenAmount 25 | expected 36 (2 x SelfHealing 18) |
-| td_nod_chemicalwarrior | RegenAmount 25 | expected 112 (2 x SelfHealing 56) |
-| td_nod_commando | RegenAmount 25 | expected 160 (2 x SelfHealing 80) |
-| td_nod_flamethrower | RegenAmount 25 | expected 58 (2 x SelfHealing 29) |
-| td_nod_lasercommando | RegenAmount 25 | expected 114 (2 x SelfHealing 57) |
-| td_nod_lasertrooper | RegenAmount 25 | expected 120 (2 x SelfHealing 60) |
-| td_nod_minigunner | RegenAmount 25 | expected 44 (2 x SelfHealing 22) |
-| td_nod_rocketsoldier | RegenAmount 25 | expected 28 (2 x SelfHealing 14) |
 | td_nod_stealthharvester | RegenAmount 10 | expected 140 (2 x SelfHealing 70) |
-| td_nod_stealthsoldier | RegenAmount 25 | expected 50 (2 x SelfHealing 25) |
 | td_nod_tiberiumharvester | RegenAmount 10 | expected 192 (2 x SelfHealing 96) |
 | terran_scv | RegenAmount 10 | expected 36 (2 x SelfHealing 18) |
 | tkm_templateharvesterraname | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | trooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
-| ts_gdi_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | ts_gdi_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
-| ts_nod_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | ts_nod_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | wc2_humans_militiapeasant | RegenAmount 10 | expected 16 (2 x SelfHealing 8) |
 | wc2_humans_peasant | RegenAmount 10 | expected 32 (2 x SelfHealing 16) |
@@ -284,7 +276,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | zerg_drone | RegenAmount 10 | expected 36 (2 x SelfHealing 18) |
 
 
-## F5 — defense RevealsShroud.Range ≠ weapon range  (46)
+## F5 — defense RevealsShroud.Range ≠ weapon range  (52)
 
 | actor | actual | expected |
 |---|---|---|
@@ -311,6 +303,12 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | ra1_allies_gunturret | RevealsShroud 8683 | weapon range 7685 |
 | ra2_soviets_teslacoil | RevealsShroud 10000 | weapon range 8842 |
 | schwarzermond_sturmcannon | RevealsShroud 6666 | weapon range 14000 |
+| scrin_buzzer_hive | RevealsShroud 5120 | weapon range 7168 |
+| scrin_lightning_spike | RevealsShroud 5120 | weapon range 7168 |
+| scrin_photon_cannon | RevealsShroud 5120 | weapon range 7168 |
+| scrin_plasma_missile_battery | RevealsShroud 5120 | weapon range 9216 |
+| scrin_storm_column | RevealsShroud 5120 | weapon range 10240 |
+| scrin_tiberium_hive | RevealsShroud 5120 | weapon range 5632 |
 | steelconsortium_antiairquantummissileturret | RevealsShroud 12000 | weapon range 15000 |
 | steelconsortium_bfg10000 | RevealsShroud 25000 | weapon range 10238976 |
 | steelconsortium_consortiumsentryturret | RevealsShroud 6666 | weapon range 15000 |
@@ -363,7 +361,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (97)
+## F7 — defense Power.Amount ≠ -Cost/20  (104)
 
 | actor | actual | expected |
 |---|---|---|
@@ -371,6 +369,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
 | asianalliance_concretebarrier | Power missing | expected -10 |
 | asianalliance_sentryflamer | Power -25 | expected -40 (-Cost/20) |
+| atreides_palace | Power -200 | expected -500 (-Cost/20) |
 | atreides_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | brik | Power missing | expected -10 |
 | corrino_storagesilo | Power -10 | expected -7 (-Cost/20) |
@@ -428,6 +427,12 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | sbag | Power missing | expected -2 |
 | schwarzermond_meteortractionray | Power -200 | expected -500 (-Cost/20) |
 | schwarzermond_sturmcannon | Power -50 | expected -60 (-Cost/20) |
+| scrin_buzzer_hive | Power -10 | expected -25 (-Cost/20) |
+| scrin_lightning_spike | Power -20 | expected -45 (-Cost/20) |
+| scrin_photon_cannon | Power -25 | expected -50 (-Cost/20) |
+| scrin_plasma_missile_battery | Power -40 | expected -80 (-Cost/20) |
+| scrin_storm_column | Power -75 | expected -125 (-Cost/20) |
+| scrin_tiberium_hive | Power -30 | expected -60 (-Cost/20) |
 | silo | Power -10 | expected -5 (-Cost/20) |
 | steelconsortium_antiairquantummissileturret | Power -45 | expected -50 (-Cost/20) |
 | steelconsortium_bfg10000 | Power -1000 | expected -500 (-Cost/20) |
@@ -466,11 +471,12 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | zerg_sunkencolony_defense | Power missing | expected -62 |
 
 
-## F8 — vehicle TurnSpeed ≠ Speed/5  (14)
+## F8 — vehicle TurnSpeed ≠ Speed/5  (16)
 
 | actor | actual | expected |
 |---|---|---|
 | atreides_apc | TurnSpeed 16 (Speed 65) | expected 13 = Speed/5 |
+| atreides_mongoose | TurnSpeed 20 (Speed 64) | expected 13 = Speed/5 |
 | atreides_siegetank | TurnSpeed 48 (Speed 43) | expected 9 = Speed/5 |
 | corrino_apc | TurnSpeed 40 (Speed 100) | expected 20 = Speed/5 |
 | corrino_bmp | TurnSpeed 40 (Speed 70) | expected 14 = Speed/5 |
@@ -479,6 +485,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | ra1_allies_lighttank | TurnSpeed 24 (Speed 111) | expected 22 = Speed/5 |
 | ra1_allies_mediumtank | TurnSpeed 20 (Speed 81) | expected 16 = Speed/5 |
 | ra1_allies_ranger | TurnSpeed 35 (Speed 157) | expected 31 = Speed/5 |
+| scrin_explorer | TurnSpeed 8 (Speed 50) | expected 10 = Speed/5 |
 | td_gdi_mammothtank | TurnSpeed 12 (Speed 49) | expected 10 = Speed/5 |
 | td_nod_buggy | TurnSpeed 40 (Speed 161) | expected 32 = Speed/5 |
 | td_nod_lighttank | TurnSpeed 22 (Speed 89) | expected 18 = Speed/5 |
@@ -486,20 +493,25 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | td_nod_ssmlauncher | TurnSpeed 20 (Speed 83) | expected 17 = Speed/5 |
 
 
-## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (2)
+## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (3)
 
 | actor | actual | expected |
 |---|---|---|
 | atreides_apc | Turreted 48 vs Mobile 16 | must match |
+| atreides_mongoose | Turreted 48 vs Mobile 20 | must match |
 | harkonnen_adp | Turreted 48 vs Mobile 20 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (11)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (24)
 
 | actor | actual | expected |
 |---|---|---|
+| atreides_minotaurus | TurnSpeed 48 (Speed 43) | expected 18 = 2 x Speed/5 (turretless) |
+| atreides_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | atreides_repairtank | TurnSpeed 16 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 | atreides_sandbike | TurnSpeed 24 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
+| atreides_sonictank | TurnSpeed 48 (Speed 31) | expected 12 = 2 x Speed/5 (turretless) |
+| corrino_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | corrino_siegetank | TurnSpeed 4 (Speed 56) | expected 22 = 2 x Speed/5 (turretless) |
 | devastator | TurnSpeed 48 (Speed 33) | expected 14 = 2 x Speed/5 (turretless) |
 | harkonnen_assaulttank | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
@@ -507,6 +519,15 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | harkonnen_flametank | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | harkonnen_inkvine | TurnSpeed 48 (Speed 43) | expected 18 = 2 x Speed/5 (turretless) |
 | ra1_soviets_v2rocketlauncher | TurnSpeed 34 (Speed 67) | expected 26 = 2 x Speed/5 (turretless) |
+| scrin_annihilator_tripod | TurnSpeed 8 (Speed 45) | expected 18 = 2 x Speed/5 (turretless) |
+| scrin_corrupter | TurnSpeed 8 (Speed 55) | expected 22 = 2 x Speed/5 (turretless) |
+| scrin_devourer_tank | TurnSpeed 8 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| scrin_eradicator_hexapod | TurnSpeed 8 (Speed 30) | expected 12 = 2 x Speed/5 (turretless) |
+| scrin_gun_walker | TurnSpeed 8 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| scrin_reaper_tripod | TurnSpeed 8 (Speed 45) | expected 18 = 2 x Speed/5 (turretless) |
+| scrin_repair_drone | TurnSpeed 8 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| scrin_seeker | TurnSpeed 8 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
+| scrin_shard_walker | TurnSpeed 8 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | td_nod_flametank | TurnSpeed 32 (Speed 83) | expected 34 = 2 x Speed/5 (turretless) |
 | td_nod_stealthtank | TurnSpeed 60 (Speed 131) | expected 52 = 2 x Speed/5 (turretless) |
 
@@ -546,8 +567,8 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | harkonnen: harkonnen_autogunturret | prereqs: harkonnen_barracks, harkonnen_constructionyard (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
-| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
@@ -635,7 +656,7 @@ _none found_
 | eden: defaulteden | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (116)
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (118)
 
 | actor | actual | expected |
 |---|---|---|
@@ -685,6 +706,8 @@ _none found_
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_mutantsergeant (cost 1154) x2 | pricier units must not outnumber cheaper ones |
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| scrin: heavyscrin | total cost 3600 | target ~10000 (±15%) |
+| scrin: heavyscrin | 4 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | ra2_allies: heavyra2allies | total cost 6150 | target ~10000 (±15%) |
 | ra2_allies: heavyra2allies | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | ra2_allies: heavyra2allies | ra2_allies_grizzlytank (cost 750) x3 vs ra2_allies_guardiangi (cost 400) x2 | pricier units must not outnumber cheaper ones |

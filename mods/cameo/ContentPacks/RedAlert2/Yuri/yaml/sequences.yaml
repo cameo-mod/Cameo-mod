@@ -2,7 +2,9 @@ yuri_constructionyard:
 	Defaults:
 		Offset: 2,-26
 	build:
-		Filename: invisibleitem.shp
+		Filename: ra2_yuri_sprites|yuri_constructionyard_yr_ygcnst_b.shp
+		Length: 18
+		Tick: 150
 	idle:
 		Filename: ra2_yuri_sprites|yuri_constructionyard_yr_ygcnst_c.shp
 		Length: 1
@@ -41,10 +43,6 @@ yuri_constructionyard:
 		Start: 3
 		Length: 3
 		ShadowStart: 9
-		Tick: 150
-	build:
-		Filename: ra2_yuri_sprites|yuri_constructionyard_yr_ygcnst_b.shp
-		Length: 18
 		Tick: 150
 	damaged-build:
 		Filename: ra2_yuri_sprites|yuri_constructionyard_yr_ygcnst_b.shp

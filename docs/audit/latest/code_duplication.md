@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
+Python files: **786** (min 5 statements), C# files: **420** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -11,24 +11,28 @@ Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
-| C1 | identical Python function bodies | 26 | 10 |
+| C1 | identical Python function bodies | 30 | 10 |
 | C2 | identical C# method bodies | 17 | 14 |
-| C3 | identical module-level literal tables | 40 | 10 |
+| C3 | identical module-level literal tables | 43 | 10 |
 
 
-## C1 — Python function clones (26 group(s))
+## C1 — Python function clones (30 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
 | 5 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:199 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:301 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:83 descendants(); tools/balance/consolidate_machinegun_profiles.py:56 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
 | 4 | 0c9e5a3408c1d09c | tools/balance/consolidate_exact_profile_duplicates.py:105 descendants(); tools/balance/consolidate_freedom_rocket_base.py:43 descendants(); tools/balance/consolidate_high_identity_profiles.py:66 descendants(); tools/balance/consolidate_laser_heavy_routes.py:82 descendants() |
 | 4 | 2af465aa2475b428 | tools/gen_cryo_fog.py:29 fractal_noise(); tools/gen_fire.py:32 fractal_noise(); tools/gen_fire_smoke_glow.py:27 fractal_noise(); tools/gen_smoke.py:28 fractal_noise() |
+| 4 | 65200300e1e889be | tools/ai/run_ai_match_batch.py:155 load_config(); tools/tests/ai_bot_player_gate.py:48 load_config(); tools/tests/ai_raid_gate.py:55 load_config(); tools/tests/ai_squad_gate.py:54 load_config() |
 | 3 | 19cd94bfaa3c12ef | tools/balance/compare_nuke_area_damage.py:290 main(); tools/balance/reconcile_r12_consumer_closure.py:380 main(); tools/balance/reconcile_r13_templates.py:161 main() |
+| 3 | 276f5256b8897b1c | tools/tests/ai_bot_player_gate.py:110 read_appended_records(); tools/tests/ai_raid_gate.py:117 read_appended_records(); tools/tests/ai_squad_gate.py:116 read_appended_records() |
 | 3 | 8854ec3eda1c1b76 | tools/balance/cameo_channel_curves.py:533 main(); tools/balance/dta_channel_curves.py:501 main(); tools/balance/reference_weapon_geometry.py:565 main() |
+| 3 | 89ffae39156fff00 | tools/tests/ai_bot_player_gate.py:66 support_directory(); tools/tests/ai_raid_gate.py:73 support_directory(); tools/tests/ai_squad_gate.py:72 support_directory() |
 | 3 | b349b4fadfe93412 | tools/balance/consolidate_explicit_family_state_profiles.py:164 descendants(); tools/balance/consolidate_named_state_corrections.py:76 descendants(); tools/balance/consolidate_pinned_role_profiles.py:92 descendants() |
 | 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:300 add_removal(); tools/balance/consolidate_named_family_profiles.py:260 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
 | 3 | f3f8811ecbc48273 | tools/gen_cryo_fog.py:51 warp(); tools/gen_fire_smoke_glow.py:50 warp(); tools/gen_smoke.py:51 warp() |
 | 2 | 05c6a74eb9d37d10 | tools/reference/extract_emperor_units.py:833 write_exclusive(); tools/reference/extract_opendune_units.py:908 write_exclusive() |
+| 2 | 0d67a0a30ddaeb8e | tools/tests/gen_cannonap_fixture.py:38 parse_generated_warhead(); tools/tests/test_cannonap_generated_fixture.py:42 parse_generated_warhead() |
 | 2 | 1126f101fc234323 | tools/tests/test_named_state_corrections.py:54 test_comparison_is_exactly_the_six_reviewed_definitions(); tools/tests/test_pinned_role_profile_consolidation.py:64 test_full_ruleset_comparison_matches_reviewed_manifest() |
 | 2 | 11d29300c3f1eadc | tools/tilesets/generate_volcanic_tileset.py:168 build_palette(); tools/tilesets/volcanic_art_utils.py:84 build_palette() |
 | 2 | 1dacd1e435667177 | tools/tilesets/generate_volcanic_tileset.py:588 base_clear_index(); tools/tilesets/volcanic_art_utils.py:132 base_clear_index() |
@@ -52,26 +56,26 @@ Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:183 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:157 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:150 Tick() |
+| 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:830 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:843 CanHitAir() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
-| 2 | 2c7861f2ea9c9096 | OpenRA.Mods.Cameo/Traits/World/HeatDistortionRenderer.cs:86 RegisterDistortion(); OpenRA.Mods.Cameo/Traits/World/ShockwaveDistortionRenderer.cs:85 RegisterShockwave() |
 | 2 | 2ed6818d4fa1dcc1 | OpenRA.Mods.CA/Traits/AttachOnCreation.cs:43 Attach(); OpenRA.Mods.CA/Traits/AttachOnTransform.cs:45 Attach() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
+| 2 | 58f4e69a7f3a03b1 | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1192 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1195 TargetScore() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
-| 2 | 88ddeee6df34ebf1 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:63 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:61 ObserverPromotionsIconsWidget() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
-| 2 | 949c5a8e30c0862b | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:512 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:515 TargetScore() |
-| 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:337 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:353 HandleMiddleClick() |
+| 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:338 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:354 HandleMiddleClick() |
 | 2 | 9f8a4e4f976a99f2 | OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs:108 Update(); OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs:121 Update() |
-| 2 | d2d42569b726aee5 | OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs:86 CaptureAndAppend(); OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs:75 CaptureAndAppend() |
-| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
+| 2 | b0d2492b62a8c3b9 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:64 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:62 ObserverPromotionsIconsWidget() |
+| 2 | d2d42569b726aee5 | OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs:93 CaptureAndAppend(); OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs:75 CaptureAndAppend() |
+| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:857 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:865 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (40 group(s))
+## C3 — Duplicated constant tables (43 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -84,21 +88,23 @@ Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
 | 4 | f9db917022226317 | tools/audit/four_source_group_inventory.py:18 SOURCES; tools/balance/explicit_voice_group_assembler.py:17 REFERENCE_SOURCES; tools/balance/four_source_synthesis_gate.py:21 SOURCES; tools/balance/reference_weapon_geometry.py:26 KNOWN_REFERENCE_SOURCES |
 | 3 | 57c53e8c22119da8 | tools/audit/audit_upgrade_regression.py:54 AIR; tools/balance/four_source_synthesis_gate.py:31 AIRCRAFT_AXES; tools/balance/reference_channel_curves.py:229 AIRCRAFT_AXES |
 | 3 | 5b6fb78177b324c0 | tools/balance/dta_channel_curves.py:23 ARMOR_AXES; tools/balance/four_source_synthesis_gate.py:27 BASE_AXES; tools/balance/reference_channel_curves.py:31 ARMOR_AXES |
-| 3 | 783c5216cd3c1bf0 | tools/audit/audit_versus_profile.py:79 NON_ARMOR; tools/balance/analyse_flat_main_fold.py:55 NON_ARMOR; tools/balance/preview_bell.py:45 OFF_AXIS |
-| 3 | 926a972c11b9232c | tools/audit/audit_heaviness_bell.py:146 AXIS_ORDER; tools/balance/effective_heaviness.py:58 BELL_AXIS_ORDER; tools/balance/gen_weapon_template.py:1023 BELL_AXIS_ORDER |
+| 3 | 783c5216cd3c1bf0 | tools/audit/audit_versus_profile.py:80 NON_ARMOR; tools/balance/analyse_flat_main_fold.py:55 NON_ARMOR; tools/balance/preview_bell.py:45 OFF_AXIS |
+| 3 | 926a972c11b9232c | tools/audit/audit_heaviness_bell.py:146 AXIS_ORDER; tools/balance/effective_heaviness.py:58 BELL_AXIS_ORDER; tools/balance/gen_weapon_template.py:1046 BELL_AXIS_ORDER |
 | 3 | 985c1fe34e42db41 | tools/audit/audit_local_effect_fields.py:25 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 3 | afb2195b28b1f9b9 | tools/audit/audit_bot_insurance.py:51 DIFFICULTIES; tools/balance/bot_difficulty_curve.py:49 DIFFICULTIES; tools/balance/bot_insurance_model.py:76 DIFFICULTIES |
 | 3 | b53e0f9e7578cc2a | tools/audit/audit_heaviness_bell.py:110 LADDERS; tools/reference/aggregate_archetype.py:63 CAMEO_LADDERS; tools/reference/armor_interpolate.py:42 LADDERS |
-| 3 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:81 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS; tools/reference/warhead_workbook.py:72 LADDERS |
-| 3 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:88 LEVELS; tools/reference/cameo_families.py:38 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
+| 3 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:82 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS; tools/reference/warhead_workbook.py:72 LADDERS |
+| 3 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:96 LEVELS; tools/reference/cameo_families.py:38 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
 | 3 | fa43615e2785b256 | tools/reference/dta_armor.py:8 VANILLA; tools/reference/extract_versus.py:48 TS_ARMORS; tools/reference/warhead_matrix.py:1079 TS_ARMORS |
-| 2 | 05b492a648a61f78 | tools/audit/audit_family_uniqueness.py:52 COMPANION; tools/audit/audit_versus_profile.py:89 COMPANION |
+| 2 | 05b492a648a61f78 | tools/audit/audit_family_uniqueness.py:52 COMPANION; tools/audit/audit_versus_profile.py:97 COMPANION |
 | 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:29 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1710 ROW_PROVENANCE_KEYS |
 | 2 | 14e3e91bbb89b6e6 | tools/aud_to_wav.py:25 INDEX_ADJUST; tools/wav_to_aud.py:32 INDEX_ADJUST |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 197ef915493c61ff | tools/reference/extract_versus.py:46 YR_ARMORS; tools/reference/warhead_matrix.py:1077 YR_ARMORS |
+| 2 | 1e84563c6800369e | tools/balance/effective_heaviness.py:70 GEO_DERIVED; tools/balance/gen_weapon_template.py:838 GEO_DERIVED |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 2ae9494faf6fdfef | tools/aud_to_wav.py:26 STEP_TABLE; tools/wav_to_aud.py:33 STEP_TABLE |
+| 2 | 36eb3ca7dd9cb6fd | tools/tests/gen_cannonap_fixture.py:31 HEAVINESS_CASES; tools/tests/test_cannonap_generated_fixture.py:35 HEAVINESS_CASES |
 | 2 | 41839a9d7e016b39 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:32 EXPECTED_EXPANSION |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
 | 2 | 4e7af25b7a053de9 | tools/audit/target_payload_routes.py:34 DAMAGE; tools/balance/shrapnel_scenario_report.py:35 DAMAGE_TYPES |
@@ -108,10 +114,11 @@ Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
 | 2 | 820ecf9a9ca15705 | tools/art/generate_chrome_scales.py:46 FIELD_DENSITY; tools/audit/audit_chrome_scale_variants.py:69 DENSITY |
 | 2 | 8ad665990352733b | tools/balance/build_workbook.py:62 TYPE_ORDER; tools/balance/import_workbook.py:37 TYPE_SHEETS |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
+| 2 | d0b8ba1c2ccfa903 | tools/audit/audit_family_uniqueness.py:51 LEVELS; tools/balance/splice_templates.py:45 LEVEL_SUFFIXES |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
 | 2 | dfc91d27d37afdd1 | tools/balance/cameo_channel_curves.py:26 ARMOR_AXES; tools/balance/four_source_synthesis_gate.py:28 COMMON_AXES |
 | 2 | e631e1af9577a4aa | tools/balance/reference_weapon_geometry.py:29 GEOMETRY_FIELDS; tools/balance/summarize_reference_geometry.py:16 GEOMETRY_FIELDS |
-| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2375 STORM_LEVELS |
+| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2492 STORM_LEVELS |
 | 2 | ee70e291636f426f | tools/balance/build_japan_pilot.py:68 CLASSIC_FACTIONS; tools/balance/validate_reference_holdout.py:62 CLASSIC_FACTIONS |
 | 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:72 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:59 MAIN_DAMAGE_TYPES |
@@ -119,7 +126,7 @@ Python files: **727** (min 5 statements), C# files: **364** (min 8 lines)
 
 ## FAIL
 
-- C1: 26 > baseline 10
+- C1: 30 > baseline 10
 - C2: 17 > baseline 14
-- C3: 40 > baseline 10
+- C3: 43 > baseline 10
 

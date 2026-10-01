@@ -319,8 +319,6 @@ sc_zerg_larva:
 		RequiresCondition: sc_zerg_egg
 	ExternalCondition@EGG:
 		Condition: sc_zerg_egg
-	WithDeathAnimation:
-		UseDeathTypeSuffix: False
 	Voiced:
 		VoiceSet: SCBroodlingVoice
 	-DeathSounds@NORMAL:
@@ -519,6 +517,7 @@ SCWRAITHDRONE:
 	Inherits@weapon: ^TerranShipArmorUpgrades
 	AttackAircraft:
 		RequiresCondition: ammo
+		FacingTolerance: 40
 	AmmoPool:
 		Ammo: 1
 		AmmoCondition: ammo
@@ -559,8 +558,6 @@ SCWRAITHDRONE:
 		InitialStance: AttackAnything
 	HasParent:
 	RejectsOrders:
-	AttackAircraft:
-		FacingTolerance: 40
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: terran_upgrade_cloakupgrade
 		Prerequisites: terran_upgrade_cloakupgrade
@@ -851,6 +848,7 @@ SCINTERCEPTOR:
 	Inherits@speed: ^GraviticUpgrade
 	AttackAircraft:
 		RequiresCondition: ammo
+		FacingTolerance: 20
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -898,8 +896,6 @@ SCINTERCEPTOR:
 		PauseOnCondition: !ammo
 		Weapon: InterceptorCannon
 		LocalOffset: 200,0,0
-	AttackAircraft:
-		FacingTolerance: 20
 	DeathSounds:
 	Power:
 		Amount: 0

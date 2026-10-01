@@ -50,21 +50,10 @@ DuelistTankCannon:
 		Palette: d2keffect
 		Blockable: false
 		LaunchAngle: 66
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 14000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 7
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Grenade: SpreadDamage
-		Damage: 14000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 7000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 7
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -105,12 +94,8 @@ DuelistTankCannon:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 14000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 14000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -154,11 +139,8 @@ DuelistTankCannon:
 		Damage: 84000
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	-Warhead@HeavyBomb:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -188,11 +170,6 @@ D2K_155mm2:
 		ContrailStartWidth: 120
 		ContrailEndWidth: 24
 		InaccuracyType: PerCellIncrement
-	Warhead@Grenade: SpreadDamage
-		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -233,31 +210,16 @@ D2K_155mm2:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 12000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 6
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 12000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 6
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 12000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 6
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
@@ -274,10 +236,7 @@ D2K_155mm3:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
 	Inherits@fx: ^d2k_ixian_d2k_155mm3
-	ReloadDelay: 80
-	Range: 8686
 	Report: MORTAR1.WAV
-	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 240
 		LaunchAngle: 80
@@ -291,10 +250,6 @@ D2K_155mm3:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@Concussion_Medium:
-		Damage: 8000
-	Warhead@Demolition_Heavy:
-		Damage: 16000
 	Warhead@CollapsedD2K_155mm3Concussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -424,21 +379,17 @@ D2K_155mm3:
 			SubmarineHeavy: 7
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
 
-	ValidTargets: Ground, Water
 D2K_Bazooka2:
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
 	MinRange: 1280  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT order-pin
-	Report: ROCKET1.WAV  # W7MAT w8-repin
+	Report: ROCKET1.WAV
 	Range: 6400
 	ReloadDelay: 5
 	ValidTargets: Ground, Water, Air
@@ -573,24 +524,12 @@ IxRailgunDroneBullet:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@Railgun_Heavy_ExtraDamage:
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-		PercentageScale: 0
-	-Warhead@CannonHE_Medium:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -699,36 +638,16 @@ IxianBomb_EMP:
 		Acceleration: 0, 0, -10
 		Image: MISSILE
 		Shadow: True
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 30000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 30000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 30000
-		Spread: 1500
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		InvalidTargets: Infantry
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -1397,22 +1316,13 @@ RaiderGuns:
 	TargetActorCenter: true
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^d2k_ixian_raiderguns
-	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
-	Range: 6400
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	TargetActorCenter: true
-
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -1423,17 +1333,6 @@ RaiderGuns_upgrade:
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1454,17 +1353,6 @@ HMG_turret_upgrade:
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2129,9 +2017,6 @@ HMG_Duelist_upgrade:
 			AntiAirShip: 11
 			SubmarineLight: 8
 			SubmarineHeavy: 6
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -2643,21 +2528,10 @@ ixian_farasha:
 		HelixAngleDeltaPerTick: 32
 		QuantizationCount: 64
 		Speed: 3000
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -2702,14 +2576,10 @@ ixian_farasha:
 			AntiAirShip: 18
 			SubmarineLight: 16
 			SubmarineHeavy: 15
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
-	-Warhead@HeavyFlameWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaWeapon:
@@ -2748,31 +2618,17 @@ d2k_farasha_aa:
 	Projectile: LaserZap
 		TrackTarget: true
 	ValidTargets: Air
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Air
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		-InvalidTargets:
 		ValidTargets: Air
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Air
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		-InvalidTargets:
 		ValidTargets: Air
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		-InvalidTargets:
 		ValidTargets: Air
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaWeapon:
 	Warhead@Laser_Medium:
 		-InvalidTargets:
 		ValidTargets: Air
@@ -3716,7 +3572,12 @@ ixian_airdrone:
 	MinRange: 1300  # W7MAT order-pin
 	Burst: 4  # W7MAT order-pin
 	BurstDelays: 5  # W7MAT order-pin
-	Warhead@Shrapnel:  # W7MAT order-pin
+	Warhead@Shrapnel: FireShrapnel
+		ValidTargets: Ground, Water, Air
+		Weapon: PhoenixRocketShrapnel
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Report: ROCKET1.WAV  # W7MAT w8-repin
 	ReloadDelay: 132
 	Range: 6500
@@ -3728,31 +3589,14 @@ ixian_airdrone:
 		Speed: 800
 		Acceleration: 4
 		Inaccuracy: 25
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
@@ -3760,19 +3604,9 @@ ixian_airdrone:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -3780,16 +3614,6 @@ ixian_airdrone:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Shrapnel: FireShrapnel
-		ValidTargets: Ground, Water, Air
-		Weapon: PhoenixRocketShrapnel
-		Amount: 2
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@FlakWeapon:

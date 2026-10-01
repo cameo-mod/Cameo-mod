@@ -18401,15 +18401,6 @@ RockDebris2:
 		TrailImage: small_trail
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_napalm
-		ExplosionPalette: effect75alpha
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
-	Range: 2816
-	Report: d2khc.wav
-	TargetActorCenter: true
-	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false
 		LaunchAngle: 128, 192
@@ -18417,22 +18408,23 @@ RockDebris2:
 		Shadow: true
 		BounceCount: 3
 		BounceRangeModifier: 20
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
 		ImpactActors: false
 
-RockDebris3:
-	Projectile: Bullet
-		Image: shrapnel3
-		TrailImage: small_trail2
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Range: 2816
 	Report: d2khc.wav
 	TargetActorCenter: true
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure
+RockDebris3:
 	Projectile: Bullet
+		Image: shrapnel3
+		TrailImage: small_trail2
 		Speed: 32, 64
 		Blockable: false
 		LaunchAngle: 128, 192
@@ -18443,6 +18435,11 @@ RockDebris3:
 		BounceRangeModifier: 20
 		TrailPalette: effect75alpha
 		TrailInterval: 1
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 2816
+	Report: d2khc.wav
+	TargetActorCenter: true
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
@@ -18455,12 +18452,6 @@ RockDebris4:
 	Projectile: Bullet
 		Image: shrapnel4
 		TrailImage: large_trail
-	ValidTargets: Ground, Water
-	ReloadDelay: 60
-	Range: 2816
-	Report: d2khc.wav
-	TargetActorCenter: true
-	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false
 		LaunchAngle: 128, 192
@@ -18471,6 +18462,11 @@ RockDebris4:
 		BounceRangeModifier: 20
 		TrailPalette: effect75alpha
 		TrailInterval: 1
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 2816
+	Report: d2khc.wav
+	TargetActorCenter: true
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
@@ -19171,6 +19167,7 @@ GLBarrelExplode:
 			AntiAirShip: 41
 			SubmarineLight: 82
 		ValidRelationships: Enemy, Neutral
+		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
 		ImpactSounds: gexpdema.wav, gexpdemb.wav, gexpdemc.wav
@@ -19179,8 +19176,6 @@ GLBarrelExplode:
 	Range: 1536
 	TargetActorCenter: true
 	Projectile: InstantExplode
-	Warhead@1Dam: SpreadDamage
-		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -19249,97 +19244,6 @@ GLTerroristExplosive:
 		Spread: 1111
 		Damage: 11111
 		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
-	Warhead@3Smu: LeaveSmudge
-		SmudgeType: Scorch
-		Size: 2
-	ReloadDelay: 250
-	Range: 1536
-	Warhead@Demolition_Heavy: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 466
-		Damage: 50000
-		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 62
-			COMPOSITE: 100
-			BLAST: 42
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 178
-			Wood: 195
-			Steel: 164
-			None: 154
-			Flak: 142
-			Concrete: 136
-			Plate: 124
-			Scout: 81
-			Light: 76
-			Medium: 75
-			Heavy: 74
-			Fighter: 73
-			Superheavy: 72
-			Bomber: 66
-			Helicopter: 59
-			Heroic: 52
-			Spaceship: 51
-			CyborgLight: 108
-			CyborgMedium: 103
-			CyborgHeavy: 96
-			CyborgHeroic: 61
-			AntiAirInfantry: 148
-			AntiAirVehicle: 75
-			AntiAirBuilding: 149
-			ShipLight: 122
-			ShipMedium: 101
-			ShipHeavy: 110
-			ShipSuperheavy: 109
-			AntiAirShip: 111
-			FlyingInfantry: 88
-			SubmarineLight: 86
-			SubmarineHeavy: 89
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Wood: 25
-			Steel: 24
-			Concrete: 23
-			None: 22
-			Flak: 21
-			Plate: 20
-			Heroic: 19
-			Scout: 18
-			Light: 17
-			Medium: 16
-			Heavy: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
-			CyborgLight: 19
-			CyborgMedium: 18
-			CyborgHeavy: 17
-			CyborgHeroic: 16
-			AntiAirInfantry: 21
-			AntiAirVehicle: 16
-			AntiAirBuilding: 23
-			ShipLight: 21
-			ShipMedium: 19
-			ShipHeavy: 19
-			ShipSuperheavy: 18
-			AntiAirShip: 20
-			FlyingInfantry: 16
-			SubmarineLight: 17
-			SubmarineHeavy: 16
-	Warhead@Concussion_Medium: AreaDamage
-		Damage: 50000
-	Projectile: InstantExplode
-	Warhead@1Dam: SpreadDamage
 		Versus:
 			None: 100
 			Wood: 60
@@ -19353,19 +19257,11 @@ GLTerroristExplosive:
 			ShipMedium: 63
 			AntiAirShip: 68
 			SubmarineLight: 66
-	Warhead@2Eff: CreateEffect
-		Explosions: ex_terr_flash
-		ImpactSounds: gexpmina.wav, gexpminb.wav
 	Warhead@3Smu: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 2
 		InvalidTargets: Vehicle, Structure, wall
 
-GLTerroristExplosive2:
-	Inherits@w70: ^Warhead_Concussion_Medium
-	Inherits@w71: ^Effect_Terrorist_Explosion_RA2
-	Inherits@w72: ^Projectile_Grenade_Light
-	Warhead@1Dam: SpreadDamage
-		Spread: 1234
-		Damage: 12345
 	ReloadDelay: 250
 	Range: 1536
 	Warhead@Demolition_Heavy: AreaDamage
@@ -19453,7 +19349,16 @@ GLTerroristExplosive2:
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 50000
 	Projectile: InstantExplode
+	Warhead@2Eff: CreateEffect
+		Explosions: ex_terr_flash
+		ImpactSounds: gexpmina.wav, gexpminb.wav
+GLTerroristExplosive2:
+	Inherits@w70: ^Warhead_Concussion_Medium
+	Inherits@w71: ^Effect_Terrorist_Explosion_RA2
+	Inherits@w72: ^Projectile_Grenade_Light
 	Warhead@1Dam: SpreadDamage
+		Spread: 1234
+		Damage: 12345
 		Versus:
 			None: 100
 			Wood: 60
@@ -19468,6 +19373,93 @@ GLTerroristExplosive2:
 			AntiAirShip: 68
 			SubmarineLight: 66
 		DamageTypes: TriggerProne, Prone100Percent, ExplosionDeath
+	ReloadDelay: 250
+	Range: 1536
+	Warhead@Demolition_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 466
+		Damage: 50000
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 62
+			COMPOSITE: 100
+			BLAST: 42
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 178
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+			CyborgLight: 108
+			CyborgMedium: 103
+			CyborgHeavy: 96
+			CyborgHeroic: 61
+			AntiAirInfantry: 148
+			AntiAirVehicle: 75
+			AntiAirBuilding: 149
+			ShipLight: 122
+			ShipMedium: 101
+			ShipHeavy: 110
+			ShipSuperheavy: 109
+			AntiAirShip: 111
+			FlyingInfantry: 88
+			SubmarineLight: 86
+			SubmarineHeavy: 89
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+			CyborgLight: 19
+			CyborgMedium: 18
+			CyborgHeavy: 17
+			CyborgHeroic: 16
+			AntiAirInfantry: 21
+			AntiAirVehicle: 16
+			AntiAirBuilding: 23
+			ShipLight: 21
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 18
+			AntiAirShip: 20
+			FlyingInfantry: 16
+			SubmarineLight: 17
+			SubmarineHeavy: 16
+	Warhead@Concussion_Medium: AreaDamage
+		Damage: 50000
+	Projectile: InstantExplode
 	Warhead@2Eff: CreateEffect
 		Explosions: ex_terr_flash
 		ImpactSounds: gexpmina.wav, gexpminb.wav
@@ -19661,7 +19653,6 @@ GLAnthraxBlue:
 		Duration: 300
 		Sequences: blue_toxins_small
 		Weapon: AnthraxCloudBlue
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
 		Speed: 12, 25
@@ -19674,7 +19665,6 @@ GLAnthraxPurple:
 		Duration: 350
 		Sequences: purple_toxins_small
 		Weapon: AnthraxCloudPurple
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
 		Speed: 12, 25
@@ -19687,7 +19677,6 @@ GLAnthraxLarge:
 		Duration: 400
 		Sequences: green_toxins
 		Weapon: AnthraxCloudLarge
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
 		Speed: 12, 25
@@ -19700,7 +19689,6 @@ GLAnthraxBlueLarge:
 		Duration: 450
 		Sequences: blue_toxins
 		Weapon: AnthraxCloudBlueLarge
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
 		Speed: 12, 25
@@ -19713,7 +19701,6 @@ GLAnthraxPurpleLarge:
 		Duration: 500
 		Sequences: purple_toxins
 		Weapon: AnthraxCloudPurpleLarge
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
 		Speed: 12, 25
@@ -19726,65 +19713,60 @@ AnthraxCloud:
 
 AnthraxCloudLarge:
 	Inherits@w70: ^Warhead_Toxic_Light
-	Warhead@Toxic_Light:
+	Warhead@Toxic_Light: AreaDamage
 		PercentageScale: 112994
 		Spread: 666
-	ReloadDelay: 1
-	Warhead@Toxic_Light: AreaDamage
 		Damage: 177
 		Falloff: 100, 30, 10, 0
 		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
 		AffectsParent: True
+	ReloadDelay: 1
 	Projectile: InstantExplode
 AnthraxCloudBlue:
 	Inherits@w70: ^Warhead_Toxic_Light
-	Warhead@Toxic_Light:
+	Warhead@Toxic_Light: AreaDamage
 		PercentageScale: 101523
 		Damage: 197
-	ReloadDelay: 1
-	Warhead@Toxic_Light: AreaDamage
 		Spread: 333
 		Falloff: 100, 30, 10, 0
 		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
 		AffectsParent: True
+	ReloadDelay: 1
 	Projectile: InstantExplode
 
 AnthraxCloudBlueLarge:
 	Inherits@w70: ^Warhead_Toxic_Light
-	Warhead@Toxic_Light:
+	Warhead@Toxic_Light: AreaDamage
 		PercentageScale: 101523
 		Spread: 666
-	ReloadDelay: 1
-	Warhead@Toxic_Light: AreaDamage
 		Damage: 197
 		Falloff: 100, 30, 10, 0
 		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
 		AffectsParent: True
+	ReloadDelay: 1
 	Projectile: InstantExplode
 AnthraxCloudPurple:
 	Inherits@w70: ^Warhead_Toxic_Light
-	Warhead@Toxic_Light:
+	Warhead@Toxic_Light: AreaDamage
 		PercentageScale: 93897
 		Damage: 213
-	ReloadDelay: 1
-	Warhead@Toxic_Light: AreaDamage
 		Spread: 333
 		Falloff: 100, 30, 10, 0
 		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
 		AffectsParent: True
+	ReloadDelay: 1
 	Projectile: InstantExplode
 
 AnthraxCloudPurpleLarge:
 	Inherits@w70: ^Warhead_Toxic_Light
-	Warhead@Toxic_Light:
+	Warhead@Toxic_Light: AreaDamage
 		PercentageScale: 93897
 		Spread: 666
-	ReloadDelay: 1
-	Warhead@Toxic_Light: AreaDamage
 		Damage: 213
 		Falloff: 100, 30, 10, 0
 		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
 		AffectsParent: True
+	ReloadDelay: 1
 	Projectile: InstantExplode
 GiantArtilleryTurret:
 	Inherits: ^Cannon
@@ -19815,19 +19797,14 @@ GiantBowlingTurret:
 		Speed: 150
 		LaunchAngle: 0
 		Blockable: true
-	Warhead@1Dam: SpreadDamage
-		Spread: 600
-		Damage: 8000
-	ReloadDelay: 240
-	Range: 12322
-	Report: tnkfire2.aud
-	Projectile: Bullet
 		Image: techcanbomb
 		Shadow: True
 		TrailDelay: 5
 		Inaccuracy: 333
 		AirburstAltitude: 0c400
 	Warhead@1Dam: SpreadDamage
+		Spread: 600
+		Damage: 8000
 		Versus:
 			None: 50
 			Wood: 70
@@ -19842,6 +19819,9 @@ GiantBowlingTurret:
 			AntiAirShip: 74
 			SubmarineLight: 85
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	ReloadDelay: 240
+	Range: 12322
+	Report: tnkfire2.aud
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk
@@ -19933,35 +19913,18 @@ TSTurretLaserFire:
 		Duration: 8
 		SecondaryBeamWidth: 15
 		-HitAnim:
-	Warhead@SmallArms: SpreadDamage
-		Damage: 1000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 1000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 1000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 1000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 1000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 1000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@Chaingun:
@@ -20146,13 +20109,14 @@ Spit_AA:
 		Speed: 444
 		HorizontalRateOfTurn: 44
 		RangeLimit: 44444
+		MinimumLaunchAngle: 123
+		MaximumLaunchAngle: 123
+		TrailImage: spittrail
+		Image: spit
 	Warhead@1Dam: SpreadDamage
 		Damage: 4444
 		Spread: 444
 		ValidTargets: Air
-	ReloadDelay: 66
-	Range: 6150
-	Warhead@1Dam: SpreadDamage
 		InvalidTargets: FireActor, WaterActor
 		Versus:
 			None: 88
@@ -20169,6 +20133,8 @@ Spit_AA:
 			SubmarineLight: 92
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 123, 33, 12, 3, 0
+	ReloadDelay: 66
+	Range: 6150
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Structure, wall
@@ -20183,11 +20149,6 @@ Spit_AA:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 	Burst: 1
-	Projectile: Missile
-		MinimumLaunchAngle: 123
-		MaximumLaunchAngle: 123
-		TrailImage: spittrail
-		Image: spit
 	Warhead@2Dam: AreaDamagePercentage
 		Damage: 5
 		Spread: 555
@@ -20694,11 +20655,14 @@ GLASCUDPOWER2:
 		Weapon: GLToxinExplodeClust2
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash_blue
+		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@4EffWater: CreateEffect
 		Explosions: ex_big_flash_blue
+		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c768
 		Damage: 5000
+		ValidTargets: Ground, Air, Water
 	ReloadDelay: 500
 	Range: 1024000
 	Warhead@MissileHE_Heavy: AreaDamage
@@ -20785,10 +20749,6 @@ GLASCUDPOWER2:
 			SubmarineHeavy: 19
 	MinRange: 4096
 	Report: vscuweaa.wav
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air, Water
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Burst: 9
 	BurstDelays: 10
 	Projectile: Bullet
@@ -20799,8 +20759,6 @@ GLASCUDPOWER2:
 		TrailImage: laserfire
 		Image: glscudmiss
 		Shadow: true
-	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@13Shake: ShakeScreen
 		Duration: 10
 		Intensity: 5
@@ -20818,8 +20776,10 @@ GLASCUDPOWER3:
 		Weapon: GLToxinExplodeClust3
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash_purple
+		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@4EffWater: CreateEffect
 		Explosions: ex_big_flash_purple
+		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c768
 		Damage: 6000
@@ -20827,6 +20787,7 @@ GLASCUDPOWER3:
 #####################################################
 # Stinger Weapons
 #####################################################
+		ValidTargets: Ground, Air, Water
 	ReloadDelay: 500
 	Range: 1024000
 	Warhead@MissileHE_Heavy: AreaDamage
@@ -20913,10 +20874,6 @@ GLASCUDPOWER3:
 			SubmarineHeavy: 19
 	MinRange: 4096
 	Report: vscuweaa.wav
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air, Water
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Burst: 9
 	BurstDelays: 10
 	Projectile: Bullet
@@ -20927,8 +20884,6 @@ GLASCUDPOWER3:
 		TrailImage: laserfire
 		Image: glscudmiss
 		Shadow: true
-	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplobig6.aud, kaboom22.aud
 	Warhead@13Shake: ShakeScreen
 		Duration: 10
 		Intensity: 5
@@ -21087,33 +21042,29 @@ GLToxinExplodeClust1:
 GLToxinExplodeClust2:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1250
+		Spread: 341
 	Warhead@3Clu: FireShrapnel
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallBlue
+		Amount: 3
+
 	Warhead@2Eff: CreateEffect
 		Explosions: blue_building
 	Projectile: InstantExplode
 	ReloadDelay: 40
-	Warhead@1Dam: SpreadDamage
-		Spread: 341
-	Warhead@3Clu: FireShrapnel
-		Amount: 3
-
 GLToxinExplodeClust3:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
+		Spread: 341
 	Warhead@3Clu: FireShrapnel
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallPurple
+		Amount: 3
+
 	Warhead@2Eff: CreateEffect
 		Explosions: purple_building
 	Projectile: InstantExplode
 	ReloadDelay: 40
-	Warhead@1Dam: SpreadDamage
-		Spread: 341
-	Warhead@3Clu: FireShrapnel
-		Amount: 3
-
 GLToxinCluster:
 	Burst: 1
 	Range: 3072
@@ -21295,6 +21246,8 @@ GLToxinBombBlue:
 	Warhead@Cluster: FireShrapnel
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallBlue
+		Amount: 9
+
 	Report: chute1.aud
 	Projectile: GravityBomb
 		Image: PARABOMB
@@ -21412,9 +21365,6 @@ GLToxinBombBlue:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@Cluster: FireShrapnel
-		Amount: 9
-
 GLToxinBombPurple:
 	Inherits@w70: ^Warhead_Flame_Heavy
 	Inherits@w71: ^Effect_Flame_Heavy
@@ -21425,6 +21375,8 @@ GLToxinBombPurple:
 	Warhead@Cluster: FireShrapnel
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallPurple
+		Amount: 9
+
 	Report: chute1.aud
 	Projectile: GravityBomb
 		Image: PARABOMB
@@ -21542,13 +21494,9 @@ GLToxinBombPurple:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@Cluster: FireShrapnel
-		Amount: 9
-
 TractorGLAnthraxGreen:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Duration: 250
 		Speed: 12, 25
@@ -21561,7 +21509,6 @@ TractorGLAnthraxGreen:
 TractorGLAnthraxBlue:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Duration: 300
 		Speed: 12, 25
@@ -21574,7 +21521,6 @@ TractorGLAnthraxBlue:
 TractorGLAnthraxPurple:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
-	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Duration: 350
 		Speed: 12, 25
@@ -21594,7 +21540,6 @@ TSCyCannonCluster:
 		Count: 3
 		Duration: 80
 		Weapon: ThermobaricFlame
-	Warhead@Cloud: SpawnSmokeParticle
 		Speed: 8, 24
 		TurnRate: 4
 		Image: burn_l
@@ -21625,24 +21570,16 @@ ThermobaricFlame:
 			ShipMedium: 40
 			AntiAirShip: 41
 			SubmarineLight: 55
-	ReloadDelay: 11
-	Warhead@Flame_Medium: AreaDamage
-		Spread: 250
-		Falloff: 100, 75, 50, 25
-	Projectile: InstantExplode
-	Warhead@1Dam: SpreadDamage
-		Versus:
 			None: 150
 			Light: 90
 			Medium: 80
 			Heavy: 75
 			Concrete: 20
-			CyborgLight: 116
-			AntiAirVehicle: 85
-			ShipLight: 42
-			ShipMedium: 40
-			AntiAirShip: 41
-			SubmarineLight: 55
+	ReloadDelay: 11
+	Warhead@Flame_Medium: AreaDamage
+		Spread: 250
+		Falloff: 100, 75, 50, 25
+	Projectile: InstantExplode
 RA2IMP:
 	ReloadDelay: 85
 	Range: 5120
@@ -21720,6 +21657,14 @@ Short8Inch:
 	ReloadDelay: 60
 	Projectile: Bullet
 		Inaccuracy: 1c300
+		Speed: 250
+		LaunchAngle: 100
+		Image: 120MM
+		ContrailLength: 50
+		ContrailStartWidth: 50
+		ContrailEndWidth: 1
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
 	Range: 8704
 	Burst: 2
 	Warhead@Demolition_Heavy_Flat: AreaDamage
@@ -21804,15 +21749,6 @@ Short8Inch:
 			FlyingInfantry: 16
 			SubmarineLight: 17
 			SubmarineHeavy: 16
-	Projectile: Bullet
-		Speed: 250
-		LaunchAngle: 100
-		Image: 120MM
-		ContrailLength: 50
-		ContrailStartWidth: 50
-		ContrailEndWidth: 1
-		ContrailStartColor: FF9933
-		ContrailEndColor: FFFFFF
 	Report: turret1.aud
 	-Warhead@Demolition_Heavy:
 
@@ -21875,18 +21811,6 @@ bowFire:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@2Eff: CreateEffect
-		ImpactSounds: bowhit.aud
-	Warhead@Percentage: AreaDamagePercentage
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		ValidTargets: Ground
-	Projectile: Missile
-		Speed: 0c650
-		Image: spearfire
-		HorizontalRateOfTurn: 48
-		VerticalRateOfTurn: 60
-		RangeLimit: 15c0
-	Warhead@1Dam: SpreadDamage
 		Spread: 150
 		Damage: 1500
 		Versus:
@@ -21902,7 +21826,11 @@ bowFire:
 			ShipMedium: 40
 			AntiAirShip: 50
 			SubmarineLight: 49
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: bowhit.aud
 	Warhead@Percentage: AreaDamagePercentage
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+		ValidTargets: Ground
 		Damage: 2
 		Spread: 150
 		Delay: 5
@@ -21920,12 +21848,20 @@ bowFire:
 			AntiAirShip: 50
 			SubmarineLight: 49
 
+	Projectile: Missile
+		Speed: 0c650
+		Image: spearfire
+		HorizontalRateOfTurn: 48
+		VerticalRateOfTurn: 60
+		RangeLimit: 15c0
 wc_tower_fire:
 	Range: 8704
 	Projectile: Missile
 		RangeLimit: 17c0
 		HorizontalRateOfTurn: 100
 		VerticalRateOfTurn: 100
+		Speed: 0c650
+		Image: spearfire
 	Warhead@1Dam: SpreadDamage
 		Spread: 250
 		Damage: 2500
@@ -21942,6 +21878,8 @@ wc_tower_fire:
 			ShipMedium: 30
 			AntiAirShip: 39
 			SubmarineLight: 39
+		ValidTargets: Ground
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 3
 		Spread: 300
@@ -21958,22 +21896,15 @@ wc_tower_fire:
 			ShipMedium: 30
 			AntiAirShip: 39
 			SubmarineLight: 39
-	ReloadDelay: 40
-	Report: bowfire.aud
-	ValidTargets: Ground
-	Projectile: Missile
-		Speed: 0c650
-		Image: spearfire
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@2Eff: CreateEffect
-		ImpactSounds: bowhit.aud
-	Warhead@Percentage: AreaDamagePercentage
 		Delay: 5
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
 		ValidTargets: Ground
 
+	ReloadDelay: 40
+	Report: bowfire.aud
+	ValidTargets: Ground
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: bowhit.aud
 ^DRPlasmaWeapon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 21
@@ -22114,8 +22045,25 @@ SWGreenLaser:
 SWGreenLaserG:
 	ReloadDelay: 75
 	Range: 7168
-	Warhead@Percentage:
+	Warhead@Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+		Spread: 100
+		Delay: 1
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+		Versus:
+			None: 70
+			Wood: 60
+			Light: 80
+			Medium: 90
+			Heavy: 100
+			Concrete: 50
+			CyborgLight: 75
+			AntiAirVehicle: 85
+			ShipLight: 69
+			ShipMedium: 67
+			AntiAirShip: 68
+			SubmarineLight: 82
 	Report: awbazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: Missile
@@ -22149,24 +22097,6 @@ SWGreenLaserG:
 			AntiAirShip: 122
 			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Percentage: AreaDamagePercentage
-		Damage: 1
-		Spread: 100
-		Delay: 1
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
-			CyborgLight: 75
-			AntiAirVehicle: 85
-			ShipLight: 69
-			ShipMedium: 67
-			AntiAirShip: 68
-			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -22205,8 +22135,25 @@ SWrBigRedLaser:
 
 SWGBigRedLaserG:
 	Range: 8192
-	Warhead@Percentage:
+	Warhead@Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+		Spread: 100
+		Delay: 1
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+		Versus:
+			None: 70
+			Wood: 60
+			Light: 80
+			Medium: 90
+			Heavy: 100
+			Concrete: 50
+			CyborgLight: 75
+			AntiAirVehicle: 85
+			ShipLight: 69
+			ShipMedium: 67
+			AntiAirShip: 68
+			SubmarineLight: 82
 	ReloadDelay: 75
 	Report: swrocket1.aud
 	ValidTargets: Ground, Air
@@ -22241,24 +22188,6 @@ SWGBigRedLaserG:
 			AntiAirShip: 122
 			SubmarineLight: 119
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Percentage: AreaDamagePercentage
-		Damage: 1
-		Spread: 100
-		Delay: 1
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
-			CyborgLight: 75
-			AntiAirVehicle: 85
-			ShipLight: 69
-			ShipMedium: 67
-			AntiAirShip: 68
-			SubmarineLight: 82
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -22333,6 +22262,22 @@ GLRebelToxinGarrison:
 	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 800
+		Spread: 200
+		InvalidTargets: Structure, wall, Husk, ToxinImmune
+		Versus:
+			None: 130
+			Light: 55
+			Medium: 40
+			Heavy: 20
+			Wood: 10
+			Concrete: 0
+			CyborgLight: 85
+			AntiAirVehicle: 47
+			ShipLight: 23
+			ShipMedium: 0
+			AntiAirShip: 0
+			SubmarineLight: 0
+		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@Cloud: SpawnSmokeParticle
 		Delay: 5
 		Count: 1
@@ -22352,23 +22297,6 @@ GLRebelToxinGarrison:
 		Amplitude: 120
 		WaveLength: 360
 		Color: 8300FF
-	Warhead@1Dam: SpreadDamage
-		Spread: 200
-		InvalidTargets: Structure, wall, Husk, ToxinImmune
-		Versus:
-			None: 130
-			Light: 55
-			Medium: 40
-			Heavy: 20
-			Wood: 10
-			Concrete: 0
-			CyborgLight: 85
-			AntiAirVehicle: 47
-			ShipLight: 23
-			ShipMedium: 0
-			AntiAirShip: 0
-			SubmarineLight: 0
-		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: purplesplash
 	Warhead@Clear: SpreadDamage
@@ -22387,6 +22315,22 @@ GLTrooperRPGMissileG:
 	Range: 8000
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
+		Spread: 500
+		ValidTargets: Ground, Air
+		Versus:
+			None: 33
+			Wood: 100
+			Light: 200
+			Medium: 167
+			Heavy: 133
+			Concrete: 67
+			CyborgLight: 81
+			AntiAirVehicle: 183
+			ShipLight: 141
+			ShipMedium: 106
+			AntiAirShip: 122
+			SubmarineLight: 119
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	ReloadDelay: 50
 	Report: irpgweaa.wav, irpgweab.wav, irpgweac.wav, irpgwead.wav, irpgweae.wav
 	ValidTargets: Ground, Air
@@ -22404,23 +22348,6 @@ GLTrooperRPGMissileG:
 		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
-	Warhead@1Dam: SpreadDamage
-		Spread: 500
-		ValidTargets: Ground, Air
-		Versus:
-			None: 33
-			Wood: 100
-			Light: 200
-			Medium: 167
-			Heavy: 133
-			Concrete: 67
-			CyborgLight: 81
-			AntiAirVehicle: 183
-			ShipLight: 141
-			ShipMedium: 106
-			AntiAirShip: 122
-			SubmarineLight: 119
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
 		Spread: 100
@@ -22547,17 +22474,18 @@ Fremen_L:
 			ShipMedium: 63
 			AntiAirShip: 75
 			SubmarineLight: 35
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_small_explosion
-	Projectile: InstantHit
-		Speed: 2000
-		Inaccuracy: 0c128
-		InaccuracyType: PerCellIncrement
-	Warhead@1Dam: SpreadDamage
 		Spread: 0c204
 		Damage: 3000
 		Falloff: 100, 0
 		DamageCalculationType: ClosestTargetablePosition
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Projectile: InstantHit
+		Speed: 2000
+		Inaccuracy: 0c128
+		InaccuracyType: PerCellIncrement
 	Warhead@4Eff_2: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship
@@ -22565,9 +22493,6 @@ Fremen_L:
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@2Eff: CreateEffect
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 

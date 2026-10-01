@@ -399,10 +399,6 @@ td_nod_artillery_artilleryshellupgrade:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		Blockable: false
-	Warhead@Grenade: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 3000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -443,10 +439,6 @@ td_nod_artillery_artilleryshellupgrade:
 			AntiAirShip: 13
 			SubmarineLight: 11
 			SubmarineHeavy: 9
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -487,11 +479,6 @@ td_nod_artillery_artilleryshellupgrade:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -534,32 +521,16 @@ td_nod_artillery_artilleryshellupgrade:
 			AntiAirShip: 12
 			SubmarineLight: 15
 			SubmarineHeavy: 17
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 6000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 6000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 	-Warhead@Effect:
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumCannon:
 	-Warhead@HeavyBomb:
@@ -632,8 +603,6 @@ td_nod_reconbike_rocket:
 		Speed: 600
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -673,10 +642,6 @@ td_nod_reconbike_rocket:
 			AntiAirShip: 11
 			SubmarineLight: 13
 			SubmarineHeavy: 14
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -717,8 +682,6 @@ td_nod_reconbike_rocket:
 			AntiAirShip: 15
 			SubmarineLight: 12
 			SubmarineHeavy: 10
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
@@ -758,8 +721,6 @@ td_nod_reconbike_rocket:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -800,11 +761,6 @@ td_nod_reconbike_rocket:
 			SubmarineLight: 12
 			SubmarineHeavy: 14
 
-	-Warhead@TankDestroyerCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@LightMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 15970
@@ -2713,37 +2669,17 @@ td_nod_chemicalssmlauncher_chemicalhonestjohn:
 		TrailInterval: 1
 		Speed: 225
 		LaunchAngle: 75
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 30000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 30000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 30000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 30000
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
@@ -3267,29 +3203,19 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 	Range: 5274
 	TargetActorCenter: true
 	Inherits@4: ^Effect_Flame_Medium
-	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
-	Range: 5274
 	StartBurstReport: flamtnk1.aud
 	Projectile: Bullet
 		Speed: 111
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@Flame_Heavy:
-		Damage: 2000
-	Warhead@Flame_Medium:
-		Damage: 2000
-	-Warhead@Flame_Heavy:
-	-Warhead@Flame_Medium:
 	Warhead@Flame_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water
 		Damage: 3000
 		PercentageScale: 9984
-	ValidTargets: Ground, Water
-	TargetActorCenter: true
 td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
 	Inherits@fx: ^td_nod_td_nod_lighttankmkii_lighttank2cannon
@@ -3301,11 +3227,6 @@ td_nod_lighttankmkii_lighttank2cannon:
 		Image: 120MM
 		Inaccuracy: 300
 		Shadow: true
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -3348,8 +3269,6 @@ td_nod_lighttankmkii_lighttank2cannon:
 			AntiAirShip: 7
 			SubmarineLight: 11
 			SubmarineHeavy: 13
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -3390,8 +3309,6 @@ td_nod_lighttankmkii_lighttank2cannon:
 			SubmarineLight: 15
 			SubmarineHeavy: 13
 
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 		PercentageScale: 0
@@ -3891,15 +3808,6 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Demolition_Light:
-		Damage: 4000
-	Warhead@Concussion_Medium:
-		Damage: 4000
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -3942,27 +3850,14 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			AntiAirShip: 12
 			SubmarineLight: 15
 			SubmarineHeavy: 17
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
@@ -4002,9 +3897,6 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			AntiAirShip: 17
 			SubmarineLight: 15
 			SubmarineHeavy: 13
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 4000
-
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -4045,9 +3937,6 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 			SubmarineHeavy: 18
 	-Warhead@Effect:
 	-Warhead@HeavyBomb:
-	-Warhead@HeavyCannon:
-	-Warhead@MediumCannon:
-	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_Heavy_Flat:
@@ -4415,30 +4304,5 @@ td_nod_minigunner_minigun_laser:
 		Range: 1250
 		ValidTargets: Shielded
 		InvalidTargets: Air
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 1
-			Concrete: 1
-			Fighter: 1
-			Flak: 1
-			Heavy: 1
-			Helicopter: 1
-			Heroic: 1
-			Light: 1
-			Medium: 1
-			None: 1
-			Plate: 1
-			REFLECTOR: 50
-			Scout: 1
-			Shield: 100
-			Spaceship: 1
-			Steel: 1
-			Superheavy: 1
-			Wood: 1
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	-Warhead@LegacyLaserExtraDamage:
