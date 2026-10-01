@@ -69,6 +69,71 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>
+	/// A contiguous run of passable cells on the edge of a player's believed territory: a way in.
+	/// <para>
+	/// The rest of that edge is cliff, water or map edge - wall the terrain provides for free. Only the
+	/// doors have to be held, which is what lets defence be planned as a line rather than as a scatter
+	/// of independent points. (Port of the donor's CNTerritoryDoor.)
+	/// </para>
+	/// </summary>
+	public sealed class ZoneTerritoryDoor
+	{
+		public readonly CPos Center;
+		public readonly CPos[] Cells;
+
+		/// <summary>Direction leading out of the territory, averaged over the run.</summary>
+		public readonly CVec Outward;
+
+		/// <summary>Reachable ground behind the door, capped. What passing through it actually opens up.</summary>
+		public readonly int GroundBeyond;
+
+		public int Width => Cells.Length;
+
+		public ZoneTerritoryDoor(CPos center, CPos[] cells, CVec outward, int groundBeyond)
+		{
+			Center = center;
+			Cells = cells;
+			Outward = outward;
+			GroundBeyond = groundBeyond;
+		}
+	}
+
+	/// <summary>
+	/// A passable cliff-edge cell that overlooks reachable lower ground (height advantage,
+	/// natural wall). (Port of the donor's CNHighGroundEdge.)
+	/// </summary>
+	public readonly struct ZoneHighGroundEdge
+	{
+		public readonly CPos Cell;
+		public readonly CVec Outward;
+		public readonly int HeightLevels;
+
+		public ZoneHighGroundEdge(CPos cell, CVec outward, int heightLevels)
+		{
+			Cell = cell;
+			Outward = outward;
+			HeightLevels = heightLevels;
+		}
+	}
+
+	/// <summary>
+	/// A weighted position a defence should cover. (Port of the donor's
+	/// CNBaseBuilderBotModule.DefensePlacementThreat - freestanding here because the Cameo base
+	/// builder is not part of the ZG-b port's dependency set.)
+	/// </summary>
+	public readonly struct ZoneDefenseThreat
+	{
+		public readonly CPos Location;
+		public readonly int Weight;
+
+		public ZoneDefenseThreat(CPos location, int weight)
+		{
+			Location = location;
+			Weight = weight;
+		}
+	}
+
+	/// <summary>
 	/// One cell of the map's shape: a connected pocket of ground bounded by chokepoint
 	/// corridors and cliff ramps, independent of who (if anyone) holds it. Computed once,
 	/// shared between bots via the static registry in TacticalMapBotModule.
@@ -152,5 +217,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// were scanned with — so a caller walks the map the way these answers were derived.
 		/// </summary>
 		bool IsPassableCell(CPos cell);
+
+		// ---- ZG-b: per-bot BELIEF over the shared terrain ----
+		// Unlike the members above, these answers come from what this one bot has seen and
+		// remembered (own buildings + BotFogMemory sightings). They are not shared, they can be
+		// stale, and "unknown" is a normal answer — never read them as the truth on the ground.
+
+		/// <summary>
+		/// The player this bot believes dominates a region, or null when unclaimed/contested/unknown.
+		/// Fog-honest: tallied from the bot's own buildings plus its REMEMBERED enemy buildings —
+		/// an enemy base never scouted claims nothing here even if it stands. May be stale (refreshed
+		/// on an interval). Region ids are positions in <see cref="Regions"/> and are invalidated
+		/// whenever <see cref="Generation"/> changes.
+		/// </summary>
+		OpenRA.Player RegionOwner(int regionId);
+
+		/// <summary>
+		/// The ways into this bot's believed territory — a contiguous run of passable edge cells each.
+		/// Belief (fog memory decides where the claim raced to), possibly stale; empty until the
+		/// territory refresh has run or while the bot holds nothing.
+		/// </summary>
+		IReadOnlyList<ZoneTerritoryDoor> TerritoryDoors { get; }
+
+		/// <summary>
+		/// The ground this bot believes it holds: cells its claim won in the own-vs-remembered-enemy
+		/// building race around the gate corridors. Belief, possibly stale.
+		/// </summary>
+		IReadOnlyCollection<CPos> Territory { get; }
+
+		/// <summary>Whether a cell is inside this bot's believed territory claim.</summary>
+		bool IsInTerritory(CPos cell);
 	}
 }
