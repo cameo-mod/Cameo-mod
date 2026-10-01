@@ -147,3 +147,8 @@ Player:
 			td_nod_tiberiumharvester: 20
 			td_nod_stealthharvester: 20
 			td_nod_chinooktransport: 5
+	SquadManagerBotModuleCA@classic:
+		AirSquadTargetTypes:
+			td_nod_apacheattackhelicopter: Aircraft, Ground, Naval
+			td_nod_venom: Aircraft, Ground, Naval
+			td_nod_chinooktransport: Ground

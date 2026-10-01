@@ -163,3 +163,8 @@ Player:
 			ra2_allies_ifv_repair: 3
 			ra2_allies_nighthawk: 3
 			ra2_allies_ra2spy: 1
+	SquadManagerBotModuleCA@classic:
+		AirSquadTargetTypes:
+			ra2_allies_harrier: Aircraft, Ground, Naval
+			ra2_allies_blackeagle: Aircraft, Building, Epic, Naval
+			ra2_allies_nighthawk: Aircraft, Ground, Naval

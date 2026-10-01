@@ -209,3 +209,9 @@ Player:
 			ra1_soviets_nukedemotruck: 1
 			ra1_soviets_madtank: 1
 			ra1_soviets_hiptransport: 5
+	SquadManagerBotModuleCA@classic:
+		AirSquadTargetTypes:
+			ra1_soviets_migattackbomber: Aircraft, Vehicle, Epic, Naval, Defense
+			ra1_soviets_su57attackbomber: Aircraft, Building, Epic, Naval
+			ra1_soviets_supersonicnuclearbomber: Building, Epic
+			ra1_soviets_hiptransport: Ground

@@ -128,7 +128,7 @@ can never remove one (a load-time crash).
 
 | Part | Size | How | State |
 |---|---|---|---|
-| Dictionary rows (`UnitsToBuild`, `BuildingFractions`, `BuildingLimits`, `UnitLimits`, `AirSquadTargetTypes`, delays and intervals) | 2,680 refs; 2,646 movable | `tools/packs/split_ai_rows.py --pack <Theme/Faction> --apply` | tool built; pilot TD/GDI measured content-identical on the engine; the all-pack move is prepared and awaits an independent engine verification before it lands |
+| Dictionary rows (`UnitsToBuild`, `BuildingFractions`, `BuildingLimits`, `UnitLimits`, `AirSquadTargetTypes`, delays and intervals) | 2,680 refs; 2,646 movable | `tools/packs/split_ai_rows.py --pack <Theme/Faction> --apply` | **landed** — all-pack move done for the six genericbot personalities; the last 27 `SquadManagerBotModuleCA@classic` `AirSquadTargetTypes` rows hand-merged into 14 packs (2026-10-01, resolved-identical verified: 12008 keys / 0 diff, boot-gate + ai_squad_gate PASS). `--all` now reports 0 movable |
 | List fields (`GuerrillaTypes`, `ExcludeFromSquadsTypes`, `HighValueTargetTypes`, …) | 4,471 refs in 41 fields | derived roles + `BotRoles` on each pack's actors (§2.8) | **ruled 2026-09-27: roles on actors**; C# next (AI architect lane) |
 | Module declarations, scalars, personalities, difficulties | — | stay central (one authority per decision) | by design |
 

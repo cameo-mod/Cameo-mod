@@ -139,3 +139,8 @@ Player:
 			td_gdi_railgunbattleship: 10
 			td_gdi_tiberiumharvester: 20
 			td_gdi_chinooktransport: 5
+	SquadManagerBotModuleCA@classic:
+		AirSquadTargetTypes:
+			td_gdi_orca: Aircraft, Ground, Naval
+			td_gdi_firehawk: Aircraft, Building, Epic, Naval
+			td_gdi_chinooktransport: Ground
