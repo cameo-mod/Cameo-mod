@@ -97,3 +97,6 @@ groups:
   V_tc2_expansion_claims:            # NOVA TC-2c — yield contested fields to the outranking ally's published expansion claim (lower ClientIndex wins; inert in 1v1)
     ExpansionPlannerBotModule:
       UseTeamExpansionClaims: true
+  W_tc2_role_split:                  # NOVA TC-2d — allied bots spread their TechRush<->Expansion rests by ClientIndex rank (mirrored teams cover the arsenal; inert in 1v1)
+    MasterAiBotModule:
+      UseTeamRoleSplit: true

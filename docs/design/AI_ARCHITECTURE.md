@@ -2530,6 +2530,17 @@ enumerates enemy actors.
   because no allied broadcasts exist. (An ally's *built* refinery is deliberately not
   enumerated — `world.Actors` is omniscient and fog forbids reading ally positions
   outside shared vision; the claim broadcast is the honest channel.)
+- **Fourth consumer (TC-2d — role split):** `MasterAiBotModuleInfo.
+  UseTeamRoleSplit` (default false) spreads the TechRush&harr;Expansion RESTING
+  point across the allied bots by `ClientIndex` rank — `TeamRoleRank` counts
+  allied indices below mine, `RoleSplitBias(rank, teamSize, shift)` spreads the
+  endpoints to ±`TeamRoleSplitShift` (20), rank 0 taking the Expansion pole.
+  The bias moves the effective rest itself, so the axis parks on it and decays
+  back to it like an authored rest. Computed from static indices, never from
+  the drifting axes — a mirrored `hard`/`hard` team converges to
+  expander+techer by construction, no oscillation possible. No new broadcast
+  field: `ClientIndex` arrived with TC-2c. Switch group `W_tc2_role_split`;
+  inert in 1v1.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count

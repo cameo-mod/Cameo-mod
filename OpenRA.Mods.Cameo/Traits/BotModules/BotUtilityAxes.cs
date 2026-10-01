@@ -97,10 +97,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int SteamrollerGuerrilla { get; private set; } = IBotUtilityAxes.Neutral;
 		bool started;
 
-		internal void Observe(UtilityAxisSample s, string personality, MasterAiBotModuleInfo info)
+		internal void Observe(UtilityAxisSample s, string personality, MasterAiBotModuleInfo info,
+			int techRushExpansionBias = 0)
 		{
 			var turtleRushRest = Rest(info.UtilityTurtleRushRest, personality);
-			var techRushExpansionRest = Rest(info.UtilityTechRushExpansionRest, personality);
+			// TC-2d: role split moves the EFFECTIVE rest — the axis parks on it at start and
+			// decays back to it once inputs quieten, exactly as an authored rest does.
+			var techRushExpansionRest = Math.Clamp(
+				Rest(info.UtilityTechRushExpansionRest, personality) + techRushExpansionBias, 0, 100);
 			var steamrollerGuerrillaRest = Rest(info.UtilitySteamrollerGuerrillaRest, personality);
 			if (!started)
 			{

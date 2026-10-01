@@ -3526,6 +3526,9 @@ Player:
 		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
 		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
 		UsePersonalityLeads: false
+		# TC-2d (§12.17): allied bots spread TechRush<->Expansion rests by ClientIndex rank
+		# (switch group W). Inert in 1v1; this module mounts on genericbot only.
+		UseTeamRoleSplit: false
 		# UT-1 (AI_DEEP_RESEARCH §5.1): each personality's starting/resting point on the three
 		# bipolar axes, [0,100] with 100 the SECOND pole. Record-only until a consumer arms
 		# UseUtilityAxes (switch group M_utility_axes); a missing key rests at neutral 50.

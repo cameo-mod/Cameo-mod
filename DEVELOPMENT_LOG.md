@@ -1,3 +1,16 @@
+# 2026-10-02 — NOVA: TC-2d role split (switch W_tc2_role_split)
+
+- `UseTeamRoleSplit` on `MasterAiBotModule` (genericbot-only): allied bots
+  spread their TechRush↔Expansion RESTING point by ClientIndex rank —
+  `TeamRoleRank` counts allied indices below mine, `RoleSplitBias` puts
+  endpoints at ±`TeamRoleSplitShift` (20), rank 0 = Expansion pole.
+- The bias moves the effective rest inside `BotUtilityAxes.Observe` — the axis
+  parks on it and decays to it like an authored rest. Static per team
+  composition → converges by construction, no oscillation. No new broadcast
+  field needed (ClientIndex shipped with TC-2c). Inert in 1v1.
+- DAWN claimed TC-3 (2v2 harness, tools/ai only) — her STATUS file confirms no
+  overlap with this lane.
+
 # 2026-10-02 — NOVA: TC-2c expansion-claim deconfliction (switch V_tc2_expansion_claims)
 
 - `TeamBroadcast` gains `ClientIndex` + `ExpansionClaim` (planner target, own-side

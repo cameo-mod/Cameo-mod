@@ -381,6 +381,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"target off its rest. 0 pins every axis at rest (pure personality), 100 = the",
 			"documented term caps.")]
 		public readonly int UtilityInputWeightPercent = 100;
+
+		[Desc("TC-2d (AI_ARCHITECTURE §12.17): role split — allied bots spread their TechRush<->Expansion",
+			"rest by ClientIndex rank (lowest takes the Expansion pole, highest TechRush), so a mirrored",
+			"team covers the arsenal instead of mirroring. Static per team — cannot oscillate.",
+			"Inert in 1v1.")]
+		public readonly bool UseTeamRoleSplit = false;
+
+		[Desc("TC-2d: axis points the team-endpoint rests spread apart (a 2-bot team gets -/+ this).")]
+		public readonly int TeamRoleSplitShift = 20;
 		[Desc("DI-1 Director (AI_ARCHITECTURE §12.16): own army value that counts as massed —",
 			"tension only builds while there is an army to send.")]
 		public readonly int DirectorArmyMassValue = 2500;
@@ -1215,7 +1224,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				OwnKillsCostWindow = KillsCostWindow
 			};
-			utilityAxes.Observe(utilitySample, currentPersonality, Info);
+			// TC-2d (§12.17): role split — spread the TechRush<->Expansion rest by ClientIndex rank
+			// among allied bots (static per team composition, so it converges by construction;
+			// a 1v1 collects no allied broadcasts and passes 0).
+			var roleBias = 0;
+			if (Info.UseTeamRoleSplit)
+			{
+				var allyIndices = TeamBlackboard.CollectBroadcasts(player)
+					.Where(b => b != null && b.SnapshotTick > 0)
+					.Select(b => b.ClientIndex)
+					.ToList();
+				roleBias = RoleSplitBias(TeamRoleRank(player.ClientIndex, allyIndices),
+					allyIndices.Count + 1, Info.TeamRoleSplitShift);
+			}
+
+			utilityAxes.Observe(utilitySample, currentPersonality, Info, roleBias);
 
 			var situation = new BotSituation
 			{
@@ -1732,6 +1755,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var total = taken + dealt;
 			return total <= 0 ? 0 : (int)((long)100 * taken / total);
+		}
+
+		/// <summary>
+		/// TC-2d (§12.17): this bot's rank among the allied bots by ClientIndex — the count of
+		/// allied indices below mine. Static per team composition: the precedence can never
+		/// oscillate however the axes drift. Pure, for the tests.
+		/// </summary>
+		internal static int TeamRoleRank(int myClientIndex, IEnumerable<int> allyClientIndices)
+		{
+			var rank = 0;
+			foreach (var index in allyClientIndices)
+				if (index < myClientIndex)
+					rank++;
+
+			return rank;
+		}
+
+		/// <summary>
+		/// TC-2d: the TechRush&lt;-&gt;Expansion rest bias for rank `rank` of `teamSize` allied
+		/// bots — endpoints land at ±`shift`, evenly spread between; rank 0 (lowest ClientIndex)
+		/// takes the Expansion pole. A lone bot (`teamSize` 1) gets 0 — nothing to split.
+		/// </summary>
+		internal static int RoleSplitBias(int rank, int teamSize, int shift)
+		{
+			if (teamSize < 2)
+				return 0;
+
+			return shift * (teamSize - 1 - 2 * Math.Clamp(rank, 0, teamSize - 1)) / (teamSize - 1);
 		}
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)

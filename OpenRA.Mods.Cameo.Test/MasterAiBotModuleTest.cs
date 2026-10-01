@@ -1061,5 +1061,32 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.IsDormant(shelf, other.EffectiveMissionId, 100), Is.False);
 			Assert.That(MasterAiBotModule.IsDormant(new Dictionary<string, int>(), mission.EffectiveMissionId, 100), Is.False);
 		}
+
+		// TC-2d (AI_ARCHITECTURE.md 12.17): role split — allied bots spread the
+		// TechRush<->Expansion rest by ClientIndex rank. Static per team, so the
+		// precedence converges by construction and cannot oscillate.
+		[Test]
+		public void RoleRankCountsLowerClientIndices()
+		{
+			Assert.That(MasterAiBotModule.TeamRoleRank(2, new[] { 0, 1, 3 }), Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.TeamRoleRank(0, new[] { 1, 2 }), Is.EqualTo(0),
+				"the lowest index on the team is rank 0 — it takes the Expansion pole");
+			Assert.That(MasterAiBotModule.TeamRoleRank(3, System.Array.Empty<int>()), Is.EqualTo(0),
+				"no allied bots — a 1v1 or a solo team — is rank 0 of a team of one");
+		}
+
+		[Test]
+		public void RoleSplitBiasSpreadsTheTeamEndpoints()
+		{
+			Assert.That(MasterAiBotModule.RoleSplitBias(0, 1, 20), Is.EqualTo(0),
+				"a lone bot splits nothing");
+			Assert.That(MasterAiBotModule.RoleSplitBias(0, 2, 20), Is.EqualTo(20),
+				"two-bot team: lowest index biases full Expansion");
+			Assert.That(MasterAiBotModule.RoleSplitBias(1, 2, 20), Is.EqualTo(-20),
+				"and its ally full TechRush");
+			Assert.That(MasterAiBotModule.RoleSplitBias(1, 3, 20), Is.EqualTo(0),
+				"three-bot team: the middle rank stays on its authored rest");
+			Assert.That(MasterAiBotModule.RoleSplitBias(2, 3, 20), Is.EqualTo(-20));
+		}
 	}
 }
