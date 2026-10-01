@@ -48,7 +48,7 @@
 	# Default grants to `fransbot` only, where the flag is already implied — inert on master.
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3376,10 +3376,12 @@ Player:
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
 	# untouched. Squads join when NOVA's lane adopts it; the engineers claim through EngineerBotModule (ENG).
 	BotUnitLeaseRegistry:
+		EnforceAtOrderGate: true
 		RequiresCondition: genericbot
 	# Reads the committed offline priors (DESIGN §19.2) as a bounded unit-builder weight; inert until its own
 	# UseLearnedPriors is on (genericbot only — classic, which shares the unit builder, has no provider).
 	BotLearnedPriors:
+		UseLearnedPriors: true
 		RequiresCondition: genericbot
 	# LC5 (AI_MASTER_PLAN §3): the ownership watchdog. Read-only (never orders, claims or releases), so it runs on
 	# classic too: classic's squad layer is the baseline the genericbot owners are compared against. Active in
@@ -3397,11 +3399,12 @@ Player:
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
+		RaidFailuresBeforeDormant: 2
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
 		# ZG-c: spatial memory + risk routing index by the zone graph when an enabled, built
 		# TacticalMapBotModule exists (genericbot); the square grid stays the fallback otherwise.
-		UseZoneTopology: true
+		UseZoneTopology: false # ZG-c merged default-on without an A/B (#718); switch group D re-arms it for the next increment A/B
 		# CA-6 (AI_ARCHITECTURE 12.9): remembered defences join the beatability
 		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
 		# variable -- flip on the candidate worktree only.
@@ -3440,6 +3443,7 @@ Player:
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
+		Enabled: true
 		RequiresCondition: genericbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot || classicbot
@@ -3473,6 +3477,17 @@ Player:
 	# DESIGN §19.5: the engineer owner is one of the two omniscient modules, as a whole (maintainer 2026-09-30):
 	# capture targets, the SafePath enemy scan and destroyed bridge huts are all seen through fog.
 	EngineerBotModule:
+		RankTargetsBySafety: true
+		StealthMaxDefenders: 2
+		RouteRecheckTicks: 100
+		MaxExposedRouteCells: 3
+		TransportChance: 25
+		EscortThinnedPercent: 50
+		EscortSuperiority: 150
+		EscortDefendedCaptures: true
+		CaptureTargetTries: 3
+		CaptureFailuresBeforeDormant: 2
+		MaxEngineersPerTarget: 1
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75
@@ -3495,6 +3510,12 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-rush
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
@@ -3548,6 +3569,12 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-turtle
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
@@ -3601,6 +3628,12 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-tech
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
@@ -3654,6 +3687,12 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-expansion
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
@@ -3707,6 +3746,12 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-steamroller
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
@@ -3759,6 +3804,12 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
+		UseProtectionRequests: true
+		AirDoctrineEnabled: true
+		EnsureArtillerySiege: true
+		EnsureAntiAirEscort: true
+		SquadMicroEnabled: true
+		FormationMovement: true
 		RequiresCondition: genericbot && personality-guerrilla
 		PrepositionDefence: true
 		FastSquadsReactToThreats: true
