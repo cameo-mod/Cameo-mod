@@ -7673,8 +7673,15 @@ CPQDEBUGDUMMY:
 	Targetable@infiltrate:
 		TargetTypes: SpyInfiltrate
 		RequiresCondition: !chronobeamed
+	# Disk drain (Yuri's Floating Disc) INVERTS the plant instead of switching it off (maintainer 2026-10-01, after CA
+	# 7fe5495a1): the plant keeps its Power trait while drained and the multiplier below turns +output into -output.
+	# Derived from each plant's own Amount, so it stays right when power is rebalanced (CA hard-codes -2x per plant).
+	# Every other disabling effect (EMP, freeze, capture...) still switches the plant off.
 	Power:
-		RequiresCondition: !powerdisabled && !forceshielddrain && !disabled
+		RequiresCondition: !powerdisabled && !forceshielddrain && (!disabled || diskdrain)
+	PowerMultiplier@DISKDRAIN:
+		Modifier: -100
+		RequiresCondition: diskdrain
 	PowerMultiplier@FSDRAIN:
 		Modifier: 0
 		RequiresCondition: forceshielddrain
