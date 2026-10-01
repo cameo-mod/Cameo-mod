@@ -1,3 +1,22 @@
+# 2026-10-01 — NOVA: UT-3 defence share — TurtleRush scales the CA-2 defend reserve
+
+- `SquadManagerBotModuleCAInfo.UseUtilityDefendReserve` (default **false**) — its OWN flag,
+  not UseUtilityAxes, so switch group M keeps isolating the delay lean and the new lean arms
+  independently as `Q_ut3_defend_share` (manifest; bare key, @classic skip-guarded).
+- `DefendReserveAxisPercent(axis, turtleFactor, rushFactor)`: 200/100/50% at axis 0/50/100,
+  linear between, clamped — turtles dig in (x2 reserve), rushers strip the pool for the wave
+  (x0.5). `DefendDraftLimit` gains an optional `IBotUtilityAxes[]` param; the lean runs
+  inside the CA-2 guard so it only modulates a reserve that preservation already keeps —
+  emergency, small pool, flag-off, or missing provider all return the plain CA-2 answer.
+- ai.yaml: `UseUtilityDefendReserve: false` on the six SquadManagerBotModuleCA instances.
+- Factors `DefendReserveTurtleFactorPercent`=200 / `...RushFactorPercent`=50, validated
+  0..400 at RulesetLoaded. Docs: ARCHITECTURE 12.15 third-consumer bullet; ROADMAP UT row [~].
+- 7 tests (`DefendUtilityReserveTest`): pole/neutral/mid map pins, flag-off ignores provider,
+  neutral bit-identical, turtle doubles, rush halves, emergency+small-pool bypass, null/empty
+  provider = neutral.
+
+Co-Authored-By: Nova (Devin) <devin@cognition.ai>
+
 # 2026-10-01 — NOVA: INC-4 wave merged to master (maintainer-authorized), 23 PRs landed
 
 - User explicitly authorized the merge; executed as a verified fast-forward of the

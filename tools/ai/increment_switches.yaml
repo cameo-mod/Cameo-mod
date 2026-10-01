@@ -79,3 +79,6 @@ groups:
   P_di2_director_pacing:             # NOVA DI-2 — Director wave phase scales the assault launch bar (stacked on director-1 publisher)
     SquadManagerBotModuleCA:
       UseDirectorPacing: true
+  Q_ut3_defend_share:                # NOVA UT-3 — TurtleRush axis scales the CA-2 defend reserve (turtles dig deeper, rushers strip the pool); needs O_ca2 armed to have a reserve to scale
+    SquadManagerBotModuleCA:
+      UseUtilityDefendReserve: true

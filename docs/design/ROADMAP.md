@@ -183,7 +183,10 @@ the fog sequencing.
     merged** (#711/#713/#718, `UseZoneTopology` off = group `D_zone_topology`); IM-1/IM-2 on
     drafts #725/#726 (group `H_influence_layers`). **NOVA.**
   - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
-  - [ ] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
+  - [~] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
+    UT-1/UT-2 merged (#736/#738, group `M_utility_axes`): delay-reset lean + guerrilla-cap
+    lean. UT-3 `nova/ut3-defend-share` — defence share: TurtleRush scales the CA-2 reserve,
+    own flag `UseUtilityDefendReserve`, group `Q_ut3_defend_share`.
   - [x] **M** LG league harness (#625; exploiters get Hard's insurance since 2026-09-29) (past masters + exploiter personalities + maps/factions). **EMBER.**
     In flight: `tools/ai/run_league.py` (spec → per-cell batch → `league_summary.json`
     with pooled W-L, Wilson, per-member/spawn splits) + `exploit_rush` /

@@ -277,6 +277,20 @@ namespace OpenRA.Mods.CA.Traits
 			"idle force is large enough to split.")]
 		public readonly int DefendPreservationTriggerUnits = 6;
 
+		[Desc("UT-3 (§5.1 'defence share'): the TurtleRush axis scales the CA-2 reserve — turtles dig",
+			"in deeper, rushers strip the pool for the wave. Only modulates the reserve when",
+			"UseDefendPreservation also engages; never creates one on its own. False = yaml",
+			"percent verbatim, bit-identical.")]
+		public readonly bool UseUtilityDefendReserve = false;
+
+		[Desc("Reserve scale at the Turtle pole (axis 0), percent of the CA-2 reserve.",
+			"Interpolates linearly to 100 at neutral.")]
+		public readonly int DefendReserveTurtleFactorPercent = 200;
+
+		[Desc("Reserve scale at the Rush pole (axis 100), percent of the CA-2 reserve.",
+			"Interpolates linearly to 100 at neutral.")]
+		public readonly int DefendReserveRushFactorPercent = 50;
+
 		[Desc("Radius in cells that naval squads should scan for targets.")]
 		public readonly int NavalScanRadius = 8;
 
@@ -482,6 +496,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (DirectorBuildUpForceScalePercent > 400 || DirectorPressureForceScalePercent > 400 ||
 				DirectorClimaxForceScalePercent > 400 || DirectorReliefForceScalePercent > 400)
 				throw new YamlException("Director force scale percents above 400 are not supported.");
+
+			if (DefendReserveTurtleFactorPercent < 0 || DefendReserveRushFactorPercent < 0)
+				throw new YamlException("Defend-reserve axis factor percents cannot be negative.");
+
+			if (DefendReserveTurtleFactorPercent > 400 || DefendReserveRushFactorPercent > 400)
+				throw new YamlException("Defend-reserve axis factor percents above 400 are not supported.");
 
 			if (SquadValueRandomBonus != 0 &&
 				(SquadValueMaxEarlyBonus != 0 || SquadValueMinLateBonus != 0 || SquadValueMaxLateBonus != 0))
@@ -1543,7 +1563,7 @@ namespace OpenRA.Mods.CA.Traits
 			// threat is at the doorstep and gets the full pool.
 			var emergency = (rally - initialBaseCenter).LengthSquared <=
 				(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
-			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info);
+			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
 			for (var i = 0; i < toDraft; i++)
 			{
 				var u = draftable[i];
@@ -2606,7 +2626,7 @@ namespace OpenRA.Mods.CA.Traits
 				var emergency = attacker == null ||
 					(long)(attacker.Location - initialBaseCenter).LengthSquared <=
 						(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
-				var toDraft = DefendDraftLimit(draftable.Count, emergency, Info);
+				var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
 
 				for (var i = 0; i < toDraft; i++)
 				{
@@ -2623,13 +2643,34 @@ namespace OpenRA.Mods.CA.Traits
 		// CA-2: how much of the draftable idle pool a protect-squad refill may take.
 		// Full commit when the flag is off, the pool is too small to split, or the
 		// attacker is already inside the base (emergency — the donor's short-ETA case).
-		public static int DefendDraftLimit(int draftableCount, bool emergency, SquadManagerBotModuleCAInfo info)
+		// UT-3: when UseUtilityDefendReserve is also on, the TurtleRush axis scales the
+		// reserve — turtles dig in deeper, rushers strip the pool for the wave. A missing
+		// or disabled provider reads neutral = the plain CA-2 reserve.
+		public static int DefendDraftLimit(int draftableCount, bool emergency, SquadManagerBotModuleCAInfo info, IBotUtilityAxes[] providers = null)
 		{
 			if (!info.UseDefendPreservation || emergency || draftableCount < info.DefendPreservationTriggerUnits)
 				return draftableCount;
+			var reservePercent = info.DefendPreservationReservePercent;
+			if (info.UseUtilityDefendReserve)
+			{
+				var axis = providers?.FirstEnabledTraitOrDefault()?.UtilityTurtleRush ?? IBotUtilityAxes.Neutral;
+				reservePercent = reservePercent *
+					DefendReserveAxisPercent(axis, info.DefendReserveTurtleFactorPercent, info.DefendReserveRushFactorPercent) / 100;
+			}
+
 			var reserve = Math.Max(info.DefendPreservationMinReserveUnits,
-				(int)((long)draftableCount * info.DefendPreservationReservePercent / 100));
+				(int)((long)draftableCount * reservePercent / 100));
 			return Math.Max(0, draftableCount - reserve);
+		}
+
+		/// <summary>Reserve scale in percent: 100 at neutral, the turtle factor at axis 0, the rush
+		/// factor at axis 100, interpolated linearly between the poles.</summary>
+		public static int DefendReserveAxisPercent(int turtleRushAxis, int turtleFactor, int rushFactor)
+		{
+			var axis = Math.Max(0, Math.Min(100, turtleRushAxis));
+			return axis >= 50
+				? 100 + (axis - 50) * (rushFactor - 100) / 50
+				: 100 - (50 - axis) * (100 - turtleFactor) / 50;
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)

@@ -2347,6 +2347,14 @@ term dominates; the term units sit in `BotUtilityAxes.cs`.
   50 → x1.0, Turtle 0 → x1.5. Flag off is byte-identical; `@classic` never arms it.
 - **Second consumer (UT-2):** under the same flag the time-ramped guerrilla-squad cap
   scales by SteamrollerGuerrilla — Guerrilla 100 → x1.5, 50 → x1.0, Steamroller 0 → x0.5.
+- **Third consumer (UT-3, 'defence share'):** `SquadManagerBotModuleCAInfo.
+  UseUtilityDefendReserve` (default false, own flag so group M keeps isolating the delay
+  lean) scales the CA-2 defend reserve by TurtleRush — `DefendReserveAxisPercent` maps
+  Turtle 0 → `DefendReserveTurtleFactorPercent` (x2.0), 50 → x1.0, Rush 100 →
+  `DefendReserveRushFactorPercent` (x0.5), linear between. It only modulates a reserve
+  `UseDefendPreservation` already keeps — emergency and small pools bypass it exactly as
+  before; it never creates a reserve on its own. Switch group `Q_ut3_defend_share`
+  (bare key + `@classic` skip; compose with O_ca2 to have a reserve to scale).
 - **Arm:** switch group `M_utility_axes` (explicit `@`-keys on the six genericbot
   personality instances; K and L remain reserved for DAWN).
 - Rest points per personality live on `MasterAiBotModule` in ai.yaml (`Utility*Rest`
