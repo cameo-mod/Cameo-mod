@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """audit_fransbot_drift — vendored-source drift guard for OpenRA.Mods.Fransbot.
 
-The Route-A port vendored 27 files from upstream Fransbot
-(github.com/OpenRA-Fransbot @ 3cb13dd, tag V1.29.19-RC "V1.29.23") into
-OpenRA.Mods.Fransbot/Traits/. Every local delta is deliberate (RA-id list
-empties, validator relaxes, engine-API drift fixes, fog fixes). This audit
+The Route-A port vendored 29 files from upstream Fransbot
+(github.com/OpenRA-Fransbot @ 9150ded, "V1.29.48 — Native Amphibious
+Handoffs + Ferry Liveness") into OpenRA.Mods.Fransbot/Traits/. Every local
+delta is deliberate (RA-id list empties, validator relaxes, engine-API
+drift fixes, fog fixes, order-gate conversion). This audit
 diffs the vendored files against the upstream clone and FAILS when:
 
   * a vendored file is added or dropped without re-baselining, or
@@ -34,7 +35,7 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 VENDORED = REPO / "OpenRA.Mods.Fransbot" / "Traits"
 BASELINE = REPO / "tools" / "ai" / "fransbot_drift_baseline.json"
 UPSTREAM_SUBDIR = pathlib.Path("src") / "Fransbot.OpenRA" / "Traits"
-UPSTREAM_REF = "3cb13dd (V1.29.19-RC, 'V1.29.23 — RoutineLand exact pre-path rejection hardening')"
+UPSTREAM_REF = "9150ded (V1.29.48, 'Native Amphibious Handoffs + Ferry Liveness')"
 
 
 def find_upstream(arg: str | None) -> pathlib.Path | None:

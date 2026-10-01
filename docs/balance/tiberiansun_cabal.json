@@ -3977,6 +3977,7 @@
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
+      "requires": "!cydamaged",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
@@ -3997,6 +3998,7 @@
       "extraction_note": "no_damage_warheads",
       "pricing": false,
       "range": "1536",
+      "requires": "cydamaged",
       "slot": "Armament@Suicide",
       "versus_templates": [],
       "warheads": [],

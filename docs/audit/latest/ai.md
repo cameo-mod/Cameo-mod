@@ -7,14 +7,14 @@ IDs referenced by ai.yaml: **225** — defined NOWHERE (BLOCKING): **8**, define
 
 | referenced id | list | ai.yaml line |
 |---|---|---|
-|  ra1_allies_alliedoretruck | ExcludeFromSquadsTypes | 3812 |
-|  ra1_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3812 |
-|  ra2_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3812 |
-|  asianalliance_asianmobileconstructionvehicle | ExcludeFromSquadsTypes | 3812 |
-|  ra1_allies_alliedchinooktransport | ExcludeFromSquadsTypes | 3812 |
-|  ra1_allies_alliedconstructionyard | ConstructionYardTypes | 3813 |
-|  ra2_allies_alliedconstructionyard | ConstructionYardTypes | 3813 |
-|  asianalliance_asianconstructionyard | ConstructionYardTypes | 3813 |
+|  ra1_allies_alliedoretruck | ExcludeFromSquadsTypes | 3889 |
+|  ra1_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3889 |
+|  ra2_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3889 |
+|  asianalliance_asianmobileconstructionvehicle | ExcludeFromSquadsTypes | 3889 |
+|  ra1_allies_alliedchinooktransport | ExcludeFromSquadsTypes | 3889 |
+|  ra1_allies_alliedconstructionyard | ConstructionYardTypes | 3890 |
+|  ra2_allies_alliedconstructionyard | ConstructionYardTypes | 3890 |
+|  asianalliance_asianconstructionyard | ConstructionYardTypes | 3890 |
 
 
 ## A2 — combat units the AI never builds (Random/Tournament pool factions)

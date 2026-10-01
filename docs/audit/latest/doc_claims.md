@@ -6,17 +6,17 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `ai_contract_distinct_module_types` | 53 | 53 | ✅ |
-| `ai_contract_player_module_instances` | 76 | 76 | ✅ |
+| `ai_contract_distinct_module_types` | 54 | 54 | ✅ |
+| `ai_contract_player_module_instances` | 77 | 77 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
-| `shield_versus_mean` | 97.6157 | 184.71 | **MISMATCH** |
-| `shield_hp_factor` | 1.02443 | 0.541389 | **MISMATCH** |
-| `shield_damage_share` | 0.0183167 | 0.0160536 | **MISMATCH** |
+| `shield_versus_mean` | 184.71 | 184.71 | ✅ |
+| `shield_hp_factor` | 0.54139 | 0.541389 | ✅ |
+| `shield_damage_share` | 0.0160536 | 0.0160536 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 326 | 326 | ✅ |
 | `multi_main_fired_weapons` | 1 | 1 | ✅ |
-| `percentage_denominator_unset` | 436 | 423 | **MISMATCH** |
+| `percentage_denominator_unset` | 423 | 423 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 0 | 0 | ✅ |
 | `meters_filling_before_death` | 329 | 329 | ✅ |
 | `corrosion_meter_actors` | 856 | 856 | ✅ |
@@ -27,7 +27,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1509 | 1509 | ✅ |
 | `unconverted_template_inheritors` | 402 | 402 | ✅ |
-| `ledgers_drifted` | 0 | 1 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 0 | ✅ |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
@@ -50,9 +50,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |
 
-**FAIL — a document and the tree disagree.**
-
-Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
+_clean_ — every registered claim still matches the tree.
 
 ## Review cadence (for what a number cannot capture)
 

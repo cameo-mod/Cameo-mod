@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1756
+*Multiplier trait families seen: 1757
 
 | trait family |
 |---|
@@ -893,6 +893,7 @@
 | `InaccuracyMultiplier@up2100upmortar4` |
 | `InaccuracyMultiplier@usauplasmiss` |
 | `InaccuracyMultiplier@wounded` |
+| `PowerMultiplier@DISKDRAIN` |
 | `PowerMultiplier@FSDRAIN` |
 | `PowerMultiplier@POWERDOWN` |
 | `PowerMultiplier@POWERUP` |

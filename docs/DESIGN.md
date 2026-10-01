@@ -3376,7 +3376,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # **x1.024 measured 2026-09-27 (#534+#539+#543+#544 merged tree)** — x0.617 pre-#490
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # **x0.541 measured 2026-10-01 (post-dupkey-collapse population: dead `Warhead@*` duplicates no longer pollute the mean — x1.024 was an artifact of ~293 phantom low-Shield entries the engine never resolved)** — x0.617 pre-#490
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs

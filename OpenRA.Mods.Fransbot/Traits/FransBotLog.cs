@@ -26,10 +26,10 @@ namespace OpenRA.Mods.Common.Traits
 	/// </summary>
 	public static class FransBotLog
 	{
-		public const string PackageVersion = "V1.29.23";
-		public const string BasePackageVersion = "V1.29.22";
-		public const string BuildId = "FB-1.29.23-87F7D8D6F526";
-		public const string SourceFingerprint = "FransAirCommanderBotModule.cs=5497F44CC71F;FransBaseBuilderBotModule.cs=31046C08645E;FransCombatIntelBotModule.cs=AFC796BC0D6E;FransCommandBidBotModule.cs=77FC0EF7C240;FransCommanderCoreBotModule.cs=642382B664C6;FransDefenseCommanderBotModule.cs=57A504605E4E;FransEconomicSaturationBotModule.cs=D691F1E25785;FransGeneralBotModule.cs=71118142E32D;FransGroundCommanderBotModule.cs=BAF3F395099A;FransGroundDefendForcePreservationGuard.cs=682FA494F825;FransGroundTransferBotModule.cs=EB9DD05F81C9;FransHarvesterBotModule.cs=FEA42B2A7A87;FransMcvExpansionManagerBotModule.cs=5D31E0C35B86;FransMineClusterBotModule.cs=205CE05C1136;FransMinelayerBotModule.cs=E6829A2DC18B;FransRiskModelBotModule.cs=E58583E4E7E3;FransSeaCommanderBotModule.cs=F4DAA52DA3D3;FransSpecOpsCommanderBotModule.cs=921E80503328;FransStrategicMapBotModule.cs=E4A52DB90641;FransSupplyTruckBotModule.cs=AB42C945CCDF;FransSupportCoordinatorBotModule.cs=DAB05F2ADA8D;FransSupportPowerBotModule.cs=6F310B0C773C;FransTransportCommanderBotModule.cs=9D0707C6BC1E;FransUnitBuilderBotModule.cs=435C109BE053;fransbot-personalities.yaml=8831338A65D1";
+		public const string PackageVersion = "V1.29.48";
+		public const string BasePackageVersion = "V1.29.47";
+		public const string BuildId = "FB-1.29.48-211D3D16F2BF";
+		public const string SourceFingerprint = "FransAirCommanderBotModule.cs=2B55FE560E9B;FransBaseBuilderBotModule.cs=31046C08645E;FransCombatIntelBotModule.cs=AFC796BC0D6E;FransCommandBidBotModule.cs=4FC9147C7437;FransCommanderCoreBotModule.cs=AAA9E2E3361D;FransDefenseCommanderBotModule.cs=3CE547EAABE0;FransEconomicSaturationBotModule.cs=D691F1E25785;FransGeneralBotModule.cs=1B6D83DC4575;FransGroundCommanderBotModule.cs=753AC9699729;FransGroundDefendForcePreservationGuard.cs=682FA494F825;FransGroundTransferBotModule.cs=DED97319453A;FransHarvesterBotModule.cs=FEA42B2A7A87;FransMcvExpansionManagerBotModule.cs=DA260CE420B1;FransMineClusterBotModule.cs=205CE05C1136;FransMinelayerBotModule.cs=E6829A2DC18B;FransRiskModelBotModule.cs=E58583E4E7E3;FransSeaCommanderBotModule.cs=F4DAA52DA3D3;FransSpecOpsCommanderBotModule.cs=D370BB8324F3;FransStrategicMapBotModule.cs=8F3428541228;FransSupplyTruckBotModule.cs=AB42C945CCDF;FransSupportCoordinatorBotModule.cs=DAB05F2ADA8D;FransSupportPowerBotModule.cs=6F310B0C773C;FransTransportCommanderBotModule.cs=348CEE906AEE;FransUnitBuilderBotModule.cs=435C109BE053;RoutineLandNegativeUnionPolicy.cs=CC0A31B7EA8E;fransbot-personalities.yaml=1512B5A93C36";
 
 		const double ImmediateSpikeMilliseconds = 10.0;
 		const double WorldTickGapMilliseconds = 60.0;
