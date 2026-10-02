@@ -16968,3 +16968,15 @@ Verified: build clean 0/0; 640/640 tests (9 new CoalitionFoldTest +
 SectorScorePercent); all four groups dry-run arm (15 rewrites;
 SquadManagerBotModuleCA@classic correctly skipped by the global skip list).
 Boot-gate + team-match A/B queued per workflow.
+
+## 2026-10-02 EMBER — catch-up merge + dual-side armed win
+
+- Pulled origin/master (through #776): FE-1 field economy (AJ_field_coverage — one
+  refinery per spreader anchor at nearest free cell; the "refinery per spreader" fix),
+  FE-0/BO-0 placement+build-order logs, TC-3 coalition fold (BB-BE), BO-1 build-order
+  knobs (AK_build_order_knobs), 79f641fc7 exempting refineries from the hard gap too
+  (aligns with SP-1 fix — refinery placement is fully field-owned now, all layers).
+- Fast-forward merge (my commits already in master's ancestry); both projects compile 0/0.
+- Armed smoke (tmpab-smoke, AB/AC/AD/AE/AF/AG/AH/ST + SP-1 fix in bin):
+  hard beat classic on BOTH spawn sides — 2-0 (spawn0 hard win, spawn1 hard win).
+  Directional, not statistical; official increment A/B is the coordinator's.
