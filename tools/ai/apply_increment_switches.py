@@ -81,6 +81,8 @@ def main() -> int:
     ap.add_argument("worktree", type=pathlib.Path)
     ap.add_argument("--groups", required=True, help="comma-separated group names, or 'all'")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--spec", type=pathlib.Path, default=SPEC,
+                    help="switch spec to read (default: tools/ai/increment_switches.yaml); tune_build_order.py --propose writes experiment specs")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -89,7 +91,7 @@ def main() -> int:
         print("refusing: apply switches only to a frozen A/B worktree, never the main checkout", file=sys.stderr)
         return 2
 
-    skip, groups = load_spec(SPEC)
+    skip, groups = load_spec(args.spec)
     names = list(groups) if args.groups == "all" else args.groups.split(",")
     unknown = [n for n in names if n not in groups]
     if unknown:

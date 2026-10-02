@@ -1,3 +1,26 @@
+# 2026-10-02 - BO-1: build-order knob layer (knobs, opening, react, learned file, tuner)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/bo1_2026_10_02`; nothing committed, no game launch).*
+
+**Done:**
+- `IBotBuildOrderKnobs` (Mods.CA) + `BuildOrderKnobsBotModule` (Mods.Cameo, `genericbot && build_order_knobs`, grant `Bots: fransbot` = inert on
+  master, switch group `AK_build_order_knobs`). Eight thousandths knobs: tempo, greed, production, tech, defence, power_margin, expansion
+  (published only), support. Mapping documented in AI_ARCHITECTURE 12.25 "Implemented" and the ai.yaml comment.
+- Base builder (`BaseBuilderQueueManagerCA`, shared with classic) reads the provider only when one is enabled: delays / intervals / wait ticks
+  (tempo), fractions by rules-derived category, power surplus target, `NewProductionCashThreshold` (greed / production), and the opening
+  step (after the power and refinery priority overrides). No provider = bit-identical.
+- Value = preset x learned x jitter, clamped; four openings with per-personality weights + Thompson sampling over learned (alpha, beta);
+  fog-honest react (air / rush / turtle / out-earned) from the published BotSituation, bounded and decaying; rush invalidates the opening.
+- `own.build_order` in the situation log; `mods/cameo/ai/learned/build_order_knobs.yaml` (empty); `UseLearnedBuildOrder` default off.
+- `tools/ai/tune_build_order.py` (score, report, `--propose` paired experiments, `--write` bounded + significance-checked) and
+  `apply_increment_switches.py --spec`. Tests: `BuildOrderKnobsEvalTest` (C#), `test_tune_build_order.py` (16).
+
+**Verified:** build 0 errors; Cameo tests 702/702; python tests pass; fog / frankenstein / personalities / wiring / direct-mutation audits
+PASS; `apply_increment_switches.py ... --groups AK_build_order_knobs --dry-run` = 1 change.
+**Not done:** no boot gate and no A/B (worktree, switch off). The presets, react thresholds and openings are untested starting values.
+The expansion knob has no consumer yet (the planner is another agent's file). `Fransbot` and `classic` are untouched.
+**Next:** merge, boot gate, arm `AK_build_order_knobs` in the increment A/B, then run the tuner pairs on mirror shards.
+
 # 2026-10-02 — Assault fan merged into the concave (one deploy state, two shapes; AI_ARCHITECTURE 12.7a objective shape)
 
 *Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/coh_formation`; nothing committed, no game launch).*

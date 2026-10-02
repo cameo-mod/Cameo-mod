@@ -388,6 +388,7 @@ namespace OpenRA.Mods.CA.Traits
 		BotLimits botLimits;
 		int refineryLimit;
 		IBotScaleTargets[] scaleTargets;
+		IBotBuildOrderKnobs[] buildOrderKnobs;
 
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
@@ -604,6 +605,19 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				SellUselessRefinery(bot);
 				sellRefineryTick = Info.SellRefineryInterval;
+			}
+		}
+
+		/// <summary>
+		/// The first enabled build-order knobs provider (AI_ARCHITECTURE 12.25), or null: classic and the switch-off state have none,
+		/// and every knob consumer then keeps the unscaled number, bit-identical.
+		/// </summary>
+		public IBotBuildOrderKnobs BuildOrderKnobs
+		{
+			get
+			{
+				buildOrderKnobs ??= player.PlayerActor.TraitsImplementing<IBotBuildOrderKnobs>().ToArray();
+				return buildOrderKnobs.FirstEnabled();
 			}
 		}
 

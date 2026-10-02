@@ -183,6 +183,33 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append('}');
 		}
 
+		// BO-1 (AI_ARCHITECTURE 12.25): the build-order knob vector (base = preset x learned x jitter, now = after react), the opening and the
+		// react events, so the report and tuner can group matches by them; omitted while no provider runs.
+		internal static void AppendBuildOrder(StringBuilder builder, BuildOrderSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "build_order");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendString(builder, "personality", snapshot.Personality ?? "");
+			AiMatchLogWriter.AppendString(builder, "faction", snapshot.Faction ?? "");
+			AiMatchLogWriter.AppendString(builder, "enemy_faction", snapshot.EnemyFaction ?? "");
+			AiMatchLogWriter.AppendString(builder, "opening", snapshot.Opening ?? "");
+			AiMatchLogWriter.AppendString(builder, "opening_end", snapshot.OpeningEnd ?? "");
+			AiMatchLogWriter.AppendNumber(builder, "opening_step", snapshot.OpeningStep);
+			AiMatchLogWriter.AppendNumber(builder, "opening_steps", snapshot.OpeningSteps);
+			AiMatchLogWriter.AppendNumber(builder, "reactions", snapshot.Reactions);
+			AiMatchLogWriter.AppendString(builder, "events", snapshot.Events ?? "");
+			for (var i = 0; i < snapshot.KnobNames.Length; i++)
+			{
+				AiMatchLogWriter.AppendNumber(builder, "base_" + snapshot.KnobNames[i], snapshot.Base[i]);
+				AiMatchLogWriter.AppendNumber(builder, "now_" + snapshot.KnobNames[i], snapshot.Now[i]);
+			}
+
+			builder.Append('}');
+		}
+
 		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
 		{
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
@@ -320,6 +347,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "coalition_main_target", situation.CoalitionMainTarget);
 			AppendThreats(builder, situation.Threats);
 			AppendScaleTargets(builder, situation.ScaleTargets);
+			AppendBuildOrder(builder, situation.BuildOrder);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

@@ -160,6 +160,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// last recompute. Null (and omitted from the log) while no ScaleTargetsBotModule is enabled.
 		internal ScaleTargetsSnapshot ScaleTargets;
 
+		// BO-1 (AI_ARCHITECTURE 12.25), record-only: the build-order knob vector, opening and react events of the provider's last update.
+		// Null (and omitted from the log) while no BuildOrderKnobsBotModule is enabled.
+		internal BuildOrderSnapshot BuildOrder;
+
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
@@ -1395,7 +1399,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				BrownoutTicks = brownoutTicks,
 				IdleProductionTicks = idleProductionTicks,
 				ProductionQueues = productionQueueCount,
-				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot
+				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
