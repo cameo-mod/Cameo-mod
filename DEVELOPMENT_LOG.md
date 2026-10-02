@@ -68,6 +68,31 @@ Compile-clean (Cameo csproj, BuildProjectReferences=false; bin copy blocked
 by the live 6v6 — DLL produced in obj). Boot-gate queued behind the match;
 increment A/B arms the pair per usual. NOT-YET-PROVEN: live garrison claims,
 artillery-clear raids, multi-field expansion rate.
+# 2026-10-02 — DAWN: ai_arch_audit static coverage tool + audit_bot_wiring arm-path fix
+
+- `tools/ai/ai_arch_audit.py` (new): static half of the architecture round-trip —
+  R1 gate reachability against master grants AND the increment-switch armed
+  regime, R2 switch-target existence, R3 seam dead-ends/orphans, R4 order-issuer
+  overlap matrix with lease/gate separation, R5 enum reachability, R6 dead knobs.
+  `--write` regenerates `docs/design/AI_ARCH_COVERAGE.md` (layered module map,
+  PERCEPTION->SITUATION->STRATEGY->EXECUTION->PRODUCTION->SUPPORT->TELEMETRY);
+  `--check` fails on ERROR or stale doc. Complements `round_trip_check.py`
+  (runtime evidence) and `audit_bot_wiring.py` (per-profile evaluation).
+- `tools/audit/audit_bot_wiring.py`: implemented the stubbed `armed_profiles`
+  regime — switch groups in `increment_switches.yaml` rewrite
+  `GrantConditionOnBotOwner.Bots`, so their tokens arm on those bot types.
+  R1 now reports unreachable-in-both-regimes (was: master-only, which flagged
+  the four switch-gated cn2/cn3 modules as unreachable — false positive; they
+  are dormant-on-master with arm paths K/L/M/X by design). New field
+  `R1_armed_only_via_increment_switch` reports the armed-only set.
+- Verified finding while reviewing the staged vendored-file deletions:
+  `PlugSpawnerBotModuleCA` is unwired (zero yaml refs) AND superseded — plugs
+  flow through `Buildable`/`BuildingAddons` -> builders -> `PlacePlug` (R4
+  matrix: BaseBuilderQueueManagerCA + FransBaseBuilderBotModule). The module's
+  own `PlacePlugAI` path is an instant-spawn that bypasses the queue. Plug
+  content itself is live across TD Nod/GDI, SC Terran/Protoss/Zerg, TS,
+  RA2Mod, WC2 — the earlier "no plug content" claim is wrong; the correct
+  claim is "the instant-plug module is unwired and superseded".
 
 # 2026-10-02 — EMBER: 6v6 team harness + coalition-general design + first evidence
 
