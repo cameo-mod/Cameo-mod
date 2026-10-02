@@ -114,13 +114,14 @@ decision do so through a provider seam; the owner emits the order.
 | Which resource field to crawl toward | ExpansionPlannerBotModule | ZoneMemory, influence, allied ExpansionClaim |
 | When to request an MCV | ExpansionPlannerBotModule (greedy driver, `RequestMcv`) | utility axes (UT-4 appetite), TeamBroadcast claims |
 | Where a refinery goes | BaseBuilderBotModuleCA queue manager | `IBotExpansionTargetProvider.RefineryClaimTarget` |
-| Where defences go | BaseBuilderBotModuleCA queue manager | `IBotDefensePlacementAdvisor` (DEF-3 fronts) |
+| Where defences go | BaseBuilderBotModuleCA queue manager | `IBotDefensePlacementAdvisor` (DEF-3 fronts), `IBotRegionRoles` (CN4: frontier fronts first) |
 | What to produce | UnitBuilderBotModuleCA | composition provider, learned priors, role sets, personality leads |
 | What a squad does | SquadManagerBotModuleCA FSM | director pace, fogged enemies, missions, siege windows, route threat, action budget |
 | Which enemy to target | SquadManagerBotModuleCA | `IBotMainTargetProvider` (learned-priors-weighted) |
 | Capture jobs | EngineerBotModule | `IBotCaptureTransportProvider` (FB2), protection requests |
 | Plug production | PlugSpawnerBotModuleCA (F) | plug's own `Buildable.Prerequisites` via TechTree; slot gating via `Pluggable.Requirements` |
 | Bridge repair | BridgeRepairBotModule (X) | remembers defended sites, leases repairers |
+| What a held region is for | RegionRolesBotModule (AA) | `IBotZoneTopology` belief + zone terrain facts |
 | Siege window | SiegeEvaluatorBotModule | remembered defences, failure memory |
 | Scout routes | ScoutBotModule | threat regions, influence layers, leads |
 | Resource-field memory | BotFogMemory / ResourceMapBotModule | zone topology (TacticalMapBotModule) |
@@ -129,10 +130,17 @@ decision do so through a provider seam; the owner emits the order.
 
 ## Provider → consumer wiring (audit 2026-10-02)
 
-All 31 `IBot*` interfaces verified live — every seam has ≥1 provider and ≥1
-consumer. None are dead seams. The two that look unconnected under a naive
-`TraitsImplementing` grep — `IBotInfluenceMap` and `IBotZoneTopology` — are
-passed via the Situation snapshot and `RegionMemory` constructor respectively.
+All 32 `IBot*` interfaces verified live — every seam has ≥1 provider and ≥1
+consumer (CN4 added `IBotRegionRoles`). None are dead seams. The two that look
+unconnected under a naive `TraitsImplementing` grep — `IBotInfluenceMap` and
+`IBotZoneTopology` — are passed via the Situation snapshot and `RegionMemory`
+constructor respectively.
+
+**Voting seams are intentionally multi-provider** (EMBER R4 flag resolved
+2026-10-02): `IBotRequestPauseUnitProduction` is an OR of vetoes —
+`BaseBuilderBotModuleCA` pauses units while below the refinery minimum,
+`BotGlobalUnitBudget` pauses at the unit cap; `UnitBuilderBotModuleCA` consumes
+the union. Not a duplicate-authority bug.
 
 ## Dead code / unreachable path audit
 
@@ -173,9 +181,9 @@ Where two modules can decide the same thing — the merge targets:
 |---|---|---|
 | OpenRA engine | base of stack; `McvExpansionManager` EX-3 hook `d5d8b2a685` | `SupportPowerBotModule` merge → `SupportPowerBotASModule` (RV2, EMBER INC-ready); `BevManager`/`SharedCargo` parked (DESIGN §19.4) |
 | RV (`OpenRA.Mods.AS`) | fully merged, 65 protected symbols | — |
-| CA | squad FSM, base/unit builders, compositions | upstream drift sync pending ("AI routing", "harasser squads", air fixes — F2) |
-| CN | `CombatAnalysisBotModule` (code); `DeployBotModule` (M), `BridgeRepairBotModule` (X) | `CNTacticalMap` chokepoints (ZG input), waves/pincer attacks, garrison improvements, cliff demolition, veinhole assault (content-blocked), stealth/subterranean/transport states |
-| Fransbot | 8 record-only services on `hard` (#656) + `IBotCaptureTransportProvider` consumer wired | ForcePreservationGuard, AirCommander strike logic, **MCV island expansion + transports (13.5k lines)**, SpecOps, sea commander, support coordinator |
+| CA | squad FSM, base/unit builders, compositions | upstream drift sync pending ("AI routing", "harasser squads", air fixes — F2; claim-blocked while DAWN holds SquadManagerCA for Y) |
+| CN | `CombatAnalysisBotModule`; `DeployBotModule` (M), `BridgeRepairBotModule` (X), `UnitRepairBotModule` (K), `GarrisonDefenseBotModule` (L), `RegionRolesBotModule` (AA), `TacticalMapBotModule` (ZG-a/b/c, D); harvester already vendored as `HarvesterBotModuleCA` | waves/pincer attacks (claim-blocked: SquadManagerCA is DAWN's Y lane), stealth (Y, in flight), subterranean/transport states, cliff demolition + veinhole assault (content-blocked) |
+| Fransbot | 8 record-only services on `hard` (#656) + `IBotCaptureTransportProvider`; ForcePreservationGuard ported as the defend-reserve (O + UT-3 axis); SpecOps demand-capturers (T) | AirCommander strike logic (CA-5, EMBER), **MCV island expansion + transports (needs E/#716 orders-only first)**, sea commander, support coordinator (nuke-exclusion — narrow) |
 | Cameo (own) | fog memory, zones, influence, utility axes, personalities, director, team blackboard, expansion planner, defence coverage | the rest of the plan |
 
 ## After every donor is merged — the target pipeline
