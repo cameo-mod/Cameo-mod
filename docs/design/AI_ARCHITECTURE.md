@@ -3116,3 +3116,106 @@ never converted into throughput.
 - *Per-queue independence:* each filled queue picks its own unit via the normal
   chooser, so composition/RoleMix logic applies per facility rather than stamping one
   unit across all of them.
+
+### 12.24 FE — field economy and coverage: refineries at the spreader, MCV and crawl apart, every field (maintainer 2026-10-02; owner Claude)
+
+DESIGN §19.1b (field economy bullet). **Observed** by the maintainer: bots stack 2–3 refineries in the home base (more than
+the fields there), then cannot build one at the field they crawl to. **Cause, code-verified:**
+`BaseBuilderBotModuleCA.ShouldBuildRefinery…` caps refineries at `yards × RefineriesPerBase (2) + MaxExtraRefineries (1)`,
+and `OptimalRefineryCount` wants `initial + additional + 2 per extra yard`. Both count construction yards, not fields. The
+EX planner's crawl target (best field in reach) and its MCV site (best far field by value × safety / distance) are chosen
+independently, so they often point the same way.
+
+**FE-0 telemetry (always on, behaviour-neutral):**
+* `cameo-ai-placements.jsonl`, one line per building a bot places: tick, player, actor, cell, reason (`crawl`,
+  `refinery_claim`, `base`, `defence`, `other`). For refineries: the nearest anchor, its cell, and the distance in cells.
+* An `expansion` object on each situation snapshot:
+  * fields known / in reach / served / harvested;
+  * anchors (spreaders + spreaderless fields) and refineries;
+  * excess refineries (beyond one per anchor);
+  * mean and max refinery→anchor distance;
+  * construction yards and outposts;
+  * the crawl target, the MCV site, and the angle between their bearings from the main base;
+  * coverage: the share of map fields within reach of our buildings.
+* `tools/ai/expansion_report.py <match dirs>`: per bot and per match, the numbers above over time (first refinery, fields
+  harvested at minutes 5/10/20, peak, excess refineries, mean anchor distance, crawl/MCV angle distribution).
+
+**FE-1 behaviour (one switch `AJ_field_coverage`, default off; classic unchanged):**
+1. **Refinery law:** one refinery per anchor (see DESIGN). A refinery is wanted while an anchor in building reach is
+   unserved, and only then. Under this switch it replaces the yard-based cap, `OptimalRefineryCount` and the §19.10
+   refinery target. §19.1b binds every field to its refinery, so a tier line never caps it. The physical cap is the
+   number of anchors.
+2. **Placement:** the refinery claim takes the placeable cell nearest its anchor ("directly next to the spreader").
+   Ties go to the cell closest to the field's resource cells.
+3. **Directions:** the MCV site is scored by the existing value × safety / distance, × a separation factor. The factor
+   falls to `MinSeparationFactor` when the site's bearing from the main base lies within `CrawlSeparationDegrees` of the
+   crawl target's bearing or of any yard or in-flight MCV site. The crawl target, in turn, prefers fields not already
+   taken by an MCV site.
+4. **Spread:** both scores gain `× (1 + SpreadBonus × distance to our nearest building / map size)`, so unexplored
+   ground wins ties.
+5. **Aggression:** earlier and more MCVs, via the existing EX-4 knobs in the switch values. No new driver.
+
+### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
+
+> *Maintainer:* "log the build order, then try to switch it around until the result is optimal … for all the buildings
+> for now (units later, after the rebalance) … the timer for each, the interval … always record the success: how fast did
+> they win, destroyed-to-lost value … each personality its own little adjustments … keep some random elements … learn
+> between matches and during the match … react to what the opponent does and change the build order mid-game."
+
+It implements DESIGN §19.2's routes for buildings. Route 2 "tuned" covers building fractions, limits, delays, intervals
+and timers. Route 3 "chosen" is the opening bandit. Everything follows §19.2's rules:
+* bounded multipliers on the defaults, with difficulty (§19.1) on top;
+* written only by dev/harness training runs, reviewed and committed;
+* applied only inside the host's bot, never into rules;
+* a match is scored as **win plus margin**.
+
+Units are out of scope until the rebalance.
+
+**BO-0 telemetry (always on, behaviour-neutral):**
+* The placement log (§12.24) is the **build order**. Each line also carries the tick the item entered the queue and the
+  tick it was placed, plus the building's category (`power`, `refinery`, `production`, `tech`, `defence`, `support`,
+  `superweapon`, `conyard`, `other`) from rules-derived tags.
+* `tools/ai/build_order_report.py <match dirs>`, per bot and match:
+  * the ordered building list with times;
+  * time to the first of each category;
+  * the outcome: win, game length, `kills_cost` / `deaths_cost` (destroyed-to-lost), and **score = win + margin**.
+    margin = (killed − lost) / (killed + lost), plus a speed bonus for a faster win.
+  * Grouped by personality and by knob vector (BO-1).
+
+**BO-1 knobs (switch `AK_build_order_knobs`, default off).** `BuildOrderKnobsBotModule` (genericbot) publishes about
+8 bounded multipliers through `IBotBuildOrderKnobs`. The base builder reads them where it reads its raw numbers:
+| knob | scales |
+|---|---|
+| `tempo` | building delays and intervals |
+| `greed` | refinery and harvester priority |
+| `production` | production-building fractions |
+| `tech` | tech delays and fractions |
+| `defence` | defence fractions |
+| `power_margin` | the power surplus target |
+| `expansion` | MCV appetite |
+| `support` | radar, repair and other support fractions |
+
+* **Opening** = an ordered list of the first N building categories, from a small named set per personality
+  (e.g. `eco`, `barracks_first`, `fast_tech`, `defence_first`).
+* **Values** = the personality preset × the learned multiplier (route 2) × a per-match random jitter (±`JitterPct`,
+  from the host bot's random), clamped to [`KnobMin`, `KnobMax`]. Every personality feels different, and no two
+  matches are identical.
+* **Between matches (route 2):** `tools/ai/tune_build_order.py` runs paired mirror experiments. It nudges one knob
+  ±δ against the current best, scores win + margin, and accepts significant improvements (coordinate descent). The
+  result is written to `mods/cameo/ai/learned/build_order_knobs.yaml` (per personality × own faction, falling back to
+  game family, then global).
+* **Opening choice (route 3):** Thompson sampling over the openings per (personality, own faction, enemy faction),
+  with posteriors in the same learned file.
+* **During the match (react):** the knobs shift from what the bot SAW (fog-honest situation snapshot) and decay back
+  over time:
+  * enemy air seen → defence ↑ (AA share);
+  * an early enemy army near the base (rush) → defence and production ↑, greed ↓;
+  * enemy defence-heavy (turtle) → tech ↑, defence ↓;
+  * enemy out-earning us → greed and expansion ↑.
+  * It reuses the personality-lead deficits (§12.14) rather than computing a second enemy estimate.
+  * The opening is abandoned when the plan is invalidated (the rush rule fires).
+* **One owner per decision (§19.3):**
+  * the knobs decide HOW and WHEN the base builder builds (order, timing, weights);
+  * §19.10 scale targets decide HOW BIG;
+  * the leads (§12.14) decide the BUDGET lean;
+  * the knob module reads those, it does not redo them.
