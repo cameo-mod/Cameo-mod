@@ -215,3 +215,12 @@ two brains side by side.
 - **CA drift sync** — upstream "AI routing / harasser squads" not yet pulled.
 - **`_ra_doubles` seat bias** — seats 2,3 won both 2v2s regardless of team;
   harness-side, document it before any team A/B reads results.
+
+**CN4 addition (2026-10-02, switch `AA_cn4_region_roles`):** `RegionRolesBotModule` — port of
+`CNRegionManagerBotModule` onto `IBotZoneTopology`'s belief surface. Each held zone gets a role
+(Core / Economy / Military / Outpost) from resource+space+security scoring with hold-timer locks
+and exclusive Core/Military preemption — the strategic classification layer between terrain
+topology and the executors. Seam `IBotRegionRoles` (`RoleOf`/`RoleAtCell`/`IsHeld`/`ValueOf`/
+`RegionsWithRole`); first consumer `DefenseCoveragePlanner.UseRegionRoles`: a still-uncovered
+front inside a Military/Outpost region outranks interior fronts when DEF-3 picks its coverage
+front. Fog-honest by construction (buildings tracked via add/remove events; RegionOwner belief).

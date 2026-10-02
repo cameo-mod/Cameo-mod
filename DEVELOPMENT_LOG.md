@@ -16296,6 +16296,17 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
 
+- 2026-10-02 nova: CN4 region-roles harvest — `RegionRolesBotModule` (port of CN's
+  CNRegionManagerBotModule, switch `AA_cn4_region_roles`) classifies each held zone-graph region
+  as Core/Economy/Military/Outpost from resource+space+security scores; exclusive Core+Military
+  with hold-timer locks and preemption; publishes `IBotRegionRoles`. Reads OUR `IBotZoneTopology`
+  belief (fog-honest RegionOwner) where the donor was omniscient; buildings tracked via
+  add/remove events (no world enumeration); deterministic ActorID refresh de-phase (donor's
+  LocalRandom was a desync hazard). First consumer: `DefenseCoveragePlanner.UseRegionRoles` —
+  an uncovered front in a Military/Outpost region outranks interior fronts for DEF-3's coverage
+  pick. 625/625 tests (11 new), fog PASS, frankenstein PASS. EMBER-tool note: R4 now also flags
+  IBotRequestPauseUnitProduction (BaseBuilderCA + BotGlobalUnitBudget) — a real duplicate-authority
+  seam worth a future single-owner pass.
 - 2026-10-02 nova: bridge-repair single-owner consolidation — the last real decision overlap
   from the dataflow audit. When `cn3_bridge_repair` arms BridgeRepairBotModule, BOTH modules
   scanned the same huts; leases deduped units but not targets (two repairers could converge on
