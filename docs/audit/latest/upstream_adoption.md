@@ -1,13 +1,13 @@
 # audit_upstream_adoption — upstream mod types Cameo already has, and what is new
 
-Cameo resolves **1143** yaml-visible type names across 7 assemblies.
+Cameo resolves **1147** yaml-visible type names across 7 assemblies.
 
 | mod | types | already in Cameo | same mechanic, other name | candidates | of the candidates |
 |---|--:|--:|--:|--:|---|
 | Romanov's Vengeance | 26 | 11 | 8 | 7 | 6 used in its own yaml |
 | Shattered Paradise | 46 | 7 | 7 | 32 | 31 used in its own yaml |
-| Crystallized Nexus | 107 | 7 | 4 | 96 | 86 used in its own yaml |
-| Combined Arms | 350 | 182 | 35 | 133 | 121 used in its own yaml |
+| Crystallized Nexus | 107 | 7 | 5 | 95 | 85 used in its own yaml |
+| Combined Arms | 350 | 180 | 37 | 133 | 121 used in its own yaml |
 | Generals Alpha | 23 | 2 | 1 | 20 | 20 used in its own yaml |
 
 ## Romanov's Vengeance — `OpenRA.Mods.RA2`
@@ -101,11 +101,12 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | upstream type | Cameo already has | evidence |
 |---|---|---|
 | `CNBaseBuilderBotModule` | `BaseBuilderBotModule, BaseBuilderBotModuleCA` | identical `[Desc]` text |
+| `CNBridgeRepairBotModule` | `BridgeRepairBotModule` | identical `[Desc]` text |
 | `CNMcvExpansionManagerBotModule` | `McvExpansionManagerBotModule` | identical `[Desc]` text |
 | `CNRepairManagerBotModule` | `UnitRepairBotModule` | identical `[Desc]` text |
 | `CNTacticalMapBotModule` | `TacticalMapBotModule` | identical `[Desc]` text |
 
-**86 of 96** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
+**85 of 95** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
 
 | type | file | uses in its yaml |
 |---|---|--:|
@@ -151,7 +152,6 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `BloomGlowEffect` | `Traits/World/BloomGlowEffect.cs` | 1 |
 | `BotPlayerNames` | `Traits/Player/BotPlayerNames.cs` | 1 |
 | `CNBaseOverlay` | `Traits/CNBaseOverlay.cs` | 1 |
-| `CNBridgeRepairBotModule` | `Traits/BotModules/CNBridgeRepairBotModule.cs` | 1 |
 | `CNCliffDemolitionBotModule` | `Traits/BotModules/CNCliffDemolitionBotModule.cs` | 1 |
 | `CNCombatSignalReporter` | `Traits/CNCombatSignalReporter.cs` | 1 |
 | `CNDestroyableCliffLayer` | `Traits/World/CNDestroyableCliffLayer.cs` | 1 |
@@ -229,7 +229,9 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `GrantPrerequisiteChargeDrainPowerCA` | `GrantPrerequisiteChargeDrainPower` | identical `[Desc]` text |
 | `HealthPercentageSpreadDamage` | `SpreadDamage` | identical `[Desc]` text |
 | `Infiltrate` | `Dummy` | identical `[Desc]` text |
+| `McvManagerBotModuleCA` | `McvManagerBotModule` | identical `[Desc]` text |
 | `PeriodicExplosionOnSlaves` | `PeriodicExplosion` | identical `[Desc]` text |
+| `PowerDownBotModuleCA` | `PowerDownBotModule` | identical `[Desc]` text |
 | `ProduceActorPowerCA` | `ProduceActorPower, PeriodicProducer, PeriodicProducerCA` | identical `[Desc]` text |
 | `ProximityExternalConditionCA` | `ProximityExternalCondition` | identical `[Desc]` text |
 | `RailgunCA` | `Railgun` | identical `[Desc]` text |

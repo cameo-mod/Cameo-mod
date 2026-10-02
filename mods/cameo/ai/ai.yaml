@@ -88,6 +88,11 @@
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
 		Bots: fransbot
+	# PP-1 (AI_ARCHITECTURE §12.23): parallel-queue production width. Provider-seam so the shared
+	# UnitBuilderBotModuleCA@generic instance never hands the width to classic (the A/B control).
+	GrantConditionOnBotOwner@parallelprod:
+		Condition: parallel_production
+		Bots: fransbot
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
@@ -3676,6 +3681,13 @@ Player:
 	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
 	ArmyFirstBotModule:
 		RequiresCondition: genericbot && army_first
+	# PP-1 (AI_ARCHITECTURE §12.23): settings-only IBotProductionWidth provider - UnitBuilder fills up to
+	# MaxQueuesPerCategory idle queues of a category per call, so multiple factories produce in parallel
+	# when income allows. Settings-only like AssaultFormationBotModule: the unit builder keeps the only
+	# order authority. `genericbot && parallel_production`: off on master (switch group AH).
+	ParallelProductionBotModule:
+		RequiresCondition: genericbot && parallel_production
+		MaxQueuesPerCategory: 4
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely

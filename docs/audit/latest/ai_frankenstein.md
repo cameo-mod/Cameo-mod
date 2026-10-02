@@ -1,3 +1,3 @@
-# AI Frankenstein guard: 155 protected symbols in 21 files
+# AI Frankenstein guard: 152 protected symbols in 20 files
 
 **PASS**: every RV-merged and Cameo-added symbol is still declared.

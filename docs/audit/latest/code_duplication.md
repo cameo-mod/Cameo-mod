@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
+Python files: **797** (min 5 statements), C# files: **443** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -11,19 +11,19 @@ Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
-| C1 | identical Python function bodies | 30 | 10 |
+| C1 | identical Python function bodies | 29 | 10 |
 | C2 | identical C# method bodies | 21 | 14 |
 | C3 | identical module-level literal tables | 43 | 10 |
 
 
-## C1 — Python function clones (30 group(s))
+## C1 — Python function clones (29 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
 | 5 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:199 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:301 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:83 descendants(); tools/balance/consolidate_machinegun_profiles.py:56 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
 | 4 | 0c9e5a3408c1d09c | tools/balance/consolidate_exact_profile_duplicates.py:105 descendants(); tools/balance/consolidate_freedom_rocket_base.py:43 descendants(); tools/balance/consolidate_high_identity_profiles.py:66 descendants(); tools/balance/consolidate_laser_heavy_routes.py:82 descendants() |
 | 4 | 2af465aa2475b428 | tools/gen_cryo_fog.py:29 fractal_noise(); tools/gen_fire.py:32 fractal_noise(); tools/gen_fire_smoke_glow.py:27 fractal_noise(); tools/gen_smoke.py:28 fractal_noise() |
-| 4 | 65200300e1e889be | tools/ai/run_ai_match_batch.py:155 load_config(); tools/tests/ai_bot_player_gate.py:48 load_config(); tools/tests/ai_raid_gate.py:55 load_config(); tools/tests/ai_squad_gate.py:54 load_config() |
+| 4 | 65200300e1e889be | tools/ai/run_ai_match_batch.py:173 load_config(); tools/tests/ai_bot_player_gate.py:48 load_config(); tools/tests/ai_raid_gate.py:55 load_config(); tools/tests/ai_squad_gate.py:54 load_config() |
 | 3 | 19cd94bfaa3c12ef | tools/balance/compare_nuke_area_damage.py:290 main(); tools/balance/reconcile_r12_consumer_closure.py:380 main(); tools/balance/reconcile_r13_templates.py:161 main() |
 | 3 | 276f5256b8897b1c | tools/tests/ai_bot_player_gate.py:110 read_appended_records(); tools/tests/ai_raid_gate.py:117 read_appended_records(); tools/tests/ai_squad_gate.py:116 read_appended_records() |
 | 3 | 8854ec3eda1c1b76 | tools/balance/cameo_channel_curves.py:533 main(); tools/balance/dta_channel_curves.py:501 main(); tools/balance/reference_weapon_geometry.py:565 main() |
@@ -33,7 +33,6 @@ Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
 | 3 | f3f8811ecbc48273 | tools/gen_cryo_fog.py:51 warp(); tools/gen_fire_smoke_glow.py:50 warp(); tools/gen_smoke.py:51 warp() |
 | 2 | 05c6a74eb9d37d10 | tools/reference/extract_emperor_units.py:833 write_exclusive(); tools/reference/extract_opendune_units.py:908 write_exclusive() |
 | 2 | 0d67a0a30ddaeb8e | tools/tests/gen_cannonap_fixture.py:38 parse_generated_warhead(); tools/tests/test_cannonap_generated_fixture.py:42 parse_generated_warhead() |
-| 2 | 1126f101fc234323 | tools/tests/test_named_state_corrections.py:54 test_comparison_is_exactly_the_six_reviewed_definitions(); tools/tests/test_pinned_role_profile_consolidation.py:64 test_full_ruleset_comparison_matches_reviewed_manifest() |
 | 2 | 11d29300c3f1eadc | tools/tilesets/generate_volcanic_tileset.py:168 build_palette(); tools/tilesets/volcanic_art_utils.py:84 build_palette() |
 | 2 | 1dacd1e435667177 | tools/tilesets/generate_volcanic_tileset.py:588 base_clear_index(); tools/tilesets/volcanic_art_utils.py:132 base_clear_index() |
 | 2 | 2bbde3b4a104ab45 | tools/tests/test_accepted_td_gdi_balance_batch.py:44 assert_weapon(); tools/tests/test_accepted_td_nod_balance_batch.py:48 assert_weapon() |
@@ -56,18 +55,18 @@ Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1015 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1022 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1027 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1047 BlockedByEscort() |
+| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1096 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1103 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1108 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1128 BlockedByEscort() |
 | 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
+| 3 | ec2ad77fd06bf5bb | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1787 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1790 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1794 TargetScore() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
-| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:861 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:874 CanHitAir() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:955 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:968 CanHitAir() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
 | 2 | 2ed6818d4fa1dcc1 | OpenRA.Mods.CA/Traits/AttachOnCreation.cs:43 Attach(); OpenRA.Mods.CA/Traits/AttachOnTransform.cs:45 Attach() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
-| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:514 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:521 RankBySafety() |
+| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:535 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:542 RankBySafety() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
-| 2 | 58f4e69a7f3a03b1 | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1363 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1366 TargetScore() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
 | 2 | 8ab419c8b1877522 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1684 GetUsefulChokepoints(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1705 GetDoorHotspots() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
@@ -76,7 +75,7 @@ Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
 | 2 | b0d2492b62a8c3b9 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:64 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:62 ObserverPromotionsIconsWidget() |
 | 2 | cfb1b41e7feda062 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1783 DoorApproachAxis(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1795 GetDoorKillZoneCells() |
 | 2 | d2d42569b726aee5 | OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs:93 CaptureAndAppend(); OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs:75 CaptureAndAppend() |
-| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:857 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:865 SellUselessRefinery() |
+| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:896 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:904 SellUselessRefinery() |
 
 
 ## C3 — Duplicated constant tables (43 group(s))
@@ -130,7 +129,7 @@ Python files: **793** (min 5 statements), C# files: **433** (min 8 lines)
 
 ## FAIL
 
-- C1: 30 > baseline 10
+- C1: 29 > baseline 10
 - C2: 21 > baseline 14
 - C3: 43 > baseline 10
 

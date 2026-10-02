@@ -42,15 +42,15 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 
 | measure | lineage view |
 |---|---|
-| matched | 1500 |
-| unmatched | 412 |
+| matched | 1499 |
+| unmatched | 413 |
 | inflated | 162 |
-| weakened | 81 |
+| weakened | 83 |
 | extreme | 22 |
 | accepted | 30 |
 
 
-Recovered **156** release identities hidden by name-only matching. Raw D4 and all ratchets above remain unchanged.
+Recovered **155** release identities hidden by name-only matching. Raw D4 and all ratchets above remain unchanged.
 
 
 ## Resurfaced value differences — current values, not waived drift
@@ -72,7 +72,7 @@ Recovered **156** release identities hidden by name-only matching. Raw D4 and al
 | FireballLauncherBuggy2 | td_nod_buggymkii_fireballlauncherbuggy2 | 6000 | 3000 | 0.50 | 3 -> 1 | weakened |
 | GrenadeThermobaric | ra1_soviets_grenadier_grenadethermobaric | 16000 | 13577 | 0.85 | 4 -> 1 | weakened |
 | GrenadeThermobaricExplode | ra1_soviets_grenadier_grenadethermobaricexplode | 8000 | 16000 | 2.00 | 4 -> 1 | inflated |
-| HighV | td_gdi_guardtower_highv_base | 4000 | 2000 | 0.50 | 2 -> 1 | weakened |
+| HighV | td_gdi_guardtower_highv | 4000 | 2000 | 0.50 | 2 -> 1 | weakened |
 | HindMissilesNuclear | ra1_soviets_hindattackhelicopter_hindmissilesnuclear | 8000 | 4000 | 0.50 | 4 -> 1 | weakened |
 | HindMissilesThermobaric | ra1_soviets_hindattackhelicopter_hindmissilesthermobaric | 10000 | 5000 | 0.50 | 5 -> 1 | weakened |
 | KamovMissilesTesla | ra1_soviets_kamovattackhelicopter_kamovmissilestesla | 10000 | 2750 | 0.28 | 5 -> 1 | weakened |
@@ -96,6 +96,8 @@ Recovered **156** release identities hidden by name-only matching. Raw D4 and al
 | RocketsRACryo | ra1_allies_alliedrocketsoldier_rocketsracryo | 20000 | 11500 | 0.57 | 2 -> 1 | weakened |
 | SCUDTesla | ra1_soviets_v2rocketlauncher_scudtesla | 90000 | 171493 | 1.91 | 3 -> 1 | inflated |
 | SCUDThermobaric | ra1_soviets_v2rocketlauncher_scudthermobaric | 120000 | 195991 | 1.63 | 3 -> 1 | inflated |
+| SiegeMortar | ra1_soviets_mortarsoldier_siegemortar_ExplicitDamage3of4 | 32000 | 24000 | 0.75 | 4 -> 1 | weakened |
+| SiegeMortarThermobaric | ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4 | 24000 | 18000 | 0.75 | 6 -> 1 | weakened |
 | StealthTankMissiles | td_nod_stealthtank_stealthtankmissiles | 12000 | 22230 | 1.85 | 1 -> 1 | inflated |
 | StealthTankMissilesBlackMarket | td_nod_stealthtank_stealthtankmissilesblackmarket | 12000 | 22230 | 1.85 | 1 -> 1 | inflated |
 | TowerMissile | td_gdi_advancedguardtower_towermissile | 14000 | 16000 | 1.14 | 7 -> 1 | inflated |

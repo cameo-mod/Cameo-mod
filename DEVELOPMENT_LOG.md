@@ -16758,6 +16758,34 @@ claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
 is an independent, SquadManager-free implementation with runtime evidence;
 both are default-off. Coordinator picks which arms in the increment.
 
+## 2026-10-02 EMBER — PP-1 parallel production + armed smoke match
+
+- Reviewed NOVA's ATK-1 (`AssaultFormationPlanner` + `GroundUnitsAssaultFanoutStateCA` +
+  `AssaultFormationBotModule`, group AG) and the LegacyBridgeHut fix — clean seams, no
+  collisions with §12.20 work; merged to master via #768.
+- PP-1 `AH_parallel_production`: IBotProductionWidth provider seam (settings-only,
+  AssaultFormation-shaped) — UnitBuilder fills up to N idle queues per category per call.
+  Provider (not field-write) chosen so the shared UnitBuilderBotModuleCA@generic can't
+  hand the width to classic. ParallelProductionBotModule, genericbot && parallel_production.
+- Smoke harness: frozen worktree tmpab-smoke at af179d72f, engine junctioned, groups
+  AB/AC/AD/AE/AF/AG armed. First match launch died on stale engine DLLs
+  (Cannot locate type: AssaultFormationBotModuleInfo — bin predated the ATK-1 merge);
+  rebuilt CA+Cameo at master, relaunched.
+- Result (1x td_gdi mirror, hard-armed vs classic): hard lost 0-1 but the armed paths
+  fired — 40 garrison records (contest claims from WT99 + raid:garrison_* published),
+  hard produced 6 MCVs (old McvTargetCount=3 ceiling gone — EX-4 works), 5 conyards/6
+  refineries placed, zero new exceptions. Loss read: expanded aggressively, couldn't
+  hold against the omniscient reference — 1-match noise, real verdict is the increment A/B.
+- AH armed separately for the PP-1 leg of the smoke.
+- Boot-gate catch (LESSON): engine\bin is SHARED by every worktree via the junction —
+  another lane's build overwrote bin\OpenRA.Mods.Cameo.dll with a pre-PP-1 copy, and
+  booting aiwork then threw 'Cannot locate type: ParallelProductionBotModuleInfo'.
+  Copying only Cameo.dll mid-match then crashed the running smoke with
+  ReflectionTypeLoadException (Cameo referenced IBotProductionWidth the deployed CA.dll
+  lacked). Rule: rebuild BOTH CA+Cameo and copy the pair together; never swap a single
+  dll into bin while a game is running. Re-gated after paired copy: menu reached, zero
+  new exceptions (PID-scoped kill).
+
 ## 2026-10-02 (claude-sonnet sub-agent, coordinated by Claude Opus 5.5) - concave + ATK-1 merged into ONE formation implementation
 
 Two duplicate "deploy before the fight" implementations (CV concave F_concave, NOVA ATK-1 AG_assault_fanout) merged per

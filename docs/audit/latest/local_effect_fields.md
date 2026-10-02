@@ -6,7 +6,7 @@
 Files scanned: 44
 Concrete weapons with local Explosions (L1): 251
 Concrete weapons with local ImpactSounds (L2): 251
-Exempt secondary-channel declarations (not ratcheted): 389
+Exempt secondary-channel declarations (not ratcheted): 391
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
@@ -43,8 +43,8 @@ Exempt secondary-channel declarations (not ratcheted): 389
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | EffectAir | YES | YES | 3193 | exempt |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | EffectWater | YES | - | 3242 | exempt |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianPunisherAG | ShieldHitEffect | - | YES | 3130 | exempt |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSniperAP | Effect | YES | YES | 9091 |  |
-| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSubmarineBomb | Effect | - | YES | 8236 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSniperAP | Effect | YES | YES | 9242 |  |
+| ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianSubmarineBomb | Effect | - | YES | 8387 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianTurretPlasma | Effect | - | YES | 6671 |  |
 | ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect | YES | YES | 9330 |  |
 | ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml | HammerheadArtillery | Effect1 | YES | YES | 9336 | exempt |
@@ -237,22 +237,23 @@ Exempt secondary-channel declarations (not ratcheted): 389
 | ContentPacks\RedAlert2\Allies\yaml\weapons.yaml | RA2GrandCannonWeapon | Effect1 | YES | YES | 2349 | exempt |
 | ContentPacks\RedAlert2\Allies\yaml\weapons.yaml | RA2GrandCannonWeapon | Effect2 | YES | YES | 2354 | exempt |
 | ContentPacks\RedAlert2\Allies\yaml\weapons.yaml | RA2GrandCannonWeapon | EffectWater | YES | YES | 2209 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ChronoMinerTeleport | 1 | - | YES | 9538 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ChronoMinerTeleportImpact | 1 | YES | YES | 9545 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ChronoMinerTeleport | 1 | - | YES | 10170 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ChronoMinerTeleportImpact | 1 | YES | YES | 10177 | exempt |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | DredMissile | Effect | - | YES | 6498 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | IonPulseDischarge | Effect2 | YES | YES | 3842 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | IvanBomb | Effect | YES | YES | 8731 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | IvanBomb | EffectWater | YES | YES | 8736 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | LightningBolt | Effect | YES | YES | 8682 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | LightningBolt | Effect2 | YES | - | 8687 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | IvanBomb | Effect | YES | YES | 9363 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | IvanBomb | EffectWater | YES | YES | 9368 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | LightningBolt | Effect | YES | YES | 9314 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | LightningBolt | Effect2 | YES | - | 9319 | exempt |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | MigMissiles_rad | Effect | YES | YES | 4649 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | MutateEffect | Effect | YES | - | 8349 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | PortableChronoImpact | 1 | YES | YES | 9530 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | PortableChronoTeleport | 1 | - | YES | 9524 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2CorpseSpawner | Effect | YES | - | 9895 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2DemoBomb | Effect | YES | YES | 8390 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | PortableChronoImpact | 1 | YES | YES | 10162 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | PortableChronoTeleport | 1 | - | YES | 10156 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2CorpseSpawner | Effect | YES | - | 10527 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2DemoBomb | Effect | YES | YES | 8781 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2DemoBomb | Effect2 | - | YES | 8835 | exempt |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2FLOATER | 3Eff | YES | YES | 3013 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2FlyingBody | Effect | YES | - | 9941 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2FlyingBody | Effect | YES | - | 10573 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2MUTA | 3Eff | YES | YES | 2947 | exempt |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2Mutate | Effect | YES | YES | 8342 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2PINKY | 3Eff | YES | YES | 2896 | exempt |
@@ -275,16 +276,17 @@ Exempt secondary-channel declarations (not ratcheted): 389
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2TorpTube | Effect | YES | YES | 6828 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2TorpTube_elite | Effect | YES | YES | 6944 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | RA2VirusExplode | Effect | YES | YES | 8224 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ReactorNuke | Effect | YES | YES | 8365 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ReactorNukeWeak | Effect | YES | - | 8377 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | StormCloud | Effect | YES | - | 8663 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | TanyaBomb | Effect | YES | YES | 8858 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | TanyaBomb | Effect | YES | YES | 8951 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ReactorNuke | Effect | YES | YES | 8444 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ReactorNuke | Effect2 | - | YES | 8498 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | ReactorNukeWeak | Effect | YES | - | 8694 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | StormCloud | Effect | YES | - | 9295 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | TanyaBomb | Effect | YES | YES | 9490 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | TanyaBomb | Effect | YES | YES | 9583 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | V3Explode | Effect | - | YES | 6282 |  |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | WarpawayEffect | 1 | YES | YES | 9500 | exempt |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | WarpawayEffect | 1 | YES | YES | 10132 | exempt |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | YRBoomerSCUD | Effect | YES | YES | 6705 |  |
 | ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | YRBoomerSCUD | EffectAir | YES | YES | 6797 | exempt |
-| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | psireveal | Effect | YES | YES | 8704 |  |
+| ContentPacks\RedAlert2\Shared\yaml\weapons.yaml | psireveal | Effect | YES | YES | 9336 |  |
 | ContentPacks\RedAlert2\Soviets\yaml\weapons.yaml | IvanBombAir | Effect | YES | YES | 2605 |  |
 | ContentPacks\RedAlert2\Soviets\yaml\weapons.yaml | IvanBombAir | EffectWater | YES | YES | 2610 | exempt |
 | ContentPacks\RedAlert2\Soviets\yaml\weapons.yaml | RA160mmE_rad_elite | Effect | YES | YES | 1091 |  |

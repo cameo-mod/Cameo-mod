@@ -135,6 +135,9 @@ groups:
   AF_harvester_spread:               # EMBER HS-1 - genericbot's field-deficit redirect scans ~3.5x faster (433->125) so crowded fields bleed harvesters to starved ones; @classic untouched
     HarvesterBotModuleCA@generic:
       ScanForLowEffectHarvestersInterval: 125
+  AH_parallel_production:            # EMBER PP-1 - IBotProductionWidth provider: BuildUnit fills up to 4 idle queues per category per call (3 war factories produce in parallel); provider-seam so shared @generic never hands it to classic
+    GrantConditionOnBotOwner@parallelprod:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
   AG_assault_fanout:                 # the line-of-death fix, ONE switch (CV concave 12.7a unified with NOVA ATK-1, 2026-10-02): arms the AssaultFormationBotModule provider so Rush squads deploy a range-matched concave arc (wider for bigger armies) and commit staggered before engaging. Provider tunables live on its Info; classic has no provider = bit-identical
     GrantConditionOnBotOwner@assaultfanout:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
