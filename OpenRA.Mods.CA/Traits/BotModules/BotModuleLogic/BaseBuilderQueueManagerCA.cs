@@ -248,6 +248,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
 			}
@@ -280,6 +281,7 @@ namespace OpenRA.Mods.CA.Traits
 				var valueInfo = actorInfo.TraitInfoOrDefault<ValuedInfo>();
 				var distanceToBaseIsImportant = true;
 				CPos? advisedDefense = null;
+				refineryClaimed = false;
 				if (plugInfo != null)
 				{
 					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
@@ -344,6 +346,7 @@ namespace OpenRA.Mods.CA.Traits
 				else
 				{
 					failCount = 0;
+					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{
@@ -386,6 +389,28 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return true;
+		}
+
+		// Cameo (12.24 FE-0 / 12.25 BO-0): record-only telemetry. The queue tick per producer and the refinery-claim flag are read by
+		// NotifyPlacement only; nothing here feeds a decision.
+		readonly Dictionary<uint, (string Item, int Tick)> queuedAt = new();
+		bool refineryClaimed;
+		IBotPlacementObserver[] placementObservers;
+
+		void NotifyPlacement(string item, CPos cell, uint producerId, string orderString, BuildingType type, bool advisedDefence)
+		{
+			placementObservers ??= world.WorldActor.TraitsImplementing<IBotPlacementObserver>().ToArray();
+			if (placementObservers.Length == 0)
+				return;
+
+			var reason = orderString != "PlaceBuilding" ? "other"
+				: advisedDefence || type == BuildingType.Defense ? "defence"
+				: type == BuildingType.BaseCrawl ? "crawl"
+				: type == BuildingType.Refinery && refineryClaimed ? "refinery_claim"
+				: "base";
+			var queued = queuedAt.TryGetValue(producerId, out var q) && q.Item == item ? q.Tick : world.WorldTick;
+			foreach (var observer in placementObservers)
+				observer.BuildingPlaced(player, world.WorldTick, item, cell, reason, queued);
 		}
 
 		ActorInfo GetProducibleBuilding(IReadOnlySet<string> actors, IEnumerable<ActorInfo> buildables, Func<ActorInfo, int> orderBy = null)
@@ -871,6 +896,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (claim.Location != null)
 						{
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
+							refineryClaimed = true;
 							return claim;
 						}
 					}

@@ -1,3 +1,21 @@
+# 2026-10-02 — FE-0 / BO-0 telemetry: placement log, `expansion` snapshot object, two report tools (behaviour-neutral)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/tel_2026_10_02`; nothing committed, no game launch).*
+
+**Done:**
+- `cameo-ai-placements.jsonl`: new world trait `AiPlacementLogWriter` (registered in `world.yaml`) fed by `IBotPlacementObserver` (CA assembly),
+  which `BaseBuilderQueueManagerCA` calls where it issues the `PlaceBuilding` order (queue tick per producer + a `refineryClaimed` flag; reason =
+  `refinery_claim` / `crawl` / `defence` / `base` / `other`). Refineries carry the nearest anchor (spreader or spreaderless field), its cell, distance.
+- `expansion` object on every situation snapshot (`AiLogExpansion.cs`: `ExpansionTelemetry` + pure `ExpansionMath`; `BotSituation.Expansion`,
+  `AiSituationLogWriter.AppendExpansion`). `ExpansionPlannerBotModule` gained read-only `LastMcvSite` (one line + a getter) - nothing else touched.
+- `tools/ai/expansion_report.py`, `tools/ai/build_order_report.py` (+ `ai_log_common.py`), `--json`; score formula in the docstring and AI_ARCHITECTURE 12.25.
+- Tests: `ExpansionTelemetryTest` (bearing, angle, excess, unassigned, spreaderless field, category order), `test_expansion_and_build_order_reports.py`.
+  Build 0 errors, Cameo tests 685/685, python tests pass; fog (new manifest entry `AiLogExpansion.cs`: 1 = the spreader scan, public map data),
+  frankenstein, wiring, direct-mutation audits PASS.
+**Not done / caveats:** no boot gate and no real match yet, so the jsonl schema is verified only against synthetic fixtures; the Fransbot base builder is not hooked
+(only the CA/Cameo `BaseBuilderQueueManagerCA` path logs); `expansion` fields use the planner's `ReachCells` / `ClaimRadiusCells` and a fixed 12-cell anchor
+radius (`ExpansionMath.AnchorRadiusCells`) - tune after the first logs. **Next:** boot-gate, one mirror match, run both tools on its Logs.
+
 # 2026-10-02 — Assault fan merged into the concave (one deploy state, two shapes; AI_ARCHITECTURE 12.7a objective shape)
 
 *Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/coh_formation`; nothing committed, no game launch).*

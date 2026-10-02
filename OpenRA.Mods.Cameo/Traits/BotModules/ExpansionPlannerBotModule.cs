@@ -244,6 +244,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public IReadOnlyList<FieldScore> LastScores { get; private set; } = Array.Empty<FieldScore>();
 
+		/// <summary>Telemetry only (12.24 FE-0): the last field handed to an MCV as its site. Never read by a decision.</summary>
+		public CPos? LastMcvSite { get; private set; }
+
 		CPos? IBotExpansionTargetProvider.ExpansionTarget => IsTraitDisabled || !Info.DriveBaseCrawl ? null : Target?.Center;
 
 		bool IBotExpansionTargetProvider.WantsRefineryAtExpansionTarget => !IsTraitDisabled && Info.DriveRefineries && wantsRefinery;
@@ -563,6 +566,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count} at tick {tick}");
+				LastMcvSite = s.Center;
 				return s.Center;
 			}
 

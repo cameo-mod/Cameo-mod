@@ -3140,6 +3140,30 @@ independently, so they often point the same way.
 * `tools/ai/expansion_report.py <match dirs>`: per bot and per match, the numbers above over time (first refinery, fields
   harvested at minutes 5/10/20, peak, excess refineries, mean anchor distance, crawl/MCV angle distribution).
 
+**Implemented (FE-0, 2026-10-02, worktree `claude/tel_2026_10_02`, not boot-gated):**
+* `OpenRA.Mods.CA/Traits/BotModules/IBotPlacementObserver.cs` is the record-only hook. `BaseBuilderQueueManagerCA` records the queue tick per producer
+  (`queuedAt`) and calls the observers when it issues the `PlaceBuilding` order. `reason` comes from the placement path it already took:
+  `refinery_claim` (the EX-2 claim returned a cell, flag `refineryClaimed`), `crawl` (`BuildingType.BaseCrawl`), `defence` (`Defense` or an advised
+  defence cell), `other` (a plug), else `base`. No decision reads any of it.
+* `OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs` (world trait `AiPlacementLogWriter`, `world.yaml`) appends `cameo-ai-placements.jsonl` at game
+  over. Line: `schema, kind:"placement", game_uid, record_id, map_uid, seed, player, faction, bot_type, personality, tick, queued_tick,
+  placed_tick, actor, cell:"x,y", category, reason` and, for refineries, `anchor_kind` (`spreader` | `field`), `anchor_cell`, `anchor_dist` (cells).
+  `category` = `ExpansionMath.Category` over `BotTargetTags` (conyard, refinery, superweapon, power, defence, production) then the `IBotUnitRoles`
+  `tech` / `support` roles, else `other`; no actor id is typed.
+* `OpenRA.Mods.Cameo/Traits/AiLogExpansion.cs`: `ExpansionTelemetry` (one per `MasterAiBotModule`, shared by the snapshots and the placement log) and the
+  pure `ExpansionMath`. It reads the existing `ResourceMapBotModule` (it only remembers each field's first-seen centre) and
+  `ExpansionPlannerBotModule.Target` / the new read-only `LastMcvSite`; spreaders = `ActorsWithTrait<ISeedableResource>` (public map data, the one
+  enumeration site, manifested in `fog_honesty_manifest.json`). Anchors = spreaders, then fields with no spreader within 12 cells. A refinery serves its
+  nearest anchor within 12 cells; excess = refineries beyond one per anchor plus the unassigned ones. In reach = field centre within the planner's
+  `ReachCells` of a buildable-area building; served = own refinery within `ClaimRadiusCells`; harvested = own harvester on the field (resource map);
+  coverage = (in reach or served) / known. Main base = the first yard seen; outposts = yards more than 20 cells from it; the angle is between the
+  bearings (clockwise from north) of the crawl target and the MCV site from the centroid of own buildings within 20 cells of the main yard (-1 = n/a).
+* Situation snapshot: top-level `expansion` object (`AiSituationLogWriter.AppendExpansion`): `fields_known, fields_in_reach, fields_served,
+  fields_harvested, anchors_spreader, anchors_field, refineries, excess_refineries, unassigned_refineries, anchor_dist_mean, anchor_dist_max, conyards,
+  outposts, crawl_target, mcv_site, crawl_mcv_angle, coverage_milli`.
+* `tools/ai/expansion_report.py <match dirs> [--json]` (shared readers in `tools/ai/ai_log_common.py`); tests `tools/tests/test_expansion_and_build_order_reports.py`
+  and `OpenRA.Mods.Cameo.Test/ExpansionTelemetryTest.cs`.
+
 **FE-1 behaviour (one switch `AJ_field_coverage`, default off; classic unchanged):**
 1. **Refinery law:** one refinery per anchor (see DESIGN). A refinery is wanted while an anchor in building reach is
    unserved, and only then. Under this switch it replaces the yard-based cap, `OptimalRefineryCount` and the §19.10
@@ -3181,6 +3205,13 @@ Units are out of scope until the rebalance.
   * the outcome: win, game length, `kills_cost` / `deaths_cost` (destroyed-to-lost), and **score = win + margin**.
     margin = (killed − lost) / (killed + lost), plus a speed bonus for a faster win.
   * Grouped by personality and by knob vector (BO-1).
+
+**Implemented (BO-0, 2026-10-02, worktree `claude/tel_2026_10_02`):** the build order is the placement log above. `tools/ai/build_order_report.py <match dirs>
+[--json]` prints per bot and match the ordered list (mm:ss, actor, category, reason), the time to the first of each category and the outcome from
+`cameo-ai-matches.jsonl`. **Score** = `win + margin + speed`: `win` = 1 for outcome `won` else 0; `margin` = `(killed - lost) / (killed + lost)` over
+`stats.kills_cost` / `stats.deaths_cost` (0 when both are 0); `speed` = `0.5 * max(0, (30 - length_min) / 30)` for a win only, `length_min` =
+`duration_ticks * timestep / 60000`. Range -1 to 2.5; the constants are `SPEED_WEIGHT` / `SPEED_REF_MIN` in the tool. Aggregates by personality and by
+knob vector (`player.knobs` / `knobs` of the match record once BO-1 writes it; `(none)` before).
 
 **BO-1 knobs (switch `AK_build_order_knobs`, default off).** `BuildOrderKnobsBotModule` (genericbot) publishes about
 8 bounded multipliers through `IBotBuildOrderKnobs`. The base builder reads them where it reads its raw numbers:
