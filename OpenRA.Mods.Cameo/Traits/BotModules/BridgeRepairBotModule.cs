@@ -41,6 +41,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	//    carries RepairsBridgesInfo and BuildableInfo — a roster name that cannot repair bridges or is not
 	//    buildable is skipped — and the count is capped by the damaged-target count, not just
 	//    MaximumRepairers (the donor could queue two types for one hut).
+	//  - Hut scan covers both trait kinds: the donor was TS-based so it scanned `BridgeHut` only —
+	//    Cameo maps carry `LegacyBridgeHut` (RA/TD flat bridges) which the order targets too.
 	//  - CNBotPerf/CNBotLog instrumentation dropped: decisions log via Log.Write + AIUtils.BotDebug.
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Orders engineers to enter damaged bridge huts and requests replacements when needed.")]
@@ -121,6 +123,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			activeAssignments.Remove(actor);
 		}
 
+		// A hut target as the module sees it: the actor plus the two fields both hut traits expose.
+		// Cameo maps place LegacyBridgeHut (RA/TD flat bridges); the donor scanned only BridgeHut
+		// (TS elevated bridges, CN's huts) — both are supported so either map style repairs.
+		readonly record struct HutTarget(Actor Actor, DamageState State, bool Repairing);
+
+		static HutTarget? ToHutTarget(Actor a)
+		{
+			var hut = a.TraitOrDefault<BridgeHut>();
+			if (hut != null)
+				return new HutTarget(a, hut.BridgeDamageState, hut.Repairing);
+
+			var legacy = a.TraitOrDefault<LegacyBridgeHut>();
+			if (legacy != null)
+				return new HutTarget(a, legacy.BridgeDamageState, legacy.Repairing);
+
+			return null;
+		}
+
+		static IEnumerable<HutTarget> HutTargets(World world)
+		{
+			foreach (var a in world.ActorsHavingTrait<BridgeHut>())
+				if (ToHutTarget(a) is HutTarget t)
+					yield return t;
+
+			foreach (var a in world.ActorsHavingTrait<LegacyBridgeHut>())
+				if (ToHutTarget(a) is HutTarget t)
+					yield return t;
+		}
+
 		void QueueRepairOrders(IBot bot)
 		{
 			if (player.WinState != WinState.Undefined)
@@ -129,11 +160,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var leases = BotUnitLeases.Of(player);
 			PruneAssignments(leases);
 
-			var targets = world.ActorsHavingTrait<BridgeHut>()
+			var targets = HutTargets(world)
 				.Where(IsRepairTarget)
-				.OrderByDescending(a => a.Trait<BridgeHut>().BridgeDamageState)
-				.ThenBy(a => a.ActorID)
+				.OrderByDescending(t => t.State)
+				.ThenBy(t => t.Actor.ActorID)
 				.Take(Math.Max(1, Info.MaximumRepairTargetOptions))
+				.Select(t => t.Actor)
 				.ToList();
 
 			if (targets.Count == 0)
@@ -191,7 +223,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool IsActiveAssignment(Actor repairer, Actor target)
 		{
-			return IsLiveOwnedRepairer(repairer) && !repairer.IsIdle && IsRepairTarget(target);
+			return IsLiveOwnedRepairer(repairer) && !repairer.IsIdle &&
+				ToHutTarget(target) is HutTarget t && IsRepairTarget(t);
 		}
 
 		bool IsAvailableRepairer(Actor repairer, IBotUnitLeases leases)
@@ -214,17 +247,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return repairer.TraitOrDefault<RepairsBridges>() != null;
 		}
 
-		bool IsRepairTarget(Actor target)
+		bool IsRepairTarget(HutTarget target)
 		{
-			if (target == null || target.IsDead || !target.IsInWorld)
+			var actor = target.Actor;
+			if (actor == null || actor.IsDead || !actor.IsInWorld)
 				return false;
 
-			if (Info.BridgeHutActorTypes.Count > 0 && !Info.BridgeHutActorTypes.Contains(target.Info.Name.ToLowerInvariant()))
+			if (Info.BridgeHutActorTypes.Count > 0 && !Info.BridgeHutActorTypes.Contains(actor.Info.Name.ToLowerInvariant()))
 				return false;
 
-			var hut = target.TraitOrDefault<BridgeHut>();
-			return hut != null && IsEligibleHut(hut.BridgeDamageState, hut.Repairing,
-				!Info.CheckRepairTargetsForVisibility || target.CanBeViewedByPlayer(player),
+			return IsEligibleHut(target.State, target.Repairing,
+				!Info.CheckRepairTargetsForVisibility || actor.CanBeViewedByPlayer(player),
 				Info.CheckRepairTargetsForVisibility, Info.MinimumDamageState);
 		}
 

@@ -16529,3 +16529,31 @@ Shipped, all dormant on master (switches default-off):
 Verified: OpenRA.Mods.CA + OpenRA.Mods.Cameo compile clean (0/0); the three groups
 arm via apply_increment_switches.py --dry-run (3 expected rewrites). Boot-gate +
 A/B runtime proof remain queued on the game driver per workflow rules.
+## 2026-10-02 (nova) — bridge repair legacy-hut fix + fleet sync
+
+**Bug found + fixed:** `BridgeRepairBotModule` (CN3 port) scanned
+`ActorsHavingTrait<BridgeHut>()` — the TS elevated-bridge hut type — but Cameo's
+RA/TD bridge huts carry `LegacyBridgeHut`. The dedicated module found zero
+targets even on maps with bridges. `EngineerBotModule`'s fallback already scans
+both (it was the only working path). Fix: `HutTarget` adapter resolving both
+trait types; module now matches Engineer's coverage. Also recorded: the earlier
+"no switch arm path" gap was closed — group X (`cn3_bridge_repair`) arms it and
+Engineer yields the RepairBridge job when it is (single-owner, #764).
+
+**Mechanism note (verified against engine + map tiles):** Cameo/RA legacy
+bridges are NOT map actors — they are painted as terrain templates and converted
+to `Bridge` actors at load by `LegacyBridgeLayer` (world.yaml:
+`Bridges: bridge1..4`). Placing `bridge1` as a map actor loads but crashes on
+damage (`Bridge.UpdateState` NRE — null footprint, never initialized by
+`Bridge.Create`). Demo run in bridge_run2 with tile-painted damaged bridges:
+clean 185s match, `ENG RepairBridge` orders observed; some huts re-ordered
+repeatedly (engineer reachability follow-up, not a crash).
+
+**Fleet sync:** master @e5fd392c folded in EMBER's GC-1 (garrison contest,
+switch `AB_garrison_contest`) + EX-4 (`CoverAllFields`, switch
+`AC_cover_map_expansion`) + N-team harness (1-8) + §12.18 coalition-fold design
++ team_coordination_report.py + 6v6 evidence (27 contested capture claims).
+Maintainer's garrison + endless-expansion asks are implemented but switch-gated
+pending A/B. Remaining open asks: formation/multi-angle assault, base spacing,
+army-first production, harvester spread, coalition fold impl (BB-BE).
+
