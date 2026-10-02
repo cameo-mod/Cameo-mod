@@ -325,6 +325,43 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Activate(SquadCA owner) { }
 
+		// Battle-nearby predicate shared with the concave state: one bounded
+		// scan at the squad centroid covering scan + squad spread, then a
+		// per-member distance verify. True means a visible enemy is already
+		// inside scan range of at least one member — ours or an ally's fight,
+		// the enemies are here either way.
+		internal static bool ContactNearSquad(SquadCA owner, WDist scanDist)
+		{
+			var memberPositions = new List<WPos>(owner.Units.Count);
+			long cx = 0, cy = 0;
+			foreach (var u in owner.Units)
+			{
+				var p = u.Actor.CenterPosition;
+				memberPositions.Add(p);
+				cx += p.X;
+				cy += p.Y;
+			}
+
+			if (memberPositions.Count == 0)
+				return false;
+
+			var centroid = new WPos((int)(cx / memberPositions.Count), (int)(cy / memberPositions.Count), 0);
+			var spread = 0L;
+			foreach (var p in memberPositions)
+				spread = Math.Max(spread, (p - centroid).HorizontalLength);
+
+			var bound = scanDist + new WDist((int)Math.Min(spread, int.MaxValue - scanDist.Length));
+			var enemies = owner.SquadManager.VisibleEnemiesNear(centroid, bound);
+			if (enemies.Count == 0)
+				return false;
+
+			var enemyPositions = new List<WPos>(enemies.Count);
+			foreach (var e in enemies)
+				enemyPositions.Add(e.CenterPosition);
+
+			return SquadMicroEvalCA.ContactNear(memberPositions, enemyPositions, scanDist);
+		}
+
 		public void Tick(SquadCA owner)
 		{
 			// Basic check
@@ -359,15 +396,29 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
+			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
+			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
+
+			// Contact-first all-in (§12.7b): the concave, the assault fan and the
+			// march holds are for BEFORE the first shot. Once a visible enemy is
+			// inside scan range of ANY member — a member fighting, or an allied
+			// force fighting right next to us — the squad commits wholesale:
+			// Lanchester's square law means a squad that keeps staging while the
+			// local fight runs feeds the enemy one prong at a time. One grouped
+			// AttackMove at the objective sends everyone in on the same tick.
+			if (owner.Type == SquadCAType.Rush && owner.IsTargetValid && ContactNearSquad(owner, attackScanRadius))
+			{
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(owner.Target.CenterPosition), false,
+					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				return;
+			}
+
 			// CV (12.7a): on contact a Rush squad deploys a concave before the first shot.
 			if (owner.SquadManager.Info.ConcaveEngagement && owner.Type == SquadCAType.Rush && GroundUnitsConcaveStateCA.ShouldEnter(owner))
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(), false);
 				return;
 			}
-
-			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
-			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
 			var enemyActor = owner.SquadManager.FindClosestEnemy(leader.Actor, attackScanRadius, owner);
 			if (enemyActor != null)
