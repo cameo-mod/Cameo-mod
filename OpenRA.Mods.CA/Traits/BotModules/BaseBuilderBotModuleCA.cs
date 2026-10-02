@@ -124,6 +124,11 @@ namespace OpenRA.Mods.CA.Traits
 			"Classic mounts no provider and keeps the old farthest-from-refinery ordering.")]
 		public readonly int RefineryUnservedRadiusCells = 10;
 
+		[Desc("Cameo (AI_ARCHITECTURE §12.20): when an active IBotPlacementAdvisor is mounted, findPos hands it",
+			"this many placeable candidate cells to re-rank instead of keeping the first. With no advisor the",
+			"placement scan is byte-identical to upstream.")]
+		public readonly int PlacementAdvisorCandidates = 24;
+
 		[Desc("Delay (in ticks) until rechecking for new BaseProviders.")]
 		public readonly int CheckForNewBasesDelay = 1500;
 

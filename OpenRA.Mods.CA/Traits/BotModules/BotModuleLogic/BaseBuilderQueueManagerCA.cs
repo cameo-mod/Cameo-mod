@@ -59,6 +59,10 @@ namespace OpenRA.Mods.CA.Traits
 		int buildingDelayModifier = 100;
 		int buildingIntervalModifier = 100;
 
+		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
+		// production. Empty = nothing pauses, upstream-identical.
+		IBotRequestPauseBuildingProduction[] pauseBuilding;
+
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
 			PlayerResources pr, IResourceLayer rl)
 		{
@@ -224,6 +228,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash
 				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
+					return false;
+
+				// Cameo (§12.20): the army-first vote — an advisor can hold new non-refinery buildings so cash
+				// flows to unit production while it needs to (refineries stay exempt, same as the cash gate).
+				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+				if (!baseBuilder.Info.RefineryTypes.Contains(item.Name)
+					&& pauseBuilding.Any(p => p.PauseBuildingProduction))
 					return false;
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
@@ -677,18 +688,54 @@ namespace OpenRA.Mods.CA.Traits
 				bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 			}
 
-			foreach (var cell in cells)
+			// Cameo (§12.20): an active placement advisor re-ranks a bounded prefix of placeable cells
+			// (spread-out bases instead of first-valid packing). No advisor = first valid cell wins, exactly
+			// as upstream — the advisor branch only runs when a provider is mounted and active.
+			var advisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			if (advisor != null)
 			{
-				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-					continue;
+				var candidates = new List<CPos>();
+				foreach (var cell in cells)
+				{
+					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+						continue;
 
-				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-					continue;
+					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+						continue;
 
-				if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-					continue;
+					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
+						continue;
 
-				return (cell, center, actorVariant);
+					candidates.Add(cell);
+					if (candidates.Count >= baseBuilder.Info.PlacementAdvisorCandidates)
+						break;
+				}
+
+				if (candidates.Count > 0)
+				{
+					var chosen = advisor.ChooseCell(actorInfo, candidates,
+						c => world.CanPlaceBuilding(c, actorInfo, bi, null));
+					if (chosen.HasValue && candidates.Contains(chosen.Value))
+						return (chosen.Value, center, actorVariant);
+
+					return (candidates[0], center, actorVariant);
+				}
+			}
+			else
+			{
+				foreach (var cell in cells)
+				{
+					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+						continue;
+
+					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+						continue;
+
+					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
+						continue;
+
+					return (cell, center, actorVariant);
+				}
 			}
 
 			return (null, center, 0);

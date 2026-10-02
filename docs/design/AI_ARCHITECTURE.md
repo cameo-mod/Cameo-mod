@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**58 distinct trait types, 82 Player instances plus one World instance** (2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**63 distinct trait types, 88 Player instances plus one World instance** (2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2736,3 +2736,56 @@ never *aimed* at it.
 - *Downstream growth:* `BuildingLimits` carries almost no production caps, so each new
   yard's local base builder fills factories/production/refineries (`RefineriesPerBase`,
   `MaxExtraRefineries` are per-base, not global) — bases grow as they land.
+
+### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
+
+Three switch-gated patches for the maintainer's second failure report (the 6v6 review):
+buildings packed wall-to-wall into a pathfinder jam, dozens of harvesters queueing on one
+field, and building production out-spending the army.
+
+**SP-1 — spaced placement** (`SpacingAdvisorBotModule`, `IBotPlacementAdvisor`, switch
+`AD_spaced_base_placement`).
+
+- *The packing found:* `BaseBuilderQueueManagerCA.findPos` returned the **first** valid
+  cell in its shuffled annulus — nothing ever preferred an open cell over a cramped one,
+  so buildings accreted edge-by-edge into a solid block.
+- *The seam:* `IBotPlacementAdvisor.ChooseCell(building, candidates, stillPlaceable)`
+  re-ranks a bounded prefix (`PlacementAdvisorCandidates = 24`) of cells that already
+  passed `CanPlaceBuilding`/`IsCloseEnoughToBase` — the advisor can never pick a cell the
+  caller would have rejected, and with no active advisor the placement scan is
+  byte-identical to upstream. Mirrors the existing `IBotDefensePlacementAdvisor` pattern.
+- *The advisor:* scores candidates by distance to the nearest own building footprint,
+  capped at `DesiredGapCells + 1` (beyond the gap, more distance stops mattering so the
+  frontier doesn't drift absurdly), plus a `OutwardLeanPercent` bias away from the base
+  centroid. If nothing meets the gap it takes the widest cell left — spacing can never
+  deadlock placement. Refinery and defence cells keep their own owners (EX-2 field
+  claims, DEF-3 coverage) and are never re-ranked by this advisor.
+
+**AF-1 — army-first cash** (`ArmyFirstBotModule`, `IBotRequestPauseBuildingProduction`,
+switch `AE_army_first`).
+
+- *The seam:* `IBotRequestPauseBuildingProduction` is the building-side mirror of the
+  existing `IBotRequestPauseUnitProduction` OR-of-vetoes vote (§19.4 R4). The queue
+  manager consults providers lazily inside `TickQueue` — any provider returning true
+  holds new non-refinery buildings for the tick; refineries stay exempt exactly as in
+  the low-cash gate.
+- *The voter:* pauses while `CashAndResources < ArmyReserveLowCash` (2500), resumes at
+  `ArmyReserveHighCash` (4000) — hysteresis so building production doesn't flicker. The
+  vote releases entirely while no unit-producing structure exists: the first
+  barracks/war factory (and rebuilding a wiped production chain) can never be starved
+  by the guard that exists to feed them.
+
+**HS-1 — harvester spread** (switch `AF_harvester_spread`).
+
+- The CA module already redirects low-effect harvesters from over-served fields to
+  starved ones by `ResourceCellsPerHarvester` deficit — the lever is cadence:
+  `ScanForLowEffectHarvestersInterval = 433` ran the rebalance roughly once per 17 s,
+  far behind harvester production. `HarvesterBotModuleCA` is split into
+  `@generic`/`@classic` instances (identical fields today; `BotRoleSets` type-name
+  targets match all instances) so the switch retunes genericbot only: interval 433→125.
+- Production-side, `ResourceCellsPerHarvester` remains the spread definition; EX-4 keeps
+  opening new fields so redistribution always has somewhere to send the surplus.
+
+*Formation/multi-front* (convex spread, multi-angle waves) is **Claude's lane**
+(`claude/cv_concave`, §12.7a) — EMBER deliberately does not touch squad formation code;
+SP-1/AF-1 only make the base cheaper to path through and the army bigger to form up.

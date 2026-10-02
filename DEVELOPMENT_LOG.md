@@ -16501,3 +16501,31 @@ inc3ab-out): perception/missions/ownership/fog/tools PASS; load + order-gate
 FAIL (LC5 record block absent in that build); outcomes FAIL (57 dangling
 attempts = LC8 write-back); learning WARN (offline fit works, in-game LEARNED
 consumption absent). The verify->feedback half of the loop is the open edge.
+
+## 2026-10-02 EMBER — SP-1/AF-1/HS-1 spread-and-pressure batch (branch devin/ember/spread-and-pressure)
+
+Maintainer's second failure report after the GC-1/EX-4 merge: packed bases
+(pathfinder jams), one-field harvester crowding, buildings out-spending the army,
+line-suicide attacks. The formation half (convex spread, multi-front waves) is
+Claude's cv_concave lane — deliberately untouched here.
+
+Shipped, all dormant on master (switches default-off):
+- SP-1 `AD_spaced_base_placement`: new CA seam IBotPlacementAdvisor — findPos hands
+  a bounded prefix (PlacementAdvisorCandidates=24) of ALREADY-VALID cells to an
+  active advisor; none active = byte-identical upstream pick. Cameo's
+  SpacingAdvisorBotModule re-ranks by nearest-own-building distance (cap
+  DesiredGapCells+1, OutwardLeanPercent=25 outward bias); never deadlocks (worst
+  case = widest cell left). Refineries/defenses keep their own placement owners.
+- AF-1 `AE_army_first`: new CA seam IBotRequestPauseBuildingProduction (mirror of
+  the existing unit-production veto vote). BaseBuilderQueueManagerCA.TickQueue
+  consults providers lazily; refineries exempt. Cameo's ArmyFirstBotModule pauses
+  buildings while cash<2500, resumes >=4000 (hysteresis); inert while no unit
+  producer exists so tech sequencing can't stall.
+- HS-1 `AF_harvester_spread`: HarvesterBotModuleCA split into @generic/@classic
+  instances (identical fields; BotRoleSets type targets match all instances — the
+  Targets: resolver confirmed safe). Switch drops @generic's low-effect redirect
+  cadence 433->125; @classic stays the upstream control.
+
+Verified: OpenRA.Mods.CA + OpenRA.Mods.Cameo compile clean (0/0); the three groups
+arm via apply_increment_switches.py --dry-run (3 expected rewrites). Boot-gate +
+A/B runtime proof remain queued on the game driver per workflow rules.
