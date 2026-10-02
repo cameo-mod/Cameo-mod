@@ -2768,11 +2768,21 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
   `ArmyCentroid`/`ExpansionClaim` are own-side. An ally's visible-enemy knowledge may be
   published only where shared vision already shows it to the team (OpenRA allied vision
   makes that the honest case).
-- **Switch groups (planned):** `BB_tc3_coalition_plan` (broadcast fields + fold +
-  `own.coalition_*` situation fields, publish-only), `BC_tc3_rescue_election` (nearest-
-  army responder), `BD_tc3_sectors` (Voronoi partition bias), `BE_tc3_main_target`
-  (MasterAi/Squad target bias). All default-off, inert in 1v1 and on mixed teams without
-  allied providers — same degradation contract as TC-2.
+- **Switch groups (shipped NOVA 2026-10-02, default-off):** `BB_tc3_coalition_plan`
+  (`MasterAiBotModule.UseCoalitionPlan` — broadcast fields ArmyCentroid/ExpansionAssist/
+  SpawnPoint + the `CoalitionFold.Compute` fold + `IBotCoalition` provider +
+  `coalition_*` situation fields, publish-only), `BC_tc3_rescue_election`
+  (`SquadManagerBotModuleCA.UseCoalitionRescue` — the elected responder answers, the
+  unelected stand down; no provider/empty election = today's TopDefendRequest),
+  `BD_tc3_sectors` (`ExpansionPlannerBotModule.UseCoalitionSectors` — Voronoi score
+  bias, `CoalitionForeignSectorPercent` 35, foreign fields deprioritized never
+  forbidden), `BE_tc3_main_target` (`MasterAiBotModule.UseCoalitionTargetBias` +
+  `SquadManagerBotModuleCA.UseCoalitionTarget` — both read the directive as demand
+  bias only). All inert in 1v1 and on mixed teams without allied providers — same
+  degradation contract as TC-2. Seam: `IBotCoalition.cs` (fold + directive +
+  `IBotExpansionAssistProvider`); the fold runs inside the master's snapshot and the
+  target bias reads the *previous* snapshot's fold (publish→fold→consume ordering —
+  the only honest order).
 - **Team roles beyond TC-2d:** the role split currently spreads TechRush↔Expansion rests.
   With sectors live, the partition itself carries the spread (sector = expander frontier),
   and `RoleSplitBias` keeps the arsenal spread — the two compose instead of competing.

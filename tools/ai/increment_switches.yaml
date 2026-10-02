@@ -154,3 +154,26 @@ groups:
       PreferBuildingTargets: true
       ValueOnlyAttackLaunch: true
       UseUpstreamStateTweaks: true
+  AD_army_first:                     # DAWN 2026-10-02 — army over base spam: defer non-essential buildings while the army is below strength and cash is high (conyard/refinery/power/first-factory always pass)
+    BaseBuilderBotModuleCA:
+      MinArmyUnitsBeforeBuildings: 14
+      ArmyFirstMinCash: 1500
+  AE_spread_assault:                 # DAWN — building gap + harvester field cap + assault fan are ON at C# defaults; this group documents the increment test pair and can tighten them
+    BaseBuilderBotModuleCA:
+      MinBuildingGapCells: 2
+    HarvesterBotModuleCA:
+      MaxHarvestersPerResourceIndice: 4
+  BB_tc3_coalition_plan:             # NOVA TC-3 - coalition fold: every member computes the identical team directive (MainTarget vote, Push/Defend phase, rescue election, sector anchors) from the same broadcast set - publish-only, inert in 1v1
+    MasterAiBotModule:
+      UseCoalitionPlan: true
+  BC_tc3_rescue_election:            # NOVA TC-3 - nearest-army rescue: the fold elects exactly one allied responder per defend request (nearest ArmyCentroid to DefendPosition); losers stand down
+    SquadManagerBotModuleCA:
+      UseCoalitionRescue: true
+  BD_tc3_sectors:                    # NOVA TC-3 - Voronoi territory: ExpansionPlanner scores own-sector fields first (spawn-anchor partition, foreign fields deprioritized never forbidden; dead ally's sector refolds)
+    ExpansionPlannerBotModule:
+      UseCoalitionSectors: true
+  BE_tc3_main_target:                # NOVA TC-3 - one commander: master's target bias + squad MainTarget preference fold to the coalition target (the merged-army effect under one directive)
+    MasterAiBotModule:
+      UseCoalitionTargetBias: true
+    SquadManagerBotModuleCA:
+      UseCoalitionTarget: true

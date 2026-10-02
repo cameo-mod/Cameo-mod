@@ -16871,3 +16871,43 @@ option (9 = old-90 cap used).
 - LESSON recorded: shared engine/bin re-clobbered by concurrent lanes' builds;
   never swap a single dll of a cross-referencing pair into a live bin (crashed
   a running match with ReflectionTypeLoadException).
+## 2026-10-02 (nova) — TC-3 coalition fold implemented (switches BB-BE)
+
+The §12.18 hivemind is live behind four default-off groups: every team member
+folds own + allied `TeamBroadcast`s through `CoalitionFold.Compute` (new
+`IBotCoalition.cs` seam in OpenRA.Mods.CA) into the identical
+`CoalitionDirective` — a voted `MainTarget`, `BuildUp/Push/Defend` phase,
+per-request rescue elections (nearest free `ArmyCentroid` to
+`DefendPosition`), and Voronoi `SectorAnchors` keyed on published spawn points.
+
+- BB `BB_tc3_coalition_plan`: MasterAiBotModule.UseCoalitionPlan publishes
+  ArmyCentroid (mean of own armed mobile units), ExpansionAssist (the
+  planner's contested claim via new IBotExpansionAssistProvider — field
+  Threat > 0, remembered-enemy fog-honest), SpawnPoint (HomeLocation /
+  base-centre fallback), then folds the directive at snapshot cadence and
+  publishes it through IBotCoalition. Situation log gains coalition_phase /
+  coalition_main_target.
+- BC `BC_tc3_rescue_election`: SquadManagerBotModuleCA.UseCoalitionRescue —
+  the elected responder rallies to DefendPosition; unelected allies stand
+  down (no pile-on). Empty election or no provider = today's
+  TopDefendRequest, verbatim.
+- BD `BD_tc3_sectors`: ExpansionPlannerBotModule.UseCoalitionSectors —
+  foreign-sector fields keep CoalitionForeignSectorPercent (35) of score;
+  argmax still picks foreign when no own-sector field remains.
+- BE `BE_tc3_main_target`: MasterAiBotModule.UseCoalitionTargetBias +
+  SquadManagerBotModuleCA.UseCoalitionTarget — both bound to a non-null
+  coalition target (master: still must be an attackable candidate; squad:
+  returns it as EffectiveMainTarget). Nemesis override still trumps.
+
+Deterministic fold (ClientIndex tiebreaks, no RNG/time), fog-honest (own-side
+scalars + ally-published positions; MainTarget is a Player, no enemy enum),
+publish-only (zero new order issuers). Ordering note: consumers read the
+*previous* snapshot's fold — the only honest publish→fold→consume order.
+SquadManagerBotModuleCA@classic gets the flags via the arm but no IBotCoalition
+provider exists on classicbot (MasterAi is genericbot-only) — degrades
+bit-identical, no code gate needed.
+
+Verified: build clean 0/0; 640/640 tests (9 new CoalitionFoldTest +
+SectorScorePercent); all four groups dry-run arm (15 rewrites;
+SquadManagerBotModuleCA@classic correctly skipped by the global skip list).
+Boot-gate + team-match A/B queued per workflow.
