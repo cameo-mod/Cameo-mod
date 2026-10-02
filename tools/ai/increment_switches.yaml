@@ -123,6 +123,15 @@ groups:
   AC_cover_map_expansion:            # EMBER EX-4 - MCV appetite tracks free far fields, not McvTargetCount: expand until every reachable field is claimed; difficulty paces speed, never the ceiling
     ExpansionPlannerBotModule:
       CoverAllFields: true
+  AD_army_first:                     # DAWN 2026-10-02 — army over base spam: defer non-essential buildings while the army is below strength and cash is high (conyard/refinery/power/first-factory always pass)
+    BaseBuilderBotModuleCA:
+      MinArmyUnitsBeforeBuildings: 14
+      ArmyFirstMinCash: 1500
+  AE_spread_assault:                 # DAWN — building gap + harvester field cap + assault fan are ON at C# defaults; this group documents the increment test pair and can tighten them
+    BaseBuilderBotModuleCA:
+      MinBuildingGapCells: 2
+    HarvesterBotModuleCA:
+      MaxHarvestersPerResourceIndice: 4
   F_concave:                         # CV concave engagement (AI_ARCHITECTURE §12.7a, maintainer order 2026-10-01)
     SquadManagerBotModuleCA:
       ConcaveEngagement: true
