@@ -2631,6 +2631,14 @@ enumerates enemy actors.
   largest same-`MainTarget` group (allies committed to the same enemy). The
   caller's own broadcast is NOT folded in — a bot reads its own scalars
   directly; the summary answers "what is the rest of the team doing".
+- **Liveness, one rule for every consumer (2026-10-02, review finding 4.2):**
+  `TeamBlackboard.ValidBroadcast(p, b, now)` is the central freshness contract
+  `CollectBroadcasts` applies before any aggregation — the publisher's
+  `WinState` is `Undefined` (OpenRA keeps `Player`/`PlayerActor` after defeat,
+  so a dead ally's last broadcast would otherwise hold its expansion/capture
+  claims and defend requests open forever), `SnapshotTick > 0`, and
+  `now - SnapshotTick <= MaxBroadcastAgeTicks` (600 = four snapshot intervals).
+  No consumer may invent its own freshness test.
 - **Published, always on:** five `own.team_*` fields in the situation log —
   `team_allied_bots`, `team_army_value`, `team_max_tension`,
   `team_defend_requests`, `team_shared_target`. In 1v1, or on a team without an
@@ -2756,7 +2764,10 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
     `DefendPosition`, skipping bots already committed to a Push they own. Every member
     computes the same election, so exactly one ally rallies — the nearest army rescues,
     by construction. Extends the TC-2b path (`TopDefendRequest` picks the request;
-    the directive picks *who* goes).
+    the directive picks *who* goes). **Review fix 4.3 (2026-10-02):** an elected
+    responder leaves the free pool for the rest of the fold — one participant answers
+    at most one defend request per directive, so two simultaneous calls cannot claim
+    the same army.
   - `Sectors` — the territory partition: a Voronoi assignment of regions (the CN4
     `IBotRegionRoles` zone set, §12.17-era topology) to allied bots by spawn distance —
     each bot owns the zones nearest its base centroid. `ExpansionPlannerBotModule`

@@ -148,6 +148,34 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OneResponderAnswersAtMostOneRequestPerFold()
+		{
+			// Review 4.3: two simultaneous calls, both nearest the same free army — the
+			// elected responder leaves the pool, so the second call elects a different
+			// ally (or none when the pool is spent).
+			var a = new WPos(1000, 1000, 0);
+			var b = new WPos(1100, 1100, 0);
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(0, urgencyLevel: 2, requestsDefence: true, defendPosition: a),
+				Broadcast(1, urgencyLevel: 2, requestsDefence: true, defendPosition: b),
+				Broadcast(2, armyCentroid: new WPos(1050, 1050, 0)), // nearest to both
+				Broadcast(3, armyCentroid: new WPos(8000, 8000, 0)),
+			};
+
+			var d = CoalitionFold.Compute(null, allies);
+			Assert.That(d.RescueAssignments.Count, Is.EqualTo(2));
+			Assert.That(d.RescueAssignments[0].ResponderClientIndex, Is.EqualTo(2));
+			Assert.That(d.RescueAssignments[1].ResponderClientIndex, Is.EqualTo(3),
+				"the second request cannot reuse the army already elected for the first");
+
+			// A pool of one still answers only the first call.
+			var thin = new List<TeamBroadcast> { allies[0], allies[1], allies[2] };
+			var d2 = CoalitionFold.Compute(null, thin);
+			Assert.That(d2.RescueAssignments.Count, Is.EqualTo(1));
+		}
+
+		[Test]
 		public void SectorAnchorsFoldDeterministically()
 		{
 			var allies = new List<TeamBroadcast>

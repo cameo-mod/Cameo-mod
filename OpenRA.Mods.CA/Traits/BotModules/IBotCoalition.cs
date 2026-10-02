@@ -133,7 +133,14 @@ namespace OpenRA.Mods.CA.Traits
 					.ThenBy(b => b.ClientIndex)
 					.FirstOrDefault();
 				if (responder != null)
+				{
 					rescue.Add(new CoalitionRescueAssignment(req.ClientIndex, req.DefendPosition, responder.ClientIndex));
+
+					// Review 4.3: one participant answers at most one call per fold — an
+					// elected responder leaves the pool so two simultaneous requests
+					// cannot both claim the same army.
+					freePool.Remove(responder);
+				}
 			}
 
 			// Phase: Defend overrides Push; Push needs a target and a synchronized wave.

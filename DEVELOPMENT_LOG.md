@@ -1,4 +1,28 @@
+# 2026-10-02 — review fixes: broadcast liveness, single-assignment rescue, stale switch groups (fransotto review 3.2/4.2/4.3)
+
+*Devin (dawn), branch `devin/dawn/team-liveness-rescue` — three findings from `CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE` in the team-coordination lane.*
+
+**Done:**
+- **4.2 liveness:** `TeamBlackboard.ValidBroadcast(p, b, now)` — publisher `WinState == Undefined` &&
+  `SnapshotTick > 0` && `now - SnapshotTick <= MaxBroadcastAgeTicks` (600 = 4 × SnapshotInterval) — applied
+  centrally inside `CollectBroadcasts`. A defeated ally's last broadcast can no longer hold its expansion/
+  capture claims, defend requests, target vote or sector anchor open (OpenRA keeps `Player`/`PlayerActor`
+  after defeat). Every consumer inherits it — none invents its own freshness test.
+- **4.3 rescue:** `CoalitionFold.Compute` removes the elected responder from `freePool` — one participant
+  answers at most one defend request per fold; two simultaneous calls can no longer claim the same army.
+- **3.2 stale switch groups:** deleted `AD_army_first` (targets `BaseBuilderBotModuleCA.MinArmyUnitsBeforeBuildings`/
+  `ArmyFirstMinCash` — removed fields; the live group is `AE_army_first` on `ArmyFirstBotModule`) and
+  `AE_spread_assault` (dead `BaseBuilderBotModuleCA.MinBuildingGapCells`; its one live field
+  `MaxHarvestersPerResourceIndice` moved under `AF_harvester_spread` scoped to `@generic` so classic's
+  explicit `0` opt-out survives — the old unqualified target would have flipped it).
+- Tests +2: `ValidBroadcast` boundary/liveness matrix (`TeamBlackboardTest`), one-responder-per-request +
+  thin-pool (`CoalitionFoldTest`).
+
+**Verified:** build 0W/0E; targeted tests 38/38; `ai_arch_audit.py` R2 ok — 56 switch targets verified,
+0 errors; `apply_increment_switches.py --groups AF_harvester_spread --dry-run` = 2 changes, both `@generic`.
+
 # 2026-10-02 — TC-2e: capture-claim deconfliction (the fifth blackboard consumer, AI_ARCHITECTURE 12.17)
+
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/tc2e-capture-claims`.*
 

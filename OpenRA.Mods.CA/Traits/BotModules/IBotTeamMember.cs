@@ -214,9 +214,34 @@ namespace OpenRA.Mods.CA.Traits
 		public static TeamBlackboardSummary Collect(Player me) => Aggregate(CollectBroadcasts(me));
 
 		/// <summary>
+		/// Review 4.2 (CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE): the one
+		/// liveness contract every consumer shares — four snapshot intervals is long
+		/// enough for staggered publishers, short enough that a dead or stalled
+		/// member's last broadcast cannot hold a claim open. A broadcast older than
+		/// this is ignored for all purposes.
+		/// </summary>
+		public const int MaxBroadcastAgeTicks = 600;
+
+		/// <summary>
+		/// One central validity rule before ANY team aggregation (review 4.2): the
+		/// publisher is still in the game (WinState Undefined — OpenRA keeps
+		/// Player/PlayerActor after defeat, so without this a defeated ally's last
+		/// broadcast keeps its claims and defend requests live forever), the
+		/// broadcast was actually published (SnapshotTick &gt; 0), and it is fresh.
+		/// </summary>
+		public static bool ValidBroadcast(Player publisher, TeamBroadcast b, int now) =>
+			b != null
+			&& publisher != null
+			&& publisher.WinState == WinState.Undefined
+			&& b.SnapshotTick > 0
+			&& now - b.SnapshotTick <= MaxBroadcastAgeTicks;
+
+		/// <summary>
 		/// The allied broadcasts themselves (allies only, never the caller) — for
 		/// consumers that need per-ally detail the summary drops, like which ally is
-		/// asking for help and where.
+		/// asking for help and where. Every entry passes <see cref="ValidBroadcast"/>:
+		/// defeated, never-published and stale members drop out here so no consumer
+		/// needs its own freshness rule.
 		/// </summary>
 		public static List<TeamBroadcast> CollectBroadcasts(Player me)
 		{
@@ -224,10 +249,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (me?.World == null)
 				return broadcasts;
 
+			var now = me.World.WorldTick;
 			foreach (var p in me.World.Players.Where(p => p != me && p.IsBot && me.IsAlliedWith(p)))
 			{
 				var member = p.PlayerActor?.TraitsImplementing<IBotTeamMember>().FirstEnabledTraitOrDefault();
-				if (member?.Broadcast != null)
+				if (member?.Broadcast != null && ValidBroadcast(p, member.Broadcast, now))
 					broadcasts.Add(member.Broadcast);
 			}
 
