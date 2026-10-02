@@ -103,7 +103,12 @@ def field_blocks(block: list[str]) -> dict[str, str]:
             current_name = match.group(1)
             current = [line]
         elif current_name is not None:
-            current.append(line)
+            # Comment-only lines must not become part of the previous field's value —
+            # a documented field would read as "differs"/"incorrect RequiresCondition"
+            # the moment a comment lands under it (2026-10-02 false FAIL on all six
+            # personalities).
+            if not line.lstrip().startswith("#"):
+                current.append(line)
     if current_name is not None:
         fields[current_name] = "\n".join(current)
     return fields

@@ -59,6 +59,10 @@ namespace OpenRA.Mods.CA.Traits
 		int buildingDelayModifier = 100;
 		int buildingIntervalModifier = 100;
 
+		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
+		// production. Empty = nothing pauses, upstream-identical.
+		IBotRequestPauseBuildingProduction[] pauseBuilding;
+
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
 			PlayerResources pr, IResourceLayer rl)
 		{
@@ -239,6 +243,13 @@ namespace OpenRA.Mods.CA.Traits
 						queue.Actor.Owner, item.Name, baseBuilder.Info.MinArmyUnitsBeforeBuildings, baseBuilder.Info.ArmyFirstMinCash);
 					return false;
 				}
+
+				// Cameo (§12.20): the army-first vote — an advisor can hold new non-refinery buildings so cash
+				// flows to unit production while it needs to (refineries stay exempt, same as the cash gate).
+				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+				if (!baseBuilder.Info.RefineryTypes.Contains(item.Name)
+					&& pauseBuilding.Any(p => p.PauseBuildingProduction))
+					return false;
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
@@ -718,27 +729,65 @@ namespace OpenRA.Mods.CA.Traits
 			// off-limits so a new building keeps that much empty space to existing structures.
 			// The buffer is built once per search from the per-tick playerBuildings cache —
 			// never relaxed inside this call; an exhausted annulus returns null and the
-			// caller retries later.
+			// caller retries later. AllowInvalidPlacement actors bypass CanPlaceBuilding
+			// entirely, so they keep bypassing the spacing rule too — same opt-out semantic.
 			var gap = minBuildingGap < 0 ? baseBuilder.Info.MinBuildingGapCells : minBuildingGap;
 			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
 
-			foreach (var cell in cells)
+			// Cameo (§12.20): an active placement advisor re-ranks a bounded prefix of placeable,
+			// gap-valid cells (spread-out bases instead of first-valid packing). No advisor = first
+			// valid cell wins, exactly as upstream.
+			var advisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			if (advisor != null)
 			{
-				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-					continue;
+				var candidates = new List<CPos>();
+				foreach (var cell in cells)
+				{
+					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+						continue;
 
-				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-					continue;
+					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+						continue;
 
-				if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-					continue;
+					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
+						continue;
 
-				// AllowInvalidPlacement actors bypass CanPlaceBuilding entirely, so they keep
-				// bypassing the spacing rule too — same opt-out semantic.
-				if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
-					continue;
+					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+						continue;
 
-				return (cell, center, actorVariant);
+					candidates.Add(cell);
+					if (candidates.Count >= baseBuilder.Info.PlacementAdvisorCandidates)
+						break;
+				}
+
+				if (candidates.Count > 0)
+				{
+					var chosen = advisor.ChooseCell(actorInfo, candidates,
+						c => world.CanPlaceBuilding(c, actorInfo, bi, null));
+					if (chosen.HasValue && candidates.Contains(chosen.Value))
+						return (chosen.Value, center, actorVariant);
+
+					return (candidates[0], center, actorVariant);
+				}
+			}
+			else
+			{
+				foreach (var cell in cells)
+				{
+					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+						continue;
+
+					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+						continue;
+
+					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
+						continue;
+
+					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+						continue;
+
+					return (cell, center, actorVariant);
+				}
 			}
 
 			return (null, center, 0);

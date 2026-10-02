@@ -6,12 +6,12 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `ai_contract_distinct_module_types` | 57 | 57 | ✅ |
-| `ai_contract_player_module_instances` | 80 | 80 | ✅ |
+| `ai_contract_distinct_module_types` | 63 | 63 | ✅ |
+| `ai_contract_player_module_instances` | 88 | 88 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
 | `shield_versus_mean` | 97.6157 | 184.71 | **MISMATCH** |
 | `shield_hp_factor` | 1.02443 | 0.541389 | **MISMATCH** |
-| `shield_damage_share` | 0.0183167 | 0.0160536 | **MISMATCH** |
+| `shield_damage_share` | 0.0183167 | 0.0160276 | **MISMATCH** |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 326 | 326 | ✅ |
@@ -33,8 +33,8 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
 | `dta_elite_weapons_reachable` | 131 | 131 | ✅ |
 | `armament_unproven_peer_votes` | 0 | 0 | ✅ |
-| `armament_reference_tier_original` | 140 | 140 | ✅ |
-| `armament_pairing_input_fingerprints` | 476 | 476 | ✅ |
+| `armament_reference_tier_original` | 140 | 141 | **MISMATCH** |
+| `armament_pairing_input_fingerprints` | 476 | 514 | **MISMATCH** |
 | `shared_attack_cycle_actors` | 15 | 15 | ✅ |
 | `mammoth_armament_voters` | 3 | 3 | ✅ |
 | `ini_armament_views_eligible` | 1388 | 1388 | ✅ |
@@ -45,7 +45,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `ranged_charge_actors` | 4 | 4 | ✅ |
 | `railtower_immediate_reacquisition_period` | 210 | 210 | ✅ |
 | `tesla_coil_attack_period` | 131 | 131 | ✅ |
-| `cameo_family_labelled_weapons` | 1566 | 1566 | ✅ |
+| `cameo_family_labelled_weapons` | 1567 | 1567 | ✅ |
 | `warhead_reference_groups` | 1674 | 1674 | ✅ |
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |

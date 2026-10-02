@@ -80,6 +80,21 @@
 	# to the genericbot tier list via tools/ai/increment_switches.yaml.
 	GrantConditionOnBotOwner@cn3stealthsquads:
 		Condition: cn3_stealth_squads
+
+	# SP-1/AF-1 (AI_ARCHITECTURE §12.20): spacing advisor + army-first building gate for genericbot.
+	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
+	GrantConditionOnBotOwner@spacedbase:
+		Condition: spaced_base
+		Bots: fransbot
+	GrantConditionOnBotOwner@armyfirst:
+		Condition: army_first
+		Bots: fransbot
+	# ATK-1 (the line-of-death fix): Rush assault squads fan out onto a target-centred arc before the
+	# commit, so the wave arrives from several bearings and fires together. The arm flips this to the
+	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@assaultfanout:
+		Condition: assault_fanout
+
 		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
@@ -3444,8 +3459,17 @@ Player:
 					Attractiveness: -9
 					TargetMetric: Value
 					CheckRadius: 9000
-	HarvesterBotModuleCA:
-		RequiresCondition: genericbot || classicbot
+	# HS-1 (AI_ARCHITECTURE §12.20): the harvester module is split into named instances so the increment
+	# switch can retune the field-deficit redirect cadence on genericbot only - @classic stays the
+	# upstream A/B reference. Fields today are byte-identical between the two.
+	HarvesterBotModuleCA@generic:
+		RequiresCondition: genericbot
+		HarvestersPerRefinery: 3
+		MaxHarvesters: 24
+		AdditionalHarvesters: 1
+		ScanForIdleHarvestersInterval: 1000
+	HarvesterBotModuleCA@classic:
+		RequiresCondition: classicbot
 		HarvestersPerRefinery: 3
 		MaxHarvesters: 24
 		AdditionalHarvesters: 1
@@ -3483,6 +3507,36 @@ Player:
 	# increment A/B arms it (switch group AB).
 	GarrisonContestBotModule:
 		RequiresCondition: genericbot && garrison_contest
+	# ATK-1 (the line-of-death fix): Rush assault squads fan out onto a target-centred arc
+	# before the commit - one slot per member on the far-side ring (AssaultFormationPlanner),
+	# so the wave arrives from several bearings and fires together instead of walking
+	# single-file into the guns. This module is the IBotAssaultFormation provider: settings
+	# plus the per-squad same-target refanout cooldown; orders stay with the squad states.
+	# `genericbot && assault_fanout`: off on master until the increment A/B arms it.
+	AssaultFormationBotModule:
+		RequiresCondition: genericbot && assault_fanout
+		MinSquadSize: 4
+		FanoutRadiusCells: 8
+		ArcDegrees: 180
+		AssemblePercent: 60
+		StageDeadlineTicks: 500
+		FanoutTriggerCells: 12
+		SlotReachCells: 2
+		RefanoutCooldownTicks: 750
+	# SP-1 (AI_ARCHITECTURE §12.20): the base-spacing advisor. findPos still owns validity (CanPlaceBuilding,
+	# base radius, distance requirements); this re-ranks its first N placeable candidates by distance to the
+	# nearest own building, so bases grow outward with gaps instead of packing into a traffic-jam monolith.
+	# Refineries and defenses keep their own placement owners (EX-2 field claims / DEF-3 coverage).
+	# `genericbot && spaced_base`: off on master until the increment A/B arms it (switch group AD).
+	SpacingAdvisorBotModule:
+		RequiresCondition: genericbot && spaced_base
+	# AF-1 (AI_ARCHITECTURE §12.20): the army-first vote. While cash sits under ArmyReserveLowCash the
+	# base builder's queues hold new non-refinery buildings so unit production eats the income first;
+	# resumes above ArmyReserveHighCash (hysteresis, no flicker). Refineries stay exempt - they ARE the
+	# economy - and the vote is inert until a unit producer exists, so tech sequencing cannot stall.
+	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
+	ArmyFirstBotModule:
+		RequiresCondition: genericbot && army_first
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
