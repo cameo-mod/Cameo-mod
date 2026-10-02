@@ -1,3 +1,30 @@
+# 2026-10-02 — Assault fan merged into the concave (one deploy state, two shapes; AI_ARCHITECTURE 12.7a objective shape)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/coh_formation`; nothing committed, no game launch).*
+
+**Done:**
+- DAWN's assault fan (12.20b, private fields + `IssueAssaultFanOrders` in `GroundUnitsAttackMoveStateCA`) is removed; the
+  attack-move state has ONE entry into `GroundUnitsConcaveStateCA`, which now has two shapes chosen by the anchor
+  (`ShouldEnter(owner, out shape)`): Army (provider-gated concave, unchanged) and Objective (no armed enemy in contact, squad
+  target within `AssaultEngageRadiusCells`, gate `FormationMovement` + Rush = where the fan was live).
+- One planner: `ConcaveEvalCA.ProngCount` / `ObjectiveProngs` / `PlanObjective` (pure, integer, mirrored wings, `ActorID % prongs`).
+  Settings keep their names/defaults (`AssaultFan*`, `AssaultEngageRadiusCells`, `AssaultSyncHoldTicks`) - no yaml change.
+- Objective cooldown (750 ticks, same ground) lives on `SquadCA` (`DeployCooldownCell/Tick`): no provider exists for it.
+- 3 new `ConcaveEvalTest` cases (prong clamp, front width + mirror, determinism + one slot per member). Tests 661/661, build 0 errors,
+  fog / frankenstein / personalities / wiring / direct-mutation audits PASS, `grep fanBuckets|fanHolding|fanPush` empty.
+
+**Behaviour differences vs the fan (genericbot, switch off):** forming uses per-member `AttackMove` orders that spend micro
+actions (the fan used one grouped order per prong, unbudgeted) and no `Stop` hold; prong count / slot hash use weaponed non-scout
+members only (the fan counted every unit and pushed scouts/unarmed too - they now keep their last order until the attack state);
+after the push the squad is in `GroundUnitsAttackState` (the fan stayed in attack-move and re-pushed each tick); the 750-tick
+same-ground cooldown is new (the fan re-fanned whenever the attack-move state re-activated); re-plan moves at 3 cells of target
+movement (fan: 8); the deploy aborts if the target dies or leaves the engage radius; slots are terrain-snapped per member (the fan
+used raw cells); entry also requires `NearestEngagedEnemy` null and siege verdict Advance (the fan sat after both). With the
+`AG_assault_fanout` switch ON and no armed enemy in contact, a target-anchored concave becomes the objective shape (prongs).
+classic: `SquadManagerBotModuleCA@classic` does not set `FormationMovement` and there is no provider -> `ShouldEnter` returns
+false at its first gate, unchanged.
+**Not done:** no boot gate / A/B (worktree). **Next:** boot-gate on merge; the increment A/B measures the unified state.
+
 # 2026-10-02 — Scale targets: base and army grow with the seen enemy (ST, DESIGN 19.10 / AI_ARCHITECTURE 12.22)
 
 **Done (branch `claude/scale_targets`, dormant: `scale_targets` is granted to `fransbot` only until `ST_scale_targets` arms it):**

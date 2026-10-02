@@ -239,5 +239,69 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(ConcaveEvalCA.CommitDelays(new long[] { 100 }, new[] { 0 }), Is.EqualTo(new[] { 0 }));
 		}
+
+		// ---- Objective shape (DAWN's assault fan merged in) ----
+
+		static List<uint> Ids(int n)
+		{
+			return Enumerable.Range(1, n).Select(i => (uint)i).ToList();
+		}
+
+		[Test]
+		public void ObjectiveProngCountIsHalfTheSquadClampedToMinAndMax()
+		{
+			Assert.That(ConcaveEvalCA.ProngCount(1, 3, 8), Is.EqualTo(3));
+			Assert.That(ConcaveEvalCA.ProngCount(6, 3, 8), Is.EqualTo(3));
+			Assert.That(ConcaveEvalCA.ProngCount(10, 3, 8), Is.EqualTo(5));
+			Assert.That(ConcaveEvalCA.ProngCount(40, 3, 8), Is.EqualTo(8));
+			Assert.That(ConcaveEvalCA.ProngCount(0, 0, 0), Is.EqualTo(1), "never below one prong");
+		}
+
+		[Test]
+		public void ObjectiveProngsSpreadOverTheFrontAndMirror()
+		{
+			// Objective at Anchor, the squad east of it: the approach axis is +X.
+			var prongs = ConcaveEvalCA.ObjectiveProngs(Anchor, Frontline, 10 * 1024, 200, 5);
+			Assert.That(prongs, Has.Length.EqualTo(5));
+
+			var degrees = prongs.Select(Deg).ToList();
+			Assert.That(degrees.Max() - degrees.Min(), Is.EqualTo(200).Within(2), "front width");
+			Assert.That(degrees[2], Is.EqualTo(0).Within(1), "middle prong on the approach axis");
+			foreach (var pr in prongs)
+				Assert.That(Dist(pr, Anchor), Is.EqualTo(10 * 1024).Within(40));
+
+			// Symmetric headings: prong i and prong n-1-i mirror across the axis exactly.
+			for (var i = 0; i < prongs.Length / 2; i++)
+			{
+				var a = prongs[i] - Anchor;
+				var b = prongs[prongs.Length - 1 - i] - Anchor;
+				Assert.That(a.X, Is.EqualTo(b.X).Within(1), "mirror X " + i);
+				Assert.That(a.Y, Is.EqualTo(-b.Y).Within(1), "mirror Y " + i);
+			}
+
+			Assert.That(ConcaveEvalCA.ObjectiveProngs(Anchor, Frontline, 10 * 1024, 200, 1)[0].X,
+				Is.EqualTo(Anchor.X + 10 * 1024).Within(1), "a single prong takes the axis");
+		}
+
+		[Test]
+		public void ObjectivePlanGivesEveryMemberAHeadingDeterministically()
+		{
+			var ids = Ids(13);
+			var a = ConcaveEvalCA.PlanObjective(Anchor, Frontline, 10 * 1024, 200, ids, 3, 8);
+			var b = ConcaveEvalCA.PlanObjective(Anchor, Frontline, 10 * 1024, 200, ids, 3, 8);
+
+			Assert.That(a, Has.Length.EqualTo(13));
+			Assert.That(a.Select(s => s.Member), Is.EqualTo(Enumerable.Range(0, 13)), "one slot per member, input order");
+			Assert.That(a.Select(s => (s.Pos, s.Rank)), Is.EqualTo(b.Select(s => (s.Pos, s.Rank))));
+			Assert.That(a.Select(s => s.Rank).Max(), Is.EqualTo(5), "13 members -> 6 prongs");
+			Assert.That(a.Select(s => s.Rank).Distinct().Count(), Is.EqualTo(6));
+
+			// Same id, same prong whatever the squad order or size of the others.
+			Assert.That(a[6].Rank, Is.EqualTo((int)(7 % 6u)));
+
+			Assert.That(ConcaveEvalCA.PlanObjective(Anchor, Frontline, 10 * 1024, 200, new List<uint>(), 3, 8), Is.Empty);
+			Assert.That(ConcaveEvalCA.PlanObjective(Anchor, Anchor, 10 * 1024, 200, Ids(4), 3, 8), Has.Length.EqualTo(4),
+				"coincident anchor and approach: default axis");
+		}
 	}
 }

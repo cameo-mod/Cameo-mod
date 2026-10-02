@@ -2102,11 +2102,34 @@ plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `M
 section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
 measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
 
+**Objective shape (merged DAWN's assault fan, 2026-10-02).** The §12.20b assault fan was a second implementation of
+"deploy before the first shot" inside `GroundUnitsAttackMoveStateCA` (§19.3: one module per decision). It is now the
+second SHAPE of this state, chosen by the anchor: `GroundUnitsConcaveStateCA.ShouldEnter(owner, out shape)` returns
+**Army** (observed armed enemies within `FanoutTriggerCells`; the range-matched concave above; gate = the
+`IBotAssaultFormation` provider, `AG_assault_fanout`, off on master), **Objective** or none. *Objective* = no armed enemy
+in contact (none in the attack scan either, `NearestEngagedEnemy` null), the squad target within
+`AssaultEngageRadiusCells` (18) of the frontline centroid, `FormationMovement` on, siege advisors say Advance, squad off its
+cooldown. Gate = today's fan gate (`FormationMovement` + Rush), so it stays LIVE exactly where the fan was (genericbot
+personalities) and needs no provider; classic sets neither `FormationMovement` nor a provider, so it is unchanged. Settings
+stay `AssaultFanRadiusCells` / `AssaultFanMinSlots` / `AssaultFanMaxSlots` / `AssaultEngageRadiusCells` /
+`AssaultSyncHoldTicks` (same names and defaults). One planner: `ConcaveEvalCA.ProngCount` (members/2 clamped 3..8),
+`ObjectiveProngs` (prongs on a 200-degree front around the objective, centred on objective -> centroid, wings mirrored with
+the `WRot` conjugate, integer math) and `PlanObjective` (member -> prong by `ActorID % prongs`, as the fan did); the state
+terrain-snaps each slot like the concave's (off-map prongs project onto the ring). Machinery shared with the army shape:
+form (`AttackMove` to the prong, re-issued while idle, late joiners re-plan), commit on formed / hold expiry /
+under fire (`NearestEngagedEnemy`), the pending-order commit, hand-over to `GroundUnitsAttackState`, and the same
+orders-only micro-action spend. Differences: the commit is "formed" when every prong is within 6 cells of its slot or
+`AssaultSyncHoldTicks` expired, the push is zero-delay (together, as the fan) - no stagger; the same-ground cooldown (750
+ticks, the provider's `RefanoutCooldownTicks` default, same radius = `AssaultEngageRadiusCells`) is kept ON THE SQUAD
+(`SquadCA.DeployCooldownCell/Tick`), not the provider: the objective shape runs with no provider, and a squad-scoped record
+dies with its squad with nothing to prune. The attack-move state has ONE entry into the deploy state (after the contact-first
+all-in) and no fan fields.
+
 ### 12.7b Contact-first all-in (maintainer 2026-10-02) — and the ONE "the fight is on" test
 
 > *Maintainer, spectating a 6v6:* a large blob stood in formation while part of the force was already trading fire.
 
-Formation (the march §12.7, the concave §12.7a, the assault fan §12.20b) is for BEFORE the first shot. When the fight is
+Formation (the march §12.7, the concave §12.7a incl. its objective shape = the former assault fan) is for BEFORE the first shot. When the fight is
 on for ANY member, a Rush squad commits wholesale on the same tick (Lanchester: staging while the local fight runs feeds
 the enemy one prong at a time). `GroundStatesCA.NearestEngagedEnemy` is the single definition, used by the attack-move
 state's all-in, the concave's entry (declines) and the concave's commit (zero-delay under-fire commit):
@@ -2836,17 +2859,9 @@ never *aimed* at it.
 Four more maintainer-observed failures, all "the stack does the simple thing wrong"
 class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
 
-**Assault fan** (`GroundUnitsAttackMoveStateCA.IssueAssaultFanOrders`, gated under
-`FormationMovement` — already on for genericbot tiers). The §12.7a concave fixes
-*contact* geometry; this fixes *approach* geometry: inside `AssaultEngageRadiusCells`
-(18) the Rush column breaks into `AssaultFanMin..MaxSlots` (3–8) prongs assigned by
-stable `ActorID % slots` hashing, each ordered to an arc slot on a ~200-degree front
-`AssaultFanRadiusCells` (10) around the target — so the squad arrives on several
-headings instead of filing down one route. Early arrivers `Stop`-hold at their slot
-while any prong is >6 cells out, up to `AssaultSyncHoldTicks` (125), then the push
-latches and everyone `AttackMove`s the target center together. Fan state rebuilds if
-the target moves >8 cells. Outside the engage radius the §12.7 column march still
-applies, so guerrilla/harass squads are untouched.
+**Assault fan** - merged on 2026-10-02 into the unified deploy state as its *objective shape*: see **§12.7a "Objective
+shape (merged DAWN's assault fan)"**. `IssueAssaultFanOrders` and the fan fields are gone; the settings
+(`AssaultFan*`, `AssaultEngageRadiusCells`, `AssaultSyncHoldTicks`) and the `FormationMovement` gate are unchanged.
 
 **Building spacing** (`BaseBuilderQueueManagerCA.findPos`, `MinBuildingGapCells` = 2
 default-on, `MinBuildingGapDefensesCells` = 1). The golden rule made mechanical: a
