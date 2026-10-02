@@ -63,6 +63,9 @@
 	GrantConditionOnBotOwner@cn3bridgerepair:
 		Condition: cn3_bridge_repair
 		Bots: fransbot
+	GrantConditionOnBotOwner@plugspawn:
+		Condition: plug_spawn
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3493,6 +3496,41 @@ Player:
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
 	# untouched. Squads join when NOVA's lane adopts it; the engineers claim through EngineerBotModule (ENG).
+	# PLUG-SPAWN (restored vendored module, extended to a plug->hosts map): WC2 keep/castle and
+	# Zerg lair/hive tech chains, TS turbines + superweapon uplinks, Temple-of-Nod nuke, refinery
+	# collectors and bunker add-ons are all plugs — without this the bot can never produce them.
+	# The module gates on each plug's Buildable.Prerequisites (techTree) so no tech path is skipped.
+	# `genericbot && plug_spawn`: off on master until the increment A/B arms it (group F).
+	PlugSpawnerBotModuleCA:
+		RequiresCondition: genericbot && plug_spawn
+		Plugs:
+			cabal_missilesilo: cabal_core
+			naxis_machinegunbunkeraddon: naxis_naxibunker
+			naxis_miniflakbunkeraddon: naxis_naxibunker
+			naxis_mortarbunkeraddon: naxis_naxibunker
+			protoss_vespenegascollector: protoss_assimilator
+			td_gdi_ioncannonuplink: td_gdi_advancedcommunicationscenter
+			td_nod_nuclearmissilesilo: td_nod_templeofnod
+			terran_expandedstorage: terran_supplydepot
+			terran_vespenegascollector: terran_refinery
+			tkm_supportlabor: tkm_orerefinery
+			ts_gdi_droppoduplink: ts_gdi_upgradecenter
+			ts_gdi_ioncannonuplink: ts_gdi_upgradecenter
+			ts_gdi_powerturbine: ts_gdi_powerplant
+			wc2_humans_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
+			wc2_humans_castle: wc2_humans_townhall
+			wc2_humans_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
+			wc2_humans_keep: wc2_humans_townhall
+			wc2_orcs_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
+			wc2_orcs_fortress: wc2_orcs_greathall
+			wc2_orcs_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
+			wc2_orcs_stronghold: wc2_orcs_greathall
+			zerg_greaterspire: zerg_spire
+			zerg_hive: zerg_hatchery
+			zerg_lair: zerg_hatchery
+			zerg_sporecolony_defense: zerg_creepcolony
+			zerg_sunkencolony: zerg_creepcolony
+			zerg_vespenegascollector: zerg_extractor
 	BotUnitLeaseRegistry:
 		EnforceAtOrderGate: true
 		RequiresCondition: genericbot

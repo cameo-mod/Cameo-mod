@@ -85,9 +85,9 @@ telemetry that the branch-coverage audit walks.
                     │                                             │
                     │  24 squad FSM states (idle→stage→attack→    │
                     │  flee, ground/air/navy/support)             │
-                    │  HarvesterBotModuleCA, McvExpansionManager, │
-                    │  MCVManagerBotModuleCA, repairs, deploy,    │
-                    │  capture, bridge, beacon respond, crates    │
+                    │  HarvesterBotModuleCA, McvExpansionManager  │
+                    │  (engine), repairs, PlugSpawner (F),        │
+                    │  deploy, capture, bridge, beacon respond    │
                     └──────────────┬──────────────────────────────┘
                                    │
                     ┌──────────────▼──────────────────────────────┐
@@ -119,6 +119,7 @@ decision do so through a provider seam; the owner emits the order.
 | What a squad does | SquadManagerBotModuleCA FSM | director pace, fogged enemies, missions, siege windows, route threat, action budget |
 | Which enemy to target | SquadManagerBotModuleCA | `IBotMainTargetProvider` (learned-priors-weighted) |
 | Capture jobs | EngineerBotModule | `IBotCaptureTransportProvider` (FB2), protection requests |
+| Plug production | PlugSpawnerBotModuleCA (F) | plug's own `Buildable.Prerequisites` via TechTree; slot gating via `Pluggable.Requirements` |
 | Bridge repair | BridgeRepairBotModule (X) | remembers defended sites, leases repairers |
 | Siege window | SiegeEvaluatorBotModule | remembered defences, failure memory |
 | Scout routes | ScoutBotModule | threat regions, influence layers, leads |
@@ -140,15 +141,15 @@ passed via the Situation snapshot and `RegionMemory` constructor respectively.
 | `IBot*` seams | 31/31 wired (provider AND consumer present) |
 | Squad FSM states | 24/24 concrete states instantiated; 3 abstract bases (`*StateBaseCA`) expected |
 | Module activation | every `RequiresCondition` has a granting path; `cnX`/`fb`-gated modules reachable via increment-switch arming |
-| Info bools | 61 total; 24 yaml-enabled, 20 in switch manifest, the rest are struct-internal fields or dormant-but-referenced flags (`UseMissions`, `UseRiskRouting`, `PublishMissions`, `FogCanaryEnabled`, `SiegeMemoryEnabled`, `WeakIncludesDefence`, `RestrictMCVDeploymentFallbackToBase`) — reachable, currently off |
+| Info bools | 61 total; 24 yaml-enabled, 20 in switch manifest, the rest are struct-internal fields or dormant-but-referenced flags (`UseMissions`, `UseRiskRouting`, `PublishMissions`, `FogCanaryEnabled`, `SiegeMemoryEnabled`, `WeakIncludesDefence`) — reachable, currently off |
+| Module classes with no yaml wiring | 3 found (2026-10-02): `McvManagerBotModuleCA` + `PowerDownBotModuleCA` deleted (superseded by engine `McvExpansionManagerBotModule`/`PowerDownBotModule`); `PlugSpawnerBotModuleCA` **restored and wired** — plugs carry whole tech chains (WC2 keep/castle, Zerg lair/hive, TS uplinks, temple nuke) — gated `genericbot && plug_spawn`, switch group F |
+| `Info` bool defaults | corrected 2026-10-02 (EMBER): `UseMissions`, `UseRiskRouting`, `PublishMissions` default `true` in C# — they are LIVE, not dormant. The true dormant surface = switch-gated groups + `FogCanaryEnabled`, `SiegeMemoryEnabled` (yaml:false), `WeakIncludesDefence` (yaml:false) |
 
 ### Dormant paths that need a switch group or a removal call
 
-- `UseMissions` (SquadManagerBotModuleCA) — mission-provider consumption wired but never armed.
-- `UseRiskRouting` (SquadManagerBotModuleCA) — route-threat router consumption armed nowhere.
-- `PublishMissions` (BotSituation) — mission publishing wired, never on.
-- `RestrictMCVDeploymentFallbackToBase` (MCVManagerBotModuleCA) — fallback constraint wired, never on.
 - `FogCanaryEnabled` (SquadManagerBotModuleCA) — fog-canary trap exists, off.
+- `SiegeMemoryEnabled` (SiegeEvaluatorBotModule, yaml:false) — failure-memory consumer wired, off.
+- `WeakIncludesDefence` (BotSituation, yaml:false) — weak-target definition excludes defences today.
 
 These are the candidates for either a switch letter or an explicit "dead by
 design — remove" call. They are *not* unreachable code; they are unarmed
@@ -161,7 +162,7 @@ Where two modules can decide the same thing — the merge targets:
 | Overlap | Today | Correct end state |
 |---|---|---|
 | Bridge repair | `EngineerBotModule` has its own RepairBridge job AND `BridgeRepairBotModule` (X) re-orders the same bridges | One owner: BridgeRepair owns the *decision* (which bridge, when), EngineerBotModule provides the *unit* via a `IBotBridgeRepairJob` seam |
-| MCV request | `ExpansionPlannerBotModule.RequestMcv` (greedy, bypasses cash gate) AND `MCVManagerBotModuleCA` still runs its own 4000-cash gate | One owner: planner owns *when/want*, MCVManager owns *which MCV deploys where* via `IBotExpansionTargetProvider` — already partially there; close the double-request |
+| MCV want | `ExpansionPlannerBotModule.RequestMcv` (greedy) AND engine `McvExpansionManagerBotModule.BuildMCV` (4000-cash gate) both call `RequestUnitProduction` | Verified benign (2026-10-02): both gates dedupe — the engine manager checks `ProductionQueue.AllQueued` + `RequestedProductionCount == 0`, the planner counts `active + queued` against its target. Two want-sources, one guarded queue. The genuinely dead third requester (`McvManagerBotModuleCA`) was deleted |
 | Defence placement | Advisor path vs `PlaceDefenseTowardsEnemyChance` fallback | Advisor wins when present (clean alternative, by design) — fine |
 | Capture | `CaptureManagerBotModuleCA` (classic) vs `EngineerBotModule` (genericbot) | Already split by bot type — the merged genericbot path is EngineerBotModule owning capture+bridge+transport; classic keeps its CA copy |
 | Fransbot stack | 27 vendored modules run whole-cloth under `fransbot` — a parallel architecture, not a merge | Harvest per-module (route B) behind the existing IBot seams; the vendored stack stays a donor only |
@@ -199,13 +200,17 @@ two brains side by side.
 
 ## What would still improve it
 
-- **`UseMissions` / `UseRiskRouting` / `PublishMissions` deserve a decision** —
-  wire a switch letter, or delete the flags. They're the largest dormant surface.
+- **Dangling mission outcomes (LC8)** — open attempts never write a terminal
+  record at `GameOver` (EMBER's round-trip: 4 dangling `capture:*` in the 2v2
+  smoke, 57 dangling across the A/B corpus). Executors should emit
+  `Released(match_end)` on world teardown.
 - **Bridge-repair double owner** — EngineerBotModule and BridgeRepairBotModule
   both decide RepairBridge; merge behind one job list.
-- **MCV double request** — planner's greedy `RequestMcv` and MCVManager's cash
-  gate can both fire; make MCVManager consume `IBotExpansionTargetProvider`'s
-  want-signal exclusively.
+- **MCV want converged** — the dead `McvManagerBotModuleCA` is gone; the two
+  live want-sources (planner greedy `RequestMcv`, engine `McvExpansionManager`
+  cash gate) both dedupe into the guarded `RequestUnitProduction` queue, so the
+  remaining improvement is cosmetic: publish the planner's want as a provider
+  the engine manager consults instead of keeping a second gate.
 - **CA drift sync** — upstream "AI routing / harasser squads" not yet pulled.
 - **`_ra_doubles` seat bias** — seats 2,3 won both 2v2s regardless of team;
   harness-side, document it before any team A/B reads results.
