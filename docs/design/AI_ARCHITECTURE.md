@@ -2833,6 +2833,16 @@ never *aimed* at it.
 
 ### 12.20b The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
 
+> **Merged 2026-10-02 (maintainer ruling, DESIGN 19.3 one module per decision).** The three DAWN knobs that duplicated
+> EMBER's SP-1/HS-1/AF-1 now have ONE owner each; the BaseBuilder fields `MinBuildingGapCells`,
+> `MinBuildingGapDefensesCells`, `MinArmyUnitsBeforeBuildings`, `ArmyFirstMinCash` and the groups `AD_army_first` and
+> `AE_spread_assault` are gone. **Spacing:** `SpacingAdvisorBotModule` (genericbot only) owns the hard gap (2 / 1, LIVE;
+> `findPos` asks `IBotPlacementAdvisor`, no advisor = no gap) and the switched re-ranking. **Harvester:**
+> `HarvesterBotModuleCA.MaxHarvestersPerResourceIndice` (4, LIVE; 0 = unlimited) stays the core, the HS-1 cadence is the
+> one switch `AF_harvester_spread`. **Army-first:** `ArmyFirstBotModule` owns both the DAWN army-count gate and the AF-1
+> cash vote, behind the one switch `AE_army_first`. **classic opts out:** no advisor, `MaxHarvestersPerResourceIndice: 0`
+> on `@classic`, no army-first (it behaves as before 10-02). Details below describe the original rules; the owners are above.
+
 Four more maintainer-observed failures, all "the stack does the simple thing wrong"
 class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
 
@@ -2879,6 +2889,17 @@ _garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first
 
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
+
+**Single owners (2026-10-02 merge with DAWN 12.20b).**
+- *Spacing* — `SpacingAdvisorBotModule` loads on `genericbot` alone and always exposes the hard gap
+  (`MinBuildingGapCells` 2, `MinBuildingGapDefensesCells` 1; `BuildingGapRule` is the pure check); the SP-1 re-ranking
+  runs only when `RerankCandidates` is true (switch `AD_spaced_base_placement`, no longer a granted condition).
+- *Harvester* — one mechanism in `HarvesterBotModuleCA`: the per-field cap (`HarvesterFieldCap`, 0 = unlimited) is live,
+  `ScanForLowEffectHarvestersInterval` (HS-1 cadence) stays behind `AF_harvester_spread`; `@classic` sets the cap to 0.
+- *Army-first* — `ArmyFirstBotModule` = AF-1 cash hysteresis OR DAWN army-count gate (`MinArmyUnitsBeforeBuildings` 0 off by
+  default, 14 / `ArmyFirstMinCash` 1500 under `AE_army_first`). `IBotRequestPauseBuildingProduction.PausesBuilding(building,
+  essential)`: the base builder classifies essentials (conyard, refinery, power, first factory), the module decides.
+  Own units only (fog honest); `ArmyFirstEval` is the pure logic.
 
 Three switch-gated patches for the maintainer's second failure report (the 6v6 review):
 buildings packed wall-to-wall into a pathfinder jam, dozens of harvesters queueing on one

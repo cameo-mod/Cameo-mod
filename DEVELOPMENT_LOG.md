@@ -1,3 +1,18 @@
+# 2026-10-02 — Merge DAWN/EMBER duplicates: building gap, harvester cap, army-first (one owner each)
+
+**Done (worktree `claude/coh_base`, written by a Claude Sonnet sub-agent for the Opus coordinator, not committed):**
+- Spacing: `SpacingAdvisorBotModule` owns the hard gap (2 / 1, LIVE, genericbot only; `IBotPlacementAdvisor` gained
+  `RanksCandidates` + the two gaps) and the re-ranking (`RerankCandidates`, switch `AD_spaced_base_placement`). BaseBuilder
+  fields removed; `findPos` takes `defenseGap`; the `spaced_base` condition granter is gone.
+- Harvester: per-field cap stays in `HarvesterBotModuleCA` (pure `HarvesterFieldCap`, 0 = unlimited); `@classic` sets 0;
+  `AF_harvester_spread` (HS-1 cadence) is the one switch.
+- Army-first: `ArmyFirstBotModule` = AF-1 cash vote + DAWN army-count gate; `PausesBuilding(building, essential)` replaces
+  the property; essentials = conyard/refinery/power/first factory. One switch `AE_army_first` (14 / 1500); `AD_army_first`
+  and `AE_spread_assault` deleted. Off on master.
+- `SpreadRulesTest` (9 tests); docs 12.20 / 12.20b updated; fog manifest refreshed (+1 own-unit count in ArmyFirst, -1 in BaseBuilder).
+
+**Not done:** no boot gate or A/B (worktree, no game launch). **Next:** boot-gate, then one increment A/B for AD/AE/AF.
+
 # 2026-10-02 — Scale targets: base and army grow with the seen enemy (ST, DESIGN 19.10 / AI_ARCHITECTURE 12.22)
 
 **Done (branch `claude/scale_targets`, dormant: `scale_targets` is granted to `fransbot` only until `ST_scale_targets` arms it):**

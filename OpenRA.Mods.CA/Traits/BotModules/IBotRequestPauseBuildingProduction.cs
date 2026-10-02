@@ -18,6 +18,11 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public interface IBotRequestPauseBuildingProduction
 	{
-		bool PauseBuildingProduction { get; }
+		/// <summary>
+		/// Whether the base builder should hold <paramref name="building"/> this tick. <paramref name="essential"/>
+		/// is the base builder's own classification (construction yard, refinery, power, first production
+		/// building) - providers normally let essentials through so the economy and tech chain never stall.
+		/// </summary>
+		bool PausesBuilding(ActorInfo building, bool essential);
 	}
 }
