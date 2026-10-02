@@ -16295,3 +16295,13 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 `siegemortarthermobaric`, `ttankzap2`) are now dead content in production — flagging to
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
+
+- 2026-10-02 nova: AI dataflow audit — `docs/design/AI_DATAFLOW.md` added: the full
+  module dataflow chart (observe→synthesize→plan→arbitrate→execute→verify), the
+  decision-ownership table, and the coverage audit results: all 31 `IBot*` seams have
+  live provider+consumer wiring, all 24 concrete squad FSM states are instantiated,
+  every `RequiresCondition` has a granting path, zero dead Info bools. Dormant-but-
+  referenced flags flagged for a switch-or-remove decision (`UseMissions`,
+  `UseRiskRouting`, `PublishMissions`, `RestrictMCVDeploymentFallbackToBase`,
+  `FogCanaryEnabled`); the two real decision-owner overlaps recorded (Engineer↔
+  BridgeRepair on RepairBridge; planner RequestMcv ↔ MCVManager cash gate).
