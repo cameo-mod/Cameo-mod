@@ -79,8 +79,8 @@ def load_spec(path: pathlib.Path) -> dict:
     spec.setdefault("swap_bots", True)
     spec.setdefault("time_limit", 3)
     spec.setdefault("team_size", 1)
-    if spec["team_size"] not in (1, 2):
-        raise ValueError(f"spec 'team_size' must be 1 or 2, got {spec['team_size']}")
+    if spec["team_size"] not in range(1, 9):
+        raise ValueError(f"spec 'team_size' must be 1..8, got {spec['team_size']}")
     for m in spec["maps"]:
         resolved = pathlib.Path(m) if pathlib.Path(m).is_absolute() else REPO_ROOT / m
         if not resolved.exists():
@@ -155,7 +155,7 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
         acc["cells_missing"].append(cell["name"] + " (no batch_results.jsonl)")
         return
 
-    if team_size == 2:
+    if team_size >= 2:
         # One datapoint per match uid: collect the candidate-side rows of each
         # match (both member rows qualify — the duo is homogeneous) and take
         # the team verdict "any member won".
@@ -349,8 +349,8 @@ def main() -> int:
             "--support-dir", str(cell_dir),
             "--stall-timeout", str(args.stall_timeout),
         ]
-        if team_size == 2:
-            cmd += ["--team-size", "2"]
+        if team_size >= 2:
+            cmd += ["--team-size", str(team_size)]
         if spec["swap_bots"]:
             cmd.append("--swap-bots")
         print(f"[{index}/{len(cells)}] {cell['name']} ...", flush=True)
