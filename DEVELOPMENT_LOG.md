@@ -16557,3 +16557,34 @@ Maintainer's garrison + endless-expansion asks are implemented but switch-gated
 pending A/B. Remaining open asks: formation/multi-angle assault, base spacing,
 army-first production, harvester spread, coalition fold impl (BB-BE).
 
+## 2026-10-02 (nova) — ATK-1 assault fan-out (the line-of-death fix)
+
+Maintainer report: committed Rush squads attack-move every member to one shared
+target point — the column walks into the guns single-file. (Sibling asks —
+garrison contest, cover-the-map, spacing, army-first, harvester spread — were
+already claimed/landed by EMBER + Claude lanes; this entry is the formation half
+only.)
+
+Shipped behind switch AG_assault_fanout (default-off, genericbot-only provider):
+- AssaultFormationPlanner: deterministic integer arc-slot planner — one slot per
+  member on a target-centred arc (default 180 deg) on the far side of the target
+  from the approach bearing; sorted-bearing + ActorID tiebreak; unusable slots
+  fold onto the target cell.
+- GroundUnitsAssaultFanoutStateCA: new squad state between rally/approach and
+  commit; per-unit AttackMove slot orders; commits on AssemblePercent (60) /
+  StageDeadlineTicks (500) / first enemy contact.
+- AssaultFormationBotModule: settings-only IBotAssaultFormation provider +
+  per-squad same-target refanout cooldown (750t). Zero SquadManagerBotModuleCA
+  edits (DAWN claim respected).
+- GroundStatesCA: Rush squads enter fan-out from StageState assembly or the
+  AttackMove trigger band (12 > dist > 8 cells).
+
+Verification: CA+Cameo+Test build clean; 653/653 tests; boot-gate passed;
+armed batch on A Nuclear Winter: 3/3 clean matches, hard 3-0 vs classic
+(fingerprint ed05a1dfb0ce) — GC-1 + expansion + fan-out all firing, no
+exceptions.
+
+LANE COLLISION (flagged): maintainer 2026-10-01 assigned squad formation to
+claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
+is an independent, SquadManager-free implementation with runtime evidence;
+both are default-off. Coordinator picks which arms in the increment.

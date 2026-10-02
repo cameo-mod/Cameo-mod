@@ -2789,3 +2789,35 @@ switch `AE_army_first`).
 *Formation/multi-front* (convex spread, multi-angle waves) is **Claude's lane**
 (`claude/cv_concave`, §12.7a) — EMBER deliberately does not touch squad formation code;
 SP-1/AF-1 only make the base cheaper to path through and the army bigger to form up.
+
+### 12.21 ATK-1 — the assault fan-out (NOVA, 2026-10-02; switch AG_assault_fanout)
+
+The maintainer's line-of-death report: a committed Rush squad attack-moved every member
+to one shared target point, so the column fed the guns one at a time.
+
+**LANE NOTE:** squad formation is assigned to Claude's `claude/cv_concave` (§12.7a,
+switch F_concave) per the 2026-10-01 standing order — that implementation deploys a
+*range-matched* concave through SquadManagerBotModuleCA hooks. ATK-1 is the independent
+NOVA implementation: planner + squad-state only, zero SquadManager edits, switch-gated
+genericbot-only, runtime-verified (hard 3-0 vs classic on A Nuclear Winter, armed batch
+of 3, 0 exceptions, fingerprint ed05a1dfb0ce). The coordinator picks which lands in the
+increment; the two cannot coexist textually (both extend GroundStatesCA) but neither
+fires unless its switch arms.
+
+- *The state:* `GroundUnitsAssaultFanoutStateCA` sits between the
+  rally/`AttackMove` approach and the commit. In the trigger band
+  (`FanoutTriggerCells` > leader distance > `FanoutRadiusCells`) or after
+  `GroundUnitsStageStateCA` assembly, `AssaultFormationPlanner` lays one slot per
+  member on an arc (`ArcDegrees` 180 default) centred on the *far side* of the target
+  from the approach bearing — the wave wraps the objective and arrives from several
+  bearings at once.
+- *The commit:* members walk per-unit `AttackMove` slot orders (micro-action budget
+  honoured), then commit together on `AssemblePercent`/`StageDeadlineTicks` — or
+  instantly on enemy contact, so nobody fights alone.
+- *Determinism and honesty:* integer WAngle-LUT math, sorted-bearing assignment, ActorID
+  tiebreak; unusable/overflow slots fold onto the target cell (the old behaviour, never
+  a stall). `RefanoutCooldownTicks` stops same-ground re-orbits.
+- *The seam:* orders stay with the squad states; `AssaultFormationBotModule` is a
+  settings-only `IBotAssaultFormation` provider (same shape as `IBotSiegeAdvisor`),
+  `RequiresCondition: genericbot && assault_fanout` — classic has no provider and
+  keeps the upstream single-point commit regardless of the switch.
