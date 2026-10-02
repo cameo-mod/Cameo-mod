@@ -3155,6 +3155,30 @@ independently, so they often point the same way.
    ground wins ties.
 5. **Aggression:** earlier and more MCVs, via the existing EX-4 knobs in the switch values. No new driver.
 
+**Implemented (FE-1, 2026-10-02, switch `AJ_field_coverage`, default off; `ExpansionPlannerBotModule.FieldCoverage`):**
+* Anchors = `ISeedableResource` actors (spreaders, public map data) plus first-seen centres of fields with no spreader within
+  `SpreaderFieldRadiusCells` (12). `AssignRefineries` pairs each own refinery with at most one anchor within the serve radius
+  (`AnchorServeRadiusCells`, 0 = `ClaimRadiusCells`); `WantedAnchor` wants a refinery iff an unserved, unparked anchor lies
+  within `ReachCells` of a buildable-area building AND placed + queued refineries < anchors. A claim wanted for
+  `AnchorStuckReplans` (12) re-plans with nothing placed or queued parks the anchor for `ParkTicks`.
+* The planner publishes it through new default-false members of `IBotExpansionTargetProvider` (`RefineryLawActive`,
+  `RefineryAnchorCount`, `UnservedAnchorsInReach`, `RefineryClaimFieldCenter`; `RefineryClaimTarget` becomes the anchor).
+  `BaseBuilderBotModuleCA` reads only these: under the law `HasMaxRefineriesFor` ignores the yard cap, `RefineryLimit` and the
+  scale-target refinery cap (the first `InititalMinimumRefineryCount` refineries still pass), `HasAdequateRefineryCount` uses the
+  initial minimum instead of `OptimalRefineryCount`, and `ExpansionWantsRefinery` no longer needs a crawl target. No provider
+  (classic) or switch off = every line is the old one.
+* Placement: `findPos(anchorOrder: true)` sorts the claim annulus (radius `ExpansionTargetClaimRadius` around the anchor) by
+  distance to the anchor, then to the field's resource centre, takes the first valid cell (the spacing advisor's re-rank is
+  skipped; refineries were already exempt from the gap) and does not fall back to a home placement.
+* Directions: `McvSite` takes an optional weight = `SeparationFactor` (x `MinSeparationFactor` 0.25 when the bearing from the main
+  base is within `CrawlSeparationDegrees` 35 of the crawl target, an own yard or another in-flight MCV site; `WAngle.ArcTan`) x
+  `SpreadFactor`. The crawl score takes the spread factor and x `MinSeparationFactor` for a field an in-flight MCV site holds.
+* Spread: `1 + SpreadBonus (1.0) x distance to our nearest building / map diagonal`, for both scores.
+* Aggression (switch values): `CoverAllFields` true, `CoverAllFieldsMaxInflight` 3 (was 2), `McvRequestReserve` 1000 (was 1500),
+  `McvTargetCount` 4 (was 3). Unmeasured guesses: the FE-0 report (`expansion_report.py`) and the increment A/B decide them.
+* Tests: `OpenRA.Mods.Cameo.Test/FieldCoverageTest.cs` (anchors, assignment, wanted rule incl. never more than anchors, separation,
+  spread). Fog manifest: `ExpansionPlannerBotModule.cs` 4 -> 5 (neutral spreader scan).
+
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 
 > *Maintainer:* "log the build order, then try to switch it around until the result is optimal … for all the buildings
