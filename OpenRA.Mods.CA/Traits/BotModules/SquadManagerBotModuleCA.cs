@@ -1653,14 +1653,22 @@ namespace OpenRA.Mods.CA.Traits
 				var election = Info.UseCoalitionRescue
 					? Player.PlayerActor.TraitsImplementing<IBotCoalition>().FirstEnabledTraitOrDefault()?.Coalition?.RescueAssignments
 					: null;
+				TeamBroadcast answered = null;
 				if (election is { Count: > 0 })
 				{
-					var elected = election.FirstOrDefault(a => a.ResponderClientIndex == Player.ClientIndex);
+					// Participant identity is InternalName (map-side bots can share a
+					// ClientIndex); a null id on the assignment is the pre-id broadcast,
+					// matched by the marked ClientIndex fallback.
+					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
+					var elected = election.FirstOrDefault(a =>
+						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
-						var requester = broadcasts.FirstOrDefault(b => b != null && b.ClientIndex == elected.RequesterClientIndex);
-						var armyValue = requester?.OwnArmyValue
+						answered = broadcasts.FirstOrDefault(b => b != null
+							&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
+								|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
+						var armyValue = answered?.OwnArmyValue
 							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
 						request = new BotProtectionRequest(World.Map.CellContaining(elected.DefendPosition),
 							armyValue, World.WorldTick + Info.ProtectInterval * 10);
@@ -1668,10 +1676,28 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 				{
-					var ally = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
-					if (ally != null)
-						request = new BotProtectionRequest(World.Map.CellContaining(ally.DefendPosition),
-							ally.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+					answered = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
+					if (answered != null)
+						request = new BotProtectionRequest(World.Map.CellContaining(answered.DefendPosition),
+							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+				}
+
+				// Observability (post-merge review): the answer writes a mission record so the
+				// team report can count defend answers — without it this channel is invisible
+				// in cameo-ai-missions.jsonl by construction.
+				if (answered != null)
+				{
+					BotMissionLog.Write(new BotMissionRecord
+					{
+						Player = Player,
+						MissionId = $"defend_answer:{CoalitionFold.ParticipantKey(answered)}:{World.Map.CellContaining(answered.DefendPosition)}",
+						Attempt = 1,
+						State = BotMissionAttemptState.Committed,
+						Executor = "Squads",
+						MissionType = "defend_answer",
+						TargetCell = World.Map.CellContaining(answered.DefendPosition),
+						Value = answered.OwnArmyValue,
+					});
 				}
 			}
 
