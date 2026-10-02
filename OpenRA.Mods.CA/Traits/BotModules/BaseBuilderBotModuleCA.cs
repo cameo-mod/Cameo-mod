@@ -387,6 +387,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int refineryLimit;
+		IBotScaleTargets[] scaleTargets;
 
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
@@ -606,6 +607,30 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>An enabled scale-targets provider's target for the category (DESIGN 19.10); false = keep the BotLimits number.</summary>
+		public bool TryGetScaleTarget(string category, out int target)
+		{
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			return scaleTargets.TryTarget(category, out target);
+		}
+
+		/// <summary>
+		/// The BuildingLimits entry of a building, with the scale targets applied: a building the provider tags `tech` or
+		/// `superweapon` takes its category target in place of its per-actor number; every other entry keeps its value.
+		/// False when the building has no entry (no limit).
+		/// </summary>
+		public bool TryGetBuildingLimit(string actorName, out int limit)
+		{
+			if (!Info.BuildingLimits.TryGetValue(actorName, out limit))
+				return false;
+
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			if (scaleTargets.TryBuilding(actorName, out var scaled))
+				limit = scaled;
+
+			return true;
+		}
+
 		void RefreshBotLimits()
 		{
 			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
@@ -793,7 +818,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
 
-			if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
+			// Scale targets (DESIGN 19.10): an enabled provider's refinery target replaces BotLimits.RefineryLimit.
+			var limit = TryGetScaleTarget("refinery", out var scaledRefineries) ? scaledRefineries : refineryLimit;
+			if (limit != 0 && currentRefineryCount >= limit)
 				return true;
 
 			foreach (var r in Info.RefineryTypes)

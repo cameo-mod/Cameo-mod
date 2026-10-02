@@ -156,6 +156,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DirectorTension;
 		internal DirectorPhase DirectorPhase;
 
+		// ST (DESIGN 19.10, AI_ARCHITECTURE 12.22), record-only: the scale-targets inputs and targets of the provider's
+		// last recompute. Null (and omitted from the log) while no ScaleTargetsBotModule is enabled.
+		internal ScaleTargetsSnapshot ScaleTargets;
+
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
@@ -1299,7 +1303,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				BankedCash = cachedResources == null ? 0 : cachedResources.Cash + cachedResources.Resources,
 				BrownoutTicks = brownoutTicks,
 				IdleProductionTicks = idleProductionTicks,
-				ProductionQueues = productionQueueCount
+				ProductionQueues = productionQueueCount,
+				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

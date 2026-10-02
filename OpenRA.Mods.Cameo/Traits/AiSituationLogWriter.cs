@@ -160,6 +160,29 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
+		// ST (DESIGN 19.10): the growth law's inputs and per-category seen/target pairs; omitted while no provider runs.
+		internal static void AppendScaleTargets(StringBuilder builder, ScaleTargetsSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "scale_targets");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendNumber(builder, "tier", snapshot.Tier);
+			AiMatchLogWriter.AppendString(builder, "personality", snapshot.Personality ?? "");
+			AiMatchLogWriter.AppendNumber(builder, "team_size", snapshot.TeamSize);
+			AiMatchLogWriter.AppendNumber(builder, "unscouted_milli", snapshot.UnscoutedMilli);
+			AiMatchLogWriter.AppendNumber(builder, "game_minutes_milli", snapshot.GameMinutesMilli);
+			AiMatchLogWriter.AppendNumber(builder, "army_baseline", snapshot.ArmyBaseline);
+			for (var i = 0; i < snapshot.Categories.Length; i++)
+			{
+				AiMatchLogWriter.AppendNumber(builder, "seen_" + snapshot.Categories[i], snapshot.Seen[i]);
+				AiMatchLogWriter.AppendNumber(builder, "target_" + snapshot.Categories[i], snapshot.Targets[i]);
+			}
+
+			builder.Append('}');
+		}
+
 		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
 		{
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
@@ -294,6 +317,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "team_defend_requests", situation.TeamDefendRequests);
 			AiMatchLogWriter.AppendNumber(builder, "team_shared_target", situation.TeamSharedTarget);
 			AppendThreats(builder, situation.Threats);
+			AppendScaleTargets(builder, situation.ScaleTargets);
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");

@@ -219,6 +219,82 @@ def difficulty_scale_failures() -> list[str]:
     return failures
 
 
+SCALE_FIELDS = ("Min", "Max", "RatioMin", "RatioMax", "Margin", "Growth", "Floor", "TurtleRushLean", "TechRushExpansionLean")
+SCALE_CATEGORIES = ("army", "harvester", "refinery", "production", "conyard", "tech", "superweapon", "defence", "aircraft")
+# category -> the BotLimits number its minute-0, nothing-seen line must reproduce (DESIGN 19.1 table).
+SCALE_VS_LIMITS = {
+    "refinery": "RefineryLimit",
+    "harvester": "HarvesterLimit",
+    "production": "ProductionTypeLimit",
+    "conyard": "ConstructionYardLimit",
+}
+TECH_LINE = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3]
+
+
+def scale_line(lo: int, hi: int, steps: int = 10) -> list[int]:
+    """The synced math, in Python: thousandths, linear on tier/9, ONE floor at the end (ScaleTargetsEval)."""
+    return [(lo + (hi - lo) * t // (steps - 1)) // 1000 for t in range(steps)]
+
+
+def scale_target_failures() -> list[str]:
+    """AI_ARCHITECTURE 12.22 / DESIGN 19.10: every ScaleTargetsBotModule category writes every field, Min <= Max, the tech
+    line floors to 1 1 1 1 2 2 2 2 3 3, and at minute 0 with nothing seen each line equals the DESIGN 19.1 table."""
+    sys.path.insert(0, str(ROOT / "tools" / "audit"))
+    from miniyaml import Ruleset
+
+    rules = Ruleset(ROOT)
+    player = rules.resolve("player")
+    module = player.child("ScaleTargetsBotModule") if player else None
+    if module is None:
+        return ["Player has no ScaleTargetsBotModule block (AI_ARCHITECTURE 12.22)"]
+
+    failures = []
+    categories = module.child("Categories")
+    if categories is None:
+        return ["ScaleTargetsBotModule has no Categories block"]
+
+    written = {c.key: c for c in categories.children}
+    for name in SCALE_CATEGORIES:
+        if name not in written:
+            failures.append(f"ScaleTargetsBotModule.Categories.{name} is missing: every category is written (DESIGN 19.1)")
+    for name in sorted(set(written) - set(SCALE_CATEGORIES)):
+        failures.append(f"ScaleTargetsBotModule.Categories.{name} is not a known category")
+
+    values: dict[str, dict[str, int]] = {}
+    for name in SCALE_CATEGORIES:
+        node = written.get(name)
+        if node is None:
+            continue
+        missing = [f for f in SCALE_FIELDS if node.get(f) is None]
+        if missing:
+            failures.append(f"ScaleTargetsBotModule.Categories.{name} does not write {missing}: the field silently uses the C# default")
+            continue
+        try:
+            values[name] = {f: int(node.get(f)) for f in SCALE_FIELDS}
+        except ValueError:
+            failures.append(f"ScaleTargetsBotModule.Categories.{name}: every field is an integer in thousandths")
+            continue
+        if values[name]["Min"] > values[name]["Max"]:
+            failures.append(f"ScaleTargetsBotModule.Categories.{name}: Min {values[name]['Min']} is above Max {values[name]['Max']}")
+        if values[name]["RatioMin"] > values[name]["RatioMax"]:
+            failures.append(f"ScaleTargetsBotModule.Categories.{name}: RatioMin is above RatioMax")
+
+    if "tech" in values:
+        line = scale_line(values["tech"]["Min"], values["tech"]["Max"])
+        if line != TECH_LINE:
+            failures.append(f"ScaleTargetsBotModule tech line floors to {line}, not {TECH_LINE}")
+
+    limits = {c.key.split("@", 1)[1]: c for c in player.children if c.key.startswith("BotLimits@")}
+    for category, field in SCALE_VS_LIMITS.items():
+        if category not in values or [t for t in DIFFICULTIES if t in limits] != list(DIFFICULTIES):
+            continue
+        expected = [int(limits[t].get(field)) for t in DIFFICULTIES]
+        line = scale_line(values[category]["Min"], values[category]["Max"])
+        if line != expected:
+            failures.append(f"ScaleTargetsBotModule {category}: minute-0 nothing-seen line {line} != BotLimits.{field} {expected} (DESIGN 19.1)")
+    return failures
+
+
 def tier_gate_failures() -> list[str]:
     """DESIGN §19.1: no module is switched on per tier. Any `RequiresCondition` on the resolved
     Player that names a difficulty condition is a violation — the module either runs everywhere
@@ -343,6 +419,7 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(scale_target_failures())
     failures.extend(tier_gate_failures())
 
     print("# AI personality audit")
@@ -365,6 +442,7 @@ def main() -> int:
     print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
     print("- Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN §19.1).")
+    print("- ScaleTargetsBotModule writes every category and field, Min <= Max, the tech line is 1 1 1 1 2 2 2 2 3 3 and minute 0 equals the DESIGN 19.1 table (AI_ARCHITECTURE 12.22).")
     print("- No module gates on a difficulty-tier condition (DESIGN §19.1); strength scales via BotLimits.")
     return 0
 
