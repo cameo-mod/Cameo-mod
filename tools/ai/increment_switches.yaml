@@ -123,3 +123,6 @@ groups:
   AC_cover_map_expansion:            # EMBER EX-4 - MCV appetite tracks free far fields, not McvTargetCount: expand until every reachable field is claimed; difficulty paces speed, never the ceiling
     ExpansionPlannerBotModule:
       CoverAllFields: true
+  F_concave:                         # CV concave engagement (AI_ARCHITECTURE §12.7a, maintainer order 2026-10-01)
+    SquadManagerBotModuleCA:
+      ConcaveEngagement: true

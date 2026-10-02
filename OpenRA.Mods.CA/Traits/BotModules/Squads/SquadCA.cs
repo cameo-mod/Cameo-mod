@@ -44,6 +44,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// 6g (CN A3): rules-derived BotTargetTags this squad prefers when picking
 		// targets (e.g. air raiders prefer artillery). Empty = no preference.
 		internal HashSet<string> PriorityTags = [];
+
+		// CV (12.7a): world tick before which the squad may not deploy a concave again.
+		internal int ConcaveCooldownUntilTick;
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)

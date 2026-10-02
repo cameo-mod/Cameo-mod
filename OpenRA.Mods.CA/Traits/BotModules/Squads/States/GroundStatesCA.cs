@@ -340,6 +340,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
+			// CV (12.7a): on contact a Rush squad deploys a concave before the first shot.
+			if (owner.SquadManager.Info.ConcaveEngagement && owner.Type == SquadCAType.Rush && GroundUnitsConcaveStateCA.ShouldEnter(owner))
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(), false);
+				return;
+			}
+
 			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
