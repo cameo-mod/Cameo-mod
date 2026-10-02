@@ -727,7 +727,11 @@ namespace OpenRA.Mods.CA.Traits
 			// caller retries later. AllowInvalidPlacement actors bypass CanPlaceBuilding
 			// entirely, so they keep bypassing the spacing rule too — same opt-out semantic.
 			var advisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
-			var gap = BuildingGapRule.Resolve(advisor, defenseGap);
+
+			// Refineries are owned by field proximity (EX-2 claims, SP-1 fix 1ba1db9b8): spacing never touches them,
+			// the hard gap included — a gap-pushed refinery reads its field as unserved and the builder stacks another.
+			var isRefinery = world.Map.Rules.Actors.TryGetValue(actorType, out var placedInfo) && placedInfo.HasTraitInfo<RefineryInfo>();
+			var gap = isRefinery ? 0 : BuildingGapRule.Resolve(advisor, defenseGap);
 			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
 
 			// Cameo (§12.20): an advisor that ranks re-ranks a bounded prefix of placeable, gap-valid cells
