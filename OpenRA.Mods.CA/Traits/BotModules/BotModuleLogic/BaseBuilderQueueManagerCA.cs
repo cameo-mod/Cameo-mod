@@ -235,26 +235,16 @@ namespace OpenRA.Mods.CA.Traits
 				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
 					return false;
 
-				// Cameo (army-first): a big base without an army is worthless. While owned combat
-				// units stay below MinArmyUnitsBeforeBuildings and cash is above ArmyFirstMinCash,
-				// defer non-essential buildings so unit production keeps the money. Construction
-				// yards, refineries and power always pass.
-				if (baseBuilder.Info.MinArmyUnitsBeforeBuildings > 0
-					&& playerResources.GetCashAndResources() > baseBuilder.Info.ArmyFirstMinCash
-					&& baseBuilder.OwnedArmyUnitCount() < baseBuilder.Info.MinArmyUnitsBeforeBuildings
-					&& !IsArmyFirstEssential(item))
-				{
-					AIUtils.BotDebug("{0} deferred {1}: army-first (below {2} combat units with cash above {3})",
-						queue.Actor.Owner, item.Name, baseBuilder.Info.MinArmyUnitsBeforeBuildings, baseBuilder.Info.ArmyFirstMinCash);
-					return false;
-				}
-
-				// Cameo (§12.20): the army-first vote — an advisor can hold new non-refinery buildings so cash
-				// flows to unit production while it needs to (refineries stay exempt, same as the cash gate).
+				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
+				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
+				// refineries, power and the first production building are essential and always pass.
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-				if (!baseBuilder.Info.RefineryTypes.Contains(item.Name)
-					&& pauseBuilding.Any(p => p.PauseBuildingProduction))
-					return false;
+				if (pauseBuilding.Length > 0)
+				{
+					var essential = IsArmyFirstEssential(item);
+					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
+						return false;
+				}
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
@@ -425,7 +415,7 @@ namespace OpenRA.Mods.CA.Traits
 				.Sum(p => p.Amount) + playerPower.ExcessPower) >= baseBuilder.Info.MinimumExcessPower;
 		}
 
-		// Cameo (army-first): buildings that stay allowed while MinArmyUnitsBeforeBuildings defers
+		// Cameo (army-first): buildings that stay allowed while the army-first vote holds
 		// the rest. Construction yards, refineries and power are always essential; the first
 		// production building must pass too — no factory means no army, so blocking it deadlocks.
 		bool IsArmyFirstEssential(ActorInfo actorInfo)
@@ -667,9 +657,9 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Find the buildable cell that is closest to pos and centered around center.
-		// minBuildingGap < 0 resolves to Info.MinBuildingGapCells; defense-style callers pass
-		// Info.MinBuildingGapDefensesCells so walls/turrets can still form tighter lines.
-		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, int minBuildingGap = -1)
+		// The building gap belongs to the placement advisor (BuildingGapRule.Resolve; no advisor = no gap);
+		// defense-style callers pass defenseGap so walls/turrets can still form tighter lines.
+		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, bool defenseGap = false)
 		{
 			var actorInfo = world.Map.Rules.Actors[actorType];
 			var actorVariant = 0;
@@ -736,14 +726,14 @@ namespace OpenRA.Mods.CA.Traits
 			// never relaxed inside this call; an exhausted annulus returns null and the
 			// caller retries later. AllowInvalidPlacement actors bypass CanPlaceBuilding
 			// entirely, so they keep bypassing the spacing rule too — same opt-out semantic.
-			var gap = minBuildingGap < 0 ? baseBuilder.Info.MinBuildingGapCells : minBuildingGap;
+			var advisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			var gap = BuildingGapRule.Resolve(advisor, defenseGap);
 			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
 
-			// Cameo (§12.20): an active placement advisor re-ranks a bounded prefix of placeable,
-			// gap-valid cells (spread-out bases instead of first-valid packing). No advisor = first
-			// valid cell wins, exactly as upstream.
-			var advisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
-			if (advisor != null)
+			// Cameo (§12.20): an advisor that ranks re-ranks a bounded prefix of placeable, gap-valid cells
+			// (spread-out bases instead of first-valid packing). No ranking advisor = first valid cell wins,
+			// exactly as upstream.
+			if (advisor != null && advisor.RanksCandidates)
 			{
 				var candidates = new List<CPos>();
 				foreach (var cell in cells)
@@ -803,23 +793,11 @@ namespace OpenRA.Mods.CA.Traits
 		// when one of its footprint cells lands in this set.
 		HashSet<CPos> OwnBuildingBufferCells(int gap)
 		{
-			var cells = new HashSet<CPos>();
 			if (playerBuildings == null)
-				return cells;
+				return new HashSet<CPos>();
 
-			foreach (var building in playerBuildings)
-			{
-				var buildingInfo = building.Info.TraitInfoOrDefault<BuildingInfo>();
-				if (buildingInfo == null)
-					continue;
-
-				foreach (var tile in buildingInfo.Tiles(building.Location))
-					for (var dx = -gap; dx <= gap; dx++)
-						for (var dy = -gap; dy <= gap; dy++)
-							cells.Add(new CPos(tile.X + dx, tile.Y + dy));
-			}
-
-			return cells;
+			return BuildingGapRule.BufferCells(
+				playerBuildings.SelectMany(b => b.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(b.Location) ?? Enumerable.Empty<CPos>()), gap);
 		}
 
 		// Cameo: ask the first ACTIVE defence-placement advisor (resolved on each use, so a late-enabled one is seen)
@@ -834,7 +812,7 @@ namespace OpenRA.Mods.CA.Traits
 			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
 
 			// The advisor's candidate cells get the same spacing rule as findPos defenses.
-			var gap = baseBuilder.Info.MinBuildingGapDefensesCells;
+			var gap = BuildingGapRule.Resolve(player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive), true);
 			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
 
 			return advisor.ChooseDefenseCell(actorInfo, baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name), baseCenter,
@@ -859,7 +837,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					var targetCell = closestEnemy != null ? closestEnemy.Location : baseCenter;
 					return findPos(actorType, distanceToBaseIsImportant, producer, defenseCenter, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius,
-						minBuildingGap: baseBuilder.Info.MinBuildingGapDefensesCells);
+						defenseGap: true);
 
 				case BuildingType.Fragile:
 					// Build away from where enemy last attacked
@@ -1006,7 +984,7 @@ namespace OpenRA.Mods.CA.Traits
 					// Defense-style placement (defense center, defense radii, toward the enemy):
 					// gets the tighter defense gap like BuildingType.Defense.
 					return findPos(actorType, distanceToBaseIsImportant, producer, crawlDefenseCenter, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius,
-						minBuildingGap: baseBuilder.Info.MinBuildingGapDefensesCells);
+						defenseGap: true);
 
 				case BuildingType.Building:
 					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseCenter, baseBuilder.Info.MinBaseRadius,

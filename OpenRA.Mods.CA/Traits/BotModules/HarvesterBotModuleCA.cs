@@ -321,9 +321,8 @@ namespace OpenRA.Mods.CA.Traits
 				// it must not attract more harvesters even when its resource cells still "lack" some,
 				// and a beyond-cap surplus counts toward worst-effect so the surplus is pushed out
 				// to lacking indices below.
-				var saturated = Info.MaxHarvestersPerResourceIndice > 0
-					&& baseIndice.PlayerHarvetserCount >= Info.MaxHarvestersPerResourceIndice;
-				var surplusHarvs = saturated ? baseIndice.PlayerHarvetserCount - Info.MaxHarvestersPerResourceIndice : 0;
+				var saturated = HarvesterFieldCap.Saturated(baseIndice.PlayerHarvetserCount, Info.MaxHarvestersPerResourceIndice);
+				var surplusHarvs = HarvesterFieldCap.Surplus(baseIndice.PlayerHarvetserCount, Info.MaxHarvestersPerResourceIndice);
 
 				if (!saturated && baseIndice.ResourceCellsCount > 0 && attraction > 0 && lackHarvs > 0)
 					lackHarvesterIndices.Add((attraction, lackHarvs, baseIndice.ResourceCellsCenter, baseIndice.PlayerHarvetserCount));
@@ -359,12 +358,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (harvestersCanAssign <= 0)
 						break;
 
-					var needHarvs = lackHarvs;
-
 					// Cameo (field spread): a receiving indice only takes up to its own cap
 					// headroom — the fix must not recreate the pile on the next field.
-					if (Info.MaxHarvestersPerResourceIndice > 0)
-						needHarvs = Math.Min(needHarvs, Info.MaxHarvestersPerResourceIndice - harvCount);
+					var needHarvs = HarvesterFieldCap.Need(lackHarvs, harvCount, Info.MaxHarvestersPerResourceIndice);
 
 					var nearbyResources = world.Map.FindTilesInAnnulus(resourceCenter, 0, resourceMapModule.GetIndiceScanRadius())
 					.Where(c => resourceMapModule.Info.ValuableResourceTypes.Contains(resourceLayer.GetResource(c).Type)
@@ -470,7 +466,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (Info.MaxHarvestersPerResourceIndice > 0 && resourceMapModule != null && resourceMapModule.GetIndicesLength() > 0)
 			{
 				var unsaturatedTargets = targets
-					.Where(c => resourceMapModule.FindClosestIndiceFromCPos(c).PlayerHarvetserCount < Info.MaxHarvestersPerResourceIndice)
+					.Where(c => !HarvesterFieldCap.Saturated(resourceMapModule.FindClosestIndiceFromCPos(c).PlayerHarvetserCount, Info.MaxHarvestersPerResourceIndice))
 					.ToList();
 
 				if (unsaturatedTargets.Count > 0)
