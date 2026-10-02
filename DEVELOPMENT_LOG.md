@@ -16925,45 +16925,6 @@ option (9 = old-90 cap used).
 **Live spectate (running):** `C:/tmp/spectate-6v6` support dir, variant
 `order_of_battle_rich_6v6`, fullscreen native res, 6xhard (NE) vs 6xclassic
 (SW) td_gdi, Referee seat = local client. World loaded clean, no exceptions.
-## 2026-10-02 (claude-sonnet sub-agent, coordinated by Claude Opus 5.5) - concave + ATK-1 merged into ONE formation implementation
-
-Two duplicate "deploy before the fight" implementations (CV concave F_concave, NOVA ATK-1 AG_assault_fanout) merged per
-DESIGN 19.3 (one bot module per decision). Result lives in AI_ARCHITECTURE 12.7a ("Unified with ATK-1").
-
-- Geometry + state machine = CV (ConcaveEvalCA, GroundUnitsConcaveStateCA), entered ONLY from the attack-move state hook.
-- Settings seam = ATK-1: AssaultFormationBotModule / IBotAssaultFormation / AssaultFormationSettings hold every tunable
-  (13 Concave* fields removed from SquadManagerBotModuleCAInfo); provider presence is the only switch; per-squad same-ground
-  cooldown replaces SquadCA.ConcaveCooldownUntilTick. Late joiners re-plan (rate-limited by the 25-tick replan minimum).
-- Deleted: AssaultFormationPlanner, AssaultFanoutStatesCA, AssaultFormationPlannerTest, FanoutRadiusCells (also from ai.yaml),
-  the Stage-state fan-out transition and the band trigger, switch group F_concave. AG_assault_fanout is the single switch.
-- ai.yaml keeps ATK-1's tested values where it set them (MinSquadSize 4, FanoutTriggerCells 12, AssemblePercent 60,
-  StageDeadlineTicks 500, ArcDegrees 180); C# defaults are CV's (16 / 80 / 150 / 150).
-- Not run: boot gate / armed A/B (coordinator's). Open: re-A/B the unified formation (ATK-1's 3-0 evidence was the old ring).
-
-2026-10-01 DAWN — Fransbot order-safety conversion (branch devin/dawn/fransbot-order-sites)
-
-INC-3b review found 99 direct actor mutations in vendored bot modules (94
-CancelActivity + 5 QueueActivity across 8 files) — bots run on the host only,
-so every mutation must ride the order stream or multiplayer desyncs. All
-converted: CancelActivity -> QueueStopOrder ("Stop" order), plain Moves ->
-QueueMoveOrder, and the 3 dynamic risk-repath Moves -> bounded waypoint
-packets (the recipe the transport commander already used). The SpecOps
-queued CallFunc cleanup was dropped — ManageCapturer clears the same dicts
-on arrival/idle already.
-
-Every module got the vendored order-sink layer (IBotEnabled/orderBot +
-pending sets + own-tick flush) where missing. Transport commander gained
-mission.InitialOrdersPending: assign/extraction orders now flush on THIS
-module's tick so cross-module service calls (seam/SpecOps) no longer issue
-under the caller's issuer — the order gate would refuse them (lease holder
-is this module).
-
-New audit_fransbot_orders pins zero direct-activity sites in all bot-module
-dirs (registered in run_all.sh). Verification: build clean, 448/448 tests,
-boot-gate PASS via Engine.SupportDir private log (shared perf.log is
-unattributable while inc2ab shards relaunch), fransbot_drift re-baselined,
-fransbot_lists regenerated. bot_insurance FAIL is pre-existing on master
-(uninsured classic/exploit_*/fransbot) — flagged for the fleet.
 
 ## 2026-10-02 EMBER — SP-1 refinery fix + full-armed smoke WON
 
