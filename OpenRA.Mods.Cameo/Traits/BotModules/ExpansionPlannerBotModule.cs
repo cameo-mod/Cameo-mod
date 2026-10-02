@@ -119,6 +119,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("TC-2c: an allied claim this close (cells) to a field's resource centre contests it.")]
 		public readonly int AllyClaimRadiusCells = 10;
 
+		[Desc("TC-3 / BD (AI_ARCHITECTURE §12.18): score the Voronoi sector anchored at our own spawn",
+			"first — a field belongs to the coalition sector anchor nearest it; foreign-sector fields keep",
+			"CoalitionForeignSectorPercent of their score (reachable, deprioritized, never forbidden).",
+			"Needs the master's UseCoalitionPlan publishing the anchors; inert in 1v1 (the only anchor",
+			"is our own) and bit-identical when no provider publishes.")]
+		public readonly bool UseCoalitionSectors = false;
+
+		[Desc("TC-3 / BD: percent of its score a foreign-sector field keeps. 0 would still leave the",
+			"argmax free to pick a foreign field when no own-sector field remains; higher values shrink",
+			"the home bias.")]
+		public readonly int CoalitionForeignSectorPercent = 35;
+
 		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
 			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
 			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
@@ -135,7 +147,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
 
 	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
-		IBotMcvExpansionSiteProvider, IBotPositionsUpdated
+		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider
 	{
 		public readonly struct FieldScore
 		{
@@ -239,6 +251,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int IBotExpansionTargetProvider.ExpansionTargetClaimRadius => Info.ClaimRadiusCells;
 
 		CPos? IBotExpansionTargetProvider.RefineryClaimTarget => IsTraitDisabled || !Info.DriveRefineries ? null : claimField?.Center;
+
+		/// <summary>
+		/// TC-3 (§12.18): the claim that wants a bodyguard — the current target field while its
+		/// evaluated threat is non-trivial. Threat is the remembered-enemy sum the region threat
+		/// providers publish at the field's centre (the same term Safety() folds into the score),
+		/// so "contested" is the fog-honest memory, not a live peek. An uncontested target needs
+		/// no escort and no target publishes nothing — null, never a behaviour change.
+		/// </summary>
+		WPos? IBotExpansionAssistProvider.ExpansionAssistTarget
+		{
+			get
+			{
+				if (IsTraitDisabled || !(Target is FieldScore target) || target.Threat <= 0)
+					return null;
+
+				return world.Map.CenterOfCell(target.Center);
+			}
+		}
 
 		/// <summary>EX-2: a field counts as ours when an own refinery stands within the claim radius of its resource centre.</summary>
 		public static bool Claimed(CPos center, IEnumerable<CPos> refineries, int claimRadiusCells)
@@ -345,6 +375,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return true;
 
 			return false;
+		}
+
+		/// <summary>
+		/// TC-3 / BD (§12.18): the Voronoi score percent — a field belongs to the coalition sector
+		/// anchor nearest it (min HorizontalLengthSquared, the same horizontal measure AllyClaimWins
+		/// uses, so terrain height cannot tilt a border). The anchor holding our own ClientIndex keeps
+		/// 100, a foreign anchor keeps `foreignPercent`; a distance tie goes to the lowest ClientIndex
+		/// so every member computes the identical partition. Pure, for the tests.
+		/// </summary>
+		public static int SectorScorePercent(WPos field, IReadOnlyDictionary<int, WPos> anchors,
+			int myClientIndex, int foreignPercent)
+		{
+			if (anchors == null || anchors.Count == 0)
+				return 100;
+
+			var nearest = int.MaxValue;
+			var best = long.MaxValue;
+			foreach (var kv in anchors)
+			{
+				var d = (kv.Value - field).HorizontalLengthSquared;
+				if (d < best || (d == best && kv.Key < nearest))
+				{
+					best = d;
+					nearest = kv.Key;
+				}
+			}
+
+			return nearest == myClientIndex ? 100 : Math.Clamp(foreignPercent, 0, 100);
 		}
 
 		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
@@ -611,6 +669,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					.ToList();
 			}
 
+			// TC-3 / BD (§12.18): the coalition's Voronoi partition — every allied spawn anchor owns
+			// the fields nearest it. Resolved once per re-plan; a missing provider or an empty anchor
+			// map leaves every score untouched (1v1, flag off — bit-identical).
+			IReadOnlyDictionary<int, WPos> sectorAnchors = null;
+			if (Info.UseCoalitionSectors)
+			{
+				var anchors = player.PlayerActor.TraitsImplementing<IBotCoalition>()
+					.FirstEnabledTraitOrDefault()?.Coalition?.SectorAnchors;
+				if (anchors != null && anchors.Count > 0)
+					sectorAnchors = anchors;
+			}
+
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
 			{
 				var field = resourceMap.GetIndice(i);
@@ -654,6 +724,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var cost = refinery.Cost + hops * link.Cost;
 				var score = Score(value, threat, guardValue, cost, incomePerTick, hops, link.BuildTicks, refinery.BuildTicks,
 					Info.TauTicks, out var payback);
+
+				// TC-3 / BD: own-sector fields keep their full score, foreign-sector fields keep
+				// CoalitionForeignSectorPercent of it — deprioritized, never forbidden: the argmax
+				// still picks a foreign field when no own-sector field is left.
+				if (sectorAnchors != null)
+					score *= SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
+						player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
+
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
