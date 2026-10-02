@@ -16296,6 +16296,17 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
 
+- 2026-10-02 nova: LC8 dangling-outcome fix — EMBER's round-trip found open mission attempts
+  never writing a terminal record at GameOver (4 dangling capture:* attempts in the 2v2 smoke,
+  57 across the A/B corpus). New `BotMissionAttemptTracker` (CA, player actor, genericbot ||
+  classicbot): `BotMissionLog.Write` registers every attempt record with it (no-op when absent,
+  so executors change nothing); `INotifyActorDisposing.Disposing` flushes
+  `Released(match_end)` for whatever is still open. `match_end` added to the shared reason set.
+  614/614 tests, fog PASS 246, frankenstein PASS, boot-gate PASS.
+  Also verified EMBER's audit_bot_wiring.py against master: her R1 (cn-quartet + plug_spawn
+  "unreachable") and R3 (18 fransbot-profile seam gaps) are tool false-positives — the tool
+  doesn't model apply_increment_switches Bots: rewrites (the arm path) or fransbot.yaml
+  providers. R4/R5/R7 corroborate the dataflow audit.
 - 2026-10-02 nova: dead-module sweep CORRECTED on review — `PlugSpawnerBotModuleCA` is NOT dead:
   27 plug actors across 11 ContentPacks carry whole tech chains (WC2 townhall->keep->castle,
   Zerg hatchery->lair->hive, TS power turbines + superweapon uplinks, TD temple nuke + ion

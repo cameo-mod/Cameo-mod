@@ -3544,6 +3544,12 @@ Player:
 	# bot-only matches (the A/B harness) and with Debug.BotDebug; the counts land in cameo-ai-matches.jsonl.
 	BotOwnershipWatchdog:
 		RequiresCondition: genericbot || classicbot
+	# LC8 (AI_MASTER_PLAN §3, EMBER's round-trip finding): open mission attempts got no terminal
+	# record at match end — dangling capture/raid rows in cameo-ai-missions.jsonl. The tracker
+	# follows BotMissionLog.Write and flushes Released(match_end) on player-actor teardown.
+	# Bookkeeping only; classicbot emits mission records too, so it runs on both stacks.
+	BotMissionAttemptTracker:
+		RequiresCondition: genericbot || classicbot
 	BotPersonalityController:
 		RequiresCondition: genericbot
 		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);
