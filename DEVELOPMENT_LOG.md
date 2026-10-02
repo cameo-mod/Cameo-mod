@@ -1,3 +1,22 @@
+# 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
+
+**Done:**
+- `BotOrderGate.NoteIssued` gains the unit's lease `holder`: a unit ordered by module A while
+  A held its lease, then ordered by B after A's claim ended, is a clean hand-off — the squad
+  dissolving and the pool re-drafting the unit (`SquadManager->ScoutBotModule`, 4 WARNs in
+  ab-smoke-out3) was never two owners in fact. The gate now records whether the earlier issuer
+  held the lease at ITS order; a later order with holder != earlier issuer is suppressed only
+  when a release is provable. An earlier issuer that never held the lease keeps the old
+  two-issuers signal — `SendUnitToAttackBotModule`/`ExternalBotOrdersManager` (AS stack) never
+  lease, so their crossings still count as the genuine unleased smell.
+- DESIGN §19.6 rollout bullet documents the lease-aware cross.
+
+**Verified:** 730/730 tests (+2: hand-off suppression both ways, still-held still crosses);
+direct-mutation/fog/frankenstein audits PASS; watch-mode only — `Refuse`/`Preempt` paths and
+the counts semantics are unchanged, classic untouched (no registry = no gate).
+
 # 2026-10-02 — telemetry fix: defend answers + shared pushes emit mission-grammar records
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — closes the report blind spot the 6v6 telemetry exposed (780 records: 5 raid, 0 defend, `shared_push_windows=0` despite 6 waves).*
