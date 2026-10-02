@@ -211,7 +211,11 @@ the fog sequencing.
     publish-only, no switch. TC-2a `nova/tc2-sync-attacks` — ally Climax opens our
     launch window (group `R_tc2_sync_attacks`, inert in 1v1). TC-2b
     `nova/tc2-defend-answers` — ally defend requests answered via the protect-squad
-    escort path (group `S_tc2_defend_answers`). TC-3 2v2 harness landed
+    escort path (group `S_tc2_defend_answers`). TC-2c `nova/tc2c-expansion-claims`
+    — ally expansion claims yield contested fields to the lower ClientIndex
+    (group `V_tc2_expansion_claims`). TC-2d `nova/tc2d-role-split` — allied
+    bots spread the TechRush-Expansion rest by deterministic index rank
+    (group `W_tc2_role_split`). TC-3 2v2 harness landed
     `devin/dawn/tc3-2v2-harness` — `--team-size 2` on
     `tools/ai/run_ai_match_batch.py` + `"team_size"` league spec key, on the
     shipped doubles map (DEVELOPMENT_LOG 2026-10-02).

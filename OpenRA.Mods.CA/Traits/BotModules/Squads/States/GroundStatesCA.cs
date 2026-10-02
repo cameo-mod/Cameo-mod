@@ -848,7 +848,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// IsPreferredObservedEnemyUnit — only what the bot can currently see
 			// or legitimately remember. Budget denial or no pick degrades to the
 			// plain AttackMove below.
-			var micro = owner.SquadManager.Info.SquadMicroEnabled && owner.Type == SquadCAType.Rush;
+			var micro = owner.SquadManager.Info.SquadMicroEnabled && owner.Type == SquadCAType.Rush
+				&& owner.TargetActor != null;
 			Actor focus = null;
 			BotUnitProfile focusProfile = null;
 			if (micro)
@@ -1086,7 +1087,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						}
 					}
 
-					if ((tryAttacking || isFiring) &&
+					if (owner.TargetActor != null && (tryAttacking || isFiring) &&
 						(u.Actor.CenterPosition - owner.TargetActor.CenterPosition).HorizontalLengthSquared <
 						(leader.CenterPosition - owner.TargetActor.CenterPosition).HorizontalLengthSquared)
 					{
@@ -1140,7 +1141,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var unitlost = squadsize > owner.Units.Count;
 			squadsize = owner.Units.Count;
 
-			if ((healthChange || unitlost) && !isFirstTick)
+			if (owner.TargetActor != null && (healthChange || unitlost) && !isFirstTick)
 			{
 				var friendlyUnits = owner.World.FindActorsInCircle(owner.TargetActor.CenterPosition, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)).Where(owner.SquadManager.IsValidAllyUnit);
 				if (friendlyUnits.Count() < squadsize + owner.SquadManager.Info.SquadSize)

@@ -1,3 +1,22 @@
+# 2026-10-02 — NOVA: squad-micro TargetActor null-guards + first armed 2v2
+
+- EMBER's MI squad micro (`SquadMicroEnabled`, INC-1) dereferenced
+  `owner.TargetActor.CenterPosition` unchecked at three sites in
+  `GroundStatesCA` — a position/invalid squad target has no `Actor`, and a
+  rush squad ticked mid-role-assignment NRE'd. Armed 2v2 smoke match 1 died
+  at 100 s on exactly this (`GroundUnitsAttackState.Tick` <-
+  `AssignRolesToIdleUnits`). Null = degrade to the existing plain path: no
+  focus scan, no leader re-pick, no guerrilla flee.
+- First armed 2v2 (all groups A-W, `hard,hard` vs `classic,classic`,
+  `_ra_doubles`, max speed): match 2 clean — **hard+hard won** on seats
+  2,3 (4 records, allies/opponents wired exactly as declared). Expansion
+  claims fired (`EX-2 refinery at 87,8 claims field 81,4` @ tick 2370,
+  EX-3 MCV to field 7 @ 11162). The TC-2 stack's first real-match exercise.
+- DAWN's TC-3 harness reviewed on the full diff and merged (PR #756,
+  master `49fc5038b`): `_append_merge_relation` preserves Creeps and
+  dedupes; ordered-pair stances symmetric; `team_scoreboard` verdict =
+  any-member-won; league dedupe = one datapoint per game_uid.
+
 # 2026-10-02 — NOVA: EX-2d depleted-field centre fallback + armed-smoke receipt
 
 - Armed smoke (all increment groups A→W, hard vs classic, A Nuclear Winter):
