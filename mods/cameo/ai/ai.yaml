@@ -60,6 +60,9 @@
 	GrantConditionOnBotOwner@cn3deploy:
 		Condition: cn3_deploy
 		Bots: fransbot
+	GrantConditionOnBotOwner@cn3bridgerepair:
+		Condition: cn3_bridge_repair
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3473,6 +3476,19 @@ Player:
 				Mode: Stats
 				DeployRange: 12
 				SafeRange: 4
+	# CN3 (crystallized-nexus CNBridgeRepairBotModule port): idle `RepairsBridges` units enter damaged
+	# bridge huts - worst damage first, one repairer per hut - and a production request asks for a
+	# repairer when none exists at all (capped by MaximumRepairers, gated on RepairsBridgesInfo +
+	# BuildableInfo). Claims each repairer (BotLeasePurpose.Repair) so squads cannot re-draft it
+	# mid-walk. EngineerBotModule keeps its own RepairBridge job meanwhile.
+	# `genericbot && cn3_bridge_repair`: off on master until the increment A/B arms it.
+	BridgeRepairBotModule:
+		RequiresCondition: genericbot && cn3_bridge_repair
+		# The cross-pack engineer roster (the same list as CaptureManagerBotModuleCA's
+		# CapturingActorTypes): names whose ActorInfo lacks RepairsBridgesInfo or BuildableInfo are
+		# skipped by the demand gate, so non-carrier entries are harmless. BridgeHutActorTypes unset:
+		# every hut counts.
+		RepairerActorTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, naxis_engineeringtruck, futuretech_engineer, futuretech_repairdroid, tsengineer, ts_nod_engineer, cabal_engineer, engineer, d2k_hijacker, d2k_mechanic, terran_scv, tkm_engineer, atreides_engineer, corrino_engineer, harkonnen_engineer, plymouth_spider
 	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is

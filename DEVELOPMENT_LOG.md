@@ -17,6 +17,40 @@
   dedupes; ordered-pair stances symmetric; `team_scoreboard` verdict =
   any-member-won; league dedupe = one datapoint per game_uid.
 
+# 2026-10-02 — DAWN: CN3 bridge repair (BridgeRepairBotModule, switch X)
+
+- `OpenRA.Mods.Cameo/Traits/BotModules/BridgeRepairBotModule.cs` — port of
+  crystallized-nexus `CNBridgeRepairBotModule`: scans `ActorsHavingTrait<BridgeHut>`
+  every `RepairScanInterval` (125), orders owned idle `RepairsBridges` units into
+  damaged huts (worst damage first, `ClosestToWithPathFrom`, one repairer per hut),
+  tracks `activeAssignments` pruned each scan (dead / idle-done / target-fixed
+  dropped), requests production via `IBotRequestUnitProduction` when zero repairers
+  exist (capped `MaximumRepairers`, deduped `RequestedProductionCount`).
+- Cameo adaptations: `self.ActorID % RepairScanInterval` replaces the donor's
+  `LocalRandom` first-scan offset (MP determinism — ActorID is identical on all
+  clients); both scans iterate deterministically (repairers by ActorID, huts by
+  damage desc then ActorID); §19.6 lease claims per assignment
+  (`BotLeasePurpose.Repair`, heartbeat `max(200, interval*4)`, renewed per scan,
+  released on prune/disable, `IBotUnitLeaseLost` drops the assignment on preempt);
+  demand gate requires `RepairsBridgesInfo` + `BuildableInfo` on the resolved
+  ActorInfo and caps requests by damaged-target count.
+- Wiring: `GrantConditionOnBotOwner@cn3bridgerepair` (Condition `cn3_bridge_repair`,
+  `Bots: fransbot` — inert until armed), `BridgeRepairBotModule:` gated
+  `genericbot && cn3_bridge_repair` next to `DeployBotModule:` with
+  `RepairerActorTypes` = the `CapturingActorTypes` roster, `BridgeHutActorTypes`
+  unset (all huts). Switch group `X_cn3_bridge_repair` appended (X free: F skipped
+  historically, D–W allocated). Fog manifest +3 sites for the new file.
+- Verified: build Release win-x64 0 errors; `dotnet test` green with the new
+  `BridgeRepairBotModuleTest` fixture; `apply_increment_switches.py --groups
+  X_cn3_bridge_repair --dry-run` prints the expected Bots-line change;
+  `audit_fog_honesty` PASS. AI_MODULE_MAP resynced; doc_claims 58 types /
+  82 instances (also absorbs a +1 drift: RV2's `SupportPowerBotASModule@wc2`
+  had landed on master without bumping the claim — resolved Player was
+  already 81 before this branch).
+- live smoke + boot-gate: PENDING (lead runs it).
+- Next steps: cliff demolition needs the region manager — deferred; veinhole +
+  state machinery remain the CN3 remainder.
+
 # 2026-10-02 — NOVA: EX-2d depleted-field centre fallback + armed-smoke receipt
 
 - Armed smoke (all increment groups A→W, hard vs classic, A Nuclear Winter):
