@@ -225,6 +225,19 @@ two brains side by side.
 - **CA drift sync** — upstream "AI routing / harasser squads" not yet pulled.
 - **`_ra_doubles` seat bias** — seats 2,3 won both 2v2s regardless of team;
   harness-side, document it before any team A/B reads results.
+- **PlugSpawn is the only bot plug path (2026-10-02, EMBER, verified):**
+  `BuildingAddons→PlacePlug` placement is live in `BaseBuilderQueueManagerCA`
+  but its demand side never fires — `ChooseBuildingToBuild` only walks
+  `BuildingFractions` (no plug entries) + the named want-lists (PowerTypes,
+  SiloTypes, RefineryTypes...), and no plug actor sits in any of them.
+  `PlugSpawnerBotModuleCA` (`genericbot && plug_spawn`, group F) is the sole
+  bot producer of plugs — cost-paying (`TakeCash` unless `IgnoreCost`) and
+  tech-gated (`TechTree.HasPrerequisites` on `Buildable.Prerequisites`, and
+  the `*upgradeavailable` tokens are host-provided tech-tree prereqs that
+  resolve correctly). It is load-bearing, not optional: without it zerg bots
+  can never tech past hatchery (`~zerg_lair` gates mutalisk/spire/hive) and
+  WC2 stalls at greathall. The earlier "no plug content / safe to delete"
+  rationale was wrong on both counts — corrected verdict: keep + arm.
 - **Capture-claim gap (6v6 evidence, 2026-10-02, EMBER):** the first
   `run_ai_match_batch.py --team-size 6` run (dusttown-battle-6v6, 6×hard vs
   6×classic) shows 27 contested capture claims — up to all six genericbot
