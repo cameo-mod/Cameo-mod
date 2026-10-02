@@ -5148,6 +5148,10 @@ override": *"Refuse, but emergencies can override."*
   (counted as `unattributed`).
 * **Rollout (AI_MASTER_PLAN §1.2 step 6).** `BotUnitLeaseRegistry.EnforceAtOrderGate` is false until its A/B: the gate then
   only COUNTS (`conflicts`) and records crossed orders (two modules ordering one unit inside `CrossedOrderWindowTicks`).
+  A cross is two owners in fact: when the earlier issuer's lease has ended since its order — the holder is now the new
+  issuer, someone else, or nobody — the later order is a clean hand-off, not a cross (squad dissolve → pool re-draft
+  read as `SquadManager->ScoutBotModule` until the gate learned the lease lifecycle, 2026-10-02). An earlier issuer that
+  never held the lease cannot prove a release, so it keeps the two-issuers signal.
   Each genericbot record in `cameo-ai-matches.jsonl` carries `order_gate`, beside LC5's `ownership`.
 * **Guard:** `BotOwnershipWatchdog` (LC5) measures the result: with the gate enforcing and squads on LC1 (#681),
   `ownership.double_owner` must be 0.

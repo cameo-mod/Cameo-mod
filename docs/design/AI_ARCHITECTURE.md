@@ -2631,6 +2631,14 @@ enumerates enemy actors.
   largest same-`MainTarget` group (allies committed to the same enemy). The
   caller's own broadcast is NOT folded in — a bot reads its own scalars
   directly; the summary answers "what is the rest of the team doing".
+- **Liveness, one rule for every consumer (2026-10-02, review finding 4.2):**
+  `TeamBlackboard.ValidBroadcast(p, b, now)` is the central freshness contract
+  `CollectBroadcasts` applies before any aggregation — the publisher's
+  `WinState` is `Undefined` (OpenRA keeps `Player`/`PlayerActor` after defeat,
+  so a dead ally's last broadcast would otherwise hold its expansion/capture
+  claims and defend requests open forever), `SnapshotTick > 0`, and
+  `now - SnapshotTick <= MaxBroadcastAgeTicks` (600 = four snapshot intervals).
+  No consumer may invent its own freshness test.
 - **Published, always on:** five `own.team_*` fields in the situation log —
   `team_allied_bots`, `team_army_value`, `team_max_tension`,
   `team_defend_requests`, `team_shared_target`. In 1v1, or on a team without an
@@ -2647,6 +2655,13 @@ enumerates enemy actors.
   release inside the same fleeting window. Runs standalone (pacing-off reads scale 100)
   or composed with DI-2; a 1v1 or absent ally provider yields `AnyClimax = false` —
   bit-identical. Switch group `R_tc2_sync_attacks`.
+  Every Rush launch that commits without a taken provider card emits a
+  `secure:<enemyPlayer>` attempt record (Committed at launch, Superseded by the next
+  wave, Failed if the wave dies) — the massed assault predates the mission grammar,
+  and without the record `team_coordination_report`'s `shared_push` sees only the
+  rare economy-raid path. The record names the enemy the wave steers toward
+  (the card it couldn't afford, else `EffectiveMainTarget`); classic has no mission
+  providers and no main target, so it stays silent.
 - **Second consumer (TC-2b — defend-request answering):** `UseTeamDefendAnswers` (default
   false) adds a third channel inside `PrepositionDefenceTick`, below own threat and own
   escort requests: `TeamBlackboard.TopDefendRequest` picks the most urgent broadcast
@@ -2655,6 +2670,11 @@ enumerates enemy actors.
   The ally's position sits outside our base radius, so the CA-2 reserve still keeps a
   floor at home, and `TeamDefendAnswerMinPoolUnits` (default 8) means a thin pool stays
   home entirely. `CollectBroadcasts` exposes the per-ally detail the summary drops.
+  The answer emits `defend_answer:<requesterKey>:<rallyCell>` attempt records (Committed
+  at the confirmed rally, Released on hold expiry/supersede, Failed if the squad dies —
+  one open attempt per id, so the rolling hold refresh extends instead of spamming) so
+  `team_coordination_report`'s `defend_missions` counts the answers this path makes —
+  the protection channel predates the mission-card grammar and otherwise wrote nothing.
   Switch group `S_tc2_defend_answers`; inert in 1v1.
 - **Third consumer (TC-2c — expansion-claim deconfliction):** the broadcast gains
   `ClientIndex` (the publisher's own index) and `ExpansionClaim` (the bot's planner
@@ -2753,7 +2773,10 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
     `DefendPosition`, skipping bots already committed to a Push they own. Every member
     computes the same election, so exactly one ally rallies — the nearest army rescues,
     by construction. Extends the TC-2b path (`TopDefendRequest` picks the request;
-    the directive picks *who* goes).
+    the directive picks *who* goes). **Review fix 4.3 (2026-10-02):** an elected
+    responder leaves the free pool for the rest of the fold — one participant answers
+    at most one defend request per directive, so two simultaneous calls cannot claim
+    the same army.
   - `Sectors` — the territory partition: a Voronoi assignment of regions (the CN4
     `IBotRegionRoles` zone set, §12.17-era topology) to allied bots by spawn distance —
     each bot owns the zones nearest its base centroid. `ExpansionPlannerBotModule`

@@ -64,12 +64,39 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TwoModulesOrderingOneUnitInsideTheWindowIsACrossedOrder()
 		{
 			var gate = new BotOrderGate<int>();
-			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 100, 100), Is.Null);
-			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 150, 100), Is.Null, "same module again is not crossed");
-			Assert.That(gate.NoteIssued(7, "CratePickupBotModule", 200, 100), Is.EqualTo("SquadManagerBotModuleCA"));
-			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 400, 100), Is.Null, "outside the window");
+			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 100, 100, null), Is.Null);
+			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 150, 100, null), Is.Null, "same module again is not crossed");
+			Assert.That(gate.NoteIssued(7, "CratePickupBotModule", 200, 100, null), Is.EqualTo("SquadManagerBotModuleCA"));
+			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 400, 100, null), Is.Null, "outside the window");
 			Assert.That(gate.Crossed, Is.EqualTo(1));
 			Assert.That(gate.CrossedPairs[("SquadManagerBotModuleCA", "CratePickupBotModule")], Is.EqualTo(1));
+		}
+
+		[Test]
+		public void AReleasedClaimReadsAsAHandOffNotACross()
+		{
+			// EMBER's round-trip finding: a unit returning to the idle pool after squad
+			// dissolution read as SquadManager->ScoutBotModule crossed — the earlier
+			// issuer's lease had already ended, so the later order is the new owner.
+			var gate = new BotOrderGate<int>();
+			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 100, 100, "SquadManagerBotModuleCA"), Is.Null);
+			Assert.That(gate.NoteIssued(7, "ScoutBotModule", 150, 100, null), Is.Null, "the squad released the unit — a clean hand-off");
+			Assert.That(gate.Crossed, Is.EqualTo(0));
+
+			var gate2 = new BotOrderGate<int>();
+			Assert.That(gate2.NoteIssued(7, "SquadManagerBotModuleCA", 100, 100, "SquadManagerBotModuleCA"), Is.Null);
+			Assert.That(gate2.NoteIssued(7, "ScoutBotModule", 150, 100, "ScoutBotModule"), Is.Null, "the new holder claimed it");
+			Assert.That(gate2.Crossed, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void OrderingAUnitTheEarlierIssuerStillHoldsIsACross()
+		{
+			var gate = new BotOrderGate<int>();
+			Assert.That(gate.NoteIssued(7, "SquadManagerBotModuleCA", 100, 100, "SquadManagerBotModuleCA"), Is.Null);
+			Assert.That(gate.NoteIssued(7, "ScoutBotModule", 150, 100, "SquadManagerBotModuleCA"), Is.EqualTo("SquadManagerBotModuleCA"),
+				"the squad still holds the lease — two owners in fact");
+			Assert.That(gate.Crossed, Is.EqualTo(1));
 		}
 
 		[Test]

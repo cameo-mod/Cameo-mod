@@ -1,3 +1,102 @@
+# 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
+
+**Done:**
+- `BotOrderGate.NoteIssued` gains the unit's lease `holder`: a unit ordered by module A while
+  A held its lease, then ordered by B after A's claim ended, is a clean hand-off — the squad
+  dissolving and the pool re-drafting the unit (`SquadManager->ScoutBotModule`, 4 WARNs in
+  ab-smoke-out3) was never two owners in fact. The gate now records whether the earlier issuer
+  held the lease at ITS order; a later order with holder != earlier issuer is suppressed only
+  when a release is provable. An earlier issuer that never held the lease keeps the old
+  two-issuers signal — `SendUnitToAttackBotModule`/`ExternalBotOrdersManager` (AS stack) never
+  lease, so their crossings still count as the genuine unleased smell.
+- DESIGN §19.6 rollout bullet documents the lease-aware cross.
+
+**Verified:** 730/730 tests (+2: hand-off suppression both ways, still-held still crosses);
+direct-mutation/fog/frankenstein audits PASS; watch-mode only — `Refuse`/`Preempt` paths and
+the counts semantics are unchanged, classic untouched (no registry = no gate).
+
+# 2026-10-02 — telemetry fix: defend answers + shared pushes emit mission-grammar records
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — closes the report blind spot the 6v6 telemetry exposed (780 records: 5 raid, 0 defend, `shared_push_windows=0` despite 6 waves).*
+
+**Done:**
+- *(merged shape: `defend_answer:<requesterKey>:<rallyCell>` — NOVA's id/kind won in the
+  02a2a73e0 merge; DAWN's open-attempt lifecycle now rides it.)*
+- `defend:`-kind answer record — the TC-2b/TC-3 ally answer goes through the Protection squad
+  channel, which predates the mission-card grammar and emitted nothing; the report's
+  `defend_missions` could only count provider `defend:self` cards (never taken while winning).
+  `CommitAllyDefend`/`CloseAllyDefend` write Committed at the rally (units counted), Released
+  on `ReleaseDefenders`/supersede to an own threat or escort, Failed if the squad dies; the
+  hold-refresh for the same requester extends one attempt instead of spamming records.
+- `secure:<enemyPlayer>` — the massed Rush wave (the actual shared-push mechanism, steered by
+  `EffectiveMainTarget`/sync gates) also emitted nothing; the metric only saw the rare economy
+  raid. `CommitSecurePush` writes Committed at launch when no provider card rode the wave —
+  target = the unaffordable card's `TargetPlayer`, else `EffectiveMainTarget()`. Next launch
+  Supersedes; a destroyed wave closes Failed. Classic has no providers and no main target —
+  silent. Both ids reuse `missionAttemptCounters`; `BotMissionAttemptTracker` match_end covers
+  teardown.
+- `team_coordination_report.py` docstring now describes both emit paths honestly
+  (`defend:cN` = direct requester attribution, `secure:<player>` = cardless wave).
+
+**Verified:** build 0W/0E; records ride `BotMissionLog.Write` (tick, InternalName, tracker
+auto-release) — no logic change, orders untouched, classic unchanged. The next armed 6v6's
+`defend_missions`/`shared_push_windows` will now measure the paths they were designed for.
+
+# 2026-10-02 — review fixes: broadcast liveness, single-assignment rescue, stale switch groups (fransotto review 3.2/4.2/4.3)
+
+*Devin (dawn), branch `devin/dawn/team-liveness-rescue` — three findings from `CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE` in the team-coordination lane.*
+
+**Done:**
+- **4.2 liveness:** `TeamBlackboard.ValidBroadcast(p, b, now)` — publisher `WinState == Undefined` &&
+  `SnapshotTick > 0` && `now - SnapshotTick <= MaxBroadcastAgeTicks` (600 = 4 × SnapshotInterval) — applied
+  centrally inside `CollectBroadcasts`. A defeated ally's last broadcast can no longer hold its expansion/
+  capture claims, defend requests, target vote or sector anchor open (OpenRA keeps `Player`/`PlayerActor`
+  after defeat). Every consumer inherits it — none invents its own freshness test.
+- **4.3 rescue:** `CoalitionFold.Compute` removes the elected responder from `freePool` — one participant
+  answers at most one defend request per fold; two simultaneous calls can no longer claim the same army.
+- **3.2 stale switch groups:** deleted `AD_army_first` (targets `BaseBuilderBotModuleCA.MinArmyUnitsBeforeBuildings`/
+  `ArmyFirstMinCash` — removed fields; the live group is `AE_army_first` on `ArmyFirstBotModule`) and
+  `AE_spread_assault` (dead `BaseBuilderBotModuleCA.MinBuildingGapCells`; its one live field
+  `MaxHarvestersPerResourceIndice` moved under `AF_harvester_spread` scoped to `@generic` so classic's
+  explicit `0` opt-out survives — the old unqualified target would have flipped it).
+- Tests +2: `ValidBroadcast` boundary/liveness matrix (`TeamBlackboardTest`), one-responder-per-request +
+  thin-pool (`CoalitionFoldTest`).
+
+**Verified:** build 0W/0E; targeted tests 38/38; `ai_arch_audit.py` R2 ok — 56 switch targets verified,
+0 errors; `apply_increment_switches.py --groups AF_harvester_spread --dry-run` = 2 changes, both `@generic`.
+
+# 2026-10-02 — TC-2e: capture-claim deconfliction (the fifth blackboard consumer, AI_ARCHITECTURE 12.17)
+
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/tc2e-capture-claims`.*
+
+**Done:**
+- `TeamBroadcast.CaptureClaim` (WPos, Zero = none): the engineer owner's live capture target rides the
+  same host-side, allied-only broadcast as the TC-2c expansion claim — own-side intent, publish-always.
+- `IBotCaptureClaimProvider` (Mods.CA): the seam `BotSituation` reads; `EngineerBotModule` implements it
+  (active escort plan else newest committed `EngineerJob.Capture` by `OrderedTick`). Classic runs
+  `CaptureManagerBotModuleCA` and publishes nothing = bit-identical.
+- `EngineerBotModuleInfo.UseTeamCaptureClaims` (default false, switch group `AL_tc2e_capture_claims`):
+  `AllyClaimsTarget` drops a candidate a lower-`ClientIndex` ally claims within `AllyCaptureClaimRadiusCells`
+  (2) at ALL three filters — the priority list, the capturable pool (which the transport run's stop pool
+  inherits), and the per-engineer `open` set — so a loser falls through to its next candidate instead of
+  racing the ally's engineer into the same building. `OutrankingAllyClaims` is the pure precedence fold
+  (TC-2c's `AllyClaimWins` shape); claims collect once per tick via `allyClaimsTick` caching.
+- Why: the 6v6 smoke logged **49 contested `capture:` mission ids** — 2–4 allied bots publishing capture
+  missions on the same buildings. Leases prevent duplicate engineer *ownership* but nothing stopped
+  independent bots picking the same *target*.
+- Tests: `EngineerBotModuleTest` +4 (outranking same-cell, radius boundary, empty/null board, mixed ranks).
+
+**Verified:** build 0W/0E (CA + Cameo + test); targeted tests 27/27; fog audit PASS — the claim is
+own-side intent consumed off `World.Players`, no new enumeration site.
+**Not done:** A/B pending — the increment decides whether the switch arms; contested-count
+check via `team_coordination_report.py` on the next 6v6.
+*Superseded by NOVA's `02a2a73e0` (below): plural `CaptureClaims`, `IBotCaptureClaimSource`,
+active stand-down, `BF_team_capture_claims` — DAWN's single-claim `AL` variant merged away
+in favour of it.*
+
 # 2026-10-02 — NOVA: TC-2e capture-claim arbitration + post-merge audit fixes (TC-3 lifecycle)
 
 **Done (branch devin/nova/def3-remote-coverage, worktree nova-tc2):**

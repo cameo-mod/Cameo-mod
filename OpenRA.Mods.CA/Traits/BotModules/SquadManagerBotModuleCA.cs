@@ -688,6 +688,20 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: where the protection squad waits for a predicted attack, and until when.
 		CPos? protectionRally;
 		int protectionHoldUntilTick = -1;
+
+		// TC-2b/TC-3 (§12.17/§12.18): the requester whose defend attempt record is open
+		// on the ally-answer protect rally — null while the squad serves an own threat or
+		// escort. The record lets team_coordination_report count the answers its
+		// defend_missions metric exists for.
+		// TC-2b/TC-3 (§12.17/§12.18): the mission id of the defend_answer attempt open
+		// on the protect rally — null while the squad serves an own threat or escort.
+		// One open attempt per id: the rolling hold refresh extends it, a new requester
+		// or a new rally cell supersedes it.
+		string allyDefendOpen;
+
+		// The mission id of the open shared-push (secure:<player>) attempt — each
+		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
+		string securePushOpen;
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -1642,6 +1656,7 @@ namespace OpenRA.Mods.CA.Traits
 			// draft, AttackMove and hold-expiry all reuse the escort path verbatim —
 			// the rolling hold lets a retracted request release within one interval.
 			// A thin home pool stays home regardless of how loud the request is.
+			TeamBroadcast allyDefendAnswer = null;
 			if (threat == null && request == null && teamAnswersOn &&
 				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
 			{
@@ -1682,23 +1697,7 @@ namespace OpenRA.Mods.CA.Traits
 							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
 				}
 
-				// Observability (post-merge review): the answer writes a mission record so the
-				// team report can count defend answers — without it this channel is invisible
-				// in cameo-ai-missions.jsonl by construction.
-				if (answered != null)
-				{
-					BotMissionLog.Write(new BotMissionRecord
-					{
-						Player = Player,
-						MissionId = $"defend_answer:{CoalitionFold.ParticipantKey(answered)}:{World.Map.CellContaining(answered.DefendPosition)}",
-						Attempt = 1,
-						State = BotMissionAttemptState.Committed,
-						Executor = "Squads",
-						MissionType = "defend_answer",
-						TargetCell = World.Map.CellContaining(answered.DefendPosition),
-						Value = answered.OwnArmyValue,
-					});
-				}
+				allyDefendAnswer = answered;
 			}
 
 			if (threat == null && request == null)
@@ -1756,8 +1755,103 @@ namespace OpenRA.Mods.CA.Traits
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
+			if (allyDefendAnswer != null)
+				CommitAllyDefend(allyDefendAnswer, rally, protectSq.Units.Count);
+			else
+				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
 			if (request == null && Info.FastSquadsReactToThreats)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
+		}
+
+		// The ally-answer protect squad is a defend action the mission-card grammar
+		// can't see through providers — the answer writes a `defend_answer` record so
+		// the team report can count it (without it this channel is invisible in
+		// cameo-ai-missions.jsonl by construction). Written at the confirmed rally, not
+		// the synthesis — a rally the squad can't take commits nothing. One open attempt
+		// per requester+rally id: the rolling hold refresh extends it, a new requester
+		// or a new rally cell supersedes it.
+		void CommitAllyDefend(TeamBroadcast answered, CPos rally, int units)
+		{
+			var id = $"defend_answer:{CoalitionFold.ParticipantKey(answered)}:{rally}";
+			if (allyDefendOpen == id)
+				return;
+
+			if (allyDefendOpen != null)
+				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
+			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+			missionAttemptCounters[id] = attempt;
+			allyDefendOpen = id;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = id,
+				Attempt = attempt,
+				State = BotMissionAttemptState.Committed,
+				Executor = "Squads",
+				MissionType = "defend_answer",
+				TargetCell = rally,
+				Units = units,
+				Value = answered.OwnArmyValue
+			});
+		}
+
+		void CloseAllyDefend(BotMissionAttemptState state, string reason)
+		{
+			if (allyDefendOpen == null)
+				return;
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = allyDefendOpen,
+				Attempt = missionAttemptCounters.GetValueOrDefault(allyDefendOpen),
+				State = state,
+				Reason = reason,
+				Executor = "Squads",
+				MissionType = "defend_answer"
+			});
+			allyDefendOpen = null;
+		}
+
+		// The cardless assault wave still needs a record for the shared-push metric:
+		// one attempt per launch, superseded by the next wave, failed with the squad.
+		void CommitSecurePush(Player target, int units)
+		{
+			CloseSecurePush(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			var id = $"secure:{target.InternalName}";
+			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+			missionAttemptCounters[id] = attempt;
+			securePushOpen = id;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = id,
+				Attempt = attempt,
+				State = BotMissionAttemptState.Committed,
+				Executor = "Squads",
+				MissionType = "secure",
+				Units = units
+			});
+		}
+
+		void CloseSecurePush(BotMissionAttemptState state, string reason)
+		{
+			if (securePushOpen == null)
+				return;
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = securePushOpen,
+				Attempt = missionAttemptCounters.GetValueOrDefault(securePushOpen),
+				State = state,
+				Reason = reason,
+				Executor = "Squads",
+				MissionType = "secure"
+			});
+			securePushOpen = null;
 		}
 
 		/// <summary>The most valuable live protection request, or null. Requests refresh
@@ -1817,6 +1911,7 @@ namespace OpenRA.Mods.CA.Traits
 			protectionRally = null;
 			protectionHoldUntilTick = -1;
 			protectionQuietSinceTick = -1;
+			CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
@@ -2105,7 +2200,13 @@ namespace OpenRA.Mods.CA.Traits
 		void CleanSquads()
 		{
 			foreach (var s in Squads.Where(s => !s.IsValid))
+			{
 				ResolveMissionAttempt(s, BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+				if (s.Type == SquadCAType.Protection)
+					CloseAllyDefend(BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+				else if (s.Type == SquadCAType.Rush)
+					CloseSecurePush(BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+			}
 			Squads.RemoveAll(s => !s.IsValid);
 			foreach (var s in Squads)
 			{
@@ -2759,6 +2860,17 @@ namespace OpenRA.Mods.CA.Traits
 						Frozen = missionFrozenTarget != null
 					};
 					MissionTaken(mission, attackForce);
+				}
+				else
+				{
+					// No provider card rode this wave — the squad still committed against
+					// an enemy the bot can name: the card it couldn't afford, else the
+					// coalition/provider steering target. secure:<player> is the shared
+					// push event the coordination report's grammar was designed for;
+					// unarmed games have no main target and emit nothing.
+					var pushTarget = mission?.TargetPlayer ?? EffectiveMainTarget();
+					if (pushTarget != null && pushTarget != Player && attackForce.IsValid)
+						CommitSecurePush(pushTarget, attackForce.Units.Count);
 				}
 				heldDefendMission = null;
 				defendMissionHeldSince = -1;
