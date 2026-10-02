@@ -16305,3 +16305,46 @@ test lane.
   `UseRiskRouting`, `PublishMissions`, `RestrictMCVDeploymentFallbackToBase`,
   `FogCanaryEnabled`); the two real decision-owner overlaps recorded (Engineer↔
   BridgeRepair on RepairBridge; planner RequestMcv ↔ MCVManager cash gate).
+
+## 2026-10-02 — EMBER: AI wiring/reachability audit + round-trip measurement
+
+Branch `devin/ember/ai-wiring-coverage`. New tool `tools/audit/audit_bot_wiring.py`
+(reachability/coverage audit over the resolved bot wiring, complementing
+ai_module_map.py's global graph):
+
+- Models every ModularBot type's granted condition tokens
+  (GrantConditionOnBotOwner) + the 6 runtime personality-* tokens as
+  mutually-exclusive profile states => 80 profiles (14 generic types x 6,
+  classic, fransbot).
+- Evaluates each loaded module instance's RequiresCondition per profile;
+  checks provider->consumer seams *within* a profile (global C1 can't see
+  cross-stack gaps) and duplicate providers per profile (DESIGN 19.3).
+
+Findings (master @16abcb6f5):
+- R1: 4 unreachable-on-master module instances, all the cn2/cn3 quartet
+  (BridgeRepair, Deploy, GarrisonDefense, UnitRepair). Gates need genericbot &&
+  cnX but grants arm only `fransbot` AND no increment_switches group re-arms
+  them -> dormant with no arm path; needs a switch letter or a park note.
+- R2: 0 gate tokens never granted. R6: 0 grants never required.
+- R3: 18 in-profile seam gaps, ALL on classic (16) + fransbot (2); the 78
+  genericbot personality-state profiles are fully wired. classic/fransbot run
+  without MasterAi by design (absence degrades).
+- R4: 0 duplicate authorities. IBotRegionThreatProvider's 2 providers
+  (MasterAi+Scout) are an additive Sum() seam — whitelisted by contract.
+- R5: 0 truly dead C# bot types; map C3's 21 = merge parents + 19.4-held +
+  classic/Common variants + update-rule miscounts + non-trait helpers.
+- R7: 94 Info bools; 20 armed by increment switch groups; 18 off w/o arm path
+  (fog-visibility relaxations yaml-off, SiegeMemory, FogCanary, SpecOps knobs);
+  rest live. NOVA's AI_DATAFLOW dormant-table is inverted: UseMissions /
+  UseRiskRouting / PublishMissions / RestrictMCVDeploymentFallbackToBase are
+  C# default-ON and live (mission records exist); flagged for doc fix.
+- Hidden consumption found: X.Of(player) locators (IBotUnitLeases via
+  BotUnitLeases.Of), helper-class consumers (BaseBuilderQueueManagerCA), ctor
+  injection (RegionMemory<-IBotZoneTopology). Map C2's 7 "no consumer" seams are
+  scan gaps, not wiring gaps — consistent with NOVA's 31/31 claim.
+
+Round-trip (tools/ai/round_trip_check.py on /c/tmp/ab681-{ctrl,cand}-out,
+inc3ab-out): perception/missions/ownership/fog/tools PASS; load + order-gate
+FAIL (LC5 record block absent in that build); outcomes FAIL (57 dangling
+attempts = LC8 write-back); learning WARN (offline fit works, in-game LEARNED
+consumption absent). The verify->feedback half of the loop is the open edge.
