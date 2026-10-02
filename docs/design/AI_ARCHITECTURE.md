@@ -2672,3 +2672,67 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
   `Allies:` within teams and `Enemies:` across; needs a map with ≥2N `PlayerReference`s
   and ≥2N mpspawns (dusttown-battle-6v6, moldova-6v6 verified at 12). `run_league.py`
   takes `"team_size": N` the same way.
+
+### 12.19 GC-1 + EX-4 — garrison contest and cover-the-map expansion (EMBER, 2026-10-02)
+
+Two maintainer-observed stack failures, one shared root cause class: behaviour that existed
+only as *opportunistic local fallback* was invisible to the strategic layer, so the stack
+never *aimed* at it.
+
+**GC-1 — the garrison contest** (`GarrisonContestBotModule`, switch `AB_garrison_contest`,
+`genericbot && garrison_contest`).
+
+- *Why the old path lost:* `LoadGarrisonerBotModuleCA` drafts only `IsIdle` units and picks a
+  map-random target — on the new stack squads absorb every infantryman first, so neutral
+  garrisonables went unclaimed by default, and walkers it did send could be re-drafted
+  mid-trip (no lease).
+- *Contest pass:* every `ScanInterval` the module scores scouted neutral `Garrisonable`
+  buildings (`Shroud.IsExplored` — fog-honest, scouting feeds the frontier), capacity-
+  weighted nearest-first from the own-buildings centroid, bounded by `ContestRadiusCells`.
+  Walkers are claimed under `BotLeasePurpose.Garrison` **before** orders go out, so a squad
+  pass in the same tick cannot draft them (`ReconcileSquadLeases` hands them off cleanly).
+  `MinimumSpareInfantry` keeps squad formation fed first; `MaxConcurrentClaims`/
+  `MaxLeasedWalkers` bound the commitment. Orders are `AttackMove` to the cell + queued
+  `EnterGarrison` — walkers fight through incidental contact instead of dying single-file.
+- *Clear pass:* enemy occupation is fog-honestly detectable — `ChangeOwnerOnGarrisoner`
+  flips the building's owner, and `BotFogMemory` already prices remembered garrisonables
+  by capacity × occupant value (§12.12). The module implements `IBotMissionProvider` and
+  publishes `Raid` missions at every enemy-owned or remembered-garrisonable defence cell
+  (`raid:garrison_<x>_<y>:r<zone>` — per-building attempt lineage). Squads remain the sole
+  execution authority: `BestAffordableMission` takes them like any raid, the trailing
+  artillery squad + `IBotSiegeAdvisor` verdicts produce stand-off bombardment — artillery
+  clears the garrison *before* infantry are committed, which is exactly the maintainer's
+  ask. `RequiredValue` = remembered defence value × `ClearRaidForcePercent` gates the
+  suicide case: an intact high-value garrison demands a squad big enough to survive it.
+- *Denial* is emergent, not a third system: an enemy column moving at a garrison makes it
+  flip enemy-owned → it becomes a published Raid target; once cleared it re-enters the
+  contest candidate set. No "deny" type needed.
+- *One-owner swap:* when armed, `LoadGarrisonerBotModuleCA@Infantry` is disarmed for
+  genericbot (`classicbot || (genericbot && !garrison_contest)`) — the same yield pattern
+  as `cn3_bridge_repair` (EngineerBotModule's RepairBridge job). Classic keeps the CA
+  loader untouched, so the A/B control is preserved.
+
+**EX-4 — cover the whole map** (`ExpansionPlannerBotModule.CoverAllFields`, switch
+`AC_cover_map_expansion`).
+
+- *The ceiling found:* `RequestMcv`'s `McvTargetCount = 3` counts **yards + MCVs + queued**
+  against the appetite — starter yard + one expansion + one in-flight MCV saturates it, so
+  the greedy driver stopped requesting after the first field. `ParkTicks` also meant a
+  transiently-uncalimable field fell out for 3000 ticks at a time.
+- *The fix:* with `CoverAllFields` armed, `targetCount` becomes `max(McvTargetCount,
+  active + min(max(freeFarFields, 1), CoverAllFieldsMaxInflight))` — i.e. a bounded
+  in-flight pipeline (`CoverAllFieldsMaxInflight = 2` queued MCVs) that runs **whenever a
+  reachable far field is still free**, regardless of how many bases already exist.
+  `freeFarFields == 0` leaves a one-MCV replacement allowance so a lost yard can be
+  refounded. Expansion stops exactly when the maintainer said it should: no unclaimed
+  reachable field remains.
+- *Difficulty scales pace, not the ceiling:* `BotLimits@<tier>.BuildingIntervalModifier`
+  already throttles production speed per difficulty and `McvRequestReserve` paces the cash
+  commitment — `CoverAllFields` removes only the count cap, so `easiest` covers the map
+  slowly, `cameogod` fast, and both eventually cover it.
+- *Composition:* teams get deconfliction for free — `UseTeamExpansionClaims` (TC-2c)
+  arbitrates contested fields before `CoverAllFields` refills the pipeline, and the §12.18
+  sector fold can bias scoring later without touching this gate.
+- *Downstream growth:* `BuildingLimits` carries almost no production caps, so each new
+  yard's local base builder fills factories/production/refineries (`RefineriesPerBase`,
+  `MaxExtraRefineries` are per-base, not global) — bases grow as they land.

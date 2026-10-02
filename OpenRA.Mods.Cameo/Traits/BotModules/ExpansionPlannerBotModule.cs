@@ -100,6 +100,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("UT-4: at the full TechRush pole the effective McvTargetCount shrinks by this many (floor 1).")]
 		public readonly int TechRushAxisMinusMcvs = 1;
 
+		[Desc("EX-4 (AI_ARCHITECTURE §12.19): the appetite tracks the map, not a flat cap — while any reachable far",
+			"field stays free, the driver keeps up to CoverAllFieldsMaxInflight construction MCVs in the queue on top",
+			"of however many yards/MCVs already exist, so expansion only stops when every field is claimed (or",
+			"unreachable/parked). Difficulty still paces it through BotLimits production intervals and the cash",
+			"reserve — speed changes, the ceiling does not. Needs DriveMcvRequests.")]
+		public readonly bool CoverAllFields = false;
+
+		[Desc("EX-4: queued construction MCVs the cover-the-map driver holds in flight at once. Bounds the",
+			"commitment, not the map: finished MCVs leave the queue and a new one is requested while fields remain.")]
+		public readonly int CoverAllFieldsMaxInflight = 2;
+
 		[Desc("TC-2c (AI_ARCHITECTURE §12.17): yield a free field to an allied bot's published expansion claim",
 			"when it outranks us (lower ClientIndex). Deterministic precedence, so contested fields converge",
 			"instead of oscillating. Inert in 1v1 — no allied broadcasts exist.")]
@@ -393,6 +404,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var axis = utilityAxesProviders?.FirstEnabledTraitOrDefault()?.UtilityTechRushExpansion ?? IBotUtilityAxes.Neutral;
 				targetCount = EffectiveMcvTargetCount(Info.McvTargetCount, axis, Info.ExpansionAxisBonusMcvs, Info.TechRushAxisMinusMcvs);
+			}
+
+			// EX-4: cover the whole map. The flat McvTargetCount ceiling is what made the stack stop at one
+			// expansion — active yards count against it, so three yards meant "never request again". With
+			// CoverAllFields the target becomes "as many active construction assets as exist, plus a bounded
+			// inflight pipeline whenever a reachable far field is still free". freeFarFields==0 keeps a one-MCV
+			// replacement allowance so a lost yard can be refounded.
+			if (Info.CoverAllFields)
+			{
+				var tick = world.WorldTick;
+				var freeFarFields = LastScores.Count(f => f.Hops >= Info.McvMinHops
+					&& !(parkedUntil.TryGetValue(f.Index, out var until) && tick < until));
+				var inflightCap = Math.Min(Math.Max(freeFarFields, 1), Math.Max(1, Info.CoverAllFieldsMaxInflight));
+				targetCount = Math.Max(targetCount, active + inflightCap);
 			}
 
 			if (!ShouldRequestMcv(resources.GetCashAndResources(), Info.McvRequestReserve, farFieldFree, active + queued, targetCount))

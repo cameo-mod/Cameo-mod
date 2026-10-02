@@ -1,3 +1,46 @@
+# 2026-10-02 — EMBER: garrison contest + cover-the-map expansion (GC-1 / EX-4)
+
+Maintainer-observed failures on master: genericbot loses every neutral
+garrisonable to classicbot (then suicides infantry into the occupied ones),
+and stops expanding after the first resource field.
+
+**Root causes found:**
+- `LoadGarrisonerBotModuleCA` only drafts `IsIdle` units at a map-random
+  garrisonable — genericbot squads absorb all infantry first, and unleased
+  walkers could be re-drafted mid-trip. Nothing strategic ever aimed at
+  garrisons.
+- `ExpansionPlannerBotModule.RequestMcv`'s appetite `McvTargetCount = 3`
+  counts yards + MCVs + queued — three construction assets in total means
+  "one expansion, then never again". The ceiling was in the count, not the
+  pace.
+
+**Shipped on `devin/ember/team-batch-harness` (dormant until armed):**
+- New `GarrisonContestBotModule` (genericbot && garrison_contest; switch
+  `AB_garrison_contest`). Contest: leases spare infantry
+  (`BotLeasePurpose.Garrison` before orders — squads can't re-draft them)
+  into scouted neutral `Garrisonable`s, capacity-weighted nearest-first
+  inside `ContestRadiusCells`; `MinimumSpareInfantry` keeps army production
+  fed. Clear: publishes `Raid` missions at enemy-owned (ChangeOwnerOnGarrisoner
+  flip) and remembered-garrisonable defence cells on `IBotMissionProvider` —
+  squads execute; the siege evaluator's stand-off/artillery-first verdicts
+  supply the "artillery clears before infantry commit" behaviour;
+  `RequiredValue = defence value x ClearRaidForcePercent` gates the suicide
+  case. When armed, `LoadGarrisonerBotModuleCA@Infantry` yields the
+  genericbot slice (classic keeps it — A/B control preserved).
+- `ExpansionPlannerBotModule.CoverAllFields` (switch `AC_cover_map_expansion`):
+  appetite becomes `active + min(max(freeFarFields,1), CoverAllFieldsMaxInflight)`
+  — a bounded MCV pipeline that runs while any reachable far field is free.
+  Difficulty still paces via BotLimits production intervals +
+  `McvRequestReserve`; the ceiling is gone. `ParkTicks` transient parking
+  unchanged; TC-2c allied-claim arbitration composes.
+- `AI_ARCHITECTURE.md` §12.19 documents both; `increment_switches.yaml` arms
+  AB/AC clean (verified `--dry-run`).
+
+Compile-clean (Cameo csproj, BuildProjectReferences=false; bin copy blocked
+by the live 6v6 — DLL produced in obj). Boot-gate queued behind the match;
+increment A/B arms the pair per usual. NOT-YET-PROVEN: live garrison claims,
+artillery-clear raids, multi-field expansion rate.
+
 # 2026-10-02 — EMBER: 6v6 team harness + coalition-general design + first evidence
 
 - `run_ai_match_batch.py --team-size N` generalised from {1,2} to 1-8

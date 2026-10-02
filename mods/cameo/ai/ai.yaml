@@ -69,6 +69,11 @@
 	GrantConditionOnBotOwner@cn4regionroles:
 		Condition: cn4_region_roles
 		Bots: fransbot
+	# GC-1 (AI_ARCHITECTURE §12.19): garrison contest + enemy-garrison clear raids for genericbot.
+	# The arm flips these to the genericbot tier list in the increment A/B; default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@garrisoncontest:
+		Condition: garrison_contest
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3463,6 +3468,14 @@ Player:
 		# Dual-purpose rocket infantry cover both threat classes in most packs; packs tune the lists.
 		AntiArmorInfantryTypes: td_nod_rocketsoldier, td_gdi_rocketsoldier, ra1_allies_rocketsoldier, ra1_soviets_rocketsoldier, ra2_soviets_flaktrooper
 		AntiAirInfantryTypes: td_nod_rocketsoldier, td_gdi_rocketsoldier, ra1_allies_rocketsoldier, ra1_soviets_rocketsoldier, ra2_soviets_flaktrooper, ra2_allies_guardiangi
+	# GC-1 (AI_ARCHITECTURE §12.19): fights for the map's garrisonables instead of walking past them.
+	# Contest half leases spare infantry into scouted neutral garrisonables nearest-first (walkers are
+	# lease-protected from squad drafting - the "feed them in one by one" fix). Clear half publishes Raid
+	# missions on enemy-occupied garrisonables through IBotMissionProvider - squads + the siege evaluator
+	# bombard them before infantry commit. `genericbot && garrison_contest`: off on master until the
+	# increment A/B arms it (switch group AB).
+	GarrisonContestBotModule:
+		RequiresCondition: genericbot && garrison_contest
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
@@ -3671,6 +3684,10 @@ Player:
 		# TC-2c: yield contested fields to the outranking ally's published claim (switch group V).
 		# Inert in 1v1.
 		UseTeamExpansionClaims: false
+		# EX-4: keep MCVs in flight while any reachable far field is free - expansion stops when the
+		# map is covered, not at a fixed yard count. Difficulty paces via BotLimits intervals +
+		# McvRequestReserve, never the ceiling. Switch group AC.
+		CoverAllFields: false
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
@@ -4266,8 +4283,11 @@ Player:
 		ValidTargets: Structure
 		InvalidTargets: Water, Defense
 		TargetDistances: Furthest
+	# GC-1 (AI_ARCHITECTURE §12.19): when the garrison-contest switch arms, the CA loader yields the genericbot
+	# slice to GarrisonContestBotModule - it picks targets nearest-first with leases, not map-random, and its
+	# infantry cannot be squad-drafted mid-walk. One owner per decision, same pattern as cn3_bridge_repair.
 	LoadGarrisonerBotModuleCA@Infantry:
-		RequiresCondition: classicbot || genericbot
+		RequiresCondition: classicbot || (genericbot && !garrison_contest)
 		PassengersPerScan: 6
 		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry
 	LoadCargoBotModule@Infantry:
