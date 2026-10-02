@@ -298,7 +298,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			capturableTypes = info.CapturableActorTypes.Count > 0 || shared == null ? info.CapturableActorTypes : shared.CapturableActorTypes;
 
 			var jobs = new List<EngineerJob>();
-			if (info.RepairableHutActorTypes.Count > 0)
+
+			// One owner per decision (architecture audit): when the dedicated CN bridge module is
+			// enabled on this actor (cn3_bridge_repair), it owns hut repair — Engineer keeps the job
+			// only as its fallback. TraitsImplementing is safe here; unitBuilders below does the same.
+			if (info.RepairableHutActorTypes.Count > 0
+				&& !self.TraitsImplementing<BridgeRepairBotModule>().Any(t => !t.IsTraitDisabled))
 				jobs.Add(EngineerJob.RepairBridge);
 			if (info.RepairableActorTypes.Count > 0)
 				jobs.Add(EngineerJob.RepairBuilding);

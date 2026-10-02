@@ -161,7 +161,7 @@ Where two modules can decide the same thing — the merge targets:
 
 | Overlap | Today | Correct end state |
 |---|---|---|
-| Bridge repair | `EngineerBotModule` has its own RepairBridge job AND `BridgeRepairBotModule` (X) re-orders the same bridges | One owner: BridgeRepair owns the *decision* (which bridge, when), EngineerBotModule provides the *unit* via a `IBotBridgeRepairJob` seam |
+| Bridge repair | **RESOLVED (2026-10-02):** `BridgeRepairBotModule` (X) owns hut repair when enabled — `EngineerBotModule` skips its RepairBridge job while an enabled CN module exists on the actor; Engineer remains the fallback when X is off. One owner per gate state, no seam needed: the armed A/B is a clean swap, not an additive layer |
 | MCV want | `ExpansionPlannerBotModule.RequestMcv` (greedy) AND engine `McvExpansionManagerBotModule.BuildMCV` (4000-cash gate) both call `RequestUnitProduction` | Verified benign (2026-10-02): both gates dedupe — the engine manager checks `ProductionQueue.AllQueued` + `RequestedProductionCount == 0`, the planner counts `active + queued` against its target. Two want-sources, one guarded queue. The genuinely dead third requester (`McvManagerBotModuleCA`) was deleted |
 | Defence placement | Advisor path vs `PlaceDefenseTowardsEnemyChance` fallback | Advisor wins when present (clean alternative, by design) — fine |
 | Capture | `CaptureManagerBotModuleCA` (classic) vs `EngineerBotModule` (genericbot) | Already split by bot type — the merged genericbot path is EngineerBotModule owning capture+bridge+transport; classic keeps its CA copy |
@@ -204,8 +204,9 @@ two brains side by side.
   record at `GameOver` (EMBER's round-trip: 4 dangling `capture:*` in the 2v2
   smoke, 57 dangling across the A/B corpus). Executors should emit
   `Released(match_end)` on world teardown.
-- **Bridge-repair double owner** — EngineerBotModule and BridgeRepairBotModule
-  both decide RepairBridge; merge behind one job list.
+- ~~**Bridge-repair double owner**~~ — RESOLVED: EngineerBotModule yields its
+  RepairBridge job whenever an enabled BridgeRepairBotModule shares the actor;
+  `cn3_bridge_repair` arming is now a clean donor-vs-incumbent swap.
 - **MCV want converged** — the dead `McvManagerBotModuleCA` is gone; the two
   live want-sources (planner greedy `RequestMcv`, engine `McvExpansionManager`
   cash gate) both dedupe into the guarded `RequestUnitProduction` queue, so the

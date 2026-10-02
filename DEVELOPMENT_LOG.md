@@ -16296,6 +16296,13 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
 
+- 2026-10-02 nova: bridge-repair single-owner consolidation — the last real decision overlap
+  from the dataflow audit. When `cn3_bridge_repair` arms BridgeRepairBotModule, BOTH modules
+  scanned the same huts; leases deduped units but not targets (two repairers could converge on
+  one hut). EngineerBotModule now skips its RepairBridge job whenever an enabled
+  BridgeRepairBotModule shares the player actor — cn3_bridge_repair arming is a clean
+  donor-vs-incumbent swap (the CN module owns huts + repairer production demand), Engineer is
+  the fallback when X is off. No new switch letter, zero yaml, flag-off parity. 614/614 tests.
 - 2026-10-02 nova: LC8 dangling-outcome fix — EMBER's round-trip found open mission attempts
   never writing a terminal record at GameOver (4 dangling capture:* attempts in the 2v2 smoke,
   57 across the A/B corpus). New `BotMissionAttemptTracker` (CA, player actor, genericbot ||
