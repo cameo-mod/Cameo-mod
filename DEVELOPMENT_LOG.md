@@ -16,6 +16,22 @@
 (only the CA/Cameo `BaseBuilderQueueManagerCA` path logs); `expansion` fields use the planner's `ReachCells` / `ClaimRadiusCells` and a fixed 12-cell anchor
 radius (`ExpansionMath.AnchorRadiusCells`) - tune after the first logs. **Next:** boot-gate, one mirror match, run both tools on its Logs.
 
+# 2026-10-02 - FE-1 field coverage: one refinery per anchor, MCV and crawl apart, spread (AI_ARCHITECTURE 12.24)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/fe1_2026_10_02`; nothing committed, no game launch).*
+
+**Done:** switch `AJ_field_coverage` (`ExpansionPlannerBotModule.FieldCoverage`, default off, genericbot-only) with
+1) refinery law (anchors = spreaders + spreaderless field centres; wanted iff an unserved anchor is in reach and refineries < anchors;
+bypasses the yard cap, `OptimalRefineryCount` and the 19.10 refinery cap; first refinery keeps `InititalMinimumRefineryCount`),
+2) anchor-nearest claim placement (`findPos anchorOrder`), 3) MCV-site separation factor + crawl avoids MCV-held fields,
+4) spread factor on both scores, 5) aggression values in the group (MaxInflight 3, reserve 1000, McvTargetCount 4).
+BaseBuilder (shared with classic) reads only new default-false `IBotExpansionTargetProvider` members. Spec note in 12.24.
+**Verified:** build 0 errors; full Cameo tests 691 pass (13 new in `FieldCoverageTest`); fog / frankenstein / personalities /
+wiring / direct-mutation audits pass (fog manifest ExpansionPlanner 4 -> 5); `apply_increment_switches.py --groups AJ_field_coverage --dry-run` = 5 changes.
+**Not verified:** no boot gate and no match (not allowed here) - the behaviour is untested in-game.
+**Open / next:** boot-gate + A/B; aggression numbers are guesses; spreader scan assumes `ISeedableResource` actors are the
+map's spreaders; a claim that cannot place returns null (retried, parked after 12 re-plans) instead of stacking at home.
+
 # 2026-10-02 — Assault fan merged into the concave (one deploy state, two shapes; AI_ARCHITECTURE 12.7a objective shape)
 
 *Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/coh_formation`; nothing committed, no game launch).*

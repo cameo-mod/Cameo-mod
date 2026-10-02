@@ -684,7 +684,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Find the buildable cell that is closest to pos and centered around center.
 		// The building gap belongs to the placement advisor (BuildingGapRule.Resolve; no advisor = no gap);
 		// defense-style callers pass defenseGap so walls/turrets can still form tighter lines.
-		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, bool defenseGap = false)
+		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, bool defenseGap = false, CPos? anchorTieBreak = null, bool anchorOrder = false)
 		{
 			var actorInfo = world.Map.Rules.Actors[actorType];
 			var actorVariant = 0;
@@ -696,9 +696,17 @@ namespace OpenRA.Mods.CA.Traits
 			var cells = world.Map.FindTilesInAnnulus(center, minRange, maxRange);
 
 			// Sort by distance to target if we have one
-			if (center != target)
+			if (center != target || anchorOrder)
 			{
 				cells = sortMax ? cells.OrderByDescending(c => (c - target).LengthSquared) : cells.OrderBy(c => (c - target).LengthSquared);
+
+				// FE-1 (§12.24): the refinery claim takes the placeable cell nearest its anchor; ties go to the cell
+				// closest to the field's resource cells. OrderBy is stable, so every other caller is unchanged.
+				if (anchorOrder && anchorTieBreak.HasValue)
+				{
+					var tie = anchorTieBreak.Value;
+					cells = ((IOrderedEnumerable<CPos>)cells).ThenBy(c => (c - tie).LengthSquared);
+				}
 
 				// Rotate building if we have a Facings in buildingVariantInfo.
 				// If we don't have Facings in buildingVariantInfo, use a random variant
@@ -707,6 +715,10 @@ namespace OpenRA.Mods.CA.Traits
 					if (buildingVariantInfo.Facings != null)
 					{
 						var vector = world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center);
+
+						// FE-1: centre == target (anchor placement) has no direction; keep variant 0 instead of dividing by zero.
+						if (vector.Length == 0)
+							vector = new WVec(0, 1, 0);
 
 						// The rotation Y point to upside vertically, so -Y = Y(rotation)
 						var desireFacing = new WAngle(WAngle.ArcSin((int)((long)Math.Abs(vector.X) * 1024 / vector.Length)).Angle);
@@ -762,7 +774,7 @@ namespace OpenRA.Mods.CA.Traits
 			// Cameo (§12.20): an advisor that ranks re-ranks a bounded prefix of placeable, gap-valid cells
 			// (spread-out bases instead of first-valid packing). No ranking advisor = first valid cell wins,
 			// exactly as upstream.
-			if (advisor != null && advisor.RanksCandidates)
+			if (advisor != null && advisor.RanksCandidates && !anchorOrder)
 			{
 				var candidates = new List<CPos>();
 				foreach (var cell in cells)
@@ -891,14 +903,24 @@ namespace OpenRA.Mods.CA.Traits
 						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
 						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
 						// cells, the claim silently fails, and the fallback drops the refinery back home.
-						var claim = findPos(actorType, distanceToBaseIsImportant, producer, field, baseCenter,
-							0, claimer.ExpansionTargetClaimRadius);
+						// FE-1 (§12.24): under the refinery law the field is an ANCHOR and the cell nearest it wins
+						// (then the cell nearest the field's resource cells); the home-base fallback below is skipped,
+						// because a refinery stacked at home is exactly what the law forbids (a failed attempt retries).
+						var law = claimer.RefineryLawActive;
+						var claim = law
+							? findPos(actorType, distanceToBaseIsImportant, producer, field, field,
+								0, claimer.ExpansionTargetClaimRadius, anchorTieBreak: claimer.RefineryClaimFieldCenter, anchorOrder: true)
+							: findPos(actorType, distanceToBaseIsImportant, producer, field, baseCenter,
+								0, claimer.ExpansionTargetClaimRadius);
 						if (claim.Location != null)
 						{
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
 							refineryClaimed = true;
 							return claim;
 						}
+
+						if (law)
+							return (null, null, 0);
 					}
 
 					// Try and place the refinery near a resource field
