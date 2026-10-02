@@ -92,6 +92,26 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// The "battle already joined" predicate: true when any observed enemy
+		/// sits within <paramref name="scanDist"/> of any member position —
+		/// regardless of which member (or which neighbouring allied force) the
+		/// enemy is actually engaging. Lanchester's square law means a squad
+		/// that keeps staging while part of the local force already fights
+		/// commits piecemeal and strictly loses, so contact anywhere near the
+		/// squad ends all formation holds in favour of an immediate all-in.
+		/// </summary>
+		public static bool ContactNear(IReadOnlyList<WPos> memberPositions, IReadOnlyList<WPos> enemyPositions, WDist scanDist)
+		{
+			var scanSq = (long)scanDist.LengthSquared;
+			foreach (var m in memberPositions)
+				foreach (var e in enemyPositions)
+					if ((e - m).HorizontalLengthSquared <= scanSq)
+						return true;
+
+			return false;
+		}
+
+		/// <summary>
 		/// The waypoint a pulled-back (or kiting) unit runs to:
 		/// <paramref name="fromPos"/> continued past itself, directly away from
 		/// <paramref name="threatPos"/>, by <paramref name="distance"/>. Passing

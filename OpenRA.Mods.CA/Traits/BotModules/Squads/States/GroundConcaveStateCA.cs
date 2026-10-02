@@ -81,6 +81,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (members.Count == 0 || members.Count < info.ConcaveMinUnits)
 				return false;
 
+			// Formation is for the approach, not the fight: if a visible enemy is
+			// already inside scan range of any member (our fight or a
+			// neighbour's), the attack-move state's all-in path handles it.
+			if (GroundUnitsAttackMoveStateCA.ContactNearSquad(owner, WDist.FromCells(info.AttackScanRadius)))
+				return false;
+
 			var centroid = Centroid(members);
 			var contact = WDist.FromCells(info.ConcaveContactCells);
 			if (owner.IsTargetValid
@@ -137,7 +143,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				planAnchor = anchor;
 			}
 
-			var reason = ShouldCommit(owner, tick, enemies);
+			var reason = ShouldCommit(owner, tick, enemies, members);
 			if (reason != CommitReason.None)
 			{
 				Commit(owner, members, enemies, tick, reason == CommitReason.UnderFire);
@@ -250,9 +256,24 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return Valid(cell);
 		}
 
-		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies)
+		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies, List<Actor> members)
 		{
 			var info = owner.SquadManager.Info;
+
+			// Battle joined anywhere near the squad — a member under fire or an
+			// allied fight beside the forming arc: commit now. The under-fire
+			// path zeroes every stagger delay so the whole squad attack-moves on
+			// the same tick instead of staging one prong at a time (Lanchester).
+			var memberPositions = new List<WPos>(members.Count);
+			foreach (var m in members)
+				memberPositions.Add(m.CenterPosition);
+
+			var enemyPositions = new List<WPos>(enemies.Count);
+			foreach (var e in enemies)
+				enemyPositions.Add(e.CenterPosition);
+
+			if (SquadMicroEvalCA.ContactNear(memberPositions, enemyPositions, WDist.FromCells(info.AttackScanRadius)))
+				return CommitReason.UnderFire;
 
 			// Evaluate every member first (LastHp must update for all), then decide.
 			var near = 0;
