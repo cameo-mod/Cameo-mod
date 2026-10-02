@@ -142,3 +142,6 @@ groups:
       PreferBuildingTargets: true
       ValueOnlyAttackLaunch: true
       UseUpstreamStateTweaks: true
+  F_concave:                         # CV concave engagement (AI_ARCHITECTURE §12.7a, maintainer order 2026-10-01)
+    SquadManagerBotModuleCA:
+      ConcaveEngagement: true

@@ -182,7 +182,10 @@ the fog sequencing.
     layers (threat ground/air, own strength, interest, staleness; decay to averages) — **ZG-a/b/c
     merged** (#711/#713/#718, `UseZoneTopology` off = group `D_zone_topology`); IM-1/IM-2 on
     drafts #725/#726 (group `H_influence_layers`). **NOVA.**
-  - [ ] **M** MI budgeted micro: focus fire, kiting, pull back damaged, concave. **EMBER.**
+  - [~] **M** MI budgeted micro: focus fire, kiting, pull back damaged (shipped in group A, 2026-10-01). **EMBER.**
+  - [ ] **M** CV concave engagement (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a): deploy into a
+    range-matched concave that widens with army size, then a staggered commit so every member reaches its range
+    together. Unified with NOVA's ATK-1 fan-out into ONE deploy state (§19.3). **Claude spec, Sonnet code.**
   - [~] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
     UT-1/UT-2 merged (#736/#738, group `M_utility_axes`): delay-reset lean + guerrilla-cap
     lean. UT-3 `nova/ut3-defend-share` — defence share: TurtleRush scales the CA-2 reserve,
