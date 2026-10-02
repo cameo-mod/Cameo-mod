@@ -5167,6 +5167,51 @@ they are orders (`FransTransportCommanderBotModule` was disarmed for this reason
   keeps killing engineers goes on the dormant shelf. A "safe path" must really be scored along the route and walked
   (the inherited CA `SafePath` never was), and re-checked while walking.
 
+### 19.10 Scale targets: base and army grow with the seen enemy, the unscouted map, difficulty, personality and time (maintainer 2026-10-01) — binding
+
+> *"Base and army size should scale with the difficulty level, observed enemy base and army size, personality, game
+> time duration. The bigger the enemy base or army is the bigger the bot should try to make his … with observed base and
+> army from memory and add a safety margin for unscouted areas … then apply multipliers with difficulty, this should
+> replace the current limits … all numbers linearly scaled like floating point numbers interpolated … like 1 tech
+> center from easiest to medium, 2 tech centers from hard to challenger and 3 tech centers for unbeatable and cameo god
+> … for very long games we can see very large bases and armies."*
+
+**The law.** No base or army number is a fixed per-tier cap any more. Every size category `k` (army value, harvesters,
+refineries, production per type, construction yards, tech, superweapons, defences, aircraft) gets ONE target, recomputed
+every few seconds:
+
+    f        = tier index / 9                              (easiest 0 … cameogod 1; §19.1's one straight line)
+    own_k    = lerp(Min_k, Max_k, f) × (1 + Growth_k × game minutes / 60)
+    enemy_k  = lerp(RatioMin_k, RatioMax_k, f) × Seen_k × (1 + Margin_k × u) / own team size
+    target_k = floor( P_k(personality) × max(own_k, enemy_k) ),  clamped to [Floor_k, PhysicalCap_k]
+
+* **Linear lines with fractions, one rounding step.** Every Min/Max/Ratio is a fractional value on the §19.1 line, and the
+  result is rounded down once at the end. In synced code this is fixed-point integer math, never floats, because bots
+  run in lockstep on every client. To get "rounded to nearest", add 0.5 to both ends. The maintainer's example: tech
+  `Min 1.0, Max 3.25` gives 1 1 1 1 2 2 2 2 3 3 (easiest–medium 1, hard–challenger 2, unbeatable–cameogod 3). §19.1's
+  table becomes the `Min/Max` of each line, so **at minute 0 with nothing seen every tier behaves exactly as before**:
+  refineries 1→10, harvesters 3→30, production `1.5→7.5` rounded down = the old rounded 1 2 2 3 4 4 5 6 6 7.
+* **Seen, never known (§19.5).** `Seen_k` comes only from fog memory (`RegionMemory` values, `BotFogMemory` remembered
+  actors, `IBotEnemyCompositionProvider`): what the bot saw, kept while dark, summed over all enemies, shared over the
+  own team.
+* **The unscouted margin.** `u` = the share of the map's area (regions/zones, by cell count) the bot has never seen or
+  has not seen for `ScoutStaleTicks`, excluding its own territory. The more of the map is dark, the more could hide in
+  it: `Margin_k` 1.0 means a fully dark map doubles what was seen.
+* **Personality** multiplies the whole target per category (`P_k`, default 1.0): Steamroller army and production up,
+  Expansion refineries, harvesters, construction yards and production up, Turtle defences up, Tech tech up, Rush army
+  down (smaller, earlier attacks), Guerrilla scouting units up. This is how §19.1c's "lead over the enemy" is sized.
+* **The army base value is CA's** attack-force value (`SquadValue`, with value-only launch per F2p2 WP-A5). The
+  `own_army` baseline is the personality's `SquadValue × lerp(ArmyMin, ArmyMax, f)`. `Growth` replaces the old 20-minute
+  ramp.
+* **Time has no cap.** Bases and armies keep growing in long games; only physical caps stop them (resource fields in
+  reach for refineries, §19.1b; the engine's own limits; a game rule's `BuildLimit`). A tier never caps a number.
+* **Targets are ceilings the builders try to reach**, not orders to spend: cash gates (`NewProductionCashThreshold`,
+  `MaximiseProductionCashRequirement`) still decide WHEN.
+* **Generic, no id lists.** Categories come from rules-derived `BotTargetTags`. The 398 hand-written `BuildingLimits`
+  entries are ignored for every building a category covers; entries left (genuinely one-of-a-kind buildings) stay until
+  reviewed.
+* `classic` keeps its fixed limits (the A/B reference). Spec and owners: `design/AI_ARCHITECTURE.md` §12.22.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on

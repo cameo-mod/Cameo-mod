@@ -1,5 +1,42 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-02 — Claude (coordinator): INC-4 claude batch lands; the two formations are one; scale targets ruled
+
+`Agent: Claude-Local (Opus 5.5) · coordinator · branch inc/2026_10_02_claude → master`
+
+**Landed (all behaviour default-off; master's default play is unchanged):**
+* **CV concave + ATK-1 fan-out → ONE deploy-before-commit state.** DESIGN §19.3: CV's geometry and state machine
+  (range-matched, arc width grows with the army, ranks, bearing pairing, terrain snap, staggered arrival), behind ATK-1's
+  `AssaultFormationBotModule` provider seam (the only switch: `AG_assault_fanout`). `AI_ARCHITECTURE.md` §12.7a.
+  ATK-1's 3-0 batch measured its OLD ring and does not transfer: **the unified state needs its own A/B.**
+* **CA F2 part 2:** the 9 blocked upstream files vendored (CA drift STALE 9 → 0); the Feb-2026 AI fixes behind
+  `F2_ca_f2p2` — air limits incl. fog-honest air threats (`ObservedAirThreats`), armour-based air targeting, routes
+  from own buildings, upstream state tweaks, and the maintainer's WP-A5 rulings (`PreferBuildingTargets`,
+  `ValueOnlyAttackLaunch`; compositions after INC-4). `UnitBuilderBotModuleCA@generic` is shared with classicbot
+  and extended by 34 ContentPacks, so it is not split: its switches act only while `SwitchCondition: genericbot` holds.
+* **Master was red:** `b39f71149` added a fog-audit site (the LegacyBridgeHut scan, neutral) without a manifest entry; fixed.
+* #765 (DAWN arch audit) merged; #716's orders-only conversion is on master via the Fransbot re-vendor
+  (`audit_bot_direct_mutation`: zero sites), so **group E (transport) may be armed in the next A/B.**
+
+**Ruled today (maintainer):** DESIGN §19.10 **scale targets**. Every base and army size is one target:
+`floor(P × max(Min→Max line × time growth, Ratio line × seen enemy × (1 + margin × unscouted share)))`. It replaces
+every fixed per-tier cap and the hand-written `BuildingLimits`, has no time cap, and is fog-honest. Spec: AI_ARCHITECTURE
+§12.22, including how it fits with the expansion planner, the utility axes, the global unit budget and the harvester
+insurance.
+
+**Next (in order):** (1) ST scale targets — Claude spec, Sonnet code, switch `ST_scale_targets`. (2) **One increment A/B**
+of every default-off group on master, mirror matches only, ≤ 3 drivers: D, E, AG, F2, H… plus ST when it lands.
+Arms per WORKFLOW §4. (3) Round-trip test of the whole AI (HANDOFF 2026-10-01 step 3).
+
+**Doc claims (pre-existing on master `6cf5527c1`, not from this batch):** `audit_doc_claims.py` FAILS on 7 balance claims —
+`shield_versus_mean` 97.6→184.7, `shield_hp_factor`, `shield_damage_share`, `percentage_denominator_unset` 436→423,
+`ledgers_drifted` 0→1, `armament_reference_tier_original` 140→141, `armament_pairing_input_fingerprints` 476→514. A
+warhead/Versus change landed without its claims (balance lane; rules 3–4: investigate which merge moved the shield profile
+before re-pinning — a doubled Shield mean is a §12.0c question, not a number to copy). The 2 AI-contract counts are fixed here.
+
+**Process note:** agents merged ~60 PRs to master on 10-01/10-02 (WORKFLOW §2: only Claude merges). Each was checked for
+default-off behaviour where it overlapped my lane; the ATK-1 duplicate is the only overlap found.
+
 ## 2026-10-01 — Claude (coordinator): three increments landed, the increment A/B says ship the switches, the plan for every agent
 
 **Read first, every session: [`WORKFLOW.md`](WORKFLOW.md)** (binding: plan first; Opus specs/reviews/merges; Sonnet
@@ -39,7 +76,7 @@ defaults ship machinery whose payoff needs its switches. **Decision pending the 
    NOVA ZG-c (group D) + IM-1 influence layers; CA F2 part 2 (hand-port CA's Feb-2026 AI routing / harasser squads /
    indirect routes / air targeting-by-armour into our modified squad files — Opus specs, Sonnet codes); the 9 CA files
    that need new upstream types (attachables, PopController, LinkedProducerTarget, SelectionBoxAnnotationRenderableCA).
-   **+ CV concave engagement** (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a, switch group `F_concave`):
+   **+ CV concave engagement** (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a, switch group `AG_assault_fanout`, unified with ATK-1 2026-10-02):
    Rush squads deploy into a range-matched concave that widens with army size, then a staggered commit so every
    member reaches its range together. Branch `claude/cv_concave` (Sonnet-coded, Opus-reviewed); supersedes
    EMBER's `devin/ember/mi-concave` (fixed-angle ring, no form/commit phase — not merged).

@@ -23,8 +23,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		protected static void GoToRandomOwnBuilding(SquadCA squad)
 		{
 			var loc = RandomBuildingLocation(squad);
+			// CA F2p2 (2bad89a77): AttackMove instead of Move, so the squad fights on the way home.
+			var orderName = squad.SquadManager.Info.UseUpstreamStateTweaks ? "AttackMove" : "Move";
 			foreach (var a in squad.Units)
-				squad.Bot.QueueOrder(new Order("Move", a.Actor, Target.FromCell(squad.World, loc), false));
+				squad.Bot.QueueOrder(new Order(orderName, a.Actor, Target.FromCell(squad.World, loc), false));
 		}
 
 		protected static CPos RandomBuildingLocation(SquadCA squad)
@@ -175,6 +177,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return false;
 		}
 
+		// CA F2p2 (b831676de): behind UseUpstreamStateTweaks the whole activity chain is searched for Resupply/ReturnToBase
+		// (not just the current and next activity). Deeper detection classes more units as rearming, so it is switched.
+		protected static bool IsRearming(Actor a, SquadCA squad)
+		{
+			if (!squad.SquadManager.Info.UseUpstreamStateTweaks)
+				return IsRearming(a);
+
+			return !a.IsIdle && (a.CurrentActivity.ActivitiesImplementing<Resupply>().Any()
+				|| a.CurrentActivity.ActivitiesImplementing<ReturnToBase>().Any());
+		}
+
 		protected static bool IsRearming(Actor a)
 		{
 			if (a.IsIdle)
@@ -239,7 +252,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			foreach (var u in squad.Units)
 			{
-				if (IsRearming(u.Actor) || IsAttackingAndTryAttack(u.Actor).IsFiring)
+				if (IsRearming(u.Actor, squad) || IsAttackingAndTryAttack(u.Actor).IsFiring)
 					continue;
 
 				var orderQueued = false;

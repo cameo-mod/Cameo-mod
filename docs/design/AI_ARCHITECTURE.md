@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**63 distinct trait types, 88 Player instances plus one World instance** (2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**64 distinct trait types, 89 Player instances plus one World instance** (2026-10-02c: ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), +1 type / +1 instance; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2036,40 +2036,41 @@ formation — they run ahead on their own (6b).
 §12.7 governs the **march**; CV governs the **deployment** between contact and the first shot. Today a Rush squad
 that meets the enemy goes straight from `GroundUnitsAttackMoveStateCA` to `GroundUnitsAttackState` and every member
 attack-moves at one point: the column arrives one unit at a time and loses the first seconds of the fight piecemeal.
-CV inserts one state, **`GroundUnitsConcaveStateCA`** (Rush squads only; switch `ConcaveEngagement`, default off),
-owned by `SquadManagerBotModuleCA` (§19.3 — it remains the sole owner of force formation; orders only, §1.1).
+CV inserts one state, **`GroundUnitsConcaveStateCA`** (Rush squads only; armed only by the `AssaultFormationBotModule` provider, default off),
+entered from `GroundUnitsAttackMoveStateCA` (§19.3 — squad states remain the sole order authority; orders only, §1.1).
 
 **Geometry — a pure, deterministic planner `ConcaveEvalCA` (integer math, no RNG, unit-tested):**
 1. **Anchor `A`**: the centroid of the *observed* enemy combat units in contact (only `IsPreferredObservedEnemyUnit`
    — fog-honest), else the squad target's position (a remembered/visible building or defence). Approach axis
    `d` = unit vector `A → frontline centroid`. **Enemy front depth** `F` = the largest projection of an observed enemy
    onto `d` (how far the enemy line already sits toward us); 0 for a lone target.
-2. **Per-member radius** `rᵢ = F + MaxRangeᵢ + ConcaveStageMarginCells` — every member stands the SAME distance
+2. **Per-member radius** `rᵢ = F + MaxRangeᵢ + StageMarginCells` — every member stands the SAME distance
    (the margin) outside its OWN range, so long-range units naturally form outer ranks and everyone is the same
    step from firing. Weaponless members (and scouts) are not placed; they keep the plain order.
-3. **Ranks**: members whose `rᵢ` lie within `ConcaveRankBandCells` of each other share one arc (the band radius is
+3. **Ranks**: members whose `rᵢ` lie within `RankBandCells` of each other share one arc (the band radius is
    the band's minimum `rᵢ`, so nobody in it stands inside its range).
 4. **Width grows with the army**: a band of `n` members needs arc length `L = n × spacing` (spacing =
-   `ConcaveSpacingCells`, infantry half of it). The arc's angle is `θ = L / r`, centred on `d` — a bigger army
+   `Spacing`, infantry half of it). The arc's angle is `θ = L / r`, centred on `d` — a bigger army
    is a wider, never a denser, concave. If `θ > ConcaveMaxArcDegrees`, spacing first compresses down to
-   `ConcaveMinSpacingCells`; members that still do not fit go to a second arc `ConcaveRankGapCells` further out.
+   `MinSpacing`; members that still do not fit go to a second arc `RankGap` further out.
 5. **Slot assignment without crossing**: sort the band's members by their current bearing around `A` and its
    slots by bearing, pair in order. Paths never cross, so wings fill from the side they already stand on.
 6. **Terrain**: each slot snaps to the nearest cell within 2 cells that the member's locomotor can enter and reach
-   (same domain). If fewer than `ConcaveMinValidSlotPct` of the slots are valid (a choke, a cliff edge), CV aborts:
+   (same domain). If fewer than `MinValidSlotPct` of the slots are valid (a choke, a cliff edge), CV aborts:
    the squad engages as today.
 
 **Phases (`GroundUnitsConcaveStateCA`):**
 * **Trigger** (in the attack-move state, BEFORE the existing `AttackScanRadius` switch to the attack state): the
-  squad has ≥ `ConcaveMinUnits` weaponed ground members, is not on cooldown, and either an observed enemy combat
-  unit is within `ConcaveContactCells` of the frontline centroid, or the squad target is within that distance.
+  squad is Rush, an enabled provider arms it, it has ≥ `MinSquadSize` weaponed ground members, the provider's
+  same-ground cooldown has run, and either an observed enemy combat
+  unit is within `FanoutTriggerCells` of the frontline centroid, or the squad target is within that distance.
   Fog limits how early a contact is seen; a partial concave formed late still beats a column.
 * **Form**: each placed member gets a `Move` (not `AttackMove` — nobody gets drawn into the fight early) to its slot.
   Orders are re-issued only to members that are idle and off their slot; every order spends one
   `IBotActionBudget` action (§19.1 — lower tiers form worse, on the same straight line); a denied member keeps its
-  last order. The plan re-runs only if `A` moves more than 3 cells (at most once per 25 ticks).
-* **Commit** when ANY of: ≥ `ConcaveFormedPct` of the placed members are within 1.5 cells of their slot; the form
-  timer reaches `ConcaveFormTicks`; a member took damage or an observed enemy is inside some member's own range
+  last order. The plan re-runs only if `A` moves more than 3 cells or an eligible member joins while forming (a late joiner gets a slot), at most once per 25 ticks.
+* **Commit** when ANY of: ≥ `AssemblePercent` of the placed members are within 1.5 cells of their slot; the form
+  timer reaches `StageDeadlineTicks`; a member took damage or an observed enemy is inside some member's own range
   (the enemy engaged us — never keep forming under fire).
 * **Synchronised arrival**: on commit, each member's time to its own firing range is `tᵢ = margin_i / speedᵢ`
   (its real distance to range, over its locomotor speed); member `i`'s `AttackMove` toward `A` is issued
@@ -2077,13 +2078,48 @@ owned by `SquadManagerBotModuleCA` (§19.3 — it remains the sole owner of forc
   When the last delayed order is out, the state hands over to `GroundUnitsAttackState` (focus fire, kiting and
   pull-back take over, §MI).
 * **Abort** to the attack-move state when the anchor is gone (no observed enemy and the target is invalid); after a
-  commit or an abort the squad cannot re-enter CV for `ConcaveCooldownTicks`.
+  commit or an abort the squad cannot re-enter CV against the same ground for `RefanoutCooldownTicks` (the provider's per-squad cooldown, restarted on arm, commit and abort).
 
 Supersedes the ring slot on `devin/ember/mi-concave` (`a64a294ae`, not merged): fixed 30°-per-member angles under a
 135° cap (an army past 5 units packs denser instead of wider), slots by ActorID (paths cross), no form or commit
 phase (units still arrive one by one), no terrain check, and it would have changed group A's shipped default behaviour
 without a new switch. Its integer mirroring trick (`WRot` conjugate for the negative wing) is reused.
-Switch group **F_concave** in `tools/ai/increment_switches.yaml`; A/B in INC-4.
+Switch group **AG_assault_fanout** in `tools/ai/increment_switches.yaml` (the single switch); A/B in INC-4.
+
+**Unified with ATK-1 (2026-10-02).** The two duplicate implementations (CV here, NOVA ATK-1 in the former §12.21) are
+merged into this one (§19.3 one module per decision). *From CV:* all geometry (`ConcaveEvalCA` — range-matched radius,
+rank bands, member-count arc width, bearing pairing, mirroring), the state machine (`GroundUnitsConcaveStateCA`:
+form with `Move`, terrain snap, commit on formed/timeout/under fire, staggered commit) and its single entry hook in the
+attack-move state. *From ATK-1:* the settings seam — `AssaultFormationBotModule` / `IBotAssaultFormation` /
+`AssaultFormationSettings` are the ONLY home of the tunables (CV's 13 `Concave*` fields left `SquadManagerBotModuleCAInfo`)
+and the provider's presence (`genericbot && assault_fanout`) is the ONLY switch, so classic has no provider and stays
+bit-identical; the per-squad same-ground cooldown (`RecordFanout`, replaces `SquadCA.ConcaveCooldownUntilTick`); late-joiner
+handling (roster change re-plans, rate-limited). *Dropped:* ATK-1's fixed-radius far-side ring (`FanoutRadiusCells`), its
+map-bounds-only slot check, its Stage-state transition and band trigger (a staged squad reaches the concave through the
+attack-move state). Field map: `MinSquadSize`=min units, `FanoutTriggerCells`=contact cells, `AssemblePercent`=formed %,
+`StageDeadlineTicks`=form ticks, `SlotReachCells`=terrain-snap radius, `ArcDegrees`=arc cap, `RefanoutCooldownTicks`=cooldown;
+plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `MinValidSlotPct`. `ai.yaml` writes this
+section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
+measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
+
+### 12.7b Contact-first all-in (maintainer 2026-10-02) — and the ONE "the fight is on" test
+
+> *Maintainer, spectating a 6v6:* a large blob stood in formation while part of the force was already trading fire.
+
+Formation (the march §12.7, the concave §12.7a, the assault fan §12.20b) is for BEFORE the first shot. When the fight is
+on for ANY member, a Rush squad commits wholesale on the same tick (Lanchester: staging while the local fight runs feeds
+the enemy one prong at a time). `GroundStatesCA.NearestEngagedEnemy` is the single definition, used by the attack-move
+state's all-in, the concave's entry (declines) and the concave's commit (zero-delay under-fire commit):
+
+* **the fight is on** = a visible enemy (`VisibleEnemiesNear`, fog-honest) and a squad member are within weapon range of
+  each other — EITHER side's `MaxRange` — counted over every member, placed or not, or a member took damage (concave).
+* Not "an enemy is visible within `AttackScanRadius`" (the first cut, `22f6e5ee9`): the concave stages just OUTSIDE
+  weapon range on purpose, so a 12-cell sight test cancelled it before it could form (coordinator 2026-10-02).
+* The all-in goes THROUGH `GroundUnitsAttackState` (target = the engaged enemy): it attack-moves every member on the same
+  tick and keeps the shipped group-A micro (focus fire, kiting, pull-back). The first cut re-issued one grouped
+  `AttackMove` from the attack-move state every tick and never left it, so those never ran for a Rush squad in contact.
+* `SquadManagerBotModuleCA.ContactFirstAllIn` (default true) — `@classic` sets false: the A/B reference keeps the
+  leader-scan engage.
 
 ### 12.8 Air doctrine (phase CA-5)
 
@@ -2795,7 +2831,7 @@ never *aimed* at it.
   yard's local base builder fills factories/production/refineries (`RefineriesPerBase`,
   `MaxExtraRefineries` are per-base, not global) — bases grow as they land.
 
-### 12.20 The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
+### 12.20b The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
 
 Four more maintainer-observed failures, all "the stack does the simple thing wrong"
 class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
@@ -2897,33 +2933,80 @@ SP-1/AF-1 only make the base cheaper to path through and the army bigger to form
 
 ### 12.21 ATK-1 — the assault fan-out (NOVA, 2026-10-02; switch AG_assault_fanout)
 
-The maintainer's line-of-death report: a committed Rush squad attack-moved every member
-to one shared target point, so the column fed the guns one at a time.
+Merged into the concave engagement: see **§12.7a "Unified with ATK-1"** — one implementation (CV geometry + state machine, ATK-1 provider seam and single switch).
 
-**LANE NOTE:** squad formation is assigned to Claude's `claude/cv_concave` (§12.7a,
-switch F_concave) per the 2026-10-01 standing order — that implementation deploys a
-*range-matched* concave through SquadManagerBotModuleCA hooks. ATK-1 is the independent
-NOVA implementation: planner + squad-state only, zero SquadManager edits, switch-gated
-genericbot-only, runtime-verified (hard 3-0 vs classic on A Nuclear Winter, armed batch
-of 3, 0 exceptions, fingerprint ed05a1dfb0ce). The coordinator picks which lands in the
-increment; the two cannot coexist textually (both extend GroundStatesCA) but neither
-fires unless its switch arms.
+### 12.22 Scale targets — the growth law (phase ST; DESIGN §19.10; maintainer order 2026-10-01; owner Claude)
 
-- *The state:* `GroundUnitsAssaultFanoutStateCA` sits between the
-  rally/`AttackMove` approach and the commit. In the trigger band
-  (`FanoutTriggerCells` > leader distance > `FanoutRadiusCells`) or after
-  `GroundUnitsStageStateCA` assembly, `AssaultFormationPlanner` lays one slot per
-  member on an arc (`ArcDegrees` 180 default) centred on the *far side* of the target
-  from the approach bearing — the wave wraps the objective and arrives from several
-  bearings at once.
-- *The commit:* members walk per-unit `AttackMove` slot orders (micro-action budget
-  honoured), then commit together on `AssemblePercent`/`StageDeadlineTicks` — or
-  instantly on enemy contact, so nobody fights alone.
-- *Determinism and honesty:* integer WAngle-LUT math, sorted-bearing assignment, ActorID
-  tiebreak; unusable/overflow slots fold onto the target cell (the old behaviour, never
-  a stall). `RefanoutCooldownTicks` stops same-ground re-orbits.
-- *The seam:* orders stay with the squad states; `AssaultFormationBotModule` is a
-  settings-only `IBotAssaultFormation` provider (same shape as `IBotSiegeAdvisor`),
-  `RequiresCondition: genericbot && assault_fanout` — classic has no provider and
-  keeps the upstream single-point commit regardless of the switch.
+**One module, one decision (§19.3):** `ScaleTargetsBotModule` (OpenRA.Mods.Cameo, player trait, `RequiresCondition:
+genericbot`) decides HOW BIG the base and army should be. It publishes the answer through `IBotScaleTargets`
+(`int Target(string category)`, `int ArmyValueTarget`, plus a snapshot for the situation log). It never builds and
+never issues orders: the existing builders read it. A consumer with no provider (classic, or the switch off) keeps its
+old limit, so master is unchanged until the A/B.
 
+**Inputs.**
+* Tier index from the active `BotLimits@<tier>` (via `BotLimitsResolver`, `Difficulties` list like `DynamicBotInsurance`).
+* Game minutes from `WorldTick`.
+* The active `personality-*` condition.
+* `Seen_k` from `MasterAiBotModule`'s published `BotSituation`: `RegionMemory` per-enemy `ArmyValue/DefenceValue/EconomyValue`,
+  `EverSeen`, `LastSeenTick`; `BotFogMemory` remembered actors (`Building` + rules-derived `BotTargetTags`) for counts
+  per category; `IBotEnemyCompositionProvider` for army value.
+* Own team size = alive players allied with the bot, including itself.
+
+**Formula:** DESIGN §19.10, verbatim, in a pure static `ScaleTargetsEval`. It uses fixed-point integer math (×1000), never
+floats, because bot decisions run in lockstep on every client. Unit-tested.
+
+**Categories (first cut)** and their consumers:
+
+| category | Seen_k | consumer (replaces) |
+|---|---|---|
+| `army` (value) | observed enemy army value | `SquadManagerBotModuleCA` desiredAttackForceValue (`SquadValue` + ramp), `MaxIdleUnits` |
+| `harvester` | seen enemy harvesters | `HarvesterBotModuleCA` (`BotLimits.HarvesterLimit`); cap refineries × `HarvestersPerRefineryCap` |
+| `refinery` | seen enemy refineries | `BaseBuilderBotModuleCA` (`RefineryLimit`); cap = resource fields in reach |
+| `production` (per production type) | seen enemy production buildings | `BaseBuilderQueueManagerCA` (`ProductionTypeLimit`) |
+| `conyard` | seen enemy construction yards | `MCVManagerBotModuleCA` (`ConstructionYardLimit`) |
+| `tech` | seen enemy tech buildings | `BuildingLimits` entries of tech-tagged buildings |
+| `superweapon` | seen enemy superweapons | `BuildingLimits` entries of superweapon-tagged buildings |
+| `defence` (value) | remembered enemy army value | base builder defence share if a cap exists today; else telemetry only |
+| `aircraft` | seen enemy aircraft (composition) | `UnitBuilderBotModuleCA.MaxAircraft` / `MaxAirSuperiority` |
+
+**Yaml shape.** One instance, every number on the §19.1 line. Fractions are written in one form FieldLoader can read
+(fixed-point ints ×100, or a decimal parsed to fixed point); the coder picks one and documents it.
+* Per category: `Min/Max/RatioMin/RatioMax/Margin/Growth/Floor`.
+* `PersonalityMultipliers`, keyed by personality condition → category → multiplier.
+* `ScoutStaleTicks`, `RecomputeTicks`.
+
+The §19.1 table numbers become the Min/Max. The other defaults are starting values for the A/B, not settled numbers:
+* `Ratio 0.6 → 1.4`, so Hard (0.96) roughly matches the enemy.
+* `Margin` 1.0 for the army, 0.5 for the base.
+* `Growth` per hour 1.0 for the army, 0.5 for the base.
+* Personality multipliers:
+  * Steamroller: army and production 1.25.
+  * Expansion: refinery, harvester, conyard and production 1.25.
+  * Turtle: defence 1.4.
+  * Tech: tech 1.5.
+  * Rush: army 0.8.
+
+**Audit.** `audit_ai_personalities.py` gains a check:
+* every category writes all fields;
+* Min ≤ Max;
+* the tech line rounds down to 1 1 1 1 2 2 2 2 3 3;
+* the minute-0, nothing-seen targets equal the old §19.1 table.
+
+**Fits with what is already on master (2026-10-02 survey; §19.3, one owner per decision):**
+* `ExpansionPlannerBotModule.McvTargetCount` (3) and UT-4's `UseUtilityExpansionAppetite` lean are the construction-yard
+  size decision, so they move here. The planner reads `Target("conyard")`. UT-4's TechRush↔Expansion axis becomes the
+  axis lean below, so it is no longer a second multiplier.
+* **The utility axes refine personality.** When `UseUtilityAxes` is on, `P_k` = the personality table × the axis lean:
+  * TurtleRush leans defence vs army;
+  * TechRush↔Expansion leans tech vs refinery/harvester/conyard/production;
+  * each by `±AxisLeanPct` at the axis ends.
+  The discrete personality sets the starting point and the continuous axis tracks how the match develops. With the
+  axes off, `P_k` = the table.
+* `BotGlobalUnitBudget` is a **physical cap** (FPS across all bots), not a tier cap: the army count target never exceeds
+  this bot's share of it.
+* `ArmyFirstBotModule` (cash priority), the Director pacing (when to launch) and the personality leads (§12.14, budget
+  lean while trailing) decide WHEN and WHERE the money goes, not HOW BIG. They stay separate. The leads read the same
+  `Seen_k` numbers, which this module publishes on the situation snapshot so there is one estimate of the enemy.
+* `DynamicBotInsurance` sizes its payout from `HarvesterLimit`. With the provider present it reads `Target("harvester")`.
+
+**Switch:** group `ST_scale_targets` (master already uses `G_personality_leads`).

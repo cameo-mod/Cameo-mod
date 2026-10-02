@@ -222,12 +222,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var assembled = owner.Units.Count(u =>
 				(u.Actor.CenterPosition - rally).LengthSquared <= radiusSquared);
 
-			// AF-1: a staged Rush squad commits through the fan-out — the state
-			// falls back to the plain attack-move itself when no
-			// IBotAssaultFormation provider is armed.
 			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent ||
 				owner.World.WorldTick >= stageDeadlineTick)
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAssaultFanoutStateCA(), false);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -328,41 +325,54 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Activate(SquadCA owner) { }
 
-		// Battle-nearby predicate shared with the concave state: one bounded
-		// scan at the squad centroid covering scan + squad spread, then a
-		// per-member distance verify. True means a visible enemy is already
-		// inside scan range of at least one member — ours or an ally's fight,
-		// the enemies are here either way.
-		internal static bool ContactNearSquad(SquadCA owner, WDist scanDist)
+		// "The fight is on" — ONE definition shared by contact-first all-in (this state) and the
+		// concave (§12.7a entry and commit): a visible enemy and a member are within weapon range of
+		// each other, EITHER side's MaxRange. Seeing an enemy is not a fight: the concave stages just
+		// outside range on purpose, so a sight-radius test would cancel it before it formed
+		// (coordinator 2026-10-02). One bounded scan at the centroid (scan + spread, fog-honest via
+		// VisibleEnemiesNear), then a per-pair range check. Returns the engaged enemy nearest to
+		// any member, or null.
+		internal static Actor NearestEngagedEnemy(SquadCA owner, WDist scanDist)
 		{
-			var memberPositions = new List<WPos>(owner.Units.Count);
+			var rules = owner.World.Map.Rules;
+			var members = new List<(WPos Pos, long Range)>(owner.Units.Count);
 			long cx = 0, cy = 0;
 			foreach (var u in owner.Units)
 			{
 				var p = u.Actor.CenterPosition;
-				memberPositions.Add(p);
+				members.Add((p, BotUnitProfiles.Get(rules, u.Actor.Info).MaxRange.Length));
 				cx += p.X;
 				cy += p.Y;
 			}
 
-			if (memberPositions.Count == 0)
-				return false;
+			if (members.Count == 0)
+				return null;
 
-			var centroid = new WPos((int)(cx / memberPositions.Count), (int)(cy / memberPositions.Count), 0);
+			var centroid = new WPos((int)(cx / members.Count), (int)(cy / members.Count), 0);
 			var spread = 0L;
-			foreach (var p in memberPositions)
-				spread = Math.Max(spread, (p - centroid).HorizontalLength);
+			foreach (var m in members)
+				spread = Math.Max(spread, (m.Pos - centroid).HorizontalLength);
 
 			var bound = scanDist + new WDist((int)Math.Min(spread, int.MaxValue - scanDist.Length));
 			var enemies = owner.SquadManager.VisibleEnemiesNear(centroid, bound);
-			if (enemies.Count == 0)
-				return false;
-
-			var enemyPositions = new List<WPos>(enemies.Count);
+			Actor nearest = null;
+			var best = long.MaxValue;
 			foreach (var e in enemies)
-				enemyPositions.Add(e.CenterPosition);
+			{
+				var enemyRange = (long)BotUnitProfiles.Get(rules, e.Info).MaxRange.Length;
+				foreach (var m in members)
+				{
+					var reach = Math.Max(m.Range, enemyRange);
+					var d = (e.CenterPosition - m.Pos).HorizontalLengthSquared;
+					if (d <= reach * reach && d < best)
+					{
+						best = d;
+						nearest = e;
+					}
+				}
+			}
 
-			return SquadMicroEvalCA.ContactNear(memberPositions, enemyPositions, scanDist);
+			return nearest;
 		}
 
 		public void Tick(SquadCA owner)
@@ -402,22 +412,27 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Switch to "GroundUnitsAttackState" if we encounter enemy units.
 			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
 
-			// Contact-first all-in (§12.7b): the concave, the assault fan and the
-			// march holds are for BEFORE the first shot. Once a visible enemy is
-			// inside scan range of ANY member — a member fighting, or an allied
-			// force fighting right next to us — the squad commits wholesale:
-			// Lanchester's square law means a squad that keeps staging while the
-			// local fight runs feeds the enemy one prong at a time. One grouped
-			// AttackMove at the objective sends everyone in on the same tick.
-			if (owner.Type == SquadCAType.Rush && owner.IsTargetValid && ContactNearSquad(owner, attackScanRadius))
+			// Contact-first all-in (§12.7b, maintainer 2026-10-02): the concave, the assault fan and the
+			// march holds are for BEFORE the first shot. Once the fight is on for ANY member (a visible
+			// enemy and a member within weapon range of each other), the squad commits wholesale (Lanchester: staging while the local fight runs feeds
+			// the enemy one prong at a time). It commits THROUGH the attack state, which attack-moves every
+			// member on the same tick AND keeps focus fire, kiting and pull-back (coordinator 2026-10-02:
+			// a grouped AttackMove from this state every tick never left it, so a Rush squad in contact
+			// skipped the shipped group-A micro). ContactFirstAllIn is false on classic, the A/B reference.
+			if (owner.SquadManager.Info.ContactFirstAllIn && owner.Type == SquadCAType.Rush && owner.IsTargetValid)
 			{
-				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(owner.Target.CenterPosition), false,
-					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
-				return;
+				var contact = NearestEngagedEnemy(owner, attackScanRadius);
+				if (contact != null)
+				{
+					owner.TargetActor = contact;
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
+					return;
+				}
 			}
 
-			// CV (12.7a): on contact a Rush squad deploys a concave before the first shot.
-			if (owner.SquadManager.Info.ConcaveEngagement && owner.Type == SquadCAType.Rush && GroundUnitsConcaveStateCA.ShouldEnter(owner))
+			// CV (12.7a, unified with ATK-1): on contact a Rush squad deploys a concave before the
+			// first shot - only when an enabled IBotAssaultFormation provider arms it (ShouldEnter).
+			if (GroundUnitsConcaveStateCA.ShouldEnter(owner))
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(), false);
 				return;
@@ -452,28 +467,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					if ((owner.World.Map.CellContaining(leader.Actor.CenterPosition) - standOffCell).LengthSquared > 4)
 						foreach (var u in owner.Units)
 							owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, standOffCell), false));
-					return;
-				}
-			}
-
-			// AF-1 (line-of-death fix): a Rush squad whose leader has entered the
-			// fan-out band — inside the trigger radius but still outside the arc —
-			// spreads onto the assault ring before the commit. Runs only when the
-			// enemy scan above found nothing (the fan must form pre-contact) and
-			// after the siege consult so a stand-off hold still wins. The band's
-			// inner edge plus the provider's same-target cooldown keep a squad
-			// already on the ring from re-fanning forever.
-			if (owner.Type == SquadCAType.Rush && owner.IsTargetValid && leader.Actor != null
-				&& GroundUnitsAssaultFanoutStateCA.TryGetSettings(owner,
-					owner.World.Map.CellContaining(owner.Target.CenterPosition), out var fanout)
-				&& owner.Units.Count >= fanout.MinSquadSize)
-			{
-				var leaderDistSquared = (leader.Actor.CenterPosition - owner.Target.CenterPosition).HorizontalLengthSquared;
-				var triggerSquared = (long)WDist.FromCells(fanout.FanoutTriggerCells).LengthSquared;
-				var ringSquared = (long)WDist.FromCells(fanout.FanoutRadiusCells).LengthSquared;
-				if (leaderDistSquared <= triggerSquared && leaderDistSquared > ringSquared)
-				{
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAssaultFanoutStateCA(), false);
 					return;
 				}
 			}
@@ -661,7 +654,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 					if (maxRoutes > 2 || useIndirectRoutes)
 					{
-						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
+						// CA F2p2 (2bad89a77): plan the flank from the own building closest to the target (leader included), not from the leader.
+						var startCell = leader.Actor.Location;
+						if (owner.SquadManager.Info.RouteFromNearestOwnBuilding)
+						{
+							var startActor = owner.SquadManager.OwnBaseBuildings.Concat(new[] { leader.Actor })
+								.ClosestToIgnoringPath(owner.Target.CenterPosition);
+							if (startActor != null)
+								startCell = startActor.Location;
+						}
+
+						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, startCell, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
+						if (routes.Count == 0 && startCell != leader.Actor.Location)
+							routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.World.Map.CellContaining(owner.Target.CenterPosition), maxRoutes);
 
 						if (owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
 							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
@@ -1077,6 +1082,21 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
+				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
+				// FindClosestEnemy(leader, range) is the observed overload (visible or remembered enemies only).
+				if (owner.SquadManager.Info.UseUpstreamStateTweaks)
+				{
+					var opportunity = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+					if (opportunity != null)
+					{
+						owner.TargetActor = opportunity;
+						return;
+					}
+
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), true);
 				return;
 			}
@@ -1097,7 +1117,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// HACK: Drop back to the idle state if we haven't moved in 2.5 seconds
 			// This works around the squad being stuck trying to attack-move to a location
 			// that they cannot path to, generating expensive pathfinding calls each tick.
-			if (owner.World.WorldTick > lastUpdatedTick + 63)
+			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63)) // CA F2p2 (9a68fea15)
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 				return;
