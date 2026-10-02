@@ -1,3 +1,45 @@
+# 2026-10-02 — EMBER: 6v6 team harness + coalition-general design + first evidence
+
+- `run_ai_match_batch.py --team-size N` generalised from {1,2} to 1-8
+  (branch `devin/ember/team-batch-harness`): Team A fills Multi0..N-1, Team B
+  MultiN..2N-1; `ally_refs` now lists every teammate (was hard-coded to one
+  partner). 1v1/2v2 dry-runs unchanged; 6v6 dry-run emits the expected
+  `ai_6v6_...` variant; live 6v6 launched on `dusttown-battle-6v6.oramap`
+  (verified 12 PlayerReferences, 12 mpspawns): 6×`hard` vs 6×`classic`,
+  td_gdi mirror — team wiring inspected in the patched map.yaml, reciprocal
+  Allies/Enemies correct, `Creeps` hostile to all.
+- New `tools/ai/team_coordination_report.py`: scores teams off
+  cameo-ai-missions records — contested capture claims, shared-target push
+  windows, defend missions, target breadth. §12.18 acceptance metrics.
+- **First 6v6 finding (tick ~30k, mid-match): 27 contested capture claims.**
+  Every teammate's EngineerBotModule independently evaluates capturables —
+  all six COMMIT `capture:oilb:120`, five RELEASE after the lease resolves.
+  Order-gate correctness holds (only the winner's engineer captures), but
+  six engineer dispatches burn for one derrick. TC-2c deconflicts expansion
+  *fields*; capturable *actors* need the same channel → folded into the
+  TC-3 design as a CoalitionDirective responsibility.
+- `AI_ARCHITECTURE.md` §12.18 added — the coalition general / "hivemind"
+  design the maintainer asked for: the coalition commander is a *pure
+  deterministic fold* (`CoalitionPlan(broadcasts ∪ own)`) evaluated
+  identically by every member each snapshot — no elected unit, no second
+  order-issuer. Publishes `CoalitionDirective{MainTarget, Phase,
+  RescueAssignments, Sectors}`; consumers are bias inputs to the existing
+  owners (SquadManager / MasterAi / ExpansionPlanner / DefenceCoverage).
+  Grounded in Lanchester square-law concentration, the AAMAS-2019
+  hierarchical-paradigm comparison, BiCNet bidirectional comms, and ZK
+  sector-responsibility doctrine. Switch letters planned BB–BE.
+- `AI_DATAFLOW.md`: coalition fold added to SYNTHESIZE + team-posture row;
+  dormant-table correction confirmed already landed (NOVA took the fix).
+- Bridge-repair status: engine `RepairsBridges` trait + `BRIDGEHUT` actors +
+  `BridgeRepairBotModule` (CN3, switch X) + #764 single-owner yield are all
+  on master — runtime verification still needs a bridge-map match; the 6v6
+  dusttown map has no bridges so a dedicated scenario is queued.
+- Pending: plug production runtime proof (BuildingAddons→PlacePlug path —
+  td_gdi ion uplink needs deep tech; wc2_orcs stronghold / naxis bunker
+  addons are the cheapest reachable plugs for a dedicated probe); regreen
+  suite triage (earlier run stalled under RAM pressure, ~57 F pattern that
+  reads as systematic drift); merge of this branch post-match.
+
 # 2026-10-02 — NOVA: DEF-3 remote-outpost defence coverage (switch Z_def3_remote_outpost_coverage)
 
 - `DefenseCoveragePlanner.CoverRemoteOutposts`: own building cells cluster into
