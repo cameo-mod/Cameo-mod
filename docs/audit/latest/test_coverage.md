@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (42 file(s)) | 468 | >= 24 |
-| T2 | `def test_*` in tools/tests (292 file(s)) | 2945 | >= 177 |
-| T3 | modules with no test mentioning them | 323 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (57 file(s)) | 625 | >= 24 |
+| T2 | `def test_*` in tools/tests (292 file(s)) | 2946 | >= 177 |
+| T3 | modules with no test mentioning them | 327 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (323)
+## T3 — untested modules (327)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -54,6 +54,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs | DeployBotGroup, DeployBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonContestBotModule.cs | GarrisonContestBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs | GarrisonDefenseBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
@@ -192,6 +193,8 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_assets.py | audit_assets |
 | python | tools/audit/audit_balance_sheet.py | audit_balance_sheet |
 | python | tools/audit/audit_basebuilder_crates.py | audit_basebuilder_crates |
+| python | tools/audit/audit_bot_direct_mutation.py | audit_bot_direct_mutation |
+| python | tools/audit/audit_bot_wiring.py | audit_bot_wiring |
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
 | python | tools/audit/audit_ca_drift.py | audit_ca_drift |
@@ -336,6 +339,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/packs/audit_bits_refs.py | audit_bits_refs |
 | python | tools/packs/compare_resolved.py | compare_resolved |
 | python | tools/packs/extract_shared.py | extract_shared |
+| python | tools/packs/materialize_inherit.py | materialize_inherit |
 | python | tools/packs/migrate_assets.py | migrate_assets |
 | python | tools/packs/split_ai_rows.py | split_ai_rows |
 | python | tools/packs/split_faction.py | split_faction |
@@ -346,5 +350,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 323 untested > baseline 224
+- T3: 327 untested > baseline 224
 

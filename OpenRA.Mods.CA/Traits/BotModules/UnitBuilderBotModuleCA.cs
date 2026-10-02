@@ -153,6 +153,9 @@ namespace OpenRA.Mods.CA.Traits
 		IBotEnemyCompositionProvider compositionProvider;
 		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
+
+		// Cameo (§12.21, PP-1): lazy — resolved on first BuildUnit; null keeps the upstream one-queue fill.
+		IBotProductionWidth productionWidth;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
@@ -333,50 +336,60 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			// For queues that support parallel production (e.g. Zerg hatchery), find one with a free slot.
 			// For standard queues, require the queue to be completely empty.
-			var queue = AIUtils.FindQueues(player, category).FirstOrDefault(q =>
-			{
-				if (q is IHasParallelQueueSlots p)
-					return p.AvailableSlots > 0;
-				return !q.AllQueued().Any();
-			});
-
-			if (queue == null)
-				return;
-
-			// Fill all available parallel slots in one pass so that every larva stays occupied.
-			var slotsToFill = (queue is IHasParallelQueueSlots parallelQueue)
-				? parallelQueue.AvailableSlots
-				: 1;
-
-			for (var slot = 0; slot < slotsToFill; slot++)
-			{
-				var unit = buildRandom ?
-					ChooseRandomUnitToBuild(queue, excludeLimited) :
-					ChooseUnitToBuild(queue, excludeLimited);
-
-				if (unit == null)
+			// Cameo (§12.21, PP-1): an enabled IBotProductionWidth provider lifts the one-queue-per-call
+			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
+			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
+			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
+			var maxQueues = productionWidth?.MaxQueuesPerCategory ?? 1;
+			var queues = AIUtils.FindQueues(player, category)
+				.Where(q =>
 				{
+					if (q is IHasParallelQueueSlots p)
+						return p.AvailableSlots > 0;
+					return !q.AllQueued().Any();
+				})
+				.Take(Math.Max(1, maxQueues));
+
+			foreach (var queue in queues)
+			{
+				// Fill all available parallel slots in one pass so that every larva stays occupied.
+				var slotsToFill = (queue is IHasParallelQueueSlots parallelQueue)
+					? parallelQueue.AvailableSlots
+					: 1;
+
+				for (var slot = 0; slot < slotsToFill; slot++)
+				{
+					var unit = buildRandom ?
+						ChooseRandomUnitToBuild(queue, excludeLimited) :
+						ChooseUnitToBuild(queue, excludeLimited);
+
+					if (unit == null)
+					{
+						if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+							RevertToBaselineComposition();
+
+						break;
+					}
+
+					var name = unit.Name;
+
+					if (!ShouldBuild(name, false, queue.Info.Type))
+					{
+						if (!excludeLimited)
+						{
+							BuildUnit(bot, category, buildRandom, true);
+							return;
+						}
+
+						break;
+					}
+
+					SetUnitInterval(name);
+					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					counters.Record(unit);
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
-						RevertToBaselineComposition();
-
-					return;
+						AddToActiveCompositionProducedValue(unit);
 				}
-
-				var name = unit.Name;
-
-				if (!ShouldBuild(name, false, queue.Info.Type))
-				{
-					if (!excludeLimited)
-						BuildUnit(bot, category, buildRandom, true);
-
-					return;
-				}
-
-				SetUnitInterval(name);
-				bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
-				counters.Record(unit);
-				if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
-					AddToActiveCompositionProducedValue(unit);
 			}
 		}
 

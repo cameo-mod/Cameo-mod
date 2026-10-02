@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **698** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **158**
+Files scanned: **698** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **170**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -12,26 +12,29 @@ _none found_
 
 | key | occurrences |
 |---|---|
-| Projectile | 18 |
-| Range | 16 |
-| ReloadDelay | 13 |
+| Projectile | 19 |
+| Range | 17 |
+| ReloadDelay | 14 |
 | Warhead@Effect | 7 |
 | Warhead@Bullet_Medium_Flat | 7 |
+| ValidTargets | 7 |
+| Warhead@ShieldHit | 6 |
 | Report | 6 |
 | Burst | 6 |
-| ValidTargets | 6 |
-| Warhead@ShieldHit | 5 |
-| Warhead@Concrete | 4 |
+| Warhead@Concrete | 5 |
 | Warhead@EffectAir | 4 |
+| Warhead@ShieldHitEffect | 4 |
 | BurstDelays | 3 |
 | Warhead@EffectWater | 3 |
-| Warhead@ShieldHitEffect | 3 |
 | Warhead@Smudge | 3 |
 | Warhead@DuneRock | 3 |
 | Warhead@DuneSand | 3 |
 | Warhead@CannonHE_Medium | 3 |
 | Warhead@Shrapnel | 2 |
 | Warhead@Demolition_Light | 2 |
+| Warhead@GrenadePercentage | 2 |
+| Warhead@ChaingunPercentage | 2 |
+| Warhead@Glow | 2 |
 | Warhead@RA2Crater | 2 |
 | Defaults | 2 |
 | Voiced | 2 |
@@ -47,11 +50,8 @@ _none found_
 | Warhead@HeavyBombPercentage | 1 |
 | Warhead@Heal | 1 |
 | Warhead@MediumChemicalWeaponPercentage | 1 |
-| Warhead@GrenadePercentage | 1 |
 | Warhead@MissileAP_Light | 1 |
 | Warhead@Demolition_Heavy_Flat | 1 |
-| Warhead@Concussion_Medium_Flat | 1 |
-| Warhead@Toxic_Light | 1 |
 
 
 ## D2 — full list
@@ -92,10 +92,10 @@ _none found_
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 6400, 6610 | DredMissile | Projectile |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 6412, 6614 | DredMissile | Warhead@Demolition_Light |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 6498, 6612 | DredMissile | Warhead@Effect |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 8857, 8950 | TanyaBomb | Report |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 8858, 8951 | TanyaBomb | Warhead@Effect |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 8864, 9215 | TanyaBomb | Warhead@Demolition_Heavy_Flat |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 9920, 9928 | RA2LargeDebris | Projectile |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 9489, 9582 | TanyaBomb | Report |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 9490, 9583 | TanyaBomb | Warhead@Effect |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 9496, 9847 | TanyaBomb | Warhead@Demolition_Heavy_Flat |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 10552, 10560 | RA2LargeDebris | Projectile |
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml | 945, 950 | RA160mmE_elite | Warhead@Concussion_Medium_Flat |
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml | 1693, 1709 | RA2120xmm_fire_elite | Range |
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml | 1695, 1710 | RA2120xmm_fire_elite | Burst |
@@ -131,6 +131,16 @@ _none found_
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 6616, 6764 | AsianTurretPlasma | Warhead@DuneSand |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 6619, 6767 | AsianTurretPlasma | Warhead@EffectAir |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 7621, 7641 | AsianChaosMine | Report |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8172, 8322 | AAGunBoatFlak | ValidTargets |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8175, 8319 | AAGunBoatFlak | Range |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8176, 8324 | AAGunBoatFlak | Warhead@Flak_Medium |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8180, 8329 | AAGunBoatFlak | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8219, 8331 | AAGunBoatFlak | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8268, 8333 | AAGunBoatFlak | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8309, 8335 | AAGunBoatFlak | Warhead@Concrete |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8311, 8337 | AAGunBoatFlak | Warhead@Glow |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8314, 8340 | AAGunBoatFlak | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 8316, 8342 | AAGunBoatFlak | Warhead@ShieldHitEffect |
 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml | 5, 29 | schwarzermond_lunarsoldier_rifle | ReloadDelay |
 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml | 6, 30 | schwarzermond_lunarsoldier_rifle | Range |
 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml | 7, 31 | schwarzermond_lunarsoldier_rifle | Report |
@@ -193,6 +203,8 @@ _none found_
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1242, 1248 | TSBombSonic | ReloadDelay |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1243, 1251 | TSBombSonic | Range |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1767, 1775 | TSAAPCCannon | ValidTargets |
+| mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml | 658, 883 | ScrinRiftDamage | ReloadDelay |
+| mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml | 661, 885 | ScrinRiftDamage | Projectile |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 150, 153 | wc2_humans_guardtower | Defaults |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 158, 161 | wc2_humans_cannontower | Defaults |
 | mods/cameo/rules/ants.yaml | 71, 80 | QANT | Voiced |
@@ -216,4 +228,7 @@ _none found_
 | mods/cameo/weapons/starwars.yaml | 814, 818 | SWNapalm | Burst |
 | mods/cameo/weapons/starwars.yaml | 843, 847 | SWNapalm2 | Burst |
 | mods/cameo/weapons/starwars.yaml | 867, 871 | SWNapalm3 | Burst |
+
+
+**FAIL** — D2 count 170 exceeds the baseline 158: a new duplicate key was introduced.
 

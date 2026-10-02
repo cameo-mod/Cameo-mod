@@ -16588,3 +16588,23 @@ LANE COLLISION (flagged): maintainer 2026-10-01 assigned squad formation to
 claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
 is an independent, SquadManager-free implementation with runtime evidence;
 both are default-off. Coordinator picks which arms in the increment.
+
+## 2026-10-02 EMBER — PP-1 parallel production + armed smoke match
+
+- Reviewed NOVA's ATK-1 (`AssaultFormationPlanner` + `GroundUnitsAssaultFanoutStateCA` +
+  `AssaultFormationBotModule`, group AG) and the LegacyBridgeHut fix — clean seams, no
+  collisions with §12.20 work; merged to master via #768.
+- PP-1 `AH_parallel_production`: IBotProductionWidth provider seam (settings-only,
+  AssaultFormation-shaped) — UnitBuilder fills up to N idle queues per category per call.
+  Provider (not field-write) chosen so the shared UnitBuilderBotModuleCA@generic can't
+  hand the width to classic. ParallelProductionBotModule, genericbot && parallel_production.
+- Smoke harness: frozen worktree tmpab-smoke at af179d72f, engine junctioned, groups
+  AB/AC/AD/AE/AF/AG armed. First match launch died on stale engine DLLs
+  (Cannot locate type: AssaultFormationBotModuleInfo — bin predated the ATK-1 merge);
+  rebuilt CA+Cameo at master, relaunched.
+- Result (1x td_gdi mirror, hard-armed vs classic): hard lost 0-1 but the armed paths
+  fired — 40 garrison records (contest claims from WT99 + raid:garrison_* published),
+  hard produced 6 MCVs (old McvTargetCount=3 ceiling gone — EX-4 works), 5 conyards/6
+  refineries placed, zero new exceptions. Loss read: expanded aggressively, couldn't
+  hold against the omniscient reference — 1-match noise, real verdict is the increment A/B.
+- AH armed separately for the PP-1 leg of the smoke.

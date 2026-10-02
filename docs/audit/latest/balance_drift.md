@@ -2,15 +2,15 @@
 
 **1 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
 
-## tiberiansun_cabal
+## redalert2mod_asianalliance
 
 ```diff
-       "reloaddelay": "25",
-+      "requires": "!cydamaged",
-       "slot": "Armament@PRIMARY",
-@@ -3999,2 +4000,3 @@
-       "range": "1536",
-+      "requires": "cydamaged",
-       "slot": "Armament@Suicide",
+       "versus_templates": [
+-       "RA2FlakTrackGun",
++       "^Warhead_Flak_Medium",
++       "^Projectile_Flak_Medium",
++       "^Effect_Flak_Puff_RA2",
++       "^Effect_Watersplash_Small_RA2",
+        "^Warhead_Flak_Medium_Flat"
 ```
 

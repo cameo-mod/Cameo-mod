@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **793**
+Files scanned: **797**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 139 | 30 |
+| E2 | handler discards the error | 140 | 30 |
 | E3 | open() without encoding= | 161 | 90 |
 | E4 | subprocess call without check= | 61 | 9 |
 
@@ -28,7 +28,7 @@ Files scanned: **793**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 139 finding(s)
+## E2 — 140 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -42,11 +42,12 @@ Files scanned: **793**
 | tools/ai/fight_report.py | 32 | handler body discards the error |
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
-| tools/ai/run_ai_match_batch.py | 586 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 691 | handler body discards the error |
+| tools/ai/team_coordination_report.py | 48 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
-| tools/audit/audit_bot_insurance.py | 140 | handler body discards the error |
+| tools/audit/audit_bot_insurance.py | 142 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_engine_freshness.py | 76 | handler body discards the error |
@@ -167,7 +168,7 @@ Files scanned: **793**
 | tools/tests/test_armament_roles.py | 306 | handler body discards the error |
 | tools/tests/test_charge_aware_reference.py | 34 | handler body discards the error |
 | tools/tests/test_charge_aware_reference.py | 49 | handler body discards the error |
-| tools/tests/test_rename_r12_compatibility_cohort.py | 238 | handler body discards the error |
+| tools/tests/test_rename_r12_compatibility_cohort.py | 270 | handler body discards the error |
 | tools/tests/test_support_armament_pricing.py | 21 | handler body discards the error |
 | tools/tests/test_support_armament_pricing.py | 107 | handler body discards the error |
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
@@ -252,8 +253,8 @@ Files scanned: **793**
 | tools/tests/test_peer_state_scenarios.py | 173 | `read_text()` without encoding= |
 | tools/tests/test_reference_map_requests.py | 27 | `read_text()` without encoding= |
 | tools/tests/test_shared_owner_wrappers.py | 19 | `read_text()` without encoding= |
-| tools/tests/test_td_naval_rename.py | 258 | `read_text()` without encoding= |
-| tools/tests/test_td_naval_rename.py | 259 | `read_text()` without encoding= |
+| tools/tests/test_td_naval_rename.py | 291 | `read_text()` without encoding= |
+| tools/tests/test_td_naval_rename.py | 292 | `read_text()` without encoding= |
 | tools/tests/test_virtual_anchor.py | 142 | `write_text()` without encoding= |
 | tools/tests/test_warhead_source_paths.py | 21 | `rules.write_text()` without encoding= |
 | tools/tests/test_warhead_source_paths.py | 31 | `base.write_text()` without encoding= |
@@ -354,9 +355,9 @@ Files scanned: **793**
 | tools/ai/ab_increment.py | 724 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
-| tools/ai/run_ai_match_batch.py | 512 | `subprocess.Popen()` without check= |
-| tools/ai/run_ai_match_batch.py | 653 | `subprocess.run()` without check= |
-| tools/ai/run_league.py | 307 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 617 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 815 | `subprocess.run()` without check= |
+| tools/ai/run_league.py | 357 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
 | tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |
 | tools/audit/audit_central_ids.py | 26 | `subprocess.run()` without check= |
@@ -410,7 +411,7 @@ Files scanned: **793**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 139 > baseline 30
+- E2: 140 > baseline 30
 - E3: 161 > baseline 90
 - E4: 61 > baseline 9
 - 1 file(s) do not parse

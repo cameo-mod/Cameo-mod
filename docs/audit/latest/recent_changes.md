@@ -1,19 +1,20 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **527**, files touched: **4753**
+Commits reviewed: **614**, files touched: **4838**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 23 | yes |
-| R2 | audit script never run by run_all.sh | 9 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 26 | partly |
+| R1 | balance yaml edited without the ledger | 24 | yes |
+| R2 | audit script never run by run_all.sh | 10 | yes |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 29 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
-## R1 — hand-edited balance numbers (23)
+## R1 — hand-edited balance numbers (24)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| d300295e | 2026-10-01 | packs: materialize 12 hard cross-pack refs (reso | Damage, Range, ReloadDelay, Speed, Spread |
 | 2f440999 | 2026-09-26 | W7 tail-2: 5 more de-parented after collision pr | Burst, BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
 | 5eff1183 | 2026-09-26 | rule-4 Versus remediation: restore weapon-parent | BurstDelays, MinRange |
 | 01c89a5a | 2026-09-26 | fix(W7): restore Inherits edges where splices ma | Damage |
@@ -39,11 +40,12 @@ Commits reviewed: **527**, files touched: **4753**
 | d36f3b0a | 2026-09-24 | W23-RA batch 1: TKM file retrofit (20/21 weapons | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 
 
-## R2 — audits missing from run_all.sh (9)
+## R2 — audits missing from run_all.sh (10)
 
 | script | problem |
 |---|---|
 | tools/audit/audit_bot_insurance.py | not invoked by run_all.sh |
+| tools/audit/audit_bot_wiring.py | not invoked by run_all.sh |
 | tools/audit/audit_chrome_master_freshness.py | not invoked by run_all.sh |
 | tools/audit/audit_chrome_scale_variants.py | not invoked by run_all.sh |
 | tools/audit/audit_inline_effects.py | not invoked by run_all.sh |
@@ -54,10 +56,13 @@ Commits reviewed: **527**, files touched: **4753**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (26)
+## R3 — commits without provenance (29)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 8a86238b | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 27de8684 | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| be34aa6d | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 3e889dc5 | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | a47642cf | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 2e52abaf | 2026-09-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
@@ -101,21 +106,21 @@ Commits reviewed: **527**, files touched: **4753**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 129 |
+| DEVELOPMENT_LOG.md | 176 |
+| mods/cameo/ai/ai.yaml | 109 |
+| docs/design/AI_ARCHITECTURE.md | 99 |
 | docs/HANDOFF.md | 99 |
-| mods/cameo/ai/ai.yaml | 81 |
-| docs/design/AI_ARCHITECTURE.md | 68 |
 | docs/LESSONS_LEARNED.md | 66 |
-| docs/DESIGN.md | 58 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 54 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 40 |
-| docs/design/ROADMAP.md | 40 |
-| docs/balance/derived/tiberiandawn_nod.json | 31 |
-| docs/balance/derived/redalert2_allies.json | 29 |
-| docs/balance/derived/redalert2mod_syndicate.json | 29 |
-| docs/balance/derived/redalert_allies.json | 29 |
-| docs/balance/derived/tiberiansun_cabal.json | 29 |
-| tools/audit/audit_weapon_shape.py | 29 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 64 |
+| docs/DESIGN.md | 60 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 54 |
+| docs/design/ROADMAP.md | 51 |
+| docs/design/AI_MODULE_MAP.md | 33 |
+| docs/balance/derived/tiberiandawn_nod.json | 32 |
+| tools/ai/increment_switches.yaml | 30 |
+| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 30 |
+| docs/balance/derived/redalert2_allies.json | 30 |
+| docs/balance/derived/redalert2mod_syndicate.json | 30 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -129,10 +134,10 @@ Commits reviewed: **527**, files touched: **4753**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 23 R1 and 0 R3 of 23/26 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/29 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 23 R1, 9 R2, 0 R3 blocking finding(s)
+- 24 R1, 10 R2, 0 R3 blocking finding(s)
 

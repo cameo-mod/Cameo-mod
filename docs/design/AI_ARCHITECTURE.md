@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**63 distinct trait types, 88 Player instances plus one World instance** (2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**64 distinct trait types, 89 Player instances plus one World instance** (2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, +1 type / +1 instance; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2821,3 +2821,23 @@ fires unless its switch arms.
   settings-only `IBotAssaultFormation` provider (same shape as `IBotSiegeAdvisor`),
   `RequiresCondition: genericbot && assault_fanout` — classic has no provider and
   keeps the upstream single-point commit regardless of the switch.
+
+### 12.21 PP-1 — parallel production width (EMBER, 2026-10-02)
+
+The maintainer's "use all production buildings" report: `UnitBuilderBotModuleCA.BuildUnit`
+filled only the FIRST idle queue of a category per call — three war factories still
+produced serially through whichever happened to be free, so parallel macro investment
+never converted into throughput.
+
+- *The seam:* `IBotProductionWidth.MaxQueuesPerCategory` — settings-only provider (same
+  shape as `IBotAssaultFormation`): the unit builder resolves it lazily and fills up to
+  N idle queues per call instead of one. No provider (classic mounts none) keeps the
+  upstream single-queue fill byte-identical — the shared `UnitBuilderBotModuleCA@generic`
+  instance never leaks the width to the A/B control, which a plain field-write switch
+  would have done.
+- *The provider:* `ParallelProductionBotModule` (`genericbot && parallel_production`,
+  switch `AH_parallel_production`, width 4). Orders still come only from the unit
+  builder — the provider is pure tunables.
+- *Per-queue independence:* each filled queue picks its own unit via the normal
+  chooser, so composition/RoleMix logic applies per facility rather than stamping one
+  unit across all of them.

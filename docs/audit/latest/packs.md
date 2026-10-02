@@ -60,7 +60,7 @@
 | win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
 | camea | 0 | 1 | mods\cameo\rules\camea.yaml |
 | cute | 0 | 1 | mods\cameo\rules\valentine.yaml |
-| dummy | 1 | 1 | mods\cameo\rules\redalert2.yaml |
+| dummy | 0 | 1 | mods\cameo\rules\redalert2.yaml |
 | hta | 0 | 1 | mods\cameo\rules\sow.yaml |
 | htb | 0 | 1 | mods\cameo\rules\sow.yaml |
 | htc | 0 | 1 | mods\cameo\rules\sow.yaml |
