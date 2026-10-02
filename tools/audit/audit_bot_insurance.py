@@ -58,10 +58,12 @@ HOSTS = ["Player", "^Conyard"]
 INSURANCE_RE = re.compile(r"\b\w+botinsurance\b")
 
 # Bot types that are deliberately uninsured. `campaign` drives scripted missions; handing it an
-# income drip would change mission pacing that was tuned without one. `fransbot` keeps the legacy
-# `secondaryinsurance` fallback instead (player.yaml: RequiresCondition excludes `genericbot`, and
-# DynamicBotInsurance is `genericbot`-gated) — its own stack manages its economy.
-UNINSURED_BOT_TYPES = {"campaign", "fransbot"}
+# income drip would change mission pacing that was tuned without one. The rest are all
+# `HiddenInLobby` harness/donor types per their yaml comments: `classic` is the A/B reference
+# (insuring it moves the baseline), the `exploit_*` trio are harness-only league testbeds
+# whose exposure purpose an income drip would blunt, and `fransbot` is the module donor.
+UNINSURED_BOT_TYPES = {"campaign", "classic", "exploit_guerrilla", "exploit_rush",
+                       "exploit_turtle", "fransbot"}
 
 CS_TRAIT = pathlib.Path("OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs")
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_.-]*|\(|\)|&&|\|\||!")
