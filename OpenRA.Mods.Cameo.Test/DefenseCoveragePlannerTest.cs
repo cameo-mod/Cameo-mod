@@ -218,5 +218,32 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(naked, Is.Not.Null);
 			Assert.That(naked.Value.X, Is.LessThan(20), "all naked: the larger base front wins");
 		}
+
+		// CN4: frontier roles (Military/Outpost) outrank the interior — a naked front in a
+		// frontier region wins the next defence even when an interior front is barer still.
+		[Test]
+		public void TheFrontierFrontWinsOverTheInterior()
+		{
+			var cells = new[]
+			{
+				new CPos(10, 10), new CPos(12, 10), new CPos(10, 13),   // interior front (Core role)
+				new CPos(40, 40), new CPos(41, 40),                    // frontier front (Military role)
+			};
+			var roleOf = (CPos c) => c.X > 30 ? RegionRole.Military : RegionRole.Core;
+
+			var pick = DefenseCoveragePlanner.PickFrontierCenter(
+				cells, new (CPos, int)[0], 14, roleOf);
+			Assert.That(pick, Is.Not.Null);
+			Assert.That(pick.Value.X, Is.EqualTo(40), "the frontier front wins although the interior has more cells");
+
+			// A covered frontier lets the fallback see the naked interior: frontier pick returns null.
+			var coveringFrontier = new[] { (new CPos(40, 40), 6), (new CPos(41, 40), 6) };
+			Assert.That(DefenseCoveragePlanner.PickFrontierCenter(cells, coveringFrontier, 14, roleOf), Is.Null);
+
+			// No frontier roles at all → no answer (caller falls back to the plain pick).
+			var pickNoFrontier = DefenseCoveragePlanner.PickFrontierCenter(
+				cells, new (CPos, int)[0], 14, _ => RegionRole.Economy);
+			Assert.That(pickNoFrontier, Is.Null);
+		}
 	}
 }

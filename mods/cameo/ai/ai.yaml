@@ -66,6 +66,9 @@
 	GrantConditionOnBotOwner@plugspawn:
 		Condition: plug_spawn
 		Bots: fransbot
+	GrantConditionOnBotOwner@cn4regionroles:
+		Condition: cn4_region_roles
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3492,6 +3495,13 @@ Player:
 		# skipped by the demand gate, so non-carrier entries are harmless. BridgeHutActorTypes unset:
 		# every hut counts.
 		RepairerActorTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, naxis_engineeringtruck, futuretech_engineer, futuretech_repairdroid, tsengineer, ts_nod_engineer, cabal_engineer, engineer, d2k_hijacker, d2k_mechanic, terran_scv, tkm_engineer, atreides_engineer, corrino_engineer, harkonnen_engineer, plymouth_spider
+	# CN4 (AI_MASTER_PLAN §3, crystallized-nexus CNRegionManagerBotModule port): classifies each held zone
+	# graph region as Core / Economy / Military / Outpost (resource+space+security scoring, exclusive
+	# Core/Military with hold-timer locks) and publishes IBotRegionRoles. Belief reads stay fog-honest
+	# (RegionOwner counts own + remembered buildings). First consumer: DefenseCoveragePlanner fronts.
+	RegionRolesBotModule:
+		RequiresCondition: genericbot && cn4_region_roles
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
