@@ -178,3 +178,8 @@ groups:
       UseCoalitionTargetBias: true
     SquadManagerBotModuleCA:
       UseCoalitionTarget: true
+  BF_team_capture_claims:            # NOVA TC-2e - capture-claim arbitration over the team blackboard: live capture/contest target cells are published; a lower-ClientIndex claimant wins, the rest stand down (DAWN 6v6 follow-up)
+    GarrisonContestBotModule:
+      UseTeamCaptureClaims: true
+    EngineerBotModule:
+      UseTeamCaptureClaims: true

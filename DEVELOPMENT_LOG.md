@@ -1,3 +1,59 @@
+# 2026-10-02 — NOVA: TC-2e capture-claim arbitration + post-merge audit fixes (TC-3 lifecycle)
+
+**Done (branch devin/nova/def3-remote-coverage, worktree nova-tc2):**
+- TC-2e (AI_ARCHITECTURE §12.17/§12.26): `IBotCaptureClaimSource` publishes live capture/contest
+  target cells on the broadcast (`TeamBroadcast.CaptureClaims`); `TeamBlackboard.ClaimsAheadOf`
+  gives the lower-ClientIndex claimant the cell. Consumers `GarrisonContestBotModule` +
+  `EngineerBotModule` (`UseTeamCaptureClaims`, switch group `BF_team_capture_claims`) skip
+  outranked candidates and stand in-flight attempts down (lease release + Stop; engineer path
+  ends missions `superseded`, waiting escort plans `Denied`). Closes DAWN's 6v6 finding: 49
+  contested capture claims.
+- Post-merge architecture review fixes (fransotto/Codex review, PR #775 findings 4.1-4.4 + 3.2):
+  rescue fold now CONSUMES the elected responder (one participant per request per fold);
+  `TeamBlackboard.IsLive` central freshness — dead/stale publishers filtered in
+  `CollectBroadcasts` (WinState, SnapshotTick>0, BroadcastMaxAgeTicks 500); participant identity
+  moves to `ParticipantId`/`Player.InternalName` (sectors + rescue keyed on it, `#ClientIndex`
+  fallback); §12.18 documents the staggered-generation consistency model honestly;
+  stale switch groups `AD_army_first`/`AE_spread_assault` deleted (dead fields after the
+  one-owner consolidation).
+- Observability (review follow-up): `team_any_climax` situation field; the TC-2b/BC answer path
+  now writes a `defend_answer:` mission attempt record so the channel is countable in
+  cameo-ai-missions.jsonl; team_coordination_report.py counts it.
+- Tests: `TeamCaptureClaimsTest` (7) + CoalitionFoldTest +3 (pool consumption, same-ClientIndex
+  map bots, participant-keyed sectors).
+
+**Verified:** build clean; test suite green; switch dry-run arming BF.
+**Not done:** boot-gate pending in this session; A/B arm is the coordinator's gate.
+
+# 2026-10-02 - TC-2e: capture-claim arbitration over the team blackboard (switch BF_team_capture_claims)
+
+*Written by a Devin sub-agent for the coordinator (branch `devin/nova/def3-remote-coverage`; nothing committed, no game launch).*
+
+**Done:**
+- New seam `IBotCaptureClaimSource` (`OpenRA.Mods.CA/Traits/BotModules`): a claim source publishes the cell
+  centres (Map.CenterOfCell) of capture/contest targets it is actively working. Implemented by
+  `EngineerBotModule` (in-flight `capture:` missions + the waiting escort plan - never repair/bridge jobs)
+  and `GarrisonContestBotModule` (one cell per live contest claim, tracked in `claimCells`).
+- `TeamBroadcast.CaptureClaims` (trailing optional ctor arg, `?? Array.Empty`) carries the union of every
+  enabled source; `BotSituation` collects it unconditionally at snapshot time - own-side data, publish-always
+  like `ExpansionClaim`. `TeamBlackboard.ClaimsAheadOf(broadcasts, myClientIndex)` is the pure fold:
+  positions from allied broadcasts with strictly lower `ClientIndex`.
+- Consumers, each behind `UseTeamCaptureClaims` (default false): GarrisonContest skips claimed cells in the
+  candidate scan and drops an in-flight claim whose cell lost arbitration (walkers released + stopped);
+  Engineer skips claimed capture candidates (both the priority and the per-owner pass), stands an in-flight
+  capture attempt down through the existing release path (`Released`/`superseded` via a new `EndMission`
+  flag, `SupersededCaptures` telemetry), and denies a waiting escort plan the same way.
+- Switch group `BF_team_capture_claims` in `tools/ai/increment_switches.yaml` (both module instances are
+  genericbot-only in ai.yaml - `RequiresCondition: genericbot` / `genericbot && garrison_contest`, so classic
+  is bit-identical and nothing publishes in 1v1).
+- Tests: `OpenRA.Mods.Cameo.Test/TeamCaptureClaimsTest.cs` pins `ClaimsAheadOf` (empty/null input, lower /
+  higher / same index, contested position resolves to the lowest claimant, null broadcasts skipped).
+- Docs: `AI_ARCHITECTURE.md` §12.17 gains the fifth-consumer bullet and new §12.26; `AI_DATAFLOW.md`
+  gains the seam row and closes the "capture-claim gap" bullet.
+
+**Verified:** `dotnet build OpenRA.Mods.Cameo.Test -c Release` = 0 errors / 0 warnings; `dotnet test engine/bin/OpenRA.Mods.Cameo.Test.dll` = 729/729 passed (7 new).
+**Not done:** no boot gate, no A/B - the switch is off on master by definition.
+
 # 2026-10-02 - BO-1: build-order knob layer (knobs, opening, react, learned file, tuner)
 
 *Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/bo1_2026_10_02`; nothing committed, no game launch).*

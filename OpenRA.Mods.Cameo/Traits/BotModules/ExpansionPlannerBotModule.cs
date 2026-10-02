@@ -588,29 +588,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// TC-3 / BD (§12.18): the Voronoi score percent — a field belongs to the coalition sector
 		/// anchor nearest it (min HorizontalLengthSquared, the same horizontal measure AllyClaimWins
-		/// uses, so terrain height cannot tilt a border). The anchor holding our own ClientIndex keeps
-		/// 100, a foreign anchor keeps `foreignPercent`; a distance tie goes to the lowest ClientIndex
-		/// so every member computes the identical partition. Pure, for the tests.
+		/// uses, so terrain height cannot tilt a border). The anchor holding our own participant id
+		/// keeps 100, a foreign anchor keeps `foreignPercent`; a distance tie goes to the ordinally
+		/// smallest id so every member computes the identical partition. Pure, for the tests.
 		/// </summary>
-		public static int SectorScorePercent(WPos field, IReadOnlyDictionary<int, WPos> anchors,
-			int myClientIndex, int foreignPercent)
+		public static int SectorScorePercent(WPos field, IReadOnlyDictionary<string, WPos> anchors,
+			string myId, int foreignPercent)
 		{
 			if (anchors == null || anchors.Count == 0)
 				return 100;
 
-			var nearest = int.MaxValue;
+			string nearest = null;
 			var best = long.MaxValue;
 			foreach (var kv in anchors)
 			{
 				var d = (kv.Value - field).HorizontalLengthSquared;
-				if (d < best || (d == best && kv.Key < nearest))
+				if (d < best || (d == best && string.CompareOrdinal(kv.Key, nearest) < 0))
 				{
 					best = d;
 					nearest = kv.Key;
 				}
 			}
 
-			return nearest == myClientIndex ? 100 : Math.Clamp(foreignPercent, 0, 100);
+			return nearest == myId ? 100 : Math.Clamp(foreignPercent, 0, 100);
 		}
 
 		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
@@ -945,7 +945,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// TC-3 / BD (§12.18): the coalition's Voronoi partition — every allied spawn anchor owns
 			// the fields nearest it. Resolved once per re-plan; a missing provider or an empty anchor
 			// map leaves every score untouched (1v1, flag off — bit-identical).
-			IReadOnlyDictionary<int, WPos> sectorAnchors = null;
+			IReadOnlyDictionary<string, WPos> sectorAnchors = null;
 			if (Info.UseCoalitionSectors)
 			{
 				var anchors = player.PlayerActor.TraitsImplementing<IBotCoalition>()
@@ -1003,7 +1003,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// still picks a foreign field when no own-sector field is left.
 				if (sectorAnchors != null)
 					score *= SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
-						player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
+						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
 
 				// FE-1: unexplored ground wins ties (spread), and the crawl prefers fields no MCV is already heading to.
 				if (Info.FieldCoverage)

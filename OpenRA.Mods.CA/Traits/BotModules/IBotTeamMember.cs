@@ -87,10 +87,27 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public readonly WPos SpawnPoint;
 
+		/// <summary>
+		/// TC-2e (AI_ARCHITECTURE §12.17): the cell centres (Map.CenterOfCell) of the
+		/// capture/contest targets this bot is actively working — own-side intent shared
+		/// with allies so capture claims do not collide; the lower <see cref="ClientIndex"/>
+		/// claimant keeps its claim. Empty when none.
+		/// </summary>
+		public readonly IReadOnlyList<WPos> CaptureClaims;
+
+		/// <summary>
+		/// TC-3 review (post-merge audit 4.4): the publisher's match-local identity —
+		/// Player.InternalName. <see cref="ClientIndex"/> orders lobby slots, but map-side
+		/// bots can share the host's index, so coalition identity (rescue elections,
+		/// sector anchors) keys on this instead. Null on old-version publishers.
+		/// </summary>
+		public readonly string ParticipantId;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
 			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
 			int clientIndex = 0, WPos expansionClaim = default, WPos armyCentroid = default,
-			WPos expansionAssist = default, WPos spawnPoint = default)
+			WPos expansionAssist = default, WPos spawnPoint = default, IReadOnlyList<WPos> captureClaims = null,
+			string participantId = null)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -105,6 +122,8 @@ namespace OpenRA.Mods.CA.Traits
 			ArmyCentroid = armyCentroid;
 			ExpansionAssist = expansionAssist;
 			SpawnPoint = spawnPoint;
+			CaptureClaims = captureClaims ?? Array.Empty<WPos>();
+			ParticipantId = participantId;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>
@@ -198,17 +217,34 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// TC-2e review (post-merge audit 4.2): the ONE liveness rule every team
+		/// aggregation shares. A broadcast counts only while its publisher is
+		/// alive (<see cref="WinState.Undefined"/>) and its snapshot is fresh —
+		/// OpenRA keeps a defeated player's traits readable, so without this a
+		/// dead ally's last broadcast keeps electing responders, holding sectors
+		/// and claiming fields. <see cref="BroadcastMaxAgeTicks"/> covers a few
+		/// staggered snapshot intervals, not a live match's worth of drift.
+		/// </summary>
+		public const int BroadcastMaxAgeTicks = 500;
+
+		public static bool IsLive(TeamBroadcast broadcast, Player publisher, int now) =>
+			broadcast != null && broadcast.SnapshotTick > 0 && now - broadcast.SnapshotTick <= BroadcastMaxAgeTicks
+				&& (publisher == null || publisher.WinState == WinState.Undefined);
+
+		/// <summary>
 		/// Read every allied bot's latest broadcast — allies only, never the caller:
 		/// the caller's own state is already on its own snapshot. Host-side and
 		/// unsynced by design (every bot runs on the host); an ally without an
 		/// enabled provider contributes nothing, so a 1v1 yields a zeroed summary.
+		/// Dead or stale publishers are filtered centrally — no consumer solves
+		/// freshness on its own.
 		/// </summary>
 		public static TeamBlackboardSummary Collect(Player me) => Aggregate(CollectBroadcasts(me));
 
 		/// <summary>
 		/// The allied broadcasts themselves (allies only, never the caller) — for
 		/// consumers that need per-ally detail the summary drops, like which ally is
-		/// asking for help and where.
+		/// asking for help and where. Only live publishers (<see cref="IsLive"/>).
 		/// </summary>
 		public static List<TeamBroadcast> CollectBroadcasts(Player me)
 		{
@@ -216,10 +252,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (me?.World == null)
 				return broadcasts;
 
+			var now = me.World.WorldTick;
 			foreach (var p in me.World.Players.Where(p => p != me && p.IsBot && me.IsAlliedWith(p)))
 			{
 				var member = p.PlayerActor?.TraitsImplementing<IBotTeamMember>().FirstEnabledTraitOrDefault();
-				if (member?.Broadcast != null)
+				if (member != null && IsLive(member.Broadcast, p, now))
 					broadcasts.Add(member.Broadcast);
 			}
 
@@ -241,6 +278,30 @@ namespace OpenRA.Mods.CA.Traits
 				.Where(b => b != null && b.RequestsDefence && b.DefendPosition != WPos.Zero)
 				.OrderByDescending(b => b.UrgencyLevel).ThenBy(b => b.OwnArmyValue)
 				.FirstOrDefault();
+		}
+
+		/// <summary>
+		/// TC-2e (AI_ARCHITECTURE §12.17): positions claimed by allied broadcasts whose
+		/// publisher outranks the caller — lower ClientIndex wins, so a contested capture
+		/// or contest target converges on one claimant instead of every ally walking at
+		/// it. Pure, for the tests; null or empty input yields an empty set.
+		/// </summary>
+		public static HashSet<WPos> ClaimsAheadOf(IEnumerable<TeamBroadcast> broadcasts, int myClientIndex)
+		{
+			var claims = new HashSet<WPos>();
+			if (broadcasts == null)
+				return claims;
+
+			foreach (var broadcast in broadcasts)
+			{
+				if (broadcast == null || broadcast.ClientIndex >= myClientIndex || broadcast.CaptureClaims == null)
+					continue;
+
+				foreach (var claim in broadcast.CaptureClaims)
+					claims.Add(claim);
+			}
+
+			return claims;
 		}
 	}
 }

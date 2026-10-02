@@ -80,10 +80,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Value priced per remembered garrison seat when the fog memory carries none (dormant-arm default).")]
 		public readonly int GarrisonSeatValue = 120;
 
+		[Desc("TC-2e (AI_ARCHITECTURE §12.17): yield a contest target an outranking allied bot already claims",
+			"(published on the team blackboard - lower ClientIndex wins), and stand an in-flight claim down",
+			"when an outranking ally's claim lands on its cell. Inert in 1v1 - no allied broadcasts exist.")]
+		public readonly bool UseTeamCaptureClaims = false;
+
 		public override object Create(ActorInitializer init) { return new GarrisonContestBotModule(init.Self, this); }
 	}
 
-	public class GarrisonContestBotModule : ConditionalTrait<GarrisonContestBotModuleInfo>, IBotTick, IBotMissionProvider
+	public class GarrisonContestBotModule : ConditionalTrait<GarrisonContestBotModuleInfo>, IBotTick, IBotMissionProvider,
+		IBotCaptureClaimSource
 	{
 		const string LeaseOwner = nameof(GarrisonContestBotModule);
 
@@ -92,6 +98,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Building ActorID -> walkers en route. Released on arrival, death, or the building leaving neutral hands.
 		readonly Dictionary<uint, List<Actor>> claimWalkers = new();
+
+		// TC-2e: the claimed garrison's cell per ActorID - buildings do not move, so it is written once at claim
+		// time and dropped with the claim. This is what CaptureClaimPositions publishes to the blackboard.
+		readonly Dictionary<uint, CPos> claimCells = new();
 		readonly Dictionary<string, int> raidReservations = new();
 		List<BotMission> missions = [];
 		IBotZoneTopology zoneTopology;
@@ -115,6 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					leases?.Release(walker, LeaseOwner);
 
 			claimWalkers.Clear();
+			claimCells.Clear();
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -163,32 +174,63 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TickContests(IBot bot, IBotUnitLeases leases)
 		{
+			// TC-2e (§12.17): the cells outranking allied bots already claim, off the team blackboard —
+			// one read per pass. Flag off or 1v1 leaves null and every gate below is the no-op it is today.
+			HashSet<WPos> claimsAhead = null;
+			if (Info.UseTeamCaptureClaims)
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
+
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
-			var prune = new List<(uint Building, bool AnyInside)>();
+			var prune = new List<(uint Building, bool AnyInside, bool Superseded)>();
 			foreach (var (building, walkers) in claimWalkers)
 			{
 				var anyInside = false;
-				walkers.RemoveAll(w =>
+				var superseded = false;
+
+				// TC-2e: the claim lost arbitration to a lower-index ally. The walkers stand down through the
+				// stale-claim path — released, the entry pruned — plus a Stop, or the queued EnterGarrison
+				// would still run and the stand-down would capture the building anyway.
+				if (claimsAhead != null && claimCells.TryGetValue(building, out var claimedCell)
+					&& claimsAhead.Contains(world.Map.CenterOfCell(claimedCell)))
 				{
-					var inside = IsInside(w);
-					var done = w.IsDead || !w.IsInWorld || w.Owner != player || inside
-						|| leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks());
-					if (done)
+					superseded = true;
+					anyInside = walkers.Any(IsInside);
+					foreach (var w in walkers)
 					{
-						anyInside |= inside;
 						leases?.Release(w, LeaseOwner);
+						if (!w.IsDead && w.IsInWorld && w.Owner == player && !IsInside(w))
+							bot.QueueOrder(new Order("Stop", w, false));
 					}
 
-					return done;
-				});
+					walkers.Clear();
+				}
+				else
+				{
+					walkers.RemoveAll(w =>
+					{
+						var inside = IsInside(w);
+						var done = w.IsDead || !w.IsInWorld || w.Owner != player || inside
+							|| leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks());
+						if (done)
+						{
+							anyInside |= inside;
+							leases?.Release(w, LeaseOwner);
+						}
+
+						return done;
+					});
+				}
+
+
 				if (walkers.Count == 0)
-					prune.Add((building, anyInside));
+					prune.Add((building, anyInside, superseded));
 			}
 
-			foreach (var (id, anyInside) in prune)
+			foreach (var (id, anyInside, superseded) in prune)
 			{
 				claimWalkers.Remove(id);
-				WriteClaimClosed(id, anyInside);
+				claimCells.Remove(id);
+				WriteClaimClosed(id, anyInside, superseded);
 			}
 
 			if (claimWalkers.Count >= Info.MaxConcurrentClaims)
@@ -209,6 +251,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& a.Owner.RelationshipWith(player) == PlayerRelationship.Neutral
 					&& a.Trait<Garrisonable>().HasSpace(1)
 					&& !claimWalkers.ContainsKey(a.ActorID)
+					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(a.Location)))
 					&& shroud.IsExplored(a.Location)
 					&& (a.Location - anchor.Value).LengthSquared <= radiusSq)
 				.OrderBy(a => ((a.Location - anchor.Value).LengthSquared)
@@ -269,6 +312,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				claimWalkers[garrison.ActorID] = claimed;
+				claimCells[garrison.ActorID] = garrison.Location;
 				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(world, garrison.Location), false, groupedActors: claimed.ToArray()));
 				bot.QueueOrder(new Order("EnterGarrison", null, Target.FromActor(garrison), true, groupedActors: claimed.ToArray()));
 
@@ -291,11 +335,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Every resolved contest claim writes a terminal card line - occupied, lost to the enemy, target
 		// destroyed, or the walkers died in transit. Without it the archive holds open claims forever.
-		void WriteClaimClosed(uint building, bool anyInside)
+		void WriteClaimClosed(uint building, bool anyInside, bool superseded = false)
 		{
 			var actor = world.GetActorById(building);
 			string reason;
-			if (anyInside || (actor != null && !actor.IsDead && actor.Owner == player))
+			if (superseded)
+				reason = BotMissionReasons.Superseded;   // TC-2e: outranked ally holds the claim — nothing was lost
+			else if (anyInside || (actor != null && !actor.IsDead && actor.Owner == player))
 				reason = BotMissionReasons.Done;
 			else if (actor == null || actor.IsDead)
 				reason = BotMissionReasons.TargetGone;
@@ -408,6 +454,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled ? Array.Empty<BotMission>() : missions;
+
+		// TC-2e (AI_ARCHITECTURE §12.17): the live contest claims' cell centres, for the team blackboard.
+		public IReadOnlyList<WPos> CaptureClaimPositions =>
+			claimCells.Count == 0
+				? Array.Empty<WPos>()
+				: claimCells.Values.Select(c => world.Map.CenterOfCell(c)).ToList();
 
 		public void MissionTaken(BotMission mission)
 		{

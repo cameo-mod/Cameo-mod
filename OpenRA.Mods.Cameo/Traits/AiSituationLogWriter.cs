@@ -369,6 +369,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "team_max_tension", situation.TeamMaxTension);
 			AiMatchLogWriter.AppendNumber(builder, "team_defend_requests", situation.TeamDefendRequests);
 			AiMatchLogWriter.AppendNumber(builder, "team_shared_target", situation.TeamSharedTarget);
+			AiMatchLogWriter.AppendNumber(builder, "team_any_climax", situation.TeamAnyClimax);
 			AiMatchLogWriter.AppendNumber(builder, "coalition_phase", situation.CoalitionPhase);
 			AiMatchLogWriter.AppendString(builder, "coalition_main_target", situation.CoalitionMainTarget);
 			AppendThreats(builder, situation.Threats);

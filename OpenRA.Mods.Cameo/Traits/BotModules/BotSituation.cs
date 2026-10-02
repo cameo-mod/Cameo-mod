@@ -169,7 +169,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
-		internal int TeamAlliedBots, TeamArmyValue, TeamMaxTension, TeamDefendRequests, TeamSharedTarget;
+		internal int TeamAlliedBots, TeamArmyValue, TeamMaxTension, TeamDefendRequests, TeamSharedTarget, TeamAnyClimax;
 
 		// TC-3 (AI_ARCHITECTURE §12.18), record-only: the folded coalition directive as of
 		// this snapshot — the team phase ordinal (0 BuildUp, 1 Push, 2 Defend) and the
@@ -1242,6 +1242,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var expansionClaim = player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>()
 				.FirstEnabledTraitOrDefault()?.ExpansionTarget;
 
+			// TC-2e (§12.17): the live capture/contest claims of every enabled claim source,
+			// unioned — own-side intent published unconditionally, exactly like ExpansionClaim.
+			// Consumers arbitrate on ClientIndex (TeamBlackboard.ClaimsAheadOf); nothing reading
+			// it means no behaviour change.
+			var captureClaims = player.PlayerActor.TraitsImplementing<IBotCaptureClaimSource>()
+				.Where(t => t.IsTraitEnabled())
+				.SelectMany(t => t.CaptureClaimPositions ?? Array.Empty<WPos>())
+				.ToList();
+
 			// TC-3 (§12.18): the broadcast fields the coalition fold consumes — the own
 			// army's mean position for the rescue election, an expansion claim that
 			// wants a bodyguard, and the spawn anchor for the sector partition. All
@@ -1270,7 +1279,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero,
 				player.ClientIndex,
 				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
-				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint);
+				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint,
+				captureClaims: captureClaims, participantId: player.InternalName);
 
 			// TC-3 (§12.18): fold own + allied broadcasts into the coalition directive —
 			// every member runs the identical function over the identical set, so all
@@ -1399,6 +1409,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				TeamMaxTension = team.MaxTension,
 				TeamDefendRequests = team.DefendRequests,
 				TeamSharedTarget = team.SharedTargetCount,
+				TeamAnyClimax = team.AnyClimax ? 1 : 0,
 				CoalitionPhase = (int)coalition.Phase,
 				CoalitionMainTarget = coalition.MainTarget?.InternalName ?? "",
 				BankedCash = cachedResources == null ? 0 : cachedResources.Cash + cachedResources.Resources,
