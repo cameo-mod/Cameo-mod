@@ -183,6 +183,33 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append('}');
 		}
 
+		// FE-0 (12.24): the field-economy picture of one snapshot; omitted when none was captured.
+		internal static void AppendExpansion(StringBuilder builder, ExpansionSnapshot e)
+		{
+			if (e == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "expansion");
+			AiMatchLogWriter.AppendNumber(builder, "fields_known", e.FieldsKnown, true);
+			AiMatchLogWriter.AppendNumber(builder, "fields_in_reach", e.FieldsInReach);
+			AiMatchLogWriter.AppendNumber(builder, "fields_served", e.FieldsServed);
+			AiMatchLogWriter.AppendNumber(builder, "fields_harvested", e.FieldsHarvested);
+			AiMatchLogWriter.AppendNumber(builder, "anchors_spreader", e.AnchorsSpreader);
+			AiMatchLogWriter.AppendNumber(builder, "anchors_field", e.AnchorsField);
+			AiMatchLogWriter.AppendNumber(builder, "refineries", e.Refineries);
+			AiMatchLogWriter.AppendNumber(builder, "excess_refineries", e.ExcessRefineries);
+			AiMatchLogWriter.AppendNumber(builder, "unassigned_refineries", e.UnassignedRefineries);
+			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_mean", e.AnchorDistMean);
+			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_max", e.AnchorDistMax);
+			AiMatchLogWriter.AppendNumber(builder, "conyards", e.Conyards);
+			AiMatchLogWriter.AppendNumber(builder, "outposts", e.Outposts);
+			AiMatchLogWriter.AppendString(builder, "crawl_target", e.CrawlTarget);
+			AiMatchLogWriter.AppendString(builder, "mcv_site", e.McvSite);
+			AiMatchLogWriter.AppendNumber(builder, "crawl_mcv_angle", e.CrawlMcvAngle);
+			AiMatchLogWriter.AppendNumber(builder, "coverage_milli", e.CoverageMilli);
+			builder.Append('}');
+		}
+
 		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
 		{
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
@@ -321,6 +348,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendThreats(builder, situation.Threats);
 			AppendScaleTargets(builder, situation.ScaleTargets);
 			builder.Append('}');
+			AppendExpansion(builder, situation.Expansion);
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
 			var enemies = situation.Enemies.Values.OrderBy(e => e.Name ?? "", StringComparer.Ordinal).ToArray();

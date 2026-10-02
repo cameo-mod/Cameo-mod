@@ -160,6 +160,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// last recompute. Null (and omitted from the log) while no ScaleTargetsBotModule is enabled.
 		internal ScaleTargetsSnapshot ScaleTargets;
 
+		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
+		internal ExpansionSnapshot Expansion;
+
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
@@ -574,6 +577,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DeathsCostWindow { get; private set; }
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
+
+		// FE-0 (12.24), record-only: the field-economy collector the snapshots and the placement log share.
+		ExpansionTelemetry expansionTelemetry;
+		internal ExpansionTelemetry ExpansionTelemetry => expansionTelemetry ??= new ExpansionTelemetry();
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
 
 		// UT-1: the cooked posture axes for consumers; a disabled master reads as neutral.
@@ -1395,7 +1402,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				BrownoutTicks = brownoutTicks,
 				IdleProductionTicks = idleProductionTicks,
 				ProductionQueues = productionQueueCount,
-				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot
+				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

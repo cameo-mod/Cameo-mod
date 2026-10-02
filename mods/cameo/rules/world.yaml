@@ -912,6 +912,8 @@ World:
 	CameoCareerFinalizer:
 	AiMatchLogWriter:
 	AiSituationLogWriter:
+	# FE-0 / BO-0: record-only placement + build-order log, cameo-ai-placements.jsonl (AI_ARCHITECTURE 12.24, 12.25).
+	AiPlacementLogWriter:
 	# MC1: record-only mission-card archive, cameo-ai-missions.jsonl (docs/design/AI_MISSION_CARDS.md, DESIGN §21.1).
 	AiMissionLogWriter:
 	ChatCommands:

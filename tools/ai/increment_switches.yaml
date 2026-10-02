@@ -123,6 +123,13 @@ groups:
   AC_cover_map_expansion:            # EMBER EX-4 - MCV appetite tracks free far fields, not McvTargetCount: expand until every reachable field is claimed; difficulty paces speed, never the ceiling
     ExpansionPlannerBotModule:
       CoverAllFields: true
+  AJ_field_coverage:                 # FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): one refinery per anchor (spreader / spreaderless field) placed next to it and never more than anchors (replaces the yard cap, OptimalRefineryCount and the scale-target refinery cap); the MCV site and the crawl target go in different directions and spread to ground we do not own; EX-4 + greedy MCV run more aggressively
+    ExpansionPlannerBotModule:
+      FieldCoverage: true
+      CoverAllFields: true             # EX-4 on (group AC's switch, repeated so AJ is self-contained)
+      CoverAllFieldsMaxInflight: 3     # 2 -> 3: a further wave of MCVs is queued while the first is still driving, so fields fill in parallel; bounded, and the cash reserve still gates each request
+      McvRequestReserve: 1000          # 1500 -> 1000: the maintainer saw bots crawl late; each request still needs the cash, difficulty paces through BotLimits intervals
+      McvTargetCount: 4                # 3 -> 4: the floor under CoverAllFields (active + inflight) for a map with few reachable far fields
   AD_spaced_base_placement:          # SP-1 re-ranking (the ONE spacing owner, SpacingAdvisorBotModule; its hard building gap is already live for genericbot) - findPos re-ranks its first 24 placeable cells by distance to the nearest own building; bases grow outward instead of packing into a pathfinder jam
     SpacingAdvisorBotModule:
       RerankCandidates: true
