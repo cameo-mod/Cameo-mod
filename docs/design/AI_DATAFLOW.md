@@ -34,6 +34,8 @@ telemetry that the branch-coverage audit walks.
                     │  BotLearnedPriors    ── kill/death ledger   │
                     │  IBotTeamMember      ── allied broadcasts   │
                     │    (ExpansionClaim, RequestsDefence, axes)  │
+                    │  CoalitionDirective    ── TC-3 team fold    │
+                    │    (§12.18: MainTarget/Phase/Rescue/Sector) │
                     │                                             │
                     │  OUTPUT: utility positions, personality,    │
                     │  pace, allied blackboard                    │
@@ -125,7 +127,7 @@ decision do so through a provider seam; the owner emits the order.
 | Siege window | SiegeEvaluatorBotModule | remembered defences, failure memory |
 | Scout routes | ScoutBotModule | threat regions, influence layers, leads |
 | Resource-field memory | BotFogMemory / ResourceMapBotModule | zone topology (TacticalMapBotModule) |
-| Team posture | BotSituation broadcast | allied claims, role split (TC-2d), defend requests |
+| Team posture | BotSituation broadcast | allied claims, role split (TC-2d), defend requests, TC-3 coalition fold (§12.18, planned) |
 | Support powers | SupportPowerBotASModule | (RV2 merge pending — OpenRA copy gated classicbot) |
 
 ## Provider → consumer wiring (audit 2026-10-02)
@@ -223,6 +225,15 @@ two brains side by side.
 - **CA drift sync** — upstream "AI routing / harasser squads" not yet pulled.
 - **`_ra_doubles` seat bias** — seats 2,3 won both 2v2s regardless of team;
   harness-side, document it before any team A/B reads results.
+- **Capture-claim gap (6v6 evidence, 2026-10-02, EMBER):** the first
+  `run_ai_match_batch.py --team-size 6` run (dusttown-battle-6v6, 6×hard vs
+  6×classic) shows 27 contested capture claims — up to all six genericbot
+  teammates COMMIT the same `capture:` mission and five RELEASE after leases
+  resolve (`tools/ai/team_coordination_report.py`). One-owner correctness
+  holds, but every bot still burns an engineer dispatch on one target —
+  TC-2c deconflicts *expansion fields*; the same claim channel needs to
+  cover capturable actors. TC-3 `CoalitionDirective.RescueAssignments` is
+  the planned general claim arbiter (§12.18).
 
 **CN4 addition (2026-10-02, switch `AA_cn4_region_roles`):** `RegionRolesBotModule` — port of
 `CNRegionManagerBotModule` onto `IBotZoneTopology`'s belief surface. Each held zone gets a role
