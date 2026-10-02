@@ -183,9 +183,12 @@ the fog sequencing.
     merged** (#711/#713/#718, `UseZoneTopology` off = group `D_zone_topology`); IM-1/IM-2 on
     drafts #725/#726 (group `H_influence_layers`). **NOVA.**
   - [~] **M** MI budgeted micro: focus fire, kiting, pull back damaged (shipped in group A, 2026-10-01). **EMBER.**
-  - [x] **M** CV concave engagement (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a): deploy into a
+  - [ ] **M** CV concave engagement (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a): deploy into a
     range-matched concave that widens with army size, then a staggered commit so every member reaches its range
-    together; switch `ConcaveEngagement`, group F, A/B in INC-4. Supersedes `devin/ember/mi-concave`. **Merged via claude/cv_concave 2026-10-02.** **Claude spec, Sonnet code.**
+    together. Unified with NOVA's ATK-1 fan-out into ONE deploy state (§19.3). **Merged 2026-10-02 (switch `AG_assault_fanout`).**
+  - [ ] **L** ST scale targets (maintainer order 2026-10-01, DESIGN §19.10, `AI_ARCHITECTURE.md` §12.22): every base and
+    army size = one fog-honest target from the tier line, the seen enemy + unscouted margin, personality, game time;
+    replaces BotLimits caps and the hand-written BuildingLimits; switch `ST_scale_targets`. **Claude spec, Sonnet code.**
   - [~] **L** UT utility strategist over the bipolar axes; one blended squad manager. **NOVA.**
     UT-1/UT-2 merged (#736/#738, group `M_utility_axes`): delay-reset lean + guerrilla-cap
     lean. UT-3 `nova/ut3-defend-share` — defence share: TurtleRush scales the CA-2 reserve,

@@ -16,48 +16,60 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
-	// AF-1 (the "line of death" fix): the IBotAssaultFormation provider for
-	// genericbot's Rush assault squads. Before this, every member of a committed
-	// squad attack-moved to one shared target point and arrived single-file —
-	// the first unit into the guns died alone, then the next. With the provider
-	// armed, GroundUnitsAssaultFanoutStateCA inserts a fan-out phase between the
-	// rally and the commit: AssaultFormationPlanner lays one slot per member on
-	// an arc around the target (centered on the far side from the approach
-	// bearing, so the wave wraps and fires together), the squad walks the ring,
-	// and the commit lands once AssemblePercent are in place or the deadline
-	// burns down. Contact mid-fan commits immediately — nobody fights alone.
+	// The "line of death" fix, unified (2026-10-02, AI_ARCHITECTURE 12.7a): the
+	// IBotAssaultFormation provider for genericbot's Rush squads. The geometry and
+	// state machine are CV's - ConcaveEvalCA plans a range-matched concave arc and
+	// GroundUnitsConcaveStateCA deploys, commits with staggered AttackMove orders and
+	// hands over to the attack state. This module is the ONLY place the tunables live
+	// and its presence (RequiresCondition genericbot && assault_fanout) is the ONLY
+	// switch: classic has no provider, so the old single-point advance stays
+	// bit-identical.
 	//
-	// Settings-only, like the siege advisor seam: this module issues no orders —
-	// the squad state machine is the single order authority. The per-squad
-	// refanout cooldown (recorded on each armed plan) stops a committed squad
-	// from being looped back onto the same arc forever when nothing visible
-	// answers the advance; a different target fans freely.
+	// Settings-only, like the siege advisor seam: this module issues no orders - the
+	// squad state machine is the single order authority. The per-squad same-target
+	// cooldown (restarted on arm, commit and abort) stops a squad from being looped
+	// back into the formation forever; a different target deploys freely.
 	[TraitLocation(SystemActors.Player)]
-	[Desc("Arms the pre-commit assault fan-out for Rush squads (the line-of-death fix): settings for the target-centered arc the squad spreads onto before engaging together.")]
+	[Desc("Arms the pre-commit concave deployment for Rush squads (the line-of-death fix): the settings a squad deploys with before engaging together.")]
 	public class AssaultFormationBotModuleInfo : ConditionalTraitInfo
 	{
-		[Desc("Squads smaller than this skip the fan-out and advance as before.")]
+		[Desc("Squads with fewer weaponed ground members skip the deployment and advance as before.")]
 		public readonly int MinSquadSize = 4;
 
-		[Desc("Cells from the target cell to each slot on the arc.")]
-		public readonly int FanoutRadiusCells = 8;
+		[Desc("Cells from the frontline centroid within which an observed enemy (or the squad target) triggers the deployment.")]
+		public readonly int FanoutTriggerCells = 16;
 
-		[Desc("Total arc span in degrees, centered on the far side of the target from the squad's approach bearing.")]
-		public readonly int ArcDegrees = 180;
+		[Desc("Cells each member stages outside its own weapon range (and the enemy front depth).")]
+		public readonly int StageMarginCells = 2;
 
-		[Desc("Commit once this percent of orderable members are at their slots; the rest pile in behind.")]
-		public readonly int AssemblePercent = 60;
+		[Desc("Members whose staging radii lie within this many cells share one arc.")]
+		public readonly int RankBandCells = 2;
 
-		[Desc("World ticks before the squad commits wherever its units stand.")]
-		public readonly int StageDeadlineTicks = 500;
+		[Desc("Arc length per member in WDist units (1024 = 1 cell); infantry take half. Bigger armies are wider.")]
+		public readonly int Spacing = 1536;
 
-		[Desc("A squad leader this close to the target (cells) enters the fan-out — beyond FanoutRadiusCells so the fan forms before arrival.")]
-		public readonly int FanoutTriggerCells = 12;
+		[Desc("Spacing in WDist units the arc may compress to before members overflow to a second arc.")]
+		public readonly int MinSpacing = 1024;
 
-		[Desc("A member this close to its slot (cells) counts as assembled.")]
+		[Desc("Widest arc in degrees; a bigger army compresses spacing, then overflows to a second arc.")]
+		public readonly int ArcDegrees = 150;
+
+		[Desc("WDist units between an arc and its overflow arc (2048 = 2 cells).")]
+		public readonly int RankGap = 2048;
+
+		[Desc("Percent of slots that must be reachable terrain, else the deployment aborts and the squad engages as before.")]
+		public readonly int MinValidSlotPct = 50;
+
+		[Desc("Cells around a slot searched for a cell the member can enter, stay in and path to.")]
 		public readonly int SlotReachCells = 2;
 
-		[Desc("World ticks before the same target may be fanned again by the same squad.")]
+		[Desc("Commit once this percent of placed members stand within 1.5 cells of their slot.")]
+		public readonly int AssemblePercent = 80;
+
+		[Desc("World ticks before the squad commits wherever its units stand.")]
+		public readonly int StageDeadlineTicks = 150;
+
+		[Desc("World ticks after an arm, commit or abort before the same squad may deploy again against the same ground.")]
 		public readonly int RefanoutCooldownTicks = 750;
 
 		public override object Create(ActorInitializer init) { return new AssaultFormationBotModule(init.Self, this); }
@@ -67,7 +79,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		readonly World world;
 
-		// Squad -> (fanned target cell, fan-out start tick). Read on every consult
+		// Squad -> (deployed target cell, last arm/commit/abort tick). Read on every consult
 		// to refuse a prompt re-fan of the same ground; pruned on record.
 		readonly Dictionary<SquadCA, (CPos Cell, int Tick)> recentFanouts = new();
 
@@ -80,19 +92,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool TryGetAssaultFormation(SquadCA squad, CPos targetCell, out AssaultFormationSettings settings)
 		{
 			settings = new AssaultFormationSettings(
-				Info.MinSquadSize, Info.FanoutRadiusCells, Info.ArcDegrees, Info.AssemblePercent,
-				Info.StageDeadlineTicks, Info.FanoutTriggerCells, Info.SlotReachCells);
+				Info.MinSquadSize, Info.FanoutTriggerCells, Info.StageMarginCells, Info.RankBandCells,
+				Info.Spacing, Info.MinSpacing, Info.ArcDegrees, Info.RankGap, Info.MinValidSlotPct,
+				Info.SlotReachCells, Info.AssemblePercent, Info.StageDeadlineTicks);
 
 			if (IsTraitDisabled)
 				return false;
 
-			// The same-target cooldown: a squad that already fanned onto this
-			// ground commits inward instead of re-orbiting the ring. Read-only —
-			// the entry is overwritten by RecordFanout on the next arm and
-			// pruned there once stale.
+			// The same-target cooldown: a squad that already deployed against this
+			// ground engages as before instead of re-forming. Read-only - the
+			// entry is overwritten by RecordFanout and pruned there once stale.
 			if (recentFanouts.TryGetValue(squad, out var rec))
 			{
-				var radiusSq = Info.FanoutRadiusCells * Info.FanoutRadiusCells;
+				var radiusSq = Info.FanoutTriggerCells * Info.FanoutTriggerCells;
 				var sameGround = (rec.Cell - targetCell).LengthSquared <= radiusSq;
 				if (sameGround && world.WorldTick - rec.Tick < Info.RefanoutCooldownTicks)
 					return false;

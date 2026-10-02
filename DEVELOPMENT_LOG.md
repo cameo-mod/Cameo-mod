@@ -115,6 +115,7 @@ Compile-clean (Cameo csproj, BuildProjectReferences=false; bin copy blocked
 by the live 6v6 — DLL produced in obj). Boot-gate queued behind the match;
 increment A/B arms the pair per usual. NOT-YET-PROVEN: live garrison claims,
 artillery-clear raids, multi-field expansion rate.
+
 # 2026-10-02 — DAWN: ai_arch_audit static coverage tool + audit_bot_wiring arm-path fix
 
 - `tools/ai/ai_arch_audit.py` (new): static half of the architecture round-trip —
@@ -16732,4 +16733,18 @@ option (9 = old-90 cap used).
 **Live spectate (running):** `C:/tmp/spectate-6v6` support dir, variant
 `order_of_battle_rich_6v6`, fullscreen native res, 6xhard (NE) vs 6xclassic
 (SW) td_gdi, Referee seat = local client. World loaded clean, no exceptions.
+## 2026-10-02 (claude-sonnet sub-agent, coordinated by Claude Opus 5.5) - concave + ATK-1 merged into ONE formation implementation
+
+Two duplicate "deploy before the fight" implementations (CV concave F_concave, NOVA ATK-1 AG_assault_fanout) merged per
+DESIGN 19.3 (one bot module per decision). Result lives in AI_ARCHITECTURE 12.7a ("Unified with ATK-1").
+
+- Geometry + state machine = CV (ConcaveEvalCA, GroundUnitsConcaveStateCA), entered ONLY from the attack-move state hook.
+- Settings seam = ATK-1: AssaultFormationBotModule / IBotAssaultFormation / AssaultFormationSettings hold every tunable
+  (13 Concave* fields removed from SquadManagerBotModuleCAInfo); provider presence is the only switch; per-squad same-ground
+  cooldown replaces SquadCA.ConcaveCooldownUntilTick. Late joiners re-plan (rate-limited by the 25-tick replan minimum).
+- Deleted: AssaultFormationPlanner, AssaultFanoutStatesCA, AssaultFormationPlannerTest, FanoutRadiusCells (also from ai.yaml),
+  the Stage-state fan-out transition and the band trigger, switch group F_concave. AG_assault_fanout is the single switch.
+- ai.yaml keeps ATK-1's tested values where it set them (MinSquadSize 4, FanoutTriggerCells 12, AssemblePercent 60,
+  StageDeadlineTicks 500, ArcDegrees 180); C# defaults are CV's (16 / 80 / 150 / 150).
+- Not run: boot gate / armed A/B (coordinator's). Open: re-A/B the unified formation (ATK-1's 3-0 evidence was the old ring).
 

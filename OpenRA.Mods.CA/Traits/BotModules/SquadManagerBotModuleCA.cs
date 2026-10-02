@@ -365,60 +365,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
-		[Desc("CV (12.7a): Rush squads that meet the enemy deploy into a range-matched concave arc around the enemy anchor (wider with more units, ranks by range), then commit with staggered AttackMove orders so every member reaches its own firing range on the same tick, then hand over to the attack state. Orders only; each order spends IBotActionBudget actions.")]
-		public readonly bool ConcaveEngagement = false;
-
-		[Desc("CV (12.7a): cells from the frontline centroid within which an observed enemy (or the squad target) triggers the concave deployment.")]
-		public readonly int ConcaveContactCells = 16;
-
-		[Desc("CV (12.7a): minimum weaponed ground members for the concave deployment.")]
-		public readonly int ConcaveMinUnits = 4;
-
-		[Desc("CV (12.7a): cells each member stages outside its own weapon range (and the enemy front depth).")]
-		public readonly int ConcaveStageMarginCells = 2;
-
-		[Desc("CV (12.7a): members whose staging radii lie within this many cells share one arc.")]
-		public readonly int ConcaveRankBandCells = 2;
-
-		[Desc("CV (12.7a): arc length per member in WDist units (1024 = 1 cell); infantry take half.")]
-		public readonly int ConcaveSpacing = 1536;
-
-		[Desc("CV (12.7a): spacing in WDist units the arc may compress to before members overflow to a second arc.")]
-		public readonly int ConcaveMinSpacing = 1024;
-
-		[Desc("CV (12.7a): widest arc in degrees; a bigger army compresses spacing, then overflows to a second arc.")]
-		public readonly int ConcaveMaxArcDegrees = 150;
-
-		[Desc("CV (12.7a): WDist units between an arc and its overflow arc (2048 = 2 cells).")]
-		public readonly int ConcaveRankGap = 2048;
-
-		[Desc("CV (12.7a): percent of slots that must be reachable terrain, else the deployment aborts and the squad engages as before.")]
-		public readonly int ConcaveMinValidSlotPct = 50;
-
-		[Desc("CV (12.7a): percent of placed members within 1.5 cells of their slot at which the squad commits.")]
-		public readonly int ConcaveFormedPct = 80;
-
-		[Desc("CV (12.7a): ticks after which the squad commits whether or not the arc is formed.")]
-		public readonly int ConcaveFormTicks = 150;
-
-		[Desc("CV (12.7a): ticks after a commit or abort before the squad may deploy a concave again.")]
-		public readonly int ConcaveCooldownTicks = 750;
-
-		[Desc("Assault fan (Rush, inside FormationMovement): radius in cells around the squad target at which the approach arc slots sit.")]
-		public readonly int AssaultFanRadiusCells = 10;
-
-		[Desc("Assault fan: minimum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
-		public readonly int AssaultFanMinSlots = 3;
-
-		[Desc("Assault fan: maximum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
-		public readonly int AssaultFanMaxSlots = 8;
-
-		[Desc("Assault fan: distance in cells to the squad target at which a Rush squad breaks column into the arc fan instead of marching on.")]
-		public readonly int AssaultEngageRadiusCells = 18;
-
-		[Desc("Assault fan: ticks early arrivers hold at their arc slot while another prong is still inbound, before the synchronized push anyway.")]
-		public readonly int AssaultSyncHoldTicks = 125;
-
 		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
 		public readonly bool SquadMicroEnabled = false;
 
@@ -521,6 +467,29 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Limit target types for specific air unit squads.")]
 		public readonly Dictionary<string, BitSet<TargetableType>> AirSquadTargetTypes = null;
+
+		[Desc("CA F2p2 (162f00bb6): limit the targets of specific air unit squads by the ARMOR type of the target (key: air unit actor type,",
+			"value: armor type names, matched against the target's Armor traits). Squads whose unit type has no entry are unaffected.",
+			"Empty (the default) keeps the targetable-type behaviour of AirSquadTargetTypes.")]
+		public readonly Dictionary<string, HashSet<string>> AirSquadTargetArmorTypes = null;
+
+		[Desc("CA F2p2 (upstream 'Prioritize buildings over other enemy units', maintainer ruling 2026-10-01): the general squad target search picks the",
+			"closest VISIBLE enemy building before other enemy units. Candidates stay the observed, fog-honest ones.")]
+		public readonly bool PreferBuildingTargets = false;
+
+		[Desc("CA F2p2 (upstream value-only attack force, maintainer ruling 2026-10-01): launch an attack squad on idle unit value alone (SquadValue > 0),",
+			"without the SquadSize unit-count gate. MaxIdleUnits still forces a launch.")]
+		public readonly bool ValueOnlyAttackLaunch = false;
+
+		[Desc("CA F2p2 (2bad89a77): harass / indirect routes start from the own base building closest to the target (or the squad leader when closer)",
+			"instead of from the squad leader. Falls back to the leader when no route is found from the building.")]
+		public readonly bool RouteFromNearestOwnBuilding = false;
+
+		[Desc("CA F2p2 (2bad89a77, 9a68fea15, b831676de): upstream squad state tweaks.",
+			"Idle squads return to base with AttackMove instead of Move; an attacking ground squad that loses its target picks an opportunity target",
+			"in AttackScanRadius or resumes AttackMove instead of fleeing; its stuck-drop-to-idle delay is 100 ticks instead of 63;",
+			"buildings are recognised by RepairableBuilding instead of Building (walls and some defences stop counting as buildings).")]
+		public readonly bool UseUpstreamStateTweaks = false;
 
 		[Desc("Enemy building types around which to scan for targets for naval squads.")]
 		public readonly HashSet<string> StaticAntiAirTypes = new HashSet<string>();
@@ -628,6 +597,9 @@ namespace OpenRA.Mods.CA.Traits
 	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
 	{
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
+
+		// CA F2p2 (2bad89a77): own base buildings for route planning, from the construction yard index (no world scan).
+		public IEnumerable<Actor> OwnBaseBuildings => constructionYardBuildings.Actors;
 
 		public CPos GetRandomBaseCenter()
 		{
@@ -812,7 +784,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool IsPreferredEnemyBuilding(Actor a)
 		{
-			return IsValidEnemyUnit(a) && a.Info.HasTraitInfo<BuildingInfo>();
+			return IsValidEnemyUnit(a) && (Info.UseUpstreamStateTweaks
+				? a.Info.HasTraitInfo<RepairableBuildingInfo>()
+				: a.Info.HasTraitInfo<BuildingInfo>());
 		}
 
 		public bool IsPreferredEnemyAircraft(Actor a)
@@ -831,6 +805,13 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var airSquadUnitType = owner.Units[0].Actor.Info.Name;
+
+			// CA F2p2 (162f00bb6): per-type armor filter; only for unit types that have an entry.
+			var armorTypes = owner.SquadManager.Info.AirSquadTargetArmorTypes;
+			if (armorTypes != null && armorTypes.TryGetValue(airSquadUnitType, out var desiredArmorTypes)
+				&& !a.Info.TraitInfos<ArmorInfo>().Any(ai => desiredArmorTypes.Contains(ai.Type)))
+				return false;
+
 			if (owner.SquadManager.Info.AirSquadTargetTypes.ContainsKey(airSquadUnitType))
 			{
 				var targetTypes = a.GetEnabledTargetTypes();
@@ -1429,6 +1410,14 @@ namespace OpenRA.Mods.CA.Traits
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
+
+			// CA F2p2 (A5-1): visible enemy buildings first; only the already-observed candidates are re-ordered.
+			if (Info.PreferBuildingTargets)
+			{
+				var visibleBuildings = visible.Where(IsPreferredEnemyBuilding).ToList();
+				if (visibleBuildings.Count > 0)
+					visible = visibleBuildings;
+			}
 
 			// Fogged scans never fall back to actors the bot cannot see; remembered
 			// enemy buildings are offered separately as FrozenActor targets.
@@ -2496,7 +2485,9 @@ namespace OpenRA.Mods.CA.Traits
 			var requiredValue = ApplyForceScale(desiredAttackForceValue, forceScale);
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
-			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && unitsHangingAroundTheBase.Count >= requiredSize))
+			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
+			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
+			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
