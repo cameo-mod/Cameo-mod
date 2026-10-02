@@ -10,15 +10,20 @@ Reads the per-match records a team run leaves in a support dir
 
 and reports, per team and per match, the §12.18 acceptance metrics:
 
-    shared_push       windows where >=2 teammates committed attack missions
+    shared_push       windows where >=2 teammates committed attack attempts
                       (raid/recon/secure) against the SAME enemy player —
-                      the coalition-main-target effect.
+                      the coalition-main-target effect. raid:* comes from
+                      taken provider cards; secure:<player> is emitted when a
+                      cardless Rush wave commits against the named enemy
+                      (mission target or main-target steering).
     contested_claims  same `mission_id` (same capturable actor id) attempted
                       by >=2 teammates — two bots racing one expansion;
                       TC-2c should drive this to ~0 when armed.
-    defend_answers    `defend` missions while a teammate was under pressure —
-                      lower bound only: missions don't carry a requester id,
-                      so answers are inferred from proximity, not causality.
+    defend_answers    `defend` mission attempts. Two sources share the kind:
+                      `defend:self:rN` = own-base Defend BotMission provider
+                      cards; `defend:cN` = TC-2b/TC-3 ally answers through the
+                      protection-squad path, where N is the REQUESTER's
+                      ClientIndex — direct attribution, not proximity.
     coverage          distinct target players / regions touched per team.
 
 Team membership is inferred from cameo-ai-matches.jsonl `allies` records
@@ -118,13 +123,14 @@ def analyse(missions, team):
     contested = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
 
     # Shared pushes: same enemy target_player attacked by >=2 teammates
-    # within `window` ticks. Pair the attempts by target+tick bucket.
+    # within `window` ticks — COMMITTED records only: a terminal record in a
+    # later window must not extend the push's apparent duration.
     shared_push_windows = 0
     push_events = collections.defaultdict(set)  # (target, bucket) -> players
     window = analyse.window
     for r in attempts:
         kind, _, tgt = mission_of(r)
-        if kind in ATTACK_KINDS and tgt and tgt not in team:
+        if kind in ATTACK_KINDS and tgt and tgt not in team and r.get("state") == "COMMITTED":
             push_events[(tgt, (r.get("tick") or 0) // window)].add(r.get("player"))
     shared_pushes = {k: ps for k, ps in push_events.items() if len(ps) > 1}
     shared_push_windows = len(shared_pushes)
@@ -136,7 +142,9 @@ def analyse(missions, team):
         if kind in ATTACK_KINDS and tgt and tgt not in team:
             targets_hit.add(tgt)
 
-    defend_count = sum(1 for r in attempts if mission_of(r)[0] in DEFEND_KINDS)
+    # Committed only: one answer = one mission, not answer + release.
+    defend_count = sum(1 for r in attempts
+                       if mission_of(r)[0] in DEFEND_KINDS and r.get("state") == "COMMITTED")
     return {
         "players": sorted(team),
         "attempts": len(attempts),
