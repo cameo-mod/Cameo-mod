@@ -174,6 +174,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotEnemyCompositionProvider compositionProvider;
 		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
+		IBotScaleTargets[] scaleTargets;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
@@ -870,7 +871,19 @@ namespace OpenRA.Mods.CA.Traits
 			if (attackAircraftInfo == null)
 				return true;
 
+			// Scale targets (DESIGN 19.10): an enabled provider's aircraft target replaces MaxAircraft, and scales
+			// MaxAirSuperiority in the same proportion; without one both are the yaml numbers.
 			var limit = Info.MaxAircraft;
+			var maxAirSuperiority = Info.MaxAirSuperiority;
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			if (scaleTargets.TryTarget("aircraft", out var scaledAircraft))
+			{
+				if (maxAirSuperiority > 0 && Info.MaxAircraft > 0)
+					maxAirSuperiority = Math.Max(1, (int)((long)maxAirSuperiority * scaledAircraft / Info.MaxAircraft));
+
+				limit = scaledAircraft;
+			}
+
 			var currentCount = 0;
 			var isAirToAir = Info.AirToAirUnits.Contains(actorInfo.Name);
 
@@ -899,7 +912,7 @@ namespace OpenRA.Mods.CA.Traits
 						currentCount = numFriendlyAirToAirUnits + queued.Count(n => Info.AirToAirUnits.Contains(n));
 					}
 
-					limit = AirLimits.AirSuperiorityLimit(limit, numEnemyAirThreatUnits, numFriendlyAirToAirUnits, CountQueued, Info.MaxAirSuperiority);
+					limit = AirLimits.AirSuperiorityLimit(limit, numEnemyAirThreatUnits, numFriendlyAirToAirUnits, CountQueued, maxAirSuperiority);
 				}
 				else
 				{

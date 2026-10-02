@@ -3010,3 +3010,30 @@ The §19.1 table numbers become the Min/Max. The other defaults are starting val
 * `DynamicBotInsurance` sizes its payout from `HarvesterLimit`. With the provider present it reads `Target("harvester")`.
 
 **Switch:** group `ST_scale_targets` (master already uses `G_personality_leads`).
+
+**Implemented (2026-10-02, branch `claude/scale_targets`, dormant until the switch arms it):**
+* Files: `OpenRA.Mods.CA/Traits/BotModules/IBotScaleTargets.cs` (interface + `TryTarget/TryArmyValue/TryBuilding` helpers),
+  `OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsEval.cs` (pure, integer-only), `ScaleTargetsBotModule.cs` (provider,
+  `ScaleTargetsSnapshot`), `OpenRA.Mods.Cameo.Test/ScaleTargetsEvalTest.cs`, `ai.yaml` (`ScaleTargetsBotModule` block +
+  `GrantConditionOnBotOwner@scaletargets`), `increment_switches.yaml` (`ST_scale_targets`), audit in `audit_ai_personalities.py`
+  (`scale_target_failures`). Situation log: optional `own.scale_targets` object (omitted while no provider runs).
+* **Fixed point:** thousandths. `Min: 1000` = 1.0, `Max: 3250` = 3.25; `Floor` is in units; `Growth` is per game HOUR in thousandths.
+* Spec decisions: (1) `IBotScaleTargets` also has `TryGetBuildingTarget(actorName)` (tech/superweapon category lookup for
+  `BuildingLimits`, from `IBotUnitRoles` `tech` + `BotTargetTags.Superweapon`; only entries that exist in BuildingLimits are
+  overridden, no new caps on unlisted buildings) and `TryGetArmyValueTarget(int baselineValue, ...)` takes the personality's
+  SquadValue, because `own_army` is baseline x line. (2) Army `Min = Max = 1000`: the only difficulty scaling of the army is the
+  enemy ratio line; minute 0 keeps today's SquadValue. The Director/team force scale, `ValueOnlyAttackLaunch` and `MaxIdleUnits`
+  (scaled by target / SquadValue) apply on top; the random `SquadValueRandomBonus` and the 20-minute bonus ramp are replaced
+  by `Growth`. (3) Axis leans are per category yaml fields `TurtleRushLean` / `TechRushExpansionLean` (signed percent at the
+  pole): army +25 and defence -25 on Turtle-Rush; tech -25 and refinery/harvester/conyard/production +25 on TechRush-Expansion.
+  (4) `production` seen = per enemy the count of its most numerous remembered production building type (the limit is per type),
+  summed over enemies. (5) `u` = zone-cell-weighted share of regions with no enemy table entry fresher than `ScoutStaleTicks`
+  (a lit empty region counts as fresh only while visible: `RegionMemory` is rebuilt per snapshot), own territory
+  (`IBotZoneTopology.IsInTerritory`) excluded. (6) With a provider, `HarvesterBotModuleCA` ignores its fixed `MaxHarvesters` (24)
+  as well as `HarvesterLimit`; `aircraft` also scales `MaxAirSuperiority` in the same proportion. (7) Aircraft physical cap =
+  `BotGlobalUnitBudget.CurrentShare()` (new, same arithmetic as the pause); no planner exposes resource fields in reach, so
+  refineries have no physical cap yet (the base builder's `RefineriesPerBase x yards + MaxExtraRefineries` ceiling still applies).
+* Not wired: no `MCVManagerBotModuleCA` exists and nothing reads `BotLimits.ConstructionYardLimit` (the engine's
+  `McvExpansionManagerBotModule` has its own `MinimumConstructionYardCount`); the conyard target drives
+  `ExpansionPlannerBotModule` only, UT-4's axis lean is skipped when a provider is present. `DynamicBotInsurance` never read
+  `HarvesterLimit` (a comment only), so it needs no change. `defence` is telemetry: the base builder has no numeric defence cap.

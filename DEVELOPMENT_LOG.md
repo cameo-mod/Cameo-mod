@@ -1,3 +1,24 @@
+# 2026-10-02 — Scale targets: base and army grow with the seen enemy (ST, DESIGN 19.10 / AI_ARCHITECTURE 12.22)
+
+**Done (branch `claude/scale_targets`, dormant: `scale_targets` is granted to `fransbot` only until `ST_scale_targets` arms it):**
+- Pure integer growth law `ScaleTargetsEval` (thousandths, one floor): own line x time growth vs seen-enemy ratio x unscouted
+  margin / team size, personality x utility-axis lean, floor, physical cap. New provider `ScaleTargetsBotModule`
+  (`IBotScaleTargets`) recomputes every 125 ticks from fog memory only (`BotSituation` profiles + remembered actors,
+  `RegionMemory` for the unscouted share, `IBotZoneTopology` for own territory); publishes `scale_targets` on the situation log.
+- Consumers read it only when an enabled provider exists: harvester limit, refinery limit, production-type limit,
+  tech/superweapon `BuildingLimits` entries, `McvTargetCount` (planner, UT-4 skipped), army value + `MaxIdleUnits`,
+  `MaxAircraft`/`MaxAirSuperiority` (cap = `BotGlobalUnitBudget` share). Switch off or classic = old code path unchanged.
+- ai.yaml block with every field written (Min/Max = the 19.1 table, tech 1.0-3.25, production/conyard 1.5-7.5);
+  audit `audit_ai_personalities.py` checks fields, Min<=Max, tech line, minute-0 table. `ScaleTargetsEvalTest` (13 tests).
+
+**Findings:** `ConstructionYardLimit` has no reader on master (no MCVManagerBotModuleCA; the engine MCV manager is out of
+reach), so the conyard target drives only the planner. `DynamicBotInsurance` never read `HarvesterLimit`. No numeric defence
+cap exists: `defence` is telemetry. Offline BuildingLimits coverage estimate: tech about 23 of 294 entries, superweapon 0
+(the debug.log line `ST BuildingLimits entries taken over` gives the runtime figure).
+**Not done:** no boot gate or A/B (worktree, no game launch); refinery physical cap (no planner exposes fields in reach);
+the base builder's `RefineriesPerBase x yards + MaxExtraRefineries` ceiling still sits above the refinery target.
+**Next:** boot-gate, arm `ST_scale_targets` in the next increment, tune ratio/margin/growth defaults from the A/B.
+
 # 2026-10-02 — DAWN: 6v6 team test — hard stack beats classic stack
 
 `order-of-battle-rich` (12 slots, TEMPERAT), 6×hard vs 6×classic, td_gdi

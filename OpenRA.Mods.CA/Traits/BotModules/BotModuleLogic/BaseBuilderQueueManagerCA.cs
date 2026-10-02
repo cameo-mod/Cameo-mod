@@ -97,6 +97,11 @@ namespace OpenRA.Mods.CA.Traits
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
+		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
+		// (0 stays "no limit" when there are no BotLimits at all).
+		int ProductionTypeLimit => productionTypeLimit > 0 && baseBuilder.TryGetScaleTarget("production", out var scaled)
+			? scaled : productionTypeLimit;
+
 		// BotLimits carries the per-difficulty value on the DESIGN §19.1 line; negative there means the module's own.
 		int NewProductionCashThreshold => botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
 			? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
@@ -270,9 +275,9 @@ namespace OpenRA.Mods.CA.Traits
 				string orderString = "PlaceBuilding";
 
 				// Check if we've hit the limit for this building already, if so cancel it
-				if (baseBuilder.Info.BuildingLimits.ContainsKey(currentBuilding.Item))
+				if (baseBuilder.TryGetBuildingLimit(currentBuilding.Item, out var currentLimit))
 				{
-					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= baseBuilder.Info.BuildingLimits[currentBuilding.Item]))
+					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= currentLimit))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
@@ -401,7 +406,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (!actors.Contains(actor.Name))
 					return false;
 
-				if (!baseBuilder.Info.BuildingLimits.TryGetValue(actor.Name, out var limit))
+				if (!baseBuilder.TryGetBuildingLimit(actor.Name, out var limit))
 					return true;
 
 				return playerBuildings.Count(a => a.Info.Name == actor.Name) +
@@ -525,7 +530,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
-				if (production != null && (productionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) < productionTypeLimit))
+				if (production != null && (ProductionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) < ProductionTypeLimit))
 				{
 					if (HasSufficientPowerForActor(production))
 					{
@@ -611,15 +616,15 @@ namespace OpenRA.Mods.CA.Traits
 				if (count * 100 > frac.Value * playerBuildings.Length)
 					continue;
 
-				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= botLimits.Info.ProductionTypeLimit)
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
 				{
-					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, botLimits.Info.ProductionTypeLimit);
+					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, ProductionTypeLimit);
 					continue;
 				}
 
-				if (baseBuilder.Info.BuildingLimits.TryGetValue(name, out var limit) && limit <= count)
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
 				{
-					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, baseBuilder.Info.BuildingLimits[name]);
+					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, limit);
 					continue;
 				}
 
