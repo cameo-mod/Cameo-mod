@@ -10,100 +10,101 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
-| `CombatAnalysisBotModule` | Cameo | `CombatAnalysisBotModule` (genericbot) | `IBotThreatAnalysis` | — |
-| `FransCombatIntelBotModule` | Fransbot | `FransCombatIntelBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `FransMineClusterBotModule` | Fransbot | `FransMineClusterBotModule` (enable-fransbot || inc3_frans_services) | — | — |
+| `CombatAnalysisBotModule` | Cameo | `CombatAnalysisBotModule` (genericbot) | `IBotRespondToAttack`, `IBotThreatAnalysis`, `IBotTick` | — |
+| `FransCombatIntelBotModule` | Fransbot | `FransCombatIntelBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `FransMineClusterBotModule` | Fransbot | `FransMineClusterBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
 | `FransRiskModelBotModule` | Fransbot | `FransRiskModelBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `FransStrategicMapBotModule` | Fransbot | `FransStrategicMapBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `ResourceMapBotModule` *(no source)* | engine | `ResourceMapBotModule` (genericbot || classicbot)<br>`ResourceMapBotModule@fransbot` (enable-fransbot) | — | — |
-| `ScoutBotModule` | Cameo | `ScoutBotModule` (genericbot) | `IBotRegionThreatProvider` | `IBotMainTargetProvider`, `IBotPersonalityLeadProvider`, `MasterAiBotModule`, `SquadManagerBotModuleCA` |
-| `TacticalMapBotModule` | Cameo | `TacticalMapBotModule` (genericbot) | `IBotZoneTopology` | `MasterAiBotModule` |
+| `FransStrategicMapBotModule` | Fransbot | `FransStrategicMapBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `ResourceMapBotModule` | Common | `ResourceMapBotModule` (genericbot || classicbot)<br>`ResourceMapBotModule@fransbot` (enable-fransbot) | `IBotTick` | — |
+| `ScoutBotModule` | Cameo | `ScoutBotModule` (genericbot) | `IBotEnabled`, `IBotNotifyIdleBaseUnits`, `IBotRegionThreatProvider`, `IBotRespondToAttack`, `IBotTick` | `IBotMainTargetProvider`, `IBotPersonalityLeadProvider`, `IBotRequestUnitProduction`, `MasterAiBotModule`, `ResourceMapBotModule`, `SquadManagerBotModuleCA` |
+| `TacticalMapBotModule` | Cameo | `TacticalMapBotModule` (genericbot) | `IBotTick`, `IBotZoneTopology` | `MasterAiBotModule` |
 
 ### SITUATION (8)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
 | `BotCounterDemandController` | Cameo | `BotCounterDemandController` (genericbot) | — | — |
-| `BotLearnedPriors` | Cameo | `BotLearnedPriors` (genericbot) | `IBotProductionWeight` | `IBotMainTargetProvider` |
+| `BotLearnedPriors` | Cameo | `BotLearnedPriors` (genericbot) | `IBotProductionWeight`, `IBotTick` | `IBotMainTargetProvider` |
 | `BotLimits` | CA | `BotLimits@easiest` (easiestbot)<br>`BotLimits@veryeasy` (veryeasybot)<br>`BotLimits@easy` (easybot)<br>`BotLimits@medium` (mediumbot)<br>`BotLimits@hard` (hardbot)<br>`BotLimits@veryhard` (veryhardbot)<br>… 10 total | — | — |
 | `BotPersonalityController` | Cameo | `BotPersonalityController` (genericbot) | — | — |
 | `BotRoleSets` | Cameo | `BotRoleSets` | — | — |
 | `BotUnitRoles` | Cameo | `BotUnitRoles` (genericbot) | `IBotUnitRoles` | — |
-| `FransEconomicSaturationBotModule` | Fransbot | `FransEconomicSaturationBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `SiegeEvaluatorBotModule` | CA | `SiegeEvaluatorBotModule` (genericbot) | `IBotSiegeAdvisor` | `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotSiegeFailureMemory`, `SquadManagerBotModuleCA` |
+| `FransEconomicSaturationBotModule` | Fransbot | `FransEconomicSaturationBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `SiegeEvaluatorBotModule` | CA | `SiegeEvaluatorBotModule` (genericbot) | `IBotSiegeAdvisor`, `IBotTick` | `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotSiegeFailureMemory`, `SquadManagerBotModuleCA` |
 
 ### STRATEGY (8)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
-| `DefenseCoveragePlanner` | Cameo | `DefenseCoveragePlanner` (genericbot) | `IBotDefensePlacementAdvisor` | `BaseBuilderBotModuleCA`, `IBotMainTargetProvider`, `IBotRememberedDefenceProvider` |
-| `ExpansionPlannerBotModule` | Cameo | `ExpansionPlannerBotModule` (genericbot) | `IBotExpansionTargetProvider` | `BaseBuilderBotModuleCA`, `IBotRegionThreatProvider`, `IBotUtilityAxes` |
-| `FransCommandBidBotModule` | Fransbot | `FransCommandBidBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `FransCommanderCoreBotModule` | Fransbot | `FransCommanderCoreBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `FransGeneralBotModule` | Fransbot | `FransGeneralBotModule` (enable-fransbot || inc3_frans_services) | — | — |
-| `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | — | — |
-| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
-| `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 15 total | — | `IBotActionBudget` |
+| `DefenseCoveragePlanner` | Cameo | `DefenseCoveragePlanner` (genericbot) | `IBotDefensePlacementAdvisor` | `BaseBuilderBotModuleCA`, `IBotMainTargetProvider`, `IBotRegionRoles`, `IBotRememberedDefenceProvider` |
+| `ExpansionPlannerBotModule` | Cameo | `ExpansionPlannerBotModule` (genericbot) | `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMcvExpansionSiteProvider`, `IBotPositionsUpdated`, `IBotTick` | `BaseBuilderBotModuleCA`, `IBotCoalition`, `IBotRegionThreatProvider`, `IBotRequestUnitProduction`, `IBotScaleTargets`, `IBotUtilityAxes`, `McvExpansionManagerBotModuleInfo`, `ResourceMapBotModule` |
+| `FransCommandBidBotModule` | Fransbot | `FransCommandBidBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `FransCommanderCoreBotModule` | Fransbot | `FransCommanderCoreBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `FransGeneralBotModule` | Fransbot | `FransGeneralBotModule` (enable-fransbot || inc3_frans_services) | `IBotRespondToAttack`, `IBotTick` | — |
+| `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
+| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
+| `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 15 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
 
 ### EXECUTION (28)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
-| `BaseRepairBotModule` | Cameo | `BaseRepairBotModule` (genericbot) | — | — |
-| `BeaconResponderBotModule` | Cameo | `BeaconResponderBotModule` (genericbot) | — | `IBotRegionThreatProvider`, `SquadManagerBotModuleCA` |
-| `BridgeRepairBotModule` | Cameo | `BridgeRepairBotModule` (genericbot && cn3_bridge_repair) | `IBotUnitLeaseLost` | — |
-| `BuildingRepairBotModuleCA` | CA | `BuildingRepairBotModuleCA` (classicbot) | — | — |
-| `CaptureManagerBotModuleCA` | CA | `CaptureManagerBotModuleCA` (classicbot) | — | — |
-| `CratePickupBotModule` | Cameo | `CratePickupBotModule` (classicbot || genericbot) | — | — |
-| `DeployBotModule` | Cameo | `DeployBotModule` (genericbot && cn3_deploy) | — | — |
-| `EngineerBotModule` | Cameo | `EngineerBotModule` (genericbot) | `IBotProtectionRequestProvider` | — |
-| `FransAirCommanderBotModule` | Fransbot | `FransAirCommanderBotModule` (enable-fransbot) | — | — |
-| `FransDefenseCommanderBotModule` | Fransbot | `FransDefenseCommanderBotModule` (enable-fransbot) | — | — |
-| `FransGroundCommanderBotModule` | Fransbot | `FransGroundCommanderBotModule@ground1` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground2` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground3` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground4` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground5` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground6` (enable-fransbot) | — | — |
-| `FransGroundTransferBotModule` | Fransbot | `FransGroundTransferBotModule` (enable-fransbot) | — | — |
-| `FransHarvesterBotModule` | Fransbot | `FransHarvesterBotModule` (enable-fransbot) | — | — |
-| `FransMcvExpansionManagerBotModule` | Fransbot | `FransMcvExpansionManagerBotModule` (enable-fransbot) | — | — |
-| `FransMinelayerBotModule` | Fransbot | `FransMinelayerBotModule` (enable-fransbot) | — | — |
-| `FransSeaCommanderBotModule` | Fransbot | `FransSeaCommanderBotModule` (enable-fransbot) | — | — |
-| `FransSpecOpsCommanderBotModule` | Fransbot | `FransSpecOpsCommanderBotModule` (enable-fransbot) | — | — |
-| `FransSupplyTruckBotModule` | Fransbot | `FransSupplyTruckBotModule` (enable-fransbot) | — | — |
-| `FransTransportCommanderBotModule` | Fransbot | `FransTransportCommanderBotModule` (enable-fransbot || engt-transport) | `IBotCaptureTransportProvider` | — |
-| `GarrisonDefenseBotModule` | Cameo | `GarrisonDefenseBotModule` (genericbot && cn2_garrison_defense) | — | — |
-| `HarvesterBotModuleCA` | CA | `HarvesterBotModuleCA` (genericbot || classicbot) | — | — |
-| `LoadCargoBotModule` *(no source)* | engine | `LoadCargoBotModule@Infantry` (genericbot || classicbot)<br>`LoadCargoBotModule@TankBunker` (genericbot || classicbot)<br>`LoadCargoBotModule@Battery` (genericbot || classicbot) | — | — |
-| `LoadGarrisonerBotModuleCA` | CA | `LoadGarrisonerBotModuleCA@Infantry` (classicbot || genericbot) | — | — |
-| `McvExpansionManagerBotModule` *(no source)* | engine | `McvExpansionManagerBotModule` (genericbot || classicbot) | — | — |
-| `MinelayerBotModule` *(no source)* | engine | `MinelayerBotModule` (genericbot || classicbot) | — | — |
-| `SendUnitToAttackBotModule` *(no source)* | engine | `SendUnitToAttackBotModule` (genericbot || classicbot)<br>`SendUnitToAttackBotModule@chrono` (genericbot || classicbot) | — | — |
-| `SquadManagerBotModuleCA` | CA | `SquadManagerBotModuleCA@rush` (genericbot && personality-rush)<br>`SquadManagerBotModuleCA@turtle` (genericbot && personality-turtle)<br>`SquadManagerBotModuleCA@tech` (genericbot && personality-tech)<br>`SquadManagerBotModuleCA@expansion` (genericbot && personality-expansion)<br>`SquadManagerBotModuleCA@steamroller` (genericbot && personality-steamroller)<br>`SquadManagerBotModuleCA@classic` (classicbot)<br>… 7 total | `IBotMissionAssignmentProvider` | `BotLimits`, `IBotActionBudget`, `IBotAircraftBuilder`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotProtectionRequestProvider`, `IBotRegionThreatProvider`, `IBotRouteThreatRouter`, `IBotSiegeAdvisor`, `IBotThreatPredictionProvider`, `IBotUnitRoles`, `IBotUtilityAxes` |
-| `UnitRepairBotModule` | Cameo | `UnitRepairBotModule` (genericbot && cn2_unit_repair) | — | — |
+| `BaseRepairBotModule` | Cameo | `BaseRepairBotModule` (genericbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `BeaconResponderBotModule` | Cameo | `BeaconResponderBotModule` (genericbot) | `IBotEnabled`, `IBotNotifyIdleBaseUnits`, `IBotTick` | `IBotRegionThreatProvider`, `SquadManagerBotModuleCA` |
+| `BridgeRepairBotModule` | Cameo | `BridgeRepairBotModule` (genericbot && cn3_bridge_repair) | `IBotTick`, `IBotUnitLeaseLost` | `IBotRequestUnitProduction` |
+| `BuildingRepairBotModuleCA` | CA | `BuildingRepairBotModuleCA` (classicbot) | `IBotRespondToAttack` | — |
+| `CaptureManagerBotModuleCA` | CA | `CaptureManagerBotModuleCA` (classicbot) | `IBotPositionsUpdated`, `IBotTick` | — |
+| `CratePickupBotModule` | Cameo | `CratePickupBotModule` (classicbot || genericbot) | `IBotTick` | — |
+| `DeployBotModule` | Cameo | `DeployBotModule` (genericbot && cn3_deploy) | `IBotTick` | — |
+| `EngineerBotModule` | Cameo | `EngineerBotModule` (genericbot) | `IBotPositionsUpdated`, `IBotProtectionRequestProvider`, `IBotTick` | — |
+| `FransAirCommanderBotModule` | Fransbot | `FransAirCommanderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` | — |
+| `FransDefenseCommanderBotModule` | Fransbot | `FransDefenseCommanderBotModule` (enable-fransbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `FransGroundCommanderBotModule` | Fransbot | `FransGroundCommanderBotModule@ground1` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground2` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground3` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground4` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground5` (enable-fransbot)<br>`FransGroundCommanderBotModule@ground6` (enable-fransbot) | `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` | — |
+| `FransGroundTransferBotModule` | Fransbot | `FransGroundTransferBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
+| `FransHarvesterBotModule` | Fransbot | `FransHarvesterBotModule` (enable-fransbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `FransMcvExpansionManagerBotModule` | Fransbot | `FransMcvExpansionManagerBotModule` (enable-fransbot) | `IBotBaseExpansion`, `IBotEnabled`, `IBotTick` | — |
+| `FransMinelayerBotModule` | Fransbot | `FransMinelayerBotModule` (enable-fransbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `FransSeaCommanderBotModule` | Fransbot | `FransSeaCommanderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` | — |
+| `FransSpecOpsCommanderBotModule` | Fransbot | `FransSpecOpsCommanderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` | — |
+| `FransSupplyTruckBotModule` | Fransbot | `FransSupplyTruckBotModule` (enable-fransbot) | `IBotTick` | `IBotRequestUnitProduction` |
+| `FransTransportCommanderBotModule` | Fransbot | `FransTransportCommanderBotModule` (enable-fransbot || engt-transport) | `IBotCaptureTransportProvider`, `IBotEnabled`, `IBotTick` | — |
+| `GarrisonDefenseBotModule` | Cameo | `GarrisonDefenseBotModule` (genericbot && cn2_garrison_defense) | `IBotTick` | — |
+| `HarvesterBotModuleCA` | CA | `HarvesterBotModuleCA@generic` (genericbot)<br>`HarvesterBotModuleCA@classic` (classicbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `LoadCargoBotModule` | AS | `LoadCargoBotModule@Infantry` (genericbot || classicbot)<br>`LoadCargoBotModule@TankBunker` (genericbot || classicbot)<br>`LoadCargoBotModule@Battery` (genericbot || classicbot) | `IBotTick` | — |
+| `LoadGarrisonerBotModuleCA` | CA | `LoadGarrisonerBotModuleCA@Infantry` (classicbot || (genericbot && !garrison_contest)) | `IBotTick` | — |
+| `McvExpansionManagerBotModule` | Common | `McvExpansionManagerBotModule` (genericbot || classicbot) | `IBotBaseExpansion`, `IBotRespondToAttack`, `IBotTick` | `IBotMcvExpansionSiteProvider`, `IBotPositionsUpdated`, `IBotRequestUnitProduction`, `IBotSuggestRefineryProduction`, `ResourceMapBotModule` |
+| `MinelayerBotModule` | Common | `MinelayerBotModule` (genericbot || classicbot) | `IBotRespondToAttack`, `IBotTick` | — |
+| `SendUnitToAttackBotModule` | AS | `SendUnitToAttackBotModule` (genericbot || classicbot)<br>`SendUnitToAttackBotModule@chrono` (genericbot || classicbot) | `IBotTick` | — |
+| `SquadManagerBotModuleCA` | CA | `SquadManagerBotModuleCA@rush` (genericbot && personality-rush)<br>`SquadManagerBotModuleCA@turtle` (genericbot && personality-turtle)<br>`SquadManagerBotModuleCA@tech` (genericbot && personality-tech)<br>`SquadManagerBotModuleCA@expansion` (genericbot && personality-expansion)<br>`SquadManagerBotModuleCA@steamroller` (genericbot && personality-steamroller)<br>`SquadManagerBotModuleCA@classic` (classicbot)<br>… 7 total | `IBotEnabled`, `IBotMissionAssignmentProvider`, `IBotPositionsUpdated`, `IBotRespondToAttack`, `IBotTick` | `BotLimits`, `IBotActionBudget`, `IBotAircraftBuilder`, `IBotCoalition`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotNotifyIdleBaseUnits`, `IBotPersonalityLeadProvider`, `IBotPositionsUpdated`, `IBotProtectionRequestProvider`, `IBotRegionThreatProvider`, `IBotRequestUnitProduction`, `IBotRouteThreatRouter`, `IBotScaleTargets`, `IBotSiegeAdvisor`, `IBotStealthDoctrine`, `IBotThreatPredictionProvider`, `IBotUnitRoles`, `IBotUtilityAxes` |
+| `UnitRepairBotModule` | Cameo | `UnitRepairBotModule` (genericbot && cn2_unit_repair) | `IBotNotifyIdleBaseUnits`, `IBotTick` | — |
 
 ### PRODUCTION (6)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
-| `BaseBuilderBotModuleCA` | CA | `BaseBuilderBotModuleCA@generic` (genericbot || classicbot) | — | `BotLimits`, `IBotExpansionTargetProvider` |
-| `BotGlobalUnitBudget` | Cameo | `BotGlobalUnitBudget` | — | — |
-| `FransBaseBuilderBotModule` | Fransbot | `FransBaseBuilderBotModule` (enable-fransbot) | — | — |
-| `FransUnitBuilderBotModule` | Fransbot | `FransUnitBuilderBotModule` (enable-fransbot) | — | `IBotEnemyCompositionProvider` |
-| `UnitBuilderBotModuleCA` | CA | `UnitBuilderBotModuleCA@generic` (genericbot || classicbot) | `IBotAircraftBuilder` | `BaseBuilderBotModuleCA`, `BotLimits`, `IBotEnemyCompositionProvider`, `IBotPersonalityLeadProvider`, `IBotProductionWeight`, `IBotUnitRoles`, `SquadManagerBotModuleCA`, `UnitCompositionsBotModule` |
+| `BaseBuilderBotModuleCA` | CA | `BaseBuilderBotModuleCA@generic` (genericbot || classicbot) | `IBotPositionsUpdated`, `IBotRequestPauseUnitProduction`, `IBotRespondToAttack`, `IBotSuggestRefineryProduction`, `IBotTick` | `BotLimits`, `IBotBaseExpansion`, `IBotBuildOrderKnobs`, `IBotExpansionTargetProvider`, `IBotPositionsUpdated`, `IBotScaleTargets`, `ResourceMapBotModule` |
+| `BotGlobalUnitBudget` | Cameo | `BotGlobalUnitBudget` | `IBotRequestPauseUnitProduction` | — |
+| `FransBaseBuilderBotModule` | Fransbot | `FransBaseBuilderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotPositionsUpdated`, `IBotRequestPauseUnitProduction`, `IBotRespondToAttack`, `IBotSuggestRefineryProduction`, `IBotTick` | `IBotBaseExpansion`, `IBotPositionsUpdated`, `IBotRequestUnitProduction`, `ResourceMapBotModule` |
+| `FransUnitBuilderBotModule` | Fransbot | `FransUnitBuilderBotModule` (enable-fransbot) | `IBotRequestUnitProduction`, `IBotTick` | `IBotEnemyCompositionProvider`, `IBotRequestPauseUnitProduction` |
+| `UnitBuilderBotModuleCA` | CA | `UnitBuilderBotModuleCA@generic` (genericbot || classicbot) | `IBotAircraftBuilder`, `IBotNotifyIdleBaseUnits`, `IBotRequestUnitProduction`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotLimits`, `IBotEnemyCompositionProvider`, `IBotPersonalityLeadProvider`, `IBotProductionWeight`, `IBotProductionWidth`, `IBotRequestPauseUnitProduction`, `IBotScaleTargets`, `IBotUnitRoles`, `SquadManagerBotModuleCA`, `UnitCompositionsBotModule` |
 | `UnitCompositionsBotModule` | CA | `UnitCompositionsBotModule` | — | — |
 
-### SUPPORT (11)
+### SUPPORT (12)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
 | `BotInsurance` | Cameo | `BotInsurance@secondaryinsurance` | — | — |
-| `BotUnitLeaseRegistry` | Cameo | `BotUnitLeaseRegistry` (genericbot) | `IBotUnitLeases` | `IBotUnitLeaseLost` |
+| `BotOwnershipWatchdog` | Cameo | `BotOwnershipWatchdog` (genericbot || classicbot) | `IBotNotifyIdleBaseUnits`, `IBotTick` | `SquadManagerBotModuleCA` |
+| `BotUnitLeaseRegistry` | Cameo | `BotUnitLeaseRegistry` (genericbot) | `IBotTick`, `IBotUnitLeases` | `IBotUnitLeaseLost` |
 | `DynamicBotInsurance` | Cameo | `DynamicBotInsurance` | — | — |
-| `ExternalBotOrdersManager` *(no source)* | engine | `ExternalBotOrdersManager` (genericbot) | — | — |
-| `FransSupportCoordinatorBotModule` | Fransbot | `FransSupportCoordinatorBotModule` (enable-fransbot) | — | — |
-| `FransSupportPowerBotModule` | Fransbot | `FransSupportPowerBotModule` (enable-fransbot) | — | — |
-| `GrantConditionOnBotOwner` *(no source)* | engine | `GrantConditionOnBotOwner@generic`<br>`GrantConditionOnBotOwner@easiest`<br>`GrantConditionOnBotOwner@veryeasy`<br>`GrantConditionOnBotOwner@easy`<br>`GrantConditionOnBotOwner@medium`<br>`GrantConditionOnBotOwner@hard`<br>… 22 total | — | — |
+| `ExternalBotOrdersManager` | AS | `ExternalBotOrdersManager` (genericbot) | `IBotTick` | — |
+| `FransSupportCoordinatorBotModule` | Fransbot | `FransSupportCoordinatorBotModule` (enable-fransbot) | `IBotTick` | — |
+| `FransSupportPowerBotModule` | Fransbot | `FransSupportPowerBotModule` (enable-fransbot) | `IBotTick` | — |
+| `GrantConditionOnBotOwner` | Common | `GrantConditionOnBotOwner@generic`<br>`GrantConditionOnBotOwner@easiest`<br>`GrantConditionOnBotOwner@veryeasy`<br>`GrantConditionOnBotOwner@easy`<br>`GrantConditionOnBotOwner@medium`<br>`GrantConditionOnBotOwner@hard`<br>… 31 total | — | — |
 | `HumanPaceBotModule` | Cameo | `HumanPaceBotModule` (genericbot) | `IBotActionBudget` | — |
-| `PowerDownBotModule` *(no source)* | engine | `PowerDownBotModule` (genericbot || classicbot) | — | — |
-| `SupportPowerBotASModule` *(no source)* | engine | `SupportPowerBotASModule` (genericbot || classicbot)<br>`SupportPowerBotASModule@wc2` (genericbot) | — | — |
-| `SupportPowerBotModule` *(no source)* | engine | `SupportPowerBotModule` (classicbot) | — | — |
+| `PowerDownBotModule` | AS | `PowerDownBotModule` (genericbot || classicbot) | `IBotTick` | — |
+| `SupportPowerBotASModule` | AS | `SupportPowerBotASModule` (genericbot || classicbot)<br>`SupportPowerBotASModule@wc2` (genericbot) | `IBotTick` | — |
+| `SupportPowerBotModule` | Common | `SupportPowerBotModule` (classicbot) | `IBotTick` | — |
 
 ### TELEMETRY (1)
 
@@ -111,9 +112,21 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 |---|---|---|---|---|
 | `AiMissionLogWriter` | Cameo | `AiMissionLogWriter` | `IBotMissionRecordSink` | — |
 
-### UNMAPPED (0)
+### UNMAPPED (11)
 
-_none_
+| Module | Asm | Instances (gate) | Provides | Consumes |
+|---|---|---|---|---|
+| `AiPlacementLogWriter` | Cameo | `AiPlacementLogWriter` | `IBotPlacementObserver` | `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule` |
+| `ArmyFirstBotModule` | Cameo | `ArmyFirstBotModule` (genericbot && army_first) | `IBotRequestPauseBuildingProduction`, `IBotTick` | — |
+| `AssaultFormationBotModule` | Cameo | `AssaultFormationBotModule` (genericbot && assault_fanout) | `IBotAssaultFormation` | — |
+| `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotMainTargetProvider`, `IBotUnitRoles`, `MasterAiBotModule` |
+| `GarrisonContestBotModule` | Cameo | `GarrisonContestBotModule` (genericbot && garrison_contest) | `IBotMissionProvider`, `IBotTick` | `IBotRememberedDefenceProvider`, `IBotZoneTopology` |
+| `ParallelProductionBotModule` | Cameo | `ParallelProductionBotModule` (genericbot && parallel_production) | `IBotProductionWidth` | — |
+| `PlugSpawnerBotModuleCA` | Cameo | `PlugSpawnerBotModuleCA` (genericbot && plug_spawn) | `IBotTick` | — |
+| `RegionRolesBotModule` | Cameo | `RegionRolesBotModule` (genericbot && cn4_region_roles) | `IBotRegionRoles`, `IBotTick` | `TacticalMapBotModule` |
+| `ScaleTargetsBotModule` | Cameo | `ScaleTargetsBotModule` (genericbot && scale_targets) | `IBotScaleTargets`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `BotPersonalityController`, `IBotUnitRoles`, `IBotUtilityAxes`, `IBotZoneTopology`, `MasterAiBotModule` |
+| `SpacingAdvisorBotModule` | Cameo | `SpacingAdvisorBotModule` (genericbot) | `IBotPlacementAdvisor` | `ResourceMapBotModule` |
+| `StealthDoctrineBotModule` | Cameo | `StealthDoctrineBotModule` (genericbot && cn3_stealth_squads) | `IBotStealthDoctrine` | `MasterAiBotModule` |
 
 ## Interface seams
 
@@ -121,35 +134,57 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 | Interface | Provided by | Consumed by | Status |
 |---|---|---|---|
+| `IBot` | `ModularBot` | — | ok |
 | `IBotActionBudget` | `HumanPaceBotModule` | `ModularBot`, `SquadManagerBotModuleCA` | ok |
 | `IBotAircraftBuilder` | `UnitBuilderBotModuleCA` | `SquadManagerBotModuleCA` | ok |
+| `IBotAssaultFormation` | `AssaultFormationBotModule` | — | DEAD-END |
+| `IBotBaseExpansion` | `FransMcvExpansionManagerBotModule`, `McvExpansionManagerBotModule` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | ok |
+| `IBotBuildOrderKnobs` | `BuildOrderKnobsBotModule` | `BaseBuilderBotModuleCA` | ok |
 | `IBotCaptureTransportProvider` | `FransTransportCommanderBotModule` | — | DEAD-END |
+| `IBotCoalition` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA` | ok |
 | `IBotDefensePlacementAdvisor` | `DefenseCoveragePlanner` | — | DEAD-END |
 | `IBotDirector` | `MasterAiBotModule` | — | DEAD-END |
+| `IBotEnabled` | `BeaconResponderBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransMcvExpansionManagerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransTransportCommanderBotModule`, `FransbotControllerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | ok |
 | `IBotEnemyCompositionProvider` | `MasterAiBotModule` | `FransUnitBuilderBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
+| `IBotExpansionAssistProvider` | `ExpansionPlannerBotModule` | `MasterAiBotModule` | ok |
 | `IBotExpansionTargetProvider` | `ExpansionPlannerBotModule` | `BaseBuilderBotModuleCA`, `MasterAiBotModule` | ok |
 | `IBotFoggedEnemyProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMainTargetProvider` | `MasterAiBotModule` | `BotLearnedPriors`, `DefenseCoveragePlanner`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
+| `IBotMainTargetProvider` | `MasterAiBotModule` | `BotLearnedPriors`, `BuildOrderKnobsBotModule`, `DefenseCoveragePlanner`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
+| `IBotMcvExpansionSiteProvider` | `ExpansionPlannerBotModule` | `McvExpansionManagerBotModule` | ok |
 | `IBotMissionAssignmentProvider` | `SquadManagerBotModuleCA` | `MasterAiBotModule` | ok |
 | `IBotMissionOutcomeSink` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMissionProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
+| `IBotMissionProvider` | `GarrisonContestBotModule`, `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
 | `IBotMissionRecordSink` | `AiMissionLogWriter` | — | DEAD-END |
+| `IBotNotifyIdleBaseUnits` | `BeaconResponderBotModule`, `BotOwnershipWatchdog`, `ScoutBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `SquadManagerBotModuleCA` | ok |
 | `IBotPersonalityLeadProvider` | `MasterAiBotModule` | `ScoutBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
+| `IBotPlacementAdvisor` | `SpacingAdvisorBotModule` | — | DEAD-END |
+| `IBotPlacementObserver` | `AiPlacementLogWriter` | — | DEAD-END |
+| `IBotPositionsUpdated` | `BaseBuilderBotModuleCA`, `CaptureManagerBotModuleCA`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `SquadManagerBotModuleCA` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule`, `McvExpansionManagerBotModule`, `SquadManagerBotModuleCA` | ok |
 | `IBotProductionWeight` | `BotLearnedPriors` | `UnitBuilderBotModuleCA` | ok |
+| `IBotProductionWidth` | `ParallelProductionBotModule` | `UnitBuilderBotModuleCA` | ok |
 | `IBotProtectionRequestProvider` | `EngineerBotModule` | `SquadManagerBotModuleCA` | ok |
+| `IBotRegionRoles` | `RegionRolesBotModule` | `DefenseCoveragePlanner` | ok |
 | `IBotRegionThreatProvider` | `MasterAiBotModule`, `ScoutBotModule` | `BeaconResponderBotModule`, `ExpansionPlannerBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotRememberedDefenceProvider` | `MasterAiBotModule` | `DefenseCoveragePlanner`, `SiegeEvaluatorBotModule` | ok |
+| `IBotRememberedDefenceProvider` | `MasterAiBotModule` | `DefenseCoveragePlanner`, `GarrisonContestBotModule`, `SiegeEvaluatorBotModule` | ok |
+| `IBotRequestPauseBuildingProduction` | `ArmyFirstBotModule` | — | DEAD-END |
+| `IBotRequestPauseUnitProduction` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `FransBaseBuilderBotModule` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | ok |
+| `IBotRequestUnitProduction` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | `BridgeRepairBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `FransSupplyTruckBotModule`, `McvExpansionManagerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
+| `IBotRespondToAttack` | `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BuildingRepairBotModuleCA`, `CombatAnalysisBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransDefenseCommanderBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransHarvesterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `HarvesterBotModuleCA`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | ok |
 | `IBotRouteThreatRouter` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
+| `IBotScaleTargets` | `ScaleTargetsBotModule` | `BaseBuilderBotModuleCA`, `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
 | `IBotSiegeAdvisor` | `SiegeEvaluatorBotModule` | `SquadManagerBotModuleCA` | ok |
 | `IBotSiegeFailureMemory` | `MasterAiBotModule` | `SiegeEvaluatorBotModule` | ok |
+| `IBotStealthDoctrine` | `StealthDoctrineBotModule` | `SquadManagerBotModuleCA` | ok |
+| `IBotSuggestRefineryProduction` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | `McvExpansionManagerBotModule` | ok |
 | `IBotTeamMember` | `MasterAiBotModule` | — | DEAD-END |
 | `IBotThreatAnalysis` | `CombatAnalysisBotModule` | `MasterAiBotModule` | ok |
 | `IBotThreatPredictionProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
+| `IBotTick` | `ArmyFirstBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BeaconResponderBotModule`, `BotLearnedPriors`, `BotOwnershipWatchdog`, `BotUnitLeaseRegistry`, `BridgeRepairBotModule`, `BuildOrderKnobsBotModule`, `CaptureManagerBotModuleCA`, `CombatAnalysisBotModule`, `CratePickupBotModule`, `DeployBotModule`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `ExternalBotOrdersManager`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransCombatIntelBotModule`, `FransCommandBidBotModule`, `FransCommanderCoreBotModule`, `FransDefenseCommanderBotModule`, `FransEconomicSaturationBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransHarvesterBotModule`, `FransMcvExpansionManagerBotModule`, `FransMineClusterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransStrategicMapBotModule`, `FransSupplyTruckBotModule`, `FransSupportCoordinatorBotModule`, `FransSupportPowerBotModule`, `FransTransportCommanderBotModule`, `FransUnitBuilderBotModule`, `FransbotControllerBotModule`, `GarrisonContestBotModule`, `GarrisonDefenseBotModule`, `HarvesterBotModuleCA`, `LoadCargoBotModule`, `LoadGarrisonerBotModuleCA`, `MasterAiBotModule`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `PlugSpawnerBotModuleCA`, `PowerDownBotModule`, `RegionRolesBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SendUnitToAttackBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA`, `SupportPowerBotASModule`, `SupportPowerBotModule`, `TacticalMapBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `ModularBot` | ok |
 | `IBotUnitLeaseLost` | `BridgeRepairBotModule` | `BotUnitLeaseRegistry` | ok |
 | `IBotUnitLeases` | `BotUnitLeaseRegistry` | — | DEAD-END |
-| `IBotUnitRoles` | `BotUnitRoles` | `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
-| `IBotUtilityAxes` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotZoneTopology` | `TacticalMapBotModule` | — | DEAD-END |
+| `IBotUnitRoles` | `BotUnitRoles` | `AiPlacementLogWriter`, `BuildOrderKnobsBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
+| `IBotUtilityAxes` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA` | ok |
+| `IBotZoneTopology` | `TacticalMapBotModule` | `GarrisonContestBotModule`, `ScaleTargetsBotModule` | ok |
 
 ## Order-issuer matrix
 
@@ -160,24 +195,23 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | Order | Issuers (coordination) | Live overlap |
 |---|---|---|
 | `Attack` | `FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransSpecOpsCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`SquadManagerBotModuleCA` (squad) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule + FransSpecOpsCommanderBotModule |
-| `AttackMove` | `BeaconResponderBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`LoadGarrisonerBotModuleCA` (no-lease)<br>`SquadManagerBotModuleCA` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule |
+| `AttackMove` | `BeaconResponderBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`GarrisonContestBotModule` (lease)<br>`LoadGarrisonerBotModuleCA` (no-lease)<br>`SquadManagerBotModuleCA` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + LoadGarrisonerBotModuleCA, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + LoadGarrisonerBotModuleCA, FransSeaCommanderBotModule + LoadGarrisonerBotModuleCA |
 | `CaptureActor` | `CaptureManagerBotModuleCA` (lease)<br>`EngineerBotModule` (lease)<br>`FransSpecOpsCommanderBotModule` (no-lease) | none — all co-running pairs lease- or gate-separated |
-| `DeployTransform` | `FransMcvExpansionManagerBotModule` (no-lease)<br>`McvManagerBotModuleCA` (no-lease, not loaded) | none — all co-running pairs lease- or gate-separated |
-| `EnterGarrison` | `GarrisonDefenseBotModule` (lease)<br>`LoadGarrisonerBotModuleCA` (no-lease) | none — all co-running pairs lease- or gate-separated |
+| `EnterGarrison` | `GarrisonContestBotModule` (lease)<br>`GarrisonDefenseBotModule` (lease)<br>`LoadGarrisonerBotModuleCA` (no-lease) | none — all co-running pairs lease- or gate-separated |
 | `EnterTransport` | `FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease) | **unseparated co-runners:** FransGroundTransferBotModule + FransMcvExpansionManagerBotModule |
-| `Harvest` | `FransHarvesterBotModule` (no-lease)<br>`HarvesterBotModuleCA` (no-lease) | none — all co-running pairs lease- or gate-separated |
-| `Move` | `BeaconResponderBotModule` (lease)<br>`CratePickupBotModule` (lease)<br>`DeployBotModule` (lease)<br>`EngineerBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransMinelayerBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransSpecOpsCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`HarvesterBotModuleCA` (no-lease)<br>`McvManagerBotModuleCA` (no-lease, not loaded)<br>`ScoutBotModule` (lease)<br>`SquadManagerBotModuleCA` (squad)<br>`UnitRepairBotModule` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransBaseBuilderBotModule, FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransGroundTransferBotModule, FransAirCommanderBotModule + FransMcvExpansionManagerBotModule, FransAirCommanderBotModule + FransMinelayerBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + FransSpecOpsCommanderBotModule, FransBaseBuilderBotModule + FransGroundCommanderBotModule, FransBaseBuilderBotModule + FransGroundTransferBotModule, FransBaseBuilderBotModule + FransMcvExpansionManagerBotModule, FransBaseBuilderBotModule + FransMinelayerBotModule, FransBaseBuilderBotModule + FransSeaCommanderBotModule, FransBaseBuilderBotModule + FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule + FransGroundTransferBotModule, FransGroundCommanderBotModule + FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule + FransMinelayerBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundTransferBotModule + FransMcvExpansionManagerBotModule, FransGroundTransferBotModule + FransMinelayerBotModule, FransGroundTransferBotModule + FransSeaCommanderBotModule, FransGroundTransferBotModule + FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule + FransMinelayerBotModule, FransMcvExpansionManagerBotModule + FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule + FransSpecOpsCommanderBotModule, FransMinelayerBotModule + FransSeaCommanderBotModule, FransMinelayerBotModule + FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule + FransSpecOpsCommanderBotModule |
+| `Harvest` | `FransHarvesterBotModule` (no-lease)<br>`HarvesterBotModuleCA` (no-lease) | **unseparated co-runners:** FransHarvesterBotModule + HarvesterBotModuleCA |
+| `Move` | `BeaconResponderBotModule` (lease)<br>`CratePickupBotModule` (lease)<br>`DeployBotModule` (lease)<br>`EngineerBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransMinelayerBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransSpecOpsCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`HarvesterBotModuleCA` (no-lease)<br>`ScoutBotModule` (lease)<br>`SquadManagerBotModuleCA` (squad)<br>`UnitRepairBotModule` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransBaseBuilderBotModule, FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransGroundTransferBotModule, FransAirCommanderBotModule + FransMcvExpansionManagerBotModule, FransAirCommanderBotModule + FransMinelayerBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + FransSpecOpsCommanderBotModule, FransAirCommanderBotModule + HarvesterBotModuleCA, FransBaseBuilderBotModule + FransGroundCommanderBotModule, FransBaseBuilderBotModule + FransGroundTransferBotModule, FransBaseBuilderBotModule + FransMcvExpansionManagerBotModule, FransBaseBuilderBotModule + FransMinelayerBotModule, FransBaseBuilderBotModule + FransSeaCommanderBotModule, FransBaseBuilderBotModule + FransSpecOpsCommanderBotModule, FransBaseBuilderBotModule + HarvesterBotModuleCA, FransGroundCommanderBotModule + FransGroundTransferBotModule, FransGroundCommanderBotModule + FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule + FransMinelayerBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule + HarvesterBotModuleCA, FransGroundTransferBotModule + FransMcvExpansionManagerBotModule, FransGroundTransferBotModule + FransMinelayerBotModule, FransGroundTransferBotModule + FransSeaCommanderBotModule, FransGroundTransferBotModule + FransSpecOpsCommanderBotModule, FransGroundTransferBotModule + HarvesterBotModuleCA, FransMcvExpansionManagerBotModule + FransMinelayerBotModule, FransMcvExpansionManagerBotModule + FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule + FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule + HarvesterBotModuleCA, FransMinelayerBotModule + FransSeaCommanderBotModule, FransMinelayerBotModule + FransSpecOpsCommanderBotModule, FransMinelayerBotModule + HarvesterBotModuleCA, FransSeaCommanderBotModule + FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule + HarvesterBotModuleCA, FransSpecOpsCommanderBotModule + HarvesterBotModuleCA |
 | `PlaceBuilding` | `BaseBuilderQueueManagerCA` (no-lease, helper)<br>`FransBaseBuilderBotModule` (no-lease)<br>`FransDefenseCommanderBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease) | **unseparated co-runners:** FransBaseBuilderBotModule + FransDefenseCommanderBotModule, FransBaseBuilderBotModule + FransMcvExpansionManagerBotModule, FransDefenseCommanderBotModule + FransMcvExpansionManagerBotModule |
 | `PlacePlug` | `BaseBuilderQueueManagerCA` (no-lease, helper)<br>`FransBaseBuilderBotModule` (no-lease) | none — all co-running pairs lease- or gate-separated |
 | `Repair` | `FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`SquadManagerBotModuleCA` (squad)<br>`UnitRepairBotModule` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule |
 | `RepairBridge` | `BridgeRepairBotModule` (lease)<br>`EngineerBotModule` (lease) | none — all co-running pairs lease- or gate-separated |
-| `RepairBuilding` | `BaseRepairBotModule` (no-lease)<br>`BuildingRepairBotModuleCA` (no-lease) | none — all co-running pairs lease- or gate-separated |
+| `RepairBuilding` | `BaseRepairBotModule` (no-lease)<br>`BuildingRepairBotModuleCA` (no-lease) | **unseparated co-runners:** BaseRepairBotModule + BuildingRepairBotModuleCA |
 | `RepairNear` | `FransSeaCommanderBotModule` (no-lease)<br>`SquadManagerBotModuleCA` (squad)<br>`UnitRepairBotModule` (lease) | none — all co-running pairs lease- or gate-separated |
 | `ReturnToBase` | `FransAirCommanderBotModule` (no-lease)<br>`SquadManagerBotModuleCA` (squad) | none — all co-running pairs lease- or gate-separated |
-| `Sell` | `BaseBuilderBotModuleCA` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease) | none — all co-running pairs lease- or gate-separated |
-| `SetRallyPoint` | `BaseBuilderBotModuleCA` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease) | none — all co-running pairs lease- or gate-separated |
+| `Sell` | `BaseBuilderBotModuleCA` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease) | **unseparated co-runners:** BaseBuilderBotModuleCA + FransBaseBuilderBotModule |
+| `SetRallyPoint` | `BaseBuilderBotModuleCA` (no-lease)<br>`FransBaseBuilderBotModule` (no-lease) | **unseparated co-runners:** BaseBuilderBotModuleCA + FransBaseBuilderBotModule |
 | `SetUnitStance` | `FransAirCommanderBotModule` (no-lease)<br>`FransCommanderCoreBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease) | **unseparated co-runners:** FransAirCommanderBotModule + FransCommanderCoreBotModule, FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransCommanderCoreBotModule + FransGroundCommanderBotModule, FransCommanderCoreBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule |
-| `Stop` | `EngineerBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransSpecOpsCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`LoadGarrisonerBotModuleCA` (no-lease)<br>`SquadManagerBotModuleCA` (squad) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransGroundTransferBotModule, FransAirCommanderBotModule + FransMcvExpansionManagerBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule + FransGroundTransferBotModule, FransGroundCommanderBotModule + FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundTransferBotModule + FransMcvExpansionManagerBotModule, FransGroundTransferBotModule + FransSeaCommanderBotModule, FransGroundTransferBotModule + FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule + FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule + FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule + FransSpecOpsCommanderBotModule |
+| `Stop` | `EngineerBotModule` (lease)<br>`FransAirCommanderBotModule` (no-lease)<br>`FransGroundCommanderBotModule` (no-lease)<br>`FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransSeaCommanderBotModule` (no-lease)<br>`FransSpecOpsCommanderBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`LoadGarrisonerBotModuleCA` (no-lease)<br>`SquadManagerBotModuleCA` (squad) | **unseparated co-runners:** FransAirCommanderBotModule + FransGroundCommanderBotModule, FransAirCommanderBotModule + FransGroundTransferBotModule, FransAirCommanderBotModule + FransMcvExpansionManagerBotModule, FransAirCommanderBotModule + FransSeaCommanderBotModule, FransAirCommanderBotModule + FransSpecOpsCommanderBotModule, FransAirCommanderBotModule + LoadGarrisonerBotModuleCA, FransGroundCommanderBotModule + FransGroundTransferBotModule, FransGroundCommanderBotModule + FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule + FransSeaCommanderBotModule, FransGroundCommanderBotModule + FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule + LoadGarrisonerBotModuleCA, FransGroundTransferBotModule + FransMcvExpansionManagerBotModule, FransGroundTransferBotModule + FransSeaCommanderBotModule, FransGroundTransferBotModule + FransSpecOpsCommanderBotModule, FransGroundTransferBotModule + LoadGarrisonerBotModuleCA, FransMcvExpansionManagerBotModule + FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule + FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule + LoadGarrisonerBotModuleCA, FransSeaCommanderBotModule + FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule + LoadGarrisonerBotModuleCA, FransSpecOpsCommanderBotModule + LoadGarrisonerBotModuleCA |
 | `Unload` | `FransGroundTransferBotModule` (no-lease)<br>`FransMcvExpansionManagerBotModule` (no-lease)<br>`FransTransportCommanderBotModule` (lease)<br>`GarrisonDefenseBotModule` (lease) | **unseparated co-runners:** FransGroundTransferBotModule + FransMcvExpansionManagerBotModule |
 
 ### Single-issuer orders
@@ -186,6 +220,7 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 |---|---|
 | `C4` | `FransSpecOpsCommanderBotModule` |
 | `DeliverCash` | `FransSupplyTruckBotModule` |
+| `DeployTransform` | `FransMcvExpansionManagerBotModule` |
 | `Dock` | `FransHarvesterBotModule` |
 | `ForceDock` | `HarvesterBotModuleCA` |
 | `FransBaseBuilderStartProductionAcknowledged` | `FransBaseBuilderBotModule` |
@@ -194,7 +229,6 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | `PauseProduction` | `FransUnitBuilderBotModule` |
 | `PlaceMinefield` | `FransMinelayerBotModule` |
 | `PlacePlugAI` | `PlugSpawnerBotModuleCA` |
-| `PowerDown` | `PowerDownBotModuleCA` |
 | `Scatter` | `SquadManagerBotModuleCA` |
 | `SetBotCounterDemand` | `MasterAiBotModule` |
 | `SetBotPersonality` | `MasterAiBotModule` |
@@ -203,43 +237,41 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 | check | severity | finding |
 |---|---|---|
-| R1 | ok | 87 gated instances checked; 4 dormant on master until their increment arm |
-| R1 | ok | `BridgeRepairBotModule` dormant on master: `cn3_bridge_repair` reach it only via increment arm X_cn3_bridge_repair (genericbot && cn3_bridge_repair) |
-| R1 | ok | `DeployBotModule` dormant on master: `cn3_deploy` reach it only via increment arm M_cn3_deploy (genericbot && cn3_deploy) |
-| R1 | ok | `GarrisonDefenseBotModule` dormant on master: `cn2_garrison_defense` reach it only via increment arm L_cn2_garrison_defense (genericbot && cn2_garrison_defense) |
-| R1 | ok | `UnitRepairBotModule` dormant on master: `cn2_unit_repair` reach it only via increment arm K_cn2_unit_repair (genericbot && cn2_unit_repair) |
-| R2 | ok | 33 switch targets verified |
+| R1 | ok | 99 gated instances checked; 0 dormant on master until their increment arm |
+| R2 | ok | 55 switch targets verified |
+| R3 | WARN | DEAD-END `IBotAssaultFormation`: provided by `AssaultFormationBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotCaptureTransportProvider`: provided by `FransTransportCommanderBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotDefensePlacementAdvisor`: provided by `DefenseCoveragePlanner`; no consumer |
 | R3 | WARN | DEAD-END `IBotDirector`: provided by `MasterAiBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotMissionRecordSink`: provided by `AiMissionLogWriter`; no consumer |
+| R3 | WARN | DEAD-END `IBotPlacementAdvisor`: provided by `SpacingAdvisorBotModule`; no consumer |
+| R3 | WARN | DEAD-END `IBotPlacementObserver`: provided by `AiPlacementLogWriter`; no consumer |
+| R3 | WARN | DEAD-END `IBotRequestPauseBuildingProduction`: provided by `ArmyFirstBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotTeamMember`: provided by `MasterAiBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotUnitLeases`: provided by `BotUnitLeaseRegistry`; no consumer |
-| R3 | WARN | DEAD-END `IBotZoneTopology`: provided by `TacticalMapBotModule`; no consumer |
-| R4 | WARN | `AttackMove` — 6 issuers: BeaconResponderBotModule (lease); FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); LoadGarrisonerBotModuleCA (no-lease); SquadManagerBotModuleCA (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule |
+| R4 | WARN | `AttackMove` — 7 issuers: BeaconResponderBotModule (lease); FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); GarrisonContestBotModule (lease); LoadGarrisonerBotModuleCA (no-lease); SquadManagerBotModuleCA (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+LoadGarrisonerBotModuleCA, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+LoadGarrisonerBotModuleCA, FransSeaCommanderBotModule+LoadGarrisonerBotModuleCA |
 | R4 | WARN | `Attack` — 6 issuers: FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); SquadManagerBotModuleCA (squad); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule |
 | R4 | WARN | `CaptureActor` — 3 issuers: CaptureManagerBotModuleCA (lease); EngineerBotModule (lease); FransSpecOpsCommanderBotModule (no-lease); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `DeployTransform` — 2 issuers: FransMcvExpansionManagerBotModule (no-lease); McvManagerBotModuleCA (no-lease,not loaded); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `EnterGarrison` — 2 issuers: GarrisonDefenseBotModule (lease); LoadGarrisonerBotModuleCA (no-lease); all co-running pairs are lease- or gate-separated |
+| R4 | WARN | `EnterGarrison` — 3 issuers: GarrisonContestBotModule (lease); GarrisonDefenseBotModule (lease); LoadGarrisonerBotModuleCA (no-lease); all co-running pairs are lease- or gate-separated |
 | R4 | WARN | `EnterTransport` — 3 issuers: FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransTransportCommanderBotModule (lease); UNSEPARATED co-runners: FransGroundTransferBotModule+FransMcvExpansionManagerBotModule |
-| R4 | WARN | `Harvest` — 2 issuers: FransHarvesterBotModule (no-lease); HarvesterBotModuleCA (no-lease); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `Move` — 18 issuers: BeaconResponderBotModule (lease); CratePickupBotModule (lease); DeployBotModule (lease); EngineerBotModule (lease); FransAirCommanderBotModule (no-lease); FransBaseBuilderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransMinelayerBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); HarvesterBotModuleCA (no-lease); McvManagerBotModuleCA (no-lease,not loaded); ScoutBotModule (lease); SquadManagerBotModuleCA (squad); UnitRepairBotModule (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransBaseBuilderBotModule, FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransGroundTransferBotModule, FransAirCommanderBotModule+FransMcvExpansionManagerBotModule, FransAirCommanderBotModule+FransMinelayerBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransBaseBuilderBotModule+FransGroundCommanderBotModule, FransBaseBuilderBotModule+FransGroundTransferBotModule, FransBaseBuilderBotModule+FransMcvExpansionManagerBotModule, FransBaseBuilderBotModule+FransMinelayerBotModule, FransBaseBuilderBotModule+FransSeaCommanderBotModule, FransBaseBuilderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+FransGroundTransferBotModule, FransGroundCommanderBotModule+FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule+FransMinelayerBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundTransferBotModule+FransMcvExpansionManagerBotModule, FransGroundTransferBotModule+FransMinelayerBotModule, FransGroundTransferBotModule+FransSeaCommanderBotModule, FransGroundTransferBotModule+FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule+FransMinelayerBotModule, FransMcvExpansionManagerBotModule+FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule+FransSpecOpsCommanderBotModule, FransMinelayerBotModule+FransSeaCommanderBotModule, FransMinelayerBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule |
+| R4 | WARN | `Harvest` — 2 issuers: FransHarvesterBotModule (no-lease); HarvesterBotModuleCA (no-lease); UNSEPARATED co-runners: FransHarvesterBotModule+HarvesterBotModuleCA |
+| R4 | WARN | `Move` — 17 issuers: BeaconResponderBotModule (lease); CratePickupBotModule (lease); DeployBotModule (lease); EngineerBotModule (lease); FransAirCommanderBotModule (no-lease); FransBaseBuilderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransMinelayerBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); HarvesterBotModuleCA (no-lease); ScoutBotModule (lease); SquadManagerBotModuleCA (squad); UnitRepairBotModule (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransBaseBuilderBotModule, FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransGroundTransferBotModule, FransAirCommanderBotModule+FransMcvExpansionManagerBotModule, FransAirCommanderBotModule+FransMinelayerBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransAirCommanderBotModule+HarvesterBotModuleCA, FransBaseBuilderBotModule+FransGroundCommanderBotModule, FransBaseBuilderBotModule+FransGroundTransferBotModule, FransBaseBuilderBotModule+FransMcvExpansionManagerBotModule, FransBaseBuilderBotModule+FransMinelayerBotModule, FransBaseBuilderBotModule+FransSeaCommanderBotModule, FransBaseBuilderBotModule+FransSpecOpsCommanderBotModule, FransBaseBuilderBotModule+HarvesterBotModuleCA, FransGroundCommanderBotModule+FransGroundTransferBotModule, FransGroundCommanderBotModule+FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule+FransMinelayerBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+HarvesterBotModuleCA, FransGroundTransferBotModule+FransMcvExpansionManagerBotModule, FransGroundTransferBotModule+FransMinelayerBotModule, FransGroundTransferBotModule+FransSeaCommanderBotModule, FransGroundTransferBotModule+FransSpecOpsCommanderBotModule, FransGroundTransferBotModule+HarvesterBotModuleCA, FransMcvExpansionManagerBotModule+FransMinelayerBotModule, FransMcvExpansionManagerBotModule+FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule+FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule+HarvesterBotModuleCA, FransMinelayerBotModule+FransSeaCommanderBotModule, FransMinelayerBotModule+FransSpecOpsCommanderBotModule, FransMinelayerBotModule+HarvesterBotModuleCA, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+HarvesterBotModuleCA, FransSpecOpsCommanderBotModule+HarvesterBotModuleCA |
 | R4 | WARN | `PlaceBuilding` — 4 issuers: BaseBuilderQueueManagerCA (no-lease,helper); FransBaseBuilderBotModule (no-lease); FransDefenseCommanderBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); UNSEPARATED co-runners: FransBaseBuilderBotModule+FransDefenseCommanderBotModule, FransBaseBuilderBotModule+FransMcvExpansionManagerBotModule, FransDefenseCommanderBotModule+FransMcvExpansionManagerBotModule |
 | R4 | WARN | `PlacePlug` — 2 issuers: BaseBuilderQueueManagerCA (no-lease,helper); FransBaseBuilderBotModule (no-lease); all co-running pairs are lease- or gate-separated |
 | R4 | WARN | `RepairBridge` — 2 issuers: BridgeRepairBotModule (lease); EngineerBotModule (lease); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `RepairBuilding` — 2 issuers: BaseRepairBotModule (no-lease); BuildingRepairBotModuleCA (no-lease); all co-running pairs are lease- or gate-separated |
+| R4 | WARN | `RepairBuilding` — 2 issuers: BaseRepairBotModule (no-lease); BuildingRepairBotModuleCA (no-lease); UNSEPARATED co-runners: BaseRepairBotModule+BuildingRepairBotModuleCA |
 | R4 | WARN | `RepairNear` — 3 issuers: FransSeaCommanderBotModule (no-lease); SquadManagerBotModuleCA (squad); UnitRepairBotModule (lease); all co-running pairs are lease- or gate-separated |
 | R4 | WARN | `Repair` — 4 issuers: FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); SquadManagerBotModuleCA (squad); UnitRepairBotModule (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule |
 | R4 | WARN | `ReturnToBase` — 2 issuers: FransAirCommanderBotModule (no-lease); SquadManagerBotModuleCA (squad); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `Sell` — 2 issuers: BaseBuilderBotModuleCA (no-lease); FransBaseBuilderBotModule (no-lease); all co-running pairs are lease- or gate-separated |
-| R4 | WARN | `SetRallyPoint` — 2 issuers: BaseBuilderBotModuleCA (no-lease); FransBaseBuilderBotModule (no-lease); all co-running pairs are lease- or gate-separated |
+| R4 | WARN | `Sell` — 2 issuers: BaseBuilderBotModuleCA (no-lease); FransBaseBuilderBotModule (no-lease); UNSEPARATED co-runners: BaseBuilderBotModuleCA+FransBaseBuilderBotModule |
+| R4 | WARN | `SetRallyPoint` — 2 issuers: BaseBuilderBotModuleCA (no-lease); FransBaseBuilderBotModule (no-lease); UNSEPARATED co-runners: BaseBuilderBotModuleCA+FransBaseBuilderBotModule |
 | R4 | WARN | `SetUnitStance` — 5 issuers: FransAirCommanderBotModule (no-lease); FransCommanderCoreBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransCommanderCoreBotModule, FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransCommanderCoreBotModule+FransGroundCommanderBotModule, FransCommanderCoreBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule |
-| R4 | WARN | `Stop` — 10 issuers: EngineerBotModule (lease); FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); LoadGarrisonerBotModuleCA (no-lease); SquadManagerBotModuleCA (squad); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransGroundTransferBotModule, FransAirCommanderBotModule+FransMcvExpansionManagerBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+FransGroundTransferBotModule, FransGroundCommanderBotModule+FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundTransferBotModule+FransMcvExpansionManagerBotModule, FransGroundTransferBotModule+FransSeaCommanderBotModule, FransGroundTransferBotModule+FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule+FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule |
+| R4 | WARN | `Stop` — 10 issuers: EngineerBotModule (lease); FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); LoadGarrisonerBotModuleCA (no-lease); SquadManagerBotModuleCA (squad); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransGroundTransferBotModule, FransAirCommanderBotModule+FransMcvExpansionManagerBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransAirCommanderBotModule+LoadGarrisonerBotModuleCA, FransGroundCommanderBotModule+FransGroundTransferBotModule, FransGroundCommanderBotModule+FransMcvExpansionManagerBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+LoadGarrisonerBotModuleCA, FransGroundTransferBotModule+FransMcvExpansionManagerBotModule, FransGroundTransferBotModule+FransSeaCommanderBotModule, FransGroundTransferBotModule+FransSpecOpsCommanderBotModule, FransGroundTransferBotModule+LoadGarrisonerBotModuleCA, FransMcvExpansionManagerBotModule+FransSeaCommanderBotModule, FransMcvExpansionManagerBotModule+FransSpecOpsCommanderBotModule, FransMcvExpansionManagerBotModule+LoadGarrisonerBotModuleCA, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+LoadGarrisonerBotModuleCA, FransSpecOpsCommanderBotModule+LoadGarrisonerBotModuleCA |
 | R4 | WARN | `Unload` — 4 issuers: FransGroundTransferBotModule (no-lease); FransMcvExpansionManagerBotModule (no-lease); FransTransportCommanderBotModule (lease); GarrisonDefenseBotModule (lease); UNSEPARATED co-runners: FransGroundTransferBotModule+FransMcvExpansionManagerBotModule |
 | R5 | WARN | BotLeasePurpose.McvExpansion: no TryClaim/Preempt/Transfer site |
 | R5 | ok | SquadCAType/BotLeasePurpose members checked against their switch/draft/claim sites |
 | R6 | WARN | `ProtectionTypes` in OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs: declared, never read anywhere |
 
-0 ERROR, 29 WARN
+0 ERROR, 31 WARN
 
-R1 checked 87 gated bot-module instances; R2 checked 33 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
+R1 checked 99 gated bot-module instances; R2 checked 55 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.

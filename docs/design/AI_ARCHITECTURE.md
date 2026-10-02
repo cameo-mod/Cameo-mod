@@ -2946,10 +2946,13 @@ alternative exists — no harvester ever strands idle.
 build requests defer to next tick. Essential = construction yards, refineries, power,
 and exactly one in-flight production building (the no-factory deadlock guard).
 
-**Switch map for the round:** `F_concave` (§12.7a), `AB_garrison_contest` + `L_cn2_
-_garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first`,
-`AE_spread_assault` (documents the default-on trio), plus `X_cn3_bridge_repair` /
-`Y_cn3_stealth_squads` from the same day's merges.
+**Switch map for the round (post-consolidation):** `F_concave`/`AG_assault_fanout` (§12.7a),
+`AB_garrison_contest` + `L_cn2_garrison_defense` (contest + man-own), `AC_cover_map_expansion`,
+`AD_spaced_base_placement`, `AE_army_first`, `AF_harvester_spread` (the default-on trio's
+switched parts), plus `X_cn3_bridge_repair` / `Y_cn3_stealth_squads` from the same day's
+merges. (The pre-consolidation `AD_army_first`/`AE_spread_assault` groups were removed from
+`increment_switches.yaml` — they wrote fields the merge deleted and would have contaminated
+`@classic`'s harvester-cap opt-out via the unscoped `HarvesterBotModuleCA` match.)
 
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)

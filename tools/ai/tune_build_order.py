@@ -39,14 +39,19 @@ import pathlib
 import re
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import ai_log_common as c  # noqa: E402
+
 REPO = pathlib.Path(__file__).resolve().parents[2]
 LEARNED_PATH = REPO / "mods" / "cameo" / "ai" / "learned" / "build_order_knobs.yaml"
 
 KNOBS = ["tempo", "greed", "production", "tech", "defence", "power_margin", "expansion", "support"]
 # `expansion` is published for the expansion planner but no consumer reads it yet, so an experiment on it could only measure noise.
 TUNABLE = [k for k in KNOBS if k != "expansion"]
-SPEED_WEIGHT = 0.25
-SPEED_REF_TICKS = 54000  # a win at 36 game minutes earns no bonus
+# The objective is shared: ai_log_common.match_score (SCORE_SPEED_WEIGHT/SCORE_SPEED_REF_TICKS) - the
+# build-order report displays the same number this gate optimizes (review 2026-10-02 §6.2).
+SPEED_WEIGHT = c.SCORE_SPEED_WEIGHT
+SPEED_REF_TICKS = c.SCORE_SPEED_REF_TICKS
 MIN_MATCHES = 20
 Z_CRIT = 1.96
 DELTA = 100  # thousandths: one coordinate step is +-10%
@@ -80,11 +85,8 @@ def score_match(outcome: str, killed: float, lost: float, duration_ticks: int) -
     """(score, win) of one match, or None when it carries no signal (undecided, too short)."""
     if outcome not in ("won", "lost") or duration_ticks < MIN_DURATION_TICKS:
         return None
-    win = 1.0 if outcome == "won" else 0.0
-    total = killed + lost
-    margin = (killed - lost) / total if total > 0 else 0.0
-    speed = SPEED_WEIGHT * min(1.0, max(0.0, 1.0 - duration_ticks / SPEED_REF_TICKS)) if win else 0.0
-    return win + margin + speed, win
+    s = c.match_score(outcome, killed, lost, duration_ticks)
+    return s["score"], s["win"]
 
 
 def build_order_of(situation: dict) -> dict | None:
