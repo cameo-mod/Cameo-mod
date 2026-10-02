@@ -1,3 +1,20 @@
+# 2026-10-02 — NOVA: DEF-3 remote-outpost defence coverage (switch Z_def3_remote_outpost_coverage)
+
+- `DefenseCoveragePlanner.CoverRemoteOutposts`: own building cells cluster into
+  fronts (`ClusterFronts`, single-linkage at FrontLinkRadius 14); the defence
+  annulus centres on `PickFrontCenter` — the front with the most uncovered cells
+  — instead of the randomly-picked yard. An expansion's naked refinery outscores
+  the covered main base, so towers follow the crawl. Perimeter/interior quota and
+  threat alignment measure around the effective centre; flag-off is verbatim
+  (same centre, same counts). Placement legality unchanged — any
+  GivesBuildableArea provider legalises the remote cell.
+- Smoke evidence motivating it: the 65k-tick loss showed hard's economy worked
+  (607k earned) but 102 buildings fell vs 26 — remote refineries were
+  structurally unprotectable (annulus around the random yard only).
+- DAWN PR #759 (CN-3 bridge repair, switch X) reviewed+merged — master
+  `85c95b257`; letters now D->X allocated, DAWN claimed Y (stealth squads),
+  Z is this group. Next free: AA.
+
 # 2026-10-02 — NOVA: squad-micro TargetActor null-guards + first armed 2v2
 
 - EMBER's MI squad micro (`SquadMicroEnabled`, INC-1) dereferenced

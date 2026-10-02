@@ -40,6 +40,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("A cell is on the perimeter when its edgeness (percent of the maximum defence radius) is at least this.")]
 		public readonly int PerimeterEdgePercent = 70;
 
+		[Desc("Cover remote expansion fronts too: cluster own buildings, advise the defence where the most cells are uncovered instead of only around the randomly-picked yard.")]
+		public readonly bool CoverRemoteOutposts = false;
+
+		[Desc("Two building cells belong to one front when they are at most this many cells apart (Chebyshev).")]
+		public readonly int FrontLinkRadius = 14;
+
 		[Desc("Search annulus (cells) when no base builder is found.")]
 		public readonly int MinimumRadius = 5;
 
@@ -161,6 +167,72 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return total == 0 || perimeterCount * 100 < sharePercent * total;
 		}
 
+		/// <summary>
+		/// DEF-3: cluster building cells into fronts — greedy single-linkage, two cells join when
+		/// within `linkRadius` (Chebyshev). Returns each cluster's cells; order is the discovery
+		/// order of the sorted input, so the result is deterministic for the tests.
+		/// </summary>
+		public static List<List<CPos>> ClusterFronts(IReadOnlyCollection<CPos> cells, int linkRadius)
+		{
+			var remaining = new List<CPos>(cells.OrderBy(c => c.X).ThenBy(c => c.Y));
+			var fronts = new List<List<CPos>>();
+			while (remaining.Count > 0)
+			{
+				var front = new List<CPos> { remaining[0] };
+				remaining.RemoveAt(0);
+				for (var i = 0; i < front.Count; i++)
+					for (var j = remaining.Count - 1; j >= 0; j--)
+						if (Math.Abs(front[i].X - remaining[j].X) <= linkRadius
+							&& Math.Abs(front[i].Y - remaining[j].Y) <= linkRadius)
+						{
+							front.Add(remaining[j]);
+							remaining.RemoveAt(j);
+						}
+				fronts.Add(front);
+			}
+
+			return fronts;
+		}
+
+		/// <summary>
+		/// DEF-3: the centroid of the front whose cells still lack the most coverage — the next
+		/// defence defends what is actually naked, which is how remote outposts earn a tower
+		/// instead of queueing behind the (already covered) main base. Ties go to the front with
+		/// more cells total, then to the lowest centroid coordinates — deterministic both ways.
+		/// Returns the picked cluster's centroid; null when every front is fully covered.
+		/// </summary>
+		public static CPos? PickFrontCenter(IReadOnlyCollection<CPos> baseCells,
+			IEnumerable<(CPos Center, int Range)> defences, int linkRadius)
+		{
+			var fronts = ClusterFronts(baseCells, linkRadius);
+			List<CPos> bestFront = null;
+			var bestUncovered = 0;
+			foreach (var front in fronts)
+			{
+				var uncovered = front.Count(c => !Covered(c, defences));
+				if (uncovered > bestUncovered ||
+					(uncovered == bestUncovered && uncovered > 0 && bestFront != null &&
+						(front.Count > bestFront.Count ||
+							(front.Count == bestFront.Count && CompareCell(Centroid(front), Centroid(bestFront)) < 0))))
+				{
+					bestUncovered = uncovered;
+					bestFront = front;
+				}
+			}
+
+			return bestFront == null ? (CPos?)null : Centroid(bestFront);
+		}
+
+		static int CompareCell(CPos a, CPos b)
+		{
+			return a.X != b.X ? a.X.CompareTo(b.X) : a.Y.CompareTo(b.Y);
+		}
+
+		static CPos Centroid(List<CPos> cells)
+		{
+			return new CPos(cells.Sum(c => c.X) / cells.Count, cells.Sum(c => c.Y) / cells.Count);
+		}
+
 		/// <summary>The specialties a defence holds; one with none falls back to anti-air (AntiAirTypes) else anti-armour.</summary>
 		public static IReadOnlyCollection<string> RolesOf(IReadOnlyDictionary<string, HashSet<string>> specialties, string name, bool antiAirType)
 		{
@@ -215,11 +287,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							byRole[role] = list = new List<(CPos Center, int Range)>();
 						list.Add((b.Location, r));
 					}
-
-					if (Edgeness(b.Location, baseCenter, maxRadius) >= Info.PerimeterEdgePercent)
-						perimeter++;
-					else
-						interior++;
 				}
 			}
 
@@ -229,6 +296,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var list = byRole.TryGetValue(role, out var l) ? l : new List<(CPos Center, int Range)>();
 				uncovered[role] = baseCells.Where(c => !Covered(c, list)).ToArray();
+			}
+
+			// DEF-3: with remote-outpost cover the annulus centres on the FRONT needing coverage
+			// most — an expansion's naked cells outscore the main base's covered ones, so towers
+			// walk out to the crawled-to fields instead of stacking at home. Any buildable-area
+			// provider still legalises the cell (IsCloseEnoughToBase is per-provider), so the
+			// remote yard's own buildable ring supplies the placement.
+			var roleDefences = byRole.Values.SelectMany(l => l).ToArray();
+			if (Info.CoverRemoteOutposts && PickFrontCenter(baseCells, roleDefences, Info.FrontLinkRadius) is CPos frontCenter)
+				baseCenter = frontCenter;
+
+			// Perimeter quota is measured around the EFFECTIVE centre (the front, when DEF-3
+			// retargeted it) — an outpost's own ring splits interior/perimeter locally.
+			foreach (var d in roleDefences)
+			{
+				if (Edgeness(d.Center, baseCenter, maxRadius) >= Info.PerimeterEdgePercent)
+					perimeter++;
+				else
+					interior++;
 			}
 
 			var cells = world.Map.FindTilesInAnnulus(baseCenter, minRadius, maxRadius).ToArray();

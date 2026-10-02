@@ -5139,6 +5139,14 @@ circumference … but still some defenses to protect against intruders who have 
 * ~75% of defences stand on the rim (`PerimeterSharePercent`), biased toward the enemy (fog-honest: remembered enemy
   defences, else the map centre); the rest inside, by coverage only.
 * Implementation: `DefenseCoveragePlanner` (genericbot) through `IBotDefensePlacementAdvisor`; `classic` keeps its placement.
+* **DEF-3 (2026-10-02, NOVA; switch `Z_def3_remote_outpost_coverage`, default off):** "the whole base" is every
+  expansion front, not only the first yard. `CoverRemoteOutposts` clusters own building cells into fronts
+  (single-linkage, `FrontLinkRadius`) and centres the placement annulus on the front with the most uncovered
+  cells — a naked crawled-to refinery outranks the already-covered main base. Perimeter/interior quota and the
+  enemy-side bias measure around that front's centre. Legality is unchanged (`IsCloseEnoughToBase` accepts any
+  buildable-area provider, so the remote yard's ring supplies the cell); flag-off keeps the verbatim
+  random-yard single-centre behaviour. Defences are still buildings: they only reach a front the crawl has
+  already touched.
 
 ### 19.8 A bot acts only through orders (2026-10-01) — binding
 

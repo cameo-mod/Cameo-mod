@@ -103,3 +103,6 @@ groups:
   X_cn3_bridge_repair:               # DAWN CN3 - BridgeRepairBotModule (CN port): idle engineers enter damaged bridge huts; demand builds one when none exist
     GrantConditionOnBotOwner@cn3bridgerepair:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  Z_def3_remote_outpost_coverage:    # NOVA DEF-3 — defences advise around the most-uncovered expansion front, not just the picked yard
+    DefenseCoveragePlanner:
+      CoverRemoteOutposts: true

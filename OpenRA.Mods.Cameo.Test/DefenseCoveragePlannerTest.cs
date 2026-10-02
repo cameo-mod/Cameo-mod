@@ -171,5 +171,52 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(ring, Is.EqualTo(15));
 		}
+
+		// DEF-3: building cells within FrontLinkRadius of each other form one front; a gap
+		// beyond it splits the map into separate fronts (the outpost is its own front).
+		[Test]
+		public void ClusterFrontsSplitsOnTheLinkRadius()
+		{
+			var cells = new[]
+			{
+				new CPos(10, 10), new CPos(12, 10), new CPos(10, 13),   // main base blob
+				new CPos(40, 40), new CPos(41, 40),                     // remote outpost
+			};
+			var fronts = DefenseCoveragePlanner.ClusterFronts(cells, 14);
+			Assert.That(fronts.Count, Is.EqualTo(2));
+			Assert.That(fronts[0].Count, Is.EqualTo(3));
+			Assert.That(fronts[1].Count, Is.EqualTo(2));
+
+			// A chain bridging the gap joins them back into one front (single linkage is
+			// transitive: (24,24) touches the blob, (33,30) chains onward to the outpost).
+			var bridged = cells.Concat(new[] { new CPos(24, 24), new CPos(33, 30) }).ToArray();
+			Assert.That(DefenseCoveragePlanner.ClusterFronts(bridged, 14).Count, Is.EqualTo(1));
+		}
+
+		// DEF-3: the next defence goes to the front with the most uncovered cells — the naked
+		// outpost beats the covered main base even though the base has far more cells.
+		[Test]
+		public void TheNakedOutpostFrontWinsTheNextDefence()
+		{
+			var cells = new[]
+			{
+				new CPos(10, 10), new CPos(12, 10), new CPos(10, 13), new CPos(11, 11),
+				new CPos(40, 40), new CPos(41, 40),
+			};
+			var coveringTheBase = new[] { (new CPos(11, 11), 6) };
+			var pick = DefenseCoveragePlanner.PickFrontCenter(cells, coveringTheBase, 14);
+			Assert.That(pick, Is.Not.Null, "the outpost's cells are uncovered — it wins");
+			Assert.That(pick.Value.X, Is.EqualTo(40), "outpost centroid x");
+			Assert.That(pick.Value.Y, Is.EqualTo(40), "outpost centroid y");
+
+			// Cover the outpost too and nothing remains naked: no retarget.
+			var coveringAll = new[] { (new CPos(11, 11), 6), (new CPos(40, 40), 5) };
+			Assert.That(DefenseCoveragePlanner.PickFrontCenter(cells, coveringAll, 14), Is.Null);
+
+			// With no defences at all the bigger front (the base) wins by the tie-break.
+			var naked = DefenseCoveragePlanner.PickFrontCenter(cells, new (CPos, int)[0], 14);
+			Assert.That(naked, Is.Not.Null);
+			Assert.That(naked.Value.X, Is.LessThan(20), "all naked: the larger base front wins");
+		}
 	}
 }
