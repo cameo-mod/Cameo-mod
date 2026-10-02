@@ -31,7 +31,7 @@ ConquestVictoryConditions decides on elimination and the map's locked
 TimeLimitManager is the stalemate failsafe (a timed-out duel records both
 bots "lost" — an honest draw, not an engine-invented winner).
 
---team-size 2 turns each side into a duo (2v2, TC-3): --bot-a/--bot-b take a
+--team-size N turns each side into an N-player team (2v2+): --bot-a/--bot-b take a
 comma-separated bot type per seat (a single name duplicates across both
 slots) and the default map becomes the shipped doubles map
 mods/cameo/maps/_ra_doubles.oramap, whose consecutive Multi pairs are the
@@ -220,17 +220,17 @@ def build_matchups(
             else:
                 a, b = fb, fa
             ba, bb = (bots_a, bots_b) if not (swap_bots and repeat % 2 == 1) else (bots_b, bots_a)
-            if team_size == 2:
+            if team_size >= 2:
                 matchups.append(
                     {
                         "index": index,
                         "repeat": repeat,
-                        "team_size": 2,
+                        "team_size": team_size,
                         "team_a": [{"bot": bot, "faction": a} for bot in ba],
                         "team_b": [{"bot": bot, "faction": b} for bot in bb],
-                        "slots_a": [0, 1],
-                        "slots_b": [2, 3],
-                        "variant": f"ai_duo_{a}_{'_'.join(ba)}__vs__{b}_{'_'.join(bb)}".replace(" ", "_"),
+                        "slots_a": list(range(team_size)),
+                        "slots_b": list(range(team_size, 2 * team_size)),
+                        "variant": f"ai_{team_size}v{team_size}_{a}_{'_'.join(ba)}__vs__{b}_{'_'.join(bb)}".replace(" ", "_"),
                     }
                 )
             else:
@@ -482,12 +482,13 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
 
     spawns = mp_spawn_cells(text)
     team_size = matchup.get("team_size", 1)
-    if team_size == 2:
-        if len(spawns) < 4:
-            fail(f"team-size 2 needs a map with at least four mpspawn actors, got {len(spawns)}")
-        for ref in ("Multi0", "Multi1", "Multi2", "Multi3"):
-            if text.count(f"\tPlayerReference@{ref}:") != 1:
-                fail(f"team-size 2 expects exactly one PlayerReference@{ref} block")
+    if team_size >= 2:
+        if len(spawns) < 2 * team_size:
+            fail(f"team-size {team_size} needs a map with at least {2 * team_size} mpspawn actors, got {len(spawns)}")
+        for i in range(2 * team_size):
+            ref = f"Multi{i}"
+            if text.count(f"	PlayerReference@{ref}:") != 1:
+                fail(f"team-size {team_size} expects exactly one PlayerReference@{ref} block")
     if not re.search(r"^Rules: ", text, re.MULTILINE):
         categories = re.search(r"^Categories: .+$", text, re.MULTILINE)
         if not categories:
@@ -499,7 +500,7 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
         fail("real-map mode expects exactly one PlayerReference@Multi0 block")
     text = text.replace(marker, REFEREE_BLOCK + marker, 1)
 
-    if team_size == 2:
+    if team_size >= 2:
         slots_a = matchup["slots_a"]
         slots_b = matchup["slots_b"]
         sides = []
@@ -513,7 +514,8 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
                 member = team[member_index]
                 text = patch_mp_block(
                     text, ref, member["bot"], member["faction"], spawns[slot],
-                    enemy_refs, ally_refs=[f"Multi{slots[1 - member_index]}"],
+                    enemy_refs,
+                    ally_refs=[f"Multi{s}" for s in slots if s != slot],
                 )
                 sides.append((ref, member["faction"], spawns[slot]))
     else:
@@ -939,10 +941,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--factions", default="td_gdi,td_nod", help="comma-separated faction internal names")
     parser.add_argument("--bot-a", default="hard", help="bot type for side A (default: hard — the Frankenstein candidate); "
-                            "with --team-size 2 a comma-separated list (hard,classic) — one name fills both slots")
+                            "with --team-size N a comma-separated list (hard,classic,...) — one name fills all slots")
     parser.add_argument("--bot-b", default="classic", help="bot type for side B (default: classic — the omniscient pre-wave reference bot); "
-                            "with --team-size 2 a comma-separated list — one name fills both slots")
-    parser.add_argument("--team-size", type=int, choices=(1, 2), default=1,
+                            "with --team-size N a comma-separated list — one name fills all slots")
+    parser.add_argument("--team-size", type=int, choices=range(1, 9), default=1,
                         help="members per side: 1 = duel (default), 2 = 2v2 — each team's seats are "
                              "consecutive Multi pairs on a 4-player map (default _ra_doubles.oramap)")
     parser.add_argument("--repeats", type=int, default=4, help="matches per matchup; sides alternate (default: 4)")
@@ -1038,10 +1040,10 @@ def main() -> int:
     # One variant dir per distinct matchup (repeats reuse it).
     variants = {}
     for m in matchups:
-        if args.team_size == 2:
+        if args.team_size >= 2:
             variants.setdefault(
                 m["variant"],
-                {"team_size": 2, "team_a": m["team_a"], "team_b": m["team_b"],
+                {"team_size": m["team_size"], "team_a": m["team_a"], "team_b": m["team_b"],
                  "slots_a": m["slots_a"], "slots_b": m["slots_b"]},
             )
         else:
@@ -1062,7 +1064,7 @@ def main() -> int:
         f"map={_short_hash(batch_fingerprint['map_sha256'])}"
     )
     for name, v in variants.items():
-        if args.team_size == 2:
+        if args.team_size >= 2:
             print(
                 f"  variant {name}: "
                 f"{v['team_a'][0]['faction']}({'+'.join(m['bot'] for m in v['team_a'])})@{'/'.join(map(str, v['slots_a']))} vs "
@@ -1077,7 +1079,7 @@ def main() -> int:
         return 0
 
     for name, v in variants.items():
-        if args.team_size == 2:
+        if args.team_size >= 2:
             write_variant(map_source, variants_root / name, v, args.time_limit)
         else:
             write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)

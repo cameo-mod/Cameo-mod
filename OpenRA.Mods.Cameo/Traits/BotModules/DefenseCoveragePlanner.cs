@@ -43,6 +43,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Cover remote expansion fronts too: cluster own buildings, advise the defence where the most cells are uncovered instead of only around the randomly-picked yard.")]
 		public readonly bool CoverRemoteOutposts = false;
 
+		[Desc("CN4 consumer: when region roles are published, an UNCOVERED front in a Military or Outpost",
+			"region outranks every non-frontier front — defence walks to the frontier first. Needs CoverRemoteOutposts.")]
+		public readonly bool UseRegionRoles = false;
+
 		[Desc("Two building cells belong to one front when they are at most this many cells apart (Chebyshev).")]
 		public readonly int FrontLinkRadius = 14;
 
@@ -68,6 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Own buildings, kept from the world's add/remove events: no enumeration of the world's actors.
 		readonly HashSet<Actor> buildings = new();
 		BaseBuilderBotModuleCA[] baseBuilders;
+		IBotRegionRoles regionRoles;
 		IReadOnlyDictionary<string, HashSet<string>> specialties;
 
 		public DefenseCoveragePlanner(Actor self, DefenseCoveragePlannerInfo info)
@@ -223,6 +228,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return bestFront == null ? (CPos?)null : Centroid(bestFront);
 		}
 
+		/// <summary>CN4: a region role that marks a frontier — the ground that faces (or gates) the enemy.</summary>
+		public static bool IsFrontierRole(RegionRole role) => role is RegionRole.Military or RegionRole.Outpost;
+
+		/// <summary>
+		/// CN4/DEF-3: like <see cref="PickFrontCenter"/>, but only fronts whose centroid lands in a
+		/// frontier region (Military or Outpost) compete — the frontier is defended before the interior,
+		/// whatever the uncovered count elsewhere. Null when no frontier front has uncovered cells;
+		/// the caller then falls back to the plain pick (a naked core base is never left undefended
+		/// behind a covered frontier).
+		/// </summary>
+		public static CPos? PickFrontierCenter(IReadOnlyCollection<CPos> baseCells,
+			IEnumerable<(CPos Center, int Range)> defences, int linkRadius, Func<CPos, RegionRole> roleOf)
+		{
+			var fronts = ClusterFronts(baseCells, linkRadius);
+			List<CPos> bestFront = null;
+			var bestUncovered = 0;
+			foreach (var front in fronts)
+			{
+				if (!IsFrontierRole(roleOf(Centroid(front))))
+					continue;
+
+				var uncovered = front.Count(c => !Covered(c, defences));
+				if (uncovered > bestUncovered ||
+					(uncovered == bestUncovered && uncovered > 0 && bestFront != null &&
+						(front.Count > bestFront.Count ||
+							(front.Count == bestFront.Count && CompareCell(Centroid(front), Centroid(bestFront)) < 0))))
+				{
+					bestUncovered = uncovered;
+					bestFront = front;
+				}
+			}
+
+			return bestFront == null ? (CPos?)null : Centroid(bestFront);
+		}
+
 		static int CompareCell(CPos a, CPos b)
 		{
 			return a.X != b.X ? a.X.CompareTo(b.X) : a.Y.CompareTo(b.Y);
@@ -304,8 +344,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// provider still legalises the cell (IsCloseEnoughToBase is per-provider), so the
 			// remote yard's own buildable ring supplies the placement.
 			var roleDefences = byRole.Values.SelectMany(l => l).ToArray();
-			if (Info.CoverRemoteOutposts && PickFrontCenter(baseCells, roleDefences, Info.FrontLinkRadius) is CPos frontCenter)
-				baseCenter = frontCenter;
+			if (Info.CoverRemoteOutposts)
+			{
+				// CN4 consumer: a still-uncovered front inside a frontier region (Military/Outpost)
+				// outranks every interior front — the seam advises, the defence still belongs to the
+				// module whose cells are naked. Falls back to the plain uncovered-max pick.
+				CPos? frontCenter = null;
+				if (Info.UseRegionRoles)
+				{
+					regionRoles ??= player.PlayerActor.TraitsImplementing<IBotRegionRoles>()
+						.FirstOrDefault(p => p.RolesReady);
+					if (regionRoles != null && regionRoles.RolesReady)
+						frontCenter = PickFrontierCenter(baseCells, roleDefences, Info.FrontLinkRadius, regionRoles.RoleAtCell);
+				}
+
+				if (frontCenter == null)
+					frontCenter = PickFrontCenter(baseCells, roleDefences, Info.FrontLinkRadius);
+				if (frontCenter is CPos picked)
+					baseCenter = picked;
+			}
 
 			// Perimeter quota is measured around the EFFECTIVE centre (the front, when DEF-3
 			// retargeted it) — an outpost's own ring splits interior/perimeter locally.

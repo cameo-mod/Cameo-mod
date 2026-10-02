@@ -24,6 +24,48 @@
   RA2Mod, WC2 — the earlier "no plug content" claim is wrong; the correct
   claim is "the instant-plug module is unwired and superseded".
 
+# 2026-10-02 — EMBER: 6v6 team harness + coalition-general design + first evidence
+
+- `run_ai_match_batch.py --team-size N` generalised from {1,2} to 1-8
+  (branch `devin/ember/team-batch-harness`): Team A fills Multi0..N-1, Team B
+  MultiN..2N-1; `ally_refs` now lists every teammate (was hard-coded to one
+  partner). 1v1/2v2 dry-runs unchanged; 6v6 dry-run emits the expected
+  `ai_6v6_...` variant; live 6v6 launched on `dusttown-battle-6v6.oramap`
+  (verified 12 PlayerReferences, 12 mpspawns): 6×`hard` vs 6×`classic`,
+  td_gdi mirror — team wiring inspected in the patched map.yaml, reciprocal
+  Allies/Enemies correct, `Creeps` hostile to all.
+- New `tools/ai/team_coordination_report.py`: scores teams off
+  cameo-ai-missions records — contested capture claims, shared-target push
+  windows, defend missions, target breadth. §12.18 acceptance metrics.
+- **First 6v6 finding (tick ~30k, mid-match): 27 contested capture claims.**
+  Every teammate's EngineerBotModule independently evaluates capturables —
+  all six COMMIT `capture:oilb:120`, five RELEASE after the lease resolves.
+  Order-gate correctness holds (only the winner's engineer captures), but
+  six engineer dispatches burn for one derrick. TC-2c deconflicts expansion
+  *fields*; capturable *actors* need the same channel → folded into the
+  TC-3 design as a CoalitionDirective responsibility.
+- `AI_ARCHITECTURE.md` §12.18 added — the coalition general / "hivemind"
+  design the maintainer asked for: the coalition commander is a *pure
+  deterministic fold* (`CoalitionPlan(broadcasts ∪ own)`) evaluated
+  identically by every member each snapshot — no elected unit, no second
+  order-issuer. Publishes `CoalitionDirective{MainTarget, Phase,
+  RescueAssignments, Sectors}`; consumers are bias inputs to the existing
+  owners (SquadManager / MasterAi / ExpansionPlanner / DefenceCoverage).
+  Grounded in Lanchester square-law concentration, the AAMAS-2019
+  hierarchical-paradigm comparison, BiCNet bidirectional comms, and ZK
+  sector-responsibility doctrine. Switch letters planned BB–BE.
+- `AI_DATAFLOW.md`: coalition fold added to SYNTHESIZE + team-posture row;
+  dormant-table correction confirmed already landed (NOVA took the fix).
+- Bridge-repair status: engine `RepairsBridges` trait + `BRIDGEHUT` actors +
+  `BridgeRepairBotModule` (CN3, switch X) + #764 single-owner yield are all
+  on master — runtime verification still needs a bridge-map match; the 6v6
+  dusttown map has no bridges so a dedicated scenario is queued.
+- Pending: plug production runtime proof (BuildingAddons→PlacePlug path —
+  td_gdi ion uplink needs deep tech; wc2_orcs stronghold / naxis bunker
+  addons are the cheapest reachable plugs for a dedicated probe); regreen
+  suite triage (earlier run stalled under RAM pressure, ~57 F pattern that
+  reads as systematic drift); merge of this branch post-match.
+
 # 2026-10-02 — NOVA: DEF-3 remote-outpost defence coverage (switch Z_def3_remote_outpost_coverage)
 
 - `DefenseCoveragePlanner.CoverRemoteOutposts`: own building cells cluster into
@@ -16322,6 +16364,56 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
 
+- 2026-10-02 nova: CN4 region-roles harvest — `RegionRolesBotModule` (port of CN's
+  CNRegionManagerBotModule, switch `AA_cn4_region_roles`) classifies each held zone-graph region
+  as Core/Economy/Military/Outpost from resource+space+security scores; exclusive Core+Military
+  with hold-timer locks and preemption; publishes `IBotRegionRoles`. Reads OUR `IBotZoneTopology`
+  belief (fog-honest RegionOwner) where the donor was omniscient; buildings tracked via
+  add/remove events (no world enumeration); deterministic ActorID refresh de-phase (donor's
+  LocalRandom was a desync hazard). First consumer: `DefenseCoveragePlanner.UseRegionRoles` —
+  an uncovered front in a Military/Outpost region outranks interior fronts for DEF-3's coverage
+  pick. 625/625 tests (11 new), fog PASS, frankenstein PASS. EMBER-tool note: R4 now also flags
+  IBotRequestPauseUnitProduction (BaseBuilderCA + BotGlobalUnitBudget) — a real duplicate-authority
+  seam worth a future single-owner pass.
+- 2026-10-02 nova: bridge-repair single-owner consolidation — the last real decision overlap
+  from the dataflow audit. When `cn3_bridge_repair` arms BridgeRepairBotModule, BOTH modules
+  scanned the same huts; leases deduped units but not targets (two repairers could converge on
+  one hut). EngineerBotModule now skips its RepairBridge job whenever an enabled
+  BridgeRepairBotModule shares the player actor — cn3_bridge_repair arming is a clean
+  donor-vs-incumbent swap (the CN module owns huts + repairer production demand), Engineer is
+  the fallback when X is off. No new switch letter, zero yaml, flag-off parity. 614/614 tests.
+- 2026-10-02 nova: LC8 dangling-outcome fix — EMBER's round-trip found open mission attempts
+  never writing a terminal record at GameOver (4 dangling capture:* attempts in the 2v2 smoke,
+  57 across the A/B corpus). New `BotMissionAttemptTracker` (CA, player actor, genericbot ||
+  classicbot): `BotMissionLog.Write` registers every attempt record with it (no-op when absent,
+  so executors change nothing); `INotifyActorDisposing.Disposing` flushes
+  `Released(match_end)` for whatever is still open. `match_end` added to the shared reason set.
+  614/614 tests, fog PASS 246, frankenstein PASS, boot-gate PASS.
+  Also verified EMBER's audit_bot_wiring.py against master: her R1 (cn-quartet + plug_spawn
+  "unreachable") and R3 (18 fransbot-profile seam gaps) are tool false-positives — the tool
+  doesn't model apply_increment_switches Bots: rewrites (the arm path) or fransbot.yaml
+  providers. R4/R5/R7 corroborate the dataflow audit.
+- 2026-10-02 nova: dead-module sweep CORRECTED on review — `PlugSpawnerBotModuleCA` is NOT dead:
+  27 plug actors across 11 ContentPacks carry whole tech chains (WC2 townhall->keep->castle,
+  Zerg hatchery->lair->hive, TS power turbines + superweapon uplinks, TD temple nuke + ion
+  uplink, refinery collectors, Naxis bunker add-ons, CABAL silo) — no bot could produce any of
+  them. Restored + extended to a plug->hosts `Plugs:` map (one module covers all kinds; upstream
+  AS needed one variant per plug) + completed its unused techTree field: each plug's
+  Buildable.Prerequisites gate at order-issue AND resolve (no tech skipping). Wired
+  `genericbot && plug_spawn`, switch group F, fransbot default grant. Still deleted:
+  `McvManagerBotModuleCA` + `PowerDownBotModuleCA` (superseded by live engine copies). Verified:
+  614/614 tests, fog PASS 246 sites, frankenstein PASS, boot-gate PASS.
+  EMBER correction accepted: UseMissions/UseRiskRouting/PublishMissions are C# default-true and
+  LIVE — the dataflow doc's dormant table now lists the real dormant flags.
+- 2026-10-02 nova: dead-module sweep — the round-trip audit found three ConditionalTrait
+  bot modules with NO yaml wiring anywhere (ai.yaml + fransbot.yaml): `McvManagerBotModuleCA`
+  (CA vendored MCV deployer, superseded by engine `McvExpansionManagerBotModule`),
+  `PowerDownBotModuleCA` (superseded by engine `PowerDownBotModule`, wired ai.yaml:455),
+  `PlugSpawnerBotModuleCA` (Cameo port of CA plug spawning, no plug content). All deleted;
+  `ai_frankenstein_manifest` + fog manifests refreshed (245 sites, PASS). Also corrected the
+  feared MCV double-request: the planner's greedy RequestMcv and the engine manager's cash
+  gate both dedupe into RequestUnitProduction (AllQueued + RequestedProductionCount==0) —
+  benign by construction.
 - 2026-10-02 nova: AI dataflow audit — `docs/design/AI_DATAFLOW.md` added: the full
   module dataflow chart (observe→synthesize→plan→arbitrate→execute→verify), the
   decision-ownership table, and the coverage audit results: all 31 `IBot*` seams have

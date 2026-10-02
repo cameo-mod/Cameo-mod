@@ -11,6 +11,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -46,9 +48,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The executor's order ended (the unit went idle) without a result either way.</summary>
 		public const string Dropped = "dropped";
 
+		/// <summary>The match tore down while the attempt was still open. Written by
+		/// <see cref="BotMissionAttemptTracker"/>, never by an executor.</summary>
+		public const string MatchEnd = "match_end";
+
 		public static readonly IReadOnlyCollection<string> Shared = new[]
 		{
-			NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done, Dropped
+			NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done, Dropped, MatchEnd
 		};
 
 		/// <summary>Null (no reason), one of the shared reasons, or an `x_` private reason of lowercase words.</summary>
@@ -133,6 +139,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (record?.Player == null || string.IsNullOrEmpty(record.MissionId))
 				return;
 
+			// LC8: keep the player's open-attempt ledger in step so match-end teardown can
+			// release whatever never reached a terminal state. Note() is a no-op when the
+			// trait is absent (classic without the tracker, humans) — callers change nothing.
+			record.Player.PlayerActor?.TraitOrDefault<BotMissionAttemptTracker>()?.Note(record);
+
 			// A reason outside the shared set is a contract bug in the emitter: write it, but mark it so the story tool
 			// and tests catch it instead of the archive silently growing a dialect.
 			if (!BotMissionReasons.IsValid(record.Reason))
@@ -146,6 +157,58 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var sink in world.WorldActor.TraitsImplementing<IBotMissionRecordSink>())
 				sink.MissionRecorded(record);
+		}
+	}
+
+	[TraitLocation(SystemActors.Player)]
+	[Desc("LC8 (mission outcomes): keeps the set of open mission attempts and writes a terminal",
+		"Released(match_end) record for anything still open when the player's actor tears down,",
+		"so no attempt stays dangling past GameOver. Bookkeeping only — never orders.")]
+	public sealed class BotMissionAttemptTrackerInfo : TraitInfo
+	{
+		public override object Create(ActorInitializer init) { return new BotMissionAttemptTracker(init.Self, this); }
+	}
+
+	public sealed class BotMissionAttemptTracker : INotifyActorDisposing
+	{
+		readonly Player player;
+
+		// (missionId, attempt) -> executor name, for every attempt whose last record was non-terminal.
+		readonly Dictionary<(string, int), string> openAttempts = new();
+
+		public BotMissionAttemptTracker(Actor self, BotMissionAttemptTrackerInfo info)
+		{
+			player = self.Owner;
+		}
+
+		public void Note(BotMissionRecord record)
+		{
+			if (record.Event != null)
+				return;
+
+			var key = (record.MissionId, record.Attempt);
+			if (BotMissionLog.IsTerminal(record.State))
+				openAttempts.Remove(key);
+			else
+				openAttempts[key] = record.Executor;
+		}
+
+		void INotifyActorDisposing.Disposing(Actor self)
+		{
+			// Copy before flushing: each Write re-enters Note() on the terminal record.
+			foreach (var kv in openAttempts.ToList())
+			{
+				openAttempts.Remove(kv.Key);
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player,
+					MissionId = kv.Key.Item1,
+					Attempt = kv.Key.Item2,
+					State = BotMissionAttemptState.Released,
+					Reason = BotMissionReasons.MatchEnd,
+					Executor = kv.Value
+				});
+			}
 		}
 	}
 }

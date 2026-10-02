@@ -23,8 +23,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	// CN3 (AI_MASTER_PLAN §3, crystallized-nexus 30cf70a): port of CNBridgeRepairBotModule. Scans the map's
 	// bridge huts every RepairScanInterval ticks and orders owned idle `RepairsBridges` units into damaged
 	// ones (worst damage first, one repairer per hut); when no repairer exists at all it requests one from
-	// the unit builders, capped at MaximumRepairers. EngineerBotModule keeps its own RepairBridge job —
-	// this module is the CN take on the same decision, behind `cn3_bridge_repair` until its increment A/B.
+	// the unit builders, capped at MaximumRepairers. When this module is enabled it owns hut repair:
+	// EngineerBotModule skips its own RepairBridge job (one owner per decision), so arming
+	// `cn3_bridge_repair` is a clean incumbent-vs-donor swap for the increment A/B, not an additive layer.
 	//
 	// Cameo changes vs the donor:
 	//  - MP determinism (architecture §1.6): the donor's `world.LocalRandom.Next(RepairScanInterval)` scan
