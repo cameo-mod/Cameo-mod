@@ -34,6 +34,24 @@
   `BridgeRepairBotModule` (CN3, switch X) + #764 single-owner yield are all
   on master — runtime verification still needs a bridge-map match; the 6v6
   dusttown map has no bridges so a dedicated scenario is queued.
+- Plug verdict corrected (verified, 2026-10-02): `PlugSpawnerBotModuleCA` is
+  the SOLE bot path to plugs — `BaseBuilderQueueManagerCA`'s `PlacePlug`
+  placement is live but `ChooseBuildingToBuild` only walks `BuildingFractions`
+  + named want-lists, and no plug actor is listed anywhere. The module pays
+  real cost (`TakeCash`, `IgnoreCost: false`) and gates on tech prereqs
+  (incl. host-provided `*upgradeavailable` tokens, verified live). It is
+  load-bearing: `~zerg_lair` / `wc2_orcs_stronghold` gate whole tech trees.
+  NOVA restored+extended it (plug→hosts map) behind group `F_plug_spawn` —
+  correct disposition is arm, not delete. Earlier "no plug content" claim
+  was wrong twice.
+- Runtime test plans queued (blocked on the 6v6 driver):
+  (a) plug: arm `F_plug_spawn` on a scratch worktree, run `--factions zerg`
+      or `wc2_orcs` mirror (cheap plug chains), grep arsenal for
+      `zerg_lair`/`wc2_orcs_stronghold`;
+  (b) bridge: `mods/cameo/maps/Landbridge.oramap` (6 slots, bridge huts),
+      arm `cn3_bridge_repair` (X), td_gdi/td_nod engineers carry
+      `RepairsBridges`; scripted check needs a pre-damaged bridge or
+      manual force-fire — watch for `RepairBridge` orders in debug.log.
 - Pending: plug production runtime proof (BuildingAddons→PlacePlug path —
   td_gdi ion uplink needs deep tech; wc2_orcs stronghold / naxis bunker
   addons are the cheapest reachable plugs for a dedicated probe); regreen
