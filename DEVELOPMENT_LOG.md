@@ -16296,6 +16296,27 @@ Not done here: the 4 orphaned base weapons (`*_base`, `siegemortar`,
 the coordinator for a cleanup decision rather than touching production YAML from the
 test lane.
 
+- 2026-10-02 nova: dead-module sweep CORRECTED on review — `PlugSpawnerBotModuleCA` is NOT dead:
+  27 plug actors across 11 ContentPacks carry whole tech chains (WC2 townhall->keep->castle,
+  Zerg hatchery->lair->hive, TS power turbines + superweapon uplinks, TD temple nuke + ion
+  uplink, refinery collectors, Naxis bunker add-ons, CABAL silo) — no bot could produce any of
+  them. Restored + extended to a plug->hosts `Plugs:` map (one module covers all kinds; upstream
+  AS needed one variant per plug) + completed its unused techTree field: each plug's
+  Buildable.Prerequisites gate at order-issue AND resolve (no tech skipping). Wired
+  `genericbot && plug_spawn`, switch group F, fransbot default grant. Still deleted:
+  `McvManagerBotModuleCA` + `PowerDownBotModuleCA` (superseded by live engine copies). Verified:
+  614/614 tests, fog PASS 246 sites, frankenstein PASS, boot-gate PASS.
+  EMBER correction accepted: UseMissions/UseRiskRouting/PublishMissions are C# default-true and
+  LIVE — the dataflow doc's dormant table now lists the real dormant flags.
+- 2026-10-02 nova: dead-module sweep — the round-trip audit found three ConditionalTrait
+  bot modules with NO yaml wiring anywhere (ai.yaml + fransbot.yaml): `McvManagerBotModuleCA`
+  (CA vendored MCV deployer, superseded by engine `McvExpansionManagerBotModule`),
+  `PowerDownBotModuleCA` (superseded by engine `PowerDownBotModule`, wired ai.yaml:455),
+  `PlugSpawnerBotModuleCA` (Cameo port of CA plug spawning, no plug content). All deleted;
+  `ai_frankenstein_manifest` + fog manifests refreshed (245 sites, PASS). Also corrected the
+  feared MCV double-request: the planner's greedy RequestMcv and the engine manager's cash
+  gate both dedupe into RequestUnitProduction (AllQueued + RequestedProductionCount==0) —
+  benign by construction.
 - 2026-10-02 nova: AI dataflow audit — `docs/design/AI_DATAFLOW.md` added: the full
   module dataflow chart (observe→synthesize→plan→arbitrate→execute→verify), the
   decision-ownership table, and the coverage audit results: all 31 `IBot*` seams have
