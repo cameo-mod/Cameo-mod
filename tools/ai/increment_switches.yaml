@@ -187,3 +187,6 @@ groups:
       UseCoalitionTargetBias: true
     SquadManagerBotModuleCA:
       UseCoalitionTarget: true
+  AL_tc2e_capture_claims:            # DAWN TC-2e - yield a capture target to the outranking ally's published claim (lower ClientIndex wins, the TC-2c arbitration for capture targets); the loser falls through to its next candidate instead of walking two engineers into the same building (the 6v6 smoke logged 49 contested capture: mission ids). Publishes via IBotCaptureClaimProvider on EngineerBotModule -> TeamBroadcast.CaptureClaim; inert in 1v1
+    EngineerBotModule:
+      UseTeamCaptureClaims: true

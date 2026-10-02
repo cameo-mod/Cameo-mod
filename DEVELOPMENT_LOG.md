@@ -1,3 +1,29 @@
+# 2026-10-02 — TC-2e: capture-claim deconfliction (the fifth blackboard consumer, AI_ARCHITECTURE 12.17)
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/tc2e-capture-claims`.*
+
+**Done:**
+- `TeamBroadcast.CaptureClaim` (WPos, Zero = none): the engineer owner's live capture target rides the
+  same host-side, allied-only broadcast as the TC-2c expansion claim — own-side intent, publish-always.
+- `IBotCaptureClaimProvider` (Mods.CA): the seam `BotSituation` reads; `EngineerBotModule` implements it
+  (active escort plan else newest committed `EngineerJob.Capture` by `OrderedTick`). Classic runs
+  `CaptureManagerBotModuleCA` and publishes nothing = bit-identical.
+- `EngineerBotModuleInfo.UseTeamCaptureClaims` (default false, switch group `AL_tc2e_capture_claims`):
+  `AllyClaimsTarget` drops a candidate a lower-`ClientIndex` ally claims within `AllyCaptureClaimRadiusCells`
+  (2) at ALL three filters — the priority list, the capturable pool (which the transport run's stop pool
+  inherits), and the per-engineer `open` set — so a loser falls through to its next candidate instead of
+  racing the ally's engineer into the same building. `OutrankingAllyClaims` is the pure precedence fold
+  (TC-2c's `AllyClaimWins` shape); claims collect once per tick via `allyClaimsTick` caching.
+- Why: the 6v6 smoke logged **49 contested `capture:` mission ids** — 2–4 allied bots publishing capture
+  missions on the same buildings. Leases prevent duplicate engineer *ownership* but nothing stopped
+  independent bots picking the same *target*.
+- Tests: `EngineerBotModuleTest` +4 (outranking same-cell, radius boundary, empty/null board, mixed ranks).
+
+**Verified:** build 0W/0E (CA + Cameo + test); targeted tests 27/27; fog audit PASS — the claim is
+own-side intent consumed off `World.Players`, no new enumeration site.
+**Not done:** A/B pending — the increment decides whether `AL_tc2e_capture_claims` arms; contested-count
+check via `team_coordination_report.py` on the next 6v6.
+
 # 2026-10-02 - BO-1: build-order knob layer (knobs, opening, react, learned file, tuner)
 
 *Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/bo1_2026_10_02`; nothing committed, no game launch).*

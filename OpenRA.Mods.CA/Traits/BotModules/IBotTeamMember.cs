@@ -87,10 +87,17 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public readonly WPos SpawnPoint;
 
+		/// <summary>
+		/// TC-2e: the capture target this bot's engineer owner is driving (its escort
+		/// mission or its newest committed capture), <see cref="WPos.Zero"/> when none.
+		/// Own-side intent so contested captures yield to the lowest ClientIndex.
+		/// </summary>
+		public readonly WPos CaptureClaim;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
 			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
 			int clientIndex = 0, WPos expansionClaim = default, WPos armyCentroid = default,
-			WPos expansionAssist = default, WPos spawnPoint = default)
+			WPos expansionAssist = default, WPos spawnPoint = default, WPos captureClaim = default)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -105,6 +112,7 @@ namespace OpenRA.Mods.CA.Traits
 			ArmyCentroid = armyCentroid;
 			ExpansionAssist = expansionAssist;
 			SpawnPoint = spawnPoint;
+			CaptureClaim = captureClaim;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>

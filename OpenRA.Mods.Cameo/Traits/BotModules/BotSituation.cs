@@ -1242,6 +1242,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var expansionClaim = player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>()
 				.FirstEnabledTraitOrDefault()?.ExpansionTarget;
 
+			// TC-2e: the engineer owner's capture claim rides the same broadcast so a contested
+			// capture yields to the outranking ally (lowest ClientIndex). Own-side intent only.
+			var captureClaim = player.PlayerActor.TraitsImplementing<IBotCaptureClaimProvider>()
+				.FirstEnabledTraitOrDefault()?.CaptureClaimTarget;
+
 			// TC-3 (§12.18): the broadcast fields the coalition fold consumes — the own
 			// army's mean position for the rescue election, an expansion claim that
 			// wants a bodyguard, and the spawn anchor for the sector partition. All
@@ -1270,7 +1275,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero,
 				player.ClientIndex,
 				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
-				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint);
+				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint,
+				captureClaim: captureClaim.HasValue ? player.World.Map.CenterOfCell(captureClaim.Value) : WPos.Zero);
 
 			// TC-3 (§12.18): fold own + allied broadcasts into the coalition directive —
 			// every member runs the identical function over the identical set, so all

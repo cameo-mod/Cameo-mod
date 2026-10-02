@@ -2679,6 +2679,18 @@ enumerates enemy actors.
   expander+techer by construction, no oscillation possible. No new broadcast
   field: `ClientIndex` arrived with TC-2c. Switch group `W_tc2_role_split`;
   inert in 1v1.
+- **Fifth consumer (TC-2e — capture-claim deconfliction):** `TeamBroadcast.CaptureClaim`
+  publishes the engineer owner's live capture target — the active escort plan else
+  the newest committed `EngineerJob.Capture` — via `IBotCaptureClaimProvider`
+  (Cameo-side `EngineerBotModule` implements it; classic runs `CaptureManagerBotModuleCA`
+  and publishes nothing). `EngineerBotModuleInfo.UseTeamCaptureClaims` (default false)
+  then drops a candidate a lower-`ClientIndex` ally claims within
+  `AllyCaptureClaimRadiusCells` (2) — every filter in the assign pass (the priority
+  list, the capturable pool, the per-engineer `open` set, and the transport-run pool
+  it feeds) falls through to the next candidate instead of racing an ally's engineer
+  into the same building. `OutrankingAllyClaims` is the pure precedence fold both
+  sides compute identically; the 6v6 smoke logged 49 contested `capture:` mission
+  ids before it. Switch group `AL_tc2e_capture_claims`; inert in 1v1.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count

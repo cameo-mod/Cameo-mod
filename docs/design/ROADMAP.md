@@ -221,7 +221,9 @@ the fog sequencing.
     — ally expansion claims yield contested fields to the lower ClientIndex
     (group `V_tc2_expansion_claims`). TC-2d `nova/tc2d-role-split` — allied
     bots spread the TechRush-Expansion rest by deterministic index rank
-    (group `W_tc2_role_split`). TC-3 2v2 harness landed
+    (group `W_tc2_role_split`). TC-2e `devin/dawn/tc2e-capture-claims` —
+    allied capture claims yield contested capture targets to the lower
+    ClientIndex (group `AL_tc2e_capture_claims`). TC-3 2v2 harness landed
     `devin/dawn/tc3-2v2-harness` — `--team-size 2` on
     `tools/ai/run_ai_match_batch.py` + `"team_size"` league spec key, on the
     shipped doubles map (DEVELOPMENT_LOG 2026-10-02).

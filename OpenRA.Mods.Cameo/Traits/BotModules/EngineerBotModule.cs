@@ -192,6 +192,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("ENG-T: most engineers (and buildings) in one infiltration run — one per stop.")]
 		public readonly int TransportRunMax = 5;
 
+		[Desc("TC-2e (AI_ARCHITECTURE §12.17): yield a capture target to an allied bot's published",
+			"capture claim when it outranks us (lower ClientIndex) — the same arbitration TC-2c uses",
+			"for expansion claims, so allied engineers stop converging on the same building (the 6v6",
+			"smoke logged 49 contested capture: mission ids). Deterministic; inert in 1v1.")]
+		public readonly bool UseTeamCaptureClaims = false;
+
+		[Desc("TC-2e: an allied claim this close (cells) to a capture target's cell contests it.")]
+		public readonly int AllyCaptureClaimRadiusCells = 2;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -200,7 +209,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
 	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
-		IBotProtectionRequestProvider
+		IBotProtectionRequestProvider, IBotCaptureClaimProvider
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -243,6 +252,67 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		EscortPlan escort;
+
+		// TC-2e: the claim this bot publishes (the active escort, else the newest committed capture),
+		// and the allied claims collected once per assign pass for the outranks-us yield.
+		List<(int ClientIndex, WPos Claim)> allyCaptureClaims;
+		int allyClaimsTick = -1;
+
+		CPos? IBotCaptureClaimProvider.CaptureClaimTarget
+		{
+			get
+			{
+				if (IsTraitDisabled)
+					return null;
+
+				if (escort != null)
+					return escort.Target?.Location;
+
+				var newest = assigned.Values
+					.Where(a => a.Job == EngineerJob.Capture && a.Target != null && a.Target.IsInWorld && !a.Target.IsDead)
+					.OrderByDescending(a => a.OrderedTick)
+					.FirstOrDefault();
+				return newest?.Target.Location;
+			}
+		}
+
+		// An outranking ally (lower ClientIndex) claims this target's cell: yield it — the claim
+		// converges team-wide instead of two engineers walking into the same building (TC-2e).
+		bool AllyClaimsTarget(Actor target)
+		{
+			if (!Info.UseTeamCaptureClaims || target == null)
+				return false;
+
+			if (allyClaimsTick != world.WorldTick)
+			{
+				allyClaimsTick = world.WorldTick;
+				allyCaptureClaims = TeamBlackboard.CollectBroadcasts(player)
+					.Where(b => b != null && b.CaptureClaim != WPos.Zero)
+					.Select(b => (b.ClientIndex, b.CaptureClaim))
+					.ToList();
+			}
+
+			return OutrankingAllyClaims(allyCaptureClaims, player.ClientIndex,
+				world.Map.CenterOfCell(target.Location), Info.AllyCaptureClaimRadiusCells);
+		}
+
+		/// <summary>TC-2e's arbitration, free of world state so it can be tested: an allied claim
+		/// within <paramref name="radiusCells"/> of the target from a lower ClientIndex wins —
+		/// the same precedence TC-2c gives expansion claims.</summary>
+		public static bool OutrankingAllyClaims(IReadOnlyList<(int ClientIndex, WPos Claim)> claims,
+			int ownClientIndex, WPos targetPos, int radiusCells)
+		{
+			if (claims == null)
+				return false;
+
+			var radius = (long)radiusCells * 1024;
+			var radiusSquared = radius * radius;
+			foreach (var (clientIndex, claim) in claims)
+				if (clientIndex < ownClientIndex && (claim - targetPos).HorizontalLengthSquared <= radiusSquared)
+					return true;
+
+			return false;
+		}
 
 		// The squad manager serves a protection request only at or above its PrepositionMinThreatValue: a request valued at
 		// a few riflemen (the first flag-on match published 440-1000) is dropped in silence. Read the bar from the squad
@@ -700,7 +770,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !AllyClaimsTarget(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 				ConsiderEscort(candidates);
 				var ordered = candidates.Where(t => !BlockedByEscort(t)).ToList();
 
@@ -744,7 +814,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (capturableTypes.Count > 0)
 				capturable = capturable.Where(target => capturableTypes.Contains(target.Info.Name.ToLowerInvariant()));
 
-			var targets = capturable.ToList();
+			var targets = capturable.Where(t => !AllyClaimsTarget(t)).ToList();
 			if (targets.Count == 0)
 				return;
 
@@ -756,7 +826,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Nearest first. A full, dormant, escort-blocked or unsafe target passes the engineer on to the next one, so
 				// with MaxEngineersPerTarget 1 engineers spread over DIFFERENT targets (TargetFull is re-read per engineer:
 				// the previous engineer's Assign already counts). CaptureTargetTries 1 = the parents' single nearest target.
-			var open = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t));
+					var open = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t) && !AllyClaimsTarget(t));
 				var tries = Info.RankTargetsBySafety
 					? RankBySafety(capturer.Actor, open)
 					: open.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)

@@ -4117,6 +4117,9 @@ Player:
 		MaxEngineersPerTarget: 1
 		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
 		UseDemandCapturers: false
+		# TC-2e: yield a capture target to the outranking ally's published claim (switch group AL).
+		# Lowest ClientIndex keeps its claim; the loser falls through to another candidate. Inert in 1v1.
+		UseTeamCaptureClaims: false
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75
