@@ -2655,6 +2655,13 @@ enumerates enemy actors.
   release inside the same fleeting window. Runs standalone (pacing-off reads scale 100)
   or composed with DI-2; a 1v1 or absent ally provider yields `AnyClimax = false` —
   bit-identical. Switch group `R_tc2_sync_attacks`.
+  Every Rush launch that commits without a taken provider card emits a
+  `secure:<enemyPlayer>` attempt record (Committed at launch, Superseded by the next
+  wave, Failed if the wave dies) — the massed assault predates the mission grammar,
+  and without the record `team_coordination_report`'s `shared_push` sees only the
+  rare economy-raid path. The record names the enemy the wave steers toward
+  (the card it couldn't afford, else `EffectiveMainTarget`); classic has no mission
+  providers and no main target, so it stays silent.
 - **Second consumer (TC-2b — defend-request answering):** `UseTeamDefendAnswers` (default
   false) adds a third channel inside `PrepositionDefenceTick`, below own threat and own
   escort requests: `TeamBlackboard.TopDefendRequest` picks the most urgent broadcast
@@ -2663,6 +2670,10 @@ enumerates enemy actors.
   The ally's position sits outside our base radius, so the CA-2 reserve still keeps a
   floor at home, and `TeamDefendAnswerMinPoolUnits` (default 8) means a thin pool stays
   home entirely. `CollectBroadcasts` exposes the per-ally detail the summary drops.
+  The answer emits `defend:c<requesterIndex>` attempt records (Committed at the rally,
+  Released on hold expiry/supersede, Failed if the squad dies) so
+  `team_coordination_report`'s `defend_missions` counts the answers this path makes —
+  the protection channel predates the mission-card grammar and otherwise wrote nothing.
   Switch group `S_tc2_defend_answers`; inert in 1v1.
 - **Third consumer (TC-2c — expansion-claim deconfliction):** the broadcast gains
   `ClientIndex` (the publisher's own index) and `ExpansionClaim` (the bot's planner

@@ -1,3 +1,28 @@
+# 2026-10-02 — telemetry fix: defend answers + shared pushes emit mission-grammar records
+
+*Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — closes the report blind spot the 6v6 telemetry exposed (780 records: 5 raid, 0 defend, `shared_push_windows=0` despite 6 waves).*
+
+**Done:**
+- `defend:c<requesterIndex>` — the TC-2b/TC-3 ally answer goes through the Protection squad
+  channel, which predates the mission-card grammar and emitted nothing; the report's
+  `defend_missions` could only count provider `defend:self` cards (never taken while winning).
+  `CommitAllyDefend`/`CloseAllyDefend` write Committed at the rally (units counted), Released
+  on `ReleaseDefenders`/supersede to an own threat or escort, Failed if the squad dies; the
+  hold-refresh for the same requester extends one attempt instead of spamming records.
+- `secure:<enemyPlayer>` — the massed Rush wave (the actual shared-push mechanism, steered by
+  `EffectiveMainTarget`/sync gates) also emitted nothing; the metric only saw the rare economy
+  raid. `CommitSecurePush` writes Committed at launch when no provider card rode the wave —
+  target = the unaffordable card's `TargetPlayer`, else `EffectiveMainTarget()`. Next launch
+  Supersedes; a destroyed wave closes Failed. Classic has no providers and no main target —
+  silent. Both ids reuse `missionAttemptCounters`; `BotMissionAttemptTracker` match_end covers
+  teardown.
+- `team_coordination_report.py` docstring now describes both emit paths honestly
+  (`defend:cN` = direct requester attribution, `secure:<player>` = cardless wave).
+
+**Verified:** build 0W/0E; records ride `BotMissionLog.Write` (tick, InternalName, tracker
+auto-release) — no logic change, orders untouched, classic unchanged. The next armed 6v6's
+`defend_missions`/`shared_push_windows` will now measure the paths they were designed for.
+
 # 2026-10-02 — review fixes: broadcast liveness, single-assignment rescue, stale switch groups (fransotto review 3.2/4.2/4.3)
 
 *Devin (dawn), branch `devin/dawn/team-liveness-rescue` — three findings from `CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE` in the team-coordination lane.*
