@@ -16529,3 +16529,62 @@ Shipped, all dormant on master (switches default-off):
 Verified: OpenRA.Mods.CA + OpenRA.Mods.Cameo compile clean (0/0); the three groups
 arm via apply_increment_switches.py --dry-run (3 expected rewrites). Boot-gate +
 A/B runtime proof remain queued on the game driver per workflow rules.
+## 2026-10-02 (nova) — bridge repair legacy-hut fix + fleet sync
+
+**Bug found + fixed:** `BridgeRepairBotModule` (CN3 port) scanned
+`ActorsHavingTrait<BridgeHut>()` — the TS elevated-bridge hut type — but Cameo's
+RA/TD bridge huts carry `LegacyBridgeHut`. The dedicated module found zero
+targets even on maps with bridges. `EngineerBotModule`'s fallback already scans
+both (it was the only working path). Fix: `HutTarget` adapter resolving both
+trait types; module now matches Engineer's coverage. Also recorded: the earlier
+"no switch arm path" gap was closed — group X (`cn3_bridge_repair`) arms it and
+Engineer yields the RepairBridge job when it is (single-owner, #764).
+
+**Mechanism note (verified against engine + map tiles):** Cameo/RA legacy
+bridges are NOT map actors — they are painted as terrain templates and converted
+to `Bridge` actors at load by `LegacyBridgeLayer` (world.yaml:
+`Bridges: bridge1..4`). Placing `bridge1` as a map actor loads but crashes on
+damage (`Bridge.UpdateState` NRE — null footprint, never initialized by
+`Bridge.Create`). Demo run in bridge_run2 with tile-painted damaged bridges:
+clean 185s match, `ENG RepairBridge` orders observed; some huts re-ordered
+repeatedly (engineer reachability follow-up, not a crash).
+
+**Fleet sync:** master @e5fd392c folded in EMBER's GC-1 (garrison contest,
+switch `AB_garrison_contest`) + EX-4 (`CoverAllFields`, switch
+`AC_cover_map_expansion`) + N-team harness (1-8) + §12.18 coalition-fold design
++ team_coordination_report.py + 6v6 evidence (27 contested capture claims).
+Maintainer's garrison + endless-expansion asks are implemented but switch-gated
+pending A/B. Remaining open asks: formation/multi-angle assault, base spacing,
+army-first production, harvester spread, coalition fold impl (BB-BE).
+
+## 2026-10-02 (nova) — ATK-1 assault fan-out (the line-of-death fix)
+
+Maintainer report: committed Rush squads attack-move every member to one shared
+target point — the column walks into the guns single-file. (Sibling asks —
+garrison contest, cover-the-map, spacing, army-first, harvester spread — were
+already claimed/landed by EMBER + Claude lanes; this entry is the formation half
+only.)
+
+Shipped behind switch AG_assault_fanout (default-off, genericbot-only provider):
+- AssaultFormationPlanner: deterministic integer arc-slot planner — one slot per
+  member on a target-centred arc (default 180 deg) on the far side of the target
+  from the approach bearing; sorted-bearing + ActorID tiebreak; unusable slots
+  fold onto the target cell.
+- GroundUnitsAssaultFanoutStateCA: new squad state between rally/approach and
+  commit; per-unit AttackMove slot orders; commits on AssemblePercent (60) /
+  StageDeadlineTicks (500) / first enemy contact.
+- AssaultFormationBotModule: settings-only IBotAssaultFormation provider +
+  per-squad same-target refanout cooldown (750t). Zero SquadManagerBotModuleCA
+  edits (DAWN claim respected).
+- GroundStatesCA: Rush squads enter fan-out from StageState assembly or the
+  AttackMove trigger band (12 > dist > 8 cells).
+
+Verification: CA+Cameo+Test build clean; 653/653 tests; boot-gate passed;
+armed batch on A Nuclear Winter: 3/3 clean matches, hard 3-0 vs classic
+(fingerprint ed05a1dfb0ce) — GC-1 + expansion + fan-out all firing, no
+exceptions.
+
+LANE COLLISION (flagged): maintainer 2026-10-01 assigned squad formation to
+claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
+is an independent, SquadManager-free implementation with runtime evidence;
+both are default-off. Coordinator picks which arms in the increment.
