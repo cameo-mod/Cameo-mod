@@ -16656,3 +16656,42 @@ Maintainer's garrison + endless-expansion asks are implemented but switch-gated
 pending A/B. Remaining open asks: formation/multi-angle assault, base spacing,
 army-first production, harvester spread, coalition fold impl (BB-BE).
 
+
+**2026-10-02 (spawn sides + contact-first all-in, maintainer spectate feedback):**
+The 6v6 on order-of-battle-rich exposed two defects the maintainer watched live:
+
+1. **Spawn sides (harness bug, fixed `22f6e5ee9`):** `run_ai_match_batch` bound
+   teams to `mpspawn` FILE order (slots_a=0..5, slots_b=6..11) but this map's
+   spawn list interleaves both geographic halves — a hard bot spawned amid the
+   classic team and died to the rush. `split_spawn_sides` now partitions the
+   first 2n spawns by farthest-pair seeds + signed nearer-seed ranking before
+   slot binding (deterministic, orientation-free). Verified variant: hard at
+   (50,22)(75,14)(81,40)(99,70)(101,20)(107,46) all NE, classic at
+   (14,75)(20,101)(22,50)(40,81)(46,107)(70,98) all SW.
+
+2. **Staging during a live fight (fixed `22f6e5ee9`):** the maintainer watched
+   a large blob stand in formation while part of the force was already
+   trading fire. Formation is for BEFORE contact only. New
+   `SquadMicroEvalCA.ContactNear` (pure predicate) + three gates:
+   - AttackMoveState Tick: a Rush squad with any member inside
+     AttackScanRadius of a visible enemy sends ONE grouped AttackMove at the
+     objective the same tick — before concave entry, fan arcs and march
+     holds. Applies to allied fights too: the enemies are the same.
+   - Concave `ShouldEnter` returns false under existing contact.
+   - Concave `ShouldCommit` now scans ALL eligible members (was placed-only)
+     and the contact check fires the under-fire commit, which already zeroes
+     every stagger delay.
+   Rationale (maintainer): Lanchester's square law — committing piecemeal
+   while a local fight runs is strictly worse than jumping in together.
+
+**Spectate harness gap found:** `Launch.Map` resolves by map uid or leaf dir
+name inside the support dir's `maps/cameo/{DEV_VERSION}/`, not by absolute
+path; and the duel template's `rules.yaml` hard-locks `GameSpeed: maximum` +
+`TimeLimitDefault` must be a listed option (36000 failed ruleset load ->
+referee `empty` class unresolved -> SpawnStartingUnits crash at WorldLoaded).
+Live spectate variants must unlock the speed dropdown and pass a valid
+option (9 = old-90 cap used).
+
+**Live spectate (running):** `C:/tmp/spectate-6v6` support dir, variant
+`order_of_battle_rich_6v6`, fullscreen native res, 6xhard (NE) vs 6xclassic
+(SW) td_gdi, Referee seat = local client. World loaded clean, no exceptions.
