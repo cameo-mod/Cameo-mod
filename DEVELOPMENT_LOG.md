@@ -17081,3 +17081,20 @@ bandit confound (§6.3/6.4) — Claude's lanes.
   shared deletion merges clean vs cb0e02194; their extra AF_harvester_spread
   `MaxHarvestersPerResourceIndice: 4` on @generic is a documented no-op (C# default is
   already 4). No conflict expected.
+
+## 2026-10-02 EMBER — armed smoke caught a real crash in GC-1 close-out (fixed)
+
+The all-39-groups armed smoke (tmpab-smoke @ 0e03d4238) died in all 4 matches:
+`InvalidOperationException: Attempted to get trait from destroyed object` at
+`GarrisonContestBotModule.IsInside` — my terminal-card refactor hoisted
+`IsInside(w)` into a separate local evaluated BEFORE the IsDead/IsInWorld
+guards; TraitOrDefault on a destroyed actor throws. Fixed: `inside` is now
+computed after the liveness checks inside the same expression, preserving the
+original short-circuit reachability. Lesson: `List.RemoveAll` predicate bodies
+must keep the destroyed-actor guards FIRST — hoisting a trait call into a local
+silently reorders them.
+
+Verification: compile clean; boot-gate PASS from a private engine copy
+(C:/tmp/aiwork-engine — bin + glsl + mods + VERSION + geoip; glsl/ is REQUIRED,
+shader compile fails without it) since the shared bin was held by other lanes.
+Re-running the armed smoke on the fixed build next.

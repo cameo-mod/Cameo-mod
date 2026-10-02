@@ -170,8 +170,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var anyInside = false;
 				walkers.RemoveAll(w =>
 				{
-					var inside = IsInside(w);
-					var done = w.IsDead || !w.IsInWorld || w.Owner != player || inside
+					// IsInside calls TraitOrDefault - destroyed actors throw, so the guards must run first.
+					var inside = !w.IsDead && w.IsInWorld && w.Owner == player && IsInside(w);
+					var done = inside || w.IsDead || !w.IsInWorld || w.Owner != player
 						|| leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks());
 					if (done)
 					{
