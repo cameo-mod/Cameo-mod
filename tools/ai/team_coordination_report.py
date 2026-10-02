@@ -35,7 +35,7 @@ import pathlib
 import sys
 
 ATTACK_KINDS = {"raid", "recon", "secure"}
-DEFEND_KINDS = {"defend"}
+DEFEND_KINDS = {"defend", "defend_answer"}  # defend_answer = TC-2b/TC-3 ally rescue answers (SquadManager, post-merge review instrumentation)
 
 
 def iter_jsonl(path):

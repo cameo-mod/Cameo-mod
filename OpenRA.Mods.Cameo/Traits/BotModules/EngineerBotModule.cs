@@ -192,6 +192,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("ENG-T: most engineers (and buildings) in one infiltration run — one per stop.")]
 		public readonly int TransportRunMax = 5;
 
+		[Desc("TC-2e (AI_ARCHITECTURE §12.17): yield a capture target an outranking allied bot already claims",
+			"(published on the team blackboard — lower ClientIndex wins), and stand an in-flight capture down",
+			"when an outranking ally's claim lands on its cell. Inert in 1v1 — no allied broadcasts exist.")]
+		public readonly bool UseTeamCaptureClaims = false;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -200,7 +205,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
 	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
-		IBotProtectionRequestProvider
+		IBotProtectionRequestProvider, IBotCaptureClaimSource
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -284,6 +289,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>Stealth targets passed over because more than StealthMaxDefenders armed enemies guard them.</summary>
 		public int GuardedSkips { get; private set; }
+
+		/// <summary>Capture attempts stood down to an outranking ally's published claim, plus denied escort plans (TC-2e).</summary>
+		public int SupersededCaptures { get; private set; }
+
+		// TC-2e (AI_ARCHITECTURE §12.17): the live capture missions' target cell centres — repair and
+		// bridge jobs are not claims. A waiting escort plan counts: it already holds its target.
+		public IReadOnlyList<WPos> CaptureClaimPositions
+		{
+			get
+			{
+				var positions = new List<WPos>();
+				foreach (var job in assigned.Values)
+					if (job.Job == EngineerJob.Capture && job.Target != null)
+						positions.Add(world.Map.CenterOfCell(job.Target.Location));
+
+				if (escort?.Target != null)
+					positions.Add(world.Map.CenterOfCell(escort.Target.Location));
+
+				return positions;
+			}
+		}
 
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)
@@ -670,6 +696,48 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var leases = BotUnitLeases.Of(player);
+
+			// TC-2e (AI_ARCHITECTURE §12.17): the cells outranking allied bots already claim, off the team
+			// blackboard — one read per evaluation. Flag off or 1v1 leaves null and every gate below is the
+			// no-op it is today.
+			HashSet<WPos> claimsAhead = null;
+			if (Info.UseTeamCaptureClaims)
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
+
+			bool ClaimedByOutrankingAlly(Actor target) =>
+				claimsAhead != null && claimsAhead.Contains(world.Map.CenterOfCell(target.Location));
+
+			if (claimsAhead != null && claimsAhead.Count > 0)
+			{
+				// Stand down an in-flight capture whose target an outranking ally now claims — the same
+				// release path as a finished job (unassigned, mission ended, lease out) plus a Stop.
+				foreach (var (a, job) in assigned.ToList())
+				{
+					if (job.Job != EngineerJob.Capture || job.Target == null || !ClaimedByOutrankingAlly(job.Target))
+						continue;
+
+					assigned.Remove(a);
+					EndMission(a, job, EngineerCheck.Working, superseded: true);
+					leases?.Release(a, LeaseOwner);
+					SupersededCaptures++;
+					bot.QueueOrder(new Order("Stop", a, false));
+					Log.Write("debug", $"AI ({player.ClientIndex}): ENG capture superseded {a.Info.Name} {a.ActorID} -> {job.Target.Info.Name} {job.Target.ActorID} (tick {world.WorldTick}; superseded {SupersededCaptures})");
+				}
+
+				// The waiting escort plan is the same claim without a walking engineer — deny it too.
+				// (A committed plan is ended by the stand-down above through its MissionId.)
+				if (escort != null && escort.Target != null && ClaimedByOutrankingAlly(escort.Target))
+				{
+					BotMissionLog.Write(new BotMissionRecord
+					{
+						Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.Superseded,
+						Executor = "Engineers", MissionType = "capture", TargetCell = escort.Target.Location, Value = escort.DefenceValue
+					});
+					SupersededCaptures++;
+					escort = null;
+				}
+			}
+
 			var capturers = world.ActorsHavingTrait<Captures>()
 				.Where(a => a.Owner == player && capturingTypes.Contains(a.Info.Name.ToLowerInvariant()))
 				.Select(a => new TraitPair<CaptureManager>(a, a.TraitOrDefault<CaptureManager>()))
@@ -700,7 +768,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !ClaimedByOutrankingAlly(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 				ConsiderEscort(candidates);
 				var ordered = candidates.Where(t => !BlockedByEscort(t)).ToList();
 
@@ -744,7 +812,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (capturableTypes.Count > 0)
 				capturable = capturable.Where(target => capturableTypes.Contains(target.Info.Name.ToLowerInvariant()));
 
-			var targets = capturable.ToList();
+			var targets = capturable.Where(t => !ClaimedByOutrankingAlly(t)).ToList();
 			if (targets.Count == 0)
 				return;
 
@@ -1270,7 +1338,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			});
 		}
 
-		void EndMission(Actor engineer, Assignment job, EngineerCheck check, bool pulledBack = false)
+		void EndMission(Actor engineer, Assignment job, EngineerCheck check, bool pulledBack = false, bool superseded = false)
 		{
 			if (job.MissionId == null)
 				return;
@@ -1287,6 +1355,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							// A voluntary retreat (RouteRecheckTicks): released, outmatched; it does not feed the dormant shelf.
 							if (pulledBack && state == BotMissionAttemptState.Released && reason == BotMissionReasons.Dropped)
 								reason = BotMissionReasons.Outmatched;
+
+							// TC-2e: a stand-down to an outranking ally's published claim — released, superseded;
+							// like the voluntary retreat, it does not feed the dormant shelf.
+							if (superseded && state == BotMissionAttemptState.Released && reason == BotMissionReasons.Dropped)
+								reason = BotMissionReasons.Superseded;
 							BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = job.MissionId, Attempt = job.Attempt, State = state, Reason = reason,
