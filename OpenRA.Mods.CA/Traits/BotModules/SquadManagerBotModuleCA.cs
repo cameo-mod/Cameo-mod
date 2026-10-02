@@ -365,6 +365,25 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
+		[Desc("Contact-first all-in (§12.7b, maintainer 2026-10-02): a Rush squad with a visible enemy inside AttackScanRadius of ANY member",
+			"commits wholesale through the attack state (no staging mid-fight). False keeps the leader-scan engage only (classic, the A/B reference).")]
+		public readonly bool ContactFirstAllIn = true;
+
+		[Desc("Assault fan (Rush, inside FormationMovement): radius in cells around the squad target at which the approach arc slots sit.")]
+		public readonly int AssaultFanRadiusCells = 10;
+
+		[Desc("Assault fan: minimum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
+		public readonly int AssaultFanMinSlots = 3;
+
+		[Desc("Assault fan: maximum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
+		public readonly int AssaultFanMaxSlots = 8;
+
+		[Desc("Assault fan: distance in cells to the squad target at which a Rush squad breaks column into the arc fan instead of marching on.")]
+		public readonly int AssaultEngageRadiusCells = 18;
+
+		[Desc("Assault fan: ticks early arrivers hold at their arc slot while another prong is still inbound, before the synchronized push anyway.")]
+		public readonly int AssaultSyncHoldTicks = 125;
+
 		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
 		public readonly bool SquadMicroEnabled = false;
 

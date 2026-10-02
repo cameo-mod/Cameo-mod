@@ -120,10 +120,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!TryGetSettings(owner, CooldownCell(owner, members), out var settings, out _) || members.Count < settings.MinSquadSize)
 				return false;
 
-			// Formation is for the approach, not the fight: if a visible enemy is
-			// already inside scan range of any member (our fight or a
-			// neighbour's), the attack-move state's all-in path handles it.
-			if (GroundUnitsAttackMoveStateCA.ContactNearSquad(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)))
+			// Formation is for the approach, not the fight: once the fight is on for any
+			// member, the attack-move state's contact-first all-in handles it.
+			if (GroundUnitsAttackMoveStateCA.NearestEngagedEnemy(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)) != null)
 				return false;
 
 			var centroid = Centroid(members);
@@ -303,23 +302,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies, List<Actor> members)
 		{
-			var info = owner.SquadManager.Info;
-
-			// Battle joined anywhere near the squad — a member under fire or an
-			// allied fight beside the forming arc: commit now. The under-fire
-			// path zeroes every stagger delay so the whole squad attack-moves on
-			// the same tick instead of staging one prong at a time (Lanchester).
-			var memberPositions = new List<WPos>(members.Count);
-			foreach (var m in members)
-				memberPositions.Add(m.CenterPosition);
-
-			var enemyPositions = new List<WPos>(enemies.Count);
-			foreach (var e in enemies)
-				enemyPositions.Add(e.CenterPosition);
-
-			if (SquadMicroEvalCA.ContactNear(memberPositions, enemyPositions, WDist.FromCells(info.AttackScanRadius)))
-				return CommitReason.UnderFire;
-
 			// Evaluate every member first (LastHp must update for all), then decide.
 			var near = 0;
 			var damaged = false;
@@ -334,15 +316,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					damaged = true;
 				p.LastHp = hp;
 
-				// The enemy engaged us: never keep forming under fire.
-				if (!enemyInRange)
-					foreach (var e in enemies)
-						if ((e.CenterPosition - p.Actor.CenterPosition).HorizontalLengthSquared <= (long)p.Range * p.Range)
-						{
-							enemyInRange = true;
-							break;
-						}
 			}
+
+			// The fight is on for ANY member (placed or not, either side's weapon range): never keep
+			// forming under fire — the zero-delay commit sends everyone on the same tick (§12.7b).
+			enemyInRange = GroundUnitsAttackMoveStateCA.NearestEngagedEnemy(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)) != null;
 
 			if (damaged || enemyInRange)
 				return CommitReason.UnderFire;

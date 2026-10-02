@@ -95,7 +95,6 @@
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@assaultfanout:
 		Condition: assault_fanout
-
 		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
@@ -4298,6 +4297,8 @@ Player:
 		IndirectRouteChance: 60
 
 	SquadManagerBotModuleCA@classic:
+		# §12.7b contact-first all-in is genericbot behaviour; classic stays the untouched A/B reference.
+		ContactFirstAllIn: false
 		RequiresCondition: classicbot
 		# Restored verbatim from the pre-wave @generic node (786bb2f2c era): the
 		# classic reference bot's squad brain — no missions, no personality variants.
