@@ -1,3 +1,27 @@
+# 2026-10-02 — DAWN: 6v6 team test — hard stack beats classic stack
+
+`order-of-battle-rich` (12 slots, TEMPERAT), 6×hard vs 6×classic, td_gdi
+mirror, `--render fast`. Same switch arming as the 1v1 test plus the TC-2 team
+switches (R sync attacks, S defend answers, V expansion claims, W role split),
+T demand capturers, U utility appetite, Z def3 outposts, X bridge repair,
+Y stealth squads.
+
+**Result: hard team won** at WT ~39.6k (~26 min). 5 of 6 hard bots alive, all
+6 classic eliminated. Hard killed 263 buildings vs 75. Survivor army values
+67k–94k each (army-first + formations leaving real standing armies). Multi4
+was eliminated early (2 refs — bad-luck spawn rush), and the team still
+carried it.
+
+Coordination report (`tools/ai/team_coordination_report.py`):
+- 414 hard mission attempts; 49 CONTESTED capture claims — multiple allied
+  hard bots published captures on the same targets (v19 garrisons, refineries,
+  comm centers). Expansion claims are team-arbitrated (V_tc2) but **capture
+  claims are not** — follow-up: route capture-target publication through the
+  same lowest-ClientIndex arbitration.
+- shared_push_windows=0, defend_missions=0 — the TC-2a/2b channels armed but
+  produced no observed joint windows/defends in this game; worth a longer
+  look before claiming they work.
+
 # 2026-10-02 — DAWN: runtime evidence + follow-on merges
 
 Test: `hard` (switches F_concave + AB_garrison_contest + AC_cover_map_expansion +
