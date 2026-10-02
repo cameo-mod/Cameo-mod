@@ -2569,3 +2569,106 @@ per enabled `ProductionQueue` sitting with no current item and nothing queued �
 factory counts separately) and `own.production_queues`. Own-side trait reads only —
 record-only, publish-always, no consumer and no flag; the LA analyst reads them for §13.1's
 drive-to-zero goal, and a save/load restarts the counters at 0 (honest reset, same as DI-1).
+
+### 12.18 TC-3 — the coalition general: from blackboard to hivemind (EMBER design, 2026-10-02)
+
+The maintainer's §11 ruling already fixes the shape: **a world-level `BotTeamCommander`
+owns the team plan; each bot's master reads it as an input.** This section is the
+implementation design for that ruling plus the 2026-10-02 maintainer request — merged
+squads under one commander, nearest-army rescue, expansion assist, collective territory
+coverage — and the RTS-teamwork literature it draws on.
+
+**What the literature says (surveyed 2026-10-02).**
+
+- *Lanchester's Square Law* (Zero-K Strategy Treatise): two pooled forces fight at the
+  square of their combined numbers — the mathematical case for merging allied armies onto
+  one target instead of each bot duelling its nearest enemy. The treatise's team rule is
+  literal: "attack the one in front of the ally next to you" — concentration, not
+  front-line mirroring. The anti-square corollary (chokes bound simultaneous engagement)
+  is why waves converge *in time* rather than clump *in space*: a coalition push wants
+  same-target arrivals in one window, not one blob walking a choke (§12.7 formations keep
+  their own spacing).
+- *Organisational paradigms in RTS* (AAMAS 2019, SC:BW): individual / swarm / market /
+  hierarchical structures compared; hierarchical — subordinates executing a superior's
+  plan — is the paradigm the maintainer's "coalition general" names. Our equivalent must
+  not add a second order-issuer (§19.3): the general is publish-only, orders stay with the
+  existing owners.
+- *BiCNet* (UCL, SC combat) and *RoMIX* (role-factored MARL): coordination quality scales
+  with bidirectional shared state and explicit role specialisation — the two things TC-1's
+  blackboard and TC-2d's role split already provide.
+- *Sector responsibility* (team-play doctrine across ZK/Bar-family multiplayer): teams
+  divide the front into owned sectors so coverage has an owner and help travels to a
+  neighbour, not across the map.
+
+**The hivemind is a function, not a unit.** Every allied bot already reads every other
+ally's broadcast off the same host-side blackboard (§12.17). Feeding the same input set
+through a pure, order-deterministic fold — `CoalitionPlan(broadcasts ∪ own)` evaluated by
+*every* member each snapshot — makes all members compute the *identical* team directive
+without election, messaging, or a command unit that can die. Transient divergence inside
+a tick is impossible to act on before the next snapshot re-converges (deterministic fold
+ordered by `ClientIndex`). This is strictly stronger than leader election: a dead
+"general" bot changes nothing; the function lives in every head.
+
+- **`CoalitionDirective`** — the fold's output, four fields:
+  - `MainTarget` — the enemy the team pushes: the `MainTarget` carried by the most
+    allied broadcasts, ties to the target of the highest `DirectorTension` broadcaster,
+    then lowest `ClientIndex` publisher. This *is* the merged-army commander: every
+    member's `MasterAiBotModule` biases its target choice toward it (bounded like every
+    axis factor, so a bot seconds from winning a different fight is not yanked off),
+    and every member's `SquadManagerBotModuleCA` treats it as the preferred `SquadCA`
+    goal. Squads do not literally merge across players — an ally's actors can never join
+    my squad — but same-target + same-window convergence produces the one-army effect
+    the maintainer describes, under one shared "commander" that is the fold itself.
+  - `Phase` — `BuildUp` / `Push` / `Defend`, derived from `AnyClimax`, total army value
+    vs. remembered enemy team value, and `DefendRequests > 0`. `Push` requires a
+    `MainTarget`; `Defend` suppresses Push while any ally is at `UrgencyLevel` 2.
+  - `RescueAssignments` — per defend-request, the elected responder: the allied bot
+    whose broadcast carries the nearest `ArmyCentroid` (new broadcast field, below) to
+    `DefendPosition`, skipping bots already committed to a Push they own. Every member
+    computes the same election, so exactly one ally rallies — the nearest army rescues,
+    by construction. Extends the TC-2b path (`TopDefendRequest` picks the request;
+    the directive picks *who* goes).
+  - `Sectors` — the territory partition: a Voronoi assignment of regions (the CN4
+    `IBotRegionRoles` zone set, §12.17-era topology) to allied bots by spawn distance —
+    each bot owns the zones nearest its base centroid. `ExpansionPlannerBotModule`
+    scores own-sector fields first (foreign fields reachable but deprioritised, never
+    forbidden — a dead ally's sector re-folds to the survivors), and
+    `DefenseCoveragePlanner` counts ally-covered fronts as covered for the team's map
+    shape but keeps a handoff margin at sector borders.
+- **New broadcast fields** (additive, `TeamBroadcast` ctor defaults keep old call sites):
+  `ArmyCentroid` (WPos of own army centre — own-side, honest), `ExpansionAssist` (an
+  `ExpansionClaim` the publisher wants escorted — a thin army claiming a contested field
+  asks for a bodyguard; the directive routes the nearest free ally the same way rescue
+  routes to `DefendPosition`).
+- **One owner per decision, unchanged:** `CoalitionDirective` is a *publication* — every
+  consumer reads it as demand bias. Squad orders stay in `SquadManagerBotModuleCA`,
+  production in `UnitBuilderBotModuleCA`, expansion in `ExpansionPlannerBotModule`,
+  defence in `PrepositionDefenceTick`. No new order issuer; the fold is pure and each
+  side of a mismatch degrades to today's behaviour (`TeamBroadcast.Empty` → own-only
+  plan = current TC-2 semantics).
+- **Fog honesty:** the directive folds own-side scalars and ally-published positions only.
+  `MainTarget` is a `Player`, not a location — no enemy enumeration crosses the wire.
+  `ArmyCentroid`/`ExpansionClaim` are own-side. An ally's visible-enemy knowledge may be
+  published only where shared vision already shows it to the team (OpenRA allied vision
+  makes that the honest case).
+- **Switch groups (planned):** `BB_tc3_coalition_plan` (broadcast fields + fold +
+  `own.coalition_*` situation fields, publish-only), `BC_tc3_rescue_election` (nearest-
+  army responder), `BD_tc3_sectors` (Voronoi partition bias), `BE_tc3_main_target`
+  (MasterAi/Squad target bias). All default-off, inert in 1v1 and on mixed teams without
+  allied providers — same degradation contract as TC-2.
+- **Team roles beyond TC-2d:** the role split currently spreads TechRush↔Expansion rests.
+  With sectors live, the partition itself carries the spread (sector = expander frontier),
+  and `RoleSplitBias` keeps the arsenal spread — the two compose instead of competing.
+- **Acceptance criteria (6v6 evaluation, tools/ai):** measured off situation + mission
+  records — (a) `team_shared_target` > 1 during at least one push window per team;
+  (b) contested expansion claims resolved without two allied refineries within
+  `AllyClaimRadiusCells`; (c) `DefendRequests` answered: a friendly squad enters the
+  requester's `DefendPosition` region within the escort expiry; (d) climax-window
+  convergence: ≥2 allies launch within ±`TeamSyncForceScale` window of the coalition
+  `Push`; (e) team territory: union of held `IBotRegionRoles` regions vs. enemy team's —
+  the union, not the overlap, is the metric (per-member coverage is already logged).
+- **6v6 harness:** `run_ai_match_batch.py --team-size N` generalises the TC-3 duo wiring —
+  Team A occupies `Multi0..Multi{N-1}`, Team B `Multi{N}..Multi{2N-1}`, reciprocal
+  `Allies:` within teams and `Enemies:` across; needs a map with ≥2N `PlayerReference`s
+  and ≥2N mpspawns (dusttown-battle-6v6, moldova-6v6 verified at 12). `run_league.py`
+  takes `"team_size": N` the same way.
