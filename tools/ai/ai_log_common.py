@@ -55,6 +55,26 @@ def mmss(ticks: float, timestep_ms: int = DEFAULT_TIMESTEP_MS) -> str:
     return f"{seconds // 60:02d}:{seconds % 60:02d}"
 
 
+# ── the ONE match-score objective (AI_ARCHITECTURE §12.25, review 2026-10-02 §6.2) ──
+# score = win + margin + speed_bonus, on raw ticks so every caller scores identically
+# regardless of how it displays time. The report and the tuner must agree or a human
+# can see arm A win the report while the tuner applies a different objective. The
+# tuner's constants are canonical - it is the gate that accepts an arm.
+SCORE_SPEED_WEIGHT = 0.25
+SCORE_SPEED_REF_TICKS = 54000  # ~36 game minutes at DEFAULT_TIMESTEP_MS; a slower win earns no bonus
+
+
+def match_score(outcome: str, killed: float, lost: float, duration_ticks: int) -> dict:
+    """win + margin + speed_bonus for one match. Callers decide which matches carry signal
+    (the tuner drops undecided/too-short ones before calling)."""
+    win = 1.0 if outcome == "won" else 0.0
+    total = killed + lost
+    margin = (killed - lost) / total if total > 0 else 0.0
+    speed = SCORE_SPEED_WEIGHT * min(1.0, max(0.0, 1.0 - duration_ticks / SCORE_SPEED_REF_TICKS)) if win else 0.0
+    return {"win": win, "margin": round(margin, 4), "speed_bonus": round(speed, 4),
+            "score": round(win + margin + speed, 4)}
+
+
 def mean(values):
     values = [v for v in values if v is not None]
     return sum(values) / len(values) if values else None

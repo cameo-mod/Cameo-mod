@@ -11,9 +11,10 @@ SCORE (one number per bot per match; higher is better):
     win    = 1 if the player's outcome is "won", else 0
     margin = (killed - lost) / (killed + lost)           killed = stats.kills_cost, lost = stats.deaths_cost
              (0 when both are 0; range -1..1)
-    speed  = 0.5 * max(0, (30 - length_min) / 30)        only for a win; length_min = duration_ticks * timestep / 60000
-    score  = win + margin + speed                        range -1 .. 2.5
-A fast, lopsided win is 2.5; a drawn-out loss with equal trades is 0. The weights are SPEED_WEIGHT / SPEED_REF_MIN below.
+    speed  = SPEED_WEIGHT * (1 - duration_ticks / SPEED_REF_TICKS) clamped to [0, weight]; wins only
+    score  = win + margin + speed                        the ONE shared objective: ai_log_common.match_score
+A fast, lopsided win tops out near 2.25; a drawn-out loss with equal trades is 0. The constants are the
+tuner's (the acceptance gate) - this report displays exactly what the gate optimizes.
 
 Aggregates: by personality, and by knob vector (the BO-1 knobs, read from `player.knobs` or `knobs` of the match record
 when present; "(none)" otherwise): matches, win rate, mean score and the mean time to first of each category.
@@ -32,16 +33,6 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import ai_log_common as c  # noqa: E402
 
 CATEGORIES = ["conyard", "power", "refinery", "production", "tech", "defence", "support", "superweapon", "other"]
-SPEED_WEIGHT = 0.5
-SPEED_REF_MIN = 30.0
-
-
-def score(outcome: str, killed: int, lost: int, length_min: float) -> dict:
-    win = 1 if outcome == "won" else 0
-    total = killed + lost
-    margin = (killed - lost) / total if total else 0.0
-    speed = SPEED_WEIGHT * max(0.0, (SPEED_REF_MIN - length_min) / SPEED_REF_MIN) if win else 0.0
-    return {"win": win, "margin": round(margin, 4), "speed_bonus": round(speed, 4), "score": round(win + margin + speed, 4)}
 
 
 def knob_vector(match: dict | None) -> str:
@@ -80,8 +71,8 @@ def build(data: dict[str, list[dict]]) -> dict:
             length = c.minutes(match.get("duration_ticks", 0), ts)
             row["outcome"] = {"result": match.get("player", {}).get("outcome", ""), "length_min": round(length, 2),
                               "kills_cost": stats.get("kills_cost", 0), "deaths_cost": stats.get("deaths_cost", 0)}
-            row["outcome"].update(score(row["outcome"]["result"], row["outcome"]["kills_cost"],
-                                        row["outcome"]["deaths_cost"], length))
+            row["outcome"].update(c.match_score(row["outcome"]["result"], row["outcome"]["kills_cost"],
+                                                row["outcome"]["deaths_cost"], match.get("duration_ticks", 0)))
         rows.append(row)
 
     def aggregate(keyname):

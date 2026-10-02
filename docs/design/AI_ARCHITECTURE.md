@@ -2864,6 +2864,11 @@ never *aimed* at it.
   genericbot (`classicbot || (genericbot && !garrison_contest)`) — the same yield pattern
   as `cn3_bridge_repair` (EngineerBotModule's RepairBridge job). Classic keeps the CA
   loader untouched, so the A/B control is preserved.
+- *Terminal cards:* every contest claim ends in a DORMANT card line — `done` (walkers
+  inside / building ours), `target_gone` (destroyed), `x_contest_lost` (flipped enemy),
+  or `lost_units` (walkers died in transit). Raid cards that leave the scan without a
+  reservation are shelved `target_gone`; reserved ones stay live under the executor. The
+  archive therefore has a close-out for every card this module publishes.
 
 **EX-4 — cover the whole map** (`ExpansionPlannerBotModule.CoverAllFields`, switch
 `AC_cover_map_expansion`).
@@ -2933,10 +2938,13 @@ alternative exists — no harvester ever strands idle.
 build requests defer to next tick. Essential = construction yards, refineries, power,
 and exactly one in-flight production building (the no-factory deadlock guard).
 
-**Switch map for the round:** `F_concave` (§12.7a), `AB_garrison_contest` + `L_cn2_
-_garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first`,
-`AE_spread_assault` (documents the default-on trio), plus `X_cn3_bridge_repair` /
-`Y_cn3_stealth_squads` from the same day's merges.
+**Switch map for the round (post-consolidation):** `F_concave`/`AG_assault_fanout` (§12.7a),
+`AB_garrison_contest` + `L_cn2_garrison_defense` (contest + man-own), `AC_cover_map_expansion`,
+`AD_spaced_base_placement`, `AE_army_first`, `AF_harvester_spread` (the default-on trio's
+switched parts), plus `X_cn3_bridge_repair` / `Y_cn3_stealth_squads` from the same day's
+merges. (The pre-consolidation `AD_army_first`/`AE_spread_assault` groups were removed from
+`increment_switches.yaml` — they wrote fields the merge deleted and would have contaminated
+`@classic`'s harvester-cap opt-out via the unscoped `HarvesterBotModuleCA` match.)
 
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
