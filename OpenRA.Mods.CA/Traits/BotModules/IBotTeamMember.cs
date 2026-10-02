@@ -67,9 +67,30 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public readonly WPos ExpansionClaim;
 
+		/// <summary>
+		/// TC-3 (AI_ARCHITECTURE §12.18): the centroid of the publisher's own mobile army —
+		/// own-side, honest. Feeds the nearest-army rescue election.
+		/// <see cref="WPos.Zero"/> when none.
+		/// </summary>
+		public readonly WPos ArmyCentroid;
+
+		/// <summary>
+		/// TC-3: an expansion claim the publisher wants escorted — a thin army claiming a
+		/// contested field asks for a bodyguard. <see cref="WPos.Zero"/> when none.
+		/// </summary>
+		public readonly WPos ExpansionAssist;
+
+		/// <summary>
+		/// TC-3: the publisher's spawn anchor (map spawn point / home location) — public
+		/// map data shared so every member folds the identical Voronoi sector partition.
+		/// <see cref="WPos.Zero"/> when none.
+		/// </summary>
+		public readonly WPos SpawnPoint;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
 			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
-			int clientIndex = 0, WPos expansionClaim = default)
+			int clientIndex = 0, WPos expansionClaim = default, WPos armyCentroid = default,
+			WPos expansionAssist = default, WPos spawnPoint = default)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -81,6 +102,9 @@ namespace OpenRA.Mods.CA.Traits
 			DefendPosition = defendPosition;
 			ClientIndex = clientIndex;
 			ExpansionClaim = expansionClaim;
+			ArmyCentroid = armyCentroid;
+			ExpansionAssist = expansionAssist;
+			SpawnPoint = spawnPoint;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>

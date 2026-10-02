@@ -243,6 +243,17 @@ namespace OpenRA.Mods.CA.Traits
 			"pool stays home regardless of how loud the request is.")]
 		public readonly int TeamDefendAnswerMinPoolUnits = 8;
 
+		[Desc("TC-3 (12.18): the coalition fold elects exactly one allied responder per defend",
+			"request (nearest ArmyCentroid to the defend position) — answer only our own",
+			"assignment; the unelected allies stand down. Needs UseTeamDefendAnswers. A missing",
+			"provider or an empty election keeps today's TopDefendRequest pick, bit-identical.")]
+		public readonly bool UseCoalitionRescue = false;
+
+		[Desc("TC-3 (12.18): the squad's main-target preference folds to the coalition's voted",
+			"MainTarget while one is published — the merged-army effect under one directive.",
+			"A null coalition target keeps today's provider pick, bit-identical.")]
+		public readonly bool UseCoalitionTarget = false;
+
 		[Desc("Percent of the desired attack force bar required while the Director is in BuildUp.",
 			"A disabled/absent Director also reads BuildUp — 100 keeps the baseline bar.")]
 		public readonly int DirectorBuildUpForceScalePercent = 100;
@@ -682,6 +693,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotProtectionRequestProvider[] protectionRequestProviders;
 		IBotRequestUnitProduction[] unitRequesters;
 		IBotUtilityAxes[] utilityAxesProviders;
+		IBotScaleTargets[] scaleTargetProviders;
 
 		// CN3: the detector-memory providers the stealth squads read. Conditional
 		// (`cn3_stealth_squads`), so enablement is resolved per use, never cached.
@@ -1345,6 +1357,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
+			scaleTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
@@ -1632,10 +1645,34 @@ namespace OpenRA.Mods.CA.Traits
 			if (threat == null && request == null && teamAnswersOn &&
 				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
 			{
-				var ally = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
-				if (ally != null)
-					request = new BotProtectionRequest(World.Map.CellContaining(ally.DefendPosition),
-						ally.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+				// TC-3 (§12.18): the coalition fold elects exactly one responder per defend
+				// request — the nearest free ally by ArmyCentroid. A published election is
+				// binding: we answer only our own assignment, and not being elected is a
+				// stand-down, not a fallback. No provider or an empty election keeps today's
+				// TopDefendRequest pick verbatim.
+				var election = Info.UseCoalitionRescue
+					? Player.PlayerActor.TraitsImplementing<IBotCoalition>().FirstEnabledTraitOrDefault()?.Coalition?.RescueAssignments
+					: null;
+				if (election is { Count: > 0 })
+				{
+					var elected = election.FirstOrDefault(a => a.ResponderClientIndex == Player.ClientIndex);
+					if (elected != null)
+					{
+						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
+						var requester = broadcasts.FirstOrDefault(b => b != null && b.ClientIndex == elected.RequesterClientIndex);
+						var armyValue = requester?.OwnArmyValue
+							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
+						request = new BotProtectionRequest(World.Map.CellContaining(elected.DefendPosition),
+							armyValue, World.WorldTick + Info.ProtectInterval * 10);
+					}
+				}
+				else
+				{
+					var ally = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
+					if (ally != null)
+						request = new BotProtectionRequest(World.Map.CellContaining(ally.DefendPosition),
+							ally.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+				}
 			}
 
 			if (threat == null && request == null)
@@ -1820,12 +1857,24 @@ namespace OpenRA.Mods.CA.Traits
 
 		Player EffectiveMainTarget()
 		{
-			if (!Info.PreferMainTarget || mainTargetProviders == null)
-				return null;
+			var preferred = Info.PreferMainTarget && mainTargetProviders != null
+				? mainTargetProviders
+					.Select(p => p.MainTarget)
+					.FirstOrDefault(target => target != null && target.WinState == WinState.Undefined)
+				: null;
 
-			return mainTargetProviders
-				.Select(p => p.MainTarget)
-				.FirstOrDefault(target => target != null && target.WinState == WinState.Undefined);
+			// TC-3 (§12.18): the coalition's voted MainTarget trumps the provider pick —
+			// the whole team folds onto one enemy. Only a non-null published target binds;
+			// a missing provider or an Empty directive keeps today's result, bit-identical.
+			if (Info.UseCoalitionTarget)
+			{
+				var coalitionTarget = Player.PlayerActor.TraitsImplementing<IBotCoalition>()
+					.FirstEnabledTraitOrDefault()?.Coalition?.MainTarget;
+				if (coalitionTarget != null)
+					return coalitionTarget;
+			}
+
+			return preferred;
 		}
 
 		public static List<T> PreferOwned<T>(List<T> candidates, Func<T, bool> ownedByMainTarget)
@@ -2501,12 +2550,23 @@ namespace OpenRA.Mods.CA.Traits
 			if (Info.UseTeamSyncAttacks && TeamBlackboard.Collect(Player).AnyClimax)
 				forceScale = TeamSyncForceScale(forceScale, true, Info.DirectorClimaxForceScalePercent);
 
-			var requiredValue = ApplyForceScale(desiredAttackForceValue, forceScale);
+			// Scale targets (DESIGN 19.10): an enabled provider's army value target replaces SquadValue and its fixed time
+			// ramp (growth lives in the provider), and MaxIdleUnits scales by the same factor. The Director / team force
+			// scale and ValueOnlyAttackLaunch apply on top, exactly as before. No provider: the yaml numbers.
+			var desiredValue = desiredAttackForceValue;
+			var maxIdleUnits = Info.MaxIdleUnits;
+			if (Info.SquadValue > 0 && scaleTargetProviders.TryArmyValue(Info.SquadValue, out var armyTarget))
+			{
+				desiredValue = armyTarget;
+				maxIdleUnits = Math.Max(1, (int)((long)Info.MaxIdleUnits * armyTarget / Info.SquadValue));
+			}
+
+			var requiredValue = ApplyForceScale(desiredValue, forceScale);
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
-			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
+			if (unitsHangingAroundTheBase.Count >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded

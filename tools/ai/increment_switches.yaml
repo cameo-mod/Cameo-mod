@@ -123,17 +123,36 @@ groups:
   AC_cover_map_expansion:            # EMBER EX-4 - MCV appetite tracks free far fields, not McvTargetCount: expand until every reachable field is claimed; difficulty paces speed, never the ceiling
     ExpansionPlannerBotModule:
       CoverAllFields: true
-  AD_spaced_base_placement:          # EMBER SP-1 - findPos re-ranks its first 24 placeable cells by distance to the nearest own building; bases grow outward with gaps instead of packing into a pathfinder jam
-    GrantConditionOnBotOwner@spacedbase:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
-  AE_army_first:                     # EMBER AF-1 - PauseBuildingProduction while cash < 2500 (resume >= 4000, refineries exempt): unit production eats the income before optional buildings do
+  AJ_field_coverage:                 # FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): one refinery per anchor (spreader / spreaderless field) placed next to it and never more than anchors (replaces the yard cap, OptimalRefineryCount and the scale-target refinery cap); the MCV site and the crawl target go in different directions and spread to ground we do not own; EX-4 + greedy MCV run more aggressively
+    ExpansionPlannerBotModule:
+      FieldCoverage: true
+      CoverAllFields: true             # EX-4 on (group AC's switch, repeated so AJ is self-contained)
+      CoverAllFieldsMaxInflight: 3     # 2 -> 3: a further wave of MCVs is queued while the first is still driving, so fields fill in parallel; bounded, and the cash reserve still gates each request
+      McvRequestReserve: 1000          # 1500 -> 1000: the maintainer saw bots crawl late; each request still needs the cash, difficulty paces through BotLimits intervals
+      McvTargetCount: 4                # 3 -> 4: the floor under CoverAllFields (active + inflight) for a map with few reachable far fields
+  AD_spaced_base_placement:          # SP-1 re-ranking (the ONE spacing owner, SpacingAdvisorBotModule; its hard building gap is already live for genericbot) - findPos re-ranks its first 24 placeable cells by distance to the nearest own building; bases grow outward instead of packing into a pathfinder jam
+    SpacingAdvisorBotModule:
+      RerankCandidates: true
+  AE_army_first:                     # the ONE army-first switch (ArmyFirstBotModule, AF-1 + DAWN merged): holds non-essential buildings while cash < 2500 (resume >= 4000) OR while combat units < 14 with cash > 1500; conyard/refinery/power/first factory always pass
     GrantConditionOnBotOwner@armyfirst:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+    ArmyFirstBotModule:
+      MinArmyUnitsBeforeBuildings: 14
+      ArmyFirstMinCash: 1500
   AF_harvester_spread:               # EMBER HS-1 - genericbot's field-deficit redirect scans ~3.5x faster (433->125) so crowded fields bleed harvesters to starved ones; @classic untouched
     HarvesterBotModuleCA@generic:
       ScanForLowEffectHarvestersInterval: 125
+  AH_parallel_production:            # EMBER PP-1 - IBotProductionWidth provider: BuildUnit fills up to 4 idle queues per category per call (3 war factories produce in parallel); provider-seam so shared @generic never hands it to classic
+    GrantConditionOnBotOwner@parallelprod:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
   AG_assault_fanout:                 # the line-of-death fix, ONE switch (CV concave 12.7a unified with NOVA ATK-1, 2026-10-02): arms the AssaultFormationBotModule provider so Rush squads deploy a range-matched concave arc (wider for bigger armies) and commit staggered before engaging. Provider tunables live on its Info; classic has no provider = bit-identical
     GrantConditionOnBotOwner@assaultfanout:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  ST_scale_targets:                  # DESIGN 19.10 / AI_ARCHITECTURE 12.22: arms the ScaleTargetsBotModule provider - harvester/refinery/production/conyard/tech/superweapon/aircraft targets and the army value target grow with the seen enemy, the unscouted map, difficulty, personality and game time, and replace the fixed per-tier limits (HarvesterLimit, RefineryLimit, ProductionTypeLimit, McvTargetCount, tech/superweapon BuildingLimits, MaxAircraft, SquadValue). No provider (classic, switch off) = every consumer keeps its limit, bit-identical
+    GrantConditionOnBotOwner@scaletargets:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  AK_build_order_knobs:              # DESIGN 19.2 / AI_ARCHITECTURE 12.25 BO-1: arms the BuildOrderKnobsBotModule provider - eight bounded multipliers (tempo, greed, production, tech, defence, power_margin, expansion, support) + a named opening from personality preset x learned x jitter with a fog-honest react layer; the shared base builder reads it only from an enabled provider (BuildingDelays/Intervals, BuildingFractions by category, power surplus, opening step). No provider (classic, switch off) = bit-identical
+    GrantConditionOnBotOwner@buildorderknobs:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
   F2_ca_f2p2:                        # CA F2 part 2 hand-ports (WP-A1/A3/A4): air limits, route start, squad state tweaks
     UnitBuilderBotModuleCA:        # one instance is shared by genericbot AND classicbot (34 ContentPacks extend it), so it cannot be split
@@ -154,3 +173,17 @@ groups:
       MinBuildingGapCells: 2
     HarvesterBotModuleCA:
       MaxHarvestersPerResourceIndice: 4
+  BB_tc3_coalition_plan:             # NOVA TC-3 - coalition fold: every member computes the identical team directive (MainTarget vote, Push/Defend phase, rescue election, sector anchors) from the same broadcast set - publish-only, inert in 1v1
+    MasterAiBotModule:
+      UseCoalitionPlan: true
+  BC_tc3_rescue_election:            # NOVA TC-3 - nearest-army rescue: the fold elects exactly one allied responder per defend request (nearest ArmyCentroid to DefendPosition); losers stand down
+    SquadManagerBotModuleCA:
+      UseCoalitionRescue: true
+  BD_tc3_sectors:                    # NOVA TC-3 - Voronoi territory: ExpansionPlanner scores own-sector fields first (spawn-anchor partition, foreign fields deprioritized never forbidden; dead ally's sector refolds)
+    ExpansionPlannerBotModule:
+      UseCoalitionSectors: true
+  BE_tc3_main_target:                # NOVA TC-3 - one commander: master's target bias + squad MainTarget preference fold to the coalition target (the merged-army effect under one directive)
+    MasterAiBotModule:
+      UseCoalitionTargetBias: true
+    SquadManagerBotModuleCA:
+      UseCoalitionTarget: true

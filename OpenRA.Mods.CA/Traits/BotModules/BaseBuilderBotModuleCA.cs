@@ -150,14 +150,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum range at which to build defensive structures near a combat hotspot.")]
 		public readonly int MaximumDefenseRadius = 20;
 
-		[Desc("Cells of empty space required between the edge of a newly placed building's footprint",
-			"and the footprint edge of any other own building. Keeps bases spread out instead of",
-			"packing buildings edge-to-edge (fewer traffic jams, cheaper pathfinding). 0 disables.")]
-		public readonly int MinBuildingGapCells = 2;
-
-		[Desc("Building gap used for defense-type placements so defensive lines can still form.")]
-		public readonly int MinBuildingGapDefensesCells = 1;
-
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
@@ -166,15 +158,6 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
-
-		[Desc("Army-first production: while the player owns fewer combat units (non-building actors",
-			"with an attack trait) than this, non-essential building requests are deferred whenever",
-			"cash is above ArmyFirstMinCash so unit production keeps the money. Construction yards,",
-			"refineries, power and the first production building always pass. 0 disables.")]
-		public readonly int MinArmyUnitsBeforeBuildings = 0;
-
-		[Desc("Cash level above which the MinArmyUnitsBeforeBuildings deferral applies.")]
-		public readonly int ArmyFirstMinCash = 2000;
 
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
@@ -342,7 +325,7 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			foreach (var provider in expansionTargetProviders)
-				if (provider.WantsRefineryAtExpansionTarget && provider.ExpansionTarget != null)
+				if (provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive))
 					return provider;
 
 			return null;
@@ -351,6 +334,20 @@ namespace OpenRA.Mods.CA.Traits
 		// Cameo (§12.13, EX-2): an expansion planner is mounted at all (genericbot). Classic shares this module but
 		// mounts no provider, so refinery placement keyed on this stays bit-identical there.
 		public bool HasExpansionGuidance => expansionTargetProviders is { Length: > 0 };
+
+		// Cameo (§12.24, FE-1): the provider enforcing one refinery per anchor, if its switch is on. Null = every refinery
+		// rule below is the old one (classic mounts no provider; genericbot with the switch off publishes false).
+		public IBotExpansionTargetProvider RefineryLawProvider()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			foreach (var provider in expansionTargetProviders)
+				if (provider.RefineryLawActive)
+					return provider;
+
+			return null;
+		}
 
 		/// <summary>
 		/// §12.13 EX-2: keep only the resource cells whose field no own refinery serves — a field counts as served
@@ -404,6 +401,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int refineryLimit;
+		IBotScaleTargets[] scaleTargets;
+		IBotBuildOrderKnobs[] buildOrderKnobs;
 
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
@@ -623,6 +622,43 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>
+		/// The first enabled build-order knobs provider (AI_ARCHITECTURE 12.25), or null: classic and the switch-off state have none,
+		/// and every knob consumer then keeps the unscaled number, bit-identical.
+		/// </summary>
+		public IBotBuildOrderKnobs BuildOrderKnobs
+		{
+			get
+			{
+				buildOrderKnobs ??= player.PlayerActor.TraitsImplementing<IBotBuildOrderKnobs>().ToArray();
+				return buildOrderKnobs.FirstEnabled();
+			}
+		}
+
+		/// <summary>An enabled scale-targets provider's target for the category (DESIGN 19.10); false = keep the BotLimits number.</summary>
+		public bool TryGetScaleTarget(string category, out int target)
+		{
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			return scaleTargets.TryTarget(category, out target);
+		}
+
+		/// <summary>
+		/// The BuildingLimits entry of a building, with the scale targets applied: a building the provider tags `tech` or
+		/// `superweapon` takes its category target in place of its per-actor number; every other entry keeps its value.
+		/// False when the building has no entry (no limit).
+		/// </summary>
+		public bool TryGetBuildingLimit(string actorName, out int limit)
+		{
+			if (!Info.BuildingLimits.TryGetValue(actorName, out limit))
+				return false;
+
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			if (scaleTargets.TryBuilding(actorName, out var scaled))
+				limit = scaled;
+
+			return true;
+		}
+
 		void RefreshBotLimits()
 		{
 			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
@@ -810,7 +846,28 @@ namespace OpenRA.Mods.CA.Traits
 
 			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
 
-			if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
+			// FE-1 (§12.24): one refinery per anchor. DESIGN §19.1b binds every field to its refinery, so the yard-based
+			// ceiling (RefineriesPerBase x yards + MaxExtraRefineries), BotLimits.RefineryLimit and the §19.10 scale-target
+			// refinery cap are all bypassed: the physical cap is the number of anchors, and a refinery is allowed only while
+			// an anchor in building reach is unserved. The very first refinery keeps InititalMinimumRefineryCount.
+			var law = RefineryLawProvider();
+			if (law != null)
+			{
+				var inProduction = 0;
+				foreach (var r in Info.RefineryTypes)
+					if (BuildingsBeingProduced != null && BuildingsBeingProduced.TryGetValue(r, out var n))
+						inProduction += n;
+
+				var total = currentRefineryCount + inProduction;
+				if (total < Info.InititalMinimumRefineryCount)
+					return false;
+
+				return total >= law.RefineryAnchorCount || law.UnservedAnchorsInReach <= inProduction;
+			}
+
+			// Scale targets (DESIGN 19.10): an enabled provider's refinery target replaces BotLimits.RefineryLimit.
+			var limit = TryGetScaleTarget("refinery", out var scaledRefineries) ? scaledRefineries : refineryLimit;
+			if (limit != 0 && currentRefineryCount >= limit)
 				return true;
 
 			foreach (var r in Info.RefineryTypes)
@@ -825,7 +882,8 @@ namespace OpenRA.Mods.CA.Traits
 		// Require at least one refinery, unless we can't build it.
 		public bool HasAdequateRefineryCount() =>
 			Info.RefineryTypes.Count == 0 ||
-			(AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount() && ExpansionWantsRefinery() == null) ||
+			(AIUtils.CountActorByCommonName(RefineryBuildings) >= (RefineryLawProvider() != null ? Info.InititalMinimumRefineryCount : OptimalRefineryCount())
+				&& ExpansionWantsRefinery() == null) ||
 			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
 			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
 
@@ -840,24 +898,6 @@ namespace OpenRA.Mods.CA.Traits
 		public bool HasAdequateProductionCount() =>
 			Info.ProductionTypes.Count == 0 ||
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
-
-		int armyUnitsCacheTick = -1;
-		int armyUnitsCount;
-
-		// Cameo (army-first): combat units are own, non-building actors carrying an attack trait
-		// (ActorsHavingTrait<AttackBase> matches every armed subclass; buildings with weapons don't
-		// count as army). Cached per world tick and shared by every queue manager of this module.
-		public int OwnedArmyUnitCount()
-		{
-			if (armyUnitsCacheTick != world.WorldTick)
-			{
-				armyUnitsCacheTick = world.WorldTick;
-				armyUnitsCount = world.ActorsHavingTrait<AttackBase>()
-					.Count(a => a.Owner == player && !a.IsDead && !a.Info.HasTraitInfo<BuildingInfo>());
-			}
-
-			return armyUnitsCount;
-		}
 
 		public bool HasCompletedPowerPlant() => AIUtils.CountActorByCommonName(powerBuildings) > 0;
 

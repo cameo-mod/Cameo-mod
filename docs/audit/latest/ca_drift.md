@@ -8,11 +8,11 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 |---|--:|
 | IDENTICAL | 67 |
 | STALE | 9 |
-| MODIFIED | 25 |
+| MODIFIED | 23 |
 | MODIFIED+STALE | 47 |
 | MOVED/REMOVED | 13 |
-| CAMEO_ONLY | 49 |
-| MISSING (upstream files never copied) | 317 |
+| CAMEO_ONLY | 54 |
+| MISSING (upstream files never copied) | 319 |
 
 ## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (9)
 
@@ -122,13 +122,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2265 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2521 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1253 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1254 lines
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 - V3 now Ukraine unique unit. - Siege Tank now replaces V2 for Ukraine. - Yaml fixes.
@@ -222,9 +222,9 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2024-05-18 Scrin allegiances, Eviscerator, Obliterator, Nullifier, Overlord's Wrath, Gateway & Watcher.
 - `OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs`: base 2025-10-06, 1 upstream commits since, Cameo diff 3 lines
     - 2025-12-07 Clean up trait lookups.
-- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 792 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 841 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 667 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 693 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 437 lines
     - 2025-08-10 AI updates.
@@ -267,7 +267,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Traits/TransferStanceToDeathActor.cs`: base 2023-05-27, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 0 upstream commits since
 
-## MISSING: upstream files never adopted (317), by area
+## MISSING: upstream files never adopted (319), by area
 
 - `Traits`: **82**
 - `Traits/SupportPowers`: **26**
@@ -287,6 +287,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `Traits/Attack`: **4**
 - `Traits/World`: **3**
 - `Traits/Air`: **2**
+- `Traits/BotModules`: **2**
 - `Traits/Infiltration`: **2**
 - `Traits/Palettes`: **2**
 - `Traits/Sound`: **2**
@@ -384,6 +385,8 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Traits/AutoGuard.cs`
 - `OpenRA.Mods.CA/Traits/BallisticMissile.cs`
 - `OpenRA.Mods.CA/Traits/Berserkable.cs`
+- `OpenRA.Mods.CA/Traits/BotModules/MCVManagerBotModuleCA.cs`
+- `OpenRA.Mods.CA/Traits/BotModules/PowerDownBotModuleCA.cs`
 - `OpenRA.Mods.CA/Traits/CancelActivityOnPickup.cs`
 - `OpenRA.Mods.CA/Traits/CargoBlocked.cs`
 - `OpenRA.Mods.CA/Traits/CargoCloner.cs`

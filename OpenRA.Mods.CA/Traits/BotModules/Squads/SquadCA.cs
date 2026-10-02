@@ -45,6 +45,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// targets (e.g. air raiders prefer artillery). Empty = no preference.
 		internal HashSet<string> PriorityTags = [];
 
+		// Objective-shape deploy cooldown (12.7a, merged assault fan): the target cell and tick of this
+		// squad's last objective deployment arm/commit/abort, so the squad is not looped back onto the
+		// prongs forever. Per squad (no provider needed - the objective shape is gated by
+		// FormationMovement); it dies with the squad.
+		internal CPos DeployCooldownCell;
+		internal int DeployCooldownTick = int.MinValue / 2;
+
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)

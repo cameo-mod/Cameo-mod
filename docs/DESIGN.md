@@ -4957,6 +4957,23 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 * **Scout replacements are rationed**, so they can never take over a factory (the `hard` bot built
   ~72 Humvees and ~5 tanks per match). Evidence and design: `AI_ARCHITECTURE.md` §12.11–12.12.
 
+* **Field economy and coverage (maintainer 2026-10-02):** *"the refineries are always directly next to the nearest
+  resource spreader … no more refineries than resource spreaders … MCV expansion and base crawling should always go in
+  different directions … cover as much ground as possible, spread as far as possible and maximize the amount of resource
+  fields you can harvest from … keep track of all that and record that in your logs."*
+  * **One refinery per anchor.** An anchor is a resource spreader (`SeedsResource`), or the centre of a field that has
+    none. A refinery is placed on the free cell nearest its anchor. The refinery count is driven by unserved anchors in
+    building reach: never more refineries than anchors, and never capped by the number of construction yards (the old
+    `RefineriesPerBase × yards` ceiling blocked the refinery a crawled-out base needed).
+  * **MCV and crawl cover different ground.** The MCV site is chosen away from the crawl direction and from our existing
+    bases, and the score rewards fields far from everything we own.
+  * **Logged every match** (placement events + per-snapshot field economy, `tools/ai/expansion_report.py`), and improved
+    against those numbers. Spec: `design/AI_ARCHITECTURE.md` §12.24.
+* **Building build order lab (maintainer 2026-10-02):** buildings' build order, timers and intervals are LOGGED every match,
+  scored (win + margin, speed, destroyed-to-lost) and TUNED through §19.2 route 2 (knobs, paired experiments) and route 3
+  (opening bandit). Each personality has its own preset, every match a random jitter, and the knobs react mid-match to
+  what the bot has seen. Units follow after the rebalance. Spec: `design/AI_ARCHITECTURE.md` §12.25.
+
 ### 19.1c Personality top priorities: a lead over the enemy (maintainer 2026-09-29) — binding
 
 | personality | top priority |
@@ -5048,6 +5065,16 @@ best from both. There should only be one bot module per type and no competing du
   as upstream CA does (maintainer, same day: *"Classic should only use the CA modules where duplicates
   exist"*). Where no CA copy exists (support powers: OpenRA vs AS) the pair is merged as for any bot.
   Moving classic moves the benchmark: the first A/B after such a change is the new baseline.
+* **Parallel duplicates from two agents (maintainer rulings 2026-10-02):** when two lanes build the same behaviour, the
+  pair is MERGED into one owner (best of each). What a maintainer directive made live **stays live** for genericbot; the
+  rest stays behind its switch until the increment A/B. **classic opts out** of directive-live changes. It keeps its
+  pre-change behaviour through its own instance, or through having no provider: classic stays the reference.
+  Applied 2026-10-02:
+  * formation: §12.7a + ATK-1 + DAWN's assault fan → one deploy state with army/objective shapes;
+  * spacing → `SpacingAdvisorBotModule`;
+  * the harvester field cap → `HarvesterBotModuleCA`;
+  * army-first → `ArmyFirstBotModule`.
+  The "fight is on" test is one predicate (`NearestEngagedEnemy`, AI_ARCHITECTURE §12.7b).
 
 ### 19.4 Bot modules held for content that is coming (2026-09-30) — binding
 

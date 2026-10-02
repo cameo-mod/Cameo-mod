@@ -1,3 +1,123 @@
+# 2026-10-02 - BO-1: build-order knob layer (knobs, opening, react, learned file, tuner)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/bo1_2026_10_02`; nothing committed, no game launch).*
+
+**Done:**
+- `IBotBuildOrderKnobs` (Mods.CA) + `BuildOrderKnobsBotModule` (Mods.Cameo, `genericbot && build_order_knobs`, grant `Bots: fransbot` = inert on
+  master, switch group `AK_build_order_knobs`). Eight thousandths knobs: tempo, greed, production, tech, defence, power_margin, expansion
+  (published only), support. Mapping documented in AI_ARCHITECTURE 12.25 "Implemented" and the ai.yaml comment.
+- Base builder (`BaseBuilderQueueManagerCA`, shared with classic) reads the provider only when one is enabled: delays / intervals / wait ticks
+  (tempo), fractions by rules-derived category, power surplus target, `NewProductionCashThreshold` (greed / production), and the opening
+  step (after the power and refinery priority overrides). No provider = bit-identical.
+- Value = preset x learned x jitter, clamped; four openings with per-personality weights + Thompson sampling over learned (alpha, beta);
+  fog-honest react (air / rush / turtle / out-earned) from the published BotSituation, bounded and decaying; rush invalidates the opening.
+- `own.build_order` in the situation log; `mods/cameo/ai/learned/build_order_knobs.yaml` (empty); `UseLearnedBuildOrder` default off.
+- `tools/ai/tune_build_order.py` (score, report, `--propose` paired experiments, `--write` bounded + significance-checked) and
+  `apply_increment_switches.py --spec`. Tests: `BuildOrderKnobsEvalTest` (C#), `test_tune_build_order.py` (16).
+
+**Verified:** build 0 errors; Cameo tests 702/702; python tests pass; fog / frankenstein / personalities / wiring / direct-mutation audits
+PASS; `apply_increment_switches.py ... --groups AK_build_order_knobs --dry-run` = 1 change.
+**Not done:** no boot gate and no A/B (worktree, switch off). The presets, react thresholds and openings are untested starting values.
+The expansion knob has no consumer yet (the planner is another agent's file). `Fransbot` and `classic` are untouched.
+**Next:** merge, boot gate, arm `AK_build_order_knobs` in the increment A/B, then run the tuner pairs on mirror shards.
+
+# 2026-10-02 — FE-0 / BO-0 telemetry: placement log, `expansion` snapshot object, two report tools (behaviour-neutral)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/tel_2026_10_02`; nothing committed, no game launch).*
+
+**Done:**
+- `cameo-ai-placements.jsonl`: new world trait `AiPlacementLogWriter` (registered in `world.yaml`) fed by `IBotPlacementObserver` (CA assembly),
+  which `BaseBuilderQueueManagerCA` calls where it issues the `PlaceBuilding` order (queue tick per producer + a `refineryClaimed` flag; reason =
+  `refinery_claim` / `crawl` / `defence` / `base` / `other`). Refineries carry the nearest anchor (spreader or spreaderless field), its cell, distance.
+- `expansion` object on every situation snapshot (`AiLogExpansion.cs`: `ExpansionTelemetry` + pure `ExpansionMath`; `BotSituation.Expansion`,
+  `AiSituationLogWriter.AppendExpansion`). `ExpansionPlannerBotModule` gained read-only `LastMcvSite` (one line + a getter) - nothing else touched.
+- `tools/ai/expansion_report.py`, `tools/ai/build_order_report.py` (+ `ai_log_common.py`), `--json`; score formula in the docstring and AI_ARCHITECTURE 12.25.
+- Tests: `ExpansionTelemetryTest` (bearing, angle, excess, unassigned, spreaderless field, category order), `test_expansion_and_build_order_reports.py`.
+  Build 0 errors, Cameo tests 685/685, python tests pass; fog (new manifest entry `AiLogExpansion.cs`: 1 = the spreader scan, public map data),
+  frankenstein, wiring, direct-mutation audits PASS.
+**Not done / caveats:** no boot gate and no real match yet, so the jsonl schema is verified only against synthetic fixtures; the Fransbot base builder is not hooked
+(only the CA/Cameo `BaseBuilderQueueManagerCA` path logs); `expansion` fields use the planner's `ReachCells` / `ClaimRadiusCells` and a fixed 12-cell anchor
+radius (`ExpansionMath.AnchorRadiusCells`) - tune after the first logs. **Next:** boot-gate, one mirror match, run both tools on its Logs.
+
+# 2026-10-02 - FE-1 field coverage: one refinery per anchor, MCV and crawl apart, spread (AI_ARCHITECTURE 12.24)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/fe1_2026_10_02`; nothing committed, no game launch).*
+
+**Done:** switch `AJ_field_coverage` (`ExpansionPlannerBotModule.FieldCoverage`, default off, genericbot-only) with
+1) refinery law (anchors = spreaders + spreaderless field centres; wanted iff an unserved anchor is in reach and refineries < anchors;
+bypasses the yard cap, `OptimalRefineryCount` and the 19.10 refinery cap; first refinery keeps `InititalMinimumRefineryCount`),
+2) anchor-nearest claim placement (`findPos anchorOrder`), 3) MCV-site separation factor + crawl avoids MCV-held fields,
+4) spread factor on both scores, 5) aggression values in the group (MaxInflight 3, reserve 1000, McvTargetCount 4).
+BaseBuilder (shared with classic) reads only new default-false `IBotExpansionTargetProvider` members. Spec note in 12.24.
+**Verified:** build 0 errors; full Cameo tests 691 pass (13 new in `FieldCoverageTest`); fog / frankenstein / personalities /
+wiring / direct-mutation audits pass (fog manifest ExpansionPlanner 4 -> 5); `apply_increment_switches.py --groups AJ_field_coverage --dry-run` = 5 changes.
+**Not verified:** no boot gate and no match (not allowed here) - the behaviour is untested in-game.
+**Open / next:** boot-gate + A/B; aggression numbers are guesses; spreader scan assumes `ISeedableResource` actors are the
+map's spreaders; a claim that cannot place returns null (retried, parked after 12 re-plans) instead of stacking at home.
+
+# 2026-10-02 — Assault fan merged into the concave (one deploy state, two shapes; AI_ARCHITECTURE 12.7a objective shape)
+
+*Written by a Claude Sonnet sub-agent for the Opus coordinator (worktree `claude/coh_formation`; nothing committed, no game launch).*
+
+**Done:**
+- DAWN's assault fan (12.20b, private fields + `IssueAssaultFanOrders` in `GroundUnitsAttackMoveStateCA`) is removed; the
+  attack-move state has ONE entry into `GroundUnitsConcaveStateCA`, which now has two shapes chosen by the anchor
+  (`ShouldEnter(owner, out shape)`): Army (provider-gated concave, unchanged) and Objective (no armed enemy in contact, squad
+  target within `AssaultEngageRadiusCells`, gate `FormationMovement` + Rush = where the fan was live).
+- One planner: `ConcaveEvalCA.ProngCount` / `ObjectiveProngs` / `PlanObjective` (pure, integer, mirrored wings, `ActorID % prongs`).
+  Settings keep their names/defaults (`AssaultFan*`, `AssaultEngageRadiusCells`, `AssaultSyncHoldTicks`) - no yaml change.
+- Objective cooldown (750 ticks, same ground) lives on `SquadCA` (`DeployCooldownCell/Tick`): no provider exists for it.
+- 3 new `ConcaveEvalTest` cases (prong clamp, front width + mirror, determinism + one slot per member). Tests 661/661, build 0 errors,
+  fog / frankenstein / personalities / wiring / direct-mutation audits PASS, `grep fanBuckets|fanHolding|fanPush` empty.
+
+**Behaviour differences vs the fan (genericbot, switch off):** forming uses per-member `AttackMove` orders that spend micro
+actions (the fan used one grouped order per prong, unbudgeted) and no `Stop` hold; prong count / slot hash use weaponed non-scout
+members only (the fan counted every unit and pushed scouts/unarmed too - they now keep their last order until the attack state);
+after the push the squad is in `GroundUnitsAttackState` (the fan stayed in attack-move and re-pushed each tick); the 750-tick
+same-ground cooldown is new (the fan re-fanned whenever the attack-move state re-activated); re-plan moves at 3 cells of target
+movement (fan: 8); the deploy aborts if the target dies or leaves the engage radius; slots are terrain-snapped per member (the fan
+used raw cells); entry also requires `NearestEngagedEnemy` null and siege verdict Advance (the fan sat after both). With the
+`AG_assault_fanout` switch ON and no armed enemy in contact, a target-anchored concave becomes the objective shape (prongs).
+classic: `SquadManagerBotModuleCA@classic` does not set `FormationMovement` and there is no provider -> `ShouldEnter` returns
+false at its first gate, unchanged.
+**Not done:** no boot gate / A/B (worktree). **Next:** boot-gate on merge; the increment A/B measures the unified state.
+
+# 2026-10-02 — Merge DAWN/EMBER duplicates: building gap, harvester cap, army-first (one owner each)
+
+**Done (worktree `claude/coh_base`, written by a Claude Sonnet sub-agent for the Opus coordinator, not committed):**
+- Spacing: `SpacingAdvisorBotModule` owns the hard gap (2 / 1, LIVE, genericbot only; `IBotPlacementAdvisor` gained
+  `RanksCandidates` + the two gaps) and the re-ranking (`RerankCandidates`, switch `AD_spaced_base_placement`). BaseBuilder
+  fields removed; `findPos` takes `defenseGap`; the `spaced_base` condition granter is gone.
+- Harvester: per-field cap stays in `HarvesterBotModuleCA` (pure `HarvesterFieldCap`, 0 = unlimited); `@classic` sets 0;
+  `AF_harvester_spread` (HS-1 cadence) is the one switch.
+- Army-first: `ArmyFirstBotModule` = AF-1 cash vote + DAWN army-count gate; `PausesBuilding(building, essential)` replaces
+  the property; essentials = conyard/refinery/power/first factory. One switch `AE_army_first` (14 / 1500); `AD_army_first`
+  and `AE_spread_assault` deleted. Off on master.
+- `SpreadRulesTest` (9 tests); docs 12.20 / 12.20b updated; fog manifest refreshed (+1 own-unit count in ArmyFirst, -1 in BaseBuilder).
+
+**Not done:** no boot gate or A/B (worktree, no game launch). **Next:** boot-gate, then one increment A/B for AD/AE/AF.
+
+# 2026-10-02 — Scale targets: base and army grow with the seen enemy (ST, DESIGN 19.10 / AI_ARCHITECTURE 12.22)
+
+**Done (branch `claude/scale_targets`, dormant: `scale_targets` is granted to `fransbot` only until `ST_scale_targets` arms it):**
+- Pure integer growth law `ScaleTargetsEval` (thousandths, one floor): own line x time growth vs seen-enemy ratio x unscouted
+  margin / team size, personality x utility-axis lean, floor, physical cap. New provider `ScaleTargetsBotModule`
+  (`IBotScaleTargets`) recomputes every 125 ticks from fog memory only (`BotSituation` profiles + remembered actors,
+  `RegionMemory` for the unscouted share, `IBotZoneTopology` for own territory); publishes `scale_targets` on the situation log.
+- Consumers read it only when an enabled provider exists: harvester limit, refinery limit, production-type limit,
+  tech/superweapon `BuildingLimits` entries, `McvTargetCount` (planner, UT-4 skipped), army value + `MaxIdleUnits`,
+  `MaxAircraft`/`MaxAirSuperiority` (cap = `BotGlobalUnitBudget` share). Switch off or classic = old code path unchanged.
+- ai.yaml block with every field written (Min/Max = the 19.1 table, tech 1.0-3.25, production/conyard 1.5-7.5);
+  audit `audit_ai_personalities.py` checks fields, Min<=Max, tech line, minute-0 table. `ScaleTargetsEvalTest` (13 tests).
+
+**Findings:** `ConstructionYardLimit` has no reader on master (no MCVManagerBotModuleCA; the engine MCV manager is out of
+reach), so the conyard target drives only the planner. `DynamicBotInsurance` never read `HarvesterLimit`. No numeric defence
+cap exists: `defence` is telemetry. Offline BuildingLimits coverage estimate: tech about 23 of 294 entries, superweapon 0
+(the debug.log line `ST BuildingLimits entries taken over` gives the runtime figure).
+**Not done:** no boot gate or A/B (worktree, no game launch); refinery physical cap (no planner exposes fields in reach);
+the base builder's `RefineriesPerBase x yards + MaxExtraRefineries` ceiling still sits above the refinery target.
+**Next:** boot-gate, arm `ST_scale_targets` in the next increment, tune ratio/margin/growth defaults from the A/B.
+
 # 2026-10-02 — DAWN: 6v6 team test — hard stack beats classic stack
 
 `order-of-battle-rich` (12 slots, TEMPERAT), 6×hard vs 6×classic, td_gdi
@@ -16695,6 +16815,34 @@ claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
 is an independent, SquadManager-free implementation with runtime evidence;
 both are default-off. Coordinator picks which arms in the increment.
 
+## 2026-10-02 EMBER — PP-1 parallel production + armed smoke match
+
+- Reviewed NOVA's ATK-1 (`AssaultFormationPlanner` + `GroundUnitsAssaultFanoutStateCA` +
+  `AssaultFormationBotModule`, group AG) and the LegacyBridgeHut fix — clean seams, no
+  collisions with §12.20 work; merged to master via #768.
+- PP-1 `AH_parallel_production`: IBotProductionWidth provider seam (settings-only,
+  AssaultFormation-shaped) — UnitBuilder fills up to N idle queues per category per call.
+  Provider (not field-write) chosen so the shared UnitBuilderBotModuleCA@generic can't
+  hand the width to classic. ParallelProductionBotModule, genericbot && parallel_production.
+- Smoke harness: frozen worktree tmpab-smoke at af179d72f, engine junctioned, groups
+  AB/AC/AD/AE/AF/AG armed. First match launch died on stale engine DLLs
+  (Cannot locate type: AssaultFormationBotModuleInfo — bin predated the ATK-1 merge);
+  rebuilt CA+Cameo at master, relaunched.
+- Result (1x td_gdi mirror, hard-armed vs classic): hard lost 0-1 but the armed paths
+  fired — 40 garrison records (contest claims from WT99 + raid:garrison_* published),
+  hard produced 6 MCVs (old McvTargetCount=3 ceiling gone — EX-4 works), 5 conyards/6
+  refineries placed, zero new exceptions. Loss read: expanded aggressively, couldn't
+  hold against the omniscient reference — 1-match noise, real verdict is the increment A/B.
+- AH armed separately for the PP-1 leg of the smoke.
+- Boot-gate catch (LESSON): engine\bin is SHARED by every worktree via the junction —
+  another lane's build overwrote bin\OpenRA.Mods.Cameo.dll with a pre-PP-1 copy, and
+  booting aiwork then threw 'Cannot locate type: ParallelProductionBotModuleInfo'.
+  Copying only Cameo.dll mid-match then crashed the running smoke with
+  ReflectionTypeLoadException (Cameo referenced IBotProductionWidth the deployed CA.dll
+  lacked). Rule: rebuild BOTH CA+Cameo and copy the pair together; never swap a single
+  dll into bin while a game is running. Re-gated after paired copy: menu reached, zero
+  new exceptions (PID-scoped kill).
+
 ## 2026-10-02 (claude-sonnet sub-agent, coordinated by Claude Opus 5.5) - concave + ATK-1 merged into ONE formation implementation
 
 Two duplicate "deploy before the fight" implementations (CV concave F_concave, NOVA ATK-1 AG_assault_fanout) merged per
@@ -16816,3 +16964,74 @@ boot-gate PASS via Engine.SupportDir private log (shared perf.log is
 unattributable while inc2ab shards relaunch), fransbot_drift re-baselined,
 fransbot_lists regenerated. bot_insurance FAIL is pre-existing on master
 (uninsured classic/exploit_*/fransbot) — flagged for the fleet.
+
+## 2026-10-02 EMBER — SP-1 refinery fix + full-armed smoke WON
+
+- Maintainer feedback: refineries landed far from resource fields and stacked
+  multiple-per-field; other buildings ate the field frontage. Root cause found:
+  SpacingAdvisorBotModule.ChooseCell never checked the building type — refinery
+  claim candidates (EX-2 annulus around the field) got re-ranked toward
+  max-distance-from-own-buildings = far edge of the field ring. The field then
+  read UNSERVED (a refinery only serves within servedRadiusCells of the field
+  centre) → the builder stacked the next refinery on the same field.
+- Fix: `HasTraitInfo<RefineryInfo>` → return null (field proximity owns refinery
+  placement, untouched). Plus resource-frontage penalty: non-refinery candidates
+  whose footprint+1 ring touches a valuable resource score last (never rejected
+  outright — dense fields can't deadlock). §12.20 updated.
+- Merge: pulled origin/master into the branch TWICE — absorbed Claude's unified
+  concave (§12.7a, AssaultFormationPlanner deleted, ConcaveEvalCA kept) and the
+  ST scale-targets module; 4 + 2 conflicts resolved (docs/comments/counts —
+  module count now 66 types / 91 Player instances), both projects compile clean,
+  boot-gate PASS after each merge state.
+- Full-armed smoke (tmpab-smoke @ bf9151265, AB/AC/AD/AE/AF/AG/AH/ST all armed,
+  hard vs classic td_gdi): **hard WON 1-0 in 18,919 ticks** — 149 kills / 116
+  lost, army_value 57.3k vs classic's 0 (wiped). Ownership watchdogs clean
+  (0 double_owner), order_gate crossed=4 (SquadManager/ScoutBotModule seam —
+  other lanes' known overlap, minor). 1 match = directional signal only; the
+  official increment A/B is the coordinator's call.
+- Round-trip on prior evidence (ab-smoke-out + out2): all layers PASS except
+  order_gate WARN (crossed=1) and learning WARN (2 LEARNED lines — known thin
+  learning-consumption gap).
+- LESSON recorded: shared engine/bin re-clobbered by concurrent lanes' builds;
+  never swap a single dll of a cross-referencing pair into a live bin (crashed
+  a running match with ReflectionTypeLoadException).
+## 2026-10-02 (nova) — TC-3 coalition fold implemented (switches BB-BE)
+
+The §12.18 hivemind is live behind four default-off groups: every team member
+folds own + allied `TeamBroadcast`s through `CoalitionFold.Compute` (new
+`IBotCoalition.cs` seam in OpenRA.Mods.CA) into the identical
+`CoalitionDirective` — a voted `MainTarget`, `BuildUp/Push/Defend` phase,
+per-request rescue elections (nearest free `ArmyCentroid` to
+`DefendPosition`), and Voronoi `SectorAnchors` keyed on published spawn points.
+
+- BB `BB_tc3_coalition_plan`: MasterAiBotModule.UseCoalitionPlan publishes
+  ArmyCentroid (mean of own armed mobile units), ExpansionAssist (the
+  planner's contested claim via new IBotExpansionAssistProvider — field
+  Threat > 0, remembered-enemy fog-honest), SpawnPoint (HomeLocation /
+  base-centre fallback), then folds the directive at snapshot cadence and
+  publishes it through IBotCoalition. Situation log gains coalition_phase /
+  coalition_main_target.
+- BC `BC_tc3_rescue_election`: SquadManagerBotModuleCA.UseCoalitionRescue —
+  the elected responder rallies to DefendPosition; unelected allies stand
+  down (no pile-on). Empty election or no provider = today's
+  TopDefendRequest, verbatim.
+- BD `BD_tc3_sectors`: ExpansionPlannerBotModule.UseCoalitionSectors —
+  foreign-sector fields keep CoalitionForeignSectorPercent (35) of score;
+  argmax still picks foreign when no own-sector field remains.
+- BE `BE_tc3_main_target`: MasterAiBotModule.UseCoalitionTargetBias +
+  SquadManagerBotModuleCA.UseCoalitionTarget — both bound to a non-null
+  coalition target (master: still must be an attackable candidate; squad:
+  returns it as EffectiveMainTarget). Nemesis override still trumps.
+
+Deterministic fold (ClientIndex tiebreaks, no RNG/time), fog-honest (own-side
+scalars + ally-published positions; MainTarget is a Player, no enemy enum),
+publish-only (zero new order issuers). Ordering note: consumers read the
+*previous* snapshot's fold — the only honest publish→fold→consume order.
+SquadManagerBotModuleCA@classic gets the flags via the arm but no IBotCoalition
+provider exists on classicbot (MasterAi is genericbot-only) — degrades
+bit-identical, no code gate needed.
+
+Verified: build clean 0/0; 640/640 tests (9 new CoalitionFoldTest +
+SectorScorePercent); all four groups dry-run arm (15 rewrites;
+SquadManagerBotModuleCA@classic correctly skipped by the global skip list).
+Boot-gate + team-match A/B queued per workflow.

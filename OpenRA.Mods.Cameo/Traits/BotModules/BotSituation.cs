@@ -156,10 +156,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DirectorTension;
 		internal DirectorPhase DirectorPhase;
 
+		// ST (DESIGN 19.10, AI_ARCHITECTURE 12.22), record-only: the scale-targets inputs and targets of the provider's
+		// last recompute. Null (and omitted from the log) while no ScaleTargetsBotModule is enabled.
+		internal ScaleTargetsSnapshot ScaleTargets;
+
+		// BO-1 (AI_ARCHITECTURE 12.25), record-only: the build-order knob vector, opening and react events of the provider's last update.
+		// Null (and omitted from the log) while no BuildOrderKnobsBotModule is enabled.
+		internal BuildOrderSnapshot BuildOrder;
+		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
+		internal ExpansionSnapshot Expansion;
+
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
 		internal int TeamAlliedBots, TeamArmyValue, TeamMaxTension, TeamDefendRequests, TeamSharedTarget;
+
+		// TC-3 (AI_ARCHITECTURE §12.18), record-only: the folded coalition directive as of
+		// this snapshot — the team phase ordinal (0 BuildUp, 1 Push, 2 Defend) and the
+		// shared MainTarget's name. BuildUp/"" while UseCoalitionPlan is off, which is the
+		// Empty directive's honest answer.
+		internal int CoalitionPhase;
+		internal string CoalitionMainTarget = "";
 	}
 
 	internal sealed class MasterAiBotSavedState
@@ -390,6 +407,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("TC-2d: axis points the team-endpoint rests spread apart (a 2-bot team gets -/+ this).")]
 		public readonly int TeamRoleSplitShift = 20;
+
+		[Desc("TC-3 (AI_ARCHITECTURE §12.18): fold own + allied team-blackboard broadcasts into",
+			"the coalition directive — the shared MainTarget vote, rescue elections and sector",
+			"anchors — and publish the three broadcast fields it consumes (army centroid,",
+			"expansion assist, spawn anchor). Inert in 1v1.")]
+		public readonly bool UseCoalitionPlan = false;
+
+		[Desc("TC-3 (AI_ARCHITECTURE §12.18): master-side target bias — adopt the folded",
+			"coalition MainTarget when it is still one of this bot's own attackable",
+			"candidates. The nemesis override still trumps it; inert without UseCoalitionPlan.")]
+		public readonly bool UseCoalitionTargetBias = false;
+
 		[Desc("DI-1 Director (AI_ARCHITECTURE §12.16): own army value that counts as massed —",
 			"tension only builds while there is an army to send.")]
 		public readonly int DirectorArmyMassValue = 2500;
@@ -476,7 +505,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -534,6 +563,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// IBotTeamMember; a disabled or never-snapshotted master reads Empty instead.
 		TeamBroadcast broadcast = TeamBroadcast.Empty;
 
+		// TC-3 (AI_ARCHITECTURE §12.18): the coalition directive folded from own +
+		// allied broadcasts at the same snapshot cadence and published through
+		// IBotCoalition — Empty while UseCoalitionPlan is off, so every consumer
+		// degrades to today's behaviour.
+		CoalitionDirective coalition = CoalitionDirective.Empty;
+
 		// §12.14 PL telemetry state: last snapshot's cumulative counters and per-type caches.
 		long prevLedgerCreatedCost = -1, prevEconDestroyed;
 		int prevSnapshotTick = -1, prevAttacksLaunched, firstAttackTick = -1;
@@ -545,6 +580,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DeathsCostWindow { get; private set; }
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
+
+		// FE-0 (12.24), record-only: the field-economy collector the snapshots and the placement log share.
+		ExpansionTelemetry expansionTelemetry;
+		internal ExpansionTelemetry ExpansionTelemetry => expansionTelemetry ??= new ExpansionTelemetry();
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
 
 		// UT-1: the cooked posture axes for consumers; a disabled master reads as neutral.
@@ -560,6 +599,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// not-yet-snapshotted master publishes the empty broadcast — never a
 		// behaviour change.
 		TeamBroadcast IBotTeamMember.Broadcast => IsTraitDisabled ? TeamBroadcast.Empty : broadcast;
+
+		// TC-3: the folded team directive consumers read as demand bias; a disabled or
+		// not-yet-folded master reads Empty — never a behaviour change.
+		CoalitionDirective IBotCoalition.Coalition => IsTraitDisabled ? CoalitionDirective.Empty : coalition;
 		public IReadOnlyList<BotMission> Missions => IsTraitDisabled || !Info.PublishMissions
 			? Array.Empty<BotMission>()
 			: missions.Where(m => (!missionReservations.TryGetValue((m.Type, m.RegionIndex), out var reservedTick) ||
@@ -1034,6 +1077,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
+
+				// TC-3 BE (§12.18): the directive folded last snapshot is a demand bias —
+				// adopt the coalition MainTarget when it is still one of this bot's own
+				// attackable candidates (an alive, reached enemy per this snapshot's
+				// profiles); otherwise keep the chosen target. The nemesis override
+				// below and the next decision interval still trump it.
+				if (Info.UseCoalitionTargetBias && coalition.MainTarget != null)
+				{
+					var coalitionProfile = candidates.FirstOrDefault(p => p.Player == coalition.MainTarget);
+					if (coalitionProfile != null)
+					{
+						if (coalitionProfile.Player != incumbentTarget)
+							incumbentSince = tick;
+						target = incumbentTarget = coalitionProfile.Player;
+						targetProfile = coalitionProfile;
+					}
+				}
 			}
 
 			// §4.3 override: a player actively killing our base is the mandatory target,
@@ -1181,11 +1241,44 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var requestsDefence = urgency >= BotUrgency.Pressured;
 			var expansionClaim = player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>()
 				.FirstEnabledTraitOrDefault()?.ExpansionTarget;
+
+			// TC-3 (§12.18): the broadcast fields the coalition fold consumes — the own
+			// army's mean position for the rescue election, an expansion claim that
+			// wants a bodyguard, and the spawn anchor for the sector partition. All
+			// own-side or provider-published; Zero while UseCoalitionPlan is off.
+			var armyCentroid = WPos.Zero;
+			var expansionAssist = WPos.Zero;
+			var spawnPoint = WPos.Zero;
+			if (Info.UseCoalitionPlan)
+			{
+				var ownMobileArmy = ownLiveActors.Where(IsCombatUnit).ToArray();
+				if (ownMobileArmy.Length > 0)
+					armyCentroid = new WPos(
+						(int)(ownMobileArmy.Sum(a => (long)a.CenterPosition.X) / ownMobileArmy.Length),
+						(int)(ownMobileArmy.Sum(a => (long)a.CenterPosition.Y) / ownMobileArmy.Length),
+						(int)(ownMobileArmy.Sum(a => (long)a.CenterPosition.Z) / ownMobileArmy.Length));
+
+				expansionAssist = player.PlayerActor.TraitsImplementing<IBotExpansionAssistProvider>()
+					.FirstEnabledTraitOrDefault()?.ExpansionAssistTarget ?? WPos.Zero;
+				spawnPoint = player.HomeLocation != CPos.Zero
+					? player.World.Map.CenterOfCell(player.HomeLocation)
+					: OwnBaseCenter(player.World, ownLiveBuildings);
+			}
+
 			broadcast = new TeamBroadcast(tick, ownArmy, (int)urgency, director.Tension, director.Phase,
 				target, requestsDefence,
 				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero,
 				player.ClientIndex,
-				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero);
+				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
+				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint);
+
+			// TC-3 (§12.18): fold own + allied broadcasts into the coalition directive —
+			// every member runs the identical function over the identical set, so all
+			// members hold the identical directive without an electable command unit.
+			// Off flag or a solo board reads Empty; consumers degrade to today's behaviour.
+			coalition = Info.UseCoalitionPlan
+				? CoalitionFold.Compute(broadcast, TeamBlackboard.CollectBroadcasts(player))
+				: CoalitionDirective.Empty;
 
 			// TC-1: and read the allies' half of the board for the situation log —
 			// the caller's own broadcast stays out of the summary by design; a 1v1
@@ -1306,10 +1399,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				TeamMaxTension = team.MaxTension,
 				TeamDefendRequests = team.DefendRequests,
 				TeamSharedTarget = team.SharedTargetCount,
+				CoalitionPhase = (int)coalition.Phase,
+				CoalitionMainTarget = coalition.MainTarget?.InternalName ?? "",
 				BankedCash = cachedResources == null ? 0 : cachedResources.Cash + cachedResources.Resources,
 				BrownoutTicks = brownoutTicks,
 				IdleProductionTicks = idleProductionTicks,
-				ProductionQueues = productionQueueCount
+				ProductionQueues = productionQueueCount,
+				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

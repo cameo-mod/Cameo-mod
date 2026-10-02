@@ -174,6 +174,10 @@ namespace OpenRA.Mods.CA.Traits
 		IBotEnemyCompositionProvider compositionProvider;
 		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
+
+		// Cameo (§12.23, PP-1): lazy — resolved on first BuildUnit; null keeps the upstream one-queue fill.
+		IBotProductionWidth productionWidth;
+		IBotScaleTargets[] scaleTargets;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
@@ -369,50 +373,60 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			// For queues that support parallel production (e.g. Zerg hatchery), find one with a free slot.
 			// For standard queues, require the queue to be completely empty.
-			var queue = AIUtils.FindQueues(player, category).FirstOrDefault(q =>
-			{
-				if (q is IHasParallelQueueSlots p)
-					return p.AvailableSlots > 0;
-				return !q.AllQueued().Any();
-			});
-
-			if (queue == null)
-				return;
-
-			// Fill all available parallel slots in one pass so that every larva stays occupied.
-			var slotsToFill = (queue is IHasParallelQueueSlots parallelQueue)
-				? parallelQueue.AvailableSlots
-				: 1;
-
-			for (var slot = 0; slot < slotsToFill; slot++)
-			{
-				var unit = buildRandom ?
-					ChooseRandomUnitToBuild(queue, excludeLimited) :
-					ChooseUnitToBuild(queue, excludeLimited);
-
-				if (unit == null)
+			// Cameo (§12.21, PP-1): an enabled IBotProductionWidth provider lifts the one-queue-per-call
+			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
+			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
+			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
+			var maxQueues = productionWidth?.MaxQueuesPerCategory ?? 1;
+			var queues = AIUtils.FindQueues(player, category)
+				.Where(q =>
 				{
+					if (q is IHasParallelQueueSlots p)
+						return p.AvailableSlots > 0;
+					return !q.AllQueued().Any();
+				})
+				.Take(Math.Max(1, maxQueues));
+
+			foreach (var queue in queues)
+			{
+				// Fill all available parallel slots in one pass so that every larva stays occupied.
+				var slotsToFill = (queue is IHasParallelQueueSlots parallelQueue)
+					? parallelQueue.AvailableSlots
+					: 1;
+
+				for (var slot = 0; slot < slotsToFill; slot++)
+				{
+					var unit = buildRandom ?
+						ChooseRandomUnitToBuild(queue, excludeLimited) :
+						ChooseUnitToBuild(queue, excludeLimited);
+
+					if (unit == null)
+					{
+						if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+							RevertToBaselineComposition();
+
+						break;
+					}
+
+					var name = unit.Name;
+
+					if (!ShouldBuild(name, false, queue.Info.Type))
+					{
+						if (!excludeLimited)
+						{
+							BuildUnit(bot, category, buildRandom, true);
+							return;
+						}
+
+						break;
+					}
+
+					SetUnitInterval(name);
+					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					counters.Record(unit);
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
-						RevertToBaselineComposition();
-
-					return;
+						AddToActiveCompositionProducedValue(unit);
 				}
-
-				var name = unit.Name;
-
-				if (!ShouldBuild(name, false, queue.Info.Type))
-				{
-					if (!excludeLimited)
-						BuildUnit(bot, category, buildRandom, true);
-
-					return;
-				}
-
-				SetUnitInterval(name);
-				bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
-				counters.Record(unit);
-				if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
-					AddToActiveCompositionProducedValue(unit);
 			}
 		}
 
@@ -870,7 +884,19 @@ namespace OpenRA.Mods.CA.Traits
 			if (attackAircraftInfo == null)
 				return true;
 
+			// Scale targets (DESIGN 19.10): an enabled provider's aircraft target replaces MaxAircraft, and scales
+			// MaxAirSuperiority in the same proportion; without one both are the yaml numbers.
 			var limit = Info.MaxAircraft;
+			var maxAirSuperiority = Info.MaxAirSuperiority;
+			scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+			if (scaleTargets.TryTarget("aircraft", out var scaledAircraft))
+			{
+				if (maxAirSuperiority > 0 && Info.MaxAircraft > 0)
+					maxAirSuperiority = Math.Max(1, (int)((long)maxAirSuperiority * scaledAircraft / Info.MaxAircraft));
+
+				limit = scaledAircraft;
+			}
+
 			var currentCount = 0;
 			var isAirToAir = Info.AirToAirUnits.Contains(actorInfo.Name);
 
@@ -899,7 +925,7 @@ namespace OpenRA.Mods.CA.Traits
 						currentCount = numFriendlyAirToAirUnits + queued.Count(n => Info.AirToAirUnits.Contains(n));
 					}
 
-					limit = AirLimits.AirSuperiorityLimit(limit, numEnemyAirThreatUnits, numFriendlyAirToAirUnits, CountQueued, Info.MaxAirSuperiority);
+					limit = AirLimits.AirSuperiorityLimit(limit, numEnemyAirThreatUnits, numFriendlyAirToAirUnits, CountQueued, maxAirSuperiority);
 				}
 				else
 				{

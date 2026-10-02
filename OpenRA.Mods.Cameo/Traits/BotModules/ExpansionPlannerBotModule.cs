@@ -119,11 +119,54 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("TC-2c: an allied claim this close (cells) to a field's resource centre contests it.")]
 		public readonly int AllyClaimRadiusCells = 10;
 
+		[Desc("TC-3 / BD (AI_ARCHITECTURE §12.18): score the Voronoi sector anchored at our own spawn",
+			"first — a field belongs to the coalition sector anchor nearest it; foreign-sector fields keep",
+			"CoalitionForeignSectorPercent of their score (reachable, deprioritized, never forbidden).",
+			"Needs the master's UseCoalitionPlan publishing the anchors; inert in 1v1 (the only anchor",
+			"is our own) and bit-identical when no provider publishes.")]
+		public readonly bool UseCoalitionSectors = false;
+
+		[Desc("TC-3 / BD: percent of its score a foreign-sector field keeps. 0 would still leave the",
+			"argmax free to pick a foreign field when no own-sector field remains; higher values shrink",
+			"the home bias.")]
+		public readonly int CoalitionForeignSectorPercent = 35;
+
 		[Desc("BEV (AI_MASTER_PLAN §3; DESIGN §19.4 keeps BevManagerBotModule unloaded because this owner covers it):",
 			"a vehicle in the MCV module's McvTypes that is NOT a construction MCV and does not deploy into a refinery is",
 			"a base-building vehicle (Japan's cores) and deploys next to the base, not at a far field. Construction MCVs",
 			"(EX-3) and field refineries (Yuri's slave miner, Japan's core refinery) keep going to fields.")]
 		public readonly bool BaseVehiclesAtBase = true;
+
+		[Desc("FE-1 (AI_ARCHITECTURE §12.24, DESIGN §19.1b; switch group AJ_field_coverage): one refinery per ANCHOR (a resource",
+			"spreader, or the centre of a field that has none), placed on the free cell nearest the anchor; a refinery is wanted",
+			"only while an anchor in building reach is unserved and never beyond the anchor count (replacing the yard-based",
+			"cap, OptimalRefineryCount and the scale-target refinery cap). The MCV site and the crawl target also score a",
+			"separation factor (different directions) and a spread factor (unexplored ground). Needs DriveRefineries.")]
+		public readonly bool FieldCoverage = false;
+
+		[Desc("FE-1: a field with a spreader within this many cells of its resource centre is represented by the spreader;",
+			"a field without one is its own anchor.")]
+		public readonly int SpreaderFieldRadiusCells = 12;
+
+		[Desc("FE-1: an own refinery within this many cells of an anchor serves it (0 = ClaimRadiusCells).")]
+		public readonly int AnchorServeRadiusCells = 0;
+
+		[Desc("FE-1: replans an anchor may stay wanted with no refinery gained before it is parked for ParkTicks",
+			"(a claim whose placement keeps failing must not retry forever).")]
+		public readonly int AnchorStuckReplans = 12;
+
+		[Desc("FE-1: the factor a site/field keeps when its bearing from the main base lies within CrawlSeparationDegrees of",
+			"the crawl target, an own yard or another in-flight MCV site (deprioritised, never forbidden).")]
+		public readonly double MinSeparationFactor = 0.25;
+
+		[Desc("FE-1: the bearing window (degrees) inside which two directions count as the same direction.")]
+		public readonly int CrawlSeparationDegrees = 35;
+
+		[Desc("FE-1: score x (1 + SpreadBonus x distance to our nearest building / map diagonal), for the MCV site and the crawl target.")]
+		public readonly double SpreadBonus = 1.0;
+
+		[Desc("FE-1: a building closer than this (cells) to the main base has no usable bearing and is ignored by the separation factor.")]
+		public readonly int MinBearingDistanceCells = 6;
 
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
@@ -135,7 +178,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
 
 	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
-		IBotMcvExpansionSiteProvider, IBotPositionsUpdated
+		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider
 	{
 		public readonly struct FieldScore
 		{
@@ -186,6 +229,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool wantsRefinery;
 		FieldScore? claimField;
 
+		// FE-1 (§12.24): the anchors and the claim of the last re-plan, own-building cells for the spread factor, and the
+		// MCV sites handed out whose MCV is still on the way (actor id -> site).
+		List<CPos> anchors = new();
+		int unservedInReach;
+		CPos? anchorClaim;
+		CPos? anchorClaimFieldCenter;
+		(CPos? Anchor, int Replans, int Refineries) anchorStuck = (null, 0, 0);
+		readonly Dictionary<CPos, int> anchorParkedUntil = new();
+		readonly Dictionary<uint, CPos> inflightMcvSites = new();
+		List<CPos> ownBuildingCells = new();
+		List<CPos> ownYardCells = new();
+
 		// BEV: the base centre the base builder publishes (the parent BevManagerBotModule used the same signal), and the
 		// construction MCVs of every MCV module on this player (Info-level: fixed for the match, safe to cache).
 		CPos? baseCenter;
@@ -194,6 +249,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, McvRole> mcvRoles = new();
 		IBotRequestUnitProduction[] unitBuilders;
 		IBotUtilityAxes[] utilityAxesProviders;
+		IBotScaleTargets[] scaleTargetProviders;
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -231,13 +287,45 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public IReadOnlyList<FieldScore> LastScores { get; private set; } = Array.Empty<FieldScore>();
 
+		/// <summary>Telemetry only (12.24 FE-0): the last field handed to an MCV as its site. Never read by a decision.</summary>
+		public CPos? LastMcvSite { get; private set; }
+
 		CPos? IBotExpansionTargetProvider.ExpansionTarget => IsTraitDisabled || !Info.DriveBaseCrawl ? null : Target?.Center;
 
 		bool IBotExpansionTargetProvider.WantsRefineryAtExpansionTarget => !IsTraitDisabled && Info.DriveRefineries && wantsRefinery;
 
 		int IBotExpansionTargetProvider.ExpansionTargetClaimRadius => Info.ClaimRadiusCells;
 
-		CPos? IBotExpansionTargetProvider.RefineryClaimTarget => IsTraitDisabled || !Info.DriveRefineries ? null : claimField?.Center;
+		CPos? IBotExpansionTargetProvider.RefineryClaimTarget => IsTraitDisabled || !Info.DriveRefineries ? null
+			: LawActive ? anchorClaim : claimField?.Center;
+
+		bool LawActive => !IsTraitDisabled && Info.FieldCoverage && Info.DriveRefineries && anchors.Count > 0;
+
+		bool IBotExpansionTargetProvider.RefineryLawActive => LawActive;
+
+		int IBotExpansionTargetProvider.RefineryAnchorCount => LawActive ? anchors.Count : 0;
+
+		int IBotExpansionTargetProvider.UnservedAnchorsInReach => LawActive ? unservedInReach : 0;
+
+		CPos? IBotExpansionTargetProvider.RefineryClaimFieldCenter => LawActive ? anchorClaimFieldCenter : null;
+
+		/// <summary>
+		/// TC-3 (§12.18): the claim that wants a bodyguard — the current target field while its
+		/// evaluated threat is non-trivial. Threat is the remembered-enemy sum the region threat
+		/// providers publish at the field's centre (the same term Safety() folds into the score),
+		/// so "contested" is the fog-honest memory, not a live peek. An uncontested target needs
+		/// no escort and no target publishes nothing — null, never a behaviour change.
+		/// </summary>
+		WPos? IBotExpansionAssistProvider.ExpansionAssistTarget
+		{
+			get
+			{
+				if (IsTraitDisabled || !(Target is FieldScore target) || target.Threat <= 0)
+					return null;
+
+				return world.Map.CenterOfCell(target.Center);
+			}
+		}
 
 		/// <summary>EX-2: a field counts as ours when an own refinery stands within the claim radius of its resource centre.</summary>
 		public static bool Claimed(CPos center, IEnumerable<CPos> refineries, int claimRadiusCells)
@@ -271,6 +359,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			baseBuilders = self.TraitsImplementing<BaseBuilderBotModuleCA>().ToArray();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			utilityAxesProviders = self.TraitsImplementing<IBotUtilityAxes>().ToArray();
+			scaleTargetProviders = self.TraitsImplementing<IBotScaleTargets>().ToArray();
 		}
 
 		/// <summary>
@@ -294,7 +383,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// MCV + tau). Nearer fields are the building line's job (EX-1/EX-2). Null when no far field is free.
 		/// </summary>
 		public static FieldScore? McvSite(IEnumerable<FieldScore> fields, CPos mcv, int minHops, int tauCells,
-			Func<FieldScore, bool> eligible = null)
+			Func<FieldScore, bool> eligible = null, Func<FieldScore, double> weight = null)
 		{
 			FieldScore? best = null;
 			var bestScore = double.MinValue;
@@ -304,6 +393,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				var score = f.Value * f.Safety / ((f.Center - mcv).Length + Math.Max(tauCells, 1));
+
+				// FE-1: separation x spread (null = master behaviour, bit-identical).
+				if (weight != null)
+					score *= weight(f);
+
 				if (score > bestScore)
 				{
 					bestScore = score;
@@ -312,6 +406,152 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			return best;
+		}
+
+		// ---- FE-1 (§12.24): pure helpers, free of world state so they can be tested ----
+
+		/// <summary>
+		/// FE-1: the anchors - every resource spreader (deduplicated, input order), then the centre of every field with no
+		/// spreader within `spreaderRadiusCells` of it. One refinery per anchor.
+		/// </summary>
+		public static List<CPos> BuildAnchors(IEnumerable<CPos> spreaders, IEnumerable<CPos> fieldCenters, int spreaderRadiusCells)
+		{
+			var result = new List<CPos>();
+			foreach (var s in spreaders)
+				if (!result.Contains(s))
+					result.Add(s);
+
+			var spreaderCount = result.Count;
+			var r2 = (long)spreaderRadiusCells * spreaderRadiusCells;
+			foreach (var f in fieldCenters)
+			{
+				var covered = false;
+				for (var i = 0; i < spreaderCount && !covered; i++)
+					covered = (result[i] - f).LengthSquared <= r2;
+
+				if (!covered && !result.Contains(f))
+					result.Add(f);
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// FE-1: which refinery serves which anchor - a result per anchor, the refinery index or -1. Greedy by ascending
+		/// distance (ties by anchor then refinery index) within `serveRadiusCells`; every refinery serves at most one anchor
+		/// and every anchor has at most one refinery, so two spreaders next to one refinery do not both count as served.
+		/// </summary>
+		public static int[] AssignRefineries(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, int serveRadiusCells)
+		{
+			var result = new int[anchorCells.Count];
+			Array.Fill(result, -1);
+			var r2 = (long)serveRadiusCells * serveRadiusCells;
+			var pairs = new List<(long D, int A, int R)>();
+			for (var a = 0; a < anchorCells.Count; a++)
+				for (var r = 0; r < refineries.Count; r++)
+				{
+					var d = (anchorCells[a] - refineries[r]).LengthSquared;
+					if (d <= r2)
+						pairs.Add((d, a, r));
+				}
+
+			pairs.Sort((x, y) => x.D != y.D ? x.D.CompareTo(y.D) : x.A != y.A ? x.A.CompareTo(y.A) : x.R.CompareTo(y.R));
+			var used = new bool[refineries.Count];
+			foreach (var (_, a, r) in pairs)
+			{
+				if (result[a] >= 0 || used[r])
+					continue;
+
+				result[a] = r;
+				used[r] = true;
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// FE-1 refinery-wanted rule: the anchor the next refinery claims, or -1. Wanted iff an anchor within `reachCells` of a
+		/// building that gives buildable area is unserved (and not parked) AND the refinery count (placed + queued) is below
+		/// the anchor count - never more refineries than anchors. Among the candidates the one nearest a building wins (ties:
+		/// lowest index). `unservedInReach` counts all unserved in-reach anchors, parked or not.
+		/// </summary>
+		public static int WantedAnchor(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, IReadOnlyList<CPos> buildingCells,
+			int serveRadiusCells, int reachCells, Func<int, bool> parked, int queuedRefineries, out int unservedInReach)
+		{
+			unservedInReach = 0;
+			var assigned = AssignRefineries(anchorCells, refineries, serveRadiusCells);
+			var best = -1;
+			var bestDistance = int.MaxValue;
+			for (var a = 0; a < anchorCells.Count; a++)
+			{
+				if (assigned[a] >= 0)
+					continue;
+
+				var distance = int.MaxValue;
+				foreach (var b in buildingCells)
+					distance = Math.Min(distance, (b - anchorCells[a]).Length);
+
+				if (distance > reachCells)
+					continue;
+
+				unservedInReach++;
+				if (parked != null && parked(a))
+					continue;
+
+				if (distance < bestDistance)
+				{
+					bestDistance = distance;
+					best = a;
+				}
+			}
+
+			return refineries.Count + queuedRefineries >= anchorCells.Count ? -1 : best;
+		}
+
+		/// <summary>FE-1: the bearing of `to` as seen from `from`, integer (WAngle.ArcTan).</summary>
+		public static WAngle Bearing(CPos from, CPos to) => WAngle.ArcTan(to.Y - from.Y, to.X - from.X);
+
+		/// <summary>FE-1: the smaller angle between two bearings, in WAngle units (0..512).</summary>
+		public static int BearingDelta(WAngle a, WAngle b)
+		{
+			var d = Math.Abs(a.Angle - b.Angle) % 1024;
+			return d > 512 ? 1024 - d : d;
+		}
+
+		/// <summary>
+		/// FE-1: the separation factor of a site - `minFactor` when its bearing from `origin` (the main base) lies within
+		/// `degrees` of the bearing of any `avoid` position (the crawl target, own yards, other in-flight MCV sites), else 1.
+		/// A position closer than `minDistanceCells` to the origin has no usable bearing and is skipped.
+		/// </summary>
+		public static double SeparationFactor(CPos site, CPos origin, IEnumerable<CPos> avoid, int degrees, double minFactor, int minDistanceCells)
+		{
+			if ((site - origin).Length < 1)
+				return 1;
+
+			var siteBearing = Bearing(origin, site);
+			var window = WAngle.FromDegrees(degrees).Angle;
+			foreach (var other in avoid)
+			{
+				if ((other - origin).Length < Math.Max(minDistanceCells, 1))
+					continue;
+
+				if (BearingDelta(siteBearing, Bearing(origin, other)) <= window)
+					return minFactor;
+			}
+
+			return 1;
+		}
+
+		/// <summary>FE-1: 1 + bonus x distance-to-our-nearest-building / map diagonal (unexplored ground wins ties).</summary>
+		public static double SpreadFactor(int distanceToNearestBuildingCells, int mapDiagonalCells, double bonus)
+		{
+			return 1 + bonus * Math.Max(distanceToNearestBuildingCells, 0) / Math.Max(mapDiagonalCells, 1);
+		}
+
+		/// <summary>FE-1: is the field's centre within `radiusCells` of a site an MCV is already heading to?</summary>
+		public static bool TakenByMcvSite(CPos center, IEnumerable<CPos> sites, int radiusCells)
+		{
+			return sites.Any(s => (s - center).LengthSquared <= (long)radiusCells * radiusCells);
 		}
 
 		/// <summary>
@@ -343,6 +583,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return true;
 
 			return false;
+		}
+
+		/// <summary>
+		/// TC-3 / BD (§12.18): the Voronoi score percent — a field belongs to the coalition sector
+		/// anchor nearest it (min HorizontalLengthSquared, the same horizontal measure AllyClaimWins
+		/// uses, so terrain height cannot tilt a border). The anchor holding our own ClientIndex keeps
+		/// 100, a foreign anchor keeps `foreignPercent`; a distance tie goes to the lowest ClientIndex
+		/// so every member computes the identical partition. Pure, for the tests.
+		/// </summary>
+		public static int SectorScorePercent(WPos field, IReadOnlyDictionary<int, WPos> anchors,
+			int myClientIndex, int foreignPercent)
+		{
+			if (anchors == null || anchors.Count == 0)
+				return 100;
+
+			var nearest = int.MaxValue;
+			var best = long.MaxValue;
+			foreach (var kv in anchors)
+			{
+				var d = (kv.Value - field).HorizontalLengthSquared;
+				if (d < best || (d == best && kv.Key < nearest))
+				{
+					best = d;
+					nearest = kv.Key;
+				}
+			}
+
+			return nearest == myClientIndex ? 100 : Math.Clamp(foreignPercent, 0, 100);
 		}
 
 		/// <summary>LC3: one more hand-out of `field`; returns the new streak and whether the field must now be parked.</summary>
@@ -399,8 +667,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// UT-4: the TechRush<->Expansion axis scales the appetite — Expansion personalities keep more
 			// MCVs flowing, TechRush ones hold back (the engine's own gates still apply on top either way).
+			// Scale targets (DESIGN 19.10): with an enabled provider the construction-yard target IS this count, and UT-4's
+			// axis lean lives inside the provider (one multiplier, never two), so the planner applies neither fixed number.
 			var targetCount = Info.McvTargetCount;
-			if (Info.UseUtilityExpansionAppetite)
+			if (scaleTargetProviders.TryTarget("conyard", out var scaledYards))
+				targetCount = scaledYards;
+			else if (Info.UseUtilityExpansionAppetite)
 			{
 				var axis = utilityAxesProviders?.FirstEnabledTraitOrDefault()?.UtilityTechRushExpansion ?? IBotUtilityAxes.Neutral;
 				targetCount = EffectiveMcvTargetCount(Info.McvTargetCount, axis, Info.ExpansionAxisBonusMcvs, Info.TechRushAxisMinusMcvs);
@@ -484,10 +756,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return true;
 			}
 
+			// FE-1 (§12.24): MCV and crawl cover different ground. A site scores x SeparationFactor (its bearing from the main
+			// base must differ from the crawl target's, any own yard's and any other in-flight MCV site's) x SpreadFactor
+			// (far from everything we own). Null weight (switch off) = master behaviour.
+			Func<FieldScore, double> weight = null;
+			if (Info.FieldCoverage)
+			{
+				var origin = baseCenter ?? (ownYardCells.Count > 0 ? ownYardCells[0] : mcv.Location);
+				var avoid = new List<CPos>(ownYardCells);
+				if (Target is FieldScore crawl)
+					avoid.Add(crawl.Center);
+
+				foreach (var kv in inflightMcvSites)
+					if (kv.Key != mcv.ActorID)
+						avoid.Add(kv.Value);
+
+				var diagonal = MapDiagonalCells();
+				weight = f => SeparationFactor(f.Center, origin, avoid, Info.CrawlSeparationDegrees, Info.MinSeparationFactor, Info.MinBearingDistanceCells)
+					* SpreadFactor(NearestOwnBuildingDistance(f.Center), diagonal, Info.SpreadBonus);
+			}
+
 			// At most one park per request: a parked field falls out and the next best is offered.
 			for (var attempt = 0; attempt < 2; attempt++)
 			{
-				if (McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells, Eligible) is not FieldScore s)
+				if (McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells, Eligible, weight) is not FieldScore s)
 					return null;
 
 				(mcvHandout, var park) = TrackMcvHandout(mcvHandout, s.Index, Info.McvMaxSiteHandouts);
@@ -498,7 +790,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 				}
 
+				if (Info.FieldCoverage)
+					inflightMcvSites[mcv.ActorID] = s.Center;
+
 				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count} at tick {tick}");
+				LastMcvSite = s.Center;
 				return s.Center;
 			}
 
@@ -521,6 +817,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var gap = distanceCells - reachCells;
 			return gap <= 0 ? 0 : (gap + Math.Max(stepCells, 1) - 1) / Math.Max(stepCells, 1);
+		}
+
+		int MapDiagonalCells()
+		{
+			var size = world.Map.MapSize;
+			return (int)Math.Sqrt((long)size.Width * size.Width + (long)size.Height * size.Height);
+		}
+
+		int NearestOwnBuildingDistance(CPos cell)
+		{
+			var best = int.MaxValue;
+			foreach (var b in ownBuildingCells)
+				best = Math.Min(best, (b - cell).Length);
+
+			return best == int.MaxValue ? 0 : best;
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -563,6 +874,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var buildingCells = new List<CPos>();
 			var refineryCells = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
+			var allBuildingCells = new List<CPos>();
+			var yardCells = new List<CPos>();
 			foreach (var a in world.Actors)
 			{
 				if (a.Owner != player || a.IsDead || !a.IsInWorld)
@@ -571,6 +884,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// The Refinery trait, from rules (the by-name lists are filled by the role rollout, §2.8).
 				if (a.Info.HasTraitInfo<RefineryInfo>())
 					refineryCells.Add(a.Location);
+
+				if (Info.FieldCoverage)
+				{
+					if (a.Info.HasTraitInfo<BuildingInfo>())
+						allBuildingCells.Add(a.Location);
+
+					if (constructionYardTypes.Contains(a.Info.Name))
+						yardCells.Add(a.Location);
+				}
 
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
 					buildingCells.Add(a.Location);
@@ -586,6 +908,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
+			if (Info.FieldCoverage)
+			{
+				ownBuildingCells = allBuildingCells;
+				ownYardCells = yardCells;
+
+				// An MCV that is gone (deployed into a yard, or dead) no longer holds its site.
+				foreach (var id in inflightMcvSites.Keys.ToArray())
+				{
+					var heading = world.GetActorById(id);
+					if (heading == null || heading.IsDead || !heading.IsInWorld || heading.Owner != player)
+						inflightMcvSites.Remove(id);
+				}
+			}
+
+			var diagonalCells = Info.FieldCoverage ? MapDiagonalCells() : 1;
 			var first = income.Count > 0 ? income.Peek() : (Tick: world.WorldTick, Earned: resources.Earned);
 			var span = Math.Max(1, world.WorldTick - first.Tick);
 			var incomePerTick = (resources.Earned - first.Earned) / (double)span;
@@ -603,6 +940,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					.Where(b => b != null && b.ExpansionClaim != WPos.Zero)
 					.Select(b => (b.ClientIndex, b.ExpansionClaim))
 					.ToList();
+			}
+
+			// TC-3 / BD (§12.18): the coalition's Voronoi partition — every allied spawn anchor owns
+			// the fields nearest it. Resolved once per re-plan; a missing provider or an empty anchor
+			// map leaves every score untouched (1v1, flag off — bit-identical).
+			IReadOnlyDictionary<int, WPos> sectorAnchors = null;
+			if (Info.UseCoalitionSectors)
+			{
+				var anchors = player.PlayerActor.TraitsImplementing<IBotCoalition>()
+					.FirstEnabledTraitOrDefault()?.Coalition?.SectorAnchors;
+				if (anchors != null && anchors.Count > 0)
+					sectorAnchors = anchors;
 			}
 
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
@@ -648,6 +997,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var cost = refinery.Cost + hops * link.Cost;
 				var score = Score(value, threat, guardValue, cost, incomePerTick, hops, link.BuildTicks, refinery.BuildTicks,
 					Info.TauTicks, out var payback);
+
+				// TC-3 / BD: own-sector fields keep their full score, foreign-sector fields keep
+				// CoalitionForeignSectorPercent of it — deprioritized, never forbidden: the argmax
+				// still picks a foreign field when no own-sector field is left.
+				if (sectorAnchors != null)
+					score *= SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
+						player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
+
+				// FE-1: unexplored ground wins ties (spread), and the crawl prefers fields no MCV is already heading to.
+				if (Info.FieldCoverage)
+				{
+					score *= SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance, diagonalCells, Info.SpreadBonus);
+					if (inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells))
+						score *= Info.MinSeparationFactor;
+				}
+
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
@@ -663,9 +1028,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// EX-2/EX-2c: want a refinery at the best free field already in reach — any in-reach field counts,
 			// not only the crawl target, so an outpost yard claims its local field right away (EX-2c). Park a
 			// field that keeps being missed.
-			claimField = BestClaimField(scores);
-			wantsRefinery = claimField.HasValue;
-			if (wantsRefinery && claimField is FieldScore want)
+			// FE-1 (§12.24): with the switch on, one refinery per anchor replaces this field-based claim.
+			if (Info.FieldCoverage && Info.DriveRefineries)
+				UpdateAnchorClaim(refineryCells, buildingCells);
+
+			var lawClaims = LawActive;
+			claimField = lawClaims ? null : BestClaimField(scores);
+			if (!lawClaims)
+				wantsRefinery = claimField.HasValue;
+
+			if (lawClaims)
+			{
+				// The anchor claim (UpdateAnchorClaim) carries its own loop guard; TrackClaim is the field claim's.
+			}
+			else if (wantsRefinery && claimField is FieldScore want)
 			{
 				claimAttempts.TryGetValue(want.Index, out var attempts);
 				var (state, now, park) = TrackClaim(wanting, want.Index, refineryCells.Count, attempts, Info.MaxClaimAttempts);
@@ -699,6 +1075,84 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// high cash trigger first. LastScores is this tick's fresh list, so a freed field is seen immediately.
 			if (Info.DriveMcvRequests)
 				RequestMcv(bot);
+		}
+
+		/// <summary>
+		/// FE-1: rebuild the anchors (spreaders are public map data, like the spawn points; field centres are the first-seen
+		/// ones) and pick the unserved anchor in reach the next refinery claims. A claim that keeps failing is parked.
+		/// </summary>
+		void UpdateAnchorClaim(List<CPos> refineryCells, List<CPos> buildingCells)
+		{
+			// Fog honesty: spreaders are neutral map actors placed by the map author - public map data like the spawn points
+			// (DESIGN 19.1b), never an enemy's state. Manifested in tools/audit/fog_honesty_manifest.json.
+			var spreaders = new List<CPos>();
+			foreach (var tp in world.ActorsWithTrait<ISeedableResource>())
+			{
+				if (tp.Actor.IsDead || !tp.Actor.IsInWorld || (tp.Trait is IDisabledTrait d && d.IsTraitDisabled))
+					continue;
+
+				spreaders.Add(tp.Actor.Location);
+			}
+
+			var centers = new List<CPos>();
+			foreach (var kv in initialCenters)
+				if (initialCells.TryGetValue(kv.Key, out var cells) && cells > 0)
+					centers.Add(kv.Value);
+
+			anchors = BuildAnchors(spreaders, centers, Info.SpreaderFieldRadiusCells);
+			anchorClaim = null;
+			anchorClaimFieldCenter = null;
+			wantsRefinery = false;
+			unservedInReach = 0;
+			if (anchors.Count == 0)
+				return;
+
+			var tick = world.WorldTick;
+			var queued = 0;
+			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
+			if (builder?.BuildingsBeingProduced != null)
+				foreach (var r in builder.Info.RefineryTypes)
+					if (builder.BuildingsBeingProduced.TryGetValue(r, out var n))
+						queued += n;
+
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var best = WantedAnchor(anchors, refineryCells, buildingCells, serve, Info.ReachCells,
+				i => anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until, queued, out unservedInReach);
+			if (best < 0)
+			{
+				anchorStuck = (null, 0, refineryCells.Count);
+				return;
+			}
+
+			var anchor = anchors[best];
+
+			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
+			var replans = anchorStuck.Anchor == anchor && refineryCells.Count <= anchorStuck.Refineries && queued == 0 ? anchorStuck.Replans + 1 : 0;
+			anchorStuck = (anchor, replans, refineryCells.Count);
+			if (Info.AnchorStuckReplans > 0 && replans >= Info.AnchorStuckReplans)
+			{
+				anchorParkedUntil[anchor] = tick + Info.ParkTicks;
+				anchorStuck = (null, 0, refineryCells.Count);
+				var parked = $"AI ({player.ClientIndex}): FE-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
+				Log.Write("debug", parked);
+				AIUtils.BotDebug(parked);
+				return;
+			}
+
+			anchorClaim = anchor;
+			wantsRefinery = true;
+
+			// Tie-break of the placement: the resource centre of the field nearest the anchor.
+			var nearest = int.MaxValue;
+			foreach (var c in centers)
+			{
+				var d = (c - anchor).LengthSquared;
+				if (d < nearest)
+				{
+					nearest = d;
+					anchorClaimFieldCenter = c;
+				}
+			}
 		}
 
 		void Idle(string reason)

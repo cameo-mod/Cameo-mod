@@ -5,7 +5,7 @@
 | activity | 15 | 4 | 1 |
 | logic | 19 | 19 | 0 |
 | projectile | 9 | 0 | 0 |
-| trait | 279 | 87 | 56 |
+| trait | 283 | 84 | 54 |
 | warhead | 16 | 0 | 0 |
 | widget | 21 | 6 | 5 |
 
@@ -40,7 +40,6 @@
 - **WithNameTagDecorationCA** (trait, `OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs`): CA uses it 4x, e.g. `mods/ca/maps/team-mastermind-madness/rules.yaml`, `mods/ca/maps/tfca/tfca-rules-base.yaml`, `mods/ca/rules/custom/mastermind-madness.yaml`
 - **AttackAircraftCA** (trait, `OpenRA.Mods.CA/Traits/Air/AttackAircraftCA.cs`): CA uses it 3x, e.g. `mods/ca/rules/aircraft.yaml`
 - **GrantConditionOnOrders** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnOrders.cs`): CA uses it 3x, e.g. `mods/ca/rules/aircraft.yaml`
-- **McvManagerBotModuleCA** (trait, `OpenRA.Mods.CA/Traits/BotModules/MCVManagerBotModuleCA.cs`): CA uses it 3x, e.g. `mods/ca/rules/ai.yaml`
 - **PopControlled** (trait, `OpenRA.Mods.CA/Traits/PopControlled.cs`): CA uses it 3x, e.g. `mods/ca/maps/ca-testing-grounds/rules.yaml`, `mods/ca/rules/misc.yaml`
 - **RenderShroudCircleCA** (trait, `OpenRA.Mods.CA/Traits/Render/RenderShroudCircleCA.cs`): CA uses it 3x, e.g. `mods/ca/maps/shellmap/rules.yaml`, `mods/ca/rules/misc.yaml`, `mods/ca/rules/vehicles.yaml`
 - **SpawnActorOnCapture** (trait, `OpenRA.Mods.CA/Traits/SpawnActorOnCapture.cs`): CA uses it 3x, e.g. `mods/ca/rules/defaults.yaml`
@@ -62,7 +61,6 @@
 - **GuidedMissile** (trait, `OpenRA.Mods.CA/Traits/GuidedMissile.cs`): CA uses it 1x, e.g. `mods/ca/rules/vehicles.yaml`
 - **ImmobileWithFacing** (trait, `OpenRA.Mods.CA/Traits/ImmobileWithFacing.cs`): CA uses it 1x, e.g. `mods/ca/rules/infantry.yaml`
 - **PortableChronoModifier** (trait, `OpenRA.Mods.CA/Traits/Multipliers/PortableChronoModifier.cs`): CA uses it 1x, e.g. `mods/ca/rules/vehicles.yaml`
-- **PowerDownBotModuleCA** (trait, `OpenRA.Mods.CA/Traits/BotModules/PowerDownBotModuleCA.cs`): CA uses it 1x, e.g. `mods/ca/rules/ai.yaml`
 - **ProductionPaletteCA** (widget, `OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs`): CA uses it 1x, e.g. `mods/ca/chrome/ingame-player.yaml`
 - **ReflectsDamage** (trait, `OpenRA.Mods.CA/Traits/ReflectsDamage.cs`): CA uses it 1x, e.g. `mods/ca/rules/scrin.yaml`
 - **RevealOnFireCA** (trait, `OpenRA.Mods.CA/Traits/RevealOnFireCA.cs`): CA uses it 1x, e.g. `mods/ca/rules/defaults.yaml`
@@ -109,7 +107,6 @@
 - Lobby (logic, `OpenRA.Mods.Cameo/Widgets/Logic/LobbyLogic.cs`)
 - Materialization (trait, `OpenRA.Mods.Cameo/Traits/Render/WithBuildingMaterialization.cs`)
 - MissileBase (trait, `OpenRA.Mods.CA/Traits/MissileBase.cs`)
-- PlugSpawnerBotModuleCA (trait, `OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs`)
 - ProductionTooltipCameo (logic, `OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs`)
 - PromotionPalette (trait, `OpenRA.Mods.Cameo/Traits/PromotionPalette.cs`)
 - PromotionTreeButton (logic, `OpenRA.Mods.Cameo/Widgets/Logic/Ingame/PromotionTreeButtonLogic.cs`)

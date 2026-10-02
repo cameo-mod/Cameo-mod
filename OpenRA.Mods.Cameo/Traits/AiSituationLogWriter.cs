@@ -160,6 +160,82 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
+		// ST (DESIGN 19.10): the growth law's inputs and per-category seen/target pairs; omitted while no provider runs.
+		internal static void AppendScaleTargets(StringBuilder builder, ScaleTargetsSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "scale_targets");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendNumber(builder, "tier", snapshot.Tier);
+			AiMatchLogWriter.AppendString(builder, "personality", snapshot.Personality ?? "");
+			AiMatchLogWriter.AppendNumber(builder, "team_size", snapshot.TeamSize);
+			AiMatchLogWriter.AppendNumber(builder, "unscouted_milli", snapshot.UnscoutedMilli);
+			AiMatchLogWriter.AppendNumber(builder, "game_minutes_milli", snapshot.GameMinutesMilli);
+			AiMatchLogWriter.AppendNumber(builder, "army_baseline", snapshot.ArmyBaseline);
+			for (var i = 0; i < snapshot.Categories.Length; i++)
+			{
+				AiMatchLogWriter.AppendNumber(builder, "seen_" + snapshot.Categories[i], snapshot.Seen[i]);
+				AiMatchLogWriter.AppendNumber(builder, "target_" + snapshot.Categories[i], snapshot.Targets[i]);
+			}
+
+			builder.Append('}');
+		}
+
+		// BO-1 (AI_ARCHITECTURE 12.25): the build-order knob vector (base = preset x learned x jitter, now = after react), the opening and the
+		// react events, so the report and tuner can group matches by them; omitted while no provider runs.
+		internal static void AppendBuildOrder(StringBuilder builder, BuildOrderSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "build_order");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendString(builder, "personality", snapshot.Personality ?? "");
+			AiMatchLogWriter.AppendString(builder, "faction", snapshot.Faction ?? "");
+			AiMatchLogWriter.AppendString(builder, "enemy_faction", snapshot.EnemyFaction ?? "");
+			AiMatchLogWriter.AppendString(builder, "opening", snapshot.Opening ?? "");
+			AiMatchLogWriter.AppendString(builder, "opening_end", snapshot.OpeningEnd ?? "");
+			AiMatchLogWriter.AppendNumber(builder, "opening_step", snapshot.OpeningStep);
+			AiMatchLogWriter.AppendNumber(builder, "opening_steps", snapshot.OpeningSteps);
+			AiMatchLogWriter.AppendNumber(builder, "reactions", snapshot.Reactions);
+			AiMatchLogWriter.AppendString(builder, "events", snapshot.Events ?? "");
+			for (var i = 0; i < snapshot.KnobNames.Length; i++)
+			{
+				AiMatchLogWriter.AppendNumber(builder, "base_" + snapshot.KnobNames[i], snapshot.Base[i]);
+				AiMatchLogWriter.AppendNumber(builder, "now_" + snapshot.KnobNames[i], snapshot.Now[i]);
+			}
+			builder.Append('}');
+		}
+
+		// FE-0 (12.24): the field-economy picture of one snapshot; omitted when none was captured.
+		internal static void AppendExpansion(StringBuilder builder, ExpansionSnapshot e)
+		{
+			if (e == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "expansion");
+			AiMatchLogWriter.AppendNumber(builder, "fields_known", e.FieldsKnown, true);
+			AiMatchLogWriter.AppendNumber(builder, "fields_in_reach", e.FieldsInReach);
+			AiMatchLogWriter.AppendNumber(builder, "fields_served", e.FieldsServed);
+			AiMatchLogWriter.AppendNumber(builder, "fields_harvested", e.FieldsHarvested);
+			AiMatchLogWriter.AppendNumber(builder, "anchors_spreader", e.AnchorsSpreader);
+			AiMatchLogWriter.AppendNumber(builder, "anchors_field", e.AnchorsField);
+			AiMatchLogWriter.AppendNumber(builder, "refineries", e.Refineries);
+			AiMatchLogWriter.AppendNumber(builder, "excess_refineries", e.ExcessRefineries);
+			AiMatchLogWriter.AppendNumber(builder, "unassigned_refineries", e.UnassignedRefineries);
+			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_mean", e.AnchorDistMean);
+			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_max", e.AnchorDistMax);
+			AiMatchLogWriter.AppendNumber(builder, "conyards", e.Conyards);
+			AiMatchLogWriter.AppendNumber(builder, "outposts", e.Outposts);
+			AiMatchLogWriter.AppendString(builder, "crawl_target", e.CrawlTarget);
+			AiMatchLogWriter.AppendString(builder, "mcv_site", e.McvSite);
+			AiMatchLogWriter.AppendNumber(builder, "crawl_mcv_angle", e.CrawlMcvAngle);
+			AiMatchLogWriter.AppendNumber(builder, "coverage_milli", e.CoverageMilli);
+			builder.Append('}');
+		}
+
 		internal static void AppendRoleCosts(StringBuilder builder, string name, IReadOnlyDictionary<string, int> costs)
 		{
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, name);
@@ -293,8 +369,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "team_max_tension", situation.TeamMaxTension);
 			AiMatchLogWriter.AppendNumber(builder, "team_defend_requests", situation.TeamDefendRequests);
 			AiMatchLogWriter.AppendNumber(builder, "team_shared_target", situation.TeamSharedTarget);
+			AiMatchLogWriter.AppendNumber(builder, "coalition_phase", situation.CoalitionPhase);
+			AiMatchLogWriter.AppendString(builder, "coalition_main_target", situation.CoalitionMainTarget);
 			AppendThreats(builder, situation.Threats);
+			AppendScaleTargets(builder, situation.ScaleTargets);
+			AppendBuildOrder(builder, situation.BuildOrder);
 			builder.Append('}');
+			AppendExpansion(builder, situation.Expansion);
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
 			var enemies = situation.Enemies.Values.OrderBy(e => e.Name ?? "", StringComparer.Ordinal).ToArray();

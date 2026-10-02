@@ -82,19 +82,34 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# SP-1/AF-1 (AI_ARCHITECTURE §12.20): spacing advisor + army-first building gate for genericbot.
+	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
+	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
 	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
-	GrantConditionOnBotOwner@spacedbase:
-		Condition: spaced_base
-		Bots: fransbot
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
+		Bots: fransbot
+	# PP-1 (AI_ARCHITECTURE §12.23): parallel-queue production width. Provider-seam so the shared
+	# UnitBuilderBotModuleCA@generic instance never hands the width to classic (the A/B control).
+	GrantConditionOnBotOwner@parallelprod:
+		Condition: parallel_production
 		Bots: fransbot
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@assaultfanout:
 		Condition: assault_fanout
+		Bots: fransbot
+	# Scale targets (DESIGN 19.10, AI_ARCHITECTURE 12.22): base and army size grow with the seen enemy, the unscouted map,
+	# difficulty, personality and game time. The arm flips this to the genericbot tier list (switch group ST_scale_targets);
+	# default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@scaletargets:
+		Condition: scale_targets
+		Bots: fransbot
+	# Build-order knobs (DESIGN 19.2, AI_ARCHITECTURE 12.25): eight bounded multipliers + an opening for the shared base builder, from the
+	# personality preset x learned x jitter, with a fog-honest react layer. The arm flips this to the genericbot tier list (switch group
+	# AK_build_order_knobs); default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@buildorderknobs:
+		Condition: build_order_knobs
 		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
@@ -3461,7 +3476,8 @@ Player:
 					CheckRadius: 9000
 	# HS-1 (AI_ARCHITECTURE §12.20): the harvester module is split into named instances so the increment
 	# switch can retune the field-deficit redirect cadence on genericbot only - @classic stays the
-	# upstream A/B reference. Fields today are byte-identical between the two.
+	# upstream A/B reference. The per-field cap (MaxHarvestersPerResourceIndice, default 4: saturated fields get no new
+	# harvesters, surplus is pushed to lacking fields) is LIVE for genericbot; classic opts out (maintainer 2026-10-02).
 	HarvesterBotModuleCA@generic:
 		RequiresCondition: genericbot
 		HarvestersPerRefinery: 3
@@ -3470,6 +3486,7 @@ Player:
 		ScanForIdleHarvestersInterval: 1000
 	HarvesterBotModuleCA@classic:
 		RequiresCondition: classicbot
+		MaxHarvestersPerResourceIndice: 0
 		HarvestersPerRefinery: 3
 		MaxHarvesters: 24
 		AdditionalHarvesters: 1
@@ -3531,20 +3548,298 @@ Player:
 		AssemblePercent: 80
 		StageDeadlineTicks: 150
 		RefanoutCooldownTicks: 750
-	# SP-1 (AI_ARCHITECTURE §12.20): the base-spacing advisor. findPos still owns validity (CanPlaceBuilding,
-	# base radius, distance requirements); this re-ranks its first N placeable candidates by distance to the
-	# nearest own building, so bases grow outward with gaps instead of packing into a traffic-jam monolith.
+	# SCALE TARGETS (DESIGN 19.10, AI_ARCHITECTURE 12.22): ONE target per size category, recomputed every RecomputeTicks:
+	#   own = lerp(Min, Max, tier/9) x (1 + Growth x hours);  enemy = lerp(RatioMin, RatioMax, tier/9) x SEEN x (1 + Margin x unscouted) / team;
+	#   target = floor(P(personality, axes) x max(own, enemy)), clamped to [Floor, physical cap]. Seen = fog memory only (DESIGN 19.5).
+	# FIXED POINT: every fraction is an integer in THOUSANDTHS (Min: 1000 = 1.0, Max: 3250 = 3.25); Floor is in units. Min/Max are the
+	# DESIGN 19.1 table, so minute 0 with nothing seen reproduces today's limits. Every category writes every field (19.1).
+	# Defaults after the rule are starting values for the increment A/B, not settled numbers.
+	# `genericbot && scale_targets`: off on master until the increment A/B arms it (switch group ST_scale_targets).
+	ScaleTargetsBotModule:
+		RequiresCondition: genericbot && scale_targets
+		RecomputeTicks: 125
+		ScoutStaleTicks: 2500
+		UseUtilityAxes: true
+		Categories:
+			# value multiplier on the personality's SquadValue; growth replaces the old 20-minute ramp
+			army:
+				Min: 1000
+				Max: 1000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 1000
+				Growth: 1000
+				Floor: 0
+				TurtleRushLean: 25
+				TechRushExpansionLean: 0
+			harvester:
+				Min: 3000
+				Max: 30000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			refinery:
+				Min: 1000
+				Max: 10000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			# 1.5 -> 7.5 floors to the old rounded line 1 2 2 3 4 4 5 6 6 7
+			production:
+				Min: 1500
+				Max: 7500
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			conyard:
+				Min: 1500
+				Max: 7500
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			# 1 1 1 1 2 2 2 2 3 3 across the ten tiers
+			tech:
+				Min: 1000
+				Max: 3250
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: -25
+			# per building NAME, like BuildingLimits
+			superweapon:
+				Min: 1000
+				Max: 1000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: 0
+				TechRushExpansionLean: 0
+			# telemetry only: no numeric defence cap exists in the base builder today
+			defence:
+				Min: 0
+				Max: 0
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: -25
+				TechRushExpansionLean: 0
+			# 25 = today's MaxAircraft; capped by this bot's BotGlobalUnitBudget share
+			aircraft:
+				Min: 25000
+				Max: 25000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: 0
+				TechRushExpansionLean: 0
+		PersonalityMultipliers:
+			steamroller:
+				army: 1250
+				production: 1250
+			expansion:
+				refinery: 1250
+				harvester: 1250
+				conyard: 1250
+				production: 1250
+			turtle:
+				defence: 1400
+			tech:
+				tech: 1500
+			rush:
+				army: 800
+	# BUILD-ORDER KNOBS (DESIGN 19.2, AI_ARCHITECTURE 12.25): HOW and WHEN the shared base builder builds. Value = Presets[personality] x learned
+	# (ai/learned/build_order_knobs.yaml, only with UseLearnedBuildOrder) x per-match jitter (+-JitterPct, drawn once from the host's random),
+	# clamped to [KnobMin, KnobMax]; the react layer multiplies it mid-match (bounded [ReactMin, ReactMax]) and decays back.
+	# FIXED POINT: every number in the dictionaries is THOUSANDTHS (1000 = x1.0). What each knob scales (BaseBuilderQueueManagerCA):
+	#   tempo        - speed of the build clock: BuildingDelays, BuildingIntervals and the general build interval are DIVIDED by it (1150 = 15% faster)
+	#   greed        - refinery fractions and the refinery delay (divided); also raises NewProductionCashThreshold (economy before factories)
+	#   production   - fractions of barracks/factory/production buildings; also lowers NewProductionCashThreshold
+	#   tech         - fractions AND delays (divided) of tech/superweapon buildings
+	#   defence      - fractions of defence/anti-air buildings
+	#   power_margin - the power surplus target (MinimumExcessPower and its bonus)
+	#   expansion    - published for the expansion planner (IBotBuildOrderKnobs.KnobMilli); the base builder does not read it
+	#   support      - fractions of radar/repair buildings
+	# Categories are rules-derived (the base builder's own type lists, then BotTargetTags/roles); no actor id is typed here.
+	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
+	BuildOrderKnobsBotModule:
+		RequiresCondition: genericbot && build_order_knobs
+		KnobMin: 600
+		KnobMax: 1600
+		JitterPct: 8
+		UseLearnedBuildOrder: false
+		LearnedFile: ai/learned/build_order_knobs.yaml
+		ReactEvalTicks: 125
+		ReactStep: 100
+		ReactDecayPerMinute: 150
+		ReactMin: 700
+		ReactMax: 1500
+		ReactAirValue: 600
+		ReactRushWindowTicks: 9000
+		ReactRushPressureValue: 800
+		ReactTurtleDefenceValue: 1500
+		ReactTurtleDefenceSharePct: 40
+		ReactOutEarnPct: 130
+		ReactOutEarnMinEconomy: 6
+		OpeningMaxTicks: 7500
+		OpeningStepTimeoutTicks: 1500
+		OpeningDecideTicks: 250
+		# One flavour per personality (DESIGN 19.1c): Rush tempo/production up and greed down; Turtle defence up; Tech tech up with a faster tech clock;
+		# Expansion greed + expansion up; Steamroller production up; Guerrilla light on production and support.
+		Presets:
+			rush:
+				tempo: 1150
+				greed: 850
+				production: 1250
+				tech: 850
+				defence: 900
+				power_margin: 900
+				expansion: 850
+				support: 850
+			turtle:
+				tempo: 950
+				greed: 1000
+				production: 900
+				tech: 1000
+				defence: 1400
+				power_margin: 1150
+				expansion: 950
+				support: 1100
+			tech:
+				tempo: 1050
+				greed: 1050
+				production: 900
+				tech: 1400
+				defence: 950
+				power_margin: 1200
+				expansion: 900
+				support: 1150
+			expansion:
+				tempo: 1000
+				greed: 1300
+				production: 950
+				tech: 950
+				defence: 900
+				power_margin: 1000
+				expansion: 1350
+				support: 900
+			steamroller:
+				tempo: 1050
+				greed: 1000
+				production: 1400
+				tech: 950
+				defence: 900
+				power_margin: 1050
+				expansion: 1000
+				support: 900
+			guerrilla:
+				tempo: 1100
+				greed: 1000
+				production: 850
+				tech: 900
+				defence: 950
+				power_margin: 900
+				expansion: 1050
+				support: 850
+		# Ordered first-N building categories. `production` is any production building; power/refinery emergencies and the
+		# first construction needs are never blocked (the opening runs after those overrides) and a stuck step is skipped.
+		Openings:
+			eco: power, refinery, production, refinery, factory, support, tech
+			barracks_first: power, barracks, refinery, factory, production, tech
+			fast_tech: power, refinery, factory, tech, tech, production, support
+			defence_first: power, refinery, defence, barracks, defence, factory, tech
+		OpeningWeights:
+			rush:
+				barracks_first: 5
+				eco: 2
+				fast_tech: 1
+				defence_first: 0
+			turtle:
+				defence_first: 5
+				eco: 3
+				fast_tech: 1
+				barracks_first: 1
+			tech:
+				fast_tech: 5
+				eco: 3
+				barracks_first: 1
+				defence_first: 1
+			expansion:
+				eco: 6
+				fast_tech: 2
+				barracks_first: 1
+				defence_first: 1
+			steamroller:
+				barracks_first: 4
+				eco: 3
+				fast_tech: 1
+				defence_first: 1
+			guerrilla:
+				barracks_first: 3
+				eco: 3
+				fast_tech: 1
+				defence_first: 2
+		# What the bot SAW (BotSituation, fog memory) -> a target react factor per knob; the factor approaches it by ReactStep per evaluation
+		# while the reaction holds and decays back at ReactDecayPerMinute. Several reactions on one knob multiply.
+		ReactTargets:
+			air:
+				defence: 1300
+			rush:
+				defence: 1300
+				production: 1250
+				greed: 800
+			turtle:
+				tech: 1250
+				defence: 800
+			out_earned:
+				greed: 1300
+				expansion: 1300
+	# SP-1 + DAWN building gap (AI_ARCHITECTURE §12.20), ONE owner of base spacing (maintainer 2026-10-02). Loaded for
+	# genericbot: the HARD gap findPos applies (MinBuildingGapCells 2 / MinBuildingGapDefensesCells 1) is LIVE. classicbot
+	# has no advisor, hence no gap - it places edge-to-edge as before 10-02. The re-ranking of findPos' first placeable
+	# candidates (bases grow outward instead of packing) is off until switch group AD arms RerankCandidates.
 	# Refineries and defenses keep their own placement owners (EX-2 field claims / DEF-3 coverage).
-	# `genericbot && spaced_base`: off on master until the increment A/B arms it (switch group AD).
 	SpacingAdvisorBotModule:
-		RequiresCondition: genericbot && spaced_base
-	# AF-1 (AI_ARCHITECTURE §12.20): the army-first vote. While cash sits under ArmyReserveLowCash the
-	# base builder's queues hold new non-refinery buildings so unit production eats the income first;
-	# resumes above ArmyReserveHighCash (hysteresis, no flicker). Refineries stay exempt - they ARE the
-	# economy - and the vote is inert until a unit producer exists, so tech sequencing cannot stall.
+		RequiresCondition: genericbot
+	# AF-1 + DAWN army-first (AI_ARCHITECTURE §12.20), ONE owner (maintainer 2026-10-02). The base builder's queues hold new
+	# non-essential buildings while cash sits under ArmyReserveLowCash (resumes above ArmyReserveHighCash) OR while owned
+	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
+	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
+	# producer exists, so tech sequencing cannot stall.
 	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
 	ArmyFirstBotModule:
 		RequiresCondition: genericbot && army_first
+	# PP-1 (AI_ARCHITECTURE §12.23): settings-only IBotProductionWidth provider - UnitBuilder fills up to
+	# MaxQueuesPerCategory idle queues of a category per call, so multiple factories produce in parallel
+	# when income allows. Settings-only like AssaultFormationBotModule: the unit builder keeps the only
+	# order authority. `genericbot && parallel_production`: off on master (switch group AH).
+	ParallelProductionBotModule:
+		RequiresCondition: genericbot && parallel_production
+		MaxQueuesPerCategory: 4
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
@@ -3764,6 +4059,10 @@ Player:
 		# map is covered, not at a fixed yard count. Difficulty paces via BotLimits intervals +
 		# McvRequestReserve, never the ceiling. Switch group AC.
 		CoverAllFields: false
+		# FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): one refinery per anchor (resource spreader or spreaderless field),
+		# placed next to it, never more than anchors; MCV site and crawl target in different directions, spread over the
+		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage.
+		FieldCoverage: false
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:

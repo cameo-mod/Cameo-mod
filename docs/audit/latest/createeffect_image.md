@@ -7,8 +7,8 @@
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2607  THMiss  Image: hakurei_dream
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:5581  OIHakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Shared\yaml\weapons.yaml:705  ReimuYinYangOrb  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:9896  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:9942  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:10528  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:10574  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:7430  AsianTSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\Shared\yaml\weapons.yaml:602  td_tanyaattach  Image: td_corpse
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\Shared\yaml\weapons.yaml:1013  TSUnitExplode  Image: ts_corpse

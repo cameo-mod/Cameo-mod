@@ -128,7 +128,8 @@ decision do so through a provider seam; the owner emits the order.
 | Assault formation (concave) | AssaultFormationBotModule (AG) + `GroundUnitsConcaveStateCA` | `IBotAssaultFormation` settings + same-ground cooldown (the only switch); `ConcaveEvalCA` plans, squad states remain the only order issuer |
 | Scout routes | ScoutBotModule | threat regions, influence layers, leads |
 | Resource-field memory | BotFogMemory / ResourceMapBotModule | zone topology (TacticalMapBotModule) |
-| Team posture | BotSituation broadcast | allied claims, role split (TC-2d), defend requests, TC-3 coalition fold (§12.18, planned) |
+| Team posture | BotSituation broadcast | allied claims, role split (TC-2d), defend requests, TC-3 coalition fold (§12.18, switches BB-BE) |
+| Coalition directive | MasterAiBotModule (BB) | `CoalitionFold.Compute` — publish-only; consumers are SquadManagerBotModuleCA (BC rescue election, BE target), ExpansionPlannerBotModule (BD sectors) |
 | Support powers | SupportPowerBotASModule | (RV2 merge pending — OpenRA copy gated classicbot) |
 
 ## Provider → consumer wiring (audit 2026-10-02)

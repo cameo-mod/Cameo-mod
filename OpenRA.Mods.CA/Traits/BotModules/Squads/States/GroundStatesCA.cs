@@ -411,11 +411,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
-			// CV (12.7a, unified with ATK-1): on contact a Rush squad deploys a concave before the
-			// first shot - only when an enabled IBotAssaultFormation provider arms it (ShouldEnter).
-			if (GroundUnitsConcaveStateCA.ShouldEnter(owner))
+			// CV (12.7a, unified with ATK-1 and the assault fan): before the first shot a Rush squad
+			// deploys - the army shape (provider-armed concave against observed enemies) or the
+			// objective shape (FormationMovement prongs around the squad target). ShouldEnter chooses.
+			if (GroundUnitsConcaveStateCA.ShouldEnter(owner, out var deployShape))
 			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(), false);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(deployShape), false);
 				return;
 			}
 
@@ -694,6 +695,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// 12.7: assault squads keep formation steps - frontline leads, anti-air
 			// inside, the rest trails the frontline centroid. Other squad types keep
 			// the plain straggler catch-up (guerrilla/harass mobility is doctrinal).
+			// (The final-approach assault fan is the concave state's objective shape, 12.7a.)
 			if (owner.SquadManager.Info.FormationMovement && owner.Type == SquadCAType.Rush
 				&& IssueFormationOrders(owner, leader, routeTarget))
 				return;

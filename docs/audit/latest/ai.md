@@ -1,20 +1,11 @@
 # audit_ai — ai.yaml wiring (B5)
 
-IDs referenced by ai.yaml: **225** — defined NOWHERE (BLOCKING): **8**, defined only in unloaded files (hygiene): **0**, pool factions with unwired combat units: **26**
+IDs referenced by ai.yaml: **220** — defined NOWHERE (BLOCKING): **0**, defined only in unloaded files (hygiene): **0**, pool factions with unwired combat units: **26**
 
 
 ## A1 — ai.yaml references defined nowhere (blocking: helipad-bug class)
 
-| referenced id | list | ai.yaml line |
-|---|---|---|
-|  ra1_allies_alliedoretruck | ExcludeFromSquadsTypes | 3936 |
-|  ra1_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3936 |
-|  ra2_allies_alliedmobileconstructionvehicle | ExcludeFromSquadsTypes | 3936 |
-|  asianalliance_asianmobileconstructionvehicle | ExcludeFromSquadsTypes | 3936 |
-|  ra1_allies_alliedchinooktransport | ExcludeFromSquadsTypes | 3936 |
-|  ra1_allies_alliedconstructionyard | ConstructionYardTypes | 3937 |
-|  ra2_allies_alliedconstructionyard | ConstructionYardTypes | 3937 |
-|  asianalliance_asianconstructionyard | ConstructionYardTypes | 3937 |
+_none found_
 
 
 ## A2 — combat units the AI never builds (Random/Tournament pool factions)

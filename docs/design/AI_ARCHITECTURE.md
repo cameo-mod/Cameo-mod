@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**64 distinct trait types, 89 Player instances plus one World instance** (2026-10-02c: ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), +1 type / +1 instance; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**68 distinct trait types, 93 Player instances plus one World instance** (2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2102,11 +2102,34 @@ plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `M
 section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
 measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
 
+**Objective shape (merged DAWN's assault fan, 2026-10-02).** The §12.20b assault fan was a second implementation of
+"deploy before the first shot" inside `GroundUnitsAttackMoveStateCA` (§19.3: one module per decision). It is now the
+second SHAPE of this state, chosen by the anchor: `GroundUnitsConcaveStateCA.ShouldEnter(owner, out shape)` returns
+**Army** (observed armed enemies within `FanoutTriggerCells`; the range-matched concave above; gate = the
+`IBotAssaultFormation` provider, `AG_assault_fanout`, off on master), **Objective** or none. *Objective* = no armed enemy
+in contact (none in the attack scan either, `NearestEngagedEnemy` null), the squad target within
+`AssaultEngageRadiusCells` (18) of the frontline centroid, `FormationMovement` on, siege advisors say Advance, squad off its
+cooldown. Gate = today's fan gate (`FormationMovement` + Rush), so it stays LIVE exactly where the fan was (genericbot
+personalities) and needs no provider; classic sets neither `FormationMovement` nor a provider, so it is unchanged. Settings
+stay `AssaultFanRadiusCells` / `AssaultFanMinSlots` / `AssaultFanMaxSlots` / `AssaultEngageRadiusCells` /
+`AssaultSyncHoldTicks` (same names and defaults). One planner: `ConcaveEvalCA.ProngCount` (members/2 clamped 3..8),
+`ObjectiveProngs` (prongs on a 200-degree front around the objective, centred on objective -> centroid, wings mirrored with
+the `WRot` conjugate, integer math) and `PlanObjective` (member -> prong by `ActorID % prongs`, as the fan did); the state
+terrain-snaps each slot like the concave's (off-map prongs project onto the ring). Machinery shared with the army shape:
+form (`AttackMove` to the prong, re-issued while idle, late joiners re-plan), commit on formed / hold expiry /
+under fire (`NearestEngagedEnemy`), the pending-order commit, hand-over to `GroundUnitsAttackState`, and the same
+orders-only micro-action spend. Differences: the commit is "formed" when every prong is within 6 cells of its slot or
+`AssaultSyncHoldTicks` expired, the push is zero-delay (together, as the fan) - no stagger; the same-ground cooldown (750
+ticks, the provider's `RefanoutCooldownTicks` default, same radius = `AssaultEngageRadiusCells`) is kept ON THE SQUAD
+(`SquadCA.DeployCooldownCell/Tick`), not the provider: the objective shape runs with no provider, and a squad-scoped record
+dies with its squad with nothing to prune. The attack-move state has ONE entry into the deploy state (after the contact-first
+all-in) and no fan fields.
+
 ### 12.7b Contact-first all-in (maintainer 2026-10-02) — and the ONE "the fight is on" test
 
 > *Maintainer, spectating a 6v6:* a large blob stood in formation while part of the force was already trading fire.
 
-Formation (the march §12.7, the concave §12.7a, the assault fan §12.20b) is for BEFORE the first shot. When the fight is
+Formation (the march §12.7, the concave §12.7a incl. its objective shape = the former assault fan) is for BEFORE the first shot. When the fight is
 on for ANY member, a Rush squad commits wholesale on the same tick (Lanchester: staging while the local fight runs feeds
 the enemy one prong at a time). `GroundStatesCA.NearestEngagedEnemy` is the single definition, used by the attack-move
 state's all-in, the concave's entry (declines) and the concave's commit (zero-delay under-fire commit):
@@ -2745,11 +2768,21 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
   `ArmyCentroid`/`ExpansionClaim` are own-side. An ally's visible-enemy knowledge may be
   published only where shared vision already shows it to the team (OpenRA allied vision
   makes that the honest case).
-- **Switch groups (planned):** `BB_tc3_coalition_plan` (broadcast fields + fold +
-  `own.coalition_*` situation fields, publish-only), `BC_tc3_rescue_election` (nearest-
-  army responder), `BD_tc3_sectors` (Voronoi partition bias), `BE_tc3_main_target`
-  (MasterAi/Squad target bias). All default-off, inert in 1v1 and on mixed teams without
-  allied providers — same degradation contract as TC-2.
+- **Switch groups (shipped NOVA 2026-10-02, default-off):** `BB_tc3_coalition_plan`
+  (`MasterAiBotModule.UseCoalitionPlan` — broadcast fields ArmyCentroid/ExpansionAssist/
+  SpawnPoint + the `CoalitionFold.Compute` fold + `IBotCoalition` provider +
+  `coalition_*` situation fields, publish-only), `BC_tc3_rescue_election`
+  (`SquadManagerBotModuleCA.UseCoalitionRescue` — the elected responder answers, the
+  unelected stand down; no provider/empty election = today's TopDefendRequest),
+  `BD_tc3_sectors` (`ExpansionPlannerBotModule.UseCoalitionSectors` — Voronoi score
+  bias, `CoalitionForeignSectorPercent` 35, foreign fields deprioritized never
+  forbidden), `BE_tc3_main_target` (`MasterAiBotModule.UseCoalitionTargetBias` +
+  `SquadManagerBotModuleCA.UseCoalitionTarget` — both read the directive as demand
+  bias only). All inert in 1v1 and on mixed teams without allied providers — same
+  degradation contract as TC-2. Seam: `IBotCoalition.cs` (fold + directive +
+  `IBotExpansionAssistProvider`); the fold runs inside the master's snapshot and the
+  target bias reads the *previous* snapshot's fold (publish→fold→consume ordering —
+  the only honest order).
 - **Team roles beyond TC-2d:** the role split currently spreads TechRush↔Expansion rests.
   With sectors live, the partition itself carries the spread (sector = expander frontier),
   and `RoleSplitBias` keeps the arsenal spread — the two compose instead of competing.
@@ -2833,20 +2866,22 @@ never *aimed* at it.
 
 ### 12.20b The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
 
+> **Merged 2026-10-02 (maintainer ruling, DESIGN 19.3 one module per decision).** The three DAWN knobs that duplicated
+> EMBER's SP-1/HS-1/AF-1 now have ONE owner each; the BaseBuilder fields `MinBuildingGapCells`,
+> `MinBuildingGapDefensesCells`, `MinArmyUnitsBeforeBuildings`, `ArmyFirstMinCash` and the groups `AD_army_first` and
+> `AE_spread_assault` are gone. **Spacing:** `SpacingAdvisorBotModule` (genericbot only) owns the hard gap (2 / 1, LIVE;
+> `findPos` asks `IBotPlacementAdvisor`, no advisor = no gap) and the switched re-ranking. **Harvester:**
+> `HarvesterBotModuleCA.MaxHarvestersPerResourceIndice` (4, LIVE; 0 = unlimited) stays the core, the HS-1 cadence is the
+> one switch `AF_harvester_spread`. **Army-first:** `ArmyFirstBotModule` owns both the DAWN army-count gate and the AF-1
+> cash vote, behind the one switch `AE_army_first`. **classic opts out:** no advisor, `MaxHarvestersPerResourceIndice: 0`
+> on `@classic`, no army-first (it behaves as before 10-02). Details below describe the original rules; the owners are above.
+
 Four more maintainer-observed failures, all "the stack does the simple thing wrong"
 class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
 
-**Assault fan** (`GroundUnitsAttackMoveStateCA.IssueAssaultFanOrders`, gated under
-`FormationMovement` — already on for genericbot tiers). The §12.7a concave fixes
-*contact* geometry; this fixes *approach* geometry: inside `AssaultEngageRadiusCells`
-(18) the Rush column breaks into `AssaultFanMin..MaxSlots` (3–8) prongs assigned by
-stable `ActorID % slots` hashing, each ordered to an arc slot on a ~200-degree front
-`AssaultFanRadiusCells` (10) around the target — so the squad arrives on several
-headings instead of filing down one route. Early arrivers `Stop`-hold at their slot
-while any prong is >6 cells out, up to `AssaultSyncHoldTicks` (125), then the push
-latches and everyone `AttackMove`s the target center together. Fan state rebuilds if
-the target moves >8 cells. Outside the engage radius the §12.7 column march still
-applies, so guerrilla/harass squads are untouched.
+**Assault fan** - merged on 2026-10-02 into the unified deploy state as its *objective shape*: see **§12.7a "Objective
+shape (merged DAWN's assault fan)"**. `IssueAssaultFanOrders` and the fan fields are gone; the settings
+(`AssaultFan*`, `AssaultEngageRadiusCells`, `AssaultSyncHoldTicks`) and the `FormationMovement` gate are unchanged.
 
 **Building spacing** (`BaseBuilderQueueManagerCA.findPos`, `MinBuildingGapCells` = 2
 default-on, `MinBuildingGapDefensesCells` = 1). The golden rule made mechanical: a
@@ -2880,6 +2915,17 @@ _garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
 
+**Single owners (2026-10-02 merge with DAWN 12.20b).**
+- *Spacing* — `SpacingAdvisorBotModule` loads on `genericbot` alone and always exposes the hard gap
+  (`MinBuildingGapCells` 2, `MinBuildingGapDefensesCells` 1; `BuildingGapRule` is the pure check); the SP-1 re-ranking
+  runs only when `RerankCandidates` is true (switch `AD_spaced_base_placement`, no longer a granted condition).
+- *Harvester* — one mechanism in `HarvesterBotModuleCA`: the per-field cap (`HarvesterFieldCap`, 0 = unlimited) is live,
+  `ScanForLowEffectHarvestersInterval` (HS-1 cadence) stays behind `AF_harvester_spread`; `@classic` sets the cap to 0.
+- *Army-first* — `ArmyFirstBotModule` = AF-1 cash hysteresis OR DAWN army-count gate (`MinArmyUnitsBeforeBuildings` 0 off by
+  default, 14 / `ArmyFirstMinCash` 1500 under `AE_army_first`). `IBotRequestPauseBuildingProduction.PausesBuilding(building,
+  essential)`: the base builder classifies essentials (conyard, refinery, power, first factory), the module decides.
+  Own units only (fog honest); `ArmyFirstEval` is the pure logic.
+
 Three switch-gated patches for the maintainer's second failure report (the 6v6 review):
 buildings packed wall-to-wall into a pathfinder jam, dozens of harvesters queueing on one
 field, and building production out-spending the army.
@@ -2899,8 +2945,22 @@ field, and building production out-spending the army.
   capped at `DesiredGapCells + 1` (beyond the gap, more distance stops mattering so the
   frontier doesn't drift absurdly), plus a `OutwardLeanPercent` bias away from the base
   centroid. If nothing meets the gap it takes the widest cell left — spacing can never
-  deadlock placement. Refinery and defence cells keep their own owners (EX-2 field
-  claims, DEF-3 coverage) and are never re-ranked by this advisor.
+  deadlock placement.
+
+- *Refinery exemption (SP-1 fix, same day):* the advisor returns `null` for any
+  `RefineryInfo` building — refinery placement stays owned by field proximity (EX-2
+  claim annulus + resource fallback). The first cut re-ranked refinery candidates too,
+  which pushed the refinery to the far edge of the claim annulus; the field then read
+  *unserved* (a field counts as served only when a refinery stands within
+  `servedRadiusCells` of its centre) and the builder stacked another refinery on the
+  same field — "refineries far away, multiple per spreader" in one bug.
+- *Resource frontage:* non-refinery candidates whose footprint plus a
+  `ResourceFrontageCells` (1) ring touches a valuable resource cell are scored last —
+  buildings may not park on the cells a refinery needs or clog the harvester approach
+  lane. Valuable set comes from `ResourceMapBotModule` (any resource when absent);
+  resource cells are never rejected outright, so a dense field map can't deadlock
+  placement either.
+- Defence cells keep DEF-3 coverage and are never re-ranked by this advisor.
 
 **AF-1 — army-first cash** (`ArmyFirstBotModule`, `IBotRequestPauseBuildingProduction`,
 switch `AE_army_first`).
@@ -3010,3 +3070,250 @@ The §19.1 table numbers become the Min/Max. The other defaults are starting val
 * `DynamicBotInsurance` sizes its payout from `HarvesterLimit`. With the provider present it reads `Target("harvester")`.
 
 **Switch:** group `ST_scale_targets` (master already uses `G_personality_leads`).
+
+**Implemented (2026-10-02, branch `claude/scale_targets`, dormant until the switch arms it):**
+* Files: `OpenRA.Mods.CA/Traits/BotModules/IBotScaleTargets.cs` (interface + `TryTarget/TryArmyValue/TryBuilding` helpers),
+  `OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsEval.cs` (pure, integer-only), `ScaleTargetsBotModule.cs` (provider,
+  `ScaleTargetsSnapshot`), `OpenRA.Mods.Cameo.Test/ScaleTargetsEvalTest.cs`, `ai.yaml` (`ScaleTargetsBotModule` block +
+  `GrantConditionOnBotOwner@scaletargets`), `increment_switches.yaml` (`ST_scale_targets`), audit in `audit_ai_personalities.py`
+  (`scale_target_failures`). Situation log: optional `own.scale_targets` object (omitted while no provider runs).
+* **Fixed point:** thousandths. `Min: 1000` = 1.0, `Max: 3250` = 3.25; `Floor` is in units; `Growth` is per game HOUR in thousandths.
+* Spec decisions: (1) `IBotScaleTargets` also has `TryGetBuildingTarget(actorName)` (tech/superweapon category lookup for
+  `BuildingLimits`, from `IBotUnitRoles` `tech` + `BotTargetTags.Superweapon`; only entries that exist in BuildingLimits are
+  overridden, no new caps on unlisted buildings) and `TryGetArmyValueTarget(int baselineValue, ...)` takes the personality's
+  SquadValue, because `own_army` is baseline x line. (2) Army `Min = Max = 1000`: the only difficulty scaling of the army is the
+  enemy ratio line; minute 0 keeps today's SquadValue. The Director/team force scale, `ValueOnlyAttackLaunch` and `MaxIdleUnits`
+  (scaled by target / SquadValue) apply on top; the random `SquadValueRandomBonus` and the 20-minute bonus ramp are replaced
+  by `Growth`. (3) Axis leans are per category yaml fields `TurtleRushLean` / `TechRushExpansionLean` (signed percent at the
+  pole): army +25 and defence -25 on Turtle-Rush; tech -25 and refinery/harvester/conyard/production +25 on TechRush-Expansion.
+  (4) `production` seen = per enemy the count of its most numerous remembered production building type (the limit is per type),
+  summed over enemies. (5) `u` = zone-cell-weighted share of regions with no enemy table entry fresher than `ScoutStaleTicks`
+  (a lit empty region counts as fresh only while visible: `RegionMemory` is rebuilt per snapshot), own territory
+  (`IBotZoneTopology.IsInTerritory`) excluded. (6) With a provider, `HarvesterBotModuleCA` ignores its fixed `MaxHarvesters` (24)
+  as well as `HarvesterLimit`; `aircraft` also scales `MaxAirSuperiority` in the same proportion. (7) Aircraft physical cap =
+  `BotGlobalUnitBudget.CurrentShare()` (new, same arithmetic as the pause); no planner exposes resource fields in reach, so
+  refineries have no physical cap yet (the base builder's `RefineriesPerBase x yards + MaxExtraRefineries` ceiling still applies).
+* Not wired: no `MCVManagerBotModuleCA` exists and nothing reads `BotLimits.ConstructionYardLimit` (the engine's
+  `McvExpansionManagerBotModule` has its own `MinimumConstructionYardCount`); the conyard target drives
+  `ExpansionPlannerBotModule` only, UT-4's axis lean is skipped when a provider is present. `DynamicBotInsurance` never read
+  `HarvesterLimit` (a comment only), so it needs no change. `defence` is telemetry: the base builder has no numeric defence cap.
+### 12.23 PP-1 — parallel production width (EMBER, 2026-10-02)
+
+The maintainer's "use all production buildings" report: `UnitBuilderBotModuleCA.BuildUnit`
+filled only the FIRST idle queue of a category per call — three war factories still
+produced serially through whichever happened to be free, so parallel macro investment
+never converted into throughput.
+
+- *The seam:* `IBotProductionWidth.MaxQueuesPerCategory` — settings-only provider (same
+  shape as `IBotAssaultFormation`): the unit builder resolves it lazily and fills up to
+  N idle queues per call instead of one. No provider (classic mounts none) keeps the
+  upstream single-queue fill byte-identical — the shared `UnitBuilderBotModuleCA@generic`
+  instance never leaks the width to the A/B control, which a plain field-write switch
+  would have done.
+- *The provider:* `ParallelProductionBotModule` (`genericbot && parallel_production`,
+  switch `AH_parallel_production`, width 4). Orders still come only from the unit
+  builder — the provider is pure tunables.
+- *Per-queue independence:* each filled queue picks its own unit via the normal
+  chooser, so composition/RoleMix logic applies per facility rather than stamping one
+  unit across all of them.
+
+### 12.24 FE — field economy and coverage: refineries at the spreader, MCV and crawl apart, every field (maintainer 2026-10-02; owner Claude)
+
+DESIGN §19.1b (field economy bullet). **Observed** by the maintainer: bots stack 2–3 refineries in the home base (more than
+the fields there), then cannot build one at the field they crawl to. **Cause, code-verified:**
+`BaseBuilderBotModuleCA.ShouldBuildRefinery…` caps refineries at `yards × RefineriesPerBase (2) + MaxExtraRefineries (1)`,
+and `OptimalRefineryCount` wants `initial + additional + 2 per extra yard`. Both count construction yards, not fields. The
+EX planner's crawl target (best field in reach) and its MCV site (best far field by value × safety / distance) are chosen
+independently, so they often point the same way.
+
+**FE-0 telemetry (always on, behaviour-neutral):**
+* `cameo-ai-placements.jsonl`, one line per building a bot places: tick, player, actor, cell, reason (`crawl`,
+  `refinery_claim`, `base`, `defence`, `other`). For refineries: the nearest anchor, its cell, and the distance in cells.
+* An `expansion` object on each situation snapshot:
+  * fields known / in reach / served / harvested;
+  * anchors (spreaders + spreaderless fields) and refineries;
+  * excess refineries (beyond one per anchor);
+  * mean and max refinery→anchor distance;
+  * construction yards and outposts;
+  * the crawl target, the MCV site, and the angle between their bearings from the main base;
+  * coverage: the share of map fields within reach of our buildings.
+* `tools/ai/expansion_report.py <match dirs>`: per bot and per match, the numbers above over time (first refinery, fields
+  harvested at minutes 5/10/20, peak, excess refineries, mean anchor distance, crawl/MCV angle distribution).
+
+**Implemented (FE-0, 2026-10-02, worktree `claude/tel_2026_10_02`, not boot-gated):**
+* `OpenRA.Mods.CA/Traits/BotModules/IBotPlacementObserver.cs` is the record-only hook. `BaseBuilderQueueManagerCA` records the queue tick per producer
+  (`queuedAt`) and calls the observers when it issues the `PlaceBuilding` order. `reason` comes from the placement path it already took:
+  `refinery_claim` (the EX-2 claim returned a cell, flag `refineryClaimed`), `crawl` (`BuildingType.BaseCrawl`), `defence` (`Defense` or an advised
+  defence cell), `other` (a plug), else `base`. No decision reads any of it.
+* `OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs` (world trait `AiPlacementLogWriter`, `world.yaml`) appends `cameo-ai-placements.jsonl` at game
+  over. Line: `schema, kind:"placement", game_uid, record_id, map_uid, seed, player, faction, bot_type, personality, tick, queued_tick,
+  placed_tick, actor, cell:"x,y", category, reason` and, for refineries, `anchor_kind` (`spreader` | `field`), `anchor_cell`, `anchor_dist` (cells).
+  `category` = `ExpansionMath.Category` over `BotTargetTags` (conyard, refinery, superweapon, power, defence, production) then the `IBotUnitRoles`
+  `tech` / `support` roles, else `other`; no actor id is typed.
+* `OpenRA.Mods.Cameo/Traits/AiLogExpansion.cs`: `ExpansionTelemetry` (one per `MasterAiBotModule`, shared by the snapshots and the placement log) and the
+  pure `ExpansionMath`. It reads the existing `ResourceMapBotModule` (it only remembers each field's first-seen centre) and
+  `ExpansionPlannerBotModule.Target` / the new read-only `LastMcvSite`; spreaders = `ActorsWithTrait<ISeedableResource>` (public map data, the one
+  enumeration site, manifested in `fog_honesty_manifest.json`). Anchors = spreaders, then fields with no spreader within 12 cells. A refinery serves its
+  nearest anchor within 12 cells; excess = refineries beyond one per anchor plus the unassigned ones. In reach = field centre within the planner's
+  `ReachCells` of a buildable-area building; served = own refinery within `ClaimRadiusCells`; harvested = own harvester on the field (resource map);
+  coverage = (in reach or served) / known. Main base = the first yard seen; outposts = yards more than 20 cells from it; the angle is between the
+  bearings (clockwise from north) of the crawl target and the MCV site from the centroid of own buildings within 20 cells of the main yard (-1 = n/a).
+* Situation snapshot: top-level `expansion` object (`AiSituationLogWriter.AppendExpansion`): `fields_known, fields_in_reach, fields_served,
+  fields_harvested, anchors_spreader, anchors_field, refineries, excess_refineries, unassigned_refineries, anchor_dist_mean, anchor_dist_max, conyards,
+  outposts, crawl_target, mcv_site, crawl_mcv_angle, coverage_milli`.
+* `tools/ai/expansion_report.py <match dirs> [--json]` (shared readers in `tools/ai/ai_log_common.py`); tests `tools/tests/test_expansion_and_build_order_reports.py`
+  and `OpenRA.Mods.Cameo.Test/ExpansionTelemetryTest.cs`.
+
+**FE-1 behaviour (one switch `AJ_field_coverage`, default off; classic unchanged):**
+1. **Refinery law:** one refinery per anchor (see DESIGN). A refinery is wanted while an anchor in building reach is
+   unserved, and only then. Under this switch it replaces the yard-based cap, `OptimalRefineryCount` and the §19.10
+   refinery target. §19.1b binds every field to its refinery, so a tier line never caps it. The physical cap is the
+   number of anchors.
+2. **Placement:** the refinery claim takes the placeable cell nearest its anchor ("directly next to the spreader").
+   Ties go to the cell closest to the field's resource cells.
+3. **Directions:** the MCV site is scored by the existing value × safety / distance, × a separation factor. The factor
+   falls to `MinSeparationFactor` when the site's bearing from the main base lies within `CrawlSeparationDegrees` of the
+   crawl target's bearing or of any yard or in-flight MCV site. The crawl target, in turn, prefers fields not already
+   taken by an MCV site.
+4. **Spread:** both scores gain `× (1 + SpreadBonus × distance to our nearest building / map size)`, so unexplored
+   ground wins ties.
+5. **Aggression:** earlier and more MCVs, via the existing EX-4 knobs in the switch values. No new driver.
+
+**Implemented (FE-1, 2026-10-02, switch `AJ_field_coverage`, default off; `ExpansionPlannerBotModule.FieldCoverage`):**
+* Anchors = `ISeedableResource` actors (spreaders, public map data) plus first-seen centres of fields with no spreader within
+  `SpreaderFieldRadiusCells` (12). `AssignRefineries` pairs each own refinery with at most one anchor within the serve radius
+  (`AnchorServeRadiusCells`, 0 = `ClaimRadiusCells`); `WantedAnchor` wants a refinery iff an unserved, unparked anchor lies
+  within `ReachCells` of a buildable-area building AND placed + queued refineries < anchors. A claim wanted for
+  `AnchorStuckReplans` (12) re-plans with nothing placed or queued parks the anchor for `ParkTicks`.
+* The planner publishes it through new default-false members of `IBotExpansionTargetProvider` (`RefineryLawActive`,
+  `RefineryAnchorCount`, `UnservedAnchorsInReach`, `RefineryClaimFieldCenter`; `RefineryClaimTarget` becomes the anchor).
+  `BaseBuilderBotModuleCA` reads only these: under the law `HasMaxRefineriesFor` ignores the yard cap, `RefineryLimit` and the
+  scale-target refinery cap (the first `InititalMinimumRefineryCount` refineries still pass), `HasAdequateRefineryCount` uses the
+  initial minimum instead of `OptimalRefineryCount`, and `ExpansionWantsRefinery` no longer needs a crawl target. No provider
+  (classic) or switch off = every line is the old one.
+* Placement: `findPos(anchorOrder: true)` sorts the claim annulus (radius `ExpansionTargetClaimRadius` around the anchor) by
+  distance to the anchor, then to the field's resource centre, takes the first valid cell (the spacing advisor's re-rank is
+  skipped; refineries were already exempt from the gap) and does not fall back to a home placement.
+* Directions: `McvSite` takes an optional weight = `SeparationFactor` (x `MinSeparationFactor` 0.25 when the bearing from the main
+  base is within `CrawlSeparationDegrees` 35 of the crawl target, an own yard or another in-flight MCV site; `WAngle.ArcTan`) x
+  `SpreadFactor`. The crawl score takes the spread factor and x `MinSeparationFactor` for a field an in-flight MCV site holds.
+* Spread: `1 + SpreadBonus (1.0) x distance to our nearest building / map diagonal`, for both scores.
+* Aggression (switch values): `CoverAllFields` true, `CoverAllFieldsMaxInflight` 3 (was 2), `McvRequestReserve` 1000 (was 1500),
+  `McvTargetCount` 4 (was 3). Unmeasured guesses: the FE-0 report (`expansion_report.py`) and the increment A/B decide them.
+* Tests: `OpenRA.Mods.Cameo.Test/FieldCoverageTest.cs` (anchors, assignment, wanted rule incl. never more than anchors, separation,
+  spread). Fog manifest: `ExpansionPlannerBotModule.cs` 4 -> 5 (neutral spreader scan).
+
+### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
+
+> *Maintainer:* "log the build order, then try to switch it around until the result is optimal … for all the buildings
+> for now (units later, after the rebalance) … the timer for each, the interval … always record the success: how fast did
+> they win, destroyed-to-lost value … each personality its own little adjustments … keep some random elements … learn
+> between matches and during the match … react to what the opponent does and change the build order mid-game."
+
+It implements DESIGN §19.2's routes for buildings. Route 2 "tuned" covers building fractions, limits, delays, intervals
+and timers. Route 3 "chosen" is the opening bandit. Everything follows §19.2's rules:
+* bounded multipliers on the defaults, with difficulty (§19.1) on top;
+* written only by dev/harness training runs, reviewed and committed;
+* applied only inside the host's bot, never into rules;
+* a match is scored as **win plus margin**.
+
+Units are out of scope until the rebalance.
+
+**BO-1 - Implemented (2026-10-02, branch `claude/bo1_2026_10_02`; switch `AK_build_order_knobs`, default off).**
+* `IBotBuildOrderKnobs` (Mods.CA: `Enabled`, `KnobMilli(knob)`, `CategoryOf(actor)`, `OpeningWanted`, `NotifyQueued(actor)`) +
+  `BuildOrderKnobsBotModule` (Mods.Cameo, `RequiresCondition: genericbot && build_order_knobs`, `GrantConditionOnBotOwner@buildorderknobs`
+  `Bots: fransbot` = inert on master). The shared `BaseBuilderBotModuleCA` reads `BuildOrderKnobs` (first enabled provider, else null:
+  classic and switch-off are bit-identical). Pure math, opening, react rules and the learned-file model are in `BuildOrderKnobsEval.cs`
+  (unit-tested). All knobs are integer thousandths.
+* **Knob -> consumer** (`BaseBuilderQueueManagerCA`; categories are rules-derived by the provider: the base builder's own type lists, then
+  `BotTargetTags`, radar/repair traits and the `tech` role - no actor-id list):
+  | knob | what it does |
+  |---|---|
+  | `tempo` | **speed** of the build clock: `BuildingDelays`, `BuildingIntervals` and the general build interval (`StructureProduction*Delay`) are divided by it, so 1150 = 15% faster |
+  | `greed` | refinery-category fractions, refinery delay (divided), and `NewProductionCashThreshold` x greed (economy before more factories) |
+  | `production` | fractions of barracks / factory / production buildings; `NewProductionCashThreshold` / production |
+  | `tech` | fractions and delays (divided) of `tech` and `superweapon` buildings |
+  | `defence` | fractions of defence / anti-air buildings |
+  | `support` | fractions of radar / repair buildings |
+  | `power_margin` | the power surplus target (`MinimumExcessPower` and its bonus, and the per-building power check) |
+  | `expansion` | published only (`KnobMilli("expansion")`); the expansion planner reads it later - the base builder does not |
+  Fractions compare as `count x 100 x 1000 > fraction x knob x buildings` (no rounding of small fractions).
+* **Opening:** yaml `Openings` (`eco`, `barracks_first`, `fast_tech`, `defence_first`) = ordered categories (`production` = any production
+  building). The base builder asks `OpeningWanted` AFTER the low-power and refinery priority overrides and before the cash-threshold
+  production override, picks the highest-fraction buildable building of that category that respects `BuildingLimits`, the production limit
+  and the power check (building power first when it would brown out), and calls `NotifyQueued` for every queued building so any path
+  advances the step. Ends: completed, `OpeningMaxTicks`, a step stuck `OpeningStepTimeoutTicks` (skipped), or the react layer.
+* **Value** = `Presets[personality]` x learned (`ai/learned/build_order_knobs.yaml`, only with `UseLearnedBuildOrder`; lookup per personality:
+  faction, `family_<prefix before the first underscore>`, `any`, then `any__any`; missing = 1000) x jitter (one `LocalRandom` draw per knob,
+  +-`JitterPct`, once per match), clamped to [`KnobMin`, `KnobMax`]. Presets: Rush tempo/production up, greed down; Turtle defence up;
+  Tech tech up (and its delays shorter); Expansion greed + expansion up; Steamroller production up; Guerrilla production/support light.
+  The opening is Thompson-sampled: score = preset weight x Beta(alpha, beta) of the matchup posterior (no posterior = Beta(1, 1)).
+* **React** (every `ReactEvalTicks`, from the published `BotSituation`, fog memory only): air = summed seen enemy `AirValue`; rush =
+  seen enemy value near our base before `ReactRushWindowTicks` (also invalidates the opening); turtle = seen defence value and share;
+  out-earned = the 12.14 economy proxy (harvesters + 2 x refineries) vs ours. Each reaction has a target factor per knob (`ReactTargets`);
+  the factor approaches it by `ReactStep` per evaluation, is bounded [`ReactMin`, `ReactMax`], and decays at `ReactDecayPerMinute` once
+  no reaction holds.
+* **Log:** `own.build_order` in the situation log (personality, faction, enemy faction, opening + end reason, `base_<knob>`/`now_<knob>`,
+  reaction flags, events `tick:name+/-`).
+* **Tuner:** `tools/ai/tune_build_order.py` (tests `tools/tests/test_tune_build_order.py`): score = win + margin + speed bonus; arms named
+  `bo__<personality>__<faction>__base` / `__<knob>__up|dn100` (batch dir name minus `_N`); `--propose` writes the next one-knob pair as
+  learned-file copies plus an `increment_switches`-style spec for `apply_increment_switches.py --spec`; `--write` accepts at most one
+  arm per (personality, faction) with >= 20 matches per arm and Welch z >= 1.96, step +-10% clamped to a learned multiplier in
+  [800, 1250], updates opening posteriors (matchups with >= 20 new matches, cap 200 then halve), each game used once. Not yet exercised:
+  no match has run with the switch on; the presets, thresholds and openings are starting values for the A/B.
+
+**BO-0 telemetry (always on, behaviour-neutral):**
+* The placement log (§12.24) is the **build order**. Each line also carries the tick the item entered the queue and the
+  tick it was placed, plus the building's category (`power`, `refinery`, `production`, `tech`, `defence`, `support`,
+  `superweapon`, `conyard`, `other`) from rules-derived tags.
+* `tools/ai/build_order_report.py <match dirs>`, per bot and match:
+  * the ordered building list with times;
+  * time to the first of each category;
+  * the outcome: win, game length, `kills_cost` / `deaths_cost` (destroyed-to-lost), and **score = win + margin**.
+    margin = (killed − lost) / (killed + lost), plus a speed bonus for a faster win.
+  * Grouped by personality and by knob vector (BO-1).
+
+**Implemented (BO-0, 2026-10-02, worktree `claude/tel_2026_10_02`):** the build order is the placement log above. `tools/ai/build_order_report.py <match dirs>
+[--json]` prints per bot and match the ordered list (mm:ss, actor, category, reason), the time to the first of each category and the outcome from
+`cameo-ai-matches.jsonl`. **Score** = `win + margin + speed`: `win` = 1 for outcome `won` else 0; `margin` = `(killed - lost) / (killed + lost)` over
+`stats.kills_cost` / `stats.deaths_cost` (0 when both are 0); `speed` = `0.5 * max(0, (30 - length_min) / 30)` for a win only, `length_min` =
+`duration_ticks * timestep / 60000`. Range -1 to 2.5; the constants are `SPEED_WEIGHT` / `SPEED_REF_MIN` in the tool. Aggregates by personality and by
+knob vector (`player.knobs` / `knobs` of the match record once BO-1 writes it; `(none)` before).
+
+**BO-1 knobs (switch `AK_build_order_knobs`, default off).** `BuildOrderKnobsBotModule` (genericbot) publishes about
+8 bounded multipliers through `IBotBuildOrderKnobs`. The base builder reads them where it reads its raw numbers:
+| knob | scales |
+|---|---|
+| `tempo` | building delays and intervals |
+| `greed` | refinery and harvester priority |
+| `production` | production-building fractions |
+| `tech` | tech delays and fractions |
+| `defence` | defence fractions |
+| `power_margin` | the power surplus target |
+| `expansion` | MCV appetite |
+| `support` | radar, repair and other support fractions |
+
+* **Opening** = an ordered list of the first N building categories, from a small named set per personality
+  (e.g. `eco`, `barracks_first`, `fast_tech`, `defence_first`).
+* **Values** = the personality preset × the learned multiplier (route 2) × a per-match random jitter (±`JitterPct`,
+  from the host bot's random), clamped to [`KnobMin`, `KnobMax`]. Every personality feels different, and no two
+  matches are identical.
+* **Between matches (route 2):** `tools/ai/tune_build_order.py` runs paired mirror experiments. It nudges one knob
+  ±δ against the current best, scores win + margin, and accepts significant improvements (coordinate descent). The
+  result is written to `mods/cameo/ai/learned/build_order_knobs.yaml` (per personality × own faction, falling back to
+  game family, then global).
+* **Opening choice (route 3):** Thompson sampling over the openings per (personality, own faction, enemy faction),
+  with posteriors in the same learned file.
+* **During the match (react):** the knobs shift from what the bot SAW (fog-honest situation snapshot) and decay back
+  over time:
+  * enemy air seen → defence ↑ (AA share);
+  * an early enemy army near the base (rush) → defence and production ↑, greed ↓;
+  * enemy defence-heavy (turtle) → tech ↑, defence ↓;
+  * enemy out-earning us → greed and expansion ↑.
+  * It reuses the personality-lead deficits (§12.14) rather than computing a second enemy estimate.
+  * The opening is abandoned when the plan is invalidated (the rush rule fires).
+* **One owner per decision (§19.3):**
+  * the knobs decide HOW and WHEN the base builder builds (order, timing, weights);
+  * §19.10 scale targets decide HOW BIG;
+  * the leads (§12.14) decide the BUDGET lean;
+  * the knob module reads those, it does not redo them.
