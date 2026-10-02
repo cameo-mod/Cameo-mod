@@ -2508,6 +2508,16 @@ Same-day sequel, found when three agents gated at once:
    name first; if absent, `dotnet build -c Release -p:TargetPlatform=win-x64`
    the mod sln from a CURRENT source tree (the mod project's
    `EngineRootPath=../engine` deploys straight into the shared `engine/bin`).
+3. **Another worktree's build silently re-clobbers `engine/bin` between your
+   build and your boot (2026-10-02).** The mod projects deploy into the
+   junctioned, SHARED `engine/bin`; any lane's `dotnet build` from the main
+   checkout overwrites the dlls with ITS tree's state. Verify the deployed
+   dll contains your type right before booting, not just right after building.
+4. **Never swap ONE dll of a cross-referencing pair into a live `engine/bin`.**
+   Copying only `OpenRA.Mods.Cameo.dll` while a match ran crashed the game with
+   `ReflectionTypeLoadException` — the new dll referenced `IBotProductionWidth`
+   that the deployed `OpenRA.Mods.CA.dll` lacked. Copy the CA+Cameo pair
+   together, and only while no game process is running.
 
 ---
 

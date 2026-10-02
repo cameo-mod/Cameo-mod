@@ -16608,3 +16608,11 @@ both are default-off. Coordinator picks which arms in the increment.
   refineries placed, zero new exceptions. Loss read: expanded aggressively, couldn't
   hold against the omniscient reference — 1-match noise, real verdict is the increment A/B.
 - AH armed separately for the PP-1 leg of the smoke.
+- Boot-gate catch (LESSON): engine\bin is SHARED by every worktree via the junction —
+  another lane's build overwrote bin\OpenRA.Mods.Cameo.dll with a pre-PP-1 copy, and
+  booting aiwork then threw 'Cannot locate type: ParallelProductionBotModuleInfo'.
+  Copying only Cameo.dll mid-match then crashed the running smoke with
+  ReflectionTypeLoadException (Cameo referenced IBotProductionWidth the deployed CA.dll
+  lacked). Rule: rebuild BOTH CA+Cameo and copy the pair together; never swap a single
+  dll into bin while a game is running. Re-gated after paired copy: menu reached, zero
+  new exceptions (PID-scoped kill).
