@@ -1,11 +1,11 @@
 # SCG / Dispatch Proposal — Neutral RTS-AI Coalition Communication
 
-**Status:** design proposal for discussion with Cameo and other OpenRA AI developers  
+**Status:** design proposal for discussion with Cameo, Fransbot and other OpenRA AI developers  
 **SCG:** **Supreme Coalition General**  
-**Cameo reference master:** `9a2f6667c6a7440804580a6f9e8da02c5646a106`  
-**Core principle:** **SCG is not another AI brain. It is a neutral Dispatch relay.**
+**Cameo reference master reviewed:** `192ed5701f2bbb16b976e41fbd9d840df1c2de2e` (later `6490e520f03d` is development-log only)  
+**Core principle:** **SCG is not another AI brain. SCG is a neutral Dispatch relay.**
 
-## 0. Why this exists
+## 0. Purpose
 
 Different RTS AIs can cooperate in the same OpenRA team without sharing an architecture.
 
@@ -18,7 +18,7 @@ General -> MissionCards -> Commanders -> units
 Cameo may internally use:
 
 ```text
-MasterAi -> Situation / Utility / Director / TC-3 -> SquadManager -> units
+MasterAi -> Situation / Utility / Director / TC-3 / planners -> existing owners -> units
 ```
 
 A stock AI may have none of those abstractions.
@@ -27,110 +27,123 @@ Trying to standardize the internal intelligence would either make the protocol e
 
 SCG takes the opposite approach:
 
-> Standardize only the smallest amount of information that must cross the boundary between allied AIs.
+> **Standardize only the smallest amount of information that must cross the boundary between allied AIs.**
 
 What happens inside each AI after it receives that information is private and entirely controlled by that AI's developers.
 
 ---
 
-## 1. Locked principles
+# 1. Locked design principles
 
-### 1.1 Shared vision communicates reality. Dispatch communicates intent.
+## 1.1 Shared vision communicates reality. Dispatch communicates intent.
 
 OpenRA allies normally share vision. They can already observe the common battlefield state.
 
-Therefore SCG should **not** create another world model or duplicate facts that allies can already see.
+Therefore SCG must not create another world model and must not routinely repeat battlefield facts that allied AIs can already see.
 
-Do not send:
+Do not send merely because it is known:
 
 ```text
-I have 14 tanks at this visible position.
+I have 14 tanks here.
 Enemy building X is visible here.
+My refinery count is 4.
+My Director tension is 83.
 ```
 
-unless the information is needed to express an internal intention or request.
-
-Do send:
+Do send what observation cannot reveal:
 
 ```text
 I intend to expand here.
-I am committing to attack this player.
+I have committed to attack this player.
 I need air support in this area.
-I am abandoning this commitment.
+I have accepted that support request.
+I am releasing this commitment.
 ```
 
-The useful information is what observation cannot reveal: **intent, commitment and need**.
+The common layer is primarily about **intent, commitment, request and lifecycle**.
 
-### 1.2 AI -> SCG -> AI
+## 1.2 AI -> SCG -> AI
 
-Different AI implementations do not need a direct compatibility contract.
+Different AI implementations do not require direct interoperability.
 
 ```text
 Fransbot -> SCG -> Cameo
 Cameo    -> SCG -> Fransbot
-Stock AI -> SCG -> any compatible participant
+Stock AI -> SCG -> compatible participants
 ```
 
-SCG is the one common boundary.
+Fransbot does not need to parse Cameo internals. Cameo does not need to parse Fransbot MissionCards.
 
-### 1.3 SCG relays. It does not decide.
+## 1.3 SCG relays. It does not decide.
 
 SCG does **not**:
 
-- choose the coalition's main target;
-- select which AI must answer a support request;
-- assign sectors;
-- rank allied plans;
-- cancel an AI's strategy;
-- issue unit orders;
-- create a shared tactical brain.
+- choose the coalition main target;
+- choose which AI must answer a request;
+- allocate sectors;
+- vote on allied plans;
+- cancel another AI's strategy;
+- decide build orders;
+- infer unit orders;
+- elect rescue forces;
+- maintain a second tactical/strategic brain.
 
-SCG may know enough metadata to route a Dispatch, but the strategic decision remains with the participating AIs.
+SCG may validate and route a Dispatch according to explicit metadata. That is transport, not strategy.
 
-If Fransbot asks for air support, SCG forwards that request to compatible participants. Cameo decides whether and how to react. If several AIs answer, Fransbot decides what to do with those answers.
+## 1.4 The receiving AI owns interpretation and action
 
-### 1.4 The receiver owns interpretation
-
-The same incoming Dispatch may produce very different behavior.
+The same incoming Dispatch may result in completely different internal behavior.
 
 Example:
 
 ```text
-REQUEST: AIR_SUPPORT
-AREA: <map position/radius>
+REQUEST AIR_SUPPORT area X
 ```
 
-Fransbot may turn that into MissionCard candidates and Commander bids.
+Fransbot may create internal MissionCard candidates and Commander bids.
 
-Cameo may feed it into its own advisor/squad system.
+Cameo may expose it as an advisory/provider input to its existing planning/squad owners.
 
-A stock-AI adapter may map it to a simple available behavior, or return `UNSUPPORTED`.
+A stock-AI adapter may map it to one simple behavior or return `UNSUPPORTED`.
 
 All are valid.
 
-### 1.5 Internal AI architecture is private
+## 1.5 Internal architecture is private
 
-SCG must never require Fransbot MissionCards, Cameo Director phases, utility axes, squad types, build queues or doctrine internals.
+SCG must never require common support for concepts such as:
 
-Those concepts may be used by an adapter, but they are not part of the common protocol.
+```text
+Fransbot MissionCards
+Fransbot Best Read
+Cameo Director phase/tension
+Cameo UtilityAxes
+Cameo CoalitionDirective
+Cameo ScaleTargets
+Cameo BuildOrderKnobs
+Cameo field-economy telemetry
+specific squad states
+specific unit types
+```
 
-### 1.6 Same-family communication may be richer
+An adapter may use those internally to decide what to publish or how to react. They are not protocol semantics.
 
-Two Fransbots can use a richer Fransbot-specific channel.
+## 1.6 Same-family communication may be richer
 
-Two Cameo instances can continue using Cameo's TeamBlackboard / TC-3 coalition logic.
+Two Fransbots can communicate at a richer Fransbot-specific level.
+
+Two Cameo instances can continue to use TeamBlackboard / TC-3 / any later Cameo-specific team mechanism.
 
 That is natural and desirable.
 
-The rule is only:
+The common rule is only:
 
-> If a private decision creates a coalition-relevant intention, commitment or request, expose the relevant result through the simple SCG Dispatch boundary so other AI families are not blind to it.
+> **When a private decision creates coalition-relevant intent, commitment or need, publish the minimum useful result through the common Dispatch boundary so other AI families are not blind to it.**
 
 ---
 
-## 2. Relationship to Cameo TC-3 after the 2026-10-02 merge
+# 2. Relationship to current Cameo TC-3
 
-Cameo now has a real internal coalition implementation:
+At current Cameo master, TC-3 is real runtime code:
 
 ```text
 TeamBroadcast
@@ -140,39 +153,91 @@ TeamBroadcast
     -> Cameo consumers
 ```
 
-This is **not the same thing as SCG**.
+That is **Cameo's internal same-family coordination**.
 
-TC-3 is allowed to be Cameo-specific and intelligent. It can understand Director tension, army centroid, Cameo target votes and Cameo expansion sectors because all participants are running compatible Cameo logic.
+It is not SCG.
 
-SCG should remain deliberately less intelligent.
-
-Recommended relationship:
+TC-3 is free to understand Cameo-specific concepts such as:
 
 ```text
-        Cameo TC-3 / internal logic
-                  |
-            Cameo SCG Adapter
-                  |
-             Dispatch v0.x
-                  |
-                 SCG
-                  |
-             Dispatch v0.x
-                  |
-        Fransbot SCG Adapter
-                  |
-        Fransbot internal logic
+Director phase
+MainTarget votes
+ArmyCentroid
+ExpansionClaim
+SectorAnchors
+Cameo rescue elections
 ```
 
-Do **not** route SCG into `CoalitionFold` as a second coalition brain.
+SCG deliberately does not understand these.
 
-Inbound SCG information should enter Cameo through a small advisory/provider seam. Existing Cameo decision owners remain free to use or ignore it.
+Recommended boundary:
+
+```text
+          Cameo internal AI / TC-3
+                    |
+              Cameo SCG Adapter
+                    |
+             Dispatch protocol
+                    |
+                   SCG
+                    |
+             Dispatch protocol
+                    |
+            Fransbot SCG Adapter
+                    |
+           Fransbot internal AI
+```
+
+Do **not** feed SCG into `CoalitionFold` as another coalition brain.
+
+Do **not** export the whole `TeamBroadcast` to SCG.
+
+The adapter exports only the small cross-family meaning that actually matters.
 
 ---
 
-## 3. Minimum participant contract
+# 3. Why the new FE/BO systems should stay out of SCG
 
-A participant first registers a small compatibility profile.
+The 2026-10-02 Cameo merge adds rich internal information:
+
+```text
+field coverage
+refinery anchors
+crawl-vs-MCV direction
+build-order opening
+build-order knob vector
+mid-match reaction state
+scale targets
+production width
+```
+
+These are excellent **Cameo inputs and diagnostics**.
+
+They are not useful common protocol fields merely because they exist.
+
+For example, SCG should not receive:
+
+```text
+Cameo greed knob = 1173
+Cameo coverage_milli = 642
+Cameo opening = fast_tech
+```
+
+If those internals produce a cross-coalition decision, publish the result instead:
+
+```text
+INTENT EXPAND area X
+REQUEST DEFEND area X
+COMMITMENT ATTACK player Y
+```
+
+This is the abstraction boundary.
+
+---
+
+# 4. Participant registration — capability, not intelligence
+
+A participant registers only what SCG needs for routing.
 
 Example:
 
@@ -188,19 +253,21 @@ Example:
 }
 ```
 
-`participant_id` must be a stable match-local player identity. Do **not** define the protocol identity as OpenRA `ClientIndex`; map-side bots can share the host client index.
+The declared capabilities are routing metadata, **not promises that the AI will accept a request**.
 
-The declared lists are compatibility metadata, not promises that the AI will accept every request.
+Use a stable match-local participant identity. Do not define SCG identity as OpenRA `ClientIndex`; map-side bots may share the host client index.
+
+Suitable identity is an explicit match participant id / player slot / stable `Player.InternalName`-derived key.
 
 ---
 
-## 4. Core Dispatch kinds
+# 5. Core Dispatch kinds
 
-Keep v0.x intentionally small.
+Keep the common vocabulary intentionally small.
 
-### INTENT
+## INTENT
 
-"I am considering / intending to do this."
+> I am considering / intending to do this.
 
 Examples:
 
@@ -210,11 +277,11 @@ INTENT ATTACK player Y
 INTENT SECURE area Z
 ```
 
-An INTENT is not ownership. The AI may still change its mind.
+An INTENT is not ownership and may change.
 
-### COMMITMENT
+## COMMITMENT
 
-"I have now committed internal resources/responsibility to this."
+> I have actually committed internal responsibility/resources to this.
 
 Example:
 
@@ -222,11 +289,11 @@ Example:
 COMMITMENT SECURE area X
 ```
 
-The details of those resources stay private.
+The resources and implementation stay private.
 
-### REQUEST
+## REQUEST
 
-"I need another participant to consider helping with this."
+> I want compatible allies to consider helping with this.
 
 Example:
 
@@ -234,13 +301,13 @@ Example:
 REQUEST AIR_SUPPORT area X
 ```
 
-SCG forwards the request. SCG does not select the helper.
+SCG forwards it. SCG does not choose the helper.
 
-### RESPONSE
+## RESPONSE
 
-A response to a specific Dispatch.
+A response to a specific request/dispatch.
 
-Suggested minimal values:
+Minimal values:
 
 ```text
 ACCEPT
@@ -249,13 +316,13 @@ PARTIAL
 UNSUPPORTED
 ```
 
-`ACCEPT` means only that the receiver has chosen to handle the request internally. It does not standardize how.
+`ACCEPT` means only that the receiver has chosen to handle the information internally. It does not standardize how.
 
-### RELEASE
+## RELEASE
 
-"This intent/commitment/request is no longer active."
+> This intent, commitment or request is no longer active.
 
-Reasons may include:
+Possible reasons:
 
 ```text
 COMPLETED
@@ -267,13 +334,19 @@ NO_LONGER_NEEDED
 
 The reason is informative. The receiver still decides what it means.
 
+## Optional STATUS
+
+Only add STATUS if implementations have a demonstrated need that cannot be represented by COMMITMENT/RELEASE.
+
+Do not make periodic progress chatter mandatory in v0.1.
+
 ---
 
-## 5. Small common action vocabulary
+# 6. Small common action/capability vocabulary
 
-The common vocabulary should describe strategic effects, not units.
+Describe strategic effects, not units.
 
-A useful first set is:
+Suggested first action vocabulary:
 
 ```text
 ATTACK
@@ -284,7 +357,7 @@ RECON
 SUPPORT
 ```
 
-A useful first capability set is:
+Suggested first capability vocabulary:
 
 ```text
 GROUND
@@ -295,9 +368,9 @@ CAPTURE
 EXPANSION
 ```
 
-Do not encode faction-specific units in the common protocol.
+Avoid faction-specific semantics.
 
-Bad:
+Bad common message:
 
 ```text
 SEND 8 MIGS
@@ -309,19 +382,19 @@ Better:
 
 ```text
 REQUEST AIR_SUPPORT
-REQUEST EXPANSION_SUPPORT
-REQUEST SPECIAL/CAPTURE capability   (only if/when standardized)
+REQUEST TRANSPORT
+REQUEST CAPTURE_SUPPORT
 ```
 
-Each AI maps the abstract need to its own faction and architecture.
+Each AI maps the abstract capability to its own faction, doctrine and architecture.
 
-The vocabulary can grow only when two or more implementations have a real use for the same semantic concept.
+Only standardize a new word when at least two independent implementations need the same meaning.
 
 ---
 
-## 6. Dispatch envelope
+# 7. Dispatch envelope
 
-Proposed neutral shape:
+A minimal OpenRA-oriented shape:
 
 ```json
 {
@@ -347,110 +420,142 @@ Proposed neutral shape:
 }
 ```
 
-Not every field is required for every Dispatch.
+Not every field is required for every kind.
 
-Important properties:
+Important rules:
 
-- **location uses common OpenRA map coordinates**, not AI-private region ids;
-- `target_player` uses stable player identity;
-- `target_actor_id` is optional and only useful when the subject is a specific shared-world actor;
+- location uses common OpenRA map coordinates, not AI-private region ids;
+- player identity uses stable match-local player identity;
+- `target_actor_id` is optional and only for a genuinely shared specific actor/objective;
 - every live Dispatch has a bounded lifetime;
-- responses correlate through `reply_to`.
+- responses correlate through `reply_to`;
+- extensions are optional and never required for basic interoperability.
 
 ---
 
-## 7. Liveness is part of the protocol
+# 8. Audience/routing without SCG making a strategic choice
 
-A Dispatch without a lifecycle becomes stale strategy.
+The **sender**, not SCG, states the routing intent.
 
-This is particularly important after reviewing Cameo's current TeamBroadcast/TC-3 implementation, where `SnapshotTick` exists but freshness is not yet centrally enforced.
+Examples:
 
-SCG should make liveness explicit from day one:
+```text
+audience: coalition
+```
+
+Forward to every compatible ally.
+
+```text
+audience: participant:Multi3
+```
+
+Forward to that participant.
+
+```text
+audience: capability:AIR
+```
+
+Forward to every registered ally that declared `AIR` and can receive this Dispatch kind.
+
+SCG does not pick “the best” air AI. It forwards to the declared audience set.
+
+If two AIs accept, both responses are returned to the requester. The requester decides what to do.
+
+This keeps routing mechanical rather than strategic.
+
+---
+
+# 9. Dispatch lifecycle
+
+A stale intent is worse than no intent.
+
+Every live Dispatch should carry:
 
 ```text
 created_tick
 expires_tick
-RELEASE
 ```
 
-SCG may maintain an **active Dispatch ledger**, but this is not a world model or strategic brain. It is only message lifecycle state.
+and may be closed early with `RELEASE`.
 
-When `expires_tick` is reached, the Dispatch is no longer forwarded as active intent.
+SCG may maintain an **active Dispatch ledger**, but that ledger is message lifecycle state, not a battlefield model.
 
-A sender may refresh an intent with a replacement/revision, or close it with `RELEASE`.
+SCG may:
 
----
+- discard expired messages from the active set;
+- correlate replies;
+- log traffic;
+- deliver replacement/revision messages.
 
-## 8. Routing — what SCG actually does
-
-SCG has a deliberately small job.
-
-### SCG MAY
-
-1. validate protocol/schema;
-2. maintain participant registration/capability metadata;
-3. assign/validate dispatch IDs;
-4. keep active messages until release/expiry;
-5. forward to an explicit participant;
-6. broadcast to the coalition;
-7. forward to all participants that declared a requested capability/message kind;
-8. relay responses back to the sender;
-9. log the traffic for debugging/replay analysis.
-
-### SCG MUST NOT
-
-1. decide which participant is strategically best;
-2. choose a winner between conflicting intents;
-3. elect a rescue responder;
-4. vote a main enemy target;
-5. allocate territory;
-6. infer unit orders;
-7. maintain a second battlefield intelligence model;
-8. require a receiving AI to act.
-
-If two AIs announce conflicting `INTENT EXPAND` messages, SCG forwards the relevant intents. **The AI implementations decide how to react.**
-
-If Fransbot sends a support request and Cameo plus another AI both accept, SCG relays both responses. **Fransbot decides what to do next.**
+SCG must not infer that expiry means success/failure or invent a replacement decision.
 
 ---
 
-## 9. Stock AI participation
+# 10. What SCG actually does
 
-The protocol must allow partial participation.
+## SCG MAY
 
-### Level 0 — publish only
+1. validate schema/version;
+2. register participant/capability metadata;
+3. validate or assign message ids;
+4. track active Dispatch lifecycle until release/expiry;
+5. forward to the explicit audience;
+6. relay responses to the original sender;
+7. log Dispatch traffic for debugging/replay analysis;
+8. ignore/forward opaque optional extension blocks without understanding them.
 
-A stock-AI adapter can emit a few high-level events when the existing AI commits to an obvious action:
+## SCG MUST NOT
+
+1. choose a coalition main target;
+2. choose which ally is strategically best for a request;
+3. resolve competing expansion claims itself;
+4. assign sectors;
+5. elect rescue responders;
+6. rank allied intents;
+7. change another AI's build order;
+8. maintain a second enemy/world intelligence model;
+9. issue gameplay orders;
+10. require the receiver to act.
+
+If two AIs publish conflicting `INTENT EXPAND` messages, SCG forwards those intents to their declared audience. **The AI implementations decide how to react.**
+
+---
+
+# 11. Stock AI participation
+
+Stock AI must be able to participate honestly at a lower communication level.
+
+## Level 0 — publish-only observer adapter
+
+An adapter observes clear stock-AI commitments and emits coarse messages:
 
 ```text
-INTENT / COMMITMENT ATTACK player X
-INTENT / COMMITMENT EXPAND area Y
+COMMITMENT ATTACK player X
+COMMITMENT EXPAND area Y
 RELEASE ...
 ```
 
-It does not need to understand incoming Dispatches.
+It receives nothing.
 
-Other AIs still benefit because they learn the stock AI's intention before or while its visible actions develop.
+This is still valuable: sophisticated allies learn what the stock AI intends and can plan around it.
 
-### Level 1 — basic receive
+## Level 1 — basic receive
 
-An adapter may understand only a tiny subset, e.g. support requests around a location.
+The adapter understands a small subset of incoming requests, e.g. support at a map position.
 
-Everything else returns `UNSUPPORTED` or is ignored according to the declared profile.
+Anything else returns `UNSUPPORTED` or is ignored according to the registered contract.
 
-### Level 2 — full common protocol
+## Level 2 — full common protocol
 
-A more advanced AI can send and receive the complete common v0.x vocabulary.
+An advanced AI can publish and consume the whole common v0.x vocabulary.
 
-No level is allowed to pretend support for semantics it does not implement.
+No implementation is required to pretend it supports semantics it does not actually implement.
 
 ---
 
-## 10. Same-family fast paths
+# 12. Same-family fast paths remain valid
 
-SCG is not intended to make Fransbot-to-Fransbot or Cameo-to-Cameo communication worse.
-
-Example team:
+A mixed team may look like:
 
 ```text
 Fransbot A <==== rich Fransbot channel ====> Fransbot B
@@ -464,73 +569,86 @@ Fransbot A <==== rich Fransbot channel ====> Fransbot B
  Cameo A   <===== Cameo TC-3 / blackboard ===> Cameo B
 ```
 
-The rich same-family channels can coordinate at much higher resolution.
+The same-family paths may be much richer and faster.
 
-The SCG boundary remains the **coalition lingua franca**.
+The SCG boundary is the **coalition lingua franca**, not a replacement for those paths.
 
 ---
 
-## 11. Suggested Cameo adapter boundary
+# 13. Suggested Cameo adapter boundary
 
-Because current Cameo already has TC-1/TC-3, the clean implementation is a separate adapter, not a modification of the coalition fold.
+Do not modify TC-3 to become SCG.
 
-Illustrative outbound mappings only:
+A separate Cameo adapter can publish coalition-relevant outcomes of Cameo's internal decisions.
+
+Illustrative outbound mappings:
 
 ```text
-Cameo chooses/commits MainTarget
-    -> Dispatch INTENT/COMMITMENT ATTACK target_player
+Cameo actually intends/commits to a main enemy
+    -> INTENT / COMMITMENT ATTACK target_player
 
-ExpansionPlanner publishes a real expansion commitment
-    -> Dispatch INTENT/COMMITMENT EXPAND area
+ExpansionPlanner commits an MCV/base expansion
+    -> INTENT / COMMITMENT EXPAND area
 
-Cameo decides it wants outside help
-    -> Dispatch REQUEST <capability> area
+Cameo's own logic decides outside support would be useful
+    -> REQUEST <capability> area
 
-Cameo abandons/completes that commitment
-    -> Dispatch RELEASE reference
+Cameo abandons/completes the commitment
+    -> RELEASE reference
 ```
 
-Do not automatically dump every TeamBroadcast field into SCG. Director tension, utility axes, army centroid and TC-3 sector internals are Cameo-private unless a future common use case explicitly justifies standardizing them.
+Do not automatically export:
 
-For inbound traffic, expose an inbox/provider such as conceptually:
+```text
+TeamBroadcast
+CoalitionDirective
+Director tension
+Utility axes
+ArmyCentroid
+BuildOrderKnobs
+ScaleTargets
+field coverage telemetry
+```
+
+For inbound traffic, use a small **advisory inbox/provider seam** conceptually like:
 
 ```text
 IBotExternalCoalitionInbox
 ```
 
-Existing Cameo owners may query that provider. The adapter itself should not issue gameplay orders.
+Existing Cameo decision owners may read it. The adapter itself should not issue gameplay orders.
 
-The exact interface name is Cameo's choice; the architectural rule is the important part.
+The exact interface name is Cameo's choice; the ownership rule is the important part.
 
 ---
 
-## 12. Suggested Fransbot adapter boundary
+# 14. Suggested Fransbot adapter boundary
 
-Fransbot can publish only coalition-relevant outcomes from its own strategic process:
+Fransbot publishes only coalition-relevant results of its private strategic process:
 
 ```text
 General intends SECURE area
-    -> Dispatch INTENT SECURE
+    -> INTENT SECURE
 
-General commits resources through its own MissionCards
-    -> Dispatch COMMITMENT SECURE
+General commits through its own MissionCard/Commander process
+    -> COMMITMENT SECURE
 
-General needs a capability it cannot currently satisfy
-    -> Dispatch REQUEST
+General needs a capability it cannot or does not want to satisfy locally
+    -> REQUEST
 
-General no longer needs / can no longer hold it
-    -> Dispatch RELEASE
+General no longer needs/can hold it
+    -> RELEASE
 ```
 
-Inbound Dispatches become information for Fransbot's own General / Best Read / MissionCard logic **only if Fransbot's implementation chooses to use them**.
+Inbound Dispatches become information for Fransbot's own General / Best Read / MissionCard logic **only if Fransbot chooses to use them**.
 
 SCG does not create Fransbot MissionCards.
 
 ---
 
-## 13. Versioning and extension rule
+# 15. Versioning and extension rule
 
-Start with a deliberately small versioned schema:
+Start deliberately small:
 
 ```text
 scg-dispatch/0.1
@@ -539,13 +657,11 @@ scg-dispatch/0.1
 Rules:
 
 - unknown optional fields are ignored;
-- unsupported action/capability is answered `UNSUPPORTED` when a response is expected;
+- unsupported semantic requests may receive `UNSUPPORTED`;
 - breaking semantic changes increment the major version;
-- AI-private data must not become mandatory common fields.
+- AI-private data never becomes mandatory merely because one implementation has it.
 
-If two same-family adapters want richer data through the same transport, SCG may relay an opaque optional extension block, but SCG must not understand or depend on it.
-
-Example:
+Optional same-family extension data may be relayed opaquely:
 
 ```json
 "extensions": {
@@ -553,13 +669,15 @@ Example:
 }
 ```
 
-This is optional. Direct same-family channels remain valid.
+SCG must not depend on it.
+
+Direct same-family channels remain valid and may be preferable.
 
 ---
 
-## 14. What success looks like
+# 16. What success looks like
 
-A mixed team can contain:
+A coalition contains:
 
 ```text
 2 x Fransbot
@@ -567,21 +685,24 @@ A mixed team can contain:
 1 x stock AI
 ```
 
-Fransbots may coordinate richly with each other. Cameos may coordinate richly through TC-3. Stock AI may understand only a small subset.
+The two Fransbots may coordinate richly with each other.
+
+The two Cameos may coordinate richly through TC-3.
+
+The stock AI may only publish obvious commitments.
 
 All five can still share the minimum common layer:
 
 ```text
 what I intend to do
-what I have committed to
-what I need from allies
+what I have actually committed to
+what I need allies to consider
 how I answer a request
-when that intent/commitment is no longer active
+when the intent/commitment/request ends
 ```
 
-That is enough for different AI developers to cooperate without merging their AI architectures.
+No new shared brain is required.
 
-The core design sentence is:
+The core sentence remains:
 
 > **Shared vision communicates reality. Dispatch communicates intent. SCG relays the Dispatch. The receiving AI decides.**
-

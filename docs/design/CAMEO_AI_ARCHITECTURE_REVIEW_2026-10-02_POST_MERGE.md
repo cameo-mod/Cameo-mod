@@ -1,38 +1,43 @@
-# Cameo AI Architecture Review — Post-Merge, 2026-10-02
+# Cameo AI Architecture Review — Current Master `192ed5701`, 2026-10-02
 
 **Reviewed repository:** `cameo-mod/Cameo-mod`  
-**Reviewed master:** `9a2f6667c6a7440804580a6f9e8da02c5646a106`  
-**Coalition implementation commit:** `9a8a39c46e029640213776a538db642585122d5f`  
-**Purpose:** architecture review after the large 2026-10-02 merge, with emphasis on ownership, lifecycle, coalition/team coordination, and interoperability boundaries.
+**Reviewed master:** `192ed5701f2bbb16b976e41fbd9d840df1c2de2e`  
+**Included merges:** #773, #774, #776 and the earlier 2026-10-02 coalition/formation consolidation  
+**Post-review master note:** `6490e520f03d` landed afterwards and changes only `DEVELOPMENT_LOG.md`; runtime/code findings remain based on `192ed5701`.  
+**Purpose:** independent architecture review after the evening merge, with emphasis on ownership, lifecycle, A/B correctness, team coordination and the boundary to cross-AI SCG/Dispatch interoperability.
 
 ## Executive summary
 
-The large merge materially improves Cameo's AI architecture. The final review was refreshed after PR #773 landed; #773 is documentation-only (field-economy/build-order specifications), so it does not change the runtime findings below. The strongest direction is still the same one that emerged from the previous Fransbot review: **one authority per decision, one owner per actor, advisors/providers instead of competing order emitters**.
+The evening merge is a net architectural improvement. Cameo is increasingly converging on the right structural rule for a large modular RTS AI:
 
-The merge consolidates several previously overlapping mechanics behind provider seams or single owners: spacing, army-first building pressure, harvester field limits, formation/concave deployment, scale targets, production width, stealth doctrine, and the new TC-3 coalition layer. This is a healthier direction than adding more independent brains.
+> **One authority per decision; providers/advisors may influence it, but existing owners emit the orders.**
 
-The most important new architectural issue is that TC-3 now exists in runtime code, not just design. `IBotCoalition`, `CoalitionFold`, rescue elections, coalition target bias and sector bias are real. That makes several assumptions in the TC-3 design load-bearing:
+That rule is now visible across formation, placement, army-first policy, scale targets, parallel production, field economy and build-order adaptation. The new FE/BO work also adds something Cameo badly needs at this stage: measurement before tuning. Placement/build-order logs and expansion telemetry make future changes much easier to evaluate from evidence rather than spectator impression.
 
-1. all team members are assumed to fold the same broadcast set;
-2. broadcasts are assumed to remain live and current;
-3. `ClientIndex` is assumed to be a unique participant identity;
-4. a rescue responder is treated as "free" without a coalition-level capacity reservation.
+The current tree nevertheless has several concrete integration issues worth fixing before more switches are armed:
 
-The current code does not fully establish those assumptions. They should be hardened before TC-3 becomes a general team-coordination foundation.
+1. **The committed architecture audit/module-map evidence is stale** relative to current master.
+2. **`increment_switches.yaml` still contains obsolete switch targets** from before the one-owner consolidation.
+3. **TC-3 still assumes more temporal coherence than the current staggered broadcast system guarantees.**
+4. **Team broadcasts still lack one central liveness/freshness rule.**
+5. **Coalition rescue can assign the same responder to multiple simultaneous requests.**
+6. **BO-1's `out_earned` reaction is player-count dependent** because it sums every living enemy economy but compares the sum with one bot's economy.
+7. **The build-order report and tuner use different objective functions**, so the human-facing report can disagree with the optimization gate.
+8. **The tuner calls the experiments paired/mirrored but analyzes pooled independent means and then selects among multiple candidate arms**, which weakens the statistical gate.
 
-A second immediate process issue is that the generated architecture evidence is now stale. `AI_ARCH_COVERAGE.md` and `AI_MODULE_MAP.md` predate the large merge and do not describe the current master. The human-authored `AI_ARCHITECTURE.md` has moved ahead of the generated audit that it says is authoritative.
+None of these requires replacing the architecture. They are boundary/lifecycle/lab-contract problems around an otherwise healthier core.
 
-Finally, the proposed **SCG / Dispatch** interoperability layer should **not** be merged into Cameo's TC-3 coalition brain. They solve different problems. TC-3 is an internal same-AI coordination mechanism. SCG should be a tiny neutral relay protocol between independent AI implementations, with no strategic authority of its own.
+The SCG/Dispatch proposal should remain separate from Cameo TC-3. TC-3 is useful rich same-family coordination. SCG is a tiny neutral relay boundary between *different* AI implementations and must not become another brain.
 
 ---
 
-## 1. Current architecture after the merge
+## 1. Current architecture at `192ed5701`
 
-The current stack is best understood as:
+A useful compressed map is:
 
 ```text
 OBSERVE
-  BotSituation / FogMemory / TacticalMap / Threat / Influence
+  BotSituation / FogMemory / TacticalMap / Threat / Influence / telemetry
         |
         v
 SYNTHESIZE
@@ -41,86 +46,79 @@ SYNTHESIZE
         v
 PLAN / ADVISE
   ExpansionPlanner / DefenseCoverage / Siege / Formation / ScaleTargets /
-  StealthDoctrine / ProductionWidth / placement advisors
+  BuildOrderKnobs / Spacing / StealthDoctrine / ProductionWidth
         |
         v
 ARBITRATE
-  BaseBuilder / UnitBuilder / SquadManager / ownership leases / action budget
+  BaseBuilder / UnitBuilder / SquadManager / leases / action budget
         |
         v
 EXECUTE
   squad states / engineer / repair / harvest / deploy / transport etc.
         |
         v
-VERIFY / FEEDBACK
-  Mission outcomes / telemetry / watchdogs / A-B tooling
+VERIFY / LEARN OFFLINE
+  mission outcomes / placement log / expansion log / reports / A-B / tuner
 ```
 
-This remains a sound overall shape. The important architectural property is that most new intelligence is entering through **read-only provider seams** while existing execution owners retain their orders.
+The important property is not the number of modules. It is that the new modules are mostly **providers of bounded inputs** rather than second order issuers.
 
-Examples from the post-merge code:
+Examples:
 
-- `SpacingAdvisorBotModule` implements `IBotPlacementAdvisor`; the queue manager still owns building placement.
-- `AssaultFormationBotModule` supplies `IBotAssaultFormation`; the squad state still owns movement orders.
-- `ScaleTargetsBotModule` publishes `IBotScaleTargets`; builders and harvesters consume the target values.
-- `ParallelProductionBotModule` publishes `IBotProductionWidth`; it does not become another production owner.
-- `StealthDoctrineBotModule` publishes `IBotStealthDoctrine`; stealth squad states remain the executors.
-- `CoalitionFold` publishes `CoalitionDirective`; existing Master/Squad/Expansion owners consume it as bias.
+- `SpacingAdvisorBotModule` -> `IBotPlacementAdvisor`; queue manager still places buildings.
+- `AssaultFormationBotModule` -> `IBotAssaultFormation`; squad state still moves the squad.
+- `ScaleTargetsBotModule` -> `IBotScaleTargets`; existing builders decide what to queue.
+- `ParallelProductionBotModule` -> `IBotProductionWidth`; `UnitBuilderBotModuleCA` still owns production orders.
+- `BuildOrderKnobsBotModule` -> `IBotBuildOrderKnobs`; base-builder logic still owns structure choice and timing.
+- `CoalitionFold` -> `IBotCoalition`; existing Master/Squad/Expansion owners consume the directive.
 
-That is the correct general pattern.
-
----
-
-## 2. What the merge improved
-
-### 2.1 One authority per decision is becoming real rather than aspirational
-
-The merge explicitly consolidates several duplicate or overlapping mechanisms. This is important because the historical failure mode in modular RTS AI is rarely "not enough modules"; it is usually **multiple modules believing they own the same unit or decision**.
-
-The current design increasingly uses this rule:
-
-> Providers may influence a decision. Exactly one existing owner emits the resulting orders.
-
-The formation merge is a good example. Rather than keeping a separate fan-out brain and a separate concave brain that both move the same squad, the merged design puts the geometry behind one provider/deploy path.
-
-The same direction is visible in spacing, harvester spread and army-first building policy.
-
-### 2.2 TC-3 preserves local execution ownership
-
-`CoalitionDirective` does not issue orders itself. Its outputs are read by:
-
-- `MasterAiBotModule` for coalition target bias;
-- `SquadManagerBotModuleCA` for coalition target preference and rescue election;
-- `ExpansionPlannerBotModule` for sector scoring.
-
-That is much safer than adding a second team-level unit commander.
-
-### 2.3 The provider vocabulary is becoming a useful architectural spine
-
-The growing set of `IBot*` provider seams is increasingly useful because it gives Cameo stable places to harvest ideas from donor AIs without importing their entire control loops.
-
-This is the right way to reuse useful Fransbot/CN/CA concepts: **import the capability or advice, not a second brain**.
+That is the correct general direction.
 
 ---
 
-## 3. High-priority findings
+## 2. What the evening merge improved
 
-### 3.1 The generated architecture audit is stale after the merge
+### 2.1 One-owner consolidation is now visible in real code
 
-This is currently the first thing I would fix, because it affects confidence in every later architecture claim.
+The 12.7a/12.20 consolidation is exactly the right kind of cleanup. Previously overlapping mechanisms for assault deployment, spacing and army-first policy are being collapsed into one owner/seam instead of stacked as independent brains.
 
-`docs/design/AI_ARCH_COVERAGE.md` was last updated at commit `2fbd9a811fef` on 2026-10-02 10:21 UTC.  
-`docs/design/AI_MODULE_MAP.md` was last updated much earlier, at `85c95b257683` on 2026-10-02 06:39 UTC.  
-The coalition implementation landed at `9a8a39c46e02` at 18:17 UTC, followed by the large merge ending at current master `65fbcf70fdd6`.
+The unified concave/objective deployment state is especially healthy architecturally: geometry/configuration may come from a provider, but squad states remain the only movement authority.
 
-The stale generated documents demonstrate the mismatch directly: their provider/consumer maps do not include the new `IBotCoalition` seam even though current `MasterAiBotModule` implements it and current consumers read it.
+### 2.2 Field economy separates *measurement*, *policy* and *execution*
 
-This means the repository currently has a process contradiction:
+FE-0 adds behavior-neutral logging. FE-1 is behind `AJ_field_coverage`. The planner publishes refinery-law/claim information and the existing base builder consumes it. This preserves the execution owner instead of introducing a second refinery builder.
 
-- `AI_ARCHITECTURE.md` says the generated module map is authoritative;
-- the generated map no longer represents current master.
+The one-refinery-per-anchor model is also much more directly tied to the actual resource geography than the old yard-count ceiling.
 
-**Recommendation:** regenerate both audits on current master and make staleness itself a CI failure whenever files under the AI architecture surface change.
+### 2.3 BO-1 is a provider, not another base builder
+
+`BuildOrderKnobsBotModule` publishes eight bounded multipliers and an opening through `IBotBuildOrderKnobs`. It does not place buildings itself.
+
+That is the right boundary. It makes it possible to tune *how and when* the existing owner builds without duplicating the owner.
+
+### 2.4 The new logs create a real experimental surface
+
+`cameo-ai-placements.jsonl`, the expansion snapshot block, `build_order_report.py`, `expansion_report.py` and the knob tuner are a major process improvement.
+
+The architecture is now mature enough that the next regressions are likely to be interaction regressions. Instrumentation is therefore as important as another behavior module.
+
+---
+
+# 3. Immediate integration findings
+
+## P0 — 3.1 The generated architecture evidence is stale
+
+`AI_ARCHITECTURE.md` says the generated module map is authoritative, but the committed generated files do not describe current master:
+
+- `docs/design/AI_ARCH_COVERAGE.md` last changed at `2fbd9a811fef` (10:21 UTC).
+- `docs/design/AI_MODULE_MAP.md` last changed at `85c95b257683` (06:39 UTC).
+- current master is `192ed5701` after the evening coalition/FE/BO merges.
+
+The current human-authored architecture says **68 distinct trait types / 93 Player instances**, while the generated evidence predates several of those types and seams.
+
+This matters because the generated files are supposed to detect exactly the kind of integration drift described below.
+
+**Recommendation:** regenerate on current master and make stale generated architecture evidence a merge failure whenever the AI surface changes.
 
 Suggested gate:
 
@@ -129,30 +127,63 @@ python tools/ai/ai_module_map.py --check
 python tools/ai/ai_arch_audit.py --check
 ```
 
-The check should fail if the generated docs do not match the current source tree.
+Do this on the merged commit, not only on an earlier branch baseline.
 
 ---
 
-### 3.2 TC-3's "identical directive" invariant is not currently guaranteed
+## P0 — 3.2 `increment_switches.yaml` still contains obsolete pre-consolidation targets
 
-`CoalitionFold` is deterministic **for a given input set**. The unit tests correctly prove that arithmetic property.
+The one-owner merge documents that the old BaseBuilder fields were removed:
 
-The runtime assumption is stronger: every allied bot is documented as computing the same `CoalitionDirective` because it sees the same broadcasts.
+```text
+MinBuildingGapCells
+MinBuildingGapDefensesCells
+MinArmyUnitsBeforeBuildings
+ArmyFirstMinCash
+```
 
-Current `MasterAiBotModule` deliberately staggers snapshot timing:
+Current source confirms those fields are no longer on `BaseBuilderBotModuleCA` / its queue-manager Info surface.
+
+However current `tools/ai/increment_switches.yaml` still contains the old groups:
+
+```yaml
+AD_army_first:
+  BaseBuilderBotModuleCA:
+    MinArmyUnitsBeforeBuildings: 14
+    ArmyFirstMinCash: 1500
+
+AE_spread_assault:
+  BaseBuilderBotModuleCA:
+    MinBuildingGapCells: 2
+```
+
+The *new* owners already have their proper groups (`AD_spaced_base_placement`, `AE_army_first`, etc.), so these are stale leftovers.
+
+`apply_increment_switches.py` is intentionally a mechanical editor: it will insert a requested field under a matching trait even when that field no longer exists in C#. The `wiring` audit reported in PR #776 does not validate this class of switch field. `ai_arch_audit.py` R2 is the audit intended to validate it, but the committed architecture audit predates the merge.
+
+**Risk:** a later `--groups all` or direct arm of these stale groups can generate an invalid experiment worktree or an experiment that no longer means what its label says.
+
+**Recommendation:** delete the obsolete groups/targets, regenerate `AI_ARCH_COVERAGE.md`, and explicitly run R2 on `192ed5701` before the next increment batch.
+
+This is the highest-confidence concrete merge-cleanup finding in this review.
+
+---
+
+# 4. TC-3 / same-family coalition findings
+
+## P1 — 4.1 “Identical CoalitionDirective” is still not guaranteed by the runtime cadence
+
+`CoalitionFold` is deterministic **for one identical set of broadcasts**. The tests establish that correctly.
+
+Runtime publication is staggered:
 
 ```csharp
 nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
 ```
 
-Each bot then does:
+Each bot then publishes its fresh own `TeamBroadcast` and immediately folds it with whatever ally broadcasts currently exist.
 
-```csharp
-broadcast = new TeamBroadcast(...current own snapshot...);
-coalition = CoalitionFold.Compute(broadcast, TeamBlackboard.CollectBroadcasts(player));
-```
-
-Therefore Bot A may fold:
+Therefore one member can fold:
 
 ```text
 A generation 20
@@ -160,7 +191,7 @@ B generation 19
 C generation 20
 ```
 
-while Bot B later folds:
+while another folds a few ticks later:
 
 ```text
 A generation 20
@@ -168,130 +199,225 @@ B generation 20
 C generation 20
 ```
 
-The function is deterministic, but the input sets are not guaranteed to represent the same generation. The test suite currently swaps `own`/`allies` while keeping identical broadcast values; it does not test staggered publication.
+A deterministic function over different inputs does not guarantee an identical result.
 
-This matters because `MainTarget`, `Phase`, rescue elections and sector data can differ transiently between team members.
+This affects `MainTarget`, `Phase` and rescue elections when the TC-3 switches are armed.
 
-There are two valid architectural choices:
+Two valid designs exist:
 
-**A. Require identical directives.**  
-Then add a team epoch / generation barrier or double buffer. Bots publish generation N while consumers fold the last complete generation N-1.
+**Strict common directive:** introduce a team epoch/double buffer and consume only a completed previous generation.
 
-**B. Accept eventual consistency.**  
-Then remove the stronger "identical directive" invariant from docs/tests and make consumers robust to short disagreement.
+**Eventual consistency:** keep the simple staggered board, but document that directives may transiently differ and make all consumers tolerant of that.
 
-Either is reasonable. The current code/documentation combination claims A while implementing something closer to B.
+Current docs/tests describe the first invariant while runtime behaves closer to the second.
 
 ---
 
-### 3.3 Team broadcasts have a timestamp but no real liveness contract
+## P1 — 4.2 TeamBroadcast has a timestamp but no central liveness contract
 
-`TeamBroadcast` carries `SnapshotTick`, but most team consumers do not use it for freshness. `TeamBlackboard.CollectBroadcasts` currently selects:
+`TeamBroadcast` carries `SnapshotTick`, but `TeamBlackboard.CollectBroadcasts` primarily filters by bot/alliance and returns the latest enabled provider value.
 
-```csharp
-p != me && p.IsBot && me.IsAlliedWith(p)
-```
-
-and returns the enabled `IBotTeamMember.Broadcast` without checking:
-
-- `WinState`;
-- maximum broadcast age;
-- `SnapshotTick == 0` except in isolated consumers;
-- whether the publisher has stopped updating.
-
-OpenRA keeps the `Player` / `PlayerActor` object after a player has lost. A last published intent can therefore remain readable after the publisher is no longer an active coalition member.
-
-Potential effects when team switches are armed:
-
-- a dead ally's old `Climax` can continue affecting synchronized launch behavior;
-- an old defence request can remain eligible;
-- an old expansion claim can still cause another bot to yield a field;
-- an old target vote can remain in a coalition fold;
-- old spawn/sector identity can survive longer than intended.
-
-**Recommendation:** define one liveness rule centrally and apply it before any team fold.
-
-For example:
+It does not centrally require:
 
 ```text
-valid broadcast =
-  SnapshotTick > 0
-  AND publisher.WinState == Undefined
-  AND now - SnapshotTick <= TeamBroadcastMaxAge
+publisher alive
+SnapshotTick > 0
+now - SnapshotTick <= max_age
 ```
 
-Do not make each consumer reinvent this filter.
+OpenRA retains `Player`/`PlayerActor` after defeat, so a last broadcast can remain readable after the participant is no longer active.
 
----
+Possible effects when team switches are armed:
 
-### 3.4 Coalition rescue can elect the same responder for multiple simultaneous requests
+- stale Climax affects sync attacks;
+- stale defence request remains eligible;
+- stale expansion claim makes a live ally yield;
+- stale target vote remains in a coalition fold;
+- stale sector identity remains in the fold.
 
-`CoalitionFold.Compute` builds `freePool` once. For each requester it selects the nearest responder from that same list, but does not remove or reserve the chosen responder.
-
-With two allies asking for help, one nearby army can therefore be elected for both requests in the same directive.
-
-That contradicts the semantic phrase "nearest free ally" unless one responder is intentionally allowed to own several simultaneous rescue obligations.
-
-**Recommendation:** make capacity explicit.
-
-The simple first rule is:
+**Recommendation:** one central validity function before *any* team aggregation, e.g.:
 
 ```text
-one responder -> at most one rescue assignment per fold
+ValidTeamBroadcast(p, b, now) =
+  p.WinState == Undefined
+  && b.SnapshotTick > 0
+  && now - b.SnapshotTick <= TeamBroadcastMaxAge
 ```
 
-Remove the selected responder from `freePool` after assignment. A later version can expose capacity if multi-rescue is ever desirable.
-
-This is the coalition-level equivalent of the actor-ownership problem already solved lower in the stack: assigning a resource twice is not fixed merely because the lower-level unit leases are correct.
+Do not make every consumer solve freshness separately.
 
 ---
 
-### 3.5 `ClientIndex` is too weak as a universal coalition identity
+## P1 — 4.3 Coalition rescue can assign one responder to multiple simultaneous requests
 
-TC-2/TC-3 currently use `ClientIndex` for precedence, rescue identity and sector anchors.
+`CoalitionFold.Compute` builds `freePool` once, selects the nearest responder for each requester, but does not consume the selected responder.
 
-That is convenient for normal lobby bots, but OpenRA's `Player` implementation gives map-side players the host/admin client index (`TODO: fix this` in engine code). Multiple map-side bots can therefore share a `ClientIndex`.
+With two simultaneous defend requests, the same nearby army can therefore be elected for both.
 
-Consequences for a generalized team layer can include:
+If “nearest free ally” is the intended semantic, the basic rule should be:
 
-- precedence collisions;
-- rescue requester/responder ambiguity;
-- sector-anchor grouping collapsing two participants into one;
-- identity instability if the mechanism is reused outside the tested lobby harness.
+```text
+one participant -> at most one rescue assignment per fold
+```
 
-**Recommendation:** use a stable player identity for coalition protocol identity. `Player.InternalName` / a match-local player-slot key is a better basis than `ClientIndex`. Keep `ClientIndex` only where lobby ordering itself is the desired input.
-
-This becomes especially important for SCG interoperability, where participants may include Cameo, Fransbot, stock AI adapters and map-side bots.
+Remove the selected responder from the pool after assignment. If multi-rescue is later desirable, model explicit capacity rather than accidental reuse.
 
 ---
 
-## 4. Lifecycle finding still open
+## P1 — 4.4 `ClientIndex` should not be the universal coalition participant identity
 
-The current `AI_DATAFLOW.md` still records dangling mission outcomes at match end: open attempts can finish the match without a terminal state.
+TC-2/TC-3 use `ClientIndex` for precedence, rescue identity and sector anchors.
 
-That remains a significant architecture issue because mission records are increasingly being treated as feedback and future learning evidence.
+That works for ordinary lobby bots, but OpenRA map-side bots can inherit the host/admin client index. Multiple map-side participants can therefore share it.
 
-The contract should remain simple:
+For generalized coalition identity, use a stable match-local player identity (`Player.InternalName` / slot key / explicit participant id). Keep `ClientIndex` only where lobby ordering itself is the intended rule.
 
-> every COMMIT / attempt must reach exactly one terminal outcome, including match teardown.
+This matters even more if Cameo later exposes an SCG adapter to Fransbot, stock AI or map-side bots.
 
-At world/game teardown, still-open attempts should emit a bounded terminal record such as:
+---
+
+# 5. FE-1 / field economy review
+
+## 5.1 The ownership boundary is good
+
+FE-1 does **not** introduce a second refinery/base builder. `ExpansionPlannerBotModule` publishes the active refinery law/anchor claim and `BaseBuilderBotModuleCA` remains the decision/order owner.
+
+That is architecturally clean.
+
+## 5.2 Failure lifecycle is bounded
+
+The new anchor path includes `AnchorStuckReplans` and parking, and in-flight MCV sites are removed when the actor is gone/deployed/dead. Those are good lifecycle details and avoid the infinite retry class found in earlier Fransbot/Cameo reviews.
+
+## 5.3 The aggressive MCV values are correctly treated as experiment values
+
+`AJ_field_coverage` raises inflight MCV count, lowers reserve and raises target floor. The docs explicitly label these as unmeasured starting values for A/B rather than architecture truths. That is correct.
+
+No architecture objection here: measure them with FE-0 before promoting them to defaults.
+
+---
+
+# 6. BO-1 / build-order lab findings
+
+## P1 — 6.1 `out_earned` is player-count dependent in team/FFA games
+
+`BuildOrderKnobsBotModule.ReactInputs` sums economy proxy across **every living enemy**:
+
+```text
+enemyEconomy += enemy.Harvesters + enemy.Refineries * 2
+```
+
+but compares that sum with **this one bot's** own economy:
+
+```text
+OwnHarvesters + ownRefineries * 2
+```
+
+`Evaluate` then triggers `OutEarned` when the summed enemy value exceeds own economy by `ReactOutEarnPct`.
+
+In a roughly even 2v2, two comparable enemies naturally sum to about 2x one bot. In 6v6 the effect is much stronger. The reaction can therefore become almost a proxy for “there are multiple enemies”, not “this bot is economically behind”.
+
+This is especially important because Cameo now has explicit multi-team harnesses.
+
+**Recommendation:** normalize by population before applying the threshold. Two reasonable semantics:
+
+```text
+average observed enemy economy per living enemy
+vs
+own economy
+```
+
+or, if the intended question is coalition economy:
+
+```text
+observed enemy-team total
+vs
+allied-team total
+```
+
+The first is simpler and keeps BO-1 local. Do not use SCG for this; it is internal Cameo reasoning.
+
+---
+
+## P1 — 6.2 Human report and tuner optimize different score functions
+
+`tools/ai/build_order_report.py` defines:
+
+```text
+speed weight = 0.5
+reference = 30 game minutes
+score = win + margin + speed
+```
+
+`tools/ai/tune_build_order.py` defines:
+
+```text
+speed weight = 0.25
+reference = 54,000 ticks (~36 min at the assumed timestep)
+score = win + margin + speed
+```
+
+The tuner also uses raw ticks, while the report converts ticks through the match timestep.
+
+This creates a lab-contract problem: a developer can inspect `build_order_report.py` and see arm A score higher while the tuner is applying a materially different objective to decide whether arm A is accepted.
+
+**Recommendation:** define the objective exactly once in shared tooling (`ai_log_common.py` or a dedicated score helper) and have both report and tuner import it.
+
+One objective should mean one formula, one time unit and one set of constants.
+
+---
+
+## P2 — 6.3 The statistical gate is safer than blind tuning, but not yet truly paired
+
+The tuner documentation calls the experiments paired/mirrored. The acceptance calculation is currently a Welch-style independent-means statistic:
+
+```text
+(mean_arm - mean_base) / sqrt(var_arm/n_arm + var_base/n_base)
+```
+
+and then the best significant candidate is selected among the measured arms.
+
+Two issues follow:
+
+1. mirrored map/seed/side pairs are not used as **paired differences**, so much of the controlled experimental structure is discarded;
+2. repeatedly testing multiple knob/direction candidates and taking the best `z >= 1.96` inflates false-positive risk relative to one pre-specified comparison.
+
+This is not a reason to remove the tuner. The current ≥20/arm threshold and one-coordinate-at-a-time update are much better than unguarded self-tuning.
+
+**Recommendation for the next lab iteration:** match arm/base games by map/seed/side and test the distribution of paired score deltas. Add either a confirmation batch/holdout before `--write`, or a multiple-comparison correction when several candidates are evaluated from the same baseline.
+
+---
+
+## P2 — 6.4 Opening learning is confounded by knob experiments
+
+Opening posteriors are updated from the same scored matches used for knob experiments. Therefore an opening win/loss can be credited while tempo/greed/production/etc. are deliberately perturbed.
+
+That learns “opening performance averaged over whatever knob experiments happened to run”, not the isolated opening effect.
+
+This may be acceptable if intentional, but it should be explicit. If the goal is a clean opening bandit, update opening posteriors from baseline/current-best knob matches only, or include the knob regime in the opening context.
+
+---
+
+# 7. Mission/lifecycle finding still open
+
+The earlier mission-card boundary remains important: every committed attempt should reach exactly one terminal state, including match teardown.
+
+If the current mission archive still permits open attempts at game end, close them with a bounded terminal record such as:
 
 ```text
 RELEASED reason=match_end
 ```
 
-A match ending is not mission success or failure by itself, but it must close the lifecycle.
+A match ending is not automatically mission success or failure, but it must close the attempt lifecycle before the archive becomes learning evidence.
 
 ---
 
-## 5. MasterAiBotModule: keep one strategic owner, reduce internal coupling
+# 8. MasterAi: keep one owner, continue extracting pure components
 
-The merge adds still more provider roles to `MasterAiBotModule`, including `IBotCoalition` on top of target selection, mission publishing/outcomes, fog information, threat routing, prediction, defence memory, personality leads, utility axes, Director and team broadcast.
+`MasterAiBotModule` now implements/coordinates a very broad strategic surface: target selection, missions/outcomes, fog information, threat routing, prediction, memory, utility axes, Director, TeamBroadcast and coalition publication.
 
-I do **not** recommend splitting this into several competing strategic brains. That would reverse the architecture's strongest improvement.
+Do **not** split this into competing strategic brains.
 
-I do recommend continuing to extract pure internal components behind the one strategic owner:
+Continue extracting pure internals behind one owner, conceptually:
 
 ```text
 MasterAiBotModule
@@ -303,72 +429,66 @@ MasterAiBotModule
   -> CoalitionFold adapter
 ```
 
-The external ownership stays one. The internal code surface becomes easier to reason about and test.
+The external authority remains one; the implementation becomes easier to audit and test.
 
 ---
 
-## 6. TC-3 and SCG should be separate layers
+# 9. SCG / Dispatch boundary after the new merge
 
-The newly merged TC-3 should be treated as **Cameo's internal/same-family team-coordination system**.
+The new FE/BO systems make the separation even clearer.
 
-It knows Cameo concepts:
-
-- Director tension/phase;
-- Cameo main-target scoring;
-- expansion claims;
-- army centroid;
-- sector bias;
-- Cameo squad rescue consumers.
-
-That is useful when several Cameo bots play together.
-
-It is not a suitable interoperability contract for unrelated AIs, because Fransbot, stock AI and future bots do not share those internal concepts.
-
-The proposed **SCG (Supreme Coalition General) / Dispatch** layer therefore should not replace TC-3 and should not be implemented as another `CoalitionFold` consumer.
-
-The clean boundary is:
+Cameo has rich internal state that **must stay private to Cameo**:
 
 ```text
-Cameo internal logic / TC-3
-          |
-      SCG adapter
-          |
-   neutral Dispatch
-          |
-         SCG
-          |
-   neutral Dispatch
-          |
-      SCG adapter
-          |
-Fransbot / stock AI / other AI internal logic
+Director phase/tension
+Utility axes
+CoalitionDirective
+ScaleTargets
+BuildOrderKnobs / opening / reactions
+field coverage / refinery law
+army centroid
+internal sector anchors
 ```
 
-Cameo-to-Cameo may continue to communicate more efficiently through TC-3. Fransbot-to-Fransbot may use richer Fransbot-specific coordination. Only coalition-relevant intent/request/commitment needs to cross the simple SCG boundary.
+None of that belongs in the common SCG protocol merely because it exists.
+
+The neutral cross-AI boundary should expose only coalition-relevant intent/lifecycle, e.g.:
+
+```text
+INTENT      ATTACK / EXPAND / SECURE / DEFEND ...
+COMMITMENT  same, now actually committed
+REQUEST     capability/support request
+RESPONSE    ACCEPT / DECLINE / PARTIAL / UNSUPPORTED
+RELEASE     commitment/request no longer active
+```
+
+Cameo-to-Cameo can continue to use TC-3. Fransbot-to-Fransbot can use richer Fransbot communication. Stock AI may participate only through a coarse adapter.
+
+**SCG remains a relay, not a coalition strategist.**
 
 ---
 
-## 7. Recommended order of work
+# 10. Recommended order of work
 
-1. **Regenerate architecture evidence on current master.** Do not rely on the pre-merge module map/audit.
-2. **Add coalition broadcast liveness.** Alive + age + non-empty filter in one place.
-3. **Decide the TC-3 consistency model.** Epoch/barrier for identical directives, or explicitly eventual consistency.
-4. **Fix/define rescue capacity.** Prevent accidental multi-assignment of one responder.
-5. **Replace universal use of ClientIndex as coalition identity** before expanding beyond the current lobby harness.
-6. **Close mission attempts at match end.** Preserve the lifecycle contract before using mission archives as learning evidence.
-7. **Keep SCG interoperability outside TC-3.** Add a small adapter rather than another strategic brain.
+1. **Remove stale switch groups/fields from `increment_switches.yaml`.**
+2. **Regenerate `AI_MODULE_MAP.md` and `AI_ARCH_COVERAGE.md` on `192ed5701`; run `ai_arch_audit.py --check`.**
+3. **Unify BO report/tuner scoring into one shared function.**
+4. **Normalize BO `out_earned` for multi-player/team games.**
+5. **Define TC-3 consistency model: common epoch or documented eventual consistency.**
+6. **Centralize TeamBroadcast liveness and alive filtering.**
+7. **Make rescue capacity explicit; one responder per request by default.**
+8. **Move generalized coalition identity away from `ClientIndex`.**
+9. **Then run AJ/AK A/B experiments; do not tune unmeasured knobs before the lab contract is coherent.**
+10. **Keep SCG/Dispatch outside TC-3 as a neutral adapter boundary.**
 
 ---
 
-## 8. Overall assessment
+# 11. Overall assessment
 
-The merge is a net architectural improvement. Cameo is moving away from overlapping modules toward a provider/advisor architecture with clearer ownership, and the consolidation work around formation, spacing, production and team behavior is exactly the right direction.
+Cameo is now much less a pile of AI modules and much more a layered system with explicit ownership and measurement. The evening merge strengthens that trend.
 
-The main risk has shifted. Earlier the danger was primarily **too many modules owning the same action**. After this merge, the higher-level risk is **assuming distributed team state is more coherent than it really is**.
+The highest-value fixes are no longer “invent more behavior”. They are **make the experiment switch surface trustworthy, make distributed team state explicit about time/liveness, and make the optimization objective singular and reproducible**.
 
-That is a much better problem to have, because it can be fixed with explicit identity, liveness and generation contracts without rewriting the AI.
+The architecture can then support both rich Cameo-specific coordination and a separate minimal cross-AI SCG/Dispatch standard without adding another brain.
 
-The strongest recommendation is therefore:
-
-> Keep Cameo's internal team intelligence rich, but make its boundaries explicit. Use liveness + generation contracts inside TC-3, and use the separate, deliberately simple SCG/Dispatch protocol for interoperability with other AI architectures.
-
+> **Keep internal intelligence rich. Keep ownership singular. Keep experiments reproducible. Keep cross-AI communication simple.**
