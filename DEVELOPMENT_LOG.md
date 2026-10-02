@@ -16710,6 +16710,35 @@ DESIGN 19.3 (one bot module per decision). Result lives in AI_ARCHITECTURE 12.7a
   StageDeadlineTicks 500, ArcDegrees 180); C# defaults are CV's (16 / 80 / 150 / 150).
 - Not run: boot gate / armed A/B (coordinator's). Open: re-A/B the unified formation (ATK-1's 3-0 evidence was the old ring).
 
+**2026-10-02 (fleet merge round 2, maintainer order "merge everything"):**
+- `inc/2026_10_02_claude` merged twice (`dc0866735`, `0de93e7b4`): the coordinator's
+  unified deploy state (CV concave + ATK-1 fan behind `IBotAssaultFormation`,
+  single switch `AG_assault_fanout`) + their improved contact-first all-in
+  (`NearestEngagedEnemy` — bounding-circle scan, either-side weapon-range test,
+  `ContactFirstAllIn` flag so classic stays bit-identical for A/B). My inline
+  fan and `ContactNearSquad`/`ContactNear` blocks were superseded by theirs.
+- INC-4b/4c CA F2 hand-ports landed behind `SwitchCondition: genericbot`
+  (group `F2_ca_f2p2`); fog-manifest union kept StealthStatesCA + F2 counts.
+- Two latent bugs found via boot-gate and fixed in-tree: ai.yaml
+  `GrantConditionOnBotOwner@cn3stealthsquads` lost its `Bots:` line in an
+  earlier merge resolution (restored, `fransbot` = inert); stale
+  `mods/cameo/OpenRA.Mods.Fransbot.dll` referenced `IBotProductionWidth`
+  (removed by the increment) — rebuilt all three mod dlls and synced.
+- `devin/ember/bot-insurance-uninsured` merged (`361421f18`): audit declares
+  classic + exploit_* + fransbot deliberately uninsured.
+- `devin/dawn/fransbot-order-sites` merged (`cacf6ab1b`): master's Fransbot
+  modules already carry equivalent orders-only machinery (pending* sets +
+  FlushPendingSynchronizedActions), so HEAD kept for the four commanders;
+  the branch's `audit_fransbot_orders.py` + run_all.sh registration landed —
+  it now verifies master's own zero-direct-activity invariant.
+- Reviewed-not-merged: `inc/all-merge` (Oct-1 staging; only unique files are
+  vendored duplicates of upstream `McvManager`/`PowerDown` already in
+  engine/OpenRA.Mods.Common and wired in ai.yaml), `devin/ember/mi-concave`
+  (superseded by the unified concave), stale devin/* alternates that would
+  delete master's newer concave/stealth code.
+- Boot-gates: menu reached on the merged tree (shared perf.log), no new
+  exceptions. Master builds clean (0W/0E) end-to-end.
+
 **2026-10-02 (spawn sides + contact-first all-in, maintainer spectate feedback):**
 The 6v6 on order-of-battle-rich exposed two defects the maintainer watched live:
 
