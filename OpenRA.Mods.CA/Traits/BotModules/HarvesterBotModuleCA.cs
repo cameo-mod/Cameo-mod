@@ -61,6 +61,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("How many resource cells should a harvester response for.")]
 		public readonly int ResourceCellsPerHarvester = 4;
 
+		[Desc("Maximum harvesters allowed to work one resource map indice before it counts as saturated.",
+			"A saturated indice stops attracting idle harvesters and its surplus (beyond this cap) is",
+			"reassigned to lacking indices by the low-effect scan. 0 or negative disables the cap.")]
+		public readonly int MaxHarvestersPerResourceIndice = 4;
+
 		[Desc("How many harvester should player owned at least.")]
 		public readonly int InitialHarvesters = 4;
 
@@ -271,7 +276,7 @@ namespace OpenRA.Mods.CA.Traits
 			CPos? worstEffectIndice = null;
 			var worstEffectHarvesterCount = int.MaxValue;
 
-			var lackHarvesterIndices = new List<(int Attraction, int LackHarvs, CPos ResoueceCenter)>();
+			var lackHarvesterIndices = new List<(int Attraction, int LackHarvs, CPos ResoueceCenter, int HarvCount)>();
 
 			/*
 			 * indiceSideLengthSquare (which is equal to indiceSideLength * indiceSideLength) is used as the basic unit to calculate the attraction of a candidate,
@@ -312,12 +317,21 @@ namespace OpenRA.Mods.CA.Traits
 				if (baseIndice.PlayerRefineryCount > 0)
 					attraction += indiceSideLengthSquare;
 
-				if (baseIndice.ResourceCellsCount > 0 && attraction > 0 && lackHarvs > 0)
-					lackHarvesterIndices.Add((attraction, lackHarvs, baseIndice.ResourceCellsCenter));
+				// Cameo (field spread): an indice at/over MaxHarvestersPerResourceIndice is saturated —
+				// it must not attract more harvesters even when its resource cells still "lack" some,
+				// and a beyond-cap surplus counts toward worst-effect so the surplus is pushed out
+				// to lacking indices below.
+				var saturated = Info.MaxHarvestersPerResourceIndice > 0
+					&& baseIndice.PlayerHarvetserCount >= Info.MaxHarvestersPerResourceIndice;
+				var surplusHarvs = saturated ? baseIndice.PlayerHarvetserCount - Info.MaxHarvestersPerResourceIndice : 0;
 
-				if (lackHarvs < worstEffectHarvesterCount && lackHarvs < 0)
+				if (!saturated && baseIndice.ResourceCellsCount > 0 && attraction > 0 && lackHarvs > 0)
+					lackHarvesterIndices.Add((attraction, lackHarvs, baseIndice.ResourceCellsCenter, baseIndice.PlayerHarvetserCount));
+
+				var effectiveLack = surplusHarvs > 0 ? Math.Min(lackHarvs, -surplusHarvs) : lackHarvs;
+				if (effectiveLack < worstEffectHarvesterCount && effectiveLack < 0)
 				{
-					worstEffectHarvesterCount = lackHarvs;
+					worstEffectHarvesterCount = effectiveLack;
 					worstEffectIndice = baseIndice.IndiceCenter;
 				}
 			}
@@ -339,13 +353,19 @@ namespace OpenRA.Mods.CA.Traits
 			harvestersCanAssign = Math.Min(harvestersCanAssign, harvesters.Count - 1);
 			if (harvestersCanAssign > 0)
 			{
-				foreach (var (_, lackHarvs, resourceCenter) in
+				foreach (var (_, lackHarvs, resourceCenter, harvCount) in
 					lackHarvesterIndices.OrderByDescending(d => d.Attraction - (harvesters[0].Location - d.ResoueceCenter).LengthSquared / pathDistanceSquareFactor))
 				{
 					if (harvestersCanAssign <= 0)
 						break;
 
 					var needHarvs = lackHarvs;
+
+					// Cameo (field spread): a receiving indice only takes up to its own cap
+					// headroom — the fix must not recreate the pile on the next field.
+					if (Info.MaxHarvestersPerResourceIndice > 0)
+						needHarvs = Math.Min(needHarvs, Info.MaxHarvestersPerResourceIndice - harvCount);
+
 					var nearbyResources = world.Map.FindTilesInAnnulus(resourceCenter, 0, resourceMapModule.GetIndiceScanRadius())
 					.Where(c => resourceMapModule.Info.ValuableResourceTypes.Contains(resourceLayer.GetResource(c).Type)
 					&& (harvesters[0].Location - resourceCenter).LengthSquared >= (c - harvesters[0].Location).LengthSquared).ToArray();
@@ -443,6 +463,19 @@ namespace OpenRA.Mods.CA.Traits
 					harv.Harvester.Info.Resources.Contains(kvp.Value) &&
 					claimLayer.CanClaimCell(actor, kvp.Key))
 				.Select(kvp => kvp.Key);
+
+			// Cameo (field spread): steer idle harvesters away from resource indices already at
+			// MaxHarvestersPerResourceIndice. Falls back to the unfiltered set so a harvester is
+			// never stranded idle when every field is saturated (or not indexed yet).
+			if (Info.MaxHarvestersPerResourceIndice > 0 && resourceMapModule != null && resourceMapModule.GetIndicesLength() > 0)
+			{
+				var unsaturatedTargets = targets
+					.Where(c => resourceMapModule.FindClosestIndiceFromCPos(c).PlayerHarvetserCount < Info.MaxHarvestersPerResourceIndice)
+					.ToList();
+
+				if (unsaturatedTargets.Count > 0)
+					targets = unsaturatedTargets;
+			}
 
 			var avoidanceCostForBin = new Dictionary<int2, int>();
 			var cellRadius = Info.HarvesterEnemyAvoidanceRadius.Length / 1024;

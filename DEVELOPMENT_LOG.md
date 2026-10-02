@@ -19,6 +19,81 @@ cap exists: `defence` is telemetry. Offline BuildingLimits coverage estimate: te
 the base builder's `RefineriesPerBase x yards + MaxExtraRefineries` ceiling still sits above the refinery target.
 **Next:** boot-gate, arm `ST_scale_targets` in the next increment, tune ratio/margin/growth defaults from the A/B.
 
+# 2026-10-02 — DAWN: 6v6 team test — hard stack beats classic stack
+
+`order-of-battle-rich` (12 slots, TEMPERAT), 6×hard vs 6×classic, td_gdi
+mirror, `--render fast`. Same switch arming as the 1v1 test plus the TC-2 team
+switches (R sync attacks, S defend answers, V expansion claims, W role split),
+T demand capturers, U utility appetite, Z def3 outposts, X bridge repair,
+Y stealth squads.
+
+**Result: hard team won** at WT ~39.6k (~26 min). 5 of 6 hard bots alive, all
+6 classic eliminated. Hard killed 263 buildings vs 75. Survivor army values
+67k–94k each (army-first + formations leaving real standing armies). Multi4
+was eliminated early (2 refs — bad-luck spawn rush), and the team still
+carried it.
+
+Coordination report (`tools/ai/team_coordination_report.py`):
+- 414 hard mission attempts; 49 CONTESTED capture claims — multiple allied
+  hard bots published captures on the same targets (v19 garrisons, refineries,
+  comm centers). Expansion claims are team-arbitrated (V_tc2) but **capture
+  claims are not** — follow-up: route capture-target publication through the
+  same lowest-ClientIndex arbitration.
+- shared_push_windows=0, defend_missions=0 — the TC-2a/2b channels armed but
+  produced no observed joint windows/defends in this game; worth a longer
+  look before claiming they work.
+
+# 2026-10-02 — DAWN: runtime evidence + follow-on merges
+
+Test: `hard` (switches F_concave + AB_garrison_contest + AC_cover_map_expansion +
+AD_army_first + AE_spread_assault armed) vs `classic` on `trial-of-possession`
+(22 garrisonable civilians), 3 mirror shards, `--render fast`.
+
+- Result: classic 2-1 in <8k-tick games (its early rush still lands before the
+economy pays off); **hard won the long game** (17.2k ticks, td_nod mirror)
+64-43 kills with **12 refineries vs classic's 7** — cover-the-map expansion
+producing the intended out-scaling.
+- Garrison system live: 32 `garrison_contest` records, 4 capture missions
+SUCCESS, `raid:garrison_18_61` published for an enemy-held garrison.
+- Ownership audit clean across all records (double_owner=0, orphan=0).
+
+Also merged `devin/dawn/ai-arch-audit` (wiring-audit switch-arm fix,
+run_league 1-8 generalisation, coordination-report set buckets) — `b051c5442`.
+
+**Still open from the review:** verified visual check of the concave/fan shapes
+needs a spectate pass; allied multi-front coordination needs a team match
+(TC-2/TC-3 switches) — the 1v1 test can't exercise it.
+
+# 2026-10-02 — DAWN: maintainer-review integration + AI improvement work
+
+Maintainer reviewed live matches and ordered four fixes: contest garrisonables
+(GC-1 covers it), never stop expanding (EX-4 covers it), attack in a spread
+concave from multiple fronts instead of a suicide column (CV covers the
+concave; multi-heading prongs extended on `devin/dawn/ai-assault`), and stop
+packing buildings edge-to-edge / piling harvesters onto one field / building
+over army (new work on `devin/dawn/ai-assault`).
+
+**Merges to master this session** (each boot-gated: perf.log `PostWorldLoaded`,
+zero new exceptions):
+- `2be0c6155` — bridge test map `tworivervillages_bridge.oramap` (painted
+  legacy bridge + Lua self-check; in-engine verified `bridge1=1 bridgehut=2`).
+- `0e54de07a` — cn3-stealth-squads (switch `Y_cn3_stealth_squads`).
+- `c60d106d0` — CV concave engagement (switch `ConcaveEngagement`, group
+  `F_concave`): Rush squads deploy a range-matched concave arc that widens with
+  army size, ranks by weapon range, staggered commit so every member reaches
+  firing range on the same tick.
+- `def3-remote-coverage` follow-up — `BridgeRepairBotModule` now scans
+  `LegacyBridgeHut` too (Cameo maps carry legacy flat bridges; the CN donor
+  scanned only `BridgeHut`, so the module could never fire on Cameo maps).
+
+**Infrastructure fix:** `mods/cameo/OpenRA.Mods.Cameo.dll` is a TRACKED binary
+that shadows `engine/bin` at runtime — it had gone stale (Aug 23), so master
+crashed at boot with `Cannot locate type: GarrisonContestBotModuleInfo` after
+GC-1 landed the yaml ref. Rebuilt + committed (`12b438ab5`). Rule of thumb:
+the tracked dll must be rebuilt whenever master ai.yaml gains a trait ref.
+
+```
+
 # 2026-10-02 — EMBER: garrison contest + cover-the-map expansion (GC-1 / EX-4)
 
 Maintainer-observed failures on master: genericbot loses every neutral
@@ -147,6 +222,34 @@ artillery-clear raids, multi-field expansion rate.
   addons are the cheapest reachable plugs for a dedicated probe); regreen
   suite triage (earlier run stalled under RAM pressure, ~57 F pattern that
   reads as systematic drift); merge of this branch post-match.
+# 2026-10-02 — DAWN: first working destructible/repairable bridge placed on a map
+
+- New map `mods/cameo/maps/tworivervillages_bridge.oramap` — clone of
+  `Tworivervillages.oramap` (RA_TEMPERAT, 98x98), title `Two rivers villages
+  (Bridge)`, plus a `BRIDGE`-family actor spanning the river at rows 20-21.
+- **Architecture correction:** Cameo's legacy bridges are NOT placed as
+  map.yaml actors. `LegacyBridgeLayer` (world.yaml `Bridges: bridge1..4`)
+  scans `map.bin` at WorldLoaded and auto-creates the bridge actor + huts from
+  painted bridge terrain templates. A bare `bridge1` in `Actors:` would never
+  get `Bridge.Create()` (footprint stays null). Correct wiring = paint the
+  template, matching every upstream RA map. Ownership is `Neutral` via
+  `OwnerInit(world owner)` (this map's `OwnsWorld` player).
+- Painted upstream recipe, verified against shipped RA maps
+  (outdoor-trails / countercross): actor template 131 (`bridge1.tem`, 5x3) at
+  origin (41,19) with subtiles {1-9,12}; approach template 382
+  (`bridge1x.tem`, 5x4) at (41,18) with subtiles {2,3,4,5,15,16,18,19}.
+  `map.bin` layout: format-2, 17-byte header, column-major cells,
+  `TilesOffset + 3*(x*98+y)` = `<u16 template, u8 subtile>`.
+- Footprint = the ten painted 131 cells over the y20-21 water rows; north hut
+  on beach (43,18), south hut on the bridge's own rock-rampart cell (41,20)
+  via `FreeActor` spawn offsets (2,-1)/(0,1) — same as upstream.
+- Established map-Lua convention used for a self-check: bundled `rules.yaml`
+  adds `World: LuaScript: Scripts: bridge_check.lua`, which prints
+  `BRIDGE_CHECK bridge1=1 bridgehut=2` to lua.log ~2s after WorldLoaded.
+- Verified in-engine (real game boot, `Launch.Map=tworivervillages_bridge.oramap`):
+  "Game started", lua.log shows exactly `bridge1=1 bridgehut=2`,
+  no new exception-*.log. Boot used the worktree's `engine/bin` binaries with
+  `Engine.ModSearchPaths` covering the worktree `mods/` + shared engine `mods/`.
 
 # 2026-10-02 — NOVA: DEF-3 remote-outpost defence coverage (switch Z_def3_remote_outpost_coverage)
 
@@ -16549,33 +16652,10 @@ FAIL (LC5 record block absent in that build); outcomes FAIL (57 dangling
 attempts = LC8 write-back); learning WARN (offline fit works, in-game LEARNED
 consumption absent). The verify->feedback half of the loop is the open edge.
 
-## 2026-10-02 EMBER — SP-1/AF-1/HS-1 spread-and-pressure batch (branch devin/ember/spread-and-pressure)
+## 2026-10-02 — EMBER: garrison contest + cover-the-map expansion (GC-1 / EX-4)
 
-Maintainer's second failure report after the GC-1/EX-4 merge: packed bases
-(pathfinder jams), one-field harvester crowding, buildings out-spending the army,
-line-suicide attacks. The formation half (convex spread, multi-front waves) is
-Claude's cv_concave lane — deliberately untouched here.
+Maintainer-observed failures on master: genericbot loses every neutral
 
-Shipped, all dormant on master (switches default-off):
-- SP-1 `AD_spaced_base_placement`: new CA seam IBotPlacementAdvisor — findPos hands
-  a bounded prefix (PlacementAdvisorCandidates=24) of ALREADY-VALID cells to an
-  active advisor; none active = byte-identical upstream pick. Cameo's
-  SpacingAdvisorBotModule re-ranks by nearest-own-building distance (cap
-  DesiredGapCells+1, OutwardLeanPercent=25 outward bias); never deadlocks (worst
-  case = widest cell left). Refineries/defenses keep their own placement owners.
-- AF-1 `AE_army_first`: new CA seam IBotRequestPauseBuildingProduction (mirror of
-  the existing unit-production veto vote). BaseBuilderQueueManagerCA.TickQueue
-  consults providers lazily; refineries exempt. Cameo's ArmyFirstBotModule pauses
-  buildings while cash<2500, resumes >=4000 (hysteresis); inert while no unit
-  producer exists so tech sequencing can't stall.
-- HS-1 `AF_harvester_spread`: HarvesterBotModuleCA split into @generic/@classic
-  instances (identical fields; BotRoleSets type targets match all instances — the
-  Targets: resolver confirmed safe). Switch drops @generic's low-effect redirect
-  cadence 433->125; @classic stays the upstream control.
-
-Verified: OpenRA.Mods.CA + OpenRA.Mods.Cameo compile clean (0/0); the three groups
-arm via apply_increment_switches.py --dry-run (3 expected rewrites). Boot-gate +
-A/B runtime proof remain queued on the game driver per workflow rules.
 ## 2026-10-02 (nova) — bridge repair legacy-hut fix + fleet sync
 
 **Bug found + fixed:** `BridgeRepairBotModule` (CN3 port) scanned
@@ -16650,4 +16730,43 @@ DESIGN 19.3 (one bot module per decision). Result lives in AI_ARCHITECTURE 12.7a
 - ai.yaml keeps ATK-1's tested values where it set them (MinSquadSize 4, FanoutTriggerCells 12, AssemblePercent 60,
   StageDeadlineTicks 500, ArcDegrees 180); C# defaults are CV's (16 / 80 / 150 / 150).
 - Not run: boot gate / armed A/B (coordinator's). Open: re-A/B the unified formation (ATK-1's 3-0 evidence was the old ring).
+
+**2026-10-02 (spawn sides + contact-first all-in, maintainer spectate feedback):**
+The 6v6 on order-of-battle-rich exposed two defects the maintainer watched live:
+
+1. **Spawn sides (harness bug, fixed `22f6e5ee9`):** `run_ai_match_batch` bound
+   teams to `mpspawn` FILE order (slots_a=0..5, slots_b=6..11) but this map's
+   spawn list interleaves both geographic halves — a hard bot spawned amid the
+   classic team and died to the rush. `split_spawn_sides` now partitions the
+   first 2n spawns by farthest-pair seeds + signed nearer-seed ranking before
+   slot binding (deterministic, orientation-free). Verified variant: hard at
+   (50,22)(75,14)(81,40)(99,70)(101,20)(107,46) all NE, classic at
+   (14,75)(20,101)(22,50)(40,81)(46,107)(70,98) all SW.
+
+2. **Staging during a live fight (fixed `22f6e5ee9`):** the maintainer watched
+   a large blob stand in formation while part of the force was already
+   trading fire. Formation is for BEFORE contact only. New
+   `SquadMicroEvalCA.ContactNear` (pure predicate) + three gates:
+   - AttackMoveState Tick: a Rush squad with any member inside
+     AttackScanRadius of a visible enemy sends ONE grouped AttackMove at the
+     objective the same tick — before concave entry, fan arcs and march
+     holds. Applies to allied fights too: the enemies are the same.
+   - Concave `ShouldEnter` returns false under existing contact.
+   - Concave `ShouldCommit` now scans ALL eligible members (was placed-only)
+     and the contact check fires the under-fire commit, which already zeroes
+     every stagger delay.
+   Rationale (maintainer): Lanchester's square law — committing piecemeal
+   while a local fight runs is strictly worse than jumping in together.
+
+**Spectate harness gap found:** `Launch.Map` resolves by map uid or leaf dir
+name inside the support dir's `maps/cameo/{DEV_VERSION}/`, not by absolute
+path; and the duel template's `rules.yaml` hard-locks `GameSpeed: maximum` +
+`TimeLimitDefault` must be a listed option (36000 failed ruleset load ->
+referee `empty` class unresolved -> SpawnStartingUnits crash at WorldLoaded).
+Live spectate variants must unlock the speed dropdown and pass a valid
+option (9 = old-90 cap used).
+
+**Live spectate (running):** `C:/tmp/spectate-6v6` support dir, variant
+`order_of_battle_rich_6v6`, fullscreen native res, 6xhard (NE) vs 6xclassic
+(SW) td_gdi, Referee seat = local client. World loaded clean, no exceptions.
 

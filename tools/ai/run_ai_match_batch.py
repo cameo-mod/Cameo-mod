@@ -378,6 +378,33 @@ def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
     return cells
 
 
+def split_spawn_sides(cells: list[tuple[int, int]], team_size: int) -> list[tuple[int, int]]:
+    """Return spawn cells reordered so indices 0..team_size-1 are one geographic
+    half of the map and team_size..2*team_size-1 are the other.
+
+    Slots bind teams by index (slots_a = range(n)), but shipped maps interleave
+    mpspawn file order across sides — on order-of-battle-rich that spawned a
+    hard bot inside the classic half (maintainer report 2026-10-02). Splitting
+    by the two farthest-apart seeds and ranking every cell by signed
+    nearer-seed distance gives a deterministic, orientation-free split that
+    also works when the side count is odd or the halves differ in size."""
+    cells = cells[: 2 * team_size]
+    far = (-1, 0, 1)
+    for i in range(len(cells)):
+        for j in range(i + 1, len(cells)):
+            d = (cells[i][0] - cells[j][0]) ** 2 + (cells[i][1] - cells[j][1]) ** 2
+            if d > far[0]:
+                far = (d, i, j)
+
+    s0, s1 = cells[far[1]], cells[far[2]]
+    ranked = sorted(
+        cells,
+        key=lambda c: (c[0] - s0[0]) ** 2 + (c[1] - s0[1]) ** 2 - (c[0] - s1[0]) ** 2 - (c[1] - s1[1]) ** 2,
+    )
+    side_a, side_b = ranked[:team_size], ranked[team_size:]
+    return sorted(side_a) + sorted(side_b)
+
+
 REFEREE_BLOCK = """\tPlayerReference@Referee:
 \t\tName: Referee
 \t\tPlayable: True
@@ -485,6 +512,7 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
     if team_size >= 2:
         if len(spawns) < 2 * team_size:
             fail(f"team-size {team_size} needs a map with at least {2 * team_size} mpspawn actors, got {len(spawns)}")
+        spawns = split_spawn_sides(spawns, team_size) + spawns[2 * team_size :]
         for i in range(2 * team_size):
             ref = f"Multi{i}"
             if text.count(f"	PlayerReference@{ref}:") != 1:

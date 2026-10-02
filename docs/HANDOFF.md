@@ -24,9 +24,15 @@ every fixed per-tier cap and the hand-written `BuildingLimits`, has no time cap,
 §12.22, including how it fits with the expansion planner, the utility axes, the global unit budget and the harvester
 insurance.
 
-**Next (in order):** (1) ST scale targets — Claude spec, Sonnet code, switch `ST_scale_targets`. (2) **One increment A/B**
+**Next (in order):** (1) ✅ ST scale targets LANDED (switch `ST_scale_targets`, inert on master; findings in §12.22 'Implemented': no MCV manager reads ConstructionYardLimit, no defence cap exists, refinery has no physical cap yet). (1b) the §19.3 coherence pass over the 10-02 duplicates (assault fan vs §12.7a, MinBuildingGapCells vs SP-1, MaxHarvestersPerResourceIndice vs HS-1, MinArmyUnitsBeforeBuildings vs AF-1). (2) **One increment A/B**
 of every default-off group on master, mirror matches only, ≤ 3 drivers: D, E, AG, F2, H… plus ST when it lands.
 Arms per WORKFLOW §4. (3) Round-trip test of the whole AI (HANDOFF 2026-10-01 step 3).
+
+**Doc claims (pre-existing on master `6cf5527c1`, not from this batch):** `audit_doc_claims.py` FAILS on 7 balance claims —
+`shield_versus_mean` 97.6→184.7, `shield_hp_factor`, `shield_damage_share`, `percentage_denominator_unset` 436→423,
+`ledgers_drifted` 0→1, `armament_reference_tier_original` 140→141, `armament_pairing_input_fingerprints` 476→514. A
+warhead/Versus change landed without its claims (balance lane; rules 3–4: investigate which merge moved the shield profile
+before re-pinning — a doubled Shield mean is a §12.0c question, not a number to copy). The 2 AI-contract counts are fixed here.
 
 **Process note:** agents merged ~60 PRs to master on 10-01/10-02 (WORKFLOW §2: only Claude merges). Each was checked for
 default-off behaviour where it overlapped my lane; the ATK-1 duplicate is the only overlap found.
