@@ -450,6 +450,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Priority target tags for bomber strike teams (12.8 strike list: superweapon, conyard, production, refinery, power, harvester, artillery). 'defence' exists in BotTargetTags but is siege-conditional and stays off.")]
 		public readonly HashSet<string> BomberPriorityTags = [BotTargetTags.Superweapon, BotTargetTags.Conyard, BotTargetTags.Production, BotTargetTags.Refinery, BotTargetTags.Power, BotTargetTags.Harvester, BotTargetTags.Artillery];
 
+		[Desc("CN3: members per stealth squad - a full squad makes the next cloak-capable unit start another one.")]
+		public readonly int StealthSquadMaxSize = 3;
+
+		[Desc("CN3: stealth squads ambush soft high-value targets first (harvesters, then artillery).")]
+		public readonly HashSet<string> StealthPriorityTags = [BotTargetTags.Harvester, BotTargetTags.Artillery];
+
 		[Desc("Pre-commit risk gate (AI_FRANSBOT_RESEARCH.md 6c): a proactive ground squad only commits to a target when its unit value beats the remembered enemy threat at that region by this percent margin. Negative disables the gate.")]
 		public readonly int AttackRiskMargin = 25;
 
@@ -631,6 +637,10 @@ namespace OpenRA.Mods.CA.Traits
 		IBotProtectionRequestProvider[] protectionRequestProviders;
 		IBotRequestUnitProduction[] unitRequesters;
 		IBotUtilityAxes[] utilityAxesProviders;
+
+		// CN3: the detector-memory providers the stealth squads read. Conditional
+		// (`cn3_stealth_squads`), so enablement is resolved per use, never cached.
+		IBotStealthDoctrine[] stealthDoctrines;
 		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
@@ -711,6 +721,7 @@ namespace OpenRA.Mods.CA.Traits
 				SquadCAType.Protection => Info.ProtectionPriorityTags,
 				SquadCAType.Support => Info.SupportPriorityTags,
 				SquadCAType.FireSupport => Info.SupportPriorityTags,
+				SquadCAType.Stealth => Info.StealthPriorityTags,
 				_ => Info.AssaultPriorityTags,
 			};
 		}
@@ -1280,6 +1291,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
+			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
 
@@ -1989,7 +2001,7 @@ namespace OpenRA.Mods.CA.Traits
 			Squads.Add(ret);
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
 				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
-				or SquadCAType.Gunship or SquadCAType.Bomber)
+				or SquadCAType.Gunship or SquadCAType.Bomber or SquadCAType.Stealth)
 				OffensiveSquadsLaunched++;
 			return ret;
 		}
@@ -2232,6 +2244,27 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
 			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
 
+		// CN3: remembered DetectCloaked coverage, aggregated across the enabled
+		// stealth-doctrine providers. Empty when `cn3_stealth_squads` arms no
+		// provider or nothing was observed - "none seen", never "none exist".
+		internal IEnumerable<BotKnownDetector> RememberedDetectors()
+		{
+			if (stealthDoctrines == null)
+				yield break;
+
+			foreach (var doctrine in stealthDoctrines)
+				if (doctrine.IsTraitEnabled())
+					foreach (var detector in doctrine.RememberedDetectors())
+						yield return detector;
+		}
+
+		// CN3: dedicated stealth squads draft armed cloak-capable ground units -
+		// an unarmed infiltrator kills nothing, naval and air units never reach
+		// this branch anyway (they are claimed above), and a cloak that is not
+		// enabled by default may never come online.
+		public static bool IsStealthDraftable(bool hasCloakTrait, bool hasAttackTrait, bool isNaval, bool isAir)
+			=> hasCloakTrait && hasAttackTrait && !isNaval && !isAir;
+
 		void FindNewUnits(IBot bot)
 		{
 			var leases = BotUnitLeases.Of(Player);
@@ -2317,6 +2350,21 @@ namespace OpenRA.Mods.CA.Traits
 							newAirSquad.NewUnits.Add(a);
 						}
 					}
+				}
+				else if (stealthDoctrines?.FirstEnabledTraitOrDefault() != null
+					&& IsStealthDraftable(a.Info.TraitInfos<CloakInfo>().Any(c => c.EnabledByDefault),
+						a.Info.HasTraitInfo<AttackBaseInfo>(), IsNavalUnit(a), IsAirUnit(a)))
+				{
+					// CN3: cloak-capable armed ground forms a stealth squad - out of
+					// guerrilla, so a stealth tank never raids half-decloaked. Same-type
+					// squads are preferred (one chassis per ambush), then the smallest
+					// squad with room.
+					var stealthSquads = Squads.Where(s => s.Type == SquadCAType.Stealth && s.Units.Count < Info.StealthSquadMaxSize).ToList();
+					var stealthSquad = stealthSquads.FirstOrDefault(s => s.Units.Any(u => u.Actor.Info.Name == a.Info.Name))
+						?? stealthSquads.MinByOrDefault(s => s.Units.Count)
+						?? RegisterNewSquad(bot, SquadCAType.Stealth);
+					stealthSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, stealthSquad.Type);
 				}
 				else if (Info.FireSupportTypes.Contains(a.Info.Name) && OpenFireSupportSquad(bot) is { } fsSquad)
 				{
