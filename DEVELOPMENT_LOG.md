@@ -17008,3 +17008,23 @@ Boot-gate + team-match A/B queued per workflow.
 - Armed smoke (tmpab-smoke, AB/AC/AD/AE/AF/AG/AH/ST + SP-1 fix in bin):
   hard beat classic on BOTH spawn sides — 2-0 (spawn0 hard win, spawn1 hard win).
   Directional, not statistical; official increment A/B is the coordinator's.
+
+## 2026-10-02 EMBER — round-trip outcomes grace + GC-1 terminal cards
+
+- Round-trip on the full-armed smoke (ab-smoke-out4): all layers PASS except outcomes FAIL
+  (5 "dangling" attempts) — investigation showed every one was a capture attempt COMMITTED
+  750-1750 ticks before match end: in-flight truncation at surrender, not an ownership bug.
+  Card-level PUBLISHED/DENIED records were never counted as attempts (correct per the
+  record_kind vocabulary); the earlier naive probe conflated the two.
+- round_trip_check.py outcomes layer now applies a 5000-tick end-of-match grace: an attempt
+  only counts as dangling if its last transition is >5000 ticks before the match's last
+  mission record; fresher open attempts report as "in flight at match end". out4 re-check:
+  outcomes PASS (0 dangling, 5 in flight).
+- GarrisonContestBotModule now writes terminal cards: contest claims close DORMANT with
+  done/target_gone/x_contest_lost/lost_units; raid cards that leave the scan unreserved
+  close DORMANT target_gone (reserved cards stay live under the executor). This feeds the
+  write-back layer (previously WARN: 0 DORMANT/REOPENED events).
+- Cameo build clean 0/0; boot-gate PASS (menu reached, zero new exceptions, PID-scoped kill).
+- Launch hazard noted: launch-game.cmd fails from Git Bash — `find` resolves to GNU find
+  which mangles the VERSION check args. Launch OpenRA.exe directly (per WORKFLOW) or via
+  PowerShell.

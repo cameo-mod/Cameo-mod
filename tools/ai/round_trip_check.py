@@ -100,16 +100,22 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     rows.append(("order gate", state,
                  f"{len(generic) - len(missing)}/{len(generic)} records with the block, refused={refused}, crossed={crossed}"))
 
-    # 6. outcomes
-    dangling = 0
-    attempts = 0
+    # 6. outcomes — an attempt still open at match end is truncation, not an ownership bug: only count
+    # it dangling if the executor went quiet long before the match's last mission record.
+    last_tick = max((r.get("tick") or 0) for r in missions) if missions else 0
+    quiet_ticks = 5000
+    dangling = in_flight = attempts = 0
     for _uid, _recs, ordered in mission_story.story([str(d) for d in dirs]):
         for _mid, m in ordered:
             for trans in m["attempts"].values():
                 attempts += 1
                 if not mission_story.is_terminal(trans[-1]):
-                    dangling += 1
-    rows.append(("outcomes", FAIL if dangling else PASS, f"{attempts} attempt(s), {dangling} dangling"))
+                    if last_tick - (trans[-1].get("tick") or 0) > quiet_ticks:
+                        dangling += 1
+                    else:
+                        in_flight += 1
+    rows.append(("outcomes", FAIL if dangling else PASS,
+                 f"{attempts} attempt(s), {dangling} dangling, {in_flight} in flight at match end"))
 
     # 7. write-back
     shelf = [r for r in missions if r.get("record_kind") == "mission" and r.get("event") in ("DORMANT", "REOPENED")]
