@@ -2868,3 +2868,79 @@ SP-1/AF-1 only make the base cheaper to path through and the army bigger to form
 ### 12.21 ATK-1 — the assault fan-out (NOVA, 2026-10-02; switch AG_assault_fanout)
 
 Merged into the concave engagement: see **§12.7a "Unified with ATK-1"** — one implementation (CV geometry + state machine, ATK-1 provider seam and single switch).
+
+### 12.22 Scale targets — the growth law (phase ST; DESIGN §19.10; maintainer order 2026-10-01; owner Claude)
+
+**One module, one decision (§19.3):** `ScaleTargetsBotModule` (OpenRA.Mods.Cameo, player trait, `RequiresCondition:
+genericbot`) decides HOW BIG the base and army should be. It publishes the answer through `IBotScaleTargets`
+(`int Target(string category)`, `int ArmyValueTarget`, plus a snapshot for the situation log). It never builds and
+never issues orders: the existing builders read it. A consumer with no provider (classic, or the switch off) keeps its
+old limit, so master is unchanged until the A/B.
+
+**Inputs.**
+* Tier index from the active `BotLimits@<tier>` (via `BotLimitsResolver`, `Difficulties` list like `DynamicBotInsurance`).
+* Game minutes from `WorldTick`.
+* The active `personality-*` condition.
+* `Seen_k` from `MasterAiBotModule`'s published `BotSituation`: `RegionMemory` per-enemy `ArmyValue/DefenceValue/EconomyValue`,
+  `EverSeen`, `LastSeenTick`; `BotFogMemory` remembered actors (`Building` + rules-derived `BotTargetTags`) for counts
+  per category; `IBotEnemyCompositionProvider` for army value.
+* Own team size = alive players allied with the bot, including itself.
+
+**Formula:** DESIGN §19.10, verbatim, in a pure static `ScaleTargetsEval`. It uses fixed-point integer math (×1000), never
+floats, because bot decisions run in lockstep on every client. Unit-tested.
+
+**Categories (first cut)** and their consumers:
+
+| category | Seen_k | consumer (replaces) |
+|---|---|---|
+| `army` (value) | observed enemy army value | `SquadManagerBotModuleCA` desiredAttackForceValue (`SquadValue` + ramp), `MaxIdleUnits` |
+| `harvester` | seen enemy harvesters | `HarvesterBotModuleCA` (`BotLimits.HarvesterLimit`); cap refineries × `HarvestersPerRefineryCap` |
+| `refinery` | seen enemy refineries | `BaseBuilderBotModuleCA` (`RefineryLimit`); cap = resource fields in reach |
+| `production` (per production type) | seen enemy production buildings | `BaseBuilderQueueManagerCA` (`ProductionTypeLimit`) |
+| `conyard` | seen enemy construction yards | `MCVManagerBotModuleCA` (`ConstructionYardLimit`) |
+| `tech` | seen enemy tech buildings | `BuildingLimits` entries of tech-tagged buildings |
+| `superweapon` | seen enemy superweapons | `BuildingLimits` entries of superweapon-tagged buildings |
+| `defence` (value) | remembered enemy army value | base builder defence share if a cap exists today; else telemetry only |
+| `aircraft` | seen enemy aircraft (composition) | `UnitBuilderBotModuleCA.MaxAircraft` / `MaxAirSuperiority` |
+
+**Yaml shape.** One instance, every number on the §19.1 line. Fractions are written in one form FieldLoader can read
+(fixed-point ints ×100, or a decimal parsed to fixed point); the coder picks one and documents it.
+* Per category: `Min/Max/RatioMin/RatioMax/Margin/Growth/Floor`.
+* `PersonalityMultipliers`, keyed by personality condition → category → multiplier.
+* `ScoutStaleTicks`, `RecomputeTicks`.
+
+The §19.1 table numbers become the Min/Max. The other defaults are starting values for the A/B, not settled numbers:
+* `Ratio 0.6 → 1.4`, so Hard (0.96) roughly matches the enemy.
+* `Margin` 1.0 for the army, 0.5 for the base.
+* `Growth` per hour 1.0 for the army, 0.5 for the base.
+* Personality multipliers:
+  * Steamroller: army and production 1.25.
+  * Expansion: refinery, harvester, conyard and production 1.25.
+  * Turtle: defence 1.4.
+  * Tech: tech 1.5.
+  * Rush: army 0.8.
+
+**Audit.** `audit_ai_personalities.py` gains a check:
+* every category writes all fields;
+* Min ≤ Max;
+* the tech line rounds down to 1 1 1 1 2 2 2 2 3 3;
+* the minute-0, nothing-seen targets equal the old §19.1 table.
+
+**Fits with what is already on master (2026-10-02 survey; §19.3, one owner per decision):**
+* `ExpansionPlannerBotModule.McvTargetCount` (3) and UT-4's `UseUtilityExpansionAppetite` lean are the construction-yard
+  size decision, so they move here. The planner reads `Target("conyard")`. UT-4's TechRush↔Expansion axis becomes the
+  axis lean below, so it is no longer a second multiplier.
+* **The utility axes refine personality.** When `UseUtilityAxes` is on, `P_k` = the personality table × the axis lean:
+  * TurtleRush leans defence vs army;
+  * TechRush↔Expansion leans tech vs refinery/harvester/conyard/production;
+  * each by `±AxisLeanPct` at the axis ends.
+  The discrete personality sets the starting point and the continuous axis tracks how the match develops. With the
+  axes off, `P_k` = the table.
+* `BotGlobalUnitBudget` is a **physical cap** (FPS across all bots), not a tier cap: the army count target never exceeds
+  this bot's share of it.
+* `ArmyFirstBotModule` (cash priority), the Director pacing (when to launch) and the personality leads (§12.14, budget
+  lean while trailing) decide WHEN and WHERE the money goes, not HOW BIG. They stay separate. The leads read the same
+  `Seen_k` numbers, which this module publishes on the situation snapshot so there is one estimate of the enemy.
+* `DynamicBotInsurance` sizes its payout from `HarvesterLimit`. With the provider present it reads `Target("harvester")`.
+
+**Switch:** group `ST_scale_targets` (master already uses `G_personality_leads`).
