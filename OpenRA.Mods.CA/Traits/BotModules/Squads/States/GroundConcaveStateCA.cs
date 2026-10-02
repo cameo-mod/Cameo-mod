@@ -123,7 +123,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Formation is for the approach, not the fight: if a visible enemy is
 			// already inside scan range of any member (our fight or a
 			// neighbour's), the attack-move state's all-in path handles it.
-			if (GroundUnitsAttackMoveStateCA.ContactNearSquad(owner, WDist.FromCells(info.AttackScanRadius)))
+			if (GroundUnitsAttackMoveStateCA.ContactNearSquad(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)))
 				return false;
 
 			var centroid = Centroid(members);
