@@ -365,45 +365,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
-		[Desc("CV (12.7a): Rush squads that meet the enemy deploy into a range-matched concave arc around the enemy anchor (wider with more units, ranks by range), then commit with staggered AttackMove orders so every member reaches its own firing range on the same tick, then hand over to the attack state. Orders only; each order spends IBotActionBudget actions.")]
-		public readonly bool ConcaveEngagement = false;
-
-		[Desc("CV (12.7a): cells from the frontline centroid within which an observed enemy (or the squad target) triggers the concave deployment.")]
-		public readonly int ConcaveContactCells = 16;
-
-		[Desc("CV (12.7a): minimum weaponed ground members for the concave deployment.")]
-		public readonly int ConcaveMinUnits = 4;
-
-		[Desc("CV (12.7a): cells each member stages outside its own weapon range (and the enemy front depth).")]
-		public readonly int ConcaveStageMarginCells = 2;
-
-		[Desc("CV (12.7a): members whose staging radii lie within this many cells share one arc.")]
-		public readonly int ConcaveRankBandCells = 2;
-
-		[Desc("CV (12.7a): arc length per member in WDist units (1024 = 1 cell); infantry take half.")]
-		public readonly int ConcaveSpacing = 1536;
-
-		[Desc("CV (12.7a): spacing in WDist units the arc may compress to before members overflow to a second arc.")]
-		public readonly int ConcaveMinSpacing = 1024;
-
-		[Desc("CV (12.7a): widest arc in degrees; a bigger army compresses spacing, then overflows to a second arc.")]
-		public readonly int ConcaveMaxArcDegrees = 150;
-
-		[Desc("CV (12.7a): WDist units between an arc and its overflow arc (2048 = 2 cells).")]
-		public readonly int ConcaveRankGap = 2048;
-
-		[Desc("CV (12.7a): percent of slots that must be reachable terrain, else the deployment aborts and the squad engages as before.")]
-		public readonly int ConcaveMinValidSlotPct = 50;
-
-		[Desc("CV (12.7a): percent of placed members within 1.5 cells of their slot at which the squad commits.")]
-		public readonly int ConcaveFormedPct = 80;
-
-		[Desc("CV (12.7a): ticks after which the squad commits whether or not the arc is formed.")]
-		public readonly int ConcaveFormTicks = 150;
-
-		[Desc("CV (12.7a): ticks after a commit or abort before the squad may deploy a concave again.")]
-		public readonly int ConcaveCooldownTicks = 750;
-
 		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
 		public readonly bool SquadMicroEnabled = false;
 

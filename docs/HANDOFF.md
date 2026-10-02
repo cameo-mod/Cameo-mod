@@ -39,7 +39,7 @@ defaults ship machinery whose payoff needs its switches. **Decision pending the 
    NOVA ZG-c (group D) + IM-1 influence layers; CA F2 part 2 (hand-port CA's Feb-2026 AI routing / harasser squads /
    indirect routes / air targeting-by-armour into our modified squad files — Opus specs, Sonnet codes); the 9 CA files
    that need new upstream types (attachables, PopController, LinkedProducerTarget, SelectionBoxAnnotationRenderableCA).
-   **+ CV concave engagement** (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a, switch group `F_concave`):
+   **+ CV concave engagement** (maintainer order 2026-10-01, `AI_ARCHITECTURE.md` §12.7a, switch group `AG_assault_fanout`, unified with ATK-1 2026-10-02):
    Rush squads deploy into a range-matched concave that widens with army size, then a staggered commit so every
    member reaches its range together. Branch `claude/cv_concave` (Sonnet-coded, Opus-reviewed); supersedes
    EMBER's `devin/ember/mi-concave` (fixed-angle ring, no form/commit phase — not merged).

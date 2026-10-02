@@ -82,8 +82,8 @@
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
 		Bots: fransbot
-	# ATK-1 (the line-of-death fix): Rush assault squads fan out onto a target-centred arc before the
-	# commit, so the wave arrives from several bearings and fires together. The arm flips this to the
+	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
+	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@assaultfanout:
 		Condition: assault_fanout
@@ -3499,21 +3499,29 @@ Player:
 	# increment A/B arms it (switch group AB).
 	GarrisonContestBotModule:
 		RequiresCondition: genericbot && garrison_contest
-	# ATK-1 (the line-of-death fix): Rush assault squads fan out onto a target-centred arc
-	# before the commit - one slot per member on the far-side ring (AssaultFormationPlanner),
-	# so the wave arrives from several bearings and fires together instead of walking
-	# single-file into the guns. This module is the IBotAssaultFormation provider: settings
-	# plus the per-squad same-target refanout cooldown; orders stay with the squad states.
+	# The line-of-death fix (AI_ARCHITECTURE 12.7a, CV concave unified with ATK-1): a Rush squad that
+	# meets the enemy deploys into a range-matched concave arc (ConcaveEvalCA: per-member radius =
+	# enemy front depth + own range + margin, wider for bigger armies) and commits with staggered
+	# AttackMove orders, so the wave fires together instead of walking single-file into the guns.
+	# This module is the IBotAssaultFormation provider: the ONLY home of the tunables, the only
+	# switch (no provider = the old advance, bit-identical), plus the per-squad same-ground
+	# cooldown; orders stay with the squad states. Values = AI_ARCHITECTURE §12.7a (coordinator 2026-10-02: ATK-1's
+	# ring-tuned 180/60/500/12 do not carry over to the range-matched concave; the next A/B measures these).
 	# `genericbot && assault_fanout`: off on master until the increment A/B arms it.
 	AssaultFormationBotModule:
 		RequiresCondition: genericbot && assault_fanout
 		MinSquadSize: 4
-		FanoutRadiusCells: 8
-		ArcDegrees: 180
-		AssemblePercent: 60
-		StageDeadlineTicks: 500
-		FanoutTriggerCells: 12
+		FanoutTriggerCells: 16
+		StageMarginCells: 2
+		RankBandCells: 2
+		Spacing: 1536
+		MinSpacing: 1024
+		ArcDegrees: 150
+		RankGap: 2048
+		MinValidSlotPct: 50
 		SlotReachCells: 2
+		AssemblePercent: 80
+		StageDeadlineTicks: 150
 		RefanoutCooldownTicks: 750
 	# SP-1 (AI_ARCHITECTURE §12.20): the base-spacing advisor. findPos still owns validity (CanPlaceBuilding,
 	# base radius, distance requirements); this re-ranks its first N placeable candidates by distance to the

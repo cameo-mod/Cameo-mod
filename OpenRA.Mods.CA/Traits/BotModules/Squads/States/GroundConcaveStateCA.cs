@@ -17,10 +17,12 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	// CV (AI_ARCHITECTURE 12.7a): between contact and the first shot a Rush squad deploys
-	// into a range-matched concave arc (ConcaveEvalCA plans it), then commits with staggered
-	// AttackMove orders so every member reaches its own firing range on the same tick, then
-	// hands over to GroundUnitsAttackState. Orders only; every order spends one micro action.
+	// CV (AI_ARCHITECTURE 12.7a, unified with ATK-1 2026-10-02): between contact and the first
+	// shot a Rush squad deploys into a range-matched concave arc (ConcaveEvalCA plans it), then
+	// commits with staggered AttackMove orders so every member reaches its own firing range on
+	// the same tick, then hands over to GroundUnitsAttackState. Orders only; every order spends
+	// one micro action. Tunables and the on/off switch come from the IBotAssaultFormation
+	// provider (AssaultFormationBotModule): no enabled provider means this state never runs.
 	class GroundUnitsConcaveStateCA : GroundStateBaseCA, IState
 	{
 		const int ReplanMinTicks = 25;
@@ -49,7 +51,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		List<Placed> placed;
+		readonly HashSet<uint> plannedIds = [];
 		readonly List<Pending> pending = [];
+		AssaultFormationSettings settings;
+		IBotAssaultFormation provider;
+		CPos cooldownCell;
 		WPos planAnchor;
 		WPos anchor;
 		int frontDepth;
@@ -61,28 +67,61 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			formStartTick = owner.World.WorldTick;
 
-			// A re-entry is not allowed until the cooldown has run; set it now so an
-			// abort or a commit both start it from the moment the squad deployed.
-			owner.ConcaveCooldownUntilTick = formStartTick + owner.SquadManager.Info.ConcaveCooldownTicks;
+			// Entry already consulted the provider, so it resolves here; if it vanished since
+			// (condition flipped), fall back to the plain advance.
+			var members = Eligible(owner);
+			if (members.Count == 0 || !TryGetSettings(owner, CooldownCell(owner, members), out settings, out provider))
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			// A re-entry is not allowed until the provider's cooldown has run; record now so an
+			// abort or a commit both restart it (RecordFanout again) from their own moment.
+			cooldownCell = CooldownCell(owner, members);
+			provider.RecordFanout(owner, cooldownCell);
 		}
 
 		public void Deactivate(SquadCA owner) { }
 
-		// The trigger, read from the attack-move state before its own scan: enough weaponed
-		// ground members, off cooldown, and an observed enemy (or the squad target) within
-		// ConcaveContactCells of the frontline centroid.
+		// The provider consult shared by the entry hook and Activate: the enabled
+		// IBotAssaultFormation for this squad's bot and the settings it would run with. The
+		// provider's own per-squad same-ground cooldown may decline. Cheap and side-effect free.
+		internal static bool TryGetSettings(SquadCA owner, CPos cell, out AssaultFormationSettings settings, out IBotAssaultFormation provider)
+		{
+			settings = default;
+			provider = owner.Bot.Player.PlayerActor.TraitsImplementing<IBotAssaultFormation>().FirstEnabledTraitOrDefault();
+			return provider != null && provider.TryGetAssaultFormation(owner, cell, out settings);
+		}
+
+		// The ground the cooldown is keyed on: the squad target, else the frontline centroid.
+		static CPos CooldownCell(SquadCA owner, List<Actor> members)
+		{
+			if (owner.IsTargetValid)
+				return owner.World.Map.CellContaining(owner.Target.CenterPosition);
+
+			return owner.World.Map.CellContaining(Centroid(members));
+		}
+
+		// The trigger, read from the attack-move state before its own scan: a Rush squad with an
+		// enabled provider, enough weaponed ground members, off the provider's cooldown, and an
+		// observed enemy (or the squad target) within FanoutTriggerCells of the frontline centroid.
 		public static bool ShouldEnter(SquadCA owner)
 		{
-			var info = owner.SquadManager.Info;
-			if (owner.World.WorldTick < owner.ConcaveCooldownUntilTick)
+			// Cheapest gates first: classic and switch-off bots have no enabled provider and pay nothing more.
+			if (owner.Type != SquadCAType.Rush
+				|| owner.Bot.Player.PlayerActor.TraitsImplementing<IBotAssaultFormation>().FirstEnabledTraitOrDefault() == null)
 				return false;
 
 			var members = Eligible(owner);
-			if (members.Count == 0 || members.Count < info.ConcaveMinUnits)
+			if (members.Count == 0)
+				return false;
+
+			if (!TryGetSettings(owner, CooldownCell(owner, members), out var settings, out _) || members.Count < settings.MinSquadSize)
 				return false;
 
 			var centroid = Centroid(members);
-			var contact = WDist.FromCells(info.ConcaveContactCells);
+			var contact = WDist.FromCells(settings.FanoutTriggerCells);
 			if (owner.IsTargetValid
 				&& (owner.Target.CenterPosition - centroid).HorizontalLengthSquared <= (long)contact.Length * contact.Length)
 				return true;
@@ -102,7 +141,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			var info = owner.SquadManager.Info;
 			var members = Eligible(owner);
 			if (members.Count == 0)
 			{
@@ -111,7 +149,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			var centroid = Centroid(members);
-			var contact = WDist.FromCells(info.ConcaveContactCells);
+			var contact = WDist.FromCells(settings.FanoutTriggerCells);
 			var enemies = GatherEnemies(owner, centroid, contact);
 			if (!TryAnchor(owner, enemies, centroid, out var newAnchor, out var newDepth))
 			{
@@ -123,9 +161,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			frontDepth = newDepth;
 
 			var replanRange = WDist.FromCells(ReplanAnchorCells);
+
+			// Re-plan when the anchor moved, or when an eligible member joined while forming (a
+			// late joiner gets a slot); both are rate-limited by ReplanMinTicks.
 			if (placed == null
 				|| (tick - lastPlanTick >= ReplanMinTicks
-					&& (anchor - planAnchor).HorizontalLengthSquared > (long)replanRange.Length * replanRange.Length))
+					&& ((anchor - planAnchor).HorizontalLengthSquared > (long)replanRange.Length * replanRange.Length
+						|| members.Any(m => !plannedIds.Contains(m.ActorID)))))
 			{
 				if (!Plan(owner, members, centroid))
 				{
@@ -168,7 +210,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		bool Plan(SquadCA owner, List<Actor> members, WPos centroid)
 		{
-			var info = owner.SquadManager.Info;
 			var rules = owner.World.Map.Rules;
 			var inputs = new List<ConcaveMember>(members.Count);
 			var profiles = new List<BotUnitProfile>(members.Count);
@@ -181,21 +222,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			var p = new ConcaveParams(
-				WDist.FromCells(info.ConcaveStageMarginCells).Length,
-				WDist.FromCells(info.ConcaveRankBandCells).Length,
-				info.ConcaveSpacing,
-				info.ConcaveMinSpacing,
-				info.ConcaveMaxArcDegrees,
-				info.ConcaveRankGap);
+				WDist.FromCells(settings.StageMarginCells).Length,
+				WDist.FromCells(settings.RankBandCells).Length,
+				settings.Spacing,
+				settings.MinSpacing,
+				settings.ArcDegrees,
+				settings.RankGap);
 
 			var slots = ConcaveEvalCA.Plan(anchor, centroid, frontDepth, inputs, p);
 
 			var result = new List<Placed>(members.Count);
 			var old = placed?.ToDictionary(o => o.Actor);
+			plannedIds.Clear();
+			foreach (var m in members)
+				plannedIds.Add(m.ActorID);
+
 			var valid = 0;
 			for (var i = 0; i < members.Count; i++)
 			{
-				if (!TrySnap(owner.World, members[i], slots[i].Pos, out var cell))
+				if (!TrySnap(owner.World, members[i], slots[i].Pos, settings.SlotReachCells, out var cell))
 					continue;
 
 				valid++;
@@ -224,16 +269,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			// A choke or a cliff edge: too few usable slots, engage as today.
-			if (valid * 100 < members.Count * info.ConcaveMinValidSlotPct)
+			if (valid * 100 < members.Count * settings.MinValidSlotPct)
 				return false;
 
 			placed = result;
 			return true;
 		}
 
-		// The nearest cell within 2 cells of the slot the member's locomotor can enter, stay in
+		// The nearest cell within reachCells of the slot the member's locomotor can enter, stay in
 		// and path to. Mirrors HarvesterBotModuleCA's retreat-cell check.
-		static bool TrySnap(World world, Actor actor, WPos slot, out CPos cell)
+		static bool TrySnap(World world, Actor actor, WPos slot, int reachCells, out CPos cell)
 		{
 			cell = default;
 			var mobile = actor.TraitOrDefault<Mobile>();
@@ -246,14 +291,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				&& mobile.CanStayInCell(c)
 				&& mobile.PathFinder.PathMightExistForLocomotorBlockedByImmovable(mobile.Locomotor, actor.Location, c);
 
-			cell = mobile.NearestCell(target, Valid, 0, 2);
+			cell = mobile.NearestCell(target, Valid, 0, reachCells);
 			return Valid(cell);
 		}
 
 		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies)
 		{
-			var info = owner.SquadManager.Info;
-
 			// Evaluate every member first (LastHp must update for all), then decide.
 			var near = 0;
 			var damaged = false;
@@ -281,7 +324,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (damaged || enemyInRange)
 				return CommitReason.UnderFire;
 
-			if (tick - formStartTick >= info.ConcaveFormTicks || near * 100 >= placed.Count * info.ConcaveFormedPct)
+			if (tick - formStartTick >= settings.StageDeadlineTicks || near * 100 >= placed.Count * settings.AssemblePercent)
 				return CommitReason.Formed;
 
 			return CommitReason.None;
@@ -292,7 +335,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		void Commit(SquadCA owner, List<Actor> members, List<Actor> enemies, int tick, bool underFire)
 		{
 			committed = true;
-			owner.ConcaveCooldownUntilTick = tick + owner.SquadManager.Info.ConcaveCooldownTicks;
+			provider.RecordFanout(owner, cooldownCell);
 
 			// The attack state fights owner.TargetActor: the observed enemy nearest the anchor.
 			Actor nearest = null;
@@ -349,9 +392,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
 		}
 
-		static void Abort(SquadCA owner)
+		void Abort(SquadCA owner)
 		{
-			owner.ConcaveCooldownUntilTick = owner.World.WorldTick + owner.SquadManager.Info.ConcaveCooldownTicks;
+			provider?.RecordFanout(owner, cooldownCell);
 			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 		}
 

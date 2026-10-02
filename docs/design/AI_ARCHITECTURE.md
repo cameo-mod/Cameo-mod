@@ -2036,40 +2036,41 @@ formation — they run ahead on their own (6b).
 §12.7 governs the **march**; CV governs the **deployment** between contact and the first shot. Today a Rush squad
 that meets the enemy goes straight from `GroundUnitsAttackMoveStateCA` to `GroundUnitsAttackState` and every member
 attack-moves at one point: the column arrives one unit at a time and loses the first seconds of the fight piecemeal.
-CV inserts one state, **`GroundUnitsConcaveStateCA`** (Rush squads only; switch `ConcaveEngagement`, default off),
-owned by `SquadManagerBotModuleCA` (§19.3 — it remains the sole owner of force formation; orders only, §1.1).
+CV inserts one state, **`GroundUnitsConcaveStateCA`** (Rush squads only; armed only by the `AssaultFormationBotModule` provider, default off),
+entered from `GroundUnitsAttackMoveStateCA` (§19.3 — squad states remain the sole order authority; orders only, §1.1).
 
 **Geometry — a pure, deterministic planner `ConcaveEvalCA` (integer math, no RNG, unit-tested):**
 1. **Anchor `A`**: the centroid of the *observed* enemy combat units in contact (only `IsPreferredObservedEnemyUnit`
    — fog-honest), else the squad target's position (a remembered/visible building or defence). Approach axis
    `d` = unit vector `A → frontline centroid`. **Enemy front depth** `F` = the largest projection of an observed enemy
    onto `d` (how far the enemy line already sits toward us); 0 for a lone target.
-2. **Per-member radius** `rᵢ = F + MaxRangeᵢ + ConcaveStageMarginCells` — every member stands the SAME distance
+2. **Per-member radius** `rᵢ = F + MaxRangeᵢ + StageMarginCells` — every member stands the SAME distance
    (the margin) outside its OWN range, so long-range units naturally form outer ranks and everyone is the same
    step from firing. Weaponless members (and scouts) are not placed; they keep the plain order.
-3. **Ranks**: members whose `rᵢ` lie within `ConcaveRankBandCells` of each other share one arc (the band radius is
+3. **Ranks**: members whose `rᵢ` lie within `RankBandCells` of each other share one arc (the band radius is
    the band's minimum `rᵢ`, so nobody in it stands inside its range).
 4. **Width grows with the army**: a band of `n` members needs arc length `L = n × spacing` (spacing =
-   `ConcaveSpacingCells`, infantry half of it). The arc's angle is `θ = L / r`, centred on `d` — a bigger army
+   `Spacing`, infantry half of it). The arc's angle is `θ = L / r`, centred on `d` — a bigger army
    is a wider, never a denser, concave. If `θ > ConcaveMaxArcDegrees`, spacing first compresses down to
-   `ConcaveMinSpacingCells`; members that still do not fit go to a second arc `ConcaveRankGapCells` further out.
+   `MinSpacing`; members that still do not fit go to a second arc `RankGap` further out.
 5. **Slot assignment without crossing**: sort the band's members by their current bearing around `A` and its
    slots by bearing, pair in order. Paths never cross, so wings fill from the side they already stand on.
 6. **Terrain**: each slot snaps to the nearest cell within 2 cells that the member's locomotor can enter and reach
-   (same domain). If fewer than `ConcaveMinValidSlotPct` of the slots are valid (a choke, a cliff edge), CV aborts:
+   (same domain). If fewer than `MinValidSlotPct` of the slots are valid (a choke, a cliff edge), CV aborts:
    the squad engages as today.
 
 **Phases (`GroundUnitsConcaveStateCA`):**
 * **Trigger** (in the attack-move state, BEFORE the existing `AttackScanRadius` switch to the attack state): the
-  squad has ≥ `ConcaveMinUnits` weaponed ground members, is not on cooldown, and either an observed enemy combat
-  unit is within `ConcaveContactCells` of the frontline centroid, or the squad target is within that distance.
+  squad is Rush, an enabled provider arms it, it has ≥ `MinSquadSize` weaponed ground members, the provider's
+  same-ground cooldown has run, and either an observed enemy combat
+  unit is within `FanoutTriggerCells` of the frontline centroid, or the squad target is within that distance.
   Fog limits how early a contact is seen; a partial concave formed late still beats a column.
 * **Form**: each placed member gets a `Move` (not `AttackMove` — nobody gets drawn into the fight early) to its slot.
   Orders are re-issued only to members that are idle and off their slot; every order spends one
   `IBotActionBudget` action (§19.1 — lower tiers form worse, on the same straight line); a denied member keeps its
-  last order. The plan re-runs only if `A` moves more than 3 cells (at most once per 25 ticks).
-* **Commit** when ANY of: ≥ `ConcaveFormedPct` of the placed members are within 1.5 cells of their slot; the form
-  timer reaches `ConcaveFormTicks`; a member took damage or an observed enemy is inside some member's own range
+  last order. The plan re-runs only if `A` moves more than 3 cells or an eligible member joins while forming (a late joiner gets a slot), at most once per 25 ticks.
+* **Commit** when ANY of: ≥ `AssemblePercent` of the placed members are within 1.5 cells of their slot; the form
+  timer reaches `StageDeadlineTicks`; a member took damage or an observed enemy is inside some member's own range
   (the enemy engaged us — never keep forming under fire).
 * **Synchronised arrival**: on commit, each member's time to its own firing range is `tᵢ = margin_i / speedᵢ`
   (its real distance to range, over its locomotor speed); member `i`'s `AttackMove` toward `A` is issued
@@ -2077,13 +2078,29 @@ owned by `SquadManagerBotModuleCA` (§19.3 — it remains the sole owner of forc
   When the last delayed order is out, the state hands over to `GroundUnitsAttackState` (focus fire, kiting and
   pull-back take over, §MI).
 * **Abort** to the attack-move state when the anchor is gone (no observed enemy and the target is invalid); after a
-  commit or an abort the squad cannot re-enter CV for `ConcaveCooldownTicks`.
+  commit or an abort the squad cannot re-enter CV against the same ground for `RefanoutCooldownTicks` (the provider's per-squad cooldown, restarted on arm, commit and abort).
 
 Supersedes the ring slot on `devin/ember/mi-concave` (`a64a294ae`, not merged): fixed 30°-per-member angles under a
 135° cap (an army past 5 units packs denser instead of wider), slots by ActorID (paths cross), no form or commit
 phase (units still arrive one by one), no terrain check, and it would have changed group A's shipped default behaviour
 without a new switch. Its integer mirroring trick (`WRot` conjugate for the negative wing) is reused.
-Switch group **F_concave** in `tools/ai/increment_switches.yaml`; A/B in INC-4.
+Switch group **AG_assault_fanout** in `tools/ai/increment_switches.yaml` (the single switch); A/B in INC-4.
+
+**Unified with ATK-1 (2026-10-02).** The two duplicate implementations (CV here, NOVA ATK-1 in the former §12.21) are
+merged into this one (§19.3 one module per decision). *From CV:* all geometry (`ConcaveEvalCA` — range-matched radius,
+rank bands, member-count arc width, bearing pairing, mirroring), the state machine (`GroundUnitsConcaveStateCA`:
+form with `Move`, terrain snap, commit on formed/timeout/under fire, staggered commit) and its single entry hook in the
+attack-move state. *From ATK-1:* the settings seam — `AssaultFormationBotModule` / `IBotAssaultFormation` /
+`AssaultFormationSettings` are the ONLY home of the tunables (CV's 13 `Concave*` fields left `SquadManagerBotModuleCAInfo`)
+and the provider's presence (`genericbot && assault_fanout`) is the ONLY switch, so classic has no provider and stays
+bit-identical; the per-squad same-ground cooldown (`RecordFanout`, replaces `SquadCA.ConcaveCooldownUntilTick`); late-joiner
+handling (roster change re-plans, rate-limited). *Dropped:* ATK-1's fixed-radius far-side ring (`FanoutRadiusCells`), its
+map-bounds-only slot check, its Stage-state transition and band trigger (a staged squad reaches the concave through the
+attack-move state). Field map: `MinSquadSize`=min units, `FanoutTriggerCells`=contact cells, `AssemblePercent`=formed %,
+`StageDeadlineTicks`=form ticks, `SlotReachCells`=terrain-snap radius, `ArcDegrees`=arc cap, `RefanoutCooldownTicks`=cooldown;
+plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `MinValidSlotPct`. `ai.yaml` writes this
+section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
+measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
 
 ### 12.8 Air doctrine (phase CA-5)
 
@@ -2850,32 +2867,4 @@ SP-1/AF-1 only make the base cheaper to path through and the army bigger to form
 
 ### 12.21 ATK-1 — the assault fan-out (NOVA, 2026-10-02; switch AG_assault_fanout)
 
-The maintainer's line-of-death report: a committed Rush squad attack-moved every member
-to one shared target point, so the column fed the guns one at a time.
-
-**LANE NOTE:** squad formation is assigned to Claude's `claude/cv_concave` (§12.7a,
-switch F_concave) per the 2026-10-01 standing order — that implementation deploys a
-*range-matched* concave through SquadManagerBotModuleCA hooks. ATK-1 is the independent
-NOVA implementation: planner + squad-state only, zero SquadManager edits, switch-gated
-genericbot-only, runtime-verified (hard 3-0 vs classic on A Nuclear Winter, armed batch
-of 3, 0 exceptions, fingerprint ed05a1dfb0ce). The coordinator picks which lands in the
-increment; the two cannot coexist textually (both extend GroundStatesCA) but neither
-fires unless its switch arms.
-
-- *The state:* `GroundUnitsAssaultFanoutStateCA` sits between the
-  rally/`AttackMove` approach and the commit. In the trigger band
-  (`FanoutTriggerCells` > leader distance > `FanoutRadiusCells`) or after
-  `GroundUnitsStageStateCA` assembly, `AssaultFormationPlanner` lays one slot per
-  member on an arc (`ArcDegrees` 180 default) centred on the *far side* of the target
-  from the approach bearing — the wave wraps the objective and arrives from several
-  bearings at once.
-- *The commit:* members walk per-unit `AttackMove` slot orders (micro-action budget
-  honoured), then commit together on `AssemblePercent`/`StageDeadlineTicks` — or
-  instantly on enemy contact, so nobody fights alone.
-- *Determinism and honesty:* integer WAngle-LUT math, sorted-bearing assignment, ActorID
-  tiebreak; unusable/overflow slots fold onto the target cell (the old behaviour, never
-  a stall). `RefanoutCooldownTicks` stops same-ground re-orbits.
-- *The seam:* orders stay with the squad states; `AssaultFormationBotModule` is a
-  settings-only `IBotAssaultFormation` provider (same shape as `IBotSiegeAdvisor`),
-  `RequiresCondition: genericbot && assault_fanout` — classic has no provider and
-  keeps the upstream single-point commit regardless of the switch.
+Merged into the concave engagement: see **§12.7a "Unified with ATK-1"** — one implementation (CV geometry + state machine, ATK-1 provider seam and single switch).

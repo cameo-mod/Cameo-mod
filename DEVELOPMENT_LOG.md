@@ -16588,3 +16588,19 @@ LANE COLLISION (flagged): maintainer 2026-10-01 assigned squad formation to
 claude/cv_concave (sec.12.7a, switch F_concave, SquadManager-touching). ATK-1
 is an independent, SquadManager-free implementation with runtime evidence;
 both are default-off. Coordinator picks which arms in the increment.
+
+## 2026-10-02 (claude-sonnet sub-agent, coordinated by Claude Opus 5.5) - concave + ATK-1 merged into ONE formation implementation
+
+Two duplicate "deploy before the fight" implementations (CV concave F_concave, NOVA ATK-1 AG_assault_fanout) merged per
+DESIGN 19.3 (one bot module per decision). Result lives in AI_ARCHITECTURE 12.7a ("Unified with ATK-1").
+
+- Geometry + state machine = CV (ConcaveEvalCA, GroundUnitsConcaveStateCA), entered ONLY from the attack-move state hook.
+- Settings seam = ATK-1: AssaultFormationBotModule / IBotAssaultFormation / AssaultFormationSettings hold every tunable
+  (13 Concave* fields removed from SquadManagerBotModuleCAInfo); provider presence is the only switch; per-squad same-ground
+  cooldown replaces SquadCA.ConcaveCooldownUntilTick. Late joiners re-plan (rate-limited by the 25-tick replan minimum).
+- Deleted: AssaultFormationPlanner, AssaultFanoutStatesCA, AssaultFormationPlannerTest, FanoutRadiusCells (also from ai.yaml),
+  the Stage-state fan-out transition and the band trigger, switch group F_concave. AG_assault_fanout is the single switch.
+- ai.yaml keeps ATK-1's tested values where it set them (MinSquadSize 4, FanoutTriggerCells 12, AssemblePercent 60,
+  StageDeadlineTicks 500, ArcDegrees 180); C# defaults are CV's (16 / 80 / 150 / 150).
+- Not run: boot gate / armed A/B (coordinator's). Open: re-A/B the unified formation (ATK-1's 3-0 evidence was the old ring).
+
