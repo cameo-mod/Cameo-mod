@@ -17057,3 +17057,27 @@ checker's 5000-tick grace covers legacy logs.
 **Flagged to owners (not mine):** BO-1 `out_earned` player-count normalization, TC-3
 consistency/liveness/rescue-capacity/ClientIndex findings (§4), tuner paired-stats + opening
 bandit confound (§6.3/6.4) — Claude's lanes.
+
+## 2026-10-02 EMBER — round-trip "execution" layer + raid dead-end finding
+
+- New layer in `round_trip_check.py`: published mission cards with no attempt, no denial
+  and no terminal event at match end now surface as `execution` WARN — the
+  publish-without-consume smell (provider dead-end or card outliving the match).
+- First finding from it: all 8 `raid:garrison_*` cards in ab-smoke-out4 were published
+  but never committed. `SelectMission` only runs inside new Rush-squad formation and
+  only when `RequiredValue <= idleForceValue` (~1080+ for unremembered garrisons, more
+  for remembered ones) — early game the idle pool can't afford them, late game the army
+  was already committed in squads. Zero risk-gate blocks in debug.log. Options for the
+  squad-layer owner: lower `ClearRaidForcePercent` (150%), let published missions inform
+  the next squad's build-up rather than gate on the current idle pool, or a dedicated
+  small-raid squad type. Not mine to change — flagged for the coordinator.
+- `crossed` order-gate WARNs decoded: out3 = SquadManager->ScoutBotModule x4, out4 =
+  SendUnitToAttackBotModule->ExternalBotOrdersManager x1. ScoutBotModule IS lease-aware
+  (BotLeasePurpose.Scout) but squad membership is not lease-tracked, so a unit returning
+  to the idle pool after squad dissolution reads as two issuers on one actor. A real
+  seam gap; belongs to the SquadManager owner.
+- Coordination note: DAWN's `devin/dawn/team-liveness-rescue` (devlog in main checkout,
+  not yet pushed) also deletes the stale AD_army_first/AE_spread_assault groups — the
+  shared deletion merges clean vs cb0e02194; their extra AF_harvester_spread
+  `MaxHarvestersPerResourceIndice: 4` on @generic is a documented no-op (C# default is
+  already 4). No conflict expected.

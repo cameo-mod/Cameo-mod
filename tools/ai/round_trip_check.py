@@ -3,7 +3,7 @@
 
 Reads one or more batch support dirs (each has Logs/ with debug.log, cameo-ai-matches.jsonl,
 cameo-ai-missions.jsonl, cameo-ai-situations.jsonl) and prints one PASS/WARN/FAIL row per layer with the
-evidence count: load, perception, missions, ownership, order gate, outcomes, write-back, fog, learning, tools.
+evidence count: load, perception, missions, ownership, order gate, outcomes, execution, write-back, fog, learning, tools.
 Exit 1 on any FAIL. A genericbot player is any player whose bot_type is not a reference bot (classic, classic_hard).
 
 Usage:
@@ -116,6 +116,16 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
                         in_flight += 1
     rows.append(("outcomes", FAIL if dangling else PASS,
                  f"{attempts} attempt(s), {dangling} dangling, {in_flight} in flight at match end"))
+
+    # 6b. execution coverage — a published card that still has no attempt, no denial and no
+    # terminal event at match end was produced but never consumed (provider dead-end, or the
+    # card simply outlived the match; unaffordable/unreachable cards legitimately sit open).
+    published = {r.get("mission_id") for r in missions if r.get("event") == "PUBLISHED"}
+    closed_or_taken = {r.get("mission_id") for r in missions
+                       if r.get("event") in ("DENIED", "DORMANT") or (r.get("event") is None and r.get("state"))}
+    unclaimed = published - closed_or_taken
+    rows.append(("execution", WARN if unclaimed else PASS,
+                 f"{len(unclaimed)} published card(s) still open with no attempt at match end (of {len(published)})"))
 
     # 7. write-back
     shelf = [r for r in missions if r.get("record_kind") == "mission" and r.get("event") in ("DORMANT", "REOPENED")]
