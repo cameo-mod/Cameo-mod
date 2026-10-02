@@ -60,6 +60,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"instead of in-filling (percent, 0 = nearest-own-building distance only).")]
 		public readonly int OutwardLeanPercent = 25;
 
+		[Desc("Ring width (cells) around a building's footprint that counts as resource-field frontage. Cells",
+			"within this ring of a valuable resource are last-resort picks for non-refinery buildings, so",
+			"refinery parking and harvester approach lanes stay open.")]
+		public readonly int ResourceFrontageCells = 1;
+
 		public override object Create(ActorInitializer init) { return new SpacingAdvisorBotModule(init.Self, this); }
 	}
 
@@ -67,6 +72,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
+		IResourceLayer resourceLayer;
+		ResourceMapBotModule resourceMap;
+		bool resourceSearched;
 
 		public SpacingAdvisorBotModule(Actor self, SpacingAdvisorBotModuleInfo info)
 			: base(info)
@@ -80,10 +88,55 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int IBotPlacementAdvisor.MinBuildingGapCells => Info.MinBuildingGapCells;
 		int IBotPlacementAdvisor.MinBuildingGapDefensesCells => Info.MinBuildingGapDefensesCells;
 
+		void EnsureResourceRefs()
+		{
+			if (resourceSearched)
+				return;
+			resourceSearched = true;
+			resourceLayer = world.WorldActor.TraitOrDefault<IResourceLayer>();
+			resourceMap = player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+		}
+
+		// True when any cell of the footprint plus its ResourceFrontageCells ring sits on a valuable resource.
+		bool TouchesValuableResource(ActorInfo building, CPos cell)
+		{
+			if (resourceLayer == null)
+				return false;
+
+			var bi = building.TraitInfoOrDefault<BuildingInfo>();
+			if (bi == null)
+				return false;
+
+			var ring = Info.ResourceFrontageCells;
+			foreach (var fp in bi.Tiles(cell))
+			{
+				for (var dy = -ring; dy <= ring; dy++)
+					for (var dx = -ring; dx <= ring; dx++)
+					{
+						var c = fp + new CVec(dx, dy);
+						var res = resourceLayer.GetResource(c).Type;
+						if (resourceMap != null
+								? resourceMap.Info.ValuableResourceTypes.Contains(res)
+								: res != null)
+							return true;
+					}
+			}
+
+			return false;
+		}
+
 		CPos? IBotPlacementAdvisor.ChooseCell(ActorInfo building, IReadOnlyList<CPos> candidates, Func<CPos, bool> stillPlaceable)
 		{
 			if (IsTraitDisabled || !Info.RerankCandidates || candidates == null || candidates.Count == 0)
 				return null;
+
+			// Refineries keep their own placement owner (the expansion planner's field claim wins — a
+			// refinery sited for spacing instead of field reach would undo EX-2 and strand harvesters on
+			// long walks). Spacing must never touch them.
+			if (building.HasTraitInfo<RefineryInfo>())
+				return null;
+
+			EnsureResourceRefs();
 
 			// One enumeration of own occupied cells per placement call — placements are a few per minute,
 			// never per-tick, so this stays cheap.
@@ -112,10 +165,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			CPos best = candidates[0];
 			var bestScore = long.MinValue;
 			var sawWide = false;
+			var sawClean = false;
 			var found = false;
 			foreach (var cell in candidates)
 			{
 				if (stillPlaceable != null && !stillPlaceable(cell))
+					continue;
+
+				// Resource frontage is refinery parking and harvester approach — a normal building parked
+				// on it pushes the next refinery out and clogs the mining lane. Only taken when no clean
+				// cell places at all.
+				var onResource = TouchesValuableResource(building, cell);
+				if (onResource && sawClean)
 					continue;
 
 				var nearestSq = long.MaxValue;
@@ -131,6 +192,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var gap = (long)Math.Min(Math.Sqrt(nearestSq), Info.DesiredGapCells + 1);
 				var outward = (cell - anchor).LengthSquared;
 				var score = gap * 100 + outward / Math.Max(1, 100 - Info.OutwardLeanPercent);
+				if (onResource)
+					score -= 100000;
 
 				if (gap <= Info.DesiredGapCells && sawWide)
 					continue;
@@ -141,6 +204,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					bestScore = score;
 					best = cell;
 					sawWide |= gap > Info.DesiredGapCells;
+					sawClean |= !onResource;
 				}
 			}
 

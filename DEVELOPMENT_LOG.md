@@ -16840,3 +16840,34 @@ option (9 = old-90 cap used).
 `order_of_battle_rich_6v6`, fullscreen native res, 6xhard (NE) vs 6xclassic
 (SW) td_gdi, Referee seat = local client. World loaded clean, no exceptions.
 
+
+## 2026-10-02 EMBER — SP-1 refinery fix + full-armed smoke WON
+
+- Maintainer feedback: refineries landed far from resource fields and stacked
+  multiple-per-field; other buildings ate the field frontage. Root cause found:
+  SpacingAdvisorBotModule.ChooseCell never checked the building type — refinery
+  claim candidates (EX-2 annulus around the field) got re-ranked toward
+  max-distance-from-own-buildings = far edge of the field ring. The field then
+  read UNSERVED (a refinery only serves within servedRadiusCells of the field
+  centre) → the builder stacked the next refinery on the same field.
+- Fix: `HasTraitInfo<RefineryInfo>` → return null (field proximity owns refinery
+  placement, untouched). Plus resource-frontage penalty: non-refinery candidates
+  whose footprint+1 ring touches a valuable resource score last (never rejected
+  outright — dense fields can't deadlock). §12.20 updated.
+- Merge: pulled origin/master into the branch TWICE — absorbed Claude's unified
+  concave (§12.7a, AssaultFormationPlanner deleted, ConcaveEvalCA kept) and the
+  ST scale-targets module; 4 + 2 conflicts resolved (docs/comments/counts —
+  module count now 66 types / 91 Player instances), both projects compile clean,
+  boot-gate PASS after each merge state.
+- Full-armed smoke (tmpab-smoke @ bf9151265, AB/AC/AD/AE/AF/AG/AH/ST all armed,
+  hard vs classic td_gdi): **hard WON 1-0 in 18,919 ticks** — 149 kills / 116
+  lost, army_value 57.3k vs classic's 0 (wiped). Ownership watchdogs clean
+  (0 double_owner), order_gate crossed=4 (SquadManager/ScoutBotModule seam —
+  other lanes' known overlap, minor). 1 match = directional signal only; the
+  official increment A/B is the coordinator's call.
+- Round-trip on prior evidence (ab-smoke-out + out2): all layers PASS except
+  order_gate WARN (crossed=1) and learning WARN (2 LEARNED lines — known thin
+  learning-consumption gap).
+- LESSON recorded: shared engine/bin re-clobbered by concurrent lanes' builds;
+  never swap a single dll of a cross-referencing pair into a live bin (crashed
+  a running match with ReflectionTypeLoadException).

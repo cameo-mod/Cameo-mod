@@ -2935,8 +2935,22 @@ field, and building production out-spending the army.
   capped at `DesiredGapCells + 1` (beyond the gap, more distance stops mattering so the
   frontier doesn't drift absurdly), plus a `OutwardLeanPercent` bias away from the base
   centroid. If nothing meets the gap it takes the widest cell left — spacing can never
-  deadlock placement. Refinery and defence cells keep their own owners (EX-2 field
-  claims, DEF-3 coverage) and are never re-ranked by this advisor.
+  deadlock placement.
+
+- *Refinery exemption (SP-1 fix, same day):* the advisor returns `null` for any
+  `RefineryInfo` building — refinery placement stays owned by field proximity (EX-2
+  claim annulus + resource fallback). The first cut re-ranked refinery candidates too,
+  which pushed the refinery to the far edge of the claim annulus; the field then read
+  *unserved* (a field counts as served only when a refinery stands within
+  `servedRadiusCells` of its centre) and the builder stacked another refinery on the
+  same field — "refineries far away, multiple per spreader" in one bug.
+- *Resource frontage:* non-refinery candidates whose footprint plus a
+  `ResourceFrontageCells` (1) ring touches a valuable resource cell are scored last —
+  buildings may not park on the cells a refinery needs or clog the harvester approach
+  lane. Valuable set comes from `ResourceMapBotModule` (any resource when absent);
+  resource cells are never rejected outright, so a dense field map can't deadlock
+  placement either.
+- Defence cells keep DEF-3 coverage and are never re-ranked by this advisor.
 
 **AF-1 — army-first cash** (`ArmyFirstBotModule`, `IBotRequestPauseBuildingProduction`,
 switch `AE_army_first`).
