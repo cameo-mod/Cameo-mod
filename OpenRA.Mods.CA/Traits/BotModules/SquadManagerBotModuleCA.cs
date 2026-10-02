@@ -682,6 +682,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotProtectionRequestProvider[] protectionRequestProviders;
 		IBotRequestUnitProduction[] unitRequesters;
 		IBotUtilityAxes[] utilityAxesProviders;
+		IBotScaleTargets[] scaleTargetProviders;
 
 		// CN3: the detector-memory providers the stealth squads read. Conditional
 		// (`cn3_stealth_squads`), so enablement is resolved per use, never cached.
@@ -1345,6 +1346,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
+			scaleTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
 			airStrikeGrid = AirstrikeGrid(self);
 		}
@@ -2501,12 +2503,23 @@ namespace OpenRA.Mods.CA.Traits
 			if (Info.UseTeamSyncAttacks && TeamBlackboard.Collect(Player).AnyClimax)
 				forceScale = TeamSyncForceScale(forceScale, true, Info.DirectorClimaxForceScalePercent);
 
-			var requiredValue = ApplyForceScale(desiredAttackForceValue, forceScale);
+			// Scale targets (DESIGN 19.10): an enabled provider's army value target replaces SquadValue and its fixed time
+			// ramp (growth lives in the provider), and MaxIdleUnits scales by the same factor. The Director / team force
+			// scale and ValueOnlyAttackLaunch apply on top, exactly as before. No provider: the yaml numbers.
+			var desiredValue = desiredAttackForceValue;
+			var maxIdleUnits = Info.MaxIdleUnits;
+			if (Info.SquadValue > 0 && scaleTargetProviders.TryArmyValue(Info.SquadValue, out var armyTarget))
+			{
+				desiredValue = armyTarget;
+				maxIdleUnits = Math.Max(1, (int)((long)Info.MaxIdleUnits * armyTarget / Info.SquadValue));
+			}
+
+			var requiredValue = ApplyForceScale(desiredValue, forceScale);
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
-			if (unitsHangingAroundTheBase.Count >= Info.MaxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
+			if (unitsHangingAroundTheBase.Count >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded

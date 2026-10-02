@@ -101,6 +101,12 @@
 	GrantConditionOnBotOwner@assaultfanout:
 		Condition: assault_fanout
 		Bots: fransbot
+	# Scale targets (DESIGN 19.10, AI_ARCHITECTURE 12.22): base and army size grow with the seen enemy, the unscouted map,
+	# difficulty, personality and game time. The arm flips this to the genericbot tier list (switch group ST_scale_targets);
+	# default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@scaletargets:
+		Condition: scale_targets
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3536,6 +3542,130 @@ Player:
 		AssemblePercent: 80
 		StageDeadlineTicks: 150
 		RefanoutCooldownTicks: 750
+	# SCALE TARGETS (DESIGN 19.10, AI_ARCHITECTURE 12.22): ONE target per size category, recomputed every RecomputeTicks:
+	#   own = lerp(Min, Max, tier/9) x (1 + Growth x hours);  enemy = lerp(RatioMin, RatioMax, tier/9) x SEEN x (1 + Margin x unscouted) / team;
+	#   target = floor(P(personality, axes) x max(own, enemy)), clamped to [Floor, physical cap]. Seen = fog memory only (DESIGN 19.5).
+	# FIXED POINT: every fraction is an integer in THOUSANDTHS (Min: 1000 = 1.0, Max: 3250 = 3.25); Floor is in units. Min/Max are the
+	# DESIGN 19.1 table, so minute 0 with nothing seen reproduces today's limits. Every category writes every field (19.1).
+	# Defaults after the rule are starting values for the increment A/B, not settled numbers.
+	# `genericbot && scale_targets`: off on master until the increment A/B arms it (switch group ST_scale_targets).
+	ScaleTargetsBotModule:
+		RequiresCondition: genericbot && scale_targets
+		RecomputeTicks: 125
+		ScoutStaleTicks: 2500
+		UseUtilityAxes: true
+		Categories:
+			# value multiplier on the personality's SquadValue; growth replaces the old 20-minute ramp
+			army:
+				Min: 1000
+				Max: 1000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 1000
+				Growth: 1000
+				Floor: 0
+				TurtleRushLean: 25
+				TechRushExpansionLean: 0
+			harvester:
+				Min: 3000
+				Max: 30000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			refinery:
+				Min: 1000
+				Max: 10000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			# 1.5 -> 7.5 floors to the old rounded line 1 2 2 3 4 4 5 6 6 7
+			production:
+				Min: 1500
+				Max: 7500
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			conyard:
+				Min: 1500
+				Max: 7500
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: 25
+			# 1 1 1 1 2 2 2 2 3 3 across the ten tiers
+			tech:
+				Min: 1000
+				Max: 3250
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 1
+				TurtleRushLean: 0
+				TechRushExpansionLean: -25
+			# per building NAME, like BuildingLimits
+			superweapon:
+				Min: 1000
+				Max: 1000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: 0
+				TechRushExpansionLean: 0
+			# telemetry only: no numeric defence cap exists in the base builder today
+			defence:
+				Min: 0
+				Max: 0
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: -25
+				TechRushExpansionLean: 0
+			# 25 = today's MaxAircraft; capped by this bot's BotGlobalUnitBudget share
+			aircraft:
+				Min: 25000
+				Max: 25000
+				RatioMin: 600
+				RatioMax: 1400
+				Margin: 500
+				Growth: 500
+				Floor: 0
+				TurtleRushLean: 0
+				TechRushExpansionLean: 0
+		PersonalityMultipliers:
+			steamroller:
+				army: 1250
+				production: 1250
+			expansion:
+				refinery: 1250
+				harvester: 1250
+				conyard: 1250
+				production: 1250
+			turtle:
+				defence: 1400
+			tech:
+				tech: 1500
+			rush:
+				army: 800
 	# SP-1 (AI_ARCHITECTURE §12.20): the base-spacing advisor. findPos still owns validity (CanPlaceBuilding,
 	# base radius, distance requirements); this re-ranks its first N placeable candidates by distance to the
 	# nearest own building, so bases grow outward with gaps instead of packing into a traffic-jam monolith.

@@ -116,6 +116,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int harvesterLimit;
+		IBotScaleTargets[] scaleTargets;
 
 		public HarvesterBotModuleCA(Actor self, HarvesterBotModuleCAInfo info)
 			: base(info)
@@ -246,7 +247,18 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var numHarvesters = AIUtils.CountActorByCommonName(harvestersIndex);
 
-				if ((harvesterLimit > 0 && numHarvesters >= harvesterLimit) || numHarvesters >= Info.MaxHarvesters)
+				// Scale targets (DESIGN 19.10): an enabled provider's harvester target replaces BotLimits.HarvesterLimit and
+				// the module's fixed MaxHarvesters; without one both apply unchanged.
+				var limit = harvesterLimit;
+				var maxHarvesters = Info.MaxHarvesters;
+				scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
+				if (scaleTargets.TryTarget("harvester", out var scaledLimit))
+				{
+					limit = scaledLimit;
+					maxHarvesters = int.MaxValue;
+				}
+
+				if ((limit > 0 && numHarvesters >= limit) || numHarvesters >= maxHarvesters)
 					return;
 
 				var harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;

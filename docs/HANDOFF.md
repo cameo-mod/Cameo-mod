@@ -24,7 +24,7 @@ every fixed per-tier cap and the hand-written `BuildingLimits`, has no time cap,
 §12.22, including how it fits with the expansion planner, the utility axes, the global unit budget and the harvester
 insurance.
 
-**Next (in order):** (1) ST scale targets — Claude spec, Sonnet code, switch `ST_scale_targets`. (2) **One increment A/B**
+**Next (in order):** (1) ✅ ST scale targets LANDED (switch `ST_scale_targets`, inert on master; findings in §12.22 'Implemented': no MCV manager reads ConstructionYardLimit, no defence cap exists, refinery has no physical cap yet). (1b) the §19.3 coherence pass over the 10-02 duplicates (assault fan vs §12.7a, MinBuildingGapCells vs SP-1, MaxHarvestersPerResourceIndice vs HS-1, MinArmyUnitsBeforeBuildings vs AF-1). (2) **One increment A/B**
 of every default-off group on master, mirror matches only, ≤ 3 drivers: D, E, AG, F2, H… plus ST when it lands.
 Arms per WORKFLOW §4. (3) Round-trip test of the whole AI (HANDOFF 2026-10-01 step 3).
 

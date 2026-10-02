@@ -194,6 +194,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, McvRole> mcvRoles = new();
 		IBotRequestUnitProduction[] unitBuilders;
 		IBotUtilityAxes[] utilityAxesProviders;
+		IBotScaleTargets[] scaleTargetProviders;
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -271,6 +272,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			baseBuilders = self.TraitsImplementing<BaseBuilderBotModuleCA>().ToArray();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			utilityAxesProviders = self.TraitsImplementing<IBotUtilityAxes>().ToArray();
+			scaleTargetProviders = self.TraitsImplementing<IBotScaleTargets>().ToArray();
 		}
 
 		/// <summary>
@@ -399,8 +401,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// UT-4: the TechRush<->Expansion axis scales the appetite — Expansion personalities keep more
 			// MCVs flowing, TechRush ones hold back (the engine's own gates still apply on top either way).
+			// Scale targets (DESIGN 19.10): with an enabled provider the construction-yard target IS this count, and UT-4's
+			// axis lean lives inside the provider (one multiplier, never two), so the planner applies neither fixed number.
 			var targetCount = Info.McvTargetCount;
-			if (Info.UseUtilityExpansionAppetite)
+			if (scaleTargetProviders.TryTarget("conyard", out var scaledYards))
+				targetCount = scaledYards;
+			else if (Info.UseUtilityExpansionAppetite)
 			{
 				var axis = utilityAxesProviders?.FirstEnabledTraitOrDefault()?.UtilityTechRushExpansion ?? IBotUtilityAxes.Neutral;
 				targetCount = EffectiveMcvTargetCount(Info.McvTargetCount, axis, Info.ExpansionAxisBonusMcvs, Info.TechRushAxisMinusMcvs);
