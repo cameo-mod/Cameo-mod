@@ -120,6 +120,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!TryGetSettings(owner, CooldownCell(owner, members), out var settings, out _) || members.Count < settings.MinSquadSize)
 				return false;
 
+			// Formation is for the approach, not the fight: once the fight is on for any
+			// member, the attack-move state's contact-first all-in handles it.
+			if (GroundUnitsAttackMoveStateCA.NearestEngagedEnemy(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)) != null)
+				return false;
+
 			var centroid = Centroid(members);
 			var contact = WDist.FromCells(settings.FanoutTriggerCells);
 			if (owner.IsTargetValid
@@ -179,7 +184,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				planAnchor = anchor;
 			}
 
-			var reason = ShouldCommit(owner, tick, enemies);
+			var reason = ShouldCommit(owner, tick, enemies, members);
 			if (reason != CommitReason.None)
 			{
 				Commit(owner, members, enemies, tick, reason == CommitReason.UnderFire);
@@ -295,7 +300,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return Valid(cell);
 		}
 
-		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies)
+		CommitReason ShouldCommit(SquadCA owner, int tick, List<Actor> enemies, List<Actor> members)
 		{
 			// Evaluate every member first (LastHp must update for all), then decide.
 			var near = 0;
@@ -311,15 +316,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					damaged = true;
 				p.LastHp = hp;
 
-				// The enemy engaged us: never keep forming under fire.
-				if (!enemyInRange)
-					foreach (var e in enemies)
-						if ((e.CenterPosition - p.Actor.CenterPosition).HorizontalLengthSquared <= (long)p.Range * p.Range)
-						{
-							enemyInRange = true;
-							break;
-						}
 			}
+
+			// The fight is on for ANY member (placed or not, either side's weapon range): never keep
+			// forming under fire — the zero-delay commit sends everyone on the same tick (§12.7b).
+			enemyInRange = GroundUnitsAttackMoveStateCA.NearestEngagedEnemy(owner, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)) != null;
 
 			if (damaged || enemyInRange)
 				return CommitReason.UnderFire;

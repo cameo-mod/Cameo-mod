@@ -800,6 +800,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		// CN3 detector seam (AI_MASTER_PLAN §3): the remembered DetectCloaked carriers,
+		// read by StealthDoctrineBotModule (the IBotStealthDoctrine provider the
+		// `cn3_stealth_squads` condition arms). The fog tables are only fed while
+		// fogged observation runs, so with the memory off this is empty - "none
+		// observed", never "no detectors exist".
+		internal IEnumerable<BotKnownDetector> KnownDetectors(int maxAgeTicks)
+		{
+			return fogMemory?.KnownDetectors(maxAgeTicks) ?? Enumerable.Empty<BotKnownDetector>();
+		}
+
 		// The enemy army as this bot has SEEN it, for adaptive counter-production (DESIGN §19.1). Only when it
 		// observes through fog; otherwise false, and the unit builder falls back to its omniscient sample.
 		bool IBotEnemyCompositionProvider.TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)

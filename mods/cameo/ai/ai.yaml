@@ -74,6 +74,14 @@
 	GrantConditionOnBotOwner@garrisoncontest:
 		Condition: garrison_contest
 		Bots: fransbot
+	# CN3 stealth squads (crystallized-nexus port): arms StealthDoctrineBotModule, the
+	# detector-memory provider the stealth drafting + states read. Same convention as the
+	# CN2/CN3 granters: fransbot by default (inert on master), the increment A/B flips it
+	# to the genericbot tier list via tools/ai/increment_switches.yaml.
+	GrantConditionOnBotOwner@cn3stealthsquads:
+		Condition: cn3_stealth_squads
+		Bots: fransbot
+
 	# SP-1/AF-1 (AI_ARCHITECTURE §12.20): spacing advisor + army-first building gate for genericbot.
 	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
 	GrantConditionOnBotOwner@spacedbase:
@@ -3576,6 +3584,13 @@ Player:
 	RegionRolesBotModule:
 		RequiresCondition: genericbot && cn4_region_roles
 		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
+	# CN3 (crystallized-nexus stealth-squad port): publishes the DetectCloaked carriers this bot
+	# has seen (fog memory + the observed type's public ruleset range) as IBotStealthDoctrine;
+	# the squad manager's stealth drafting and the Stealth squad states route around that
+	# remembered coverage. No provider armed = no stealth squads and no coverage checks.
+	# `genericbot && cn3_stealth_squads`: off on master until the increment A/B arms it.
+	StealthDoctrineBotModule:
+		RequiresCondition: genericbot && cn3_stealth_squads
 	# LC1 (AI_MASTER_PLAN §3, the Fransbot author's review P0): the unit-claim contract. The capture manager, crate
 	# pickup, scouts and beacon responders claim a unit before a long-lived job and skip units another module holds
 	# (IsIdle is not ownership). genericbot only: without a registry every module behaves as before, so classic is
@@ -4282,6 +4297,8 @@ Player:
 		IndirectRouteChance: 60
 
 	SquadManagerBotModuleCA@classic:
+		# §12.7b contact-first all-in is genericbot behaviour; classic stays the untouched A/B reference.
+		ContactFirstAllIn: false
 		RequiresCondition: classicbot
 		# Restored verbatim from the pre-wave @generic node (786bb2f2c era): the
 		# classic reference bot's squad brain — no missions, no personality variants.

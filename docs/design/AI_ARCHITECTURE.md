@@ -2102,6 +2102,25 @@ plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `M
 section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
 measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
 
+### 12.7b Contact-first all-in (maintainer 2026-10-02) — and the ONE "the fight is on" test
+
+> *Maintainer, spectating a 6v6:* a large blob stood in formation while part of the force was already trading fire.
+
+Formation (the march §12.7, the concave §12.7a, the assault fan §12.20b) is for BEFORE the first shot. When the fight is
+on for ANY member, a Rush squad commits wholesale on the same tick (Lanchester: staging while the local fight runs feeds
+the enemy one prong at a time). `GroundStatesCA.NearestEngagedEnemy` is the single definition, used by the attack-move
+state's all-in, the concave's entry (declines) and the concave's commit (zero-delay under-fire commit):
+
+* **the fight is on** = a visible enemy (`VisibleEnemiesNear`, fog-honest) and a squad member are within weapon range of
+  each other — EITHER side's `MaxRange` — counted over every member, placed or not, or a member took damage (concave).
+* Not "an enemy is visible within `AttackScanRadius`" (the first cut, `22f6e5ee9`): the concave stages just OUTSIDE
+  weapon range on purpose, so a 12-cell sight test cancelled it before it could form (coordinator 2026-10-02).
+* The all-in goes THROUGH `GroundUnitsAttackState` (target = the engaged enemy): it attack-moves every member on the same
+  tick and keeps the shipped group-A micro (focus fire, kiting, pull-back). The first cut re-issued one grouped
+  `AttackMove` from the attack-move state every tick and never left it, so those never ran for a Rush squad in contact.
+* `SquadManagerBotModuleCA.ContactFirstAllIn` (default true) — `@classic` sets false: the A/B reference keeps the
+  leader-scan engage.
+
 ### 12.8 Air doctrine (phase CA-5)
 
 * **Gunships (helicopters, hovering spaceships): close air support** — attach to the main
@@ -2811,6 +2830,53 @@ never *aimed* at it.
 - *Downstream growth:* `BuildingLimits` carries almost no production caps, so each new
   yard's local base builder fills factories/production/refineries (`RefineriesPerBase`,
   `MaxExtraRefineries` are per-base, not global) — bases grow as they land.
+
+### 12.20b The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
+
+Four more maintainer-observed failures, all "the stack does the simple thing wrong"
+class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
+
+**Assault fan** (`GroundUnitsAttackMoveStateCA.IssueAssaultFanOrders`, gated under
+`FormationMovement` — already on for genericbot tiers). The §12.7a concave fixes
+*contact* geometry; this fixes *approach* geometry: inside `AssaultEngageRadiusCells`
+(18) the Rush column breaks into `AssaultFanMin..MaxSlots` (3–8) prongs assigned by
+stable `ActorID % slots` hashing, each ordered to an arc slot on a ~200-degree front
+`AssaultFanRadiusCells` (10) around the target — so the squad arrives on several
+headings instead of filing down one route. Early arrivers `Stop`-hold at their slot
+while any prong is >6 cells out, up to `AssaultSyncHoldTicks` (125), then the push
+latches and everyone `AttackMove`s the target center together. Fan state rebuilds if
+the target moves >8 cells. Outside the engage radius the §12.7 column march still
+applies, so guerrilla/harass squads are untouched.
+
+**Building spacing** (`BaseBuilderQueueManagerCA.findPos`, `MinBuildingGapCells` = 2
+default-on, `MinBuildingGapDefensesCells` = 1). The golden rule made mechanical: a
+candidate cell is rejected if the new footprint comes within `gap` cells (Chebyshev)
+of any own building's footprint. The buffer set is built once per `findPos` call from
+the per-tick own-buildings cache; `AllowInvalidPlacement` actors exempt (same opt-out
+`CanPlaceBuilding` uses); an exhausted annulus still returns null and the queue
+retries — the rule never relaxes mid-call. Defenses get the tighter 1-cell gap so
+turret/wall lines still form. Result: bases spread, lanes stay open for harvesters
+and reinforcing units, and the pathfinder stops degrading under wall-to-wall clutter.
+
+**Harvester field spread** (`HarvesterBotModuleCA`,
+`MaxHarvestersPerResourceIndice` = 4 default-on). A resource-map indice at the cap is
+*saturated*: `FindAndOrderLowEffectHarvesterOnResourceMap` never sends more harvesters
+into it and actively pushes its surplus to the best lacking indice (receiving indice
+headroom is clamped to `cap - current` so the rebalance cannot overshoot into a new
+pile). `FindNextResource` filters saturated-indice cells when an unsaturated
+alternative exists — no harvester ever strands idle.
+
+**Army-first** (`MinArmyUnitsBeforeBuildings`, default 0 = off; `AD_army_first` sets
+14 + `ArmyFirstMinCash` 1500). At `TickQueue`'s emission point: while owned
+`AttackBase` units are below the threshold and cash exceeds the reserve, non-essential
+build requests defer to next tick. Essential = construction yards, refineries, power,
+and exactly one in-flight production building (the no-factory deadlock guard).
+
+**Switch map for the round:** `F_concave` (§12.7a), `AB_garrison_contest` + `L_cn2_
+_garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first`,
+`AE_spread_assault` (documents the default-on trio), plus `X_cn3_bridge_repair` /
+`Y_cn3_stealth_squads` from the same day's merges.
+
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
 
