@@ -1,13 +1,13 @@
 # audit_upstream_adoption — upstream mod types Cameo already has, and what is new
 
-Cameo resolves **1147** yaml-visible type names across 7 assemblies.
+Cameo resolves **1156** yaml-visible type names across 7 assemblies.
 
 | mod | types | already in Cameo | same mechanic, other name | candidates | of the candidates |
 |---|--:|--:|--:|--:|---|
 | Romanov's Vengeance | 26 | 11 | 8 | 7 | 6 used in its own yaml |
 | Shattered Paradise | 46 | 7 | 7 | 32 | 31 used in its own yaml |
 | Crystallized Nexus | 107 | 7 | 5 | 95 | 85 used in its own yaml |
-| Combined Arms | 350 | 180 | 37 | 133 | 121 used in its own yaml |
+| Combined Arms | 350 | 183 | 37 | 130 | 118 used in its own yaml |
 | Generals Alpha | 23 | 2 | 1 | 20 | 20 used in its own yaml |
 
 ## Romanov's Vengeance — `OpenRA.Mods.RA2`
@@ -252,7 +252,7 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `WithReloadBar` | `WithDisguiseTargetPalette` | identical `[Desc]` text |
 | `WithUnitConverterCountDecoration` | `WithTextDecoration` | identical `[Desc]` text |
 
-**121 of 133** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
+**118 of 130** candidates are used by the mod's own rules (the rest are dead code there too, and are not worth porting first).
 
 | type | file | uses in its yaml |
 |---|---|--:|
@@ -322,7 +322,6 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `IgnoreOutOfRangeAttackOrders` | `Traits/Attack/IgnoreOutOfRangeAttackOrders.cs` | 2 |
 | `ImmobilePositionable` | `Traits/ImmobilePositionable.cs` | 2 |
 | `InfiltrateForTimedCondition` | `Traits/Infiltration/InfiltrateForTimedCondition.cs` | 2 |
-| `LinkedProducerSource` | `Traits/LinkedProducerSource.cs` | 2 |
 | `MeteorPower` | `Traits/SupportPowers/MeteorPower.cs` | 2 |
 | `MissileStrikePower` | `Traits/SupportPowers/MissileStrikePower.cs` | 2 |
 | `ProjectileHusk` | `Projectiles/ProjectileHusk.cs` | 2 |
@@ -354,14 +353,12 @@ A `[Desc]` match is EVIDENCE, not proof, and it misleads in both directions. `Le
 | `InfiltratePower` | `Traits/SupportPowers/InfiltratePower.cs` | 1 |
 | `InheritsExperienceLevelOfMaster` | `Traits/InheritsExperienceLevelOfMaster.cs` | 1 |
 | `Interceptor` | `Traits/Air/Interceptor.cs` | 1 |
-| `LinkedProducerTarget` | `Traits/LinkedProducerTarget.cs` | 1 |
 | `NotificationManager` | `Traits/Player/NotificationManager.cs` | 1 |
 | `NotificationOnDamage` | `Traits/NotificationOnDamage.cs` | 1 |
 | `PassengerBlocked` | `Traits/PassengerBlocked.cs` | 1 |
 | `PlayerBountyPool` | `Traits/Player/PlayerBountyPool.cs` | 1 |
 | `PlayerConnectionStatus` | `Traits/Player/PlayerConnectionStatus.cs` | 1 |
 | `PlayerExperienceLevels` | `Traits/Player/PlayerExperienceLevels.cs` | 1 |
-| `PopController` | `Traits/Player/PopController.cs` | 1 |
 | `ReclaimableExperiencePool` | `Traits/Player/ReclaimableExperiencePool.cs` | 1 |
 | `ReclaimableValueProducer` | `Traits/Player/ReclaimableValueProducer.cs` | 1 |
 | `ScriptTriggersCA` | `Scripting/ScriptTriggersCA.cs` | 1 |

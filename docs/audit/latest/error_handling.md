@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **797**
+Files scanned: **806**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 140 | 30 |
+| E2 | handler discards the error | 141 | 30 |
 | E3 | open() without encoding= | 161 | 90 |
-| E4 | subprocess call without check= | 61 | 9 |
+| E4 | subprocess call without check= | 62 | 9 |
 
 
 ## Files that do not parse
@@ -28,7 +28,7 @@ Files scanned: **797**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 140 finding(s)
+## E2 — 141 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -42,12 +42,13 @@ Files scanned: **797**
 | tools/ai/fight_report.py | 32 | handler body discards the error |
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
-| tools/ai/run_ai_match_batch.py | 691 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 719 | handler body discards the error |
 | tools/ai/team_coordination_report.py | 48 | handler body discards the error |
+| tools/ai/tune_build_order.py | 75 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
-| tools/audit/audit_bot_insurance.py | 142 | handler body discards the error |
+| tools/audit/audit_bot_insurance.py | 144 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_engine_freshness.py | 76 | handler body discards the error |
@@ -341,7 +342,7 @@ Files scanned: **797**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 61 finding(s)
+## E4 — 62 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -355,9 +356,10 @@ Files scanned: **797**
 | tools/ai/ab_increment.py | 724 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
-| tools/ai/run_ai_match_batch.py | 617 | `subprocess.Popen()` without check= |
-| tools/ai/run_ai_match_batch.py | 815 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 645 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 843 | `subprocess.run()` without check= |
 | tools/ai/run_league.py | 357 | `subprocess.run()` without check= |
+| tools/audit/audit_ai_arch_freshness.py | 36 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
 | tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |
 | tools/audit/audit_central_ids.py | 26 | `subprocess.run()` without check= |
@@ -411,8 +413,8 @@ Files scanned: **797**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 140 > baseline 30
+- E2: 141 > baseline 30
 - E3: 161 > baseline 90
-- E4: 61 > baseline 9
+- E4: 62 > baseline 9
 - 1 file(s) do not parse
 

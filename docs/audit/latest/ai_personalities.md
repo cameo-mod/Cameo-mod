@@ -12,5 +12,6 @@
 - BotPersonalityController and squad-manager condition sets match exactly.
 - Personality conditions have exactly one matching notification block each.
 - No dead RushInterval/RushAttackScanRadius keys remain.
-- Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN ง19.1).
-- No module gates on a difficulty-tier condition (DESIGN ง19.1); strength scales via BotLimits.
+- Every per-tier BotLimits number and production multiplier lies on one equal-step line (DESIGN ยง19.1).
+- ScaleTargetsBotModule writes every category and field, Min <= Max, the tech line is 1 1 1 1 2 2 2 2 3 3 and minute 0 equals the DESIGN 19.1 table (AI_ARCHITECTURE 12.22).
+- No module gates on a difficulty-tier condition (DESIGN ยง19.1); strength scales via BotLimits.

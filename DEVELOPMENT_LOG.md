@@ -17154,3 +17154,26 @@ Verification: compile clean; boot-gate PASS from a private engine copy
 (C:/tmp/aiwork-engine — bin + glsl + mods + VERSION + geoip; glsl/ is REQUIRED,
 shader compile fails without it) since the shared bin was held by other lanes.
 Re-running the armed smoke on the fixed build next.
+
+## 2026-10-02 late — ember lane: origin/master merge (110823350), GC-1 conflict + crash-fix re-application
+
+Merged `origin/master` (through 977ee08ea — NOVA's `def3-remote-coverage` PR #777 carrying
+DAWN's TC-2e capture-claim arbitration + TC-3 lifecycle hardening, commit 02a2a73e0).
+
+One conflict: `GarrisonContestBotModule.cs`. Upstream had already integrated my GC-1 terminal
+cards and EXTENDED them — `claimsAhead` (TeamBlackboard.ClaimsAheadOf arbitration off the team
+capture-claim board), `claimCells` tracking, a supersede stand-down path (release + Stop order so
+the queued EnterGarrison cannot capture anyway), and `WriteClaimClosed(id, anyInside, superseded)`
+mapping superseded to `BotMissionReasons.Superseded`. Resolution: take their block wholesale and
+RE-APPLY the destroyed-actor guard fix in the two places their merge re-captured the pre-fix
+ordering — `walkers.Any(IsInside)` in the supersede path and `var inside = IsInside(w)` in the
+else-branch RemoveAll now both check IsDead/IsInWorld/owner BEFORE the trait call. The crash they
+inherited would have thrown on the first dead walker — merge resolution had to re-fix it, not
+just pick a side.
+
+Post-merge verification: Cameo + Cameo.Test builds clean; TeamCaptureClaims + CoalitionFold +
+Mission filters = 50/50 pass; `apply_increment_switches --groups all --dry-run` arms all 41
+groups (new: BF_team_capture_claims, BD_tc3_sectors, BE_tc3_main_target — the TC-2e/TC-3 groups
+upstream added) with 121 changes and no stale targets; arch freshness audit caught the merge's
+own staleness (map regen on merged tree → PASS); boot-gate PASS with `Engine.SupportDir` pointed
+at a private logs dir so a concurrent main-checkout boot could not overwrite my perf.log evidence.
